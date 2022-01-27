@@ -16,7 +16,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("_________________________________________________________________________________________");
+        System.out.println("____________________________________________________________________________");
     }
 
     public String readCommand() {
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public void showNewTask(int numTasks, Task t, String type) {
-        System.out.println("\tAw, gee! New" + type + ":\n\t\t" + t);
+        System.out.println("\tAw, gee! New " + type + ":\n\t\t" + t);
         System.out.println("\tHooray! You now have " + numTasks + " tasks");
     }
 

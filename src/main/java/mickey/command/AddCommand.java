@@ -9,6 +9,8 @@ import mickey.task.Task;
 import mickey.task.TaskList;
 import mickey.task.ToDo;
 
+import java.time.format.DateTimeParseException;
+
 public class AddCommand extends Command {
     public AddCommand(String fullCommand) {
         super(fullCommand);
@@ -23,12 +25,20 @@ public class AddCommand extends Command {
                 ui.showNewTask(tasks.size() + 1, newTask, "todo");
                 break;
             case "deadline":
-                newTask = new Deadline(getDescription(), getDate());
-                ui.showNewTask(tasks.size() + 1, newTask, "deadline");
+                try {
+                    newTask = new Deadline(getDescription(), getDate());
+                    ui.showNewTask(tasks.size() + 1, newTask, "deadline");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date");
+                }
                 break;
             case "event":
-                newTask = new Event(getDescription(), getDate());
-                ui.showNewTask(tasks.size() + 1, newTask, "event");
+                try {
+                    newTask = new Event(getDescription(), getDate());
+                    ui.showNewTask(tasks.size() + 1, newTask, "event");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date");
+                }
                 break;
             default:
         }
