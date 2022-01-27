@@ -107,6 +107,10 @@ public class Duke {
                                     .size() + " tasks in the list.");
                     storage.OverwriteFile(tasks.getTasks());
                     break;
+                case FIND:
+                    String word = parser.parseFind(input);
+                    ui.listTasks(tasks.findTasks(word));
+                    break;
                 case ERROR:
                     throw new DukeException("Sorry :( I don't know what this means.");
                 }

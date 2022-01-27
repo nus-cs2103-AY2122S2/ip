@@ -38,4 +38,14 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public List<Task> findTasks(String word) {
+        List<Task> tempTasks = new ArrayList<>();
+        for (int i = 0 ;i < tasks.size();i++) {
+            if (tasks.get(i).getDescription().contains(word)) {
+                tempTasks.add(tasks.get(i));
+            }
+        }
+        return tempTasks;
+    }
+
 }

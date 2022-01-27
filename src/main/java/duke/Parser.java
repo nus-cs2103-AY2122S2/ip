@@ -22,6 +22,8 @@ public class Parser {
             return RESULT.DEADLINE;
         } else if (split[0].equals("event")) {
             return RESULT.EVENT;
+        } else if (split[0].equals("find")) {
+            return RESULT.FIND;
         }
         return RESULT.ERROR;
     }
@@ -78,8 +80,17 @@ public class Parser {
         }
     }
 
+    public String parseFind(String input) throws DukeException {
+        String[] split = input.split(" ");
+        if (split.length < 2) {
+            throw new DukeException("OH NO! The you are missing the keyword!");
+        } else {
+            return split[1];
+        }
+    }
+
     public enum RESULT {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR, FIND
     }
 
 }
