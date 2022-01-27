@@ -202,5 +202,22 @@ public class TaskList {
         }
     }
 
+    public void findFeature(String command, TaskList list) {
+        String taskName = command.split("find ", 2)[1]; // Retrieve task name
+        int count = 1;
+        String output = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < list.getSize(); i++) {
+            if (list.getTask(i).name.contains(taskName)) {
+                output += count + "." + list.getTask(i).toString() + "\n";
+                count += 1;
+            }
+        }
+        if (output.equals("Here are the matching tasks in your list:\n")) {
+            System.out.println("There are no matching tasks!");
+        } else {
+            System.out.println(output);
+        }
+    }
+
 }
 
