@@ -57,4 +57,18 @@ public class TaskListTest {
         }
     }
 
+    @Test
+    public void find() {
+        try {
+            TaskList taskList = new TaskList(new StorageStub("data.txt"));
+            taskList.addTodo("read book");
+            taskList.addTodo("return book");
+            taskList.addTodo("item3");
+            assertEquals("1.[T][ ] read book\n2.[T][ ] return book\n",
+                    taskList.find("book"));
+        } catch (DukeException e) {
+
+        }
+    }
+
 }

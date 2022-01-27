@@ -18,8 +18,18 @@ public abstract class Task {
     }
 
     /**
+     * Check if the name of the task contains the keyword.
+     * @param keyword The keyword.
+     * @return True if the name contains the keyword else false.
+     */
+    public boolean contains(String keyword) {
+        return name.contains(keyword);
+    }
+
+    /**
      * Marks the task as done.
      */
+
     public void mark() {
         isDone = true;
     }
