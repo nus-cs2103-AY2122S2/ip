@@ -17,6 +17,9 @@ public class Ui {
         System.out.println("Hello from\n" + welcomeMessage);
     }
 
+    /**
+     * Print exit message.
+     */
     public void exit() {
         String goodByeMessage = Ui.createLine()
                 + "       " + "Bye. I hope to see you soon." +"\n"
@@ -24,6 +27,10 @@ public class Ui {
         System.out.println(goodByeMessage);
     }
 
+    /**
+     * Print divider line.
+     * @return divider line
+     */
     public static String createLine() {
         return  "   __________________________________________________\n";
     }

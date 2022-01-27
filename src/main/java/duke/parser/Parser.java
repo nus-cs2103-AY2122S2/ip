@@ -26,6 +26,11 @@ public class Parser {
     }
 
 
+    /**
+     * Process user commands.
+     *
+     * @return False if the command is "bye", True otherwise
+     */
     public boolean processInput() {
         if(userInput.equals("bye")) {
             return false;
@@ -111,6 +116,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Create a task based on the input of the users.
+     *
+     * @param input a String command
+     * @return a String respond based on the command input
+     * @throws InvalidTypeException if the command does not start with a valid type
+     * @throws MissingNameException if the name of the item is missing
+     * @throws MissingEventDateException if the date for events type is missing or in wrong format
+     * @throws MissingDeadlineDateException if the date for deadline type is missing or in wrong format
+     */
     public static String createTask(String input) throws InvalidTypeException, MissingNameException, MissingEventDateException, MissingDeadlineDateException{
         String[] splitString = input.split("/", 2);
         String[] instruction = splitString[0].split(" ", 2);
