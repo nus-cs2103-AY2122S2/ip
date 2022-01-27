@@ -39,8 +39,7 @@ public class Event extends Task {
      */
     public String getAt() {
         return start.format(DateTimeFormatter.ofPattern("h:mm a")) + " - "
-                + end.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
-                + start.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
+                + end.format(DateTimeFormatter.ofPattern("h:mm a MMM dd yyyy"));
     }
 
     /**

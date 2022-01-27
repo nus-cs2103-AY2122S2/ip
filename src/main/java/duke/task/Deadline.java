@@ -32,8 +32,7 @@ public class Deadline extends Task {
      * @return deadline as a string.
      */
     public String getBy() {
-        return by.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
-                + by.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
+        return by.format(DateTimeFormatter.ofPattern("h:mm a MMM dd yyyy"));
     }
 
     /**
