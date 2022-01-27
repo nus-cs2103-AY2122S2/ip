@@ -66,7 +66,7 @@ public class Duke {
                 }
                 fw.close();
             } catch (IOException e) {
-                //throw a DukeException and say couldn't save session
+                System.out.println(e.getMessage());
             }
             System.out.println("See you later alligator :)");
         } else if (command.equals("list")) {
