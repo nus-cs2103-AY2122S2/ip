@@ -33,20 +33,22 @@ public class CommandManager {
             }
 
             switch (splitString[0]) {
-                case "mark":
-                    return new MarkTaskCommand(this.taskManager, this.storage, commandArg);
-                case "unmark":
-                    return new UnmarkTaskCommand(this.taskManager, this.storage, commandArg);
-                case "todo":
-                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.TODO, commandArg);
-                case "deadline":
-                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.DEADLINE, commandArg);
-                case "event":
-                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
-                case "delete":
-                    return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
-                default:
-                    return new InvalidCommand();
+            case "mark":
+                return new MarkTaskCommand(this.taskManager, this.storage, commandArg);
+            case "unmark":
+                return new UnmarkTaskCommand(this.taskManager, this.storage, commandArg);
+            case "todo":
+                return new AddTaskCommand(this.taskManager, this.storage, TaskType.TODO, commandArg);
+            case "deadline":
+                return new AddTaskCommand(this.taskManager, this.storage, TaskType.DEADLINE, commandArg);
+            case "event":
+                return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
+            case "delete":
+                return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
+            case "find":
+                return new FindCommand(this.taskManager, commandArg);
+            default:
+                return new InvalidCommand();
             }
         }
     }
