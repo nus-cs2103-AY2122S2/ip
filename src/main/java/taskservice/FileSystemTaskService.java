@@ -5,8 +5,13 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import taskservice.exceptions.TaskNotFoundException;
+import taskservice.exceptions.TaskServiceException;
+import taskservice.exceptions.UnsupportedTaskTypeException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +21,7 @@ import java.util.Optional;
 
 public class FileSystemTaskService implements TaskService {
     private static final String TASKS_FILENAME = "tasks";
+    private static final String EXCEPTION_INVALID_FILE_FORMAT = "Unable to parse invalid tasks file from file system";
 
     private final Path rootDir;
     private final Path tasksDir;
@@ -55,7 +61,7 @@ public class FileSystemTaskService implements TaskService {
                     this.tasks.add(this.parseStringToTask(currentLine));
                 }
             } catch (IOException ex) {
-                throw new TaskServiceException();
+                throw new TaskServiceException(ex.getMessage());
             } finally {
                 this.closeReader(reader);
             }
@@ -79,7 +85,7 @@ public class FileSystemTaskService implements TaskService {
     @Override
     public void update(int id, Task taskToUpdate) throws TaskServiceException {
         if (!this.isValidTaskId(id)) {
-            throw new TaskServiceException();
+            throw new TaskNotFoundException();
         }
         this.tasks.set(id, taskToUpdate.clone());
         this.saveTasksToFileSystem();
@@ -88,7 +94,7 @@ public class FileSystemTaskService implements TaskService {
     @Override
     public void delete(int id) throws TaskServiceException {
         if (!this.isValidTaskId(id)) {
-            throw new TaskServiceException();
+            throw new TaskNotFoundException();
         }
         this.tasks.remove(id);
         this.saveTasksToFileSystem();
@@ -97,7 +103,7 @@ public class FileSystemTaskService implements TaskService {
     private Task parseStringToTask(String str) throws TaskServiceException {
         final String[] tokens = str.split("\\|");
         if (tokens.length < 3 || (!tokens[1].trim().equals("0") && !tokens[1].trim().equals("1"))) {
-            throw new TaskServiceException();
+            throw new TaskServiceException(FileSystemTaskService.EXCEPTION_INVALID_FILE_FORMAT);
         }
 
         Task task;
@@ -112,7 +118,7 @@ public class FileSystemTaskService implements TaskService {
             task = new Event(tokens[2].trim(), tokens[3].trim());
             break;
         default:
-            throw new TaskServiceException();
+            throw new TaskServiceException(FileSystemTaskService.EXCEPTION_INVALID_FILE_FORMAT);
         }
 
         if (tokens[1].trim().equals("1")) {
@@ -144,7 +150,7 @@ public class FileSystemTaskService implements TaskService {
             final Event e = (Event) task;
             return "E" + statusAndDesc + " | " + e.getAt();
         } else {
-            throw new TaskServiceException();
+            throw new UnsupportedTaskTypeException();
         }
     }
 
@@ -153,7 +159,7 @@ public class FileSystemTaskService implements TaskService {
             try {
                 reader.close();
             } catch (IOException ex) {
-                throw new TaskServiceException();
+                throw new TaskServiceException(ex.getMessage());
             }
         }
     }
@@ -162,7 +168,7 @@ public class FileSystemTaskService implements TaskService {
         try {
             Files.write(this.tasksDir, this.formatTasksAsString().getBytes(StandardCharsets.UTF_8));
         } catch (IOException ex) {
-            throw new TaskServiceException();
+            throw new TaskServiceException(ex.getMessage());
         }
     }
 

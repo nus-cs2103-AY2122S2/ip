@@ -13,7 +13,7 @@ import tasks.Task;
 import tasks.Todo;
 
 import taskservice.TaskService;
-import taskservice.TaskServiceException;
+import taskservice.exceptions.TaskServiceException;
 
 public class Bot {
     private static final String INDENTATION = "    ";

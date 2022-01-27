@@ -1,6 +1,7 @@
 package taskservice;
 
 import tasks.Task;
+import taskservice.exceptions.TaskServiceException;
 
 import java.util.Optional;
 
