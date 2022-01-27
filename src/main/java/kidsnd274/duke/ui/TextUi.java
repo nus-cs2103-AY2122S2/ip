@@ -5,7 +5,9 @@ import kidsnd274.duke.command.CommandResult;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-// Handles Terminal Input and Output of the program
+/**
+ * TextUi object that handles terminal Input and Output of the program
+ */
 public class TextUi {
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
     private static final String MESSAGE_GOODBYE = "Goodbye!";
@@ -18,29 +20,51 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Default constructor for TextUi
+     *
+     * When instantiated, it prints the Logo
+     */
     public TextUi() {
         this.in = new Scanner(System.in);
         this.out = System.out;
         printLogo();
     }
 
+    /**
+     * Gets the next line of user input
+     * @return A String representation of one line of user input
+     */
     public String getInput() {
         return in.nextLine();
     }
 
+    /**
+     * Prints the introduction message
+     */
     public void printIntro() {
         printMessage(generateIntro());
     }
 
+    /**
+     * Prints the welcome message along with the Logo
+     */
     public void printLogo() {
         printMessage("Hello from\n" + LOGO);
     }
 
+    /**
+     * Prints the goodbye message
+     */
     public void printGoodbye() {
         printMessage(generateGoodbye());
     }
 
-    public void printResults(CommandResult result) { // CHange this to CommandResult in the future
+    /**
+     * Prints the result from the given {@code CommandResult}
+     * @param result The provided {@code CommandResult}
+     */
+    public void printResults(CommandResult result) {
         printMessage(generateResponse(result.toString()));
     }
 
