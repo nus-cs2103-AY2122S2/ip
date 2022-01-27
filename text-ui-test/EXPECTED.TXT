@@ -47,7 +47,7 @@ MNSKY: I can help!
 > [E][?] the purge (at: november 31 2022 4:33 pm)
 MNSKY: I can help!
 
-> [MNSKY has deleted the task lol from the list.]
+> [MNSKY deleted the task lol from the list.]
 MNSKY: I can help!
 
 > 1. [T][?] remove abornacee mavee
