@@ -6,10 +6,19 @@ import kidsnd274.duke.exceptions.NullDateProvidedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * Parser object that takes in user input and returns a {@code Command} type.
+ */
 public class Parser {
     private TaskList taskList;
 
+    /**
+     * Main parse command that takes in user input and returns a {@code Command} type.
+     *
+     * It also checks for erroneous input
+     * @param input User input
+     * @return A {@code Command} type based on user's input
+     */
     public Command parseCommand(String input) {
         if (input.contains("`")) {
             return new ErrorCommand("\"`\" character is not allowed");
@@ -103,11 +112,24 @@ public class Parser {
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
             return new DeleteCommand(taskList, taskNo);
+        } else if (command.equals(FindCommand.COMMAND_WORD)) {
+            String[] inputSplit = input.split(" ", 2);
+            if (inputSplit.length < 2) {
+                return new ErrorCommand("Search query cannot be empty");
+            }
+            String searchQuery = inputSplit[1];
+            return new FindCommand(taskList, searchQuery);
         }
 
         return new ErrorCommand("Unknown command: " + command);
     }
 
+    /**
+     * Sets the task list used in the current Parser instance
+     *
+     * Used for {@code Command}s and certain result printing.
+     * @param taskList Task list used for modification or reference when {@code Command}s are executed.
+     */
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
     }
@@ -131,7 +153,7 @@ class Pair<T, V> {
     public T first;
     public V second;
 
-    public Pair(T first, V second) {
+    protected Pair(T first, V second) {
         this.first = first;
         this.second = second;
     }

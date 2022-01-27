@@ -3,10 +3,13 @@ package kidsnd274.duke.command;
 import kidsnd274.duke.TaskList;
 import kidsnd274.duke.taskobjects.Task;
 
+/**
+ * Command to mark a task as undone
+ */
 public class MarkAsUndoneCommand extends TaskListCommand {
     public static final String COMMAND_WORD = "unmark";
 
-    private int taskNo;
+    private final int taskNo;
 
     public MarkAsUndoneCommand(TaskList taskList, int taskNo) {
         super(taskList);

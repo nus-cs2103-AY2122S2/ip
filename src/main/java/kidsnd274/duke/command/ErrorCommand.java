@@ -1,7 +1,10 @@
 package kidsnd274.duke.command;
 
+/**
+ * A class representing an incorrect command
+ */
 public class ErrorCommand extends Command {
-    private String message;
+    private final String message;
 
     public ErrorCommand(String message) {
         this.message = message;

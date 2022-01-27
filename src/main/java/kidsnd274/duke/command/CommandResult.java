@@ -1,5 +1,10 @@
 package kidsnd274.duke.command;
 
+/**
+ * A class representing the result of a Command
+ *
+ * Stores the resulting message and a boolean marks if the task list has been modified or not
+ */
 public class CommandResult {
     private String message = null;
     private boolean isModified = false;
