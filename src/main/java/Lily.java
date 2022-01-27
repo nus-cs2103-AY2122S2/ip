@@ -218,8 +218,8 @@ public class Lily {
                         throew new error you didnt type a description man, try again
                 */
                 try {
-                    String[] parsedDeadline = findEventDescStart(sentence);
-                    Event e = new Event(parsedDeadline[0], parsedDeadline[1]);
+                    String[] parsedEvent = findEventDescStart(sentence);
+                    Event e = new Event(parsedEvent[0], parsedEvent[1]);
                     list.add(e);
                     taskAddedMsg(e);
                 } catch (LilyException le) { // need catch "no-/at" error
