@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,8 +12,39 @@ public class Duke {
         String[] task, taskInfo;
         Task tempTask;
         String input, command;
+        boolean isDone;
+        boolean isModified = false;
+        String localDir = System.getProperty("user.dir");
+        File dataFolder = new File(localDir + "/data");
+        File dataFile = new File(localDir + "/data/db.txt");
+        BufferedWriter bw = null;
 
         System.out.println("Hola! soy José\nQué puedo hacer por ti? UwU");
+
+        // checks for the data directory and file and creates them if they don't exist
+        // subsequently initializes the tasks arraylist if a data file is found
+        try {
+            boolean dirCreated = dataFolder.mkdir();
+            if (dirCreated || !dataFile.exists()) {
+                dataFile.createNewFile();
+            } else {
+                Scanner sc = new Scanner(dataFile);
+                while (sc.hasNextLine()) {
+                    task = sc.nextLine().split("\\|");
+                    isDone = task[1].equals("1") ? true : false; 
+                    if (task[0].equals("T")) {
+                        tasks.add(new ToDo(task[2], isDone));
+                    } else if (task[0].equals("D")) {
+                        tasks.add(new Deadline(task[2], isDone, task[3]));
+                    } else {
+                        tasks.add(new Event(task[2], isDone, task[3]));
+                    }
+                }
+                sc.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         while (scanner.hasNext()) {
             try {
@@ -29,15 +64,18 @@ public class Duke {
                     if (command.equals("mark")) {
                         tempTask = tasks.get(Integer.parseInt(task[1]) - 1);
                         tempTask.mark();
+                        isModified = true;
                         System.out.println("¡Bonito! He marcado esta tarea como hecha:\n" + tempTask);
                     } else if (command.equals("unmark")) {
                         tempTask = tasks.get(Integer.parseInt(task[1]) - 1);
                         tempTask.unmark();
+                        isModified = true;
                         System.out.println("Bien, he marcado esta tarea como aún no realizada:\n" + tempTask);
                     } else if (command.equals("delete")) {
                         tempTask = tasks.get(Integer.parseInt(task[1]) - 1);
                         System.out.println("Señalado. He eliminado esta tarea:\n" + tempTask);
                         tasks.remove(tempTask);
+                        isModified = true;
                         System.out.println("Ahora tienes " + tasks.size() + " tareas en la lista.");
                     } else {
                         if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
@@ -52,6 +90,7 @@ public class Duke {
                                     tempTask = new Event(taskInfo[0], taskInfo[1]);
                                 }
                                 tasks.add(tempTask);
+                                isModified = true;
                                 System.out.println("Entendido. he añadido esta tarea:\n" + tempTask);
                             } else {
                                 throw new DukeException(command + " requires additional info");
@@ -61,13 +100,24 @@ public class Duke {
                         }
                         System.out.println("Ahora tienes " + tasks.size() + " tareas en la lista.");
                     }
+
+                    if (isModified) {
+                        bw = new BufferedWriter(new FileWriter(dataFile));
+                        for (Task t : tasks) {
+                            bw.write(t.formatData());
+                            bw.newLine();
+                        }
+                        bw.close();
+                        isModified = false;
+                    }
                 }
             } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
             System.out.println("-------------------------------------");
         }
-
         scanner.close();
     }
 }
