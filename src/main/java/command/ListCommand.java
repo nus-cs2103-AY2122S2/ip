@@ -2,6 +2,7 @@ package command;
 
 import task.TaskList;
 import utility.Input;
+import utility.Storage;
 
 public class ListCommand extends Command{
     public ListCommand(String command){
@@ -9,7 +10,7 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList task, Input input) {
+    public void execute(TaskList task, Input input, Storage storage) {
         task.printTasks(input);
     }
 

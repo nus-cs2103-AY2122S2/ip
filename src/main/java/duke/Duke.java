@@ -5,16 +5,25 @@ import exception.DukeException;
 import task.TaskList;
 import utility.Input;
 import utility.Parser;
+import utility.Storage;
 
 
 public class Duke {
 
     public Input input;
     public TaskList tasks;
+    public Storage storage;
 
-    public Duke(){
+    public Duke(String filePath){
         this.input = new Input();
-        this.tasks = new TaskList();
+        this.storage = new Storage(filePath);
+
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            input.printException(e);
+            tasks = new TaskList();
+        }
     }
 
 
@@ -26,7 +35,7 @@ public class Duke {
             try {
                 String commandString = input.readLine();
                 Command command = Parser.parse(commandString);
-                command.execute(this.tasks, this.input);
+                command.execute(this.tasks, this.input, this.storage);
                 bye = command.isExit();
             } catch (DukeException e) {
                 this.input.printException(e);
@@ -37,6 +46,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        String filePath = "src/main/storage/save.text";
+        new Duke(filePath).run();
     }
 }
