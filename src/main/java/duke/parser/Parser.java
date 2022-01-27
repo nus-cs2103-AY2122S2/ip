@@ -19,14 +19,14 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    private String command;
+    private String userInput;
 
-    public Parser(String command) {
-        this.command = command;
+    public Parser(String userInput) {
+        this.userInput = userInput;
     }
 
 
-    public static boolean processInput(String userInput) {
+    public boolean processInput() {
         if(userInput.equals("bye")) {
             return false;
         } else if (userInput.equals("list")) {
