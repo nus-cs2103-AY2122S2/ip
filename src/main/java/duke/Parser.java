@@ -2,6 +2,14 @@ package main.java.duke;
 
 public class Parser {
 
+    /**
+     * Makes sense of the user command
+     *
+     * @param userCommand Contains the original user commmand to be parsed.
+     * @param ui Deals with interaction with the user.
+     * @return Command that is based off the userCommand input.
+     * @throws UnsupportedOperationException If userCommand is in the wrong format.
+     */
     public static Command parse(String userCommand, Ui ui) throws UnsupportedOperationException {
         String words[] = userCommand.split(" ", 2);
         String command = words[0];

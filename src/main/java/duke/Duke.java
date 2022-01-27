@@ -9,6 +9,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs an instance of Duke.
+     * Sets up UI, Storage, TaskList tagged to instance of Duke.
+     *
+     * @param filePath Path where storage is located or to be created.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +27,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs that instance of Duke.
+     * Allows users to interact with Duke in CLI.
+     */
     public void run() {
         ui.welcome();
         boolean end = false;

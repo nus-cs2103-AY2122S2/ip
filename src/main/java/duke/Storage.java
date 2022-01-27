@@ -10,10 +10,22 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructs an instance of Storage.
+     *
+     * @param filePath Path where storage is located or to be created.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads stored tasks from previous execution of Duke.
+     *
+     * @return An arraylist storing tasks from previous execution of Duke.
+     * @throws IOException If file cannot be read.
+     * @throws ArrayIndexOutOfBoundsException If file is in wrong format.
+     */
     public ArrayList<Task> load() throws IOException {
         try {
             File directory = new File("data");
@@ -54,6 +66,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the tasks in the hard disk automatically whenever the task list changes.
+     *
+     * @params taskArr Current tasks to be written to file.
+     * @throws IOException If file cannot be written to.
+     */
     public void writeToFile(ArrayList<Task> taskArr) throws IOException {
         FileWriter fw = new FileWriter("data/task.txt");
 
