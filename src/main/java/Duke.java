@@ -1,10 +1,15 @@
 import java.util.Arrays;
 import java.util.Scanner;
+
+import javax.annotation.processing.FilerException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Duke {
-    public static ArrayList<Task> list = new ArrayList<>();
+
+    public static ArrayList<Task> list;
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,6 +21,11 @@ public class Duke {
         System.out.println("Greetings! I'm Duke" + "\n" + "What can I do for you today?\n" + logo);
 
         try {
+            list = LoadFile.load();
+
+            if (!LoadFile.loaded) {
+                list = new ArrayList<>();
+            }
             //to read user input
             Scanner scanned = new Scanner(System.in);
             System.out.println("");
@@ -126,7 +136,6 @@ public class Duke {
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 }
 
-
                 //delete a task from the list
                 else if (input.length() >= 6 && "delete".equals(input.substring(0, 6))) {
                     ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
@@ -151,22 +160,28 @@ public class Duke {
                 }
 
 
-                //adds user input to the list and notifies user
+                //unrecognised input, throw exception
                 else {
                     throw new DukeException(
                             "Sorry I didn't recognise that command, please try again."
                     );
                 }
 
+                saveFile();
+                System.out.println("Saved!");
+
                 //to continue reading user input
                 scanned = new Scanner(System.in);
                 System.out.println("");
                 input = scanned.nextLine();
+                
             }
 
             //goodbye msg
             System.out.println("Sad to see you leave, come back soon!");
         } catch (DukeException e) {
+            System.err.print(e);
+        } catch (IOException e) {
             System.err.print(e);
         }
     }
@@ -218,5 +233,12 @@ public class Duke {
             return str;
         }
 
+    }
+
+
+    //save file to the hard disk
+    public static void saveFile() throws IOException {
+        String str = ReadFile.readFile(list);
+        WriteFile.writeToFile(str);
     }
 }
