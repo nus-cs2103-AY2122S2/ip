@@ -66,6 +66,11 @@ public class FileSystemTaskService implements TaskService {
     }
 
     @Override
+    public int getNumberOfTasks() {
+        return this.tasks.size();
+    }
+
+    @Override
     public void create(Task taskToCreate) throws TaskServiceException {
         this.tasks.add(taskToCreate.clone());
         this.saveTasksToFileSystem();
