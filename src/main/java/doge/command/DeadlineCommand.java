@@ -10,6 +10,9 @@ import doge.task.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents the "deadline" command. Doge bot will add a task of "deadline" type
+ */
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand (Task task) {

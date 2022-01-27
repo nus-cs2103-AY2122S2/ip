@@ -6,6 +6,9 @@ import doge.Ui;
 import doge.exception.DogeException;
 import doge.task.Task;
 
+/**
+ * Encapsulates the functionalities of the different commands understandable by Doge bot.
+ */
 public abstract class Command {
     protected Task task;
     protected String details;

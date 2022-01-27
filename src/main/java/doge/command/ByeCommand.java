@@ -5,7 +5,14 @@ import doge.TaskList;
 import doge.Ui;
 import doge.exception.DogeException;
 
+/**
+ * Represents the "bye" command. Doge bot will send a farewell message and terminate itself.
+ */
 public class ByeCommand extends Command {
+
+    /**
+     *
+     */
     public ByeCommand() {
 
     }
