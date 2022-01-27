@@ -47,7 +47,7 @@ public class TaskManager {
                 } else {
                     throw new BaronException("Please specify a deadline by the /by keyword.");
                 }
-            } else  {
+            } else {
                 throw new BaronException("Please specify only one deadline.");
             }
         } else {
@@ -60,7 +60,7 @@ public class TaskManager {
                     throw new BaronException(Message.generateEmptyDescMessage(taskType));
                 }
                 throw new BaronException("Please specify a date by the /at keyword.");
-            } else  {
+            } else {
                 throw new BaronException("Please specify only one date.");
             }
         }
