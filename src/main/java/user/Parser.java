@@ -15,13 +15,13 @@ public class Parser {
             taskToMark = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            throw new DukeException("Not a valid task number!");
+            throw new DukeException(Task.invalidTaskNumErrorString);
         }
 
         if (1 <= taskToMark && taskToMark <= numTasks) {
             return taskToMark - 1;
         } else {
-            throw new DukeException(String.format("Task %d does not exist!", taskToMark));
+            throw new DukeException(String.format(Task.taskNumDoesNotExistString, taskToMark));
         }
     }
 
@@ -32,13 +32,13 @@ public class Parser {
             taskToUnmark = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            throw new DukeException("Not a valid task number!");
+            throw new DukeException(Task.invalidTaskNumErrorString);
         }
 
         if (1 <= taskToUnmark && taskToUnmark <= numTasks) {
             return taskToUnmark - 1;
         } else {
-            throw new DukeException(String.format("Task %d does not exist!", taskToUnmark));
+            throw new DukeException(String.format(Task.taskNumDoesNotExistString, taskToUnmark));
         }
     }
 
@@ -49,19 +49,19 @@ public class Parser {
             taskToDelete = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            throw new DukeException("Not a valid task number!");
+            throw new DukeException(Task.invalidTaskNumErrorString);
         }
 
         if (1 <= taskToDelete && taskToDelete <= numTasks) {
             return taskToDelete - 1;
         } else {
-            throw new DukeException("Task %d does not exist!");
+            throw new DukeException(String.format(Task.taskNumDoesNotExistString, taskToDelete));
         }
     }
 
     public Task handleTodo(String taskString) throws DukeException {
         if (taskString.length() <= 5) {
-            throw new DukeException("Description cannot be empty!");
+            throw new DukeException(Task.badDescriptionErrorString);
         } else {
             String taskName = taskString.substring(5);  // "todo " has 5 characters
             return new Todo(taskName);
@@ -70,18 +70,18 @@ public class Parser {
 
     public Task handleDeadline(String taskString) throws DukeException {
         if (taskString.length() <= 9) {
-            throw new DukeException("Description cannot be empty!");
+            throw new DukeException(Task.badDescriptionErrorString);
         } else {
             int byIdx = taskString.indexOf("/by");
             if (byIdx <= 9) {  // either -1, or 0 to 9
-                throw new DukeException("Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'");
+                throw new DukeException(Deadline.wrongFormatErrorString);
             } else {
                 String taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
                 try {
                     String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
                     return new Deadline(taskName, taskDeadline);
                 } catch (StringIndexOutOfBoundsException err) {
-                    throw new DukeException("Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'");
+                    throw new DukeException(Deadline.wrongFormatErrorString);
                 }
             }
         }
@@ -89,18 +89,18 @@ public class Parser {
 
     public Task handleEvent(String taskString) throws DukeException {
         if (taskString.length() <= 6) {
-            throw new DukeException("Description cannot be empty!");
+            throw new DukeException(Task.badDescriptionErrorString);
         } else {
             int atIdx = taskString.indexOf("/at");
             if (atIdx <= 6) {  // either -1, or 0 to 6
-                throw new DukeException("Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'");
+                throw new DukeException(Event.wrongFormatErrorString);
             } else {
                 String taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
                 try {
                     String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
                     return new Event(taskName, taskTime);
                 } catch (StringIndexOutOfBoundsException err) {
-                    throw new DukeException("Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'");
+                    throw new DukeException(Event.wrongFormatErrorString);
                 }
             }
         }
@@ -115,7 +115,7 @@ public class Parser {
         } else if (taskString.startsWith("event ")) {
             t = handleEvent(taskString);
         } else {
-            throw new DukeException("I don't think I know what this is!");
+            throw new DukeException(Task.unknownInputErrorString);
         }
         return t;
     }

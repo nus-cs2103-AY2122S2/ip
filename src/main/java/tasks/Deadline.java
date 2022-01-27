@@ -8,8 +8,9 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-    DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public static String wrongFormatErrorString = "Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'";
+    public DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+    public DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Task.TaskType type = Task.TaskType.DEADLINE;
     public String taskName;
@@ -20,8 +21,7 @@ public class Deadline extends Task {
         try {
             this.deadline = LocalDateTime.parse(deadline, inputFormat);
         } catch (DateTimeParseException err) {
-            throw new DukeException(
-                "Datetime format is wrong! Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'");
+            throw new DukeException(wrongFormatErrorString);
         }
     }
 

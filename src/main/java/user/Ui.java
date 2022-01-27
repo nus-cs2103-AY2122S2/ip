@@ -11,30 +11,30 @@ public class Ui {
     public Scanner sc = new Scanner(System.in);
     public Tasklist tasklist;
 
-    public String indent = "    ";
-    public String separator = "--------------------------------------------";
+    public static String indent = "    ";
+    public static String separator = "--------------------------------------------";
     public String[] openingMessage = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
     public String closingMessage = "Bye. Hope to see you again soon!";
 
     public Parser parser;
 
-    public Ui () throws DukeException {
+    public Ui() {
         tasklist = new Tasklist();
         tasklist.loadTasks();
         parser = new Parser();
     }
 
-    public void printIndent(String s) {
+    public static void printIndent(String s) {
         System.out.println(indent + s);
     }
 
-    public void prettyPrint(String s) {
+    public static void prettyPrint(String s) {
         printIndent(separator);
         printIndent(s);
         printIndent(separator + "\n");
     }
 
-    public void prettyPrint(String[] messages) {
+    public static void prettyPrint(String[] messages) {
         printIndent(separator);
         for (String message : messages) printIndent(message);
         printIndent(separator + "\n");

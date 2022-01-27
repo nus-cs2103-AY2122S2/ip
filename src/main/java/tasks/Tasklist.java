@@ -2,20 +2,25 @@ package tasks;
 
 import exceptions.DukeException;
 import storage.Storage;
+import user.Ui;
 
 import java.util.ArrayList;
 
 public class Tasklist {
 
-    public Storage s = new Storage();
+    public Storage storage = new Storage();
     public ArrayList<Task> allTasks = new ArrayList<>();
 
-    public void loadTasks() throws DukeException {
-        allTasks = s.loadTasks();
+    public void loadTasks() {
+        try {
+            allTasks = storage.loadTasks();
+        } catch (DukeException err) {
+            Ui.prettyPrint(err.toString());
+        }
     }
 
     public void saveTasks() throws DukeException {
-        s.saveTasks(allTasks);
+        storage.saveTasks(allTasks);
     }
 
     public int getNumTasks() {

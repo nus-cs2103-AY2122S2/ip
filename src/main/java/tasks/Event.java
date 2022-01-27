@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
+    public static String wrongFormatErrorString = "Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'";
     DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
     DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
@@ -20,8 +21,7 @@ public class Event extends Task {
         try {
             this.eventTime = LocalDateTime.parse(eventTime, inputFormat);
         } catch (DateTimeParseException err) {
-            throw new DukeException(
-                "Datetime format is wrong! Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'");
+            throw new DukeException(wrongFormatErrorString);
         }
     }
 

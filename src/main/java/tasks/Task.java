@@ -4,6 +4,11 @@ import exceptions.DukeException;
 
 public abstract class Task {
 
+    public static String unknownInputErrorString = "I don't think I know what this is!";
+    public static String badDescriptionErrorString = "Description cannot be empty!";
+    public static String invalidTaskNumErrorString = "Not a valid task number!";
+    public static String taskNumDoesNotExistString = "Task %d does not exist!";
+
     public enum TaskType {
         TODO,
         EVENT,
