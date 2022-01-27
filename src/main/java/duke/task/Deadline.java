@@ -6,11 +6,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline are tasks that need to be done before a specific date/time.
+ *
+ * <p>e.g., submit report by 11/10/2019 5pm.</>
+ */
 public class Deadline extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
     private static final char DEADLINE_SYMBOL = 'D';
 
+    /**
+     * Default constructor for Deadline.
+     *
+     * <p>Calls super class, Task, default constructor.
+     * Sets deadlineDate and deadlineTime to default values 2020-12-12 and 2359.</>
+     */
     public Deadline() {
         super();
 
@@ -19,6 +30,13 @@ public class Deadline extends Task {
         this.deadlineTime = LocalTime.parse("2359", timeFormatter);
     }
 
+    /**
+     * Overloaded constructor for Deadline.
+     *
+     * @param taskDescription Description of deadline task.
+     * @param deadlineDate Date of deadline.
+     * @param deadlineTime Time of deadline.
+     */
     public Deadline(String taskDescription, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(taskDescription);
 
@@ -26,6 +44,12 @@ public class Deadline extends Task {
         this.deadlineTime = deadlineTime;
     }
 
+    /**
+     * Returns Deadline data in a defined save file string format.
+     *
+     * @return A string with Deadline data in the defined save file format: <br>
+     * D|true/false|taskDescription|MMM d yyyy|hh:mm a \n
+     */
     @Override
     public String saveFileFormat() {
         return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|"
@@ -35,6 +59,12 @@ public class Deadline extends Task {
                 + "\n";
     }
 
+    /**
+     * Extracts and initializes data to deadline from a string.
+     *
+     * @param data The string to extract data and initialize data from.
+     *             Data format: D|true/false|taskDescription|MMM d yyyy|hh:mm a
+     */
     @Override
     public void extractFileData(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
@@ -49,6 +79,12 @@ public class Deadline extends Task {
         deadlineTime = LocalTime.parse(st.nextToken(), timeFormatter);
     }
 
+    /**
+     * Gets the Deadline information in string format.
+     *
+     * @return Deadline information in the following string format:
+     * [D][ ] taskDescription (by: date time)
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
