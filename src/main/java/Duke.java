@@ -3,6 +3,9 @@ import java.lang.*;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main(String[] args) {
@@ -52,7 +55,13 @@ public class Duke {
             else if (splitStr[0].equals("todo") || splitStr[0].equals("deadline") || splitStr[0].equals("event")){
                 String[] parts = value.split("/");
                 String description = parts[0];
-                if (parts.length>1){ description+= "("+parts[1]+")";}
+                if (parts.length>1){
+                    if (parts[1].length()==13) {
+                        LocalDate d1 = LocalDate.parse(parts[1].substring(3));
+                        parts[1] = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    }
+                    description+= "("+parts[1]+")";
+                }
 
                 try {
                     if (splitStr[0].equals("todo")) {
