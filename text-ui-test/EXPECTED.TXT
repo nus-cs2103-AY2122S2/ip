@@ -13,25 +13,67 @@ Ahoy! Me name be McBot.
 Tell me lad, what do you want?
 ==========================================
 ==========================================
+Your list is empty boi
+==========================================
+==========================================
 Got 'em down as todo:
 [T][ ] read book
 Ye now have 1 tasks in list lad
 ==========================================
 ==========================================
+Sorry boi, ye can't leave todo task empty
+==========================================
+==========================================
 Got 'em down as deadline:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 10-Mar-2022)
 Ye now have 2 tasks in list lad
 ==========================================
 ==========================================
-Got 'em down as event:
-[E][ ] team meeting (at: Monday 2-4pm)
+Got 'em down as deadline:
+[D][ ] submit assignment (by: 20-Apr-2022 11:59PM)
 Ye now have 3 tasks in list lad
+==========================================
+==========================================
+Got 'em down as event:
+[E][ ] team meeting (at: 12-Feb-2022 02:00PM)
+Ye now have 4 tasks in list lad
+==========================================
+==========================================
+Got 'em down as event:
+[E][ ] party (at: 24-Jun-2022)
+Ye now have 5 tasks in list lad
+==========================================
+==========================================
+Fool, follow this format: deadline -TASKNAME- /by DD/MM/YYYY HHMM
+==========================================
+==========================================
+Fool, follow this format: deadline -TASKNAME- /by DD/MM/YYYY HHMM
+==========================================
+==========================================
+you can't leave your deadline task empty
+==========================================
+==========================================
+Yer date and time should follow this format: DD/MM/YYYY HHMM
+==========================================
+==========================================
+Fool, follow this format: event -TASKNAME- /at DD/MM/YYYY HHMM-
+==========================================
+==========================================
+Fool, follow this format: event -TASKNAME- /at DD/MM/YYYY HHMM-
+==========================================
+==========================================
+you can't leave your event task empty
+==========================================
+==========================================
+Yer date and time should follow this format: DD/MM/YYYY HHMM
 ==========================================
 ==========================================
 Here are yer tasks boi:
 1.[T][ ] read book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] team meeting (at: Monday 2-4pm)
+2.[D][ ] return book (by: 10-Mar-2022)
+3.[D][ ] submit assignment (by: 20-Apr-2022 11:59PM)
+4.[E][ ] team meeting (at: 12-Feb-2022 02:00PM)
+5.[E][ ] party (at: 24-Jun-2022)
 ==========================================
 ==========================================
 Aye I'ave marked it done:
@@ -39,23 +81,27 @@ Aye I'ave marked it done:
 ==========================================
 ==========================================
 Aye I'ave marked it done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: 10-Mar-2022)
 ==========================================
 ==========================================
 Here are yer tasks boi:
 1.[T][X] read book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] team meeting (at: Monday 2-4pm)
+2.[D][X] return book (by: 10-Mar-2022)
+3.[D][ ] submit assignment (by: 20-Apr-2022 11:59PM)
+4.[E][ ] team meeting (at: 12-Feb-2022 02:00PM)
+5.[E][ ] party (at: 24-Jun-2022)
 ==========================================
 ==========================================
 Aye I'ave unmarked it:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 10-Mar-2022)
 ==========================================
 ==========================================
 Here are yer tasks boi:
 1.[T][X] read book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] team meeting (at: Monday 2-4pm)
+2.[D][ ] return book (by: 10-Mar-2022)
+3.[D][ ] submit assignment (by: 20-Apr-2022 11:59PM)
+4.[E][ ] team meeting (at: 12-Feb-2022 02:00PM)
+5.[E][ ] party (at: 24-Jun-2022)
 ==========================================
 ==========================================
 You fool!! It is already unmark'd
@@ -73,27 +119,6 @@ I only accept integers boi
 Don't mess with me boi, that number is not in the list
 ==========================================
 ==========================================
-Sorry boi, ye can't leave todo task empty
-==========================================
-==========================================
-Fool, follow this format: deadline -TASKNAME- /by -DATE-
-==========================================
-==========================================
-you can't leave your deadline date empty
-==========================================
-==========================================
-you can't leave your deadline task empty
-==========================================
-==========================================
-Fool, follow this format: event -TASKNAME- /at -DATE/TIME-
-==========================================
-==========================================
-you can't leave your event task empty
-==========================================
-==========================================
-you can't leave your event date/time empty
-==========================================
-==========================================
 I don't understand a word ye're sayin'
 ==========================================
 ==========================================
@@ -108,17 +133,19 @@ Boi, I can't delete a number that ain't on the list
 ==========================================
 Aye, I 'ave deleted it
 [T][X] read book
-Ye now have 2 tasks in list lad
+Ye now have 4 tasks in list lad
 ==========================================
 ==========================================
 Here are yer tasks boi:
-1.[D][ ] return book (by: Sunday)
-2.[E][ ] team meeting (at: Monday 2-4pm)
+1.[D][ ] return book (by: 10-Mar-2022)
+2.[D][ ] submit assignment (by: 20-Apr-2022 11:59PM)
+3.[E][ ] team meeting (at: 12-Feb-2022 02:00PM)
+4.[E][ ] party (at: 24-Jun-2022)
 ==========================================
 ==========================================
 Aye, I 'ave deleted it
-[D][ ] return book (by: Sunday)
-Ye now have 1 tasks in list lad
+[D][ ] return book (by: 10-Mar-2022)
+Ye now have 3 tasks in list lad
 ==========================================
 ==========================================
 Arghh! This ain't the last time ye see me lad
