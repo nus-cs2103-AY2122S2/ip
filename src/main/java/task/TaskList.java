@@ -52,4 +52,14 @@ public class TaskList {
         }
     }
 
+    public TaskList filterByKeyword(String keyword) {
+        TaskList newOne = new TaskList();
+        for(Task t : this.getTasks()) {
+            if(t.getName().toLowerCase().contains(keyword)) {
+                newOne.add(t);
+            }
+        }
+        return newOne;
+    }
+
 }

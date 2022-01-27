@@ -35,6 +35,8 @@ public class Parser {
             case "bye":
                 command = new ExitCommand(inputCommand);
                 break;
+            case "find":
+                command = new FindCommand(inputCommand);
         }
         if (command != null) {
             return command;
