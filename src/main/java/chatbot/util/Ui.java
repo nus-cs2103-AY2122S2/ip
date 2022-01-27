@@ -4,7 +4,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.BufferedInputStream;
 
+/**
+ * User interface handler.
+ */
 public class Ui {
+
     public static void print(Object x) {
         System.out.print(x);
     }
