@@ -126,7 +126,11 @@ public class Parser {
     }
 
     /**
+     * When user tries to find a task, this is used to parse user input
      *
+     * @param input User input
+     * @return Keyword user has inputted
+     * @throws DukeException Throws when missing a keyword
      */
     public String parseFind(String input) throws DukeException {
         String[] split = input.split(" ");

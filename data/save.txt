@@ -1,2 +1,2 @@
 T|0|test
-T|1|toilet
+T|0|toilet
