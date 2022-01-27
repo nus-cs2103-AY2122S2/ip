@@ -21,6 +21,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I'm\n" + logo);
         System.out.println("What can I do for you?");
+        
         try {
             File taskFile = new File("taskHistory.txt");
             taskFile.createNewFile();
