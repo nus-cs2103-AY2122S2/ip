@@ -166,7 +166,7 @@ public class AddCommands extends Commands {
         System.out.println("Quit ordering me around!");
         System.out.println("I've added this task to our list:");
         System.out.println("    " + newTask.toString());
-        System.out.println("Now you have " + TASKLIST.currentSize + " tasks in the list.\n");
+        TASKLIST.printCurrentSize();
     }
 
     /**

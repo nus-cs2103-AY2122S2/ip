@@ -13,7 +13,7 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /** Size of the current task list. **/
-    public int currentSize;
+    private int currentSize;
     
     /**
      * Constructor for taskList.
@@ -128,5 +128,26 @@ public class TaskList {
         if (count == 1) {
             System.out.println("No task with that keyword\n");
         }
+    }
+
+    /**
+     * Prints a message to inform user of the total number of
+     * current tasks.
+     */
+
+    public void printCurrentSize() {
+        System.out.println("Now you have " + this.currentSize + " tasks in the list.\n");
+    }
+
+    /**
+     * Returns true is input is more than task list's size or
+     * lesser than 0.
+     * @param i the number to be checked against the size.
+     * @return true if more than size of task list or lesser than 0
+     *         False if it's lesser than size of task list.
+     */
+
+    public boolean isNumberOutOfRange(int i) {
+        return (i < 0 || i > currentSize);
     }
 }

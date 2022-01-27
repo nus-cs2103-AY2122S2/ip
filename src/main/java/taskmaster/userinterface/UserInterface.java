@@ -94,7 +94,7 @@ public class UserInterface {
     public void displayInvalidCommand(String input) {
         System.out.println("\n" + input + "?");
         System.out.println("What are you on about?");
-        System.out.println("Type list if you want to know the commands, kid!\n");
+        System.out.println("Type 'help' if you want to know the commands, kid!\n");
     }
 
     /**

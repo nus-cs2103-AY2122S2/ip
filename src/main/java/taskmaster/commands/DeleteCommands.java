@@ -46,7 +46,7 @@ public class DeleteCommands extends Commands {
             int index = Integer.parseInt(stringIntoParts[1]);
 
             //If index is out of range, throw illegal argument exception
-            if (index <= 0 || index > TASKLIST.currentSize) {
+            if (TASKLIST.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! "
                                             + "Number has to in the range of the list\n");
             }
@@ -74,7 +74,7 @@ public class DeleteCommands extends Commands {
         System.out.println("YES! I've removed this task and soon I'll remove you as well!:\n");
         printTask(selectedTask);
         TASKLIST.delete(index - 1);
-        System.out.println("Now you have " + TASKLIST.currentSize + " tasks in the list\n");
+        TASKLIST.printCurrentSize();
     }
 
     /**

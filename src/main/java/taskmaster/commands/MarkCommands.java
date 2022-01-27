@@ -47,7 +47,7 @@ public class MarkCommands extends Commands {
             int index = Integer.parseInt(stringIntoParts[1]);
 
             //If index is out of range, throw illegal argument exception
-            if (index <= 0 || index > TASKLIST.currentSize) {
+            if (TASKLIST.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
             }
 
