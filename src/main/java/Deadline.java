@@ -1,14 +1,25 @@
-public class Deadline extends Task {
-    private String dueDate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String dueDate) {
+public class Deadline extends Task {
+    private static final DateTimeFormatter outputFormatter =
+            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
+    private final LocalDateTime dueDate;
+
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
+    public Deadline(String description, String dueDate) {
+        super(description);
+        this.dueDate = LocalDateTime.parse(dueDate, outputFormatter);
+    }
+
     @Override
     public String getSaveString() {
-        return super.getSaveString() + "|" + dueDate;
+        return super.getSaveString() + "|" + dueDate.format(outputFormatter);
     }
 
     @Override
@@ -18,6 +29,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (by: %s)", this.dueDate);
+        return super.toString() + String.format(" (by: %s)", dueDate.format(outputFormatter));
     }
 }

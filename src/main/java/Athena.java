@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,6 +13,8 @@ public class Athena {
 
     private TaskList taskList;
     private boolean isActive;
+    private static final DateTimeFormatter inputFormatter =
+            DateTimeFormatter.ofPattern("d/M/yyyy H:mm");
 
     public Athena() {
         // Load save data if present
@@ -53,13 +57,15 @@ public class Athena {
                 sayTaskAddingLines(taskString);
                 break;
             case "deadline":
-                String[] taskNameAndDate = readTaskNameAndDate(arguments, "/by");
-                taskString = taskList.addDeadline(taskNameAndDate[0], taskNameAndDate[1]);
+                String[] taskNameAndDate = readTaskNameAndDateTime(arguments, "/by");
+                LocalDateTime dueDate = LocalDateTime.parse(taskNameAndDate[1], inputFormatter);
+                taskString = taskList.addDeadline(taskNameAndDate[0], dueDate);
                 sayTaskAddingLines(taskString);
                 break;
             case "event":
-                taskNameAndDate = readTaskNameAndDate(arguments, "/at");
-                taskString = taskList.addEvent(taskNameAndDate[0], taskNameAndDate[1]);
+                taskNameAndDate = readTaskNameAndDateTime(arguments, "/at");
+                LocalDateTime eventDate = LocalDateTime.parse(taskNameAndDate[1], inputFormatter);
+                taskString = taskList.addEvent(taskNameAndDate[0], eventDate);
                 sayTaskAddingLines(taskString);
                 break;
             case "mark":
@@ -96,7 +102,6 @@ public class Athena {
         if (taskList.wasModified()) {
             try {
                 saveToDisk();
-                System.out.println("saved");
             } catch (IOException e) {
                 sayText("I encountered a problem saving to disk: " + e.getMessage());
             }
@@ -124,7 +129,7 @@ public class Athena {
         return input.strip();
     }
 
-    private String[] readTaskNameAndDate(String input, String separator) throws AthenaInputException {
+    private String[] readTaskNameAndDateTime(String input, String separator) throws AthenaInputException {
         if (input.equals("")) {
             throw new AthenaInputException(ErrorCode.MISSING_TASK_NAME);
         } else if (!input.contains(separator)) {

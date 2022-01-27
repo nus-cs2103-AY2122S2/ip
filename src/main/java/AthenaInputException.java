@@ -18,7 +18,10 @@ public class AthenaInputException extends Exception {
             return("Error. Please provide a task name.");
             // No fallthrough
         case MISSING_TASK_DATETIME:
-            return("Error. Please provide a date and/or time.");
+            return("Error. Please provide a date and time.");
+            // No fallthrough
+        case INVALID_TASK_DATETIME:
+            return("Error. Please enter the date and time in the following format: dd/mm/yyyy hh:mm");
             // No fallthrough
         default:
             return(""); // Should not get here.

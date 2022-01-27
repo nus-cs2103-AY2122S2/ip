@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 import java.util.List;
@@ -51,14 +52,14 @@ public class TaskList {
         return toDo.toString();
     }
 
-    public String addEvent(String description, String eventDate) {
+    public String addEvent(String description, LocalDateTime eventDate) {
         Event event = new Event(description, eventDate);
         taskList.add(event);
         wasModified = true;
         return event.toString();
     }
 
-    public String addDeadline(String description, String dueDate) {
+    public String addDeadline(String description, LocalDateTime dueDate) {
         Deadline deadline = new Deadline(description, dueDate);
         taskList.add(deadline);
         wasModified = true;
