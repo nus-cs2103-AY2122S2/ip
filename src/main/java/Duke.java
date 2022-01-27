@@ -9,13 +9,13 @@ import java.util.Scanner;
  * @author Pun Hui Min
  */
 
-
 public class Duke {
 
     protected ArrayList<Task> tasks;
     static final String NO_DESC = "Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
             "Let's try again ~(^.^)~\n" +
             "Type 'help' if you need to know how to use this command";
+    static final String BYE_RESPONSE = "Bye~ Hope to see you again soon!\n~--~~--~~--~~(~v~)~~--~~--~~--~";
 
     public Duke() {
         this.tasks = new ArrayList<Task>();
@@ -64,8 +64,14 @@ public class Duke {
      * Prints the 'bye' response by Ducky. Usually called when the user says "bye"
      */
     public void printBye() {
-        String byeResponse = "Bye~ Hope to see you again soon!";
-        System.out.println(byeResponse);
+        String output = "";
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currentTask = this.tasks.get(i);
+            String message = currentTask.getTask();
+            output = output + "\n" + (i + 1 + ". " + message);
+        }
+        TextWriter writing = new TextWriter(output);
+        System.out.println(BYE_RESPONSE);
     }
 
     /**
@@ -230,6 +236,9 @@ public class Duke {
         case DEADLINE:
             try {
                 String text = textEntered[1];
+                if (!text.contains("/by")) {
+                    throw new DukeException("Please use \"/by\"");
+                }
                 String[] textArr = text.split("/by ");
                 String description = textArr[0];
                 if (textArr.length == 1) {
@@ -250,6 +259,9 @@ public class Duke {
         case EVENT:
             try {
                 String text = textEntered[1];
+                if (!text.contains("/at")) {
+                    throw new DukeException("Please use \"/at\"");
+                }
                 String[] textArr = text.split("/at ");
                 String description = textArr[0];
                 if (textArr.length == 1) {
