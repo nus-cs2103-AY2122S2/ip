@@ -1,3 +1,10 @@
+package lily;
+import lily.task.Deadline;
+import lily.task.Event;
+import lily.task.LilyException;
+import lily.task.Task;
+import lily.task.Todo;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -9,10 +16,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 /**
- * Author: Hong Yi En, Ian
- * Last Updated: 26 Jan 2022 (Year 2 Sem 2)
+ * Runs an interactive CLI-based chatbot which manages your todos
  * 
- * An interactive CLI-based chatbot to store todos
+ * Author: Hong Yi En, Ian
+ * Last Updated: Jan 2022 (AY21/22 Sem 2)
  */
 public class Lily {
     private static final String indent = "    ";
