@@ -35,14 +35,16 @@ public class Storage {
         }
     }
 
+
     /**
      * Saves the list data to the file at Path "data/duke.txt".
      * @param toDoList The List of items to be saved.
      */
-    public void saveFile(ArrayList<duke.task.Task> toDoList) {
+    public void saveFile(ArrayList<Task> toDoList) {
+
         try {
             StringBuilder textToAdd = new StringBuilder();
-            for (duke.task.Task task : toDoList) {
+            for (Task task : toDoList) {
                 textToAdd.append(task.toText());
             }
 
@@ -55,14 +57,15 @@ public class Storage {
         }
     }
 
+
     /**
      * Reads the file at Path "data/duke.txt" and returns the content as a list.
      * @return ArrayList of <code>Tasks</code> from the data file.
      * @throws duke.task.LoadingException If the file is not in the correct format.
      */
-    public ArrayList<duke.task.Task> readFile() throws duke.task.LoadingException {
+    public ArrayList<Task> readFile() throws LoadingException {
         File dataFile = new File("data/duke.txt");
-        ArrayList<duke.task.Task> toDoList = new ArrayList<>(100);
+        ArrayList<Task> toDoList = new ArrayList<>(100);
         try {
             Scanner s = new Scanner(dataFile);
             String[] taskLine;
@@ -72,13 +75,13 @@ public class Storage {
                 switch (taskLine[0]) {
                 case "T":
                     taskLine[2].trim();
-                    toDoList.add(new duke.task.ToDo(taskLine[2]));
+                    toDoList.add(new ToDo(taskLine[2]));
                     break;
                 case "D":
-                    toDoList.add(new duke.task.Deadline(taskLine[2], taskLine[3]));
+                    toDoList.add(new Deadline(taskLine[2], taskLine[3]));
                     break;
                 case "E":
-                    toDoList.add(new duke.task.Event(taskLine[2], taskLine[3]));
+                    toDoList.add(new Event(taskLine[2], taskLine[3]));
                     break;
                 }
 
@@ -90,8 +93,8 @@ public class Storage {
             return toDoList;
         } catch (FileNotFoundException ignored) {
         } catch (IndexOutOfBoundsException ex) {
-            throw new duke.task.LoadingException("Index Out of Bounds");
+            throw new LoadingException("Index Out of Bounds");
         }
-        return new ArrayList<duke.task.Task> (100);
+        return new ArrayList<Task> (100);
     }
 }

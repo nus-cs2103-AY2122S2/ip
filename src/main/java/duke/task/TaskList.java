@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * Represents a list of <code>Tasks</code>. A <code>TaskList</code> object is represented by an ArrayList of Tasks.
  */
 public class TaskList {
-    private ArrayList<duke.task.Task> toDoList;
-
+    private ArrayList<Task> toDoList;
+    
     /**
      * Returns a new instance of the <code>TaskList</code> object with the specified ArrayList.
      * @param arr ArrayList of tasks.
      */
-    public TaskList(ArrayList<duke.task.Task> arr) {
+    public TaskList(ArrayList<Task> arr) {
         this.toDoList = arr;
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
      * Returns the ArrayList of <code>Tasks</code>.
      * @return ArrayList of <code>Tasks</code>.
      */
-    public ArrayList<duke.task.Task> getToDoList() {
+    public ArrayList<Task> getToDoList() {
         return toDoList;
     }
 
@@ -28,7 +28,7 @@ public class TaskList {
      * Adds a <code>Task</code> to the list.
      * @param task <code>Task</code> to be added to the list.
      */
-    public void add(duke.task.Task task) {
+    public void add(Task task) {
         this.toDoList.add(task);
     }
 
@@ -37,7 +37,7 @@ public class TaskList {
      * @param idx Index of the task.
      * @return <code>Task</code> at the index.
      */
-    public duke.task.Task get(int idx) {
+    public Task get(int idx) {
         return this.toDoList.get(idx);
     }
 
@@ -46,7 +46,22 @@ public class TaskList {
      * @param idx Index of the task.
      * @return <code>Task</code> removed at the index.
      */
-    public duke.task.Task remove(int idx) {
+    public Task remove(int idx) {
         return this.toDoList.remove(idx);
+    }
+
+    /**
+     * Returns a list of <code>Tasks</code> that contains the specified keyword.
+     * @param keyword The keyword to be searched.
+     * @return List of relevant tasks that contains the keyword.
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> relevantTasks = new ArrayList<>(100);
+        for (Task task : toDoList) {
+            if (task.getName().contains(keyword)) {
+                relevantTasks.add(task);
+            }
+        }
+        return relevantTasks;
     }
 }
