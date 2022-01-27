@@ -33,7 +33,7 @@ public class DateTime {
     }
 
     public String toInputString() {
-        return this.date.toString() + " " + time;
+        return this.date.toString() + " " + (this.time > 999 ? "" : "0") + time;
     }
 
     @Override

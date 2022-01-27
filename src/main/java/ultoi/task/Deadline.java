@@ -28,7 +28,7 @@ public class Deadline extends Task {
     }
 
     public String toInputString() {
-        return "deadline" + description + " /by " + dateTime.toInputString();
+        return "deadline " + description + " /by " + dateTime.toInputString();
     }
 
     @Override

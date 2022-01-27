@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     public String toInputString() {
-        return "event" + description + " /at " + dateTime.toInputString();
+        return "event " + description + " /at " + dateTime.toInputString();
     }
 
     @Override
