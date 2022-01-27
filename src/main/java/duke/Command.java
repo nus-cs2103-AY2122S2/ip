@@ -24,10 +24,17 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException, IOException;
 
+    /**
+     * Set isExit to true
+     */
     public void changeExit() {
         this.isExit = true;
     }
 
+    /**
+     * Getter to return exit status
+     * @return boolean isExit
+     */
     public boolean isExit() {
         return this.isExit;
     }

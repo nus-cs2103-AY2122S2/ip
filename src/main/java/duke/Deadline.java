@@ -5,14 +5,30 @@ import exceptions.DukeDeadlineException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Extends Task class
+ * Represents events with deadline
+ */
 public class Deadline extends Task {
     protected LocalDate by_date;
 
+    /**
+     * Constructor
+     * Takes in name of task and deadline
+     * @param name String name of task
+     * @param by_date LocalDate task deadline
+     */
     public Deadline(String name, LocalDate by_date) {
         super(name);
         this.by_date = by_date;
     }
 
+    /**
+     * Static method to return a Deadline object
+     * @param input String to be parsed
+     * @return Deadline Task object
+     * @throws DukeDeadlineException
+     */
     public static Deadline setDeadline(String input) throws DukeDeadlineException { //method to call constructor solving
                                                     // "'this' should be called in first line" error
         String taskname;
@@ -37,6 +53,10 @@ public class Deadline extends Task {
         return null;
     }
 
+    /**
+     * Getter for Deadline task
+     * @return String parsed LocalDate
+     */
     public String getDate() {
         return this.by_date.toString();
     }
