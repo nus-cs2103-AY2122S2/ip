@@ -17,6 +17,8 @@ public class Parser {
 
     private static final String COMMAND_DELETE = "delete";
 
+    private static final String COMMAND_FIND = "find";
+
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
 
     /**
@@ -48,6 +50,8 @@ public class Parser {
             return new CreateCommand(args, TaskType.EVENT);
         case COMMAND_DELETE:
             return new DeleteCommand(args);
+        case COMMAND_FIND:
+            return new FindCommand(args);
         default:
             throw new DukeException(ERROR_INVALID_COMMAND);
         }

@@ -27,6 +27,13 @@ public abstract class Task {
     }
 
     /**
+     * Getter for task title.
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
      * Mark tasks as done.
      */
     public void markAsDone() {
