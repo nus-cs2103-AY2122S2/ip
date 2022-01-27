@@ -1,15 +1,55 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     private static String isPlural(int n) {
         if (n < 1 || n > 1) {
             return "s ";
         }
         return " ";
+    }
+
+    private static void load() throws IOException, DukeException {
+        File f = new File("data/duke.txt");
+        f.createNewFile();
+        Scanner sc = new Scanner(f);
+        while(sc.hasNext()) {
+            String command = sc.nextLine();
+            String[] commandArr = command.split(" \\| ");
+            String type = commandArr[0];
+            boolean status = (Integer.parseInt(commandArr[1]) == 1);
+            String description = commandArr[2];
+            switch(type) {
+                case "E":
+                    String at = commandArr[3];
+                    tasks.add(new Event(description, status, at));
+                    break;
+                case "D":
+                    String by = commandArr[3];
+                    tasks.add(new Deadline(description, status, by));
+                    break;
+                case "T":
+                    tasks.add(new ToDo(description, status));
+                    break;
+            }
+        }
+        sc.close();
+    }
+
+    private static void save() throws IOException {
+        StringBuffer sb = new StringBuffer();
+        for (Task task: tasks) {
+            sb.append(task.save());
+        }
+        FileWriter fw = new FileWriter("data/duke.txt");
+        fw.write(sb.toString());
+        fw.close();
     }
 
     public static void main(String[] args) {
@@ -20,13 +60,16 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
             System.out.println("Hello from\n" + logo);
-
             System.out.println("Hello! I'm Duke");
 
-            Scanner sc = new Scanner(System.in);
+            load();
 
             System.out.println("What can I do for you?");
+
+            Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
+
+            FileWriter fw = new FileWriter("data/duke.txt", true);
 
             while (!command.equals("bye")) {
                 if (command.equals("list")) {
@@ -56,6 +99,7 @@ public class Duke {
                     } else if (type.equals("delete")) {
                         int i = Integer.parseInt(commandArr[1]) - 1;
                         Task task = tasks.remove(i);
+
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(task);
                     } else {
@@ -99,9 +143,14 @@ public class Duke {
                 }
                 command = sc.nextLine();
             }
+
+            save();
+
             sc.close();
             System.out.println("Bye. Hope to see you again soon!");
         } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
