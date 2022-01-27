@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    private final String type = "D";
+    protected final static String type = "D";
     private final LocalDateTime dateTime;
+    private final String dateAndTime;
 
     /**
      * Constructs a deadline object.
@@ -19,7 +20,24 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dateAndTime) {
         super(description);
+        this.dateAndTime = dateAndTime;
         this.dateTime = LocalDateTime.parse(dateAndTime);
+    }
+
+
+    protected Deadline(Boolean marked, String description, String dateAndTime) {
+        super(description);
+        this.dateAndTime = dateAndTime;
+        this.dateTime = LocalDateTime.parse(dateAndTime);
+        if (marked) {
+            this.markComplete();
+        }
+    }
+
+    @Override
+    public String taskToSaveString() {
+        String mark = this.completed ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
+        return String.join(Task.FORMAT_SPLIT, this.type, mark, this.description, this.dateAndTime);
     }
 
     @Override

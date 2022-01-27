@@ -10,7 +10,9 @@ import alfred.command.ListCommand;
 import alfred.command.MarkCommand;
 import alfred.command.ToDoCommand;
 import alfred.command.UnmarkCommand;
+import alfred.exceptions.IllegalCharacterException;
 import alfred.exceptions.InvalidCommandException;
+import alfred.task.Task;
 
 /**
  * Encapsulates a parser used to identify the command
@@ -25,12 +27,16 @@ public class AlfredParser {
      * @return Command object that can be executed.
      * @throws InvalidCommandException if no valid command is identified in the input.
      */
-    public Command parseInput(String input) throws InvalidCommandException {
+    public Command parseInput(String input) throws InvalidCommandException,
+            IllegalCharacterException {
         // read in arguments
         String[] arguments = input.split(" ");
         String command = arguments[0];
 
         // case by case, check for valid input
+        if (input.contains(Task.FORMAT_SPLIT)) {
+            throw new IllegalCharacterException();
+        }
         // LIST
         if ((command.equals("list")) && (arguments.length == 1)) {
             return new ListCommand();
@@ -56,4 +62,5 @@ public class AlfredParser {
             throw new InvalidCommandException();
         }
     }
+
 }

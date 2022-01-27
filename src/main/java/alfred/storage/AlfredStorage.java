@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Encapsulates the logic for managing the internal data states
@@ -16,15 +17,19 @@ import java.util.ArrayList;
 public class AlfredStorage {
     private final ArrayList<Task> taskList;
     private final String dataPath;
+    private final String folderPath;
+
 
     /**
      * Constructs an AlfredStorage object.
      *
      * @param dataPath Data path to where Alfred.txt file should be saved.
      */
-    public AlfredStorage(String dataPath) {
-        this.taskList = new ArrayList<Task>();
+    public AlfredStorage(String folderPath, String dataPath) {
+
         this.dataPath = dataPath;
+        this.folderPath = folderPath;
+        this.taskList = this.loadFromFile();
     }
 
     /**
@@ -147,30 +152,57 @@ public class AlfredStorage {
         return "Now you have " + this.taskList.size() + " task(s) in the your list.";
     }
 
+    private ArrayList<Task> loadFromFile() {
+        ArrayList<Task> arr = new ArrayList<Task>();
+
+        // try to load from file
+        try {
+            File file = new File(this.dataPath);
+            Scanner sc = new Scanner(file);
+
+            // if can load, create list
+            String line;
+            Task task;
+            while (sc.hasNextLine()) {
+                line = sc.nextLine();
+                task = Task.parseSavedInput(line);
+                arr.add(task); // FIFO
+            }
+            return arr;
+
+        } catch (FileNotFoundException fe) {
+            // create empty file
+            try {
+                System.out.println("Alfred.txt not created. Will create at: " + this.dataPath);
+                File directory = new File(this.folderPath);
+                directory.mkdir();
+                File output = new File(this.dataPath);
+                output.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println(
+                        "Something went wrong trying to save the file: " + ioe.getMessage()
+                        + "\nPlease restart.");
+            }
+            return arr;
+        }
+
+    }
+
     private void saveToFile() {
         FileWriter fw;
         // save to file
         try {
-            System.out.println(new File(".").getCanonicalPath());
             fw = new FileWriter(this.dataPath);
-            String newList = this.listToString();
-            fw.write(newList);
+            for (int i = 0; i < this.taskList.size(); i++) {
+                if (i != 0) {
+                    fw.write("\n");
+                }
+                fw.write(this.taskList.get(i).taskToSaveString());
+            }
             fw.close();
         } catch (FileNotFoundException fe) { // create if needed
-            System.out.println("Alfred.txt not created. Will create at: " + this.dataPath);
-            try {
-                // create the file
-                File output = new File(this.dataPath);
-                output.createNewFile();
-                fw = new FileWriter(output);
-                String newList = this.listToString();
-                fw.write(newList);
-                fw.close();
+            System.out.println("Something went wrong trying to load the file: " + fe.getMessage());
 
-            } catch (IOException ioe) {
-                System.out.println(
-                        "Something went wrong trying to save the file: " + ioe.getMessage());
-            }
         } catch (IOException ioe) {
             System.out.println(
                     "Something went wrong trying to save the file: " + ioe.getMessage());

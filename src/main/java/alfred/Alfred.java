@@ -23,7 +23,9 @@ public class Alfred {
     public Alfred() {
         this.ui = new AlfredUserInterface();
         this.parser = new AlfredParser();
-        this.storage = new AlfredStorage(String.join(File.separator, ".", "data", "Alfred.txt"));
+        this.storage = new AlfredStorage(
+                String.join(File.separator, ".", "data"),
+                String.join(File.separator, ".", "data", "Alfred.txt"));
     }
 
     /**

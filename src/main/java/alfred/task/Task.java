@@ -3,6 +3,7 @@ package alfred.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,16 +12,17 @@ import java.util.regex.Pattern;
  */
 public abstract class Task {
     // class constants
-    private static final String COMPLETION_MARK = "X";
-    private static final String INCOMPLETE_MARK = " ";
+    public static final String FORMAT_SPLIT = "`";
+    protected static final String COMPLETION_MARK = "X";
+    protected static final String INCOMPLETE_MARK = " ";
     private static final DateTimeFormatter dateTimeFormatter =
             DateTimeFormatter.ofLocalizedDateTime(
                     FormatStyle.MEDIUM, FormatStyle.MEDIUM);
 
 
     // instance attributes
-    private final String description;
-    private boolean completed;
+    protected final String description;
+    protected boolean completed;
 
     /**
      * Constructor of the parent class, so every task must have
@@ -78,6 +80,37 @@ public abstract class Task {
         return matcher.find();
 
     }
+
+    /**
+     * Parses a save string to return a Task object.
+     *
+     * @param input String representation of saved task.
+     * @return Task object that was saved.
+     */
+    public static Task parseSavedInput(String input) {
+        String[] arguments = input.split(Task.FORMAT_SPLIT);
+        arguments = Arrays.stream(arguments).map(s -> s.trim()).toArray(String[]::new);
+        String command = arguments[0];
+        System.out.println(command);
+        boolean marked = arguments[1].equals(Task.COMPLETION_MARK);
+        switch (command) {
+            case ToDo.type:
+                return new ToDo(marked, arguments[2]);
+            case Event.type:
+                return new Event(marked, arguments[2], arguments[3]);
+            case Deadline.type:
+                return new Deadline(marked, arguments[2], arguments[3]);
+            default:
+                throw new RuntimeException("Invalid command saved!");
+        }
+    }
+
+    /**
+     * Converts a task to a save string for saving.
+     *
+     * @return String for saving.
+     */
+    public abstract String taskToSaveString();
 
     @Override
     public String toString() {

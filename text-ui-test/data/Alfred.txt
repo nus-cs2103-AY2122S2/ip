@@ -1,6 +1,6 @@
-1. [D][ ]  return book (by: Jan 2, 2021, 10:00:00 AM)
-2. [E][ ]  project meeting (at: Nov 3, 2022, 10:00:00 PM)
-3. [T][X]  join sports club
-4. [T][ ]  borrow book
-5. [D][ ]  return book (by: May 28, 2021, 9:01:00 AM)
-6. [E][ ]  project meeting (at: May 3, 2023, 12:43:00 PM)
+D` ` return book`2021-01-02T10:00:00
+E` ` project meeting`2022-11-03T22:00:00
+T`X` join sports club
+T` ` borrow book
+D` ` return book`2021-05-28T09:01:00
+E` ` project meeting`2023-05-03T12:43:00
