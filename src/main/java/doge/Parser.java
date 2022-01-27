@@ -1,10 +1,11 @@
 package doge;
 
-import doge.command.Command;
 import doge.command.ByeCommand;
+import doge.command.Command;
 import doge.command.DeadlineCommand;
 import doge.command.DeleteCommand;
 import doge.command.EventCommand;
+import doge.command.FindCommand;
 import doge.command.ListCommand;
 import doge.command.MarkCommand;
 import doge.command.TodoCommand;
@@ -39,6 +40,8 @@ public class Parser {
             return new ListCommand(curr.substring(4).trim());
         case "bye":
             return new ByeCommand();
+        case "find":
+            return new FindCommand(curr.substring(4).trim());
         default:
             throw new DogeException("Command not recognised!");
         }
