@@ -6,28 +6,28 @@ import duke.task.Task;
 /**
  * Class for printing UI elements.
  */
-public class UI {
+public class Ui {
     private static final String MESSAGE_INTRO = "Hello! I'm Duke\n     What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
 
     /**
      * Prints the set welcome message with the borders.
      */
-    public void showWelcome(){
+    public void showWelcome() {
         printContent(MESSAGE_INTRO);
     }
 
     /**
      * Prints the set exit message with the borders.
      */
-    public void showExitMessage(){
+    public void showExitMessage() {
         printContent(MESSAGE_BYE);
     }
 
     /**
      * Prints the top and bottom borders.
      */
-    public void printLine(){
+    public void printLine() {
         System.out.println("    ____________________________________________________________");
     }
 
@@ -36,7 +36,7 @@ public class UI {
      *
      * @param text
      */
-    public void printContent(String text){
+    public void printContent(String text) {
         String spacing = "     ";
         printLine();
         System.out.println(spacing + text);
@@ -51,7 +51,7 @@ public class UI {
      * @param task Task that just been added/deleted
      * @param message Template text for addition or deletion
      */
-    public void printAddDeleteTaskSuccess(List<Task> tasks, Task task, String message){
+    public void printAddDeleteTaskSuccess(List<Task> tasks, Task task, String message) {
         String content = taskLine(task, message) + "\n";
         content += listSizeLine(tasks);
         printContent(content);
@@ -64,7 +64,7 @@ public class UI {
      * @param message Template text for the printed task
      * @return Combined string mainly used for printing
      */
-    public String taskLine(Task task, String message){
+    public String taskLine(Task task, String message) {
         return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString();
     }
 
@@ -74,7 +74,7 @@ public class UI {
      * @param tasks List of tasks
      * @return String for how many tasks in the list
      */
-    public String listSizeLine(List<Task> tasks){
+    public String listSizeLine(List<Task> tasks) {
         return "     Now you have " + tasks.size() + " task" + (tasks.size() != 1 ? "s" : "") + " in the list.";
     }
 }

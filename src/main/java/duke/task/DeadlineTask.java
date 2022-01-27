@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,7 +16,7 @@ public class DeadlineTask extends Task{
      * @param title Title of task
      * @param taskDate Date of task deadline
      */
-    public DeadlineTask(String title, String taskDate){
+    public DeadlineTask(String title, String taskDate) {
         super(title);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);
@@ -31,7 +30,7 @@ public class DeadlineTask extends Task{
      * @param taskDate Date of task deadline
      * @param taskTime Time of task deadline
      */
-    public DeadlineTask(String title, String taskDate, String taskTime){
+    public DeadlineTask(String title, String taskDate, String taskTime) {
         super(title);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);
@@ -45,7 +44,7 @@ public class DeadlineTask extends Task{
      * @param isDone Done state deadline
      * @param taskDate Date of Task deadline
      */
-    public DeadlineTask(String title, Boolean isDone, String taskDate){
+    public DeadlineTask(String title, Boolean isDone, String taskDate) {
         super(title, isDone);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);
@@ -60,7 +59,7 @@ public class DeadlineTask extends Task{
      * @param taskDate Date of task deadline
      * @param taskTime Time of task deadline
      */
-    public DeadlineTask(String title, Boolean isDone, String taskDate, String taskTime){
+    public DeadlineTask(String title, Boolean isDone, String taskDate, String taskTime) {
         super(title, isDone);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);
@@ -72,7 +71,7 @@ public class DeadlineTask extends Task{
      *
      * @return String for printing the deadline
      */
-    public String getByTime(){
+    public String getByTime() {
         return "(by: " + taskDate + (taskTime != null ? " " + taskTime.toString() : "") + ")";
     }
 
@@ -81,8 +80,9 @@ public class DeadlineTask extends Task{
      *
      * @return String for file saving
      */
-    public String toOutputLine(){
-        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + " | " + taskDate.toString() + (taskTime != null ? " | " + taskTime.toString() : "");
+    public String toOutputLine() {
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + " | "
+                + taskDate.toString() + (taskTime != null ? " | " + taskTime.toString() : "");
     }
 
     /**
@@ -92,7 +92,7 @@ public class DeadlineTask extends Task{
      * @return String with title and deadline of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return this.title + " " + getByTime();
     }
 }

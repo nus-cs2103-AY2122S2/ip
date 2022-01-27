@@ -21,12 +21,12 @@ public class ParserTest {
     }
 
     @Test
-    public void testParser_invalid_exceptionThrown(){
+    public void testParser_invalid_exceptionThrown() {
         try {
             Parser.parse("invalid");
             fail();
-        } catch(DukeException e){
-            assertEquals("OOPS!!! You have entered an invalid command :(" , e.getMessage());
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You have entered an invalid command :(", e.getMessage());
         }
     }
 }

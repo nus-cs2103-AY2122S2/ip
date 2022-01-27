@@ -26,12 +26,12 @@ public class Parser {
      * @return Command object of what the user entered
      * @throws DukeException If the command is invalid
      */
-    public static Command parse(String fullCommand) throws DukeException{
-        String[] splittedCommand = fullCommand.split("\\s+");
-        String command = splittedCommand[0];
-        String args = fullCommand.substring(splittedCommand[0].length()).trim();
+    public static Command parse(String fullCommand) throws DukeException {
+        String[] splitCommand = fullCommand.split("\\s+");
+        String command = splitCommand[0];
+        String args = fullCommand.substring(splitCommand[0].length()).trim();
 
-        switch(command){
+        switch (command) {
         case COMMAND_BYE:
             return new ByeCommand();
         case COMMAND_LIST:

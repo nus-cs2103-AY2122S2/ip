@@ -10,7 +10,7 @@ public class TodoTask extends Task{
      *
      * @param title Title of task
      */
-    public TodoTask(String title){
+    public TodoTask(String title) {
         super(title);
         this.type = TaskType.TODO;
     }
@@ -20,7 +20,7 @@ public class TodoTask extends Task{
      * @param title
      * @param isDone
      */
-    public TodoTask(String title, Boolean isDone){
+    public TodoTask(String title, Boolean isDone) {
         super(title, isDone);
         this.type = TaskType.TODO;
     }

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 /**
  * Tasks that are classified as events.
  */
-public class EventTask extends Task{
+public class EventTask extends Task {
     protected LocalDate eventDate;
     protected LocalTime eventTime;
 
@@ -16,7 +16,7 @@ public class EventTask extends Task{
      * @param title Title of event
      * @param eventDate Date of event
      */
-    public EventTask(String title, String eventDate){
+    public EventTask(String title, String eventDate) {
         super(title);
         this.type = TaskType.EVENT;
         this.eventDate = LocalDate.parse(eventDate);
@@ -30,7 +30,7 @@ public class EventTask extends Task{
      * @param eventDate Date of event
      * @param eventTime Time of event
      */
-    public EventTask(String title, String eventDate, String eventTime){
+    public EventTask(String title, String eventDate, String eventTime) {
         super(title);
         this.type = TaskType.EVENT;
         this.eventDate = LocalDate.parse(eventDate);
@@ -44,7 +44,7 @@ public class EventTask extends Task{
      * @param isDone Done state
      * @param eventDate Date of event
      */
-    public EventTask(String title, Boolean isDone, String eventDate){
+    public EventTask(String title, Boolean isDone, String eventDate) {
         super(title, isDone);
         this.type = TaskType.EVENT;
         this.eventDate = LocalDate.parse(eventDate);
@@ -59,7 +59,7 @@ public class EventTask extends Task{
      * @param eventDate Date of event
      * @param eventTime Time of event
      */
-    public EventTask(String title, Boolean isDone, String eventDate, String eventTime){
+    public EventTask(String title, Boolean isDone, String eventDate, String eventTime) {
         super(title, isDone);
         this.type = TaskType.EVENT;
         this.eventDate = LocalDate.parse(eventDate);
@@ -71,7 +71,7 @@ public class EventTask extends Task{
      *
      * @return String for printing the event date and time
      */
-    public String getEventTime(){
+    public String getEventTime() {
         return "(at: " + eventDate + (eventTime != null ? " " + eventTime.toString() : "") + ")";
     }
 
@@ -80,8 +80,9 @@ public class EventTask extends Task{
      *
      * @return String for file saving
      */
-    public String toOutputLine(){
-        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + " | " + eventDate.toString() + (eventTime != null ? " | " + eventTime.toString() : "");
+    public String toOutputLine() {
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title +
+                " | " + eventDate.toString() + (eventTime != null ? " | " + eventTime.toString() : "");
     }
 
     /**
@@ -91,7 +92,7 @@ public class EventTask extends Task{
      * @return String with the title and event date and time
      */
     @Override
-    public String toString(){
+    public String toString() {
         return this.title + " " + getEventTime();
     }
 }

@@ -14,7 +14,7 @@ import duke.task.Task;
 public class Duke {
     private static final String FILE_PATH = "./data/test.txt";
 
-    private static final UI ui = new UI();
+    private static final Ui UI = new Ui();
 
     public static void main(String[] args) {
         run();
@@ -25,21 +25,21 @@ public class Duke {
      * Uses Scanner to parse commands.
      */
     public static void run(){
-        ui.showWelcome();
+        UI.showWelcome();
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);
         List<Task> taskList = Storage.loadFromFile(FILE_PATH);
-        while(!isExit){
-            try{
+        while (!isExit) {
+            try {
                 String commandLine = sc.nextLine();
                 Command c = Parser.parse(commandLine);
-                c.execute(taskList, ui);
+                c.execute(taskList, UI);
                 isExit = c.isExit();
-            } catch(DukeException e){
-                ui.printContent(e.getMessage());
+            } catch (DukeException e) {
+                UI.printContent(e.getMessage());
             }
         }
-        ui.showExitMessage();
+        UI.showExitMessage();
         sc.close();
     }
 }

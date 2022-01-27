@@ -8,13 +8,13 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UITest {
+public class UiTest {
     @Test
-    public void uiTestWelcome_valid_success() throws IOException{
+    public void uiTestWelcome_valid_success() throws IOException {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.showWelcome();
         outStream.flush();
         String lines = outStream.toString();
@@ -24,11 +24,11 @@ public class UITest {
     }
 
     @Test
-    public void uiTestBye_valid_success() throws IOException{
+    public void uiTestBye_valid_success() throws IOException {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.showExitMessage();
         outStream.flush();
         String lines = outStream.toString();
@@ -38,11 +38,11 @@ public class UITest {
     }
 
     @Test
-    public void uiTestPrint_valid_success() throws IOException{
+    public void uiTestPrint_valid_success() throws IOException {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.printContent("This is a test line to fit within the top and bottom borders");
         outStream.flush();
         String lines = outStream.toString();

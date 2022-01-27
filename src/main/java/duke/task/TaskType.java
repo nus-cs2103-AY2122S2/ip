@@ -12,7 +12,7 @@ public enum TaskType {
      *
      * @param initial Initial of task type
      */
-    TaskType(String initial){
+    TaskType(String initial) {
         this.initial = initial;
     }
 
@@ -21,7 +21,7 @@ public enum TaskType {
      *
      * @return Task type initial in a string
      */
-    public String getInitial(){
+    public String getInitial() {
         return this.initial;
     }
 }
