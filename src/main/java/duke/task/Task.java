@@ -15,6 +15,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public void markAsDone(){
         this.isDone = true;
     }
