@@ -28,6 +28,7 @@ class TaskList {
         }
     }
 
+
     void markTask(int index) throws IndexOutOfBoundsException {
         try {
             taskList.get(index - 1).setDone();
@@ -77,7 +78,12 @@ class TaskList {
             } else {
                 sc.nextLine();
             }
-            this.taskList.add(Task.createTask(type, done, name, date));
+            try {
+                this.taskList.add(Task.createTask(type, done, name, date));
+            } catch (DukeExceptions e) {
+                System.out.println(e.getMessage());
+            }
+            
         }
     }
 

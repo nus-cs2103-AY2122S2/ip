@@ -1,4 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 abstract class Task {
+    protected static DateTimeFormatter initFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     protected String taskName;
     protected boolean done;
 
@@ -17,7 +23,7 @@ abstract class Task {
 
     abstract String updateIntoDatabase();
 
-    static Task createTask(String type, Boolean done, String name, String date) {
+    static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
         type = type.toUpperCase();
         if (type.equals("TODO")) {
             return new ToDo(name, done);
@@ -50,18 +56,23 @@ final class ToDo extends Task {
 }
 
 final class Deadline extends Task {
-    String deadline;
+    LocalDateTime deadline;
 
-    protected Deadline(String taskName, boolean done, String deadline) {
+    protected Deadline(String taskName, boolean done, String deadline) throws InvalidDate {
         super(taskName, done);
-        this.deadline = deadline;
+        try {
+            this.deadline = LocalDateTime.parse(deadline, initFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDate();
+        }
+
     }
 
     @Override
     public String toString() {
         String tag = "[D]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String deadline = "(by: " + this.deadline + ")";
+        String deadline = "(by: " + this.deadline.format(formatter) + ")";
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 
@@ -72,11 +83,16 @@ final class Deadline extends Task {
 }
 
 final class Event extends Task {
-    String eventDate;
+    LocalDateTime eventDate;
 
-    protected Event(String taskName, boolean done, String eventDate) {
+    protected Event(String taskName, boolean done, String eventDate) throws InvalidDate {
         super(taskName, done);
-        this.eventDate = eventDate;
+        try {
+            this.eventDate = LocalDateTime.parse(eventDate, initFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDate();
+        }
+
     }
 
     @Override

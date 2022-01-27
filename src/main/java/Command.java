@@ -28,7 +28,7 @@ abstract class Command {
                 }
                 System.out.println("Alright! It's done:");
                 System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
-            }  
+            }
         },
         UNMARK {
             @Override
@@ -96,7 +96,7 @@ abstract class Command {
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(event.toString());
                 taskList.printNoTasks();
-            }  
+            }
         },
         DELETE {
             @Override
@@ -112,9 +112,9 @@ abstract class Command {
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
-                
+
             }
-        };
+        },;
 
         public abstract void run(String parameter, TaskList taskList) throws DukeExceptions;
     }
@@ -136,6 +136,6 @@ abstract class Command {
         } catch (IllegalArgumentException e) {
             throw InvalidCommand.createInvalidCommand(command);
         }
-        
+
     }
 }

@@ -1,4 +1,4 @@
-abstract class DukeExceptions extends Exception{
+abstract class DukeExceptions extends Exception {
     protected DukeExceptions(String s) {
         super(s);
     }
@@ -21,7 +21,7 @@ abstract class EmptyParameters extends DukeExceptions {
     EmptyParameters(String s) {
         super(s);
     }
-    
+
 }
 
 final class ListIndexOutOfBound extends DukeExceptions {
@@ -29,7 +29,7 @@ final class ListIndexOutOfBound extends DukeExceptions {
     ListIndexOutOfBound() {
         super("Index is out of bond!");
     }
-    
+
 }
 
 final class EmptyTask extends EmptyParameters {
@@ -37,7 +37,7 @@ final class EmptyTask extends EmptyParameters {
     private EmptyTask(String s) {
         super(s);
     }
-    
+
     static EmptyTask createEmptyTask(String taskCmd) throws EmptyTask {
         throw new EmptyTask("Are you tryng to add something to " + taskCmd.toLowerCase());
     }
@@ -48,7 +48,7 @@ final class EmptyDate extends EmptyParameters {
     private EmptyDate(String s) {
         super(s);
     }
-    
+
     static EmptyDate createEmptyDate(String taskCmd) throws EmptyDate {
         throw new EmptyDate(taskCmd.substring(0, 1).toUpperCase() + taskCmd.substring(1) + " needs a date");
     }
@@ -72,11 +72,17 @@ final class MissingCommand extends InvalidCommand {
     MissingCommand() {
         super("Sorry, I don't see any commands!");
     }
-    
+
 }
 
 final class IncorrectCommand extends InvalidCommand {
     IncorrectCommand() {
         super("Sorry! I don't undestand what are you saying!");
+    }
+}
+
+final class InvalidDate extends DukeExceptions {
+    InvalidDate() {
+        super("Sorry! You have entered the wrong date!");
     }
 }
