@@ -11,11 +11,18 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles user input and commands.
+ */
 public class Parser {
 
     private boolean isExit = false;
     private Ui ui = new Ui();
 
+    /**
+     * Handles user command and give an appropriate reply.
+     * @param userInput commands specified by the user.
+     */
     public void parse(String userInput) {
         String[] input = userInput.split(" ", 2);
 
@@ -54,6 +61,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in the given user input and return a newly created task specified by the user.
+     * Catches any invalid command and reply appropriately.
+     * @param userInput User command.
+     * @param type Type of task to be created.
+     * @return A new task specified by the user.
+     */
     private Task getTask(String[] userInput, Type type) {
         Task task = null;
 
@@ -100,15 +114,29 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Returns a boolean depending on Duke understanding the given command.
+     * @param input User command.
+     * @return True if Duke understands the command, false otherwise.
+     */
     private boolean isCommandRecognized(String input) {
         String temp = input.toLowerCase();
         return temp.equals("todo") || temp.equals("event") || temp.equals("deadline") || temp.equals("delete");
     }
 
+    /**
+     * Returns a boolean that signifies the user's wish to end the program.
+     * @return A boolean.
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Returns user commands as an Enum type.
+     * @param input User command.
+     * @return An Enum type corresponding to the user's command.
+     */
     public Type getEnumType(String input) {
         String temp = input.toLowerCase();
         Type type;

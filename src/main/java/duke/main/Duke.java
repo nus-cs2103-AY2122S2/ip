@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Behaves as a task manager to keep record of the different tasks.
+ */
 public class Duke {
 
     private Parser parser;
@@ -14,6 +17,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates a Duke object that takes in a filepath for reading and writing of data.
+     * Initializes all necessary classes.
+     * @param filePath Path in which the list of task is stored.
+     */
     public Duke(String filePath) {
         parser = new Parser();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Execute the Duke bot.
+     */
     private void run() {
         taskList.fetchData(storage.readData());
         ui.showWelcome();

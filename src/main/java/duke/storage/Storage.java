@@ -13,10 +13,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles reading and writing of data.
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Creates a Storage object that has access to the text file as specified by the filepath.
+     * @param filePath Path in which the text file is stored or to be stored.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
 
@@ -27,6 +34,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads data from the text file and output it as a list of tasks.
+     * @return An array list consisting of all previously stored tasks.
+     */
     public ArrayList<Task> readData() {
         ArrayList<Task> list = new ArrayList<>();
 
@@ -56,6 +67,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the current tasks into the text file as specified by the filepath.
+     * @param list List of tasks created by the user.
+     */
     public void saveData(ArrayList<Task> list) {
         try {
             FileWriter fileWriter = new FileWriter(file);
