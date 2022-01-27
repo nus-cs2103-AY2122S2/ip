@@ -80,7 +80,7 @@ public class Duke {
                             + "\nNow you have " + todo_list.size() + " tasks in the list.";
                     System.out.print(outputChatBox(output_text));
                 } else if (task_type.equals("deadline")) {
-                    String description = command.substring(task_type.length()).split("/")[0];
+                    String description = command.substring(task_type.length()).split("/")[0].substring(1);
                     if (description.length() == 0) {
                         throw new EmptyDescriptionException();
                     }
@@ -94,7 +94,7 @@ public class Duke {
                             + "\nNow you have " + todo_list.size() + " tasks in the list.";
                     System.out.print(outputChatBox(output_text));
                 } else if (task_type.equals("event")) {
-                    String description = command.substring(task_type.length()).split("/")[0];
+                    String description = command.substring(task_type.length()).split("/")[0].substring(1);
                     if (description.length() == 0) {
                         throw new EmptyDescriptionException();
                     }

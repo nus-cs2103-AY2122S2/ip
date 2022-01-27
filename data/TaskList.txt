@@ -1,4 +1,6 @@
 T | 0 | read book
-D | 0 | return book  | June 6th
-D | 0 | project meeting  | Aug 6th 2-4pm
+D | 0 | return book    | 2002-06-25
+D | 0 | project meeting    | 1926-08-17
 T | 1 | join sports club
+D | 0 | shopping  | 2002-06-25
+D | 0 | homework  | 1926-08-17
