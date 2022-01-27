@@ -5,10 +5,9 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
-
     // tasklist exception messages
     private final static String INDEX_NO_EXIST = "Yo yo yo, this task don't exist. Give a legitimate task number.";
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<Task>();
@@ -52,10 +51,10 @@ public class TaskList {
     }
 
     public String getTaskListStr() {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); ++i) {
-            sb.append(String.valueOf(i + 1)).append(". ").append(tasks.get(i).toString()).append("\n");
+            sb.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
 
         return sb.toString();

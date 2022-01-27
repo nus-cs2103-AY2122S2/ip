@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 import duke.util.Ui;
 
 public abstract class TaskCommand extends Command {
@@ -20,8 +20,8 @@ public abstract class TaskCommand extends Command {
     protected void updateTaskList(Task newTask, TaskList taskList, Storage storage, Ui ui) throws DukeException {
         taskList.addTask(newTask);
         storage.saveList(taskList.getTaskList());
-        String printStr = "Gotcha. Added the task: \n   " + newTask.toString()
-                + "\nNow you have " + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.";
+        String printStr = "Gotcha. Added the task: \n   " + newTask.toString() + "\nNow you have "
+                + taskList.getTaskListSize() + " tasks in your list.";
 
         ui.printResponse(printStr);
     }

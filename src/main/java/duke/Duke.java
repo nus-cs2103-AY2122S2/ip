@@ -18,23 +18,16 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.HashMap;
 
 public class Duke {
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
     private boolean isRunning;
-
-    private TaskList taskList;
     private Storage storage;
-    private Ui ui;
-    private Parser parser;
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-
-        duke.runDuke();
-    }
 
     public Duke() {
         taskList = new TaskList();
@@ -76,6 +69,12 @@ public class Duke {
         commands.put("delete", new DeleteCommand("delete"));
 
         parser = new Parser(commands);
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+
+        duke.runDuke();
     }
 
     /* Run duke.Duke default behavior */

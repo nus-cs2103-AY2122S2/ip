@@ -1,15 +1,14 @@
 package duke.task;
 
-import java.util.StringTokenizer;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.StringTokenizer;
 
 public class Deadline extends Task {
+    private static final char DEADLINE_SYMBOL = 'D';
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
-    private static final char DEADLINE_SYMBOL = 'D';
 
     public Deadline() {
         super();
@@ -28,11 +27,9 @@ public class Deadline extends Task {
 
     @Override
     public String saveFileFormat() {
-        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|"
-                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + "|"
-                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"))
-                + "\n";
+        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.deadlineDate.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + "|" + this.deadlineTime.format(
+                DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
     }
 
     @Override
@@ -51,10 +48,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " "
-                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"))
-                + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

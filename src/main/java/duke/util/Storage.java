@@ -2,26 +2,23 @@ package duke.util;
 
 import duke.exception.DukeException;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.format.DateTimeParseException;
-
 public class Storage {
-    private String fileDirPath;
-    private String fullFilePath;
-
-    private File file;
-
     // exception messages
     private final static String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
-    private final static String FILE_LOADING_ERROR_MSG = "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
+    private final static String FILE_LOADING_ERROR_MSG
+            = "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
     private final static String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
+    private final String fileDirPath;
+    private final String fullFilePath;
+    private File file;
 
     public Storage(String fileName, String fileDirPath) throws DukeException {
         this.fileDirPath = fileDirPath;
@@ -50,8 +47,7 @@ public class Storage {
     }
 
     /* Load task list from file saved */
-    public <T extends Loading> void loadFromSave(ArrayList<T> taskList,
-            Function<String, T> factory)
+    public <T extends Loading> void loadFromSave(ArrayList<T> taskList, Function<String, T> factory)
             throws DukeException {
         try {
             // read file
