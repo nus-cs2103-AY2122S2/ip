@@ -20,6 +20,7 @@ public class DateParser {
      * @return String corresponding to the <code>LocalDate</code>
      */
     public static String dateToString(LocalDate date) {
+        assert date != null: "LocalDate object is not initialized correctly.";
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 }
