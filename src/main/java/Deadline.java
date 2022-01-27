@@ -32,6 +32,6 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     public String dateTimeInfo() {
-        return "(by: " + super.getDateTime() + ")";
+        return "(by: " + super.getDateTimeOutput() + ")";
     }
 }

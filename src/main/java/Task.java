@@ -64,4 +64,13 @@ public abstract class Task {
     public String toString() {
         return "[" + type.getAbbreviation() + "] " + getStatusIcon() + " " + description;
     }
+
+    /**
+     * Returns the string representation of the task in save format.
+     *
+     * @return The string representation of the task to be saved
+     */
+    public String saveFormat() {
+        return type.getAbbreviation() + " | " + (isDone ? "1" : "0") + " | " + description;
+    }
 }

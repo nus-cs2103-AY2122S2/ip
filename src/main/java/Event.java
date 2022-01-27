@@ -32,6 +32,6 @@ public class Event extends TaskWithDateTime {
      */
     @Override
     public String dateTimeInfo() {
-        return "(at: " + super.getDateTime() +")";
+        return "(at: " + super.getDateTimeOutput() +")";
     }
 }
