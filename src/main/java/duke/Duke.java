@@ -8,6 +8,9 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Main Duke class that runs the task management program, Duke.
+ */
 public class Duke {
     private static final String FILE_PATH = "./data/test.txt";
 
@@ -17,7 +20,11 @@ public class Duke {
         run();
     }
 
-    public static void run() {
+    /**
+     * Driver function in order to start Duke.
+     * Uses Scanner to parse commands.
+     */
+    public static void run(){
         UI.showWelcome();
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);

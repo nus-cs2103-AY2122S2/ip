@@ -10,8 +10,14 @@ import duke.Storage;
 public class ListCommand extends Command {
     private static final String MESSAGE_LIST = "Here are the tasks in your list:";
 
+    /**
+     * Execution of the list command to list all tasks in the list.
+     *
+     * @param tasks Task list
+     * @param ui UI object
+     */
     @Override
-    public void execute(List<Task> tasks, Ui ui) throws DukeException {
+    public void execute(List<Task> tasks, Ui ui) {
         String list = MESSAGE_LIST + "\n     ";
         if (tasks.size() == 0) {
             list += "~~List is currently empty~~";

@@ -7,6 +7,9 @@ import duke.Ui;
 
 import duke.Storage;
 
+/**
+ * Command to delete tasks.
+ */
 public class DeleteCommand extends Command {
     private static final String MESSAGE_TASKDELETE = "Noted. I've removed this task:";
 
@@ -15,6 +18,13 @@ public class DeleteCommand extends Command {
             "please select a valid task to delete using the task's number";
     private int taskNumber;
 
+
+    /**
+     * Constructor to the delete command.
+     *
+     * @param taskNumber Number of the task to be deleted
+     * @throws DukeException If the task number is empty or is not an integer
+     */
     public DeleteCommand(String taskNumber) throws DukeException {
         if (taskNumber.equals("")) {
             throw new DukeException(ERROR_EMPTY_DELETE);
@@ -26,6 +36,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Execution of the delete command to delete the task.
+     *
+     * @param tasks Task list
+     * @param ui UI object
+     * @throws DukeException If the number given is out of the range of the task list
+     */
     @Override
     public void execute(List<Task> tasks, Ui ui) throws DukeException {
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
