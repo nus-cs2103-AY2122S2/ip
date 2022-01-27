@@ -1,5 +1,9 @@
 package duke.exception;
 
+/**
+ * RonException type: Load
+ * Exception thrown when error occurs while loading backup file on start
+ */
 public class LoadException extends RonException {
     public static final String message = "No current tasks found, creating new task list.";
 

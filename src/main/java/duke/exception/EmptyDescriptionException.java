@@ -1,5 +1,9 @@
 package duke.exception;
 
+/**
+ * RonException type: Empty description
+ * Exception thrown when user does not input a description of task
+ */
 public class EmptyDescriptionException extends RonException {
     public static final String message = "Please add a description for ";
     public static final String message2 = " task.";

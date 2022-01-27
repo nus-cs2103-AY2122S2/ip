@@ -7,6 +7,9 @@ import duke.parser.InputParser;
 
 import java.util.Scanner;
 
+/**
+ * User Interface for Chatbot
+ */
 public class Ui {
     public void showLoadingError() {
         System.out.println("____________________________________________________________");
@@ -20,6 +23,12 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Starts the UI for the chatbot
+     * Terminates on entry "bye"
+     *
+     * @param tasks
+     */
     public void start(TaskList tasks) {
         Scanner sc = new Scanner(System.in);
 
