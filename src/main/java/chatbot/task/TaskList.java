@@ -5,6 +5,9 @@ import chatbot.util.Storage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * An ordered collection of tasks.
+ */
 public class TaskList extends ArrayList<Task> implements Serializable {
     private final String saveFile;
 
@@ -12,6 +15,10 @@ public class TaskList extends ArrayList<Task> implements Serializable {
         this.saveFile = saveFile;
     }
 
+    /**
+     * Constructs a task list with a specified file to load from and save to.
+     * @param saveFile the save file location
+     */
     public static TaskList create(String saveFile) {
         TaskList taskList = Storage.<TaskList>Load(saveFile);
         if (taskList == null) {
@@ -20,49 +27,34 @@ public class TaskList extends ArrayList<Task> implements Serializable {
         return taskList;
     }
 
-    public static TaskList create() {
-        return new TaskList("");
-    }
-
-    @Override
-    public boolean add(Task task) {
+    /**
+     * Inserts a task to the task list and save the modified list to the save file if a valid save file was specified.
+     * @param task the task to add to the list
+     * @return true (as specified by Collection.add(E))
+     */
+    @Override public boolean add(Task task) {
         boolean ret = super.add(task);
-        if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
-        }
+        Storage.Save(saveFile, this);
         return ret;
-    }
-
-    @Override
-    public Task remove(int index) {
-        Task ret = super.remove(index);
-        if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
-        }
-        return ret;
-    }
-
-    @Override
-    public void clear() {
-        super.clear();
-        if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
-        }
     }
 
     /**
-     * Find all tasks in the list containing the specified keyword.
-     *
-     * @param keyword the keyword to search for in the list
-     * @return an array containing the found tasks
+     * Removes a task from the task list and save the modified list to the save file if a valid save file was specified.
+     * @param index the index of the element to be removed
+     * @return the element previously at the specified position
      */
-    public Task[] find(String keyword) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        for (Task t : this) {
-            if (t.toString().contains(keyword)) {
-                tasks.add(t);
-            }
-        }
-        return tasks.toArray(new Task[0]);
+    @Override public Task remove(int index) {
+        Task ret = super.remove(index);
+        Storage.Save(saveFile, this);
+        return ret;
+    }
+
+    /**
+     * Removes all of the elements from this list (optional operation) and save the modified list to the save file if a valid save file was specified.
+     * The list will be empty after this call returns.
+     */
+    @Override public void clear() {
+        super.clear();
+        Storage.Save(saveFile, this);
     }
 }

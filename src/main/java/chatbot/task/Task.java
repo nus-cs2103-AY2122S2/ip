@@ -2,10 +2,17 @@ package chatbot.task;
 
 import java.io.Serializable;
 
-public class Task implements Serializable {
+/**
+ * Abstract base class for tasks.
+ */
+public abstract class Task implements Serializable {
     private final String desc;
     private boolean isDone;
 
+    /**
+     * Constructs a task with the specified description.
+     * @param desc the description of the task
+     */
     public Task(String desc) {
         isDone = false;
         this.desc = desc;
