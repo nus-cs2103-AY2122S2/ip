@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 public class ToDoCommand implements Command {
     public static final String KEYWORD = "todo";
+    public static final String FORMAT = "Command Format: \"" + KEYWORD + " <desc>\"";
 
-    @Override
-    public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         try {
@@ -18,15 +18,16 @@ public class ToDoCommand implements Command {
         } catch (Exception ignored) {
         }
 
-        String commandFormat = "Please enter the command as \"" + KEYWORD + " <desc>\".\n" +
-                "The description cannot be empty.";
+
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\n" + commandFormat, false);
+            return new CommandOutput("Error: Empty description\n" + FORMAT, "audio/ding.wav");
         }
 
         // Add event.
         Task task = new ToDo(desc);
         taskList.add(task);
-        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, taskList.size()), true);
+        return new CommandOutput(
+                String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
+                        taskList.size()), "audio/ding.wav");
     }
 }

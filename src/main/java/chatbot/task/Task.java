@@ -15,8 +15,7 @@ public class Task implements Serializable {
         this.isDone = done;
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", desc);
     }
 }

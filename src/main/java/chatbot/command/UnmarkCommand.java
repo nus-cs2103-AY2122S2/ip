@@ -5,18 +5,18 @@ import chatbot.task.TaskList;
 
 public class UnmarkCommand implements Command {
     public static final String KEYWORD = "unmark";
+    public static final String FORMAT =
+            "Command format: \"" + KEYWORD + " <index>\"\n" + "Index range: 1 to <size of list>";
 
-    @Override
-    public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override public CommandOutput execute(String[] input, TaskList taskList) {
         try {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
             task.setDone(false);
-            return new CommandOutput(String.format("OK, I've marked this task as not done yet:\n  %s", task), true);
+            return new CommandOutput(String.format("OK, I've marked this task as not done yet:\n  %s", task),
+                    "audio/ding.wav");
         } catch (Exception e) {
-            String commandFormat = "Please enter the command as \"" + KEYWORD + " <index>\".\n" +
-                    "The index of unmark must be within the size of the list.";
-            return new CommandOutput("Error: Invalid index.\n" + commandFormat, false);
+            return new CommandOutput("Error: Invalid index\n" + FORMAT, "audio/ding.wav");
         }
     }
 }

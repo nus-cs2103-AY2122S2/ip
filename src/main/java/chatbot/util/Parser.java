@@ -1,6 +1,7 @@
 package chatbot.util;
 
-import chatbot.command.*;
+import chatbot.command.Command;
+import chatbot.command.CommandOutput;
 import chatbot.task.TaskList;
 
 import java.util.Hashtable;
@@ -12,9 +13,8 @@ public class Parser {
     public Parser() {
         this.commands = new Hashtable<>();
         this.unrecognizedCommand = new Command() {
-            @Override
-            public CommandOutput execute(String[] input, TaskList taskList) {
-                return new CommandOutput("Unrecognised command.", false);
+            @Override public CommandOutput execute(String[] input, TaskList taskList) {
+                return new CommandOutput("Unrecognised command.", "audio/ding.sfx");
             }
         };
 

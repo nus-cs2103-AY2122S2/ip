@@ -1,32 +1,36 @@
 package chatbot.task;
 
+import chatbot.util.Storage;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskList implements Serializable {
-    private final ArrayList<Task> tasks;
+public class TaskList extends ArrayList<Task> implements Serializable {
+    private final String saveFile;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
+    public TaskList(TaskList other) {
+        super(other);
+        this.saveFile = other.saveFile;
     }
 
-    public void add(Task task) {
-        tasks.add(task);
+    public TaskList(String saveFile) {
+        this(Storage.<TaskList>Load(saveFile));
     }
 
-    public Task remove(int index) {
-        return tasks.remove(index);
+    @Override public boolean add(Task task) {
+        boolean ret = super.add(task);
+        Storage.Save(saveFile, this);
+        return ret;
     }
 
-    public int size() {
-        return tasks.size();
+    @Override public Task remove(int index) {
+        Task ret = super.remove(index);
+        Storage.Save(saveFile, this);
+        return ret;
     }
 
-    public Task get(int index) {
-        return tasks.get(index);
-    }
-
-    public void clear() {
-        tasks.clear();
+    @Override public void clear() {
+        super.clear();
+        Storage.Save(saveFile, this);
     }
 }
