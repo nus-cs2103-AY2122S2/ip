@@ -205,6 +205,23 @@ public class TaskManager {
     }
 
     /**
+     * Filters the task list in this {@code TaskManager} by the specified {@code keyword}.
+     *
+     * @param keyword the keyword to filter the task list by.
+     * @return the filtered task list.
+     */
+    public ArrayList<Task> filterDescByKeyword(String keyword) {
+        ArrayList<Task> filteredTaskList = new ArrayList<>();
+        this.taskList.forEach((task -> {
+            if (task.description.contains(keyword)) {
+                filteredTaskList.add(task);
+            }
+        }));
+
+        return filteredTaskList;
+    }
+
+    /**
      * Reverts the changes after an edit operation ({@code addTask}, {@code deleteTask}, {@code markTask},
      * {@code unmarkTask}).
      * <p>

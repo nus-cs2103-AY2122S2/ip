@@ -17,7 +17,7 @@ public class CommandManager {
      * and {@code Storage}.
      *
      * @param taskManager the {@code TaskManager} required in executing some commands.
-     * @param storage the {@code Storage} required in executing some commands.
+     * @param storage     the {@code Storage} required in executing some commands.
      */
     public CommandManager(TaskManager taskManager, Storage storage) {
         this.taskManager = taskManager;
@@ -62,6 +62,8 @@ public class CommandManager {
                 return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
             case "delete":
                 return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
+            case "find":
+                return new FindCommand(this.taskManager, commandArg);
             default:
                 return new InvalidCommand();
             }
