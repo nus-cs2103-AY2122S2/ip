@@ -11,6 +11,10 @@ list
 delete 1
 list
 todo
+todo CS2040
+todo CS2100
+todo wash cloth
+mark 1
 deadline
 deadline CS2040
 deadline CS2040/
@@ -21,4 +25,7 @@ event CS2040
 event CS2040/
 event CS2040/atw
 event CS2040/at
+find CS
+find CS2040
+find meeting
 bye
