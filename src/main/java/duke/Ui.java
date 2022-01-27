@@ -42,9 +42,11 @@ public class Ui {
                 break;
             case "list":
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskCount; i++) {
-                    System.out.println((i + 1) + "." + list.get(i).toString());
-                }
+                ShowTasks.list(taskCount, list);
+                break;
+            case "find":
+                System.out.println("Here are the matching tasks in your list:");
+                ShowTasks.find(taskCount, tempList[1], list);
                 break;
             case "todo":
                 CreateTask.todo(tempList[1], list);
