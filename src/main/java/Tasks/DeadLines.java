@@ -11,7 +11,7 @@ public class DeadLines extends Task {
     @Override
     public String cacheString() {
         String s = getMarked() ? "1" : "0";
-        return "D" + "|" + s + "|" + this.getTask() + "|"  + this.details;
+        return "D" + "|" + s + "|" + this.getTask() + "|"  + returnDate(this.details);
     }
 
     @Override

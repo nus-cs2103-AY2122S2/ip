@@ -1,7 +1,6 @@
 import DukeComponent.Storage;
 import DukeComponent.TaskList;
 import DukeComponent.Ui;
-
 import java.util.Scanner;
 
 public class Duke {
