@@ -2,6 +2,8 @@ package Duke;
 
 import java.util.ArrayList;
 
+import Duke.task.Task;
+
 public class TaskList {
 	ArrayList<Task> tasks;
 	int count;

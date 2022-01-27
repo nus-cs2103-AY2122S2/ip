@@ -1,5 +1,8 @@
 package Duke;
 
+import Duke.command.ByeCommand;
+import Duke.command.Command;
+
 public class Duke {
 	public TaskList taskList;
 	public Save save;

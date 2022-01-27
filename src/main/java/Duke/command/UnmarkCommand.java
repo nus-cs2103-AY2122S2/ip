@@ -1,18 +1,22 @@
-package Duke;
+package Duke.command;
 
-public class MarkCommand extends Command {
+import Duke.Save;
+import Duke.TaskList;
+import Duke.Ui;
+
+public class UnmarkCommand extends Command {
 	int taskNum;
 
-	MarkCommand(int taskNum) {
+	public UnmarkCommand(int taskNum) {
 		this.taskNum = taskNum;
 	}
 
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		try {
-			tasks.getTask(taskNum).mark();
+			tasks.getTask(taskNum).unmark();
 			System.out.println("\t____________________________________________________________");
-			System.out.println("\t Nice! I've marked this task as done:");
+			System.out.println("\t OK, I've marked this task as not done yet:");
 			System.out.println("\t\t" + tasks.getTask(taskNum).track()
 					+ tasks.getTask(taskNum).getStatus() + " " + tasks.getTask(taskNum));
 			System.out.println("\t____________________________________________________________");

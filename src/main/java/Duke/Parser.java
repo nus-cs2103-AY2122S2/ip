@@ -1,5 +1,16 @@
 package Duke;
 
+import Duke.command.AddCommand;
+import Duke.command.ByeCommand;
+import Duke.command.Command;
+import Duke.command.DeleteCommand;
+import Duke.command.ListCommand;
+import Duke.command.MarkCommand;
+import Duke.command.UnmarkCommand;
+import Duke.task.Event;
+import Duke.task.Deadline;
+import Duke.task.Todo;
+
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 

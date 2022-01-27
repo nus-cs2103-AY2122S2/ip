@@ -1,4 +1,4 @@
-package Duke;
+package Duke.task;
 
 /**
  * Represents a task to be done. This task possesses a state/status that is by default not done. Task also has a
@@ -57,7 +57,7 @@ public abstract class Task {
 	 * @return Type of Task.
 	 */
 	public abstract String track();
-	
+
 	/**
 	 * Returns the String representation of a Task
 	 *

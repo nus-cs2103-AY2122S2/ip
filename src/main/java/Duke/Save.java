@@ -1,5 +1,9 @@
 package Duke;
 
+import Duke.task.Task;
+import Duke.task.Todo;
+import Duke.task.Deadline;
+import Duke.task.Event;
 import enums.Command;
 import enums.Type;
 

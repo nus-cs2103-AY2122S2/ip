@@ -1,4 +1,4 @@
-package Duke;
+package Duke.task;
 
 /**
  * Represents a type of task that has no deadline.

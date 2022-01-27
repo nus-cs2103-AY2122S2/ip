@@ -1,4 +1,4 @@
-package Duke;
+package Duke.task;
 
 /**
  * Represents an upcoming event associated with its time of occurrence. This event is a task that possesses a
