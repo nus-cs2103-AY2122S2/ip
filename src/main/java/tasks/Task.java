@@ -54,6 +54,12 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Getter method to return the description of a task
+     * @return description of task
+     */
+    public String getDescription() { return this.description; }
+
 
 
 

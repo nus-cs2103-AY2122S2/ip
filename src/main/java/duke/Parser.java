@@ -3,7 +3,7 @@ import tasks.*;
 
 public class Parser {
     enum CommandType {
-        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE;
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND;
 
         static CommandType getCommandType(String input) throws DukeException {
             for (CommandType type : CommandType.values()) {
@@ -97,6 +97,9 @@ public class Parser {
             }
 
             switch (commandType) {
+            case FIND:
+                TaskList.findTask(inputArray[1]);
+                break;
             case DELETE:
                 taskAction(CommandType.DELETE, inputArray[1]);
                 break;
