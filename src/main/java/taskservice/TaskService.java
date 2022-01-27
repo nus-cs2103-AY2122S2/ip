@@ -2,9 +2,12 @@ package taskservice;
 
 import tasks.Task;
 
+import java.util.Optional;
+
 public interface TaskService {
-    Task[] get();
-    void create(Task taskToCreate);
-    void update(Task taskToUpdate);
-    void delete(int id);
+    Optional<Task> getById(int id) throws TaskServiceException;
+    Task[] get() throws TaskServiceException;
+    void create(Task taskToCreate) throws TaskServiceException;
+    void update(int id, Task taskToUpdate) throws TaskServiceException;
+    void delete(int id) throws TaskServiceException;
 }
