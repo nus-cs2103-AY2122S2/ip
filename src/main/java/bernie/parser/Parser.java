@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  * It has parseType method: a preliminary Parser to determine what type of input
  * has the user keyed in.
  * It also has getParams method which help to extract out relevant parts of the input
- * and return parameters needed accordingly for Bernie to perform actions
+ * and return parameters needed accordingly to perform actions
  */
 public class Parser {
     TaskList tasks;
@@ -49,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Verifies the user input is of which task
+     * Verifies the user input is of which task type
      * @param taskType Type
      * @param input String
      * @return boolean to affirm if the input is of this task
@@ -64,7 +64,7 @@ public class Parser {
     }
 
     /**
-     * Splits a user input into an array containing parameters for creating Task accordingly,
+     * Splits a user input into an array containing parameters for handling actions accordingly,
      * depending on taskType.
      * @param taskType Type
      * @param input String, a user input to be split into an array of parameters
@@ -72,7 +72,7 @@ public class Parser {
      * For "todo": an array of 1, containing description.
      * For "deadline": an array of 2: [description, by]
      * For "event": an array of 2: [description, at]
-     * For "mark": an array of 2: [action, taskNum]
+     * For "mark": an array of 2: [action, taskNum], action is either mark/unmark
      * For "delete": an array of 1: [taskNum]
      */
     public String[] getParams(Type taskType, String input) throws InvalidArgumentException {
@@ -116,7 +116,7 @@ public class Parser {
     /**
      * Checks if user marks a task that is already marked, or unmarks a task that is already unmarked
      * @param parsedArr
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException if user attempts to marks a marked task or unmark an unmarked task
      */
     void checkValidMarkAction(String[] parsedArr) throws InvalidArgumentException {
         String action = parsedArr[0];
@@ -129,7 +129,8 @@ public class Parser {
     }
             
     /**
-     * Checks for valid "mark" or "delete" action inputs. Throws error if it is not valid: task non-existent
+     * Checks for valid "mark" or "delete" action inputs. Throws error if it is not valid: wrong input format or
+     * a task number is not given
      * @param parsedArr String[], the user input String split into an array of String for processing
      *                 parameters for the action
      * @throws InvalidArgumentException for invalid inputs
@@ -139,7 +140,7 @@ public class Parser {
             try {
                 String taskNum = parsedArr[1];
                 Integer.parseInt(taskNum);
-                tasks.taskExists(taskNum);
+                tasks.checkTaskExists(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new InvalidArgumentException("That's not a task number! Put a number.");
             }
@@ -152,7 +153,6 @@ public class Parser {
         }
     }
 
-    
     /**
      * Gets the description from the parsedArr which contains parameters for creating Task
      * @param parsedArr String[], parameters for creating Task, obtained from user input String.
@@ -166,7 +166,6 @@ public class Parser {
             if (taskType.equals(Type.TODO)) {
                 description = parsedArr[1];
             } else {
-                // can take note of lowercase/uppercase
                 description = parsedArr[0].split(taskType.name().toLowerCase() + " ")[1];
             }
             checkDescriptionNotNumber(description);
@@ -176,6 +175,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the description is a valid String: not a number.
+     * @param description
+     * @return boolean
+     * @throws InvalidArgumentException if the description is a number
+     */
     boolean checkDescriptionNotNumber(String description) throws InvalidArgumentException {
         try {
             Integer.parseInt(description);
@@ -186,12 +191,12 @@ public class Parser {
     }
 
     /**
-     * Gets the time from the parsedArr which contains parametrs for creating Task
+     * Gets the time from the parsedArr which contains parameters for creating Task
      * @param parsedArr String[], parameters for creating Task, obtained from user input String.
      * @param taskType type, if it is DEADLINE we check if the input date format is correct.
      * @return String time, for creating of Task. It is of format: yyyy-mm-dd for converting
      * to LocalDate object by TaskList's addTask class
-     * @throws InvalidArgumentException if there is no time input given
+     * @throws InvalidArgumentException if there is no time input given or wrong date format
      */
     String getTime(String[] parsedArr, Type taskType) throws InvalidArgumentException {
         try {
@@ -206,4 +211,3 @@ public class Parser {
         }
     }
 }
-

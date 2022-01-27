@@ -11,7 +11,7 @@ public class DeadlineTest {
     @Test
     public void printDateTest() {
         LocalDate date = LocalDate.parse("2022-01-28");
-        assertEquals("Jan 28 2022", new Deadline("return book", date).printDate());
+        assertEquals("Jan 28 2022", new Deadline("return book", date).formatDate());
     }
 
     @Test

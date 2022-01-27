@@ -53,7 +53,7 @@ public class TaskListTest {
     public void taskExistsTest() {
         TaskList tasks = new TaskList();
         try {
-            tasks.taskExists("1");
+            tasks.checkTaskExists("1");
         } catch (InvalidArgumentException e) {
             assertEquals("Task number does not exist!", e.getMessage());
         }

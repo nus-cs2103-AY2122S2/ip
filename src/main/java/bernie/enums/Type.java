@@ -1,8 +1,11 @@
 package bernie.enums;
 
 /**
- * Different bernie.enums.Type of tasks: notable types are EMPTY, when the user inputs nothing: ""
- * ADD: refers to when bernie.enums.Type is to be added: TODO, DEADLINE, EVENT
+ * Different Type of tasks: notable types are EMPTY, when the user inputs nothing: "".
+ * LIST, BYE, EMPTY are inputs that won't result in creation of tasks.
+ * MARK, UNMARK, DELETE are action tasks that changes the state of the tasks.
+ * ADD: refers to when Type is to be added are: TODO, DEADLINE, EVENT.
+ * They are the 3 different types of tasks that can be created.
  */
 public enum Type {
     LIST,

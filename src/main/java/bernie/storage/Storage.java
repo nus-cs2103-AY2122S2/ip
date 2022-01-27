@@ -14,13 +14,16 @@ import java.io.IOException;
  * Storage class handles the loading and saving of tasks in the file
  */
 public class Storage {
-    String root = System.getProperty("user.dir");
-    File tasksFile;
-    File dataDir;
-    String lineBreak = "___________________________________________________________";
+    private String root = System.getProperty("user.dir");
+    private File tasksFile;
+    private File dataDir;
+    private static final String LINE_BREAK = "___________________________________________________________";
 
     /**
-     * Constructs the Storage class with the File tasksFile and dataDir
+     * Constructs the Storage class with the File tasksFile and dataDir.
+     * tasksFile is the path of where we want to store the text file containing the
+     * information of the tasks on our TaskList.
+     * dataDir is the directory where the tasksFile is suppose to be in
      */
     public Storage() {
         this.tasksFile = new File(root + "/data", "Bernie.txt");
@@ -45,7 +48,7 @@ public class Storage {
                     System.out.println(line);
                 }
                 reader.close();
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             } else {
                 // create dir and file
                 dataDir.mkdir();
@@ -53,14 +56,14 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            System.out.println(LINE_BREAK);
         }
     }
 
     /**
      * Handles the conditions for checking if the File exist before
      * saving the tasks with the save function. If File doesn't exist,
-     * the required files will be created before save
+     * the required files will be created before save.
      * @param tasks TaskList, takes in the current tasks
      */
     public void saveTasks(TaskList tasks) {
@@ -75,7 +78,7 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            System.out.println(LINE_BREAK);
         }
     }
 
@@ -83,7 +86,7 @@ public class Storage {
      * Saves the most updated tasks whenever the tasks changes upon
      * delete or add by writing the file. The file is saved to ./data/Bernie.txt
      * @params tasks TaskList, takes in the current tasks
-     * @throws IOException
+     * @throws IOException for any IO errors
      */
     void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(tasksFile);

@@ -1,5 +1,7 @@
 package bernie.tasks;
-
+/**
+ * Event is one of the Task that can be created by the user input
+ */
 public class Event extends Task {
     private String at;
 

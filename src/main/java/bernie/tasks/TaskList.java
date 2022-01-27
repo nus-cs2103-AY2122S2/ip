@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList helps to store tasks given by the user. TaskList is contained in
- * the Bot class and handles the Task for the Bot.
- * 1st method: add, which adds inputs by the user into the storage.
- * 2nd method: list, which shows what's in the TaskList currently.
+ * TaskList helps to store tasks that are created. TaskList is used for the adding,
+ * deleting, listing and marking of tasks.
  */
 
 public class TaskList {
     private List<Task> tasks;
     /**
-     * Constructs a TaskList containing an array to contain tasks
+     * Constructs a TaskList containing an arrayList to contain tasks
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -32,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a Task that is indexed i
+     * Returns the Task that is indexed i
      * @param i int, the index of the Task
      * @return Task object
      */
@@ -40,6 +38,10 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    /**
+     * Returns the number of tasks in the TaskList that are not yet done
+     * @return int, number of tasks not done
+     */
     public int numTasksLeft() {
         int count = 0;
         for (Task task : tasks) {
@@ -51,8 +53,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task given the parsedArr and taskType determined by Bernie
-     * @param parsedArr String[], given by Bernie
+     * Adds a type of Task given the parsedArr and taskType
+     * @param parsedArr String[], determined by parser which parses the user input
+     *                  into an array of arguments
      * @param taskType Type, either TODO, DEADLINE or EVENT
      * @return Task created
      */
@@ -84,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out every item contained in the tasks array
+     * Prints out every item contained in the TaskList
      */
     public void listTasks() {
         for (int i = 0; i < tasks.size(); i++) {
@@ -109,10 +112,15 @@ public class TaskList {
         return tasks.get(taskIndex);
     }
 
-    public Task taskExists(String taskNum) throws InvalidArgumentException {
+    /**
+     * Checks if a taskExists given the task number
+     * @param taskNum String, the task number
+     * @throws InvalidArgumentException if the task number given does not exist
+     */
+    public void checkTaskExists(String taskNum) throws InvalidArgumentException {
         int index = Integer.parseInt(taskNum) - 1;
         try {
-            return tasks.get(index);
+            tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Task number does not exist!");
         }
@@ -120,7 +128,7 @@ public class TaskList {
 
     /**
      * Deletes tasks from the List
-     * @param taskNum String, the task number
+     * @param taskNum String, the task number we want to delete
      * @return Task, the task that is deleted
      */
     public Task deleteTask(String taskNum) {

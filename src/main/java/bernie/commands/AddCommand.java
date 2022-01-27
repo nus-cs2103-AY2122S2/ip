@@ -9,10 +9,25 @@ import bernie.tasks.Task;
 import bernie.tasks.TaskList;
 import bernie.ui.UiHandler;
 
+/**
+ * AddCommand is responsible for getting the TaskList to add the respective Type of tasks
+ */
 public class AddCommand extends Command {
     String[] parsedArr;
     Type type;
 
+    /**
+     * Constructs an AddCommand Class with the respective Type based on the user input. The parsedArr is
+     * determined by the parser based on the Type, giving out the relevant arguments required to
+     * create the Type of task.
+     * @param tasks TaskList, contains all our Task we create
+     * @param uiHandler UiHandler, responsible for printing out messages to the user for any action done
+     * @param storage Storage, responsible for saving and loading of tasks into a text file
+     * @param parser Parser, helps to parse user inputs to perform subsequent actions
+     * @param input String, user input into the program
+     * @throws BernieException For invalid command by the user
+     * @throws InvalidArgumentException For a correct command with invalid arguments given by the user
+     */
     public AddCommand(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input)
             throws BernieException, InvalidArgumentException {
         super(tasks, uiHandler, storage, parser, input);
@@ -31,10 +46,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Bernie will decide what kind of task is to be created. Bernie splits the input accordingly,
-     * to get the parameters required to create the type of task. The creation and adding of task will be
-     * handled by the TaskList. New state of tasks is saved to the data directory
-     * after we add a task.
+     * Executes the AddCommand, calling the TaskList to add the respective task based on the Type
+     * determined by the parser. After adding, storage will save the updated tasks and uiHandler shows
+     * the message to the user.
      */
     public void execute() {
         Task newTask = null;
