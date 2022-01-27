@@ -19,4 +19,13 @@ public class TaskList {
     public void remove(Task t) {
         list.remove(t);
     }
+
+    public String listing() {
+        String s = "";
+        for (int i = 0; i < list.size(); i++) {
+            s += (i + 1) + ".";
+            s += list.get(i) + "\n";
+        }
+        return s;
+    }
 }
