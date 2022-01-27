@@ -42,7 +42,7 @@ public class Task {
         if (this.done) {
             return this.type + " ### 1 ### " + this.task;
         } else {
-            return this.type + " ### 0 ###" + this.task;
+            return this.type + " ### 0 ### " + this.task;
         }
     }
 
