@@ -26,7 +26,7 @@ public class Parser {
 
         return new Todo(taskName);
     }
-    private static Event newEvent(String s) throws DukeException{
+    private static Event newEvent(String s) throws DukeException {
         String[] fields =  s.replaceFirst("event","").split("/at");
 
         if (fields.length != 2){
@@ -41,11 +41,10 @@ public class Parser {
             throw new DukeException("No Date Specified!");
         }
 
-        String taskName = fields[0];
-        LocalDateTime date = Parser.parseDateTime(fields[1]);
-
+        String taskName = fields[0].strip();
+        LocalDateTime date = Parser.parseDateTime(fields[1].strip());
         if (date == null) {
-            throw new DukeException("Invalid Date format! Please enter Date/Time in the form DDMMYYYY HHMM");
+            throw new DukeException("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM");
         }
 
         return new Event(taskName,date);
@@ -65,8 +64,8 @@ public class Parser {
             throw new DukeException("No Date Specified!");
         }
 
-        String taskName = fields[0];
-        LocalDateTime date = Parser.parseDateTime(fields[1]);
+        String taskName = fields[0].strip();
+        LocalDateTime date = Parser.parseDateTime(fields[1].strip());
 
         if (date == null) {
             throw new DukeException("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM");
@@ -83,40 +82,50 @@ public class Parser {
         LocalDateTime date;
         Task t;
 
-        String[] split = fileInput.split("\t");
-        type = split[0].toCharArray()[0];
-        done = split[1].toCharArray()[0];
-        name = split[2].strip();
-        date = Parser.parseDateTime(split[3]);
+        try {
+            String[] split = fileInput.split("\t");
+            type = split[0].toCharArray()[0];
+            done = split[1].toCharArray()[0];
+            name = split[2].strip();
+            date = Parser.parseDateTime(split[3]);
+        } catch (IndexOutOfBoundsException exception){
+            throw new DukeException("Unable to load task from file!");
+        }
 
-        if (name.equals("") || date == null) {
+        if (name.equals("")) {
             throw new DukeException("Unable to load task from file!");
         }
 
 
-        switch(type){
+        switch(type) {
 
-            case 'T':
-                t = new Todo(name);
-                break;
+        case 'T':
+            t = new Todo(name);
+            break;
 
-            case 'D':
-                t = new Deadline(name, date);
-                break;
-
-            case 'E':
-                t = new Event(name, date);
-                break;
-
-            default:
+        case 'D':
+            if (date == null) {
                 throw new DukeException("Unable to load task from file!");
+            }
+            t = new Deadline(name, date);
+            break;
+
+        case 'E':
+            if (date == null) {
+                throw new DukeException("Unable to load task from file!");
+            }
+            t = new Event(name, date);
+            break;
+
+        default:
+            throw new DukeException("Unable to load task from file!");
         }
 
-            if (done == 'X') {
-                t.markDone();
-            }
+        if (done == 'X') {
+            t.markDone();
+        }
 
-            return t;
+        return t;
     }
 
     public static Command parse(String input){
@@ -134,9 +143,9 @@ public class Parser {
     public static LocalDateTime parseDateTime(String input){
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         //DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-
         try {
-            return LocalDateTime.parse(input, format);
+            LocalDateTime date = LocalDateTime.parse(input, format);
+            return date;
         } catch (DateTimeParseException exception){
             return null;
         }
