@@ -96,11 +96,19 @@ public class Event extends Task {
      * @return Formatted string containing details of the dateTime object
      */
     public String formatDateTime(LocalDateTime dateTime) {
-        String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
-        String month = dateTime.getMonthValue() < 10 ? "0" + dateTime.getMonthValue() : "" + dateTime.getMonthValue();
+        String day = dateTime.getDayOfMonth() < 10
+                ? "0" + dateTime.getDayOfMonth()
+                : "" + dateTime.getDayOfMonth();
+        String month = dateTime.getMonthValue() < 10
+                ? "0" + dateTime.getMonthValue()
+                : "" + dateTime.getMonthValue();
         Integer year = dateTime.getYear();
-        String hour = dateTime.getHour() < 10 ? "0" + dateTime.getHour() : "" + dateTime.getHour();
-        String minute = dateTime.getMinute() < 10 ? "0" + dateTime.getMinute() : "" +  dateTime.getMinute();
+        String hour = dateTime.getHour() < 10
+                ? "0" + dateTime.getHour()
+                : "" + dateTime.getHour();
+        String minute = dateTime.getMinute() < 10
+                ? "0" + dateTime.getMinute()
+                : "" +  dateTime.getMinute();
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 
@@ -110,8 +118,12 @@ public class Event extends Task {
      * @return Formatted string containing details of the Date object
      */
     public String formatDate(LocalDate date) {
-        String day = date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : "" + date.getDayOfMonth();
-        String month = date.getMonthValue() < 10 ? "0" + date.getMonthValue() : "" + date.getMonthValue();
+        String day = date.getDayOfMonth() < 10
+                ? "0" + date.getDayOfMonth()
+                : "" + date.getDayOfMonth();
+        String month = date.getMonthValue() < 10
+                ? "0" + date.getMonthValue()
+                : "" + date.getMonthValue();
         Integer year = date.getYear();
         return day + "-" + month + "-" + year;
     }

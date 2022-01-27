@@ -54,17 +54,17 @@ public class Storage {
      * @throws DukeException if unable to read content from duke file/file does not exist
      */
     public ArrayList<Task> readFromDukeFile() throws DukeException {
-        boolean directoryExists = new File(this.directoryPath).exists();
-        boolean fileExists = new File(this.filePath).exists();
+        boolean isDirectoryExists = new File(this.directoryPath).exists();
+        boolean isFileExists = new File(this.filePath).exists();
         try {
-            if (!directoryExists) {
+            if (!isDirectoryExists) {
                 Files.createDirectories(Path.of(this.directoryPath));
                 File dukeFile = new File(this.filePath);
                 if (!dukeFile.createNewFile()) {
                     throw new IOException("Unable to create file at specified path. It already exists");
                 }
             } else {
-                if (!fileExists) {
+                if (!isFileExists) {
                     File dukeFile = new File(this.filePath);
                     if (!dukeFile.createNewFile()) {
                         throw new IOException("Unable to create file at specified path. It already exists");
@@ -84,41 +84,41 @@ public class Storage {
                 String[] taskArray = taskData.split(",");
                 String taskInput = taskArray[0].toUpperCase(Locale.ROOT);
                 switch (taskInput) {
-                    case "E":
-                        if (taskArray.length == 4) {
-                            taskToAdd = new Event(taskArray[2], taskArray[3]);
-                            if (taskArray[1].equals("1")) {
-                                taskToAdd.markIsDone();
-                            }
-                            tasks.add(taskToAdd);
-                        } else {
-                            throw new DukeException("Unable to read file format!");
+                case "E":
+                    if (taskArray.length == 4) {
+                        taskToAdd = new Event(taskArray[2], taskArray[3]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
                         }
-                        break;
-                    case "T":
-                        if (taskArray.length == 3) {
-                            taskToAdd = new Todo(taskArray[2]);
-                            if (taskArray[1].equals("1")) {
-                                taskToAdd.markIsDone();
-                            }
-                            tasks.add(taskToAdd);
-                        } else {
-                            throw new DukeException("Unable to read file format!");
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                case "T":
+                    if (taskArray.length == 3) {
+                        taskToAdd = new Todo(taskArray[2]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
                         }
-                        break;
-                    case "D":
-                        if (taskArray.length == 4) {
-                            taskToAdd = new Deadline(taskArray[2], taskArray[3]);
-                            if (taskArray[1].equals("1")) {
-                                taskToAdd.markIsDone();
-                            }
-                            tasks.add(taskToAdd);
-                        } else {
-                            throw new DukeException("Unable to read file format!");
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                case "D":
+                    if (taskArray.length == 4) {
+                        taskToAdd = new Deadline(taskArray[2], taskArray[3]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
                         }
-                        break;
-                    default:
-                        System.out.println("No tasks in file!");
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                default:
+                    System.out.println("No tasks in file!");
                 }
             }
 

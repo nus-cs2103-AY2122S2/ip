@@ -13,10 +13,10 @@ public class TextUi {
 
     private static final String DIVIDER = "===================================================";
     private static final String logo = " ____        _\n"
-                                    + "|  _ \\ _   _| | _____\n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Method that greets the user when the file first runs
