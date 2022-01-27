@@ -9,7 +9,15 @@ public class ParserTest {
     public void dummyTest(){
         assertEquals(2,2);
     }
-//    public void parseFileInputTest(){
-//        assertEquals(true, parseFileInput("bye"));
+
+    @Test
+    public void parseFileInputTest(){
+
+    }
+
+//    @Test
+//    public void parseFileDataTest(){
+//        TaskList tasklist = new TaskList();
+//        assertEquals();
 //    }
 }

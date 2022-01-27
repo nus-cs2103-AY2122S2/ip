@@ -9,12 +9,8 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
-    public ArrayList<Task> get(){
-        return this.tasklist;
-    }
-
     public static void markTaskNum(int taskNum, String check){
-        if (check.equals("true")) {
+        if (check.equals("true") && (taskNum > 0)) {
             tasklist.get(taskNum).mark();
         }
     }
@@ -62,7 +58,7 @@ public class TaskList {
     }
 
 
-    public static Task addTask(String name, String time, String type, boolean isReading){
+    public static void addTask(String name, String time, String type, boolean isReading){
         Task task;
         if (type.equals("D")){
             task = new Deadline(name, Task.totalTask, time, isReading);
@@ -72,6 +68,6 @@ public class TaskList {
             task = new ToDo(name, Task.totalTask, isReading);
         }
         tasklist.add(task);
-        return task;
     }
+
 }

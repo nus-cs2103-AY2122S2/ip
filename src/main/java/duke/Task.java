@@ -16,7 +16,7 @@ public class Task {
     String type;
     int number;
     static int totalTask = 0;
-    boolean isdone = false;
+    boolean isDone = false;
 
     /**
      * Constructor of task
@@ -56,7 +56,7 @@ public class Task {
     }
 
     public String getDataRepresentation(){
-        return String.format("%s---%s---%s---%s \n", this.type, this.isdone, this.name, this.time);
+        return String.format("%s---%s---%s---%s\n", this.type, this.isDone, this.name, this.time);
     }
 
     private void setDate(String input, boolean isReading){
@@ -80,14 +80,14 @@ public class Task {
      * Marks tasks as done.
      */
     public void mark(){
-        this.isdone = true;
+        this.isDone = true;
     }
 
     /**
      * Unmarks tasks as not done.
      */
     public void unmark(){
-        this.isdone = false;
+        this.isDone = false;
     }
 
     /**
@@ -96,7 +96,7 @@ public class Task {
      * @return X if task is done and empty string if task is not done
      */
     public String getStatus(){
-        if (this.isdone){
+        if (this.isDone){
             return "X";
         } else {
             return " ";

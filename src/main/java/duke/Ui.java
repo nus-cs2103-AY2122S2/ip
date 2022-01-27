@@ -12,13 +12,8 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
         while(!isBye) {
-            try {
-                String input = sc.nextLine();
-                isBye = Parser.parseInput(input);
-            }
-            catch (EmptyDescriptorExceptions e){
-                Ui.printEmptyDescriptionException();
-            }
+            String input = sc.nextLine();
+            isBye = Parser.parseIsBye(input);
         }
     }
 

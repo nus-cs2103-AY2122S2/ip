@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    static File savedata;
+    static File saveData;
     static Parser parser;
 
     public Storage(){
@@ -18,7 +18,7 @@ public class Storage {
 
     public static void writeAllToFile() {
         try {
-            FileWriter fw = new FileWriter(savedata);
+            FileWriter fw = new FileWriter(saveData);
             for (int i = 0; i < Task.totalTask; i++) {
                 fw.write(TaskList.tasklist.get(i).getDataRepresentation());
             }
@@ -30,7 +30,7 @@ public class Storage {
     }
 
     public static void addLineToFile(String line) throws IOException {
-        FileWriter fw = new FileWriter(savedata, true); // create a FileWriter in append mode
+        FileWriter fw = new FileWriter(saveData, true); // create a FileWriter in append mode
         fw.write(line);
         fw.close();
     }
@@ -49,19 +49,18 @@ public class Storage {
             } else {
                 System.out.println("Resuming previous saved state.");
             }
-            savedata = pathToFile.toFile();
+            saveData = pathToFile.toFile();
             readSavedData();
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void readSavedData() throws FileNotFoundException {
-        Scanner s = new Scanner(savedata);
+        Scanner s = new Scanner(saveData);
         while(s.hasNext()){
-            parser.parseFileData(s.nextLine());
+            TaskList.tasklist.add(parser.parseFileData(s.nextLine()));
         }
     }
 
