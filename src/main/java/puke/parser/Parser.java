@@ -4,7 +4,18 @@ import puke.exception.PukeException;
 import puke.task.TaskList;
 import puke.ui.Ui;
 
+/**
+ * Handles the user inputs.
+ */
 public class Parser {
+    /**
+     * Processes a line of input from the user.
+     *
+     * @param s Line of input from the user.
+     * @param tasks List of tasks in the current session.
+     * @return Response from the chat-bot.
+     * @throws PukeException If the line of input is invalid.
+     */
     public String processInput(String s, TaskList tasks) throws PukeException {
         String[] inputs = s.split(" ", 2);
         String command = inputs[0]; // get the first word of the input

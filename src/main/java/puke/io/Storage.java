@@ -14,15 +14,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Handles the storage of tasks on file for saving between sessions.
+ */
 public class Storage {
     private final String filePath;
     private final File file;
 
+    /**
+     * Initialises the storage file.
+     *
+     * @param s Path of the storage file.
+     */
     public Storage(String s) {
         filePath = s;
         file = new File(s);
     }
 
+    /**
+     * Loads the tasks from the file onto the tasks list.
+     *
+     * @param tasks List of tasks for the current session.
+     * @throws PukeException If storage file/directory cannot be created.
+     */
     public void loadTasks(TaskList tasks) throws PukeException {
         try {
             file.getParentFile().mkdir();
@@ -34,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Populates the task list with tasks from the file.
+     *
+     * @param tasks List of tasks for the current session.
+     * @param s Scanner loaded with the storage file.
+     */
     private void populateTasks(TaskList tasks, Scanner s) {
         while (s.hasNext()) {
             String[] taskInfo = s.nextLine().split("@@");
@@ -60,6 +80,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks from the current session onto the file.
+     *
+     * @param tasks List of tasks from the current session.
+     * @throws PukeException If the tasks cannot be saved to file.
+     */
     public void saveTasks(TaskList tasks) throws PukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
