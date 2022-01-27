@@ -54,6 +54,20 @@ public class Task {
     }
 
     /**
+     * Checks if specified keyword is in the Task name.
+     *
+     * @param text Specifying keyword.
+     * @return True if keyword found, false otherwise.
+     */
+    public boolean isFoundInName(String text) {
+        if (name.contains(text)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns a formatted String representation of this Task.
      *
      * @return Formatted String.

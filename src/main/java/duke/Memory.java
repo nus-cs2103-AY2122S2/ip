@@ -65,7 +65,7 @@ public class Memory {
     }
 
     /**
-     * Echoes all Tasks in Memory.
+     * Returns all Tasks in Memory.
      */
     public String listAll() {
         if (size == 0) {
@@ -76,6 +76,34 @@ public class Memory {
                 str = str + "\n " + i + ". " + this.getString(i-1);
             }
             return str;
+        }
+    }
+
+    /**
+     * Finds all Task with specified keyword in their name.
+     *
+     * @param text Specifying keyword.
+     * @return String representation of the list of found Tasks.
+     */
+    public String findAll(String text) {
+        if (size == 0) {
+            return "Trust me, I wont find anything.";
+        } else {
+            String str = "";
+
+            for (int i = 1; i <= size; i++) {
+                Task tempTask = this.getTask(i - 1);
+                if (tempTask.isFoundInName(text)) {
+                    str = str + "\n " + i + ". " + this.getString(i - 1);
+                }
+            }
+
+            if (str.equals("")) {
+                return "Unfortunately, I didn't find anything.";
+            } else {
+                str = "Here's what I found, and their ids:" + str;
+                return str;
+            }
         }
     }
 

@@ -42,6 +42,7 @@ public class UserInterface {
         String saving = "Saving data...";
 
         String specific = "You're gonna need to be more specific.\n";
+        String tryFind = "Try 'find keyword'";
         String tryTodo = "Try 'todo An exciting human task'";
         String tryDeadline = "Try 'deadline A task /by Sunday'";
         String tryEvent = "Try 'event An event /at 7PM'";
@@ -74,6 +75,19 @@ public class UserInterface {
 
             case "list":
                 echo.echoString(memory.listAll());
+                break;
+
+            case "find":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + tryFind);
+                } else {
+                    //Empty to-do
+                    if (tempStrArray[1].equals("")) {
+                        echo.echoString(specific + tryFind);
+                    } else {
+                        echo.echoString(memory.findAll(tempStrArray[1]));
+                    }
+                }
                 break;
 
             case "todo":
