@@ -12,6 +12,13 @@ public class Deadline extends Task {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
+
+    /**
+     * Instantiates a new Deadline object
+     * @param description of the deadline
+     * @param by (duedate of the task)
+     * @throws DukeException if the date parsed is of an incorrect format
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         if (isDateFormat(by)) {
@@ -23,7 +30,10 @@ public class Deadline extends Task {
         }
     }
 
-
+    /**
+     * Method that converts a deadline to its storage file format
+     * @return A string that describes a deadline with its storage file format
+     */
     @Override
     public String toFileFormat() {
         if (by != null) {
@@ -33,6 +43,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Method that converts a deadline to its display/string format
+     * @return A string that describes a deadline with its display format
+     */
     @Override
     public String toString() {
         if (this.by != null) {
@@ -42,6 +56,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * A method that takes in a string and checks if its in dateTime format
+     * @param dateTimeString duedate string
+     * @return A boolean that indicates if the string is in dateTime format
+     */
     private boolean isDateTimeFormat(String dateTimeString) {
         try {
             LocalDateTime.parse(dateTimeString, dateTimeFormat);
@@ -52,6 +71,11 @@ public class Deadline extends Task {
         return false;
     }
 
+    /**
+     * A method that takes in a string and check if its in date format
+     * @param dateString duedate string
+     * @return A boolean that indicates if a string is in date format
+     */
     private boolean isDateFormat(String dateString)  {
         try {
             LocalDate.parse(dateString, dateFormat);
@@ -62,6 +86,11 @@ public class Deadline extends Task {
         return false;
     }
 
+    /**
+     * Takes in a dateTime object and converts it to the correct string display format
+     * @param dateTime dateTime object
+     * @return Formatted string containing details of the dateTime object
+     */
     public String formatDateTime(LocalDateTime dateTime) {
         String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
         String month = dateTime.getMonthValue() < 10 ? "0" + dateTime.getMonthValue() : "" + dateTime.getMonthValue();
@@ -71,6 +100,11 @@ public class Deadline extends Task {
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 
+    /**
+     * Takes in a date object and converts it to the correct string display format
+     * @param date date object
+     * @return Formatted string containing details of the Date object
+     */
     public String formatDate(LocalDate date) {
         String day = date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : "" + date.getDayOfMonth();
         String month = date.getMonthValue() < 10 ? "0" + date.getMonthValue() : "" + date.getMonthValue();
