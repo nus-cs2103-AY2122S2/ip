@@ -2,10 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Commands {
 
@@ -20,6 +26,46 @@ public class Commands {
                 + "_______________________________________________________\n";
         System.out.println(bye);
     }
+
+    public String convertToDukeDate(String date) {
+        SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+        df1.setLenient(false);
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        df2.setLenient(false);
+        try {
+            Date dummyDate1 = df1.parse(date);
+            LocalDate dukeDate1 = dummyDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            return dukeDate1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (ParseException e1) {
+            try {
+                Date dummyDate2 = df2.parse(date);
+                LocalDate dukeDate2 = LocalDate.parse(date);
+                return dukeDate2.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } catch (ParseException e2) {
+                return date;
+            }
+        }
+    }
+
+    public String convertToDukeTime(String time) {
+        if (time.contains("am") || time.contains("pm")
+                || time.contains("AM") || time.contains("PM")
+                || time.contains("Am") || time.contains("Pm")) {
+            return time;
+        } else {
+            String splicedTime = time.substring(0, 4);
+            DateFormat inputFormat = new SimpleDateFormat("HHmm");
+            DateFormat outputFormat = new SimpleDateFormat("hh:mmaa");
+            try {
+                Date dukeTime = inputFormat.parse(splicedTime);
+                return outputFormat.format(dukeTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return time;
+            }
+        }
+    }
+
 
     public void list() { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
@@ -88,7 +134,8 @@ public class Commands {
 
     public void deadline(String[] tokens) throws DukeException {
         String description = "";
-        String timeFrame = "";
+        String date = "";
+        String time = "";
         int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
         for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].equals("/by")) {
@@ -99,24 +146,21 @@ public class Commands {
             }
             description = description.concat(" ");
         }
-
-        // Check for timeFrame
+        // Check for Date and Time
         if (timeStart == -1) {
             throw new DukeException("'/by' not detected");
         }
-
-        for (int j = timeStart + 1; j < tokens.length; j++) {
-            timeFrame = timeFrame.concat(tokens[j]);
-            if (j != (tokens.length - 1)) {
-                timeFrame = timeFrame.concat(" ");
-            }
-        }
-        taskHistory.addDeadline(description, timeFrame);
+        // Handle Date
+        date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
+        // Handle Time
+        time = time.concat(convertToDukeTime(tokens[timeStart + 2]));
+        taskHistory.addDeadline(description, date, time);
     }
 
     public void event(String[] tokens) throws DukeException {
         String description = "";
-        String timeFrame = "";
+        String date = "";
+        String time = "";
         int timeStart = -1; // -1 is a placeholder to indicate /at has not been found
         for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].startsWith("/")) {
@@ -132,14 +176,14 @@ public class Commands {
         if (timeStart == -1) {
             throw new DukeException("'/at' not detected");
         }
-
-        for (int j = timeStart + 1; j < tokens.length; j++) {
-            timeFrame = timeFrame.concat(tokens[j]);
-            if (j != (tokens.length - 1)) {
-                timeFrame = timeFrame.concat(" ");
-            }
-        }
-        taskHistory.addEvent(description, timeFrame);
+        // Handle Date
+        date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
+        // Handle Time
+        String[] arr = tokens[timeStart + 2].split("-");
+        time = time.concat(convertToDukeTime(arr[0])
+                .concat("-")
+                .concat(convertToDukeTime(arr[1])));
+        taskHistory.addEvent(description, date, time);
     }
 
     public void delete(int index) {
@@ -148,13 +192,13 @@ public class Commands {
 
     File startup() throws IOException {
         String home = System.getProperty("user.home");
-        Path path = Paths.get(home,"Duke", "data");
+        Path path = Paths.get(home, "Duke", "data");
         String filePath = String.valueOf(path);
         // Check if parent and child directory exists else create them
         File f1 = new File(filePath);
         f1.mkdirs();
         // Check if duke.txt exits else create it
-        File f2 = new File (filePath + "\\duke.txt");
+        File f2 = new File(filePath + "\\duke.txt");
         f2.createNewFile();
 
         return f2;

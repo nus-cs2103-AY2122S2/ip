@@ -5,6 +5,7 @@ import java.util.MissingFormatArgumentException; // Imported MissingFormatArgume
 import java.util.Scanner; // Imported Scanner class
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = "_______________________________________________________\n"
                 + " ____        _         _    ____ _   _ \n"
