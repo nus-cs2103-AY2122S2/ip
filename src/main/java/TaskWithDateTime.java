@@ -57,4 +57,13 @@ public abstract class TaskWithDateTime extends Task {
     public String toString() {
         return super.toString() + dateTimeInfo();
     }
+
+    /**
+     * Returns the string representation of the task with date/time in save format.
+     *
+     * @return The string representation of the task with date/time to be saved
+     */
+    public String saveFormat() {
+        return super.saveFormat() + " | " + dateTimeInput;
+    }
 }

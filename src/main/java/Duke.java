@@ -1,17 +1,26 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    private static final List<Task> tasks = new ArrayList<>();
-
     private final Ui ui;
+    private Storage storage;
+    private List<Task> tasks;
 
-    public Duke() {
+    public Duke(String folderName, String fileName) {
         ui = new Ui();
+
+        try {
+            storage = new Storage(folderName, fileName);
+            tasks = storage.loadTasksFromFile();
+        } catch (DukeException | IOException e) {
+            ui.displayError(e.getMessage());
+            tasks = new ArrayList<>();
+        }
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data", "tasks.txt").run();
     }
 
     public void run() {
@@ -24,7 +33,7 @@ public class Duke {
 
             try {
                 processCommand(commandLine);
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 ui.displayError(e.getMessage());
             } finally {
                 ui.displayLine();
@@ -32,7 +41,7 @@ public class Duke {
         }
     }
 
-    public void processCommand(String commandLine) throws DukeException {
+    public void processCommand(String commandLine) throws DukeException, IOException {
         String[] commandLineParts = commandLine.split(" ", 2);
 
         String commandType;
@@ -54,7 +63,7 @@ public class Duke {
         executeCommand(commandType, commandInfo);
     }
 
-    public void executeCommand(String commandType, String commandInfo) throws DukeException {
+    public void executeCommand(String commandType, String commandInfo) throws DukeException, IOException {
         int taskNum;
         Task task;
         String taskDescription;
@@ -65,36 +74,35 @@ public class Duke {
             ui.displayExit();
             break;
         case "list":
-            displayTasks();
+            displayTasks(tasks);
             break;
         case "mark":
             taskNum = getTaskNumFromMarkCommand(commandInfo);
-            markTask(taskNum);
+            markTask(tasks, taskNum);
             break;
         case "unmark":
             taskNum = getTaskNumFromUnmarkCommand(commandInfo);
-            unmarkTask(taskNum);
-            break;
+            unmarkTask(tasks, taskNum);
         case "delete":
             taskNum = getTaskNumFromDeleteCommand(commandInfo);
-            deleteTask(taskNum);
+            deleteTask(tasks, taskNum);
             break;
         case "todo":
             taskDescription = getTaskDescriptionFromToDoCommand(commandInfo);
             task = new ToDo(taskDescription);
-            addTask(task);
+            addTask(tasks, task);
             break;
         case "deadline":
             taskInfo = processTaskInfoFromDeadlineCommand(commandInfo);
             String[] deadlineTaskDetails = taskInfo.split("/", 2);
             task = new Deadline(deadlineTaskDetails[0], deadlineTaskDetails[1]);
-            addTask(task);
+            addTask(tasks, task);
             break;
         case "event":
             taskInfo = processTaskInfoFromEventCommand(commandInfo);
             String[] eventTaskDetails = taskInfo.split("/", 2);
             task = new Event(eventTaskDetails[0], eventTaskDetails[1]);
-            addTask(task);
+            addTask(tasks, task);
             break;
         default:
             throw new DukeException("INVALID COMMAND. Please try again!");
@@ -293,16 +301,18 @@ public class Duke {
         }
     }
 
-    public void addTask(Task task) {
+    public void addTask(List<Task> tasks, Task task) throws IOException {
         tasks.add(task);
 
         String response = ui.taskAddedMessage(task)
                 + System.lineSeparator()
                 + ui.numOfTasksInListMessage(tasks);
         ui.displayResponse(response);
+
+        storage.saveTasksToFile(tasks);
     }
 
-    public void displayTasks() throws DukeException {
+    public void displayTasks(List<Task> tasks) throws DukeException {
         if (tasks.size() != 0) {
             String response = ui.tasksInListMessage(tasks);
             ui.displayResponse(response);
@@ -311,31 +321,35 @@ public class Duke {
         }
     }
 
-    public void markTask(int taskNum) throws DukeException {
+    public void markTask(List<Task> tasks, int taskNum) throws DukeException, IOException {
         if (taskNum > 0 && taskNum <= tasks.size()) {
             Task task = tasks.get(taskNum - 1);
             task.setDone();
 
             String message = ui.taskDoneMessage(task);
             ui.displayResponse(message);
+
+            storage.saveTasksToFile(tasks);
         } else {
             throw new DukeException("Task not found. Please try again!");
         }
     }
 
-    public void unmarkTask(int taskNum) throws DukeException {
+    public void unmarkTask(List<Task> tasks, int taskNum) throws DukeException, IOException {
         if (taskNum > 0 && taskNum <= tasks.size()) {
             Task task = tasks.get(taskNum - 1);
             task.setNotDone();
 
             String message = ui.taskNotDoneMessage(task);
             ui.displayResponse(message);
+
+            storage.saveTasksToFile(tasks);
         } else {
             throw new DukeException("Task not found. Please try again!");
         }
     }
 
-    public void deleteTask(int taskNum) throws DukeException {
+    public void deleteTask(List<Task> tasks, int taskNum) throws DukeException, IOException {
         if (taskNum > 0 && taskNum <= tasks.size()) {
             Task task = tasks.get(taskNum - 1);
             tasks.remove(task);
@@ -344,6 +358,8 @@ public class Duke {
                     + System.lineSeparator()
                     + ui.numOfTasksInListMessage(tasks);
             ui.displayResponse(message);
+
+            storage.saveTasksToFile(tasks);
         } else {
             throw new DukeException("Task not found. Please try again!");
         }
