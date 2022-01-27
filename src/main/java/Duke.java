@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,19 +129,23 @@ public class Duke {
             }
             task = command[1];
             switch (command[0]) {
-            case "deadline":
-                description = task.split(" /")[0];
-                details = task.split("/by ")[1];
-                t = new Deadline(false, description, details);
-                break;
-            case "event":
-                description = task.split(" /")[0];
-                details = task.split("/at ")[1];
-                t = new Event(false, description, details);
-                break;
-            case "todo":
-                description = task;
-                t = new Todo(false, description);
+                case "todo":
+                        description = task;
+                        t = new Todo(description);
+                        tasks.add(t);
+                        return printTask(t);
+                case "deadline":
+                        description = task.split(" /")[0];
+                        details = task.split("/by ")[1];
+                        t = new Deadline(description, details);
+                        tasks.add(t);
+                        return printTask(t);
+                case "event":
+                        description = task.split(" /")[0];
+                        details = task.split("/at ")[1];
+                        t = new Event(description, details);
+                        tasks.add(t);
+                        return printTask(t);
             }
             tasks.add(t);
             FileSave.writetoFile(tasks);
@@ -148,6 +153,9 @@ public class Duke {
         }
         catch (DukeException e) {
             return e.emptyDesc();
+        }
+        catch (DateTimeParseException e) {
+            return "Get the date format right!\n" + "dd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm\n";
         }
     }
 

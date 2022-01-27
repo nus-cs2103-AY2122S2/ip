@@ -1,20 +1,27 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task{
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public Event(boolean status, String description, String at) {
+    public Event(boolean isDone, String description, String at) throws DateTimeParseException {
         super(description);
-        this.at = at;
-        super.isDone = status;
+        this.at = DateUtil.stringToDate(at);
+        this.isDone = isDone;
+    }
+
+    public Event(String description, String by) throws DateTimeParseException {
+        this(false, description, by);
     }
 
     @Override
     public String appendtoFile() {
-        return "E|" + (super.isDone ? "1" : "0") + "|" + super.description + "|" + this.at + "\n";
+        return "E|" + (super.isDone ? "1" : "0") + "|" + super.description + "|" + DateUtil.dateToString(at) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + DateUtil.dateToString(at) + ")";
     }
 }

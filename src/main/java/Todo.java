@@ -1,9 +1,15 @@
+import java.time.format.DateTimeParseException;
+
 public class Todo extends Task{
     protected boolean status;
 
-    public Todo(boolean status, String description) {
+    public Todo(boolean isDone, String description) {
         super(description);
-        super.isDone = status;
+        this.isDone = isDone;
+    }
+
+    public Todo(String description) throws DateTimeParseException {
+        this(false, description);
     }
 
     @Override
