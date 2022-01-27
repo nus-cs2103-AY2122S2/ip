@@ -7,6 +7,9 @@ import Duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This FindCommand class will find a task name that has a matching given keyword when executed.
+ */
 public class FindCommand extends Command {
 	private final String KEYWORD;
 
@@ -14,6 +17,13 @@ public class FindCommand extends Command {
 		this.KEYWORD = keyword;
 	}
 
+	/**
+	 * Executes command by matching a keyword and printing the matched tasks that contains keyword.
+	 *
+	 * @param tasks TaskList of tasks.
+	 * @param ui    Ui provided.
+	 * @param save  Saved history.
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		ArrayList<Task> taskArrList = tasks.getCurrentList();
