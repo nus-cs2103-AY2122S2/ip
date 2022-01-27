@@ -4,6 +4,7 @@ import exception.DukeException;
 import task.Task;
 import utility.Input;
 import task.TaskList;
+import utility.Storage;
 
 public class MarkCommand extends Command {
 
@@ -29,7 +30,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Input input) throws DukeException {
+    public void execute(TaskList tasks, Input input, Storage storage) throws DukeException {
         if (this.dukeException != null) {
             throw this.dukeException;
         } else if (this.index <= 0 || this.index > tasks.getSize()) {
@@ -44,6 +45,7 @@ public class MarkCommand extends Command {
             task.setMarked(false);
             input.print(String.format("I've marked task %d!", this.index));
         }
+        storage.save(tasks);
     }
 
     @Override

@@ -3,6 +3,7 @@ package command;
 import exception.DukeException;
 import task.*;
 import utility.Input;
+import utility.Storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Input input) throws DukeException {
+    public void execute(TaskList tasks, Input input, Storage storage) throws DukeException {
         if(this.dukeException != null) {
             throw this.dukeException;
         }
@@ -66,6 +67,8 @@ public class AddCommand extends Command {
 
         input.print("i added this task: ");
         input.print(t.toString());
+
+        storage.save(tasks);
     }
 
     @Override
