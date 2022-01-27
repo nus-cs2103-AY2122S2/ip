@@ -21,6 +21,16 @@ public abstract class Task {
         this.status = 0;
     }
 
+    /**
+     * Check if the task name contains a specified string.
+     *
+     * @param s String to match in the task name.
+     * @return True if the task name contains the string; False otherwise.
+     */
+    public boolean containKeyword(String s) {
+        return this.name.contains(s);
+    }
+
     abstract String toSaveString();
 
     @Override
