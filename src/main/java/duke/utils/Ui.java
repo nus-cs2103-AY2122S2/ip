@@ -25,7 +25,7 @@ public class Ui {
     /**
      * Constructor method for Ui class
      */
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
@@ -36,8 +36,9 @@ public class Ui {
      *
      * @param tasks Arraylist of tasks
      */
-    public static void printList(ArrayList<Task> tasks){
-        if(tasks.size() == 0) {
+    public static void printList(ArrayList<Task> tasks) {
+
+        if (tasks.size() == 0) {
             System.out.println("No Tasks Right Now");
         } else {
             for (int x = 0; x < tasks.size(); x++) {
@@ -46,17 +47,19 @@ public class Ui {
         }
     }
 
+
     /**
      * Print the addition of a new task to the list
      *
      * @param curr Task that has been added to the list
      * @param size number of tasks in the list
      */
-    public static void printTaskAddition(Task curr, int size){
+    public static void printTaskAddition(Task curr, int size) {
         System.out.println("Got it! I've added this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + size + " tasks in the list");
     }
+
 
     /**
      * Print the removal of a task from the list
@@ -64,20 +67,22 @@ public class Ui {
      * @param curr Task that has been removed from the list
      * @param size number of tasks in the list
      */
-    public static void printTaskDeletion(Task curr, int size){
+    public static void printTaskDeletion(Task curr, int size) {
         System.out.println("Got it! I've removed this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + size + " tasks in the list");
     }
 
 
+
     /**
      * Print the welcome message for the user
      */
-    public static void printHello(){
+    public static void printHello() {
         System.out.println("Hello! I'm Duke!");
         System.out.println("What can I do for you?");
     }
+
 
     /**
      * Print a line for interface
@@ -90,7 +95,7 @@ public class Ui {
     /**
      * Print the goodbye message for the user
      */
-    public static void printBye(){
+    public static void printBye() {
         System.out.println("Bye! Hope to see you again soon");
     }
 
@@ -115,13 +120,14 @@ public class Ui {
         return this.lastCommand.equals("bye");
     }
 
+
     /**
      * Print a task has been marked
      * as completed
      *
      * param t Task that has been marked as complete
      */
-    public static void printMarkCompletion(Task t){
+    public static void printMarkCompletion(Task t) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(t.toString());
     }

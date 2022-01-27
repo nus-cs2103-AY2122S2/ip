@@ -12,7 +12,7 @@ public class ToDo extends Task {
      * @param desc Description of ToDo
      * @param isComp Completion Status of ToDo
      */
-    public ToDo(String desc, boolean isComp){
+    public ToDo(String desc, boolean isComp) {
         super(desc, isComp);
     }
 
@@ -23,7 +23,7 @@ public class ToDo extends Task {
      * @return String representation of the ToDo
      */
     @Override
-    public String toString(){
+    public String toString() {
         String temp = "[T] " + super.toString();
         return temp;
     }

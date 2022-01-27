@@ -22,7 +22,7 @@ public class Event extends Task {
      * @param isComp Completion Status of Event
      * @param date Date on which the Event Occurs
      */
-    public Event(String desc, boolean isComp, LocalDate date){
+    public Event(String desc, boolean isComp, LocalDate date) {
         super(desc, isComp);
         this.date = date;
     }
@@ -34,7 +34,7 @@ public class Event extends Task {
      * @return String representation of the Event
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[E] " + super.toString() + " (at: " + this.getDate() + ")";
     }
 

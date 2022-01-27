@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * @param isComp Completion Status of Deadline
      * @param date Date by which Deadline has to be Completed
      */
-    public Deadline(String desc, boolean isComp, LocalDate date){
+    public Deadline(String desc, boolean isComp, LocalDate date) {
         super(desc, isComp);
         this.date = date;
     }
@@ -34,10 +34,8 @@ public class Deadline extends Task {
      * @return String representation of the Deadline
      */
     @Override
-    public String toString(){
+    public String toString() {
         String temp = "[D] " + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         return temp;
     }
-
-
 }

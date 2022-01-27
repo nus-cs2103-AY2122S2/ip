@@ -22,10 +22,11 @@ public class Duke {
     private TaskList tl;
 
 
+
     /**
      * Constructor Method for Duke
      */
-    public Duke(){
+    public Duke() {
         this.ui = new Ui();
         tl = new TaskList(Storage.getSavedList());
     }
@@ -40,7 +41,6 @@ public class Duke {
         boolean isExit = false;
 
         while (!isExit) {
-
             Ui.printLine();
 
             try {
@@ -56,7 +56,6 @@ public class Duke {
         tl.saveListToStorage();
         Ui.printBye();
     }
-
 
     /**
      * Main method for the program

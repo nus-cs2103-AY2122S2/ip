@@ -23,6 +23,7 @@ public class TaskList {
      */
     private ArrayList<Task> tasks;
 
+
     /**
      * Constructor method for
      * TaskList
@@ -65,7 +66,6 @@ public class TaskList {
             this.tasks.add(curr);
             Ui.printTaskAddition(curr, getSize());
         } catch (DateTimeParseException e) {
-
             throw new DukeException.DukeNoTimeProvided();
         }
     }
@@ -98,13 +98,14 @@ public class TaskList {
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
     public void deleteTask(int toDelete) throws DukeException.DukeInvalidNumberException {
-        if(toDelete < 0 || toDelete > tasks.size()){
+        if (toDelete < 0 || toDelete > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         Task toBeRemoved = tasks.get(toDelete - 1);
         this.tasks.remove(toDelete - 1);
         Ui.printTaskDeletion(toBeRemoved, getSize());
     }
+
 
     /**
      * Save the list of tasks to
@@ -122,7 +123,7 @@ public class TaskList {
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
     public void markTaskAsCompleted(int toMark) throws DukeException.DukeInvalidNumberException {
-        if(toMark < 0 || toMark > tasks.size()) {
+        if (toMark < 0 || toMark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         tasks.get(toMark - 1).markCompleted();
@@ -136,11 +137,12 @@ public class TaskList {
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
     public void markTaskAsUncomplete(int toUnmark) throws DukeException.DukeInvalidNumberException {
-        if(toUnmark < 0 || toUnmark > tasks.size()) {
+        if (toUnmark < 0 || toUnmark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         tasks.get(toUnmark - 1).markNotCompleted();
     }
+
 
     /**
      * Print the list of tasks
