@@ -12,15 +12,44 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Add deadline command.
+ *
+ * <p>Extends from TaskCommand, as this class adds new Events task
+ * to the task list</>
+ */
 public class DeadlineCommand extends TaskCommand {
     private final static String TASK_FORMAT_WRONG = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
     private final static String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
     private final static String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
 
+    /**
+     * Constructor for command to init values.
+     *
+     * <p>Calls superclass TaskCommand constructor.</>
+     *
+     * @param key Keyword to call this command.
+     */
     public DeadlineCommand(String key) {
         super(key);
     }
 
+    /**
+     * Execution behavior of the add deadline command.
+     *
+     * <p>Create and add new deadline task into the task list base on what the user inputs.
+     * Will also print the new deadline task created through the UI. <br>
+     * User does not have to put in a time, default time set is 2359.</>
+     *
+     * @param input User input
+     * @param taskList User tasklist.
+     * @param storage Storage to store the updated tasklist.
+     * @param ui Duke UI to print what the command wants.
+     * @throws DukeException If no task descriptor or
+     * deadline task format is wrong (no /by)
+     * or date format is wrong (yy-mm-dd)
+     * or time format is wrong (HHmm)
+     */
     @Override
     public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task newTask = null;
