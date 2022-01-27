@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -28,12 +29,12 @@ public class LoadFile {
                         int startIndex = str.indexOf(" [at: ");
                         int endIndex = startIndex + 6;
 
-                        task = new Event(str.substring(7, startIndex), str.substring(endIndex, str.length() - 1));
+                        task = new Event(str.substring(7, startIndex), LocalDate.parse(str.substring(endIndex, str.length() - 1)));
                     } else {
                         int startIndex = str.indexOf(" [by: ");
                         int endIndex = startIndex + 6;
 
-                        task = new Deadline(str.substring(7, startIndex), str.substring(endIndex, str.length() - 1));
+                        task = new Deadline(str.substring(7, startIndex), LocalDate.parse(str.substring(endIndex, str.length() - 1)));
                     }
 
                     if (str.substring(4, 5).equals("X")) {
