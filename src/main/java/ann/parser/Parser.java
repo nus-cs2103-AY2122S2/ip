@@ -1,13 +1,6 @@
 package ann.parser;
 
-import ann.commands.AddCommand;
-import ann.commands.Command;
-import ann.commands.DeleteCommand;
-import ann.commands.ExitCommand;
-import ann.commands.IncorrectCommand;
-import ann.commands.ListCommand;
-import ann.commands.MarkCommand;
-import ann.commands.UnmarkCommand;
+import ann.commands.*;
 import ann.data.InputPattern;
 import ann.data.tasks.TaskType;
 
@@ -23,6 +16,8 @@ public class Parser {
             return handleAdd(input.substring(3));
         } else if(input.length() < 4) {
             return new IncorrectCommand("Oops! Please enter a valid command!");
+        } else if(input.substring(0, 4).toLowerCase().equals("find")) {
+            return handleFind(input.substring(4));
         } else if(input.substring(0, 4).toLowerCase().equals("mark")) {
             return handleMark(input.substring(4));
         } else if(input.length() < 6) {
@@ -138,6 +133,14 @@ public class Parser {
             } else {
                 return new AddCommand(TaskType.DEADLINE, deadlineComponentsArray);
             }
+        }
+    }
+
+    private static Command handleFind(String findKeyWords) {
+        if(findKeyWords.isBlank()) {
+            return new IncorrectCommand("Oops! Please use the following format:\nfind [key word(s)]");
+        } else {
+            return new FindCommand(findKeyWords.trim());
         }
     }
 }
