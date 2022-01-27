@@ -1,11 +1,15 @@
 package mnsky;
 
-import mnsky.exceptions.MnskyException;
-import mnsky.task.*;
-
 import java.util.ArrayList;
 
+import mnsky.exceptions.MnskyException;
+import mnsky.task.Deadline;
+import mnsky.task.Event;
+import mnsky.task.Task;
+
 public class Mnsky {
+    private static final String[] writeCommands = {"mark", "unmark", "todo", "event", "deadline", "delete"};
+
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -14,10 +18,10 @@ public class Mnsky {
      * Creates a UI object.
      */
     public Mnsky() {
-        this.ui = new Ui();
-        this.storage = new Storage("data/MnskyData.txt");
-        this.taskList = new TaskList(this.ui, this.storage);
-        this.ui.greeting();
+        ui = new Ui();
+        storage = new Storage("data/MnskyData.txt");
+        taskList = new TaskList(ui, storage);
+        ui.printGreeting();
     }
 
     /**
@@ -26,8 +30,6 @@ public class Mnsky {
      * @return True if the command writes to the task list, or false otherwise.
      */
     private boolean isWriteCommand(String searchedCommand) {
-        String[] writeCommands = {"mark", "unmark", "todo", "event", "deadline", "delete"};
-
         for (String command : writeCommands) {
             if (command.equals(searchedCommand)) {
                 return true;
@@ -41,68 +43,64 @@ public class Mnsky {
      * Runs the main loop of Mnsky, including retrieving, parsing, and processing user input.
      * @return False is the user input the command bye, or true otherwise.
      */
-    public boolean run() {
-        String input = this.ui.getInput();
-        ArrayList<String> parsedInput = Parser.parseInput(input);
+    public void run() {
+        boolean isRunning = true;
 
-        try {
-            switch (parsedInput.get(0)) {
-            case "bye":
-                this.ui.bye();
-                return false;
+        while (isRunning) {
+            String input = ui.getInput();
+            ArrayList<String> parsedInput = Parser.parseInput(input);
 
-            case "list":
-                this.ui.printList(this.taskList);
-                break;
-
-            case "mark":
-                Task markedTask = taskList.mark(parsedInput.get(1));
-                this.ui.printTask(markedTask);
-                break;
-
-            case "unmark":
-                Task unmarkedTask = taskList.unmark(parsedInput.get(1));
-                this.ui.printTask(unmarkedTask);
-                break;
-
-            case "task":
-                Task task = taskList.addTask(parsedInput.get(1));
-                this.ui.printAddedTask(task);
-                break;
-
-            case "event":
-                Event event = taskList.addEvent(parsedInput.get(1), parsedInput.get(2));
-                this.ui.printAddedTask(event);
-                break;
-
-            case "deadline":
-                Deadline deadline = taskList.addDeadline(parsedInput.get(1), parsedInput.get(2));
-                this.ui.printAddedTask(deadline);
-                break;
-
-            case "delete":
-                Task deleted = taskList.delete(parsedInput.get(1));
-                this.ui.printDeletedTask(deleted);
-                break;
-
-            default:
-                this.ui.printMnsky("...");
+            try {
+                switch (parsedInput.get(0)) {
+                case "bye":
+                    isRunning = false;
+                    break;
+                case "list":
+                    ui.printList(taskList);
+                    break;
+                case "mark":
+                    Task markedTask = taskList.mark(parsedInput.get(1));
+                    ui.printTask(markedTask);
+                    break;
+                case "unmark":
+                    Task unmarkedTask = taskList.unmark(parsedInput.get(1));
+                    ui.printTask(unmarkedTask);
+                    break;
+                case "task":
+                    Task task = taskList.addTask(parsedInput.get(1));
+                    ui.printAddedTask(task);
+                    break;
+                case "event":
+                    Event event = taskList.addEvent(parsedInput.get(1), parsedInput.get(2));
+                    ui.printAddedTask(event);
+                    break;
+                case "deadline":
+                    Deadline deadline = taskList.addDeadline(parsedInput.get(1), parsedInput.get(2));
+                    ui.printAddedTask(deadline);
+                    break;
+                case "delete":
+                    Task deleted = taskList.delete(parsedInput.get(1));
+                    ui.printDeletedTask(deleted);
+                    break;
+                default:
+                    ui.printMnsky("...");
+                }
+            } catch (MnskyException e) {
+                ui.printException(e);
             }
-        } catch (MnskyException e) {
-            this.ui.printException(e);
+
+            if (isWriteCommand(parsedInput.get(0))) {
+                storage.writeToDataFile(taskList);
+            }
+
+            ui.printMnsky("I can help!");
         }
 
-        if (this.isWriteCommand(parsedInput.get(0))) {
-            this.storage.writeToDataFile(this.taskList);
-        }
-
-        this.ui.printMnsky("I can help!");
-        return true;
+        ui.printBye();
     }
 
     public static void main(String[] args) {
         Mnsky mnsky = new Mnsky();
-
-        while (mnsky.run()) {}
+        mnsky.run();
     }
 }

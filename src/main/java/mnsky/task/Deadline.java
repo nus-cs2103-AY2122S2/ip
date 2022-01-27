@@ -33,15 +33,15 @@ public class Deadline extends Task {
         String genericTaskname = super.getGenericTaskName();
         String dateString = "";
         String timeString = "";
-        boolean dateExists = this.byDate != null;
-        boolean timeExists = this.byTime != null;
+        boolean dateExists = byDate != null;
+        boolean timeExists = byTime != null;
 
         if (dateExists) {
-            dateString = this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            dateString = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
         if (timeExists) {
-            timeString = this.byTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+            timeString = byTime.format(DateTimeFormatter.ofPattern("h:mm a"));
         }
 
         if (dateExists && timeExists) {
@@ -51,7 +51,7 @@ public class Deadline extends Task {
         } else if (timeExists) {
             return String.format("[D]%s (by: %s)", genericTaskname, timeString);
         } else {
-            return String.format("[D]%s (by: %s)", genericTaskname, this.by);
+            return String.format("[D]%s (by: %s)", genericTaskname, by);
         }
     }
 
@@ -60,7 +60,7 @@ public class Deadline extends Task {
      * @return The string representation to be used for the storage data.
      */
     @Override
-    public String getSaveData() {
-        return String.format("[D]%s /by %s",  super.getGenericTaskName(), this.by);
+    public String getStorageData() {
+        return String.format("[D]%s /by %s",  super.getGenericTaskName(), by);
     }
 }

@@ -17,6 +17,6 @@ public class MnskyException extends RuntimeException {
      */
     @Override
     public String getMessage() {
-        return this.message;
+        return message;
     }
 }

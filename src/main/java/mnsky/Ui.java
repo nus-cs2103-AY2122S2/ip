@@ -1,9 +1,9 @@
 package mnsky;
 
+import java.util.Scanner;
+
 import mnsky.exceptions.MnskyException;
 import mnsky.task.Task;
-
-import java.util.Scanner;
 
 public class Ui {
     private Scanner con;
@@ -28,27 +28,26 @@ public class Ui {
     public String getInput() {
         System.out.println();
         System.out.print("> ");
-        return this.con.nextLine();
+        return con.nextLine();
     }
 
     /**
      * Prints the greeting message for the chatbot.
      */
-    public void greeting() {
-        this.printMnsky("Hi, I'm");
-        this.printMnsky("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
-        this.printMnsky("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
-        this.printMnsky("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
-        this.printMnsky("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
-        this.printMnsky("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
-        this.printMnsky("I can help!");
+    public void printGreeting() {
+        printMnsky("Hi, I'm");
+        printMnsky("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
+        printMnsky("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
+        printMnsky("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
+        printMnsky("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
+        printMnsky("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
+        printMnsky("I can help!");
     }
 
     /**
      * Prints out the bye messages.
      */
-    public void bye() {
-        this.printMnsky("I can help!");
+    public void printBye() {
         System.out.println("[MNSKY has shut itself down]");
     }
 
@@ -57,7 +56,7 @@ public class Ui {
      * @param e The exception to be printed out.
      */
     public void printException(MnskyException e) {
-        this.printMnsky("..?");
+        printMnsky("..?");
         System.out.println(e.getMessage());
     }
 

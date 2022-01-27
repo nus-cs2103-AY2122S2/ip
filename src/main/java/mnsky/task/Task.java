@@ -5,40 +5,40 @@ public class Task {
     private boolean done;
 
     /**
-     * Creates a Task object.
-     * @param name The name for the task.
+     * Constructor for the Task object.
+     * @param taskName The name for the task.
      */
-    public Task(String name) {
-        this.taskName = name;
-        this.done = false;
+    public Task(String taskName) {
+        this.taskName = taskName;
+        done = false;
     }
 
     /**
      * Marks the task as done.
      */
     public void mark() {
-        this.done = true;
+        done = true;
     }
 
     /**
      * Unmarks the task so it's not yet done.
      */
     public void unmark() {
-        this.done = false;
+        done = false;
     }
 
     /**
      * Returns the task name.
      * @return The task name.
      */
-    public String getName() {return this.taskName;}
+    public String getName() {return taskName;}
 
     /**
      * Returns the task name with info indicating if it's marked or not.
      * @return The task name with info indicating if it's marked or not.
      */
     public String getGenericTaskName() {
-        return String.format("[%s] %s", this.done ? "X" : "?", this.taskName);
+        return String.format("[%s] %s", done ? "X" : "?", taskName);
     }
 
     /**
@@ -47,14 +47,14 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[T]" + this.getGenericTaskName();
+        return "[T]" + getGenericTaskName();
     }
 
     /**
      * Returns the string representation to be used for the storage data.
      * @return The string representation to be used for the storage data.
      */
-    public String getSaveData() {
-        return this.toString();
+    public String getStorageData() {
+        return toString();
     }
 }

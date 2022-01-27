@@ -34,15 +34,15 @@ public class Event extends Task {
 
         String dateString = "";
         String timeString = "";
-        boolean dateExists = this.atDate != null;
-        boolean timeExists = this.atTime != null;
+        boolean dateExists = atDate != null;
+        boolean timeExists = atTime != null;
 
         if (dateExists) {
-            dateString = this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            dateString = atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
 
         if (timeExists) {
-            timeString = this.atTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+            timeString = atTime.format(DateTimeFormatter.ofPattern("h:mm a"));
         }
 
         if (dateExists && timeExists) {
@@ -52,7 +52,7 @@ public class Event extends Task {
         } else if (timeExists) {
             return String.format("[E]%s (at: %s)", genericTaskname, timeString);
         } else {
-            return String.format("[E]%s (at: %s)", genericTaskname, this.at);
+            return String.format("[E]%s (at: %s)", genericTaskname, at);
         }
     }
 
@@ -61,7 +61,7 @@ public class Event extends Task {
      * @return The string representation to be used for the storage data.
      */
     @Override
-    public String getSaveData() {
+    public String getStorageData() {
         return String.format("[E]%s /at %s", super.getGenericTaskName(), at);
     }
 }

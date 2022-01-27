@@ -1,11 +1,11 @@
 package mnsky;
 
-import mnsky.exceptions.MnskyException;
-import mnsky.exceptions.MnskyMissingParameterException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.exceptions.MnskyMissingParameterException;
 
 public class Parser {
     /**
@@ -102,7 +102,7 @@ public class Parser {
      */
     public static ArrayList<ArrayList<String>> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
         try {
-            ArrayList<ArrayList<String>> taskList = new ArrayList<>();
+            ArrayList<ArrayList<String>> tasks = new ArrayList<>();
 
             for (String line : rawTaskList) {
                 String[] lineSplit = line.split(" ");
@@ -121,11 +121,11 @@ public class Parser {
                         nextTask.add("");
                     }
                     nextTask.add(line.substring(4, 5));
-                    taskList.add(nextTask);
+                    tasks.add(nextTask);
                 }
             }
 
-            return taskList;
+            return tasks;
         } catch (MnskyMissingParameterException e) {
             throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }
@@ -141,43 +141,35 @@ public class Parser {
         ArrayList<String> parsedInput = new ArrayList<>();
 
         switch (inputSplit[0]) {
-            case "bye":
-                parsedInput.add("bye");
-                break;
-
-            case "list":
-                parsedInput.add("list");
-                break;
-
-            case "mark":
-                parsedInput.add("mark");
-                parsedInput.add(retrieveIndex("mark", inputSplit));
-                break;
-
-            case "unmark":
-                parsedInput.add("unmark");
-                parsedInput.add(retrieveIndex("unmark", inputSplit));
-                break;
-
-            case "todo":
-                parsedInput = parseTask(input);
-                break;
-
-            case "event":
-                parsedInput = parseEvent(inputSplit);
-                break;
-
-            case "deadline":
-                parsedInput = parseDeadline(inputSplit);
-                break;
-
-            case "delete":
-                parsedInput.add("delete");
-                parsedInput.add(retrieveIndex("delete", inputSplit));
-                break;
-
-            default:
-                parsedInput.add("invalid");
+        case "bye":
+            parsedInput.add("bye");
+            break;
+        case "list":
+            parsedInput.add("list");
+            break;
+        case "mark":
+            parsedInput.add("mark");
+            parsedInput.add(retrieveIndex("mark", inputSplit));
+            break;
+        case "unmark":
+            parsedInput.add("unmark");
+            parsedInput.add(retrieveIndex("unmark", inputSplit));
+            break;
+        case "todo":
+            parsedInput = parseTask(input);
+            break;
+        case "event":
+            parsedInput = parseEvent(inputSplit);
+            break;
+        case "deadline":
+            parsedInput = parseDeadline(inputSplit);
+            break;
+        case "delete":
+            parsedInput.add("delete");
+            parsedInput.add(retrieveIndex("delete", inputSplit));
+            break;
+        default:
+            parsedInput.add("invalid");
         }
 
         return parsedInput;
