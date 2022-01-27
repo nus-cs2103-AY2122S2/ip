@@ -8,6 +8,7 @@ import tasks.Todo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,7 +33,7 @@ public class FileSystemTaskService implements TaskService {
 
     @Override
     public Optional<Task> getById(int id) throws TaskServiceException {
-        if (id < 0 || id >= this.tasks.size()) {
+        if (!this.isValidTaskId(id)) {
             return Optional.empty();
         }
         return Optional.of(this.tasks.get(id).clone());
@@ -67,17 +68,26 @@ public class FileSystemTaskService implements TaskService {
 
     @Override
     public void create(Task taskToCreate) throws TaskServiceException {
-
+        this.tasks.add(taskToCreate.clone());
+        this.saveTasksToFileSystem();
     }
 
     @Override
     public void update(int id, Task taskToUpdate) throws TaskServiceException {
-
+        if (!this.isValidTaskId(id)) {
+            throw new TaskServiceException();
+        }
+        this.tasks.set(id, taskToUpdate.clone());
+        this.saveTasksToFileSystem();
     }
 
     @Override
     public void delete(int id) throws TaskServiceException {
-
+        if (!this.isValidTaskId(id)) {
+            throw new TaskServiceException();
+        }
+        this.tasks.remove(id);
+        this.saveTasksToFileSystem();
     }
 
     private Task parseStringToTask(String str) throws TaskServiceException {
@@ -108,6 +118,32 @@ public class FileSystemTaskService implements TaskService {
         return task;
     }
 
+    private String formatTasksAsString() throws TaskServiceException {
+        String formattedOutput = "";
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (i > 0) {
+                formattedOutput += "\n";
+            }
+            formattedOutput += this.formatTaskAsString(this.tasks.get(i));
+        }
+        return formattedOutput;
+    }
+
+    private String formatTaskAsString(Task task) throws TaskServiceException {
+        final String statusAndDesc = " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription();
+        if (task instanceof Todo) {
+            return "T" + statusAndDesc;
+        } else if (task instanceof Deadline) {
+            final Deadline d = (Deadline) task;
+            return "D" + statusAndDesc + " | " + d.getBy();
+        } else if (task instanceof Event) {
+            final Event e = (Event) task;
+            return "E" + statusAndDesc + " | " + e.getAt();
+        } else {
+            throw new TaskServiceException();
+        }
+    }
+
     private void closeReader(BufferedReader reader) throws TaskServiceException {
         if (reader != null) {
             try {
@@ -116,5 +152,17 @@ public class FileSystemTaskService implements TaskService {
                 throw new TaskServiceException();
             }
         }
+    }
+
+    private void saveTasksToFileSystem() throws TaskServiceException {
+        try {
+            Files.write(this.tasksDir, this.formatTasksAsString().getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ex) {
+            throw new TaskServiceException();
+        }
+    }
+
+    private boolean isValidTaskId(int id) {
+        return id > -1 && id < this.tasks.size();
     }
 }

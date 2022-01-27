@@ -13,6 +13,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return this.getAt();
+    }
+
     @Override
     public Event clone() {
         return new Event(super.description, this.at, super.isDone);

@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     @Override
     public Deadline clone() {
         return new Deadline(super.description, this.by, super.isDone);
