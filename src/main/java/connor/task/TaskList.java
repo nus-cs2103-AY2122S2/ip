@@ -235,7 +235,8 @@ public class TaskList {
     public static ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task t : TaskList.getTasks()) {
-            if (t.getDesc().contains(keyword.trim())) {
+            // Search is not case-sensitive
+            if (t.getDesc().toLowerCase().contains(keyword.trim().toLowerCase())) {
                 matchingTasks.add(t);
             }
         }
