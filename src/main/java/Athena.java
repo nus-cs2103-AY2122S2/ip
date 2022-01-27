@@ -1,10 +1,15 @@
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Athena {
     private final TaskList taskList;
     private boolean isActive;
 
     public Athena() {
+        // IF IN DISK, LOAD FROM DISK
         this.taskList = new TaskList();
         this.isActive = true;
         sayText("Greetings! My name is Athena. What can I help you with?");
@@ -23,6 +28,7 @@ public class Athena {
             arguments = splitInput[1];
         }
         // Run the given command
+        taskList.resetLastModified();
         try {
             switch (command) {
             case "todo":
@@ -69,6 +75,15 @@ public class Athena {
             }
         } catch (AthenaInputException e) {
             sayText(e.getMessage());
+        }
+        // Save the updated list to hard disk when needed
+        if (taskList.wasModified()) {
+            try {
+                saveToDisk();
+                System.out.println("saved");
+            } catch (IOException e) {
+                sayText("I encountered a problem saving to disk: " + e.getMessage());
+            }
         }
     }
 
@@ -139,6 +154,19 @@ public class Athena {
         } else {
             sayText(String.format("Now you have %d tasks in your list.", this.taskList.getNumberOfTasks()));
         }
+    }
+
+    private void saveToDisk() throws IOException {
+        java.nio.file.Path directoryPath = Paths.get("data");
+        java.nio.file.Path savePath = directoryPath.resolve("athena.txt");
+
+        // Create the data directory if necessary
+        if (!Files.exists(directoryPath)) {
+            Files.createDirectory(directoryPath);
+        }
+        // Save the file, overriding any existing save
+        ArrayList<String> taskListTextFormat = taskList.getSaveRepresentation();
+        Files.write(savePath, taskListTextFormat);
     }
 
     public static void main(String[] args) {
