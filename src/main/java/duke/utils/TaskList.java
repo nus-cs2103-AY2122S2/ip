@@ -89,6 +89,18 @@ public class TaskList {
         return tasks.size();
     }
 
+    public void findEvent(String desc) {
+        ArrayList<Task> matches = new ArrayList<>();
+
+        for(int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(desc)) {
+                matches.add(tasks.get(i));
+            }
+        }
+
+        Ui.printSearchList(matches);
+    }
+
 
 
 

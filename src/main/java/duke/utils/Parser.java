@@ -97,6 +97,17 @@ public class Parser {
                 }
                 break;
 
+            case "find":
+
+                try {
+                    tl.findEvent(st.nextToken(""));
+                } catch (NoSuchElementException e){
+                    throw new DukeException.DukeNoTaskGivenException();
+                }
+
+                break;
+
+
             case "bye":
 
                 break;

@@ -26,6 +26,19 @@ public class Ui {
         }
     }
 
+    public static void printSearchList(ArrayList<Task> tasks){
+
+        System.out.println("The Following Matching Tasks were found: ");
+
+        if(tasks.size() == 0) {
+            System.out.println("No Matching Tasks Found");
+        } else {
+            for (int x = 0; x < tasks.size(); x++) {
+                System.out.println((x + 1) + ". " + tasks.get(x).toString());
+            }
+        }
+    }
+
     public static void printTaskAddition(Task curr, int size){
         System.out.println("Got it! I've added this task:");
         System.out.println(curr.toString());
