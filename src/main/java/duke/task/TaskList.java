@@ -34,6 +34,23 @@ public class TaskList {
     }
 
     /**
+     * Returns an ArrayList of all tasks with titles that match the given keyword.
+     *
+     * @param keyword The keyword to be matched with.
+     * @return The ArrayList of all tasks matching keyword.
+     */
+    public ArrayList<Task> getTasksByKeyword(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getTitle().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
      * Returns a task by the index corresponding to its position in a numbered list.
      *
      * @param index The index of the task selected.

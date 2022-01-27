@@ -2,13 +2,7 @@ package duke.parser;
 
 import duke.DukeException;
 import duke.InvalidArgumentException;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -129,6 +123,13 @@ public class Parser {
                         throw new InvalidArgumentException("Incorrect time format");
                     }
                 }
+            }
+            break;
+        case "find":
+            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
+                throw new MissingArgumentException("Missing keyword or keyphrase");
+            } else {
+                command = new FindCommand(splitCommand[1]);
             }
             break;
         default:
