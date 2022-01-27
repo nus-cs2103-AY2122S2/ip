@@ -1,14 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     private final String botName;
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private final String line ="+" + String.valueOf('-').repeat(50) + "+\n";
 
     private Duke(String botName) {
         this.botName = botName;
-        tasks = new ArrayList<>();
+        this.tasks = getTasks();
     }
 
     private void Greeting() {
@@ -41,29 +42,25 @@ public class Duke {
         String[] command = input.split(" ", 2);
         try {
             switch (command[0]) {
-                case "list":
-                    sb.append(printList());
-                    break;
-                case "mark":
-                    itemIndex = Integer.parseInt(command[1]) - 1;
-                    tasks.get(itemIndex).markItem();
-                    sb.append("Alfred, mark it as done!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
-                    break;
-                case "unmark":
-                    itemIndex = Integer.parseInt(command[1]) - 1;
-                    tasks.get(itemIndex).unmarkItem();
-                    sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
-                    break;
-                case "todo":
-                case "event":
-                case "deadline":
-                    sb.append(addTask(command));
-                    break;
-                case "delete":
-                    sb.append(deleteTask(Integer.parseInt(command[1]) - 1));
-                    break;
-                default:
-                    throw new DukeException(Error.INVALID);
+            case "list":
+                sb.append(printList());
+                break;
+            case "mark":
+                sb.append(toggleStatus("mark", Integer.parseInt(command[1]) - 1));
+                break;
+            case "unmark":
+                sb.append(toggleStatus("unmark", Integer.parseInt(command[1]) - 1));
+                break;
+            case "todo":
+            case "event":
+            case "deadline":
+                sb.append(addTask(command));
+                break;
+            case "delete":
+                sb.append(deleteTask(Integer.parseInt(command[1]) - 1));
+                break;
+            default:
+                throw new DukeException(Error.INVALID);
             }
         }
         catch (DukeException e) {
@@ -73,51 +70,96 @@ public class Duke {
         System.out.print(sb);
     }
 
-    private String addTask(String[] command) throws DukeException{
-        Task t;
-        String description;
-        String details;
+    private StringBuilder toggleStatus(String action, int index) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            if (index >= tasks.size() || index < 0) {
+                throw new DukeException(Error.LISTERROR);
+            }
+            switch (action) {
+            case "mark":
+                tasks.get(index).markItem();
+                sb.append("Alfred, mark it as done!\n  ").append(tasks.get(index).toString()).append("\n");
+                FileSave.writetoFile(tasks);
+                break;
+            case "unmark":
+                tasks.get(index).unmarkItem();
+                sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(index).toString()).append("\n");
+                FileSave.writetoFile(tasks);
+                break;
+            }
+            return sb;
+        }
+        catch (DukeException e) {
+            return sb.append(printList() + e.listError());
+        }
+    }
+
+    private ArrayList<Task> getTasks() {
+        FileSave.createFile();
+        tasks = new ArrayList<>();
+        List<String> lines = FileSave.readFile();
+        if (lines != null) {
+            for (String line : lines) {
+                String[] item = line.split("\\|");
+                switch(item[0]) {
+                case "D":
+                    tasks.add(new Deadline(item[1].equals("1"), item[2], item[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
+                    break;
+                default:
+                    tasks.add(new Todo(item[1].equals("1"), item[2]));
+                }
+            }
+        }
+        return tasks;
+    }
+
+    private String addTask(String[] command){
         try {
             String task;
+            Task t = null;
+            String description;
+            String details;
             if (command.length <= 1) {
                 throw new DukeException(Error.EMPTYDESC);
             }
             task = command[1];
             switch (command[0]) {
-                case "todo":
-                        description = task;
-                        t = new Todo(description);
-                        tasks.add(t);
-                        return printTask(t);
-                case "deadline":
-                        description = task.split("/")[0];
-                        details = task.split("/by")[1];
-                        t = new Deadline(description, details);
-                        tasks.add(t);
-                        return printTask(t);
-                case "event":
-                        description = task.split("/")[0];
-                        details = task.split("/at")[1];
-                        t = new Event(description, details);
-                        tasks.add(t);
-                        return printTask(t);
+            case "deadline":
+                description = task.split(" /")[0];
+                details = task.split("/by ")[1];
+                t = new Deadline(false, description, details);
+                break;
+            case "event":
+                description = task.split(" /")[0];
+                details = task.split("/at ")[1];
+                t = new Event(false, description, details);
+                break;
+            case "todo":
+                description = task;
+                t = new Todo(false, description);
             }
+            tasks.add(t);
+            FileSave.writetoFile(tasks);
+            return printTask(t);
         }
         catch (DukeException e) {
             return e.emptyDesc();
         }
-        return "";
     }
 
     private String deleteTask(int index) {
         try {
-            if (index >= tasks.size()) {
+            if (index >= tasks.size() || index < 0) {
                 throw new DukeException(Error.LISTERROR);
             }
             Task t = tasks.get(index);
-            t.decrementTask();
             tasks.remove(index);
-            return "Got it. Task removed:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
+            FileSave.writetoFile(tasks);
+            return "Got it. Task removed:\n  " + t + "\n" + t.printNoOfTasks(tasks.size()) + "\n";
         }
         catch (DukeException e) {
             return printList() + e.listError();
@@ -136,8 +178,7 @@ public class Duke {
     }
 
     private String printTask(Task t) {
-        t.incrementTask();
-        return "Got it. Task added:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
+        return "Got it. Task added:\n  " + t + "\n" + t.printNoOfTasks(tasks.size()) + "\n";
     }
 
     private boolean Response(String input){

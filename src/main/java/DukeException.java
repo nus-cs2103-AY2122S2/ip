@@ -18,4 +18,5 @@ public class DukeException extends Exception{
     public String listError() {
         return "Index does not exists in array.\n";
     }
+    
 }

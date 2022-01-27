@@ -1,7 +1,14 @@
 public class Todo extends Task{
+    protected boolean status;
 
-    public Todo(String description) {
+    public Todo(boolean status, String description) {
         super(description);
+        super.isDone = status;
+    }
+
+    @Override
+    public String appendtoFile() {
+        return "T|" + (super.isDone ? "1" : "0") + "|" + super.description + "\n";
     }
 
     @Override
