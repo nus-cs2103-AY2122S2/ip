@@ -4,10 +4,12 @@
  */
 public class Event extends Task {
     private final String at;
+    private DateTime timings;
 
     public Event(String e, String at) {
         super(e);
-        this.at = at;
+        timings = new DateTime(at);
+        this.at = timings.getString();
     }
 
     @Override
