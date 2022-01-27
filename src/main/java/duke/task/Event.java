@@ -3,10 +3,6 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Task type: Event
- */
-
 public class Event extends Task {
     public LocalDate date;
     public String stringTime;
