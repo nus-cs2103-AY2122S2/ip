@@ -7,6 +7,7 @@ import connor.command.ClearCommand;
 import connor.command.Command;
 import connor.command.CommandType;
 import connor.command.DeleteCommand;
+import connor.command.FindCommand;
 import connor.command.ListCommand;
 import connor.task.TaskStatus;
 import connor.task.TaskType;
@@ -104,7 +105,7 @@ public class Parser {
             break;
         }
         case "find": {
-            this.ct = CommandType.FIND;
+            this.commandType = CommandType.FIND;
             this.command = new FindCommand(desc);
             break;
         }
