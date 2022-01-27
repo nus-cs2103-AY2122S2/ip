@@ -2,7 +2,6 @@ package duke;
 
 import duke.task.Task;
 import duke.task.TaskList;
-
 import java.util.List;
 
 public class Ui {
@@ -12,7 +11,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println(LINES);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm duke.duke.Duke\nWhat can I do for you?");
         System.out.println(LINES);
     }
 
