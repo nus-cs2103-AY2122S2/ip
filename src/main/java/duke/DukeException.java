@@ -5,7 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class DukeException extends Exception{
+/**
+ * The DukeException class identifies and throws Exceptions unique to Duke.
+ */
+public class DukeException extends Exception {
     String[] validInputs = new String[] {"deadline", "todo", "event", };
     List<String> inputList = new ArrayList<>(Arrays.asList(validInputs));
     String[] validInputs2 = new String[] {"mark", "unmark", "delete"};
@@ -19,32 +22,38 @@ public class DukeException extends Exception{
 
     public DukeException() {}
 
-    public void invalidChecker (String[] tempList, int tasks) throws DukeException {
-        switch (tempList[0]) {
+    /**
+     * The method invalidChecker checks for any invalid input the user might have entered and throws an exception
+     * indicating the error.
+     * @param input contains information entered by the user.
+     * @param tasks indicates the current number of tasks that is being tracked.
+     */
+    public void invalidChecker (String[] input, int tasks) throws DukeException {
+        switch (input[0]) {
             case "bye":
             case "list":
                 break;
             case "mark":
             case "unmark":
             case "delete":
-                if (tempList.length == 1) {
+                if (input.length == 1) {
                     throw new DukeException("☹ OOPS!!! Please enter a task number.");
                 }
-                int taskNum = Integer.parseInt(tempList[1]);
+                int taskNum = Integer.parseInt(input[1]);
                 if (!(taskNum <= tasks && taskNum > 0)) {
                     throw new DukeException("☹ OOPS!!! Task number does not exist.");
                 }
                 break;
             case "todo":
-                if (tempList.length == 1) {
+                if (input.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 }
                 break;
             case "deadline":
-                if (tempList.length == 1) {
+                if (input.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 } else {
-                    String[] dateTime  = tempList[1].split("/by ", 2);
+                    String[] dateTime  = input[1].split("/by ", 2);
                     if (dateTime[0].equals("")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
                     } else if (dateTime.length == 1) {
@@ -54,10 +63,10 @@ public class DukeException extends Exception{
                 }
                 break;
             case "event":
-                if (tempList.length == 1) {
+                if (input.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 } else {
-                    String[] dateTime  = tempList[1].split("/at ", 2);
+                    String[] dateTime  = input[1].split("/at ", 2);
                     if (dateTime[0].equals("")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
                     } else if (dateTime.length == 1) {
@@ -71,7 +80,11 @@ public class DukeException extends Exception{
         }
     }
 
-    public void isValidDate(String dateTime) throws DukeException {
+    /**
+     * The method isValidDate checks if the user has entered a invalid format for the date and time.
+     * @param dateTime contains the date and time entered by the user.
+     */
+    private void isValidDate(String dateTime) throws DukeException {
         LocalDateTime d1 = LocalDateTime.now();
         try {
             LocalDateTime d2 = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"));

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Storage class methods to save and retrieve information from the task list.
+ */
 public class Storage {
     String filepath;
 
@@ -19,7 +22,10 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public void CreateFile() {
+    /**
+     * The CreateFile method creates a new txt file to track the list of task if the file has not been created.
+     */
+    private void CreateFile() {
         try {
             File myObj = new File(this.filepath);
             if (myObj.createNewFile()) {
@@ -30,6 +36,10 @@ public class Storage {
         }
     }
 
+    /**
+     * The savTasks method saves the list of tasks that are currently being tracked into a txt file.
+     * @param list contains the Tasks that are currently being tracked.
+     */
     public void saveTasks(List<Task> list) {
         try {
             FileWriter myWriter = new FileWriter(this.filepath);
@@ -49,6 +59,10 @@ public class Storage {
         }
     }
 
+    /**
+     * The loadTasks method retrieves the list of tasks that were being tracked previously by the application.
+     * @return returns the list of task that were being tracked previously.
+     */
     public List<String> loadTasks() throws DukeException {
         List<String> list = new ArrayList<>();
         try {

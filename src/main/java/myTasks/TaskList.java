@@ -3,6 +3,9 @@ package myTasks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TaskList keep tracks of the list of tasks, creates and mark tasks.
+ */
 public class TaskList {
     public List<Task> list= new ArrayList<>();
 

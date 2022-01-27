@@ -3,6 +3,9 @@ package myTasks;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * * Creates a task that will begin at a certain time.
+ */
 public class Event extends Task {
     public String dateTime;
 

@@ -3,6 +3,9 @@ package myTasks;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates a task that must be completed before a certain time.
+ */
 public class Deadline extends Task {
     public String dateTime;
 
