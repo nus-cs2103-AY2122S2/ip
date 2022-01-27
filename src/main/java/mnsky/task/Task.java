@@ -6,31 +6,31 @@ public class Task {
 
     /**
      * Constructor for the Task object.
-     * @param name The name for the task.
+     * @param taskName The name for the task.
      */
-    public Task(String name) {
-        this.taskName = name;
-        this.done = false;
+    public Task(String taskName) {
+        this.taskName = taskName;
+        done = false;
     }
 
     /**
      * Marks the task as done.
      */
     public void mark() {
-        this.done = true;
+        done = true;
     }
 
     /**
      * Unmarks the task so it's not yet done.
      */
     public void unmark() {
-        this.done = false;
+        done = false;
     }
 
-    public String getName() {return this.taskName;}
+    public String getName() {return taskName;}
 
     public String getGenericTaskName() {
-        return String.format("[%s] %s", this.done ? "X" : "?", this.taskName);
+        return String.format("[%s] %s", done ? "X" : "?", taskName);
     }
 
     /**
@@ -39,10 +39,10 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[T]" + this.getGenericTaskName();
+        return "[T]" + getGenericTaskName();
     }
 
-    public String getSaveData() {
-        return this.toString();
+    public String getStorageData() {
+        return toString();
     }
 }

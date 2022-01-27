@@ -1,11 +1,11 @@
 package mnsky;
 
-import mnsky.exceptions.MnskyException;
-import mnsky.exceptions.MnskyMissingParameterException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.exceptions.MnskyMissingParameterException;
 
 public class Parser {
     /**
@@ -102,7 +102,7 @@ public class Parser {
      */
     public static ArrayList<ArrayList<String>> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
         try {
-            ArrayList<ArrayList<String>> taskList = new ArrayList<>();
+            ArrayList<ArrayList<String>> tasks = new ArrayList<>();
 
             for (String line : rawTaskList) {
                 String[] lineSplit = line.split(" ");
@@ -121,11 +121,11 @@ public class Parser {
                         nextTask.add("");
                     }
                     nextTask.add(line.substring(4, 5));
-                    taskList.add(nextTask);
+                    tasks.add(nextTask);
                 }
             }
 
-            return taskList;
+            return tasks;
         } catch (MnskyException e) {
             throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }

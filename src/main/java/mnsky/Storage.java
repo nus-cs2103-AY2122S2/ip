@@ -1,8 +1,5 @@
 package mnsky;
 
-import mnsky.exceptions.MnskyException;
-import mnsky.task.Task;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +8,9 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.task.Task;
 
 public class Storage {
     private String dataFilePath;
@@ -35,18 +35,18 @@ public class Storage {
 
         // If directory for data file doesn't exist, try to create it first
         try {
-            fileWriter = new FileWriter(this.dataFilePath);
+            fileWriter = new FileWriter(dataFilePath);
         } catch (IOException e) {
-            this.createDataFolder();
+            createDataFolder();
         }
 
         try {
-            fileWriter = new FileWriter(this.dataFilePath);
+            fileWriter = new FileWriter(dataFilePath);
             BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
-            ArrayList<Task> list = taskList.getTaskList();
+            ArrayList<String> storageDatas = taskList.getStorageDatas();
 
-            for (int i = 0; i < list.size(); i++) {
-                bufferedWriter.write(list.get(i).getSaveData());
+            for (String storageData : storageDatas) {
+                bufferedWriter.write(storageData);
                 bufferedWriter.newLine();
             }
 
@@ -64,14 +64,14 @@ public class Storage {
      */
     public ArrayList<String> readFromDataFile() throws MnskyException {
         try {
-            Scanner fileScanner = new Scanner(new File(this.dataFilePath));
-            ArrayList<String> taskList = new ArrayList<>();
+            Scanner fileScanner = new Scanner(new File(dataFilePath));
+            ArrayList<String> tasks = new ArrayList<>();
 
             while (fileScanner.hasNext()) {
-                taskList.add(fileScanner.nextLine());
+                tasks.add(fileScanner.nextLine());
             }
 
-            return taskList;
+            return tasks;
         } catch (FileNotFoundException e) {
             throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }

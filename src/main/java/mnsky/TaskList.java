@@ -1,16 +1,18 @@
 package mnsky;
 
-import mnsky.exceptions.MnskyException;
-import mnsky.exceptions.MnskyInvalidParameterException;
-import mnsky.task.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import mnsky.exceptions.MnskyException;
+import mnsky.exceptions.MnskyInvalidParameterException;
+import mnsky.task.Deadline;
+import mnsky.task.Event;
+import mnsky.task.Task;
+
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for the TaskList object. Retrieves the storage data if there are no issues with it.
@@ -18,13 +20,13 @@ public class TaskList {
      * @param storage The storage object, to be used for retrieving the storage data.
      */
     public TaskList(Ui ui, Storage storage) {
-        this.list = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         try {
-            this.getStorageData(storage);
+            getStorageData(storage);
         } catch (MnskyException e) {
             ui.printException(e);
-            this.list = new ArrayList<>();
+            tasks = new ArrayList<>();
         }
     }
 
@@ -35,7 +37,7 @@ public class TaskList {
      */
     public Task addTask(String name) {
         Task task = new Task(name);
-        this.list.add(task);
+        tasks.add(task);
         return task;
     }
 
@@ -51,16 +53,16 @@ public class TaskList {
 
         // Check to see if there are any dates or times in the first two words after the /by command
         if (atSplit.length >= 1) {
-            atDate = this.parseDate(atSplit[0]);
+            atDate = parseDate(atSplit[0]);
             if (atDate != null && atSplit.length >= 2) {
-                atTime = this.parseTime(atSplit[1]);
+                atTime = parseTime(atSplit[1]);
             } else {
-                atTime = this.parseTime(atSplit[0]);
+                atTime = parseTime(atSplit[0]);
             }
         }
 
         Event event = new Event(name, at, atDate, atTime);
-        this.list.add(event);
+        tasks.add(event);
         return event;
     }
 
@@ -76,16 +78,16 @@ public class TaskList {
 
         // Check to see if there are any dates or times in the first two words after the /by command
         if (bySplit.length >= 1) {
-            byDate = this.parseDate(bySplit[0]);
+            byDate = parseDate(bySplit[0]);
             if (byDate != null && bySplit.length >= 2) {
-                byTime = this.parseTime(bySplit[1]);
+                byTime = parseTime(bySplit[1]);
             } else {
-                byTime = this.parseTime(bySplit[0]);
+                byTime = parseTime(bySplit[0]);
             }
         }
 
         Deadline deadline = new Deadline(name, by, byDate, byTime);
-        this.list.add(deadline);
+        tasks.add(deadline);
         return deadline;
     }
 
@@ -102,7 +104,7 @@ public class TaskList {
         }
 
         int index = Integer.parseInt(stringIndex) - 1;
-        if (index < 0 || index >= this.list.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new MnskyInvalidParameterException(command, "index");
         }
 
@@ -116,9 +118,9 @@ public class TaskList {
      * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
      */
     public Task mark(String stringIndex) throws MnskyInvalidParameterException {
-        int index = this.stringToIndex("mark", stringIndex);
-        this.list.get(index).mark();
-        return this.list.get(index);
+        int index = stringToIndex("mark", stringIndex);
+        tasks.get(index).mark();
+        return tasks.get(index);
     }
 
     /**
@@ -128,9 +130,9 @@ public class TaskList {
      * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
      */
     public Task unmark(String stringIndex) throws MnskyInvalidParameterException {
-        int index = this.stringToIndex("unmark", stringIndex);
-        this.list.get(index).unmark();
-        return this.list.get(index);
+        int index = stringToIndex("unmark", stringIndex);
+        tasks.get(index).unmark();
+        return tasks.get(index);
     }
 
     /**
@@ -140,9 +142,9 @@ public class TaskList {
      * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
      */
     public Task delete(String stringIndex) throws MnskyInvalidParameterException  {
-        int index = this.stringToIndex("delete", stringIndex);
-        Task deletedTask = this.list.get(index);
-        this.list.remove(index);
+        int index = stringToIndex("delete", stringIndex);
+        Task deletedTask = tasks.get(index);
+        tasks.remove(index);
         return deletedTask;
     }
 
@@ -183,15 +185,15 @@ public class TaskList {
             Task actualTask;
             switch (task.get(0)) {
                 case "task":
-                    actualTask = this.addTask(task.get(1));
+                    actualTask = addTask(task.get(1));
                     break;
 
                 case "event":
-                    actualTask = this.addEvent(task.get(1), task.get(2));
+                    actualTask = addEvent(task.get(1), task.get(2));
                     break;
 
                 case "deadline":
-                    actualTask = this.addDeadline(task.get(1), task.get(2));
+                    actualTask = addDeadline(task.get(1), task.get(2));
                     break;
 
                 default:
@@ -207,11 +209,15 @@ public class TaskList {
     }
 
     /**
-     * Gets the task list itself.
-     * @return The task list.
+     * Gets a list of the storage data of all the tasks in the task list.
+     * @return The list of storage data of all the tasks.
      */
-    public ArrayList<Task> getTaskList() {
-        return this.list;
+    public ArrayList<String> getStorageDatas() {
+        ArrayList<String> storageDatas = new ArrayList<>();
+        for (Task task : tasks) {
+            storageDatas.add(task.getStorageData());
+        }
+        return storageDatas;
     }
 
     /**
@@ -220,12 +226,12 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        if (this.list.size() == 0) {
+        if (tasks.size() == 0) {
             return "[MNSKY presents an empty task list.]";
         } else {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < this.list.size(); i++) {
-                sb.append(String.format("%d. %s\n", i + 1, this.list.get(i)));
+            for (int i = 0; i < tasks.size(); i++) {
+                sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
             }
             return sb.toString();
         }
