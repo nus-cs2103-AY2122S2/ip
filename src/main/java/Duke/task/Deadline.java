@@ -76,19 +76,25 @@ public class Deadline extends Task {
 	 *
 	 * @return Name of Task.
 	 */
+	@Override
 	public String getName() {
 		return this.NAME;
 	}
 
 	/**
-	 * Returns the deadline.
+	 * Returns the converted deadline of the Task.
 	 *
-	 * @return Deadline of Task.
+	 * @return Converted deadline of Task.
 	 */
 	public String getDate() {
 		return this.CONVERTED_DATE_STR;
 	}
 
+	/**
+	 * Returns the deadline of the Task as provided in constructor.
+	 *
+	 * @return Deadline of Task.
+	 */
 	public String getUnconvertedDate() {
 		return this.INITIAL_DATE_STR;
 	}

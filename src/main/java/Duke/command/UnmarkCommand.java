@@ -4,13 +4,28 @@ import Duke.Save;
 import Duke.TaskList;
 import Duke.Ui;
 
+/**
+ * This UnmarkCommand class will mark a task as undone when executed.
+ */
 public class UnmarkCommand extends Command {
 	int taskNum;
 
+	/**
+	 * Constructor for UnmarkCommand with a given task number to be marked as undone in the list.
+	 *
+	 * @param taskNum 0-based index task number to be marked.
+	 */
 	public UnmarkCommand(int taskNum) {
 		this.taskNum = taskNum;
 	}
 
+	/**
+	 * Executes command by marking task as undone.
+	 *
+	 * @param tasks TaskList of tasks.
+	 * @param ui    Ui provided.
+	 * @param save  Saved history.
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		try {

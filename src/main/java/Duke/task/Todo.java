@@ -21,7 +21,7 @@ public class Todo extends Task {
 	/**
 	 * Returns the String representation of this Task.
 	 *
-	 * @return
+	 * @return String representation of this Task.
 	 */
 	@Override
 	public String toString() {
@@ -43,6 +43,7 @@ public class Todo extends Task {
 	 *
 	 * @return Name of Task.
 	 */
+	@Override
 	public String getName() {
 		return this.NAME;
 	}

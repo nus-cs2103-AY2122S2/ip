@@ -3,17 +3,26 @@ package Duke;
 import Duke.command.ByeCommand;
 import Duke.command.Command;
 
+/**
+ * Represents a chatbot named Duke.
+ */
 public class Duke {
 	public TaskList taskList;
 	public Save save;
 	public Ui ui;
 
+	/**
+	 * Constructor for Duke chatbot which initialises with a saved history Save, list of tasks TaskList, system UI Ui.
+	 */
 	public Duke() {
 		this.save = new Save();
 		this.taskList = new TaskList(save.savedTasks());
 		this.ui = new Ui();
 	}
 
+	/**
+	 * Runs the Duke chatbot.
+	 */
 	public void run() {
 		this.ui.welcome();
 		boolean isRunning = true;

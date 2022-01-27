@@ -14,7 +14,16 @@ import Duke.task.Todo;
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 
+/**
+ * Utility class to parse inputs that are retrieved from user.
+ */
 public class Parser {
+	/**
+	 * Parses the String input and returns the appropriate command.
+	 *
+	 * @param input String input from user.
+	 * @return Appropriate Command.
+	 */
 	public static Command parse(String input) {
 		String[] tokens = input.split(" ");
 		String commandStr = tokens[0];
