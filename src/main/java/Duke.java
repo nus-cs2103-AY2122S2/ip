@@ -32,6 +32,8 @@ public class Duke {
                     control.writeTasksToFile();
                     control.bye();
                     break;
+                } else if (firstWord.equals("save")) {
+                    control.save();
                 } else if (firstWord.equals("list")) {
                     control.list();
                 } else if (commandArr.length < 2) {
@@ -44,8 +46,6 @@ public class Duke {
                     control.deadline(command);
                 } else if (firstWord.equals("event")) {
                     control.event(command);
-                } else if (firstWord.equals("save")) {
-                    control.save();
                 } else { //firstWord.equals("delete")
                     control.delete(command);
                 }

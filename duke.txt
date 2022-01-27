@@ -1,3 +1,1 @@
 1: [T][ ] something
-2: [D][ ] something  (by: something)
-3: [E][ ] something  (at: something)
