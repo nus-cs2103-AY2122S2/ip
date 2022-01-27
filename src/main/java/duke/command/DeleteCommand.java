@@ -5,8 +5,6 @@ import duke.Storage;
 import duke.List;
 import duke.task.Task;
 import duke.exception.DukeException;
-
-
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

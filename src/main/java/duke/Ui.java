@@ -66,4 +66,14 @@ public class Ui {
         System.out.println(taskList);
     }
 
+    public void printFindTask(List taskList) {
+        String str = "";
+        int i = 1;
+        for (Task t : taskList.getArrayList()) {
+            str += i + ". " + t.toString() + "\n";
+            i++;
+        }
+        System.out.println("Here are the matching tasks in your list:\n"
+                            + str);
+    }
 }

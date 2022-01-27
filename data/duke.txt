@@ -1,4 +1,6 @@
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Mar 23 2022 6:00 PM)
-3. [E][ ] watch movie (at: Sun 2-4pm)
+2. [T][ ] borrow shirt
+3. [E][ ] project (at: Sun 4pm)
+4. [D][ ] project (by: Mar 23 2023 6:00 PM)
+

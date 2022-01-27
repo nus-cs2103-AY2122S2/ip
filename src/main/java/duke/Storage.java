@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -59,7 +60,7 @@ public class Storage {
                     int indexOfOpenBracket = line.indexOf('(');
                     int indexOfCloseBracket = line.indexOf(')');
                     String description = line.substring(10, indexOfOpenBracket - 1);
-                    String time = line.substring(indexOfOpenBracket + 1, indexOfCloseBracket - 1);
+                    String time = line.substring(indexOfOpenBracket + 4, indexOfCloseBracket);
                     Event event = new Event(description, time);
                     arrayList.add(event);
                 }
@@ -67,8 +68,9 @@ public class Storage {
                     int indexOfOpenBracket = line.indexOf('(');
                     int indexOfCloseBracket = line.indexOf(')');
                     String description = line.substring(10, indexOfOpenBracket - 1);
-                    String time = line.substring(indexOfOpenBracket + 1, indexOfCloseBracket - 1);
-                    LocalDateTime dateTime = LocalDateTime.parse(time);
+                    String time = line.substring(indexOfOpenBracket + 4, indexOfCloseBracket);
+                    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(" MMM dd yyyy h:mm a");
+                    LocalDateTime dateTime = LocalDateTime.parse(time, outputFormat);
                     Deadline deadline = new Deadline(description, dateTime);
                     arrayList.add(deadline);
                 }

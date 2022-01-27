@@ -10,13 +10,13 @@ public class Parser {
 
     private static void checkIfUserInputValid(String userInput) throws DukeException {
         String str = userInput.trim();
-        if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
+        if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("find")) {
             throw new DukeException(("OOPS!!! The description of a " + str + " cannot be empty."));
         }
 
         if (!(userInput.startsWith("list") || userInput.startsWith("mark") || userInput.startsWith("unmark")
             || userInput.startsWith("delete") || userInput.startsWith("todo") || userInput.startsWith("event")
-            || userInput.startsWith("deadline") || userInput.equals("bye"))) {
+            || userInput.startsWith("deadline") || userInput.equals("bye")|| userInput.startsWith("find"))) {
             throw new DukeException("\"OOPS!!! I'm sorry, but I don't know what that means :-(\"");
         }
     }
@@ -66,6 +66,10 @@ public class Parser {
             }
         else if (userInput.startsWith("bye")) {
             return new ByeCommand();
+        }
+        else if (userInput.startsWith("find")) {
+            String description = userInput.substring(5);
+            return new FindCommand(description);
         }
         else {
             return new ListCommand();

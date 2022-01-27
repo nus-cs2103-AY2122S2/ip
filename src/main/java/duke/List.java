@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.exception.ListException;
 import duke.task.*;
 import java.time.LocalDateTime;
@@ -86,6 +87,17 @@ public class List {
 
     public Task getLast() {
         return arrayList.get(arrayList.size() - 1);
+    }
+
+    public List findTask(String findDescription) {
+        ArrayList<Task> findTaskList = new ArrayList<>();
+        for (Task task : arrayList) {
+            String description = task.getDescription();
+            if (description.contains(findDescription)) {
+                findTaskList.add(task);
+            }
+        }
+        return new List(findTaskList);
     }
 
     /**
