@@ -1,8 +1,8 @@
 package duke.task;
 
-
 import duke.parser.DateTimeParser;
 import java.time.LocalDate;
+
 public class Deadline extends Task {
     protected String type;
     protected LocalDate time;
