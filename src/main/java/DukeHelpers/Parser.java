@@ -41,6 +41,8 @@ public class Parser {
                 missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
                 missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
                 break;
+            case FIND:
+                res = res = Pattern.matches("find .+", s);
         }
         if (missingDesc) { throw new EmptyDescriptionException(command.toString()); }
         if (missingTime) { throw new EmptyTimeException(command.toString()); }
@@ -64,6 +66,8 @@ public class Parser {
                 TaskList.onDeadline(ans, input);
             } else if (isCommand(input, Command.EVENT)) {
                 TaskList.onEvent(ans, input);
+            } else if (isCommand(input, Command.FIND)) {
+                TaskList.getMatchedTasks(input);
             } else {
                 throw new InvalidCommandException();
             }

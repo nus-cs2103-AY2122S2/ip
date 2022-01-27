@@ -34,6 +34,10 @@ public class Task  {
         this.isDone = false;
     }
 
+    public boolean matchDescription(String s) {
+        return this.description.contains(s);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

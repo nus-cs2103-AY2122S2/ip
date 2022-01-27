@@ -110,12 +110,9 @@ public class TaskList {
         System.out.println(ans);
     }
 
-
-
     public static Task getTask(int index) {
         return arr.get(index);
     }
-
 
     public static int len() {
         return arr.size();
@@ -125,6 +122,23 @@ public class TaskList {
         return len() == 1
                 ? "1 task"
                 : len() + " tasks";
+    }
+
+    public static void getMatchedTasks(String input) {
+        boolean isMatched = false;
+        String keyword = input.substring(5);
+        String ans = "\tHere are the matching tasks in your list:";
+        for (int i = 0; i < len(); i++) {
+            Task t = arr.get(i);
+            if(t.matchDescription(keyword)) {
+                ans += String.format("\n\t%d.%s", i + 1, t.toString());
+                isMatched = true;
+            } else {
+                continue;
+            }
+        }
+        ans = (isMatched) ? ans : "There are no matching tasks in your list!";
+        System.out.println(ans);
     }
 
 }
