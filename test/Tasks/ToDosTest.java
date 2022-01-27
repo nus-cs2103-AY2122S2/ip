@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for ToDos.
+ */
 class ToDosTest {
 
+    /**
+     * Test method for cacheString in ToDos class.
+     */
     @Test
     void testCacheString() {
         ToDos t1 = new ToDos("hello", true);
@@ -24,6 +30,9 @@ class ToDosTest {
         assertEquals("T|1|home work", t4.cacheString());
     }
 
+    /**
+     * Test method for toString in ToDos class.
+     */
     @Test
     void testToString() {
         //testcase 1

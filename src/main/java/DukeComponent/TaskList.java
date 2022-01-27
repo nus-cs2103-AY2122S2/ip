@@ -3,27 +3,53 @@ package DukeComponent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import Tasks.*;
+import Tasks.Tasks;
 
-public class TaskList implements Iterable<Task> {
-    private final ArrayList<Task> ls;
+/**
+ * A class that belongs to DukeComponent Package.
+ * This class encapsulates the logic of Task List in Duke.
+ */
+public class TaskList implements Iterable<Tasks> {
+    private final ArrayList<Tasks> ls;
 
-    public TaskList(ArrayList<Task> ls) {
+    /**
+     * Constructor for TaskList.
+     * @param ls Arraylist that contains the Tasks in Duke.
+     */
+    public TaskList(ArrayList<Tasks> ls) {
         this.ls = ls;
     }
 
-    public Task get(int i) {
+    /**
+     * Getter method for TaskList.
+     * @param i 0-based index for users to get the task from the TaskList.
+     * @return Task from the TaskList.
+     */
+    public Tasks get(int i) {
         return ls.get(i);
     }
 
-    public void add(Task t) {
+    /**
+     * Adds the Task into the TaskList.
+     * @param t Task that is added to the TaskList.
+     */
+    public void add(Tasks t) {
         ls.add(t);
     }
 
-    public Task remove(int i) {
+    /**
+     * Removes the Task at index i from the TaskList
+     * @param i 0-based index indicating position of Task in the TaskList.
+     * @return Task that is removed.
+     */
+    public Tasks remove(int i) {
         return ls.remove(i);
     }
 
+    /**
+     * Size of TaskList.
+     * @return Integer representing size of TaskList.
+     */
     public int size() {
         return ls.size();
     }
@@ -34,7 +60,7 @@ public class TaskList implements Iterable<Task> {
      */
     public void find(String description) {
         int count = 1;
-        for (Task t : ls) {
+        for (Tasks t : ls) {
             if (t.getTask().contains(description)) {
                 System.out.println(count + "." + t);
                 count++;
@@ -42,8 +68,12 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Iterator method to allow for-each loop of TaskList.
+     * @return An iterator for Tasks.
+     */
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<Tasks> iterator() {
         return new Iterator<>() {
             private int currentIndex = 0;
             private final int currentSize = ls.size();
@@ -54,7 +84,7 @@ public class TaskList implements Iterable<Task> {
             }
 
             @Override
-            public Task next() {
+            public Tasks next() {
                 return ls.get(currentIndex++);
             }
 
