@@ -6,19 +6,24 @@ public class Event extends Task {
         this.timeRange = timeRange;
     }
 
+    public Event(String taskName, String timeRange, boolean isDone) {
+        super(taskName, "E", isDone);
+        this.timeRange = timeRange;
+    }
+
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
-            this.done = true;
+            this.isDone = true;
             return  " Nice! I've marked this task as done:" + "\n" + "  " +
                     "     [" + this.taskType + "]" + //[T]
-                    "[" + (done ? "X" : " ") + "] " + // [X]
+                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
                     this.taskName;
         } else {
-            this.done = false;
+            this.isDone = false;
             return "OK, I've marked this task as not done yet:" + "\n" + "  " +
                     "     [" + this.taskType + "]" + //[T]
-                    "[" + (done ? "X" : " ") + "] " + // [X]
+                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
                     this.taskName;
         }
     }
@@ -26,9 +31,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + this.taskType + "]" +
-                "[" + (done ? "X" : " ") + "] " +
+                "[" + (isDone ? "X" : " ") + "] " +
                 this.taskName +
-                "(at: " + this.timeRange + ")" +
+                " (at: " + this.timeRange + ")" +
                 "\n";
     }
 }

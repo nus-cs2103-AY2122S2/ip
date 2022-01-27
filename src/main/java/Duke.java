@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     static String indent = "    ";
@@ -15,6 +16,8 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         taskList = new ArrayList<>(); // arraylist to hold inputs
+
+        loadTaskListFromDb();
 
         dukeOutput(" Hello! I'm YourBoss.\n" +
                 indent +
@@ -146,7 +149,7 @@ public class Duke {
     static void appendTaskToDB(Task task) {
         try {
             FileWriter fw = new FileWriter(DB, true);
-            String stringToAppend = task.taskType + "|" + task.done + "|" + task.taskName;
+            String stringToAppend = task.taskType + "|" + task.isDone + "|" + task.taskName;
             switch (task.taskType) {
                 case "E":
                     // typecasting because only an event would have taskType "E"
@@ -188,6 +191,38 @@ public class Duke {
             }
         } catch (IOException e) {
             dukeOutput("An Error has occured with file creation!");
+        }
+    }
+
+    static void loadTaskListFromDb() {
+        // get taskList from hard disk aka DB
+        try {
+            File dbObj = new File(DB);
+            System.out.println(dbObj.exists());
+            if (!dbObj.exists()) {
+                createDirAndFileIfNonExistent(DB);
+                return;
+            }
+            Scanner s = new Scanner(dbObj);
+            while (s.hasNext()) {
+                String currLine = s.nextLine();
+                System.out.println(currLine);
+                String[] currLineSplit = currLine.split("\\|");
+                String taskType = currLineSplit[0];
+                boolean isDone = currLineSplit[1].equals("true");
+                String taskName = currLineSplit[2];
+                System.out.println(taskType + " & " + isDone + " & " + taskName);
+
+                if (taskType.equals("E")) {
+                    taskList.add(new Event(taskName, currLineSplit[3], isDone));
+                } else if (taskType.equals("D")) {
+                    taskList.add(new Deadline(taskName, currLineSplit[3], isDone));
+                } else {
+                    taskList.add(new ToDo(taskName, isDone));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            dukeOutput("Error database not found!");
         }
     }
 }
