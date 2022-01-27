@@ -47,6 +47,9 @@ public class Parser {
         } else if (input.split(" ")[0].equals("delete")) {
             int pos = Integer.parseInt(input.split(" ")[1]);
             return new DeleteCommand(pos);
+        } else if (input.split(" ")[0].equals("find")) {
+            String keyword = input.split(" ", 2)[1];
+            return new FindCommand(keyword);
         } else {
             throw new DukeException("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
