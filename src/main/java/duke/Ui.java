@@ -34,7 +34,7 @@ public class Ui {
     /**
      * Prints any text together with the top and bottom borders.
      *
-     * @param text
+     * @param text Text to print
      */
     public void printContent(String text) {
         String spacing = "     ";
@@ -75,6 +75,7 @@ public class Ui {
      * @return String for how many tasks in the list
      */
     public String listSizeLine(List<Task> tasks) {
-        return "     Now you have " + tasks.size() + " task" + (tasks.size() != 1 ? "s" : "") + " in the list.";
+        return "     Now you have " + tasks.size() + " task"
+                + (tasks.size() != 1 ? "s" : "") + " in the list.";
     }
 }

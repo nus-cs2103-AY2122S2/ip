@@ -6,7 +6,7 @@ import java.time.LocalTime;
 /**
  * Tasks that are set with a deadline.
  */
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
     protected LocalDate taskDate;
     protected LocalTime taskTime;
 

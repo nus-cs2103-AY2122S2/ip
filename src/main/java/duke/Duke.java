@@ -24,7 +24,7 @@ public class Duke {
      * Driver function in order to start Duke.
      * Uses Scanner to parse commands.
      */
-    public static void run(){
+    public static void run() {
         UI.showWelcome();
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);
