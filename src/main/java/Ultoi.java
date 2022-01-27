@@ -26,10 +26,7 @@ public class Ultoi {
 
             try {
                 checkInput(cmd, logs);
-            } catch (UltoiException e) {
-                System.out.print(lineBreaker + indent + e.getMessage() + "\n" + lineBreaker);
-                continue;
-            }
+
 
             System.out.print(lineBreaker);
 
@@ -132,6 +129,11 @@ public class Ultoi {
             }
 
             System.out.print(lineBreaker);
+
+            } catch (UltoiException e) {
+                System.out.print(lineBreaker + indent + e.getMessage() + "\n" + lineBreaker);
+                continue;
+            }
         }
     }
 
