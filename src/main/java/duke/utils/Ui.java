@@ -12,12 +12,13 @@ public class Ui {
     private Scanner sc;
     private String lastCommand;
 
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
-    public static void printList(ArrayList<Task> tasks){
-        if(tasks.size() == 0) {
+    public static void printList(ArrayList<Task> tasks) {
+
+        if (tasks.size() == 0) {
             System.out.println("No Tasks Right Now");
         } else {
             for (int x = 0; x < tasks.size(); x++) {
@@ -26,28 +27,28 @@ public class Ui {
         }
     }
 
-    public static void printTaskAddition(Task curr, int size){
+    public static void printTaskAddition(Task curr, int size) {
         System.out.println("Got it! I've added this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + size + " tasks in the list");
     }
 
-    public static void printTaskDeletion(Task curr, int size){
+    public static void printTaskDeletion(Task curr, int size) {
         System.out.println("Got it! I've removed this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + size + " tasks in the list");
     }
 
-    public static void printHello(){
+    public static void printHello() {
         System.out.println("Hello! I'm Duke!");
         System.out.println("What can I do for you?");
     }
 
-    public static void printLine(){
+    public static void printLine() {
         System.out.println("-------------------");
     }
 
-    public static void printBye(){
+    public static void printBye() {
         System.out.println("Bye! Hope to see you again soon");
     }
 
@@ -61,7 +62,7 @@ public class Ui {
         return this.lastCommand.equals("bye");
     }
 
-    public static void printMarkCompletion(Task t){
+    public static void printMarkCompletion(Task t) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(t.toString());
     }

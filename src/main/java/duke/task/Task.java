@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.utils.Ui;
-
 import java.io.Serializable;
 
 
@@ -25,7 +24,7 @@ public abstract class Task implements Serializable {
      * @param x Description of the Task
      * @param y Completion Status of the Task
      */
-    public Task(String x, boolean y){
+    public Task(String x, boolean y) {
         this.description = x;
         this.isFinished = y;
     }
@@ -34,7 +33,7 @@ public abstract class Task implements Serializable {
      * Marks this instance of task
      * as completed
      */
-    public void markCompleted(){
+    public void markCompleted() {
         this.isFinished = true;
         Ui.printMarkCompletion(this);
     }
@@ -43,7 +42,7 @@ public abstract class Task implements Serializable {
      * Marks this instance of task
      * as not completed
      */
-    public void markNotCompleted(){
+    public void markNotCompleted() {
         this.isFinished = false;
         Ui.printMarkUncompletion(this);
     }
@@ -56,8 +55,8 @@ public abstract class Task implements Serializable {
      * task
      */
     @Override
-    public String toString(){
-        if(isFinished){
+    public String toString() {
+        if (isFinished) {
             String temp = "[X] " + description;
             return temp;
         } else {
@@ -72,7 +71,7 @@ public abstract class Task implements Serializable {
      *
      * @return Completion status of this task
      */
-    public boolean getCompletionStatus(){
+    public boolean getCompletionStatus() {
         return this.isFinished;
     }
 

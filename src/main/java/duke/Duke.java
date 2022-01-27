@@ -12,8 +12,7 @@ public class Duke {
     private Ui ui;
     private TaskList tl;
 
-
-    public Duke(){
+    public Duke() {
         this.ui = new Ui();
         tl = new TaskList(Storage.getSavedList());
     }
@@ -24,7 +23,6 @@ public class Duke {
         boolean isExit = false;
 
         while (!isExit) {
-
             Ui.printLine();
 
             try {

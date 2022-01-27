@@ -16,7 +16,7 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    public TaskList(ArrayList<Task> saved){
+    public TaskList(ArrayList<Task> saved) {
         this.tasks = saved;
     }
 
@@ -37,7 +37,6 @@ public class TaskList {
             this.tasks.add(curr);
             Ui.printTaskAddition(curr, getSize());
         } catch (DateTimeParseException e) {
-
             throw new DukeException.DukeNoTimeProvided();
         }
     }
@@ -55,7 +54,7 @@ public class TaskList {
 
 
     public void deleteTask(int toDelete) throws DukeException.DukeInvalidNumberException {
-        if(toDelete < 0 || toDelete > tasks.size()){
+        if (toDelete < 0 || toDelete > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         Task toBeRemoved = tasks.get(toDelete - 1);
@@ -63,29 +62,29 @@ public class TaskList {
         Ui.printTaskDeletion(toBeRemoved, getSize());
     }
 
-    public void saveListToStorage(){
+    public void saveListToStorage() {
         Storage.saveListToDisk(tasks);
     }
 
     public void markTaskAsCompleted(int toMark) throws DukeException.DukeInvalidNumberException {
-        if(toMark < 0 || toMark > tasks.size()) {
+        if (toMark < 0 || toMark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         tasks.get(toMark - 1).markCompleted();
     }
 
     public void markTaskAsUncomplete(int toUnmark) throws DukeException.DukeInvalidNumberException {
-        if(toUnmark < 0 || toUnmark > tasks.size()) {
+        if (toUnmark < 0 || toUnmark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         tasks.get(toUnmark - 1).markNotCompleted();
     }
 
-    public void printList(){
+    public void printList() {
         Ui.printList(tasks);
     }
 
-    public int getSize(){
+    public int getSize() {
         return tasks.size();
     }
 
