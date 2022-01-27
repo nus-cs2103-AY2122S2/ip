@@ -1,15 +1,23 @@
-import exceptions.DukeException;
 import user.Ui;
 
+/** The main Duke class, that allows the user to save tasks. */
 public class Duke {
 
     public Ui ui;
 
-    public Duke() throws DukeException {
+    /**
+     * Constructor for the Duke class.
+     */
+    public Duke() {
         ui = new Ui();
     }
 
-    public static void main(String[] args) throws DukeException {
+    /**
+     * The main function that starts Duke.
+     *
+     * @param args String inputs, but not used for Duke.
+     */
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.ui.greet();
         String userInput;

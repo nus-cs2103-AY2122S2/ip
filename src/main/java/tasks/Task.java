@@ -2,6 +2,7 @@ package tasks;
 
 import exceptions.DukeException;
 
+/** A class that functions as an abstraction of a task. */
 public abstract class Task {
 
     public static String unknownInputErrorString = "I don't think I know what this is!";
@@ -14,20 +15,39 @@ public abstract class Task {
         EVENT,
         DEADLINE
     }
+
     public boolean done = false;
 
+    /**
+     * Sets the Task as done or undone.
+     *
+     * @param newDone True if the task is to be set as done, false to be set as undone.
+     */
     public void setDone(boolean newDone) {
         this.done = newDone;
     }
 
+    /**
+     * Checks if the task is done or undone.
+     *
+     * @return True if the task is done, false otherwise.
+     */
     public boolean isDone() {
         return this.done;
     }
 
+    /** Method to be implemented by any Task: to be able to be represented by a string. */
     public abstract String exportToString();
 
+    /**
+     * Returns a task when given the string representation of it.
+     *
+     * @param exportedTask The string representation of a Task.
+     * @return A Task object.
+     * @throws DukeException If given task command was not formatted properly.
+     */
     public static Task importFromString(String exportedTask)
-            throws IllegalArgumentException, ArrayIndexOutOfBoundsException, DukeException {
+        throws DukeException {
         String[] details = exportedTask.split(" ");
         Task task = null;
         switch (TaskType.valueOf(details[0])) {
@@ -45,6 +65,5 @@ public abstract class Task {
                 break;
         }
         return task;
-
     }
 }

@@ -6,8 +6,17 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+/** A class that handles the parsing of a user's input. */
 public class Parser {
 
+    /**
+     * Returns the task number of a task to be marked as completed.
+     *
+     * @param command The user's input to mark the task as completed.
+     * @param numTasks The total number of tasks saved.
+     * @return The task number of the task.
+     * @throws DukeException If the task number provided is invalid.
+     */
     public int handleMarkTask(String command, int numTasks) throws DukeException {
         String taskString = command.substring(5);  // "mark " is 5 letters
         int taskToMark;
@@ -25,6 +34,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the task number of a task to be marked as not completed.
+     *
+     * @param command The user's input to mark the task as not completed.
+     * @param numTasks The total number of tasks saved.
+     * @return The task number of the task.
+     * @throws DukeException If the task number provided is invalid.
+     */
     public int handleUnmarkTask(String command, int numTasks) throws DukeException {
         String taskString = command.substring(7);  // "unmark " is 7 letters
         int taskToUnmark;
@@ -42,6 +59,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the task number of a task to be deleted.
+     *
+     * @param command The user's input to mark the task as deleted.
+     * @param numTasks The total number of tasks saved.
+     * @return The task number of the task.
+     * @throws DukeException If the task number provided is invalid.
+     */
     public int handleDeleteTask(String command, int numTasks) throws DukeException {
         String taskString = command.substring(7);  // "delete " is 7 letters
         int taskToDelete;
@@ -59,6 +84,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Todo task given the user's input to create a Todo task.
+     *
+     * @param taskString The user's input.
+     * @return The Todo task.
+     * @throws DukeException If the user's input is invalid.
+     */
     public Task handleTodo(String taskString) throws DukeException {
         if (taskString.length() <= 5) {
             throw new DukeException(Task.badDescriptionErrorString);
@@ -68,6 +100,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Deadline task given the user's input to create a Deadline task.
+     *
+     * @param taskString The user's input.
+     * @return The Deadline task.
+     * @throws DukeException If the user's input is invalid.
+     */
     public Task handleDeadline(String taskString) throws DukeException {
         if (taskString.length() <= 9) {
             throw new DukeException(Task.badDescriptionErrorString);
@@ -87,6 +126,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an Event task given the user's input to create an Event task.
+     *
+     * @param taskString The user's input.
+     * @return The Event task.
+     * @throws DukeException If the user's input is invalid.
+     */
     public Task handleEvent(String taskString) throws DukeException {
         if (taskString.length() <= 6) {
             throw new DukeException(Task.badDescriptionErrorString);
@@ -106,6 +152,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the right Task given the user's input to create a new Task.
+     *
+     * @param taskString The user's input.
+     * @return The right task.
+     * @throws DukeException If the user's input is invalid.
+     */
     public Task addTask(String taskString) throws DukeException {
         Task t;
         if (taskString.startsWith("todo ")) {

@@ -6,6 +6,7 @@ import tasks.Tasklist;
 
 import java.util.Scanner;
 
+/** A class that handles the interactions with the user. */
 public class Ui {
 
     public Scanner sc = new Scanner(System.in);
@@ -13,48 +14,73 @@ public class Ui {
 
     public static String indent = "    ";
     public static String separator = "--------------------------------------------";
+    public static String logo = indent + " ____        _        \n"
+            + indent + "|  _ \\ _   _| | _____ \n"
+            + indent + "| | | | | | | |/ / _ \\\n"
+            + indent + "| |_| | |_| |   <  __/\n"
+            + indent + "|____/ \\__,_|_|\\_\\___|\n";
     public String[] openingMessage = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
     public String closingMessage = "Bye. Hope to see you again soon!";
 
     public Parser parser;
 
+    /**
+     * Constructor method to create a new tasklist and parser.
+     */
     public Ui() {
         tasklist = new Tasklist();
         tasklist.loadTasks();
         parser = new Parser();
     }
 
-    public static void printIndent(String s) {
-        System.out.println(indent + s);
+    /**
+     * Prints a string with indentation before it.
+     *
+     * @param message The string to be printed with indentation before it.
+     */
+    public static void printIndent(String message) {
+        System.out.println(indent + message);
     }
 
-    public static void prettyPrint(String s) {
+    /**
+     * Prints a string with separators before and after it.
+     *
+     * @param message The string to be printed with separators before and after it.
+     */
+    public static void prettyPrint(String message) {
         printIndent(separator);
-        printIndent(s);
+        printIndent(message);
         printIndent(separator + "\n");
     }
-
+    /**
+     * Prints multiple string with separators before and after it.
+     *
+     * @param messages An array of strings string to be printed with separators before and after them.
+     */
     public static void prettyPrint(String[] messages) {
         printIndent(separator);
         for (String message : messages) printIndent(message);
         printIndent(separator + "\n");
     }
 
+    /**
+     * Greets the user with a Duke logo and a welcome message.
+     */
     public void greet() {
-        String logo = indent + " ____        _        \n"
-                + indent + "|  _ \\ _   _| | _____ \n"
-                + indent + "| | | | | | | |/ / _ \\\n"
-                + indent + "| |_| | |_| |   <  __/\n"
-                + indent + "|____/ \\__,_|_|\\_\\___|\n";
-
         System.out.println(logo);
         prettyPrint(openingMessage);
     }
 
+    /**
+     * Greets the user with a goodbye message.
+     */
     public void sayGoodbye() {
         prettyPrint(closingMessage);
     }
 
+    /**
+     * Displays the tasks saved to the user.
+     */
     public void displayTasks() {
         printIndent(separator);
         if (tasklist.getNumTasks() == 0) {
@@ -68,10 +94,20 @@ public class Ui {
         printIndent(separator + "\n");
     }
 
+    /**
+     * Reads user input.
+     *
+     * @return The user's input.
+     */
     public String getInput() {
         return sc.nextLine();
     }
 
+    /**
+     * Handles the user's input, and performs the corresponding action.
+     *
+     * @param userInput The user's input
+     */
     public void handle(String userInput) {
         try {
              if (userInput.equals("list")) {  // display tasks
