@@ -4,6 +4,7 @@ import duke.*;
 import duke.Storage;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
 
@@ -81,5 +82,24 @@ public class TaskList {
     public static Integer getTaskSize() {
         return tasks.size();
     }
+
+    /**
+     * Method that takes in a keyword and prints out the list of tasks that contains the keyword
+     * @param keyWord task keyword
+     */
+    public static void findTask(String keyWord) {
+        System.out.println("here");
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            String taskDescription = task.getDescription().toLowerCase(Locale.ROOT);
+            String keyWordDescription = keyWord.toLowerCase(Locale.ROOT);
+            if (taskDescription.matches("\\b" + keyWordDescription + "\\b")) {
+                matchingTasks.add(task);
+            }
+        }
+        System.out.println("This is what we found!");
+        listTasks(matchingTasks);
+    }
+
 
 }

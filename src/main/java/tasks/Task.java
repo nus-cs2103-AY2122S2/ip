@@ -23,6 +23,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Getter method to return the description of a task
+     * @return description of task
+     */
+    public String getDescription() { return this.description; }
+
     public String toFileFormat() {
         return "," + getStatusNumber() + "," + this.description;
     }
