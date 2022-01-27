@@ -1,5 +1,9 @@
 import core.IOManager;
 
+/** Main class for Dooke CLI Chatbot
+ * @author s7manth
+ * @version 0.1
+ */
 public class Dooke {
     public static void main(String[] args) {
         String logo =

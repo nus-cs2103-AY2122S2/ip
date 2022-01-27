@@ -1,5 +1,7 @@
 package core;
 
+/** Identifier class to determine the input type.
+ */
 public class InputIdentifier {
     private static final String LIST_COMMAND = "list";
     private static final String MARK_COMMAND = "mark";
@@ -9,6 +11,10 @@ public class InputIdentifier {
     private static final String TODO_COMMAND = "todo";
     private static final String DELETE_COMMAND = "delete";
 
+    /** Returns what the input type is given the string representation of the input command.
+     * @param inputData The string which represents the user input.
+     * @return The identified input type.
+     */
     public static InputType determineInputType(String inputData) {
         if (inputData.toLowerCase().startsWith(EVENT_COMMAND)) {
             return InputType.EVENT;
