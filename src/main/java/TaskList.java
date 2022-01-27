@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class TaskList {
     private final ArrayList<Task> itemList = new ArrayList<>(0);
     private Path absolutePath;
+    private Path folderPath;
     private String fileName;
     private File targetFile;
 
@@ -17,6 +18,7 @@ public class TaskList {
     public TaskList(String fileName) {
         String currentDir = System.getProperty("user.dir");
         Path currentPath = Path.of(currentDir + File.separator + "data");
+        this.folderPath = currentPath.toAbsolutePath();
         this.absolutePath = currentPath.toAbsolutePath();
         this.fileName = fileName;
     }
@@ -60,12 +62,14 @@ public class TaskList {
                     this.itemList.add(new DeadlineTask(deadlineTitle, deadlineDeadline, isMarked));
                     break;
                 }
-                //add task to list
             }
+            fileReader.close();
+            bufferedReader.close();
         } catch (Exception err) {
             System.out.println(err.getMessage() + " create reader");
         }
         this.targetFile = new File(this.absolutePath.toString());
+
     }
 
     public void addTodo(String taskKey) {
@@ -181,7 +185,8 @@ public class TaskList {
         String strIndex = tokens[1]; //error here
         int index = Integer.parseInt(strIndex);
         Task targetTask = this.itemList.get(index);
-        this.itemList.remove(index);
+        this.itemList.remove(index); //error if empty
+        deleteLineToFile(index); //error if empty
         System.out.println(
                 "----------------------------" +
                         "----------------------------\n" +
@@ -241,17 +246,51 @@ public class TaskList {
         return initList.toString();
     }
 
+    public void deleteLineToFile(int index) {
+        File inputFile = new File(this.absolutePath.toString());
+        File tempFile = new File(this.folderPath.resolve("temp.txt").toString());
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+            List<String> lines = Files.readAllLines(this.absolutePath, StandardCharsets.UTF_8);
+
+            String targetLine = lines.get(index);
+            String currentLine;
+
+            while((currentLine = reader.readLine()) != null) {
+                if(currentLine.equals(targetLine)) continue;
+                writer.write(currentLine);
+            }
+
+            reader.close();
+            writer.close();
+
+            if (!inputFile.delete()) {
+                System.out.println("cannot delete sia");
+            };
+
+            if (!tempFile.renameTo(inputFile)) {
+                System.out.println(inputFile.getAbsolutePath() + "cannot rename sia");
+            };
+
+            this.targetFile = tempFile;
+
+        } catch(Exception err) {
+            err.printStackTrace();
+        }
+    }
+
     public void updatesToFile(int index, String mark) {
         //use already written text in file to edit.
-        int lineSkip = index == 0 ? 0 : index - 1;
         String targetLine = "";
         try {
             List<String> lines = Files.readAllLines(this.absolutePath, StandardCharsets.UTF_8);
-            targetLine = lines.get(lineSkip);
+            targetLine = lines.get(index);
             List<String> tokens = Arrays.asList(targetLine.split(" / "));
             tokens.set(tokens.size() - 1, mark);
             targetLine = String.join(" / ", tokens);
-            lines.set(lineSkip, targetLine);
+            lines.set(index, targetLine);
             Files.write(this.absolutePath, lines, StandardCharsets.UTF_8);
         } catch (Exception err) {
 
@@ -270,25 +309,24 @@ public class TaskList {
             }
             switch(taskType) {
             case "T":
-                String todoTokens[] = taskKey.split(" ");
-                toWrite = String.join(" / ", todoTokens);
-                toWrite = toWrite + " / " + mark;
+                String[] todoTokens = taskKey.split("todo ");
+                toWrite = "todo / " + todoTokens[1] + " / " + mark;
                 bufferedWriter.append(newLine + toWrite);
                 break;
             case "E":
-                String eventTokens[] = taskKey.split(" /at ");
-                toWrite = String.join(" ", eventTokens);
-                String eSplit[] = toWrite.split(" ");
+                String eventTokens[] = taskKey.split("event ");
+                toWrite = eventTokens[1];
+                String eSplit[] = toWrite.split(" /at ");
                 toWrite = String.join(" / ", eSplit );
-                toWrite = toWrite + " / " + mark;
+                toWrite = "event / " + toWrite + " / " + mark;
                 bufferedWriter.append(newLine + toWrite);
                 break;
             case "D":
-                String deadlineTokens[] = taskKey.split(" /by ");
-                toWrite = String.join(" ", deadlineTokens);
-                String dSplit[] = toWrite.split(" ");
+                String deadlineTokens[] = taskKey.split("deadline ");
+                toWrite = deadlineTokens[1];
+                String dSplit[] = toWrite.split(" by/ ");
                 toWrite = String.join(" / ", dSplit );
-                toWrite = toWrite + " / " + mark;
+                toWrite = "deadline / " + toWrite + " / " + mark;
                 bufferedWriter.append(newLine + toWrite);
                 break;
             }
