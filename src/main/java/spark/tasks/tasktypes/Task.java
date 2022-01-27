@@ -5,7 +5,7 @@ import spark.exceptions.taskmodificationexceptions.TaskAlreadyUnMarked;
 
 public abstract class Task {
     protected String title;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Creates a new Task.
@@ -25,35 +25,39 @@ public abstract class Task {
      */
     protected Task(boolean isDone, String title) {
         this.title = title;
-        this.done = isDone;
+        this.isDone = isDone;
     }
 
+    /**
+     * Returns the title of the Task.
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
     public void mark() throws TaskAlreadyMarked {
-        if (this.done) {
+        if (this.isDone) {
             throw new TaskAlreadyMarked(this);
         }
 
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unMark() throws TaskAlreadyUnMarked {
-        if (!this.done) {
+        if (!this.isDone) {
             throw new TaskAlreadyUnMarked(this);
         }
 
-        this.done = false;
+        this.isDone = false;
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     private String getStatusIcon() {
-        return this.done ? "[X]" : "[]";
+        return this.isDone ? "[X]" : "[]";
     }
 
     public abstract String encodeTask();

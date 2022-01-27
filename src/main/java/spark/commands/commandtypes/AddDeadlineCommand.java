@@ -6,17 +6,20 @@ import spark.tasks.TaskList;
 import spark.Ui;
 
 public class AddDeadlineCommand extends Command {
-    private String[] tokens;
+    private String title;
+    private String by;
 
-    public AddDeadlineCommand(String[] tokens) {
-        this.tokens = tokens;
+    public AddDeadlineCommand(String title, String by) {
+        this.title = title;
+        this.by = by;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addDeadline(tokens);
+            tasks.addDeadline(title, by);
             storage.writeTasksFile(tasks.encodeTasks());
+            ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
         } catch (SparkException e) {
             ui.printException(e);
         }
@@ -25,5 +28,9 @@ public class AddDeadlineCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    private String getAddTaskSuccessMessage(TaskList tasks) {
+        return String.format("Okay! I've added this task:\n   %s", tasks.getLastAddedTask());
     }
 }

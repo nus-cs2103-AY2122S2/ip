@@ -1,6 +1,7 @@
 package spark;
 
 import spark.commands.commandtypes.Command;
+import spark.commands.commandtypes.ListCommand;
 import spark.exceptions.SparkException;
 import spark.exceptions.fileexceptions.FileException;
 import spark.exceptions.fileexceptions.TaskDecodingException;
@@ -25,7 +26,7 @@ public class Spark {
             this.taskList = new TaskList(storage.readTasksFile());
         } catch (FileException | TaskDecodingException e) {
             ui.printException(e);
-            ui.printMessage("Note that any changes will not be saved to your save-file.");
+            ui.printMessageWithDivider("Note that any changes will not be saved to your save-file.");
             this.taskList = new TaskList();
         }
     }
@@ -47,15 +48,20 @@ public class Spark {
     }
 
     public void run() {
+        new ListCommand().execute(taskList, ui, storage);
         ui.printWelcomeMessage();
 
         boolean isExit = false;
 
         while (!isExit) {
-            String userInput = ui.getInput();
-            Command command = Parser.parseInput(userInput);
-            command.execute(taskList, ui, storage);
-            isExit = command.isExit();
+            try {
+                String userInput = ui.getInput();
+                Command command = Parser.parseInput(userInput);
+                command.execute(taskList, ui, storage);
+                isExit = command.isExit();
+            } catch (SparkException e) {
+                ui.printException(e);
+            }
         }
     }
 

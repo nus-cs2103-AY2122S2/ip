@@ -8,7 +8,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage("Cool, see you around!");
+        ui.printMessageWithDivider("Cool, see you around!");
     }
 
     @Override

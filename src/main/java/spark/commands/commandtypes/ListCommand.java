@@ -7,7 +7,7 @@ import spark.Ui;
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.showTaskList();
+        ui.printMessage(tasks.getTaskList());
     }
 
     @Override

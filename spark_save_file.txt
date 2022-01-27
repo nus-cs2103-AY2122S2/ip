@@ -1,2 +1,3 @@
 T @@@ true @@@ buy milk
-T @@@ false @@@ go class
+T @@@ false @@@ buy stuff
+D @@@ false @@@  @@@ 2-22-2022 1800

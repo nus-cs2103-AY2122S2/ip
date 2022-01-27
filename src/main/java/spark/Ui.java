@@ -10,8 +10,8 @@ import java.util.Scanner;
  * to send inputs and receive feedback from Spark.Spark.
  */
 public class Ui {
-    private static final String normalLineSeparator = "----------------------------------------------------------------------";
-    private static final String exceptionLineSeparator = "-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!";
+    private static final String normalLineSeparator = "======================================================================";
+    private static final String exceptionLineSeparator = "======================================================================";
     private static final String defaultWelcomeMessage = String.format("%s\n%s",
             "Hello I'm Spark!",
             "What can I do for you?"
@@ -40,7 +40,7 @@ public class Ui {
      * to the user.
      */
     public void printWelcomeMessage() {
-        printMessage(defaultWelcomeMessage);
+        printMessageWithDivider(defaultWelcomeMessage);
     }
 
     /**
@@ -48,10 +48,14 @@ public class Ui {
      *
      * @param message
      */
-    public void printMessage(String message) {
+    public void printMessageWithDivider(String message) {
         System.out.println(normalLineSeparator);
         System.out.println(message);
         System.out.println(normalLineSeparator);
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 
     /**
@@ -61,7 +65,7 @@ public class Ui {
      */
     public void printException(SparkException e) {
         System.out.println(exceptionLineSeparator);
-        System.out.println(e.getMessage());
+        System.out.println(String.format("%s %s", "[ERROR]", e.getMessage()));
         System.out.println(exceptionLineSeparator);
     }
 }

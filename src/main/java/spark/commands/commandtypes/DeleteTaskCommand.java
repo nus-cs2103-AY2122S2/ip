@@ -6,16 +6,16 @@ import spark.tasks.TaskList;
 import spark.Ui;
 
 public class DeleteTaskCommand extends Command {
-    private String[] tokens;
+    int index;
 
-    public DeleteTaskCommand(String[] tokens) {
-        this.tokens = tokens;
+    public DeleteTaskCommand(int index) {
+        this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.deleteTask(tokens);
+            tasks.deleteTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
         } catch (SparkException e) {
             ui.printException(e);
@@ -25,5 +25,9 @@ public class DeleteTaskCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    private String getDeleteTaskSuccessMessage(TaskList tasks) {
+        return String.format("Okay! I've removed this task:\n   %s", tasks.getLastDeletedTask());
     }
 }

@@ -30,7 +30,7 @@ public enum CommandKeyword {
         return commandKeywords;
     }
 
-    public String getCommandKeyword() {
-        return this.commandKeyword;
+    public int getCommandKeywordLength() {
+        return this.commandKeyword.length();
     }
 }
