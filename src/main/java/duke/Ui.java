@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ Class to represent the Ui interactions messages the user will have with the chatbot
+ */
 public class Ui {
 
     public static void run() throws IOException {
@@ -22,6 +25,7 @@ public class Ui {
         }
         sc.close();
     }
+
     public static void unknownCommand() {
         System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
                 " Please wish again");

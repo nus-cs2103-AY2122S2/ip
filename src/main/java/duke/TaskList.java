@@ -5,9 +5,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
+/**
+ Class to process the Tasklist of the chatbot
+ */
 public class TaskList {
 
+    /**
+     * Prints the arraylist for the user of the chatbot
+     *
+     * @param storeList arraylist to be printed
+     * @return Nothing
+     *
+     */
     public static void printTheList(ArrayList<Task> storeList) {
         int sizeOfList = storeList.size();
         System.out.println("Everything in my blue brain now:");
@@ -17,6 +26,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a specific item in the tasklist
+     *
+     * @param command command of which task to delete
+     *
+     * @return Nothing
+     *
+     */
     public static void deleteTask(String command, ArrayList<Task> storeList) {
         if (command.length() <= 7) {
             System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
@@ -33,6 +50,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmark a task status in the task list
+     *
+     * @param command command by user which specify which task
+     * @param storeList tasklist to be unmarked from
+     * @return Nothing
+     *
+     */
     public static void unmarkCommand(String command, ArrayList<Task> storeList) {
         int taskNumber1 = Integer.parseInt(command.substring(7));
         if (taskNumber1 > storeList.size()) {
@@ -48,6 +73,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmark a task status in the task list
+     *
+     * @param command command by user which specify which task
+     * @param storeList tasklist to be marked from
+     * @return Nothing
+     *
+     */
     public static void markCommand(String command, ArrayList<Task> storeList) {
         int taskNumber = Integer.parseInt(command.substring(5));
         if (taskNumber > storeList.size()) {
@@ -63,6 +96,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add event type task to tasklist
+     *
+     * @param command command by user which specify task description
+     * @param storeList tasklist to be added to
+     * @return Nothing
+     *
+     */
     public static void addEvent(String command, ArrayList<Task> storeList) {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 6) {
@@ -79,6 +120,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add Todo type task to tasklist
+     *
+     * @param command command by user which specify task description
+     * @param storeList tasklist to be added to
+     * @return Nothing
+     *
+     */
     public static void addTodo(String command, ArrayList<Task> storeList) {
         if (command.length() < 5) {
             System.out.println("Master, I have all the knowledge in the world but I do not know what you want to do," +
@@ -93,6 +142,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add Deadline type task to tasklist
+     *
+     * @param command command by user which specify task description
+     * @param storeList tasklist to be added to
+     * @return Nothing
+     *
+     */
     public static void addDeadline(String command, ArrayList<Task> storeList) {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 9) {

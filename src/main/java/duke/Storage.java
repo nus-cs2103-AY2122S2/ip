@@ -9,7 +9,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ Class to enable the restoring and saving of the task list of the chatbot using the
+ directory of the duke.java file.
+ */
 public class Storage {
+
+    /**
+     * Restores the contents of file from local directory
+     *
+     * @param storeList contents from file to be saved into this arraylist
+     * @return Nothing
+     * @throws IOException If path is not valid
+     */
     public static void restoreList(ArrayList<Task> storeList) throws IOException {
         String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
         String newFilePath = currentDirectory + "/duke.txt";
@@ -53,6 +65,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the contents of file in local directory
+     *
+     * @param arrlist arraylist contents to be saved locally
+     * @return Nothing
+     * @throws IOException If path is not valid
+     */
     public static void saveList(ArrayList<Task> arrlist) throws IOException {
         int sizeOfList = arrlist.size();
         String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
@@ -94,6 +113,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Erases the contents of file in local directory
+     *
+     * @param path path of the file to be erased
+     * @return Nothing
+     * @throws IOException If path is not valid
+     */
     public static void eraseList(String path) throws IOException {
         PrintWriter writer = new PrintWriter(new File(path));
         writer.print("");
