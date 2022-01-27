@@ -3,7 +3,7 @@ package duke.main;
 public class Ui {
     private static Parser parser;
     private static String response;
-    public static String errorMsg;
+    private static String errorMsg;
 
     /**
      * The possible types of Reply that Burp can have, in response to
@@ -79,7 +79,7 @@ public class Ui {
      * Method to output a formatted "Welcome" message.
      */
     public static void showWelcome() {
-        Ui.setDukeResponse(Parser.formatMsg("Hello from Burp\nWhat can I do for you?"));
+        Ui.setDukeResponse(Parser.formatMsg("\nHey! Nice to see you back here again.\nWhat would you like to do?"));
     }
 
     /**

@@ -1,10 +1,8 @@
 package duke.main;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -41,6 +39,7 @@ public class Duke extends Application {
 
     private final String filepath = "./tasklist.txt";
     private boolean isFirstStartup = true;
+
     /**
      * Constructor for Duke.
      * Tries to retrieve the list of Tasks from the default filepath
@@ -135,6 +134,7 @@ public class Duke extends Application {
         try {
             Storage.writeFileContent(toDoList);
         } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -144,7 +144,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label("\n"+userInput.getText());
+        Label userText = new Label("\n" + userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         userText.setWrapText(true);
         dukeText.setWrapText(true);
@@ -161,6 +161,7 @@ public class Duke extends Application {
 
         userInput.clear();
     }
+
     private void onStartUp() {
         Ui.showWelcome();
         Label dukeText = new Label(Ui.getDukeResponse());
@@ -170,6 +171,7 @@ public class Duke extends Application {
                 dukeWelcomeBox
         );
     }
+
     /**
      * Gets Burp's response in return to a command given to it.
      *
@@ -185,36 +187,36 @@ public class Duke extends Application {
             return Ui.getDukeResponseError();
         }
     }
-
-    /**
-     * Driver for Duke.
-     * Runs Duke and awaits for Commands from the user.
-     *
-     * @throws DukeException when a WrongCommand is given
-     * @throws IOException   when an IO error occurs while reading user input
-     */
-    public void run() throws DukeException, IOException {
-        // Declaration of variables
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String cmd;
-
-        // Print out the welcome message and await user input
-        Ui.showWelcome();
-        while (!(cmd = br.readLine()).equals("bye")) {
-            String commandType = cmd.split(" ")[0];
-            ui.burpReply(ui.determineType(commandType), toDoList, cmd, this.storage);
-        }
-        Ui.showBye();
-    }
-
-    /**
-     * Main method. Used for CLI programs
-     *
-     * @param args unused
-     * @throws DukeException when a WrongCommand is given
-     * @throws IOException   when an IO error occurs
-     */
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
-    }
+//
+//    /**
+//     * Driver for Duke.
+//     * Runs Duke and awaits for Commands from the user.
+//     *
+//     * @throws DukeException when a WrongCommand is given
+//     * @throws IOException   when an IO error occurs while reading user input
+//     */
+//    public void run() throws DukeException, IOException {
+//        // Declaration of variables
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String cmd;
+//
+//        // Print out the welcome message and await user input
+//        Ui.showWelcome();
+//        while (!(cmd = br.readLine()).equals("bye")) {
+//            String commandType = cmd.split(" ")[0];
+//            ui.burpReply(ui.determineType(commandType), toDoList, cmd, this.storage);
+//        }
+//        Ui.showBye();
+//    }
+//
+//    /**
+//     * Main method. Used for CLI programs
+//     *
+//     * @param args unused
+//     * @throws DukeException when a WrongCommand is given
+//     * @throws IOException   when an IO error occurs
+//     */
+//    public static void main(String[] args) throws DukeException, IOException {
+//        new Duke().run();
+//    }
 }

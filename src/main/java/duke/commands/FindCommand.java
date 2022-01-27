@@ -50,7 +50,7 @@ public class FindCommand extends Command<String> {
             for (int i = 0; i < temp.size(); i++) {
                 dukeResponse += "" + (i + 1) + "." + temp.get(i).toString() + "\n";
             }
-            dukeResponse +=  "\n";
+            dukeResponse += "\n";
             Ui.setDukeResponse(dukeResponse);
         } else {
             Ui.setDukeResponse(Parser.formatMsg("There were no terms matching: " + searchTerm));
