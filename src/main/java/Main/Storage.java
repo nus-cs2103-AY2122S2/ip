@@ -2,13 +2,15 @@ package Main;
 
 import Task.Task;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
+import java.nio.Buffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,32 +22,33 @@ import Task.Event;
 public class Storage {
 
     protected String savePath;
-    static String DATA_FOLDER_PATH = "/data";
 
     public Storage(String s) {
-        this.savePath = s;
+        this.savePath = System.getProperty("user.dir") + "/" + s;
     }
 
     public void saveFile(String textToAdd) {
-        //check if data folder exists
-        File dataFolder = new File(DATA_FOLDER_PATH);
 
-        File saveFile = new File(savePath);
-        if (!dataFolder.exists()) {
-            //if data folder does not exists, create folder
-            dataFolder.mkdir();
+        if (savePath.contains("/")) {
+            File dataFolder = new File(savePath.substring(0,savePath.lastIndexOf("/")));
+
+            if (!dataFolder.exists()) {
+                //if data folder does not exists, create folder
+                dataFolder.mkdirs();
+            }
         }
+
         try {
-            FileWriter fw = new FileWriter(saveFile);
-            fw.write(textToAdd);
-            fw.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(savePath));
+            bw.write(textToAdd);
+            bw.close();
         } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
 
     public List<Task> load() throws TsundereException {
-        List<Task> emptyTasks = new ArrayList<Task>();
+        List<Task> emptyTasks = new ArrayList<>();
         Path saveFile = Path.of(savePath);
         String returnStr = "";
         try {
@@ -88,7 +91,7 @@ public class Storage {
                 countLst++;
 
         }
-
+        c.close();
         return emptyTasks;
     }
 

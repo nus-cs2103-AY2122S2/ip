@@ -1,1 +1,4 @@
-T|0|eat
+T|1|gijsagj
+D|0|eat|null
+E|0|run|2019-01-01
+T|0|gje

@@ -5,17 +5,6 @@ import java.util.Scanner;
 public class Ui {
 
     static final private String lines = "------------------------------------------------------------------------";
-    static final private String logo = "´´´´¶¶¶¶¶¶´´´´´´¶¶¶¶¶¶\n" +
-            "´´¶¶¶¶¶¶¶¶¶¶´´¶¶¶¶¶¶¶¶¶¶\n" +
-            "´¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶´´´´¶¶¶¶\n" +
-            "¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶´´´´¶¶¶¶\n" +
-            "¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶´´¶¶¶¶¶\n" +
-            "¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ ´¶¶¶¶¶´\n" +
-            "´´¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n" +
-            "´´´´´¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n" +
-            "´´´´´´´¶¶¶¶¶¶¶¶¶¶¶¶¶\n" +
-            "´´´´´´´´´¶¶¶¶¶¶¶¶\n" +
-            "´´´´´´´´´´´¶¶¶¶";
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -35,7 +24,7 @@ public class Ui {
     }
 
     public void showIntro() {
-        printWrapper("Hmph, it's you again...\n" + logo);
+        printWrapper("Hmph, it's you again...\n");
     }
 
     public void showError(String e) {
