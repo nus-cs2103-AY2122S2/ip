@@ -1,9 +1,11 @@
 package duke.command;
 
-import duke.Duke;
 import duke.UI;
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
     @Test
-    public void testDelete_valid_success(){
+    public void testDelete_valid_success() {
         UI ui = new UI();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test Title 1"));
@@ -49,14 +51,14 @@ public class DeleteCommandTest {
                     "     Now you have 1 task in the list.\n" +
                     "    ____________________________________________________________\n\n", lines);
 
-        } catch (DukeException | IOException e){
+        } catch (DukeException | IOException e) {
             fail();
         }
     }
 
     @Test
-    public void testDelete_invalidInput_exceptionThrown(){
-        UI ui =new UI();
+    public void testDelete_invalidInput_exceptionThrown() {
+        UI ui = new UI();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test Title 1"));
         taskList.add(new TodoTask("Test Title 2"));
@@ -64,31 +66,31 @@ public class DeleteCommandTest {
         taskList.add(new EventTask("Test Title 4", "2022-01-01", "11:11"));
 
         //if user tries to delete nothing
-        try{
+        try {
             new DeleteCommand("");
             fail();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Task to delete cannot be empty:(", e.getMessage());
         }
         //if user tries to enter something that is not a number
-        try{
+        try {
             new DeleteCommand("invalid");
             fail();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Invalid task number, "
                     + "please select a valid task to delete using the task's number", e.getMessage());
         }
         //if user tries to delete a number out of the range of the list
-        try{
+        try {
             new DeleteCommand("8").execute(taskList, ui);
-        } catch(DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Invalid task number, "
                     + "please select a valid task to delete using the task's number", e.getMessage());
         }
         //if user tries to delete a number below 1
-        try{
+        try {
             new DeleteCommand("-2").execute(taskList, ui);
-        } catch(DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Invalid task number, "
                     + "please select a valid task to delete using the task's number", e.getMessage());
         }

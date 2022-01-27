@@ -19,84 +19,87 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class MarkCommandTest {
     @Test
-    public void markCommand_emptyTask_exceptionThrown(){
-        try{
+    public void markCommand_emptyTask_exceptionThrown() {
+        try {
             new MarkCommand("", true);
             fail();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Task to mark cannot be empty:(", e.getMessage());
         }
     }
 
     @Test
-    public void unmarkCommand_emptyTask_exceptionThrown(){
-        try{
+    public void unmarkCommand_emptyTask_exceptionThrown() {
+        try {
             new MarkCommand("", false);
             fail();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             assertEquals("OOPS!!! Task to unmark cannot be empty:(", e.getMessage());
         }
     }
 
     @Test
-    public void markCommand_invalidNumber_exceptionThrown(){
-        try{
+    public void markCommand_invalidNumber_exceptionThrown() {
+        try {
             new MarkCommand("invalid", true);
             fail();
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to mark using the task's number",
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to mark using the task's number",
                     e.getMessage());
         }
     }
 
     @Test
-    public void unmarkCommand_invalidNumber_exceptionThrown(){
-        try{
+    public void unmarkCommand_invalidNumber_exceptionThrown() {
+        try {
             new MarkCommand("invalid", false);
             fail();
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to unmark using the task's number",
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to unmark using the task's number",
                     e.getMessage());
         }
     }
 
     @Test
-    public void markCommand_numberOutOfRange_exceptionThrown(){
+    public void markCommand_numberOutOfRange_exceptionThrown() {
         UI ui = new UI();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test task"));
-        try{
+        try {
             new MarkCommand("8", true).execute(taskList, ui);
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to mark using the task's number",
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to mark using the task's number",
                     e.getMessage());
         }
 
-        try{
+        try {
             new MarkCommand("-1", true).execute(taskList, ui);
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to mark using the task's number",
-                    e.getMessage());
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to mark using the task's number", e.getMessage());
         }
     }
 
     @Test
-    public void unmarkCommand_numberOutOfRange_exceptionThrown(){
+    public void unmarkCommand_numberOutOfRange_exceptionThrown() {
         UI ui = new UI();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test task"));
-        try{
+        try {
             new MarkCommand("8", false).execute(taskList, ui);
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to unmark using the task's number",
-                    e.getMessage());
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to unmark using the task's number", e.getMessage());
         }
 
-        try{
+        try {
             new MarkCommand("-1", false).execute(taskList, ui);
-        } catch (DukeException e){
-            assertEquals("OOPS!!! Invalid task number, please select a valid task to unmark using the task's number",
-                    e.getMessage());
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Invalid task number, " +
+                            "please select a valid task to unmark using the task's number", e.getMessage());
         }
     }
 
