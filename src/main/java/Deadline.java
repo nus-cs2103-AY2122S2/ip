@@ -11,7 +11,7 @@
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String n, boolean d, String b) {
+    public Deadline(String n, int d, String b) {
         super(n, d);
         super.type = 'D';
         by = b;
@@ -20,8 +20,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(getTaskIcon()).append(this.getDoneIcon());
-        res.append(this.name).append("\n");
+        res.append(getTaskIcon()).append(" - ");
+        res.append(this.getDoneIcon()).append(" - ");
+        res.append(this.name).append(" - ");
         res.append(by).append("\n");
         return res.toString();
     }
