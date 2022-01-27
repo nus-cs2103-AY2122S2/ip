@@ -1,24 +1,20 @@
 package ultoi.task;
 
-import ultoi.command.Command;
-import ultoi.command.AddCommand;
-import ultoi.command.ByeCommand;
-import ultoi.command.DeleteCommand;
-import ultoi.command.ListCommand;
-import ultoi.command.MarkCommand;
-
-import ultoi.util.Ultoi;
-import ultoi.util.UltoiUi;
-import ultoi.util.UltoiException;
-import ultoi.util.Storage;
-import ultoi.util.TaskList;
-import ultoi.util.Parser;
-import ultoi.util.DateTime;
-
+/**
+ * Represents a task.
+ *
+ * @author snoidetx
+ * @version 0.0.0
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new task.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -28,22 +24,41 @@ public class Task {
         return description;
     }
 
+    /**
+     * Generates a done symbol X if the task is done.
+     */
     public String genDoneSymbol() {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Marks the task as undone.
+     */
     public void markAsUndone() {
         isDone = false;
     }
 
+    /**
+     * Returns the standard input message to create this task.
+     *
+     * @return Input string.
+     */
     public String toInputString() {
         return "task " + description;
     }
 
+    /**
+     * Returns a string representation of the task.
+     *
+     * @return String representation of the task.
+     */
     public String toString() {
         return "[" + genDoneSymbol() + "] " + description;
     }
