@@ -7,17 +7,17 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final String logo;
-    private final String line;
-    private static final Scanner scanner = new Scanner(System.in);
+    private final String LOGO;
+    private final String LINE;
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public Ui() {
-        this.logo = "\t ____        _        \n"
+        this.LOGO = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
                 + "\t| | | | | | | |/ / _ \\\n"
                 + "\t| |_| | |_| |   <  __/\n"
                 + "\t|____/ \\__,_|_|\\_\\___|\n";
-        this.line = "\t____________________________________________________________________";
+        this.LINE = "\t____________________________________________________________________";
     }
 
     /**
@@ -25,7 +25,7 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        System.out.println(logo + "\t Hello! I'm Duke\n" + "\t What can I do for you?");
+        System.out.println(LOGO + "\t Hello! I'm Duke\n" + "\t What can I do for you?");
         showLine();
     }
 
@@ -33,7 +33,7 @@ public class Ui {
      * Show the line
      */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Ui {
      * @return input by the user.
      */
     public String readCommand() {
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     /**

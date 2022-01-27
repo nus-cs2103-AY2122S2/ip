@@ -7,7 +7,7 @@ import com.duke.util.Ui;
 
 public class DeleteCommand extends Command {
 
-    private final int pos;
+    private int pos;
 
     public DeleteCommand(int pos) {
         this.pos = pos;

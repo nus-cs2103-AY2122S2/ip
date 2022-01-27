@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private final ArrayList<Task> list;
+    private ArrayList<Task> list;
     private int count;
 
     public TaskList(ArrayList<Task> list) {

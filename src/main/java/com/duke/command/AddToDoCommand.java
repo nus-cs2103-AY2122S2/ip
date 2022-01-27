@@ -7,7 +7,7 @@ import com.duke.util.Ui;
 
 public class AddToDoCommand extends Command {
 
-    private final Task task;
+    private Task task;
 
     public AddToDoCommand(Task task) {
         this.task = task;

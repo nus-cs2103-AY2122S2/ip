@@ -7,7 +7,7 @@ import com.duke.util.Ui;
 
 public class AddEventCommand extends Command {
 
-    private final Task task;
+    private Task task;
 
     public AddEventCommand(Task task) {
         this.task = task;
