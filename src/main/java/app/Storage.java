@@ -1,21 +1,29 @@
+package app;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Save {
+public class Storage {
     String filePath;
 
-    public Save(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<Task> loadTasks() throws Exception {
+    public List<Task> load() throws Exception {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         if (f.exists()) {
@@ -30,10 +38,10 @@ public class Save {
                             t = new ToDo(toAdd[2]);
                             break;
                         case "D":
-                            t = new Deadline(Arrays.copyOfRange(toAdd, 2, 4));
+                            t = new Deadline(toAdd[2], toAdd[3]);
                             break;
                         case "E":
-                            t = new Event(Arrays.copyOfRange(toAdd, 2, 4));
+                            t = new Event(toAdd[2], toAdd[3]);
                             break;
                         default:
                             throw new Exception();
@@ -47,15 +55,14 @@ public class Save {
             } catch (FileNotFoundException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
-
         }
         return tasks;
     }
 
-    public void saveTasks(List<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task t : tasks) {
+            for (Task t : tasks.getTasks()) {
                 StringBuilder newTask = new StringBuilder();
                 if (t instanceof ToDo) {
                     newTask.append("T|");
@@ -75,10 +82,10 @@ public class Save {
 
                 if (t instanceof Deadline) {
                     newTask.append("|");
-                    newTask.append(((Deadline) t).by);
+                    newTask.append(((Deadline) t).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
                 } else if (t instanceof Event) {
                     newTask.append("|");
-                    newTask.append(((Event) t).at);
+                    newTask.append(((Event) t).at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
                 }
                 newTask.append("\r\n");
                 fw.write(newTask.toString());

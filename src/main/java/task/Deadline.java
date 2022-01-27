@@ -1,12 +1,14 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    public LocalDateTime by;
 
-    public Deadline(String[] details) {
-        this.description = details[0];
-        this.by = LocalDateTime.parse(details[1], (DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+    public Deadline(String description, String date) {
+        this.description = description;
+        this.by = LocalDateTime.parse(date, (DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
     }
 
     @Override

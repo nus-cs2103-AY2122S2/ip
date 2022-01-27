@@ -1,9 +1,11 @@
-abstract class Task {
-    protected String description;
-    protected boolean isDone = false;
+package task;
+
+public abstract class Task {
+    public String description;
+    public boolean isDone = false;
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     public Task markAsDone() {

@@ -1,12 +1,14 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDateTime at;
+    public LocalDateTime at;
 
-    public Event(String[] details) {
-        this.description = details[0];
-        this.at = LocalDateTime.parse(details[1], (DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+    public Event(String description, String date) {
+        this.description = description;
+        this.at = LocalDateTime.parse(date, (DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
     }
 
     @Override
