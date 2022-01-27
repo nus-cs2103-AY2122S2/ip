@@ -1,2 +1,2 @@
-public class InvalidNumberException extends Exception{
+public class InvalidNumberException extends PykeException{
 }

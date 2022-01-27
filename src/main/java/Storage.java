@@ -5,13 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
-public class LocalFileIO {
-    private static final java.nio.file.Path DIR = Paths.get(".", "data");
-    private static final java.nio.file.Path FILE_PATH = Paths.get(".", "data", "TaskList.txt");
+public class Storage {
+    private static java.nio.file.Path DIR;
+    private static java.nio.file.Path FILE_PATH;
 
-    public static void init(ArrayList<Task> taskList) throws IOException, DateTimeParseException {
+    public Storage(String dir, String fileName) {
+        DIR = Paths.get(".", dir);
+        FILE_PATH = Paths.get(".", dir, fileName);
+    }
+    public void init(TaskList taskList) throws IOException, DateTimeParseException {
         if (!Files.exists(DIR)) {
             Files.createDirectory(DIR);
         }
@@ -32,38 +35,31 @@ public class LocalFileIO {
                     if (isMarked == 1) {
                         temp.setStatus(true);
                     }
-                    taskList.add(temp);
+                    taskList.addTask(temp);
                 } else if (taskType.equals("D")) {
                     String taskTime = parsedList[3].substring(1);
                     Task temp = new Deadline(taskName, LocalDate.parse(taskTime));
                     if (isMarked == 1) {
                         temp.setStatus(true);
                     }
-                    taskList.add(temp);
+                    taskList.addTask(temp);
                 } else if (taskType.equals("E")) {
                     String taskTime = parsedList[3].substring(1);
                     Task temp = new Event(taskName, LocalDate.parse(taskTime));
                     if (isMarked == 1) {
                         temp.setStatus(true);
                     }
-                    taskList.add(temp);
+                    taskList.addTask(temp);
                 }
             }
         }
         return ;
     }
 
-    public static void saveFile(ArrayList<Task> taskList) throws IOException {
+    public void saveFile(TaskList taskList) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(FILE_PATH);
-        for (int i = 0; i < taskList.size(); i++) {
-            Object temp = taskList.get(i);
-            if (temp instanceof ToDo) {
-                writer.write(((ToDo) temp).toSavedFile() + "\n");
-            } else if (temp instanceof Deadline) {
-                writer.write(((Deadline) temp).toSavedFile() + "\n");
-            } else if (temp instanceof Event) {
-                writer.write(((Event) temp).toSavedFile() + "\n");
-            }
+        for (int i = 0; i < taskList.getSize(); i++) {
+            writer.write(taskList.getTaskSavingStyle(i) + "\n");
         }
         writer.flush();
         writer.close();
