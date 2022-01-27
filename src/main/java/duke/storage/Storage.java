@@ -35,12 +35,6 @@ public class Storage {
         fw.close();
     }
 
-
-    /**
-     * Write text into the filePath of this Storage object.
-     *
-     * @param textToAdd text to be inserted to the filePath of this Storage object
-     */
     public void writeToPath(String textToAdd) {
         String file = filePath;
         try {

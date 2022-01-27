@@ -33,6 +33,14 @@ public class Duke {
         ui.exit();
     }
 
+    private static boolean isBye(String s) {
+        return !s.equals("bye");
+    }
+
+
+
+
+
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
