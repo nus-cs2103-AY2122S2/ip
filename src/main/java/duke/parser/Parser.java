@@ -25,13 +25,13 @@ public class Parser {
             throw new ChiException("Too many words nyan!");
         } else {
             try {
-             int index = Integer.parseInt(refine);
-             if (index > size) {
-                 throw new ChiException("Too big index nyan!");
-             } else if (index < 0) {
-                 throw new ChiException("No negative indexes nyan!");
-             }
-             return index - 1;
+                int index = Integer.parseInt(refine);
+                if (index > size) {
+                    throw new ChiException("Too big index nyan!");
+                } else if (index < 0) {
+                    throw new ChiException("No negative indexes nyan!");
+                }
+                return index - 1;
             } catch (NumberFormatException e) {
                 throw new ChiException("This is not a number nyan!");
             }
@@ -124,6 +124,7 @@ public class Parser {
         return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                 newTask, tl.getSize());
     }
+
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
@@ -142,42 +143,49 @@ public class Parser {
             // Check for keywords
             int processed;
             switch (command[0].toLowerCase()) {
-                case "mark":
-                    // Retrieve the task from the list
-                    processed = processNumberMsg(msg.substring(4), tl.getSize());
-                    Task doneTask = tl.getTask(processed);
-                    // Mark as done
-                    doneTask.markAsDone();
-                    sge.updateFile(doneTask, tl, "mark");
-                    return String.format("Great job nyan~!\n%s\n", doneTask);
-                case "unmark":
-                    processed = processNumberMsg(msg.substring(6), tl.getSize());
-                    Task doneTask1 = tl.getTask(processed);
-                    doneTask1.markAsUndone();
-                    sge.updateFile(doneTask1, tl, "unmark");
-                    return String.format("Let's get it done next time nyan~!\n%s\n", doneTask1);
-                case "todo":
-                    // Obtain the ToDo
-                    Task newTask = new Todo(msg.substring(4).trim(), false);
-                    // Add task to list
-                    tl.addTask(newTask);
-                    sge.updateFile(newTask, tl, "todo");
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask, tl.getSize());
-                case "deadline":
-                    return processDeadlineMsg(msg.substring(8), tl, sge);
-                case "event":
-                    return processEventMsg(msg.substring(5),tl,sge);
-                case "delete":
-                    processed = processNumberMsg(msg.substring(6), tl.getSize());
-                    Task toDelete = tl.getTask(processed);
-                    tl.deleteTask(toDelete);
-                    sge.updateFile(toDelete, tl, "delete");
-                    return String.format("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
-                            toDelete, tl.getSize());
-                default:
-                    // Some message which does not start with a keyword
-                    throw new ChiException(msg);
+            case "mark":
+                // Retrieve the task from the list
+                processed = processNumberMsg(msg.substring(4), tl.getSize());
+                Task doneTask = tl.getTask(processed);
+                // Mark as done
+                doneTask.markAsDone();
+                sge.updateFile(doneTask, tl, "mark");
+                return String.format("Great job nyan~!\n%s\n", doneTask);
+                // Fallthrough
+            case "unmark":
+                processed = processNumberMsg(msg.substring(6), tl.getSize());
+                Task doneTask1 = tl.getTask(processed);
+                doneTask1.markAsUndone();
+                sge.updateFile(doneTask1, tl, "unmark");
+                return String.format("Let's get it done next time nyan~!\n%s\n", doneTask1);
+                // Fallthrough
+            case "todo":
+                // Obtain the ToDo
+                Task newTask = new Todo(msg.substring(4).trim(), false);
+                // Add task to list
+                tl.addTask(newTask);
+                sge.updateFile(newTask, tl, "todo");
+                return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                        newTask, tl.getSize());
+                // Fallthrough
+            case "deadline":
+                return processDeadlineMsg(msg.substring(8), tl, sge);
+                // Fallthrough
+            case "event":
+                return processEventMsg(msg.substring(5), tl, sge);
+                // Fallthrough
+            case "delete":
+                processed = processNumberMsg(msg.substring(6), tl.getSize());
+                Task toDelete = tl.getTask(processed);
+                tl.deleteTask(toDelete);
+                sge.updateFile(toDelete, tl, "delete");
+                return String.format("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
+                        toDelete, tl.getSize());
+                // Fallthrough
+            default:
+                // Some message which does not start with a keyword
+                throw new ChiException(msg);
+                // Fallthrough
             }
         }
     }
