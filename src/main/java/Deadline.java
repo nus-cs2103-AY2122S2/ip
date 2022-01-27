@@ -21,4 +21,13 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd uuuu");
         return "[D]" + super.toString() + " (by: " + time.format(formatter) + ")";
     }
+
+    /**
+     * Provides the string representation of the task for data storage
+     */
+    @Override
+    public String toStoreInfo() {
+        String status = isDone ? "1" : "0";
+        return "D | " + status + " | " + this.description + " | " + this.time + "\n";
+    }
 }

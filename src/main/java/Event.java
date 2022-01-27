@@ -21,4 +21,12 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[E]" + super.toString() + " (at: " + time.format(formatter) + ")";
     }
+
+    /**
+     * Provides the string representation of the task for data storage
+     */
+    public String toStoreInfo() {
+        String status = isDone ? "1" : "0";
+        return "E | " + status + " | " + this.description + " | " + this.time + "\n";
+    }
 }
