@@ -15,6 +15,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    /**
+     * Returns a Command object representing the user input.
+     *
+     * @param fullCommand Raw input from user.
+     * @return A Command representing the user input.
+     * @throws DukeException If user input is not a valid command or valid but in the wrong format.
+     */
     static Command parseCommand(String fullCommand) throws DukeException {
         if (fullCommand.trim().compareToIgnoreCase("bye") == 0) {
             return new ExitCommand();
@@ -40,6 +47,23 @@ public class Parser {
             return parseDeleteCommand(inputWithoutCommand);
         } else {
             throw new DukeException(DukeException.ERROR_NO_COMMAND);
+        }
+    }
+
+    /**
+     * Returns a java.time.LocalDateTime object representing the input.
+     *
+     * @param input The input to be parsed, "yyyy/MM/dd HHmm" format.
+     * @return The parsed LocalDateTime.
+     * @throws DukeException If the input cannot be parsed based on the stated format.
+     */
+    static LocalDateTime parseDateTime(String input) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(input, format);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            throw new DukeException(DukeException.FORMAT_DATE);
         }
     }
 
@@ -87,16 +111,6 @@ public class Parser {
             return new DeleteCommand(taskId);
         } catch (NumberFormatException e) {
             throw new DukeException(DukeException.ERROR_PARSE_INT);
-        }
-    }
-
-    static LocalDateTime parseDateTime(String input) throws DukeException {
-        try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(input, format);
-            return dateTime;
-        } catch (DateTimeParseException e) {
-            throw new DukeException(DukeException.FORMAT_DATE);
         }
     }
 
