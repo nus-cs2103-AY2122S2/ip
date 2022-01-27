@@ -11,20 +11,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Save {
-	public static final String DUKE_PATHNAME = "src/main/java/Duke/data/duke.txt";
-	public static ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
-	public static ArrayList<Task> tasks = new ArrayList<>(100);
-	public static int count;
+	private static final String DUKE_PATHNAME = "src/main/java/Duke/data/duke.txt";
+	private ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
+	private ArrayList<Task> tasks = new ArrayList<>(100);
+	private int count;
 
-	public static void load() {
+	Save() {
+		load();
+	}
+
+	public void load() {
 		readAndAdd();
 		process(inputsToBeProcessed);
 	}
 
-	public static void save() {
+	public void save() {
 		try {
 			FileWriter fw = new FileWriter(DUKE_PATHNAME);
-			String textToWrite = simplify(tasks);
+			String textToWrite = simplify();
 			fw.write(textToWrite);
 			fw.close();
 		} catch (IOException e) {
@@ -34,11 +38,10 @@ public class Save {
 		}
 	}
 
-	public static void readAndAdd() {
+	public void readAndAdd() {
 		try {
 			File file = new File(DUKE_PATHNAME);
 			Scanner fileScanner = new Scanner(file);
-
 			while (fileScanner.hasNext()) {
 				String line = fileScanner.nextLine();
 				String[] tokens = line.split(" / ");
@@ -62,46 +65,46 @@ public class Save {
 			System.out.println("\t____________________________________________________________");
 			File fileDir = new File("src/main/java/Duke/data");
 			fileDir.mkdirs();
-			File file = new File(fileDir, "duke.txt");
+			File fileToCreate = new File(fileDir, "duke.txt");
 			try {
-				FileWriter createdFile = new FileWriter(file);
+				FileWriter createdFile = new FileWriter(fileToCreate);
 			} catch (IOException e1) {
 				System.out.println("File cannot be created");
 			}
 		}
 	}
 
-	public static void addToList(Type type, String status, String name) {
+	public void addToList(Type type, String status, String name) {
 		if (type == Type.T) {
 			inputsToBeProcessed.add("todo " + name);
-			Save.count++;
+			this.count++;
 			if (status.equals("1")) {
-				inputsToBeProcessed.add("mark " + Save.count);
+				inputsToBeProcessed.add("mark " + this.count);
 			}
 		}
 	}
 
-	public static void addToList(Type type, String status, String name, String date) {
+	public void addToList(Type type, String status, String name, String date) {
 		switch (type) {
 		case D:
 			inputsToBeProcessed.add("deadline " + name + " /by " + date);
-			Save.count++;
+			this.count++;
 			if (status.equals("1")) {
-				inputsToBeProcessed.add("mark " + Save.count);
+				inputsToBeProcessed.add("mark " + this.count);
 			}
 			break;
 		case E:
 			inputsToBeProcessed.add("event " + name + " /at " + date);
-			Save.count++;
+			this.count++;
 			if (status.equals("1")) {
-				inputsToBeProcessed.add("mark " + Save.count);
+				inputsToBeProcessed.add("mark " + this.count);
 			}
 			break;
 		default:
 		}
 	}
 
-	public static void process(ArrayList<String> taskList) {
+	public void process(ArrayList<String> taskList) {
 
 		for (String s : taskList) {
 			String[] tokens = s.split(" ");
@@ -122,7 +125,7 @@ public class Save {
 			case MARK:
 				String markStr = tokens[1];
 				int taskNumMark = Integer.parseInt(markStr) - 1;
-				tasks.get(taskNumMark).mark();
+				this.tasks.get(taskNumMark).mark();
 				break;
 			case UNMARK:
 				String unmarkStr = tokens[1];
@@ -134,7 +137,7 @@ public class Save {
 				tasks.add(todo);
 				break;
 			case EVENT:
-				String[] tokensEvent = s.split("/");
+				String[] tokensEvent = s.split("/at ");
 				String time = tokensEvent[1];
 
 				String[] tokensNameEvent = name.split("/");
@@ -156,26 +159,28 @@ public class Save {
 		}
 	}
 
-	public static String simplify(ArrayList<Task> tasks) {
+	public String simplify() {
 		String s = "";
-		for (int i = 0; i < Save.count; i++) {
-			Task task = tasks.get(i);
+		for (int i = 0; i < this.tasks.size(); i++) {
+			Task task = this.tasks.get(i);
 			if (task instanceof Todo) {
 				Todo todo = (Todo) task;
 				s = s + "T / " + (todo.getStatus().equals("[X]") ? "1 / " : "0 / ") + todo.getName();
 			} else if (task instanceof Event) {
 				Event event = (Event) task;
-				String[] timeTokens = event.getTime().split(" ", 2);
 				s = s + "E / " + (event.getStatus().equals("[X]") ? "1 / " : "0 / ") + event.getName() + "/ "
-						+ timeTokens[1];
+						+ event.getTime();
 			} else {
 				Deadline deadline = (Deadline) task;
-				String[] dateTokens = deadline.getDate().split(" ", 2);
 				s = s + "D / " + (deadline.getStatus().equals("[X]") ? "1 / " : "0 / ") + deadline.getName()
-						+ "/ " + dateTokens[1];
+						+ "/ " + deadline.getUnconvertedDate();
 			}
 			s += "\n";
 		}
 		return s;
+	}
+
+	public ArrayList<Task> savedTasks() {
+		return this.tasks;
 	}
 }

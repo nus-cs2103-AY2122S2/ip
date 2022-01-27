@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
 	private final String TYPE = "D";
-	private final String dateStr;
+	private final String INITIAL_DATE_STR;
+	private final String CONVERTED_DATE_STR;
 	private final String NAME;
 	private final LocalDate date;
 	private final LocalTime time;
@@ -25,13 +26,14 @@ public class Deadline extends Task {
 	public Deadline(String name, String dateStr) {
 		super(name);
 		this.NAME = name;
+		this.INITIAL_DATE_STR = dateStr;
 
 		String[] tokens = dateStr.split("\\s+");
 		this.date = LocalDate.parse(tokens[0]);
 		String hour = tokens[1].substring(0, 2);
 		String min = tokens[1].substring(2, 4);
 		this.time = LocalTime.parse(hour + ":" + min);
-		this.dateStr = convertDate(this.date, this.time);
+		this.CONVERTED_DATE_STR = convertDate();
 	}
 
 	/**
@@ -39,11 +41,9 @@ public class Deadline extends Task {
 	 * YYYY-MM-DD to (DD, Month (First 3 Letters), YYYY, HH:MM)
 	 * E.g. 2012-11-11 1600 to 11 Nov 2012,
 	 *
-	 * @param date Date.
-	 * @param time Time.
 	 * @return String of preferred format.
 	 */
-	public String convertDate(LocalDate date, LocalTime time) {
+	public String convertDate() {
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd LLL yyyy");
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
@@ -58,7 +58,7 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-		return this.NAME + "(by: " + dateStr + ")";
+		return this.NAME + "(by: " + CONVERTED_DATE_STR + ")";
 	}
 
 	/**
@@ -86,6 +86,10 @@ public class Deadline extends Task {
 	 * @return Deadline of Task.
 	 */
 	public String getDate() {
-		return this.dateStr;
+		return this.CONVERTED_DATE_STR;
+	}
+
+	public String getUnconvertedDate() {
+		return this.INITIAL_DATE_STR;
 	}
 }
