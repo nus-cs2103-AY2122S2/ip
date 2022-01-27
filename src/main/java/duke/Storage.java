@@ -9,10 +9,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class which is used to handle file loading/saving
+ */
 public class Storage {
-    final String DATA_PATH = "data";
-    String fileName;
+    private final String DATA_PATH = "data";
+    private String fileName;
 
+    /**
+     * Default constructor for Storage
+     * Creates the directory for the filename passed in
+     *
+     * @param fileName Name of the save/load file
+     */
     public Storage(String fileName) {
         File directory = new File(DATA_PATH);
         if (!directory.exists()) {
@@ -21,6 +30,11 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Appends to the specified file in text
+     *
+     * @param text The text to pass into the file
+     */
     public void WriteToFile(String text) {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
@@ -32,6 +46,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Completely overwrites the file with the contents in the taskList
+     * Translates each task into a string representation and writes them into the file
+     *
+     * @param tasks The tasks that will overwrite the file
+     */
     public void OverwriteFile(List<Task> tasks) {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
@@ -47,6 +67,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the file and outputs a List of Tasks based on the file
+     *
+     * @return List of tasks
+     * @throws DukeException Throws when file cannot be read
+     */
     public List<Task> ParseFile() throws DukeException {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);

@@ -4,6 +4,9 @@ import duke.task.*;
 
 import java.util.Scanner;
 
+/**
+ * Duke class used for running the Duke chat bot
+ */
 public class Duke {
 
     private final Ui ui;
@@ -15,7 +18,6 @@ public class Duke {
      *
      * @param fileName File name to give save data
      */
-
     public Duke(String fileName) {
         ui = new Ui();
         storage = new Storage(fileName);
@@ -26,10 +28,18 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function
+     * @param args arguments to pass in
+     */
     public static void main(String[] args) {
         new Duke("save.txt").run();
     }
 
+    /**
+     * Our pseudo main function that basically handles all functionality of duke
+     * All input handling and parsing is handled by respective classes
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();

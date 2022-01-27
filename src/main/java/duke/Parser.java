@@ -1,9 +1,21 @@
 package duke;
 
+/**
+ * Parser class which is used to parse user input into a form Duke can understand
+ */
 public class Parser {
+    /**
+     * Default constructor
+     */
     public Parser() {
     }
 
+    /**
+     * Parses the initial input from user and outputs a RESULT
+     * RESULT is used in Duke class to handle actions
+     * @param input User input
+     * @return RESULT of what action to run
+     */
     public RESULT parseInput(String input) {
         String[] split = input.split(" ");
         if (input.equals("bye")) {
@@ -26,6 +38,14 @@ public class Parser {
         return RESULT.ERROR;
     }
 
+    /**
+     * Used to parse user input to figure out what index user is specifying
+     * Used in conjunction with mark/unmark/delete
+     *
+     * @param input User input
+     * @return Index of object user is trying to mark/unmark/delete
+     * @throws DukeException Throws when user enters invalid number
+     */
     public int parseIndex(String input) throws DukeException {
         String[] split = input.split(" ");
         try {
@@ -39,6 +59,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Runs when user tries to create a Todo object
+     * Parses the user input and splits it up for the Todo object to read
+     *
+     * @param input User input
+     * @return Todo description
+     * @throws DukeException If user enters invalid input, throws an exception
+     */
     public String parseTodo(String input) throws DukeException {
         String[] split = input.split(" ");
         if (split.length < 2) {
@@ -48,6 +76,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Runs when user tries to create a Deadline object
+     * Parses the user input and splits it up for the Deadline object to read
+     *
+     * @param input User input
+     * @return String array, String[0] contains description and String[0] contains date/time
+     * @throws DukeException Throws when user inputs invalid description or date/time
+     */
     public String[] parseDeadline(String input) throws DukeException {
         String[] split = input.split(" ");
         if (split.length < 2) {
@@ -63,6 +99,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Runs when user tries to create a Event object
+     * Parses the user input and splits it up for the Event object to read
+     *
+     * @param input User input
+     * @return String array, String[0] contains description and String[0] contains date/time
+     * @throws DukeException Throws when user inputs invalid description or date/time
+     */
     public String[] parseEvent(String input) throws DukeException {
         String[] split = input.split(" ");
         if (split.length < 2) {
@@ -78,6 +122,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Enum which holds all the various user commands
+     */
     public enum RESULT {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR
     }
