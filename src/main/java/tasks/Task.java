@@ -9,8 +9,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    protected Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     protected String getStatusIcon() {
         return this.isDone ? "X" : " ";
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public void markAsDone() {
@@ -24,6 +33,8 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public abstract Task clone();
 
     @Override
     public String toString() {
