@@ -3,6 +3,9 @@ package duke;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * The class handling UI and IO from users.
+ */
 public class Ui {
 
     private final static Scanner IN = new Scanner(System.in);
@@ -13,6 +16,9 @@ public class Ui {
         this.tasks = tasks;
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         printMenu();
         while (true) {
