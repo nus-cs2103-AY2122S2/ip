@@ -10,6 +10,10 @@ public class Event extends Task {
         }
     }
 
+    public String toInputString() {
+        return "event" + description + " /at " + dateTime.toInputString();
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.dateTime.toString() + ")";

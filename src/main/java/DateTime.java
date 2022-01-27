@@ -20,9 +20,13 @@ class DateTime {
         }
     }
 
+    public String toInputString() {
+        return this.date.toString() + " " + time;
+    }
+
     @Override
     public String toString() {
         return this.date.toString() + " " + (this.time > 999 ? "" : "0")
-                + this.time / 100 + ":" + this.time % 100;
+                + this.time / 100 + ":" + (this.time > 9 ? "" : "0") + this.time % 100;
     }
 }

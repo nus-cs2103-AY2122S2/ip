@@ -10,6 +10,10 @@ public class Deadline extends Task {
         }
     }
 
+    public String toInputString() {
+        return "deadline" + description + " /by " + dateTime.toInputString();
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.dateTime.toString() + ")";

@@ -1,11 +1,55 @@
-import java.io.File;
-import java.io.PrintWriter;
-
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.nio.file.Path;
 
 public class Ultoi {
+    private Storage storage;
+    private TaskList tasks;
+    private UltoiUi ui;
+
+    /**
+     * Creates a new Ultoi chatbot.
+     *
+     * @param filePath Path to the file to load and save tasks.
+     */
+    public Ultoi(Path filePath) {
+        ui = new UltoiUi();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (UltoiException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcomeMsg();
+
+        for ( ; ; ) {
+            try {
+                String input = ui.readInput();
+                Command cmd = Parser.parse(input);
+                cmd.execute(this.ui, this.tasks, this.storage);
+                if (Parser.isBye(input)) {
+                    return;
+                }
+            } catch (UltoiException e) {
+                ui.showError(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Path filePath = java.nio.file.Paths.get(System.getProperty("user.home"), "iP", "data", "Ultoi.txt");
+        new Ultoi(filePath).run();
+    }
+}
+
+
+/*
+
+
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -47,7 +91,7 @@ public class Ultoi {
                 String[] tokens = cmd.split(" ");
                 int taskIndex = Integer.parseInt(tokens[1]) - 1;
                 Task removed = logs.remove(taskIndex);
-                System.out.println(indent + "Noted. I have removed this task:");
+                System.out.println(indent + c);
                 System.out.println(indent.repeat(2) + removed.toString());
                 System.out.println(indent + "Now you have " + logs.size() + " tasks in the list.");
             } else if ((cmd.split(" "))[0].equals("mark")) {
@@ -144,10 +188,6 @@ public class Ultoi {
         }
     }
 
-    /* Checks whether a given command is valid.
-     *
-     * @return A Command enum representing the type of input.
-     */
     private static void checkInput(String cmd, ArrayList<Task> logs) throws UltoiException {
         String[] tokens = cmd.split(" ");
 
@@ -203,7 +243,7 @@ public class Ultoi {
                         }
                     }
                     if (!hasAt) {
-                        throw new UltoiException("<OoO> Error! An event requires a [/at] keyword followed by the time.");
+                        throw new UltoiException("<OnO> Error! An event requires a [/at] keyword followed by the time.");
                     }
                 }
                 break;
@@ -242,3 +282,5 @@ public class Ultoi {
         pw.close();
     }
 }
+
+*/

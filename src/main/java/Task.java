@@ -19,6 +19,10 @@ public class Task {
         isDone = false;
     }
 
+    public String toInputString() {
+        return "task " + description;
+    }
+
     public String toString() {
         return "[" + genDoneSymbol() + "] " + description;
     }
