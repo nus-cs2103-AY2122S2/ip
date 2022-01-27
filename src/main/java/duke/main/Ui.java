@@ -2,6 +2,8 @@ package duke.main;
 
 public class Ui {
     private static Parser parser;
+    private static String response;
+    public static String errorMsg;
 
     /**
      * The possible types of Reply that Burp can have, in response to
@@ -55,7 +57,7 @@ public class Ui {
      * Method to output a formatted "Bye" message.
      */
     public static void showBye() {
-        System.out.println(parser.formatMsg("Bye. Hope to see you again soon!"));
+        Ui.setDukeResponse(Parser.formatMsg("Bye. Hope to see you again soon!"));
     }
 
     /**
@@ -75,7 +77,7 @@ public class Ui {
      * Method to output a formatted "Welcome" message.
      */
     public static void showWelcome() {
-        System.out.println(parser.formatMsg("Hello from Burp\n\tWhat can I do for you?"));
+        Ui.setDukeResponse(Parser.formatMsg("Hello from Burp\n\tWhat can I do for you?"));
     }
 
     /**
@@ -83,6 +85,25 @@ public class Ui {
      */
     public static void handleLoadError() {
         System.out.println("File could not be loaded -- most likely it has not been created");
+    }
+
+
+    public static String getDukeResponse() {
+        return Ui.response;
+    }
+
+    public static String setDukeResponse(String response) {
+        Ui.response = response;
+        return Ui.response;
+    }
+
+    public static String getDukeResponseError() {
+        return Ui.errorMsg;
+    }
+
+    public static String setDukeResponseError(String errorMsg) {
+        Ui.errorMsg = errorMsg;
+        return Ui.errorMsg;
     }
 
 }

@@ -61,7 +61,7 @@ public class Parser {
      * @return a nicely formatted String.
      */
     public static String formatMsg(String msg) {
-        String tabbedLine = "\t----------------------------------------------";
-        return (tabbedLine + "\n\t" + msg + "\n" + tabbedLine);
+        final String TABBED_LINE = "\t----------------------------------------------";
+        return (TABBED_LINE + "\n\t" + msg + "\n" + TABBED_LINE);
     }
 }

@@ -6,6 +6,7 @@ import duke.main.DukeException;
 import duke.main.Parser;
 import duke.main.Storage;
 import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Event;
 
 /**
@@ -48,12 +49,13 @@ public class AddEventCommand extends Command<String> {
             toDoList.add(newEvent);
 
             // Print out the formatted message after adding to TaskList
-            System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newEvent
+            Ui.setDukeResponse(Parser.formatMsg("Got it. I've added this task:\n\t" + newEvent
                     + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
 
             // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
+            Ui.setDukeResponseError(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
         } catch (IOException e) {
             throw new DukeException(Parser.formatMsg("IOException caught") + e);

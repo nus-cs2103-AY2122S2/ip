@@ -5,7 +5,6 @@ import java.util.List;
 
 import duke.tasks.Task;
 
-
 /**
  * TaskList class.
  * This class encapsulates the abstract List of Tasks.

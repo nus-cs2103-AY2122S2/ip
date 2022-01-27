@@ -3,6 +3,7 @@ package duke.commands;
 import duke.main.DukeException;
 import duke.main.Parser;
 import duke.main.TaskList;
+import duke.main.Ui;
 
 /**
  * WrongCommand is a Command.
@@ -16,6 +17,7 @@ public class WrongCommand extends Command<String> {
      * @throws DukeException when this class is instantiated
      */
     public WrongCommand() throws DukeException {
+        Ui.setDukeResponseError(Parser.formatMsg("OOPS!!! I'm sorry, but I don't know what that means :-("));
         throw new DukeException(Parser.formatMsg("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
     }
 
