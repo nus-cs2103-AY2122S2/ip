@@ -4,6 +4,9 @@ import exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Handle user input
+ */
 public class UI {
 
     Scanner scanner;

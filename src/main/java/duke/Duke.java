@@ -8,12 +8,20 @@ import utility.Parser;
 import utility.Storage;
 
 
+/**
+ * Main class for Duke
+ *
+ */
 public class Duke {
 
     public UI ui;
     public TaskList tasks;
     public Storage storage;
 
+    /**
+     * constructor for Duke
+     * @param filePath
+     */
     public Duke(String filePath){
         this.ui = new UI();
         this.storage = new Storage(filePath);

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Store data for tasks list
+ */
 public class Storage {
 
     String filePath;

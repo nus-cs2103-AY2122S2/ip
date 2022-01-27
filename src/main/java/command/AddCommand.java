@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * Add new task for command class
+ */
 public class AddCommand extends Command {
     String type;
     String name;
@@ -93,6 +96,9 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * @return false for addCommand as it has not exit loop yet
+     */
     @Override
     public boolean isExit() {
         return false;

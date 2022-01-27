@@ -5,6 +5,9 @@ import utility.UI;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of Tasks Class
+ */
 public class TaskList {
 
     List<Task> tasks;

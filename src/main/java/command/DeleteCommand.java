@@ -6,6 +6,9 @@ import task.TaskList;
 import utility.UI;
 import utility.Storage;
 
+/**
+ * Delete tasks from list for command class
+ */
 public class DeleteCommand extends Command {
 
     int index;

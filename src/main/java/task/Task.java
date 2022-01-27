@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Task class
+ */
 public class Task {
 
     String taskName;

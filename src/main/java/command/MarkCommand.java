@@ -6,6 +6,9 @@ import utility.UI;
 import task.TaskList;
 import utility.Storage;
 
+/**
+ * Command for mark and unmark for tasks
+ */
 public class MarkCommand extends Command {
 
     boolean isMark;

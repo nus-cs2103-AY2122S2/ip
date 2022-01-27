@@ -5,6 +5,9 @@ import exception.DukeException;
 
 import java.util.StringTokenizer;
 
+/**
+ * Parser for user input
+ */
 public class Parser {
     Parser(){
     }

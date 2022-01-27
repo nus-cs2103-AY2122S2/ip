@@ -5,6 +5,10 @@ import task.TaskList;
 import utility.UI;
 import utility.Storage;
 
+
+/**
+ * convert user input into command
+ */
 public abstract class Command {
 
     String command;
