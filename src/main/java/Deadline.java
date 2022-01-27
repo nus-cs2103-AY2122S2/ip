@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represent tasks that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
-    protected String time;
+    protected LocalDate time;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
@@ -15,7 +18,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd uuuu");
+        return "[D]" + super.toString() + " (by: " + time.format(formatter) + ")";
     }
 
     /**
