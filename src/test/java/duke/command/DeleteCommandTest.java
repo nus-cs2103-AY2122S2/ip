@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class DeleteCommandTest {
     @Test
     public void testDelete_valid_success() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test Title 1"));
         taskList.add(new TodoTask("Test Title 2"));
@@ -58,7 +58,7 @@ public class DeleteCommandTest {
 
     @Test
     public void testDelete_invalidInput_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test Title 1"));
         taskList.add(new TodoTask("Test Title 2"));

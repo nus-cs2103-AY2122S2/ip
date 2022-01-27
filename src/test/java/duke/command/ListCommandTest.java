@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListCommandTest {
     @Test
     public void listCommand_emptyList_success() throws IOException, DukeException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
@@ -34,7 +34,7 @@ public class ListCommandTest {
 
     @Test
     public void listCommand_fullList_success() throws IOException, DukeException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Task 1: Todo"));
         taskList.add(new TodoTask("Task 2: Todo, Marked", true));

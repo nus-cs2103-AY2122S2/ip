@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -64,7 +64,7 @@ public class MarkCommandTest {
 
     @Test
     public void markCommand_numberOutOfRange_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test task"));
         try {
@@ -85,7 +85,7 @@ public class MarkCommandTest {
 
     @Test
     public void unmarkCommand_numberOutOfRange_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Test task"));
         try {
@@ -105,7 +105,7 @@ public class MarkCommandTest {
 
     @Test
     public void markCommand_valid_success() throws DukeException, IOException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Task 1: Todo"));
         taskList.add(new DeadlineTask("Task 2: Deadline w/ Date and Time", "2022-01-01", "11:11"));
@@ -147,7 +147,7 @@ public class MarkCommandTest {
 
     @Test
     public void unmarkCommand_valid_success() throws DukeException, IOException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Task 1: Todo", true));
         taskList.add(new DeadlineTask("Task 2: Deadline w/ Date and Time", true,"2022-01-01", "11:11"));

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskType;
@@ -40,7 +40,7 @@ public class CreateCommandTest {
 
     @Test
     public void createCommand_todoTask_success() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         try {
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -60,7 +60,7 @@ public class CreateCommandTest {
 
     @Test
     public void createCommand_deadlineTask_success() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         //With Date + Time
@@ -98,7 +98,7 @@ public class CreateCommandTest {
 
     @Test
     public void createDeadlineTask_emptyDeadline_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         //No /by in the line
@@ -120,7 +120,7 @@ public class CreateCommandTest {
 
     @Test
     public void createDeadlineTask_invalidDateTimeFormat_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         try {
@@ -134,7 +134,7 @@ public class CreateCommandTest {
 
     @Test
     public void createCommand_eventTask_success() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         //With Date + Time
@@ -172,7 +172,7 @@ public class CreateCommandTest {
 
     @Test
     public void createEventTask_emptyEventTime_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         //No /at in the line
@@ -194,7 +194,7 @@ public class CreateCommandTest {
 
     @Test
     public void createEventTask_invalidDateTimeFormat_exceptionThrown() {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
 
         try {

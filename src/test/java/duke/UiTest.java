@@ -14,7 +14,7 @@ public class UiTest {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.showWelcome();
         outStream.flush();
         String lines = outStream.toString();
@@ -28,7 +28,7 @@ public class UiTest {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.showExitMessage();
         outStream.flush();
         String lines = outStream.toString();
@@ -42,7 +42,7 @@ public class UiTest {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
 
-        UI ui = new UI();
+        Ui ui = new Ui();
         ui.printContent("This is a test line to fit within the top and bottom borders");
         outStream.flush();
         String lines = outStream.toString();

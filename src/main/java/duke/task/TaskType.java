@@ -6,11 +6,12 @@ public enum TaskType {
     EVENT("E");
 
     private String initial;
-    TaskType(String initial){
+
+    TaskType(String initial) {
         this.initial = initial;
     }
 
-    public String getInitial(){
+    public String getInitial() {
         return this.initial;
     }
 }
