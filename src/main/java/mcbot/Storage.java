@@ -90,6 +90,12 @@ public class Storage {
         return  arrList;
     }
 
+    /**
+     * Updates the data file with the updates task list.
+     * Rewrites each task one by one. 
+     * 
+     * @param taskList The list containing the tasks.
+     */
     public void updateData(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -102,6 +108,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends a new task to the data file.
+     * Writes a new line of task to the data file.
+     * 
+     * @param task The task to be saved into the data file.
+     */
     public void appendData(Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
