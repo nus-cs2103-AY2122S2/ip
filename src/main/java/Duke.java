@@ -11,37 +11,22 @@ import java.io.FileWriter;
 import java.util.Arrays;
 
 public class Duke {
-    private static final String LINE = "_____________________________________________________________";
-    private static final String GAP = "      ";
-    private static final String LOGO =
-            "      ████████▄  ███    █▄     ▄█   ▄█▄    ▄████████ \n" +
-            "      ███   ▀███ ███    ███   ███ ▄███▀   ███    ███ \n" +
-            "      ███    ███ ███    ███   ███▐██▀     ███    █▀  \n" +
-            "      ███    ███ ███    ███  ▄█████▀     ▄███▄▄▄     \n" +
-            "      ███    ███ ███    ███ ▀▀█████▄    ▀▀███▀▀▀     \n" +
-            "      ███    ███ ███    ███   ███▐██▄     ███    █▄  \n" +
-            "      ███   ▄███ ███    ███   ███ ▀███▄   ███    ███ \n" +
-            "      ████████▀  ████████▀    ███   ▀█▀   ██████████";
+    private final Ui ui;
 
+    public Duke() {
+        this.ui = new Ui();
+    }
 
-    public static void main(String[] args) {
-
-        System.out.println(LINE);
-        System.out.println(GAP + "Hello from\n" + LOGO);
-        System.out.println(LINE);
-        System.out.println(
-                GAP + "I am a chat bot and I'm here to help you be productive :)\n" +
-                GAP + "What can I do for you today?"
-        );
-        System.out.println(LINE);
+    public void run() {
+        this.ui.initialGreet();
 
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<Task>();
-        List<String> commands = List.of("list", "bye", "mark", "unmark", "delete", "todo", "event", "deadline", "save");
+        List<String> commands = List.of("list", "bye", "mark", "unmark", "delete", "todo", "event", "deadConstants.LINE", "save");
 
         try {
-            if (Files.exists(Paths.get("data/duke.txt"))) {
-                File f = new File("data/duke.txt");
+            if (Files.exists(Paths.get(Constants.STORAGE_PATH))) {
+                File f = new File(Constants.STORAGE_PATH);
                 Scanner fileScanner = new Scanner(f);
                 while(fileScanner.hasNextLine()) {
                     List<String> description = Arrays.asList(fileScanner.nextLine().split(" "));
@@ -54,11 +39,9 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println(GAP + e.getMessage());
-            System.out.println(LINE);
-        } catch (InvalidArgumentException e) {
-            System.out.println(GAP + e.getMessage());
-            System.out.println(LINE);
+            ui.print(e.getMessage());
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
         }
 
         while (true) {
@@ -69,14 +52,17 @@ public class Duke {
                 }
 
                 if (instruction[0].equals("bye")) {
-                    System.out.println(GAP + "Bye. Hope to see you again soon!");
-                    System.out.println(LINE);
+                    ui.finalBye();
                     return;
 
                 } else if (instruction[0].equals("list")) {
+                    StringBuilder response = new StringBuilder("");
+
+                    //String response = "";
                     for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println(GAP + (i + 1) + ". " + tasks.get(i));
+                        response.append(String.format((i + 1) + ". " + tasks.get(i) + "\n"));
                     }
+                    ui.print(response.toString());
 
                 } else if (instruction[0].equals("mark") || instruction[0].equals("unmark")) {
                     int taskNum = Integer.parseInt(instruction[1]);
@@ -93,7 +79,7 @@ public class Duke {
                         response = tasks.get(taskNum - 1).markAsNotDone();
                     }
 
-                    System.out.println(GAP + response);
+                    ui.print(response);
 
                 } else if (instruction[0].equals("delete")) {
                     int taskNum = Integer.parseInt(instruction[1]);
@@ -102,31 +88,24 @@ public class Duke {
                         throw new InvalidIndexException();
                     }
 
-                    System.out.println(String.format(GAP + "Ok, I will remove this task: \n %s", tasks.get(taskNum - 1)));
+                    System.out.println(String.format(Constants.GAP + "Ok, I will remove this task: \n %s", tasks.get(taskNum - 1)));
+                    System.out.println(Constants.LINE);
                     tasks.remove(taskNum - 1);
 
-                } else if (instruction[0].equals("todo") || instruction[0].equals("event") || instruction[0].equals("deadline")) {
-                    Task newTask;
-
-                    if(instruction[0].equals("todo")) {
-                        newTask = Todo.of(instruction);
-                    } else if (instruction[0].equals("event")) {
-                        newTask = Event.of(instruction);
-                    } else {
-                        newTask = Deadline.of(instruction);
-                    }
-
+                } else if (instruction[0].equals("todo") || instruction[0].equals("event") || instruction[0].equals("deadConstants.LINE")) {
+                    Task newTask = Task.createTask(Arrays.asList(instruction));
                     tasks.add(newTask);
-                    System.out.println(GAP + "Got it. I've added this task\n" + GAP +  newTask);
-                    System.out.println(String.format(GAP + "You have %d tasks in the list", tasks.size()));
+                    System.out.println(Constants.GAP + "Got it. I've added this task\n" + Constants.GAP +  newTask);
+                    System.out.println(String.format(Constants.GAP + "You have %d tasks in the list", tasks.size()));
+                    System.out.println(Constants.LINE);
 
                 } else if (instruction[0].equals("save")) {
                     String output;
                     for (Task task : tasks) {
                         System.out.println(task);
                     }
-                    Path dir = Paths.get("data");
-                    Path store = Paths.get("data/duke.txt");
+                    Path dir = Paths.get(Constants.DIR_PATH);
+                    Path store = Paths.get(Constants.STORAGE_PATH);
                     if (!Files.exists(dir)) {
                         Files.createDirectory(dir);
                         Files.createFile(store);
@@ -134,21 +113,22 @@ public class Duke {
                         Files.createFile(store);
                     }
 
-                    FileWriter writer = new FileWriter("data/duke.txt");
+                    FileWriter writer = new FileWriter(Constants.STORAGE_PATH);
                     for (Task task : tasks) {
                         writer.write(task.toStorageString() + "\n");
                     }
                     writer.close();
                 }
-                System.out.println(LINE);
             }
             catch (DukeException e){
-                System.out.println(GAP + e.getMessage());
-                System.out.println(LINE);
+                ui.print(e.getMessage());
             } catch (IOException e) {
-                System.out.println(GAP + e.getMessage());
-                System.out.println(LINE);
+                ui.print(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
