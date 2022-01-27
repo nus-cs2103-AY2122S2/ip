@@ -122,6 +122,23 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Filters the task list in this {@code TaskManager} by the specified keyword.
+     *
+     * @param keyword the keyword to filter the task list by.
+     * @return the filtered task list.
+     */
+    public ArrayList<Task> filterDescByKeyword(String keyword) {
+        ArrayList<Task> filteredTaskList = new ArrayList<>();
+        this.taskList.forEach((task -> {
+            if (task.description.contains(keyword)) {
+                filteredTaskList.add(task);
+            }
+        }));
+
+        return filteredTaskList;
+    }
+
     public void revertChanges() {
         if (this.previousTaskList != null) {
             this.taskList = new ArrayList<>(this.previousTaskList);
