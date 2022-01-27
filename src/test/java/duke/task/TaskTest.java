@@ -147,7 +147,7 @@ public class TaskTest {
             }, reference);
             fail();
         } catch (IOException ignored) {
-
+            assertTrue(true);
         }
     }
 }

@@ -4,6 +4,9 @@ import duke.util.Printable;
 
 import java.util.ArrayList;
 
+/**
+ * Provides a dummy printable object for test scripts to print into.
+ */
 public class PrinterStub implements Printable {
     private final ArrayList<String> lines;
 
