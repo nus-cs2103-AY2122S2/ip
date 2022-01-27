@@ -8,6 +8,10 @@ import main.java.duke.parser.Parser;
 import main.java.duke.responses.Response;
 import main.java.duke.ui.Ui;
 
+/**
+ * Duke is a program that takes in user inputs and stores them as Tasks
+ */
+
 public class Duke {
   TaskList taskList;
   Storage store;
@@ -16,6 +20,9 @@ public class Duke {
 
   boolean isRunning = true;
 
+  /**
+   * Constructor for Duke Chatbot
+   */
   Duke() {
     this.taskList = new TaskList();
     this.store = new Storage(taskList);
@@ -23,6 +30,9 @@ public class Duke {
     this.cmdLine = new Ui();
   }
 
+  /**
+   * Starts Duke
+   */
   public void run() {
     
     store.initialiseStorage();

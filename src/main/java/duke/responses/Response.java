@@ -1,6 +1,6 @@
 package main.java.duke.responses;
 /**
- * This is an interface of a Response object
+ * This is an interface of a Response.
  */
 public interface Response {
 

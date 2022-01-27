@@ -5,11 +5,26 @@ import main.java.duke.dukeexceptions.DukeTaskListException;
 import main.java.duke.responses.Response;
 import main.java.duke.responses.UnMarkResponse;
 
-public class UnmarkCommand extends  Command{
+/***
+ * Command that is created when user wants to Mark a Task as done
+ */
+
+public class UnmarkCommand extends Command {
+
+    /***
+     * Constructors the Command using the user command 
+     * @param stringCmd String representation of the users command
+     */
 
     public UnmarkCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }
+
+    /***
+     * Marks a task as undone from the TaskList and updates the Storage.
+     * @return Response class that would contains the UI message.
+     * @throws DukeException thrown in the event of a invalid index.
+     */
     
     @Override
     public Response execute() throws DukeException {

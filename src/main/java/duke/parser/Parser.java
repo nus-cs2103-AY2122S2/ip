@@ -10,17 +10,33 @@ import main.java.duke.responses.WelcomeResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/***
+ * Parser that deals with user inputs.
+ */
+
 public class Parser {
     static private ArrayList<String> commandList = new ArrayList<>(
             Arrays.asList("bye", "delete", "list", "mark", "unmark", "todo", "deadline", "event"));
-    
+
+    /**
+     * @return a WelcomeResponse.
+     */
     public Response welcome() {
         return new WelcomeResponse();
     }
-    
+    /**
+     * @return a StartResponse.
+     */
     public Response start() {
         return new StartResponse();
     }
+
+    /***
+     * 
+     * @param stringCmd this is the users input.
+     * @return the appropriate Response based on the stringCmd.
+     * @throws DukeException Error in the event of a unknown input.
+     */
     
     public Command getCommand(String stringCmd) throws DukeException {
         

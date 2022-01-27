@@ -5,12 +5,26 @@ import main.java.duke.dukeexceptions.DukeTaskListException;
 import main.java.duke.responses.DeleteResponse;
 import main.java.duke.responses.Response;
 
+/***
+ * Command that is created when user wants to delete a Task
+ */
+
 public class DeleteCommand extends  Command{
+
+    /***
+     * Constructors the Command using the user command 
+     * @param stringCmd String representation of the users command
+     */
     
     public DeleteCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }
-    
+
+    /***
+     * Deletes a task from the TaskList and updates the Storage.
+     * @return Response class that would contains the UI message.
+     * @throws DukeException thrown in the event of a invalid index.
+     */
     @Override
     public Response execute() throws DukeException {
         String[] stringCmdArr = stringCmd.split(" ");
