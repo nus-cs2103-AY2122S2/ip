@@ -170,4 +170,25 @@ public class TaskList {
             }
         }
     }
+
+    public static void findTask(String command, ArrayList<Task> storeList) {
+        String itemToFind = command.substring(5);
+        int sizeOfList = storeList.size();
+        ArrayList<Task> tobePrinted = new ArrayList<>();
+        for (int i = 0; i < sizeOfList; i++) {
+            if (storeList.get(i).getDescription().contains(itemToFind)) {
+                tobePrinted.add(storeList.get(i));
+            } else {
+
+            }
+        }
+        if (tobePrinted.size() == 0) {
+            System.out.println("Im sorry master, you have no matching tasks");
+        } else {
+            System.out.println("Master, I have found these in my brain");
+            for (int j = 0; j < tobePrinted.size(); j++) {
+                System.out.println((j + 1) + ". " + tobePrinted.get(j).toString());
+            }
+        }
+    }
 }

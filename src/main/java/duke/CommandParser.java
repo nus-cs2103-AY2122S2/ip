@@ -32,7 +32,9 @@ public class CommandParser {
             TaskList.addEvent(command, storeList);
         } else if (command.startsWith("delete")) {
             TaskList.deleteTask(command, storeList);
-        }  else {
+        }  else if (command.startsWith("find")) {
+            TaskList.findTask(command, storeList);
+        } else {
             Ui.unknownCommand();
         }
     }
