@@ -6,8 +6,6 @@ package duke;
  *
  * @author Toh Zhan Qing
  */
-
-
 public class Duke {
 
     public static void main(String[] args){
@@ -16,6 +14,9 @@ public class Duke {
         ui.loop();
     }
 
+    /**
+     * Initialises all necessary classes
+     */
     public static void initialise(){
         TaskList tasklist = new TaskList();
         Storage storage = new Storage();

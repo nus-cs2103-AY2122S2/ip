@@ -2,6 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * This is the class that stores the task in a list format
+ * and provide methods to modify the list
+ */
+
 public class TaskList {
     static ArrayList<Task> tasklist;
 

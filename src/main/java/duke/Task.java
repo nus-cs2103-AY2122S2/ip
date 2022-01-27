@@ -55,6 +55,10 @@ public class Task {
 
     }
 
+    /**
+     * Gets string representation of how task will be formatted into disk
+     * @return string representation of how task will be formatted into disk
+     */
     public String getDataRepresentation(){
         return String.format("%s---%s---%s---%s\n", this.type, this.isDone, this.name, this.time);
     }
