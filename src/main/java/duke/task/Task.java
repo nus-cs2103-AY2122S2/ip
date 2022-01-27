@@ -1,9 +1,5 @@
 package duke.task;
 
-/**
- * Task class to store various types of tasks in chatbot
- */
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     public boolean getIsDone() {

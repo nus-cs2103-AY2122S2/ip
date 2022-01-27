@@ -7,11 +7,6 @@ import duke.task.Todo;
 
 import java.time.format.DateTimeFormatter;
 
-/**
- * Parser type: Storage parser
- * Parse all current tasks in chatbot to store in a suitable format
- */
-
 public class StorageParser extends Parser {
     protected Task task;
 
