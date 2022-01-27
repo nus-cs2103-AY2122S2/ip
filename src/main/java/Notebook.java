@@ -1,16 +1,21 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Stores and handles the list of tasks
  */
 public class Notebook {
     private final ArrayList<Task> tasks;
+    private final Storage storage;
 
     /**
      * Constructor to initialise a new task list.
      */
     public Notebook() {
         tasks = new ArrayList<>();
+        storage = new Storage();
+        taskFiller();
     }
 
     /**
@@ -38,17 +43,30 @@ public class Notebook {
         case "mark":
         case "unmark":
             e = this.marker(e);
+            try {
+                storage.editTasks(tasks.get(Integer.parseInt(temp[1]) - 1), 1);
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("Please enter a valid number!");
+            }
             break;
         case "todo":
             e = this.todo(temp[1]);
+            storage.addTasks(tasks.get(tasks.size() - 1));
             break;
         case "deadline":
             e = this.deadline(temp[1]);
+            storage.addTasks(tasks.get(tasks.size() - 1));
             break;
         case "event":
             e = this.event(temp[1]);
+            storage.addTasks(tasks.get(tasks.size() - 1));
             break;
         case "delete":
+            try {
+                storage.editTasks(tasks.get(Integer.parseInt(temp[1]) - 1), 2);
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("Please enter a valid number!");
+            }
             e = this.deleter(Integer.parseInt(temp[1]));
             break;
         }
@@ -166,6 +184,42 @@ public class Notebook {
                     + "\n" + outstanding();
         } catch (IndexOutOfBoundsException e) {
             return "Invalid task number. Please try again";
+        }
+    }
+
+    /**
+     * Copies over tasks in data file to the task arraylist.
+     */
+    public void taskFiller() {
+        try {
+            Scanner sc = new Scanner(storage.getTasks());
+            while (sc.hasNext()) {
+                String temp = sc.nextLine();
+                String taskInfo = temp.split(" >> ")[1];
+                char taskType = temp.charAt(1);
+                char marking = temp.charAt(4);
+                switch (taskType) {
+                case 'T':
+                    todo(taskInfo);
+                    break;
+                case 'D':
+                    taskInfo = taskInfo.replaceFirst("\\(By:", "/by");
+                    taskInfo = taskInfo.replaceFirst("\\)", "");
+                    deadline(taskInfo);
+                    break;
+                case 'E':
+                    taskInfo = taskInfo.replaceFirst("\\(At:", "/at");
+                    taskInfo = taskInfo.replaceFirst("\\)", "");
+                    event(taskInfo);
+                    break;
+                }
+
+                if (marking == 'X') {
+                    tasks.get(tasks.size() - 1).mark();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
