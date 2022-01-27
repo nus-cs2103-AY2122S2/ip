@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+// This is a Java class
 public class Duke {
     /**
      * Main class
