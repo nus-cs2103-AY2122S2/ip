@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class UltoiUi {
     public static final String INDENT = "    ";
     private static final String LINE_BREAK = "======U======L======T======O======I======";
-    private static final String WELCOME_MESSAGE = "Hello! I am ultoi.util.Ultoi [ uhl-twah ].\n"
+    private static final String WELCOME_MESSAGE = "Hello! I am Ultoi [ uhl-twah ].\n"
             + "What can I do for you? <O_O>";
-    private static final String LOADING_ERROR = "ultoi.util.Ultoi fails to load your past tasks. <OoO>";
+    private static final String LOADING_ERROR = "Ultoi fails to load your past tasks. <OoO>";
 
 
     private final Scanner in;

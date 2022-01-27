@@ -18,18 +18,18 @@ public class DateTime {
      * @param datetime Input string to be processed.
      * @throws UltoiException If the input string does not follow the format "YYYY-MM-DD tttt".
      */
-    public DateTime(String datetime) throws UltoiException {
-        String[] datetimes = datetime.split(" ");
+    public DateTime(String dateTime) throws UltoiException {
+        String[] dateTimes = dateTime.split(" ");
 
         try {
             this.date = LocalDate.parse(dateTimes[0]);
             this.time = Integer.parseInt(dateTimes[1]);
         } catch (Exception e) {
-            throw new UltoiException("wrong time format!");
+            throw UltoiException.wrongDateTimeFormatException();
         }
 
         if (this.time < 0 || time % 100 > 59 || time / 100 > 23) {
-            throw new UltoiException("wrong time format!");
+            throw UltoiException.wrongDateTimeFormatException();
         }
     }
 

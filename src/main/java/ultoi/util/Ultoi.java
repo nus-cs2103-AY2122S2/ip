@@ -3,6 +3,7 @@ package ultoi.util;
 import ultoi.command.Command;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Represents a bot named Ultoi that could help users memorize their tasks.
@@ -21,6 +22,7 @@ public class Ultoi {
      * @param filePath Path to the file to load and save tasks.
      */
     public Ultoi(Path filePath) {
+        this.ui = new UltoiUi();
         storage = new Storage(filePath);
 
         try {
@@ -57,8 +59,8 @@ public class Ultoi {
      * @param args User input.
      */
     public static void main(String[] args) {
-        Path filePath = java.nio.file.Paths.get(System.getProperty("user.home"),
-                "iP", "data", "ultoi.util.Ultoi.txt");
+        Path filePath = Paths.get(System.getProperty("user.home"),
+                "iP", "data", "Ultoi.txt");
         new Ultoi(filePath).run();
     }
 }
