@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
+/**
+ Class to start the Duke chatbot which supports adding tasks to a list
+ */
 
 public class Duke {
     public static void main(String[] args) throws IOException {
