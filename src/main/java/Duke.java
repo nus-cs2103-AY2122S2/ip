@@ -53,8 +53,8 @@ public class Duke {
 
     /**
      * Add a task to the list.
-     * A task can be one of 'todo', 'event' or 'deadline', whilst 'event'
-     * and 'deadline' have a time specified after the keyword '/at' or '/by'.
+     * A task can be one of 'todo', 'event' or 'deadline', whilst 'event' and 'deadline' have a time 
+     * specified after the keyword '/at' or '/by'.
      *
      * @param input The user input of adding a task. 
      *
@@ -78,7 +78,8 @@ public class Duke {
             t = new Todo(description);
         } else if (type == TaskType.EVENT) {
             timeIndex = input.indexOf(" /at ");
-            if (timeIndex == -1) { // cannot find '/at'
+            if (timeIndex == -1) { 
+                // cannot find '/at'
                 throw new DukeException("\t ☹ OOPS!!! The time of an event cannot be empty.\n");
             }
             try {
@@ -91,9 +92,11 @@ public class Duke {
                 throw new DukeException("\t ☹ OOPS!!! The description or time of an event cannot be empty.\n");
             }
             t = new Event(description, time);
-        } else { // deadline
+        } else { 
+            // deadline
             timeIndex = input.indexOf(" /by ");
-            if (timeIndex == -1) { // cannot find '/at'
+            if (timeIndex == -1) { 
+                // cannot find '/at'
                 throw new DukeException("\t ☹ OOPS!!! The time of a deadline cannot be empty.\n");
             }
             try {
@@ -149,12 +152,12 @@ public class Duke {
     private void run() {
         String input = sc.nextLine();
         String[] splitted = input.split("\\s+");
-        if (input.equals("bye")) { // bye
+        if (input.equals("bye")) { 
             this.bye();
             return;
-        } else if (input.equals("list")) { // list
+        } else if (input.equals("list")) {
             this.list();
-        } else if (splitted.length == 2 && splitted[0].equals("mark")) { // mark
+        } else if (splitted.length == 2 && splitted[0].equals("mark")) {
             try {
                 int num = Integer.parseInt(splitted[1]);
                 this.mark(num-1);
@@ -163,7 +166,7 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printMsg("\t Opps! The item you wanna mark is out of bounds.\n");
             }
-        } else if (splitted.length == 2 && splitted[0].equals("unmark")) { // unmark
+        } else if (splitted.length == 2 && splitted[0].equals("unmark")) {
             try {
                 int num = Integer.parseInt(splitted[1]);
                 this.unmark(num-1);
@@ -172,25 +175,25 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printMsg("\t Opps! The item you wanna unmark is out of bounds.\n");
             }
-        } else if (splitted[0].equals("todo")) { // add todo
+        } else if (splitted[0].equals("todo")) {
             try {
                 this.addTask(TaskType.TODO, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
             }
-        } else if (splitted[0].equals("event")) { // add event
+        } else if (splitted[0].equals("event")) {
             try {
                 this.addTask(TaskType.EVENT, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
             }
-        } else if (splitted[0].equals("deadline")) { // add deadline
+        } else if (splitted[0].equals("deadline")) {
             try {
                 this.addTask(TaskType.DEADLINE, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
             }
-        } else if (splitted.length == 2 && splitted[0].equals("delete")) { //delete
+        } else if (splitted.length == 2 && splitted[0].equals("delete")) {
             try {
                 int num = Integer.parseInt(splitted[1]);
                 this.delete(num-1);
@@ -199,7 +202,7 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printMsg("\t Opps! The item you wanna mark is out of bounds.\n");
             }
-        } else { // handle exceptions
+        } else {
             this.printMsg("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
         this.run();
