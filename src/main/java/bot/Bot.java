@@ -3,6 +3,9 @@ package bot;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +57,9 @@ public class Bot {
                 return this.addTask(new Todo(tokens[1].trim()));
             case "deadline":
                 final String[] deadlineArgs = tokens[1].split(" /by ");
-                return this.addTask(new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim()));
+                return this.addTask(new Deadline(
+                        deadlineArgs[0].trim(),
+                        LocalDate.parse(deadlineArgs[1].trim(), Deadline.DATE_INPUT_FORMAT)));
             case "event":
                 final String[] eventArgs = tokens[1].split(" /at ");
                 return this.addTask(new Event(eventArgs[0].trim(), eventArgs[1].trim()));
