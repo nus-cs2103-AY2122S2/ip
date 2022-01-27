@@ -1,8 +1,11 @@
 package duke.tasklist;
 
+import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.task.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -84,5 +87,45 @@ public class TaskList {
     public void fetchData(ArrayList<Task> data) {
         list.clear();
         list.addAll(data);
+    }
+
+    /**
+     * Finds a task by searching for a keyword.
+     * @param input Keyword specified by the user.
+     */
+    public void find(String input) {
+        int i = 0;
+        new Ui().showLine();
+
+        try {
+            if (input.equals("")) {
+                throw new DukeException("Empty body");
+            }
+            if (list.size() != 0) {
+                System.out.println("Here are the matching tasks in your list:\n");
+                for (Task task: list) {
+                    LocalDate date = task.getDate();
+
+                    if (task.getUserInput().contains(input)) {
+                        System.out.println(++i + ". " + task);
+                        continue;
+                    }
+
+                    if (date != null) {
+                        if (date.toString().contains(input)
+                                || date.format(DateTimeFormatter.ofPattern("MMM d yyyy")).contains(input)) {
+                            System.out.println(++i + ".  " + task);
+                        }
+                    }
+                }
+            }
+            if (i == 0) {
+                System.out.println("☹ OOPS!!! Duke searched high and low but could not find the task that you want!");
+            }
+        } catch (DukeException e) {
+            System.out.println("☹ OOPS!!! The description of the find command cannot be empty!");
+        }
+
+        new Ui().showLine();
     }
 }
