@@ -68,18 +68,18 @@ public class Duke {
                         break;
                     }
                 } else if (command.equals("deadline")) {
-                    String[] s = parser.parseDeadline(sc.nextLine());
                     try {
+                        String[] s = parser.parseDeadline(sc.nextLine());
                         newTask = makeDeadline(s[0], s[1]);
-                    } catch (IndexOutOfBoundsException ex) {
+                    } catch (IncompleteArgumentException ex) {
                         ui.showIncompleteArgumentError();
                         break;
                     }
                 } else {
-                    String[] s = parser.parseEvent(sc.nextLine());
                     try {
+                        String[] s = parser.parseEvent(sc.nextLine());
                         newTask = makeEvent(s[0], s[1]);
-                    } catch (IndexOutOfBoundsException ex) {
+                    } catch (IncompleteArgumentException ex) {
                         ui.showIncompleteArgumentError();
                         break;
                     }
@@ -97,7 +97,7 @@ public class Duke {
     }
 
 
-    private void mark(int idx) {
+    public void mark(int idx) {
         taskList.get(idx - 1).mark();
         if (taskList.get(idx - 1).getDone()) {
             ui.markAsDone(taskList.getToDoList(), idx);
@@ -106,22 +106,22 @@ public class Duke {
         }
     }
 
-    private Task makeToDo(String name) throws ToDoIllegalArgumentException {
+    public Task makeToDo(String name) throws ToDoIllegalArgumentException {
         if (name.isEmpty()) {
             throw new ToDoIllegalArgumentException("Illegal Argument");
         }
         return new ToDo(name);
     }
 
-    private Task makeDeadline(String name, String by) {
+    public Task makeDeadline(String name, String by) {
         return new Deadline(name, by.trim());
     }
 
-    private Task makeEvent(String name, String at) {
+    public Task makeEvent(String name, String at) {
         return new Event(name, at.trim());
     }
 
-    private void remove(int idx) {
+    public void remove(int idx) {
         Task removed = taskList.remove(idx - 1);
         ui.confirmRemoval(removed, taskList.getToDoList());
     }
