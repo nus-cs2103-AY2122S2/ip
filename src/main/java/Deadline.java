@@ -7,6 +7,14 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String formatString() {
+        String output = "D";
+        String markState = this.isDone ? "mark" : "unmark";
+        return output + " | " + markState + " | "
+                + this.description + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }

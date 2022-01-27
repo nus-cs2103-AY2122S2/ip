@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,44 +16,47 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         ArrayList<Task> database = new ArrayList<>();
+        Duke.readFile("data/duke.txt", database);
+        System.out.println(database);
         Duke.introMessage();
         Scanner sc = new Scanner(System.in);
-        Task input = new Task(sc.nextLine());
-        while (!input.description.equals("bye")) {
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
             try {
                 System.out.println(LINE);
-                if (input.description.equals("list")) {
+                if (input.equals("list")) {
                     Duke.listAction(database);
-                } else if (input.description.startsWith("mark")) {
-                    String itemNumber = input.description.substring(5);
+                } else if (input.startsWith("mark")) {
+                    String itemNumber = input.substring(5);
                     Duke.markAction(itemNumber, database);
-                } else if (input.description.startsWith("unmark")) {
-                    String itemNumber = input.description.substring(7);
+                } else if (input.startsWith("unmark")) {
+                    String itemNumber = input.substring(7);
                     Duke.unmarkAction(itemNumber, database);
-                } else if (input.description.startsWith("todo")) {
-                    String description = input.description.substring(5);
+                } else if (input.startsWith("todo")) {
+                    String description = input.substring(5);
                     Duke.toDoAction(description, database);
-                } else if (input.description.startsWith("deadline")) {
-                    String[] itemArr = input.description.substring(9).split(" /by ");
+                } else if (input.startsWith("deadline")) {
+                    String[] itemArr = input.substring(9).split(" /by ");
                     Duke.deadlineAction(itemArr, database);
-                } else if (input.description.startsWith("event")) {
-                    String[] itemArr = input.description.substring(6).split(" /at ");
+                } else if (input.startsWith("event")) {
+                    String[] itemArr = input.substring(6).split(" /at ");
                     Duke.eventAction(itemArr, database);
-                } else if (input.description.startsWith("delete")) {
-                    String itemNumber = input.description.substring(7);
+                } else if (input.startsWith("delete")) {
+                    String itemNumber = input.substring(7);
                     deleteAction(itemNumber, database);
                 } else {
                     throw new DukeException(ERROR_UNKNOWN);
                 }
                 System.out.println(LINE);
-                input = new Task(sc.nextLine());
-            } catch (StringIndexOutOfBoundsException e){
+                //input = new Task(sc.nextLine());
+            } catch (IndexOutOfBoundsException e){
                 System.out.println(new DukeException(ERROR_DESCRIPTION).getMessage() + "\n" + LINE);
             } catch (DukeException errorMessage) {
                 System.out.println(errorMessage.getMessage() + "\n" + LINE);
             }
-            input = new Task(sc.nextLine());
+            input = sc.nextLine();
         }
+        writeFile(database);
         System.out.println(LINE + "\n" + "Bye. Hope to see you again soon!" + "\n" + LINE);
     }
 
@@ -123,5 +128,60 @@ public class Duke {
         int numOfItems = listOfItems.size();
         System.out.println(REMOVED + itemToDelete);
         System.out.println("Now you have " + numOfItems + " tasks in the list.");
+    }
+
+    public static void readFile(String path, ArrayList<Task> itemList) throws DukeException {
+        File information = new File(path);
+        if (information.exists()) {
+            try {
+                File file = new File(path);
+                Scanner sc = new Scanner(file);
+                while (sc.hasNextLine()) {
+                    String text = sc.nextLine();
+                    String[] data = text.split(" \\| ");
+                    String initial = data[0];
+                    Task history;
+                    switch (initial) {
+                        case "T":
+                            history = new Todo(data[2]);
+                            break;
+                        case "D":
+                            history = new Deadline(data[2], data[3]);
+                            break;
+                        case "E":
+                            history = new Event(data[2], data[3]);
+                            break;
+                        default:
+                            throw new DukeException("Cannot understand the command");
+                    }
+                    if (data[1].equals("mark")) {
+                        history.markAsDone();
+                    }
+                    itemList.add(history);
+                }
+            } catch (FileNotFoundException e) {
+                throw new DukeException("Cannot find file...");
+            }
+        }
+    }
+
+    public static void writeFile(ArrayList<Task> itemList) throws DukeException {
+        try {
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            String path = directory.getAbsolutePath() + "/Duke.txt";
+            File newFile = new File(path);
+            FileWriter writer = new FileWriter(newFile);
+            StringBuilder data = new StringBuilder();
+            for (Task item : itemList) {
+                data.append(item.formatString()).append("\n");
+            }
+            writer.write(data.toString());
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Error... try again");
+        }
     }
 }
