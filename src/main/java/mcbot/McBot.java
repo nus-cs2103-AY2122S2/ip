@@ -4,12 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import mcbot.task.Task;
+import mcbot.task.ToDo;
+import mcbot.task.Event;
+import mcbot.task.Deadline;
+
 import mcbot.exception.McBotException;
 import mcbot.exception.InvalidCommandException;
-import mcbot.task.*;
 
 public class McBot {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -45,7 +49,7 @@ public class McBot {
                     isRunning = false;
                     break;
                 }
-                case "list": {
+                case "list":
                     try {
                         if (tasks.size() == 0) {
                             throw new McBotException("Your list is empty boi");
@@ -55,13 +59,13 @@ public class McBot {
                         ui.printError(e);
                     }
                     break;
-                }
-                case "mark": {
+                case "mark":
                     try {
                         String numStr = parser.getDetails();
                         int num = Integer.parseInt(numStr);
-                        if (num < 1 || num > tasks.size())
+                        if (num < 1 || num > tasks.size()) {
                             throw new McBotException();
+                        }
                         Task t = tasks.get(num - 1);
                         if (!t.isMarked()) {
                             t.markDone();
@@ -79,8 +83,7 @@ public class McBot {
                         ui.markError("integerNotFound");
                     }
                     break;
-                }
-                case "unmark": {
+                case "unmark":
                     try {
                         String numStr = parser.getDetails();
                         int num = Integer.parseInt(numStr);
@@ -105,8 +108,7 @@ public class McBot {
                         ui.markError("integerNotFound");
                     }
                     break;
-                }
-                case "todo": {
+                case "todo":
                     try {
                         String taskName = parser.getDetails();
                         Task t = new ToDo(taskName);
@@ -117,8 +119,7 @@ public class McBot {
                         ui.taskError("emptyTask");
                     }
                     break;
-                }
-                case "deadline": {
+                case "deadline":
                     try {
                         String taskName = parser.getDeadlineTask();
                         Task t;
@@ -148,8 +149,7 @@ public class McBot {
                         ui.taskError("datetimeFormat");
                     }
                     break;
-                }
-                case "event": {
+                case "event":
                     try {
                         String taskName = parser.getEventTask();
                         Task t;
@@ -160,7 +160,6 @@ public class McBot {
                         LocalDate eventDate = LocalDate.parse(dateStr, dateFormatter);
                         if (dateStr.isBlank()) {
                             throw new InvalidCommandException("you can't leave your event date/time empty");
-                            
                         }
                         if (parser.isThereTime()) {
                             String timeStr = parser.getEventTime();
@@ -180,14 +179,13 @@ public class McBot {
                         ui.taskError("datetimeFormat");
                     }
                     break;
-                }
-                case "delete": {
+                case "delete":
                     try {
                         String numStr = parser.getDetails();
                         int num = Integer.parseInt(numStr);
-                        if (num < 1 || num > tasks.size())
+                        if (num < 1 || num > tasks.size()) {
                             throw new McBotException("Boi, I can't delete a number that ain't on the list");
-                        Task t = tasks.get(num - 1);
+                        }                        Task t = tasks.get(num - 1);
                         tasks.remove(num - 1);
                         storage.updateData(tasks.getList());
                         ui.deleteLine(t, tasks.size());
@@ -199,10 +197,8 @@ public class McBot {
                         ui.deleteError("notInteger");
                     }
                     break;
-                }
-                default: {
+                default:
                     throw new InvalidCommandException("I don't understand a word ye're sayin'");
-                }
                 }
             } catch (McBotException e) {
                 ui.printError(e);

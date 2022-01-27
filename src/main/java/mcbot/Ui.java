@@ -1,6 +1,7 @@
 package mcbot;
 
 import java.util.ArrayList;
+
 import mcbot.task.Task;
 import mcbot.exception.McBotException;
 
@@ -73,55 +74,50 @@ public class Ui {
 
     public void markError(String error) {
         switch(error) {
-        case "missingData": {
+        case "missingData":
             System.out.println("I don't know which one yer referring to");
             break;
-        }
-        case "notInteger": {
+        case "notInteger":
             System.out.println("I only accept integers boi");
             break;
-        }
-        case "integerNotFound": {
+        case "integerNotFound":
             System.out.println("Don't mess with me boi, that number is not in the list");
             break;
-        }
-        default: {
+        default:
             System.out.println("New Error detected");
             break;
-        }
         }
     }
     
     public void deleteError(String error) {
         switch (error) {
-        case "empty": {
+        case "empty":
             System.out.println("Fool, I need a number to know which one to delete");
             break;
-        }
-        case "notInteger": {
+        case "notInteger":
             System.out.println("Boi, I only accept integers here for deletion");
             break;
-        }
+        default:
+            System.out.println("new error not caught");
         }
     }
 
     public void taskError(String error) {
         switch (error) {
-        case "emptyTask": {
+        case "emptyTask":
             System.out.println("Sorry boi, ye can't leave todo task empty");
             break;
-        }
-        case "deadlineFormat": {
+        case "deadlineFormat":
             System.out.println("Fool, follow this format: deadline -TASKNAME- /by DD/MM/YYYY HHMM");
             break;
-        }
-        case "eventFormat": {
+        case "eventFormat":
             System.out.println("Fool, follow this format: event -TASKNAME- /at DD/MM/YYYY HHMM-");
             break;
-        }
-        case "datetimeFormat": {
+        case "datetimeFormat":
             System.out.println("Yer date and time should follow this format: DD/MM/YYYY HHMM");
-        }
+            break;
+        default:
+            System.out.println("new error not caught");
         }
     }
 
