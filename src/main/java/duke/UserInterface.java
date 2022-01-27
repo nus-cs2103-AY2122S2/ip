@@ -39,6 +39,7 @@ public class UserInterface {
         System.out.println("Hello from\n" + logo);
 
         String nothing = "I can't read your mind, doc! Not yet, anyway.";
+        String saving = "Saving data...";
 
         String specific = "You're gonna need to be more specific.\n";
         String tryTodo = "Try 'todo An exciting human task'";
@@ -51,13 +52,14 @@ public class UserInterface {
         String unknown = "Sorry, I don't quite understand what you mean by '";
 
         // First line
-        echo.echoString("Heya! I'm Duke!\n" +
-                "What can I do for ya?");
+        echo.echoString("Heya! I'm Duke!\n"
+                + "What can I do for ya?");
 
         while(isLooping) {
 
             tempString = scanner.nextLine();
             String[] tempStrArray = tempString.split(" ", 2);
+            String retStr;
 
             switch (tempStrArray[0]) {
             case "":
@@ -65,12 +67,13 @@ public class UserInterface {
                 break;
 
             case "bye":
+                echo.echoString(saving);
                 memory.parseUpdateAll();
                 isLooping = false;
                 break;
 
             case "list":
-                memory.listAll();
+                echo.echoString(memory.listAll());
                 break;
 
             case "todo":
@@ -81,7 +84,8 @@ public class UserInterface {
                     if (tempStrArray[1].equals("")) {
                         echo.echoString(specific + tryTodo);
                     } else {
-                        memory.addTask(tempStrArray[1]);
+                        retStr = memory.addTask(tempStrArray[1]);
+                        echo.echoString(retStr);
                     }
                 }
                 break;
@@ -100,7 +104,8 @@ public class UserInterface {
                         } else if (tempDeadArray[1].equals("")) {
                             echo.echoString(specific + "Don't forget the task's deadline");
                         } else {
-                            memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
+                            retStr = memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
+                            echo.echoString(retStr);
                         }
                     }
                 }
@@ -120,7 +125,8 @@ public class UserInterface {
                         } else if (tempEventArray[1].equals("")) {
                             echo.echoString(specific + "Don't forget the event's time");
                         } else {
-                            memory.addEvent(tempEventArray[0], tempEventArray[1]);
+                            retStr = memory.addEvent(tempEventArray[0], tempEventArray[1]);
+                            echo.echoString(retStr);
                         }
                     }
                 }
@@ -136,7 +142,7 @@ public class UserInterface {
                     // Test if single number after 'mark'
                     try {
                         int address = Integer.parseInt(testString);
-                        memory.setDone(address);
+                        echo.echoString(memory.setDone(address));
                     } catch (NumberFormatException exception) {
                         echo.echoString("You need to give me a number doc!\n" +
                                 tryMark);
@@ -154,7 +160,7 @@ public class UserInterface {
                     // Test if single number after 'unmark'
                     try {
                         int address = Integer.parseInt(testString);
-                        memory.setUndone(address);
+                        echo.echoString(memory.setUndone(address));
                     } catch (NumberFormatException exception) {
                         echo.echoString("You need to give me a number doc!\n" +
                                 tryUnmark);
@@ -172,7 +178,7 @@ public class UserInterface {
                     // Test if single number after 'delete'
                     try {
                         int address = Integer.parseInt(testString);
-                        memory.deleteTask(address);
+                        echo.echoString(memory.deleteTask(address));
                     } catch (NumberFormatException exception) {
                         echo.echoString("You need to give me a number doc!\n" +
                                 tryDelete);
