@@ -50,8 +50,8 @@ public class AddDeadlineCommand extends Command<String> {
             toDoList.add(newDeadline);
 
             // Print out the formatted message after adding to TaskList
-            Ui.setDukeResponse(Parser.formatMsg("Got it. I've added this task:\n\t" + newDeadline
-                    + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+            Ui.setDukeResponse(Parser.formatMsg("Got it. I've added this task:\n" + newDeadline
+                    + "\nNow you have " + toDoList.size() + " tasks in the list."));
 
             // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);

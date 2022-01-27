@@ -7,8 +7,6 @@ import duke.tasks.Task;
 
 
 public class FindCommand extends Command<String> {
-    private final String TABBED_LINE = "\t----------------------------------------------";
-
     /**
      * Constructor for FindCommand.
      * When this class is instantiated, it automatically runs runCommand().
@@ -48,12 +46,11 @@ public class FindCommand extends Command<String> {
         if (temp.size() > 0) {
             String dukeResponse = "";
             // Print out all search terms found
-            dukeResponse += TABBED_LINE + "\n";
-            dukeResponse += "\tHere are the matching tasks in your list:\n";
+            dukeResponse += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < temp.size(); i++) {
-                dukeResponse += "\t" + (i + 1) + "." + temp.get(i).toString() + "\n";
+                dukeResponse += "" + (i + 1) + "." + temp.get(i).toString() + "\n";
             }
-            dukeResponse += TABBED_LINE + "\n";
+            dukeResponse +=  "\n";
             Ui.setDukeResponse(dukeResponse);
         } else {
             Ui.setDukeResponse(Parser.formatMsg("There were no terms matching: " + searchTerm));

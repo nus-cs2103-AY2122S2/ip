@@ -7,7 +7,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
@@ -28,13 +32,17 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
+        // Setting background colour
+        this.setBackground(new Background(new BackgroundFill(Color.rgb(100, 200, 200, 1),
+                new CornerRadii(5.0), new Insets(-5.0))));
 
-        l.setPadding(new Insets(10, 5, 0, 0));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
-        Circle clip = new Circle(50, 40, 40);
+        // Setting circular border for profile picture
+        Circle clip = new Circle(50, 50, 45);
         iv.setClip(clip);
+
         this.setAlignment(Pos.TOP_RIGHT);
         this.setPadding(new Insets(10, 2, 10, 2));
         this.getChildren().addAll(text, displayPicture);
@@ -46,6 +54,8 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
+        this.setBackground(new Background(new BackgroundFill(Color.rgb(240, 180, 180, 1),
+                new CornerRadii(0), new Insets(0))));
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);

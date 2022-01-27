@@ -45,8 +45,8 @@ public class AddToDoCommand extends Command<String> {
             toDoList.add(newToDo);
 
             // Print out the formatted message after adding to TaskList
-            Ui.setDukeResponse(Parser.formatMsg("Got it. I've added this task:\n\t" + newToDo
-                    + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+            Ui.setDukeResponse(Parser.formatMsg("Got it. I've added this task:\n" + newToDo
+                    + "\nNow you have " + toDoList.size() + " tasks in the list."));
 
             // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);

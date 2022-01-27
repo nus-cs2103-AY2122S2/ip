@@ -38,7 +38,7 @@ public class UnmarkCommand extends Command<Integer> {
             taskToUnmark.unmark();
 
             // Print out the formatted message after unmarking
-            Ui.setDukeResponse(Parser.formatMsg("OK, I've marked this task as not done yet:\n\t" + taskToUnmark));
+            Ui.setDukeResponse(Parser.formatMsg("OK, I've marked this task as not done yet:\n" + taskToUnmark));
         } catch (IndexOutOfBoundsException e) {
             Ui.setDukeResponseError(Parser.formatMsg("☹ OOPS!!! Item to unmark does not exist."));
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to unmark does not exist."));
