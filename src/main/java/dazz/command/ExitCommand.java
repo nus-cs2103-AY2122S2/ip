@@ -1,3 +1,9 @@
+package dazz.command;
+
+import dazz.Storage;
+import dazz.TaskList;
+import dazz.Ui;
+
 public class ExitCommand extends Command {
 
     @Override

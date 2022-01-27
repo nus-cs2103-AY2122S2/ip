@@ -1,3 +1,5 @@
+package dazz.exception;
+
 public enum ErrorType {
     EMPTY_DATE("OOPS!!! Your date is empty! Please check!"),
     EMPTY_DESCRIPTION("OOPS!!! Your description is empty! Please check!"),

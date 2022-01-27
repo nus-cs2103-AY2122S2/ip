@@ -1,3 +1,11 @@
+package dazz;
+
+import dazz.command.*;
+import dazz.exception.DazzException;
+import dazz.exception.EmptyDateException;
+import dazz.exception.EmptyDescriptionException;
+import dazz.exception.IncompleteCommandException;
+
 public class Parser {
     public static Command parse(String input) throws DazzException {
         String[] arr = input.split(" ", 2);

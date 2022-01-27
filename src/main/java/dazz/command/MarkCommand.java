@@ -1,3 +1,10 @@
+package dazz.command;
+
+import dazz.Storage;
+import dazz.TaskList;
+import dazz.Ui;
+import dazz.exception.InvalidTaskIndexException;
+
 public class MarkCommand extends Command {
     private final int index;
 

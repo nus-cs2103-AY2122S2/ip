@@ -1,3 +1,10 @@
+package dazz.command;
+
+import dazz.Storage;
+import dazz.TaskList;
+import dazz.Ui;
+import dazz.task.Todo;
+
 public class TodoCommand extends Command {
     private final Todo todo;
     public TodoCommand(String description) {

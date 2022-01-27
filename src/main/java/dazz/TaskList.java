@@ -1,4 +1,7 @@
-import java.util.ArrayList;
+package dazz;
+
+import dazz.exception.InvalidTaskIndexException;
+import dazz.task.Task;
 import java.util.List;
 
 public class TaskList {
@@ -50,20 +53,5 @@ public class TaskList {
     public List<Task> getTaskList() {
         return this.taskList;
     }
-
-    public void list() {
-        System.out.println("\tHere are the tasks in your list:");
-        if (taskList.size() == 0) {
-            System.out.println("\tYou have no task in your list.");
-        } else {
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-                System.out.println("\t" + (i + 1) + ". " + task);
-            }
-        }
-    }
-
-
-
 
 }

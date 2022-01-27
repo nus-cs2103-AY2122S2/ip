@@ -1,3 +1,10 @@
+package dazz.command;
+
+import dazz.Storage;
+import dazz.TaskList;
+import dazz.Ui;
+import dazz.task.Deadline;
+
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command{
