@@ -19,18 +19,39 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Saves the tasks in the computer whenever the task list changes and
+ * loads the data from the computer when PikaBot starts up.
+ */
 public class Storage {
 
     String filePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath Path of data file on computer.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Checks if data file exists on user's computer.
+     *
+     * @return Boolean value whether data file exists.
+     */
     public boolean doesFileExist() {
         return Files.exists(Paths.get(filePath));
     }
 
+    /**
+     * Parses data file from computer into a TaskList.
+     *
+     * @param f Data file to be read from.
+     * @return TaskList of tasks parsed from data file.
+     * @throws FileNotFoundException If file is not found.
+     */
     public static TaskList fileToTaskList(File f) throws FileNotFoundException {
         Scanner sc = new Scanner(f);
         ArrayList<Task> arrList = new ArrayList<>();
@@ -73,6 +94,15 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes tasks to data file on computer.
+     *
+     * @param taskList List of tasks.
+     * @throws IOException If the named file exists
+     * but is a directory rather than a regular file,
+     * does not exist but cannot be created, or cannot
+     * be opened for any other reason.
+     */
     public void TaskListToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : taskList.getTaskList()) {
@@ -81,6 +111,14 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Adds new task to data file on computer.
+     *
+     * @param taskToAdd Task to be added to data file on computer.
+     * @throws IOException If the named file exists but is
+     * a directory rather than a regular file, does not exist
+     * but cannot be created, or cannot be opened for any other reason.
+     */
     public void appendToFile(Task taskToAdd) throws IOException{
         if (! doesFileExist()) {
             String[] pathDetails = filePath.split("/", 2);
