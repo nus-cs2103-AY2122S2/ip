@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CommandList {
 
@@ -33,7 +34,7 @@ public class CommandList {
             for (int i = 0; i < list.size(); i++) {
                 System.out.println((i + 1) + "." + list.get(i));
             }
-        }  else if (firstWord.equals("mark") || firstWord.equals("unmark")) { // mark/unmark task
+        } else if (firstWord.equals("mark") || firstWord.equals("unmark")) { // mark/unmark task
             String secondWord = inputs[1];
             int index = Integer.parseInt(secondWord);
 
@@ -104,6 +105,24 @@ public class CommandList {
                     storage.store(list);
                 } catch (ParseException e) {
                     System.out.println("Please enter a valid date!");
+                }
+            }
+        } else if (firstWord.equals("find")) { // find tasks by a keyword
+            String secondWord = inputs[1];
+            List<Task> matches = new ArrayList<>();
+
+            for(Task task: list) {
+                if (task.toString().contains(secondWord)) {
+                    matches.add(task);
+                }
+            }
+
+            if (matches.isEmpty()) {
+                System.out.println("No matching tasks found.");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < matches.size(); i++) {
+                    System.out.println((i + 1) + "." + matches.get(i));
                 }
             }
         } else { // print error message
