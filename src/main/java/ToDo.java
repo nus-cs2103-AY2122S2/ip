@@ -4,6 +4,10 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toSavedFile() {
+        return "T | " + super.toSavedFile();
+    }
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
