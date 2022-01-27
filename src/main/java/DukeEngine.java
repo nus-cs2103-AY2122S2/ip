@@ -1,17 +1,16 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DukeEngine {
     
-    private ArrayList<Task> itemList;
+    private TaskList tasks;
     public boolean isPolling;
 
     public DukeEngine() {
         try {
-            itemList = Storage.readSaveFile();
+            tasks = Storage.readSaveFile();
         } catch (DukeException e) {
             Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
-            itemList = new ArrayList<>();
+            tasks = new TaskList();
         }
         
         isPolling = true;
@@ -31,19 +30,19 @@ public class DukeEngine {
                 break;
 
             case "list":
-                replyMessage = listItems();
+                replyMessage = tasks.listItems();
                 break;
 
             case "mark":
                 assertValidItemNumber(commandDetails);
-                replyMessage = markItem(Integer.parseInt(commandDetails));
-                Storage.updateTaskFile(itemList);
+                replyMessage = tasks.markItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(tasks);
                 break;
 
             case "unmark":
                 assertValidItemNumber(commandDetails);
-                replyMessage = unmarkItem(Integer.parseInt(commandDetails));
-                Storage.updateTaskFile(itemList);
+                replyMessage = tasks.unmarkItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(tasks);
                 break;
 
             case "todo":
@@ -53,14 +52,14 @@ public class DukeEngine {
             case "event":
                 assertNonEmptyDetails(commandDetails);
                 Task task = createTask(command, commandDetails);
-                replyMessage = addTask(task);
-                Storage.updateTaskFile(itemList);
+                replyMessage = tasks.addTask(task);
+                Storage.updateTaskFile(tasks);
                 break;
 
             case "delete":
                 assertValidItemNumber(commandDetails);
-                replyMessage = deleteItem(Integer.parseInt(commandDetails));
-                Storage.updateTaskFile(itemList);
+                replyMessage = tasks.deleteItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(tasks);
                 break;
 
             default:
@@ -94,53 +93,12 @@ public class DukeEngine {
             : new Event(taskArgs[0], taskArgs[1]);
     }
 
-    public String addTask(Task task) {
-        itemList.add(task);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list",
-            task, itemList.size());
-    }
-
-    public String deleteItem(int itemNumber) {
-        Task task = itemList.remove(itemNumber - 1);
-        return String.format(
-            "Noted. I've removed this task:\n  %s\nNow you have %s task(s) in the list",
-            task, itemList.size());
-    }
-
-    public String markItem(int itemNumber) {
-        Task task = itemList.get(itemNumber - 1);
-        task.markAsDone();
-        return "Nice! I've marked this as done:\n  " + task;
-    }
-
-    public String unmarkItem(int itemNumber) {
-        Task task = itemList.get(itemNumber - 1);
-        task.unmarkAsDone();
-        return "OK, I've marked this task as not done yet:\n  " + task;
-    }
-
-    public String listItems() {
-        StringBuilder sb = new StringBuilder();
-        if (itemList.isEmpty()) {
-            sb.append("There is nothing in the list!");
-        }
-        
-        for (int i = 1; i <= itemList.size(); i++) {
-            sb.append(i + ". ").append(itemList.get(i - 1)).append("\n");
-        }
-        return sb.toString();
-    }
-
     public String greetingMessage() {
         StringBuilder greeting = new StringBuilder();
         greeting.append("Wow! Hello! I'm Duke.\n");
         greeting.append("What can I do for you?");
 
         return greeting.toString();
-    }
-
-    public String echoInput(String msg) {
-        return msg;
     }
 
     public String byeMessage() {
@@ -169,7 +127,7 @@ public class DukeEngine {
 
         int itemNumber = Integer.parseInt(str);
 
-        if (itemNumber <= 0 || itemNumber > itemList.size()) throw new DukeException(
+        if (!tasks.isValidItemNumber(itemNumber)) throw new DukeException(
             "Please specify a valid item number");
     }
 }

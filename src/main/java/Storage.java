@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,11 +17,11 @@ public class Storage {
         return file;
     }
 
-    public static void updateTaskFile (ArrayList<Task> taskList) throws IOException {
+    public static void updateTaskFile (TaskList taskList) throws IOException {
         String tempFilePath = FILEPATH + ".new";
         File file = Storage.createFileIfNotExist(tempFilePath);
         FileWriter fw = new FileWriter(file, true);
-        for (Task task : taskList) {
+        for (Task task : taskList.tasks) {
             fw.write(task.toFileFormat());
         }
         fw.close();
@@ -30,8 +29,8 @@ public class Storage {
 
     }
 
-    public static ArrayList<Task> readSaveFile() throws DukeException{
-        ArrayList<Task> taskList = new ArrayList<>();
+    public static TaskList readSaveFile() throws DukeException{
+        TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
         Scanner s = null;
 
@@ -45,27 +44,27 @@ public class Storage {
 
                 switch (packetSections[0]){
                 case "T":
-                    taskList.add(new ToDo(taskName, isDone));
+                    tasks.addTask(new ToDo(taskName, isDone));
                     break;
                 case "D":
                     String deadlineString = packetSections[3];
-                    taskList.add(new Deadline(taskName, isDone, deadlineString));
+                    tasks.addTask(new Deadline(taskName, isDone, deadlineString));
                     break;
                 case "E":
                     String startDateString = packetSections[3];
-                    taskList.add(new Event(taskName, isDone, startDateString));
+                    tasks.addTask(new Event(taskName, isDone, startDateString));
                     break;
                 default:
                     break;
                 }
             }
         } catch (FileNotFoundException e) {
-            taskList = new ArrayList<>();
+            tasks = new TaskList();
         } finally {
             s.close();
         }
 
-        return taskList;
+        return tasks;
         
     }
 }
