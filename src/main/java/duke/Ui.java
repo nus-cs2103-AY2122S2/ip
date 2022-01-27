@@ -83,6 +83,9 @@ public class Ui {
         case "event":
             event(argument);
             break;
+        case "find":
+            find(argument);
+            break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -146,5 +149,13 @@ public class Ui {
         OUT.println("Got it. I've added this task:");
         OUT.println(response);
         OUT.println(tasks.listCount());
+    }
+
+    private void find(String argument) throws DukeException {
+        if (argument == null)
+            throw new DukeException("OOPS!!! The description of find cannot be empty.");
+        String response = tasks.find(argument);
+        OUT.println("Here are the matching tasks in your list:");
+        OUT.println(response);
     }
 }
