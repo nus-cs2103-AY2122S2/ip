@@ -1,16 +1,16 @@
-package duke;
+package duke.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class Deadline extends Task {
+public class Event extends Task{
 
-    protected String dueDate;
+    protected String time;
 
-    public Deadline(String name, String dueDate) {
+    public Event(String name, String time) {
         super(name);
-        this.dueDate = dueDate;
+        this.time = time;
     }
 
     public String convertDate(String dueDate) {
@@ -28,6 +28,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + convertDate(this.dueDate) + ")";
+        return "[E]" + super.toString() + " (at: " + convertDate(this.time) + ")";
     }
 }

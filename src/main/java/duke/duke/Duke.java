@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 import java.util.ArrayList;
 
 public class Duke {
@@ -6,8 +6,9 @@ public class Duke {
     private TaskList tasks;
     private final Storage storage;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui(); // Setting up new UI
+        String filePath = "data/duke.ser";
         storage = new Storage(filePath); // Searching for File
         try {
             tasks = new TaskList(storage.load()); // Loading if Found
@@ -32,7 +33,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.ser").run();
+        new Duke().run();
     }
 }
 
