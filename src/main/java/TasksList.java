@@ -73,7 +73,7 @@ public class TasksList {
         }
         String response;
         if (tasks.size() != 0) {
-            response = "Hi, I managed to retrieve your previous data!\nHere it is: \n" + this.list();
+            response = "I managed to retrieve your previous data!\nHere it is: \n" + this.list();
         } else {
             response = "As a new user, try to add task and I will store them for you!";
         }
