@@ -17,7 +17,7 @@ public class Storage {
     String root = System.getProperty("user.dir");
     File tasksFile;
     File dataDir;
-    String lineBreak = "___________________________________________________________";
+    private static final String LINE_BREAK = "___________________________________________________________";
 
     /**
      * Constructs the Storage class with the File tasksFile and dataDir
@@ -45,7 +45,7 @@ public class Storage {
                     System.out.println(line);
                 }
                 reader.close();
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             } else {
                 // create dir and file
                 dataDir.mkdir();
@@ -53,7 +53,7 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            System.out.println(LINE_BREAK);
         }
     }
 
@@ -75,7 +75,7 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            System.out.println(LINE_BREAK);
         }
     }
 

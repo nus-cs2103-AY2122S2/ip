@@ -9,14 +9,14 @@ import bernie.tasks.TaskList;
  * to the user
  */
 public class UiHandler {
-    String lineBreak = "___________________________________________________________";
+    private static final String LINE_BREAK = "___________________________________________________________";
 
     /**
      * Prints out message when user starts the program
      */
     public void greet() {
         System.out.println("Hello! I'm Bernie\nWhat's up?");
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -32,7 +32,7 @@ public class UiHandler {
      */
     public void showErrorMsg(String msg) {
         System.out.println(msg);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -43,7 +43,7 @@ public class UiHandler {
     public void showAddedMsg(Task newTask, int numTasksLeft) {
         System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
                 newTask, numTasksLeft);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -54,7 +54,7 @@ public class UiHandler {
     public void showDeleteMsg(Task deletedTask, int numTasksLeft) {
         System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
                 deletedTask, numTasksLeft);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -67,7 +67,7 @@ public class UiHandler {
             System.out.println("NOTHING! :D");
         }
         tasks.listTasks();
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -76,7 +76,7 @@ public class UiHandler {
      */
     public void showDoneMsg(Task markedTask) {
         System.out.printf("This is now done:\n%s\n", markedTask);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -85,6 +85,6 @@ public class UiHandler {
      */
     public void showUndoneMsg(Task unmarkedTask) {
         System.out.printf("This is now undone:\n%s\n", unmarkedTask);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 }
