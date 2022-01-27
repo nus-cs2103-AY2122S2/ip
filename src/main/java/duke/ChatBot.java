@@ -36,7 +36,7 @@ public class ChatBot {
         try {
           String stringCmd = cmdLine.getNextLine();
           Command cmd = commandHandler.getCommand(stringCmd);
-          cmd.getReasources(store, taskList);
+          cmd.getResources(store, taskList);
           if (cmd instanceof ByeCommand) {
             isRunning = false;
           }

@@ -1,7 +1,8 @@
 package main.java.duke.dukeexceptions;
 
 
-public class ForeignException extends main.java.duke.dukeexceptions.DukeException {
+public class ForeignException extends DukeException {
+    
     public ForeignException(String msg) {
         super(msg);
     }

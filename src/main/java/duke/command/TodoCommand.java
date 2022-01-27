@@ -13,10 +13,10 @@ public class TodoCommand extends Command{
     }
 
     public Response execute() throws DukeException {
-        String[] stringCmdArr = this.stringCmd.split("todo ");
-        Task tempTask = new ToDo(stringCmdArr[1]);
-        this.taskList.addTask(tempTask);
-        store.loadToDisk(this.taskList);
-        return new AddTaskResponse(tempTask, this.taskList);
+        String[] stringCmdUnits = stringCmd.split("todo ");
+        Task tempTask = new ToDo(stringCmdUnits[1]);
+        taskList.addTask(tempTask);
+        store.loadToDisk(taskList);
+        return new AddTaskResponse(tempTask, taskList);
     }
 }

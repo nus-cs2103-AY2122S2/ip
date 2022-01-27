@@ -13,16 +13,16 @@ public class MarkCommand extends Command{
     
     @Override
     public Response execute() throws DukeException {
-        String[] stringCmdArr = stringCmd.split(" ");
-        if (stringCmdArr.length == 1) {
+        String[] stringCmdUnits = stringCmd.split(" ");
+        if (stringCmdUnits.length == 1) {
             throw new DukeTaskListException("");
         }
-        int index = Integer.parseInt(stringCmdArr[1]);
+        int index = Integer.parseInt(stringCmdUnits[1]);
         if (index > taskList.taskLength() || index < 1) {
             throw new DukeTaskListException("");
         }
-        this.taskList.markTask(index - 1);
-        this.store.loadToDisk(this.taskList);
-        return new MarkResponse(this.taskList.getTask(index - 1));
+        taskList.markTask(index - 1);
+        store.loadToDisk(taskList);
+        return new MarkResponse(taskList.getTask(index - 1));
     }
 }

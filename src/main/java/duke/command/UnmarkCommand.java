@@ -13,15 +13,15 @@ public class UnmarkCommand extends  Command{
     
     @Override
     public Response execute() throws DukeException {
-        String[] stringCmdArr = stringCmd.split(" ");
-        if (stringCmdArr.length == 1) {
+        String[] stringCmdUnits = stringCmd.split(" ");
+        if (stringCmdUnits.length == 1) {
             throw new DukeTaskListException("");
         }
-        int index = Integer.parseInt(stringCmdArr[1]);
+        int index = Integer.parseInt(stringCmdUnits[1]);
         if (index > taskList.taskLength() || index < 1) {
             throw new DukeTaskListException("");
         }
-        this.taskList.unmarkTask(index - 1);
-        return new UnMarkResponse(this.taskList.getTask(index - 1));
+        taskList.unmarkTask(index - 1);
+        return new UnMarkResponse(taskList.getTask(index - 1));
     }
 }

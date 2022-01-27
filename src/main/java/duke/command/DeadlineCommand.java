@@ -6,7 +6,7 @@ import main.java.duke.responses.Response;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.Task;
 
-public class DeadlineCommand extends  Command{
+public class DeadlineCommand extends  Command {
     
     public DeadlineCommand(String stringCmd) {
         this.stringCmd = stringCmd;
