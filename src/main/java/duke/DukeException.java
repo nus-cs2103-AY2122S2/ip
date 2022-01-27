@@ -33,6 +33,24 @@ public class DukeException extends Exception{
                 int taskNum = Integer.parseInt(tempList[1]);
                 if (!(taskNum <= tasks && taskNum > 0)) {
                     throw new DukeException("☹ OOPS!!! Task number does not exist.");
+                }else {
+                    String[] dateTime  = tempList[1].split("/by ", 2);
+                    if (dateTime[0].equals("")) {
+                        throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    } else if (dateTime.length == 1) {
+                        throw new DukeException("☹ OOPS!!! Please enter a deadline for the task using /by.");
+                    }
+                    isValidDate(dateTime[1]);
+                }
+                break;
+            case "find":
+                if (tempList.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please enter a task to find.");
+                } else {
+                    String[] task  = tempList[1].split(" ");
+                    if (task.length > 1) {
+                        throw new DukeException("☹ OOPS!!! Sorry you can only search for single words.");
+                    }
                 }
                 break;
             case "todo":
@@ -59,7 +77,7 @@ public class DukeException extends Exception{
                 } else {
                     String[] dateTime  = tempList[1].split("/at ", 2);
                     if (dateTime[0].equals("")) {
-                        throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                     } else if (dateTime.length == 1) {
                         throw new DukeException("☹ OOPS!!! Please enter a timeframe for the task using /at.");
                     }
