@@ -4,6 +4,7 @@ package duke.main;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.FindCommand;
@@ -49,6 +50,8 @@ public class Parser {
             return new DeleteCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
         case FIND:
             return new FindCommand(toDoList, cmd);
+        case BYE:
+            return new ByeCommand();
         default:
             return new WrongCommand();
         }

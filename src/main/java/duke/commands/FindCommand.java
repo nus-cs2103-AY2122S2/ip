@@ -49,16 +49,12 @@ public class FindCommand extends Command<String> {
             String dukeResponse = "";
             // Print out all search terms found
             dukeResponse += TABBED_LINE + "\n";
-            System.out.println(TABBED_LINE);
             dukeResponse += "\tHere are the matching tasks in your list:\n";
-            System.out.println("\tHere are the matching tasks in your list:");
             for (int i = 0; i < temp.size(); i++) {
-                System.out.println("\t" + (i + 1) + "." + temp.get(i).toString());
                 dukeResponse += "\t" + (i + 1) + "." + temp.get(i).toString() + "\n";
             }
             dukeResponse += TABBED_LINE + "\n";
             Ui.setDukeResponse(dukeResponse);
-            System.out.println(TABBED_LINE);
         } else {
             Ui.setDukeResponse(Parser.formatMsg("There were no terms matching: " + searchTerm));
         }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,7 +40,7 @@ public class Duke extends Application {
     private Ui ui;
 
     private final String filepath = "./tasklist.txt";
-
+    private boolean isFirstStartup = true;
     /**
      * Constructor for Duke.
      * Tries to retrieve the list of Tasks from the default filepath
@@ -119,8 +120,22 @@ public class Duke extends Application {
             this.handleUserInput();
         });
 
+        // Call this on startup to show welcome text
+        if (isFirstStartup) {
+            this.onStartUp();
+            this.isFirstStartup = false;
+        }
+
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    @Override
+    public void stop() {
+        try {
+            Storage.writeFileContent(toDoList);
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -134,16 +149,27 @@ public class Duke extends Application {
         userText.setWrapText(true);
         dukeText.setWrapText(true);
 
-        DialogBox userBox = new DialogBox(userText, new ImageView(user));
-        DialogBox dukeBox = new DialogBox(dukeText, new ImageView(duke));
+        DialogBox userBox = DialogBox.getUserDialog(userText, new ImageView(user));
+        DialogBox dukeBox = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
 
         dialogContainer.getChildren().addAll(
                 userBox,
                 dukeBox
         );
+
+        dialogContainer.setAlignment(Pos.CENTER_LEFT);
+
         userInput.clear();
     }
+    private void onStartUp() {
+        Ui.showWelcome();
+        Label dukeText = new Label(Ui.getDukeResponse());
 
+        DialogBox dukeWelcomeBox = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
+        dialogContainer.getChildren().addAll(
+                dukeWelcomeBox
+        );
+    }
     /**
      * Gets Burp's response in return to a command given to it.
      *

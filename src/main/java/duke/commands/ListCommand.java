@@ -30,14 +30,10 @@ public class ListCommand extends Command<String> {
     public void runCommand(TaskList toDoList, String cmd) {
         String toPrint = "";
         // Prints out the list of items in the TaskList
-        toPrint += TABBED_LINE + "\n";
-        System.out.println(TABBED_LINE);
+        toPrint += "\tHere's what you have on your list: \n";
         for (int i = 0; i < toDoList.size(); i++) {
             toPrint += "\t" + (i + 1) + "." + toDoList.get(i).toString() + "\n";
-            System.out.println("\t" + (i + 1) + "." + toDoList.get(i).toString());
         }
-        toPrint += TABBED_LINE;
         Ui.setDukeResponse(toPrint);
-        System.out.println(TABBED_LINE);
     }
 }

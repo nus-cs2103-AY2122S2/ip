@@ -10,7 +10,7 @@ public class Ui {
      * a Command
      */
     public enum Reply {
-        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT, FIND
+        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT, FIND, BYE
     }
 
     /**
@@ -48,6 +48,8 @@ public class Ui {
             return Reply.DELETE;
         case "find":
             return Reply.FIND;
+        case "bye":
+            return Reply.BYE;
         default:
             return Reply.DEFAULT;
         }

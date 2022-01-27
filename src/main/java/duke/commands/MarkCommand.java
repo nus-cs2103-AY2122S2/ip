@@ -39,7 +39,6 @@ public class MarkCommand extends Command<Integer> {
 
             // Print out the formatted message after marking
             Ui.setDukeResponse(Parser.formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
-//            Ui.dukeResponse(Parser.formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
         } catch (IndexOutOfBoundsException e) {
             Ui.setDukeResponseError(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist."));
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist."));
