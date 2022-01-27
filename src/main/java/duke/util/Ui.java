@@ -1,10 +1,18 @@
 package duke.util;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
+    /**
+     * Default constructor for Ui
+     */
     public Ui() {
     }
 
-    /* Initial greeting for duke.Duke */
+    /**
+     * Initial greeting for Duke.
+     */
     public void startGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,6 +25,12 @@ public class Ui {
     }
 
     /* Print in the response format */
+
+    /**
+     * Prints an input based on Duke's response format.
+     *
+     * @param response The response to be printed in the format.
+     */
     public void printResponse(String response) {
         System.out.println(
                 "\n--------------------------------------------------------------------------------------------");
@@ -26,7 +40,11 @@ public class Ui {
                 "--------------------------------------------------------------------------------------------\n");
     }
 
-    /* Print in the response format */
+    /**
+     * Prints the error statement in the Duke's error format.
+     *
+     * @param errorStatement The error statement to be printed.
+     */
     public void printError(String errorStatement) {
         printResponse("ERROR ERROR! DUKE HAS ERROR: \n \n" + errorStatement);
     }

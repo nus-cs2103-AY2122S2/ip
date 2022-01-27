@@ -22,6 +22,9 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.HashMap;
 
+/**
+ * Duke chatbot behavior and data.
+ */
 public class Duke {
     private boolean isRunning;
 
@@ -36,6 +39,9 @@ public class Duke {
         duke.runDuke();
     }
 
+    /**
+     * Duke constructor. Initializes values.
+     */
     public Duke() {
         taskList = new TaskList();
         ui = new Ui();
@@ -78,7 +84,9 @@ public class Duke {
         parser = new Parser(commands);
     }
 
-    /* Run duke.Duke default behavior */
+    /**
+     * Runs duke logic and behavior.
+     */
     public void runDuke() {
         ui.startGreeting();
         Scanner sc = new Scanner(System.in);
