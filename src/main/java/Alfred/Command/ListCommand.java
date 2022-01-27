@@ -1,7 +1,7 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 
 /**
  * Encapsulates the list command.

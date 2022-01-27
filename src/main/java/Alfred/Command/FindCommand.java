@@ -1,9 +1,9 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Command.Command;
-import Alfred.Exceptions.MissingInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
+import alfred.command.Command;
+import alfred.exceptions.MissingInputException;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

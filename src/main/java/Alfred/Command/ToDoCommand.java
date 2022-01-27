@@ -1,10 +1,10 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Exceptions.MissingInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.Task.Task;
-import Alfred.Task.ToDo;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.MissingInputException;
+import alfred.storage.AlfredStorage;
+import alfred.task.Task;
+import alfred.task.ToDo;
+import alfred.ui.AlfredUserInterface;
 
 /**
  * Encapsulates the T0D0 command.

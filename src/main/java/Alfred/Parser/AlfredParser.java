@@ -1,16 +1,16 @@
-package Alfred.Parser;
+package alfred.parser;
 
-import Alfred.Command.Command;
-import Alfred.Command.DeadlineCommand;
-import Alfred.Command.DeleteCommand;
-import Alfred.Command.EventCommand;
-import Alfred.Command.ExitCommand;
-import Alfred.Command.FindCommand;
-import Alfred.Command.ListCommand;
-import Alfred.Command.MarkCommand;
-import Alfred.Command.ToDoCommand;
-import Alfred.Command.UnmarkCommand;
-import Alfred.Exceptions.InvalidCommandException;
+import alfred.command.Command;
+import alfred.command.DeadlineCommand;
+import alfred.command.DeleteCommand;
+import alfred.command.EventCommand;
+import alfred.command.ExitCommand;
+import alfred.command.FindCommand;
+import alfred.command.ListCommand;
+import alfred.command.MarkCommand;
+import alfred.command.ToDoCommand;
+import alfred.command.UnmarkCommand;
+import alfred.exceptions.InvalidCommandException;
 
 /**
  * Encapsulates a parser used to identify the command

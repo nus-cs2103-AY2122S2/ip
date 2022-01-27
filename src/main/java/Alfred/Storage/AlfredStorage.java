@@ -1,8 +1,8 @@
-package Alfred.Storage;
+package alfred.storage;
 
-import Alfred.Exceptions.InvalidIndexException;
-import Alfred.Task.Task;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.InvalidIndexException;
+import alfred.task.Task;
+import alfred.ui.AlfredUserInterface;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

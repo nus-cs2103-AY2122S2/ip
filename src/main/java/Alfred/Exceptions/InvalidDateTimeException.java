@@ -1,4 +1,4 @@
-package Alfred.Exceptions;
+package alfred.exceptions;
 
 /**
  * Encapsulates the exception thrown when an invalid date time format

@@ -1,4 +1,4 @@
-package Alfred.Exceptions;
+package alfred.exceptions;
 
 /**
  * Encapsulates an exception that occurs when an invalid command keyword

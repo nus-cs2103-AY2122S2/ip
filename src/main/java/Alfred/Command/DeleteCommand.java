@@ -1,9 +1,9 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Exceptions.InvalidIndexException;
-import Alfred.Exceptions.InvalidInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.InvalidIndexException;
+import alfred.exceptions.InvalidInputException;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 
 /**
  * This class encapsulates the Delete Command.

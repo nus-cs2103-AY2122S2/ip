@@ -1,9 +1,9 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Exceptions.InvalidDateTimeException;
-import Alfred.Exceptions.InvalidInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.InvalidDateTimeException;
+import alfred.exceptions.InvalidInputException;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 
 /**
  * Encapsulates the exit command.

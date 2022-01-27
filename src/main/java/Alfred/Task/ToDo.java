@@ -1,4 +1,4 @@
-package Alfred.Task;
+package alfred.task;
 
 /**
  * Encapsulates a T0D0 task.

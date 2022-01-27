@@ -1,11 +1,11 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Exceptions.InvalidDateTimeException;
-import Alfred.Exceptions.InvalidInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.Task.Event;
-import Alfred.Task.Task;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.InvalidDateTimeException;
+import alfred.exceptions.InvalidInputException;
+import alfred.storage.AlfredStorage;
+import alfred.task.Event;
+import alfred.task.Task;
+import alfred.ui.AlfredUserInterface;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;

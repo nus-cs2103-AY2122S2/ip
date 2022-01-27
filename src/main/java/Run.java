@@ -1,4 +1,4 @@
-import Alfred.Alfred;
+import alfred.Alfred;
 
 public class Run {
 

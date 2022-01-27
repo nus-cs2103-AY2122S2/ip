@@ -1,10 +1,10 @@
-package Alfred;
+package alfred;
 
-import Alfred.Parser.AlfredParser;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
-import Alfred.Command.Command;
-import Alfred.Exceptions.AlfredException;
+import alfred.parser.AlfredParser;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
+import alfred.command.Command;
+import alfred.exceptions.AlfredException;
 import java.io.File;
 
 /**

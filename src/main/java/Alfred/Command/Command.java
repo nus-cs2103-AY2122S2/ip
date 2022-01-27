@@ -1,10 +1,10 @@
-package Alfred.Command;
+package alfred.command;
 
 
-import Alfred.Exceptions.AlfredException;
-import Alfred.Exceptions.InvalidInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
+import alfred.exceptions.AlfredException;
+import alfred.exceptions.InvalidInputException;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 
 /**
  * This is an abstract class encapsulating all valid commands

@@ -1,4 +1,4 @@
-package Alfred.Exceptions;
+package alfred.exceptions;
 
 /**
  * Encapsulates the exception thrown when an index is used to reference
