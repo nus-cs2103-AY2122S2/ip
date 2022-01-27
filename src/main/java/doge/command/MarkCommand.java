@@ -26,7 +26,7 @@ public class MarkCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.details.isEmpty()) {
-            throw new DogeException("How am I suppose to mark something without knowing which task?");
+            throw new DogeException("How am I supposed to mark something without knowing which task?");
         }
 
         int pos;
