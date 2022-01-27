@@ -1,5 +1,6 @@
 import duke.task.TaskStub;
 import duke.tasklist.TaskList;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ class TaskListTest {
     }
 
     @Test
-    void deleteTask() {
+    void taskCanBeDeleted_newTask_taskListIsEmpty() {
         TaskList t = new TaskList();
         TaskStub ts = new TaskStub("");
         t.addTask(ts);
@@ -22,19 +23,4 @@ class TaskListTest {
         assertEquals(0, t.getSize());
     }
 
-    @Test
-    void getTasksMsg() {
-    }
-
-    @Test
-    void getTaskStore() {
-    }
-
-    @Test
-    void getSize() {
-    }
-
-    @Test
-    void getTask() {
-    }
 }

@@ -10,10 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     /** The date of the deadline */
-    private LocalDate by;
-
+    private LocalDate deadlineDate;
     /** The time of day of the deadline */
-    private LocalTime byTime;
+    private LocalTime deadlineTime;
 
     /**
      * Constructor for Deadline Class.
@@ -24,11 +23,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description);
-        this.by = by;
-        this.byTime = null;
-            if (isDone) {
-                this.markAsDone();
-            }
+        this.deadlineDate = by;
+        this.deadlineTime = null;
+        if (isDone) {
+            this.markAsDone();
+        }
     }
 
     /**
@@ -41,8 +40,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by, LocalTime byTime, boolean isDone) {
         super(description);
-        this.by = by;
-        this.byTime = byTime;
+        this.deadlineDate = by;
+        this.deadlineTime = byTime;
         if (isDone) {
             this.markAsDone();
         }
@@ -55,7 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String writeToFile() {
-        return " D " + super.writeToFile() + " | " + this.by + " | " + this.byTime;
+        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime;
     }
 
     /**
@@ -65,6 +64,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.byTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " " + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " )";
     }
 }

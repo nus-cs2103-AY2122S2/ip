@@ -2,6 +2,7 @@ import duke.exception.ChiException;
 import duke.parser.Parser;
 import duke.storage.StorageStub;
 import duke.tasklist.TaskListStub;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ class ParserTest {
     }
 
     @Test
-    void outputMsg_incorrectCommand_ChiExceptionThrown() throws ChiException, IOException{
+    void outputMessage_incorrectCommand_ChiExceptionThrown() throws ChiException, IOException{
         Parser p = new Parser();
         TaskListStub tls = new TaskListStub();
         StorageStub ss = new StorageStub("/somePath.txt");
