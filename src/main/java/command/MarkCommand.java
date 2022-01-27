@@ -24,7 +24,6 @@ public class MarkCommand extends Command {
         } else if(prefix.equals("unmark")){
             this.isMark = false;
         }
-
         try {
             this.index = Integer.parseInt(stringSplit[1]);
         } catch (ArrayIndexOutOfBoundsException e){
@@ -43,11 +42,10 @@ public class MarkCommand extends Command {
         Task task = tasks.getByNumber(this.index);
         if (this.isMark) {
             task.setMarked(true);
-            ui.print(String.format("I've marked task %d!", this.index));
         } else {
             task.setMarked(false);
-            ui.print(String.format("I've marked task %d!", this.index));
         }
+        ui.print(String.format("I've marked task %d!", this.index));
         storage.save(tasks);
     }
 

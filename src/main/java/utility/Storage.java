@@ -52,7 +52,6 @@ public class Storage {
                 throw new DukeException("file cannot be found!");
             }
         }
-
         return taskList;
     }
 
@@ -89,7 +88,6 @@ public class Storage {
                 writer.write(System.lineSeparator());
             }
             writer.close();
-
         } catch (IOException e) {
             throw new DukeException("cannot save tasks");
         }

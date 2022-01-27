@@ -25,7 +25,6 @@ public class Duke {
     public Duke(String filePath){
         this.ui = new UI();
         this.storage = new Storage(filePath);
-
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -34,11 +33,9 @@ public class Duke {
         }
     }
 
-
     public void run() {
         this.ui.startMessage();
         boolean bye = false;
-
         while(!bye){
             try {
                 String commandString = ui.readLine();
@@ -51,9 +48,7 @@ public class Duke {
             } finally {
                 ui.showLine();
             }
-
         }
-
     }
 
     public static void main(String[] args) {

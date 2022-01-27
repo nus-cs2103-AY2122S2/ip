@@ -25,7 +25,6 @@ public class AddCommand extends Command {
         super(command);
         StringTokenizer stringToken = new StringTokenizer(command);
         String prefix = stringToken.nextToken();
-
         List<String> strArray = new ArrayList<>();
         String by = "";
         while(stringToken.hasMoreTokens()){
@@ -53,8 +52,6 @@ public class AddCommand extends Command {
             time = stringToken.nextToken();
         }
 
-
-
         if(prefix.equals("deadline") || prefix.equals("event")) {
             String hour = time.substring(0,2);
             String min = time.substring(2);
@@ -69,7 +66,6 @@ public class AddCommand extends Command {
         this.name = taskName;
         this.taskTime = dateTime;
         this.by = by;
-
     }
 
     @Override
@@ -77,7 +73,6 @@ public class AddCommand extends Command {
         if(this.dukeException != null) {
             throw this.dukeException;
         }
-
         Task t;
         if(this.type.equals("todo")) {
             t = new Todo(this.name);
@@ -89,10 +84,8 @@ public class AddCommand extends Command {
             throw new DukeException("invalid type");
         }
         tasks.add(t);
-
         ui.print("i added this task: ");
         ui.print(t.toString());
-
         storage.save(tasks);
     }
 
@@ -103,6 +96,5 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
-
-
+    
 }

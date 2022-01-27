@@ -8,6 +8,7 @@ import utility.Storage;
  * Command for Exit Duke app
  */
 public class ExitCommand extends Command{
+
     public ExitCommand(String command) {
         super(command);
     }
@@ -16,7 +17,6 @@ public class ExitCommand extends Command{
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.print("Aww. Bye! See you again soon");
     }
-
 
     @Override
     public boolean isExit() {

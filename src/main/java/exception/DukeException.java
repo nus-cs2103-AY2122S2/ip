@@ -5,7 +5,6 @@ package exception;
  */
 public class DukeException extends Exception{
 
-
     /**
      * constructor for DukeException
      * @param errMessage

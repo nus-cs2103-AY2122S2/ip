@@ -31,20 +31,14 @@ public class DeleteCommand extends Command {
         } else if (this.index <= 0 || this.index > tasks.getSize()) {
             throw new DukeException("only input integers within the range");
         }
-
         Task removedTask = tasks.deleteByNumber(this.index);
         ui.print(String.format("I've deleted task %d!", this.index));
         ui.print(String.format("  %s", removedTask.toString()));
-
         storage.save(tasks);
     }
-
-
-
 
     @Override
     public boolean isExit() {
         return false;
     }
-
 }

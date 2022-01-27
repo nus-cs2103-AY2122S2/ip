@@ -8,7 +8,6 @@ public class Task {
     String taskName;
     boolean isMarked;
 
-
     public Task(String taskName) {
         this.taskName = taskName;
         this.isMarked = false;

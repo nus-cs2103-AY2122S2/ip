@@ -36,7 +36,6 @@ public class Parser {
                 command = new ExitCommand(inputCommand);
                 break;
         }
-
         if (command != null) {
             return command;
         } else {
