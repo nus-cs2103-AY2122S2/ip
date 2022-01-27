@@ -1,12 +1,9 @@
+import exceptions.DukeException;
+import user.Ui;
+
 public class Duke {
 
     public Ui ui;
-
-    public enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
 
     public Duke() throws DukeException {
         ui = new Ui();

@@ -1,6 +1,8 @@
+package tasks;
+
 public class Todo extends Task {
 
-    public Duke.TaskType type = Duke.TaskType.TODO;
+    public Task.TaskType type = Task.TaskType.TODO;
     public String taskName;
 
     public Todo(String taskName) {

@@ -1,3 +1,7 @@
+package tasks;
+
+import exceptions.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +11,7 @@ public class Deadline extends Task {
     DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
     DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Duke.TaskType type = Duke.TaskType.DEADLINE;
+    public Task.TaskType type = Task.TaskType.DEADLINE;
     public String taskName;
     public LocalDateTime deadline;
 

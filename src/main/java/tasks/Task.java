@@ -1,5 +1,14 @@
+package tasks;
+
+import exceptions.DukeException;
+
 public abstract class Task {
 
+    public enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
     public boolean done = false;
 
     public void setDone(boolean newDone) {
@@ -16,7 +25,7 @@ public abstract class Task {
             throws IllegalArgumentException, ArrayIndexOutOfBoundsException, DukeException {
         String[] details = exportedTask.split(" ");
         Task task = null;
-        switch (Duke.TaskType.valueOf(details[0])) {
+        switch (TaskType.valueOf(details[0])) {
             case TODO:
                 task = new Todo(details[1]);
                 task.setDone(Boolean.parseBoolean(details[2]));

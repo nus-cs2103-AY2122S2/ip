@@ -1,3 +1,9 @@
+package user;
+
+import exceptions.DukeException;
+import tasks.Task;
+import tasks.Tasklist;
+
 import java.util.Scanner;
 
 public class Ui {
