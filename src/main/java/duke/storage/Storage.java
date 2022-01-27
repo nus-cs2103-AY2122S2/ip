@@ -61,6 +61,7 @@ public class Storage {
                 }
                 list.add(task);
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("OOPS!!! Duke.Main.Duke is unable to locate your file!");
         }

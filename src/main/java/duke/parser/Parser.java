@@ -32,7 +32,7 @@ public class Parser {
         try {
             switch (type) {
             case BYE:
-                ui.echo("Bye. Hope to see you again soon!");
+                ui.goodbye();
                 isExit = true;
                 break;
             case LIST:
