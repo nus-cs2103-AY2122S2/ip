@@ -2,11 +2,11 @@ package duke.task;
 
 public abstract class Task {
     protected final String title;
-    protected boolean status;
+    protected boolean isComplete;
 
-    public Task(String title, boolean status) {
+    public Task(String title, boolean isComplete) {
         this.title = title;
-        this.status = status;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -14,21 +14,21 @@ public abstract class Task {
      * @return '[X]' if task completed and '[ ]' if not
      */
     protected String getStatusIcon() {
-        return (this.status ? "[X]" : "[ ]");
+        return (this.isComplete ? "[X]" : "[ ]");
     }
 
     /**
      * Marks the given task as complete.
      */
     public void markAsComplete() {
-        this.status = true;
+        this.isComplete = true;
     }
 
     /**
      * Marks the given task as incomplete.
      */
     public void markAsIncomplete() {
-        this.status = false;
+        this.isComplete = false;
     }
 
     @Override

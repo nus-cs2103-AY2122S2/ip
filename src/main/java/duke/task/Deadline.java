@@ -6,8 +6,8 @@ import java.util.Date;
 public class Deadline extends Task {
     private final Date time;
 
-    public Deadline(String title, Date time, boolean status) {
-        super(title, status);
+    public Deadline(String title, Date time, boolean isComplete) {
+        super(title, isComplete);
         this.time = time;
     }
 

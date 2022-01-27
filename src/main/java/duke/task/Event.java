@@ -6,8 +6,8 @@ import java.util.Date;
 public class Event extends Task {
     private final Date time;
 
-    public Event(String title, Date time, boolean status) {
-        super(title, status);
+    public Event(String title, Date time, boolean isComplete) {
+        super(title, isComplete);
         this.time = time;
     }
 
