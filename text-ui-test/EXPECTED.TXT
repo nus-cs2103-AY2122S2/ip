@@ -5,3 +5,70 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+________________________________
+Hello! I am Duke_two.
+Your Personal Assistant.
+What can I do for you?
+________________________________
+From Duke_two: 
+	'Hello' is an invalid command! Please try again!
+________________________________
+From Duke_two: 
+	'hmmm' is an invalid command! Please try again!
+________________________________
+From Duke_two: 
+	There are no pending tasks!
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[T][ ] finish 2103 assignment
+You now have 1 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [T][ ] finish 2103 assignment
+________________________________
+From Duke_two: 
+	That is an invalid task. Please try again!
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[E][ ] project meeting  (at: 1230pm on Thus)
+You now have 2 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [T][ ] finish 2103 assignment
+2: [E][ ] project meeting  (at: 1230pm on Thus)
+________________________________
+From Duke_two: 
+	Removed from your tasks: 
+	[T][ ] finish 2103 assignment
+You now have 1 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [E][ ] project meeting  (at: 1230pm on Thus)
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[D][ ] finish 2106 lab 1  (by: Monday)
+You now have 2 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [E][ ] project meeting  (at: 1230pm on Thus)
+2: [D][ ] finish 2106 lab 1  (by: Monday)
+________________________________
+From Duke_two: 
+	Nice! I've marked this task as done: 
+	[D][X] finish 2106 lab 1  (by: Monday)
+________________________________
+From Duke_two: 
+	Removed from your tasks: 
+	[D][X] finish 2106 lab 1  (by: Monday)
+You now have 1 tasks in your list
+________________________________
+From Duke_two: 
+	GoodBye! I hope to see you again!
+________________________________

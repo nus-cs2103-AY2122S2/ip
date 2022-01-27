@@ -21,16 +21,21 @@ public class Control {
 //    }
 
     public void bye() {
-        String bye = "GoodBye! I hope to see you again!";
+        String bye ="GoodBye! I hope to see you again!";
         System.out.println(bye);
     }
 
     public void list() {
         int leng = tasks.toArray().length;
-        for (int i = 0; i < leng; i++) {
-            Task task = tasks.get(i);
-            int num = i + 1;
-            System.out.println(num + ": " + task.toString());
+        if (leng == 0) {
+            System.out.println("There are no pending tasks!");
+        } else {
+            System.out.println("");
+            for (int i = 0; i < leng; i++) {
+                Task task = tasks.get(i);
+                int num = i + 1;
+                System.out.println(num + ": " + task.toString());
+            }
         }
     }
 
@@ -60,7 +65,7 @@ public class Control {
         String taskName = taskArr[1];
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
-        System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
+        System.out.println("Added to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
 
@@ -72,7 +77,7 @@ public class Control {
         String date = taskDetails[1];
         Deadline task = new Deadline(taskName, false, "D", date) ;
         this.tasks.add(task);
-        System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
+        System.out.println("Added to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
 
@@ -84,7 +89,7 @@ public class Control {
         String date = taskDetails[1];
         Event task = new Event(taskName, false, "E", date) ;
         this.tasks.add(task);
-        System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
+        System.out.println("Added to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
 
@@ -94,7 +99,7 @@ public class Control {
             String deleteIndStr = taskArr[1];
             int deleteInd = Integer.parseInt(deleteIndStr) - 1;
             Task task = this.tasks.get(deleteInd);
-            System.out.println("From Duke_two: \n\tRemoved from your tasks: \n\t" + task.toString());
+            System.out.println("Removed from your tasks: \n\t" + task.toString());
             int num = tasks.toArray().length - 1;
             System.out.println("You now have " + num + " tasks in your list");
             this.tasks.remove(deleteInd);
@@ -105,6 +110,5 @@ public class Control {
         }
 
     }
-
 
 }

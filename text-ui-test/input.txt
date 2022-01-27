@@ -1,0 +1,15 @@
+Hello
+hmmm
+list
+todo finish 2103 assignment
+list
+event project meeting /a 1230pm on Thurs
+event project meeting /at 1230pm on Thus
+list
+delete 1
+list
+deadline finish 2106 lab 1 /by Monday
+list
+mark 2
+delete 2
+bye
