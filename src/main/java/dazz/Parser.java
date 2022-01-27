@@ -1,6 +1,16 @@
 package dazz;
 
-import dazz.command.*;
+import dazz.command.Command;
+import dazz.command.DeadlineCommand;
+import dazz.command.DefaultCommand;
+import dazz.command.DeleteCommand;
+import dazz.command.EventCommand;
+import dazz.command.ExitCommand;
+import dazz.command.ListCommand;
+import dazz.command.MarkCommand;
+import dazz.command.TodoCommand;
+import dazz.command.UnmarkCommand;
+
 import dazz.exception.DazzException;
 import dazz.exception.EmptyDateException;
 import dazz.exception.EmptyDescriptionException;

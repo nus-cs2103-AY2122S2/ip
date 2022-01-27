@@ -1,7 +1,9 @@
 package dazz;
 
 import dazz.exception.InvalidTaskIndexException;
+
 import dazz.task.Task;
+
 import java.util.List;
 
 public class TaskList {
