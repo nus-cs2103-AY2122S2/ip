@@ -3,85 +3,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Stores and handles the list of tasks
+ * Handles the list of tasks and operations on it.
  */
-public class Notebook {
-    private final ArrayList<Task> tasks;
+public class TaskList {
+    private final ArrayList<Task> taskList;
     private final Storage storage;
 
-    /**
-     * Constructor to initialise a new task list.
-     */
-    public Notebook() {
-        tasks = new ArrayList<>();
-        storage = new Storage();
+    public TaskList(Storage storage) {
+        this.taskList = new ArrayList<>();
+        this.storage = storage;
         taskFiller();
-    }
-
-    /**
-     * Uses input string e to determine appropriate action.
-     * If input is "list", will execute listOut method. If not, adds
-     * instruction to tasks list.
-     * @param e The instruction to follow
-     * @return The string result
-     */
-    public String instruction(String e) {
-        try {
-            ArthurException.checkException(e);
-        } catch (InvalidInstructionException | EmptyDescriptionException f) {
-            return f.getMessage();
-        }
-
-
-        String[] temp = e.split(" ", 2);    // Gets the first word
-        String inst = temp[0];
-
-        switch (inst) {
-        case "list":
-            e = this.listOut();
-            break;
-        case "mark":
-        case "unmark":
-            e = this.marker(e);
-            try {
-                storage.editTasks(tasks.get(Integer.parseInt(temp[1]) - 1), 1);
-            } catch (IndexOutOfBoundsException ex) {
-                System.out.println("Please enter a valid number!");
-            }
-            break;
-        case "todo":
-            e = this.todo(temp[1]);
-            storage.addTasks(tasks.get(tasks.size() - 1));
-            break;
-        case "deadline":
-            e = this.deadline(temp[1]);
-            storage.addTasks(tasks.get(tasks.size() - 1));
-            break;
-        case "event":
-            e = this.event(temp[1]);
-            storage.addTasks(tasks.get(tasks.size() - 1));
-            break;
-        case "delete":
-            try {
-                storage.editTasks(tasks.get(Integer.parseInt(temp[1]) - 1), 2);
-            } catch (IndexOutOfBoundsException ex) {
-                System.out.println("Please enter a valid number!");
-            }
-            e = this.deleter(Integer.parseInt(temp[1]));
-            break;
-        }
-        return e;
     }
 
     /**
      * Lists out the tasks stored in the tasks Arraylist.
      * @return A string version of the list formatted with numbering.
      */
-    private String listOut() {
+    public String listOut() {
         StringBuilder temp = new StringBuilder("Here are the tasks in your list: \n");
         int tempCounter = 1;
 
-        for (Task a : tasks) {
+        for (Task a : taskList) {
             temp.append(tempCounter).append(". ").append(a).append("\n");
             tempCounter++;
         }
@@ -93,11 +35,11 @@ public class Notebook {
      * @param e The instruction to follow with the task number
      * @return The string result of the instruction
      */
-    private String marker(String e) {
+    public String marker(String e) {
         String[] temp = e.split(" ");
 
         try {
-            Task currTask = tasks.get(Integer.parseInt(temp[1]) - 1);
+            Task currTask = taskList.get(Integer.parseInt(temp[1]) - 1);
             if (temp[0].equals("mark")) {
                 currTask.mark();
                 return "Good job! Task Completed \n" + currTask;
@@ -115,9 +57,9 @@ public class Notebook {
      * @param e The description of the todo task to be added
      * @return String conformation of the input
      */
-    private String todo(String e) {
+    public String todo(String e) {
         Todo temp = new Todo(e);
-        tasks.add(temp);
+        taskList.add(temp);
         return "Added a new Todo task: \n" + temp
                 + "\n" + this.outstanding();
     }
@@ -128,7 +70,7 @@ public class Notebook {
      * @param e The description of the task with deadline info to be added
      * @return String conformation of the input
      */
-    private String deadline(String e) {
+    public String deadline(String e) {
         Deadline temp;
         try {
             String[] tempArr = e.split("/by ");
@@ -136,7 +78,7 @@ public class Notebook {
         } catch (IndexOutOfBoundsException a) {
             return "Please add the deadline date";
         }
-        tasks.add(temp);
+        taskList.add(temp);
         return "Added a new Deadline task: \n" + temp
                 + "\n" + this.outstanding();
     }
@@ -148,7 +90,7 @@ public class Notebook {
      * @param e The description of the task with timing info to be added
      * @return String conformation of the input
      */
-    private String event(String e) {
+    public String event(String e) {
         Event temp;
         try {
             String[] tempArr = e.split("/at ");
@@ -157,7 +99,7 @@ public class Notebook {
             return "Please add the event Date and/or Time";
         }
 
-        tasks.add(temp);
+        taskList.add(temp);
         return "Added a new Event task: \n" + temp
                 + "\n" + this.outstanding();
     }
@@ -166,20 +108,20 @@ public class Notebook {
      * Generates a string about the number of tasks left in list
      * @return String info regarding num of tasks left
      */
-    private String outstanding() {
+    public String outstanding() {
         return "You have "
-                + this.tasks.size()
+                + this.taskList.size()
                 + " tasks in list at the moment.";
     }
 
     /**
      * Deletes the task from the list.
      * @param i The task number to delete
-     * @return String conformation of the task deletion 
+     * @return String conformation of the task deletion
      */
-    private String deleter(int i) {
+    public String deleter(int i) {
         try {
-            Task currTask = tasks.remove(i - 1);
+            Task currTask = taskList.remove(i - 1);
             return "Successfully removed this task: \n" + currTask
                     + "\n" + outstanding();
         } catch (IndexOutOfBoundsException e) {
@@ -188,9 +130,9 @@ public class Notebook {
     }
 
     /**
-     * Copies over tasks in data file to the task arraylist.
+     * Copies over tasks in the data file to the taskList.
      */
-    public void taskFiller() {
+    private void taskFiller() {
         try {
             Scanner sc = new Scanner(storage.getTasks());
             while (sc.hasNext()) {
@@ -215,11 +157,29 @@ public class Notebook {
                 }
 
                 if (marking == 'X') {
-                    tasks.get(tasks.size() - 1).mark();
+                    taskList.get(taskList.size() - 1).mark();
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Gets the Task object at the given index from taskList.
+     * @param num The index of the Task object to retrieve
+     * @return A Task object
+     * @throws IndexOutOfBoundsException Incorrect index needs to be handled properly
+     */
+    public Task getTask(int num) throws IndexOutOfBoundsException {
+        return this.taskList.get(num);
+    }
+
+    /**
+     * Gives the taskList size.
+     * @return list size in int
+     */
+    public int tasksSize() {
+        return this.taskList.size();
     }
 }

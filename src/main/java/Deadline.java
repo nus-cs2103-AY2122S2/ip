@@ -4,7 +4,7 @@
  */
 public class Deadline extends Task {
     private final String by;
-    private DateTime timings;
+    private final DateTime timings;
 
     public Deadline(String e, String by) {
         super(e);

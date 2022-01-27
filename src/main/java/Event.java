@@ -4,7 +4,7 @@
  */
 public class Event extends Task {
     private final String at;
-    private DateTime timings;
+    private final DateTime timings;
 
     public Event(String e, String at) {
         super(e);

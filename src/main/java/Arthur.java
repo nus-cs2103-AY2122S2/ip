@@ -1,52 +1,49 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.format.DateTimeParseException;
 
 public class Arthur {
 
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
+
     /**
-     * Adds design above and below the given text.
-     * @param text The string to be placed between the design
+     * Initiates the Ui, Storage and taskList object.
+     * Adds existing tasks from hard disk if any available.
      */
-    public static void printFormat(String text) {
-        String design = "_";
-        System.out.println(design.repeat(50) + "\n"
-                + text + "\n" + design.repeat(50));
+    public Arthur() {
+        ui = new Ui();
+        storage = new Storage(ui);
+        try {
+            tasks = new TaskList(storage);
+        } catch (DateTimeParseException e) {
+            ui.printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
+                    + "You can also enter time or date only");
+        }
+    }
+
+    /**
+     * Runs the given instructions till "bye" command is given
+     */
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            String inst = ui.readInst();
+            try {
+                ArthurException.checkException(inst);
+                Parser commander = new Parser(inst);
+                commander.execute(tasks, storage, ui);
+                isExit = commander.isEnd();
+            } catch (DateTimeParseException e) {
+                ui.printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
+                        + "You can also enter time or date only");
+            } catch (InvalidInstructionException | EmptyDescriptionException f) {
+                ui.printFormat(f.getMessage());
+            }
+        }
     }
 
     public static void main(String[] args) {
-        BufferedReader io = new BufferedReader(new InputStreamReader(System.in));
-        String input;
-        Notebook notebook = new Notebook();     // An object to store list of tasks
-
-        // Greetings
-        String logo = " / \\   _ |_ |_  | |  _  \n"
-                + "/---\\ |  |_ | | |_| |  ";
-        printFormat("Greetings from\n" + logo
-                + "\n" + "How may I assist you today?");
-
-        try {
-            input = io.readLine();
-            // keeps running till exit input 'bye'
-            while (!input.equals("bye")) {
-                input= input.toLowerCase();
-                if (input.equals("hello") || input.equals("hi")) {  // Hello inputs
-                    printFormat("Hello there!");
-                } else {
-                    try {
-                        printFormat(notebook.instruction(input));
-                    } catch (DateTimeParseException e) {
-                        printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
-                                + "You can also enter time or date only");
-                    }
-                }
-                input = io.readLine();
-            }
-            printFormat("Bye!" + "\n" + "Have a great day!");
-        } catch (IOException e) {
-            printFormat("Sorry, there seems to be an Issue."
-                    + "\n" + "Please restart and try again");
-        }
+        new Arthur().run();
     }
 }

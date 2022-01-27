@@ -9,10 +9,15 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
     private LocalDate date;
     private LocalTime time;
-    private String str;
+    private final String str;
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
     DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
 
+    /**
+     * Converts input string to date and time objects.
+     * @param input Formatted user input as string
+     * @throws DateTimeParseException Throws if the date and/or time is not formatted properly
+     */
     public DateTime(String input) throws DateTimeParseException {
         // Checks if date is present
         if (input.contains("-")) {

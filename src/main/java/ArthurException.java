@@ -17,6 +17,7 @@ public class ArthurException {
 
         // Check for valid instructions
         switch (temp[0]) {
+        case "bye":
         case "list":
         case "mark":
         case "unmark":
@@ -30,9 +31,13 @@ public class ArthurException {
         }
 
         // Check if instructions come with description
-        if (!temp[0].equals("list")) {
+        if (!temp[0].equals("list") && !temp[0].equals("bye")) {
             if (temp.length < 2 || temp[1].trim().isEmpty()) {
                 throw new EmptyDescriptionException(temp[0]);
+            } else if (temp[0].equals("deadline") && !temp[1].contains("/by")) {
+                throw new InvalidInstructionException("Please state the date and/or time");
+            } else if (temp[0].equals("event") && !temp[1].contains("/at")) {
+                throw new InvalidInstructionException("Please state the date and/or time");
             }
         }
     }

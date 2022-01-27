@@ -8,12 +8,26 @@ import java.util.Scanner;
  * Handles creating and editing data file.
  */
 public class Storage {
-    private File storage;
+    private final File storage;
     private final String FILE_PATH = "data/Tasks.txt";
+    private final Ui ui;
 
-    public Storage() {
-        storage = new File(FILE_PATH);
+    /**
+     * Gets the ui and creates the necessary file and directories.
+     * @param ui The ui object
+     */
+    public Storage(Ui ui) {
+        this.ui = ui;
         new File("data").mkdirs();
+        storage = new File(FILE_PATH);
+        if (!storage.exists()) {
+            try {
+                storage.createNewFile();
+            } catch (IOException e) {
+                ui.printFormat("Sorry, there seems to be an Issue."
+                        + "\n" + "Please restart and try again");
+            }
+        }
     }
 
     /**
@@ -34,22 +48,23 @@ public class Storage {
             fw.write(task.toString() + "\n");
             fw.close();
         } catch (IOException ex) {
-            System.out.println("Sorry, there seems to be an Issue."
+            ui.printFormat("Sorry, there seems to be an Issue."
                     + "\n" + "Please restart and try again");
         }
     }
 
     /**
-     * Edits the tasks in the data file
+     * Edits the tasks in the data file.
      * @param task The task to be edited
      * @param id 1 to mark/unmark, 2 to delete the line from file
      */
     public void editTasks(Task task, int id) {
         StringBuilder tempData = new StringBuilder();
         // This splits the modified task to help get the task info
-        String[] tempArr = task.toString().split(" >> ");
+
 
         try {
+            String[] tempArr = task.toString().split(" >> ");
             Scanner sc = new Scanner(storage);
             while (sc.hasNext()) {
                 // This is the task stored in the file
@@ -78,7 +93,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("Sorry, there seems to be an Issue."
+            ui.printFormat("Sorry, there seems to be an Issue."
                     + "\n" + "Please restart and try again");
             e.printStackTrace();
         }
