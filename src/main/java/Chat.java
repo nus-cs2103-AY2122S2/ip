@@ -4,7 +4,7 @@ public class Chat {
 
     /**
      * This Chat version is just supposed to take in the commands,
-     * and return them, thats all. Mitran.Di.CHatri.
+     * and return them, thats all. Mitran.Di.CHatri. Ton.
      */
 
     public static String LINE_BREAK = "---------------";
