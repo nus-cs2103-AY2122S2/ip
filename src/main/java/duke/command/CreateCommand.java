@@ -12,6 +12,9 @@ import duke.UI;
 
 import duke.Storage;
 
+/**
+ * Command to create new tasks.
+ */
 public class CreateCommand extends Command{
 
     private static final String MESSAGE_TASKADD = "Got it. I've added this task:";
@@ -26,6 +29,13 @@ public class CreateCommand extends Command{
     private String args;
     private TaskType taskType;
 
+    /**
+     * Constructor to the create command.
+     *
+     * @param args Arguments needed in the line of the task to create
+     * @param taskType Type of task to create
+     * @throws DukeException If the arguments is an empty string
+     */
     public CreateCommand(String args, TaskType taskType) throws DukeException{
         if (args.equals(""))
             throw new DukeException(ERROR_INVALID_TITLE);
@@ -33,6 +43,13 @@ public class CreateCommand extends Command{
         this.taskType = taskType;
     }
 
+    /**
+     * Execution of the create command to create corresponding tasks.
+     *
+     * @param tasks Task list
+     * @param ui UI object
+     * @throws DukeException If there are incompatibilities or errors in the format for creating a particular task
+     */
     @Override
     public void execute(List<Task> tasks, UI ui) throws DukeException {
         Task newTask = null;

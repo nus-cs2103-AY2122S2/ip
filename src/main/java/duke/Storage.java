@@ -13,9 +13,18 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
+/**
+ * Handles saving to file and loading the file to the task list.
+ */
 public class Storage {
     private static final String FILE_PATH = "./data/test.txt";
 
+    /**
+     * Saves the current list state to the statically set file.
+     *
+     * @param taskList Current task list
+     * @return 1 if operation if successful
+     */
     public static int saveToFile(List<Task> taskList){
         FileWriter out = null;
         //Check if folder/file is present, otherwise create file
@@ -41,6 +50,12 @@ public class Storage {
         return 1;
     }
 
+    /**
+     * Checks the current file and loads entries into a list.
+     *
+     * @param path File path string
+     * @return List of tasks
+     */
     public static List<Task> loadFromFile(String path){
         FileReader in = null;
         BufferedReader reader = null;
