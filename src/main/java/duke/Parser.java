@@ -13,6 +13,7 @@ public class Parser {
     /**
      * Parses the initial input from user and outputs a RESULT
      * RESULT is used in Duke class to handle actions
+     *
      * @param input User input
      * @return RESULT of what action to run
      */

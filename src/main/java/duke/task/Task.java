@@ -22,7 +22,7 @@ public class Task {
      * Overloaded constructor for task
      *
      * @param description Description for task
-     * @param isDone Sets whether task is done
+     * @param isDone      Sets whether task is done
      */
     public Task(String description, boolean isDone) {
         this.description = description;

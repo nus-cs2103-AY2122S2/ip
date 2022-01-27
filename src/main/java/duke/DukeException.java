@@ -4,10 +4,11 @@ package duke;
  * Class used to handle exceptions/errors during runtime
  */
 public class DukeException extends Exception {
-    private String errorMsg;
+    private final String errorMsg;
 
     /**
      * Constructor for DukeException
+     *
      * @param msg Message to pass into the exception
      */
     public DukeException(String msg) {
@@ -16,6 +17,7 @@ public class DukeException extends Exception {
 
     /**
      * Gets the error message assigned to DukeException
+     *
      * @return The error message
      */
     public String getErrorMsg() {

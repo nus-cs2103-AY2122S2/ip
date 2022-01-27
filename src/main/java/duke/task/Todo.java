@@ -19,7 +19,7 @@ public class Todo extends Task {
      * Allows for passing in whether task is done
      *
      * @param description Description for Todo
-     * @param isDone Whether the task is done
+     * @param isDone      Whether the task is done
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

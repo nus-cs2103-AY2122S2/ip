@@ -30,6 +30,7 @@ public class Duke {
 
     /**
      * Main function
+     *
      * @param args arguments to pass in
      */
     public static void main(String[] args) {

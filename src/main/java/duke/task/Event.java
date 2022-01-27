@@ -18,7 +18,7 @@ public class Event extends Task {
      * Default constructor of Event
      *
      * @param description Description of event
-     * @param at Time/Date of event
+     * @param at          Time/Date of event
      * @throws DukeException Throws if given invalid date/time
      */
     public Event(String description, String at) throws DukeException {
@@ -41,8 +41,8 @@ public class Event extends Task {
      * to set whether event is done
      *
      * @param description Description of event
-     * @param isDone Whether event isDone
-     * @param at Time/Date of event
+     * @param isDone      Whether event isDone
+     * @param at          Time/Date of event
      * @throws DukeException Throws if given invalid date/time
      */
     public Event(String description, boolean isDone, String at) throws DukeException {

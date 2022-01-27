@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Storage {
     private final String DATA_PATH = "data";
-    private String fileName;
+    private final String fileName;
 
     /**
      * Default constructor for Storage

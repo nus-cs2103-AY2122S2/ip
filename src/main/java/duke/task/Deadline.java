@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * Default constructor of Deadline
      *
      * @param description Description of deadline
-     * @param by Time/Date of deadline
+     * @param by          Time/Date of deadline
      * @throws DukeException Throws if given invalid date/time
      */
     public Deadline(String description, String by) throws DukeException {
@@ -41,8 +41,8 @@ public class Deadline extends Task {
      * to set whether deadline is done
      *
      * @param description Description of deadline
-     * @param isDone Whether deadline isDone
-     * @param by Time/Date of deadline
+     * @param isDone      Whether deadline isDone
+     * @param by          Time/Date of deadline
      * @throws DukeException Throws if given invalid date/time
      */
     public Deadline(String description, boolean isDone, String by) throws DukeException {
