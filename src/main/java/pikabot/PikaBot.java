@@ -31,7 +31,6 @@ public class PikaBot {
         String input = sc.nextLine();
         String[] strInputArr = input.split(" ", 2);
 
-
         while (!strInputArr[0].equals("bye")) {
             Command command = Parser.parseCommand(strInputArr);
             command.execute(taskList, storage);

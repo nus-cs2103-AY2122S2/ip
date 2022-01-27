@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
+
     String[] deadlineCommand;
 
     public DeadlineCommand(String[] deadlineCommand) {
@@ -27,11 +28,9 @@ public class DeadlineCommand extends Command {
             storage.appendToFile(currDeadline);
         } catch (DeadlineException | IOException e) {
             Ui.printExceptionMessage(e);
-
         } catch (DateTimeParseException e) {
             Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to " +
-                    "be a valid date in numerical format YYYY-MM-DD.");
+                "be a valid date in numerical format YYYY-MM-DD.");
         }
     }
-
 }

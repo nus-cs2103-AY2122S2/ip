@@ -7,6 +7,7 @@ import pikabot.Ui;
 import java.io.IOException;
 
 public class UnmarkCommand extends Command {
+
     String[] unmarkCommand;
 
     public UnmarkCommand(String[] markCommand) {

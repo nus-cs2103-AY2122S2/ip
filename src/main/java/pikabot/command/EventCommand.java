@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class EventCommand extends Command {
+
     String[] eventCommand;
 
     public EventCommand(String[] eventCommand) {
@@ -31,7 +32,7 @@ public class EventCommand extends Command {
 
         } catch (DateTimeParseException e) {
             Ui.printExceptionCustomisedMessage("The description of an event must" +
-                    "contain a date in the numerical format YYYY-MM-DD");
+                "contain a date in the numerical format YYYY-MM-DD");
         }
     }
 }

@@ -1,5 +1,6 @@
 package pikabot.task;
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -28,6 +29,4 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
-
-
 }

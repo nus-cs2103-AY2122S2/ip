@@ -6,6 +6,7 @@ import pikabot.TaskList;
 import pikabot.exception.InvalidTaskCommandException;
 
 public class InvalidCommand extends Command {
+
     String[] invalidCommand;
 
     public InvalidCommand(String[] invalidCommand) {
@@ -24,6 +25,4 @@ public class InvalidCommand extends Command {
             Ui.printExceptionMessage(e);
         }
     }
-
-
 }

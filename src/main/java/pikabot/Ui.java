@@ -1,6 +1,5 @@
 package pikabot;
 
-import pikabot.TaskList;
 import pikabot.task.Task;
 
 public class Ui {
@@ -11,13 +10,13 @@ public class Ui {
     //opening
     public static void printWelcomeText() {
         System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Hello! I'm PikaBot" +
-                "\n" + INDENTATION + "What can I do for you? シ\n" + INDENTATION + LINE);
+            "\n" + INDENTATION + "What can I do for you? シ\n" + INDENTATION + LINE);
     }
 
     //ending
     public static void printClosingText() {
         System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Bye. Hope to see you again!" +
-                "\n" + INDENTATION + LINE);
+            "\n" + INDENTATION + LINE);
     }
 
     public static void printListOfTasks(TaskList taskList) {
@@ -29,7 +28,7 @@ public class Ui {
 
         while (taskNumber <= length) {
             System.out.println(INDENTATION + taskNumber + "." +
-                    taskList.get(taskNumber - 1));
+                taskList.get(taskNumber - 1));
             taskNumber++;
         }
         System.out.println(INDENTATION + LINE);
@@ -51,11 +50,11 @@ public class Ui {
 
     public static void indicateAddedTask(Task task, TaskList taskList) {
         System.out.println(INDENTATION + LINE + "\n" +
-                INDENTATION + "Got it. I've added this task:" + "\n" +
-                INDENTATION + "  " + task + "\n" +
-                INDENTATION + "Now you have " + taskList.noOfTasks() + " tasks in the list." +
-                "\n" +
-                INDENTATION + LINE);
+            INDENTATION + "Got it. I've added this task:" + "\n" +
+            INDENTATION + "  " + task + "\n" +
+            INDENTATION + "Now you have " + taskList.noOfTasks() + " tasks in the list." +
+            "\n" +
+            INDENTATION + LINE);
     }
 
     public static void indicateRemovedTask(Task task, TaskList taskList) {
@@ -78,6 +77,4 @@ public class Ui {
         System.out.println(INDENTATION + message);
         System.out.println(INDENTATION + LINE);
     }
-
-
 }

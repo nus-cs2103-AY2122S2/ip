@@ -5,6 +5,7 @@ import pikabot.Storage;
 import pikabot.Ui;
 
 import java.io.IOException;
+
 public class MarkCommand extends Command {
 
     String[] markCommand;
