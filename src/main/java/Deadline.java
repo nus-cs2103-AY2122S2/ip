@@ -1,25 +1,29 @@
 public class Deadline extends Task {
-    String taskType = "D";
     String deadline;
 
     public Deadline(String taskName, String deadline) {
-        super(taskName);
+        super(taskName, "D");
+        this.deadline = deadline;
+    }
+
+    public Deadline(String taskName, String deadline, boolean isDone) {
+        super(taskName, "D", isDone);
         this.deadline = deadline;
     }
 
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
-            this.done = true;
+            this.isDone = true;
             return  " Nice! I've marked this task as done:" + "\n" + "  " +
                     "     [" + this.taskType + "]" + //[T]
-                    "[" + (done ? "X" : " ") + "] " + // [X]
+                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
                     this.taskName;
         } else {
-            this.done = false;
+            this.isDone = false;
             return "OK, I've marked this task as not done yet:" + "\n" + "  " +
                     "     [" + this.taskType + "]" + //[T]
-                    "[" + (done ? "X" : " ") + "] " + // [X]
+                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
                     this.taskName;
         }
     }
@@ -27,9 +31,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[" + this.taskType + "]" +
-                "[" + (done ? "X" : " ") + "] " +
+                "[" + (isDone ? "X" : " ") + "] " +
                 this.taskName +
-                "(by: " + this.deadline + ")" +
+                " (by: " + this.deadline + ")" +
                 "\n";
     }
 }
