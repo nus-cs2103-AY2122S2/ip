@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.exception.DukeException;
-import duke.util.Storage;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 import duke.util.Ui;
 
 import java.time.LocalDate;
@@ -13,7 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends TaskCommand {
-    private final static String TASK_FORMAT_WRONG = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
+    private final static String TASK_FORMAT_WRONG
+            = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
     private final static String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
     private final static String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
 

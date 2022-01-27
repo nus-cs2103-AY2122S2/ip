@@ -1,4 +1,3 @@
-import duke.task.Deadline;
 import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,8 @@ public class EventTest {
     @Test
     public void testFullInit() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        Event event = new Event("Party at Tom's", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
+        Event event = new Event(
+                "Party at Tom's", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
 
         assertEquals("[E][ ] Party at Tom's (at: Oct 5 2015 03:05 PM)", event.toString());
     }

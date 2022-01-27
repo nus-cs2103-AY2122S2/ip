@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.Event;
-import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 import duke.util.Ui;
 
 import java.time.LocalDate;
@@ -13,7 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class EventCommand extends TaskCommand {
-    private final static String TASK_FORMAT_WRONG = "Did you remember to put in the date after /at? Or did u remember to add /at?";
+    private final static String TASK_FORMAT_WRONG
+            = "Did you remember to put in the date after /at? Or did u remember to add /at?";
     private final static String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
     private final static String TIME_FORMAT_WRONG = "duke.task.Event time format is wrong. HHmm";
 

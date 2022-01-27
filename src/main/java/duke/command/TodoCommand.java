@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.util.Storage;
 import duke.util.Ui;
 
 public class TodoCommand extends TaskCommand {

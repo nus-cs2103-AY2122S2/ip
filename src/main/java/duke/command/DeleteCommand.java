@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.Storage;
 import duke.util.Ui;
 
 public class DeleteCommand extends Command {
@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
 
         Task task = taskList.removeTask(taskIndex);
         storage.saveList(taskList.getTaskList());
-        ui.printResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
-                + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.");
+        ui.printResponse(
+                "Got it, task has been removed: \n" + task.toString() + "\nNow you have " + taskList.getTaskListSize()
+                        + " tasks in your list.");
     }
 }

@@ -1,5 +1,4 @@
 import duke.task.Deadline;
-
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -19,7 +18,8 @@ public class DeadlineTest {
     @Test
     public void testFullInit() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        Deadline deadline = new Deadline("Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
+        Deadline deadline = new Deadline(
+                "Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
 
         assertEquals("[D][ ] Finish CS2300 Assignment (by: Oct 5 2015 03:05 PM)", deadline.toString());
     }
@@ -45,7 +45,8 @@ public class DeadlineTest {
     @Test
     public void saveDataMarkTrue() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        Deadline deadline = new Deadline("Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
+        Deadline deadline = new Deadline(
+                "Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
         deadline.setIsDone(true);
 
         assertEquals("D|true|Finish CS2300 Assignment|Oct 5 2015|03:05 PM\n", deadline.saveFileFormat());
@@ -54,7 +55,8 @@ public class DeadlineTest {
     @Test
     public void saveDataMarkFalse() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        Deadline deadline = new Deadline("Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
+        Deadline deadline = new Deadline(
+                "Finish CS2300 Assignment", LocalDate.parse("2015-10-05"), LocalTime.parse("1505", timeFormatter));
 
         assertEquals("D|false|Finish CS2300 Assignment|Oct 5 2015|03:05 PM\n", deadline.saveFileFormat());
     }
