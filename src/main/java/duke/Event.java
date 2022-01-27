@@ -1,16 +1,23 @@
 package duke;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String at;
+    private LocalDate date;
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        this.date = LocalDate.parse(at);
     }
 
-    public Event(String description, String by, boolean isDone) {
+    public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;
+        this.date = LocalDate.parse(at);
     }
 
     @Override
@@ -26,6 +33,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
