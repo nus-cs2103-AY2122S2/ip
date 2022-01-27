@@ -5,6 +5,11 @@ public class Deadline extends Task {
     String taskType = "D";
     LocalDate deadline;
 
+    public Deadline(String taskName, String deadline) {
+        super(taskName, "D");
+        this.deadline = LocalDate.parse(deadline);
+    }
+
     public Deadline(String taskName, String deadline, boolean isDone) {
         super(taskName, "D", isDone);
         this.deadline = LocalDate.parse(deadline);

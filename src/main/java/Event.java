@@ -5,6 +5,13 @@ public class Event extends Task {
     String timeRange;
     LocalDate eventDate;
 
+    public Event(String taskName, String dateTime) {
+        super(taskName, "E");
+        String[] dateTimeSplit = dateTime.split(" ");
+        this.eventDate = LocalDate.parse(dateTimeSplit[0]);
+        this.timeRange = dateTimeSplit[1];
+    }
+
     public Event(String taskName, String dateTime, boolean isDone) {
         super(taskName, "E", isDone);
         String[] dateTimeSplit = dateTime.split(" ");
