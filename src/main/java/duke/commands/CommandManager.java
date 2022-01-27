@@ -76,31 +76,38 @@ public class CommandManager {
                 case "todo":
                     AddTaskCommand todo = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.TODO);
                     todo.execute();
+                    listStorage.saveList();
                     break;
                 case "deadline":
                     AddTaskCommand deadline =
                             new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.DEADLINE);
                     deadline.execute();
+                    listStorage.saveList();
                     break;
                 case "event":
                     AddTaskCommand event = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.EVENT);
                     event.execute();
+                    listStorage.saveList();
                     break;
                 case "mark":
                     NumCommand mark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.MARK);
                     mark.execute();
+                    listStorage.saveList();
                     break;
                 case "unmark":
                     NumCommand unmark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.UNMARK);
                     unmark.execute();
+                    listStorage.saveList();
                     break;
                 case "delete":
                     NumCommand delete = new NumCommand(this.uiManager, this.taskManager, command[1], Type.DELETE);
                     delete.execute();
+                    listStorage.saveList();
                     break;
                 case "save":
                     SaveCommand save = new SaveCommand(this.uiManager, this.taskManager);
                     save.execute();
+                    listStorage.saveList();
                     break;
                 case "find":
                     FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1]);

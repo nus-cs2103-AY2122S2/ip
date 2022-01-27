@@ -1,10 +1,11 @@
 package duke.ui;
 
-import duke.tasks.Task;
 import duke.tasks.TaskManager;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  * ListStorage Object that handles storage of Tasks in a ser file.
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * Creates ser file if absent.
  */
 public class ListStorage {
-    ArrayList<Task> taskList;
+    TaskManager taskManager;
 
     /**
      * Constructs the ListStorage Object.
@@ -21,7 +22,7 @@ public class ListStorage {
      * @param taskManager TaskManager used for getting task list
      */
     public ListStorage(TaskManager taskManager) {
-        this.taskList = taskManager.getList();
+        this.taskManager = taskManager;
     }
 
     /**
@@ -36,7 +37,7 @@ public class ListStorage {
         }
         FileOutputStream writeData = new FileOutputStream("storage/list.ser");
         ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-        writeStream.writeObject(this.taskList);
+        writeStream.writeObject(taskManager.getList());
         writeStream.flush();
         writeStream.close();
     }
