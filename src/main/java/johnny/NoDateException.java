@@ -1,3 +1,5 @@
+package johnny;
+
 public class NoDateException extends Exception{
 
     public String errorMessage() {

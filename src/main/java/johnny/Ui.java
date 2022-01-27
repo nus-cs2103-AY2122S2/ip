@@ -1,3 +1,5 @@
+package johnny;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class Ui {
     }
 
     public void handleUi() throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
-        System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
+        System.out.println("Hello! I'm Johnny.Johnny \n" + "What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input;
         while(true) {

@@ -1,3 +1,5 @@
+package johnny;
+
 public class InvalidArgumentsException extends Exception{
 
     private String invalidInput;

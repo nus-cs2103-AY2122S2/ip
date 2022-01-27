@@ -1,3 +1,5 @@
+package johnny;
+
 public class EmptyDescriptionException extends Exception{
 
     public String errorMessage() {
