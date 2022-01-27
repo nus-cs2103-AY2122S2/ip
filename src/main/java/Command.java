@@ -1,11 +1,15 @@
 public abstract class Command {
 
-    CommandType commandType;
+    protected CommandType commandType;
+    protected boolean active;
     
     public Command(CommandType commandType) {
         this.commandType = commandType;
+        this.active = true;
     }
 
-    public abstract void execute(Ui ui, Storage storage);
+    public abstract boolean isActive();
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
     
 }
