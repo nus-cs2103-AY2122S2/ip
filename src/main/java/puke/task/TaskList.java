@@ -7,21 +7,45 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents the list of task in the current session.
+ */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
+    /**
+     * Initialise an ArrayList to store the tasks.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns the number of tasks in the current session.
+     *
+     * @return Number of tasks.
+     */
     public int getNoOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Checks if a task number given is valid.
+     * A valid task number is between 1 and the number of tasks (inclusive).
+     *
+     * @param taskNo Task number to check validity.
+     * @return true if the task number is valid; false otherwise.
+     */
     public boolean isValidTask(int taskNo) {
         return taskNo >= 1 && taskNo <= this.getNoOfTasks();
     }
 
+    /**
+     * Returns a string representation of the list of tasks.
+     *
+     * @return String representation of the task list, or a message if the list is empty.
+     * @throws PukeException If the list of task is empty.
+     */
     public String listTasks() throws PukeException {
         if (this.getNoOfTasks() == 0) {
             throw new PukeException("You have no task right now!");
@@ -36,6 +60,13 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Marks a task as done given the task number.
+     *
+     * @param taskNo Task number of task to mark.
+     * @return Success message.
+     * @throws PukeException If the task number is invalid, or the task is already marked as done.
+     */
     public String markTask(int taskNo) throws PukeException {
         if (!this.isValidTask(taskNo)) {
             throw new PukeException(String.format("%d is not a valid task number!", taskNo));
@@ -50,6 +81,13 @@ public class TaskList {
         return "Kudos! I've marked this task as done:\n  " + t;
     }
 
+    /**
+     * Marks a task as undone given the task number.
+     *
+     * @param taskNo Task number of task to unmark.
+     * @return Success message.
+     * @throws PukeException If the task number is invalid, or the task is already marked as undone.
+     */
     public String unmarkTask(int taskNo) throws PukeException {
         if (!this.isValidTask(taskNo)) {
             throw new PukeException(String.format("%d is not a valid task number!", taskNo));
@@ -64,6 +102,14 @@ public class TaskList {
         return "Alright, I've marked this task as not done yet:\n  " + t;
     }
 
+    /**
+     * Adds a task to the list given the argument containing task name and date/time if applicable.
+     *
+     * @param type Type of task to add.
+     * @param args Argument given by the user.
+     * @return Success message.
+     * @throws PukeException If the argument is invalid for the task type.
+     */
     public String addTask(String type, String args) throws PukeException {
         if (args == null) {
             throw new PukeException("I'll need a description for the task..");
@@ -106,10 +152,22 @@ public class TaskList {
                 + (this.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.";
     }
 
+    /**
+     * Adds a task object directly to the task list.
+     *
+     * @param t Task to add to the list.
+     */
     public void addTaskToList(Task t) {
         this.tasks.add(t);
     }
 
+    /**
+     * Removes a task given the task number.
+     *
+     * @param taskNo Task number of task to remove.
+     * @return Success message.
+     * @throws PukeException If the task number is invalid.
+     */
     public String deleteTask(int taskNo) throws PukeException {
         if (!this.isValidTask(taskNo)) {
             throw new PukeException(String.format("%d is not a valid task number!", taskNo));
@@ -123,6 +181,7 @@ public class TaskList {
     }
 
     /**
+
      * Returns a list of task(s) with name containing the specified keyword.
      *
      * @param keyword Keyword to match in the task name.
@@ -150,6 +209,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Generates the information of tasks in the current session to save on the file.
+     *
+     * @return String representation of all tasks to save.
+     */
     public String generateStorageData() {
         String result = "";
 

@@ -8,12 +8,20 @@ import puke.task.TaskList;
 import puke.io.Storage;
 import puke.parser.Parser;
 
+/**
+ * Main class for Puke.
+ */
 public class Puke {
     private static Ui ui;
     private static TaskList tasks;
     private static Storage storage;
     private static Parser parser;
 
+    /**
+     * Initialises Puke and the objects required.
+     *
+     * @param filePath Path of storage file.
+     */
     public Puke(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
@@ -27,6 +35,9 @@ public class Puke {
         }
     }
 
+    /**
+     * Reads inputs from user.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.printWelcomeMessage();
