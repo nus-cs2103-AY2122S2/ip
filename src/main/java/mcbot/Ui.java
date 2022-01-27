@@ -116,6 +116,9 @@ public class Ui {
         case "datetimeFormat":
             System.out.println("Yer date and time should follow this format: DD/MM/YYYY HHMM");
             break;
+        case "emptyFindTask":
+            System.out.println("Yer cant leave it empty mate");
+            break;
         default:
             System.out.println("new error not caught");
         }
@@ -141,5 +144,13 @@ public class Ui {
         System.out.println("Aye, I 'ave deleted it");
         System.out.println(t);
         System.out.println("Ye now have " + size + " tasks in list lad");
+    }
+
+    public void noMatch() {
+        System.out.println("No matching task found, sorry mate");
+    }
+
+    public void printFind() {
+        System.out.println("I'ave found this: ");
     }
 }

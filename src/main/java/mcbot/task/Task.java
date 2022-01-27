@@ -76,6 +76,10 @@ public class Task {
      * 
      * @return The string describing the task.
      */
+    public String getTaskName() {
+        return taskName;
+    }
+    
     @Override
     public String toString() {
         return "[" + getTaskIcon() + "][" + getStatusIcon() + "] " + taskName;

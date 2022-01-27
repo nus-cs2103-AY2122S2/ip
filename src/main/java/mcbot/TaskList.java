@@ -34,4 +34,22 @@ public class TaskList {
     public void remove(int i) {
         taskList.remove(i);
     }
+
+    public void find(String taskName, Ui ui) {
+        boolean anyMatch = false;
+        boolean isHeaderPrinted = false;
+        for (Task t : taskList) {
+            if (t.getTaskName().contains(taskName)) {
+                anyMatch = true;
+                if (!isHeaderPrinted && anyMatch) {
+                    ui.printFind();
+                    isHeaderPrinted = true;
+                }
+                ui.printTask(t);
+            }
+        }
+        if (!anyMatch) {
+            ui.noMatch();
+        }
+    }
 }

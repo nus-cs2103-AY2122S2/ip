@@ -96,8 +96,7 @@ public class McBot {
                             storage.updateData(tasks.getList());
                             ui.unmarkLine();
                             ui.printTask(t);
-                        }
-                        else {
+                        } else {
                             ui.unmarkDuplication();
                         }
                     } catch (ArrayIndexOutOfBoundsException | InvalidCommandException e) {
@@ -185,7 +184,8 @@ public class McBot {
                         int num = Integer.parseInt(numStr);
                         if (num < 1 || num > tasks.size()) {
                             throw new McBotException("Boi, I can't delete a number that ain't on the list");
-                        }                        Task t = tasks.get(num - 1);
+                        }
+                        Task t = tasks.get(num - 1);
                         tasks.remove(num - 1);
                         storage.updateData(tasks.getList());
                         ui.deleteLine(t, tasks.size());
@@ -195,6 +195,14 @@ public class McBot {
                         ui.printError(e);
                     } catch (NumberFormatException e) {
                         ui.deleteError("notInteger");
+                    }
+                    break;
+                case "find":
+                    try {
+                        String taskName = parser.getDetails();
+                        tasks.find(taskName, ui);
+                    } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
+                        ui.taskError("emptyFindTask");
                     }
                     break;
                 default:
