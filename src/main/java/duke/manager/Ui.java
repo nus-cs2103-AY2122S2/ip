@@ -1,10 +1,10 @@
 package duke.manager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 import duke.exception.DukeException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Represents an Ui object that handles the user interaction.
@@ -41,17 +41,18 @@ public class Ui {
 
     /**
      * Prints out the error message appended with indentation.
+     *
      * @param errMessage The message of the error.
      */
     public void showError(String errMessage) {
-        System.out.println(INDENTATION+errMessage);
+        System.out.println(INDENTATION + errMessage);
     }
 
     /**
      * Prints out a divider line.
      */
     public void showLine() {
-        System.out.println(INDENTATION+DIVIDER);
+        System.out.println(INDENTATION + DIVIDER);
     }
 
     /**
@@ -60,7 +61,7 @@ public class Ui {
      * @param message The message to be printed.
      */
     public void print(String message) {
-        System.out.println(INDENTATION+message);
+        System.out.println(INDENTATION + message);
     }
 
 }

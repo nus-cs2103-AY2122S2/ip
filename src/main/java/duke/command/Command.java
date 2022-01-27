@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
-import duke.manager.Storage;
 import duke.exception.DukeException;
+import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 
 /**
  * Represents a general command that can be executed.
@@ -19,6 +19,7 @@ public abstract class Command {
      * @throws DukeException If there is an issue saving the tasks.
      */
     public abstract void execute(TaskList taskList,Ui ui, Storage storage) throws DukeException;
+
 
     /**
      * Returns true if it is an exit command and false otherwise.

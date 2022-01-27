@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
 import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 
 /**
  * Represents a command that will exit the program upon execution.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Executes the command by printing a farewell message.

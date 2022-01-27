@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a ToDo Task that contains a task name.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * A constructor that stores the name of the Task.
@@ -11,7 +11,7 @@ public class ToDo extends Task{
      * @param taskName The name of the task.
      */
     public ToDo(String taskName) {
-        super (taskName);
+        super(taskName);
     }
 
     /**
@@ -24,5 +24,4 @@ public class ToDo extends Task{
         String done = isComplete() ? "[X]" : "[ ]";
         return "[T]" + done + getTaskName();
     }
-
 }

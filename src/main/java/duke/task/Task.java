@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Represents a general Task that can be put into the TaskList.
  */
-abstract public class Task implements Serializable {
+public abstract class Task implements Serializable {
     private String taskName;
     private boolean status;
 

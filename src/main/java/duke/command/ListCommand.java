@@ -1,14 +1,16 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.manager.Ui;
-import duke.manager.TaskList;
 import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
+
 
 /**
  * Represents a command that will list out all the tasks in the TaskList upon execution.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
+
 
     /**
      * Executes the command listing out all the tasks currently in the TaskList.

@@ -1,11 +1,11 @@
 package duke;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
-import duke.manager.Storage;
-import duke.manager.Parser;
-import duke.exception.DukeException;
 import duke.command.Command;
+import duke.exception.DukeException;
+import duke.manager.Parser;
+import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 
 /**
  * Represents Duke the assistant.
@@ -51,7 +51,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = parser.parse(fullCommand);
-                c.execute(taskList,ui,storage);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

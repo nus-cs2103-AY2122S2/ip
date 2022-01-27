@@ -1,9 +1,10 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import duke.exception.DukeException;
 
 /**
  * Represents an Event Task that contains a date.
@@ -18,7 +19,7 @@ public class Event extends Task{
      * @param at The String representation of the date
      * @throws DukeException If the date given is invalid or the format is incorrect.
      */
-    public Event(String taskName, String at) throws DukeException{
+    public Event(String taskName, String at) throws DukeException {
         super(taskName);
         boolean isCorrectFormat = formatChecker(at);
         if (isCorrectFormat) {
@@ -40,7 +41,8 @@ public class Event extends Task{
     @Override
     public String toString() {
         String done = isComplete() ? "[X]" : "[ ]";
-        return "[E]" + done + getTaskName() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + done + getTaskName() + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
@@ -58,5 +60,4 @@ public class Event extends Task{
             return true;
         }
     }
-
 }

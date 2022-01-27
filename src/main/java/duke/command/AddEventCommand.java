@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
-import duke.manager.Storage;
 import duke.exception.DukeException;
+import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 import duke.task.Event;
 
 /**
  * Represents a command that will add an Event Task to the TaskList upon execution..
  */
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
     private String task;
     private String at;
 
@@ -35,11 +35,11 @@ public class AddEventCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Event event = new Event(task,at);
+        Event event = new Event(task, at);
         taskList.add(event);
         ui.print("Got it. I've added this task:");
         ui.print(event.toString());
-        ui.print("Now you have " + taskList.numOfTasks() +  " tasks in the list.");
+        ui.print("Now you have " + taskList.numOfTasks() + " tasks in the list.");
         try {
             storage.save(taskList);
         } catch (Exception e) {

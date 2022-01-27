@@ -1,14 +1,16 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import duke.exception.DukeException;
+
 
 /**
  * Represents a Deadline Task that contains a due date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDate dueDate;
 
     /**
@@ -40,7 +42,8 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         String done = isComplete() ? "[X]" : "[ ]";
-        return "[D]" + done + getTaskName() + " (by: " + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + done + getTaskName() + " (by: "
+                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
@@ -58,5 +61,4 @@ public class Deadline extends Task{
             return true;
         }
     }
-
 }
