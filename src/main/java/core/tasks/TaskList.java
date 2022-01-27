@@ -1,5 +1,6 @@
 package core.tasks;
 
+import core.exceptions.EmptyArgumentException;
 import core.exceptions.InvalidDeleteIndexException;
 import core.exceptions.NoTaskToDeleteException;
 import utilities.OutputFormatter;
@@ -106,6 +107,34 @@ public class TaskList {
             outputFormatter.appendAll(String.join(" | ", arr), "\n");
         }
 
+        return outputFormatter.getFormattedOutput();
+    }
+
+    public String outputWithFoundString(String toBeFound) throws EmptyArgumentException {
+        if (toBeFound.isBlank() || toBeFound.isEmpty()) {
+            throw new EmptyArgumentException();
+        }
+
+        OutputFormatter outputFormatter = OutputFormatter.getInstance();
+        if (this.taskList.size() == 0) {
+            outputFormatter.append("The task list is empty!");
+        } else {
+            outputFormatter.appendAll("Here are the matching tasks in your list:", "\n");
+            int count = 1;
+            int runningLength = 1;
+
+            for (Task task : this.taskList) {
+                if (task.getTaskDescription().contains(toBeFound) || task.getTaskDescription().contains(toBeFound.toLowerCase())) {
+                    outputFormatter.appendAll(count, ".", task.toString());
+                    count++;
+                    if (runningLength++ < this.taskList.size()) {
+                        outputFormatter.append("\n");
+                    }
+                } else {
+                    runningLength++;
+                }
+            }
+        }
         return outputFormatter.getFormattedOutput();
     }
 

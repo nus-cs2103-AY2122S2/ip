@@ -1,7 +1,7 @@
 package core;
 
+import core.exceptions.EmptyArgumentException;
 import core.exceptions.FileIsCorruptException;
-
 import core.exceptions.InvalidDeleteIndexException;
 import core.exceptions.NoDeadlineMentionedException;
 import core.exceptions.NoDescriptionGivenException;
@@ -63,6 +63,9 @@ public class InputHandler {
                 break;
             case DELETE :
                 handleDelete(inputData, outputFormatter);
+                break;
+            case FIND :
+                handleFind(inputData, outputFormatter);
                 break;
             case UNKNOWN :
                 handleUnknown(outputFormatter);
@@ -193,6 +196,20 @@ public class InputHandler {
         } catch (InvalidDeleteIndexException | NoTaskToDeleteException e) {
             outputFormatter.append(e.getMessage());
         }
+    }
+
+    private void handleFind(String inputData, OutputFormatter outputFormatter) {
+        try {
+            String[] inputSequence = inputData.split("find");
+            if (inputSequence.length < 2) {
+                throw new EmptyArgumentException();
+            }
+            String toBeFound = inputSequence[1].trim();
+            outputFormatter.append(this.taskList.outputWithFoundString(toBeFound));
+        } catch (EmptyArgumentException e) {
+            outputFormatter.append(e.getMessage());
+        }
+
     }
 
     public void initializeWithFile(File file) throws IOException, FileIsCorruptException {

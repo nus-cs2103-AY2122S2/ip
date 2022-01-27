@@ -8,6 +8,7 @@ public class InputIdentifier {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String TODO_COMMAND = "todo";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     public static InputType determineInputType(String inputData) {
         if (inputData.toLowerCase().startsWith(EVENT_COMMAND)) {
@@ -22,6 +23,8 @@ public class InputIdentifier {
             return InputType.UNMARK;
         } else if (inputData.equalsIgnoreCase(LIST_COMMAND)) {
             return InputType.LIST;
+        } else if (inputData.toLowerCase().startsWith(FIND_COMMAND)) {
+            return InputType.FIND;
         } else if (inputData.toLowerCase().startsWith(DELETE_COMMAND)) {
             return InputType.DELETE;
         } else {
