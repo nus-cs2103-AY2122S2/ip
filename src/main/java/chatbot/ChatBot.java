@@ -16,6 +16,9 @@ import chatbot.util.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Task management chat bot.
+ */
 public class ChatBot {
     private static final String BOT_NAME = "Delphine";
     private static final String SAVE_FILE_PATH = "./data/save_file";
@@ -38,6 +41,9 @@ public class ChatBot {
 
     private final Parser parser;
 
+    /**
+     * Constructs a chat bot.
+     */
     public ChatBot() {
         this.parser = new Parser();
         this.parser.addCommand(DeadlineCommand.TRIGGER, new DeadlineCommand());
@@ -51,6 +57,9 @@ public class ChatBot {
         this.parser.addCommand(FindCommand.TRIGGER, new FindCommand());
     }
 
+    /**
+     * Runs the chat bot.
+     */
     public void run() {
         Ui.println(LOGO + String.format("\nHello! I'm %s!\nWhat can I do for you?", BOT_NAME));
         TaskList taskList = TaskList.create(SAVE_FILE_PATH);

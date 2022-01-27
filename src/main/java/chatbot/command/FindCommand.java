@@ -1,11 +1,8 @@
 package chatbot.command;
 
-import chatbot.task.Deadline;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Arrays;
 
 public class FindCommand implements Command {
