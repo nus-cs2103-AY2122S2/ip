@@ -3,14 +3,24 @@ package main.java.duke.responses;
 
 import main.java.duke.task.Task;
 
+/***
+ * Response to the UnMarkResponse Command
+ */
+
 public class UnMarkResponse implements Response {
     Task currTask;
 
+    /**
+     * Constructs the response based on the Task
+     * @param currTask 
+     */
     public UnMarkResponse(Task currTask) {
         this.currTask = currTask;
     }
-    
 
+    /**
+     * Callback function that displays the intended results
+     */
     @Override
     public void callback() {
         System.out.println(

@@ -12,16 +12,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/***
+ * Storage is a class that allows users to access a persist storage
+ */
 public class Storage {
 
   File storageTaskList;
   TaskList runningTaskList;
+
+  /***
+   * Constructs the contents of the Storage with a TaskList
+   * @param runningTaskList that to be added to the Storage
+   */
   
   public Storage(TaskList runningTaskList) {
     this.storageTaskList = new File("data/command.txt");
     this.runningTaskList = runningTaskList;
   }
-  
+
+  /***
+   * Function that is run upon initialisation of the storage.
+   * Loods the persist storage into a TaskList.
+   */
   public void initialiseStorage() {
     File data = new File("data");
     try {
@@ -60,8 +72,10 @@ public class Storage {
         return null;
     }
   }
-  
 
+  /***
+   * function that loads from permanent storage to the TaskList.
+   */
   public TaskList loadFromDisk() {
     try {
       Scanner fileReader = null;
@@ -77,6 +91,10 @@ public class Storage {
       return new TaskList();
     }
   }
+
+  /***
+   * function that loads the TaskList into the permanent storage.
+   */
 
   public void loadToDisk(TaskList taskList) throws DukeException {
     try {

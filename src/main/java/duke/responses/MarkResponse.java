@@ -2,13 +2,24 @@ package main.java.duke.responses;
 
 import main.java.duke.task.Task;
 
+/***
+ * Response to the MarkResponse Command
+ */
+
 public class MarkResponse implements Response {
     Task currTask;
-    
+
+    /**
+     * Constructs the response based on the Task
+     * @param currTask
+     */
     public MarkResponse(Task currTask) {
         this.currTask = currTask;    
     }
 
+    /**
+     * Callback function that displays the intended results
+     */
     @Override
     public void callback() {
         System.out.println(
