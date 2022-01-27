@@ -6,8 +6,6 @@ import seedu.duke.exceptions.UnableToUpdateDatabaseException;
 import seedu.duke.task.*;
 
 import java.io.*;
-import java.nio.file.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -122,7 +120,6 @@ public class Storage {
 
     LocalDateTime getLocalDateTimeFromDate(String string) {
         try {
-            System.out.println(string);
             TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(string);
             LocalDateTime date = LocalDateTime.from(ta);
             return date;

@@ -1,10 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.NoCommandException;
-import seedu.duke.exceptions.NoDateException;
 import seedu.duke.task.*;
 
 import java.io.IOException;

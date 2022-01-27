@@ -7,7 +7,6 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
