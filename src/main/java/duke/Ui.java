@@ -1,6 +1,10 @@
-import java.util.ArrayList;
+package duke;
+
+import myTasks.TaskList;
+import myTasks.Task;
+import commands.*;
+
 import java.util.List;
-import java.util.Scanner;
 
 public class Ui {
     public Ui() {
@@ -21,6 +25,7 @@ public class Ui {
             new DukeException().invalidChecker(tempList, taskCount);
         } catch (DukeException e) {
             System.err.println(e);
+            return;
         }
 
         System.out.println("------------------------------------------------------------");
@@ -35,36 +40,36 @@ public class Ui {
                 }
                 break;
             case "todo":
-                tasks.todo(tempList[1], list);
+                CreateTask.todo(tempList[1], list);
                 System.out.println(list.get(taskCount).toString());
                 System.out.println("Got it. I've added this task:");
                 printAndSave(taskCount + 1, list);
                 break;
             case "deadline":
-                tasks.deadline(tempList[1], list);
+                CreateTask.deadline(tempList[1], list);
                 System.out.println(list.get(taskCount).toString());
                 printAndSave(taskCount + 1, list);
                 System.out.println("Got it. I've added this task:");
                 break;
             case "event":
-                tasks.event(tempList[1], list);
+                CreateTask.event(tempList[1], list);
                 System.out.println(list.get(taskCount).toString());
                 printAndSave(taskCount + 1, list);
                 System.out.println("Got it. I've added this task:");
                 break;
             case "mark":
-                tasks.mark(tempList[1], list);
+                MarkTask.mark(tempList[1], list);
                 printAndSave(taskCount, list);
                 System.out.println("Nice! I've marked this task as done:");
                 break;
             case "unmark":
-                tasks.unmark(tempList[1], list);
+                MarkTask.unmark(tempList[1], list);
                 printAndSave(taskCount, list);
                 System.out.println("OK, I've marked this task as not done yet:");
                 break;
             case "delete":
                 System.out.println("Noted. I've removed this task:");
-                tasks.delete(tempList[1], list);
+                DeleteTask.delete(tempList[1], list);
                 printAndSave(taskCount - 1, list);
                 break;
         }

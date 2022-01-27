@@ -1,9 +1,13 @@
+package duke;
+
+import myTasks.Deadline;
+import myTasks.Event;
+import myTasks.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -45,7 +49,7 @@ public class Storage {
         }
     }
 
-    public List<String> loadTasks() throws DukeException{
+    public List<String> loadTasks() throws DukeException {
         List<String> list = new ArrayList<>();
         try {
             File myObj = new File(this.filepath);

@@ -1,8 +1,10 @@
+package myTasks;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    String dateTime;
+    public String dateTime;
 
     public Deadline(String description, String dateTime) {
         super(description);

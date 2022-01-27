@@ -1,8 +1,10 @@
+package myTasks;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    String dateTime;
+    public String dateTime;
 
     public Event(String description, String dateTime) {
         super(description);
