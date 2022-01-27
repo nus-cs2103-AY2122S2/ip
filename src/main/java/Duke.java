@@ -1,16 +1,17 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+// import java.util.Scanner;
+// import java.io.File;
+// import java.io.FileWriter;
+// import java.io.IOException;
 
 public class Duke {
 
-    ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> taskList;
     boolean firstUserChat = true;
     String userName;
     String taskFilePath;
     Ui ui;
+    Storage storage;
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
@@ -19,64 +20,7 @@ public class Duke {
     public Duke(String filePath) {
         taskFilePath = filePath;
         ui = new Ui();
-    }
-
-    private void loadFileContents(String taskFilePath) {
-        // load tasklist data from save 
-        try {
-            File f = new File(taskFilePath);
-            
-            // checks if the user already has existing save data 
-            if (!f.createNewFile()) {
-                ui.showTask("loading previous save data...");
-                Scanner s = new Scanner(f);
-                while(s.hasNext()) {
-                    
-                    String task = s.nextLine();
-                    String[] taskStrings = task.split(" \\| ");
-                    String taskType = taskStrings[0];
-                    boolean taskStatus = taskStrings[1] == "1";
-                    String taskDescription = taskStrings[2];
-
-                    switch (taskType) {
-                        case "T":
-                            taskList.add(new Todo(taskDescription, taskStatus));
-                            break;
-                        case "E":
-                            taskList.add(new Event(taskDescription, taskStrings[3], taskStatus));
-                            break;
-                        case "D":
-                            taskList.add(new Deadline(taskDescription, taskStrings[3], taskStatus));
-                            break;
-                        default:
-                            throw new DukeException("Invalid save data");
-                    }
-                }
-                s.close();
-            // else creates the save data for further use
-            } else {
-                ui.showText("creating save data...");
-            }
-            
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }
-    }
-
-    private void updateFileContents(String taskFilePath) {
-        // write & update save data with current tasklist 
-        try {
-            FileWriter fw = new FileWriter(taskFilePath);
-            for (Task t: taskList) {
-                fw.write(t.toStringSaveData());
-                fw.write(System.lineSeparator());
-            }
-            fw.close();
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-        }
+        storage = new Storage(taskFilePath, ui);
     }
 
     public void run() {
@@ -85,7 +29,7 @@ public class Duke {
         userName = ui.showWelcome();
 
         // load TaskList from existing data 
-        loadFileContents(taskFilePath);
+        taskList = new ArrayList<>((storage.loadFileContents()));
 
         boolean active = true;
 
@@ -114,37 +58,37 @@ public class Duke {
                     // Mark, "mark itemIndexNumber", marks an item as done 
                     case MARK:
                         markTask(description, commandType.getRegex());
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
                     
                     // Unmark, "unmark itemIndexNumber", marks an item as undone 
                     case UNMARK:
                         unmarkTask(description, commandType.getRegex());
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
 
                     // Delete - removes Tasks from the list 
                     case DELETE:
                         deleteTask(description);
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
 
                     // Adds a todo task
                     case TODO:
                         addTodo(description);
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
 
                     // Adds an event task 
                     case EVENT:
                         addEventOrDeadline(description, commandType, commandType.getRegex());
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
 
                     // Adds a deadline task 
                     case DEADLINE:
                         addEventOrDeadline(description, commandType, commandType.getRegex());
-                        updateFileContents(taskFilePath);
+                        storage.updateFileContents(taskList);
                         break;
                 }
             }
@@ -159,7 +103,7 @@ public class Duke {
     private void addTodo(String taskDescription) throws DukeException {
         // check if the user's input is just whitespaces
         if (taskDescription.trim().length() == 0) {
-            throw new DukeException("I'm sorry, your event command is missing a task description. Please try again."); 
+            throw new DukeException("I'm sorry, your todo command is missing a task description. Please try again."); 
         }
         Task task = new Todo(taskDescription, false); 
         taskList.add(task);
