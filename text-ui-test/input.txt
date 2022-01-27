@@ -19,4 +19,6 @@ unmark 20
 list
 deadline drawing 01/07/2022
 event ball 10/02/2022
+event soccer /at 50/02/2022
+event soccer /at 20/02/2022 1800
 bye
