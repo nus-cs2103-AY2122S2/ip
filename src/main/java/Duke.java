@@ -1,4 +1,7 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -105,16 +108,16 @@ public class Duke {
             System.out.println("Now you have " + numOfItems + " tasks in the list.");
     }
 
-    public static void deadlineAction(String[] arr, ArrayList<Task> listOfItems) {
-        Deadline deadlineItem = new Deadline(arr[0], arr[1]);
+    public static void deadlineAction(String[] arr, ArrayList<Task> listOfItems) throws DukeException {
+        Deadline deadlineItem = new Deadline(arr[0], convertDate(arr[1]));
         listOfItems.add(deadlineItem);
         int numOfItems = listOfItems.size();
         System.out.println(ADDED + deadlineItem);
         System.out.println("Now you have " + numOfItems + " tasks in the list.");
     }
 
-    public static void eventAction(String[] arr, ArrayList<Task> listOfItems) {
-        Event eventItem = new Event(arr[0], arr[1]);
+    public static void eventAction(String[] arr, ArrayList<Task> listOfItems) throws DukeException {
+        Event eventItem = new Event(arr[0], convertDate(arr[1]));
         listOfItems.add(eventItem);
         int numOfItems = listOfItems.size();
         System.out.println(ADDED + eventItem);
@@ -146,10 +149,10 @@ public class Duke {
                             history = new Todo(data[2]);
                             break;
                         case "D":
-                            history = new Deadline(data[2], data[3]);
+                            history = new Deadline(data[2], convertDate(data[3]));
                             break;
                         case "E":
-                            history = new Event(data[2], data[3]);
+                            history = new Event(data[2], convertDate(data[3]));
                             break;
                         default:
                             throw new DukeException("Cannot understand the command");
@@ -182,6 +185,15 @@ public class Duke {
             writer.close();
         } catch (IOException e) {
             throw new DukeException("Error... try again");
+        }
+    }
+
+    public static LocalDate convertDate(String dateString) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            return LocalDate.parse(dateString, format);
+        } catch (DateTimeParseException error) {
+            throw new DukeException("Wrong Format...");
         }
     }
 }
