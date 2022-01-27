@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class DukeException extends Exception{
@@ -39,28 +42,44 @@ public class DukeException extends Exception{
                 if (tempList.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 } else {
-                    String[] restOfPara  = tempList[1].split("/by ", 2);
-                    if (restOfPara[0].equals("")) {
+                    String[] dateTime  = tempList[1].split("/by ", 2);
+                    if (dateTime[0].equals("")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-                    } else if (restOfPara.length == 1) {
+                    } else if (dateTime.length == 1) {
                         throw new DukeException("☹ OOPS!!! Please enter a deadline for the task using /by.");
                     }
+                    isValidDate(dateTime[1]);
                 }
                 break;
             case "event":
                 if (tempList.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
                 } else {
-                    String[] restOfPara  = tempList[1].split("/at ", 2);
-                    if (restOfPara[0].equals("")) {
+                    String[] dateTime  = tempList[1].split("/at ", 2);
+                    if (dateTime[0].equals("")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-                    } else if (restOfPara.length == 1) {
+                    } else if (dateTime.length == 1) {
                         throw new DukeException("☹ OOPS!!! Please enter a timeframe for the task using /at.");
                     }
+                    isValidDate(dateTime[1]);
                 }
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    public void isValidDate(String dateTime) throws DukeException {
+        LocalDateTime d1 = LocalDateTime.now();
+        try {
+            LocalDateTime d2 = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"));
+            if (d2.isBefore(d1)) {
+                throw new DukeException("☹ OOPS!!! Please enter a valid date from "
+                        + d1.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hha")) + " and onwards.");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Please enter a valid date and time in the format yyyy-mm-dd hha " +
+                    "(Example: 2022-10-10 10PM)");
         }
     }
 }
