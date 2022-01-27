@@ -12,7 +12,7 @@ import Exceptions.WrongInputException;
  * This class encapsulates the Parser logic from users in Duke.
  */
 public class Parser {
-    String userInput;
+    String input;
 
     /**
      * Constructor for Parser.
@@ -22,7 +22,7 @@ public class Parser {
      */
     public Parser(String userInput) throws TaskException {
         checkUserInput(userInput);
-        this.userInput = userInput;
+        this.input = userInput;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Parser {
      * @param tasks Pass the TaskList into {@link DukeComponent.Command} class for manipulation.
      */
     public void executeCommand(TaskList tasks) {
-        Command c = new Command(userInput, tasks);
+        Command c = new Command(input, tasks);
         c.execute();
     }
 
