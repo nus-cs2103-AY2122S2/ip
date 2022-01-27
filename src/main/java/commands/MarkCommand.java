@@ -1,11 +1,18 @@
+package commands;
+
+import data.Task;
+import data.TaskList;
+import storage.Storage;
+import ui.Ui;
+
 public class MarkCommand extends Command {
     private final int i;
 
-    MarkCommand (int i) {
+    public MarkCommand(int i) {
         this.i = i;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
 
             Task t = tasks.get(i);
             t.mark();

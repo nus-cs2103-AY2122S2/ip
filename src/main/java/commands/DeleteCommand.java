@@ -1,11 +1,18 @@
-public class DeleteCommand extends Command{
+package commands;
+
+import data.Task;
+import data.TaskList;
+import storage.Storage;
+import ui.Ui;
+
+public class DeleteCommand extends Command {
     private final int i;
 
-    DeleteCommand (int i) {
+    public DeleteCommand(int i) {
         this.i = i;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
 
             Task t = tasks.get(i);
             tasks.remove(t);

@@ -1,3 +1,5 @@
+package common;
+
 public enum Type {
     TODO,
     DEADLINE,

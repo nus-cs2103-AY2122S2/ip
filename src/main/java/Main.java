@@ -1,3 +1,8 @@
+import commands.Command;
+import data.TaskList;
+import storage.Storage;
+import ui.Ui;
+
 public class Main {
     private static final Ui ui = new Ui();
     private static final TaskList tasks = new TaskList();

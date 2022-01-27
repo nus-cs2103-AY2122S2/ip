@@ -1,3 +1,6 @@
+package data;
+
+import common.Type;
 
 public class Task {
     private final String name;
@@ -5,7 +8,7 @@ public class Task {
     private final Type type;
     private String time = "";
 
-    Task(String name, Type type) {
+    public Task(String name, Type type) {
         this.marked = false;
         this.name = name;
         this.type = type;

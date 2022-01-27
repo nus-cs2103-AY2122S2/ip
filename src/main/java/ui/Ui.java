@@ -1,3 +1,8 @@
+package ui;
+
+import commands.Command;
+import parser.Parser;
+
 import java.util.Scanner;
 
 public class Ui {
