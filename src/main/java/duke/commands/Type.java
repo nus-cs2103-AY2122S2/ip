@@ -1,7 +1,7 @@
 package duke.commands;
 
 /**
- * Enumeration types used to represent commands
+ * Enumeration types used to represent tasks
  */
 public enum Type {
     TODO,
@@ -9,7 +9,5 @@ public enum Type {
     EVENT,
     MARK,
     UNMARK,
-    SAVE,
-    DELETE,
-    FIND;
+    DELETE;
 }

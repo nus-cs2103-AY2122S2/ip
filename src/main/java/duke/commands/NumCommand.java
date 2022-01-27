@@ -31,30 +31,6 @@ public class NumCommand extends Command {
 
     /**
      * Apply changes to the Task object using the TaskManager Object.
-     * Handles errors arising from invalid input.
-     */
-    public void insert() {
-        try {
-            switch (type) {
-            case MARK:
-                taskManager.labelDone(num);
-                break;
-            case UNMARK:
-                taskManager.labelUndone(num);
-                break;
-            case DELETE:
-                taskManager.remove(num);
-                break;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            uiManager.showErrorMessage("I don't think we have that task!\nUse 'list' to check");
-        } catch (InvalidOperationException e) {
-            uiManager.showErrorMessage(e.toString());
-        }
-    }
-
-    /**
-     * Apply changes to the Task object using the TaskManager Object.
      *
      * @throws IndexOutOfBoundsException if the index provided is invalid
      * @throws InvalidOperationException if the operation is invalid

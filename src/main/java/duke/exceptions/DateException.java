@@ -7,8 +7,6 @@ package duke.exceptions;
 public class DateException extends Exception {
     private String taskType;
 
-
-
     /**
      * Constructs the DateException Object
      *

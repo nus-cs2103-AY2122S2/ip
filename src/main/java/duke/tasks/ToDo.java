@@ -2,11 +2,13 @@ package duke.tasks;
 
 import duke.exceptions.InvalidOperationException;
 
+import java.io.Serializable;
+
 /**
  * Task Object of type ToDo.
  * A ToDo Object can hold a String description and a boolean isDone.
  */
-public class ToDo extends Task {
+public class ToDo extends Task implements Serializable {
     private String description;
     private boolean isDone;
 

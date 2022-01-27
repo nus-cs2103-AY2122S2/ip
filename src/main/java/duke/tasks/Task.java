@@ -2,10 +2,12 @@ package duke.tasks;
 
 import duke.exceptions.InvalidOperationException;
 
+import java.io.Serializable;
+
 /**
  * Skeletal implementation of a Task Object.
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
 
     /**
      * Marks Task Object as done.

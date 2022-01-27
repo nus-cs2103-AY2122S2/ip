@@ -122,17 +122,6 @@ public class UiManager {
     }
 
     /**
-     * Prints a formatted message when a saved list is parsed
-     * into the TaskManager Object.
-     *
-     * @param tm TaskManager Object containing Task List
-     */
-    public void printLoad(TaskManager tm) {
-        System.out.println("Loaded your previous list:");
-        this.printList(tm);
-    }
-
-    /**
      * Prints a formatted message when there is no saved Task List.
      */
     public void printLoadFail() {

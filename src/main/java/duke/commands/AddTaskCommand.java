@@ -59,32 +59,6 @@ public class AddTaskCommand extends Command {
     }
 
     /**
-     * Inserts Task Object into the TaskManager's
-     * task list without printing.
-     * Used during initialisation of program.
-     */
-    public void insert() {
-        try {
-            switch (type) {
-            case TODO:
-                Task newToDo = new ToDo(this.description);
-                taskManager.insertTask(newToDo);
-                break;
-            case DEADLINE:
-                Task newDeadline = new Deadline(this.description, this.date);
-                taskManager.insertTask(newDeadline);
-                break;
-            case EVENT:
-                Task newEvent = new Event(this.description, this.date);
-                taskManager.insertTask(newEvent);
-                break;
-            }
-        } catch (DateTimeParseException e) {
-            uiManager.showErrorMessage("Invalid date in your saved entry!");
-        }
-    }
-
-    /**
      * Inserts Task Object into TaskManager Object's task list.
      *
      * @throws DateTimeParseException if an invalid String is passed for date

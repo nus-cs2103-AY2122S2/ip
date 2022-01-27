@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.exceptions.InvalidOperationException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDate;
  * An Event Object can hold a String description, a LocalDate date,
  * and a boolean isDone.
  */
-public class Event extends Task {
+public class Event extends Task implements Serializable {
     private String description;
     private LocalDate date;
     private boolean isDone;
