@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 /**
  * This is an Action class that obtains a sentence as input that
@@ -14,6 +14,7 @@ public class Action {
     protected DukeList dL;
     protected FileAction fA;
 
+    String line = "\n____________________________________________________________\n";
     enum Commands {
         todo, deadline, event, list, mark, unmark, delete, bye;
     }
@@ -27,7 +28,7 @@ public class Action {
     /**
      * Based on supplied Action word, run the action
      */
-    public void makeAction() throws DukeException {
+    public void makeAction() throws DukeException, IOException {
         Commands act = Commands.valueOf(actWord());
         switch (act) {
             case todo:
@@ -55,9 +56,9 @@ public class Action {
                 bye();
                 break;
             default:
-                String s = "____________________________________________________________\n" +
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "____________________________________________________________";
+                String s = line +
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                        line;
                 throw new DukeException(s);
         }
     }
@@ -110,15 +111,16 @@ public class Action {
         try {
             desc = inp[1];
         } catch (Exception e) {
-            sb.append("\n____________________________________________________________\n").append("☹ OOPS!!! The description of a todo cannot be empty.\n");
-            sb.append("____________________________________________________________\n");
+            sb.append(line).append("☹ OOPS!!! The description of a todo cannot be empty.");
+            sb.append(line);
             throw new DukeException(sb.toString());
         }
         //Continue running if description is valid
         for (String s : title) {
             sb.append(s).append(" ");
         }
-        Task t = new ToDo(sb.toString(), false);
+        sb.toString().trim();
+        Task t = new ToDo(sb.toString(), 0);
         return dL.add(t, fA);
     }
 
@@ -137,16 +139,16 @@ public class Action {
             desc = inp[1];
         } catch (Exception e) {
             StringBuilder s = new StringBuilder();
-            sb.append("____________________________________________________________\n" +
-                    "☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                    "____________________________________________________________");
+            sb.append(line +
+                    "☹ OOPS!!! The description of a deadline cannot be empty." +
+                    line);
             throw new DukeException(s.toString());
         }
 
         //Continue running if description is valid
         for (int i = 1; i < inp.length; i ++) {
             if (inp[i].equals("/by")) {
-                by.append("(by: ");
+                by.append(" by: ");
                 check = true;
             } else if (!check) {
                 sb.append(inp[i]).append(" ");
@@ -154,8 +156,8 @@ public class Action {
                 by.append(inp[i]).append(" ");
             }
         }
-        by.append(")");
-        t = new Deadline(sb.toString(), false, by.toString());
+        sb.toString().trim();
+        t = new Deadline(sb.toString(), 0, by.toString());
         return dL.add(t, fA);
     }
 
@@ -173,16 +175,16 @@ public class Action {
             desc = inp[1];
         } catch (Exception e) {
             StringBuilder s = new StringBuilder();
-            sb.append("____________________________________________________________\n" +
+            sb.append(line +
                     "☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                    "____________________________________________________________");
+                    line);
             throw new DukeException(s.toString());
         }
 
         //Continue running if description is valid
         for (int i = 1; i < inp.length; i ++) {
             if (inp[i].equals("/at")) {
-                at.append("(at: ");
+                at.append(" at: ");
                 check = true;
             } else if (!check) {
                 sb.append(inp[i]).append(" ");
@@ -190,19 +192,24 @@ public class Action {
                 at.append(inp[i]).append(" ");
             }
         }
-        at.append(")");
-        t = new Event(sb.toString(), false, at.toString());
+        sb.toString().trim();
+        t = new Event(sb.toString(), 0, at.toString());
         return dL.add(t, fA);
     }
 
     /**
      * Stops the program
      */
-    public void bye() {
+    public void bye() throws IOException {
         StringBuilder sb = new StringBuilder();
-        String line = "____________________________________________________________\n";
         String byeMsg = "Bye. Hope to see you again soon!\n";
         sb.append(line).append(byeMsg).append(line);
+        try {
+            dL.saveAllTasks(fA);
+            fA.closeWriteFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(sb.toString());
         System.exit(0);
     }
