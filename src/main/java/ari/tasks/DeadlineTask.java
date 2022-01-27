@@ -2,48 +2,42 @@ package main.java.ari.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import main.java.ari.exception.CommandFormatException;
-import main.java.ari.exception.EmptyCommandException;
-
+/**
+ * DeadlineTask extends Task
+ */
 public class DeadlineTask extends Task {
     protected String time;
     protected LocalDate nowTime;
 
-    public DeadlineTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
-        String[] taskArray = message.split("/by");
-
-        LocalDate nowTime;
-        if (taskArray[0].equals("")) {
-            throw new EmptyCommandException();
-        } else if (taskArray.length == 1) {
-            throw new CommandFormatException();
-        } else {
-            nowTime = LocalDate.parse(taskArray[1].stripLeading().stripTrailing());
-        }
-
-        super.taskDescription = taskArray[0].stripLeading().stripTrailing();
-        this.nowTime = nowTime;
-        time = nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-    }
-
-    public DeadlineTask(String message, String deadline, LocalDate date) {
-        super.taskDescription = message;
+    /**
+     * Constructor of DeadlineTask
+     *
+     * @param description description of DeadlineTask
+     * @param deadline    deadline of DeadlineTask
+     * @param date        LocalDate representation for convenience
+     */
+    public DeadlineTask(String description, String deadline, LocalDate date) {
+        super.taskDescription = description;
         this.time = deadline;
         this.nowTime = date;
     }
 
-    public DeadlineTask(String message, String deadline) {
-        super(message);
-        time = deadline;
-    }
-
+    /**
+     * Returns string representation of DeadlineTask
+     *
+     * @return string representation of DeadlineTask
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
+    /**
+     * Returns string representation of DeadlineTask in save file
+     *
+     * @return string representation of DeadlineTask in save file
+     */
     @Override
     public String writeToFile() {
         return "deadline " + super.writeToFile() + "/by " + time;
