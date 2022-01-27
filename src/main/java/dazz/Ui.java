@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -118,16 +120,24 @@ public class Ui {
         if (taskList.getSize() == 0) {
             System.out.println("\tYou have no task in your list.");
         } else {
-            for (int i = 0; i < taskList.getSize(); i++) {
-                Task task = taskList.getTaskList().get(i);
-                System.out.println("\t" + (i + 1) + ". " + task);
-            }
+            taskList.list();
         }
     }
+
 
     /**
      * Prints the default message.
      */
+    public void showSearches(TaskList taskList, String search) {
+        String finalSearch = search.toLowerCase(Locale.ROOT);
+        System.out.println("\tHere are the matching tasks in your list:");
+        List<Task> tasks = taskList.getTaskList();
+        tasks.forEach(x -> {
+            if (x.getDescription().toLowerCase(Locale.ROOT).contains(finalSearch)) {
+            System.out.println("\t" + x);}
+        });
+    }
+
     public void showDefault() {
         System.out.println("\t" + ErrorType.INVALID_COMMAND.getErrorMessage());
     }

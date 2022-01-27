@@ -6,6 +6,7 @@ import dazz.command.DefaultCommand;
 import dazz.command.DeleteCommand;
 import dazz.command.EventCommand;
 import dazz.command.ExitCommand;
+import dazz.command.FindCommand;
 import dazz.command.ListCommand;
 import dazz.command.MarkCommand;
 import dazz.command.TodoCommand;
@@ -59,6 +60,13 @@ public class Parser {
                 throw new EmptyDateException();
             }
             return new EventCommand(wordArr[0], Ui.toLocalDateTime(wordArr[1]));
+        case "find":
+            if (arr.length < 2) {
+                throw new IncompleteCommandException();
+            } else if (arr[1].trim().equals("")) {
+                throw new IncompleteCommandException();
+            }
+            return new FindCommand(arr[1]);
         case "mark":
             if (arr.length < 2) {
                 throw new IncompleteCommandException();

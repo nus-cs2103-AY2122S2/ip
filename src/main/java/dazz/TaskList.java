@@ -83,6 +83,10 @@ public class TaskList {
      *
      * @return
      */
+    public void list() {
+        taskList.forEach(x -> System.out.println("\t" + x));
+    }
+
     public int getSize() {
         return taskList.size();
     }
