@@ -1,7 +1,28 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.MissingFormatArgumentException; // Imported MissingFormatArgumentException
 import java.util.Scanner; // Imported Scanner class
 
 public class Duke {
+
+    public static boolean isDateValid(String date) {
+        SimpleDateFormat df1 = new SimpleDateFormat("MM/dd/yyyy");
+        df1.setLenient(false);
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        df2.setLenient(false);
+        try {
+            Date dummyDate1 = df1.parse(date);
+        } catch (ParseException e1) {
+            try {
+                Date dummyDate2 = df2.parse(date);
+            } catch (ParseException e2) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         String logo = "_______________________________________________________\n"
                 + " ____        _         _    ____ _   _ \n"
