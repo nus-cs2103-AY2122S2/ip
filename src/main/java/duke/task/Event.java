@@ -41,7 +41,7 @@ public class Event extends Task{
         } else {
             mark = "[ ] ";
         }
-        return "[E]" + mark + getName() +
-                " (at: " + this.time.format(formatter) + ")";
+        return "[E]" + mark + getName()
+                + " (at: " + this.time.format(formatter) + ")";
     }
 }

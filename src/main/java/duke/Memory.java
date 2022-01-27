@@ -113,8 +113,7 @@ public class Memory {
             size++;
             parser.updateAll();
             return "added deadline: " + getString(size - 1);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return "Please format your date in yyyy-mm-dd";
         }
     }
@@ -132,8 +131,7 @@ public class Memory {
             size++;
             parser.updateAll();
             return "added event: " + getString(size - 1);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return "Please format your date in yyyy-mm-dd";
         }
     }
@@ -208,8 +206,7 @@ public class Memory {
             echo.echoString("Task data file does not exist. Creating file...");
             try {
                 file.createNewFile();
-            }
-            catch(IOException e) {
+            } catch(IOException e) {
                 echo.echoString(e.getMessage());
             }
         }

@@ -41,8 +41,7 @@ public class DeadlineTest {
             deadline = new Deadline("test2", "02-12-2000");
             // fail
             assertEquals(1,2);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             // pass
             assertEquals(2,2);
         }

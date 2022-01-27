@@ -9,7 +9,7 @@ import java.time.LocalDate;
  */
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Creates a Task object.
@@ -18,7 +18,7 @@ public class Task {
      */
     public Task(String text) {
         this.name = text;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -36,21 +36,21 @@ public class Task {
     }
 
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
     /**
      * Sets the task as done.
      */
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Sets the task as undone.
      */
     public void setUndone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Task {
     @Override
     public String toString() {
         String mark;
-        if (this.done) {
+        if (this.isDone) {
             mark = "[X] ";
         } else {
             mark = "[ ] ";
