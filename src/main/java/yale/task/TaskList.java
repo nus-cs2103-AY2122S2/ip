@@ -212,7 +212,7 @@ public class TaskList {
                 count += 1;
             }
         }
-        if (output.equals("Here are the matching tasks in your list:\n")) {
+        if (output.equals("Here are the matching tasks in your list:\n") || taskName.equals(" ")) {
             System.out.println("There are no matching tasks!");
         } else {
             System.out.println(output);
