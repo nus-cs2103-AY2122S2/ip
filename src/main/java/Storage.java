@@ -33,8 +33,8 @@ public class Storage {
             try {
                 this.file.createNewFile();
             } catch (IOException err) {
-                throw new TesseractException("Not joking but I cannot create a memory for you.. \n" +
-                        "You mind changing a laptop?");
+                throw new TesseractException("Not joking but I cannot create a memory for you.. \n"
+                        + "You mind changing a laptop?");
             }
         }
         return tasks;
@@ -58,8 +58,9 @@ public class Storage {
             fw.close();
             this.updated = false; // storage is up-to-date
         } catch (IOException e) {
-            throw new TesseractException("Sorry but I cannot upload your list of tasks into memory due to" +
-                    "some unforeseen errors :(\n Try command force exit (to be added in later)");
+            throw new TesseractException("Sorry but I cannot upload your list of tasks into memory due to"
+                    + "some unforeseen errors :(\n "
+                    + "Try command force exit (to be added in later)");
         }
     }
 }

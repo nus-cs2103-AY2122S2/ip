@@ -28,22 +28,23 @@ public class TaskList {
     public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
         for (int i = 0; i < storageMemory.size(); i++) {
-            String[] task = storageMemory.get(i).split("@", 4); // format: D@1@do something
+            String[] tasks = storageMemory.get(i).split("@", 4); // format: D@1@do something
             Task taskNew;
-            if (task.length < 3)
+            if (tasks.length < 3) {
                 break;
-            switch (task[0]) {
-                case "E": //event
-                    taskNew = new Event(task[2], task[3]);
-                    break;
-                case "D": //deadline
-                    taskNew = new Deadline(task[2], task[3]);
-                    break;
-                default: // todo
-                    taskNew = new Todo(task[2]);
-                    break;
             }
-            if (Integer.parseInt(task[1]) == 1) {
+            switch (tasks[0]) {
+            case "E": //event
+                taskNew = new Event(tasks[2], tasks[3]);
+                break;
+            case "D": //deadline
+                taskNew = new Deadline(tasks[2], tasks[3]);
+                break;
+            default: // todo
+                taskNew = new Todo(tasks[2]);
+                break;
+            }
+            if (Integer.parseInt(tasks[1]) == 1) {
                 taskNew.markAsDone();
             }
             this.taskList.add(taskNew);
