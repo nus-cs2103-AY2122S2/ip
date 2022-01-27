@@ -4,15 +4,32 @@ import baron.tasks.TaskManager;
 import baron.tasks.TaskType;
 import baron.util.Storage;
 
+/**
+ * Parses the given command string and returns the correct {@code Command} for execution,
+ * together with the required dependencies ({@code TaskManager} or {@code Storage}).
+ */
 public class CommandManager {
     private final TaskManager taskManager;
     private final Storage storage;
 
+    /**
+     * Constructs a {@code CommandManager} object with the specified {@code TaskManager}
+     * and {@code Storage}.
+     *
+     * @param taskManager the {@code TaskManager} required in executing some commands.
+     * @param storage the {@code Storage} required in executing some commands.
+     */
     public CommandManager(TaskManager taskManager, Storage storage) {
         this.taskManager = taskManager;
         this.storage = storage;
     }
 
+    /**
+     * Parses the given full command string and returns a {@code Command}.
+     *
+     * @param fullCommand the full command string to be parsed.
+     * @return a {@code Command} object ready for execution.
+     */
     public Command parseCommand(String fullCommand) {
         fullCommand = fullCommand.strip();
         if (fullCommand.equals("bye")) {
