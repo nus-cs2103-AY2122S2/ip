@@ -5,13 +5,28 @@ import Duke.task.Task;
 import Duke.TaskList;
 import Duke.Ui;
 
+/**
+ * This DeleteCommand class will delete a task provided with a 0-based index when executed.
+ */
 public class DeleteCommand extends Command {
 	int taskNum;
 
+	/**
+	 * Constructor for DeleteCommand which provides an index to delete.
+	 *
+	 * @param taskNum 0-based index.
+	 */
 	public DeleteCommand(int taskNum) {
 		this.taskNum = taskNum;
 	}
 
+	/**
+	 * Executes command by deleting the given indexed task from TaskList.
+	 *
+	 * @param tasks TaskList of tasks.
+	 * @param ui    Ui provided.
+	 * @param save  Saved history.
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		Task deleteTask = tasks.getTask(this.taskNum);

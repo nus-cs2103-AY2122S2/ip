@@ -4,13 +4,28 @@ import Duke.Save;
 import Duke.TaskList;
 import Duke.Ui;
 
+/**
+ * This MarkCommand class will mark a task as done when executed.
+ */
 public class MarkCommand extends Command {
 	int taskNum;
 
+	/**
+	 * Constructor for MarkCommand with a given task number to be marked as done in the list.
+	 *
+	 * @param taskNum 0-based index task number to be marked.
+	 */
 	public MarkCommand(int taskNum) {
 		this.taskNum = taskNum;
 	}
 
+	/**
+	 * Executes command by marking task as done.
+	 *
+	 * @param tasks TaskList of tasks.
+	 * @param ui    Ui provided.
+	 * @param save  Saved history.
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		try {

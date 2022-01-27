@@ -46,10 +46,16 @@ public class Event extends Task {
 	 *
 	 * @return Name of Task.
 	 */
+	@Override
 	public String getName() {
 		return this.NAME;
 	}
 
+	/**
+	 * Returns the Time of the event happening.
+	 *
+	 * @return Time of the event happening.
+	 */
 	public String getTime() {
 		return this.TIME;
 	}

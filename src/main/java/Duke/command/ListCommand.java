@@ -5,7 +5,18 @@ import Duke.task.Task;
 import Duke.TaskList;
 import Duke.Ui;
 
+/**
+ * This ListCommand class will show a list of added tasks when executed.
+ */
 public class ListCommand extends Command {
+
+	/**
+	 * Executes command by showing a list of tasks in the current TaskList.
+	 *
+	 * @param tasks TaskList of tasks.
+	 * @param ui    Ui provided.
+	 * @param save  Saved history.
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Save save) {
 		System.out.println("\t____________________________________________________________");

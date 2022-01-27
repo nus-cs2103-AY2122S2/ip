@@ -14,21 +14,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a handler to load a save file, or save to a file.
+ */
 public class Save {
 	private static final String DUKE_PATHNAME = "src/main/java/Duke/data/duke.txt";
 	private ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
 	private ArrayList<Task> tasks = new ArrayList<>(100);
 	private int count;
 
+	/**
+	 * Creates a new instance of Save that loads the history from a specific path.
+	 */
 	Save() {
 		load();
 	}
 
+	/**
+	 * Loads the current content of the file in appropriate format for the TaskList tasks.
+	 */
 	public void load() {
 		readAndAdd();
 		process(inputsToBeProcessed);
 	}
 
+	/**
+	 * Saves the current content into the file with given path.
+	 */
 	public void save() {
 		try {
 			FileWriter fw = new FileWriter(DUKE_PATHNAME);
@@ -42,6 +54,9 @@ public class Save {
 		}
 	}
 
+	/**
+	 * Reads from the given file and adds into a list to be processed later.
+	 */
 	public void readAndAdd() {
 		try {
 			File file = new File(DUKE_PATHNAME);
@@ -78,6 +93,13 @@ public class Save {
 		}
 	}
 
+	/**
+	 * Adds a task to the list that is of type Todo.
+	 *
+	 * @param type   Type of command.
+	 * @param status Status of Task.
+	 * @param name   Name of Task.
+	 */
 	public void addToList(Type type, String status, String name) {
 		if (type == Type.T) {
 			inputsToBeProcessed.add("todo " + name);
@@ -88,6 +110,14 @@ public class Save {
 		}
 	}
 
+	/**
+	 * Adds a task to the list that has a date or time.
+	 *
+	 * @param type   Type of command.
+	 * @param status Status of Task.
+	 * @param name   Name of Task.
+	 * @param date   Date of Task.
+	 */
 	public void addToList(Type type, String status, String name, String date) {
 		switch (type) {
 		case D:
@@ -108,6 +138,11 @@ public class Save {
 		}
 	}
 
+	/**
+	 * Processes the saved file and adds to the list of tasks.
+	 *
+	 * @param taskList ArrayList of Strings to be processed
+	 */
 	public void process(ArrayList<String> taskList) {
 
 		for (String s : taskList) {
@@ -163,6 +198,11 @@ public class Save {
 		}
 	}
 
+	/**
+	 * Converts the format of the tasks in the list to appropriate save format.
+	 *
+	 * @return String representation of tasks in appropriate format
+	 */
 	public String simplify() {
 		String s = "";
 		for (int i = 0; i < this.tasks.size(); i++) {
@@ -184,6 +224,11 @@ public class Save {
 		return s;
 	}
 
+	/**
+	 * Returns the list of saved tasks.
+	 *
+	 * @return List of saved tasks.
+	 */
 	public ArrayList<Task> savedTasks() {
 		return this.tasks;
 	}
