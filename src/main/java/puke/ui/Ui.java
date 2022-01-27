@@ -1,3 +1,5 @@
+package puke.ui;
+
 public class Ui {
     private static final String LINE = "____________________________________________________________\n";
 

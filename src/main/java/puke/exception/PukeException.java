@@ -1,5 +1,7 @@
+package puke.exception;
+
 public class PukeException extends Exception {
-  PukeException(String message) {
+  public PukeException(String message) {
     super(message);
   }
 }

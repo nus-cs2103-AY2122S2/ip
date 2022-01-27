@@ -1,3 +1,9 @@
+package puke.parser;
+
+import puke.exception.PukeException;
+import puke.task.TaskList;
+import puke.ui.Ui;
+
 public class Parser {
     public String processInput(String s, TaskList tasks, Ui ui) throws PukeException {
         String[] inputs = s.split(" ", 2);

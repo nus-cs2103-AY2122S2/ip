@@ -1,10 +1,12 @@
+package puke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDateTime at;
 
-    Event(String taskName, LocalDateTime date) {
+    public Event(String taskName, LocalDateTime date) {
         super(taskName);
         this.at = date;
     }

@@ -1,10 +1,12 @@
+package puke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-    Deadline(String taskName, LocalDateTime date) {
+    public Deadline(String taskName, LocalDateTime date) {
         super(taskName);
         this.by = date;
     }

@@ -1,3 +1,7 @@
+package puke.task;
+
+import puke.exception.PukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +10,7 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
@@ -20,7 +24,7 @@ public class TaskList {
 
     public String listTasks() {
         if (this.getNoOfTasks() == 0) {
-            return "You have no task right now!\n";
+            return "You have no task right now!";
         }
 
         String result = "Here are the tasks you have:";
@@ -86,9 +90,9 @@ public class TaskList {
                 }
 
                 if (type.equals("deadline")) {
-                    t = new Deadline(taskDetail[0], dateTime);
+                    t = new Deadline(taskDetail[0].trim(), dateTime);
                 } else {
-                    t = new Event(taskDetail[0], dateTime);
+                    t = new Event(taskDetail[0].trim(), dateTime);
                 }
             } catch (DateTimeParseException e) {
                 throw new PukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");

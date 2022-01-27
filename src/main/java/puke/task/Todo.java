@@ -1,5 +1,7 @@
+package puke.task;
+
 public class Todo extends Task {
-    Todo(String taskName) {
+    public Todo(String taskName) {
         super(taskName);
     }
 

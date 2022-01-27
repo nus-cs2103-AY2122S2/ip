@@ -1,4 +1,12 @@
+package puke;
+
 import java.util.Scanner;
+
+import puke.exception.PukeException;
+import puke.ui.Ui;
+import puke.task.TaskList;
+import puke.io.Storage;
+import puke.parser.Parser;
 
 public class Puke {
     private static Ui ui;
@@ -42,9 +50,5 @@ public class Puke {
 
             ui.printResponse(response);
         }
-    }
-
-    public static void main(String[] args) {
-        new Puke("./../../../data/puke.txt").run();
     }
 }

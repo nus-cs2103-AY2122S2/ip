@@ -1,4 +1,6 @@
-abstract class Task {
+package puke.task;
+
+public abstract class Task {
     protected final String name;
     protected int status; // 0: undone, 1: done
 
