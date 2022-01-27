@@ -4,6 +4,7 @@ import connor.Connor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -73,9 +74,9 @@ public class TaskList {
                 print(ERROR_INVALID_DL_FORMAT);
                 return;
             }
-            String[] phrase = desc.split("/by", 2);
-            String thing = phrase[0].trim();
-            String when  = phrase[1].trim();
+            String[] phrases = desc.split("/by", 2);
+            String thing = phrases[0].trim();
+            String when  = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_DL_DESC);
                 return;
@@ -101,9 +102,9 @@ public class TaskList {
                 print(ERROR_INVALID_EVENT_FORMAT);
                 return;
             }
-            String[] phrase = desc.split("/at", 2);
-            String thing = phrase[0].trim();
-            String when  = phrase[1].trim();
+            String[] phrases = desc.split("/at", 2);
+            String thing = phrases[0].trim();
+            String when  = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_EVENT_DESC);
                 return;
@@ -129,9 +130,9 @@ public class TaskList {
             print(ERROR_INVALID_TASK_TYPE);
             return;
         }
-        // After task is added show current no. of tasks
+        // After task is added show current number of tasks
         print("");
-        getNoOfTasks();
+        getNumberOfTasks();
     }
 
     public static void deleteTask(int index) {
@@ -164,7 +165,7 @@ public class TaskList {
                     return;
                 }
                 print(ERROR_INDEX_OUT_OF_RANGE);
-                getNoOfTasks();
+                getNumberOfTasks();
             }
             break;
         }
@@ -180,14 +181,14 @@ public class TaskList {
                     return;
                 }
                 print(ERROR_INDEX_OUT_OF_RANGE);
-                getNoOfTasks();
+                getNumberOfTasks();
             }
             break;
         }
         }
     }
 
-    public static int getNoOfTasks() {
+    public static int getNumberOfTasks() {
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
         return tasks.size();

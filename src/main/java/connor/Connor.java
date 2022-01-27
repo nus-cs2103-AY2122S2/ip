@@ -5,9 +5,9 @@ import connor.task.Task;
 import connor.task.TaskList;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Connor {
     public static final String CURRENT_VERSION = "Version 1.0.0";
@@ -20,7 +20,6 @@ public class Connor {
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
 
     private static boolean isActive = true;
-    private static ArrayList<Task> taskList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
 
     private Storage storage;
@@ -59,7 +58,7 @@ public class Connor {
         sc.close();
     }
 
-        private static void print(String s) {
+    private static void print(String s) {
         System.out.println(s);
     }
 

@@ -1,7 +1,11 @@
 package connor;
 
 import connor.exception.InvalidTaskFileException;
-import connor.task.*;
+import connor.task.Deadline;
+import connor.task.Event;
+import connor.task.Task;
+import connor.task.TaskList;
+import connor.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +29,9 @@ public class Storage {
         ArrayList<File> filePathDirectories = new ArrayList<>();
         File currentFilePath = new File(this.filePath);
         while (currentFilePath.getParentFile() != null) {
-            filePathDirectories.add(currentFilePath.getParentFile());
-            currentFilePath = currentFilePath.getParentFile();
+            File newFilePath = currentFilePath.getParentFile();
+            filePathDirectories.add(newFilePath);
+            currentFilePath = newFilePath;
         }
         for (int i = filePathDirectories.size() - 1; i >= 0; i--) {
             filePathDirectories.get(i).mkdirs();
@@ -36,8 +41,7 @@ public class Storage {
     }
 
     public void loadTasks() throws FileNotFoundException, IndexOutOfBoundsException, InvalidTaskFileException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
+        Scanner s = new Scanner(new File(filePath));
         copyTasks = new ArrayList<>();
         while (s.hasNext()) {
             copyTasks.add(stringToTask(s.nextLine()));
@@ -48,9 +52,9 @@ public class Storage {
     public static String taskToString(Task t) {
         String spacing = " | ";
         String taskType = t.getLetter();
-        String doneness = t.isDone() ? "[#] " : "[ ] ";
+        String doneStatus = t.isDone() ? "[#] " : "[ ] ";
         String desc = t.getDesc();
-        StringBuilder sb = new StringBuilder(doneness + taskType + spacing + desc);
+        StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
         if (t instanceof Deadline) {
             sb.append(spacing + "By: ");
             sb.append(((Deadline) t).getBy());
@@ -64,14 +68,14 @@ public class Storage {
     }
 
     public static Task stringToTask(String s) throws IndexOutOfBoundsException, InvalidTaskFileException {
-        char c = s.charAt(4);
-        char d = s.charAt(1);
-        switch (c) {
+        char taskType = s.charAt(4);
+        char doneStatus = s.charAt(1);
+        switch (taskType) {
         case 'T': {
             String[] parts = s.split(" \\| ", 2);
             String desc = parts[1];
             ToDo todo = new ToDo(desc);
-            if (d == '#') {
+            if (doneStatus == '#') {
                 todo.mark();
             }
             return todo;
@@ -79,7 +83,7 @@ public class Storage {
         case 'D': {
             String[] parts = s.split(" \\| ", 3);
             String desc = parts[1];
-            String when = parts[2].replaceAll("By: ", "");
+            String when = parts[2].replaceFirst("By: ", "");
             Deadline deadline;
             try {
                 // Check if 'when' is a valid date
@@ -89,7 +93,7 @@ public class Storage {
                 // Otherwise, treat it as a normal String
                 deadline = new Deadline(desc, when);
             }
-            if (d == '#') {
+            if (doneStatus == '#') {
                 deadline.mark();
             }
             return deadline;
@@ -97,7 +101,7 @@ public class Storage {
         case 'E': {
             String[] parts = s.split(" \\| ", 3);
             String desc = parts[1];
-            String when = parts[2].replaceAll("At: ", "");
+            String when = parts[2].replaceFirst("At: ", "");
             Event event;
             try {
                 // Check if 'when' is a valid date
@@ -107,7 +111,7 @@ public class Storage {
                 // Otherwise, treat it as a normal String
                 event = new Event(desc, when);
             }
-            if (d == '#') {
+            if (doneStatus == '#') {
                 event.mark();
             }
             return event;

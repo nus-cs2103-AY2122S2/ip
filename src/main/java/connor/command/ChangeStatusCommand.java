@@ -4,8 +4,8 @@ import connor.task.TaskStatus;
 import connor.task.TaskList;
 
 public class ChangeStatusCommand extends Command {
-    TaskStatus ts;
-    int index;
+    private TaskStatus ts;
+    private int index;
 
     public ChangeStatusCommand(TaskStatus ts, int index) {
         this.ts = ts;

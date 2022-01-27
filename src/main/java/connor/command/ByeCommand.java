@@ -3,7 +3,6 @@ package connor.command;
 import connor.Connor;
 
 public class ByeCommand extends Command {
-
     public ByeCommand() {}
 
     @Override

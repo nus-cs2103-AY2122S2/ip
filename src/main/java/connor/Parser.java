@@ -1,6 +1,13 @@
 package connor;
 
-import connor.command.*;
+import connor.command.AddCommand;
+import connor.command.ByeCommand;
+import connor.command.ChangeStatusCommand;
+import connor.command.ClearCommand;
+import connor.command.Command;
+import connor.command.CommandType;
+import connor.command.DeleteCommand;
+import connor.command.ListCommand;
 import connor.task.TaskStatus;
 import connor.task.TaskType;
 
@@ -9,44 +16,44 @@ public class Parser {
     private static final String ERROR_INVALID_COMMAND_START = "My apologies, I don't understand what '";
     private static final String ERROR_INVALID_COMMAND_END = "' means.";
 
-    CommandType ct;
-    Command command;
-    boolean canActivate = true;
+    private CommandType commandType;
+    private Command command;
+    private boolean canActivate = true;
 
     public Parser(String s) {
-        String[] statement = s.trim().concat(" ").split(" ", 2);
-        String commandRaw = statement[0];
-        String command = statement[0].toLowerCase();
-        String desc = statement[1].trim();
+        String[] statements = s.trim().concat(" ").split(" ", 2);
+        String commandRaw = statements[0];
+        String command = statements[0].toLowerCase();
+        String desc = statements[1].trim();
         switch (command) {
         case "exit":
         case "bye": {
-            this.ct = CommandType.BYE;
+            this.commandType = CommandType.BYE;
             this.command = new ByeCommand();
             break;
         }
         case "list": {
-            this.ct = CommandType.LIST;
+            this.commandType = CommandType.LIST;
             this.command = new ListCommand();
             break;
         }
         case "todo": {
-            this.ct = CommandType.ADD;
+            this.commandType = CommandType.ADD;
             this.command = new AddCommand(TaskType.TODO, desc);
             break;
         }
         case "deadline": {
-            this.ct = CommandType.ADD;
+            this.commandType = CommandType.ADD;
             this.command = new AddCommand(TaskType.DEADLINE, desc);
             break;
         }
         case "event": {
-            this.ct = CommandType.ADD;
+            this.commandType = CommandType.ADD;
             this.command = new AddCommand(TaskType.EVENT, desc);
             break;
         }
         case "delete": {
-            this.ct = CommandType.DELETE;
+            this.commandType = CommandType.DELETE;
             try {
                 int taskNo = Integer.parseInt(desc) - 1;
                 this.command = new DeleteCommand(taskNo);
@@ -57,12 +64,12 @@ public class Parser {
             break;
         }
         case "clear": {
-            this.ct = CommandType.CLEAR;
+            this.commandType = CommandType.CLEAR;
             this.command = new ClearCommand();
             break;
         }
         case "mark": {
-            this.ct = CommandType.CHANGE_STATUS;
+            this.commandType = CommandType.CHANGE_STATUS;
             try {
                 int taskNo = Integer.parseInt(desc) - 1;
                 this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
@@ -73,7 +80,7 @@ public class Parser {
             break;
         }
         case "unmark": {
-            this.ct = CommandType.CHANGE_STATUS;
+            this.commandType = CommandType.CHANGE_STATUS;
             try {
                 int taskNo = Integer.parseInt(desc) - 1;
                 this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
@@ -84,7 +91,7 @@ public class Parser {
             break;
         }
         default: {
-            this.ct = CommandType.UNKNOWN;
+            this.commandType = CommandType.UNKNOWN;
             System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
             canActivate = false;
         }

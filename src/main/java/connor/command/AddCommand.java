@@ -4,8 +4,8 @@ import connor.task.TaskType;
 import connor.task.TaskList;
 
 public class AddCommand extends Command {
-    TaskType tt;
-    String desc;
+    private TaskType tt;
+    private String desc;
 
     public AddCommand(TaskType tt, String desc) {
         this.tt = tt;
