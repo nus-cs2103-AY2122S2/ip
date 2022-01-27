@@ -9,7 +9,7 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showInitFailedMessage() {
+    public void showFailedInitMessage() {
         System.out.println("Failed to initialise Ann :( Exiting...");
     }
 

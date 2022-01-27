@@ -35,7 +35,7 @@ public class Ann {
             this.tasks = new TaskList(storage.load());
             ui.showGreeting();
         } catch (Exception e) {
-            ui.showInitFailedMessage();
+            ui.showFailedInitMessage();
             throw new RuntimeException(e);
         }
     }
