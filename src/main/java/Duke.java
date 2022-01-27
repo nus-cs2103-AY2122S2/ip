@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -46,6 +50,16 @@ public class Duke {
                 }
             }
         } else if (command.equals("bye")) {
+            try {
+                FileWriter fw = new FileWriter("prince.txt");
+                for (Integer i = 0; i < list.size(); i++) {
+                    fw.write(list.get(i).toString());
+                    fw.write(System.lineSeparator());
+                }
+                fw.close();
+            } catch (IOException e) {
+                //throw a DukeException and say couldn't save session
+            }
             System.out.println("See you later alligator :)");
         } else if (command.equals("list")) {
             if (list.size() == 0) {
@@ -101,6 +115,25 @@ public class Duke {
                 + "\\_|   |_|   |_||_| |_| \\___|\\___|\n";
 
         String divider = "~~~~~~~~~~~~~~~~~~~~~~~";
+
+        try {
+            File data = new File("prince.txt");
+            if (!data.createNewFile()) {
+                Scanner s = new Scanner(data);
+                while (s.hasNext()) {
+                    //read tasks and add to arraylist
+                    String line = s.nextLine();
+                    Task t = new Parser(line).parse();
+                    if (line.substring(4,5).equals("X")) {
+                        t.makeDone();
+                    }
+                    list.add(t);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("error");
+            System.out.println(e.getMessage());
+        }
 
         System.out.println("Hello I'm\n" + prince);
         System.out.println("How can I help you today?");
