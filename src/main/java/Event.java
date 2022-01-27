@@ -5,9 +5,9 @@ import java.time.format.FormatStyle;
 public class Event  extends Task {
     private LocalDate time;
 
-    public Event(String content, String time) {
+    public Event(String content, LocalDate time) {
         super(content);
-        this.time = LocalDate.parse(time, DateTimeFormatter.ISO_DATE);
+        this.time = time;
     }
 
     @Override

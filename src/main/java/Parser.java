@@ -1,0 +1,58 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+class Parser {
+    public static Command parse(String userInput, TaskList taskList, Over over)
+    throws NoTimeGivenException {
+        String[] words;
+        String firstWord;
+        words = userInput.split(" ");
+        firstWord = words[0];
+        if (firstWord.equals("bye")) {
+            return new CommandBye(over);
+        } else if (firstWord.equals("list")) {
+            return new CommandList(taskList);
+        } else if (firstWord.equals("mark") && words.length == 2) {
+            int taskNo = Integer.parseInt(words[1]);
+            return new CommandMark(taskList, taskNo);
+        } else if (firstWord.equals("unmark") && words.length == 2) {
+            int taskNo = Integer.parseInt(words[1]);
+            return new CommandUnmark(taskList, taskNo);
+        } else if (firstWord.equals("todo")) {
+            String todoContent = words[1];
+            for (int i = 2; i < words.length; i++) {
+                todoContent = todoContent + " " + words[i];
+            }
+            return new CommandTodo(taskList, todoContent);
+        } else if (firstWord.equals("deadline")) {
+            String deadlineContent = words[1];
+            for (int i = 2; i < words.length; i++) {
+                if (words[i].equals("/by") )
+                    break;
+                deadlineContent = deadlineContent + " " + words[i];
+            }
+            String[] separateTime = userInput.split("/by ");
+            if (separateTime.length < 1) {
+                throw new NoTimeGivenException("No time specified");
+            }
+            String dateString = separateTime[1];
+            LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+            return new CommandDeadline(taskList, deadlineContent, date);
+        } else if (firstWord.equals("event")) {
+            String eventContent = words[1];
+            for (int i = 2; i < words.length; i++) {
+                if (words[i].equals("/at"))
+                    break;
+                eventContent = eventContent + " " + words[i];
+            }
+            String timeString = userInput.split("/at ")[1];
+            LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ISO_DATE);
+            return new CommandEvent(taskList, eventContent, time);
+        } else if (firstWord.equals("delete") && words.length == 2) {
+            int taskNo = Integer.parseInt(words[1]);
+            return new CommandDelete(taskList, taskNo);
+        } else  {
+            return new CommandUnclear();
+        }
+    }
+}

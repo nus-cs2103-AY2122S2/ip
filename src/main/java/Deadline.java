@@ -4,9 +4,9 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
     private LocalDate date;
-    public Deadline(String content, String date) {
+    public Deadline(String content, LocalDate date) {
         super(content);
-        this.date = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        this.date = date;
     }
 
     @Override

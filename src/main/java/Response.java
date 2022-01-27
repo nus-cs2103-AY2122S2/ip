@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 public class Response {
     public static final
     String LOGO = " ____        _        \n"
