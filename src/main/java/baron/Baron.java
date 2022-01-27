@@ -3,12 +3,16 @@ package baron;
 import baron.commands.Command;
 import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
-import baron.util.TextUi;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
+import baron.util.TextUi;
 
 import java.util.Scanner;
 
+/**
+ * Main class for the Baron application that user uses to run. The Baron application keeps and
+ * tracks tasks like a to-do list.
+ */
 public class Baron {
     private final Scanner inputScanner;
     private final TaskManager taskManager;
@@ -16,6 +20,11 @@ public class Baron {
     private final Storage storage;
     private final TextUi textUi;
 
+    /**
+     * Constructs a {@code Baron} object with the specified relative file path.
+     *
+     * @param relativeFilePath the relative file path to be used for Storage.
+     */
     public Baron(String relativeFilePath) {
         TaskManager taskManagerTemp;
         this.inputScanner = new Scanner(System.in);
@@ -31,6 +40,9 @@ public class Baron {
         this.textUi = new TextUi(this.taskManager);
     }
 
+    /**
+     * Starts the Baron application.
+     */
     private void start() {
         this.textUi.showWelcomeMessage();
         Command command;
@@ -49,8 +61,12 @@ public class Baron {
         }
     }
 
+    /**
+     * Initialises and starts the Baron application.
+     *
+     * @param args the command line arguments (not used).
+     */
     public static void main(String[] args) {
-        Baron baron = new Baron("data/baron.txt");
-        baron.start();
+        new Baron("data/baron.txt").start();
     }
 }
