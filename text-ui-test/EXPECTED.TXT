@@ -84,4 +84,10 @@ Here are your tasks:
 1. [T][ ] Java week 2
 2. [E][ ] ball (at: 10/02/2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
+Please use "/by"
+~--~~--~~--~~(~v~)~~--~~--~~--~
+Please use "/at"
+~--~~--~~--~~(~v~)~~--~~--~~--~
+Your tasks have been saved in duke.txt.
 Bye~ Hope to see you again soon!
+~--~~--~~--~~(~v~)~~--~~--~~--~
