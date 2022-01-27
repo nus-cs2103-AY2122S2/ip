@@ -4,10 +4,13 @@ import chatbot.util.Storage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class TaskList extends ArrayList<Task> implements Serializable {
     private final String saveFile;
+
+    public TaskList(String saveFile) {
+        this.saveFile = saveFile;
+    }
 
     public static TaskList create(String saveFile) {
         TaskList taskList = Storage.<TaskList>Load(saveFile);
@@ -15,10 +18,6 @@ public class TaskList extends ArrayList<Task> implements Serializable {
             taskList = new TaskList(saveFile);
         }
         return taskList;
-    }
-
-    public TaskList(String saveFile) {
-        this.saveFile = saveFile;
     }
 
     @Override public boolean add(Task task) {

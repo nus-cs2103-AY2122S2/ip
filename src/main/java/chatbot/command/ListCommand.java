@@ -11,6 +11,6 @@ public class ListCommand implements Command {
             output.append(
                     String.format("%d. %s%s", i + 1, taskList.get(i).toString(), i < taskList.size() - 1 ? "\n" : ""));
         }
-        return new CommandOutput(output.toString(), "audio/ding.wav");
+        return new CommandOutput(output.toString(), "/audio/ding.wav");
     }
 }

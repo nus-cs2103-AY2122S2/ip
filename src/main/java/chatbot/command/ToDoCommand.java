@@ -20,7 +20,7 @@ public class ToDoCommand implements Command {
 
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Empty description\n" + FORMAT, "audio/ding.wav");
+            return new CommandOutput("Error: Empty description\n" + FORMAT, "/audio/ding.wav");
         }
 
         // Add event.
@@ -28,6 +28,6 @@ public class ToDoCommand implements Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                        taskList.size()), "audio/ding.wav");
+                        taskList.size()), "/audio/ding.wav");
     }
 }

@@ -2,7 +2,7 @@ package chatbot.util;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.File;
+import java.io.BufferedInputStream;
 
 public class Ui {
     public static void print(Object x) {
@@ -13,11 +13,10 @@ public class Ui {
         System.out.println(x);
     }
 
-    public static void playSound(String filePath) {
+    public static void playSound(String fileName) {
         try {
-            File wavFile = new File(filePath);
             Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(wavFile));
+            clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(Ui.class.getResourceAsStream(fileName))));
             clip.start();
         } catch (Exception e) {
             System.out.println(e);

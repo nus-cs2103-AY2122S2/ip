@@ -12,9 +12,9 @@ public class DeleteCommand implements Command {
         try {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.remove(index - 1);
-            return new CommandOutput(String.format("Noted. I've removed this task:\n  %s", task), "audio/ding.wav");
+            return new CommandOutput(String.format("Noted. I've removed this task:\n  %s", task), "/audio/ding.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + FORMAT, "audio/ding.wav");
+            return new CommandOutput("Error: Invalid index\n" + FORMAT, "/audio/ding.wav");
         }
     }
 }

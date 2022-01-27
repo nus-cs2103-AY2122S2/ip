@@ -1,5 +1,7 @@
 package chatbot.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,7 +20,8 @@ public class Storage {
             }
             file.createNewFile();
 
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file, false));
+            ObjectOutputStream objectOutputStream =
+                    new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file, false)));
             objectOutputStream.writeObject(item);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -28,13 +31,12 @@ public class Storage {
         }
     }
 
-    public static <T extends Serializable> T Load(String filePath) {
+    public static <T extends Serializable> T Load(String fileName) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(filePath);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            ObjectInputStream objectInputStream =
+                    new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
             T item = (T) objectInputStream.readObject();
             objectInputStream.close();
-            fileInputStream.close();
             return item;
         } catch (Exception e) {
             return null;
