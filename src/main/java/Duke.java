@@ -119,7 +119,6 @@ public class Duke {
         try {
             File data = new File("prince.txt");
             if (!data.createNewFile()) {
-                System.out.println("file exists");
                 Scanner s = new Scanner(data);
                 while (s.hasNext()) {
                     //read tasks and add to arraylist
@@ -130,8 +129,6 @@ public class Duke {
                     }
                     list.add(t);
                 }
-            } else {
-                System.out.println("new file");
             }
         } catch (IOException e) {
             System.out.println("error");
