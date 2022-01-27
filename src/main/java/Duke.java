@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Kenobi {
+public class Duke {
   static ArrayList<Task> taskList = new ArrayList<>();
   static String logo = " __   ___\n"
       + "/  | /  / _____  _    _  _____  _____    __\n"
