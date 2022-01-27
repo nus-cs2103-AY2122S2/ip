@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package duke;
+
+import duke.exception.RonException;
 
 public class Duke {
     private Storage storage;
@@ -12,6 +14,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (RonException e) {
             tasks = new TaskList(filePath);
+            ui.showLoadingError();
         }
     }
 

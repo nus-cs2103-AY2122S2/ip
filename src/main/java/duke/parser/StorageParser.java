@@ -1,9 +1,16 @@
+package duke.parser;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.format.DateTimeFormatter;
 
 public class StorageParser extends Parser {
     protected Task task;
 
-    StorageParser(Task task) {
+    public StorageParser(Task task) {
         this.task = task;
     }
 

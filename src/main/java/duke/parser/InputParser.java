@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.TaskList;
+import duke.exception.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class InputParser extends Parser {
     public void parseInput(String input, TaskList tasks) throws RonException {
         String trimmedText = input.trim();
@@ -59,7 +68,7 @@ public class InputParser extends Parser {
                 throw new WrongDateSyntaxException();
             }
             Task task = new Deadline(input);
-            if (task.description.trim().length() == 0) {
+            if (task.getDescription().trim().length() == 0) {
                 throw new EmptyDescriptionException("deadline");
             }
             tasks.add(task);

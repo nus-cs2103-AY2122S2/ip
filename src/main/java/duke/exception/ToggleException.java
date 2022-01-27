@@ -1,9 +1,11 @@
+package duke.exception;
+
 public class ToggleException extends RonException {
     public static final String markedMessage = "Task is already marked.";
     public static final String unmarkedMessage = "Task is already unmarked.";
     public static boolean marked;
 
-    ToggleException(boolean marked) {
+    public ToggleException(boolean marked) {
         this.marked = marked;
     }
 
