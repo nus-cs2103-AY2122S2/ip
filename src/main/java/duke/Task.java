@@ -3,6 +3,7 @@ package main.java.duke;
 // Credits: partial solution from
 // https://nus-cs2103-ay2122s2.github.io/website/schedule/week2/project.html
 public class Task {
+
     protected String description;
     protected boolean isDone;
 

@@ -3,6 +3,7 @@ package main.java.duke;
 public class Parser {
 
     public static Command parse(String userCommand, Ui ui) throws UnsupportedOperationException {
+
         String words[] = userCommand.split(" ", 2);
         String command = words[0];
         switch (command) {
