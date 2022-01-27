@@ -1,14 +1,13 @@
 package task;
 
 public class Todo  extends Task {
-    public String tag;
 
     public Todo(String description){
-        super(description, "T");
-        this.tag = "T";
+        super(description);
     }
 
-    public String getTag(){
-        return "[" + tag + "]";
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
     }
 }

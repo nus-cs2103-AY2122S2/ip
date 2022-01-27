@@ -1,33 +1,32 @@
 package task;
 
-public abstract class Task {
-    String Description;
-    boolean isDone;
-    String tag;
+public class Task {
 
-    public Task (String Description, String tag){
-        this.Description = Description;
-        this.isDone = false;
-        this.tag = tag;
-    }
-    public void changeStatus(){
-        this.isDone = !isDone;
+    String taskName;
+    boolean isMarked;
+
+
+    public Task(String taskName) {
+        this.taskName = taskName;
+        this.isMarked = false;
     }
 
-    public String getStatus(){
-        if(this.isDone){
-            return "[X]";
-        } else {
-            return "[]";
-        }
+    public boolean isMarked() {
+        return this.isMarked;
     }
+
+    public String getName() {
+        return this.taskName;
+    }
+
+    public void setMarked(boolean isMarked) {
+        this.isMarked = isMarked;
+    }
+
     @Override
-    public String toString(){
-        return Description;
-    }
-
-    public String getTag(){
-        return tag;
+    public String toString() {
+        String status = isMarked ? "X" : " ";
+        return String.format("[%s] %s", status, this.taskName);
     }
 
 

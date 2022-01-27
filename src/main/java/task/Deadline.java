@@ -1,19 +1,18 @@
 package task;
 
 public class Deadline extends Task {
-    public String tag;
     public String time;
 
     public Deadline(String description, String time){
-        super(description, "D");
-        this.tag = "D";
+        super(description);
         this.time = time;
     }
-
-    public String getTag(){
-        return "[" + tag + "]";
-    }
     public String getTime(){
-        return "(by: " + time + ")";
+        return this.time;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " " + this.time;
     }
 }

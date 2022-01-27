@@ -1,22 +1,20 @@
 package task;
 
 public class Event extends Task {
-    public String tag;
     public String time;
 
     public Event(String description, String time){
-        super(description, "E");
-        this.tag = "E";
+        super(description);
         this.time = time;
     }
 
-    @Override
-    public String getTag(){
-        return "[" + tag + "]";
+    public String getTime(){
+        return this.time;
     }
 
-    public String getTime(){
-        return "(at: " + time + ")";
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " " + this.time;
     }
 
 }
