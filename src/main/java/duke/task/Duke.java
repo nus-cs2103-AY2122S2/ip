@@ -1,7 +1,11 @@
-import duke.task.*;
+package duke.task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Represents the Duke Chatbot. A <code>Duke</code> object corresponds to a Duke chatbot.
+ */
 
 public class Duke {
     private Ui ui;
@@ -9,10 +13,17 @@ public class Duke {
     private Parser parser;
     private TaskList taskList;
 
+    /**
+     * Creates and runs a new <code>Duke</code> object.
+     * @param args an array of Strings.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Creates a new instance of <code>Duke</code>> object and initializes its attributes.
+     */
     public Duke() {
         ui = new Ui();
 
@@ -31,13 +42,20 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Runs the <code>Duke</code> object, and saves its data after the run finishes.
+     */
     public void run() {
         respond();
 
         storage.saveFile(taskList.getToDoList());
     }
 
-    private void respond() {
+    /**
+     * Reads the user input and responds based on it.
+     * If the input matches none of the command, prompts the user to re-enter.
+     */
+    public void respond() {
         Scanner sc = new Scanner(System.in);
         label:
         while (sc.hasNext()) {
@@ -70,7 +88,7 @@ public class Duke {
                 } else if (command.equals("deadline")) {
                     try {
                         String[] s = parser.parseDeadline(sc.nextLine());
-                        newTask = makeDeadline(s[0], s[1]);
+                        newTask = new Deadline(s[0], s[1]);
                     } catch (IncompleteArgumentException ex) {
                         ui.showIncompleteArgumentError();
                         break;
@@ -78,7 +96,7 @@ public class Duke {
                 } else {
                     try {
                         String[] s = parser.parseEvent(sc.nextLine());
-                        newTask = makeEvent(s[0], s[1]);
+                        newTask = new Event(s[0], s[1]);
                     } catch (IncompleteArgumentException ex) {
                         ui.showIncompleteArgumentError();
                         break;
@@ -96,7 +114,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Reverses the boolean <code>done</code> attribute of the task at the given list index.
+     * @param idx Index of the task in the <code>taskList</code>;
+     */
     public void mark(int idx) {
         taskList.get(idx - 1).mark();
         if (taskList.get(idx - 1).getDone()) {
@@ -106,6 +127,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a <code>ToDo</code> with the specified name.
+     * @param name Name of the task.
+     * @return new instance of <code>ToDo</code> with the specified name.
+     * @throws ToDoIllegalArgumentException If the name is an empty string.
+     */
     public Task makeToDo(String name) throws ToDoIllegalArgumentException {
         if (name.isEmpty()) {
             throw new ToDoIllegalArgumentException("Illegal Argument");
@@ -113,14 +140,10 @@ public class Duke {
         return new ToDo(name);
     }
 
-    public Task makeDeadline(String name, String by) {
-        return new Deadline(name, by.trim());
-    }
-
-    public Task makeEvent(String name, String at) {
-        return new Event(name, at.trim());
-    }
-
+    /**
+     * Removes the <code>task</code> at the specified index of the <code>taskList</code>.
+     * @param idx Index of the <code>task</code> in the <code>taskList</code>.
+     */
     public void remove(int idx) {
         Task removed = taskList.remove(idx - 1);
         ui.confirmRemoval(removed, taskList.getToDoList());

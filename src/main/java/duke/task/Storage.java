@@ -9,10 +9,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage to deal with loading tasks from the file and saving tasks in the file in the hard drive.
+ */
 public class Storage {
+    /**
+     * Returns a new instance of the <code>Storage</code> object.
+     */
     public Storage() {
     }
 
+    /**
+     * Creates a file at Path "data/duke.txt" if it does not exist.
+     * If the file exists, do nothing.
+     */
     public void checkFile() {
         try {
             Files.createDirectory(Paths.get("data"));
@@ -25,6 +35,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the list data to the file at Path "data/duke.txt".
+     * @param toDoList The List of items to be saved.
+     */
     public void saveFile(ArrayList<duke.task.Task> toDoList) {
         try {
             StringBuilder textToAdd = new StringBuilder();
@@ -41,6 +55,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file at Path "data/duke.txt" and returns the content as a list.
+     * @return ArrayList of <code>Tasks</code> from the data file.
+     * @throws duke.task.LoadingException If the file is not in the correct format.
+     */
     public ArrayList<duke.task.Task> readFile() throws duke.task.LoadingException {
         File dataFile = new File("data/duke.txt");
         ArrayList<duke.task.Task> toDoList = new ArrayList<>(100);
