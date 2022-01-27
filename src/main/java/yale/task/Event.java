@@ -25,6 +25,12 @@ public class Event extends Task {
         super(name, isMarked);
         this.at = LocalDate.parse(at);
     }
+
+    /**
+     * Returns a customised String format of
+     * the Event object
+     * @return
+     */
     @Override
     public String export() {
         return "E " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.at;

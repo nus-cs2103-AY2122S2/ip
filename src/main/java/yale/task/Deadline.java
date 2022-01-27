@@ -24,6 +24,12 @@ public class Deadline extends Task {
         super(name, isMarked);
         this.by = LocalDate.parse(by);
     }
+
+    /**
+     * Returns a customised String format of
+     * the Deadline object
+     * @return
+     */
     @Override
     public String export() {
         return "D " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.by;

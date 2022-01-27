@@ -2,11 +2,22 @@ package yale.command;
 
 import java.util.Scanner;
 
+/**
+ * Class to deal with interactions
+ * with the user
+ */
 public class Ui {
 
+    /**
+     * Constructor method
+     */
     public Ui() {
     }
 
+    /**
+     * Prints out welcome message
+     * to user when program starts
+     */
     public void welcomePrompt() {
         String logo = "-----YALE-----";
         System.out.println("Allow me to introduce myself\n" + logo);

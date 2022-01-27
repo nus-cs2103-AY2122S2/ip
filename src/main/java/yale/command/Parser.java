@@ -2,10 +2,23 @@ package yale.command;
 
 import yale.task.TaskList;
 
+/**
+ * Class to deal with making sense of
+ * user command
+ */
 public class Parser {
+    /**
+     * Constructor method
+     */
     public Parser() {
     }
 
+    /**
+     * Carries out the different feature
+     * operations depending on the user input
+     * @param command
+     * @param list
+     */
     public void performAction(String command, TaskList list) {
         if (command.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");

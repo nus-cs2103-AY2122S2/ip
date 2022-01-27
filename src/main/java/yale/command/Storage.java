@@ -7,14 +7,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to deal with loading tasks
+ * from file and saving tasks in file
+ */
 public class Storage {
-
+    /**
+     * String defining the file path
+     */
     protected String filePath;
 
+    /**
+     * Constructor method
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads contents from specified file
+     * @return
+     */
     public String loadFileContents() {
         try {
             File f = new File(this.filePath); // create a File for the given file path
@@ -36,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes content into specified file
+     * @param textToAdd
+     * @throws IOException
+     */
     public void writeToFile(String textToAdd) throws IOException {
         try {
             FileWriter fw = new FileWriter(this.filePath);

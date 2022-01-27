@@ -5,7 +5,16 @@ import yale.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Represents a chatbot that tracks
+ * tasks for users.
+ */
 public class Yale {
+    /**
+     * Creates Ui, Storage, Parser
+     * Scanner and TaskList objects
+     * @param args
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.welcomePrompt();

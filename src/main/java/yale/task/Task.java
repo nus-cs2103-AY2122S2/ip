@@ -48,6 +48,11 @@ public class Task {
         isMarked = false;
     }
 
+    /**
+     * Returns a customised String format of
+     * the Task object
+     * @return
+     */
     public String export() {
         return " " + "| "
                 + (isMarked? 1 : 0) + " | " + this.name;

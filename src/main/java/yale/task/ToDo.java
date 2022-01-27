@@ -14,6 +14,11 @@ public class ToDo extends Task {
         super(name, isMarked);
     }
 
+    /**
+     * Returns a customised String format of
+     * the ToDo object
+     * @return
+     */
     @Override
     public String export() {
         return "T " + "| " + (isMarked? 1 : 0) + " | " + this.name;

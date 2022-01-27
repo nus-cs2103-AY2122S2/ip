@@ -30,7 +30,8 @@ public class TaskList {
     }
 
     /**
-     * Lists out tasks added to ArrayList
+     * Returns a String containing the tasks
+     * that are in the list
      * @return List of tasks
      */
     public String listOut() {
@@ -41,6 +42,11 @@ public class TaskList {
         }
         return output;
     }
+
+    /**
+     * Exports out tasks in a custom String format
+     * @return
+     */
     public String exportOut() {
         String output = "";
         for (int i = 0; i < list.size(); i++) {
@@ -49,6 +55,12 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Reads the tasks in the specified file and
+     * creates them. These tasks are then added to
+     * the list
+     * @param fileData
+     */
     public void importIn(String fileData) {
         if (fileData.equals("")) {
             return;
@@ -100,6 +112,11 @@ public class TaskList {
         list.remove(itemNo);
     }
 
+    /**
+     * Calls listOut() method if there are any tasks in the list.
+     * @param command
+     * @param list
+     */
     public void listFeature(String command, TaskList list) {
         if (list.getSize() == 0) {
             System.out.println("You have no tasks at the moment!");
@@ -108,6 +125,12 @@ public class TaskList {
                     + list.listOut());
         }
     }
+
+    /**
+     * Deletes a specific task from the list
+     * @param command
+     * @param list
+     */
     public void deleteFeature(String command, TaskList list) {
         try {
             String[] commandArray = command.split(" ");
@@ -127,6 +150,12 @@ public class TaskList {
             System.out.println("Error: You forgot to indicate the task number!");
         }
     }
+
+    /**
+     * Marks a specific task in the list
+     * @param command
+     * @param list
+     */
     public void markFeature(String command, TaskList list) {
         try {
             String[] commandArray = command.split(" ");
@@ -155,6 +184,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a ToDo object if the user input contains
+     * "todo" and adds it into the list
+     * @param command
+     * @param list
+     */
     public void todoFeature(String command, TaskList list) {
         try {
             String task = command.split("todo ", 2)[1]; // Remove word
@@ -168,6 +203,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a Deadline object if the user input contains
+     * "deadline" and adds it into the list
+     * @param command
+     * @param list
+     */
     public void deadlineFeature(String command, TaskList list) {
         try {
             String removeDeadline = command.split("deadline ", 2)[1]; // Remove Deadline word
@@ -185,6 +226,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates an Event object if the user input contains
+     * "event" and adds it into the list
+     * @param command
+     * @param list
+     */
     public void eventFeature(String command, TaskList list) {
         try {
             String removeEvent = command.split("event ", 2)[1]; // Remove Event word
