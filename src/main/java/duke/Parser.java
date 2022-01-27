@@ -1,15 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.TodoCommand;
-import duke.command.UnmarkCommand;
-import duke.command.UnrecognizedCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -36,6 +27,8 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(remaining));
         } else if (input.matches("unmark [1-9]+\\d*")) {
             return new UnmarkCommand(Integer.parseInt(remaining));
+        } else if (firstWord.equals("find")) {
+            return new FindCommand(remaining);
         } else if (firstWord.equals("todo")) {
             if (remaining.equals("")) {
                 throw new DukeException("The description of a todo cannot be empty");

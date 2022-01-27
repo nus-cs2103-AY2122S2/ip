@@ -9,11 +9,10 @@ public class MarkCommand extends Command {
     private final int index;
 
     /**
-     * Constructs a {@code MarkCommand} object with keyword MARK.
+     * Constructs a {@code MarkCommand} object.
      * @param index the index of the task to mark as done
      */
     public MarkCommand(int index) {
-        super(Command.Keyword.MARK);
         this.index = index;
     }
 

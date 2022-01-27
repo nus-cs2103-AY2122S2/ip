@@ -7,11 +7,9 @@ import duke.Storage;
 public class UnrecognizedCommand extends Command {
 
     /**
-     * Constructs a {@code UnrecognizedCommand} object with keyword UNRECOGNIZED.
+     * Constructs a {@code UnrecognizedCommand} object.
      */
-    public UnrecognizedCommand() {
-        super(Keyword.UNRECOGNIZED);
-    }
+    public UnrecognizedCommand() {}
 
     /**
      * Pushes a message to the UI to indicate that the command is not recognized.

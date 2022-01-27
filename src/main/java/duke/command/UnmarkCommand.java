@@ -9,11 +9,10 @@ public class UnmarkCommand extends Command {
     private final int index;
 
     /**
-     * Constructs a {@code UnmarkCommand} object with keyword UNMARK.
+     * Constructs an {@code UnmarkCommand} object.
      * @param index the index of the task to unmark
      */
     public UnmarkCommand(int index) {
-        super(Command.Keyword.UNMARK);
         this.index = index;
     }
 

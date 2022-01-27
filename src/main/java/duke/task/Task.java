@@ -19,8 +19,9 @@ public abstract class Task {
          */
         E
     }
-    protected String description;
-    protected boolean isDone;
+
+    protected final String description;
+    protected final boolean isDone;
 
     /**
      * Constructs a {@code Task} object with a description.
@@ -58,8 +59,8 @@ public abstract class Task {
      * Returns 1 if the task is marked as done and 0 otherwise.
      * @return 1 if the task is marked as done and 0 otherwise
      */
-    public int getStatus() {
-        return isDone ? 1 : 0;
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

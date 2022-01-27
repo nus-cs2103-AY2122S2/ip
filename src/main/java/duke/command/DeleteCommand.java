@@ -9,11 +9,10 @@ public class DeleteCommand extends Command {
     private final int index;
 
     /**
-     * Constructs a {@code DeleteCommand} object with keyword DELETE.
+     * Constructs a {@code DeleteCommand} object.
      * @param index the index of the task to delete
      */
     public DeleteCommand(int index) {
-        super(Keyword.DELETE);
         this.index = index;
     }
 

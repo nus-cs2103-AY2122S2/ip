@@ -4,8 +4,8 @@ import duke.DukeDateTime;
 
 public class Deadline extends Task {
 
-    protected Icon icon = Icon.D;
-    protected DukeDateTime by;
+    protected static Icon ICON = Icon.D;
+    protected final DukeDateTime by;
 
     /**
      * Constructs a {@code Deadline} object with the specified description and deadline
@@ -31,17 +31,17 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + icon + "]" + super.toString() + " (by: " + by.format("d MMM yyyy") + ")";
+        return "[" + ICON + "]" + super.toString() + " (by: " + by.format("d MMM yyyy") + ")";
     }
 
     @Override
     public Icon getIcon() {
-        return icon;
+        return ICON;
     }
 
     @Override
     public String getDescription() {
-        return description + " /by " + by.format("yyyy-M-d");
+        return description + " /by " + by.format("d MMM yyyy");
     }
 
     @Override

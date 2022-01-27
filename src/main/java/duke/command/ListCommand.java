@@ -7,21 +7,24 @@ import duke.Storage;
 public class ListCommand extends Command {
 
     /**
-     * Constructs a {@code ListCommand} object with keyword LIST.
+     * Constructs a {@code ListCommand} object.
      */
-    public ListCommand() {
-        super(Keyword.LIST);
-    }
+    public ListCommand() {}
 
     /**
-     * Asks the UI to show the list of tasks.
+     * Asks the UI to display the list of tasks.
      * @param tasks current list of tasks
      * @param ui the UI used
      * @param storage the storage used
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+        if (tasks.size() == 0) {
+            ui.showMessage("There are no tasks in your list~");
+        } else {
+            ui.showMessage("Here are the tasks in your list:");
+            ui.showList(tasks);
+        }
     }
 
 }

@@ -4,8 +4,8 @@ import duke.DukeDateTime;
 
 public class Event extends Task {
 
-    protected Icon icon = Icon.E;
-    protected DukeDateTime at;
+    protected static Icon ICON = Icon.E;
+    protected final DukeDateTime at;
 
     /**
      * Constructs an {@code Event} object with the specified description and time
@@ -30,17 +30,17 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + icon + "]" + super.toString() + " (at: " + at.format("d MMM yyyy") + ")";
+        return "[" + ICON + "]" + super.toString() + " (at: " + at.format("d MMM yyyy") + ")";
     }
 
     @Override
     public Icon getIcon() {
-        return icon;
+        return ICON;
     }
 
     @Override
     public String getDescription() {
-        return description + " /at " + at.format("yyyy-M-d");
+        return description + " /at " + at.format("d MMM yyyy");
     }
 
     @Override

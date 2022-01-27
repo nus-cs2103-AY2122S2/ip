@@ -10,10 +10,10 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String name;
-    private final Storage storage;
+    private String name;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
     /**
      * Constructs a {@code Duke} object with its name and path for storage.
@@ -46,10 +46,9 @@ public class Duke {
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
-                if (c.getKeyword() == Command.Keyword.BYE) {
-                    updateRecords();
-                    break;
-                }
+            } catch (ExitException e) {
+                storage.update(tasks);
+                break;
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             } finally {
@@ -80,7 +79,7 @@ public class Duke {
      * @throws IOException if an I/O error occurred
      */
     public static void main(String[] args) throws IOException {
-        new Duke("Enkel", System.getProperty("user.dir")).run();
+        new Duke("Enkel", System.getProperty("user.dir") + "../../../").run();
     }
 
 }

@@ -13,12 +13,11 @@ public class EventCommand extends Command {
     private final DukeDateTime at;
 
     /**
-     * Constructs a {@code EventCommand} object with keyword EVENT.
+     * Constructs a {@code EventCommand} object.
      * @param description the description of the event
      * @param at a {@code DukeDateTime object specifying the time of the event}
      */
     public EventCommand(String description, DukeDateTime at) {
-        super(Keyword.EVENT);
         this.description = description;
         this.at = at;
     }

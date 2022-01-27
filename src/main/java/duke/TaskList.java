@@ -11,7 +11,7 @@ public class TaskList {
     /**
      * Constructs an empty list of tasks.
      */
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
@@ -19,7 +19,7 @@ public class TaskList {
      * Constructs a {@code TaskList} object from a list of tasks.
      * @param list the list of tasks
      */
-    TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 

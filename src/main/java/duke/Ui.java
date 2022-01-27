@@ -24,17 +24,21 @@ public class Ui {
 
     /**
      * Displays the list of tasks.
-     * @param tasks the list of tasks
+     * @param tasks the list of tasks, not null
      */
     public void showList(TaskList tasks) {
-        if (tasks.size() == 0) {
-            System.out.println("There are no tasks in your list~");
-            return;
-        }
-        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
+    }
+
+    /**
+     * Display the task at the specified index in the list of tasks.
+     * @param tasks the list of tasks, not null
+     * @param index the index of the task to display
+     */
+    public void showListItem(TaskList tasks, int index) {
+        System.out.println((index + 1) + ". " + tasks.get(index));
     }
 
     /**

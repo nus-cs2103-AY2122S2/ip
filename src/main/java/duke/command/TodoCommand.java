@@ -11,11 +11,10 @@ public class TodoCommand extends Command {
     private final String description;
 
     /**
-     * Constructs a {@code TodoCommand} object with keyword TODO.
+     * Constructs a {@code TodoCommand} object.
      * @param description the description of the todo task
      */
     public TodoCommand(String description) {
-        super(Keyword.TODO);
         this.description = description;
     }
 

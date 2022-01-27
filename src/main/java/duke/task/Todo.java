@@ -1,8 +1,10 @@
 package duke.task;
 
+import duke.DukeDateTime;
+
 public class Todo extends Task {
 
-    protected Icon icon = Icon.T;
+    protected static Icon ICON = Icon.T;
 
     /**
      * Constructs a {@code Todo} object with the specified description
@@ -23,12 +25,12 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + icon + "]" + super.toString();
+        return "[" + ICON + "]" + super.toString();
     }
 
     @Override
     public Icon getIcon() {
-        return icon;
+        return ICON;
     }
 
     @Override

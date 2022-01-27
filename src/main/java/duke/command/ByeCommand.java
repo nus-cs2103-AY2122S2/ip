@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ExitException;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
@@ -7,11 +8,9 @@ import duke.Storage;
 public class ByeCommand extends Command {
 
     /**
-     * Constructs a {@code ByeCommand} object with keyword BYE
+     * Constructs a {@code ByeCommand} object.
      */
-    public ByeCommand() {
-        super(Keyword.BYE);
-    }
+    public ByeCommand() {}
 
     /**
      * Pushes a goodbye message to the UI.
@@ -20,8 +19,9 @@ public class ByeCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ExitException {
         ui.showMessage("Bye. Hope to see you again soon!");
+        throw new ExitException();
     }
 
 }

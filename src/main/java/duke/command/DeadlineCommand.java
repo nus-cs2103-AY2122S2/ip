@@ -13,12 +13,11 @@ public class DeadlineCommand extends Command {
     private final DukeDateTime by;
 
     /**
-     * Constructs a {@code DeadlineCommand} object with keyword DEADLINE.
+     * Constructs a {@code DeadlineCommand} object.
      * @param description the description of the deadline task
      * @param by a {@code DukeDateTime} object specifying the deadline of the task
      */
     public DeadlineCommand(String description, DukeDateTime by) {
-        super(Keyword.DEADLINE);
         this.description = description;
         this.by = by;
     }
