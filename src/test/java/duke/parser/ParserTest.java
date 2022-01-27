@@ -9,10 +9,14 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
+/**
+ * Tests if Parser functions work as intended.
+ */
 public class ParserTest {
     /**
      * Tests if the parser parses an add command correctly
@@ -37,6 +41,11 @@ public class ParserTest {
         assertEquals(todo, todoResult);
     }
 
+    /**
+     * Tests if the parser parses a delete command correctly
+     *
+     * @throws DukeException
+     */
     @Test
     public void parseDeleteTest() throws DukeException {
         String inputCommand = "delete 1";
@@ -45,6 +54,11 @@ public class ParserTest {
         assertEquals(delete, result);
     }
 
+    /**
+     * Tests if the parser parses a list command correctly
+     *
+     * @throws DukeException
+     */
     @Test
     public void parseListTest() throws DukeException {
         String inputCommand = "list";
@@ -53,6 +67,11 @@ public class ParserTest {
         assertEquals(list, result);
     }
 
+    /**
+     * Tests if the parser parses a bye command correctly
+     *
+     * @throws DukeException
+     */
     @Test
     public void parseByeTest() throws DukeException {
         String inputCommand = "bye";
@@ -61,6 +80,11 @@ public class ParserTest {
         assertEquals(bye, result);
     }
 
+    /**
+     * Tests if the parser parses a mark command correctly
+     *
+     * @throws DukeException
+     */
     @Test
     public void parseMarkTest() throws DukeException {
         String inputCommand = "mark 1";
@@ -74,6 +98,11 @@ public class ParserTest {
         assertEquals(unmark, result2);
     }
 
+    /**
+     * Tests if the parser parses a sort command correctly
+     *
+     * @throws DukeException
+     */
     @Test
     public void parseSortTest() throws DukeException {
         String inputCommand = "sort date";

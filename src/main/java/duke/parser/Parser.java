@@ -13,12 +13,25 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
+/**
+ * Parses input String into a more decipherable object.
+ */
 public class Parser {
+    /**
+     * Formats an input String into a LocalDateTime object.
+     */
     public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("yyyy-MM-dd HHmm")
             .toFormatter(Locale.ENGLISH);
 
+    /**
+     * Parses a given inputCommand into a Command object for the ease of interpreting commands.
+     *
+     * @param inputCommand String String of input command.
+     * @return Command Returns any subclass of Command based on the input String.
+     * @throws DukeException
+     */
     public static Command parse(String inputCommand) throws DukeException {
         if (inputCommand.length() == 0) {
             try {

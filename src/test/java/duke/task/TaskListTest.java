@@ -5,11 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Tests whether TaskList functions work as intended.
+ */
 public class TaskListTest {
     private static TaskList taskList = new TaskList();
     private static TaskList initialList = new TaskList();
 
+    /**
+     * Populates taskList and initialList with the same content.
+     */
     @BeforeEach
     public void setUpTaskList() {
         taskList.getTasks().clear();
@@ -21,6 +26,9 @@ public class TaskListTest {
         initialList.getTasks().add(new ToDo("World"));
     }
 
+    /**
+     * Tests whether addTask adds a task correctly
+     */
     @Test
     public void addTaskTest() {
         taskList.addTask(new ToDo("content"));
@@ -28,6 +36,9 @@ public class TaskListTest {
         assertEquals(taskList, initialList);
     }
 
+    /**
+     * Tests whether deleteTask deletes a task correctly
+     */
     @Test
     public void deleteTaskTest() {
         taskList.getTasks().add(new ToDo("what"));

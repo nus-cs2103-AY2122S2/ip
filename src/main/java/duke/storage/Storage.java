@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Saves files to data/duke.txt and loads saved file.
+ */
 public class Storage {
     private final String filePath;
 
@@ -16,6 +19,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the duke.txt file to get data from previous runs of Duke.
+     *
+     * @return ArrayList<Task> ArrayList that is populated with duke.txt save file.
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
         BufferedReader bufferedReader = null;
@@ -61,7 +70,7 @@ public class Storage {
                             }
                         }
                     } else {
-                        if (isDone.equals("X")){
+                        if (isDone.equals("X")) {
                             String content = line.substring(7);
                             taskList.add(new ToDo(content, true));
                         } else {
@@ -78,6 +87,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current tasks into data/duke.txt.
+     *
+     * @param taskList taskList object that contains all tasks to be saved
+     */
     public void save(TaskList taskList) {
         File file = new File(filePath);
         BufferedWriter bufferedWriter = null;

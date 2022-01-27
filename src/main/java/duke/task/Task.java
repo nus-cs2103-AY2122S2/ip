@@ -48,6 +48,9 @@ public class Task implements Comparable<Task> {
         this.content = content;
     }
 
+    /**
+     * Marks this task as done.
+     */
     public void mark() {
         this.isDone = true;
         Ui.printDivider();
@@ -56,6 +59,9 @@ public class Task implements Comparable<Task> {
         Ui.printDivider();
     }
 
+    /**
+     * Unmarks this task.
+     */
     public void unmark() {
         this.isDone = false;
         Ui.printDivider();
@@ -64,6 +70,13 @@ public class Task implements Comparable<Task> {
         Ui.printDivider();
     }
 
+    /**
+     * Compares two tasks based on date and content.
+     * A date is larger if it occurs earlier, and content is larger based on String compareTo.
+     *
+     * @param task Task to be compared with.
+     * @return int Integer that shows which is larger.
+     */
     @Override
     public int compareTo(Task task) {
         if (this.date != null && task.date != null) {

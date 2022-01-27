@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
+/**
+ * Contains main method for Duke chatbot.
+ * In charge of initializing UI and storage with taskList.
+ */
 public class Duke {
     private static final String filePath = "data/duke.txt";
 
@@ -18,6 +22,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Loads the Duke chatbot with a given filePath to the saved file.
+     * If there is no file in the filePath, Storage will create a new file.
+     * @param filePath File's path.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
@@ -29,6 +38,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot. Reads in user input commands,
+     * and it sends them to their respective classes.
+     */
     public void run() {
         ui.showUiForStart();
         Scanner inputScanner = new Scanner(System.in);
