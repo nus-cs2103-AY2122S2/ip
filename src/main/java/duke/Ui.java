@@ -216,4 +216,10 @@ public class Ui {
         taskList.find(taskName);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
+
+    public void showError(Exception exception) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(exception.getMessage());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 }
