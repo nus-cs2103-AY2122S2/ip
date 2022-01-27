@@ -3,15 +3,29 @@ package duke.tasklist;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a STUB of a TaskList for testing purposes.
+ */
 public class TaskListStub extends TaskList {
-    List<String> test_tasks = new ArrayList<>();
+
+    /** Stores the tasks */
+    private List<String> testTasks = new ArrayList<>();
+
+    /**
+     * Instantiates the new instance with 2 fixed tasks added in.
+     */
     public TaskListStub() {
-        this.test_tasks.add("list item 1");
-        this.test_tasks.add("list item 2");
+        this.testTasks.add("list item 1");
+        this.testTasks.add("list item 2");
     }
 
+    /**
+     * Returns a concatenation of the two tasks stored in the Stub.
+     *
+     * @return A String of tasks for testing.
+     */
     @Override
     public String getTasksMsg() {
-        return test_tasks.get(0) + "\n" + test_tasks.get(1);
+        return testTasks.get(0) + "\n" + testTasks.get(1);
     }
 }

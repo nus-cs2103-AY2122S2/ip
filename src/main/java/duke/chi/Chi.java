@@ -26,7 +26,7 @@ public class Chi {
     private Parser parser;
 
     /**
-     * Constructor of Chi class.
+     * Instantiates the necessary components to run the application.
      *
      * @param filepath The filepath of task data saved in hard-disk.
      */
