@@ -1,6 +1,7 @@
 package dazz;
 
 import dazz.command.Command;
+
 import dazz.exception.DazzException;
 
 /**
