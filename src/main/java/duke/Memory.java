@@ -67,13 +67,15 @@ public class Memory {
     /**
      * Echoes all Tasks in Memory.
      */
-    public void listAll() {
+    public String listAll() {
         if (size == 0) {
-            echo.echoString("You've got nothing to do.");
+            return "You've got nothing to do.";
         } else {
+            String str = "Here's what you got:";
             for (int i = 1; i <= size; i++) {
-                echo.echoString(i + ". " + this.getString(i-1));
+                str = str + "\n " + i + ". " + this.getString(i-1);
             }
+            return str;
         }
     }
 
@@ -82,11 +84,11 @@ public class Memory {
      *
      * @param name The name of the Task to be made.
      */
-    public void addTask(String name) {
+    public String addTask(String name) {
         taskMem.add(new Task(name));
         size++;
-        echo.echoString("added task: " + getString(size - 1));
         parser.updateAll();
+        return "added task: " + getString(size - 1);
     }
 
     /**
@@ -95,15 +97,15 @@ public class Memory {
      * @param name The name of the Deadline to be made.
      * @param time The due time of the Deadline.
      */
-    public void addDeadline(String name, String time) {
+    public String addDeadline(String name, String time) {
         try {
             taskMem.add(new Deadline(name, time));
             size++;
-            echo.echoString("added deadline: " + getString(size - 1));
             parser.updateAll();
+            return "added deadline: " + getString(size - 1);
         }
         catch (DateTimeParseException e) {
-            echo.echoString("Please format your date in yyyy-mm-dd");
+            return "Please format your date in yyyy-mm-dd";
         }
     }
 
@@ -113,15 +115,15 @@ public class Memory {
      * @param name The name of the Event to be made.
      * @param time The time of the Event.
      */
-    public void addEvent(String name, String time) {
+    public String addEvent(String name, String time) {
         try {
             taskMem.add(new Event(name, time));
             size++;
-            echo.echoString("added event: " + getString(size - 1));
             parser.updateAll();
+            return "added event: " + getString(size - 1);
         }
         catch (DateTimeParseException e) {
-            echo.echoString("Please format your date in yyyy-mm-dd");
+            return "Please format your date in yyyy-mm-dd";
         }
     }
 
@@ -130,16 +132,16 @@ public class Memory {
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
      */
-    public void setDone(int fakeAddress) {
+    public String setDone(int fakeAddress) {
         int address = fakeAddress - 1;
         if (address >= size || address < 0) {
-            echo.echoString("Memory address requested out of bounds!");
+            return "Memory address requested out of bounds!";
         } else {
             getTask(address).setDone();
-            echo.echoString("Cool! You've done this task:\n  " +
-                    getString(address));
+            parser.updateAll();
+            return "Cool! You've done this task:\n  "
+                    + getString(address);
         }
-        parser.updateAll();
     }
 
     /**
@@ -147,16 +149,16 @@ public class Memory {
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
      */
-    public void setUndone(int fakeAddress) {
+    public String setUndone(int fakeAddress) {
         int address = fakeAddress - 1;
         if (address >= size || address < 0) {
-            echo.echoString("Memory address requested out of bounds!");
+            return "Memory address requested out of bounds!";
         } else {
             getTask(address).setUndone();
-            echo.echoString("This task is now undone:\n  " +
-                    getString(address));
+            parser.updateAll();
+            return "This task is now undone:\n  " +
+                    getString(address);
         }
-        parser.updateAll();
     }
 
     /**
@@ -164,16 +166,17 @@ public class Memory {
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
      */
-    public void deleteTask(int fakeAddress) {
+    public String deleteTask(int fakeAddress) {
         int address = fakeAddress - 1;
         if (address >= size || address < 0) {
-            echo.echoString("Memory address requested out of bounds!");
+            return "Memory address requested out of bounds!";
         } else {
-            echo.echoString("removed: " + getString(address));
+            String temp = getString(address);
             taskMem.remove(address);
             size--;
+            parser.updateAll();
+            return "removed: " + temp;
         }
-        parser.updateAll();
     }
 
     /**
