@@ -1,4 +1,4 @@
 D|0|test|1920-02-02 19:34
 T|1|watch anime
 E|0|shit|1920-02-02
-E|0|shit|1920-02-02 20:03
+T|1|stuff
