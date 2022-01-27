@@ -1,6 +1,5 @@
 package echo.command;
 
-import echo.main.EchoException;
 import echo.storage.Storage;
 import echo.task.TaskList;
 import echo.ui.Ui;
@@ -26,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Execute command.
+     * Executes command.
      *
      * @param tasks TaskList containing list of tasks.
      * @param ui Ui that deals with user interactions.

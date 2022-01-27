@@ -1,6 +1,15 @@
 package echo.parser;
 
-import echo.command.*;
+import echo.command.Command;
+import echo.command.DeadlineCommand;
+import echo.command.DeleteCommand;
+import echo.command.EventCommand;
+import echo.command.FindCommand;
+import echo.command.HelpCommand;
+import echo.command.ListCommand;
+import echo.command.MarkCommand;
+import echo.command.TodoCommand;
+import echo.command.UnmarkCommand;
 
 import echo.ui.Ui;
 

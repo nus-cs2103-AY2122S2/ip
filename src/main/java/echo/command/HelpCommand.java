@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND = "help";
 
     /**
-     * Execute command.
+     * Executes command.
      *
      * @param tasks TaskList containing list of tasks.
      * @param ui Ui that deals with user interactions.
