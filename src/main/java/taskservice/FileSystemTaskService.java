@@ -23,7 +23,7 @@ public class FileSystemTaskService implements TaskService {
     private boolean hasReadFromFileSystem;
 
     public FileSystemTaskService(String appPath) throws TaskServiceException {
-        this.rootDir = Paths.get(".").resolve(appPath);
+        this.rootDir = Paths.get("./" + appPath);
         this.tasksDir = this.rootDir.resolve(FileSystemTaskService.TASKS_FILENAME);
         this.tasks = new ArrayList<>();
         this.hasReadFromFileSystem = false;
