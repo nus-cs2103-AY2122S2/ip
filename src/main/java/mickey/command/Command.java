@@ -1,9 +1,9 @@
-package command;
+package mickey.command;
 
-import app.MickeyException;
-import app.Storage;
-import app.Ui;
-import task.TaskList;
+import mickey.app.MickeyException;
+import mickey.app.Storage;
+import mickey.app.Ui;
+import mickey.task.TaskList;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -23,7 +23,8 @@ public abstract class Command {
     }
 
     String[] splitArgs() {
-        return args.map(s -> Arrays.stream(s.split("/by", 2)).map(String::trim).toArray(String[]::new)).orElse(null);
+        return args.map(s -> Arrays.stream(s.split("/by", 2)).map(String::trim).toArray(String[]::new))
+                .orElse(null);
     }
 
     String getDescription() throws MickeyException {

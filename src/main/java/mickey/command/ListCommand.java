@@ -1,9 +1,9 @@
-package command;
+package mickey.command;
 
-import app.MickeyException;
-import app.Storage;
-import app.Ui;
-import task.TaskList;
+import mickey.app.MickeyException;
+import mickey.app.Storage;
+import mickey.app.Ui;
+import mickey.task.TaskList;
 
 public class ListCommand extends Command {
     public ListCommand(String fullCommand) {

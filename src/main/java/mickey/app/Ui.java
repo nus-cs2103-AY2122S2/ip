@@ -1,6 +1,6 @@
-package app;
+package mickey.app;
 
-import task.Task;
+import mickey.task.Task;
 
 import java.util.Scanner;
 

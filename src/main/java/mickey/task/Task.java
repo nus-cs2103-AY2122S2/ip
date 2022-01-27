@@ -1,4 +1,4 @@
-package task;
+package mickey.task;
 
 public abstract class Task {
     public String description;

@@ -1,10 +1,10 @@
-package app;
+package mickey.app;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.ToDo;
+import mickey.task.Deadline;
+import mickey.task.Event;
+import mickey.task.Task;
+import mickey.task.TaskList;
+import mickey.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

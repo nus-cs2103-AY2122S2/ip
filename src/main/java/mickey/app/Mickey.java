@@ -1,7 +1,7 @@
-package app;
+package mickey.app;
 
-import command.Command;
-import task.TaskList;
+import mickey.command.Command;
+import mickey.task.TaskList;
 
 public class Mickey {
     private final Storage storage;

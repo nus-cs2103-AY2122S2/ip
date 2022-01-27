@@ -1,4 +1,4 @@
-package task;
+package mickey.task;
 
 public class ToDo extends Task {
 

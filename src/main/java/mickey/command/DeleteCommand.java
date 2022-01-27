@@ -1,10 +1,10 @@
-package command;
+package mickey.command;
 
-import app.MickeyException;
-import app.Storage;
-import app.Ui;
-import task.Task;
-import task.TaskList;
+import mickey.app.MickeyException;
+import mickey.app.Storage;
+import mickey.app.Ui;
+import mickey.task.Task;
+import mickey.task.TaskList;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(String fullCommand) {

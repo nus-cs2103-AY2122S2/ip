@@ -1,13 +1,13 @@
-package command;
+package mickey.command;
 
-import app.MickeyException;
-import app.Storage;
-import app.Ui;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.ToDo;
+import mickey.app.MickeyException;
+import mickey.app.Storage;
+import mickey.app.Ui;
+import mickey.task.Deadline;
+import mickey.task.Event;
+import mickey.task.Task;
+import mickey.task.TaskList;
+import mickey.task.ToDo;
 
 public class AddCommand extends Command {
     public AddCommand(String fullCommand) {

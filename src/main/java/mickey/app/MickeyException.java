@@ -1,4 +1,4 @@
-package app;
+package mickey.app;
 
 public class MickeyException extends Exception {
     public MickeyException(String msg) {

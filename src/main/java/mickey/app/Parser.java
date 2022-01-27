@@ -1,11 +1,11 @@
-package app;
+package mickey.app;
 
-import command.AddCommand;
-import command.ByeCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.MarkCommand;
+import mickey.command.AddCommand;
+import mickey.command.ByeCommand;
+import mickey.command.Command;
+import mickey.command.DeleteCommand;
+import mickey.command.ListCommand;
+import mickey.command.MarkCommand;
 
 public class Parser {
     public Parser() {
