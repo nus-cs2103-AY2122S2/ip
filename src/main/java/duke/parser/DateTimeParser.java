@@ -9,7 +9,7 @@ import java.util.Date;
 public class DateTimeParser {
 
     /**
-     * Return a LocalDate object based on the input String.
+     * Return a LocalDate object based on the input String
      *
      * @param date an String giving the date to be parsed
      * @return a LocalDate object from the parsed String.
