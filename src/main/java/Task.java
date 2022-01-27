@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Task {
     private final String name;
     private boolean isDone;
@@ -34,8 +36,32 @@ public class Task {
         return output;
     }
 
+    public static Task createTask(List<String> description) throws InvalidArgumentException {
+        if (description.get(0).equals("todo")) {
+            return Todo.of(description);
+        } else if (description.get(0).equals("deadline")) {
+            return Deadline.of(description);
+        } else if (description.get(0).equals("event")) {
+            return Event.of(description);
+        }
+        throw new InvalidArgumentException();
+    }
+
     public String getStatusIcon() {
         return (isDone? "X" : " ");
+    }
+
+    String getName() {
+        return this.name;
+    }
+
+    Boolean getStatus() {
+        return this.isDone;
+    }
+
+    public String toStorageString() {
+        String status = isDone? "X" : ".";
+        return String.format(status + " task " + name);
     }
 
     @Override
