@@ -30,13 +30,19 @@ public class FileAction {
      * Saves content of Tasks into given file
      */
     public void saveFile(String cont) throws IOException {
-        fileWriter = new FileWriter(filepath);
-        writer = new BufferedWriter(fileWriter);
         try {
             writer.write(cont);
         } catch (IOException e) {
             throw new IOException("\nUnexpected error occurred where Tasks cannot be saved in file!\n");
         }
+    }
+
+    /**
+     * Starts the process of file writing
+     */
+    public void startWriter() throws IOException {
+        fileWriter = new FileWriter(filepath);
+        writer = new BufferedWriter(fileWriter);
     }
 
     /**

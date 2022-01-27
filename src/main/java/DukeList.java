@@ -105,6 +105,7 @@ public class DukeList {
      * provided text file
      */
     public void saveAllTasks(FileAction f) throws IOException {
+        f.startWriter();
         for (Task t : tasks) {
             f.saveFile(t.toString());
         }
