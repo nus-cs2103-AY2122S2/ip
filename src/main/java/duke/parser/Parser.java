@@ -5,6 +5,7 @@ import main.java.duke.dukeexceptions.DukeException;
 import main.java.duke.dukeexceptions.ForeignException;
 import main.java.duke.responses.Response;
 import main.java.duke.responses.StartResponse;
+import main.java.duke.responses.WelcomeResponse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,10 @@ import java.util.Arrays;
 public class Parser {
     static private ArrayList<String> commandList = new ArrayList<>(
             Arrays.asList("bye", "delete", "list", "mark", "unmark", "todo", "deadline", "event"));
+    
+    public Response welcome() {
+        return new WelcomeResponse();
+    }
     
     public Response start() {
         return new StartResponse();

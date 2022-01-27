@@ -1,17 +1,59 @@
 package main.java.duke;
+import main.java.duke.command.ByeCommand;
+import main.java.duke.command.Command;
+import main.java.duke.data.Storage;
+import main.java.duke.data.TaskList;
+import main.java.duke.dukeexceptions.DukeException;
+import main.java.duke.parser.Parser;
+import main.java.duke.responses.Response;
+import main.java.duke.ui.Ui;
 
 public class Duke {
+  TaskList taskList;
+  Storage store;
+  Parser commandHandler;
+  Ui cmdLine;
+
+  boolean isRunning = true;
+
+  Duke() {
+    this.taskList = new TaskList();
+    this.store = new Storage(taskList);
+    this.commandHandler = new Parser();
+    this.cmdLine = new Ui();
+  }
+
+  public void run() {
+    
+    store.initialiseStorage();
+    this.taskList = store.loadFromDisk();
+    cmdLine.callResponse(commandHandler.welcome());
+    cmdLine.callResponse(commandHandler.start());
+    
+    while(isRunning) {
+      try {
+        String stringCmd = cmdLine.getNextLine();
+        Command cmd = commandHandler.getCommand(stringCmd);
+        cmd.getReasources(store, taskList);
+        if (cmd instanceof ByeCommand) {
+          isRunning = false;
+        }
+        Response feedback = cmd.execute();
+        cmdLine.callResponse(feedback);
+      } catch (DukeException e) {
+        e.callback();
+      }
+    }
+
+  }
+  /**
+   * Method that stops the Chatbot;
+   */
+  public void stop() {
+    this.isRunning = false;
+  }
+
   public static void main(String[] args) {
-    String logo = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
-    System.out.println("Hello from\n" + logo);
-
-    ChatBot cb = new ChatBot();
-    cb.run();
-
-
+    new Duke().run();
   }
 }
