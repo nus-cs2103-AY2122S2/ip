@@ -33,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method. Creates a Duke instance and runs it.
+     * @param args The command line arguments
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

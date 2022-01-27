@@ -11,7 +11,7 @@ public class Ui {
     /**
      * A divider for design purposes
      */
-    public static final String DIVIDER = "\n____________________________________________________________\n";
+    private static final String DIVIDER = "\n____________________________________________________________\n";
 
     private final Parser parser;
 
@@ -60,14 +60,14 @@ public class Ui {
     }
 
     /**
-     * The message the user will be shown upon starting the program.
+     * Returns the message the user will be shown upon starting the program.
      */
     public void showWelcomeMessage() {
         showMessage("Why hello there! My name is Wensleydale.\nWhat do you need?");
     }
 
     /**
-     * The message the user will be shown upon exiting the program
+     * Retruns the message the user will be shown upon exiting the program
      */
     public void showFarewellMessage() {
         showMessage("Farewell then!");

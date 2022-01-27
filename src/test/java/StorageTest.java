@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StorageTest {
     @Test
     public void load_FileNotFoundException() throws IOException {
-        Boolean check = false;
+        Boolean wasThrown = false;
         File file = new File("data/test.txt");
 
         if (file.exists()) {
@@ -22,10 +22,10 @@ public class StorageTest {
         try {
             storage.load();
         } catch (DukeException e) {
-            check = true;
+            wasThrown = true;
         }
 
-        assertTrue(check);
+        assertTrue(wasThrown);
     }
 
 

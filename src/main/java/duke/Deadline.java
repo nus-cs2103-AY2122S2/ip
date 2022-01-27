@@ -56,7 +56,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * toString implementation of task.
+     * Returns the toString implementation of task.
      *
      * @return String implementation of task
      */

@@ -60,7 +60,7 @@ public class Task {
     }
 
     /**
-     * ToString implementation of the duke.Task class
+     * Returns ToString implementation of the Task class
      *
      * @return String representation of the status of the task along with its description
      */

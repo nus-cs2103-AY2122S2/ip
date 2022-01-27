@@ -94,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * toString implementation of the list of tasks ordered numerically.
+     * Returns the toString implementation of the list of tasks ordered numerically.
      * @return the string implementation of the list of tasks
      */
     public String toString() {
