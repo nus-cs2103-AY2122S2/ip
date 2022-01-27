@@ -42,7 +42,7 @@ public class Ui {
                 break;
             case "list":
                 System.out.println("Here are the tasks in your list:");
-                ShowTasks.list(taskCount, list);
+                ShowTasks.showList(taskCount, list);
                 break;
             case "find":
                 System.out.println("Here are the matching tasks in your list:");

@@ -44,7 +44,7 @@ public class DukeException extends Exception {
                 if (!(taskNum <= tasks && taskNum > 0)) {
                     throw new DukeException("☹ OOPS!!! Task number does not exist.");
                 }else {
-                    String[] dateTime  = tempList[1].split("/by ", 2);
+                    String[] dateTime  = input[1].split("/by ", 2);
                     if (dateTime[0].equals("")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
                     } else if (dateTime.length == 1) {
@@ -54,10 +54,10 @@ public class DukeException extends Exception {
                 }
                 break;
             case "find":
-                if (tempList.length == 1) {
+                if (input.length == 1) {
                     throw new DukeException("☹ OOPS!!! Please enter a task to find.");
                 } else {
-                    String[] task  = tempList[1].split(" ");
+                    String[] task  = input[1].split(" ");
                     if (task.length > 1) {
                         throw new DukeException("☹ OOPS!!! Sorry you can only search for single words.");
                     }
