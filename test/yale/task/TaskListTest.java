@@ -15,6 +15,14 @@ class TaskListTest {
     }
 
     @Test
+    void getSize() {
+        TaskList list = new TaskList();
+        Task task = new Task("work", false);
+        list.addToList(task);
+        assertEquals(1, list.getSize());
+    }
+
+    @Test
     void deleteTask() {
         TaskList list = new TaskList();
         Task task = new Task("work", false);
@@ -22,7 +30,6 @@ class TaskListTest {
         list.deleteTask(0);
         assertEquals(0, (list.getSize()));
     }
-
 
     @Test
     void markFeature() {
