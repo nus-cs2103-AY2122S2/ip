@@ -11,10 +11,15 @@ public class Ui {
     public Scanner sc = new Scanner(System.in);
     public Tasklist tasklist;
 
-    public static String indent = "    ";
-    public static String separator = "--------------------------------------------";
-    public String[] openingMessage = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
-    public String closingMessage = "Bye. Hope to see you again soon!";
+    public static String INDENT = "    ";
+    public static String SEPARATOR = "--------------------------------------------";
+    public static String LOGO = INDENT + " ____        _        \n"
+            + INDENT + "|  _ \\ _   _| | _____ \n"
+            + INDENT + "| | | | | | | |/ / _ \\\n"
+            + INDENT + "| |_| | |_| |   <  __/\n"
+            + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
+    public String[] OPENING_MESSAGE = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
+    public String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
 
     public Parser parser;
 
@@ -25,38 +30,32 @@ public class Ui {
     }
 
     public static void printIndent(String s) {
-        System.out.println(indent + s);
+        System.out.println(INDENT + s);
     }
 
     public static void prettyPrint(String s) {
-        printIndent(separator);
+        printIndent(SEPARATOR);
         printIndent(s);
-        printIndent(separator + "\n");
+        printIndent(SEPARATOR + "\n");
     }
 
     public static void prettyPrint(String[] messages) {
-        printIndent(separator);
+        printIndent(SEPARATOR);
         for (String message : messages) printIndent(message);
-        printIndent(separator + "\n");
+        printIndent(SEPARATOR + "\n");
     }
 
     public void greet() {
-        String logo = indent + " ____        _        \n"
-                + indent + "|  _ \\ _   _| | _____ \n"
-                + indent + "| | | | | | | |/ / _ \\\n"
-                + indent + "| |_| | |_| |   <  __/\n"
-                + indent + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println(logo);
-        prettyPrint(openingMessage);
+        System.out.println(LOGO);
+        prettyPrint(OPENING_MESSAGE);
     }
 
     public void sayGoodbye() {
-        prettyPrint(closingMessage);
+        prettyPrint(CLOSING_MESSAGE);
     }
 
     public void displayTasks() {
-        printIndent(separator);
+        printIndent(SEPARATOR);
         if (tasklist.getNumTasks() == 0) {
             printIndent("You have no tasks!");
         } else {
@@ -65,7 +64,7 @@ public class Ui {
                 printIndent(String.format("%d. %s", i+1, tasklist.getTask(i)));
             }
         }
-        printIndent(separator + "\n");
+        printIndent(SEPARATOR + "\n");
     }
 
     public String getInput() {

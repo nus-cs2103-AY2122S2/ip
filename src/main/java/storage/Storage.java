@@ -14,28 +14,28 @@ import tasks.Task;
 
 public class Storage {
 
-    public File directory = new File("data");
-    public Path tasksPath = Paths.get("data", "tasks.txt");
-    public File tasksFile = new File(tasksPath.toString());
+    public File DIRECTORY = new File("data");
+    public Path TASKS_PATH = Paths.get("data", "tasks.txt");
+    public File TASKS_FILE = new File(TASKS_PATH.toString());
 
     public ArrayList<Task> loadTasks() throws DukeException {
 
         ArrayList<Task> allTasks = new ArrayList<>();
 
         // adds directory if it does not exist
-        boolean directoryCreated = directory.mkdir();
+        boolean directoryCreated = DIRECTORY.mkdir();
 
         // creates a new file if it does not exist
         boolean didNotExist;
         try {
-            didNotExist = tasksFile.createNewFile();
+            didNotExist = TASKS_FILE.createNewFile();
         } catch (IOException err) {
             throw new DukeException(err.getMessage());
         }
 
         if (!directoryCreated && !didNotExist) {  // the file existed
             try {
-                Scanner s = new Scanner(tasksFile); // create a Scanner using the File as the source
+                Scanner s = new Scanner(TASKS_FILE); // create a Scanner using the File as the source
                 Task t;
                 while (s.hasNext()) {
                     String someTask = s.nextLine();
@@ -55,7 +55,7 @@ public class Storage {
 
     public void saveTasks(ArrayList<Task> allTasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(tasksPath.toString());
+            FileWriter fw = new FileWriter(TASKS_PATH.toString());
             for (Task t: allTasks) {
                 fw.write(t.exportToString() + "\n");
             }

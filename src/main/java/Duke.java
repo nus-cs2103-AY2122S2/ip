@@ -1,15 +1,14 @@
-import exceptions.DukeException;
 import user.Ui;
 
 public class Duke {
 
     public Ui ui;
 
-    public Duke() throws DukeException {
+    public Duke() {
         ui = new Ui();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.ui.greet();
         String userInput;

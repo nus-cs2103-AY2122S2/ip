@@ -59,8 +59,8 @@ public class Tasklist {
         Task thisTask = allTasks.get(taskNum);
         allTasks.remove(taskNum);
         return new String[] {
-                "Noted. I've removed this task:",
-                thisTask.toString(),
-                String.format("Now you have %d tasks in the list.", allTasks.size())};
+            "Noted. I've removed this task:",
+            thisTask.toString(),
+            String.format("Now you have %d tasks in the list.", allTasks.size())};
     }
 }
