@@ -1,17 +1,9 @@
 import java.util.Arrays;
 import java.util.Scanner;
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
->>>>>>> branch-Level-8
-
-import javax.annotation.processing.FilerException;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -192,13 +184,10 @@ public class Duke {
             System.out.println("Sad to see you leave, come back soon!");
         } catch (DukeException e) {
             System.err.print(e);
-<<<<<<< HEAD
         } catch (IOException e) {
             System.err.print(e);
-=======
         } catch (DateTimeParseException e) {
             System.err.println("Oops! That was not a valid date format, please try again in the format yyyy-mm-dd!");
->>>>>>> branch-Level-8
         }
     }
 

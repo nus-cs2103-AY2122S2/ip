@@ -21,23 +21,21 @@ public class LoadFile {
 
                     Task task;
 
-                    if (str.substring(1, 2).equals("T")) {
+                    if (str.contains("[T]")) {
                         task = new Todo(str.substring(7));
                     }
 
-                    else if (str.substring(1, 2).equals("E")) {
-                        int startIndex = str.indexOf(" [at: ");
-                        int endIndex = startIndex + 6;
+                    else if (str.contains("[E]")) {
+                        int startIndex = str.indexOf(" (at: ");
 
-                        task = new Event(str.substring(7, startIndex), LocalDate.parse(str.substring(endIndex, str.length() - 1)));
+                        task = new Event(str.substring(18, startIndex), LocalDate.parse(str.substring(0, 10)));
                     } else {
-                        int startIndex = str.indexOf(" [by: ");
-                        int endIndex = startIndex + 6;
+                        int startIndex = str.indexOf(" (by: ");
 
-                        task = new Deadline(str.substring(7, startIndex), LocalDate.parse(str.substring(endIndex, str.length() - 1)));
+                        task = new Deadline(str.substring(18, startIndex), LocalDate.parse(str.substring(0, 10)));
                     }
 
-                    if (str.substring(4, 5).equals("X")) {
+                    if (str.contains("[X]")) {
                         task.markAsDone();
                     }
 

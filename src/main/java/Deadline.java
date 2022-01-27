@@ -1,16 +1,12 @@
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-
-    protected LocalDate by;
-
     public Deadline(String description, LocalDate by) {
-        super(description);
-        this.by = by;
+        super(description, by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + this.getStatusIcon() + " " + this.description + " (by: " + Date.toString(this.by) + ")";
+        return "[D]" + this.getStatusIcon() + " " + this.description + " (by: " + Date.toString(this.date) + ")";
     }
 }

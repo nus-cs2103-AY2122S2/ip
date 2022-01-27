@@ -7,7 +7,14 @@ public class ReadFile {
         String s = "";
 
         while (n >= 0) {
-            s += list.get(n).toString() + "\n";
+            String d;
+            if (list.get(n) instanceof Todo) {
+                s += list.get(n).toString() + "\n";
+            } else {
+                d = list.get(n).date.toString();
+                s += d + " " + list.get(n).toString() + "\n";
+            }
+
             n -= 1;
         }
 
