@@ -1,3 +1,7 @@
+package duke;
+
+import duke.util.Constants;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

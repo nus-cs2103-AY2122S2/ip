@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
