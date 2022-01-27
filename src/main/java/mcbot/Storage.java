@@ -1,3 +1,5 @@
+package mcbot;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import mcbot.task.Task;
+import mcbot.task.ToDo;
+import mcbot.task.Deadline;
+import mcbot.task.Event;
+import mcbot.exception.McBotException;
 
 public class Storage {
     String frameLine = "==========================================";
@@ -95,7 +102,7 @@ public class Storage {
         }
     }
 
-    public void appendData(ArrayList<Task> taskList, Task task) {
+    public void appendData(Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(task.toDataString() + "\n");

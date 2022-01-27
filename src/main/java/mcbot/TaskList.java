@@ -1,4 +1,7 @@
+package mcbot;
+
 import java.util.ArrayList;
+import mcbot.task.Task;
 
 public class TaskList {
     

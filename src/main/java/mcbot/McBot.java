@@ -1,7 +1,12 @@
+package mcbot;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import mcbot.exception.McBotException;
+import mcbot.exception.InvalidCommandException;
+import mcbot.task.*;
 
 public class McBot {
     
@@ -66,7 +71,7 @@ public class McBot {
                         } else {
                             ui.markDuplication();
                         }
-                    } catch (ArrayIndexOutOfBoundsException | invalidCommandException e) {
+                    } catch (ArrayIndexOutOfBoundsException | InvalidCommandException e) {
                         ui.markError("missingData");
                     } catch (NumberFormatException e) {
                         ui.markError("notInteger");
@@ -92,7 +97,7 @@ public class McBot {
                         else {
                             ui.unmarkDuplication();
                         }
-                    } catch (ArrayIndexOutOfBoundsException | invalidCommandException e) {
+                    } catch (ArrayIndexOutOfBoundsException | InvalidCommandException e) {
                         ui.markError("missingData");
                     } catch (NumberFormatException e) {
                         ui.markError("notInteger");
@@ -106,9 +111,9 @@ public class McBot {
                         String taskName = parser.getDetails();
                         Task t = new ToDo(taskName);
                         tasks.add(t);
-                        storage.appendData(tasks.getList(), t);
+                        storage.appendData(t);
                         ui.addTodoLine(t, tasks.size());
-                    } catch (invalidCommandException | ArrayIndexOutOfBoundsException e) {
+                    } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
                         ui.taskError("emptyTask");
                     }
                     break;
@@ -118,12 +123,12 @@ public class McBot {
                         String taskName = parser.getDeadlineTask();
                         Task t;
                         if (taskName.isBlank()) {
-                            throw new invalidCommandException("you can't leave your deadline task empty");
+                            throw new InvalidCommandException("you can't leave your deadline task empty");
                         }
                         String dateStr = parser.getDeadlineDate();
                         LocalDate deadlineDate = LocalDate.parse(dateStr, dateFormatter);
                         if (dateStr.isBlank()) {
-                            throw new invalidCommandException("you can't leave your deadline date empty");
+                            throw new InvalidCommandException("you can't leave your deadline date empty");
                         }
                         if (parser.isThereTime()) {
                             String timeStr = parser.getDeadlineTime();
@@ -133,9 +138,9 @@ public class McBot {
                             t = new Deadline(taskName, deadlineDate);
                         }
                         tasks.add(t);
-                        storage.appendData(tasks.getList(), t);
+                        storage.appendData(t);
                         ui.addDeadlineLine(t, tasks.size());
-                    } catch (invalidCommandException e) {
+                    } catch (InvalidCommandException e) {
                         ui.printError(e);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         ui.taskError("deadlineFormat");
@@ -149,12 +154,12 @@ public class McBot {
                         String taskName = parser.getEventTask();
                         Task t;
                         if (taskName.isBlank()) {
-                            throw new invalidCommandException("you can't leave your event task empty");
+                            throw new InvalidCommandException("you can't leave your event task empty");
                         }
                         String dateStr = parser.getEventDate();
                         LocalDate eventDate = LocalDate.parse(dateStr, dateFormatter);
                         if (dateStr.isBlank()) {
-                            throw new invalidCommandException("you can't leave your event date/time empty");
+                            throw new InvalidCommandException("you can't leave your event date/time empty");
                             
                         }
                         if (parser.isThereTime()) {
@@ -165,9 +170,9 @@ public class McBot {
                             t = new Event(taskName, eventDate);
                         }
                         tasks.add(t);
-                        storage.appendData(tasks.getList(), t);
+                        storage.appendData(t);
                         ui.addEventLine(t, tasks.size());
-                    } catch (invalidCommandException e) {
+                    } catch (InvalidCommandException e) {
                         ui.printError(e);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         ui.taskError("eventFormat");
@@ -186,7 +191,7 @@ public class McBot {
                         tasks.remove(num - 1);
                         storage.updateData(tasks.getList());
                         ui.deleteLine(t, tasks.size());
-                    } catch (invalidCommandException | ArrayIndexOutOfBoundsException e) {
+                    } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
                         ui.deleteError("empty");
                     } catch (McBotException e) {
                         ui.printError(e);
@@ -196,7 +201,7 @@ public class McBot {
                     break;
                 }
                 default: {
-                    throw new invalidCommandException("I don't understand a word ye're sayin'");
+                    throw new InvalidCommandException("I don't understand a word ye're sayin'");
                 }
                 }
             } catch (McBotException e) {

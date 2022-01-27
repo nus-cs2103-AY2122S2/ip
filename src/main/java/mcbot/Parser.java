@@ -1,8 +1,7 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+package mcbot;
+
 import java.util.Scanner;
+import mcbot.exception.InvalidCommandException;
 
 public class Parser {
     
@@ -27,10 +26,10 @@ public class Parser {
         sc.close();
     }
 
-    public String getDetails() throws invalidCommandException {
+    public String getDetails() throws InvalidCommandException {
         String details = fullCommand.split(" ", 2)[1];
         if (details.isBlank())
-            throw new invalidCommandException();
+            throw new InvalidCommandException();
         return details;
     }
 

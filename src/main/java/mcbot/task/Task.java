@@ -1,3 +1,5 @@
+package mcbot.task;
+
 public class Task {
     protected String taskName;
     protected boolean isDone;

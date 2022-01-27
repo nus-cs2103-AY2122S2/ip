@@ -1,3 +1,5 @@
+package mcbot.exception;
+
 public class McBotException extends Exception {
 
     public McBotException() {

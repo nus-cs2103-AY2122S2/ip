@@ -1,4 +1,8 @@
+package mcbot;
+
 import java.util.ArrayList;
+import mcbot.task.Task;
+import mcbot.exception.McBotException;
 
 public class Ui {
     private String frameLine = "==========================================";
