@@ -1,23 +1,23 @@
 package bobby.exception;
 
 public class StorageException extends BobbyException {
-    private String errtype;
+    private String errType;
 
     public  StorageException(String message) {
         super(message);
-        errtype = message;
+        errType = message;
     }
 
     @Override
     public String toString() {
-        String error_string;
-        switch(errtype) {
-        case "no_file": error_string = "\tFile not found. Creating file now. (づ｡◕‿‿◕｡)づ";
+        String errorMsg;
+        switch(errType) {
+        case "no_file": errorMsg = "\tFile not found. Creating file now. (づ｡◕‿‿◕｡)づ";
             break;
-        case "empty_file": error_string = "Empty file found! Nothing to import";
+        case "empty_file": errorMsg = "Empty file found! Nothing to import";
             break;
-        default: error_string = "\tSomething went wrong. Couldn't save or load tasks";
+        default: errorMsg = "\tSomething went wrong. Couldn't save or load tasks";
         }
-        return error_string;
+        return errorMsg;
     }
 }

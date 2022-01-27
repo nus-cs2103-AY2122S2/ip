@@ -1,35 +1,35 @@
 package bobby.exception;
 
 public class DeleteException extends BobbyException {
-    private String errtype;
+    private String errType;
 
     public DeleteException(String message) {
         super(message);
-        errtype = message;
+        errType = message;
     }
 
     @Override
     public String toString() {
-        String error_string;
-        switch (errtype) {
+        String errorMsg;
+        switch (errType) {
         case "empty":
-            error_string = "\tDelete which task?";
+            errorMsg = "\tDelete which task?";
             break;
         case "letter":
-            error_string = "\tThat is neither a number nor \"all\"";
+            errorMsg = "\tThat is neither a number nor \"all\"";
             break;
         case "OOB":
-            error_string = "\tNumber too big, count properly!";
+            errorMsg = "\tNumber too big, count properly!";
             break;
         case "negative":
-            error_string = "\tInvalid number man, cannot be 0 or negative";
+            errorMsg = "\tInvalid number man, cannot be 0 or negative";
             break;
         case "list_empty":
-            error_string = "\tList is already empty, nothing to delete";
+            errorMsg = "\tList is already empty, nothing to delete";
             break;
         default:
-            error_string = "\tI cannot understand this..";
+            errorMsg = "\tI cannot understand this..";
         }
-        return error_string;
+        return errorMsg;
     }
 }
