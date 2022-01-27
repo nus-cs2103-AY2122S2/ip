@@ -1,7 +1,7 @@
 package command;
 
 import task.TaskList;
-import utility.Input;
+import utility.UI;
 import utility.Storage;
 
 public class ListCommand extends Command{
@@ -10,8 +10,8 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList task, Input input, Storage storage) {
-        task.printTasks(input);
+    public void execute(TaskList task, UI ui, Storage storage) {
+        task.printTasks(ui);
     }
 
     @Override

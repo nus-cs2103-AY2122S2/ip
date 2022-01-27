@@ -2,7 +2,7 @@ package command;
 
 import exception.DukeException;
 import task.Task;
-import utility.Input;
+import utility.UI;
 import task.TaskList;
 import utility.Storage;
 
@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Input input, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (this.dukeException != null) {
             throw this.dukeException;
         } else if (this.index <= 0 || this.index > tasks.getSize()) {
@@ -40,10 +40,10 @@ public class MarkCommand extends Command {
         Task task = tasks.getByNumber(this.index);
         if (this.isMark) {
             task.setMarked(true);
-            input.print(String.format("I've marked task %d!", this.index));
+            ui.print(String.format("I've marked task %d!", this.index));
         } else {
             task.setMarked(false);
-            input.print(String.format("I've marked task %d!", this.index));
+            ui.print(String.format("I've marked task %d!", this.index));
         }
         storage.save(tasks);
     }

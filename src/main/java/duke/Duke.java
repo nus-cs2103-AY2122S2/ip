@@ -3,42 +3,45 @@ package duke;
 import command.Command;
 import exception.DukeException;
 import task.TaskList;
-import utility.Input;
+import utility.UI;
 import utility.Parser;
 import utility.Storage;
 
 
 public class Duke {
 
-    public Input input;
+    public UI ui;
     public TaskList tasks;
     public Storage storage;
 
     public Duke(String filePath){
-        this.input = new Input();
+        this.ui = new UI();
         this.storage = new Storage(filePath);
 
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            input.printException(e);
+            ui.printException(e);
             tasks = new TaskList();
         }
     }
 
 
     public void run() {
-        this.input.startMessage();
+        this.ui.startMessage();
         boolean bye = false;
 
         while(!bye){
             try {
-                String commandString = input.readLine();
+                String commandString = ui.readLine();
+                ui.showLine();
                 Command command = Parser.parse(commandString);
-                command.execute(this.tasks, this.input, this.storage);
+                command.execute(this.tasks, this.ui, this.storage);
                 bye = command.isExit();
             } catch (DukeException e) {
-                this.input.printException(e);
+                this.ui.printException(e);
+            } finally {
+                ui.showLine();
             }
 
         }

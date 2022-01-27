@@ -1,6 +1,6 @@
 package task;
 
-import utility.Input;
+import utility.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +37,14 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public void printTasks(Input input) {
+    public void printTasks(UI ui) {
         if (tasks.size() == 0) {
             System.out.println("You currently do not have any tasks");
         } else {
-            input.print("These are your tasks: ");
+            ui.print("These are your tasks: ");
             for (int i = 1; i <= this.getSize(); i++) {
                 Task task = this.getByNumber(i);
-                input.print(String.format("%d. %s", i, task.toString()));
+                ui.print(String.format("%d. %s", i, task.toString()));
             }
         }
     }

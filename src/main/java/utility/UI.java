@@ -4,11 +4,11 @@ import exception.DukeException;
 
 import java.util.Scanner;
 
-public class Input {
+public class UI {
 
     Scanner scanner;
 
-    public Input(){
+    public UI(){
         this.scanner = new Scanner(System.in);
     }
 
@@ -26,6 +26,10 @@ public class Input {
 
     public void printException(DukeException e) {
         System.out.println(e.getMessage());
+    }
+
+    public void showLine() {
+        System.out.println("_____________________");
     }
 
 

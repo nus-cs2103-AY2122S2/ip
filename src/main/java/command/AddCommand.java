@@ -2,7 +2,7 @@ package command;
 
 import exception.DukeException;
 import task.*;
-import utility.Input;
+import utility.UI;
 import utility.Storage;
 
 import java.time.LocalDateTime;
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Input input, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if(this.dukeException != null) {
             throw this.dukeException;
         }
@@ -87,8 +87,8 @@ public class AddCommand extends Command {
         }
         tasks.add(t);
 
-        input.print("i added this task: ");
-        input.print(t.toString());
+        ui.print("i added this task: ");
+        ui.print(t.toString());
 
         storage.save(tasks);
     }

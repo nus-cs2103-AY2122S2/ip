@@ -3,7 +3,7 @@ package command;
 import exception.DukeException;
 import task.Task;
 import task.TaskList;
-import utility.Input;
+import utility.UI;
 import utility.Storage;
 
 public class DeleteCommand extends Command {
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Input input, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (this.dukeException != null) {
             throw this.dukeException;
         } else if (this.index <= 0 || this.index > tasks.getSize()) {
@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
         }
 
         Task removedTask = tasks.deleteByNumber(this.index);
-        input.print(String.format("I've deleted task %d!", this.index));
-        input.print(String.format("  %s", removedTask.toString()));
+        ui.print(String.format("I've deleted task %d!", this.index));
+        ui.print(String.format("  %s", removedTask.toString()));
 
         storage.save(tasks);
     }

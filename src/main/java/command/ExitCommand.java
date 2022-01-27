@@ -1,7 +1,7 @@
 package command;
 
 import task.TaskList;
-import utility.Input;
+import utility.UI;
 import utility.Storage;
 
 public class ExitCommand extends Command{
@@ -10,8 +10,8 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Input input, Storage storage) {
-        input.print("Aww. Bye! See you again soon");
+    public void execute(TaskList tasks, UI ui, Storage storage) {
+        ui.print("Aww. Bye! See you again soon");
     }
 
 
