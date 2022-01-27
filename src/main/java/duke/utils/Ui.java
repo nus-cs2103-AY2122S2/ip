@@ -49,6 +49,24 @@ public class Ui {
 
 
     /**
+     * Print the list of tasks that matches
+     * the user's search request
+     *
+     * @param tasks Arraylist of tasks
+     */
+    public static void printSearchList(ArrayList<Task> tasks) {
+
+        if(tasks.size() == 0) {
+            System.out.println("No Matching Tasks Found");
+        } else {
+            System.out.println("The Following Matching Tasks were found: ");
+            for (int x = 0; x < tasks.size(); x++) {
+                System.out.println((x + 1) + ". " + tasks.get(x).toString());
+            }
+        }
+    }
+
+    /**
      * Print the addition of a new task to the list
      *
      * @param curr Task that has been added to the list
@@ -149,7 +167,7 @@ public class Ui {
      *
      * @param e Exception received
      */
-    public static void showError(DukeException e){
+    public static void showError(DukeException e) {
         System.out.println(e);
     }
 

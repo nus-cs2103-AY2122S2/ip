@@ -30,7 +30,7 @@ public class TaskList {
      *
      * @param saved List of tasks from hard disk
      */
-    public TaskList(ArrayList<Task> saved){
+    public TaskList(ArrayList<Task> saved) {
         this.tasks = saved;
     }
 
@@ -111,7 +111,7 @@ public class TaskList {
      * Save the list of tasks to
      * the hard disk
      */
-    public void saveListToStorage(){
+    public void saveListToStorage() {
         Storage.saveListToDisk(tasks);
     }
 
@@ -147,7 +147,7 @@ public class TaskList {
     /**
      * Print the list of tasks
      */
-    public void printList(){
+    public void printList() {
         Ui.printList(tasks);
     }
 
@@ -157,8 +157,30 @@ public class TaskList {
      *
      * @return the number of tasks
      */
-    public int getSize(){
+    public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Print list of tasks that
+     * contains user's keyword
+     *
+     * @param desc keyword to search for
+     */
+    public void findEvent(String desc) throws DukeException.DukeNoTaskGivenException {
+        ArrayList<Task> matches = new ArrayList<>();
+
+        if (desc.replace(" ", "").equals("")){
+            throw new DukeException.DukeNoTaskGivenException();
+        }
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(desc)) {
+                matches.add(tasks.get(i));
+            }
+        }
+
+        Ui.printSearchList(matches);
     }
 
 

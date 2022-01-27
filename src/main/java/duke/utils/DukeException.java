@@ -40,7 +40,7 @@ public class DukeException extends Exception {
          */
         @Override
         public String toString() {
-            return super.toString() + "PLEASE SPECIFY A TASK";
+            return super.toString() + "PLEASE SPECIFY A TASK TO ADD/SEARCH";
         }
     }
 

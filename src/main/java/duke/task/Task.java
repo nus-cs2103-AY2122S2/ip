@@ -75,4 +75,13 @@ public abstract class Task implements Serializable {
         return this.isFinished;
     }
 
+    /**
+     * Return description of this task
+     *
+     * @return String description of this Task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
 }

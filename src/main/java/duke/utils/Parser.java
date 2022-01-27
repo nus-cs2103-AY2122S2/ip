@@ -34,7 +34,7 @@ public class Parser {
             try {
                 int toMark = Integer.parseInt(st.nextToken());
                 tl.markTaskAsCompleted(toMark);
-            } catch (DukeException | NumberFormatException e){
+            } catch (DukeException | NumberFormatException e) {
                 throw new DukeException.DukeInvalidNumberException();
             }
 
@@ -55,7 +55,7 @@ public class Parser {
 
             try {
                 tl.addToDo(st.nextToken(""));
-            } catch (NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 throw new DukeException.DukeNoTaskGivenException();
             }
 
@@ -102,12 +102,22 @@ public class Parser {
 
             break;
 
-            case "bye":
+        case "find":
 
-                break;
+            try {
+                tl.findEvent(st.nextToken(""));
+            } catch (NoSuchElementException e) {
+                throw new DukeException.DukeNoTaskGivenException();
+            }
 
-            default:
-                throw new DukeException.DukeInvalidCommandException();
+            break;
+
+        case "bye":
+
+            break;
+
+        default:
+            throw new DukeException.DukeInvalidCommandException();
         }
     }
 }

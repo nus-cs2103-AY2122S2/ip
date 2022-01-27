@@ -45,7 +45,7 @@ public class Duke {
 
             try {
                 Parser.parse(ui.readCommand(), tl);
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 Ui.showError(e);
             }
 
