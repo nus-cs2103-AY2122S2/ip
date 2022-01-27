@@ -41,6 +41,8 @@ public class Parser {
             return tasks.addTask(command, argument);
         case "delete":
             return tasks.deleteTask(Integer.parseInt(argument));
+        case "find":
+            return tasks.findTasks(argument);
         default:
             throw new PukeException("Are you sure you're making sense?");
         }

@@ -122,6 +122,34 @@ public class TaskList {
                 + (this.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.";
     }
 
+    /**
+     * Returns a list of task(s) with name containing the specified keyword.
+     *
+     * @param keyword Keyword to match in the task name.
+     * @return List of matching tasks.
+     * @throws PukeException If keyword is not provided.
+     */
+    public String findTasks(String keyword) throws PukeException {
+        if (keyword == null) {
+            throw new PukeException("I'll need a keyword to find..");
+        }
+
+        String result = "";
+        int i = 1;
+        for (Task t : tasks) {
+            if (t.containKeyword(keyword)) {
+                result += "\n" + i + "." + t;
+                i++;
+            }
+        }
+
+        if (result == "") {
+            return "There is no matching task for '" + keyword + "'";
+        } else {
+            return "Here are the matching tasks for you:" + result;
+        }
+    }
+
     public String generateStorageData() {
         String result = "";
 
