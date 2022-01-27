@@ -1,5 +1,8 @@
 package main.java.duke.task;
 
+import main.java.duke.dukeexceptions.DukeDateExceptions;
+import main.java.duke.dukeexceptions.DukeException;
+
 import java.time.LocalDateTime;
 
 /**
@@ -17,10 +20,14 @@ public class Event extends Task {
    * @param name name of the event.
    * @param dateInfo extra dateInfo of the event.
    */
-  public Event(String name, String dateInfo) {
+  public Event(String name, String dateInfo) throws DukeException {
     super(name);
     this.info = dateInfo;
-    this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);
+    try {
+      this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);
+    } catch (Exception e) {
+      throw new DukeDateExceptions("");
+    }
   }
 
   public Event(String name, boolean marked, String dateInfo) {

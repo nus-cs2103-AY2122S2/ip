@@ -10,7 +10,6 @@ import main.java.duke.task.ToDo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
@@ -50,7 +49,6 @@ public class Storage {
 
   static private Task storageToTask(String taskString) {
     String[] commandSplit = taskString.split(" \\| ");
-    System.out.println(Arrays.toString(commandSplit));
     switch (commandSplit[0]) {
       case "T":
         return new ToDo(commandSplit[2], storageToMark(commandSplit[1]));
