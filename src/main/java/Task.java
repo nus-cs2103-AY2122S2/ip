@@ -24,9 +24,9 @@ public class Task {
     public String toString() {
         String out = "";
         if (status) {
-            out = "[X] " + details;
+            out = " | 1 | " + details;
         } else {
-            out = "[ ] " + details;
+            out = " | 0 | " + details;
         }
         return out;
     }
