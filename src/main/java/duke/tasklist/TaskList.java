@@ -91,4 +91,20 @@ public class TaskList {
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
+
+    /**
+     * Returns tasks which match the given keywords in proper format.
+     *
+     * @param wordsToCheck The array of keywords that the task must contain.
+     * @return A String of tasks.
+     */
+    public String checkWordsInTask(String[] wordsToCheck) {
+        StringBuilder s = new StringBuilder();
+        for (Task t: this.tasks) {
+            if (t.checkDescription(wordsToCheck)) {
+                s.append(t).append("\n");
+            }
+        }
+        return s.length() == 0 ? "Could not find anything related to that!" : s.toString();
+    }
 }

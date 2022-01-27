@@ -22,6 +22,23 @@ public class Task {
     }
 
     /**
+     * Verifies if a task description contains all keywords supplied.
+     *
+     * @param wordsToCheck Array of keywords.
+     * @return Boolean of whether task matches all keywords.
+     */
+    public boolean checkDescription(String[] wordsToCheck) {
+        boolean isIn = true;
+        for (String s: wordsToCheck) {
+            if (!this.description.contains(s.trim())) {
+                isIn = false;
+                break;
+            }
+        }
+        return isIn;
+    }
+
+    /**
      * Returns a cross if task has been completed.
      *
      * @return String of completion status.
@@ -50,7 +67,7 @@ public class Task {
      * @return String of task in data file storage format.
      */
     public String writeToFile() {
-        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description;
+        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description + "\n";
     }
 
     /**

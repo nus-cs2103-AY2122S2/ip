@@ -1,1 +1,2 @@
- E | 0 | something | 2022-10-10 | 12:00 | 12:30
+ T | 0 | something
+ T | 0 | something 1

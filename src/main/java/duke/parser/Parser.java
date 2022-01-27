@@ -153,6 +153,18 @@ public class Parser {
                 newTask, tl.getSize());
     }
 
+    /**
+     * Finds tasks in the task list which match keywords in the message body.
+     *
+     * @param msg The message body.
+     * @param tl The TaskList containing tasks.
+     * @return A String response of matching tasks found.
+     */
+    public String processFindMsg(String msg, TaskList tl) {
+        // Assume that at this point there are some text
+        String[] findWords = msg.split(" ");
+        return "Here's what I could find!\n" + tl.checkWordsInTask(findWords);
+    }
 
     /**
      * Carries out various operations if valid message is sent by the user.
@@ -220,6 +232,9 @@ public class Parser {
                 sge.updateFile(toDelete, tl, "delete");
                 return String.format("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
                         toDelete, tl.getSize());
+                // Fallthrough
+            case "find":
+                return processFindMsg(msg.substring(4), tl);
                 // Fallthrough
             default:
                 // Some message which does not start with a keyword
