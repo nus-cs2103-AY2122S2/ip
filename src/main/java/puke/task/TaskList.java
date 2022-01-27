@@ -22,9 +22,9 @@ public class TaskList {
         return taskNo >= 1 && taskNo <= this.getNoOfTasks();
     }
 
-    public String listTasks() {
+    public String listTasks() throws PukeException {
         if (this.getNoOfTasks() == 0) {
-            return "You have no task right now!";
+            throw new PukeException("You have no task right now!");
         }
 
         String result = "Here are the tasks you have:";
