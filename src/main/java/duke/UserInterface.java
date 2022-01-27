@@ -27,6 +27,11 @@ public class UserInterface {
         this.memory = memory;
     }
 
+    /**
+     * Runs the main loop for UserInterface.
+     * Scans user input through CLI and checks for syntax.
+     * Runs appropriate methods in Memory.
+     */
     public void uiLoop() {
         scanner = new Scanner(System.in);
 

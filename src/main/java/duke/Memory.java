@@ -35,6 +35,12 @@ public class Memory {
         this.file = new File("data");
     }
 
+    /**
+     * Returns stored size of taskMem, not actual size.
+     * Although, they should be the same.
+     *
+     * @return Stored size of taskMem.
+     */
     public int getSize() {
         return size;
     }
@@ -80,7 +86,7 @@ public class Memory {
     }
 
     /**
-     * Adds a Task to memory.
+     * Adds a Task to Memory.
      *
      * @param name The name of the Task to be made.
      */
@@ -92,7 +98,7 @@ public class Memory {
     }
 
     /**
-     * Adds a Deadline to memory.
+     * Adds a Deadline to Memory.
      *
      * @param name The name of the Deadline to be made.
      * @param time The due time of the Deadline.
@@ -110,7 +116,7 @@ public class Memory {
     }
 
     /**
-     * Adds an Event to memory.
+     * Adds an Event to Memory.
      *
      * @param name The name of the Event to be made.
      * @param time The time of the Event.
@@ -162,7 +168,7 @@ public class Memory {
     }
 
     /**
-     * Removes a Task from memory.
+     * Removes a Task from Memory.
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
      */
@@ -180,7 +186,7 @@ public class Memory {
     }
 
     /**
-     * Sets up the data file and parser.
+     * Sets up the data file and Parser.
      */
     public void setup() {
 
