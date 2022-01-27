@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 public class Ui {
     BufferedReader io;
 
+    /**
+     * Constructor for Ui object.
+     */
     public Ui() {
         this.io = new BufferedReader(new InputStreamReader(System.in));
     }

@@ -7,6 +7,10 @@ public class Task {
     private final String description;     // Task.Task description
     private boolean isDone;
 
+    /**
+     * Constructor for the Task object
+     * @param e String input of the task description
+     */
     public Task(String e) {
         this.description = e;
     }

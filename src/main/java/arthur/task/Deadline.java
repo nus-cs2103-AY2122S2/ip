@@ -10,6 +10,11 @@ public class Deadline extends Task {
     private final String by;
     private final DateTime timings;
 
+    /**
+     * Constructor for deadline
+     * @param e String to be created as task
+     * @param by String with the necessary timings
+     */
     public Deadline(String e, String by) {
         super(e);
         timings = new DateTime(by);
