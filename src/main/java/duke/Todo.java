@@ -1,5 +1,7 @@
 package duke;
+
 public class Todo extends Task {
+
     char type;
 
     public Todo(String description) {

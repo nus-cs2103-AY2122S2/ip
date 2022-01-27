@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+
     public static void run() throws IOException {
         startGreeting();
         Scanner sc = new Scanner(System.in);
