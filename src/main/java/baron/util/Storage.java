@@ -2,11 +2,11 @@ package baron.util;
 
 import baron.exceptions.BaronException;
 import baron.message.Message;
+import baron.tasks.Deadline;
+import baron.tasks.Event;
 import baron.tasks.Task;
 import baron.tasks.TaskType;
 import baron.tasks.ToDo;
-import baron.tasks.Deadline;
-import baron.tasks.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
