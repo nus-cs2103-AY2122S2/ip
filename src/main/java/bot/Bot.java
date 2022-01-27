@@ -3,7 +3,8 @@ package bot;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
+
+import java.util.Optional;
 import java.util.Scanner;
 
 import tasks.Deadline;
@@ -11,13 +12,20 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import taskservice.TaskService;
+import taskservice.TaskServiceException;
+
 public class Bot {
     private static final String INDENTATION = "    ";
     private static final String DIVIDER = "____________________________________________________________";
     private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final TaskService taskService;
+
+    public Bot(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     public void start(InputStream inputStream, OutputStream outputStream) throws Exception {
         final Scanner input = new Scanner(inputStream);
@@ -42,8 +50,9 @@ public class Bot {
     }
 
     private String process(String query) throws BotException {
-        final String[] tokens = query.split(" ", 2);
-        switch (tokens[0]) {
+        try {
+            final String[] tokens = query.split(" ", 2);
+            switch (tokens[0]) {
             case "list":
                 return this.getTaskList();
             case "mark":
@@ -62,6 +71,9 @@ public class Bot {
                 return this.deleteTask(Integer.parseInt(tokens[1]) - 1);
             default:
                 throw new BotException("I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (TaskServiceException ex) {
+            throw new BotException(ex.getMessage());
         }
     }
 
@@ -77,39 +89,59 @@ public class Bot {
         return this.constructResponse(Bot.FAREWELL);
     }
 
-    private String getTaskList() {
-        final String taskList = "Here are the tasks in your list:\n" + this.constructTaskList(this.tasks);
+    private String getTaskList() throws TaskServiceException {
+        final String taskList = "Here are the tasks in your list:\n"
+                + this.constructTaskList(this.taskService.get());
         return this.constructResponse(taskList);
     }
 
-    private String addTask(Task t) throws BotException {
-        if (t.getDescription().equals("")) {
+    private String addTask(Task newTask) throws BotException, TaskServiceException {
+        if (newTask.getDescription().equals("")) {
             throw new BotException("The description of a task cannot be empty.");
         }
-        this.tasks.add(t);
+        this.taskService.create(newTask);
         final String response =
-                "Got it. I've added this task:\n  " + t + "\nNow you have " + this.tasks.size() + " tasks in the list.";
+                "Got it. I've added this task:\n  " + newTask
+                        + "\nNow you have " + this.taskService.getNumberOfTasks() + " tasks in the list.";
         return this.constructResponse(response);
     }
 
-    private String markTask(int taskId) {
-        final Task t = this.tasks.get(taskId);
-        t.markAsDone();
-        final String response = "Nice! I've marked this task as done:\n  " + t;
+    private String markTask(int taskId) throws BotException, TaskServiceException {
+        final Optional<Task> result = this.taskService.getById(taskId);
+        if (result.isEmpty()) {
+            throw new BotException("Task to mark doesn't exist");
+        }
+
+        result.get().markAsDone();
+        this.taskService.update(taskId, result.get());
+
+        final String response = "Nice! I've marked this task as done:\n  " + result.get();
         return this.constructResponse(response);
     }
 
-    private String unmarkTask(int taskId) {
-        final Task t = this.tasks.get(taskId);
-        t.markAsUndone();
-        final String response = "OK, I've marked this task as not done yet:\n  " + t;
+    private String unmarkTask(int taskId) throws BotException, TaskServiceException {
+        final Optional<Task> result = this.taskService.getById(taskId);
+        if (result.isEmpty()) {
+            throw new BotException("Task to unmark doesn't exist");
+        }
+
+        result.get().markAsUndone();
+        this.taskService.update(taskId, result.get());
+
+        final String response = "OK, I've marked this task as not done yet:\n  " + result.get();
         return this.constructResponse(response);
     }
 
-    private String deleteTask(int taskId) {
-        final String response = "Noted. I've removed this task:\n  " + this.tasks.get(taskId) + "\nNow you have " +
-                (this.tasks.size() - 1) + " tasks in the list.";
-        this.tasks.remove(taskId);
+    private String deleteTask(int taskId) throws BotException, TaskServiceException {
+        final Optional<Task> result = this.taskService.getById(taskId);
+        if (result.isEmpty()) {
+            throw new BotException("Task to remove doesn't exist");
+        }
+
+        this.taskService.delete(taskId);
+
+        final String response = "Noted. I've removed this task:\n  " + result.get()
+                + "\nNow you have " + this.taskService.getNumberOfTasks() + " tasks in the list.";
         return this.constructResponse(response);
     }
 
@@ -120,13 +152,13 @@ public class Bot {
         return divider + response + divider;
     }
 
-    private String constructTaskList(ArrayList<Task> tasks) {
+    private String constructTaskList(Task[] tasks) {
         String taskList = "";
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.length; i++) {
             if (i > 0) {
                 taskList += "\n";
             }
-            taskList += (i + 1) + "." + tasks.get(i);
+            taskList += (i + 1) + "." + tasks[i];
         }
         return taskList;
     }
