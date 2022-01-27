@@ -3,6 +3,9 @@ package parser;
 import command.*;
 import exception.DukeException;
 
+/**
+ * Enum to distinguish commands.
+ */
 public class Parser {
     public enum Commands {
         TODO,
@@ -15,6 +18,14 @@ public class Parser {
         BYE;
     }
 
+    /**
+     * Processes a raw String command and decides the command.
+     * If an error is detected, Duke exception is thrown.
+     *
+     * @param fullCommand Raw String command
+     * @return Command to be executed
+     * @throws DukeException If an error occurs when processing a command
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String response = fullCommand.trim();
         if (response.equals("")) {
@@ -64,6 +75,13 @@ public class Parser {
         return new IncorrectCommand();
     }
 
+    /**
+     * Removes a word from a String of words.
+     *
+     * @param response String of text to remove a word from
+     * @param word Word to be removed
+     * @return A substring that removes a specific word from a string of text
+     */
     public static String removeSubString(String response, String word) {
         return response.replace(word, "");
     }

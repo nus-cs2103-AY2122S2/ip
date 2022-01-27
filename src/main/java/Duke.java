@@ -11,6 +11,11 @@ public class Duke extends Exception {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Starts an instance of the Duke bot.
+     *
+     * @param filePath location of the chat history file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +27,11 @@ public class Duke extends Exception {
         }
     }
 
+    /**
+     * Run the instance of the Duke bot.
+     * Acts as the start point which encapsulates
+     * the program logic.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -40,6 +50,11 @@ public class Duke extends Exception {
         }
     }
 
+    /**
+     * Start point of the project
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

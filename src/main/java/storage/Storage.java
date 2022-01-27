@@ -14,14 +14,31 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Reads and Stores user tasks.
+ * Facilitates caching feature by storing a file into the specified file path.
+ */
 public class Storage {
     protected String filePath;
     protected ArrayList<Task> tasks;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath File path to read/write.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the information from a file indicated from the file path.
+     * If an error is detected, throws Duke exception to indicate
+     * there was an issue processing the cached data.
+     *
+     * @return An ArrayList of tasks
+     * @throws DukeException If detected file or File input stream is corrupted
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             FileInputStream fis = new FileInputStream(this.filePath);
@@ -46,6 +63,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the information from a file indicated from the file path.
+     * If an error is detected, throws Duke exception to indicate
+     * there was an issue processing the cached data.
+     *
+     * @throws DukeException If unable to detect file
+     */
     public void store(TaskList tasks) throws DukeException {
         try {
             FileOutputStream fos = new FileOutputStream(this.filePath);
