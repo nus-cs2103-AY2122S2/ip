@@ -7,12 +7,19 @@ import duke.manager.Parser;
 import duke.exception.DukeException;
 import duke.command.Command;
 
+/**
+ * Represents Duke the assistant.
+ */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Constructor for storing the filepath of this instance of Duke.
+     * @param filePath The relative filepath of the save file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,10 +32,17 @@ public class Duke {
         }
     }
 
+    /**
+     * The main function of the program.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs Duke the assistant until an exit command is issued.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

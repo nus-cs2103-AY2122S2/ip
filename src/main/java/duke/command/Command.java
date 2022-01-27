@@ -5,13 +5,24 @@ import duke.manager.TaskList;
 import duke.manager.Storage;
 import duke.exception.DukeException;
 
+/**
+ * Represents a general command that can be executed.
+ */
 public abstract class Command {
 
-    public Command() {
+    /**
+     * Executes the command by utilising the parameters in the stated in the overriden method.
+     *
+     * @param taskList A TaskList that stores the tasks.
+     * @param ui An Ui object to handle user interaction.
+     * @param storage A Storage object to handle saving of data.
+     * @throws DukeException If there is an issue saving the tasks.
+     */
+    public abstract void execute(TaskList taskList,Ui ui, Storage storage) throws DukeException;
 
-    }
-
-    public abstract void execute(TaskList tasks,Ui ui, Storage storage) throws DukeException;
-
+    /**
+     * Returns true if it is an exit command and false otherwise.
+     * @return a boolean.
+     */
     public abstract boolean isExit();
 }
