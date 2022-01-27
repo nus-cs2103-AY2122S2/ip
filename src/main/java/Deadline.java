@@ -1,11 +1,27 @@
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDate by;
 
     Deadline(String name, String by) {
         super(name);
-        this.by = by;
+        if (dateValidator(by)) {
+            this.by = LocalDate.parse(by);
+        } else {
+            this.by = LocalDate.now();
+        }
+    }
+
+    private Boolean dateValidator(String date) {
+        try {
+            LocalDate.parse(date);
+        } catch(DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     public static Deadline of(String[] description) throws InvalidArgumentException {
@@ -20,6 +36,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]" + super.toString() + "(by: " + by + ")");
+        return String.format("[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")");
     }
 }
