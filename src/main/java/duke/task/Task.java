@@ -64,6 +64,12 @@ public class Task {
         return Integer.toString(counter);
     }
 
+    /**
+     * Return an Integer array containing the task id of the tasks containing the keyword.
+     *
+     * @param keyword the keyword user want to find
+     * @return
+     */
     public static Integer[] findTask(String keyword) {
         int arrayLength = listOfTask.size();
         Task[] tempArray = Task.getTaskList();
