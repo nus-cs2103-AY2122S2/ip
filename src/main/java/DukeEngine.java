@@ -10,14 +10,12 @@ public class DukeEngine {
         try {
             itemList = Storage.readSaveFile();
         } catch (DukeException e) {
-            System.out.println(
-                chatBox("File is corrupted and Duke is unable to restore data from previous sessions.\n" 
-                        + "Resetting contents of save-file."));
+            Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
             itemList = new ArrayList<>();
         }
         
         isPolling = true;
-        System.out.println(chatBox(greetingMessage()));
+        Ui.printMessage(greetingMessage());
     }
 
     public void inputHandler(String input) {
@@ -66,16 +64,15 @@ public class DukeEngine {
                 break;
 
             default:
-                replyMessage = "OoPs! I don't know what that means :P";
+                replyMessage = Ui.UNKNOWN_COMMAND_MESSAGE;
             }
         } catch (DukeException e) {
             replyMessage = e.getMessage();
         } catch (IOException ioException) {
-            System.out.println(ioException);
-            replyMessage = "Something went wrong with the hard disk!";
+            replyMessage = Ui.mergeMessages(ioException.toString(), Ui.READ_WRITE_ERROR_MESSAGE);
         }
 
-        System.out.println(chatBox(replyMessage));
+        Ui.printMessage(replyMessage);
     }
 
     public Task createTask(String command, String commandDetails) throws DukeException{
@@ -175,19 +172,4 @@ public class DukeEngine {
         if (itemNumber <= 0 || itemNumber > itemList.size()) throw new DukeException(
             "Please specify a valid item number");
     }
-
-    //wraps a given text in a box to be printed
-    public String chatBox(String givenText) {
-        StringBuilder box = new StringBuilder();
-        box.append("----------------------------------------\n");
-        box.append(givenText);
-
-        //add a newline after givenText if it does not have one
-        if (givenText.charAt(givenText.length() - 1) != '\n') box.append("\n");
-
-        box.append("----------------------------------------\n");
-
-        return box.toString();
-    }
-
 }
