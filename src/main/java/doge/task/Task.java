@@ -30,6 +30,10 @@ public class Task {
 		return this.description;
 	}
 
+	public void setDescription(String d) {
+		this.description = d;
+	}
+
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}

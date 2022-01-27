@@ -25,9 +25,9 @@ public class DeadlineCommand extends Command {
             throw new DeadlineException("Where is the END DATE?");
         } else {
             LocalDateTime dateTime = Doge.getDateTime(curr[1].trim());
+            this.task.setDescription(curr[0].trim());
             this.task.setDateTime(dateTime);
             tasks.addTask(this.task);
-            ui.respond(this);
         }
     }
 

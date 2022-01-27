@@ -25,6 +25,7 @@ public class EventCommand extends Command {
             throw new EventException("Where is the END DATE?");
         } else {
             LocalDateTime dateTime = Doge.getDateTime(curr[1].trim());
+            this.task.setDescription(curr[0].trim());
             this.task.setDateTime(dateTime);
             tasks.addTask(this.task);
         }
