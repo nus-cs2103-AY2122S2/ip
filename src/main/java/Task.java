@@ -1,4 +1,11 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 abstract class Task {
+    protected static DateTimeFormatter initFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     protected String taskName;
     protected boolean done;
 
@@ -21,7 +28,7 @@ final class ToDo extends Task {
     ToDo(String taskName) {
         super(taskName);
     }
-    
+
     @Override
     public String toString() {
         String tag = "[T]";
@@ -31,35 +38,45 @@ final class ToDo extends Task {
 }
 
 final class Deadline extends Task {
-    String deadline;
+    LocalDateTime deadline;
 
-    Deadline(String taskName, String deadline) {
+    Deadline(String taskName, String deadline) throws InvalidDate {
         super(taskName);
-        this.deadline = deadline;
+        try {
+            this.deadline = LocalDateTime.parse(deadline, initFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDate();
+        }
+
     }
-    
+
     @Override
     public String toString() {
         String tag = "[D]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String deadline = "(by:" + this.deadline + ")";
+        String deadline = "(by: " + this.deadline.format(formatter) + ")";
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 }
 
 final class Event extends Task {
-    String eventDate;
+    LocalDateTime eventDate;
 
-    Event(String taskName, String eventDate) {
+    Event(String taskName, String eventDate) throws InvalidDate {
         super(taskName);
-        this.eventDate = eventDate;
+        try {
+            this.eventDate = LocalDateTime.parse(eventDate, initFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDate();
+        }
+
     }
-    
+
     @Override
     public String toString() {
         String tag = "[E]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String deadline = "(at:" + this.eventDate + ")";
-        return tag + doneIndicator + " " + this.taskName + deadline;
+        String eventDate = "(at: " + this.eventDate.format(formatter) + ")";
+        return tag + doneIndicator + " " + this.taskName + eventDate;
     }
 }

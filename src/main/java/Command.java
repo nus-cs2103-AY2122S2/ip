@@ -27,7 +27,7 @@ abstract class Command {
                 }
                 System.out.println("Alright! It's done:");
                 System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
-            }  
+            }
         },
         UNMARK {
             @Override
@@ -60,13 +60,13 @@ abstract class Command {
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("dateline");
-                int index = parameter.indexOf("/by");
+                int index = parameter.indexOf("/by ");
                 if (index < 0)
                     throw EmptyDate.createEmptyDate("dateline");
                 String task = parameter.substring(0, index);
                 if (task.isBlank())
                     throw EmptyTask.createEmptyTask("dateline");
-                String date = parameter.substring(index + 3, parameter.length());
+                String date = parameter.substring(index + 4, parameter.length());
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("dateline");
                 Task deadline = new Deadline(task, date);
@@ -81,13 +81,13 @@ abstract class Command {
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("event");
-                int index = parameter.indexOf("/at");
+                int index = parameter.indexOf("/at ");
                 if (index < 0)
                     throw EmptyDate.createEmptyDate("event");
                 String task = parameter.substring(0, index);
                 if (task.isBlank())
                     throw EmptyTask.createEmptyTask("event");
-                String date = parameter.substring(index + 3, parameter.length());
+                String date = parameter.substring(index + 4, parameter.length());
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("event");
                 Task event = new Event(task, date);
@@ -95,7 +95,7 @@ abstract class Command {
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(event.toString());
                 taskList.printNoTasks();
-            }  
+            }
         },
         DELETE {
             @Override
@@ -111,9 +111,9 @@ abstract class Command {
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
-                
+
             }
-        };
+        },;
 
         public abstract void run(String parameter, TaskList taskList) throws DukeExceptions;
     }
@@ -135,6 +135,6 @@ abstract class Command {
         } catch (IllegalArgumentException e) {
             throw InvalidCommand.createInvalidCommand(command);
         }
-        
+
     }
 }

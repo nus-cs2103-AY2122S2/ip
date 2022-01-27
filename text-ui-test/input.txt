@@ -1,14 +1,14 @@
 some random command
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 2/2/2022 1200
+event project meeting /at 30/1/2022 1000
 todo join sports club
 todo borrow book
 list
-deadline return book /by Sundy
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
-event CS2103 finals /at 2/1/2022
+deadline Capstone Project Submission /by 12/2/2022 2359
+event IU Concert /at 5/5/2022 2000
+deadline do homework /by 31/1/2022 1800
+event CS2103 finals /at 2/1/2022 1200
 list
 todo
 deadline

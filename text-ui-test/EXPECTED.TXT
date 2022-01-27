@@ -7,10 +7,10 @@ Alright! Added that to the list:
 [T][ ] read book
 Now you have 1 tasks in the list.
 Alright! Added that to the list: 
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: 02 Feb 2022 12:00 PM)
 Now you have 2 tasks in the list.
 Alright! Added that to the list: 
-[E][ ] project meeting (at: Aug 6th 2-4pm)
+[E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 Now you have 3 tasks in the list.
 Alright! Added that to the list: 
 [T][ ] join sports club
@@ -20,32 +20,32 @@ Alright! Added that to the list:
 Now you have 5 tasks in the list.
 Here you go sir:
 1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
 Alright! Added that to the list: 
-[D][ ] return book (by: Sundy)
+[D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
 Now you have 6 tasks in the list.
 Alright! Added that to the list: 
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 Now you have 7 tasks in the list.
 Alright! Added that to the list: 
-[D][ ] do homework (by: no idea :-p)
+[D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 Now you have 8 tasks in the list.
 Alright! Added that to the list: 
-[E][ ] CS2103 finals (at: 2/1/2022)
+[E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Now you have 9 tasks in the list.
 Here you go sir:
 1. [T][ ] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sundy)
-7. [E][ ] project meeting (at: Mon 2-4pm)
-8. [D][ ] do homework (by: no idea :-p)
-9. [E][ ] CS2103 finals (at: 2/1/2022)
+6. [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
+7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
+8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
+9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Error: Are you tryng to add something to todo
 Error: Are you tryng to add something to dateline
 Error: Are you tryng to add something to event
@@ -57,38 +57,38 @@ Alright! It's done:
 [T][X] read book
 Here you go sir:
 1. [T][X] read book
-2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sundy)
-7. [E][ ] project meeting (at: Mon 2-4pm)
-8. [D][ ] do homework (by: no idea :-p)
-9. [E][ ] CS2103 finals (at: 2/1/2022)
+6. [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
+7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
+8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
+9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Alright! It's done:
-[D][X] return book (by: June 6th)
+[D][X] return book (by: 02 Feb 2022 12:00 PM)
 Here you go sir:
 1. [T][X] read book
-2. [D][X] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sundy)
-7. [E][ ] project meeting (at: Mon 2-4pm)
-8. [D][ ] do homework (by: no idea :-p)
-9. [E][ ] CS2103 finals (at: 2/1/2022)
+6. [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
+7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
+8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
+9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Alright! It's done:
 [T][ ] read book
 Here you go sir:
 1. [T][ ] read book
-2. [D][X] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-6. [D][ ] return book (by: Sundy)
-7. [E][ ] project meeting (at: Mon 2-4pm)
-8. [D][ ] do homework (by: no idea :-p)
-9. [E][ ] CS2103 finals (at: 2/1/2022)
+6. [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
+7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
+8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
+9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Error: Index is out of bond!
 Error: Mark needs a number
 Error: Unmark needs a number
@@ -98,12 +98,12 @@ Alright, I've deleted this from the list:
 Now you have 8 tasks in the list.
 Here you go sir:
 1. [T][ ] read book
-2. [D][X] return book (by: June 6th)
-3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
+3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
-5. [D][ ] return book (by: Sundy)
-6. [E][ ] project meeting (at: Mon 2-4pm)
-7. [D][ ] do homework (by: no idea :-p)
-8. [E][ ] CS2103 finals (at: 2/1/2022)
+5. [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
+6. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
+7. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
+8. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Error: Index is out of bond!
 Arrivederci!

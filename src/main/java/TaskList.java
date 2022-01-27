@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 class TaskList {
     protected ArrayList<Task> taskList;
 
@@ -12,7 +13,7 @@ class TaskList {
 
     void addTask(Task item) {
         taskList.add(item);
-    } 
+    }
 
     void printTasks() {
         for (int index = 0; index < this.taskList.size(); index++) {
