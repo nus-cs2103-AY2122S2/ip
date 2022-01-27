@@ -15,7 +15,6 @@ public class Parser {
 
     public void readFullCommand() {
         fullCommand = sc.nextLine();
-        //return fullCommand;
     }
     
     public String getKeyCommand() {
