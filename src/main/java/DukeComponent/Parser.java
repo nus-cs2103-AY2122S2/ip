@@ -3,15 +3,15 @@ package DukeComponent;
 import exceptions.*;
 
 public class Parser {
-    String userInput;
+    String input;
 
     public Parser(String userInput) throws TaskException {
         checkUserInput(userInput);
-        this.userInput = userInput;
+        this.input = userInput;
     }
 
     public void executeCommand(TaskList tasks) {
-        Command c = new Command(userInput, tasks);
+        Command c = new Command(input, tasks);
         c.execute();
     }
 
