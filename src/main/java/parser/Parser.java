@@ -1,6 +1,7 @@
 package parser;
 
 import command.*;
+import exception.DukeException;
 
 public class Parser {
     public enum Commands {
@@ -14,7 +15,7 @@ public class Parser {
         BYE;
     }
 
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws DukeException {
         String response = fullCommand.trim();
         if (response.equals("")) {
             return new IncorrectCommand();
@@ -28,11 +29,19 @@ public class Parser {
                     case TODO:
                         return new TodoCommand(removeSubString(response, "todo "));
                     case DEADLINE:
-                        secondSplit = response.split(" /by ");
-                        return new DeadlineCommand(removeSubString(response, "deadline "), secondSplit[1]);
+                        try {
+                            secondSplit = removeSubString(response, "deadline ").split(" /by ");
+                            return new DeadlineCommand(secondSplit[0], secondSplit[1]);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("date or time was not specified! Try again.");
+                        }
                     case EVENT:
-                        secondSplit = response.split(" /at ");
-                        return new EventCommand(removeSubString(response, "event "), secondSplit[1]);
+                        try {
+                            secondSplit = removeSubString(response, "event ").split(" /at ");
+                            return new EventCommand(secondSplit[0], secondSplit[1]);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("location was not specified! Try again.");
+                        }
                     case MARK:
                         return new MarkCommand(Integer.parseInt(responseArray[1]));
                     case UNMARK:
@@ -46,6 +55,8 @@ public class Parser {
                     default:
                         break;
                 }
+            } catch (DukeException e) {
+                return new IncorrectCommand(e.getMessage());
             } catch (IllegalArgumentException e) {
                 return new IncorrectCommand();
             }

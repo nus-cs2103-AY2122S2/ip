@@ -42,20 +42,20 @@ public class Ui {
 
     public void showCommands() {
         StringBuilder welcome = new StringBuilder(
-                "1. todo [task]\n");
-        welcome.append("2. deadline [task] /by [date]\n");
-        welcome.append("3. event [task] /at [location]\n");
+                "1. todo [java.task]\n");
+        welcome.append("2. deadline [java.task] /by [date]\n");
+        welcome.append("3. event [java.task] /at [location]\n");
         welcome.append("4. list\n");
-        welcome.append("5. mark X (mark X task as done)\n");
-        welcome.append("6. unmark X (mark X task as undone)\n");
-        welcome.append("7. delete X (delete X task from the list)\n");
+        welcome.append("5. mark X (mark X java.task as done)\n");
+        welcome.append("6. unmark X (mark X java.task as undone)\n");
+        welcome.append("7. delete X (delete X java.task from the list)\n");
         welcome.append("8. bye - exit Duke bot\n");
         System.out.println(welcome.toString());
     }
 
     public void showListOfTasksMessage(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("You have 0 task at the moment. Start by adding these commands:\n");
+            System.out.println("Start by adding these commands:\n");
             showCommands();
         } else {
             for (int i = 0; i < tasks.size(); i++) {
@@ -67,24 +67,24 @@ public class Ui {
     public void showResponseMessage(String res) {
         switch (res) {
             case "mark":
-                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("Nice! I've marked this java.task as done:");
                 break;
             case "unmark":
-                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("OK, I've marked this java.task as not done yet:");
                 break;
             case "delete":
-                System.out.println("Noted. I've removed this task:");
+                System.out.println("Noted. I've removed this java.task:");
                 break;
             case "todo":
             case "deadline":
             case "event":
-                System.out.println("Got it. I've added this task:");
+                System.out.println("Got it. I've added this java.task:");
                 break;
         }
     }
 
-    public void showIncorrectMessage() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
+    public String showIncorrectMessage() {
+        return "OOPS!!! I'm sorry, but I don't know what that means :(";
     }
 
     public void showTerminatingMessage() {

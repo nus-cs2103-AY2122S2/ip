@@ -20,7 +20,7 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done java.task with X
     }
 
     @Override

@@ -1,6 +1,6 @@
 package task;
 
-import task.Task;
+import exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,22 +24,17 @@ public class Deadline extends Task {
         convertToDate(by);
     }
 
-    private void convertToDate(String by) {
-        try {
-            String[] split = by.split("\\s+");
-            if (split.length > 1) {
-                this.datetime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-            } else {
-                this.date = LocalDate.parse(by, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            }
-        }
+    private void convertToDate(String by) throws DateTimeParseException {
         /* Date format is invalid */
-        catch (DateTimeParseException e) {
-            System.out.println(by + " is Invalid Date & Time format");
+        String[] split = by.split("\\s+");
+        if (split.length > 1) {
+            this.datetime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        } else {
+            this.date = LocalDate.parse(by, DateTimeFormatter.ofPattern(DATE_FORMAT));
         }
     }
 
-    public String printDeadline() {
+    public String formatDeadline() {
         if (this.datetime != null) {
             return datetime.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
         } else {
@@ -49,6 +44,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + printDeadline() + ")";
+        return "[D]" + super.toString() + " (by: " + formatDeadline() + ")";
     }
 }

@@ -7,9 +7,9 @@ import task.TaskList;
 
 public class Duke extends Exception {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();

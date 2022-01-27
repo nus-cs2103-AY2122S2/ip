@@ -13,8 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-java.ui-test/ACTUAL.txt
+text-java.ui-test/EXPECTED-UNIX.TXT
 
 # Compiled class file
 *.class

@@ -1,6 +1,5 @@
 package command;
 
-import command.Command;
 import exception.DukeException;
 import storage.Storage;
 import task.Deadline;
@@ -8,11 +7,17 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand extends Command {
     protected Task deadline;
 
-    public DeadlineCommand(String description, String by) {
-        this.deadline = new Deadline(description, by);
+    public DeadlineCommand(String description, String by) throws DukeException {
+        try {
+            this.deadline = new Deadline(description, by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date or time was not formatted correctly. Make sure it is yyyy-MM-dd");
+        }
     }
 
     @Override
