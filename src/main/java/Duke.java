@@ -188,7 +188,7 @@ public class Duke {
     }
 
     private void listTasks() {
-        if (taskList.size() == 0) {
+        if (taskList.isEmpty()) {
             ui.showText("Your list is empty");
         }
         else {

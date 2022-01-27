@@ -12,6 +12,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
     public Task get(int index) {
         return taskList.get(index);
     }
