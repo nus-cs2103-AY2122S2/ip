@@ -7,6 +7,12 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+
 public class Parser {
     private final String userName;
 
@@ -38,6 +44,9 @@ public class Parser {
             return new DeleteCommand(index);
         } else if (command.startsWith("bye")) {
             return new ExitCommand(this.userName);
+        } else if (command.startsWith("find")) {
+            String searchString = this.parseForSearch(command);
+            return new FindCommand(searchString);
         } else {
             throw new NoCommandException();
         }
@@ -89,6 +98,16 @@ public class Parser {
         return new ToDo(taskName);
     }
 
+    LocalDateTime getLocalDateTimeFromDate(String string) {
+        try {
+            TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(string);
+            LocalDateTime date = LocalDateTime.from(ta);
+            return date;
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
     Task parseForDeadline(String command) throws DukeException {
         int indexTaskName = 9;
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)
@@ -100,11 +119,12 @@ public class Parser {
         }
         String taskName = command
                 .substring(indexTaskName, dateMarkerIndex);
-        int indexStartOfDate = dateMarkerIndex + 4;  //"/by <date>"
+        int indexStartOfDate = dateMarkerIndex + 4;  //"/by yyyy-mm-dd hh:mm"
         if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
-        String date = command.substring(indexStartOfDate);
+        String dateString = command.substring(indexStartOfDate);
+        LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
         return new Deadline(taskName, date);
     }
 
@@ -124,7 +144,13 @@ public class Parser {
         if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
-        String date = command.substring(indexStartOfDate);
+        String dateString = command.substring(indexStartOfDate);
+        LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
         return new Event(taskName, date);
+    }
+
+    String parseForSearch(String command) {
+        int indexToStart = 5;
+        return command.substring(5); //"find "
     }
 }

@@ -7,6 +7,11 @@ import seedu.duke.task.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.Scanner;
 
 public class Storage {
@@ -65,10 +70,11 @@ public class Storage {
             int indexOfSlash = taskDetails.indexOf("/");
             taskName = taskDetails.substring(4,indexOfSlash - 1);
             String date = taskDetails.substring(indexOfSlash + 2); //"/ Sunday"
+            LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
             if (taskType.equals("E")) {
-                return new Event(taskName, doneStatus, date);
+                return new Event(taskName, doneStatus, dateObj);
             } else {
-                return new Deadline(taskName, doneStatus, date);
+                return new Deadline(taskName, doneStatus, dateObj);
             }
         } else {
             taskName = taskDetails.substring(4);
@@ -82,7 +88,9 @@ public class Storage {
         summary += (task.isDone()) ? "1 " : "0 ";
         summary += task.getTaskName() + " ";
         if (taskType.equals("E") || taskType.equals("D")) {
-            summary += "/ " + task.getDate();
+            LocalDateTime date = task.getDate();
+            String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            summary += "/ " + dateString; //24 Dec 2019 --> 2019-12-24
         }
         return summary + "\n";
     }
@@ -109,6 +117,18 @@ public class Storage {
         for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
             String lineToAdd = this.createSummaryFromTask(taskList.getTasks().get(i));
             this.addLine(filePath, lineToAdd);
+        }
+    }
+
+    LocalDateTime getLocalDateTimeFromDate(String string) {
+        try {
+            System.out.println(string);
+            TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(string);
+            LocalDateTime date = LocalDateTime.from(ta);
+            return date;
+        } catch (DateTimeParseException e) {
+            System.out.println("Error generating date string");
+            return null;
         }
     }
 }

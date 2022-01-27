@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
     private final String taskType = "D";
 
@@ -8,7 +11,7 @@ public class Deadline extends Task {
      * @param taskName for task name
      * @param date for end date
      */
-    public Deadline(String taskName, String date) {
+    public Deadline(String taskName, LocalDateTime date) {
         super(taskName, false, date);
     }
 
@@ -21,7 +24,7 @@ public class Deadline extends Task {
         super(oldDeadline.getTaskName(), done, oldDeadline.getDate());
     }
 
-    public Deadline(String taskName, boolean doneStatus, String date) {
+    public Deadline(String taskName, boolean doneStatus, LocalDateTime date) {
         super(taskName,doneStatus, date);
     }
 
@@ -47,6 +50,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + String.format(" (by: %s)",this.getDate());
+                + String.format(" (by: %s)",this.getFormattingDateString());
     }
 }

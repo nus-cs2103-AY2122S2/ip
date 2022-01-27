@@ -1,9 +1,12 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     private final String taskType = "E";
     
-    public Event(String taskName, String date) {
+    public Event(String taskName, LocalDateTime date) {
         super(taskName, false, date);
     }
     
@@ -11,7 +14,7 @@ public class Event extends Task {
         super(oldEvent.getTaskName(), done, oldEvent.getDate());
     }
 
-    public Event(String taskName, boolean doneStatus, String date) {
+    public Event(String taskName, boolean doneStatus, LocalDateTime date) {
         super(taskName,doneStatus, date);
     }
 
@@ -28,6 +31,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + String.format(" (at: %s)",this.getDate());
+                + String.format(" (at: %s)",this.getFormattingDateString());
     }
 }

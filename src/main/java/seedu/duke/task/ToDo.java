@@ -17,11 +17,11 @@ public class ToDo extends Task {
      * @param done to specify a boolean
      */
     ToDo(ToDo oldToDo, boolean done) {
-        super(oldToDo.getTaskName(), done, "");
+        super(oldToDo.getTaskName(), done, null);
     }
 
     public ToDo(String taskName, boolean done) {
-        super(taskName, done, "");
+        super(taskName, done, null);
     }
 
     /**

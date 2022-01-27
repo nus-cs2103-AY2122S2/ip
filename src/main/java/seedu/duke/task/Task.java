@@ -1,6 +1,10 @@
 package seedu.duke.task;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     /**
      * taskName refers to the name of the task.
@@ -10,7 +14,7 @@ public abstract class Task {
      * done records if a task has been marked as complete.
      */
     private final boolean done;
-    private final String date;
+    private final LocalDateTime date;
 
     /**
      * Constructor for a task.
@@ -19,7 +23,8 @@ public abstract class Task {
     Task(String name) {
         this.taskName = name;
         this.done = false;
-        this.date = "";
+        //do null pointer exception check
+        this.date = null;
     }
 
     /**
@@ -27,7 +32,7 @@ public abstract class Task {
      * @param name refers to the task name
      * @param doneStatus refers to the boolean that tracks if a task is complete
      */
-    Task(String name, boolean doneStatus, String date) {
+    Task(String name, boolean doneStatus, LocalDateTime date) {
         this.taskName = name;
         this.done = doneStatus;
         this.date = date;
@@ -49,7 +54,17 @@ public abstract class Task {
         return this.taskName;
     }
 
-    public String getDate() { return this.date; }
+    public LocalDateTime getDate() { return this.date; }
+
+    public String getFormattingDateString() {
+        try {
+            String indicator = (this.date.getHour() >= 12) ? "pm" : "am";
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm ")) + indicator;
+        } catch (NullPointerException e) {
+            return "";
+        }
+    }
+
     /**
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter

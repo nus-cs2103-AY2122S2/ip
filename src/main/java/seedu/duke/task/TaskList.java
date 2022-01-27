@@ -47,7 +47,6 @@ public class TaskList {
      * Used to print all tasks when command "list" is called in Duke.
      */
     public void printTasks() {
-        System.out.println("Here is your to-do:");
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             System.out.println(String
                     .format("%d . %s", i + 1, tasks.get(i).toString()));
@@ -124,5 +123,17 @@ public class TaskList {
         ArrayList<Task> updatedTasks = this.copyTaskList();
         updatedTasks.remove(index);
         return new TaskList(updatedTasks);
+    }
+
+    public TaskList find(String search) throws DukeException {
+        TaskList newTaskList = new TaskList();
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
+            Task currentTask = this.tasks.get(i);
+            String taskString = currentTask.toString();
+            if (taskString.contains(search)) {
+                newTaskList = newTaskList.add(currentTask);
+            }
+        }
+        return newTaskList;
     }
 }

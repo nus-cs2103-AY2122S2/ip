@@ -77,4 +77,8 @@ public class Ui {
         System.out.println("Database has been updated");
     }
 
+    public void showCompletedSearch(TaskList taskList) {
+        System.out.println("Here are the matched tasks:");
+        taskList.printTasks();
+    }
 }
