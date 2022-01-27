@@ -31,6 +31,10 @@ public class Deadline extends Task {
                 this.done ? "X" : " ", this.taskName, this.deadline.format(niceFormat));
     }
 
+    public String getDescription() {
+        return this.taskName;
+    }
+
     public String exportToString() {
         return String.format("%s %s %s %s",
             this.type, this.taskName, this.done, this.deadline.format(inputFormat));

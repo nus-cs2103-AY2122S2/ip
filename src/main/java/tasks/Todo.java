@@ -14,6 +14,10 @@ public class Todo extends Task {
         return String.format("[T][%s] %s", this.done ? "X" : " ", this.taskName);
     }
 
+    public String getDescription() {
+        return this.taskName;
+    }
+
     public String exportToString() {
         return String.format("%s %s %s", this.type, this.taskName, this.done);
     }

@@ -24,6 +24,7 @@ public abstract class Task {
         return this.done;
     }
 
+    public abstract String getDescription();
     public abstract String exportToString();
 
     public static Task importFromString(String exportedTask)

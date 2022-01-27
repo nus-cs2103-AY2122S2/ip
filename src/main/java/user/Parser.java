@@ -59,6 +59,10 @@ public class Parser {
         }
     }
 
+    public String handleFindTask(String command) {
+        return command.substring(5);  // "find " is 7 letters
+    }
+
     public Task handleTodo(String taskString) throws DukeException {
         if (taskString.length() <= 5) {
             throw new DukeException(Task.badDescriptionErrorString);
