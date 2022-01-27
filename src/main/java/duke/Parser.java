@@ -62,6 +62,7 @@ public class Parser {
         while(scanner.hasNext()) {
             String temp = scanner.nextLine();
             String[] tempStrArray = temp.split(regex, 0);
+
             switch(tempStrArray[0]) {
 
             case "T":

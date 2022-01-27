@@ -41,7 +41,7 @@ public class Deadline extends Task{
         } else {
             mark = "[ ] ";
         }
-        return "[D]" + mark + getName() +
-                " (by: " + this.time.format(formatter) + ")";
+        return "[D]" + mark + getName()
+                + " (by: " + this.time.format(formatter) + ")";
     }
 }
