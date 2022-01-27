@@ -56,4 +56,13 @@ public class Ui {
         }
         System.out.println(LINES);
     }
+
+    public void listTasks(List<Task> tasks) {
+        System.out.println(LINES);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
+        }
+        System.out.println(LINES);
+    }
 }
