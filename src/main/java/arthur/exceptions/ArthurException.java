@@ -1,5 +1,7 @@
+package arthur.exceptions;
+
 /**
- * Handles the custom exception for Arthur.
+ * Handles the custom exception for arthur.Arthur.
  */
 public class ArthurException {
 

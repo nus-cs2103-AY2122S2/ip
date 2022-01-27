@@ -1,3 +1,11 @@
+package arthur;
+
+import arthur.Storage;
+import arthur.task.Deadline;
+import arthur.task.Event;
+import arthur.task.Task;
+import arthur.task.Todo;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -42,7 +50,7 @@ public class TaskList {
             Task currTask = taskList.get(Integer.parseInt(temp[1]) - 1);
             if (temp[0].equals("mark")) {
                 currTask.mark();
-                return "Good job! Task Completed \n" + currTask;
+                return "Good job! Task.Task Completed \n" + currTask;
             } else {
                 currTask.unmark();
                 return "Alright, I will unmark this \n" + currTask;
@@ -53,14 +61,14 @@ public class TaskList {
     }
 
     /**
-     * Initialises and adds new Todo task to task list.
+     * Initialises and adds new Task.Todo task to task list.
      * @param e The description of the todo task to be added
      * @return String conformation of the input
      */
     public String todo(String e) {
         Todo temp = new Todo(e);
         taskList.add(temp);
-        return "Added a new Todo task: \n" + temp
+        return "Added a new Task.Todo task: \n" + temp
                 + "\n" + this.outstanding();
     }
 
@@ -79,7 +87,7 @@ public class TaskList {
             return "Please add the deadline date";
         }
         taskList.add(temp);
-        return "Added a new Deadline task: \n" + temp
+        return "Added a new Task.Deadline task: \n" + temp
                 + "\n" + this.outstanding();
     }
 
@@ -100,7 +108,7 @@ public class TaskList {
         }
 
         taskList.add(temp);
-        return "Added a new Event task: \n" + temp
+        return "Added a new Task.Event task: \n" + temp
                 + "\n" + this.outstanding();
     }
 
@@ -166,9 +174,9 @@ public class TaskList {
     }
 
     /**
-     * Gets the Task object at the given index from taskList.
-     * @param num The index of the Task object to retrieve
-     * @return A Task object
+     * Gets the Task.Task object at the given index from taskList.
+     * @param num The index of the Task.Task object to retrieve
+     * @return A Task.Task object
      * @throws IndexOutOfBoundsException Incorrect index needs to be handled properly
      */
     public Task getTask(int num) throws IndexOutOfBoundsException {

@@ -1,3 +1,5 @@
+package arthur;
+
 /**
  * Handles decoding of the user commands
  */
@@ -15,7 +17,7 @@ public class Parser {
      * instruction to tasks list.
      * @param taskList The tasklist of tasks and operations
      * @param storage The object to access data file in storage
-     * @param ui The Ui class to use for user interaction
+     * @param ui The arthur.Ui class to use for user interaction
      */
     public void execute(TaskList taskList, Storage storage, Ui ui) {
         String[] temp = this.command.split(" ", 2);    // Gets the first word

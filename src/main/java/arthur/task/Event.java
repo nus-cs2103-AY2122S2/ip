@@ -1,5 +1,9 @@
+package arthur.task;
+
+import arthur.timings.DateTime;
+
 /**
- * A class that creates Event objects with at variable,
+ * A class that creates Task.Event objects with at variable,
  * that stores the data/time the event will occur.
  */
 public class Event extends Task {

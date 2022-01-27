@@ -1,5 +1,7 @@
+package arthur.exceptions;
+
 /**
- * Custom exception for Arthur.
+ * Custom exception for arthur.Arthur.
  * Thrown when input is not a supported instruction.
  */
 public class InvalidInstructionException extends Exception{

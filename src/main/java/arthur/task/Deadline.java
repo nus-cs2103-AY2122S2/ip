@@ -1,5 +1,9 @@
+package arthur.task;
+
+import arthur.timings.DateTime;
+
 /**
- * A class that creates Deadline objects with by variable,
+ * A class that creates Task.Deadline objects with by variable,
  * that stores the deadline information for that task.
  */
 public class Deadline extends Task {

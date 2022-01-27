@@ -1,5 +1,7 @@
+package arthur.task;
+
 /**
- * A class that creates Todo objects
+ * A class that creates Task.Todo objects
  */
 public class Todo extends Task {
 

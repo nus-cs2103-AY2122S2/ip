@@ -1,3 +1,9 @@
+package arthur;
+
+import arthur.exceptions.ArthurException;
+import arthur.exceptions.EmptyDescriptionException;
+import arthur.exceptions.InvalidInstructionException;
+
 import java.time.format.DateTimeParseException;
 
 public class Arthur {
@@ -7,7 +13,7 @@ public class Arthur {
     private final Ui ui;
 
     /**
-     * Initiates the Ui, Storage and taskList object.
+     * Initiates the arthur.Ui, arthur.Storage and taskList object.
      * Adds existing tasks from hard disk if any available.
      */
     public Arthur() {
