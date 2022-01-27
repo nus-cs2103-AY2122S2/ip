@@ -10,55 +10,22 @@ import java.util.ArrayList;
 
 public class InputList {
 
-    private int count;
     private ArrayList<Task> tasks;
 
+    public InputList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public InputList() {
-        tasks = new ArrayList<Task>(100);
-
-        try {
-            File file = new File(
-                    "tasklist.txt");
-            file.createNewFile();
-
-            BufferedReader br
-                    = new BufferedReader(new FileReader(file));
-
-            String st;
-
-            while ((st = br.readLine()) != null) {
-                String[] words = st.split(",");
-                if(words[0].equals("TODO")) {
-                    tasks.add(new Todo(words[2], words[1].equals("true")));
-                } else if (words[0].equals("DEADLINE")) {
-                    tasks.add(new Deadline(words[2], LocalDate.parse(words[3]), words[1].equals("true")));
-                } else if (words[0].equals("EVENT")) {
-                    tasks.add(new Event(words[2], LocalDate.parse(words[3]), words[1].equals("true")));
-                }
-            }
-
-        } catch(IOException e) {
-            System.out.println(e.getMessage() + "---IO Exception");
-        }
+        this.tasks = new ArrayList<>();
     }
 
     public static void main(String[] args) {
 
     }
 
-    public void writeToFile() {
-        try {
-            File file = new File("tasklist.txt");
-            FileWriter writer = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(writer);
-
-            for(int i = 0; i < tasks.size(); i++) {
-                bw.write(tasks.get(i).getTaskString() + "\n");
-            }
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void writeToFile(Storage store) {
+        store.writeTasks(this.tasks);
     }
 
     public void printList() {
@@ -70,14 +37,12 @@ public class InputList {
 
     public void add(Task newTask) {
         tasks.add(newTask);
-        count++;
     }
 
     public void delete(int index) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(tasks.get(index - 1).toString());
         tasks.remove(index - 1);
-        count--;
     }
 
     public void mark(int index) {
