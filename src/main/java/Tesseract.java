@@ -1,3 +1,19 @@
+package tesseract.main;
+
+import tesseract.command.Command;
+
+import tesseract.main.Date;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.TesseractException;
+
+import tesseract.task.Deadline;
+import tesseract.task.Event;
+import tesseract.task.Task;
+import tesseract.task.Todo;
+
+
 public class Tesseract {
     static final String SCHEDULE_PATH = "src/main/Data/Schedule.txt";
 

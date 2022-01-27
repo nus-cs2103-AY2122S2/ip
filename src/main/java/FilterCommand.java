@@ -1,3 +1,12 @@
+package tesseract.command;
+
+import tesseract.command.Command;
+
+import tesseract.main.Date;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+
 public class FilterCommand extends Command {
     protected static final int KEYWORD = 2;
     protected static final int CONDITION = 3;

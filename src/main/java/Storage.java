@@ -1,3 +1,8 @@
+package tesseract.main;
+
+import tesseract.main.TaskList;
+import tesseract.main.TesseractException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,13 +16,13 @@ public class Storage {
     protected String path;
     protected boolean updated;
 
-    Storage(String path) {
+    public Storage(String path) {
         this.path = path;
         this.file = new File(path);
         this.updated = false;
     }
 
-    List<String> getStorage() throws TesseractException {
+    public List<String> getStorage() throws TesseractException {
         List<String> tasks = new ArrayList<String>();
         try {
             Scanner sc = new Scanner(this.file);
@@ -35,15 +40,15 @@ public class Storage {
         return tasks;
     }
 
-    void needUpdate() {
+    public void needUpdate() {
         this.updated = true; // only update if there is change (new task added)
     }
 
-    boolean isUpdated() {
+    public boolean isUpdated() {
         return this.updated;
     }
 
-    void updateStorage(TaskList taskList, int numOfTasks) throws TesseractException {
+    public void updateStorage(TaskList taskList, int numOfTasks) throws TesseractException {
         try {
             FileWriter fw = new FileWriter(this.path);
             for (int i = 0; i < numOfTasks; i++) {

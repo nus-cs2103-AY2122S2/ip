@@ -1,3 +1,12 @@
+package tesseract.command;
+
+import tesseract.command.Command;
+
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.TesseractException;
+
 public class ExitCommand extends Command{
     protected String cmdWord;
 

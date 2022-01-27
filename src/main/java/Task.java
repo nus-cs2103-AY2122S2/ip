@@ -1,3 +1,7 @@
+package tesseract.task;
+
+import tesseract.main.Date;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;

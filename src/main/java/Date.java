@@ -1,11 +1,18 @@
+package tesseract.main;
+
+import tesseract.main.TesseractException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.DateTimeException;
+
 
 public class Date {
     LocalDate date;
     String time;
 
-    Date(String time) {
+    public Date(String time) {
         this.time = time;
         this.date = LocalDate.parse(time);
     }
@@ -19,17 +26,20 @@ public class Date {
                 for (String integer : ints) {
                     Integer.parseInt(integer);
                 }
+                new Date(time).formattedTime();
+            } catch (DateTimeException e) {
+                throw new TesseractException("Please enter a valid date that can be found on calender :P");
             } catch (NumberFormatException e) {
                 throw new TesseractException("Please enter date in the YYYY-MM-DD format~");
             }
         }
     }
 
-    boolean equals(Date date1) {
+    public boolean equals(Date date1) {
         return this.date.equals(date1.date);
     }
 
-    String formattedTime() {
+    public String formattedTime() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

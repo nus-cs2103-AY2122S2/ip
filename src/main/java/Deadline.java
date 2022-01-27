@@ -1,4 +1,8 @@
-import java.time.LocalDate;
+package tesseract.task;
+
+import tesseract.main.Date;
+
+import tesseract.task.Task;
 
 public class Deadline extends Task {
     protected String by;

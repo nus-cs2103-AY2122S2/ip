@@ -1,8 +1,22 @@
-public class CreateTaskCommand extends Command {
+package tesseract.command;
+
+import tesseract.command.Command;
+
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.Date;
+
+import tesseract.task.Deadline;
+import tesseract.task.Event;
+import tesseract.task.Task;
+import tesseract.task.Todo;
+
+class CreateTaskCommand extends Command {
     protected String taskType;
     protected String[] cmdArr;
 
-    CreateTaskCommand(String[] cmdArr) {
+    public CreateTaskCommand(String[] cmdArr) {
         super(cmdArr[0]);
         this.taskType = cmdArr[0];
         this.cmdArr = cmdArr;

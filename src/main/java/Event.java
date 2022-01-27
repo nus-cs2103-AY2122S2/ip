@@ -1,10 +1,16 @@
+package tesseract.task;
+
+import tesseract.main.Date;
+
+import tesseract.task.Task;
+
 import java.time.LocalDate;
 
 public class Event extends Task {
     protected String at;
     protected Date date;
 
-    Event(String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = at;
         this.date = new Date(at);

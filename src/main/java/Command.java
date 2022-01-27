@@ -1,3 +1,21 @@
+package tesseract.command;
+
+import tesseract.command.CreateTaskCommand;
+import tesseract.command.DeleteCommand;
+import tesseract.command.ExitCommand;
+import tesseract.command.FilterCommand;
+import tesseract.command.ListCommand;
+import tesseract.command.MarkCommand;
+import tesseract.command.UnmarkCommand;
+
+import tesseract.main.Date;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.TesseractException;
+
+
+
 public class Command {
     protected String cmdWord;
 
@@ -30,9 +48,9 @@ public class Command {
                 }
                 break;
             case "filter":
-                if (cmdLen < 3 || fullCmd.indexOf("/by") < 0) {
+                if (cmdLen < 4 || fullCmd.indexOf("/by") < 0) {
                     throw new TesseractException("What do you want to filter by again?");
-                } else if (cmdArr[2].equals("/by")) {
+                } else if (cmdArr[2].equals("date")) {
                     Date.checkValidTime(cmdArr[3]);
                 }
                 break;
@@ -95,7 +113,7 @@ public class Command {
         }
     }
 
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 

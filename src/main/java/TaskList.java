@@ -1,3 +1,14 @@
+package tesseract.main;
+
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.Date;
+
+import tesseract.task.Deadline;
+import tesseract.task.Event;
+import tesseract.task.Task;
+import tesseract.task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +20,12 @@ public class TaskList {
     protected List<Task> taskList;
     protected int numOfTasks;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
         this.numOfTasks = 0;
     }
 
-    TaskList(List<String> storageMemory) {
+    public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
         for (int i = 0; i < storageMemory.size(); i++) {
             String[] task = storageMemory.get(i).split("@", 4); // format: D@1@do something
@@ -40,20 +51,20 @@ public class TaskList {
         this.numOfTasks = this.taskList.size();
     }
 
-    TaskList(List<Task> tasks, int numOfTasks) {
+    public TaskList(List<Task> tasks, int numOfTasks) {
         this.taskList = tasks;
         this.numOfTasks = numOfTasks;
     }
 
-    int size() {
+    public int size() {
         return numOfTasks;
     }
 
-    Task get(int index) {
+    public Task get(int index) {
         return this.taskList.get(index);
     }
 
-    TaskList filterByDate(Date date) {
+    public TaskList filterByDate(Date date) {
         List<Task> tasks = new ArrayList<Task>();
         for (Task task : taskList) {
             if (task.isOn(date)) {
@@ -63,7 +74,7 @@ public class TaskList {
         return new TaskList(tasks, tasks.size());
     }
 
-    void addTask(Task tNew) {
+    public void addTask(Task tNew) {
         this.numOfTasks += 1;
         this.taskList.add(tNew);
     }
@@ -72,18 +83,18 @@ public class TaskList {
      * @param index
      * @return the removed task to be printed out by Ui
      */
-    Task deleteTask(int index) {
+    public Task deleteTask(int index) {
         this.numOfTasks -= 1;
         return this.taskList.remove(index - 1);
     }
 
-    Task markAsDone(int index) {
+    public Task markAsDone(int index) {
         Task done = this.taskList.get(index - 1);
         done.markAsDone();
         return done;
     }
 
-    Task markAsUndone(int index) {
+    public Task markAsUndone(int index) {
         Task undone = this.taskList.get(index - 1);
         undone.markAsUndone();
         return undone;
