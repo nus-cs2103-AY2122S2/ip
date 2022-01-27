@@ -200,6 +200,14 @@ public class McBot {
                     }
                     break;
                 }
+                case "find":
+                    try {
+                        String taskName = parser.getDetails();
+                        tasks.find(taskName, ui);
+                    } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
+                        ui.taskError("emptyFindTask");
+                    }
+                    break;
                 default: {
                     throw new InvalidCommandException("I don't understand a word ye're sayin'");
                 }
