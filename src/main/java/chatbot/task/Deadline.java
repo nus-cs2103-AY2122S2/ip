@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline with the specified description, start date, start time, end date and end time.
+     *
      * @param desc the description of the event
      * @param date the due date of the event
      * @param time the due time of the event

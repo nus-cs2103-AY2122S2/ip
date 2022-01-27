@@ -29,6 +29,7 @@ public class Parser {
     /**
      * Associates the specified trigger with the specified command in this map.
      * If the parser previously contained a mapping for the trigger, the old command is replaced.
+     *
      * @param trigger trigger with which the specified command is to be associated
      * @param command command to be associated with the specified trigger
      */
@@ -38,6 +39,7 @@ public class Parser {
 
     /**
      * Returns the command to which the specified trigger is mapped, or a default command if this parser contains no mapping for the trigger.
+     *
      * @param trigger the trigger whose associated command is to be returned
      * @return the command to which the specified trigger is mapped, or a default command if this parser contains no mapping for the trigger.
      */

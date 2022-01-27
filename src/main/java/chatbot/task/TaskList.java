@@ -17,10 +17,11 @@ public class TaskList extends ArrayList<Task> implements Serializable {
 
     /**
      * Constructs a task list with a specified file to load from and save to.
+     *
      * @param saveFile the save file location
      */
     public static TaskList create(String saveFile) {
-        TaskList taskList = Storage.<TaskList>Load(saveFile);
+        TaskList taskList = Storage.Load(saveFile);
         if (taskList == null) {
             taskList = new TaskList(saveFile);
         }
@@ -68,7 +69,7 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     public Task[] find(String keyword) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : this) {
-            if (t.toString().contains(keyword)) {
+            if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
                 tasks.add(t);
             }
         }

@@ -9,7 +9,8 @@ public class CommandOutput {
 
     /**
      * Constructs a command with a specified output and sfx file.
-     * @param output the command output
+     *
+     * @param output  the command output
      * @param sfxFile the sfx file
      */
     public CommandOutput(String output, String sfxFile) {

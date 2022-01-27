@@ -14,7 +14,7 @@ public class MarkCommand implements Command {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
             task.setDone(true);
-            return new CommandOutput(String.format("Nice! I've marked this task as done:\n  %s", taskList),
+            return new CommandOutput(String.format("Nice! I've marked this task as done:\n  %s", task),
                     "/audio/ding.wav");
         } catch (Exception e) {
             return new CommandOutput("Error: Invalid index\n" + FORMAT, "/audio/ding.wav");

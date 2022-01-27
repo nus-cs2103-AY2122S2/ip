@@ -22,7 +22,7 @@ public class DeadlineCommand implements Command {
         LocalTime time = null;
         try {
             int i = 1;
-            while (i < input.length && !input[i].equals("/at")) {
+            while (i < input.length && !input[i].equals("/by")) {
                 ++i;
             }
             desc = String.join(" ", Arrays.asList(input).subList(1, i));

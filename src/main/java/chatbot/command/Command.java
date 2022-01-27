@@ -8,7 +8,8 @@ import chatbot.task.TaskList;
 public interface Command {
     /**
      * Executes the command with the specified arguments onto the specified task list.
-     * @param input the arguments of the command
+     *
+     * @param input    the arguments of the command
      * @param taskList the task list to execute the command on
      * @return returns the output of the command
      */

@@ -11,6 +11,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Constructs a task with the specified description.
+     *
      * @param desc the description of the task
      */
     public Task(String desc) {

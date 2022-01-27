@@ -14,11 +14,12 @@ public class Event extends Task {
 
     /**
      * Constructs an event with the specified description, start date, start time, end date and end time.
-     * @param desc the description of the event
+     *
+     * @param desc      the description of the event
      * @param startDate the start date of the event
      * @param startTime the start time of the event
-     * @param endDate the end date of the event
-     * @param endTime the end time of the event
+     * @param endDate   the end date of the event
+     * @param endTime   the end time of the event
      */
     public Event(String desc, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         super(desc);
