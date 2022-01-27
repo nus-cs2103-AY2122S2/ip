@@ -1,3 +1,5 @@
+package bob.exception;
+
 public class EventException extends BobException {
 
     public EventException() {

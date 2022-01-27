@@ -1,3 +1,5 @@
+package bob.exception;
+
 public class InvalidCommandException extends BobException {
 
     public InvalidCommandException() {

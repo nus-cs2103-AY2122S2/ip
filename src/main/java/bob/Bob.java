@@ -1,9 +1,11 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.StringTokenizer;
+package bob;
 
-public class Bob {
+import bob.command.ListCommand;
+import bob.exception.BobException;
+import bob.command.ByeCommand;
+import bob.command.Command;
+
+class Bob {
     public Storage store;
     public Ui ui;
     private TaskList tasks;
@@ -23,7 +25,7 @@ public class Bob {
     public void greet() {
         ui.logo();
         ui.greetMessage();
-        store.readStore(ui);
+        new ListCommand(true).execute(tasks, ui, store);
         ui.userReply();
     }
 

@@ -1,3 +1,9 @@
+package bob;
+
+import bob.Task.Task;
+import bob.command.ListCommand;
+import bob.exception.FileException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,31 +24,16 @@ public class Storage {
                 store.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("make file exception here");
+            System.out.println("File exception while creating new file");
         }
     }
 
     public void updateStore(TaskList taskList) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(store));
             oos.writeObject(taskList.getList());
         } catch (IOException e) {
-            System.out.println("make file exception here");
-        }
-    }
-
-    // Only one List of type Task will be stored in the store
-    @SuppressWarnings("unchecked")
-    public void readStore(Ui ui) {
-        try {
-            FileInputStream fis = new FileInputStream(store);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            List<Task> taskList = (List<Task>) ois.readObject();
-            for (int i = 0; i < taskList.size(); i++) {
-                ui.say("\t" + (i + 1) + ". " + taskList.get(i).printStatus());
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            ui.noTasks();
+            System.out.println(e.getMessage());
         }
     }
 

@@ -1,3 +1,5 @@
+package bob.exception;
+
 public class DeadlineException extends BobException {
 
     public DeadlineException() {

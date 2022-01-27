@@ -1,3 +1,9 @@
+package bob;
+
+import bob.exception.BobException;
+import bob.Task.Task;
+import bob.exception.InvalidIndexException;
+
 import java.util.List;
 
 public class TaskList {

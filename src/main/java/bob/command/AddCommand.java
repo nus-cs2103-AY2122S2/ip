@@ -1,3 +1,10 @@
+package bob.command;
+
+import bob.Storage;
+import bob.Task.Task;
+import bob.TaskList;
+import bob.Ui;
+
 public abstract class AddCommand extends Command {
     private String taskName;
 

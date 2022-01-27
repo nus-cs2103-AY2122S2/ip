@@ -1,3 +1,5 @@
+package bob.exception;
+
 public class BobException extends IllegalArgumentException {
     private String bobReply;
     public BobException(String error) {

@@ -1,3 +1,11 @@
+package bob.command;
+
+import bob.exception.BobException;
+import bob.Storage;
+import bob.Task.Task;
+import bob.TaskList;
+import bob.Ui;
+
 public class MarkCommand extends Command {
     private int index;
     public MarkCommand(int index) {
