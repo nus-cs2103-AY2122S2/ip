@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskList {
-
     List<Task> tasks = new ArrayList<>();
     public TaskList(File f) throws DukeException {
         try {

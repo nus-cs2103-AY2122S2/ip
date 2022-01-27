@@ -10,7 +10,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
-        super.saveFormat = "T," + this.description + "," + super.isDone;
+        super.saveFormat = "T," + this.description;
     }
     /**
      * Creates a Todo task from previously saved list of tasks during initialisation of chat-bot.

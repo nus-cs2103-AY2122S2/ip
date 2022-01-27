@@ -78,6 +78,7 @@ public class Duke {
                                 currTask.setNotDone();
                                 System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
                             }
+                            storage.save(taskList);
                         }
                     } else {
                         if (temp[0].equals("todo")) {
@@ -97,6 +98,7 @@ public class Duke {
                                 }
                             }
                         }
+                        storage.save(taskList);
                     }
                 }
             } catch (Exception e) {
@@ -105,7 +107,7 @@ public class Duke {
                 str = sc.nextLine();
             }
         }
-        storage.save(taskList);
+        //storage.save(taskList);
         ui.printByeMessage();
         sc.close();
     }
