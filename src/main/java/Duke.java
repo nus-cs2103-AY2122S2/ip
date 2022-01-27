@@ -55,6 +55,7 @@ public class Duke {
                         throw new DukeException("argument for list detected");
                     }
                     cmd.list();
+                    cmd.update(curr);
                     break;
                 } catch (DukeException ex) {
                     String err = "_______________________________________________________\n"
@@ -63,11 +64,14 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             case "mark": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
                     cmd.mark(index - 1);
+                    cmd.update(curr);
                     break;
                 } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                     String err = "_______________________________________________________\n"
@@ -76,12 +80,15 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "unmark": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
                     cmd.unmark(index - 1);
+                    cmd.update(curr);
                     break;
                 } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                     String err = "_______________________________________________________\n"
@@ -90,6 +97,8 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "todo": {
@@ -98,6 +107,7 @@ public class Duke {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
                     cmd.todo(tokens);
+                    cmd.update(curr);
                     break;
                 } catch (MissingFormatArgumentException ex) {
                     String err = "_______________________________________________________\n"
@@ -106,6 +116,8 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "deadline": {
@@ -114,6 +126,7 @@ public class Duke {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
                     cmd.deadline(tokens);
+                    cmd.update(curr);
                     break;
                 } catch (MissingFormatArgumentException ex) {
                     String err = "_______________________________________________________\n"
@@ -131,6 +144,8 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "event": {
@@ -139,6 +154,7 @@ public class Duke {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
                     cmd.event(tokens);
+                    cmd.update(curr);
                     break;
                 } catch (MissingFormatArgumentException ex) {
                     String err = "_______________________________________________________\n"
@@ -156,12 +172,15 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "delete": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
                     cmd.delete(index - 1);
+                    cmd.update(curr);
                     break;
                 } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException ex) {
                     String err = "_______________________________________________________\n"
@@ -170,6 +189,8 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             case "update": {
