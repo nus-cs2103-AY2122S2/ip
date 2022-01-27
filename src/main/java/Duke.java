@@ -1,14 +1,18 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.*;
 import myPackage.*;
 import exceptions.DukeException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Task c = new Task("HELLO");
+        TaskList.list = new ArrayList<>();
+        Save.checkFile();
+        Save.load("data/duke.txt");
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
-        int listCount = 0;
-        ArrayList<Task> list = new ArrayList<>(); // Task[100];
+        int listCount = TaskList.list.size();
+
         //String[] list = new String[100];
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -25,30 +29,32 @@ public class Duke {
                 case "list": {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < listCount; i++) {
-                        System.out.printf("%d.[%s][%s] %s%n", i + 1, list.get(i).getTaskType(), list.get(i).getStatusIcon(), list.get(i).getDescription());
+                        System.out.printf("%d.[%s][%s] %s%n", i + 1, TaskList.list.get(i).getTaskType(),
+                                TaskList.list.get(i).getStatusIcon(), TaskList.list.get(i).getDescription());
                     }
                     break;
                 }
                 case "mark": {
                     if (lenSplit > 1) {
-                        list.get(Integer.parseInt(userInputSplit[1]) - 1).markAsDone();
+                        TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markAsDone();
                     }
                     break;
                 }
                 case "unmark": {
                     if (lenSplit > 1) {
-                        list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkAsDone();
+                        TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkAsDone();
                     }
                     break;
                 }
                 case "delete": {
                     if (lenSplit > 1) {
                         System.out.println("OK REMOVED\n");
-                        list.get(Integer.parseInt(userInputSplit[1]) - 1).getFullDescription();
-                        list.remove(Integer.parseInt(userInputSplit[1]) - 1);
+                        TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).getFullDescription();
+                        TaskList.list.remove(Integer.parseInt(userInputSplit[1]) - 1);
                         listCount--;
                         System.out.printf("\nyou now have %d tasks in the list%n", listCount);
                     }
+                    Save.save();
                     break;
                 }
                 default: {
@@ -63,9 +69,10 @@ public class Duke {
                                 break;
                             }
                             System.out.println("Got it, I've added this task:");
-                            list.add(new ToDos(userInput));
+                            TaskList.list.add(new ToDos(userInput));
                             System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
                             listCount++;
+                            Save.save();
                             break;
                         }
                         case "deadline": {
@@ -78,9 +85,10 @@ public class Duke {
                                 break;
                             }
                             System.out.println("Got it, I've added this task:");
-                            list.add(new Deadlines(userInput.split("/")[0], userInput.split("/")[1]));
+                            TaskList.list.add(new Deadlines(userInput.split("/")[0], userInput.split("/")[1]));
                             System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
                             listCount++;
+                            Save.save();
                             break;
                         }
                         case "event": {
@@ -93,9 +101,10 @@ public class Duke {
                                 break;
                             }
                             System.out.println("Got it, I've added this task:");
-                            list.add(new Events(userInput.split("/")[0], userInput.split("/")[1]));
+                            TaskList.list.add(new Events(userInput.split("/")[0], userInput.split("/")[1]));
                             System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
                             listCount++;
+                            Save.save();
                             break;
                         }
                         default: {
@@ -107,11 +116,8 @@ public class Duke {
                             break;
                         }
                     }
-
                 }
             }
         }
-
-
     }
 }

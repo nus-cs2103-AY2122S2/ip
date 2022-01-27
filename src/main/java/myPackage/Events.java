@@ -1,11 +1,24 @@
 package myPackage;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task{
     private String date;
+    private LocalDate localDate;
     public Events(String description, String date) {
         super(description);
-        this.date = date;
-        System.out.printf("[E][ ] %s (%s)", this.description, date);
+        try {
+            String[] str = date.split("by ");
+            localDate = LocalDate.parse(str[1]);
+            this.date =  localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+        catch (Exception e) {
+            System.out.println("not proper date");
+            this.date = date;
+        }
+        System.out.printf("[E][ ] %s (%s)", this.description, this.date);
     }
     public void markAsDone() {
         this.isDone = true;
@@ -31,5 +44,11 @@ public class Events extends Task{
     @Override
     public String getFullDescription() {
         return String.format("[E][ ] %s (%s)", this.description, date);
+    }
+
+    public String getOriginalDescription() {return description;}
+
+    public String getTiming() {
+        return this.date;
     }
 }
