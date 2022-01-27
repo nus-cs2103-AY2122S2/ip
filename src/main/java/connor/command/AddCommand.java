@@ -7,8 +7,8 @@ import connor.task.TaskList;
  * Represents an Add {@code Command}.
  */
 public class AddCommand extends Command {
-    TaskType tt;
-    String desc;
+    private TaskType tt;
+    private String desc;
 
     public AddCommand(TaskType tt, String desc) {
         this.tt = tt;

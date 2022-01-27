@@ -6,7 +6,6 @@ import connor.Connor;
  * Represents a Bye {@code Command}.
  */
 public class ByeCommand extends Command {
-
     public ByeCommand() {}
 
     /**

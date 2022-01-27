@@ -7,8 +7,8 @@ import connor.task.TaskList;
  * Represents a Change Status {@code Command}.
  */
 public class ChangeStatusCommand extends Command {
-    TaskStatus ts;
-    int index;
+    private TaskStatus ts;
+    private int index;
 
     public ChangeStatusCommand(TaskStatus ts, int index) {
         this.ts = ts;

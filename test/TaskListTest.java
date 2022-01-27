@@ -11,33 +11,33 @@ class TaskListTest {
     public void testTaskListMethods() {
         TaskList.setTasks(new ArrayList<>());
         assertEquals(new ArrayList<>(), TaskList.getTasks());
-        assertEquals(0, TaskList.getNoOfTasks());
+        assertEquals(0, TaskList.getNumberOfTasks());
 
         TaskList.addTask(TaskType.TODO, "Things");
-        assertEquals(1,TaskList.getNoOfTasks());
+        assertEquals(1,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /by Monday");
-        assertEquals(2,TaskList.getNoOfTasks());
+        assertEquals(2,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /at Monday");
-        assertEquals(2,TaskList.getNoOfTasks());
+        assertEquals(2,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /at   ");
-        assertEquals(2,TaskList.getNoOfTasks());
+        assertEquals(2,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "     /at Monday");
-        assertEquals(2,TaskList.getNoOfTasks());
+        assertEquals(2,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "Thing /at Monday");
-        assertEquals(3,TaskList.getNoOfTasks());
+        assertEquals(3,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "Thing/atMonday");
-        assertEquals(4,TaskList.getNoOfTasks());
+        assertEquals(4,TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "ThingMonday");
-        assertEquals(4,TaskList.getNoOfTasks());
+        assertEquals(4,TaskList.getNumberOfTasks());
 
         TaskList.deleteTask(2);
-        assertEquals(3,TaskList.getNoOfTasks());
+        assertEquals(3,TaskList.getNumberOfTasks());
         TaskList.deleteTask(999999);
-        assertEquals(3,TaskList.getNoOfTasks());
+        assertEquals(3,TaskList.getNumberOfTasks());
         TaskList.deleteTask(-999999);
-        assertEquals(3,TaskList.getNoOfTasks());
+        assertEquals(3,TaskList.getNumberOfTasks());
 
         TaskList.clearTasks();
-        assertEquals(0,TaskList.getNoOfTasks());
+        assertEquals(0,TaskList.getNumberOfTasks());
     }
 }

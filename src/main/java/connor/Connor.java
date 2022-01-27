@@ -2,14 +2,12 @@ package connor;
 
 import connor.command.ByeCommand;
 import connor.exception.InvalidTaskFileException;
-import connor.task.Task;
 import connor.task.TaskList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * Main class for Connor program to start running.
@@ -28,7 +26,6 @@ public class Connor {
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
 
     private static boolean isActive = true;
-    private static ArrayList<Task> taskList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
 
     private Storage storage;

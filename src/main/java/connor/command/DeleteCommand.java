@@ -6,7 +6,7 @@ import connor.task.TaskList;
  * Represents a Delete {@code Command}.
  */
 public class DeleteCommand extends Command {
-    int index;
+    private int index;
 
     public DeleteCommand(int index) {
         this.index = index;
