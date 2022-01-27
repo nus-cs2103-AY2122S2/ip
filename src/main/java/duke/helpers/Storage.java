@@ -1,17 +1,20 @@
-package DukeHelpers;
+package duke.helpers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+
 import java.util.ArrayList;
-import Commands.Deadline;
-import Commands.Event;
-import Commands.ToDo;
-import Commands.Task;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.ToDo;
+import duke.commands.Task;
 
 /**
  * Represents a storage for all Task data a Duke object saves according to user input.
@@ -70,15 +73,12 @@ public class Storage {
                     String time = temp[3];
                     t = new Event(desc, time);
                 }
-
                 if (isMarked) {
                     t.markDone();
                 } else {
                     t.markUndone();
                 }
-
                 taskArr.add(t);
-
             }
         } catch (NoSuchFileException e) {
             System.out.println("File not found");

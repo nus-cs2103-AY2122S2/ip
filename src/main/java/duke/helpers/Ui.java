@@ -1,4 +1,5 @@
-package DukeHelpers;
+package duke.helpers;
+
 import java.util.Scanner;
 
 /**
@@ -19,7 +20,7 @@ public class Ui {
      * Displays a welcome message for the user upon running a Duke object
      */
     public void welcome() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\n" + "What can I do for you?");
     }
 
     /**

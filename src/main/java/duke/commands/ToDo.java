@@ -1,4 +1,4 @@
-package Commands;
+package duke.commands;
 
 /**
  * Represents a Task to be done by the user with no specified date.

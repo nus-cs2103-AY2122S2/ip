@@ -1,4 +1,4 @@
-package Commands;
+package duke.commands;
 
 /**
  * Represents a task to be done by the user. It contains a description of the task, type of task and mark status.

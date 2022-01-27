@@ -1,4 +1,4 @@
-package Commands;
+package duke.commands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,37 +6,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Deadline to be met by the user with a specified date and/or time.
+ * Represents a Event to be attended by the user with a specified date and/or time.
  */
-public class Deadline extends Task {
-
-    private String by;
+public class Event extends Task {
+    private String at;
     private LocalDate date;
     private LocalTime time;
     private String dateFormat;
     private String timeFormat;
 
-    private static final String[] dateFormats = {
+    private static final String[] DATE_FORMATS = {
             "dd/MM/yyyy",
             "dd MM yyyy",
             "yyyy/MM/dd",
             "yyyy MM dd",
             "MMM dd yyyy",
     };
-    private static final String[] timeFormats = {
+    private static final String[] TIME_FORMATS = {
             "HHmm",
             "HH:mm",
     };
 
     /**
-     * Constructs a Deadline object.
+     * Constructs an Event object.
      *
-     * @param description description of Deadline.
-     * @param by date and/or time of Deadline.
+     * @param description description of Event.
+     * @param at date and/or time at which Event occurs.
      */
-    public Deadline(String description, String by) {
-        super(description, "D");
-        this.by = by;
+    public Event(String description, String at) {
+        super(description, "E");
+        this.at = at;
     }
 
     /**
@@ -46,11 +45,11 @@ public class Deadline extends Task {
      * @throws DateTimeParseException If parser could not parse the time according to format.
      */
     public boolean isValidTime() {
-        for (String format : timeFormats) {
+        for (String format : TIME_FORMATS) {
             try {
-                if (this.by.split(" ").length != 1) {
+                if (this.at.split(" ").length != 1) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                    LocalTime.parse(this.by.split(" ")[1], formatter);
+                    LocalTime.parse(this.at.split(" ")[1], formatter);
                     this.timeFormat = format;
                     return true;
                 } else {
@@ -69,8 +68,8 @@ public class Deadline extends Task {
      * @throws DateTimeParseException If parser could not parse the date according to format.
      */
     public boolean isValidDate() {
-        String d = this.by.split(" ")[0].replace("-", " ");
-        for (String format : dateFormats) {
+        String d = this.at.split(" ")[0].replace("-", " ");
+        for (String format : DATE_FORMATS) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
                 LocalDate.parse(d, formatter);
@@ -83,13 +82,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns formatted date of Deadline.
+     * Returns formatted date of Event.
      *
-     * @return date of Deadline.
+     * @return date of Event.
      */
     @Override
     public String getDate() {
-        String d = this.by.split(" ")[0].replace("-", " ");
+        String d = this.at.split(" ")[0].replace("-", " ");
         if (this.isValidDate()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dateFormat);
             this.date = LocalDate.parse(d, formatter);
@@ -100,15 +99,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns formatted time of Deadline.
+     * Returns formatted time of Event.
      *
-     * @return time of Deadline.
+     * @return time of Event.
      */
     @Override
     public String getTime() {
         if (this.isValidTime()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.timeFormat);
-            this.time = LocalTime.parse(this.by.split(" ")[1], formatter);
+            this.time = LocalTime.parse(this.at.split(" ")[1], formatter);
             return this.time.format(DateTimeFormatter.ofPattern("HH:mm a"));
         } else {
             return "";
@@ -116,12 +115,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a formatted String describing the Deadline.
+     * Returns a formatted String describing the Event.
      *
-     * @return formatted String describing the Deadline.
+     * @return formatted String describing the Event.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (this.getDate() + " " + this.getTime()).trim() + ")";
+        return "[E]" + super.toString() + " (at: " + (this.getDate() + " " + this.getTime()).trim() + ")";
     }
 }

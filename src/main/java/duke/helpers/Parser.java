@@ -1,11 +1,12 @@
-package DukeHelpers;
+package duke.helpers;
 
-import Exceptions.DukeException;
-import Exceptions.EmptyDescriptionException;
-import Exceptions.EmptyTimeException;
-import Exceptions.InvalidCommandException;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidCommandException;
+import duke.commands.Command;
+
 import java.util.regex.Pattern;
-import Commands.Command;
 
 /**
  * Represents a parser which makes sense of user inputs and calls the calls the corresponding commands.
@@ -25,32 +26,32 @@ public class Parser {
         boolean missingDesc = false;
         boolean missingTime = false;
         switch (command) {
-            case BYE:
-                res = s.equals("bye");
-                break;
-            case LIST:
-                res = s.equals("list");
-                break;
-            case DELETE:
-                res = Pattern.matches("delete \\d+", s);
-                break;
-            case TOGGLEMARK:
-                res = Pattern.matches("mark \\d+|unmark \\d+", s);
-                break;
-            case TODO:
-                res = Pattern.matches("todo .+", s);
-                missingDesc = !res && s.equals("todo ");
-                break;
-            case DEADLINE:
-                res = Pattern.matches("deadline .+ /by .+", s);
-                missingDesc = !res && Pattern.matches("deadline\\s+|deadline\\s+/by.*", s);
-                missingTime = !res && !missingDesc && Pattern.matches("deadline .+", s);
-                break;
-            case EVENT:
-                res = Pattern.matches("event .+ /at .+", s);
-                missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
-                missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
-                break;
+        case BYE:
+            res = s.equals("bye");
+            break;
+        case LIST:
+            res = s.equals("list");
+            break;
+        case DELETE:
+            res = Pattern.matches("delete \\d+", s);
+            break;
+        case TOGGLEMARK:
+            res = Pattern.matches("mark \\d+|unmark \\d+", s);
+            break;
+        case TODO:
+            res = Pattern.matches("todo .+", s);
+            missingDesc = !res && s.equals("todo ");
+            break;
+        case DEADLINE:
+            res = Pattern.matches("deadline .+ /by .+", s);
+            missingDesc = !res && Pattern.matches("deadline\\s+|deadline\\s+/by.*", s);
+            missingTime = !res && !missingDesc && Pattern.matches("deadline .+", s);
+            break;
+        case EVENT:
+            res = Pattern.matches("event .+ /at .+", s);
+            missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
+            missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
+            break;
             case FIND:
                 res = res = Pattern.matches("find .+", s);
                 break;
