@@ -1,12 +1,6 @@
-import java.util.ArrayList;
-// import java.util.Scanner;
-// import java.io.File;
-// import java.io.FileWriter;
-// import java.io.IOException;
-
 public class Duke {
 
-    ArrayList<Task> taskList;
+    TaskList taskList;
     boolean firstUserChat = true;
     String userName;
     String taskFilePath;
@@ -21,15 +15,14 @@ public class Duke {
         taskFilePath = filePath;
         ui = new Ui();
         storage = new Storage(taskFilePath, ui);
+        // load TaskList from existing data 
+        taskList = new TaskList(storage.loadFileContents());
     }
 
     public void run() {
         
         // Jarvis introduces himself, asks for user's name & greets user
         userName = ui.showWelcome();
-
-        // load TaskList from existing data 
-        taskList = new ArrayList<>((storage.loadFileContents()));
 
         boolean active = true;
 
@@ -39,7 +32,7 @@ public class Duke {
                 String userInput = ui.readCommand();
                 String[] userInputString = userInput.split(" ", 2);
                 String command = userInputString[0];
-                Command commandType = Command.getCommand(command);
+                CommandType commandType = CommandType.getCommand(command);
                 String description = userInputString.length > 1 ? userInputString[1] : "" ;
 
                 switch (commandType) {
@@ -111,7 +104,7 @@ public class Duke {
         ui.showTask(task.toString());
     }
 
-    private void addEventOrDeadline(String taskDescription, Command commandType, String regex) throws DukeException {
+    private void addEventOrDeadline(String taskDescription, CommandType commandType, String regex) throws DukeException {
         // check if the user's input is correctly formatted
         if (!taskDescription.contains(regex)) {
             throw new DukeException("Your " + commandType + " command is incorrectly formatted. Please use " + regex);
@@ -131,7 +124,7 @@ public class Duke {
         try {
             Task task;
 
-            if (commandType.equals(Command.EVENT)) {
+            if (commandType.equals(CommandType.EVENT)) {
                 task = new Event(taskDescriptionText, taskDescriptionTime, false);
             } else {
                 task = new Deadline(taskDescriptionText, taskDescriptionTime, false);
@@ -177,7 +170,7 @@ public class Duke {
                 int taskIndex = Integer.valueOf(id) - 1;
                 
                 // if user-specified task index is out of the list 
-                if (taskIndex >= taskList.size() || taskIndex < 0) {
+                    if (taskIndex >= taskList.size() || taskIndex < 0) {
                     throw new DukeException("I'm sorry, you're referencing a task that does not exist!");
                 }
 
