@@ -1,1 +1,1 @@
- E | 0 | something | 2022-10-10 | 12:00 | 12:30
+ T | 0 | something big T | 0 | something small T | 0 | very big T | 0 | somethingsmall D | 0 | something huge | 2022-10-10 | 12:10 D | 0 | somethingtough | 2022-10-10 | 15:15

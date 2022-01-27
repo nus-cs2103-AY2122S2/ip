@@ -17,6 +17,17 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean checkDescription(String[] wordsToCheck) {
+        boolean isIn = true;
+        for (String s: wordsToCheck) {
+            if (!this.description.contains(s.trim())) {
+                isIn = false;
+                break;
+            }
+        }
+        return isIn;
+    }
+
     /**
      * Returns a cross if task has been completed.
      * @return String of completion status.

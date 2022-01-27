@@ -124,6 +124,13 @@ public class Parser {
         return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                 newTask, tl.getSize());
     }
+
+    public String processFindMsg(String msg, TaskList tl) {
+        // Assume that at this point there are some text
+        String[] findWords = msg.split(" ");
+        return "Here's what I could find!\n" + tl.checkWordsInTask(findWords);
+    }
+
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
@@ -175,6 +182,8 @@ public class Parser {
                     sge.updateFile(toDelete, tl, "delete");
                     return String.format("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
                             toDelete, tl.getSize());
+                case "find":
+                    return processFindMsg(msg.substring(4), tl);
                 default:
                     // Some message which does not start with a keyword
                     throw new ChiException(msg);

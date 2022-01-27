@@ -47,4 +47,14 @@ public class TaskList {
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
+
+    public String checkWordsInTask(String[] wordsToCheck) {
+        StringBuilder s = new StringBuilder();
+        for (Task t: this.tasks) {
+            if (t.checkDescription(wordsToCheck)) {
+                s.append(t).append("\n");
+            }
+        }
+        return s.length() == 0 ? "Could not find anything related to that!" : s.toString();
+    }
 }
