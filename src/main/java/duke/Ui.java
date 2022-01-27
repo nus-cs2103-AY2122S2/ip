@@ -109,4 +109,8 @@ public class Ui {
     public void sayGoodbye() {
         System.out.println("Bye! I'm sure you'll start talking to a real human now. Haha...");
     }
+
+    public void showKeywords() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 }
