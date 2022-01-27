@@ -13,6 +13,14 @@ import java.util.Date;
 
 public class CommandList {
 
+    /**
+     * Execute different actions based on user's input taken from Parser.
+     *
+     * @param input command to execute
+     * @param parser Parser object to terminate program if necessary
+     * @param list Arraylist of Tasks to manipulate
+     * @param storage Storage object to load/store list of Tasks
+     */
     public void execute(String input, Parser parser, ArrayList<Task> list, Storage storage) {
         String[] inputs = input.split(" ");
         String firstWord = inputs[0];
@@ -41,8 +49,7 @@ public class CommandList {
             int index = Integer.parseInt(secondWord);
 
             Task targetTask = list.get((index - 1));
-            list.remove((index - 1));
-            targetTask.delete();
+            list = targetTask.delete(list, (index - 1));
             System.out.println("Now you have " + list.size() + " tasks in your list.");
             storage.store(list);
         } else if (firstWord.equals("todo")) { // adds a todo task

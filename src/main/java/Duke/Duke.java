@@ -8,7 +8,12 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * Main method of Duke program.
+     *
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
 
         Ui ui = new Ui();
         ui.displayGreeting();

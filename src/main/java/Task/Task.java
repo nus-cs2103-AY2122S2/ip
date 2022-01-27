@@ -1,19 +1,34 @@
 package Task;
 
+import java.util.ArrayList;
+
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Default constructor for Task object.
+     *
+     * @param description description of Task to be added
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Get status of Task.
+     *
+     * @return a "X" if Task is done and " " if otherwise
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks a Task as completed.
+     */
     public void mark() {
         if (!isDone) {
             isDone = true;
@@ -25,6 +40,9 @@ public class Task {
         }
     }
 
+    /**
+     * Unmarks a Task as completed.
+     */
     public void unmark() {
         if (isDone) {
             isDone = false;
@@ -36,15 +54,28 @@ public class Task {
         }
     }
 
-    public void delete() {
+    /**
+     * Removes a Task from list of Tasks.
+     */
+    public ArrayList<Task> delete(ArrayList<Task> list, int index) {
+        list.remove(index);
         System.out.println("Noted. I've removed this task: \n"
                 + toString());
+        return list;
     }
 
+    /**
+     * Sets a Task as isDone.
+     */
     public void complete() {
         this.isDone = true;
     }
 
+    /**
+     * Prints Task details as a String.
+     *
+     * @return String form of Task details
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
