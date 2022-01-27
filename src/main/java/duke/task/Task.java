@@ -18,32 +18,57 @@ public class Task {
         counter++;
     }
 
+    /**
+     * Mark this Task object as done.
+     */
     public void markDone() {
         this.isDone = true;
         updateFile();
     }
 
+    /**
+     * Mark this Task object as not done.
+     */
     public void markNotDone() {
         this.isDone = false;
         updateFile();
     }
-    
+
+    /**
+     * Delete this Task from the list.
+     *
+     * @param t Task object to be deleted
+     */
     public void deleteTask(Task t) {
         listOfTask.remove(t);
         counter--;
         updateFile();
     }
-    
-    
+
+    /**
+     * Retrieve the current task list.
+     *
+     * @return a Task array consisting of the current task list.
+     */
     public static Task[] getTaskList() {
         Task[] newArray = listOfTask.toArray(new Task[0]);
         return newArray;
     }
 
+    /**
+     * Retrieve the number of tasks that is currently present.
+     *
+     * @return a String consisting the number of tasks.
+     */
     public static String getCounter() {
         return Integer.toString(counter);
     }
 
+    /**
+     * Retrieve a formatted String of the current task list.
+     *
+     * @return a String with the current task list
+     */
     public static String printArray() {
         int arrayLength = listOfTask.size();
         Task[] tempArray = Task.getTaskList();
@@ -67,6 +92,7 @@ public class Task {
         storage.writeToPath(Task.printArray());
     }
 
+    @Override
     public String toString() {
         String status = this.isDone ? "X" : " ";
         return "[" + status + "] " + this.name;
