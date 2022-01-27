@@ -19,21 +19,29 @@ public class Ann {
     private ArrayList<Task> list;
     private int numItems;
 
-    public Ann(String folderName, String fileName) {
+    public Ann() {
+    }
+
+    private void run(String[] args) {
+        start(args);
+        runCommandUntilExitCommand();
+        exit();
+    }
+
+    public void start(String[] args) {
         try {
             this.ui = new Ui();
-            this.storage = new Storage(folderName, fileName);
+            this.storage = initialiseStorage(args);
             this.tasks = new TaskList(storage.load());
+            ui.showGreeting();
         } catch (Exception e) {
             ui.showInitFailedMessage();
             throw new RuntimeException(e);
         }
     }
 
-    private void run() {
-        ui.showGreeting();
-        runCommandUntilExitCommand();
-        exit();
+    private Storage initialiseStorage(String[] args) throws Storage.StorageOperationException {
+        return args.length != 2 ? new Storage(args[0], args[1]) : new Storage();
     }
 
     private void runCommandUntilExitCommand() {
@@ -63,6 +71,6 @@ public class Ann {
     }
 
     public static void main(String[] args) {
-        new Ann("data", "ann.txt").run();
+        new Ann().run(args);
     }
 }

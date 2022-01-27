@@ -13,8 +13,18 @@ import java.util.Scanner;
 import ann.data.TaskList;
 
 public class Storage {
+    private final static String DEFAULT_STORAGE_FOLDER_NAME = "data";
+    private final static String DEFAULT_STORAGE_FILE_NAME = "ann.txt";
     private File file;
     private String folderName, fileName;
+
+    public Storage() throws StorageOperationException {
+        if(!isValidFileName(DEFAULT_STORAGE_FILE_NAME)) {
+            throw new InvalidStorageFilePathException("Default storage file should end with '.txt'");
+        }
+        openFolder(DEFAULT_STORAGE_FOLDER_NAME);
+        openFile(DEFAULT_STORAGE_FOLDER_NAME, DEFAULT_STORAGE_FILE_NAME);
+    }
 
     public Storage(String folderName, String fileName) throws StorageOperationException{
         if(!isValidFileName(fileName)) {
@@ -24,7 +34,7 @@ public class Storage {
         openFile(folderName, fileName);
     }
 
-    public void openFolder(String folderName) throws StorageOperationException {
+    private void openFolder(String folderName) throws StorageOperationException {
         Path path = Paths.get(folderName);
         if(!Files.exists(path)) {
             File f1 = new File(folderName);
@@ -35,7 +45,7 @@ public class Storage {
         this.folderName = folderName;
     }
 
-    public void openFile(String folderName, String fileName) throws StorageOperationException {
+    private void openFile(String folderName, String fileName) throws StorageOperationException {
         Path filePath = Paths.get(folderName + fileName);
         if(!Files.exists(filePath)) {
             file = new File(folderName, fileName);

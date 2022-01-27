@@ -18,29 +18,29 @@ public class Parser {
         } else if (input.toLowerCase().equals("list")){
             return new ListCommand();
         } else if (input.length() < 3) {
-            return new IncorrectCommand("Oop! Please enter a valid command!");
+            return new IncorrectCommand("Oops! Please enter a valid command!");
         } else if(input.substring(0, 3).toLowerCase().equals("add")) {
             return handleAdd(input.substring(3));
         } else if(input.length() < 4) {
-            return new IncorrectCommand("Oop! Please enter a valid command!");
+            return new IncorrectCommand("Oops! Please enter a valid command!");
         } else if(input.substring(0, 4).toLowerCase().equals("mark")) {
             return handleMark(input.substring(4));
         } else if(input.length() < 6) {
-            return new IncorrectCommand("Oop! Please enter a valid command!");
+            return new IncorrectCommand("Oops! Please enter a valid command!");
         } else if(input.substring(0, 6).toLowerCase().equals("unmark")) {
             return handleUnmark(input.substring(6));
         } else if(input.substring(0, 6).toLowerCase().equals("delete")) {
             return handleDelete(input.substring(6));
         } else {
-            return new IncorrectCommand("Oop! Please enter a valid command!");
+            return new IncorrectCommand("Oops! Please enter a valid command!");
         }
     }
 
     private static Command handleAdd(String input) {
         if(input.isBlank()) {
-            return new IncorrectCommand("Oop! Please specify the task you wish to add!");
+            return new IncorrectCommand("Oops! Please specify the task you wish to add!");
         } else if(input.charAt(0) != ' ') {
-            return new IncorrectCommand("Oop! Please enter a valid command!");
+            return new IncorrectCommand("Oops! Please enter a valid command!");
         } else {
             String taskType = input.split(" ")[1].toLowerCase();
             switch (taskType) {
@@ -51,7 +51,7 @@ public class Parser {
                 case "deadline":
                     return handleDeadline(input.substring(10));
                 default:
-                    return new IncorrectCommand("Oop! Please enter a valid task type!");
+                    return new IncorrectCommand("Oops! Please enter a valid task type!");
             }
         }
     }
@@ -97,7 +97,7 @@ public class Parser {
 
     private static Command handleTodo(String todoContent) {
         if(todoContent.isBlank()) {
-            return new IncorrectCommand("Oop! Please add a description for the todo!");
+            return new IncorrectCommand("Oops! Please add a description for the todo!");
         } else {
             return new AddCommand(TaskType.TODO, new String[] {todoContent});
         }
