@@ -6,11 +6,14 @@ import java.time.format.DateTimeParseException;
 
 import duke.command.CommandParser;
 
+/**
+ * Encapsulates behavior of Deadline type of Task
+ */
 public class Deadline extends Task {
     private LocalDate date;
 
     /**
-     * Instantiate Deadline object with date string
+     * Instantiates Deadline object with date string
      *
      * @param name name for Deadline
      * @param date date of duke.task.Deadline (in d/M/yyyy format)
@@ -21,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Instantiate Deadline object with date string, and status
+     * Instantiates Deadline object with date string, and status
      *
      * @param name name for Deadline
      * @param date date of Deadline (in d/M/yyyy format)
@@ -33,7 +36,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Instantiate Deadline object
+     * Instantiates Deadline object
      *
      * @param name name for Deadline
      * @param date date of Deadline
@@ -43,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Instantiate Deadline object with status
+     * Instantiates Deadline object with status
      *
      * @param name name for Deadline
      * @param date date of Deadline
@@ -54,6 +57,11 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Returns the tag, status, name, and date of the Deadline, formatted.
+     *
+     * @return formatted string of the Deadline info
+     */
     @Override
     public String nameWithStatus() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
@@ -63,6 +71,11 @@ public class Deadline extends Task {
                 this.date.format(fmt));
     }
 
+    /**
+     * Parses a formatted string from file storage, then returns the Deadline object
+     *
+     * @return Deadline object represented by the string
+     */
     @Override
     public String fileSaveFormat() {
         return String.format("%s||%s",

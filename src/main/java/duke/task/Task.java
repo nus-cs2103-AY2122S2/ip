@@ -3,32 +3,60 @@ package duke.task;
 import duke.DukeException;
 
 public class Task {
-    /**
-     * Mark in checkbox of completed Task
-     */
+    /** Mark in checkbox of completed Task */
     private static final char completedMark = 'X';
 
-    /**
-     * Mark in checkbox of uncompleted Task
-     */
+    /** Mark in checkbox of uncompleted Task */
     private static final char incompleteMark = ' ';
 
+    /** Name of Task */
     private String name;
+
+    /** Status of completion of Task */
     private Boolean done;
+
+    /** Tag of Task */
     private char tag = ' ';
 
+    /**
+     * Instantiates Task with name
+     * Default tag is ' ', and default status is false
+     *
+     * @param name name of Task
+     */
     public Task(String name) {
         this(name, ' ', false);
     }
 
+    /**
+     * Instantiates Task with name and status
+     * Default tag is ' '
+     *
+     * @param name name of Task
+     * @param done status of completion of Task
+     */
     public Task(String name, Boolean done) {
         this(name, ' ', done);
     }
 
+    /**
+     * Instantiates Task with name and tag
+     * Default status is false
+     *
+     * @param name name of Task
+     * @param tag tag of Task
+     */
     public Task(String name, char tag) {
         this(name, tag, false);
     }
 
+    /**
+     * Instantiates Task with name, tag, and status
+     *
+     * @param name name of Task
+     * @param tag tag of Task
+     * @param done status of completion of Task
+     */
     public Task(String name, char tag, Boolean done) {
         this.name = name;
         this.tag = tag;
@@ -164,6 +192,11 @@ public class Task {
         return task;
     }
 
+    /**
+     * String representation of Task.
+     *
+     * @return name of Task
+     */
     @Override
     public String toString() {
         return this.name;

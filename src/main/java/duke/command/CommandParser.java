@@ -8,14 +8,16 @@ import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 
+/**
+ * Class to encapsulate methods related to parsing user input
+ * Contains available commands and their relative syntax
+ */
 public class CommandParser {
-    /**
-     * Date format for parsing from user input, file i/o
-     */
+    /** Date format for parsing from user input, file i/o */
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     /**
-     * Available command, their syntax (in regex), and usage documentation
+     * Available commands, their syntax (in regex), and usage documentation
      *
      * NOTE: syntax convention should as below
      * Semantics: command-name arg [[/key kwargs] ... ]
@@ -37,10 +39,11 @@ public class CommandParser {
             { "delete", "delete (\\d+)", "delete <task number>" },
     };
 
+    /** Input source for parser to read from */
     private final Scanner input;
 
     /**
-     * Instantiate parser for parsing commands for duke.Duke
+     * Instantiates parser for parsing commands for Duke
      *
      * @param input Scanner that takes in input
      */

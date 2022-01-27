@@ -6,16 +6,25 @@ import java.util.stream.Collectors;
 
 import duke.DukeException;
 
+/**
+ * Class to encapsulate the behavior of a List of Tasks.
+ */
 public class TaskList {
-    /**
-     * Main data structure to store Task objects
-     */
+    /** Main data structure to store Task objects */
     private List<Task> tasks;
 
+    /**
+     * Instantiates an empty TaskList
+     */
     public TaskList() {
         this(new ArrayList<>());
     }
 
+    /**
+     * Instantiates TaskList with List of Tasks
+     *
+     * @param tasks list of Tasks
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -126,7 +135,7 @@ public class TaskList {
     }
 
     /**
-     * Filter TaskList for Tasks whose names contain the search string
+     * Filters TaskList for Tasks whose names contain the search string
      *
      * @param search substring to search for
      * @return filtered TaskList
@@ -139,6 +148,11 @@ public class TaskList {
                         .collect(Collectors.toList()));
     }
 
+    /**
+     * Returns String as an ordered list with the numbering and status of the Task
+     *
+     * @return string representation of TaskList
+     */
     @Override
     public String toString() {
         if (this.size() == 0) {

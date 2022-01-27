@@ -12,15 +12,14 @@ import duke.task.Deadline;
 import duke.command.Command;
 import duke.command.CommandParser;
 
+/**
+ * Main class that abstracts the implementation of task list chatbot
+ */
 public class Duke {
-    /**
-     * List of Tasks
-     */
+    /** List of Tasks */
     private TaskList tasks;
 
-    /**
-     * Storage component for load/save Tasks upon program start/end
-     */
+    /** Storage component for load/save Tasks upon program start/end */
     private Storage storage;
 
     /**
@@ -29,14 +28,12 @@ public class Duke {
      */
     private final CommandParser cmd = new CommandParser(new Scanner(System.in));
 
-    /**
-     * Ui component for displaying text in format and color
-     */
+    /** Ui component for displaying text in format and color */
     private final Ui ui = new Ui();
 
 
     /**
-     * Construct a Duke instance
+     * Constructs a Duke instance
      *
      * @param filename File to load and save Tasks
      */
@@ -58,7 +55,7 @@ public class Duke {
     }
 
     /**
-     * Main driver method to run duke.Duke
+     * Main driver method to run Duke
      */
     public void run() {
         while (true) {
@@ -72,7 +69,7 @@ public class Duke {
     }
 
     /**
-     * Perform certain behaviours according to the command passed.
+     * Handles behaviours according to the command passed.
      *
      * @param action command from user
      * @throws DukeException general exception for invalid user command: invalid command, arguments, etc.

@@ -3,17 +3,22 @@ package duke.command;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class to capture fields and encapsulate behavior of a Command
+ * A Command is parsed from user input
+ */
 public class Command {
+    /** Name of Command */
     private String name;
+
+    /** Argument of Command */
     private String argument;
 
-    /**
-     * Keyword arguments
-     */
+    /** Keyword arguments */
     private Map<String, String> kwargs;
 
     /**
-     * Create a Command object
+     * Creates a Command object
      *
      * @param name name of command
      */
@@ -22,7 +27,7 @@ public class Command {
     }
 
     /**
-     * Create a Commmand object with arg
+     * Creates a Commmand object with arg
      *
      * @param name name of command
      * @param arg argument of command
@@ -32,7 +37,7 @@ public class Command {
     }
 
     /**
-     * Create a Command object with arg and kwargs
+     * Creates a Command object with arg and kwargs
      *
      * @param name name of command
      * @param arg argument of command
