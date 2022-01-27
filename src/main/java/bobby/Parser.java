@@ -1,15 +1,6 @@
 package bobby;
 
-import bobby.command.Command;
-import bobby.command.ByeCommand;
-import bobby.command.DeadlineCommand;
-import bobby.command.DeleteCommand;
-import bobby.command.EventCommand;
-import bobby.command.InvalidCommand;
-import bobby.command.ListCommand;
-import bobby.command.MarkCommand;
-import bobby.command.ToDoCommand;
-import bobby.command.UnmarkCommand;
+import bobby.command.*;
 
 public class Parser {
 
@@ -32,6 +23,8 @@ public class Parser {
         case "event": command = new EventCommand(fullCommand);
             break;
         case "delete": command = new DeleteCommand(fullCommand, fullCommandArr);
+            break;
+        case "find": command = new FindCommand(fullCommand);
             break;
         default: command = new InvalidCommand();
         }

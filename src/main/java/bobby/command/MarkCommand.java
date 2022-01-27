@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
             throw new MarkException("empty");
         } else if (Character.isLetter(fullCommand.charAt(5))) {               // contains letter instead of number
             throw new MarkException("letter");
-        } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) {        // out of bounds
+        } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) {   // out of bounds
             throw new MarkException("OOB");
         } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
             throw new MarkException("negative");

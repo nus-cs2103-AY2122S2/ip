@@ -14,6 +14,10 @@ public class Task implements Serializable, Comparable<Task> {
         date = null;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
     public void markDone() {
         isDone = true;
     }
