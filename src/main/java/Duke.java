@@ -1,5 +1,8 @@
 import java.util.*;
 import java.lang.*;
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -89,7 +92,29 @@ public class Duke {
 
 
             }
+
+            try {
+                FileWriter myWriter = new FileWriter("duke.txt");
+                for (int i=0; i<list.size(); i++) {
+                    myWriter.write(i+1 + ". " + list.get(i));
+                    myWriter.write(String.format("%n"));
+
+                }
+                myWriter.close();
+                //System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+
+
         }
+
+
+
+
+
+
 
     }
 }
