@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -100,16 +103,16 @@ public class Duke {
             System.out.println("Now you have " + numOfItems + " tasks in the list.");
     }
 
-    public static void deadlineAction(String[] arr, ArrayList<Task> listOfItems) {
-        Deadline deadlineItem = new Deadline(arr[0], arr[1]);
+    public static void deadlineAction(String[] arr, ArrayList<Task> listOfItems) throws DukeException {
+        Deadline deadlineItem = new Deadline(arr[0], convertDate(arr[1]));
         listOfItems.add(deadlineItem);
         int numOfItems = listOfItems.size();
         System.out.println(ADDED + deadlineItem);
         System.out.println("Now you have " + numOfItems + " tasks in the list.");
     }
 
-    public static void eventAction(String[] arr, ArrayList<Task> listOfItems) {
-        Event eventItem = new Event(arr[0], arr[1]);
+    public static void eventAction(String[] arr, ArrayList<Task> listOfItems) throws DukeException {
+        Event eventItem = new Event(arr[0], convertDate(arr[1]));
         listOfItems.add(eventItem);
         int numOfItems = listOfItems.size();
         System.out.println(ADDED + eventItem);
@@ -123,5 +126,14 @@ public class Duke {
         int numOfItems = listOfItems.size();
         System.out.println(REMOVED + itemToDelete);
         System.out.println("Now you have " + numOfItems + " tasks in the list.");
+    }
+
+    public static LocalDate convertDate(String dateString) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            return LocalDate.parse(dateString, format);
+        } catch (DateTimeParseException error) {
+            throw new DukeException("Wrong Format...");
+        }
     }
 }
