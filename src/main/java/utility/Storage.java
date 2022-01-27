@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,9 +33,9 @@ public class Storage {
                     if(taskLine[0].equals("T")){
                         t = new Todo(taskLine[2]);
                     } else if(taskLine[0].equals("D")){
-                        t = new Deadline(taskLine[2], taskLine[3]);
+                        t = new Deadline(taskLine[2], LocalDateTime.parse(taskLine[3]));
                     } else  if(taskLine[0].equals("E")){
-                        t = new Event(taskLine[2],taskLine[3]);
+                        t = new Event(taskLine[2],LocalDateTime.parse(taskLine[3]));
                     } else {
                         throw new DukeException("cannot read the line");
                     }
