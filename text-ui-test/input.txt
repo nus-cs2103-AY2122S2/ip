@@ -3,8 +3,8 @@
 harish
 list
 todo buy lunch
-deadline return book /by 3rd Feb
-event project team meeting /at 22nd Jan 12-2pm
+deadline return book /by 2019-03-01
+event project team meeting /at 2019-02-22
 todo buy shoes
 todo edit pics
 list
@@ -12,20 +12,27 @@ mark 2
 mark 5
 todo fill out application form
 unmark 2
-deadline paint walls /by 5th Feb
+deadline paint walls /by 2022-06-18
 mark 7
 mark 3
 list
-event dance practice /at Monday 8-9pm
+event dance practice /at 2022-5-1
+event dance practice /at 2022-05-15 180
+event dance practice /at 2022-05-15 1800
 unmark 5
 unmark 7
 list
 unmark 3
 mark 19
-delete 2
 delete
 delete 12
 unmark 14
+due-before 2020-01-10
+due-on 2022-05-15
+due-on
+due-before
+due-on 14
+due-on
 list
 mark
 mark 1
@@ -37,6 +44,7 @@ deadline
 deadline mark
 deadline mark /by
 event
+delete 2
 event meet
 event meet /at
 

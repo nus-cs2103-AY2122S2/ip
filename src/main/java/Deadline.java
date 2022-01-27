@@ -26,17 +26,20 @@ public class Deadline extends Task {
     private static final String TIME_ARGUMENT = "/by";
 
     // instance variable to store deadline
-    private final String deadline;
+    private final DateHandler deadline;
 
     /**
      * Constructor for Deadline class.
      * @param message the text given by the user.
      * return an instance of deadline.
+     * @throw WrongDateArgumentException if the user inputs an invalid date.
+     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     Deadline(String message) {
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
         String str = message.split(SEPARATOR, LIMIT)[DD_IDX];
-        this.deadline = str.split(SPACE, LIMIT)[DD_IDX];
+        DateHandler.checkValidDate(str.split(SPACE, LIMIT)[DD_IDX]);
+        this.deadline = new DateHandler(str.split(SPACE, LIMIT)[DD_IDX]);
     }
 
     /**
@@ -54,11 +57,31 @@ public class Deadline extends Task {
     }
 
     /**
+     * checks if the task deadline is due before date.
+     * @param date the string given by user.
+     * @return return if the task is due before date; false otherwise.
+     */
+    @Override
+    boolean isBefore(String date) {
+        return this.deadline.isBefore(date.trim());
+    }
+
+    /**
+     * checks if the task deadline is due on date.
+     * @param date the string given by user.
+     * @return return if the task is due on date; false otherwise.
+     */
+    @Override
+    boolean isOnDate(String date) {
+        return this.deadline.isOnDate(date.trim());
+    }
+
+    /**
      * toString returns the string representation of the Deadline object.
      * @return the string representation of the instance.
      */
     @Override
     public String toString() {
-        return SYMBOL + super.toString() + "(by:" + this.deadline + ")";
+        return SYMBOL + super.toString() + "(by: " + this.deadline + ")";
     }
 }

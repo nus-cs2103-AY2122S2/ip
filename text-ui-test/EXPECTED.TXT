@@ -45,8 +45,8 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+3. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
 4. [T][ ] buy shoes
 5. [T][ ] edit pics
 Number of tasks up to now: 5
@@ -54,7 +54,7 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[D][X] return book (by:3rd Feb)
+[D][X] return book (by: FRIDAY 1 MARCH 2019)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
@@ -69,7 +69,7 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[D][ ] return book (by:3rd Feb)
+[D][ ] return book (by: FRIDAY 1 MARCH 2019)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
@@ -79,25 +79,35 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[D][X] paint walls (by:5th Feb)
+[D][X] paint walls (by: SATURDAY 18 JUNE 2022)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[E][X] project team meeting (at:22nd Jan 12-2pm)
+[E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+3. [E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
 4. [T][ ] buy shoes
 5. [T][X] edit pics
 6. [T][ ] fill out application form
-7. [D][X] paint walls (by:5th Feb)
+7. [D][X] paint walls (by: SATURDAY 18 JUNE 2022)
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+You have input: 2022-5-1
+ please try with the format YYYY-MM-DD
+Please try again
+------------------------------------------------
+------------------------------------------------
+You have input: 2022-05-15 180
+ please try with the format HHMM
+Please try again
 ------------------------------------------------
 ------------------------------------------------
 harish, I have added dance practice 
@@ -111,35 +121,30 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[D][ ] paint walls (by:5th Feb)
+[D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+3. [E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
 4. [T][ ] buy shoes
 5. [T][ ] edit pics
 6. [T][ ] fill out application form
-7. [D][ ] paint walls (by:5th Feb)
-8. [E][ ] dance practice (at:Monday 8-9pm)
+7. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+8. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[E][ ] project team meeting (at:22nd Jan 12-2pm)
+[E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Task num :19 isn't present. Type 'list' command to view the task numbers.
 Please try again
-------------------------------------------------
-------------------------------------------------
-The following task has been removed from the list :
-[D][ ] return book (by:3rd Feb)
-Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Task missing for :delete
@@ -155,14 +160,45 @@ Please try again
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
+1. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+Number of tasks: 2
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+Number of tasks: 1
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Task missing for :due-on
+Please try again
+------------------------------------------------
+------------------------------------------------
+Task missing for :due-before
+Please try again
+------------------------------------------------
+------------------------------------------------
+You have input: 14
+ please try with the format YYYY-MM-DD
+Please try again
+------------------------------------------------
+------------------------------------------------
+Task missing for :due-on
+Please try again
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
-3. [T][ ] buy shoes
-4. [T][ ] edit pics
-5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
-Number of tasks up to now: 7
+2. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+3. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+4. [T][ ] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+8. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
@@ -176,19 +212,20 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[T][X] edit pics
+[T][X] buy shoes
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][X] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
-3. [T][ ] buy shoes
-4. [T][X] edit pics
-5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
-Number of tasks up to now: 7
+2. [D][ ] return book (by: FRIDAY 1 MARCH 2019)
+3. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+4. [T][X] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+8. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
@@ -214,11 +251,16 @@ Task missing for :EVENT
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline meet
+The following task has been removed from the list :
+[D][ ] return book (by: FRIDAY 1 MARCH 2019)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Event meet
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline meet /at
+Time argument missing for Event meet /at
 Please try again
 ------------------------------------------------
 You have not input any command, please add some and try again.
@@ -245,12 +287,12 @@ You have not input any command, please add some and try again.
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][X] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
-3. [T][ ] buy shoes
-4. [T][X] edit pics
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+3. [T][X] buy shoes
+4. [T][ ] edit pics
 5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
+6. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+7. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
 8. [ ] return books to library
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish

@@ -71,6 +71,9 @@ public class Conan {
     // starting index of a list or a char in string.
     private static final int START_INDEX = 0;
 
+    // stores the length of date argument.
+    private static final int DATE_LENGTH = 10;
+
     // Stores the command TODO.
     private static final String TODO = "TODO";
 
@@ -80,8 +83,15 @@ public class Conan {
     // Stores the command EVENT.
     private static final String EVENT = "EVENT";
 
+    // stores the command for due before.
+    private static final String DUE_BEFORE = "due-before";
 
-    private static final String NUM_TASKS= "Number of tasks up to now: ";
+    // stores the command for due on.
+    private static final String DUE_ON = "due-on";
+
+    private static final String NUM_TASKS = "Number of tasks up to now: ";
+
+    private static final String NUM_TASK = "Number of tasks: ";
 
     // username is an instance variable that stores the name of the user.
     private String username;
@@ -177,6 +187,10 @@ public class Conan {
                     throw new MissingTaskArgumentException(UNMARK);
                 } else if (message.equalsIgnoreCase(DELETE)) {
                     throw new MissingTaskArgumentException(DELETE);
+                } else if (message.equalsIgnoreCase(DUE_BEFORE)) {
+                    throw new MissingTaskArgumentException(DUE_BEFORE);
+                } else if (message.equalsIgnoreCase(DUE_ON)) {
+                    throw new MissingTaskArgumentException(DUE_ON);
                 } else {
                     throw new IllegalCommandException(message);
                 }
@@ -192,6 +206,10 @@ public class Conan {
                     return unmark(message);
                 case DELETE:
                     return delete(message);
+                case DUE_BEFORE:
+                    return dueBefore(message);
+                case DUE_ON:
+                    return dueOn(message);
             }
 
             return add(message);
@@ -203,12 +221,13 @@ public class Conan {
         }
     }
 
-
     /**
      * add function adds a task to the list of tasks to be performed.
      * @param text the task to be added.
      * @return CarryOn.NEXT to ask what else the user wants to do.
      * @throws MissingTimeArgumentException if the user missed time argument out.
+     * @throw WrongDateArgumentException if the user inputs an invalid date.
+     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     private CarryOn add(String text) {
 
@@ -304,6 +323,69 @@ public class Conan {
         }
         System.out.println(ASK + this.username);
         System.out.println(SEPARATOR);
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * prints a list of tasks that are due before date
+     * @param date the date given by the user
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throw WrongDateArgumentException if the user inputs an invalid date.
+     * @throw WrongTimeArgumentException if the user inputs an invalid time.
+     */
+    private CarryOn dueBefore(String date) {
+
+        date = date.substring(DUE_BEFORE.length()).trim();
+
+        DateHandler.checkValidDate(date);
+
+        System.out.println(DISPLAY + this.username);
+        int taskNum = 1;
+
+        for (Task task: tasks) {
+            if (task.isBefore(date)) {
+                System.out.println(taskNum + ". " + task);
+                taskNum += 1;
+            }
+        }
+
+        taskNum -= 1;
+        System.out.println(NUM_TASK + taskNum);
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * prints a list of tasks that are due on date
+     * @param date the date given by the user
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throw WrongDateArgumentException if the user inputs an invalid date.
+     * @throw WrongTimeArgumentException if the user inputs an invalid time.
+     */
+    private CarryOn dueOn(String date) {
+
+        date = date.substring(DUE_ON.length()).trim();
+
+        DateHandler.checkValidDate(date);
+
+        System.out.println(DISPLAY + this.username);
+        int taskNum = 1;
+
+        for (Task task: tasks) {
+            if (task.isOnDate(date)) {
+                System.out.println(taskNum + ". " + task);
+                taskNum += 1;
+            }
+        }
+
+        taskNum -= 1;
+
+        System.out.println(NUM_TASK + taskNum);
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+
         return CarryOn.NEXT;
     }
 

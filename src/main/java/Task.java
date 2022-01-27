@@ -50,6 +50,24 @@ public class Task {
     }
 
     /**
+     * checks if the task is due before date.
+     * @param date the string given by user.
+     * @return false trivially, as Tasks do not have deadlines, or event date.
+     */
+    boolean isBefore(String date) {
+        return false;
+    }
+
+    /**
+     * checks if the task is on date.
+     * @param date the string given by the user
+     * @return false trivially, as tasks do not have dates associated with them.
+     */
+    boolean isOnDate(String date) {
+        return false;
+    }
+
+    /**
      * toSting method returns the string representation of the object.
      * @return the string representing the task instance.
      */
