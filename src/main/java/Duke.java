@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class Duke {
     static final String farewell_words = "Bye. Hope to see you again soon!";
 
     private static class processIO {
-        static boolean run() throws EmptyDescriptionException,  EmptyTimeException, InvalidCommandException, InvalidNumberException {
+        static boolean run() throws EmptyDescriptionException,  EmptyTimeException, InvalidCommandException, InvalidNumberException, DateTimeParseException {
             Scanner scanner = new Scanner(System.in);
 
                 String command = scanner.nextLine();
@@ -83,7 +85,7 @@ public class Duke {
                         if (task_by.length() == 0) {
                             throw new EmptyTimeException();
                         }
-                        Deadline temp = new Deadline(description, task_by);
+                        Deadline temp = new Deadline(description, LocalDate.parse(task_by));
                         todo_list.add(temp);
                         String output_text = "Got it. I've added this task:\n    " + temp.toString()
                                 + "\nNow you have " + todo_list.size() + " tasks in the list.";
@@ -97,7 +99,7 @@ public class Duke {
                         if (task_time.length() == 0) {
                             throw new EmptyTimeException();
                         }
-                        Event temp = new Event(description, task_time);
+                        Event temp = new Event(description, LocalDate.parse(task_time));
                         todo_list.add(temp);
                         String output_text = "Got it. I've added this task:\n    " + temp.toString()
                                 + "\nNow you have " + todo_list.size() + " tasks in the list.";
@@ -139,6 +141,8 @@ public class Duke {
                 System.out.println(outputChatBox("OOPS!!! The time cannot be empty. :-("));
             } catch (InvalidNumberException e) {
                 System.out.println(outputChatBox("OOPS!!! Seems like this is a invalid number :-("));
+            } catch (DateTimeParseException e) {
+                System.out.println(outputChatBox("OOPS!!! Please enter date in yyyy-mm-dd style. (e.g. 2002-06-25)"));
             }
         }
     }
