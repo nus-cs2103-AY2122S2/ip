@@ -13,7 +13,7 @@ public class ListResponse implements Response {
 
     /**
      * Constructor for ListResponse.
-     * @param iterate list of items.
+     * @param iterate TaskList
      */
     public ListResponse(TaskList iterate) {
         this.iterate = iterate;

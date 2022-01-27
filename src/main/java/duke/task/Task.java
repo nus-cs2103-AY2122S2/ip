@@ -92,4 +92,8 @@ public class Task {
   public String display() {
     return "[" + markDisplay() + "] " + this.name;
   }
+  
+  public boolean isRelated(String term) {
+    return name.contains(term);
+  }
 }

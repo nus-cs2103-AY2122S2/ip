@@ -43,6 +43,8 @@ public class Parser {
             return new DeadlineCommand(stringCmd);
         case "event":
             return  new EventCommand(stringCmd);
+        case "find":
+            return  new FindCommand(stringCmd);
         default:
             throw new ForeignException("");
         }
