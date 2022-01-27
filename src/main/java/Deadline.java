@@ -1,13 +1,17 @@
 public class Deadline extends Task {
-    protected String time;
+    protected DateTime dateTime;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, String time) throws UltoiException {
         super(description);
-        this.time = time;
+        try {
+            this.dateTime = new DateTime(time);
+        } catch (UltoiException e) {
+            throw e;
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateTime.toString() + ")";
     }
 }
