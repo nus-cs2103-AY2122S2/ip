@@ -4,6 +4,7 @@ import pikabot.command.Command;
 import pikabot.command.DeadlineCommand;
 import pikabot.command.DeleteCommand;
 import pikabot.command.EventCommand;
+import pikabot.command.FindCommand;
 import pikabot.command.InvalidCommand;
 import pikabot.command.ListCommand;
 import pikabot.command.MarkCommand;
@@ -16,6 +17,7 @@ import pikabot.task.Todo;
 
 import pikabot.exception.DeadlineException;
 import pikabot.exception.EventException;
+import pikabot.exception.FindException;
 import pikabot.exception.TodoException;
 
 import java.time.LocalDate;
@@ -56,6 +58,9 @@ public class Parser {
         }
         case "unmark": {
             return new UnmarkCommand(inputArr);
+        }
+        case "find": {
+            return new FindCommand(inputArr);
         }
         default: {
             return new InvalidCommand(inputArr);
@@ -130,6 +135,18 @@ public class Parser {
                         "numerical format YYYY-MM-DD");
                 }
             }
+        }
+    }
+
+    /**
+     * Checks whether command to search for tasks containing a keyword is valid.
+     *
+     * @param findArray String array containing input string from user.
+     * @throws FindException If no keyword is entered.
+     */
+    public static void parseFindCommand(String[] findArray) throws FindException {
+        if (findArray.length == 1) {
+            throw new FindException();
         }
     }
 }

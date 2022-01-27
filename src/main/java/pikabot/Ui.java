@@ -47,6 +47,28 @@ public class Ui {
     }
 
     /**
+     * Prints out list of tasks containing a specified keyword.
+     *
+     * @param taskList TaskList containing tasks with the specified keyword.
+     * @param keyword Keyword to search for that is given by user.
+     */
+    public static void printListOfMatchedTasks(TaskList taskList, String keyword) {
+        System.out.println(INDENTATION + LINE);
+        System.out.println(INDENTATION + "Here are the tasks containing \"keyword\" in your list:");
+
+        int taskNumber = 1;
+        int length = taskList.noOfTasks();
+
+        while (taskNumber <= length) {
+            System.out.println(INDENTATION + taskNumber + "." +
+                taskList.get(taskNumber - 1));
+            taskNumber++;
+        }
+
+        System.out.println(INDENTATION + LINE);
+    }
+
+    /**
      * Prints out indication that a task has been marked as done.
      *
      * @param task Task that has been marked as done.
