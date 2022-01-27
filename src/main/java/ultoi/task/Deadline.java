@@ -20,6 +20,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String time) throws UltoiException {
         super(description);
+
         try {
             this.dateTime = new DateTime(time);
         } catch (UltoiException e) {

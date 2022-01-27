@@ -17,6 +17,7 @@ public class Ultoi {
     public Ultoi(Path filePath) {
         ui = new UltoiUi();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (UltoiException e) {
@@ -43,7 +44,8 @@ public class Ultoi {
     }
 
     public static void main(String[] args) {
-        Path filePath = java.nio.file.Paths.get(System.getProperty("user.home"), "iP", "data", "ultoi.util.Ultoi.txt");
+        Path filePath = java.nio.file.Paths.get(System.getProperty("user.home"),
+                "iP", "data", "ultoi.util.Ultoi.txt");
         new Ultoi(filePath).run();
     }
 }

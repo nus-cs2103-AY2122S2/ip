@@ -1,9 +1,7 @@
 package ultoi.util;
 
-import ultoi.task.Task;
-import ultoi.task.ToDo;
-import ultoi.task.Deadline;
 import ultoi.task.Event;
+import ultoi.task.Deadline;
 
 import ultoi.command.Command;
 import ultoi.command.AddCommand;
@@ -56,12 +54,12 @@ public class Parser {
         return input.equals("bye");
     }
 
-    //following methods to be depreciated
     public static Deadline parseDeadline(String input) throws UltoiException {
         String description = "";
         String time = "";
 
         String[] tokens = input.split(" ");
+
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].equals(AddCommand.COMMAND_BY)) {
                 for (int j = i + 1; j < tokens.length; j++) {
@@ -84,6 +82,7 @@ public class Parser {
         String time = "";
 
         String[] tokens = input.split(" ");
+        
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].equals(AddCommand.COMMAND_AT)) {
                 for (int j = i + 1; j < tokens.length; j++) {

@@ -46,6 +46,7 @@ public class TaskList {
 
     public String toInputString() {
         String str = "";
+
         for (int i = 0; i < size(); i++) {
             str = str + (i + 1) + ". " + getTask(i).toInputString();
             if (i < size() - 1) {
@@ -58,12 +59,14 @@ public class TaskList {
     @Override
     public String toString() {
         String str = "";
+
         for (int i = 0; i < size(); i++) {
             str = str + (i + 1) + ". " + getTask(i).toString();
             if (i < size() - 1) {
                 str = str + "\n";
             }
         }
+
         return str;
     }
 }
