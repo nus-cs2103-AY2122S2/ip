@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,6 +76,9 @@ public class BH {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     System.out.println(line + "Okay, I have remove this task:\n" +
                             this.deleteTask(index) + line);
+                } else if (s1.equals("check")) {
+                    LocalDate date = LocalDate.parse(inputArray[1]);
+                    this.checkDate(date);
                 } else {
                     System.out.println("Wrong input, please check again");
                 }
@@ -91,7 +95,7 @@ public class BH {
             BufferedReader bufferedReader = new BufferedReader(reader);
             String input = bufferedReader.readLine();
             while (input != null) {
-                String[] task = input.split("/");
+                String[] task = input.split(" ### ");
                 String type = task[0];
                 String status = task[1];
                 String thing = task[2];
@@ -120,6 +124,17 @@ public class BH {
             System.out.println(e.getMessage());
             throw new DukeException("Loading error");
         }
+    }
+
+    void checkDate(LocalDate date) {
+        System.out.println(line);
+        for (int i = 0; i < this.getListSize(); i++) {
+            Task currTask = this.list.get(i);
+            if (currTask.getDate().equals(date)) {
+                System.out.println(currTask.toString());
+            }
+        }
+        System.out.println(line);
     }
 
     void save() {
