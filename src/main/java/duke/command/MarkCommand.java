@@ -22,7 +22,11 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) {
-        tasks.mark(num);
+        try {
+            tasks.mark(num);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The task number is kinda sus... it's outta bounds!");
+        }
     }
 
     /**

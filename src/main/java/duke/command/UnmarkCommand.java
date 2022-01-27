@@ -22,7 +22,11 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) {
-        tasks.unmark(num);
+        try {
+            tasks.unmark(num);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The task number is kinda sus... it's outta bounds!");
+        }
     }
 
     /**

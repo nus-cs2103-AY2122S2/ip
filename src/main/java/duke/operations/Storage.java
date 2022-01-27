@@ -71,13 +71,13 @@ public class Storage {
             finalOutput = "T|" + mark + "|" + task.getDescription();
         } else if (task instanceof Deadline) {
             finalOutput = "D|" + mark + "|" + task.getDescription()
-                    + "|" + Parser.localDateToString(((Deadline) task).getDate())
-                    + "|" + Parser.localTimeToString(((Deadline) task).getTime());
+                    + "|" + Parser.convertLocalDateToString(((Deadline) task).getDate())
+                    + "|" + Parser.convertLocalTimeToString(((Deadline) task).getTime());
         } else if (task instanceof Event) {
             finalOutput = "E|" + mark + "|" + task.getDescription()
-                    + "|" + Parser.localDateToString(((Event) task).getDate())
-                    + "|" + Parser.localTimeToString(((Event) task).getStartTime())
-                    + "|" + Parser.localTimeToString(((Event) task).getEndTime());
+                    + "|" + Parser.convertLocalDateToString(((Event) task).getDate())
+                    + "|" + Parser.convertLocalTimeToString(((Event) task).getStartTime())
+                    + "|" + Parser.convertLocalTimeToString(((Event) task).getEndTime());
         }
         return finalOutput;
     }
@@ -134,8 +134,8 @@ public class Storage {
                 TaskList.addToListNoPrint(toDo);
                 break;
             case "D":
-                Task deadline = new Deadline(lineArr[2], Parser.stringToLocalDate(lineArr[3]),
-                        Parser.stringToLocalTime(lineArr[4]));
+                Task deadline = new Deadline(lineArr[2], Parser.convertStringToLocalDate(lineArr[3]),
+                        Parser.convertStringToLocalTime(lineArr[4]));
                 if (isMarked(checkMarked)) {
                     deadline.mark();
                 } else {
@@ -144,8 +144,8 @@ public class Storage {
                 TaskList.addToListNoPrint(deadline);
                 break;
             case "E":
-                Task event = new Event(lineArr[2], Parser.stringToLocalDate(lineArr[3]),
-                        Parser.stringToLocalTime(lineArr[4]), Parser.stringToLocalTime(lineArr[5]));
+                Task event = new Event(lineArr[2], Parser.convertStringToLocalDate(lineArr[3]),
+                        Parser.convertStringToLocalTime(lineArr[4]), Parser.convertStringToLocalTime(lineArr[5]));
                 if (isMarked(checkMarked)) {
                     event.mark();
                 } else {
