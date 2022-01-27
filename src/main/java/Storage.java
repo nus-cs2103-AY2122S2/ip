@@ -29,7 +29,7 @@ public class Storage {
                     String task = s.nextLine();
                     String[] taskStrings = task.split(" \\| ");
                     String taskType = taskStrings[0];
-                    boolean taskStatus = taskStrings[1] == "1";
+                    boolean taskStatus = taskStrings[1].equals("1");
                     String taskDescription = taskStrings[2];
 
                     switch (taskType) {
@@ -52,20 +52,25 @@ public class Storage {
                 ui.showText("creating save data...");
             }
             
+        // if the file cannot be read, generate an empty list 
         } catch (IOException e) {
             ui.showError(e.getMessage());
+            return new ArrayList<Task>();
+        // if the file contains corrupt data, generate an empty list 
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+            return new ArrayList<Task>();
         }
 
         return taskList;
     }
 
-    public void updateFileContents(ArrayList<Task> taskList) {
+    public void updateFileContents(TaskList taskList) {
+        ArrayList<Task> externalTaskList = taskList.getTasks();
         // write & update save data with current tasklist 
         try {
             FileWriter fw = new FileWriter(taskFilePath);
-            for (Task t: taskList) {
+            for (Task t: externalTaskList) {
                 fw.write(t.toStringSaveData());
                 fw.write(System.lineSeparator());
             }
