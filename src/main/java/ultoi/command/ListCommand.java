@@ -35,11 +35,12 @@ public class ListCommand implements Command {
     }
 
     /**
-     * Show the list of tasks.
+     * Executes the command.
      *
-     * @param ui ultoi.util.UltoiUi used.
-     * @param tasks List of tasks.
-     * @param storage ultoi.util.Storage used to access memory.
+     * @param ui User interface to be used.
+     * @param tasks Task list to be used.
+     * @param storage Storage to be used.
+     * @throws UltoiException If any Ultoi exception happens.
      */
     @Override
     public void execute(UltoiUi ui, TaskList tasks, Storage storage) {

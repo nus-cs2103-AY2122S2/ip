@@ -13,6 +13,12 @@ import ultoi.util.TaskList;
 import ultoi.util.Parser;
 import ultoi.util.DateTime;
 
+/**
+ * Represents a command that adds task to the list.
+ *
+ * @author snoidetx
+ * @version 0.0.0
+ */
 public class AddCommand implements Command {
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
@@ -23,6 +29,12 @@ public class AddCommand implements Command {
 
     private final Task task;
 
+    /**
+     * Creates an add command.
+     *
+     * @param input User input.
+     * @throws UltoiException If the input cannot be identified.
+     */
     public AddCommand(String input) throws UltoiException {
         try {
             if (input.startsWith(this.COMMAND_TODO)) {
@@ -39,6 +51,14 @@ public class AddCommand implements Command {
         }
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param ui User interface to be used.
+     * @param tasks Task list to be used.
+     * @param storage Storage to be used.
+     * @throws UltoiException If any Ultoi exception happens.
+     */
     @Override
     public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
         tasks.addTask(this.task);
@@ -47,12 +67,23 @@ public class AddCommand implements Command {
         return;
     }
 
+    /**
+     * Generates a message for the command.
+     *
+     * @param tasks Task list used.
+     * @return Message for the comment.
+     */
     private String generateMsg(TaskList tasks) {
         return this.MESSAGE + "\n"
                 + UltoiUi.INDENT + this.task.toString() + "\n"
                 + tasks.generateNumOfTasksMsg();
     }
 
+    /**
+     * Returns the task.
+     *
+     * @return Task according to the command.
+     */
     public Task getTask() {
         return this.task;
     }

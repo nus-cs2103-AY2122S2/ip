@@ -13,6 +13,12 @@ import ultoi.util.TaskList;
 import ultoi.util.Parser;
 import ultoi.util.DateTime;
 
+/**
+ * Represents a command that marks a task as done or undone.
+ *
+ * @author snoidetx
+ * @version 0.0.0
+ */
 public class MarkCommand implements Command {
     private static final int COMMAND_LENGTH_MARK = 4;
     private static final int COMMAND_LENGTH_UNMARK = 6;
@@ -22,6 +28,12 @@ public class MarkCommand implements Command {
     private final boolean isMark;
     private final int index;
 
+    /**
+     * Creates an mark command.
+     *
+     * @param input User input.
+     * @throws UltoiException If the input cannot be identified.
+     */
     public MarkCommand(String input) throws UltoiException {
         this.isMark = input.startsWith("mark");
 
@@ -33,6 +45,14 @@ public class MarkCommand implements Command {
         }
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param ui User interface to be used.
+     * @param tasks Task list to be used.
+     * @param storage Storage to be used.
+     * @throws UltoiException If any Ultoi exception happens.
+     */
     public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
         try {
             if (this.isMark) {
@@ -49,6 +69,12 @@ public class MarkCommand implements Command {
         return;
     }
 
+    /**
+     * Generates a message for the command.
+     *
+     * @param task Task to be marked.
+     * @return Message for the command.
+     */
     private String generateMsg(Task task) {
         return (this.isMark ? this.MESSAGE_MARK : this.MESSAGE_UNMARK) + "\n"
                 + UltoiUi.INDENT + task.toString();

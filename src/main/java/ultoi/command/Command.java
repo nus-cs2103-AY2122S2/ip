@@ -13,6 +13,12 @@ import ultoi.util.TaskList;
 import ultoi.util.Parser;
 import ultoi.util.DateTime;
 
+/**
+ * Represents a command.
+ *
+ * @author snoidetx
+ * @version 0.0.0
+ */
 public interface Command {
     public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException;
 }

@@ -52,11 +52,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the input is a bye command.
+     *
+     * @param input User input.
+     * @return True if the input is "bye".
+     */
     public static boolean isBye(String input) {
         return input.equals("bye");
     }
 
-    //following methods to be depreciated
+    /**
+     * Returns a Deadline object parsed from user input.
+     * This method will be depreciated in future.
+     *
+     * @param input User input.
+     * @return Deadline object represented by the input.
+     * @throws UltoiException If user input cannot be parsed.
+     */
     public static Deadline parseDeadline(String input) throws UltoiException {
         String description = "";
         String time = "";
@@ -79,6 +92,14 @@ public class Parser {
         return new Deadline(description, time);
     }
 
+    /**
+     * Returns a Event object parsed from user input.
+     * This method will be depreciated in future.
+     *
+     * @param input User input.
+     * @return Event object represented by the input.
+     * @throws UltoiException If user input cannot be parsed.
+     */
     public static Event parseEvent(String input) throws UltoiException {
         String description = "";
         String time = "";

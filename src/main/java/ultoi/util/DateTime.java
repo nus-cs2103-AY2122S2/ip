@@ -1,24 +1,23 @@
 package ultoi.util;
 
-import ultoi.task.Task;
-import ultoi.task.ToDo;
-import ultoi.task.Deadline;
-import ultoi.task.Event;
-
-import ultoi.command.Command;
-import ultoi.command.AddCommand;
-import ultoi.command.ByeCommand;
-import ultoi.command.DeleteCommand;
-import ultoi.command.ListCommand;
-import ultoi.command.MarkCommand;
-
 import java.time.LocalDate;
 
+/**
+ * Represents a data and time.
+ *
+ * @author snoidetx
+ * @version 0.0
+ */
 public class DateTime {
     private final LocalDate date;
     private final int time;
 
-    // format: YYYY-MM-DD tttt
+    /**
+     * Creates a new DateTime object.
+     *
+     * @param datetime Input string to be processed.
+     * @throws UltoiException If the input string does not follow the format "YYYY-MM-DD tttt".
+     */
     public DateTime(String datetime) throws UltoiException {
         String[] datetimes = datetime.split(" ");
         try {
@@ -32,10 +31,20 @@ public class DateTime {
         }
     }
 
+    /**
+     * Returns a string representing the standard input for this DateTime object.
+     *
+     * @return Input string of this DateTime object.
+     */
     public String toInputString() {
         return this.date.toString() + " " + (this.time > 999 ? "" : "0") + time;
     }
 
+    /**
+     * Returns a string representation of this DateTime object.
+     *
+     * @return String representation of this DateTime object.
+     */
     @Override
     public String toString() {
         return this.date.toString() + " " + (this.time > 999 ? "" : "0")
