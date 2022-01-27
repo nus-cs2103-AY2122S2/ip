@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores tasks from the chatbot in an ArrayList for easy retrieval
+ */
 public class TaskList {
     private List<Task> store;
     private final File file;
@@ -65,6 +68,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieves task from given index
+     *
+     * @param index
+     * @return Task in given index
+     */
     public Task get(int index) {
         return this.store.get(index);
     }
@@ -94,18 +103,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Get number of tasks in current tasklist
+     *
+     * @return int value of size of tasklist
+     */
     public int size() {
         return this.store.size();
     }
 
+    /**
+     * Adds param task into tasklist
+     *
+     * @param task
+     */
     public void add(Task task) {
         this.store.add(task);
     }
 
+    /**
+     * Removes task from param index from tasklist
+     *
+     * @param index
+     * @return task removed from tasklist
+     */
     public Task remove(int index) {
         return this.store.remove(index);
     }
 
+    /**
+     * Writes current state snapshot of tasklist into .txt file
+     *
+     * @throws WriteException
+     */
     public void backup() throws WriteException {
         try {
             FileWriter fw = new FileWriter(this.file, false);

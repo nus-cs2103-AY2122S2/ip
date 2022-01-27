@@ -10,6 +10,10 @@ import duke.task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parser type: Input parser
+ * Parse all user inputs for addition into tasklist
+ */
 public class InputParser extends Parser {
     public void parseInput(String input, TaskList tasks) throws RonException {
         String trimmedText = input.trim();
