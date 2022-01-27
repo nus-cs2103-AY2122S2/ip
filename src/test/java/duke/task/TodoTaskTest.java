@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoTaskTest {
     @Test
-    public void todoTask_valid_success(){
+    public void todoTask_valid_success() {
         assertTrue(new TodoTask("Title 1") instanceof TodoTask);
         assertTrue(new TodoTask("Title 2", true) instanceof TodoTask);
     }
 
     @Test
-    public void todoTask_toOutputLine_success(){
+    public void todoTask_toOutputLine_success() {
         assertEquals(new TodoTask("Title 1").toOutputLine(),
                 "T | 0 | Title 1");
         assertEquals(new TodoTask("Title 2", true).toOutputLine(),
@@ -21,7 +21,7 @@ public class TodoTaskTest {
     }
 
     @Test
-    public void todoTask_toString_success(){
+    public void todoTask_toString_success() {
         assertEquals(new TodoTask("Title 1").toString(),
                 "Title 1");
         assertEquals(new TodoTask("Title 2", true).toString(),

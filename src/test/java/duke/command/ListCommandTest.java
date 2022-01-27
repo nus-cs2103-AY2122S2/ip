@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListCommandTest {
     @Test
     public void listCommand_emptyList_success() throws IOException, DukeException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStream));
@@ -34,12 +34,13 @@ public class ListCommandTest {
 
     @Test
     public void listCommand_fullList_success() throws IOException, DukeException {
-        UI ui = new UI();
+        Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         taskList.add(new TodoTask("Task 1: Todo"));
         taskList.add(new TodoTask("Task 2: Todo, Marked", true));
         taskList.add(new DeadlineTask("Task 3: Deadline w/ Date and Time", "2022-01-01", "11:11"));
-        taskList.add(new DeadlineTask("Task 4: Deadline w/ Date and Time, Marked", true,"2022-01-01", "11:11"));
+        taskList.add(new DeadlineTask("Task 4: Deadline w/ Date and Time, Marked",
+                true,"2022-01-01", "11:11"));
         taskList.add(new DeadlineTask("Task 5: Deadline w/ Date only", "2022-01-01"));
         taskList.add(new DeadlineTask("Task 6: Deadline w/ Date only, Marked", true, "2022-01-01"));
         taskList.add(new EventTask("Task 7: Event w/ Date and Time", "2022-01-01", "11:11"));

@@ -5,42 +5,82 @@ public abstract class Task {
     protected Boolean isDone;
     protected TaskType type;
 
-    public Task(String title){
+    /**
+     * Superclass constructor for tasks.
+     *
+     * @param title Title of task
+     */
+    public Task(String title) {
         this.title = title;
         this.isDone = false;
     }
-    
-    public Task(String title, Boolean isDone){
+
+    /**
+     * Superclass constructor for tasks with specified done state.
+     *
+     * @param title Title of task
+     * @param isDone Done state
+     */
+    public Task(String title, Boolean isDone) {
         this.title = title;
         this.isDone = isDone;
     }
 
+    /**
+     * Getter for task title.
+     */
     public String getTitle() {
         return this.title;
     }
 
-    public void markAsDone(){
+    /**
+     * Mark tasks as done.
+     */
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public void markAsUndone(){
+    /**
+     * Unmark tasks.
+     */
+    public void markAsUndone() {
         this.isDone = false;
     }
 
-    public String getType(){
+    /**
+     * Obtain the initial for the type of task.
+     *
+     * @return String with the initial of the task type
+     */
+    public String getType() {
         return this.type.getInitial();
     }
 
-    public String getStatusIcon(){
+    /**
+     * Obtain the indication for done state in a string for printing.
+     *
+     * @return Done indicator, X if the task is done and nothing if the task is undone
+     */
+    public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
-    public String toOutputLine(){
+    /**
+     * Concatenate task to general format for saving to file.
+     *
+     * @return Stirng for file saving
+     */
+    public String toOutputLine() {
         return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title;
     }
 
+    /**
+     * Use title as the String representation of the task.
+     *
+     * @return Title of task
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return this.title;
     }
 }

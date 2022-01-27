@@ -1,7 +1,16 @@
 package duke.exception;
 
-public class DukeException extends Exception{
-    public DukeException(String str){
+
+/**
+ * Custom exception class for printing set error texts.
+ */
+public class DukeException extends Exception {
+    /**
+     * Exception constructor.
+     *
+     * @param str Error message
+     */
+    public DukeException(String str) {
         super(str);
     }
 }
