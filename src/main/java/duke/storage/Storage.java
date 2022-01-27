@@ -4,6 +4,8 @@ import duke.task.*;
 import duke.ui.Ui;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,6 +19,13 @@ public class Storage {
     public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
         BufferedReader bufferedReader = null;
+        if (!Files.exists(Paths.get(filePath))) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         FileReader fileReader = new FileReader(file);
         bufferedReader = new BufferedReader(fileReader);
         ArrayList<Task> taskList = new ArrayList<>();
