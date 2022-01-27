@@ -1,6 +1,8 @@
 package doge.command;
 
-import doge.*;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
 import doge.exception.DogeException;
 
 public class UnmarkCommand extends Command {

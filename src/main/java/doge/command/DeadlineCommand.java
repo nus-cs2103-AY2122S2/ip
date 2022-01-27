@@ -1,6 +1,10 @@
 package doge.command;
 
-import doge.*;
+import doge.Doge;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
+import doge.exception.DeadlineException;
 import doge.exception.DogeException;
 import doge.task.Task;
 
@@ -16,9 +20,9 @@ public class DeadlineCommand extends Command {
         String[] curr = this.task.getDescription().split("/");
 
         if (this.task.getDescription().isEmpty()) {
-            throw new DogeException("What is the event ABOUT?");
+            throw new DeadlineException("What is the event ABOUT?");
         } else if (curr.length == 1) {
-            throw new DogeException("Where is the END DATE?");
+            throw new DeadlineException("Where is the END DATE?");
         } else {
             LocalDateTime dateTime = Doge.getDateTime(curr[1].trim());
             this.task.setDateTime(dateTime);

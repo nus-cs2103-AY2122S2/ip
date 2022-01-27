@@ -1,7 +1,5 @@
 package doge.task;
 
-import doge.task.Task;
-
 public class Todo extends Task {
 	public Todo(String description) {
 		super(description);

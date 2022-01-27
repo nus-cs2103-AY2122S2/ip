@@ -1,7 +1,11 @@
 package doge.command;
 
-import doge.*;
+import doge.Doge;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
 import doge.exception.DogeException;
+import doge.exception.EventException;
 import doge.task.Task;
 
 import java.time.LocalDateTime;
@@ -16,9 +20,9 @@ public class EventCommand extends Command {
         String[] curr = this.task.getDescription().split("/");
 
         if (this.task.getDescription().isEmpty()) {
-            throw new DogeException("What is the event ABOUT?");
+            throw new EventException("What is the event ABOUT?");
         } else if (curr.length == 1) {
-            throw new DogeException("Where is the END DATE?");
+            throw new EventException("Where is the END DATE?");
         } else {
             LocalDateTime dateTime = Doge.getDateTime(curr[1].trim());
             this.task.setDateTime(dateTime);

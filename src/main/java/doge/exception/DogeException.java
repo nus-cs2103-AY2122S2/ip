@@ -1,7 +1,7 @@
 package doge.exception;
 
 public class DogeException extends Exception {
-	private final String message;
+	private String message;
 
 	public DogeException(String s) {
 		super(s);

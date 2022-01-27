@@ -1,7 +1,10 @@
 package doge.command;
 
-import doge.*;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
 import doge.exception.DogeException;
+import doge.exception.TodoException;
 import doge.task.Task;
 
 public class TodoCommand extends Command {
@@ -11,7 +14,7 @@ public class TodoCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.task.getDescription().isEmpty()) {
-            throw new DogeException("So doing NOTHING is a task? doge.task.Task details cannot be left empty!");
+            throw new TodoException("So doing NOTHING is a task? doge.task.Task details cannot be left empty!");
         } else {
             tasks.addTask(this.task);
         }
