@@ -10,14 +10,6 @@ public class InputList {
         this.tasks = tasks;
     }
 
-    public InputList() {
-        this.tasks = new ArrayList<>();
-    }
-
-    public static void main(String[] args) {
-
-    }
-
     public void writeToFile(Storage store) {
         store.writeTasks(this.tasks);
     }
