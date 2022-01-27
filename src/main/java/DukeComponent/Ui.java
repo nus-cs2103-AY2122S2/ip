@@ -1,3 +1,5 @@
+package DukeComponent;
+
 import exceptions.TaskException;
 import java.util.Scanner;
 

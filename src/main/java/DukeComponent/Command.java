@@ -1,3 +1,5 @@
+package DukeComponent;
+
 import Tasks.*;
 
 public class Command {

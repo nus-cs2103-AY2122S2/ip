@@ -1,3 +1,5 @@
+package DukeComponent;
+
 import Tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
