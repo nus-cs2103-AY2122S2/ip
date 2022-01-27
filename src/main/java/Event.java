@@ -19,7 +19,7 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(), sdf.format(this.at));
     }
 
-    public String write() {
+    public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return String.format("%s | %s | %s | %s\n", "E", markStatus, super.taskName, sdf.format(this.at));

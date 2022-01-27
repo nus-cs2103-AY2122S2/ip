@@ -1,16 +1,9 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Duke {
 
@@ -66,8 +59,6 @@ public class Duke {
             } catch (DukeException e) {
                 e.exceptionResponse();
             }
-
-
         }
         sc.close();
     }
@@ -83,54 +74,54 @@ public class Duke {
 
     private static void init() throws IOException {
         File dataFile = new File("data/todo.dat");
-        dataFile.getParentFile().mkdirs();
+        boolean pathExists = dataFile.getParentFile().mkdirs();
         if (!dataFile.exists()) { dataFile.createNewFile(); }
 
         taskList = new ArrayList<>();
 
-        // TODO: error handling?
+        try (Scanner scanner = new Scanner(dataFile).useDelimiter("\\n")) {
+            scanner.forEachRemaining(entry -> {
+                String[] input = entry.split(" \\| ");
+                Task newTask = null;
 
-        Scanner sc = new Scanner(dataFile).useDelimiter("\\n");
-        sc.forEachRemaining(entry -> {
-            String[] input = entry.split(" \\| ");
-            Task newTask = null;
-
-            if (input[0].equals("T")) { newTask = new ToDo(input[2]); }
-            else if (input[0].equals("D")) {
-                try {
-                    newTask = new Deadline(input[2], input[3]);
-                } catch (DukeException e) {
-                    e.printStackTrace();
+                if (input[0].equals("T")) { newTask = new ToDo(input[2]); }
+                else if (input[0].equals("D")) {
+                    try {
+                        newTask = new Deadline(input[2], input[3]);
+                    } catch (DukeException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        newTask = new Event(input[2], input[3]);
+                    } catch (DukeException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } else {
-                try {
-                    newTask = new Event(input[2], input[3]);
-                } catch (DukeException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            if (newTask != null) {
-                newTask.isMarked = input[1].equals("1");
-                taskList.add(newTask);
-            }
-        });
-        sc.close();
+                if (newTask != null) {
+                    newTask.isMarked = input[1].equals("1");
+                    taskList.add(newTask);
+                }
+            });
+        } catch (Exception e) {
+            new DukeException(dataFile.getName() + " not found.").exceptionResponse();
+        }
     }
 
     public static void save() throws IOException {
         FileWriter fw = new FileWriter("data/todo.dat", false);
         taskList.forEach(entry -> {
             try {
-                fw.write(entry.write());
+                fw.write(entry.toFile());
             } catch (IOException e) {
-                e.printStackTrace();
+                new DukeException(e.getMessage()).exceptionResponse();
             }
         });
         fw.close();
     }
 
-    public static void main(String[] args) throws IOException, DukeException {
+    public static void main(String[] args) throws IOException {
         init();
         greet();
         run();

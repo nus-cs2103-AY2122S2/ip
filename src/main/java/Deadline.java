@@ -19,7 +19,7 @@ public class Deadline extends Task{
         return String.format("[D]%s (by: %s)", super.toString(), sdf.format(this.by));
     }
 
-    public String write() {
+    public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return String.format("%s | %s | %s | %s\n", "D", markStatus, super.taskName, sdf.format(this.by));

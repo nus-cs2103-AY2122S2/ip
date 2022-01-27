@@ -21,5 +21,5 @@ abstract class Task {
         return String.format("[%s] " + this.getTaskName(), this.getMarkedStatus());
     }
 
-    public abstract String write();
+    public abstract String toFile();
 }
