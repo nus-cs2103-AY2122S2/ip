@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks, UI ui) throws DukeException {
+    public void execute(List<Task> tasks, Ui ui) throws DukeException {
         List<Integer> foundIndexes = new ArrayList<Integer>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getTitle().contains(this.searchTerm)) {
