@@ -14,6 +14,7 @@ public class Parser {
     public static String ADD_TODO = "ADD_TODO";
     public static String ADD_DEADLINE = "ADD_DEADLINE";
     public static String ADD_EVENT = "ADD_EVENT";
+    public static String FIND_EVENT = "FIND_EVENT";
 
 
     public Parser(String userInput) {
@@ -55,6 +56,9 @@ public class Parser {
         } else if(input.length() >= 7 && input.substring(0, 7).equals("delete ") && isNumeric(input.substring(7))) {
             result.add(DELETE);
             result.add(input.substring(7));
+        } else if(tags.length == 2 && tags[0].equals("find") && tags[1] instanceof String) {
+            result.add(FIND_EVENT);
+            result.add(tags[1]);
         } else if(tags[0].equals("todo")) {
             if(tags.length == 1 || tags[1].equals("")) {
                 throw new EmptyDescriptionException();
