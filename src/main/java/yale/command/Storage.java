@@ -31,7 +31,7 @@ public class Storage {
             }
             return "";
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            new File("data").mkdirs();
             return "";
         }
     }
