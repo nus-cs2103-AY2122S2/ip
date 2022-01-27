@@ -1,8 +1,33 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class Commands {
 
     private final TaskHistory taskHistory = new TaskHistory();
 
     public Commands() { // Empty Constructor
+    }
+
+    public LocalDate convertToDukeDate(String date) throws DukeException {
+        SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+        df1.setLenient(false);
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        df2.setLenient(false);
+        try {
+            Date dummyDate1 = df1.parse(date);
+            return dummyDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (ParseException e1) {
+            try {
+                Date dummyDate2 = df2.parse(date);
+                return LocalDate.parse(date);
+            } catch (ParseException e2) {
+                throw new DukeException("Failed to convert date");
+            }
+        }
     }
 
     void bye() { // Get DukeLCH to Exit
@@ -97,7 +122,12 @@ public class Commands {
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {
-            timeFrame = timeFrame.concat(tokens[j]);
+            try {
+                LocalDate dukeDate = convertToDukeDate(tokens[j]);
+                timeFrame = timeFrame.concat(dukeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            } catch (DukeException e) {
+                timeFrame = timeFrame.concat(tokens[j]);
+            }
             if (j != (tokens.length - 1)) {
                 timeFrame = timeFrame.concat(" ");
             }
@@ -125,7 +155,12 @@ public class Commands {
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {
-            timeFrame = timeFrame.concat(tokens[j]);
+            try {
+                LocalDate dukeDate = convertToDukeDate(tokens[j]);
+                timeFrame = timeFrame.concat(dukeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            } catch (DukeException e) {
+                timeFrame = timeFrame.concat(tokens[j]);
+            }
             if (j != (tokens.length - 1)) {
                 timeFrame = timeFrame.concat(" ");
             }
