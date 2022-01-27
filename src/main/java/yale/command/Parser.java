@@ -21,6 +21,8 @@ public class Parser {
             list.deadlineFeature(command, list);
         } else if (command.contains("event")) {
             list.eventFeature(command, list);
+        } else if (command.contains("find")) {
+            list.findFeature(command, list);
         } else {
             System.out.println("Error: " + command
                     + " is not a valid command. Please try again.");
