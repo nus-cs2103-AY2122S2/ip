@@ -1,6 +1,7 @@
 package mcbot;
 
 import java.util.Scanner;
+
 import mcbot.exception.InvalidCommandException;
 
 public class Parser {

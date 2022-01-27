@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import mcbot.task.Task;
 import mcbot.task.ToDo;
 import mcbot.task.Deadline;
 import mcbot.task.Event;
+
 import mcbot.exception.McBotException;
 
 public class Storage {
@@ -51,35 +53,33 @@ public class Storage {
                 String[] str = s.nextLine().split(" \\| ");
                 Task t;
                 switch (str[0]) {
-                case "T": {
+                case "T":
                     t = new ToDo(str[2]);
                     break;
-                }
-                case "D": {
-                    LocalDate date = LocalDate.parse(str[3]);
+                case "D":
+                    LocalDate deadlineDate = LocalDate.parse(str[3]);
                     if (str.length == 5) {
                         LocalTime time = LocalTime.parse(str[4]);
-                        t = new Deadline(str[2], date, time);
+                        t = new Deadline(str[2], deadlineDate, time);
                     } else {
-                        t = new Deadline(str[2], date);
+                        t = new Deadline(str[2], deadlineDate);
                     }
                     break;
-                }
-                case "E": {
-                    LocalDate date = LocalDate.parse(str[3]);
+                case "E":
+                    LocalDate eventDate = LocalDate.parse(str[3]);
                     if (str.length == 5) {
                         LocalTime time = LocalTime.parse(str[4]);
-                        t = new Event(str[2], date, time);
+                        t = new Event(str[2], eventDate, time);
                     } else {
-                        t = new Event(str[2], date);
+                        t = new Event(str[2], eventDate);
                     }
                     break;
-                }
                 default:
                     throw new McBotException("I dont understand the words in the file");
                 }
-                if (str[1].equals("1"))
+                if (str[1].equals("1")) {
                     t.markDone();
+                }
                 arrList.add(t);
             }
         } catch (IOException | McBotException e) {
@@ -98,7 +98,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -108,7 +108,7 @@ public class Storage {
             fw.write(task.toDataString() + "\n");
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
