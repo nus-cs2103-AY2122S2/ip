@@ -99,7 +99,7 @@ final class Event extends Task {
     public String toString() {
         String tag = "[E]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String eventDate = "(at: " + this.eventDate + ")";
+        String eventDate = "(at: " + this.eventDate.format(formatter) + ")";
         return tag + doneIndicator + " " + this.taskName + eventDate;
     }
 
