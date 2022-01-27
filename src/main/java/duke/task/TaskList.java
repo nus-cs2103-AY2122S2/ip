@@ -12,6 +12,7 @@ public class TaskList {
 
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.ui = new Ui();
     }
 
     public TaskList(Ui ui) {
@@ -76,8 +77,8 @@ public class TaskList {
                 System.out.println(e.toString());
             }
         } else {
-            tasks.remove(index - 1);
-            ui.showUiForDelete(tasks.get(index - 1), tasks.size());
+            Task removedTask = tasks.remove(index - 1);
+            ui.showUiForDelete(removedTask, tasks.size());
         }
     }
 
@@ -116,6 +117,21 @@ public class TaskList {
         };
         tasks.sort(comparator);
         ui.showUiForSort(tasks, sortType);
+    }
+
+    @Override
+    public boolean equals(Object taskList) {
+        TaskList taskListCast = (TaskList) taskList;
+        if (taskListCast.tasks.size() != this.tasks.size()) {
+            return false;
+        }else {
+            for(int k = 0; k < tasks.size(); k++) {
+                if (tasks.get(k).compareTo(taskListCast.tasks.get(k)) != 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }
