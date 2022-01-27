@@ -42,6 +42,13 @@ public class Parser {
                 throw new EmptyDateException();
             }
             return new EventCommand(wordArr[0], Ui.toLocalDateTime(wordArr[1]));
+        case "find":
+            if (arr.length < 2) {
+                throw new IncompleteCommandException();
+            } else if (arr[1].trim().equals("")) {
+                throw new IncompleteCommandException();
+            }
+            return new FindCommand(arr[1]);
         case "mark":
             if (arr.length < 2) {
                 throw new IncompleteCommandException();

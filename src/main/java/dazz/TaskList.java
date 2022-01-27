@@ -45,6 +45,10 @@ public class TaskList {
         }
     }
 
+    public void list() {
+        taskList.forEach(x -> System.out.println("\t" + x));
+    }
+
     public int getSize() {
         return taskList.size();
     }
