@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    /**
+     * Path for the save file
+     */
     final String DATA_PATH = "data";
     String fileName;
 
