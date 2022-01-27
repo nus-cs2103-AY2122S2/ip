@@ -25,7 +25,7 @@ public class Ui {
     }
 
     public void handleUi() throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
-        System.out.println("Hello! I'm Johnny.Johnny \n" + "What can I do for you?");
+        System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input;
         while(true) {
@@ -52,6 +52,10 @@ public class Ui {
             }
             else if(commandTag.equals(Parser.DELETE)) {
                 tasks.delete(Integer.parseInt(parseOutput.get(1)));
+            }
+            else if(commandTag.equals(Parser.FIND_EVENT)) {
+                System.out.println("Here are the matching tasks in your list:");
+                tasks.searchEventAndPrint(parseOutput.get(1));
             }
             else if(commandTag.equals(Parser.ADD_TODO)) {
 

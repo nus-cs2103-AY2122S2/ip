@@ -51,6 +51,15 @@ public class InputList {
         System.out.println(tasks.get(index - 1).toString());
     }
 
+    public void searchEventAndPrint(String searchString) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(searchString)) {
+                System.out.print(i + 1);
+                System.out.println(". " + tasks.get(i).toString());
+            }
+        }
+    }
+
     public int getCount() {
         return tasks.size();
     }
