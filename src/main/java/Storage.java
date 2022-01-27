@@ -6,17 +6,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
     private File file;
 
-    public Storage() {
+    public Storage(String filePath) {
         try {
             Path path = Paths.get("data/");
             if (!Files.exists(path)) { Files.createDirectory(path); }
-            this.file = new File(path + "/list.txt");
+            this.file = new File(filePath);
             this.file.createNewFile();
         } catch (FileAlreadyExistsException e) {
             e.getStackTrace();
@@ -25,20 +26,37 @@ public class Storage {
         }
     }
 
-    private Task parseInput(String input) {
-        String[] arr = input.split(" === ");
-        String type = arr[0];
-        boolean isDone = arr[1].equals("1");
+    public List<Task> loadList() {
+        List<Task> list = null;
+        try {
+            Scanner scanner = new Scanner(this.file);
+            list = new ArrayList<>();
+            while (scanner.hasNext()) {
+                list.add(parseInput(scanner.nextLine()));
+            }
+            return list;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            return new ArrayList<>();
+        } catch (InvalidDateFormatException e) {
+            return list;
+        }
+    }
+
+    private Task parseInput(String input) throws InvalidDateFormatException {
+        String[] arr = input.split("===");
+        String taskType = arr[0].trim();
+        boolean isDone = arr[1].trim().equals("1");
         Task task = null;
-        switch (type) {
+        switch (taskType) {
         case "D":
-            task = new Deadline(arr[0], isDone, arr[2], arr[3]);
+            task = new Deadline(arr[2].trim(), isDone, Ui.toLocalDateTime(arr[3].trim()));
             break;
         case "E":
-            task = new Event(arr[0], isDone, arr[2], arr[3]);
+            task = new Event(arr[2].trim(), isDone, Ui.toLocalDateTime(arr[3].trim()));
             break;
         case "T":
-            task = new Todo(arr[0], isDone, arr[2]);
+            task = new Todo(arr[2].trim(), isDone);
             break;
         default:
             break;
@@ -46,39 +64,18 @@ public class Storage {
         return task;
     }
 
-    public void loadList(TaskList taskList) {
-        try {
-            Scanner s = new Scanner(this.file);
-            while (s.hasNext()) {
-                Task task = parseInput(s.nextLine());
-                taskList.add(task, false);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-    }
-
-    public String processTaskToOutput(Task task) {
-        String separator = " === ";
-        int isDone = task.getIsDone() ? 1 : 0;
-        return task.getTaskType() + separator + isDone + separator +
-                task.getDescription() + separator + task.getDate();
-    }
-
     public void updateList(TaskList taskList)  {
-            try {
-                String filePath = file.getPath();
-                FileWriter fw = new FileWriter(filePath);
-                List<Task> list = taskList.getReminders();
-                for (Task task : list) {
-                    String textToAdd = processTaskToOutput(task);
-                    fw.write(textToAdd + System.lineSeparator());
-                }
-                fw.close();
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+        try {
+            String filePath = file.getPath();
+            FileWriter fw = new FileWriter(filePath);
+            List<Task> list = taskList.getTaskList();
+            for (Task task : list) {
+                fw.write(task.writeToFile() + System.lineSeparator());
             }
-
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
 }

@@ -1,15 +1,32 @@
-public class Event extends Task {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String taskType, String description, String date) {
-        super(taskType, description, date);
+public class Event extends Task {
+    private static final String TYPE = "E";
+    private final LocalDateTime dateTime;
+
+    public Event(String description, LocalDateTime date) {
+        super(description);
+        this.dateTime = date;
     }
 
-    public Event(String taskType, boolean isDone, String description, String date) {
-        super(taskType, isDone, description, date);
+    public Event(String description, boolean isDone, LocalDateTime date) {
+        super(description, isDone);
+        this.dateTime = date;
+    }
+
+    private String getDateTimeFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd MMM yyyy, hh:mma]");
+        return this.dateTime.format(formatter);
+    }
+
+    @Override
+    public String writeToFile() {
+        return TYPE + " === " + super.writeToFile() + " === " + this.getDateTimeFormat();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + super.getDate() + ")";
+        return "[" + TYPE + "]" + super.toString() + " (by: " + this.getDateTimeFormat() + ")";
     }
 }

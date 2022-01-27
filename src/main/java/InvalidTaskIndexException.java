@@ -1,5 +1,5 @@
 public class InvalidTaskIndexException extends DazzException {
     public InvalidTaskIndexException() {
-        super("\tOOPS!!! The index you have provided is invalid!");
+        super(ErrorType.INVALID_INDEX.getErrorMessage());
     }
 }

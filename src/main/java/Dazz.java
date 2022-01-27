@@ -1,34 +1,34 @@
-import java.util.Scanner;
-
 public class Dazz {
-    private Storage storage;
+    private final Storage storage;
     private final Ui ui;
-    private final Parser logic;
+    private final TaskList taskList;
 
-
-    public Dazz(TaskList taskList) {
+    public Dazz(String filePath) {
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.loadList());
         this.ui = new Ui();
-        this.logic = new Parser(taskList);
-        this.storage = new Storage();
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DazzException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
 
     public static void main(String[] args) {
-        TaskList taskList = new TaskList();
-        Dazz dazz = new Dazz(taskList);
-        Scanner scanner = new Scanner(System.in);
-        dazz.ui.startUp();
-        dazz.storage.loadList(taskList);
-        while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            System.out.println(Ui.HORIZONTAL_LINE);
-            dazz.logic.run(input);
-            System.out.println(Ui.HORIZONTAL_LINE);
-            if (input.startsWith("bye")) {
-                break;
-            }
-        }
-        dazz.storage.updateList(taskList);
-        scanner.close();
+        new Dazz("data/tasks.txt").run();
     }
 }
 
