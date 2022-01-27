@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     /**
      * Creates an instance of a FindCommand object.
      *
-     * @param searchInfo
+     * @param searchInfo the details that the user is looking for
      */
     public FindCommand(String searchInfo) {
         this.searchInfo = searchInfo;
