@@ -2,6 +2,15 @@ package duke;
 
 import duke.exception.RonException;
 
+/**
+ * Custom chatbot adapted from Duke
+ * Name of chatbot: Ron
+ *
+ * @author jaegarpoon
+ * @version 0.1
+ * @since 2022-02-21
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
