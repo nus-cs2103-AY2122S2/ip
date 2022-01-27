@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
@@ -14,13 +15,13 @@ public class TaskList {
         return toDo.toString();
     }
 
-    public String addEvent(String description, String eventDate) {
+    public String addEvent(String description, LocalDateTime eventDate) {
         Event event = new Event(description, eventDate);
         this.taskList.add(event);
         return event.toString();
     }
 
-    public String addDeadline(String description, String dueDate) {
+    public String addDeadline(String description, LocalDateTime dueDate) {
         Deadline deadline = new Deadline(description, dueDate);
         this.taskList.add(deadline);
         return deadline.toString();
