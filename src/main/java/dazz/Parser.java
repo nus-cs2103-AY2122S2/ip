@@ -1,12 +1,29 @@
 package dazz;
 
-import dazz.command.*;
+import dazz.command.Command;
+import dazz.command.DeadlineCommand;
+import dazz.command.DefaultCommand;
+import dazz.command.DeleteCommand;
+import dazz.command.EventCommand;
+import dazz.command.ExitCommand;
+import dazz.command.ListCommand;
+import dazz.command.MarkCommand;
+import dazz.command.TodoCommand;
+import dazz.command.UnmarkCommand;
+
 import dazz.exception.DazzException;
 import dazz.exception.EmptyDateException;
 import dazz.exception.EmptyDescriptionException;
 import dazz.exception.IncompleteCommandException;
 
 public class Parser {
+    /**
+     * Returns a valid <code>Command</code> when valid user input is parsed.
+     * If the user input is invalid, <code>DefaultCommand</code> is returned
+     * @param input User input.
+     * @return Command command depending on the type of input.
+     * @throws DazzException If errors are detected in user input
+     */
     public static Command parse(String input) throws DazzException {
         String[] arr = input.split(" ", 2);
         String[] wordArr;
