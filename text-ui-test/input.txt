@@ -1,5 +1,6 @@
 help
 todo Java week 2
+delete 1
 event Ball /at 26th January 2021
 deadline quiz 2 /by 19th January 2021
 deadline /by 615

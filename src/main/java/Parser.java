@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Checker {
+public class Parser {
     private String command;
     private Status state;
 
@@ -16,7 +16,7 @@ public class Checker {
         UNMARK
     };
 
-    public Checker(String input) throws DukeException {
+    public Parser(String input) throws DukeException {
         this.command = input;
 
         if (this.command.equals("bye")) {

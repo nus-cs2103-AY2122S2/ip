@@ -19,12 +19,20 @@ public class Task {
     }
 
     /**
+     * Gets the task description.
+     *
+     * @return specified Task description
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Gets the task status. Returns the formatted task status icon.
-     * Can only be used in the Task class.
      *
      * @return specified Task status icon i.e. [X] or  [ ]
      */
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 

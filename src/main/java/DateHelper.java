@@ -18,7 +18,15 @@ public class DateHelper {
             Date date = simpleDateFormat.parse(time);
             this.formattedDatetime = date;
         } catch (ParseException e) {
-            throw new DukeException(INVALID_DATE);
+           try {
+                String pattern = "dd MMMM yyyy";
+                DateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                simpleDateFormat.setLenient(false);
+                Date date = simpleDateFormat.parse(time);
+                this.formattedDatetime = date;
+            } catch (ParseException err) {
+               throw new DukeException(INVALID_DATE);
+           }
         }
     }
 
