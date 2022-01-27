@@ -15,6 +15,13 @@ public class Task {
         this.isDone = new_status;
     }
 
+    public String toSavedFile() {
+        if (this.isDone) {
+            return "1 | " + this.description;
+        } else {
+            return "0 | " + this.description;
+        }
+    }
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

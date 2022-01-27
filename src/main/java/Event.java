@@ -1,13 +1,17 @@
 public class Event extends Task {
-    protected String event_time;
+    protected String eventTime;
 
-    public Event(String description, String event_time) {
+    public Event(String description, String eventTime) {
         super(description);
-        this.event_time = event_time;
+        this.eventTime = eventTime;
     }
 
     @Override
+    public String toSavedFile() {
+        return "D | " + super.toSavedFile() + " | " + this.eventTime;
+    }
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + event_time + ")";
+        return "[E]" + super.toString() + " (at: " + eventTime + ")";
     }
 }
