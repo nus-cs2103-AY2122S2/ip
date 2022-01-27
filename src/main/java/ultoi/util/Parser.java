@@ -9,6 +9,7 @@ import ultoi.command.Command;
 import ultoi.command.AddCommand;
 import ultoi.command.ByeCommand;
 import ultoi.command.DeleteCommand;
+import ultoi.command.FindCommand;
 import ultoi.command.ListCommand;
 import ultoi.command.MarkCommand;
 
@@ -42,6 +43,8 @@ public class Parser {
             case "mark":
             case "unmark":
                 return new MarkCommand(input);
+            case "find":
+                return new FindCommand(input);
             case "bye":
                 return new ByeCommand(input);
             default:

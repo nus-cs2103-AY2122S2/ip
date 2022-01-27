@@ -24,6 +24,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String genDoneSymbol() {
         return isDone ? "X" : " ";
     }

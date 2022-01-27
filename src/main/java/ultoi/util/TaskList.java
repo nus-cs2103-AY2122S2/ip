@@ -44,6 +44,18 @@ public class TaskList {
         return "Now you have " + size() + " task(s) in total.";
     }
 
+    public TaskList findTasksWith(String keyword) {
+        List<Task> matchingTasks = new ArrayList<Task>();
+
+        for (int i = 0; i < size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
+                matchingTasks.add(tasks.get(i));
+            }
+        }
+
+        return new TaskList(matchingTasks);
+    }
+
     public String toInputString() {
         String str = "";
         for (int i = 0; i < size(); i++) {
