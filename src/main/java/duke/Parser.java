@@ -1,3 +1,4 @@
+package duke;
 import exceptions.DukeDeadlineException;
 import exceptions.DukeEventException;
 import exceptions.DukeException;

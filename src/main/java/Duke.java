@@ -1,20 +1,8 @@
+import duke.*;
 import exceptions.DukeDeadlineException;
 import exceptions.DukeEventException;
 import exceptions.DukeException;
-import exceptions.DukeTodoException;
-
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDate;
-
-//import java.io.*;
-//import java.util.*;
 
 /**
  * Represents the Duke bot

@@ -1,3 +1,4 @@
+package duke;
 /**
  * Extends Command class
  * When executed, calls Ui method to print output

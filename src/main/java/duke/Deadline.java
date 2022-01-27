@@ -1,15 +1,15 @@
+package duke;
+
 import exceptions.DukeDeadlineException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-//    protected String by;
     protected LocalDate by_date;
 
     public Deadline(String name, LocalDate by_date) {
         super(name);
-//        this.by = by;
         this.by_date = by_date;
     }
 
@@ -27,8 +27,6 @@ public class Deadline extends Task {
             taskby_date = LocalDate.parse(taskby);
 
             Deadline d_line = new Deadline(taskname, taskby_date);
-//            System.out.println("Got it. I've added this task: ");
-//            System.out.println(d_line);
             return d_line;
         } catch (Exception e) {
             DukeDeadlineException error = new DukeDeadlineException(

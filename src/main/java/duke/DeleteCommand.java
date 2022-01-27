@@ -1,23 +1,19 @@
+package duke;
 import java.io.IOException;
 
 /**
  * Extends Command class
- * When executed, calls ui method to print relevant output
+ * When executed, calls ui to print delete output
  */
-public class UnmarkCommand extends Command {
+public class DeleteCommand extends Command {
     int ranking;
-
-    /**
-     * Constructor
-     * Initialise index of task to mark as not done
-     * @param ranking int ranking of task
-     */
-    public UnmarkCommand(int ranking) {
+    public DeleteCommand(int ranking) {
         this.ranking = ranking;
     }
 
     /**
-     * Handles un-marking of task of specific index in tasklist as not done
+     * Handles deleting of a specific task by its index
+     * Calls ui to print output for delete action and updates storage
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
@@ -27,8 +23,8 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
         assert this.ranking > 0 && this.ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
 
-        tasklist.markUndone(this.ranking);
+        tasklist.delete(this.ranking);
         storage.writeToFile(tasklist);
-        return ui.printUnmarkTaskFromDone(tasklist, this.ranking);
+        return ui.printTaskIsDeleted(tasklist);
     }
 }

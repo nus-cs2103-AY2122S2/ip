@@ -1,8 +1,8 @@
+package duke;
 import exceptions.DukeDeadlineException;
 import exceptions.DukeException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -83,9 +83,6 @@ public class Storage {
                 String event_name = get_event_name[0];
                 String event_venue = get_event_name[1].split("\\)")[0];
 
-                // Testing formatted data
-//                System.out.println(event_name + ", " + event_venue);
-
                 Task event = Event.setEvent(event_name + " /at " + event_venue);
 
                 if (completion[1].equals("X")) {
@@ -106,9 +103,6 @@ public class Storage {
                 // formatting to input
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
                 String task_by_date = LocalDate.parse(task_by, formatter).toString();
-
-                //Checking formatted data
-//                System.out.println(task_name + ": " + task_by_date);
 
                 Task deadline = Deadline.setDeadline(task_name + " /by " + task_by_date);
 
