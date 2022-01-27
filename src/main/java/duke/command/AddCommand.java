@@ -14,7 +14,8 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an AddCommand object that adds a task to the task list upon execution.
-     * @param task The task to be added
+     *
+     * @param task The task to be added.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -22,10 +23,11 @@ public class AddCommand extends Command {
 
     /**
      * Adds the given task to the list, displays the result to the user, and saves the change to the list.
-     * @param taskList The list of tasks
-     * @param ui The UI object responsible for user interaction
-     * @param storage The Storage object responsible for saving the change
-     * @throws FileSaveException If the change cannot be saved
+     *
+     * @param taskList The list of tasks.
+     * @param ui The UI object responsible for user interaction.
+     * @param storage The Storage object responsible for saving the change.
+     * @throws FileSaveException If the change cannot be saved.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws FileSaveException {

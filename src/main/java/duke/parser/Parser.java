@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Parses and identifies the command provided by the user.
+     *
      * @param strCommand The user's command in String format.
      * @return The Command object corresponding to the user's input.
      * @throws DukeException If the user provides an invalid or incorrectly formatted command.

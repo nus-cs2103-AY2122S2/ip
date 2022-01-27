@@ -9,8 +9,9 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructs a new TaskList object with an initial list of tasks
-     * @param tasks The initial list of tasks
+     * Constructs a new TaskList object with an initial list of tasks.
+     *
+     * @param tasks The initial list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -25,7 +26,8 @@ public class TaskList {
 
     /**
      * Returns the ArrayList of all tasks in the TaskList.
-     * @return tasks, the ArrayList of tasks
+     *
+     * @return tasks, the ArrayList of tasks.
      */
     public ArrayList<Task> getTasks() {
         return tasks;
@@ -33,9 +35,10 @@ public class TaskList {
 
     /**
      * Returns a task by the index corresponding to its position in a numbered list.
-     * @param index The index of the task selected
-     * @return The selected task
-     * @throws TaskOutOfBoundsException If there is no task with the given index
+     *
+     * @param index The index of the task selected.
+     * @return The selected task.
+     * @throws TaskOutOfBoundsException If there is no task with the given index.
      */
     public Task getTask(int index) throws TaskOutOfBoundsException {
         if (0 < index & index <= tasks.size()) {
@@ -47,9 +50,10 @@ public class TaskList {
 
     /**
      * Deletes a task by the index corresponding to its position in a numbered list.
-     * @param index The index of the task selected
-     * @return The deleted task
-     * @throws TaskOutOfBoundsException If there is no task with the given index
+     *
+     * @param index The index of the task selected.
+     * @return The deleted task.
+     * @throws TaskOutOfBoundsException If there is no task with the given index.
      */
     public Task deleteTask(int index) throws TaskOutOfBoundsException {
         if (0 < index & index <= tasks.size()) {
@@ -61,7 +65,8 @@ public class TaskList {
 
     /**
      * Adds the given task to tasks.
-     * @param task The task to be added
+     *
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);

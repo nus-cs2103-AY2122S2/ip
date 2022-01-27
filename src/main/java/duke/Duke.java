@@ -16,7 +16,8 @@ public class Duke {
 
     /**
      * Constructs a Duke task manager.
-     * @param filepath The filepath in which the task list is stored and retrieved from
+     *
+     * @param filepath The filepath in which the task list is stored and retrieved from.
      */
     public Duke(String filepath) {
         this.ui = new Ui();

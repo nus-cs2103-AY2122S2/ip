@@ -12,7 +12,8 @@ public class Ui {
 
     /**
      * Reads one line of input from the user.
-     * @return The user's input
+     *
+     * @return The user's input.
      */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
@@ -21,7 +22,8 @@ public class Ui {
 
     /**
      * Stylises Duke output to be preceded by a divider. All Duke output is printed with this method.
-     * @param str The output to be stylised
+     *
+     * @param str The output to be stylised.
      */
     public void stylePrint(String str) {
         System.out.println("________\n" + str);
@@ -57,6 +59,7 @@ public class Ui {
 
     /**
      * Displays all the user's current tasks in a numbered list form beginning at 1.
+     *
      * @param tasks The ArrayList containing all user tasks.
      */
     public void displayTasks(ArrayList<Task> tasks) {
@@ -74,7 +77,8 @@ public class Ui {
 
     /**
      * Displays error messages with the stylePrint() style.
-     * @param errorMessage The error message to be displayed
+     *
+     * @param errorMessage The error message to be displayed.
      */
     public void displayError(String errorMessage) {
         stylePrint(errorMessage);
@@ -82,6 +86,7 @@ public class Ui {
 
     /**
      * Displays that a task has been marked as complete.
+     *
      * @param task The marked task.
      */
     public void displayMarkedTask(Task task) {
@@ -90,6 +95,7 @@ public class Ui {
 
     /**
      * Displays that a task has been marked as incomplete.
+     *
      * @param task The unmarked task.
      */
     public void displayUnmarkedTask(Task task) {
@@ -98,6 +104,7 @@ public class Ui {
 
     /**
      * Displays that a task has been deleted.
+     *
      * @param task The deleted task.
      */
     public void displayDeletedTask(Task task) {
@@ -106,6 +113,7 @@ public class Ui {
 
     /**
      * Displays that a task has been added.
+     *
      * @param task The added task.
      */
     public void displayAddedTask(Task task) {
@@ -114,6 +122,7 @@ public class Ui {
 
     /**
      * Displays how many tasks are currently in the user's list in sentence form.
+     *
      * @param tasks The ArrayList of tasks.
      */
     public void displayNumberOfTasks(ArrayList<Task> tasks) {

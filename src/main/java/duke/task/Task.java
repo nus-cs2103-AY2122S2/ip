@@ -9,7 +9,8 @@ public abstract class Task {
 
     /**
      * Constructs a new Task object.
-     * @param title The name given to the task
+     *
+     * @param title The name given to the task.
      * @param status Indicates whether the task has been completed or not.
      */
     public Task(String title, boolean status) {
@@ -19,7 +20,8 @@ public abstract class Task {
 
     /**
      * Returns icon that represents whether the given task has been completed or not.
-     * @return '[X]' if task completed and '[ ]' if not
+     *
+     * @return '[X]' if task completed and '[ ]' if not.
      */
     protected String getStatusIcon() {
         return (this.status ? "[X]" : "[ ]");
@@ -41,7 +43,8 @@ public abstract class Task {
 
     /**
      * Returns the task name and indicates whether it has been completed or not.
-     * @return The task name with the completion status icon as a prefix
+     *
+     * @return The task name with the completion status icon as a prefix.
      */
     @Override
     public String toString() {

@@ -11,9 +11,10 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task object.
-     * @param title The name given to the task
-     * @param time The date and time of the event
-     * @param status Indicates whether the task has been completed or not
+     *
+     * @param title The name given to the task.
+     * @param time The date and time of the event.
+     * @param status Indicates whether the task has been completed or not.
      */
     public Event(String title, Date time, boolean status) {
         super(title, status);
@@ -22,8 +23,9 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task object with the completion status initialised to false.
-     * @param title The name given to the task
-     * @param time The date and time of the event
+     *
+     * @param title The name given to the task.
+     * @param time The date and time of the event.
      */
     public Event(String title, Date time) {
         super(title, false);
@@ -31,8 +33,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns task name with the '[E]' prefix to identify it as a event
-     * @return the task as a string
+     * Returns task name with the '[E]' prefix to identify it as a event.
+     *
+     * @return the task as a string.
      */
     @Override
     public String toString() {

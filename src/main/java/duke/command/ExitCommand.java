@@ -11,9 +11,10 @@ public class ExitCommand extends Command {
 
     /**
      * Instructs UI object to display the exit message before closing Duke.
-     * @param taskList The list of tasks
-     * @param ui The UI object responsible for user interaction
-     * @param storage The Storage object responsible for retrieving/storing the list
+     *
+     * @param taskList The list of tasks.
+     * @param ui The UI object responsible for user interaction.
+     * @param storage The Storage object responsible for retrieving/storing the list.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -22,7 +23,8 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true to indicate that this command is an exit command.
-     * @return true
+     *
+     * @return true.
      */
     @Override
     public boolean isExit() {

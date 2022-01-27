@@ -11,9 +11,10 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline task object.
-     * @param title The name given to the task
-     * @param time The date and time of the deadline
-     * @param status Indicates whether the task has been completed or not
+     *
+     * @param title The name given to the task.
+     * @param time The date and time of the deadline.
+     * @param status Indicates whether the task has been completed or not.
      */
     public Deadline(String title, Date time, boolean status) {
         super(title, status);
@@ -22,8 +23,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline task object with the completion status initialised to false.
-     * @param title The name given to the task
-     * @param time The date and time of the deadline
+     *
+     * @param title The name given to the task.
+     * @param time The date and time of the deadline.
      */
     public Deadline(String title, Date time) {
         super(title, false);
@@ -31,8 +33,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns task name with the '[D]' prefix to identify it as a deadline
-     * @return the task as a string
+     * Returns task name with the '[D]' prefix to identify it as a deadline.
+     *
+     * @return the task as a string.
      */
     @Override
     public String toString() {

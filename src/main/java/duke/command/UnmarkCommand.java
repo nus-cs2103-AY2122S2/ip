@@ -14,7 +14,8 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructs a UnmarkCommand object that marks the given task as complete upon execution.
-     * @param index The index of the task to be unmarked
+     *
+     * @param index The index of the task to be unmarked.
      */
     public UnmarkCommand(int index) {
         this.index = index;
@@ -22,9 +23,10 @@ public class UnmarkCommand extends Command {
 
     /**
      * Marks the given task as incomplete, displays the result to the user, and saves the change to the list.
-     * @param taskList The list of tasks
-     * @param ui The UI object responsible for user interaction
-     * @param storage The Storage object responsible for saving the change
+     *
+     * @param taskList The list of tasks.
+     * @param ui The UI object responsible for user interaction.
+     * @param storage The Storage object responsible for saving the change.
      * @throws DukeException If the indexed task does not exist or the change cannot be saved.
      */
     @Override
