@@ -7,6 +7,9 @@ import com.duke.util.Parser;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
 
+/**
+ * A chat robot which can save a todo list.
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,6 +22,9 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Run the chat bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

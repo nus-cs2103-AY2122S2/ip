@@ -5,6 +5,13 @@ import com.duke.task.TaskList;
 import com.duke.util.Ui;
 
 public class ListCommand extends Command {
+
+    /**
+     * Execute the command to show the list of task
+     * @param tasks List of Task
+     * @param ui User interface
+     * @param storage Storage used by Duke
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showMsg("\t Here are the tasks in your list:");
@@ -13,6 +20,10 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Whether to exit Duke.
+     * @return boolean value to indicate whether to exit Duke
+     */
     @Override
     public boolean isExit() {
         return false;

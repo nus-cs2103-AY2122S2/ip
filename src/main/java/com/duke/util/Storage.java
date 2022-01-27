@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A storage that can save and load the record of user's todo list.
+ */
 public class Storage {
 
     private final String path;
@@ -16,6 +19,10 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Load the record of user's task list
+     * @return List of Task
+     */
     public ArrayList<Task> load() {
         File f = new File(path);
         ArrayList<Task> arr = new ArrayList<>();
@@ -44,6 +51,10 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Save the user's task list into a file.
+     * @param arr List of Task
+     */
     public void save(TaskList arr) {
         try {
             FileWriter fw = new FileWriter(path);

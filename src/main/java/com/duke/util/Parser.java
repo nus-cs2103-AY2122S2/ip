@@ -10,6 +10,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Parse the input by the user.
+     * @param input message input by the user.
+     * @return Command that can execute according to the user's input.
+     * @throws DukeException if there is invalid argument.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();
