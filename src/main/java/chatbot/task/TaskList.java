@@ -27,33 +27,22 @@ public class TaskList extends ArrayList<Task> implements Serializable {
         return taskList;
     }
 
-    /**
-     * Inserts a task to the task list and save the modified list to the save file if a valid save file was specified.
-     * @param task the task to add to the list
-     * @return true (as specified by Collection.add(E))
-     */
-    @Override public boolean add(Task task) {
+    @Override
+    public boolean add(Task task) {
         boolean ret = super.add(task);
         Storage.Save(saveFile, this);
         return ret;
     }
 
-    /**
-     * Removes a task from the task list and save the modified list to the save file if a valid save file was specified.
-     * @param index the index of the element to be removed
-     * @return the element previously at the specified position
-     */
-    @Override public Task remove(int index) {
+    @Override
+    public Task remove(int index) {
         Task ret = super.remove(index);
         Storage.Save(saveFile, this);
         return ret;
     }
 
-    /**
-     * Removes all of the elements from this list (optional operation) and save the modified list to the save file if a valid save file was specified.
-     * The list will be empty after this call returns.
-     */
-    @Override public void clear() {
+    @Override
+    public void clear() {
         super.clear();
         Storage.Save(saveFile, this);
     }
