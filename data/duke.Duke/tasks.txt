@@ -9,3 +9,6 @@ T---true--- 3---null
 T---true--- 4---null
 T---false--- 5---null
 D---true--- aaa ---Apr 04 1998 02:00 PM
+T---false--- die---null
+D---false--- eat dinner ---2022-1-27 2400
+D---false--- eat dinner ---Jan 28 2022 12:00 AM
