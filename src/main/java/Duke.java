@@ -1,20 +1,25 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import commands.Command;
+import exceptions.DukeException;
 import storage.Storage;
+import tasks.TaskList;
 import ui.Ui;
 import parser.Parser;
-import exceptions.*;
-import commands.*;
-import tasks.*;
 
+/**
+ * Main class which runs the program
+ */
 public class Duke {
-//	private static ArrayList<Task> TASKLIST = new ArrayList<>();
 	private TaskList tasks;
-	private static Storage storage;
-	private static Ui ui;
+	private Storage storage;
+	private Ui ui;
 
+	/**
+	 * Creates a Duke object with tasks loaded
+	 * @param filePath
+	 */
 	public Duke(String filePath) {
 		storage = new Storage(filePath);
 		ui = new Ui();
@@ -27,6 +32,9 @@ public class Duke {
 		}
 	}
 
+	/**
+	 * Main program loop that is run in main
+	 */
 	public void run(){
 		//intro messages
 		ui.welcomeMessage();

@@ -6,19 +6,37 @@ import storage.Storage;
 
 import java.io.IOException;
 
+/**
+ * Class which handles saving of task to text in data
+ */
 public class ByeCommand extends Command {
 	private TaskList tasks;
 
+	/**
+	 * Method to get the modified tasklist after command execution
+	 * @return TaskList
+	 */
 	@Override
 	public TaskList getList() {
 		return tasks;
 	}
 
+	/**
+	 * Method to see if command ends the main program loop
+	 * @return true if it ends main program
+	 */
 	@Override
 	public boolean ends() {
 		return true;
 	}
 
+	/**
+	 * Method to execute the bye command
+	 * Prints bye message and saves the tasks created from the program loop to a text file
+	 * @param tasks tasks list to be modified
+	 * @param ui to help with printing of messages
+	 * @param storage To deal with saving of tasklist
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
 		this.tasks = tasks;

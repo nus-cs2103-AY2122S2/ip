@@ -1,9 +1,16 @@
 package commands;
 
-import tasks.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
 import ui.Ui;
 import storage.Storage;
 
+/**
+ * Class which handles the adding of commands to tasklist
+ */
 public class AddCommand extends Command {
 	private String input;
 	private String type;
@@ -16,31 +23,46 @@ public class AddCommand extends Command {
 		this.input = details;
 	}
 
+	/**
+	 * Method to get the modified tasklist after command execution
+	 * @return TaskList
+	 */
 	@Override
 	public TaskList getList() {
 		return tasks;
 	}
 
+	/**
+	 * Method to see if command ends the main program loop
+	 * @return true if it ends main program
+	 */
 	@Override
 	public boolean ends() {
 		return false;
 	}
 
+	/**
+	 * Method to execute the add command
+	 * Adds respective task type depending on input
+	 * @param tasks tasks list to be modified
+	 * @param ui to help with printing of messages
+	 * @param storage To deal with saving of tasklist
+	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
 		this.tasks = tasks;
 		String[] processedInput;
 		switch (type) {
 		case "todo":
-			this.added = new ToDo(input);
+			added = new ToDo(input);
 			break;
 		case "event":
 			processedInput = input.split("/at", 2);
-			this.added = new Event(processedInput[0], processedInput[1]);
+			added = new Event(processedInput[0], processedInput[1]);
 			break;
 		case "deadline":
 			processedInput = input.split("/by", 2);
-			this.added = new Deadline(processedInput[0], processedInput[1]);
+			added = new Deadline(processedInput[0], processedInput[1]);
 			break;
 		}
 		this.tasks.add(added);
