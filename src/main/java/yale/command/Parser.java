@@ -14,8 +14,8 @@ public class Parser {
     }
 
     /**
-     * Carries out different operations
-     * depending on the user input.
+     * Carries out the different feature
+     * operations depending on the user input
      * @param command
      * @param list
      */
