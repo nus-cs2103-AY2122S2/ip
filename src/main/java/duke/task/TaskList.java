@@ -3,6 +3,8 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Contains the task list and basic operations involving it.
@@ -17,6 +19,15 @@ public class TaskList {
      */
     public TaskList() {
         tasks = new ArrayList<Task>();
+    }
+
+    /**
+     * Overloaded constructor for TaskList.
+     * 
+     * @param tasks Takes in an arraylist of tasks.
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -86,5 +97,23 @@ public class TaskList {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Filters and gets the tasklist with only task that has the keyword.
+     * 
+     * @param keyword Keyword we want the task to have.
+     * @return TaskList with the keyword.
+     */
+    public TaskList getTaskListWithKeyword(final String keyword) {
+        //predicate to check if task description has keyword
+        Predicate<Task> filterPredicate = task -> {
+            return task.getTaskDescription().toLowerCase().matches(keyword.toLowerCase());
+        };
+
+        //filter task
+        ArrayList<Task> filteredTasks = tasks.stream().filter(filterPredicate).collect(Collectors.toCollection(ArrayList::new));
+
+        return new TaskList(filteredTasks);
     }
 }

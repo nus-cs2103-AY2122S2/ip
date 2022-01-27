@@ -38,6 +38,11 @@ public abstract class Task implements Saving, Loading {
         this.isDone = isDone;
     }
 
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
     /**
      * Gets the Task in string format.
      *
