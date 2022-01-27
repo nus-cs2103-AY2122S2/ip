@@ -1,3 +1,17 @@
+package ultoi.util;
+
+import ultoi.task.Task;
+import ultoi.task.ToDo;
+import ultoi.task.Deadline;
+import ultoi.task.Event;
+
+import ultoi.command.Command;
+import ultoi.command.AddCommand;
+import ultoi.command.ByeCommand;
+import ultoi.command.DeleteCommand;
+import ultoi.command.ListCommand;
+import ultoi.command.MarkCommand;
+
 /**
  * Represents a parser used to convert user input into valid commands.
  *
@@ -6,10 +20,10 @@
  */
 public class Parser {
     /**
-     * Returns a Command object that input represents.
+     * Returns a ultoi.command.Command object that input represents.
      *
      * @param input User input.
-     * @return Command object that input represents.
+     * @return ultoi.command.Command object that input represents.
      * @throws UltoiException If input is not identifiable.
      */
     public static Command parse(String input) throws UltoiException {

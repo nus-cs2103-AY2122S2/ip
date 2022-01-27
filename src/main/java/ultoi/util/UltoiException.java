@@ -1,10 +1,12 @@
+package ultoi.util;
+
 public class UltoiException extends Exception {
     public static final String EXCEPTION_FACE = "<OnO>";
     private static final String EXCEPTION_COMMAND_MISMATCH = "Error! This command is used in a wrong way.";
-    private static final String EXCEPTION_FAIL_TO_LOAD_FILE = "Error! Ultoi cannot load your tasks.";
-    private static final String EXCEPTION_FAIL_TO_SAVE_FILE = "Error! Ultoi cannot save your tasks.";
+    private static final String EXCEPTION_FAIL_TO_LOAD_FILE = "Error! ultoi.util.Ultoi cannot load your tasks.";
+    private static final String EXCEPTION_FAIL_TO_SAVE_FILE = "Error! ultoi.util.Ultoi cannot save your tasks.";
     private static final String EXCEPTION_INDEX_OUT_OF_BOUND = "Error! We do not have the task you keyed in.";
-    private static final String EXCEPTION_NO_SUCH_COMMAND = "Error! Ultoi does not understand this command.";
+    private static final String EXCEPTION_NO_SUCH_COMMAND = "Error! ultoi.util.Ultoi does not understand this command.";
 
     public UltoiException(String errorMessage) {
         super(errorMessage);

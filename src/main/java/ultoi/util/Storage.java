@@ -1,14 +1,18 @@
+package ultoi.util;
+
+import ultoi.command.AddCommand;
+import ultoi.task.Task;
+
 import java.io.File;
 import java.io.PrintWriter;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class Storage {
+public class Storage {
     private final File file;
 
     public Storage(Path path) {

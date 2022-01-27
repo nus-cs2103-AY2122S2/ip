@@ -1,3 +1,7 @@
+package ultoi.util;
+
+import ultoi.task.Task;
+
 import java.util.List;
 import java.util.ArrayList;
 
