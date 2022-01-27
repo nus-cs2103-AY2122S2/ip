@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 abstract class Command {
 
     protected enum CommandName {
@@ -23,6 +21,7 @@ abstract class Command {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Mark");
                 try {
+                    taskList.getTask(Integer.parseInt(parameter)).setDone();
                     taskList.markTask(Integer.parseInt(parameter));
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
@@ -81,7 +80,6 @@ abstract class Command {
         EVENT {
             @Override
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                // TODO Auto-generated method stub
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("event");
                 int index = parameter.indexOf("/at ");
