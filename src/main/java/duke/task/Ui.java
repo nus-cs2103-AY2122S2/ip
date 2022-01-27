@@ -20,10 +20,10 @@ public class Ui {
         System.out.println("Cya later~ ≧◉◡◉≦");
     }
 
-    public void displayList(ArrayList<duke.task.Task> toDoList) {
+    public void displayList(ArrayList<Task> toDoList) {
         int number = 1;
         System.out.println("here are your tasks ☜(ˆ▿ˆc)");
-        for (duke.task.Task item : toDoList) {
+        for (Task item : toDoList) {
             System.out.println(number + ". " + item.toString());
             number++;
         }
@@ -38,7 +38,7 @@ public class Ui {
                 "/ event date to create a valid task (> <ლ)");
     }
 
-    public void confirmAddition(duke.task.Task newTask, ArrayList<duke.task.Task> toDoList) {
+    public void confirmAddition(Task newTask, ArrayList<Task> toDoList) {
         System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
                 newTask + "\n" +
                 "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
@@ -48,17 +48,17 @@ public class Ui {
         System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
     }
 
-    public void markAsDone(ArrayList<duke.task.Task> toDoList, int idx) {
+    public void markAsDone(ArrayList<Task> toDoList, int idx) {
         System.out.println("yay!!! this task is now marked as done ٩(˘◡˘)۶");
         System.out.println(toDoList.get(idx - 1).toString());
     }
 
-    public void unmarkAsDone(ArrayList<duke.task.Task> toDoList, int idx) {
+    public void unmarkAsDone(ArrayList<Task> toDoList, int idx) {
         System.out.println("this task is now marked as not done yet... do it soon! ᕙ(`▿´)ᕗ");
         System.out.println(toDoList.get(idx - 1).toString());
     }
 
-    public void confirmRemoval(duke.task.Task removed, ArrayList<duke.task.Task> toDoList) {
+    public void confirmRemoval(Task removed, ArrayList<Task> toDoList) {
         System.out.println("OKI!! i have removed this task: \n" +
                 removed + "\n" +
                 "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
@@ -67,5 +67,22 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("UH-OH!! seems like the file is not in the right format... (⊙.⊙) \n" +
                 "don't worry! I'll start a new file for you!");
+    }
+
+    /**
+     * Prints the specified relevant tasks for the user.
+     * @param relevantTasks List of relevant tasks containing a keyword.
+     */
+    public void showFindResult(ArrayList<Task> relevantTasks) {
+        if (relevantTasks.isEmpty()) {
+            System.out.println("There are no matching tasks （・⊝・）");
+        } else {
+            System.out.println("Here are the matching tasks in the list (｡◕‿◕｡) :");
+            int counter = 1;
+            for (Task task : relevantTasks) {
+                System.out.println(counter + ". " + task);
+                counter++;
+            }
+        }
     }
 }

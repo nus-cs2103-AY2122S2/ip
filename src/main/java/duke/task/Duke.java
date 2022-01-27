@@ -90,6 +90,10 @@ public class Duke {
             case "delete":
                 remove(sc.nextInt());
                 break;
+            case "find":
+                ArrayList<Task> relevantTasks = taskList.find(sc.nextLine());
+                ui.showFindResult(relevantTasks);
+                break;
             default:
                 ui.doNotUnderstand();
             }
