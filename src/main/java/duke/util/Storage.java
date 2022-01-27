@@ -5,11 +5,13 @@ import duke.exception.DukeException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     // exception messages
     private final static String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
@@ -20,6 +22,13 @@ public class Storage {
     private final String fullFilePath;
     private File file;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param fileName Name of data file.
+     * @param fileDirPath File directory path of data file.
+     * @throws DukeException If there are issues creating or reading the file.
+     */
     public Storage(String fileName, String fileDirPath) throws DukeException {
         this.fileDirPath = fileDirPath;
         fullFilePath = fileDirPath + "/" + fileName;
@@ -27,6 +36,14 @@ public class Storage {
         initFile();
     }
 
+    /**
+     * Initializes file and directory.
+     *
+     * <p>Creates file and directory if they don't exist yet base on the file name and directory path provided.
+     * If file and directory already exists, will just open the file.</>
+     *
+     * @throws DukeException If cannot create new file.
+     */
     private void initFile() throws DukeException {
         File directory = new File(fileDirPath);
 
@@ -46,8 +63,16 @@ public class Storage {
         }
     }
 
-    /* Load task list from file saved */
-    public <T extends Loading> void loadFromSave(ArrayList<T> taskList, Function<String, T> factory)
+    /**
+     * Load task list from file saved.
+     *
+     * @param list List to store the new objects created based on the data.
+     * @param factory Function<String, T> that takes in an input and returns a new object that extends Loading.
+     * @param <T> Object that should extend Loading.
+     * @throws DukeException If there are issues reading the file or format of file is wrong.
+     */
+    public <T extends Loading> void loadFromSave(ArrayList<T> list,
+            Function<String, T> factory)
             throws DukeException {
         try {
             // read file
@@ -57,17 +82,22 @@ public class Storage {
                 T newTask = factory.apply(nextLine); // create the proper obj type
 
                 newTask.extractFileData(nextLine);
-                taskList.add(newTask);
+                list.add(newTask);
             }
 
             scanner.close();
 
-        } catch (IOException | DateTimeParseException exception) {
+        } catch (IOException exception) {
             throw new DukeException(FILE_LOADING_ERROR_MSG);
         }
     }
 
-    /* save a list to a file */
+    /**
+     * Save data in list to a file.
+     *
+     * @param list A list that data needs to be saved. The objects must extend Saving.
+     * @throws DukeException If there is problem writing to the file.
+     */
     public void saveList(ArrayList<? extends Saving> list) throws DukeException {
         try {
             // write data to file

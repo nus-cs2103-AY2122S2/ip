@@ -5,11 +5,22 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 
+/**
+ * Event are tasks that start at a specific time and ends at a specific time.
+ *
+ * <p>e.g., team project meeting on 2/10/2019 2-4pm.</>
+ */
 public class Event extends Task {
     private static final char EVENT_SYMBOL = 'E';
     private LocalDate eventDate;
     private LocalTime eventTime;
 
+    /**
+     * Default constructor for Event.
+     *
+     * <p>Calls super class, Task, default constructor.
+     * Sets eventDate and eventTime to default values 2020-12-12 and 2359.</>
+     */
     public Event() {
         super();
 
@@ -18,6 +29,13 @@ public class Event extends Task {
         this.eventTime = LocalTime.parse("2359", timeFormatter);
     }
 
+    /**
+     * Overloaded constructor for Event.
+     *
+     * @param taskDescription Description of event.
+     * @param eventDate Date of event.
+     * @param eventTime time of event.
+     */
     public Event(String taskDescription, LocalDate eventDate, LocalTime eventTime) {
         super(taskDescription);
 
@@ -25,6 +43,12 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Returns event data in a defined save file string format.
+     *
+     * @return A string with Deadline data in the defined save file format: <br>
+     * E|true/false|taskDescription|MMM d yyyy|hh:mm a \n
+     */
     @Override
     public String saveFileFormat() {
         return EVENT_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.eventDate.format(
@@ -32,6 +56,12 @@ public class Event extends Task {
                 DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
     }
 
+    /**
+     * Extracts and initializes data to deadline from a string.
+     *
+     * @param data The string to extract data and initialize data from.
+     *             Data format: E|true/false|taskDescription|MMM d yyyy|hh:mm a
+     */
     @Override
     public void extractFileData(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
@@ -46,6 +76,12 @@ public class Event extends Task {
         eventTime = LocalTime.parse(st.nextToken(), timeFormatter);
     }
 
+    /**
+     * Gets the Event information in string format.
+     *
+     * @return Event information in the following string format:
+     * [E][ ] taskDescription (at: date time)
+     */
     @Override
     public String toString() {
         return "[" + EVENT_SYMBOL + "]" + super.toString() + " (at: " + this.eventDate.format(
