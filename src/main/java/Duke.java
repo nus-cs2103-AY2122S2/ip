@@ -1,9 +1,39 @@
 import java.lang.*;
 import java.util.*;
+import java.io.File;
 
 public class Duke {
     static String indent = "     ";
     static String line = "    ____________________________________________________________";
+    private static final String FILEPATH = ""
+
+    public static void updateTask(Task task) {
+        try {
+            FileOutputStream f = new FileOutputStream(new File("tasks.json"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            // Write updated tasks to file
+            o.writeObject(p1);
+
+            o.close();
+            f.close();
+
+            FileInputStream fi = new FileInputStream(new File("tasks.json"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            // Read objects
+            Task t1 = (Task) oi.readObject();
+
+            oi.close();
+            fi.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         // Greeting

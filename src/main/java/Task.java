@@ -1,7 +1,9 @@
 import java.lang.*;
 import java.util.*;
+import java.io.Serializable;
 
-public class Task {
+public class Task implements Serializable {
+    private static final long SERIAL_VERSION_UID = 1L;
 
     int rank;
     String task;
