@@ -190,4 +190,17 @@ public class TaskList {
     public int tasksSize() {
         return this.taskList.size();
     }
+
+    public String find(String str) {
+        StringBuilder temp = new StringBuilder("Here are the matching tasks in your list: \n");
+        int tempCounter = 1;
+
+        for (Task a : taskList) {
+            if (a.toString().contains(str)) {
+                temp.append(tempCounter).append(". ").append(a).append("\n");
+                tempCounter++;
+            }
+        }
+        return temp.toString();
+    }
 }

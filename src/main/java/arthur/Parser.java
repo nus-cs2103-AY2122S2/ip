@@ -49,6 +49,9 @@ public class Parser {
                 storage.editTasks(taskList.getTask(Integer.parseInt(temp[1]) - 1), 2);
                 this.command = taskList.deleter(Integer.parseInt(temp[1]));
                 break;
+            case "find":
+                this.command = taskList.find(temp[1]);
+                break;
             case "bye":
                 this.isEnd = true;
                 this.command = "Bye!" + "\n" + "Have a great day!";
