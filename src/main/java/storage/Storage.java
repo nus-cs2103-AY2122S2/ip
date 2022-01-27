@@ -5,9 +5,11 @@ import tasks.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class which handles saving and loading of data from text
+ */
 public class Storage {
 	private String filePath;
 	private TaskList tasks = new TaskList();
@@ -16,6 +18,12 @@ public class Storage {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Creates the required directory and file if it does not exsist
+	 * if not, loads the correct task data stored in the text file and returns the tasklist
+	 * @return Tasklist loaded from the text file
+	 * @throws IOException
+	 */
 	public TaskList load() throws IOException {
 		//load files
 		File directory = new File("data");
@@ -66,6 +74,11 @@ public class Storage {
 		return tasks;
 	}
 
+	/**
+	 * Saves the input task list into a text file to be loaded in future runs
+	 * @param tasks list of tasks to be saved
+	 * @throws IOException
+	 */
 	public void saveFile(TaskList tasks) throws IOException {
 		FileWriter fw = new FileWriter("data/tasks.txt");
 		for (int i =0; i < tasks.size(); i++){
