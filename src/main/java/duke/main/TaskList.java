@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -50,5 +51,11 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    public ArrayList<Task> findTasks(String searchDescription) {
+        return new ArrayList<Task>(tasks.stream()
+                .filter(task -> task.hasSubstring(searchDescription))
+                .collect(Collectors.toList()));
     }
 }

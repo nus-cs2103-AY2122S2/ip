@@ -6,6 +6,7 @@ import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.exception.DukeException;
@@ -45,6 +46,9 @@ public class Parser {
         } else if (fullCommand.startsWith("delete")) {
             String inputWithoutCommand = fullCommand.replaceFirst("delete", "").trim();
             return parseDeleteCommand(inputWithoutCommand);
+        } else if (fullCommand.startsWith("find")) {
+            String inputWithoutCommand = fullCommand.replaceFirst("find", "").trim();
+            return parseFindCommand(inputWithoutCommand);
         } else {
             throw new DukeException(DukeException.ERROR_NO_COMMAND);
         }
@@ -112,6 +116,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException(DukeException.ERROR_PARSE_INT);
         }
+    }
+
+    private static FindCommand parseFindCommand(String input) throws DukeException {
+        if (input.matches("\\s*")) {
+            throw new DukeException(DukeException.ERROR_FIND_NO_NAME);
+        }
+        return new FindCommand(input);
     }
 
     private static boolean validateDeadlineEventSplit(String[] splitInput) throws DukeException {
