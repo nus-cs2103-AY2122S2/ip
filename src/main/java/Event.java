@@ -1,17 +1,26 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    public String time;
+    public LocalDate date;
+    public String stringTime;
 
     public Event(String input) {
         super(input.substring(6, input.indexOf("/")));
-        this.time = input.substring(input.indexOf("/") + 4);
+        this.stringTime = input.substring(input.indexOf("/") + 4).trim();
+        this.date = LocalDate.parse(stringTime, DateTimeFormatter.ofPattern("d/M/yyyy"));
     }
 
-    public String getTime() {
-        return this.time;
+    public String getFullDateTime() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + ("(at: " + this.time + ")");
+        return "[E]" + super.toString() + ("(at: " + this.getFullDateTime() + ")");
     }
 }

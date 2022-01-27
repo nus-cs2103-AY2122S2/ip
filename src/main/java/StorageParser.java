@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class StorageParser extends Parser {
     protected Task task;
 
@@ -13,11 +15,13 @@ public class StorageParser extends Parser {
         }
 
         if (this.task instanceof Deadline) {
-            returnString = returnString + "D | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + ((Deadline) this.task).getTime();
+            String dateTime = ((Deadline) this.task).getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " " + ((Deadline) this.task).getTime().format(DateTimeFormatter.ofPattern("HHmm"));
+            returnString = returnString + "D | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + dateTime;
         }
 
         if (this.task instanceof Event) {
-            returnString = returnString + "E | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + ((Event) this.task).getTime();
+            String dateTime = ((Event) this.task).getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy"));
+            returnString = returnString + "E | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + dateTime;
         }
 
         return returnString + "\n";
