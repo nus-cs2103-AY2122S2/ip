@@ -13,10 +13,12 @@ import java.util.Arrays;
 public class Duke {
     private final Ui ui;
     private TasksList taskslist;
+    private Storage storage;
 
     public Duke() {
         this.ui = new Ui();
         this.taskslist = new TasksList();
+        this.storage = new Storage();
     }
 
     public void run() {
@@ -28,16 +30,8 @@ public class Duke {
         List<String> commands = List.of("list", "bye", "mark", "unmark", "delete", "todo", "event", "deadline", "save");
 
         try {
-            if (Files.exists(Paths.get(Constants.STORAGE_PATH))) {
-                File f = new File(Constants.STORAGE_PATH);
-                Scanner fileScanner = new Scanner(f);
-                List<String> tasksStrings = new ArrayList<>();
-                while(fileScanner.hasNextLine()) {
-                    tasksStrings.add(fileScanner.nextLine());
-                }
-                String response = taskslist.importStorageStrings(tasksStrings);
-                ui.print(response);
-            }
+            String response = taskslist.importStorageStrings(storage.importData());
+            ui.print(response);
         } catch (FileNotFoundException e) {
             ui.print(e.getMessage());
         } catch (DukeException e) {
@@ -79,25 +73,10 @@ public class Duke {
                     ui.print(response);
 
                 } else if (instruction[0].equals("save")) {
-                    StringBuilder response = new StringBuilder("The following tasks will be saved: \n");
-                    response.append(taskslist.list());
-
-                    Path dir = Paths.get(Constants.DIR_PATH);
-                    Path store = Paths.get(Constants.STORAGE_PATH);
-                    if (!Files.exists(dir)) {
-                        Files.createDirectory(dir);
-                        Files.createFile(store);
-                    } else if (!Files.exists(store)) {
-                        Files.createFile(store);
-                    }
-
-                    FileWriter writer = new FileWriter(Constants.STORAGE_PATH);
-                    for (String task : taskslist.toStorageStrings()) {
-                        writer.write(task);
-                    }
-                    writer.close();
-
-                    ui.print(response.toString());
+                    //StringBuilder response = new StringBuilder("The following tasks will be saved: \n" +
+                    //        taskslist.list());
+                    String response = storage.exportData(taskslist.toStorageStrings(), taskslist.list());
+                    ui.print(response);
                 }
             }
             catch (DukeException e){
