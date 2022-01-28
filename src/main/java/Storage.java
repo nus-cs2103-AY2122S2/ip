@@ -36,11 +36,12 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             while((command = reader.readLine()) != null){
+                // 9: [E][ ] something  (at: Sep 11 2011, 12:12)
                 String[] commandArr = command.split("]");
                 String cmdTemp = commandArr[0];
                 String firstWord = cmdTemp.substring(cmdTemp.length() - 1);
                 String taskName = command.substring(10);
-                String isMarked = command.substring(7, 8);
+                String isMarked = commandArr[1].substring(1, 2);
                 boolean isMarkedBool = isMarked.equals("X");
 
                 if (firstWord.equals("T")) {

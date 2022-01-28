@@ -11,6 +11,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() + " (by: " + this.time + ")";
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() +
+                " (by: " + this.time + ")";
     }
 }

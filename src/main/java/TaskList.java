@@ -4,12 +4,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
-        String start = "Hello! I am Duke_two.\n"
-                        + "Your Personal Assistant.\n"
-                        + "What can I do for you?\n"
-                        + "________________________________";
         this.tasks = new ArrayList<>();
-        System.out.println(start);
     }
 
     public ArrayList<Task> getTasks() {
@@ -18,7 +13,6 @@ public class TaskList {
 
     public void add(Task task) {
         this.tasks.add(task);
-//        System.out.println("From Duke_two: \n\tAdded to your tasks: " + task.toString());
     }
 
     public void bye() {
@@ -45,7 +39,6 @@ public class TaskList {
             String[] taskArr = taskStr.split(" ");
             int index = Integer.parseInt(taskArr[1]) - 1;
             Task task = this.tasks.get(index);
-            String isTaskCheck = "";
             if (taskArr[0].equals("mark")) {
                 task.setChecked(true);
                 System.out.println("Nice! I've marked this task as done: \n\t" + task.toString());
