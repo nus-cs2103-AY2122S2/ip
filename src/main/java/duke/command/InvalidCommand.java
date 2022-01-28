@@ -4,12 +4,15 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class InvalidCommand extends Command {
+    String errorMessage;
 
-    public InvalidCommand(){}
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) {
-        ui.printInvalidCommand();
+        ui.print(errorMessage);
         return true;
     }
 }

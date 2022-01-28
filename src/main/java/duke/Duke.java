@@ -1,4 +1,6 @@
 package duke;
+import duke.command.InvalidCommand;
+import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Parser;
@@ -26,8 +28,12 @@ public class Duke {
             System.out.print("Me   : ");
             String message = ui.readCommand();
             ui.showLine();
-            Command command = parser.parseCommand(message);
-            run = command.exec(tasks, ui, storage);
+            try {
+                Command command = parser.parseCommand(message);
+                run = command.exec(tasks, ui, storage);
+            } catch (DukeException e) {
+                run = new InvalidCommand(e.toString()).exec(tasks, ui, storage);
+            }
         }
     }
 

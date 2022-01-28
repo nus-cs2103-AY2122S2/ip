@@ -1,4 +1,5 @@
 package duke.util;
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import java.util.ArrayList;
 
@@ -9,29 +10,30 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("Now you've got " + taskList.size() +" tasks in the list.");
+        return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size() +
+                " tasks in the list.";
     }
 
-    public void deleteTask(int index) {
-        Task deletedTask = null;
+    public void deleteTask(int index) throws InvalidIndexException {
+        Task deletedTask;
         try {
             deletedTask = this.taskList.remove(index);
-        } catch (IndexOutOfBoundsException e){
-            System.exit(1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedTask.printTask());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public Task mark(int index) {
-        Task markTask = null;
+    public Task mark(int index) throws InvalidIndexException {
+        Task markTask;
         try {
             markTask = taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
-            System.exit(1);
+            throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
         markTask.updateStatus(1);
         System.out.println("Nice! I've marked this task as done");
@@ -39,12 +41,12 @@ public class TaskList {
         return markTask;
     }
 
-    public Task unmark(int index) {
-        Task unmarkTask = null;
+    public Task unmark(int index) throws InvalidIndexException {
+        Task unmarkTask;
         try {
             unmarkTask = taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
-            System.exit(1);
+            throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
         unmarkTask.updateStatus(0);
         System.out.println("Oof! I've marked this task as undone");

@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui(){
         this.sc = new Scanner(System.in);
@@ -29,9 +29,7 @@ public class Ui {
     public void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public void printInvalidCommand() {
-        System.out.println("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
-    }
+
     public void close() {
         sc.close();
     }

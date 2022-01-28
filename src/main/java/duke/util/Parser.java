@@ -2,6 +2,10 @@ package duke.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandFormatException;
+import duke.exception.InvalidDateException;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
@@ -19,8 +23,8 @@ public class Parser {
     private static final SimpleDateFormat taskFormat = new SimpleDateFormat("MMM dd yyyy");
     private static final SimpleDateFormat savedFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final Command EXIT_COMMAND = new ExitCommand();
-    private  static final Command LIST = new ListCommand();
-    private  static final Command INVALID_COMMAND = new InvalidCommand();
+    private static final Command LIST = new ListCommand();
+    private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
 
     public Parser(){}
 
@@ -48,17 +52,16 @@ public class Parser {
                 parsedTask = new Deadline(activity, timeOrPlace);
                 break;
             default:
-
         }
         parsedTask.updateStatus(status);
         return parsedTask;
     }
 
-    public Command parseCommand(String command) {
+    public Command parseCommand(String command) throws DukeException {
         String[] splitStr = command.split(" ", 2);
-        Command parsed = null;
-        Task task = null;
-        int index = -1;
+        Command parsed;
+        Task task;
+        int index;
         switch (splitStr[0]) {
             case "bye":
                 parsed = EXIT_COMMAND;
@@ -70,8 +73,9 @@ public class Parser {
                 try {
                     index = Integer.parseInt(splitStr[1]);
                     index--;
-                } catch (NumberFormatException e) {
-                    System.exit(1);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandFormatException("Command mark has invalid syntax -e.g., mark [index], where " +
+                        "index is an integer");
                 }
                 parsed = new MarkCommand(index);
                 break;
@@ -79,8 +83,9 @@ public class Parser {
                 try {
                     index = Integer.parseInt(splitStr[1]);
                     index--;
-                } catch (NumberFormatException e) {
-                    System.exit(1);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandFormatException("Command unmark has invalid syntax -e.g., unmark [index], where " +
+                            "index is an integer");
                 }
                 parsed = new UnmarkCommand(index);
                 break;
@@ -93,7 +98,9 @@ public class Parser {
                 try {
                     task = new Deadline(tempStr[0], tempStr[1]);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Invalid date format");
+                    throw new InvalidDateException();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandFormatException("Command deadline has invalid syntax -e.g., deadline [activity] /by [yyyy-mm-dd]");
                 }
                 parsed = new AddCommand(task);
                 break;
@@ -103,7 +110,7 @@ public class Parser {
                     task = new Event(tempStr2[0], tempStr2[1]);
                     parsed = new AddCommand(task);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Invalid event command format.");
+                    throw new InvalidCommandFormatException("Command deadline has invalid syntax -e.g., event [activity] /at [location]");
                 }
                 break;
             case "delete":
@@ -111,8 +118,9 @@ public class Parser {
                     index = Integer.parseInt(splitStr[1]);
                     index--;
                     parsed = new DeleteCommand(index);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid deletion index.");
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandFormatException("Command delete has invalid syntax -e.g., delete [index], where " +
+                            "index is an integer");
                 }
                 break;
             default:
