@@ -7,11 +7,21 @@ import duke.command.MarkCommand;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.exception.DukeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
+/**
+ * Parser deals with understanding the user's input and create the correspondign Command to deal with the request.
+ */
 public class Parser {
 
+    /**
+     * Parses a single line from the user input that is broken up into 2 strings. The first string is the first
+     * command word, and the second string is the details of the command. From here, the command word is checked to
+     * decide on whether to respond with an appropriate command, or an exception if the command is not recognized.
+     * @param cmd the first word in a line from the user's input
+     * @param details the subsequent words in the same line from the user
+     * @return an appropriate Command based on the user's request
+     * @throws DukeException
+     */
     public static Command parse(String cmd, String details) throws DukeException {
         switch (cmd) {
         case "bye":
@@ -28,18 +38,11 @@ public class Parser {
             return new AddCommand(details);
         case "deadline":
         case "event":
-            // check date here
-            try {
-                String[] d_deets = details.split("/");
-                String givenDate = d_deets[1].trim().substring(3); //ignore the words at or by + the space that follows
-                LocalDate parsedDate = LocalDate.parse(givenDate);
-                return new AddCommand(cmd, d_deets[0].trim(), parsedDate);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter a date with the format yyyy-mm-dd");
-            }
+            return new AddCommand(cmd, details);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
 
 }

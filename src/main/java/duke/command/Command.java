@@ -6,25 +6,43 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Command is the action that needs to be taken to carry out the user's request.
+ */
 public abstract class Command {
 
     private boolean exit = false;
     private Task task;
 
-    public Command() {
+    /**
+     * Command constructor
+     * @throws DukeException as the user might leave out crtiical information or input wrong commands.
+     */
+    public Command() throws DukeException{
     }
 
-    public void execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
+    /**
+     * Kickstarts the actions to execute in order to carry out the command.
+     * @param tasks holds all the tasks that the user has recorded down.
+     * @param ui used to notify the user of task completion.
+     * @param storage saves the tasks to file if there were any edits to it.
+     * @throws DukeException
+     */
+    public abstract void execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException;
 
-    }
-
+    /**
+     * checks whether the the command was an exit command
+     * @return boolean flag
+     */
     public boolean isExit() {
         return this.exit;
     }
 
-    public void startExit() {
+    /**
+     * Flips the exit status to true.
+     */
+    protected void startExit() {
         this.exit = true;
     }
-
 
 }

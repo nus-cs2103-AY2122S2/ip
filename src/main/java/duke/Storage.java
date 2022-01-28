@@ -13,14 +13,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is the entity that deals with reading and writing the list of tasks to the user's text file
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for Storage class.
+     * @param filePath the location of a textfile containing the user's list of tasks, relative to the root directory
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads in a list of tasks from the user's text file and saves them into an arraylist of Tasks.
+     * @return the arraylist of Tasks
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         String dir = System.getProperty("user.dir");
@@ -73,6 +84,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the given arraylist of Tasks out to the user's file.
+     * @param tasks the arraylist of Tasks to be saved
+     */
     public void saveToFile(ArrayList<Task> tasks) {
         String text = "";
         for (int i = 1; i <= tasks.size(); i++) {
