@@ -3,8 +3,8 @@ package duke;
 import duke.command.Command;
 import duke.command.Parser;
 import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.task.Storage;
-import ui.Ui;
 
 
 public class Duke {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.DukeException;
-import ui.Ui;
+import duke.ui.Ui;
 
 public class Storage {
     

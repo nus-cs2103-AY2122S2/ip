@@ -6,7 +6,7 @@ import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import ui.Ui;
+import duke.ui.Ui;
 
 public class AddCommand extends Command {
 
