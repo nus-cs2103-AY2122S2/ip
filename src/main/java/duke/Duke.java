@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.functionality.Parser;
+import duke.functionality.Storage;
+import duke.functionality.TaskList;
+import duke.ui.UserInterface;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -21,16 +29,12 @@ public class Duke {
             try {
                 userInterface.lineDivider();
                 Parser.parse(input, this.tasks);
+                this.storage.writeFile(this.tasks);
                 userInterface.lineDivider();
             } catch (DukeException errorMessage) {
                 userInterface.errorMessage(errorMessage);
             }
             input = userInterface.readInput();
-        }
-        try {
-            this.storage.writeFile(this.tasks);
-        } catch (DukeException e) {
-            userInterface.errorMessage(e);
         }
         userInterface.byeMessage();
     }

@@ -1,3 +1,11 @@
+package duke.functionality;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -13,7 +21,7 @@ public class TaskList {
 
     private final ArrayList<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
