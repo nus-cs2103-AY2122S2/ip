@@ -47,6 +47,22 @@ public class TaskList {
     }
 
     /**
+     * Finds all Task objects that contains the target String.
+     * Shows the UI by creating a new temporary TaskList and using toString on it.
+     *
+     * @param target String Target String to be searched for.
+     */
+    public void findTask(String target) {
+        TaskList taskList = new TaskList(new ArrayList<Task>(), ui);
+        for (Task task : tasks) {
+            if (task.content.contains(target)) {
+                taskList.tasks.add(task);
+            }
+        }
+        ui.showUiForTaskList(taskList);
+    }
+
+    /**
      * Marks the task at index as complete.
      *
      * @param index Index of the task to mark (starts from 1).

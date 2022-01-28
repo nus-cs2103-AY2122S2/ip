@@ -13,6 +13,7 @@ public abstract class Command {
      */
     public enum CommandType {
         BYE,
+        FIND,
         LIST,
         MARK,
         UNMARK,
