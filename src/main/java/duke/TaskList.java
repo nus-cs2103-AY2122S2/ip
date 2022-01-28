@@ -24,4 +24,17 @@ public class TaskList {
             System.out.println( (i + 1) + ". "  + taskArrayList.get(i) + "\n");
         }
     }
+
+    static void find(String term){
+        boolean hasResults = false;
+        for (Task t : Storage.taskList) {
+            if (t.getDescription().contains(term)) {
+                hasResults = true;
+                System.out.println(t);
+            }
+        }
+        if (!hasResults) {
+            System.out.println("Sorry, we didn't find anything related to your search terms.");
+        }
+    }
 }

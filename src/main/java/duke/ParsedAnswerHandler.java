@@ -3,7 +3,6 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ParsedAnswerHandler {
     ParsedAnswer pa;
@@ -104,6 +103,10 @@ public class ParsedAnswerHandler {
 
             case "delete":
                 TaskList.delete(pa.getIndex());
+                break;
+
+            case "find":
+                TaskList.find(pa.getDesc());
                 break;
         }
     }
