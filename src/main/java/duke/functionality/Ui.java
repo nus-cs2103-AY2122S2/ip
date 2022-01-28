@@ -9,21 +9,21 @@ import java.util.Scanner;
  * to all user interface displays. Such as the messages.
  */
 public class Ui {
-    private String greeting = "Hello! I'm TaskJamie\nWhat can i do for you?";
-    private String ending =  "Bye. Hope to see you again soon!";
+    private final String GREETING = "Hello! I'm TaskJamie\nWhat can i do for you?";
+    private final String ENDING =  "Bye. Hope to see you again soon!";
 
     /**
      * Returns nothing, but prints out the greeting message of Duke TaskBot.
      */
     public void showGreeting() {
-        System.out.println(greeting);
+        System.out.println(GREETING);
     }
 
     /**
      * Returns nothing, but prints out the leaving message of Duke TaskBot.
      */
     public void showEnding() {
-        System.out.println(ending);
+        System.out.println(ENDING);
     }
 
     /**

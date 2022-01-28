@@ -41,7 +41,7 @@ public class TaskList {
         Task task = taskList.get(actualTaskNum); // get the task from the array
         task.setTaskDone();
         Storage.updateTextFile();
-        System.out.println(message + task.toString());
+        System.out.println(message + task);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
         Task task = taskList.get(actualTaskNum); // get the task from the array
         task.setTaskNotDone();
         Storage.updateTextFile();
-        System.out.println(message + task.toString());
+        System.out.println(message + task);
     }
 
     /**
@@ -85,12 +85,17 @@ public class TaskList {
     public void findWord(String word) {
         String message = "Here are the matching tasks in your list:\n";
         System.out.print(message);
+        int counter = 1;
         for(int i = 0; i < numOfTask; i++) {
-            Task t = taskList.get(i);
-            if(t.getDescription().contains(word)) {
-                String output = i + 1 + "." + t.toString();
+            Task task = taskList.get(i);
+            if(task.getDescription().contains(word)) {
+                String output = counter + "." + task;
+                counter++;
                 System.out.println(output);
             }
+        }
+        if(counter == 1) {
+            System.out.println("OOPS!, there are no matching task with the word provided.");
         }
     }
 }

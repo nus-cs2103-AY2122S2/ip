@@ -76,7 +76,7 @@ public class Storage {
             String input = sc.nextLine();
             String[] inputSplit = input.split("\\|"); //split input by |
             String task = inputSplit[0];
-            Integer mark = Integer.parseInt(inputSplit[1]);
+            int mark = Integer.parseInt(inputSplit[1]);
             if (task.equals("T")) {
                 Todo tempTask = new Todo(inputSplit[2]);
                 if (mark == 1) {
