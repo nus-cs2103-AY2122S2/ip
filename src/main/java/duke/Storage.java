@@ -17,8 +17,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class Storage {
 
     private static final String FILEPATH = "data/duke.txt";
+    private static final String DIR_PATH = "data/";
 
-    private static File createFileIfNotExist(String filePath) throws IOException{
+    private static File createFileIfNotExist(String filePath, String dirPath) throws IOException{
+        File dir = new File(dirPath);
+        dir.mkdir();
         File file = new File(filePath);
         file.createNewFile();
         return file;
@@ -26,7 +29,7 @@ public class Storage {
 
     public static void updateTaskFile (TaskList taskList) throws IOException {
         String tempFilePath = FILEPATH + ".new";
-        File file = Storage.createFileIfNotExist(tempFilePath);
+        File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
         FileWriter fw = new FileWriter(file, true);
         for (Task task : taskList.tasks) {
             fw.write(task.toFileFormat());
