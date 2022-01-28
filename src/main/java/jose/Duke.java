@@ -4,11 +4,19 @@ import java.io.IOException;
 import java.util.Scanner;
 import jose.task.*;
 
+/**
+ * The main class used to run Jose. Is called Duke for consistency.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class constructor that also sets up the task list and retrieves/creates the data file.
+     *
+     * @param filePath The path of the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -20,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method containing the main logic of the program.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
@@ -102,6 +113,11 @@ public class Duke {
         scanner.close();
     }
 
+    /**
+     * Main method.
+     *
+     * @param args Arguments to be passed in.
+     */
     public static void main(String[] args) {
         new Duke(System.getProperty("user.dir") + "/data/db.txt").run();
     }
