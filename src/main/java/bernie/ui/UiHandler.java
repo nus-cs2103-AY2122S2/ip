@@ -93,6 +93,6 @@ public class UiHandler {
     public void showFoundTasksMsg(TaskList tasks, String description) {
         System.out.println("We found these tasks in your list:");
         tasks.findTasks(description);
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 }
