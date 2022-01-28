@@ -11,5 +11,6 @@ public enum CommandType {
     CREATE_DEADLINE,
     CREATE_EVENT,
     LIST,
-    DELETE
+    DELETE,
+    FIND
 }

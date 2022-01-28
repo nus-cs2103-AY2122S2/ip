@@ -6,9 +6,9 @@ import duke.command.CreateEventCommand;
 import duke.command.CreateToDoCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import duke.command.UnkownCommandException;
 import duke.command.UnmarkCommand;
 import duke.common.DukeException;
 
@@ -238,6 +238,22 @@ public class Parser {
     }
 
     /**
+     * Parse input tokens and creates a FindCommand.
+     *
+     * @param tokens input tokens to be parsed.
+     * @return FindCommand.
+     * @throws InvalidArgumentException if there are invalid arguments.
+     */
+    private static Command parseFindCommand(String[] tokens) throws InvalidArgumentException {
+        if (tokens.length != 2) {
+            throw new InvalidArgumentException(":-( OOPS!!! Please enter only one keyword "
+                    + "following the find command");
+        }
+
+        return new FindCommand(tokens[1]);
+    }
+
+    /**
      * Parse through the command and creates a command accordingly.
      *
      * @param input user input string.
@@ -246,24 +262,38 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] tokens = input.split("\\s+");
-            if (tokens[0].equals("list")) {
-                return new ListCommand();
-            } else if (tokens[0].equals("mark")) {
-                return parseMarkCommand(tokens);
-            } else if (tokens[0].equals("unmark")) {
-                return  parseUnmarkCommand(tokens);
-            } else if (tokens[0].equals("todo")) {
-                return parseTodoCommand(tokens);
-            } else if (tokens[0].equals("deadline")) {
-                return parseDeadlineCommand(tokens);
-            } else if (tokens[0].equals("event")) {
-                return parseEventCommand(tokens);
-            } else if (tokens[0].equals("delete")) {
-                return parseDeleteCommand(tokens);
-            } else if (tokens[0].equals("bye")) {
-                return new ExitCommand();
-            } else {
+        Command command;
+            switch (tokens[0]) {
+            case "list":
+                command = new ListCommand();
+                break;
+            case "mark":
+                command = parseMarkCommand(tokens);
+                break;
+            case "unmark":
+                command = parseUnmarkCommand(tokens);
+                break;
+            case "todo":
+                command = parseTodoCommand(tokens);
+                break;
+            case "deadline":
+                command = parseDeadlineCommand(tokens);
+                break;
+            case "event":
+                command = parseEventCommand(tokens);
+                break;
+            case "delete":
+                command = parseDeleteCommand(tokens);
+                break;
+            case "bye":
+                command = new ExitCommand();
+                break;
+            case "find":
+                command = parseFindCommand(tokens);
+                break;
+            default:
                 throw new UnkownCommandException();
             }
+        return command;
     }
 }
