@@ -14,6 +14,11 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
 
+    public static void main(String[] args) {
+        Duke chatBot = new Duke("data/data.txt");
+        chatBot.run();
+    }
+
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
