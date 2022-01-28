@@ -1,6 +1,8 @@
+package duke;
+
 import java.io.IOException;
 import java.util.MissingFormatArgumentException;
-import java.util.Scanner; // Imported Scanner class
+import java.util.Scanner;
 
 public class Duke {
 

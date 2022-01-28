@@ -1,3 +1,5 @@
+package duke;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -186,10 +188,6 @@ public class Commands {
     public void delete(int index, DukeHistory history) {
         history.deleteTask(index);
     }
-
-
-
-
 
 
 }

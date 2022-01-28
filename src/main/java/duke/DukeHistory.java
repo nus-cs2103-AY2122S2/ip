@@ -1,6 +1,7 @@
-import java.lang.StringBuilder; // Imported StringBuilder class
-import java.util.ArrayList; // Imported ArrayList class
-import java.util.Iterator;
+package duke;
+
+import java.lang.StringBuilder;
+import java.util.ArrayList;
 
 public class DukeHistory {
     private final ArrayList<Task> records = new ArrayList<>(100); // ArrayList of size 100 by default
