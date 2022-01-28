@@ -12,15 +12,29 @@ public class DeleteCommand extends Command {
 
     private final String indexToDelete;
 
-    public DeleteCommand(String indexToUnmark) {
-        this.indexToDelete = indexToUnmark;
+    /**
+     * Constructs a DeleteCommand with the specified indexToDelete string
+     * @param indexToDelete
+     */
+    public DeleteCommand(String indexToDelete) {
+        this.indexToDelete = indexToDelete;
     }
 
+    /**
+     * Deletes the task at the specified indexToDelete. This is done by using the remove method
+     * of the calendar object. Afterwards, display a message on the UI handler to indicate that
+     * the task was successfully deleted, and use the save method in the storage handler to save
+     * the new calendar to file.
+     * @param calendar - the calendar used in the program
+     * @param ui - the ui handler for the program
+     * @param storage - the storage handler for the program
+     * @throws InvalidInputException - thrown when the index to delete is invalid
+     */
     @Override
     public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         try {
             int index = Integer.parseInt(indexToDelete);
-            String taskString = calendar.taskAtIndex(index);
+            String taskString = calendar.taskStringAtIndex(index);
             calendar.remove(index);
             ui.showTaskDeleted(taskString);
             storage.save(calendar);
