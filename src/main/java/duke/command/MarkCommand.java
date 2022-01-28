@@ -24,7 +24,7 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task taskToMark = tasks.get_tasks().get(id - 1);
+            Task taskToMark = tasks.getTasks().get(id - 1);
             if (this.mark) {
                 taskToMark.mark();
                 ui.notifyMarkedTaskMessage(taskToMark, true);
@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
                 taskToMark.unmark();
                 ui.notifyMarkedTaskMessage(taskToMark, false);
             }
-            storage.saveToFile(tasks.get_tasks());
+            storage.saveToFile(tasks.getTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No such task exists! Are you sure about that task number?");
         }

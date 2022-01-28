@@ -28,8 +28,8 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskMaster tasks, Ui ui, Storage storage) {
-        tasks.add_task(this.task);
+        tasks.addTask(this.task);
         ui.notifyAddedTaskMessage(this.task);
-        storage.saveToFile(tasks.get_tasks());
+        storage.saveToFile(tasks.getTasks());
     }
 }

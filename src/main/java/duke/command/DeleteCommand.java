@@ -15,8 +15,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskMaster tasks, Ui ui, Storage storage) {
-        Task removed_task = tasks.delete_task(this.id);
+        Task removed_task = tasks.deleteTask(this.id);
         ui.notifyRemovedTaskMessage(removed_task);
-        storage.saveToFile(tasks.get_tasks());
+        storage.saveToFile(tasks.getTasks());
     }
 }

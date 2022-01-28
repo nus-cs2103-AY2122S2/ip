@@ -8,22 +8,20 @@ import duke.task.Task;
 
 public abstract class Command {
 
-    private boolean exit = false;
-    private Task task;
+    private boolean isExit = false;
 
     public Command() {
     }
 
     public void execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
-
     }
 
     public boolean isExit() {
-        return this.exit;
+        return this.isExit;
     }
 
     public void startExit() {
-        this.exit = true;
+        this.isExit = true;
     }
 
 
