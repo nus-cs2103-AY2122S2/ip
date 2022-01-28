@@ -73,6 +73,12 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Searches and returns a list of tasks that contains the query.
+     *
+     * @param query The String to search for in the task.
+     * @return A list of tasks that matches the query.
+     */
     public List<Task> search(String query) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : taskList) {

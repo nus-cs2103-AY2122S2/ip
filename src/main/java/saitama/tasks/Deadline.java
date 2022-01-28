@@ -8,9 +8,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * A deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate deadline;
 
+    /**
+     * Initialises an undone deadline task.
+     *
+     * @param description The details of the deadline task.
+     * @param by The deadline of the task in dd/mm/yyyy format.
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     */
     public Deadline(String description, String by) throws InvalidFormatException {
         super(description);
         String[] time = by.split("/");
@@ -25,6 +36,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Initialises a deadline task.
+     *
+     * @param description The details of the deadline task.
+     * @param by The deadline of the task in dd/mm/yyyy format.
+     * @param isDone Whether the task is done.
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     */
     public Deadline(String description, String by, boolean isDone) throws InvalidFormatException {
         super(description, isDone);
         String[] time = by.split("/");
@@ -39,11 +58,22 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Writes the data of the task to a text file.
+     *
+     * @param fw The file writer in charge of writing to file.
+     * @throws IOException if there is an error writing the file.
+     */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
         fw.write("D " + isDone + " " + this.description + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
     }
 
+    /**
+     * Returns the string format of the task.
+     *
+     * @return The string format of the task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
