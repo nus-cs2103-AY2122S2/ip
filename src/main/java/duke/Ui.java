@@ -39,6 +39,7 @@ public class Ui {
     }
 
     public void printTasks(ArrayList<Task> tasks) {
+        System.out.println("Here are the requested tasks:");
         StringBuilder taskList = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
             taskList.append(i).append(". ").append(tasks.get(i - 1)).append("\n");

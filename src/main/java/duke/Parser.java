@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -39,6 +34,8 @@ public class Parser {
         case "deadline":
         case "event":
             return new AddCommand(cmd, details);
+        case "find":
+            return new FindCommand(details);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
