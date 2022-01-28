@@ -28,8 +28,8 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
         assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks)";
 
-        tasklist.markDone(this.ranking);
+        tasklist.markDone(ranking);
         storage.writeToFile(tasklist);
-        return ui.printMarkTaskAsDone(tasklist, this.ranking);
+        return ui.printMarkTaskAsDone(tasklist, ranking);
     }
 }
