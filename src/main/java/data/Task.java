@@ -18,6 +18,10 @@ public class Task {
         this.marked = true;
     }
 
+    /**
+     * Set the time of the task.
+     * @param time The time that the task should be done.
+     **/
     public void setTime(String time) {
         time = identifyTime(time);
         if(this.type == Type.EVENT)

@@ -11,6 +11,13 @@ public class PrintCommand extends Command {
         text = s;
     }
 
+    /**
+     * Print the text as respond.
+     * @param tasks The list containing all the tasks
+     * @param ui User interface
+     * @param storage Class that manages storage
+     **/
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.respond(text);
     }

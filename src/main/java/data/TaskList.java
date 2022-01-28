@@ -6,22 +6,33 @@ public class TaskList {
 
     private final ArrayList<Task> list = new ArrayList<>();
 
+    /** Return the size of the TaskList.  */
     public int size() {
         return this.list.size();
     }
 
+    /** Get a Task from the list by the index of the task.  */
     public Task get(int i) {
         return list.get(i);
     }
 
+    /**
+     * Add a task to the list.
+     * @param task The task you want to add to the list.
+     **/
     public void add(Task task) {
         list.add(task);
     }
 
-    public void remove(Task t) {
-        list.remove(t);
+    /**
+     * Delete a task from the list.
+     * @param task The task you want to add to the list.
+     **/
+    public void remove(Task task) {
+        list.remove(task);
     }
 
+    /** Listing out all the tasks in the list.  */
     public String listing() {
         String s = "";
         for (int i = 0; i < list.size(); i++) {

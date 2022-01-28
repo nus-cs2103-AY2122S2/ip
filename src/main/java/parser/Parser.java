@@ -7,6 +7,10 @@ import data.Task;
 
 public class Parser {
 
+    /**
+     * Parse the user input to a command if the input is valid.
+     * @param input The text that the user input.
+     **/
     public static Command parse(String input) {
         if (input.equals("bye")) {
             return new ExitCommand();

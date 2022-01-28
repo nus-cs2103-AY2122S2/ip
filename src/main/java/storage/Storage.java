@@ -14,6 +14,10 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Store the record of a task into storage.
+     * @param info information about the task.
+     **/
     public void record(String info) {
         try {
             makeDirectory();

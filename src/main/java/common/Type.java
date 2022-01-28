@@ -1,5 +1,5 @@
 package common;
-
+/** An Enum class referring the type of a Task object.  */
 public enum Type {
     TODO,
     DEADLINE,
