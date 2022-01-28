@@ -1,3 +1,15 @@
+package Duke;
+
+import Duke.command.Command;
+import Duke.command.ByeCommand;
+
+import Duke.exception.DukeException;
+
+import Duke.util.Parser;
+import Duke.util.Storage;
+import Duke.util.TaskList;
+import Duke.util.Ui;
+
 import java.io.FileNotFoundException;
 
 public class Duke {
@@ -40,6 +52,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/data/duke.txt").run();
+        new Duke("src/main/java/Duke/data/duke.txt").run();
     }
 }

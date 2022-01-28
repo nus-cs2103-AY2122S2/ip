@@ -1,3 +1,11 @@
+package Duke.command;
+
+import Duke.exception.DukeException;
+
+import Duke.util.TaskList;
+import Duke.util.Storage;
+import Duke.util.Ui;
+
 /**
  * This UnmarkCommand class will mark a task as undone
  */
@@ -16,7 +24,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Executes command by adding task into TaskList.
+     * Executes command by adding task into Duke.Duke.util.TaskList.
      *  @param taskList List of tasks
      * @param ui       Ui provided
      * @param storage  Saved history

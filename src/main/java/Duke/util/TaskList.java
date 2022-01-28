@@ -1,11 +1,16 @@
+package Duke.util;
+
+import Duke.exception.DukeException;
+
+import Duke.task.Event;
+import Duke.task.Deadline;
+import Duke.task.Task;
+import Duke.task.Todo;
+
 import java.io.FileNotFoundException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileWriter;
 
 public class TaskList {
 
@@ -152,36 +157,4 @@ public class TaskList {
         ui.requestNextCommand();
     }
 
-//    /**
-//     * Appends new tasks into saved file
-//     *
-//     * @param content Task to be added to saved file
-//     */
-//    private void append(String content) {
-//        try {
-//            FileWriter writer = new FileWriter(FILE_PATH, true);
-//            writer.write(content);
-//            writer.close();
-//        } catch (IOException e) {
-//            System.out.println("Exception thrown:" + e);
-//        }
-//    }
-//
-//    /**
-//     * Save all tasks into a file
-//     */
-//    private void saveToFile() {
-//        String result = "";
-//        for (Task task : taskList) {
-//            result = result.concat(task.toSave() + "\n");
-//        }
-//
-//        try {
-//            FileWriter writer = new FileWriter(FILE_PATH, false);
-//            writer.write(result);
-//            writer.close();
-//        } catch (IOException e) {
-//            System.out.println("Exception thrown:" + e);
-//        }
-//    }
 }

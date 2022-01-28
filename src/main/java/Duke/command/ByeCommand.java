@@ -1,3 +1,11 @@
+package Duke.command;
+
+import Duke.exception.DukeException;
+
+import Duke.util.TaskList;
+import Duke.util.Storage;
+import Duke.util.Ui;
+
 public class ByeCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";

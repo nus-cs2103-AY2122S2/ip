@@ -1,3 +1,13 @@
+package Duke.command;
+
+import Duke.exception.DukeException;
+
+import Duke.task.Task;
+
+import Duke.util.TaskList;
+import Duke.util.Storage;
+import Duke.util.Ui;
+
 public class AddCommand extends Command {
 
     Task task;
@@ -13,7 +23,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes command by adding task into TaskList.
+     * Executes command by adding task into Duke.Duke.util.TaskList.
      *  @param taskList List of tasks
      * @param ui        Ui provided
      * @param storage   Saved history

@@ -1,3 +1,9 @@
+package Duke.util;
+
+import Duke.exception.DukeException;
+
+import Duke.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

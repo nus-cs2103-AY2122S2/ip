@@ -1,3 +1,5 @@
+package Duke.task;
+
 /**
  * Represents a todolist task to be done. This event is a task that possesses a state/status
  * that is by default not done

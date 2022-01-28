@@ -1,3 +1,5 @@
+package Duke.util;
+
 import java.io.PrintStream;
 
 import java.util.Scanner;
@@ -13,7 +15,6 @@ public class Ui {
     private final String LINE = "\t___________________________________________________________\n";
     private final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
     private final String REQUEST_NEXT_COMMAND_ANGRY = "\tAye Aye, better get it right this time. Your next command:";
-    private final String REPLY = "\tAye, Aye. Your command:";
     private final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
     private final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
     private final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
