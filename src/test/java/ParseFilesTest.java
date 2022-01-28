@@ -1,39 +1,30 @@
-import Taskmaster.Exception.DukeExceptions;
-import Taskmaster.Task.Task;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.EventTask;
-import Taskmaster.util.ParseFiles;
-
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
+import taskmaster.task.TodoTask;
+import taskmaster.util.ParseFiles;
 
 public class ParseFilesTest {
-    private final ParseFiles FILEPARSER = new ParseFiles();
+    private final ParseFiles FILE_PARSER = new ParseFiles();
 
     @Test
-    @DisplayName("Test Todotask creation")
+    @DisplayName("Test Todo task creation")
     public void testTodoTask() {
-        assertTrue(FILEPARSER.parseTask("T | 1 | me") instanceof TodoTask);
+        assertTrue(FILE_PARSER.parseTask("T | 1 | me") instanceof TodoTask);
     }
 
     @Test
     @DisplayName("Test DeadlineTask creation")
     public void testDeadlineTask() {
-        assertTrue(FILEPARSER.parseTask("D | 0 | SpongeBob | 24/02/1998 1800") instanceof DeadlineTask);
+        assertTrue(FILE_PARSER.parseTask("D | 0 | SpongeBob | 24/02/1998 1800") instanceof DeadlineTask);
     }
 
     @Test
     @DisplayName("Test EventTask creation")
     public void testEventTask() {
-        assertTrue(FILEPARSER.parseTask("E | 0 | SpongeBob | 27/12/2000 0900") instanceof EventTask);
+        assertTrue(FILE_PARSER.parseTask("E | 0 | SpongeBob | 27/12/2000 0900") instanceof EventTask);
     }
 
 
