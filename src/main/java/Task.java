@@ -31,4 +31,16 @@ public class Task {
         return out;
     }
 
+    public static boolean is_valid_task(String details, String type) throws DukeException {
+        if (details.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        } else if ((type.equals("deadline") || type.equals("event")) && !details.contains("/")) {
+            throw new DukeException("☹ OOPS!!! The date of a " + type + " cannot be empty. Use / and type the date after it");
+        } else if ((type.equals("deadline") || type.equals("event")) && details.endsWith("/")) {
+            throw new DukeException("☹ OOPS!!! The date of a " + type + " cannot be empty. Type the date after your /");
+        } else {
+            return true;
+        }
+    }
+
 }
