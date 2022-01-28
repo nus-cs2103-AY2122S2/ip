@@ -59,4 +59,22 @@ public class Deadline extends Task{
             return this.date.format(format);
         }
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (! (o instanceof Deadline)){
+            return false;
+        }
+
+        @SuppressWarnings("Unchecked")
+        Deadline deadline = (Deadline) o;
+
+        if (deadline.taskName.equals(this.taskName)){
+            if (deadline.getDate().equals(this.getDate())){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

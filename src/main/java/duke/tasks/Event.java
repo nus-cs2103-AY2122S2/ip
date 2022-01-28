@@ -54,4 +54,22 @@ public class Event extends Task{
             return this.date.format(format);
         }
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (! (o instanceof Event)){
+            return false;
+        }
+
+        @SuppressWarnings("Unchecked")
+        Event event = (Event) o;
+
+        if (event.taskName.equals(this.taskName)){
+            if (event.getDate().equals(this.getDate())){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -36,5 +36,6 @@ public abstract class Task{
     public char getType() {
         return ' ';
     }
+
 }
 

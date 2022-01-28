@@ -21,7 +21,7 @@ public class DeleteTaskCommand extends Command{
                 ui.showDeleteOutOfBounds(taskManager.size());
             } else {
                 Task t = taskManager.getTask(index);
-                boolean success = taskManager.deleteTask(index);
+                boolean success = taskManager.deleteTask(t);
                 if (success){
                     save(storage, ui, taskManager);
                     ui.showDeletedTask(t, taskManager.size());

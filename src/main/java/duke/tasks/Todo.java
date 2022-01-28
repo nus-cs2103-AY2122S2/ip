@@ -29,4 +29,16 @@ public class Todo extends Task{
     public String getDate(){
         return "";
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (! (o instanceof Todo)){
+            return false;
+        }
+
+        @SuppressWarnings("Unchecked")
+        Todo todo = (Todo) o;
+
+        return todo.taskName.equals(this.taskName);
+    }
 }

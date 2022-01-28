@@ -43,6 +43,10 @@ public class TaskManager {
         }
     }
 
+    public boolean deleteTask(Task t){
+        return tasks.remove(t);
+    }
+
     public boolean markTaskDone(int index){
         if (tasks.size() <= 0){
             return false;
@@ -59,6 +63,13 @@ public class TaskManager {
                 }
             }
         }
+    }
+    public boolean markTaskDone(Task t) {
+        if (t.getDone() == ' ') {
+            tasks.get(tasks.indexOf(t)).markDone();
+            return true;
+        }
+        return false;
     }
 
     public boolean markTaskUndone(int index){
@@ -77,6 +88,13 @@ public class TaskManager {
                 }
             }
         }
+    }
+    public boolean markTaskUndone(Task t) {
+        if (t.getDone() == 'X') {
+            tasks.get(tasks.indexOf(t)).markUndone();
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Task> getTaskList(){
