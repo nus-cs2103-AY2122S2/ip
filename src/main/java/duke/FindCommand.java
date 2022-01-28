@@ -7,15 +7,15 @@ import java.util.ArrayList;
  * When executed, calls ui method to print output
  */
 public class FindCommand extends Command {
-    LocalDate input_date;
+    LocalDate inputDate;
 
     /**
      * Constructor
      * Takes in Java LocalDate as input
-     * @param input_date LocalDate
+     * @param inputDate LocalDate
      */
-    public FindCommand(LocalDate input_date) {
-        this.input_date = input_date;
+    public FindCommand(LocalDate inputDate) {
+        this.inputDate = inputDate;
     }
 
     /**
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         for (Task t : all) {
             if (t instanceof Deadline) {
                 Deadline deadline = (Deadline) t;
-                if (deadline.getDate().equals(input_date.toString())) {
+                if (deadline.getDate().equals(inputDate.toString())) {
                     filtered.add(t);
                 }
             }
@@ -39,9 +39,9 @@ public class FindCommand extends Command {
         if (filtered.size() == 0) {
             return ui.printFilteredDeadline(0);
         } else {
-            TaskList filtered_tasklist = new TaskList(filtered);
+            TaskList filteredTasklist = new TaskList(filtered);
             // do nothing to storage
-            return ui.printFilteredDeadline(filtered_tasklist);
+            return ui.printFilteredDeadline(filteredTasklist);
         }
     }
 

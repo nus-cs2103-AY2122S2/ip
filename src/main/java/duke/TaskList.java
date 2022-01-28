@@ -7,14 +7,14 @@ import java.util.ArrayList;
  * All operations to add/delete tasks in the list
  */
 public class TaskList {
-    private ArrayList<Task> all_tasks;
+    private ArrayList<Task> allTasks;
 
     /**
      * Constructor
      * Create new TaskList
      */
     public TaskList() {
-        this.all_tasks = new ArrayList<Task>();
+        this.allTasks = new ArrayList<Task>();
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      * @param currentTasks ArrayList of existing tasks
      */
     public TaskList(ArrayList<Task> currentTasks) {
-        this.all_tasks = currentTasks;
+        this.allTasks = currentTasks;
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @return ArrayList of Task
      */
     public ArrayList<Task> getAllTasks() {
-        return all_tasks;
+        return allTasks;
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskList {
      * @param task
      */
     public void addTask(Task task) {
-        all_tasks.add(task);
+        allTasks.add(task);
     }
 
     /**
@@ -47,9 +47,9 @@ public class TaskList {
      * @param ranking ranking is index + 1
      */
     public void delete(int ranking) {
-        assert ranking > 0 && ranking <= all_tasks.size():
+        assert ranking > 0 && ranking <= allTasks.size():
                 "Please give a valid input (0 < input < number of tasks";
-        all_tasks.remove(ranking-1);
+        allTasks.remove(ranking-1);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList {
      * @param ranking
      */
     public void markDone(int ranking) {
-        all_tasks.get(ranking-1).markDone();
+        allTasks.get(ranking-1).markDone();
     }
 
     /**
@@ -65,7 +65,7 @@ public class TaskList {
      * @param ranking
      */
     public void markUndone(int ranking) {
-        all_tasks.get(ranking-1).unMarkDone();
+        allTasks.get(ranking-1).unMarkDone();
     }
 
     /**
@@ -73,6 +73,6 @@ public class TaskList {
      * @return int length of Task ArrayList
      */
     public int getLength() {
-        return all_tasks.size();
+        return allTasks.size();
     }
 }

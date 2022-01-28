@@ -10,17 +10,18 @@ import java.time.format.DateTimeFormatter;
  * Represents events with deadline
  */
 public class Deadline extends Task {
-    protected LocalDate by_date;
+    protected LocalDate byDate;
 
     /**
      * Constructor
      * Takes in name of task and deadline
      * @param name String name of task
-     * @param by_date LocalDate task deadline
+     * @param byDate LocalDate task deadline
      */
-    public Deadline(String name, LocalDate by_date) {
+
+    public Deadline(String name, LocalDate byDate) {
         super(name);
-        this.by_date = by_date;
+        this.byDate = byDate;
     }
 
     /**
@@ -31,18 +32,18 @@ public class Deadline extends Task {
      */
     public static Deadline setDeadline(String input) throws DukeDeadlineException { //method to call constructor solving
                                                     // "'this' should be called in first line" error
-        String taskname;
-        String taskby;
-        LocalDate taskby_date;
+        String taskName;
+        String taskBy;
+        LocalDate taskByDate;
 
         try {
             String[] split = input.split(" /by ");
-            taskname = split[0];
-            taskby = split[1];
+            taskName = split[0];
+            taskBy = split[1];
 
-            taskby_date = LocalDate.parse(taskby);
+            taskByDate = LocalDate.parse(taskBy);
 
-            Deadline d_line = new Deadline(taskname, taskby_date);
+            Deadline d_line = new Deadline(taskName, taskByDate);
             return d_line;
         } catch (Exception e) {
             DukeDeadlineException error = new DukeDeadlineException(
@@ -58,12 +59,12 @@ public class Deadline extends Task {
      * @return String parsed LocalDate
      */
     public String getDate() {
-        return by_date.toString();
+        return byDate.toString();
     }
 
     @Override
     public String toString() {
-        String formatted = by_date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formatted = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D]" + super.toString() + " (by:" + formatted + ")";
     }
 }

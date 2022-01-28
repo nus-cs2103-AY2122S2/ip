@@ -81,11 +81,11 @@ public class Storage {
                 // str_split[] = { "[E", "[ ", " event_name (at: event_venue)" }
                 // content = { " ", "event_name (at: event_venue)" }
                 String separator = " \\(at:";
-                String[] get_event_name = content[1].split(separator, 2);
-                String event_name = get_event_name[0];
-                String event_venue = get_event_name[1].split("\\)")[0];
+                String[] getEventName = content[1].split(separator, 2);
+                String eventName = getEventName[0];
+                String eventVenue = getEventName[1].split("\\)")[0];
 
-                Task event = Event.setEvent(event_name + " /at " + event_venue);
+                Task event = Event.setEvent(eventName + " /at " + eventVenue);
 
                 if (completion[1].equals("X")) {
                     event.markDone();
@@ -98,15 +98,15 @@ public class Storage {
                 // str_split[] = { "[D", "[ ", " task_name (by: deadline_in_yyyy-mm-dd)" }
                 // content = { " ", "task_name (by: deadline_in_yyyy-mm-dd)" }
                 String separator = " \\(by:";
-                String[] get_task_name = content[1].split(separator, 2);
-                String task_name = get_task_name[0];
-                String task_by = get_task_name[1].split("\\)")[0];
+                String[] getTaskName = content[1].split(separator, 2);
+                String taskName = getTaskName[0];
+                String taskBy = getTaskName[1].split("\\)")[0];
 
                 // formatting to input
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-                String task_by_date = LocalDate.parse(task_by, formatter).toString();
+                String taskByDate = LocalDate.parse(taskBy, formatter).toString();
 
-                Task deadline = Deadline.setDeadline(task_name + " /by " + task_by_date);
+                Task deadline = Deadline.setDeadline(taskName + " /by " + taskByDate);
 
                 if (completion[1].equals("X")) {
                     deadline.markDone();
