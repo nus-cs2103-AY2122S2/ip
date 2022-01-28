@@ -11,7 +11,8 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description, false);
         String[] dateTime = at.split(" ");
-        this.at = LocalDateTime.of(LocalDate.parse(dateTime[0]), LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
+        this.at = LocalDateTime.of(LocalDate.parse(dateTime[0]),
+                LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
     }
 
     public Event(String description, boolean isDone, String at) {

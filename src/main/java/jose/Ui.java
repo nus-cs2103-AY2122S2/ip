@@ -5,7 +5,7 @@ import jose.task.*;
 
 public class Ui {
     private static final String LS = System.lineSeparator();
-    private static final String DIVIDER = "---------------------------------------";
+    private static final String DIVIDER = "-----------------------------------------";
     private final PrintStream out;
 
     public Ui() {

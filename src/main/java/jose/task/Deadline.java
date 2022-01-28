@@ -11,7 +11,8 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description, false);
         String[] dateTime = by.split(" ");
-        this.by = LocalDateTime.of(LocalDate.parse(dateTime[0]), LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
+        this.by = LocalDateTime.of(LocalDate.parse(dateTime[0]),
+                LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
     }
 
     public Deadline(String description, boolean isDone, String by) {

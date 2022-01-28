@@ -23,70 +23,68 @@ public class Duke {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser();
-        String[] task, taskInfo;
-        Task tempTask;
-        String input;
         boolean isModified = false;
         boolean isRunning = true;
 
         ui.showGreeting();
 
         while (isRunning) {
-            input = scanner.nextLine();
+            String input = scanner.nextLine();
+            String[] taskInfo;
+            Task tempTask;
+
             try {
                 Parser.Command command = parser.parse(input);
                 switch (command) {
-                    case BYE:
-                        ui.showExitMessage();
-                        isRunning = false;
-                        break;
-                    case LIST:
-                        ui.showList(tasks);
-                        break;
-                    case MARK:
-                        tempTask = tasks.getTask(parser.getIndex(input));
-                        tempTask.mark();
-                        isModified = true;
-                        ui.showMarkMessage(tempTask);
-                        break;
-                    case UNMARK:
-                        tempTask = tasks.getTask(parser.getIndex(input));
-                        tempTask.unmark();
-                        isModified = true;
-                        ui.showUnmarkMessage(tempTask);
-                        break;
-                    case DELETE:
-                        tempTask = tasks.getTask(parser.getIndex(input));
-                        ui.showDeleteMessage(tempTask);
-                        tasks.removeTask(tempTask);
-                        isModified = true;
-                        ui.showRemainingTasks(tasks);
-                        break;
-                    case TODO:
-                        task = input.split(" ", 2);
-                        tempTask = new ToDo(task[1]);
-                        tasks.addTask(tempTask);
-                        isModified = true;
-                        ui.showAddMessage(tempTask);
-                        ui.showRemainingTasks(tasks);
-                        break;
-                    case DEADLINE:
-                        task = input.split(" ", 2);
-                        taskInfo = task[1].split(" /by ");
-                        tempTask = new Deadline(taskInfo[0], taskInfo[1]);
-                        tasks.addTask(tempTask);
-                        isModified = true;
-                        ui.showAddMessage(tempTask);
-                        ui.showRemainingTasks(tasks);
-                        break;
-                    case EVENT:
-                        task = input.split(" ", 2);
-                        taskInfo = task[1].split(" /at ");
-                        tempTask = new Event(taskInfo[0], taskInfo[1]);
-                        tasks.addTask(tempTask);
-                        isModified = true;
-                        ui.showAddMessage(tempTask);
-                        ui.showRemainingTasks(tasks);
+                case BYE:
+                    ui.showExitMessage();
+                    isRunning = false;
+                    break;
+                case LIST:
+                    ui.showList(tasks);
+                    break;
+                case MARK:
+                    tempTask = tasks.getTask(parser.getIndex(input));
+                    tempTask.mark();
+                    isModified = true;
+                    ui.showMarkMessage(tempTask);
+                    break;
+                case UNMARK:
+                    tempTask = tasks.getTask(parser.getIndex(input));
+                    tempTask.unmark();
+                    isModified = true;
+                    ui.showUnmarkMessage(tempTask);
+                    break;
+                case DELETE:
+                    tempTask = tasks.getTask(parser.getIndex(input));
+                    ui.showDeleteMessage(tempTask);
+                    tasks.removeTask(tempTask);
+                    isModified = true;
+                    ui.showRemainingTasks(tasks);
+                    break;
+                case TODO:
+                    taskInfo = input.split(" ", 2);
+                    tempTask = new ToDo(taskInfo[1]);
+                    tasks.addTask(tempTask);
+                    isModified = true;
+                    ui.showAddMessage(tempTask);
+                    ui.showRemainingTasks(tasks);
+                    break;
+                case DEADLINE:
+                    taskInfo = input.split(" ", 2)[1].split(" /by ");
+                    tempTask = new Deadline(taskInfo[0], taskInfo[1]);
+                    tasks.addTask(tempTask);
+                    isModified = true;
+                    ui.showAddMessage(tempTask);
+                    ui.showRemainingTasks(tasks);
+                    break;
+                case EVENT:
+                    taskInfo = input.split(" ", 2)[1].split(" /at ");
+                    tempTask = new Event(taskInfo[0], taskInfo[1]);
+                    tasks.addTask(tempTask);
+                    isModified = true;
+                    ui.showAddMessage(tempTask);
+                    ui.showRemainingTasks(tasks);
                 }
 
                 if (isModified) {

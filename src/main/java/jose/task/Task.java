@@ -6,7 +6,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public Task(String description, boolean isDone) {
@@ -15,15 +15,15 @@ public class Task {
     }
 
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public String formatData() {
@@ -32,6 +32,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.description;
+        return getStatusIcon() + " " + description;
     }
 }
