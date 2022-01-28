@@ -191,6 +191,9 @@ public class Parser {
         case "delete":
             getCommand = prepareDelete(keyWord, fullInput);
             break;
+        case "find":
+            getCommand = prepareFind(keyWord, fullInput);
+            break;
         default:
             getCommand = new InvalidCommand(NA_MESSAGE);
             break;
