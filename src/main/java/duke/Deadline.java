@@ -1,6 +1,10 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+/**
+ * A type of tasks, have a specific date(deadline)
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -17,7 +21,10 @@ public class Deadline extends Task {
         this.by = by;
         this.date = LocalDate.parse(by);
     }
-
+    /**
+     * Transform the task into the format of data, to be stored into file data
+     * @return A formatted string
+     */
     @Override
     public String dataFormatOfTask() {
         String bool;
