@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Represents a user interface.
  */
 public class Ui {
-    static String indent = "    ";
+    static final String INDENT = "    ";
     private Scanner scanner;
 
     /**
@@ -23,7 +23,7 @@ public class Ui {
      */
     public void outputGreeting() {
         myBossOutput(" Hello! I'm YourBoss.\n" +
-                indent +
+                INDENT +
                 " What can you do for me?");
     }
 
@@ -52,7 +52,7 @@ public class Ui {
     public void outputTaskList(ArrayList<Task> taskList) {
         StringBuilder tempOut = new StringBuilder("");
         for (int i = 0; i < taskList.size(); i++) {
-            tempOut.append(" " + indent).append((i + 1) + ".").append(taskList.get(i).toString());
+            tempOut.append(" " + INDENT).append((i + 1) + ".").append(taskList.get(i).toString());
         }
         hLineBreak();
         printlnWithIndent(" Here are the tasks in your list:");
@@ -82,7 +82,7 @@ public class Ui {
      * Outputs a formatted line break.
      */
     static void hLineBreak() {
-        System.out.println(indent+"____________________________________________________________");
+        System.out.println(INDENT +"____________________________________________________________");
     }
 
     /**
@@ -91,7 +91,7 @@ public class Ui {
      * @param input input to print.
      */
     static void printlnWithIndent(String input) {
-        System.out.print(indent);
+        System.out.print(INDENT);
         System.out.println(input);
     }
 
@@ -114,7 +114,7 @@ public class Ui {
     void addTaskOutput(Task task) {
         hLineBreak();
         printlnWithIndent(" Got it. I've added this task:");
-        System.out.print(indent + "   " + task);
+        System.out.print(INDENT + "   " + task);
         printlnWithIndent(" Now you have "+ TaskList.getSize() +" tasks in the list.");
         hLineBreak();
     }
@@ -127,7 +127,7 @@ public class Ui {
     void outputDeleteTask(Task task) {
         hLineBreak();
         printlnWithIndent(" Noted. I've removed this task:");
-        System.out.print(indent + "   " + task);
+        System.out.print(INDENT + "   " + task);
         printlnWithIndent(" Now you have "+ TaskList.getSize() +" tasks in the list.");
         hLineBreak();
     }

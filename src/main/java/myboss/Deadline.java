@@ -9,7 +9,6 @@ import java.util.Objects;
  * to a task with a specified date.
  */
 public class Deadline extends Task {
-    String taskType = "D";
     LocalDate deadline;
 
     /**
