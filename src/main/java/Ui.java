@@ -1,3 +1,4 @@
+package duke;
 //Ui: deals with interactions with the user
 import java.util.ArrayList;
 import java.util.List;

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -7,19 +9,19 @@ import java.io.IOException;  // Import the IOException class to handle errors
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private duke.Storage storage;
+    private duke.TaskList tasks;
+    private duke.Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        ui = new duke.Ui();
+        storage = new duke.Storage(filePath);
         try {
             //tasks = new TaskList(storage.load());
-            tasks = new TaskList();
+            tasks = new duke.TaskList();
         } catch (Exception e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasks = new duke.TaskList();
         }
     }
 
@@ -44,25 +46,25 @@ public class Duke {
 
             } else if (splitStr[0].equals("mark")) {
                 int index = Integer.parseInt(splitStr[1]);
-                Task task = (Task) tasks.get(index - 1);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
                 task.markAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(tasks.get(index - 1));
 
             } else if (splitStr[0].equals("unmark")) {
                 int index = Integer.parseInt(splitStr[1]);
-                Task task = (Task) tasks.get(index - 1);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
                 task.unmarkAsDone();
                 ui.markdone(tasks.get(index - 1));
 
             } else if (splitStr[0].equals("delete")) {
                 int index = Integer.parseInt(splitStr[1]);
-                Task task = (Task) tasks.get(index - 1);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
                 tasks.remove(index - 1);
                 ui.removedTask(task, tasks);
 
             } else if (splitStr[0].equals("todo") || splitStr[0].equals("deadline") || splitStr[0].equals("event")) {
-                
+
                 String[] parts = value.split("/");
                 String description = parts[0];
                 if (parts.length > 1) {
@@ -76,7 +78,7 @@ public class Duke {
                 try {
                     if (splitStr[0].equals("todo")) {
                         description = description.substring(5);
-                        tasks.add(new ToDo(description));
+                        tasks.add(new duke.ToDo(description));
                     }
                 } catch (Exception e) {
                     ui.emptyInput();
@@ -84,7 +86,7 @@ public class Duke {
                 try {
                     if (splitStr[0].equals("deadline")) {
                         description = description.substring(9);
-                        tasks.add(new Deadline(description));
+                        tasks.add(new duke.Deadline(description));
                     }
                 } catch (Exception e) {
                     ui.emptyInput();
@@ -92,7 +94,7 @@ public class Duke {
                 try {
                     if (splitStr[0].equals("event")) {
                         description = description.substring(6);
-                        tasks.add(new Event(description));
+                        tasks.add(new duke.Event(description));
                     }
                 } catch (Exception e) {
                     ui.emptyInput();
