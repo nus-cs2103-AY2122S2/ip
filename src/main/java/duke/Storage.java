@@ -21,8 +21,8 @@ public class Storage {
 
     private static File createFileIfNotExist(String filePath, String dirPath) throws IOException{
         File dir = new File(dirPath);
-        dir.mkdir();
         File file = new File(filePath);
+        dir.mkdir();
         file.createNewFile();
         return file;
     }
@@ -31,6 +31,7 @@ public class Storage {
         String tempFilePath = FILEPATH + ".new";
         File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
         FileWriter fw = new FileWriter(file, true);
+        
         for (Task task : taskList.tasks) {
             fw.write(task.toFileFormat());
         }

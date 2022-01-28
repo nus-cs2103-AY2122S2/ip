@@ -5,11 +5,11 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Parser dukeEngine = new Parser();
+        Parser parser = new Parser();
 
-        while(dukeEngine.isPolling) {
+        while(parser.isPolling) {
             String input = sc.nextLine();
-            dukeEngine.inputHandler(input);
+            parser.inputHandler(input);
         }
 
         sc.close();

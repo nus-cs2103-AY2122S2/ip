@@ -15,6 +15,7 @@ public class Event extends Task{
     public Event (String task, String startDateString) throws DukeException {
         super(task);
         String[] datetime = startDateString.split(" ");
+        
         try {
             startDate = LocalDate.parse(datetime[0], DATE_FORMATTER);
             time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);

@@ -15,6 +15,7 @@ public class Deadline extends Task{
     public Deadline(String task, String deadlineDate) throws DukeException {
         super(task);
         String[] datetime = deadlineDate.split(" ");
+
         try {
             deadline = LocalDate.parse(datetime[0], DATE_FORMATTER);
             time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);
