@@ -7,7 +7,15 @@ public class Duke {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
+        try {
+            startConversation();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void startConversation() throws DukeException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke :) \nWhat can I do for you? :D");
         String inputString = sc.nextLine();
