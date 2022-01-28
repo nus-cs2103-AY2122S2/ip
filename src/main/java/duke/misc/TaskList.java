@@ -59,15 +59,15 @@ public class TaskList {
     /**
      * Iterates through the list and prints out each task that is on the list.
      */
-    public void display() {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Here are the tasks in your list:\n");
+    public String display() {
+        String result = "";
+        result += "     Here are the tasks in your list:\n";
         for (int i = 1; i <= this.numberOfTasks; i++) {
             Task currTask = this.listOfTasks.get(i - 1);
             String output = "     " + i + "." + currTask + "\n";
-            System.out.println(output);
+            result += output;
         }
-        System.out.println("    ____________________________________________________________\n");
+        return result;
     }
 
     /**
@@ -75,14 +75,11 @@ public class TaskList {
      *
      * @param taskId The taskID that corresponds to the task that is to be marked.
      */
-    public void mark(int taskId) {
+    public String mark(int taskId) {
         Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(true);
         writeToFile();
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n"
-                + "       " + currTask + "\n"
-                + "    ____________________________________________________________\n");
+        return "Nice! I've marked this task as done:\n" + currTask;
     }
 
     /**
@@ -90,14 +87,11 @@ public class TaskList {
      *
      * @param taskId The taskID that corresponds to the task that is to be unmarked.
      */
-    public void unmark(int taskId) {
+    public String unmark(int taskId) {
         Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(false);
         writeToFile();
-        System.out.println("    ____________________________________________________________\n"
-                + "     OK, I've marked this task as not done yet:\n"
-                + "       " + currTask + "\n"
-                + "    ____________________________________________________________\n");
+        return "OK, I've marked this task as not done yet:\n" + currTask;
     }
 
     /**
@@ -105,19 +99,15 @@ public class TaskList {
      *
      * @param userInput Command entered by the user that describes the task.
      */
-    public void todo(String userInput) {
+    public String todo(String userInput) {
         this.numberOfTasks++;
 
         Task currentTask = new Todo(userInput);
         this.listOfTasks.add(currentTask);
         writeToFile();
 
-        String output = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + currentTask + "\n"
-                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(output);
+        return "Got it. I've added this task:\n" + currentTask + "\n"
+                + "Now you have " + this.numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -127,19 +117,15 @@ public class TaskList {
      * @param dueDate Specifies the date that this task has to be done by.
      * @param dueTime Specifies the time that this task has to be done by.
      */
-    public void deadline(String userInput, LocalDate dueDate, LocalTime dueTime) {
+    public String deadline(String userInput, LocalDate dueDate, LocalTime dueTime) {
         this.numberOfTasks++;
 
         Task currentTask = new Deadline(userInput, dueDate, dueTime);
         this.listOfTasks.add(currentTask);
         writeToFile();
 
-        String output = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + currentTask + "\n"
-                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(output);
+        return "Got it. I've added this task:\n" + currentTask + "\n"
+                + "Now you have " + this.numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -147,7 +133,7 @@ public class TaskList {
      *
      * @param userInput Command entered by the user that describes the task.
      */
-    public void event(String userInput, LocalDate eventDate,
+    public String event(String userInput, LocalDate eventDate,
                       LocalTime eventStartTime, LocalTime eventEndTime) {
         this.numberOfTasks++;
 
@@ -155,12 +141,8 @@ public class TaskList {
         this.listOfTasks.add(currentTask);
         writeToFile();
 
-        String output = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + currentTask + "\n"
-                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(output);
+        return "Got it. I've added this task:\n" + currentTask + "\n"
+                + "Now you have " + this.numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -168,16 +150,13 @@ public class TaskList {
      *
      * @param taskId The taskID that corresponds to the task that is to be deleted.
      */
-    public void delete(int taskId) {
+    public String delete(int taskId) {
         Task currTask = this.listOfTasks.get(taskId - 1);
         this.listOfTasks.remove(taskId - 1);
         this.numberOfTasks--;
         writeToFile();
 
-        System.out.println("    ____________________________________________________________\n"
-                + "     Noted. I've removed this task:\n"
-                + "       " + currTask + "\n"
-                + "    ____________________________________________________________\n");
+        return "Noted. I've removed this task:\n" + currTask;
     }
 
     /**
@@ -185,7 +164,7 @@ public class TaskList {
      *
      * @param searchTarget Keyword specified by the user.
      */
-    public void find(String searchTarget) {
+    public String find(String searchTarget) {
         StringBuilder res = new StringBuilder();
         int count = 1;
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -197,10 +176,7 @@ public class TaskList {
                 count++;
             }
         }
-        System.out.println("    ____________________________________________________________\n"
-                + "     Here are the matching tasks in your list:\n"
-                + res
-                + "    ____________________________________________________________\n");
+        return "Here are the matching tasks in your list:\n" + res;
     }
 
     /**

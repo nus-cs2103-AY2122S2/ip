@@ -27,7 +27,7 @@ public class Parser {
      *
      * @param userInput Command entered by the user.
      */
-    public static void parse(String userInput, TaskList taskListOfTasks) throws DukeException {
+    public static String parse(String userInput, TaskList taskListOfTasks) throws DukeException {
         String[] wordsArray = userInput.trim().split(" ");
         List<String> wordsList = Arrays.asList(wordsArray);
         String firstWord = wordsList.get(0);
@@ -35,18 +35,16 @@ public class Parser {
         switch (firstWord) {
         case ("list"):
             if (wordsList.size() == 1) {
-                taskListOfTasks.display();
+                return taskListOfTasks.display();
             } else {
                 throw new InvalidCommand("This command should not have any arguments :(");
             }
-            break;
         case ("todo"):
             if (wordsList.size() > 1) {
-                taskListOfTasks.todo(userInput.substring(5));
+                return taskListOfTasks.todo(userInput.substring(5));
             } else {
                 throw new InvalidCommand("The description of a todo cannot be empty :(");
             }
-            break;
         case ("deadline"):
             if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
@@ -91,9 +89,8 @@ public class Parser {
                         throw new InvalidDateTime("You cannot travel back in time!");
                     }
                 }
-                taskListOfTasks.deadline(removeLastChar(desc), newDate, newTime);
+                return taskListOfTasks.deadline(removeLastChar(desc), newDate, newTime);
             }
-            break;
         case ("event"):
             if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
@@ -148,9 +145,8 @@ public class Parser {
                         }
                     }
                 }
-                taskListOfTasks.event(removeLastChar(desc), newDate, newStartTime, newEndTime);
+                return taskListOfTasks.event(removeLastChar(desc), newDate, newStartTime, newEndTime);
             }
-            break;
         case("mark"):
             if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
@@ -159,13 +155,12 @@ public class Parser {
             } else {
                 int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
-                    taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
+                    return taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
                 } else {
                     throw new InvalidIndex("The specified task ID is out of range. "
                             + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
-            break;
         case("unmark"):
             if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
@@ -174,13 +169,13 @@ public class Parser {
             } else {
                 int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
-                    taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
+                    return taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
                     throw new InvalidIndex("The specified task ID is out of range. "
                             + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
-            break;
+
         case("delete"):
             if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
@@ -189,20 +184,20 @@ public class Parser {
             } else {
                 int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
-                    taskListOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
+                    return taskListOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
                     throw new InvalidIndex("The specified task ID is out of range. "
                             + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
-            break;
         case ("find"):
             if (wordsList.size() > 1) {
-                taskListOfTasks.find(userInput.substring(5));
+                return taskListOfTasks.find(userInput.substring(5));
             } else {
                 throw new InvalidCommand("The search field cannot be empty :(");
             }
-            break;
+        case ("bye"):
+            return "See you again!";
         default:
             throw new InvalidCommand("I'm sorry, but I don't know what that means :(");
         }

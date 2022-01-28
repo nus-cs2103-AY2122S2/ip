@@ -26,6 +26,14 @@ public class Storage {
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String DATA_PATH = "./data/data.txt";
 
+    public Storage() {
+        try {
+            initFileFolder();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Creates new data file/folder if it does not exists.
      *
@@ -36,11 +44,8 @@ public class Storage {
         File dataFolder = new File(DATA_FOLDER_PATH);
         // Create new folder if it does not exist
         if (!dataFolder.isDirectory()) {
-            System.out.println("     Data folder not found... Creating folder now...");
             boolean isSuccess = dataFolder.mkdirs();
-            if (isSuccess) {
-                System.out.println("     Success in creating folder!");
-            } else {
+            if (!isSuccess) {
                 throw new IOException("     Failed to create folder.\n"
                         + "     Please create a folder named 'data' in src manually"
                         + "     , before running this program!");
@@ -51,11 +56,8 @@ public class Storage {
         File dataFile = new File(DATA_PATH);
         // Create new data.txt file if it does not exist
         if (!dataFile.isFile()) {
-            System.out.println("     Data file not found... Creating data file now...");
             boolean isSuccess = dataFile.createNewFile();
-            if (isSuccess) {
-                System.out.println("     Success in creating data file!" + "\n");
-            } else {
+            if (!isSuccess) {
                 throw new IOException("     Failed to create datafile.\n"
                         + "     Please create a data.txt in src/data manually"
                         + "     , before running this program!");
@@ -84,13 +86,15 @@ public class Storage {
      *
      * @throws FileNotFoundException If file is not found.
      */
-    public static void readData() throws FileNotFoundException {
+    public static String readData() throws FileNotFoundException {
         File dataFile = new File(DATA_PATH);
+        String result = "";
         Scanner s = new Scanner(dataFile);
-        System.out.println("     Here are the records in the hard disk:\n");
+        result += "     Here are the records in the hard disk:\n";
         while (s.hasNext()) {
-            System.out.println("     " + s.nextLine());
+            result += "     " + s.nextLine() + "\n";
         }
+        return result;
     }
 
     /**
