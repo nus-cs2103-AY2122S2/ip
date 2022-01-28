@@ -1,9 +1,11 @@
-import TaskList.TaskList;
-import exceptions.DukeException;
-import storage.Storage;
-import tasks.Task;
+package duke;
 
-import java.util.ArrayList;
+import duke.parser.Parser;
+import duke.tasklist.TaskList;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -40,7 +42,6 @@ public class Duke {
             try {
                 Parser.processUserInput(commandType, userInput, tasks);
                 storage.saveData(tasks);
-                ui.printDivider();
             } catch(DukeException e) {
                 ui.printInvalidCommand();
             }

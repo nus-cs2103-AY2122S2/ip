@@ -1,5 +1,7 @@
-import TaskList.TaskList;
-import tasks.Task;
+package duke.Commands;
+
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
 
 public class MarkCommand {
 

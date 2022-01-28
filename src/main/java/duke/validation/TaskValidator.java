@@ -1,10 +1,10 @@
 
-package validation;
+package duke.validation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 public class TaskValidator {
 

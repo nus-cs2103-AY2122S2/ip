@@ -1,5 +1,8 @@
-import TaskList.TaskList;
-import exceptions.DukeException;
+package duke.parser;
+
+import duke.Commands.*;
+import duke.tasklist.TaskList;
+import duke.exceptions.DukeException;
 
 import java.util.Locale;
 

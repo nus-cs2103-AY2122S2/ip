@@ -1,12 +1,13 @@
-package storage;
+package duke.storage;
 
-import TaskList.TaskList;
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.ToDo;
-import tasks.Task;
-import validation.TaskValidator;
+import duke.tasklist.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
+import duke.validation.TaskValidator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -69,41 +70,38 @@ public class Storage {
     }
 
     public ArrayList<Task> loadData() {
-        ArrayList<Task> tasks = new ArrayList<>();
-
+        TaskList taskList = new TaskList();
         try {
-            File loadFile = new File(filePath);
-            Scanner readFile = new Scanner(loadFile);
-            int count = 0;
+            File file = new File(filePath);
+            Scanner readFile = new Scanner(file);
+            int numTaskAdded = 0;
 
-            while(readFile.hasNext()) {
+            while (readFile.hasNext()) {
                 try {
-                    String savedData[] = readFile.nextLine().split(" \\| ");
-                    String commandType = savedData[0];
-                    String commandLine;
-
-                    switch(commandType) {
+                    String[] savedData = readFile.nextLine().split(" \\| ");
+                    String command;
+                    switch (savedData[0]) {
                         case "T":
-                            commandLine = "todo " + savedData[2];
-                            tasks.add(count, new ToDo(commandLine));
+                            command = "todo " + savedData[2];
+                            taskList.addToDoTask(command);
                             break;
                         case "D":
-                            commandLine = "deadline " + savedData[2];
-                            tasks.add(count, new Deadline(commandLine, TaskValidator.convertDate(savedData[3])));
+                            command = "deadline " + savedData[2] + " /by " + savedData[3];
+                            taskList.addDeadlineTask(command);
                             break;
                         case "E":
-                            commandLine = "event " + savedData[2];
-                            tasks.add(count, new Event(commandLine, TaskValidator.convertDate(savedData[3])));
+                            command = "event " + savedData[2] + " /at " + savedData[3];
+                            taskList.addEventTask(command);
                             break;
                         default:
                             throw new DukeException("Unable to parse file: " + filePath);
                     }
                     if (savedData[1].equals("1")) {
-                        tasks.get(count).setComplete();
+                        taskList.completedTask(numTaskAdded);
                     }
-                    count++;
+                    numTaskAdded++;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Unable to parse line " + (count + 1) + " of " + filePath);
+                    System.out.println("Unable to parse line " + (numTaskAdded + 1) + " of " + filePath);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -111,6 +109,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("IO exception error when loading data " + filePath);
         }
-        return tasks;
+        return taskList.getTasks();
     }
 }

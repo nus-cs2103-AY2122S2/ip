@@ -1,4 +1,7 @@
-import TaskList.TaskList;
+package duke.Commands;
+
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 public class AddEventCommand extends Command {
 
