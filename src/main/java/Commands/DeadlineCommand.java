@@ -19,14 +19,14 @@ public class DeadlineCommand extends DukeCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
-        String deadlineName = Parser.parseDescription(this.description);
-        LocalDateTime localDateTime = Parser.parseDateTime(description, "deadline");
+        String deadlineName = Parser.parseDescription(this.commandBody);
+        LocalDateTime localDateTime = Parser.parseDateTime(this.commandBody, "deadline");
 
         Tasks.Deadline deadlineTask = new Tasks.Deadline(deadlineName, localDateTime);
         tasks.add(deadlineTask);
 
         storage.save(tasks);
-        ui.successfulAdd(deadlineTask, tasks.getSize());
+        ui.showSuccessfulAdd(deadlineTask, tasks.getSize());
 
     }
 }

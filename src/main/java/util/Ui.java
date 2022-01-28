@@ -11,7 +11,7 @@ public class Ui {
     private PrintWriter pr = new PrintWriter(new
             BufferedWriter((new OutputStreamWriter((System.out)))));
 
-    public void successfulAdd(Task task, int listSize) {
+    public void showSuccessfulAdd(Task task, int listSize) {
         pr.print("Got it. I've added this task:\n" + task.toString() + "\n" +
                 "Now you have " + listSize + " tasks in the list.\n");
         pr.flush();
@@ -31,27 +31,27 @@ public class Ui {
         pr.flush();
     }
 
-    public void deleteReply(Task task, int taskListSize) {
+    public void showDeleteReply(Task task, int taskListSize) {
         pr.print("Noted. I've removed this task:\n");
         pr.print(task.toString());
         pr.print("\nNow you have " + taskListSize + " tasks in the list.\n");
         pr.flush();
     }
 
-    public void markReply(Task task) {
+    public void showMarkReply(Task task) {
         pr.print("Nice! I've marked this task as done:" + "\n");
         pr.print(task.toString() + "\n");
         pr.flush();
     }
 
-    public void unmarkReply(Task task) {
+    public void showUnmarkReply(Task task) {
         pr.print("OK, I've marked this task as not done yet:" + "\n");
         pr.print(task.toString() + "\n");
         pr.flush();
     }
 
 
-    public void printTaskList(TaskList taskList) {
+    public void showTaskList(TaskList taskList) {
         pr.print("Here are the items in your list: \n");
         for (int i = 0; i < taskList.getSize(); i++) {
             Tasks.Task task = taskList.get(i);
