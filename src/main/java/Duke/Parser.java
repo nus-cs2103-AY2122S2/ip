@@ -11,8 +11,19 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the manner in which the program is parsed
+ * and expected to behave when user inputs are entered.
+ */
 public class Parser {
 
+    /**
+     * Processes the TaskList according to the input
+     * entered by the user.
+     *
+     * @param tasklist TaskList to process on
+     * @throws IOException If unexpected input is entered.
+     */
     public void process(TaskList tasklist) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -56,7 +67,13 @@ public class Parser {
         }
     }
 
-    public String formatedDate(String input) {
+    /**
+     * Returns the formatted Date to display from the deadline input.
+     *
+     * @param input the input Date as per "yyyy-MM-dd HH:mm"
+     * @return the formatted Date as per "MMM-dd-yyyy HH:mm a"
+     */
+    private String formatedDate(String input) {
         DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
         return LocalDateTime.parse(input, formatIn).format(formatOut);
