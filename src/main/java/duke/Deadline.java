@@ -62,6 +62,14 @@ public class Deadline extends Task {
         return byDate.toString();
     }
 
+    /**
+     * Getter for Deadline task name
+     * @return String represents name
+     */
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         String formatted = byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

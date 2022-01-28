@@ -52,4 +52,20 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at:" + at + ")";
     }
+
+    /**
+     * Getter for Event task venue
+     * @return String represents venue
+     */
+    public String getVenue() {
+        return at;
+    }
+
+    /**
+     * Getter for Event task name
+     * @return String represents name
+     */
+    public String getName() {
+        return name;
+    }
 }
