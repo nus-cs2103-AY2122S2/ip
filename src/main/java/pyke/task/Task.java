@@ -17,6 +17,9 @@ public class Task {
         this.isDone = new_status;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
     /**
      * Format the task class to a style used in local files for saving
      *

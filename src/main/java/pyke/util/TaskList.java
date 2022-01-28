@@ -80,4 +80,7 @@ public class TaskList {
         return temp;
     }
 
+    public boolean hasKeyword(int taskId, String keyword) {
+        return taskList.get(taskId).hasKeyword(keyword);
+    }
 }

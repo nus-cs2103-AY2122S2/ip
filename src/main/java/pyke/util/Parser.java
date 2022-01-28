@@ -48,6 +48,8 @@ public class Parser {
                     command.substring(6).split("/")[0],
                     command.substring(6).split("/")[1].substring(3)
             );
+        case "find":
+            return new FindCommand(tokenList[1]);
         default:
             throw new InvalidCommandException();
         }
