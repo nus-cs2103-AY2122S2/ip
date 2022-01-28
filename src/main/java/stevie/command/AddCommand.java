@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     /**
      * Constructor for an AddCommand
      *
-     * @param task the task to be added
+     * @param task task to be added
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -28,9 +28,9 @@ public class AddCommand extends Command {
      * task list. Newly updated task list is saved, and ui outputs a response string to let user
      * know that AddCommand is successfully executed.
      *
-     * @param tasks task list to make changes on
+     * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
-     * @param ui to pass a response string for output
+     * @param ui      to pass a response string for output
      * @return false to not terminate the session
      */
     @Override

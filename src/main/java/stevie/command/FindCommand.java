@@ -14,6 +14,11 @@ public class FindCommand extends Command {
      */
     private final String query;
 
+    /**
+     * Constructor for an FindCommand
+     *
+     * @param queryStr string that is used to query for tasks
+     */
     public FindCommand(String queryStr) {
         query = queryStr;
     }
@@ -21,9 +26,9 @@ public class FindCommand extends Command {
     /**
      * Executes the find command and lets UI output the response string.
      *
-     * @param tasks task list to find from
+     * @param tasks   task list to find from
      * @param storage task list data handler
-     * @param ui user interface to print response string
+     * @param ui      user interface to print response string
      * @return false to indicate that command does not terminate Stevie
      */
     @Override

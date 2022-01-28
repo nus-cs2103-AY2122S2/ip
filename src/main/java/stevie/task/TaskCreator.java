@@ -12,10 +12,10 @@ public class TaskCreator {
     /**
      * Creates a new task based on the type. Tasks can have name and/or a date.
      *
-     * @param type type of the task
-     * @param done true if task is already done, else false
+     * @param type     type of the task
+     * @param done     true if task is already done, else false
      * @param taskName name of the task
-     * @param date date of the task
+     * @param date     date of the task
      * @return newly constructed task if all arguments supplied are valid
      * @throws TaskException if the type of the task is invalid, or unsupported
      */
@@ -41,11 +41,11 @@ public class TaskCreator {
     }
 
     /**
-     /**
+     * /**
      * Creates a new task based on the type. Tasks can only have a name.
      *
-     * @param type type of the task
-     * @param done true if task is already done, else false
+     * @param type     type of the task
+     * @param done     true if task is already done, else false
      * @param taskName name of the task
      * @return newly constructed task if all arguments supplied are valid
      * @throws TaskException if the type of the task is invalid, or unsupported

@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
     /**
      * Set markDone to true to mark the task as done, else task is mark as undone
      */
-    private final boolean markDone;
+    private final boolean isDone;
 
     /**
      * The index of the task to be deleted
@@ -23,10 +23,10 @@ public class MarkCommand extends Command {
      * Constructor for MarkDone
      *
      * @param mark true to mark a task as done, else to task is mark as undone
-     * @param idx the index of the task in the task list
+     * @param idx  the index of the task in the task list
      */
     public MarkCommand(boolean mark, int idx) {
-        markDone = mark;
+        isDone = mark;
         taskIdx = idx;
     }
 
@@ -35,16 +35,16 @@ public class MarkCommand extends Command {
      * If successful, save the updated state of the task list. Ui outputs a response string to
      * let user know if the command is successfully executed.
      *
-     * @param tasks task list to make changes on
+     * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
-     * @param ui to pass a response string for output
+     * @param ui      to pass a response string for output
      * @return false to not terminate the session
      */
     @Override
     public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out;
         try {
-            if (markDone) {
+            if (isDone) {
                 out = tasks.markDone(taskIdx);
             } else {
                 out = tasks.markUndone(taskIdx);

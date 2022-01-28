@@ -13,6 +13,18 @@ public class StevieUi {
         sc = new Scanner(System.in);
     }
 
+    private static String help() {
+        return "\"list\": to display your activities.\n" +
+                "\"bye\": to end our session.\n" +
+                "\"mark <i>\" to mark the i-th task as done.\n" +
+                "\"unmark <i>\" to unmark the i-th task as done.\n" +
+                "\"delete <i>\" to delete the i-th task.\n" +
+                "\"todo <task_name>\" to add a todo task.\n" +
+                "\"deadline <task_name> /by <date>\" to add a deadline.\n" +
+                "\"event <event_name> /at <date>\" to add an event.\n" +
+                "Date should in format of dd/mm/yyyy HH:mm";
+    }
+
     /**
      * Receives a non-empty user input. If user's input is "help", output a message to inform
      * user on the commands to properly operate Stevie.
@@ -32,18 +44,6 @@ public class StevieUi {
      */
     public void terminate() {
         sc.close();
-    }
-
-    private static String help() {
-        return "\"list\": to display your activities.\n" +
-                "\"bye\": to end our session.\n" +
-                "\"mark <i>\" to mark the i-th task as done.\n" +
-                "\"unmark <i>\" to unmark the i-th task as done.\n" +
-                "\"delete <i>\" to delete the i-th task.\n" +
-                "\"todo <task_name>\" to add a todo task.\n" +
-                "\"deadline <task_name> /by <date>\" to add a deadline.\n" +
-                "\"event <event_name> /at <date>\" to add an event.\n" +
-                "Date should in format of dd/mm/yyyy HH:mm";
     }
 
     /**

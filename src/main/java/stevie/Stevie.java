@@ -14,20 +14,35 @@ import java.io.File;
  * your saved data, replace the path field.
  */
 public class Stevie {
-    private final TaskList tasks;
-    private final StevieUi ui;
-    private final TaskDataHandler storage;
-
     /**
      * Path to the save file for task list
      */
     private static String path = "src" + File.separator + "main"
             + File.separator + "data" + File.separator + "tasks.txt";
 
+    /**
+     * Task list to store all of user's upcoming tasks
+     */
+    private final TaskList tasks;
+
+    /**
+     * Ui to receive user inputs and output responses
+     */
+    private final StevieUi ui;
+
+    /**
+     * Handles saving and loading of user's tasks
+     */
+    private final TaskDataHandler storage;
+
     private Stevie() {
         ui = new StevieUi();
         storage = new TaskDataHandler(path);
         tasks = new TaskList(storage.loadTasks());
+    }
+
+    public static void main(String[] args) {
+        new Stevie().run();
     }
 
     private void run() {
@@ -44,9 +59,5 @@ public class Stevie {
             }
         }
         ui.terminate();
-    }
-
-    public static void main(String[] args) {
-        new Stevie().run();
     }
 }
