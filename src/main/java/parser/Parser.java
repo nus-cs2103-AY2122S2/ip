@@ -52,7 +52,8 @@ public class Parser {
                 }
                 return new AddCommand(t);
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new PrintCommand("Your expression of time is not valid");
+                return new PrintCommand("Your expression of time is not valid\n" +
+                        "eg: /at 2022-01-27 6pm or /by 2022/01/27 6pm");
             } catch (NoGoodException e) {
                 return new PrintCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

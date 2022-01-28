@@ -119,8 +119,8 @@ public class Task {
     }
 
     private void suggest() {
-        System.out.println("I would appreciate if you write date in the form of yyyy-mm-dd time\n" +
-                "eg: 2022-01-27 6pm");
+        System.out.println("\nI would appreciate if you write date in the form of yyyy-mm-dd time\n" +
+                "(eg: 2022-01-27 6pm)");
     }
 
     @Override

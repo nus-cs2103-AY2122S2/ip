@@ -34,12 +34,14 @@ public class TaskList {
 
     public String search(String prefix) {
         String result = "";
+        int count = 0;
         for (Task t : list) {
             if (t.match(prefix)) {
                 result = result + t + "\n";
+                count++;
             }
         }
-        return result;
+        return result + "found " + count + " matching results.";
     }
 
     /** Listing out all the tasks in the list.  */
