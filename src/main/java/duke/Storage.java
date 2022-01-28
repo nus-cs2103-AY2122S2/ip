@@ -49,40 +49,40 @@ public class Storage {
 
                 switch (currLineArr[0]) {
                 case "T":
-                    Task tempT = new ToDo(currLineArr[2]);
+                    Task toDoTask = new ToDo(currLineArr[2]);
 
                     if (currLineArr[1].equals("X")) {
-                        tempT.markDone();
+                        toDoTask.markDone();
                     }
 
-                    tasks.add(tempT);
+                    tasks.add(toDoTask);
                     break;
                 case "D":
-                    LocalDate tempDate = LocalDate.parse(currLineArr[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalTime tempTime = currLineArr.length < 5 ? null : LocalTime.parse(currLineArr[4],
+                    LocalDate currDate = LocalDate.parse(currLineArr[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalTime currTime = currLineArr.length < 5 ? null : LocalTime.parse(currLineArr[4],
                             DateTimeFormatter.ofPattern("HH:mm"));
 
-                    Task tempD = tempTime == null ? new Deadline(currLineArr[2], tempDate) : new Deadline(
-                            currLineArr[2], tempDate, tempTime);
+                    Task deadlineTask = currTime == null ? new Deadline(currLineArr[2], currDate) : new Deadline(
+                            currLineArr[2], currDate, currTime);
 
                     if (currLineArr[1].equals("X")) {
-                        tempD.markDone();
+                        deadlineTask.markDone();
                     }
 
-                    tasks.add(tempD);
+                    tasks.add(deadlineTask);
                     break;
                 case "E":
-                    LocalDate tempDateEvent = LocalDate.parse(currLineArr[3],
+                    LocalDate dateForEvent = LocalDate.parse(currLineArr[3],
                             DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalTime tempTimeBegin = LocalTime.parse(currLineArr[4], DateTimeFormatter.ofPattern("HH:mm"));
-                    LocalTime tempTimeEnd = LocalTime.parse(currLineArr[5], DateTimeFormatter.ofPattern("HH:mm"));
-                    Task tempE = new Event(currLineArr[2], tempDateEvent, tempTimeBegin, tempTimeEnd);
+                    LocalTime beginTime = LocalTime.parse(currLineArr[4], DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalTime endTime = LocalTime.parse(currLineArr[5], DateTimeFormatter.ofPattern("HH:mm"));
+                    Task eventTask = new Event(currLineArr[2], dateForEvent, beginTime, endTime);
 
                     if (currLineArr[1].equals("X")) {
-                        tempE.markDone();
+                        eventTask.markDone();
                     }
 
-                    tasks.add(tempE);
+                    tasks.add(eventTask);
                     break;
                 default:
                     //empty
