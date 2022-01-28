@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 public class Task {
     protected String description;
@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return isDone ? "X" : " ";
     }
 
     public void markAsDone() {
@@ -31,7 +31,6 @@ public class Task {
 
     @Override
     public String toString() {
-        String v = "[" + this.getStatusIcon() + "]" + " " + this.description;
-        return v;
+        return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
 }

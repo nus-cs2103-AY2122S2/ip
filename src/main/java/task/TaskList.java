@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Duke.UI;
+import duke.UI;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -15,7 +15,7 @@ public class TaskList {
         return this.list;
     }
 
-    public int size() {
+    public int getSize() {
         return list.size();
     }
 
@@ -39,10 +39,10 @@ public class TaskList {
     }
 
     public void printTaskList() {
-        UI.line();
+        UI.printLine();
         for(int m = 0; m < list.size(); m++) {
             System.out.println((m + 1) + "." + list.get(m).toString());
         }
-        UI.line();
+        UI.printLine();
     }
 }

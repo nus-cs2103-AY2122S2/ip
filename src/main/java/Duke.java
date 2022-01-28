@@ -1,5 +1,8 @@
-import Task.TaskList;
-import Duke.*;
+import duke.Parser;
+import duke.Storage;
+import duke.UI;
+
+import task.TaskList;
 
 public class Duke {
 
@@ -10,15 +13,15 @@ public class Duke {
     public Duke(String filePath) throws Exception {
         ui = new UI();
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.read());
+        tasks = new TaskList(storage.readData());
     }
 
     public void run() throws Exception {
-        ui.intro(); // start
-        Parser p = new Parser();
-        p.process(tasks);
-        storage.write(tasks.getList());
-        ui.terminate(); // end
+        ui.printIntro(); // start
+        Parser parser = new Parser();
+        parser.processData(tasks);
+        storage.writeData(tasks.getList());
+        ui.printTerminate(); // end
     }
 
     public static void main(String[] args) throws Exception {

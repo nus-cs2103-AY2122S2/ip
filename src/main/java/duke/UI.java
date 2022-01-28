@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class UI {
     static String line = "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
@@ -21,16 +21,16 @@ public class UI {
                     + "||  ||  ||  ||  ||  ||      ||    ||   \\\\   \\\\       ||\n"
                     + "||==||  ||==||  ||==||======||====||    \\\\===\\\\======||\n";
 
-    public static void intro() {
+    public static void printIntro() {
         System.out.println("\n" + logo + line);
         System.out.println(start + line);
     }
 
-    public static void line() {
+    public static void printLine() {
         System.out.println(line);
     }
 
-    public static void terminate() {
+    public static void printTerminate() {
         System.out.println(line + "Bye yo. Hope I helped you!" + line);
     }
 

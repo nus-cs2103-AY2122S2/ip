@@ -1,8 +1,14 @@
-package Duke;
+package duke;
 
-import Task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Storage {
@@ -13,14 +19,17 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> read() throws Exception {
+    public ArrayList<Task> readData() throws Exception {
+
         File file = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
 
         if (file.exists()) {
+
             BufferedReader r = new BufferedReader(new FileReader(file));
             String t = r.readLine();
-            while (!(t == null)) {
+
+            while (t != null) {
                 char i = t.charAt(0);
                 if (i == 'T') {
                     String[] in = t.split(":");
@@ -40,7 +49,7 @@ public class Storage {
         return list;
     }
 
-    public void write(ArrayList<Task> list) throws Exception {
+    public void writeData(ArrayList<Task> list) throws Exception {
         FileWriter fw = new FileWriter(filePath);
         for(int n = 0; n < list.size(); n++) {
             fw.write(list.get(n).toSave() + "\n");
