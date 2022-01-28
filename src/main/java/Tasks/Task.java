@@ -1,11 +1,13 @@
 package tasks;
+
 import fileHandling.FilesReader;
+import fileHandling.FilesWriter;
 
 import java.util.ArrayList;
 
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static int taskCount = 0;
 
@@ -39,7 +41,7 @@ public class Task {
             Event event = (Event) task;
             if (event.duration == null) {
                 System.out.println(" Please enter the duration as well!");
-                System.out.println(" Command format: task-type task-description /by task-duration");
+                System.out.println(" Command format: task-type task-description /at task-duration");
                 return;
             }
         }
@@ -48,7 +50,7 @@ public class Task {
             Deadline taskWithDeadline = (Deadline) task;
             if (taskWithDeadline.deadline == null) {
                 System.out.println(" Please enter the deadline as well!");
-                System.out.println(" Command format: task-type task-description /at task-deadline");
+                System.out.println(" Command format: task-type task-description /by task-deadline");
                 return;
             }
         }
@@ -61,6 +63,17 @@ public class Task {
         taskList.add(task);
         System.out.println("  " + taskList.get(taskCount).toString());
         taskCount++;
+
+        if (task instanceof Todo) {
+            Todo todo = (Todo) task;
+            FilesWriter.writeToFile("T|" + (todo.isDone ? "1|" : "0|") + todo.description + "\n");
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
+            FilesWriter.writeToFile("E|" + (event.isDone ? "1|" : "0|") + event.description + "|" + event.duration + "\n");
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            FilesWriter.writeToFile("D|" + (deadline.isDone ? "1|" : "0|") + deadline.description + "|" + deadline.deadline + "\n");
+        }
     }
 
     public static void removeFromList(int index) {
@@ -71,6 +84,10 @@ public class Task {
 
     public static void getSavedTasks() {
         taskList = FilesReader.getTaskListFromFile();
+    }
+
+    public static void saveTasks() {
+
     }
 
     public static void printAllTasks() {

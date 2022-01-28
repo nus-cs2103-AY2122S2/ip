@@ -1,4 +1,5 @@
 package tasks;
+
 public class Event extends Task {
     protected String duration;
 
@@ -6,6 +7,8 @@ public class Event extends Task {
         super(description);
         this.duration = duration;
     }
+
+
 
     @Override
     public String toString() {
