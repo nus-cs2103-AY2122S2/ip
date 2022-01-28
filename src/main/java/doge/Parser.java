@@ -17,8 +17,18 @@ import doge.task.Deadline;
 import doge.task.Event;
 import doge.task.Todo;
 
+/**
+ * Represents a parser that helps to parse the input information for Doge bot to understand.
+ */
 public class Parser {
 
+    /**
+     * Returns a Command that Doge bot understands in order for it to execute.
+     *
+     * @param input the user input given
+     * @return Command that Doge bot can execute upon
+     * @throws DogeException if user gives an invalid/unrecognisable command
+     */
     public static Command parse(String input) throws DogeException {
         String curr = input.toLowerCase().trim();
         String c = curr.split(" ")[0].trim();

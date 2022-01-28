@@ -20,7 +20,9 @@ public class ByeCommand extends Command {
     /**
      * Executes the "Bye" command. It saves the current TaskList into storage and then Doge bot terminates itself.
      *
-     * {@inheritDoc}
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DogeException if storage fails to save task list
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {

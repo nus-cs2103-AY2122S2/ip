@@ -17,6 +17,7 @@ public class EventCommand extends Command {
 
     /**
      * Constructor for class EventCommand.
+     *
      * @param task the event task that is associated with this command
      */
     public EventCommand(Task task) {
@@ -26,8 +27,11 @@ public class EventCommand extends Command {
     /**
      * Executes the "event" command. It adds a task of "event" type into the TaskList.
      *
-     * {@inheritDoc}
-     * @throws DogeException if it fails to add the "event" task into the TaskList
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
+     * @throws DogeException if it fails to add the "event" task into the TaskList or user failed to provide
+     * necessary details to initialise an Event task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         String[] curr = this.task.getDescription().split("/");

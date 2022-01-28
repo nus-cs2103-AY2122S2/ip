@@ -31,7 +31,9 @@ public class ListCommand extends Command {
     /**
      * Executes the "list" command. It either list all tasks or tasks that are due by a certain period if stated.
      *
-     * {@inheritDoc}
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DogeException if it fails to list the tasks
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {

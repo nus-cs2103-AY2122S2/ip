@@ -22,8 +22,10 @@ public class DeleteCommand extends Command {
     /**
      * Executes the "delete" command. It deletes the specified task from the TaskList.
      *
-     * {@inheritDoc}
-     * @throws DogeException if it fails to delete the specified task
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
+     * @throws DogeException if it fails to delete the specified task or user failed to provide the task number
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.details.isEmpty()) {
