@@ -176,7 +176,11 @@ public class TaskList {
                 count++;
             }
         }
-        return "Here are the matching tasks in your list:\n" + res;
+        if (count == 1) {
+            return "No results found :(";
+        } else {
+            return "Here are the matching tasks in your list:\n" + res;
+        }
     }
 
     /**
