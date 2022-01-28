@@ -1,5 +1,9 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +35,6 @@ public class Storage {
                         Task t = Parser.parseToTaskFromFile(fileInput);
                         tasks.add(t);
                     } catch (DukeException exception) {
-                        // UI.showError??
                         continue;
                     }
                 }
@@ -81,5 +84,9 @@ public class Storage {
     public boolean createDir() {
         File dir = new File(DIR_PATH);
         return dir.mkdir();
+    }
+
+    public String getFullPath(){
+        return this.FILE_PATH;
     }
 }

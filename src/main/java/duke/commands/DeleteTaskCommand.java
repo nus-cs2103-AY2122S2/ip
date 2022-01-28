@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.tasks.Task;
+import duke.TaskManager;
+import duke.Ui;
+
 public class DeleteTaskCommand extends Command{
     public DeleteTaskCommand(String userInput){
         super(userInput);

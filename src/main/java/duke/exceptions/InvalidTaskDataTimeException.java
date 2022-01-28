@@ -1,4 +1,6 @@
-public class InvalidTaskDataTimeException extends DukeException{
+package duke.exceptions;
+
+public class InvalidTaskDataTimeException extends DukeException {
     private String type;
 
     public InvalidTaskDataTimeException(String type){

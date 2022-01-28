@@ -1,3 +1,12 @@
+package duke;
+
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -53,7 +62,7 @@ public class Parser {
         String[] fields =  s.replaceFirst("deadline","").split("/by");
 
         if (fields.length != 2){
-            throw new DukeException("Wrong format entered! Please enter <Deadline Name> /at <Deadline>");
+            throw new DukeException("Wrong format entered! Please enter <Deadline Name> /by <Deadline>");
         }
 
         if (fields[0].strip().equals("")) {

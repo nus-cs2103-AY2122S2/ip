@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -8,11 +13,10 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-    public boolean addTask(String s) throws DukeException{
+    public boolean addTask(String s) throws DukeException {
         try {
             Task t = Parser.parseToTask(s);
             tasks.add(t);
-            //Ui.showAddedTask(t, tasks.size());
 
             return true;
         } catch (DukeException e){
@@ -26,7 +30,6 @@ public class TaskManager {
 
     public boolean deleteTask(int index){
         if (tasks.size() == 0){
-            //Ui.showDeleteEmptyList();
             return false;
         } else {
             if (index < 0 || index >= tasks.size()){
@@ -47,7 +50,7 @@ public class TaskManager {
                 return false;
             } else {
                 Task t = tasks.get(index);
-                if (t.done == ' ') {
+                if (t.getDone() == ' ') {
                     t.markDone();
                     return true;
                 } else {
@@ -65,7 +68,7 @@ public class TaskManager {
                 return false;
             } else {
                 Task t = tasks.get(index);
-                if (t.done == 'X') {
+                if (t.getDone() == 'X') {
                     t.markUndone();
                     return true;
                 } else {

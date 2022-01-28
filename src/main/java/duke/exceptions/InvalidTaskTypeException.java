@@ -1,4 +1,6 @@
-public class InvalidTaskTypeException extends DukeException{
+package duke.exceptions;
+
+public class InvalidTaskTypeException extends DukeException {
     private String entry;
 
     public InvalidTaskTypeException(String entry){

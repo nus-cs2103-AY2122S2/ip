@@ -1,3 +1,8 @@
+import duke.*;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -46,7 +51,7 @@ public class ParserTest {
         try{
             Parser.parseToTask("deadline name /by");
         } catch (DukeException e){
-            assertEquals("Wrong format entered! Please enter <Deadline Name> /at <Deadline>",e.getMessage());
+            assertEquals("Wrong format entered! Please enter <Deadline Name> /by <Deadline>",e.getMessage());
         }
 
         try{

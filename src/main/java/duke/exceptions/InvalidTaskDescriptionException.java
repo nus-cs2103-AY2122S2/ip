@@ -1,4 +1,6 @@
-public class InvalidTaskDescriptionException extends DukeException{
+package duke.exceptions;
+
+public class InvalidTaskDescriptionException extends DukeException {
     private String type;
 
     public InvalidTaskDescriptionException(String type){

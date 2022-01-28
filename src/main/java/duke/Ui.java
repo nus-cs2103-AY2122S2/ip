@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.Task;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -139,6 +143,9 @@ public class Ui {
     // Save/Load Files
     public void showInitializeDefaults() {
         writer.println("...Initializing Defaults...");
+    }
+    public void showLoadFilePath(String filePath){
+        writer.println("Loading task from: " + filePath);
     }
     public void showFileNotFound() {
         writer.println("Data File not found!");
