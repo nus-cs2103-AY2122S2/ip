@@ -1,10 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
     private final String taskTitle;
     private final String taskType = "E";
     private boolean markedStatus;
-    private String deadline;
+    private LocalDateTime deadline;
 
-    public EventTask(String taskTitle, String deadline) {
+    public EventTask(String taskTitle, LocalDateTime deadline) {
         super(taskTitle, deadline);
         this.taskTitle = taskTitle;
         this.deadline = deadline;
@@ -34,7 +38,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         String mark = this.markedStatus ? "[X]" : "[ ]";
-        String deadlineText = "(at: " + deadline + ")";
+        String deadlineText = "(at: " + deadline.format(DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm a")) + ")";
         String toReturn = "[E]" + mark + " " + this.taskTitle + " " + deadlineText;
         return toReturn;
     }

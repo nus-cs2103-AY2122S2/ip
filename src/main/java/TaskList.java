@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -58,17 +62,24 @@ public class TaskList {
             System.out.println(err.getMessage());
             return;
         }
-        Task newTask = new EventTask(taskTitle, deadline);
-        this.itemList.add(newTask);
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Got it. I've added this task:\n"
-                        + "  " + newTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            System.out.println(deadline);
+            Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
+            this.itemList.add(newTask);
+            System.out.println(
+                    "----------------------------" +
+                            "----------------------------\n" +
+                            "Got it. I've added this task:\n"
+                            + "  " + newTask + "\n"
+                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "\n"
+                            + "--------------------------------------------------------"
+            );
+        } catch(DateTimeParseException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void addDeadline(String taskKey) {
@@ -97,17 +108,26 @@ public class TaskList {
             System.out.println(err.getMessage());
             return;
         }
-        Task newTask = new DeadlineTask(taskTitle, deadline);
-        this.itemList.add(newTask);
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Got it. I've added this task:\n"
-                        + "  " + newTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+
+        try {
+            //Accept string
+            //Parse string to datetime, use formatter here to change reading style
+            //when printing, check date time and print format.
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy HHmm");
+            Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
+            this.itemList.add(newTask);
+            System.out.println(
+                    "----------------------------" +
+                            "----------------------------\n" +
+                            "Got it. I've added this task:\n"
+                            + "  " + newTask + "\n"
+                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "\n"
+                            + "--------------------------------------------------------"
+            );
+        } catch(DateTimeParseException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void deleteTask(String taskKey) {
