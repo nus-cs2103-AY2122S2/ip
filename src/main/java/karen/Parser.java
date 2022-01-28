@@ -49,15 +49,15 @@ public class Parser {
         Command cmd = new InvalidCommand();
 
         switch (keyWord) {
-            case "deadline":
-                if (fullInput.matches("^((?!\\/by).)*$")) {
-                    cmd = new InvalidCommand("You're missing an /by flag needed to add deadlines");
-                }
-                break;
-            case "event":
-                if (fullInput.matches("^((?!\\/at).)*$")) {
-                    cmd = new InvalidCommand("You're missing an /at flag needed to add events");
-                }
+        case "deadline":
+            if (fullInput.matches("^((?!\\/by).)*$")) {
+                cmd = new InvalidCommand("You're missing an /by flag needed to add deadlines");
+            }
+            break;
+        case "event":
+            if (fullInput.matches("^((?!\\/at).)*$")) {
+                cmd = new InvalidCommand("You're missing an /at flag needed to add events");
+            }
         }
         return cmd;
     }
@@ -92,7 +92,7 @@ public class Parser {
             // indicates that the format isn't valid - can't parse it
             return prepareInvalid(keyWord, fullInput);
         } catch (KarenException err) {
-            return new InvalidCommand(err.msg);
+            return new InvalidCommand(err.message);
         }
     }
 
@@ -111,14 +111,14 @@ public class Parser {
 
         Command cmd;
         switch (keyWord) {
-            case "mark":
-                cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.MARK);
-                break;
-            case "unmark":
-                cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.UNMARK);
-                break;
-            default:
-                return new InvalidCommand("How did this even get here.");
+        case "mark":
+            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.MARK);
+            break;
+        case "unmark":
+            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.UNMARK);
+            break;
+        default:
+            return new InvalidCommand("How did this even get here.");
         }
         return cmd;
     }
@@ -160,27 +160,27 @@ public class Parser {
         Command getCommand;
 
         switch (keyWord) {
-            case "list":
-                getCommand = new ListCommand();
-                break;
-            case "bye":
-                getCommand = new ByeCommand();
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                getCommand = prepareAdd(keyWord, fullInput);
-                break;
-            case "mark":
-            case "unmark":
-                getCommand = prepareModify(keyWord, fullInput);
-                break;
-            case "delete":
-                getCommand = prepareDelete(keyWord, fullInput);
-                break;
-            default:
-                getCommand = new InvalidCommand(NA_MESSAGE);
-                break;
+        case "list":
+            getCommand = new ListCommand();
+            break;
+        case "bye":
+            getCommand = new ByeCommand();
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            getCommand = prepareAdd(keyWord, fullInput);
+            break;
+        case "mark":
+        case "unmark":
+            getCommand = prepareModify(keyWord, fullInput);
+            break;
+        case "delete":
+            getCommand = prepareDelete(keyWord, fullInput);
+            break;
+        default:
+            getCommand = new InvalidCommand(NA_MESSAGE);
+            break;
         };
         return getCommand;
     }

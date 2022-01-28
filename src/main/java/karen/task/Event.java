@@ -16,7 +16,7 @@ public class Event extends Task{
 
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", this.done, this.description, this.at);
+        return String.format("E|%s|%s|%s", this.isDone, this.description, this.at);
     }
 
     @Override

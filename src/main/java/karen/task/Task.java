@@ -7,25 +7,25 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     public String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * To set done status of Task to true
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * To set done status of Task to false
      */
     public void markUndone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -33,7 +33,7 @@ public abstract class Task {
      * @return String representation of done attribute of Task
      */
     public String getDoneIcon () {
-        return (this.done) ? "X" : " ";
+        return (this.isDone) ? "X" : " ";
     }
 
     /**

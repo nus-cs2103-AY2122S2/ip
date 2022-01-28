@@ -5,11 +5,11 @@ package karen;
  * custom messages for user.
  */
 public class KarenException extends Exception {
-    String msg;
+    String message;
 
     public KarenException(String msg) {
         super(msg);
-        this.msg = msg;
+        this.message = msg;
     }
 
     /**
@@ -18,6 +18,6 @@ public class KarenException extends Exception {
      */
     @Override
     public String toString() {
-        return this.msg;
+        return this.message;
     }
 }
