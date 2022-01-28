@@ -2,12 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DukeTest {
-    private static String exitTrigger = "bye";
-
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     private static boolean isExit(String input) {
-        return input.equals(exitTrigger);
+        return input.equals("bye");
     }
 
     private static void exit() {
@@ -40,22 +38,34 @@ public class DukeTest {
             System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
             String input = scanner.nextLine();
-            String[] splitInput = new String[2];
-            String command;
-            splitInput = input.split(" ", 2);
-            command = splitInput[0];
+
+            String[] splitInput = input.split(" ", 2);
+            ;
+            String command = splitInput[0];
 
             while (!(isExit(command))) {
                 switch (command) {
                     case "list":
-                        list();
-                        break;
+                        if (splitInput.length > 1) {
+                            throw new DukeException("There should not be anything else after list.");
+                        } else {
+                            list();
+                            break;
+                        }
                     case "mark":
-                        taskList.get(Integer.parseInt(splitInput[1]) - 1).mark();
-                        break;
+                        if (splitInput.length < 2) {
+                            throw new DukeException("Please indicate which task you want to mark!");
+                        } else {
+                            taskList.get(Integer.parseInt(splitInput[1]) - 1).mark();
+                            break;
+                        }
                     case "unmark":
-                        taskList.get(Integer.parseInt(splitInput[1]) - 1).unmark();
-                        break;
+                        if (splitInput.length < 2) {
+                            throw new DukeException("Please indicate which task you want to unmark!");
+                        } else {
+                            taskList.get(Integer.parseInt(splitInput[1]) - 1).unmark();
+                            break;
+                        }
                     case "todo":
                         if (splitInput.length < 2) {
                             throw new DukeException("The description of a todo cannot be empty.");
