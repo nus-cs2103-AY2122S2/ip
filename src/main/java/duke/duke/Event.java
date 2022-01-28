@@ -13,6 +13,14 @@ public class Event extends Task{
         this.time = time;
     }
 
+    /**
+     * Converts a date that starts in the format of YYYY-MM-DD, and formats
+     * it to DD Mon YYYY.
+     *
+     * @param dueDate Date in format of YYYY-MM-DD
+     * @return Formatted date
+     */
+
     public String convertDate(String dueDate) {
         try {
             LocalDate date = LocalDate.parse(dueDate);
