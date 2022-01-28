@@ -31,7 +31,7 @@ public class TaskList {
      * @return ArrayList of Task
      */
     public ArrayList<Task> getAllTasks() {
-        return this.all_tasks;
+        return all_tasks;
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskList {
      * @param task
      */
     public void addTask(Task task) {
-        this.all_tasks.add(task);
+        all_tasks.add(task);
     }
 
     /**
@@ -47,9 +47,9 @@ public class TaskList {
      * @param ranking ranking is index + 1
      */
     public void delete(int ranking) {
-        assert ranking > 0 && ranking <= this.all_tasks.size():
+        assert ranking > 0 && ranking <= all_tasks.size():
                 "Please give a valid input (0 < input < number of tasks";
-        this.all_tasks.remove(ranking-1);
+        all_tasks.remove(ranking-1);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList {
      * @param ranking
      */
     public void markDone(int ranking) {
-        this.all_tasks.get(ranking-1).markDone();
+        all_tasks.get(ranking-1).markDone();
     }
 
     /**
@@ -65,7 +65,7 @@ public class TaskList {
      * @param ranking
      */
     public void markUndone(int ranking) {
-        this.all_tasks.get(ranking-1).unMarkDone();
+        all_tasks.get(ranking-1).unMarkDone();
     }
 
     /**
@@ -73,6 +73,6 @@ public class TaskList {
      * @return int length of Task ArrayList
      */
     public int getLength() {
-        return this.all_tasks.size();
+        return all_tasks.size();
     }
 }

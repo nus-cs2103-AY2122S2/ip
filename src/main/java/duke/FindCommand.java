@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         for (Task t : all) {
             if (t instanceof Deadline) {
                 Deadline deadline = (Deadline) t;
-                if (deadline.getDate().equals(this.input_date.toString())) {
+                if (deadline.getDate().equals(input_date.toString())) {
                     filtered.add(t);
                 }
             }

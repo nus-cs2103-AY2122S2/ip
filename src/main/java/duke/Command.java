@@ -25,10 +25,10 @@ public abstract class Command {
     public abstract String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException, IOException;
 
     public void changeExit() {
-        this.isExit = true;
+        isExit = true;
     }
 
     public boolean isExit() {
-        return this.isExit;
+        return isExit;
     }
 }

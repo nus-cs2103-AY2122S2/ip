@@ -21,9 +21,9 @@ public class DeleteCommand extends Command {
      * @throws IOException
      */
     public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
-        assert this.ranking > 0 && this.ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
+        assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
 
-        tasklist.delete(this.ranking);
+        tasklist.delete(ranking);
         storage.writeToFile(tasklist);
         return ui.printTaskIsDeleted(tasklist);
     }

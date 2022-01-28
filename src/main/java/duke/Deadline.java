@@ -38,12 +38,12 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        return this.by_date.toString();
+        return by_date.toString();
     }
 
     @Override
     public String toString() {
-        String formatted = this.by_date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formatted = by_date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D]" + super.toString() + " (by:" + formatted + ")";
     }
 }

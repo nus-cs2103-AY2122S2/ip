@@ -26,7 +26,7 @@ public class MarkCommand extends Command {
      * @throws IOException
      */
     public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
-        assert this.ranking > 0 && this.ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
+        assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks)";
 
         tasklist.markDone(this.ranking);
         storage.writeToFile(tasklist);

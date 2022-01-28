@@ -53,7 +53,7 @@ public class Storage {
      */
     public ArrayList<Task> getAllTasks() throws IOException, DukeDeadlineException, DukeException {
         ArrayList<Task> all = new ArrayList<Task>();
-        Scanner s = new Scanner(this.file);
+        Scanner s = new Scanner(file);
         String str;
 
         while (s.hasNextLine()) {
@@ -123,7 +123,7 @@ public class Storage {
     }
 
     public void writeToFile(TaskList tasklist) throws IOException {
-        FileWriter fw = new FileWriter(this.file);
+        FileWriter fw = new FileWriter(file);
         ArrayList<Task> all = tasklist.getAllTasks();
         // go through all Task object and write to filepath
         for (int i = 1; i <= all.size(); i++) {

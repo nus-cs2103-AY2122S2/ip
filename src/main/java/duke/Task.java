@@ -9,11 +9,11 @@ public class Task {
     }
 
     public void markDone() {
-        this.done = true;
+        done = true;
     }
 
     public void unMarkDone() {
-        this.done = false;
+        done = false;
     }
 
     public static boolean isDeadline(Task t) {
@@ -21,10 +21,10 @@ public class Task {
     }
 
     public String toString() {
-        if (this.done) {
-            return "[X] " + this.name;
+        if (done) {
+            return "[X] " + name;
         } else {
-            return "[ ] " + this.name;
+            return "[ ] " + name;
         }
     }
 }
