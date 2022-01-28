@@ -1,15 +1,20 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-
-    private String dueDate;
+    private LocalDateTime dueDate;
 
     public Event(String description, String dueDate) {
         super(description);
-        this.dueDate = dueDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime parsedDate = LocalDateTime.parse(dueDate, formatter);
+        this.dueDate = parsedDate;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dueDate +")";
+        return "[E]" + super.toString() +
+                " (at: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma")) +")";
     }
 }
