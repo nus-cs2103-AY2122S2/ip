@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -32,12 +33,12 @@ public class Duke {
             }
             else if (strArr[0].equals("deadline")) { {
                 String[] strParts = str.split("/by ");
-                list.add(new Deadline(str, strParts[1]));
+                list.add(new Deadline(str, LocalDate.parse(strParts[1])));
                 System.out.println(String.format("added: %s", str));
             }
             else if (strArr[0].equals("event")) { {
                 String[] strParts = str.split("/at ");
-                list.add(new Event(str, strParts[1]));
+                list.add(new Event(str, LocalDate.parse(strParts[1])));
                 System.out.println(String.format("added: %s", str));
             }
             else if (strArr[0].equals("todo")) { {
