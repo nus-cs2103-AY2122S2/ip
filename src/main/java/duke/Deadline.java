@@ -46,4 +46,8 @@ public class Deadline extends Task {
       return "D,0," + super.desc + "," + this.date;
     }
   }
+
+  public LocalDate getDate() {
+    return date;
+  }
 }

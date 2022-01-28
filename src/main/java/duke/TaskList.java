@@ -119,8 +119,7 @@ public class TaskList {
     }
 
     /**
-     * This method changes the status of a particular task to Done
-     * in the list.
+     * Changes the completion status of the task
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -137,8 +136,7 @@ public class TaskList {
     }
 
     /**
-     * This method changes the status of a particular task to Not Done
-     * in the list.
+     * Changes the completion status of the task
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -152,6 +150,28 @@ public class TaskList {
             System.out.println("OKAY! I'VE MARKED THIS TASK AS NOT DONE:");
             System.out.println(task);
         }
+    }
+
+    /**
+     * Finds a list of tasks with a keyword specified by the user.
+     *
+     * @param taskName the keyword entered by the user.
+     */
+    public void findTask(String taskName) {
+        int num = 1;
+        int matchNum = 0;
+        System.out.println("HERE ARE THE MATCHING TASKS IN YOUR LIST:");
+        for (Task task : list) {
+            String str = task.getDesc();
+            if (taskName == null) {
+                break;
+            } else if (str.contains(taskName)) {
+                System.out.println(num + "." + task);
+                matchNum++;
+            }
+            num++;
+        }
+        System.out.println("MATCH FOUND: " + matchNum);
     }
 
     /**

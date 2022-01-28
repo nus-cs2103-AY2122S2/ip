@@ -28,6 +28,7 @@ public class Ui {
         System.out.println("event {task description} /at {DATE}             Add Event into list");
         System.out.println("mark {Task ID}                                  Mark specific task as done");
         System.out.println("unmark {Task ID}                                Mark specific task as not done");
+        System.out.println("find {keyword}                                  Find tasks with a specific keyword from list");
         System.out.println("delete {Task ID}                                Delete specific task from list");
         System.out.println("bye                                             End the Duke program");
     }
@@ -59,6 +60,8 @@ public class Ui {
             } else if (parse.getCmd().equals("delete")) {
                 int index = Integer.parseInt(parse.getDesc()) - 1;
                 list.deleteTask(index);
+            } else if (parse.getCmd().equals("find")) {
+                list.findTask(parse.getDesc());
             } else {
                 notSpecified();
             }

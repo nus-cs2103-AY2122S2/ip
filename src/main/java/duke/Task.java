@@ -35,4 +35,12 @@ public abstract class Task {
   }
 
   public abstract String changeFormat();
+
+  public String getDesc() {
+    return desc;
+  }
+
+  public boolean getIsDone() {
+    return done;
+  }
 }
