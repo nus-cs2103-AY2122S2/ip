@@ -1,3 +1,6 @@
+import java.lang.Boolean;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,6 +8,7 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println("Hello from Duke!");
+        populateTasksFromFile();
 
         Scanner sc = new Scanner(System.in);
         list = new ArrayList<String>();
@@ -56,4 +60,34 @@ public class Duke {
             System.out.println(String.format("%d. %s", i, task.toString()));
         }
     }
+
+    public void populateTasksFromFile() {
+        try {
+            File file = new File("duke.txt");
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String taskString = fileScanner.nextLine();
+                String[] data = taskString.split(",");
+                String type = data[0];
+                Boolean status = Boolean.parseBoolean(data[1]);
+                String text = data[2];
+                if (data[0].equals("T")) {
+                    list.add(new Todo(data[2], data[1]))
+                }
+                else if (data[0].equals("D")) {
+                    String date = data[3];
+                    list.add(new Deadline(text, status, date));
+                }
+                else if (data[0].equals("E")) {
+                    String date = data[3];
+                    list.add(new Deadline(text, status, date));
+                }
+            }
+            fileScanner.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Something went wrong");
+        }
+    }
+
 }
