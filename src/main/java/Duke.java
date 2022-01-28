@@ -1,7 +1,11 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Scanner;
-
+import java.util.LinkedList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,10 +22,12 @@ public class Duke {
         read();
     }
     public static void read() {
+        LinkedList<Task> tasks = new LinkedList<>();
         String directoryPath = "./data";
         String filePath = "./data/duke.txt";
         File file = new File(filePath);
         File directory = new File(directoryPath);
+        loadTasks(directory, file, tasks);
         String input;
         Scanner sc = new Scanner(System.in);
         input = sc.next();
@@ -30,7 +36,10 @@ public class Duke {
             int id;
             switch(input) {
                 case "list" :
-                    readFile(directory, file);
+                    System.out.println("Here are the tasks on your list, sir.");
+                    for (int i = 1; i <= tasks.size(); i++) {
+                        System.out.println(i +". " + tasks.get(i - 1));
+                    }
                     break;
                 case "todo" :
                     sc.reset();
@@ -38,7 +47,8 @@ public class Duke {
                         input = sc.nextLine().strip();
                         if (input.isEmpty()) throw new DukeException("Do what, sir?");
                         Todo task = new Todo(input);
-                        addTasks(directory, file, task);
+                        tasks.add(task);
+                        addTasks(file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -51,7 +61,8 @@ public class Duke {
                         if (deadline.length < 2) throw new DukeException("Invalid deadline task, sir.");
                         LocalDate date = LocalDate.parse(deadline[1]);
                         Deadline task = new Deadline(deadline[0], date);
-                        addTasks(directory, file, task);
+                        tasks.add(task);
+                        addTasks(file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -63,22 +74,32 @@ public class Duke {
                     try {
                         if (event.length < 2) throw new DukeException("Invalid event task, sir.");
                         Event task = new Event(event[0], event[1]);
-                        addTasks(directory, file, task);
+                        tasks.add(task);
+                        addTasks(file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case "mark" :
                     id = sc.nextInt();
-                    updateTasks(directory, file, id, "mark");
+                    updateTasks(file, id, "mark");
+                    if (id <= tasks.size()) {
+                        tasks.get(id - 1).markAsDone();
+                    }
                     break;
                 case "unmark" :
                     id = sc.nextInt();
-                    updateTasks(directory, file, id, "unmark");
+                    updateTasks(file, id, "unmark");
+                    if (id <= tasks.size()) {
+                        tasks.get(id - 1).markAsNotDone();
+                    }
                     break;
                 case "remove" :
                     id = sc.nextInt();
-                    updateTasks(directory, file, id, "remove");
+                    updateTasks(file, id, "remove");
+                    if (id <= tasks.size()) {
+                        tasks.remove(id - 1);
+                    }
                     break;
                 default :
                     sc.reset();
@@ -94,16 +115,62 @@ public class Duke {
         sc.close();
     }
 
-    public static void readFile(File directory, File file) {
+    public static void loadTasks(File directory, File file, LinkedList tasks) {
         try {
             if (!directory.exists()) {
                 directory.mkdir();
             }
             if (!file.exists()) {
-                System.out.println("I have created a new list for your tasks, sir.");
                 file.createNewFile();
                 return;
             }
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String type = scanner.next();
+                String status = scanner.next();
+                String description = scanner.nextLine().strip();
+                switch (type) {
+                    case "[T]" :
+                        Todo task = new Todo(description);
+                        if (status.equals("[X]")) {
+                            task.markAsDone();
+                        }
+                        tasks.add(task);
+                        break;
+                    case "[D]" :
+                        String[] by = description.split("by: ");
+                        SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy");
+                        try {
+                            Date date = format.parse(by[1].substring(0, by[1].length() - 1));
+                            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            Deadline deadline = new Deadline(by[0].substring(0, by[0].length() - 2), localDate);
+                            if (status.equals("[X]")) {
+                                deadline.markAsDone();
+                            }
+                        tasks.add(deadline);
+                        } catch (ParseException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case "[E]" :
+                        String[] venue = description.split("at: ");
+                        Event event = new Event(venue[0].substring(0, venue[0].length() - 2), venue[1].substring(0, venue[1].length() - 1));
+                        if (status.equals("[X]")) {
+                            event.markAsDone();
+                        }
+                        tasks.add(event);
+                        break;
+                    default :
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void readFile(File file) {
+        try {
             Scanner reader = new Scanner(file);
             System.out.println("Here are the tasks on your list, sir.");
             while (reader.hasNextLine()) {
@@ -114,15 +181,8 @@ public class Duke {
         }
     }
 
-    public static void addTasks(File directory, File file, Task task) {
+    public static void addTasks(File file, Task task) {
         try {
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            if (!file.exists()) {
-                System.out.println("I have created a new list for your tasks, sir.");
-                file.createNewFile();
-            }
             FileWriter writer = new FileWriter(file.getPath(), true);
             writer.write(task.toString() + "\n");
             writer.close();
@@ -133,11 +193,8 @@ public class Duke {
         }
     }
 
-    public static void updateTasks(File directory, File file, int id, String command) {
+    public static void updateTasks(File file, int id, String command) {
         try {
-            if (!directory.exists() || !file.exists()) {
-                throw new DukeException("You do not have a task list, sir.");
-            }
             String path = file.getPath();
             String temp = "./data/temp.txt";
             File tempFile = new File(temp);
@@ -176,13 +233,6 @@ public class Duke {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            if (e.getMessage().equals("You do not have a task list, sir.")) {
-                System.out.println("Create one by using any one of these commands:");
-                System.out.println("  list");
-                System.out.println("  todo <task>");
-                System.out.println("  deadline <task> /by <when>");
-                System.out.println("  event <task> /at <venue>");
-            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
