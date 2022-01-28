@@ -91,6 +91,30 @@ public class TaskList {
 
     }
 
+    public void find(String item) {
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        String tab = "    ";
+
+        for (Task t: this.list) {
+            if (t.description.contains(item)) {
+                foundTasks.add(t);
+
+            }
+        }
+
+        String firstLine = "Here are the matching tasks in you list:\n" + tab;
+        String lists = "";
+        for (int i = 0; i < foundTasks.size(); i++) {
+            if (i != 0) {
+                lists += "\n" + tab;
+            }
+            lists += String.format("%d. %s", i + 1, foundTasks.get(i).toString());
+
+        }
+
+        ui.reply(firstLine + lists);
+    }
+
 
 
 }

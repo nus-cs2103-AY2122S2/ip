@@ -112,6 +112,9 @@ public class Duke {
             } else if (task.equals("delete")) {
                 tasks.deleteItem(item);
 
+            } else if (task.equals("find")) {
+                tasks.find(item);
+
             } else {
                 ui.reply("What is this? Can you read English?");
             }
