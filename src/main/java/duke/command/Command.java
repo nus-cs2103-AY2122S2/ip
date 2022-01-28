@@ -17,12 +17,13 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command based on the subclass.
+     * Executes the command based on the subclass and returns the string result.
      *
      * @param tasks TaskList of the current running application.
      * @param ui Ui of the current running application.
      * @param storage Storage of the current running application.
+     * @return The string result.
      * @throws DukeException if any error arises when executing the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
