@@ -40,6 +40,9 @@ public class Parser {
         } else if (command.equals("delete")) {
             Parser.exceptionCheck(commandParts.length, command);
             return new DeleteCommand(fullCommand.substring(7));
+        } else if (command.equals("find")) {
+            Parser.exceptionCheck(commandParts.length, command);
+            return new FindCommand(fullCommand.substring(5));
         } else if (command.equals("bye")) {
             return new ByeCommand("bye");
         } else {

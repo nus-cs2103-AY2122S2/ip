@@ -68,6 +68,11 @@ public class Ui {
         pr.flush();
     }
 
+    public void showEmptyFind() {
+        pr.print("Sorry, there are no tasks corresponding to the keyword entered \n");
+        pr.flush();
+    }
+
     public void showErrorMessage(String err) {
         pr.print(err + "\n");
         pr.flush();
