@@ -1,4 +1,7 @@
+package jose;
+
 import java.util.ArrayList;
+import jose.task.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;

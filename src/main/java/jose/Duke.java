@@ -1,5 +1,8 @@
+package jose;
+
 import java.io.IOException;
 import java.util.Scanner;
+import jose.task.*;
 
 public class Duke {
     private Storage storage;
