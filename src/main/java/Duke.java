@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,6 +11,51 @@ public class Duke {
         System.out.println("Hello, traveller! My name in Paimon.\nHow can I help you today?");
         String input = readInput(reader);
         List<Task> tasks = new LinkedList<>();
+
+        //load data file
+        try {
+            File data = new File("../../../data/duke.txt");
+            data.getParentFile().mkdirs(); //make preceding directories, if any are not found
+            //File data = new File("duke.txt");
+            if (!data.createNewFile()) { //if file exists
+                Scanner fileReader = new Scanner(data);
+                while (fileReader.hasNextLine()) {
+                    String line = fileReader.nextLine();
+                    String[] tmp = line.split("\\|");
+
+                    boolean isDone = tmp[1].trim().equals("D");
+                    //assumes valid input
+                    switch (tmp[0].trim()) {
+                    case "T":
+                        Todo t = new Todo(tmp[2].trim());
+                        if (isDone) {
+                            t.markComplete();
+                        }
+                        tasks.add(t);
+                        break;
+                    case "D":
+                        Deadline d = new Deadline(tmp[2].trim(), tmp[3].trim());
+                        if (isDone) {
+                            d.markComplete();
+                        }
+                        tasks.add(d);
+                        break;
+                    case "E":
+                        Event e = new Event(tmp[2].trim(), tmp[3].trim());
+                        if (isDone) {
+                            e.markComplete();
+                        }
+                        tasks.add(e);
+                        break;
+                    //needs default exception handling
+                    }
+                }
+                fileReader.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Oh no, an error occurred with the data processing.");
+            e.printStackTrace();
+        }
 
         while (!input.equals("bye")){
             String command = input.replaceAll(" .*", "");
@@ -30,22 +78,26 @@ public class Duke {
                     int i = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.get(i).markComplete();
                     System.out.println("Task successfully updated.");
+                    saveData(tasks);
                     break;
                 case "undo":
                     int j = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.get(j).markIncomplete();
+                    saveData(tasks);
                     break;
                 case "delete":
                     int k = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.remove(k);
                     System.out.println("Noted, the task has been scrubbed off the list!");
                     printList(tasks);
+                    saveData(tasks);
                     break;
                 case "todo":
                     Todo t = new Todo(input);
                     tasks.add(t);
                     System.out.println("Got it! I have noted down the following task in your list.");
                     System.out.println(t);
+                    saveData(tasks);
                     break;
                 case "deadline":
                     String datetime = input.replaceAll(".* by ", "");
@@ -55,6 +107,7 @@ public class Duke {
                     System.out.println("Got it! I have noted down the following task in your list. " +
                             "\nRemember the deadline!");
                     System.out.println(d);
+                    saveData(tasks);
                     break;
                 case "event":
                     String time = input.replaceAll(".* at ", "");
@@ -64,6 +117,7 @@ public class Duke {
                     System.out.println("Got it! I have noted down the following task in your list. " +
                             "\nDo be there on time!");
                     System.out.println(e);
+                    saveData(tasks);
                     break;
                 default:
                     System.out.println("That went over Paimon's head a little...");
@@ -144,5 +198,26 @@ public class Duke {
         }
 
         return false;
+    }
+
+    //data.txt file + all its directories will be present at this point
+    public static void saveData(List<Task> tasks) {
+        File data = new File("../../../data/duke.txt");
+        //File data = new File("duke.txt");
+        FileWriter f;
+
+        try {
+            f = new FileWriter(data, false);
+            boolean isFirst = true;
+            for (int i = 0; i < tasks.size(); i++) {
+                String s = isFirst ? "" : "\n";
+                f.write(s + tasks.get(i).writeToFile());
+                isFirst = false;
+            }
+            f.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred with writing to the data file.");
+            e.printStackTrace();
+        }
     }
 }
