@@ -48,6 +48,10 @@ public class Task {
         return String.format("%d %s", bool, taskDescription);
     }
 
+    public boolean hasDone() {
+        return isDone;
+    }
+
     /**
      * Marks Task as done
      */
