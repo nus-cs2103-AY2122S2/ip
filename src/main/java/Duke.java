@@ -1,13 +1,12 @@
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     /**
      * Main class
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,7 +21,9 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        List<Task> pastCommands = new ArrayList<>();
+        TaskList pastTasks = new TaskList();
+
+        pastTasks.load();
 
         try {
             while (true) {
@@ -32,25 +33,21 @@ public class Duke {
                     System.out.println(buildMessage("Bye. Hope to see you again soon!"));
                     break;
                 } else if (command.equals("list")) {
-                    StringBuilder list = new StringBuilder();
-                    for (int i = 0; i < pastCommands.size(); i++) {
-                        list.append(String.format("%d.%s\n", i + 1, pastCommands.get(i)));
-                    }
-                    System.out.println(buildMessage(list.toString().trim()));
+                    System.out.println(buildMessage(pastTasks.toString()));
 
                 } else if (command.split(" ")[0].equals("mark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                    pastCommands.get(index).isDone = true;
+                    pastTasks.get(index).isDone = true;
                     System.out.println(buildMessage("Nice! I've marked this task as done: \n  "
-                            + pastCommands.get(index))
+                            + pastTasks.get(index))
                     );
 
                 } else if (command.split(" ")[0].equals("unmark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                    pastCommands.get(index).isDone = false;
+                    pastTasks.get(index).isDone = false;
 
                     System.out.println(buildMessage("OK, I've marked this task as not done yet:\n  "
-                            + pastCommands.get(index)
+                            + pastTasks.get(index)
                     ));
                 } else if (command.split(" ")[0].equals("todo")) {
                     if (command.length() == 4) {
@@ -59,15 +56,16 @@ public class Duke {
 
                     // Extract name from todo command, eg. todo borrow book
                     String name = command.substring(5);
-                    pastCommands.add(new TaskToDos(false, name));
+                    pastTasks.add(new TaskToDos(false, name));
+                    pastTasks.save();
 
                     System.out.println(buildMessage(String.format("""
                                     Got it. I've added this task:
                                      %s
                                     Now you have %d %s in the list.""",
-                            pastCommands.get(pastCommands.size() - 1),
-                            pastCommands.size(),
-                            pastCommands.size() == 1 ? "task" : "tasks"
+                            pastTasks.get(pastTasks.size() - 1),
+                            pastTasks.size(),
+                            pastTasks.size() == 1 ? "task" : "tasks"
                     )));
                 } else if (command.split(" ")[0].equals("deadline")) {
                     // Extract name and time to be done by from deadline command, eg. deadline return book /by Sunday.
@@ -75,14 +73,16 @@ public class Duke {
                     String name = temp.split("/")[0].trim();
                     String doneBy = temp.split("/")[1].substring(3).trim();
 
-                    pastCommands.add(new TaskDeadlines(false, name, doneBy));
+                    pastTasks.add(new TaskDeadlines(false, name, doneBy));
+                    pastTasks.save();
+
                     System.out.println(buildMessage(String.format("""
                                     Got it. I've added this task:
                                      %s
                                     Now you have %d %s in the list.""",
-                            pastCommands.get(pastCommands.size() - 1),
-                            pastCommands.size(),
-                            pastCommands.size() == 1 ? "task" : "tasks"
+                            pastTasks.get(pastTasks.size() - 1),
+                            pastTasks.size(),
+                            pastTasks.size() == 1 ? "task" : "tasks"
                     )));
                 } else if (command.split(" ")[0].equals("event")) {
                     // Extract name and time to be done by from event command, eg. event project meeting /at Mon 2-4pm
@@ -90,27 +90,29 @@ public class Duke {
                     String name = temp.split("/")[0].trim();
                     String startAt = temp.split("/")[1].substring(3).trim();
 
-                    pastCommands.add(new TaskEvents(false, name, startAt));
+                    pastTasks.add(new TaskEvents(false, name, startAt));
+                    pastTasks.save();
+
                     System.out.println(buildMessage(String.format("""
                                     Got it. I've added this task:
                                      %s
                                     Now you have %d %s in the list.""",
-                            pastCommands.get(pastCommands.size() - 1),
-                            pastCommands.size(),
-                            pastCommands.size() == 1 ? "task" : "tasks"
+                            pastTasks.get(pastTasks.size() - 1),
+                            pastTasks.size(),
+                            pastTasks.size() == 1 ? "task" : "tasks"
                     )));
                 } else if (command.split(" ")[0].equals("delete")) {
-                    Task removedTask = pastCommands.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+                    Task removedTask = pastTasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+                    pastTasks.save();
 
                     System.out.println(buildMessage(String.format("""
                                     Noted. I've removed this task:
                                      %s
                                     Now you have %d %s in the list.""",
                             removedTask,
-                            pastCommands.size(),
-                            pastCommands.size() == 1 ? "task" : "tasks"
+                            pastTasks.size(),
+                            pastTasks.size() == 1 ? "task" : "tasks"
                     )));
-
                 } else {
                     throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
                 }
