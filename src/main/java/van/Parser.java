@@ -39,7 +39,7 @@ public class Parser {
           if (parameters.length != 2) {
             throw new VanException("Invalid format. Please use: event <task> /at <date>");
           }
-          taskArguments = parameters[1].split(" /by ");
+          taskArguments = parameters[1].split(" /at ");
           if (taskArguments.length != 2) {
             throw new VanException("Invalid format. Please use: event <task> /at <date>");
           }
