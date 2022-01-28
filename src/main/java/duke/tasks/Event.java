@@ -34,6 +34,11 @@ public class Event extends Task{
     }
 
     @Override
+    public LocalDateTime getDateObj(){
+        return this.date;
+    }
+
+    @Override
     public String toString(){
         DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
 

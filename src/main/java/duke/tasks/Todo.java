@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.exceptions.DukeException;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Todo extends Task{
@@ -20,7 +21,12 @@ public class Todo extends Task{
     }
 
     @Override
-    public String getDate(){
+    public LocalDateTime getDateObj(){
         return null;
+    }
+
+    @Override
+    public String getDate(){
+        return "";
     }
 }

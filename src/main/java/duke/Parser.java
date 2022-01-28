@@ -143,8 +143,12 @@ public class Parser {
     public static Command parse(String input) throws DukeException{
         if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
             return new AddCommand(input);
-        } else if (input.startsWith("list")){
+        } else if (input.equals("list")){
             return new ListCommand();
+        } else if (input.equals("list name")){
+            return new SortByNameCommand();
+        } else if (input.equals("list date")){
+            return new SortByDateCommand();
         } else if (input.startsWith("mark") || input.startsWith("unmark")){
             return MarkCommand.of(input);
         } else if (input.equals("bye")) {

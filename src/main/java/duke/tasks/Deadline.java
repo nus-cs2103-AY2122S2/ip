@@ -46,6 +46,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public LocalDateTime getDateObj(){
+        return this.date;
+    }
+
+    @Override
     public String getDate(){
         if (this.date == null) {
             return this.dateString;

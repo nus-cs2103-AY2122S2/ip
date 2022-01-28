@@ -3,6 +3,8 @@ package duke;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
+import java.util.Collections;
+
 public class Duke {
     private TaskManager manager;
     private Ui ui;

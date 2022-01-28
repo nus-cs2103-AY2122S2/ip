@@ -2,6 +2,7 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 public abstract class Task{
     protected String taskName;
@@ -24,6 +25,7 @@ public abstract class Task{
         return this.taskName;
     }
     public abstract String getDate();
+    public abstract LocalDateTime getDateObj();
     public abstract String getDateForSaving();
 
     public String toString(){
@@ -35,3 +37,4 @@ public abstract class Task{
         return ' ';
     }
 }
+

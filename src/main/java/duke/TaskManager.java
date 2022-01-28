@@ -4,6 +4,7 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskManager {
     private ArrayList<Task> tasks = new ArrayList<Task>();
