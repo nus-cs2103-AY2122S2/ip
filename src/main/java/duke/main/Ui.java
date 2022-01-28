@@ -79,7 +79,7 @@ public class Ui {
      * Method to output a formatted "Welcome" message.
      */
     public static void showWelcome() {
-        Ui.setDukeResponse(Parser.formatMsg("\nHey! Nice to see you back here again.\nWhat would you like to do?"));
+        Ui.setDukeResponse(Parser.formatMsg("Hey! Nice to see you back here again.\nWhat would you like to do?"));
     }
 
     /**

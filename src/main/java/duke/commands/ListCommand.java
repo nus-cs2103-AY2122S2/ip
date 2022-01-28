@@ -28,7 +28,7 @@ public class ListCommand extends Command<String> {
     public void runCommand(TaskList toDoList, String cmd) {
         String toPrint = "";
         // Prints out the list of items in the TaskList
-        toPrint += "Here's what you have on your list: \n";
+        toPrint += "(Total " + toDoList.size() + ") Here's what you have:\n";
         for (int i = 0; i < toDoList.size(); i++) {
             toPrint += "" + (i + 1) + "." + toDoList.get(i).toString() + "\n";
         }
