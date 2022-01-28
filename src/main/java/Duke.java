@@ -151,7 +151,7 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
-                String[] inputWords = input.split("\\s", 2);
+                String[] inputWords = input.split("\\s");
                 switch (input) {
                     case "bye":
                         Duke.farewell();
