@@ -11,11 +11,27 @@ import mickey.task.ToDo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Add command to create todos, deadlines and events.
+ */
 public class AddCommand extends Command {
+    /**
+     * Constructor.
+     *
+     * @param fullCommand User input command.
+     */
     public AddCommand(String fullCommand) {
         super(fullCommand);
     }
 
+    /**
+     * Execute command.
+     *
+     * @param tasks List of tasks.
+     * @param ui Ui to print feedback.
+     * @param storage Storage to store tasks.
+     * @throws MickeyException Exception for invalid commands.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         Task newTask = null;

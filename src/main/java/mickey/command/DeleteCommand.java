@@ -6,11 +6,27 @@ import mickey.app.Ui;
 import mickey.task.Task;
 import mickey.task.TaskList;
 
+/**
+ * Delete command to delete task.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Constructor.
+     *
+     * @param fullCommand User input command.
+     */
     public DeleteCommand(String fullCommand) {
         super(fullCommand);
     }
 
+    /**
+     * Execute command.
+     *
+     * @param tasks List of tasks.
+     * @param ui Ui to print feedback.
+     * @param storage Storage to store tasks.
+     * @throws MickeyException Exception for invalid commands.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         int indexToDelete = getIndex();
