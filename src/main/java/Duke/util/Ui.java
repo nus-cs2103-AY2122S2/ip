@@ -1,4 +1,4 @@
-package Duke;
+package Duke.util;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Ui {
 	/**
 	 * Constructor for Ui class which allows user inputs.
 	 */
-	Ui() {
+	public Ui() {
 		sc = new Scanner(System.in);
 	}
 

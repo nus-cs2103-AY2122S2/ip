@@ -1,9 +1,9 @@
 package Duke.command;
 
-import Duke.Save;
+import Duke.util.Save;
 import Duke.task.Task;
-import Duke.TaskList;
-import Duke.Ui;
+import Duke.util.TaskList;
+import Duke.util.Ui;
 
 /**
  * This DeleteCommand class will delete a task provided with a 0-based index when executed.

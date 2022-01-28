@@ -1,4 +1,4 @@
-package Duke;
+package Duke.util;
 
 import Duke.task.Task;
 import Duke.task.Todo;
@@ -27,7 +27,7 @@ public class Save {
 	/**
 	 * Creates a new instance of Save that loads the history from a specific path.
 	 */
-	Save() {
+	public Save() {
 		load();
 	}
 

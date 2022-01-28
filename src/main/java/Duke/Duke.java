@@ -2,6 +2,10 @@ package Duke;
 
 import Duke.command.ByeCommand;
 import Duke.command.Command;
+import Duke.util.Parser;
+import Duke.util.Save;
+import Duke.util.TaskList;
+import Duke.util.Ui;
 
 /**
  * Represents a chatbot named Duke.

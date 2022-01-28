@@ -1,4 +1,4 @@
-package Duke;
+package Duke.util;
 
 import Duke.command.*;
 import Duke.enums.CommandEnums;

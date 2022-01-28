@@ -1,9 +1,7 @@
 package Duke;
 
-import java.util.ArrayList;
-
-import Duke.task.Task;
 import Duke.task.TaskStub;
+import Duke.util.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,8 +1,8 @@
 package Duke.command;
 
-import Duke.Save;
-import Duke.TaskList;
-import Duke.Ui;
+import Duke.util.Save;
+import Duke.util.TaskList;
+import Duke.util.Ui;
 
 /**
  * This ByeCommand class will print the exit message when executed.

@@ -1,9 +1,9 @@
 package Duke.command;
 
-import Duke.Save;
+import Duke.util.Save;
 import Duke.task.Task;
-import Duke.TaskList;
-import Duke.Ui;
+import Duke.util.TaskList;
+import Duke.util.Ui;
 
 /**
  * This AddCommand class will add a task when executed.
