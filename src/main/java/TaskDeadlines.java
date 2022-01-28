@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class TaskDeadlines extends Task {
     LocalDate doneBy;
@@ -6,7 +7,7 @@ public class TaskDeadlines extends Task {
     /**
      * Constructor
      */
-    public TaskDeadlines(boolean isDone, String name, String doneBy) {
+    public TaskDeadlines(boolean isDone, String name, String doneBy) throws DateTimeParseException {
         super(isDone, name);
         this.doneBy = LocalDate.parse(doneBy);
     }

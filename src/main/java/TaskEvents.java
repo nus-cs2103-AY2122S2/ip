@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class TaskEvents extends Task {
     LocalDate startAt;
@@ -6,7 +7,7 @@ public class TaskEvents extends Task {
     /**
      * Constructor
      */
-    public TaskEvents(boolean isDone, String name, String startAt) {
+    public TaskEvents(boolean isDone, String name, String startAt) throws DateTimeParseException {
         super(isDone, name);
         this.startAt = LocalDate.parse(startAt);
     }
