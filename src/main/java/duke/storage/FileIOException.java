@@ -9,7 +9,7 @@ import duke.common.DukeException;
 public class FileIOException extends DukeException {
 
     /**
-     * Constructor FileIOException
+     * Constructor for FileIOException.
      * @param errorMessage message describing error.
      */
     FileIOException(String errorMessage) {

@@ -16,6 +16,9 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ *  Parses the user input.
+ */
 public class Parser {
 
     /**
