@@ -1,5 +1,8 @@
 package bob.Task;
 
+/**
+ * {@inheritDoc}
+ */
 public class Todo extends Task {
     public Todo(String name) {
         super(name);
@@ -9,6 +12,6 @@ public class Todo extends Task {
 
     @Override
     public String printStatus() {
-        return "[T] " + statusSymbols[super.getStatus()] + " " + this.toString();
+        return "[T] " + statusSymbols[super.getStatus()] + " " + this;
     }
 }

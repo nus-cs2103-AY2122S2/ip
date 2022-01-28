@@ -3,7 +3,9 @@ package bob.Task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * {@inheritDoc}
+ */
 public class Event extends Task {
     private final LocalDate date;
     private final LocalTime startTime;

@@ -5,12 +5,18 @@ import bob.Storage;
 import bob.Task.Task;
 import bob.TaskList;
 import bob.Ui;
-
+/**
+ * {@inheritDoc}
+ */
 public class MarkCommand extends Command {
     private int index;
     public MarkCommand(int index) {
         this.index = index;
     }
+    /**
+     * {@inheritDoc}
+     * Marks the task as done and updates the store.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task toMark = tasks.getTask(index);

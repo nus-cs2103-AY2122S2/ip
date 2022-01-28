@@ -13,9 +13,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the file storage for the Bob program
+ */
 public class Storage {
     private File store;
     public static String fileName;
+
+    /**
+     * Constructor for the Storage class.
+     * @param filePath the relative path to the file
+     */
     public Storage(String filePath) {
         fileName = filePath;
         try {
@@ -28,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the store of the program.
+     * Rewrites the file with a new serialized task list.
+     * @param taskList a List of tasks
+     */
     public void updateStore(TaskList taskList) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(store));
@@ -37,7 +50,12 @@ public class Storage {
         }
     }
 
-    // Only one List of type Task will be stored in the store
+    /**
+     * Returns the List of tasks that was saved in the store from previous program runs.
+     * Deserializes the object from the file given and casts it to a List of tasks. This cast is safe as
+     * there will be no other objects being written into the file.
+     * @return a List of tasks
+     */
     @SuppressWarnings("unchecked")
     public List<Task> getSavedStore() {
         try {
@@ -45,7 +63,7 @@ public class Storage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             return (List<Task>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            return new ArrayList<Task>();
+            return new ArrayList<>();
         }
     }
 }

@@ -21,7 +21,18 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the parser for the Bob program.
+ * Makes sense of the user input and translates it to a command.
+ */
 public class Parser {
+
+    /**
+     * Returns a Command that represents the user's inputs.
+     * @param input a string representing the user's input
+     * @return Command that was interpreted from user input
+     * @throws BobException exceptions that tells Bob to let the user know what went wrong
+     */
     public static Command parse(String input) throws BobException {
         String firstWord = input.split(" ")[0];
         if (firstWord.equalsIgnoreCase("list")) {

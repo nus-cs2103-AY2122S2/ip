@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.io.Serializable;
 
+/**
+ * Represents the task that the bob program will record.
+ */
 public abstract class Task implements Serializable {
     private String name;
     private int status;
@@ -13,22 +16,6 @@ public abstract class Task implements Serializable {
 
     public Task(String name) {
         this.name = name;
-    }
-
-    public static Task addNewToDo(String input) {
-        return new Todo(input);
-    };
-
-    public String getType() {
-        return this.type;
-    }
-
-    public static Task addNewDeadline(String input, LocalDateTime date) {
-        return new Deadline(input, date);
-    }
-
-    public static Task addNewEvent(String input, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        return new Event(input, date, startTime, endTime);
     }
 
     public String getName() { return this.name; }

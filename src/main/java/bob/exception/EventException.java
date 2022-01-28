@@ -1,5 +1,7 @@
 package bob.exception;
-
+/**
+ * {@inheritDoc}
+ */
 public class EventException extends BobException {
 
     public EventException() {

@@ -2,7 +2,9 @@ package bob.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * {@inheritDoc}
+ */
 public class Deadline extends Task {
     private LocalDateTime date;
 
@@ -15,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String printStatus() {
-        return "[D] " + Task.statusSymbols[super.getStatus()] + " " + this.toString() + " (by: " +
+        return "[D] " + Task.statusSymbols[super.getStatus()] + " " + this + " (by: " +
                 date.format(DateTimeFormatter.ofPattern("dd MMM yyy HH:mm")) + ")";
     }
 

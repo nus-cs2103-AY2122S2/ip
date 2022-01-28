@@ -5,6 +5,12 @@ import bob.exception.BobException;
 import bob.command.ByeCommand;
 import bob.command.Command;
 
+/**
+ * The Bob class implements a chat-bot that records your tasks and tracks your progress.
+ *
+ * @author Ryan Low
+ * @version 1.0
+ */
 class Bob {
     public Storage store;
     public Ui ui;
@@ -14,6 +20,10 @@ class Bob {
         new Bob().initializeBob();
     }
 
+    /**
+     * Represents the initializer of the Bob program.
+     * Sets up the store, tasks, and ui for the program.
+     */
     public void initializeBob() {
         store = new Storage("Bob.txt");
         tasks = new TaskList(store.getSavedStore());
@@ -22,6 +32,9 @@ class Bob {
         activeListener();
     }
 
+    /**
+     * Prints the greeting messages for Bob upon initializing.
+     */
     public void greet() {
         ui.logo();
         ui.greetMessage();
@@ -29,6 +42,9 @@ class Bob {
         ui.userReply();
     }
 
+    /**
+     * Runs the program by actively listening to commands and executes them.
+     */
     public void activeListener() {
         boolean isBye = false;
         while(!isBye) {

@@ -1,12 +1,13 @@
 package bob.exception;
 
+/**
+ * Represents the exception that gives Bob the message to say when an error occurs.
+ */
 public class BobException extends IllegalArgumentException {
-    private String bobReply;
     public BobException(String error) {
         super(error);
-        this.bobReply = error;
     }
     public String getBobReply() {
-        return this.bobReply;
+        return getMessage();
     }
 }

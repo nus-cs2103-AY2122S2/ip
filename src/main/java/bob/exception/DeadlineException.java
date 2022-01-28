@@ -1,5 +1,7 @@
 package bob.exception;
-
+/**
+ * {@inheritDoc}
+ */
 public class DeadlineException extends BobException {
 
     public DeadlineException() {
