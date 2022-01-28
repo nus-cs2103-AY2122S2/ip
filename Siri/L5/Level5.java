@@ -6,8 +6,17 @@ public class Level5 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> arrList = new ArrayList<Task>();
-        String line = "    __________________________________________________\n"; //print a line before greeting message
-        System.out.println(line + "     Hi there. I'm Siri \n" + "     How may I help you? \n" + line);
+        String line = "    ____________________________________________________________________________________\n";
+        //prints a line before and after greeting message upon runnind of
+        System.out.println(line + "     Hi, I'm Siri, your personal to-do list program. \n"
+                + "     You can add 3 types of tasks to the list: todo, deadline and event tasks.\n"
+                + "     To add to the list, specify the type of task before it's description.\n"
+                + "     Only deadlines and events can accept dates and timings\n\n"
+                + "     Examples:\n"
+                + "     todo run a mile\n"
+                + "     deadline return library book /by Sunday 2359\n"
+                + "     event Jack's wedding /at Holiday Inn 1800\n\n"
+                + "     What do you wish to take note of today? \n" + line);
 
         while (true) { //will keep querying user for input until user inputs "bye"
             String word = sc.next();
