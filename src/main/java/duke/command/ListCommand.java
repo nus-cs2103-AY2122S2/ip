@@ -7,7 +7,7 @@ import duke.helptool.Ui;
 /**
  * The type List command.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Instantiates a new List command.
