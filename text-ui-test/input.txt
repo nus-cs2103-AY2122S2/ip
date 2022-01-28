@@ -1,15 +1,18 @@
-Hello
+hello
 hmmm
 list
-todo finish 2103 assignment
+todo Finish 2103
 list
-event project meeting /a 1230pm on Thurs
-event project meeting /at 1230pm on Thus
+event meet friends /at 2022-01-28
+event meet friends /at 2022-01-28 23:00
+save
+deadline finish 2106 quiz /by 2022-01-29 23:59
+list
+mark 1
+list
+save
+unmark 1
 list
 delete 1
-list
-deadline finish 2106 lab 1 /by Monday
-list
-mark 2
-delete 2
+save
 bye

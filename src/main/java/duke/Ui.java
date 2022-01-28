@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDescriptionException;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 

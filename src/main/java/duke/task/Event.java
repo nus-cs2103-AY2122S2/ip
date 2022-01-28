@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.file_management.Time;
+
 public class Event extends Task{
     private String eventDate;
     private Time time;

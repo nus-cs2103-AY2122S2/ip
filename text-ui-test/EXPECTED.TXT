@@ -1,17 +1,15 @@
-Hello from
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-________________________________
 Hello! I am Duke_two.
 Your Personal Assistant.
 What can I do for you?
 ________________________________
 From Duke_two: 
-	'Hello' is an invalid command! Please try again!
+	'hello' is an invalid command! Please try again!
 ________________________________
 From Duke_two: 
 	'hmmm' is an invalid command! Please try again!
@@ -21,53 +19,65 @@ From Duke_two:
 ________________________________
 From Duke_two: 
 	Added to your tasks: 
-	[T][ ] finish 2103 assignment
+	[T][ ] Finish 2103
 You now have 1 tasks in your list
 ________________________________
 From Duke_two: 
 	
-1: [T][ ] finish 2103 assignment
+1: [T][ ] Finish 2103
 ________________________________
 From Duke_two: 
-	That is an invalid task. Please try again!
-________________________________
-From Duke_two: 
-	Added to your tasks: 
-	[E][ ] project meeting  (at: 1230pm on Thus)
-You now have 2 tasks in your list
-________________________________
-From Duke_two: 
-	
-1: [T][ ] finish 2103 assignment
-2: [E][ ] project meeting  (at: 1230pm on Thus)
-________________________________
-From Duke_two: 
-	Removed from your tasks: 
-	[T][ ] finish 2103 assignment
-You now have 1 tasks in your list
-________________________________
-From Duke_two: 
-	
-1: [E][ ] project meeting  (at: 1230pm on Thus)
+	An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.
 ________________________________
 From Duke_two: 
 	Added to your tasks: 
-	[D][ ] finish 2106 lab 1  (by: Monday)
+	[E][ ] meet friends  (at: Jan 28 2022, 23:00)
 You now have 2 tasks in your list
 ________________________________
 From Duke_two: 
+	Your Tasks has been saved into your device!
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+You now have 3 tasks in your list
+________________________________
+From Duke_two: 
 	
-1: [E][ ] project meeting  (at: 1230pm on Thus)
-2: [D][ ] finish 2106 lab 1  (by: Monday)
+1: [T][ ] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
 ________________________________
 From Duke_two: 
 	Nice! I've marked this task as done: 
-	[D][X] finish 2106 lab 1  (by: Monday)
+	[T][X] Finish 2103
+________________________________
+From Duke_two: 
+	
+1: [T][X] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+________________________________
+From Duke_two: 
+	Your Tasks has been saved into your device!
+________________________________
+From Duke_two: 
+	Alright, I've marked this task as not done yet: 
+	[T][ ] Finish 2103
+________________________________
+From Duke_two: 
+	
+1: [T][ ] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
 ________________________________
 From Duke_two: 
 	Removed from your tasks: 
-	[D][X] finish 2106 lab 1  (by: Monday)
-You now have 1 tasks in your list
+	[T][ ] Finish 2103
+You now have 2 tasks in your list
+________________________________
+From Duke_two: 
+	Your Tasks has been saved into your device!
 ________________________________
 From Duke_two: 
 	GoodBye! I hope to see you again!

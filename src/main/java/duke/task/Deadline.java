@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.file_management.Time;
+
 public class Deadline extends Task{
 
     private String deadline;

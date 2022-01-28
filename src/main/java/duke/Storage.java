@@ -1,3 +1,12 @@
+package duke;
+
+import duke.file_management.CreateFile;
+import duke.file_management.WriteFile;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

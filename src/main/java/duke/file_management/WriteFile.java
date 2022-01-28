@@ -1,3 +1,5 @@
+package duke.file_management;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
