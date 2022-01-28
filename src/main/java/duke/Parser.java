@@ -57,6 +57,8 @@ public class Parser {
                 } else if (c[0].equals("delete")) {
                     int no = Integer.parseInt(c[1]) - 1;
                     tasklist.delete(no);
+                } else if (c[0].equals("find")) {
+                    tasklist.find(c[1]);
                 } else {
                     throw new DukeException(UI.invalid);
                 }

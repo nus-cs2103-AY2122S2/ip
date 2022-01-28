@@ -94,4 +94,42 @@ public class TaskList {
         }
         UI.printLine();
     }
+
+    public void find(String str) {
+        printSearchList(generateList(str));
+    }
+
+    private ArrayList<Task> generateList(String str) {
+        ArrayList<Task> output = new ArrayList<>();
+        for (int m = 0; m < list.size(); m++) {
+            String in = list.get(m).getDescription();
+            if (in.equals(str)) {
+                output.add(list.get(m));
+            } else if (scan(in, str)){
+                output.add(list.get(m));
+            } else {
+                // add nothing
+            }
+        }
+        return output;
+    }
+
+    private boolean scan(String in, String str) {
+        boolean isPresent = false;
+        String[] y = in.split(" ");
+        for(int n = 0; n < y.length; n++) {
+            if (y[n].equals(str)) {
+                isPresent = true;
+            }
+        }
+        return isPresent;
+    }
+
+    private void printSearchList(ArrayList<Task> list) {
+        UI.printLine();
+        for(int m = 0; m < list.size(); m++) {
+            System.out.println((m + 1) + "." + list.get(m).toString());
+        }
+        UI.printLine();
+    }
 }
