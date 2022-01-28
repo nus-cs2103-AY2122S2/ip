@@ -8,8 +8,6 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-
-
     @Override
     public String toString() {
         return " [E]" + super.toString() + "\t (at " + duration + ")";

@@ -5,7 +5,7 @@ import fileHandling.FilesWriter;
 
 import java.util.ArrayList;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     private static ArrayList<Task> taskList = new ArrayList<Task>();
@@ -63,17 +63,6 @@ public class Task {
         taskList.add(task);
         System.out.println("  " + taskList.get(taskCount).toString());
         taskCount++;
-
-        if (task instanceof Todo) {
-            Todo todo = (Todo) task;
-            FilesWriter.writeToFile("T|" + (todo.isDone ? "1|" : "0|") + todo.description + "\n");
-        } else if (task instanceof Event) {
-            Event event = (Event) task;
-            FilesWriter.writeToFile("E|" + (event.isDone ? "1|" : "0|") + event.description + "|" + event.duration + "\n");
-        } else if (task instanceof Deadline) {
-            Deadline deadline = (Deadline) task;
-            FilesWriter.writeToFile("D|" + (deadline.isDone ? "1|" : "0|") + deadline.description + "|" + deadline.deadline + "\n");
-        }
     }
 
     public static void removeFromList(int index) {
@@ -87,7 +76,18 @@ public class Task {
     }
 
     public static void saveTasks() {
-
+        for (Task task : taskList) {
+            if (task instanceof Todo) {
+                Todo todo = (Todo) task;
+                FilesWriter.writeToFile("T|" + (todo.isDone ? "1|" : "0|") + todo.description + "\n");
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                FilesWriter.writeToFile("E|" + (event.isDone ? "1|" : "0|") + event.description + "|" + event.duration + "\n");
+            } else if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                FilesWriter.writeToFile("D|" + (deadline.isDone ? "1|" : "0|") + deadline.description + "|" + deadline.deadline + "\n");
+            }
+        }
     }
 
     public static void printAllTasks() {
@@ -100,6 +100,7 @@ public class Task {
             System.out.println("   " + (i + 1) + "." + taskList.get(i).toString());
         }
     }
+
 
     @Override
     public String toString() {

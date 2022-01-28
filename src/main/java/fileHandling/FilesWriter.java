@@ -7,7 +7,6 @@ public class FilesWriter {
     public static void writeToFile(String task) {
         try {
             FileWriter fw = new FileWriter("data/heylo.txt", true);
-            System.out.println("writing");
             fw.append(task);
             fw.close();
         } catch (IOException e) {
