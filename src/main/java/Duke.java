@@ -1,13 +1,16 @@
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.FileReader;
 
 public class Duke {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        setUpData();
         try {
             startConversation();
         } catch (DukeException e) {
@@ -114,11 +117,38 @@ public class Duke {
             FileWriter myObj = new FileWriter("data.txt");
             myObj.flush();
             for (int i = 0; i < tasks.size(); i++) {
-                myObj.write(tasks.get(i).symbol() + " | " + tasks.get(i).getStatusIcon() + " | " +
+                myObj.write(tasks.get(i).symbol() + "-" + tasks.get(i).getStatusIcon() + "-" +
                         tasks.get(i).toString() + "\n");
-                System.out.println("Written to file");
             }
             myObj.close();
+        } catch (IOException e) {
+            System.out.println("File does not exist.");
+        }
+    }
+
+    public static void setUpData() {
+        try {
+            FileReader myObj = new FileReader("data.txt");
+            BufferedReader br = new BufferedReader(myObj);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] lineArray = line.split("-");
+                Task task;
+                switch (lineArray[0]) {
+                    case "T":
+                        task = new Todo(lineArray[2]);
+                        break;
+                    case "E":
+                        task = new Event(lineArray[2]);
+                        break;
+                    default:
+                        task = new Deadline(lineArray[2]);
+                }
+                if (lineArray[1].equals("X")) {
+                    task.setAsDone();
+                }
+                tasks.add(task);
+            }
         } catch (IOException e) {
             System.out.println("File does not exist.");
         }
