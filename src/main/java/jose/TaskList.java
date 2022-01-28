@@ -3,13 +3,25 @@ package jose;
 import java.util.ArrayList;
 import jose.task.*;
 
+/**
+ * Class that represents a task list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * The default constructor that sets up an empty list.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+
+    /**
+     * A constructor that sets up the tasks list based on the given tasks.
+     *
+     * @param arr An ArrayList containing tasks.
+     */
     public TaskList(ArrayList<String> arr) {
         tasks = new ArrayList<>();
         String[] task;
