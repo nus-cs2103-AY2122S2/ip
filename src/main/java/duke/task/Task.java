@@ -16,6 +16,10 @@ public class Task {
         this(description, false);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns a string X indicating whether the task is done or not.
      *

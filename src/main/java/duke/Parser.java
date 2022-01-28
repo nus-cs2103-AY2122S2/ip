@@ -17,7 +17,9 @@ public class Parser {
             if (commandArr.length > 1) {
                 String type = commandArr[0];
                 String description = commandArr[1];
-                if (type.equals("todo")) {
+                if (type.equals("find")) {
+                    return new FindCommand(description);
+                } else if (type.equals("todo")) {
                     return new ToDoCommand(description);
                 } else if (type.equals("deadline")) {
                     String by = fullCommand.split(" /by ")[1];
