@@ -42,6 +42,11 @@ public class Ui {
         System.out.println(tasks);
     }
 
+    public void showFoundTaskList(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks);
+    }
+
     public void showNumberOfTasks(TaskList tasks) {
         System.out.println("You now have " + tasks.size() + " task" + isPlural(tasks.size()) + "in the list.");
     }

@@ -41,12 +41,23 @@ public class TaskList {
         return task;
     }
 
+    public TaskList filter(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return new TaskList(filteredTasks);
+    }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size() - 1; i++) {
             sb.append((i + 1) + "." + tasks.get(i) + "\n");
         }
+        sb.append(tasks.size() + "." + tasks.get(tasks.size() - 1));
         return sb.toString();
     }
 }
