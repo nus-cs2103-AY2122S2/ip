@@ -1,6 +1,10 @@
 package core;
 
-/** Identifier class to determine the input type.
+/**
+ * Identifier class to determine the input type.
+ *
+ * @author s7manth
+ * @version 0.1
  */
 public class InputIdentifier {
     private static final String LIST_COMMAND = "list";
@@ -12,7 +16,9 @@ public class InputIdentifier {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
 
-    /** Returns what the input type is given the string representation of the input command.
+    /**
+     * Returns what the input type is given the string representation of the input command.
+     *
      * @param inputData The string which represents the user input.
      * @return The identified input type.
      */

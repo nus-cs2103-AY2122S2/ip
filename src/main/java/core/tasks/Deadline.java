@@ -9,11 +9,23 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Deadline class.
+ *
+ * @author s7manth
+ * @version 0.1
+ */
 public class Deadline extends Task {
     protected LocalDate byDate;
     protected LocalTime byTime;
     protected String by;
 
+    /**
+     * Constructor for the Deadline class.
+     *
+     * @param description The description of the deadline.
+     * @param by The time by which the deadline is supposed to be achieved.
+     */
     private Deadline(String description, String by) {
         super(description);
         String[] dateAndTime = by.split(" ");
@@ -24,16 +36,36 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Method to obtain the label for the Deadline class.
+     *
+     * @return The label of Deadline.
+     */
     @Override
     public String getLabel() {
         return "D";
     }
 
+    /**
+     * Obtains peripheral information about the Deadline object.
+     *
+     * @return The peripheral info about the Deadline.
+     */
     @Override
     public String getPeripheralInfo() {
         return this.by;
     }
 
+    /**
+     * Factory method to obtain an instance of the Deadline class.
+     *
+     * @param description The description of the Deadline.
+     * @param by The time by which the deadline must be achieved.
+     * @return An instance of the Deadline class with the specified description and by time.
+     * @throws NoDeadlineMentionedException Throws an exception if no deadline is mentioned.
+     * @throws NoDescriptionGivenException Throws an exception if the description is empty or blank.
+     * @throws DateTimeParseException Throws an exception if the deadline entered is in an incorrect format.
+     */
     public static Deadline getInstance(String description, String by) throws NoDeadlineMentionedException, NoDescriptionGivenException, DateTimeParseException {
         if (description.isBlank() || description.isBlank()) {
             throw new NoDescriptionGivenException();
@@ -45,6 +77,11 @@ public class Deadline extends Task {
         return new Deadline(description, by);
     }
 
+    /**
+     * Obtains a string representation of the Deadline object.
+     *
+     * @return String representing the Deadline object.
+     */
     @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();

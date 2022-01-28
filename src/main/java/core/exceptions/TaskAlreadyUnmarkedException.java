@@ -1,6 +1,9 @@
 package core.exceptions;
 
-public class TaskAlreadyUnmarkedException extends DukeException {
+/**
+ * Exception indicating that the task is already unmarked.
+ */
+public class TaskAlreadyUnmarkedException extends DookeException {
     public TaskAlreadyUnmarkedException() {
         super("This task was never complete!");
     }

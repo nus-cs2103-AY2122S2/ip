@@ -1,6 +1,8 @@
 import core.IOManager;
 
-/** Main class for Dooke CLI Chatbot
+/**
+ * Main class for Dooke CLI Chatbot
+ *
  * @author s7manth
  * @version 0.1
  */

@@ -27,25 +27,34 @@ import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 
-/** Handles the input commands.
+/**
+ * Handles the input commands.
+ *
+ * @author s7manth
+ * @version 0.1
  */
 public class InputHandler {
     private TaskList taskList;
 
-    /** Constructor for the InputHandler class.
+    /**
+     * Constructor for the InputHandler class.
      */
     private InputHandler() {
         this.taskList = TaskList.getInstance();
     }
 
-    /** Factory method to obtain an instance of InputHandler.
+    /**
+     * Factory method to obtain an instance of InputHandler.
+     *
      * @return An instance of InputHandler.
      */
     public static InputHandler getInstance() {
         return new InputHandler();
     }
 
-    /** Handles the input given the string representation of the input command by the user.
+    /**
+     * Handles the input given the string representation of the input command by the user.
+     *
      * @param inputData Input command to be handled.
      * @return The output string.
      */
@@ -85,7 +94,9 @@ public class InputHandler {
         return outputFormatter.getFormattedOutput();
     }
 
-    /** Handles the mark command.
+    /**
+     * Handles the mark command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -103,7 +114,9 @@ public class InputHandler {
 
     }
 
-    /** Handles the unmark command.
+    /**
+     * Handles the unmark command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -120,14 +133,18 @@ public class InputHandler {
         }
     }
 
-    /** Handles the list command.
+    /**
+     * Handles the list command.
+     *
      * @param outputFormatter The output formatter used to produce desired output.
      */
     private void handleList(OutputFormatter outputFormatter) {
         outputFormatter.appendAll(this.taskList.formattedOutput());
     }
 
-    /** Handles the todo command.
+    /**
+     * Handles the todo command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -141,7 +158,9 @@ public class InputHandler {
         }
     }
 
-    /** Handles the deadline command.
+    /**
+     * Handles the deadline command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -175,7 +194,9 @@ public class InputHandler {
         }
     }
 
-    /** Handles the event command.
+    /**
+     * Handles the event command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -209,14 +230,18 @@ public class InputHandler {
         }
     }
 
-    /** Handles any unknown command.
+    /**
+     * Handles any unknown command.
+     *
      * @param outputFormatter The output formatter used to produce desired output.
      */
     private void handleUnknown(OutputFormatter outputFormatter) {
         outputFormatter.appendAll("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    /** Handles the delete command.
+    /**
+     * Handles the delete command.
+     *
      * @param inputData Input command to be handled.
      * @param outputFormatter The output formatter used to produce desired output.
      */
@@ -238,6 +263,12 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Handles the find command.
+     *
+     * @param inputData Input command to be handled.
+     * @param outputFormatter The output formatter used to produce desired output.
+     */
     private void handleFind(String inputData, OutputFormatter outputFormatter) {
         try {
             String[] inputSequence = inputData.split("find");
@@ -251,6 +282,13 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Initializer method for reading the file to add to the task list.
+     *
+     * @param file The file to be read.
+     * @throws IOException Throws an exception if not able to read/obtain the file.
+     * @throws FileIsCorruptException Throws an exception if the contents of the file are in an incorrect format.
+     */
     public void initializeWithFile(File file) throws IOException, FileIsCorruptException {
         BufferedReader fileReader = new BufferedReader(new FileReader(file));
         String fileLine = fileReader.readLine();
@@ -260,7 +298,9 @@ public class InputHandler {
         }
     }
 
-    /** Handles the inputs received from the persistent storage txt file.
+    /**
+     * Handles the inputs received from the persistent storage txt file.
+     *
      * @param inputData Input command to be handled.
      * @throws FileIsCorruptException Throws an exception if the contents of the file are in an incorrect format.
      */
@@ -295,7 +335,9 @@ public class InputHandler {
         }
     }
 
-    /** Method to save the tasks at the end of the session.
+    /**
+     * Method to save the tasks at the end of the session.
+     *
      * @param filePath The path of the file where the content needs to be saved.
      * @throws IOException Throws an exception in the event that there is no file to be written to.
      */
