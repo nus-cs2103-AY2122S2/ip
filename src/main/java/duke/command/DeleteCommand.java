@@ -11,9 +11,7 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    /**
-     * 1-based index of task to be deleted.
-     */
+    /** 1-based index of task to be deleted. */
     int point;
 
     /**

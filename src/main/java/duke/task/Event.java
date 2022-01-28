@@ -8,14 +8,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /**
-     * String representation of the event start dates/times.
-     */
+    /** String representation of the event start dates/times. */
     protected LocalDateTime start;
 
-    /**
-     * String representation of the event end dates/times.
-     */
+    /** String representation of the event end dates/times. */
     protected LocalDateTime end;
 
     /**
@@ -80,6 +76,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
+        return "[E]" + super.toString() + " (at: " + getAt() + ")";
     }
 }

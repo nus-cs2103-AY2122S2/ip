@@ -9,9 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /**
-     * String representation of the deadline.
-     */
+    /** String representation of the deadline. */
     protected LocalDateTime by;
 
     /**
@@ -63,6 +61,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+        return "[D]" + super.toString() + " (by: " + getBy() + ")";
     }
 }

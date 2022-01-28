@@ -13,9 +13,7 @@ import java.time.LocalDateTime;
  */
 public class CreateEventCommand extends Command{
 
-    /**
-     * Event task created.
-     */
+    /** Event task created. */
     private Event event;
 
     /**

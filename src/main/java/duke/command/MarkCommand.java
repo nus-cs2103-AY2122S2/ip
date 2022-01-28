@@ -11,9 +11,7 @@ import duke.ui.Ui;
  */
 public class MarkCommand extends Command{
 
-    /**
-     * 1-based index of the task in the list.
-     */
+    /** 1-based index of the task in the list. */
     private int point;
 
     /**
