@@ -19,7 +19,7 @@ public class FindCommand extends DukeCommand {
 
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().contains(description)) {
+            if (task.getDescription().contains(this.commandBody)) {
                 arrList.add(task);
             }
         }
@@ -27,7 +27,7 @@ public class FindCommand extends DukeCommand {
         if (arrList.getSize() == 0 ){
             ui.showEmptyFind();
         } else {
-            ui.printTaskList(arrList);
+            ui.showTaskList(arrList);
         }
     }
 }
