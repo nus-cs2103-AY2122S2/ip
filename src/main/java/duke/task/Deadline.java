@@ -22,7 +22,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get format to display deadline task on file
+     * Gets format to display deadline task on file
      *
      * @return format to display deadline task on file
      */
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get general format to display deadline task
+     * Gets general format to display deadline task
      *
      * @return general format to display deadline task
      */

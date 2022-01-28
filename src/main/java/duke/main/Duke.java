@@ -48,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * Instantiate Duke and run it
+     * Instantiates Duke and run it
      *
      * @param args
      */

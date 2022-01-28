@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task from the list
+     * Deletes task from the list
      *
      * @param number task number of task to be deleted from the list
      */
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to the list
+     * Adds task to the list
      *
      * @param task task to be added to the list
      */

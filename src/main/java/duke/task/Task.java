@@ -13,7 +13,7 @@ public class Task {
     }
 
     /**
-     * Get completion status of task
+     * Gets completion status of task
      *
      * @return "X" if task is done, otherwise " "
      */
@@ -22,13 +22,14 @@ public class Task {
     }
 
     /**
-     * Get description of task
+     * Gets description of task
      *
      * @return description of task
      */
     public String getDescription() {
         return description;
     }
+
     /**
      * Marks task as done
      */
@@ -44,7 +45,7 @@ public class Task {
     }
 
     /**
-     * Get format to display task on file
+     * Gets format to display task on file
      *
      * @return format to display task on file
      */
@@ -53,7 +54,7 @@ public class Task {
     }
 
     /**
-     * Get general format to display task
+     * Gets general format to display task
      *
      * @return general format to display task
      */

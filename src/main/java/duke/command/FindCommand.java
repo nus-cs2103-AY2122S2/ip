@@ -17,7 +17,7 @@ public class FindCommand extends Command{
     }
 
     /**
-     * Find matching tasks with specified keyword
+     * Finds matching tasks with specified keyword
      *
      * @param tasks contains list of tasks
      * @param ui interact with user

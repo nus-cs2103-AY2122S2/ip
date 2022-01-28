@@ -128,7 +128,7 @@ public class Ui {
     }
 
     /**
-     * Read user input and returns it
+     * Reads user input and returns it
      *
      * @return user input
      */

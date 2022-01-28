@@ -65,7 +65,7 @@ public class Storage {
     }
 
     /**
-     * Save list of tasks into file
+     * Saves list of tasks into file
      *
      * @param tasks list of tasks
      * @throws DukeException if I0Exception occurs

@@ -10,7 +10,7 @@ public class Todo extends Task{
     }
 
     /**
-     * Get format to display todo task on file
+     * Gets format to display todo task on file
      *
      * @return format to display todo task on file
      */

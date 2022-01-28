@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get format to display event task on file
+     * Gets format to display event task on file
      *
      * @return format to display event task on file
      */
@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get general format to display event task
+     * Gets general format to display event task
      *
      * @return general format to display event task
      */

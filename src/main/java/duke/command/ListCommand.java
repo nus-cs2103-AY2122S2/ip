@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Display list of tasks
+     * Displays list of tasks
      *
      * @param tasks contains list of tasks
      * @param ui interact with user
