@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class Event extends Task {
+public class Event extends Task {
 
     private Date date;
     private DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
@@ -28,7 +28,7 @@ class Event extends Task {
     }
 
     @Override
-    String getDescription() {
+    public String getDescription() {
         return this.description + " (at: " + formatter.format(date).toString() + ")";
     }
 }

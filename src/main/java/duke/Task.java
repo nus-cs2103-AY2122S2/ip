@@ -25,7 +25,7 @@ class Task {
         this.status = false;
     }
 
-    String getDescription(){
+    public String getDescription(){
         return this.description;
     }
 

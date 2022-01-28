@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class Deadline extends Task {
+public class Deadline extends Task {
 
     private Date date;
     private DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
@@ -26,7 +26,7 @@ class Deadline extends Task {
     }
 
     @Override
-    String getDescription() {
+    public String getDescription() {
         return this.description + " (by: " + formatter.format(date).toString() + ")";
     }
 }

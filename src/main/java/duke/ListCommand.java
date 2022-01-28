@@ -10,4 +10,9 @@ public class ListCommand extends Command{
         storage.rewriteTask(taskList);
     }
 
+    @Override
+    public String toString() {
+        return "List Command is working";
+    }
+
 }

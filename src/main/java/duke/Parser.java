@@ -8,7 +8,7 @@ public class Parser {
     Scanner scanner;
     String command;
 
-    Parser() {
+    public Parser() {
         this.scanner = new Scanner(System.in);
         this.command = " ";
     }

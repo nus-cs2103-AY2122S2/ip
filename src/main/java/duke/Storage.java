@@ -14,8 +14,9 @@ public class Storage {
 
     String filePath;
     File file;
+    boolean isFileOpen = false;
 
-    Storage(String filePath) throws IOException {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         String basePath = new File("").getAbsolutePath();
         //file = new File( basePath + "/" + filePath);
@@ -28,10 +29,18 @@ public class Storage {
                 file.mkdirs();
             } else {
                 file = new File(basePath);
+                isFileOpen = true;
             }
         }
+    }
 
-
+    @Override
+    public String toString() {
+        if (isFileOpen) {
+            return "Success";
+        } else {
+            return "No success";
+        }
     }
 
     public ArrayList<Task> load() throws IOException, ParseException, DukeException {
