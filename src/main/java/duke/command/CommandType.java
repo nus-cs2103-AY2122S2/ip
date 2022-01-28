@@ -1,3 +1,5 @@
+package duke.command;
+
 /**
  * An enumeration that defines different command types.
  */

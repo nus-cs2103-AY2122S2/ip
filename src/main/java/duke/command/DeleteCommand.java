@@ -1,25 +1,33 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 /**
- * A class that represents a command to mark a task as done.
+ * A class that represents a command to delete a task.
  */
-public class MarkCommand implements Command {
+public class DeleteCommand implements Command {
     private final int taskNum;
 
     /**
-     * Constructor to initialize an instance of MarkCommand class with
+     * Constructor to initialize an instance of DeleteCommand class with
      * task number.
      *
      * @param taskNum Task number
      */
-    public MarkCommand(int taskNum) {
+    public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
     /**
      * Checks if the command is an Exit command.
      *
-     * @return False as the command is a Done command
+     * @return False as the command is a Delete command
      */
     @Override
     public boolean isExit() {
@@ -27,8 +35,8 @@ public class MarkCommand implements Command {
     }
 
     /**
-     * Executes the command of marking the task in the task list as done
-     * and saving the updated list to the data file.
+     * Executes the command of deleting the task from the task list and
+     * saving the updated list to the data file.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
@@ -39,9 +47,11 @@ public class MarkCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         if (taskNum > 0 && taskNum <= taskList.getNumOfTasks()) {
-            Task taskDone = taskList.markDone(taskNum);
+            Task taskDeleted = taskList.deleteTask(taskNum);
 
-            String response = ui.taskDoneMessage(taskDone);
+            String response = ui.taskDeletedMessage(taskDeleted)
+                    + System.lineSeparator()
+                    + ui.numOfTasksInListMessage(taskList);
             ui.displayResponse(response);
 
             storage.saveTasksToFile(taskList);

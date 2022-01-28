@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * A class that handles any exceptions during the program execution.
  */
