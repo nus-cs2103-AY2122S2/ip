@@ -8,10 +8,10 @@ package duke;
 public class ToDo extends Task {
 
   /**
-   * Method Constructor
+   * Assigns desc and done to this instance.
    *
-   * @param desc the task description
-   * @param done the status of the task
+   * @param desc the task description.
+   * @param done the current completion status of the task.
    */
   public ToDo(String desc, boolean done) {
     super(desc, done);
@@ -28,6 +28,11 @@ public class ToDo extends Task {
     return str;
   }
 
+  /**
+   * Changes the string format of this event object.
+   *
+   * @return a string in this format T,{done},{desc}.
+   */
   @Override
   public String changeFormat() {
     if (super.done) {

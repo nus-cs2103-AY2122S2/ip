@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * This class supports exception belonging to the Duke program.
+ * This class supports exception belonging to the duke program.
  * @author Sim Jun Heng
  * @version CS2103T AY21/22 Sem 2
  */

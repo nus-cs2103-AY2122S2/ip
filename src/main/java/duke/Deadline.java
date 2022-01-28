@@ -12,11 +12,11 @@ public class Deadline extends Task {
   private LocalDate date;
 
   /**
-   * Method Constructor
+   * Assigns desc, date and done to this instance.
    *
-   * @param desc the task description
-   * @param date deadline of the task
-   * @param done the status of the task
+   * @param desc the task description.
+   * @param date the date of the event.
+   * @param done the current completion status of the task.
    */
   public Deadline(String desc, LocalDate date, boolean done) {
     super(desc, done);
@@ -38,6 +38,11 @@ public class Deadline extends Task {
     return str;
   }
 
+  /**
+   * Changes the string format of this object.
+   *
+   * @return a string in this format D,{done},{desc},{date}.
+   */
   @Override
   public String changeFormat() {
     if (super.done) {

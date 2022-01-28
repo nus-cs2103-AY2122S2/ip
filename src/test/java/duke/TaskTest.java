@@ -5,7 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
+/**
+ * This class tests methods from the Task class.
+ * @author Sim Jun Heng
+ * @version CS2103T AY21/22 Sem 2
+ */
 public class TaskTest {
+
+    /**
+     *  Tests the changeFormat method in the task class.
+     */
     @Test
     public void testChangeFormat() {
         LocalDate date = LocalDate.parse("2020-03-01");

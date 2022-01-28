@@ -15,9 +15,11 @@ import java.util.Scanner;
 public class Storage {
 
     /**
-     * Loads task data from file and adds it into a list
+     * Loads task data from file and adds it into a list.
+     * If file or directory is not found, the respective items are created and
+     * an empty array list is returned.
      *
-     * @return
+     * @return an arraylist containing data read form the file.
      * @throws IOException if there's error arising from the file methods
      * @throws DukeException if data in the file is corrupted (not in the correct storage format)
      */
@@ -84,6 +86,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes data from the arraylist into file.
+     *
+     * @param list an arraylist containing task objects.
+     * @throws IOException if there's error arising from I/O methods.
+     */
     public static void writeFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter("./data/duke.txt");
         String str = list.getIndex(0).changeFormat();

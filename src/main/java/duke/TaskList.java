@@ -119,8 +119,8 @@ public class TaskList {
     }
 
     /**
-     * This method changes the status of a particular task to Done
-     * in the list.
+     * This method changes the completion status of the task
+     * to done in the list.
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -137,8 +137,8 @@ public class TaskList {
     }
 
     /**
-     * This method changes the status of a particular task to Not Done
-     * in the list.
+     * This method changes the completion status of the task
+     * to not done in the list.
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -154,27 +154,16 @@ public class TaskList {
         }
     }
 
-    /**
-     * Gets a specific task from the list based on position.
-     *
-     * @param index the position of the task in the list.
-     * @return a task object.
-     */
     public Task getIndex(int index) {
         return list.get(index);
     }
 
-    /**
-     * Retrieves the size of the task list
-     *
-     * @return the size of the list
-     */
     public int getSize() {
         return list.size();
     }
 
     /**
-     * Adds task into list without printing anything
+     * Adds task into list without printing anything.
      */
     public void addTask(Task task) {
         list.add(task);
