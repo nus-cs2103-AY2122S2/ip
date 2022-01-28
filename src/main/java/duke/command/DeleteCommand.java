@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     protected String index;
 
@@ -6,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (tasks.isEmpty()) {
                 ui.printWithDivider("Your list is empty!");

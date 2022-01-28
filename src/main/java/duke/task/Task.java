@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
 
     protected String taskName;
     protected boolean isMarked;
@@ -8,8 +10,16 @@ abstract class Task {
         this.isMarked = false;
     }
 
+    public void setMarked(String status) {
+        this.isMarked = status.equals("mark");
+    }
+
     public String getTaskName() {
         return this.taskName;
+    }
+
+    public boolean getIsMarked() {
+        return isMarked;
     }
 
     public String getMarkedStatus() {

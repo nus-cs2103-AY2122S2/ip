@@ -1,7 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class ExitCommand extends Command {
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.close();
         storage.write(tasks);
     }

@@ -1,3 +1,18 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ToggleCommand;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
 
     public static int parseInt(String strToIntValue) throws DukeException {
@@ -9,7 +24,7 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws DukeException {
-        Command cmd = null;
+        Command cmd;
         try {
             String[] input = fullCommand.split(" ", 2);
             switch (input[0].toLowerCase()) {

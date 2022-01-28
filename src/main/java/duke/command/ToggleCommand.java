@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class ToggleCommand extends Command {
 
     protected String cmd;
@@ -9,7 +18,7 @@ public class ToggleCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (tasks.isEmpty()) {
                 ui.printWithDivider("Your list is empty!");
@@ -21,7 +30,7 @@ public class ToggleCommand extends Command {
                 ui.showError("Invalid entry number!");
             } else {
                 Task toggleTask = tasks.get(toggleIndex);
-                toggleTask.isMarked = cmd.equals("mark");
+                toggleTask.setMarked(cmd);
                 ui.showToggleTask(toggleTask);
             }
         } catch (DukeException e) {

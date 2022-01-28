@@ -1,3 +1,9 @@
+package duke.tasklist;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,27 +27,27 @@ public class TaskList {
     }
 
 
-    protected boolean isEmpty() {
+    public boolean isEmpty() {
         return this.tasks.isEmpty();
     }
 
-    protected Task getLast() {
+    public Task getLast() {
         return this.tasks.get(this.tasks.size() - 1);
     }
 
-    protected Task get(int index) {
+    public Task get(int index) {
         return this.tasks.get(index);
     }
 
-    protected Task removeTask(int index) {
+    public Task removeTask(int index) {
         return this.tasks.remove(index);
     }
 
-    protected int size() {
+    public int size() {
         return this.tasks.size();
     }
 
-    protected void addTask(Task task) throws DukeException {
+    public void addTask(Task task) throws DukeException {
         if (this.size() < 100) {
             this.tasks.add(task);
         } else {

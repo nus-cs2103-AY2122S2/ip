@@ -1,29 +1,33 @@
+package duke.ui;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    protected final String strPadding = "      ";
+    public final String STR_PADDING = "      ";
     protected final Scanner sc = new Scanner(System.in);
 
     protected void showExit() {
         printWithDivider("Pleasure to be of service, see you soon!");
     }
 
-    protected void close() {
+    public void close() {
         this.showExit();
         sc.close();
     }
 
-    protected String readCommand() {
+    public String readCommand() {
         return sc.nextLine();
     }
 
-    protected void showToggleTask(Task task) {
+    public void showToggleTask(Task task) {
         List<String> outputs = new ArrayList<>();
         String markedString = "Nice! I've marked this task: ";
         String unmarkedString = "OK, I've unmarked this task: ";
-        String outString = task.isMarked ? markedString : unmarkedString;
+        String outString = task.getIsMarked() ? markedString : unmarkedString;
 
         outputs.add(outString);
         outputs.add("   " + task);
@@ -31,7 +35,7 @@ public class Ui {
         printWithDivider(outputs);
     }
 
-    protected void showDeletion(int listSize, Task task) {
+    public void showDeletion(int listSize, Task task) {
         List<String> outputs = new ArrayList<>();
         String ack = "Noted, I've removed this task: ";
         String taskString = (listSize == 1) ? "task" : "tasks";
@@ -44,7 +48,7 @@ public class Ui {
         printWithDivider(outputs);
     }
 
-    protected void showAddition(int listSize, Task task) {
+    public void showAddition(int listSize, Task task) {
         List<String> outputs = new ArrayList<>();
         String taskString = (listSize == 1) ? "task" : "tasks";
         String ack = "Got it, I've added this task: ";
@@ -57,15 +61,15 @@ public class Ui {
         printWithDivider(outputs);
     }
 
-    protected void showError(String errorMessage) {
+    public void showError(String errorMessage) {
         this.printWithDivider("Error: " + errorMessage);
     }
 
 
-    protected void showWelcome() {
+    public void showWelcome() {
         String botName = "Baymax";
         String greeting = "Greetings, I am " + botName + ".\n" +
-                strPadding + "What can I do you for?";
+                STR_PADDING + "What can I do you for?";
 
         this.printWithDivider(greeting);
     }
@@ -73,20 +77,20 @@ public class Ui {
     protected void printWithDivider(List<String> messages) {
         System.out.println("    ---------------------------------------------");
         for (String s : messages) {
-            System.out.println(strPadding + s);
+            System.out.println(STR_PADDING + s);
         }
         System.out.println("    ---------------------------------------------");
     }
 
-    protected void printWithDivider(StringBuilder message) {
+    public void printWithDivider(StringBuilder message) {
         System.out.println("    ---------------------------------------------");
         System.out.println(message.toString());
         System.out.println("    ---------------------------------------------");
     }
 
-    protected void printWithDivider(String message) {
+    public void printWithDivider(String message) {
         System.out.println("    ---------------------------------------------");
-        System.out.println(strPadding + message);
+        System.out.println(STR_PADDING + message);
         System.out.println("    ---------------------------------------------");
     }
 

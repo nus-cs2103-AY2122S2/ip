@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class AddCommand extends Command {
     String taskType;
     String taskDetails;
@@ -8,7 +18,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (taskType) {
         case "todo":
             try {
