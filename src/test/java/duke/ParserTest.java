@@ -4,7 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * This class tests methods from the Parser class.
+ * @author Sim Jun Heng
+ * @version CS2103T AY21/22 Sem 2
+ */
 public class ParserTest {
+
+    /**
+     *  Tests the constructor of the parser class.
+     */
     @Test
     public void testInputParser(){
         // First Testcase

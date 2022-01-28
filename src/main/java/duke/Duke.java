@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 
 /**
- * This program is used to add, list & mark the status of your current tasks.
+ * This class runs the Duke program - a task manager for users.
  * @author Sim Jun Heng
  * @version CS2103T AY21/22 Sem 2
  */

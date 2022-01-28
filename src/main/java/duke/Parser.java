@@ -1,10 +1,20 @@
 package duke;
 
+/**
+ * This class deals with making sense of the user command.
+ * @author Sim Jun Heng
+ * @version CS2103T AY21/22 Sem 2
+ */
 public class Parser {
     private String command;
     private String desc = null;
     private String date = null;
 
+    /**
+     * Creates a parser object after parsing user inputs.
+     *
+     * @param str the string entered by the user.
+     */
     public Parser(String str) {
         String[] temp = str.split(" ");
         command = temp[0];

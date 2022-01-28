@@ -11,9 +11,10 @@ public abstract class Task {
   protected String desc;
 
   /**
-   * Method Constructor
+   * Assigns desc and done to this instance.
    *
-   * @param desc the task description
+   * @param desc the task description.
+   * @param done the current completion status of the task.
    */
   public Task(String desc, boolean done) {
     this.desc = desc;
@@ -28,11 +29,14 @@ public abstract class Task {
   }
 
   /**
-   * This method is used to change the status of the Task to not done.
+   * Changes the completion status of the task to not done.
    */
   public void setAsNotDone() {
     this.done = false;
   }
 
+  /**
+   * Changes the string format of this event object.
+   */
   public abstract String changeFormat();
 }

@@ -32,6 +32,11 @@ public class Ui {
         System.out.println("bye                                             End the Duke program");
     }
 
+    /**
+     * Prints out a list of available commands in this program.
+     *
+     * @param list an arraylist containing the different tasks.
+     */
     public static void allowUserInput(TaskList list) throws DukeException, IOException {
         // Scanner Object
         Scanner scanner = new Scanner(System.in);
@@ -70,9 +75,9 @@ public class Ui {
     }
 
     /**
-     * This method handles the case where a random input is supplied by the user
+     * Handles invalid inputs.
      *
-     * @throws DukeException if add type description is empty
+     * @throws DukeException if invalid inputs are detected.
      */
     public static void notSpecified() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

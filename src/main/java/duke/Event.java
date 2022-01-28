@@ -13,10 +13,11 @@ public class Event extends Task {
   private LocalDate date;
 
   /**
-   * Method Constructor
+   * Assigns desc, date and done to this instance.
    *
-   * @param desc the task description
-   * @param date of the event
+   * @param desc the task description.
+   * @param date the date of the event.
+   * @param done the current completion status of the task.
    */
   public Event(String desc, LocalDate date, boolean done) {
     super(desc, done);
@@ -38,6 +39,11 @@ public class Event extends Task {
     return str;
   }
 
+  /**
+   * Changes the string format of this event object.
+   *
+   * @return a string in this format E,{done},{desc},{date}.
+   */
   @Override
   public String changeFormat() {
     if (super.done) {
