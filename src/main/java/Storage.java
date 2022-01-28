@@ -1,11 +1,5 @@
-import javax.sound.midi.Soundbank;
 import java.io.*;
-import java.nio.Buffer;
-import java.sql.SQLOutput;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -17,21 +11,23 @@ import java.util.Scanner;
  * @since   2022-1-25
  */
 
-public class FileAction {
+public class Storage {
     protected String filepath;
     protected FileWriter fileWriter;
     protected FileReader fileReader;
     protected BufferedWriter writer;
     protected BufferedReader reader;
+    protected TaskList tasks;
 
-    public FileAction(String path) {
+    public Storage(String path, TaskList tasks) {
         filepath = path;
+        this.tasks = tasks;
     }
 
     /**
      * Saves content of Tasks into given file
      */
-    public void saveFile(String cont) throws IOException {
+    public void saveTask(String cont) throws IOException {
         try {
             writer.write(cont);
         } catch (IOException e) {
@@ -77,10 +73,21 @@ public class FileAction {
     }
 
     /**
+     * Saves the current instances of Task items in Tasks list into
+     * provided text file
+     */
+    public void saveAllTasks(TaskList tasks) throws IOException {
+        startWriter();
+        for (Task task : tasks.getTasks()) {
+            saveTask(task.toString());
+        }
+    }
+
+    /**
      * Reads tasks saved in the hard drive file provided by the user and
      * places Task objects into the current DukeList
      */
-    public ArrayList<Task> readTasksFromFile() throws FileNotFoundException {
+    public void readTasksFromFile() throws FileNotFoundException {
         ArrayList<Task> readTasks = new ArrayList<>();
         String line = "";
         fileReader = new FileReader(filepath);
@@ -91,10 +98,10 @@ public class FileAction {
                 String[] arrOfString = line.split(" - ");
                 readTasks.add(createTaskFromText(arrOfString));
             }
+            tasks.setTasks(readTasks);
         } catch (IOException e) {
             System.out.println("Error in reading tasks from file!");
         }
-        return readTasks;
     }
 
     /**

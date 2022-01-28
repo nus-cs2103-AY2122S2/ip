@@ -42,7 +42,7 @@ public class Deadline extends Task {
      * Setting Deadline object's date it should end by
      */
     public void setStringToLocalDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         setBy(localDate);
     }

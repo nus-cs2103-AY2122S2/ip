@@ -40,7 +40,7 @@ public class Event extends Task {
      * Setting Event object's date it is held on
      */
     public void setStringToLocalDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         setAt(localDate);
     }
