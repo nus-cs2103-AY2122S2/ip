@@ -25,7 +25,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 return new PrintCommand("Please enter a valid number!");
             }
-        } else if ((input.startsWith("delete ") && input.length() == 8 || input.length() == 9)) {
+        } else if ((input.startsWith("delete ") && (input.length() == 8 || input.length() == 9))) {
             try {
                 int i = Integer.parseInt(input.split("\\s+")[1]) - 1;
                 return new DeleteCommand(i);
@@ -34,7 +34,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 return new PrintCommand("Please enter a valid number!");
             }
-        } else if ((input.startsWith("search ") && input.length() > 7)) {
+        } else if ((input.startsWith("find ") && input.length() > 5)) {
             String prefix = input.split("\\s+")[1];
             return new SearchCommand(prefix);
         } else {
