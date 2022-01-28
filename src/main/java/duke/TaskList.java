@@ -17,6 +17,7 @@ public class TaskList {
             System.out.println("Item not found in list.");
         }
     }
+
     static void list() {
         ArrayList<Task> taskArrayList = Storage.taskList;
         System.out.println("Here are the tasks in your list: " + "\n");
