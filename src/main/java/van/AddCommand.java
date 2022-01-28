@@ -12,4 +12,9 @@ public class AddCommand implements Command {
     ui.taskMessage(newTask, taskList.getTaskCount());
     return false;
   }
+
+  @Override
+  public String toString() {
+    return newTask.getStatus();
+  }
 }
