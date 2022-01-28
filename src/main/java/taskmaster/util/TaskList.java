@@ -150,4 +150,23 @@ public class TaskList {
     public boolean isNumberOutOfRange(int i) {
         return (i < 0 || i > currentSize);
     }
+
+    /**
+     * Returns true or false depending on whether
+     * the task list is empty.
+     * @return true if empty, false otherwise.
+     */
+
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
+    /**
+     * Delete all tasks in the task list.
+     * For testing purposes.
+     */
+
+    public void deleteAllTasks() {
+        taskList.clear();
+    }
 }

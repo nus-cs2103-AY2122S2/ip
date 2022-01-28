@@ -1,17 +1,11 @@
-import Taskmaster.Commands.AddCommands;
-import Taskmaster.Commands.DeleteCommands;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.EventTask;
-
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import Taskmaster.util.TaskList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+
+import taskmaster.commands.DeleteCommands;
+import taskmaster.task.TodoTask;
+import taskmaster.util.TaskList;
 
 public class DeleteCommandsTest {
     private final TaskList TASKLIST = new TaskList();
@@ -20,10 +14,9 @@ public class DeleteCommandsTest {
     @DisplayName("Test Delete 1")
     public void testDelete1Task() {
         TASKLIST.add(new TodoTask("Hello World"));
-        int initialSize = TASKLIST.currentSize;
         DeleteCommands command = new DeleteCommands("delete 1",TASKLIST);
         command.execute();
-        assertTrue(initialSize != TASKLIST.currentSize);
+        assertTrue(TASKLIST.isEmpty());
     }
 
     @Test
@@ -34,15 +27,13 @@ public class DeleteCommandsTest {
         TASKLIST.add(new TodoTask("Mummy"));
         TASKLIST.add(new TodoTask("Goomba"));
         TASKLIST.add(new TodoTask("Oi"));
-        int initialSize = TASKLIST.currentSize;
         DeleteCommands command = new DeleteCommands("delete 1",TASKLIST);
         command.execute();
         command.execute();
         command.execute();
         command.execute();
         command.execute();
-        assertTrue(initialSize != TASKLIST.currentSize);
-        assertEquals(TASKLIST.currentSize,0);
+        assertTrue(TASKLIST.isEmpty());
     }
 
 

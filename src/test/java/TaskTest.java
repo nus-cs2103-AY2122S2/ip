@@ -1,21 +1,15 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.EventTask;
-import Taskmaster.Task.Task;
-import Taskmaster.util.TaskList;
-
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import Taskmaster.util.TaskList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
+import taskmaster.task.TodoTask;
+import taskmaster.util.TaskList;
 
-import java.time.LocalDateTime;
 
 
 public class TaskTest {

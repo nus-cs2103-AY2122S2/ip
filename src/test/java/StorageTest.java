@@ -1,7 +1,3 @@
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.util.Storage;
-import Taskmaster.util.TaskList;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
@@ -13,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.TodoTask;
+import taskmaster.util.Storage;
+import taskmaster.util.TaskList;
 
 public class StorageTest {
     private final Storage STORAGE = new Storage();
