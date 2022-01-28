@@ -64,6 +64,6 @@ public class Parser {
      * @return a nicely formatted String.
      */
     public static String formatMsg(String msg) {
-        return ("\n" + msg + "\n");
+        return (msg + "\n");
     }
 }

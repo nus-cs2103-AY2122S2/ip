@@ -55,8 +55,8 @@ public class AddEventCommand extends Command<String> {
             // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
-            Ui.setDukeResponseError(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
-            throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
+            Ui.setDukeResponseError(Parser.formatMsg("OOPS!!! The description of an event cannot be empty."));
+            throw new DukeException(Parser.formatMsg("OOPS!!! The description of an event cannot be empty."));
         } catch (IOException e) {
             throw new DukeException(Parser.formatMsg("IOException caught") + e);
         }

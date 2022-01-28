@@ -39,8 +39,8 @@ public class DeleteCommand extends Command<Integer> {
             Ui.setDukeResponse(Parser.formatMsg("Noted. I've removed this task:\n" + deletedTask
                     + "\nNow you have " + toDoList.size() + " tasks in the list."));
         } catch (IndexOutOfBoundsException e) {
-            Ui.setDukeResponseError("☹ OOPS!!! Item to delete does not exist.");
-            throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to delete does not exist."));
+            Ui.setDukeResponseError("OOPS!!! Item to delete does not exist.");
+            throw new DukeException(Parser.formatMsg("OOPS!!! Item to delete does not exist."));
         }
     }
 }
