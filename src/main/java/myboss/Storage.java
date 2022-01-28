@@ -9,14 +9,29 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a storage with specified file path.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a Storage Object. Creates directory and file as specified in file path if
+     * it does not already exist.
+     *
+     * @param filePath path to file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         createDirAndFileIfNonExistent();
     }
 
+    /**
+     * Appends the specified task to the storage file.
+     *
+     * @param task task specified.
+     * @return whether the task was appended successfully.
+     */
     public boolean appendTaskToFile(Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -42,6 +57,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the storage file.
+     *
+     * @return whether the clear was successful.
+     */
     public boolean clearTaskFile() {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -54,6 +74,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates directory and file as in the file path if it does not already exist.
+     *
+     * @return whether the directory and file was created successfully.
+     */
     public boolean createDirAndFileIfNonExistent() {
         try {
             File fileObj = new File(filePath);
@@ -71,6 +96,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks from storage file.
+     *
+     * @return the ArrayList of tasks loaded from storage file.
+     */
     public ArrayList<Task> loadTaskListFromFile() {
         // get taskList from file
         ArrayList<Task> tempTaskList = new ArrayList<>();
@@ -103,6 +133,11 @@ public class Storage {
         return tempTaskList;
     }
 
+    /**
+     * Overwrites the storage file with the specified list of tasks.
+     *
+     * @param taskList list of tasks to be written into the storage file.
+     */
     public void updateFile(ArrayList<Task> taskList) {
         createDirAndFileIfNonExistent();
         clearTaskFile();

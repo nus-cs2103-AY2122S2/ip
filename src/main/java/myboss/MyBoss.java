@@ -2,17 +2,29 @@ package myboss;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the Personal Assistant Chatbot that helps a person to keep track of various things.
+ * A MyBoss Object corresponds to a Personal Assistant Chatbot.
+ */
 public class MyBoss {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a MyBoss Object with the specified file path for saving tasks.
+     *
+     * @param filePath path to file where tasks will be saved.
+     */
     public MyBoss(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadTaskListFromFile());
     }
 
+    /**
+     * Logic of the Personal Assistant Chatbot that receives input and acts accordingly.
+     */
     public void run() {
         ui.outputGreeting();
 

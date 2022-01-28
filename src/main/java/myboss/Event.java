@@ -4,10 +4,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Represents a task with a specified date and time range of the task. An Event Object
+ * corresponds to a task with a specified date and time range.
+ */
 public class Event extends Task {
     String timeRange;
     LocalDate eventDate;
 
+    /**
+     * Creates an Event Object with the specified task name and datetime.
+     *
+     * @param taskName name of the task.
+     * @param dateTime date and time of the task.
+     */
     public Event(String taskName, String dateTime) {
         super(taskName, "E");
         String[] dateTimeSplit = dateTime.split(" ");
@@ -15,6 +25,13 @@ public class Event extends Task {
         this.timeRange = dateTimeSplit[1];
     }
 
+    /**
+     * Creates an Event Object with the specified task name, datetime and whether task is done.
+     *
+     * @param taskName name of the task.
+     * @param dateTime date and time range of the task.
+     * @param isDone whether the task is done.
+     */
     public Event(String taskName, String dateTime, boolean isDone) {
         super(taskName, "E", isDone);
         String[] dateTimeSplit = dateTime.split(" ");
@@ -22,12 +39,26 @@ public class Event extends Task {
         this.timeRange = dateTimeSplit[1];
     }
 
-    public Event(String taskName, String dateTime, String timeRange, boolean isDone) {
+    /**
+     * Creates an Event Object with the specified task name, date, time range and whether task is done.
+     *
+     * @param taskName name of the task.
+     * @param date date of the task.
+     * @param timeRange time range of the task.
+     * @param isDone whether the task is done.
+     */
+    public Event(String taskName, String date, String timeRange, boolean isDone) {
         super(taskName, "E", isDone);
-        this.eventDate = LocalDate.parse(dateTime);
+        this.eventDate = LocalDate.parse(date);
         this.timeRange = timeRange;
     }
 
+    /**
+     * Returns the string output of an Event Object when marked as done or not done.
+     *
+     * @param isDone whether task is to be marked as done or not done.
+     * @return string output of an Event Object when marked as done or not done.
+     */
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
