@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  * This class encapsulates the information necessary for an Event task.
  */
 
-public class EventTask extends Task{
+public class EventTask extends Task {
     /** Time and Date of Event. **/
-    LocalDateTime eventDate;
+    private LocalDateTime eventDate;
 
     /**
      * Constructor for an EventTask.
@@ -46,10 +46,8 @@ public class EventTask extends Task{
     @Override
     public String saveToFileFormat() {
         String result = "E";
-        String mark = this.isCompleted? "1" : "0";
+        String mark = this.isCompleted ? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return result + " | " + mark + " | " + taskName + " | " + eventDate.format(oldFormat);
     }
-
-    
 }

@@ -16,6 +16,11 @@ public class Taskmaster {
         this.ui = new UserInterface();
     }
 
+    /**
+     * The main method of the taskmaster application.
+     * @param args The input arguments.
+     */
+
     public static void main(String[] args) {
         Taskmaster taskMaster = new Taskmaster();
         taskMaster.ui.runChatBot();

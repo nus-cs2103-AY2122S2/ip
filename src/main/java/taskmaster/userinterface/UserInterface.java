@@ -1,15 +1,13 @@
 package taskmaster.userinterface;
 
-import taskmaster.util.TaskList;
-import taskmaster.util.Storage;
+import java.util.Scanner;
 
 import taskmaster.commands.AddCommands;
 import taskmaster.commands.DeleteCommands;
 import taskmaster.commands.MarkCommands;
-
 import taskmaster.exception.DukeExceptions;
-
-import java.util.Scanner;
+import taskmaster.util.Storage;
+import taskmaster.util.TaskList;
 
 /**
  * This class encapsulates the UserInterface which interacts with
@@ -25,7 +23,7 @@ public class UserInterface {
     protected Storage storage;
 
     /** Taskmaster's logo. **/
-    protected final String LOGO = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
+    protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
                                     + "  |||||\n" + "  |||||\n";
 
     /**
@@ -42,7 +40,7 @@ public class UserInterface {
      */
 
     private void displayOpeningMessage() {
-        System.out.println(LOGO);
+        System.out.println(logo);
         System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
         System.out.println("Okay, what do you want?\n");
     }
@@ -133,50 +131,49 @@ public class UserInterface {
         String firstWord = stringIntoParts[0];
 
         switch (firstWord) {
-            case "list":
-                taskList.list();
-                break;
+        case "list":
+            taskList.list();
+            break;
 
-            case "mark": case "unmark":
-                MarkCommands markCommand = new MarkCommands(input,taskList);
-                markCommand.execute();
-                break;
+        case "mark": case "unmark":
+            MarkCommands markCommand = new MarkCommands(input, taskList);
+            markCommand.execute();
+            break;
 
-            case "delete":
-                DeleteCommands deleteCommand = new DeleteCommands(input,taskList);
-                deleteCommand.execute();
-                break;
+        case "delete":
+            DeleteCommands deleteCommand = new DeleteCommands(input, taskList);
+            deleteCommand.execute();
+            break;
 
-            case "todo":  case "deadline": case "event":
-                AddCommands addCommand = new AddCommands(input, taskList);
-                addCommand.execute();
-                break;
+        case "todo": case "deadline": case "event":
+            AddCommands addCommand = new AddCommands(input, taskList);
+            addCommand.execute();
+            break;
 
-            case "find":
-                try {
-                    if (stringIntoParts.length == 1) {
-                        throw new DukeExceptions("ERROR: find command requires a parameter to specify"
+        case "find":
+            try {
+                if (stringIntoParts.length == 1) {
+                    throw new DukeExceptions("ERROR: find command requires a parameter to specify"
                                                     + " what keyword to find");
-                    }
-
-                    String toFind = input.substring(input.indexOf(" ") + 1);
-                    taskList.find(toFind);
-
-                } catch (DukeExceptions e) {
-                    System.out.println(e.getMessage());
                 }
-                break;
+                String toFind = input.substring(input.indexOf(" ") + 1);
+                taskList.find(toFind);
+            } catch (DukeExceptions e) {
+                System.out.println(e.getMessage());
+            }
 
-            case "bye":
-                return;
+            break;
 
-            case "help":
-                displayListOfCommand();
-                break;
+        case "bye":
+            return;
 
-            default:
-                displayInvalidCommand(input);
-                break;
+        case "help":
+            displayListOfCommand();
+            break;
+
+        default:
+            displayInvalidCommand(input);
+            break;
         }
 
     }
@@ -201,11 +198,11 @@ public class UserInterface {
      */
 
     public void runChatBot() {
-            displayOpeningMessage();
-            loadExistingFile();
-            displayMenu();
-            displayByeMessage();
-            updateList();
+        displayOpeningMessage();
+        loadExistingFile();
+        displayMenu();
+        displayByeMessage();
+        updateList();
     }
 
 

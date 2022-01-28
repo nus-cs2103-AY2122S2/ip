@@ -1,8 +1,9 @@
 package taskmaster.commands;
 
 import taskmaster.exception.DukeExceptions;
-import taskmaster.util.TaskList;
 import taskmaster.task.Task;
+import taskmaster.util.TaskList;
+
 
 /*
  * This class inherits from the Command class.
@@ -11,7 +12,7 @@ import taskmaster.task.Task;
  */
 
 public class DeleteCommands extends Commands {
-    private final TaskList TASKLIST;
+    private TaskList taskList;
 
     /**
      * Constructor for DeleteCommands
@@ -22,7 +23,7 @@ public class DeleteCommands extends Commands {
 
     public DeleteCommands(String command, TaskList taskList) {
         super(command);
-        this.TASKLIST = taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -46,7 +47,7 @@ public class DeleteCommands extends Commands {
             int index = Integer.parseInt(stringIntoParts[1]);
 
             //If index is out of range, throw illegal argument exception
-            if (TASKLIST.isNumberOutOfRange(index)) {
+            if (taskList.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! "
                                             + "Number has to in the range of the list\n");
             }
@@ -70,11 +71,11 @@ public class DeleteCommands extends Commands {
      */
 
     private void deleteTask(int index) {
-        Task selectedTask = TASKLIST.get(index - 1);
+        Task selectedTask = taskList.get(index - 1);
         System.out.println("YES! I've removed this task and soon I'll remove you as well!:\n");
         printTask(selectedTask);
-        TASKLIST.delete(index - 1);
-        TASKLIST.printCurrentSize();
+        taskList.delete(index - 1);
+        taskList.printCurrentSize();
     }
 
     /**

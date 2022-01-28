@@ -1,15 +1,16 @@
 package taskmaster.commands;
 
-import taskmaster.exception.DukeExceptions;
-import taskmaster.util.TaskList;
-import taskmaster.task.Task;
-import taskmaster.task.TodoTask;
-import taskmaster.task.DeadlineTask;
-import taskmaster.task.EventTask;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import taskmaster.exception.DukeExceptions;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
+import taskmaster.task.Task;
+import taskmaster.task.TodoTask;
+import taskmaster.util.TaskList;
+
 
 /*
  * This class inherits from the Command class.
@@ -18,7 +19,7 @@ import java.time.format.DateTimeParseException;
 
 public class AddCommands extends Commands {
     /** TaskList contains all the task. **/
-    private final TaskList TASKLIST;
+    private TaskList taskList;
 
     /**
      * Constructor for AddCommands.
@@ -29,7 +30,7 @@ public class AddCommands extends Commands {
 
     public AddCommands(String command, TaskList taskList) {
         super(command);
-        this.TASKLIST = taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -49,7 +50,6 @@ public class AddCommands extends Commands {
                         + "Eg todo eat, deadline eat food /by 12pm,"
                         + "event concert /at 8pm\n");
             }
-
             String taskName = command.substring(command.indexOf(" "));
 
             if (firstWord.equals("todo")) {
@@ -60,7 +60,6 @@ public class AddCommands extends Commands {
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     /**
@@ -95,15 +94,15 @@ public class AddCommands extends Commands {
                     throw new DukeExceptions("Deadline tasks require /by specify the deadline."
                                             + "Eg deadline eat food /by 12pm\n");
                 }
-                    addDeadlineTask(taskNameWithoutBack, dateTime);
-                } else {
-                    //Handle the case of event task having no /at
-                    if (!temp.contains("at")) {
-                        throw new DukeExceptions("Event tasks require /at specify the time of occurrence."
+                addDeadlineTask(taskNameWithoutBack, dateTime);
+            } else {
+                //Handle the case of event task having no /at
+                if (!temp.contains("at")) {
+                    throw new DukeExceptions("Event tasks require /at specify the time of occurrence."
                                                     + "music concert /at 8pm\n");
-                    }
-                    addEventTask(taskNameWithoutBack, dateTime);
                 }
+                addEventTask(taskNameWithoutBack, dateTime);
+            }
 
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
@@ -124,7 +123,7 @@ public class AddCommands extends Commands {
 
     private void addTodoTask(String taskName) {
         TodoTask newTask = new TodoTask(taskName);
-        TASKLIST.add(newTask);
+        taskList.add(newTask);
         printTask(newTask);
     }
 
@@ -135,9 +134,9 @@ public class AddCommands extends Commands {
      * @param dateTime Deadline the task is due by.
      */
 
-    private void addDeadlineTask(String taskName, LocalDateTime dateTime){
+    private void addDeadlineTask(String taskName, LocalDateTime dateTime) {
         DeadlineTask newTask = new DeadlineTask(taskName, dateTime);
-        TASKLIST.add(newTask);
+        taskList.add(newTask);
         printTask(newTask);
     }
 
@@ -148,9 +147,9 @@ public class AddCommands extends Commands {
      * @param dateTime The date and time the task is occurring at.
      */
 
-    private void addEventTask(String taskName, LocalDateTime dateTime){
+    private void addEventTask(String taskName, LocalDateTime dateTime) {
         EventTask newTask = new EventTask(taskName, dateTime);
-        TASKLIST.add(newTask);
+        taskList.add(newTask);
         printTask(newTask);
     }
 
@@ -166,7 +165,7 @@ public class AddCommands extends Commands {
         System.out.println("Quit ordering me around!");
         System.out.println("I've added this task to our list:");
         System.out.println("    " + newTask.toString());
-        TASKLIST.printCurrentSize();
+        taskList.printCurrentSize();
     }
 
     /**

@@ -1,32 +1,34 @@
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.time.LocalDateTime;
-import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.TodoTask;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
 public class StorageTest {
-    private final Storage STORAGE = new Storage();
-    private final TaskList TASKLIST = new TaskList();
+    private Storage storage = new Storage();
+    private TaskList taskList = new TaskList();
 
     private void setUpParameters() {
         StorageTest testStorage = new StorageTest();
-        testStorage.STORAGE.loadFile(TASKLIST);
+        testStorage.storage.loadFile(taskList);
     }
 
     private void populateTaskList() {
-        TASKLIST.add(new TodoTask("Donkey Kong"));
+        taskList.add(new TodoTask("Donkey Kong"));
         LocalDateTime currentTime = LocalDateTime.now();
-        TASKLIST.add(new DeadlineTask("Supper", currentTime));
+        taskList.add(new DeadlineTask("Supper", currentTime));
     }
 
 
@@ -54,25 +56,20 @@ public class StorageTest {
         populateTaskList();
         try {
             File fileToBeLoaded = new File(Paths.get("").toAbsolutePath() + "/data/duke.txt");
-            this.STORAGE.updateList(TASKLIST);
+            this.storage.updateList(taskList);
             String contentInFile = "";
             String st = "";
             BufferedReader br = new BufferedReader(new FileReader(fileToBeLoaded));
             while ((st = br.readLine()) != null) {
                 contentInFile = contentInFile.concat(st + "\n");
             }
-            String expectedString = TASKLIST.listTasksInTextFormat() + "\n";
+            String expectedString = taskList.listTasksInTextFormat() + "\n";
             assertEquals(expectedString, contentInFile);
         } catch (IOException e) {
             System.out.println("Unable to write to file");
         }
 
-
-
-
     }
 
-
-
-
 }
+
