@@ -74,6 +74,22 @@ public abstract class Task {
     }
 
     /**
+     * Returns a string presentation of the action in the Task as specified by action.
+     * @return - the string representation of the action required for the task
+     */
+    public String getAction() {
+        return this.action;
+    }
+
+    /**
+     * Returns a string representation of the type of the task as specified in type
+     * @return - the string representation of the type of the task
+     */
+    public String getType() {
+        return this.type;
+    }
+
+    /**
      * Returns a string representation of the date of the task. If the date is saved as a
      * LocalDate object, it is returned as the format "d MMM yyyy". Otherwise the raw
      * dateString is returned
