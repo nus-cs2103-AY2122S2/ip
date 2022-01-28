@@ -68,6 +68,10 @@ public class Parser {
                 Storage.updateTaskFile(tasks);
                 break;
 
+            case "find":
+                replyMessage = tasks.find(commandDetails);
+                break;
+                
             default:
                 replyMessage = Ui.UNKNOWN_COMMAND_MESSAGE;
             }
