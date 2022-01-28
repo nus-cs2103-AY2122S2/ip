@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This class is responsible for parsing user inputs and
+ * returns a ParsedAnswer object that contains information that has been parsed by this class.
+ */
 public class Parser {
     private String input;
 

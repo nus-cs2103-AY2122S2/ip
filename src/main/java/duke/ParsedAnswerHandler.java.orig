@@ -3,11 +3,14 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
 
 /**
  * This class receives a ParsedAnswer object and execute commands based on information
  * from the object.
  */
+>>>>>>> branch-A-JavaDoc
 
 public class ParsedAnswerHandler {
     ParsedAnswer pa;

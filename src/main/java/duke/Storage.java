@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is a class that is responsible for storing the tasks into Duke.
+ */
 public class Storage {
     private final String homeDir;
     public static ArrayList<Task> taskList;
