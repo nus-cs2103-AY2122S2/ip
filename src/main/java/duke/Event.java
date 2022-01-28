@@ -28,7 +28,7 @@ public class Event extends Task {
      * @return Event object
      * @throws IOException
      */
-    public static Event setEvent(String input) throws IOException {
+    public static Event setEvent(String input) {
         String eventName;
         String eventAt;
 
