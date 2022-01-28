@@ -9,8 +9,8 @@ public enum TaskType {
     private final String abbreviation;
 
     /**
-     * Constructor to initialize an instance of enumeration type
-     * (task type) with abbreviation field.
+     * Constructor to initialize an instance of TaskType enumeration
+     * with abbreviation field.
      *
      * @param abbreviation Abbreviation of the task type
      */

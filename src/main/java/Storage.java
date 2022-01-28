@@ -12,8 +12,8 @@ public class Storage {
      * Constructor to initialize an instance of Storage class with folder
      * name and file name.
      *
-     * @param folderName Folder name of the storage file
-     * @param fileName Name of the storage file
+     * @param folderName Folder name of the data file
+     * @param fileName File name of the data file
      * @throws DukeException If the directory cannot be initialised
      * @throws IOException If the storage file cannot be initialised
      */
@@ -23,11 +23,11 @@ public class Storage {
     }
 
     /**
-     * Initializes the directory of the storage file.
+     * Initializes the directory of the data file.
      * Creates the directory if it does not exist.
      *
-     * @param folderName Folder name of the storage file
-     * @return The file that represents the relative path of the directory
+     * @param folderName Folder name of the data file
+     * @return The relative path of the directory
      * @throws DukeException If the directory cannot be initialised
      */
     private File initialiseDirectory(String folderName) throws DukeException {
@@ -46,13 +46,13 @@ public class Storage {
     }
 
     /**
-     * Initializes the storage file.
-     * Creates the storage file if it does not exist.
+     * Initializes the data file.
+     * Creates the data file if it does not exist.
      *
      * @param directory Relative path of the directory
-     * @param fileName Name of the storage file
-     * @return The storage file
-     * @throws IOException If the storage file cannot be initialised
+     * @param fileName File name of the data file
+     * @return The data file
+     * @throws IOException If the data file cannot be initialised
      */
     private File initialiseFile(File directory, String fileName) throws IOException {
         File file = new File(directory + "/" + fileName);
@@ -70,14 +70,14 @@ public class Storage {
     }
 
     /**
-     * Loads all the tasks in the storage file to the task list.
+     * Loads all the tasks in the data file to the task list.
      *
-     * @return The list containing the tasks
-     * @throws IOException If the storage file or task cannot be read
+     * @return The task list containing the tasks
+     * @throws IOException If the data file or task cannot be read
      * @throws DukeException If an invalid type of task is found
      */
-    public List<Task> loadTasksFromFile() throws DukeException, IOException {
-        List<Task> tasks = new ArrayList<>();
+    public TaskList loadTasksFromFile() throws IOException, DukeException {
+        TaskList taskList = new TaskList();
 
         FileReader fileReader = new FileReader(dataFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -91,15 +91,15 @@ public class Storage {
 
             if (type.equals(TaskType.TODO.getAbbreviation())) {
                 Task todoTask = new ToDo(description, isDone);
-                tasks.add(todoTask);
+                taskList.addTask(todoTask);
             } else if (type.equals(TaskType.DEADLINE.getAbbreviation())) {
                 String dateTime = taskDetails[3].trim();
                 Task deadlineTask = new Deadline(description, dateTime, isDone);
-                tasks.add(deadlineTask);
+                taskList.addTask(deadlineTask);
             } else if (type.equals(TaskType.EVENT.getAbbreviation())) {
                 String dateTime = taskDetails[3].trim();
                 Task eventTask = new Event(description, dateTime, isDone);
-                tasks.add(eventTask);
+                taskList.addTask(eventTask);
             } else {
                 // Error detection for any invalid type of tasks found in the
                 // storage file. This should not happen since the user is only
@@ -110,21 +110,21 @@ public class Storage {
 
         bufferedReader.close();
 
-        return tasks;
+        return taskList;
     }
 
     /**
-     * Saves all the tasks in the task list to the storage file.
+     * Saves all the tasks in the task list to the data file.
      *
-     * @param tasks List containing the tasks to be saved
-     * @throws IOException If the tasks cannot be saved
+     * @param taskList Task list containing the tasks to be saved
+     * @throws IOException If the tasks cannot be saved to the data file
      */
-    public void saveTasksToFile(List<Task> tasks) throws IOException {
+    public void saveTasksToFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(dataFile,false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < taskList.getNumOfTasks(); i++) {
+            Task task = taskList.getTask(i);
             bufferedWriter.write(task.saveFormat() + System.lineSeparator());
         }
 
