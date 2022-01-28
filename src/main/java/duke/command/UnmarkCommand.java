@@ -1,7 +1,14 @@
-public class DeleteCommand extends Command{
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
+public class UnmarkCommand extends Command{
     private int index;
-    public DeleteCommand(int index){
-        super("delete");
+    public UnmarkCommand(int index){
+        super("unmark");
         this.index = index;
     }
 
@@ -10,10 +17,9 @@ public class DeleteCommand extends Command{
         if(index < 0 || index >= tasks.size()){
             System.out.println("Invalid index, please try again.");
         } else {
-            Task task = tasks.remove(index);
-            ui.taskDeleteMessage(task, tasks.size());
+            Task task = tasks.unmark(index);
+            ui.taskUnmarkedMessage(task);
             storage.save(tasks.list());
         }
     }
 }
-

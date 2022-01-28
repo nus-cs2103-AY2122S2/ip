@@ -1,3 +1,6 @@
+package duke.ui;
+
+import duke.task.Task;
 import java.util.List;
 
 public class Ui {
