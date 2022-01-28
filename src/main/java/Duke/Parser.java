@@ -1,12 +1,13 @@
 package Duke;
 
 import Duke.command.*;
+import Duke.enums.CommandEnums;
 import Duke.task.Event;
 import Duke.task.Deadline;
 import Duke.task.Todo;
 
-import exceptions.DukeException;
-import exceptions.InvalidCommandException;
+import Duke.exceptions.DukeException;
+import Duke.exceptions.InvalidCommandException;
 
 /**
  * Utility class to parse inputs that are retrieved from user.
@@ -24,7 +25,7 @@ public class Parser {
 		Command command = null;
 
 		try {
-			enums.Command inputCommand = enums.Command.valueOf(commandStr.toUpperCase());
+			CommandEnums inputCommandEnums = CommandEnums.valueOf(commandStr.toUpperCase());
 
 			int sizeOfInputArr = tokens.length;
 
@@ -36,7 +37,7 @@ public class Parser {
 			name = name.concat(tokens[sizeOfInputArr - 1]); // to eliminate white space at the end
 
 			try {
-				switch (inputCommand) {
+				switch (inputCommandEnums) {
 				case BYE:
 					command = new ByeCommand();
 					break;

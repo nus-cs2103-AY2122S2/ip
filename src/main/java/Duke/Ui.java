@@ -54,4 +54,11 @@ public class Ui {
 	public void close() {
 		sc.close();
 	}
+
+	/**
+	 * Prints a message to request for user to try again.
+	 */
+	public void tryAgain() {
+		System.out.println("\t Try again.");
+	}
 }

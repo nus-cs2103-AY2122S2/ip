@@ -16,7 +16,7 @@ public class Duke {
 	 */
 	public Duke() {
 		this.save = new Save();
-		this.taskList = new TaskList(save.savedTasks());
+		this.taskList = save.taskList();
 		this.ui = new Ui();
 	}
 
@@ -29,10 +29,16 @@ public class Duke {
 
 		while (isRunning) {
 			String command = this.ui.readCommand();
-			Command c = Parser.parse(command);
-			c.execute(this.taskList, this.ui, this.save);
-			if (c instanceof ByeCommand) {
-				isRunning = false;
+			try {
+				Command c = Parser.parse(command);
+				c.execute(this.taskList, this.ui, this.save);
+				if (c instanceof ByeCommand) {
+					isRunning = false;
+				}
+			} catch (NullPointerException e) {
+				ui.showLine();
+				ui.tryAgain();
+				ui.showLine();
 			}
 		}
 		this.save.save();

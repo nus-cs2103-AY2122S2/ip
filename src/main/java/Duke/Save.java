@@ -4,8 +4,8 @@ import Duke.task.Task;
 import Duke.task.Todo;
 import Duke.task.Deadline;
 import Duke.task.Event;
-import enums.Command;
-import enums.Type;
+import Duke.enums.CommandEnums;
+import Duke.enums.Type;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +20,8 @@ import java.util.Scanner;
 public class Save {
 	private static final String DUKE_PATHNAME = "src/main/java/Duke/data/duke.txt";
 	private ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
-	private ArrayList<Task> tasks = new ArrayList<>(100);
+	//	private ArrayList<Task> tasks = new ArrayList<>(100);
+	private TaskList tasks = new TaskList(100);
 	private int count;
 
 	/**
@@ -149,7 +150,7 @@ public class Save {
 			String[] tokens = s.split(" ");
 			String command = tokens[0];
 
-			Command inputCommand = Command.valueOf(command.toUpperCase());
+			CommandEnums inputCommandEnums = CommandEnums.valueOf(command.toUpperCase());
 
 			int sizeOfInputArr = tokens.length;
 
@@ -160,16 +161,16 @@ public class Save {
 			}
 			name = name.concat(tokens[sizeOfInputArr - 1]); // to eliminate white space at the end
 
-			switch (inputCommand) {
+			switch (inputCommandEnums) {
 			case MARK:
 				String markStr = tokens[1];
 				int taskNumMark = Integer.parseInt(markStr) - 1;
-				this.tasks.get(taskNumMark).mark();
+				this.tasks.getTask(taskNumMark).mark();
 				break;
 			case UNMARK:
 				String unmarkStr = tokens[1];
 				int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
-				tasks.get(taskNumUnmark).unmark();
+				tasks.getTask(taskNumUnmark).unmark();
 				break;
 			case TODO:
 				Todo todo = new Todo(name);
@@ -205,8 +206,8 @@ public class Save {
 	 */
 	public String simplify() {
 		String s = "";
-		for (int i = 0; i < this.tasks.size(); i++) {
-			Task task = this.tasks.get(i);
+		for (int i = 0; i < this.tasks.getCount(); i++) {
+			Task task = this.tasks.getTask(i);
 			if (task instanceof Todo) {
 				Todo todo = (Todo) task;
 				s = s + "T / " + (todo.getStatus().equals("[X]") ? "1 / " : "0 / ") + todo.getName();
@@ -229,7 +230,7 @@ public class Save {
 	 *
 	 * @return List of saved tasks.
 	 */
-	public ArrayList<Task> savedTasks() {
+	public TaskList taskList() {
 		return this.tasks;
 	}
 }

@@ -1,5 +1,5 @@
-package enums;
+package Duke.enums;
 
-public enum Command {
+public enum CommandEnums {
 	TODO, EVENT, DEADLINE, MARK, UNMARK, DELETE, LIST, BYE, FIND
 }

@@ -12,25 +12,22 @@ class TaskListTest {
 
 	@Test
 	void add() {
-		ArrayList<Task> taskArrList = new ArrayList<Task>(100);
-		TaskList taskList = new TaskList(taskArrList);
+		TaskList taskList = new TaskList(100);
 		TaskStub taskStub = new TaskStub("Hello");
 		taskList.add(taskStub);
-		assertEquals(1, taskArrList.size());
+		assertEquals(1, taskList.getCount());
 	}
 
 	@Test
 	void delete() {
-		ArrayList<Task> taskArrList = new ArrayList<Task>(100);
-		TaskList taskList = new TaskList(taskArrList);
+		TaskList taskList = new TaskList(100);
 		taskList.delete(0);
-		assertEquals(0, taskArrList.size());
+		assertEquals(0, taskList.getCount());
 	}
 
 	@Test
 	void getTask() {
-		ArrayList<Task> taskArrList = new ArrayList<Task>(100);
-		TaskList taskList = new TaskList(taskArrList);
+		TaskList taskList = new TaskList(100);
 		TaskStub taskStub = new TaskStub("Hello");
 		taskList.add(taskStub);
 		assertEquals("Hello", taskList.getTask(0).getName());
@@ -38,8 +35,7 @@ class TaskListTest {
 
 	@Test
 	void getCount() {
-		ArrayList<Task> taskArrList = new ArrayList<Task>(100);
-		TaskList taskList = new TaskList(taskArrList);
+		TaskList taskList = new TaskList(100);
 		assertEquals(0, taskList.getCount());
 	}
 }

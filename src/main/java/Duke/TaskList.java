@@ -9,16 +9,18 @@ import Duke.task.Task;
  */
 public class TaskList {
 	ArrayList<Task> tasks;
+	int size;
 	int count;
 
 	/**
-	 * Constructor to create a list of tasks with a provided ArrayList.
+	 * Constructor to create a list of tasks with an initial capacity.
 	 *
-	 * @param tasks ArrayList of Tasks.
+	 * @param size Size of TaskList.
 	 */
-	public TaskList(ArrayList<Task> tasks) {
-		this.tasks = tasks;
-		this.count = tasks.size();
+	public TaskList(int size) {
+		this.tasks = new ArrayList<>(100);
+		this.size = size;
+		this.count = 0;
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class TaskList {
 	}
 
 	/**
-	 * Returns the tasks at given index
+	 * Returns the tasks at given index.
 	 *
 	 * @param index 0-based index of task number.
 	 * @return Task at given index.
@@ -66,6 +68,11 @@ public class TaskList {
 		return this.count;
 	}
 
+	/**
+	 * Returns the current list of tasks as an ArrayList.
+	 *
+	 * @return ArrayList of current list of tasks.
+	 */
 	public ArrayList<Task> getCurrentList() {
 		return this.tasks;
 	}
