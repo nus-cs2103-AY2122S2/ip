@@ -92,7 +92,7 @@ Dateline needs a date
 ============================
 Error Detected: 
 Event needs a date
-Alright, I've marked the task: 
+Alright, I've marked the duke.task:
 [T][X] read book
 Good job by the way!
 ==============================
@@ -107,7 +107,7 @@ Here You go:
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 ==============================
-Alright, I've marked the task: 
+Alright, I've marked the duke.task:
 [D][X] return book (by: 02 Feb 2022 12:00 PM)
 Good job by the way!
 ==============================
@@ -122,7 +122,7 @@ Here You go:
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 ==============================
-Alright, I've unmarked the task: 
+Alright, I've unmarked the duke.task:
 [T][ ] read book
 Hope you complete it soon!
 ==============================
