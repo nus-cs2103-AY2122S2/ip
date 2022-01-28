@@ -80,6 +80,9 @@ public class MyBoss {
                         tasks.addTask(newEvent);
                         ui.addTaskOutput(newEvent);
                         break;
+                    case "find":
+                        ui.outputFoundTasks(tasks.findTasks(remainingUserInput));
+                        break;
                     default:
                         throw new MyBossException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
 
@@ -96,7 +99,7 @@ public class MyBoss {
         }
     }
 
-    public static void main(String[] args) {
-        new MyBoss("./data/tasks.txt").run();
+    public static void main(String[] args){
+            new MyBoss("./data/tasks.txt").run();
     }
 }

@@ -61,6 +61,22 @@ public class Ui {
     }
 
     /**
+     * Output the given list of tasks that have been found with the find command.
+     *
+     * @param taskList the specified list of tasks.
+     */
+    public void outputFoundTasks(ArrayList<Task> taskList) {
+        StringBuilder tempOut = new StringBuilder("");
+        for (int i = 0; i < taskList.size(); i++) {
+            tempOut.append(" " + INDENT).append((i + 1) + ".").append(taskList.get(i).toString());
+        }
+        hLineBreak();
+        printlnWithIndent(" Here are the matching tasks in your list:");
+        System.out.print(tempOut); // newline in tempOut
+        hLineBreak();
+    }
+
+    /**
      * Output the given task as marked.
      *
      * @param task the specified task marked as done.
