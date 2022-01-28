@@ -11,11 +11,11 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("========================");
+        System.out.println("===============================");
     }
 
     public void showLine() {
-        System.out.println("========================");
+        System.out.println("===============================");
     }
 
     public void print(String str) {

@@ -1,5 +1,6 @@
 todo return books
 deadline finish assignment /by Sunday 3pm
+deadline finish assignment /by 2022-01-22
 list
 mark 1
 list
@@ -9,5 +10,22 @@ list
 delete 2
 list
 unmark 1
+list
+apple
+mark 0
+unmark 0
+delete 0
+mark 3
+unmark 3
+delete 3
+mark
+unmark
+delete
+mark apple
+unmark apple
+delete apple
+mark 1 1
+unmark 1 1
+delete 1 1
 list
 bye
