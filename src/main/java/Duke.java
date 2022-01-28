@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.LinkedList;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -49,7 +49,8 @@ public class Duke {
                     String[] deadline = input.split(" /by ");
                     try {
                         if (deadline.length < 2) throw new DukeException("Invalid deadline task, sir.");
-                        Deadline task = new Deadline(deadline[0], deadline[1]);
+                        LocalDate date = LocalDate.parse(deadline[1]);
+                        Deadline task = new Deadline(deadline[0], date);
                         addTasks(directory, file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
