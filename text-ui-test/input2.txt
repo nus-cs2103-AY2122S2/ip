@@ -1,0 +1,20 @@
+
+
+harish
+
+yes
+list
+todo make bread toast
+deadline take clothes out of drier
+deadline take clothes out of the dryer /by 2022-01-29
+event attend photoediting session /at 2023-02-18 1900
+mark 34
+mark 3
+mark 5
+list
+unmark 5
+list
+delete 4
+list
+
+bye

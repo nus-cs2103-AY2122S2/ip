@@ -5,6 +5,7 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 
 public class DateHandler {
 
@@ -59,6 +60,33 @@ public class DateHandler {
             this.isTimeGiven = true;
         } else {
             this.date = LocalDate.parse(date);
+            this.time = LocalTime.MIN;
+            this.isTimeGiven = false;
+        }
+    }
+
+    DateHandler(String date, int dummyVariable) {
+
+        String[] strings = date.split(SPACE);
+
+        for (int i = 0; i < strings.length / 2; i++) {
+            String temp = strings[i];
+            strings[i] = strings[strings.length - i - 1];
+            strings[strings.length - i - 1] = temp;
+        }
+
+
+        this.date = LocalDate.of(Integer.valueOf(strings[0]), Month.valueOf(strings[1]), Integer.valueOf(strings[2]));
+        //reaches here
+
+        if (strings.length == 5) {
+            //extract time
+            String[] time = strings[strings.length - 2].split(":");
+            int hour = Integer.valueOf(time[0]);
+            int minute = Integer.valueOf(time[1].substring(1));
+            this.time = LocalTime.of(hour, minute);
+            this.isTimeGiven = true;
+        } else {
             this.time = LocalTime.MIN;
             this.isTimeGiven = false;
         }

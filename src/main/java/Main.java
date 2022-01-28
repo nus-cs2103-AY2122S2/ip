@@ -26,7 +26,14 @@ public class Main {
             userInput = sc.nextLine();
         }
 
-        conan.tellName(userInput);
+        // code when a similar user is found.
+        boolean isSimilarPreviousUser = conan.tellName(userInput);
+        if (isSimilarPreviousUser) {
+            userInput = sc.nextLine();
+            while(!conan.continueFromLastTime(userInput)) {
+                userInput = sc.nextLine();
+            }
+        }
 
         // while the user still wants to type in.
         while (carryOn == CarryOn.NEXT) {

@@ -25,6 +25,6 @@ public class FaultyTaskNumberException extends IllegalCommandException {
      */
     @Override
     public String toString() {
-        return "Task num :" + this.message + " isn't present. Type 'list' command to view the task numbers.";
+        return "Task num: " + this.message + " isn't present. Type 'list' command to view the task numbers.";
     }
 }

@@ -23,12 +23,12 @@ Number of tasks up to now: 1
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added return book 
+harish, I have added return book
 Number of tasks up to now: 2
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added project team meeting 
+harish, I have added project team meeting
 Number of tasks up to now: 3
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
@@ -73,7 +73,7 @@ Sure, I have unmarked this task :
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added paint walls 
+harish, I have added paint walls
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
@@ -110,7 +110,7 @@ You have input: 2022-05-15 180
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added dance practice 
+harish, I have added dance practice
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
@@ -143,19 +143,19 @@ Sure, I have unmarked this task :
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task num :19 isn't present. Type 'list' command to view the task numbers.
+Task num: 19 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :delete
+Task missing for: delete
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task num :12 isn't present. Type 'list' command to view the task numbers.
+Task num: 12 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task num :14 isn't present. Type 'list' command to view the task numbers.
+Task num: 14 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -172,11 +172,11 @@ Number of tasks: 1
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :due-on
+Task missing for: due-on
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :due-before
+Task missing for: due-before
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -185,7 +185,7 @@ You have input: 14
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :due-on
+Task missing for: due-on
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -202,7 +202,7 @@ Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :mark
+Task missing for: mark
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -229,25 +229,25 @@ Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :unmark
+Task missing for: unmark
 Please try again
 ------------------------------------------------
 You have not input any command, please add some and try again.
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :DEADLINE
+Task missing for: DEADLINE
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline mark
+Time argument missing for: Deadline mark
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline mark /by
+Time argument missing for: Deadline mark /by
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :EVENT
+Task missing for: EVENT
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -256,11 +256,11 @@ The following task has been removed from the list :
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Event meet
+Time argument missing for: Event meet
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Event meet /at
+Time argument missing for: Event meet /at
 Please try again
 ------------------------------------------------
 You have not input any command, please add some and try again.

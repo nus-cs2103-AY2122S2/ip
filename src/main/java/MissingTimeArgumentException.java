@@ -26,6 +26,6 @@ public class MissingTimeArgumentException extends MissingTaskArgumentException {
      */
     @Override
     public String toString() {
-        return "Time argument missing for " + this.message;
+        return "Time argument missing for: " + this.message;
     }
 }

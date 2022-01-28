@@ -1,0 +1,133 @@
+------------------------------------------------
+Hello There, My name is Conan! 
+Hope you're doing fine today! (^_^) 
+I'm a task manager, and I can help you keep up with your tasks.
+Now before we start, lets get acquainted! Lets start with our names!
+------------------------------------------------
+------------------------------------------------
+Please enter valid name
+------------------------------------------------
+Please enter valid name
+------------------------------------------------
+I have found out that there was a similar user in the past under the name :
+harish
+If this is you, would you like to continue from the previous tasks ?
+If this isn't you or you don't want to use the previous tasks, please type no
+------------------------------------------------
+------------------------------------------------
+You have entered: 
+Please enter either yes or no
+8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+3. [T][X] buy shoes
+4. [T][ ] edit pics
+5. [T][ ] fill out application form
+6. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+7. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+8. [ ] return books to library
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added make bread toast
+Number of tasks up to now: 9
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Time argument missing for: Deadline take clothes out of drier
+Please try again
+------------------------------------------------
+------------------------------------------------
+harish, I have added take clothes out of the dryer
+Number of tasks up to now: 10
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added attend photoediting session
+Number of tasks up to now: 11
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Task num: 34 isn't present. Type 'list' command to view the task numbers.
+Please try again
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] buy shoes
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] fill out application form
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+3. [T][X] buy shoes
+4. [T][ ] edit pics
+5. [T][X] fill out application form
+6. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+7. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+8. [ ] return books to library
+9. [T][ ] make bread toast
+10. [D][ ] take clothes out of the dryer (by: SATURDAY 29 JANUARY 2022)
+11. [E][ ] attend photoediting session (at: SATURDAY 19:00 18 FEBRUARY 2023)
+Number of tasks up to now: 11
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[T][ ] fill out application form
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+3. [T][X] buy shoes
+4. [T][ ] edit pics
+5. [T][ ] fill out application form
+6. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+7. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+8. [ ] return books to library
+9. [T][ ] make bread toast
+10. [D][ ] take clothes out of the dryer (by: SATURDAY 29 JANUARY 2022)
+11. [E][ ] attend photoediting session (at: SATURDAY 19:00 18 FEBRUARY 2023)
+Number of tasks up to now: 11
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+The following task has been removed from the list :
+[T][ ] edit pics
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [E][ ] project team meeting (at: FRIDAY 22 FEBRUARY 2019)
+3. [T][X] buy shoes
+4. [T][ ] fill out application form
+5. [D][ ] paint walls (by: SATURDAY 18 JUNE 2022)
+6. [E][ ] dance practice (at: SUNDAY 18:00 15 MAY 2022)
+7. [ ] return books to library
+8. [T][ ] make bread toast
+9. [D][ ] take clothes out of the dryer (by: SATURDAY 29 JANUARY 2022)
+10. [E][ ] attend photoediting session (at: SATURDAY 19:00 18 FEBRUARY 2023)
+Number of tasks up to now: 10
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+You have not input any command, please add some and try again.
+------------------------------------------------
+------------------------------------------------
+Goodbye, harish
+Hope I helped you complete your tasks!
+Have a great day ahead, enjoy ! (^-^)/
+Hope to see you next time! 
+------------------------------------------------

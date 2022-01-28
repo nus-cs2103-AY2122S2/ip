@@ -25,6 +25,6 @@ public class MissingTaskArgumentException extends IllegalCommandException {
      */
     @Override
     public String toString() {
-        return "Task missing for :" + this.message;
+        return "Task missing for: " + this.message;
     }
 }
