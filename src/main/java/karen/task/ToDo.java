@@ -10,7 +10,7 @@ public class ToDo extends Task {
 
     @Override
     public String toSaveData() {
-        return String.format("T|%s|%s", this.done, this.description);
+        return String.format("T|%s|%s", this.isDone, this.description);
     }
 
     @Override

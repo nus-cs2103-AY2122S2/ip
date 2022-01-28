@@ -100,7 +100,8 @@ public class Storage {
             writer.write(data);
         }
         catch (FileNotFoundException err) {
-            this.ui.displayWarning(String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
+            this.ui.displayWarning(
+                    String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
         }
         catch (IOException err) {
             this.ui.displayWarning("Something went wrong with writing to file");
@@ -125,18 +126,18 @@ public class Storage {
         Task initTask;
 
         switch (taskType) {
-            case "T":
-                initTask = new ToDo(taskArgs[0]);
-                break;
-            case "D":
-                initTask = new Deadline(taskArgs[0], taskArgs[1]);
-                break;
-            case "E":
-                initTask = new Event(taskArgs[0], taskArgs[1]);
-                break;
-            default:
-                initTask = null;
-                break;
+        case "T":
+            initTask = new ToDo(taskArgs[0]);
+            break;
+        case "D":
+            initTask = new Deadline(taskArgs[0], taskArgs[1]);
+            break;
+        case "E":
+            initTask = new Event(taskArgs[0], taskArgs[1]);
+            break;
+        default:
+            initTask = null;
+            break;
         }
         return initTask;
     }

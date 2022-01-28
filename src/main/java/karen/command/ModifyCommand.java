@@ -24,17 +24,18 @@ public class ModifyCommand extends Command {
         try {
             Task getTask = storage.getTask(this.taskIndex);
             switch (this.modifyAction) {
-                case MARK:
-                    getTask.markDone();
-                    ui.displayUserInput(String.format(DONE_FORMAT, getTask.toString()));
-                    break;
-                case UNMARK:
-                    getTask.markUndone();
-                    ui.displayUserInput(String.format(UNDONE_FORMAT, getTask.toString()));
-                    break;
+            case MARK:
+                getTask.markDone();
+                ui.displayUserInput(String.format(DONE_FORMAT, getTask.toString()));
+                break;
+            case UNMARK:
+                getTask.markUndone();
+                ui.displayUserInput(String.format(UNDONE_FORMAT, getTask.toString()));
+                break;
             }
         } catch (IndexOutOfBoundsException err) {
-            throw new KarenException(String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex+1));
+            throw new KarenException(
+                    String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex+1));
         }
 
 

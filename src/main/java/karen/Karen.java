@@ -20,7 +20,7 @@ public class Karen {
                 cmd.execute(ui, storage);
                 isExit = cmd.isExit();
             } catch (KarenException err) {
-                ui.displayUserInput(err.msg);
+                ui.displayUserInput(err.message);
             }
         }
 
