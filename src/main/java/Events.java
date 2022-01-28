@@ -22,7 +22,7 @@ public class Events extends Task {
 
     @Override
     public String storeFormat(){
-        return "E|" + super.done + "|" + super.s + "|" + this.time + "\n";
+        return "E|" + super.done + "|" + super.s + "|" + this.date + "\n";
     }
 
 }

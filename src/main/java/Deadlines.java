@@ -22,6 +22,6 @@ public class Deadlines extends Task{
 
     @Override
     public String storeFormat(){
-        return "D|" + super.done + "|" + super.s + "|" + this.time + "\n";
+        return "D|" + super.done + "|" + super.s + "|" + this.date + "\n";
     }
 }

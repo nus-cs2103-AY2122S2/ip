@@ -103,7 +103,7 @@ public class DukeList {
      * @param j The description of the task
      * @throws DukeTaskException is thrown when description is empty, or the format is not followed correctly
      */
-    public void addTask(String t, String j) throws DukeTaskException{
+    public void addTask(String t, String j) throws DukeTaskException, IOException {
         String m = j.trim();
         if(t.equals("todo")){
             if(m.isEmpty()){
