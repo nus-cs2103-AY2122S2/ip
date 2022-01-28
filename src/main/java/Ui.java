@@ -124,10 +124,13 @@ public class Ui {
     public void showDeletedTask(Task t, int numberOfTasks) {
         writer.printf(   "Noted. I have removed this task:\n" +
                 "\t%s\n" +
-                "There are now %d tasks in your task list", t, numberOfTasks);
+                "There are now %d tasks in your task list\n", t, numberOfTasks);
     }
     public void showDeleteEmptyList() {
         writer.println("There are no tasks in your task list to delete.");
+    }
+    public void showDeleteFailed() {
+        writer.println("Delete Task Failed");
     }
     public void showDeleteOutOfBounds(int limit) {
         writer.printf("Invalid number entered! The number entered must be between 1 and %s", limit);
@@ -158,6 +161,9 @@ public class Ui {
     public void showSavingComplete() {
         writer.println("Saving Completed!");
     }
+    public void showSavingFailed() {
+        writer.println("Saving Failed!");
+    }
     public void showTaskLoadFail(String input) {
         writer.println("Task not loaded. Details: " + input);
     }
@@ -168,6 +174,10 @@ public class Ui {
 
     public String getUserInput(){
         return scanner.next();
+    }
+
+    public void showMessage(String s){
+        writer.println(s);
     }
 
     // Tests

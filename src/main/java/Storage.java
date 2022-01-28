@@ -19,7 +19,7 @@ public class Storage {
         DIR_PATH = System.getProperty("user.home") + FILE_SEPERATOR + dir;
     }
 
-    public TaskManager loadTaskManagerFromFile() {
+    public TaskManager loadTaskManagerFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         file = new File(FILE_PATH);
         try {
@@ -37,15 +37,25 @@ public class Storage {
                 }
                 return new TaskManager(tasks);
             } else {
-                return new TaskManager();
+                throw new DukeException("Unable to read Task List from file!");
             }
         } catch (SecurityException | IOException exception) {
-            return new TaskManager();
+            throw new DukeException("Unable to read Task List from file!");
         }
     }
-    public boolean saveTaskManager(TaskManager taskManager) {
-        file = new File(FILE_PATH);
+    public boolean saveTaskManager(TaskManager taskManager) throws DukeException {
+
         try {
+
+            file = new File(FILE_PATH);
+
+            if (!dirExists()) {
+                boolean dirCreated = createDir();
+                if (!dirCreated){
+                    throw new IOException("Unable to create directory!");
+                }
+            }
+
             FileWriter writer = new FileWriter(file);
 
             for ( Task task: taskManager.getTaskList()) {
@@ -60,7 +70,7 @@ public class Storage {
             writer.close();
             return true;
         } catch (IOException exception){
-            return false;
+            throw new DukeException("Unable to save to disk!");
         }
     }
 

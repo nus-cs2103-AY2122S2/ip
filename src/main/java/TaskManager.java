@@ -29,13 +29,11 @@ public class TaskManager {
             //Ui.showDeleteEmptyList();
             return false;
         } else {
-            if (index <= 0 || index > tasks.size()){
-                //Ui.showDeleteOutOfBounds(tasks.size());
+            if (index < 0 || index >= tasks.size()){
                 return false;
             } else {
-                Task t = tasks.get(index-1);
-                tasks.remove(index-1);
-                //Ui.showDeletedTask(t, tasks.size());
+                Task t = tasks.get(index);
+                tasks.remove(index);
                 return true;
             }
         }
@@ -43,20 +41,16 @@ public class TaskManager {
 
     public boolean markTaskDone(int index){
         if (tasks.size() <= 0){
-            //Ui.showMarkEmptyList();
             return false;
         } else {
-            if (index <= 0 || index > tasks.size()){
-                //Ui.showMarkOutOfBounds();
+            if (index < 0 || index >= tasks.size()){
                 return false;
             } else {
-                Task t = tasks.get(index - 1);
+                Task t = tasks.get(index);
                 if (t.done == ' ') {
                     t.markDone();
-                    //Ui.showMarked(t);
                     return true;
                 } else {
-                    //Ui.showMarkNotNeeded(t);
                     return false;
                 }
             }
@@ -65,20 +59,16 @@ public class TaskManager {
 
     public boolean markTaskUndone(int index){
         if (tasks.size() <= 0){
-            //Ui.showUnmarkEmptyList();
             return false;
         } else {
-            if (index <= 0 || index > tasks.size()) {
-                //Ui.showUnmarkOutOfBounds();
+            if (index < 0 || index >= tasks.size()) {
                 return false;
             } else {
-                Task t = tasks.get(index - 1);
+                Task t = tasks.get(index);
                 if (t.done == 'X') {
                     t.markUndone();
-                    //Ui.showUnmarked(t);
                     return true;
                 } else {
-                    //Ui.showUnmarkNotNeeded(t);
                     return false;
                 }
             }
@@ -87,6 +77,17 @@ public class TaskManager {
 
     public ArrayList<Task> getTaskList(){
         return this.tasks;
+    }
+    public Task getTask(int index) {
+        if (size() == 0){
+            return null;
+        }
+
+        if (index < 0 || index >= size()){
+            return null;
+        }
+
+        return tasks.get(index);
     }
 
     public int size(){

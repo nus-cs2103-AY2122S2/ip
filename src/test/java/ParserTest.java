@@ -97,7 +97,7 @@ public class ParserTest {
         try{
             Parser.parseToTask("deadline name /at 11/11/2011 1500");
         } catch (DukeException e){
-            assertEquals("Wrong format entered! Please enter <Deadline Name> /at <Deadline>",
+            assertEquals("Wrong format entered! Please enter <Deadline Name> /by <Deadline>",
                     e.getMessage());
         }
 
