@@ -9,9 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /**
-     * Logo of the Chat bot.
-     */
+    /** Logo of the Chat bot. */
     private static final String LOGO = "888      888     888  .d8888b.         d8888 \n"
             + "888      888     888 d88P  Y88b       d88888 \n"
             + "888      888     888 888    888      d88P888 \n"
@@ -21,22 +19,16 @@ public class Ui {
             + "888      Y88b. .d88P Y88b  d88P  d8888888888 \n"
             + "88888888  \"Y88888P\"   \"Y8888P\"  d88P     888 \n";
 
-    /**
-     * The divider line used to wrap string before output.
-     */
+    /** The divider line used to wrap string before output. */
     private static final String DIVIDER_LINE = "___________________"
             + "_________________________________________\n";
 
-    /**
-     * Scanner used for user input.
-     */
+    /** Scanner used for user input. */
     private Scanner scanner;
 
-    /**
-     * Constructor to create Ui object.
-     */
+    /** Constructor to create Ui object. */
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**

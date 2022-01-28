@@ -10,24 +10,16 @@ import duke.ui.Ui;
  */
 public class Duke {
 
-    /**
-     * duke.storage.Storage handles loading and saving of tasks.
-     */
+    /** Storage handles loading and saving of tasks. */
     private Storage storage;
 
-    /**
-     * Stores the list of tasks.
-     */
+    /** Stores the list of tasks. */
     private TaskList tasks;
 
-    /**
-     * Responsible for interactions with the user.
-     */
+    /** Responsible for interactions with the user. */
     private Ui ui;
 
-    /**
-     * File path used for storage.
-     */
+    /** File path used for storage. */
     private static final String FILE_PATH = ".\\data\\duke.txt";
 
     /**

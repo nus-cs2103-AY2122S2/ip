@@ -10,9 +10,7 @@ import duke.ui.Ui;
  */
 public abstract class Command {
 
-    /**
-     * Keeps track of the Type of command.
-     */
+    /** Keeps track of the Type of command. */
     private CommandType commandType;
 
     /**

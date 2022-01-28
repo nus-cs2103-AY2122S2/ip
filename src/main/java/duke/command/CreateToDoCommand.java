@@ -11,9 +11,7 @@ import duke.ui.Ui;
  */
 public class CreateToDoCommand extends Command{
 
-    /**
-     * ToDo task created.
-     */
+    /** ToDo task created. */
     private ToDo toDo;
 
     /**

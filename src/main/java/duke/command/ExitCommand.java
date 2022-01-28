@@ -9,9 +9,7 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command{
 
-    /**
-     * Constructor to create ExitCommand.
-     */
+    /** Constructor to create ExitCommand. */
     public ExitCommand() {
         super(CommandType.EXIT);
     }

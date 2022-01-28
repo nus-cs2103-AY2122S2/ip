@@ -6,19 +6,13 @@ package duke.task;
  */
 public class Task {
 
-    /**
-     * String to represent about the task.
-     */
+    /** String to represent about the task. */
     protected String description;
 
-    /**
-     * Boolean to keep track whether task is done.
-     */
+    /** Boolean to keep track whether task is done. */
     protected boolean isDone;
 
-    /**
-     * Type of task.
-     */
+    /** Type of task. */
     public TaskType type;
 
     /**
@@ -28,8 +22,8 @@ public class Task {
      */
     public Task(String description, TaskType type) {
         this.description = description;
-        this.isDone = false;
         this.type = type;
+        isDone = false;
     }
 
     /**
@@ -37,16 +31,17 @@ public class Task {
      *
      * @return true if task is done, false otherwise.
      */
-    public boolean getIsDone() {
-        return this.isDone;
+    protected boolean getIsDone() {
+        return isDone;
     }
+
     /**
      * Outputs the icon representing the
      * status of the task.
      *
      * @return status Icon as string.
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
@@ -56,7 +51,7 @@ public class Task {
      * @return text description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -64,7 +59,7 @@ public class Task {
      * to true.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -72,7 +67,7 @@ public class Task {
      * to false.
      */
     public void unmarkAsDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -81,7 +76,7 @@ public class Task {
      * @return TaskType representing the task.
      */
     public TaskType getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -91,6 +86,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

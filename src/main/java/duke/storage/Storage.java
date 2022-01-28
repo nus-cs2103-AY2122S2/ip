@@ -22,14 +22,10 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    /**
-     * File used for storage.
-     */
+    /** File used for storage. */
     private final File STORAGE_FILE;
 
-    /**
-     * Constructor to create Storage object.
-     */
+    /** Constructor to create Storage object. */
     public Storage(String filePath) {
         STORAGE_FILE = new File(filePath);
     }
@@ -37,14 +33,14 @@ public class Storage {
     /**
      * Create the file and necessary folder to store tasks.
      *
-     * @throws FileIOException if unable to create file or folder.
+     * @throws FileIoException if unable to create file or folder.
      */
-    private void createFile() throws FileIOException {
+    private void createFile() throws FileIoException {
         try {
             STORAGE_FILE.getParentFile().mkdirs();
             STORAGE_FILE.createNewFile();
         } catch (IOException exception) {
-            throw new FileIOException(exception.getMessage());
+            throw new FileIoException(exception.getMessage());
         }
     }
 
@@ -130,9 +126,9 @@ public class Storage {
             }
             bufferedReader.close();
         } catch (FileNotFoundException exception) {
-            this.createFile();
+            createFile();
         } catch (IOException exception) {
-            throw new FileIOException(exception.getMessage());
+            throw new FileIoException(exception.getMessage());
         }
         return taskList;
     }
@@ -141,9 +137,9 @@ public class Storage {
     /**
      * Saves the tasks from task list to the file stored locally.
      *
-     * @throws FileIOException if unable to create or write to file.
+     * @throws FileIoException if unable to create or write to file.
      */
-    public void saveToFile(TaskList taskList) throws FileIOException {
+    public void saveToFile(TaskList taskList) throws FileIoException {
         try {
             if (!STORAGE_FILE.exists()) {
                 createFile();
@@ -171,7 +167,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException exception) {
-            throw new FileIOException(exception.getMessage());
+            throw new FileIoException(exception.getMessage());
         }
     }
 }
