@@ -14,6 +14,10 @@ public abstract class Task {
         this.status = status;
     }
 
+    public String getActivity() {
+        return this.activity;
+    }
+
     public abstract String printTask();
 
 }
