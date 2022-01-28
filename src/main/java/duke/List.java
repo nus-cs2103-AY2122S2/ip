@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- * This class encapsulates a list of Tasks input from the user which is stored in an Array List.
+ * Represents a list of the tasks added by the user.
  */
 public class List {
-    private ArrayList<Task> arrayList;//Array List to store the tasks.
+    private ArrayList<Task> arrayList;
 
     public List() {
         this.arrayList = new ArrayList<>();
@@ -19,17 +19,14 @@ public class List {
         this.arrayList = list;
     }
 
-    /**
-     * This method returns the arraylist of Tasks.
-     * @return returns arraylist of Tasks.
-     */
     public ArrayList<Task> getArrayList() {
         return this.arrayList;
     }
 
     /**
-     * This method marks a task at a specific index in the list as done.
-     * @param index index of the task to be marked done in the array list of list
+     * Marks a task at a specific index in the list as done.
+     *
+     * @param index Index of the task to be marked done in the array list of list.
      */
     public void markDone(int index) {
         Task task = arrayList.get(index);
@@ -37,8 +34,9 @@ public class List {
     }
 
     /**
-     * This method marks a task at a specific index in the list as not done.
-     * @param index index of the task to be marked as not done in the array list of list.
+     * Marks a task at a specific index in the list as not done.
+     *
+     * @param index Index of the task to be marked as not done in the array list of list.
      */
     public void unmarkDone(int index) {
         Task task = arrayList.get(index);
@@ -46,10 +44,11 @@ public class List {
     }
 
     /**
-     *This method adds a todo task, deadline task or event task to the list.
-     * @param taskType Enum Tasks
-     * @param description Description of task
-     * @param timing date/time for Deadline and event task
+     * Adds a Task to the list, used for event task or todo task.
+     *
+     * @param taskType TaskType of task being added.
+     * @param description Description of task.
+     * @param timing Date/Time for event task.
      */
     public void add(Tasks taskType, String description, String timing) {
         switch (taskType) {
@@ -64,16 +63,24 @@ public class List {
         }
     }
 
+    /**
+     * Adds a Task to the list, used for deadline task.
+     *
+     * @param taskType TaskType of Task.
+     * @param description Description of Task.
+     * @param date Date of Task is due.
+     */
     public void add(Tasks taskType, String description, LocalDateTime date) {
         Deadline deadline = new Deadline(description, date);
         arrayList.add(deadline);
     }
 
     /**
-     * This method deletes a task from the list.
-     * @param index index of the task in the list.
-     * @return returns the task deleted
-     * @throws ListException catches an exception when the index is out of bound.
+     * Deletes a task from the list and returns it.
+     *
+     * @param index Index of the task in the list.
+     * @return Returns the task deleted
+     * @throws ListException If the index is out of bound.
      */
     public Task delete(int index) throws ListException{
         if (index < 1 || index > arrayList.size()) {
@@ -89,6 +96,7 @@ public class List {
     }
 
     /**
+     * Returns a String representation of the List in the desired format.
      *
      * @return Returns a string which displays the list of tasks in order of them being added.
      */
