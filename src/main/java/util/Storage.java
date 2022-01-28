@@ -8,6 +8,7 @@ import task.Deadline;
 import exception.DukeException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.io.FileWriter;
@@ -18,23 +19,19 @@ public class Storage {
 
     File file;
 
-    public Storage(String filePath) throws DukeException {
+    public Storage(String filePath) {
         this.file = new File(filePath);
 
     }
 
-    public void loadFile(List<Task> tasks) throws IOException, DukeException {
-        if (!file.exists()) {
-            throw new DukeException("Please create a file under directory data");
-        } else {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String s = sc.nextLine();
-                Task t = parseTextFile(s);
-                tasks.add(t);
+    public void loadFile(List<Task> tasks) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String s = sc.nextLine();
+            Task t = parseTextFile(s);
+            tasks.add(t);
             }
         }
-    }
 
     private static Task parseTextFile(String s) {
         Task t;

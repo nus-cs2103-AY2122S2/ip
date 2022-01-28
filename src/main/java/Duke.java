@@ -9,32 +9,38 @@ import task.Deadline;
 import task.Todo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException, IOException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private File newFile;
+    private Parser parser;
 
-        Scanner sc = new Scanner(System.in);
+    public Duke(String filePath) throws DukeException, FileNotFoundException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        newFile = new File(filePath);
+        tasks = new TaskList();
+        parser = new Parser();
 
-        Ui ui = new Ui();
-
-        File newFile = new File("data/duke.txt");
-
-        Storage storage = new Storage("data/duke.txt");
-
-        Parser parser = new Parser();
-
-        ui.greet();
-
-        if (!newFile.exists()) {
-            throw new DukeException("Please create file under directory data");
+        if (newFile.exists()) {
+            storage.loadFile(tasks.list);
+        } else {
+            throw new DukeException("Please create the text file data/duke.txt");
         }
 
-        TaskList tasks = new TaskList();
-        storage.loadFile(tasks.list);
 
+    }
+
+    public void run() throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        ui.greet();
 
         String tab = "    ";
 
@@ -48,7 +54,7 @@ public class Duke {
                 if (!item.equals("")) {
                     tasks.add(new Todo(item));
                 } else {
-                    throw new DukeException("Can read instructions or not? Todo cannot be empty :/");
+                    ui.reply("Can read instructions or not? Todo cannot be empty :/");
                 }
 
             } else if (task.equals("deadline")) {
@@ -116,6 +122,14 @@ public class Duke {
         ui.exit();
         sc.close();
     }
+
+
+
+    public static void main(String[] args) throws DukeException, IOException {
+        new Duke("data/duke.txt").run();
+        }
+
+
 
 }
 

@@ -24,6 +24,7 @@ public class Parser {
         }
     }
 
+
     public String getTask() {
         return this.task;
     }
