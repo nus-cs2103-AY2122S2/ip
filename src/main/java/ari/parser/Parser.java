@@ -4,16 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import main.java.ari.command.ByeCommand;
-import main.java.ari.command.Command;
-import main.java.ari.command.DeadlineCommand;
-import main.java.ari.command.DeleteCommand;
-import main.java.ari.command.EventCommand;
-import main.java.ari.command.IncorrectCommand;
-import main.java.ari.command.ListCommand;
-import main.java.ari.command.MarkCommand;
-import main.java.ari.command.TodoCommand;
-import main.java.ari.command.UnmarkCommand;
+import main.java.ari.command.*;
 import main.java.ari.exception.CommandFormatException;
 import main.java.ari.exception.EmptyCommandException;
 
@@ -52,6 +43,8 @@ public class Parser {
             return prepareEvent(command);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(command);
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(command);
         default:
             return new IncorrectCommand("I am sorry Master, I am afraid I do not know what you mean");
         }
@@ -214,6 +207,20 @@ public class Parser {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
             return new IncorrectCommand("Sorry Master, you have to enter an integer after the \"delete\" command");
+        }
+    }
+
+    /**
+     * Returns FindCommand if desc is valid else IncorrectCommand
+     *
+     * @param desc description of task
+     * @return FindCommand
+     */
+    private Command prepareFind(String desc) {
+        try {
+            return new FindCommand(getArgument(desc));
+        } catch (EmptyCommandException emptyEx) {
+            return new IncorrectCommand(emptyEx.getMessage());
         }
     }
 
