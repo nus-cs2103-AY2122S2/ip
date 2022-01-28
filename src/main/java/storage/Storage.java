@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.dukeexceptions.DukeExceptions;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,11 +13,11 @@ import java.util.Scanner;
 public class Storage{
     File file;
 
-    Storage(String filename) {
+    public Storage(String filename) {
         this.file = new File(filename);
     }
 
-    TaskList getData() throws FileNotFoundException {
+    public TaskList getData() throws FileNotFoundException {
         Scanner fileInput = new Scanner(this.file);
         TaskList taskList = new TaskList();
         while (fileInput.hasNextLine()) {
@@ -33,7 +39,7 @@ public class Storage{
         return taskList;
     }
 
-    void updateData(TaskList taskList) throws IOException {
+    public void updateData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(file);
         fw.write(taskList.updateDatabase());
         fw.close();

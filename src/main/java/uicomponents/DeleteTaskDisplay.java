@@ -1,5 +1,9 @@
+package duke.uicomponents;
+
+import duke.tasklist.TaskList;
+
 public class DeleteTaskDisplay{
-    void run(String task, TaskList taskList) {
+    public void run(String task, TaskList taskList) {
         System.out.println("============================");
         System.out.println("Deleted this tasks: ");
         System.out.println(task);

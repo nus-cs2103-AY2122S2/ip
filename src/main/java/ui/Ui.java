@@ -1,16 +1,24 @@
-import java.util.Scanner;
+package duke.ui;
+
+import duke.command.Command;
+import duke.dukeexceptions.DukeExceptions;
+import duke.dukeexceptions.InvalidCommand;
+import duke.praser.Praser;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.uicomponents.*;
 
 public class Ui {
     Menu menu;
     ExitScreen exitScreen;
     ErrorMenu errorMenu;
-    TaskListDisplay taskListDisplay;
+    public TaskListDisplay taskListDisplay;
     MarkTaskDisplay markTaskDisplay;
     UnmarkedTaskDisplay unmarkedTaskDisplay;
     NewTaskDisplay newTaskDisplay;
     DeleteTaskDisplay deleteTaskDisplay;
 
-    Ui() {
+    public Ui() {
         this.menu = new Menu();
         this.exitScreen = new ExitScreen();
         this.taskListDisplay = new TaskListDisplay();
@@ -21,19 +29,19 @@ public class Ui {
         this.errorMenu = new ErrorMenu();
     }
 
-    void showMenu() {
+    public void showMenu() {
         menu.run();
     }
 
-    Command showUserCommandLine(String userInput) throws InvalidCommand {
+    public Command showUserCommandLine(String userInput) throws InvalidCommand {
         return Praser.prase(userInput);
     }
 
-    void showCommandError(DukeExceptions exceptions) {
+    public void showCommandError(DukeExceptions exceptions) {
         this.errorMenu.run(exceptions.getMessage());
     }
 
-    void showExitScreen() {
+    public void showExitScreen() {
         this.exitScreen.run();
     }
 
@@ -41,11 +49,11 @@ public class Ui {
         this.taskListDisplay.run(taskList);
     }
 
-    void showMarkedTaskDisplay(String task) {
+    public void showMarkedTaskDisplay(String task) {
         this.markTaskDisplay.run(task);
     }
 
-    void showUnmarkedTaskDisplay(String task) {
+    public void showUnmarkedTaskDisplay(String task) {
         this.unmarkedTaskDisplay.run(task);
     }
 

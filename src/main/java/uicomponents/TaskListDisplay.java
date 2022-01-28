@@ -1,5 +1,9 @@
+package duke.uicomponents;
+
+import duke.tasklist.TaskList;
+
 public class TaskListDisplay{
-    void run(TaskList taskList) {
+    public void run(TaskList taskList) {
 
         System.out.println("==============================");
         System.out.println("Here You go: ");

@@ -1,3 +1,8 @@
+package duke.praser;
+
+import duke.command.Command;
+import duke.dukeexceptions.InvalidCommand;
+
 public class Praser{
     public static Command prase(String userInput) throws InvalidCommand {
         String command;

@@ -1,8 +1,12 @@
+package duke.task;
+
+import duke.dukeexceptions.InvalidDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-abstract class Task {
+public abstract class Task {
     protected static DateTimeFormatter initFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     protected String taskName;
@@ -13,17 +17,17 @@ abstract class Task {
         this.done = done;
     }
 
-    void setDone() {
+    public void setDone() {
         this.done = true;
     }
 
-    void setUndone() {
+    public void setUndone() {
         this.done = false;
     }
 
-    abstract String updateIntoDatabase();
+    public abstract String updateIntoDatabase();
 
-    static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
+    public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
         type = type.toUpperCase();
         if (type.equals("TODO")) {
             return new ToDo(name, done);
@@ -50,7 +54,7 @@ final class ToDo extends Task {
         return tag + doneIndicator + " " + this.taskName;
     }
 
-    String updateIntoDatabase() {
+    public String updateIntoDatabase() {
         return "TODO\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + "*** Next Task ***\n";
     }
 }
@@ -76,7 +80,7 @@ final class Deadline extends Task {
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 
-    String updateIntoDatabase() {
+    public String updateIntoDatabase() {
         return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
@@ -103,7 +107,7 @@ final class Event extends Task {
         return tag + doneIndicator + " " + this.taskName + eventDate;
     }
 
-    String updateIntoDatabase() {
+    public String updateIntoDatabase() {
         return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }

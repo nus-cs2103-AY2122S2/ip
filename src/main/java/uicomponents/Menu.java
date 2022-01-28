@@ -1,7 +1,7 @@
-import java.util.Scanner;
+package duke.uicomponents;
 
-class Menu {
-    void run() {
+public class Menu {
+    public void run() {
         System.out.println("=========================");
         System.out.println("   Welcome chosen one!   ");
         System.out.println("      I am Big Tech      ");
