@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Control {
     private ArrayList<Task> tasks;
+
     public Control() {
         String start =
                 "________________________________\n"
@@ -25,7 +26,7 @@ public class Control {
 //    }
 
     public void bye() {
-        String bye ="GoodBye! I hope to see you again!";
+        String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
     }
 
@@ -44,7 +45,7 @@ public class Control {
     }
 
     public void taskCheck(String taskStr) {
-        try{
+        try {
             String[] taskArr = taskStr.split(" ");
             int index = Integer.parseInt(taskArr[1]) - 1;
             Task task = this.tasks.get(index);
@@ -74,27 +75,36 @@ public class Control {
     }
 
     public void deadline(String taskStr) {
-        // deadline return book /by Sunday
-        String[] taskArr = taskStr.split(" ", 2);
-        String[] taskDetails = taskArr[1].split("/by ");
-        String taskName = taskDetails[0];
-        String date = taskDetails[1];
-        Deadline task = new Deadline(taskName, false, "D", date) ;
-        this.tasks.add(task);
-        System.out.println("Added to your tasks: \n\t" + task.toString());
-        System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        try {
+            // deadline return book /by Sunday
+            String[] taskArr = taskStr.split(" ", 2);
+            String[] taskDetails = taskArr[1].split("/by ");
+            String taskName = taskDetails[0];
+            String date = taskDetails[1];
+            Deadline task = new Deadline(taskName, false, "D", date);
+            this.tasks.add(task);
+            System.out.println("Added to your tasks: \n\t" + task.toString());
+            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+        }
+
     }
 
     public void event(String taskStr) {
-        // event project meeting /at Mon 2-4pm
-        String[] taskArr = taskStr.split(" ", 2);
-        String[] taskDetails = taskArr[1].split("/at ");
-        String taskName = taskDetails[0];
-        String date = taskDetails[1];
-        Event task = new Event(taskName, false, "E", date) ;
-        this.tasks.add(task);
-        System.out.println("Added to your tasks: \n\t" + task.toString());
-        System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        try {
+            String[] taskArr = taskStr.split(" ", 2);
+            String[] taskDetails = taskArr[1].split("/at ");
+            String taskName = taskDetails[0];
+            String date = taskDetails[1];
+            Event task = new Event(taskName, false, "E", date);
+            this.tasks.add(task);
+            System.out.println("Added to your tasks: \n\t" + task.toString());
+            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+        }
+
     }
 
     public void delete(String taskStr) {
@@ -164,5 +174,4 @@ public class Control {
             writeFile.writeToFile(num + ": " + task.toString() + System.lineSeparator());
         }
     }
-
 }
