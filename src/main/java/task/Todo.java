@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Represents task which is entered with Todo Prefix.

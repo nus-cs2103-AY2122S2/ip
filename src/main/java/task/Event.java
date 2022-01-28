@@ -1,46 +1,46 @@
-package Task;
+package task;
 
 /**
- * Represents Task which is entered with Deadline Prefix.
+ * Represents Task which is entered with Event Prefix.
  */
-public class Deadline extends Task {
-    /**
-     * Deadline date.
-     */
-    protected String by;
+public class Event extends Task {
 
     /**
-     * Creates a Deadline task.
-     *
-     * @param description Description of the Deadline task.
-     * @param by Deadline Date.
+     * Event location.
      */
-    public Deadline(String description, String by) {
+    protected String at;
+
+    /**
+     * Creates a Event task.
+     *
+     * @param description Description of the Event task.
+     * @param at Event location.
+     */
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
     /**
      * Returns the string representation with details
      * on the task type, mark status, description and
-     * deadline date.
+     * event location.
      *
      * @return String representation of Task to display.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[E]" + super.toString() + " (by: " + at + ")";
     }
 
     /**
      * Returns the string representation with details
      * on the task type, mark status, description and
-     * deadline date.
+     * event location.
      *
      * @return String representation of Task to save.
      */
-    @Override
     public String toSave() {
-        return "D" + super.toSave() + " : " + by;
+        return "E" + super.toSave() + " : " + at;
     }
 }

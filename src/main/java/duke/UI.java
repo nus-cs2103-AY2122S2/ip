@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * Representation containing all string representation and methods
@@ -35,7 +35,7 @@ public class UI {
      * Prints the intro of Mike with logo
      * and intro paragraph.
      */
-    public static void intro() {
+    public static void printIntro() {
         String start = "              Greetings! Mike here!\n" +
                 "               How can I help you?\n" ;
         String logo =
@@ -47,7 +47,6 @@ public class UI {
                         + "||  ||  ||  ||  ||  ||      ||    ||   \\\\   \\\\       ||\n"
                         + "||==||  ||==||  ||==||======||====||    \\\\===\\\\======||\n";
 
-
         System.out.println("\n" + logo + line);
         System.out.println(start + line);
     }
@@ -55,14 +54,14 @@ public class UI {
     /**
      * Prints custom line for Duke.
      */
-    public static void line() {
+    public static void printLine() {
         System.out.println(line);
     }
 
     /**
      * Prints bye message for Duke.
      */
-    public static void terminate() {
+    public static void printTerminate() {
         System.out.println(line + "Bye yo. Hope I helped you!" + line);
     }
 

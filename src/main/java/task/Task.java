@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * Represents a Task, containing its relevant fields
@@ -35,7 +35,7 @@ public class Task {
      * @return "X" if Task is done and " " if not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return isDone ? "X" : " ";
     }
 
     /**
@@ -83,7 +83,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        String v = "[" + this.getStatusIcon() + "]" + " " + this.description;
-        return v;
+        return "[" + this.getStatusIcon() + "]" + " " + this.description;
     }
 }

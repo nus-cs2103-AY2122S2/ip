@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * Represents Exceptions specific to Duke.
