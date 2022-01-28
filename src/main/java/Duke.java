@@ -1,31 +1,32 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.MissingFormatArgumentException; // Imported MissingFormatArgumentException
+import java.util.MissingFormatArgumentException;
 import java.util.Scanner; // Imported Scanner class
 
 public class Duke {
 
-    public static void main(String[] args) {
-        String logo = "_______________________________________________________\n"
-                + " ____        _         _    ____ _   _ \n"
-                + "|  _ \\ _   _| | _____ | | /  ___| | | |\n"
-                + "| | | | | | | |/ / _ \\| | | |   | |_| |\n"
-                + "| |_| | |_| |   <  __/| |_| |___|  _  |\n"
-                + "|____/ \\__,_|_|\\_\\___||___|\\____|_| |_|\n"
-                + "Hello! I'm DukeLCH\n"
-                + "How can I be of service?\n" //Simple Greet
-                + "_______________________________________________________\n";
-        System.out.println(logo);
-        Commands cmd = new Commands();
-        Scanner io = new Scanner(System.in); // Scanner object created
-        File curr = null;
+    private Commands cmd;
+    private DukeUi ui;
+    private DukeStorage storage;
+    private DukeHistory history;
+
+    public Duke(String filePath) {
+        cmd = new Commands();
+        ui = new DukeUi();
+        storage = new DukeStorage();
+        history = new DukeHistory();
+
+        String[] arr = filePath.split("\\\\");
         try {
-            curr = cmd.startup();
-            cmd.restore(curr);
+            storage.startup(arr[0], arr[1]);
+            storage.restore(history);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            ui.printLoadError();
         }
+    }
+
+    public void run() {
+        ui.printGreeting();
+        Scanner io = new Scanner(System.in); // Scanner object created
         label:
         while (true) {
             String input = io.nextLine();
@@ -37,69 +38,50 @@ public class Duke {
                     if (tokens.length != 1) {
                         throw new DukeException("argument for bye detected");
                     }
-                    cmd.update(curr);
                     cmd.bye();
+                    storage.update(history);
                     break label;
                 } catch (DukeException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Arguments detected *\n"
-                            + "Are you trying to type 'bye' instead? If so, please try again!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printFoundArgumentError();
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             case "list":
                 try {
                     if (tokens.length != 1) {
                         throw new DukeException("argument for list detected");
                     }
-                    cmd.list();
-                    cmd.update(curr);
+                    cmd.list(history);
                     break;
                 } catch (DukeException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Arguments detected *\n"
-                            + "Are you trying to type 'list' instead? If so, please try again!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printFoundArgumentError();
                     break;
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             case "mark": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
-                    cmd.mark(index - 1);
-                    cmd.update(curr);
+                    cmd.mark(index - 1, history);
+                    storage.update(history);
                     break;
-                } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Invalid entry detected *\n"
-                            + "Please provide a valid entry!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                } catch (IndexOutOfBoundsException ex) {
+                    ui.printInvalidArgumentError();
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "unmark": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
-                    cmd.unmark(index - 1);
-                    cmd.update(curr);
+                    cmd.unmark(index - 1, history);
+                    storage.update(history);
                     break;
-                } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Invalid entry detected *\n"
-                            + "Please provide a valid entry!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                } catch (IndexOutOfBoundsException ex) {
+                    ui.printInvalidArgumentError();
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "todo": {
@@ -107,18 +89,14 @@ public class Duke {
                     if (tokens.length <= 1) {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
-                    cmd.todo(tokens);
-                    cmd.update(curr);
+                    cmd.todo(tokens, history);
+                    storage.update(history);
                     break;
                 } catch (MissingFormatArgumentException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* No arguments detected *\n"
-                            + "Please provide a description for your ToDo!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printMissingArgumentError(keyword);
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "deadline": {
@@ -126,27 +104,17 @@ public class Duke {
                     if (tokens.length <= 1) {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
-                    cmd.deadline(tokens);
-                    cmd.update(curr);
+                    cmd.deadline(tokens, history);
+                    storage.update(history);
                     break;
                 } catch (MissingFormatArgumentException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* No arguments detected *\n"
-                            + "Please provide a description for your Deadline!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printMissingArgumentError(keyword);
                     break;
                 } catch (DukeException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Time frame not detected *\n"
-                            + "Please provide a time frame for your Deadline!\n"
-                            + "Check if you have typed '/by' to indicate the time frame!\n"
-                            + "e.g. deadline return book /by Sunday\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printMissingDateTimeArgumentError(keyword);
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "event": {
@@ -154,81 +122,53 @@ public class Duke {
                     if (tokens.length <= 1) {
                         throw new MissingFormatArgumentException("no argument detected");
                     }
-                    cmd.event(tokens);
-                    cmd.update(curr);
+                    cmd.event(tokens, history);
+                    storage.update(history);
                     break;
                 } catch (MissingFormatArgumentException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* No arguments detected *\n"
-                            + "Please provide a description for your Event!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printMissingArgumentError(keyword);
                     break;
                 } catch (DukeException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Time frame not detected *\n"
-                            + "Please provide a time frame for your Event!\n"
-                            + "Check if you have typed '/at' to indicate the time frame!\n"
-                            + "e.g. event project meeting /at Mon 2-4pm\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printMissingDateTimeArgumentError(keyword);
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "delete": {
                 try {
                     int index = Integer.parseInt(tokens[1]);
-                    cmd.delete(index - 1);
-                    cmd.update(curr);
+                    cmd.delete(index - 1, history);
+                    storage.update(history);
                     break;
                 } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Invalid entry detected *\n"
-                            + "Please provide a valid entry!\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printInvalidArgumentError();
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             case "update": {
                 try {
-                    if (curr == null) {
-                        throw new FileNotFoundException();
-                    }
-                    cmd.update(curr);
-                    break;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    storage.update(history);
                     break;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ui.printWriteError();
                 }
             }
             default:
                 try {
                     throw new MissingFormatArgumentException("invalid keywords");
                 } catch (MissingFormatArgumentException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Unrecognised keyword used *\n"
-                            + "Please try the keywords provided below:\n"
-                            + "    1. list\n"
-                            + "    2. todo [description]\n"
-                            + "    3. deadline [description] /by [date] [time]\n"
-                            + "    4. event [description] /at [date] [time]\n"
-                            + "    5. mark [#entry]\n"
-                            + "    6. unmark [#entry]\n"
-                            + "    7. delete [#entry]\n"
-                            + "    8. update\n"
-                            + "    9. bye\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
+                    ui.printListOfCommands();
                     break;
                 }
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        new Duke("data\\duke.txt").run();
     }
 }

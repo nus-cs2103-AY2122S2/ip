@@ -1,10 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,8 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Commands {
-
-    private final TaskHistory taskHistory = new TaskHistory();
 
     public Commands() { // Empty Constructor
     }
@@ -67,16 +58,19 @@ public class Commands {
     }
 
 
-    public void list() { // Get DukeLCH to List cmdHistory
+    public void list(DukeHistory history) { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
         System.out.println(border
                 + "These are your tasks that we have in our records:\n"
-                + taskHistory.printAll() + border);
+                + history.printAll() + border);
     }
 
-    public void mark(int index) {
-        taskHistory.getTask(index).markTask();
-        Task currTask = taskHistory.getTask(index);
+    public void mark(int index, DukeHistory history) {
+        if (index < 0 || index > history.getLength() - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        history.getTask(index).markTask();
+        Task currTask = history.getTask(index);
         String tasking = "";
         if (currTask instanceof ToDos) {
             ToDos temp = (ToDos) currTask;
@@ -97,9 +91,12 @@ public class Commands {
         System.out.println(msg);
     }
 
-    public void unmark(int index) {
-        taskHistory.getTask(index).unmarkTask();
-        Task currTask = taskHistory.getTask(index);
+    public void unmark(int index, DukeHistory history) {
+        if (index < 0 || index > history.getLength() - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        history.getTask(index).unmarkTask();
+        Task currTask = history.getTask(index);
         String tasking = "";
         if (currTask instanceof ToDos) {
             ToDos temp = (ToDos) currTask;
@@ -113,7 +110,7 @@ public class Commands {
         } else {
             System.out.println("Error occurred while processing " + currTask.getTask()); // Temporary error handler
         }
-        taskHistory.getTask(index).unmarkTask();
+        history.getTask(index).unmarkTask();
         String msg = "_______________________________________________________\n"
                 + "A reminder that the following task has not been done:\n"
                 + "    " + tasking
@@ -121,7 +118,7 @@ public class Commands {
         System.out.println(msg);
     }
 
-    public void todo(String[] tokens) {
+    public void todo(String[] tokens, DukeHistory history) {
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
             description = description.concat(tokens[i]);
@@ -129,10 +126,10 @@ public class Commands {
                 description = description.concat(" ");
             }
         }
-        taskHistory.addToDo(description);
+        history.addToDo(description);
     }
 
-    public void deadline(String[] tokens) throws DukeException {
+    public void deadline(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
         String time = "";
@@ -147,17 +144,17 @@ public class Commands {
             description = description.concat(" ");
         }
         // Check for Date and Time
-        if (timeStart == -1) {
+        if (timeStart == -1 || tokens.length - timeStart < 3) {
             throw new DukeException("'/by' not detected");
         }
         // Handle Date
         date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
         // Handle Time
         time = time.concat(convertToDukeTime(tokens[timeStart + 2]));
-        taskHistory.addDeadline(description, date, time);
+        history.addDeadline(description, date, time);
     }
 
-    public void event(String[] tokens) throws DukeException {
+    public void event(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
         String time = "";
@@ -173,7 +170,7 @@ public class Commands {
         }
 
         // Check for timeFrame
-        if (timeStart == -1) {
+        if (timeStart == -1 || tokens.length - timeStart < 3) {
             throw new DukeException("'/at' not detected");
         }
         // Handle Date
@@ -183,55 +180,16 @@ public class Commands {
         time = time.concat(convertToDukeTime(arr[0])
                 .concat("-")
                 .concat(convertToDukeTime(arr[1])));
-        taskHistory.addEvent(description, date, time);
+        history.addEvent(description, date, time);
     }
 
-    public void delete(int index) {
-        taskHistory.deleteTask(index);
+    public void delete(int index, DukeHistory history) {
+        history.deleteTask(index);
     }
 
-    File startup() throws IOException {
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "Duke", "data");
-        String filePath = String.valueOf(path);
-        // Check if parent and child directory exists else create them
-        File f1 = new File(filePath);
-        f1.mkdirs();
-        // Check if duke.txt exits else create it
-        File f2 = new File(filePath + "\\duke.txt");
-        f2.createNewFile();
 
-        return f2;
-    }
 
-    public void restore(File curr) throws FileNotFoundException {
-        Scanner s = new Scanner(curr);
-        while (s.hasNext()) {
-            String temp = s.nextLine();
-            String[] arr = temp.split(">");
-            int mark = Integer.parseInt(arr[1]);
-            switch (arr[0]) {
-            case "T":
-                taskHistory.addToDo(mark, arr[2]);
-                break;
-            case "D":
-                taskHistory.addDeadline(mark, arr[2], arr[3], arr[4]);
-                break;
-            case "E":
-                taskHistory.addEvent(mark, arr[2], arr[3], arr[4]);
-                break;
-            default:
-                System.out.println("load unsuccessful");
-                break;
-            }
-        }
-    }
 
-    void update(File curr) throws IOException {
-        String content = taskHistory.formatRecord();
-        FileWriter fw = new FileWriter(curr);
-        fw.append(content);
-        fw.flush();
-        fw.close();
-    }
+
+
 }

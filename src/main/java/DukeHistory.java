@@ -2,58 +2,58 @@ import java.lang.StringBuilder; // Imported StringBuilder class
 import java.util.ArrayList; // Imported ArrayList class
 import java.util.Iterator;
 
-public class TaskHistory {
-    private final ArrayList<Task> record = new ArrayList<>(100); // ArrayList of size 100 by default
+public class DukeHistory {
+    private final ArrayList<Task> records = new ArrayList<>(100); // ArrayList of size 100 by default
 
-    public TaskHistory() { //Empty Constructor
+    public DukeHistory() { //Empty Constructor
     }
 
     public void addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
-        record.add(tempToDo);
+        records.add(tempToDo);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempToDo.getToDo()
-                + "Currently you have " + record.size() + " tasks in our records.\n"
+                + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     public void addToDo(int mark, String description) {
         ToDos tempToDo = new ToDos(mark, description);
-        record.add(tempToDo);
+        records.add(tempToDo);
     }
 
     public void addDeadline(String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(description, date, time);
-        record.add(tempDeadline);
+        records.add(tempDeadline);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempDeadline.getDeadline()
-                + "Currently you have " + record.size() + " tasks in our records.\n"
+                + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     public void addDeadline(int mark, String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(mark, description, date, time);
-        record.add(tempDeadline);
+        records.add(tempDeadline);
     }
 
     public void addEvent(String description, String date, String time) {
         Event tempEvent = new Event(description, date, time);
-        record.add(tempEvent);
+        records.add(tempEvent);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempEvent.getEvent()
-                + "Currently you have " + record.size() + " tasks in our records.\n"
+                + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     public void addEvent(int mark, String description, String date, String time) {
         Event tempEvent = new Event(mark, description, date, time);
-        record.add(tempEvent);
+        records.add(tempEvent);
     }
 
     /**
@@ -66,7 +66,7 @@ public class TaskHistory {
     public String printAll() {
         int count = 1;
         StringBuilder result = new StringBuilder();
-        for (Task nextTask : record) {
+        for (Task nextTask : records) {
             if (nextTask instanceof ToDos) {
                 ToDos temp = (ToDos) nextTask;
                 result.append(count).append(".").append(temp.getToDo());
@@ -89,12 +89,12 @@ public class TaskHistory {
     }
 
     public Task getTask(int index) {
-        return record.get(index);
+        return records.get(index);
     }
 
     public void deleteTask(int index) {
         StringBuilder description = new StringBuilder();
-        Task temp = record.remove(index);
+        Task temp = records.remove(index);
         if (temp instanceof ToDos) {
             ToDos tempToDos = (ToDos) temp;
             description.append(tempToDos.getToDo());
@@ -110,16 +110,14 @@ public class TaskHistory {
         String msg = "_______________________________________________________\n"
                 + "Understood, removing this task now:\n"
                 + "    " + description
-                + "Now you have " + record.size() + " tasks in our records.\n"
+                + "Now you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     String formatRecord() {
         StringBuilder s = new StringBuilder();
-        Iterator<Task> iterator = record.iterator();
-        while (iterator.hasNext()) {
-            Task temp = iterator.next();
+        for (Task temp : records) {
             if (temp instanceof ToDos) {
                 ToDos tempToDos = (ToDos) temp;
                 s.append(tempToDos.getFormattedText()).append("\n");
@@ -133,7 +131,10 @@ public class TaskHistory {
                 System.out.println("Error occurred while deleting " + temp.getTask());
             }
         }
-        String content = s.toString();
-        return content;
+        return s.toString();
+    }
+
+    public int getLength() {
+        return records.size();
     }
 }
