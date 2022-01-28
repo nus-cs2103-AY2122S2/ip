@@ -3,6 +3,9 @@ package karen.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Stores the (/at) date in which the Event occurs at
+ */
 public class Event extends Task{
     protected LocalDate at;
 

@@ -5,6 +5,9 @@ import karen.Storage;
 import karen.task.Task;
 import karen.Ui;
 
+/**
+ * To delete Task object from Storage.
+ */
 public class DeleteCommand extends Command {
     private int taskIndex;
 

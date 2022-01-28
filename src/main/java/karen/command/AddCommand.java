@@ -4,6 +4,9 @@ import karen.Storage;
 import karen.task.Task;
 import karen.Ui;
 
+/**
+ * To add Task objects into Storage.
+ */
 public class AddCommand extends Command {
     protected Task item;
 

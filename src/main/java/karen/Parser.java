@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Validates and parses arguments to create Command objects.
+ */
 public class Parser {
     public static final Pattern INDEX_FORMAT = Pattern.compile("^(?<keyWord>[^\\s]+)\\s+(?<index>\\d+)$");
     public static final Pattern KEYWORD_FORMAT = Pattern.compile("^(?<keyWord>[^\\s]+).*$");
@@ -21,7 +24,12 @@ public class Parser {
 
     public static final String NA_MESSAGE = "I don't understand anything - I want to speak with your manager";
 
-
+    /**
+     * Validates if dateString parameter follows yyyy-mm-dd format.
+     * @param dateString input string
+     * @return dateString original input string
+     * @throws KarenException if format doesn't follow yyyy-mm-dd
+     */
     public String validateDateFormat(String dateString) throws KarenException {
         try {
             LocalDate.parse(dateString);
@@ -31,6 +39,12 @@ public class Parser {
         return dateString;
     }
 
+    /**
+     * Creates InvalidCommand objects with troubleshooting messages
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return InvalidCommand with default or custom message.
+     */
     private Command prepareInvalid(String keyWord, String fullInput) {
         Command cmd = new InvalidCommand();
 
@@ -48,6 +62,13 @@ public class Parser {
         return cmd;
     }
 
+    /**
+     * Creates AddCommand object by parsing parameters to instantiate Task objects and
+     * other relevant arguments.
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return AddCommand object
+     */
     private Command prepareAdd(String keyWord, String fullInput) {
         final Matcher matcher;
         try {
@@ -75,6 +96,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates ModifyCommand object by parsing parameters to get (1-based index) of Tasks
+     * to modify and the relevant ModifyType
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return ModifyCommand object
+     */
     private Command prepareModify(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
@@ -95,6 +123,13 @@ public class Parser {
         return cmd;
     }
 
+    /**
+     * Creates DeleteCommand object by parsing parameters to get (1-based index) of Tasks
+     * to delete.
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return DeleteCommand object
+     */
     private Command prepareDelete(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
@@ -109,6 +144,11 @@ public class Parser {
 
     }
 
+    /**
+     * Creates Command object from the full user input
+     * @param fullInput full input from user
+     * @return Command object
+     */
     private Command createCommand(String fullInput) {
         // extract first word
         final Matcher matcher = KEYWORD_FORMAT.matcher(fullInput);
@@ -145,6 +185,12 @@ public class Parser {
         return getCommand;
     }
 
+    /**
+     * Wrapper function for Parser object to parse input strings from user
+     * to create Command objects
+     * @param fullInput full input from user
+     * @return Command object
+     */
     public Command parseInput(String fullInput){
         Command cmd;
         cmd = this.createCommand(fullInput);

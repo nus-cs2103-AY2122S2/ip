@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Loads, manages and subsequently saves user's task list
+ * Loads, manages and subsequently saves the user's task list
  */
 public class Storage {
     public static final String DATA_DIR = "./data/";
@@ -27,10 +27,19 @@ public class Storage {
         this.taskList = this.loadTasks();
     }
 
+    /**
+     * Gets number of tasks in taskList
+     * @return Number of tasks in taskList
+     */
     public int getTaskCount() {
         return this.taskList.size();
     }
 
+    /**
+     * Reads data from DATA_PATH directory and parses it into an ArrayList of
+     * Task objects.
+     * @return ArrayList of Task objects read from DATA_PATH directory.
+     */
     private ArrayList<Task> loadTasks() {
         ArrayList<Task> taskList = new ArrayList<>();
         BufferedReader br = null;
@@ -72,6 +81,9 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes data from taskList attribute into file to DATA_PATH directory.
+     */
     protected void saveTasks() {
         // formatting data for writing
         String data = "";
@@ -88,10 +100,10 @@ public class Storage {
             writer.write(data);
         }
         catch (FileNotFoundException err) {
-//            this.echoWarning(String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
+            this.ui.displayWarning(String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
         }
         catch (IOException err) {
-//            this.echoWarning("Something went wrong with writing to file");
+            this.ui.displayWarning("Something went wrong with writing to file");
         }
         finally {
             try {
@@ -103,6 +115,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates Task object based on letters from data format saved in DATA_PATH.
+     * @param taskType Single letter string to indicate subclass of Task object.
+     * @param taskArgs Relevant arguments to instantiate subclasses of Task Objects
+     * @return Task Object
+     */
     public Task createTask(String taskType, String[] taskArgs) {
         Task initTask;
 
@@ -123,21 +141,38 @@ public class Storage {
         return initTask;
     }
 
+    /**
+     * Getter method for Task objects within taskList based on (0-based) index
+     * @param index of Task Object inside of taskList
+     * @return Task object at index parameter
+     * @throws IndexOutOfBoundsException if index is not within range of taskList
+     */
     public Task getTask(int index) throws IndexOutOfBoundsException {
         return this.taskList.get(index);
     }
 
+    /**
+     * Getter method for taskList
+     * @return list of Task objects
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Adds Task object to end of taskList
+     * @param item Task object to be added to taskList
+     */
     public void addTask(Task item) {
         this.taskList.add(item);
     }
 
+    /**
+     * Deletes Task object based on (0-based) index
+     * @param index of Task Object inside of taskList
+     */
     public void deleteTask(int index) {
         this.taskList.remove(index);
     }
-
 
 }

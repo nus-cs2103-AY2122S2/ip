@@ -3,6 +3,9 @@ package karen.command;
 import karen.Storage;
 import karen.Ui;
 
+/**
+ * To feedback Karen to exit and close the application.
+ */
 public class ByeCommand extends Command {
     public ByeCommand() {}
 
