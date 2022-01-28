@@ -28,6 +28,18 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> findTasks(String query) {
+        ArrayList<Task> results = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.matchDescription(query)) {
+                results.add(task);
+            }
+        }
+
+        return results;
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }

@@ -41,7 +41,7 @@ public class Duke {
                         isRunning = false;
                         break;
                     case LIST:
-                        ui.showList(tasks);
+                        ui.showList(tasks.getTasks());
                         break;
                     case MARK:
                         tempTask = tasks.getTask(parser.getIndex(input));
@@ -61,6 +61,10 @@ public class Duke {
                         tasks.removeTask(tempTask);
                         isModified = true;
                         ui.showRemainingTasks(tasks);
+                        break;
+                    case FIND:
+                        task = input.split(" ", 2);
+                        ui.showList(tasks.findTasks(task[1]));
                         break;
                     case TODO:
                         task = input.split(" ", 2);

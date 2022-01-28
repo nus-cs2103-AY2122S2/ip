@@ -14,6 +14,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean matchDescription(String query) {
+        return description.contains(query);
+    }
+
     public void mark() {
         this.isDone = true;
     }
