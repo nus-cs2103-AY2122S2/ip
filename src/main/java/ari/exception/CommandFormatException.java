@@ -1,6 +1,9 @@
 package main.java.ari.exception;
 
-public class CommandFormatException extends DukeException {
+/**
+ * Signals an error caused by having wrong command format
+ */
+public class CommandFormatException extends AriException {
     public CommandFormatException() {
     }
 
