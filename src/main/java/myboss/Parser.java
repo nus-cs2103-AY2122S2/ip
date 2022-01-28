@@ -5,7 +5,7 @@ public class Parser {
 
     }
 
-    public static String[] getUserCmdFirst(String userCmd) {
+    public static String[] splitUserCmd(String userCmd) {
         return userCmd.split(" ",2);
     }
 

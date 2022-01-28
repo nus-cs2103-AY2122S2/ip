@@ -14,9 +14,10 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        createDirAndFileIfNonExistent();
     }
 
-    public void appendTaskToFile(Task task) {
+    public boolean appendTaskToFile(Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             String stringToAppend = task.taskType + "|" + task.isDone + "|" + task.taskName;
@@ -34,24 +35,28 @@ public class Storage {
             }
             fw.write(stringToAppend + System.lineSeparator());
             fw.close();
+            return true;
         } catch (IOException e) {
             Ui.myBossOutput("Error appending task to text file!");
+            return false;
         }
     }
 
-    public void clearTaskFile() {
+    public boolean clearTaskFile() {
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write("");
             fw.close();
+            return true;
         } catch (IOException e) {
             Ui.myBossOutput("Error clearing DB");
+            return false;
         }
     }
 
-    public void createDirAndFileIfNonExistent(String fileName) {
+    public boolean createDirAndFileIfNonExistent() {
         try {
-            File fileObj = new File(fileName);
+            File fileObj = new File(filePath);
             File parentFile = fileObj.getParentFile();
             if (!parentFile.exists()) {
                 parentFile.mkdir();
@@ -59,8 +64,10 @@ public class Storage {
             if (!fileObj.exists()) {
                 fileObj.createNewFile();
             }
+            return true;
         } catch (IOException e) {
             Ui.myBossOutput("An Error has occurred with file creation!");
+            return false;
         }
     }
 
@@ -70,7 +77,7 @@ public class Storage {
         try {
             File dbObj = new File(filePath);
             if (!dbObj.exists()) {
-                createDirAndFileIfNonExistent(filePath);
+                createDirAndFileIfNonExistent();
                 return new ArrayList<Task>();
             }
             Scanner s = new Scanner(dbObj);
@@ -97,7 +104,7 @@ public class Storage {
     }
 
     public void updateFile(ArrayList<Task> taskList) {
-        createDirAndFileIfNonExistent(filePath);
+        createDirAndFileIfNonExistent();
         clearTaskFile();
         taskList.forEach((task)
                 -> appendTaskToFile(task));

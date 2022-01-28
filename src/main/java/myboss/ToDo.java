@@ -33,4 +33,9 @@ public class ToDo extends Task {
                 "[" + (isDone ? "X" : " ") + "] " +
                 this.taskName + "\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
 }

@@ -18,7 +18,7 @@ public class MyBoss {
 
         while (true) {
             String userCmd = ui.getUserCmd();
-            String[] splitUserCmd = Parser.getUserCmdFirst(userCmd);
+            String[] splitUserCmd = Parser.splitUserCmd(userCmd);
             String command = splitUserCmd[0];
 
             String remainingUserInput = Parser.getRemainingUserCmd(splitUserCmd);

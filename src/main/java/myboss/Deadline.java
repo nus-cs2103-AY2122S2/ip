@@ -2,6 +2,7 @@ package myboss;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Deadline extends Task {
     String taskType = "D";
@@ -43,5 +44,14 @@ public class Deadline extends Task {
                 this.taskName +
                 " (by: " + deadlineFormatted + ")" +
                 "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Deadline deadline1 = (Deadline) o;
+        return Objects.equals(taskType, deadline1.taskType) && Objects.equals(deadline, deadline1.deadline);
     }
 }

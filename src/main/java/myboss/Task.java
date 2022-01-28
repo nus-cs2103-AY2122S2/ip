@@ -1,5 +1,7 @@
 package myboss;
 
+import java.util.Objects;
+
 public class Task {
     boolean isDone;
     String taskName;
@@ -35,5 +37,15 @@ public class Task {
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " +
                 this.taskName + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone
+                && Objects.equals(taskName, task.taskName)
+                && Objects.equals(taskType, task.taskType);
     }
 }
