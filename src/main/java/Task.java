@@ -15,7 +15,7 @@ class Task {
         status = false;
     }
 
-    String getStatus() {
+    String getStatus () {
         return status ? "[X]" : "[ ]";
     }
 
@@ -23,7 +23,7 @@ class Task {
         this.status = true;
     }
 
-    void unmarkDone() {
+    void unmarkDone () {
         this.status = false;
     }
 

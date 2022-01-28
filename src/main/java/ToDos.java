@@ -9,8 +9,6 @@ class ToDos extends Task {
         this.status = hasCompleted;
     }
 
-
-
     @Override
     public String toString() {
         return "[" + Type.T + "]";
