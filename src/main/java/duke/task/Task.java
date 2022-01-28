@@ -2,15 +2,12 @@ package duke.task;
 
 public abstract class Task {
     String activity;
-    int status;
+    int status = 0;
     String type = " ";
 
     public Task(String activity, String type) {
         this.activity = activity;
         this.type = type;
-    }
-    public void addedTask() {
-        System.out.println("Got it. I've added this task");
     }
 
     public void updateStatus(int status) {

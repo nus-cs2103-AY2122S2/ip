@@ -11,9 +11,9 @@ public class AddCommand extends Command {
     }
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addTask(this.task);
+        String message = taskList.addTask(this.task);
         storage.saveAddedTask(this.task);
-        ui.print(this.task.printTask());
+        ui.print(message);
         return true;
     }
 }
