@@ -1,16 +1,17 @@
 package duke.task;
 
 public abstract class Task {
+
     String activity;
-    int status = 0;
-    String type = " ";
+    boolean status = false;
+    String type = " "; // Necessary for spacing
 
     public Task(String activity, String type) {
         this.activity = activity;
         this.type = type;
     }
 
-    public void updateStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

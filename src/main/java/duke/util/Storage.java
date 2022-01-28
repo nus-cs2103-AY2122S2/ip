@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.task.Task;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,13 +7,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
+
 public class Storage {
+
     private String filepath;
 
     public Storage(String filepath){
@@ -34,7 +38,7 @@ public class Storage {
 
         ArrayList<Task> taskList = new ArrayList<>(100);
         Scanner readFile = null;
-        String nextSavedTask = null;
+        String nextSavedTask;
         try {
             readFile = new Scanner(saveFile).useDelimiter("\\|");
         } catch (FileNotFoundException e) {
@@ -70,9 +74,6 @@ public class Storage {
             reader = new BufferedReader(new FileReader(saveFile));
             writer = new BufferedWriter(new FileWriter(tempFile));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

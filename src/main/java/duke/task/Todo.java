@@ -8,10 +8,10 @@ public class Todo extends Task {
 
     @Override
     public String printTask() {
-        if (this.status == 0) {
-            return "[" + type + "][ ] " + activity;
-        } else {
+        if (this.status) {
             return "[" + type + "][X] " + activity;
+        } else {
+            return "[" + type + "][ ] " + activity;
         }
     }
 

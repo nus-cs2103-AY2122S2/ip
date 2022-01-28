@@ -1,11 +1,14 @@
 package duke;
-import duke.command.InvalidCommand;
+
 import duke.exception.DukeException;
+
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
+
 import duke.command.Command;
+import duke.command.InvalidCommand;
 
 public class Duke {
 
@@ -28,16 +31,16 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
-        boolean run = true;
-        while(run) {
+        boolean shouldRun = true;
+        while(shouldRun) {
             System.out.print("Me   : ");
             String message = ui.readCommand();
             ui.showLine();
             try {
                 Command command = parser.parseCommand(message);
-                run = command.exec(tasks, ui, storage);
+                shouldRun = command.exec(tasks, ui, storage);
             } catch (DukeException e) {
-                run = new InvalidCommand(e.toString()).exec(tasks, ui, storage);
+                shouldRun = new InvalidCommand(e.toString()).exec(tasks, ui, storage);
             }
         }
     }
