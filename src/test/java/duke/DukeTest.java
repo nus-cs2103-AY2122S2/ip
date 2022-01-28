@@ -1,6 +1,7 @@
-import org.junit.jupiter.api.Test;
+package duke;
 
-import javax.swing.text.html.parser.Parser;
+import duke.Duke;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

@@ -1,7 +1,4 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
+package duke;
 
 import tasks.Deadline;
 import tasks.TaskList;
@@ -19,7 +16,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialises Duke the chat-bot along with its necessary classes and files.
+     * Initialises duke.Duke the chat-bot along with its necessary classes and files.
      *
      * @param filePath Path directory of the saved file containing the list of tasks.
      */
@@ -39,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke the chatbot and interacts with the user based on user input.
+     * Runs duke.Duke the chatbot and interacts with the user based on user input.
      *
      * @throws DukeException
      * @throws IOException
