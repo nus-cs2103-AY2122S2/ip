@@ -1,7 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.task.TaskList;
+import duke.task.Storage;
+import ui.Ui;
+
+
 public class Duke {
 
     TaskList taskList;
-    boolean firstUserChat = true;
     String userName;
     String taskFilePath;
     Ui ui;

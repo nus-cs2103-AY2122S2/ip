@@ -1,5 +1,8 @@
+package duke.command;
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.DukeException;
 
 public enum CommandType {
     BYE("bye", null),
