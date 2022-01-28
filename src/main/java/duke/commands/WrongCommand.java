@@ -17,7 +17,8 @@ public class WrongCommand extends Command<String> {
      * @throws DukeException when this class is instantiated
      */
     public WrongCommand() throws DukeException {
-        Ui.setDukeResponseError(Parser.formatMsg("OOPS!!! I'm sorry, but I don't know what that means :-("));
+        Ui.setDukeResponseError(Parser.formatMsg("Sorry, I do not know what that means." +
+                "\nDid you mean to type something else?"));
         throw new DukeException(Parser.formatMsg("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
     }
 

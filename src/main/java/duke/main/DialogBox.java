@@ -2,10 +2,13 @@ package duke.main;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,38 +17,45 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+
 
 /**
  * DialogBox is the dialog box for the GUI when running Duke
  */
 public class DialogBox extends HBox {
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Creates a new DialogBox that has a Label (which is a text), and an Image to accompany the text
      *
-     * @param l label for this particular DialogBox
-     * @param iv an image for this DialogBox
+     * @param text label for this particular DialogBox
+     * @param img  an image for this DialogBox
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        // Setting background colour
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
+
         this.setBackground(new Background(new BackgroundFill(Color.rgb(100, 200, 200, 1),
-                new CornerRadii(5.0), new Insets(-5.0))));
+                new CornerRadii(0), new Insets(0))));
+        this.displayPicture.setFitWidth(100.0);
 
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
+        this.displayPicture.setFitHeight(100.0);
         // Setting circular border for profile picture
         Circle clip = new Circle(50, 50, 45);
-        iv.setClip(clip);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.setPadding(new Insets(10, 2, 10, 2));
-        this.getChildren().addAll(text, displayPicture);
+        this.displayPicture.setClip(clip);
     }
 
 
@@ -61,14 +71,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
+
+//    public static DialogBox getUserDialog(Label l, ImageView iv) {
+//        return new DialogBox(l, iv);
+//    }
+//
+//    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+//        var db = new DialogBox(l, iv);
+//        db.flip();
+//        return db;
+//    }
 
 }
