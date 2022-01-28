@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Returns String representation of the TaskList
+     * Returns String representation of the duke.TaskList
      */
     @Override
     public String toString() {

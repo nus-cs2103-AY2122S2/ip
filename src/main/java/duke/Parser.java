@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+package duke;
 
 /**
  * Deals with making sense of the user command
