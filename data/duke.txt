@@ -1,7 +1,6 @@
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [E][ ] project meeting (at: Sun 2-4pm)
-3. [D][ ] assignment (by: Mar 28 2022 11:59 PM)
-4. [T][ ] borrow shirt
-5. [E][ ] math meeting (at: Mon 3-6pm)
-6. [D][ ] cs assignment (by: Apr 23 2022 11:59 PM)
+2. [T][ ] borrow shirt
+3. [E][ ] project (at: Sun 4pm)
+4. [D][ ] project (by: Mar 23 2023 6:00 PM)
+
