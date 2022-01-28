@@ -1,17 +1,19 @@
 package duke.command;
 
 import duke.List;
-import duke.Ui;
 import duke.Storage;
+import duke.Ui;
 import duke.task.Tasks;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class AddCommand extends Command {
-    public Tasks taskType;
-    public String description;
-    public String time;
-    public LocalDateTime localDateTime;
+
+    private Tasks taskType;
+    private String description;
+    private String time;
+    private LocalDateTime localDateTime;
 
     public AddCommand(Tasks taskType, String description, String time) {
         super(false);
@@ -43,6 +45,4 @@ public class AddCommand extends Command {
         ui.printAddedTask(taskList);
         storage.writeToFile("data/duke.txt", taskList);
     }
-
-
 }

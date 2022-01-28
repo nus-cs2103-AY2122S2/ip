@@ -4,16 +4,19 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Storage {
+
     private File file;
     private String filePath;
     private File directory;
@@ -42,7 +45,6 @@ public class Storage {
     }
 
     public ArrayList<Task> load() {
-
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File("data/duke.txt");
         try {
@@ -77,8 +79,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
 
-        } finally {
-            return arrayList;
         }
+        return arrayList;
     }
 }
