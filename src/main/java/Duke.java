@@ -1,17 +1,16 @@
 import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
 import util.Parser;
 import util.Storage;
 import util.Ui;
-import task.Task;
-import task.TaskList;
-import task.Event;
-import task.Deadline;
-import task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -21,7 +20,7 @@ public class Duke {
     private File newFile;
     private Parser parser;
 
-    public Duke(String filePath) throws DukeException, FileNotFoundException {
+    public Duke(String filePath) throws FileNotFoundException, DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
         newFile = new File(filePath);
@@ -125,7 +124,7 @@ public class Duke {
 
 
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         new Duke("data/duke.txt").run();
         }
 
