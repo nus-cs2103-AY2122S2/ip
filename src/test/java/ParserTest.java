@@ -1,5 +1,5 @@
 import duke.command.ListCommand;
-import duke.command.UnkownCommandException;
+import duke.parser.UnkownCommandException;
 import duke.common.DukeException;
 import duke.parser.Parser;
 import org.junit.jupiter.api.AfterAll;
