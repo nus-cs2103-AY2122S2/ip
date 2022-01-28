@@ -135,4 +135,23 @@ public class TaskList {
         int taskIndex = Integer.parseInt(taskNum) - 1;
         return tasks.remove(taskIndex);
     }
+
+    /**
+     * Finds all tasks that have description containing the input given and prints them out
+     * @param descriptionToFind String, user input
+     */
+    public void findTasks(String descriptionToFind) {
+        int count = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(descriptionToFind)) {
+                count++;
+                System.out.printf("%d. %s\n", i + 1, task);
+            }
+        }
+        if (count == 0) {
+            System.out.println("Nothing!");
+        }
+    }
 }

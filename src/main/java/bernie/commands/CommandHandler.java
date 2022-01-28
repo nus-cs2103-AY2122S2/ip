@@ -61,6 +61,9 @@ public class CommandHandler {
                 AddCommand addCommand = new AddCommand(tasks, uiHandler, storage, parser, input);
                 addCommand.execute();
                 break;
+            case FIND:
+                FindCommand findCommand = new FindCommand(tasks, uiHandler, storage, parser, input);
+                findCommand.execute();
             default:
                 break;
             }

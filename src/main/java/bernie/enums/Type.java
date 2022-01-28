@@ -17,5 +17,6 @@ public enum Type {
     EVENT,
     MARK,
     UNMARK,
-    DELETE
+    DELETE,
+    FIND
 }

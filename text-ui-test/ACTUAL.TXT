@@ -144,4 +144,31 @@ NOTHING! :D
 ___________________________________________________________
 Task number does not exist!
 ___________________________________________________________
+Got ya. Added:
+[T][ ] buy some groceries
+You got 1 tasks waiting for ya!
+___________________________________________________________
+Got ya. Added:
+[E][ ] dinner date (at: Fri 7pm)
+You got 2 tasks waiting for ya!
+___________________________________________________________
+Got ya. Added:
+[D][ ] buy equipment (by: Feb 1 2022)
+You got 3 tasks waiting for ya!
+___________________________________________________________
+This is now done:
+[D][X] buy equipment (by: Feb 1 2022)
+___________________________________________________________
+We found these tasks in your list:
+1. [T][ ] buy some groceries
+3. [D][X] buy equipment (by: Feb 1 2022)
+___________________________________________________________
+Where's the description?
+___________________________________________________________
+We found these tasks in your list:
+2. [E][ ] dinner date (at: Fri 7pm)
+___________________________________________________________
+We found these tasks in your list:
+Nothing!
+___________________________________________________________
 See ya!

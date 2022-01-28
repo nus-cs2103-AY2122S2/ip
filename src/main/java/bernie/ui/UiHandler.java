@@ -86,4 +86,13 @@ public class UiHandler {
         System.out.printf("This is now undone:\n%s\n", unmarkedTask);
         System.out.println(LINE_BREAK);
     }
+
+    /**
+     * Prints out the header message for matching tasks in the list
+     */
+    public void showFoundTasksMsg(TaskList tasks, String description) {
+        System.out.println("We found these tasks in your list:");
+        tasks.findTasks(description);
+        System.out.println(lineBreak);
+    }
 }
