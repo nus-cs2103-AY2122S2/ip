@@ -7,10 +7,24 @@ import mickey.command.DeleteCommand;
 import mickey.command.ListCommand;
 import mickey.command.MarkCommand;
 
+/**
+ * Parser to handle input commands to Mickey.
+ */
 public class Parser {
+
+    /**
+     * Constructor.
+     */
     public Parser() {
     }
 
+    /**
+     * Returns command based on the command parsed.
+     *
+     * @param fullCommand User input command.
+     * @return Corresponding command object called by user.
+     * @throws MickeyException Exception for invalid commands.
+     */
     public static Command parse(String fullCommand) throws MickeyException {
         String[] args = fullCommand.split(" ");
         switch (args[0]) {

@@ -16,14 +16,29 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage object to perform task load and store from tasks.txt file.
+ */
 public class Storage {
+    /** Path of the file containing saved tasks. */
     String filePath;
 
+    /**
+     * Constructor.
+     *
+     * @param filePath path of the file containing saved tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws Exception {
+    /**
+     * Load tasks from text file.
+     *
+     * @return List of tasks loaded from file.
+     * @throws MickeyException exception for task loading error.
+     */
+    public List<Task> load() throws MickeyException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         if (f.exists()) {
@@ -44,7 +59,7 @@ public class Storage {
                             t = new Event(toAdd[2], toAdd[3]);
                             break;
                         default:
-                            throw new Exception();
+                            throw new MickeyException("Failed to load task\n");
                     }
 
                     if (toAdd[1].equals("1")) {
@@ -59,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save tasks into text file.
+     *
+     * @param tasks List of tasks.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
