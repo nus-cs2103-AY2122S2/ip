@@ -120,8 +120,7 @@ public class TaskList {
     }
 
     /**
-     * This method changes the completion status of the task
-     * to done in the list.
+     * Changes the completion status of the task
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -138,8 +137,7 @@ public class TaskList {
     }
 
     /**
-     * This method changes the completion status of the task
-     * to not done in the list.
+     * Changes the completion status of the task
      *
      * @param index position of the task in the list
      * @throws DukeException if position of the task exceeds what we have on the list
@@ -155,6 +153,34 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a list of tasks with a keyword specified by the user.
+     *
+     * @param taskName the keyword entered by the user.
+     */
+    public void findTask(String taskName) {
+        int num = 1;
+        int matchNum = 0;
+        System.out.println("HERE ARE THE MATCHING TASKS IN YOUR LIST:");
+        for (Task task : list) {
+            String str = task.getDesc();
+            if (taskName == null) {
+                break;
+            } else if (str.contains(taskName)) {
+                System.out.println(num + "." + task);
+                matchNum++;
+            }
+            num++;
+        }
+        System.out.println("MATCH FOUND: " + matchNum);
+    }
+
+    /**
+     * Gets a specific task from the list based on position.
+     *
+     * @param index the position of the task in the list.
+     * @return a task object.
+     */
     public Task getIndex(int index) {
         return list.get(index);
     }

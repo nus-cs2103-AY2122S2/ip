@@ -53,4 +53,7 @@ public class Event extends Task {
     }
   }
 
+  public LocalDate getDate() {
+    return date;
+  }
 }

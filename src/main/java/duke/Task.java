@@ -22,7 +22,7 @@ public abstract class Task {
   }
 
   /**
-   * This method is used to change the status of the Task to done.
+   * Changes the status of the Task to done.
    */
   public void setAsDone() {
     this.isDone = true;
@@ -39,4 +39,12 @@ public abstract class Task {
    * Changes the string format of this event object.
    */
   public abstract String changeFormat();
+
+  public String getDesc() {
+    return desc;
+  }
+
+  public boolean getIsDone() {
+    return isDone;
+  }
 }
