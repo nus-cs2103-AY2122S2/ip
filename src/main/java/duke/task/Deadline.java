@@ -23,7 +23,7 @@ public class Deadline extends Task {
      * @param isDone a boolean indicating whether the task is done
      * @param by a {@code DukeDateTime} object specifying the deadline
      */
-    public Deadline(String description, Boolean isDone, DukeDateTime by) {
+    public Deadline(String description, boolean isDone, DukeDateTime by) {
         super(description, isDone);
         this.by = by;
     }
@@ -35,13 +35,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Icon getIcon() {
-        return ICON;
+    public String toStringRecord() {
+        return ICON + " " + super.toStringRecord() + " /by " + by.format("yyyy-M-d");
     }
 
     @Override
-    public String getDescription() {
-        return description + " /by " + by.format("d MMM yyyy");
+    public Icon getIcon() {
+        return ICON;
     }
 
     @Override

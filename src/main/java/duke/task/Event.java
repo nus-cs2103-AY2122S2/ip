@@ -23,7 +23,7 @@ public class Event extends Task {
      * @param isDone a boolean indicating whether the task is done
      * @param at a {@code DukeDateTime} object specifying the time of the event
      */
-    public Event(String description, Boolean isDone, DukeDateTime at) {
+    public Event(String description, boolean isDone, DukeDateTime at) {
         super(description, isDone);
         this.at = at;
     }
@@ -34,13 +34,13 @@ public class Event extends Task {
     }
 
     @Override
-    public Icon getIcon() {
-        return ICON;
+    public String toStringRecord() {
+        return ICON + " " + super.toStringRecord() + " /at " + at.format("yyyy-M-d");
     }
 
     @Override
-    public String getDescription() {
-        return description + " /at " + at.format("d MMM yyyy");
+    public Icon getIcon() {
+        return ICON;
     }
 
     @Override

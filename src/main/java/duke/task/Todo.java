@@ -19,7 +19,7 @@ public class Todo extends Task {
      * @param description the description of the todo task
      * @param isDone a boolean indicating whether the task is done
      */
-    public Todo(String description, Boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -29,13 +29,13 @@ public class Todo extends Task {
     }
 
     @Override
-    public Icon getIcon() {
-        return ICON;
+    public String toStringRecord() {
+        return ICON + " " + super.toStringRecord();
     }
 
     @Override
-    public String getDescription() {
-        return description;
+    public Icon getIcon() {
+        return ICON;
     }
 
     @Override

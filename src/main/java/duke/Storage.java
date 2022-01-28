@@ -5,10 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Storage {
 
@@ -75,8 +76,7 @@ public class Storage {
         FileWriter fw = new FileWriter(records.getPath());
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
-            fw.write(t.getIcon() + " " + (t.isDone() ? "1" : "0") + " "
-                    + t.getDescription() + "\n");
+            fw.write(t.toStringRecord() + "\n");
         }
         fw.close();
     }

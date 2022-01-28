@@ -56,8 +56,16 @@ public abstract class Task {
     }
 
     /**
-     * Returns 1 if the task is marked as done and 0 otherwise.
-     * @return 1 if the task is marked as done and 0 otherwise
+     * Returns a string for recording the task.
+     * @return a string for recording the task
+     */
+    public String toStringRecord() {
+        return (isDone ? 1 : 0) + " " + description;
+    }
+
+    /**
+     * Returns true if the task is marked as done.
+     * @return true if the task is marked as done
      */
     public boolean isDone() {
         return isDone;
@@ -65,13 +73,15 @@ public abstract class Task {
 
     /**
      * Returns the description of the task.
-     * @return the description of the task.
+     * @return the description of the task
      */
-    public abstract String getDescription();
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * Returns the icon representing the type of the task.
-     * @return the icon representing the type of the task.
+     * @return the icon representing the type of the task
      */
     public abstract Icon getIcon();
 

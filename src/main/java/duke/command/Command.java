@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+import duke.task.TaskList;
 
 public abstract class Command {
 

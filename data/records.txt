@@ -1,8 +1,5 @@
-D 1 return book /by 4 Sep 2017 10:00
-D 1 homework /by 18 Sep 2019
-E 0 concert /at 18 Mar 2021 13:00
-D 1 proposal /by 20 Sep 2019
-T 1 surfing
-D 0 report /by 19 Nov 2019 15:00
-D 1 party /by 28 Feb 2021 15:00
-D 1 play games /by 15 Apr 2020 15:30
+D 0 homework /by 2020-3-4 17:00
+E 0 concert /at 2020-3-9 14:00
+E 1 party /at 2020-3-14 19:00
+T 0 read book
+D 0 report /by 2020-4-10 12:00

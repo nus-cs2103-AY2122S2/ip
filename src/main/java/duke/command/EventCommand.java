@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.DukeDateTime;
 import duke.task.Task;
 import duke.task.Event;
+import duke.task.TaskList;
 
 public class EventCommand extends Command {
 

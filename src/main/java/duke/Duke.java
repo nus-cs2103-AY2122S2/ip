@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import duke.command.Command;
+import duke.task.TaskList;
 
 public class Duke {
 
@@ -46,6 +47,7 @@ public class Duke {
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
+                storage.update(tasks);
             } catch (ExitException e) {
                 storage.update(tasks);
                 break;
