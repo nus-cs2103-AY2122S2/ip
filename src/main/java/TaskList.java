@@ -2,16 +2,18 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> itemList = new ArrayList<>(0);
     private Path absolutePath;
-    private Path folderPath;
-    private String fileName;
+    private final Path folderPath;
+    private final String fileName;
     private File targetFile;
 
     //read file and initialize arraylist: if dont have existing file, create.
@@ -40,6 +42,7 @@ public class TaskList {
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/mm/yyyy HHmm");
             String line;
             while((line  = bufferedReader.readLine()) != null) {
                 //write to arraylist
@@ -54,12 +57,12 @@ public class TaskList {
                 case "event":
                     String eventTitle = "event " + tokens[1];
                     String eventDeadline = tokens[3];
-                    this.itemList.add(new EventTask(eventTitle, eventDeadline, isMarked));
+                    this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
                     break;
                 case "deadline":
                     String deadlineTitle = "deadline " + tokens[1];
                     String deadlineDeadline = tokens[3];
-                    this.itemList.add(new DeadlineTask(deadlineTitle, deadlineDeadline, isMarked));
+                    this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
                     break;
                 }
             }
@@ -126,18 +129,24 @@ public class TaskList {
             System.out.println(err.getMessage());
             return;
         }
-        Task newTask = new EventTask(taskTitle, deadline);
-        this.itemList.add(newTask);
-        writeToFile(taskKey, "E", false);
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Got it. I've added this task:\n"
-                        + "  " + newTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
+            writeToFile(taskKey, "E", false);
+            this.itemList.add(newTask);
+            System.out.println(
+                    "----------------------------" +
+                            "----------------------------\n" +
+                            "Got it. I've added this task:\n"
+                            + "  " + newTask + "\n"
+                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "\n"
+                            + "--------------------------------------------------------"
+            );
+        } catch(DateTimeParseException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void addDeadline(String taskKey) {
@@ -166,18 +175,27 @@ public class TaskList {
             System.out.println(err.getMessage());
             return;
         }
-        Task newTask = new DeadlineTask(taskTitle, deadline);
-        this.itemList.add(newTask);
-        writeToFile(taskKey, "D", false);
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Got it. I've added this task:\n"
-                        + "  " + newTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+
+        try {
+            //Accept string
+            //Parse string to datetime, use formatter here to change reading style
+            //when printing, check date time and print format.
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
+            writeToFile(taskKey, "D", false);
+            this.itemList.add(newTask);
+            System.out.println(
+                    "----------------------------" +
+                            "----------------------------\n" +
+                            "Got it. I've added this task:\n"
+                            + "  " + newTask + "\n"
+                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "\n"
+                            + "--------------------------------------------------------"
+            );
+        } catch(DateTimeParseException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void deleteTask(String taskKey) {
@@ -244,7 +262,7 @@ public class TaskList {
         StringBuilder initList = new StringBuilder();
 
         for (int i = 1; i < itemList.size() + 1; i++) {
-            initList.append(i + ".");
+            initList.append(i).append(".");
             initList.append(itemList.get(i - 1));
             initList.append("\n");
         }
@@ -317,23 +335,23 @@ public class TaskList {
             case "T":
                 String[] todoTokens = taskKey.split("todo ");
                 toWrite = "todo / " + todoTokens[1] + " / " + mark;
-                bufferedWriter.append(newLine + toWrite);
+                bufferedWriter.append(newLine).append(toWrite);
                 break;
             case "E":
-                String eventTokens[] = taskKey.split("event ");
+                String[] eventTokens = taskKey.split("event ");
                 toWrite = eventTokens[1];
-                String eSplit[] = toWrite.split(" /at ");
+                String[] eSplit = toWrite.split(" /at ");
                 toWrite = String.join(" / ", eSplit );
                 toWrite = "event / " + toWrite + " / " + mark;
                 bufferedWriter.append(newLine + toWrite);
                 break;
             case "D":
-                String deadlineTokens[] = taskKey.split("deadline ");
+                String[] deadlineTokens = taskKey.split("deadline ");
                 toWrite = deadlineTokens[1];
-                String dSplit[] = toWrite.split(" by/ ");
+                String[] dSplit = toWrite.split(" by/ ");
                 toWrite = String.join(" / ", dSplit );
                 toWrite = "deadline / " + toWrite + " / " + mark;
-                bufferedWriter.append(newLine + toWrite);
+                bufferedWriter.append(newLine).append(toWrite);
                 break;
             }
             bufferedWriter.close();

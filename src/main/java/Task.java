@@ -1,7 +1,9 @@
+import java.time.LocalDateTime;
+
 public abstract class Task {
     private final String taskTitle;
     private boolean markedStatus;
-    private String deadline;
+    private LocalDateTime deadline;
     //mark/unmarked as classes
 
     public Task(String taskTitle) {
@@ -9,7 +11,7 @@ public abstract class Task {
         this.markedStatus = false;
     }
 
-    public Task(String taskTitle, String deadline) {
+    public Task(String taskTitle, LocalDateTime deadline) {
         this.taskTitle = taskTitle;
         this.deadline = deadline;
         this.markedStatus = false;

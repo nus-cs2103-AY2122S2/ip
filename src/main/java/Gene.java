@@ -66,6 +66,9 @@ public class Gene {
                     continue;
                 }
 
+                //printmatch all/incomplete/complete events
+                //printmatch all/incomplete/comlete events in a date
+
                 if (Identity.deadlineMatch(nextKey)) {
                     //unmark
                     Gene.thisList.addDeadline(nextKey);
