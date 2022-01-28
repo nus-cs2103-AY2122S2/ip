@@ -29,6 +29,16 @@ public class Task {
     }
 
     /**
+     * Checks whether a query can be found in the task description.
+     *
+     * @param query The given word or phrase.
+     * @return Boolean stating whether the description contains the query.
+     */
+    public boolean matchDescription(String query) {
+        return description.contains(query);
+    }
+
+    /**
      * Method to mark a task as done.
      */
     public void mark() {

@@ -1,6 +1,8 @@
 package jose;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+
 import jose.task.*;
 
 /**
@@ -83,10 +85,10 @@ public class Ui {
      *
      * @param tasks A task list.
      */
-    public void showList(TaskList tasks) {
+    public void showList(ArrayList<Task> tasks) {
         out.println(DIVIDER + LS + "Aquí están las tareas en su lista:");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            out.println(i + 1 + ": " + tasks.getTask(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            out.println(i + 1 + ": " + tasks.get(i));
         }
         out.println(DIVIDER);
     }

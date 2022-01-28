@@ -8,7 +8,7 @@ public class Parser {
      * A set of predefined commands.
      */
     public enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     /**
@@ -32,6 +32,8 @@ public class Parser {
                 return Command.UNMARK;
             } else if (command.equals("delete")) {
                 return Command.DELETE;
+            } else if (command.equals("find")) {
+                return Command.FIND;
             } else {
                 if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                     if (task.length > 1) {
