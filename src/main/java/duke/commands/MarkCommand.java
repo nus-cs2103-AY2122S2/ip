@@ -3,6 +3,7 @@ package duke.commands;
 import duke.main.DukeException;
 import duke.main.Parser;
 import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Task;
 
 /**
@@ -37,9 +38,10 @@ public class MarkCommand extends Command<Integer> {
             taskToMark.mark();
 
             // Print out the formatted message after marking
-            System.out.println(Parser.formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
+            Ui.setDukeResponse(Parser.formatMsg("OK, I've marked this task as done:\n" + taskToMark));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist."));
+            Ui.setDukeResponseError(Parser.formatMsg("OOPS!!! Item to mark does not exist."));
+            throw new DukeException(Parser.formatMsg("OOPS!!! Item to mark does not exist."));
         }
     }
 }

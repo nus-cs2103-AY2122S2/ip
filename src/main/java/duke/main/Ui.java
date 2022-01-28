@@ -2,13 +2,15 @@ package duke.main;
 
 public class Ui {
     private static Parser parser;
+    private static String response;
+    private static String errorMsg;
 
     /**
      * The possible types of Reply that Burp can have, in response to
      * a Command
      */
     public enum Reply {
-        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT, FIND
+        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT, FIND, BYE
     }
 
     /**
@@ -46,6 +48,8 @@ public class Ui {
             return Reply.DELETE;
         case "find":
             return Reply.FIND;
+        case "bye":
+            return Reply.BYE;
         default:
             return Reply.DEFAULT;
         }
@@ -55,7 +59,7 @@ public class Ui {
      * Method to output a formatted "Bye" message.
      */
     public static void showBye() {
-        System.out.println(parser.formatMsg("Bye. Hope to see you again soon!"));
+        Ui.setDukeResponse(Parser.formatMsg("Bye. Hope to see you again soon!"));
     }
 
     /**
@@ -75,7 +79,7 @@ public class Ui {
      * Method to output a formatted "Welcome" message.
      */
     public static void showWelcome() {
-        System.out.println(parser.formatMsg("Hello from Burp\n\tWhat can I do for you?"));
+        Ui.setDukeResponse(Parser.formatMsg("Hey! Nice to see you back here again.\nWhat would you like to do?"));
     }
 
     /**
@@ -83,6 +87,25 @@ public class Ui {
      */
     public static void handleLoadError() {
         System.out.println("File could not be loaded -- most likely it has not been created");
+    }
+
+
+    public static String getDukeResponse() {
+        return Ui.response;
+    }
+
+    public static String setDukeResponse(String response) {
+        Ui.response = response;
+        return Ui.response;
+    }
+
+    public static String getDukeResponseError() {
+        return Ui.errorMsg;
+    }
+
+    public static String setDukeResponseError(String errorMsg) {
+        Ui.errorMsg = errorMsg;
+        return Ui.errorMsg;
     }
 
 }

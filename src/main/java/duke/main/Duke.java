@@ -1,10 +1,7 @@
 package duke.main;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 
 /**
@@ -12,10 +9,13 @@ import java.io.InputStreamReader;
  * This class contains all the abstracted details for Duke.
  */
 public class Duke {
+
     private TaskList toDoList;
     private Storage storage;
     private Ui ui;
+
     private final String filepath = "./tasklist.txt";
+    private boolean isFirstStartup = true;
 
     /**
      * Constructor for Duke.
@@ -37,34 +37,18 @@ public class Duke {
     }
 
     /**
-     * Driver for Duke.
-     * Runs Duke and awaits for Commands from the user.
+     * Gets Burp's response in return to a command given to it.
      *
-     * @throws DukeException when a WrongCommand is given
-     * @throws IOException   when an IO error occurs while reading user input
+     * @param input the user input
+     * @return Burp's response
      */
-    public void run() throws DukeException, IOException {
-        // Declaration of variables
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String cmd;
-
-        // Print out the welcome message and await user input
-        Ui.showWelcome();
-        while (!(cmd = br.readLine()).equals("bye")) {
-            String commandType = cmd.split(" ")[0];
-            ui.burpReply(ui.determineType(commandType), toDoList, cmd, this.storage);
+    public String getResponse(String input) {
+        try {
+            String commandType = input.split(" ")[0];
+            ui.burpReply(ui.determineType(commandType), toDoList, input, this.storage);
+            return Ui.getDukeResponse();
+        } catch (DukeException e) {
+            return Ui.getDukeResponseError();
         }
-        Ui.showBye();
-    }
-
-    /**
-     * Main method. Used for CLI programs
-     *
-     * @param args unused
-     * @throws DukeException when a WrongCommand is given
-     * @throws IOException   when an IO error occurs
-     */
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
     }
 }

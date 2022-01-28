@@ -3,6 +3,7 @@ package duke.commands;
 import duke.main.DukeException;
 import duke.main.Parser;
 import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Task;
 
 /**
@@ -35,10 +36,11 @@ public class DeleteCommand extends Command<Integer> {
             Task deletedTask = toDoList.remove(numberToDelete);
 
             // Print out the formatted message after removing from TaskList
-            System.out.println(Parser.formatMsg("Noted. I've removed this task:\n\t" + deletedTask
-                    + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+            Ui.setDukeResponse(Parser.formatMsg("Noted. I've removed this task:\n" + deletedTask
+                    + "\nNow you have " + toDoList.size() + " tasks in the list."));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to delete does not exist."));
+            Ui.setDukeResponseError("OOPS!!! Item to delete does not exist.");
+            throw new DukeException(Parser.formatMsg("OOPS!!! Item to delete does not exist."));
         }
     }
 }

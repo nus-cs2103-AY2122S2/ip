@@ -2,11 +2,11 @@ package duke.commands;
 
 import duke.main.Parser;
 import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Task;
 
-public class FindCommand extends Command<String> {
-    private final String tabbedLine = "\t----------------------------------------------";
 
+public class FindCommand extends Command<String> {
     /**
      * Constructor for FindCommand.
      * When this class is instantiated, it automatically runs runCommand().
@@ -44,15 +44,16 @@ public class FindCommand extends Command<String> {
 
         // Printing logic
         if (temp.size() > 0) {
+            String dukeResponse = "";
             // Print out all search terms found
-            System.out.println(tabbedLine);
-            System.out.println("\tHere are the matching tasks in your list:");
+            dukeResponse += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < temp.size(); i++) {
-                System.out.println("\t" + (i + 1) + "." + temp.get(i).toString());
+                dukeResponse += "" + (i + 1) + "." + temp.get(i).toString() + "\n";
             }
-            System.out.println(tabbedLine);
+            dukeResponse += "\n";
+            Ui.setDukeResponse(dukeResponse);
         } else {
-            System.out.println(Parser.formatMsg("There were no terms matching: " + searchTerm));
+            Ui.setDukeResponse(Parser.formatMsg("There were no terms matching: " + searchTerm));
         }
     }
 }
