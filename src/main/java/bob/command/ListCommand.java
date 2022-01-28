@@ -24,7 +24,7 @@ public class ListCommand extends Command {
                 ui.preListReply();
             }
             for (int i = 1; i <= tasks.size(); i++) {
-                ui.say("\t" + i + ". " + tasks.getTask(i - 1).printStatus());
+                ui.say(String.format("\t %o . %s", i, tasks.getTask(i - 1).printStatus()));
             }
             ui.postListFace();
         }

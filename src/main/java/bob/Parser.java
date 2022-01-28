@@ -1,19 +1,7 @@
 package bob;
 
-import bob.exception.BobException;
-import bob.exception.InvalidCommandException;
-import bob.exception.EventException;
-import bob.exception.ToDoException;
-import bob.exception.DeadlineException;
-
-import bob.command.DeadlineCommand;
-import bob.command.DeleteCommand;
-import bob.command.ToDoCommand;
-import bob.command.EventCommand;
-import bob.command.ByeCommand;
-import bob.command.Command;
-import bob.command.ListCommand;
-import bob.command.MarkCommand;
+import bob.command.*;
+import bob.exception.*;
 
 
 import java.time.LocalDate;
@@ -77,8 +65,14 @@ public class Parser {
             }
         } else if (firstWord.equalsIgnoreCase("bye")) {
             return new ByeCommand();
+        } else if (firstWord.equalsIgnoreCase("find")) {
+            String searchInput = input.substring(4).trim();
+            if (searchInput.isBlank()) {
+                throw new FindException();
+            }
+            return new FindCommand(searchInput);
         } else {
-            throw new InvalidCommandException();
+                throw new InvalidCommandException();
         }
     }
 }
