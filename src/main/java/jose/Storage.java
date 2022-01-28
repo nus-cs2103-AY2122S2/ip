@@ -22,10 +22,10 @@ public class Storage {
      * @throws IOException If there are any errors creating the data file.
      */
     public Storage(String filePath) throws IOException {
-        this.file = new File(filePath);
-        if (!this.file.exists()) {
-            this.file.getParentFile().mkdirs();
-            this.file.createNewFile();
+        file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         }
     }
 

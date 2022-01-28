@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void getStatusIconTest_true(){
+    public void getStatusIconTest_marked(){
         assertEquals("[X]", new Task("", true).getStatusIcon());
     }
 
     @Test
-    public void getStatusIconTest_false(){
+    public void getStatusIconTest_unmarked(){
         assertEquals("[ ]", new Task("", false).getStatusIcon());
     }
 

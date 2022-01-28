@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -32,14 +32,14 @@ public class Task {
      * Method to mark a task as done.
      */
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Method to mark a task as not done.
      */
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Task {
      * @return An icon representing the status of a task.
      */
     public String getStatusIcon() {
-        return (this.isDone ? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     /**
@@ -67,6 +67,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.description;
+        return getStatusIcon() + " " + description;
     }
 }
