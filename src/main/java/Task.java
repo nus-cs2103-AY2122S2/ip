@@ -1,10 +1,10 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isMarked;
 
-    public Task(String description) {
+    public Task(String description, boolean isMarked) {
         this.description = description;
-        this.isMarked = false;
+        this.isMarked = isMarked;
     }
 
     public void markAsDone() {
@@ -19,4 +19,6 @@ public class Task {
     public String toString() {
         return "[" + (isMarked ? "X" : " ") + "] " + this.description;
     }
+
+    public abstract String toData();
 }
