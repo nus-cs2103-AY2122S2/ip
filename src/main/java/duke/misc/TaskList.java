@@ -1,20 +1,20 @@
 package duke.misc;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Acts as a storage for all the tasks that the user has entered.
  *
- * @auther Terng Yan Long
+ * @author Terng Yan Long
  */
 public class TaskList {
     private final ArrayList<Task> listOfTasks;
@@ -52,7 +52,7 @@ public class TaskList {
      * Adds 1 to the numberOfTasks.
      * Mostly used when a Task is being added to the TaskList.
      */
-    public void incrementTasks(){
+    public void incrementTasks() {
         this.numberOfTasks++;
     }
 

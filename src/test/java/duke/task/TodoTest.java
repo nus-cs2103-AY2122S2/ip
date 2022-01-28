@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
@@ -12,13 +12,13 @@ public class TodoTest {
     }
 
     @Test
-    public void testGetStatusIcon_unmarked(){
+    public void testGetStatusIcon_unmarked() {
         Todo task = new Todo("x");
         assertEquals(" ", task.getStatusIcon());
     }
 
     @Test
-    public void testGetStatusIcon_marked(){
+    public void testGetStatusIcon_marked() {
         Todo task = new Todo("x");
         task.setStatus(true);
         assertEquals("X", task.getStatusIcon());

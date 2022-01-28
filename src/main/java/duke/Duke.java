@@ -1,14 +1,14 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.misc.Parser;
 import duke.misc.Storage;
 import duke.misc.TaskList;
 import duke.misc.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * KoroBot is a chatbot that tracks the list of tasks on hand.
@@ -17,6 +17,10 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class Duke {
+    /**
+     * Runs Duke.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         Ui.greet();
 

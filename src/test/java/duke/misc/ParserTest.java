@@ -1,10 +1,10 @@
 package duke.misc;
 
-import org.junit.jupiter.api.Test;
-
 import static duke.misc.Parser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -98,8 +98,8 @@ public class ParserTest {
             parse("deadline task without /_by", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("Please follow this format: deadline <task> " +
-                    "/by <date in yyyy-MM-dd> <time in 24hrs format>", e.getMessage());
+            assertEquals("Please follow this format: deadline <task> "
+                    + "/by <date in yyyy-MM-dd> <time in 24hrs format>", e.getMessage());
         }
 
         try {
@@ -204,8 +204,8 @@ public class ParserTest {
             parse("event task without /_at", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("Please follow this format: event <task> " +
-                    "/at <date in yyyy-MM-dd> <time in 24hrs format>", e.getMessage());
+            assertEquals("Please follow this format: event <task> "
+                    + "/at <date in yyyy-MM-dd> <time in 24hrs format>", e.getMessage());
         }
 
         try {
@@ -305,8 +305,8 @@ public class ParserTest {
             parse("mark 0", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1."
-                    , e.getMessage());
+            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1.",
+                    e.getMessage());
         }
 
         try {
@@ -356,8 +356,8 @@ public class ParserTest {
             parse("unmark 0", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1."
-                    , e.getMessage());
+            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1.",
+                    e.getMessage());
         }
 
         try {
@@ -405,8 +405,8 @@ public class ParserTest {
             parse("delete 0", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1."
-                    , e.getMessage());
+            assertEquals("The specified task ID is out of range. Please enter a number from 0 to 1.",
+                    e.getMessage());
         }
 
         try {

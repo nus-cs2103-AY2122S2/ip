@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
@@ -33,13 +33,13 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testGetStatusIcon_unmarked(){
+    public void testGetStatusIcon_unmarked() {
         Deadline task = new Deadline("x", LocalDate.parse("2077-12-12"), LocalTime.parse("12:00"));
         assertEquals(" ", task.getStatusIcon());
     }
 
     @Test
-    public void testGetStatusIcon_marked(){
+    public void testGetStatusIcon_marked() {
         Deadline task = new Deadline("x", LocalDate.parse("2077-12-12"), LocalTime.parse("12:00"));
         task.setStatus(true);
         assertEquals("X", task.getStatusIcon());

@@ -1,10 +1,5 @@
 package duke.misc;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidCommand;
-import duke.exception.InvalidDateTime;
-import duke.exception.InvalidIndex;
-
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,6 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidCommand;
+import duke.exception.InvalidDateTime;
+import duke.exception.InvalidIndex;
 
 /**
  * Extracts and deciphers the user's input, and subsequently calls the relevant function.
@@ -51,8 +51,8 @@ public class Parser {
             if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
             } else if (!wordsList.contains("/by")) {
-                throw new InvalidCommand("Please follow this format: deadline <task> " +
-                        "/by <date in yyyy-MM-dd> <time in 24hrs format>");
+                throw new InvalidCommand("Please follow this format: deadline <task> "
+                        + "/by <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
                 int separator = wordsList.indexOf("/by");
                 String desc = "";
@@ -98,8 +98,8 @@ public class Parser {
             if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
             } else if (!wordsList.contains("/at")) {
-                throw new InvalidCommand("Please follow this format: event <task> " +
-                        "/at <date in yyyy-MM-dd> <time in 24hrs format>");
+                throw new InvalidCommand("Please follow this format: event <task> "
+                        + "/at <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
                 int separator = wordsList.indexOf("/at");
                 String desc = "";
@@ -161,8 +161,8 @@ public class Parser {
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
                 } else {
-                    throw new InvalidIndex("The specified task ID is out of range. " +
-                            "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    throw new InvalidIndex("The specified task ID is out of range. "
+                            + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
             break;
@@ -176,8 +176,8 @@ public class Parser {
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
-                    throw new InvalidIndex("The specified task ID is out of range. " +
-                            "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    throw new InvalidIndex("The specified task ID is out of range. "
+                            + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
             break;
@@ -191,8 +191,8 @@ public class Parser {
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
-                    throw new InvalidIndex("The specified task ID is out of range. " +
-                            "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    throw new InvalidIndex("The specified task ID is out of range. "
+                            + "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
                 }
             }
             break;
@@ -215,7 +215,7 @@ public class Parser {
      * @return true if the input string represents an integer value, and false otherwise.
      * @throws NumberFormatException thrown if the string does not represent an integer value.
      */
-    private static boolean isInteger(String input) throws NumberFormatException  {
+    private static boolean isInteger(String input) throws NumberFormatException {
         boolean isInt = true;
         try {
             Integer.parseInt(input);

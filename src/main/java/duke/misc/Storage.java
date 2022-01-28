@@ -1,12 +1,5 @@
 package duke.misc;
 
-import duke.exception.InvalidCommand;
-import duke.exception.InvalidDateTime;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +8,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.exception.InvalidCommand;
+import duke.exception.InvalidDateTime;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Deals with the loading/storing of data from/to the hard disk folder.
@@ -63,6 +63,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialises the task list according to the size specified.
+     * Copies content from data file if it exists on the hard-disk.
+     *
+     * @param size Size of tasklist
+     * @return A TaskList that may contain stored data from previous runs.
+     */
     public static TaskList initTaskList(int size) {
         File dataFile = new File(DATA_PATH);
         TaskList taskListOfTasks = new TaskList(size);
