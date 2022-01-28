@@ -6,9 +6,13 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Encapsulates the logic to parse and understand inputs by the user.
+ */
 public class Parser {
     
     private TaskList tasks;
+    /** Represents whether or not the parser is accepting userinput. */
     public boolean isPolling;
 
     public Parser() {
@@ -23,6 +27,11 @@ public class Parser {
         Ui.printMessage(Ui.GREETING_MESSAGE);
     }
 
+    /**
+     * Handles user commands and delegates them to their corresponding methods.
+     * 
+     * @param input The text input by the user.
+     */
     public void inputHandler(String input) {
         String[] commandArgs = input.split(" ", 2);
         String command = commandArgs[0];
@@ -84,6 +93,14 @@ public class Parser {
         Ui.printMessage(replyMessage);
     }
 
+    /**
+     * Creates a Task based on user-specified parameters.
+     * 
+     * @param command The type of task to be created.
+     * @param commandDetails The user-specified parameters for different types of tasks.
+     * @return A Task.
+     * @throws DukeException if user-specified parameters do not meet the expected format.
+     */
     public Task createTask(String command, String commandDetails) throws DukeException{
         String[] taskArgs = null;
 
@@ -103,6 +120,13 @@ public class Parser {
             : new Event(taskArgs[0], taskArgs[1]);
     }
 
+    /**
+     * The action to be taken when a bye command is issued.
+     * 
+     * <p> Sets the parser to stop accepting user input. </p>
+     * 
+     * @return The bye message.
+     */
     public String byeMessage() {
         isPolling = false;
         return "Bye. Hope to see you again soon!";

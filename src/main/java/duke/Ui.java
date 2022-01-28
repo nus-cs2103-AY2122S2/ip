@@ -24,8 +24,8 @@ public class Ui {
     /**
      * Wraps a given text in a box to be printed
      * 
-     * @param givenText
-     * @return
+     * @param givenText The given text
+     * @return Modified text.
      */
     public static String chatBox(String givenText) {
         StringBuilder box = new StringBuilder();
@@ -53,9 +53,9 @@ public class Ui {
     /**
      * Concatenates 2 message separated by a blank line.
      * 
-     * @param m1 The first message
-     * @param m2 The second message
-     * @return Concatenated message
+     * @param m1 The first message.
+     * @param m2 The second message.
+     * @return Concatenated message.
      */
     public static String mergeMessages(String m1, String m2) {
         return newLineAfter(m1) + "\n" + m2;
