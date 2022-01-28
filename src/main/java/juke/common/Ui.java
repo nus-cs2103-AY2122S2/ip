@@ -4,6 +4,9 @@ import juke.command.Result;
 
 import java.util.Scanner;
 
+/**
+ * Manages the user interface involving user input and console output.
+ */
 public class Ui {
     private static final String LINE_PREFIX = "\u232c ";
     private static final String LINE_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -24,6 +27,9 @@ public class Ui {
     
     private Scanner in;
     
+    /**
+     * Constructor that initializes the scanner for user input.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
     }
@@ -32,15 +38,26 @@ public class Ui {
         return this.in.nextLine().trim().split("\\s+");
     }
     
+    /**
+     * Prints the welcome message.
+     */
     public void greet() {
         this.printLogo();
         this.formattedPrint("Greetings Executor!");
     }
     
+    /**
+     * Prints the Juke logo.
+     */
     public void printLogo() {
         System.out.println(LOGO);
     }
     
+    /**
+     * Prints the message associated with a success, or the error message otherwise.
+     *
+     * @param result Result of a command execution.
+     */
     public void displayResult(Result result) {
         try {
             String string = result.getOrThrow();
@@ -50,6 +67,11 @@ public class Ui {
         }
     }
     
+    /**
+     * Prints a string with decorative formatting.
+     *
+     * @param text String to print.
+     */
     public void formattedPrint(String... text) {
         System.out.println(LINE_DIVIDER);
         for (String str : text) {

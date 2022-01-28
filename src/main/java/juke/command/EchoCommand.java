@@ -2,6 +2,9 @@ package juke.command;
 
 import juke.exception.JukeException;
 
+/**
+ *
+ */
 public class EchoCommand extends Command {
     private String message;
     
