@@ -8,7 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,10 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
     private Storage store;
+    private File file;
     private TaskList taskList;
     @BeforeEach
     public void setUp() {
         store = new Storage("StorageTest.txt");
+        file = new File("StorageTest.txt");
         taskList = setUpTaskList();
     }
 
@@ -43,12 +45,20 @@ class StorageTest {
         new File("StorageTest.txt").delete();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void updateStoreTest() {
+    public void updateStore() {
         store.updateStore(taskList);
-        for (int i = 0; i < taskList.size(); i++) {
-            assertEquals(taskList.getList().get(i).toString(),
-                    store.getSavedStore().get(i).toString());
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            List<Task> tasks = (List<Task>) ois.readObject();
+            for (int i = 0; i < taskList.size(); i++) {
+                assertEquals(taskList.getList().get(i).toString(),
+                        tasks.get(i).toString());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            fail(e.getMessage());
         }
     }
 }

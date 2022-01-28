@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
     @Test
-    public void parseTest() {
+    public void parse() {
         String ToDoInput = "todo feed the dogs";
         assertTrue(Parser.parse(ToDoInput) instanceof ToDoCommand);
         String DeadlineInput = "deadline homework /by 2022-01-31T23:59";
@@ -25,7 +25,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseExceptionTest() {
+    public void parse_exceptionThrown() {
         String ToDoInput = "todo";
         assertThrows(ToDoException.class,
                 () -> Parser.parse(ToDoInput));
