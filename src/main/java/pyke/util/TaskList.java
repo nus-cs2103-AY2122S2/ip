@@ -44,17 +44,36 @@ public class TaskList {
         return taskList.get(taskId).toSavedFile();
     }
 
+    /**
+     * This method will add a task into the TaskList and return the newly added task
+     *
+     * @param newTask the new task to be added
+     * @return the newly added task
+     */
     public Task addTask(Task newTask) {
         taskList.add(newTask);
         return newTask;
     }
 
+    /**
+     * This method will delete the specific task from the TaskList and return the newly deleted task
+     *
+     * @param taskId the index of the task to be deleted
+     * @return the newly deleted task
+     */
     public Task delTask(int taskId) {
         Task temp = taskList.get(taskId);
         taskList.remove(taskId);
         return temp;
     }
 
+    /**
+     * This method will set finished/unfinished status of a specific task and return it
+     *
+     * @param taskId the index of the task we want to set the status
+     * @param newStatus the new status to be set to
+     * @return the task that just get updated 
+     */
     public Task setTaskStatus(int taskId, boolean newStatus) {
         Task temp = taskList.get(taskId);
         temp.setStatus(newStatus);
