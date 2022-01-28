@@ -17,6 +17,10 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Constructor for the Duke class
+     * @param filePath The path of the file which acts as the databse
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +31,10 @@ public class Duke {
         }
 
     }
+
+    /**
+     * Runs the application
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

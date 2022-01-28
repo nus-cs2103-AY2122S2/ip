@@ -5,6 +5,9 @@ import Tasks.TaskList;
 
 import java.io.*;
 
+/**
+ * Ui is a class that deals with user interaction
+ */
 public class Ui {
     private BufferedReader br = new BufferedReader(new
             InputStreamReader(System.in));
@@ -51,7 +54,7 @@ public class Ui {
     }
 
 
-    public void printTaskList(TaskList taskList) {
+    public void showTaskList(TaskList taskList) {
         pr.print("Here are the items in your list: \n");
         for (int i = 0; i < taskList.getSize(); i++) {
             Tasks.Task task = taskList.get(i);

@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is a class that deals with the management of the database
+ */
 public class Storage {
     private String filePath;
 
