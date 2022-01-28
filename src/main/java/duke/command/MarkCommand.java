@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
      *
      * @param currTask the curr task
      */
-    public MarkCommand(int currTask){
+    public MarkCommand(int currTask) {
         this.currTask = currTask;
     }
 
@@ -28,13 +28,13 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (currTask - 1 < 0 || (currTask > tasks.getSize())){
+            if (currTask - 1 < 0 || (currTask > tasks.getSize())) {
                 throw new DukeException("☹ OOPS!!! The task of a mark cannot be reached.");
             }
-            tasks.getTask(currTask-1).markAsDone();
-            ui.showSuccessMark(tasks.getTask(currTask-1).toString());
+            tasks.getTask(currTask - 1).markAsDone();
+            ui.showSuccessMark(tasks.getTask(currTask - 1).toString());
             storage.write(tasks);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showExceptionError(e);
         }
     }

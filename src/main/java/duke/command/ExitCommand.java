@@ -7,7 +7,7 @@ import duke.helptool.Ui;
 /**
  * The type Exit command.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Instantiates a new Exit command.

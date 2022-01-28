@@ -1,30 +1,30 @@
 package duke.helptool;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Objects;
+
+import duke.task.Task;
 
 /**
  * The type Task list.
  */
 public class TaskList {
-    private final ArrayList<Task> TaskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Instantiates a new Task list.
      *
      * @param arrayList the array list
      */
-    public TaskList(ArrayList<Task> arrayList){
-        this.TaskList = Objects.requireNonNullElseGet(arrayList, ArrayList::new);
+    public TaskList(ArrayList<Task> arrayList) {
+        this.taskList = Objects.requireNonNullElseGet(arrayList, ArrayList::new);
     }
 
     /**
      * Instantiates a new Task list.
      */
     public TaskList() {
-        this.TaskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
 
@@ -33,8 +33,8 @@ public class TaskList {
      *
      * @param task the task
      */
-    public void addTask(Task task){
-        this.TaskList.add(task);
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
     /**
@@ -42,8 +42,8 @@ public class TaskList {
      *
      * @param index the index
      */
-    public void delete(int index){
-        this.TaskList.remove(index);
+    public void delete(int index) {
+        this.taskList.remove(index);
     }
 
     /**
@@ -52,8 +52,8 @@ public class TaskList {
      * @param index the index
      * @return the task
      */
-    public Task getTask(int index){
-        return this.TaskList.get(index);
+    public Task getTask(int index) {
+        return this.taskList.get(index);
     }
 
     /**
@@ -61,8 +61,8 @@ public class TaskList {
      *
      * @return the int
      */
-    public int getSize(){
-        return this.TaskList.size();
+    public int getSize() {
+        return this.taskList.size();
     }
 
 
