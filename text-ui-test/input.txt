@@ -1,5 +1,11 @@
+unknowncommand
+todo
 todo bake bread
-event project meeting /at Mon 2-4pm
+event
+event project /at 10/10-23
+event project meeting /at 2011/11/12
+deadline
+deadline return /by 6-54-34
 deadline return book /by 2022/12/11
 list
 mark -1

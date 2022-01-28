@@ -5,6 +5,16 @@ What can I do for you?
 
 -------------------------------
 
+Sorry, I don't understand that command :/
+-------------------------------
+
+-------------------------------
+
+Not enough fields, please check your inputs and try again.
+-------------------------------
+
+-------------------------------
+
 Got it. I've added this task:
 [T] [ ] bake bread
 Now you have 1 tasks in the list.
@@ -12,9 +22,29 @@ Now you have 1 tasks in the list.
 
 -------------------------------
 
+Not enough fields, please check your inputs and try again.
+-------------------------------
+
+-------------------------------
+
+Invalid date: Please format date as yyyy-mm-dd
+-------------------------------
+
+-------------------------------
+
 Got it. I've added this task:
-[E] [ ] project meeting  (at: Mon 2-4pm)
+[E] [ ] project meeting  (at: Nov 12 2011)
 Now you have 2 tasks in the list.
+-------------------------------
+
+-------------------------------
+
+Not enough fields, please check your inputs and try again.
+-------------------------------
+
+-------------------------------
+
+Invalid date: Please format date as yyyy-mm-dd
 -------------------------------
 
 -------------------------------
@@ -26,20 +56,20 @@ Now you have 3 tasks in the list.
 
 -------------------------------
 
-Here are the tasks in your list:
+You currently have 3 task in your list:
 1. [T] [ ] bake bread
-2. [E] [ ] project meeting  (at: Mon 2-4pm)
+2. [E] [ ] project meeting  (at: Nov 12 2011)
 3. [D] [ ] return book  (by: Dec 11 2022)
 -------------------------------
 
 -------------------------------
 
-This is an invalid index, please try again!
+Invalid index, please try again.
 -------------------------------
 
 -------------------------------
 
-This is an invalid index, please try again!
+Invalid index, please try again.
 -------------------------------
 
 -------------------------------
@@ -51,65 +81,65 @@ Nice! I've marked this task as done:
 -------------------------------
 
 Nice! I've marked this task as done:
-[E] [X] project meeting  (at: Mon 2-4pm)
+[E] [X] project meeting  (at: Nov 12 2011)
 -------------------------------
 
 -------------------------------
 
-Here are the tasks in your list:
+You currently have 3 task in your list:
 1. [T] [X] bake bread
-2. [E] [X] project meeting  (at: Mon 2-4pm)
+2. [E] [X] project meeting  (at: Nov 12 2011)
 3. [D] [ ] return book  (by: Dec 11 2022)
 -------------------------------
 
 -------------------------------
 
 OK! I've marked this task as not done yet:
-[E] [ ] project meeting  (at: Mon 2-4pm)
+[E] [ ] project meeting  (at: Nov 12 2011)
 -------------------------------
 
 -------------------------------
 
-This is an invalid index, please try again!
+Invalid index, please try again.
 -------------------------------
 
 -------------------------------
 
-This is an invalid index, please try again!
+Invalid index, please try again.
 -------------------------------
 
 -------------------------------
 
-Here are the tasks in your list:
+You currently have 3 task in your list:
 1. [T] [X] bake bread
-2. [E] [ ] project meeting  (at: Mon 2-4pm)
+2. [E] [ ] project meeting  (at: Nov 12 2011)
 3. [D] [ ] return book  (by: Dec 11 2022)
 -------------------------------
 
 -------------------------------
 
-OK! I've removed this task:
+OK! I've deleted this task:
 [D] [ ] return book  (by: Dec 11 2022)
 Now you have 2 tasks in the list.
 -------------------------------
 
 -------------------------------
 
-OK! I've removed this task:
-[E] [ ] project meeting  (at: Mon 2-4pm)
+OK! I've deleted this task:
+[E] [ ] project meeting  (at: Nov 12 2011)
 Now you have 1 tasks in the list.
 -------------------------------
 
 -------------------------------
 
-OK! I've removed this task:
+OK! I've deleted this task:
 [T] [X] bake bread
 Now you have 0 tasks in the list.
 -------------------------------
 
 -------------------------------
 
-Here are the tasks in your list:
+You currently have 0 task in your list:
 -------------------------------
 
 -------------------------------
