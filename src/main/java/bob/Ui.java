@@ -41,6 +41,14 @@ public class Ui {
         System.out.println("Bob: " + error);
     }
 
+    public void noSearchResults() {
+        System.out.println("Bob: I could not find such a task, did you even tell me about it?????");
+    }
+
+    public void searchHasResults() {
+        System.out.println("Bob: I found these tasks");
+    }
+
     public void userReply() {
         line();
         System.out.print("You: ");
