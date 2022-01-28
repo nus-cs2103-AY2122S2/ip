@@ -3,7 +3,11 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
+/**
+ * This class receives a ParsedAnswer object and execute commands based on information
+ * from the object.
+ */
 
 public class ParsedAnswerHandler {
     ParsedAnswer pa;

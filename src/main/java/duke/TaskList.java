@@ -2,6 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * This class contains operations to manipulate the list stored by Duke.
+ */
+
 public class TaskList {
     static void add(Task task) {
         Storage.taskList.add(task);

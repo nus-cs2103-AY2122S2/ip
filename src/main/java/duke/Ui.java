@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This class is responsible for displaying the welcome message to the user.
+ */
+
 public class Ui {
     public void showWelcomeMessage() {
         String logo = " ____        _        \n"

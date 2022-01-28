@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This is a parent class that serves as the main template for the various kind of tasks
+ * stored in Duke.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
