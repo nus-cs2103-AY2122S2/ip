@@ -2,20 +2,17 @@ package duke.info.task;
 
 public class Deadline extends Task {
 
-    private final String date;
-
     public Deadline(String deadline, String date, boolean isComplete) {
-        super(deadline, "deadline", isComplete);
-        this.date = date;
+        super(deadline, "deadline", isComplete, date);
     }
 
     @Override
     public String saveFormat() {
-        return super.saveFormat() + "|" + this.date;
+        return super.saveFormat() + "|" + this.getDateString();
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.date);
+        return String.format("[D]%s (by: %s)", super.toString(), this.getDateString());
     }
 }
