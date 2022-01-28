@@ -9,18 +9,35 @@ import java.io.File;
 public class Bobby {
     static ArrayList<Task> taskArray = new ArrayList<Task>();
 
-    private static void addToDo(String task) throws BobbyException {
+    private static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("bobby.txt");
+        for (int i = 0; i < taskArray.size(); i++) {
+            Task t = taskArray.get(i);
+            int count = i + 1;
+            fw.write(System.lineSeparator() + count + "." + t);
+        }
+        fw.close();
+    }
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter("bobby.txt", true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    private static void addToDo(String task) throws BobbyException, IOException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             Todo newTodo = new Todo(inputs[1]);
             System.out.println("Bobby heard: " + newTodo);
             taskArray.add(newTodo);
+            writeToFile();
             System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
         } else {
             throw new BobbyException("Description cannot be empty");
         }
     }
-    private static void addDeadline(String task) throws BobbyException {
+    private static void addDeadline(String task) throws BobbyException, IOException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /by ", 2);
@@ -30,6 +47,7 @@ public class Bobby {
                 Deadline newDeadline = new Deadline(description, by);
                 System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
+                writeToFile();
                 System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else {
                 throw new BobbyException("Date/Time format of Deadline is incorrect or empty");
@@ -39,7 +57,7 @@ public class Bobby {
         }
 
     }
-    private static void addEvent(String task) throws BobbyException {
+    private static void addEvent(String task) throws BobbyException, IOException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /at ", 2);
@@ -49,6 +67,7 @@ public class Bobby {
                 Event newEvent = new Event(description, at);
                 System.out.println("Bobby heard: " + newEvent);
                 taskArray.add(newEvent);
+                writeToFile();
                 System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else {
                 throw new BobbyException("Date/Time format of Event is incorrect or empty");
@@ -57,19 +76,20 @@ public class Bobby {
             throw new BobbyException("Description cannot be empty");
         }
     }
-    private static void delete(String task) throws BobbyException {
+    private static void delete(String task) throws BobbyException, IOException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             int i = Integer.parseInt(inputs[1]) - 1;
             System.out.println("Bobby has forgotten this task:\n" + taskArray.get(i));
             taskArray.remove(i);
+            writeToFile();
             System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
         } else {
             throw new BobbyException("Indicate which task should be deleted.");
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Bobby greets you. Bobby is here to help.");
         try {
             File file = new File("bobby.txt");
