@@ -1,11 +1,20 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import  java.time.format.DateTimeParseException;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 class Duke {
 
+
+    public static ArrayList<Task> tasks;
+
     public static Deadline createDeadline(String [] input) {
        String description = "";
-       String by = "";
+       String by;
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < input.length; i++){
             if(!(input[i]).equals("/by")) {
@@ -37,7 +46,7 @@ class Duke {
 
     public static Event createEvent(String [] input) {
         String description = "";
-        String at = "";
+        String at;
 
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < input.length; i++){
@@ -59,7 +68,15 @@ class Duke {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+
+        Storage storage = new Storage();
+        try {
+            storage.createFile();
+        }  catch (IOException ie) {
+                System.out.println("Cannot write to file: " + ie.getMessage());
+        }
+
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -74,9 +91,15 @@ class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+
         String[] input = str.split(" ");
         //TaskList tasks = new TaskList();
+        try {
+            tasks = storage.readTasks();
+        } catch (FileNotFoundException fe) {
+            System.out.println(fe.getMessage());
+            tasks = new ArrayList<>();
+        }
 
 
 
@@ -94,6 +117,7 @@ try {
         System.out.println("Nice! I've marked this task as done: ");
         Task temp = tasks.get(Integer.parseInt(input[1]) - 1);
         temp.markAsDone();
+        storage.writeTasks();
 
         System.out.println(temp.toString());
 
@@ -101,6 +125,7 @@ try {
         System.out.println("OK, I've marked this task as not done yet:");
         Task temp = tasks.get(Integer.parseInt(input[1]) - 1);
         temp.unmark();
+        storage.writeTasks();
         System.out.println(temp.toString());
 
     } else if (input[0].equals("todo")) {
@@ -110,6 +135,7 @@ try {
         Todo temp = createTodo(input);
         System.out.println(temp.toString());
         tasks.add(temp);
+        storage.writeTasks();
         System.out.println("Got it. I've added this task:");
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     } else if (input[0].equals("event")) {
@@ -119,6 +145,7 @@ try {
         Event temp = createEvent(input);
         System.out.println(temp.toString());
         tasks.add(temp);
+        storage.writeTasks();
         System.out.println("Got it. I've added this task:");
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     } else if (input[0].equals("deadline")) {
@@ -128,6 +155,7 @@ try {
         Deadline temp = createDeadline(input);
         System.out.println(temp.toString());
         tasks.add(temp);
+        storage.writeTasks();
         System.out.println("Got it. I've added this task:");
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     } else if (input[0].equals("delete")) {
@@ -138,6 +166,7 @@ try {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(remove.toString());
         tasks.remove(Integer.parseInt(input[1]) - 1);
+        storage.writeTasks();
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 
     }
@@ -148,6 +177,9 @@ try {
 } catch (DukeException exception)  {
     System.out.println(exception.getMessage());
 }
+   catch (IOException ie) {
+    System.out.println("Cannot write to file: " + ie.getMessage());
+   }
             str = sc.nextLine();
              input = str.split(" ");
         }
@@ -156,6 +188,10 @@ try {
         sc.close();
 
     }
+
+
+
+
 
 
 
