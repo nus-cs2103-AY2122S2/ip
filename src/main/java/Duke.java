@@ -1,8 +1,8 @@
-import exception.DukeException;
+
 import util.Parser;
 import util.Storage;
 import util.Ui;
-import task.Task;
+
 import task.TaskList;
 import task.Event;
 import task.Deadline;
@@ -21,23 +21,26 @@ public class Duke {
     private File newFile;
     private Parser parser;
 
-    public Duke(String filePath) throws DukeException, FileNotFoundException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         newFile = new File(filePath);
         tasks = new TaskList();
         parser = new Parser();
 
-        if (newFile.exists()) {
-            storage.loadFile(tasks.list);
-        } else {
-            throw new DukeException("Please create the text file data/duke.txt");
+        try {
+            if (newFile.exists()) {
+                storage.loadFile(tasks.list);
+            }
+        } catch (FileNotFoundException e) {
+            ui.reply("Please create the text file data/duke.txt");
         }
+
 
 
     }
 
-    public void run() throws IOException {
+    public void run() {
         Scanner sc = new Scanner(System.in);
 
         ui.greet();
@@ -117,7 +120,13 @@ public class Duke {
             task = parser.getTask();
             item = parser.getItem();
         }
-        storage.writeToFile(tasks.list);
+
+        try {
+            storage.writeToFile(tasks.list);
+        } catch (IOException e) {
+            ui.reply("IOException detected");
+        }
+
 
         ui.exit();
         sc.close();
@@ -125,7 +134,7 @@ public class Duke {
 
 
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
         }
 
