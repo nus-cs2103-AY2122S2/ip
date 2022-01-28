@@ -22,9 +22,9 @@ public class AddCommandTest {
 	}
 
 	@Test
-	void isNotEndsToDo() {
+	void doesNotEndToDo() {
 		cmd = new AddCommand("todo", "return book");
-		assertTrue(!cmd.ends());
+		assertTrue(!cmd.endsProgram());
 	}
 
 	@Test
@@ -34,9 +34,9 @@ public class AddCommandTest {
 	}
 
 	@Test
-	void isNotEndsEvent() {
+	void doesNotEndEvent() {
 		cmd = new AddCommand("event", "return book /at 2/2/2022 1200");
-		assertTrue(!cmd.ends());
+		assertTrue(!cmd.endsProgram());
 	}
 
 	@Test
@@ -46,9 +46,9 @@ public class AddCommandTest {
 	}
 
 	@Test
-	void isNotEndsDeadline() {
+	void doesNotEndDeadline() {
 		cmd = new AddCommand("deadline", "return book /by 2/2/2022 1200");
-		assertTrue(!cmd.ends());
+		assertTrue(!cmd.endsProgram());
 	}
 
 	@Test

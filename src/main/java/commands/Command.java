@@ -23,7 +23,7 @@ public abstract class Command {
 	 * Abstract method to see if command ends the main program loop
 	 * @return true if it ends main program
 	 */
-	public abstract boolean ends();
+	public abstract boolean endsProgram();
 
 	/**
 	 * Abstract method to get the modified tasklist after command execution

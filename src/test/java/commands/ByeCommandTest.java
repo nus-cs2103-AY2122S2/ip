@@ -20,7 +20,7 @@ public class ByeCommandTest {
 	}
 
 	@Test
-	void Ends() {
-		assertTrue(cmd.ends());
+	void endsProgram() {
+		assertTrue(cmd.endsProgram());
 	}
 }

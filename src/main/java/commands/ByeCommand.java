@@ -26,7 +26,7 @@ public class ByeCommand extends Command {
 	 * @return true if it ends main program
 	 */
 	@Override
-	public boolean ends() {
+	public boolean endsProgram() {
 		return true;
 	}
 

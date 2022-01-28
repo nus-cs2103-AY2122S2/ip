@@ -48,7 +48,7 @@ public class Duke {
 				cmd = Parser.processInput(input);
 				cmd.execute(tasks, ui, storage);
 				tasks = cmd.getList();
-				if (cmd.ends()) {
+				if (cmd.endsProgram()) {
 					break;
 				}
 			} catch (DukeException e) {

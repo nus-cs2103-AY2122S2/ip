@@ -25,8 +25,8 @@ public class ListCommandTest {
 	}
 
 	@Test
-	void isNotEnds() {
-		assertTrue(!cmd.ends());
+	void doesNotEnd() {
+		assertTrue(!cmd.endsProgram());
 	}
 
 	@Test

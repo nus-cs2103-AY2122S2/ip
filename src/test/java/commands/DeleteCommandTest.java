@@ -27,8 +27,8 @@ public class DeleteCommandTest {
 	}
 
 	@Test
-	void isNotEnds() {
-		assertTrue(!cmd.ends());
+	void doesNotEnd() {
+		assertTrue(!cmd.endsProgram());
 	}
 
 	@Test
