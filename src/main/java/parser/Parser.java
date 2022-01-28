@@ -3,6 +3,8 @@ package parser;
 import command.*;
 import exception.DukeException;
 
+import java.util.Locale;
+
 /**
  * Enum to distinguish commands.
  */
@@ -15,7 +17,8 @@ public class Parser {
         MARK,
         UNMARK,
         DELETE,
-        BYE;
+        BYE,
+        FIND;
     }
 
     /**
@@ -36,19 +39,22 @@ public class Parser {
         if (responseArray.length > 0) {
             try {
                 command = Commands.valueOf(responseArray[0].toUpperCase());
+                String textContent = removeSubString(response.toLowerCase(), responseArray[0].toLowerCase() + " ");
                 switch (command) {
+                    case FIND:
+                        return new FindCommand(textContent);
                     case TODO:
-                        return new TodoCommand(removeSubString(response, "todo "));
+                        return new TodoCommand(textContent);
                     case DEADLINE:
                         try {
-                            secondSplit = removeSubString(response, "deadline ").split(" /by ");
+                            secondSplit = textContent.split(" /by ");
                             return new DeadlineCommand(secondSplit[0], secondSplit[1]);
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("date or time was not specified! Try again.");
                         }
                     case EVENT:
                         try {
-                            secondSplit = removeSubString(response, "event ").split(" /at ");
+                            secondSplit = textContent.split(" /at ");
                             return new EventCommand(secondSplit[0], secondSplit[1]);
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("location was not specified! Try again.");

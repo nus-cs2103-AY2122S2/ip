@@ -2,6 +2,7 @@ package task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Implements Serializable package to
@@ -76,5 +77,21 @@ public class TaskList implements Serializable {
      */
     public void add(Task task) {
         this.tasks.add(task);
+    }
+
+    /**
+     * Searches for the task(s) that matches the search term.
+     *
+     * @param search Search term of the task's description
+     * @return An ArrayList of tasks that matches the search term
+     */
+    public ArrayList<Task> find (String search) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for(Task t : tasks){
+            if(t.getDescription() != null && t.getDescription().toLowerCase().contains(search)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
     }
 }

@@ -22,6 +22,16 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+
+    /**
+     * Gets the task's description.
+     *
+     * @return task's description
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Marks the task completed.
      */
@@ -42,9 +52,7 @@ public abstract class Task implements Serializable {
      * Empty string - incomplete
      * @return Task's status
      */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done java.task with X
-    }
+    public String getStatusIcon() { return (isDone ? "X" : " "); } // mark done java.task with X
 
     /**
      * Returns task's basic details.

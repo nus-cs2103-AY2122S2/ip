@@ -91,6 +91,22 @@ public class Ui {
     }
 
     /**
+     * Displays found tasks stored in the TaskList object.
+     *
+     * @param tasks TaskList that contains the found tasks
+     */
+    public void showFoundTasksMessage(TaskList tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("Nothing was found :(");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+            }
+        }
+    }
+
+    /**
      * Displays bot's response to user's command.
      * This method is invoked after a command is executed successfully.
      *

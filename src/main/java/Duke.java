@@ -5,6 +5,11 @@ import storage.Storage;
 import ui.Ui;
 import task.TaskList;
 
+/**
+ * Duke bot allows users to interact with a "smart" bot that tracks tasks,
+ * deadlines, todos and events. Moreover, new features are progressively
+ * added into the bot - caching, search, data validation.
+ */
 public class Duke extends Exception {
 
     private final Storage storage;

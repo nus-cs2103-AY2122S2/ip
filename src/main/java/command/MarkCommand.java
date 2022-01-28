@@ -1,5 +1,6 @@
 package command;
 
+import exception.DukeException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
@@ -30,11 +31,12 @@ public class MarkCommand extends Command {
      * @param storage Storage to perform caching features
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.index > 0 && this.index <= tasks.size()) {
             ui.showResponseMessage("mark");
             Task task = tasks.get(index - 1);
             task.mark();
+            storage.store(tasks);
             ui.showTaskMessage(task);
         } else {
             ui.showInvalidRange();
