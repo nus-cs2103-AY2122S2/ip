@@ -1,6 +1,6 @@
 public class ExitCommand extends Command{
-    public ExitCommand(String userInput){
-        super(userInput);
+    public ExitCommand(){
+        super();
     }
 
     @Override

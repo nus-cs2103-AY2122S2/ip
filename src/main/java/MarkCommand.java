@@ -3,5 +3,13 @@ public abstract class MarkCommand extends Command{
         super(userInput);
     }
 
-    public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager);
+    public static MarkCommand of(String userInput){
+        if (userInput.startsWith("mark")) {
+            return new MarkDoneCommand(userInput);
+        } else {
+            return new MarkUndoneCommand(userInput);
+        }
+    }
+
+    public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 }

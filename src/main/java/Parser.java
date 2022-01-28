@@ -128,15 +128,19 @@ public class Parser {
         return t;
     }
 
-    public static Command parse(String input){
+    public static Command parse(String input) throws DukeException{
         if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
             return new AddCommand(input);
         } else if (input.startsWith("list")){
             return new ListCommand();
         } else if (input.startsWith("mark") || input.startsWith("unmark")){
-            //return new MarkCommand(input);
+            return MarkCommand.of(input);
+        } else if (input.equals("bye")) {
+            return new ExitCommand();
+        } else if (input.startsWith("delete")){
+            return new DeleteTaskCommand(input);
         }
-             return null;
+             throw new DukeException("Invalid Command!");
 
     }
 

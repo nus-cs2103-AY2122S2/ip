@@ -8,7 +8,7 @@ public class AddCommand extends Command{
             Task task = Parser.parseToTask(this.userInput);
             taskManager.addTask(task);
             ui.showAddedTask(task, taskManager.size());
-            storage.saveTaskManager(taskManager);
+            save(storage,ui,taskManager);
             return true;
         } catch (FailedTaskParseException exception){
             throw new DukeException("Wrong Format!");

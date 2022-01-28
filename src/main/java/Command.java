@@ -9,6 +9,15 @@ public abstract class Command {
     }
     public Command(){}
 
+    protected void save(Storage storage,Ui ui, TaskManager taskManager){
+        try {
+            storage.saveTaskManager(taskManager);
+            ui.showSavingComplete();
+        } catch (DukeException e){
+            ui.showSavingFailed();
+        }
+    }
+
     public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 
     public boolean isExit(){
