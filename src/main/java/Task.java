@@ -1,4 +1,6 @@
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     private String task;
     private boolean isDone;
     private String Symbol;
@@ -16,6 +18,7 @@ public class Task {
     }
 
     public void setUnDone() {
+
         isDone = false;
     }
 
