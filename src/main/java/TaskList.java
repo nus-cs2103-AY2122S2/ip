@@ -2,9 +2,12 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    Parser parser;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.parser = new Parser();
+
     }
 
     public ArrayList<Task> getTasks() {
@@ -55,8 +58,7 @@ public class TaskList {
 
     public void todo(String taskStr) {
         // eg to_do borrow book (without the _)
-        String[] taskArr = taskStr.split(" ", 2);
-        String taskName = taskArr[1];
+        String taskName = parser.parseToDo(taskStr);
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
         System.out.println("Added to your tasks: \n\t" + task.toString());
@@ -65,9 +67,7 @@ public class TaskList {
 
     public void deadline(String taskStr) {
         try {
-            // deadline return book /by Sunday
-            String[] taskArr = taskStr.split(" ", 2);
-            String[] taskDetails = taskArr[1].split("/by ");
+            String[] taskDetails = parser.parseDeadline(taskStr);
             String taskName = taskDetails[0];
             String date = taskDetails[1];
             Deadline task = new Deadline(taskName, false, "D", date);
@@ -82,8 +82,7 @@ public class TaskList {
 
     public void event(String taskStr) {
         try {
-            String[] taskArr = taskStr.split(" ", 2);
-            String[] taskDetails = taskArr[1].split("/at ");
+            String[] taskDetails = parser.parseEvent(taskStr);
             String taskName = taskDetails[0];
             String date = taskDetails[1];
             Event task = new Event(taskName, false, "E", date);
@@ -93,12 +92,11 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
         }
-
     }
 
     public void delete(String taskStr) {
         try {
-            String[] taskArr = taskStr.split(" ", 2);
+            String[] taskArr = parser.splitLimitTwo(taskStr);
             String deleteIndStr = taskArr[1];
             int deleteInd = Integer.parseInt(deleteIndStr) - 1;
             Task task = this.tasks.get(deleteInd);
