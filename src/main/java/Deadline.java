@@ -1,5 +1,3 @@
-import java.time.format.DateTimeParseException;
-
 public class Deadline extends Task{
 
     private String deadline;
@@ -7,14 +5,8 @@ public class Deadline extends Task{
 
     public Deadline(String name, boolean isChecked, String taskLabel, String deadline) {
         super(name, isChecked, taskLabel);
-//        try {
-//
-            Time time = new Time(deadline);
-            this.time = time;
-//        } catch (ArrayIndexOutOfBoundsException e) {
-//            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
-//        }
-
+        Time time = new Time(deadline);
+        this.time = time;
     }
 
     @Override
