@@ -1,7 +1,12 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Control {
     private ArrayList<Task> tasks;
+
     public Control() {
         String start =
                 "________________________________\n"
@@ -21,7 +26,7 @@ public class Control {
 //    }
 
     public void bye() {
-        String bye ="GoodBye! I hope to see you again!";
+        String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
     }
 
@@ -40,7 +45,7 @@ public class Control {
     }
 
     public void taskCheck(String taskStr) {
-        try{
+        try {
             String[] taskArr = taskStr.split(" ");
             int index = Integer.parseInt(taskArr[1]) - 1;
             Task task = this.tasks.get(index);
@@ -70,27 +75,36 @@ public class Control {
     }
 
     public void deadline(String taskStr) {
-        // deadline return book /by Sunday
-        String[] taskArr = taskStr.split(" ", 2);
-        String[] taskDetails = taskArr[1].split("/by ");
-        String taskName = taskDetails[0];
-        String date = taskDetails[1];
-        Deadline task = new Deadline(taskName, false, "D", date) ;
-        this.tasks.add(task);
-        System.out.println("Added to your tasks: \n\t" + task.toString());
-        System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        try {
+            // deadline return book /by Sunday
+            String[] taskArr = taskStr.split(" ", 2);
+            String[] taskDetails = taskArr[1].split("/by ");
+            String taskName = taskDetails[0];
+            String date = taskDetails[1];
+            Deadline task = new Deadline(taskName, false, "D", date);
+            this.tasks.add(task);
+            System.out.println("Added to your tasks: \n\t" + task.toString());
+            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+        }
+
     }
 
     public void event(String taskStr) {
-        // event project meeting /at Mon 2-4pm
-        String[] taskArr = taskStr.split(" ", 2);
-        String[] taskDetails = taskArr[1].split("/at ");
-        String taskName = taskDetails[0];
-        String date = taskDetails[1];
-        Event task = new Event(taskName, false, "E", date) ;
-        this.tasks.add(task);
-        System.out.println("Added to your tasks: \n\t" + task.toString());
-        System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        try {
+            String[] taskArr = taskStr.split(" ", 2);
+            String[] taskDetails = taskArr[1].split("/at ");
+            String taskName = taskDetails[0];
+            String date = taskDetails[1];
+            Event task = new Event(taskName, false, "E", date);
+            this.tasks.add(task);
+            System.out.println("Added to your tasks: \n\t" + task.toString());
+            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+        }
+
     }
 
     public void delete(String taskStr) {
@@ -108,7 +122,49 @@ public class Control {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That index number is out of range! Please try again!");
         }
-
     }
-
+//
+//    public void save() {
+//        writeTasksToFile();
+//        System.out.println("Your Tasks has been saved into your device!");
+//    }
+//
+//    public void load(String fileName) {
+//        String command = null;
+//        try {
+//            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+//            while ((command = reader.readLine()) != null) {
+//                String[] commandArr = command.split("]");
+//                String cmdTemp = commandArr[0];
+//                String firstWord = cmdTemp.substring(cmdTemp.length() - 1);
+//                String taskName = command.substring(10);
+//                String isMarked = command.substring(7, 8);
+//                boolean isMarkedBool = isMarked.equals("X");
+//
+//                if (firstWord.equals("T")) {
+//                    ToDo task = new ToDo(taskName, isMarkedBool, "T");
+//                    this.tasks.add(task);
+//                } else if (firstWord.equals("D")) {
+//                    String[] detailsArr = taskName.split(" \\(by: ");
+//                    String details = detailsArr[1].substring(0, detailsArr[1].length() - 2);
+//                    Deadline task = new Deadline(taskName, isMarkedBool, "D", details);
+//                    this.tasks.add(task);
+//
+//                } else { //Event
+//                    String[] detailsArr = taskName.split(" \\(at: ");
+//                    String details = detailsArr[1].substring(0, detailsArr[1].length() - 2);
+//                    Deadline task = new Deadline(taskName, isMarkedBool, "E", details);
+//                    this.tasks.add(task);
+//                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void writeTasksToFile() {
+//
+//    }
 }

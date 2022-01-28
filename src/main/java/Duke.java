@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,11 +23,15 @@ public class Duke {
                 if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") || firstWord.equals("unmark") ||
                     firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("delete"))) {
                     throw new InvalidCommandException();
+
+                // One word commands
                 } else if (firstWord.equals("bye")) {
                     control.bye();
                     break;
                 } else if (firstWord.equals("list")) {
                     control.list();
+
+                //Multiple word commands
                 } else if (commandArr.length < 2) {
                     throw new InvalidDescriptionException();
                 } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
@@ -43,8 +49,11 @@ public class Duke {
                 System.out.println("'" + firstWord + "' is an invalid command! Please try again!");
             } catch (InvalidDescriptionException e) {
                 System.out.println("There cannot be an empty description of your task! Please try again! ");
+            } catch (DateTimeParseException e) {
+                System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("That is an invalid task. Please try again!");
+
             } finally {
                 System.out.println("________________________________");
             }
