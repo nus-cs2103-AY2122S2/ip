@@ -43,6 +43,14 @@ public class Task {
     }
 
     /**
+     * Check if the description of task contains certain word
+     * @param word The word wish to check
+     * @return Boolean of whether the word is contained in task
+     */
+    boolean containsWord(String word) {
+        return this.task.contains(word);
+    }
+    /**
      * Mark the task as done
      */
     void mark() {

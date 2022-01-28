@@ -89,6 +89,10 @@ public class BH {
                 } else if (s1.equals("check")) {
                     LocalDate date = LocalDate.parse(inputArray[1]);
                     this.checkDate(date);
+                } else if (s1.equals("find")) {
+                    String[] arr = input.split(" ", 2);
+                    String word = arr[1];
+                    this.checkWord(word);
                 } else {
                     System.out.println("Wrong input, please check again");
                 }
@@ -110,6 +114,16 @@ public class BH {
             Task currTask = this.list.get(i);
             if (currTask.getDate().equals(date)) {
                 System.out.println(currTask.toString());
+            }
+        }
+        System.out.println(ui.getLine());
+    }
+
+    void checkWord(String word) {
+        System.out.println(ui.getLine());
+        for (int i = 0; i < this.getListSize(); i++) {
+            if (this.list.get(i).containsWord(word)) {
+                System.out.println(this.list.get(i).toString());
             }
         }
         System.out.println(ui.getLine());
