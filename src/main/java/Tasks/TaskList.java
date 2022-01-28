@@ -2,9 +2,16 @@ package Tasks;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList is a class that deals with the management and storage of tasks
+ */
 public class TaskList {
     private ArrayList<Task> arrayList;
 
+    /**
+     * Constructor for the TaskList class
+     * @param arrayList An array list containing the tasks to be stored
+     */
     public TaskList(ArrayList<Task> arrayList) {
         this.arrayList = arrayList;
     }
