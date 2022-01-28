@@ -8,10 +8,10 @@ import main.java.ari.tasks.Task;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    private int indexToDelete;
-
     private static final String DELETE_MESSAGE = "Yes Master, I have removed this task:\n" + "\t    %s\n"
             + "\tYou have %d task(s) currently";
+
+    private int indexToDelete;
 
     public DeleteCommand(int index) {
         this.indexToDelete = index - 1;

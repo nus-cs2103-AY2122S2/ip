@@ -6,9 +6,9 @@ package main.java.ari.command;
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
-    private int indexToUnmark;
-
     private static final String UNMARK_MESSAGE = "Yes Master, I have marked this task as not done yet:\n    %s";
+
+    private int indexToUnmark;
 
     public UnmarkCommand(int index) {
         this.indexToUnmark = index - 1;
