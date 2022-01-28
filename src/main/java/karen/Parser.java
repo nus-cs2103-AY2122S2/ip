@@ -22,7 +22,7 @@ public class Parser {
     public static final String NA_MESSAGE = "I don't understand anything - I want to speak with your manager";
 
 
-    private String validateDateFormat(String dateString) throws KarenException {
+    public String validateDateFormat(String dateString) throws KarenException {
         try {
             LocalDate.parse(dateString);
         } catch (DateTimeException err) {

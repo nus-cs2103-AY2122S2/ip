@@ -6,7 +6,7 @@ import karen.Ui;
 
 public class InvalidCommand extends Command {
     public static final String DEFAULT_MESSAGE = "I don't understand anything - I want to speak with your manager";
-    protected String message;
+    public String message;
 
     public InvalidCommand(String message) {
         this.message = message;
@@ -18,6 +18,11 @@ public class InvalidCommand extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage) throws KarenException {
+        throw new KarenException(this.message);
+    }
+
+    public void execute() throws KarenException {
+        // temp fix for mocking - to be done later
         throw new KarenException(this.message);
     }
 }
