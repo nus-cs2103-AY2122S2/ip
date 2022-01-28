@@ -2,6 +2,8 @@ import javax.sound.midi.Soundbank;
 import java.io.*;
 import java.nio.Buffer;
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -87,7 +89,7 @@ public class FileAction {
         try {
             while ((line = reader.readLine()) != null) {
                 String[] arrOfString = line.split(" - ");
-                readTasks.add(taskFromText(arrOfString));
+                readTasks.add(createTaskFromText(arrOfString));
             }
         } catch (IOException e) {
             System.out.println("Error in reading tasks from file!");
@@ -98,20 +100,25 @@ public class FileAction {
     /**
      * Creates Task based on the text provided in the given text file
      */
-    public Task taskFromText(String[] line) {
+    public Task createTaskFromText(String[] line) {
         String type = line[0];
         String done = line[1];
         String desc = line[2];
+        String date = "";
         Task newT = null;
         switch (type) {
             case "T":
                 newT = new ToDo(desc, Integer.valueOf(done));
                 break;
             case "D":
-                newT = new Deadline(desc, Integer.valueOf(done), line[3]);
+                 date = line[3];
+                newT = new Deadline(desc, Integer.valueOf(done));
+                ((Deadline) newT).setStringToLocalDate(date);
                 break;
             case "E":
-                newT = new Event(desc, Integer.valueOf(done), line[3]);
+                date = line[3];
+                newT = new Event(desc, Integer.valueOf(done));
+                ((Event) newT).setStringToLocalDate(date);
                 break;
             default:
                 System.out.println("Invalid Task type!");
