@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents Duke's storage for tasks.
+ */
 public class Storage {
     String filePath;
 

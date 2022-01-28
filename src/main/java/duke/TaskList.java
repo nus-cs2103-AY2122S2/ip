@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 

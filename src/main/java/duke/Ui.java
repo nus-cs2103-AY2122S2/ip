@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Represents the user interface.
+ */
 public class Ui {
     private final Scanner sc;
 

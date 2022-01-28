@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents Duke, the task manager program.
+ */
 public class Duke {
 
     private final Storage storage;
