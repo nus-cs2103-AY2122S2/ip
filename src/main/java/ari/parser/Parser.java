@@ -116,14 +116,14 @@ public class Parser {
     }
 
     /**
-     * Returns MarkCommand if arg is valid else IncorrectCommand
+     * Returns MarkCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return MarkCommand
      */
-    private Command prepareMark(String arg) {
+    private Command prepareMark(String desc) {
         try {
-            return new MarkCommand(Integer.parseInt(getArgument(arg)));
+            return new MarkCommand(Integer.parseInt(getArgument(desc)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
@@ -132,14 +132,14 @@ public class Parser {
     }
 
     /**
-     * Returns UnmarkCommand if arg is valid else IncorrectCommand
+     * Returns UnmarkCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return UnmarkCommand
      */
-    private Command prepareUnmark(String arg) {
+    private Command prepareUnmark(String desc) {
         try {
-            return new UnmarkCommand(Integer.parseInt(getArgument(arg)));
+            return new UnmarkCommand(Integer.parseInt(getArgument(desc)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
@@ -148,28 +148,28 @@ public class Parser {
     }
 
     /**
-     * Returns TodoCommand if arg is valid else IncorrectCommand
+     * Returns TodoCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return TodoCommand
      */
-    private Command prepareTodo(String arg) {
+    private Command prepareTodo(String desc) {
         try {
-            return new TodoCommand(getArgument(arg));
+            return new TodoCommand(getArgument(desc));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         }
     }
 
     /**
-     * Returns DeadlineCommand if arg is valid else IncorrectCommand
+     * Returns DeadlineCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return DeadlineCommand
      */
-    private Command prepareDeadline(String arg) {
+    private Command prepareDeadline(String desc) {
         try {
-            String[] taskTime = splitBy(getArgument(arg));
+            String[] taskTime = splitBy(getArgument(desc));
             LocalDate date = checkDateFormat(taskTime[1]);
             return new DeadlineCommand(taskTime[0], taskTime[1], date);
         } catch (EmptyCommandException emptyEx) {
@@ -182,14 +182,14 @@ public class Parser {
     }
 
     /**
-     * Returns EventCommand if arg is valid else IncorrectCommand
+     * Returns EventCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return EventCommand
      */
-    private Command prepareEvent(String arg) {
+    private Command prepareEvent(String desc) {
         try {
-            String[] taskTime = splitAt(getArgument(arg));
+            String[] taskTime = splitAt(getArgument(desc));
             LocalDate date = checkDateFormat(taskTime[1]);
             return new EventCommand(taskTime[0], taskTime[1], date);
         } catch (EmptyCommandException emptyEx) {
@@ -202,14 +202,14 @@ public class Parser {
     }
 
     /**
-     * Returns DeleteCommand if arg is valid else IncorrectCommand
+     * Returns DeleteCommand if desc is valid else IncorrectCommand
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return DeleteCommand
      */
-    private Command prepareDelete(String arg) {
+    private Command prepareDelete(String desc) {
         try {
-            return new DeleteCommand(Integer.parseInt(getArgument(arg)));
+            return new DeleteCommand(Integer.parseInt(getArgument(desc)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
@@ -218,45 +218,45 @@ public class Parser {
     }
 
     /**
-     * Returns array with item description and deadline if arg is valid else throw format exception
+     * Returns array with item description and deadline if desc is valid else throw format exception
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return array with item description and deadline
      * @throws CommandFormatException keyword "/by" is missing
      */
-    private String[] splitBy(String arg) throws CommandFormatException {
-        String[] returnArr = arg.split("/by");
+    private String[] splitBy(String desc) throws CommandFormatException {
+        String[] words = desc.split("/by");
 
-        if (returnArr.length == 1) {
+        if (words.length == 1) {
             throw new CommandFormatException("deadline _Item Description_ /by _Deadline_");
         }
 
-        for (int i = 0; i < returnArr.length; i++) {
-            returnArr[i] = returnArr[i].stripLeading().stripTrailing();
+        for (int i = 0; i < words.length; i++) {
+            words[i] = words[i].stripLeading().stripTrailing();
         }
 
-        return returnArr;
+        return words;
     }
 
     /**
-     * Returns array with item description and event data if arg is valid else throw format exception
+     * Returns array with item description and event data if desc is valid else throw format exception
      *
-     * @param arg description of task
+     * @param desc description of task
      * @return array with item description and deadline
      * @throws CommandFormatException keyword "/at" is missing
      */
-    private String[] splitAt(String arg) throws CommandFormatException {
-        String[] returnArr = arg.split("/at");
+    private String[] splitAt(String desc) throws CommandFormatException {
+        String[] words = desc.split("/at");
 
-        if (returnArr.length == 1) {
+        if (words.length == 1) {
             throw new CommandFormatException("event _Item Description_ /at _Event Date or Time_");
         }
 
-        for (int i = 0; i < returnArr.length; i++) {
-            returnArr[i] = returnArr[i].stripLeading().stripTrailing();
+        for (int i = 0; i < words.length; i++) {
+            words[i] = words[i].stripLeading().stripTrailing();
         }
 
-        return returnArr;
+        return words;
     }
 
     /**
