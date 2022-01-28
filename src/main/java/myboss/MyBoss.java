@@ -68,6 +68,9 @@ public class MyBoss {
                         tasks.addTask(newEvent);
                         ui.addTaskOutput(newEvent);
                         break;
+                    case "find":
+                        ui.outputFoundTasks(tasks.findTasks(remainingUserInput));
+                        break;
                     default:
                         throw new MyBossException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
 

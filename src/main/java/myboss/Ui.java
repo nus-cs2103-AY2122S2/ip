@@ -38,6 +38,17 @@ public class Ui {
         hLineBreak();
     }
 
+    public void outputFoundTasks(ArrayList<Task> taskList) {
+        StringBuilder tempOut = new StringBuilder("");
+        for (int i = 0; i < taskList.size(); i++) {
+            tempOut.append(" " + indent).append((i + 1) + ".").append(taskList.get(i).toString());
+        }
+        hLineBreak();
+        printlnWithIndent(" Here are the matching tasks in your list:");
+        System.out.print(tempOut); // newline in tempOut
+        hLineBreak();
+    }
+
     public void outputMarked(Task task) {
         myBossOutput(task.markAsDone(true));
     }
