@@ -5,6 +5,7 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.ToDo;
 import tasks.Task;
+import validation.DateValidator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -88,11 +89,11 @@ public class Storage {
                             break;
                         case "D":
                             commandLine = "deadline " + savedData[2];
-                            tasks.add(count, new Deadline(commandLine, savedData[3]));
+                            tasks.add(count, new Deadline(commandLine, DateValidator.convertDate(savedData[3])));
                             break;
                         case "E":
                             commandLine = "event " + savedData[2];
-                            tasks.add(count, new Event(commandLine, savedData[3]));
+                            tasks.add(count, new Event(commandLine, DateValidator.convertDate(savedData[3])));
                             break;
                         default:
                             throw new DukeException("Unable to parse file: " + filePath);

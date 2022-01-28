@@ -4,6 +4,9 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Deadline;
 import tasks.ToDo;
+import validation.DateValidator;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,10 +45,10 @@ public class Duke {
                             tasks.get(currentTask).setComplete();
                             System.out.println("Nice! I've marked this task as done: ");
                             System.out.println(tasks.get(currentTask).toString());
-                            continue;
                         } catch (NumberFormatException e){
                             throw new DukeException("Please enter a number of the item in the list you wish to mark!");
                         }
+                        break;
                     }
                     case UNMARK: {
                         try {
@@ -53,10 +56,10 @@ public class Duke {
                             tasks.get(currentTask).setIncomplete();
                             System.out.println("OK, I've marked this task as not done yet: ");
                             System.out.println(tasks.get(currentTask).toString());
-                            continue;
                         } catch (NumberFormatException e){
                             throw new DukeException("Please enter a number of the item in the list you wish to unmark!");
                         }
+                        break;
                     }
                     case TODO: {
                         try {
@@ -64,30 +67,31 @@ public class Duke {
                             System.out.println("Got it. I've added this task:  ");
                             System.out.println(tasks.get(tasks.size() - 1).toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                            continue;
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
+                        break;
                     }
                     case DEADLINE: {
                         String strArrDate[] = strArr[1].split("/by ", 2);
                         String eventName = strArrDate[0];
                         String eventDate = strArrDate[1];
+                        DateValidator.convertDate(eventDate);
                         System.out.println("Got it. I've added this task:  ");
-                        tasks.add(new Deadline(eventName, eventDate));
+                        tasks.add(new Deadline(eventName, DateValidator.convertDate(eventDate)));
                         System.out.println(tasks.get(tasks.size() - 1).toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        continue;
+                        break;
                     }
                     case EVENT: {
                         String strArrDate[] = strArr[1].split("/at ", 2);
                         String eventName = strArrDate[0];
                         String eventDate = strArrDate[1];
                         System.out.println("Got it. I've added this task:  ");
-                        tasks.add(new Event(eventName, eventDate));
+                        tasks.add(new Event(eventName, DateValidator.convertDate(eventDate)));
                         System.out.println(tasks.get(tasks.size() - 1).toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        continue;
+                        break;
                     }
                     case REMOVE: {
                         try {
@@ -97,10 +101,10 @@ public class Duke {
                             System.out.println(toRemove.toString());
                             tasks.remove(toRemove);
                             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                            continue;
                         } catch (NumberFormatException e){
                             throw new DukeException("Please enter the number of the item in the list you wish to remove!");
                         }
+                        break;
                     }
                     case BYE:
                         break loop;

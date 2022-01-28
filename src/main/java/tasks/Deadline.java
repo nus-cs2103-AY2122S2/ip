@@ -1,19 +1,21 @@
 package tasks;
 
+import java.time.LocalDate;
+
 public class Deadline extends Task {
 
-    protected String deadlineBy;
+    protected LocalDate deadlineBy;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate deadlineBy) {
         super(description);
-        this.deadlineBy = by;
+        this.deadlineBy = deadlineBy;
     }
 
-    public String getDeadlineBy() {
+    public LocalDate getDeadlineBy() {
         return deadlineBy;
     }
 
-    public void setDeadlineBy(String deadlineBy) {
+    public void setDeadlineBy(LocalDate deadlineBy) {
         this.deadlineBy = deadlineBy;
     }
 
