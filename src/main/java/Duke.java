@@ -1,5 +1,7 @@
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,7 +18,10 @@ public class Duke {
         read();
     }
     public static void read() {
-        LinkedList<Task> tasks = new LinkedList<>();
+        String directoryPath = "./data";
+        String filePath = "./data/duke.txt";
+        File file = new File(filePath);
+        File directory = new File(directoryPath);
         String input;
         Scanner sc = new Scanner(System.in);
         input = sc.next();
@@ -25,91 +30,55 @@ public class Duke {
             int id;
             switch(input) {
                 case "list" :
-                    System.out.println("Your tasks list, sir:");
-                    for (int i = 1; i <= tasks.size(); i++) {
-                        System.out.println(i + "." + tasks.get(i - 1));
-                    }
+                    readFile(directory, file);
                     break;
-                case "mark" :
-                    id = sc.nextInt();
-                    try {
-                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
-                        if (tasks.get(id - 1).isDone) throw new DukeException("This task was already completed, sir.");
-                        tasks.get(id - 1).markAsDone();
-                        System.out.println("Good job sir, this task is marked done:");
-                        System.out.println("  " + tasks.get(id - 1));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    } finally {
-                        break;
-                    }
-                case "unmark" :
-                    id = sc.nextInt();
-                    try {
-                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
-                        if (!tasks.get(id - 1).isDone) throw new DukeException("It wasn't even done yet, sir.");
-                        tasks.get(id - 1).markAsNotDone();
-                        System.out.println("Slacking off, sir? This task is marked not done:");
-                        System.out.println("  " + tasks.get(id - 1));
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    } finally {
-                        break;
-                    }
                 case "todo" :
                     sc.reset();
                     try {
                         input = sc.nextLine().strip();
                         if (input.isEmpty()) throw new DukeException("Do what, sir?");
-                        tasks.add(new Todo(input));
-                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                        Todo task = new Todo(input);
+                        addTasks(directory, file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-                    finally {
-                        break;
-                    }
+                    break;
                 case "deadline" :
                     sc.reset();
                     input = sc.nextLine().strip();
                     String[] deadline = input.split(" /by ");
                     try {
                         if (deadline.length < 2) throw new DukeException("Invalid deadline task, sir.");
-                        tasks.add(new Deadline(deadline[0], deadline[1]));
-                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                        Deadline task = new Deadline(deadline[0], deadline[1]);
+                        addTasks(directory, file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
-                    } finally {
-                        break;
                     }
+                    break;
                 case "event" :
                     sc.reset();
                     input = sc.nextLine().strip();
                     String[] event = input.split(" /at ");
                     try {
                         if (event.length < 2) throw new DukeException("Invalid event task, sir.");
-                        tasks.add(new Event(event[0], event[1]));
-                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                        Event task = new Event(event[0], event[1]);
+                        addTasks(directory, file, task);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
-                    } finally {
-                        break;
                     }
+                    break;
+                case "mark" :
+                    id = sc.nextInt();
+                    updateTasks(directory, file, id, "mark");
+                    break;
+                case "unmark" :
+                    id = sc.nextInt();
+                    updateTasks(directory, file, id, "unmark");
+                    break;
                 case "remove" :
                     id = sc.nextInt();
-                    try {
-                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
-                        System.out.println("Too weak to handle it? This task have been removed sir: \n" + "  " + tasks.remove(id - 1));
-                        System.out.println("There are " + tasks.size() + " tasks on your list.");
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    } finally {
-                        break;
-                    }
+                    updateTasks(directory, file, id, "remove");
+                    break;
                 default :
                     sc.reset();
                     sc.nextLine();
@@ -122,6 +91,100 @@ public class Duke {
         System.out.println("Good bye, sir.");
         System.out.println("___________________________________________________________");
         sc.close();
+    }
+
+    public static void readFile(File directory, File file) {
+        try {
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            if (!file.exists()) {
+                System.out.println("I have created a new list for your tasks, sir.");
+                file.createNewFile();
+                return;
+            }
+            Scanner reader = new Scanner(file);
+            System.out.println("Here are the tasks on your list, sir.");
+            while (reader.hasNextLine()) {
+                System.out.println("  " + reader.nextLine());
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void addTasks(File directory, File file, Task task) {
+        try {
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            if (!file.exists()) {
+                System.out.println("I have created a new list for your tasks, sir.");
+                file.createNewFile();
+            }
+            FileWriter writer = new FileWriter(file.getPath(), true);
+            writer.write(task.toString() + "\n");
+            writer.close();
+            System.out.println("I've added this to your tasks sir: " + task);
+            }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void updateTasks(File directory, File file, int id, String command) {
+        try {
+            if (!directory.exists() || !file.exists()) {
+                throw new DukeException("You do not have a task list, sir.");
+            }
+            String path = file.getPath();
+            String temp = "./data/temp.txt";
+            File tempFile = new File(temp);
+            tempFile.createNewFile();
+            int ptr = 0;
+            FileWriter writer = new FileWriter(temp, true);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                ptr++;
+                if (ptr == id) {
+                    String type = scanner.next();
+                    String status = scanner.next();
+                    String description = scanner.nextLine().strip();
+                    if (command.equals("mark")) {
+                        status = "[X]";
+                        System.out.println("Good job, sir. This task is marked done: ");
+                        writer.write(type + " " + status + " " + description + "\n");
+                    } else if (command.equals("unmark")){
+                        status = "[-]";
+                        System.out.println("Slacking off, sir? This task is marked not done: ");
+                        writer.write(type + " " + status + " " + description + "\n");
+                    } else {
+                        System.out.println("Too weak to handle it? This task have been removed sir: ");
+                    }
+                    System.out.println("  " + description);
+                } else {
+                    writer.write(scanner.nextLine() + "\n");
+                }
+            }
+            writer.close();
+            file.delete();
+            File dump = new File(path);
+            tempFile.renameTo(dump);
+            if (ptr < id) {
+                throw new DukeException("This is an invalid task id, sir.");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            if (e.getMessage().equals("You do not have a task list, sir.")) {
+                System.out.println("Create one by using any one of these commands:");
+                System.out.println("  list");
+                System.out.println("  todo <task>");
+                System.out.println("  deadline <task> /by <when>");
+                System.out.println("  event <task> /at <venue>");
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
