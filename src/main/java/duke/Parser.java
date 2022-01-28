@@ -111,10 +111,10 @@ public class Parser {
 
         } else if (words[0].equals("find")) {
             try {
-                LocalDate localdate = LocalDate.parse(words[1]);
-                return new FindCommand(localdate);
+//                LocalDate localdate = LocalDate.parse(words[1]);
+                return new FindCommand(words[1]);
             } catch (Exception e) {
-                throw new DukeException("Please input date in the format YYYY-MM-DD to be found");
+                throw new DukeException("I'm not sure what's happening. Please try again later!");
             }
 
         } else {
