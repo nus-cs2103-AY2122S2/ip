@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -77,7 +78,8 @@ public class Duke {
                     String[] deadline = input.split(" /by ");
                     try {
                         if (deadline.length < 2) throw new DukeException("Invalid deadline task, sir.");
-                        tasks.add(new Deadline(deadline[0], deadline[1]));
+                        LocalDate date = LocalDate.parse(deadline[1]);
+                        tasks.add(new Deadline(deadline[0], date));
                         System.out.println("I've added this to your tasks sir: " + tasks.getLast());
                         System.out.println("There are " + tasks.size() + " tasks on your list.");
                     } catch (DukeException e) {
