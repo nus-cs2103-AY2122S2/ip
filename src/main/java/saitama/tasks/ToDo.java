@@ -1,5 +1,8 @@
 package saitama.tasks;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -10,9 +13,9 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
-    public String getTaskData() {
+    public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        return "T " + isDone + " " + this.description + "\n";
+        fw.write("T " + isDone + " " + this.description + "\n");
     }
 
     @Override

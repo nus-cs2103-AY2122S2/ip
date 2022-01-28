@@ -3,6 +3,9 @@ package saitama.commands;
 import saitama.Storage;
 import saitama.TaskList;
 import saitama.Ui;
+import saitama.tasks.Task;
+
+import java.util.List;
 
 public class FindCommand extends Command {
     private String query;
@@ -13,7 +16,18 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.search(query);
+        System.out.println("OK...");
+        List<Task> matchingTasks = taskList.search(query);
+        int counter = 1;
+        if (matchingTasks.size() == 0) {
+            System.out.println("There are no matching tasks in your list!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task task : matchingTasks) {
+                System.out.println(counter + "." + task);
+                counter += 1;
+            }
+        }
     }
 
     @Override

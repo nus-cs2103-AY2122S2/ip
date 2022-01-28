@@ -23,10 +23,6 @@ public class TaskList {
      */
     public void add(Task task) {
         taskList.add(task);
-        System.out.println("OK...");
-        System.out.println("The following task has been added to the list: ");
-        System.out.println(task);
-        System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -55,11 +51,7 @@ public class TaskList {
      * @param taskNumber The task number to be deleted.
      */
     public void delete(int taskNumber) {
-        System.out.println("OK...");
-        System.out.println("The following task has been removed from the list: ");
-        System.out.println(taskList.get(taskNumber - 1));
         taskList.remove(taskNumber - 1);
-        System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -81,36 +73,14 @@ public class TaskList {
         return taskList.size();
     }
 
-    /**
-     * Prints the list of tasks currently in the task list.
-     */
-    public void list() {
-        System.out.println("OK...");
-        if (numOfTasks() == 0) {
-            System.out.println("There are no tasks in your list!");
-        } else {
-            System.out.println(this);
-        }
-    }
-
-    public void search(String query) {
-        System.out.println("OK...");
+    public List<Task> search(String query) {
         List<Task> matchingTasks = new ArrayList<>();
-        int counter = 1;
         for (Task task : taskList) {
             if (task.toString().contains(query)) {
                 matchingTasks.add(task);
             }
         }
-        if (matchingTasks.size() == 0) {
-            System.out.println("There are no matching tasks in your list!");
-        } else {
-            System.out.println("Here are the matching tasks in your list:");
-            for (Task task : matchingTasks) {
-                System.out.println(counter + "." + task);
-                counter += 1;
-            }
-        }
+        return matchingTasks;
     }
 
     /**
@@ -121,12 +91,12 @@ public class TaskList {
     @Override
     public String toString() {
         int counter = 1;
-        String output = "Here are the tasks in your list:";
+        String output = "";
         for (Task task : taskList) {
-            output += "\n" + counter + "." + task;
+            output +=  counter + "." + task + "\n";
             counter += 1;
         }
-        return output;
+        return output.substring(0, output.length() - 1);
     }
 
     /**

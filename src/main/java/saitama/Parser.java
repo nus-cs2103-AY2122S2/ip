@@ -1,11 +1,22 @@
 package saitama;
 
-import saitama.commands.*;
-import saitama.exceptions.*;
+import saitama.commands.AddCommand;
+import saitama.commands.Command;
+import saitama.commands.DeleteCommand;
+import saitama.commands.ExitCommand;
+import saitama.commands.FindCommand;
+import saitama.commands.ListCommand;
+import saitama.commands.MarkCommand;
+import saitama.commands.UnmarkCommand;
+import saitama.exceptions.EmptyDescriptionException;
+import saitama.exceptions.InvalidCommandException;
+import saitama.exceptions.InvalidFormatException;
+import saitama.exceptions.InvalidTaskNumberException;
+import saitama.exceptions.MissingQueryException;
 import saitama.tasks.Deadline;
+import saitama.tasks.Event;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
-import saitama.tasks.Event;
 
 /**
  * Interprets the user input.

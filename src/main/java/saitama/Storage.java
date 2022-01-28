@@ -32,10 +32,9 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> ls = new ArrayList<Task>();
         File f = new File(filePath);
-        
+
         try {
             Scanner sc = new Scanner(f);
-
             while (sc.hasNext()) {
                 boolean isDone = false;
                 Task newTask;
@@ -63,7 +62,8 @@ public class Storage {
                         newTask = new Deadline(substring[0], substring[1], isDone);
                         ls.add(newTask);
                     } catch (InvalidFormatException e) {
-                        //Should not happen since it is read from saved file
+                        System.out.println("Data corrupted! Returning empty task list...");
+                        return new ArrayList<Task>();
                     }
                     break;
                 case "E":
@@ -84,15 +84,15 @@ public class Storage {
      *
      * @param taskList The task list to be saved.
      */
-    public void save(saitama.TaskList taskList) {
+    public void save(ArrayList<Task> taskList) {
         File f = new File(filePath);
         String directoryName = filePath.replace(f.getName(), "");
         File directory = new File(directoryName);
         directory.mkdirs();
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : taskList.toArrayList()) {
-                fw.write(task.getTaskData());
+            for (Task task : taskList) {
+                task.saveTask(fw);
             }
             fw.close();
         } catch (IOException e) {

@@ -17,7 +17,11 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        System.out.println("OK...");
         taskList.add(task);
+        System.out.println("The following task has been added to the list: ");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
     }
 
     @Override

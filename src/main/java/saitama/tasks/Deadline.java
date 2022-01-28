@@ -2,6 +2,8 @@ package saitama.tasks;
 
 import saitama.exceptions.InvalidFormatException;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -37,9 +39,9 @@ public class Deadline extends Task {
         }
     }
 
-    public String getTaskData() {
+    public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        return "D " + isDone + " " + this.description + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
+        fw.write("D " + isDone + " " + this.description + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
     }
 
     @Override

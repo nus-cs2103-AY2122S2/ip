@@ -35,7 +35,6 @@ public class Ui {
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        sc.close();
         return sc.nextLine().trim();
     }
 

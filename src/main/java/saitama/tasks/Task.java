@@ -1,5 +1,6 @@
 package saitama.tasks;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 abstract public class Task {
@@ -23,19 +24,13 @@ abstract public class Task {
 
     public void markAsDone() {
         isDone = true;
-        System.out.println("OK...");
-        System.out.println("The following task has been marked as done: ");
-        System.out.println(this);
     }
 
     public void markAsUndone() {
         isDone = false;
-        System.out.println("OK...");
-        System.out.println("The following task has been marked as not done: ");
-        System.out.println(this);
     }
 
-    abstract public String getTaskData() throws IOException;
+    abstract public void saveTask(FileWriter fw) throws IOException;
 
     @Override
     public String toString() {

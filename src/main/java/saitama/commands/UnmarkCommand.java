@@ -20,7 +20,10 @@ public class UnmarkCommand extends Command {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
+        System.out.println("OK...");
         taskList.unmarkTask(taskNumber);
+        System.out.println("The following task has been marked as not done: ");
+        System.out.println(taskList.get(taskNumber));
     }
 
     @Override
