@@ -10,7 +10,7 @@ import duke.util.TaskList;
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printAllTasks(tasks.getAllTasks());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showAllTasks(tasks.getAllTasks());
     }
 }

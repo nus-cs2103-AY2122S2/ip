@@ -28,31 +28,20 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot until termination. Reads the user command and executes it,
-     * until the user issues the exit command.
+     * Gets user input and executes the corresponding command.
+     *
+     * @param input User input.
+     * @return Result of the executed command or error message.
      */
-    public void run() {
-        ui.printGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.getInput();
-                Command command = Parser.parseCommand(input);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (Exception e) {
-                ui.printMessage(e.toString());
-            }
-        }
-
+    public String getResponse(String input) {
         try {
-            storage.save(tasks);
+            Command command = Parser.parseCommand(input.trim());
+            if (command.isExit()) {
+                storage.save(tasks);
+            }
+            return command.execute(tasks, ui, storage);
         } catch (Exception e) {
-            ui.printMessage(e.toString());
+            return ui.showMessage(e.toString());
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

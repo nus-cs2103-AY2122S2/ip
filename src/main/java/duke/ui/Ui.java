@@ -12,8 +12,6 @@ import java.util.Scanner;
  * Represents a UI that deals with interactions with the user.
  * */
 public class Ui {
-    private static final String LINE_BREAK
-            = "____________________________________________________________\n";
     private static final String CAT_FACE = " =^_^=\n";
     private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____      /\\_/\\           ___\n"
@@ -25,91 +23,82 @@ public class Ui {
     private static final String MESSAGE_NUM_LIST_ITEMS = "Number of tasks in list: ";
     private static final String MESSAGE_TASK_WITH_KEYWORD = "Here are the matching tasks with keyword: ";
 
-    private final Scanner in;
-    private final PrintStream out;
-
     public Ui() {
-        this(System.in, System.out);
     }
 
     /**
-     * Creates an Ui with the specified objects.
+     * Formats the message to be shown to the user.
      *
-     * @param in InputStream to read input from console.
-     * @param out PrintStream to print output to console.
+     * @param message The message to be shown.
+     * @return The formatted message.
      */
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
+    public String showMessage(String message) {
+        return message + CAT_FACE;
     }
 
     /**
-     * Reads user input from the console.
+     * Returns the logo to be shown to the user.
      *
-     * @return User input.
+     * @return The logo.
      */
-    public String getInput() {
-        return in.nextLine().strip();
+    public String showLogo() {
+        return LOGO;
     }
 
     /**
-     * Prints output to the console with the specified message.
+     * Returns the greeting to be shown to the user.
      *
-     * @param message The message to be printed.
+     * @return The greeting.
      */
-    public void printMessage(String message) {
-        out.print(LINE_BREAK + message + CAT_FACE + LINE_BREAK);
+    public String showGreeting() {
+        return showMessage(GREETING);
     }
 
     /**
-     * Prints the greeting and logo.
+     * Returns the goodbye message to be shown to the user.
+     *
+     * @return The goodbye message.
      */
-    public void printGreeting() {
-        out.print(LOGO);
-        printMessage(GREETING);
-    }
-
-    /**
-     * Prints the goodbye message.
-     */
-    public void printGoodbye() {
-        printMessage(GOODBYE);
+    public String showGoodbye() {
+        return showMessage(GOODBYE);
     }
 
     /**
      * Prints an error when data cannot be loaded.
      */
     public void showLoadingError() {
-        printMessage(ErrorMessage.MESSAGE_LOADING_ERROR);
+        System.out.print(showMessage(ErrorMessage.MESSAGE_LOADING_ERROR));
     }
 
     /**
-     * Formats and prints the tasks.
+     * Formats and returns the tasks to be shown to the user.
      *
      * @param listItems ArrayList of tasks to be printed.
+     * @return The formatted tasks string.
      */
-    public void printAllTasks(ArrayList<Task> listItems) {
+    public String showAllTasks(ArrayList<Task> listItems) {
         StringBuilder formatted = new StringBuilder();
         for (int i = 0; i < listItems.size(); i++) {
             formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
         }
         formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
-        printMessage(formatted.toString());
+        return showMessage(formatted.toString());
     }
 
     /**
-     * Formats and prints the tasks.
+     * Formats and returns the tasks with a given keyword to be shown to the user.
      *
      * @param listItems ArrayList of tasks to be printed.
      * @param keyword Keyword to be searched for.
+     * @return The formatted tasks string.
      */
-    public void printFoundTasks(ArrayList<Task> listItems, String keyword) {
+    public String showFoundTasks(ArrayList<Task> listItems, String keyword) {
         StringBuilder formatted = new StringBuilder();
         formatted.append(MESSAGE_TASK_WITH_KEYWORD).append(keyword).append(" \n");
         for (int i = 0; i < listItems.size(); i++) {
             formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
         }
         formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
-        printMessage(formatted.toString());
+        return showMessage(formatted.toString());
     }
 }
