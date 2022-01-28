@@ -11,12 +11,12 @@ import duke.ui.Ui;
 public class Duke {
 
     /**
-     * duke.storage.Storage handles loading and saving of tasks.
+     * Handle the loading and saving of tasks.
      */
     private Storage storage;
 
     /**
-     * Stores the list of tasks.
+     * Temporary store of list of tasks.
      */
     private TaskList tasks;
 
@@ -72,7 +72,7 @@ public class Duke {
 
     /**
      *
-     * Calls the run function for Duke chat bot.
+     * Calls the run function of Duke chat bot.
      *
      * @param args command line arguments from terminal.
      */

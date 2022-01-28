@@ -7,7 +7,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Responsible for the functionality needed when un-marking a Task;
+ * Responsible for the functionality needed when un-marking a Task.
  */
 public class UnmarkCommand extends Command{
 
