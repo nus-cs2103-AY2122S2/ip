@@ -1,3 +1,5 @@
+import tasks.Task;
+
 import java.util.Scanner;
 
 public class Heylo {
@@ -9,6 +11,9 @@ public class Heylo {
                         "|  _  | |  __/ | |_| | | | | (_) |\n" +
                         "|_| |_|  \\___|  \\__, | |_|  \\___/\n" +
                         "                |___/\n";
+
+        Task.getSavedTasks();
+
         System.out.println(logo);
         System.out.println("Heylo! What can I do for you today? :)\n");
 

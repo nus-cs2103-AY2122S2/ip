@@ -1,4 +1,6 @@
 package tasks;
+import fileHandling.FilesReader;
+
 import java.util.ArrayList;
 
 public class Task {
@@ -65,6 +67,10 @@ public class Task {
         System.out.println("  " + taskList.get(index).toString());
         taskList.remove(index);
         taskCount--;
+    }
+
+    public static void getSavedTasks() {
+        taskList = FilesReader.getTaskListFromFile();
     }
 
     public static void printAllTasks() {
