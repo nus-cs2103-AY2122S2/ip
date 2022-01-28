@@ -16,26 +16,27 @@ public class Parser {
             return new ExitCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
-        } else if (input.length() == 6
-                || input.length() == 7 && input.startsWith("mark ")) {
+        } else if (input.startsWith("mark ") && (input.length() == 6 || input.length() == 7)) {
             try {
-                int i = Integer.parseInt(input.substring(5)) - 1;
+                int i = Integer.parseInt(input.split("\\s+")[1]) - 1;
                 return new MarkCommand(i);
             } catch (NumberFormatException e) {
                 return new PrintCommand("Please enter a number after mark! (E.g. mark 2)");
             } catch (IndexOutOfBoundsException e) {
                 return new PrintCommand("Please enter a valid number!");
             }
-        } else if ((input.length() == 8
-                || input.length() == 9) && input.startsWith("delete ")) {
+        } else if ((input.startsWith("delete ") && input.length() == 8 || input.length() == 9)) {
             try {
-                int i = Integer.parseInt(input.substring(7)) - 1;
+                int i = Integer.parseInt(input.split("\\s+")[1]) - 1;
                 return new DeleteCommand(i);
             } catch (NumberFormatException e) {
                 return new PrintCommand("Please enter a number after delete! (E.g. delete 2)");
             } catch (IndexOutOfBoundsException e) {
                 return new PrintCommand("Please enter a valid number!");
             }
+        } else if ((input.startsWith("search ") && input.length() > 7)) {
+            String prefix = input.split("\\s+")[1];
+            return new SearchCommand(prefix);
         } else {
             try {
                 Task t;

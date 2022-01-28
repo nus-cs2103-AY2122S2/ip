@@ -32,6 +32,16 @@ public class TaskList {
         list.remove(task);
     }
 
+    public String search(String prefix) {
+        String result = "";
+        for (Task t : list) {
+            if (t.match(prefix)) {
+                result = result + t + "\n";
+            }
+        }
+        return result;
+    }
+
     /** Listing out all the tasks in the list.  */
     public String listing() {
         String s = "";

@@ -31,6 +31,14 @@ public class Task {
         }
     }
 
+    /**
+     * Check if the prefix matches this task.
+     * @param prefix the prefix used to check.
+     **/
+    public boolean match(String prefix) {
+        return this.name.contains(prefix);
+    }
+
     private String identifyTime(String time) {
         String result = time;
         String[] dayAndTime = time.split(" ", 2);
