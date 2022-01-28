@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represent a task to complete
+ */
 public class Task {
     boolean isDone;
     protected final String task;
@@ -11,6 +14,11 @@ public class Task {
     protected LocalDate date;
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Constructor of task
+     * @param task Description of the task
+     * @param type Type of the task
+     */
     Task(String task, String type) {
         this.isDone = false;
         this.task = task;
@@ -19,6 +27,12 @@ public class Task {
         this.time = this.date.toString();
     }
 
+    /**
+     * Constructor of task
+     * @param task Description of the task
+     * @param type Type of the task
+     * @param time time of the task
+     */
     Task(String task, String type, String time) {
         this.isDone = false;
         this.task = task;
@@ -28,17 +42,31 @@ public class Task {
         this.date = LocalDate.parse(timeArr[1]);
     }
 
+    /**
+     * Mark the task as done
+     */
     void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Unmark the task as not done
+     */
+    void unMark() {
+        this.isDone = false;
+    }
+    /**
+     * Return the date of the task
+     * @return Date of the task
+     */
     LocalDate getDate() {
         return this.date;
     }
 
-    void unmark() {
-        this.isDone = false;
-    }
+    /**
+     * Return the task to standard saving format
+     * @return String in standard saving format
+     */
 
     String saveFormat() {
         if (this.isDone) {
@@ -48,6 +76,11 @@ public class Task {
         }
     }
 
+    /**
+     * If the task is done, return a string contains type of task + [X] + description of task
+     * Else change the [X] to [ ]
+     * @return String contains type of task, isDone status and description of task
+     */
 
     @Override
     public String toString() {

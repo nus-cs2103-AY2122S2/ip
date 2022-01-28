@@ -148,7 +148,7 @@ public class BH {
     }
 
     private String unMark(int index) {
-        this.list.get(index).unmark();
+        this.list.get(index).unMark();
         return this.list.get(index).toString();
     }
 }
