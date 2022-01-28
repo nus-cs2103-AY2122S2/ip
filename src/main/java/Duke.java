@@ -5,12 +5,6 @@ import java.io.OutputStreamWriter;
 public class Duke {
     public static void main(String[] args) throws Exception{
         Scanner s = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         System.out.println("Duke: Hello! I'm Duke\n      What can I do for you?");
         String inp = "";
         DukeList a = new DukeList();
