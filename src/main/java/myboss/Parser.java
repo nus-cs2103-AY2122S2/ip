@@ -1,9 +1,6 @@
 package myboss;
 
 public class Parser {
-    public Parser() {
-
-    }
 
     public static String[] splitUserCmd(String userCmd) {
         return userCmd.split(" ",2);
