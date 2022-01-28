@@ -15,7 +15,7 @@ public class Ui {
     public static final String ERR_DIVIDER = "------------------------------------------------";
     public static final String WELCOME = "Hello, my name is Karen.\nI'll be speaking (to) as your manager today.";
     public static final String GOODBYE = "Goodbye - I'll be seeing your manager's manager next.\nI'll remember this.";
-    public static final String NO_TASKS = "Nothing is even added yet.";
+    public static final String NO_TASKS = "Nothing can be found.";
 
     private final Scanner in;
     private final PrintStream out;
@@ -114,7 +114,7 @@ public class Ui {
      * 1-based index formatting
      * @param taskList ArrayList object for print out
      */
-    public void displayTaskList(ArrayList<Task> taskList) {
+    public String displayTaskList(ArrayList<Task> taskList) {
         StringBuilder formatString = new StringBuilder();
         int index = 1;
         for (Task item: taskList) {
@@ -125,7 +125,7 @@ public class Ui {
             formatString.append(NO_TASKS);
         }
 
-        displayUserInput(formatString.toString());
+        return formatString.toString();
     }
 
 }
