@@ -3,19 +3,36 @@ import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import java.util.ArrayList;
 
+/**
+ * The class which contains the array list of tasks and functions that can be done to modify it.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructor for TaskList.
+     * @param taskList an ArrayList which is abstracted into the TaskList.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Adds a task into the task list.
+     * @param task the input task which will be added into the task list.
+     * @return the string which will be prints out the task that has been added and the current tasks in the list.
+     */
     public String addTask(Task task) {
         this.taskList.add(task);
         return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size() +
                 " tasks in the list.";
     }
 
+    /**
+     * Deletes a task from the task list.
+     * @param index the index of the task to be deleted.
+     * @throws InvalidIndexException if the index is out of bounds.
+     */
     public void deleteTask(int index) throws InvalidIndexException {
         Task deletedTask;
         try {
@@ -28,6 +45,12 @@ public class TaskList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Marks a task as completed in the task list.
+     * @param index the index of the task to be marked as completed.
+     * @return the completed task.
+     * @throws InvalidIndexException if the index is out of bounds.
+     */
     public Task mark(int index) throws InvalidIndexException {
         Task markTask;
         try {
@@ -41,6 +64,12 @@ public class TaskList {
         return markTask;
     }
 
+    /**
+     * Marks a task as incomplete in the task list.
+     * @param index the index of the task to be marked as incomplete.
+     * @return the incomplete task.
+     * @throws InvalidIndexException if the index is out of bounds.
+     */
     public Task unmark(int index) throws InvalidIndexException {
         Task unmarkTask;
         try {
@@ -54,6 +83,9 @@ public class TaskList {
         return unmarkTask;
     }
 
+    /**
+     * Prints a list of all the tasks currently in the task list.
+     */
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
