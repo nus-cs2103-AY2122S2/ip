@@ -1,6 +1,9 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,10 +100,11 @@ public class DukeList {
     /**
      * Used to handle splitting and creation of task into different types before they are added to the list.
      * @param t The type of task
-     * @param m The description of the task
+     * @param j The description of the task
      * @throws DukeTaskException is thrown when description is empty, or the format is not followed correctly
      */
-    public void addTask(String t, String m) throws DukeTaskException, IOException {
+    public void addTask(String t, String j) throws DukeTaskException{
+        String m = j.trim();
         if(t.equals("todo")){
             if(m.isEmpty()){
                 throw new WrongTodoFormat("\nDuke: Wrong format! The description of a todo cannot be empty.\n");
@@ -111,8 +115,10 @@ public class DukeList {
         else if(t.equals("deadline")){
             if(Pattern.matches(".+/by.+" , m)){
                 String[] k = m.split("/by");
-                Deadlines e = new Deadlines(k[0],k[1]);
-                this.add(e);
+                if(isValidDate(k[1].trim())) {
+                    Deadlines e = new Deadlines(k[0], k[1].trim());
+                    this.add(e);
+                }
             }
             else{
                 throw new WrongDeadlineFormat("\nDuke: Wrong format! To add a deadline, follow the format \"deadline description /by date\"\n");
@@ -121,12 +127,24 @@ public class DukeList {
         else{
             if(Pattern.matches(".+/at.+" , m)){
                 String[] r = m.split("/at");
-                Events e = new Events(r[0],r[1]);
-                this.add(e);
+                if(isValidDate(r[1].trim())) {
+                    Events e = new Events(r[0], r[1].trim());
+                    this.add(e);
+                }
             }
             else{
                 throw new WrongEventFormat("\nDuke: Wrong format! To add an event, follow the format \"event description /at date\"\n");
             }
+        }
+    }
+
+    public boolean isValidDate(String k) {
+        try{
+            LocalDate d = LocalDate.parse(k);
+            return true;
+        }catch(DateTimeParseException e) {
+            System.out.println("Duke: Date is in the wrong format! Try \"yyyy-mm-dd\"\n");
+            return false;
         }
     }
 
@@ -146,6 +164,24 @@ public class DukeList {
         } catch(NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeTaskException("\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n");
         }
+    }
+
+    public void todayTask(){
+        LocalDate cur = LocalDate.now();
+        String day = "\nDuke: Here are the tasks due today\n";
+        boolean b = true;
+        for(Task t: a){
+            if (t instanceof Events || t instanceof Deadlines ){
+                if(t.date.isEqual(cur)) {
+                    b = false;
+                    day = day + "     " + t.show() + "\n";
+                }
+            }
+        }
+        if(b){
+            day += "      NO TASK DUE TODAY";
+        }
+        System.out.println(day);
     }
 
 }

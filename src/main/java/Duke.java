@@ -66,6 +66,9 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
             }
+            else if(inp.equals("today")){
+                a.todayTask();
+            }
             else {
                 System.out.println("\nDuke: OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
