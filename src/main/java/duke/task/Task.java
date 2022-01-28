@@ -47,4 +47,8 @@ public class Task {
         }
     }
 
+    public String getDetails() {
+        return this.details;
+    }
+
 }
