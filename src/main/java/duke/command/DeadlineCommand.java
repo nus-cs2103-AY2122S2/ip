@@ -1,5 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+
 public class DeadlineCommand extends Command {
-    private Deadline deadline;
+    private final Deadline deadline;
 
     public DeadlineCommand(String description, String by) {
         deadline = new Deadline(description, by);

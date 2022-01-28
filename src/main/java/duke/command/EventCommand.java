@@ -1,5 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+
 public class EventCommand extends Command {
-    private Event event;
+    private final Event event;
 
     public EventCommand(String description, String at) {
         event = new Event(description, at);

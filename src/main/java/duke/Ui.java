@@ -1,7 +1,11 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
