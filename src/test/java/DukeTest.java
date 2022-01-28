@@ -1,13 +1,13 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import Duke.sonautil.DukeException;
-import Duke.sonautil.Parser;
-import Duke.sonautil.TaskList;
-
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
+
+import duke.sonautil.DukeException;
+import duke.sonautil.Parser;
+import duke.sonautil.TaskList;
 
 public class DukeTest {
 
@@ -17,13 +17,13 @@ public class DukeTest {
         Parser p = new Parser();
 
         //test case 1: "list"
-        assertTrue(Arrays.equals(new String[]{"list", null, null, null}, p.messageProcess("list") ));
+        assertTrue(Arrays.equals(new String[]{"list", null, null, null}, p.messageProcess("list")));
 
         //test case 2: "mark 1"
-        assertTrue(Arrays.equals(new String[]{"mark", "0", null, null}, p.messageProcess("mark 1") ));
+        assertTrue(Arrays.equals(new String[]{"mark", "0", null, null}, p.messageProcess("mark 1")));
 
         //test case 3: "unmark 1"
-        assertTrue(Arrays.equals(new String[]{"unmark", "0", null, null}, p.messageProcess("unmark 1") ));
+        assertTrue(Arrays.equals(new String[]{"unmark", "0", null, null}, p.messageProcess("unmark 1")));
 
         //test case 4: "todo play"
         assertTrue(Arrays.equals(new String[]{"todo", "play", null, null}, p.messageProcess("todo play")));

@@ -1,6 +1,6 @@
-package Duke.sonautil;
+package duke.sonautil;
 
-import Duke.task.Task;
+import duke.task.Task;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -54,8 +54,8 @@ public class Ui {
      * Prints out when file is not found
      */
     public static void fileNotFoundMessage() {
-        System.out.println("Oh no... I couldn't find the Duke.task list in your hard disk...\n" +
-                "Don't worry! I will create one for you now :)\n");
+        System.out.println("Oh no... I couldn't find the Duke.task list in your hard disk...\n"
+                + "Don't worry! I will create one for you now :)\n");
     }
 
     /**
@@ -161,18 +161,18 @@ public class Ui {
      *
      * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 00:00 since the user did not enter a time for the event
-     * @param tasksAdded_index total number of tasks in the list
+     * @param tasksAddedIndex total number of tasks in the list
      */
-    public static void eventEnterSuccessMessage(Task task, String timeEntered, int tasksAdded_index) {
+    public static void eventEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
         if (timeEntered.equals("true")) {
             System.out.println((LINE + "\nWokay! I've added this Duke.task:\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
         } else {
             System.out.println((LINE
                     + "\nSince you did not enter what time is this event happening, I will help you set it at 00:00!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
         }
     }
 
@@ -201,17 +201,17 @@ public class Ui {
      *
      * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 23:59 since the user did not enter a time for the event
-     * @param tasksAdded_index total number of tasks in the list
+     * @param tasksAddedIndex total number of tasks in the list
      */
-    public static void deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAdded_index) {
+    public static void deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
         if (timeEntered.equals("true")) {
             System.out.println((LINE + "\nWokay! I've added this Duke.task:\n" + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
         } else {
             System.out.println((LINE + "\nSince you did not enter the due time for this Duke.task, "
                     + "I will help you set it at 23:59!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
         }
     }
 
@@ -238,12 +238,12 @@ public class Ui {
      * Prints out when to-do Duke.task is entered successfully
      *
      * @param task Duke.task to be added
-     * @param taskAdded_index total number of tasks in the list
+     * @param tasksAddedIndex total number of tasks in the list
      */
-    public static void todoEnteredSuccessMessage(Task task, int taskAdded_index) {
+    public static void todoEnteredSuccessMessage(Task task, int tasksAddedIndex) {
         System.out.println(LINE + "\nWokay! I've added this Duke.task:\n"
                 + task.toString()
-                + "\nNow you have " + (taskAdded_index) + " Duke.task(s) in the list\n" + LINE);
+                + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE);
     }
 
     /**

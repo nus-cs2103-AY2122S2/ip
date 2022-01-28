@@ -1,32 +1,28 @@
-package Duke.sonautil;
-
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.Todo;
-
-import java.util.ArrayList;
-
+package duke.sonautil;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * Works on loading, changing and maintaining the contents in the hard disk file
  */
 public class Storage {
-    public String path;
+    private final String path;
 
     public Storage(String path) {
         this.path = path;
@@ -60,11 +56,13 @@ public class Storage {
         case "unmark":
             changeMarking("1", "0", Integer.parseInt(command[1]));
             break;
+        default:
         }
     }
 
     /**
-     * deletes the Duke.task from local file by creating a temp file and copy every Duke.task except the one to be deleted
+     * deletes the Duke.task from local file by creating a temp file
+     * and copy every Duke.task except the one to be deleted
      *
      * @param taskToDelete the index of Duke.task to delete
      */
@@ -89,7 +87,7 @@ public class Storage {
                         bw.write("\n" + line);
                     }
                 }
-                indexAccessed ++;
+                indexAccessed++;
             }
 
         } catch (IOException e) {
@@ -163,6 +161,8 @@ public class Storage {
                 tasks.add(new Event(taskDetail[2],
                         Integer.parseInt(taskDetail[1]), LocalDateTime.parse(taskDetail[3])));
                 break;
+
+            default:
             }
         }
         return tasks;

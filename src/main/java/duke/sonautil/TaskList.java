@@ -1,30 +1,37 @@
-package Duke.sonautil;
-
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.Todo;
-
+package duke.sonautil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * contains the Duke.task list. Has operations to add/delete tasks in the list
  */
 public class TaskList {
 
+    private static int taskAddedIndex;
     private final ArrayList<Task> list;
-    private static int tasksAdded_index;
 
+    /**
+     * Constructor for object TaskList
+     *
+     * @param list an arraylist with Task
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
-        tasksAdded_index = list.size();
+        taskAddedIndex = list.size();
     }
 
+    /**
+     * Constructor for object TaskList
+     */
     public TaskList() {
         list = new ArrayList<>(100);
-        tasksAdded_index = 0;
+        taskAddedIndex = 0;
     }
 
     /**
@@ -37,7 +44,7 @@ public class TaskList {
         String keyword = command[0];
         switch (keyword) {
         case "list":
-            if (tasksAdded_index == 0) {
+            if (taskAddedIndex == 0) {
                 Ui.emptyListMessage();
             } else {
                 Ui.showListMessage();
@@ -50,7 +57,7 @@ public class TaskList {
         case "todo": {
             Task task = new Todo(command[1]);
             addTask(task);
-            Ui.todoEnteredSuccessMessage(task, tasksAdded_index);
+            Ui.todoEnteredSuccessMessage(task, taskAddedIndex);
 
             break;
         }
@@ -58,7 +65,7 @@ public class TaskList {
         case "deadline": {
             Task task = new Deadline(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
-            Ui.deadlineEnterSuccessMessage(task, command[3], tasksAdded_index);
+            Ui.deadlineEnterSuccessMessage(task, command[3], taskAddedIndex);
 
             break;
         }
@@ -66,7 +73,7 @@ public class TaskList {
         case "event": {
             Task task = new Event(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
-            Ui.eventEnterSuccessMessage(task, command[3], tasksAdded_index);
+            Ui.eventEnterSuccessMessage(task, command[3], taskAddedIndex);
 
             break;
         }
@@ -75,12 +82,12 @@ public class TaskList {
             int taskIndex = Integer.parseInt(command[1]);
 
             //user trying to mark a non-existing Duke.task
-            if (taskIndex >= tasksAdded_index || taskIndex < 0) {
+            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
 
             //user trying to mark a done Duke.task as done again
-            if (list.get(taskIndex).isDone) {
+            if (list.get(taskIndex).isDone()) {
                 throw new DukeException(Ui.markRepeatMessage());
             }
 
@@ -93,11 +100,11 @@ public class TaskList {
         case "unmark": {
             int taskIndex = Integer.parseInt(command[1]);
             //user trying to unmark a non-existing Duke.task
-            if (taskIndex >= tasksAdded_index || taskIndex < 0) {
+            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
             //user trying to mark a undone Duke.task as undone again
-            if (!list.get(taskIndex).isDone) {
+            if (!list.get(taskIndex).isDone()) {
                 throw new DukeException(Ui.unmarkRepeatMessage());
             }
             list.get(taskIndex).unmark();
@@ -108,12 +115,12 @@ public class TaskList {
 
         case "delete": {
             //list is empty
-            if (tasksAdded_index == 0) {
+            if (taskAddedIndex == 0) {
                 throw new DukeException(Ui.listEmptyMessage());
             }
             int taskIndex = Integer.parseInt(command[1]);
             //user trying to delete a non-existing Duke.task
-            if (taskIndex >= tasksAdded_index || taskIndex < 0) {
+            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
             Ui.taskRemovedMessage(getTask(taskIndex));
@@ -124,13 +131,13 @@ public class TaskList {
 
         case "schedule":
             //list is empty
-            if (tasksAdded_index == 0) {
+            if (taskAddedIndex == 0) {
                 throw new DukeException(Ui.scheduleEmptyMessage());
             }
             ArrayList<Task> scheduleList = new ArrayList<>(100);
             LocalDate date = LocalDate.parse(command[1]);
 
-            for (int i = 0; i < tasksAdded_index; i++) {
+            for (int i = 0; i < taskAddedIndex; i++) {
                 if (list.get(i) instanceof Event) {
                     Event task = (Event) list.get(i);
                     if (date.isEqual(task.getAt().toLocalDate())) {
@@ -162,7 +169,7 @@ public class TaskList {
             String findWord = command[1];
             ArrayList<Task> searchList = new ArrayList<>(100);
 
-            for (int i = 0; i < tasksAdded_index; i++) {
+            for (int i = 0; i < taskAddedIndex; i++) {
                 String taskDescription = list.get(i).getDescription();
                 if (taskDescription.contains(findWord)) {
                     searchList.add(list.get(i));
@@ -171,6 +178,7 @@ public class TaskList {
 
             if (searchList.size() == 0) {
                 Ui.findNoMatchError();
+
             } else {
                 Ui.findShowResult();
                 for (int i = 0; i < searchList.size(); i++) {
@@ -179,8 +187,12 @@ public class TaskList {
                 Ui.showLine();
             }
 
-        case "unknown":
+            break;
 
+        case "unknown":
+            //fallthrough
+
+        default:
         }
     }
 
@@ -198,7 +210,7 @@ public class TaskList {
      * Prints out all tasks in the list
      */
     private void showList() {
-        for (int i = 0; i < tasksAdded_index; i++) {
+        for (int i = 0; i < taskAddedIndex; i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
     }
@@ -210,7 +222,7 @@ public class TaskList {
      */
     private void addTask(Task task) {
         list.add(task);
-        tasksAdded_index ++;
+        taskAddedIndex++;
     }
 
     /**
@@ -220,7 +232,7 @@ public class TaskList {
      */
     private void removeTask(int taskIndex) {
         list.remove(taskIndex);
-        tasksAdded_index --;
+        taskAddedIndex--;
     }
 
 }

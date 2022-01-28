@@ -1,15 +1,15 @@
-package Duke;
-
-import Duke.sonautil.DukeException;
-import Duke.sonautil.Storage;
-import Duke.sonautil.TaskList;
-import Duke.sonautil.Parser;
-import Duke.sonautil.Ui;
-
-import java.io.IOException;
+package duke;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.sonautil.DukeException;
+import duke.sonautil.Parser;
+import duke.sonautil.Storage;
+import duke.sonautil.TaskList;
+import duke.sonautil.Ui;
+
 
 /**
  * The bot that responses to commands and collects tasks
@@ -19,6 +19,11 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for object Duke
+     *
+     * @param filePath filePath of the tasklist
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -31,10 +36,13 @@ public class Duke {
         }
     }
 
+    /**
+     * function to run Duke
+     */
     public void run() {
         Ui.welcomeMessage();
-        Scanner user_input = new Scanner(System.in).useDelimiter("\n");
-        String userMessage = user_input.next();
+        Scanner userInput = new Scanner(System.in).useDelimiter("\n");
+        String userMessage = userInput.next();
         while (!userMessage.equals("bye")) {
             try {
                 String[] command = new Parser().messageProcess(userMessage);
@@ -46,7 +54,7 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 System.out.println(Ui.dateTimeErrorMessage());
             }
-            userMessage = user_input.next();
+            userMessage = userInput.next();
         }
 
         Ui.goodbyeMessage();

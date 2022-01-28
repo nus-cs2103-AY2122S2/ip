@@ -1,8 +1,8 @@
-package Duke.sonautil;
+package duke.sonautil;
 
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -194,7 +194,7 @@ public class Parser {
             command[0] = "delete";
             command[1] = String.valueOf(taskIndex);
 
-        }  else if (userMessage.startsWith("schedule") && split[0].equals("schedule")) {
+        } else if (userMessage.startsWith("schedule") && split[0].equals("schedule")) {
 
             String dateString = userMessage.substring(8).replaceAll(" ", "");
 

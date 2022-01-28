@@ -1,19 +1,33 @@
-package Duke.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 
 /**
  * Represents the event (with date) entered by user
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime at;
+    private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+    /**
+     * Constructor for object Event
+     *
+     * @param at the date of event
+     * @param description description for the task
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructor for object Event
+     *
+     * @param description description for the task
+     * @param isDone whether the task is done
+     * @param at date of event
+     */
     public Event(String description, int isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
@@ -31,7 +45,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         int year = at.getYear();
-        String month = super.months[at.getMonthValue() - 1];
+        String month = months[at.getMonthValue() - 1];
         int day = at.getDayOfMonth();
 
         String hour;

@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 
@@ -8,12 +8,26 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
 
     protected LocalDateTime by;
+    private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+    /**
+     * Constructor for object Deadline
+     *
+     * @param by the due date of deadline
+     * @param description description for the task
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructor for object Deadline
+     *
+     * @param description description for the task
+     * @param isDone whether the task is done
+     * @param by due date of deadline
+     */
     public Deadline(String description, int isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;
@@ -31,7 +45,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         int year = by.getYear();
-        String month = super.months[by.getMonthValue() - 1];
+        String month = months[by.getMonthValue() - 1];
         int day = by.getDayOfMonth();
 
         String hour;
@@ -52,5 +66,4 @@ public class Deadline extends Task {
                 + super.toString()
                 + "(by: " + month + " " + day + " " + year + " " + hour + ":" + min + ")";
     }
-
 }

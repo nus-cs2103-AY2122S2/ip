@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 
 /**
@@ -6,18 +6,36 @@ package Duke.task;
  */
 public class Task {
     protected String description;
-    public Boolean isDone;
-    public String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    private Boolean isDone;
 
+    /**
+     * Constructor for object Task
+     *
+     * @param description description for the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for object Task
+     *
+     * @param isDone whether the date is done or not
+     * @param description description for the task
+     */
     public Task(String description, int isDone) {
         this.description = description;
         this.isDone = isDone == 1;
+    }
+
+    /**
+     * Returns whether the task is done or not. True for done, false for not done.
+     *
+     * @return boolean value
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**
@@ -44,6 +62,11 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Returns description of the task
+     *
+     * @return description of the task
+     */
     public String getDescription() {
         return description;
     }
