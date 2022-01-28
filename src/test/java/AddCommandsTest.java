@@ -1,42 +1,45 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import taskmaster.commands.AddCommands;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
 import taskmaster.task.TodoTask;
 import taskmaster.util.TaskList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class AddCommandsTest {
-    private final TaskList TASKLIST = new TaskList();
+    private TaskList taskList = new TaskList();
 
     @Test
     @DisplayName("Test TodoTask creation")
     public void testAddTodoTask() {
-        TASKLIST.deleteAllTasks();
-        AddCommands command = new AddCommands("todo me", TASKLIST);
+        taskList.deleteAllTasks();
+        AddCommands command = new AddCommands("todo me", taskList);
         command.execute();
-        assertTrue(TASKLIST.get(0) instanceof TodoTask);
+        assertTrue(taskList.get(0) instanceof TodoTask);
     }
 
     @Test
     @DisplayName("Test DeadlineTask creation")
     public void testAddDeadlineTask() {
-        TASKLIST.deleteAllTasks();
-        AddCommands command = new AddCommands("deadline eat some pizza /by 10/10/2010 1000", TASKLIST);
+        taskList.deleteAllTasks();
+        AddCommands command = new AddCommands("deadline eat some pizza /by 10/10/2010 1000", taskList);
         command.execute();
-        assertTrue(TASKLIST.get(0) instanceof DeadlineTask);
+        assertTrue(taskList.get(0) instanceof DeadlineTask);
     }
 
 
     @Test
     @DisplayName("Test EventTask creation")
     public void testAddEventTask() {
-        TASKLIST.deleteAllTasks();
-        AddCommands command = new AddCommands("event Spiderman No Way Home /at 01/01/2022 2359", TASKLIST);
+        taskList.deleteAllTasks();
+        AddCommands command = new AddCommands("event Spiderman No Way Home /at 01/01/2022 2359", taskList);
         command.execute();
-        assertTrue(TASKLIST.get(0) instanceof EventTask);
+        assertTrue(taskList.get(0) instanceof EventTask);
     }
 
 

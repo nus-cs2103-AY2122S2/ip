@@ -50,8 +50,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String isCompletedOrNah = this.isCompleted? "X" : "";
-         return "[" + isCompletedOrNah + "] " + taskName;
+        String isCompletedOrNah = this.isCompleted ? "X" : "";
+        return "[" + isCompletedOrNah + "] " + taskName;
     }
 
     /**
@@ -71,8 +71,4 @@ public abstract class Task {
     public boolean containsKeyword(String keyword) {
         return this.taskName.contains(keyword);
     }
-
-
-
-
 }

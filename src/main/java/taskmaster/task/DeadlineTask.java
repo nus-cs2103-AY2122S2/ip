@@ -7,10 +7,10 @@ import java.time.format.DateTimeFormatter;
  * This class encapsulates the information necessary for a Deadline task.
  */
 
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
 
     /** Time and Date of Deadline. **/
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      *  Constructor for a DeadlineTask.
@@ -45,12 +45,10 @@ public class DeadlineTask extends Task{
     @Override
     public String saveToFileFormat() {
         String result = "D";
-        String mark = this.isCompleted? "1" : "0";
+        String mark = this.isCompleted ? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return result + " | " + mark + " | " + taskName + " | " + deadline.format(oldFormat);
     }
-
-  
-
 }
+
 

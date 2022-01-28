@@ -34,8 +34,7 @@ public class TodoTask extends Task {
     @Override
     public String saveToFileFormat() {
         String result = "T";
-        String mark = this.isCompleted? "1" : "0";
+        String mark = this.isCompleted ? "1" : "0";
         return result + " | " + mark + " | " + taskName;
     }
-    
 }

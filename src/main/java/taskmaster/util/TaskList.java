@@ -1,6 +1,8 @@
 package taskmaster.util;
-import taskmaster.task.Task;
+
 import java.util.ArrayList;
+
+import taskmaster.task.Task;
 
 
 /*
@@ -14,9 +16,9 @@ public class TaskList {
 
     /** Size of the current task list. **/
     private int currentSize;
-    
+
     /**
-     * Constructor for taskList.
+     * Constructor for Task List.
      */
 
     public TaskList() {
@@ -43,12 +45,11 @@ public class TaskList {
 
     public void add(Task task) {
         taskList.add(task);
-        currentSize+=1;
+        currentSize += 1;
     }
 
     /**
      * Marks the task in the task list at the specified index.
-     * 
      * @param index task at the index to be marked.
      */
 
@@ -85,11 +86,11 @@ public class TaskList {
         if (currentSize == 0) {
             System.out.println("    \nYou haven't added any task, brat!\n");
         } else {
-             System.out.println("    \nHere are the tasks in your list:");
-             for (int i = 0; i < currentSize; i++)
-                 System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
+            System.out.println("    \nHere are the tasks in your list:");
+            for (int i = 0; i < currentSize; i++) {
+                System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
+            }
             System.out.println("\n");
-         
         }
     }
 

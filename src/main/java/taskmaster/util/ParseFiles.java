@@ -1,15 +1,14 @@
 package taskmaster.util;
 
-import taskmaster.exception.DukeExceptions;
-
-import taskmaster.task.Task;
-import taskmaster.task.TodoTask;
-import taskmaster.task.DeadlineTask;
-import taskmaster.task.EventTask;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import taskmaster.exception.DukeExceptions;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
+import taskmaster.task.Task;
+import taskmaster.task.TodoTask;
 
 /**
  *  This class encapsulates a parser that helps parse
@@ -31,7 +30,6 @@ public class ParseFiles {
         for (int i = 0; i < splitBasedOnDelimiter.length; i++) {
             splitBasedOnDelimiter[i] = splitBasedOnDelimiter[i].trim();
         }
-
         return splitBasedOnDelimiter;
     }
 
@@ -52,7 +50,7 @@ public class ParseFiles {
             eventTask.markTask();
         }
         return eventTask;
-     }
+    }
 
     /**
      * Helper function that helps handle deadline tasks.
@@ -65,7 +63,6 @@ public class ParseFiles {
      * @return the newly created deadline task.
      */
 
-    
     private Task handlesDeadlineTasks(int isMark, String description, LocalDateTime deadlineBy) {
         DeadlineTask deadlineTask = new DeadlineTask(description, deadlineBy);
         if (isMark == 1) {
@@ -84,7 +81,6 @@ public class ParseFiles {
      * @return the newly created Todo task.
      */
 
-
     private Task handlesTodoTasks(int isMark, String description) {
         TodoTask todoTask = new TodoTask(description);
         if (isMark == 1) {
@@ -102,8 +98,6 @@ public class ParseFiles {
      * @param str Line from the file that is to be read.
      * @return Newly created Task.
      */
-    
-    
     public Task parseTask(String str) {
         //Container file for returning Task
         Task taskToBeReturned = null;
@@ -114,8 +108,8 @@ public class ParseFiles {
                 //Handle Wrong Inputs
                 //Case 1: user only specified Task type
                 if (stringIntoParts.length == 1) {
-                    throw new DukeExceptions("ERROR! You've only specified the task type, you need to specify whether task"
-                                                + " is completed or not and the description of the task \n");
+                    throw new DukeExceptions("ERROR! You've only specified the task type, you need to specify"
+                            + "whether task is completed or not and the description of the task \n");
                 }
 
                 //Case 2: If second input(completed/uncompleted) is not an integer, throw exception
@@ -135,26 +129,28 @@ public class ParseFiles {
                 //If code reaches here, it is confirmed to have 3 or more parameters
                 // Deadline Task or Event Task Handling
                 if (taskType == 'D' || taskType == 'E') {
-                    //Case 4: Assume that the 3rd input is the description of the task and the user is missing the deadline by/time of event
+                    //Case 4: Assume that the 3rd input is the description of the task
+                    // and the user is missing the deadline by/time of event.
+
                     if (stringIntoParts.length != 4) {
                         throw new DukeExceptions("ERROR! Deadline and Event tasks is missing the date "
                                                     + "which the event occur on/deadline");
                     } else {
-                            String timeAndDate = stringIntoParts[3];
-                            DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                            LocalDateTime dateTime = LocalDateTime.parse(timeAndDate, oldFormat);
-                            if (taskType == 'D') {
-                                taskToBeReturned = handlesDeadlineTasks(index, stringIntoParts[2],dateTime);
-                            } else {
-                                taskToBeReturned = handlesEventTasks(index, stringIntoParts[2],dateTime);
-                            }
-                    }  
+                        String timeAndDate = stringIntoParts[3];
+                        DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(timeAndDate, oldFormat);
+                        if (taskType == 'D') {
+                            taskToBeReturned = handlesDeadlineTasks(index, stringIntoParts[2], dateTime);
+                        } else {
+                            taskToBeReturned = handlesEventTasks(index, stringIntoParts[2], dateTime);
+                        }
+                    }
                 } else {
                     //Todo Task
                     taskToBeReturned = handlesTodoTasks(index, stringIntoParts[2]);
                 }
             } else {
-                //If Task type is not T/D/E    
+                //If Task type is not T/D/E
                 throw new DukeExceptions("ERROR! I do not recognise that task type!");
             }
 
@@ -170,7 +166,6 @@ public class ParseFiles {
         }
 
         return taskToBeReturned;
-
     }
 
 }

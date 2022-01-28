@@ -1,14 +1,14 @@
 package taskmaster.util;
 
-import taskmaster.task.Task;
-
-import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
-
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-import java.nio.file.Paths;
+import taskmaster.task.Task;
+
+
 
 /**
  * This class encapsulates Storage which handles
@@ -25,16 +25,16 @@ public class Storage {
      */
 
     private void createDirectory() {
-            String path = Paths.get("").toAbsolutePath() + "/data/";
-            File dir = new File(path);
+        String path = Paths.get("").toAbsolutePath() + "/data/";
+        File dir = new File(path);
 
-            if (dir.mkdir()) {
-                System.out.println("\nI've created the directory " + dir.getName());
-                System.out.println("\nYou better be grateful, kid");
+        if (dir.mkdir()) {
+            System.out.println("\nI've created the directory " + dir.getName());
+            System.out.println("\nYou better be grateful, kid");
 
-            } else {
-                System.out.println("\nERROR! What? I'm unable to create directory");
-            }
+        } else {
+            System.out.println("\nERROR! What? I'm unable to create directory");
+        }
     }
 
     /**
@@ -54,7 +54,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("\nWhat's this? An error occurred when I tried to create the file");
         }
-       
     }
 
     /**
@@ -68,14 +67,13 @@ public class Storage {
         try {
             String dir = Paths.get("").toAbsolutePath() + "/data/";
             String filename = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
-            File directory = new File(dir); 
+            File directory = new File(dir);
             File fileToBeLoaded = new File(filename);
 
             if (!directory.exists()) {
                 System.out.println("\nHUH? The directory doesn't exist?!");
                 createDirectory();
-            } 
-            
+            }
             if (!fileToBeLoaded.exists()) {
                 System.out.println("HUH? The file doesn't exist?!");
                 createFile();
@@ -89,7 +87,6 @@ public class Storage {
             }
 
             reader.close();
-           
         } catch (IOException e) {
             System.out.println("\nWhat's this? An error occurred when I tried to load the file");
         }
@@ -101,7 +98,6 @@ public class Storage {
      *
      * @param taskList Current Task List.
      */
-    
     public void updateList(TaskList taskList) {
         try {
             String filename = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
@@ -112,7 +108,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("ERROR: Writing task lists to file");
         }
-        
     }
 
 }

@@ -1,8 +1,9 @@
 package taskmaster.commands;
 
 import taskmaster.exception.DukeExceptions;
-import taskmaster.util.TaskList;
 import taskmaster.task.Task;
+import taskmaster.util.TaskList;
+
 
 /*
  * This class inherits from the Command class.
@@ -11,7 +12,7 @@ import taskmaster.task.Task;
  */
 
 public class MarkCommands extends Commands {
-    private final TaskList TASKLIST;
+    private TaskList taskList;
 
     /**
      * Constructor for MarkCommands.
@@ -22,7 +23,7 @@ public class MarkCommands extends Commands {
 
     public MarkCommands(String command, TaskList taskList) {
         super(command);
-        this.TASKLIST = taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -47,7 +48,7 @@ public class MarkCommands extends Commands {
             int index = Integer.parseInt(stringIntoParts[1]);
 
             //If index is out of range, throw illegal argument exception
-            if (TASKLIST.isNumberOutOfRange(index)) {
+            if (taskList.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
             }
 
@@ -74,9 +75,9 @@ public class MarkCommands extends Commands {
      */
 
     private void mark(int index) {
-        Task selectedTask = TASKLIST.get(index - 1);
+        Task selectedTask = taskList.get(index - 1);
         System.out.println("Aye! I've marked this task as completed:\n");
-        TASKLIST.mark(index - 1);
+        taskList.mark(index - 1);
         printTask(selectedTask);
     }
 
@@ -88,9 +89,9 @@ public class MarkCommands extends Commands {
      */
 
     private void unmark(int index) {
-        Task selectedTask = TASKLIST.get(index - 1);
+        Task selectedTask = taskList.get(index - 1);
         System.out.println("Aye kid! I've marked this task as uncompleted:\n");
-        TASKLIST.unmark(index - 1);
+        taskList.unmark(index - 1);
         printTask(selectedTask);
     }
 
