@@ -62,12 +62,8 @@ public class Storage {
             FileWriter writer = new FileWriter(file);
 
             for ( Task task: taskManager.getTaskList()) {
-                String date ="None";
-                if (task.getDate() != null) {
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                    date = task.getDate().format(format).toString();
-                }
-                writer.write(String.format("%c\t%c\t%s\t%s\n",task.getType(),task.getDone(),task.getTaskName(),date));
+
+                writer.write(task.getDateForSaving());
             }
 
             writer.close();

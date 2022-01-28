@@ -51,9 +51,11 @@ public class Parser {
         }
 
         String taskName = fields[0].strip();
-        LocalDateTime date = Parser.parseDateTime(fields[1].strip());
+        String dateString = fields[1].strip();
+        LocalDateTime date = Parser.parseDateTime(dateString);
+
         if (date == null) {
-            throw new DukeException("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM");
+            return new Event(taskName,dateString);
         }
 
         return new Event(taskName,date);
@@ -74,10 +76,11 @@ public class Parser {
         }
 
         String taskName = fields[0].strip();
-        LocalDateTime date = Parser.parseDateTime(fields[1].strip());
+        String dateString = fields[1].strip();
+        LocalDateTime date = Parser.parseDateTime(dateString);
 
         if (date == null) {
-            throw new DukeException("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM");
+            return new Deadline(taskName,dateString);
         }
 
         return new Deadline(taskName,date);

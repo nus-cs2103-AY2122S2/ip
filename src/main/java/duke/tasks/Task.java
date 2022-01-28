@@ -1,11 +1,12 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Task{
+public abstract class Task{
     protected String taskName;
     protected char done = ' ';
-    protected LocalDateTime date;
+
 
     public Task(){}
 
@@ -22,9 +23,8 @@ public class Task{
     public String getTaskName(){
         return this.taskName;
     }
-    public LocalDateTime getDate(){
-        return this.date;
-    }
+    public abstract String getDate();
+    public abstract String getDateForSaving();
 
     public String toString(){
         String s = String.format("[%c][%c] %s",this.getType(),this.done,this.taskName);

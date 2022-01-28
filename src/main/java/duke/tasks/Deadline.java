@@ -6,10 +6,16 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
 
     private LocalDateTime date;
+    private String dateString = "";
 
     public Deadline(String taskName, LocalDateTime date){
         this.taskName = taskName;
         this.date = date;
+    }
+
+    public Deadline(String taskName, String dateString){
+        this.taskName = taskName;
+        this.dateString = dateString;
     }
 
     public char getType(){
@@ -17,9 +23,35 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
-        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+    public String getDateForSaving(){
+        if (this.date == null){
+            return String.format("%c\t%c\t%s\t%s\n",getType(),getDone(),getTaskName(),this.dateString);
+        } else {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            return String.format("%c\t%c\t%s\t%s\n",getType(),getDone(),getTaskName(),this.date.format(format));
+        }
+    }
 
-        return String.format("[%c][%c] %s (by: %s)",this.getType(),this.done,this.taskName,this.date.format(formatted));
+    @Override
+    public String toString(){
+        if (this.date == null){
+            return String.format("[%c][%c] %s (by: %s)",
+                    this.getType(),this.done,this.taskName,this.dateString);
+        } else {
+            DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+
+            return String.format("[%c][%c] %s (by: %s)",
+                    this.getType(),this.done,this.taskName,this.date.format(formatted));
+        }
+    }
+
+    @Override
+    public String getDate(){
+        if (this.date == null) {
+            return this.dateString;
+        } else {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            return this.date.format(format);
+        }
     }
 }
