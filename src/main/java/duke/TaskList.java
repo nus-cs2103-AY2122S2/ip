@@ -25,6 +25,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    public int size() {
+        return this.tasks.toArray().length;
+    }
+
     public void bye() {
         String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
