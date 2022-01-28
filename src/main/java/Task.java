@@ -2,29 +2,50 @@ import java.util.Arrays;
 
 public class Task {
     protected String d;
-    protected boolean done;
+    protected String type;
+    protected boolean isDone;
 
     public Task(String d) {
         this.d = d;
-        this.done = false;
+        this.isDone = false;
     }
 
-//    public Task(String[] arr) {
-//        this.done = false;
-//        this.d = Arrays.toString(arr);
-//        this.d = this.d.substring(1, this.d.length()-1).replaceAll(",", "");
-//    }
+    public Task(String d, String done){
+        this.d = d;
+        if(done.equals("1")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }
+
+    public String getDescription(){
+        return this.d;
+    }
+
+    public String getIsDone(){
+        if(isDone){
+            return "1";
+        }
+        else{
+            return "0";
+        }
+    }
+
+    public String getType(){
+        return this.type;
+    }
 
     public String markString() {
-        return (done ? "[X]" : "[]");
+        return (isDone ? "[X]" : "[]");
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void setUndone(){
-        this.done = false;
+        this.isDone = false;
     }
 
     @Override
