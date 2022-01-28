@@ -26,4 +26,9 @@ public class Task {
     public String toString() {
         return "["+ this.getStatusIcon() + "] " + description;
     }
+
+    public String writeToFile() {
+        String s = (isDone) ? "D" : "N";
+        return s + " | " + description;
+    }
 }
