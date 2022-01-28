@@ -6,7 +6,6 @@ public class Ui {
     String line = "------------------------------------";
 
     public Ui() {
-        this.line = line;
     }
 
     public void showWelcome() {
