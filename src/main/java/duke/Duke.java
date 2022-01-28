@@ -146,4 +146,8 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
         new Duke("data/list.txt").run();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3b5f87c667a37235d9c6c86386e211d503709ebd
