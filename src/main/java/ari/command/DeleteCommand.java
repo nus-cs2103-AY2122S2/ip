@@ -2,6 +2,9 @@ package main.java.ari.command;
 
 import main.java.ari.tasks.Task;
 
+/**
+ * Deletes a Task from TaskList
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 

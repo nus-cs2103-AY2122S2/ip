@@ -15,15 +15,12 @@ import main.java.ari.tasks.Task;
 import main.java.ari.tasks.TaskList;
 
 /**
- * Storage deals with loading tasks from file and saving tasks into file
+ * Deals with loading tasks from file and saving tasks into file
  */
 public class Storage {
     public String path;
     protected File filePath;
 
-    /**
-     * Constructor of Storage
-     */
     public Storage() {
     }
 

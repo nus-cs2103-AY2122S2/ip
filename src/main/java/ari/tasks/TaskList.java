@@ -3,7 +3,7 @@ package main.java.ari.tasks;
 import java.util.ArrayList;
 
 /**
- * TaskList contains a list of Tasks and methods that deal with Task
+ * Contains a list of Tasks and methods that deal with Task
  */
 public class TaskList {
     private ArrayList<Task> taskList;

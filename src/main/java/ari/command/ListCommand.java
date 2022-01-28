@@ -1,5 +1,8 @@
 package main.java.ari.command;
 
+/**
+ * Displays a list of Tasks that is recorded
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 

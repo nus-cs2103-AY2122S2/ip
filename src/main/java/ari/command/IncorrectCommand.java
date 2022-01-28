@@ -1,5 +1,8 @@
 package main.java.ari.command;
 
+/**
+ * Represents a command that has incorrect inputs
+ */
 public class IncorrectCommand extends Command {
     private String message;
 

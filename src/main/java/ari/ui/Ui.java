@@ -2,7 +2,10 @@ package main.java.ari.ui;
 
 import java.util.Scanner;
 
-public class Ui { // deals with interactions with the user
+/**
+ * Deals with the interactions with the user
+ */
+public class Ui {
     private Scanner sc;
 
     private static final String LINE_BREAK = "____________________________________________________________";
@@ -20,6 +23,11 @@ public class Ui { // deals with interactions with the user
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Returns user input
+     *
+     * @return user input
+     */
     public String getUserInput() {
         String input = sc.nextLine();
         printWithTab(LINE_BREAK);
@@ -27,6 +35,9 @@ public class Ui { // deals with interactions with the user
         return input;
     }
 
+    /**
+     * Prints welcome message
+     */
     public void displayWelcomeMessage() {
         printWithTab(LINE_BREAK);
         System.out.println(LOGO);
@@ -36,12 +47,22 @@ public class Ui { // deals with interactions with the user
         System.out.println();
     }
 
+    /**
+     * Prints message that other classes want to display to user
+     *
+     * @param message message to display to user
+     */
     public void displayMessage(String message) {
         printWithTab(message);
         printWithTab(LINE_BREAK);
         System.out.println();
     }
 
+    /**
+     * Prints the message with tab prepended to it
+     *
+     * @param message message to pad with tab
+     */
     private void printWithTab(String message) {
         String[] mesArray = message.split("\n");
         for (String mes : mesArray) {

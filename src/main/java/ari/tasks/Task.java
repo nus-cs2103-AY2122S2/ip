@@ -1,7 +1,7 @@
 package main.java.ari.tasks;
 
 /**
- * Task encapsulates information regarding task that is stored
+ * Encapsulates information regarding task that is stored
  */
 public class Task {
     protected boolean isDone = false;

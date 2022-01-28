@@ -1,7 +1,7 @@
 package main.java.ari.tasks;
 
 /**
- * ToDoTask extends Task
+ * Represents a Task to do
  */
 public class ToDoTask extends Task {
     /**

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import main.java.ari.tasks.DeadlineTask;
 
+/**
+ * Adds a DeadlineTask to TaskList
+ */
 public class DeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";
 

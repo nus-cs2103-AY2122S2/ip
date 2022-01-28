@@ -7,6 +7,9 @@ import main.java.ari.storage.Storage;
 import main.java.ari.tasks.TaskList;
 import main.java.ari.ui.Ui;
 
+/**
+ * Represents Ari functions
+ */
 public class Ari {
     private String filePath;
 
@@ -14,14 +17,22 @@ public class Ari {
     private TaskList toDoList;
     private Ui ui;
 
+    /**
+     * Constructor of Ari
+     *
+     * @param path path to location of save file
+     */
     public Ari(String path) {
         filePath = path;
         ui = new Ui();
     }
 
+    /**
+     * Starts the program
+     */
     public void run() {
         ui.displayWelcomeMessage();
-        
+
         Parser par = new Parser();
         store = new Storage();
         store.setFile(filePath);

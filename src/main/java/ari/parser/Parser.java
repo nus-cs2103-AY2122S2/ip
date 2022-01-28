@@ -17,11 +17,19 @@ import main.java.ari.command.UnmarkCommand;
 import main.java.ari.exception.CommandFormatException;
 import main.java.ari.exception.EmptyCommandException;
 
-public class Parser { // deals with making sense of the USER command
+/**
+ * Deals with making sense of the USER command/input
+ */
+public class Parser {
     public Parser() {
-
     }
 
+    /**
+     * Assigns method to execute based on user input
+     *
+     * @param command user input: command and description
+     * @return command to execute
+     */
     public Command parse(String command) {
         String[] cmdArray = command.split(" ");
 
@@ -49,6 +57,13 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Assigns methods to execute from input of save file if it exists
+     *
+     * @param instruction command to run
+     * @param description description of task
+     * @return command to execute
+     */
     public Command fileParse(String instruction, String description) {
         String command = instruction + " " + description;
 
@@ -66,6 +81,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Splits file command
+     *
+     * @param fileCommand input from file
+     * @return an array containing the command, whether to mark the task and task description
+     */
     public String[] fileBreakdown(String fileCommand) {
         String[] words = fileCommand.split(" ");
         String[] returnCommands = new String[3];
@@ -77,6 +98,13 @@ public class Parser { // deals with making sense of the USER command
         return returnCommands;
     }
 
+    /**
+     * Returns the description part of the command
+     *
+     * @param command user input
+     * @return description part of command
+     * @throws EmptyCommandException if description is empty
+     */
     private String getArgument(String command) throws EmptyCommandException {
         String[] cmdArray = command.split(" ");
 
@@ -87,6 +115,12 @@ public class Parser { // deals with making sense of the USER command
         return command.substring(command.indexOf(' ') + 1);
     }
 
+    /**
+     * Returns MarkCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return MarkCommand
+     */
     private Command prepareMark(String arg) {
         try {
             return new MarkCommand(Integer.parseInt(getArgument(arg)));
@@ -97,6 +131,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns UnmarkCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return UnmarkCommand
+     */
     private Command prepareUnmark(String arg) {
         try {
             return new UnmarkCommand(Integer.parseInt(getArgument(arg)));
@@ -107,6 +147,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns TodoCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return TodoCommand
+     */
     private Command prepareTodo(String arg) {
         try {
             return new TodoCommand(getArgument(arg));
@@ -115,6 +161,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns DeadlineCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return DeadlineCommand
+     */
     private Command prepareDeadline(String arg) {
         try {
             String[] taskTime = splitBy(getArgument(arg));
@@ -129,6 +181,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns EventCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return EventCommand
+     */
     private Command prepareEvent(String arg) {
         try {
             String[] taskTime = splitAt(getArgument(arg));
@@ -143,6 +201,12 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns DeleteCommand if arg is valid else IncorrectCommand
+     *
+     * @param arg description of task
+     * @return DeleteCommand
+     */
     private Command prepareDelete(String arg) {
         try {
             return new DeleteCommand(Integer.parseInt(getArgument(arg)));
@@ -153,6 +217,13 @@ public class Parser { // deals with making sense of the USER command
         }
     }
 
+    /**
+     * Returns array with item description and deadline if arg is valid else throw format exception
+     *
+     * @param arg description of task
+     * @return array with item description and deadline
+     * @throws CommandFormatException keyword "/by" is missing
+     */
     private String[] splitBy(String arg) throws CommandFormatException {
         String[] returnArr = arg.split("/by");
 
@@ -167,6 +238,13 @@ public class Parser { // deals with making sense of the USER command
         return returnArr;
     }
 
+    /**
+     * Returns array with item description and event data if arg is valid else throw format exception
+     *
+     * @param arg description of task
+     * @return array with item description and deadline
+     * @throws CommandFormatException keyword "/at" is missing
+     */
     private String[] splitAt(String arg) throws CommandFormatException {
         String[] returnArr = arg.split("/at");
 
@@ -181,9 +259,16 @@ public class Parser { // deals with making sense of the USER command
         return returnArr;
     }
 
-    private LocalDate checkDateFormat(String arg) throws DateTimeParseException {
+    /**
+     * Returns LocalDate representation
+     *
+     * @param date date of task
+     * @return LocalDate of task
+     * @throws DateTimeParseException
+     */
+    private LocalDate checkDateFormat(String date) throws DateTimeParseException {
         try {
-            return LocalDate.parse(arg);
+            return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException("Dear Master, please enter the date using \"YYYY-MM-DD\" format",
                     e.getParsedString(), e.getErrorIndex());

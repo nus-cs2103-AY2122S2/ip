@@ -1,5 +1,8 @@
 package main.java.ari.command;
 
+/**
+ * Un-marks a Task
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 

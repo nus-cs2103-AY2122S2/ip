@@ -2,6 +2,9 @@ package main.java.ari.command;
 
 import main.java.ari.tasks.Task;
 
+/**
+ * Represents a command to add Tasks to TaskList
+ */
 public abstract class AddCommand extends Command {
     protected Task task;
 

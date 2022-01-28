@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import main.java.ari.tasks.EventTask;
 
+/**
+ * Adds an EventCommand to TaskList
+ */
 public class EventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
 
