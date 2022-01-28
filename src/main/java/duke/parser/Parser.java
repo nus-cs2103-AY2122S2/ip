@@ -53,7 +53,14 @@ public class Parser {
             }
         } else {
             String secondArg = inputArray[1];
-            if (Command.CommandType.DELETE.equals(firstArg)) {
+            if (Command.CommandType.FIND.equals(firstArg)) {
+                String target = inputCommand.substring(5);
+                if (!target.isEmpty()) {
+                    return new FindCommand(target, inputArray);
+                } else {
+                    throw new DukeMissingArgumentException("target");
+                }
+            } else if (Command.CommandType.DELETE.equals(firstArg)) {
                 try {
                     int index = Integer.parseInt(secondArg);
                     return new DeleteCommand(index, inputArray);
