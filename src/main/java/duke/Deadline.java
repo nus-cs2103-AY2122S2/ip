@@ -16,10 +16,10 @@ public class Deadline extends Task {
    *
    * @param desc the task description.
    * @param date the date of the event.
-   * @param done the current completion status of the task.
+   * @param isDone the current completion status of the task.
    */
-  public Deadline(String desc, LocalDate date, boolean done) {
-    super(desc, done);
+  public Deadline(String desc, LocalDate date, boolean isDone) {
+    super(desc, isDone);
     this.date = date;
   }
 
@@ -30,7 +30,7 @@ public class Deadline extends Task {
     String customPattern = "MMM dd yyyy";
     DateTimeFormatter customFormat = DateTimeFormatter.ofPattern(customPattern);
     String tempDate = customFormat.format(this.date);
-    if (super.done) {
+    if (super.isDone) {
       str += "[X] " + super.desc + " (by: " + tempDate + ")";
     } else {
       str += "[ ] " + super.desc + " (by: " + tempDate + ")";
@@ -45,7 +45,7 @@ public class Deadline extends Task {
    */
   @Override
   public String changeFormat() {
-    if (super.done) {
+    if (super.isDone) {
       return "D,1," + super.desc + "," + this.date;
     } else {
       return "D,0," + super.desc + "," + this.date;

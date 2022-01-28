@@ -7,7 +7,7 @@ package duke;
  */
 public abstract class Task {
   // Class variables
-  protected boolean done;
+  protected boolean isDone;
   protected String desc;
 
   /**
@@ -16,23 +16,23 @@ public abstract class Task {
    * @param desc the task description.
    * @param done the current completion status of the task.
    */
-  public Task(String desc, boolean done) {
+  public Task(String desc, boolean isDone) {
     this.desc = desc;
-    this.done = done;
+    this.isDone = isDone;
   }
 
   /**
    * This method is used to change the status of the Task to done.
    */
   public void setAsDone() {
-    this.done = true;
+    this.isDone = true;
   }
 
   /**
    * Changes the completion status of the task to not done.
    */
   public void setAsNotDone() {
-    this.done = false;
+    this.isDone = false;
   }
 
   /**

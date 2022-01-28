@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * This class contains the task list and deals with add/delete list operations.

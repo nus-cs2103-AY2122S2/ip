@@ -15,12 +15,12 @@ public class Event extends Task {
   /**
    * Assigns desc, date and done to this instance.
    *
-   * @param desc the task description.
-   * @param date the date of the event.
-   * @param done the current completion status of the task.
+   * @param desc the task description
+   * @param date the date of the event
+   * @param isDone the current completion status of the task.
    */
-  public Event(String desc, LocalDate date, boolean done) {
-    super(desc, done);
+  public Event(String desc, LocalDate date, boolean isDone) {
+    super(desc, isDone);
     this.date = date;
   }
 
@@ -31,7 +31,7 @@ public class Event extends Task {
     String customPattern = "MMM dd yyyy";
     DateTimeFormatter customFormat = DateTimeFormatter.ofPattern(customPattern);
     String tempDate = customFormat.format(this.date);
-    if (super.done) {
+    if (super.isDone) {
       str += "[X] " + super.desc + " (by: " + tempDate + ")";
     } else {
       str += "[ ] " + super.desc + " (by: " + tempDate + ")";
@@ -46,7 +46,7 @@ public class Event extends Task {
    */
   @Override
   public String changeFormat() {
-    if (super.done) {
+    if (super.isDone) {
       return "E,1," + super.desc + "," + this.date;
     } else {
       return "E,0," + super.desc + "," + this.date;
