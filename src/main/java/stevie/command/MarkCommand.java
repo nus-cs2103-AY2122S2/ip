@@ -6,10 +6,11 @@ import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 
 public class MarkCommand extends Command {
-    private final boolean markDone;
+    private final boolean isDone;
     private final int taskIdx;
+
     public MarkCommand(boolean mark, int idx) {
-        markDone = mark;
+        isDone = mark;
         taskIdx = idx;
     }
 
@@ -17,7 +18,7 @@ public class MarkCommand extends Command {
     public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out;
         try {
-            if (markDone) {
+            if (isDone) {
                 out = tasks.markDone(taskIdx);
             } else {
                 out = tasks.markUndone(taskIdx);

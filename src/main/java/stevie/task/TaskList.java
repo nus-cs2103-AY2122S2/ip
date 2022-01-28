@@ -9,12 +9,10 @@ import java.util.ArrayList;
  * tasks.
  */
 public class TaskList {
-    /** Array of Activity in the list */
+    /**
+     * Array of Activity in the list
+     */
     private ArrayList<Task> tasks;
-
-    public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;

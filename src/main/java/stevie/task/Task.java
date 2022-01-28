@@ -6,14 +6,16 @@ import java.text.SimpleDateFormat;
  * Represents a simple task.
  */
 public abstract class Task {
-    /** Name of the task */
-    protected String name;
-
-    /** Status of the task */
-    protected boolean isDone;
-
     protected static SimpleDateFormat formatter
             = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    /**
+     * Name of the task
+     */
+    protected String name;
+    /**
+     * Status of the task
+     */
+    protected boolean isDone;
 
     public Task(String name) {
         this.name = name;

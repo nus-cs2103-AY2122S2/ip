@@ -7,9 +7,11 @@ import stevie.task.TaskList;
 
 public class DeleteCommand extends Command {
     private final int taskIdx;
+
     public DeleteCommand(int idx) {
         taskIdx = idx;
     }
+
     @Override
     public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out;

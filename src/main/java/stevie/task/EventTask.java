@@ -6,7 +6,7 @@ import java.util.Date;
  * A type of task that can be characterised as an event. An <code>stevie.task.EventTask</code> contains
  * a name and an event date.
  */
-public class EventTask extends Task{
+public class EventTask extends Task {
     private Date date;
 
     /**
