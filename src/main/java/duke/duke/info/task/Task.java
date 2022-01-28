@@ -3,6 +3,7 @@ package duke.info.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public abstract class Task {
 
@@ -51,6 +52,10 @@ public abstract class Task {
         } else {
             return this.dateString;
         }
+    }
+
+    public boolean matchesKeyword(String keyword) {
+        return this.action.toLowerCase().contains(keyword);
     }
 
     @Override

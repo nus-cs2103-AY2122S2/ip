@@ -12,8 +12,8 @@ public class Calendar {
         this.calendar = new ArrayList<Task>();
     }
 
-    public Calendar(ArrayList<Task> storage) {
-        this.calendar = storage;
+    public Calendar(ArrayList<Task> calendar) {
+        this.calendar = calendar;
     }
 
     public void add(Task taskToAdd) {
@@ -48,6 +48,16 @@ public class Calendar {
         }
         product += this.calendar.get(this.calendar.size() - 1).saveFormat();
         return product;
+    }
+
+    public Calendar tasksMatchingKeyword(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: this.calendar) {
+            if (task.matchesKeyword(keyword)) {
+                result.add(task);
+            }
+        }
+        return new Calendar(result);
     }
 
     @Override

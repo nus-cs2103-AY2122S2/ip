@@ -11,6 +11,7 @@ import duke.commands.EventCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
 
 public class Parser {
 
@@ -44,6 +45,8 @@ public class Parser {
                 return new UnmarkCommand(input);
             case "delete":
                 return new DeleteCommand(input);
+            case "find":
+                return new FindCommand(input);
             default:
                 throw new InvalidCommandException();
         }
