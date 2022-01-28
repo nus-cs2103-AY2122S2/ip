@@ -7,6 +7,14 @@ import java.util.ArrayList;
 
 
 public class Parser {
+    /**
+     * Parse the commands into a string of tokens.
+     * Then dispatch the commands according to the first word
+     *
+     * @param command inputed by the user
+     * @return the dispatched command
+     * @throws InvalidCommandException if the command cannot be recognized
+     */
     public Command parseCommand(String command) throws InvalidCommandException {
         ArrayList<String> parsedStr = new ArrayList<>();
         String[] tokenList = command.split(" ");

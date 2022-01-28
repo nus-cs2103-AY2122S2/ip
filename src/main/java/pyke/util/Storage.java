@@ -21,6 +21,15 @@ public class Storage {
         DIR = Paths.get(".", dir);
         FILE_PATH = Paths.get(".", dir, fileName);
     }
+
+    /**
+     * Initialte the taskList by the local file.
+     * If such file or directory does not exist, it will attempt to create one
+     *
+     * @param taskList the class that stores info and operations about taskss
+     * @throws IOException if there is an error when reading file
+     * @throws DateTimeParseException if the dates format in local file is not standard
+     */
     public void init(TaskList taskList) throws IOException, DateTimeParseException {
         if (!Files.exists(DIR)) {
             Files.createDirectory(DIR);
@@ -63,6 +72,12 @@ public class Storage {
         return ;
     }
 
+    /**
+     * This operation will write every tasks in a taskList into a local file
+     *
+     * @param taskList the class that stores all tasks
+     * @throws IOException if there is an error when writing to local files
+     */
     public void saveFile(TaskList taskList) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(FILE_PATH);
         for (int i = 0; i < taskList.getSize(); i++) {

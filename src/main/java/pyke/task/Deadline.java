@@ -13,10 +13,21 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Format the deadline class to a style used in local files for saving
+     *
+     * @return the formatted string for saving
+     */
     @Override
     public String toSavedFile() {
         return "D | " + super.toSavedFile() + " | " + this.by;
     }
+
+    /**
+     * Format the deadline class to a style used for output
+     *
+     * @return the formatted string for output
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

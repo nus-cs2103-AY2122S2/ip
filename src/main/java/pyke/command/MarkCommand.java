@@ -17,6 +17,15 @@ public class MarkCommand extends Command{
         this.taskId = taskId;
     }
 
+    /**
+     * Execute a command that marks or unmarks a task in the list
+     *
+     * @param taskList the class store the tasks info
+     * @param ui the interface for output information
+     * @param storage in charge of file IO
+     * @throws PykeException if the number is not in the range of lilst index
+     * @throws IOException if there is an error when writing to the local file
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws PykeException, IOException {
         if (taskId <= 0 || taskId > taskList.getSize()) {
             throw new InvalidNumberException();
@@ -30,6 +39,11 @@ public class MarkCommand extends Command{
             }
         }
     }
+    /**
+     * To know if this command will exit the program
+     *
+     * @return true if this method will exit the program
+     */
     public boolean isExit() {
         return false;
     }

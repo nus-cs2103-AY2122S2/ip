@@ -17,6 +17,11 @@ public class Task {
         this.isDone = new_status;
     }
 
+    /**
+     * Format the task class to a style used in local files for saving
+     *
+     * @return the formatted string for saving
+     */
     public String toSavedFile() {
         if (this.isDone) {
             return "1 | " + this.description;
@@ -24,6 +29,12 @@ public class Task {
             return "0 | " + this.description;
         }
     }
+
+    /**
+     * Format the task class to a style used for output
+     *
+     * @return the formatted string for output
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

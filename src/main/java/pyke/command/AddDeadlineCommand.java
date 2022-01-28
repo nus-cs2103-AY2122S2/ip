@@ -21,6 +21,17 @@ public class AddDeadlineCommand extends Command{
         this.ddl = ddl;
     }
 
+    /**
+     * Execute a command that adds a deadline task.
+     * Then it will write the list to the local file and output certain info about this operation.
+     *
+     * @param taskList the class store the tasks info
+     * @param ui the interface for output information
+     * @param storage in charge of file IO
+     * @throws PykeException
+     * @throws DateTimeParseException if the input dates are not in the correct format for parsing
+     * @throws IOException if there is an error when writing to the local file
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
@@ -34,6 +45,12 @@ public class AddDeadlineCommand extends Command{
                     + "\nNow you have " + taskList.getSize() + " tasks in the list.");
         }
     }
+
+    /**
+     * To know if this command will exit the program
+     *
+     * @return true if this method will exit the program
+     */
     public boolean isExit() {
         return false;
     }

@@ -11,6 +11,11 @@ public class TaskList {
         taskList = new ArrayList<Task>();
     }
 
+    /**
+     * This method will get the total number of tasks stored in this object
+     *
+     * @return the total number of tasks stores here
+     */
     public int getSize() {
         return taskList.size();
     }
@@ -19,10 +24,22 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    /**
+     * This method will format specific task, format it to output style and return it
+     *
+     * @param taskId the index of task the program wants to output
+     * @return the formatted string about this task for output
+     */
     public String getTaskOutputStyle(int taskId) {
         return taskList.get(taskId).toString();
     }
 
+    /**
+     * This method will format specific task, format it to saving file style and return it
+     *
+     * @param taskId the index of task the program wants to write to local files
+     * @return the formatted string about this task for saving
+     */
     public String getTaskSavingStyle(int taskId) {
         return taskList.get(taskId).toSavedFile();
     }

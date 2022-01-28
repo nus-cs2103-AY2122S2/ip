@@ -20,9 +20,15 @@ public class Ui {
                 + "    ____________________________________________________________\n";
     }
 
+    /**
+     * read a line of String from users' input
+     *
+     * @return the command in String
+     */
     public String getCommand() {
         return scanner.nextLine();
     }
+
     public void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -37,9 +43,21 @@ public class Ui {
     public void sayFarewell() {
         System.out.println(convertToChatBox("Bye. Hope to see you again soon!"));
     }
+
+    /**
+     * Output text in a chat-box style
+     *
+     * @param text the original text for output
+     */
     public void outputText(String text) {
         System.out.println(convertToChatBox(text));
     }
+
+    /**
+     * Output exception information in a chat-box style
+     *
+     * @param exceptionInfo the original info about exceptions
+     */
     public void outputException(String exceptionInfo) {
         System.out.println(convertToChatBox(exceptionInfo));
     }
