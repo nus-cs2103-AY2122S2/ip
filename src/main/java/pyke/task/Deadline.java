@@ -1,6 +1,6 @@
 package pyke.task;
 
-import duke.task.Task;
+import pyke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

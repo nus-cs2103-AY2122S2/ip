@@ -1,6 +1,6 @@
 package pyke.util;
 
-import duke.task.Task;
+import pyke.task.Task;
 
 import java.util.ArrayList;
 

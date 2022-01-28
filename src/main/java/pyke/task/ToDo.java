@@ -1,6 +1,6 @@
 package pyke.task;
 
-import duke.task.Task;
+import pyke.task.Task;
 
 public class ToDo extends Task {
     public ToDo(String description) {
