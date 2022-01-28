@@ -1,5 +1,10 @@
+import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Bobby {
     static ArrayList<Task> taskArray = new ArrayList<Task>();
@@ -66,56 +71,70 @@ public class Bobby {
 
     public static void main(String[] args) {
         System.out.println("Bobby greets you. Bobby is here to help.");
+        try {
+            File file = new File("bobby.txt");
+            file.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error has occurred.");
+        }
         Scanner scannerObj = new Scanner(System.in);
 
-        while(scannerObj.hasNextLine()) {
+        while (scannerObj.hasNextLine()) {
             String userInput = scannerObj.nextLine();
             String[] inputs = userInput.split(" ", 2);
             String command = inputs[0];
 
-            if (userInput.equals("bye")) {
+            switch (Commands.valueOf(command.toUpperCase())) {
+            case BYE:
                 System.out.println("Bobby bids you farewell.");
                 break;
-            } else if (userInput.equals("list")) {
+            case LIST:
                 System.out.println("Here is what you told Bobby:");
                 for (int i = 0; i < taskArray.size(); i++) {
                     Task t = taskArray.get(i);
                     int count = i + 1;
                     System.out.println(count + "." + t);
                 }
-            } else if (command.equals("mark")) {
+                break;
+            case MARK:
                 Task t = taskArray.get(Integer.parseInt(inputs[1]) - 1);
                 t.markAsDone();
                 System.out.println("Bobby applauds you. This task is done:\n" + t);
-            } else if (command.equals("unmark")) {
-                Task t = taskArray.get(Integer.parseInt(inputs[1]) - 1);
-                t.unmarkAsDone();
-                System.out.println("Bobby will remember that this task is not yet done:\n" + t);
-            } else if (command.equals("todo")) {
+                break;
+            case UNMARK:
+                Task i = taskArray.get(Integer.parseInt(inputs[1]) - 1);
+                i.unmarkAsDone();
+                System.out.println("Bobby will remember that this task is not yet done:\n" + i);
+                break;
+            case TODO:
                 try {
                     addToDo(userInput);
                 } catch (BobbyException e) {
                     System.err.println(e);
                 }
-            } else if (command.equals("deadline")) {
+                break;
+            case DEADLINE:
                 try {
                     addDeadline(userInput);
                 } catch (BobbyException e) {
                     System.err.println(e);
                 }
-            } else if (command.equals("event")) {
+                break;
+            case EVENT:
                 try {
                     addEvent(userInput);
                 } catch (BobbyException e) {
                     System.err.println(e);
                 }
-            } else if (command.equals("delete")) {
+                break;
+            case DELETE:
                 try {
                     delete(userInput);
                 } catch (BobbyException e) {
                     System.err.println(e);
                 }
-            } else {
+                break;
+            default:
                 try {
                     throw new BobbyException("Bobby does not understand you. Please use valid inputs.");
                 } catch (BobbyException e) {
