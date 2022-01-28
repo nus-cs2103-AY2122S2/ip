@@ -44,6 +44,10 @@ public class TaskList {
         return itemNum > 0 && itemNum <= tasks.size();
     }
 
+    public int size() {
+        return tasks.size();
+    }
+
     public String listItems() {
         StringBuilder sb = new StringBuilder();
         if (tasks.isEmpty()) {

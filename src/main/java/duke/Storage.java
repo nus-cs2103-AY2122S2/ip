@@ -68,7 +68,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         } finally {
-            s.close();
+            if (s != null) {
+                s.close();
+            }
         }
 
         return tasks;
