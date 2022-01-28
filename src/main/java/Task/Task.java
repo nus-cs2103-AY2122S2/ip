@@ -34,4 +34,8 @@ public class Task {
         String v = "[" + this.getStatusIcon() + "]" + " " + this.description;
         return v;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
