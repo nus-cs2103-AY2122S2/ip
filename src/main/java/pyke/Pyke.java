@@ -1,16 +1,28 @@
+package pyke;
+
+import pyke.command.Command;
+import pyke.exception.EmptyDescriptionException;
+import pyke.exception.InvalidCommandException;
+import pyke.exception.InvalidNumberException;
+import pyke.exception.PykeException;
+import pyke.ui.Ui;
+import pyke.util.Parser;
+import pyke.util.Storage;
+import pyke.util.TaskList;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 
-
-public class Duke {
+public class Pyke {
 
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
     private Storage storage;
 
-    public Duke() {
+
+    public Pyke() {
         ui = new Ui();
         taskList = new TaskList();
         parser = new Parser();
@@ -52,7 +64,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Pyke().run();
     }
 }
 

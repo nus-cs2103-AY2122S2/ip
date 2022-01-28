@@ -1,7 +1,13 @@
+package pyke.util;
+
+import pyke.command.*;
+import pyke.exception.InvalidCommandException;
+
 import java.util.ArrayList;
 
+
 public class Parser {
-    public Command parseCommand(String command) throws InvalidCommandException{
+    public Command parseCommand(String command) throws InvalidCommandException {
         ArrayList<String> parsedStr = new ArrayList<>();
         String[] tokenList = command.split(" ");
         if (tokenList.length == 1) {
