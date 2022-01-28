@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -13,10 +16,6 @@ public class Task {
 
     public void markIncomplete() {
         this.isDone = false;
-    }
-
-    public boolean isEqualTo(String s) {
-        return description.equals(s);
     }
 
     public String getStatusIcon() {
