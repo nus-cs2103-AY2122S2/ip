@@ -6,6 +6,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Runs the command for user to create a new task.
+ */
+
 public class TaskCommand extends Command {
 
     enum TaskType {
@@ -13,13 +17,28 @@ public class TaskCommand extends Command {
     }
 
     TaskType taskType;
-    String command; 
-    
+    String command;
+
+    /**
+     * Constructor to create a command to create a new task.
+     * @param taskType determine what kind of task to be created.
+     * @param command the command entered by the user.
+     */
     TaskCommand (TaskType taskType, String command) {
         this.taskType = taskType;
         this.command = command; 
     }
 
+
+    /**
+     * Executes the command proceeds to create a new task for the user, and appending it to the list.
+     *
+     * @param taskList The TaskList of the current user.
+     * @param ui The user interface to show messages to users.
+     * @param storage The file system for reading and writing into the database.
+     * @throws IOException when there is an error opening the file.
+     * @throws ParseException when there is an error in recognising the text.
+     */
     @Override
     void runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
         String indentation = "    ";
