@@ -1,4 +1,3 @@
-
 import util.Parser;
 import util.Storage;
 import util.Ui;
@@ -8,10 +7,11 @@ import task.Event;
 import task.Deadline;
 import task.Todo;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -22,6 +22,8 @@ public class Duke {
     private Parser parser;
 
     public Duke(String filePath) {
+
+
         ui = new Ui();
         storage = new Storage(filePath);
         newFile = new File(filePath);
@@ -111,6 +113,9 @@ public class Duke {
 
             } else if (task.equals("delete")) {
                 tasks.deleteItem(item);
+
+            } else if (task.equals("find")) {
+                tasks.find(item);
 
             } else {
                 ui.reply("What is this? Can you read English?");

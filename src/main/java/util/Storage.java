@@ -24,6 +24,12 @@ public class Storage {
 
     }
 
+    /**
+     * read the text file and converts the content into an ArrayList of Tasks
+     * @param tasks ArrayList of tasks
+     * @throws FileNotFoundException
+     */
+
     public void loadFile(List<Task> tasks) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
@@ -57,6 +63,12 @@ public class Storage {
         }
         return t;
     }
+
+    /**
+     * writes the tasks into text file before ending the program
+     * @param tasks ArrayList of tasks
+     * @throws IOException
+     */
 
     public void writeToFile(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(this.file);
