@@ -87,7 +87,7 @@ public class Level5 {
 
     static void checkRestOfInput(String description) throws EmptyDescException {
 
-        if (description.equals("")) {
+        if (description.isBlank()) {
             throw new EmptyDescException("     The description of a todo task cannot be empty.");
         } else {
             return;
