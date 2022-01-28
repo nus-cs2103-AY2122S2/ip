@@ -5,50 +5,50 @@
 ██║░░██║██║  ██║░░░██║░╚═╝░██║  ██████╦╝╚█████╔╝██████╦╝
 ╚═╝░░╚═╝╚═╝  ╚═╝░░░╚═╝░░░░░╚═╝  ╚═════╝░░╚════╝░╚═════╝░
 ====================================================================
-Bob: What tasks are you adding to the list today? 	¯\(°_o)/¯
+bob: What tasks are you adding to the list today? 	¯\(°_o)/¯
 	No tasks saved previously~
 ====================================================================
 You: ====================================================================
-Bob: You are very free rn 	※\(^o^)/※
+bob: You are very free rn 	※\(^o^)/※
 ====================================================================
 You: ====================================================================
-Bob: I have added Eat dinner to your tasks! You have 1 tasks now ._.)/\(._.
+bob: I have added Eat dinner to your tasks! You have 1 tasks now ._.)/\(._.
 ====================================================================
 You: ====================================================================
-Bob: I have added CS2103T IP to your tasks! You have 2 tasks now ._.)/\(._.
+bob: I have added CS2103T IP to your tasks! You have 2 tasks now ._.)/\(._.
 ====================================================================
 You: ====================================================================
-Bob: I have added Movie to your tasks! You have 3 tasks now ._.)/\(._.
+bob: I have added Movie to your tasks! You have 3 tasks now ._.)/\(._.
 ====================================================================
 You: ====================================================================
-Bob: Your input was invalid (ㆆ _ ㆆ)
+bob: Your input was invalid (ㆆ _ ㆆ)
 ====================================================================
 You: ====================================================================
-Bob: ╭∩╮༼ಠ益ಠ╭∩╮༽
+bob: ╭∩╮༼ಠ益ಠ╭∩╮༽
 ====================================================================
 You: ====================================================================
-Bob: Great job in completing your task! I've marked it as done. ᕕ(⌐■_■)ᕗ ♪♬
+bob: Great job in completing your task! I've marked it as done. ᕕ(⌐■_■)ᕗ ♪♬
 	[T] [✓] Eat dinner
 ====================================================================
 You: ====================================================================
-Bob: You already did this task... or did you? (ಠ_⊙)
+bob: You already did this task... or did you? (ಠ_⊙)
 ====================================================================
 You: ====================================================================
-Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ
+bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ
 	[D] [ ] CS2103T IP (by: Jan 20)
 ====================================================================
 You: ====================================================================
-Bob: Adding a Todo requires a task name! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "todo Write a proper ToDo"]====================================================================
+bob: Adding a Todo requires a task name! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "todo Write a proper ToDo"]====================================================================
 You: ====================================================================
-Bob: Adding a deadline requires [task name] + [/by] + [deadline]! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "deadline Learn how to add deadline /by today"]====================================================================
+bob: Adding a deadline requires [task name] + [/by] + [deadline]! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "deadline Learn how to add deadline /by today"]====================================================================
 You: ====================================================================
-Bob: Adding an event requires [event name] + [/at] + [day and time]! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "event seminar for people who dk how to add events /at Mon 6-9pm"]====================================================================
+bob: Adding an event requires [event name] + [/at] + [day and time]! (ノಠ益ಠ)ノ彡┻━┻	[e.g. "event seminar for people who dk how to add events /at Mon 6-9pm"]====================================================================
 You: ====================================================================
-Bob: Okay, these are your tasks
+bob: Okay, these are your tasks
 	1. [T] [✓] Eat dinner
 	2. [E] [ ] Movie (at: Jan 18 2-3)
       (づ｡◕‿‿◕｡)づ
 ====================================================================
 You: ====================================================================
-Bob: bye bye c u next time (ʘ‿ʘ)╯
+bob: bye bye c u next time (ʘ‿ʘ)╯
 ====================================================================
