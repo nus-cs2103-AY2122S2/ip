@@ -8,14 +8,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
 
-        Ui ui = new Ui();
-        Control control = new Control();
-        CreateFile file = new CreateFile();
-        boolean isCreated = file.createFile();
-        if (!isCreated) {
-            control.load(file.getFileName());
-        }
-        ui.uiHandler(control);
+
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage(taskList);
+        Ui ui = new Ui(taskList, storage);
+
+        ui.uiHandler();
     }
 }
 

@@ -3,10 +3,15 @@ import java.util.Scanner;
 
 public class Ui {
     private final static String fromDuke = "From Duke_two: \n\t";
+    Storage storage;
+    TaskList taskList;
 
-    public Ui() { }
+    public Ui(TaskList taskList, Storage storage) {
+        this.storage = storage;
+        this.taskList = taskList;
+    }
 
-    public void uiHandler(Control control) {
+    public void uiHandler() {
         Scanner scanner = new Scanner(System.in);
         String firstWord = "";
         while (true) {
@@ -22,27 +27,27 @@ public class Ui {
 
                     // One word commands
                 } else if (firstWord.equals("bye")) {
-                    control.writeTasksToFile();
-                    control.bye();
+                    storage.writeTasksToFile();
+                    taskList.bye();
                     break;
                 } else if (firstWord.equals("save")) {
-                    control.save();
+                    storage.save();
                 } else if (firstWord.equals("list")) {
-                    control.list();
+                    taskList.list();
 
                     //Multiple word commands
                 } else if (commandArr.length < 2) {
                     throw new InvalidDescriptionException();
                 } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
-                    control.taskCheck(command);
+                    taskList.taskCheck(command);
                 } else if (firstWord.equals("todo")) {
-                    control.todo(command);
+                    taskList.todo(command);
                 } else if (firstWord.equals("deadline")) {
-                    control.deadline(command);
+                    taskList.deadline(command);
                 } else if (firstWord.equals("event")) {
-                    control.event(command);
+                    taskList.event(command);
                 } else { //firstWord.equals("delete")
-                    control.delete(command);
+                    taskList.delete(command);
                 }
 
             } catch (InvalidCommandException e) {

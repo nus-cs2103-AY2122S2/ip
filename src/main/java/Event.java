@@ -11,6 +11,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() + " (at: " + this.time + ")";
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() +
+                " (at: " + this.time + ")";
     }
 }

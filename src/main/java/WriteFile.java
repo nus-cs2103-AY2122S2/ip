@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteFile {
-    private String pathName;
+    private final String pathName;
 
     public WriteFile() {
         this.pathName = "duke.txt";
