@@ -16,6 +16,13 @@ public class FindCommand extends TaskListCommand {
         super(name, args, taskList);
     }
 
+    /**
+     * Searches the TaskList using keyword passed in
+     * by user, and displays it.
+     *
+     * @return False.
+     * @throws IllegalArgumentException If no search term was passed to command.
+     */
     @Override
     public boolean execute() throws IllegalArgumentException {
         // Args for this command represents keyword to search

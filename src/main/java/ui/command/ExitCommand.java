@@ -13,8 +13,14 @@ class ExitCommand extends Command {
         super(name, args);
     }
 
+    /**
+     * Signals the termination of the ChatBot by
+     * returning true.
+     *
+     * @return True.
+     */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public boolean execute() {
         ArrayList<String> response = new ArrayList<>();
         response.add(GOODBYE_STRING);
         styledPrint(response);

@@ -14,8 +14,14 @@ class ShowTaskListCommand extends TaskListCommand {
         super(name, args, taskList);
     }
 
+    /**
+     * Displays task stored by user in a list
+     * format with numbering.
+     *
+     * @return False.
+     */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public boolean execute() {
         TaskList taskList = this.getTaskList();
         ArrayList<String> taskDescriptions = taskList.getTaskDescriptions();
         ArrayList<String> response = new ArrayList<>();

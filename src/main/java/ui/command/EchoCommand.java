@@ -11,6 +11,11 @@ class EchoCommand extends Command {
         super(name, args);
     }
 
+    /**
+     * Echoes original command passed in by user.
+     *
+     * @return False.
+     */
     @Override
     public boolean execute() {
         ArrayList<String> response = new ArrayList<>();

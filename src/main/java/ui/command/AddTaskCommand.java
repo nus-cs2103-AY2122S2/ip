@@ -18,6 +18,12 @@ class AddTaskCommand extends TaskListCommand {
         super(name, args, taskList);
     }
 
+    /**
+     * Adds a given task to TaskList.
+     *
+     * @return False.
+     * @throws IllegalArgumentException if the arguments are invalid for given task.
+     */
     @Override
     public boolean execute() throws IllegalArgumentException {
         TaskList taskList = this.getTaskList();

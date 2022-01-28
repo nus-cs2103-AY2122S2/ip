@@ -73,18 +73,36 @@ public abstract class Task {
         return this.isDone ? "[X]" : "[ ]";
     }
 
+    /**
+     * Marks current task as done.
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * Marks current task as undone.
+     */
     public void unmarkDone() {
         this.isDone = false;
     }
 
+    /**
+     * Gets the name of the Task.
+     *
+     * @return Name of task.
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Gets a boolean on whether the
+     * task is done.
+     *
+     * @return True if task was marked done,
+     * false otherwise.
+     */
     public boolean isDone() {
         return this.isDone;
     }

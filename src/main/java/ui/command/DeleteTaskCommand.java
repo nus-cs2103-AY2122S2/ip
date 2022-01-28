@@ -15,6 +15,13 @@ class DeleteTaskCommand extends TaskListCommand {
         super(name, args, taskList);
     }
 
+    /**
+     * Deletes a task using the index of task
+     * provided as an argument.
+     *
+     * @return False.
+     * @throws IllegalArgumentException If invalid index is given.
+     */
     @Override
     public boolean execute() throws IllegalArgumentException {
         // Args for this command represents index of task to delete

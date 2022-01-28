@@ -15,6 +15,13 @@ class UnmarkTaskCommand extends TaskListCommand {
         super(name, args, taskList);
     }
 
+    /**
+     * Marks a given task in taskList as undone,
+     * using index passed by user.
+     *
+     * @return False.
+     * @throws IllegalArgumentException If the index is invalid.
+     */
     @Override
     public boolean execute() throws IllegalArgumentException {
         // Args for this command represents index of task to
