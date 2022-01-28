@@ -9,7 +9,6 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     public Ui() {
-
     }
 
     public String[] readCommand() {
