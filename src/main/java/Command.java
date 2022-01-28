@@ -1,140 +1,209 @@
-abstract class Command {
+import java.io.IOException;
 
-    protected enum CommandName {
-        BYE {
-            @Override
-            public void run(String parameter, TaskList taskList) {
-                System.out.println("Arrivederci!");
-                System.exit(0);
-            }
-        },
-        LIST {
-            @Override
-            public void run(String parameter, TaskList taskList) {
-                System.out.println("Here you go sir:");
-                taskList.printTasks();
-            }
-        },
-        MARK {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyNumber.createEmptyNumber("Mark");
-                try {
-                    taskList.getTask(Integer.parseInt(parameter)).setDone();
-                    taskList.markTask(Integer.parseInt(parameter));
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ListIndexOutOfBound();
-                }
-                System.out.println("Alright! It's done:");
-                System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
-            }
-        },
-        UNMARK {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyNumber.createEmptyNumber("Unmark");
-                    try {
-                        taskList.unmarkTask(Integer.parseInt(parameter));
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new ListIndexOutOfBound();
-                    }
-                System.out.println("Alright! It's done:");
-                System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
-            }
-        },
-        TODO {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyTask.createEmptyTask("todo");
-                Task todo = Task.createTask("TODO", false, parameter, null);
-                taskList.addTask(todo);
-                System.out.println("Alright! Added that to the list: ");
-                System.out.println(todo.toString());
-                taskList.printNoTasks();
-            }
-        },
-        DEADLINE {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyTask.createEmptyTask("dateline");
-                int index = parameter.indexOf("/by ");
-                if (index < 0)
-                    throw EmptyDate.createEmptyDate("dateline");
-                String task = parameter.substring(0, index);
-                if (task.isBlank())
-                    throw EmptyTask.createEmptyTask("dateline");
-                String date = parameter.substring(index + 4, parameter.length());
-                if (date.isBlank())
-                    throw EmptyDate.createEmptyDate("dateline");
-                Task deadline = Task.createTask("DEADLINE", false, task, date);
-                taskList.addTask(deadline);
-                System.out.println("Alright! Added that to the list: ");
-                System.out.println(deadline.toString());
-                taskList.printNoTasks();
-            }
-        },
-        EVENT {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyTask.createEmptyTask("event");
-                int index = parameter.indexOf("/at ");
-                if (index < 0)
-                    throw EmptyDate.createEmptyDate("event");
-                String task = parameter.substring(0, index);
-                if (task.isBlank())
-                    throw EmptyTask.createEmptyTask("event");
-                String date = parameter.substring(index + 4, parameter.length());
-                if (date.isBlank())
-                    throw EmptyDate.createEmptyDate("event");
-                Task event = Task.createTask("EVENT", false, task, date);
-                taskList.addTask(event);
-                System.out.println("Alright! Added that to the list: ");
-                System.out.println(event.toString());
-                taskList.printNoTasks();
-            }
-        },
-        DELETE {
-            @Override
-            public void run(String parameter, TaskList taskList) throws DukeExceptions {
-                if (parameter.isBlank())
-                    throw EmptyNumber.createEmptyNumber("Delete");
-                try {
-                    Task deletedTask = taskList.getTask(Integer.parseInt(parameter));
-                    taskList.deleteFromIndex(Integer.parseInt(parameter));
-                    System.out.println("Alright, I've deleted this from the list:");
-                    System.out.println(deletedTask.toString());
-                    taskList.printNoTasks();
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ListIndexOutOfBound();
-                }
+abstract class Command{
+    String parameter;
 
-            }
-        },;
-
-        public abstract void run(String parameter, TaskList taskList) throws DukeExceptions;
+    protected Command(String parameter) {
+        this.parameter = parameter;
     }
 
-    abstract protected void run() throws DukeExceptions;
+    public abstract void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions;
 
-    static void runCommand(String input, TaskList taskList) throws DukeExceptions {
-        String command;
-        String parameter = "";
-        String[] splited = input.split("\\s+");
-        if (splited.length < 2) {
-            command = input;
+    public static Command getCommand(String command, String parameter) throws InvalidCommand {
+        if (command.equals("BYE")) {
+            return new ByeCommand(parameter);
+        } else if (command.equals("LIST")) {
+            return new ListCommand(parameter);
+        } else if (command.equals("MARK")) {
+            return new MarkCommand(parameter);
+        } else if (command.equals("UNMARK")) {
+            return new UnmarkCommand(parameter);
+        } else if (command.equals("TODO")) {
+            return new TodoCommand(parameter);
+        } else if (command.equals("DEADLINE")) {
+            return new DeadlineCommand(parameter);
+        } else if (command.equals("EVENT")) {
+            return new EventCommand(parameter);
+        } else if (command.equals("DELETE")) {
+            return new DeleteCommand(parameter);
         } else {
-            command = splited[0];
-            parameter = input.substring(command.length() + 1, input.length());
+            throw InvalidCommand.createInvalidCommand(command);
+        }
+    }
+}
+
+class ByeCommand extends Command {
+    ByeCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        ui.showExitScreen();
+        System.exit(0);
+    }
+}
+
+class ListCommand extends Command {
+    ListCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        ui.taskListDisplay.run(taskList);
+    }
+}
+
+class MarkCommand extends Command {
+    MarkCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (this.parameter.isBlank()) {
+            throw EmptyNumber.createEmptyNumber("Mark");
         }
         try {
-            CommandName.valueOf(command.toUpperCase()).run(parameter, taskList);
-        } catch (IllegalArgumentException e) {
-            throw InvalidCommand.createInvalidCommand(command);
+            String task = taskList.markTask(Integer.parseInt(this.parameter));
+            ui.showMarkedTaskDisplay(task);
+            storage.updateData(taskList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListIndexOutOfBound();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class UnmarkCommand extends Command {
+    UnmarkCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (this.parameter.isBlank()) {
+            throw EmptyNumber.createEmptyNumber("Unmark");
+        }
+        try {
+            String task = taskList.unmarkTask(Integer.parseInt(this.parameter));
+            ui.showUnmarkedTaskDisplay(task);
+            storage.updateData(taskList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListIndexOutOfBound();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class TodoCommand extends Command {
+    TodoCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (this.parameter.isBlank()) {
+            throw EmptyTask.createEmptyTask("todo");
+        }
+        Task todo = Task.createTask("TODO", false, this.parameter, null);
+        taskList.addTask(todo);
+        ui.newTaskDisplay(todo, taskList);
+        try {
+            storage.updateData(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class DeadlineCommand extends Command {
+    DeadlineCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (this.parameter.isBlank()) {
+            throw EmptyTask.createEmptyTask("dateline");
+        }
+        int index = this.parameter.indexOf("/by ");
+        if (index < 0) {
+            throw EmptyDate.createEmptyDate("dateline");
+        }
+        String task = this.parameter.substring(0, index);
+        if (task.isBlank()) {
+            throw EmptyTask.createEmptyTask("dateline");
+        }
+        String date = this.parameter.substring(index + 4, parameter.length());
+        if (date.isBlank()) {
+            throw EmptyDate.createEmptyDate("dateline");
+        }
+        Task deadline = Task.createTask("DEADLINE", false, task, date);
+        taskList.addTask(deadline);
+        ui.newTaskDisplay(deadline, taskList);
+        try {
+            storage.updateData(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class EventCommand extends Command {
+    EventCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (this.parameter.isBlank()) {
+            throw EmptyTask.createEmptyTask("event");
+        }
+        int index = this.parameter.indexOf("/at ");
+        if (index < 0) {
+            throw EmptyDate.createEmptyDate("event");
+        }
+        String task = this.parameter.substring(0, index);
+        if (task.isBlank()) {
+            throw EmptyTask.createEmptyTask("event");
+        }
+        String date = this.parameter.substring(index + 4, parameter.length());
+        if (date.isBlank()) {
+            throw EmptyDate.createEmptyDate("event");
+        }
+        Task event = Task.createTask("EVENT", false, task, date);
+        taskList.addTask(event);
+        ui.newTaskDisplay(event, taskList);
+        try {
+            storage.updateData(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class DeleteCommand extends Command {
+    DeleteCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        if (parameter.isBlank()) {
+            throw EmptyNumber.createEmptyNumber("Delete");
+        }
+        try {
+            String deletedTask = taskList.deleteFromIndex(Integer.parseInt(parameter));
+            ui.showDeleteTaskDisplay(deletedTask, taskList);
+            storage.updateData(taskList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListIndexOutOfBound();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

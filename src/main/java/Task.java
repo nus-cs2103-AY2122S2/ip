@@ -77,7 +77,7 @@ final class Deadline extends Task {
     }
 
     String updateIntoDatabase() {
-        return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline + "\n"
+        return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }
@@ -104,7 +104,7 @@ final class Event extends Task {
     }
 
     String updateIntoDatabase() {
-        return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate + "\n"
+        return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }

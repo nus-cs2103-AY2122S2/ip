@@ -1,42 +1,66 @@
 =========================
-   Harro! I am Bob!    
+   Welcome chosen one!   
+      I am Big Tech      
  How can I be of service 
 =========================
-Error: Sorry! I don't undestand what are you saying!
-Alright! Added that to the list: 
+============================
+Error Detected: 
+Sorry! I don't undestand what are you saying!
+====================================
+Alright, I've added this to the list
 [T][ ] read book
 Now you have 1 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [D][ ] return book (by: 02 Feb 2022 12:00 PM)
 Now you have 2 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 Now you have 3 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [T][ ] join sports club
 Now you have 4 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [T][ ] borrow book
 Now you have 5 tasks in the list.
-Here you go sir:
+====================================
+==============================
+Here You go: 
 1. [T][ ] read book
 2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-Alright! Added that to the list: 
+==============================
+====================================
+Alright, I've added this to the list
 [D][ ] Capstone Project Submission (by: 12 Feb 2022 11:59 PM)
 Now you have 6 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 Now you have 7 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 Now you have 8 tasks in the list.
-Alright! Added that to the list: 
+====================================
+====================================
+Alright, I've added this to the list
 [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
 Now you have 9 tasks in the list.
-Here you go sir:
+====================================
+==============================
+Here You go: 
 1. [T][ ] read book
 2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
@@ -46,16 +70,33 @@ Here you go sir:
 7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
-Error: Are you tryng to add something to todo
-Error: Are you tryng to add something to dateline
-Error: Are you tryng to add something to event
-Error: Dateline needs a date
-Error: Event needs a date
-Error: Dateline needs a date
-Error: Event needs a date
-Alright! It's done:
+==============================
+============================
+Error Detected: 
+Are you tryng to add something to todo
+============================
+Error Detected: 
+Are you tryng to add something to dateline
+============================
+Error Detected: 
+Are you tryng to add something to event
+============================
+Error Detected: 
+Dateline needs a date
+============================
+Error Detected: 
+Event needs a date
+============================
+Error Detected: 
+Dateline needs a date
+============================
+Error Detected: 
+Event needs a date
+Alright, I've marked the task: 
 [T][X] read book
-Here you go sir:
+Good job by the way!
+==============================
+Here You go: 
 1. [T][X] read book
 2. [D][ ] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
@@ -65,9 +106,12 @@ Here you go sir:
 7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
-Alright! It's done:
+==============================
+Alright, I've marked the task: 
 [D][X] return book (by: 02 Feb 2022 12:00 PM)
-Here you go sir:
+Good job by the way!
+==============================
+Here You go: 
 1. [T][X] read book
 2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
@@ -77,9 +121,12 @@ Here you go sir:
 7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
-Alright! It's done:
+==============================
+Alright, I've unmarked the task: 
 [T][ ] read book
-Here you go sir:
+Hope you complete it soon!
+==============================
+Here You go: 
 1. [T][ ] read book
 2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
@@ -89,14 +136,26 @@ Here you go sir:
 7. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 8. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 9. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
-Error: Index is out of bond!
-Error: Mark needs a number
-Error: Unmark needs a number
-Error: Delete needs a number
-Alright, I've deleted this from the list:
+==============================
+============================
+Error Detected: 
+Index is out of bond!
+============================
+Error Detected: 
+Mark needs a number
+============================
+Error Detected: 
+Unmark needs a number
+============================
+Error Detected: 
+Delete needs a number
+============================
+Deleted this tasks: 
 [T][ ] borrow book
 Now you have 8 tasks in the list.
-Here you go sir:
+============================
+==============================
+Here You go: 
 1. [T][ ] read book
 2. [D][X] return book (by: 02 Feb 2022 12:00 PM)
 3. [E][ ] project meeting (at: 30 Jan 2022 10:00 AM)
@@ -105,5 +164,12 @@ Here you go sir:
 6. [E][ ] IU Concert (at: 05 May 2022 08:00 PM)
 7. [D][ ] do homework (by: 31 Jan 2022 06:00 PM)
 8. [E][ ] CS2103 finals (at: 02 Jan 2022 12:00 PM)
-Error: Index is out of bond!
-Arrivederci!
+==============================
+============================
+Error Detected: 
+Index is out of bond!
+============================
+     We hope you have an    
+Enriching experience with us
+           Bye Bye          
+============================
