@@ -14,12 +14,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Storage {
-    private static java.nio.file.Path DIR;
-    private static java.nio.file.Path FILE_PATH;
+    private static java.nio.file.Path fileDir;
+    private static java.nio.file.Path filePath;
 
     public Storage(String dir, String fileName) {
-        DIR = Paths.get(".", dir);
-        FILE_PATH = Paths.get(".", dir, fileName);
+        fileDir = Paths.get(".", dir);
+        filePath = Paths.get(".", dir, fileName);
     }
 
     /**
@@ -31,13 +31,13 @@ public class Storage {
      * @throws DateTimeParseException if the dates format in local file is not standard
      */
     public void init(TaskList taskList) throws IOException, DateTimeParseException {
-        if (!Files.exists(DIR)) {
-            Files.createDirectory(DIR);
+        if (!Files.exists(fileDir)) {
+            Files.createDirectory(fileDir);
         }
-        if (!Files.exists(FILE_PATH)) {
-            Files.createFile(FILE_PATH);
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
         } else {
-            BufferedReader reader = Files.newBufferedReader(FILE_PATH);
+            BufferedReader reader = Files.newBufferedReader(filePath);
             String str = null;
 
             while((str = reader.readLine()) != null) {
@@ -79,7 +79,7 @@ public class Storage {
      * @throws IOException if there is an error when writing to local files
      */
     public void saveFile(TaskList taskList) throws IOException {
-        BufferedWriter writer = Files.newBufferedWriter(FILE_PATH);
+        BufferedWriter writer = Files.newBufferedWriter(filePath);
         for (int i = 0; i < taskList.getSize(); i++) {
             writer.write(taskList.getTaskSavingStyle(i) + "\n");
         }
