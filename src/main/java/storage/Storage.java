@@ -1,14 +1,14 @@
 package storage;
 
+import TaskList.TaskList;
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.ToDo;
 import tasks.Task;
-import validation.DateValidator;
+import validation.TaskValidator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,11 +39,11 @@ public class Storage {
         }
     }
 
-    public void saveData(ArrayList<Task> tasks) {
+    public void saveData(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
 
-            for (Task currTask : tasks) {
+            for (Task currTask : tasks.getTasks()) {
                 String description = currTask.getDescription();
                 int isComplete = currTask.isComplete() ? 1 : 0;
                 String saveText;
@@ -89,11 +89,11 @@ public class Storage {
                             break;
                         case "D":
                             commandLine = "deadline " + savedData[2];
-                            tasks.add(count, new Deadline(commandLine, DateValidator.convertDate(savedData[3])));
+                            tasks.add(count, new Deadline(commandLine, TaskValidator.convertDate(savedData[3])));
                             break;
                         case "E":
                             commandLine = "event " + savedData[2];
-                            tasks.add(count, new Event(commandLine, DateValidator.convertDate(savedData[3])));
+                            tasks.add(count, new Event(commandLine, TaskValidator.convertDate(savedData[3])));
                             break;
                         default:
                             throw new DukeException("Unable to parse file: " + filePath);
