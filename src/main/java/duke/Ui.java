@@ -9,14 +9,14 @@ public class Ui {
     private final Scanner sc;
 
     /**
-     * Constructor for the Ui class, creates a new scanner which allows it to take input form a user
+     * Constructor for the Ui class, creates a new scanner which allows it to take input form a user.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
     /**
-     * Function for printing the greeting to it user
+     * Function for printing the greeting to it user.
      */
     public void greet() {
         String greeting = encloseWithin("Hello! I'm duke.Duke\nWhat can I do for you?\n");
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Function for printing the goodbye after the user has finished using the application
+     * Function for printing the goodbye after the user has finished using the application.
      */
     public void sayGoodbye() {
         String goodbye = encloseWithin("Bye. Hope to see you again soon!\n");
@@ -33,7 +33,8 @@ public class Ui {
     }
 
     /**
-     * Function to format output of the bot within 2 lines
+     * Function to format output of the bot within 2 lines.
+     *
      * @param str output to the user
      */
     public void say(String str) {
@@ -44,7 +45,8 @@ public class Ui {
     }
 
     /**
-     * Receives input from user
+     * Receives input from user.
+     *
      * @return the inputted texts from the user
      */
     public String askForInput() {
@@ -52,9 +54,9 @@ public class Ui {
     }
 
     private String encloseWithin(String str) {
-        String Header = "____________________________________________________________";
+        String header = "____________________________________________________________";
         StringBuilder string = new StringBuilder();
-        string.append(Header).append("\n").append(str).append(Header).append("\n");
+        string.append(header).append("\n").append(str).append(header).append("\n");
         return string.toString();
     }
 }

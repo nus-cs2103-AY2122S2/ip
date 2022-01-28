@@ -1,16 +1,17 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
- * Inherits from Task and is the implementation of a Deadline task which contains a description and a deadline
+ * Inherits from Task and is the implementation of a Deadline task which contains a description and a deadline.
  */
 public class Deadlines extends Task {
     LocalDateTime deadline;
 
     /**
-     * Constructor for the Deadline task
+     * Constructor for the Deadline task.
+     *
      * @param task Description of task
      * @param deadline Deadline of the task
      * @throws DukeException if the format of the deadline is not correct or description is empty
@@ -31,7 +32,8 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Converts the task into a readable form
+     * Converts the task into a readable form.
+     *
      * @return String containing information on this deadline task
      */
     @Override
@@ -45,7 +47,8 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Converts the task into a compact version for storage
+     * Converts the task into a compact version for storage.
+     *
      * @return String containing compact version of the task
      */
     @Override

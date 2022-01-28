@@ -1,12 +1,13 @@
 package duke;
 
 /**
- * Inherits from Task and is the implementation of a simple Todo
+ * Inherits from Task and is the implementation of a simple Todo.
  */
 public class ToDos extends Task {
 
     /**
-     * Constructor for the todo task
+     * Constructor for the todo task.
+     *
      * @param task the description of the task
      * @throws DukeException if the description is empty
      */
@@ -19,7 +20,8 @@ public class ToDos extends Task {
     }
 
     /**
-     * Converts the Todo object into a readable form
+     * Converts the Todo object into a readable form.
+     *
      * @return String representation of Todo
      */
     @Override

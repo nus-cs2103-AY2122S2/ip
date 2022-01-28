@@ -1,19 +1,24 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * CLass responsible for interacting with List of task storing and loading from storage
+ * CLass responsible for interacting with List of task storing and loading from storage.
  */
 public class Storage {
     private final String filepath;
     private final String filename;
 
     /**
-     * Constructor for the Storage class
+     * Constructor for the Storage class.
      */
     public Storage() {
         this.filepath = System.getProperty("user.dir") + File.separator + "data";
@@ -35,7 +40,8 @@ public class Storage {
     }
 
     /**
-     * Reads from the storage and returns the stored list of tasks
+     * Reads from the storage and returns the stored list of tasks.
+     *
      * @return an array list containing the stored list of tasks
      */
     public ArrayList<Task> readFromStorage() {
@@ -68,6 +74,8 @@ public class Storage {
                         task.mark();
                     }
                     break;
+                default:
+                    // Do nothing
                 }
                 listOfTasks.add(task);
                 st = reader.readLine();
@@ -83,7 +91,8 @@ public class Storage {
     }
 
     /**
-     * Writes all currently stored tasks into storage
+     * Writes all currently stored tasks into storage.
+     *
      * @param listOfTasks TaskList containing the list of tasks to be written to storage
      */
     public void writeToStorage(TaskList listOfTasks) {

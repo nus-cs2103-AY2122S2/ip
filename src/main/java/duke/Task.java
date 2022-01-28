@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * General class encompassing all the common functionalities of all children tasks
+ * General class encompassing all the common functionalities of all children tasks.
  */
 public class Task {
     private String task;
@@ -14,7 +14,8 @@ public class Task {
     public String initials;
 
     /**
-     * Constructor for General Task
+     * Constructor for General Task.
+     *
      * @param task description of the task
      */
     public Task(String task) {
@@ -23,21 +24,22 @@ public class Task {
     }
 
     /**
-     * Function to mark the current task as done
+     * Function to mark the current task as done.
      */
     public void mark() {
         this.done = true;
     }
 
     /**
-     * function to mark the current task as not done
+     * function to mark the current task as not done.
      */
     public void unmark() {
         this.done = false;
     }
 
     /**
-     * Returns the description of the current task
+     * Returns the description of the current task.
+     *
      * @return String containing the description of the current task
      */
     public String describe() {
@@ -45,7 +47,8 @@ public class Task {
     }
 
     /**
-     * Converts the task into a readable form
+     * Converts the task into a readable form.
+     *
      * @return String containing description of current task
      */
     @Override
@@ -62,7 +65,8 @@ public class Task {
     }
 
     /**
-     * Converts the task into a compact version for storage
+     * Converts the task into a compact version for storage.
+     *
      * @return String containing compact version of the task
      */
     public ArrayList<String> makeCompact() {
@@ -79,7 +83,8 @@ public class Task {
     }
 
     /**
-     * Converts the String representation of Date and time to a LocalDateTime object
+     * Converts the String representation of Date and time to a LocalDateTime object.
+     *
      * @param date String representation for the Date and time
      * @return a LocalDateTime object representing the Date and time of this Task
      */

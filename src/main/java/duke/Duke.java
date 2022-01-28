@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Driver class for the bot
+ * Driver class for the bot.
  */
 public class Duke {
     private final Ui ui;
@@ -9,7 +9,7 @@ public class Duke {
     private final TaskList taskList;
 
     /**
-     * Constructor for the Bot
+     * Constructor for the Bot.
      */
     public Duke() {
         this.ui = new Ui();
@@ -18,7 +18,7 @@ public class Duke {
     }
 
     /**
-     * Function to enable the bot and start interaction with the user
+     * Function to enable the bot and start interaction with the user.
      */
     public void run() {
         this.ui.greet();

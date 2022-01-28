@@ -1,18 +1,18 @@
 package duke;
 
 /**
- * Class responsible for executing the command from the userInput
+ * Class responsible for executing the command from the userInput.
  */
 public class Command {
 
-    private static String ListStatus(TaskList listOfTasks) {
+    private static String listStatus(TaskList listOfTasks) {
         return "Now you have " + listOfTasks.size() + " tasks in the list.\n";
     }
 
     private static String taskAddedMessage(Task newTask, TaskList listOfTasks) {
         StringBuilder toPrint = new StringBuilder("Got it. I've added this task:\n");
         toPrint.append(newTask.toString()).append("\n");
-        toPrint.append(ListStatus(listOfTasks));
+        toPrint.append(listStatus(listOfTasks));
         return toPrint.toString();
     }
 
@@ -62,7 +62,7 @@ public class Command {
             Task removedTask = listOfTasks.remove(index);
             StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
             toPrint.append(removedTask.toString()).append("\n");
-            toPrint.append(ListStatus(listOfTasks));
+            toPrint.append(listStatus(listOfTasks));
             return toPrint.toString();
         }
     }
@@ -96,15 +96,16 @@ public class Command {
         }
         Task toUnmark = listOfTasks.get(index);
         toUnmark.unmark();
-        StringBuilder toPrint = new StringBuilder("OK, I've marked this task as not done yet:\n").append(toUnmark)
-                                                                                                 .append("\n");
+        StringBuilder toPrint = new StringBuilder("OK, I've marked this task as not done yet:\n")
+                .append(toUnmark)
+                .append("\n");
         return toPrint.toString();
     }
 
     private static String findTask(String keyword, TaskList listOfTasks) {
         StringBuilder toPrint = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = 1;
-        for (Task task: listOfTasks.getList()) {
+        for (Task task : listOfTasks.getList()) {
             if (task.describe().contains(keyword)) {
                 String toAdd = count + "." + task + "\n";
                 toPrint.append(toAdd);
@@ -115,9 +116,11 @@ public class Command {
     }
 
     /**
-     * Contains the logic for processing the processed userInput, finds the corresponding commands to the userInput and
-     * executes it
-     * @param processedInput String array containing valuable information regarding the command to execute
+     * Contains the logic for processing the processed userInput, finds the corresponding commands
+     * to the userInput and executes it.
+     *
+     * @param processedInput String array containing valuable information regarding the command
+     *                       to execute
      * @param listOfTasks TaskList containing the current list of task
      * @return String containing any responses to the user after execution of command
      */
@@ -150,7 +153,8 @@ public class Command {
                 toPrint = findTask(processedInput[1], listOfTasks);
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                throw new DukeException("☹ OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-(\n");
             }
         } catch (DukeException e) {
             toPrint = e.getMessage();

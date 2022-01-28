@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class containing methods to process the user input into a easier to handle form
+ * Class containing methods to process the user input into a easier to handle form.
  */
 public class Parser {
 
@@ -33,7 +33,7 @@ public class Parser {
             // Mark and unmark have the same syntax, so only process it once
             if (inputMessage.length() < 4) {
                 // Do nothing (For Future methods to be added if their lengths are lesser than 4
-            } else if (inputMessage.substring(0,4).contains("find")) {
+            } else if (inputMessage.substring(0, 4).contains("find")) {
                 if (inputMessage.length() <= 4) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description "
                                              + "for the find task\n");
@@ -82,10 +82,11 @@ public class Parser {
     }
 
     /**
-     * Processes the users input and formats it into a String array separating the important information
+     * Processes the users input and formats it into a String array separating the important information.
+     *
      * @param userInput raw String containing the user's input
-     * @return String array containing information on the type of task, description and Timing if required else if invalid input
-     *         return a String array containing only one element "null"
+     * @return String array containing information on the type of task, description and timing and
+     *         if required, else if invalid input return a String array containing only one element "null"
      */
     public static String[] parseInput(String userInput) {
         try {

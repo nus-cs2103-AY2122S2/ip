@@ -3,13 +3,14 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Stores the task list and contains the basic functionalities to modify/interact with the tasklist
+ * Stores the task list and contains the basic functionalities to modify/interact with the tasklist.
  */
 public class TaskList {
     private final ArrayList<Task> listOfTasks;
 
     /**
-     * Constructor for initialising a stored tasklist
+     * Constructor for initialising a stored tasklist.
+     *
      * @param listOfTasks Stored list of task
      */
     public TaskList(ArrayList<Task> listOfTasks) {
@@ -17,14 +18,15 @@ public class TaskList {
     }
 
     /**
-     * Constructor for new tasklist
+     * Constructor for new tasklist.
      */
     public TaskList() {
         this.listOfTasks = new ArrayList<>();
     }
 
     /**
-     * Returns the size of tasklist
+     * Returns the size of tasklist.
+     *
      * @return the number of tasks in the list
      */
     public int size() {
@@ -32,7 +34,8 @@ public class TaskList {
     }
 
     /**
-     * Gets a task from the list
+     * Gets a task from the list.
+     *
      * @param index the index number of the task in the list
      * @return The task at the index
      */
@@ -41,7 +44,8 @@ public class TaskList {
     }
 
     /**
-     * Removes a task from the list
+     * Removes a task from the list.
+     *
      * @param index the index number of the task in the list
      * @return The removed task
      */
@@ -50,15 +54,17 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the list
-     * @param task
+     * Adds a new task to the list.
+     *
+     * @param task the task to be added
      */
     public void add(Task task) {
         this.listOfTasks.add(task);
     }
 
     /**
-     * return the entire list of tasks
+     * return the entire list of tasks.
+     *
      * @return the array containing the list of tasks
      */
     public ArrayList<Task> getList() {

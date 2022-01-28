@@ -1,16 +1,17 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
- * Inherits from Task and is the implementation of a Event task which contains a description and a timing for the event
+ * Inherits from Task and is the implementation of a Event task which contains a description and a timing for the event.
  */
 public class Event extends Task {
     LocalDateTime timing;
 
     /**
-     * Constructor for Event task
+     * Constructor for Event task.
+     *
      * @param task description of the event
      * @param timing time of the event
      * @throws DukeException if description is empty or timing is not in the correct format
@@ -31,7 +32,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the task into a readable form
+     * Converts the task into a readable form.
+     *
      * @return String containing information on this deadline task
      */
     @Override
@@ -45,7 +47,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the task into a compact version for storage
+     * Converts the task into a compact version for storage.
+     *
      * @return String containing compact version of the task
      */
     @Override
