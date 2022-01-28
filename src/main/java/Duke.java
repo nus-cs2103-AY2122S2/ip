@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,8 +55,10 @@ public class Duke {
                     tasks.add(new Todo(breakdown[2], Boolean.parseBoolean(breakdown[1])));
                     break;
                 case E:
+                    tasks.add(new Event(breakdown[2], Boolean.parseBoolean(breakdown[1]), LocalDateTime.parse(breakdown[3])));
+                    break;
                 case D:
-                    tasks.add(new Event(breakdown[2], Boolean.parseBoolean(breakdown[1]), breakdown[3]));
+                    tasks.add(new Deadline(breakdown[2], Boolean.parseBoolean(breakdown[1]), LocalDateTime.parse(breakdown[3])));
                     break;
                 }
             }
@@ -155,22 +160,31 @@ public class Duke {
                     Task task;
                     if (command.equals(Command.TODO)) {
                         task = new Todo(options, false);
-                    } else if (command.equals(Command.DEADLINE)) {
-                        String[] splitCommand = options.split(" /by ");
-                        if (splitCommand.length < 2) {
-                            throw new DukeException("NO DEADLINE TIME SUPPLIED");
-                        }
-                        String description = splitCommand[0];
-                        String byTime = splitCommand[1];
-                        task = new Deadline(description, false, byTime);
                     } else {
-                        String[] splitCommand = options.split(" /at ");
+                        boolean isDeadline = command.equals(Command.DEADLINE);
+
+                        // deconstruct command string
+                        String[] splitCommand = options.split(isDeadline ? " /by " : " /at ");
                         if (splitCommand.length < 2) {
-                            throw new DukeException("NO EVENT TIME SUPPLIED");
+                            throw new DukeException("NO TIME SUPPLIED");
                         }
+
+                        // retrieve description of task
                         String description = splitCommand[0];
-                        String atTime = splitCommand[1];
-                        task = new Event(description, false, atTime);
+
+                        // retrieve associated time of task
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                        LocalDateTime time;
+                        try {
+                            time = LocalDateTime.parse(splitCommand[1], formatter);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("INVALID TIME FORMAT (dd-MM-yyyy HH:mm)");
+                        }
+
+                        // instantiate deadline or event task accordingly
+                        task = isDeadline
+                                ? new Deadline(description, false, time)
+                                : new Event(description, false, time);
                     }
                     tasks.add(task);
 

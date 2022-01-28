@@ -1,18 +1,22 @@
-public class Deadline extends Task {
-    protected String byTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, boolean isMarked, String byTime) {
+public class Deadline extends Task {
+    protected LocalDateTime byTime;
+
+    public Deadline(String description, boolean isMarked, LocalDateTime byTime) {
         super(description, isMarked);
         this.byTime = byTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.byTime + ")";
+        String byTimeFormatted = this.byTime.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy"));
+        return "[D]" + super.toString() + " (by: " + byTimeFormatted + ")";
     }
 
     @Override
     public String toData() {
-        return "D | " + (this.isMarked ? 1 : 0) + " | " + this.description + " | " + this.byTime;
+        return "D | " + this.isMarked + " | " + this.description + " | " + this.byTime;
     }
 }

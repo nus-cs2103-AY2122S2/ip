@@ -10,6 +10,6 @@ public class Todo extends Task {
 
     @Override
     public String toData() {
-        return "T | " + (this.isMarked ? 1 : 0) + " | " + this.description;
+        return "T | " + this.isMarked + " | " + this.description;
     }
 }
