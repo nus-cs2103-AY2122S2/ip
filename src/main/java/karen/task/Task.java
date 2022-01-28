@@ -36,6 +36,10 @@ public abstract class Task {
         return (this.isDone) ? "X" : " ";
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Abstract method to parse Task objects into a String object representation
      * for writing to file

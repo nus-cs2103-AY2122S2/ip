@@ -15,7 +15,7 @@ public class Ui {
     public static final String ERR_DIVIDER = "------------------------------------------------";
     public static final String WELCOME = "Hello, my name is Karen.\nI'll be speaking (to) as your manager today.";
     public static final String GOODBYE = "Goodbye - I'll be seeing your manager's manager next.\nI'll remember this.";
-    public static final String NO_TASKS = "Nothing is even added yet.";
+    public static final String NO_TASKS = "Nothing can be found.";
 
     private final Scanner in;
     private final PrintStream out;
@@ -106,26 +106,26 @@ public class Ui {
         out.println(message);
         out.println(ERR_DIVIDER);
         out.print("\n");
-
     }
 
     /**
-     * Prints formatted output for displaying taskList objects in
-     * 1-based index formatting
-     * @param taskList ArrayList object for print out
+     * Formats String representation of Task object(s) in taskList in 1-based index formatting.
+     * @param taskList
+     * @return Formatted String representation of taskList
      */
-    public void displayTaskList(ArrayList<Task> taskList) {
+    public String formatTaskList(ArrayList<Task> taskList) {
         StringBuilder formatString = new StringBuilder();
         int index = 1;
         for (Task item: taskList) {
             formatString.append(formatIndexItem(index, item.toString()));
             index++;
         }
+
+        // If the taskList is empty, return with default message
         if (taskList.size()==0) {
             formatString.append(NO_TASKS);
         }
-
-        displayUserInput(formatString.toString());
+        return formatString.toString();
     }
 
 }

@@ -17,10 +17,9 @@ public class Parser {
     public static final Pattern INDEX_FORMAT = Pattern.compile("^(?<keyWord>[^\\s]+)\\s+(?<index>\\d+)$");
     public static final Pattern KEYWORD_FORMAT = Pattern.compile("^(?<keyWord>[^\\s]+).*$");
     public static final Pattern TODO_FORMAT = Pattern.compile("^todo\\s+(?<description>.*)$");
-    public static final Pattern DEADLINE_FORMAT =
-      Pattern.compile("^deadline (?<description>.*) \\/by (?<time>.*)$");
-    public static final Pattern EVENT_FORMAT =
-      Pattern.compile("^event (?<description>.*) \\/at (?<time>.*)$");
+    public static final Pattern DEADLINE_FORMAT = Pattern.compile("^deadline (?<description>.*) \\/by (?<time>.*)$");
+    public static final Pattern EVENT_FORMAT = Pattern.compile("^event (?<description>.*) \\/at (?<time>.*)$");
+    public static final Pattern FIND_FORMAT = Pattern.compile("^find (?<keyTerm>.*)$");
 
     public static final String NA_MESSAGE = "I don't understand anything - I want to speak with your manager";
 
@@ -141,7 +140,21 @@ public class Parser {
         } catch (IllegalStateException err) {
             return new InvalidCommand("Missing arguments for delete command");
         }
+    }
 
+    /**
+     * Creates FindCommand object by parsing parameters to get keyTerm to search with
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return FindCommand object
+     */
+    private Command prepareFind(String keyWord, String fullInput) {
+        final Matcher matcher = FIND_FORMAT.matcher(fullInput.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand("'find' command needs a term to even search with");
+        }
+
+        return new FindCommand(matcher.group("keyTerm"));
     }
 
     /**

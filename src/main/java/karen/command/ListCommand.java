@@ -13,6 +13,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage) {
-        ui.displayTaskList(storage.getTaskList());
+        ui.displayUserInput(ui.formatTaskList(storage.getTaskList()));
     }
 }

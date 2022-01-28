@@ -9,6 +9,8 @@ deadline woosh
 deadline woosh /by later
 deadline woosh /by 2021-12-30
 list
+find die
+find die
 mark 2
 mark 0
 mark 1
