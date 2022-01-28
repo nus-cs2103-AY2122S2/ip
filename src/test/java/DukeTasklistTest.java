@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTasklistTest {
-  @Test
-  public void displayFilledListTest() {
-    TaskList testModule = new TaskList();
-    ArrayList<Task> testList = new ArrayList<>();
-    Task testTask = new Todo("testing");
-    testList.add(testTask);
-    testModule.setListWithoutSaving(testList);
-    assertEquals(testModule.displayList(),"1. [T][ ] testing");
-  }
+    @Test
+    public void displayFilledListTest() {
+        TaskList testModule = new TaskList();
+        ArrayList<Task> testList = new ArrayList<>();
+        Task testTask = new Todo("testing");
+        testList.add(testTask);
+        testModule.setListWithoutSaving(testList);
+        assertEquals(testModule.displayList(), "1. [T][ ] testing");
+    }
 
-  @Test
-  public void displayEmptyListTest() {
-    TaskList testModule = new TaskList();
-    ArrayList<Task> testList = new ArrayList<>();
-    testModule.setListWithoutSaving(testList);
-    assertEquals(testModule.displayList(),"LUMU: Your list is empty!");
-  }
+    @Test
+    public void displayEmptyListTest() {
+        TaskList testModule = new TaskList();
+        ArrayList<Task> testList = new ArrayList<>();
+        testModule.setListWithoutSaving(testList);
+        assertEquals(testModule.displayList(), "LUMU: Your list is empty!");
+    }
 }

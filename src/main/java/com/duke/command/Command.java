@@ -7,8 +7,8 @@ import com.duke.modules.TaskList;
  * This is an abstract class and cannot be instantiated.
  */
 public abstract class Command {
-  protected TaskList taskList;
+    protected TaskList taskList;
 
-  public abstract CommandResult execute();
+    public abstract CommandResult execute();
 }
 
