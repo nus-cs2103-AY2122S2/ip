@@ -1,93 +1,118 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
 
-    public static ArrayList<Task> list = new ArrayList<Task>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) {
-        System.out.println("Hello! I'm Bob :) \nWhat can I do for you? :D");
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
-        String inputstring1 = sc.nextLine();
-        String[] inputstring = inputstring1.split(" ");
-        while (!inputstring[0].equals("bye")) {
-            if (inputstring[0].equals("list")) {
-                displaylist();
-            } else if (inputstring[0].equals("mark")) {
-                mark(inputstring[1]);
-            } else if (inputstring[0].equals("unmark")) {
-                unmark(inputstring[1]);
-            } else if (inputstring[0].equals("todo") || inputstring[0].equals("deadline")
-                    || inputstring[0].equals("event")) {
-                addtolist(inputstring);
-            } else if (inputstring[0].equals("delete")) {
-                delete(inputstring[1]);
-            } else {
-                DukeException exception = new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
-                System.out.println(exception);
+        System.out.println("Hello! I'm Duke :) \nWhat can I do for you? :D");
+        String inputString = sc.nextLine();
+        String[] inputStringArray = inputString.split(" ");
+
+        while (!inputStringArray[0].equals("bye")) {
+            switch (inputStringArray[0]) {
+                case "list":
+                    displayList();
+                    break;
+                case "mark":
+                    mark(inputStringArray[1]);
+                    break;
+                case "unmark":
+                    unmark(inputStringArray[1]);
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    addToList(inputStringArray);
+                    break;
+                case "delete":
+                    delete(inputStringArray[1]);
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
             }
-            inputstring1 = sc.nextLine();
-            inputstring = inputstring1.split(" ");
+            inputString = sc.nextLine();
+            inputStringArray = inputString.split(" ");
         }
         System.out.println("Bye. Hope to see you again soon! :))");
     }
 
-    public static void displaylist() {
-        String returnstring = "";
-        for (int i = 0; i < list.size(); i++) {
-            returnstring = returnstring + (i + 1) + ". [" + list.get(i).symbol() + "][" + list.get(i).getStatusIcon() +
-                    "] " + list.get(i) + "\n";
+    public static void displayList() {
+        String returnString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" + tasks.get(i).getStatusIcon()
+                    + "] " + tasks.get(i) + "\n";
         }
-        System.out.println(returnstring);
+        System.out.println(returnString);
     }
 
-    public static void addtolist(String[] stringtoadd) {
-        if (stringtoadd.length < 2) {
-            DukeException exception = new DukeException("OOPS!! The description of a " + stringtoadd[0] +
-                    " cannot be empty.");
-            System.out.println(exception);
+    public static void addToList(String[] stringToAdd) throws DukeException {
+        if (stringToAdd.length < 2) {
+            throw new DukeException("OOPS!! The description of a " + stringToAdd[0] + " cannot be empty.");
         } else {
             Task task;
             String returnstring = "";
-            for (int i = 1; i < stringtoadd.length; i++) {
-                returnstring = returnstring + stringtoadd[i] + " ";
+            for (int i = 1; i < stringToAdd.length; i++) {
+                returnstring = returnstring + stringToAdd[i] + " ";
             }
-            if (stringtoadd[0].equals("todo")) {
+            if (stringToAdd[0].equals("todo")) {
                 task = new Todo(returnstring);
-            } else if (stringtoadd[0].equals("deadline")) {
+            } else if (stringToAdd[0].equals("deadline")) {
                 task = new Deadline(returnstring);
             } else {
                 task = new Event(returnstring);
             }
-            list.add(task);
+            tasks.add(task);
             System.out.println("Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " + returnstring +
-                    "\nNow you have " + list.size() + " tasks in the list.");
+                    "\nNow you have " + tasks.size() + " tasks in the list.");
         }
+        updateData();
     }
 
     public static void mark(String number) {
         int num = Integer.parseInt(number);
-        list.get(num - 1).setAsDone();
-        Task temp = list.get(num - 1);
-        System.out.println("Nice! :P I've marked this tast as done:\n [" + temp.symbol() + "][" +
+        tasks.get(num - 1).setAsDone();
+        Task temp = tasks.get(num - 1);
+        System.out.println("Nice! :P I've marked this task as done:\n [" + temp.symbol() + "][" +
                 temp.getStatusIcon() + "] " + temp);
+        updateData();
     }
 
     public static void unmark(String number) {
         int num = Integer.parseInt(number);
-        list.get(num - 1).setAsNotDone();
-        Task temp = list.get(num - 1);
+        tasks.get(num - 1).setAsNotDone();
+        Task temp = tasks.get(num - 1);
         System.out.println("OK ._. , I've marked this task as not done yet:\n [" + temp.symbol() + "][" +
                 temp.getStatusIcon() + "] " + temp);
+        updateData();
     }
 
     public static void delete(String number) {
         int num = Integer.parseInt(number);
-        Task temp = list.get(num - 1);
+        Task temp = tasks.get(num - 1);
         System.out.println("Noted. I've removed this task:\n [" + temp.symbol() + "][" +
                 temp.getStatusIcon() + "] " + temp +
-                    "\nNow you have " + (list.size() - 1) + " tasks left in this list");
-        list.remove(num - 1);
+                "\nNow you have " + (tasks.size() - 1) + " tasks left in this list");
+        tasks.remove(num - 1);
+        updateData();
     }
 
+    public static void updateData() {
+        try {
+            FileWriter myObj = new FileWriter("data.txt");
+            myObj.flush();
+            for (int i = 0; i < tasks.size(); i++) {
+                myObj.write(tasks.get(i).symbol() + " | " + tasks.get(i).getStatusIcon() + " | " +
+                        tasks.get(i).toString() + "\n");
+                System.out.println("Written to file");
+            }
+            myObj.close();
+        } catch (IOException e) {
+            System.out.println("File does not exist.");
+        }
+    }
 }

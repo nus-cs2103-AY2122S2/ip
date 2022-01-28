@@ -1,14 +1,7 @@
-public class DukeException {
-
-    String message;
+public class DukeException extends Exception{
 
     DukeException(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return message;
+        super(message);
     }
 
 }
