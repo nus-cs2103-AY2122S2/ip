@@ -1,6 +1,17 @@
 package duke;
 
+/**
+ * Class that parses user input and returns
+ * command type of input
+ */
 public class Parser {
+
+    /**
+     * Reads user input and returns command type detected
+     *
+     * @param input User input text
+     * @return Command type
+     */
     public static Command parse(String input) {
         String commandString = input.split(" ")[0];
 

@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Wrapper class for list of tasks stored in List
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
