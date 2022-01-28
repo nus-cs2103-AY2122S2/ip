@@ -14,11 +14,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private static final String FILEPATH = "data/duke.txt";
     private static final String DIR_PATH = "data/";
 
+    /**
+     * Generate a file at the given directory if it does not exist.
+     * 
+     * @param filePath The file to be created.
+     * @param dirPath The directory where the file should be.
+     * @return The created file.
+     * @throws IOException If an I/O error occurs.
+     */
     private static File createFileIfNotExist(String filePath, String dirPath) throws IOException{
         File dir = new File(dirPath);
         dir.mkdir();
@@ -27,6 +38,12 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Stores the list of tasks in the hard drive.
+     * 
+     * @param taskList The list of tasks to be written.
+     * @throws IOException If an I/O error occurs.
+     */
     public static void updateTaskFile (TaskList taskList) throws IOException {
         String tempFilePath = FILEPATH + ".new";
         File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
@@ -39,6 +56,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads and retrieve the contents of the save file in the hard disk.
+     * 
+     * @return The list of tasks stored in the file.
+     * @throws DukeException If the contents of the file cannot be restored correctly.
+     */
     public static TaskList readSaveFile() throws DukeException{
         TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
