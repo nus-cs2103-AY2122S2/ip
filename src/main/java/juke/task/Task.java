@@ -8,7 +8,6 @@ public abstract class Task {
         this.description = description;
         this.status = juke.task.TaskStatus.NOT_DONE;
     }
-    //test
     
     public void markAsDone() {
         this.status = juke.task.TaskStatus.DONE;

@@ -1,33 +1,46 @@
 package juke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import juke.exception.*;
+import juke.command.Command;
+import juke.command.CommandHandler;
+import juke.common.TaskList;
+import juke.common.Ui;
+import juke.exception.JukeException;
+import juke.exception.JukeInvalidArgumentCountException;
+import juke.exception.JukeInvalidArgumentException;
+import juke.exception.JukeMissingArgumentException;
+import juke.exception.JukeTaskListEmptyException;
+import juke.exception.JukeTaskListFullException;
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
 import juke.task.Todo;
 
+import java.util.ArrayList;
+
 public class Juke {
     private static final Juke INSTANCE = new Juke();
     
-    private final ArrayList<Task> taskList;
+    private Ui ui;
+    private TaskList taskList;
     private final int taskListSize = 100;
     private final FileManager fileManager;
     
     public Juke() {
-        this.taskList = new ArrayList<>(this.taskListSize);
+        this.ui = new Ui();
+        this.taskList = new TaskList();
         this.fileManager = new FileManager();
+        
+        CommandHandler.registerCommands();
     }
     
-    private void run(Scanner input) {
-        this.greet();
+    private void run() {
+        this.ui.greet();
         this.loadFile();
         while (true) {
             PrintHelper.getInstance().printMarker();
             
-            String[] args = input.nextLine().strip().split("\\s+");
+            String[] args = ui.getInput();
+            Command cmd;
             if (args.length > 0) {
                 try {
                     switch (args[0]) {
@@ -62,6 +75,19 @@ public class Juke {
                     case "delete":
                         this.deleteTaskFromTaskList(args);
                         this.saveFile();
+                        break;
+                    case "echo":
+                        String s = "";
+                        if (args.length > 1) {
+                            for (int i = 1; i < args.length; i++) {
+                                s += args[i] + " ";
+                            }
+                            s = s.strip();
+                        }
+                        cmd = CommandHandler.COMMANDS.get("echo").get()
+                                .addParameter("", s)
+                                .execute();
+                        ui.displayResult(cmd.getResult());
                         break;
                     default:
                         this.echo(args);
@@ -99,25 +125,8 @@ public class Juke {
         this.fileManager.write(writeArr);
     }
     
-    private void greet() {
-        String logo = "                                                             _____   \n"
-            + "          _____  ______   _____     ______   _______    _____\\    \\  \n"
-            + "         |\\    \\_\\     \\  \\    \\   |\\     \\  \\      \\  /    / |    | \n"
-            + "         \\ \\     \\\\    |  |    |    \\\\     \\  |     /|/    /  /___/| \n"
-            + "          \\|      ||   |  |    |     \\|     |/     //|    |__ |___|/ \n"
-            + "           |      ||    \\_/   /|      |     |_____// |       \\       \n"
-            + "   ______  |      ||\\         \\|      |     |\\     \\ |     __/ __    \n"
-            + "  /     / /      /|| \\         \\__   /     /|\\|     ||\\    \\  /  \\   \n"
-            + " |      |/______/ | \\ \\_____/\\    \\ /_____/ |/_____/|| \\____\\/    |  \n"
-            + " |\\_____\\      | /   \\ |    |/___/||     | / |    | || |    |____/|  \n"
-            + " | |     |_____|/     \\|____|   | ||_____|/  |____|/  \\|____|   | |  \n"
-            + "  \\|_____|                  |___|/                          |___|/   \n";
-        System.out.println(logo);
-        PrintHelper.getInstance().formattedPrint("Greetings Executor!");
-    }
-    
     private void bye() {
-        PrintHelper.getInstance().formattedPrint("Until we meet again!");
+        ui.formattedPrint("Until we meet again!");
         System.exit(0);
     }
     
@@ -281,11 +290,7 @@ public class Juke {
         }
     }
     
-
-    
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        INSTANCE.run(input);
-        input.close();
+        INSTANCE.run();
     }
 }
