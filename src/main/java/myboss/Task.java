@@ -1,3 +1,5 @@
+package myboss;
+
 public class Task {
     boolean isDone;
     String taskName;

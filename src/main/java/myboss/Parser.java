@@ -1,3 +1,5 @@
+package myboss;
+
 public class Parser {
     public Parser() {
 

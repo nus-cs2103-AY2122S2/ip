@@ -1,18 +1,13 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package myboss;
 
-public class Deadline extends Task {
-    String taskType = "D";
-    LocalDate deadline;
+public class ToDo extends Task {
 
-    public Deadline(String taskName, String deadline) {
-        super(taskName, "D");
-        this.deadline = LocalDate.parse(deadline);
+    public ToDo(String taskName) {
+        super(taskName, "T");
     }
 
-    public Deadline(String taskName, String deadline, boolean isDone) {
-        super(taskName, "D", isDone);
-        this.deadline = LocalDate.parse(deadline);
+    public ToDo(String taskName, boolean isDone) {
+        super(taskName, "T", isDone);
     }
 
     @Override
@@ -34,12 +29,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
-        String deadlineFormatted = deadline.format(formatter);
         return "[" + this.taskType + "]" +
                 "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName +
-                " (by: " + deadlineFormatted + ")" +
-                "\n";
+                this.taskName + "\n";
     }
 }

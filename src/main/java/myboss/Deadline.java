@@ -1,11 +1,20 @@
-public class ToDo extends Task {
+package myboss;
 
-    public ToDo(String taskName) {
-        super(taskName, "T");
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Deadline extends Task {
+    String taskType = "D";
+    LocalDate deadline;
+
+    public Deadline(String taskName, String deadline) {
+        super(taskName, "D");
+        this.deadline = LocalDate.parse(deadline);
     }
 
-    public ToDo(String taskName, boolean isDone) {
-        super(taskName, "T", isDone);
+    public Deadline(String taskName, String deadline, boolean isDone) {
+        super(taskName, "D", isDone);
+        this.deadline = LocalDate.parse(deadline);
     }
 
     @Override
@@ -27,8 +36,12 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
+        String deadlineFormatted = deadline.format(formatter);
         return "[" + this.taskType + "]" +
                 "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName + "\n";
+                this.taskName +
+                " (by: " + deadlineFormatted + ")" +
+                "\n";
     }
 }

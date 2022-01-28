@@ -1,3 +1,5 @@
+package myboss;
+
 import java.time.format.DateTimeParseException;
 
 public class MyBoss {
@@ -67,14 +69,14 @@ public class MyBoss {
                         ui.addTaskOutput(newEvent);
                         break;
                     default:
-                        throw new myBossException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new MyBossException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                 }
             } catch (StringIndexOutOfBoundsException ex) {
                 Ui.myBossOutput(" OOPS!!! Argument after missing /at or /by!!!");
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.myBossOutput(" OOPS!!! I think you're missing some arguments!");
-            } catch (myBossException e) {
+            } catch (MyBossException e) {
                 Ui.myBossOutput(e.getMessage());
             } catch (DateTimeParseException e) {
                 Ui.myBossOutput("Date must be of format yyyy-mm-dd!");
