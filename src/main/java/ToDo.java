@@ -4,6 +4,11 @@ public class ToDo extends Task{
         super(taskName);
     }
 
+    public ToDo(String taskName, String isMarked) {
+        super(taskName);
+        this.isMarked = (isMarked.equals("1"));
+    }
+
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());

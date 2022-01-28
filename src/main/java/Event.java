@@ -1,14 +1,25 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
     protected Date at;
 
-    public Event(String eventName, String at) throws DukeException {
-        super(eventName);
+    public Event(String taskName, String at) throws DukeException {
+        super(taskName);
         try {
             this.at = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(at);
-        } catch (Exception e) {
+        } catch (ParseException e) {
+            throw new DukeException("Please enter the date in \"dd / MM / yyyy HH:mm\" format");
+        }
+    }
+
+    public Event(String taskName, String at, String isMarked) throws DukeException {
+        super(taskName);
+        try {
+            this.at = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(at);
+            this.isMarked = (isMarked.equals("1"));
+        } catch (ParseException e) {
             throw new DukeException("Please enter the date in \"dd / MM / yyyy HH:mm\" format");
         }
     }
