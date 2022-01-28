@@ -12,13 +12,13 @@ public class DeadlineCommand extends Command {
         deadline = new Deadline(description, by);
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(deadline);
         ui.showTaskAdded(deadline);
         ui.showNumberOfTasks(tasks);
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

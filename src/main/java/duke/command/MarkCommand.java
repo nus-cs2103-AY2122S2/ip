@@ -11,12 +11,12 @@ public class MarkCommand extends Command {
         this.index = index;
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.mark(index);
         ui.showMark(tasks.get(index));
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

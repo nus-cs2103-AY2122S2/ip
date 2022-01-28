@@ -12,13 +12,13 @@ public class ToDoCommand extends Command {
         toDo = new ToDo(description);
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(toDo);
         ui.showTaskAdded(toDo);
         ui.showNumberOfTasks(tasks);
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

@@ -11,12 +11,12 @@ public class UnmarkCommand extends Command {
         this.index = index;
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.unmark(index);
         ui.showUnmark(tasks.get(index));
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

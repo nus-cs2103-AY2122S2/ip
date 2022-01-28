@@ -11,12 +11,12 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         ui.showDelete(tasks.delete(index));
         ui.showNumberOfTasks(tasks);
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }
