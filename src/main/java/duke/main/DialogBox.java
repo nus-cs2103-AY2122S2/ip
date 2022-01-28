@@ -1,5 +1,7 @@
 package duke.main;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,8 +18,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
 
 
 /**
@@ -80,15 +80,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-
-//    public static DialogBox getUserDialog(Label l, ImageView iv) {
-//        return new DialogBox(l, iv);
-//    }
-//
-//    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-//        var db = new DialogBox(l, iv);
-//        db.flip();
-//        return db;
-//    }
-
 }

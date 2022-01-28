@@ -26,6 +26,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the scrollPane. This is the main window of the entire application.
+     * It also calls onStartup(), which will show the welcome text.
+     */
     @FXML
     public void initialize() {
         // initalize is called on startup
@@ -33,6 +37,9 @@ public class MainWindow extends AnchorPane {
         this.onStartup();
     }
 
+    /**
+     * Shows welcome text onto the window upon startup
+     */
     public void onStartup() {
         Ui.showWelcome();
         String response = Ui.getDukeResponse();
