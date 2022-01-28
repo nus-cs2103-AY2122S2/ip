@@ -106,25 +106,25 @@ public class Ui {
         out.println(message);
         out.println(ERR_DIVIDER);
         out.print("\n");
-
     }
 
     /**
-     * Prints formatted output for displaying taskList objects in
-     * 1-based index formatting
-     * @param taskList ArrayList object for print out
+     * Formats String representation of Task object(s) in taskList in 1-based index formatting.
+     * @param taskList
+     * @return Formatted String representation of taskList
      */
-    public String displayTaskList(ArrayList<Task> taskList) {
+    public String formatTaskList(ArrayList<Task> taskList) {
         StringBuilder formatString = new StringBuilder();
         int index = 1;
         for (Task item: taskList) {
             formatString.append(formatIndexItem(index, item.toString()));
             index++;
         }
+
+        // If the taskList is empty, return with default message
         if (taskList.size()==0) {
             formatString.append(NO_TASKS);
         }
-
         return formatString.toString();
     }
 

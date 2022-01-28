@@ -142,6 +142,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates FindCommand object by parsing parameters to get keyTerm to search with
+     * @param keyWord first word of input
+     * @param fullInput full input from user
+     * @return FindCommand object
+     */
     private Command prepareFind(String keyWord, String fullInput) {
         final Matcher matcher = FIND_FORMAT.matcher(fullInput.trim());
         if (!matcher.matches()) {
