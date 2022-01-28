@@ -4,6 +4,8 @@ import tasks.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +14,9 @@ public class FilesReader {
         ArrayList<Task> taskList = new ArrayList<Task>();
         try {
             File f = new File("data/heylo.txt");
+
+            Files.createDirectories(Paths.get("data"));
+
             if (!f.createNewFile()) {
                 System.out.println("Loading your tasks list...");
             }
@@ -22,7 +27,7 @@ public class FilesReader {
             return taskList;
         } catch (IOException ioException) {
             System.out.println("An unknown error occurred.");
-            ioException.printStackTrace();
+            System.exit(1);
         }
         return taskList;
     }
