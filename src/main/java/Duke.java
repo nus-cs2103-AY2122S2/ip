@@ -104,6 +104,7 @@ public class Duke {
                     input = input.replaceAll(" by .*", "");
                     Deadline d = new Deadline(input, datetime);
                     tasks.add(d);
+
                     System.out.println("Got it! I have noted down the following task in your list. " +
                             "\nRemember the deadline!");
                     System.out.println(d);
