@@ -2,9 +2,10 @@ package karen;
 
 import karen.command.Command;
 
+/**
+ * App interface for managing between UI, Parser, Storage.
+ */
 public class Karen {
-    public Karen() {}
-
     public static void main(String[] args) {
         Ui ui = new Ui();
         Parser parser = new Parser();

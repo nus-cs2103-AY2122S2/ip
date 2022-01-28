@@ -3,6 +3,9 @@ package karen.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Stores the (/by) date in which the Deadline occurs by
+ */
 public class Deadline extends Task{
     protected LocalDate by;
     public Deadline(String description, String by) {

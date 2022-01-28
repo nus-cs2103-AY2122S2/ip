@@ -4,6 +4,9 @@ import karen.KarenException;
 import karen.Storage;
 import karen.Ui;
 
+/**
+ * To indicate invalid user inputs.
+ */
 public class InvalidCommand extends Command {
     public static final String DEFAULT_MESSAGE = "I don't understand anything - I want to speak with your manager";
     public String message;

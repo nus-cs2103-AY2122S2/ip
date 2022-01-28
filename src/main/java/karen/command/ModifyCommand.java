@@ -5,6 +5,9 @@ import karen.Storage;
 import karen.task.Task;
 import karen.Ui;
 
+/**
+ * To modify Task objects in Storage.
+ */
 public class ModifyCommand extends Command {
     public static final String DONE_FORMAT = "This task is finally done:\n  %s";
     public static final String UNDONE_FORMAT = "This task is now incomplete - unacceptable:\n  %s";
