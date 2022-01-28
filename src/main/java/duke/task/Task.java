@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
 
-    private boolean status;
+    private boolean isComplete;
     private String details;
     private int id;
 
@@ -15,21 +15,21 @@ public class Task {
      */
     public Task(String details) {
         this.details = details;
-        this.status = false;
+        this.isComplete = false;
     }
 
     /**
      * Sets the status of the task to true to mark that it has been completed.
      */
     public void mark() {
-        this.status = true;
+        this.isComplete = true;
     }
 
     /**
      * Sets the status of the task to false to mark that it hass not been completed.
      */
     public void unmark() {
-        this.status = false;
+        this.isComplete = false;
     }
 
     /**
@@ -39,11 +39,19 @@ public class Task {
     @Override
     public String toString() {
         String out = "";
-        if (status) {
+        if (isComplete) {
             out = " | 1 | " + details;
         } else {
             out = " | 0 | " + details;
         }
         return out;
+    }
+
+    /**
+     * Returns the details of the task, including its description and date where possible.
+     * @return a string composing the details.
+     */
+    public String getDetails() {
+        return this.details;
     }
 }
