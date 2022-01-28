@@ -17,7 +17,7 @@ public class AddCommandsTest {
         TASKLIST.deleteAllTasks();
         AddCommands command = new AddCommands("todo me", TASKLIST);
         command.execute();
-        assertTrue(TASKLIST.get(1) instanceof TodoTask);
+        assertTrue(TASKLIST.get(0) instanceof TodoTask);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class AddCommandsTest {
         TASKLIST.deleteAllTasks();
         AddCommands command = new AddCommands("deadline eat some pizza /by 10/10/2010 1000", TASKLIST);
         command.execute();
-        assertTrue(TASKLIST.get(1) instanceof DeadlineTask);
+        assertTrue(TASKLIST.get(0) instanceof DeadlineTask);
     }
 
 
@@ -36,7 +36,7 @@ public class AddCommandsTest {
         TASKLIST.deleteAllTasks();
         AddCommands command = new AddCommands("event Spiderman No Way Home /at 01/01/2022 2359", TASKLIST);
         command.execute();
-        assertTrue(TASKLIST.get(1) instanceof EventTask);
+        assertTrue(TASKLIST.get(0) instanceof EventTask);
     }
 
 
