@@ -2,14 +2,18 @@ package duke;
 
 import duke.exception.ListException;
 import duke.task.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+
 
 /**
  * This class encapsulates a list of Tasks input from the user which is stored in an Array List.
  */
 public class List {
-    private ArrayList<Task> arrayList;//Array List to store the tasks.
+
+    private ArrayList<Task> arrayList;
 
     public List() {
         this.arrayList = new ArrayList<>();
@@ -21,6 +25,7 @@ public class List {
 
     /**
      * This method returns the arraylist of Tasks.
+     *
      * @return returns arraylist of Tasks.
      */
     public ArrayList<Task> getArrayList() {
@@ -29,6 +34,7 @@ public class List {
 
     /**
      * This method marks a task at a specific index in the list as done.
+     *
      * @param index index of the task to be marked done in the array list of list
      */
     public void markDone(int index) {
@@ -38,6 +44,7 @@ public class List {
 
     /**
      * This method marks a task at a specific index in the list as not done.
+     *
      * @param index index of the task to be marked as not done in the array list of list.
      */
     public void unmarkDone(int index) {
@@ -46,10 +53,11 @@ public class List {
     }
 
     /**
-     *This method adds a todo task, deadline task or event task to the list.
-     * @param taskType Enum Tasks
+     * This method adds a todo task, deadline task or event task to the list.
+     *
+     * @param taskType    Enum Tasks
      * @param description Description of task
-     * @param timing date/time for Deadline and event task
+     * @param timing      date/time for Deadline and event task
      */
     public void add(Tasks taskType, String description, String timing) {
         switch (taskType) {
@@ -71,14 +79,15 @@ public class List {
 
     /**
      * This method deletes a task from the list.
+     *
      * @param index index of the task in the list.
      * @return returns the task deleted
      * @throws ListException catches an exception when the index is out of bound.
      */
-    public Task delete(int index) throws ListException{
+    public Task delete(int index) throws ListException {
         if (index < 1 || index > arrayList.size()) {
-            throw new ListException("Sorry. The task you indicated cannot be found.\n" +
-                                    "Please enter a new task.");
+            throw new ListException("Sorry. The task you indicated cannot be found.\n"
+                    + "Please enter a new task.");
         } else {
             return arrayList.remove(index - 1);
         }
@@ -89,7 +98,6 @@ public class List {
     }
 
     /**
-     *
      * @return Returns a string which displays the list of tasks in order of them being added.
      */
     @Override

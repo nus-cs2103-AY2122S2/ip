@@ -1,9 +1,10 @@
-import duke.Storage;
 import duke.List;
-import duke.Ui;
-import duke.command.*;
 import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import duke.command.Command;
 import duke.exception.DukeException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -13,7 +14,7 @@ public class Duke {
     private List tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws FileNotFoundException{
+    public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new List(storage.load());
@@ -37,6 +38,7 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("data/duke.txt");
         duke.run();

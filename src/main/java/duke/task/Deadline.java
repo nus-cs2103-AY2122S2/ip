@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * This class encapsulates a Deadline task which inherits from Task.
  */
 public class Deadline extends Task {
-    private LocalDateTime by; //date/time that the task needs to be done by.
+
+    private LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);

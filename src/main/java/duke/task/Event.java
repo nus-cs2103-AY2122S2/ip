@@ -4,7 +4,7 @@ package duke.task;
  * This class encapsulates an Event task which inherits from Task.
  */
 public class Event extends Task {
-    private String at; //date/time of the event.
+    private String at;
 
     public Event(String description, String at) {
         super(description);

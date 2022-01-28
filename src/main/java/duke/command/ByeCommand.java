@@ -5,6 +5,7 @@ import duke.Storage;
 import duke.Ui;
 
 public class ByeCommand extends Command {
+
     public ByeCommand() {
         super(true);
     }

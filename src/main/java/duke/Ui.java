@@ -1,9 +1,11 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
+
     private Scanner sc;
 
     public Ui() {
@@ -42,7 +44,7 @@ public class Ui {
 
     public void printDeletedTask(List taskList, Task task) {
         System.out.println("Roger. I've deleted this task:\n  "
-                +  task.toString() + "\n"
+                + task.toString() + "\n"
                 + "Now you have "
                 + taskList.getArrayList().size()
                 + " tasks in the list");
