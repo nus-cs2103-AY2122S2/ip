@@ -16,4 +16,9 @@ public class Deadlines extends Task{
             return "[D][ ] " + s + " (by: " + time + ")";
         }
     }
+
+    @Override
+    public String storeFormat(){
+        return "D|" + super.done + "|" + super.s + "|" + this.time + "\n";
+    }
 }
