@@ -1,12 +1,14 @@
+import java.time.LocalDate;
+
 public class TaskDeadlines extends Task {
-    String doneBy;
+    LocalDate doneBy;
 
     /**
      * Constructor
      */
     public TaskDeadlines(boolean isDone, String name, String doneBy) {
         super(isDone, name);
-        this.doneBy = doneBy;
+        this.doneBy = LocalDate.parse(doneBy);
     }
 
     /**
@@ -14,6 +16,6 @@ public class TaskDeadlines extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", isDone ? "X" : " ", name, doneBy);
+        return String.format("[D][%s] %s (by: %s)", isDone ? "X" : " ", name, doneBy.toString());
     }
 }

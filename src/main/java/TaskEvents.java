@@ -1,12 +1,14 @@
+import java.time.LocalDate;
+
 public class TaskEvents extends Task {
-    String startAt;
+    LocalDate startAt;
 
     /**
      * Constructor
      */
     public TaskEvents(boolean isDone, String name, String startAt) {
         super(isDone, name);
-        this.startAt = startAt;
+        this.startAt = LocalDate.parse(startAt);
     }
 
     /**
