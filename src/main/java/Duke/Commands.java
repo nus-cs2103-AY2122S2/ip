@@ -1,7 +1,7 @@
-import Exceptions.EmptyMessageException;
-import Exceptions.WrongDateFormatException;
+package Duke;
 
-import java.util.List;
+import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.WrongDateFormatException;
 
 public class Commands {
 

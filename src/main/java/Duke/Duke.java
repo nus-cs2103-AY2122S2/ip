@@ -1,6 +1,8 @@
-import Exceptions.EmptyMessageException;
-import Exceptions.WrongCommandException;
-import Exceptions.WrongDateFormatException;
+package Duke;
+
+import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.WrongCommandException;
+import Duke.Exceptions.WrongDateFormatException;
 
 import java.io.IOException;
 import java.util.Scanner;
