@@ -32,7 +32,7 @@ public class AddCommand extends Command {
 		tasks.add(task);
 		ui.showLine();
 		System.out.println("\t Got it. I've added this task:");
-		System.out.println("\t\t " + task.track() + task.getStatus() + " " + task.getName());
+		System.out.println("\t\t " + task.track() + task.getStatus() + " " + task.toString());
 		System.out.println("\t Now you have " + (tasks.getCount()) + " tasks in the list.");
 		ui.showLine();
 	}
