@@ -23,11 +23,21 @@ public class DeadlineTask extends Task {
         this.date = date;
     }
 
+    /**
+     * Generates a formatted string to be written to a .txt save file.
+     *
+     * @return a formatted string that can be read to restore the task
+     */
     @Override
     public String generateTaskSaveData() {
         return "D|" + (isDone ? "1" : "0") + "|" + name + "|" + formatter.format(date);
     }
 
+    /**
+     * Generates a formatted string to display the state and type of task.
+     *
+     * @return a formatted string to be displayed for user
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formatter.format(date) + ")";

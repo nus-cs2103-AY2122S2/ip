@@ -2,12 +2,23 @@ package stevie;
 
 import java.util.Scanner;
 
+/**
+ * This class interacts with the user by receiving inputs from the user, as well as, returning the
+ * response to the user.
+ */
 public class StevieUi {
     private Scanner sc;
 
     public StevieUi() {
         sc = new Scanner(System.in);
     }
+
+    /**
+     * Receives a non-empty user input. If user's input is "help", output a message to inform
+     * user on the commands to properly operate Stevie.
+     *
+     * @return user's input
+     */
     public String getUserInput() {
         String userIn = "";
         while ((userIn = sc.nextLine()).length() == 0 || userIn.equals("help")) {
@@ -16,6 +27,9 @@ public class StevieUi {
         return userIn;
     }
 
+    /**
+     * Close the scanner object.
+     */
     public void terminate() {
         sc.close();
     }
@@ -32,12 +46,20 @@ public class StevieUi {
                 "Date should in format of dd/mm/yyyy HH:mm";
     }
 
+    /**
+     * Prints the response string from Stevie.
+     *
+     * @param text response from Stevie
+     */
     public void outputMessage(String text) {
         System.out.println("____________________________");
         System.out.println(text);
         System.out.println("____________________________");
     }
 
+    /**
+     * Greets the user when Stevie starts.
+     */
     public void greet() {
         // Logo generated from:
         // https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20

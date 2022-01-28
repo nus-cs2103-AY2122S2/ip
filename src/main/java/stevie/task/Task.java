@@ -12,9 +12,17 @@ public abstract class Task {
     /** Status of the task */
     protected boolean isDone;
 
+    /**
+     * A formatter to format Date object into a readable string.
+     */
     protected static SimpleDateFormat formatter
             = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
+    /**
+     * Constructor for a Task.
+     *
+     * @param name the name of the task
+     */
     public Task(String name) {
         this.name = name;
     }
@@ -44,5 +52,11 @@ public abstract class Task {
         return status + this.name;
     }
 
+    /**
+     * Generates a formatted string to be written to a .txt save file. Must be overridden by
+     * classes that extends Task.
+     *
+     * @return a formatted string that can be read to restore the task
+     */
     public abstract String generateTaskSaveData();
 }
