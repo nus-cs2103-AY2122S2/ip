@@ -1,3 +1,6 @@
+package duke;
+
+
 /**
  * The UI class contains methods that deals with interactions with the user.
  */

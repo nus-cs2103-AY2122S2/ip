@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 //class to read file and process file into a string format
