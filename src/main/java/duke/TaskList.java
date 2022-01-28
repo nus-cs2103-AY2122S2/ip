@@ -48,6 +48,26 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Finds the list of tasks that contains the given keyword and lists them out.
+     * 
+     * @param searchText The keyword to search for.
+     * @return A list of tasks
+     */
+    public String find(String searchText) {
+        TaskList matchedTasks = new TaskList();
+        
+        for(Task task : tasks) {
+            if (task.toFileFormat().contains(searchText)) {
+                matchedTasks.addTask(task);
+            }
+        }
+
+        String message = "Here are the matching tasks in your list:\n";
+
+        return Ui.mergeMessages(message, matchedTasks.listItems());
+    }
+
     public String listItems() {
         StringBuilder sb = new StringBuilder();
         if (tasks.isEmpty()) {
