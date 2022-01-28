@@ -12,6 +12,15 @@ import java.time.LocalDate;
 public class Parser {
 
 
+    /**
+     * Parse all given String input to determine respective corresponding commands that the user is calling
+     * @param input String user input command
+     * @return Command corresponding to user input
+     * @throws IOException
+     * @throws DukeException
+     * @throws DukeDeadlineException
+     * @throws DukeEventException
+     */
     public static Command parse(String input) throws IOException, DukeException, DukeDeadlineException, DukeEventException {
         String[] words = input.split(" ", 2);
         if (words[0].equals("bye")) {

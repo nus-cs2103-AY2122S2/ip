@@ -122,6 +122,11 @@ public class Storage {
         return all;
     }
 
+    /**
+     * Iterate through input TaskList and update storage file
+     * @param tasklist TaskList is an ArrayList of Task
+     * @throws IOException
+     */
     public void writeToFile(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter(file);
         ArrayList<Task> all = tasklist.getAllTasks();
