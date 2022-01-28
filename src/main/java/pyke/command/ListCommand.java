@@ -6,7 +6,7 @@ import pyke.util.TaskList;
 
 public class ListCommand extends Command{
     /**
-     * Execute a command that will print the list of tasks. It will specify if the list is empty
+     * c
      *
      * @param taskList the class store the tasks info
      * @param ui the interface for output information
