@@ -17,14 +17,25 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
+/**
+ * This class abstracts the load and store operations onto the disk.
+ */
 public class Storage {
 
-    private String filepath;
+    private final String filepath;
 
+    /**
+     * A constructor for the Storage class.
+     * @param filepath the relative filepath to store and load tasks from.
+     */
     public Storage(String filepath){
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the tasks from disk.
+     * @return ArrayList <Tasks> which contain the tasks that have been saved onto the disk.
+     */
     public ArrayList<Task> load() {
         File saveFile = new File(this.filepath);
         saveFile.getParentFile().mkdirs();
@@ -53,6 +64,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Adds a new task onto storage.
+     * @param addedTask the task to be added onto storage.
+     */
     public void saveAddedTask(Task addedTask) {
         try {
             FileWriter fw = new FileWriter(this.filepath, true);
@@ -63,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Replaces a task in storage with the given task.
+     * @param index the index of the stored task to be replaced.
+     * @param updatedTask the updated task.
+     */
     public void saveUpdatedTask(int index, Task updatedTask) {
         String tempFilePath = "data/temp.txt";
         File tempFile = new File(tempFilePath);

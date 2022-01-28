@@ -23,8 +23,12 @@ import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.command.DeleteCommand;
 
+/**
+ * This class parses the user input into commands and also parses the saved task list on disk into tasks.
+ */
 public class Parser {
 
+    // Global constant commands.
     private static final SimpleDateFormat taskFormat = new SimpleDateFormat("MMM dd yyyy");
     private static final SimpleDateFormat savedFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -32,9 +36,16 @@ public class Parser {
     private static final Command LIST = new ListCommand();
     private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
 
-    public Parser() {
-    }
+    /**
+     * Constructor for a parser.
+     */
+    public Parser() {}
 
+    /**
+     * Parses a saved task on disk into a task.
+     * @param savedTask the saved task.
+     * @return the parsed task.
+     */
     public static Task parseFile(String savedTask) {
 
         String[] splitStr = savedTask.split("\\|");
@@ -64,10 +75,17 @@ public class Parser {
             break;
         default:
         }
+
         parsedTask.setStatus(status);
         return parsedTask;
     }
 
+    /**
+     * Parses user input into a command.
+     * @param command the user input.
+     * @return a command that can be executed.
+     * @throws DukeException if the user input is invalid.
+     */
     public Command parseCommand(String command) throws DukeException {
         String[] splitStr = command.split(" ", 2);
         Command parsed;
