@@ -1,6 +1,8 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
@@ -97,4 +99,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task with partial-match to taskName in task list.
+     * @param taskName the task to find in task list.
+     */
+    public void find(String taskName) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        Iterator<Task> iter = taskList.iterator();
+
+        if (taskName.trim().equals("")) {
+            System.out.println("No matching tasks were found in your list.");
+            return;
+        }
+
+        while (iter.hasNext()) {
+            Task currentTask = iter.next();
+            if (currentTask.getActivity().contains(taskName)) {
+                foundTasks.add(currentTask);
+            }
+        }
+
+        if (foundTasks.size() > 0) {
+            System.out.println("Here are the marching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                int num = i + 1;
+                System.out.print(num + ". ");
+                System.out.println(foundTasks.get(i).printTask());
+            }
+        } else {
+            System.out.println("No matching tasks were found in your list.");
+        }
+    }
 }

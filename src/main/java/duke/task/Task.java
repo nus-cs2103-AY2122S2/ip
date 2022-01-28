@@ -30,6 +30,14 @@ public abstract class Task {
     }
 
     /**
+     * Getter for activity of the task.
+     * @return the activity of the task.
+     */
+    public String getActivity() {
+        return this.activity;
+    }
+
+    /**
      * Formats the task into a string for the user to read.
      * @return the string to be printed.
      */

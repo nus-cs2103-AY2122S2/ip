@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import java.time.format.DateTimeParseException;
 
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandFormatException;
 import duke.exception.InvalidDateException;
@@ -34,7 +35,7 @@ public class Parser {
 
     private static final Command EXIT_COMMAND = new ExitCommand();
     private static final Command LIST = new ListCommand();
-    private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
+    private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Task.\nValid tasks are: \"todo\", \"deadline\", \"event\" and \"find\"");
 
     /**
      * Constructor for a parser.
@@ -148,6 +149,14 @@ public class Parser {
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new InvalidCommandFormatException("Command delete has invalid syntax -e.g., delete [index], where " +
                         "index is an integer");
+            }
+            break;
+        case "find":
+            try {
+                String findTask = splitStr[1];
+                parsed = new FindCommand(findTask);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidCommandFormatException("Command find has invalid syntax -e.g., find [task]");
             }
             break;
         default:
