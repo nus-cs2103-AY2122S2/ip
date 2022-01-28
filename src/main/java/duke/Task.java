@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    boolean done;
+    boolean isDone;
     protected final String task;
     protected final String type;
     protected final String time;
@@ -12,7 +12,7 @@ public class Task {
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     Task(String task, String type) {
-        this.done = false;
+        this.isDone = false;
         this.task = task;
         this.type = type;
         this.date = LocalDate.now();
@@ -20,7 +20,7 @@ public class Task {
     }
 
     Task(String task, String type, String time) {
-        this.done = false;
+        this.isDone = false;
         this.task = task;
         this.type = type;
         this.time = time;
@@ -29,7 +29,7 @@ public class Task {
     }
 
     void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     LocalDate getDate() {
@@ -37,11 +37,11 @@ public class Task {
     }
 
     void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     String saveFormat() {
-        if (this.done) {
+        if (this.isDone) {
             return this.type + " ### 1 ### " + this.task;
         } else {
             return this.type + " ### 0 ### " + this.task;
@@ -51,7 +51,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[" + this.type + "] [X] " + this.task;
         } else {
             return "[" + this.type + "] [ ] " + this.task;

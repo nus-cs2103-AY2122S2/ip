@@ -3,15 +3,28 @@ package duke;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage class is used for storing data and loading data
+ */
 public class Storage {
     private final String filePath;
     private ArrayList<Task> list;
 
+    /**
+     * Constructor of Storage
+     * @param filePath the filepath used to store data and load data
+     */
     Storage(String filePath) {
         this.filePath = filePath;
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Load all data in the filepath
+     * Return a list containing all task saved in the filepath
+     * @return ArrayList contains all tasks saved in the filepath
+     * @throws DukeException If there is error when reading data
+     */
     ArrayList<Task> load() throws DukeException {
         try {
             FileReader reader = new FileReader(filePath);
@@ -50,6 +63,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Save all tasks in the list to the filepath
+     * @param saveList the list to be save
+     */
     void save(ArrayList<Task> saveList) {
         try {
             FileWriter writer = new FileWriter(filePath);

@@ -4,19 +4,37 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represent a chatbot called BH
+ * It is able to read input and proceed with different kind of task and save all the tasks
+ */
 public class BH {
     private ArrayList<Task> list;
     private Storage storage;
     private Scanner sc = new Scanner(System.in);
     private Ui ui;
     private static String filePath = "/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
-    
+
+    /**
+     * constructor of BH
+     * @throws DukeException if the filepath is invalid
+     */
     public BH() throws DukeException {
         this.storage = new Storage(filePath);
         this.list = this.storage.load();
         this.ui = new Ui();
     }
 
+    /**
+     * continue reading input until a bye is detected
+     * if input starts with list, print out all tasks in the list
+     * if input starts with mark, mark the task as done
+     * if input starts with unmark, unmark the task as not done
+     * if input starts with todo, deadline or event, create a corresponding task and add to list
+     * if input starts with delete, delete the corresponding task
+     * if input starts with check, check all the task on the same date
+     * @throws DukeException if wrong input is detected
+     */
     public void run() throws DukeException {
         this.ui.greet();
         try {
@@ -81,6 +99,11 @@ public class BH {
         }
     }
 
+    /**
+     * check all task in the list and print out all having same date as the input
+     *
+     * @param date the date to check
+     */
     void checkDate(LocalDate date) {
         System.out.println(ui.getLine());
         for (int i = 0; i < this.getListSize(); i++) {
@@ -92,17 +115,17 @@ public class BH {
         System.out.println(ui.getLine());
     }
 
-    void addToList(Task task) {
+    private void addToList(Task task) {
         this.list.add(task);
     }
 
-    Task deleteTask(int index) {
+    private Task deleteTask(int index) {
         Task task =  this.list.get(index);
         this.list.remove(index);
         return task;
     }
 
-    String getList() {
+    private String getList() {
         String s = "";
         for (int i = 0; i < this.list.size(); i++) {
             s = s + (i + 1) + ". " + list.get(i) + "\n";
@@ -110,16 +133,21 @@ public class BH {
         return s;
     }
 
+    /**
+     * Returns number of task in the list
+     *
+     * @return numer of task in the list
+     */
     int getListSize() {
         return this.list.size();
     }
 
-    String mark(int index) {
+    private String mark(int index) {
         this.list.get(index).mark();
         return this.list.get(index).toString();
     }
 
-    String unMark(int index) {
+    private String unMark(int index) {
         this.list.get(index).unmark();
         return this.list.get(index).toString();
     }
