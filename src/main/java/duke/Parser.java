@@ -90,6 +90,17 @@ public class Parser {
                     return pa;
                 }
 
+            case "find":
+                try {
+                    ParsedAnswer pa = new ParsedAnswer("find", -1);
+                    pa.setDesc(parsedString[1]);
+                    return pa;
+                } catch (Exception e) {
+                    ParsedAnswer pa = new ParsedAnswer("error", -1);
+                    pa.setDesc("Please specify what you're searching for.");
+                    return pa;
+                }
+
             default:
                 ParsedAnswer pa = new ParsedAnswer("error", - 1);
                 pa.setDesc("Sorry, but I have no idea what you mean.");
