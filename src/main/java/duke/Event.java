@@ -13,15 +13,15 @@ public class Event extends Task {
     }
 
     public static Event setEvent(String input) throws IOException {
-        String eventname;
-        String eventat;
+        String eventName;
+        String eventAt;
 
 
         try {
             String[] split = input.split(" /at ");
-            eventname = split[0];
-            eventat = split[1];
-            Event e = new Event(eventname, eventat);
+            eventName = split[0];
+            eventAt = split[1];
+            Event e = new Event(eventName, eventAt);
             return e;
         } catch (Exception e) {
             DukeEventException error = new DukeEventException(
