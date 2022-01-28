@@ -47,4 +47,12 @@ list
 delete 1
 list
 delete 1
+todo buy some groceries
+event dinner date /at Fri 7pm
+deadline buy equipment /by 2022-02-01
+mark 3
+find buy
+find
+find dinner
+find hello
 bye

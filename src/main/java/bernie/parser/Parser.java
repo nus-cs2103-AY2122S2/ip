@@ -43,6 +43,8 @@ public class Parser {
             return Type.EMPTY;
         } else if (isType(Type.DELETE, input)) {
             return Type.DELETE;
+        } else if (isType(Type.FIND, input)) {
+            return Type.FIND;
         } else {
             return Type.ADD;
         }
@@ -74,6 +76,7 @@ public class Parser {
      * For "event": an array of 2: [description, at]
      * For "mark": an array of 2: [action, taskNum]
      * For "delete": an array of 1: [taskNum]
+     * For "find": an array of 1: [description]
      */
     public String[] getParams(Type taskType, String input) throws InvalidArgumentException {
         String description;
@@ -82,19 +85,19 @@ public class Parser {
         case TODO:
             parsedArr = input.split("todo ");
             description = getDescription(parsedArr, Type.TODO);
-            parsedArr = new String[]{description};
+            parsedArr = new String[]{ description };
             break;
         case DEADLINE:
             parsedArr = input.split(" /by ");
             description = getDescription(parsedArr, Type.DEADLINE);
             String by = getTime(parsedArr, Type.DEADLINE);
-            parsedArr = new String[]{description, by};
+            parsedArr = new String[]{ description, by };
             break;
         case EVENT:
             parsedArr = input.split(" /at ");
             description = getDescription(parsedArr, Type.EVENT);
             String at = getTime(parsedArr, Type.EVENT);
-            parsedArr = new String[]{description, at};
+            parsedArr = new String[]{ description, at };
             break;
         case MARK:
             parsedArr = input.split(" ");
@@ -105,7 +108,12 @@ public class Parser {
         case DELETE:
             parsedArr = input.split(" ");
             checkMarkOrDeleteInput(parsedArr, Type.DELETE);
-            parsedArr = new String[]{parsedArr[1]};
+            parsedArr = new String[]{ parsedArr[1] };
+            break;
+        case FIND:
+            parsedArr = input.split("find ");
+            description = getDescription(parsedArr, Type.FIND);
+            parsedArr = new String[]{ description };
             break;
         default:
             break;
@@ -163,7 +171,7 @@ public class Parser {
     String getDescription(String[] parsedArr, Type taskType) throws InvalidArgumentException {
         String description;
         try {
-            if (taskType.equals(Type.TODO)) {
+            if (taskType.equals(Type.TODO) || taskType.equals(Type.FIND)) {
                 description = parsedArr[1];
             } else {
                 // can take note of lowercase/uppercase
