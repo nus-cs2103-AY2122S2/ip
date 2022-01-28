@@ -80,7 +80,7 @@ public class Level5 {
                     break;
                 }
             } else {
-                //do nothing
+                System.out.println(line + "     Please enter a valid task type with description.       \n" + line);
             }
         }
     }
