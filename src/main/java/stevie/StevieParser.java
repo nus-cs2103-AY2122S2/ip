@@ -10,7 +10,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+/**
+ * StevieParser parses user's input to creates a Command. Command is used to alter the user's task list.
+ */
 public class StevieParser {
+    /**
+     * Parses a user's input to produce a command. A valid command is only produced if user's
+     * input is complete. If not, an exception is thrown to inform user of missing information.
+     *
+     * @param userIn user's input
+     * @return a command if a valid input is given
+     * @throws StevieException if user's input is invalid or incomplete
+     */
     public static Command parse(String userIn) throws StevieException {
         if (userIn.equals("bye")) {
             return new ExitCommand();
@@ -31,6 +42,15 @@ public class StevieParser {
         return parseAddTask(userIn);
     }
 
+    /**
+     * Parses a user's input to produce an AddCommand. A valid add command is only produced if user's
+     * input contains the appropriate fields for the task. If not, an exception is thrown to inform
+     * user of missing information.
+     *
+     * @param userIn user's input
+     * @return an AddCommand if a valid input is given
+     * @throws StevieException if user's input is invalid or incomplete
+     */
     private static Command parseAddTask(String userIn) throws StevieException {
         if (Pattern.matches("^todo\\s(.*?)", userIn)) {
             String s = userIn.replace("todo ", "").trim();
