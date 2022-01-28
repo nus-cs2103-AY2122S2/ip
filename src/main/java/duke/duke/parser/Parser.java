@@ -17,6 +17,14 @@ public class Parser {
 
     Parser() {}
 
+    /**
+     * Returns a command as specified by the specified input fullCommand. This command
+     * takes in a string line from I/O and converts it into a command depending on the
+     * leading identifier keyword.
+     * @param fullCommand - string command to be parsed
+     * @return - Command from specified fullCommand
+     * @throws InvalidCommandException - if the String cannot be parsed into a Command
+     */
     public static Command parse(String fullCommand) throws InvalidCommandException {
         String[] splitCommand = fullCommand.split(" ", 2); // splits the first word from the command
         String command = splitCommand[0];

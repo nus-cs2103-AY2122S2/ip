@@ -16,11 +16,24 @@ public class Storage {
     private final File file;
     private final String filePath;
 
+    /**
+     * Constructs a Storage object using the save file as specified
+     * by filePath. If no previous file exists, a new file will be created
+     * at the file location.
+     * @param filePath - the path to the file with the previous save
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the Task from the specified fileEntry. This method converts
+     * a fileEntry in the save file into a Task that can be used by Duke
+     * @param fileEntry - the file entry with the saved task
+     * @return - Task represented by the file entry
+     * @throws DukeException - if there was an error with parsing the task
+     */
     Task parseTask(String fileEntry) throws DukeException {
         String[] splitEntry = fileEntry.split("\\|");
         String type = splitEntry[0];
@@ -41,6 +54,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList of tasks that is loaded from the File object.
+     * This method reads the File from the File attribute and parses each
+     * task using the parseTask() method. The parsed Task is added into an
+     * ArrayList and returned by the method.
+     * @return - an ArrayList of Tasks from the save file
+     * @throws NoPreviousSaveException - if there is no previous save file
+     */
     public ArrayList<Task> load() throws NoPreviousSaveException {
         try {
             Scanner scanner = new Scanner(this.file);
@@ -56,10 +77,16 @@ public class Storage {
         }
     }
 
-    public void save(Calendar toSave) throws IOException {
+    /**
+     * Saves a file to persistent memory. Saves the specified calendar
+     * to the File as specified by the filePath in the constructor
+     * @param calendar - the Calendar to be saved to a file
+     * @throws IOException - if there was an error saving file using I/O
+     */
+    public void save(Calendar calendar) throws IOException {
         System.out.println("Saving");
         FileWriter fw = new FileWriter(filePath);
-        fw.write(toSave.saveFormat());
+        fw.write(calendar.saveFormat());
         fw.close();
     }
 }
