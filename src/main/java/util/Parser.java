@@ -8,6 +8,11 @@ public class Parser {
         this.item = "";
     }
 
+    /**
+     * Parse the input into command and details of the command
+     * @param inp input to be parsed
+     */
+
 
     public void parse(String inp) {
         String[] strarr = inp.split(" ");
@@ -24,10 +29,20 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * @return the parsed command
+     */
+
 
     public String getTask() {
         return this.task;
     }
+
+    /**
+     * @return the parsed description of the command
+     *
+     */
 
     public String getItem() {
         return this.item;

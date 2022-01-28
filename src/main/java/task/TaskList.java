@@ -31,6 +31,11 @@ public class TaskList {
         list.remove(index);
     }
 
+    /**
+     * creates command message to inform the user that item has been deleted
+     * @param item index of the item in the list to be deleted
+     */
+
     public void deleteItem(String item) {
         try {
             int index = Integer.parseInt(item);
@@ -41,6 +46,13 @@ public class TaskList {
             ui.reply("You can't do that! It's not on the list!");
         }
     }
+
+    /**
+     * removes the task from the list
+     * @param task task to be removed
+     * @param total total number of tasks after removing this task from the list
+     * @return String message to tell the user that item has been deleted
+     */
 
     public String removeTask(Task task, int total) {
         String tab = "    ";
@@ -56,6 +68,13 @@ public class TaskList {
         return firstLine + secondLine + thirdLine;
 
     }
+
+    /**
+     * adds the task to the list
+     * @param task task to be added
+     * @param total total number of tasks after adding this task to the list
+     * @return
+     */
 
     public String addTask(Task task, int total) {
         String tab = "    ";
