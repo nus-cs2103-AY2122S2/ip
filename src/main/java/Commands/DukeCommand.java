@@ -9,10 +9,10 @@ import util.Ui;
 import java.io.IOException;
 
 public class DukeCommand {
-    public String description;
+    public String commandBody;
 
     public DukeCommand(String description) {
-        this.description = description;
+        this.commandBody = description;
     }
 
     public boolean isExit() {
