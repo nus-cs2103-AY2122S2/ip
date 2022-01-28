@@ -18,4 +18,9 @@ public class MarkCommand extends Command {
             t.mark();
             ui.respond("Nice! I've marked this task as done:\n  " + t);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof MarkCommand && ((MarkCommand) o).i == this.i;
+    }
 }

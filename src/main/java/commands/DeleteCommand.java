@@ -14,9 +14,14 @@ public class DeleteCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
 
-            Task t = tasks.get(i);
-            tasks.remove(t);
-            ui.respond( "Noted. I've removed this task: \n  " +
-                    t + "\n     Now you have " + tasks.size() + " tasks in the list.");
-        }
+        Task t = tasks.get(i);
+        tasks.remove(t);
+        ui.respond("Noted. I've removed this task: \n  " +
+                t + "\n     Now you have " + tasks.size() + " tasks in the list.");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof DeleteCommand && ((DeleteCommand) o).i == this.i;
+    }
+}

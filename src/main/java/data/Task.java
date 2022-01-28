@@ -112,6 +112,11 @@ public class Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        return o instanceof Task && o.toString().equals(this.toString());
+    }
+
+    @Override
     public String toString() {
         return "[" + type + "][" + (marked? "X" : " ") + "] " + name + time;
     }

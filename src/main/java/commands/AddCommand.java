@@ -22,4 +22,9 @@ public class AddCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof AddCommand && ((AddCommand) o).t.equals(this.t);
+    }
+
 }

@@ -14,4 +14,9 @@ public class PrintCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.respond(text);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof PrintCommand && ((PrintCommand) o).text.equals(this.text);
+    }
 }

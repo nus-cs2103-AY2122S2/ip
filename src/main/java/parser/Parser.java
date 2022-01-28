@@ -37,10 +37,10 @@ public class Parser {
                 Task t;
                 if (input.startsWith("todo ")) t = new Task(input.split(" ", 2)[1], Type.TODO);
                 else if (input.startsWith("event ")) {
-                    t = new Task(input.split("/")[0].split(" ", 2)[1], Type.EVENT);
+                    t = new Task(input.split(" /")[0].split(" ", 2)[1], Type.EVENT);
                     t.setTime(input.split("/at ", 2)[1]);
                 } else if (input.startsWith("deadline ")) {
-                    t = new Task(input.split("/")[0].split(" ", 2)[1], Type.DEADLINE);
+                    t = new Task(input.split(" /")[0].split(" ", 2)[1], Type.DEADLINE);
                     t.setTime(input.split("/by ", 2)[1]);
                 } else {
                     throw new NoGoodException("");
