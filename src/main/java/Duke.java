@@ -1,4 +1,6 @@
-import java.util.*;  
+import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) throws DukeException{
@@ -61,8 +63,11 @@ public class Duke {
                     try {
                         int indexOfTime = input.indexOf(deadlineCondition); //to find /
                         String dateTime = input.substring(indexOfTime + deadlineCondition.length(), input.length()); // the date and time for by
+                        //convert to the correct one
+                        LocalDateTime deadlineTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/M/y Hmm"));
+                        String convertedTime = deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
                         String stringSliced = input.substring(9, indexOfTime); // after deadline
-                        Deadline deadlineTask = new Deadline(stringSliced, dateTime);
+                        Deadline deadlineTask = new Deadline(stringSliced, convertedTime);
                         taskArray.add(deadlineTask);
                         String noOfTask = String.valueOf(taskArray.size());
                         System.out.println(messageTask + deadlineTask.toString() + "\n"
@@ -77,8 +82,11 @@ public class Duke {
                     try {
                         int indexOfTime = input.indexOf(eventCondition); //to find /
                         String dateTime = input.substring(indexOfTime + eventCondition.length(), input.length()); // the date and time for by
+                        //convert to the correct one
+                        LocalDateTime eventTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/M/y Hmm"));
+                        String convertedTime = eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
                         String stringSliced = input.substring(6, indexOfTime); // after deadline
-                        Event eventTask = new Event(stringSliced, dateTime);
+                        Event eventTask = new Event(stringSliced, convertedTime);
                         taskArray.add(eventTask);
                         String noOfTask = String.valueOf(taskArray.size());
                         System.out.println(messageTask + eventTask.toString() + "\n"
