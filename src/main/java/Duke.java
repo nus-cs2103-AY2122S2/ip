@@ -4,11 +4,77 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // initialisations for file I/O
+        File file = new File(
+                "data/duke.txt");
+        BufferedReader readFile
+                = new BufferedReader(new FileReader(file));
+        FileWriter fw = new  FileWriter("data/duke.txt",true);
+        PrintWriter writeFile = new  PrintWriter(fw);
+
+//        System.out.println("first " + fileReader.readLine());
         ArrayList<Task> tasks = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        int items = 0;
+        String line = "";
+
+        // read tasks from file and add it to list
+        while((line = readFile.readLine()) != null) {
+            items++;
+            String[] words = line.split(" ");
+            String type = words[0];
+
+            // check whether the task is marked
+            boolean isDone = true;
+            if(words[1].equals("0")) {
+                isDone = false;
+            }
+
+            if(words[0].equals("T")) {
+                sb = new StringBuilder();
+                for(int i = 2; i < words.length; i++) {
+                    sb.append(words[i]).append(" "); // get the description
+                }
+                tasks.add(new ToDo(sb.toString(), isDone));
+            }
+            else if(words[0].equals("D")) {
+                sb = new StringBuilder();
+                int count = 2;
+                for(int i = 2; i < words.length; i++) {
+                    count++;
+                    if(words[i].equals("|"))
+                        break;
+                    sb.append(words[i]).append(" "); // get the description
+                }
+                String description = sb.toString();
+                sb = new StringBuilder();
+                for(int i = count; i < words.length; i++) {
+                    sb.append(words[i]).append(" "); // get the description
+                }
+                tasks.add(new Deadline(description, "(by: " + sb.toString() + ")", isDone));
+            }
+            else {
+                sb = new StringBuilder();
+                int count = 2;
+                for(int i = 2; i < words.length; i++) {
+                    count++;
+                    if(words[i].equals("|"))
+                        break;
+                    sb.append(words[i]).append(" "); // get the description
+                }
+                String description = sb.toString();
+                sb = new StringBuilder();
+                for(int i = count; i < words.length; i++) {
+                    sb.append(words[i]).append(" "); // get the description
+                }
+                tasks.add(new Event(description, "(at: " + sb.toString() + ")", isDone));
+            }
+        }
+
         System.out.println("Hello!!! I'm jBot\nWhat can I do for you? :3");
         String full = br.readLine();
         String[] s = full.split(" ");
-        int items = 0;
 
         label:
         while (true) {
@@ -67,6 +133,7 @@ public class Duke {
                         tasks.add(new ToDo(s[1]));
                         System.out.println("      [T][ ] " + s[1]);
                         items++;
+                        writeFile.println("T 0 " + s[1]);
                         System.out.println("\n    Now you have " + items + " tasks on your list");
                     }
 
@@ -77,9 +144,11 @@ public class Duke {
                     s = findDate(full.split(" "));
                     System.out.println("    Okay! I've added this task into the list:\n  ");
                     tasks.add(new Event(s[0], s[1]));
-//                System.out.println("full  " + s[1]);
+                System.out.println("full  " + s[1]);
                     System.out.println("      [E][ ] " + s[0]);
                     items++;
+                    writeFile.println("E 0" + s[0] + " | " + s[1]);
+
                     System.out.println("\n    Now you have " + items + " tasks on your list");
 
                     break;
@@ -92,6 +161,8 @@ public class Duke {
 //                System.out.println("full  " + s[1]);
                     System.out.println("      [D][ ] " + s[0]);
                     items++;
+                    writeFile.println("D 0" + s[0] + " | " + s[1]);
+
                     System.out.println("\n    Now you have " + items + " tasks on your list");
 
                     break;
@@ -104,6 +175,7 @@ public class Duke {
             full = br.readLine();
             s = full.split(" ");
         }
+        writeFile.close();
     }
 
     static String[] findDate(String[] full) {
