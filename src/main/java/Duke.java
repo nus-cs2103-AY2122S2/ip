@@ -117,7 +117,7 @@ public class Duke {
             FileWriter myObj = new FileWriter("data.txt");
             myObj.flush();
             for (int i = 0; i < tasks.size(); i++) {
-                myObj.write(tasks.get(i).symbol() + "-" + tasks.get(i).getStatusIcon() + "-" +
+
                         tasks.get(i).toString() + "\n");
             }
             myObj.close();
@@ -132,17 +132,14 @@ public class Duke {
             BufferedReader br = new BufferedReader(myObj);
             String line;
             while ((line = br.readLine()) != null) {
-                String[] lineArray = line.split("-");
+
                 Task task;
                 switch (lineArray[0]) {
                     case "T":
                         task = new Todo(lineArray[2]);
                         break;
                     case "E":
-                        task = new Event(lineArray[2]);
-                        break;
-                    default:
-                        task = new Deadline(lineArray[2]);
+
                 }
                 if (lineArray[1].equals("X")) {
                     task.setAsDone();
