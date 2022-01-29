@@ -18,7 +18,7 @@ public class ListCommand extends Command {
             int[] taskCount = {1};
 
             tasks.forEach(task -> {
-                sb.append(String.format(ui.STR_PADDING + "  %d. " + task.toString(), taskCount[0]++));
+                sb.append(String.format(ui.STR_PADDING + "  %d. " + task, taskCount[0]++));
 
                 if (taskCount[0] != tasks.size() + 1) {
                     sb.append("\n");
