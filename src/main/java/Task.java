@@ -7,8 +7,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
-        return isDone? "X" : " ";
+        return this.isDone? "X" : " ";
     }
 
     public void markAsDone() {
@@ -16,6 +21,26 @@ public class Task {
     }
     public void markAsUndone() {
         this.isDone = false;
+    }
+
+    public String getBool() {
+        return isDone? "1" : "0";
+    }
+
+    public String getLetter() {
+        if (this instanceof Todo) {
+            return "T";
+        } else if (this instanceof Deadline) {
+            return "D";
+        } else if (this instanceof Event) {
+            return "E";
+        } else {
+            return null;
+        }
+    }
+
+    public String getTaskData() {
+        return this.getLetter() + " | " + this.getBool() + " | " + this.description;
     }
 
     @Override
