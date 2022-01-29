@@ -5,6 +5,7 @@
 
 src/main/java/*.class
 src/main/data.txt
+src/main/out
 
 # Gradle build files
 /.gradle/
