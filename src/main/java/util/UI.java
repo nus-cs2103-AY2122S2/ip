@@ -1,3 +1,5 @@
+package util;
+
 /**
  * Handles outputs to interact with user
  */
@@ -13,6 +15,4 @@ public class UI {
     public void printOutPut(String commandOutput) {
         System.out.println(commandOutput + "\n");
     }
-
-
 }
