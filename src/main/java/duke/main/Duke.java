@@ -17,7 +17,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    
+
     /**
      * Creates a Duke object that initializes all the necessary components for the task manager program.
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
@@ -25,7 +25,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        
+
         try {
             this.taskList = new TaskList(storage.loadFromFile());
         } catch (IOException e) {

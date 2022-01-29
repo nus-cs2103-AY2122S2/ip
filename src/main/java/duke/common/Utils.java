@@ -12,9 +12,9 @@ public class Utils {
      * @return If add command has a valid type.
      */
     public static boolean isValidType(String type) {
-        if (type.equalsIgnoreCase("todo") ||
-                type.equalsIgnoreCase("event") ||
-                type.equalsIgnoreCase("deadline")) {
+        if (type.equalsIgnoreCase("todo")
+                || type.equalsIgnoreCase("event")
+                || type.equalsIgnoreCase("deadline")) {
             return true;
         }
 
@@ -35,7 +35,7 @@ public class Utils {
     }
 
     /**
-     * Checks if user's input excluding the command itself, specifically the arguments, are numeric. 
+     * Checks if user's input excluding the command itself, specifically the arguments, are numeric.
      * @param arg arg is the argument provided by user.
      * @param ui ui displays feedback to the user.
      * @return If user input argument is numeric.
