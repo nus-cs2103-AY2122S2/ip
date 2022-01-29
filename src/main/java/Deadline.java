@@ -1,20 +1,23 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Represents a deadline, which has to be done within a specific date/time.
  */
 final class Deadline extends Task {
 
-    // At this stage, the due time is treated as a string.
-    private String dueTime;
+    private LocalDate dueTime;
 
     /**
      * Initializes a deadline with a name (description).
      *
      * @param description The name of the task.
-     * @param dueTime     The due time for the deadline.
+     * @param dueTime     The due time for the deadline. The format should be 'YYYY-MM-DD'.
      */
     private Deadline(String description, String dueTime) {
         super(description);
-        this.dueTime = dueTime;
+        this.dueTime = LocalDate.parse(dueTime);
     }
 
     private Deadline(String[] details) {
@@ -64,6 +67,7 @@ final class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by " + this.dueTime + ")";
+        return super.toString() + " (by " +
+                this.dueTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }
