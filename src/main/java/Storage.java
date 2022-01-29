@@ -33,12 +33,8 @@ public class Storage {
     }
 
     @SuppressWarnings("unchecked")
-    public static ArrayList<Task> load() throws ApolloException {
-        try {
-            ObjectInputStream objStream = new ObjectInputStream(Files.newInputStream(DATA_PATH));
-            return (ArrayList<Task>) objStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new ApolloException("Cannot load save file. ");
-        }
+    public static ArrayList<Task> load() throws IOException, ClassNotFoundException {
+        ObjectInputStream objStream = new ObjectInputStream(Files.newInputStream(DATA_PATH));
+        return (ArrayList<Task>) objStream.readObject();
     }
 }

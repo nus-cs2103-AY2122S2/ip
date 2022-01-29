@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Apollo {
     public static ArrayList<Task> tasks;
     private static Commands input;
+    private static boolean isRunning;
 
     protected static void printMessage(String message) {
         System.out.println("\t________________________________________________________________________\n\t "
@@ -13,22 +15,31 @@ public class Apollo {
     private static void initialise() {
         tasks = new ArrayList<>();
         input = new Commands();
+        isRunning = true;
         Banner.welcomeMsg();
     }
 
     private static void run() {
         try {
-            input.response();
-        } catch (ApolloException error) {
-            printMessage(error.getMessage());
-            run();
-        } catch (NumberFormatException error) {
-            printMessage("Please enter an Integer instead. ");
-            run();
+            tasks = Storage.load();
+        } catch (IOException | ClassNotFoundException ignored) {
+            printMessage("No save loaded. ");
+        }
+
+        while (isRunning) {
+            try {
+                input.response();
+                Storage.save(tasks);
+            } catch (ApolloException error) {
+                printMessage(error.getMessage());
+            } catch (NumberFormatException error) {
+                printMessage("Please enter an Integer instead. ");
+            }
         }
     }
 
     public static void stop() {
+        isRunning = false;
         printMessage("See you next time. \n"
                 + "I am always available when you need me. ");
     }
@@ -84,14 +95,6 @@ public class Apollo {
             message = "Noted, I've marked this task as not done yet. \n  ";
         }
         printMessage(message + task);
-    }
-
-    public static void save() throws ApolloException {
-        Storage.save(tasks);
-    }
-
-    public static void load() throws ApolloException {
-        tasks = Storage.load();
     }
 
     public static void main(String[] args) {

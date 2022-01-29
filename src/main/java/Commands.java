@@ -34,7 +34,6 @@ public class Commands {
             break;
         case LIST:
             Apollo.printList();
-            response();
             break;
         case MARK:
             if (this.fullCommand.length == 1) {
@@ -42,7 +41,6 @@ public class Commands {
                         + "  mark <task number>");
             }
             Apollo.mark(Integer.parseInt(this.fullCommand[1]), true);
-            response();
             break;
         case UNMARK:
             if (this.fullCommand.length == 1) {
@@ -50,7 +48,6 @@ public class Commands {
                         + "  unmark <task number>");
             }
             Apollo.mark(Integer.parseInt(this.fullCommand[1]), false);
-            response();
             break;
         case TODO:
             if (this.fullCommand.length == 1) {
@@ -59,7 +56,6 @@ public class Commands {
             }
             newTask = new Todo(this.fullCommand[1]);
             Apollo.addTask(newTask);
-            response();
             break;
         case DEADLINE:
             if (this.fullCommand.length == 1) {
@@ -73,7 +69,6 @@ public class Commands {
             }
             newTask = new Deadline(descTime[0], descTime[1]);
             Apollo.addTask(newTask);
-            response();
             break;
         case EVENT:
             if (this.fullCommand.length == 1) {
@@ -87,7 +82,6 @@ public class Commands {
             }
             newTask = new Event(descPeriod[0], descPeriod[1]);
             Apollo.addTask(newTask);
-            response();
             break;
         case DELETE:
             if (this.fullCommand.length == 1) {
@@ -95,15 +89,6 @@ public class Commands {
                         + "  delete <task number>");
             }
             Apollo.deleteTask(Integer.parseInt(this.fullCommand[1]));
-            response();
-            break;
-        case SAVE:
-            Apollo.save();
-            response();
-            break;
-        case LOAD:
-            Apollo.load();
-            response();
             break;
         default:
             throw new ApolloException("Apologies, I do not understand that. ");
