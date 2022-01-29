@@ -1,7 +1,11 @@
-public class TaskNotFoundException extends Throwable {
+final class TaskNotFoundException extends DukeException {
 
-    @Override
-    public String getMessage() {
-        return "Oops, I'm not able to retrieve this task";
+
+    protected TaskNotFoundException(String message) {
+        super(message);
+    }
+
+    protected TaskNotFoundException() {
+        super("Oops, I'm not able to retrieve this task");
     }
 }

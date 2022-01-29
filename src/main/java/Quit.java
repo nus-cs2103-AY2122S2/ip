@@ -20,7 +20,7 @@ final class Quit extends Instruction {
      * @return The see-you message.
      */
     @Override
-    protected String act() {
-        return Quit.SEE_YOU_MESSAGE;
+    protected void act(Ui ui) {
+        ui.printMessage(Quit.SEE_YOU_MESSAGE);
     }
 }

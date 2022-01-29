@@ -14,14 +14,12 @@ final class ListTasks extends Instruction {
 
     /**
      * Performs a search on the list of tasks, and return them as formatted strings.
-     *
-     * @return A list of tasks that are not done yet.
      */
     @Override
-    protected String act() {
+    protected void act(Ui ui) {
         List<Task> tasks = this.tasks.listOfTasks();
 
-        return ListTasks.getTaskList(tasks);
+        ui.printMessage(ListTasks.getTaskList(tasks));
     }
 
     /**

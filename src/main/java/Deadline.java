@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,12 +18,17 @@ final class Deadline extends Task {
      * @param description The name of the task.
      * @param dueTime     The due time for the deadline. The format should be 'YYYY-MM-DD'.
      */
-    private Deadline(String description, String dueTime) {
+    private Deadline(String description, String dueTime) throws FailedToInterpretTaskException {
         super(description);
-        this.dueTime = LocalDate.parse(dueTime);
+        try {
+            this.dueTime = LocalDate.parse(dueTime);
+        } catch(DateTimeParseException e) {
+            throw new FailedToInterpretTaskException("Oops, the format of date should be YYYY-MM-DD!");
+        }
     }
 
-    private Deadline(String[] details) {
+
+    private Deadline(String[] details) throws FailedToInterpretTaskException {
 
         this(details[0], details[1]);
     }
@@ -31,8 +37,9 @@ final class Deadline extends Task {
      * The constructor to be called. Instantiates an event using a single string containing all the details.
      *
      * @param details Contains the description and time range for the deadline.
+     * @throws FailedToInterpretTaskException If unable to interpret the string as a deadline.
      */
-    protected Deadline(String details) throws IllegalArgumentException {
+    protected Deadline(String details) throws FailedToInterpretTaskException {
 
         this(parseDetails(details));
     }
@@ -50,12 +57,12 @@ final class Deadline extends Task {
      * @param details The string containing the event description and due time.
      * @return An array of strings containing the description and due time.
      */
-    private static String[] parseDetails(String details) throws IllegalArgumentException {
+    private static String[] parseDetails(String details) throws FailedToInterpretTaskException {
 
         String[] args = details.split(" /by ", 2);
 
         if (args.length != 2) {
-            throw new IllegalArgumentException(
+            throw new FailedToInterpretTaskException(
                     "Oops, both of the description and the due time of the deadline can't be empty.");
         }
 

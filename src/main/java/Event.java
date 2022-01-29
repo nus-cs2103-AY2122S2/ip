@@ -30,8 +30,9 @@ final class Event extends Task {
      * Instantiates an event using a single string containing all the details.
      *
      * @param details Contains the description and time range for the event.
+     * @throws FailedToInterpretTaskException If failed to interpret the task as an event.
      */
-    protected Event(String details) throws IllegalArgumentException {
+    protected Event(String details) throws FailedToInterpretTaskException {
 
         this(parseDetails(details));
     }
@@ -50,12 +51,12 @@ final class Event extends Task {
      * @param details The string containing the event description and time range.
      * @return An array of strings containing the description and time range.
      */
-    private static String[] parseDetails(String details) throws IllegalArgumentException {
+    private static String[] parseDetails(String details) throws FailedToInterpretTaskException {
 
         String[] args = details.split(" /at ", 2);
 
         if (args.length != 2) {
-            throw new IllegalArgumentException(
+            throw new FailedToInterpretTaskException(
                     "Oops, both of the description and the time of the event can't be empty.");
         }
 

@@ -29,14 +29,16 @@ abstract class Instruction {
      *
      * @param instruction The line of command.
      * @return A corresponding instance of instruction.
+     * @throws DukeException If the instruction is invalid.
      */
-    protected static Instruction of(String instruction, TaskManager tasks) throws IllegalArgumentException {
+    protected static Instruction of(String instruction, TaskManager tasks)
+            throws DukeException {
 
         // Extract the words in the instruction. The first word should determine the type of instruction to be returned.
         String[] words = instruction.split(" ", 2);
 
         if (words.length == 0) {
-            throw new IllegalArgumentException("Oops, I don't know what empty instruction means.");
+            throw new InvalidInstructionException("Oops, I don't know what empty instruction means.");
         }
 
         String type = words[0];
@@ -62,7 +64,7 @@ abstract class Instruction {
         case "delete":
             return new Delete(instruction, tasks);
         default:
-            throw new IllegalArgumentException("Oops, I'm not sure what you mean.");
+            throw new InvalidInstructionException("Oops, I'm not sure what you mean.");
         }
     }
 
@@ -80,7 +82,17 @@ abstract class Instruction {
     /**
      * Performs the associated action of the task. By default, there is no action associated to a task.
      *
+     * @param ui The UI to be used by this instruction.
      * @return The message once the instruction is executed.
      */
-    protected abstract String act();
+    protected abstract void act(Ui ui);
+
+    /**
+     * Returns whether current instruction is a terminating instruction.
+     *
+     * @return True if current instruction is a terminating instruction.
+     */
+    protected boolean isTerminatingInstruction() {
+        return this instanceof Quit;
+    }
 }

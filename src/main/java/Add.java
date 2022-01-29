@@ -20,10 +20,10 @@ final class Add extends Instruction{
     /**
      * Adds the task into the task manager, and return the message when the action is done.
      *
-     * @return The message.
+     * @param ui The UI to be used.
      */
     @Override
-    protected String act() {
-        return tasks.addTask(this.task);
+    protected void act(Ui ui) {
+        ui.printMessage(tasks.addTask(this.task));
     }
 }

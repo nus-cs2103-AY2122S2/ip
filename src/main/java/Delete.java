@@ -8,9 +8,9 @@ final class Delete extends Instruction {
      *
      * @param instruction The line of instruction for deletion, starting with 'delete'.
      * @param tasks The task manager used.
-     * @throws IllegalArgumentException If the given instruction does not contain a valid index.
+     * @throws InvalidInstructionException If the given instruction does not contain a valid index.
      */
-    Delete(String instruction, TaskManager tasks) throws IllegalArgumentException {
+    Delete(String instruction, TaskManager tasks) throws InvalidInstructionException {
         this(parseInstruction(instruction, tasks), tasks);
     }
 
@@ -20,25 +20,25 @@ final class Delete extends Instruction {
         this.toDelete = tasks.getTaskIndex(index);
     }
 
-    private static int parseInstruction(String instruction, TaskManager tasks) throws IllegalArgumentException {
+    private static int parseInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
         String[] args = instruction.split(" ");
         int index;
 
         if (args.length < 2) {
-            throw new IllegalArgumentException("Oops, the index of the task to be deleted cannot be empty!");
+            throw new InvalidInstructionException("Oops, the index of the task to be deleted cannot be empty!");
         } else if (args.length > 2) {
-            throw new IllegalArgumentException("Oops, there should be only one index of task after 'delete'.");
+            throw new InvalidInstructionException("Oops, there should be only one index of task after 'delete'.");
         }
 
         try {
             index = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Oops, delete operation only accepts integer index!");
+            throw new InvalidInstructionException("Oops, delete operation only accepts integer index!");
         }
 
         if (!tasks.isValidIndex(index)) {
-            throw new IllegalArgumentException("Oops, the task provided doesn't exist!");
+            throw new InvalidInstructionException("Oops, the task provided doesn't exist!");
         }
 
         return index;
@@ -47,13 +47,15 @@ final class Delete extends Instruction {
     /**
      * Performs deletion of the task.
      *
+     * @param ui The UI to be used.
      * @return The message after deletion.
      */
     @Override
-    protected String act() {
+    protected void act(Ui ui) {
 
         tasks.deleteIndex(toDeleteIndex);
 
-        return "You have successfully deleted:\n" + this.toDelete.toString();
+        ui.printMessage("You have successfully deleted:\n" +
+                this.toDelete.toString());
     }
 }

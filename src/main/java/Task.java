@@ -40,17 +40,17 @@ abstract class Task {
      *
      * @param instruction The line of instruction used to create a task.
      * @return The instantiated task.
-     * @throws IllegalArgumentException If the instruction (i) does not contain valid type of task; or (ii) does not
-     * contain a valid description of task.
+     * @throws FailedToInterpretTaskException If the instruction (i) does not contain valid type of task; or
+     * (ii) does not contain a valid description of task.
      */
-    protected static Task of(String instruction) throws IllegalArgumentException {
+    protected static Task of(String instruction) throws FailedToInterpretTaskException {
 
         String[] args = instruction.split(" ", 2);
         String type = args[0];
 
         if (args.length < 2) {
 
-            throw new IllegalArgumentException("Oops, a type and a description for the task must be provided.");
+            throw new FailedToInterpretTaskException("Oops, a type and a description for the task must be provided.");
         }
 
         // Contains the description and possibly other information about the task.

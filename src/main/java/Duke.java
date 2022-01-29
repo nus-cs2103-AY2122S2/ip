@@ -1,18 +1,53 @@
 public class Duke {
 
-    private static final String WELCOME_MESSAGE = "Hello, this is Duke!\nWhat can I do for you today?";
+    private Storage storage;
+    private TaskManager taskManager;
+    private Ui ui;
+
     private static final String END_MESSAGE = "Bye!";
     private static final String FILE_PATH = "data/tasks.txt";
+
+    /**
+     * Constructs a Duke -- a personal task manager.
+     *
+     * @param storage The storage to be used.
+     * @param taskManager The task manager to be used.
+     * @param ui The ui to be used.
+     */
+    private Duke(Storage storage, TaskManager taskManager, Ui ui) {
+        this.storage = storage;
+        this.taskManager = taskManager;
+        this.ui = ui;
+    }
 
     public static void main(String[] args) {
 
         Storage storage = new Storage(FILE_PATH);
         TaskManager taskManager = new TaskManager(storage);
+        Ui ui = new Ui(System.out, System.in);
 
-        System.out.println(WELCOME_MESSAGE);
+        Duke duke = new Duke(storage, taskManager, ui);
+        duke.run();
 
-        InstructionHandler instructionHandler = new InstructionHandler(taskManager);
-        instructionHandler.doInstructions();
         taskManager.writeBack(storage);
+
+    }
+
+    private void run() {
+
+        ui.printWelcomeMessage();
+
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                Instruction currentInstruction = ui.getNextInstruction(taskManager);
+                currentInstruction.act(ui);
+                isExit = currentInstruction.isTerminatingInstruction();
+            } catch (DukeException e) {
+                System.err.println(e.getMessage());
+            } finally {
+                ui.askForInstruction();
+            }
+        }
     }
 }
