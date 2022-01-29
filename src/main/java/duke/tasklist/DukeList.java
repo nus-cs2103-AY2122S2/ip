@@ -13,8 +13,6 @@ public class DukeList {
     public List<Task> a;
     private Storage storage;
 
-    public static final String STORAGE_PATH = "src/data.txt";
-
     public DukeList(Storage s){
         this.a = s.load();
         this.storage = s;

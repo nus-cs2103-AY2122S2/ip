@@ -10,13 +10,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Ui ui;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         Ui ui = new Ui();
-        Storage storage = new Storage("src/data.txt");
+        Storage storage = new Storage("./data.txt");
         ui.showWelcome();
-        Scanner s = new Scanner(System.in);
         boolean isExit = false;
         DukeList list = new DukeList(storage);
         while (!isExit){
