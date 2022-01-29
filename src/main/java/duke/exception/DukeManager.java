@@ -2,12 +2,23 @@ package duke.exception;
 
 import duke.exception.DukeException;
 
+/**
+ * DukeManager class
+ */
 public class DukeManager {
 
+    /**
+     * Constructor for DukeManager
+     */
     public DukeManager() {
-
     }
 
+    /**
+     * test if input is a valid command
+     * @param command input command
+     * @return command if valid
+     * @throws DukeException if command not valid
+     */
     public String test(String command) throws DukeException {
         if ((command.replaceAll("\\s+", "")).equals("list") ||
                 (command.replaceAll("\\s+", "")).equals("bye")) {

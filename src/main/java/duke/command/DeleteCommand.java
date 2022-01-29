@@ -4,12 +4,21 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
+/**
+ * DeleteCommand class
+ */
 public class DeleteCommand extends Command<String>{
 
     private String text;
     private TaskList list;
     private Storage storage;
 
+    /**
+     *
+     * @param text unformatted string for deadline
+     * @param list task list to add this task to
+     * @param storage storage of where this task will be added to
+     */
     public DeleteCommand(String text, TaskList list, Storage storage) {
         this.text = text;
         this.list = list;
@@ -17,6 +26,9 @@ public class DeleteCommand extends Command<String>{
         runCommand();
     }
 
+    /**
+     * Splice the string and delete from list and display to user
+     */
     @Override
     public void runCommand() {
         int indexToDelete = intSearch(text) - 1;

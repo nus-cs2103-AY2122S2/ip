@@ -3,10 +3,19 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class
+ */
 public class Event extends Task {
 
     private LocalDateTime dueDate;
 
+    /**
+     * Constructor for Event object
+     * @param description description of task
+     * @param dueDate due date of task
+     * @param fromDisk boolean to determine if object was created from hard disk or from commandline
+     */
     public Event(String description, String dueDate, boolean fromDisk) {
         super(description);
         if (fromDisk) {
@@ -20,6 +29,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Override toString function to display task in required syntax
+     * @return String in required syntax
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() +
