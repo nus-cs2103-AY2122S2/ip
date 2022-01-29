@@ -1,23 +1,25 @@
 import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Represents a deadline, which has to be done within a specific date/time.
  */
 final class Deadline extends Task {
 
-    // At this stage, the due time is treated as a string.
-    private String dueTime;
-    private final String DUE_TIME_FILED = "due_time";
+    private final String DUE_TIME_FIELD = "due_time";
+    private LocalDate dueTime;
 
     /**
      * Initializes a deadline with a name (description).
      *
      * @param description The name of the task.
-     * @param dueTime     The due time for the deadline.
+     * @param dueTime     The due time for the deadline. The format should be 'YYYY-MM-DD'.
      */
     private Deadline(String description, String dueTime) {
         super(description);
-        this.dueTime = dueTime;
+        this.dueTime = LocalDate.parse(dueTime);
     }
 
     private Deadline(String[] details) {
@@ -37,7 +39,7 @@ final class Deadline extends Task {
 
     public Deadline(HashMap<String, Object> infoTable) {
         super(infoTable);
-        this.dueTime = (String) infoTable.get(DUE_TIME_FILED);
+        this.dueTime = (LocalDate) infoTable.get(DUE_TIME_FIELD);
     }
 
     /**
@@ -74,7 +76,7 @@ final class Deadline extends Task {
     protected HashMap<String, Object> getInfoTable() {
 
         var infoTable = this.initializeInfoTable();
-        infoTable.put(DUE_TIME_FILED, this.dueTime);
+        infoTable.put(DUE_TIME_FIELD, this.dueTime);
         return infoTable;
     }
 
@@ -85,6 +87,7 @@ final class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by " + this.dueTime + ")";
+        return super.toString() + " (by " +
+                this.dueTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }
