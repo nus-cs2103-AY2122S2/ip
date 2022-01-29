@@ -43,6 +43,12 @@ public class Duke {
         ui.showGoodBye();
     }
 
+    /**
+     * Runs the program
+     * @param args
+     * @throws IOException
+     * @throws ParseException
+     */
     public static void main(String[] args) throws IOException, ParseException {
         new Duke().run();
     }

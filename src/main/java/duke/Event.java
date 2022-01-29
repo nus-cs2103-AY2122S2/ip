@@ -18,6 +18,9 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    /**
+     * @inheritDoc
+     */
     public String toFile() {
         return "E\t" + super.toFile() + "\t" + ft.format(this.duration);
     }

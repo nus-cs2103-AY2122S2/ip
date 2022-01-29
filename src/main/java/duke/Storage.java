@@ -27,6 +27,12 @@ public class Storage {
         this.file = new File(String.valueOf(filePath));
     }
 
+    /**
+     * Converts the data in the file into a task list
+     * @return A task list containing task retrieved from file
+     * @throws IOException file error
+     * @throws ParseException date not correct format
+     */
     public ArrayList<Task> read() throws IOException, ParseException {
 
         Scanner sc = new Scanner(this.file);
@@ -56,6 +62,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes all the data from the list into the file
+     * @param taskList List containing all the tasks
+     * @throws DukeException File error
+     */
     public void write(ArrayList<Task> taskList) throws DukeException {
 
         try {
@@ -74,6 +85,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts string date into Date date object
+     * @param date date in string type
+     * @return Date in date type
+     * @throws ParseException date not in correct format
+     */
     public Date parse(String date) throws ParseException {
         return ft.parse(date);
     }
