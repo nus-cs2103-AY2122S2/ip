@@ -5,14 +5,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.MarkCommand;
+import duke.command.PrintCommand;
+import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
+import duke.exception.IncompleteCommandException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.exception.IncompleteCommandException;
-import duke.exception.InvalidCommandException;
 
 /**
  * Represents the Parsing capabilities of the Duke project. A <code> Parse </code> object corresponds
@@ -29,8 +35,8 @@ public class Parser {
      * @param input date specified by user input. Eg, "2020-06-06".
      * @return formatted date.
      */
-    public static LocalDate formatDate(String input){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-MM-dd");
+    public static LocalDate formatDate(String input) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(input, dtf);
         return date;
     }
@@ -41,7 +47,7 @@ public class Parser {
      * @return formatted time.
      */
     public static LocalTime formatTime(String input) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
         LocalTime time = LocalTime.parse(input, dtf);
         return time;
     }
@@ -52,7 +58,7 @@ public class Parser {
      * @return date but as a String.
      */
     public static String dateToString(LocalDate input) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = input.format(dtf);
         return date;
     }
@@ -63,7 +69,7 @@ public class Parser {
      * @return time but as a String.
      */
     public static String timeToString(LocalTime input) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
         String time = input.format(dtf);
         return time;
     }
@@ -144,7 +150,7 @@ public class Parser {
         } else if (command.equals("delete")) {
             return new DeleteCommand(Integer.parseInt(inputSplit[1]));
 
-        } else if(command.equals("find")) {
+        } else if (command.equals("find")) {
             return new FindCommand(inputSplit[1]);
 
         } else {

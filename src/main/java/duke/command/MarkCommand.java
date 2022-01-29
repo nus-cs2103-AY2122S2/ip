@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public MarkCommand(Integer number) {
-        super(null, number,null);
+        super(null, number, null);
     }
 
     /**

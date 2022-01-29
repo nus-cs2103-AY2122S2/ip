@@ -36,7 +36,7 @@ public class TaskList {
      * @param taskNum an indicator to the index of taskList.
      */
     public void markTask(int taskNum) {
-        String message = "Nice! I've marked this task as done:\n" ;
+        String message = "Nice! I've marked this task as done:\n";
         int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
         Task task = taskList.get(actualTaskNum); // get the task from the array
         task.setTaskDone();
@@ -60,11 +60,11 @@ public class TaskList {
     /**
      * Returns nothing, but prints out all task in taskList.
      */
-    public void printList(){
+    public void printList() {
         String message = "Here are the tasks in your list:";
         System.out.println(message);
 
-        for(int i = 0; i < numOfTask; i++){
+        for (int i = 0; i < numOfTask; i++) {
             String output = i + 1 + "." + taskList.get(i).toString();
             System.out.println(output);
         }
@@ -82,19 +82,23 @@ public class TaskList {
         System.out.println(message + task.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
+    /**
+     * Returns nothing, but prints all task that contains that matches the specified word.
+     * @param word keyword input from user
+     */
     public void findWord(String word) {
         String message = "Here are the matching tasks in your list:\n";
         System.out.print(message);
         int counter = 1;
-        for(int i = 0; i < numOfTask; i++) {
+        for (int i = 0; i < numOfTask; i++) {
             Task task = taskList.get(i);
-            if(task.getDescription().contains(word)) {
+            if (task.getDescription().contains(word)) {
                 String output = counter + "." + task;
                 counter++;
                 System.out.println(output);
             }
         }
-        if(counter == 1) {
+        if (counter == 1) {
             System.out.println("OOPS!, there are no matching task with the word provided.");
         }
     }

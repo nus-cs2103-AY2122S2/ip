@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.functionality.TaskList;
+import duke.task.Task;
 
 /**
  * Represents the commands inputted by a user. The Command class cannot be instantiated as it is an abstract class.
  */
-public abstract class Command{
+public abstract class Command {
     protected Task task;
     protected Integer index;
     protected String word;

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.functionality.TaskList;
+import duke.task.Task;
 
 /**
  * Represents the add command. A <code>AddCommand</code> object corresponds to adding that specified task

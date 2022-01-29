@@ -6,7 +6,7 @@ import duke.functionality.TaskList;
  * Represents the find command. A <code>FindCommand</code> object corresponds to finding similar tasks
  * in the taskList of TaskList class.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     /**
      * Constructor of FindCommand.
