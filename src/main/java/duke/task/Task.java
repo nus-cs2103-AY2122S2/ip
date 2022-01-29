@@ -10,16 +10,16 @@ public class Task implements Serializable {
         this.name = name;
     }
 
-    public void mark(){
+    public void mark() {
         isMarked = true;
     }
 
-    public void unmark(){
+    public void unmark() {
         isMarked = false;
     }
 
     @Override
-    public String toString(){
-       return isMarked ? "[X] " + name : "[ ] " + name;
+    public String toString() {
+        return isMarked ? "[X] " + name : "[ ] " + name;
     }
 }

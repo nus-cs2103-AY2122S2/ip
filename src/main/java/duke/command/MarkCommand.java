@@ -5,16 +5,17 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int index;
-    public MarkCommand(int index){
-       super("mark");
-       this.index = index;
+
+    public MarkCommand(int index) {
+        super("mark");
+        this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if(index < 0 || index >= tasks.size()){
+        if (index < 0 || index >= tasks.size()) {
             System.out.println("Invalid index, please try again.");
         } else {
             Task task = tasks.mark(index);

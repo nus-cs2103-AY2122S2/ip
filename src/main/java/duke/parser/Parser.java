@@ -8,13 +8,14 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnknownCommand;
 import duke.command.UnmarkCommand;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
 
     public static Command parse(String input) throws ArrayIndexOutOfBoundsException,
-        NumberFormatException, DateTimeParseException {
+            NumberFormatException, DateTimeParseException {
         input = input.trim();
         // Ignore empty input
         if (input.equals("")) {
