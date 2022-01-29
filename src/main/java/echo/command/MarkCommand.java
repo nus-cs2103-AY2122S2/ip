@@ -1,11 +1,11 @@
 package echo.command;
 
+import java.io.IOException;
+
+import echo.main.EchoException;
 import echo.storage.Storage;
 import echo.task.TaskList;
 import echo.ui.Ui;
-import echo.main.EchoException;
-
-import java.io.IOException;
 
 /**
  * This class inherits from the Command class and encapsulates the mark command.

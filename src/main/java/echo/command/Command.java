@@ -1,9 +1,10 @@
 package echo.command;
 
+import echo.main.EchoException;
 import echo.storage.Storage;
 import echo.task.TaskList;
 import echo.ui.Ui;
-import echo.main.EchoException;
+
 
 /**
  * This class encapsulates a command to be executed.

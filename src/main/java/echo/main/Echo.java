@@ -1,13 +1,13 @@
 package echo.main;
 
+import java.io.FileNotFoundException;
+
 import echo.command.Command;
 import echo.parser.Parser;
-
 import echo.storage.Storage;
 import echo.task.TaskList;
 import echo.ui.Ui;
 
-import java.io.FileNotFoundException;
 
 /**
  * Echo, a Personal Assistant Chatbot that helps a person to keep track of various things.

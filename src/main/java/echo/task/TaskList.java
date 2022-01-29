@@ -1,8 +1,9 @@
 package echo.task;
 
+import java.util.ArrayList;
+
 import echo.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * This class encapsulates the list of tasks associated with Echo.

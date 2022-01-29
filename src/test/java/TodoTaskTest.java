@@ -1,9 +1,10 @@
 package junit;
 
-import echo.task.TodoTask;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import echo.task.TodoTask;
 
 public class TodoTaskTest {
 

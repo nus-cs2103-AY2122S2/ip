@@ -1,13 +1,13 @@
 package echo.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
+import echo.main.EchoException;
 import echo.storage.Storage;
 import echo.task.DeadlineTask;
 import echo.task.TaskList;
 import echo.ui.Ui;
-import echo.main.EchoException;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 /**
  * This class inherits from the Command class and encapsulates the deadline command.

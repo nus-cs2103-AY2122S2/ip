@@ -1,23 +1,21 @@
 package echo.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+import echo.main.EchoException;
 import echo.task.DeadlineTask;
 import echo.task.EventTask;
 import echo.task.TaskList;
 import echo.task.TodoTask;
 
-import echo.main.EchoException;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -67,7 +65,7 @@ public class Storage {
         File directory = file.getParentFile();
 
         // Creates the directory if it does not exist.
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 
@@ -96,7 +94,7 @@ public class Storage {
                     } else {
                         localDateTime = LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
                         if (type.equals("D")) {
-                            tasks.add(new DeadlineTask(desc,localDateTime));
+                            tasks.add(new DeadlineTask(desc, localDateTime));
                         } else {
                             tasks.add(new EventTask(desc, localDateTime));
                         }
@@ -105,6 +103,8 @@ public class Storage {
                     if (Integer.parseInt(split[1]) == 1) {
                         tasks.mark(tasks.size() - 1);
                     }
+                    break;
+                default:
                     break;
                 }
             } catch (NumberFormatException nfe) {

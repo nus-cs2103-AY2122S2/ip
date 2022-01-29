@@ -1,5 +1,9 @@
 package echo.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import echo.command.Command;
 import echo.command.DeadlineCommand;
 import echo.command.DeleteCommand;
@@ -10,14 +14,8 @@ import echo.command.ListCommand;
 import echo.command.MarkCommand;
 import echo.command.TodoCommand;
 import echo.command.UnmarkCommand;
-
-import echo.ui.Ui;
-
 import echo.main.EchoException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import echo.ui.Ui;
 
 /**
  * Parser encapsulates a parser to deal with making sense of the user command.
@@ -70,7 +68,8 @@ public class Parser {
 
                     try {
                         dateTimeString = splitSlash[1].substring(splitSlash[1].indexOf(" ") + 1);
-                        localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                        localDateTime = LocalDateTime.parse(dateTimeString,
+                                DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
 
                         if (command.equals(DeadlineCommand.COMMAND)) {
                             return prepareDeadlineCommand(input, desc, localDateTime);
@@ -78,7 +77,7 @@ public class Parser {
                             return prepareEventCommand(input, desc, localDateTime);
                         }
                     } catch (DateTimeParseException e) {
-                        throw new EchoException("Invalid format for date and time. Follow the <yyyy-mm-dd> <24hr time> format."
+                        throw new EchoException("Invalid format. Follow the <yyyy-mm-dd> <24hr time> format."
                                 + "\n" + Ui.addPrefix("E.g. 2019-10-15 1800"));
                     }
                 }
