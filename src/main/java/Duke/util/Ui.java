@@ -55,42 +55,29 @@ public class Ui {
     }
 
     /**
+     * Prints a message to inform user of the list of outstanding tasks
+     */
+    public void printTaskList() {
+        OUT.println(TASK_CALL);
+    }
+
+    /**
      * Prints a message to request for user to input next command
      */
     public void requestNextCommand() {
         OUT.println(LINE + REQUEST_NEXT_COMMAND);
     }
 
-<<<<<<< HEAD
-    /**
-     * Prints exit message.
-     */
-=======
-    public void printTaskList() {
-        OUT.println(TASK_CALL);
-    }
-
-    public void showError(String errorMessage) {
-        OUT.println(errorMessage + REQUEST_NEXT_COMMAND_ANGRY);
-    }
-
->>>>>>> branch-Level-9
     public void showExitMessage() {
         OUT.println("\tFair winds adventurer, till we meet next time yarr. Bye for now.\n" + LINE);
     }
 
-<<<<<<< HEAD
     /**
-     * Prints a message to inform user of the list of outstanding tasks
+     * Prints a message to inform user of the list of tasks that matches the keyword
      */
-    public void printTaskList() {
-        OUT.println(TASK_CALL);
-=======
     public void showMatchingTasks() {
         OUT.println(TASK_MATCH);
->>>>>>> branch-Level-9
     }
-
 
     /**
      * Prints a message to welcome the user
@@ -106,13 +93,10 @@ public class Ui {
         OUT.println(LINE);
     }
 
-<<<<<<< HEAD
     /**
      * Prints a message to inform user of their input error
      */
     public void showError(String errorMessage) {
         OUT.println(errorMessage + REQUEST_NEXT_COMMAND_ANGRY);
     }
-=======
->>>>>>> branch-Level-9
 }
