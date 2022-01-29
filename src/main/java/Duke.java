@@ -1,10 +1,20 @@
-import java.util.*;  
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.IOException;
 
-public class Duke {
+class Duke {
+
     public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
+        FileClass fc = new FileClass(); //file class 
+        String home = System.getProperty("user.home"); //home directory
+
+        String filePath = home + "/Desktop/ip/duke.txt";
+        System.out.println(filePath);
+        fc.createFile(filePath);
 
         ArrayList<Task> taskArray = new ArrayList<Task>();
+        ArrayList<String> stringArray = new ArrayList<String>();
 
         String beginning = "Hello! I'm Duke\n" +
                            "What can I do for you?";
@@ -41,14 +51,19 @@ public class Duke {
 
 
                 } else if (checkType[0].equals("todo")) { //check todo
+
+                    String toDoCondition = "todo ";
     
                     try {
-                        String stringSliced = input.substring(5,input.length());
+                        int indexOfToDo = toDoCondition.length(); //to find todo
+                        String stringSliced = input.substring(indexOfToDo,input.length());
+                        stringArray.add(stringSliced);
                         Todo todoTask = new Todo(stringSliced);
                         taskArray.add(todoTask);
                         String noOfTask = String.valueOf(taskArray.size());
                         System.out.println(messageTask + todoTask.toString() + "\n"
                                         + "Now you have " + noOfTask + " tasks in the list.");
+
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -62,6 +77,7 @@ public class Duke {
                         int indexOfTime = input.indexOf(deadlineCondition); //to find /
                         String dateTime = input.substring(indexOfTime + deadlineCondition.length(), input.length()); // the date and time for by
                         String stringSliced = input.substring(9, indexOfTime); // after deadline
+                        stringArray.add(stringSliced + "| " + dateTime);
                         Deadline deadlineTask = new Deadline(stringSliced, dateTime);
                         taskArray.add(deadlineTask);
                         String noOfTask = String.valueOf(taskArray.size());
@@ -78,6 +94,7 @@ public class Duke {
                         int indexOfTime = input.indexOf(eventCondition); //to find /
                         String dateTime = input.substring(indexOfTime + eventCondition.length(), input.length()); // the date and time for by
                         String stringSliced = input.substring(6, indexOfTime); // after deadline
+                        stringArray.add(stringSliced + "| " + dateTime);
                         Event eventTask = new Event(stringSliced, dateTime);
                         taskArray.add(eventTask);
                         String noOfTask = String.valueOf(taskArray.size());
@@ -110,6 +127,20 @@ public class Duke {
             
             input = sc.nextLine();
         
+        }
+
+        // Recording everything in the duke.txt
+        for (int i = 0; i < taskArray.size(); i++ ) {
+            Task tasks = taskArray.get(i);
+            try {
+                String firstInitial = tasks.getInitial() ; //first initial character
+                String textToAdd = firstInitial + " | " + tasks.getStatusIcon() + " | " 
+                                    + stringArray.get(i);
+                fc.writeFile(filePath, textToAdd);
+            } catch (IOException e) {
+                System.out.println("File not found");
+            }
+
         }
 
         String ending = "Bye. Hope to see you again soon!";

@@ -40,4 +40,8 @@ public class Task {
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
+
+    public String getInitial(){
+        return "Task";
+    }
 }
