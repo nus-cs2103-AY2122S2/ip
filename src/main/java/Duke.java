@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,10 +5,11 @@ public class Duke {
     static final String LIST = "list";
     static final String MARK = "mark";
     static final String UNMARK = "unmark";
-    static final ArrayList<WordListItem> textHistory = new ArrayList<>();
+    static WordList wordList;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        wordList = new WordList();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,7 +19,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         replyWelcomeMessage();
-        String input = "";
+        String input;
         while (true) {
             input = sc.nextLine();
             if (input.isEmpty()) {
@@ -28,19 +27,19 @@ public class Duke {
                 continue;
             }
             if (isList(input)) {
-                printHistory();
+                wordList.printList();
                 continue;
             }
 
             if (isMark(input)) {
                 int itemNumber = Integer.parseInt(input.substring(5));
-                markItem(itemNumber);
+                wordList.markItem(itemNumber);
                 continue;
             }
 
             if (isUnmark(input)) {
                 int itemNumber = Integer.parseInt(input.substring(7));
-                unmarkItem(itemNumber);
+                wordList.unmarkItem(itemNumber);
                 continue;
             }
 
@@ -49,36 +48,9 @@ public class Duke {
             }
 
             echo(input);
-            storeWord(input);
+            wordList.storeWord(input);
         }
         replyBye();
-    }
-
-    public static void storeWord(String word) {
-        Duke.textHistory.add(new WordListItem(word));
-    }
-
-    public static void printHistory() {
-        int i = 1;
-        System.out.println("------------------------------------");
-        for(WordListItem wordListItem: Duke.textHistory) {
-            System.out.println(i + ". " + wordListItem);
-            i++;
-        }
-        System.out.println("------------------------------------");
-        System.out.println("");
-    }
-
-    public static void markItem(int itemNumber) {
-        Duke.textHistory.get(itemNumber - 1).markItem();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + Duke.textHistory.get(itemNumber - 1));
-    }
-
-    public static void unmarkItem(int itemNumber) {
-        Duke.textHistory.get(itemNumber - 1).unmarkItem();
-        System.out.println("Nice! I've marked this task as not done: ");
-        System.out.println("  " + Duke.textHistory.get(itemNumber - 1));
     }
 
     public static void echo(String words) {
