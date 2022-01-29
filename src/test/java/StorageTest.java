@@ -1,4 +1,5 @@
 import duke.DukeException;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.task.ToDo;
@@ -9,10 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTest {
-    // Unable to test this as errors are regarding no r/w permission on the system.
-    Storage validStorage = new Storage("data/.test.dat");
-    Storage invalidStorage = new Storage("data/.invalid.dat");
 
+    private final Storage validStorage = new Storage("data/.test.dat");
+    private final Storage invalidStorage = new Storage("data/.invalid.dat");
+
+    /**
+     * Test to determine if {@link Storage#read()} works as intended.
+     */
     @Test
     public void readTest() {
         try {
@@ -23,6 +27,9 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Test to determine if {@link Storage#write(TaskList)} works as intended.
+     */
     @Test
     public void writeTest() {
         TaskList tasks = new TaskList();

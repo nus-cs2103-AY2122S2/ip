@@ -10,8 +10,13 @@ import java.util.stream.Collectors;
 
 public class Storage {
 
-    protected File dataFile;
+    private final File dataFile;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filePath the path to the locally-stored file
+     */
     public Storage(String filePath) {
         dataFile = new File(filePath);
 
@@ -24,6 +29,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads list the {@link #dataFile} and returns a `List` used to populate `TaskList`.
+     *
+     * @return the content of {@link #dataFile} in a `List`
+     * @throws DukeException if {@link #dataFile} could not be located or read
+     */
     public List<String> read() throws DukeException {
         List<String> dataList;
 
@@ -40,6 +51,13 @@ public class Storage {
         return dataList;
     }
 
+    /**
+     * Stores the content of `TaskList` into {@link #dataFile}.
+     *
+     * @param tasks the `TaskList` containing this instance's `Task`
+     * @return true if this method runs successfully
+     * @throws DukeException if {@link #dataFile} could not be located or written to
+     */
     public boolean write(TaskList tasks) throws DukeException {
         try (FileWriter fw = new FileWriter(dataFile, false)) {
             for (int i = 0; i < tasks.size(); i++) {
