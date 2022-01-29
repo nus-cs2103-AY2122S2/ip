@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Bobby {
     static ArrayList<Task> taskArray = new ArrayList<Task>();
@@ -26,7 +28,7 @@ public class Bobby {
             String[] splitInputs = inputs[1].split(" /by ", 2);
             if (splitInputs.length > 1) {
                 String description = splitInputs[0];
-                String by = splitInputs[1];
+                LocalDate by = LocalDate.parse(splitInputs[1]);
                 Deadline newDeadline = new Deadline(description, by);
                 System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
