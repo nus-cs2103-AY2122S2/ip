@@ -17,7 +17,9 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println(indentation + line);
-        System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?\n" + indentation + "Type /help to see the commands that I can run :)");
+        System.out.println(indentation + "Hello! I'm Duke\n" + indentation +
+                "What can I do for you?\n" + indentation +
+                "Type /help to see the commands that I can run :)");
         System.out.println(indentation + line);
         parser = new Parser();
     }
@@ -37,7 +39,8 @@ public class Ui {
 
     public void showWrongFormat(String methodType) {
         System.out.println(indentation + line);
-        System.out.println(indentation + " OOPS!!! You have entered an incorrect format of " + methodType);
+        System.out.println(indentation +
+                " OOPS!!! You have entered an incorrect format of " + methodType);
         System.out.println(indentation + line);
     }
 

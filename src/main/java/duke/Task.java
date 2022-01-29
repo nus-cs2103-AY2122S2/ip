@@ -6,23 +6,23 @@ class Task {
     }
 
     protected String description;
-    protected boolean status;
+    protected boolean hasCompleted;
 
     public Task(String description) {
         this.description = description;
-        status = false;
+        hasCompleted = false;
     }
 
     String getStatus () {
-        return status ? "[X]" : "[ ]";
+        return hasCompleted ? "[X]" : "[ ]";
     }
 
     void markDone() {
-        this.status = true;
+        this.hasCompleted = true;
     }
 
     void unmarkDone () {
-        this.status = false;
+        this.hasCompleted = false;
     }
 
     public String getDescription(){

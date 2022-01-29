@@ -19,7 +19,6 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         String basePath = new File("").getAbsolutePath();
-        //file = new File( basePath + "/" + filePath);
 
         String[] path = filePath.split("/");
         for (String s : path) {
@@ -69,19 +68,24 @@ public class Storage {
 
                     Deadline deadline;
                     if (currentLine.charAt(4) == 'X') {
-                        deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(') - 1), true, dueDate);
+                        deadline = new Deadline(currentLine.substring(6,
+                                currentLine.indexOf('(') - 1), true, dueDate);
                     } else {
-                        deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(') - 1), dueDate);
+                        deadline = new Deadline(currentLine.substring(6,
+                                currentLine.indexOf('(') - 1), dueDate);
                     }
                     taskArrayList.add(deadline);
                 } else if (currentLine.contains("[E]")) {
-                    String date = currentLine.substring(currentLine.indexOf('(') + 5, currentLine.indexOf(')'));
+                    String date = currentLine.substring(currentLine.indexOf('(') + 5,
+                            currentLine.indexOf(')'));
                     Date dueDate = (Date) formatter.parse(date);
                     Event event;
                     if (currentLine.charAt(4) == 'X') {
-                        event = new Event(currentLine.substring(6, currentLine.indexOf('(') - 1), true, dueDate);
+                        event = new Event(currentLine.substring(6,
+                                currentLine.indexOf('(') - 1), true, dueDate);
                     } else {
-                        event = new Event(currentLine.substring(6, currentLine.indexOf('(') - 1), dueDate);
+                        event = new Event(currentLine.substring(6,
+                                currentLine.indexOf('(') - 1), dueDate);
                     }
                     taskArrayList.add(event);
                 } else {

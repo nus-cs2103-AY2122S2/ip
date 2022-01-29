@@ -17,7 +17,7 @@ public class Event extends Task {
 
     public Event(String description, boolean hasCompleted, Date date) {
         super(description);
-        this.status = hasCompleted;
+        this.hasCompleted = hasCompleted;
         this.date = date;
 
     }
@@ -29,6 +29,7 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return this.description + " (at: " + formatter.format(date).toString() + ")";
+        return this.description +
+                " (at: " + formatter.format(date).toString() + ")";
     }
 }

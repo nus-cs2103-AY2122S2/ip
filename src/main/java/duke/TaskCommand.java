@@ -37,8 +37,10 @@ public class TaskCommand extends Command {
                 ToDos newToDo = new ToDos(newString);
                 taskList.addTask(newToDo);
                 message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newToDo.toString() + newToDo.getStatus() + " " + newToDo.getDescription() + "\n" +
-                        indentation + "Now you have " + String.valueOf(taskList.getSize()) + " tasks in the list.";
+                        indentation + "  " + newToDo.toString() +
+                        newToDo.getStatus() + " " + newToDo.getDescription() + "\n" +
+                        indentation + "Now you have " +
+                        String.valueOf(taskList.getSize()) + " tasks in the list.";
                 storage.appendTask(newToDo);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showWrongFormat("ToDo");
@@ -52,8 +54,10 @@ public class TaskCommand extends Command {
                 Event newEvent = new Event(description, dueDate);
                 taskList.addTask(newEvent);
                 message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newEvent.toString() + newEvent.getStatus() + " " + newEvent.getDescription() + "\n" +
-                        indentation + "Now you have " + String.valueOf(taskList.getSize()) + " tasks in the list.";
+                        indentation + "  " + newEvent.toString() +
+                        newEvent.getStatus() + " " + newEvent.getDescription() + "\n" +
+                        indentation + "Now you have " +
+                        String.valueOf(taskList.getSize()) + " tasks in the list.";
                 storage.appendTask(newEvent);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Event");
@@ -67,15 +71,17 @@ public class TaskCommand extends Command {
                 Deadline newDeadline = new Deadline(description, dueDate);
                 taskList.addTask(newDeadline);
                 message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newDeadline.toString() + newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n" +
-                        indentation + "Now you have " + String.valueOf(taskList.getSize() + " tasks in the list.");
+                        indentation + "  " + newDeadline.toString() +
+                        newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n" +
+                        indentation + "Now you have " +
+                        String.valueOf(taskList.getSize() + " tasks in the list.");
                 storage.appendTask(newDeadline);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Deadline");
                 return;
             }
         }
-        
+
         ui.outputMessage(message);
     }
 }

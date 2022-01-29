@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, boolean hasCompleted, Date date) {
         super(description);
-        this.status = hasCompleted;
+        this.hasCompleted = hasCompleted;
         this.date = date;
     }
 
@@ -27,6 +27,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return this.description + " (by: " + formatter.format(date).toString() + ")";
+        return this.description +
+                " (by: " + formatter.format(date).toString() + ")";
     }
 }

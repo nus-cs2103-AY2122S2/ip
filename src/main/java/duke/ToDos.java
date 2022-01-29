@@ -8,7 +8,7 @@ public class ToDos extends Task {
 
     public ToDos(String description, boolean hasCompleted) {
         super(description);
-        this.status = hasCompleted;
+        this.hasCompleted = hasCompleted;
     }
 
     @Override
