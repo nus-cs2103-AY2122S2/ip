@@ -3,7 +3,7 @@ package paggro.parser;
 import paggro.command.ByeCommand;
 import paggro.command.Command;
 import paggro.command.DeadlineCommand;
-import paggro.command.DeleteCommand
+import paggro.command.DeleteCommand;
 import paggro.command.EventCommand;
 import paggro.command.ListCommand;
 import paggro.command.ListOnDateCommand;
