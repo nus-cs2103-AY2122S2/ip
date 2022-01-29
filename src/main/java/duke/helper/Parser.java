@@ -9,6 +9,7 @@ import duke.tasks.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 public class Parser {
 
@@ -62,7 +63,8 @@ public class Parser {
         String[] strArr = input.split(" ");
         String command = strArr[0];
         if(!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
-                || command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
+                || command.equals("deadline") || command.equals("event") || command.equals("delete") ||
+                command.equals("find"))) {
             throw new DukeInvalidCommandException();
         }
         if (command.equals("list")) {
@@ -165,6 +167,21 @@ public class Parser {
             }
             return "Noted. I've removed this task:" + "\n" + task.toString() + "\n"+
             "Now you have " + taskList.size() + " tasks in the list.";
+        }
+        if (command.equals("find")){
+            String keyword = strArr[1];
+            StringBuilder message = new StringBuilder("Here are the matching tasks in your list:");
+            int j = 1;
+            for (int i = 1; i <= taskList.size(); i++) {
+                int index = i - 1;
+                if (taskList.get(index).getDescription().contains(keyword)) {
+                    message.append("\n" + j + ". " + taskList.get(index).toString());
+                    j++;
+                }
+
+            }
+            return message.toString();
+
         }
         return null;
     }

@@ -17,6 +17,14 @@ public class Task {
         return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
 
+    /**
+     * Returns the description of the task.
+     * @return description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getDetail() {
         return "";
     }
