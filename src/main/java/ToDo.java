@@ -9,7 +9,7 @@ public class ToDo extends Task {
     }
 
     public String toFile() {
-        return "T -- " + super.toFile();
+        return "T\t" + super.toFile();
     }
 
     @Override

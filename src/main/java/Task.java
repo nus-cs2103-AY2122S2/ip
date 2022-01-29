@@ -21,7 +21,7 @@ public class Task {
     }
 
     public String toFile() {
-        return this.completed + " -- " + this.description;
+        return this.completed + "\t" + this.description;
     }
 
     @Override

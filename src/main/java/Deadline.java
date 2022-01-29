@@ -1,31 +1,28 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Deadline extends Task {
 
-    public String deadline;
-    public LocalDate date;
-    public String time;
+    public Date deadline;
+    SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, Date deadline) {
         super(description);
         this.deadline = deadline;
-        String[] datetime = deadline.trim().split(" ");
-        this.date = LocalDate.parse(datetime[0].trim());
-        this.time = datetime[1].trim();
     }
 
-    public Deadline(String description, String deadline, boolean completed) {
+    public Deadline(String description, Date deadline, boolean completed) {
         super(description, completed);
-        this.deadline = deadline.trim();
+        this.deadline = deadline;
     }
 
     public String toFile() {
-        return "D -- " + super.toFile() + " -- " + this.deadline;
+        System.out.println(this.deadline);
+        return "D\t" + super.toFile() + "\t" + ft.format(this.deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.time + ")";
+        return "[D]" + super.toString() + " (by: " + ft.format(this.deadline) + ")";
     }
 }

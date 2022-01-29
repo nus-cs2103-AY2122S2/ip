@@ -1,31 +1,27 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Event extends Task {
 
-    public String duration;
-    public LocalDate date;
-    public String time;
+    public Date duration;
+    SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
 
-    public Event(String description, String duration) {
+    public Event(String description, Date duration) {
         super(description);
-        this.duration = duration.trim();
-        String[] datetime = duration.trim().split(" ");
-        this.date = LocalDate.parse(datetime[0].trim());
-        this.time = datetime[1].trim();
+        this.duration = duration;
     }
 
-    public Event(String description, String duration, boolean completed) {
+    public Event(String description, Date duration, boolean completed) {
         super(description, completed);
-        this.duration = duration.trim();
+        this.duration = duration;
     }
 
     public String toFile() {
-        return "E -- " + super.toFile() + " -- " + this.duration;
+        return "E\t" + super.toFile() + "\t" + ft.format(this.duration);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.time + ")";
+        return "[D]" + super.toString() + " (at: " + ft.format(this.duration) + ")";
     }
 }
