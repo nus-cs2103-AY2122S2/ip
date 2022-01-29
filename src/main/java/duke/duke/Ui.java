@@ -8,6 +8,11 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * Prints the logo of Duke when called, as well as a simple welcome
+     * message.
+     */
+
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,9 +24,19 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Prints a line when called
+     */
+
     public void showLine() {
         System.out.println(line);
     }
+
+    /**
+     * Returns user input when called.
+     *
+     * @return User input.
+     */
 
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
