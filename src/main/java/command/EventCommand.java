@@ -1,18 +1,19 @@
 package command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import exception.DukeException;
 import storage.Storage;
 import task.Event;
 import task.TaskList;
 import ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class EventCommand extends Command {
-    String message;
-    String time;
+    private String message;
+    private String time;
 
+    /** Stores message and time for Event Task to be created. */
     public EventCommand(String message, String time) {
         this.message = message;
         this.time = time;
@@ -35,8 +36,8 @@ public class EventCommand extends Command {
             throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
         }
         storage.writeToFile(taskList);
-        ui.outputMessage("Got it. I've added this task: \n" +
-                taskList.get(taskList.size() - 1) +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.outputMessage("Got it. I've added this task: \n"
+                + taskList.get(taskList.size() - 1)
+                + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 }

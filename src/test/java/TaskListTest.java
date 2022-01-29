@@ -1,3 +1,7 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import task.Deadline;
@@ -5,15 +9,10 @@ import task.Event;
 import task.TaskList;
 import task.Todo;
 
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class TaskListTest {
 
     @Test
-    public void taskListSize(){
+    public void taskListSize() {
         TaskList taskList = new TaskList();
         taskList.add(new Deadline("one", false, LocalDate.parse("2020-02-02")));
         taskList.add(new Event("two", true, LocalDate.parse("2021-01-02")));
@@ -23,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskListDelete(){
+    public void taskListDelete() {
         TaskList taskList = new TaskList();
         taskList.add(new Deadline("one", false, LocalDate.parse("2020-02-02")));
         taskList.add(new Event("two", true, LocalDate.parse("2021-01-02")));

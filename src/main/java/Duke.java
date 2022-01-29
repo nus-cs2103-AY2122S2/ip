@@ -10,6 +10,7 @@ public class Duke {
     private final Storage storage;
     private final TaskList taskList;
 
+    /** Uses Ui, Storage and TaskList. */
     public Duke() throws DukeException {
         ui = new Ui();
         storage = new Storage();
@@ -21,7 +22,7 @@ public class Duke {
      * @param args Only inputs are user inputs from Ui. Not utilised.
      * @throws DukeException If there is a problem with creating Storage file.
      */
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws DukeException {
         Duke dk = new Duke();
         Ui ui = dk.ui;
         Storage storage = dk.storage;

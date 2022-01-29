@@ -6,7 +6,7 @@ import task.TaskList;
 import ui.Ui;
 
 public class DeleteCommand extends Command {
-    int serialNumber;
+    private int serialNumber;
 
     public DeleteCommand(int serialNumber) {
         this.serialNumber = serialNumber;
@@ -26,11 +26,11 @@ public class DeleteCommand extends Command {
         if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
             throw new DukeException("Have you entered the correct number?");
         }
-        String taskDescription = taskList.get(this.serialNumber - 1).description;
+        String taskDescription = taskList.get(this.serialNumber - 1).getDescription();
         taskList.delete(this.serialNumber);
         storage.writeToFile(taskList);
-        ui.outputMessage("Noted. I've removed this task:\n" +
-                taskDescription +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.outputMessage("Noted. I've removed this task:\n"
+                + taskDescription
+                + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 }

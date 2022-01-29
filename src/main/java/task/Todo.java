@@ -5,11 +5,11 @@ public class Todo extends Task {
         super(description, isDone);
     }
     public String fileFormat() {
-        return String.format("T | %s | %s", this.isDone ? "X" : " ", this.description);
+        return String.format("T | %s | %s", getTaskStatus() ? "X" : " ", getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", this.isDone ? "X" : " ", this.description);
+        return String.format("[T][%s] %s", getTaskStatus() ? "X" : " ", getDescription());
     }
 }
