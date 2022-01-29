@@ -16,6 +16,7 @@ import juke.task.Task;
 import juke.task.Todo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Juke {
     private static final Juke INSTANCE = new Juke();
@@ -88,6 +89,9 @@ public class Juke {
                                 .addParameter("", s)
                                 .execute();
                         ui.displayResult(cmd.getResult());
+                        break;
+                    case "find":
+                        this.find(args);
                         break;
                     default:
                         this.echo(args);
@@ -221,6 +225,27 @@ public class Juke {
             }
         } else {
             throw new JukeInvalidArgumentCountException("event", 4, args.length);
+        }
+    }
+    
+    private void find(String[] args) throws JukeException {
+        if (args.length > 1) {
+            String query = "";
+            for (int i = 1; i < args.length; i++) {
+                query += args[i] + " ";
+            }
+            query = query.strip();
+            List<Task> results = this.taskList.search(query);
+            if (results.size() == 0) {
+                throw new JukeException("No results found.");
+            }
+            String[] descriptions = new String[results.size()];
+            for (int i = 0; i < results.size(); i++) {
+                descriptions[i] = results.get(i).toString();
+            }
+            this.ui.formattedPrint(descriptions);
+        } else {
+            throw new JukeInvalidArgumentCountException("find", 2, args.length);
         }
     }
     

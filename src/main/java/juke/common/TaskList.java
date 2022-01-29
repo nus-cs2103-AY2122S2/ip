@@ -5,6 +5,7 @@ import juke.task.Task;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> taskList;
@@ -32,6 +33,16 @@ public class TaskList implements Iterable<Task> {
     
     public int size() {
         return this.taskList.size();
+    }
+    
+    public List<Task> search(String query) {
+        ArrayList<Task> queryList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(query)) {
+                queryList.add(task);
+            }
+        }
+        return queryList;
     }
     
     @Override
