@@ -270,4 +270,28 @@ public class Commands {
         }
         history.deleteTask(index);
     }
+
+    /**
+     * A method that, when called, builds a String phrase with the inputted String[] tokens before getting the
+     * inputted instance of DukeHistory to call findPhrase().
+     *
+     * It then prints the returned String for the user to see.
+     *
+     * @param tokens A String[] of tokens inputted by the user.
+     * @param history An instance of DukeHistory.
+     * @throws DukeException If no task is found matching the inputted phrase.
+     */
+    public void find(String[] tokens, DukeHistory history) throws DukeException {
+        StringBuilder phrase = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            phrase.append(tokens[i]);
+            if (i != (tokens.length - 1)) {
+                phrase.append(" ");
+            }
+        }
+        String border = "_______________________________________________________\n";
+        System.out.println(border
+                + "Here is what we found:\n"
+                + history.findPhrase(phrase.toString()) + border);
+    }
 }

@@ -49,6 +49,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             case "list":
                 try {
@@ -72,6 +73,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "unmark": {
@@ -85,6 +87,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "todo": {
@@ -100,6 +103,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "deadline": {
@@ -118,6 +122,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "event": {
@@ -136,6 +141,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "delete": {
@@ -149,6 +155,7 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
                 }
             }
             case "update": {
@@ -157,6 +164,22 @@ public class Duke {
                     break;
                 } catch (IOException e) {
                     ui.printWriteError();
+                    break;
+                }
+            }
+            case "find": {
+                try {
+                    if (tokens.length <= 1) {
+                        throw new MissingFormatArgumentException("no argument detected");
+                    }
+                    cmd.find(tokens, history);
+                    break;
+                } catch (MissingFormatArgumentException ex) {
+                    ui.printMissingArgumentError(keyword);
+                    break;
+                } catch (DukeException e) {
+                    ui.printFoundNothing();
+                    break;
                 }
             }
             default:

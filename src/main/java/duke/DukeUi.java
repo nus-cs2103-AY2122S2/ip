@@ -130,4 +130,15 @@ public class DukeUi {
                 + "_______________________________________________________\n";
         System.out.println(err);
     }
+
+    /**
+     * A method that prints a response if Duke cannot find any tasks matching a users inputted phrase.
+     */
+    public void printFoundNothing() {
+        String err = "_______________________________________________________\n"
+                + "It appears we could not find anything matching the phrase.\n"
+                + "Please try adding the task to Duke!\n"
+                + "_______________________________________________________\n";
+        System.out.println(err);
+    }
 }

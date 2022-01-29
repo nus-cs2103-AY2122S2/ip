@@ -223,4 +223,44 @@ public class DukeHistory {
     public int getSize() {
         return records.size();
     }
+
+    /**
+     * A method that, when called, looks through all the tasks in the current instance of ArrayList<Task> records
+     * and find all the tasks whose description contains the inputted phrase.
+     *
+     * It then returns a constructed String containing a list of all the identified tasks.
+     *
+     * @param phrase A String representing the inputted phrase.
+     * @return A String that contains a list of all tasks with the inputted phrase in their description.
+     * @throws DukeException If no tasks is found matching the inputted phrase.
+     */
+    public String findPhrase(String phrase) throws DukeException {
+        int count = 1;
+        StringBuilder s = new StringBuilder();
+        for (Task nextTask : records) {
+            if (nextTask instanceof ToDos) {
+                ToDos temp = (ToDos) nextTask;
+                if (temp.getDescription().contains(phrase)) {
+                    s.append(count).append(".").append(temp.getToDo());
+                    count++;
+                }
+            } else if (nextTask instanceof Deadlines) {
+                Deadlines temp = (Deadlines) nextTask;
+                if (temp.getDescription().contains(phrase)) {
+                    s.append(count).append(".").append(temp.getDeadline());
+                    count++;
+                }
+            } else if (nextTask instanceof Event) {
+                Event temp = (Event) nextTask;
+                if (temp.getDescription().contains(phrase)) {
+                    s.append(count).append(".").append(temp.getEvent());
+                    count++;
+                }
+            }
+        }
+        if (count == 1) {
+            throw new DukeException("could not find anything matching the phrase");
+        }
+        return s.toString();
+    }
 }
