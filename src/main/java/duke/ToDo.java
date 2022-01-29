@@ -10,6 +10,9 @@ public class ToDo extends Task {
         super(description, completed);
     }
 
+    /**
+     * @inheritDoc
+     */
     public String toFile() {
         return "T\t" + super.toFile();
     }

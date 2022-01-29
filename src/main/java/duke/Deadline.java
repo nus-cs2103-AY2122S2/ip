@@ -18,6 +18,9 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * @inheritDoc
+     */
     public String toFile() {
         System.out.println(this.deadline);
         return "D\t" + super.toFile() + "\t" + ft.format(this.deadline);
