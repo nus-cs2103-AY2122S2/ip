@@ -72,4 +72,17 @@ public class TaskList {
         return strReturn;
     }
 
+    public String tasksFinder(String toFind) {
+        String s = "";
+        int counter = 1;
+        for (int i = 0; i < count; i++) {
+            if (aryLst.get(i).description.contains(toFind)) {
+                s += "\n" + counter + ". " + aryLst.get(i).toString();
+                counter++;
+            }
+        }
+
+        return s;
+    }
+
 }

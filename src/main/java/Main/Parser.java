@@ -6,6 +6,7 @@ import Command.ExitCommand;
 import Command.ListCommand;
 import Command.MarkCommand;
 import Command.DeleteCommand;
+import Command.FindCommand;
 
 public class Parser {
 
@@ -58,6 +59,12 @@ public class Parser {
             }
             num = Integer.parseInt(splitStr[1]);
             return new DeleteCommand(num);
+        } else if (us.contains("FIND")) {
+            splitStr = s.split(" ");
+            if (splitStr.length < 2) {
+                throw new TsundereException("Hmph you baka, gimme a correct format. For example: find eat");
+            }
+            return new FindCommand(splitStr[1]);
         } else {
             throw new TsundereException("I don't know what you want! Say something valid.");
         }
