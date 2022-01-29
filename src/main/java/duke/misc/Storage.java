@@ -26,6 +26,9 @@ public class Storage {
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String DATA_PATH = "./data/data.txt";
 
+    /**
+     * Initialises a new storage instance.
+     */
     public Storage() {
         try {
             initFileFolder();

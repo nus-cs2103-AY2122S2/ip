@@ -1,5 +1,7 @@
 package duke.gui;
 
+import java.io.FileNotFoundException;
+
 import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -10,10 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.FileNotFoundException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -59,7 +58,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (response.equals("See you again!")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished( event -> Platform.exit() );
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }
