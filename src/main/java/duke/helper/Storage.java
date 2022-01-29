@@ -22,7 +22,7 @@ public class Storage {
         String directoryPath = "/" + pathArr[0];
         try {
             file = new File(System.getProperty("user.dir") + "/" + filePath);
-            if(!file.isFile()) {
+            if (!file.isFile()) {
                 File dir;
                 dir = new File(System.getProperty("user.dir") + directoryPath);
                 dir.mkdir();
@@ -39,14 +39,14 @@ public class Storage {
      * @param taskList list of tasks to be saved.
      */
     public void save(ArrayList<Task> taskList) {
-        try{
+        try {
             FileWriter fw = new FileWriter(file);
-            for(Task task : taskList){
+            for (Task task : taskList){
                 fw.write(task.getDetail());
             }
             fw.close();
             System.out.println("saving in progress");
-        } catch(IOException e) {
+        } catch (IOException e) {
 //            System.out.println("saving failed");
             System.out.println(e.getMessage());
         }

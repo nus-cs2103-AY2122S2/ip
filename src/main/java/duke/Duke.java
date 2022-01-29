@@ -11,7 +11,6 @@ import duke.helper.Ui;
  */
 public class Duke {
 
-
     //constructor
     private TaskList taskList;
     private Storage storage;
@@ -45,12 +44,10 @@ public class Duke {
                 ui.print(message);
                 storage.save(taskList.getTaskList());
 
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 System.out.println(e.toString());
             }
         }
-
     }
 
     /**
