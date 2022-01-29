@@ -11,8 +11,20 @@ import duke.command.UnmarkCommand;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A parser that parses user inputs into the appropriate Command Object.
+ */
 public class Parser {
 
+    /**
+     * Parses a user input instruction into a valid Command Object.
+     *
+     * @param input String instruction.
+     * @return Command Object.
+     * @throws ArrayIndexOutOfBoundsException If input has an invalid number of fields for the given command.
+     * @throws NumberFormatException If input index cannot be converted into a valid integer.
+     * @throws DateTimeParseException If input date is in the incorrect format.
+     */
     public static Command parse(String input) throws ArrayIndexOutOfBoundsException,
         NumberFormatException, DateTimeParseException {
         input = input.trim();
