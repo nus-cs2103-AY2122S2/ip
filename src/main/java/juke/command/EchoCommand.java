@@ -12,12 +12,12 @@ public class EchoCommand extends Command {
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = new Result.Error(new JukeException("Unknwon parameter " + param));
+                this.result = Result.error(new JukeException("Unknwon parameter " + param));
                 return this;
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = new Result.Error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeException("Missing default argument"));
             return this;
         }
         return this;

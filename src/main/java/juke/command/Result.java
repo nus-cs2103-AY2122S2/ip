@@ -4,74 +4,80 @@ import juke.exception.JukeException;
 
 /**
  * Abstraction for the result of the execution of a command.
- *
- * @param <T> Only used for inner classes.
  */
-public abstract class Result<T> {
-    /**
-     * Returns the stored value.
-     *
-     * @return Stored value.
-     */
-    public abstract T get();
+public abstract class Result {
+    private String message;
+    
+    private Result(String message) {
+        this.message = message;
+    }
     
     /**
-     * Returns the stored value, or throws an exception.
+     * Creates a new success result.
      *
-     * @return Stored value.
+     * @param message Message.
+     * @return Success result.
+     */
+    public static Result success(String message) {
+        return new Result.Success(message);
+    }
+    
+    /**
+     * Creates a new error result.
+     *
+     * @param exception Exception to throw.
+     * @return Error result.
+     */
+    public static Result error(Exception exception) {
+        return new Result.Error(exception);
+    }
+    
+    /**
+     * Creates a new empty result.
+     *
+     * @return Empty result.
+     */
+    public static Result empty() {
+        return Empty.EMPTY_INSTANCE;
+    }
+    
+    /**
+     * Returns the stored string.
+     *
+     * @return Stored string.
+     */
+    public String get() {
+        return this.message;
+    }
+    
+    /**
+     * Returns the stored string, or throws an exception.
+     *
+     * @return Stored string.
      * @throws Exception Exception.
      */
-    public abstract String getOrThrow() throws Exception;
+    public String getOrThrow() throws Exception {
+        return this.message;
+    }
     
     /**
      * A successful execution of a command.
      */
-    public static class Success extends Result<String> {
-        private String message;
-        
+    public static class Success extends Result {
         public Success(String message) {
-            this.message = message;
-        }
-    
-        /**
-         * Returns the stored value.
-         *
-         * @return Stored value.
-         */
-        @Override
-        public String get() {
-            return this.message;
-        }
-    
-        /**
-         * Returns the stored value.
-         *
-         * @return Stored value.
-         */
-        @Override
-        public String getOrThrow() {
-            return this.message;
+            super(message);
         }
     }
     
     /**
      * A command execution with an error.
      */
-    public static class Error extends Result<Exception> {
+    public static class Error extends Result {
         private Exception exception;
         
-        public Error(Exception exception) {
+        private Error(Exception exception) {
+            super(exception.getMessage());
             this.exception = exception;
-        }
-    
-        /**
-         * Returns the exeception.
-         *
-         * @return Exception.
-         */
-        @Override
-        public Exception get() {
-            return this.exception;
         }
     
         /**
@@ -89,17 +95,13 @@ public abstract class Result<T> {
     /**
      * A result before command execution.
      */
-    public static class Empty extends Result<Object> {
-        private static final Object NULL_OBJECT = null;
+    public static class Empty extends Result {
+        private static final Result EMPTY_INSTANCE = new Empty();
+        
+        private static final JukeException EMPTY_EXCEPTION = new JukeException("Result is empty.");
     
-        /**
-         * Returns a static instance of a null object.
-         *
-         * @return Null.
-         */
-        @Override
-        public Object get() {
-            return NULL_OBJECT;
+        private Empty() {
+            super(null);
         }
     
         /**
@@ -110,7 +112,7 @@ public abstract class Result<T> {
          */
         @Override
         public String getOrThrow() throws Exception {
-            throw new JukeException("Result is empty");
+            throw EMPTY_EXCEPTION;
         }
     }
 }

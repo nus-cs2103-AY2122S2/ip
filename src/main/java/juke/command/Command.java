@@ -22,7 +22,7 @@ public abstract class Command {
     /**
      * Result of the command execution.
      */
-    protected Result result = new Result.Empty();
+    protected Result result = Result.empty();
     
     /**
      * Constructor that initializes the command.
@@ -78,11 +78,11 @@ public abstract class Command {
     public String getArgument(String param) {
         if (this.hasParameter(param)) {
             return this.paramArgs.get(param).orElseGet(() -> {
-                this.result = new Result.Error(new JukeException("Missing argument for parameter " + param));
+                this.result = Result.error(new JukeException("Missing argument for parameter " + param));
                 return "";
             });
         } else {
-            this.result = new Result.Error(new JukeException("Missing parameter " + param));
+            this.result = Result.error(new JukeException("Missing parameter " + param));
             return "";
         }
     }
@@ -116,7 +116,7 @@ public abstract class Command {
      */
     public String getDefaultArgument() {
         return this.paramArgs.get(DEFAULT_PARAMETER).orElseGet(() -> {
-            this.result = new Result.Error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeException("Missing default argument"));
             return "";
         });
     }
