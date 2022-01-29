@@ -57,8 +57,8 @@ public class Parser {
     }
 
     private boolean isAdd(String command) {
-        return command.equalsIgnoreCase("todo") ||
-                command.equalsIgnoreCase("deadline") ||
-                command.equalsIgnoreCase("event");
+        return command.equalsIgnoreCase("todo")
+                || command.equalsIgnoreCase("deadline")
+                || command.equalsIgnoreCase("event");
     }
 }

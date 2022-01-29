@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String args) {
         this.args = args;
     }
-    
+
     /**
      * Executes the delete command.
      */
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(this.args);
             int noOfTasks = taskList.size();
             String task = taskList.getTasks().get(index - 1).toString();
-            
+
             taskList.delete(--index);
             storage.writeToFile("", index, true);
             noOfTasks = taskList.size();
