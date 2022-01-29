@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class Duke {
     static final String BYE = "bye";
     static final String LIST = "list";
-    static final ArrayList<String> textHistory = new ArrayList<>();
+    static final String MARK = "mark";
+    static final String UNMARK = "unmark";
+    static final ArrayList<WordListItem> textHistory = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,8 +23,24 @@ public class Duke {
         String input = "";
         while (true) {
             input = sc.nextLine();
+            if (input.isEmpty()) {
+                warnEmpty();
+                continue;
+            }
             if (isList(input)) {
                 printHistory();
+                continue;
+            }
+
+            if (isMark(input)) {
+                int itemNumber = Integer.parseInt(input.substring(5));
+                markItem(itemNumber);
+                continue;
+            }
+
+            if (isUnmark(input)) {
+                int itemNumber = Integer.parseInt(input.substring(7));
+                unmarkItem(itemNumber);
                 continue;
             }
 
@@ -37,20 +55,31 @@ public class Duke {
     }
 
     public static void storeWord(String word) {
-        Duke.textHistory.add(word);
+        Duke.textHistory.add(new WordListItem(word));
     }
 
     public static void printHistory() {
         int i = 1;
         System.out.println("------------------------------------");
-        for(String word: Duke.textHistory) {
-            System.out.println(i + ". " + word);
+        for(WordListItem wordListItem: Duke.textHistory) {
+            System.out.println(i + ". " + wordListItem);
+            i++;
         }
         System.out.println("------------------------------------");
         System.out.println("");
     }
 
-//    public static void displayResult()
+    public static void markItem(int itemNumber) {
+        Duke.textHistory.get(itemNumber - 1).markItem();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("  " + Duke.textHistory.get(itemNumber - 1));
+    }
+
+    public static void unmarkItem(int itemNumber) {
+        Duke.textHistory.get(itemNumber - 1).unmarkItem();
+        System.out.println("Nice! I've marked this task as not done: ");
+        System.out.println("  " + Duke.textHistory.get(itemNumber - 1));
+    }
 
     public static void echo(String words) {
         System.out.println("------------------------------------");
@@ -63,6 +92,14 @@ public class Duke {
         return Duke.BYE.equals(word);
     }
 
+    public static boolean isMark(String word) {
+        return word.startsWith(Duke.MARK);
+    }
+
+    public static boolean isUnmark(String word) {
+        return word.startsWith(Duke.UNMARK);
+    }
+
     public static boolean isList(String word) {
         return Duke.LIST.equals(word);
     }
@@ -70,6 +107,10 @@ public class Duke {
     public static void replyWelcomeMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    public static void warnEmpty() {
+        System.out.println("input is Empty!");
     }
     public static void replyBye() {
         System.out.println("Bye. Hope to see you again soon!");
