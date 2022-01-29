@@ -48,40 +48,42 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String tempResult = "";
         switch (this.type) {
         case "T":
             try {
                 ToDo temp = new ToDo(description);
                 tasks.addTask(temp);
-                ui.showAddTodo(temp.toString(), tasks.getSize());
+                tempResult = ui.showAddTodo(temp.toString(), tasks.getSize());
                 storage.write(tasks);
             } catch (DukeException e) {
-                ui.showExceptionError(e);
+                tempResult = ui.showExceptionError(e);
             }
             break;
         case "D":
             try {
                 Deadline ddl = new Deadline(description, dateTime);
                 tasks.addTask(ddl);
-                ui.showAddDeadline(ddl.toString(), tasks.getSize());
+                tempResult = ui.showAddDeadline(ddl.toString(), tasks.getSize());
                 storage.write(tasks);
             } catch (DukeException e) {
-                ui.showExceptionError(e);
+                tempResult = ui.showExceptionError(e);
             }
             break;
         case "E":
             try {
                 Event event = new Event(description, dateTime);
                 tasks.addTask(event);
-                ui.showAddEvent(event.toString(), tasks.getSize());
+                tempResult = ui.showAddEvent(event.toString(), tasks.getSize());
                 storage.write(tasks);
             } catch (DukeException e) {
-                ui.showExceptionError(e);
+                tempResult = ui.showExceptionError(e);
             }
             break;
         default:
             break;
         }
+        return tempResult;
     }
 }

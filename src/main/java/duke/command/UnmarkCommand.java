@@ -26,16 +26,18 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String tempResult = "";
         try {
             if (currTask - 1 < 0 || (currTask > tasks.getSize())) {
                 throw new DukeException("☹ OOPS!!! The task of a unmark cannot be reached.");
             }
             tasks.getTask(currTask - 1).markAsNotDone();
-            ui.showSuccessUnmark(tasks.getTask(currTask - 1).toString());
+            tempResult = ui.showSuccessUnmark(tasks.getTask(currTask - 1).toString());
             storage.write(tasks);
         } catch (DukeException e) {
-            ui.showExceptionError(e);
+            tempResult = ui.showExceptionError(e);
         }
+        return tempResult;
     }
 }

@@ -7,8 +7,6 @@ import duke.helptool.Storage;
 import duke.helptool.TaskList;
 import duke.helptool.Ui;
 
-
-
 /**
  * The type Duke.
  *
@@ -37,34 +35,22 @@ public class Duke {
     }
 
     /**
-     * Run the chatterbot
+     * Generate response text based on user input
+     *
+     * @param input the input
+     * @return the response
      */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                if (c != null) {
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                }
-            } catch (DukeException e) {
-                ui.showExceptionError(e);
-            } finally {
-                ui.showLine();
+    public String getResponse(String input) {
+        String tempResult = "";
+        try {
+            Command c = Parser.parse(input);
+            if (c != null) {
+                tempResult = c.execute(tasks, ui, storage);
             }
+        } catch (DukeException e) {
+            tempResult = ui.showExceptionError(e);
         }
+        return tempResult;
     }
 
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        new Duke("./textRecord.txt").run();
-    }
 }

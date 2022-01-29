@@ -21,17 +21,19 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String tempResult = "";
         try {
             if (currTask - 1 < 0 || (currTask > tasks.getSize())) {
                 throw new DukeException("☹ OOPS!!! The task of a delete cannot be reached.");
             }
             String taskDeleted = tasks.getTask(currTask - 1).toString();
             tasks.delete(currTask - 1);
-            ui.showDelete(taskDeleted, tasks.getSize());
+            tempResult = ui.showDelete(taskDeleted, tasks.getSize());
             storage.write(tasks);
         } catch (DukeException e) {
-            ui.showExceptionError(e);
+            tempResult = ui.showExceptionError(e);
         }
+        return tempResult;
     }
 }
