@@ -79,24 +79,24 @@ public class Storage {
             String[] strWords =  strLine.split("[|]");
 
                 switch (strWords[0]) {
-                    case "T" :
-                        if (strWords.length < 3) {
-                            throw new TsundereException("Save File Corrupted... One task can't be read!");
-                        }
-                        emptyTasks.add(new ToDo(strWords[2]));
-                        break;
-                    case "E":
-                        if (strWords.length < 4) {
-                            throw new TsundereException("Save File Corrupted... One task can't be read!");
-                        }
-                        emptyTasks.add(new Event(strWords[2], strWords[3]));
-                        break;
-                    case "D":
-                        if (strWords.length < 4) {
-                            throw new TsundereException("Save File Corrupted... One task can't be read!");
-                        }
-                        emptyTasks.add(new Deadline(strWords[2], strWords[3]));
-                        break;
+                case "T" :
+                    if (strWords.length < 3) {
+                        throw new TsundereException("Save File Corrupted... One task can't be read!");
+                    }
+                    emptyTasks.add(new ToDo(strWords[2]));
+                    break;
+                case "E":
+                    if (strWords.length < 4) {
+                        throw new TsundereException("Save File Corrupted... One task can't be read!");
+                    }
+                    emptyTasks.add(new Event(strWords[2], strWords[3]));
+                    break;
+                case "D":
+                    if (strWords.length < 4) {
+                        throw new TsundereException("Save File Corrupted... One task can't be read!");
+                    }
+                    emptyTasks.add(new Deadline(strWords[2], strWords[3]));
+                    break;
                 }
 
                 if (strWords[1].equals("1")) {

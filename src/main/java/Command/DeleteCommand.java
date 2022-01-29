@@ -9,7 +9,7 @@ import Main.Storage;
  * Delete task in tasklist and storage saves it
  */
 public class DeleteCommand extends Command {
-    int num;
+    protected int num;
     public DeleteCommand(int num) {
         this.num = num;
     }

@@ -14,8 +14,8 @@ public class MarkCommand extends Command {
         UNMARK,
     }
 
-    Type ty;
-    int num;
+    protected Type ty;
+    protected int num;
 
     /**
      * Create a new MarkCommand

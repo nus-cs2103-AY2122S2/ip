@@ -19,8 +19,8 @@ public class AddCommand extends Command {
         EVENT
     }
 
-    Type ty;
-    String body;
+    protected Type ty;
+    protected String body;
 
     /**
      * Create a new AddCommand
@@ -51,23 +51,23 @@ public class AddCommand extends Command {
 
        String[] splitStr;
         switch (this.ty) {
-            case TODO:
-                t.addTask(new ToDo(body));
-                break;
-            case DEADLINE:
-                splitStr = body.split("/by");
-                if (splitStr.length < 2) {
-                    throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by 2019-01-15");
-                }
-                t.addTask(new Deadline(splitStr[0], splitStr[1]));
-                break;
-            case EVENT:
-                splitStr = body.split("/at");
-                if (splitStr.length < 2) {
-                    throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at 2019-01-15");
-                }
-                t.addTask(new Event(splitStr[0], splitStr[1]));
-                break;
+        case TODO:
+            t.addTask(new ToDo(body));
+            break;
+        case DEADLINE:
+            splitStr = body.split("/by");
+            if (splitStr.length < 2) {
+                throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by 2019-01-15");
+            }
+            t.addTask(new Deadline(splitStr[0], splitStr[1]));
+            break;
+        case EVENT:
+            splitStr = body.split("/at");
+            if (splitStr.length < 2) {
+                throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at 2019-01-15");
+            }
+            t.addTask(new Event(splitStr[0], splitStr[1]));
+            break;
         }
 
         u.printWrapper("New task! You better do it.\n" + t.getTaskStr(t.getCount()) + "\nYou have " + t.getCount() + " task(s) to do you lazy bum!");

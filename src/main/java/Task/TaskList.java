@@ -7,14 +7,14 @@ import java.util.ArrayList;
  * manage the list of tasks
  */
 public class TaskList {
-    private List<Task> aryLst;
+    private List<Task> tasks;
     private int count;
 
     /**
      * Create a new TaskList class
      */
-    public TaskList () {
-        aryLst = new ArrayList<Task>();
+    public  TaskList () {
+        tasks = new ArrayList<Task>();
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      * @param inputTks input list of tasks from reading the save file
      */
     public TaskList(List<Task> inputTks) {
-        aryLst = inputTks;
+        tasks = inputTks;
         count = inputTks.size();
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param tk input task
      */
     public void addTask(Task tk) {
-        aryLst.add(tk);
+        tasks.add(tk);
         count++;
     }
 
@@ -43,7 +43,7 @@ public class TaskList {
      * @param num index + 1 of the task to be deleted
      */
     public void delete(int num) {
-        aryLst.remove(num -1);
+        tasks.remove(num -1);
         count--;
     }
 
@@ -53,7 +53,7 @@ public class TaskList {
      * @param num index + 1 of the task to be marked
      */
     public void markTask(int num) {
-        aryLst.get(num - 1).markDone();
+        tasks.get(num - 1).markDone();
     }
 
     /**
@@ -62,7 +62,7 @@ public class TaskList {
      * @param num index + 1 of the task to be unmarked
      */
     public void unmarkTask(int num) {
-        aryLst.get(num - 1).markNotDone();
+        tasks.get(num - 1).markNotDone();
     }
 
     /**
@@ -72,7 +72,7 @@ public class TaskList {
      * @return the string format of the task
      */
     public String getTaskStr(int num) {
-        return aryLst.get(num - 1).toString();
+        return tasks.get(num - 1).toString();
     }
 
     /**
@@ -98,7 +98,7 @@ public class TaskList {
 
         for (int i = 0; i < count; i++) {
             int num = i + 1;
-            s += "\n" + num + ". " + aryLst.get(i).toString();
+            s += "\n" + num + ". " + tasks.get(i).toString();
         }
 
         return s;
@@ -114,9 +114,9 @@ public class TaskList {
         String strReturn = "";
         for (int i = 0; i < count; i++) {
             if (i == 0) {
-                strReturn = aryLst.get(i).saveString();
+                strReturn = tasks.get(i).saveString();
             } else {
-                strReturn += "\n" + aryLst.get(i).saveString();
+                strReturn += "\n" + tasks.get(i).saveString();
             }
         }
         return strReturn;
