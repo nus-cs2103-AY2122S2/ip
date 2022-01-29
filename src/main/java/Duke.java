@@ -9,7 +9,7 @@ public class Duke {
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke \n" + "What can I do for you";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
 
@@ -28,45 +28,87 @@ public class Duke {
                     break;
                 case "mark":
                     int markIndex = sc.nextInt() - 1;
-                    Task markTask = Task.getTasks().get(markIndex);
-                    markTask.setIsDone(true);
-                    System.out.printf("Nice! I've marked this task as done: \n"
-                            + "   %s\n", markTask);
-                    break;
+                    try {
+                        Task markTask = Task.getTasks().get(markIndex);
+                        markTask.setIsDone(true);
+                        System.out.printf("Nice! I've marked this task as done: \n"
+                                + "   %s\n", markTask);
+                        break;
+                    } catch (IndexOutOfBoundsException indexErr) {
+                        DukeException e = new DukeException("☹ OOPS!!! Invalid index.");
+                        System.out.println(e.getMessage());
+                    }
                 case "unmark":
                     int unmarkIndex = sc.nextInt() - 1;
-                    Task unmarkTask = Task.getTasks().get(unmarkIndex);
-                    unmarkTask.setIsDone(false);
-                    System.out.printf("Ok, I've marked this task as not done yet: \n"
-                            + "   %s\n", unmarkTask);
-                    break;
+                    try {
+                        Task unmarkTask = Task.getTasks().get(unmarkIndex);
+                        unmarkTask.setIsDone(false);
+                        System.out.printf("Ok, I've marked this task as not done yet: \n"
+                                + "   %s\n", unmarkTask);
+                        break;
+                    } catch (IndexOutOfBoundsException indexErr) {
+                        DukeException e = new DukeException("☹ OOPS!!! Invalid index.");
+                        System.out.println(e.getMessage());
+                    }
                 case "todo":
                     String toDoDescription = sc.nextLine().trim();
-                    Task newToDo = new ToDo(toDoDescription);
-                    Task.addTask(newToDo);
-                    System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
-                            newToDo, Task.taskCountToString());
+                    if (toDoDescription.equals("")) {
+                        DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println(e.getMessage());
+                    } else {
+                        Task newToDo = new ToDo(toDoDescription);
+                        Task.addTask(newToDo);
+                        System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
+                                newToDo, Task.taskCountToString());
+                    }
                     break;
                 case "deadline":
                     String deadlineTempInput = sc.nextLine();
+                    if(!deadlineTempInput.contains("/by")) {
+                        DukeException e = new DukeException("The additional info doesn't fit the input format.");
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     String deadlineDescription = deadlineTempInput.split("/by", 2)[0].trim();
                     String deadlineDueDate = deadlineTempInput.split("/by", 2)[1].trim();
-                    Task newDeadline = new Deadline(deadlineDescription, deadlineDueDate);
-                    Task.addTask(newDeadline);
-                    System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
-                            newDeadline, Task.taskCountToString());
+                    if (deadlineDescription.equals("")) {
+                        DukeException e = new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        System.out.println(e.getMessage());
+                    } else if (deadlineDueDate.equals("")) {
+                        DukeException e = new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
+                        System.out.println(e.getMessage());
+                    } else {
+                        Task newDeadline = new Deadline(deadlineDescription, deadlineDueDate);
+                        Task.addTask(newDeadline);
+                        System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
+                                newDeadline, Task.taskCountToString());
+                    }
                     break;
                 case "event":
                     String eventTempInput = sc.nextLine();
+                    if(!eventTempInput.contains("/at")) {
+                        DukeException e = new DukeException("The additional info doesn't fit the input format.");
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     String eventDescription = eventTempInput.split("/at", 2)[0].trim();
                     String eventDateTime = eventTempInput.split("/at", 2)[1].trim();
-                    Task newEvent = new Event(eventDescription.toString(), eventDateTime.toString());
-                    Task.addTask(newEvent);
-                    System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
-                            newEvent, Task.taskCountToString());
+                    if (eventDescription.equals("")) {
+                        DukeException e = new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        System.out.println(e.getMessage());
+                    } else if (eventDateTime.equals("")) {
+                        DukeException e = new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
+                        System.out.println(e.getMessage());
+                    } else {
+                        Task newEvent = new Event(eventDescription, eventDateTime);
+                        Task.addTask(newEvent);
+                        System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
+                                newEvent, Task.taskCountToString());
+                    }
                     break;
                 default:
-                    System.out.printf("Unknown command.\n");
+                    DukeException e = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(e.getMessage());
                     break;
             }
         }
