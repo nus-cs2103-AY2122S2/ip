@@ -1,8 +1,7 @@
 package duke;
 
 /**
- * Represents a class that handles the responses that Duke gives in
- * response to certain commands.
+ * Represents a class that handles the responses that Duke gives in response to certain commands.
  */
 public class DukeUi {
 
@@ -50,8 +49,7 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints an error message when arguments
-     * are passed to commands that do not require them.
+     * A method that prints an error message when arguments are passed to commands that do not require them.
      */
     public void printFoundArgumentError() {
         String err = "_______________________________________________________\n"
@@ -63,8 +61,7 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints an error message when arguments
-     * passed to a command is invalid.
+     * A method that prints an error message when arguments passed to a command is invalid.
      */
     public void printInvalidArgumentError() {
         String err = "_______________________________________________________\n"
@@ -75,8 +72,7 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints an error message when there is
-     * no argument detected for a command that requires arguments.
+     * A method that prints an error message when there is no argument detected for a command that requires arguments.
      *
      * @param keyword A String representing the specific command used.
      */
@@ -89,9 +85,8 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints an error message when there is
-     * no DateTime argument detected or key phrases used to
-     * detect DateTime is inputted by the user.
+     * A method that prints an error message when there is no DateTime argument detected or
+     * key phrases used to detect DateTime is inputted by the user.
      *
      * @param keyword A String representing the specific command used.
      */
@@ -117,8 +112,7 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints a list of recognized commands if
-     * the user inputs an unrecognized command.
+     * A method that prints a list of recognized commands if the user inputs an unrecognized command.
      */
     public void printListOfCommands() {
         String err = "_______________________________________________________\n"

@@ -14,6 +14,9 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Represents a class meant for Unit Testing Duke.
+ */
 public class DukeTest {
 
     static DukeStorage dummyStorage = new DukeStorage();

@@ -1,12 +1,12 @@
 package duke;
 
 import java.lang.StringBuilder;
+
 import java.util.ArrayList;
 
 /**
- * Represents a class that maintains an ArrayList<Task> records,
- * using a variety of methods, created during at the beginning of
- * each session of Duke.
+ * Represents a class that maintains an ArrayList<Task> records using a variety of methods, that is created
+ * at the beginning of each session of Duke.
  */
 public class DukeHistory {
     private final ArrayList<Task> records = new ArrayList<>(100); // ArrayList of size 100 by default
@@ -15,12 +15,10 @@ public class DukeHistory {
     }
 
     /**
-     * A method that, when called, attempts to initialize a ToDos
-     * task using the inputted description and add it to the
+     * A method that, when called, attempts to initialize a ToDos task using the inputted description and adds it to the
      * ArrayList<Task> records.
      *
-     * @param description A String description interpreted by
-     *                    Commands.todo().
+     * @param description A String description interpreted by Commands.todo().
      */
     public void addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
@@ -34,18 +32,14 @@ public class DukeHistory {
     }
 
     /**
-     * A method that is called only when Duke attempts to load
-     * data from a pre-existing duke.txt file in the user's
+     * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
      *
-     * It initializes a ToDos task using the mark and description
-     * found and adds it to the current instance of ArrayList<Task>
-     * records.
+     * It initializes a ToDos task using the mark and description found and adds it to
+     * the current instance of ArrayList<Task> records.
      *
-     * @param mark An integer indicating whether the task is done
-     *             or not.
-     * @param description A String representing the description of
-     *                    the task.
+     * @param mark An integer indicating whether the task is done or not.
+     * @param description A String representing the description of the task.
      */
     public void addToDo(int mark, String description) {
         ToDos tempToDo = new ToDos(mark, description);
@@ -53,16 +47,12 @@ public class DukeHistory {
     }
 
     /**
-     * A method that, when called, attempts to initialize a Deadline
-     * task using the inputted description, date and time and add it
-     * to the ArrayList<Task> records.
+     * A method that, when called, attempts to initialize a Deadline task using
+     * the inputted description, date and time and adds it to the ArrayList<Task> records.
      *
-     * @param description A String description interpreted by
-     *                    Commands.deadline().
-     * @param date A String date interpreted by
-     *             Commands.convertToDukeDate().
-     * @param time A String time interpreted by
-     *             Commands.convertToDukeTime().
+     * @param description A String description interpreted by Commands.deadline().
+     * @param date A String date interpreted by Commands.convertToDukeDate().
+     * @param time A String time interpreted by Commands.convertToDukeTime().
      */
     public void addDeadline(String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(description, date, time);
@@ -76,18 +66,14 @@ public class DukeHistory {
     }
 
     /**
-     * A method that is called only when Duke attempts to load
-     * data from a pre-existing duke.txt file in the user's
+     * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
      *
-     * It initializes a Deadline task using the mark, description.
-     * date and time found and adds it to the current instance of
-     * ArrayList<Task> records.
+     * It initializes a Deadline task using the mark, description, date and time found and
+     * adds it to the current instance of ArrayList<Task> records.
      *
-     * @param mark An integer indicating whether the task is done
-     *             or not
-     * @param description A String representing the description
-     *                    of the task.
+     * @param mark An integer indicating whether the task is done or not
+     * @param description A String representing the description of the task.
      * @param date A String representing the date of the task.
      * @param time A String representing the time of the task.
      */
@@ -97,16 +83,12 @@ public class DukeHistory {
     }
 
     /**
-     * A method that, when called, attempts to initialize an Event
-     * task using the inputted description, date and time and add it
-     * to the ArrayList<Task> records.
+     * A method that, when called, attempts to initialize an Event task using
+     * the inputted description, date and time and adds it to the ArrayList<Task> records.
      *
-     * @param description A String description interpreted by
-     *                    Commands.event().
-     * @param date A String date interpreted by
-     *             Commands.convertToDukeDate().
-     * @param time A String time interpreted by
-     *             Commands.convertToDukeTime().
+     * @param description A String description interpreted by Commands.event().
+     * @param date A String date interpreted by Commands.convertToDukeDate().
+     * @param time A String time interpreted by Commands.convertToDukeTime().
      */
     public void addEvent(String description, String date, String time) {
         Event tempEvent = new Event(description, date, time);
@@ -120,18 +102,14 @@ public class DukeHistory {
     }
 
     /**
-     * A method that is called only when Duke attempts to load
-     * data from a pre-existing duke.txt file in the user's
+     * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
      *
-     * It initializes an Event task using the mark, description.
-     * date and time found and adds it to the current instance of
-     * ArrayList<Task> records.
+     * It initializes an Event task using the mark, description, date and time found
+     * and adds it to the current instance of ArrayList<Task> records.
      *
-     * @param mark An integer indicating whether the task is done
-     *             or not.
-     * @param description A String representing the description
-     *                    of the task.
+     * @param mark An integer indicating whether the task is done or not.
+     * @param description A String representing the description of the task.
      * @param date A String representing the date of the task.
      * @param time A String representing the time of the task.
      */
@@ -141,12 +119,10 @@ public class DukeHistory {
     }
 
     /**
-     * A method that, when called, builds a String containing all
-     * the tasks stored in the current instance of ArrayList<Task>
-     * records.
+     * A method that, when called, builds a String containing all the tasks stored
+     * in the current instance of ArrayList<Task> records.
      *
-     * @return A String containing all the tasks stored in the
-     *         current instance of ArrayList<Task> records.
+     * @return A String containing all the tasks stored in the current instance of ArrayList<Task> records.
      */
     public String printAll() {
         int count = 1;
@@ -176,21 +152,17 @@ public class DukeHistory {
     /**
      * Returns the task corresponding to the inputted entry index.
      *
-     * @param index An integer indicating the desired entry to
-     *              return.
-     * @return A Task stored in the current instance of ArrayList<Task>
-     *         records.
+     * @param index An integer indicating the desired entry to return.
+     * @return A Task stored in the current instance of ArrayList<Task> records.
      */
     public Task getTask(int index) {
         return records.get(index);
     }
 
     /**
-     * A method that, when called, deletes the corresponding entry
-     * index in ArrayList<Task> records.
+     * A method that, when called, deletes the corresponding entry index in ArrayList<Task> records.
      *
-     * @param index An integer indicating the desired entry to
-     *              delete.
+     * @param index An integer indicating the desired entry to delete.
      */
     public void deleteTask(int index) {
         StringBuilder description = new StringBuilder();
@@ -219,14 +191,12 @@ public class DukeHistory {
      * A method called when an update request is made for Duke to
      * update the local duke.txt file with the latest records.
      *
-     * It will construct a String containing all the tasks in
-     * records, appropriately formatted by the getFormattedText()
+     * It will construct a String containing all the tasks in records, appropriately formatted by the getFormattedText()
      * methods of their respective class.
      *
-     * @return A String containing all the properly formatted tasks
-     *         found in ArrayList<Task> records.
+     * @return A String containing all the properly formatted tasks found in ArrayList<Task> records.
      */
-    String formatRecord() {
+    String formatRecords() {
         StringBuilder s = new StringBuilder();
         for (Task temp : records) {
             if (temp instanceof ToDos) {
