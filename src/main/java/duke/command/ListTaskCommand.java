@@ -6,9 +6,19 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Used to show tasks from the task list when user inputs "list".
+ */
 public class ListTaskCommand extends Command {
 
-
+    /**
+     * Executes the listing of tasks within the Task List.
+     *
+     * @param tasks Tasklist that was declared in the Duke class.
+     * @param ui Ui that was declared in the Duke class.
+     * @param storage Storage that was declared in the Duke class.
+     * @throws DukeException When there is no task in the list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {

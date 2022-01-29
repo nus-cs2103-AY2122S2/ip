@@ -4,6 +4,9 @@ import duke.*;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
+/**
+ * Adds a deadline task into the task list.
+ */
 public class AddDeadlineCommand extends Command {
     private String description;
     private DateHelper datetime;
@@ -12,6 +15,13 @@ public class AddDeadlineCommand extends Command {
             "Let's try again ~(^.^)~\n" +
             "Type 'help' if you need to know how to use this command";
 
+    /**
+     * Constructor for the addition of deadlines.
+     *
+     * @param input Description of the task.
+     * @param time Due date of the task.
+     * @throws DukeException
+     */
     public AddDeadlineCommand(String input, String time) throws DukeException {
         description = input;
         if (time.length() == 0) {
@@ -23,6 +33,14 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Executes the addition of deadline task into the tasklist.
+     *
+     * @param tasks TaskList that is maintained in Ducky.
+     * @param ui Ui that is maintained in Ducky.
+     * @param storage Storage that is maintained in Ducky.
+     * @throws DukeException thrown when there is no description written.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (description.length() == 0) {

@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Parent class for all tasks. Stores information regarding the task description and whether it has been completed.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -10,9 +13,9 @@ public class Task {
     }
 
     /**
-     * Gets the duke.task description and status. Returns the formatted status and description of the duke.task.
+     * Gets the task description and status. Returns the formatted status and description of the task.
      *
-     * @return specified task.Task description
+     * @return specified Task description
      */
     public String getTask() {
         String icon = getStatusIcon();
@@ -21,32 +24,32 @@ public class Task {
     }
 
     /**
-     * Gets the duke.task description.
+     * Gets the task description.
      *
-     * @return specified task.Task description
+     * @return specified Task description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Gets the duke.task status. Returns the formatted duke.task status icon.
+     * Gets the task status. Returns the formatted task status icon.
      *
-     * @return specified task.Task status icon i.e. [X] or  [ ]
+     * @return specified Task status icon i.e. [X] or  [ ]
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
     /**
-     * Sets the duke.task status. Changes duke.task status to true.
+     * Sets the task status. Changes task status to true.
      */
     public void setDone(){
         isDone = true;
     }
 
     /**
-     * Sets the duke.task status. Changes duke.task status to false.
+     * Sets the task status. Changes task status to false.
      */
     public void setNotDone(){
         isDone = false;

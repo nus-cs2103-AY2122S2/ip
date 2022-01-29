@@ -2,25 +2,53 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * List that stores the tasks that the user has created through Ducky.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
+    /**
+     * Constructor that creates an empty TaskList.
+     */
     public TaskList() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the TaskList.
+     *
+     * @param item Task that the user would like to add (e.g. Event, Deadline, Todo).
+     */
     public void addTask(Task item){
         tasks.add(item);
     }
 
-    public Task removeTask(int j) {
-        return tasks.remove(j);
+    /**
+     * Removes a task from the task list.
+     *
+     * @param id Index of the task within the task list.
+     * @return returns the Task that was removed.
+     */
+    public Task removeTask(int id) {
+        return tasks.remove(id);
     }
 
-    public Task getTask(int i){
-        return tasks.get(i);
+    /**
+     * Gets the task from the task list.
+     *
+     * @param id Index of the the task within the task list.
+     * @return Returns the task that matches the index within the task list.
+     */
+    public Task getTask(int id){
+        return tasks.get(id);
     }
 
+    /**
+     * Formats the tasks within the Task List. Formatted string is used as what is to be saved in the text file.
+     *
+     * @return Formatted string consisting of the various tasks that the user has saved in Ducky.
+     */
     public String formatTasks() {
         String output = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -41,6 +69,11 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Gets the number of tasks within the Task List.
+     *
+     * @return Number of tasks in the Task List.
+     */
     public Integer getSize(){
         return tasks.size();
     }

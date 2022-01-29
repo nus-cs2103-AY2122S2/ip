@@ -11,20 +11,37 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
+/**
+ * Storage class is meant to read and write to the text file based on the tasks the the user creates.
+ */
 public class Storage {
-    //    String contents;
     private String fileName;
     private TaskList tasks;
 
+    /**
+     * Constructor of the Storage class.
+     *
+     * @param path  file name of the text file.
+     */
     public Storage(String path) {
         fileName = path;
         tasks = new TaskList();
     }
 
+    /**
+     * Gets the name of the file where the user stored their previous list of tasks.
+     *
+     * @return returns the file name.
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * Saves the existing tasks into the text file.
+     *
+     * @param args Formatted tasks that are in the form <Marked Status> | <Task Type> | <Task Details>.
+     */
     public void saveFile(String args) {
         try {
             FileWriter myWriter = new FileWriter(fileName, false);
@@ -36,11 +53,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the txt file and generates the TaskList based on historical tasks that the user has inputted into Ducky.
+     *
+     * @param filepath path in which the text file exists.
+     * @return TaskList which holds the historical tasks that the user inputted into Ducky previously.
+     * @throws DukeException Exception is thrown when there is an issue with the inputs in the text file.
+     */
     public TaskList readFile(String filepath) throws DukeException {
         try {
             File myObj = new File(System.getProperty("user.dir")+ "/" + filepath);
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {// Process the data such that it can see if this is event or deadline or todo,
+            while (myReader.hasNextLine()) {// Process the data such that it can see if this is event/ deadline/ todo,
                 String data = myReader.nextLine(); // then create accordingly
                 processString(data);
             }
@@ -51,6 +75,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes the strings that are in the text file.
+     *
+     * @param line A string that is in the text file. Should be in the form <Mark State> | <Task Type> | <Task Details>.
+     * @throws DukeException thrown when there is an issue with the inputs in the text file.
+     */
     private void processString(String line) throws DukeException {
         String[] parts = line.split("\\|");
         String state = parts[0].trim();

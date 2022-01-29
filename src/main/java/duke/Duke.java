@@ -8,33 +8,22 @@ import duke.command.Command;
  */
 
 /**
- * duke.Duke is the main class that
- * It houses a run duke.command to call on other classes such as
+ * Duke is the main class that houses a 'run' command to call on other classes to process the user input.
+ * It helps the user to record down tasks such as Events, Deadlines, and Todos.
+ * It can also save the user's tasks into a text file, and load it up when the user interacts with Ducky again.
  */
 public class Duke {
-
-    //    protected ArrayList<task.Task> tasks;
     private Storage storage;
     private String filename;
     private Ui ui;
     private TaskList tasks;
 
-    static final String NO_DESC = "Oops! \\(@.@)/ You have not keyed in a description for the duke.task!\n" +
-            "Let's try again ~(^.^)~\n" +
-            "Type 'help' if you need to know how to use this duke.command";
-    static final String BYE_RESPONSE = "Bye~ Hope to see you again soon!\n៚ ⋯⋯⋯ |\\__( o)> ⋯⋯⋯⋯ ༄";
-    static final String INVALID_DATE = "Oops, please put a valid time format!\n" +
-            "Let's try again ~(^.^)~\n" +
-            "Type 'help' if you need to know how to use this duke.command";
-
-
     /**
      * Processes the string inputted by the user. Filters the duke.command and calls on other functions to print a string.
      *
      * @throws DukeException when the specified ID number is not in the list, if the time is not provided accurately,
-     *                       or if there was no description or duke.command provided.
+     *                       or if there was no description or command provided.
      */
-
     public void run() {
         ui.welcome();
         boolean isExit = false;
@@ -54,7 +43,11 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Constructor method for Duke.
+     *
+     * @param filepath text file name. Typically called 'duke.txt'.
+     */
     public Duke(String filepath) {
         filename = filepath;
         storage = new Storage(filepath);

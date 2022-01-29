@@ -2,7 +2,12 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Parses the user input and triggers commands to run the input information.
+ */
 public class Parser {
+    private String userInput;
+    private String[] textEntered;
     private String command;
     private Checker checker;
     private Storage storage;
@@ -13,8 +18,23 @@ public class Parser {
             "Let's try again ~(^.^)~\n" +
             "Type 'help' if you need to know how to use this duke.command";
 
-    public Parser(String input) throws DukeException {
-        String[] textEntered = input.split(" ", 2);
+    /**
+     * Constructor method for Parser.
+     *
+     * @param input User's input into CLI (e.g. event jumping /at 6 January 2023).
+     */
+    public Parser(String input) {
+        userInput = input;
+    }
+
+    /**
+     * Parses the user input to determine the commands to be used.
+     *
+     * @throws DukeException Throws a DukeException if there is missing or incorrect information from the user input.
+     * @return Command that is to be called based on the user's input.
+     */
+    public Command parse() throws DukeException {
+        textEntered = userInput.split(" ", 2);
         command = textEntered[0];
         checker = new Checker(command);
 
@@ -89,9 +109,6 @@ public class Parser {
             parsedCommand = new MarkCommand(markId);
             break;
         }
-    }
-
-    public Command parse() {
         return parsedCommand;
     }
 }

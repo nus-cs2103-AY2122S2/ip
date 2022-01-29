@@ -2,11 +2,14 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles text to be returned to the user.
+ */
 public class Ui {
 
-    public Ui() {
-    }
-
+    /**
+     * Welcome text that is to be printed when the user first starts Ducky.
+     */
     public void welcome() {
         String logo = " ____              _"
                 + "\n|  _ \\ _   _ _____| | ____ __\n"
@@ -20,14 +23,25 @@ public class Ui {
                 "✧･ﾟ: *✧･ﾟ:* |\\__( o)> *:･ﾟ✧*:･ﾟ✧");
     }
 
+    /**
+     * New command input should end with this and output should end with this as well.
+     */
     public void showLine() {
         System.out.println("✧･ﾟ: *✧･ﾟ:* |\\__( o)> *:･ﾟ✧*:･ﾟ✧");
     }
 
+    /**
+     * Shows the error message that was caught.
+     * @param errorMessage
+     */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 
+    /**
+     * Reads in the user inputs.
+     * @return
+     */
     public String readCommand(){
         Scanner myObj = new Scanner(System.in);
         return myObj.nextLine();
