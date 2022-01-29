@@ -16,3 +16,14 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 data/data.bin
+src/main/java/duke/.idea/.gitignore
+src/main/java/duke/.idea/misc.xml
+src/main/java/duke/.idea/modules.xml
+src/main/java/duke/.idea/vcs.xml
+src/main/java/duke/.idea/codeStyles/codeStyleConfig.xml
+src/main/java/duke/data/data.bin
+text-ui-test/data/data.bin
+src/test/.idea/.gitignore
+src/test/.idea/misc.xml
+src/test/.idea/modules.xml
+src/test/.idea/vcs.xml
