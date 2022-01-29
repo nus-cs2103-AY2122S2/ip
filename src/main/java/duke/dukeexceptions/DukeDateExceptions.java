@@ -1,10 +1,21 @@
 package main.java.duke.dukeexceptions;
 
-public class DukeDateExceptions extends DukeException{
+/**
+ * Duke exceptions that catch DateTime related errors
+ */
+public class DukeDateExceptions extends DukeException {
+
+    /**
+     * Constructs the DukeDateExceptions exception
+     * @param msg
+     */
     public DukeDateExceptions(String msg) {
         super(msg);
     }
 
+    /**
+     * Prints a error msg
+     */
     @Override
     public void callback() {
         System.out.println(

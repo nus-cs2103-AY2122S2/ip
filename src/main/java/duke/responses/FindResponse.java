@@ -5,7 +5,6 @@ import main.java.duke.data.TaskList;
 /**
  * Response that is created in the event of FindCommand
  */
-
 public class FindResponse implements Response {
     
     private TaskList iterate;

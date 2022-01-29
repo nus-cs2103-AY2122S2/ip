@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 /**
  * Deadline is a type of Task that contains addition.
  */
-
 public class Deadline extends Task {
   private static String TYPE = "D";
   private String info;

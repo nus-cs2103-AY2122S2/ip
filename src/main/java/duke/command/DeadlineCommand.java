@@ -10,8 +10,7 @@ import main.java.duke.task.Task;
 /***
  * Command that is run when the user inputs a Deadline Task.
  */
-
-public class DeadlineCommand extends  Command{
+public class DeadlineCommand extends  Command {
     
     /***
      * Constructors the Command using the user command 

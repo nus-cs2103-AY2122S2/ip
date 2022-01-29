@@ -16,11 +16,19 @@ public class ToDo extends Task {
     super(name);
   }
 
+  /**
+   * Constructs the ToDo task with the given name is a specified mark value;
+   * @param name
+   * @param mark 
+   */
   public ToDo(String name, boolean mark) {
     super(name);
     this.isMarked = mark;
   }
 
+  /**
+   * @return a String representation of the Task to be stored
+   */
   @Override
   public String toStore() {
     return TYPE + " | " + this.markStore() + " | " + this.name;
@@ -31,7 +39,6 @@ public class ToDo extends Task {
    * 
    * @return a String representation fo ToDo.
    */
-
   @Override
   public String display() {
     return "[" + TYPE + "] " + "[" + markDisplay() + "] " + this.name;

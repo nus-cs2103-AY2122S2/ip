@@ -31,19 +31,15 @@ public class AddTaskResponse implements Response {
         System.out.println(
                 "____________________________________________________________"
         );
-
         System.out.println(
                 "Got it. I've added this task:"
         );
-
         System.out.println(
                 currTask.display()
         );
-
         System.out.println(
                 "Now you have " + tasklist.getTaskList().size() + " tasks in this list"
         );
-
         System.out.println(
                 "____________________________________________________________"
         );

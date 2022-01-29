@@ -7,6 +7,9 @@ public class ForeignException extends DukeException {
         super(msg);
     }
 
+    /**
+     * Prints a error msg
+     */
     @Override
     public void callback() {
         System.out.println(

@@ -1,6 +1,13 @@
 package main.java.duke.responses;
 
+/***
+ * Welcome response
+ */
 public class WelcomeResponse implements Response {
+
+    /**
+     * Callback function that displays the intended results
+     */
     @Override
     public void callback() {
         String logo = " ____        _        \n"

@@ -16,16 +16,15 @@ import java.util.Scanner;
  * Storage is a class that allows users to access a persist storage
  */
 public class Storage {
+
+
+  private File persistStore;
+  private TaskList runningTaskList;
   
   /***
    * Constructs the contents of the Storage with a TaskList
    * @param runningTaskList that to be added to the Storage
    */
-
-  private File persistStore;
-  private TaskList runningTaskList;
-
-  
   public Storage(TaskList runningTaskList) {
     this.persistStore = new File("data/command.txt");
     this.runningTaskList = runningTaskList;
@@ -96,7 +95,6 @@ public class Storage {
   /***
    * function that loads the TaskList into the permanent storage.
    */
-
   public void loadToDisk(TaskList taskList) throws DukeException {
     try {
       FileWriter fileWriter = new FileWriter(persistStore);

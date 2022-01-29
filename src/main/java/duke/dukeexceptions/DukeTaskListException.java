@@ -1,11 +1,14 @@
 package main.java.duke.dukeexceptions;
 
-public class DukeTaskListException extends DukeDateExceptions{
+public class DukeTaskListException extends DukeDateExceptions {
 
     public DukeTaskListException(String msg) {
         super(msg);
     }
 
+    /**
+     * Prints a error msg
+     */
     @Override
     public void callback() {
         System.out.println(

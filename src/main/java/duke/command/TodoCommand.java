@@ -10,14 +10,12 @@ import main.java.duke.task.ToDo;
 /***
  * Command that is run when the user inputs a Tdo Task.
  */
-
 public class TodoCommand extends Command{
 
     /***
      * Constructors the Command using the user command 
      * @param stringCmd String representation of the users command
      */
-    
     public TodoCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }

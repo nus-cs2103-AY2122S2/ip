@@ -8,7 +8,6 @@ import main.java.duke.responses.Response;
  * Command that is created when user wants to list all the task in the 
  * TaskList
  */
-
 public class ListCommand extends Command{
 
     /***

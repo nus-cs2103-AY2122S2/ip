@@ -25,7 +25,7 @@ public class UnMarkResponse implements Response {
     public void callback() {
         System.out.println(
                 "____________________________________________________________");
-        System.out.println("OK, I've marked this task as not done yet:\n");
+        System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(this.currTask.display());
         System.out.println(
                 "____________________________________________________________");

@@ -7,19 +7,14 @@ import main.java.duke.responses.Response;
 import main.java.duke.responses.StartResponse;
 import main.java.duke.responses.WelcomeResponse;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /***
  * Parser that deals with user inputs.
  */
-
 public class Parser {
+    
     /**
      * @return a WelcomeResponse.
      */
-
     public Response welcome() {
         return new WelcomeResponse();
     }
@@ -36,9 +31,7 @@ public class Parser {
      * @return the appropriate Response based on the stringCmd.
      * @throws DukeException Error in the event of a unknown input.
      */
-    
     public Command getCommand(String stringCmd) throws DukeException {
-        
         String[] stringCmdUnits = stringCmd.split(" ");
         String stringFirstCmd = stringCmdUnits[0];
         switch (stringFirstCmd) {

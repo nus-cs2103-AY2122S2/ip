@@ -9,8 +9,7 @@ import main.java.duke.responses.Response;
 /***
  * Command that is created when user wants to delete a Task
  */
-
-public class DeleteCommand extends  Command{
+public class DeleteCommand extends  Command {
 
     /***
      * Constructors the Command using the user command 

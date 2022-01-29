@@ -8,14 +8,12 @@ import main.java.duke.responses.UnMarkResponse;
 /***
  * Command that is created when user wants to Mark a Task as done
  */
-
 public class UnmarkCommand extends Command {
 
     /***
      * Constructors the Command using the user command 
      * @param stringCmd String representation of the users command
      */
-
     public UnmarkCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }

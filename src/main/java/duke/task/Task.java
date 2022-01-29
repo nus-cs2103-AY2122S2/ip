@@ -3,12 +3,11 @@ package main.java.duke.task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task that
+ * This is a Task.
  */
-
 public class Task {
   /**
-   * String that represent if Task is done
+   * Boolean representing the task is marked.
    */
   boolean isMarked = false;
 
@@ -38,7 +37,6 @@ public class Task {
    * 
    * @param isMarked representing the completeness of the task.
    */
-
   public void setMark(boolean isMarked) {
     this.isMarked = isMarked;
   }
@@ -49,7 +47,6 @@ public class Task {
    * 
    * @param val representing the completeness of the task.
    */
-
   public void MarkResponse(boolean val) {
     System.out.println(
         "____________________________________________________________");

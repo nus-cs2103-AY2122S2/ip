@@ -9,8 +9,7 @@ import main.java.duke.task.Task;
 /***
  * Command that is run when the user inputs a Event Task.
  */
-
-public class EventCommand extends  Command{
+public class EventCommand extends  Command {
 
     /***
      * Constructors the Command using the user command 

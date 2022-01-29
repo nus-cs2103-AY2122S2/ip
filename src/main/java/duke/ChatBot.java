@@ -13,22 +13,26 @@ import main.java.duke.ui.Ui;
  * This is the chatbot object.
  */
 public class ChatBot {
-  TaskList taskList;
-  Storage store;
-  Parser commandHandler;
-  Ui cmdLine;
-  
-  boolean isRunning = true;
-  
+  private TaskList taskList;
+  private Storage store;
+  private Parser commandHandler;
+  private Ui cmdLine;
+  private boolean isRunning = true;
+
+  /**
+   * Constructs the ChatBot
+   */
   ChatBot() {
     this.taskList = new TaskList();
     this.store = new Storage(taskList);
     this.commandHandler = new Parser();
     this.cmdLine = new Ui();
   }
-  
+
+  /**
+   * Starts the chatbot
+   */
   public void run() {
-    
       store.initialiseStorage();
       this.taskList = store.loadFromDisk();
       cmdLine.callResponse(commandHandler.start());
@@ -46,7 +50,6 @@ public class ChatBot {
           e.callback();
         }
       }
-
   }
 
 

@@ -1,10 +1,13 @@
 package main.java.duke.dukeexceptions;
 
-public class StorageErrorException extends DukeException{
+public class StorageErrorException extends DukeException {
     public StorageErrorException(String msg) {
         super(msg);
     }
 
+    /**
+     * Prints a error msg
+     */
     @Override
     public void callback() {
         System.out.println(
