@@ -1,6 +1,6 @@
 import java.time.format.DateTimeParseException;
 
-public class Todo extends Task{
+public class Todo extends Task {
     protected boolean status;
 
     public Todo(boolean isDone, String description) {

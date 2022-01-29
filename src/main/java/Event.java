@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime at;
 

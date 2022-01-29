@@ -13,7 +13,7 @@ public class DateUtil {
     private static final DateTimeFormatter STRING_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
     public static LocalDateTime stringToDate(String dateTime) throws DateTimeParseException {
-            return LocalDateTime.parse(dateTime, FORMATTER);
+        return LocalDateTime.parse(dateTime, FORMATTER);
     }
 
     public static String dateToString(LocalDateTime dateTime) {

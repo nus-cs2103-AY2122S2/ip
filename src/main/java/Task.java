@@ -22,7 +22,7 @@ public abstract class Task {
     public String printNoOfTasks(int totalTasks) {
         return "Now you have " + totalTasks + " tasks in the list.";
     }
-    
+
     public abstract String appendtoFile();
 
     @Override

@@ -1,4 +1,4 @@
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     protected Error err;
 
@@ -18,5 +18,5 @@ public class DukeException extends Exception{
     public String listError() {
         return "Index does not exists in array.\n";
     }
-    
+
 }
