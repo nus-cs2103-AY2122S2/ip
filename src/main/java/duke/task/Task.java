@@ -36,4 +36,8 @@ public class Task {
         return this.s;
     }
 
+    public boolean find(String phrase){
+        return this.s.contains(phrase);
+    }
+
 }

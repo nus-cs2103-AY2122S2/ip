@@ -110,4 +110,17 @@ public class DukeList {
         System.out.println(day);
     }
 
+    public void findTasks(String arg) {
+        String found = "\nDuke: Here are the matching tasks in your list\n";
+        int n = 0;
+        for (Task t: a) {
+            if (t.find(arg)) {
+                n += 1;
+                found = found + "      " + n + "."
+                        + t.show() + "\n";
+            }
+        }
+        System.out.println(found);
+    }
+
 }
