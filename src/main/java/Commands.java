@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Commands {
@@ -14,6 +17,11 @@ public class Commands {
 
     private void next() {
         this.fullCommand = scanner.nextLine().trim().split(" ", 2);
+    }
+
+    private LocalDateTime parseDateTime(String datetime) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return LocalDateTime.parse(datetime, pattern);
     }
 
     public void response() throws ApolloException {
@@ -71,7 +79,8 @@ public class Commands {
                 throw new ApolloException("Please add the time that this task is due. \n"
                         + "  deadline <description> /by <time>");
             }
-            newTask = new Deadline(descTime[0], descTime[1]);
+            newTask = new Deadline(descTime[0], parseDateTime(descTime[1]));
+
             Apollo.addTask(newTask);
             response();
             break;
@@ -85,7 +94,7 @@ public class Commands {
                 throw new ApolloException("Please add the period that this task happens. \n"
                         + "  event <description> /at <period>");
             }
-            newTask = new Event(descPeriod[0], descPeriod[1]);
+            newTask = new Event(descPeriod[0], parseDateTime(descPeriod[1]));
             Apollo.addTask(newTask);
             response();
             break;
