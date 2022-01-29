@@ -2,17 +2,17 @@ package van;
 
 public class ToDo extends Task {
 
-  public ToDo(String description) {
-    super(description);
-  }
+    public ToDo(String description) {
+        super(description);
+    }
 
-  @Override
-  public String getStatus() {
-    return "[T]" + super.getStatus();
-  }
+    @Override
+    public String getStatus() {
+        return "[T]" + super.getStatus();
+    }
 
-  @Override
-  public String saveStatus() {
-    return "T|" + super.getCompletion() + "|" + description;
-  }
+    @Override
+    public String saveStatus() {
+        return "T|" + super.getCompletion() + "|" + description;
+    }
 }

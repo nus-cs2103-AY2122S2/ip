@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return done ? "[X] " + description  : "[ ] " + description;
+        return done ? "[X] " + description : "[ ] " + description;
     }
 
     public String getCompletion() {
