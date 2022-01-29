@@ -33,11 +33,11 @@ public class Ui {
      * Gets formatted string of item at (1-based) index.
      * Example: 1.[T][ ] example-task
      * @param index (1-based) index of item
-     * @param item String object representation of object
+     * @param item Task object
      * @return Formatted string object representation of item at index.
      */
-    protected String formatIndexItem(int index, String item) {
-        return String.format("%d.%s\n", index, item);
+    protected String formatIndexTask(int index, Task item) {
+        return String.format("%d.%s\n", index, item.toString());
     }
 
     /**
@@ -117,7 +117,7 @@ public class Ui {
         StringBuilder formatString = new StringBuilder();
         int index = 1;
         for (Task item: taskList) {
-            formatString.append(formatIndexItem(index, item.toString()));
+            formatString.append(formatIndexTask(index, item));
             index++;
         }
 
