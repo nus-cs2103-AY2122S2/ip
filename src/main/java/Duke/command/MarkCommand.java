@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
 
     /**
      * Executes command by marking task in TaskList.
-     *  @param taskList List of tasks
+     * @param taskList  List of tasks
      * @param ui        Ui provided
      * @param storage   Saved history
      */

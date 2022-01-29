@@ -4,6 +4,7 @@ import Duke.command.AddCommand;
 import Duke.command.ByeCommand;
 import Duke.command.Command;
 import Duke.command.DeleteCommand;
+import Duke.command.FindCommand;
 import Duke.command.ListCommand;
 import Duke.command.MarkCommand;
 import Duke.command.UnmarkCommand;
@@ -32,6 +33,12 @@ public class Parser {
             }
             int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
             command = new DeleteCommand(taskIndex);
+            break;
+        case (FindCommand.COMMAND_WORD):
+            if (splitCommand.length == 1) {
+                throw new DukeException("\tAaaarrrrgggghhhh you can't find nuthin' matey!\n");
+            }
+            command = new FindCommand(splitCommand[1]);
             break;
         case (ListCommand.COMMAND_WORD):
             command = new ListCommand();
