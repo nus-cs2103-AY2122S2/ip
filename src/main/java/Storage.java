@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILELOCATION = "data/version0/duke.txt";
+    private static final String FILELOCATION = "data/duke.txt";
     private File file;
 
     public Storage() {
