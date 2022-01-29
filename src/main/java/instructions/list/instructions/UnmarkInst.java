@@ -5,7 +5,8 @@ import tasks.TaskList;
 
 /**
  * This class represents a Mark Task as Undone Instruction.
- * Format: "unmark x", where x is the task number to be marked undone.
+ * <br>
+ * Format: {@code unmark < task number >}
  *
  * @author Ong Han Yang
  */

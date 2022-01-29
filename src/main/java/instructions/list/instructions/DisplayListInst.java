@@ -6,7 +6,8 @@ import tasks.TaskList;
 
 /**
  * This class represents a display list instruction.
- * Format: "list"
+ * <br>
+ * Format: {@code list}
  *
  * @author Ong Han Yang
  */
