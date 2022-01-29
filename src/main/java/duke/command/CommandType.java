@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.DukeException;
 
 /**
  * Represents the possible Command types.

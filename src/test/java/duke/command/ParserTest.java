@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class ParserTest {
     @Test
@@ -51,9 +52,9 @@ public class ParserTest {
         assertThrows(DukeException.class, () -> duke.command.Parser.parse("event /desc"));
         assertThrows(DukeException.class, () -> duke.command.Parser.parse("event /desc eventDescription"));
         assertThrows(DukeException.class, () -> duke.command.Parser.parse("event /desc eventDescription /at"));
-        assertThrows(DukeException.class,
-                () -> duke.command.Parser.parse("event /desc eventDescription /at 2022-1-1 1230"));
-        assertThrows(DukeException.class,
-                () -> duke.command.Parser.parse("event /desc eventDescription /at 2022-1-1 1230 /dur"));
+        assertThrows(DukeException.class, () -> duke.command.Parser
+                .parse("event /desc eventDescription /at 2022-1-1 1230"));
+        assertThrows(DukeException.class, () -> duke.command.Parser
+                .parse("event /desc eventDescription /at 2022-1-1 1230 /dur"));
     }
 }
