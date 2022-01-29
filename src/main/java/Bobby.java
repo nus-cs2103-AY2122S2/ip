@@ -1,28 +1,55 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 
 public class Bobby {
-    static ArrayList<Task> taskArray = new ArrayList<Task>();
+    private static ArrayList<Task> taskArray = new ArrayList<Task>();
 
-    private static void writeToFile() throws IOException {
+    private static void updateFile() throws IOException {
         FileWriter fw = new FileWriter("bobby.txt");
         for (int i = 0; i < taskArray.size(); i++) {
             Task t = taskArray.get(i);
-            int count = i + 1;
-            fw.write(System.lineSeparator() + count + "." + t);
+            t.writeToFile(fw);
         }
         fw.close();
     }
 
-    private static void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter("bobby.txt", true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
+    private static void loadFile(File file) throws FileNotFoundException {
+        Scanner s = new Scanner(file);
+        while (s.hasNext()) {
+            //System.out.println(s.nextLine());
+            String line = s.nextLine();
+            String[] inputs = line.split(" ; ");
+            switch (inputs[0]) {
+            case "T":
+                Todo newToDo = new Todo(inputs[2]);
+                if (inputs[1].equals("true")) {
+                    newToDo.markAsDone();
+                }
+                taskArray.add(newToDo);
+                break;
+            case "D":
+                Deadline newDeadline = new Deadline(inputs[2], inputs[3]);
+                if (inputs[1].equals("true")) {
+                    newDeadline.markAsDone();
+                }
+                taskArray.add(newDeadline);
+                break;
+            case "E":
+                Event newEvent = new Event(inputs[2], inputs[3]);
+                if (inputs[1].equals("true")) {
+                    newEvent.markAsDone();
+                }
+                taskArray.add(newEvent);
+                break;
+            }
+        }
     }
 
     private static void addToDo(String task) throws BobbyException, IOException {
@@ -31,7 +58,7 @@ public class Bobby {
             Todo newTodo = new Todo(inputs[1]);
             System.out.println("Bobby heard: " + newTodo);
             taskArray.add(newTodo);
-            writeToFile();
+            updateFile();
             System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
         } else {
             throw new BobbyException("Description cannot be empty");
@@ -47,7 +74,7 @@ public class Bobby {
                 Deadline newDeadline = new Deadline(description, by);
                 System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
-                writeToFile();
+                updateFile();
                 System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else {
                 throw new BobbyException("Date/Time format of Deadline is incorrect or empty");
@@ -67,7 +94,7 @@ public class Bobby {
                 Event newEvent = new Event(description, at);
                 System.out.println("Bobby heard: " + newEvent);
                 taskArray.add(newEvent);
-                writeToFile();
+                updateFile();
                 System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else {
                 throw new BobbyException("Date/Time format of Event is incorrect or empty");
@@ -82,7 +109,7 @@ public class Bobby {
             int i = Integer.parseInt(inputs[1]) - 1;
             System.out.println("Bobby has forgotten this task:\n" + taskArray.get(i));
             taskArray.remove(i);
-            writeToFile();
+            updateFile();
             System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
         } else {
             throw new BobbyException("Indicate which task should be deleted.");
@@ -93,13 +120,18 @@ public class Bobby {
         System.out.println("Bobby greets you. Bobby is here to help.");
         try {
             File file = new File("bobby.txt");
-            file.createNewFile();
+            if (file.exists()) {
+                loadFile(file);
+                System.out.println("Bobby remembers previous tasks.");
+            } else {
+                file.createNewFile();
+            }
         } catch (IOException e) {
             System.out.println("An error has occurred.");
         }
         Scanner scannerObj = new Scanner(System.in);
 
-        while (scannerObj.hasNextLine()) {
+        scanner: while (scannerObj.hasNextLine()) {
             String userInput = scannerObj.nextLine();
             String[] inputs = userInput.split(" ", 2);
             String command = inputs[0];
@@ -107,7 +139,7 @@ public class Bobby {
             switch (Commands.valueOf(command.toUpperCase())) {
             case BYE:
                 System.out.println("Bobby bids you farewell.");
-                break;
+                break scanner;
             case LIST:
                 System.out.println("Here is what you told Bobby:");
                 for (int i = 0; i < taskArray.size(); i++) {
@@ -119,11 +151,13 @@ public class Bobby {
             case MARK:
                 Task t = taskArray.get(Integer.parseInt(inputs[1]) - 1);
                 t.markAsDone();
+                updateFile();
                 System.out.println("Bobby applauds you. This task is done:\n" + t);
                 break;
             case UNMARK:
                 Task i = taskArray.get(Integer.parseInt(inputs[1]) - 1);
                 i.unmarkAsDone();
+                updateFile();
                 System.out.println("Bobby will remember that this task is not yet done:\n" + i);
                 break;
             case TODO:

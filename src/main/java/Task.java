@@ -1,4 +1,7 @@
-public class Task {
+import java.io.FileWriter;
+import java.io.IOException;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,6 +21,8 @@ public class Task {
     public void unmarkAsDone() {
         this.isDone = false;
     }
+
+    public abstract void writeToFile(FileWriter fw) throws IOException;
 
     @Override
     public String toString() {
