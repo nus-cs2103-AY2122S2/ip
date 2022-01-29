@@ -60,5 +60,16 @@ public class Ui {
         System.out.println("Invalid date: Please format date as yyyy-mm-dd");
         showLine();
     }
+
+    public void listFindResults(List<Task> result) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < result.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, result.get(i).toString());
+        }
+    }
+
+    public void taskNotFound() {
+        System.out.println("Sorry! There are no matching tasks found.");
+    }
 }
 

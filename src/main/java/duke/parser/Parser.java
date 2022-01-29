@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnknownCommand;
@@ -57,6 +58,9 @@ public class Parser {
             desc = strArr[1].split("/by");
             date = LocalDate.parse(desc[1].trim().replace("/", "-"));
             command = new AddCommand("deadline", desc[0], date);
+            break;
+        case "find":
+            command = new FindCommand(strArr[1]);
             break;
         default:
             command = new UnknownCommand();
