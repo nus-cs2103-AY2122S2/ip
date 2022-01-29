@@ -82,6 +82,7 @@ class Duke {
                         LocalDateTime deadlineTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/M/y Hmm"));
                         String convertedTime = deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
                         String stringSliced = input.substring(9, indexOfTime); // after deadline
+                        stringArray.add(stringSliced);
                         Deadline deadlineTask = new Deadline(stringSliced, convertedTime);
                         taskArray.add(deadlineTask);
                         String noOfTask = String.valueOf(taskArray.size());
@@ -101,6 +102,7 @@ class Duke {
                         LocalDateTime eventTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/M/y Hmm"));
                         String convertedTime = eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
                         String stringSliced = input.substring(6, indexOfTime); // after deadline
+                        stringArray.add(stringSliced);
                         Event eventTask = new Event(stringSliced, convertedTime);
                         taskArray.add(eventTask);
                         String noOfTask = String.valueOf(taskArray.size());
