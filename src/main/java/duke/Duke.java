@@ -29,19 +29,20 @@ public class Duke {
 
 
     /**
-     * Processes the string inputted by the user. Filters the duke.command and calls on other functions to print a string.
+     * Processes the string inputted by the user. Filters the duke.command and calls on other functions to print a
+     * string.
      *
      * @throws DukeException when the specified ID number is not in the list, if the time is not provided accurately,
      *                       or if there was no description or duke.command provided.
      */
-
     public void run() {
         ui.welcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                // show the divider line ("_______")
+                ui.showLine();
                 Command c = new Parser(fullCommand).parse();
                 c.execute(tasks, ui, storage);
                 storage.saveFile(tasks.formatTasks());

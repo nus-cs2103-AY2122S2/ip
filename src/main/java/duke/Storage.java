@@ -40,8 +40,10 @@ public class Storage {
         try {
             File myObj = new File(System.getProperty("user.dir")+ "/" + filepath);
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {// Process the data such that it can see if this is event or deadline or todo,
-                String data = myReader.nextLine(); // then create accordingly
+            while (myReader.hasNextLine()) {
+                // Process the data such that it can see if this is event or deadline or todo,
+                // then create accordingly
+                String data = myReader.nextLine();
                 processString(data);
             }
             myReader.close();
