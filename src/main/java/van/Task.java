@@ -25,7 +25,7 @@ public class Task {
      * @return String containing details of the task
      */
     public String getStatus() {
-        return done ? "[X] " + description  : "[ ] " + description;
+        return done ? "[X] " + description : "[ ] " + description;
     }
 
     /**
