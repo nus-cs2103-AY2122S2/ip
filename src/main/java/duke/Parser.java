@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The Parser class, containing the parsing logic for the bot.
@@ -11,7 +13,8 @@ public class Parser {
     /**
      * Processes the input.
      *
-     * @throws DukeException InvalidInputException, EmptyDescDescription, UnknownCommandException
+     * @param input input of the user
+     * @throws DukeException duke.InvalidInputException, EmptyDescDescription, UnknownCommandException
      */
     public static void process(String input) throws DukeException, IOException {
         String[] arr = input.split(" ");
@@ -118,6 +121,20 @@ public class Parser {
             }
             TaskList.delete(num);
             Storage.saveToFile();
+            break;
+        }
+        case "find": {
+            String desc = input.replaceFirst("find", "").trim();
+            Pattern pattern = Pattern.compile("\\b" + desc + "\\b");
+            StringBuilder listString = new StringBuilder();
+            for (int i = 0; i < TaskList.getTasks().size(); i++) {
+                Task t = TaskList.getTasks().get(i);
+                Matcher matcher = pattern.matcher(t.getDescription());
+                if (matcher.find()) {
+                    listString.append(i + 1).append(".").append(t).append("\n");
+                }
+            }
+            System.out.println(Ui.getBorder() + "Here are the matching tasks in your list:\n" + listString + Ui.getBorder());
             break;
         }
         default:

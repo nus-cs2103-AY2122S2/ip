@@ -42,6 +42,7 @@ public class Ui {
     /**
      * Returns the string to be printed on a successful add operation.
      *
+     * @param t task that was added
      * @return string to be printed on a successful add operation
      */
     public static String successMessage(Task t) {

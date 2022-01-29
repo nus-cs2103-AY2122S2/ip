@@ -6,8 +6,8 @@ package duke;
  * @author Jet Tan
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for a new instance of Task.
@@ -32,6 +32,15 @@ public class Task {
      */
     public void unmarkAsDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Returns the description of the task.
+     *
+     * @return description of the task
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

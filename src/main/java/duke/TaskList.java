@@ -21,6 +21,8 @@ public class TaskList {
     
     /**
      * Marks the specified task as done.
+     *
+     * @param tasknum the specified task to mark
      */
     public static void mark(int tasknum) {
         Task t = taskList.get(tasknum - 1);
@@ -31,6 +33,8 @@ public class TaskList {
 
     /**
      * Unmarks the specified task.
+     *
+     * @param tasknum the specified task to unmark
      */
     public static void unmark(int tasknum) {
         Task t = taskList.get(tasknum - 1);
@@ -41,6 +45,8 @@ public class TaskList {
     
     /**
      * Deletes the specified task.
+     *
+     * @param tasknum the specified task to delete
      */
     public static void delete(int tasknum) {
         Task t = taskList.get(tasknum - 1);
