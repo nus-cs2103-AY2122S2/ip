@@ -5,7 +5,8 @@ import tasks.TaskList;
 
 /**
  * This class represents a Mark Task as Done Instruction.
- * Format: "mark x", where x is the task number to be marked done.
+ * <br>
+ * Format: {@code mark < task number >}
  *
  * @author Ong Han Yang
  */

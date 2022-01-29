@@ -6,7 +6,8 @@ import tasks.TaskList;
 
 /**
  * This class represents a Delete Task Instruction.
- * Format: "Delete x", where x is an integer.
+ * <br>
+ * Format: {@code Delete < task number>}
  *
  * @author Ong Han Yang
  */

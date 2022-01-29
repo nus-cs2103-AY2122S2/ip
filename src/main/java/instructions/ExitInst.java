@@ -5,7 +5,8 @@ import tasks.TaskList;
 
 /**
  * This class represents an exit instruction.
- * Format: "bye"
+ * <br>
+ * Format: {@code bye}
  *
  * @author Ong Han Yang
  */

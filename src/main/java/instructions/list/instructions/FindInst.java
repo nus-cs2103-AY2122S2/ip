@@ -12,7 +12,8 @@ import tasks.TaskList;
 /**
  * This class encapsulates a Find Tasks instruction. A Find Task finds all tasks with the given
  * keyword.
- * Format: "find <keyword>"
+ * <br>
+ * Format: {@code find < keyword >}
  *
  * @author Ong Han Yang
  */
