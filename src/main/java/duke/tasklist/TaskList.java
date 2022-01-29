@@ -1,4 +1,7 @@
-package duke.taskList;
+package duke.tasklist;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -8,9 +11,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Represents the list of tasks that the user has created.
@@ -70,7 +70,7 @@ public class TaskList {
     private ArrayList<Task> findKeywordHelper(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
-            if(tasks.get(i).getDescription().contains(keyword)) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
                 result.add(tasks.get(i));
             }
         }
@@ -91,7 +91,7 @@ public class TaskList {
      *
      * @param c The duke.command.Command given by user.
      * @param task Additional arguments the user supplied such as description.
-     * @param showMessage A boolean to indicate if a feedback message should be generated.
+     * @param canShowMessage A boolean to indicate if a feedback message should be generated.
      * @return Feedback String corresponding to the duke.command.Command.
      * @throws DukeWrongInputFormatException If there's a mistake with the format of the command.
      */
@@ -120,9 +120,9 @@ public class TaskList {
             break;
         }
         this.tasks.add(t);
-        if(canShowMessage) {
+        if (canShowMessage) {
             return "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t"
-                    + "Now you have " + tasks.size() + " in the list.\n" ;
+                    + "Now you have " + tasks.size() + " in the list.\n";
         } else {
             return null;
         }
@@ -132,9 +132,9 @@ public class TaskList {
      * Sets the done boolean variable of the duke.task.Task at index in to true.
      *
      * @param in Index of task to be marked as done, given as a String.
-     * @param showMessage A boolean to indicate if a feedback message should be generated.
+     * @param canShowMessage A boolean to indicate if a feedback message should be generated.
      * @return Feedback String.
-     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command or if the index number does not exist.
+     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command.
      */
     public String markAsDone(String in, boolean canShowMessage) throws DukeException {
         try {
@@ -142,10 +142,10 @@ public class TaskList {
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
-                this.tasks.get(index-1).setDone(true);
+                this.tasks.get(index - 1).setDone(true);
                 if (canShowMessage) {
                     return "\n\tNice! I've marked this task as done:\n\t\t"
-                            + this.tasks.get(index-1).toString() + "\n";
+                            + this.tasks.get(index - 1).toString() + "\n";
                 } else {
                     return null;
                 }
@@ -163,7 +163,7 @@ public class TaskList {
      *
      * @param in Index of task to be marked as not done, given as a String.
      * @return Feedback String.
-     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command or if the index number does not exist.
+     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command.
      */
     public String unmarkDone(String in) throws DukeException {
         try {
@@ -171,9 +171,9 @@ public class TaskList {
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
-                this.tasks.get(index-1).setDone(false);
+                this.tasks.get(index - 1).setDone(false);
                 return "\n\tOK, I've marked this task as not done yet:\n\t\t"
-                        + this.tasks.get(index-1).toString() + "\n";
+                        + this.tasks.get(index - 1).toString() + "\n";
             }
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
@@ -188,7 +188,7 @@ public class TaskList {
      *
      * @param in Index of task to be deleted, given as a String.
      * @return Feedback String.
-     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command or if the index number does not exist.
+     * @throws DukeWrongInputFormatException If there's a mistake with the format of the command.
      */
     public String deleteTask(String in) throws DukeException {
         try {

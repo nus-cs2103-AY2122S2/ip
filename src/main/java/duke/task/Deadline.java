@@ -1,18 +1,18 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeWrongInputFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
+import duke.exception.DukeWrongInputFormatException;
+
 /**
  * Represents a deadline task.
  */
-public class Deadline extends Task{
-    private final String DEADLINE_STRING;
-    private final LocalDateTime DEADLINE;
+public class Deadline extends Task {
+    private String deadlineString;
+    private LocalDateTime deadline;
 
     /**
      * Returns a deadline Task object and accepts a String as description and a String to indicate the deadline.
@@ -22,8 +22,8 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String deadLine) throws DukeException {
         super(description);
-        this.DEADLINE = this.parseDeadline(deadLine);
-        this.DEADLINE_STRING = this.formatDeadline();
+        this.deadline = this.parseDeadline(deadLine);
+        this.deadlineString = this.formatDeadline();
     }
 
     /**
@@ -32,9 +32,9 @@ public class Deadline extends Task{
      * @param deadLine Deadline of the task.
      * @return deadLine as a LocalDateTime.
      */
-    private LocalDateTime parseDeadline(String deadLine) throws DukeException{
-        String[] temp = deadLine.split(" ",2);
-        if(temp.length <= 1 || temp[1].length() < 4) {
+    private LocalDateTime parseDeadline(String deadLine) throws DukeException {
+        String[] temp = deadLine.split(" ", 2);
+        if (temp.length <= 1 || temp[1].length() < 4) {
             throw new DukeWrongInputFormatException("Format for deadline is wrong. Please refer to list of commands.");
         }
         try {
@@ -52,18 +52,17 @@ public class Deadline extends Task{
      */
     private String formatDeadline() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return DEADLINE.format(form);
+        return deadline.format(form);
     }
-
     /**
      * Returns a formatted String to be saved in a file.
      *
      * @return Formatted String for saving.
      */
-   @Override
+    @Override
     public String formatSave() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        String date = this.DEADLINE.format(form);
+        String date = this.deadline.format(form);
         return "D |" + (super.isDone ? "1| " : "0| ") + super.description + " /by " + date;
     }
 
@@ -74,6 +73,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.DEADLINE_STRING + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadlineString + ")";
     }
 }

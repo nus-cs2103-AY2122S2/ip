@@ -34,7 +34,7 @@ public abstract class Task {
     /**
      * Returns the task description.
      * @return description of task.
-     */    
+     */
     public String getDescription() {
         return this.description;
     }
@@ -46,6 +46,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" +(isDone ? "X" : " ") + "] " + this.description;
+        return "[" + (isDone ? "X" : " ") + "] " + this.description;
     }
 }

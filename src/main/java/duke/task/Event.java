@@ -1,18 +1,18 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeWrongInputFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.exception.DukeWrongInputFormatException;
 
 /**
  * Represents an event task.
  */
 public class Event extends Task {
-    private final String SCHEDULED_TIME_STRING;
-    private final LocalDateTime SCHEDULED_TIME;
+    private String scheduledTimeString;
+    private LocalDateTime scheduledTime;
 
     /**
      * Returns an event Task object and accepts a String as description and a String to indicate the scheduledTime.
@@ -22,8 +22,8 @@ public class Event extends Task {
      */
     public Event(String description, String scheduledTime) throws DukeException {
         super(description);
-        this.SCHEDULED_TIME = parseScheduledTime(scheduledTime);
-        this.SCHEDULED_TIME_STRING = formatScheduledTime();
+        this.scheduledTime = parseScheduledTime(scheduledTime);
+        this.scheduledTimeString = formatScheduledTime();
     }
 
     /**
@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     private String formatScheduledTime() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return SCHEDULED_TIME.format(form);
+        return scheduledTime.format(form);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Event extends Task {
     @Override
     public String formatSave() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        String date = this.SCHEDULED_TIME.format(form);
+        String date = this.scheduledTime.format(form);
         return "E |" + (super.isDone ? "1| " : "0| ") + super.description + " /at " + date;
     }
 
@@ -74,6 +74,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.SCHEDULED_TIME_STRING + ")";
+        return "[E]" + super.toString() + " (at: " + this.scheduledTimeString + ")";
     }
 }

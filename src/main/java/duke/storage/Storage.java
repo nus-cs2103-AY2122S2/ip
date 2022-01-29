@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.command.Command;
-import duke.taskList.TaskList;
-import duke.exception.DukeException;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
 
 /**
  * Represents the hard disk that stores the tasks between sessions.
@@ -64,7 +64,9 @@ public class Storage {
                     }
                 }
             }
-        } catch (DukeException ignored) {}
+        } catch (DukeException ignored) {
+            //meant to be empty
+        }
     }
 
     /**
@@ -73,7 +75,7 @@ public class Storage {
      * @throws IOException If there was an error of I/O while saving the tasks.
      */
     public void saveTask() throws IOException {
-        Path path = Paths.get("data","duke.txt");
+        Path path = Paths.get("data", "duke.txt");
         Files.write(path, tasks.saveToFile());
     }
 }

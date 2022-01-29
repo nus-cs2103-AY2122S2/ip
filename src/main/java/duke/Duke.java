@@ -1,13 +1,15 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * Represents the start of the program and the main run loop.
@@ -82,6 +84,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the program.
+     *
+     * @param args ignored
+     */
     public static void main(String[] args) {
         Duke d = new Duke();
         d.execute();
