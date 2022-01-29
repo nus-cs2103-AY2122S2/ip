@@ -50,4 +50,37 @@ public class TaskList {
     public int getSize() {
         return taskArrayList.size();
     }
+
+    /**
+     * find in the list of tasks with similar names.
+     * @param taskName the search enquiry.
+     * @return an array list of tasks that contain the search enquiry.
+     */
+    public ArrayList<String> find(String taskName) {
+        String indentation = "    ";
+        int counter = 1;
+
+        ArrayList<Task> foundTask = new ArrayList<>();
+        for (Task task: taskArrayList) {
+            if (task.getDescription().contains(taskName)) {
+                foundTask.add(task);
+            }
+        }
+
+        ArrayList<String> stringOfTasks = new ArrayList<>();
+
+        if (foundTask.isEmpty()) {
+            stringOfTasks.add("No such task found");
+            return stringOfTasks;
+        }
+
+        for (Task task: foundTask) {
+            stringOfTasks.add(indentation + String.valueOf(counter) + ". "  + task.toString() + task.getStatus() + " " + task.getDescription());
+            counter++;
+        }
+
+        foundTask.clear();
+        return stringOfTasks;
+    }
 }
+
