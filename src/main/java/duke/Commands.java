@@ -68,7 +68,7 @@ public class Commands {
     }
 
     public void mark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getLength() - 1) {
+        if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
         history.getTask(index).markTask();
@@ -94,7 +94,7 @@ public class Commands {
     }
 
     public void unmark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getLength() - 1) {
+        if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
         history.getTask(index).unmarkTask();

@@ -135,7 +135,7 @@ public class DukeHistory {
         return s.toString();
     }
 
-    public int getLength() {
+    public int getSize() {
         return records.size();
     }
 }

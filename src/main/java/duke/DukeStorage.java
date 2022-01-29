@@ -63,4 +63,8 @@ public class DukeStorage {
         fw.close();
     }
 
+    String getFilePath() {
+        return this.filePath.getPath();
+    }
+
 }
