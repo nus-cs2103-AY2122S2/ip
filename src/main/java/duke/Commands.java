@@ -8,11 +8,19 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Represents a class that contains the logic for all keywords that Duke
+ * recognizes.
+ */
 public class Commands {
 
     public Commands() { // Empty Constructor
     }
 
+    /**
+     *  Prints a response to "bye" command to indicate that the command was
+     *  accepted.
+     */
     public void bye() { // Get DukeLCH to Exit
         String bye = "_______________________________________________________\n"
                 + "Goodbye. I hope to be of service to you again soon!\n"
@@ -20,6 +28,14 @@ public class Commands {
         System.out.println(bye);
     }
 
+    /**
+     * A method that takes in a String, checks it against 2 accepted date formats
+     * and converts it into a default date format for output. If the String
+     * satisfies neither format, it is simply outputted as is.
+     *
+     * @param date A String input that represents a date.
+     * @return Either a default formatted date or the user input.
+     */
     public String convertToDukeDate(String date) {
         SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
         df1.setLenient(false);
@@ -40,6 +56,15 @@ public class Commands {
         }
     }
 
+    /**
+     * A method that takes in a String representing a time period and checks if
+     * it's told in a 12-hour clock. If not, the method attempts to convert it
+     * into a 12-hour clock.
+     *
+     * @param time A String input that represents a time period.
+     * @return Either a default 12-hour clock format or the user input.
+     */
+
     public String convertToDukeTime(String time) {
         if (time.contains("am") || time.contains("pm")
                 || time.contains("AM") || time.contains("PM")
@@ -59,7 +84,12 @@ public class Commands {
         }
     }
 
-
+    /**
+     * A method that, when called, gets the inputted instance of
+     * DukeHistory to print a list of all tasks in its records.
+     *
+     * @param history An instance of DukeHistory.
+     */
     public void list(DukeHistory history) { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
         System.out.println(border
@@ -67,6 +97,14 @@ public class Commands {
                 + history.printAll() + border);
     }
 
+    /**
+     * A method that, when called, checks the validity of a given entry
+     * index before getting the inputted instance of DukeHistory to mark
+     * that entry in its records as done.
+     *
+     * @param index An integer indicating the desired entry to mark.
+     * @param history An instance of DukeHistory.
+     */
     public void mark(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
@@ -93,6 +131,14 @@ public class Commands {
         System.out.println(msg);
     }
 
+    /**
+     * A method that, when called, checks the validity of a given entry
+     * index before getting the inputted instance of DukeHistory to unmark
+     * that entry in its records.
+     *
+     * @param index An integer indicating the desired entry to unmark.
+     * @param history An instance of DukeHistory.
+     */
     public void unmark(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
@@ -120,6 +166,16 @@ public class Commands {
         System.out.println(msg);
     }
 
+    /**
+     * A method that, when called, uses the provided String[] tokens
+     * to build a description for a ToDos Task.
+     *
+     * It then gets the inputted instance of DukeHistory to add a
+     * ToDos task entry into it's record using the generated description.
+     *
+     * @param tokens A String[] of tokens inputted by the user.
+     * @param history An instance of DukeHistory.
+     */
     public void todo(String[] tokens, DukeHistory history) {
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
@@ -131,6 +187,19 @@ public class Commands {
         history.addToDo(description);
     }
 
+    /**
+     * A method that, when called, uses the provided String[] tokens
+     * to build a description, date and time for a Deadline Task.
+     *
+     * It then gets the inputted instance of DukeHistory to add a
+     * Deadline task entry into it's records using the generated
+     * description, date and time.
+     *
+     * @param tokens A String[] of tokens inputted by the user.
+     * @param history An instance of DukeHistory.
+     * @throws DukeException If the '/by' phrase is not detected in the
+     *                       String[] of tokens.
+     */
     public void deadline(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
@@ -156,6 +225,20 @@ public class Commands {
         history.addDeadline(description, date, time);
     }
 
+    /**
+     * A method that, when called, attempts to initialize an Event
+     * task using the provided String[] tokens to build a description,
+     * date and time.
+     *
+     * It then gets the inputted instance of DukeHistory to add an
+     * Event task entry into it's records using the generated
+     * description, date and time.
+     *
+     * @param tokens A String[] of tokens inputted by the user.
+     * @param history An instance of DukeHistory.
+     * @throws DukeException If the '/at' phrase is not detected in the
+     *                       String[] of tokens.
+     */
     public void event(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
@@ -185,9 +268,19 @@ public class Commands {
         history.addEvent(description, date, time);
     }
 
-    public void delete(int index, DukeHistory history) {
+    /**
+     * A method that, when called, checks the validity of a given entry
+     * index before getting the inputted instance of DukeHistory to
+     * delete that entry in its records.
+     *
+     * @param index An integer indicating the desired entry to
+     *              delete.
+     * @param history An instance of DukeHistory
+     */
+    public void delete(int index, DukeHistory history)  {
+        if (index < 0 || index > history.getSize() - 1) {
+            throw new IndexOutOfBoundsException();
+        }
         history.deleteTask(index);
     }
-
-
 }

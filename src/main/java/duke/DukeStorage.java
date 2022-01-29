@@ -8,14 +8,29 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Represents a class that handles the detection, creation, restoration
+ * and updating of local duke.txt files
+ */
 public class DukeStorage {
 
     private File filePath;
 
     public DukeStorage() {
-
     }
 
+    /**
+     * Takes a given directory and fileName and detects the existence of
+     * the file in the given directory. If it does not exist, creates the
+     * directory and file on the user's behalf.
+     *
+     * Updates the filePath field in this class using the inputs provided.
+     *
+     * @param directory The desired directory.
+     * @param fileName The name of the text file.
+     * @throws IOException If there is an error in creating the filePath
+     *                     due to incorrect directory or fileName input.
+     */
     public void startup(String directory, String fileName) throws IOException {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Duke");
@@ -32,6 +47,16 @@ public class DukeStorage {
         this.filePath = f2;
     }
 
+    /**
+     * Attempts to load the data of a local duke.txt file into the given
+     * history.
+     *
+     * @param history The DukeHistory instance that is being used in the
+     *                current running instance of Duke.
+     * @throws FileNotFoundException If there is an error in detecting
+     *                               the file at the stored filePath
+     *                               within this class.
+     */
     public void restore(DukeHistory history) throws FileNotFoundException {
         Scanner s = new Scanner(this.filePath);
         while (s.hasNext()) {
@@ -55,6 +80,15 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Updates the data of a local duke.txt file with the latest changes
+     * made to it found in the provided history.
+     *
+     * @param history The DukeHistory instance that is being used in the
+     *                current running instance of Duke.
+     * @throws IOException If there is an error in detecting the file at
+     *                     the stored filePath within this class.
+     */
     void update(DukeHistory history) throws IOException {
         String content = history.formatRecord();
         FileWriter fw = new FileWriter(this.filePath);
@@ -63,6 +97,11 @@ public class DukeStorage {
         fw.close();
     }
 
+    /**
+     * Returns the stored filePath in this class.
+     *
+     * @return The stored filePath in this class.
+     */
     String getFilePath() {
         return this.filePath.getPath();
     }

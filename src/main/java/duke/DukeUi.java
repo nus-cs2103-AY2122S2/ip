@@ -1,11 +1,17 @@
 package duke;
 
+/**
+ * Represents a class that handles the responses that Duke gives in
+ * response to certain commands.
+ */
 public class DukeUi {
 
     public DukeUi() {
-
     }
 
+    /**
+     * A method that prints a load error message.
+     */
     public void printLoadError() {
         String err = "_______________________________________________________\n"
                 + "* Load to duke.txt failed *\n"
@@ -15,6 +21,9 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints a write error message.
+     */
     public void printWriteError() {
         String err = "_______________________________________________________\n"
                 + "* Write to duke.txt failed *\n"
@@ -24,6 +33,9 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints Duke's default greeting.
+     */
     public void printGreeting() {
         String logo = "_______________________________________________________\n"
                 + " ____        _         _    ____ _   _ \n"
@@ -37,6 +49,10 @@ public class DukeUi {
         System.out.println(logo);
     }
 
+    /**
+     * A method that prints an error message when arguments
+     * are passed to commands that do not require them.
+     */
     public void printFoundArgumentError() {
         String err = "_______________________________________________________\n"
                 + "* Arguments detected *\n"
@@ -46,6 +62,10 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints an error message when arguments
+     * passed to a command is invalid.
+     */
     public void printInvalidArgumentError() {
         String err = "_______________________________________________________\n"
                 + "* Invalid entry detected *\n"
@@ -54,6 +74,12 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints an error message when there is
+     * no argument detected for a command that requires arguments.
+     *
+     * @param keyword A String representing the specific command used.
+     */
     public void printMissingArgumentError(String keyword) {
         String err = "_______________________________________________________\n"
                 + "* No arguments detected *\n"
@@ -62,6 +88,13 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints an error message when there is
+     * no DateTime argument detected or key phrases used to
+     * detect DateTime is inputted by the user.
+     *
+     * @param keyword A String representing the specific command used.
+     */
     public void printMissingDateTimeArgumentError(String keyword) {
         String str;
         switch (keyword) {
@@ -83,6 +116,10 @@ public class DukeUi {
         System.out.println(err);
     }
 
+    /**
+     * A method that prints a list of recognized commands if
+     * the user inputs an unrecognized command.
+     */
     public void printListOfCommands() {
         String err = "_______________________________________________________\n"
                 + "* Unrecognised keyword used *\n"
