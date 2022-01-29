@@ -38,12 +38,12 @@ public class Parser {
     public void parseInput(String input) throws DukeException {
         try {
             String[] commandLine = parseCommandLine(input);
-            Command c = Command.getCommand(commandLine[0]);
-            if (c == null) {
+            Command command = Command.getCommand(commandLine[0]);
+            if (command == null) {
                 throw new DukeException.DukeInvalidCommandException();
             }
 
-            switch (c) {
+            switch (command) {
             case BYE:
                 parseBye(commandLine);
                 ui.endMessage();
@@ -139,7 +139,6 @@ public class Parser {
         }
         taskList.addTask(commandLine[1], Task.Type.TODO);
     }
-
 
     private LocalDateTime parseGetTime(String time) throws DukeException {
         try {

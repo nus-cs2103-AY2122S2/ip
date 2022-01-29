@@ -60,7 +60,7 @@ public class DukeException extends Exception {
         }
     }
 
-    public static class DukeIOException extends DukeException {
+    public static class DukeIoException extends DukeException {
         @Override
         public String toString() {
             return super.toString() + ": There is an error processing the data :(";

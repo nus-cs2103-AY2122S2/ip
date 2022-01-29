@@ -43,7 +43,7 @@ public class Duke {
                 isExit = parser.commandIsExit();
             } catch (DukeException e) {
                 ui.showErrorMessage(e.toString());
-            }
+            } 
         }
     }
 

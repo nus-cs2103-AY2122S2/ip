@@ -33,7 +33,7 @@ public class TaskList {
         try {
             storage.load(this);
         } catch (FileNotFoundException e) {
-            throw new DukeException.DukeIOException();
+            throw new DukeException.DukeIoException();
         }
     }
 
@@ -44,7 +44,7 @@ public class TaskList {
         try {
             this.storage.save(tasks);
         } catch (IOException e) {
-            throw new DukeException.DukeIOException();
+            throw new DukeException.DukeIoException();
         }
     }
 
