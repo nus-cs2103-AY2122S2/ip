@@ -64,7 +64,7 @@ public class DukeParser {
         return true;
     }
 
-    public static Command createCommand(String[] arg, String cmd) throws DukeException {
+    private static Command createCommand(String[] arg, String cmd) throws DukeException {
         if(cmd.equals("bye")){
             if(arg.length == 1){
                 return new ExitCommand();
