@@ -1,7 +1,7 @@
 package paggro.task;
 
 public abstract class Task {
-    String description;
+    public String description;
     public boolean isDone;
 
     public Task(String des) {

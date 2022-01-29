@@ -54,6 +54,13 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) { // no parameter given
                 throw new PaggroException("    Really? delete has to be used with a number... =.=");
             }
+        } else if (command.equals("find")) {
+            try {
+                String parameters = inputArr[1];
+                return new FindCommand(parameters);
+            } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                throw new PaggroException("    Really? The description of a find cannot be empty... =.=");
+            }
         } else if (command.equals("listOnDate")) {
             try {
                 String dateString = inputArr[1];
