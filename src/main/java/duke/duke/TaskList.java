@@ -88,6 +88,29 @@ public class TaskList {
         }
     }
 
+    public void find(String input, ArrayList<Task> arr) {
+        try {
+            String word = input.split(" ", 2)[1]; // Remove instruction
+            int counter = 1;
+            boolean hasFound = false;
+            for (int i = 0; i < arr.size(); i++) {
+                if (arr.get(i).getName().contains(word) && !word.equals("")) {
+                    if (!hasFound) {
+                        System.out.println("I found the matching items you requested:");
+                    }
+                    System.out.println(counter + "." + arr.get(i).toString());
+                    counter++;
+                    hasFound = true;
+                }
+            }
+            if (!hasFound) {
+                System.out.println("Unfortunately, I couldn't find anything related to " + word);
+            }
+        } catch (Exception e) {
+            System.out.println("Don't be cheeky. Give me something to look for");
+        }
+    }
+
     public void todo(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction

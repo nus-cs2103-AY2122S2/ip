@@ -32,6 +32,10 @@ public class Parser {
         else if (commandString.contains("todo")) {
             tasks.todo(commandString, tasks.arr);
         }
+        // Find Feature
+        else if (commandString.contains("find")) {
+            tasks.find(commandString, tasks.arr);
+        }
         // Edge Case
         else {
             System.out.println(commandString + " is not a valid command. Please try again.");
