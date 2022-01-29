@@ -69,7 +69,7 @@ public class Parser {
             int num = Integer.parseInt(splitStr[1]);
             return new DeleteCommand(num);
         } else if (us.contains("FIND")) {
-            splitStr = s.split(" ");
+            String[] splitStr = s.split(" ");
             if (splitStr.length < 2) {
                 throw new TsundereException("Hmph you baka, gimme a correct format. For example: find eat");
             }

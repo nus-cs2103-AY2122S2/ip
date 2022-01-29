@@ -126,8 +126,8 @@ public class TaskList {
         String s = "";
         int counter = 1;
         for (int i = 0; i < count; i++) {
-            if (aryLst.get(i).description.contains(toFind)) {
-                s += "\n" + counter + ". " + aryLst.get(i).toString();
+            if (tasks.get(i).description.contains(toFind)) {
+                s += "\n" + counter + ". " + tasks.get(i).toString();
                 counter++;
             }
         }
