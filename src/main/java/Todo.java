@@ -8,4 +8,9 @@ public class Todo extends Task {
         return "T";
     }
 
+    @Override
+    public String displayTime() {
+        return super.toString();
+    }
+
 }
