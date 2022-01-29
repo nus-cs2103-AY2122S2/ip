@@ -9,21 +9,23 @@ final class UnmarkAsDone extends Instruction {
      * Constructor 1. Initializes the instruction using an index of task.
      *
      * @param index The index of the task.
+     * @param tasks The task manager to be used.
      */
-    private UnmarkAsDone(int index) {
-        this.toUnmark = TaskManager.getTaskIndex(index);
-        super.setDescription("unmark");
+    private UnmarkAsDone(int index, TaskManager tasks) {
+        super("unmark", tasks);
+        this.toUnmark = tasks.getTaskIndex(index);
     }
 
     /**
      * Constructor 2. Takes in the whole instruction line and initializes the UnmarkAsDone instruction.
      *
      * @param instruction The line of instruction. It has to be guaranteed that the first word is 'unmark'.
+     * @param tasks The task manager to be used.
      * @throws IllegalArgumentException
      */
-    protected UnmarkAsDone(String instruction) throws IllegalArgumentException {
+    protected UnmarkAsDone(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
-        this(UnmarkAsDone.parseInstruction(instruction));
+        this(UnmarkAsDone.parseInstruction(instruction, tasks), tasks);
     }
 
     /**
@@ -35,7 +37,7 @@ final class UnmarkAsDone extends Instruction {
      * @throws IllegalArgumentException If (i) the instruction has no valid integer to be parsed; or (ii) the index is
      * out of range.
      */
-    private static int parseInstruction(String instruction) throws IllegalArgumentException {
+    private static int parseInstruction(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
         String[] args = instruction.split(" ", 2);
         int index;
@@ -52,7 +54,7 @@ final class UnmarkAsDone extends Instruction {
             throw new IllegalArgumentException("Oops, unmark operation only accepts integer index!");
         }
 
-        if (!TaskManager.isValidIndex(index)) {
+        if (!tasks.isValidIndex(index)) {
             throw new IllegalArgumentException("Oops, the task provided doesn't exist!");
         }
 

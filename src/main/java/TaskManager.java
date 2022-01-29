@@ -1,12 +1,28 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * An object that stores a list of tasks, performs actions on tasks.
+ * Stores a list of tasks, and performs actions on them.
  */
 public class TaskManager {
 
     // A list of tasks stored.
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
+
+    /**
+     * Initializes the task manager, by reading the file to the tasks list.
+     *
+     * @param storage The storage to read from.
+     */
+    protected TaskManager(Storage storage) {
+
+        try {
+            this.tasks = storage.readTasks();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
 
     /**
      * Marks the status of the task as done.
@@ -31,19 +47,19 @@ public class TaskManager {
      *
      * @return The list of all the tasks.
      */
-    protected static ArrayList<Task> listOfTasks() {
+    protected ArrayList<Task> listOfTasks() {
 
-        return TaskManager.tasks;
+        return this.tasks;
     }
 
     /**
      * Adds a task into the list.
      *
-     * @param task
+     * @param task The task to be added.
      * @return The message after the task is added.
      */
-    protected static String addTask(Task task) {
-        TaskManager.tasks.add(task);
+    protected String addTask(Task task) {
+        this.tasks.add(task);
         return "added: " + task.toString();
     }
 
@@ -53,8 +69,8 @@ public class TaskManager {
      * @param index The index of task to be retrieved (1-indexed).
      * @return The retrieved task.
      */
-    protected static Task getTaskIndex(int index) {
-        return TaskManager.tasks.get(index - 1);
+    protected Task getTaskIndex(int index) {
+        return this.tasks.get(index - 1);
     }
 
     /**
@@ -63,9 +79,9 @@ public class TaskManager {
      * @param index An index of task. (1-indexed)
      * @return True if the index is valid, false otherwise.
      */
-    protected static boolean isValidIndex(int index) {
+    protected boolean isValidIndex(int index) {
 
-        return (index > 0 && index <= TaskManager.tasks.size());
+        return (index > 0 && index <= this.tasks.size());
     }
 
     /**
@@ -73,8 +89,18 @@ public class TaskManager {
      *
      * @param toDeleteIndex The index of the task to be deleted. (1-indexed)
      */
-    protected static void deleteIndex(int toDeleteIndex) {
+    protected void deleteIndex(int toDeleteIndex) {
 
-        TaskManager.tasks.remove(toDeleteIndex - 1);
+        this.tasks.remove(toDeleteIndex - 1);
+    }
+
+    /**
+     * Write the current tasks back to the storage.
+     *
+     * @param storage The destination storage
+     */
+    protected void writeBack(Storage storage) {
+
+        storage.writeTasks(tasks);
     }
 }

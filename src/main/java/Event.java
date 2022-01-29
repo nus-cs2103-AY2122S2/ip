@@ -1,9 +1,13 @@
+import java.util.HashMap;
+
 /**
  * Represents an event, which has a start time and end time.
  */
 final class Event extends Task {
     // At this stage, the time range is treated as a string.
     private String timeRange;
+
+    private final String TIME_RANGE_FIELD = "time_range";
 
     /**
      * Initializes an event with a name (description) and a time range.
@@ -22,7 +26,8 @@ final class Event extends Task {
     }
 
     /**
-     * The constructor to be called. Instantiates an event using a single string containing all the details.
+     * Constructs an <code>Event</code>.
+     * Instantiates an event using a single string containing all the details.
      *
      * @param details Contains the description and time range for the event.
      */
@@ -31,10 +36,11 @@ final class Event extends Task {
         this(parseDetails(details));
     }
 
-    @Override
-    protected String getTypeIcon() {
-        return "[E]";
+    protected Event(HashMap<String, Object> infoTable) {
+        super(infoTable);
+        this.timeRange = (String) infoTable.get(TIME_RANGE_FIELD);
     }
+
 
     /**
      * Parses the details containing the event description and time range.
@@ -57,6 +63,29 @@ final class Event extends Task {
     }
 
     /**
+     * Turns the current <code>Task</code> into a <code>HashMap</code> that contains the necessary information to be
+     * written into hard disk.
+     *
+     * @return A table contains the information.
+     */
+    protected HashMap<String, Object> getInfoTable() {
+
+        var infoTable = this.initializeInfoTable();
+        infoTable.put(TIME_RANGE_FIELD, this.timeRange);
+        return infoTable;
+    }
+
+    @Override
+    protected String getTypeIcon() {
+        return "[E]";
+    }
+
+    @Override
+    protected TaskType getType() {
+        return TaskType.EVENT;
+    }
+
+    /**
      * Converts an event to a string.
      *
      * @return The string that represents the event.
@@ -65,6 +94,8 @@ final class Event extends Task {
     public String toString() {
         return super.toString() + " (at " + this.timeRange + ")";
     }
+
+
 }
 
 

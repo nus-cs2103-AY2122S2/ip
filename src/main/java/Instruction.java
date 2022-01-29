@@ -6,6 +6,18 @@ abstract class Instruction {
 
     private String description;
     private static final String TERMINATE_INSTRUCTION = "bye";
+    protected TaskManager tasks;
+
+    /**
+     * Constructor to be used by subclasses.
+     *
+     * @param description The description of the instruction.
+     * @param tasks The task manager to be used with the instruction.
+     */
+    protected Instruction(String description, TaskManager tasks) {
+        this.description = description;
+        this.tasks = tasks;
+    }
 
     protected static String getTerminateInstruction() {
         return TERMINATE_INSTRUCTION;
@@ -18,7 +30,7 @@ abstract class Instruction {
      * @param instruction The line of command.
      * @return A corresponding instance of instruction.
      */
-    protected static Instruction of(String instruction) throws IllegalArgumentException {
+    protected static Instruction of(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
         // Extract the words in the instruction. The first word should determine the type of instruction to be returned.
         String[] words = instruction.split(" ", 2);
@@ -31,24 +43,24 @@ abstract class Instruction {
 
         switch (type) {
         case "list":
-            return new ListTasks();
+            return new ListTasks(tasks);
         case Instruction.TERMINATE_INSTRUCTION:
-            return new Quit(Instruction.TERMINATE_INSTRUCTION);
+            return new Quit(Instruction.TERMINATE_INSTRUCTION, tasks);
         case "mark":
             // Mark the task as done. If the second parameter is not an integer, or if the task does not exit, throw
             // an exception. (To be implemented later)
-            return new MarkAsDone(instruction);
+            return new MarkAsDone(instruction, tasks);
         case "unmark":
             // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
             // throw an exception. (To be implemented later)
-            return new UnmarkAsDone(instruction);
+            return new UnmarkAsDone(instruction, tasks);
         case "todo":
         case "event":
         case "deadline":
             // These three cases are used to add tasks of different types.
-            return new Add(Task.of(instruction));
+            return new Add(Task.of(instruction), tasks);
         case "delete":
-            return new Delete(instruction);
+            return new Delete(instruction, tasks);
         default:
             throw new IllegalArgumentException("Oops, I'm not sure what you mean.");
         }

@@ -7,6 +7,11 @@ class InstructionHandler {
 
     private final String TERMINATE_INSTRUCTION = Instruction.getTerminateInstruction();
     private final String OUTPUT_PREFIX = ">> ";
+    private TaskManager tasks;
+
+    protected InstructionHandler(TaskManager tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Receives the instructions from user, and performs them one by one and prints the message, until a terminating
@@ -21,7 +26,7 @@ class InstructionHandler {
 
 
             try {
-                nextInstruction = Instruction.of(sc.nextLine());
+                nextInstruction = Instruction.of(sc.nextLine(), this.tasks);
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
                 System.out.println(OUTPUT_PREFIX + "Try again please:");
