@@ -17,17 +17,17 @@ public class DeleteCommand extends Command{
 
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        int i;
+        int index;
         try {
-            i = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.parameters);
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (i > lister.tasks.size()) {
+        if (index > lister.tasks.size()) {
             throw  new PaggroException("    Really? There is no item indexed at " + i + "... =.=");
         }
 
-        Task task = lister.tasks.get(i - 1);
+        Task task = lister.tasks.get(index - 1);
 
         if (task instanceof Event) {
             Event e = (Event) task;
@@ -46,13 +46,13 @@ public class DeleteCommand extends Command{
             }
         }
 
-        lister.delete(i);
+        lister.delete(index);
         ui.showDeleted(task);
         ui.showNumber(lister.tasks.size());
 
 
         try {
-            storage.deleteFromStorage(i);
+            storage.deleteFromStorage(index);
         } catch (IOException e) {
             throw new PaggroException("    Could not delete in paggro.txt =.=");
         }

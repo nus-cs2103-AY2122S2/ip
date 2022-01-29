@@ -15,21 +15,21 @@ public class MarkCommand extends Command{
 
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        int i;
+        int index;
         try {
-            i = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.parameters);
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (i > lister.tasks.size()) {
-            throw  new PaggroException("    Really? There is no item indexed at " + i + "... =.=");
+        if (index > lister.tasks.size()) {
+            throw  new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
-        lister.mark(i);
-        Task task = lister.tasks.get(i - 1);
+        lister.mark(index);
+        Task task = lister.tasks.get(index - 1);
         ui.showMarked(task);
 
         try {
-            storage.markInStorage(i, task);
+            storage.markInStorage(index, task);
         } catch (IOException e) {
             throw new PaggroException("    Could not mark in paggro.txt =.=");
         }
