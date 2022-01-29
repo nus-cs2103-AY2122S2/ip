@@ -1,3 +1,8 @@
+package batman.tasks;
+
+import batman.exception.DukeException;
+import batman.exception.Error;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +11,7 @@ public class TaskList {
 
     private static ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
@@ -85,7 +90,7 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> getTasksFromFile(List<String> lines) {
+    public void getTasksFromFile(List<String> lines) {
         tasks = new ArrayList<>();
         if (lines != null) {
             for (String line : lines) {
@@ -102,7 +107,6 @@ public class TaskList {
                 }
             }
         }
-        return tasks;
     }
 
     public static String printList() {

@@ -1,3 +1,5 @@
+package batman.exception;
+
 public class DukeException extends Exception {
 
     protected Error err;

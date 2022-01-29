@@ -1,3 +1,5 @@
+package batman.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -6,7 +8,7 @@ public class Ui {
     private final Scanner sc;
     private final String botName;
 
-    Ui(String botName) {
+    public Ui(String botName) {
         sc = new Scanner(System.in);
         this.botName = botName;
     }

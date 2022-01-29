@@ -1,3 +1,9 @@
+package batman.parser;
+
+import batman.exception.DukeException;
+import batman.exception.Error;
+import batman.tasks.TaskList;
+
 public class Parser {
 
     public static StringBuilder parseInput(String input) {

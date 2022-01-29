@@ -1,3 +1,7 @@
+package batman.storage;
+
+import batman.tasks.Task;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -6,12 +10,11 @@ import java.util.List;
 
 public class Storage {
 
-    //initialize Path object
-    private static String dataPath;
     private static Path path;
 
-    Storage(String filePath) {
-        dataPath = System.getProperty("user.dir") + filePath;
+    public Storage(String filePath) {
+        //initialize Path object
+        String dataPath = System.getProperty("user.dir") + filePath;
         path = Paths.get(dataPath);
         createFile();
     }
@@ -23,19 +26,20 @@ public class Storage {
         try {
             Files.createFile(path);
             System.out.println("File has been created...");
+
         } catch (IOException e) {
             System.out.println("Loading content...");
         }
     }
 
-    public static void writeToFile(ArrayList<Task> tasks) throws IOException {
+    public void writeToFile(ArrayList<Task> tasks) throws IOException {
         Files.write(path, "".getBytes());
         for (Task t : tasks) {
             Files.write(path, t.appendtoFile().getBytes(), StandardOpenOption.APPEND);
         }
     }
 
-    public static List<String> load() throws IOException {
+    public List<String> load() throws IOException {
         return Files.readAllLines(path);
     }
 }
