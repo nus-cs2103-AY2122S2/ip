@@ -7,7 +7,7 @@ import Duke.util.Storage;
 import Duke.util.Ui;
 
 /**
- * This DeleteCommand class will delete a task from the list of tasks
+ * This DeleteCommand class will delete a task from the list of tasks.
  */
 public class DeleteCommand extends Command {
 
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes command by printing exit message.
-     *  @param taskList List of tasks.
+     * @param taskList List of tasks.
      * @param ui       Ui provided.
      * @param storage  Saved history.
      */

@@ -15,7 +15,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes command by adding task into Duke.Duke.util.TaskList.
-     *  @param taskList List of tasks
+     * @param taskList List of tasks
      * @param ui       Ui provided
      * @param storage  Saved history
      */

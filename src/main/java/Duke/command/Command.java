@@ -2,17 +2,18 @@ package Duke.command;
 
 import Duke.exception.DukeException;
 
-import Duke.task.Task;
-
 import Duke.util.TaskList;
 import Duke.util.Storage;
 import Duke.util.Ui;
 
+/**
+ * This Command class is the parent class for all commands to be executed.
+ */
 public abstract class Command {
 
     /**
      * Executes command by printing exit message.
-     *  @param taskList  Duke.Duke.util.TaskList of tasks
+     * @param taskList  List of tasks
      * @param ui        Ui provided
      * @param storage   Saved history
      */

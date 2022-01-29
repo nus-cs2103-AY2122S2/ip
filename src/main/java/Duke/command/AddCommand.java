@@ -8,6 +8,9 @@ import Duke.util.TaskList;
 import Duke.util.Storage;
 import Duke.util.Ui;
 
+/**
+ * This AddCommand class will add a task into a list of tasks when executed.
+ */
 public class AddCommand extends Command {
 
     Task task;
@@ -24,7 +27,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes command by adding task into Duke.Duke.util.TaskList.
-     *  @param taskList List of tasks
+     * @param taskList  List of tasks
      * @param ui        Ui provided
      * @param storage   Saved history
      */

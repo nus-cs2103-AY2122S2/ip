@@ -14,8 +14,17 @@ import Duke.task.Event;
 import Duke.task.Deadline;
 import Duke.task.Todo;
 
+/**
+ * Utility class to parse inputs that are retrieved from user.
+ */
 public class Parser {
 
+    /**
+     * Parses the String input and returns the appropriate command.
+     *
+     * @param userInput String input from user.
+     * @return Appropriate Command.
+     */
     public static Command parseCommand(String userInput) throws DukeException {
 
         String[] splitCommand = userInput.split(" ", 2);

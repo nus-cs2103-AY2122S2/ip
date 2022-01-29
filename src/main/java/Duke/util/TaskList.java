@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Utility class to keep track of list of added task.
+ */
 public class TaskList {
 
     private final ArrayList<Task> taskList;
@@ -19,15 +22,24 @@ public class TaskList {
     private int taskCount = 0;
     private Ui ui = new Ui();
 
+    /**
+     * Creates a new instance of tasklist that creates a new list of tasks.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Creates a new instance of tasklist that loads the saved list of tasks.
+     */
     public TaskList(Scanner sc) throws FileNotFoundException, DukeException {
         this.taskList = new ArrayList<>();
         readFromFile(sc);
     }
 
+    /**
+     * Loads the saved list of tasks
+     */
     private void readFromFile(Scanner sc) throws DukeException {
         while (sc.hasNext()) {
             String[] savedData = sc.nextLine().split(" \\| ");
@@ -64,8 +76,6 @@ public class TaskList {
         if (task != null) {
             this.taskList.add(task);
             this.taskCount++;
-//            String contentToSave = task.toSave();
-//            Storage.append(contentToSave);
             System.out.println(TASK_ADDED + "\t" + taskList.get(this.taskCount - 1).toString());
             System.out.println("\tNow you have " + this.taskCount + " tasks in your task list arrr, better get workin' aye!\n");
             ui.requestNextCommand();
@@ -87,7 +97,6 @@ public class TaskList {
             ui.deleteTask();
             System.out.println("\t" + task);
             ui.requestNextCommand();
-//            Storage.saveToFile(this.taskList);
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
         }
@@ -124,7 +133,6 @@ public class TaskList {
     public void markTask(int taskIndex) {
         Task curr = taskList.get(taskIndex);
         curr.markAsDone();
-//        Storage.saveToFile(this.taskList);
         ui.markAsDone();
         System.out.println("\t" + curr);
         ui.requestNextCommand();
@@ -138,7 +146,6 @@ public class TaskList {
     public void unmarkTask(int taskIndex) {
         Task curr = taskList.get(taskIndex);
         curr.markAsUndone();
-//        Storage.saveToFile(this.taskList);
         ui.markAsUndone();
         System.out.println("\t" + curr);
         ui.requestNextCommand();

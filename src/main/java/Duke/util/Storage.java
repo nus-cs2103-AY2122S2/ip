@@ -11,14 +11,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Utility class to load a saved file, or save to a file.
+ */
 public class Storage {
 
     private static String FILE_PATH;
 
+    /**
+     * Creates a new instance of Storage that loads the history from a specific path
+     * or creates a new file for saving tasks
+     */
     public Storage(String filePath) {
         this.FILE_PATH = filePath;
     }
 
+    /**
+     * Loads the current content of the file or create a new file for saving the list of tasks
+     */
     public Scanner load() throws DukeException {
         try {
             File file = new File(FILE_PATH);
