@@ -13,7 +13,7 @@ public class DukeManager {
                 (command.replaceAll("\\s+", "")).equals("bye")) {
             return command;
         }
-        String[] keyWords = {"todo", "event", "deadline", "mark", "unmark", "delete"};
+        String[] keyWords = {"todo", "event", "deadline", "mark", "unmark", "delete", "find"};
         String[] splicedCommand = command.split(" ", 2);
         if (splicedCommand.length == 1) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
