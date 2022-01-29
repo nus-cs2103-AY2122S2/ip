@@ -7,6 +7,9 @@ import duke.task.Tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Parser to make sense of user inputs.
+ */
 public class Parser {
 
     private static void checkIfUserInputValid(String userInput) throws DukeException {
@@ -29,6 +32,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse user inputs and return a valid Command if user input is valid.
+     *
+     * @param userInput User input.
+     * @return Returns a Command corresponding to the user input.
+     * @throws DukeException If user input is invalid.
+     */
     public static Command parseUserInput(String userInput) throws DukeException {
         checkIfUserInputValid(userInput);
 

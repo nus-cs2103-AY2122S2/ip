@@ -6,6 +6,9 @@ import duke.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a MarkDoneCommand which tells Duke to mark a task as done.
+ */
 public class MarkDoneCommand extends Command {
 
     private int index;
@@ -15,6 +18,14 @@ public class MarkDoneCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the MarkDoneCommand.
+     *
+     * @param taskList TaskList of current tasks.
+     * @param ui Ui.
+     * @param storage Storage.
+     * @throws IOException If the File to be written to in Storage is not found.
+     */
     @Override
     public void execute(List taskList, Ui ui, Storage storage) throws IOException {
         taskList.markDone(index);

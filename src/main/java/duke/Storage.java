@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * Represents a storage which stores the data in the list to a file found in the hard disk.
+ */
 public class Storage {
 
     private File file;
@@ -30,6 +33,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Prints the content of the file.
+     *
+     * @param filePath File path of file to be printed.
+     * @throws FileNotFoundException If file is not found.
+     */
     public void printFileContent(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -38,12 +47,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the data of list to the file.
+     *
+     * @param filePath File path of file.
+     * @param taskList Task list of tasks.
+     * @throws IOException If an error occurs while writing to file.
+     */
     public void writeToFile(String filePath, List taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(taskList.toString());
         fw.close();
     }
 
+    /**
+     * Loads the list of tasks in the file to an array list and returns it.
+     *
+     * @return Returns an array list of the tasks loaded from the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File("data/duke.txt");

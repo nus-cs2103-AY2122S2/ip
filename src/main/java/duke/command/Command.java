@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 
 import java.io.IOException;
 
+/**
+ * Represents a Command.
+ */
 abstract public class Command {
 
     private boolean isExit;

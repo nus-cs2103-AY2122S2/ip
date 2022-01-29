@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * This class encapsulates a ToDos Task which inherits from Task.
+ * Represents a ToDo Task.
  */
 public class ToDo extends Task {
 

@@ -1,17 +1,19 @@
 package duke.task;
 
 /**
- * This class encapsulates a task input by the user.
+ * Represents a Task. A Task object corresponds to a String description
+ * and a boolean condition which represents if the task is done or not.
  */
 public abstract class Task {
 
-    private String description; //description of the task.
-    private boolean isDone; //boolean condition: when true, task is done. when false, task is not done.
+    private String description;
+    private boolean isDone;
+
 
     /**
      * Constructor to create a task object.
      *
-     * @param description: Description of task with String datatype.
+     * @param description Description of task.
      */
     public Task(String description) {
         this.description = description;
@@ -23,21 +25,23 @@ public abstract class Task {
     }
 
     /**
-     * This method mark the task as done.
+     * Marks the Task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * This method unmark the task as done.
+     * Unmark the task as done.
      */
     public void unmarkDone() {
         this.isDone = false;
     }
 
     /**
-     * @return Returns a String of the description of the task
+     * Returns a String representation of a Task in the desired format.
+     *
+     * @return String representation.
      */
     @Override
     public String toString() {
