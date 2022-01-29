@@ -65,6 +65,21 @@ public class TaskList {
     }
 
     /**
+     * Gets all tasks matching description.
+     *
+     * @return List of tasks matching description.
+     */
+    public List<Task> findTasks(String description) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.description.contains(description)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
+
+    /**
      * Adds task to list.
      *
      * @param t Task to add.
