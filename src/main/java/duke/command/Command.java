@@ -1,3 +1,5 @@
+package duke.command;
+
 public abstract class Command<T> {
 
     private boolean systemRunning = true;

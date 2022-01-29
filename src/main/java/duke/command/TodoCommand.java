@@ -1,4 +1,9 @@
-import java.util.ArrayList;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 public class TodoCommand extends Command<String> {
 
@@ -23,7 +28,5 @@ public class TodoCommand extends Command<String> {
         list.addTask(freshTodo);
         storage.writeToFile(list);
         ui.addTodo(freshTodo, list);
-        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
-                + "    " + freshTodo + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
     }
 }

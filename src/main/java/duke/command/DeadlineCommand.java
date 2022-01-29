@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class DeadlineCommand extends Command<String>{
 
     private TaskList list;
