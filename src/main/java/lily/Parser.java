@@ -43,53 +43,35 @@ public class Parser {
                     break userInteracting;
     
                 case "list":
-                    if (list.isEmpty()) {
-                        errorPretty("there's nothing in the list bro");
-                    } else {
-                        prettyPrint("you told me you had to\n" + printList());
-                    }
+                    ui.showList(tasks);
                     break;
     
                 case "mark":
                     int addIdx = Integer.parseInt(parsedSentence[1]) - 1;
+                    ui.showMarked(tasks.mark(addIdx), addIdx);
                     /*
-                        * if (list.isEmpty())
+                        * if (tasks.isEmpty())
                         * throw new Error("you cant mark something that isn't there");
                         * else if (already marked)
                         * throw new error you've already finished this
                         * if input doesn't have an int, ask which number you want to mark also.
                         */
-                    list.get(addIdx).mark();
-                    String markMsg = "oh. you've finished it. okay\n"
-                            + indent + (addIdx + 1) + "."
-                            + list.get(addIdx).toString();
-                    prettyPrint(markMsg);
                     break;
     
                 case "unmark":
                     int delIdx = Integer.parseInt(parsedSentence[1]) - 1;
+                    ui.showUnmarked(tasks.unmark(delIdx), delIdx);
                     /*
-                        * if (list.isEmpty())
+                        * if (tasks.isEmpty())
                         * throw new Error("you can't unmark something thaj isn't there");
                         * else if (not marked yet)
                         * throw new error you havent done this
                         * if input doesn't have an int, ask which number you want to mark also.
                         */
-                    list.get(delIdx).unmark();
-                    String unmarkMsg = "hey, you gotta get it done later, okay?\n"
-                            + indent + (delIdx + 1) + "."
-                            + list.get(delIdx).toString();
-                    prettyPrint(unmarkMsg);
                     break;
     
                 case "todo":
-                    try {
-                        Todo t = new Todo(findTodoDescStart(sentence));
-                        list.add(t);
-                        taskAddedMsg(t);
-                    } catch (LilyException le) {
-                        errorPretty("Todo description cannot be empty!");
-                    }
+                    ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks);
                     break;
                 case "deadline":
                     /*
@@ -98,14 +80,8 @@ public class Parser {
                         if user didnt' type a desc
                             throw new error you didnt type a description man, try again
                     */
-                    try {
-                        String[] parsedDeadline = findDeadlineDescStart(sentence);
-                        Deadline d = new Deadline(parsedDeadline[0], parsedDeadline[1]);
-                        list.add(d);
-                        taskAddedMsg(d);
-                    } catch (LilyException le) { // need catch "no-/by" error
-                        errorPretty("Deadline description cannot be empty!");
-                    }
+                    String[] parsedDeadline = findDeadlineDescStart(sentence);
+                    ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks);
                     break;
                 case "event":
                     /*
@@ -114,31 +90,19 @@ public class Parser {
                         if user didnt' type a desc
                             throew new error you didnt type a description man, try again
                     */
-                    try {
-                        String[] parsedEvent = findEventDescStart(sentence);
-                        Event e = new Event(parsedEvent[0], parsedEvent[1]);
-                        list.add(e);
-                        taskAddedMsg(e);
-                    } catch (LilyException le) { // need catch "no-/at" error
-                        errorPretty("Event description cannot be empty!");
-                    }
+                    String[] parsedEvent = findEventDescStart(sentence);
+                    ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks);
                     break;
     
                 case "delete":
                 case "remove":
-                    try {
-                        prettyPrint("hmph. then why did you make me track your\n"
-                                + indent + list.remove(Integer.parseInt(parsedSentence[1]) - 1)
-                                + "\n"
-                                + indent + "anyway, now you're left with\n" + printList());
-                    } catch (IndexOutOfBoundsException e) { // new error: catch no int input also
-                    }
+                    ui.showTaskRemoved(tasks.remove(
+                            Integer.parseInt(parsedSentence[1]) - 1), 
+                            tasks);
                     break;
     
                 default:
-                    errorPretty("sorry i don't understand what you meant by\n\n"
-                            + indent + sentence + "\n\n"
-                            + indent + "you can try these instead:\n" + listCommands());
+                    ui.showInvalidCommand(sentence);
                 }
 
             } catch (LilyException le) {

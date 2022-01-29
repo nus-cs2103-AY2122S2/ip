@@ -4,6 +4,7 @@ import lily.task.Event;
 import lily.task.LilyException;
 import lily.task.Task;
 import lily.task.Todo;
+import lily.TaskList;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -84,14 +85,22 @@ public class Ui {
         userInput.close();
     }
 
-    // need to fix
-    public String list() {
-        // transfer to UI
-        if (list.isEmpty()) {
+    public void showList(TaskList tl) {
+        if (tl.isEmpty()) {
             showError("there's nothing in the list bro");
         } else {
-            prettyPrint("you told me you had to\n" + printList());
+            prettyPrint("you told me you had to" + LS + tl.printTasks());
         }
+    }
+
+    public void showMarked(Task t, int idx) {
+        prettyPrint("oh. you've finished it. okay" + LS
+                + INDENT + (idx + 1) + "." + t.toString());
+    }
+
+    public void showUnmarked(Task t, int idx) {
+        prettyPrint("hey, you gotta get it done later, okay?" + LS
+                + INDENT + (idx + 1) + "." + t.toString());
     }
 
     public String showCommands() {
@@ -104,14 +113,27 @@ public class Ui {
                 + INDENT + "> bye: stop talking with Lily";
     }
 
-    // still gotta fix
-    private static void showTaskAdded(TaskList tl) {
-        String no = tl.size() == 1 ? " task " : " tasks ";
-        prettyPrint("i've dumped this into your list:\n"
-                + INDENT + tl.toString() + "\n"
-                + INDENT + "so now you have " + list.size() + no + "happening. hope you're happy");
+    public void showTaskAdded(Task t, TaskList tl) {
+        String plural = tl.size() == 1 ? " task " : " tasks ";
+        prettyPrint("i've dumped this into your list:" + LS
+                + INDENT + t.toString() + LS
+                + INDENT + "so now you have " + tl.size() + plural + "happening. hope you're happy");
     }
 
+    public void showTaskRemoved(Task t, TaskList tl) {
+        prettyPrint("hmph. then why did you make me track your" + LS
+                + INDENT + t + LS
+                + INDENT + "anyway, now you're left with" + LS
+                + INDENT + tl.printTasks());
+    }   
+
+    public void showInvalidCommand(String sentence) {
+        errorPretty("sorry i don't understand what you meant by" + LS + LS
+                + INDENT + sentence + LS + LS
+                + INDENT + "you can try these instead:\n" + listCommands());
+
+    }
+                            
     private void prettyPrint(String s) {
         System.out.println(LS + INDENT + DIVIDER
                 + INDENT + s + LS

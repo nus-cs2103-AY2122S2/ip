@@ -36,14 +36,6 @@ public class Lily {
     public void run() {
         ui.showWelcome(tasks);
         this.parser.parse(); // executes commands also
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                isExit = c.isExit();
-            } catch (LilyException e) {
-                ui.showError(e.getMessage());
-            }
-        }
     }
 
     public static void main(String[] args) {
