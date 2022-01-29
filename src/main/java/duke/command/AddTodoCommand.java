@@ -23,7 +23,7 @@ public class AddTodoCommand extends Command {
         } else {
             System.out.println("des"+ description);
             Todo entry = new Todo(description);
-            tasks.addTasks(entry);
+            tasks.addTask(entry);
             String message = entry.getTask();
             System.out.println("I have added the following todo:\n" + message);
             System.out.println("You now have " + tasks.getSize() + " tasks");

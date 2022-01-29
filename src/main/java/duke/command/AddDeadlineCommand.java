@@ -29,7 +29,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException(DESC_RESPONSE);
         } else {
             Deadline entry = new Deadline(description, datetime);
-            tasks.addTasks(entry);
+            tasks.addTask(entry);
             String message = entry.getTask();
             System.out.println("I have added the following deadline:\n" + message);
             System.out.println("You now have " + tasks.getSize() + " tasks");

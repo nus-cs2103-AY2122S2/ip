@@ -9,7 +9,7 @@ public class TaskList {
         tasks = new ArrayList<Task>();
     }
 
-    public void addTasks(Task item){
+    public void addTask(Task item){
         tasks.add(item);
     }
 

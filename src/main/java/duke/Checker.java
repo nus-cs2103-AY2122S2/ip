@@ -4,7 +4,7 @@ public class Checker {
     private String command;
     private Status state;
 
-    enum Status {
+    public enum Status {
         BYE,
         HELP,
         LIST,

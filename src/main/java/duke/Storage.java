@@ -61,15 +61,15 @@ public class Storage {
             String time = parts[3];
             DateHelper datetime = new DateHelper(time);
             Deadline out = new Deadline(description, datetime);
-            tasks.addTasks(out);
+            tasks.addTask(out);
         } else if (type.equals("E")) {
             String time = parts[3];
             DateHelper datetime = new DateHelper(time);
             Event out = new Event(description, datetime);
-            tasks.addTasks(out);
+            tasks.addTask(out);
         } else if (type.equals("T")) {
             Todo out = new Todo(description);
-            tasks.addTasks(out);
+            tasks.addTask(out);
         }
         // 2. Check if marked
         if (state.equals("1")) {
