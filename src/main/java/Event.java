@@ -5,11 +5,17 @@ public class Event extends Task {
 
     private LocalDateTime dueDate;
 
-    public Event(String description, String dueDate) {
+    public Event(String description, String dueDate, boolean fromDisk) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        LocalDateTime parsedDate = LocalDateTime.parse(dueDate, formatter);
-        this.dueDate = parsedDate;
+        if (fromDisk) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmma");
+            LocalDateTime parsedDate = LocalDateTime.parse(dueDate, formatter);
+            this.dueDate = parsedDate;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime parsedDate = LocalDateTime.parse(dueDate, formatter);
+            this.dueDate = parsedDate;
+        }
     }
 
     @Override
