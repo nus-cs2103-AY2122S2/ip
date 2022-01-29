@@ -31,7 +31,7 @@ public class Parser {
                         output = new AddCommand(new Deadline(taskArguments[0], date));
                     } catch (DateTimeParseException e) {
                         throw new VanException("Invalid date format. "
-                                + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+                          + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
                     }
                     break;
 
@@ -48,10 +48,9 @@ public class Parser {
                         output = new AddCommand(new Event(taskArguments[0], date));
                     } catch (DateTimeParseException e) {
                         throw new VanException("Invalid date format. "
-                                + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+                          + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
                     }
                     break;
-
                 case "todo":
                     if (parameters.length != 2) {
                         throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
@@ -87,6 +86,12 @@ public class Parser {
                     } catch (NumberFormatException ex) {
                         output = new InvalidCommand("Please use integer numbers e.g. 1, 2");
                     }
+                    break;
+                case "find":
+                    if (parameters.length != 2) {
+                        throw new VanException("Invalid format. Please use find <keyword>");
+                    }
+                    output = new FindCommand(parameters[1]);
                     break;
                 case "bye":
                     output = new ExitCommand();
@@ -133,5 +138,10 @@ public class Parser {
             }
         }
         return tasks;
+    }
+
+    public static String[] parseDescription(Task task) {
+        String[] keywords = task.getDescription().split(" ");
+        return keywords;
     }
 }

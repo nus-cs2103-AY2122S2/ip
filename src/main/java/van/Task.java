@@ -59,4 +59,13 @@ public class Task {
     public void setunDone() {
         this.done = false;
     }
+
+    /**
+     * Returns description of the task
+     *
+     * @return returns the description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
 }

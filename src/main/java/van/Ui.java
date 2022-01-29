@@ -46,4 +46,12 @@ public class Ui {
             System.out.println(i + 1 + ". " + taskList.get(i).getStatus());
         }
     }
+
+    public void printResults(ArrayList<Task> taskList, String keyword) {
+        this.printDivider();
+        System.out.println("Tasks containing " + keyword + ":");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(i + 1 + ". " + taskList.get(i).getStatus());
+        }
+    }
 }
