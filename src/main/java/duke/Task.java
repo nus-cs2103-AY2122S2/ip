@@ -35,6 +35,10 @@ public class Task {
      * If task is completed return X else return <space>
      * @return A string of either X or <space>
      */
+    public String getDescription() {
+        return description;
+    }
+
     private String getCompleted() {
         return completed ? "X" : " ";
     }

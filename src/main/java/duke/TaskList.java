@@ -46,6 +46,15 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public void find(String search) {
+        for (Task t : tasks) {
+            if (t.getDescription().contains(search)) {
+                System.out.println("\t" + t);
+            }
+        }
+        System.out.println();
+    }
+
     @Override
     public String toString() {
         if (!tasks.isEmpty()) {

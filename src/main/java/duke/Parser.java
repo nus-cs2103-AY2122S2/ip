@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Parser {
 
-    private final String[] cmdTypes = {"list", "delete", "unmark", "mark", "todo", "event", "deadline", "bye"};
+    private final String[] cmdTypes = {"find", "list", "delete", "unmark", "mark", "todo", "event", "deadline", "bye"};
 
     /**
      * Gets string and checks if command is in cmdTypes
@@ -34,7 +34,7 @@ public class Parser {
      * @return true if is "bye" else false
      */
     public boolean checkQuit(String cmd) {
-        return cmd.equalsIgnoreCase(cmdTypes[7]);
+        return cmd.equalsIgnoreCase(cmdTypes[8]);
     }
 
     /**
@@ -106,6 +106,10 @@ public class Parser {
             storage.write(tasks.getTaskList());
             ui.showAdded(newTask);
             break;
+
+        case "find":
+            tasks.find(task);
+
         default:
         }
     }
