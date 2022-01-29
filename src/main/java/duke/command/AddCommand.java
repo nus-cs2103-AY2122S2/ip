@@ -9,14 +9,28 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 public class AddCommand extends Command {
-    String taskType;
-    String taskDetails;
 
+    private final String taskType;
+    private final String taskDetails;
+
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param taskType    the task type
+     * @param taskDetails the task details
+     */
     public AddCommand(String taskType, String taskDetails) {
         this.taskType = taskType.toLowerCase();
         this.taskDetails = taskDetails;
     }
 
+    /**
+     * Adds the task into this `TaskList` and prints out a message to show what has been added.
+     *
+     * @param tasks   the tasks in `TaskList`
+     * @param ui      the UI that the user interacts with
+     * @param storage the storage that is used to read/write to the local file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (taskType) {
@@ -45,6 +59,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns `true` if the `Command` is `ExitCommand`.
+     *
+     * @return `true` if the `Command` is `ExitCommand`
+     */
     @Override
     public boolean isExit() {
         return false;

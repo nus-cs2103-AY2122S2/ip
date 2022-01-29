@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
+    /**
+     * Test to determine if {@link Parser#parseInt(String)} works as intended.
+     */
     @Test
     public void parseIntTest() {
         try {
@@ -28,6 +31,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Test to determine if {@link Parser#parseCommand(String)} works as intended.
+     */
     @Test
     public void parseCommandTest() {
         String[] commands = {
@@ -48,6 +54,9 @@ public class ParserTest {
         assertTrue(Parser.parseCommand(commands[9]) instanceof InvalidCommand);
     }
 
+    /**
+     * Test to determine if {@link Parser#parseStringToTask(String)} works as intended.
+     */
     @Test
     public void parseStringToTaskTest() {
         String[] inputs = {

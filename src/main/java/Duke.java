@@ -11,6 +11,11 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path to locally-stored data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,7 +27,7 @@ public class Duke {
         }
     }
 
-    protected void run() {
+    private void run() {
         ui.showWelcome();
         boolean hasExit = false;
         while(!hasExit) {
@@ -37,6 +42,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Duke("data/todo.dat").run();
     }

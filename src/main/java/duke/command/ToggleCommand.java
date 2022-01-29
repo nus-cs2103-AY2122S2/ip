@@ -9,14 +9,27 @@ import duke.task.Task;
 
 public class ToggleCommand extends Command {
 
-    protected String cmd;
-    protected String index;
+    private final String cmd;
+    private final String entryNumber;
 
-    public ToggleCommand(String cmd, String index) {
+    /**
+     * Instantiates a new Toggle command.
+     *
+     * @param cmd   to indicate whether to `mark` or `unmark` a `Task`
+     * @param entryNumber the entry number of the `Task` to `mark` or `unmark`
+     */
+    public ToggleCommand(String cmd, String entryNumber) {
         this.cmd = cmd;
-        this.index = index;
+        this.entryNumber = entryNumber;
     }
 
+    /**
+     * Sets the status the `Task` according to the {@link #cmd}.
+     *
+     * @param tasks   the tasks in `TaskList`
+     * @param ui      the UI that the user interacts with
+     * @param storage the storage that is used to read/write to the local file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
@@ -25,7 +38,7 @@ public class ToggleCommand extends Command {
                 return;
             }
 
-            int toggleIndex = Parser.parseInt(index) - 1;
+            int toggleIndex = Parser.parseInt(entryNumber) - 1;
             if (toggleIndex < 0 || toggleIndex >= tasks.size()) {
                 ui.showError("Invalid entry number!");
             } else {
@@ -38,6 +51,11 @@ public class ToggleCommand extends Command {
         }
     }
 
+    /**
+     * Returns `true` if the `Command` is `ExitCommand`.
+     *
+     * @return `true` if the `Command` is `ExitCommand`
+     */
     @Override
     public boolean isExit() {
         return false;

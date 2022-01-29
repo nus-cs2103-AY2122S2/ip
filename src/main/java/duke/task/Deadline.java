@@ -7,8 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task{
-    protected Date by;
 
+    /** The `Date` of when this `Deadline` is held. */
+    private final Date by;
+
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param taskName the task name/description
+     * @param by       the date of when this `Deadline` is due
+     * @throws DukeException if the `String` representation of the date does not follow the format
+     */
     public Deadline(String taskName, String by) throws DukeException {
         super(taskName);
         try {
@@ -18,6 +27,14 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param taskName the task name/description
+     * @param by       the date of when this `Deadline` is due
+     * @param isMarked the is `Deadline` has been marked/completed
+     * @throws DukeException if the `String` representation of the date does not follow the format
+     */
     public Deadline(String taskName, String by, String isMarked) throws DukeException {
         super(taskName);
         try {
@@ -28,12 +45,22 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Returns the `String` representation of a `Deadline`.
+     *
+     * @return the `String` representation of a `Deadline`
+     */
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy @ hh:mm a");
         return String.format("[D]%s (by: %s)", super.toString(), sdf.format(this.by));
     }
 
+    /**
+     * Returns the `String` representation of a `Deadline` that is written to the local data file.
+     *
+     * @return the `String` representation of a `Deadline` that is written to the local data file
+     */
     public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

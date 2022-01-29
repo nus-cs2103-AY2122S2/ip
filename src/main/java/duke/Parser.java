@@ -15,6 +15,13 @@ import duke.task.ToDo;
 
 public class Parser {
 
+    /**
+     * Parses `String` to `Integer`.
+     *
+     * @param strToIntValue the `String` that needs to be parsed to an `Integer` value
+     * @return the `Integer` value of the `String`.
+     * @throws DukeException if the parameter could not be parsed to an `Integer`.
+     */
     public static int parseInt(String strToIntValue) throws DukeException {
         try {
             return Integer.parseInt(strToIntValue);
@@ -23,6 +30,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a `String` and returns its corresponding `Command`.
+     *
+     * @param fullCommand the full command containing the keyword and its necessary details
+     * @return the corresponding command
+     */
     public static Command parseCommand(String fullCommand) {
         Command cmd;
         String[] input = fullCommand.split(" ", 2);
@@ -57,6 +70,13 @@ public class Parser {
         return cmd;
     }
 
+    /**
+     * Parses a `String` to `Task` when reading from the locally-stored data file.
+     *
+     * @param entry an entry in the locally-stored data file
+     * @return the corresponding tasks initiated with its details and marked status.
+     * @throws DukeException if there is an invalid keyword in the local data file
+     */
     public static Task parseStringToTask(String entry) throws DukeException {
         String[] input = entry.split(" \\| ");
         Task newTask;
