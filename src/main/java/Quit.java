@@ -10,11 +10,13 @@ final class Quit extends Instruction {
      *
      * @param message The terminating command that signals the end of program.
      */
-    protected Quit(String message) {
-        super.setDescription(message);
+    Quit(String message, TaskManager tasks) {
+        super(message, tasks);
     }
 
     /**
+     * Returns a see-you message.
+     *
      * @return The see-you message.
      */
     @Override

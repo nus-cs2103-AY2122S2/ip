@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Represent a task that is stored by Duke.
  */
@@ -5,6 +7,11 @@ abstract class Task {
 
     private boolean isDone;
     private String description;
+
+    // Used for generating info table about the task.
+    private static final String DESCRIPTION_FIELD = "description";
+    private static final String IS_DONE_FILED = "is_done";
+    private static final String TASK_TYPE_FIELD = "task_type";
 
     /**
      * Constructor of a task. Sets the description of the task, and set the isDone status to be false by default.
@@ -15,6 +22,17 @@ abstract class Task {
 
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Constructor using an infoTable.
+     *
+     * @param infoTable The <code>HashMap</code> that contains the information about the current task.
+     */
+    protected Task(HashMap<String, Object> infoTable) {
+
+        this.description = (String) infoTable.get(DESCRIPTION_FIELD);
+        this.isDone = (boolean) infoTable.get(IS_DONE_FILED);
     }
 
     /**
@@ -52,6 +70,7 @@ abstract class Task {
         }
     }
 
+
     /**
      * Marks the current task as done.
      */
@@ -85,10 +104,66 @@ abstract class Task {
      *
      * @return The icon.
      */
-    private String getStatusIcon() {
+    protected String getStatusIcon() {
         return this.isDone ? "[X]" : "[ ]";
     }
 
     protected abstract String getTypeIcon();
+
+    /**
+     * Returns the type of the current task.
+     *
+     * @return The type of the task.
+     */
+    protected abstract TaskType getType();
+
+    /**
+     * Turns the current <code>Task</code> into a <code>HashMap</code> that contains the necessary information to be
+     * written into hard disk.
+     *
+     * @return The HashMap containing the information about the current <code>Task</code>.
+     */
+    protected abstract HashMap<String, Object> getInfoTable();
+
+    /**
+     * Initializes the information table for the current task. This table contains the (attribute, value) for all the
+     * common attributes that a <code>Task</code> contains.
+     *
+     * @return
+     */
+    protected HashMap<String, Object> initializeInfoTable() {
+
+        HashMap<String, Object> infoTable = new HashMap<>();
+        infoTable.put(TASK_TYPE_FIELD, this.getType());
+        infoTable.put(DESCRIPTION_FIELD, this.description);
+        infoTable.put(IS_DONE_FILED, this.isDone);
+
+        return infoTable;
+    }
+
+    /**
+     * Retrieves a <code>Task</code> from a hash table that contains the relevant data.
+     *
+     * @param infoTable The <code>HashMap</code> that contains the data of a <code>Task</code>.
+     * @return The task obtained.
+     */
+    protected static Task retrieveTask(HashMap<String, Object> infoTable) throws TaskNotFoundException {
+
+        TaskType taskType = (TaskType) infoTable.get(TASK_TYPE_FIELD);
+
+        switch (taskType) {
+
+        case DEADLINE:
+            return new Deadline(infoTable);
+        case TODO:
+            return new ToDo(infoTable);
+        case EVENT:
+            return new Event(infoTable);
+        }
+
+
+        throw new TaskNotFoundException();
+    }
+
 
 }

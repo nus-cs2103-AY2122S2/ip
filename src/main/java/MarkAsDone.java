@@ -9,22 +9,24 @@ final class MarkAsDone extends Instruction {
      * Constructor 1. Initializes the instruction using an index of task.
      *
      * @param index The index of the task.
+     * @param tasks The task manager to be used.
      */
-    private MarkAsDone(int index) {
+    private MarkAsDone(int index, TaskManager tasks) {
 
-        super.setDescription("mark");
-        this.toMark = TaskManager.getTaskIndex(index);
+        super("mark", tasks);
+        this.toMark = tasks.getTaskIndex(index);
     }
 
     /**
      * Constructor 2. Takes in the whole instruction line and initializes the MarkAsDone instruction.
      *
      * @param instruction The line of instruction. It has to be guaranteed that the first word is 'mark'.
+     * @param tasks The task manager to be used.
      * @throws IllegalArgumentException
      */
-    protected MarkAsDone(String instruction) throws IllegalArgumentException {
+    protected MarkAsDone(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
-        this(MarkAsDone.parseInstruction(instruction));
+        this(MarkAsDone.parseInstruction(instruction, tasks), tasks);
     }
 
     /**
@@ -32,11 +34,12 @@ final class MarkAsDone extends Instruction {
      * index of task to be marked.
      *
      * @param instruction The line of instruction.
+     * @param tasks The task manager used by this instruction.
      * @return The index of the object to be marked.
      * @throws IllegalArgumentException If (i) the instruction has no valid integer to be parsed; or (ii) the index is
      * out of range.
      */
-    private static int parseInstruction(String instruction) throws IllegalArgumentException {
+    private static int parseInstruction(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
         String[] args = instruction.split(" ", 2);
         int index;
@@ -53,7 +56,7 @@ final class MarkAsDone extends Instruction {
             throw new IllegalArgumentException("Oops, mark operation only accepts integer index!");
         }
 
-        if (!TaskManager.isValidIndex(index)) {
+        if (!tasks.isValidIndex(index)) {
             throw new IllegalArgumentException("Oops, the task provided doesn't exist!");
         }
 

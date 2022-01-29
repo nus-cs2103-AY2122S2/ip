@@ -8,8 +8,8 @@ final class ListTasks extends Instruction {
     /**
      * Constructor of the instruction, adds the description.
      */
-    protected ListTasks() {
-        super.setDescription("list");
+    ListTasks(TaskManager tasks) {
+        super("list", tasks);
     }
 
     /**
@@ -19,7 +19,7 @@ final class ListTasks extends Instruction {
      */
     @Override
     protected String act() {
-        List<Task> tasks = TaskManager.listOfTasks();
+        List<Task> tasks = this.tasks.listOfTasks();
 
         return ListTasks.getTaskList(tasks);
     }
@@ -35,10 +35,10 @@ final class ListTasks extends Instruction {
         StringBuilder result = new StringBuilder("List of tasks:\n");
 
         for (int i = 0; i < tasks.size(); i++) {
-            result.append("     " + (i + 1) + ". " + tasks.get(i).toString() + "\n");
+            result.append("     ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
 
-        result.append(">> Now you have " + tasks.size() + " tasks in the list.");
+        result.append(">> Now you have ").append(tasks.size()).append(" tasks in the list.");
         return result.toString();
     }
 }

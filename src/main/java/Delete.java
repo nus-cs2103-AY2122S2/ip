@@ -7,19 +7,20 @@ final class Delete extends Instruction {
      * Instantiates an instruction "delete", with the given line of instruction.
      *
      * @param instruction The line of instruction for deletion, starting with 'delete'.
+     * @param tasks The task manager used.
      * @throws IllegalArgumentException If the given instruction does not contain a valid index.
      */
-    protected Delete(String instruction) throws IllegalArgumentException {
-        this(parseInstruction(instruction));
+    Delete(String instruction, TaskManager tasks) throws IllegalArgumentException {
+        this(parseInstruction(instruction, tasks), tasks);
     }
 
-    private Delete(int index) {
-        super.setDescription("delete");
+    private Delete(int index, TaskManager tasks) {
+        super("delete", tasks);
         this.toDeleteIndex = index;
-        this.toDelete = TaskManager.getTaskIndex(index);
+        this.toDelete = tasks.getTaskIndex(index);
     }
 
-    private static int parseInstruction(String instruction) throws IllegalArgumentException {
+    private static int parseInstruction(String instruction, TaskManager tasks) throws IllegalArgumentException {
 
         String[] args = instruction.split(" ");
         int index;
@@ -36,7 +37,7 @@ final class Delete extends Instruction {
             throw new IllegalArgumentException("Oops, delete operation only accepts integer index!");
         }
 
-        if (!TaskManager.isValidIndex(index)) {
+        if (!tasks.isValidIndex(index)) {
             throw new IllegalArgumentException("Oops, the task provided doesn't exist!");
         }
 
@@ -51,7 +52,7 @@ final class Delete extends Instruction {
     @Override
     protected String act() {
 
-        TaskManager.deleteIndex(toDeleteIndex);
+        tasks.deleteIndex(toDeleteIndex);
 
         return "You have successfully deleted:\n" + this.toDelete.toString();
     }

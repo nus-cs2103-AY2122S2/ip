@@ -9,10 +9,11 @@ final class Add extends Instruction{
      * Constructor for an add instruction.
      *
      * @param task The task to be added.
+     * @param tasks The task manager to be used.
      */
-    protected Add(Task task) throws IllegalArgumentException {
+    protected Add(Task task, TaskManager tasks) throws IllegalArgumentException {
 
-        super.setDescription("add");
+        super("add", tasks);
         this.task = task;
     }
 
@@ -23,6 +24,6 @@ final class Add extends Instruction{
      */
     @Override
     protected String act() {
-        return TaskManager.addTask(this.task);
+        return tasks.addTask(this.task);
     }
 }

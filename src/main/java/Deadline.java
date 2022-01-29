@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Represents a deadline, which has to be done within a specific date/time.
  */
@@ -5,6 +7,7 @@ final class Deadline extends Task {
 
     // At this stage, the due time is treated as a string.
     private String dueTime;
+    private final String DUE_TIME_FILED = "due_time";
 
     /**
      * Initializes a deadline with a name (description).
@@ -32,6 +35,11 @@ final class Deadline extends Task {
         this(parseDetails(details));
     }
 
+    public Deadline(HashMap<String, Object> infoTable) {
+        super(infoTable);
+        this.dueTime = (String) infoTable.get(DUE_TIME_FILED);
+    }
+
     /**
      * Parses the details containing the event description and due time.
      * <p>
@@ -55,6 +63,19 @@ final class Deadline extends Task {
     @Override
     protected String getTypeIcon() {
         return "[D]";
+    }
+
+    @Override
+    protected TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
+    @Override
+    protected HashMap<String, Object> getInfoTable() {
+
+        var infoTable = this.initializeInfoTable();
+        infoTable.put(DUE_TIME_FILED, this.dueTime);
+        return infoTable;
     }
 
     /**
