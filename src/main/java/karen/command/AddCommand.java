@@ -17,6 +17,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) {
         storage.addTask(item);
+        storage.saveTasks();
         ui.displayUserInput(ui.formatCount("added", item, storage.getTaskCount()));
 
     }

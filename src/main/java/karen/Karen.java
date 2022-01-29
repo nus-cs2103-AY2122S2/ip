@@ -23,11 +23,5 @@ public class Karen {
                 ui.displayUserInput(err.message);
             }
         }
-
-        // clean up tasks
-        if (isExit) {
-            storage.saveTasks();
-        }
-
     }
 }

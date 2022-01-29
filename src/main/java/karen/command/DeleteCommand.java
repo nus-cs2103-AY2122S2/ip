@@ -20,6 +20,8 @@ public class DeleteCommand extends Command {
         try {
             Task item = storage.getTask(this.taskIndex);
             storage.deleteTask(this.taskIndex);
+            storage.saveTasks();
+
             ui.displayUserInput(ui.formatCount("removed", item, storage.getTaskCount()));
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(

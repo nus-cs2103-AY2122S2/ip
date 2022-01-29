@@ -84,7 +84,7 @@ public class Storage {
     /**
      * Writes data from taskList attribute into file to DATA_PATH directory.
      */
-    protected void saveTasks() {
+    public void saveTasks() {
         // formatting data for writing
         String data = "";
         for (Task item: this.taskList) {
@@ -172,7 +172,7 @@ public class Storage {
      * Deletes Task object based on (0-based) index
      * @param index of Task Object inside of taskList
      */
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws IndexOutOfBoundsException {
         this.taskList.remove(index);
     }
 
