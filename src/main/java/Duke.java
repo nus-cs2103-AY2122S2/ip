@@ -164,6 +164,7 @@ public class Duke {
                         break;
                     default:
                         task = new Deadline(lineArray[2], lineArray[3]);
+
                 }
                 if (lineArray[1].equals("X")) {
                     task.setAsDone();
