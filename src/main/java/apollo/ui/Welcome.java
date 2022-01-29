@@ -1,6 +1,10 @@
+package apollo.ui;
+
+import apollo.Apollo;
+
 import java.time.LocalTime;
 
-public class Banner extends Apollo{
+public class Welcome extends Apollo{
 
     public static String dayTime() {
         // define the border values
@@ -26,7 +30,7 @@ public class Banner extends Apollo{
         else return "Night";
     }
 
-    public static void welcomeMsg() {
+    public static String welcomeMessage(boolean isLoaded) {
         String logo = "       @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n"
                 + "       @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n"
                 + "       @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n"
@@ -42,9 +46,10 @@ public class Banner extends Apollo{
                 + "    @@@@@-@@@@@@ @@@@@@@      =@@@@@@@-   @@@@@@@@@@ @@@@@@@@@%   @@@@@@@@      \n"
                 + "    @%#*+:+%#*+= -=+++++        =%@%=     --======== --=======-    :*@@*.       \n";
         System.out.println("Hello from\n" + logo);
-        String daytime = dayTime();
-        String msg = String.format("Good %s Sir, I am Apollo. \nHow can I help you on this wonderful %s? ",
-                daytime, daytime.toLowerCase());
-        Apollo.printMessage(msg);
+        String greeting = isLoaded
+                ? "Welcome back sir. "
+                : String.format("Good %s sir, I am Apollo. ", dayTime());
+        return String.format("%s\nHow can I help you on this wonderful %s? ",
+                greeting, dayTime().toLowerCase());
     }
 }
