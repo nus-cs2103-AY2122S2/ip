@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) throws IOException {
-        File data = new File("../../data.txt");
-        Scanner s = new Scanner(data);
+        Scanner s = new Scanner(System.in);
         String k = s.nextLine();
-        System.out.println(k);
-        String[] x = k.split("\\|");
-        for(String i : x){
+        String[] x = k.split(" ", 2);
+        System.out.println(x.length);
+        for (String i : x){
             System.out.println(i);
         }
     }
