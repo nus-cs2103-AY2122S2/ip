@@ -23,7 +23,7 @@ public class Parser {
      * @throws DateTimeParseException If date/time entered is invalid
      */
     public String[] messageProcess(String userMessage) throws DukeException, DateTimeParseException {
-        String[] command = new String[4];
+        String[] command = new String[5];
         String[] split = userMessage.split(" ");
 
         if (userMessage.equals("list")) {

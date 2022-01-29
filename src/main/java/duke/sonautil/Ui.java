@@ -7,7 +7,6 @@ import duke.task.Task;
  */
 public class Ui {
 
-    public static final String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
     public static final String LOGO = "  *    ,---.    ,-----.  ,--.  ,--.   ,---.      *\n"
             + "      '   .-'  '  .-.  ' |  ,'.|  |  /  O  \\    *\n"
             + " *    `.  `-.  |  | |  | |  |' '  | |  .-.  |\n"
@@ -16,38 +15,38 @@ public class Ui {
 
     /**
      * Prints when the list is empty
+     *
+     * @return message to user
      */
-    public static void emptyListMessage() {
-        System.out.println(LINE + "\nOops... your list is empty! :(\n" + LINE);
-    }
-
-    /**
-     * Prints out the line when Duke.Duke is responding
-     */
-    public static void showLine() {
-        System.out.println(LINE);
+    public static String emptyListMessage() {
+        return "Oops... your list is empty! :(";
     }
 
     /**
      * Prints out when Duke.Duke is list
+     *
+     * @return message to user
      */
-    public static void showListMessage() {
-        System.out.println(LINE + "\nHere is your Duke.task list!");
+    public static String showListMessage() {
+        return "Here is your list!";
     }
 
     /**
-     * Prints out right after Sona is opened
+     * returns string right after Sona is opened
+     *
+     * @return message to user
      */
-    public static void welcomeMessage() {
-        System.out.println(LOGO);
-        System.out.println("\nHi! You can call me Sona ^^~\nHow can I help you?");
+    public static String welcomeMessage() {
+        return "Hi! You can call me Sona, your AMAZING task manager ^^~ How can I help you?";
     }
 
     /**
-     * Prints out after user types "bye"
+     *  returns string after user types "bye"
+     *
+     * @return message to user
      */
-    public static void goodbyeMessage() {
-        System.out.println(LINE + "\nBye-bye :')  Hope to see you soon!\n" + LINE);
+    public static String goodbyeMessage() {
+        return "Bye-bye :')  Hope to see you soon!";
     }
 
     /**
@@ -62,10 +61,8 @@ public class Ui {
      * Prints out when file is invalid
      */
     public static void invalidFileMessage() {
-        System.out.println(LINE
-                + "Oops! I can't load your file due to some errors..."
-                + "\nDon't worry! I will create a new one for you."
-                + LINE);
+        System.out.println("Oops! I can't load your file due to some errors..."
+                + "\nDon't worry! I will create a new one for you.");
     }
 
     /**
@@ -74,7 +71,7 @@ public class Ui {
      * @return message to user
      */
     public static String emptyTaskMessage() {
-        return LINE + "\nOh no..did you forget to put what you need to do? :(\n" + LINE;
+        return "Oh no..did you forget to put what you need to do? :(";
     }
 
     /**
@@ -83,11 +80,9 @@ public class Ui {
      * @return message to user
      */
     public static String dateTimeErrorMessage() {
-        return LINE
-                + "\nOh no... the format or the date/time you entered is wrong! "
+        return "\nOh no... the format or the date/time you entered is wrong! "
                 + "The correct format should be YYYY-MM-DD HHMM\n"
-                + "It is not necessary to put in time!\n"
-                + LINE;
+                + "It is not necessary to put in time!\n";
     }
 
     /**
@@ -97,7 +92,7 @@ public class Ui {
      * @return message to user
      */
     public static String userUnknownInputMessage(String s) {
-        return LINE + "\n" + s + "? Sorry, I don't understand what that means.. :(\n" + LINE;
+        return s + "? Sorry, I don't understand what that means.. :(";
     }
 
     /**
@@ -106,17 +101,17 @@ public class Ui {
      * @return message to user
      */
     public static String scheduleEmptyMessage() {
-        return LINE + "\nThere is nothing happening on this day! Hooray~\n" + LINE;
+        return "There is nothing happening on this day! Hooray~";
     }
 
     /**
      * Prints out the list of tasks on a particular date
      *
      * @param date date that the user wants to check
+     * @return message to user
      */
-    public static void showSchedule(String date) {
-        System.out.println(LINE
-                + "\nThese are the events/deadlines happening on " + date + ":");
+    public static String showSchedule(String date) {
+        return "These are the events/deadlines happening on " + date + ":\n";
     }
 
     /**
@@ -125,17 +120,17 @@ public class Ui {
      * @return message to user
      */
     public static String scheduleNoDateErrorMessage() {
-        return LINE + "\nWhich day would you like to check? Input format: schedule YYYY-MM-DD\n" + LINE;
+        return "Which day would you like to check? Input format: schedule YYYY-MM-DD";
     }
 
     /**
      * Prints out when a Duke.task is removed from the list
      *
      * @param task Duke.task to be removed
+     * @return message to user
      */
-    public static void taskRemovedMessage(Task task) {
-        System.out.println(LINE + "\nDone! I've removed this Duke.task:\n"
-                + task.toString() + "\n" + LINE);
+    public static String taskRemovedMessage(Task task) {
+        return "Done! I've removed this task:\n" + task.toString();
     }
 
     /**
@@ -144,7 +139,7 @@ public class Ui {
      * @return message to user
      */
     public static String taskRemoveEmptyMessage() {
-        return LINE + "\nWhich Duke.task do you want to delete? Add the number in the end to tell me~\n" + LINE;
+        return "Which task do you want to delete? Add the number in the end to tell me~";
     }
 
     /**
@@ -153,7 +148,7 @@ public class Ui {
      * @return message to user
      */
     public static String listEmptyMessage() {
-        return LINE + "\nOops... your list is empty! :(\n" + LINE;
+        return "Oops... your list is empty! :(";
     }
 
     /**
@@ -162,17 +157,17 @@ public class Ui {
      * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 00:00 since the user did not enter a time for the event
      * @param tasksAddedIndex total number of tasks in the list
+     * @return message to user
      */
-    public static void eventEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
+    public static String eventEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
         if (timeEntered.equals("true")) {
-            System.out.println((LINE + "\nWokay! I've added this Duke.task:\n"
+            return "Wokay! I've added this task:\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " task(s) in the list";
         } else {
-            System.out.println((LINE
-                    + "\nSince you did not enter what time is this event happening, I will help you set it at 00:00!\n"
+            return "Since you did not enter what time is this event happening, I will help you set it at 00:00!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " task(s) in the list";
         }
     }
 
@@ -182,7 +177,7 @@ public class Ui {
      * @return message to user
      */
     public static String eventDateEmptyMessage() {
-        return LINE + "\nOops! You forgot to add the event date after '/'.. try again? :)\n" + LINE;
+        return "Oops! You forgot to add the event date after '/'.. try again? :)";
     }
 
     /**
@@ -191,9 +186,7 @@ public class Ui {
      * @return message to user
      */
     public static String eventNoSlashMessage() {
-        return LINE
-                + "\nWhen is the event happening? Add '/' and the date after the event to make me record ;)\n"
-                + LINE;
+        return "When is the event happening? Add '/' and the date after the event to make me record ;)";
     }
 
     /**
@@ -202,16 +195,17 @@ public class Ui {
      * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 23:59 since the user did not enter a time for the event
      * @param tasksAddedIndex total number of tasks in the list
+     * @return message to user
      */
-    public static void deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
+    public static String deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAddedIndex) {
         if (timeEntered.equals("true")) {
-            System.out.println((LINE + "\nWokay! I've added this Duke.task:\n" + task.toString()
-                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
+            return "Wokay! I've added this task:\n" + task.toString()
+                    + "\nNow you have " + (tasksAddedIndex) + " task(s) in the list";
         } else {
-            System.out.println((LINE + "\nSince you did not enter the due time for this Duke.task, "
+            return "Since you did not enter the due time for this task, "
                     + "I will help you set it at 23:59!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAddedIndex) + " task(s) in the list";
         }
     }
 
@@ -221,7 +215,7 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineDateEmptyMessage() {
-        return LINE + "\nOops! You forgot to add the due date after '/'.. try again? :)\n" + LINE;
+        return "Oops! You forgot to add the due date after '/'.. try again? :)";
     }
 
     /**
@@ -230,8 +224,7 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineNoSlashMessage() {
-        return LINE + "\nWhen is the deadline? Add '/' and the date after your Duke.task to make me record ;)\n"
-                + LINE;
+        return "When is the deadline? Add '/' and the date after your task to make me record ;)";
     }
 
     /**
@@ -239,21 +232,22 @@ public class Ui {
      *
      * @param task Duke.task to be added
      * @param tasksAddedIndex total number of tasks in the list
+     * @return message to user
      */
-    public static void todoEnteredSuccessMessage(Task task, int tasksAddedIndex) {
-        System.out.println(LINE + "\nWokay! I've added this Duke.task:\n"
+    public static String todoEnteredSuccessMessage(Task task, int tasksAddedIndex) {
+        return "Wokay! I've added this task:\n"
                 + task.toString()
-                + "\nNow you have " + (tasksAddedIndex) + " Duke.task(s) in the list\n" + LINE);
+                + "\nNow you have " + (tasksAddedIndex) + " task(s) in the list";
     }
 
     /**
      * Prints out when a Duke.task is successfully unmarked
      *
      * @param task Duke.task to be unmarked
+     * @return message to user
      */
-    public static void unmarkSuccessMessage(Task task) {
-        System.out.println(LINE + "\nAw man..I've marked this Duke.task as not done yet:\n"
-                + task.toString() + "\n" + LINE);
+    public static String unmarkSuccessMessage(Task task) {
+        return "Aw man..I've marked this task as not done yet:\n" + task.toString();
     }
 
     /**
@@ -262,11 +256,11 @@ public class Ui {
      * @return message to user
      */
     public static String unmarkRepeatMessage() {
-        return LINE + "\nYou have already unmarked this Duke.task!\n" + LINE;
+        return "You have already unmarked this task!";
     }
 
     public static String taskDontExistMessage(int taskIndex) {
-        return LINE + "\nThere is no number " + (taskIndex + 1) + " in your Duke.task list!\n" + LINE;
+        return "There is no number " + (taskIndex + 1) + " in your task list!";
     }
 
     /**
@@ -275,16 +269,17 @@ public class Ui {
      * @return message to user
      */
     public static String unmarkNoNumberMessage() {
-        return LINE + "\nWhich Duke.task do you want to unmark? Add the number in the end to tell me~\n" + LINE;
+        return "Which task do you want to unmark? Add the number in the end to tell me~";
     }
 
     /**
      * Prints out when a Duke.task is successfully marked
      *
      * @param task Duke.task to be marked
+     * @return message to user
      */
-    public static void markSuccessMessage(Task task) {
-        System.out.println(LINE + "\nYay! I've marked this Duke.task as done:\n" + task.toString() + "\n" + LINE);
+    public static String markSuccessMessage(Task task) {
+        return "Yay! I've marked this task as done:\n" + task.toString();
     }
 
     /**
@@ -293,7 +288,7 @@ public class Ui {
      * @return message to user
      */
     public static String markRepeatMessage() {
-        return LINE + "\nYou have already finished this Duke.task! :D\n" + LINE;
+        return "You have already finished this task! :D";
     }
 
     /**
@@ -302,7 +297,7 @@ public class Ui {
      * @return message to user
      */
     public static String markNoNumberMessage() {
-        return LINE + "\nWhich Duke.task do you want to mark? Add the number in the end to tell me~\n" + LINE;
+        return "Which task do you want to mark? Add the number in the end to tell me~";
     }
 
     /**
@@ -311,22 +306,25 @@ public class Ui {
      * @return message to user
      */
     public static String findNoKeywordError() {
-        return LINE + "\nEnter your keyword behind 'find' to let me search for you! :)\n" + LINE;
+        return "Enter your keyword behind 'find' to let me search for you! :)";
     }
 
     /**
      * Prints out when there is no match to user's search
-
+     *
+     * @return message to user
      */
-    public static void findNoMatchError() {
-        System.out.println(LINE + "\nI couldn't find any Duke.task that matches your search! :(\n" + LINE);
+    public static String findNoMatchError() {
+        return "I couldn't find any task that matches your search! :(";
     }
 
     /**
      * Prints out when Sona is showing search result to user
+     *
+     * @return message to user
      */
-    public static void findShowResult() {
-        System.out.println(LINE + "\nHere are the tasks that match your search:");
+    public static String findShowResult() {
+        return "Here are the tasks that match your search:\n";
     }
 
 

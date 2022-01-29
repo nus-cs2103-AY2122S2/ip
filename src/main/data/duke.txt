@@ -1,4 +1,9 @@
-D | 0 | homework  | 2022-02-03T15:00
 T | 0 | play
-T | 0 | play game
-E | 0 | hw  | 2022-09-04T00:00
+D | 0 | hw  | 2022-01-01T23:59
+E | 1 | party  | 2022-01-01T00:00
+T | 0 | do hw
+T | 0 | play
+T | 0 | list
+T | 0 | play
+T | 0 | play
+T | 0 | oooo
