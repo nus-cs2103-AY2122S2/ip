@@ -65,9 +65,9 @@ public class Duke {
                     storage.save();
 
                     ui.printMessage(String.format("""
-                                    Got it. I've added this task:
-                                     %s
-                                    Now you have %d %s in the list.""",
+                            Got it. I've added this task:
+                            %s
+                            Now you have %d %s in the list.""",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -77,9 +77,9 @@ public class Duke {
                     storage.save();
 
                     ui.printMessage(String.format("""
-                                    Got it. I've added this task:
-                                     %s
-                                    Now you have %d %s in the list.""",
+                            Got it. I've added this task:
+                            %s
+                            Now you have %d %s in the list.""",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -89,22 +89,22 @@ public class Duke {
                     storage.save();
 
                     ui.printMessage(String.format("""
-                                    Got it. I've added this task:
-                                     %s
-                                    Now you have %d %s in the list.""",
+                            Got it. I've added this task:
+                            %s
+                            Now you have %d %s in the list.""",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
                     ));
                 } else if (parser.getType(command).equals("delete")) {
-                    Task removedTask = pastTasks.remove(parser.getDeleteIndex(command));
+                    Task removedTask = pastTasks.remove(Parser.getDeleteIndex(command));
 
                     storage.save();
 
                     ui.printMessage(String.format("""
-                                    Noted. I've removed this task:
-                                     %s
-                                    Now you have %d %s in the list.""",
+                            Noted. I've removed this task:
+                            %s
+                            Now you have %d %s in the list.""",
                             removedTask,
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"

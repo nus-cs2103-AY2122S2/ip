@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     Parser parser = new Parser();
+
     @Test
     public void testGettingType() {
         assertEquals("bye", parser.getType("bye"),

@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class TaskList {
 
     /**
      * Returns element at index
-     *
      */
     public Task get(int index) {
         return taskList.get(index);
@@ -33,7 +31,6 @@ public class TaskList {
 
     /**
      * Returns size of taskList
-     *
      */
     public int size() {
         return taskList.size();
@@ -41,7 +38,6 @@ public class TaskList {
 
     /**
      * Removes element at index
-     *
      */
     public Task remove(int index) {
         return taskList.remove(index);

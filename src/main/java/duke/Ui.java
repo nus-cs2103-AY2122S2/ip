@@ -8,25 +8,20 @@ package duke;
 public class Ui {
     /**
      * Prints a String and then terminate the line.
-     *
      */
     public void println(String message) {
         System.out.println(message);
     }
 
     /**
-     *
      * Prints the formatted version of given message to console
-     *
      */
     public void printMessage(String message) {
-        System.out.println(
-                String.format("""
+        System.out.printf("""
                         ____________________________________________________________
                         %s
-                        ____________________________________________________________""",
-                        message
-                )
+                        ____________________________________________________________%n""",
+                message
         );
     }
 }

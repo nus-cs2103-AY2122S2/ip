@@ -1,8 +1,6 @@
 package duke;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -14,7 +12,6 @@ public class Storage {
 
     /**
      * Loads the task list from storage
-     *
      */
     public void load() throws IOException {
         FileReader fr = new FileReader("storage.txt");
