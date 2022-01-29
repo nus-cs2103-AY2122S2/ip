@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.operations.TaskList;
+import duke.task.Task;
 
 /**
  * An abstract class to handle the commands of the logic from Parser class.

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * containing the tasklist operations. e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
-    protected static final ArrayList<Task> taskArr = new ArrayList<>();
+    protected static final ArrayList<Task> TASK_ARRAY_LIST = new ArrayList<>();
     /**
      * Prints the total number of tasks.
      *
@@ -30,7 +30,7 @@ public class TaskList {
      */
     public void mark(int num) {
         Ui.line();
-        Task currTask = taskArr.get(num - 1);
+        Task currTask = TASK_ARRAY_LIST.get(num - 1);
         currTask.mark();
         System.out.println("     The bar on the top left of your screen just increased! Keep going!");
         System.out.println("     " + currTask);
@@ -45,7 +45,7 @@ public class TaskList {
      */
     public void unmark(int num) {
         Ui.line();
-        Task currTask = taskArr.get(num - 1);
+        Task currTask = TASK_ARRAY_LIST.get(num - 1);
         currTask.unmark();
         System.out.println("     Surely you aren't the imposter... right??");
         System.out.println("     " + currTask);
@@ -59,9 +59,9 @@ public class TaskList {
      * @param task task to be added into the ArrayList.
      */
     public void addToList(Task task) {
-        taskArr.add(task);
+        TASK_ARRAY_LIST.add(task);
         System.out.println("       " + task.toString());
-        totalTasks(taskArr.size());
+        totalTasks(TASK_ARRAY_LIST.size());
         Storage.updateTextFile();
         Ui.line();
     }
@@ -72,7 +72,7 @@ public class TaskList {
      * @param task task to be added into the ArrayList.
      */
     public static void addToListNoPrint(Task task) {
-        taskArr.add(task);
+        TASK_ARRAY_LIST.add(task);
         Storage.updateTextFile();
     }
 
@@ -82,11 +82,11 @@ public class TaskList {
      * @param task task to be deleted from the ArrayList.
      */
     public void deleteFromList(Task task) {
-        taskArr.remove(task);
+        TASK_ARRAY_LIST.remove(task);
         Ui.line();
         System.out.println("     Hmm... kinda sus you deleted this task...");
         System.out.println("       " + task);
-        totalTasks(taskArr.size());
+        totalTasks(TASK_ARRAY_LIST.size());
         Storage.updateTextFile();
         Ui.line();
     }
@@ -97,8 +97,8 @@ public class TaskList {
     public void printList() {
         Ui.line();
         System.out.println("     Here are the tasks in your device:");
-        for (int i = 0; i < taskArr.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + taskArr.get(i).toString());
+        for (int i = 0; i < TASK_ARRAY_LIST.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + TASK_ARRAY_LIST.get(i).toString());
         }
         Ui.line();
     }
@@ -115,9 +115,9 @@ public class TaskList {
             System.out.println("     You sussy baka! What are you trying to find?");
         }
 
-        for (int i = 0; i < taskArr.size(); i++) {
-            if(taskArr.get(i).getDescription().contains(keyword)) {
-                System.out.println("     " + counter + ": " + taskArr.get(i).toString());
+        for (int i = 0; i < TASK_ARRAY_LIST.size(); i++) {
+            if (TASK_ARRAY_LIST.get(i).getDescription().contains(keyword)) {
+                System.out.println("     " + counter + ": " + TASK_ARRAY_LIST.get(i).toString());
                 counter++;
             }
         }

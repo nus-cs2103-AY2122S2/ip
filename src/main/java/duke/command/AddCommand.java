@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.operations.TaskList;
+import duke.task.Task;
 
 /**
  * Represents a subclass of Command.
@@ -13,7 +13,7 @@ public class AddCommand extends Command {
      * @param task the task to be instantiated with.
      */
     public AddCommand(Task task) {
-        super(task,null, null);
+        super(task, null, null);
     }
 
     /**

@@ -1,8 +1,8 @@
 package duke.operations;
 
 import duke.command.AddCommand;
-import duke.command.DeleteCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.MarkCommand;
@@ -15,11 +15,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Represents a parser for Duke. It deals with making sense of the user command.
@@ -87,59 +86,41 @@ public class Parser {
 
         if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();
-        }
-
-        else if (input.equalsIgnoreCase("list")) {
+        } else if (input.equalsIgnoreCase("list")) {
             return new PrintCommand();
-        }
-
-        else if (firstWord.equalsIgnoreCase("mark")) {
+        } else if (firstWord.equalsIgnoreCase("mark")) {
             return handleMarkInput(strs[1]);
-        }
-
-        else if (firstWord.equalsIgnoreCase("unmark")) {
+        } else if (firstWord.equalsIgnoreCase("unmark")) {
             return handleUnmarkInput(strs[1]);
-        }
-
-        else if (firstWord.equalsIgnoreCase("todo")) {
+        } else if (firstWord.equalsIgnoreCase("todo")) {
             String subString = input.substring(4).trim(); // take the remaining of the input String after "todo"
             if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
                 return handleToDoInput(subString);
             }
-        }
-
-        else if (firstWord.equalsIgnoreCase("deadline")) {
+        } else if (firstWord.equalsIgnoreCase("deadline")) {
             String subString = input.substring(8).trim(); // take the remaining of the input String after "deadline"
             if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
                 return handleDeadlineInput(subString);
             }
-        }
-
-        else if (firstWord.equalsIgnoreCase("event")) {
+        } else if (firstWord.equalsIgnoreCase("event")) {
             String subString = input.substring(5).trim(); // take the remaining of the input String after "event"
             if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
                 return handleEventInput(subString);
             }
-        }
-
-        else if (firstWord.equalsIgnoreCase("delete")) {
+        } else if (firstWord.equalsIgnoreCase("delete")) {
             int listIndex = Integer.parseInt(strs[1]); // retrieve the index after delete
-            Task taskToBeDeleted = TaskList.taskArr.get(listIndex - 1);
+            Task taskToBeDeleted = TaskList.TASK_ARRAY_LIST.get(listIndex - 1);
             return new DeleteCommand(taskToBeDeleted);
-        }
-
-        else if (firstWord.equalsIgnoreCase("find")) {
+        } else if (firstWord.equalsIgnoreCase("find")) {
             String keyword = input.substring(4).trim(); // take the remaining of the input String
             return new FindCommand(keyword);
-        }
-
-        else {
+        } else {
             throw new UnknownInputException();
         }
     }
@@ -172,7 +153,7 @@ public class Parser {
     private static Command handleDeadlineInput(String str) throws DukeException {
         // breaks the string into 2 parts, description, date and time.
         String[] inputArgs = str.split(" /");
-        if (!inputArgs[1].substring(0,3).equals("by ")) {
+        if (!inputArgs[1].substring(0, 3).equals("by ")) {
             throw new UnknownInputException();
         } else {
             String deadlineDateTime = inputArgs[1].substring(3); // retrieves the String after '/by'
@@ -194,7 +175,7 @@ public class Parser {
     private static Command handleEventInput(String str) throws DukeException {
         // breaks the string into 2 parts, description, date and time.
         String[] inputArgs = str.split(" /");
-        if (!inputArgs[1].substring(0,3).equals("at ")) {
+        if (!inputArgs[1].substring(0, 3).equals("at ")) {
             throw new UnknownInputException();
         } else {
             String eventDateTime = inputArgs[1].substring(3); // retrieves the String after '/at'

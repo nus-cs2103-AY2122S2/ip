@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 /**
  * Represents a storage of Duke. It deals with loading tasks from the file and saving tasks in the file.
  */
@@ -52,7 +53,7 @@ public class Storage {
      */
     public static void writeToFile(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task str : TaskList.taskArr) {
+        for (Task str : TaskList.TASK_ARRAY_LIST) {
             fw.write(formatTextFileLine(str) + System.lineSeparator());
         }
         fw.close();
@@ -65,7 +66,7 @@ public class Storage {
      * @return the formatted task data.
      */
     public static String formatTextFileLine(Task task) {
-        String finalOutput= null;
+        String finalOutput = null;
         int mark = (task.getStatusIcon().equals("X") ? IS_MARKED : IS_UNMARKED);
         if (task instanceof ToDo) {
             finalOutput = "T|" + mark + "|" + task.getDescription();

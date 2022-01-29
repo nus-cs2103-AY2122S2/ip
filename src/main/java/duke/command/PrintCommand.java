@@ -10,7 +10,7 @@ public class PrintCommand extends Command {
      * A constructor for <code>PrintCommand</code>.
      */
     public PrintCommand() {
-        super(null, null,null);
+        super(null, null, null);
     }
 
     /**

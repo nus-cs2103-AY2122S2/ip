@@ -12,7 +12,7 @@ public class UnmarkCommand extends Command {
      * @param num the index in the arraylist to be marked.
      */
     public UnmarkCommand(Integer num) {
-        super(null, num,null);
+        super(null, num, null);
     }
 
     /**

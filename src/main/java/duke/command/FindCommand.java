@@ -5,7 +5,7 @@ import duke.operations.TaskList;
 /**
  * Represents a subclass of Command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     /**
      * A constructor for <code>FindCommand</code>.
      *

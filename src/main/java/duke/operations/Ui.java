@@ -21,9 +21,6 @@ public class Ui {
     private static final String WELCOME_MESSAGE_TWO = "If you have seen this SUSSY imposter,"
             + " please let me know immediately... otherwise how may I be of assistance?";
     private static final String GOODBYE_MESSAGE = "Better watch out for the imposter AMONG US!";
-    protected static final String MARK_MESSAGE = "     The bar on the top left of your screen just increased!"
-            + " Keep going!";
-    protected static final String UNMARK_MESSAGE = "     Surely you aren't the imposter... right??";
 
     /**
      * Prints a line.

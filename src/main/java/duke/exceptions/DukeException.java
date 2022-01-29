@@ -3,7 +3,7 @@ package duke.exceptions;
 /**
  * Represents the main exception class that handles errors specific to Duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * A constructor for <code>DukeException</code>.
      *

@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
      * A constructor for <code>ExitCommand</code>.
      */
     public ExitCommand() {
-        super(null, null,null);
+        super(null, null, null);
     }
 
     /**
