@@ -1,8 +1,8 @@
 package tasks;
 
 public class Task {
+    protected String saveFormat;
     protected String description;
-    public String saveFormat;
     protected boolean isDone;
 
     public Task(String description) {
@@ -10,17 +10,22 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
-    public boolean getStatus(){ return isDone; }
-    public void setDone(){
+    public String getSaveFormat() {
+        return saveFormat;
+    }
+    public boolean getStatus() {
+        return isDone;
+    }
+    public void setDone() {
         isDone = true;
     }
-    public void setNotDone(){
+    public void setNotDone() {
         isDone = false;
     }
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
@@ -30,9 +35,8 @@ public class Task {
      * @return A description of the task including its type, status, date and time.
      */
     @Override
-    public String toString(){
-        return "[" + getStatusIcon() +"] " + description;
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
-
 
 }

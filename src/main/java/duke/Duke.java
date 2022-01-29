@@ -1,14 +1,14 @@
 package duke;
 
-import tasks.Deadline;
-import tasks.TaskList;
-import tasks.Task;
-import tasks.Event;
-import tasks.Todo;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
 
 public class Duke {
     private Storage storage;
@@ -87,10 +87,10 @@ public class Duke {
                         } else if (temp[0].equals("deadline")) {
                             Deadline deadline = new Deadline(str.substring(9));
                             taskList.addTask(deadline);
-                        } else if (temp[0].equals("find")){
+                        } else if (temp[0].equals("find")) {
                             System.out.println("Listed below are the matching tasks in your list: ");
-                            for (Task t : taskList.getTasks()){
-                                if (t.toString().contains(str.substring(5))){
+                            for (Task t : taskList.getTasks()) {
+                                if (t.toString().contains(str.substring(5))) {
                                     System.out.println(t);
                                 }
                             }
@@ -104,7 +104,6 @@ public class Duke {
                 str = sc.nextLine();
             }
         }
-        //storage.save(taskList);
         ui.printByeMessage();
         sc.close();
     }

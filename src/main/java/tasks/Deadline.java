@@ -1,20 +1,20 @@
 package tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
-    String[] DateAndTime;
-    LocalDate date;
-    String time;
+import duke.DukeException;
+
+public class Deadline extends Task {
+    private String[] DateAndTime;
+    private LocalDate date;
+    private String time;
 
     /**
      * Creates a Deadline task and sets its date and time accordingly from user input.
      *
      * @param description Description of the deadline task generated from user input.
-     * @throws DukeException, If the input format is not followed or there are missing information.
+     * @throws DukeException If the input format is not followed or there are missing information.
      */
     public Deadline(String description) throws DukeException {
         super(description);
@@ -25,8 +25,7 @@ public class Deadline extends Task{
             date = LocalDate.parse(DateAndTime[0]);
             time = DateAndTime[1];
             super.saveFormat = "D," + this.description + "," + date + "," + time + "," + super.isDone;
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException();
         }
     }
@@ -35,7 +34,7 @@ public class Deadline extends Task{
      * Creates a Deadline task from previously saved list of tasks during initialisation of chat-bot.
      *
      * @param saveFormat Data saved in tasks list file.
-     * @param blean A Boolean value set to True to differentiate the creation of the task from saved list and user input.
+     * @param blean A Boolean value set to True to differentiate the creation of task from saved list and user input.
      * @throws DukeException If the format is not followed or there are missing information.
      */
     public Deadline(String saveFormat, boolean blean) throws DukeException {
@@ -45,7 +44,7 @@ public class Deadline extends Task{
             this.description = strArr[1];
             date = LocalDate.parse(strArr[2]);
             time = strArr[3];
-            if (Boolean.parseBoolean(strArr[4])){
+            if (Boolean.parseBoolean(strArr[4])) {
                 super.setDone();
             }
             super.saveFormat = strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + strArr[3];
@@ -61,7 +60,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return  "D | " + super.toString() + "BY: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
-                " " + time;
+        return "D | " + super.toString() + "BY: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY"))
+                + " " + time;
     }
 }

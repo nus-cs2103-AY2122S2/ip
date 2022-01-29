@@ -1,9 +1,13 @@
 package duke;
 
 public class Ui {
-    String welcomeMessage;
-    String byeMessage;
-    public Ui(){
+    private String welcomeMessage;
+    private String byeMessage;
+
+    /**
+     * Constructor for Ui.
+     */
+    public Ui() {
         welcomeMessage =
                 "       __  \n"
                 + "(____()'`; \n"
@@ -13,13 +17,23 @@ public class Ui {
 
         byeMessage = "Bye! Hope not to see you again :)";
     };
-    public void showLoadingError(){
+
+    /**
+     * Prints a message informing user an error with loading of file.
+     */
+    public void showLoadingError() {
         System.out.println("Error loading file! A new list will be created.");
     }
-    public void printWelcomeMessage(){
+    /**
+     * Prints a welcome message to user.
+     */
+    public void printWelcomeMessage() {
         System.out.println(welcomeMessage);
     }
-    public void printByeMessage(){
+    /**
+     * Prints a message to signal the termination of program.
+     */
+    public void printByeMessage() {
         System.out.println(byeMessage);
     }
 }

@@ -1,19 +1,26 @@
 package duke;
 
-import tasks.TaskList;
-import tasks.Task;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
-public class Storage implements StorageInterface{
-    File f;
+import tasks.Task;
+import tasks.TaskList;
 
+public class Storage implements StorageInterface {
+    private File f;
+
+    /**
+     * Constructor for Storage class
+     * @param filePath Path of file containing the tasks stored in hard disk.
+     */
     public Storage(String filePath) {
         f = new File(filePath);
-        if (!f.exists()){
+        if (!f.exists()) {
             f = new File("Data");
             f.mkdirs();
             f = new File("Data/tasks.txt");
@@ -25,7 +32,7 @@ public class Storage implements StorageInterface{
      *
      * @return File of saved tasks list.
      */
-    public File load(){
+    public File load() {
         return f;
     }
 
@@ -49,17 +56,19 @@ public class Storage implements StorageInterface{
      * @throws IOException If the file could not be written.
      */
     public void save(TaskList taskList) throws IOException {
-        try{
+        try {
             Files.delete(Path.of("Data/tasks.txt"));
-        } catch (NoSuchFileException e){}
-        finally{
+        } catch (NoSuchFileException e) {
+            File f = new File("Data");
+            f.mkdirs();
+        } finally {
             for (Task t: taskList.getTasks()) {
                 try {
-                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.getStatus() + System.lineSeparator());
+                    writeToFile("Data/tasks.txt", t.getSaveFormat() + "," + t.getStatus() + System.lineSeparator());
                 } catch (FileNotFoundException e) {
                     File f = new File("Data");
                     f.mkdirs();
-                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.getStatus() + System.lineSeparator());
+                    writeToFile("Data/tasks.txt", t.getSaveFormat() + "," + t.getStatus() + System.lineSeparator());
                 }
             }
         }

@@ -16,7 +16,7 @@ public class Todo extends Task {
      * Creates a Todo task from previously saved list of tasks during initialisation of chat-bot.
      *
      * @param saveFormat Data saved in tasks list file.
-     * @param blean A Boolean value set to True to differentiate the creation of the task from saved list and user input.
+     * @param blean A Boolean value set to True to differentiate the creation of task from saved list and user input.
      * @throws DukeException If the format is not followed or there are missing information.
      */
     public Todo(String saveFormat, boolean blean) throws DukeException {
@@ -24,7 +24,7 @@ public class Todo extends Task {
         try {
             String[] strArr = description.split(",");
             this.description = strArr[1];
-            if (Boolean.parseBoolean(strArr[2])){
+            if (Boolean.parseBoolean(strArr[2])) {
                 super.setDone();
             }
             super.saveFormat = strArr[0] + "," + strArr[1];
@@ -38,7 +38,7 @@ public class Todo extends Task {
      * @return a description of the task including its type and status.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "T " + "| " + super.toString();
     }
 }
