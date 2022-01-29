@@ -32,24 +32,39 @@ public class Duke {
                         Task markTask = Task.getTasks().get(markIndex);
                         markTask.setIsDone(true);
                         System.out.printf("Nice! I've marked this task as done: \n"
-                                + "   %s\n", markTask);
+                                + "    %s\n", markTask);
                         break;
                     } catch (IndexOutOfBoundsException indexErr) {
                         DukeException e = new DukeException("☹ OOPS!!! Invalid index.");
                         System.out.println(e.getMessage());
                     }
+                    break;
                 case "unmark":
                     int unmarkIndex = sc.nextInt() - 1;
                     try {
                         Task unmarkTask = Task.getTasks().get(unmarkIndex);
                         unmarkTask.setIsDone(false);
                         System.out.printf("Ok, I've marked this task as not done yet: \n"
-                                + "   %s\n", unmarkTask);
+                                + "    %s\n", unmarkTask);
                         break;
                     } catch (IndexOutOfBoundsException indexErr) {
                         DukeException e = new DukeException("☹ OOPS!!! Invalid index.");
                         System.out.println(e.getMessage());
                     }
+                    break;
+                case "delete":
+                    int deleteIndex = sc.nextInt() - 1;
+                    try {
+                        Task deleteTask = Task.getTasks().get(deleteIndex);
+                        Task.deleteTask(deleteIndex);
+                        System.out.printf("Noted. I've removed this task: \n" + "    %s\n"
+                                + "%s\n", deleteTask, Task.taskCountToString());
+                        break;
+                    } catch (IndexOutOfBoundsException indexErr) {
+                        DukeException e = new DukeException("☹ OOPS!!! Invalid index.");
+                        System.out.println(e.getMessage());
+                    }
+                    break;
                 case "todo":
                     String toDoDescription = sc.nextLine().trim();
                     if (toDoDescription.equals("")) {

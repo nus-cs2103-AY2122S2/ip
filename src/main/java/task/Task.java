@@ -23,6 +23,8 @@ public abstract class Task {
         Task.TASKS.add(newTask);
     }
 
+    public static void deleteTask(int taskIndex) { Task.TASKS.remove(taskIndex); }
+
     public static Task getTask(int taskIndex) {
         return Task.TASKS.get(taskIndex);
     }
