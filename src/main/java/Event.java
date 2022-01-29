@@ -1,7 +1,9 @@
-public class Event extends Task {
-    private final String period;
+import java.time.LocalDateTime;
 
-    public Event(String description, String period) {
+public class Event extends Task {
+    private final LocalDateTime period;
+
+    public Event(String description, LocalDateTime period) {
         super(description);
         this.period = period;
     }
