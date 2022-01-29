@@ -4,12 +4,21 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
-public class MarkCommand extends Command<String> {
+/**
+ * MarkCommand class
+ */
+public class MarkCommand extends Command<String>{
 
     private String text;
     private TaskList list;
     private Storage storage;
 
+    /**
+     * Constructor for MarkCommand object
+     * @param text string containing index of task to mark
+     * @param list task list to mark specified task
+     * @param storage storage of where this task will be marked
+     */
     public MarkCommand(String text, TaskList list, Storage storage) {
         this.text = text;
         this.list = list;
@@ -17,6 +26,9 @@ public class MarkCommand extends Command<String> {
         runCommand();
     }
 
+    /**
+     * Mark task
+     */
     @Override
     public void runCommand() {
         int taskNumber = intSearch(text) - 1;
@@ -31,6 +43,11 @@ public class MarkCommand extends Command<String> {
         }
     }
 
+    /**
+     * Format string to obtain index
+     * @param text unformatted string
+     * @return index of task to mark
+     */
     public int intSearch(String text) {
         String[] splicedString = text.split(" ");
         return Integer.parseInt(splicedString[1]);

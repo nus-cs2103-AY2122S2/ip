@@ -3,14 +3,25 @@ package duke.command;
 import duke.Duke;
 import duke.tasklist.TaskList;
 
-public class ListCommand extends Command<String> {
+/**
+ * list class
+ */
+public class ListCommand extends Command<String>{
 
     private TaskList list;
+
+    /**
+     * Constructor for list object
+     * @param list task list to display
+     */
     public ListCommand(TaskList list) {
         this.list = list;
         runCommand();
     }
 
+    /**
+     * display tasks in task list
+     */
     @Override
     public void runCommand() {
         System.out.println("Here are the tasks in your list:\n");

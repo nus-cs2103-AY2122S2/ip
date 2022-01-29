@@ -4,12 +4,21 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
-public class UnmarkCommand extends Command<String> {
+/**
+ * UnmarkCommand class
+ */
+public class UnmarkCommand extends Command<String>{
 
     private String text;
     private TaskList list;
     private Storage storage;
 
+    /**
+     * Constructor for UnmarkCommand object
+     * @param text string containing index of task to unmark
+     * @param list task list to unmark specified task
+     * @param storage storage of where this task will be unmarked
+     */
     public UnmarkCommand(String text, TaskList list, Storage storage) {
         this.text = text;
         this.list = list;
@@ -17,6 +26,9 @@ public class UnmarkCommand extends Command<String> {
         runCommand();
     }
 
+    /**
+     * method to unmark task
+     */
     @Override
     public void runCommand() {
         int taskNumber = intSearch(text) - 1;
@@ -31,6 +43,11 @@ public class UnmarkCommand extends Command<String> {
         }
     }
 
+    /**
+     * Format string to obtain index
+     * @param text unformatted string
+     * @return index of task to mark
+     */
     public int intSearch(String text) {
         String[] splicedString = text.split(" ");
         return Integer.parseInt(splicedString[1]);
