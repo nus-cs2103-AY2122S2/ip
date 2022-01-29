@@ -5,6 +5,7 @@ import juke.task.Task;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Abstraction for list of tasks.
@@ -78,6 +79,22 @@ public class TaskList implements Iterable<Task> {
         return this.taskList.size();
     }
     
+    /**
+     * Queries for all tasks containing the given string.
+     *
+     * @param query Query string.
+     * @return List containing the results of the query.
+     */
+    public List<Task> search(String query) {
+        ArrayList<Task> queryList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(query)) {
+                queryList.add(task);
+            }
+        }
+        return queryList;
+    }
+
     /**
      * Returns the iterator over the elements of the list.
      *
