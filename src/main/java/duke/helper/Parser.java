@@ -9,6 +9,7 @@ import duke.tasks.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 /**
  * Represents parser which parses user's input and String of texts and try to make sense of it.
@@ -194,6 +195,21 @@ public class Parser {
             }
             return "Noted. I've removed this task:" + "\n" + task.toString() + "\n"+
             "Now you have " + taskList.size() + " tasks in the list.";
+        }
+        if (command.equals("find")){
+            String keyword = strArr[1];
+            StringBuilder message = new StringBuilder("Here are the matching tasks in your list:");
+            int j = 1;
+            for (int i = 1; i <= taskList.size(); i++) {
+                int index = i - 1;
+                if (taskList.get(index).getDescription().contains(keyword)) {
+                    message.append("\n" + j + ". " + taskList.get(index).toString());
+                    j++;
+                }
+
+            }
+            return message.toString();
+
         }
         return null;
     }

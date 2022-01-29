@@ -34,6 +34,15 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task.
+     * @return description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+
+    /**
      * Returns the detail of the task, to be overridden in its subclasses.
      * @return the detail of the task.
      */
