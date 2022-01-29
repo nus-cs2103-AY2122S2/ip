@@ -12,6 +12,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         String input = sc.nextLine();
+
+        replyWelcomeMessage();
         while (!isBye(input)) {
             echo(input);
             input = sc.nextLine();
@@ -30,6 +32,10 @@ public class Duke {
         return Duke.BYE.equals(word);
     }
 
+    public static void replyWelcomeMessage() {
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+    }
     public static void replyBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
