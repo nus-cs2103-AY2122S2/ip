@@ -28,13 +28,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchList = new TaskList();
         for (int i = 0; i < tasks.getSize(); i++) {
             if (tasks.getTask(i).getDescription().contains(findDetail)) {
                 matchList.addTask(tasks.getTask(i));
             }
         }
-        ui.showMatchedTask(matchList);
+        return ui.showMatchedTask(matchList);
     }
 }

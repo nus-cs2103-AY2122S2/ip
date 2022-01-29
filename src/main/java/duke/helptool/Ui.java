@@ -14,30 +14,13 @@ public class Ui {
     public Ui() {
     }
 
-
-    /**
-     * Read command string.
-     *
-     * @return the string
-     */
-    public String readCommand() {
-        return myObj.nextLine();
-    }
-
-    /**
-     * Close reading.
-     */
-    public void closeReading() {
-        myObj.close();
-    }
-
     /**
      * Show exception error.
      *
      * @param e the e
      */
-    public void showExceptionError(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showExceptionError(DukeException e) {
+        return e.getMessage();
     }
 
     /**
@@ -45,9 +28,8 @@ public class Ui {
      *
      * @param input the input
      */
-    public void showSuccessMark(String input) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(input);
+    public String showSuccessMark(String input) {
+        return "Nice! I've marked this task as done:\n" + input + "\n";
     }
 
     /**
@@ -55,9 +37,8 @@ public class Ui {
      *
      * @param input the input
      */
-    public void showSuccessUnmark(String input) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(input);
+    public String showSuccessUnmark(String input) {
+        return "OK, I've marked this task as not done yet:\n" + input + "\n";
     }
 
     /**
@@ -66,10 +47,9 @@ public class Ui {
      * @param input           the input
      * @param sizeAfterDelete the size after delete
      */
-    public void showDelete(String input, int sizeAfterDelete) {
-        System.out.println("OK, I've removed this task:");
-        System.out.println("\t" + input);
-        System.out.format("Now you have %d tasks in the list.\n", sizeAfterDelete);
+    public String showDelete(String input, int sizeAfterDelete) {
+        return String.format("OK, I've removed this task:\n\t%s\nNow you have %d tasks in the list.\n",
+                    input, sizeAfterDelete);
     }
 
     /**
@@ -77,13 +57,14 @@ public class Ui {
      *
      * @param tasks the tasks
      */
-    public void showList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(TaskList tasks) {
+        StringBuilder temp = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             if (tasks.getTask(i) != null) {
-                System.out.format("%s. %s\n", i + 1, tasks.getTask(i).toString());
+                temp.append(String.format("%s. %s\n", i + 1, tasks.getTask(i).toString()));
             }
         }
+        return temp.toString();
     }
 
     /**
@@ -91,11 +72,12 @@ public class Ui {
      *
      * @param tasks the tasks
      */
-    public void showMatchedTask(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showMatchedTask(TaskList tasks) {
+        StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.format("%s. %s\n", i + 1, tasks.getTask(i).toString());
+            temp.append(String.format("%s. %s\n", i + 1, tasks.getTask(i).toString()));
         }
+        return temp.toString();
     }
 
     /**
@@ -104,10 +86,10 @@ public class Ui {
      * @param todo the todo
      * @param size the size
      */
-    public void showAddTodo(String todo, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+    public String showAddTodo(String todo, int size) {
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 todo, size);
-        System.out.println(result);
+        return result;
     }
 
     /**
@@ -116,10 +98,10 @@ public class Ui {
      * @param ddl  the ddl
      * @param size the size
      */
-    public void showAddDeadline(String ddl, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+    public String showAddDeadline(String ddl, int size) {
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 ddl, size);
-        System.out.println(result);
+        return result;
     }
 
     /**
@@ -128,10 +110,10 @@ public class Ui {
      * @param event the event
      * @param size  the size
      */
-    public void showAddEvent(String event, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+    public String showAddEvent(String event, int size) {
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 event, size);
-        System.out.println(result);
+        return result;
     }
 
     /**
@@ -154,9 +136,9 @@ public class Ui {
     /**
      * Bye.
      */
-    public void bye() {
+    public String bye() {
         // print result
-        System.out.println("\tBye. Hope to see you again soon!");
+        return "\tBye. Hope to see you again soon!\n";
     }
 
 }
