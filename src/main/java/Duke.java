@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private static final String BOT_NAME = "Feline";
@@ -53,6 +55,8 @@ public class Duke {
                     printTaskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format. Please use this format: dd/MM/yyyy hhmm");
                 } finally {
                     break;
                 }
