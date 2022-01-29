@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 
@@ -18,7 +17,7 @@ public class Storage {
      * Initializes the location of the file to retrieve data from.
      * @param filePath
      */
-    Storage(String filePath){
+    public Storage(String filePath){
         this.filePath = filePath;
     }
     /*ArrayList<String> load() {
@@ -44,7 +43,7 @@ public class Storage {
      * Writes the values stored within the tasklist to the file called data/tasks.txt
      * @param list
      */
-    void save(TaskList list) {
+    public void save(TaskList list) {
         try {
             FileWriter myWriter = new FileWriter("data/tasks.txt");
             for (int i=0; i<list.size(); i++) {
