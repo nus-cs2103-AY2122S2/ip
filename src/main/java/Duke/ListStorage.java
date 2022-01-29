@@ -32,7 +32,6 @@ public class ListStorage {
                     .append(".")
                     .append(item.toString())
                     .append("\n");
-            //System.out.println(i + ". " + item);
             i++;
         }
         return toPrint.toString();
