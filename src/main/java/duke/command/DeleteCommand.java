@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
-public class DeleteCommand extends Command<String>{
+public class DeleteCommand extends Command<String> {
 
     private String text;
     private TaskList list;

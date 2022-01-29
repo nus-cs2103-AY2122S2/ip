@@ -1,6 +1,6 @@
 package duke.command;
 
-public class ByeCommand extends Command<String>{
+public class ByeCommand extends Command<String> {
 
     public ByeCommand() {
         runCommand();

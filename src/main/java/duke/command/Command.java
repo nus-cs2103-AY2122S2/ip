@@ -1,6 +1,6 @@
 package duke.command;
 
-public abstract class Command<T> {
+public abstract class Command<String> {
 
     private boolean systemRunning = true;
     public abstract void runCommand();

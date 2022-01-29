@@ -13,7 +13,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void addTest() {
+    public void addTask_addTodo_expectedBehavior() {
         TaskList taskList = new TaskList();
         ToDo freshTodo = new ToDo("try this");
         taskList.addTask(freshTodo);
@@ -21,7 +21,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markTest() {
+    public void markTask_markTodo_expectedBehavior() {
         TaskList taskList = new TaskList();
         ToDo freshTodo = new ToDo("try this");
         freshTodo.setDone(true);

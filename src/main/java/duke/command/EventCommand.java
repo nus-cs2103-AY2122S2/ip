@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class EventCommand extends Command<String>{
+public class EventCommand extends Command<String> {
 
     private TaskList list;
     private String description;
@@ -28,6 +28,6 @@ public class EventCommand extends Command<String>{
         Event freshEvent = new Event(splicedDescription, dueDate, false);
         list.addTask(freshEvent);
         storage.writeToFile(list);
-        ui.addEvent(freshEvent, list);
+        ui.showAddEvent(freshEvent, list);
     }
 }

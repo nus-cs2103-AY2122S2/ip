@@ -3,7 +3,7 @@ package duke.command;
 import duke.Duke;
 import duke.tasklist.TaskList;
 
-public class ListCommand extends Command<String>{
+public class ListCommand extends Command<String> {
 
     private TaskList list;
     public ListCommand(TaskList list) {

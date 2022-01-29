@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-
-
     public Ui() {
     }
 
@@ -32,17 +30,17 @@ public class Ui {
         System.out.println("  " + "That's all?? lame!!!");
     }
 
-    public void addDeadline(Deadline freshDeadline, TaskList list) {
+    public void showAddDeadline(Deadline freshDeadline, TaskList list) {
         System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshDeadline + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
     }
 
-    public void addEvent(Event freshEvent, TaskList list) {
+    public void showAddEvent(Event freshEvent, TaskList list) {
         System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshEvent + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
     }
 
-    public void addTodo(ToDo freshTodo, TaskList list) {
+    public void showAddTodo(ToDo freshTodo, TaskList list) {
         System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshTodo + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
     }

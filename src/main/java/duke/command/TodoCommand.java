@@ -27,6 +27,6 @@ public class TodoCommand extends Command<String> {
         ToDo freshTodo = new ToDo(splicedString);
         list.addTask(freshTodo);
         storage.writeToFile(list);
-        ui.addTodo(freshTodo, list);
+        ui.showAddTodo(freshTodo, list);
     }
 }

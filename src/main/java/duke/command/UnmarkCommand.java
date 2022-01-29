@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
-public class UnmarkCommand extends Command<String>{
+public class UnmarkCommand extends Command<String> {
 
     private String text;
     private TaskList list;

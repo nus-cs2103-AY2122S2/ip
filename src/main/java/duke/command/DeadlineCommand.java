@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class DeadlineCommand extends Command<String>{
+public class DeadlineCommand extends Command<String> {
 
     private TaskList list;
     private String text;
@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command<String>{
         Deadline freshDeadline = new Deadline(splicedDescription, dueDate, false);
         list.addTask(freshDeadline);
         storage.writeToFile(list);
-        ui.addDeadline(freshDeadline, list);
+        ui.showAddDeadline(freshDeadline, list);
     }
 }
 

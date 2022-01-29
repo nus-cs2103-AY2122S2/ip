@@ -49,7 +49,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadFile() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             FileInputStream readFile = new FileInputStream(storedFilePath);
