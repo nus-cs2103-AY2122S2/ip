@@ -1,25 +1,24 @@
 package storage;
 
-import exception.DukeException;
-import task.TaskList;
-import ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import exception.DukeException;
+import task.TaskList;
+
 public class Storage {
-    static String PATH = "data";
-    static String FILENAME = "todolist.txt";
-    File file;
+    private static final String PATH = "data";
+    private static final String FILENAME = "todolist.txt";
+    private File file;
 
     /**
      * Creates .txt file according to PATH and FILENAME where todolist will be recorded.
      * @throws DukeException If there is a problem with creating the file.
      */
-    public Storage() throws DukeException{
+    public Storage() throws DukeException {
         File directory = new File(PATH + "/");
-        if (! directory.exists()){
+        if (!directory.exists()) {
             boolean wasCreated = directory.mkdir();
         }
 

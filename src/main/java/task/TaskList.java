@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Functions below basically all apply to the ArrayList made in the constructor.
  */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
@@ -29,6 +29,7 @@ public class TaskList {
         tasks.remove(serialNumber - 1);
     }
 
+    @Override
     public String toString() {
         String s = "";
         for (int i = 0; i < tasks.size(); i++) {

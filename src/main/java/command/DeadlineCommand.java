@@ -1,18 +1,19 @@
 package command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import exception.DukeException;
 import storage.Storage;
 import task.Deadline;
 import task.TaskList;
 import ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class DeadlineCommand extends Command {
-    String message;
-    String time;
+    private String message;
+    private String time;
 
+    /** Stores message and time for Deadline Task to be created */
     public DeadlineCommand(String message, String time) {
         this.message = message;
         this.time = time;
@@ -35,8 +36,8 @@ public class DeadlineCommand extends Command {
             throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
         }
         storage.writeToFile(taskList);
-        ui.outputMessage("Got it. I've added this task: \n" +
-                taskList.get(taskList.size() - 1) +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.outputMessage("Got it. I've added this task: \n"
+                + taskList.get(taskList.size() - 1)
+                + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 }

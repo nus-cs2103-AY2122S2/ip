@@ -1,15 +1,15 @@
 package ui;
 
-import exception.DukeException;
-
 import java.util.Scanner;
+
+import exception.DukeException;
 
 /**
  * Ui interface that the user interacts with.
  * Involves a scanner to read user inputs.
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
