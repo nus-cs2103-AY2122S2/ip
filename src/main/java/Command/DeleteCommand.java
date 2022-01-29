@@ -6,7 +6,7 @@ import Main.Ui;
 import Main.Storage;
 
 public class DeleteCommand extends Command {
-    int num;
+    protected int num;
     public DeleteCommand(int num) {
         this.num = num;
     }

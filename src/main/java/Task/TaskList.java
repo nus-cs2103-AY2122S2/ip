@@ -1,42 +1,40 @@
 package Task;
 
-import Task.Task;
-
 import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private List<Task> aryLst;
+    private List<Task> tasks;
     private int count;
 
     public  TaskList () {
-        aryLst = new ArrayList<Task>();
+        tasks = new ArrayList<Task>();
     }
     public TaskList(List<Task> inputTks) {
-        aryLst = inputTks;
+        tasks = inputTks;
         count = inputTks.size();
     }
 
     public void addTask(Task tk) {
-        aryLst.add(tk);
+        tasks.add(tk);
         count++;
     }
 
     public void delete(int num) {
-        aryLst.remove(num -1);
+        tasks.remove(num -1);
         count--;
     }
 
     public void markTask(int num) {
-        aryLst.get(num - 1).markDone();
+        tasks.get(num - 1).markDone();
     }
 
     public void unmarkTask(int num) {
-        aryLst.get(num - 1).markNotDone();
+        tasks.get(num - 1).markNotDone();
     }
 
     public String getTaskStr(int num) {
-        return aryLst.get(num - 1).toString();
+        return tasks.get(num - 1).toString();
     }
 
     public int getCount() {
@@ -52,7 +50,7 @@ public class TaskList {
 
         for (int i = 0; i < count; i++) {
             int num = i + 1;
-            s += "\n" + num + ". " + aryLst.get(i).toString();
+            s += "\n" + num + ". " + tasks.get(i).toString();
         }
 
         return s;
@@ -64,9 +62,9 @@ public class TaskList {
         String strReturn = "";
         for (int i = 0; i < count; i++) {
             if (i == 0) {
-                strReturn = aryLst.get(i).saveString();
+                strReturn = tasks.get(i).saveString();
             } else {
-                strReturn += "\n" + aryLst.get(i).saveString();
+                strReturn += "\n" + tasks.get(i).saveString();
             }
         }
         return strReturn;

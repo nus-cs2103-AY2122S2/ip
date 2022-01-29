@@ -11,8 +11,8 @@ public class MarkCommand extends Command {
         UNMARK,
     }
 
-    Type ty;
-    int num;
+    protected Type ty;
+    protected int num;
 
     public MarkCommand(String s, int num) {
         if (s.equals("MARK")) {
