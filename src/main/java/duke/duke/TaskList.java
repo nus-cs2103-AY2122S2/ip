@@ -143,7 +143,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If there are no details in input.
      */
 
-    public void todo(String input, ArrayList<Task> arr) {
+    public void toDo(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
             ToDo newToDo = new ToDo(word);
