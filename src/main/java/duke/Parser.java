@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,7 +92,7 @@ public class Parser {
             int idx = Integer.parseInt(str_idx) - 1;
 
             if (!(idx >= 0 && idx < listSize)) {
-                throw new DukeException("Task does not exist");
+                throw new DukeException("duke.Task does not exist");
             }
 
             return idx;

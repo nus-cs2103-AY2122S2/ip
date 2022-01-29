@@ -1,36 +1,36 @@
 
-	Hello! I'm Duke
+	Hello! I'm duke.Duke
 	What can I do for you?
 
 	Wrong command
 
 	Empty list
 
-	DukeException: Task does not exist
+	duke.DukeException: duke.Task does not exist
 
-	DukeException: Task does not exist
+	duke.DukeException: duke.Task does not exist
 
-	DukeException: There is no index
+	duke.DukeException: There is no index
 
-	DukeException: There is no index
+	duke.DukeException: There is no index
 
 	No task to do
 
-	DukeException: /at not found
+	duke.DukeException: /at not found
 
-	DukeException: /by not found
+	duke.DukeException: /by not found
 
-	DukeException: No task in instruction
+	duke.DukeException: No task in instruction
 
-	DukeException: No task in instruction
+	duke.DukeException: No task in instruction
 
-	DukeException: Description of task not found
+	duke.DukeException: Description of task not found
 
-	DukeException: Description of task not found
+	duke.DukeException: Description of task not found
 
-	DukeException: Datetime of task not found
+	duke.DukeException: Datetime of task not found
 
-	DukeException: Datetime of task not found
+	duke.DukeException: Datetime of task not found
 
 	Got it. I've added this task:
 		[T][ ] C
@@ -44,31 +44,31 @@
 		[D][ ] C (by: D)
 	Now you have 3 tasks in the list.
 
-	Task marked as done.
+	duke.Task marked as done.
 		1. [T][X] C
 
-	Task marked as done.
+	duke.Task marked as done.
 		2. [E][X] C (by: D)
 
-	Task marked as done.
+	duke.Task marked as done.
 		3. [D][X] C (by: D)
 
-	DukeException: Task does not exist
+	duke.DukeException: duke.Task does not exist
 
 	1. [T][X] C
 	2. [E][X] C (by: D)
 	3. [D][X] C (by: D)
 
-	Task marked as not done yet.
+	duke.Task marked as not done yet.
 		1. [T][ ] C
 
-	Task marked as not done yet.
+	duke.Task marked as not done yet.
 		2. [E][ ] C (by: D)
 
-	Task marked as not done yet.
+	duke.Task marked as not done yet.
 		3. [D][ ] C (by: D)
 
-	DukeException: Task does not exist
+	duke.DukeException: duke.Task does not exist
 
 	1. [T][ ] C
 	2. [E][ ] C (by: D)
@@ -86,7 +86,7 @@
 		[E][ ] C (by: D)
 	Now you have 1 tasks in the list.
 
-	DukeException: Task does not exist
+	duke.DukeException: duke.Task does not exist
 
 	Empty list
 
