@@ -1,39 +1,31 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
-    private static final String DATA_DIRECTORY = "data";
-    private static final String DATA_FILE = "apollo.ser";
+    private static final Path DATA_PATH = Paths.get("data", "apollo.ser");
 
     private static void initialiseDir() throws ApolloException {
-        File dataDir = new File(DATA_DIRECTORY);
-        boolean isDirCreated = dataDir.exists();
-        if (!isDirCreated || !dataDir.isDirectory()) {
-            isDirCreated = dataDir.mkdir();
-        }
-        if (!isDirCreated) {
-            throw new ApolloException("Cannot create save directory. ");
+        try {
+            if (!Files.exists(DATA_PATH)) {
+                if (!Files.exists(DATA_PATH.getParent())) {
+                    Files.createDirectory(DATA_PATH.getParent());
+                }
+                Files.createFile(DATA_PATH);
+            }
+        } catch (IOException e) {
+            throw new ApolloException("Cannot create save. ");
         }
     }
 
     public static void save(ArrayList<Task> tasks) throws ApolloException {
         initialiseDir();
-        File dataFile = new File(DATA_DIRECTORY + File.separator + DATA_FILE);
         try {
-            boolean isFileExist = dataFile.createNewFile();
-        } catch (IOException e) {
-            throw new ApolloException("Cannot create save file. ");
-        }
-
-        try {
-            FileOutputStream fileStream = new FileOutputStream(DATA_DIRECTORY + File.separator + DATA_FILE);
-            ObjectOutputStream objStream = new ObjectOutputStream(fileStream);
+            ObjectOutputStream objStream = new ObjectOutputStream(Files.newOutputStream(DATA_PATH));
             objStream.writeObject(tasks);
         } catch (IOException e) {
             throw new ApolloException("Cannot write to save file. ");
@@ -43,11 +35,8 @@ public class Storage {
     @SuppressWarnings("unchecked")
     public static ArrayList<Task> load() throws ApolloException {
         try {
-            FileInputStream fileStream = new FileInputStream(DATA_DIRECTORY + File.separator + DATA_FILE);
-            ObjectInputStream objStream = new ObjectInputStream(fileStream);
+            ObjectInputStream objStream = new ObjectInputStream(Files.newInputStream(DATA_PATH));
             return (ArrayList<Task>) objStream.readObject();
-        } catch (FileNotFoundException e) {
-            throw new ApolloException("No save file found. ");
         } catch (IOException | ClassNotFoundException e) {
             throw new ApolloException("Cannot load save file. ");
         }
