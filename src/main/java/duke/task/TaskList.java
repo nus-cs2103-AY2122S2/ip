@@ -21,6 +21,23 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    public String findTasks(String detail){
+        String output = "";
+        int count = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            String description = tasks.get(i).getDescription();
+            String message = tasks.get(i).getTask();
+            if (i == tasks.size() -1 && description.contains(detail)) {
+                count++;
+                output += count + ". " + message;
+            } else if (description.contains(detail)) {
+                count++;
+                output += count + ". " + message + "\n";
+            }
+        }
+        return output;
+    }
+
     public String formatTasks() {
         String output = "";
         for (int i = 0; i < tasks.size(); i++) {

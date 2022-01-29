@@ -88,6 +88,9 @@ public class Parser {
             String markId = textEntered[1];
             parsedCommand = new MarkCommand(markId);
             break;
+        case FIND:
+            String findString = textEntered[1];
+            parsedCommand = new FindCommand(findString);
         }
     }
 

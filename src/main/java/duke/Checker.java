@@ -13,7 +13,8 @@ public class Checker {
         TODO,
         DELETE,
         MARK,
-        UNMARK
+        UNMARK,
+        FIND
     };
 
     public Checker(String input) throws DukeException {
@@ -37,6 +38,8 @@ public class Checker {
             this.state = Status.UNMARK;
         } else if (this.command.equals("mark")) {
             this.state = Status.MARK;
+        } else if (this.command.equals("find")) {
+            this.state = Status.FIND;
         } else {
             throw new DukeException("Sorry, I did not catch that! \\(T.T)/\n" +
                     "Please type 'help' to see all commands I can help with.");
