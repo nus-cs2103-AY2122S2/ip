@@ -46,6 +46,8 @@ public class Parser {
             return new UnmarkCommand(command, list, storage);
         } else if (command.startsWith("mark")) {
             return new MarkCommand(command, list, storage);
+        } else if (command.startsWith("find")) {
+            return new FindCommand(command, list);
         } else {
             throw new DukeException("Oh dear, there must be an error somewhere!");
         }
