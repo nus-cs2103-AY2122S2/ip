@@ -1,37 +1,38 @@
+package duke.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        tasks = new ArrayList<Task>();
     }
 
     public void addTasks(Task item){
-        this.tasks.add(item);
+        tasks.add(item);
     }
 
     public Task removeTask(int j) {
-        return this.tasks.remove(j);
+        return tasks.remove(j);
     }
 
     public Task getTask(int i){
-        return this.tasks.get(i);
+        return tasks.get(i);
     }
 
     public String formatTasks() {
         String output = "";
-        for (int i = 0; i < this.tasks.size(); i++) {
-//            Task currentTask = this.tasks.get(i);
-            String message = this.tasks.get(i).getDescription();
-            String preStatus = this.tasks.get(i).getStatusIcon();
+        for (int i = 0; i < tasks.size(); i++) {
+            String message = tasks.get(i).getDescription();
+            String preStatus = tasks.get(i).getStatusIcon();
             String status = "";
             if (preStatus.equals("X")) {
                 status = status + "1";
             } else {
                 status = status + "0";
             }
-            if (i == this.tasks.size()-1) {
+            if (i == tasks.size()-1) {
                 output = output + status + " | " + message;
             } else {
                 output = output + status + " | " + message + "\n";
@@ -41,6 +42,6 @@ public class TaskList {
     }
 
     public Integer getSize(){
-        return this.tasks.size();
+        return tasks.size();
     }
 }

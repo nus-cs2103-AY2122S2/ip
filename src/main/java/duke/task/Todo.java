@@ -1,18 +1,20 @@
+package duke.task;
+
 public class Todo extends Task {
     private String type;
 
     public Todo(String description) {
         super(description);
-        this.type = "T";
+        type = "T";
     }
 
     @Override
     public String getTask() {
-        return "[" + this.type +"]" + super.getTask();
+        return "[" + type +"]" + super.getTask();
     }
 
     @Override
     public String getDescription() {
-        return this.type + " | " + this.description;
+        return type + " | " + description;
     }
 }

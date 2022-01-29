@@ -4,18 +4,18 @@
 | |_| | |_| | |___|   <  | |
 |____/ \___/\_____|_|\_\ |_|
 Hello! I'm Ducky! :)
-I am a task manager.
+I am a duke.task manager.
 Type 'help' for more information on the commands you can give me.
 What can I do for you today?
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-> Type 'list' to see what you have in your task list
+> Type 'list' to see what you have in your duke.task list
 > Type 'todo <message>' to put a todo in your list
 > Type 'deadline <message> /by <deadline>' to put a deadline in your list.
-	 - Deadline must be in 'DD/MM/YYYY' format
+	 - duke.task.Deadline must be in 'DD/MM/YYYY' format
 > Type 'event <message> /at <date>' to put an event in your list
 	 - Date must be in 'DD/MM/YYYY' format
-> Type 'mark <x>' to mark a task in your list
-> Type 'unmark <x>' to unmark a task in your list
+> Type 'mark <x>' to mark a duke.task in your list
+> Type 'unmark <x>' to unmark a duke.task in your list
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following todo:
 [T][ ] Java week 2
@@ -23,49 +23,49 @@ You now have 1 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops, please put a valid time format!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops, please put a valid time format!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops, please put a valid time format!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Oops! \(@.@)/ You have not keyed in a description for the task!
+Oops! \(@.@)/ You have not keyed in a description for the duke.task!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following deadline:
 [D][ ] drawing (by: 01 July 2022)
 You now have 2 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Oops! \(@.@)/ You have not keyed in a description for the task!
+Oops! \(@.@)/ You have not keyed in a description for the duke.task!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following event:
 [E][ ] ball (at: 10 February 2022)
 You now have 3 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Oops! \(@.@)/ You have not keyed in a description for the task!
+Oops! \(@.@)/ You have not keyed in a description for the duke.task!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Here are your tasks:
 1. [T][ ] Java week 2
 2. [D][ ] drawing (by: 01 July 2022)
 3. [E][ ] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Oops! \(@.@)/ This task does not exist.
+Oops! \(@.@)/ This duke.task does not exist.
 Please type 'list' to see existing tasks *(^.^)*
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have removed this from your tasks:
 [D][ ] drawing (by: 01 July 2022)
 You now have 2 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Ok, I have marked the following task:
+Ok, I have marked the following duke.task:
 [E][X] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Sorry, I could not find the item \(T.T)/
@@ -74,7 +74,7 @@ Please type 'list' to view your current entries.
 Sorry, I could not find the item \(T.T)/
 Please type 'list' to view your current entries.
 ~--~~--~~--~~(~v~)~~--~~--~~--~
-Sure, I have unmarked the following task:
+Sure, I have unmarked the following duke.task:
 [E][ ] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Sorry, I could not find that \(T.T)/
@@ -90,7 +90,7 @@ Please use "/at"
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops, please put a valid time format!
 Let's try again ~(^.^)~
-Type 'help' if you need to know how to use this command
+Type 'help' if you need to know how to use this duke.command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following event:
 [E][ ] soccer (at: 20 February 2022)
