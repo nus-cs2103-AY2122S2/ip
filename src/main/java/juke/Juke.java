@@ -17,6 +17,9 @@ import juke.task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Entry point for the Juke application.
+ */
 public class Juke {
     private static final Juke INSTANCE = new Juke();
     
@@ -25,6 +28,9 @@ public class Juke {
     private final int taskListSize = 100;
     private final FileManager fileManager;
     
+    /**
+     * Constructor that initializes the application.
+     */
     public Juke() {
         this.ui = new Ui();
         this.taskList = new TaskList();
@@ -290,6 +296,12 @@ public class Juke {
         }
     }
     
+    
+    /**
+     * Main class for the Juke application.
+     *
+     * @param args Running arguments, not used.
+     */
     public static void main(String[] args) {
         INSTANCE.run();
     }
