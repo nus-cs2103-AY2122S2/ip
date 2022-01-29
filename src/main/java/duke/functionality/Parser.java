@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    private static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
-    private static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
-    private static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-MM-dd HHmm";
+    public static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
+    public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
+    public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-MM-dd HHmm";
 
     public static void parse(String input, TaskList taskList) throws DukeException {
         try {
