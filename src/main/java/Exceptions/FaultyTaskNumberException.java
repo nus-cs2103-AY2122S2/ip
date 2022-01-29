@@ -1,3 +1,6 @@
+package Exceptions;
+
+
 /**
  * This file contains the implementation of FaultyTaskNumberException.
  * FaultyTaskNumberException is used to raise error when the user inputs a task number that is not present.
@@ -14,7 +17,7 @@ public class FaultyTaskNumberException extends IllegalCommandException {
      * Constructor for FaultyTaskNumberException.
      * @param message the user input task number.
      */
-    FaultyTaskNumberException(int message) {
+    public FaultyTaskNumberException(int message) {
         super(String.valueOf(message));
         this.message = message;
     }
@@ -27,4 +30,5 @@ public class FaultyTaskNumberException extends IllegalCommandException {
     public String toString() {
         return "Task num: " + this.message + " isn't present. Type 'list' command to view the task numbers.";
     }
+
 }

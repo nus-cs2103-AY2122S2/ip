@@ -1,9 +1,12 @@
+package Helper;
+
 /**
  * This file contains the implementation of TaskList.
  * @author Saravanan Anuja Harish
  */
 
 import java.util.ArrayList;
+import Tasks.Task;
 
 public class TaskList {
 
@@ -14,7 +17,7 @@ public class TaskList {
      * Constructor for TaskList.
      * returns an instance of TaskList.
      */
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -23,7 +26,7 @@ public class TaskList {
      * @param task the task to be added
      * @return true if added successfully
      */
-    boolean add(Task task) {
+    public boolean add(Task task) {
         return this.tasks.add(task);
     }
 
@@ -32,7 +35,7 @@ public class TaskList {
      * @param index the index number of the task.
      * @return Task at index.
      */
-    Task get(int index) {
+    public Task get(int index) {
         return this.tasks.get(index);
     }
 
@@ -41,7 +44,7 @@ public class TaskList {
      * @param num the task number.
      * @return the task that was removed.
      */
-    Task remove(int num) {
+    public Task remove(int num) {
         return this.tasks.remove(num);
     }
 
@@ -49,7 +52,7 @@ public class TaskList {
      * gets the total number of tasks.
      * @return the number tasks the user has.
      */
-    int numOfTasks() {
+    public int numOfTasks() {
         return this.tasks.size();
     }
 
@@ -57,7 +60,7 @@ public class TaskList {
      * returns the string representation of tasks without numbering.
      * @return String representation of each task in a line.
      */
-    String getTasks() {
+    public String getTasks() {
         String content = "";
         for (Task task : this.tasks) {
             content += task.toString() + "\n";
@@ -72,7 +75,7 @@ public class TaskList {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    TaskList tasksDueOn(String date) {
+    public TaskList tasksDueOn(String date) {
         DateHandler.checkValidDate(date);
         TaskList dueTasks = new TaskList();
         for(int i = 0; i < this.numOfTasks(); i++) {
@@ -91,7 +94,7 @@ public class TaskList {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    TaskList tasksDueBefore(String date) {
+    public TaskList tasksDueBefore(String date) {
         DateHandler.checkValidDate(date);
         TaskList dueTasks = new TaskList();
         for(int i = 0; i < this.numOfTasks(); i++) {

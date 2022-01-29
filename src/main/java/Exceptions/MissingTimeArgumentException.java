@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * This file contains the implementation of MissingTimeArgumentException.
  * MissingTimeArgumentException is used to raise error when the time argument of deadline
@@ -15,7 +17,7 @@ public class MissingTimeArgumentException extends MissingTaskArgumentException {
      * Constructor for MissingTimeArgumentException.
      * @param message the user input
      */
-    MissingTimeArgumentException(String message) {
+    public MissingTimeArgumentException(String message) {
         super(message);
         this.message = message;
     }

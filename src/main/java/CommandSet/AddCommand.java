@@ -1,7 +1,14 @@
+package CommandSet;
+
 /**
  * File contains the implementation of AddCommand class.
  * @author Saravanan Anuja Harish
  */
+import Helper.Storage;
+import Exceptions.MissingTimeArgumentException;
+import Helper.TaskList;
+import Helper.Ui;
+import Tasks.*;
 
 public class AddCommand extends Command {
 
@@ -39,7 +46,7 @@ public class AddCommand extends Command {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    static void add(TaskList taskList, String text) {
+    public static void add(TaskList taskList, String text) {
 
         String[] split_text = text.split(SPACE, 2);
         String type = split_text[START_INDEX].toUpperCase();
@@ -74,7 +81,7 @@ public class AddCommand extends Command {
      * @param taskList the list of user tasks.
      * @param storage the string of the task to be added.
      */
-    static void add(TaskList taskList, Storage storage) {
+    public static void add(TaskList taskList, Storage storage) {
         for (String task: storage.loadPreviousTasks()) {
             if (Todo.isTodo(task)) {
                 taskList.add(new Todo(task, DUMMY_VARIABLE));

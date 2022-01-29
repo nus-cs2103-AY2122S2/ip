@@ -1,7 +1,11 @@
+package Tasks;
+
 /**
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Deadline class.
  */
+import Helper.DateHandler;
+import Exceptions.MissingTimeArgumentException;
 
 public class Deadline extends Task {
 
@@ -46,7 +50,7 @@ public class Deadline extends Task {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    Deadline(String message) {
+    public Deadline(String message) {
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
         String str = message.split(SEPARATOR, LIMIT)[DD_IDX];
         DateHandler.checkValidDate(str.split(SPACE, LIMIT)[DD_IDX]);
@@ -58,7 +62,7 @@ public class Deadline extends Task {
      * @param str string output of Deadline.
      * @param dummyVariable int to differentiate from other constructor.
      */
-    Deadline(String str, int dummyVariable) {
+    public Deadline(String str, int dummyVariable) {
         super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
         String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
         temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
@@ -71,7 +75,7 @@ public class Deadline extends Task {
      * @return true if correct.
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
-    static boolean correctArgument(String text) {
+    public static boolean correctArgument(String text) {
         if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) ||
                 text.trim().split(TIME_ARGUMENT).length == 1) {
             throw new MissingTimeArgumentException("Deadline " + text);
@@ -86,7 +90,7 @@ public class Deadline extends Task {
      * @return return if the task is due before date; false otherwise.
      */
     @Override
-    boolean isBefore(String date) {
+    public boolean isBefore(String date) {
         return this.deadline.isBefore(date.trim());
     }
 
@@ -96,7 +100,7 @@ public class Deadline extends Task {
      * @return return if the task is due on date; false otherwise.
      */
     @Override
-    boolean isOnDate(String date) {
+    public boolean isOnDate(String date) {
         return this.deadline.isOnDate(date.trim());
     }
 
@@ -105,7 +109,7 @@ public class Deadline extends Task {
      * @param str the string representation of the task.
      * @return true if  the task is Deadline.
      */
-    static boolean isDeadline(String str) {
+    public static boolean isDeadline(String str) {
         return str.substring(START_INDEX, SYMBOL.length()).contains(SYMBOL);
     }
 

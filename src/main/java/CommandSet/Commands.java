@@ -1,3 +1,4 @@
+package CommandSet;
 /**
  * This file contains the implementation of enum Commands.
  * @author Saravanan Anuja Harish

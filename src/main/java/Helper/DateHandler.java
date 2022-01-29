@@ -1,3 +1,5 @@
+package Helper;
+
 /**
  * This file contains the implementation of DatHandler class.
  * @author  Saravanan Anuja Harish
@@ -6,6 +8,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import Exceptions.WrongDateArgumentException;
+import Exceptions.WrongTimeArgumentException;
 
 public class DateHandler {
 
@@ -50,7 +54,7 @@ public class DateHandler {
      * @param date the string representation of the date.
      * returns an instance of DateHandler.
      */
-    DateHandler(String date) {
+    public DateHandler(String date) {
         date = date.trim();
         if (date.contains(SPACE)) {
             this.date = LocalDate.parse(date.split(SPACE, LIMIT)[DATE_IDX]);
@@ -65,7 +69,7 @@ public class DateHandler {
         }
     }
 
-    DateHandler(String date, int dummyVariable) {
+    public DateHandler(String date, int dummyVariable) {
 
         String[] strings = date.split(SPACE);
 
@@ -103,7 +107,7 @@ public class DateHandler {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    static void checkValidDate(String userDate) {
+    public static void checkValidDate(String userDate) {
 
         // handle time checking
         if (userDate.contains(SPACE)) {
@@ -151,7 +155,7 @@ public class DateHandler {
      * @param maxDate the value if the date limit
      * @return true if the true; false otherwise
      */
-    boolean isBefore(String maxDate) {
+    public boolean isBefore(String maxDate) {
         return this.date.isBefore(LocalDate.parse(maxDate.trim()));
     }
 
@@ -160,7 +164,7 @@ public class DateHandler {
      * @param onDate the date given.
      * @return return true if onDate matches the date of instance; false otherwise.
      */
-    boolean isOnDate(String onDate) {
+    public boolean isOnDate(String onDate) {
         return this.date.equals(LocalDate.parse(onDate.trim()));
     }
 

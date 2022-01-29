@@ -3,6 +3,10 @@
  * This file contains the implementation of Main class.
  */
 import java.util.Scanner;
+import Exceptions.EmptyCommandException;
+import Exceptions.IllegalCommandException;
+import Helper.CarryOn;
+import Helper.Ui;
 
 public class Main {
 

@@ -1,7 +1,12 @@
+package Tasks;
+
 /**
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Event class.
  */
+
+import Helper.DateHandler;
+import Exceptions.MissingTimeArgumentException;
 
 public class Event extends Task{
 
@@ -46,7 +51,7 @@ public class Event extends Task{
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    Event(String message) {
+    public Event(String message) {
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
         String str = message.split(SEPARATOR, LIMIT)[ET_IDX];
         DateHandler.checkValidDate(str.split(SPACE, LIMIT)[ET_IDX].trim());
@@ -58,7 +63,7 @@ public class Event extends Task{
      * @param str string output of Event.
      * @param dummyVariable int to differentiate from other constructor.
      */
-    Event(String str, int dummyVariable) {
+    public Event(String str, int dummyVariable) {
         super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
         String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
         temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
@@ -71,7 +76,7 @@ public class Event extends Task{
      * @return return if there is an event before date; false otherwise.
      */
     @Override
-    boolean isBefore(String date) {
+    public boolean isBefore(String date) {
         return this.time.isBefore(date.trim());
     }
 
@@ -81,7 +86,7 @@ public class Event extends Task{
      * @return return if there is an event on date; false otherwise.
      */
     @Override
-    boolean isOnDate(String date) {
+    public boolean isOnDate(String date) {
         return this.time.isOnDate(date.trim());
     }
 
@@ -91,7 +96,7 @@ public class Event extends Task{
      * @return true if correct.
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
-    static boolean correctArgument(String text) {
+    public static boolean correctArgument(String text) {
 
         if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) || text.trim().split(TIME_ARGUMENT).length == 1) {
             throw new MissingTimeArgumentException("Event " + text);
@@ -105,7 +110,7 @@ public class Event extends Task{
      * @param str the string representation of the task.
      * @return true if  the task is Event.
      */
-    static boolean isEvent(String str) {
+    public static boolean isEvent(String str) {
         return str.substring(START_INDEX, SYMBOL.length()).contains(SYMBOL);
     }
 

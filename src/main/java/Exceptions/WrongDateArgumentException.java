@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * This file contains the implementation of WrongDateArgumentException.
  * WrongDateArgumentException is used to raise error when the user inputs date in the wrong format.
@@ -13,7 +15,7 @@ public class WrongDateArgumentException extends IllegalCommandException {
      * Constructor for WrongDateExceptionException.
      * @param date input given by user.
      */
-    WrongDateArgumentException(String date) {
+    public WrongDateArgumentException(String date) {
         super(date);
         this.date = date;
     }

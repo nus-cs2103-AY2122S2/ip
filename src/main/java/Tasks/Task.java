@@ -1,3 +1,5 @@
+package Tasks;
+
 /**
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Task class.
@@ -32,7 +34,7 @@ public class Task {
      * @param task the task to be done.
      * returns a new instance of task.
      */
-    Task(String task) {
+    public Task(String task) {
         this.task = task.trim();
         this.done = false;
     }
@@ -43,7 +45,7 @@ public class Task {
      * @param dummyVariable int to differentiate from other constructor.
      * returns a new instance of Task.
      */
-    Task(String task, int dummyVariable) {
+    public Task(String task, int dummyVariable) {
 
         if (task.substring(START_INDEX, DONE.length()).contains(DONE)) {
             this.done = true;
@@ -58,14 +60,14 @@ public class Task {
     /**
      * markDone marks the task completed.
      */
-    void markDone() {
+    public void markDone() {
         this.done = true;
     }
 
     /**
      * markDone unmarks the task as not completed.
      */
-    void unMarkDone() {
+    public void unMarkDone() {
         this.done = false;
     }
 
@@ -73,7 +75,7 @@ public class Task {
      * returns the task to be performed.
      * @return the task.
      */
-    String getTask() {
+    public String getTask() {
         return this.task;
     }
 
@@ -82,7 +84,7 @@ public class Task {
      * @param date the string given by user.
      * @return false trivially, as Tasks do not have deadlines, or event date.
      */
-    boolean isBefore(String date) {
+    public boolean isBefore(String date) {
         return false;
     }
 
@@ -91,7 +93,7 @@ public class Task {
      * @param date the string given by the user
      * @return false trivially, as tasks do not have dates associated with them.
      */
-    boolean isOnDate(String date) {
+    public boolean isOnDate(String date) {
         return false;
     }
 

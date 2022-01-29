@@ -1,7 +1,12 @@
+package CommandSet;
+
 /**
  * File contains the implementation of DueCommand class.
  * @author Saravanan Anuja Harish
  */
+
+import Helper.TaskList;
+import Helper.Ui;
 
 public class DueCommand extends Command {
 
@@ -26,7 +31,7 @@ public class DueCommand extends Command {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    static void dueOn(String date, TaskList taskList) {
+    public static void dueOn(String date, TaskList taskList) {
         date = date.substring(DUE_ON.length()).trim();
         Ui.printMessage(taskList.tasksDueOn(date).toString());
     }
@@ -39,7 +44,7 @@ public class DueCommand extends Command {
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
-    static void dueBefore(String date, TaskList taskList) {
+    public static void dueBefore(String date, TaskList taskList) {
         date = date.substring(DUE_BEFORE.length()).trim();
         Ui.printMessage(taskList.tasksDueBefore(date).toString());
     }

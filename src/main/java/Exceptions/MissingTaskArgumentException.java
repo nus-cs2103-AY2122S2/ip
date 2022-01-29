@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * This file contains the implementation of MissingTaskArgumentException.
  * This Exception class throws exception when the task argument is missing in the user input.
@@ -14,7 +16,7 @@ public class MissingTaskArgumentException extends IllegalCommandException {
      * Constructor for MissingTaskArgumentException.
      * @param message the user input
      */
-    MissingTaskArgumentException(String message) {
+    public MissingTaskArgumentException(String message) {
         super(message);
         this.message = message;
     }

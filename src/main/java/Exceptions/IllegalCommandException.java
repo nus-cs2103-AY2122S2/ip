@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * This file contains the implementation of IllegalCommandException.
  * IllegalCommandException is used to raise an error when invalid arguments are fed.
@@ -10,7 +12,7 @@ public class IllegalCommandException extends IllegalArgumentException {
      * Constructor for IllegalCommandException.
      * @param message the user input.
      */
-    IllegalCommandException(String message) {
+    public IllegalCommandException(String message) {
         super(message);
     }
 

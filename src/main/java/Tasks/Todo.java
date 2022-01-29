@@ -1,3 +1,5 @@
+package Tasks;
+
 /**
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Todo Class.
@@ -20,7 +22,7 @@ public class Todo extends Task {
      * @param message the text given by user.
      * returns an instance of Todo.
      */
-    Todo (String message) {
+    public Todo (String message) {
         super(message);
     }
 
@@ -29,7 +31,7 @@ public class Todo extends Task {
      * @param str the string output of Todo.
      * @param dummyVariable int to differentiate from other constructor.
      */
-    Todo(String str, int dummyVariable) {
+    public Todo(String str, int dummyVariable) {
         super(str.substring(SYMBOL.length()).trim(), DUMMY_VARIABLE);
     }
 
@@ -38,7 +40,7 @@ public class Todo extends Task {
      * @param str the string representation of the task.
      * @return true if  the task is todo.
      */
-    static boolean isTodo(String str) {
+    public static boolean isTodo(String str) {
         return str.substring(START_INDEX, SYMBOL.length()).contains(SYMBOL);
     }
 

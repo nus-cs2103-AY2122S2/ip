@@ -1,7 +1,12 @@
+package CommandSet;
+
 /**
  * This file contains the implementation of CommandChecker.
  * @author Saravanan Anuja Harish
  */
+import Exceptions.InvalidYesOrNoException;
+import Exceptions.MissingTaskArgumentException;
+import Exceptions.IllegalCommandException;
 
 public class CommandChecker {
 
@@ -52,7 +57,7 @@ public class CommandChecker {
      * @param message the user input message.
      * @return the respective command enum.
      */
-    static Commands findAndCheck(String message) {
+    public static Commands findAndCheck(String message) {
 
         try {
             // Checks if the user wants to exit.
@@ -120,7 +125,7 @@ public class CommandChecker {
      * @return either YES or NO.
      * @throws InvalidYesOrNoException if the user inputs a command other than yes or no.
      */
-    static Commands yesOrNoChecker(String message) {
+    public static Commands yesOrNoChecker(String message) {
         switch (message.toLowerCase()) {
         case YES:
             return Commands.YES;
