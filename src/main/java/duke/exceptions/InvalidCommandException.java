@@ -1,7 +1,7 @@
-package Duke.exceptions;
+package duke.exceptions;
 
 public class InvalidCommandException extends DukeException {
-	public InvalidCommandException(String str) {
-		super(str);
-	}
+    public InvalidCommandException(String str) {
+        super(str);
+    }
 }

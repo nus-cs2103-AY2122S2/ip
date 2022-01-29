@@ -1,7 +1,7 @@
-package Duke.enums;
+package duke.enums;
 
 public enum Type {
-	T,
-	D,
-	E
+    T,
+    D,
+    E
 }

@@ -1,7 +1,7 @@
-package Duke.exceptions;
+package duke.exceptions;
 
 public class InvalidDescriptorException extends DukeException {
-	public InvalidDescriptorException(String str) {
-		super(str);
-	}
+    public InvalidDescriptorException(String str) {
+        super(str);
+    }
 }

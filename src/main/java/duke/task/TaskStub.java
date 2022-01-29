@@ -1,20 +1,25 @@
-package Duke.task;
+package duke.task;
 
 public class TaskStub extends Task {
-	public final String DESCRIPTION;
+    public final String description;
 
-	public TaskStub(String description) {
-		super(description);
-		this.DESCRIPTION = description;
-	}
+    /**
+     * Constructor for Task Stub.
+     *
+     * @param description description of Task Stub.
+     */
+    public TaskStub(String description) {
+        super(description);
+        this.description = description;
+    }
 
-	@Override
-	public String track() {
-		return "[ ]";
-	}
+    @Override
+    public String track() {
+        return "[ ]";
+    }
 
-	@Override
-	public String getName() {
-		return this.DESCRIPTION;
-	}
+    @Override
+    public String getName() {
+        return this.description;
+    }
 }
