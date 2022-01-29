@@ -16,7 +16,7 @@ public class Storage {
         if (!file.exists()) {
             try {
                 File directory = new File(file.getParent());
-                if (!directory.exists()) {
+                if (!directory.exists()) {  //data file not in specific folder, need to handle
                     directory.mkdirs();
                 }
                 file.createNewFile();
@@ -62,8 +62,8 @@ public class Storage {
                 }
                 tasks.add(taskToAdd);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File doesn't exist!");
+        } catch (FileNotFoundException e) { //required file doesnt exist in their computer, create new file
+            this.file.createNewFile();
         }
         return tasks;
     }
