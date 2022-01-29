@@ -21,6 +21,8 @@ abstract public class Task {
 
     abstract public String symbol();
 
+    abstract public String displayTime();
+
     @Override
     public String toString() {
         return details;
