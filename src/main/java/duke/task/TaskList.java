@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
 
 /**
  * Represents a list of Tasks.
@@ -36,6 +36,12 @@ public class TaskList extends ArrayList<Task> {
         get(id).setDone(false);
     }
 
+    /**
+     * Searches for Tasks that have a description containing a keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return The Tasks with descriptions containing the keyword.
+     */
     public List<Task> search(String keyword) {
         TaskList matchingTasks = new TaskList();
 

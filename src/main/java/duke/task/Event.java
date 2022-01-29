@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
+
+import duke.DukeException;
 
 /**
  * Represents a task with a time and duration.
@@ -52,8 +52,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy h:mm a");
-        return "[E]" + super.toString() + " (at: " + at.format(formatter) + " - " +
-                at.plus(duration).format(formatter) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(formatter) + " - " + at.plus(duration).format(formatter)
+                + ")";
     }
 
     @Override

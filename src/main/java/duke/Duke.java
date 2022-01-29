@@ -1,15 +1,5 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Parser;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import duke.ui.Ui;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,14 +10,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import duke.command.Command;
+import duke.command.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
+
 /**
  * Encapsulates the main high-level logic of the bot.
  */
 public class Duke {
     private final Ui ui = new Ui();
-    private final TaskList tasks = new TaskList();
+    private final TaskList tasks;
     private final Storage storage = new Storage();
     private boolean shouldExit = false;
+
+    /**
+     * Constructs a Duke instance.
+     */
+    public Duke() {
+        tasks = storage.loadTasks();
+    }
 
     public static void main(String[] args) {
         new Duke().run();
@@ -39,7 +46,6 @@ public class Duke {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.greet();
-        storage.loadTasks(tasks);
 
         while (!shouldExit) {
             try {
@@ -91,6 +97,8 @@ public class Duke {
         case ADD_EVENT:
             addTask(new Event(params.get("desc"), getParamAsDateTime(params, "at"), getParamAsDuration(params, "dur")));
             break;
+        default:
+            throw new DukeException("Unexpected command: " + command.getType());
         }
     }
 

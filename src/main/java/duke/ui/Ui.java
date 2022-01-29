@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.Arrays;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Encapsulates the user interaction logic.
@@ -119,6 +119,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Displays the information about the Tasks that have been found from a search.
+     *
+     * @param tasks The Tasks that have been found.
+     */
     public void acknowledgeFind(List<Task> tasks) {
         printDivider();
         printTabbed(TEXT_ACKNOWLEDGE_FIND, 1);

@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +11,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.DukeException;
 
 /**
  * Saves and loads Task data in String format.
@@ -45,9 +45,10 @@ public class Storage {
     /**
      * Loads the Tasks stored in a .txt file into a list of tasks.
      *
-     * @param tasks The list of tasks to load data into.
+     * @return The loaded list of Tasks.
      */
-    public void loadTasks(List<Task> tasks) {
+    public TaskList loadTasks() {
+        TaskList tasks = new TaskList();
 
         try {
             File file = new File(FILE_NAME);
@@ -79,6 +80,9 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException ignored) {
+            return tasks;
         }
+
+        return tasks;
     }
 }
