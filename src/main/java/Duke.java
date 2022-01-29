@@ -74,6 +74,16 @@ public class Duke {
                 tasks.remove(index - 1);
                 ui.removedTask(task, tasks);
 
+            } else if (splitStr[0].equals("find")) {
+                String findString = value.substring(5);
+                TaskList foundTasks = new duke.TaskList();
+                for (int i =0; i<tasks.size(); i++) {
+                    if (tasks.get(i).toString().contains(findString)) {
+                        foundTasks.add(tasks.get(i));
+                    }
+                }
+                ui.findTasks( foundTasks));
+
             } else if (splitStr[0].equals("todo") || splitStr[0].equals("deadline") || splitStr[0].equals("event")) {
 
                 String[] parts = value.split("/");

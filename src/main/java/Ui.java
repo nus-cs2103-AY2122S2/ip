@@ -80,4 +80,16 @@ public class Ui {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
 
     }
+
+    /**
+     *
+     */
+    public void findTasks(TaskList tasks){
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i =0; i<tasks.size(); i++) {
+            System.out.println(tasks.get(i));
+        }
+        System.out.println("____________________________________________________________");
+    }
 }
