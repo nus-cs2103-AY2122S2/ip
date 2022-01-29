@@ -11,11 +11,20 @@ public class MarkCommand extends Command{
         index = x;
     }
 
+    /**
+     * Mark the specified task in the DukeList
+     * @param ui Ui to communicate with user
+     * @param tasks DukeList that stores Tasks
+     */
     @Override
     public void execute(Ui ui, DukeList tasks){
         tasks.mark(index);
     }
 
+    /**
+     * Returns false so program does not quit
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

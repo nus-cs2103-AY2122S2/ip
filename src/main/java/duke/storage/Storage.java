@@ -14,10 +14,20 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Creates a Storage instance
+     * @param p Path to file to be used in Storage methods
+     */
     public Storage(String p){
         this.filePath = p;
     }
 
+    /**
+     * Checks if file exists at the relative filePath and
+     * parses it using DukeParser to get previously stored List. If
+     * not, creates file at the location and returns a new List.
+     * @return ArrayList which may contain previously stored tasks.
+     */
     public List<Task> load(){
         File data = new File(filePath);
         try {
@@ -28,11 +38,14 @@ public class Storage {
                 return DukeParser.readData(data);
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return new ArrayList<Task>();
         }
     }
 
+    /**
+     * Stores tasks in current List into file at filePath
+     * @param l List to be stored
+     */
     public void store(List<Task> l) {
         try {
             BufferedWriter b = new BufferedWriter(new FileWriter(filePath, false));

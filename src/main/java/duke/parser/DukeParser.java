@@ -16,6 +16,14 @@ import java.util.Scanner;
 
 public class DukeParser {
 
+    /**
+     * Reads the data from the specified file,
+     * parses the content into Tasks and stores
+     * it in an ArrayList
+     * @param f File to be parsed
+     * @return ArrayList containing Tasks parsed from f
+     * @throws IOException
+     */
     public static ArrayList<Task> readData(File f) throws IOException {
         Scanner s = new Scanner(f);
         ArrayList<Task> ans = new ArrayList<Task>();
@@ -46,6 +54,12 @@ public class DukeParser {
         return ans;
     }
 
+    /**
+     * Checks whether the String argument is
+     * in the LocalDate format "yyyy-mm-dd".
+     * @param k String to be checked
+     * @return Boolean which tells if String is in valid format
+     */
     public static boolean isValidDate(String k) {
         try{
             LocalDate d = LocalDate.parse(k);
@@ -55,6 +69,12 @@ public class DukeParser {
         }
     }
 
+    /**
+     * Checks if the String argument is a valid Integer.
+     * Returns true if it is an Integer, false if not
+     * @param i String to be checked
+     * @return Boolean which tells if String is Integer
+     */
     public static boolean isInt(String i){
         try{
             int n = Integer.parseInt(i);
@@ -64,6 +84,16 @@ public class DukeParser {
         return true;
     }
 
+    /**
+     * Creates a Command object depending on the String arguments.
+     * It returns a Command object corresponding to the String cmd, if the arguments
+     * are in the right format.
+     * @param arg Input from user split into a String array of length 2,
+     *            where String[0] is the command and String[1] is the command body
+     * @param cmd The string corresponding to a Command type
+     * @return A Command instance
+     * @throws DukeException If the argument is invalid or missing arguments
+     */
     private static Command createCommand(String[] arg, String cmd) throws DukeException {
         if(cmd.equals("bye")){
             if(arg.length == 1){
@@ -145,6 +175,11 @@ public class DukeParser {
 
     }
 
+    /**
+     * Parses the raw input from the user and returns a Command instance
+     * @param inp String input from user
+     * @return A Command instance
+     */
     public static Command parseInput(String inp){
         String[] arg = inp.split(" ", 2);
         try {

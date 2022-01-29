@@ -15,14 +15,24 @@ public class Ui {
     private String GREETING = "\nDuke: Hello! I'm Duke\n      What can I do for you?\n";
     private String CLOSING = "\nDuke:  Bye. Hope to see you again soon!";
 
+    /**
+     * Prints greeting message to the console.
+     */
     public void showWelcome(){
         System.out.println(GREETING);
     }
 
+    /**
+     * Prints closing message to the console.
+     */
     public void showClosing(){
         System.out.println(CLOSING);
     }
 
+    /**
+     * Prints the list of Tasks to the console.
+     * @param a DukeList to be printed
+     */
     public void printList(DukeList a){
         try {
             BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -35,6 +45,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Reads input from the console.
+     * @return String of input from console
+     */
     public String readInput(){
         Scanner s = new Scanner(System.in);
         String ans = "";
@@ -46,15 +60,4 @@ public class Ui {
         return ans;
     }
 
-    public void markMessage(Task x){
-        System.out.println(NAME + "Nice! I've marked this task as done:\n       " + x.show());
-    }
-
-    public void unMarkMessage(Task x){
-        System.out.println(NAME + "OK, I've marked this task as not done yet:\n      " + x.show());
-    }
-
-    public void unknownMessage(){
-        System.out.println(NAME + "OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-    }
 }
