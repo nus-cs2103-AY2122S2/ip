@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * The duke.TaskList class, containing the duke.TaskList and methods that interact with Tasks.
+ * The TaskList class, containing the TaskList and methods that interact with Tasks.
  *
  * @author Jet Tan
  */
@@ -11,9 +11,9 @@ public class TaskList {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Getter for the duke.TaskList.
+     * Getter for the TaskList.
      *
-     * @return the duke.TaskList
+     * @return the TaskList
      */
     public static ArrayList<Task> getTasks() {
         return taskList;

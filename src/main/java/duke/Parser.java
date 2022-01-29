@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 
 /**
- * The duke.Parser class, containing the parsing logic for the bot.
+ * The Parser class, containing the parsing logic for the bot.
  *
  * @author Jet Tan
  */
@@ -11,7 +11,7 @@ public class Parser {
     /**
      * Processes the input.
      *
-     * @throws DukeException duke.InvalidInputException, EmptyDescDescription, duke.UnknownCommandException
+     * @throws DukeException InvalidInputException, EmptyDescDescription, UnknownCommandException
      */
     public static void process(String input) throws DukeException, IOException {
         String[] arr = input.split(" ");

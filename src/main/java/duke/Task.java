@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The duke.Task class.
+ * The Task class.
  *
  * @author Jet Tan
  */
@@ -10,10 +10,10 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for a new instance of duke.Task.
+     * Constructor for a new instance of Task.
      * By default, the isDone status is set to false.
      *
-     * @param description The description of the duke.Task
+     * @param description The description of the Task
      */
     public Task(String description) {
         this.description = description;
