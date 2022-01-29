@@ -13,6 +13,23 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns all tasks with names/descriptions that
+     * contain the given search term
+     *
+     * @param searchTerm Search term provided by user
+     * @return TaskList of tasks with descriptions that contain the given search term
+     */
+    public TaskList findTask(String searchTerm) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.description.contains(searchTerm)) {
+                foundTasks.add(task);
+            }
+        }
+        return new TaskList(foundTasks);
+    }
+
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
     }

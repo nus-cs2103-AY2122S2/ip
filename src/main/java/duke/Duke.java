@@ -137,6 +137,11 @@ public class Duke {
                     throw new DukeException("task index provided is invalid :(");
                 }
 
+            } else if (command.equals(Command.FIND)) {
+                String searchTerm = input.split(" ")[1];
+                TaskList foundTasks = tasks.findTask(searchTerm);
+                this.ui.displayFoundTaskList(foundTasks);
+
             } else {
                 throw new UnknownCommandException();
             }
