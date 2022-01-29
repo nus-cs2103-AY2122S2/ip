@@ -1,8 +1,8 @@
 package duke.operations;
 
-import duke.exceptions.EmptyInputException;
-
 import java.util.Scanner;
+
+import duke.exceptions.EmptyInputException;
 
 /**
  * Deals with interactions with the user.

@@ -1,8 +1,8 @@
 package duke.operations;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents a TaskList of Duke. A <code>TaskList</code> corresponds to
