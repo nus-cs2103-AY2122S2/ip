@@ -163,7 +163,8 @@ public class Duke {
                         task = new Event(lineArray[2], lineArray[3]);
                         break;
                     default:
-                         task = new Deadline(lineArray[2], lineArray[3]);
+                        task = new Deadline(lineArray[2], lineArray[3]);
+
                 }
                 if (lineArray[1].equals("X")) {
                     task.setAsDone();
