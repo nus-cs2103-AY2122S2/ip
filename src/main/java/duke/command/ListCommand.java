@@ -5,6 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+import java.util.stream.Stream;
+
 public class ListCommand extends Command {
 
     @Override
@@ -13,15 +15,15 @@ public class ListCommand extends Command {
             ui.printWithDivider("Your list is empty!");
         } else {
             StringBuilder sb = new StringBuilder(ui.STR_PADDING + "Here are the tasks in your list: \n");
+            int[] taskCount = {1};
 
-            for (int i = 0; i < tasks.size(); i++) {
-                Task currentTask = tasks.get(i);
-                sb.append(String.format(ui.STR_PADDING + "  %d. " + currentTask.toString(), i + 1));
+            tasks.forEach(task -> {
+                sb.append(String.format(ui.STR_PADDING + "  %d. " + task.toString(), taskCount[0]++));
 
-                if (i != tasks.size() - 1) {
+                if (taskCount[0] != tasks.size() + 1) {
                     sb.append("\n");
                 }
-            }
+            });
             ui.printWithDivider(sb);
         }
     }

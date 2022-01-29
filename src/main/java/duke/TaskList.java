@@ -3,9 +3,10 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private final List<Task> tasks;
 
     public TaskList() {
@@ -47,5 +48,10 @@ public class TaskList {
 
     public void addTask(Task task) {
         this.tasks.add(task);
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return tasks.iterator();
     }
 }

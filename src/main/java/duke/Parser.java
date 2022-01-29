@@ -4,6 +4,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.ToggleCommand;
@@ -45,6 +46,9 @@ public class Parser {
         case "remove":
         case "delete":
             cmd = new DeleteCommand(input[1]);
+            break;
+        case "find":
+            cmd = new FindCommand(input[1]);
             break;
         default:
             cmd = new InvalidCommand();
