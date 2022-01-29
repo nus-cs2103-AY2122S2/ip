@@ -5,11 +5,19 @@ import Main.TsundereException;
 import Main.Ui;
 import Task.TaskList;
 
+/**
+ * A chatbot that manages tasks and stores them in data/tasks.txt
+ */
 public class Tsundere {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * A chatbot that manages tasks and stores them in data/tasks.txt
+     *
+     * @param filePath string of the file path for the save file
+     */
     public Tsundere(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Tsundere {
         }
     }
 
+    /**
+     * runs the chatbot
+     */
     public void run() {
         ui.showIntro();
         boolean isExit = false;
@@ -36,6 +47,11 @@ public class Tsundere {
         }
     }
 
+    /**
+     * creates a new Tsundere class and runs it
+     *
+     * @param args unused param
+     */
     public static void main(String[] args) {
         new Tsundere("data/tasks.txt").run();
     }

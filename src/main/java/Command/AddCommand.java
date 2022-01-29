@@ -9,7 +9,9 @@ import Main.Ui;
 import Main.Storage;
 import Main.TsundereException;
 
-
+/**
+ * Add a new task into tasklist and storage saves it
+ */
 public class AddCommand extends Command {
     enum Type {
         TODO,
@@ -20,6 +22,12 @@ public class AddCommand extends Command {
     Type ty;
     String body;
 
+    /**
+     * Create a new AddCommand
+     *
+     * @param s string to determine Type of command
+     * @param body string description of the task
+     */
     public AddCommand(String s, String body) {
         if (s.equals("TODO")) {
             this.ty = Type.TODO;
@@ -31,6 +39,14 @@ public class AddCommand extends Command {
         this.body = body;
     }
 
+    /**
+     * Execute the add command to add the task into the tasklist and store it using the Storage
+     *
+     * @param t TaskList for managing and adding tasks
+     * @param u UI for displaying text
+     * @param s Storage for saving to file
+     * @throws TsundereException
+     */
     public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
 
        String[] splitStr;
@@ -58,6 +74,11 @@ public class AddCommand extends Command {
         s.saveFile(t.tasksToString());
     }
 
+    /**
+     * Determine if the class is ExitCommand.
+     *
+     * @return False always because it is not an ExitCommand
+     */
     public boolean isExit() {
         return false;
     }

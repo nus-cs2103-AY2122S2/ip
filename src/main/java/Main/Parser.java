@@ -7,8 +7,19 @@ import Command.ListCommand;
 import Command.MarkCommand;
 import Command.DeleteCommand;
 
+/**
+ * Parser that parse input into commands
+ */
 public class Parser {
 
+    /**
+     * parse input into commands by look at keywords
+     *
+     * @param s input string by the users
+     * @return commands for execution
+     * @throws TsundereException for incorrect input string format
+     * @throws NumberFormatException for incorrect input integer format
+     */
     static public Command parse(String s) throws TsundereException, NumberFormatException {
         String[] splitStr;
         int num;

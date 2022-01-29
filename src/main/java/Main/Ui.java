@@ -2,6 +2,9 @@ package Main;
 
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Ui {
 
     static final private String lines = "------------------------------------------------------------------------";
