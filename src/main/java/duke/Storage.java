@@ -74,7 +74,7 @@ public class Storage {
         }
     }
 
-    private Date parse(String date) throws ParseException {
+    public Date parse(String date) throws ParseException {
         return ft.parse(date);
     }
 }
