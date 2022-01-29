@@ -11,16 +11,17 @@ public class Storage {
 
     static File saveData;
     static Parser parser;
+    TaskList tasklist = null;
 
     public Storage(){
-        load();
+        tasklist = load();
     }
 
-    public static void writeAllToFile() {
+    public static void writeAllToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(saveData);
             for (int i = 0; i < Task.totalTask; i++) {
-                fw.write(TaskList.tasklist.get(i).getDataRepresentation());
+                fw.write(taskList.tasklist.get(i).getDataRepresentation());
             }
             fw.close();
         }
@@ -35,7 +36,8 @@ public class Storage {
         fw.close();
     }
 
-    public static void load(){
+    public static TaskList load(){
+        TaskList tasklist= null;
         try {
             String currDir = System.getProperty("user.dir");
             java.nio.file.Path pathDir = java.nio.file.Paths.get(currDir, "data", "duke.Duke");
@@ -50,17 +52,19 @@ public class Storage {
                 System.out.println("Resuming previous saved state.");
             }
             saveData = pathToFile.toFile();
-            readSavedData();
+            tasklist = new TaskList();
+            readSavedData(tasklist);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+        return tasklist;
     }
 
-    public static void readSavedData() throws FileNotFoundException {
+    public static void readSavedData(TaskList taskList) throws FileNotFoundException {
         Scanner s = new Scanner(saveData);
         while(s.hasNext()){
-            TaskList.tasklist.add(parser.parseFileData(s.nextLine()));
+            taskList.tasklist.add(parser.parseFileData(s.nextLine()));
         }
     }
 

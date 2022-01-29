@@ -3,15 +3,15 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    static ArrayList<Task> tasklist;
+    public ArrayList<Task> tasklist;
 
     public TaskList(){
         tasklist = new ArrayList<Task>();
     }
 
-    public static void markTaskNum(int taskNum, String check){
+    public void markTaskNum(int taskNum, String check){
         if (check.equals("true") && (taskNum > 0)) {
-            tasklist.get(taskNum).mark();
+            this.tasklist.get(taskNum).mark();
         }
     }
 
@@ -21,20 +21,20 @@ public class TaskList {
      *
      * @param num index (starts from 1) to delete
      */
-    public static void deleter(int num){
+    public void deleter(int num){
         if (num > 0 && num <= Task.totalTask){
             num--;
-            Ui.printRemovedThisTask(num);
-            tasklist.remove(num);
+            Ui.printRemovedThisTask(num, this);
+            this.tasklist.remove(num);
             Task.totalTask--;
             for(int i = num; i <Task.totalTask; i++){
-                tasklist.get(i).decrementNum();
+                this.tasklist.get(i).decrementNum();
             }
             Ui.printTotalTasks();
         } else {
             System.out.println("☹ OOPS!!! There is no such task found.");
         }
-        Storage.writeAllToFile();
+        Storage.writeAllToFile(this);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      *
      * @param input Original input string that was entered
      */
-    public static void markTask(String input){
+    public void markTask(String input){
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
         Task curr = tasklist.get(taskNum);
@@ -54,11 +54,11 @@ public class TaskList {
             curr.unmark();
             Ui.printMarkTaskNotDone(curr);
         }
-        Storage.writeAllToFile();
+        Storage.writeAllToFile(this);
     }
 
 
-    public static void addTask(String name, String time, String type, boolean isReading){
+    public void addTask(String name, String time, String type, boolean isReading){
         Task task;
         if (type.equals("D")){
             task = new Deadline(name, Task.totalTask, time, isReading);
@@ -68,6 +68,16 @@ public class TaskList {
             task = new ToDo(name, Task.totalTask, isReading);
         }
         tasklist.add(task);
+    }
+
+    public void findTask(String keyword){
+        TaskList matchTasks = new TaskList();
+        for(int i=0; i<Task.totalTask; i++){
+            if (this.tasklist.get(i).name.contains(keyword)){
+                matchTasks.tasklist.add(tasklist.get(i));
+            }
+        }
+        Ui.printMatchTasks(matchTasks.tasklist);
     }
 
 }

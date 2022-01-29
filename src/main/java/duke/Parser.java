@@ -1,32 +1,36 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     public Parser(){
         Storage.parser = this;
     }
 
-    public static boolean parseIsBye(String input){
+    public static boolean parseIsBye(String input,TaskList tasklist){
         if (input.equals("bye")){
             return true;
         } else {
-            parseInput(input);
+            parseInput(input, tasklist);
             return false;
         }
     }
 
-    public static void parseInput(String input){
+    public static void parseInput(String input, TaskList taskList) {
         if (input.equals("list")) {
-            Ui.printAllTasks();
+            Ui.printAllTasks(taskList);
         } else if (input.startsWith("delete")) {
-            TaskList.deleter(Integer.parseInt(input.substring(7)));
+            taskList.deleter(Integer.parseInt(input.substring(7)));
         } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-            TaskList.markTask(input);
-        } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")){
+            taskList.markTask(input);
+        } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")) {
             Task task = parseCreateNewTask(input);
-            if (task != null){
-                TaskList.tasklist.add(task);
+            if (task != null) {
+                taskList.tasklist.add(task);
             }
+        } else if (input.startsWith("find ")){
+            taskList.findTask(input.substring(6));
         } else {
             Ui.printWhatDoesThatMean();
         }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -8,12 +9,12 @@ public class Ui {
         startup();
     }
 
-    public void loop(){
+    public void loop(TaskList tasklist){
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
         while(!isBye) {
             String input = sc.nextLine();
-            isBye = Parser.parseIsBye(input);
+            isBye = Parser.parseIsBye(input, tasklist);
         }
     }
 
@@ -39,17 +40,25 @@ public class Ui {
         System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
     }
 
-    public static void printAllTasks(){
+    public static void printAllTasks(TaskList tasklist){
         System.out.printf("Here are the tasks in your list:\n");
         for(int i=0; i<Task.totalTask; i++){
-            System.out.print(TaskList.tasklist.get(i).toString());
+            System.out.print(tasklist.tasklist.get(i).toString());
         }
         System.out.println("__________________________________________________________________");
     }
 
-    public static void printRemovedThisTask(int num){
+    public static void printMatchTasks(ArrayList<Task> tasklist){
+        System.out.printf("Here are the match tasks in your list:\n");
+        for(int i=0; i<tasklist.size(); i++){
+            System.out.print(tasklist.get(i).toString());
+        }
+        System.out.println("__________________________________________________________________");
+    }
+
+    public static void printRemovedThisTask(int num, TaskList taskList){
         System.out.println(" Noted. I've removed this task: ");
-        System.out.printf("  [%s][%s] %s\n",TaskList.tasklist.get(num).type, TaskList.tasklist.get(num).getStatus(), TaskList.tasklist.get(num).name);
+        System.out.printf("  [%s][%s] %s\n",taskList.tasklist.get(num).type, taskList.tasklist.get(num).getStatus(), taskList.tasklist.get(num).name);
     }
 
     public static void printMarkTaskDone(Task curr){
