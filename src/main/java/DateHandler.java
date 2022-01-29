@@ -75,15 +75,20 @@ public class DateHandler {
             strings[strings.length - i - 1] = temp;
         }
 
+        int year_idx = 0;
+        int month_idx = 1;
+        int day_idx = 2;
+        this.date = LocalDate.of(Integer.valueOf(strings[year_idx]), Month.valueOf(strings[month_idx]),
+                Integer.valueOf(strings[day_idx]));
 
-        this.date = LocalDate.of(Integer.valueOf(strings[0]), Month.valueOf(strings[1]), Integer.valueOf(strings[2]));
-        //reaches here
-
-        if (strings.length == 5) {
+        int splitArrLenWithTime = 5;
+        if (strings.length == splitArrLenWithTime) {
             //extract time
             String[] time = strings[strings.length - 2].split(":");
-            int hour = Integer.valueOf(time[0]);
-            int minute = Integer.valueOf(time[1].substring(1));
+            int hour_idx = 0;
+            int minute_idx = 1;
+            int hour = Integer.valueOf(time[hour_idx]);
+            int minute = Integer.valueOf(time[minute_idx].substring(1));
             this.time = LocalTime.of(hour, minute);
             this.isTimeGiven = true;
         } else {

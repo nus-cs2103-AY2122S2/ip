@@ -24,6 +24,6 @@ public class WrongDateArgumentException extends IllegalCommandException {
      */
     @Override
     public String toString() {
-        return "You have input: " + this.date + "\n please try with the format YYYY-MM-DD";
+        return "You have input: " + this.date + "\nPlease try with the format YYYY-MM-DD";
     }
 }

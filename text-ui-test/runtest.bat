@@ -30,4 +30,4 @@ REM run the program, feed commands from input.txt file and redirect the output t
 C:\Users\G.SARAVANAN\.jdks\azul-13.0.6\bin\java -classpath C:\Users\G.SARAVANAN\.jdks\corretto-11.0.13\bin Main < input2.txt > ACTUAL2.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+FC ACTUAL2.TXT EXPECTED2.TXT

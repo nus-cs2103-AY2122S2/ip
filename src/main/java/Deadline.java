@@ -39,7 +39,6 @@ public class Deadline extends Task {
     private static final int START_INDEX = 0;
 
 
-
     /**
      * Constructor for Deadline class.
      * @param message the text given by the user.
@@ -73,7 +72,8 @@ public class Deadline extends Task {
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
     static boolean correctArgument(String text) {
-        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) || text.trim().split(TIME_ARGUMENT).length == 1) {
+        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) ||
+                text.trim().split(TIME_ARGUMENT).length == 1) {
             throw new MissingTimeArgumentException("Deadline " + text);
         }
 

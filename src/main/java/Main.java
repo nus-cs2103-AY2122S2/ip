@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
 
     private final static String EMPTY_STRING = "";
-    private static final String SEPARATOR = "------------------------------------------------";
 
     public static void main(String[] args) {
 
@@ -21,8 +20,8 @@ public class Main {
 
         //keep asking the user for name till u get a valid name
         while (userInput.trim().equalsIgnoreCase(EMPTY_STRING)) {
-            System.out.println(SEPARATOR);
-            System.out.println("Please enter valid name");
+            Ui.printSeparator();
+            Ui.printAskValidName();
             userInput = sc.nextLine();
         }
 
@@ -47,8 +46,8 @@ public class Main {
                 }
                 carryOn = conan.tell(text);
             } catch (IllegalCommandException e) {
-                System.out.println(e.toString());
-                System.out.println(SEPARATOR);
+                Ui.printMessage(e.toString());
+                Ui.printSeparator();
             }
         }
     }

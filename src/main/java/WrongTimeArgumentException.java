@@ -24,6 +24,6 @@ public class WrongTimeArgumentException extends IllegalCommandException {
      */
     @Override
     public String toString() {
-        return "You have input: " + this.time + "\n please try with the format HHMM";
+        return "You have input: " + this.time + "\nPlease try with the format HHMM";
     }
 }

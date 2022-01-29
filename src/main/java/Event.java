@@ -54,6 +54,18 @@ public class Event extends Task{
     }
 
     /**
+     * Constructor for Event class.
+     * @param str string output of Event.
+     * @param dummyVariable int to differentiate from other constructor.
+     */
+    Event(String str, int dummyVariable) {
+        super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
+        String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
+        temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
+        this.time = new DateHandler(temp, DUMMY_VARIABLE);
+    }
+
+    /**
      * checks if there are any events before date.
      * @param date the string given by user.
      * @return return if there is an event before date; false otherwise.
@@ -71,18 +83,6 @@ public class Event extends Task{
     @Override
     boolean isOnDate(String date) {
         return this.time.isOnDate(date.trim());
-    }
-
-    /**
-     * Constructor for Event class.
-     * @param str string output of Event.
-     * @param dummyVariable int to differentiate from other constructor.
-     */
-    Event(String str, int dummyVariable) {
-        super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
-        String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
-        temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
-        this.time = new DateHandler(temp, DUMMY_VARIABLE);
     }
 
     /**
