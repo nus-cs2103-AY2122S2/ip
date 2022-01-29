@@ -2,28 +2,27 @@ package duke.task;
 
 import java.time.LocalDate;
 
-public class Deadlines extends Task{
+public class Deadlines extends Task {
 
-    public LocalDate date;
+    private LocalDate date;
 
     public Deadlines(String s, String time) {
         super(s);
         this.date = LocalDate.parse(time);
-        super.date = this.date;
+        super.setDate(this.date);
     }
 
     @Override
-    public String show(){
-        if(super.done){
-            return "[D][X] " + s + " (by: " + date + ")";
-        }
-        else{
-            return "[D][ ] " + s + " (by: " + date + ")";
+    public String show() {
+        if (super.getDone()) {
+            return "[D][X] " + super.taskDescription() + " (by: " + date + ")";
+        } else {
+            return "[D][ ] " + super.taskDescription() + " (by: " + date + ")";
         }
     }
 
     @Override
-    public String storeFormat(){
-        return "D|" + super.done + "|" + super.s + "|" + this.date + "\n";
+    public String storeFormat() {
+        return "D|" + super.getDone() + "|" + super.taskDescription() + "|" + this.date + "\n";
     }
 }

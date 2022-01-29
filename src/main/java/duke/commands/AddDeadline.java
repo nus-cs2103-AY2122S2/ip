@@ -4,12 +4,12 @@ import duke.tasklist.DukeList;
 import duke.task.Deadlines;
 import duke.ui.Ui;
 
-public class AddDeadline extends Command{
+public class AddDeadline extends Command {
 
     private String msg;
     private String date;
 
-    public AddDeadline(String msg, String date){
+    public AddDeadline(String msg, String date) {
         this.msg = msg;
         this.date = date;
     }

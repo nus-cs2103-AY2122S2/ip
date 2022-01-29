@@ -14,17 +14,16 @@ public class Storage {
 
     private String filePath;
 
-    public Storage(String p){
+    public Storage(String p) {
         this.filePath = p;
     }
 
-    public List<Task> load(){
+    public List<Task> load() {
         File data = new File(filePath);
         try {
-            if(data.createNewFile()){
+            if (data.createNewFile()) {
                 return new ArrayList<Task>();
-            }
-            else{
+            } else {
                 return DukeParser.readData(data);
             }
         } catch (IOException e) {

@@ -10,10 +10,10 @@ import java.util.List;
 
 public class DukeList {
 
-    public List<Task> a;
+    private List<Task> a;
     private Storage storage;
 
-    public DukeList(Storage s){
+    public DukeList(Storage s) {
         this.a = s.load();
         this.storage = s;
     }
@@ -22,11 +22,12 @@ public class DukeList {
      * Used to add a task to the list, and print add message to the console.
      * @param t Task to be added
      */
-    public void add(Task t){
+    public void add(Task t) {
         a.add(t);
         storage.store(a);
-        System.out.println("\nDuke: Got it. I've added this task:\n      " + t.show() + "\n      Now you have " +
-                this.a.size() + " tasks in the list.\n");
+        System.out.println("\nDuke: Got it. I've added this task:\n      "
+                + t.show() + "\n      Now you have "
+                + this.a.size() + " tasks in the list.\n");
     }
 
 
@@ -37,7 +38,7 @@ public class DukeList {
     public void mark(int x) {
         try {
             a.get(x - 1).mark();
-        } catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("\nDuke: Wrong index to mark! Use \"list\" to see the current tasks.\n");
         }
         storage.store(a);
@@ -47,10 +48,10 @@ public class DukeList {
      * Used to unmark tasks.
      * @param x The task number
      */
-    public void unmark(int x){
+    public void unmark(int x) {
         try {
             a.get(x - 1).unmark();
-        } catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("\nDuke: Wrong index to unmark! Use \"list\" to see the current tasks.\n");
         }
         storage.store(a);
@@ -62,12 +63,12 @@ public class DukeList {
      */
     @Override
     public String toString(){
-        if(a.isEmpty()){
+        if (a.isEmpty()) {
             return "NO TASKS\n";
         }
         String ans = "";
         int y = 1;
-        for(Task x : a){
+        for (Task x : a) {
             ans += y + ". " + x.show() + "\n";
             y++;
         }
@@ -84,27 +85,28 @@ public class DukeList {
         try{
             Task t = a.get(x-1);
             a.remove(x-1);
-            System.out.println("\nDuke: Noted. I've removed this task:\n      " + t.show() + "\n      Now you have " +
-                    this.a.size() + " tasks in the list.\n");
+            System.out.println("\nDuke: Noted. I've removed this task:\n      "
+                    + t.show() + "\n      Now you have "
+                    + this.a.size() + " tasks in the list.\n");
             storage.store(a);
         } catch( IndexOutOfBoundsException e) {
             System.out.println("\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n");
         }
     }
 
-    public void todayTask(){
+    public void todayTask() {
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
         for(Task t: a){
-            if (t instanceof Events || t instanceof Deadlines){
-                if(t.date.isEqual(cur)) {
+            if (t instanceof Events || t instanceof Deadlines) {
+                if (t.getDate().isEqual(cur)) {
                     b = false;
                     day = day + "     " + t.show() + "\n";
                 }
             }
         }
-        if(b){
+        if (b) {
             day += "      NO TASK DUE TODAY";
         }
         System.out.println(day);

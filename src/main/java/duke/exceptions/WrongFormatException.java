@@ -1,8 +1,8 @@
 package duke.exceptions;
 
-public class WrongFormatException extends DukeException{
+public class WrongFormatException extends DukeException {
 
-    public WrongFormatException(){
+    public WrongFormatException() {
         super("Command is in the wrong format!");
     }
 }

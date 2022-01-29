@@ -4,12 +4,12 @@ import duke.tasklist.DukeList;
 import duke.task.Events;
 import duke.ui.Ui;
 
-public class AddEvents extends Command{
+public class AddEvents extends Command {
 
     private String msg;
     private String date;
 
-    public AddEvents(String msg, String date){
+    public AddEvents(String msg, String date) {
         this.msg = msg;
         this.date = date;
     }

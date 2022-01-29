@@ -6,10 +6,8 @@ import duke.storage.Storage;
 import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
 
 public class Duke {
-
 
     public static void main(String[] args) {
         Ui ui = new Ui();
@@ -17,7 +15,7 @@ public class Duke {
         ui.showWelcome();
         boolean isExit = false;
         DukeList list = new DukeList(storage);
-        while (!isExit){
+        while (!isExit) {
             String inp = ui.readInput();
             Command c = DukeParser.parseInput(inp);
             c.execute(ui,list);
