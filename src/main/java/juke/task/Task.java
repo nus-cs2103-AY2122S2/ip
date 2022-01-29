@@ -12,7 +12,7 @@ public abstract class Task {
     /**
      * Task status.
      */
-    protected juke.task.TaskStatus status;
+    protected TaskStatus status;
     
     /**
      * Constructor to initialize a task with a description.
@@ -28,7 +28,7 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.status = juke.task.TaskStatus.DONE;
+        this.status = TaskStatus.DONE;
     }
     
     /**

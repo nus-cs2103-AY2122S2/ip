@@ -17,20 +17,18 @@ public abstract class Command {
     /**
      * Mapping of command arguments to its parameters.
      */
-    protected HashMap<String, Optional<String>> paramArgs;
+    protected HashMap<String, Optional<String>> paramArgs = new HashMap<>();
     
     /**
      * Result of the command execution.
      */
-    protected Result result;
+    protected Result result = new Result.Empty();
     
     /**
      * Constructor that initializes the command.
      */
     public Command() {
-        this.paramArgs = new HashMap<>();
         this.paramArgs.put("", Optional.empty());
-        this.result = new Result.Empty();
     }
     
     /**
@@ -132,7 +130,7 @@ public abstract class Command {
      */
     public Command addParameter(String param, String args) {
         Optional<String> option = Optional.empty();
-        // Lazy evaluation right here
+        // Short circuit evaluation right here
         if (args != null && !args.isBlank()) {
             option = Optional.of(args);
         }
