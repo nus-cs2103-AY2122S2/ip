@@ -5,6 +5,7 @@ import paggro.command.Command;
 import paggro.command.DeadlineCommand;
 import paggro.command.DeleteCommand;
 import paggro.command.EventCommand;
+import paggro.command.FindCommand;
 import paggro.command.ListCommand;
 import paggro.command.ListOnDateCommand;
 import paggro.command.MarkCommand;
@@ -70,6 +71,13 @@ public class Parser {
                 throw new PaggroException("    Really? Can you input an actual number this time... =.=");
             } catch (ArrayIndexOutOfBoundsException e) { // no parameter given
                 throw new PaggroException("    Really? delete has to be used with a number... =.=");
+            }
+        } else if (command.equals("find")) {
+            try {
+                String parameters = inputArr[1];
+                return new FindCommand(parameters);
+            } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                throw new PaggroException("    Really? The description of a find cannot be empty... =.=");
             }
         } else if (command.equals("listOnDate")) {
             try {

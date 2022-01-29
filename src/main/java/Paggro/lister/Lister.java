@@ -83,4 +83,15 @@ public class Lister {
         }
         return nDate;
     }
+
+    public ArrayList<Task> findIndicesContaining(String key) {
+        ArrayList<Task> tasksContainingKey = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.description.toLowerCase().contains(key.toLowerCase())) {
+                tasksContainingKey.add(t);
+            }
+        }
+        return tasksContainingKey;
+    }
 }
