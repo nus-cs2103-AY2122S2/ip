@@ -67,34 +67,30 @@ public class Ui {
 
 
     public void showWelcome() {
-        String botName = "Baymax";
+        String botName = "Task Manager";
         String greeting = "Greetings, I am " + botName + ".\n" +
-                STR_PADDING + "What can I do you for?";
+                STR_PADDING + "I'm here to help you with your... tasks, obviously!";
 
         this.printWithDivider(greeting);
     }
 
     protected void printWithDivider(List<String> messages) {
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
         for (String s : messages) {
             System.out.println(STR_PADDING + s);
         }
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
     }
 
     public void printWithDivider(StringBuilder message) {
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
         System.out.println(message.toString());
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
     }
 
     public void printWithDivider(String message) {
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
         System.out.println(STR_PADDING + message);
-        System.out.println("    ---------------------------------------------");
-    }
-
-    protected void printDivString() {
-        System.out.println("    ---------------------------------------------");
+        System.out.println("    -----------------------------------------------------------");
     }
 }
