@@ -1,6 +1,12 @@
 package duke;
 
+
 import java.util.ArrayList;
+
+
+/**
+ * This is the class that parses through inputs
+ */
 
 public class Parser {
 
@@ -8,6 +14,11 @@ public class Parser {
         Storage.parser = this;
     }
 
+    /**
+     * Checks if input is 'bye'
+     * @param input input entered by user into Duke
+     * @return true if input is bye, false otherwise
+     */
     public static boolean parseIsBye(String input,TaskList tasklist){
         if (input.equals("bye")){
             return true;
@@ -17,6 +28,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks and processes user input (provided that it is not 'bye')
+     * @param input user input into Duke (after making sure it is not 'bye')
+     * @param taskList current tasklist
+     */
     public static void parseInput(String input, TaskList taskList) {
         if (input.equals("list")) {
             Ui.printAllTasks(taskList);
@@ -36,6 +52,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse through input and create a new task
+     * @param input user input into Duke
+     * @return task based on input parameters
+     */
     public static Task parseCreateNewTask(String input){
         Task task = null;
         try {
@@ -60,6 +81,11 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Parse data in file data
+     * @param input one line of file data in the form of (Task_Type---Task_status---Task_name---date)
+     * @return task based on file data information provided
+     */
     public static Task parseFileData(String input){
         if (input == null || input == ""){
             return null;

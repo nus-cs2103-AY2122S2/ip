@@ -7,8 +7,10 @@ T---false--- 1---null
 T---true--- 2---null
 T---true--- 3---null
 T---true--- 4---null
-D---true--- aaa ---Apr 04 1998 02:00 PM
-T---false--- die---null
+D---false--- aaa ---Apr 04 1998 02:00 PM
 D---false--- eat dinner ---2022-1-27 2400
 D---false--- eat dinner ---Jan 28 2022 12:00 AM
 D---true--- eat some fish ---Oct 10 1998 10:00 AM
+D---false--- eat dinner ---Jan 28 2022 12:00 AM
+E---false--- have cake for supper ---1998-25-03 1200
+E---true--- have cat for supper ---Mar 25 1998 12:00 PM

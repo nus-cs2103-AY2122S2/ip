@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+/**
+ * Class responsible for writing to and reading from disk
+ */
+
 public class Storage {
 
     static File saveData;
@@ -17,6 +21,9 @@ public class Storage {
         tasklist = load();
     }
 
+    /**
+     * Write all current information in Tasklist to disk
+     */
     public static void writeAllToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(saveData);
@@ -30,12 +37,22 @@ public class Storage {
         }
     }
 
+    /**
+     * append a line of task information to disk
+     *
+     * @param line Task information to write to disk
+     * @throws IOException if there is an error writing to disk
+     */
     public static void addLineToFile(String line) throws IOException {
         FileWriter fw = new FileWriter(saveData, true); // create a FileWriter in append mode
         fw.write(line);
         fw.close();
     }
 
+    /**
+     * Finds previous save data if exists. If not found, creates new save data
+     * If found, calls readSavedData
+     */
     public static TaskList load(){
         TaskList tasklist= null;
         try {
@@ -61,6 +78,10 @@ public class Storage {
         return tasklist;
     }
 
+    /**
+     * reads information from disk to taskList
+     * @throws FileNotFoundException when file is not found
+     */
     public static void readSavedData(TaskList taskList) throws FileNotFoundException {
         Scanner s = new Scanner(saveData);
         while(s.hasNext()){

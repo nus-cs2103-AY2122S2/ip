@@ -12,7 +12,7 @@ public class ParserTest {
 
     @Test
     public void parseIsByeTest(){
-        assertEquals(false, Parser.parseIsBye("Bye"));
+        assertEquals(false, Parser.parseIsBye("Bye", null));
     }
 
     @Test

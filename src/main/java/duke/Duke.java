@@ -6,8 +6,6 @@ package duke;
  *
  * @author Toh Zhan Qing
  */
-
-
 public class Duke {
 
     public static void main(String[] args){
