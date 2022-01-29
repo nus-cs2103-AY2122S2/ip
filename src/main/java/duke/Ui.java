@@ -8,15 +8,15 @@ import java.util.Scanner;
 
 public class Ui {
     public final String STR_PADDING = "      ";
-    protected final Scanner sc = new Scanner(System.in);
-
-    protected void showExit() {
-        printWithDivider("Pleasure to be of service, see you soon!");
-    }
+    private final Scanner sc = new Scanner(System.in);
 
     public void close() {
         this.showExit();
         sc.close();
+    }
+
+    private void showExit() {
+        printWithDivider("Pleasure to be of service, see you soon!");
     }
 
     public String readCommand() {
@@ -65,7 +65,6 @@ public class Ui {
         this.printWithDivider("Error: " + errorMessage);
     }
 
-
     public void showWelcome() {
         String botName = "Duke, the Task Master";
         String greeting = "Greetings, I am " + botName + ".\n" +
@@ -74,7 +73,7 @@ public class Ui {
         this.printWithDivider(greeting);
     }
 
-    protected void printWithDivider(List<String> messages) {
+    public void printWithDivider(List<String> messages) {
         System.out.println("    -----------------------------------------------------------");
         for (String s : messages) {
             System.out.println(STR_PADDING + s);

@@ -5,7 +5,6 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 public class DeleteCommand extends Command {
     protected String index;
@@ -26,8 +25,7 @@ public class DeleteCommand extends Command {
             if (deletionIndex < 0 || deletionIndex >= tasks.size()) {
                 ui.showError("Invalid entry number!");
             } else {
-                Task deletedTask = tasks.removeTask(deletionIndex);
-                ui.showDeletion(tasks.size(), deletedTask);
+                ui.showDeletion(tasks.size(), tasks.removeTask(deletionIndex));
             }
         } catch (DukeException e) {
             ui.showError(e.getMessage());

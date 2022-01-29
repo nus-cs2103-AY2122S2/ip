@@ -14,8 +14,7 @@ public class TaskList {
 
     public TaskList(List<String> tasks) {
         this.tasks = new ArrayList<>();
-        tasks.forEach(entry -> {
-            //parse entries
+        tasks.forEach(entry -> { // parse entries
             try {
                 this.tasks.add(Parser.parseStringToTask(entry));
             } catch (DukeException e) {
@@ -24,13 +23,8 @@ public class TaskList {
         });
     }
 
-
     public boolean isEmpty() {
         return this.tasks.isEmpty();
-    }
-
-    public Task getLast() {
-        return this.tasks.get(this.tasks.size() - 1);
     }
 
     public Task get(int index) {
