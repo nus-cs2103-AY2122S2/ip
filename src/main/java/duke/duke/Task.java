@@ -3,13 +3,13 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
     protected final String mark = "[X]";
     protected final String unmarked = "[ ]";
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getName() {
@@ -17,15 +17,15 @@ public class Task implements Serializable {
     }
 
     public void setMarked() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void setUnmarked() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public String isDone() {
-        if (this.done) {
+        if (this.isDone) {
             return mark;
         }
         else {

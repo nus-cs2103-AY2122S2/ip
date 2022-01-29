@@ -30,7 +30,7 @@ public class Parser {
         }
         // To Do Feature
         else if (commandString.contains("todo")) {
-            tasks.todo(commandString, tasks.arr);
+            tasks.toDo(commandString, tasks.arr);
         }
         // Edge Case
         else {
