@@ -3,6 +3,9 @@ package seedu.duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Used when user wants to create a {@link Task} that has a end date but no start date.
+ */
 public class Deadline extends Task {
     private final String taskType = "D";
 
@@ -44,8 +47,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * prints the task string with [D] to annotate.
-     * @return String task information
+     * {inheritDoc}
      */
     @Override
     public String toString() {

@@ -1,10 +1,22 @@
-package seedu.duke;
+package seedu.duke.chatbot;
 
-import seedu.duke.command.*;
-import seedu.duke.exceptions.*;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.MarkCommand;
+import seedu.duke.command.UnmarkCommand;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.IncompleteCommandException;
+import seedu.duke.exceptions.NoCommandException;
+import seedu.duke.exceptions.NoDateException;
+import seedu.duke.exceptions.NoValidTaskIndexException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
 import seedu.duke.task.ToDo;
 
 import java.time.LocalDateTime;
@@ -12,13 +24,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
+/**
+ * Handles commands from users in String and filters the information needed to create {@link Command}
+ */
 public class Parser {
     private final String userName;
 
+    /**
+     * Creates a Parser, which processes command inputs from users, given in String.
+     * @param userName which is the name input by the user
+     */
     Parser(String userName) {
         this.userName = userName;
     }
 
+    /**
+     *Parses string commands from user into information needed to execute the command.
+     * @param command which is a string input by the user with a command keyword.
+     * @return {@link Command } which starts the execution of the command
+     * @throws DukeException if an unknown command keyword or incomplete command is given
+     */
     Command parse(String command) throws DukeException {
         if (command.startsWith("list")) {
             return new ListCommand();
@@ -51,6 +76,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to mark a task.
+     * @param command is a string with a command keyword "mark" from user
+     * @return the index of the {@link Task} to mark in {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an invalid task number is given from user
+     */
     int parseForMark(String command) throws DukeException {
         int indexAfterCommand = 5;
         if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
@@ -63,6 +94,12 @@ public class Parser {
         return indexOfTaskToMark;
     }
 
+    /**
+     * Parses a command that seeks to unmark a task.
+     * @param command is a string with a command keyword "unmark" from user
+     * @return the index of the {@link Task} to unmark in {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an invalid task number is given from user
+     */
     int parseForUnmark(String command) throws DukeException {
         int indexAfterCommand = 7;
         if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
@@ -74,6 +111,12 @@ public class Parser {
         return indexToUnmark;
     }
 
+    /**
+     * Parses a command that seeks to delete a task.
+     * @param command is a string with a command keyword "delete" from user
+     * @return the index of the {@link Task} to delete in {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an invalid task number is given from user
+     */
     int parseForDelete(String command) throws DukeException {
         int indexTaskName = 7;
         //command is given as "delete <taskIndex>"
@@ -88,6 +131,12 @@ public class Parser {
         return indexToUnmark;
     }
 
+    /**
+     * Parses a command that seeks to add a ToDo o to {@link seedu.duke.task.TaskList}.
+     * @param command is a string with a command keyword "todo"
+     * @return {@link ToDo} to add to {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an incomplete command is given from user
+     */
     Task parseForTodo(String command) throws DukeException {
         int indexTaskName = 5;
         if (command.length() <= 5) {
@@ -97,9 +146,15 @@ public class Parser {
         return new ToDo(taskName);
     }
 
-    LocalDateTime getLocalDateTimeFromDate(String string) {
+    /**
+     * Creates a {@link java.time.LocalDateTime} from a String command detailing the date.
+     * @param dateStr is a string detailing the date in yyyy-MM-dd HH:mm format
+     * @return {@link LocalDateTime} object to create {@link Deadline} and {@link Event}
+     * @throws DukeException if wrongly formatted date or no date is given from user.
+     */
+    LocalDateTime getLocalDateTimeFromDate(String dateStr) throws DukeException {
         try {
-            TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(string);
+            TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(dateStr);
             LocalDateTime date = LocalDateTime.from(ta);
             return date;
         } catch (DateTimeParseException e) {
@@ -107,8 +162,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to add a {@link Deadline} to {@link seedu.duke.task.TaskList}.
+     * @param command is a string with a command keyword "deadline" from user
+     * @return {@link Deadline} to add to {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an incomplete command is given from user
+     */
     Task parseForDeadline(String command) throws DukeException {
-        int indexTaskName = 9;
+        int indexTaskName= 9;
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)
             throw new IncompleteCommandException();
         }
@@ -127,6 +188,12 @@ public class Parser {
         return new Deadline(taskName, date);
     }
 
+    /**
+     * Parses a command seeks to to add a {@link Event} to {@link seedu.duke.task.TaskList}.
+     * @param command is a string with a command keyword "event"
+     * @return {@link Event} to add to {@link seedu.duke.task.TaskList}
+     * @throws DukeException if an incomplete command is given from user
+     */
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
@@ -148,6 +215,11 @@ public class Parser {
         return new Event(taskName, date);
     }
 
+    /**
+     * Parses a command that seeks to search a {@link Task} in {@link TaskList}.
+     * @param command is a string like "search book" to find tasks with the word book in it
+     * @return String Keyword to search in {@link seedu.duke.task.TaskList}
+     */
     String parseForSearch(String command) {
         int indexToStart = 5;
         return command.substring(5); //"find "

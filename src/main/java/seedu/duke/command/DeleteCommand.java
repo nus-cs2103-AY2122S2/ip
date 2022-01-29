@@ -1,19 +1,28 @@
 package seedu.duke.command;
 
-import seedu.duke.Storage;
+import seedu.duke.chatbot.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
-import seedu.duke.Ui;
+import seedu.duke.chatbot.Ui;
 
-import java.io.IOException;
-
+/**
+ * Executes the deleting of a {@link Task} from {@link TaskList}.
+ */
 public class DeleteCommand extends Command {
     private final int index;
+
+    /**
+     * Creates a DeleteCommand object.
+     * @param index which is the index of the {@link Task} to delete in {@link TaskList}
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     *{@inheritDoc}.
+     */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.delete(index);
@@ -24,6 +33,9 @@ public class DeleteCommand extends Command {
         return newTaskList;
     }
 
+    /**
+     *{@inheritDoc}.
+     */
     @Override
     public boolean isExit() {
         return false;

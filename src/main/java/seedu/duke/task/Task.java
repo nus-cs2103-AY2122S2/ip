@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Used to create task that is added to {@link TaskList}.
+ */
 public abstract class Task {
     /**
      * taskName refers to the name of the task.
@@ -46,10 +49,6 @@ public abstract class Task {
         return done;
     }
 
-    /**
-     * Gets the taskName of the taskList.
-     * @return String task name
-     */
     public String getTaskName() {
         return this.taskName;
     }

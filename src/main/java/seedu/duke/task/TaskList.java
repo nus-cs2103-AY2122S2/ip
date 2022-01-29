@@ -1,6 +1,6 @@
 package seedu.duke.task;
 
-import seedu.duke.Ui;
+import seedu.duke.chatbot.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.NoValidTaskIndexException;
 import seedu.duke.exceptions.TaskAlreadyMarkedException;
@@ -125,7 +125,12 @@ public class TaskList {
         return new TaskList(updatedTasks);
     }
 
-    public TaskList find(String search) throws DukeException {
+    /**
+     * Used to search the TaskList to find {@link Task} that contain the search keyword.
+     * @param search that contains the search keyword
+     * @return a new {@link TaskList} with only {@link Task} that contain the search keyword
+     */
+    public TaskList find(String search) {
         TaskList newTaskList = new TaskList();
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             Task currentTask = this.tasks.get(i);

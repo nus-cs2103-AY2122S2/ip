@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.duke.chatbot;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.task.*;
+import seedu.duke.task.TaskList;
 
 import java.io.IOException;
 
@@ -10,13 +10,16 @@ import java.io.IOException;
  * Functions as the chatbot by taking in inputs.
  * Also helps in giving out specified outputs.
  */
-//path: "C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt"
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates the chatbot.
+     * @param filePath which provides the path to the database, a txt file storing old tasks
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, ui);
@@ -27,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the chatbot by taking in commands and executing them.
+     */
     public void run() {
         String name  = ui.showWelcome();
         Parser parser = new Parser(name);
@@ -43,6 +49,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot Duke with a specified path to the database file.
+     */
     public static void main(String[] args) {
         String filePath = "C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt";
         new Duke(filePath).run();
