@@ -1,7 +1,4 @@
-package duke.storage;
-
-import duke.exception.DukeException;
-import duke.tasklist.TaskList;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +15,7 @@ public class Storage {
     public Storage(String filePath) {
         dataFile = new File(filePath);
 
-        // dir/file check
+        // dir/file check should not throw unless no r/w permission
         dataFile.getParentFile().mkdirs();
         try {
             dataFile.createNewFile();
@@ -36,14 +33,14 @@ public class Storage {
                     .tokens()
                     .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
-            throw new DukeException("Unable to locate data file.");
+            throw new DukeException("Unable to locate/read data file.");
         }
 
         // if dataList is empty, dataFile has no entry
         return dataList;
     }
 
-    public void write(TaskList tasks) {
+    public boolean write(TaskList tasks) throws DukeException {
         try (FileWriter fw = new FileWriter(dataFile, false)) {
             for (int i = 0; i < tasks.size(); i++) {
                 try {
@@ -52,8 +49,9 @@ public class Storage {
                     e.printStackTrace();
                 }
             }
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("Unable to locate/write to data file.");
         }
     }
 }

@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 public class ToggleCommand extends Command {
 

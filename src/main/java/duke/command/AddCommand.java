@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 public class AddCommand extends Command {
     String taskType;
@@ -21,12 +22,8 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (taskType) {
         case "todo":
-            try {
-                tasks.addTask(new ToDo(taskDetails));
-                ui.showAddition(tasks.size(), tasks.getLast());
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+            tasks.addTask(new ToDo(taskDetails));
+            ui.showAddition(tasks.size(), tasks.getLast());
             break;
         case "event":
             String[] eventDetails = taskDetails.split(" /at ", 2);

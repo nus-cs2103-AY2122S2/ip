@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class InvalidCommand extends Command {
     @Override

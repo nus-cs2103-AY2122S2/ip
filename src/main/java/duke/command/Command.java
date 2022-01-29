@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);

@@ -1,7 +1,5 @@
-package duke.tasklist;
+package duke;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class TaskList {
         tasks.forEach(entry -> {
             //parse entries
             try {
-                this.tasks.add(Parser.stringToTask(entry));
+                this.tasks.add(Parser.parseStringToTask(entry));
             } catch (DukeException e) {
                 e.printStackTrace();
             }
@@ -47,11 +45,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public void addTask(Task task) throws DukeException {
-        if (this.size() < 100) {
-            this.tasks.add(task);
-        } else {
-            throw new DukeException("Number of tasks is >= 100, please remove some!");
-        }
+    public void addTask(Task task) {
+        this.tasks.add(task);
     }
 }

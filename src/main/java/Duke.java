@@ -1,9 +1,9 @@
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
 import duke.command.Command;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.Ui;
 
 public class Duke {
 
@@ -26,17 +26,14 @@ public class Duke {
         ui.showWelcome();
         boolean hasExit = false;
         while(!hasExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                if (fullCommand.isBlank()) {
-                    continue;
-                }
-                Command cmd = Parser.parse(fullCommand);
-                cmd.execute(tasks, ui, storage);
-                hasExit = cmd.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.toString());
+            // default case in Parser::parseCommand catches invalid commands
+            String fullCommand = ui.readCommand();
+            if (fullCommand.isBlank()) {
+                continue;
             }
+            Command cmd = Parser.parseCommand(fullCommand);
+            cmd.execute(tasks, ui, storage);
+            hasExit = cmd.isExit();
         }
     }
 
