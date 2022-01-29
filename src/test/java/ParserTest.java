@@ -1,13 +1,20 @@
 package junit;
 
-import echo.command.*;
-import echo.main.EchoException;
-import echo.parser.Parser;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import echo.command.DeadlineCommand;
+import echo.command.DeleteCommand;
+import echo.command.EventCommand;
+import echo.command.HelpCommand;
+import echo.command.ListCommand;
+import echo.command.MarkCommand;
+import echo.command.TodoCommand;
+import echo.command.UnmarkCommand;
+import echo.main.EchoException;
+import echo.parser.Parser;
 
 public class ParserTest {
 
