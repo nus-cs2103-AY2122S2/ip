@@ -1,5 +1,5 @@
 T : 0 : read book
-E : 1 : watch movie : 12pm
+E : 0 : watch movie : 12pm
 D : 0 : brush teeth : 12am
 E : 0 : watch movie : 12pm
 D : 0 : brush teeth : 2012-04-04
