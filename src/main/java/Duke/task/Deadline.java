@@ -52,6 +52,6 @@ public class Deadline extends Task {
      * @return String format of deadline task to be saved
      */
     public String toSave() {
-        return String.format("D | %d | %s | %s", this.isDone ? 1 : 0, this.description, this.date);
+        return String.format("D | %d | %s | %s | %s", this.isDone ? 1 : 0, this.description, this.date, this.time);
     }
 }

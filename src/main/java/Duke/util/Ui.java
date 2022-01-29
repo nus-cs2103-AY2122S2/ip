@@ -13,15 +13,16 @@ public class Ui {
     private final static Scanner IN = new Scanner(System.in);
 
     private final String HELP = "\tA 'bye' command will exit the program, yarr.\n";
-    private final String WELCOME_MESSAGE = "\tAhoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
-    private final String WELCOME_QUESTION = "\tWhat can I do for you? Your command:\n";
     private final String LINE = "\t___________________________________________________________\n";
     private final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
     private final String REQUEST_NEXT_COMMAND_ANGRY = "\tAye Aye, better get it right this time. Your next command:";
     private final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
     private final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
     private final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
+    private final String TASK_MATCH = "\tAvast ye Matey. Here goes your matching tasks in your task list:\n";
     private final String TASK_UNCHECKED = "\tAlright matey, hurry up and finish up this task arrr:\n";
+    private final String WELCOME_MESSAGE = "\tAhoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
+    private final String WELCOME_QUESTION = "\tWhat can I do for you? Your command:\n";
 
     /**
      * Reads the user input.
@@ -60,18 +61,34 @@ public class Ui {
         OUT.println(LINE + REQUEST_NEXT_COMMAND);
     }
 
+<<<<<<< HEAD
     /**
      * Prints exit message.
      */
+=======
+    public void printTaskList() {
+        OUT.println(TASK_CALL);
+    }
+
+    public void showError(String errorMessage) {
+        OUT.println(errorMessage + REQUEST_NEXT_COMMAND_ANGRY);
+    }
+
+>>>>>>> branch-Level-9
     public void showExitMessage() {
         OUT.println("\tFair winds adventurer, till we meet next time yarr. Bye for now.\n" + LINE);
     }
 
+<<<<<<< HEAD
     /**
      * Prints a message to inform user of the list of outstanding tasks
      */
     public void printTaskList() {
         OUT.println(TASK_CALL);
+=======
+    public void showMatchingTasks() {
+        OUT.println(TASK_MATCH);
+>>>>>>> branch-Level-9
     }
 
 
@@ -89,10 +106,13 @@ public class Ui {
         OUT.println(LINE);
     }
 
+<<<<<<< HEAD
     /**
      * Prints a message to inform user of their input error
      */
     public void showError(String errorMessage) {
         OUT.println(errorMessage + REQUEST_NEXT_COMMAND_ANGRY);
     }
+=======
+>>>>>>> branch-Level-9
 }

@@ -13,7 +13,7 @@ import Duke.util.Ui;
  */
 public class AddCommand extends Command {
 
-    Task task;
+    private final Task task;
     public static final String COMMAND_WORD = "add";
 
     /**
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(task);
-        String contentToSave = task.toSave();
+        String contentToSave = task.toSave() + "\n";
         Storage.append(contentToSave);
     }
 }

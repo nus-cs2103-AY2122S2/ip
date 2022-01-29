@@ -12,7 +12,7 @@ import Duke.util.Ui;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Constructor for DeleteCommand which provides an index to delete.

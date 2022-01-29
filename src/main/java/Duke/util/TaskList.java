@@ -10,7 +10,9 @@ import Duke.task.Todo;
 import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Utility class to keep track of list of added task.
@@ -51,10 +53,18 @@ public class TaskList {
                 task = new Todo(savedData[2]);
                 break;
             case "E":
-                task = new Event(savedData[2], savedData[3]);
+                if (savedData.length == 3) {
+                    task = new Event(savedData[2], savedData[3]);
+                } else { // If time is included for the task
+                    task = new Event(savedData[2], savedData[3] + " " + savedData[4]);
+                }
                 break;
             case "D":
-                task = new Deadline(savedData[2], savedData[3]);
+                if (savedData.length == 3) {
+                    task = new Deadline(savedData[2], savedData[3]);
+                } else { // If time is included for the task
+                    task = new Deadline(savedData[2], savedData[3] + " " + savedData[4]);
+                }
                 break;
             default:
                 task = new Todo("");
@@ -100,6 +110,24 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
         }
+    }
+
+    public void findTaskMatchingKeyword(String keyword) {
+        List<Task> matchingTask = new ArrayList<>();
+//        this.taskList.forEach(x -> {
+//            boolean hasKeyword = x.getTaskDescription().contains(keyword);
+//            keywordMatchedList.add(hasKeyword);
+//        });
+        matchingTask = this.taskList.stream()
+                .filter(str -> str.getTaskDescription().trim().contains(keyword))
+                .collect(Collectors.toList());
+
+        // To be modified
+        ui.showMatchingTasks();
+        for (int i = 0; i < matchingTask.size(); i++) {
+            System.out.println("\t" + (i + 1) + "." + matchingTask.get(i));
+        }
+        ui.requestNextCommand();
     }
 
     /**

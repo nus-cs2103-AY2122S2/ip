@@ -52,6 +52,6 @@ public class Event extends Task {
      * @return String format of the Event task to be saved
      */
     public String toSave() {
-        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.description, this.date);
+        return String.format("E | %d | %s | %s | %s", this.isDone ? 1 : 0, this.description, this.date, this.time);
     }
 }
