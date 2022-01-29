@@ -1,9 +1,27 @@
 package paggro.parser;
 
-import paggro.command.*;
+import paggro.command.ByeCommand;
+import paggro.command.Command;
+import paggro.command.DeadlineCommand;
+import paggro.command.DeleteCommand
+import paggro.command.EventCommand;
+import paggro.command.ListCommand;
+import paggro.command.ListOnDateCommand;
+import paggro.command.MarkCommand;
+import paggro.command.ToDoCommand;
+import paggro.command.UnmarkCommand;
 import paggro.exception.PaggroException;
 
+/**
+ * This class encapsulates a Parser object which parses text input into a command.
+ */
 public class Parser {
+    /**
+     * Parses the String of user input into a command.
+     * @param input String given by user.
+     * @return Command object associated with the input.
+     * @throws PaggroException
+     */
     public static Command parse(String input) throws PaggroException {
         String[] inputArr = input.split(" ", 2);
         String command = inputArr[0];
@@ -47,7 +65,6 @@ public class Parser {
         } else if (command.equals("delete")) {
             try {
                 String parameters = inputArr[1];
-                int i = Integer.parseInt(parameters);
                 return new DeleteCommand(parameters);
             } catch (NumberFormatException e) { // parameter was not a number
                 throw new PaggroException("    Really? Can you input an actual number this time... =.=");

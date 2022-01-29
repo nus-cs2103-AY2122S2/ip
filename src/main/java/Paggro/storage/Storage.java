@@ -1,9 +1,9 @@
 package paggro.storage;
 
+import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,19 +15,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import paggro.lister.Lister;
 import paggro.exception.PaggroException;
-import paggro.task.*;
-import paggro.task.Deadline;
+import paggro.lister.Lister;
 import paggro.notableDate.NotableDate;
+import paggro.task.Deadline;
+import paggro.task.Event;
+import paggro.task.Task;
+import paggro.task.ToDo;
 
+/**
+ * This class encapsulates a Storage object that stores previously input tasks.
+ */
 public class Storage {
+    /** The file in which the task data is stored. */
     File paggroData;
 
+    /**
+     * Constructor of Storage.
+     * @param filePath The path of the file to be used for storage.
+     */
     public Storage(String filePath) {
         paggroData = new File(filePath);
     }
 
+    /**
+     * Loads the list of stored tasks into the Lister object.
+     * @return The Lister object with uploaded tasks from storage.
+     * @throws PaggroException
+     */
     public Lister loadTasks() throws PaggroException {
         if (!paggroData.exists()) {
             try {
@@ -110,6 +125,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a given task to the data file to be stored.
+     * @param task Task to be stored.
+     * @throws IOException
+     */
     public void addToStorage(Task task) throws IOException {
         try {
             FileWriter fw = new FileWriter("../../../data/paggro.txt", true);
@@ -120,7 +140,12 @@ public class Storage {
         }
     }
 
-    public void deleteFromStorage(int i) throws IOException {
+    /**
+     * Removes a tasks at a given line of the file from the storage.
+     * @param lineNum The line number containing the task to be removed.
+     * @throws IOException
+     */
+    public void deleteFromStorage(int lineNum) throws IOException {
         File updated = new File("../../../data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
@@ -128,7 +153,7 @@ public class Storage {
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();
-            if (j != i) {
+            if (j != lineNum) {
                 fw.write(currLine + System.lineSeparator());
             }
             j++;
@@ -139,7 +164,13 @@ public class Storage {
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 
-    public void markInStorage(int i, Task task) throws IOException {
+    /**
+     * Marks the task at a given line of the file as done in storage.
+     * @param lineNum The line number containing the task to be marked.
+     * @param task The task to be marked as done.
+     * @throws IOException
+     */
+    public void markInStorage(int lineNum, Task task) throws IOException {
         File updated = new File("../../../data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
@@ -147,7 +178,7 @@ public class Storage {
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();
-            if (j != i) {
+            if (j != lineNum) {
                 fw.write(currLine + System.lineSeparator());
             } else {
                 fw.write(task.parseTask() + System.lineSeparator());
@@ -160,7 +191,13 @@ public class Storage {
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 
-    public void unmarkInStorage(int i, Task task) throws IOException {
+    /**
+     * Unmarks the task at a given line of the file as not done in storage.
+     * @param lineNum The line number containing the task to be unmarked.
+     * @param task The task to be unmarked as done.
+     * @throws IOException
+     */
+    public void unmarkInStorage(int lineNum, Task task) throws IOException {
         File updated = new File("../../../data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
@@ -168,7 +205,7 @@ public class Storage {
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();
-            if (j != i) {
+            if (j != lineNum) {
                 fw.write(currLine + System.lineSeparator());
             } else {
                 fw.write(task.parseTask() + System.lineSeparator());

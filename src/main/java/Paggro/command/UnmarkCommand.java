@@ -2,34 +2,48 @@ package paggro.command;
 
 import java.io.IOException;
 
-import paggro.lister.Lister;
-import paggro.ui.Ui;
-import paggro.storage.Storage;
 import paggro.exception.PaggroException;
+import paggro.lister.Lister;
+import paggro.storage.Storage;
 import paggro.task.Task;
+import paggro.ui.Ui;
 
+/**
+ * This class encapsulates a unmark command which unmarks a given task as not done.
+ */
 public class UnmarkCommand extends Command{
+    /**
+     * Constructor of UnmarkCommand
+     * @param parameters String of index to be unmarked as not done.
+     */
     public UnmarkCommand(String parameters) {
         super(parameters);
     }
 
+    /**
+     * Carries out the execution of the unmark command which unmarks the given task as not done.
+     * @param lister The Lister object for the command to execute on.
+     * @param ui The Ui object for the command to execute on.
+     * @param storage The Storage object for the command to execute on.
+     * @throws PaggroException
+     */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        int i;
+        int index;
         try {
-            i = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.parameters);
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (i > lister.tasks.size()) {
-            throw  new PaggroException("    Really? There is no item indexed at " + i + "... =.=");
+        if (index > lister.tasks.size()) {
+            throw  new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
-        lister.unmark(i);
-        Task task = lister.tasks.get(i - 1);
+        lister.unmark(index);
+        Task task = lister.tasks.get(index - 1);
         ui.showUnmarked(task);
 
         try {
-            storage.unmarkInStorage(i, task);
+            storage.unmarkInStorage(index, task);
         } catch (IOException e) {
             throw new PaggroException("    Could not unmark in paggro.txt =.=");
         }

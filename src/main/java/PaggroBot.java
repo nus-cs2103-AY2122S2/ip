@@ -1,18 +1,28 @@
 import java.io.IOException;
 
+import paggro.command.Command;
+import paggro.exception.PaggroException;
+import paggro.lister.Lister;
+import paggro.parser.Parser;
 import paggro.storage.Storage;
 import paggro.ui.Ui;
-import paggro.lister.Lister;
-import paggro.exception.PaggroException;
-import paggro.command.Command;
-import paggro.parser.Parser;
 
+/**
+ * This class encapsulates a PaggroBot, a chat bot that handles user-given tasks.
+ */
 public class PaggroBot {
+    /** Storage object where inputs are stored. */
     Storage storage;
+    /** Ui object which reads from and writes to the user. */
     Ui ui;
+    /** Lister object which contains list of tasks and significant dates. */
     Lister lister;
 
-    public  PaggroBot(String filePath) {
+    /**
+     * Constructor of PaggroBot.
+     * @param filePath Path of file to load stored tasks from and upload tasks to.
+     */
+    public PaggroBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -23,6 +33,9 @@ public class PaggroBot {
         }
     }
 
+    /**
+     * Runs the PaggroBot object to start reading and handling commands.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

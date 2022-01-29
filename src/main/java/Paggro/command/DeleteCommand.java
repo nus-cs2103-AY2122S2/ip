@@ -2,32 +2,47 @@ package paggro.command;
 
 import java.io.IOException;
 
-import paggro.lister.Lister;
-import paggro.ui.Ui;
-import paggro.storage.Storage;
 import paggro.exception.PaggroException;
-import paggro.task.*;
+import paggro.lister.Lister;
 import paggro.notableDate.NotableDate;
+import paggro.storage.Storage;
+import paggro.task.Deadline;
+import paggro.task.Event;
+import paggro.task.Task;
+import paggro.ui.Ui;
 
-
+/**
+ * This class encapsulates a delete command which removes a task entry from the list.
+ */
 public class DeleteCommand extends Command{
+    /**
+     * Constructor of DeleteCommand.
+     * @param parameters String of index to be deleted
+     */
     public DeleteCommand(String parameters) {
         super(parameters);
     }
 
+    /**
+     * Carries out the execution of a delete command which removes a task from the list.
+     * @param lister The Lister object for the command to execute on.
+     * @param ui The Ui object for the command to execute on.
+     * @param storage The Storage object for the command to execute on.
+     * @throws PaggroException
+     */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        int i;
+        int index;
         try {
-            i = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.parameters);
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (i > lister.tasks.size()) {
-            throw  new PaggroException("    Really? There is no item indexed at " + i + "... =.=");
+        if (index > lister.tasks.size()) {
+            throw  new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
 
-        Task task = lister.tasks.get(i - 1);
+        Task task = lister.tasks.get(index - 1);
 
         if (task instanceof Event) {
             Event e = (Event) task;
@@ -46,13 +61,13 @@ public class DeleteCommand extends Command{
             }
         }
 
-        lister.delete(i);
+        lister.delete(index);
         ui.showDeleted(task);
         ui.showNumber(lister.tasks.size());
 
 
         try {
-            storage.deleteFromStorage(i);
+            storage.deleteFromStorage(index);
         } catch (IOException e) {
             throw new PaggroException("    Could not delete in paggro.txt =.=");
         }

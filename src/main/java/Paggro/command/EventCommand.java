@@ -1,23 +1,38 @@
 package paggro.command;
 
 import java.io.IOException;
+
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
-import paggro.lister.Lister;
-import paggro.ui.Ui;
-import paggro.storage.Storage;
 import paggro.exception.PaggroException;
-import paggro.task.Task;
-import paggro.task.Event;
+import paggro.lister.Lister;
 import paggro.notableDate.NotableDate;
+import paggro.storage.Storage;
+import paggro.task.Event;
+import paggro.task.Task;
+import paggro.ui.Ui;
 
+/**
+ * This class encapsulates an event command which creates a new event entry.
+ */
 public class EventCommand extends Command {
+    /**
+     * Constructor of EventCommand object.
+     * @param parameters String containing event description.
+     */
     public EventCommand(String parameters) {
         super(parameters);
     }
 
+    /**
+     * Carries out the execution of a deadline command which creates a new Event object.
+     * @param lister The Lister object for the command to execute on.
+     * @param ui The Ui object for the command to execute on.
+     * @param storage The Storage object for the command to execute on.
+     * @throws PaggroException
+     */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         String[] desArr = parameters.split(" /", 2);
