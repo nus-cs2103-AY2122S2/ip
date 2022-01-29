@@ -2,8 +2,8 @@ package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ public class DataStore {
     /**
      * Path to store data
      */
-    final private static String PATH = "data/tasks.csv";
+    static final String PATH = "data/tasks.csv";
 
 
     /**
@@ -23,7 +23,7 @@ public class DataStore {
      *
      * @param tasks TaskList containing all tasks to be saved
      */
-    public static void saveData(TaskList tasks){
+    public static void saveData(TaskList tasks) {
         File csvFile = new File(PATH);
         try {
             if (!csvFile.isFile()) {
@@ -86,9 +86,9 @@ public class DataStore {
         taskType = taskType.toLowerCase();
         if (taskType.equals("todo")) {
             return TaskType.TODO;
-        } else if (taskType.equals("event")){
+        } else if (taskType.equals("event")) {
             return TaskType.EVENT;
-        } else if (taskType.equals("deadline")){
+        } else if (taskType.equals("deadline")) {
             return TaskType.DEADLINE;
         }
         return null;

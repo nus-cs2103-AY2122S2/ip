@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -41,11 +40,12 @@ public class Deadline extends Task {
      */
     public void print() {
         System.out.print("[D]");
-        System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
         if (datetime == null) {
             System.out.println(" (by: " + this.time + ")");
         } else {
-            System.out.println(" (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")");
+            System.out.println(" (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")");
         }
     }
 

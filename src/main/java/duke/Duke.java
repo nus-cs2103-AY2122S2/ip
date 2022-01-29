@@ -5,7 +5,11 @@ package duke;
  */
 public class Duke {
 
-
+    /**
+     * Runs the Duke Program
+     *
+     * @param args No Args needed
+     */
     public static void main(String[] args) {
         Ui.printWelcome();
 
@@ -14,7 +18,7 @@ public class Duke {
         Command actionType = Ui.getCommand();
         String[] parsedInput = Ui.getInputs();
 
-        while(actionType != Command.BYE) {
+        while (actionType != Command.BYE) {
             int indexOfList = -1;
             Boolean wasAddSuccess = null;
 
@@ -86,9 +90,12 @@ public class Duke {
                 list.print(indexOfList);
                 list.delete(indexOfList);
                 System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
+                break;
             case FIND:
                 list.findTask(parsedInput[0]);
-
+                break;
+            default:
+                break;
             }
 
             DataStore.saveData(list);

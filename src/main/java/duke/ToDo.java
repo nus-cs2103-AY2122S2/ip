@@ -7,7 +7,7 @@ public class ToDo extends Task {
      *
      * @param description description of task
      */
-    ToDo(String description){
+    ToDo(String description) {
         super(description);
     }
 
@@ -16,7 +16,7 @@ public class ToDo extends Task {
      */
     public void print() {
         System.out.print("[T]");
-        System.out.println("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
+        System.out.println("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
     }
 
     /**
