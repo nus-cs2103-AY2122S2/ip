@@ -21,7 +21,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.status = juke.task.TaskStatus.NOT_DONE;
+        this.status = TaskStatus.NOT_DONE;
     }
     
     /**
