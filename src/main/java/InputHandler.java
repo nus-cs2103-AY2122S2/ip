@@ -28,10 +28,10 @@ public class InputHandler {
                     String name = String.join(" ", nameArray);
                     Todo newTodo = new Todo(name);
                     arr.add(newTodo);
-                    printMessage(newTodo);
+                    printAddTaskMessage(newTodo);
                     return false;
                 } else {
-                    throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException(":( OOPS!!! The description of a todo cannot be empty. Correct usage: todo [task]");
                 }
             case "event":
                 if (splitInput.length > 3) {
@@ -42,10 +42,10 @@ public class InputHandler {
                     String time = nameAndTimeArray[1];
                     Event newEvent = new Event(name, time);
                     arr.add(newEvent);
-                    printMessage(newEvent);
+                    printAddTaskMessage(newEvent);
                     return false;
                 } else {
-                    throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException(":( OOPS!!! The description of a event cannot be empty. Correct usage: event [task] /at [time]");
                 }
             case "deadline":
                 if (splitInput.length > 3) {
@@ -56,10 +56,10 @@ public class InputHandler {
                     String time = nameAndTimeArray[1];
                     Deadline newDeadline = new Deadline(name, time);
                     arr.add(newDeadline);
-                    printMessage(newDeadline);
+                    printAddTaskMessage(newDeadline);
                     return false;
                 } else {
-                    throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty. Correct usage: deadline [task] /by [time]");
                 }
             case "list":
                 if (splitInput.length == 1) {
@@ -75,7 +75,7 @@ public class InputHandler {
                     }
                     return false;
                 } else {
-                    throw new DukeException("Wrong usage of list!");
+                    throw new DukeException("Wrong usage of list! Correct usage: list");
                 }
             case "mark":
                 if (splitInput.length == 2) {
@@ -85,7 +85,7 @@ public class InputHandler {
                     taskToBeMarked.markTask();
                     return false;
                 } else {
-                    throw new DukeException("Wrong usage of mark!");
+                    throw new DukeException("Wrong usage of mark! Correct usage: mark [index]");
                 }
             case "unmark":
                 if (splitInput.length == 2) {
@@ -95,12 +95,23 @@ public class InputHandler {
                     taskToBeUnmarked.unmarkTask();
                     return false;
                 } else {
-                    throw new DukeException("Wrong usage of unmark!");
+                    throw new DukeException("Wrong usage of unmark! Correct usage: unmark [index]");
+                }
+            case "delete":
+                if (splitInput.length == 2) {
+                    int idx = Integer.parseInt(splitInput[1]) - 1;
+                    Task taskToBeDeleted = arr.get(idx);
+                    arr.remove(idx);
+                    System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + arr.size() + " tasks in the list");
+                    return false;
+                } else {
+                    throw new DukeException("Wrong usage of delete! Correct usage: delete [index]");
                 }
             case "bye":
                 return true;
             default:
-                throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :(");
+                throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task], event [task] /at [time],"
+                + " deadline [task] /by [time], mark [index], unmark [index], delete [index], bye");
         }
 
     }
@@ -109,7 +120,7 @@ public class InputHandler {
      * Prints out the task name that has been added as well as the number of tasks in the list
      * @param task The task that has been added
      */
-    public void printMessage(Task task) {
+    public void printAddTaskMessage(Task task) {
         System.out.println("Got it. I've added this task:\n" + task + "\nNow you have " + arr.size() + " tasks in the list." );
     }
 }
