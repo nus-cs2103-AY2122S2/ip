@@ -112,7 +112,7 @@ public class Parser {
                 // add task
                 if (input.startsWith("todo")) {
                     // generate
-                    String description = input.substring(5);
+                    String description = input.substring(4);
                     if (isEmpty(description)) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }

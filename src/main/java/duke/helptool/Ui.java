@@ -1,13 +1,9 @@
 package duke.helptool;
 
-import java.util.Scanner;
-
 /**
  * The type Ui.
  */
 public class Ui {
-    private static final Scanner myObj = new Scanner(System.in);
-
     /**
      * Instantiates a new Ui.
      */
@@ -87,9 +83,8 @@ public class Ui {
      * @param size the size
      */
     public String showAddTodo(String todo, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
+        return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 todo, size);
-        return result;
     }
 
     /**
@@ -99,9 +94,8 @@ public class Ui {
      * @param size the size
      */
     public String showAddDeadline(String ddl, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
+        return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 ddl, size);
-        return result;
     }
 
     /**
@@ -111,26 +105,8 @@ public class Ui {
      * @param size  the size
      */
     public String showAddEvent(String event, int size) {
-        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
+        return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.\n",
                 event, size);
-        return result;
-    }
-
-    /**
-     * Show line.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Greet.
-     */
-    public void greet() {
-        showLine();
-        System.out.println("\tHello I am DDX");
-        System.out.println("\tWhat can I do for you?");
-        showLine();
     }
 
     /**
@@ -138,7 +114,7 @@ public class Ui {
      */
     public String bye() {
         // print result
-        return "\tBye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon!\nThe application will close automatically in 3 seconds...\n";
     }
 
 }
