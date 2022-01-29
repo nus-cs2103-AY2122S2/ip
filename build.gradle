@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'org.example'
@@ -29,6 +28,13 @@ application {
 
 run {
     standardInput = System.in
+}
+
+checkstyle {
+}
+
+checkstyleMain {
+    source = 'src/main/java'
 }
 
 dependencies {

@@ -6,7 +6,7 @@ package duke;
 
 public class Duke {
     public static void main(String[] args) {
-        UI UI = new UI();
+        UI ui = new UI();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,6 +14,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        UI.start();
+        ui.start();
     }
 }
