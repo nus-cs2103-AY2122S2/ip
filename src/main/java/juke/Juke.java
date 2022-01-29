@@ -20,16 +20,12 @@ import java.util.ArrayList;
 public class Juke {
     private static final Juke INSTANCE = new Juke();
     
-    private Ui ui;
-    private TaskList taskList;
+    private Ui ui = new Ui();
+    private TaskList taskList = new TaskList();
     private final int taskListSize = 100;
-    private final FileManager fileManager;
+    private final FileManager fileManager = new juke.FileManager();
     
     public Juke() {
-        this.ui = new Ui();
-        this.taskList = new TaskList();
-        this.fileManager = new FileManager();
-        
         CommandHandler.registerCommands();
     }
     

@@ -2,7 +2,7 @@ package juke.task;
 
 public abstract class Task {
     protected String description;
-    protected juke.task.TaskStatus status;
+    protected TaskStatus status;
     
     public Task(String description) {
         this.description = description;
@@ -10,7 +10,7 @@ public abstract class Task {
     }
     
     public void markAsDone() {
-        this.status = juke.task.TaskStatus.DONE;
+        this.status = TaskStatus.DONE;
     }
     
     public void markAsNotDone() {
