@@ -9,10 +9,10 @@ public class TaskList {
     /**
      * Arraylist of Tasks
      */
-    private ArrayList<Task> actions = new ArrayList<Task>();
+    private final ArrayList<Task> actions = new ArrayList<>();
 
     /**
-     * Adds Task to the tasklist
+     * Adds Task to the TaskList
      *
      * @param type Type of task to be added
      * @param inputs Array of parsed input from user
@@ -24,16 +24,19 @@ public class TaskList {
             throw new EmptyDescriptionException("ToDo cannot be empty");
         }
 
-        boolean isAddSuccess = false;
+        boolean isAddSuccess;
         switch (type) {
         case TODO :
             isAddSuccess = actions.add(new ToDo(inputs[0]));
             break;
         case DEADLINE:
-            isAddSuccess = actions.add(new Deadline(inputs[0],inputs[1]));
+            isAddSuccess = actions.add(new Deadline(inputs[0], inputs[1]));
             break;
         case EVENT:
-            isAddSuccess = actions.add(new Event(inputs[0],inputs[1]));
+            isAddSuccess = actions.add(new Event(inputs[0], inputs[1]));
+            break;
+        default:
+            isAddSuccess = false;
             break;
         }
 
@@ -53,11 +56,13 @@ public class TaskList {
             task = new ToDo(inputs[1]);
             break;
         case DEADLINE:
-            task = new Deadline(inputs[1],inputs[2]);
+            task = new Deadline(inputs[1], inputs[2]);
 
             break;
         case EVENT:
-            task = new Event(inputs[1],inputs[2]);
+            task = new Event(inputs[1], inputs[2]);
+            break;
+        default:
             break;
         }
         if (inputs[0].equals("1")) {
@@ -66,13 +71,12 @@ public class TaskList {
             task.markIncompleted();
         }
         actions.add(task);
-        return;
     }
 
     /**
      * Prints out Tasks in the TaskList
      */
-    public void print(){
+    public void print() {
         for (int i = 0; i < actions.size(); i++) {
             System.out.print(i + 1);
             System.out.print(".");
@@ -85,7 +89,7 @@ public class TaskList {
      *
      * @param i Task index that is to be printed out
      */
-    public void print(int i){
+    public void print(int i) {
         actions.get(i - 1).print();
     }
 
@@ -94,7 +98,7 @@ public class TaskList {
      *
      * @param index Task index to be marked as complete
      */
-    public void markComplete(int index){
+    public void markComplete(int index) {
         this.actions.get(index - 1).markCompleted();
     }
 
@@ -103,7 +107,7 @@ public class TaskList {
      *
      * @param index Task index to be marked as incomplete
      */
-    public void markIncomplete(int index){
+    public void markIncomplete(int index) {
         this.actions.get(index - 1).markIncompleted();
     }
 
@@ -122,7 +126,7 @@ public class TaskList {
      * @param i index of task to be deleted
      */
     public void delete(int i) {
-        actions.remove(i-1);
+        actions.remove(i - 1);
     }
 
     /**
@@ -135,11 +139,16 @@ public class TaskList {
         return actions.get(i - 1);
     }
 
+    /**
+     * Prints put tasks that are found to match input
+     *
+     * @param search input String to search for
+     */
     public void findTask(String search) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < actions.size(); i++) {
             Task task = actions.get(i);
-            if (task.getDetails()[2].indexOf(search) != -1) {
+            if (task.getDetails()[2].contains(search)) {
                 System.out.print(i + 1);
                 System.out.print(".");
                 task.print();

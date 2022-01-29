@@ -14,5 +14,6 @@ public class DeadlineTest {
         assertEquals(expected[1], actual[1]);
         assertEquals(expected[2], actual[2]);
         assertEquals(expected[3], actual[3]);
+        assertEquals(1,2);
     }
 }

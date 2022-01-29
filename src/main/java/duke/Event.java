@@ -40,11 +40,12 @@ public class Event extends Task {
      */
     public void print() {
         System.out.print("[E]");
-        System.out.print("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
         if (datetime == null) {
             System.out.println(" (at: " + this.time + ")");
         } else {
-            System.out.println(" (at: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")");
+            System.out.println(" (at: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")");
         }
 
     }
