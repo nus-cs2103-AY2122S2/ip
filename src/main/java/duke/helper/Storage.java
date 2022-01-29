@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage object which deals with loading, saving the task into the file.
+ *
+ */
 public class Storage {
     private File file;
 
@@ -29,6 +33,11 @@ public class Storage {
             System.out.println("error initiating file");
         }
     }
+
+    /**
+     * Saves the taskList as lines of Strings in the file.
+     * @param taskList list of tasks to be saved.
+     */
     public void save(ArrayList<Task> taskList) {
         try{
             FileWriter fw = new FileWriter(file);
@@ -43,6 +52,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an arrayList of tasks which are read and parsed from the file.
+     * @return
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> taskList = new ArrayList<>();
         try {
