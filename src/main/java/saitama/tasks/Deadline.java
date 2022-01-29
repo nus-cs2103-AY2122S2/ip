@@ -66,7 +66,8 @@ public class Deadline extends Task {
      */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        fw.write("D " + isDone + " " + this.description + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
+        fw.write("D " + isDone + " " + this.description
+                + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
     }
 
     /**
@@ -76,6 +77,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

@@ -1,4 +1,4 @@
-package  saitama.exceptions;
+package saitama.exceptions;
 
 /**
  * An exception that is thrown when the user does not

@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -6,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ToDoTest {
 
-    Task task = new ToDo("Eat");
+    private Task task = new ToDo("Eat");
 
     @Test
     void testToString() {

@@ -3,7 +3,7 @@ package saitama.tasks;
 import java.io.FileWriter;
 import java.io.IOException;
 
-abstract public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -30,7 +30,7 @@ abstract public class Task {
         isDone = false;
     }
 
-    abstract public void saveTask(FileWriter fw) throws IOException;
+    public abstract void saveTask(FileWriter fw) throws IOException;
 
     @Override
     public String toString() {

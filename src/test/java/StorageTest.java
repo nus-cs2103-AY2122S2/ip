@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+
 import saitama.Storage;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
@@ -9,20 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
 
-    private String FILEPATH = "data/Text.txt";
-    Storage storage = new Storage(FILEPATH);
-    Task toDo = new ToDo("Eat");
+    private String filePath = "data/Text.txt";
+    private Storage storage = new Storage(filePath);
+    private Task toDo = new ToDo("Eat");
+    private ArrayList<Task> test = new ArrayList<>();
 
     @Test
     void save() {
-        ArrayList<Task> test = new ArrayList<>();
         test.add(toDo);
         storage.save(test);
     }
 
     @Test
     void load() {
-        ArrayList<Task> test = new ArrayList<>();
         test.add(toDo);
         assertEquals(test.toString(), storage.load().toString());
     }

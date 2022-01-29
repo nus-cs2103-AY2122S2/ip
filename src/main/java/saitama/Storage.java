@@ -47,8 +47,10 @@ public class Storage {
                 switch(data[1]) {
                 case "":
                     isDone = false;
+                    break;
                 case "1":
                     isDone = true;
+                    break;
                 }
 
                 //add task to array list

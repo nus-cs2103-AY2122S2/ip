@@ -1,5 +1,4 @@
 T 1 eat
 D 0 cs2106 /by 20/11/2022
-T 0 sleep
 E 0 party /at home
-D 0 CS2103T /by 30/01/2022
+D 1 CS2103T /by 30/01/2022

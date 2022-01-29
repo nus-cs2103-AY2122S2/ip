@@ -99,7 +99,7 @@ public class TaskList {
         int counter = 1;
         String output = "";
         for (Task task : taskList) {
-            output +=  counter + "." + task + "\n";
+            output += counter + "." + task + "\n";
             counter += 1;
         }
         return output.substring(0, output.length() - 1);
