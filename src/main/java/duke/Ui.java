@@ -67,7 +67,7 @@ public class Ui {
 
 
     public void showWelcome() {
-        String botName = "Task Manager";
+        String botName = "Duke, the Task Master";
         String greeting = "Greetings, I am " + botName + ".\n" +
                 STR_PADDING + "I'm here to help you with your... tasks, obviously!";
 
