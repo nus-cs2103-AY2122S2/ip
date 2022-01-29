@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private Storage storage;
@@ -56,7 +58,8 @@ public class Duke {
         System.out.println("See you next time!");
     }
 
-    public static String getCommands() {
+
+    private static String getCommands() {
         return "list, todo, deadline (using /by), event (using /at), mark, unmark, delete";
     }
 

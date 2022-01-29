@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -69,6 +70,9 @@ public class TaskList {
                     printTaskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date-time format! Format: <dd/MM/yyyy HHMM>."
+                            + System.lineSeparator() + "An example: 12/12/2222 0800");
                 } finally {
                     break;
                 }

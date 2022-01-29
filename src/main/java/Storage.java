@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILELOCATION = "data/duke.txt";
+    private static final String FILELOCATION = "data/version0/duke.txt";
     private File file;
 
     public Storage() {
@@ -32,7 +32,6 @@ public class Storage {
         for (int i = 0; i < tasks.getSize(); i++) {
             fileWriter.write(tasks.get(i).getTaskData() + System.lineSeparator());
         }
-        System.out.println("Your tasks have been saved!");
         fileWriter.close();
     }
 
