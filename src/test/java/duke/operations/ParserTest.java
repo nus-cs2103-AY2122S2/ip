@@ -31,7 +31,7 @@ class ParserTest {
             assertEquals(0,
                     Parser.parse("deadline im dumb /by 11231123"));
         } catch (DukeException e) {
-            assertEquals("baka, that's the wrong format. Enter dd-MM-yyyy HHmm", e.getMessage());
+            assertEquals("you sussy baka, that's the wrong date format! Enter dd-MM-yyyy HHmm", e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ class ParserTest {
             assertEquals(0,
                     Parser.parse("event im dumb /at 11231123"));
         } catch (DukeException e) {
-            assertEquals("baka, that's the wrong format. Enter dd-MM-yyyy HHmm-HHmm", e.getMessage());
+            assertEquals("you sussy baka, that's the wrong date format! Enter dd-MM-yyyy HHmm-HHmm", e.getMessage());
         }
     }
 }
