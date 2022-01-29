@@ -37,7 +37,7 @@ public class Ui {
 
     public void showDeletion(int listSize, Task task) {
         List<String> outputs = new ArrayList<>();
-        String ack = "Noted, I've removed this task: ";
+        String ack = "Noted, I've removed the following task: ";
         String taskString = (listSize == 1) ? "task" : "tasks";
         String size = String.format("Now you have %d %s in the list", listSize, taskString);
 

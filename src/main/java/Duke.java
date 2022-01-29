@@ -28,6 +28,9 @@ public class Duke {
         while(!hasExit) {
             try {
                 String fullCommand = ui.readCommand();
+                if (fullCommand.isBlank()) {
+                    continue;
+                }
                 Command cmd = Parser.parse(fullCommand);
                 cmd.execute(tasks, ui, storage);
                 hasExit = cmd.isExit();
