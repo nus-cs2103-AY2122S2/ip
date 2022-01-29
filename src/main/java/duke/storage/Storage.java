@@ -45,7 +45,8 @@ public class Storage {
 
             saveFile = new File(p.toString());
         } catch (IOException e) {
-            throw new DukeException("There was a problem accessing and/or creating your save file!");
+            throw new DukeException("There was a problem with creating a save file at " + home + dirPath + ". " +
+                    "Please ensure that I have access to the directory.");
         }
     }
 
@@ -131,7 +132,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            throw new DukeException("There was a problem loading data from your save file!");
+            throw new DukeException("There was a problem loading your save file!");
         }
         return tasks;
     }

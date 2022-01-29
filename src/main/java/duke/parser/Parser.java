@@ -216,8 +216,6 @@ public class Parser {
                         Integer.parseInt(parsedReq[1]));
             } catch (NumberFormatException n) {
                 return new IncorrectCommand("Please enter a valid task number to delete!");
-            } catch (IndexOutOfBoundsException e) {
-                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }
@@ -238,8 +236,6 @@ public class Parser {
                         Integer.parseInt(parsedReq[1]));
             } catch (NumberFormatException n) {
                 return new IncorrectCommand("Please enter a valid task to mark as done!");
-            } catch (IndexOutOfBoundsException e) {
-                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }
@@ -261,8 +257,6 @@ public class Parser {
                         Integer.parseInt(parsedReq[1]));
             } catch (NumberFormatException n) {
                 return new IncorrectCommand("Please enter a valid task number to mark as undone!");
-            } catch (IndexOutOfBoundsException e) {
-                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }

@@ -16,10 +16,9 @@ public class ListCommand extends Command {
      * @param ui the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of executing the list command
-     * @throws DukeException if there were any errors with storage operations
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         return "Your outstanding tasks as of now are as listed:\n" +
                 tasks.toString();
     }

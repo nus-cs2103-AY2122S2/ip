@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,10 +26,9 @@ public class IncorrectCommand extends Command {
      * @param ui the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of executing the "incorrect" command
-     * @throws DukeException if there were any errors with storage operations
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         return incorrectMessage;
     }
 

@@ -38,20 +38,20 @@ public class Duke {
     }
 
     private void run() {
-        try {
             ui.greetUser();
-            boolean isExit;
+            boolean isExit = false;
 
             do {
-                String request = ui.readCommand();
-                Command c = new Parser().parseCommand(request);
-                String result = c.execute(tasks, ui, storage);
-                ui.replyUser(result);
-                isExit = c.isExit();
+                try {
+                    String request = ui.readCommand();
+                    Command c = new Parser().parseCommand(request);
+                    String result = c.execute(tasks, ui, storage);
+                    ui.replyUser(result);
+                    isExit = c.isExit();
+                } catch (DukeException e) {
+                    ui.replyUser(e.getMessage());
+                }
             } while (!isExit);
-        } catch (DukeException e) {
-            ui.replyUser(e.getMessage());
-        }
     }
 }
 

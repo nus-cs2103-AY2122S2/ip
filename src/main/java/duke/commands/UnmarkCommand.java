@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidTaskException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -28,10 +29,14 @@ public class UnmarkCommand extends Command {
      * @param ui the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of executing the unmark command
-     * @throws DukeException if there were any errors with storage operations
+     * @throws DukeException if there were any errors during execution
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (targetIndex >= tasks.listSize() || targetIndex < 0) {
+            throw new InvalidTaskException();
+        }
+
         Task t = tasks.unmarkTask(targetIndex);
         storage.save(tasks);
 

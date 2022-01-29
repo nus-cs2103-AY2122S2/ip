@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner userInput;
-    private static final String divider = "    ============================================================\n";
+    private static final String divider = "    ============================================================";
 
     /**
      * Creates a new UI object.
