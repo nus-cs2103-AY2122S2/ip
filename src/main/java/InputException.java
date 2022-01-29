@@ -1,13 +1,16 @@
-public class AthenaInputException extends Exception {
-    private final ErrorCode errorCode;
+public class InputException extends Exception {
+    private final InputErrorCode inputErrorCode;
 
-    public AthenaInputException(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+    public InputException(InputErrorCode inputErrorCode) {
+        this.inputErrorCode = inputErrorCode;
     }
 
     @Override
     public String getMessage() {
-        switch (errorCode) {
+        switch (inputErrorCode) {
+        case INVALID_COMMAND:
+            return("That's an invalid command. Please try again.");
+            // No fallthrough
         case MISSING_TASK_NUMBER:
             return("Error. Please provide a valid task number.");
             // No fallthrough

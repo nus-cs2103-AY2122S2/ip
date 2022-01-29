@@ -1,4 +1,5 @@
 public abstract class Task {
+    public static final char SAVE_SEPARATOR = '|';
     private final String description;
     private boolean isDone;
 
@@ -18,8 +19,8 @@ public abstract class Task {
     // Returns the icon of the type of task
     public abstract String getIcon();
 
-    public String getSaveString() {
-        return getIcon() + "|" + (isDone ? 1 : 0) + "|" + description;
+    public String getSaveFormat() {
+        return getIcon() + SAVE_SEPARATOR + (isDone ? 1 : 0) + SAVE_SEPARATOR + description;
     }
 
     @Override

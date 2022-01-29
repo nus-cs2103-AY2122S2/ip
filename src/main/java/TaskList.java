@@ -13,14 +13,14 @@ public class TaskList {
     }
 
     // Known bug - code will break if user input includes |
-    public TaskList(List<String> saveTextFormat) {
+    public TaskList(List<String> taskListSaveFormat) {
         this();
-        for (int i = 0; i < saveTextFormat.size(); i++) {
-            String taskSaveString = saveTextFormat.get(i);
-            String[] taskParams = taskSaveString.split("\\|");
+        for (int i = 0; i < taskListSaveFormat.size(); i++) {
+            String taskSaveFormat = taskListSaveFormat.get(i);
+            String[] taskParams = taskSaveFormat.split("\\|");
             switch (taskParams[0]) {
             case "T":
-                taskList.add(new ToDo(taskParams[2]));
+                taskList.add(new Todo(taskParams[2]));
                 break;
             case "E":
                 taskList.add(new Event(taskParams[2], taskParams[3]));
@@ -45,59 +45,62 @@ public class TaskList {
         return wasModified;
     }
 
-    public String addTodo(String description) {
-        ToDo toDo = new ToDo(description);
-        taskList.add(toDo);
+    // Returns the task number of the added task
+    public int addTodo(String description) {
+        taskList.add(new Todo(description));
         wasModified = true;
-        return toDo.toString();
+        return getNumberOfTasks();
     }
 
-    public String addEvent(String description, LocalDateTime eventDate) {
-        Event event = new Event(description, eventDate);
-        taskList.add(event);
+    public int addEvent(String description, LocalDateTime eventDate) {
+        taskList.add(new Event(description, eventDate));
         wasModified = true;
-        return event.toString();
+        return getNumberOfTasks();
     }
 
-    public String addDeadline(String description, LocalDateTime dueDate) {
-        Deadline deadline = new Deadline(description, dueDate);
-        taskList.add(deadline);
+    public boolean isValidTaskNumber(int taskNumber) {
+        return (taskNumber >= 1 && taskNumber <= getNumberOfTasks());
+    }
+
+    public int addDeadline(String description, LocalDateTime dueDate) {
+        taskList.add(new Deadline(description, dueDate));
         wasModified = true;
-        return deadline.toString();
+        return getNumberOfTasks();
     }
 
     // Return the relevant Task in string form
-    public String markTaskAsDone(int taskNumber) {
+    public void markTaskAsDone(int taskNumber) {
         Task task = taskList.get(taskNumber - 1); // assume valid taskNumber
         task.markAsDone();
         wasModified = true;
-        return task.toString();
     }
 
     // Return the relevant Task in string form
-    public String markTaskAsNotDone(int taskNumber) {
+    public void markTaskAsNotDone(int taskNumber) {
         Task task = taskList.get(taskNumber - 1); // assume valid taskNumber
         task.markAsNotDone();
         wasModified = true;
-        return task.toString();
     }
 
     // Return the deleted Task in String form. Assume valid inputs.
-    public String deleteTask(int taskNumber) {
-        Task task = taskList.get(taskNumber - 1);
+    public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
         wasModified = true;
-        return task.toString();
     }
 
     public int getNumberOfTasks() {
         return taskList.size();
     }
 
-    public ArrayList<String> getSaveRepresentation() {
+    // Assume valid taskNumber
+    public String getTaskString(int taskNumber) {
+        return taskList.get(taskNumber - 1).toString();
+    }
+
+    public ArrayList<String> getSaveFormat() {
         ArrayList<String> output = new ArrayList<>();
         for (Task task : taskList) {
-            output.add(task.getSaveString());
+            output.add(task.getSaveFormat());
         }
         return output;
     }

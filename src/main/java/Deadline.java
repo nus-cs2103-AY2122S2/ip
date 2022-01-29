@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,8 +17,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getSaveString() {
-        return super.getSaveString() + "|" + dueDate.format(outputFormatter);
+    public String getSaveFormat() {
+        return super.getSaveFormat() + SAVE_SEPARATOR + dueDate.format(outputFormatter);
     }
 
     @Override

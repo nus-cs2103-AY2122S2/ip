@@ -1,13 +1,13 @@
 list
 todo borrow book
-deadline return book /by this Sunday
-event project meeting /at Tues 2-4pm
+deadline return book /by 29/1/2022 1300
+event project meeting /at 21/2/1945 0505
 mark 2
 list
 mark 3
 unmark 2
 list
-deadline do homework /by no idea :)
+deadline do homework /by 3/4/2020 2359
 delete 1
 delete 2
 list
@@ -18,10 +18,11 @@ deadline
 event
 deadline noby
 event noat
-deadline /by notaskname
-event /at notaskname
+deadline /by noTaskName
+event /at noTaskName
 deadline name /by
 event name /at
+event name /at 12312313/2323/233 rubbishdate
 mark -15
 mark
 unmark 23

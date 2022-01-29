@@ -20,7 +20,7 @@ public class Storage {
         }
 
         // Save the file, overriding any existing save
-        List<String> taskListSaveFormat = taskList.getSaveRepresentation();
+        List<String> taskListSaveFormat = taskList.getSaveFormat();
         Files.write(savePath, taskListSaveFormat);
     }
 
@@ -29,8 +29,7 @@ public class Storage {
     }
 
     public TaskList loadFromDisk() throws IOException {
-        List<String> taskListTextFormat = Files.readAllLines(savePath);
-        TaskList taskList = new TaskList(taskListTextFormat);
-        return taskList;
+        List<String> taskListSaveFormat = Files.readAllLines(savePath);
+        return new TaskList(taskListSaveFormat);
     }
 }

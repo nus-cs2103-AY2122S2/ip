@@ -1,4 +1,5 @@
-public enum ErrorCode {
+public enum InputErrorCode {
+    INVALID_COMMAND,
     MISSING_TASK_NUMBER,
     INVALID_TASK_NUMBER,
     MISSING_TASK_NAME,

@@ -18,8 +18,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String getSaveString() {
-        return super.getSaveString() + "|" + eventDate.format(outputFormatter);
+    public String getSaveFormat() {
+        return super.getSaveFormat() + SAVE_SEPARATOR + eventDate.format(outputFormatter);
     }
 
     @Override

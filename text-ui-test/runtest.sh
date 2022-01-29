@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# delete save file from previous run
+rm data/athena.txt
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then

@@ -5,48 +5,49 @@ Athena: Okay, I've added this task to your list.
 [T][ ] borrow book
 Athena: Now you have 1 task in your list.
 Athena: Okay, I've added this task to your list.
-[D][ ] return book (by: this Sunday)
+[D][ ] return book (by: Jan 29 2022 01:00PM)
 Athena: Now you have 2 tasks in your list.
 Athena: Okay, I've added this task to your list.
-[E][ ] project meeting (at: Tues 2-4pm)
+[E][ ] project meeting (at: Feb 21 1945 05:05AM)
 Athena: Now you have 3 tasks in your list.
 Athena: Alright, I've marked the following task as done:
-[D][X] return book (by: this Sunday)
+[D][X] return book (by: Jan 29 2022 01:00PM)
 Athena: Here's the current list of tasks:
 1. [T][ ] borrow book
-2. [D][X] return book (by: this Sunday)
-3. [E][ ] project meeting (at: Tues 2-4pm)
+2. [D][X] return book (by: Jan 29 2022 01:00PM)
+3. [E][ ] project meeting (at: Feb 21 1945 05:05AM)
 Athena: Alright, I've marked the following task as done:
-[E][X] project meeting (at: Tues 2-4pm)
+[E][X] project meeting (at: Feb 21 1945 05:05AM)
 Athena: Alright, I've marked the following task as not done:
-[D][ ] return book (by: this Sunday)
+[D][ ] return book (by: Jan 29 2022 01:00PM)
 Athena: Here's the current list of tasks:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: this Sunday)
-3. [E][X] project meeting (at: Tues 2-4pm)
+2. [D][ ] return book (by: Jan 29 2022 01:00PM)
+3. [E][X] project meeting (at: Feb 21 1945 05:05AM)
 Athena: Okay, I've added this task to your list.
-[D][ ] do homework (by: no idea :))
+[D][ ] do homework (by: Apr 3 2020 11:59PM)
 Athena: Now you have 4 tasks in your list.
-Athena: Alright, I've deleted the following task from the list.
+Athena: Alright, I will delete the following task from the list:
 [T][ ] borrow book
 Athena: Now you have 3 tasks in your list.
-Athena: Alright, I've deleted the following task from the list.
-[E][X] project meeting (at: Tues 2-4pm)
+Athena: Alright, I will delete the following task from the list:
+[E][X] project meeting (at: Feb 21 1945 05:05AM)
 Athena: Now you have 2 tasks in your list.
 Athena: Here's the current list of tasks:
-1. [D][ ] return book (by: this Sunday)
-2. [D][ ] do homework (by: no idea :))
+1. [D][ ] return book (by: Jan 29 2022 01:00PM)
+2. [D][ ] do homework (by: Apr 3 2020 11:59PM)
 Athena: That's an invalid command. Please try again.
 Athena: That's an invalid command. Please try again.
 Athena: Error. Please provide a task name.
 Athena: Error. Please provide a task name.
 Athena: Error. Please provide a task name.
-Athena: Error. Please provide a date and/or time.
-Athena: Error. Please provide a date and/or time.
+Athena: Error. Please provide a date and time.
+Athena: Error. Please provide a date and time.
 Athena: Error. Please provide a task name.
 Athena: Error. Please provide a task name.
-Athena: Error. Please provide a date and/or time.
-Athena: Error. Please provide a date and/or time.
+Athena: Error. Please provide a date and time.
+Athena: Error. Please provide a date and time.
+Athena: Error. Please enter the date and time in the following format: dd/mm/yyyy hh:mm
 Athena: Error. There is no such task. Please try again.
 Athena: Error. Please provide a valid task number.
 Athena: Error. There is no such task. Please try again.
