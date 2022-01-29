@@ -8,11 +8,16 @@ import java.util.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 
-//Storage: deals with loading tasks from the file and saving tasks in the file
-
+/**
+ * deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Initializes the location of the file to retrieve data from.
+     * @param filePath
+     */
     Storage(String filePath){
         this.filePath = filePath;
     }
@@ -35,9 +40,13 @@ public class Storage {
 
      */
 
+    /**
+     * Writes the values stored within the tasklist to the file called data/tasks.txt
+     * @param list
+     */
     void save(TaskList list) {
         try {
-            FileWriter myWriter = new FileWriter("duke.txt");
+            FileWriter myWriter = new FileWriter("data/tasks.txt");
             for (int i=0; i<list.size(); i++) {
                 myWriter.write(i+1 + ". " + list.get(i));
                 myWriter.write(String.format("%n"));

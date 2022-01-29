@@ -7,12 +7,20 @@ import java.lang.*;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
 
+/**
+ * Programme which serves as an interactive checklist.
+ */
 public class Duke {
 
     private duke.Storage storage;
     private duke.TaskList tasks;
     private duke.Ui ui;
 
+    /**
+     * Initializes Duke.
+     * @param filePath represents the path of the file and existing tasks to be loaded
+     *                 if already present.
+     */
     public Duke(String filePath) {
         ui = new duke.Ui();
         storage = new duke.Storage(filePath);
@@ -25,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs through live user input to add, edit the tasks.
+     */
     void run() {
         ui.start();
 
@@ -48,14 +59,14 @@ public class Duke {
                 int index = Integer.parseInt(splitStr[1]);
                 duke.Task task = (duke.Task) tasks.get(index - 1);
                 task.markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(tasks.get(index - 1));
+                ui.markDone(tasks.get(index - 1));
+
 
             } else if (splitStr[0].equals("unmark")) {
                 int index = Integer.parseInt(splitStr[1]);
                 duke.Task task = (duke.Task) tasks.get(index - 1);
                 task.unmarkAsDone();
-                ui.markdone(tasks.get(index - 1));
+                ui.unmarkDone(tasks.get(index - 1));
 
             } else if (splitStr[0].equals("delete")) {
                 int index = Integer.parseInt(splitStr[1]);
@@ -110,7 +121,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Creates an instance of Duke and runs it.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
