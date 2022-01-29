@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * A text based chatbot able to keep track of tasks.
+ */
 public class Duke {
     public boolean isListening = true;
     private final String FILE_PATH;
@@ -13,6 +16,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Main constructor of Duke class.
+     *
+     * @param filePath file path to store saved task list.
+     */
     public Duke(String filePath) {
         this.FILE_PATH = filePath;
         this.storage = new Storage(FILE_PATH);
@@ -20,6 +28,11 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Parses user input and executes the appropriate command.
+     *
+     * @param input user instruction to be executed.
+     */
     public void run(String input){
         try {
             Command c = Parser.parse(input);
@@ -36,6 +49,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main program.
+     *
+     * @param args inputs to the program.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Duke chatbot = new Duke("data/data.bin");

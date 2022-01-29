@@ -2,6 +2,10 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * A class that encapsulates a task.
+ * Contains methods to mark and unmark the task.
+ */
 public class Task implements Serializable {
     private String name;
     private boolean isMarked = false;
