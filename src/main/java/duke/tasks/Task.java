@@ -20,6 +20,7 @@ public class Task {
     public String getDetail() {
         return "";
     }
+
     @Override
     public String toString(){
         return this.getStatusIcon() + this.description;

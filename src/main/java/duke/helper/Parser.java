@@ -17,7 +17,7 @@ public class Parser {
     }
 
     public static boolean hasKeyword(String[] nextLineArr, String keyword){
-        for(int i = 0; i < nextLineArr.length; i++) {
+        for (int i = 0; i < nextLineArr.length; i++) {
             if(nextLineArr[i].equals(keyword)) {
                 return true;
             }
@@ -26,10 +26,10 @@ public class Parser {
     }
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
     public static boolean isDate(String possibleDate) {
-        try{
+        try {
             LocalDate date = LocalDate.parse(possibleDate);
             return true;
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
@@ -39,29 +39,29 @@ public class Parser {
         String command = strArr[0];
         boolean isDone = strArr[1].equals("1") ? true : false;
         switch (command) {
-            case "T":
-                return new Todo(strArr[2], isDone);
-            case "D":
-                if(isDate(strArr[3])){
-                    LocalDate ld = LocalDate.parse(strArr[3]);
-                    return new Deadline(strArr[2], ld, isDone);
-                }
-                return new Deadline(strArr[2], strArr[3], isDone);
-            case "E":
-                if(isDate(strArr[3])){
-                    LocalDate ld = LocalDate.parse(strArr[3]);
-                    return new Event(strArr[2], ld, isDone);
-                }
-                return new Event(strArr[2], strArr[3], isDone);
-            default:
-                return null;
+        case "T":
+            return new Todo(strArr[2], isDone);
+        case "D":
+            if (isDate(strArr[3])) {
+                LocalDate ld = LocalDate.parse(strArr[3]);
+                return new Deadline(strArr[2], ld, isDone);
+            }
+            return new Deadline(strArr[2], strArr[3], isDone);
+        case "E":
+            if (isDate(strArr[3])) {
+                LocalDate ld = LocalDate.parse(strArr[3]);
+                return new Event(strArr[2], ld, isDone);
+            }
+            return new Event(strArr[2], strArr[3], isDone);
+        default:
+            return null;
         }
     }
 
     public static String parseInputLine(String input, TaskList taskList) throws DukeException {
         String[] strArr = input.split(" ");
         String command = strArr[0];
-        if(!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
+        if (!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
                 || command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
             throw new DukeInvalidCommandException();
         }
@@ -83,7 +83,6 @@ public class Parser {
             }
             temp.markDone();
             return "Nice! I've marked this task as done:\n" + temp.toString();
-
         }
 
         if (command.equals("todo")) {
@@ -131,16 +130,14 @@ public class Parser {
             if (hasKeyword(strArr, "/at")) {
                 String title;
                 String[] splitArr = input.split("/at", 2);
-
-                try{
+                try {
                     title = splitArr[0].substring("event".length() + 1).trim();
-                }
-                catch (StringIndexOutOfBoundsException e){
+                } catch (StringIndexOutOfBoundsException e){
                     throw new DukeEmptyArgumentException();
                 }
                 String time = splitArr[1].trim();
                 Task task;
-                if(isDate(time)) {
+                if (isDate(time)) {
                     LocalDate ld = LocalDate.parse(time);
                     task = new Event(title, ld);
                 } else {
@@ -154,13 +151,13 @@ public class Parser {
                 throw new DukeMissingArgumentException("/at");
             }
         }
-        if (command.equals("delete")){
+        if (command.equals("delete")) {
             int index = Integer.parseInt(strArr[1]) - 1;
             Task task;
-            try{
+            try {
                 task = taskList.get(index);
                 taskList.delete(index);
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeInvalidIndexException();
             }
             return "Noted. I've removed this task:" + "\n" + task.toString() + "\n"+
