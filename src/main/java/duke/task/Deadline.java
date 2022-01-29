@@ -23,8 +23,7 @@ public class Deadline extends Task{
      */
     public Deadline(String name, boolean isChecked, String taskLabel, String deadline) {
         super(name, isChecked, taskLabel);
-        Time time = new Time(deadline);
-        this.time = time;
+        this.time = new Time(deadline);
     }
 
     /**

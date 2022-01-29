@@ -11,10 +11,27 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Storage Class handles saving and loading of files to th program.
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class Storage {
+    /**
+     * TaskList object that handles Tasks .
+     */
     private TaskList taskList;
+
+    /**
+     * Parser object to help parse the file into the program.
+     */
     private Parser parser;
 
+    /**
+     * Constructor to create a Storage Object
+     *
+     * @param taskList TaskList object that handles Tasks.
+     */
     public Storage(TaskList taskList) {
         this.parser = new Parser();
         this.taskList = taskList;
@@ -25,12 +42,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to save the TaskList into a file in the local device.
+     */
     public void save() {
-
         writeTasksToFile();
         System.out.println("Your Tasks has been saved into your device!");
     }
 
+    /**
+     * Helper Method to save Tasks in TaskList into a file in the local device.
+     */
     public void writeTasksToFile() {
         WriteFile writeFile = new WriteFile();
         writeFile.clearFile();
@@ -42,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to load previously saved file in the local device onto the program.
+     *
+     * @param fileName File "duke.txt" from the local device
+     */
     public void load(String fileName) {
         String command = null;
         try {

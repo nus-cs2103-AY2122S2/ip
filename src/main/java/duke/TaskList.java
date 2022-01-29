@@ -7,39 +7,74 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList class handles the commands to the Tasks that are stored in an ArrayList.
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class TaskList {
+    /**
+     * ArrayList to store the Tasks that are inputted by the user.
+     */
     private ArrayList<Task> tasks;
+
+    /**
+     * Parser Object to help pass the input of the user.
+     */
     Parser parser;
 
+    /**
+     * Constructor to create a TaskList Object.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.parser = new Parser();
-
     }
 
+    /**
+     * Getter of the ArrayList that are storing the Tasks.
+     *
+     * @return An ArrayList of the Tasks inputted by the user.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Command to adds Tasks into the TaskList.
+     *
+     * @param task Task that will be added into the TaskList.
+     */
     public void add(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Command to help find the number of Tasks in the TaskList.
+     *
+     * @return The length of the ArrayList.
+     */
     public int size() {
         return this.tasks.toArray().length;
     }
 
+    /**
+     * Command to signal to the program to close.
+     */
     public void bye() {
         String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
     }
 
+    /**
+     * Command to list out all of the Tasks in the TaskList.
+     */
     public void list() {
         int leng = tasks.toArray().length;
         if (leng == 0) {
             System.out.println("There are no pending tasks!");
         } else {
-            System.out.println("");
+            System.out.println();
             for (int i = 0; i < leng; i++) {
                 Task task = tasks.get(i);
                 int num = i + 1;
@@ -48,6 +83,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Command to "mark" or "unmark" a Task in the TaskList.
+     *
+     * @param taskStr String of command inputted by the User.
+     */
     public void taskCheck(String taskStr) {
         try {
             String[] taskArr = taskStr.split(" ");
@@ -67,6 +107,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Command to add a Todo Task into the TaskList.
+     *
+     * @param taskStr String of Todo Task instruction.
+     */
     public void todo(String taskStr) {
         // eg to_do borrow book (without the _)
         String taskName = parser.parseToDo(taskStr);
@@ -76,6 +121,11 @@ public class TaskList {
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
 
+    /**
+     * Command to add a Deadline Task into the TaskList.
+     *
+     * @param taskStr String of Deadline Task instruction.
+     */
     public void deadline(String taskStr) {
         try {
             String[] taskDetails = parser.parseDeadline(taskStr);
@@ -91,6 +141,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Command to add a Event Task into the TaskLIst.
+     *
+     * @param taskStr String of Event Task instruction.
+     */
     public void event(String taskStr) {
         try {
             String[] taskDetails = parser.parseEvent(taskStr);
@@ -105,6 +160,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Command to delete a Task from the TaskList.
+     *
+     * @param taskStr String of the Task that you are trying to delete.
+     */
     public void delete(String taskStr) {
         try {
             String[] taskArr = parser.splitLimitTwo(taskStr);
