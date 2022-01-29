@@ -8,11 +8,11 @@ public class Event extends Task {
 
     public Event(String name, LocalDate date) {
         super(name);
-        this.date =date;
+        this.date = date;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E] " + super.toString() + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }

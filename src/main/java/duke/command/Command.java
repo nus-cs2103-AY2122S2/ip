@@ -16,7 +16,7 @@ public class Command {
      * @param keyword Name of the command.
      */
     public Command(String keyword) {
-       this.keyword = keyword;
+        this.keyword = keyword;
     }
 
     /**
@@ -26,8 +26,8 @@ public class Command {
      * @param ui Ui to use when printing messages.
      * @param storage Storage to call for loading and saving tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage){
-    };
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    }
 
     /**
      * Returns boolean that states if a command is and exit command.

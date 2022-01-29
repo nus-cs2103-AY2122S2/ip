@@ -1,6 +1,7 @@
 package duke.tasklist;
 
 import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class TaskList {
      * @param task Task to be added.
      * @return True if task has been successfully added.
      */
-    public boolean add(Task task){
+    public boolean add(Task task) {
         return taskList.add(task);
     }
 
@@ -46,9 +47,9 @@ public class TaskList {
      * @param index Index position of the task to be removed.
      * @return The removed task if given a valid index, otherwise returns null.
      */
-    public Task remove(int index){
-        if(index >= 0 && index < taskList.size()) {
-           return taskList.remove(index);
+    public Task remove(int index) {
+        if (index >= 0 && index < taskList.size()) {
+            return taskList.remove(index);
         }
         return null;
     }
@@ -58,13 +59,14 @@ public class TaskList {
      *
      * @return List of tasks.
      */
-    public List<Task> list(){
+    public List<Task> list() {
         List<Task> copy = new ArrayList<>();
-        for(Task task : taskList){
+        for (Task task : taskList) {
             copy.add(task);
         }
         return copy;
     }
+
 
     /**
      * Returns the integer size of the current list.
@@ -81,7 +83,7 @@ public class TaskList {
      * @param index Index position of the task to be marked in the list.
      * @return Task that was marked.
      */
-    public Task mark(int index){
+    public Task mark(int index) {
         Task task = taskList.get(index);
         task.mark();
         return task;
@@ -93,7 +95,7 @@ public class TaskList {
      * @param index Index position of the task to be unmarked in the list.
      * @return Task that was unmarked.
      */
-    public Task unmark(int index){
+    public Task unmark(int index) {
         Task task = taskList.get(index);
         task.unmark();
         return task;

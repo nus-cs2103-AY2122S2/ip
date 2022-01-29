@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -8,20 +9,20 @@ import java.util.List;
  */
 public class Ui {
     private String lineBreak = "-------------------------------\n";
-    private String welcomeMessage =  "Hello! I'm Duke\nWhat can I do for you?\n";
+    private String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
     private String goodbyeMessage = "Bye. Hope to see you again soon!";
 
     /**
      * Prints welcome message to the screen.
      */
-    public void greet(){
+    public void greet() {
         System.out.println(lineBreak + welcomeMessage + lineBreak);
     }
 
     /**
      * Prints goodbye message to the screen.
      */
-    public void goodbye(){
+    public void goodbye() {
         System.out.println(goodbyeMessage);
     }
 
@@ -38,7 +39,7 @@ public class Ui {
      * @param task Task that was added.
      * @param noOfTasks Number of tasks that are currently in the list of tasks.
      */
-    public void taskAddedMessage(Task task, int noOfTasks){
+    public void taskAddedMessage(Task task, int noOfTasks) {
         System.out.println("Got it. I've added this task:\n"
                 + task.toString()
                 + "\nNow you have " + noOfTasks + " tasks in the list.");
@@ -49,9 +50,9 @@ public class Ui {
      *
      * @param tasks List of tasks to be printed.
      */
-    public void list(List<Task> tasks){
+    public void list(List<Task> tasks) {
         System.out.printf("You currently have %d task in your list:\n", tasks.size());
-        for(int i = 0; i < tasks.size(); i++){
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
         }
     }
@@ -61,8 +62,8 @@ public class Ui {
      *
      * @param task Task that was successfully marked.
      */
-    public void taskMarkedMessage(Task task){
-       System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+    public void taskMarkedMessage(Task task) {
+        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
@@ -70,7 +71,7 @@ public class Ui {
      *
      * @param task Task that was successfully unmarked.
      */
-    public void taskUnmarkedMessage(Task task){
+    public void taskUnmarkedMessage(Task task) {
         System.out.println("OK! I've marked this task as not done yet:\n" + task.toString());
     }
 
@@ -80,9 +81,9 @@ public class Ui {
      * @param task Task that was successfully deleted.
      * @param noOfTasks Number of Tasks that are currently in the list of tasks.
      */
-    public void taskDeleteMessage(Task task, int noOfTasks){
+    public void taskDeleteMessage(Task task, int noOfTasks) {
         System.out.println("OK! I've deleted this task:\n" + task.toString()
-            + "\nNow you have " + noOfTasks + " tasks in the list.");
+                + "\nNow you have " + noOfTasks + " tasks in the list.");
     }
 
     /**

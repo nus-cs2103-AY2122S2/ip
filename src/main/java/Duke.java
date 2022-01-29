@@ -3,6 +3,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.storage.Storage;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -28,12 +29,14 @@ public class Duke {
         this.ui = new Ui();
     }
 
+
     /**
      * Parses user input and executes the appropriate command.
      *
      * @param input user instruction to be executed.
      */
-    public void run(String input){
+    public void run(String input) {
+
         try {
             Command c = Parser.parse(input);
             ui.showLine();
@@ -42,7 +45,7 @@ public class Duke {
             ui.showLine();
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.notEnoughFieldsMessage();
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             ui.invalidIndex();
         } catch (DateTimeParseException e) {
             ui.invalidDate();
@@ -58,7 +61,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Duke chatbot = new Duke("data/data.bin");
         chatbot.ui.greet();
-        while(chatbot.isListening){
+        while (chatbot.isListening) {
             chatbot.run(sc.nextLine());
         }
     }

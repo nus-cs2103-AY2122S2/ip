@@ -4,8 +4,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class UnknownCommand extends Command{
-    public UnknownCommand(){
+public class UnknownCommand extends Command {
+    public UnknownCommand() {
         super("unknown");
     }
 
