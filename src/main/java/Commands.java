@@ -5,7 +5,7 @@ public class Commands {
     static Scanner scanner;
 
     private enum Command {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, INVALID
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, SAVE, LOAD, INVALID
     }
 
     public Commands() {
@@ -95,6 +95,14 @@ public class Commands {
                         + "  delete <task number>");
             }
             Apollo.deleteTask(Integer.parseInt(this.fullCommand[1]));
+            response();
+            break;
+        case SAVE:
+            Apollo.save();
+            response();
+            break;
+        case LOAD:
+            Apollo.load();
             response();
             break;
         default:

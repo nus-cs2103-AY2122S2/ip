@@ -1,6 +1,6 @@
-public class Task {
-    protected boolean isDone;
-    protected String description;
+public class Task implements java.io.Serializable {
+    private boolean isDone;
+    private final String description;
 
     public Task(String description) {
         this.description = description;

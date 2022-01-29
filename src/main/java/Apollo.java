@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Apollo {
-    private static ArrayList<Task> tasks;
+    public static ArrayList<Task> tasks;
     private static Commands input;
 
     protected static void printMessage(String message) {
@@ -84,6 +84,14 @@ public class Apollo {
             message = "Noted, I've marked this task as not done yet. \n  ";
         }
         printMessage(message + task);
+    }
+
+    public static void save() throws ApolloException {
+        Storage.save(tasks);
+    }
+
+    public static void load() throws ApolloException {
+        tasks = Storage.load();
     }
 
     public static void main(String[] args) {
