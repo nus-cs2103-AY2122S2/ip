@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Task {
 
-    String time;
+    String time = "";
     String name;
     String type;
     int number;
@@ -37,7 +37,7 @@ public class Task {
             setDate(time, isReading);
             this.type = type;
             if (!isReading) {
-                Ui.printAddingTasks(this);
+                Ui.printAddThisTask(this);
                 Storage.addLineToFile(this.getDataRepresentation());
                 totalTask++;
                 Ui.printTotalTasks();

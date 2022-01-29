@@ -80,6 +80,7 @@ public class Ui {
         System.out.println("__________________________________________________________________");
     }
 
+
     /**
      * print the task that got removed
      * @param num index of task to remove (zero indexed)
@@ -114,11 +115,12 @@ public class Ui {
         System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
     }
 
+
     /**
      * print when user adds Task
      * @param task task to add into TaskList
      */
-    public static void printAddingTasks(Task task) {
+    public static void printAddThisTask(Task task) {
         System.out.println("Got it. I've added this task: ");
         if (task.type.equals("D")) {
             System.out.printf(" [D][%s] %s (by: %s) \n", task.getStatus(), task.name, task.time);

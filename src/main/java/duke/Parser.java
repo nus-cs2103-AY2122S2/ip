@@ -76,7 +76,7 @@ public class Parser {
                 task = new Event(inputArr[0].substring(5), Task.totalTask, inputArr[1], false);
             }
         } catch (EmptyDescriptorExceptions e) {
-            e.printStackTrace();
+            Ui.printEmptyDescriptionException();
         }
         return task;
     }

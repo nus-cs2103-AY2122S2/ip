@@ -14,3 +14,11 @@ D---true--- eat some fish ---Oct 10 1998 10:00 AM
 D---false--- eat dinner ---Jan 28 2022 12:00 AM
 E---false--- have cake for supper ---1998-25-03 1200
 E---true--- have cat for supper ---Mar 25 1998 12:00 PM
+T---false--- BAC deposit /at 2000-01-01 1100---null
+E---false--- eat cake ---1200
+D---false--- BACK deposit ---Jan 01 2000 11:00 AM
+T---false--- eventor /at tmr---null
+E---false--- eventor ---tmr
+D---false--- eat cake ---tmr
+D---false--- eat cake NOW ---Jan 01 2022 11:00 AM
+E---false--- eat bread now ---Jul 07 2001 10:00 PM

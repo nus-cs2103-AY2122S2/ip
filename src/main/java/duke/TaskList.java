@@ -14,6 +14,7 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
+
     public void markTaskNum(int taskNum, String check){
         if (check.equals("true") && (taskNum > 0)) {
             this.tasklist.get(taskNum).mark();
@@ -62,7 +63,6 @@ public class TaskList {
         Storage.writeAllToFile(this);
     }
 
-
     public void addTask(String name, String time, String type, boolean isReading){
         Task task;
         if (type.equals("D")){
@@ -78,7 +78,7 @@ public class TaskList {
     public void findTask(String keyword){
         TaskList matchTasks = new TaskList();
         for(int i=0; i<Task.totalTask; i++){
-            if (this.tasklist.get(i).name.contains(keyword)){
+            if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)){
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }
