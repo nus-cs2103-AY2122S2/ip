@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 repositories {
@@ -10,7 +10,7 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClass.set("duke.Duke")
 }
 
 archivesBaseName = 'duke'
@@ -18,9 +18,17 @@ archivesBaseName = 'duke'
 dependencies {
     implementation 'junit:junit:4.12'
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
-    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 }
 
 checkstyle {
     toolVersion = '8.29'
+}
+
+run {
+    enableAssertions = true
+}
+
+test {
+    useJUnitPlatform()
 }
