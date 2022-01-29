@@ -50,7 +50,8 @@ public class TaskList {
         }
 
         for (Task task: taskArrayList) {
-            stringOfTasks.add(indentation + String.valueOf(counter) + ". "  + task.toString() + task.getStatus() + " " + task.getDescription());
+            stringOfTasks.add(indentation + String.valueOf(counter) + ". "  +
+                    task.toString() + task.getStatus() + " " + task.getDescription());
             counter++;
         }
         return stringOfTasks;

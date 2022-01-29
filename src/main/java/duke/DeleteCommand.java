@@ -28,7 +28,8 @@ public class DeleteCommand extends Command{
         String indentation = "    ";
         Task t = taskList.getTask(index);
         taskList.deleteTask(index);
-        String message = indentation + "Noted. I've removed this task: \n" + indentation + "  " + t.toString() + t.getStatus() +  " " + t.getDescription();
+        String message = indentation + "Noted. I've removed this task: \n" +
+                indentation + "  " + t.toString() + t.getStatus() +  " " + t.getDescription();
         ui.outputMessage(message);
     }
 }

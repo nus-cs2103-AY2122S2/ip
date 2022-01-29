@@ -37,10 +37,12 @@ public class MarkCommand extends Command{
         String message;
         if (markTypes == MarkTypes.Mark) {
             taskList.markTask(index);
-            message = indentation + "Nice! I've marked this task as done:\n" + indentation + "  " + t.toString() + t.getStatus() + " " + t.getDescription();
+            message = indentation + "Nice! I've marked this task as done:\n"
+                    + indentation + "  " + t.toString() + t.getStatus() + " " + t.getDescription();
         } else {
             taskList.unmarkTask(index);
-            message = indentation + "OK, I've marked this task as not done yet:\n" + indentation + "  " + t.toString() + t.getStatus() + " " + t.getDescription();
+            message = indentation + "OK, I've marked this task as not done yet:\n"
+                    + indentation + "  " + t.toString() + t.getStatus() + " " + t.getDescription();
         }
 
         ui.outputMessage(message);

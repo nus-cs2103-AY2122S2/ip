@@ -9,7 +9,7 @@ class Task {
     }
 
     protected String description;
-    protected boolean status;
+    protected boolean hasCompleted;
 
     /**
      * A constructor to create a new task
@@ -17,7 +17,7 @@ class Task {
      */
     public Task(String description) {
         this.description = description;
-        status = false;
+        hasCompleted = false;
     }
 
     /**
@@ -25,21 +25,21 @@ class Task {
      * @return a boolean of the status of the task.
      */
     String getStatus () {
-        return status ? "[X]" : "[ ]";
+        return hasCompleted ? "[X]" : "[ ]";
     }
 
     /**
      * Mark this task completed.
      */
     void markDone() {
-        this.status = true;
+        this.hasCompleted = true;
     }
 
     /**
      * Unmark this task completed.
      */
     void unmarkDone () {
-        this.status = false;
+        this.hasCompleted = false;
     }
 
     /**
