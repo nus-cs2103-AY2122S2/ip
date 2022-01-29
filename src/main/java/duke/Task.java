@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents a task
+ *
+ * @author sibinhho99-nus
+ */
 public class Task {
     boolean isDone = false;
     String name = "";

@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Represents a list of tasks
+ *
+ * @author sibinhho99-nus
  */
 public class TaskList {
     List<Task> taskList;

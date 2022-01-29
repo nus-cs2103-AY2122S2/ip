@@ -2,6 +2,8 @@ package duke;
 
 /**
  * Deals with making sense of the user command
+ *
+ * @author sibinhho99-nus
  */
 public class Parser {
     /**
@@ -15,7 +17,7 @@ public class Parser {
 
     /**
      *
-     * Returns event task from command
+     * Returns event Task object from command
      *
      */
     public Task parseEvent(String command) {
@@ -29,7 +31,7 @@ public class Parser {
 
     /**
      *
-     * Returns deadlines task from command
+     * Returns deadline Task object from command
      *
      */
     public Task parseDeadlines(String command) {
@@ -43,7 +45,7 @@ public class Parser {
 
     /**
      *
-     * Returns deadlines task from command
+     * Returns todo Task object from command
      *
      */
     public Task parseTodos(String command) {

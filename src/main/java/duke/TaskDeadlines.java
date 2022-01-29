@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents task of deadline type
+ *
+ * @author sibinhho99-nus
+ */
 public class TaskDeadlines extends Task {
     LocalDate doneBy;
 

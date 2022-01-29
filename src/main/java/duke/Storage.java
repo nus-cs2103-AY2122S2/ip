@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
+ *
+ * @author sibinhho99-nus
  */
 public class Storage {
     public TaskList taskList = new TaskList();

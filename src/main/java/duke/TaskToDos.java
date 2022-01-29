@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents task of todo type
+ *
+ * @author sibinhho99-nus
+ */
 public class TaskToDos extends Task {
     /**
      * Constructor

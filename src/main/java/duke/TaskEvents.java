@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents task of event type
+ *
+ * @author sibinhho99-nus
+ */
 public class TaskEvents extends Task {
     LocalDate startAt;
 

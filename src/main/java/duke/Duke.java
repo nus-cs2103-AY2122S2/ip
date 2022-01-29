@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main class
+ *
+ * @author sibinhho99-nus
+ */
 public class Duke {
     /**
-     * Main class
+     * Main method
      */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);

@@ -2,6 +2,8 @@ package duke;
 
 /**
  * Deals with interactions with the user
+ *
+ * @author sibinhho99-nus
  */
 public class Ui {
     /**
