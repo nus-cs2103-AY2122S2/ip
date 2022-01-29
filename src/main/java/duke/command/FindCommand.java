@@ -25,6 +25,9 @@ public class FindCommand extends Command<String> {
         runCommand();
     }
 
+    /**
+     * command to return the list of Tasks required by find command
+     */
     @Override
     public void runCommand() {
         String searchText = command.substring(5);
