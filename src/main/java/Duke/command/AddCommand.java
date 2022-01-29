@@ -31,5 +31,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(task);
+        String contentToSave = task.toSave();
+        Storage.append(contentToSave);
     }
 }

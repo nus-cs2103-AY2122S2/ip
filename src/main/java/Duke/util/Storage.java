@@ -24,7 +24,17 @@ public class Storage {
             File file = new File(FILE_PATH);
             return new Scanner(file);
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            File fileDir = new File("src/main/java/Duke/data");
+            fileDir.mkdirs();
+            File fileToCreate = new File(fileDir, "duke.txt");
+            Scanner sc = null;
+            try {
+                new FileWriter(fileToCreate);
+                sc = new Scanner(fileToCreate);
+            } catch (IOException error) {
+                throw new DukeException(error.getMessage());
+            }
+            return sc;
         }
     }
 

@@ -16,8 +16,6 @@ public class TaskList {
 
     private final ArrayList<Task> taskList;
     private final String TASK_ADDED = "\tTask Added, arrgh:\n";
-    private static final String FILE_DIR = "src/main/data";
-    private static final String FILE_PATH = "src/main/data/duke.txt";
     private int taskCount = 0;
     private Ui ui = new Ui();
 
@@ -66,8 +64,8 @@ public class TaskList {
         if (task != null) {
             this.taskList.add(task);
             this.taskCount++;
-            String contentToSave = task.toSave();
-            Storage.append(contentToSave);
+//            String contentToSave = task.toSave();
+//            Storage.append(contentToSave);
             System.out.println(TASK_ADDED + "\t" + taskList.get(this.taskCount - 1).toString());
             System.out.println("\tNow you have " + this.taskCount + " tasks in your task list arrr, better get workin' aye!\n");
             ui.requestNextCommand();
@@ -89,7 +87,7 @@ public class TaskList {
             ui.deleteTask();
             System.out.println("\t" + task);
             ui.requestNextCommand();
-            Storage.saveToFile(this.taskList);
+//            Storage.saveToFile(this.taskList);
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
         }
@@ -114,8 +112,8 @@ public class TaskList {
      * @param taskIndex 0-based index of task number.
      * @return Task at given index.
      */
-    public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+    public String getTask(int taskIndex) {
+        return taskList.get(taskIndex).getTaskDescription();
     }
 
     /**
@@ -126,7 +124,7 @@ public class TaskList {
     public void markTask(int taskIndex) {
         Task curr = taskList.get(taskIndex);
         curr.markAsDone();
-        Storage.saveToFile(this.taskList);
+//        Storage.saveToFile(this.taskList);
         ui.markAsDone();
         System.out.println("\t" + curr);
         ui.requestNextCommand();
@@ -140,7 +138,7 @@ public class TaskList {
     public void unmarkTask(int taskIndex) {
         Task curr = taskList.get(taskIndex);
         curr.markAsUndone();
-        Storage.saveToFile(this.taskList);
+//        Storage.saveToFile(this.taskList);
         ui.markAsUndone();
         System.out.println("\t" + curr);
         ui.requestNextCommand();

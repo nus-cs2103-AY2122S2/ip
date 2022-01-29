@@ -24,13 +24,14 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Executes command by adding task into Duke.Duke.util.TaskList.
+     * Executes command by marking task in TaskList.
      *  @param taskList List of tasks
-     * @param ui       Ui provided
-     * @param storage  Saved history
+     * @param ui        Ui provided
+     * @param storage   Saved history
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.markTask(taskIndex);
+        Storage.saveToFile(taskList.getCurrentList());
     }
 }

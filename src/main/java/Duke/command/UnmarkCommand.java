@@ -24,7 +24,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Executes command by adding task into Duke.Duke.util.TaskList.
+     * Executes command by unmarking task in TaskList.
      *  @param taskList List of tasks
      * @param ui       Ui provided
      * @param storage  Saved history
@@ -32,5 +32,6 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.unmarkTask(taskIndex);
+        Storage.saveToFile(taskList.getCurrentList());
     }
 }
