@@ -18,6 +18,10 @@ public class Task {
         this.completed = completed;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     private String getCompleted() {
         return completed ? "X" : " ";
     }

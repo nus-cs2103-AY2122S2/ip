@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Parser {
 
-    private final String[] cmdTypes = {"list", "delete", "unmark", "mark", "todo", "event", "deadline", "bye"};
+    private final String[] cmdTypes = {"find", "list", "delete", "unmark", "mark", "todo", "event", "deadline", "bye"};
 
     public String[] splitCmd(String input) throws DukeException {
 
@@ -23,7 +23,7 @@ public class Parser {
     }
 
     public boolean checkQuit(String cmd) {
-        return cmd.equalsIgnoreCase(cmdTypes[7]);
+        return cmd.equalsIgnoreCase(cmdTypes[8]);
     }
 
     public void runCmd(String cmd, String task, TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
@@ -84,6 +84,9 @@ public class Parser {
             storage.write(tasks.getTaskList());
             ui.showAdded(newTask);
             break;
+
+        case "find":
+            tasks.find(task);
         }
     }
 
