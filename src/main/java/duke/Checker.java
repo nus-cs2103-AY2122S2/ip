@@ -16,7 +16,8 @@ public class Checker {
         TODO,
         DELETE,
         MARK,
-        UNMARK
+        UNMARK,
+        FIND
     };
 
     /**
@@ -29,24 +30,27 @@ public class Checker {
     public Checker(String input) throws DukeException {
         command = input;
 
-        if (command.equals("bye")) {
-            state = Status.BYE;
-        } else if (command.equals("help")) {
-            state = Status.HELP;
-        } else if (command.equals("list")) {
-            state = Status.LIST;
-        } else if (command.equals("delete")) {
-            state = Status.DELETE;
-        } else if (command.equals("todo")) {
-            state = Status.TODO;
-        } else if (command.equals("deadline")) {
-            state = Status.DEADLINE;
-        } else if (command.equals("event")) {
-            state = Status.EVENT;
-        } else if (command.equals("unmark")) {
-            state = Status.UNMARK;
-        } else if (command.equals("mark")) {
-            state = Status.MARK;
+
+        if (this.command.equals("bye")) {
+            this.state = Status.BYE;
+        } else if (this.command.equals("help")) {
+            this.state = Status.HELP;
+        } else if (this.command.equals("list")) {
+            this.state = Status.LIST;
+        } else if (this.command.equals("delete")) {
+            this.state = Status.DELETE;
+        } else if (this.command.equals("todo")) {
+            this.state = Status.TODO;
+        } else if (this.command.equals("deadline")) {
+            this.state = Status.DEADLINE;
+        } else if (this.command.equals("event")) {
+            this.state = Status.EVENT;
+        } else if (this.command.equals("unmark")) {
+            this.state = Status.UNMARK;
+        } else if (this.command.equals("mark")) {
+            this.state = Status.MARK;
+        } else if (this.command.equals("find")) {
+            this.state = Status.FIND;
         } else {
             throw new DukeException("Sorry, I did not catch that! \\(T.T)/\n" +
                     "Please type 'help' to see all commands I can help with.");
