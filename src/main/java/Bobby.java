@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Bobby {
     private static ArrayList<Task> taskArray = new ArrayList<Task>();
@@ -35,7 +37,7 @@ public class Bobby {
                 taskArray.add(newToDo);
                 break;
             case "D":
-                Deadline newDeadline = new Deadline(inputs[2], inputs[3]);
+                Deadline newDeadline = new Deadline(inputs[2], LocalDate.parse(inputs[3]));
                 if (inputs[1].equals("true")) {
                     newDeadline.markAsDone();
                 }
@@ -70,7 +72,7 @@ public class Bobby {
             String[] splitInputs = inputs[1].split(" /by ", 2);
             if (splitInputs.length > 1) {
                 String description = splitInputs[0];
-                String by = splitInputs[1];
+                LocalDate by = LocalDate.parse(splitInputs[1]);
                 Deadline newDeadline = new Deadline(description, by);
                 System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
