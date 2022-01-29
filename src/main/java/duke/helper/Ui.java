@@ -8,6 +8,10 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Returns the next line of input and output as a String.
+     * @return
+     */
     public String nextLine() {
         return scanner.nextLine();
     }

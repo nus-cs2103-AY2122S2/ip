@@ -5,6 +5,9 @@ import duke.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline which is a more specific case of a task.
+ */
 public class Deadline extends Task {
 
     protected String by;

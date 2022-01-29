@@ -6,6 +6,9 @@ import duke.helper.Storage;
 import duke.helper.TaskList;
 import duke.helper.Ui;
 
+/**
+ *
+ */
 public class Duke {
 
 
@@ -13,13 +16,21 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
-    //private duke.helper.Ui ui;
+
+    /**
+     * Sets up the objects needed for the application to run.
+     * Loads the task data stored in the filePath.
+     * @param filePath The place where task data are stored.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Runs the program till termination.
+     */
     public void run(){
         ui.greet();
         String input = null;
@@ -42,6 +53,10 @@ public class Duke {
 
     }
 
+    /**
+     * Entry point of the application
+     * @param args
+     */
     public static void main(String[] args){
         new Duke("data/tasks.txt").run();
     }

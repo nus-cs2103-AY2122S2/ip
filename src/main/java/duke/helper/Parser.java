@@ -10,12 +10,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents parser which parses user's input and String of texts and try to make sense of it.
+ */
 public class Parser {
 
+    /**
+     * Returns if the input String is a signal for exiting the program.
+     * @param input the input user entered.
+     * @return return if the input starts with "bye".
+     */
     public static boolean isExit(String input) {
         return input.startsWith("bye");
     }
 
+    /**
+     * Returns if the keyword to be searched is in the given String array
+     * @param nextLineArr an Array of String as input
+     * @param keyword the keyword to be searched
+     * @return whether the nextLineArr contains keyword
+     */
     public static boolean hasKeyword(String[] nextLineArr, String keyword){
         for(int i = 0; i < nextLineArr.length; i++) {
             if(nextLineArr[i].equals(keyword)) {
@@ -25,6 +39,7 @@ public class Parser {
         return false;
     }
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+
     public static boolean isDate(String possibleDate) {
         try{
             LocalDate date = LocalDate.parse(possibleDate);
@@ -33,6 +48,12 @@ public class Parser {
             return false;
         }
     }
+
+    /**
+     * Returns the task parsed from the nextLine argument.
+     * @param nextLine input as next line of String.
+     * @return the task parsed from the line of input.
+     */
     public static Task parseFileLine(String nextLine) {
         String[] strArr = nextLine.split(" \\| ");
         String[] subStrArr;
@@ -58,11 +79,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the feedback of parsing the input line which is subsequently sent to an Ui object.
+     * @param input input String given by the user.
+     * @param taskList taskList to be updated.
+     * @return feedback of the input to be handled to an Ui object for output in front of user.
+     * @throws DukeException possible exceptions that may arise during parsing of the input.
+     */
     public static String parseInputLine(String input, TaskList taskList) throws DukeException {
         String[] strArr = input.split(" ");
         String command = strArr[0];
         if(!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
-                || command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
+                || command.equals("deadline") || command.equals("event") || command.equals("delete") ||
+                command.equals("find"))) {
             throw new DukeInvalidCommandException();
         }
         if (command.equals("list")) {
