@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    public Date duration;
-    SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
+    private final Date duration;
+    private final SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
 
     public Event(String description, Date duration) {
         super(description);

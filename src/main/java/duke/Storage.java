@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Storage {
 
     private final File file;
-    SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
+    private final SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
 
     public Storage() throws IOException {
         Path filePath = Paths.get(System.getProperty("user.dir"), "duke.txt");
@@ -50,6 +50,7 @@ public class Storage {
                 task[3] = task[3].trim();
                 taskList.add(new Event(task[2], parse(task[3]), task[1].equals("true")));
                 break;
+            default:
             }
         }
 

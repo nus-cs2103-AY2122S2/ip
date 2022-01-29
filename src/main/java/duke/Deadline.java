@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
-    public Date deadline;
-    SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
+    private final Date deadline;
+    private final SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
 
     public Deadline(String description, Date deadline) {
         super(description);
