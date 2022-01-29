@@ -5,6 +5,9 @@ import duke.tasklist.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+/**
+ * TodoCommand Class
+ */
 public class TodoCommand extends Command<String> {
 
     private TaskList list;
@@ -12,6 +15,13 @@ public class TodoCommand extends Command<String> {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for ToDoCommand
+     * @param description unformatted string for todo
+     * @param list task list to add this task to
+     * @param storage storage of where this task will be added to
+     * @param ui ui of subsequent system out to user
+     */
     public TodoCommand(String description, TaskList list, Storage storage, Ui ui) {
         this.list = list;
         this.description = description;
@@ -21,6 +31,9 @@ public class TodoCommand extends Command<String> {
     }
 
 
+    /**
+     * add todotask to task list
+     */
     @Override
     public void runCommand() {
         String splicedString = description.substring(5);

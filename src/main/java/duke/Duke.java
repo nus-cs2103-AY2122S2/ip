@@ -8,6 +8,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Duke class
+ */
 public class Duke {
 
     private Storage storage;
@@ -15,6 +18,10 @@ public class Duke {
     private Ui ui;
     public static int COUNTER = 1;
 
+    /**
+     * Constructor for Duke object
+     * @param filePath filepath of data to be saved/retrieved
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * run the program
+     */
     public void run() {
         ui.showWelcome();
         DukeManager dukeManager = new DukeManager();
@@ -43,6 +53,10 @@ public class Duke {
         ui.showBye();
     }
 
+    /**
+     * entry method to run program
+     * @param args inputs
+     */
     public static void main(String[] args) {
         String pathToFile = "./data/duke.txt";
         new Duke(pathToFile).run();

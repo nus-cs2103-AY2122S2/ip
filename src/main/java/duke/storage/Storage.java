@@ -2,19 +2,22 @@ package duke.storage;
 
 import duke.tasklist.TaskList;
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
+import duke.task.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class
+ */
 public class Storage {
 
     private String storedFilePath;
 
+    /**
+     * Constructor for storage object
+     * @param filePath filepath of where data will be stored
+     */
     public Storage(String filePath) {
         File directory = new File("./data");
         if (!directory.exists()) {
@@ -31,6 +34,10 @@ public class Storage {
         this.storedFilePath = filePath;
     }
 
+    /**
+     * modify contents of data
+     * @param taskList list of tasks be saved
+     */
     public void writeToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(storedFilePath);
@@ -49,6 +56,11 @@ public class Storage {
         }
     }
 
+    /**
+     * loading data in file to program
+     * @return data in file
+     * @throws DukeException error occurred
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
