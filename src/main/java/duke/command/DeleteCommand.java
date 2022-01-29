@@ -30,13 +30,13 @@ public class DeleteCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
             Task taskDeleted = taskList.getTaskList().get(index);
             taskList.getTaskList().remove(index);
             taskList.getTaskSet().remove(taskDeleted);
             storage.writeFile(taskList);
-            ui.deletedTask(taskList, taskDeleted);
+            return ui.deletedTask(taskList, taskDeleted);
         } catch (Exception e) {
             throw new CortanaException("No such task!");
         }

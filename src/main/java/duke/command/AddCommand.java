@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         if (taskList.getTaskSet().contains(task)) {
             throw new CortanaException("Task already exists!");
         } else {
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             } catch (Exception e) {
                 throw new CortanaException(e.getMessage());
             }
-            ui.addedTask(taskList, task);
+            return ui.addedTask(taskList, task);
         }
     }
 

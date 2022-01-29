@@ -19,12 +19,12 @@ public class DeleteAllCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
             taskList.getTaskSet().clear();
             taskList.getTaskList().clear();
             storage.writeFile(taskList);
-            ui.deletedAll();
+            return ui.deletedAll();
         } catch (Exception e) {
             throw new CortanaException("Something went wrong when attempting to delete all tasks.");
         }

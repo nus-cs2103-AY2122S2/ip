@@ -22,18 +22,20 @@ public class FindCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         int numberOfTasksMatchKeyword = 0;
+        StringBuilder tasksWithSameKeyword = new StringBuilder();
         for (Task task: taskList.getTaskList()) {
             if (task.getDescription().contains(keyWord)) {
                 numberOfTasksMatchKeyword++;
-                ui.printTask(task);
+                tasksWithSameKeyword.append(task).append("\n");
             }
         }
         if (numberOfTasksMatchKeyword == 0) {
             throw new CortanaException("No task found with keyword " + keyWord + "!");
         } else {
-            ui.foundTasksMatchKeyword(numberOfTasksMatchKeyword, keyWord);
+            tasksWithSameKeyword.append(ui.foundTasksMatchKeyword(numberOfTasksMatchKeyword, keyWord));
+            return tasksWithSameKeyword.toString();
         }
     }
 

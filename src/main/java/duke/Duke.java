@@ -1,7 +1,5 @@
 package duke;
 
-import java.nio.file.Paths;
-
 import duke.command.Command;
 import duke.utils.CortanaException;
 import duke.utils.Parser;
@@ -28,35 +26,12 @@ public class Duke {
         tasks = new TaskList(storage.loadFile());
     }
 
-    /**
-     * Run Duke.
-     */
-    public void run() {
-        boolean isExit = false;
-        ui.showWelcome();
-
-        while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (CortanaException e) {
-                ui.showErrorMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (CortanaException e) {
+            return ui.showErrorMessage(e.getMessage());
         }
-    }
-
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        String path = Paths.get("").toAbsolutePath() + "/data/";
-        new Duke(path).run();
     }
 }

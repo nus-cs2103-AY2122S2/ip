@@ -39,7 +39,8 @@ public class ShowAllTasksOnSameDateCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+        StringBuilder tasksOnSameDate = new StringBuilder();
         LocalDate localDate = dateTime.toLocalDate();
         LocalTime localTime = dateTime.toLocalTime();
         int numberOfTasksOnSameDate = 0;
@@ -52,14 +53,14 @@ public class ShowAllTasksOnSameDateCommand extends Command {
                         if (((Deadline) task).getBy().equals(dateTime)) {
                             /* all deadlines with the exact same date and time */
                             numberOfTasksOnSameDate++;
-                            ui.printTask(task);
+                            tasksOnSameDate.append(task).append("\n");
                         }
                     } else {
                         /* deadline only has date */
                         if (((Deadline) task).getBy().toLocalDate().equals(localDate)) {
                             /* all deadlines with the same date regardless of time */
                             numberOfTasksOnSameDate++;
-                            ui.printTask(task);
+                            tasksOnSameDate.append(task).append("\n");
                         }
                     }
                 } else if (task instanceof Event) {
@@ -69,13 +70,13 @@ public class ShowAllTasksOnSameDateCommand extends Command {
                         if (((Event) task).getAt().equals(dateTime)) {
                             /* all events with the exact same date and time */
                             numberOfTasksOnSameDate++;
-                            ui.printTask(task);
+                            tasksOnSameDate.append(task).append("\n");
                         }
                     } else { //event only has date
                         if (((Event) task).getAt().toLocalDate().equals(localDate)) {
                             /* all events with the same date regardless of time */
                             numberOfTasksOnSameDate++;
-                            ui.printTask(task);
+                            tasksOnSameDate.append(task).append("\n");
                         }
                     }
                 }
@@ -84,7 +85,8 @@ public class ShowAllTasksOnSameDateCommand extends Command {
                 /* no tasks found */
                 throw new CortanaException("No task found on " + dateTimeString + "!");
             } else {
-                ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString);
+                tasksOnSameDate.append(ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
+                return tasksOnSameDate.toString();
             }
         } catch (DateTimeParseException e) {
             throw new CortanaException("Invalid date/time!");

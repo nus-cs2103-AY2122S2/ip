@@ -30,12 +30,12 @@ public class MarkCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
             Task task = taskList.getTaskList().get(index);
             task.markAsDone();
             storage.writeFile(taskList);
-            ui.marked(task);
+            return ui.marked(task);
         } catch (Exception e) {
             throw new CortanaException("No such task!");
         }

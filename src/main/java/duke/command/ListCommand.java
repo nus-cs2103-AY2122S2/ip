@@ -17,14 +17,18 @@ public class ListCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        StringBuilder tasksToList = new StringBuilder();
+        //String tasks = "";
         if (taskList.getTaskList().size() == 0) {
-            ui.noTaskLeft();
+            return ui.noTaskLeft();
         } else {
             for (int i = 0; i < taskList.getTaskList().size(); i++) {
                 Task task = taskList.getTaskList().get(i);
-                ui.listed(i + 1, task);
+                //tasks += ui.listed(i + 1, task);
+                tasksToList.append(ui.listed(i + 1, task)).append("\n");
             }
+            return tasksToList.toString();
         }
     }
 

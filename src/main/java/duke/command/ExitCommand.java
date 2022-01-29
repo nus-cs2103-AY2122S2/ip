@@ -23,8 +23,8 @@ public class ExitCommand extends Command {
      * @param ui the ui to operate on
      * @param storage the storage to operate on
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.exited();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.exited();
     }
 
     /**
