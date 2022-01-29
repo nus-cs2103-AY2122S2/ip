@@ -7,7 +7,7 @@ abstract public class Task {
 
     protected String description;
     protected boolean isDone;
-    
+
     Task(String description) {
         this.description = description;
         this.isDone = false;

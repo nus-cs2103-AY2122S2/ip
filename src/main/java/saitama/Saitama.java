@@ -19,7 +19,7 @@ public class Saitama {
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
-
+    
     /**
      * Run the chatbot.
      */

@@ -35,8 +35,8 @@ public class Parser {
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
             InvalidCommandException, InvalidTaskNumberException, MissingQueryException {
         String[] splitCommand = fullCommand.split(" ", 2);
-        String command = splitCommand[0].toUpperCase();
-        splitCommand[0] = command;
+        splitCommand[0] = splitCommand[0].toUpperCase();
+        String command = splitCommand[0];
 
         switch (command) {
         case "BYE":
@@ -52,8 +52,11 @@ public class Parser {
         case "FIND":
             return prepareFind(splitCommand);
         case "TODO":
+            //Fallthrough
         case "DEADLINE":
+            //Fallthrough
         case "EVENT":
+            //Fallthrough
             return prepareAdd(splitCommand);
         default:
             throw new InvalidCommandException();
@@ -172,14 +175,12 @@ public class Parser {
      * @return Whether the string can be converted to integer.
      */
     private static boolean isNumeric(String string) {
-        int intValue;
-
         if(string == null || string.equals("")) {
             return false;
         }
 
         try {
-            intValue = Integer.parseInt(string);
+            int intValue = Integer.parseInt(string);
             return true;
         } catch (NumberFormatException e) {
             return false;
