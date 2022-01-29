@@ -88,6 +88,12 @@ public class Parser {
             output = new InvalidCommand("Please use integer numbers e.g. 1, 2");
           }
           break;
+        case "find":
+            if (parameters.length != 2) {
+              throw new VanException("Invalid format. Please use find <keyword>");
+            }
+            output = new FindCommand(parameters[1]);
+            break;
         case "bye":
           output = new ExitCommand();
           break;
@@ -133,5 +139,10 @@ public class Parser {
       }
     }
     return tasks;
+  }
+
+  public static String[] parseDescription(Task task) {
+    String[] keywords = task.getDescription().split(" ");
+    return keywords;
   }
 }
