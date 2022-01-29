@@ -9,11 +9,27 @@ public class TaskList {
         this.arr = arr;
     }
 
+    /**
+     * Print all the tasks in the ArrayList line by line.
+     * It will number each line respectively up to the array size.
+     *
+     * @param arr The given ArrayList of tasks that the user currently has.
+     */
+
     public void list(ArrayList<Task> arr) {
         for (int i = 0; i < arr.size(); i++) {
             System.out.println(i + 1 + "." + arr.get(i).toString());
         }
     }
+
+    /**
+     * Mark or unmark the respective index of the task in the ArrayList given by the input.
+     * Prints an acknowledgement if successful, else prints an edge case warning.
+     *
+     * @param input The respective index of the ArrayList needed to be mark or unmarked.
+     * @param arr The ArrayList with the current list of tasks.
+     * @throws NumberFormatException If input is less than or equals to zero.
+     */
 
     public void mark(String input, ArrayList<Task> arr) {
         try {
@@ -40,6 +56,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes the respective index of the task in the ArrayList given by the input.
+     * Prints an acknowledgement if successful, else prints an edge case warning.
+     *
+     * @param input The respective index of the ArrayList needed to be removed.
+     * @param arr The ArrayList with the current list of tasks.
+     * @throws NumberFormatException If input is less than or equals to zero.
+     */
+
     public void delete(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
@@ -53,25 +78,45 @@ public class TaskList {
                 arr.remove(delete);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("Error! Nothing to delete!");
         }
     }
 
+    /**
+     * Creates a new Deadline class with the input detailing the class variables.
+     * Adds the new Deadline class to the ArrayList.
+     * Prints an acknowledgement if successful.
+     *
+     * @param input The information required for the initialization of the Deadline class.
+     * @param arr The ArrayList with the current list of tasks.
+     * @throws IndexOutOfBoundsException If there are no details in input.
+     */
+
     public void deadline(String input, ArrayList<Task> arr) {
         try {
-            String nondead = input.split("deadline ", 2)[1]; // Remove instruction
-            String task = nondead.split(" /by ", 2)[0]; // Split to task
-            String date = nondead.split(" /by ", 2)[1]; // Split to date
+            String unprocessed = input.split("deadline ", 2)[1]; // Remove instruction
+            String task = unprocessed.split(" /by ", 2)[0]; // Split to task
+            String date = unprocessed.split(" /by ", 2)[1]; // Split to date
             Deadline newDeadline = new Deadline(task, date);
             arr.add(newDeadline);
             System.out.println("Got it! I've added this task: \n    " +
-                    newDeadline.toString() + "\n" +
+                    newDeadline + "\n" +
                     "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
         }
     }
+
+    /**
+     * Creates a new Event class with the input detailing the class variables.
+     * Adds the new Event class to the ArrayList.
+     * Prints an acknowledgement if successful.
+     *
+     * @param input The information required for the initialization of the Event class.
+     * @param arr The ArrayList with the current list of tasks.
+     * @throws IndexOutOfBoundsException If there are no details in input.
+     */
 
     public void event(String input, ArrayList<Task> arr) {
         try {
@@ -81,7 +126,7 @@ public class TaskList {
             Event newEvent = new Event(task, date);
             arr.add(newEvent);
             System.out.println("Got it! I've added this task: \n    " +
-                    newEvent.toString() + "\n" +
+                    newEvent + "\n" +
                     "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me an event to record.");
@@ -111,7 +156,17 @@ public class TaskList {
         }
     }
 
-    public void todo(String input, ArrayList<Task> arr) {
+    /**
+     * Creates a new Task class with the input detailing the class variables.
+     * Adds the new Task class to the ArrayList.
+     * Prints an acknowledgement if successful.
+     *
+     * @param input The information required for the initialization of the Task class.
+     * @param arr The ArrayList with the current list of tasks.
+     * @throws IndexOutOfBoundsException If there are no details in input.
+     */
+
+    public void toDo(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
             ToDo newToDo = new ToDo(word);

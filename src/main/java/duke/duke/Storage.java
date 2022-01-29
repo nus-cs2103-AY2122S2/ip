@@ -16,6 +16,15 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an ArrayList after reading from 'data/duke.ser'.
+     * Then, creates an array with all previous tasks.
+     *
+     * @return Old task list.
+     * @throws IOException If file not found.
+     * @throws ClassNotFoundException If unable to find Task class to cast ArrayList to.
+     */
+
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         FileInputStream readData = new FileInputStream("data/duke.ser");
         ObjectInputStream readStream = new ObjectInputStream(readData);
@@ -24,6 +33,15 @@ public class Storage {
         readStream.close();
         return arr;
     }
+
+    /**
+     * Save the current task list to new file 'data/duke.ser'
+     * If this is first boot (no file initialized yet), will create directory "data" and
+     * then create the new file to save to.
+     * If file already exists, creates new file and overwrites previous one.
+     *
+     * @param arr Current task list.
+     */
 
     public void save(ArrayList<Task> arr) {
         File directory = new File("data");
