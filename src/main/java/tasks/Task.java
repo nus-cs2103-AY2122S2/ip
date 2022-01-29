@@ -1,15 +1,16 @@
-package task;
+package tasks;
 
+import enums.TaskType;
 import java.util.ArrayList;
 
 public abstract class Task {
     protected String description;
-    protected String taskType;
+    protected TaskType taskType;
     protected boolean isDone;
 
     protected static final ArrayList<Task> TASKS = new ArrayList<>();
 
-    public Task(String description, String taskType) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
@@ -41,7 +42,7 @@ public abstract class Task {
         return this.description;
     }
 
-    public String getTaskType() { return this.taskType; }
+    public TaskType getTaskType() { return this.taskType; }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");

@@ -1,10 +1,12 @@
-package task;
+package tasks;
+
+import enums.TaskType;
 
 public class Event extends Task{
     protected String eventTime;
 
     public Event(String description, String eventTime) {
-        super(description, "E");
+        super(description, TaskType.Event);
         this.eventTime = eventTime;
     }
 
