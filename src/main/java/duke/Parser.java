@@ -47,7 +47,8 @@ public class Parser {
      * @throws DukeException A foreseeable error has occurred
      * @throws IOException Save file error occurred
      */
-    public void runCmd(String cmd, String task, TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void runCmd(String cmd, String task, TaskList tasks, Ui ui, Storage storage)
+            throws DukeException, IOException {
 
         int idx;
         Task newTask;
@@ -105,28 +106,27 @@ public class Parser {
             storage.write(tasks.getTaskList());
             ui.showAdded(newTask);
             break;
+        default:
         }
     }
 
     /**
      * Checks the validity of the index of the array list
-     * @param str_idx index of list in string type
+     * @param strIdx index of list in string type
      * @param listSize size of list
      * @return the index of the list
      * @throws DukeException A foreseeable error has occured
      */
-    private int getIdx(String str_idx, int listSize) throws DukeException {
+    private int getIdx(String strIdx, int listSize) throws DukeException {
         try {
-            int idx = Integer.parseInt(str_idx) - 1;
+            int idx = Integer.parseInt(strIdx) - 1;
 
             if (!(idx >= 0 && idx < listSize)) {
                 throw new DukeException("duke.Task does not exist");
             }
 
             return idx;
-        }
-
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("There is no index");
         }
 
@@ -148,13 +148,9 @@ public class Parser {
         } else {
             if (splitTask[0].equals("") && splitTask[1].equals("")) {
                 throw new DukeException("No task in instruction");
-            }
-
-            else if (splitTask[0].equals("")) {
+            } else if (splitTask[0].equals("")) {
                 throw new DukeException("Description of task not found");
-            }
-
-            else if (splitTask[1].equals("")) {
+            } else if (splitTask[1].equals("")) {
                 throw new DukeException("Datetime of task not found");
             }
         }
@@ -176,7 +172,10 @@ public class Parser {
         try {
             return dateFormat.parse(datetime);
         } catch (ParseException e) {
-            throw new DukeException("That is not a date.\n\t\tRequires this format: dd-MMM-yyyy h.mma\n\t\tFor Example: 3-jan-2011 1.00pm");
+            throw new DukeException("""
+                    That is not a date.
+                    \t\tRequires this format: dd-MMM-yyyy h.mma
+                    \t\tFor Example: 3-jan-2011 1.00pm""");
         }
     }
 }
