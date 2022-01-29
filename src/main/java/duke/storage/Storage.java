@@ -19,11 +19,12 @@ import java.io.IOException;
  * A class that handles create, read and write file operations.
  */
 public class Storage {
+    private final File directory;
     private final File dataFile;
 
     /**
-     * Constructor to initialize an instance of Storage class with folder
-     * name and file name.
+     * Constructor to initialize an instance of Storage class with
+     * folder name and file name.
      *
      * @param folderName Folder name of the data file
      * @param fileName File name of the data file
@@ -31,7 +32,7 @@ public class Storage {
      * @throws IOException If the storage file cannot be initialised
      */
     public Storage(String folderName, String fileName) throws DukeException, IOException {
-        File directory = initialiseDirectory(folderName);
+        directory = initialiseDirectory(folderName);
         dataFile = initialiseFile(directory, fileName);
     }
 
@@ -40,7 +41,7 @@ public class Storage {
      * Creates the directory if it does not exist.
      *
      * @param folderName Folder name of the data file
-     * @return The relative path of the directory
+     * @return The relative pathname of the directory
      * @throws DukeException If the directory cannot be initialised
      */
     private File initialiseDirectory(String folderName) throws DukeException {
@@ -62,7 +63,7 @@ public class Storage {
      * Initializes the data file.
      * Creates the data file if it does not exist.
      *
-     * @param directory Relative path of the directory
+     * @param directory Relative pathname of the directory
      * @param fileName File name of the data file
      * @return The data file
      * @throws IOException If the data file cannot be initialised
@@ -80,6 +81,24 @@ public class Storage {
         } else {
             throw new IOException("\t" + "Unable to initialise file");
         }
+    }
+
+    /**
+     * Returns the relative pathname of the directory.
+     *
+     * @return The relative pathname of the directory
+     */
+    public File getDirectory() {
+        return directory;
+    }
+
+    /**
+     * Returns the data file.
+     *
+     * @return The data file
+     */
+    public File getDataFile() {
+        return dataFile;
     }
 
     /**
