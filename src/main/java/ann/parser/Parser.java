@@ -4,7 +4,20 @@ import ann.commands.*;
 import ann.data.InputPattern;
 import ann.data.tasks.TaskType;
 
+/**
+ * Represents a parser to parse user input into appropriate commands.
+ *
+ * @author Hong Anh
+ * @version 0.1
+ */
 public class Parser {
+
+    /**
+     * Returns a Command which is the result of parsing the user input.
+     *
+     * @param input a String which is the user input.
+     * @return a Command.
+     */
     public static Command parse(String input) {
         if(input.toLowerCase().equals("bye")) {
             return new ExitCommand();
@@ -31,6 +44,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of an 'add' command and returns the appropriate Command object.
+     *
+     * @param input a String which represents the contents of the 'add' command.
+     * @return an appropriate Command object.
+     */
     private static Command handleAdd(String input) {
         if(input.isBlank()) {
             return new IncorrectCommand("Oops! Please specify the task you wish to add!");
@@ -51,6 +70,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of a 'mark' command and returns the appropriate Command object.
+     *
+     * @param index a String which should contain the index of the Task to be mark as done.
+     * @return an appropriate Command object.
+     */
     private static Command handleMark(String index) {
         if(index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nmark [task number]");
@@ -64,6 +89,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of an 'unmark' command and returns the appropriate Command object.
+     *
+     * @param index a String which should contain the index of the Task to be mark as not done.
+     * @return an appropriate Command object.
+     */
     private static Command handleUnmark(String index) {
         if(index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nunmark [task number]");
@@ -77,6 +108,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of a 'delete' command and returns the appropriate Command object.
+     *
+     * @param index a String which should contain the index of the Task to be deleted.
+     * @return an appropriate Command object.
+     */
     private static Command handleDelete(String index) {
         if(index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\ndelete [task number]");
@@ -90,6 +127,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of an 'add todo' command and returns the appropriate Command object.
+     *
+     * @param todoContent a String which should contain the contents of the Task to be added.
+     * @return an appropriate Command object.
+     */
     private static Command handleTodo(String todoContent) {
         if(todoContent.isBlank()) {
             return new IncorrectCommand("Oops! Please add a description for the todo!");
@@ -98,6 +141,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of an 'add event' command and returns the appropriate Command object.
+     *
+     * @param eventComponents a String which should contain the information of the Event to be added.
+     * @return an appropriate Command object.
+     */
     private static Command handleEvent(String eventComponents) {
         if(eventComponents.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm");
@@ -117,6 +166,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the contents of a 'add deadline' command and returns the appropriate Command object.
+     *
+     * @param deadlineComponents a String which should contain the information of the Deadline to be added.
+     * @return an appropriate Command object.
+     */
     private static Command handleDeadline(String deadlineComponents) {
         if(deadlineComponents.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nadd deadline [content] /by yyyy-MM-dd HH:mm");
