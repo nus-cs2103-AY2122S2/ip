@@ -78,7 +78,7 @@ public class TaskList {
                 arr.remove(delete);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("Error! Nothing to delete!");
         }
     }
@@ -95,13 +95,13 @@ public class TaskList {
 
     public void deadline(String input, ArrayList<Task> arr) {
         try {
-            String nondead = input.split("deadline ", 2)[1]; // Remove instruction
-            String task = nondead.split(" /by ", 2)[0]; // Split to task
-            String date = nondead.split(" /by ", 2)[1]; // Split to date
+            String unprocessed = input.split("deadline ", 2)[1]; // Remove instruction
+            String task = unprocessed.split(" /by ", 2)[0]; // Split to task
+            String date = unprocessed.split(" /by ", 2)[1]; // Split to date
             Deadline newDeadline = new Deadline(task, date);
             arr.add(newDeadline);
             System.out.println("Got it! I've added this task: \n    " +
-                    newDeadline.toString() + "\n" +
+                    newDeadline + "\n" +
                     "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
@@ -126,7 +126,7 @@ public class TaskList {
             Event newEvent = new Event(task, date);
             arr.add(newEvent);
             System.out.println("Got it! I've added this task: \n    " +
-                    newEvent.toString() + "\n" +
+                    newEvent + "\n" +
                     "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me an event to record.");

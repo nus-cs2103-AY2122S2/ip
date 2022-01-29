@@ -22,7 +22,6 @@ public class Duke {
         ui.showWelcome(); // Welcome Page
         Parser reader = new Parser();
         while (true) {
-            // Let's Go!
             String fullCommand = ui.readCommand();
             reader.parse(fullCommand, tasks, storage);
             ui.showLine();
