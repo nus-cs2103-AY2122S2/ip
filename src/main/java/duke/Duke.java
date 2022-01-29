@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-
+/**
+ * This class consists of the main method, and to initialise the program.
+ */
 public class Duke {
 
     Ui ui;
@@ -12,6 +14,12 @@ public class Duke {
     Storage storage;
     //21/07/2011 10:48 AM
 
+    /**
+     * This is the constructor to create a new instance of Duke.
+     * @param filePath is the directory for the file location on the computer.
+     * @throws IOException if the file is corrupt or file is not found.
+     * @throws ParseException if the contents of the file is not in the correct format.
+     */
     public Duke (String filePath) throws IOException, ParseException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,7 +33,12 @@ public class Duke {
 
     }
 
-    public void run() throws IOException, DukeException, ParseException {
+    /**
+     * Starts the program Duke for the user
+     * @throws IOException if the file is corrupt or file is not found.
+     * @throws ParseException if the contents of the file is not in the correct format.
+     */
+    public void run() throws IOException, ParseException {
 
         Parser parser = new Parser();
 
@@ -39,18 +52,8 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         new Duke("data/tasks.txt").run();
     }
 
-
-
-    static void runHelpCommand() {
-        System.out.println("    Hello. You can run a few commands with this machine.");
-        System.out.println("    1. Type todo to create a task at hand. (eg. todo homework today)");
-        System.out.println("    2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM)");
-        System.out.println("    3. Type deadline to create an deadline. (eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)");
-        System.out.println("    4. Type list to see what are the tasks on hand.");
-
-    }
 }

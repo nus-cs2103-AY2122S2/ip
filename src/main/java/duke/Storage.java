@@ -10,17 +10,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * This class handles the file storage, loading and saving the list that the user has entered.
+ * After exiting the program, the data will be saved and reloaded again when the program starts again.
+ */
 public class Storage {
 
     String filePath;
     File file;
     boolean isFileOpen = false;
 
-    public Storage(String filePath) throws IOException {
+    /**
+     * Is a constructor for the instance of Storage. This also checks if the directory and file exists, if not
+     * it will create a new one in the respective directory.
+     * @param filePath the directory of the file.
+     */
+    public Storage(String filePath) {
         this.filePath = filePath;
         String basePath = new File("").getAbsolutePath();
-        //file = new File( basePath + "/" + filePath);
-
         String[] path = filePath.split("/");
         for (String s : path) {
             basePath = basePath + "/" + s;
@@ -34,15 +41,14 @@ public class Storage {
         }
     }
 
-    @Override
-    public String toString() {
-        if (isFileOpen) {
-            return "Success";
-        } else {
-            return "No success";
-        }
-    }
-
+    /**
+     *
+     * @return an ArrayList of tasks that was saved from previous sessions. If there was no saved data,
+     * it will return an empty ArrayList.
+     * @throws IOException when the file is corrupted.
+     * @throws ParseException when the text in the file is not recognised
+     * @throws DukeException when the command given by the user is not recognised.
+     */
     public ArrayList<Task> load() throws IOException, ParseException, DukeException {
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
@@ -92,6 +98,11 @@ public class Storage {
         }
     }
 
+    /**
+     * To append the task into the data file provided by the user.
+     * @param task the task that is to be stored.
+     * @throws IOException when there is an error opening the file.
+     */
     public void appendTask(Task task) throws IOException {
         FileWriter appendWriter = new FileWriter(file, true);
         String toPrint = task.toString() + task.getStatus() +  task.getDescription();
@@ -100,6 +111,11 @@ public class Storage {
         appendWriter.close();
     }
 
+    /**
+     * To clear the file and to rewrite all the Tasks in TaskLists into the file
+     * @param taskList the tasklist of the user in the current session
+     * @throws IOException when there is an error opening the file.
+     */
     public void rewriteTask(TaskList taskList) throws IOException {
         FileWriter rewriteWriter = new FileWriter(file, false);
         for (Task task: taskList.taskArrayList) {

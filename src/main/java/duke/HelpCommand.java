@@ -3,8 +3,19 @@ package duke;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * Runs the command for user to show the available commands available.
+ */
+
 public class HelpCommand extends Command {
 
+    /**
+     * Sends to the user interface the commands available for the user to use.
+     *
+     * @param taskList The TaskList of the current user.
+     * @param ui The user interface to show messages to users.
+     * @param storage The file system for reading and writing into the database.
+     */
     @Override
     void runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
         String message = "Hello. You can run a few commands with this machine.\n" +
