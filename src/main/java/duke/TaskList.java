@@ -22,8 +22,7 @@ public class TaskList implements Iterable<Task> {
      */
     public TaskList(List<String> tasks) {
         this.tasks = new ArrayList<>();
-        tasks.forEach(entry -> {
-            //parse entries
+        tasks.forEach(entry -> { // parse entries
             try {
                 this.tasks.add(Parser.parseStringToTask(entry));
             } catch (DukeException e) {
@@ -32,7 +31,6 @@ public class TaskList implements Iterable<Task> {
         });
     }
 
-
     /**
      * Returns `true` if this TaskList contains no `Task`.
      *
@@ -40,15 +38,6 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean isEmpty() {
         return this.tasks.isEmpty();
-    }
-
-    /**
-     * Gets the last Task added into this TaskList.
-     *
-     * @return the last Task added into this TaskList
-     */
-    public Task getLast() {
-        return this.tasks.get(this.tasks.size() - 1);
     }
 
     /**

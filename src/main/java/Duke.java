@@ -31,7 +31,7 @@ public class Duke {
         ui.showWelcome();
         boolean hasExit = false;
         while(!hasExit) {
-            // default case in Parser::parseCommand catches invalid commands
+            // default case in Parser::parseCommand handles invalid commands
             String fullCommand = ui.readCommand();
             if (fullCommand.isBlank()) {
                 continue;

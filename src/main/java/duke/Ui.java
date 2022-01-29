@@ -91,7 +91,6 @@ public class Ui {
         this.printWithDivider("Error: " + errorMessage);
     }
 
-
     /** Show a welcome message with the bot's name. */
     public void showWelcome() {
         String botName = "Duke, the Task Master";
@@ -106,7 +105,7 @@ public class Ui {
      *
      * @param messages the messages
      */
-    protected void printWithDivider(List<String> messages) {
+    public void printWithDivider(List<String> messages) {
         System.out.println("    -----------------------------------------------------------");
         for (String s : messages) {
             System.out.println(STR_PADDING + s);

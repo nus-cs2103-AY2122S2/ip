@@ -38,13 +38,13 @@ public class Storage {
     public List<String> read() throws DukeException {
         List<String> dataList;
 
-        // try block should populate dataList
+        // try block should populate dataList unless no r/w permission
         try (Scanner sc = new Scanner(dataFile)) {
             dataList = sc.useDelimiter("\\n")
                     .tokens()
                     .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
-            throw new DukeException("Unable to locate/read data file.");
+            throw new DukeException("Unable to locate/read file.");
         }
 
         // if dataList is empty, dataFile has no entry
@@ -64,12 +64,13 @@ public class Storage {
                 try {
                     fw.write(tasks.get(i).toFile());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new DukeException("Unable to write to file.");
                 }
             }
             return true;
         } catch (IOException e) {
-            throw new DukeException("Unable to locate/write to data file.");
+            // most likely r/w permissions
+            throw new DukeException("Unable to locate/write to file.");
         }
     }
 }
