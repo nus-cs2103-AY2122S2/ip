@@ -1,11 +1,17 @@
-import java.util.ArrayList;
+package ui;
+
+import exception.DukeException;
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
 
     TaskList tasks;
 
-    Ui(TaskList tasks) {
+    public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 

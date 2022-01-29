@@ -1,14 +1,19 @@
+package task;
+
+import exception.DukeException;
+import task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
 
     public ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -38,7 +43,7 @@ public class TaskList {
             }
             if (stringToAdd[0].equals("todo")) {
                 if (containsBy) {
-                    throw new DukeException("Todo cannot have a due date. Create an deadline or event instead :)");
+                    throw new DukeException("task.Todo cannot have a due date. Create an deadline or event instead :)");
                 } else {
                     task = new Todo(returnString);
                     System.out.println(task);

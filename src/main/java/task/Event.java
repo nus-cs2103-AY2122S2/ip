@@ -1,10 +1,14 @@
+package task;
+
+import task.Task;
+
 import java.time.LocalDate;
 
 public class Event extends Task {
 
     LocalDate date;
 
-    Event(String details, String date) {
+    public Event(String details, String date) {
         super(details);
         this.date = LocalDate.parse(date);
     }

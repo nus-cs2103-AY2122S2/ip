@@ -1,8 +1,14 @@
+package parser;
+
+import exception.DukeException;
+import storage.Storage;
+import task.TaskList;
+
 public class Parser {
 
     TaskList tasks;
 
-    Parser(TaskList tasks) {
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 

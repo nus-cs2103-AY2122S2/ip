@@ -1,3 +1,5 @@
+package task;
+
 abstract public class Task {
     protected String details;
     protected boolean isDone;
