@@ -3,11 +3,11 @@ package duke.main;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.functionality.Parser;
 import duke.functionality.Storage;
 import duke.functionality.TaskList;
 import duke.functionality.Ui;
-import duke.exception.DukeException;
 
 /**
  * Represents the starting point of the Duke project. A <code> Duke </code> object corresponds
@@ -41,7 +41,7 @@ public class Duke {
     public void run() {
         this.ui.showGreeting();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
@@ -60,6 +60,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
-        new Duke(home,"/data/TaskData.txt").run();
+        new Duke(home, "/data/TaskData.txt").run();
     }
 }

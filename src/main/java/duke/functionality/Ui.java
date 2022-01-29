@@ -1,16 +1,16 @@
 package duke.functionality;
 
-import duke.exception.BlankCommandException;
-
 import java.util.Scanner;
+
+import duke.exception.BlankCommandException;
 
 /**
  * Represents the User Interface of the Duke project. A <code> Ui </code> object corresponds
  * to all user interface displays. Such as the messages.
  */
 public class Ui {
-    private final String GREETING = "Hello! I'm TaskJamie\nWhat can i do for you?";
-    private final String ENDING =  "Bye. Hope to see you again soon!";
+    private static final String GREETING = "Hello! I'm TaskJamie\nWhat can i do for you?";
+    private static final String ENDING = "Bye. Hope to see you again soon!";
 
     /**
      * Returns nothing, but prints out the greeting message of Duke TaskBot.
@@ -36,7 +36,9 @@ public class Ui {
     /**
      * Returns nothing, but prints out the error messages when loading in the text file.
      */
-    public void showLoadingError(String error) { System.out.println(error); }
+    public void showLoadingError(String error) {
+        System.out.println(error);
+    }
 
     /**
      * Returns a full command gotten from user input.

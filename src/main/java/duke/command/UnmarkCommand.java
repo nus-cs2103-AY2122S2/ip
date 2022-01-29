@@ -6,7 +6,7 @@ import duke.functionality.TaskList;
  * Represents the unmark command. A <code>UnmarkCommand</code> object allows users to set the corresponding task as
  * not done.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
 
     /**
      * Constructor for the UnmarkCommand class.

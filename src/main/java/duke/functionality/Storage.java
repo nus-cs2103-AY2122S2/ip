@@ -1,16 +1,15 @@
 package duke.functionality;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents the Storage capabilities of the Duke project. A <code> Storage </code> object corresponds
@@ -25,7 +24,7 @@ public class Storage {
      * @param pwd user's current working directory.
      * @param path path to "/data/TaskData.txt".
      */
-    public Storage(String pwd, String path){
+    public Storage(String pwd, String path) {
         Storage.pwd = pwd;
         Storage.path = path;
     }
@@ -110,13 +109,13 @@ public class Storage {
         String output = "";
         String doneIcon = task.getStatusIcon();
         if (task instanceof Todo) {
-            if(doneIcon.equals("X")) {
+            if (doneIcon.equals("X")) {
                 output = "T|1|" + task.getDescription();
             } else {
                 output = "T|0|" + task.getDescription();
             }
         } else if (task instanceof Deadline) {
-            if(doneIcon.equals("X")) {
+            if (doneIcon.equals("X")) {
                 output = "D|1|" + task.getDescription() + "|" + Parser.dateToString(((Deadline) task).getDate())
                         + "|" + Parser.timeToString(((Deadline) task).getTime());
             } else {
@@ -124,7 +123,7 @@ public class Storage {
                         + "|" + Parser.timeToString(((Deadline) task).getTime());
             }
         } else if (task instanceof Event) {
-            if(doneIcon.equals("X")) {
+            if (doneIcon.equals("X")) {
                 output = "E|1|" + task.getDescription() + "|" + Parser.dateToString(((Event) task).getDate())
                         + "|" + Parser.timeToString(((Event) task).getStartTime())
                         + "|" + Parser.timeToString(((Event) task).getEndTime());

@@ -5,13 +5,13 @@ import duke.functionality.TaskList;
 /**
  * Represents the exit command. A <code>ExitCommand</code> object corresponds to exiting the Duke program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Constructor for ExitCommand class.
      */
     public ExitCommand() {
-        super(null, null,null);
+        super(null, null, null);
     }
 
     /**

@@ -5,7 +5,7 @@ import duke.functionality.TaskList;
 /**
  * Represents the print command. A <code>PrintCommand</code> object allows users to see all task in Duke TaskBot.
  */
-public class PrintCommand extends Command{
+public class PrintCommand extends Command {
 
     /**
      * Constructor for PrintCommand class.
