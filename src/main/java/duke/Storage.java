@@ -1,9 +1,6 @@
 package duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -11,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
- * The duke.Storage class, containing methods to create and load the folder and tasklist save file.
+ * The Storage class, containing methods to create and load the folder and tasklist save file.
  *
  * @author Jet Tan
  */
@@ -54,7 +51,7 @@ public class Storage {
             Task t = TaskList.getTasks().get(i);
             listString.append(i + 1).append(".").append(t.toString()).append("\n");
         }
-        PrintWriter out = new PrintWriter(TASKLIST_FILE_PATH);
+        PrintWriter out = new PrintWriter(new FileWriter(TASKLIST_FILE_PATH, false));
         out.println(listString);
         out.close();
     }

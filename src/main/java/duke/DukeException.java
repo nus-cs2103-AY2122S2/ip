@@ -2,7 +2,7 @@ package duke;
 
 public class DukeException extends RuntimeException {
     /**
-     * Constructor for a new instance of duke.DukeException.
+     * Constructor for a new instance of DukeException.
      *
      * @param e The error message of the exception.
      */
@@ -15,7 +15,7 @@ class UnknownCommandException extends DukeException {
     private final String msg;
 
     /**
-     * Constructor for a new instance of duke.UnknownCommandException.
+     * Constructor for a new instance of UnknownCommandException.
      *
      * @param e The error message of the exception.
      */
@@ -39,7 +39,7 @@ class InvalidInputException extends DukeException {
     private final String msg;
 
     /**
-     * Constructor for a new instance of duke.InvalidInputException.
+     * Constructor for a new instance of InvalidInputException.
      *
      * @param e The error message of the exception.
      */
@@ -63,7 +63,7 @@ class EmptyDescException extends DukeException {
     private final String msg;
 
     /**
-     * Constructor for a new instance of duke.EmptyDescException.
+     * Constructor for a new instance of EmptyDescException.
      *
      * @param e The error message of the exception.
      */

@@ -13,7 +13,7 @@ public class TaskList {
     /**
      * Getter for the TaskList.
      *
-     * @return the taskList
+     * @return the TaskList
      */
     public static ArrayList<Task> getTasks() {
         return taskList;

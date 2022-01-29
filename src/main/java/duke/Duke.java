@@ -1,8 +1,9 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.PrintStream;
 
 /**
  * Chatbot that supports tracking tasks as added by the user. Created as part of CS2103T.
@@ -10,10 +11,11 @@ import java.util.Scanner;
  * @author Jet Tan
  */
 public class Duke {
+
     /**
-     * Driver method of the chatbot.
+     * Constructor for an instance of the Chatbot.
      */
-    public static void main(String[] args) {
+    public Duke() {
         try {
             Storage.initFiles();
         } catch (IOException e) {
@@ -24,15 +26,32 @@ public class Duke {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Ui.greet();
-        Scanner s = new Scanner(System.in);
-        while (s.hasNextLine()) {
-            String input = s.nextLine().toLowerCase().trim();
-            try {
-                Parser.process(input);
-            } catch (DukeException | IOException e) {
-                System.out.println(e);
-            }
+    }
+
+    /**
+     * Returns a String containing the response based on user input.
+     *
+     * @param input the user input
+     * @return String containing the response based on user input
+     */
+    String getResponse(String input) {
+        input = input.toLowerCase().trim();
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+
+            PrintStream oldStream = System.out;
+
+            System.setOut(printStream);
+
+            Parser.process(input);
+
+            System.out.flush();
+            System.setOut(oldStream);
+            return outputStream.toString();
+        } catch (DukeException | IOException e) {
+            System.out.println(e);
         }
+        return "Invalid input.";
     }
 }

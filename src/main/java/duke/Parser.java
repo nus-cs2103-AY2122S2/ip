@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The duke.Parser class, containing the parsing logic for the bot.
+ * The Parser class, containing the parsing logic for the bot.
  *
  * @author Jet Tan
  */
@@ -14,7 +14,7 @@ public class Parser {
      * Processes the input.
      *
      * @param input input of the user
-     * @throws DukeException duke.InvalidInputException, EmptyDescDescription, duke.UnknownCommandException
+     * @throws DukeException duke.InvalidInputException, EmptyDescDescription, UnknownCommandException
      */
     public static void process(String input) throws DukeException, IOException {
         String[] arr = input.split(" ");

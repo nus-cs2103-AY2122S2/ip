@@ -13,7 +13,7 @@ public class Task {
      * Constructor for a new instance of Task.
      * By default, the isDone status is set to false.
      *
-     * @param description the description of the Task
+     * @param description The description of the Task
      */
     public Task(String description) {
         this.description = description;

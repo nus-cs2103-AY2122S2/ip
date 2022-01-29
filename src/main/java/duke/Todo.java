@@ -1,15 +1,15 @@
 package duke;
 
 /**
- * The duke.Todo class.
+ * The Todo class.
  *
  * @author Jet Tan
  */
 public class Todo extends Task {
     /**
-     * Constructor for a new instance of duke.Todo, containing the description of the duke.Todo.
+     * Constructor for a new instance of Todo, containing the description of the Todo.
      *
-     * @param description The description of the duke.Todo.
+     * @param description The description of the Todo.
      */
     public Todo(String description) {
         super(description);
