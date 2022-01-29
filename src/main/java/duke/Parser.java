@@ -56,6 +56,8 @@ public class Parser {
             return new TaskCommand(TaskCommand.TaskType.deadline, command);
         } else if (command.contains("/help")) {
             return new HelpCommand();
+        } else if (command.contains("find")) {
+            return new FindCommand(command.substring(5));
         } else {
             throw new DukeException("Invalid Command.");
         }
