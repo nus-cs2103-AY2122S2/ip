@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+import duke.commands.*;
+import duke.exceptions.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -55,7 +64,7 @@ public class DukeParser {
         return true;
     }
 
-    public static Command createCommand(String[] arg, String cmd) throws DukeException{
+    public static Command createCommand(String[] arg, String cmd) throws DukeException {
         if(cmd.equals("bye")){
             if(arg.length == 1){
                 return new ExitCommand();

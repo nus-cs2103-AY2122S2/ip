@@ -1,6 +1,12 @@
+package duke;
+
+import duke.commands.Command;
+import duke.parser.DukeParser;
+import duke.storage.Storage;
+import duke.tasklist.DukeList;
+import duke.ui.Ui;
+
 import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
 
 public class Duke {
 
@@ -8,7 +14,7 @@ public class Duke {
 
     public static void main(String[] args) throws Exception{
         Ui ui = new Ui();
-        Storage storage = new Storage("../../data.txt");
+        Storage storage = new Storage("src/data.txt");
         ui.showWelcome();
         Scanner s = new Scanner(System.in);
         boolean isExit = false;

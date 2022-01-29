@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.tasklist.DukeList;
+import duke.task.Task;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

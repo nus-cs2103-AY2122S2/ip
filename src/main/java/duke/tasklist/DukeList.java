@@ -1,9 +1,11 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+package duke.tasklist;
+
+import duke.storage.Storage;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 import java.util.List;
 
 public class DukeList {
@@ -11,7 +13,7 @@ public class DukeList {
     public List<Task> a;
     private Storage storage;
 
-    public static final String STORAGE_PATH = "../../data.txt";
+    public static final String STORAGE_PATH = "src/data.txt";
 
     public DukeList(Storage s){
         this.a = s.load();
@@ -97,7 +99,7 @@ public class DukeList {
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
         for(Task t: a){
-            if (t instanceof Events || t instanceof Deadlines ){
+            if (t instanceof Events || t instanceof Deadlines){
                 if(t.date.isEqual(cur)) {
                     b = false;
                     day = day + "     " + t.show() + "\n";

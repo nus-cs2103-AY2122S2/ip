@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.task.Task;
+import duke.parser.DukeParser;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

@@ -1,14 +1,19 @@
-public class UnMarkCommand extends Command{
+package duke.commands;
+
+import duke.tasklist.DukeList;
+import duke.ui.Ui;
+
+public class DeleteCommand extends Command{
 
     private int index;
 
-    public UnMarkCommand(int x){
+    public DeleteCommand(int x){
         index = x;
     }
 
     @Override
     public void execute(Ui ui, DukeList tasks){
-        tasks.unmark(index);
+        tasks.delete(index);
     }
 
     @Override
