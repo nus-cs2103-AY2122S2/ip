@@ -1,3 +1,5 @@
+package athena.tasks;
+
 public abstract class Task {
     public static final char SAVE_SEPARATOR = '|';
     private final String description;

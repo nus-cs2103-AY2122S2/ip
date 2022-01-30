@@ -1,3 +1,8 @@
+package athena.commands;
+
+import athena.tasks.TaskList;
+import athena.ui.Ui;
+
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {

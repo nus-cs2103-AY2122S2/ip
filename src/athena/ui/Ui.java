@@ -1,4 +1,7 @@
 // Abstract out the messages
+package athena.ui;
+
+import athena.tasks.TaskList;
 
 import java.util.Scanner;
 

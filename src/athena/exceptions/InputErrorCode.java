@@ -1,3 +1,5 @@
+package athena.exceptions;
+
 public enum InputErrorCode {
     INVALID_COMMAND,
     MISSING_TASK_NUMBER,

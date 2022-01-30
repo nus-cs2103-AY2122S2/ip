@@ -1,4 +1,14 @@
+package athena;
+
 import java.io.IOException;
+
+import athena.commands.Command;
+import athena.commands.ShutdownCommand;
+import athena.exceptions.InputException;
+import athena.parser.Parser;
+import athena.storage.Storage;
+import athena.tasks.TaskList;
+import athena.ui.Ui;
 
 public class Athena {
     private static final String SAVE_DIRECTORY = "data";

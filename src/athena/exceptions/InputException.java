@@ -1,3 +1,5 @@
+package athena.exceptions;
+
 public class InputException extends Exception {
     private final InputErrorCode inputErrorCode;
 

@@ -1,3 +1,10 @@
+package athena.commands;
+
+import athena.exceptions.InputErrorCode;
+import athena.exceptions.InputException;
+import athena.tasks.TaskList;
+import athena.ui.Ui;
+
 public class UnmarkCommand extends Command {
     private final int taskNumber;
 
