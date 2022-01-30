@@ -2,11 +2,11 @@ package echo.command;
 
 import java.io.IOException;
 
-import echo.main.EchoException;
 import echo.storage.Storage;
 import echo.task.TaskList;
 import echo.task.TodoTask;
 import echo.ui.Ui;
+import echo.utils.EchoException;
 
 /**
  * This class inherits from the Command class and encapsulates the todo command.
@@ -35,14 +35,16 @@ public class TodoCommand extends Command {
      * @param ui Ui that deals with user interactions.
      * @param storage Storage deals with loading tasks from the file and saving tasks in the file.
      *
+     * @return String message representing command successful execution.
+     *
      * @throws EchoException If input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EchoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EchoException {
         try {
             tasks.add(new TodoTask(DESCRIPTION));
-            ui.showAdd(tasks.taskStatus(tasks.size() - 1), tasks.size());
             storage.save(tasks);
+            return ui.showAdd(tasks.taskStatus(tasks.size() - 1), tasks.size());
         } catch (IOException e) {
             throw new EchoException("Unable to access folder: " + storage.filePath());
         }

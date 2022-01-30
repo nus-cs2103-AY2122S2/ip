@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import echo.command.ByeCommand;
 import echo.command.Command;
 import echo.command.DeadlineCommand;
 import echo.command.DeleteCommand;
@@ -14,13 +15,15 @@ import echo.command.ListCommand;
 import echo.command.MarkCommand;
 import echo.command.TodoCommand;
 import echo.command.UnmarkCommand;
-import echo.main.EchoException;
-import echo.ui.Ui;
+import echo.utils.EchoException;
 
 /**
  * Parser encapsulates a parser to deal with making sense of the user command.
  */
 public class Parser {
+
+    /** Is user exited */
+    private static boolean isExit = false;
 
     /**
      * Parse user command and determines action to perform.
@@ -62,8 +65,7 @@ public class Parser {
                     // "/" not specified in input.
                     if (!input.contains("/")) {
                         throw new EchoException("Please specify the time of the task: \n"
-                                + Ui.addPrefix("deadline <description> /by <yyyy-mm-dd> <24hr time> \n")
-                                + Ui.addPrefix("event <description> /at <yyyy-mm-dd> <24hr time>"));
+                                + "<command> <description> /by <yyyy-mm-dd> <24hr time>");
                     }
 
                     try {
@@ -78,7 +80,7 @@ public class Parser {
                         }
                     } catch (DateTimeParseException e) {
                         throw new EchoException("Invalid format. Follow the <yyyy-mm-dd> <24hr time> format."
-                                + "\n" + Ui.addPrefix("E.g. 2019-10-15 1800"));
+                                + "\n" + "E.g. 2019-10-15 1800");
                     }
                 }
             case MarkCommand.COMMAND:
@@ -86,29 +88,31 @@ public class Parser {
             case DeleteCommand.COMMAND:
                 if (splitSpace.length == 1) {
                     // If second input (task number) is not specified
-                    throw new EchoException("Please specify the task number. Eg. mark 1, unmark 1, delete 1");
+                    throw new EchoException("Please specify the task number. Eg. mark 1");
                 }
 
                 // Parse second input into an int, throws NumberFormatException if it's not an int.
                 try {
                     int taskIndex = Integer.parseInt(splitSpace[1]) - 1;
                     if (command.equals(MarkCommand.COMMAND)) {
-                        return prepareMark(taskIndex);
+                        return prepareMarkCommand(taskIndex);
                     } else if (command.equals(UnmarkCommand.COMMAND)) {
-                        return prepareUnmark(taskIndex);
+                        return prepareUnmarkCommand(taskIndex);
                     } else {
-                        return prepareDelete(taskIndex);
+                        return prepareDeleteCommand(taskIndex);
                     }
                 } catch (NumberFormatException nfe) {
                     // Second input provided by user is not an int.
-                    throw new EchoException("Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
+                    throw new EchoException("Second input must be an integer. Eg. mark 1");
                 }
             case FindCommand.COMMAND:
                 if (splitSpace.length == 1) {
                     // If second input (description) is not specified
                     throw new EchoException("Please specify the description to find!");
                 }
-                return prepareFind(input.substring(command.length() + 1).trim());
+                return prepareFindCommand(input.substring(command.length() + 1).trim());
+            case ByeCommand.COMMAND:
+                return prepareByeCommand();
             default:
                 return prepareHelpCommand();
             }
@@ -116,6 +120,15 @@ public class Parser {
             // Deals with input that is just white space.
             throw new EchoException("Invalid input!!!");
         }
+    }
+
+    /**
+     * Is user exited.
+     *
+     * @return True if user is exited; False otherwise.
+     */
+    public static boolean isExit() {
+        return isExit;
     }
 
     /**
@@ -186,7 +199,7 @@ public class Parser {
      *
      * @return MarkCommand.
      */
-    private static Command prepareMark(int i) {
+    private static Command prepareMarkCommand(int i) {
         return new MarkCommand(i);
     }
 
@@ -197,7 +210,7 @@ public class Parser {
      *
      * @return UnmarkCommand.
      */
-    private static Command prepareUnmark(int i) {
+    private static Command prepareUnmarkCommand(int i) {
         return new UnmarkCommand(i);
     }
 
@@ -208,7 +221,7 @@ public class Parser {
      *
      * @return DeleteCommand.
      */
-    private static Command prepareDelete(int i) {
+    private static Command prepareDeleteCommand(int i) {
         return new DeleteCommand(i);
     }
 
@@ -218,7 +231,7 @@ public class Parser {
      * @param desc Description to find.
      * @return FindCommand.
      */
-    private static Command prepareFind(String desc) {
+    private static Command prepareFindCommand(String desc) {
         return new FindCommand(desc);
     }
 
@@ -229,5 +242,15 @@ public class Parser {
      */
     private static Command prepareHelpCommand() {
         return new HelpCommand();
+    }
+
+    /**
+     * Prepare bye command.
+     *
+     * @return ByeCommand.
+     */
+    private static Command prepareByeCommand() {
+        isExit = true;
+        return new ByeCommand();
     }
 }

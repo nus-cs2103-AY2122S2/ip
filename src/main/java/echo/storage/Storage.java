@@ -10,11 +10,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import echo.main.EchoException;
 import echo.task.DeadlineTask;
 import echo.task.EventTask;
 import echo.task.TaskList;
 import echo.task.TodoTask;
+import echo.utils.EchoException;
 
 
 /**
