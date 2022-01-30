@@ -171,6 +171,12 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Finds the task based on search key word.
+     *
+     * @param taskList The tasklist containing all the tasks.
+     * @param userInput The String user input containing the key word to search.
+     */
     public void findTask(TaskList taskList, String userInput) {
         TaskList foundTasks = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
