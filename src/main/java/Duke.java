@@ -1,8 +1,6 @@
-package duke;
-
-import tasklist.TaskList;
-import util.Parser;
-import util.UI;
+import duke.tasklist.TaskList;
+import duke.util.Parser;
+import duke.util.UI;
 import java.io.*;
 
 public class Duke {

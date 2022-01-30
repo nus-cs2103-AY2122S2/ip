@@ -1,6 +1,6 @@
-package util;
+package duke.util;
 
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

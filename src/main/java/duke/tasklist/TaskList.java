@@ -1,15 +1,15 @@
-package tasklist;
+package duke.tasklist;
 
 import java.util.ArrayList;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.util.UI;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
-import util.WriteToFile;
-import util.UI;
-import dukeexception.DukeException;
+import duke.util.WriteToFile;
+import duke.dukeexception.DukeException;
 
 public class TaskList {
     ArrayList<Task> Tasks = new ArrayList<>();

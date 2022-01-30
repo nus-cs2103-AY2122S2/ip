@@ -1,28 +1,30 @@
-package tasks;
+package duke.tasks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
-public class Deadline extends Task {
-    String deadline;
+public class Event extends Task {
+    String event;
     LocalDate time;
 
     DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder()
             .append(DateTimeFormatter.ofPattern(
                     "" +
-                            "[yyyy-MM-dd HH:mm:ss]" +
-                            "[yyyy-MM-dd]" +
-                            "[yyyy/MM/dd]" +
-                            "[yyyy-MM-dd HH:mm a]"
+                    "[yyyy-MM-dd HH:mm:ss]" +
+                    "[yyyy-MM-dd]" +
+                    "[yyyy/MM/dd]" +
+                    "[yyyy-MM-dd HH:mm a]"
             ));
 
     DateTimeFormatter dateTimeFormatter = dateTimeFormatterBuilder.toFormatter();
 
-    public Deadline(String deadline, String time) {
-        super(deadline);
-        this.deadline = deadline;
+
+    public Event(String event, String time) throws DateTimeException {
+        super(event);
+        this.event = event;
+        System.out.println(time);
 
         try {
             this.time = LocalDate.parse(time, dateTimeFormatter);
@@ -34,6 +36,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String temp = time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + super.toString() + "(by: " + temp + ")";
+        return "[E]" + super.toString() + "(at: " + temp + ")";
     }
 }

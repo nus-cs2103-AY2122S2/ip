@@ -1,4 +1,4 @@
-package util;
+package duke.util;
 
 /**
  * Handles outputs to interact with user
