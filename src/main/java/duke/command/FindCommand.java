@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import duke.task.Task;
 import duke.util.Save;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * This FindCommand class will find a task name that has a matching given keyword when executed.
@@ -21,11 +20,10 @@ public class FindCommand extends Command {
      * Executes command by matching a keyword and printing the matched tasks that contains keyword.
      *
      * @param tasks TaskList of tasks.
-     * @param ui    Ui provided.
      * @param save  Saved history.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Save save) {
+    public String execute(TaskList tasks, Save save) {
         ArrayList<Task> taskArrList = tasks.getCurrentList();
         ArrayList<Boolean> keywordMatchedList = new ArrayList<>(tasks.getCount());
         boolean hasMatch = false;
@@ -42,21 +40,21 @@ public class FindCommand extends Command {
             hasMatch = hasMatch || x;
         }
 
-        System.out.println("\t____________________________________________________________");
+        String response = "";
         if (hasMatch) {
             int matchedTaskCount = 1;
-            System.out.println("\t Here are the matching tasks in your list:");
+            response = response.concat("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.getCount(); i++) {
                 if (keywordMatchedList.get(i)) {
                     Task task = tasks.getTask(i);
-                    String str = "\t " + matchedTaskCount + "." + task.track() + task.getStatus() + " " + task;
+                    String str = matchedTaskCount + "." + task.track() + task.getStatus() + " " + task;
                     matchedTaskCount++;
-                    System.out.println(str);
+                    response = response.concat("\n" + str);
                 }
             }
         } else {
-            System.out.println("\t No tasks found with keyword '" + this.keyword + "'.");
+            response = "No tasks found with keyword '" + this.keyword + "'.";
         }
-        System.out.println("\t____________________________________________________________");
+        return response;
     }
 }

@@ -5,57 +5,49 @@ import duke.command.Command;
 import duke.util.Parser;
 import duke.util.Save;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Represents a chatbot named Duke.
  */
 public class Duke {
     private TaskList taskList;
-    private Save save;
-    private Ui ui;
+    private final Save save;
 
     /**
-     * Constructor for Duke chatbot which initialises with a saved history Save, list of tasks TaskList, system UI Ui.
+     * Constructor for Duke chatbot which initialises with a saved history Save, list of tasks TaskList,
      */
     public Duke() {
         this.save = new Save();
         this.taskList = save.taskList();
-        this.ui = new Ui();
+        //        this.ui = new Ui();
     }
 
     /**
-     * Runs the Duke chatbot.
+     * Handles the user input and calls the command requested by user.
+     * @param input user input.
+     * @return String of executed command.
      */
-    public void run() {
-        this.ui.welcome();
-        boolean isRunning = true;
-
-        while (isRunning) {
-            String command = this.ui.readCommand();
-            try {
-                Command c = Parser.parse(command);
-                c.execute(this.taskList, this.ui, this.save);
-                if (c instanceof ByeCommand) {
-                    isRunning = false;
-                }
-            } catch (NullPointerException e) {
-                ui.showLine();
-                ui.tryAgain();
-                ui.showLine();
+    public String handleInput(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String output = "\n" + c.execute(this.taskList, this.save);
+            if (c instanceof ByeCommand) {
+                this.save.save();
             }
+            return output;
+        } catch (NullPointerException e) {
+            return "This command is invalid";
         }
-        this.save.save();
-        ui.close();
     }
-
 
     /**
-     * Main method to run
-     * @param args Command line arguments
+     * Returns a default response after receiving user input.
+     *
+     * @param input User input.
+     * @return Response.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String getResponse(String input) {
+        return "Wonka heard: " + input;
     }
+
 }

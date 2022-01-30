@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
+import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -56,9 +57,8 @@ public class Parser {
                         int taskNumMark = Integer.parseInt(markStr) - 1;
                         command = new MarkCommand(taskNumMark);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("\t____________________________________________________________");
-                        System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
-                        System.out.println("\t____________________________________________________________");
+                        String invalidMarkMessage = "☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
+                        command = new InvalidCommand(invalidMarkMessage);
                     }
                     break;
                 case UNMARK:
@@ -67,14 +67,20 @@ public class Parser {
                         int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
                         command = new UnmarkCommand(taskNumUnmark);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("\t____________________________________________________________");
-                        System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
-                        System.out.println("\t____________________________________________________________");
+                        String invalidUnmarkMessage = "☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
+                        command = new InvalidCommand(invalidUnmarkMessage);
                     }
                     break;
                 case TODO:
-                    Todo todo = new Todo(name);
-                    command = new AddCommand(todo);
+                    try {
+                        if (sizeOfInputArr == 1) {
+                            throw new InvalidCommandException("☹ Woof Woof!!! This command is unidentifiable!!!");
+                        }
+                        Todo todo = new Todo(name);
+                        command = new AddCommand(todo);
+                    } catch (InvalidCommandException e) {
+                        command = new InvalidCommand(e.getMessage());
+                    }
                     break;
                 case EVENT:
                     try {
@@ -86,9 +92,8 @@ public class Parser {
                         Event event = new Event(eventName, time);
                         command = new AddCommand(event);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("\t____________________________________________________________");
-                        System.out.println("\t☹ Please specify a date!!");
-                        System.out.println("\t____________________________________________________________");
+                        String invalidEventMessage = "☹ Please specify a date!!";
+                        command = new InvalidCommand(invalidEventMessage);
                     }
                     break;
                 case DEADLINE:
@@ -101,9 +106,8 @@ public class Parser {
                         Deadline deadline = new Deadline(deadlineName, date);
                         command = new AddCommand(deadline);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("\t____________________________________________________________");
-                        System.out.println("\t☹ Please specify a date!!");
-                        System.out.println("\t____________________________________________________________");
+                        String invalidDeadlineMessage = "☹ Please specify a date!!";
+                        command = new InvalidCommand(invalidDeadlineMessage);
                     }
                     break;
                 case DELETE:
@@ -111,9 +115,8 @@ public class Parser {
                         int taskNum = Integer.parseInt(tokens[1]) - 1;
                         command = new DeleteCommand(taskNum);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("\t____________________________________________________________");
-                        System.out.println("\t☹ Woof Woof!!! Please specify a task to be deleted!!!");
-                        System.out.println("\t____________________________________________________________");
+                        String invalidDeleteMessage = "☹ Woof Woof!!! Please specify a task to be deleted!!!";
+                        command = new InvalidCommand(invalidDeleteMessage);
                     }
                     break;
                 case FIND:
@@ -123,14 +126,10 @@ public class Parser {
                     throw new InvalidCommandException("\t☹ Woof Woof!!! This command is unidentifiable!!!");
                 }
             } catch (DukeException e) {
-                System.out.println("\t____________________________________________________________");
-                System.out.println(e.getMessage());
-                System.out.println("\t____________________________________________________________");
+                command = new InvalidCommand(e.getMessage());
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t ☹ Woof Woof!!! You haven't given me enough information for this action!!!");
-            System.out.println("\t____________________________________________________________");
+            command = new InvalidCommand("☹ Woof Woof!!! You haven't given me enough information for this action!!!");
         }
         return command;
     }

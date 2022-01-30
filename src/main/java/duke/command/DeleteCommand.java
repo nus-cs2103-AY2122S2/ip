@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.Task;
 import duke.util.Save;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * This DeleteCommand class will delete a task provided with a 0-based index when executed.
@@ -24,18 +23,14 @@ public class DeleteCommand extends Command {
      * Executes command by deleting the given indexed task from TaskList.
      *
      * @param tasks TaskList of tasks.
-     * @param ui    Ui provided.
      * @param save  Saved history.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Save save) {
+    public String execute(TaskList tasks, Save save) {
         Task deleteTask = tasks.getTask(this.taskNum);
         tasks.delete(this.taskNum);
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t Noted. I've removed this task:");
-        System.out.println("\t\t " + deleteTask.track() + deleteTask.getStatus() + " "
-                + deleteTask);
-        System.out.println("\t Now you have " + tasks.getCount() + " tasks in the list.");
-        System.out.println("\t____________________________________________________________");
+        String response = "Noted. I've removed this task:\n" + deleteTask.track() + deleteTask.getStatus() + " "
+                + deleteTask + "\nNow you have " + tasks.getCount() + " tasks in the list.";
+        return response;
     }
 }
