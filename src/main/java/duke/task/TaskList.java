@@ -63,7 +63,7 @@ public class TaskList {
      * A getter method to return the current entire taskList. 
      * @return ArrayList containing existing tasks. 
      */
-    protected ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return taskList;
     }
 

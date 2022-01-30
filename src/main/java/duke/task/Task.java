@@ -27,6 +27,15 @@ public abstract class Task {
     }
 
     /**
+     * Getter method to return the description of a Task. 
+     * @return A String representing the description of a Task. 
+     */
+    public String getDescription() {
+        //
+        return this.description;
+    }
+
+    /**
      * Setter method to mark the status of a Task as done.
      */
     public void markAsDone() {

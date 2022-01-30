@@ -31,6 +31,8 @@ public final class Parser {
                 return new MarkCommand(commandType, description, true);
             case UNMARK:
                 return new MarkCommand(commandType, description, false);
+            case FIND:
+                return new FindCommand(commandType, description);
             case TODO:
                 // Fallthrough
             case EVENT:

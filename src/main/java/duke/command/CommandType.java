@@ -13,6 +13,7 @@ public enum CommandType {
     MARK("mark", "\\d+"),
     UNMARK("unmark", "\\d+"),
     DELETE("delete", "\\d+"),
+    FIND("find", null), 
     TODO("todo", null),
     EVENT("event", "/at"),
     DEADLINE("deadline", "/by");
