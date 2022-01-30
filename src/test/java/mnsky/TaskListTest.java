@@ -31,7 +31,7 @@ public class TaskListTest {
         Task newTask = taskList.addTask("ggg ffff hh");
 
         assertEquals(newTask.getName(), "ggg ffff hh");
-        assertEquals(taskList.getTaskList().size(), 1);
-        assertEquals(taskList.getTaskList().get(0), newTask);
+        assertEquals(taskList.getListStrings().size(), 1);
+        assertEquals(taskList.getListStrings().get(0), "1. " + newTask.toString());
     }
 }
