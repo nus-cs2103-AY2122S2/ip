@@ -8,15 +8,40 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The Command object that represents the different commands of Duke.
+ */
 public abstract class Command{
+    /** The parameter entered by the user which varies based on the type of comments. */
     String parameter;
 
+    /**
+     * Creates a new Command.
+     *
+     * @param parameter The parameter entered by the user.
+     */
     protected Command(String parameter) {
         this.parameter = parameter;
     }
 
+    /**
+     * Runs the various commands based on the type of command it is.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions The exception from Duke if there are errors encountered.
+     */
     public abstract void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions;
 
+    /**
+     * Creates the command based on the user's input in the command line.
+     *
+     * @param command The type of command.
+     * @param parameter The parameter which varies based on the type of command.
+     * @return The command with its type based on command.
+     * @throws InvalidCommand If the user enters either an invalid command or empty command.
+     */
     public static Command getCommand(String command, String parameter) throws InvalidCommand {
         if (command.equals("BYE")) {
             return new ByeCommand(parameter);
@@ -40,11 +65,23 @@ public abstract class Command{
     }
 }
 
+/**
+ * The Bye command exits the Duke application.
+ */
 class ByeCommand extends Command {
+    /** Constructs a bye command without expecting a parameter. */
     ByeCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Causes the Duke application to exit.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         ui.showExitScreen();
@@ -52,22 +89,46 @@ class ByeCommand extends Command {
     }
 }
 
+/**
+ * The list command shows the task list to the user.
+ */
 class ListCommand extends Command {
+    /** Constructs the list command without expecting a parameter. */
     ListCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Shows all the tasks in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         ui.taskListDisplay.run(taskList);
     }
 }
 
+/**
+ * The mark command marks the tasks, representing the tasks as complete.
+ */
 class MarkCommand extends Command {
+    /** Constructs the mark command with index number of the item in the task list as the parameter. */
     MarkCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Marks the task indicated by the index in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (this.parameter.isBlank()) {
@@ -85,11 +146,23 @@ class MarkCommand extends Command {
     }
 }
 
+/**
+ * The unmarks command unmarks the task, indicating it as incomplete.
+ */
 class UnmarkCommand extends Command {
+    /** Constructs the unmark command with index number of the item in the task list as the parameter. */
     UnmarkCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Unmarks the task indicated by the index in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (this.parameter.isBlank()) {
@@ -107,11 +180,23 @@ class UnmarkCommand extends Command {
     }
 }
 
+/**
+ * The Todo Command dds a todo tasks in the task list.
+ */
 class TodoCommand extends Command {
+    /** Constructs the TODO command that takes in the name of the TODO task as the parameter. */
     TodoCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Adds a todo task in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions If the user did not indicate a name of the task.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (this.parameter.isBlank()) {
@@ -128,11 +213,23 @@ class TodoCommand extends Command {
     }
 }
 
+/**
+ * The deadline command adds a deadline tasks.
+ */
 class DeadlineCommand extends Command {
+    /** Creates the deadline command with task name /by dd/mm/yyyy HHmm as parameter. */
     DeadlineCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Adds a deadline command into the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (this.parameter.isBlank()) {
@@ -161,11 +258,23 @@ class DeadlineCommand extends Command {
     }
 }
 
+/**
+ * The event command adds an event task in the task list.
+ */
 class EventCommand extends Command {
+    /** Creates the event command with task name /at dd/mm/yyyy HHmm as parameter. */
     EventCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Adds an event task in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (this.parameter.isBlank()) {
@@ -194,11 +303,23 @@ class EventCommand extends Command {
     }
 }
 
+/**
+ * The delete command deletes a task in the task list.
+ */
 class DeleteCommand extends Command {
+    /** Constructs the delete command with index number of the item in the task list as the parameter. */
     DeleteCommand(String parameter) {
         super(parameter);
     }
 
+    /**
+     * Deletes the task indicated by the index number in the task list.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param ui The UI on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @throws DukeExceptions If the user did not enter a number.
+     */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (parameter.isBlank()) {

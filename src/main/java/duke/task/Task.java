@@ -6,27 +6,61 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The task object represents the tasks stored by duke.
+ */
 public abstract class Task {
+    /** The date formatter on which indicates that the user will enter the date in dd/mm/yyyy HHmm. */
     protected static DateTimeFormatter initFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    /** The date formatter on which the date will be displayed when toString() is called. */
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+    /** The name of the task. */
     protected String taskName;
+    /** Representing whether the task is done */
     protected boolean done;
 
+    /**
+     * Creates a new Task.
+     *
+     * @param taskName The name of the task.
+     * @param done Whether the task is done or not.
+     */
     protected Task(String taskName, boolean done) {
         this.taskName = taskName;
         this.done = done;
     }
 
+    /**
+     * Sets the task to be complete.
+     */
     public void setDone() {
         this.done = true;
     }
 
+    /**
+     * Sets the task to be incomplete.
+     */
     public void setUndone() {
         this.done = false;
     }
 
+    /**
+     * Returns a string in the format that is stored in the file filename.
+     *
+     * @return The properties of the task that follows the format stored in the file filename.
+     */
     public abstract String updateIntoDatabase();
 
+    /**
+     * Creates a new task.
+     *
+     * @param type The type of task.
+     * @param done The completeness of the tasks.
+     * @param name The name of the task.
+     * @param date The date of the task.
+     * @return A new Task object.
+     * @throws InvalidDate If the task that requires a date encounters a date in an invalid format.
+     */
     public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
         type = type.toUpperCase();
         if (type.equals("TODO")) {
@@ -41,12 +75,20 @@ public abstract class Task {
     };
 }
 
+/**
+ * The task representing TODO.
+ */
 final class ToDo extends Task {
 
     protected ToDo(String taskName, boolean done) {
         super(taskName, done);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return The tasks with its properties.
+     */
     @Override
     public String toString() {
         String tag = "[T]";
@@ -54,14 +96,31 @@ final class ToDo extends Task {
         return tag + doneIndicator + " " + this.taskName;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     public String updateIntoDatabase() {
         return "TODO\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + "*** Next Task ***\n";
     }
 }
 
+/**
+ * The tasks that contains the deadline.
+ */
 final class Deadline extends Task {
+    /** The date of the dateline */
     LocalDateTime deadline;
 
+    /**
+     * A task with a deadline.
+     *
+     * @param taskName The name of the task.
+     * @param done The completeness of the task.
+     * @param deadline The date representing the deadline of the task.
+     * @throws InvalidDate If the user did not enter the date in the format dd/mm/yyyy HHmm.
+     */
     protected Deadline(String taskName, boolean done, String deadline) throws InvalidDate {
         super(taskName, done);
         try {
@@ -72,6 +131,11 @@ final class Deadline extends Task {
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return The tasks with its properties.
+     */
     @Override
     public String toString() {
         String tag = "[D]";
@@ -80,6 +144,12 @@ final class Deadline extends Task {
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     public String updateIntoDatabase() {
         return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
@@ -87,8 +157,17 @@ final class Deadline extends Task {
 }
 
 final class Event extends Task {
+    /** The date of the event */
     LocalDateTime eventDate;
 
+    /**
+     * Creates the event task.
+     *
+     * @param taskName The name of the task.
+     * @param done The completeness of the task.
+     * @param eventDate
+     * @throws InvalidDate
+     */
     protected Event(String taskName, boolean done, String eventDate) throws InvalidDate {
         super(taskName, done);
         try {
@@ -99,6 +178,11 @@ final class Event extends Task {
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return The tasks with its properties.
+     */
     @Override
     public String toString() {
         String tag = "[E]";
@@ -107,6 +191,12 @@ final class Event extends Task {
         return tag + doneIndicator + " " + this.taskName + eventDate;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     public String updateIntoDatabase() {
         return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";

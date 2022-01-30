@@ -1,6 +1,12 @@
 package duke.uicomponents;
 
+/**
+ * The display when the user starts duke.
+ */
 public class Menu {
+    /**
+     * Runs the menu display.
+     */
     public void run() {
         System.out.println("=========================");
         System.out.println("   Welcome chosen one!   ");

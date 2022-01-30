@@ -1,7 +1,8 @@
 package duke.dukeexceptions;
 
-import duke.Duke;
-
+/**
+ * The custom exception for duke.
+ */
 public abstract class DukeExceptions extends Exception {
     protected DukeExceptions(String s) {
         super(s);
