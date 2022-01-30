@@ -1,3 +1,5 @@
+package taskmaster;
+
 import taskmaster.userinterface.UserInterface;
 
 /**
@@ -12,18 +14,12 @@ public class Taskmaster {
      * Constructor for Taskmaster the chatbot.
      */
 
-    private Taskmaster () {
+    public Taskmaster () {
         this.ui = new UserInterface();
     }
 
-    /**
-     * The main method of the taskmaster application.
-     * @param args The input arguments.
-     */
-
-    public static void main(String[] args) {
-        Taskmaster taskMaster = new Taskmaster();
-        taskMaster.ui.runChatBot();
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
