@@ -92,7 +92,7 @@ public abstract class Task {
             LocalTime time = LocalTime.parse(dateList[1], DateTimeFormatter.ofPattern(timeFormat));
             return time;
         } catch (DateTimeParseException e) {
-            throw new DukeException("ERROR! Please input your time format in 24hrs format or am/pm");
+            throw new DukeException("ERROR! Please input your time format in 24hrs format or AM/PM");
         }
     }
 

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeadlineTest {
     @Test
     public void saveToFileString_callingMethod_outputShownCorrectly() throws DukeException {
-        String expectedResult = new Deadline("IP Project", "2/12/2019 6pm").saveToFileString();
+        String expectedResult = new Deadline("IP Project", "2/12/2019 6PM").saveToFileString();
         String actualResult = "D|0|IP Project|2019-12-02 18:00\n";
         assertEquals(expectedResult, actualResult);
     }
@@ -23,7 +23,7 @@ public class DeadlineTest {
 
     @Test
     public void toString_callingMethod_outputShownCorrectly() throws DukeException {
-        String expectedResult = new Deadline("IP Project", "2/12/2019 6pm").toString();
+        String expectedResult = new Deadline("IP Project", "2/12/2019 6PM").toString();
         String actualResult = "[D][ ] IP Project (by: Dec 02 2019 18:00)";
         assertEquals(expectedResult, actualResult);
     }

@@ -9,7 +9,7 @@ public class EventTest {
 
     @Test
     public void saveToFileString_callingMethod_outputShownCorrectly() throws DukeException {
-        String expectedResult = new Event("Team meeting", "2/12/2019 6pm").saveToFileString();
+        String expectedResult = new Event("Team meeting", "2/12/2019 6PM").saveToFileString();
         String actualResult = "E|0|Team meeting|2019-12-02 18:00\n";
         assertEquals(expectedResult, actualResult);
     }
@@ -24,7 +24,7 @@ public class EventTest {
 
     @Test
     public void toString_callingMethod_outputShownCorrectly() throws DukeException {
-        String expectedResult = new Event("Team meeting", "2/12/2019 6pm").toString();
+        String expectedResult = new Event("Team meeting", "2/12/2019 6PM").toString();
         String actualResult = "[E][ ] Team meeting (at: Dec 02 2019 18:00)";
         assertEquals(expectedResult, actualResult);
     }

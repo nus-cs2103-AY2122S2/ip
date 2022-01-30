@@ -67,11 +67,11 @@ public class Ui {
      * Prints message to inform the users that task is added into the list.
      *
      * @param task task to be added into the list.
-     * @param taskList the list of task.
+     * @param taskLists the list of task.
      */
-    public void showTaskAdded(Task task, ArrayList<Task> taskList) {
+    public void showTaskAdded(Task task, ArrayList<Task> taskLists) {
         System.out.println("Got it. I've added this task:");
-        System.out.println(task + "\n" + "Now you have " + taskList.size()
+        System.out.println(task + "\n" + "Now you have " + taskLists.size()
                 + " tasks in the list.");
     }
 
@@ -79,24 +79,24 @@ public class Ui {
      * Prints message to inform the users that task is deleted from the list.
      *
      * @param task task to be deleted from the list.
-     * @param taskList the list of task.
+     * @param taskLists the list of task.
      */
-    public void showTaskDeleted(Task task, ArrayList<Task> taskList) {
+    public void showTaskDeleted(Task task, ArrayList<Task> taskLists) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println(task + "\n" + "Now you have " + taskList.size()
+        System.out.println(task + "\n" + "Now you have " + taskLists.size()
                 + " tasks in the list.");
     }
 
     /**
      * Displays the list of tasks the user has.
      */
-    public void showList(ArrayList<Task> taskList) {
-        if (taskList.size() == 0) {
+    public void showList(ArrayList<Task> taskLists) {
+        if (taskLists.size() == 0) {
             System.out.println("No task for now");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for(int i = 1; i < taskList.size() + 1; i++){
-                Task currTask = taskList.get(i - 1);
+            for(int i = 1; i < taskLists.size() + 1; i++){
+                Task currTask = taskLists.get(i - 1);
                 System.out.println(i + ". " + currTask);
             }
         }
@@ -120,6 +120,23 @@ public class Ui {
     public void showTaskUnmarked(Task currTask) {
         System.out.println("OK, I've marked this task as not done yet:\n"
                 + currTask);
+    }
+
+    /**
+     * Prints the search results of what the user find.
+     *
+     * @param resultLists result lists from the search keyword.
+     */
+    public void displaySearchResult(ArrayList<Task> resultLists) {
+        if (resultLists.size() == 0) {
+            System.out.println("Opps! No such results");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < resultLists.size(); i++) {
+                Task currTask = resultLists.get(i);
+                System.out.println(i + 1 + ". " + currTask);
+            }
+        }
     }
 
 }
