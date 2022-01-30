@@ -11,5 +11,5 @@ package CommandSet;
 public enum Commands {
     // contains commands that are valid.
     // invalid command enum is to indicate the command given by user was invalid.
-    ADD, BYE, DELETE, DUEBEFORE, DUEON, INVALID, LIST, MARK, NO, UNMARK, YES
+    ADD, BYE, DELETE, DUEBEFORE, DUEON, FIND, INVALID, LIST, MARK, NO, UNMARK, YES
 }

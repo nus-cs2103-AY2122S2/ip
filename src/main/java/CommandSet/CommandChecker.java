@@ -32,6 +32,9 @@ public class CommandChecker {
     // stores the command for due on.
     private static final String DUE_ON = "due-on";
 
+    // stores the command for find.
+    private static final String FIND = "find";
+
     // Stores the command TODO.
     private static final String TODO = "TODO";
 
@@ -94,6 +97,8 @@ public class CommandChecker {
                     throw new MissingTaskArgumentException(DUE_BEFORE);
                 } else if (message.equalsIgnoreCase(DUE_ON)) {
                     throw new MissingTaskArgumentException(DUE_ON);
+                } else if (message.equalsIgnoreCase(FIND)) {
+                    throw new MissingTaskArgumentException(FIND);
                 } else {
                     throw new IllegalCommandException(message);
                 }
@@ -113,6 +118,8 @@ public class CommandChecker {
                 return Commands.DUEBEFORE;
             case DUE_ON:
                 return Commands.DUEON;
+            case FIND:
+                return Commands.FIND;
             }
 
             return Commands.ADD;

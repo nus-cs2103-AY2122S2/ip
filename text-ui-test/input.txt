@@ -47,6 +47,10 @@ event
 delete 2
 event meet
 event meet /at
+find
+find buy
+find edit
+find boardmarkers
 
 haha
 lol

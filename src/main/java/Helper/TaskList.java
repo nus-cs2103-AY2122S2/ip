@@ -107,6 +107,22 @@ public class TaskList {
     }
 
     /**
+     * checks for tasks that contain the word given by user.
+     * @param word the word to look out for.
+     * @return a TaskList containing those tasks that have word.
+     */
+    public TaskList getTasksContaining(String word) {
+        TaskList tasksContainingWord = new TaskList();
+        for(int i = 0; i < this.numOfTasks(); i++) {
+            Task task = this.get(i);
+            if (task.contains(word)) {
+                tasksContainingWord.add(task);
+            }
+        }
+        return tasksContainingWord;
+    }
+
+    /**
      * gets the string representation of the class.
      * @return the string representation of the instance
      */

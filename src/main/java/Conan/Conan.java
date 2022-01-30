@@ -1,5 +1,14 @@
 package Conan;
 
+import CommandSet.AddCommand;
+import CommandSet.ByeCommand;
+import CommandSet.Commands;
+import CommandSet.CommandChecker;
+import CommandSet.DeleteCommand;
+import CommandSet.DueCommand;
+import CommandSet.FindCommand;
+import CommandSet.Marking;
+
 import Helper.TaskList;
 import Helper.Storage;
 import Helper.Ui;
@@ -7,14 +16,6 @@ import Helper.CarryOn;
 
 import Exceptions.InvalidYesOrNoException;
 import Exceptions.IllegalCommandException;
-
-import CommandSet.AddCommand;
-import CommandSet.ByeCommand;
-import CommandSet.CommandChecker;
-import CommandSet.Commands;
-import CommandSet.DeleteCommand;
-import CommandSet.DueCommand;
-import CommandSet.Marking;
 
 /**
  * <h1>Conan</h1>
@@ -141,6 +142,9 @@ public class Conan {
                 break;
             case DUEON:
                 DueCommand.tasksDueOn(message, this.taskList);
+                break;
+            case FIND:
+                FindCommand.findTasksContaining(message, this.taskList);
                 break;
             case LIST:
                 Ui.printMessage(this.taskList.toString());
