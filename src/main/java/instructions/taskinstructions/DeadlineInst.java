@@ -41,6 +41,7 @@ public class DeadlineInst extends NewTaskInst {
      *          time/date format is wrong.
      */
     public static DeadlineInst of(String taskDetails) throws InvalidInputException {
+        // input cannot start with or end with a space.
         String[] split = taskDetails.split(" /by ");
         // a correct format will produce a String[2].
 
@@ -50,7 +51,7 @@ public class DeadlineInst extends NewTaskInst {
             if (split.length == 2 && split[0].length() != 0) {
                 //happens in "deadline a/at b", "deadline a /atb" etc
                 throw MISSING_SPACES_EXCEPTION;
-            }
+            }   
             throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /by "s
@@ -82,7 +83,7 @@ public class DeadlineInst extends NewTaskInst {
     @Override
     public String doInst(TaskList taskList) {
         DeadlineTask task = DeadlineTask.of(super.getTaskDesc(), this.deadline);
-        taskList.add(task);
+        taskList.add(true, task);
         return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now.",
                 task, taskList.length());
     }

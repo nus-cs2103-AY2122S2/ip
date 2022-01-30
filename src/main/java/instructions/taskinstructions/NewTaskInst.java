@@ -52,7 +52,7 @@ public abstract class NewTaskInst extends Instruction {
      *          is wrong.
      */
     public static NewTaskInst of(String input) throws InvalidInputException {
-        //to do tasks are not shown to prevent improper highlighting of comments
+        //to do tasks examles are not shown to prevent improper highlighting of comments
         String[] split = input.split(" ", 2);
 
         if (split.length == 1) { // happens when: "deadline", "event"

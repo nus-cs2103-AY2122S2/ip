@@ -26,7 +26,7 @@ public class MarkAsDoneInst extends ModifyListedTaskInst {
      * @param taskNum the task number to mark as done.
      * @return the Mark Task as Done Instruction.
      */
-    protected static MarkAsDoneInst of(int taskNum) {
+    public static MarkAsDoneInst of(int taskNum) {
         return new MarkAsDoneInst(taskNum);
     }
 
@@ -39,7 +39,7 @@ public class MarkAsDoneInst extends ModifyListedTaskInst {
      */
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException {
-        taskList.markTask(super.getTaskNum() - 1, true);
+        taskList.markTask(super.getTaskNum() - 1, true, true);
         return String.format("Okay, this task is done:\n%s",
                 taskList.displayTask(super.getTaskNum() - 1));
     }

@@ -109,7 +109,7 @@ public final class DateTimeParser {
         Month month = Month.of(monthNum);
         Year year = Year.of(Integer.parseInt(input.substring(0, 4)));
         int dayNum = Integer.parseInt(input.substring(8, 10));
-        if (dayNum < 1) {
+        if (dayNum < 1 || dayNum > 31) {
             throw new InvalidDateException(String.format("There is no %d-th day!", dayNum));
         }
         if (!year.isLeap() && monthNum == 2) { // leap year
@@ -130,7 +130,7 @@ public final class DateTimeParser {
         int mins = Integer.parseInt((input.substring(14, 16)));
         boolean isValidHour = hours >= 0 && hours < 24;
         boolean isValidMin = mins >= 0 && mins < 60;
-        if (isValidHour || isValidMin) {
+        if (!isValidHour || !isValidMin) {
             throw new InvalidTimeException(
                     String.format("There is no %d-th hour, %d-th minute!", hours, mins));
         }

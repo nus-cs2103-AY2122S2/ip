@@ -1,6 +1,5 @@
 package tasks;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,21 +43,27 @@ public class TaskList {
     /**
      * Adds an item into the taskList.
      *
+     * @param saveToFile whether to save to the given file or not.
      * @param item the item to be added.
      */
-    public void add(Task item) {
+    public void add(boolean saveToFile, Task item) {
         this.list.add(item);
-        this.saveToFile();
+        if (saveToFile) {
+            this.saveToFile();
+        }
     }
 
     /**
      * Adds multiple items at a time to the taskList.
      *
+     * @param saveToFile whether to save to the given file or not.
      * @param items all the items to be added.
      */
-    public void add(Task... items) {
+    public void add(boolean saveToFile, Task... items) {
         this.list.addAll(List.of(items));
-        this.saveToFile();
+        if (saveToFile) {
+            this.saveToFile();
+        }
     }
 
     /**
@@ -75,14 +80,17 @@ public class TaskList {
      * Removes an item from the list of tasks.
      *
      * @param taskIndex the index of the item to remove.
+     * @param saveToFile whether to save to the given file or not.
      * @return the removed task.
      */
-    public Task delete(int taskIndex) throws NoSuchTaskException {
+    public Task delete(int taskIndex, boolean saveToFile) throws NoSuchTaskException {
         if (!isWithinIndex(taskIndex)) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
         Task output = this.list.remove(taskIndex);
-        this.saveToFile();
+        if (saveToFile) {
+            this.saveToFile();
+        }
         return output;
     }
 
@@ -100,14 +108,17 @@ public class TaskList {
      *
      * @param taskIndex the index of the task to be marked.
      * @param isDone whether the task is to be done or not.
+     * @param saveToFile whether to save to the given file or not.
      * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
-    public void markTask(int taskIndex, boolean isDone) throws NoSuchTaskException {
+    public void markTask(int taskIndex, boolean isDone, boolean saveToFile) throws NoSuchTaskException {
         if (!isWithinIndex(taskIndex)) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
         this.list.get(taskIndex).markAs(isDone);
-        this.saveToFile();
+        if (saveToFile) {
+            this.saveToFile();
+        }
     }
 
     /**

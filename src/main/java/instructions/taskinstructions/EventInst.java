@@ -86,6 +86,7 @@ public class EventInst extends NewTaskInst {
         // if either of the timings are invalid, an exception will be thrown
         DateTimeParser.checkValidFormat(timings[0]);
         DateTimeParser.checkValidFormat(timings[1]);
+        // TODO: check that endTime > startTime
 
         LocalDateTime startTime = DateTimeParser.parse(timings[0]);
         LocalDateTime endTime = DateTimeParser.parse(timings[1]);
@@ -102,7 +103,7 @@ public class EventInst extends NewTaskInst {
     @Override
     public String doInst(TaskList taskList) {
         EventTask task = new EventTask(super.getTaskDesc(), this.startTime, this.endTime);
-        taskList.add(task);
+        taskList.add(true, task);
         return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now.",
                 task, taskList.length());
     }
