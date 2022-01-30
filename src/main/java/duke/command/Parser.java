@@ -36,7 +36,7 @@ public class Parser {
         try {
             validate(inputString, action, args, taskList);
         } catch (DukeException de) {
-            System.out.println(de.getMessage());
+            ui.print(de.getMessage());
             return 1;
         }
 
@@ -101,7 +101,7 @@ public class Parser {
             ui.print(taskList.findTasksContaining(args[1]), "Here are the matching tasks in your list:");
             return 1;
         default:
-            System.out.println("Unknown Command");
+            ui.print("Unknown Command");
             return 0;
         }
     }
