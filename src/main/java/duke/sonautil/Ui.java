@@ -37,7 +37,7 @@ public class Ui {
      * @return message to user
      */
     public static String welcomeMessage() {
-        return "Hi! You can call me Sona, your AMAZING task manager ^^~ How can I help you?";
+        return "Hi! You can call me Sona, your AMAZING task manager ><! How can I help you?";
     }
 
     /**
@@ -50,19 +50,13 @@ public class Ui {
     }
 
     /**
-     * Prints out when file is not found
-     */
-    public static void fileNotFoundMessage() {
-        System.out.println("Oh no... I couldn't find the Duke.task list in your hard disk...\n"
-                + "Don't worry! I will create one for you now :)\n");
-    }
-
-    /**
      * Prints out when file is invalid
+     *
+     * @returns message to user
      */
-    public static void invalidFileMessage() {
-        System.out.println("Oops! I can't load your file due to some errors..."
-                + "\nDon't worry! I will create a new one for you.");
+    public static String invalidFileMessage() {
+        return "Oops! I can't load your file due to some errors..."
+                + "\nDon't worry! I will create a new one for you.";
     }
 
     /**

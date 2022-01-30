@@ -1,5 +1,6 @@
 package duke.ui;
 import duke.Duke;
+import duke.sonautil.TaskList;
 import duke.sonautil.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -11,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,12 +34,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcome = Ui.welcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, sona));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        String welcome = Ui.welcomeMessage();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, sona));
     }
 
     /**

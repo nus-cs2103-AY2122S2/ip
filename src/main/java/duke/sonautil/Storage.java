@@ -127,7 +127,6 @@ public class Storage {
         try {
             return fileContentProcess();
         } catch (FileNotFoundException e) {
-            Ui.fileNotFoundMessage();
             createNewFile();
             return new ArrayList<>();
         }
