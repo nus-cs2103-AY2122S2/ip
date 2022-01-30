@@ -140,6 +140,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 System.out.println(counter + ". " + tasks.get(i).toString());
+                counter += 1;
             }
         }
     }
