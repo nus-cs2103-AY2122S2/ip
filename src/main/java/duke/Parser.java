@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+<<<<<<< HEAD
     /**
      * Processes the message given by the user.
      * @param message the message inputted by user
@@ -125,6 +126,8 @@ public class Parser {
         return returnMessage;
     }
 
+=======
+>>>>>>> branch-A-CodingStandard
     /**
      * Parses the message contents and returns the suitable duke.Task object.
      *
@@ -237,6 +240,76 @@ public class Parser {
         }
 
         return indexOfItem;
+    }
+
+    public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
+        String currMessage;
+        Task currTask;
+        int index;
+
+        if (message.equalsIgnoreCase("bye")) {
+            return null;
+        }
+
+        if (message.indexOf(" ") == -1) { //take the first word of the input
+            currMessage = message.toLowerCase();
+        } else {
+            currMessage = message.substring(0, message.indexOf(" ")).toLowerCase();
+        }
+
+        switch (currMessage) {
+        case "list":
+            String listOfTasks = tasks.toString();
+
+            message = "Provided are the tasks currently in your list:\n" + listOfTasks;
+            break;
+        case "mark":
+            index = getIndexFromMessage(message); //get the index
+            currTask = tasks.getTaskAtIndex(index);
+            currTask.markDone();
+
+            message = "Alright then! I've marked that task as done:" + "\n\t" + currTask;
+            break;
+        case "unmark":
+            index = getIndexFromMessage(message); //get the index
+            currTask = tasks.getTaskAtIndex(index);
+            currTask.markUndone();
+
+            message = "Alright then! I've marked that task as not done:" + "\n\t" + currTask;
+            break;
+        case "delete":
+            index = getIndexFromMessage(message);
+            currTask = tasks.removeTask(index);
+            storage.modifyStorage(currTask, ConfirmCodes.DELETION, tasks);
+            message = "As you wish. I've removed the task from your list:" + "\n\t" + currTask
+                    + "\nI hope it was nothing important..." + "\n" + getTaskCount(tasks);
+            break;
+        case "todo":
+            currTask = parseMessageContents(message, TaskTypes.TODO);
+
+            tasks.addTask(currTask);
+            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
+            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask +
+                    "\n" + getTaskCount(tasks);
+            break;
+        case "deadline":
+            currTask = parseMessageContents(message, TaskTypes.DEADLINE);
+            tasks.addTask(currTask);
+            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
+            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
+                    getTaskCount(tasks);
+            break;
+        case "event":
+            currTask = parseMessageContents(message, TaskTypes.EVENT);
+            tasks.addTask(currTask);
+            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
+            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
+                    getTaskCount(tasks);
+            break;
+        default:
+            throw new DukeException("Pardon me, but I did not understand what you said.");
+        }
+        return message;
     }
 
     private String getTaskCount(TaskList tasks) {
