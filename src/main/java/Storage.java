@@ -2,9 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +10,8 @@ public class Storage {
     private File file;
 
     public Storage(String filePath) {
-        this.file = new File(this.filePath);
+        this.file = new File(filePath);
+        this.filePath = filePath;
         if (!file.exists()) {
             try {
                 File directory = new File(file.getParent());

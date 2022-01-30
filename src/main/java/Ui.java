@@ -1,4 +1,11 @@
+import java.util.Scanner;
+
 public class Ui {
+    Scanner scanner;
+
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
 
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
@@ -9,23 +16,32 @@ public class Ui {
 
     public static final String BOT_NAME = "Feline";
 
-    public static final String WELCOME_MESSAGE = "Yoooo! My name is "
-            + BOT_NAME + EXCLAMATION + LINE_SEPARATOR + "How can i help you bro?";
-
-    public static final String FAREWELL_MESSAGE = "See you next time" + EXCLAMATION;
-
     public static final String COMMANDS = "list, todo, deadline (using /by)," +
                                         " event (using /at), mark, unmark, delete";
+
+    public String readCommand() {
+        return scanner.nextLine();
+    }
+
+    public void divide() {
+        showToUser(DIVIDER);
+    }
+
     public void greet() {
-        showToUser(DIVIDER, WELCOME_MESSAGE);
+        showToUser(DIVIDER, Messages.WELCOME_MESSAGE);
     }
 
     public void farewell() {
-        showToUser(DIVIDER, FAREWELL_MESSAGE);
+        showToUser(DIVIDER, Messages.FAREWELL_MESSAGE);
+        scanner.close();
     }
 
-    public String getCommands() {
-        return COMMANDS;
+    public void showCommands() {
+        showToUser(DIVIDER, Messages.UNKNOWN_COMMAND, COMMANDS);
+    }
+
+    public void showError(String message) {
+        showToUser(message);
     }
 
     public void showToUser(String... message) {

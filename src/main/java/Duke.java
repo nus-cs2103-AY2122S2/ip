@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Duke {
     private static Storage storage;
@@ -15,79 +12,32 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (IOException e) { //abstract to DukeException
-            //ui.showloadingerror
-            System.out.println("Error loading file");
+            ui.showError("Error loading file.");
             this.tasks = new TaskList();
         }
     }
 
-//    public void run() {
-//        ui.Greet();
-//        boolean isExit = false;
-//        while(!isExit) {
-//            try {
-//                  String fullCommand = ui.readCommand();
-//                  ui.showLine();    // show the divider line ("__________")
-//                  Command c = Parser.parse(fullCommand);
-//                    c.execute(tasks, ui, storage);
-//                    isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Duke("data/tasks.txt").run();
-//    }
-
-
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
+    public void run() {
         ui.greet();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
+        boolean isExit = false;
+        while(!isExit) {
             try {
-                String input = sc.nextLine();
-                String[] inputWords = input.split("\\s");
-                switch (input) {
-                    case "bye":
-                        ui.farewell();
-                        return;
-                    case "list":
-                        tasks.printList();
-                        break;
-                    default: // not the one word commands that we have. check further commands, else throw exception
-                        String firstWord = inputWords[0];
-                        switch (firstWord) {
-                            case "mark":
-                                tasks.mark(inputWords);
-                                break;
-                            case "unmark":
-                                tasks.unmark(inputWords);
-                                break;
-                            case "delete":
-                                tasks.delete(inputWords);
-                                break;
-                            case "todo":
-                            case "deadline":
-                            case "event":
-                                tasks.addTask(firstWord, input);
-                                break;
-                            default:
-                                throw new UnknownException("Unknown command! the follow are the commands: "
-                                        + ui.getCommands()); //can show help commands
-                        }
-                        storage.save(tasks);    //everytime TaskList is edited, save tasks to file. (writeToFile)
-                }
-            } catch (UnknownException | IOException e) {
-                System.out.println(e.getMessage());
+                  String fullCommand = ui.readCommand();
+                  ui.divide();    // show the divider line ("__________")
+                  Command c = Parser.parse(fullCommand);
+                    c.execute(tasks, ui, storage);
+                    isExit = c.isExit();
+            } catch (Exception e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.divide();
             }
         }
-        sc.close();
-        ui.farewell();
+
     }
+
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
 }
