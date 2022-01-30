@@ -1,7 +1,6 @@
 package luke.commands;
 
 import luke.data.TaskList;
-import luke.data.tasks.Task;
 
 public abstract class ReadCommand extends Command {
 

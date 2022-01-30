@@ -5,8 +5,8 @@ import luke.data.tasks.Task;
 
 public class DeleteCommand extends UpdateCommand {
 
-    private static final String DEFAULT_MESSAGE = "Forcing it out... Success! I've removed the following task:\n\t%s";
     public static final CommandAction COMMAND_ACTION = CommandAction.DELETE;
+    private static final String DEFAULT_MESSAGE = "Forcing it out... Success! I've removed the following task:\n\t%s";
 
     public DeleteCommand(int index) {
         super(index);

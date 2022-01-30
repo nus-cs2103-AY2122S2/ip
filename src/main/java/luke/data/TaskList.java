@@ -1,12 +1,11 @@
 package luke.data;
 
-import luke.data.tasks.Task;
-import luke.storage.Storable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
+import luke.data.tasks.Task;
+import luke.storage.Storable;
 
 public class TaskList implements Storable {
     private List<Task> taskList;

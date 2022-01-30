@@ -1,9 +1,11 @@
 package luke.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import luke.commands.Command;
 import luke.data.TaskList;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
     private static final String[] DESCRIPTIONS = {"eat", "sleep", "code"};
@@ -12,14 +14,14 @@ class ParserTest {
     private static final String[] TIMES = {"06:00", "12:00", "18:00", "23:59"};
 
     @Test
-    public void deadlineCommand_validInput_correctCommandResult(){
+    public void deadlineCommand_validInput_correctCommandResult() {
         String successMessage = "I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.";
         for (int i = 0; i < DESCRIPTIONS.length; i++) {
             for (int j = 0; j < DATES.length; j++) {
                 for (int k = 0; k < TIMES.length; k++) {
                     String description = DESCRIPTIONS[i];
-                    String datetime = String.format("%s %s", DATES[j],TIMES[k]);
-                    String commandString = String.format("deadline %s /by %s", description,datetime);
+                    String datetime = String.format("%s %s", DATES[j], TIMES[k]);
+                    String commandString = String.format("deadline %s /by %s", description, datetime);
                     Command command = Parser.parse(commandString);
                     String expectedCommandResult = String.format("[D][ ] %s (by: %s)",
                             description, DateTimeParser.toString(DateTimeParser.toLocalDateTime(datetime)));
@@ -31,7 +33,7 @@ class ParserTest {
     }
 
     @Test
-    public void eventCommand_invalidArgument_incorrectCommandResult(){
+    public void eventCommand_invalidArgument_incorrectCommandResult() {
         String commandString = String.format("event %s", DESCRIPTIONS[0]);
         Command command = Parser.parse(commandString);
         String errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
@@ -52,7 +54,7 @@ class ParserTest {
     }
 
     @Test
-    public void unmarkCommand_invalidInput_incorrectCommandResult(){
+    public void unmarkCommand_invalidInput_incorrectCommandResult() {
         String commandString = "unmark 1";
         String expected = "The force cannot find the task.\nPlease try again :(";
         Command command = Parser.parse(commandString);
@@ -66,7 +68,7 @@ class ParserTest {
     }
 
     @Test
-    public void deleteCommand_validInput_correctCommandResult(){
+    public void deleteCommand_validInput_correctCommandResult() {
         String commandString = String.format("todo %s", DESCRIPTIONS[0]);
         Command command = Parser.parse(commandString);
         TaskList taskList = new TaskList();
@@ -79,7 +81,7 @@ class ParserTest {
     }
 
     @Test
-    public void markCommand_validInput_correctCommandResult(){
+    public void markCommand_validInput_correctCommandResult() {
         String commandString = String.format("todo %s", DESCRIPTIONS[0]);
         Command command = Parser.parse(commandString);
         TaskList taskList = new TaskList();
@@ -98,7 +100,7 @@ class ParserTest {
     }
 
     @Test
-    public void findCommand_validInput_correctCommandResult(){
+    public void findCommand_validInput_correctCommandResult() {
         TaskList taskList = new TaskList();
 
         String commandString = String.format("find %s", DESCRIPTIONS[0]);
@@ -138,7 +140,7 @@ class ParserTest {
     }
 
     @Test
-    public void findCommand_invalidInput_incorrectCommandResult(){
+    public void findCommand_invalidInput_incorrectCommandResult() {
         TaskList taskList = new TaskList();
 
         String commandString = "find";
