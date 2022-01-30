@@ -20,6 +20,7 @@ list
 delete 4
 delete 3
 list
-event project meeting /at Mon 2-4pm
-list
+event project meeting /at 12/12/2021 09:00
+find test
+find project
 bye

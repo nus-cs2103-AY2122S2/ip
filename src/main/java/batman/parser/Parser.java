@@ -28,6 +28,9 @@ public class Parser {
             case "delete":
                 sb.append(TaskList.deleteTask(Integer.parseInt(command[1]) - 1));
                 break;
+            case "find":
+                sb.append(TaskList.findTask(command[1]));
+                break;
             default:
                 throw new DukeException(Error.INVALID);
             }
