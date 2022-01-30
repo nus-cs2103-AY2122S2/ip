@@ -22,6 +22,12 @@ public class Ui {
         parser = new Parser();
     }
 
+    /**
+     * Processes the inputs and outputs of the Duke class
+     *
+     * @param tasks   the list of tasks
+     * @param storage the storage instance
+     */
     public void userInput(TaskList tasks, Storage storage) {
         Scanner sc = new Scanner(System.in);
         String input = "";
@@ -45,6 +51,7 @@ public class Ui {
 
     /**
      * Outputs a message to the user in a particular design (enclosed with dividers)
+     *
      * @param message The message string to be shown to the user
      */
     public void showMessage(String message) {
@@ -53,6 +60,7 @@ public class Ui {
 
     /**
      * Outputs an error message during runtime.
+     *
      * @param e The exception that was thrown
      */
     public void showLoadingError(Exception e) {

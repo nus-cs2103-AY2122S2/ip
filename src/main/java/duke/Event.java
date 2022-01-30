@@ -13,7 +13,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected LocalDate date;
-    protected LocalTime timeBeginning, timeEnd;
+    protected LocalTime timeBeginning;
+    protected LocalTime timeEnd;
 
     /**
      * Constructor for duke.Event class
@@ -37,10 +38,10 @@ public class Event extends Task {
      */
     @Override
     public String toStringInFileFormat() {
-        return "E|" + this.getStatusIcon() + "|" + this.description + "|" +
-                this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" +
-                this.timeBeginning.format(DateTimeFormatter.ofPattern("HH:mm")) + "|" +
-                this.timeEnd.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return "E|" + this.getStatusIcon() + "|" + this.description + "|"
+            + this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|"
+            + this.timeBeginning.format(DateTimeFormatter.ofPattern("HH:mm")) + "|"
+            + this.timeEnd.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**
@@ -50,9 +51,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateAndTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " from " +
-                timeBeginning.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to " +
-                timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String dateAndTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " from "
+            + timeBeginning.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to "
+            + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return "[E]" + super.toString() + " (at: " + dateAndTime + ")";
     }
 }

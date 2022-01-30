@@ -16,11 +16,13 @@ public class ToDo extends Task {
         super(d);
     }
 
-    @Override
+
     /**
      * Returns the task properties in the format of the task to be saved onto hard disk
+     *
      * @return String representing the task toString in hard-disk format
      */
+    @Override
     public String toStringInFileFormat() {
         return "T|" + this.getStatusIcon() + "|" + this.description;
     }

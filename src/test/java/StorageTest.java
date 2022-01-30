@@ -1,15 +1,16 @@
-import duke.DukeException;
-import duke.Storage;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Storage;
 
 public class StorageTest {
     @Test
-    public void load_FileNotFoundException() throws IOException {
+    public void load_fileNotFoundException() throws IOException {
         Boolean wasThrown = false;
         File file = new File("data/test.txt");
 

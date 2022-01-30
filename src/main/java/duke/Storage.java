@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Constructor for the Storage class
+     *
      * @param filePath the file path the text file will be stored in
      */
     public Storage(String filePath) {
@@ -34,9 +35,10 @@ public class Storage {
     /**
      * Creates the text file and directory if the text file does not exist. Otherwise, loads the text file
      * into the TaskList.
+     *
      * @return The list of tasks that have been loaded
      * @throws DukeException throws if text file does not exist
-     * @throws IOException throws if text file cannot be created
+     * @throws IOException   throws if text file cannot be created
      */
     public List<Task> load() throws DukeException, IOException {
         List<Task> tasks = new ArrayList<>();
@@ -60,10 +62,10 @@ public class Storage {
                 case "D":
                     LocalDate currDate = LocalDate.parse(currLineArr[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime currTime = currLineArr.length < 5 ? null : LocalTime.parse(currLineArr[4],
-                            DateTimeFormatter.ofPattern("HH:mm"));
+                        DateTimeFormatter.ofPattern("HH:mm"));
 
                     Task deadlineTask = currTime == null ? new Deadline(currLineArr[2], currDate) : new Deadline(
-                            currLineArr[2], currDate, currTime);
+                        currLineArr[2], currDate, currTime);
 
                     if (currLineArr[1].equals("X")) {
                         deadlineTask.markDone();
@@ -73,7 +75,7 @@ public class Storage {
                     break;
                 case "E":
                     LocalDate dateForEvent = LocalDate.parse(currLineArr[3],
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime beginTime = LocalTime.parse(currLineArr[4], DateTimeFormatter.ofPattern("HH:mm"));
                     LocalTime endTime = LocalTime.parse(currLineArr[5], DateTimeFormatter.ofPattern("HH:mm"));
                     Task eventTask = new Event(currLineArr[2], dateForEvent, beginTime, endTime);
@@ -105,11 +107,12 @@ public class Storage {
 
     /**
      * Retrieves the changes to be made to the stored text file and modifies it accordingly.
-     * @param task The task to be added to/deleted from the stored text file
-     * @param code The type of action to be performed on the task
+     *
+     * @param task  The task to be added to/deleted from the stored text file
+     * @param code  The type of action to be performed on the task
      * @param tasks The object representing the list of tasks
      * @throws DukeException throws if an Internal error obstructs the running of the code,
-     *      such as incorrect ConfirmCode
+     *                       such as incorrect ConfirmCode
      */
     public void modifyStorage(Task task, ConfirmCodes code, TaskList tasks) throws DukeException {
         try {

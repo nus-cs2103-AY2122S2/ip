@@ -45,8 +45,8 @@ public class Deadline extends Task {
      * @return String representing the task toString in hard-disk format
      */
     public String toStringInFileFormat() {
-        String stringImplementationInFileFormat = "D|" + this.getStatusIcon() + "|" + this.description + "|" +
-                this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String stringImplementationInFileFormat = "D|" + this.getStatusIcon() + "|" + this.description + "|"
+            + this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         if (time != null) {
             stringImplementationInFileFormat += "|" + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
