@@ -64,7 +64,7 @@ public class Parser {
             return new DeleteCommand(getTaskNumberFromInput(remainingInput));
             // No fallthrough necessary
         case "find":
-            return new FindCommand(getSearchPhraseFromInput(arguments));
+            return new FindCommand(getSearchPhraseFromInput(remainingInput));
         case "list":
             return new ListCommand();
             // No fallthrough necessary
