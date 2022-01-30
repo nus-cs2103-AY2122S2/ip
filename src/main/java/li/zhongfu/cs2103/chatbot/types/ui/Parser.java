@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +12,16 @@ import java.util.Map;
 public class Parser {
     private static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
-            .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-            .appendPattern("[yyyy-MM-dd[ HH:mm[:ss]]]")
-            .appendPattern("[MMM d yyyy[ HH:mm[:ss]]]")
-            .appendPattern("[d MMM yyyy[ HH:mm[:ss]]]")
+            .appendPattern("[uuuu-MM-dd[ HH:mm[:ss]]['T'HH:mm[:ss]]]")
+            .appendPattern("[MMM d uuuu[ HH:mm[:ss]]]")
+            .appendPattern("[d MMM uuuu[ HH:mm[:ss]]]")
+            .appendPattern("[MMMM d uuuu[ HH:mm[:ss]]]")
+            .appendPattern("[d MMMM uuuu[ HH:mm[:ss]]]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-            .toFormatter();
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
 
     private DateTimeFormatter dtFormatter;
 
