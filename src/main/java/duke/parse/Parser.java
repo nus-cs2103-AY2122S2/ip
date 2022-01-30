@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    private InputStream inputStream;
+    private final InputStream inputStream;
 
     /**
      * Constructors a parser, with the specified input stream.

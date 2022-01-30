@@ -9,7 +9,7 @@ import main.java.duke.ui.Ui;
  */
 final class MarkAsDone extends Instruction {
 
-    private Task toMark;
+    private final Task toMark;
 
     /**
      * Constructor 1. Initializes the instruction using an index of task.

@@ -4,7 +4,7 @@ package main.java.duke.main;
  * An abstract clas that represents the exceptions related to main.Duke.
  */
 public abstract class DukeException extends Exception {
-    private String message;
+    private final String message;
 
     /**
      * Constructs an exception used by Duke, with the specified message.
