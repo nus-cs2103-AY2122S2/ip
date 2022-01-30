@@ -13,7 +13,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String byTimeFormatted = this.byTime.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy"));
+        String byTimeFormatted = this.byTime.format(DateTimeFormatter.ofPattern(
+                "HH:mm, MMM dd yyyy"));
         return "[D]" + super.toString() + " (by: " + byTimeFormatted + ")";
     }
 

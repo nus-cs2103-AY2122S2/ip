@@ -67,11 +67,13 @@ public class Storage {
                         break;
                     case E:
                         tasks.add(new Event(breakdown[2],
-                                Boolean.parseBoolean(breakdown[1]), LocalDateTime.parse(breakdown[3])));
+                                Boolean.parseBoolean(breakdown[1]),
+                                LocalDateTime.parse(breakdown[3])));
                         break;
                     case D:
                         tasks.add(new Deadline(breakdown[2],
-                                Boolean.parseBoolean(breakdown[1]), LocalDateTime.parse(breakdown[3])));
+                                Boolean.parseBoolean(breakdown[1]),
+                                LocalDateTime.parse(breakdown[3])));
                         break;
                     }
                 } catch (IllegalArgumentException e) {
