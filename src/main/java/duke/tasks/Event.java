@@ -40,9 +40,7 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-
-        return String.format("[%c][%c] %s (at: %s)",this.getType(),this.done,this.taskName,this.date.format(formatted));
+        return String.format("[%c][%c] %s (at: %s)",this.getType(),this.done,this.taskName,this.getDate());
     }
 
     @Override
@@ -50,7 +48,7 @@ public class Event extends Task{
         if (this.date == null) {
             return this.dateString;
         } else {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
             return this.date.format(format);
         }
     }

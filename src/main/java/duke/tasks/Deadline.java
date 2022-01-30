@@ -34,15 +34,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString(){
-        if (this.date == null){
-            return String.format("[%c][%c] %s (by: %s)",
-                    this.getType(),this.done,this.taskName,this.dateString);
-        } else {
-            DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-
-            return String.format("[%c][%c] %s (by: %s)",
-                    this.getType(),this.done,this.taskName,this.date.format(formatted));
-        }
+        return String.format("[%c][%c] %s (by: %s)", this.getType(),this.done,this.taskName,this.getDate());
     }
 
     @Override
@@ -55,7 +47,7 @@ public class Deadline extends Task{
         if (this.date == null) {
             return this.dateString;
         } else {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
             return this.date.format(format);
         }
     }
@@ -70,9 +62,7 @@ public class Deadline extends Task{
         Deadline deadline = (Deadline) o;
 
         if (deadline.taskName.equals(this.taskName)){
-            if (deadline.getDate().equals(this.getDate())){
-                return true;
-            }
+            return deadline.getDate().equals(this.getDate());
         }
 
         return false;
