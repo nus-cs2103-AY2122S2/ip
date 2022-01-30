@@ -9,7 +9,9 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 
-//deals with making sense of the user duke.command
+/**
+ * Deals with making sense of the user's input.
+ */
 public class Parser {
 
     /**

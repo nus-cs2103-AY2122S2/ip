@@ -4,10 +4,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * An extension from Action, Deadline has a date variable of
+ * type LocalDateTime that is specific to itself.
+ */
 public class Deadline extends Action {
 
     private LocalDateTime date;
 
+    /**
+     * Constructs a new Deadline object by taking in
+     * String variables, task and by.
+     * Etc; task = "some task" and by = "2010-10-10 10:10"
+     * @param task task with deadline
+     * @param by date and time values of the task with deadline
+     */
     public Deadline(String task, String by)  {
         super(task);
         try {
@@ -20,6 +31,14 @@ public class Deadline extends Action {
         }
     }
 
+    /**
+     * Constructs a new Deadline object by taking in
+     * String variable, task,LocalDateTime variable
+     * by and boolean variable, bool.
+     * @param task task with deadline
+     * @param by date and time values
+     * @param bool done status of task with deadline
+     */
     public Deadline(String task, LocalDateTime by, boolean bool)  {
         super(task, bool);
         this.date = by;
@@ -45,6 +64,10 @@ public class Deadline extends Action {
         return new Deadline(act, date, false);
     }
 
+    /**
+     * Returns a string representation the Deadline object.
+     * @return string representation
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "

@@ -9,16 +9,20 @@ import java.nio.file.Paths;
 import java.io.File;
 import java.util.ArrayList;
 
-//deals with loading tasks from the file and saving tasks in the file
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Constructs a new Storage object with a
+     * given file path.
+     * @param filePath file path location
+     */
     public Storage(String filePath) {
         file = new File(filePath);
-    }
-
-    public Storage() {
     }
 
     /**

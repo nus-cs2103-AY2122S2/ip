@@ -8,10 +8,22 @@ import duke.action.Deadline;
 import duke.action.Event;
 import duke.action.Todo;
 
+/**
+ * An extension from Command. AddCommand has the Action
+ * variable, action that is specific to it.
+ * The AddCommand class deals with the addition
+ * of a task to a given taskList.
+ */
 public class AddCommand extends Command {
 
     private final Action action;
 
+    /**
+     * Constructs a new AddCommand object with
+     * String variables, command and details.
+     * @param command command etc; deadline ,event, todo
+     * @param details details of the task etc; anything after the command
+     */
     public AddCommand(String command, String details) {
         if (command.equals("todo")) {
             action = new Todo(details);
@@ -31,6 +43,8 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Returns a String indicating the result of
+     * the addition of a task to the tasklist.
      * Executes the adding of a task onto the taskList
      * as well as saving the contents of the taskList
      * onto the file.

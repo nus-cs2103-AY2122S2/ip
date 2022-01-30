@@ -1,11 +1,24 @@
 package duke.action;
 
+/**
+ * An extension from Action.
+ */
 public class Todo  extends Action {
 
+    /**
+     * Constructs a new Todo object with a String variable s.
+     * @param s task todo
+     */
     public Todo(String s)  {
         super(s);
     }
 
+    /**
+     * Constructs a new Todo object with a String variable s,
+     * and a boolean variable, bool.
+     * @param s task todo
+     * @param bool done status of task todo
+     */
     public Todo(String s, boolean bool)  {
         super(s, bool);
     }
@@ -30,6 +43,10 @@ public class Todo  extends Action {
         return new Todo(act, false);
     }
 
+    /**
+     * Returns a string representation of the Todo object.
+     * @return string representation
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

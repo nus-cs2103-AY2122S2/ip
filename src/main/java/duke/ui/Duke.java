@@ -1,6 +1,10 @@
 package duke.ui;
 import duke.command.Command;
 
+/**
+ * Previously responsible for running the chatbot program,
+ * now simply a container of Storage, TaskList and Ui variables.
+ */
 public class Duke {
 
     private final Storage storage;
@@ -19,14 +23,26 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the storage
+     * @return storage
+     */
     public Storage getStorage() {
         return storage;
     }
 
+    /**
+     * Returns taskList.
+     * @return taskList
+     */
     public TaskList getTasks() {
         return tasks;
     }
 
+    /**
+     * Returns Ui.
+     * @return Ui
+     */
     public Ui getUi() {
         return ui;
     }
@@ -49,6 +65,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program. Make sure
+     * the specified file location is correct.
+     * @param args Some string arguments.
+     */
     public static void main(String[] args) {
         new Duke("C:/repos/ip/data/tasks.txt").run();
     }
