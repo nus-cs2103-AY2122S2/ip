@@ -3,8 +3,15 @@ package taskmaster.userinterface;
 import java.util.Scanner;
 
 import taskmaster.commands.AddCommands;
+import taskmaster.commands.ByeCommands;
+import taskmaster.commands.Commands;
+import taskmaster.commands.DefaultCommands;
 import taskmaster.commands.DeleteCommands;
+import taskmaster.commands.FindCommands;
+import taskmaster.commands.HelpCommands;
+import taskmaster.commands.ListCommands;
 import taskmaster.commands.MarkCommands;
+
 import taskmaster.exception.DukeExceptions;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
@@ -49,8 +56,8 @@ public class UserInterface {
      * Prints the bye message displayed when the user exits.
      */
 
-    private void displayByeMessage() {
-        System.out.println("See you around kiddo, I'm an angsty dude but deep down i'm a lonely man");
+    public String displayByeMessage() {
+        return "See you around kiddo, I'm an angsty dude but deep down i'm a lonely man";
     }
 
     /**
@@ -68,7 +75,7 @@ public class UserInterface {
      * program exits.
      */
 
-    private void updateList() {
+    public void updateList() {
         storage.updateList(taskList);
     }
 
@@ -80,7 +87,7 @@ public class UserInterface {
      * @return True if input is "bye" and false otherwise.
      */
 
-    private boolean ifBye(String userInput) {
+    public boolean ifBye(String userInput) {
         return userInput.equals("bye");
     }
 
@@ -89,33 +96,35 @@ public class UserInterface {
      * @param input The input entered by the user
      */
 
-    public void displayInvalidCommand(String input) {
-        System.out.println("\n" + input + "?");
-        System.out.println("What are you on about?");
-        System.out.println("Type 'help' if you want to know the commands, kid!\n");
+    public String displayInvalidCommand(String input) {
+        return "\n" + input + "?"
+                + "What are you on about? \n Type 'help' if "
+                + "you want to know the commands, kid!\n";
     }
 
     /**
      * Prints the list of commands that are in this program.
      */
 
-    public void displayListOfCommand() {
-        System.out.println("____________________________________________________________");
-        System.out.println("\nCommands: ");
-        System.out.println("    List                                    -List out all your current tasks");
-        System.out.println("    todo <task name>                        -Add a todo task without any deadline"
-                            + " specified");
-        System.out.println("    deadline <task name> /by <Date><Time>   -Adds a task that has to be done before "
-                            + "the specified deadline");
-        System.out.println("    event <task name> /at <Date><Time>      -Adds a task that occurs at the specified "
-                            + "time and date");
-        System.out.println("    mark <task number>                      -Marks task as completed");
-        System.out.println("    unmark <task number>                    -Marks a completed task as uncompleted");
-        System.out.println("    delete <task number>                    -Deletes the task at the specified index");
-        System.out.println("    bye                                     -Exits the program");
-        System.out.println("    find <keyword>                          -Retrieves all tasks that contains the "
-                            + "specified keyword");
-        System.out.println("____________________________________________________________\n");
+    public String displayListOfCommand() {
+        String result = "";
+        result += "____________________________________________________________\n";
+        result += "\nCommands: ";
+        result += "    List                                    -List out all your current tasks\n";
+        result += "    todo <task name>                        -Add a todo task without any deadline"
+                            + " specified\n";
+        result += "    deadline <task name> /by <Date><Time>   -Adds a task that has to be done before "
+                            + "the specified deadline\n";
+        result += "    event <task name> /at <Date><Time>      -Adds a task that occurs at the specified "
+                            + "time and date\n";
+        result += "    mark <task number>                      -Marks task as completed\n";
+        result += "    unmark <task number>                    -Marks a completed task as uncompleted\n";
+        result += "    delete <task number>                    -Deletes the task at the specified index\n";
+        result += "    bye                                     -Exits the program\n";
+        result += "    find <keyword>                          -Retrieves all tasks that contains the "
+                            + "specified keyword\n";
+        result += "____________________________________________________________\n";
+        return result;
     }
 
 
@@ -126,84 +135,30 @@ public class UserInterface {
      * @param input Input the user entered.
      */
 
-    public void performCommand(String input) {
+    public Commands performCommand(String input) throws DukeExceptions {
         String[] stringIntoParts = input.split(" ");
         String firstWord = stringIntoParts[0];
-
         switch (firstWord) {
         case "list":
-            taskList.list();
-            break;
-
+            return new ListCommands();
         case "mark": case "unmark":
-            MarkCommands markCommand = new MarkCommands(input, taskList);
-            markCommand.execute();
-            break;
-
+            return new MarkCommands(input);
         case "delete":
-            DeleteCommands deleteCommand = new DeleteCommands(input, taskList);
-            deleteCommand.execute();
-            break;
-
+            return new DeleteCommands(input);
         case "todo": case "deadline": case "event":
-            AddCommands addCommand = new AddCommands(input, taskList);
-            addCommand.execute();
-            break;
-
+            return new AddCommands(input);
         case "find":
-            try {
-                if (stringIntoParts.length == 1) {
-                    throw new DukeExceptions("ERROR: find command requires a parameter to specify"
-                                                    + " what keyword to find");
-                }
-                String toFind = input.substring(input.indexOf(" ") + 1);
-                taskList.find(toFind);
-            } catch (DukeExceptions e) {
-                System.out.println(e.getMessage());
-            }
-
-            break;
-
+            return new FindCommands(input);
         case "bye":
-            return;
-
+            return new ByeCommands();
         case "help":
-            displayListOfCommand();
-            break;
-
+            return new HelpCommands();
         default:
-            displayInvalidCommand(input);
-            break;
+            return new DefaultCommands(input);
         }
 
     }
-
-    /**
-     * Serves as the interface between the user and the program.
-     */
-
-    private void displayMenu() {
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
-        while (!isExit) {
-            String userInput = sc.nextLine();
-            performCommand(userInput);
-            isExit = ifBye(userInput);
-        }
-        sc.close();
+    public String displayErrorMessage(String errorMsg) {
+        return errorMsg;
     }
-
-    /**
-     * Method that starts the Taskmaster program.
-     */
-
-    public void runChatBot() {
-        displayOpeningMessage();
-        loadExistingFile();
-        displayMenu();
-        displayByeMessage();
-        updateList();
-    }
-
-
 }

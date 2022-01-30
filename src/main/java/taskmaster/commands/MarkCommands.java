@@ -2,6 +2,8 @@ package taskmaster.commands;
 
 import taskmaster.exception.DukeExceptions;
 import taskmaster.task.Task;
+import taskmaster.userinterface.UserInterface;
+import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
 
@@ -12,18 +14,15 @@ import taskmaster.util.TaskList;
  */
 
 public class MarkCommands extends Commands {
-    private TaskList taskList;
 
     /**
      * Constructor for MarkCommands.
      *
      * @param command Type of command.
-     * @param taskList Task list that command is going to be added in.
      */
 
-    public MarkCommands(String command, TaskList taskList) {
+    public MarkCommands(String command) {
         super(command);
-        this.taskList = taskList;
     }
 
     /**
@@ -31,39 +30,35 @@ public class MarkCommands extends Commands {
      * Extract the components of the command.
      */
 
-    private void parseCommand() {
+    private String parseCommand(TaskList taskList) throws DukeExceptions {
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
+        String result = "";
 
+        if (stringIntoParts.length == 1) {
+            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
+        } else if (stringIntoParts.length > 2) {
+            //Handle the case of having more than 2 inputs
+            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
+        }
+
+        //Handle error if the second input is not an integer
+        //Gets the index of the task in the task list
         try {
-            if (stringIntoParts.length == 1) {
-                throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
-            } else if (stringIntoParts.length > 2) {
-                //Handle the case of having more than 2 inputs
-                throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
-            }
-
-            //Handle error if the second input is not an integer
-            //Gets the index of the task in the task list
             int index = Integer.parseInt(stringIntoParts[1]);
 
             //If index is out of range, throw illegal argument exception
             if (taskList.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
             }
-
             if (firstWord.equals("mark")) {
-                mark(index);
+                result += mark(index, taskList);
             } else if (firstWord.equals("unmark")) {
-                unmark(index);
+                result += unmark(index, taskList);
             }
-
+            return result;
         } catch (NumberFormatException nfe) {
-            System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
-
-        } catch (DukeExceptions e) {
-            //Out of task range is thrown if the second input is out of range
-            System.out.println(e.getMessage());
+            throw new DukeExceptions("What? Second input has to be an integer! Eg mark 1, unmark 2\\n");
         }
     }
 
@@ -74,11 +69,11 @@ public class MarkCommands extends Commands {
      * @param index Index of task that is to be marked.
      */
 
-    private void mark(int index) {
+    private String mark(int index, TaskList taskList) {
         Task selectedTask = taskList.get(index - 1);
-        System.out.println("Aye! I've marked this task as completed:\n");
+        String result = "Aye! I've marked this task as completed:\n";
         taskList.mark(index - 1);
-        printTask(selectedTask);
+        return result + printTask(selectedTask);
     }
 
     /**
@@ -88,11 +83,11 @@ public class MarkCommands extends Commands {
      * @param index Index of task that is to be un-marked.
      */
 
-    private void unmark(int index) {
+    private String unmark(int index, TaskList taskList) {
         Task selectedTask = taskList.get(index - 1);
-        System.out.println("Aye kid! I've marked this task as uncompleted:\n");
+        String result = "Aye kid! I've marked this task as uncompleted:\n";
         taskList.unmark(index - 1);
-        printTask(selectedTask);
+        return result + printTask(selectedTask);
     }
 
     /**
@@ -100,16 +95,16 @@ public class MarkCommands extends Commands {
      * @param task Task whose information is to be printed.
      */
 
-    private void printTask(Task task) {
-        System.out.println("    " + task.toString());
+    private String printTask(Task task) {
+        return "    " + task.toString();
     }
 
     /**
      * Execute Command.
      */
 
-    public void execute() {
-        parseCommand();
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
+        return parseCommand(taskList);
     }
 
 
