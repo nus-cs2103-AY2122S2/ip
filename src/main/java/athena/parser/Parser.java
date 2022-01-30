@@ -4,6 +4,7 @@ import athena.commands.Command;
 import athena.commands.DeadlineCommand;
 import athena.commands.DeleteCommand;
 import athena.commands.EventCommand;
+import athena.commands.FindCommand;
 import athena.commands.ListCommand;
 import athena.commands.MarkCommand;
 import athena.commands.ShutdownCommand;
@@ -50,6 +51,8 @@ public class Parser {
         case "delete":
             return new DeleteCommand(getTaskNumberFromInput(arguments));
             // No fallthrough necessary
+        case "find":
+            return new FindCommand(getSearchPhraseFromInput(arguments));
         case "list":
             return new ListCommand();
             // No fallthrough necessary
@@ -77,6 +80,13 @@ public class Parser {
         input = input.split("/")[0].strip();
         if (input.isEmpty()) {
             throw new InputException(InputErrorCode.MISSING_TASK_NAME);
+        }
+        return input;
+    }
+
+    private static String getSearchPhraseFromInput(String input) throws InputException {
+        if (input.isEmpty()) {
+            throw new InputException(InputErrorCode.MISSING_SEARCH_PHRASE);
         }
         return input;
     }

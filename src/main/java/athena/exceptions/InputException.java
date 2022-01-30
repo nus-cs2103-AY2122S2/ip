@@ -28,6 +28,9 @@ public class InputException extends Exception {
         case INVALID_TASK_DATETIME:
             return("Error. Please enter the date and time in the following format: dd/mm/yyyy hh:mm");
             // No fallthrough
+        case MISSING_SEARCH_PHRASE:
+            return("Error. Please provide a search phrase.");
+            // No fallthrough
         default:
             return(""); // Should not get here.
             // No fallthrough

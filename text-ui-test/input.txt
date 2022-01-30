@@ -11,6 +11,9 @@ deadline do homework /by 3/4/2020 2359
 delete 1
 delete 2
 list
+find [D][ ]
+find do homework
+find 1.
 invalidcommand
 
 todo
@@ -27,4 +30,5 @@ mark -15
 mark
 unmark 23
 delete 2323233
+find
 bye
