@@ -8,25 +8,24 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
-    private Scanner sc;
+    private String output;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        this.output = "";
     }
 
     /**
      * Prints welcome message
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        output = "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Prints exit message
      */
     public void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+       output = "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -35,9 +34,9 @@ public class Ui {
      * @param tasks list of tasks
      */
     public void showList(ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
+        output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("%d.%s", i + 1, tasks.get(i)));
+            output += String.format("%d.%s\n", i + 1, tasks.get(i));
         }
     }
 
@@ -47,8 +46,7 @@ public class Ui {
      * @param task task marked as done
      */
     public void showMarkTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+        output = "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
@@ -57,8 +55,7 @@ public class Ui {
      * @param task task marked as undone
      */
     public void showUnmarkTask(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task);
+        output = "OK, I've marked this task as not done yet:\n" + task + "\n";
     }
 
     /**
@@ -68,13 +65,12 @@ public class Ui {
      * @param tasks current list of tasks
      */
     public void showAddTask(Task task, ArrayList<Task> tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
+        output = "Got it. I've added this task:\n" + task + "\n";
         if (tasks.size() <= 1) {
-            System.out.println(String.format("Now you have %d task in the list.", tasks.size()));
+            output += String.format("Now you have %d task in the list.\n", tasks.size());
         }
         else {
-            System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+            output += String.format("Now you have %d tasks in the list.\n", tasks.size());
         }
     }
 
@@ -85,9 +81,8 @@ public class Ui {
      * @param tasks current list of tasks
      */
     public void showDeleteTask(Task task, ArrayList<Task> tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        output = "Noted. I've removed this task:\n" + task + "\n" +
+                String.format("Now you have %d tasks in the list.\n", tasks.size());
     }
 
     /**
@@ -96,17 +91,10 @@ public class Ui {
      * @param tasks list of matching tasks
      */
     public void showMatchingTasks(ArrayList<Task> tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+        output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("%d.%s", i + 1, tasks.get(i)));
+            output += String.format("%d.%s\n", i + 1, tasks.get(i));
         }
-    }
-
-    /**
-     * Prints line
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -115,7 +103,7 @@ public class Ui {
      * @param message loading error message
      */
     public void showLoadingError(String message) {
-        System.out.println(message);
+        output = message;
     }
 
     /**
@@ -124,7 +112,7 @@ public class Ui {
      * @param message error message
      */
     public void showError(String message) {
-        System.out.println(message);
+        output = message;
     }
 
     /**
@@ -132,7 +120,10 @@ public class Ui {
      *
      * @return user input
      */
-    public String readCommand() {
-        return sc.nextLine();
+  //  public String readCommand() {
+    //    return sc.nextLine();
+    //}
+    public String toString() {
+        return output;
     }
 }
