@@ -44,7 +44,7 @@ public class Conan {
      */
     public Conan() {
         Ui.printSeparator();
-        Ui.greeting();
+        Ui.printGreeting();
 
         this.username = EMPTY_STR_FILLER;
         this.taskList = new TaskList();
@@ -94,7 +94,7 @@ public class Conan {
         try {
             userInput = userInput.trim();
 
-            if (CommandChecker.yesOrNoChecker(userInput) == Commands.YES) {
+            if (CommandChecker.checkYesOrNo(userInput) == Commands.YES) {
                 AddCommand.add(this.taskList, this.storage);
             }
             Ui.printAsk(this.username);
@@ -137,19 +137,19 @@ public class Conan {
                 DeleteCommand.delete(this.taskList, message);
                 break;
             case DUEBEFORE:
-                DueCommand.dueBefore(message, this.taskList);
+                DueCommand.tasksDueBefore(message, this.taskList);
                 break;
             case DUEON:
-                DueCommand.dueOn(message, this.taskList);
+                DueCommand.tasksDueOn(message, this.taskList);
                 break;
             case LIST:
                 Ui.printMessage(this.taskList.toString());
                 break;
             case MARK:
-                Marking.mark(message, this.taskList);
+                Marking.markTask(message, this.taskList);
                 break;
             case UNMARK:
-                Marking.unmark(message, this.taskList);
+                Marking.unmarkTask(message, this.taskList);
                 break;
             default:
                 // do nothing

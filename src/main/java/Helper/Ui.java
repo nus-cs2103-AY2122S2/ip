@@ -12,7 +12,7 @@ public class Ui {
     /**
      * prints introductory greetings.
      */
-    public static void greeting() {
+    public static void printGreeting() {
 
         String greeting = "Hello There, My name is Conan! \n"
                 + "Hope you're doing fine today! (^_^) \n"

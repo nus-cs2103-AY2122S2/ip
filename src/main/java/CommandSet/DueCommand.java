@@ -34,7 +34,7 @@ public class DueCommand extends Command {
      * @param date the due date.
      * @param taskList the list of user tasks.
      */
-    public static void dueOn(String date, TaskList taskList) {
+    public static void tasksDueOn(String date, TaskList taskList) {
         date = date.substring(DUE_ON.length()).trim();
         Ui.printMessage(taskList.tasksDueOn(date).toString());
     }
@@ -45,7 +45,7 @@ public class DueCommand extends Command {
      * @param date the due date.
      * @param taskList the list of user tasks.
      */
-    public static void dueBefore(String date, TaskList taskList) {
+    public static void tasksDueBefore(String date, TaskList taskList) {
         date = date.substring(DUE_BEFORE.length()).trim();
         Ui.printMessage(taskList.tasksDueBefore(date).toString());
     }

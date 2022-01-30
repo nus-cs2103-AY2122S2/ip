@@ -28,7 +28,7 @@ public class Marking extends Command{
      * @param taskList the list of user tasks.
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
-    public static void mark(String message, TaskList taskList) {
+    public static void markTask(String message, TaskList taskList) {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
         if (num <= taskList.numOfTasks() && num > 0) {
@@ -45,7 +45,7 @@ public class Marking extends Command{
      * @param taskList the list of user tasks.
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
-    public static void unmark(String message, TaskList taskList) {
+    public static void unmarkTask(String message, TaskList taskList) {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
         if(num > 0 && num <= taskList.numOfTasks()) {

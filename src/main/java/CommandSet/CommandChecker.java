@@ -129,7 +129,7 @@ public class CommandChecker {
      * @return either YES or NO.
      * @throws InvalidYesOrNoException if the user inputs a command other than yes or no.
      */
-    public static Commands yesOrNoChecker(String message) {
+    public static Commands checkYesOrNo(String message) {
         switch (message.toLowerCase()) {
         case YES:
             return Commands.YES;
