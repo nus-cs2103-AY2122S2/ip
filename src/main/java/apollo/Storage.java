@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage {
+
     private static final Path DATA_PATH = Paths.get("data", "apollo.ser");
 
     private static void initialiseDir() throws ApolloIoException {
@@ -28,8 +29,10 @@ public class Storage {
 
     public static void save(TaskList taskList) throws ApolloIoException {
         initialiseDir();
+
         try {
-            ObjectOutputStream objStream = new ObjectOutputStream(Files.newOutputStream(DATA_PATH));
+            ObjectOutputStream objStream =
+                    new ObjectOutputStream(Files.newOutputStream(DATA_PATH));
             objStream.writeObject(taskList);
         } catch (IOException e) {
             throw new ApolloIoException("Cannot write to save file. ");
@@ -37,9 +40,9 @@ public class Storage {
     }
 
     public static TaskList load() throws ApolloIoException {
-        ObjectInputStream objStream;
         try {
-            objStream = new ObjectInputStream(Files.newInputStream(DATA_PATH));
+            ObjectInputStream objStream =
+                    new ObjectInputStream(Files.newInputStream(DATA_PATH));
             return (TaskList) objStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new ApolloIoException("Cannot load save file. ");

@@ -49,10 +49,10 @@ public class WelcomeTest {
         String morningLoad = "Welcome back sir. \nHow can I help you on this wonderful morning? ";
         String morningNoLoad = "Good morning sir, I am Apollo. \nHow can I help you on this wonderful morning? ";
 
-        assertEquals(morningLoad, Welcome.welcomeMessage(true, morning1));
-        assertEquals(morningLoad, Welcome.welcomeMessage(true, morning2));
-        assertEquals(morningNoLoad, Welcome.welcomeMessage(false, morning1));
-        assertEquals(morningNoLoad, Welcome.welcomeMessage(false, morning2));
+        assertEquals(morningLoad, Welcome.greet(true, morning1));
+        assertEquals(morningLoad, Welcome.greet(true, morning2));
+        assertEquals(morningNoLoad, Welcome.greet(false, morning1));
+        assertEquals(morningNoLoad, Welcome.greet(false, morning2));
     }
 
     @Test
@@ -63,10 +63,10 @@ public class WelcomeTest {
         String afternoonLoad = "Welcome back sir. \nHow can I help you on this wonderful afternoon? ";
         String afternoonNoLoad = "Good afternoon sir, I am Apollo. \nHow can I help you on this wonderful afternoon? ";
 
-        assertEquals(afternoonLoad, Welcome.welcomeMessage(true, afternoon1));
-        assertEquals(afternoonLoad, Welcome.welcomeMessage(true, afternoon2));
-        assertEquals(afternoonNoLoad, Welcome.welcomeMessage(false, afternoon1));
-        assertEquals(afternoonNoLoad, Welcome.welcomeMessage(false, afternoon2));
+        assertEquals(afternoonLoad, Welcome.greet(true, afternoon1));
+        assertEquals(afternoonLoad, Welcome.greet(true, afternoon2));
+        assertEquals(afternoonNoLoad, Welcome.greet(false, afternoon1));
+        assertEquals(afternoonNoLoad, Welcome.greet(false, afternoon2));
     }
 
     @Test
@@ -77,10 +77,10 @@ public class WelcomeTest {
         String eveningLoad = "Welcome back sir. \nHow can I help you on this wonderful evening? ";
         String eveningNoLoad = "Good evening sir, I am Apollo. \nHow can I help you on this wonderful evening? ";
 
-        assertEquals(eveningLoad, Welcome.welcomeMessage(true, evening1));
-        assertEquals(eveningLoad, Welcome.welcomeMessage(true, evening2));
-        assertEquals(eveningNoLoad, Welcome.welcomeMessage(false, evening1));
-        assertEquals(eveningNoLoad, Welcome.welcomeMessage(false, evening2));
+        assertEquals(eveningLoad, Welcome.greet(true, evening1));
+        assertEquals(eveningLoad, Welcome.greet(true, evening2));
+        assertEquals(eveningNoLoad, Welcome.greet(false, evening1));
+        assertEquals(eveningNoLoad, Welcome.greet(false, evening2));
     }
 
     @Test
@@ -91,10 +91,10 @@ public class WelcomeTest {
         String nightLoad = "Welcome back sir. \nHow can I help you on this wonderful night? ";
         String nightNoLoad = "Good night sir, I am Apollo. \nHow can I help you on this wonderful night? ";
 
-        assertEquals(nightLoad, Welcome.welcomeMessage(true, night1));
-        assertEquals(nightLoad, Welcome.welcomeMessage(true, night2));
-        assertEquals(nightNoLoad, Welcome.welcomeMessage(false, night1));
-        assertEquals(nightNoLoad, Welcome.welcomeMessage(false, night2));
+        assertEquals(nightLoad, Welcome.greet(true, night1));
+        assertEquals(nightLoad, Welcome.greet(true, night2));
+        assertEquals(nightNoLoad, Welcome.greet(false, night1));
+        assertEquals(nightNoLoad, Welcome.greet(false, night2));
     }
 
     @AfterAll

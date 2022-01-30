@@ -1,9 +1,11 @@
 package apollo.tasks;
 
 public class Task implements java.io.Serializable {
+
     private boolean isDone;
     private final String description;
-    private final Type type;
+    private final Type taskType;
+
     public enum Type {
         TODO, DEADLINE, EVENT;
 
@@ -13,10 +15,10 @@ public class Task implements java.io.Serializable {
         }
     }
 
-    public Task(String description, Type type) {
+    public Task(String description, Type taskType) {
         this.description = description;
         this.isDone = false;
-        this.type = type;
+        this.taskType = taskType;
     }
 
     public String getStatus() {
@@ -28,6 +30,9 @@ public class Task implements java.io.Serializable {
     }
 
     public String toString() {
-        return String.format("[%s][%s] %s", type, this.getStatus(), this.description);
+        return String.format("[%s][%s] %s",
+                taskType,
+                this.getStatus(),
+                this.description);
     }
 }

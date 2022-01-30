@@ -11,12 +11,16 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
     @Override
+
     public String execute() throws ApolloOutOfBoundsException {
         if (index < 0 || index >= taskList.taskCount()) {
             throw new ApolloOutOfBoundsException();
         }
+
         Task deleted = taskList.deleteTask(index);
         return String.format("Alright, I've removed this task. \n"
-                + "  %s\nThere's a total of %d tasks now. ", deleted, taskList.taskCount());
+                + "  %s\nThere's a total of %d tasks now. ",
+                deleted,
+                taskList.taskCount());
     }
 }

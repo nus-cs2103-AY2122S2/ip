@@ -3,6 +3,7 @@ package apollo.tasks;
 import java.util.ArrayList;
 
 public class TaskList implements java.io.Serializable{
+
     private final ArrayList<Task> taskList;
 
     public TaskList() {
@@ -14,9 +15,9 @@ public class TaskList implements java.io.Serializable{
     }
 
     public Task deleteTask(int i) {
-        Task toDelete = taskList.get(i);
+        Task deleted = taskList.get(i);
         taskList.remove(i);
-        return toDelete;
+        return deleted;
     }
 
     public Task markTask(int i, boolean isDone) {

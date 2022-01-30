@@ -5,6 +5,7 @@ import apollo.parser.Parser;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
+
     private final LocalDateTime period;
 
     public Event(String description, LocalDateTime period) {
@@ -14,6 +15,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), this.period.format(Parser.formatter));
+        return String.format("%s (at: %s)",
+                super.toString(),
+                this.period.format(Parser.formatter));
     }
 }

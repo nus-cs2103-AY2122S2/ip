@@ -47,7 +47,7 @@ public class Welcome {
         System.out.println(("Hello from\n" + logo).replace("\n", LINE_FEED));
     }
 
-    public static String welcomeMessage(boolean isLoaded, LocalTime now) {
+    public static String greet(boolean isLoaded, LocalTime now) {
         String greeting = isLoaded
                 ? "Welcome back sir. "
                 : String.format("Good %s sir, I am Apollo. ", dayTime(now));

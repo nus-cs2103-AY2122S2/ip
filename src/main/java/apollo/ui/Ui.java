@@ -25,8 +25,11 @@ public class Ui {
     }
 
     public void printMessage(String message) {
-        String border = "\t________________________________________________________________________\n";
-        String wrapMessage = border + "\t " + message.replace("\n", "\n\t ") + "\n" + border;
+        String border = "\t_______________________________"
+                + "_________________________________________\n";
+        String wrapMessage = border + "\t "
+                + message.replace("\n", "\n\t ")
+                + "\n" + border;
         out.print(wrapMessage.replace("\n", LINE_FEED));
     }
 

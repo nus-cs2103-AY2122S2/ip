@@ -16,6 +16,8 @@ public class ListCommand extends Command {
         if (taskList.taskCount() == 0) {
             return "You currently have no tasks. ";
         }
-        return String.format("These are your current tasks. %s", getIndexedList());
+
+        return String.format("These are your current tasks. %s",
+                getIndexedList());
     }
 }
