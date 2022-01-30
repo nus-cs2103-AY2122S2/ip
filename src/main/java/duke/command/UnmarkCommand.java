@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.functionality.TaskList;
+import duke.task.Task;
 
 /**
  * Represents the unmark command. A <code>UnmarkCommand</code> object allows users to set the corresponding task as
@@ -17,12 +18,15 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Returns nothing, but marks the corresponding task in the taskList in TaskList class as not done.
+     * Returns a string which contains the message after unmarking the task from the list.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after unmarking task from the list.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.unMarkTask(super.index);
+    public String execute(TaskList tasks) {
+        String message = "OK, I've marked this task as not done yet:\n";
+        Task unMarkedTask = tasks.unMarkTask(super.index);
+        return message + unMarkedTask;
     }
 
     /**

@@ -24,10 +24,11 @@ public abstract class Command {
     }
 
     /**
-     * Returns nothing, but used to execute the respective methods in TaskList class.
+     * Returns a string, after the execution of the respective methods in TaskList class.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return a String representing the respective messages after the execution of the methods in TaskList class.
      */
-    public abstract void execute(TaskList tasks);
+    public abstract String execute(TaskList tasks);
 
     /**
      * Returns a boolean depending on the input command of the user.

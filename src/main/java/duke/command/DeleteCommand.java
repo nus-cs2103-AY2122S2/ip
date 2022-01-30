@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.functionality.TaskList;
+import duke.task.Task;
 
 /**
  * Represents the delete command. A <code>DeleteCommand</code> object corresponds to deleting that specified task
@@ -17,12 +18,16 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns nothing, but deletes the specified task in the taskList in TaskList class.
+     * Returns a string which contains the message after deleting the task from the list.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after deleting task from list.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.deleteTask(super.index);
+    public String execute(TaskList tasks) {
+        Task deletedTask = tasks.deleteTask(super.index);
+        String message = "Noted. I've removed this task:\n";
+        return message + deletedTask.toString() + "\n"
+                + "Now you have " + tasks.getListSize() + " tasks in the list.";
     }
 
     /**

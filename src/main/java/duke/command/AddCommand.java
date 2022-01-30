@@ -19,12 +19,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns nothing, but adds the specified task in the taskList in TaskList class.
+     * Returns a string which contains the message after adding the task to the list.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after adding task to list.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
+        String message = "Got it. I've added this task:\n";
         tasks.addToList(super.task);
+        return message + super.task.toString() + "\nNow you have " + tasks.getListSize() + " tasks in the list.";
     }
 
     /**

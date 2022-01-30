@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.functionality.TaskList;
+import duke.task.Task;
 
 /**
  * Represents the mark command. A <code>MarkCommand</code> object allows users to set the corresponding task as done.
@@ -16,12 +17,15 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Returns nothing, but marks the corresponding task in the taskList in TaskList class as done.
+     * Returns a string which contains the message after marking the task from the list.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after marking task from the list.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.markTask(super.index);
+    public String execute(TaskList tasks) {
+        Task markedTask = tasks.markTask(super.index);
+        String message = "Nice! I've marked this task as done:\n";
+        return message + markedTask;
     }
 
     /**

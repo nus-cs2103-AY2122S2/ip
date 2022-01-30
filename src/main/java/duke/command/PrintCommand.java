@@ -15,12 +15,13 @@ public class PrintCommand extends Command {
     }
 
     /**
-     * Returns nothing, but prints out all the task in the taskList in TaskList class.
+     * Returns a string which contains all the task after the execution of printList in the TaskList class.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after calling printList in the TaskList class.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.printList();
+    public String execute(TaskList tasks) {
+        return tasks.printList();
     }
 
     /**

@@ -15,11 +15,14 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns nothing & does not execute anything.
+     * Returns a string which contains the message to stop the execution of Duke.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message to signify the end of execution.
      */
     @Override
-    public void execute(TaskList tasks) { }
+    public String execute(TaskList tasks) {
+        return "Bye. Hope to see you again soon!";
+    }
 
     /**
      * Returns true as the Command is an ExitCommand.
