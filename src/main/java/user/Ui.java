@@ -18,8 +18,19 @@ public class Ui {
             + INDENT + "| | | | | | | |/ / _ \\\n"
             + INDENT + "| |_| | |_| |   <  __/\n"
             + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String[] OPENING_MESSAGE = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
+    private static final String[] OPENING_MESSAGE = new String[] {"Hello! I'm Duke! What can I do for you?"};
     private static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String[] helpStrings = new String[] {
+        "Commands:",
+        "'todo [some activity]' - add a todo",
+        "'deadline [some task] /by [dd/mm/yyyy-hh:mm]' - add a deadline",
+        "'event [some event] /at [dd/mm/yyyy-hh:mm]' - add an event",
+        "'list'- view all tasks",
+        "'find [keyword]' - search tasks by keyword",
+        "'mark [task number]' - mark a task as done",
+        "'unmark [task number]' - mark a task as not done",
+        "'delete [task number]' - delete a task"
+    };
 
     private final Scanner sc = new Scanner(System.in);
     private final Tasklist tasklist;
@@ -84,34 +95,50 @@ public class Ui {
 
     /**
      * Displays the tasks saved to the user.
+     *
+     * @return An array of Strings.
      */
-    public void displayTasks() {
-        printIndent(SEPARATOR);
+    public String[] displayTasks() {
+        String[] result;
+        // printIndent(SEPARATOR);
         if (tasklist.getNumTasks() == 0) {
-            printIndent("You have no tasks!");
+            // printIndent("You have no tasks!");
+            result = new String[] {"You have no tasks!"};
         } else {
-            printIndent("Here are the tasks in your list:");
+            result = new String[1 + tasklist.getNumTasks()];
+            // printIndent("Here are the tasks in your list:");
+            result[0] = "Here are the tasks in your list:";
             for (int i = 0; i < tasklist.getNumTasks(); i++) {
-                printIndent(String.format("%d. %s", i + 1, tasklist.getTask(i)));
+                // printIndent(String.format("%d. %s", i + 1, tasklist.getTask(i)));
+                result[i + 1] = String.format("%d. %s", i + 1, tasklist.getTask(i));
             }
         }
-        printIndent(SEPARATOR + "\n");
+        // printIndent(SEPARATOR + "\n");
+        return result;
     }
 
     /**
      * Displays each task in an ArrayList of tasks.
+     *
+     * @return An array of Strings.
      */
-    public void displayFoundTasks(ArrayList<Task> foundTasks) {
-        printIndent(SEPARATOR);
+    public String[] displayFoundTasks(ArrayList<Task> foundTasks) {
+        String[] result;
+        // printIndent(SEPARATOR);
         if (foundTasks.size() == 0) {
-            printIndent("No tasks are found!");
+            // printIndent("No tasks are found!");
+            result = new String[] {"No tasks are found!"};
         } else {
-            printIndent("Here are the matching tasks in your list:");
+            result = new String[1 + foundTasks.size()];
+            // printIndent("Here are the matching tasks in your list:");
+            result[0] = "Here are the matching tasks in your list:";
             for (int i = 0; i < foundTasks.size(); i++) {
-                printIndent(String.format("%d. %s", i + 1, foundTasks.get(i)));
+                // printIndent(String.format("%d. %s", i + 1, foundTasks.get(i)));
+                result[i + 1] = String.format("%d. %s", i + 1, foundTasks.get(i));
             }
         }
-        printIndent(SEPARATOR + "\n");
+        // printIndent(SEPARATOR + "\n");
+        return result;
     }
 
     /**
@@ -127,40 +154,42 @@ public class Ui {
      * Handles the user's input, and performs the corresponding action.
      *
      * @param userInput The user's input
+     * @return An array of Strings to be printed.
      */
-    public void handle(String userInput) {
+
+    public String[] handle(String userInput) {
+        String[] result = {};
         try {
-            if (userInput.equals("list")) { // display tasks
-                displayTasks();
+            if (userInput.equals("help")) { // help
+                result = helpStrings;
+            } else if (userInput.equals("list")) { // display tasks
+                result = displayTasks();
             } else if (userInput.startsWith("mark ")) { // mark task as done
                 int taskToMark = parser.handleMarkTask(userInput, tasklist.getNumTasks());
-                String[] result = tasklist.markTask(taskToMark);
-                prettyPrint(result);
+                result = tasklist.markTask(taskToMark);
             } else if (userInput.startsWith("unmark ")) { // mark task as undone
                 int taskToUnmark = parser.handleUnmarkTask(userInput, tasklist.getNumTasks());
-                String[] result = tasklist.unmarkTask(taskToUnmark);
-                prettyPrint(result);
+                result = tasklist.unmarkTask(taskToUnmark);
             } else if (userInput.startsWith("delete ")) { // delete task
                 int taskToDelete = parser.handleDeleteTask(userInput, tasklist.getNumTasks());
-                String[] result = tasklist.deleteTask(taskToDelete);
-                prettyPrint(result);
+                result = tasklist.deleteTask(taskToDelete);
             } else if (userInput.startsWith("find ")) { // find task
                 String keywords = parser.handleFindTask(userInput);
                 ArrayList<Task> foundTasks = tasklist.findTasks(keywords);
-                displayFoundTasks(foundTasks);
+                result = displayFoundTasks(foundTasks);
             } else { // add task
                 Task t = parser.addTask(userInput);
                 tasklist.addTask(t);
-                String[] messages = new String[] {
+                result = new String[] {
                     "Got it. I've added this task:",
                     t.toString(),
                     "Now you have " + tasklist.getNumTasks() + " tasks in the list."
                 };
-                prettyPrint(messages);
             }
             tasklist.saveTasks();
         } catch (DukeException err) {
-            prettyPrint(err.getMessage());
+            result = new String[] {err.getMessage()};
         }
+        return result;
     }
 }
