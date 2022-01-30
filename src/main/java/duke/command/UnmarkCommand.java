@@ -20,10 +20,10 @@ public class UnmarkCommand extends Command {
      * @param storage file storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.setUnDone(taskNo);
         String statement = "Ok, I have marked this task as not done yet:\n  ";
-        System.out.println(statement + taskList.getAction(taskNo));
+        return statement + taskList.getAction(taskNo);
     }
 
     /**

@@ -105,16 +105,17 @@ public class TaskList {
      * Prints out the contents of the list
      * in a numeric notation.
      */
-    public void listOut() {
+    public String listOut() {
         int count = 1;
-        System.out.println("Here are the tasks in your list:");
+        String toBeAppended =  "Here are the tasks in your list:\n";
         if (list.isEmpty()) {
-            System.out.println("Oh, you have nothing to do, how free you are!");
+            toBeAppended = "Oh, you have nothing to do, how free you are!";
         } else {
             for (Action act : list) {
-                System.out.println(count + "." + act);
+                toBeAppended += count + "." + act + "\n";
                 count++;
             }
         }
+        return toBeAppended;
     }
 }

@@ -39,7 +39,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-
+/*
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
-    }
+    }*/
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.

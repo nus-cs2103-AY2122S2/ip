@@ -6,6 +6,7 @@ import duke.ui.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -19,6 +20,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            //Step 1. Setting up required components
+            Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+            Scene scene1 = new Scene(helloWorld); // Setting the scene to be our Label
+            stage.setScene(scene1); // Setting the stage to show our screen
+
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/View/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

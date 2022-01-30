@@ -20,11 +20,11 @@ public class DeleteCommand extends Command {
      * @param storage file storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Action action = taskList.delete(taskNo);
-        System.out.println(new StringBuilder().append("Noted. I have removed this task:\n  ")
+        return new StringBuilder().append("Noted. I have removed this task:\n  ")
                 .append(action).append("\nNow you have ").append(taskList.size()).append(" tasks in the list.")
-                .toString());
+                .toString();
     }
 
     /**

@@ -20,10 +20,10 @@ public class MarkCommand extends Command {
      * @param storage file storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.setDone(taskNo);
         String statement = "Nice! I have marked this task as done:\n  ";
-        System.out.println(statement + taskList.getAction(taskNo));
+        return statement + taskList.getAction(taskNo);
     }
 
     /**
