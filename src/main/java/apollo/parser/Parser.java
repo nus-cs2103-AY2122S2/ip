@@ -57,6 +57,9 @@ public class Parser {
             return new ListCommand();
         case "exit":
             return new ExitCommand();
+        case "find":
+            description = parseArgs(args)[0].trim();
+            return new FindCommand(description);
         default:
             return new InvalidCommand();
         }

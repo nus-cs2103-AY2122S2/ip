@@ -4,7 +4,9 @@ import apollo.commands.*;
 import apollo.exceptions.ApolloIllegalArgumentException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
 
@@ -18,9 +20,8 @@ public class ParserTest {
 
     @Test
     void parseCommand_todoMissingArguments_throwException() {
-        Exception exception = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("todo");
-        });
+        Exception exception = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("todo"));
         String expected = "Insufficient Arguments. ";
         assertEquals(exception.getMessage(), expected);
     }
@@ -32,12 +33,10 @@ public class ParserTest {
 
     @Test
     void parseCommand_deadlineMissingArguments_throwException() {
-        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("deadline   ");
-        });
-        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("deadline   test");
-        });
+        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("deadline   "));
+        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("deadline   test"));
         String expected1 = "Insufficient Arguments. ";
         String expected2 = "Please add date and time in this format: dd-MM-yyyy HH:mm";
         assertEquals(exception1.getMessage(), expected1);
@@ -51,12 +50,10 @@ public class ParserTest {
 
     @Test
     void parseCommand_eventMissingArguments_throwException() {
-        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("event   ");
-        });
-        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("event   test /bt");
-        });
+        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("event   "));
+        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("event   test /bt"));
         String expected1 = "Insufficient Arguments. ";
         String expected2 = "Please add date and time in this format: dd-MM-yyyy HH:mm";
         assertEquals(exception1.getMessage(), expected1);
@@ -71,12 +68,10 @@ public class ParserTest {
 
     @Test
     void parseCommand_markMissingArguments_throwException() {
-        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("Mark  ");
-        });
-        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("unmark  ");
-        });
+        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("Mark  "));
+        Exception exception2 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("unmark  "));
         String expected = "Insufficient Arguments. ";
         assertEquals(exception1.getMessage(), expected);
         assertEquals(exception2.getMessage(), expected);
@@ -89,9 +84,8 @@ public class ParserTest {
 
     @Test
     void parseCommand_deleteMissingArguments_throwException() {
-        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class, () -> {
-            parser.parseCommand("   delete    ");
-        });
+        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("   delete    "));
         String expected = "Insufficient Arguments. ";
         assertEquals(exception1.getMessage(), expected);
     }
@@ -110,5 +104,19 @@ public class ParserTest {
     void parseCommand_invalidTest_invalidInstance() throws ApolloIllegalArgumentException {
         assertTrue(parser.parseCommand("anyOtherString") instanceof InvalidCommand);
         assertTrue(parser.parseCommand("any Other String") instanceof InvalidCommand);
+    }
+
+    @Test
+    void parseCommand_findTest_findInstance() throws ApolloIllegalArgumentException {
+        assertTrue(parser.parseCommand("find word") instanceof FindCommand);
+        assertTrue(parser.parseCommand("find multiple words") instanceof FindCommand);
+    }
+
+    @Test
+    void parseCommand_findMissing_throwException() {
+        Exception exception1 = assertThrows(ApolloIllegalArgumentException.class,
+                () -> parser.parseCommand("   find    "));
+        String expected = "Insufficient Arguments. ";
+        assertEquals(exception1.getMessage(), expected);
     }
 }

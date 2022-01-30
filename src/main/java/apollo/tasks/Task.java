@@ -23,6 +23,10 @@ public class Task implements java.io.Serializable {
         return isDone ? "X" : " ";
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAs(boolean isDone) {
         this.isDone = isDone;
     }

@@ -31,4 +31,8 @@ public class TaskList implements java.io.Serializable{
     public String getTaskString(int i) {
         return taskList.get(i).toString();
     }
+
+    public String getTaskDescription(int i) {
+        return taskList.get(i).getDescription();
+    }
 }

@@ -1,7 +1,6 @@
 package apollo.commands;
 
 import apollo.exceptions.ApolloOutOfBoundsException;
-import apollo.tasks.Task;
 import apollo.tasks.TaskList;
 import apollo.tasks.Todo;
 import org.junit.jupiter.api.AfterEach;
