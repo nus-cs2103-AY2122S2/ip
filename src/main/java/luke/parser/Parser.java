@@ -1,5 +1,9 @@
 package luke.parser;
 
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.Map;
+
 import luke.commands.AddCommand;
 import luke.commands.Command;
 import luke.commands.CommandAction;
@@ -17,21 +21,17 @@ import luke.data.tasks.Deadline;
 import luke.data.tasks.Event;
 import luke.data.tasks.Todo;
 
-import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Parser {
     private static Map<String, CommandAction> commandActionMap = new HashMap<>() {{
-        put("bye", CommandAction.EXIT);
-        put("list", CommandAction.LIST);
-        put("mark", CommandAction.MARK);
-        put("unmark", CommandAction.UNMARK);
-        put("todo", CommandAction.TODO);
-        put("event", CommandAction.EVENT);
-        put("deadline", CommandAction.DEADLINE);
-        put("delete", CommandAction.DELETE);
-    }};
+            put("bye", CommandAction.EXIT);
+            put("list", CommandAction.LIST);
+            put("mark", CommandAction.MARK);
+            put("unmark", CommandAction.UNMARK);
+            put("todo", CommandAction.TODO);
+            put("event", CommandAction.EVENT);
+            put("deadline", CommandAction.DEADLINE);
+            put("delete", CommandAction.DELETE);
+        }};
 
     public static Command parse(String input) {
         String[] inputs = input.split(" ", 2);
@@ -47,6 +47,8 @@ public class Parser {
                     return prepareAddCommand(cmdAction, inputs);
                 case UPDATE:
                     return prepareUpdateCommand(cmdAction, inputs);
+                default:
+                    break;
                 }
             }
             return new InvalidCommand();
@@ -83,7 +85,8 @@ public class Parser {
         }
     }
 
-    public static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args) throws IllegalArgumentException {
+    public static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
+            throws IllegalArgumentException {
         Map<String, String> argsMap = new HashMap<>();
         if (args.length < 2) {
             throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));

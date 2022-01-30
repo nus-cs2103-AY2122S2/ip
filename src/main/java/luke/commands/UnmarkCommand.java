@@ -4,8 +4,9 @@ import luke.data.TaskList;
 
 public class UnmarkCommand extends UpdateCommand {
 
-    private static final String DEFAULT_MESSAGE = "Force should be used for greater good!\nI've forced this task as not done yet...";
     public static final CommandAction COMMAND_ACTION = CommandAction.UNMARK;
+    private static final String DEFAULT_MESSAGE = "Force should be used for greater good!\n"
+            + "I've forced this task as not done yet...";
 
     public UnmarkCommand(int index) {
         super(index);
