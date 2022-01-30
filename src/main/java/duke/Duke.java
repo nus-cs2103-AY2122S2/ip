@@ -6,7 +6,10 @@ import duke.dukeException.NoTimeGivenException;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Duke {
+/**
+ * The main logic of Duke
+ */
+class Duke {
     private static final TaskList taskList = new TaskList();
     private static final Storage storage = new Storage();
 

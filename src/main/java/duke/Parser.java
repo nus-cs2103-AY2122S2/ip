@@ -1,13 +1,24 @@
 package duke;
-
-import duke.command.*;
-import duke.dukeException.NoTimeGivenException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import duke.command.Command;
+import duke.dukeException.NoTimeGivenException;
+import duke.command.*;
 
-public class Parser {
-    public static Command parse(String userInput, TaskList taskList, Over over) throws NoTimeGivenException {
+/**
+ * Encapsulates the parsing logic of string commands
+ */
+class Parser {
+    /**
+     * returns the Command object that the user indicates through userInput
+     * @param userInput the String value that the user typed
+     * @param taskList the current list of tasks that duke stores, encapsulated in TaskList class
+     * @param over the boolean value that decides when to kill the program, encapsulated in custom wrapper class
+     * @return the Command object that can be executed
+     * @throws NoTimeGivenException if the user types the wrong format of time
+     */
+    public static Command parse(String userInput, TaskList taskList, Over over)
+    throws NoTimeGivenException {
         String[] words;
         String firstWord;
         words = userInput.split(" ");

@@ -31,6 +31,10 @@ public abstract class Task {
         this.finished = false;
     }
 
+    /**
+     * returns a string representation of the task to be read by users.
+     * @return a string representation of the task
+     */
     @Override
     public String toString() {
         if (finished) {
@@ -40,6 +44,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * returns a string representation of the task to be used in writing to a local file.
+     * @return a string representation of the task
+     */
     public String toData() {
         if (finished) {
             return "1:" + content;
