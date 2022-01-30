@@ -1,2 +1,2 @@
-T ~   ~  borrow book ~ 
-D ~   ~  return book ~ 2022-01-24
+T ~ X ~  borrow book ~ 
+D ~ X ~  return book ~ 2022-01-24
