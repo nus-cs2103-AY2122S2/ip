@@ -90,10 +90,10 @@ public class Parser {
             LocalDate localDate = LocalDate.parse(stringDate, formatter);
             return localDate;
         } catch (DateTimeParseException e) {
-            System.out.println("The date input provided does not comply to any correct standards\n" +
-                    "Please follow this format instead: yyyy/MMMM/dd (eg. 2022/May/19)\n");
+            throw new DateTimeParseException("The date input provided does not comply to any correct standards\n" +
+                    "Please follow this format instead: yyyy/MMMM/dd (eg. 2022/May/19)\n" +
+                    "Please try running the command again!\n", userInput, 0);
         }
-        return null;
     }
 
     /**
@@ -156,38 +156,63 @@ public class Parser {
         return res.toString();
     }
 
+    public void checkInteger() throws DukeException {
+        int taskNumber = obtainInteger();
+        if (taskNumber >= tasks.getTaskListSize() || taskNumber < 1) {
+            throw new DukeException("Please provide the correct Task number! Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!\n");
+        }
+    }
+
     /**
      * Makes a call on duke.TaskList's mark()
      */
     public String markTaskAsDone() {
+        Task task;
         StringBuilder res = new StringBuilder();
         res.append(line).append("Nice! I've marked this task as done: \n");
-        Task task = tasks.markTask(obtainInteger());
-        res.append(task.toString()).append(line);
-        return res.toString();
+        try {
+            checkInteger();
+            task = tasks.markTask(obtainInteger());
+            res.append(task.toString()).append(line);
+            return res.toString();
+        } catch (DukeException e) {
+            String error = e.getMessage();
+            return e.getMessage();
+        }
     }
 
     /**
      * Makes a call on duke.TaskList's unmark()
      */
     public String unmarkTask() {
+        Task task;
         StringBuilder res = new StringBuilder();
         res.append(line).append("Nice! I've unmarked this task: \n");
-        Task task = tasks.unmarkTask(obtainInteger());
-        res.append(task.toString()).append(line);
-        return res.toString();
+        try {
+            checkInteger();
+            task = tasks.unmarkTask(obtainInteger());
+            res.append(task.toString()).append(line);
+            return res.toString();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
      * Makes a call on duke.TaskList's delete()
      */
     public String deleteTask() throws DukeException {
-        StringBuilder res = new StringBuilder();
-        res.append(line).append("Noted. I've removed this task: \n");
-        res.append(tasks.delete(obtainInteger()).toString()).append("\n");
-        res.append("Now you have ").append(tasks.getTaskListSize());
-        res.append(" tasks in the list.\n").append(line);
-        return res.toString();
+        try {
+            checkInteger();
+            StringBuilder res = new StringBuilder();
+            res.append(line).append("Noted. I've removed this task: \n");
+            res.append(tasks.delete(obtainInteger()).toString()).append("\n");
+            res.append("Now you have ").append(tasks.getTaskListSize());
+            res.append(" tasks in the list.\n").append(line);
+            return res.toString();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -220,10 +245,14 @@ public class Parser {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        Task task = new Deadline(title, 0, obtainDate());
-        tasks.addTask(task);
-        successMessage.append("Added duke.Deadline task successfully!\n");
-        return successMessage.toString();
+        try {
+            Task task = new Deadline(title, 0, obtainDate());
+            tasks.addTask(task);
+            successMessage.append("Added Deadline task successfully!\n");
+            return successMessage.toString();
+        } catch (DateTimeParseException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -238,10 +267,14 @@ public class Parser {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        Task task = new Event(title, 0, obtainDate());
-        tasks.addTask(task);
-        successMessage.append("Added duke.Event task successfully!\n");
-        return successMessage.toString();
+        try {
+            Task task = new Event(title, 0, obtainDate());
+            tasks.addTask(task);
+            successMessage.append("Added Event task successfully!\n");
+            return successMessage.toString();
+        } catch (DateTimeParseException e) {
+            return e.getMessage();
+        }
     }
 
     /**

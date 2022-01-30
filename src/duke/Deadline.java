@@ -2,8 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
 
 /**
  * This is a child class of duke.Task, duke.Deadline.

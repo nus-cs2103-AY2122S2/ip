@@ -3,8 +3,8 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 /**
- * This duke.Duke program is a Personal Assistant Chatbot
- * to keep track of various things.
+ * Ui class that handles the display and obtaining of user input
+ * of Duke application
  *
  * @author  Hsiao Jiet
  * @version 1.0
@@ -16,23 +16,30 @@ public class Ui {
     String line = "____________________________________________________________\n";
     Scanner scanner;
 
+    /**
+     * Constructor.
+     * Initialises a scanner for user input and starts up application welcome message.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
         System.out.println(createWelcomeMessage());
     }
 
+    /** Returns a pre-made Welcome message to users  */
     public String createWelcomeMessage() {
         StringBuilder welcomeMessage = new StringBuilder();
-        String welcome = "Welcome to duke.Duke, your personal duke.Task assistant!\n";
+        String welcome = "Welcome to Duke, your personal Task assistant!\n";
         welcomeMessage.append(line).append(welcome).append(line);
         return welcomeMessage.toString();
     }
 
+    /** Takes in TaskList and Storage objects so that they can be updated with user's commands  */
     public void displayCommandMessage(TaskList tasks, Storage storage) throws DukeException, IOException {
         System.out.println(askForCommand());
         parseUserInput(tasks, storage);
     }
 
+    /** Returns a pre-made command message to users  */
     public String askForCommand() {
         StringBuilder commandLine = new StringBuilder();
         String command = "What is your command: \n";
@@ -40,6 +47,7 @@ public class Ui {
         return commandLine.toString();
     }
 
+    /** Takes in TaskList and Storage objects to parse the user input  */
     public void parseUserInput(TaskList tasks, Storage storage) throws DukeException, IOException {
         String userInput = scanner.nextLine();
         parser = new Parser(userInput, tasks, storage);//Calls duke.Parser to parse information of userInput
