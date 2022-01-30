@@ -25,10 +25,29 @@ sourceSets {
 
 }
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
 }
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
+run{
+    standardInput = System.in
 }
