@@ -218,10 +218,10 @@ public class TaskList {
                 "'todo *todo name*'  : Use this to add a todo task into Duke.\n" +
                 "'event *event name* /at *YYYY-MM-DD HH:MM*'       : Use this to add an event task into Duke.\n" +
                 "'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Use this to add a deadline task into Duke.\n" +
-                "\n=> Lastly, commands to edit a task on Duke.\n" +
+                "\n=> Lastly, these are the commands to edit a task on Duke.\n" +
                 "'mark *task #*' : Use this to mark a task as completed.\n" +
                 "'unmark *task #*' : Use this to un-mark a task as incomplete.\n" +
-                "'delete *task #*' : Use this to delete a task from Duke.\n"
+                "'delete *task #*' : Use this to delete a task from Duke."
         );
     }
 }

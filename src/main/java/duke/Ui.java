@@ -13,7 +13,10 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final static String FROM_DUKE_TWO = "From Duke: \n\t";
+    /**
+     * Constant String from Duke after every command to Duke.
+     */
+    private final static String FROM_DUKE = "From Duke: \n\t";
 
     /**
      * Storage Class to help with loading or saving or file.
@@ -45,7 +48,7 @@ public class Ui {
         while (true) {
             try {
                 String command = scanner.nextLine();
-                System.out.print(FROM_DUKE_TWO);
+                System.out.print(FROM_DUKE);
                 String[] commandArr = command.split(" ");
                 firstWord = commandArr[0];
                 if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find") ||
