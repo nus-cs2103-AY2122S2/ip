@@ -70,6 +70,8 @@ public abstract class Instruction {
             return new Add(Task.of(instruction), tasks);
         case "delete":
             return new Delete(instruction, tasks);
+        case "find":
+            return new Find(instruction, tasks);
         default:
             throw new InvalidInstructionException("Oops, I'm not sure what you mean.");
         }

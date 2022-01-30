@@ -27,6 +27,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the description of the current task.
+     *
+     * @return The description.
+     */
+    protected String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Constructor using an infoTable.
      *
      * @param infoTable The <code>HashMap</code> that contains the information about the current task.
