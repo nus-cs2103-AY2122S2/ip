@@ -81,8 +81,8 @@ public class Duke {
                 throw new DukeException("Please tell me what you need to do");
             }
             try {
-                title = command[1].split("/by ")[0];
-                time = command[1].split("/by ")[1];
+                title = command[1].split(" /by ")[0];
+                time = command[1].split(" /by ")[1];
                 task = new Deadline(title, time);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Please tell me the deadline in this format: <Activity> /by <Time>");
@@ -93,8 +93,8 @@ public class Duke {
                 throw new DukeException("Please tell me what you need to do");
             }
             try {
-                title = command[1].split("/at ")[0];
-                time = command[1].split("/at ")[1];
+                title = command[1].split(" /at ")[0];
+                time = command[1].split(" /at ")[1];
                 task = new Event(title, time);
             } catch (IndexOutOfBoundsException e){
                 throw new DukeException("Please tell me when your event is in this format: <Activity> /at <Time>");
