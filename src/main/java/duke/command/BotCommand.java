@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.bot.BotType;
-import duke.exception.InvalidArgumentException;
 import duke.task.TaskList;
 
 /**
@@ -48,8 +47,9 @@ public class BotCommand extends Command {
             return COMMAND_WORD_JJBA;
         case DIO:
             return COMMAND_WORD_DIO;
+        default:
+            return "none";
         }
-        return "none";
     }
 
     /**

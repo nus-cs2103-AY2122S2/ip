@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +8,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents the storage system of the program. A <code>Storage</code> object can be created to
@@ -110,9 +110,11 @@ public class Storage {
             case "T":
                 return new Todo(dataArgs[2], isTaskMark);
             case "D":
-                return new Deadline(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]), LocalTime.parse(dataArgs[4]));
+                return new Deadline(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
+                        LocalTime.parse(dataArgs[4]));
             case "E":
-                return new Event(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]), LocalTime.parse(dataArgs[4]), LocalTime.parse(dataArgs[5]));
+                return new Event(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
+                        LocalTime.parse(dataArgs[4]), LocalTime.parse(dataArgs[5]));
             default:
                 throw new IOException(MESSAGE_INVALID_FILE);
             }

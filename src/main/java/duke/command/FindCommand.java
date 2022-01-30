@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.InvalidArgumentException;
 import duke.task.TaskList;
 
 /**

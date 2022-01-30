@@ -1,7 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.bot.BotMessage;
-import duke.bot.JJBABotMessage;
+import duke.bot.JjbaBotMessage;
 import duke.command.BotCommand;
 import duke.command.Command;
 import duke.command.CommandFeedback;
@@ -11,26 +13,23 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-import java.io.IOException;
-
-
 /**
  * Represents a task bot. A <code>Duke</code> object can be created to
  * accept user input, create tasks and respond to the user.
  */
 public class Duke {
+    public static final String FILE_PATH = "/data/taskInfo.txt";
+
     private TaskList taskList;
     private Storage storage;
     private final Console console;
     private boolean isExit;
 
-    private static final String FILE_PATH = "/data/taskInfo.txt";
-
     /**
      * Creates a default instance of a Duke object.
      */
     public Duke() {
-        this(FILE_PATH, new JJBABotMessage());
+        this(FILE_PATH, new JjbaBotMessage());
     }
 
     /**
@@ -48,7 +47,7 @@ public class Duke {
      * @param filePath path to the storage file.
      * @param bot type of message bot to output messages.
      */
-    public Duke(String filePath, BotMessage bot){
+    public Duke(String filePath, BotMessage bot) {
         console = new Console(bot);
         isExit = false;
 
@@ -75,7 +74,7 @@ public class Duke {
      * @param args unused.
      */
     public static void main(String[] args) {
-        new Duke(FILE_PATH, new JJBABotMessage()).run();
+        new Duke(FILE_PATH, new JjbaBotMessage()).run();
     }
 
     /**
@@ -129,6 +128,8 @@ public class Duke {
         case EXIT:
             isExit = true;
             break;
+        default:
+            console.printError("Unexpected error in handleCommandFeedback!");
         }
 
         console.printCommandFeedback(comFeed);

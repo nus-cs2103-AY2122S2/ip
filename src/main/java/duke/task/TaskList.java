@@ -50,7 +50,7 @@ public class TaskList {
      * @param task task to be removed from the list.
      */
     public void remove(Task task) {
-         taskArr.remove(task);
+        taskArr.remove(task);
     }
 
     /**
@@ -71,10 +71,17 @@ public class TaskList {
         return taskArr.isEmpty();
     }
 
+    /**
+     * Returns the list of task that matches with the search info
+     * provided by the user.
+     *
+     * @param searchInfo the information to look for certain task in the task list.
+     * @return a list of task that matches with input description.
+     */
     public TaskList search(String searchInfo) {
         TaskList newTaskList = new TaskList();
 
-        for(Task task : taskArr) {
+        for (Task task : taskArr) {
             if (task.description.contains(searchInfo)) {
                 newTaskList.add(task);
             }
