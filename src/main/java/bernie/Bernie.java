@@ -1,3 +1,5 @@
+package bernie;
+
 import bernie.commands.CommandHandler;
 
 public class Bernie {
