@@ -20,7 +20,7 @@ public class Todo extends Task {
      */
     @Override
     public String getAppendData() {
-        return "T | " + (super.isDone ? "1" : "0") + " | " + description ;
+        return "T | " + (super.isDone ? "1" : "0") + " | " + description;
     }
 
     /**

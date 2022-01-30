@@ -19,7 +19,7 @@ public class Event extends Task {
      * Creates a new event with a date.
      *
      * @param description the description of the event
-     * @param d the date of the event
+     * @param d           the date of the event
      */
     public Event(String description, LocalDate d) {
         super(description);
@@ -32,7 +32,7 @@ public class Event extends Task {
      * Creates a new event with a time.
      *
      * @param description the description of the event
-     * @param t the time of the event
+     * @param t           the time of the event
      */
     public Event(String description, LocalTime t) {
         super(description);
@@ -45,8 +45,8 @@ public class Event extends Task {
      * Creates a new event with a date and time.
      *
      * @param description the description of the event
-     * @param d the date of the event
-     * @param t the time of the event
+     * @param d           the date of the event
+     * @param t           the time of the event
      */
     public Event(String description, LocalDate d, LocalTime t) {
         super(description);
@@ -110,9 +110,9 @@ public class Event extends Task {
      */
     @Override
     public String getAppendData() {
-        return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
-                (hasDate ? d.toString() : "0") + " | " +
-                (hasTime ? t.toString() : "0");
+        return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | "
+                + (hasDate ? d.toString() : "0") + " | "
+                + (hasTime ? t.toString() : "0");
     }
 
     /**
@@ -122,8 +122,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                (hasDate && hasTime
+        return "[E]" + super.toString() + " (at: "
+                + (hasDate && hasTime
                         ? getDateTime()
                         : hasDate
                         ? getDate()

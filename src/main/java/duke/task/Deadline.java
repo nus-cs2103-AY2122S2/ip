@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * Creates a new deadline with a date.
      *
      * @param description the description of the deadline
-     * @param d the date of the deadline
+     * @param d           the date of the deadline
      */
     public Deadline(String description, LocalDate d) {
         super(description);
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      * Creates a new deadline with a time.
      *
      * @param description the description of the deadline
-     * @param t the time of the deadline
+     * @param t           the time of the deadline
      */
     public Deadline(String description, LocalTime t) {
         super(description);
@@ -45,8 +45,8 @@ public class Deadline extends Task {
      * Creates a new deadline with a date and time.
      *
      * @param description the description of the deadline
-     * @param d the date of the deadline
-     * @param t the time of the deadline
+     * @param d           the date of the deadline
+     * @param t           the time of the deadline
      */
     public Deadline(String description, LocalDate d, LocalTime t) {
         super(description);
@@ -110,9 +110,9 @@ public class Deadline extends Task {
      */
     @Override
     public String getAppendData() {
-        return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
-                (hasDate ? d.toString() : "0") + " | " +
-                (hasTime ? t.toString() : "0");
+        return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | "
+                + (hasDate ? d.toString() : "0") + " | "
+                + (hasTime ? t.toString() : "0");
     }
 
     /**
@@ -122,8 +122,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                (hasDate && hasTime
+        return "[D]" + super.toString() + " (by: "
+                + (hasDate && hasTime
                         ? getDateTime()
                         : hasDate
                         ? getDate()

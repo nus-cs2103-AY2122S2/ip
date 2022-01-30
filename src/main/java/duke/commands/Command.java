@@ -12,8 +12,8 @@ public abstract class Command {
     /**
      * Executes the command and returns the result.
      *
-     * @param tasks the TaskList containing the current tasks
-     * @param ui the Ui of the chatbot
+     * @param tasks   the TaskList containing the current tasks
+     * @param ui      the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of execution
      * @throws DukeException if there were any errors during execution

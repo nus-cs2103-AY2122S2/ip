@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
     /**
      * Executes the delete command.
      *
-     * @param tasks the TaskList containing the current tasks
-     * @param ui the Ui of the chatbot
+     * @param tasks   the TaskList containing the current tasks
+     * @param ui      the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of executing the delete command
      * @throws DukeException if there were any errors during execution
@@ -38,9 +38,9 @@ public class DeleteCommand extends Command {
         }
         Task t = tasks.deleteTask(targetIndex);
         storage.save(tasks);
-        return "No problem, I've deleted that task for you:\n\n" +
-                t.toString() + "\n\n" +
-                "You now have " + tasks.listSize() + " task(s) remaining on your list.";
+        return "No problem, I've deleted that task for you:\n\n"
+                + t.toString() + "\n\n"
+                + "You now have " + tasks.listSize() + " task(s) remaining on your list.";
     }
 
     @Override

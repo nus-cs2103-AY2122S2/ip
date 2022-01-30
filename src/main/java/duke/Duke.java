@@ -17,7 +17,9 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
-    /** Creates a new Duke chatbot */
+    /**
+     * Creates a new Duke chatbot
+     */
     public Duke() {
         try {
             ui = new Ui();
@@ -38,20 +40,20 @@ public class Duke {
     }
 
     private void run() {
-            ui.greetUser();
-            boolean isExit = false;
+        ui.greetUser();
+        boolean isExit = false;
 
-            do {
-                try {
-                    String request = ui.readCommand();
-                    Command c = new Parser().parseCommand(request);
-                    String result = c.execute(tasks, ui, storage);
-                    ui.replyUser(result);
-                    isExit = c.isExit();
-                } catch (DukeException e) {
-                    ui.replyUser(e.getMessage());
-                }
-            } while (!isExit);
+        do {
+            try {
+                String request = ui.readCommand();
+                Command c = new Parser().parseCommand(request);
+                String result = c.execute(tasks, ui, storage);
+                ui.replyUser(result);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.replyUser(e.getMessage());
+            }
+        } while (!isExit);
     }
 }
 
