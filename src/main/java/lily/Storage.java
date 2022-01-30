@@ -24,7 +24,8 @@ public class Storage {
 
     /**
      * Create a new Storage manager.
-     * @param fp The filepath to load from and save to
+     * 
+     * @param fp The filepath to load from and save to.
      */
     public Storage(String fp) {
         filePath = fp;
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Returns a LinkedList from reading the savefile.
+     * 
      * @return Saved tasks in the savefile.
      * @throws LilyException If there is no savefile or a problem arose.
      */
@@ -58,6 +60,7 @@ public class Storage {
 
     /**
      * Writes the Tasklist to a file.
+     * 
      * @param list The Tasklist to be exported.
      * @throws IOException If a problem arose.
      */

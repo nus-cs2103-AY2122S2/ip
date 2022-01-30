@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+application {
+    // mainClass = 'Lily.java' 
+    mainClassName = 'Lily.Main' 
+}
+
+shadowJar {
+    archiveBaseName.set('Lily')
+    archiveClassifier.set('')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/*
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+*/

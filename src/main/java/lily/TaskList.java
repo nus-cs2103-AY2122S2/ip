@@ -7,6 +7,7 @@ import lily.task.Todo;
 import lily.task.Deadline;
 import lily.task.Event;
 
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 /**
@@ -35,18 +36,38 @@ public class TaskList {
         list = loadedData;
     }
 
+    /**
+     * Returns true if this list contains no elements.
+     * 
+     * @return True if this list contains no elements.
+     */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
+    /**
+     * Returns the number of elements in this list.
+     * 
+     * @return the number of elements in this list.
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * Returns the contents of the list.
+     * 
+     * @return The TaskList.
+     */
     public LinkedList<Task> getContents() {
         return list;
     }
 
+    /**
+     * Returns the tasks in the form of a String for printing.
+     * 
+     * @return The tasks as Strings to be printed.
+     */
     public String getTasks() {
         String listMsg = "";
         int i = 1;
@@ -62,17 +83,16 @@ public class TaskList {
 
     /**
      * Marks the task and returns it.
+     * 
      * @param idx The index of the task to be marked.
      * @return The task after it has been marked.
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException If the index exceeds the list.
+     * @throws LilyException If user has finished the task already.
      */
-    public Task mark(int idx) throws IndexOutOfBoundsException {
+    public Task mark(int idx) throws IndexOutOfBoundsException, 
+            LilyException {
                     /*
-                     * if (list.isEmpty())
-                     * throw new Error("you cant mark something that isn't there");
-                     * else if (already marked)
-                     * throw new error you've already finished this
-                     * if input doesn't have an int, ask which number you want to mark also.
+                     * if input doesn't have an int, ask which number you want to mark .
                      */
         Task t = list.get(idx);
         t.mark();
@@ -81,56 +101,66 @@ public class TaskList {
 
     /**
      * Unmarks the task and returns it.
+     * 
      * @param idx The index of the task to be unmarked.
      * @return The task after it has been unmarked.
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException If the index exceeds the list.
+     * @throws LilyException If user hasn't done the task yet.
      */
-    public Task unmark(int idx) throws IndexOutOfBoundsException {
-                    /*
-                     * if (list.isEmpty())
-                     * throw new Error("you can't unmark something thaj isn't there");
-                     * else if (not marked yet)
-                     * throw new error you havent done this
-                     * if input doesn't have an int, ask which number you want to mark also.
-                     */
+    public Task unmark(int idx) throws IndexOutOfBoundsException, 
+            LilyException {
         Task t = list.get(idx);
         t.unmark();
         return t;
     }
 
-    // in ui, print 'task added' else, todo desc cant be empty from lilyexception
-    public Task addTodo(String desc) throws LilyException {
+    /**
+     * Adds a todo to the TaskList.
+     * 
+     * @param desc What the todo is about.
+     * @return The todo that was added.
+     */
+    public Task addTodo(String desc) {
         Todo t = new Todo(desc);
         list.add(t);
         return t;
     }
 
-                    /*
-                     * if user didn't type "/by" (byIdx == -1)
-                     * throw new Error "you didnt' type /by bro, try again"
-                     * if user didnt' type a desc
-                     * throw new error you didnt type a description man, try again
-                     */
-    // need to catch "no-/by" error
-    // in ui, do 'task added' msg else, todo desc cant be empty from lilyexception
-    public Task addDeadline(String desc, String by) throws LilyException {
+    /**
+     * Adds a deadline to the TaskList.
+     * 
+     * @param desc What the deadline is about.
+     * @param by When the deadline is due.
+     * @return The deadline that was added.
+     * @throws DateTimeParseException If the date was not recognizable.
+     */
+    public Task addDeadline(String desc, String by) throws DateTimeParseException {
         Deadline d = new Deadline(desc, by);
         list.add(d);
         return d;
     }
 
-                    /*
-                     * if user didn't type "/at" (atIdx == -1)
-                     * throw new Error "you didnt' type /at bro, try again"
-                     * if user didnt' type a desc
-                     * throew new error you didnt type a description man, try again
-                     */
-    public Task addEvent(String desc, String at) throws LilyException {
+    /**
+     * Adds a Event to the TaskList.
+     * 
+     * @param desc What the Event is about.
+     * @param at When the Event is due.
+     * @return The Event that was added.
+     * @throws DateTimeParseException If the date was not recognizable.
+     */
+    public Task addEvent(String desc, String at) throws DateTimeParseException {
         Event e = new Event(desc, at);
         list.add(e);
         return e;
     }
 
+    /**
+     * Removes a Task from the TaskList.
+     * 
+     * @param idx The index of which was removed.
+     * @return The Task that was removed.
+     * @throws IndexOutOfBoundsException When the index is not in the List.
+     */
     public Task remove(int idx) throws IndexOutOfBoundsException {
         return list.remove(idx);
     }
