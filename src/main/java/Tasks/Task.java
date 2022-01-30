@@ -73,21 +73,41 @@ public abstract class Task {
 
     public static void getSavedTasks() {
         taskList = FilesReader.getTaskListFromFile();
+        taskCount = taskList.size();
     }
 
     public static void saveTasks() {
         for (Task task : taskList) {
             if (task instanceof Todo) {
                 Todo todo = (Todo) task;
-                FilesWriter.writeToFile("T|" + (todo.isDone ? "1|" : "0|") + todo.description + "\n");
+                FilesWriter.writeToFile("T : " + (todo.isDone ? "1 : " : "0 : ") + todo.description + "\n");
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                FilesWriter.writeToFile("E|" + (event.isDone ? "1|" : "0|") + event.description + "|" + event.duration + "\n");
+                FilesWriter.writeToFile("E : " + (event.isDone ? "1 : " : "0 : ") + event.description + " : " + event.duration + "\n");
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                FilesWriter.writeToFile("D|" + (deadline.isDone ? "1|" : "0|") + deadline.description + "|" + deadline.deadline + "\n");
+                FilesWriter.writeToFile("D : " + (deadline.isDone ? "1 : " : "0 : ") + deadline.description + " : " + deadline.deadline + "\n");
             }
         }
+    }
+
+    public static Task convertStringToTask(String task) {
+        String[] input = task.split(" : ");
+        switch (input[0]) {
+        case "T":
+            Todo todo = new Todo(input[2]);
+            todo.isDone = Integer.parseInt(input[1]) == 1;
+            return todo;
+        case "E":
+            Event event = new Event(input[2], input[3]);
+            event.isDone = Integer.parseInt(input[1]) == 1;
+            return event;
+        case "D":
+            Deadline deadline = new Deadline(input[2], input[3]);
+            deadline.isDone = Integer.parseInt(input[1]) == 1;
+            return deadline;
+        }
+        return null;
     }
 
     public static void printAllTasks() {

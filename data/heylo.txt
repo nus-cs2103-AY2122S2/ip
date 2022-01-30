@@ -1,3 +1,5 @@
-T|0|this
-E|1|that |3
-D|0|more |7
+E : 1 : more  : 8
+T : 0 : this
+D : 1 : sth  : 8
+T : 0 : hi
+E : 0 : there  : 7

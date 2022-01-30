@@ -1,9 +1,11 @@
 package fileHandling;
 
 import tasks.Task;
+import tasks.Todo;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,8 +24,11 @@ public class FilesReader {
             }
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                System.out.println(s.nextLine());
+                taskList.add(Task.convertStringToTask(s.nextLine()));
             }
+            // Clear file after read
+            PrintWriter pw = new PrintWriter("data/heylo.txt");
+            pw.close();
             return taskList;
         } catch (IOException ioException) {
             System.out.println("An unknown error occurred.");
