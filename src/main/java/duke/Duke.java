@@ -1,4 +1,7 @@
 package duke;
+import storage.Storage;
+import storage.TaskList;
+
 import java.io.IOException;
 import java.text.ParseException;
 

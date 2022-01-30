@@ -1,5 +1,12 @@
 package duke;
 
+import storage.Storage;
+import storage.TaskList;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -176,10 +183,7 @@ public class Parser {
         try {
             return dateFormat.parse(datetime);
         } catch (ParseException e) {
-            throw new DukeException("""
-                    That is not a date.
-                    \t\tRequires this format: dd-MMM-yyyy h.mma
-                    \t\tFor Example: 3-jan-2011 1.00pm""");
+            throw new DukeException("That is not a date.\n\t\tRequires this format: dd-MMM-yyyy h.mma\n\t\tFor Example: 3-jan-2011 1.00pm");
         }
     }
 }

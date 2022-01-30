@@ -1,4 +1,5 @@
-package duke;
+package storage;
+import task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -23,7 +24,7 @@ public class TaskList {
 
     /**
      * Gets task specified by index
-     * @param index of task
+     * @param idx of task
      * @return task
      */
     public Task getTask(int idx) {
@@ -32,7 +33,7 @@ public class TaskList {
 
     /**
      * Removes task from list
-     * @param index of task to be removed
+     * @param idx of task to be removed
      */
     public void removeTask(int idx) {
         tasks.remove(idx);
@@ -46,6 +47,10 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Finds and prints all occurence of task
+     * @param search task to be searched
+     */
     public void find(String search) {
         for (Task t : tasks) {
             if (t.getDescription().contains(search)) {
