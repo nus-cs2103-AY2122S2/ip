@@ -145,12 +145,13 @@ public class Duke extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user))
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-        parser.run(userInput.getText(), ui, taskList);
+        int runResult = parser.run(userInput.getText(), ui, taskList);
+        if (runResult == 1) {
+            Storage.saveFile("data", "duke.txt", taskList.getList());
+        }
         userInput.clear();
     }
 
