@@ -169,6 +169,12 @@ public class DukeParser {
                     return new AddEvents(body[1], body[1].trim());
                 }
             }
+        } else if (cmd.equals("find")) {
+            if (arg.length == 1) {
+                throw new MissingArgumentException();
+            } else {
+                return new FindCommand(arg[1]);
+            }
         } else {
             throw new InvalidCommandException();
         }

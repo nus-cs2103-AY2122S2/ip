@@ -68,4 +68,8 @@ public class Task {
     public void setDate(LocalDate e) {
         this.date = e;
     }
+    public boolean find(String phrase){
+        return this.s.contains(phrase);
+    }
+
 }
