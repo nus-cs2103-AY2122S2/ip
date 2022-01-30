@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
+    /**
+     * Test method for the TaskList class.
+     */
     @Test
     public void testTaskList() {
         Task task1 = new Task("read book");

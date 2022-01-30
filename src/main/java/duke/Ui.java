@@ -13,33 +13,46 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that defines the Ui of the app
+ */
 public class Ui {
 
+    /**
+     *  Method to display the welcome message.
+     */
     public void displayHelloMessage() {
         display("Hello! I'm Duke\nWhat can I do for you?");
         displayLine();
     }
 
+    /**
+     * Method to display the breaker line.
+     */
     public void displayLine() {
         display("--------------------------------------------------");
     }
 
+    /**
+     * Method to display the bye message.
+     */
     public void displayByeMessage() {
         displayLine();
         display("Bye. Hope to see you soon.");
         displayLine();
     }
 
-    public void displayMessage(String command) {
-        displayLine();
-        display("added:" + command);
-        displayLine();
-    }
-
+    /**
+     * Method to display any object.
+     * @param object Object to be displayed.
+     */
     public void display(Object object) {
         System.out.println(object);
     }
 
+    /**
+     * Method to display the list to the user
+     */
     public void displayList() {
         displayLine();
         display("Here are the tasks in your list:");
@@ -49,6 +62,10 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     *  Method to display the unmarking of a task.
+     * @param complete The task that is to be unmarked.
+     */
     public void displayIncompleteTask(Task complete) {
         displayLine();
         display("OK, I've marked this task as not done yet:");
@@ -56,6 +73,10 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     * Method to display the marking of a task
+     * @param incomplete The task to be marked complete
+     */
     public void displayTaskCompletion(Task incomplete) {
         displayLine();
         display("Nice! I've marked this task as done:");
@@ -64,7 +85,13 @@ public class Ui {
     }
 
 
-
+    /**
+     * Method to execute command after parsing.
+     * @param command The input by the user.
+     * @param description The description of the task
+     * @throws DukeException Throws exception if command is invalid
+     * @throws IOException Throws invalid if file does not exist
+     */
     public void executeCommand(String command, String description) throws DukeException, IOException {
         try {
             if (command.equals("list")) {
