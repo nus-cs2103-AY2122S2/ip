@@ -1,5 +1,4 @@
 package duke;
-import tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,11 +10,18 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
+
+
+
 public class Storage {
+    private static final ArrayList<Task> tasks = new ArrayList<>();
     protected String directoryPath;
     protected String filePath;
-    private static final ArrayList<Task> tasks = new ArrayList<>();
-
 
     /**
      * Instantiates a storage object given a directory path and a file path
@@ -37,13 +43,13 @@ public class Storage {
      * @throws DukeException if the file cannot be found in the directory
      */
     public static void writeToDukeFile() throws DukeException {
-        try{
+        try {
             FileWriter fw = new FileWriter("./data/duke.txt");
             for (Task task: tasks) {
                 fw.write(task.toFileFormat() + "\n");
             }
             fw.close();
-        } catch (IOException exception){
+        } catch (IOException exception) {
             throw new DukeException("Duke file cannot be found!! Make sure it exists in the data folder.");
         }
     }

@@ -1,5 +1,10 @@
 package duke;
-import tasks.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
+
 
 public class Parser {
     enum CommandType {
@@ -39,6 +44,8 @@ public class Parser {
             case MARK:
                 TaskList.markTask(taskId, true);
                 break;
+            default:
+                throw new DukeException("Invalid Command Type!");
             }
 
         } catch (NumberFormatException e) {
@@ -60,11 +67,9 @@ public class Parser {
         if (inputArray.length == 1) {
             if (inputArray[0].equalsIgnoreCase("list")) {
                 TaskList.listTasks();
-            }
-            else if  (inputArray[0].equalsIgnoreCase("bye")) {
+            } else if (inputArray[0].equalsIgnoreCase("bye")) {
                 return true;
-            }
-            else {
+            } else {
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
         }
@@ -110,25 +115,25 @@ public class Parser {
                 taskAction(CommandType.MARK, inputArray[1]);
                 break;
             case TODO:
-                Task ToDo = new Todo(taskDetails);
+                Task todo = new Todo(taskDetails);
                 if (taskDetails.equals("")) {
                     throw new DukeException("Todo command is invalid!");
                 }
-                TaskList.addTask(ToDo);
+                TaskList.addTask(todo);
                 break;
             case DEADLINE:
                 if (description.equals("") || date.equals("")) {
                     throw new DukeException("Deadline command is invalid!");
                 }
-                Task Deadline = new Deadline(description, date);
-                TaskList.addTask(Deadline);
+                Task deadline = new Deadline(description, date);
+                TaskList.addTask(deadline);
                 break;
             case EVENT:
                 if (dateTime.equals("") || description.equals("")) {
                     throw new DukeException("Event command is invalid");
                 }
-                Task Event = new Event(description, dateTime);
-                TaskList.addTask(Event);
+                Task event = new Event(description, dateTime);
+                TaskList.addTask(event);
                 break;
             default:
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");

@@ -1,12 +1,14 @@
 package tasks;
-import duke.DukeException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class EventTest {
-    Event event;
+    private Event event;
 
     @Test
     public void testCorrectEventString() {

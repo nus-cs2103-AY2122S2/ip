@@ -1,12 +1,16 @@
 package duke;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 
 public class TextUiTest {
     private static final String DIVIDER = "===================================================";
-    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
 
     @Test
