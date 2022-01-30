@@ -2,6 +2,7 @@ package lily;
 
 import lily.task.Task;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -46,7 +47,8 @@ public class Ui {
             welcomeMessage += INDENT + "sup, welcome back" + LS
                     + INDENT + "here's your list from the last time" + LS
                     + LS
-                    + tl.getTasks();
+                    + listTasks(tl.getContents()) + LS + LS
+                    + INDENT + "why is it so full of nonsense";
         } else {
             showError(INDENT + "oh bother, a new one");
             welcomeMessage += INDENT + "hey." + LS
@@ -83,6 +85,23 @@ public class Ui {
     }
 
     /**
+     * Lists the tasks in the form of a String for printing.
+     * 
+     * @return The tasks as Strings to be printed.
+     */
+    private String listTasks(LinkedList<Task> list) {
+        String listMsg = "";
+        int i = 1;
+        for (Task t : list) {
+            listMsg += "    " + i + "."
+                    + t.toString()
+                    + (i == list.size() ? "" : System.lineSeparator());
+            i++;
+        }
+        return listMsg;
+    }
+
+    /**
      * Lists the actions users can take to interact with Lily.
      * 
      * @return A string with indents in front of actions users can take.
@@ -94,6 +113,7 @@ public class Ui {
                 + INDENT + "> list: show what you have to do" + LS
                 + INDENT + "> mark: indicate which numbered task you completed" + LS
                 + INDENT + "> unmark: indicate which task you havent completed" + LS
+                + INDENT + "> find: search your list for a single keyword" + LS
                 + INDENT + "> bye: stop talking with Lily";
     }
 
@@ -125,7 +145,7 @@ public class Ui {
         if (tl.isEmpty()) {
             showError("there's nothing in the list bro");
         } else {
-            prettyPrint("you told me you had to" + LS + tl.getTasks());
+            prettyPrint("you told me you had to" + LS + listTasks(tl.getContents()));
         }
     }
 
@@ -174,11 +194,37 @@ public class Ui {
      */
     public void showTaskRemoved(Task t, TaskList tl) {
         prettyPrint("hmph. then why did you make me track your" + LS
-                + INDENT + INDENT + t + LS
+                + INDENT + t + LS
                 + LS
                 + INDENT + "anyway, now you're left with" + LS
-                + INDENT + tl.getTasks());
+                + listTasks(tl.getContents()));
     }   
+
+    /**
+     * Shows the tasks which have descriptions matching the search term.
+     * 
+     * @param searchTerm What the user is searching for.
+     * @param tl The TaskList to search inside.
+     */
+    public void showFind(String searchTerm, TaskList tl) {
+        LinkedList<Task> taskLinkedList = tl.getContents();
+        LinkedList<Task> matchedTasks = new LinkedList<>();
+
+        for (int i = 0; i < tl.getSize(); i++) {
+            Task currTask = taskLinkedList.get(i);
+            String descToBeSearched = currTask.getDesc();
+
+            if (descToBeSearched.contains(searchTerm)) {
+                matchedTasks.add(currTask);
+            }
+        }
+        if (matchedTasks.size() == 0) {
+            prettyPrint("bro, your list has nothing with that inside");
+        } else {
+            prettyPrint("ah. here are your tasks with \"" + searchTerm + "\" in them." + LS
+                    + listTasks(matchedTasks));
+        }
+    }
 
     /**
      * Tell the user that Lily did not understand the command.
@@ -186,9 +232,9 @@ public class Ui {
      * @param sentence The user's input.
      */
     public void showInvalidCommand(String sentence) {
-        showError("sorry i don't understand what you meant by" + LS + LS
-                + INDENT + sentence + LS + LS
-                + INDENT + "you can try these instead:" + LS 
+        showError(sentence + "?" + LS + LS
+                + INDENT + "bro i cannot understand you ( ︶︿︶)" + LS + LS
+                + INDENT + "i only know these hor:" + LS 
                 + getCommands());
 
     }

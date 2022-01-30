@@ -81,6 +81,16 @@ public class Parser {
                             Integer.parseInt(parsedSentence[1]) - 1), 
                             tasks);
                     break;
+
+                case "find":
+                // Fallthrough
+                case "search":
+                    if (parsedSentence.length > 2) {
+                        throw new LilyException("bro you can only find 1 word at a time");
+                    } else {
+                        ui.showFind(parsedSentence[1], tasks);
+                    }
+                    break;
     
                 default:
                     ui.showInvalidCommand(sentence);
@@ -93,7 +103,9 @@ public class Parser {
             } catch (IndexOutOfBoundsException oob) {
                 ui.showError("eh bro your list is shorter than that");
             } catch (DateTimeParseException dtpe) {
-                ui.showError("can you say that again in this form: year-mm-dd");
+                ui.showError("can you say the date again in this form: year-mm-dd");
+            } catch (NumberFormatException nfe) {
+                ui.showError("eh can you type its number instead?");
             }
         }
         ui.closeUi();

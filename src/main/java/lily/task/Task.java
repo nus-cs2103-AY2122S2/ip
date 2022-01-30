@@ -23,15 +23,24 @@ public class Task implements Serializable{
     }
 
     /**
+     * Returns the description of the task.
+     * 
+     * @return The description of the Task as a String.
+     */
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
      * Mark the task as done.
      * 
      * @throws LilyException If user has finished the task already.
      */
     public void mark() throws LilyException {
-        if (this.isDone) {
+        if (isDone) {
             throw new LilyException("bro this task is already marked.");
         } else {
-            this.isDone = true;
+            isDone = true;
         }
     }
 
@@ -41,10 +50,10 @@ public class Task implements Serializable{
      * @throws LilyException If user hasn't done the task yet.
      */
     public void unmark() throws LilyException {
-        if (!this.isDone) {
+        if (!isDone) {
             throw new LilyException("bro you haven't done this.");
         } else {
-            this.isDone = false;
+            isDone = false;
         }
     }
 
