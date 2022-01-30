@@ -2,13 +2,12 @@ package duke.command;
 
 import duke.util.Save;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * This UnmarkCommand class will mark a task as undone when executed.
  */
 public class UnmarkCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Constructor for UnmarkCommand with a given task number to be marked as undone in the list.
@@ -23,22 +22,20 @@ public class UnmarkCommand extends Command {
      * Executes command by marking task as undone.
      *
      * @param tasks TaskList of tasks.
-     * @param ui    Ui provided.
      * @param save  Saved history.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Save save) {
+    public String execute(TaskList tasks, Save save) {
+        String response = "";
         try {
             tasks.getTask(taskNum).unmark();
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t OK, I've marked this task as not done yet:");
-            System.out.println("\t\t" + tasks.getTask(taskNum).track()
-                    + tasks.getTask(taskNum).getStatus() + " " + tasks.getTask(taskNum));
-            System.out.println("\t____________________________________________________________");
+            response += "OK, I've marked this task as not done yet:\n";
+            String unmarkString = tasks.getTask(taskNum).track() + tasks.getTask(taskNum).getStatus()
+                    + " " + tasks.getTask(taskNum);
+            response += unmarkString;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
-            System.out.println("\t____________________________________________________________");
+            response = "Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
         }
+        return response;
     }
 }
