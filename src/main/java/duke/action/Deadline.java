@@ -1,23 +1,26 @@
 package duke.action;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Action {
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     public Deadline(String task, String by)  {
         super(task);
         try {
-            this.date = LocalDate.parse(by);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
+            this.date = LocalDateTime.parse(by, format);
         } catch (DateTimeParseException e) {
-            System.out.println("Wrong date format: Please use yyyy-mm-dd");
+            System.out.println("Wrong date format: Please delete input "
+                    + "and re-enter using yyyy-mm-dd format");
+            this.date = LocalDateTime.now();
         }
     }
 
-    public Deadline(String task, LocalDate by, boolean bool)  {
+    public Deadline(String task, LocalDateTime by, boolean bool)  {
         super(task, bool);
         this.date = by;
     }
@@ -45,6 +48,6 @@ public class Deadline extends Action {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy, H:m")) + ")";
     }
 }

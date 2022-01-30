@@ -14,6 +14,7 @@ public class Event extends Action {
             this.date = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             System.out.println("Wrong date format: Please use yyyy-mm-dd");
+            this.date = LocalDate.now();
         }
     }
 
