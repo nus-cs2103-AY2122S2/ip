@@ -17,36 +17,38 @@ public class Parser {
 
     /**
      * Calls appropriate TaskList methods for each command and updates storage.
-     * @param inputStringArray string array containing user instructions.
+     * @param inputStringsArray string array containing user instructions.
      * @param storage Storage object that deals with storage updation.
      * @throws DukeException If user input message does not make sense.
      */
-    public void userCommand(String[] inputStringArray, Storage storage) throws DukeException {
-        switch (inputStringArray[0]) {
+    public void userCommand(String[] inputStringsArray, Storage storage) throws DukeException {
+        switch (inputStringsArray[0]) {
             case "list":
                 tasks.displayList();
                 break;
             case "mark":
-                tasks.mark(inputStringArray[1]);
+                tasks.mark(inputStringsArray[1]);
                 storage.updateData(tasks);
                 break;
             case "unmark":
-                tasks.unmark(inputStringArray[1]);
+                tasks.unmark(inputStringsArray[1]);
                 storage.updateData(tasks);
                 break;
             case "todo":
             case "deadline":
             case "event":
-                tasks.addToList(inputStringArray);
+                tasks.addToList(inputStringsArray);
                 storage.updateData(tasks);
                 break;
             case "delete":
-                tasks.delete(inputStringArray[1]);
+                tasks.delete(inputStringsArray[1]);
                 storage.updateData(tasks);
+                break;
+            case "find":
+                tasks.find(inputStringsArray[1]);
                 break;
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
         }
     }
-
 }
