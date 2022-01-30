@@ -3,6 +3,9 @@ package task;
 import exception.DukeException;
 import java.util.ArrayList;
 
+/**
+ * Interface that stores list of tasks and contains methods that manipulate it.
+ */
 public class TaskList {
 
     public ArrayList<Task> tasks;
@@ -15,6 +18,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Prints all tasks in the task list.
+     */
     public void displayList() {
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -24,6 +30,11 @@ public class TaskList {
         System.out.println(returnString);
     }
 
+    /**
+     * Adds a new task to the task list.
+     * @param stringToAdd array that contains details of the task user wants to add to the task list.
+     * @throws DukeException If input string does not comply with todo, deadline or event formats.
+     */
     public void addToList(String[] stringToAdd) throws DukeException {
         if (stringToAdd.length < 2) {
             throw new DukeException("OOPS!! The description of a " + stringToAdd[0] + " cannot be empty.");
@@ -64,6 +75,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a specific task in the task list as completed.
+     * @param number String number that specifies task number in task list to mark as completed.
+     */
     public void mark(String number) {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsDone();
@@ -72,6 +87,10 @@ public class TaskList {
                 temp.getStatusIcon() + "] " + temp);
     }
 
+    /**
+     * Marks a specific task in the task list as not completed.
+     * @param number String number that specifies task number in task list to mark as not completed.
+     */
     public void unmark(String number) {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsNotDone();
@@ -80,6 +99,10 @@ public class TaskList {
                 temp.getStatusIcon() + "] " + temp);
     }
 
+    /**
+     * Deletes all or specific tasks from the task list based on string input.
+     * @param number string that specifies if a specific task number or all tasks are to be deleted.
+     */
     public void delete(String number) {
         if (number.equals("all")) {
             this.tasks =  new ArrayList<>();
