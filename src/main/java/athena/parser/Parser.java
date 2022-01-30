@@ -16,10 +16,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates helper methods to parse user input given to Athena.
+ */
 public class Parser {
     private static final DateTimeFormatter inputFormatter =
             DateTimeFormatter.ofPattern("d/M/yyyy Hmm");
 
+    /**
+     * Returns a Command object based on the given input, which encapsulates the user
+     * command in an object that can later be executed.
+     *
+     * @param input Raw user input given to Athena.
+     * @return Command object encapsulating the user command.
+     * @throws InputException If user input is invalid, such as when providing a non-existent command.
+     */
     public static Command getCommand(String input) throws InputException {
         // Separate out the command keyword from the other arguments given
         String[] splitInput = input.split(" ", 2);
