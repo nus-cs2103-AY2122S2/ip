@@ -32,7 +32,7 @@ public abstract class NewTaskInst extends Instruction {
 
     /** Reusable Invalid Input Exception for when the input command has an invalid date format */
     protected static final InvalidInputException INVALID_DATE_TIME_FORMAT =
-            new InvalidInputException("The date/time format is wrong!");
+            new InvalidInputException("The date/time format is wrong! Please enter in this format: yyyy-mm-dd hh:mm");
 
     /** The provided description for the task to be added */
     private String taskDesc;

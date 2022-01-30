@@ -83,7 +83,7 @@ public final class DateTimeParser {
         if (dayNum < 1) {
             return false;
         }
-        if (year.isLeap() && monthNum == 2) {
+        if (!year.isLeap() && monthNum == 2) { // leap year
             if (dayNum > month.minLength()) {
                 return false;
             }
