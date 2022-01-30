@@ -28,7 +28,7 @@ public class TaskList {
     private static String filePath = "data";
 
     /** The container for the items, implemented as an ArrayList */
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Constructs a taskList.
@@ -64,7 +64,7 @@ public class TaskList {
      * @return the removed task.
      */
     public Task delete(int taskIndex) throws NoSuchTaskException {
-        boolean isWithinIndex = taskIndex > 0 && taskIndex < this.list.size();
+        boolean isWithinIndex = taskIndex > -1 && taskIndex < this.list.size();
         if (!isWithinIndex) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
