@@ -1,7 +1,5 @@
 package batman.tasks;
 
-import batman.tasks.Task;
-
 import java.time.format.DateTimeParseException;
 
 public class Todo extends Task {

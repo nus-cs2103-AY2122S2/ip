@@ -1,9 +1,9 @@
 package batman.tasks;
 
-import batman.parser.DateUtil;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import batman.parser.DateUtil;
 
 public class Deadline extends Task {
 
