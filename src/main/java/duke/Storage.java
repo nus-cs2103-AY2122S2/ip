@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -73,7 +75,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current instances of Task items in Tasks list into
+     * Saves the current instances of duke.Task items in Tasks list into
      * provided text file
      */
     public void saveAllTasks(TaskList tasks) throws IOException {
@@ -85,7 +87,7 @@ public class Storage {
 
     /**
      * Reads tasks saved in the hard drive file provided by the user and
-     * places Task objects into the current DukeList
+     * places duke.Task objects into the current DukeList
      */
     public void readTasksFromFile() throws FileNotFoundException {
         ArrayList<Task> readTasks = new ArrayList<>();
@@ -105,7 +107,7 @@ public class Storage {
     }
 
     /**
-     * Creates Task based on the text provided in the given text file
+     * Creates duke.Task based on the text provided in the given text file
      */
     public Task createTaskFromText(String[] line) {
         String type = line[0];
@@ -128,7 +130,7 @@ public class Storage {
                 ((Event) newT).setStringToLocalDate(date);
                 break;
             default:
-                System.out.println("Invalid Task type!");
+                System.out.println("Invalid duke.Task type!");
                 break;
         }
         return newT;

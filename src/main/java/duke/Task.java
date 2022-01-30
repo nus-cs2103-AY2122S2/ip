@@ -1,9 +1,11 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This is an abstract Task class that creates task instances with a title,
+ * This is an abstract duke.Task class that creates task instances with a title,
  * whether task is completed and the type of task.
  *
  *
@@ -47,14 +49,14 @@ public abstract class Task {
     }
 
     /**
-     * Sets the Task to be done
+     * Sets the duke.Task to be done
      */
     public int getDoneIcon() {
         return getDone();
     }
 
     /**
-     * Sets the Task's type of: Todo, Deadline, Event
+     * Sets the duke.Task's type of: Todo, duke.Deadline, duke.Event
      */
     public String getTaskIcon() {
         return String.format("%c", type);

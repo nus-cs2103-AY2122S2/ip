@@ -1,12 +1,13 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * This is an Action class that obtains a sentence as input that
- * can be deciphered to create tasks in the Duke system
+ * can be deciphered to create tasks in the duke.Duke system
  *
  * @author  Hsiao Jiet
  * @version 1.0
@@ -45,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * Obtains title. Applicable for creating Todo, Deadline and Event
+     * Obtains title. Applicable for creating Todo, duke.Deadline and duke.Event
      */
     public String obtainTitle() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
@@ -53,7 +54,7 @@ public class Parser {
         try {
             firstWordInTitle = listOfUserInput[1];
         } catch (Exception e) {
-            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.\n");
+            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/duke.Deadline/duke.Event cannot be empty.\n");
             errorMessage.append(line);
             throw new DukeException(errorMessage.toString());
         }
@@ -70,7 +71,7 @@ public class Parser {
     }
 
     /**
-     * Obtains date. Applicable for Deadline, Event
+     * Obtains date. Applicable for duke.Deadline, duke.Event
      */
     public LocalDate obtainDate() {
         Boolean hasClue = false;
@@ -142,7 +143,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on TaskList's printTasks()
+     * Makes a call on duke.TaskList's printTasks()
      */
     public String listOutTasks() {
         StringBuilder res = new StringBuilder();
@@ -156,7 +157,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on TaskList's mark()
+     * Makes a call on duke.TaskList's mark()
      */
     public String markTaskAsDone() {
         StringBuilder res = new StringBuilder();
@@ -167,7 +168,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on TaskList's unmark()
+     * Makes a call on duke.TaskList's unmark()
      */
     public String unmarkTask() {
         StringBuilder res = new StringBuilder();
@@ -178,7 +179,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on TaskList's delete()
+     * Makes a call on duke.TaskList's delete()
      */
     public String deleteTask() throws DukeException {
         StringBuilder res = new StringBuilder();
@@ -191,7 +192,7 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a Todo Task and adds into the list
+     * creates a Todo duke.Task and adds into the list
      */
     public String createToDoTask() throws DukeException {
         StringBuilder successMessage = new StringBuilder();
@@ -209,7 +210,7 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a Deatasksine Task and adds to the list
+     * creates a Deatasksine duke.Task and adds to the list
      */
     public String createDeadlineTask() throws DukeException {
         StringBuilder successMessage = new StringBuilder();
@@ -221,13 +222,13 @@ public class Parser {
         }
         Task task = new Deadline(title, 0, obtainDate());
         tasks.addTask(task);
-        successMessage.append("Added Deadline task successfully!\n");
+        successMessage.append("Added duke.Deadline task successfully!\n");
         return successMessage.toString();
     }
 
     /**
      * Checks if user input is valid, then
-     * creates a Event Task and adds to the list
+     * creates a duke.Event duke.Task and adds to the list
      */
     public String createEventTask() throws DukeException {
         StringBuilder successMessage = new StringBuilder();
@@ -239,7 +240,7 @@ public class Parser {
         }
         Task task = new Event(title, 0, obtainDate());
         tasks.addTask(task);
-        successMessage.append("Added Event task successfully!\n");
+        successMessage.append("Added duke.Event task successfully!\n");
         return successMessage.toString();
     }
 

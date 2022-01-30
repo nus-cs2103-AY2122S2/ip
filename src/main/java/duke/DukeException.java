@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * This is a custom Duke Exception class
+ * This is a custom duke.Duke Exception class
  *
  *
  * @author  Hsiao Jiet

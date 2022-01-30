@@ -1,7 +1,9 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 /**
- * This Duke program is a Personal Assistant Chatbot
+ * This duke.Duke program is a Personal Assistant Chatbot
  * to keep track of various things.
  *
  * @author  Hsiao Jiet
@@ -21,7 +23,7 @@ public class Ui {
 
     public String createWelcomeMessage() {
         StringBuilder welcomeMessage = new StringBuilder();
-        String welcome = "Welcome to Duke, your personal Task assistant!\n";
+        String welcome = "Welcome to duke.Duke, your personal duke.Task assistant!\n";
         welcomeMessage.append(line).append(welcome).append(line);
         return welcomeMessage.toString();
     }
@@ -40,7 +42,7 @@ public class Ui {
 
     public void parseUserInput(TaskList tasks, Storage storage) throws DukeException, IOException {
         String userInput = scanner.nextLine();
-        parser = new Parser(userInput, tasks, storage);//Calls Parser to parse information of userInput
-        parser.parse();//and do the respective action from TaskList
+        parser = new Parser(userInput, tasks, storage);//Calls duke.Parser to parse information of userInput
+        parser.parse();//and do the respective action from duke.TaskList
     }
 }

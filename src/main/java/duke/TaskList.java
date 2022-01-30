@@ -1,8 +1,9 @@
-import java.io.IOException;
+package duke;
+
 import java.util.ArrayList;
 /**
  * This is a DukeList class that handles the operations to the
- * tasks in the list in the Duke system
+ * tasks in the list in the duke.Duke system
  *
  * @author  Hsiao Jiet
  * @version 1.0
@@ -52,7 +53,7 @@ public class TaskList {
             tasks.remove(i - 1);
         } catch (Exception e) {
             StringBuilder error = new StringBuilder();
-            error.append(line ).append("☹ OOPS!!! Fam, you do not even have this numbered Task in your list.\n");
+            error.append(line ).append("☹ OOPS!!! Fam, you do not even have this numbered duke.Task in your list.\n");
             error.append(line);
             throw new DukeException(error.toString());
         }
@@ -76,8 +77,8 @@ public class TaskList {
     }
 
     /**
-     * Marks the Task as done by given index input.
-     * Index is based on the position the Task is in, in the list
+     * Marks the duke.Task as done by given index input.
+     * Index is based on the position the duke.Task is in, in the list
      */
     public Task markTask(int i) {
         Task task = tasks.get(i - 1);
@@ -86,8 +87,8 @@ public class TaskList {
     }
 
     /**
-     * Unmarks the Task as done by given index input.
-     * Index is based on the position the Task is in, in the list
+     * Unmarks the duke.Task as done by given index input.
+     * Index is based on the position the duke.Task is in, in the list
      */
     public Task unmarkTask(int i) {
         Task task = tasks.get(i - 1);

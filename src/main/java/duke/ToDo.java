@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * This is a child class of Task, Todo.
+ * This is a child class of duke.Task, Todo.
  * Todo class accepts only a title and if it is complete as parameter
  *
  *
