@@ -5,7 +5,7 @@ import spike.task.TaskList;
 /**
  * Warns user about incorrect command.
  */
-public class IncorrectCommand extends Command{
+public class IncorrectCommand extends Command {
     private String errorMsg;
 
     /**

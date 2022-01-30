@@ -1,11 +1,12 @@
 package spike.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import spike.task.Task;
 import spike.task.TaskList;
 import spike.task.ToDo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToggleMarkCommandTest {
     @Test

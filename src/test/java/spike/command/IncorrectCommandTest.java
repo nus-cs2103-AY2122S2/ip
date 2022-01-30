@@ -1,9 +1,10 @@
 package spike.command;
 
-import org.junit.jupiter.api.Test;
-import spike.task.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import spike.task.TaskList;
 
 public class IncorrectCommandTest {
     @Test

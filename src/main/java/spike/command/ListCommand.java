@@ -1,14 +1,14 @@
 package spike.command;
 
+import java.time.LocalDateTime;
+
 import spike.task.Task;
 import spike.task.TaskList;
-
-import java.time.LocalDateTime;
 
 /**
  * Lists tasks according to user requirement.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     private int action;
     private LocalDateTime ldt;
 

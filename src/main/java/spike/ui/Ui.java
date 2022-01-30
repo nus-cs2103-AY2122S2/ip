@@ -11,6 +11,9 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Constructor using system input and output.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;

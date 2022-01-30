@@ -1,10 +1,10 @@
 package spike.command;
 
-import spike.task.Task;
-import spike.task.TaskList;
-
 import java.io.FileWriter;
 import java.io.IOException;
+
+import spike.task.Task;
+import spike.task.TaskList;
 
 /**
  * Handles data before exiting.

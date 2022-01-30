@@ -1,8 +1,5 @@
 package spike.storage;
 
-import spike.exception.SpikeException;
-import spike.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +8,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import spike.exception.SpikeException;
+import spike.task.Deadline;
+import spike.task.Event;
+import spike.task.Task;
+import spike.task.TaskList;
+import spike.task.ToDo;
+
+
 
 /**
  * Saves and loads task list to and from the hard disk.

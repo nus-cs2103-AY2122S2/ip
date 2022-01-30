@@ -1,13 +1,14 @@
 package spike.parser;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
 import spike.command.IncorrectCommand;
 import spike.task.TaskList;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     private Parser parser;

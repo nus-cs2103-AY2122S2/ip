@@ -5,7 +5,7 @@ import spike.command.ExitCommand;
 import spike.exception.SpikeException;
 import spike.parser.Parser;
 import spike.storage.Storage;
-import spike.task.*;
+import spike.task.TaskList;
 import spike.ui.Ui;
 
 /**
@@ -48,9 +48,13 @@ public class Spike {
         System.exit(0);
     }
 
-
+    /**
+     * Entry point of the program.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        new Spike("data/", "data/Spike.txt").run();
+        new Spike("/data", "/data/Spike.txt").run();
         return;
     }
 }

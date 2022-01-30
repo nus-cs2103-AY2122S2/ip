@@ -9,7 +9,7 @@ public class SpikeException extends Exception {
      *
      * @param str
      */
-    public SpikeException(String str){
+    public SpikeException(String str) {
         super(str);
     }
 }

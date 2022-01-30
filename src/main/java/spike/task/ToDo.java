@@ -3,7 +3,7 @@ package spike.task;
 /**
  * Encapsulate information of pure to-do task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Default constructor.
      */

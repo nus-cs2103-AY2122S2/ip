@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulate information of task with deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /**
      * Default constructor.

@@ -1,18 +1,28 @@
 package spike.parser;
-
-import spike.exception.SpikeException;
-import spike.command.*;
-import spike.task.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import spike.command.AddCommand;
+import spike.command.Command;
+import spike.command.DeleteCommand;
+import spike.command.ExitCommand;
+import spike.command.FindCommand;
+import spike.command.IncorrectCommand;
+import spike.command.ListCommand;
+import spike.command.ToggleMarkCommand;
+import spike.exception.SpikeException;
+import spike.task.Deadline;
+import spike.task.Event;
+import spike.task.Task;
+import spike.task.TaskList;
+import spike.task.ToDo;
 
 /**
  * Encapsulates functionalities to parse user command.
  */
 public class Parser {
-     protected enum CommandName {
+    protected enum CommandName {
         LIST("list"),
         MARK("mark"),
         UNMARK("unmark"),
@@ -42,7 +52,7 @@ public class Parser {
      * @return a proper command to be executed
      */
     public Command parseCommand(String inputLine, TaskList tasks) {
-        String[] commandWords =  inputLine.split(" ");
+        String[] commandWords = inputLine.split(" ");
         CommandName type = validateCommand(commandWords[0]);
         if (type == null) {
             return new IncorrectCommand("Sorry, I am not programmed to do this yet :(");
@@ -99,17 +109,17 @@ public class Parser {
 
 
     private Command parseList(String inputLine) throws SpikeException {
-         if (inputLine.length() >= 5) {
-             // User tries to list task by date
-             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-             LocalDateTime ldt = parseDateTime(inputLine.substring(5), dtf);
-             if (ldt == null) {
-                 throw new SpikeException("Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date");
-             }
-             return new ListCommand(0, ldt);
-         } else {
-             return new ListCommand();
-         }
+        if (inputLine.length() >= 5) {
+            // User tries to list task by date
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime ldt = parseDateTime(inputLine.substring(5), dtf);
+            if (ldt == null) {
+                throw new SpikeException("Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date");
+            }
+            return new ListCommand(0, ldt);
+        } else {
+            return new ListCommand();
+        }
     }
 
     private Command parseAdd(CommandName c, String command, String[] commandWords) throws SpikeException {
