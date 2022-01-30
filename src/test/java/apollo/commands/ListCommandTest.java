@@ -30,9 +30,9 @@ public class ListCommandTest {
         addTodo.execute();
         Command list = new ListCommand();
         String expected = "These are your current tasks. \n"
-                + "\t1.[T][ ] todo task\n"
-                + "\t2.[T][ ] todo task\n"
-                + "\t3.[T][ ] todo task";
+                + "1.[T][ ] todo task\n"
+                + "2.[T][ ] todo task\n"
+                + "3.[T][ ] todo task";
         assertEquals(expected, list.execute());
     }
 

@@ -5,7 +5,7 @@ public class ListCommand extends Command {
     private String getIndexedList() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < taskList.taskCount(); i++) {
-            stringBuilder.append("\n\t").append(i+1).append(".");
+            stringBuilder.append("\n").append(i+1).append(".");
             stringBuilder.append(taskList.getTaskString(i));
         }
         return stringBuilder.toString();
