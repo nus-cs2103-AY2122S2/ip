@@ -44,7 +44,16 @@ public class Duke {
                     break;
                 } else if (parser.getType(command).equals("list")) {
                     ui.printMessage(pastTasks.toString());
+                } else if (parser.getType(command).equals("find")) {
+                    TaskList results = new TaskList();
+                    for (Task t: pastTasks.taskList) {
+                        String taskToFind = Parser.getTaskToFindName(command);
+                        if (t.name.contains(taskToFind)) {
+                            results.add(t);
+                        }
+                    }
 
+                    ui.printMessage(results.toString());
                 } else if (parser.getType(command).equals("unmark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
                     pastTasks.get(index).isDone = false;

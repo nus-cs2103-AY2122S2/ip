@@ -15,6 +15,13 @@ public class Parser {
     }
 
     /**
+     * Returns task name to find from find command
+     */
+    public static String getTaskToFindName(String command) {
+        return command.substring(5);
+    }
+
+    /**
      * Returns the type of the command (bye delete etc)
      */
     public String getType(String command) {
