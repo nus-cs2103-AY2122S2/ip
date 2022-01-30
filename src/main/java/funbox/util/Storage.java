@@ -1,9 +1,15 @@
 package funbox.util;
 
-import java.io.*;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+
 import funbox.exception.FunBoxExceptions;
 import funbox.task.Deadline;
 import funbox.task.Event;
@@ -14,14 +20,14 @@ import funbox.task.ToDo;
  * Deal with writing and reading user commands locally.
  */
 public class Storage {
-    private final String DIRURL = "data/";
-    private final String FILEURL = "data/tasks.txt";
-    private final String TEMPFILEURL = "data/temp.txt";
+    private final String DIR_URL = "data/";
+    private final String FILE_URL = "data/tasks.txt";
+    private final String TEMPFILE_URL = "data/temp.txt";
     private final String DELIMITOR = ",";
     private Ui ui;
     private Parser parser;
     private TaskList taskList;
-    HashMap<String, String> typeHashmap;
+    private HashMap<String, String> typeHashmap;
 
     /**
      * The constructor for the storage class.
@@ -56,12 +62,12 @@ public class Storage {
             boolean isDirectoryCreated = this.createDirectory();
             if (isDirectoryCreated) {
                 this.ui.printDirSuccess();
-                this.createFile(this.FILEURL);
+                this.createFile(this.FILE_URL);
             } else {
                 this.ui.printDirAlreadyExist();
             }
         } else if (!isFileExist()) {
-            this.createFile(this.FILEURL);
+            this.createFile(this.FILE_URL);
         } else {
             this.ui.printLoadData();
             try {
@@ -78,7 +84,7 @@ public class Storage {
      * @return Return true if directory exist, otherwise, false
      */
     private boolean isDirectoryExist() {
-        return new File(this.DIRURL).isDirectory();
+        return new File(this.DIR_URL).isDirectory();
     }
 
     /**
@@ -87,7 +93,7 @@ public class Storage {
      * @return Return true if file exist, otherwise, false
      */
     private boolean isFileExist() {
-        return Files.exists(Paths.get(this.FILEURL));
+        return Files.exists(Paths.get(this.FILE_URL));
     }
 
     /**
@@ -96,7 +102,7 @@ public class Storage {
      * @return Return true if directory exists, otherwise, false
      */
     private boolean createDirectory() {
-        return new File(this.DIRURL).mkdir();
+        return new File(this.DIR_URL).mkdir();
     }
 
     /**
@@ -104,7 +110,7 @@ public class Storage {
      */
     private void createFile(String fileUrl) {
         try {
-            if (new File(fileUrl).createNewFile() && fileUrl == this.FILEURL) {
+            if (new File(fileUrl).createNewFile() && fileUrl == this.FILE_URL) {
                 this.ui.printFileSuccess();
             }
         } catch (IOException e) {
@@ -123,7 +129,7 @@ public class Storage {
      * @throws IOException           If an I/O error occur
      */
     public TaskList readFile() throws IOException, FunBoxExceptions {
-        File file = new File(this.FILEURL);
+        File file = new File(this.FILE_URL);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String task;
         TaskList taskList = new TaskList();
@@ -157,6 +163,8 @@ public class Storage {
                             parser.stringToLocalDate(taskSplit[3]),
                             parser.getTime(taskSplit[3]), type));
                     break;
+                default:
+                    break;
                 }
             }
 
@@ -175,11 +183,11 @@ public class Storage {
      * @throws IOException If file does not exist.
      */
     public void deleteTask(int index) throws IOException {
-        this.createFile(this.TEMPFILEURL);
-        File tempFile = new File(this.TEMPFILEURL);
-        File file = new File(this.FILEURL);
+        this.createFile(this.TEMPFILE_URL);
+        File tempFile = new File(this.TEMPFILE_URL);
+        File file = new File(this.FILE_URL);
         BufferedReader br = new BufferedReader(new FileReader(file));
-        FileWriter fw = new FileWriter(this.TEMPFILEURL, true);
+        FileWriter fw = new FileWriter(this.TEMPFILE_URL, true);
         String task;
         int counter = 1;
 
@@ -190,7 +198,7 @@ public class Storage {
                 br.close();
                 fw.close();
                 file.delete();
-                tempFile.renameTo(new File(this.FILEURL));
+                tempFile.renameTo(new File(this.FILE_URL));
                 break;
             } else {
                 if (counter != index) {
@@ -218,7 +226,7 @@ public class Storage {
                 Deadline temp = (Deadline) task;
                 result = "D,0";
                 result = result.concat(DELIMITOR).concat(temp.description).concat(DELIMITOR)
-                        .concat(temp.date.toString()).concat(" ").concat(temp.time);
+                        .concat(temp.getDate().toString()).concat(" ").concat(temp.getTime());
                 break;
             case "event":
                 Event temp2 = (Event) task;
@@ -226,8 +234,10 @@ public class Storage {
                 result = result.concat(DELIMITOR).concat(temp2.description).concat(DELIMITOR)
                         .concat(temp2.date.toString()).concat(" ").concat(temp2.time);
                 break;
+            default:
+                break;
             }
-            FileWriter fw = new FileWriter(this.FILEURL, true);
+            FileWriter fw = new FileWriter(this.FILE_URL, true);
             fw.write(result + "\n");
             fw.close();
         } catch (IOException e) {

@@ -1,5 +1,4 @@
 package funbox.task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    public LocalDate date;
-    public String time;
+    private LocalDate date;
+    private String time;
 
     /**
      * The constructor for the Deadline.
@@ -26,6 +25,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Return the time.
+     *
+     * @return Return the time.
+     */
+    public String getTime() {
+        return this.getTime();
+    }
+
+    /**
+     * Returns the local date.
+     *
+     * @return Returns the local date.
+     */
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    /**
      * Return a string representation.
      *
      * @return Return a string.
@@ -34,6 +51,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                + " "  + time + ")";
+                + " " + time + ")";
     }
 }
