@@ -5,15 +5,23 @@ import duke.ui.Ui;
 
 public class ExitCommand extends Command{
 
-
     public ExitCommand(){
     }
 
+    /**
+     * Prints closing message to console through Ui method
+     * @param ui Ui to communicate with user
+     * @param list DukeList that stores Tasks
+     */
     @Override
     public void execute(Ui ui, DukeList list){
        ui.showClosing();
     }
 
+    /**
+     * Returns true to end program
+     * @return true
+     */
     @Override
     public boolean isExit() {
         return true;

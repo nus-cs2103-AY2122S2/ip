@@ -19,7 +19,7 @@ public class DukeList {
     }
 
     /**
-     * Used to add a task to the list, and print add message to the console.
+     * Adds a task to the list, prints add message to the console.
      * @param t Task to be added
      */
     public void add(Task t){
@@ -31,7 +31,7 @@ public class DukeList {
 
 
     /**
-     * Used to mark tasks as done.
+     * Mark specified task as done.
      * @param x
      */
     public void mark(int x) {
@@ -44,7 +44,7 @@ public class DukeList {
     }
 
     /**
-     * Used to unmark tasks.
+     * Unmark specified task.
      * @param x The task number
      */
     public void unmark(int x){
@@ -77,8 +77,8 @@ public class DukeList {
 
 
     /**
-     * Used to delete tasks from the list
-     * @param x String representation of the index to delete
+     * Deletes specified task from the list
+     * @param x Index of task in list to delete
      */
     public void delete(int x) {
         try{
@@ -92,6 +92,9 @@ public class DukeList {
         }
     }
 
+    /**
+     * Prints a list of tasks due on current date to the console
+     */
     public void todayTask(){
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
