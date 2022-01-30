@@ -47,4 +47,16 @@ public class TaskList {
         }
         return txtdata;
     }
+
+    public TaskList search(String keyword) {
+        TaskList searchResult = new TaskList();
+        for (int i = 0; i < this.todo.size(); i++) {
+
+            int index = this.todo.get(i).toString().indexOf(keyword);
+            if (index != -1) {
+                searchResult.addTask(this.todo.get(i));
+            }
+        }
+        return searchResult;
+    }
 }
