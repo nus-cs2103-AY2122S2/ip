@@ -31,7 +31,7 @@ public class Ui {
      * Command list includes the keyword and description.
      */
     public String[] readCommand() {
-        String[] commandList = new String[]{sc.next(),sc.nextLine()};
+        String[] commandList = new String[]{sc.next(), sc.nextLine()};
         return commandList;
     }
 
@@ -95,7 +95,7 @@ public class Ui {
             System.out.println("No task for now");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for(int i = 1; i < taskLists.size() + 1; i++){
+            for (int i = 1; i < taskLists.size() + 1; i++) {
                 Task currTask = taskLists.get(i - 1);
                 System.out.println(i + ". " + currTask);
             }

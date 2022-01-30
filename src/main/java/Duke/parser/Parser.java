@@ -1,10 +1,19 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.ui.DukeException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HandleErrorCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.NotKnownCommand;
+import duke.commands.UnmarkCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
+import duke.ui.DukeException;
 
 /**
  * Deals with handling of the user command.
@@ -18,54 +27,54 @@ public class Parser {
      * @return the respective commands.
      */
     public static Command parse(String[] commandList) {
-        String first_word = commandList[0];
-        String remaining_word = commandList[1].trim();
+        String firstWord = commandList[0];
+        String remainingWord = commandList[1].trim();
         try {
-            switch (first_word) {
+            switch (firstWord) {
             case "bye":
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
             case "deadline":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! The description of a deadline cannot be empty. :<");
                 }
-                String[] deadlineActions = remaining_word.split("/by", 2);
+                String[] deadlineActions = remainingWord.split("/by", 2);
                 Deadline deadlineTask = new Deadline(deadlineActions[0].trim(), deadlineActions[1].trim());
                 return new AddCommand(deadlineTask);
             case "event":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! The description of a event cannot be empty. :<");
                 }
-                String[] eventActions = remaining_word.split("/at", 2);
+                String[] eventActions = remainingWord.split("/at", 2);
                 Event eventTask = new Event(eventActions[0].trim(), eventActions[1].trim());
                 return new AddCommand(eventTask);
             case "todo":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! The description of a todo cannot be empty. :<");
                 }
-                ToDo todoTask = new ToDo(remaining_word);
+                ToDo todoTask = new ToDo(remainingWord);
                 return new AddCommand(todoTask);
             case "mark":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! Please input a number. :<");
                 }
-                return new MarkCommand(remaining_word);
+                return new MarkCommand(remainingWord);
             case "unmark":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! Please input a number. :<");
                 }
-                return new UnmarkCommand(remaining_word);
+                return new UnmarkCommand(remainingWord);
             case "delete":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! Please input a number. :<");
                 }
-                return new DeleteCommand(remaining_word);
+                return new DeleteCommand(remainingWord);
             case "find":
-                if (remaining_word.equals("")) {
+                if (remainingWord.equals("")) {
                     return new HandleErrorCommand("OOPS!!! Please input a number. :<");
                 }
-                return new FindCommand(remaining_word);
+                return new FindCommand(remainingWord);
             default:
                 return new NotKnownCommand();
             }

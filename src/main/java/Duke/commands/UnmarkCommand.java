@@ -1,15 +1,15 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * Deals with handling command that unmark tasks.
  */
-public class UnmarkCommand extends Command{
-    String taskNum;
+public class UnmarkCommand extends Command {
+    private String taskNum;
 
     /**
      * Constructor for UnmarkCommand.

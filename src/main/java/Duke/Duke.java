@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import duke.ui.DukeException;
 import duke.ui.Ui;
-import duke.tasklist.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represent the main class of the program.

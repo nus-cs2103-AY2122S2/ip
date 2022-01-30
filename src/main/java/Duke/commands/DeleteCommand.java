@@ -1,16 +1,16 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.ui.DukeException;
-import duke.ui.Ui;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.DukeException;
+import duke.ui.Ui;
 
 /**
  * Deals with handling command that delete tasks.
  */
-public class DeleteCommand extends Command{
-    String taskNum;
+public class DeleteCommand extends Command {
+    private String taskNum;
 
     /**
      * Constructor for AddCommand.

@@ -2,13 +2,12 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.DukeException;
 import duke.ui.Ui;
 
 /**
  * Deals with handling command that is unknown.
  */
-public class NotKnownCommand extends Command{
+public class NotKnownCommand extends Command {
 
     /**
      * Prints out the error message.

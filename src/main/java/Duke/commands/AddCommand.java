@@ -1,15 +1,15 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * Deals with handling command that add tasks.
  */
-public class AddCommand extends Command{
-    Task task;
+public class AddCommand extends Command {
+    private Task task;
 
     /**
      * Constructor for AddCommand.

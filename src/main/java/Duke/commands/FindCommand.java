@@ -3,8 +3,8 @@ package duke.commands;
 import java.util.ArrayList;
 
 import duke.storage.Storage;
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 /**

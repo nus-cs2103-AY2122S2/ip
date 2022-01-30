@@ -37,7 +37,7 @@ public abstract class Task {
      *
      * @return description of the task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -57,7 +57,7 @@ public abstract class Task {
         isDone = false;
     }
 
-    abstract public String saveToFileString();
+    public abstract String saveToFileString();
 
     /**
      * Returns the date that was converted from String to LocalDate.
@@ -102,7 +102,7 @@ public abstract class Task {
      * @return the status and description of the task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 }

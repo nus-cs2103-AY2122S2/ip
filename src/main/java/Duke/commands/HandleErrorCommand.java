@@ -1,14 +1,14 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import duke.ui.DukeException;
 import duke.ui.Ui;
-import duke.tasklist.TaskList;
 
 /**
  * Deals with handling command for errors.
  */
-public class HandleErrorCommand extends Command{
+public class HandleErrorCommand extends Command {
     private String errorMsg;
 
     /**

@@ -3,14 +3,15 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import duke.ui.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.ui.DukeException;
+
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -33,7 +34,7 @@ public class Storage {
      * @return the the list of tasks.
      * @throws DukeException If files cannot be read or created.
      */
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             File saveFile = new File(saveFilePath);
@@ -65,6 +66,7 @@ public class Storage {
                     }
                     taskList.add(eventTask);
                     break;
+                default:
                 }
             }
         } catch (IOException e) {
@@ -79,7 +81,7 @@ public class Storage {
      * @param taskList the list of tasks.
      * @throws DukeException if you cannot write into the file.
      */
-    public void save(ArrayList<Task> taskList) throws DukeException{
+    public void save(ArrayList<Task> taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(saveFilePath);
             for (int i = 0; i < taskList.size(); i++) {

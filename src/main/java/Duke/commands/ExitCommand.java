@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Deals with handling command that user exit.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Saves the tasks into file and print to inform user.
