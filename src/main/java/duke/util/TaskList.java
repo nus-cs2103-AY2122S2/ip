@@ -5,7 +5,6 @@ import duke.exception.ErrorMessage;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains a list of tasks and has operations to manipulate tasks in the list.
@@ -25,7 +24,7 @@ public class TaskList {
      *
      * @param tasks List of tasks to be added to the task list.
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
 
