@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Storage {
+/**
+ * provides abstraction to reading and writing tasklist record to local directory.
+ */
+class Storage {
     public void writeData(TaskList taskList) {
         Path dirPath = Paths.get("data");
         Path filePath = Paths.get("data/taskList.txt");

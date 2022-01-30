@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * set of constant string values to respond to the user.
+ */
 public class Response {
     public static final
     String LOGO = " ____        _        \n"
