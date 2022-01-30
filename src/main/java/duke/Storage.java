@@ -1,15 +1,16 @@
 package duke;
 
-import duke.exception.DukeIoException;
-import duke.task.TaskList;
-import duke.task.serializer.TaskListSerializer;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+
+import duke.exception.DukeIoException;
+import duke.task.TaskList;
+import duke.task.serializer.TaskListSerializer;
+
 
 /**
  * Handles all persistence-related operations on the file system for the inflation and serialization

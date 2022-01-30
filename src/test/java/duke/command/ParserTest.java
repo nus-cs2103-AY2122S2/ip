@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.exception.DukeInvalidCommandException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeInvalidCommandException;
 
 public class ParserTest {
     @Test

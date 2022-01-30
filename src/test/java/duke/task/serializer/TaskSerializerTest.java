@@ -1,19 +1,20 @@
 package duke.task.serializer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeIoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.testutil.StreamUtils;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskSerializerTest {
     @Test
@@ -49,9 +50,9 @@ public class TaskSerializerTest {
     @Test
     public void testDeflate_valid_success() throws DukeIoException {
         Task[] tasks = new Task[] {
-                new Todo("Test 1"),
-                new Deadline("Test 2", LocalDateTime.parse("2022-12-12T12:34")),
-                new Event("Test 3", LocalDateTime.parse("2022-12-12T12:34"))
+            new Todo("Test 1"),
+            new Deadline("Test 2", LocalDateTime.parse("2022-12-12T12:34")),
+            new Event("Test 3", LocalDateTime.parse("2022-12-12T12:34"))
         };
 
         for (int i = 0; i < 3; i++) {

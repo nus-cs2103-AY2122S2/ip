@@ -1,15 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     private static class TaskStub extends Task {
@@ -72,10 +72,10 @@ public class TaskListTest {
         final HashMap<Integer, Task> tasks = new HashMap<>();
 
         Task[] sourceTasks = new Task[] {
-                new TaskStub("Task"),
-                new TaskStub("Task"),
-                new TaskStub("Task"),
-                new TaskStub("Task")
+            new TaskStub("Task"),
+            new TaskStub("Task"),
+            new TaskStub("Task"),
+            new TaskStub("Task")
         };
         Arrays.stream(sourceTasks).forEachOrdered(list::addTask);
 
