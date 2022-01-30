@@ -25,9 +25,10 @@ public class Ui {
                 System.out.print(fromDuke);
                 String[] commandArr = command.split(" ");
                 firstWord = commandArr[0];
-                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") ||
-                        firstWord.equals("unmark") || firstWord.equals("todo") || firstWord.equals("deadline") ||
-                        firstWord.equals("event") || firstWord.equals("delete") || firstWord.equals("save"))) {
+                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find") ||
+                        firstWord.equals("event") || firstWord.equals("todo") || firstWord.equals("deadline") ||
+                        firstWord.equals("delete") || firstWord.equals("save") || firstWord.equals("help") ||
+                        firstWord.equals("mark") || firstWord.equals("unmark"))) {
                     throw new InvalidCommandException();
 
                     // One word commands
@@ -39,12 +40,16 @@ public class Ui {
                     storage.save();
                 } else if (firstWord.equals("list")) {
                     taskList.list();
+                } else if (firstWord.equals("help")) {
+                    taskList.help();
 
                     //Multiple word commands
                 } else if (commandArr.length < 2) {
                     throw new InvalidDescriptionException();
                 } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
                     taskList.taskCheck(command);
+                } else if (firstWord.equals("find")) {
+                    taskList.find(command);
                 } else if (firstWord.equals("todo")) {
                     taskList.todo(command);
                 } else if (firstWord.equals("deadline")) {
@@ -64,7 +69,7 @@ public class Ui {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("That is an invalid task. Please try again!");
             } finally {
-            System.out.println("________________________________");
+            System.out.println("__________________________________________");
         }
         }
     }
