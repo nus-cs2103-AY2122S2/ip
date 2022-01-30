@@ -45,6 +45,7 @@ public class Parser {
             cmd = new ExitCommand();
             break;
         case "list":
+        case "ls":
             cmd = new ListCommand();
             break;
         case "mark":
