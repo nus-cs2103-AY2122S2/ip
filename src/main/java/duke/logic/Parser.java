@@ -22,16 +22,16 @@ public class Parser {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public static int parseIndex(String index) {
+    private static int parseIndex(String index) {
         return Integer.parseInt(index) - 1;
     }
 
-    public static String parseDescription(String options, String divider) {
+    private static String parseDescription(String options, String divider) {
         String[] splitCommand = options.split(divider);
         return splitCommand[0];
     }
 
-    public static LocalDateTime parseTime(String options, String divider) throws DukeException {
+    private static LocalDateTime parseTime(String options, String divider) throws DukeException {
         String[] splitCommand = options.split(divider);
         if (splitCommand.length < 2) {
             throw new DukeException("NO TIME SUPPLIED");
