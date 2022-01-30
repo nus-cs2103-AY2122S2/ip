@@ -49,13 +49,6 @@ public abstract class Task {
     }
 
     /**
-     * Sets the duke.Task to be isDone
-     */
-    public int getIsDoneIcon() {
-        return getIsDone();
-    }
-
-    /**
      * Sets the duke.Task's type of: Todo, duke.Deadline, duke.Event
      */
     public String getTaskIcon() {

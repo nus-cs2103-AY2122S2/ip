@@ -21,7 +21,7 @@ public class ToDo extends Task {
     public String toString() {
         StringBuilder successMessage = new StringBuilder();
         successMessage.append(getTaskIcon()).append(" - ");
-        successMessage.append(getIsDoneIcon()).append(" - ");
+        successMessage.append(isDone).append(" - ");
         successMessage.append(name).append("\n");;
         return successMessage.toString();
     }

@@ -51,6 +51,11 @@ public class Ui {
     public void parseUserInput(TaskList tasks, Storage storage) throws DukeException, IOException {
         String userInput = scanner.nextLine();
         parser = new Parser(userInput, tasks, storage);//Calls Parser to parse information of userInput
-        parser.parseInput();//and do the respective action from duke.TaskList
+        try {
+            parser.parseInput();//and do the respective action from duke.TaskList
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

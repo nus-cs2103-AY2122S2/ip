@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * This is an Action class that obtains a sentence as input that
@@ -22,7 +23,7 @@ public class Parser {
     String line = "\n____________________________________________________________\n";
 
     enum Commands {
-        todo, deadline, event, list, mark, unmark, delete, bye;
+        todo, deadline, event, list, mark, unmark, delete, find, bye;
     }
 
     public Parser(String input, TaskList list, Storage storage) {
@@ -131,14 +132,16 @@ public class Parser {
             case delete:
                 System.out.println(deleteTask());
                 break;
+            case find:
+                System.out.println(findTask());
+                break;
             case bye:
                 terminateAndSaveProgram(storage);
-                break;
+                System.exit(0);
             default:
-                String s = line +
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        line;
-                throw new DukeException(s);
+                StringBuilder errorMessage = new StringBuilder();
+                errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\nTry another command!\n").append(line);
+                throw new IllegalArgumentException(errorMessage.toString());
         }
     }
 
@@ -277,19 +280,48 @@ public class Parser {
     }
 
     /**
+     * Finds task with given clue word
+     */
+    public String findTask() throws DukeException {
+        StringBuilder successMessage = new StringBuilder();
+        StringBuilder noMatchMessage = new StringBuilder();
+        String wordsProvided;
+        try {
+            successMessage.append(line).append("Here are the matching tasks in your list:\n");
+            wordsProvided = obtainTitle();
+            boolean hasMatch = false;
+            for (int i = 0; i < tasks.getTaskListSize(); i ++) {
+                Task task = tasks.getParticularTask(i);
+                if (task.getName().toLowerCase().contains(wordsProvided)) {
+                    hasMatch = true;
+                    successMessage.append(task.toString());
+                }
+            }
+            if (hasMatch) {
+                successMessage.append(line);
+                return successMessage.toString();
+            } else {
+                noMatchMessage.append(line).append("There are no Tasks that match the string inputted!").append(line);
+                return noMatchMessage.toString();
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
      * Saves all content into file and stops the program
      */
-    public void terminateAndSaveProgram(Storage storage) throws IOException {
+    public String terminateAndSaveProgram(Storage storage) throws IOException {
         StringBuilder successMessage = new StringBuilder();
         String byeMessage = "Bye. Hope to see you again soon!\n";
         successMessage.append(line).append(byeMessage).append(line);
         try {
             storage.saveAllTasks(tasks);
             storage.closeWriteFile();
-            System.out.println(successMessage.toString());
+            return successMessage.toString();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
-        System.exit(0);
     }
 }

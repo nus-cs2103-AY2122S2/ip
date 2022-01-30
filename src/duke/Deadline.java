@@ -62,7 +62,7 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(getTaskIcon()).append(" - ");
-        result.append(getDoneIcon()).append(" - ");
+        result.append(isDone).append(" - ");
         result.append(name).append(" - ");
         result.append(convertLocalDateToString()).append("\n");
         return result.toString();
