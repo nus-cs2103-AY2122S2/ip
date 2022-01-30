@@ -4,6 +4,9 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Main class from which the bot is run.
+ */
 public class Duke {
 
     private Ui ui;
@@ -22,6 +25,9 @@ public class Duke {
         parser = new Parser(tasks);
     }
 
+    /**
+     * Starts the bot by combining Parser, Storage, TaskList and Ui and handling Duke exceptions.
+     */
     public void run() {
         try {
             ui.startConversation(this.parser, this.storage);
@@ -31,6 +37,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the bot.
+     * @param args but not used.
+     */
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke :) \nWhat can I do for you? :D");
         new Duke("data.txt").run();
