@@ -1,4 +1,4 @@
-package saitama;
+package saitama.parser;
 
 import saitama.commands.AddCommand;
 import saitama.commands.Command;

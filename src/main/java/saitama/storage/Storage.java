@@ -1,4 +1,4 @@
-package saitama;
+package saitama.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;

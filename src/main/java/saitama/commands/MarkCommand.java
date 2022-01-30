@@ -1,9 +1,10 @@
 package saitama.commands;
 
-import saitama.Storage;
-import saitama.TaskList;
-import saitama.Ui;
 import saitama.exceptions.InvalidTaskNumberException;
+import saitama.storage.Storage;
+import saitama.tasks.Task;
+import saitama.tasks.TaskList;
+import saitama.ui.Ui;
 
 /**
  * A Command object that marks a given task.
@@ -16,14 +17,13 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        System.out.println("OK...");
+        Task task = taskList.get(taskNumber);
         taskList.markTask(taskNumber);
-        System.out.println("The following task has been marked as done: ");
-        System.out.println(taskList.get(taskNumber));
+        return ui.showMarkTask(task, taskList);
     }
 
     @Override

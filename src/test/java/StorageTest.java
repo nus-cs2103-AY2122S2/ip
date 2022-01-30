@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import saitama.Storage;
+import saitama.storage.Storage;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 

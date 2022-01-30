@@ -1,10 +1,10 @@
 package saitama.commands;
 
-import saitama.Storage;
-import saitama.TaskList;
-import saitama.Ui;
 import saitama.exceptions.InvalidTaskNumberException;
+import saitama.storage.Storage;
 import saitama.tasks.Task;
+import saitama.tasks.TaskList;
+import saitama.ui.Ui;
 
 /**
  * A Command object that deletes a given task.
@@ -17,16 +17,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        System.out.println("OK...");
         Task task = taskList.get(taskNumber);
         taskList.delete(taskNumber);
-        System.out.println("The following task has been removed from the list: ");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
+        return ui.showDeleteTask(task, taskList);
     }
 
     @Override
