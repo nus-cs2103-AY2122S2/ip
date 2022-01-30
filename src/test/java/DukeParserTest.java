@@ -1,18 +1,19 @@
-import duke.command.Parser;
-import duke.error.DukeException;
-import duke.task.*;
-import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.sql.Array;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
+import duke.command.Parser;
+import duke.error.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+
 
 public class DukeParserTest {
     @Test
@@ -25,10 +26,10 @@ public class DukeParserTest {
         assertEquals("111", tl.getLast().getTaskName());
         parser.run("deadline 222 /by 11/11/1998", p, tl);
         assertEquals("222", tl.getLast().getTaskName());
-        assertEquals(LocalDate.parse("11/11/1998", formatter), ((DeadlineTask)tl.getLast()).getDueDate());
+        assertEquals(LocalDate.parse("11/11/1998", formatter), ((DeadlineTask) tl.getLast()).getDueDate());
         parser.run("event 333 /at 11/11/1998", p, tl);
         assertEquals("333", tl.getLast().getTaskName());
-        assertEquals(LocalDate.parse("11/11/1998", formatter), ((EventTask)tl.getLast()).getDate());
+        assertEquals(LocalDate.parse("11/11/1998", formatter), ((EventTask) tl.getLast()).getDate());
     }
 
     @Test
@@ -66,9 +67,12 @@ public class DukeParserTest {
         assertEquals(-1, checkErrorMessage("list /on", "Provide the date in the format dd-mm-yyyy!", tl));
         assertEquals(-1, checkErrorMessage("list /after", "Provide the date in the format dd-mm-yyyy!", tl));
         assertEquals(-1, checkErrorMessage("list /before", "Provide the date in the format dd-mm-yyyy!", tl));
-        assertEquals(-1, checkErrorMessage("list /on adsf54fasd54", "Provide the date in the format dd-mm-yyyy!", tl));
-        assertEquals(-1, checkErrorMessage("list /before adsf54fasd54", "Provide the date in the format dd-mm-yyyy!", tl));
-        assertEquals(-1, checkErrorMessage("list /after adsf54fasd54", "Provide the date in the format dd-mm-yyyy!", tl));
+        assertEquals(-1, checkErrorMessage("list /on adsf54fasd54",
+                "Provide the date in the format dd-mm-yyyy!", tl));
+        assertEquals(-1, checkErrorMessage("list /before adsf54fasd54",
+                "Provide the date in the format dd-mm-yyyy!", tl));
+        assertEquals(-1, checkErrorMessage("list /after adsf54fasd54",
+                "Provide the date in the format dd-mm-yyyy!", tl));
 
         //MARK, UNMARK, DELETE
         assertEquals(-1, checkErrorMessage("mark", "Task ID must be provided!", tl));
@@ -89,7 +93,8 @@ public class DukeParserTest {
         assertEquals(-1, checkErrorMessage("todo", "Task Name must be provided!", tl));
         assertEquals(-1, checkErrorMessage("event", "Task Name must be provided!", tl));
         assertEquals(-1, checkErrorMessage("deadline", "Task Name must be provided!", tl));
-        assertEquals(-1, checkErrorMessage("deadline 111", "/by flag not detected. Please specify date using /by!", tl));
+        assertEquals(-1, checkErrorMessage("deadline 111",
+                "/by flag not detected. Please specify date using /by!", tl));
         assertEquals(-1, checkErrorMessage("event 111", "/at flag not detected. Please specify date using /at!", tl));
         assertEquals(-1, checkErrorMessage("deadline 111 /by", "Please specify deadline date after /by!", tl));
         assertEquals(-1, checkErrorMessage("event 111 /at", "Please specify deadline date after /at!", tl));
@@ -106,8 +111,8 @@ public class DukeParserTest {
         Ui p = new Ui();
         String[] args = message.split("\\s+");
         String action = args[0];
-        try{
-            parser.validate(message,action, args, tl);
+        try {
+            parser.validate(message, action, args, tl);
         } catch (DukeException de) {
             assertEquals(expectedMessage, de.getMessage());
             return -1;
