@@ -15,6 +15,14 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    public Task get(int index) {
+        return tasks.get(index);
+    }
+
+    public int getSize() {
+        return tasks.size();
+    }
+
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
@@ -48,8 +56,12 @@ public class TaskList {
             return printTask(t);
         } catch (DukeException e) {
             return e.emptyDesc();
-        } catch (DateTimeParseException e) {
-            return "Get the date format right!\n" + "dd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm\n";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Missing argument(s) for tasks\n" +
+                    "e.g. <task> <desc> /(at or by) <datetime>\n";
+        }
+        catch (DateTimeParseException e) {
+            return "Get the date format right!\ndd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm\n";
         }
     }
 
