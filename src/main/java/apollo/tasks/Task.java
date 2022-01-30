@@ -27,7 +27,6 @@ public class Task implements java.io.Serializable {
         }
     }
 
-
     /**
      * Constructor for {@code Task}.
      *
@@ -49,6 +48,11 @@ public class Task implements java.io.Serializable {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Returns String representation of task description.
+     *
+     * @return Task description.
+     */
     public String getDescription() {
         return description;
     }

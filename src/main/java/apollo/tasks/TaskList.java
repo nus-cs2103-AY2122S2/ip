@@ -62,13 +62,19 @@ public class TaskList implements java.io.Serializable{
     /**
      * Gets String representation of task of supplied index.
      *
-     * @param i Index of task
+     * @param i Index of task.
      * @return String representation of task.
      */
     public String getTaskString(int i) {
         return taskList.get(i).toString();
     }
 
+    /**
+     * Gets String representation of task description.
+     *
+     * @param i Index of task.
+     * @return String representation of description.
+     */
     public String getTaskDescription(int i) {
         return taskList.get(i).getDescription();
     }

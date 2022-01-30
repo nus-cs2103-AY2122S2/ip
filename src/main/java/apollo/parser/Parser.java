@@ -50,7 +50,8 @@ public class Parser {
     }
 
     /**
-     * Parses arguments for index.
+     * Parses arguments for 1-based index.
+     * Returns as 0-based index.
      *
      * @param args To parse for index.
      * @return Index parsed as an Integer.
