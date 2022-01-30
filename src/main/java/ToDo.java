@@ -1,6 +1,12 @@
-public class ToDo extends Task {
+class ToDo extends Task {
   public ToDo(String name) {
     super(name);
+  }
+
+  @Override
+  String toSave() {
+    int doneBit = isDone ? 1 : 0;
+    return String.format("T,.,%d,.,%s\n", doneBit, name);
   }
 
   @Override

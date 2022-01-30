@@ -1,23 +1,25 @@
-public class Task {
-  private final String name;
-  private boolean done;
+abstract class Task {
+  protected final String name;
+  protected boolean isDone;
 
   public Task(String name) {
     this.name = name;
-    this.done = false;
+    this.isDone = false;
   }
 
   public void done() {
-    done = true;
+    isDone = true;
   }
 
   public void undone() {
-    done = false;
+    isDone = false;
   }
+
+  abstract String toSave();
 
   @Override
   public String toString() {
-    String check = this.done ? "X" : " ";
+    String check = this.isDone ? "X" : " ";
     return String.format("[%s] %s", check, this.name);
   }
 }
