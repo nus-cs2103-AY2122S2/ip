@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
-import li.zhongfu.cs2103.chatbot.types.Parser;
-import li.zhongfu.cs2103.chatbot.types.ParserResult;
 import li.zhongfu.cs2103.chatbot.types.Storage;
 import li.zhongfu.cs2103.chatbot.types.TaskList;
-import li.zhongfu.cs2103.chatbot.types.UserInterface;
 import li.zhongfu.cs2103.chatbot.types.tasks.Deadline;
 import li.zhongfu.cs2103.chatbot.types.tasks.Event;
 import li.zhongfu.cs2103.chatbot.types.tasks.Task;
 import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
+import li.zhongfu.cs2103.chatbot.types.ui.ParserResult;
+import li.zhongfu.cs2103.chatbot.types.ui.UserInterface;
 
 public class Duke {
     private final String botName;

@@ -1,10 +1,5 @@
-package li.zhongfu.cs2103.chatbot.types;
+package li.zhongfu.cs2103.chatbot.types.ui;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -25,18 +20,18 @@ public class Parser {
             .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
             .toFormatter();
 
-    private BufferedReader br;
     private DateTimeFormatter dtFormatter;
 
-    public Parser(InputStream stream, DateTimeFormatter dateTimeFormatter) {
-        this.br = new BufferedReader(new InputStreamReader(stream));
+    public Parser(DateTimeFormatter dateTimeFormatter) {
         this.dtFormatter = dateTimeFormatter;
     }
 
-    public Parser(InputStream stream) {
-        this(stream, DEFAULT_DATE_TIME_FORMATTER);
+    public Parser() {
+        this(DEFAULT_DATE_TIME_FORMATTER);
     }
 
+    // i'm literally just doing this because they said i had to
+    // maybe one day it'll support different formats
     /**
      * Parses a string in the form {@code positional argument /arg1 foo bar /arg2 baz bax /arg3}
      * and returns a {@code Map<String, String>} containing the parsed arguments, e.g.:
@@ -54,7 +49,7 @@ public class Parser {
      * @param args a string containing unparsed arguments
      * @return a Map containing parsed arguments
      */
-    private static Map<String, String> parseArgString(String argString) {
+    public Map<String, String> parseArgString(String argString) {
         Map<String, String> args = new HashMap<>();
         String[] parts = argString.split("(^|\\s+)/");
         args.put("", parts[0]);
@@ -68,18 +63,6 @@ public class Parser {
         }
 
         return args;
-    }
-
-    public ParserResult parseNext() throws IOException {
-        String input = this.br.readLine();
-        String[] parts = input.split("\\s+", 2); // split into command and args
-        String cmd = parts[0];
-        if (parts.length == 1) { // only command
-            return new ParserResult(cmd, new HashMap<>());
-        } else { // length is 2
-            Map<String, String> args = parseArgString(parts[1]);
-            return new ParserResult(cmd, args);
-        }
     }
 
     // er, probably not the best place for this, but whatever

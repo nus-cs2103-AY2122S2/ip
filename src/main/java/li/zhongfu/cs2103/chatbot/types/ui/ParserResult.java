@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot.types;
+package li.zhongfu.cs2103.chatbot.types.ui;
 
 import java.util.Map;
 

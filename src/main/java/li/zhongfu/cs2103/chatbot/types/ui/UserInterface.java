@@ -1,10 +1,14 @@
-package li.zhongfu.cs2103.chatbot.types;
+package li.zhongfu.cs2103.chatbot.types.ui;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserInterface {
     private static final String HLINE = "____________________________________________________________";
@@ -17,11 +21,13 @@ public class UserInterface {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private PrintStream output;
+    private BufferedReader br;
     private Parser parser;
 
     public UserInterface(InputStream input, PrintStream output) {
-        this.parser = new Parser(input);
+        this.parser = new Parser();
         this.output = output;
+        this.br = new BufferedReader(new InputStreamReader(input));
     }
 
     public void printDialog(String[] lines) {
@@ -56,7 +62,15 @@ public class UserInterface {
     }
 
     public ParserResult getInput() throws IOException {
-        return this.parser.parseNext();
+        String input = this.br.readLine();
+        String[] parts = input.split("\\s+", 2); // split into command and args
+        String cmd = parts[0];
+        if (parts.length == 1) { // only command
+            return new ParserResult(cmd, new HashMap<>());
+        } else { // length is 2
+            Map<String, String> args = this.parser.parseArgString(parts[1]);
+            return new ParserResult(cmd, args);
+        }
     }
 
     // i know this really really really doesn't belong here
