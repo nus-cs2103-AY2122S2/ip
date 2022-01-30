@@ -6,8 +6,6 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
-import duke.validation.TaskValidator;
 
 import java.io.File;
 import java.io.FileWriter;

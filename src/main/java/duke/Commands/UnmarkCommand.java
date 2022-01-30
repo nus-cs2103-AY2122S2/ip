@@ -10,7 +10,7 @@ public class UnmarkCommand {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
             Task task = taskList.getTasks().get(index);
             task.setIncomplete();
-            System.out.println("OK, I've marked this task as not done yet:\n  " + task);
+            System.out.println("OK, I've unmarked this task as incomplete:\n  " + task);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter a number of the item in the list you wish to unmark!");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

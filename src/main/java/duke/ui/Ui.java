@@ -8,19 +8,19 @@ import java.util.ArrayList;
 public class Ui {
     protected static final String DIVIDER = "--------------------------------------------";
 
-    public void printWelcomeMessage() {
+    public static void printWelcomeMessage() {
         System.out.println(DIVIDER);
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         System.out.println(DIVIDER);
     }
 
-    public void printExitMessage() {
+    public static void printExitMessage() {
         System.out.println(DIVIDER);
         System.out.println("Bye! Have a nice day! :)");
         System.out.println(DIVIDER);
     }
 
-    public void printDivider() {
+    public static void printDivider() {
         System.out.println(DIVIDER);
     }
 
@@ -30,7 +30,7 @@ public class Ui {
         System.out.println("Now you have " + taskList.getTasks().size() + " task(s) in the list");
     }
 
-    public void printInvalidCommand() {
+    public static void printInvalidCommand() {
         System.out.println("Command is invalid, please try again!");
     }
 

@@ -43,6 +43,7 @@ public class TaskList {
 
     public boolean addDeadlineTask(String userInput) {
         try {
+
             String[] information = TaskValidator.validateDeadline(userInput);
             boolean isDescriptionEmpty = information[0].equals("");
             boolean isDatelineEmpty = information[1].equals("");
