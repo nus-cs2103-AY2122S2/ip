@@ -11,8 +11,6 @@ class DeadlineTest {
 
     @Test
     void testToString() {
-//        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.BASIC_ISO_DATE) + ")";
-
         assertEquals("[D][ ] read book (by: 20011109)", new Deadline("read book", LocalDate.of(2001, 11, 9)).toString());
     }
 
