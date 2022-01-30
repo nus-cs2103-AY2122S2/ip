@@ -1,4 +1,4 @@
-package duke;
+package duke.Task;
 
 /**
  * A type of tasks, do not have date

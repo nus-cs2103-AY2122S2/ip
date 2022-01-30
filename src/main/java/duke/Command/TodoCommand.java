@@ -3,6 +3,8 @@ package duke.Command;
 import duke.*;
 import duke.DukeExceptions.DukeException;
 import duke.DukeExceptions.TodoException;
+import duke.Task.Task;
+import duke.Task.Todo;
 
 import java.io.IOException;
 

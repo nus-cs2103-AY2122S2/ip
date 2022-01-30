@@ -1,5 +1,7 @@
 package duke;
 
+import duke.Task.Task;
+
 /**
  * User Interface class, print beautiful output to user
  */

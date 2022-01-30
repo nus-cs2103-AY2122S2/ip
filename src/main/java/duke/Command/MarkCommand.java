@@ -3,7 +3,7 @@ package duke.Command;
 import duke.DukeExceptions.DukeException;
 import duke.DukeExceptions.MarkException;
 import duke.Storage;
-import duke.Task;
+import duke.Task.Task;
 import duke.TaskList;
 import duke.Ui;
 

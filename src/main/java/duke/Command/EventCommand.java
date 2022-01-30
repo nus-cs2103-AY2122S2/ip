@@ -4,6 +4,8 @@ package duke.Command;
 import duke.*;
 import duke.DukeExceptions.DukeException;
 import duke.DukeExceptions.EventException;
+import duke.Task.Event;
+import duke.Task.Task;
 
 import java.io.IOException;
 

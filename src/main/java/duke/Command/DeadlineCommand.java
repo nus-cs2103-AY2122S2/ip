@@ -3,6 +3,8 @@ package duke.Command;
 import duke.*;
 import duke.DukeExceptions.DeadlineException;
 import duke.DukeExceptions.DukeException;
+import duke.Task.Deadline;
+import duke.Task.Task;
 
 import java.io.IOException;
 
