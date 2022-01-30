@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * A Task which records the time when it is due as a LocalDate.
  * 
  * @author Hong Yi En, Ian
- * @version Jan 2022 (AY21/22 Sem 2)
+ * @version Feb 2022 (AY21/22 Sem 2)
  */
 public class Deadline extends Task {
     private LocalDate by;
