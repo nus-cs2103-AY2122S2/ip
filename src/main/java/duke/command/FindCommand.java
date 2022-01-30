@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Encapsulates a command that finds a task containing a given string.
@@ -42,9 +42,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if the application should exit after this command executes.
+     * Checks whether the Duke application should exit after this command.
      *
-     * @return true iff this is a ByeCommand instance.
+     * @return true iff this Command is a ByeCommand instance.
      */
     @Override
     public boolean isExit() {

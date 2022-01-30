@@ -14,7 +14,7 @@ public class ByeCommand extends Command {
      *
      * @param taskList the task list to execute this command on.
      * @param ui the user interface of Duke.
-     * @param storage the storage of Duke
+     * @param storage the storage of Duke.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
