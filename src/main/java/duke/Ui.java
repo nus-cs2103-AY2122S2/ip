@@ -82,6 +82,12 @@ public class Ui {
         System.out.println(formatMsg(unmarkMsg));
     }
 
+    /**
+     * Display listed message after listing task
+     *
+     * @param task Task that was listed
+     * @param size Number of tasks in list
+     */
     public void displayListedText(Task task, int size) {
         String output = " Got it. I've added this task:\n   "
                 + task.toString()

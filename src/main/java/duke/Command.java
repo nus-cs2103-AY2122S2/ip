@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command types enum
+ */
 public enum Command {
     LIST,
     MARK,

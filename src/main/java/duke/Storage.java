@@ -1,4 +1,3 @@
-
 package duke;
 
 import java.io.File;
@@ -8,7 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles storing list of tasks to disk,
+ * default filepath: "data/list.txt"
+ */
 public class Storage {
+
+    /**
+     * String containing path to save list of tasks
+     */
     private String filePath;
 
     public Storage(String filePath) {
@@ -90,7 +97,7 @@ public class Storage {
     /**
      * Overwrite data in "data/list.txt" with current list data
      *
-     * @param data Arraylist of Tasks data
+     * @param taskList Arraylist of Tasks data
      * @throws IOException Throws FileNotFoundException error if writing to non-existent file
      */
     public void saveListOnDisk(TaskList taskList) throws IOException {
