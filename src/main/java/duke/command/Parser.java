@@ -39,7 +39,8 @@ public final class Parser {
                 return new AddCommand(commandType, description);
             }
         } catch (DukeException e) {
-            // TODO 
+            // propagate the error higher up
+            throw e;
         }
 
         return null;
