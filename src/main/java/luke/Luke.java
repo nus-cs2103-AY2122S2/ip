@@ -11,12 +11,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Implements the Luke chat bot.
+ */
 public class Luke {
 
     private Ui ui;
     private TaskList taskList;
     private StorageFile storageFile;
 
+    /**
+     * Constructs a new Luke chat bot with the specified file path as the data file.
+     * If unable to read/write file or create a new file at the specified file path,
+     * the system will print the error message and exit.
+     * @param filePath The specified file path to the data file.
+     */
     Luke(String filePath) {
         ui = new Ui();
         taskList = new TaskList();
@@ -28,6 +37,9 @@ public class Luke {
         }
     }
 
+    /**
+     * Initializes the storage with the data found from the data file if it is not empty.
+     */
     private void initializeStorage() {
         try {
             List<String> data = storageFile.load();
@@ -49,6 +61,10 @@ public class Luke {
         }
     }
 
+    /**
+     * Starts the chat bot by initalizing storage and printing greeting message.
+     * Loops until the exit command is issued.
+     */
     public void start() {
         initializeStorage();
         boolean isExit = false;

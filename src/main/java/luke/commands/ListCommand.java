@@ -2,10 +2,17 @@ package luke.commands;
 
 import luke.data.TaskList;
 
+/**
+ * Implements the list command.
+ */
 public class ListCommand extends Command {
 
-    public static final CommandAction COMMAND_ACTION = CommandAction.LIST;
-
+    /**
+     * Takes in a task list, loop through each task and add them to the message string.
+     * Returns its command result.
+     * @param taskList The task list to perform the action on.
+     * @return The result of this command's execution.
+     */
     @Override
     public CommandResult execute(TaskList taskList) {
         String msg = "Yay! You have no task to do!";

@@ -1,5 +1,8 @@
 package luke.commands;
 
+/**
+ * Types of commands available for the user to issue.
+ */
 public enum CommandAction {
     DEADLINE(ActionType.ADD, "description,by"), TODO(ActionType.ADD, "description"), EVENT(ActionType.ADD, "description,at"),
     MARK(ActionType.UPDATE, "index"), UNMARK(ActionType.UPDATE, "index"), DELETE(ActionType.UPDATE, "index"),

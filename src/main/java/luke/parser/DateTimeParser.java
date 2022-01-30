@@ -5,7 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
+/**
+ * DateTime Parser with specific format.
+ * Accepts numerous format as input, but output format only as [MMM dd yyyy HH:mm] for strings
+ * and [dd/MM/yyyy HH:mm] for storing.
+ */
 public class DateTimeParser {
+
+    /**
+     * Formatter containing all acceptable datetime format that user can pass as string.
+     */
     private static DateTimeFormatter fromStringToDate = new DateTimeFormatterBuilder()
             .appendOptional(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
             .appendOptional(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
@@ -20,7 +29,15 @@ public class DateTimeParser {
             .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
             .appendOptional(DateTimeFormatter.ofPattern("yyyy.MM.dd HHmm"))
             .toFormatter();
+
+    /**
+     * Specific format [MMM dd yyyy HH:mm] to convert all date to string.
+     */
     private static DateTimeFormatter fromDateToString = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+
+    /**
+     * Specific format [dd/MM/yyyy HH:mm] to convert all date to command string.
+     */
     private static DateTimeFormatter fromDateToCommand = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public static LocalDateTime toLocalDateTime(String date) throws DateTimeParseException {
