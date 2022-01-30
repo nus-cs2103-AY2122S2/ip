@@ -1,29 +1,67 @@
 package duke;
 
+/**
+ * Parser class to handle the inputs of the user
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class Parser {
+    /**
+     * Empty COnstructor.
+     */
     public Parser() {}
 
+    /**
+     * Used to split instruction by " "
+     *
+     * @param inst Instruction from user
+     * @return String Array of 2 Strings
+     */
     public String[] splitLimitTwo (String inst) {
         return inst.split(" ", 2);
     }
 
+    /**
+     * Used to parse an Event Task.
+     *
+     * @param inst String of a Event Task.
+     * @return String Array containing String of details of Event, and String of time of Event.
+     */
     public String[] parseEvent(String inst) {
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/at ");
     }
 
+    /**
+     * Used to parse an Deadline Task.
+     *
+     * @param inst String of a Deadline Task.
+     * @return String Array containing String of details of Deadline task, and String of time of Deadline.
+     */
     public String[] parseDeadline(String inst) {
         // deadline return book /by Sunday
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/by ");
     }
 
+    /**
+     * Used to parse a Todo Task.
+     *
+     * @param inst String of a Todo Task.
+     * @return String of details of Todo Task.
+     */
     public String parseToDo(String inst) {
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1];
     }
 
-    public String dataFormatHelper(String dateTime) {
+    /**
+     * Used to help format the date from a load file into a "YYYY-MM-DD HH:MM" format
+     *
+     * @param dateTime String of date and time that is from a loaded file
+     * @return String in "YYYY-MM-DD HH:MM" format.
+     */
+    public String dateFormatHelper(String dateTime) {
         String[] dateTimeArr = dateTime.split(", ");
         String date = dateTimeArr[0];
         String[] dateArr = date.split(" ");

@@ -1,5 +1,11 @@
 package duke;
 
+/**
+ * Main class of Duke
+ * Prints the introduction text of Duke
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class Duke {
 
     public static void main(String[] args) {
@@ -13,7 +19,6 @@ public class Duke {
                 + "What can I do for you?\n"
                 + "________________________________";
         System.out.println(logo + start);
-
 
         TaskList taskList = new TaskList();
         Storage storage = new Storage(taskList);

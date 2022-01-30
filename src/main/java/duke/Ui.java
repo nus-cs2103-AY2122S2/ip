@@ -6,16 +6,39 @@ import duke.exception.InvalidDescriptionException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Ui class handles the input
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class Ui {
-    private final static String FROM_DUKE_TWO = "From Duke_two: \n\t";
+
+    private final static String FROM_DUKE_TWO = "From Duke: \n\t";
+
+    /**
+     * Storage Class to help with loading or saving or file.
+     */
     Storage storage;
+
+    /**
+     * TaskList Object is to help loaded and save.
+     */
     TaskList taskList;
 
+    /**
+     * Constructor to create a Ui Object.
+     *
+     * @param taskList Constructor to create a Ui Object.
+     * @param storage Storage Class to help with loading or saving or file.
+     */
     public Ui(TaskList taskList, Storage storage) {
         this.storage = storage;
         this.taskList = taskList;
     }
 
+    /**
+     * Method to run Duke.
+     */
     public void uiHandler() {
         Scanner scanner = new Scanner(System.in);
         String firstWord = "";

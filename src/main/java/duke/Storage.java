@@ -11,10 +11,27 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Storage Class handles saving and loading of files to th program.
+ *
+ * @author Justin Ng Jie Ern
+ */
 public class Storage {
+    /**
+     * TaskList object that handles Tasks .
+     */
     private TaskList taskList;
+
+    /**
+     * Parser object to help parse the file into the program.
+     */
     private Parser parser;
 
+    /**
+     * Constructor to create a Storage Object
+     *
+     * @param taskList TaskList object that handles Tasks.
+     */
     public Storage(TaskList taskList) {
         this.parser = new Parser();
         this.taskList = taskList;
@@ -25,12 +42,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to save the TaskList into a file in the local device.
+     */
     public void save() {
-
         writeTasksToFile();
         System.out.println("Your Tasks has been saved into your device!");
     }
 
+    /**
+     * Helper Method to save Tasks in TaskList into a file in the local device.
+     */
     public void writeTasksToFile() {
         WriteFile writeFile = new WriteFile();
         writeFile.clearFile();
@@ -42,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to load previously saved file in the local device onto the program.
+     *
+     * @param fileName File "duke.txt" from the local device
+     */
     public void load(String fileName) {
         String command = null;
         try {
@@ -61,76 +88,23 @@ public class Storage {
                 } else if ("D".equals(firstWord)) {
                     String[] detailsArr = taskName.split(" \\(by: ");
                     String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                    String detailsFormat = parser.dataFormatHelper(detail);
+                    String detailsFormat = parser.dateFormatHelper(detail);
                     Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detailsFormat);
                     taskList.add(task);
                 } else if ("E".equals(firstWord)) {
                     String[] detailsArr = taskName.split(" \\(at: ");
                     String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                    String detailsFormat = parser.dataFormatHelper(detail);
+                    String detailsFormat = parser.dateFormatHelper(detail);
                     Event task = new Event(detailsArr[0], isMarkedBool, "E", detailsFormat);
                     taskList.add(task);
                 } else {
                     System.out.println("Should not be in the else block for load function");
+
                 }
             }
         } catch (ArrayIndexOutOfBoundsException | IOException e) {
             e.printStackTrace();
         }
     }
-
-//    private String dataFormatHelper(String dateTime) {
-//        String[] dateTimeArr = dateTime.split(", ");
-//        String date = dateTimeArr[0];
-//        String[] dateArr = date.split(" ");
-//        String month = dateArr[0];
-//        String day = dateArr[1];
-//        String year = dateArr[2];
-//        String monthNum = "";
-//        String time = dateTimeArr[1];
-//        switch (month) {
-//            case "Jan":
-//                monthNum = "01";
-//                break;
-//            case "Feb":
-//                monthNum = "02";
-//                break;
-//            case "Mar":
-//                monthNum = "03";
-//                break;
-//            case "Apr":
-//                monthNum = "04";
-//                break;
-//            case "May":
-//                monthNum = "05";
-//                break;
-//            case "Jun":
-//                monthNum = "06";
-//                break;
-//            case "Jul":
-//                monthNum = "07";
-//                break;
-//            case "Aug":
-//                monthNum = "08";
-//                break;
-//            case "Sep":
-//                monthNum = "09";
-//                break;
-//            case "Oct":
-//                monthNum = "10";
-//                break;
-//            case "Nov":
-//                monthNum = "11";
-//                break;
-//            case "Dec":
-//                monthNum = "12";
-//                break;
-//            default:
-//                System.out.println("Month does not exist");
-//
-//        }// YYYY-MM-DD HH:MM
-//        return year + "-" + monthNum + "-" + day + " " + time;
-//    }
-
 
 }
