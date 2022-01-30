@@ -3,11 +3,11 @@ package duke.commands;
 import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
-public class UnMarkCommand extends Command{
+public class UnMarkCommand extends Command {
 
     private int index;
 
-    public UnMarkCommand(int x){
+    public UnMarkCommand(int x) {
         index = x;
     }
 
@@ -17,7 +17,7 @@ public class UnMarkCommand extends Command{
      * @param tasks DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList tasks){
+    public void execute(Ui ui, DukeList tasks) {
         tasks.unmark(index);
     }
 

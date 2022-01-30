@@ -4,7 +4,7 @@ import duke.tasklist.DukeList;
 import duke.task.Events;
 import duke.ui.Ui;
 
-public class AddEvents extends Command{
+public class AddEvents extends Command {
 
     private String msg;
     private String date;

@@ -3,7 +3,7 @@ package duke.commands;
 import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
-public class TodayTask extends Command{
+public class TodayTask extends Command {
 
     /**
      * Print out the tasks due or happening on current date to the console

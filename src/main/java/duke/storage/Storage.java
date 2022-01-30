@@ -31,10 +31,9 @@ public class Storage {
     public List<Task> load(){
         File data = new File(filePath);
         try {
-            if(data.createNewFile()){
+            if (data.createNewFile()) {
                 return new ArrayList<Task>();
-            }
-            else{
+            } else {
                 return DukeParser.readData(data);
             }
         } catch (IOException e) {

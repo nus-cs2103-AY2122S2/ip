@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Creates an exception with the given message

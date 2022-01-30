@@ -3,7 +3,7 @@ package duke.commands;
 import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Prints the list of tasks to the console

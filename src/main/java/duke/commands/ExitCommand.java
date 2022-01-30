@@ -3,7 +3,7 @@ package duke.commands;
 import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     public ExitCommand(){
     }
@@ -14,7 +14,7 @@ public class ExitCommand extends Command{
      * @param list DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList list){
+    public void execute(Ui ui, DukeList list) {
        ui.showClosing();
     }
 

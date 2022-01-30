@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class Events extends Task {
 
-    public LocalDate date;
+    private LocalDate date;
 
     /**
      * Creates an Events instance
      * @param s Task description
      * @param time Date which task is due
      */
-    public Events (String s, String time){
+    public Events (String s, String time) {
         super(s);
         this.date = LocalDate.parse(time);
-        super.date = this.date;
+        super.setDate(this.date);
     }
 
     /**
@@ -22,12 +22,11 @@ public class Events extends Task {
      * @return String representation of this Events
      */
     @Override
-    public String show(){
-        if(super.done){
-            return "[E][X] " + s + " (at: " + date + ")";
-        }
-        else{
-            return "[E][ ] " + s + " (at: " + date + ")";
+    public String show() {
+        if (super.getDone()) {
+            return "[E][X] " + super.taskDescription() + " (at: " + date + ")";
+        } else {
+            return "[E][ ] " + super.taskDescription() + " (at: " + date + ")";
         }
     }
 
@@ -36,8 +35,8 @@ public class Events extends Task {
      * @return String format of this Events
      */
     @Override
-    public String storeFormat(){
-        return "E|" + super.done + "|" + super.s + "|" + this.date + "\n";
+    public String storeFormat() {
+        return "E|" + super.getDone() + "|" + super.taskDescription() + "|" + this.date + "\n";
     }
 
 }

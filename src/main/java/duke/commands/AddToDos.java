@@ -4,7 +4,7 @@ import duke.tasklist.DukeList;
 import duke.task.ToDos;
 import duke.ui.Ui;
 
-public class AddToDos extends Command{
+public class AddToDos extends Command {
 
     private String body;
 

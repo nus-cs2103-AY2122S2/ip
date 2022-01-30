@@ -16,11 +16,11 @@ public class ToDos extends Task {
      */
     @Override
     public String show(){
-        if(super.done){
-            return "[T][X] " + super.s;
+        if(super.getDone()){
+            return "[T][X] " + super.taskDescription();
         }
         else{
-            return "[T][ ] " + super.s;
+            return "[T][ ] " + super.taskDescription();
         }
     }
 
@@ -30,7 +30,7 @@ public class ToDos extends Task {
      */
     @Override
     public String storeFormat(){
-        return "T" + "|" + super.done + "|" + super.s + "\n";
+        return "T" + "|" + super.getDone() + "|" + super.taskDescription() + "\n";
     }
 
 }

@@ -4,7 +4,7 @@ import duke.tasklist.DukeList;
 import duke.task.Deadlines;
 import duke.ui.Ui;
 
-public class AddDeadline extends Command{
+public class AddDeadline extends Command {
 
     private String msg;
     private String date;
