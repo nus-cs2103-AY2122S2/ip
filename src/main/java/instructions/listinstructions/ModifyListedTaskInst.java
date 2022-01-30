@@ -1,4 +1,4 @@
-package instructions.list.instructions;
+package instructions.listinstructions;
 
 import exceptions.InvalidInputException;
 import instructions.Instruction;
@@ -14,12 +14,12 @@ import instructions.Instruction;
  */
 public abstract class ModifyListedTaskInst extends Instruction {
     /** Reusable Invalid Input Exception for when there is no provided task number */
-    private static final InvalidInputException NO_TASK_NUM_EXCEPTION
-            = new InvalidInputException("Cannot delete without a specified task number!");
+    private static final InvalidInputException NO_TASK_NUM_EXCEPTION =
+            new InvalidInputException("Cannot delete without a specified task number!");
 
     /** Reusable Invalid Input Exception for when the provided task number is not an integer */
-    private static final InvalidInputException NOT_INTEGER_EXCEPTION
-            = new InvalidInputException("Given task number is not an integer!");
+    private static final InvalidInputException NOT_INTEGER_EXCEPTION =
+            new InvalidInputException("Given task number is not an integer!");
 
     /** The taskNumber to modify */
     private int taskNum;
@@ -54,7 +54,7 @@ public abstract class ModifyListedTaskInst extends Instruction {
         }
         int taskNumInteger;
         try {
-            taskNumInteger  = Integer.parseInt(taskNum);
+            taskNumInteger = Integer.parseInt(taskNum);
         } catch (NumberFormatException e) {
             throw NOT_INTEGER_EXCEPTION;
         }

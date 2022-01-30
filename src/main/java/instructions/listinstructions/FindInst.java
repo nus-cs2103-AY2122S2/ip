@@ -1,12 +1,9 @@
-package instructions.list.instructions;
+package instructions.listinstructions;
 
 import java.util.stream.Stream;
 
 import exceptions.InvalidInputException;
-import exceptions.NoSuchTaskException;
-
 import instructions.Instruction;
-
 import tasks.TaskList;
 
 /**
@@ -19,8 +16,9 @@ import tasks.TaskList;
  */
 public class FindInst extends Instruction {
     /** Reusable exception for when no keywords are given */
-    private static final InvalidInputException MISSING_KEYWORD_EXCEPTION
-            = new InvalidInputException("No keywords detected in your input! "
+    private static final InvalidInputException MISSING_KEYWORD_EXCEPTION =
+            new InvalidInputException("No keywords "
+            + "detected in your input! "
             + "Please use \"find\" with a keyword!");
 
     /** The keyword to search for */
@@ -38,7 +36,7 @@ public class FindInst extends Instruction {
     /**
      * Produces a FindInstruction with the given input.
      *
-     * @param input the original instruction in the form of "find <x>".
+     * @param input the original instruction in the form of "find < x >".
      * @return a Find Task instruction with the keyword found in the input.
      * @throws InvalidInputException when no keywords are specified.
      */
@@ -48,7 +46,7 @@ public class FindInst extends Instruction {
             throw MISSING_KEYWORD_EXCEPTION;
         }
         String strippedKeywords = split[1].strip();
-        if (strippedKeywords.length() == 0 ) {
+        if (strippedKeywords.length() == 0) {
             throw MISSING_KEYWORD_EXCEPTION;
         }
         return new FindInst(split[1]);

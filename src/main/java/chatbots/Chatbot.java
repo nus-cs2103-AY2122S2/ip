@@ -13,6 +13,13 @@ public abstract class Chatbot {
     protected boolean isAwake;
 
     /**
+     * Constructs a chatbot.
+     */
+    protected Chatbot() {
+        this.isAwake = true;
+    }
+
+    /**
      * Asks the chatbot to speak with given input.
      *
      * @param input the input words to speak.
@@ -60,10 +67,5 @@ public abstract class Chatbot {
         this.isAwake = awake;
     }
 
-    /**
-     * Constructs a Chatbot.
-     */
-    protected Chatbot() {
-        this.isAwake = true;
-    }
+
 }

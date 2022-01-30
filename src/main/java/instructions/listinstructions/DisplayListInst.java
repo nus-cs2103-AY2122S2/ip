@@ -1,4 +1,4 @@
-package instructions.list.instructions;
+package instructions.listinstructions;
 
 import exceptions.NoSuchTaskException;
 import instructions.Instruction;
@@ -18,8 +18,8 @@ public class DisplayListInst extends Instruction {
      * TODO:
      * Maybe allow a "list x", to list up to the first x tasks of the list.
      */
-    private static DisplayListInst FIXED_DISPLAY_INST
-            = new DisplayListInst();
+    private static final DisplayListInst FIXED_DISPLAY_INST =
+            new DisplayListInst();
 
     /**
      * Constructs a Display List Instruction.

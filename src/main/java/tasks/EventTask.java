@@ -47,10 +47,10 @@ public class EventTask extends Task {
     public String toString() {
         boolean isSameDay = startTime.toLocalDate().equals(endTime.toLocalDate());
         return String.format("[E]%s (at: %s %s, until: %s)",
-                super.toString()
-                , startTime.toLocalDate()
-                , startTime.toLocalTime()
-                , isSameDay
+                super.toString(),
+                startTime.toLocalDate(),
+                startTime.toLocalTime(),
+                isSameDay
                         ? endTime.toLocalTime()
                         : endTime.toLocalDate() + " " + endTime.toLocalTime());
     }

@@ -1,16 +1,15 @@
 package chatbots;
 
+import java.util.Scanner;
+
 import exceptions.InvalidInputException;
 import exceptions.SaveFileModifiedException;
-
 import instructions.ExitInst;
 import instructions.Instruction;
-import instructions.list.instructions.DisplayListInst;
-
-import instructions.list.instructions.FindInst;
+import instructions.listinstructions.DisplayListInst;
+import instructions.listinstructions.FindInst;
 import tasks.TaskList;
 
-import java.util.Scanner;
 
 /**
  * This class encapsulates the chatbot Fluffers for CS2103T's Individual Project.
@@ -23,7 +22,7 @@ import java.util.Scanner;
 public class Fluffers extends TaskManagerChatbot {
     private enum AsciiArt {
         /** ASCII art for when Fluffers just wakes up */
-        AWAKE(    "    /\\_____/\\\n"
+        AWAKE("    /\\_____/\\\n"
                 + "   /  o   o  \\\n"
                 + "  ( ==  ^  == )\n"
                 + "   )         (\n"
@@ -32,13 +31,13 @@ public class Fluffers extends TaskManagerChatbot {
                 + "(__(__)___(__)__)"
         ),
         /** ASCII art for when Fluffers goes back to sleep */
-        ASLEEP(   "      |\\      _,,,---,,_\n"
+        ASLEEP("      |\\      _,,,---,,_\n"
                 + "ZZZzz /,`.-'`'    -.  ;-;;,_\n"
                 + "     |,4-  ) )-,_. ,\\ (  `'-'\n"
                 + "    '---''(_/--'  `-'\\_)"
         ),
         /** ASCII art for when Fluffers is displaying a list */
-        LIST_TOP( "    |\\__/,|   (`\\\n"
+        LIST_TOP("    |\\__/,|   (`\\\n"
                 + "  _.|o o  |_   ) )\n"
                 + "-(((---(((--------"
         );
@@ -111,8 +110,8 @@ public class Fluffers extends TaskManagerChatbot {
             return farewell();
         }
         if (inst instanceof DisplayListInst || inst instanceof FindInst) {
-            String output = String.format("%s\n%s------------------", AsciiArt.LIST_TOP.art
-                    , super.instHandler.doInstruction(inst));
+            String output = String.format("%s\n%s------------------", AsciiArt.LIST_TOP.art,
+                    super.instHandler.doInstruction(inst));
             if (inst instanceof FindInst) {
                 output = this.speak("Here's what I found! (the numbering is the kept the "
                         + "same as the \"list\" command") + output;

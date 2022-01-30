@@ -1,13 +1,11 @@
-package instructions._new.task.instructions;
-
-import date.time.DateTimeParser;
-
-import exceptions.InvalidInputException;
-
-import tasks.EventTask;
-import tasks.TaskList;
+package instructions.taskinstructions;
 
 import java.time.LocalDateTime;
+
+import date.time.DateTimeParser;
+import exceptions.InvalidInputException;
+import tasks.EventTask;
+import tasks.TaskList;
 
 /**
  * This class represents an instruction for a new Event task.
@@ -59,12 +57,12 @@ public class EventInst extends NewTaskInst {
             split = taskDetails.split("/at");
             if (split.length == 2 && split[0].length() != 0) {
                 //happens in "event a/at b", "event a /atb", "event a/atb"
-                throw NewTaskInst.MISSING_SPACES_EXCEPTION;
+                throw MISSING_SPACES_EXCEPTION;
             }
-            throw NewTaskInst.MISSING_TASK_DETAILS_EXCEPTION;
+            throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /at "s
-            throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
+            throw TOO_MANY_ARGUMENTS_EXCEPTION;
         }
 
 
@@ -77,18 +75,18 @@ public class EventInst extends NewTaskInst {
             split = split[1].split("/until");
             if (split.length == 2 && split[0].length() != 0) {
                 // happens in "/at a/until b" or similar
-                throw NewTaskInst.MISSING_SPACES_EXCEPTION;
+                throw MISSING_SPACES_EXCEPTION;
             }
-            throw NewTaskInst.MISSING_TASK_DETAILS_EXCEPTION;
+            throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (timings.length >= 3) {
-            throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
+            throw TOO_MANY_ARGUMENTS_EXCEPTION;
         }
 
         boolean startTimeIsValid = DateTimeParser.checkValidFormat(timings[0]);
         boolean endTimeIsValid = DateTimeParser.checkValidFormat(timings[1]);
         if (!startTimeIsValid || !endTimeIsValid) {
-            throw NewTaskInst.INVALID_DATE_TIME_FORMAT;
+            throw INVALID_DATE_TIME_FORMAT;
         }
 
         LocalDateTime startTime = DateTimeParser.parse(timings[0]);
@@ -107,7 +105,7 @@ public class EventInst extends NewTaskInst {
     public String doInst(TaskList taskList) {
         EventTask task = new EventTask(super.getTaskDesc(), this.startTime, this.endTime);
         taskList.add(task);
-        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now."
-                , task, taskList.length());
+        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now.",
+                task, taskList.length());
     }
 }

@@ -1,4 +1,4 @@
-package instructions._new.task.instructions;
+package instructions.taskinstructions;
 
 import tasks.TaskList;
 import tasks.ToDoTask;
