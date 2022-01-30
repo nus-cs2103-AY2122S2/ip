@@ -27,7 +27,7 @@ public class ToDo extends Task {
      */
     @Override
     public String parseTask() {
-        return "T | " + Boolean.toString(isDone) + " | " + description;
+        return "T | " + Boolean.toString(isDone()) + " | " + getDescription();
     }
 
     /**
@@ -36,10 +36,10 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        if (isDone) {
-            return  "[T][X] " + description;
+        if (isDone()) {
+            return "[T][X] " + getDescription();
         } else {
-            return "[T][ ] " + description;
+            return "[T][ ] " + getDescription();
         }
     }
 }

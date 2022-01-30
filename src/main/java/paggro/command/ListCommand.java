@@ -23,6 +23,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) {
-        ui.showList(lister.tasks);
+        ui.showList(lister.getTasks());
     }
 }

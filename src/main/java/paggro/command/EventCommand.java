@@ -1,14 +1,13 @@
 package paggro.command;
 
 import java.io.IOException;
-
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 import paggro.exception.PaggroException;
 import paggro.lister.Lister;
-import paggro.notableDate.NotableDate;
+import paggro.notabledate.NotableDate;
 import paggro.storage.Storage;
 import paggro.task.Event;
 import paggro.task.Task;
@@ -35,7 +34,7 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        String[] desArr = parameters.split(" /", 2);
+        String[] desArr = this.getParameters().split(" /", 2);
         Task task;
         try {
             String des = desArr[0];
@@ -51,19 +50,19 @@ public class EventCommand extends Command {
                     LocalTime time = LocalTime.parse(timeString);
                     task = (new Event(des, nDate, time, false));
                 } catch (DateTimeParseException e) {
-                    throw new PaggroException("    Really? =.= Time inputs must be in this format:\n" +
-                            "      HH:MM");
+                    throw new PaggroException("    Really? =.= Time inputs must be in this format:\n"
+                            + "      HH:MM");
                 }
             } else {
                 task = new Event(des, nDate, false);
             }
             nDate.addTask(task); //potential bug
         } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
-            throw new PaggroException("    Really? =.= The use of the event command must be as follows:\n" +
-                    "      event <DESCRIPTION> /<DATE AND/OR TIME>");
+            throw new PaggroException("    Really? =.= The use of the event command must be as follows:\n"
+                    + "      event <DESCRIPTION> /<DATE AND/OR TIME>");
         } catch (DateTimeParseException e) {
-            throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n" +
-                    "      YYYY-MM-DD"));
+            throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n"
+                    + "      YYYY-MM-DD"));
         }
         lister.add(task);
 
@@ -74,6 +73,6 @@ public class EventCommand extends Command {
         }
 
         ui.showAdded(task);
-        ui.showNumber(lister.tasks.size());
+        ui.showNumber(lister.getTasks().size());
     }
 }

@@ -10,7 +10,7 @@ import paggro.task.Task;
  */
 public class Ui {
     /** Scanner used for reading input */
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructor of the Ui object.
@@ -68,7 +68,7 @@ public class Ui {
         }
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.isDone) {
+            if (task.isDone()) {
                 System.out.println("    " + Integer.toString(i + 1) + "." + task);
             } else {
                 System.out.println("    " + Integer.toString(i + 1) + "." + task);

@@ -11,7 +11,7 @@ import paggro.ui.Ui;
 /**
  * This class encapsulates a unmark command which unmarks a given task as not done.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     /**
      * Constructor of UnmarkCommand
      * @param parameters String of index to be unmarked as not done.
@@ -31,15 +31,15 @@ public class UnmarkCommand extends Command{
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         int index;
         try {
-            index = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.getParameters());
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (index > lister.tasks.size()) {
-            throw  new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
+        if (index > lister.getTasks().size()) {
+            throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
         lister.unmark(index);
-        Task task = lister.tasks.get(index - 1);
+        Task task = lister.getTasks().get(index - 1);
         ui.showUnmarked(task);
 
         try {

@@ -1,18 +1,18 @@
 package paggro.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-import paggro.notableDate.NotableDate;
+import paggro.notabledate.NotableDate;
 
 /**
  * This class encapsulates an event occurring on a given date.
  */
 public class Event extends Task {
     /** The date on which the Task is due. */
-    public NotableDate date;
+    private NotableDate date;
     /** The time at which the Task is due, if applicable. */
-    LocalTime time;
+    private LocalTime time;
 
     /**
      * Default constructor of Event.
@@ -38,6 +38,14 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the NotableDate of the Event object.
+     * @return NotableDate of the event.
+     */
+    public NotableDate getDate() {
+        return date;
+    }
+
+    /**
      * Parses the task into a string formatted to be saved to storage.
      * @return String to be saved to storage.
      */
@@ -46,10 +54,11 @@ public class Event extends Task {
         DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tFormat = DateTimeFormatter.ofPattern("HH:mm");
         if (time == null) {
-            return "E | " + Boolean.toString(isDone) + " | " + description + " | " + date.localDate.format(dFormat);
+            return "E | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
+                    + date.getLocalDate().format(dFormat);
         } else {
-            return "E | " + Boolean.toString(isDone) + " | " + description + " | " + date.localDate.format(dFormat)
-                    + " | " + time.format(tFormat);
+            return "E | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
+                    + date.getLocalDate().format(dFormat) + " | " + time.format(tFormat);
         }
     }
 
@@ -60,10 +69,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         String str;
-        if (isDone) {
-            str = "[E][X] " + description + " (at: " + date;
+        if (isDone()) {
+            str = "[E][X] " + getDescription() + " (at: " + date;
         } else {
-            str = "[E][ ] " + description + " (at: " + date;
+            str = "[E][ ] " + getDescription() + " (at: " + date;
         }
 
         if (time != null) {

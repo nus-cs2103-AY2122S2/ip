@@ -1,23 +1,20 @@
 package paggro.storage;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import paggro.exception.PaggroException;
 import paggro.lister.Lister;
-import paggro.notableDate.NotableDate;
+import paggro.notabledate.NotableDate;
 import paggro.task.Deadline;
 import paggro.task.Event;
 import paggro.task.Task;
@@ -28,9 +25,9 @@ import paggro.task.ToDo;
  */
 public class Storage {
     /** The file in which the task data is stored. */
-    File paggroData;
+    private File paggroData;
     /** The path in which the file is stored */
-    String filePath;
+    private String filePath;
 
     /**
      * Constructor of Storage.
@@ -89,7 +86,7 @@ public class Storage {
                     if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
                         nDate = new NotableDate(lDate);
                         dateMap.put(lDate, nDate);
-                    } else  {
+                    } else {
                         nDate = dateMap.get(lDate);
                     }
                     if (details.length > 4) {
@@ -109,7 +106,7 @@ public class Storage {
                     if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
                         nDate = new NotableDate(lDate);
                         dateMap.put(lDate, nDate);
-                    } else  {
+                    } else {
                         nDate = dateMap.get(lDate);
                     }
                     if (details.length > 4) {

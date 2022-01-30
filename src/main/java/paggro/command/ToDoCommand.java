@@ -9,14 +9,14 @@ import paggro.task.Task;
 import paggro.task.ToDo;
 import paggro.ui.Ui;
 
-public class ToDoCommand extends Command{
+public class ToDoCommand extends Command {
     public ToDoCommand(String parameters) {
         super(parameters);
     }
 
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        Task task = new ToDo(this.parameters);
+        Task task = new ToDo(this.getParameters());
         lister.add(task);
 
         try {
@@ -26,6 +26,6 @@ public class ToDoCommand extends Command{
         }
 
         ui.showAdded(task);
-        ui.showNumber(lister.tasks.size());
+        ui.showNumber(lister.getTasks().size());
     }
 }

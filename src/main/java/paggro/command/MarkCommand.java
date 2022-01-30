@@ -11,7 +11,7 @@ import paggro.ui.Ui;
 /**
  * This class encapsulates a mark command which marks a given task as done.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     /**
      * Constructor of MarkCommand
      * @param parameters String of index to be marked as done.
@@ -31,15 +31,15 @@ public class MarkCommand extends Command{
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         int index;
         try {
-            index = Integer.parseInt(this.parameters);
+            index = Integer.parseInt(this.getParameters());
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
-        if (index > lister.tasks.size()) {
-            throw  new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
+        if (index > lister.getTasks().size()) {
+            throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
         lister.mark(index);
-        Task task = lister.tasks.get(index - 1);
+        Task task = lister.getTasks().get(index - 1);
         ui.showMarked(task);
 
         try {

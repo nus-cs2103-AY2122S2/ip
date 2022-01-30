@@ -12,8 +12,7 @@ public abstract class Command {
     /**
      * The arguments of a command, if applicable
      */
-     String parameters;
-
+    String parameters;
     /**
      * Default constructor for commands with no parameters.
      */
@@ -27,6 +26,14 @@ public abstract class Command {
      */
     public Command(String parameters) {
         this.parameters = parameters;
+    }
+
+    /**
+     * Returns parameters of the command.
+     * @return String of parameters.
+     */
+    public String getParameters() {
+        return this.parameters;
     }
 
     /**

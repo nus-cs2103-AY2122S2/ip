@@ -1,8 +1,7 @@
-package paggro.notableDate;
+package paggro.notabledate;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import paggro.task.Task;
@@ -12,9 +11,9 @@ import paggro.task.Task;
  */
 public class NotableDate {
     /** The date of the NotableDate object. */
-    public LocalDate localDate;
+    LocalDate localDate;
     /** The list of tasks on the NotableDate. */
-    public ArrayList<Task> tasks;
+    ArrayList<Task> tasks;
 
     /**
      * Constructor of NotableDate.
@@ -23,6 +22,22 @@ public class NotableDate {
     public NotableDate(LocalDate date) {
         this.localDate = date;
         tasks = new ArrayList<>();
+    }
+
+    /**
+     * Returns the localDate of this NotableDate object.
+     * @return LocalDate of the NotableDate.
+     */
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    /**
+     * Returns the tasks list of the NotableDate object.
+     * @return ArrayList of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**

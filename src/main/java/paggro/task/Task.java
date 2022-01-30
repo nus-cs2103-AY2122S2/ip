@@ -5,9 +5,9 @@ package paggro.task;
  */
 public abstract class Task {
     /** The description of the Task object. */
-    public String description;
+    String description;
     /** The boolean indicating if the task is complete. */
-    public boolean isDone;
+    boolean isDone;
 
     /**
      * Default constructor of Task.
@@ -26,6 +26,22 @@ public abstract class Task {
     public Task(String des, boolean isDone) {
         description = des;
         this.isDone = isDone;
+    }
+
+    /**
+     * Returns the description of the Task object.
+     * @return String description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Checks if the Task object is done.
+     * @return True if the task is done and false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     public void setDone() {

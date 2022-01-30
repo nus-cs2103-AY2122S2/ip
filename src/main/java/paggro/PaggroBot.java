@@ -1,5 +1,6 @@
+package paggro;
+
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import paggro.command.Command;
 import paggro.exception.PaggroException;
@@ -13,11 +14,11 @@ import paggro.ui.Ui;
  */
 public class PaggroBot {
     /** Storage object where inputs are stored. */
-    Storage storage;
+    private Storage storage;
     /** Ui object which reads from and writes to the user. */
-    Ui ui;
+    private Ui ui;
     /** Lister object which contains list of tasks and significant dates. */
-    Lister lister;
+    private Lister lister;
 
     /**
      * Constructor of PaggroBot.
@@ -40,7 +41,7 @@ public class PaggroBot {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
                 ui.showLine();

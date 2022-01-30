@@ -1,10 +1,10 @@
 package paggro.lister;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.time.LocalDate;
 
-import paggro.notableDate.NotableDate;
+import paggro.notabledate.NotableDate;
 import paggro.task.Task;
 
 /**
@@ -32,6 +32,22 @@ public class Lister {
     public Lister(ArrayList<Task> tasks, HashMap<LocalDate, NotableDate> dateMap) {
         this.tasks = tasks;
         this.dateMap = dateMap;
+    }
+
+    /**
+     * Returns the tasks list of the Lister object.
+     * @return ArrayList of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Returns the dateMap of the Lister object.
+     * @return HashMap of the dateMap.
+     */
+    public HashMap<LocalDate, NotableDate> getDateMap() {
+        return dateMap;
     }
 
     /**
@@ -78,17 +94,22 @@ public class Lister {
         if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
             nDate = new NotableDate(lDate);
             dateMap.put(lDate, nDate);
-        } else  {
+        } else {
             nDate = dateMap.get(lDate);
         }
         return nDate;
     }
 
+    /**
+     * Returns a list of tasks that contain the given keyword.
+     * @param key String of the keyword to search for.
+     * @return ArrayList of tasks with keyword.
+     */
     public ArrayList<Task> findIndicesContaining(String key) {
         ArrayList<Task> tasksContainingKey = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
-            if (t.description.toLowerCase().contains(key.toLowerCase())) {
+            if (t.getDescription().toLowerCase().contains(key.toLowerCase())) {
                 tasksContainingKey.add(t);
             }
         }

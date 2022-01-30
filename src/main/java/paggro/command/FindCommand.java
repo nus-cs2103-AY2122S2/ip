@@ -1,6 +1,5 @@
 package paggro.command;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import paggro.exception.PaggroException;
@@ -12,7 +11,7 @@ import paggro.ui.Ui;
 /**
  * This class encapsulates a find command which prints a list of tasks containing a given search key.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     /**
      * Constructor of FindCommand
      * @param parameters String key to be searched for.
@@ -30,7 +29,7 @@ public class FindCommand extends Command{
      */
     @Override
     public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        ArrayList<Task> tasks = lister.findIndicesContaining(this.parameters);
+        ArrayList<Task> tasks = lister.findIndicesContaining(this.getParameters());
         ui.showList(tasks);
     }
 }
