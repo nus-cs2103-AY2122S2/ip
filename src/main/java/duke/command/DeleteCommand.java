@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
-import duke.function.Storage;
 import duke.task.Task;
 
 /**
@@ -13,11 +13,11 @@ public class DeleteCommand extends Command {
     /**
      * The task number to be deleted.
      */
-    int taskNumber;
+    private int taskNumber;
     /**
      * To store any exceptions that were thrown during the parsing of the command.
      */
-    DukeException exception;
+    private DukeException exception;
 
     /**
      * Initializes the delete command with the provided user input.

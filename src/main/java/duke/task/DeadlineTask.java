@@ -11,11 +11,11 @@ public class DeadlineTask extends Task {
     /**
      * Preposition describing the date (eg. on, by).
      */
-    String preposition;
+    private String preposition;
     /**
      * Date and time of the deadline.
      */
-    LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Initializes a new ∂eadline task.

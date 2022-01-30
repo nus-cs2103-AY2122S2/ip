@@ -13,15 +13,15 @@ public class MarkCommand extends Command {
     /**
      * To determine whether the command will mark or unmark the task.
      */
-    boolean isMark;
+    private boolean isMark;
     /**
      * The specified task to be marked or unmarked.
      */
-    int taskNumber;
+    private int taskNumber;
     /**
      * To store any exceptions that were thrown during the parsing of the command.
      */
-    DukeException exception;
+    private DukeException exception;
 
     /**
      * Initializes a new mark command.

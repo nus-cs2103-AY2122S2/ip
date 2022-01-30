@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
@@ -24,7 +24,7 @@ public class Storage {
     /**
      * The path to the save file
      */
-    String filePath;
+    private String filePath;
 
     /**
      * Initializes a new storage instance
@@ -52,16 +52,11 @@ public class Storage {
                 while (fileSc.hasNextLine()) {
                     String[] line = fileSc.nextLine().split(";");
                     Task task;
-                    // Todo Task
                     if (line[0].equals("T")) {
                         task = new ToDoTask(line[2]);
-                    }
-                    // Deadline Task
-                    else if (line[0].equals("D")) {
+                    } else if (line[0].equals("D")) {
                         task = new DeadlineTask(line[2], line[3], LocalDateTime.parse(line[4]));
-                    }
-                    // Event Task
-                    else if (line[0].equals("E")) {
+                    } else if (line[0].equals("E")) {
                         task = new EventTask(line[2], line[3], LocalDateTime.parse(line[4]));
                     } else {
                         throw new DukeException("An invalid task type was read");
