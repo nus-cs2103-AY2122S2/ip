@@ -4,5 +4,6 @@ public enum ActionType {
     READ,
     ADD,
     UPDATE,
-    ERROR, NO_ACTION
+    ERROR,
+    NO_ACTION
 }

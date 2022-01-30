@@ -7,9 +7,11 @@ import luke.commands.DeadlineCommand;
 import luke.commands.DeleteCommand;
 import luke.commands.EventCommand;
 import luke.commands.ExitCommand;
+import luke.commands.FindCommand;
 import luke.commands.InvalidCommand;
 import luke.commands.ListCommand;
 import luke.commands.MarkCommand;
+import luke.commands.ReadCommand;
 import luke.commands.TodoCommand;
 import luke.commands.UnmarkCommand;
 import luke.commands.UpdateCommand;
@@ -31,6 +33,7 @@ public class Parser {
         put("event", CommandAction.EVENT);
         put("deadline", CommandAction.DEADLINE);
         put("delete", CommandAction.DELETE);
+        put("find", CommandAction.FIND);
     }};
 
     public static Command parse(String input) {
@@ -42,7 +45,7 @@ public class Parser {
                 case NO_ACTION:
                     return new ExitCommand();
                 case READ:
-                    return new ListCommand();
+                    return prepareReadCommand(cmdAction, inputs);
                 case ADD:
                     return prepareAddCommand(cmdAction, inputs);
                 case UPDATE:
@@ -56,6 +59,16 @@ public class Parser {
             return new InvalidCommand("The force does not comprehend the date.");
         } catch (IllegalArgumentException e) {
             return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    public static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
+        switch (cmdAction) {
+        case FIND:
+            String keyword = parseFilterArgument(args);
+            return new FindCommand(keyword);
+        default:
+            return new ListCommand();
         }
     }
 
@@ -106,6 +119,18 @@ public class Parser {
             }
         }
         return argsMap;
+    }
+
+    public static String parseFilterArgument(String[] args) throws IllegalArgumentException {
+        if (args.length < 2) {
+            throw new IllegalArgumentException(String.format("find command requires a keyword argument.", args[0]));
+        }
+
+        if (args[1].isBlank()) {
+            throw new IllegalArgumentException(String.format("find command requires a keyword argument.", args[0]));
+        }
+
+        return args[1];
     }
 
     public static int parseUpdateArguments(String[] args) throws IllegalArgumentException {

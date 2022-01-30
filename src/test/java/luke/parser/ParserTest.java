@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
     private static final String[] DESCRIPTIONS = {"eat", "sleep", "code"};
+    private static final String[] FILLERS = {"dinner", "lunch", "project"};
     private static final String[] DATES = {"01/01/2022", "02/02/2022", "03/03/2022"};
     private static final String[] TIMES = {"06:00", "12:00", "18:00", "23:59"};
 
@@ -93,6 +94,59 @@ class ParserTest {
         commandString = String.format("list");
         expected = String.format("Currently, you have the following tasks:\n\t1. [T][X] %s", DESCRIPTIONS[0]);
         command = Parser.parse(commandString);
+        assertEquals(expected, command.execute(taskList).getResult());
+    }
+
+    @Test
+    public void findCommand_validInput_correctCommandResult(){
+        TaskList taskList = new TaskList();
+
+        String commandString = String.format("find %s", DESCRIPTIONS[0]);
+        Command command = Parser.parse(commandString);
+        command.execute(taskList);
+
+        String expected = "The force is unable to find any task with the keyword...\n"
+                + "The keyword parsed is \"%s\".";
+        expected = String.format(expected, DESCRIPTIONS[0]);
+        command = Parser.parse(commandString);
+        assertEquals(expected, command.execute(taskList).getResult());
+
+        commandString = String.format("todo %s %s", DESCRIPTIONS[0], FILLERS[0]);
+        command = Parser.parse(commandString);
+        command.execute(taskList);
+
+        commandString = String.format("todo %s %s", DESCRIPTIONS[2], FILLERS[2]);
+        command = Parser.parse(commandString);
+        command.execute(taskList);
+
+        commandString = String.format("todo %s %s", DESCRIPTIONS[0], FILLERS[1]);
+        command = Parser.parse(commandString);
+        command.execute(taskList);
+
+        commandString = String.format("find %s", DESCRIPTIONS[0]);
+        expected = "The force found the following matching tasks:\n\t1. [T][ ] %s %s\n\t3. [T][ ] %s %s";
+        expected = String.format(expected, DESCRIPTIONS[0], FILLERS[0], DESCRIPTIONS[0], FILLERS[1]);
+        command = Parser.parse(commandString);
+        assertEquals(expected, command.execute(taskList).getResult());
+
+        commandString = String.format("list");
+        expected = "Currently, you have the following tasks:\n\t1. [T][ ] %s %s\n\t2. [T][ ] %s %s\n\t3. [T][ ] %s %s";
+        expected = String.format(expected, DESCRIPTIONS[0], FILLERS[0],
+                DESCRIPTIONS[2], FILLERS[2], DESCRIPTIONS[0], FILLERS[1]);
+        command = Parser.parse(commandString);
+        assertEquals(expected, command.execute(taskList).getResult());
+    }
+
+    @Test
+    public void findCommand_invalidInput_incorrectCommandResult(){
+        TaskList taskList = new TaskList();
+
+        String commandString = "find";
+        Command command = Parser.parse(commandString);
+        command.execute(taskList);
+
+        String errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        String expected = String.format(errorMsg, "find command requires a keyword argument.");
         assertEquals(expected, command.execute(taskList).getResult());
     }
 }

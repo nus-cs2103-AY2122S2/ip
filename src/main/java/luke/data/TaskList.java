@@ -5,12 +5,18 @@ import luke.storage.Storable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TaskList implements Storable {
     private List<Task> taskList;
 
     public TaskList() {
         taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     @Override
@@ -41,5 +47,14 @@ public class TaskList implements Storable {
 
     public Task remove(int index) {
         return taskList.remove(index);
+    }
+
+    public void setFiltered(Predicate<Task> predicate) {
+        taskList.stream().forEach(x -> x.clearFilter());
+        taskList.stream().forEach(x -> {
+            if (!predicate.test(x)) {
+                x.markAsFiltered();
+            }
+        });
     }
 }
