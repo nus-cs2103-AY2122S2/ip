@@ -4,7 +4,10 @@ public class InputParser {
         String value = input;
         for(InputType inputType: InputType.values()) {
             if (input.startsWith(inputType.label)) {
-                value = input.substring(inputType.label.length() + 1);
+                value = "";
+                if (inputType.label.length() < input.length()) {
+                    value = input.substring(inputType.label.length() + 1);
+                }
                 type = inputType;
                 return new Object[]{type, value};
             }
