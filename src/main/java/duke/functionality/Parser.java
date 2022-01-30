@@ -13,6 +13,7 @@ import duke.command.FindCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintCommand;
 import duke.command.UnmarkCommand;
+import duke.exception.BlankCommandException;
 import duke.exception.DukeException;
 import duke.exception.IncompleteCommandException;
 import duke.exception.InvalidCommandException;
@@ -113,7 +114,7 @@ public class Parser {
                 date = formatDate(splitDuration[0]);
                 time = formatTime(splitDuration[1]);
             } catch (DateTimeParseException e) {
-                throw new DukeException("The expected input form is deadline ____ /by yyyy-mm-dd hhmm");
+                throw new DukeException("The expected input form is deadline xxx /by yyyy-mm-dd hhmm");
             }
 
             return new AddCommand(new Deadline(description, date, time));
@@ -136,7 +137,7 @@ public class Parser {
                 startTime = formatTime(splitDuration[1]);
                 endTime = formatTime(splitDuration[2]);
             } catch (DateTimeParseException e) {
-                throw new DukeException("The expected input form is event ____ /at yyyy-mm-dd hhmm hhmm");
+                throw new DukeException("The expected input form is event xxx /at yyyy-mm-dd hhmm hhmm");
             }
 
             return new AddCommand(new Event(description, date, startTime, endTime));
@@ -152,6 +153,9 @@ public class Parser {
 
         } else if (command.equals("find")) {
             return new FindCommand(inputSplit[1]);
+
+        } else if (command.equals("")) {
+            throw new BlankCommandException();
 
         } else {
             throw new InvalidCommandException();

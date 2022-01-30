@@ -29,24 +29,17 @@ public class Storage {
         Storage.path = path;
     }
 
-    /**
-     * Returns nothing, but stores the specified task into the taskList in TaskList class.
-     * @param task the task created in Parser class.
-     */
-    public static void storeToList(Task task) { //same as addToList but no printing
-        TaskList.taskList.add(task);
-        TaskList.numOfTask++;
-    }
 
     /**
      * Returns nothing, but stores all task into the text file specified by path.
      * @param path path to "/data/TaskData.txt".
+     * @param taskList the tasklist to be written.
      * @throws IOException if the text file is missing.
      */
-    public static void writeToFile(String path) throws IOException {
+    public static void writeToFile(String path, TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(path);
-        for (int i = 0; i < TaskList.numOfTask; i++) {
-            Task task = TaskList.taskList.get(i);
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTask(i);
             fw.write(craftOutput(task));
             fw.write(System.lineSeparator());
         }
@@ -56,21 +49,24 @@ public class Storage {
     /**
      * Returns nothing, but calls writeToFile to update the text file.
      */
-    public static void updateTextFile() {
+    public static void updateTextFile(TaskList taskList) {
         try {
-            writeToFile(Storage.pwd + Storage.path);
+            writeToFile(Storage.pwd + Storage.path, taskList);
         } catch (IOException e) {
             System.out.println("Something happened to the text file !" + e.getMessage());
         }
     }
 
     /**
-     * Returns nothing, but reads the input from the specified file and stores them in the taskList in TaskList class.
+     * Returns a new Tasklist object that is the saved taskList which consist of all the data read
+     * from the file provided.
      * @param file the text file that stores all tasks.
+     * @return a TaskList object representing the saved taskList.
      * @throws FileNotFoundException if the file is missing.
      */
-    public static void readFileDataAndStoreInList(File file) throws FileNotFoundException {
+    public TaskList readFileDataAndStoreInList(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
+        TaskList newTaskList = new TaskList();
         while ((sc.hasNextLine())) {
             String input = sc.nextLine();
             String[] inputSplit = input.split("\\|"); //split input by |
@@ -81,23 +77,24 @@ public class Storage {
                 if (mark == 1) {
                     tempTask.setTaskDone();
                 }
-                storeToList(tempTask);
+                newTaskList.addToList(tempTask);
             } else if (task.equals("D")) {
                 Deadline tempTask = new Deadline(inputSplit[2], Parser.formatDate(inputSplit[3]),
                         Parser.formatTime(inputSplit[4]));
                 if (mark == 1) {
                     tempTask.setTaskDone();
                 }
-                storeToList(tempTask);
+                newTaskList.addToList(tempTask);
             } else if (task.equals("E")) {
                 Event tempTask = new Event(inputSplit[2], Parser.formatDate(inputSplit[3]) ,
                         Parser.formatTime(inputSplit[4]), Parser.formatTime(inputSplit[5]));
                 if (mark == 1) {
                     tempTask.setTaskDone();
                 }
-                storeToList(tempTask);
+                newTaskList.addToList(tempTask);
             }
         }
+        return newTaskList;
     }
 
     /**
@@ -137,18 +134,20 @@ public class Storage {
     }
 
     /**
-     * Returns nothing, but loads all tasks from the specified path.
-     * @throws IOException if the file is missing.
+     * Returns a TaskList object after loading all tasks from the specified path.
+     * @return a TaskList object representing the saved taskList.
+     * @throws IOException if the file or directory is missing.
      */
-    public void load() throws IOException {
+    public TaskList load() throws IOException {
         File directory = new File(pwd + "/data");
         File inputFile = new File(pwd + path);
-        if (directory.mkdir()) {
-            System.out.println("You do not have the Directory, do not worry! I will create the directory for you");
+        if (directory.mkdir() && inputFile.createNewFile()) {
+            throw new IOException("Do not worry! I will create the directory & file for you");
+
+        } else if (inputFile.createNewFile()) {
+            throw new IOException("Do not worry! I will create the file for you");
         }
-        if (inputFile.createNewFile()) {
-            System.out.println("You do not have the file, do not worry! I will create the file for you");
-        }
-        readFileDataAndStoreInList(inputFile);
+
+        return readFileDataAndStoreInList(inputFile);
     }
 }

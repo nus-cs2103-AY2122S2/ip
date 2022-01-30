@@ -9,8 +9,7 @@ import duke.task.Task;
  * to the actions available on a Task object.
  */
 public class TaskList {
-    protected static ArrayList<Task> taskList = new ArrayList<>();
-    protected static int numOfTask = 0;
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Default constructor of TaskList class.
@@ -18,56 +17,50 @@ public class TaskList {
     public TaskList() { }
 
     /**
-     * Returns nothing, but deletes the task specified.
+     * Returns the specified Task that is going to be deleted.
      * @param taskNum an indicator to the index of taskList.
+     * @return the specified task to be deleted.
      */
-    public void deleteTask(int taskNum) {
-        String message = "Noted. I've removed this task:\n";
+    public Task deleteTask(int taskNum) {
         int actualTaskNum = taskNum - 1;
-        System.out.println(message + taskList.get(actualTaskNum).toString());
-        taskList.remove(actualTaskNum);
-        numOfTask--;
-        Storage.updateTextFile();
-        System.out.println("Now you have " + numOfTask + " tasks in the list.");
+        Task deletedTask = taskList.remove(actualTaskNum);
+        return deletedTask;
     }
 
     /**
-     * Returns nothing, but marks the task specified as done.
+     * Returns the specified Task that is going to be marked as done.
      * @param taskNum an indicator to the index of taskList.
+     * @return the specified task to be marked.
      */
-    public void markTask(int taskNum) {
-        String message = "Nice! I've marked this task as done:\n";
+    public Task markTask(int taskNum) {
         int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
-        Task task = taskList.get(actualTaskNum); // get the task from the array
-        task.setTaskDone();
-        Storage.updateTextFile();
-        System.out.println(message + task);
+        Task markedTask = taskList.get(actualTaskNum); // get the task from the array
+        markedTask.setTaskDone();
+        return markedTask;
     }
 
     /**
-     * Returns nothing, but marks the task specified as not done.
+     * Returns the specified Task that is going to be marked as not done.
      * @param taskNum an indicator to the index of taskList.
+     * @return the specified task to be unmarked.
      */
-    public void unMarkTask(int taskNum) {
-        String message = "OK, I've marked this task as not done yet:\n";
+    public Task unMarkTask(int taskNum) {
         int actualTaskNum = taskNum - 1;
-        Task task = taskList.get(actualTaskNum); // get the task from the array
-        task.setTaskNotDone();
-        Storage.updateTextFile();
-        System.out.println(message + task);
+        Task unMarkedtask = taskList.get(actualTaskNum); // get the task from the array
+        unMarkedtask.setTaskNotDone();
+        return unMarkedtask;
     }
 
     /**
-     * Returns nothing, but prints out all task in taskList.
+     * Returns a string which is the collection of all the task in taskList.
+     * @return accumulated tasks.
      */
-    public void printList() {
-        String message = "Here are the tasks in your list:";
-        System.out.println(message);
-
-        for (int i = 0; i < numOfTask; i++) {
-            String output = i + 1 + "." + taskList.get(i).toString();
-            System.out.println(output);
+    public String printList() {
+        String output = "Here are the tasks in your list:\n";
+        for (int i = 0; i < getListSize(); i++) {
+            output += i + 1 + "." + taskList.get(i).toString() + "\n";
         }
+        return output;
     }
 
     /**
@@ -75,31 +68,31 @@ public class TaskList {
      * @param task the task created in Parser class.
      */
     public void addToList(Task task) {
-        String message = "Got it. I've added this task:\n";
         taskList.add(task);
-        numOfTask++;
-        Storage.updateTextFile();
-        System.out.println(message + task.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
     /**
-     * Returns nothing, but prints all task that contains that matches the specified word.
+     * Returns a new TaskList which contains all the Task that matches the specified word.
      * @param word keyword input from user
+     * @return a new TaskList containing all Task that contains the specified word.
      */
-    public void findWord(String word) {
-        String message = "Here are the matching tasks in your list:\n";
-        System.out.print(message);
-        int counter = 1;
-        for (int i = 0; i < numOfTask; i++) {
+    public TaskList findWord(String word) {
+        TaskList newTaskList = new TaskList();
+
+        for (int i = 0; i < getListSize(); i++) {
             Task task = taskList.get(i);
             if (task.getDescription().contains(word)) {
-                String output = counter + "." + task;
-                counter++;
-                System.out.println(output);
+                newTaskList.addToList(task);
             }
         }
-        if (counter == 1) {
-            System.out.println("OOPS!, there are no matching task with the word provided.");
-        }
+        return newTaskList;
+    }
+
+    public int getListSize() {
+        return taskList.size();
+    }
+
+    public Task getTask(int index) {
+        return taskList.get(index);
     }
 }

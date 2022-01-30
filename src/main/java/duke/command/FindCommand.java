@@ -17,12 +17,24 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns nothing, but finds all task that share the same word in the taskList in TaskList class.
+     * Returns a string which contains all the task after the execution of findWord in the TaskList class.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
+     * @return crafted message after calling findword in the TaskList class.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.findWord(super.word);
+    public String execute(TaskList tasks) {
+        TaskList newTaskList = tasks.findWord(super.word);
+        String message = "Here are the matching tasks in your list:\n";
+        int counter = 1;
+        for (int i = 0; i < newTaskList.getListSize(); i++) {
+            String output = counter + "." + newTaskList.getTask(i);
+            counter++;
+            message += output + "\n";
+        }
+        if (counter == 1) {
+            message = "OOPS!, there are no matching task with the word provided." + "\n";
+        }
+        return message;
     }
 
     /**
