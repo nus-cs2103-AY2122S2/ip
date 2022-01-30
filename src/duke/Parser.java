@@ -19,16 +19,16 @@ public class Parser {
     protected TaskList tasks;
     protected String[] listOfUserInput;
     protected Storage storage;
-
     String line = "\n____________________________________________________________\n";
+
     enum Commands {
         todo, deadline, event, list, mark, unmark, delete, bye;
     }
 
-    public Parser(String input, TaskList list, Storage store) {
+    public Parser(String input, TaskList list, Storage storage) {
         userInput = input;
         tasks = list;
-        storage = store;
+        this.storage = storage;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Parser {
         try {
             firstWordInTitle = listOfUserInput[1];
         } catch (Exception e) {
-            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/duke.Deadline/duke.Event cannot be empty.\n");
+            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.\n");
             errorMessage.append(line);
             throw new DukeException(errorMessage.toString());
         }
@@ -74,7 +74,7 @@ public class Parser {
      * Obtains date. Applicable for duke.Deadline, duke.Event
      */
     public LocalDate obtainDate() {
-        Boolean hasClue = false;
+        Boolean hasClue = false; //such as '/by' or '/at'
         StringBuilder stringDate = new StringBuilder();
         for (int i = 1; i < listOfUserInput.length; i ++) {
             String currentWord = listOfUserInput[i];
@@ -99,14 +99,14 @@ public class Parser {
     /**
      * Obtains integer. Applicable for mark, unmark and delete
      */
-    public int obtainInteger() {
+    public int obtainTaskNumber() {
         return Integer.valueOf(listOfUserInput[1]);
     }
 
     /**
      * Based on supplied Action word, run the action
      */
-    public void parse() throws DukeException, IOException {
+    public void parseInput() throws DukeException, IOException {
         splitUserInput();
         Commands action = Commands.valueOf(obtainCommandWord());
         switch (action) {
@@ -143,40 +143,39 @@ public class Parser {
     }
 
     /**
-     * Makes a call on duke.TaskList's printTasks()
+     * Makes a call to TaskList's printTasks()
      */
     public String listOutTasks() {
-        StringBuilder res = new StringBuilder();
-        res.append(line).append("Here are the tasks in your list: \n");
+        StringBuilder successMessage = new StringBuilder();
+        successMessage.append(line).append("Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.getTaskListSize(); i ++) {
-            res.append(String.format("%o. ", i + 1));
-            res.append(tasks.getParticularTask(i).toString());
+            successMessage.append(String.format("%o. ", i + 1));
+            successMessage.append(tasks.getParticularTask(i).toString());
         }
-        res.append(line);
-        return res.toString();
+        successMessage.append(line);
+        return successMessage.toString();
     }
 
-    public void checkInteger() throws DukeException {
-        int taskNumber = obtainInteger();
+    public void checkTaskNumber() throws DukeException {
+        int taskNumber = obtainTaskNumber();
         if (taskNumber >= tasks.getTaskListSize() || taskNumber < 1) {
             throw new DukeException("Please provide the correct Task number! Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!\n");
         }
     }
 
     /**
-     * Makes a call on duke.TaskList's mark()
+     * Makes a call on TaskList's mark()
      */
     public String markTaskAsDone() {
         Task task;
-        StringBuilder res = new StringBuilder();
-        res.append(line).append("Nice! I've marked this task as done: \n");
+        StringBuilder successMessage = new StringBuilder();
+        successMessage.append(line).append("Nice! I've marked this task as done: \n");
         try {
-            checkInteger();
-            task = tasks.markTask(obtainInteger());
-            res.append(task.toString()).append(line);
-            return res.toString();
+            checkTaskNumber();
+            task = tasks.markTask(obtainTaskNumber());
+            successMessage.append(task.toString()).append(line);
+            return successMessage.toString();
         } catch (DukeException e) {
-            String error = e.getMessage();
             return e.getMessage();
         }
     }
@@ -186,13 +185,13 @@ public class Parser {
      */
     public String unmarkTask() {
         Task task;
-        StringBuilder res = new StringBuilder();
-        res.append(line).append("Nice! I've unmarked this task: \n");
+        StringBuilder successMessage = new StringBuilder();
+        successMessage.append(line).append("Nice! I've unmarked this task: \n");
         try {
-            checkInteger();
-            task = tasks.unmarkTask(obtainInteger());
-            res.append(task.toString()).append(line);
-            return res.toString();
+            checkTaskNumber();
+            task = tasks.unmarkTask(obtainTaskNumber());
+            successMessage.append(task.toString()).append(line);
+            return successMessage.toString();
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -203,13 +202,13 @@ public class Parser {
      */
     public String deleteTask() throws DukeException {
         try {
-            checkInteger();
-            StringBuilder res = new StringBuilder();
-            res.append(line).append("Noted. I've removed this task: \n");
-            res.append(tasks.delete(obtainInteger()).toString()).append("\n");
-            res.append("Now you have ").append(tasks.getTaskListSize());
-            res.append(" tasks in the list.\n").append(line);
-            return res.toString();
+            checkTaskNumber();
+            StringBuilder successMessage = new StringBuilder();
+            successMessage.append(line).append("Noted. I've removed this task: \n");
+            successMessage.append(tasks.deleteTask(obtainTaskNumber()).toString()).append("\n");
+            successMessage.append("Now you have ").append(tasks.getTaskListSize());
+            successMessage.append(" tasks in the list.\n").append(line);
+            return successMessage.toString();
         } catch (DukeException e) {
             return e.getMessage();
         }

@@ -46,7 +46,7 @@ public class TaskList {
     /**
      * Deletes Tasks from the list
      */
-    public Task delete(int i) throws DukeException {
+    public Task deleteTask(int i) throws DukeException {
         Task task;
         try {
             task = tasks.get(i - 1);
@@ -64,16 +64,16 @@ public class TaskList {
      * Displays all Tasks in the list
      */
     public String printTasks() {
-        StringBuilder res = new StringBuilder();
+        StringBuilder successMessage = new StringBuilder();
         String line = "____________________________________________________________ \n";
-        res.append(line);
-        res.append("Here are the tasks in your list: \n");
+        successMessage.append(line);
+        successMessage.append("Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.size(); i ++) {
-            res.append(String.format("%o.", i + 1));
-            res.append(tasks.get(i).toString());
+            successMessage.append(String.format("%o.", i + 1));
+            successMessage.append(tasks.get(i).toString());
         }
-        res.append(line);
-        return res.toString();
+        successMessage.append(line);
+        return successMessage.toString();
     }
 
     /**
@@ -82,7 +82,7 @@ public class TaskList {
      */
     public Task markTask(int i) {
         Task task = tasks.get(i - 1);
-        task.setDone(1);
+        task.setIsDone(1);
         return task;
     }
 
@@ -92,7 +92,7 @@ public class TaskList {
      */
     public Task unmarkTask(int i) {
         Task task = tasks.get(i - 1);
-        task.setDone(0);
+        task.setIsDone(0);
         return task;
     }
 }

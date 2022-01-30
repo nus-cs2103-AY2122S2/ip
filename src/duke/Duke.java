@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class Duke {
     private Storage storage;
-    private TaskList tasks = new TaskList(); //has items in it
+    private TaskList tasks = new TaskList();
     private Ui ui;
 
     /**

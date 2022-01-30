@@ -112,25 +112,25 @@ public class Storage {
     public Task createTaskFromText(String[] line) {
         String type = line[0];
         String done = line[1];
-        String desc = line[2];
+        String title = line[2];
         String date = "";
         Task newT = null;
         switch (type) {
             case "T":
-                newT = new ToDo(desc, Integer.valueOf(done));
+                newT = new ToDo(title, Integer.valueOf(done));
                 break;
             case "D":
                  date = line[3];
-                newT = new Deadline(desc, Integer.valueOf(done));
+                newT = new Deadline(title, Integer.valueOf(done));
                 ((Deadline) newT).setStringToLocalDate(date);
                 break;
             case "E":
                 date = line[3];
-                newT = new Event(desc, Integer.valueOf(done));
+                newT = new Event(title, Integer.valueOf(done));
                 ((Event) newT).setStringToLocalDate(date);
                 break;
             default:
-                System.out.println("Invalid duke.Task type!");
+                System.out.println("Invalid Task type found in file!\n");
                 break;
         }
         return newT;

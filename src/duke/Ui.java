@@ -50,7 +50,7 @@ public class Ui {
     /** Takes in TaskList and Storage objects to parse the user input  */
     public void parseUserInput(TaskList tasks, Storage storage) throws DukeException, IOException {
         String userInput = scanner.nextLine();
-        parser = new Parser(userInput, tasks, storage);//Calls duke.Parser to parse information of userInput
-        parser.parse();//and do the respective action from duke.TaskList
+        parser = new Parser(userInput, tasks, storage);//Calls Parser to parse information of userInput
+        parser.parseInput();//and do the respective action from duke.TaskList
     }
 }

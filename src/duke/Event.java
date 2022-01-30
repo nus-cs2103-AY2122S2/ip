@@ -19,18 +19,18 @@ public class Event extends Task {
     /**
      * Creates duke.Event object with provided LocalDate variable
      */
-    public Event(String n, int d, LocalDate a) {
-        super(n, d);
+    public Event(String name, int isDone, LocalDate at) {
+        super(name, isDone);
         super.type = 'E';
-        at = a;
+        this.at = at;
     }
 
     /**
      * Creates duke.Event object without provided LocalDate variable
      * Used when there is the need to parse text into date first
      */
-    public Event(String n, int d) {
-        super(n, d);
+    public Event(String name, int isDone) {
+        super(name, isDone);
         super.type = 'E';
     }
 
@@ -60,11 +60,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append(getTaskIcon()).append(" - ");
-        res.append(this.getDoneIcon()).append(" - ");
-        res.append(this.name).append(" - ");;
-        res.append(convertLocalDateToString()).append("\n");
-        return res.toString();
+        StringBuilder result = new StringBuilder();
+        result.append(getTaskIcon()).append(" - ");
+        result.append(getDoneIcon()).append(" - ");
+        result.append(name).append(" - ");;
+        result.append(convertLocalDateToString()).append("\n");
+        return result.toString();
     }
 }

@@ -16,20 +16,20 @@ import java.time.format.DateTimeParseException;
 
 public abstract class Task {
     protected String name;
-    protected int done;
+    protected int isDone;
     protected Character type;
 
     public Task(String n, int d) {
         name = n;
-        done = d;
+        isDone = d;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getDone() {
-        return done;
+    public int getIsDone() {
+        return isDone;
     }
 
     public Character getType() {
@@ -40,8 +40,8 @@ public abstract class Task {
         this.name = name;
     }
 
-    public void setDone(int done) {
-        this.done = done;
+    public void setIsDone(int isDone) {
+        this.isDone = isDone;
     }
 
     public void setType(Character type) {
@@ -49,10 +49,10 @@ public abstract class Task {
     }
 
     /**
-     * Sets the duke.Task to be done
+     * Sets the duke.Task to be isDone
      */
-    public int getDoneIcon() {
-        return getDone();
+    public int getIsDoneIcon() {
+        return getIsDone();
     }
 
     /**
