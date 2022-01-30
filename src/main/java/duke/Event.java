@@ -1,10 +1,10 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
-public class Event  extends Task {
-    private LocalDate time;
+public class Event extends Task {
+    private final LocalDate time;
 
     public Event(String content, LocalDate time) {
         super(content);
@@ -13,7 +13,7 @@ public class Event  extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.BASIC_ISO_DATE) + ")" ;
+        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.BASIC_ISO_DATE) + ")";
     }
 
     @Override

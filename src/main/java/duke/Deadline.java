@@ -1,10 +1,11 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
-    private LocalDate date;
+    private final LocalDate date;
+
     public Deadline(String content, LocalDate date) {
         super(content);
         this.date = date;

@@ -1,9 +1,12 @@
 package duke;
+
 /**
- * Provides the format that Duke's response will be displayed */
+ * Provides the format that Duke's response will be displayed
+ */
 public class Ui {
     public static final String SEPARATOR = "--------------------------------------\n";
-    public static void wrapPrint (String msg) {
+
+    public static void wrapPrint(String msg) {
         String[] splitted = msg.split("\n");
         String wrapee = "";
         for (String line : splitted) {

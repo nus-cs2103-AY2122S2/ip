@@ -7,8 +7,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    private static TaskList taskList = new TaskList();
-    private static Storage storage = new Storage();
+    private static final TaskList taskList = new TaskList();
+    private static final Storage storage = new Storage();
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);

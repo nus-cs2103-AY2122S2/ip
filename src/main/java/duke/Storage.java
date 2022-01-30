@@ -1,11 +1,12 @@
 package duke;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.nio.file.Files;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.nio.file.StandardOpenOption;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,10 +20,7 @@ public class Storage {
             if (!fileExists) {
                 Files.createFile(filePath);
             }
-            BufferedWriter myWriter = Files.newBufferedWriter(
-                                          filePath, StandardOpenOption.CREATE,
-                                          StandardOpenOption.TRUNCATE_EXISTING,
-                                          StandardOpenOption.WRITE);
+            BufferedWriter myWriter = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             myWriter.write(taskList.toData());
             myWriter.close();
         } catch (IOException e) {
@@ -44,7 +42,7 @@ public class Storage {
                     Task curTask;
                     if (taskType.equals("T")) {
                         curTask = new Todo(parsed[2]);
-                    } else if ( taskType.equals("D") ) {
+                    } else if (taskType.equals("D")) {
                         LocalDate date = LocalDate.parse(parsed[3], DateTimeFormatter.ISO_DATE);
                         curTask = new Deadline(parsed[2], date);
                     } else {

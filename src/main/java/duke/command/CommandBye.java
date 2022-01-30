@@ -6,6 +6,7 @@ import duke.Ui;
 
 public class CommandBye extends Command {
     Over over;
+
     public CommandBye(Over over) {
         this.over = over;
     }

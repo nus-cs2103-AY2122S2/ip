@@ -1,7 +1,9 @@
 package duke;
+
 import java.util.ArrayList;
+
 public class TaskList {
-    private ArrayList<Task> todo;
+    private final ArrayList<Task> todo;
 
     public TaskList() {
         this.todo = new ArrayList<>();
@@ -28,12 +30,12 @@ public class TaskList {
 
     public String markFinished(int num) {
         todo.get(num - 1).finished();
-        return Response.RESPONSE_MARKDONE + "\n" +  todo.get(num - 1).toString();
+        return Response.RESPONSE_MARKDONE + "\n" + todo.get(num - 1).toString();
     }
 
     public String unmarkFinished(int num) {
         todo.get(num - 1).notFinished();
-        return Response.RESPONSE_MARKDONE + "\n" +  todo.get(num - 1).toString();
+        return Response.RESPONSE_MARKDONE + "\n" + todo.get(num - 1).toString();
     }
 
     public int size() {

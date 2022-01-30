@@ -1,9 +1,12 @@
 package duke.command;
-import java.time.LocalDate;
-import duke.TaskList;
+
 import duke.Event;
 import duke.Response;
+import duke.TaskList;
 import duke.Ui;
+
+import java.time.LocalDate;
+
 public class CommandEvent extends Command {
     TaskList taskList;
     LocalDate time;
@@ -17,8 +20,8 @@ public class CommandEvent extends Command {
 
     @Override
     public void execute() {
-        Event  newTask = new Event(eventContent, time);
+        Event newTask = new Event(eventContent, time);
         taskList.addTask(newTask);
-        Ui.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask.toString() + "\n");
+        Ui.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask + "\n");
     }
 }

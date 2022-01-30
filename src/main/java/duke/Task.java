@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * Provides abstraction of an task in the todoList
  */
@@ -8,9 +9,10 @@ public abstract class Task {
 
     /**
      * Contructs an item object
+     *
      * @param content description of what to do in String
      */
-    public Task (String content) {
+    public Task(String content) {
         this.content = content;
         this.finished = false;
     }

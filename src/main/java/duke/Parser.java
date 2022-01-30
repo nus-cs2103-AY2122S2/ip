@@ -1,13 +1,13 @@
 package duke;
+
+import duke.command.*;
+import duke.dukeException.NoTimeGivenException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import duke.command.Command;
-import duke.dukeException.NoTimeGivenException;
-import duke.command.*;
 
 public class Parser {
-    public static Command parse(String userInput, TaskList taskList, Over over)
-    throws NoTimeGivenException {
+    public static Command parse(String userInput, TaskList taskList, Over over) throws NoTimeGivenException {
         String[] words;
         String firstWord;
         words = userInput.split(" ");
@@ -31,8 +31,9 @@ public class Parser {
         } else if (firstWord.equals("deadline")) {
             String deadlineContent = words[1];
             for (int i = 2; i < words.length; i++) {
-                if (words[i].equals("/by") )
+                if (words[i].equals("/by")) {
                     break;
+                }
                 deadlineContent = deadlineContent + " " + words[i];
             }
             String[] separateTime = userInput.split("/by ");
@@ -45,8 +46,9 @@ public class Parser {
         } else if (firstWord.equals("event")) {
             String eventContent = words[1];
             for (int i = 2; i < words.length; i++) {
-                if (words[i].equals("/at"))
+                if (words[i].equals("/at")) {
                     break;
+                }
                 eventContent = eventContent + " " + words[i];
             }
             String timeString = userInput.split("/at ")[1];
@@ -55,7 +57,7 @@ public class Parser {
         } else if (firstWord.equals("delete") && words.length == 2) {
             int taskNo = Integer.parseInt(words[1]);
             return new CommandDelete(taskList, taskNo);
-        } else  {
+        } else {
             return new CommandUnclear();
         }
     }

@@ -1,6 +1,8 @@
 package duke.command;
+
 import duke.TaskList;
 import duke.Ui;
+
 public class CommandMark extends Command {
     TaskList taskList;
     int taskNo;
