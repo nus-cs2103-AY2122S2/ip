@@ -6,9 +6,9 @@ import tasks.Task;
 * TaskList class for the bot, handling and storing the list of Task objects locally.
 */
 public class TaskList {
-    private ArrayList<Task> taskList;
-
     private static final String NO_SUCH_TASK = "I'm very sorry Sir, there is no such task you mentioned.";
+
+    private ArrayList<Task> taskList;
 
     /**
     * Class constructor.
@@ -25,12 +25,11 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
-    
     /**
     * Adds a Task into the ArrayList of Task objects.
     * <p>
     * This method adds a Task without giving the user any reply.
-    * 
+    *
     * @param    task    the Task object to be added
     * @see      Task
     */
@@ -40,7 +39,7 @@ public class TaskList {
 
     /**
     * Returns the Task object at the specified ArrayList index.
-    * 
+    *
     * @param    taskIndex    the index of the Task object
     * @return                the Task object
     * @see      Task
@@ -48,14 +47,14 @@ public class TaskList {
     public Task getTaskFromIndex(int taskIndex) throws DukeException {
         if (taskIndex >= this.taskList.size()) { // invalid integer input
             throw new DukeException(NO_SUCH_TASK);
-        } 
+        }
         return this.taskList.get(taskIndex);
     }
 
     /**
     * Returns the String of the reply to the user, after adding a Task
     * newTask into the ArrayList.
-    * 
+    *
     * @param    newTask    the Task object to be added
     * @return              the String of the reply to the user
     * @see      Task
@@ -73,7 +72,7 @@ public class TaskList {
     /**
     * Returns the String of the reply to the user showing all the tasks
     * that they currently have.
-    * 
+    *
     * @return           the String of the reply to the user
     * @see      Task
     */
@@ -94,7 +93,7 @@ public class TaskList {
     * in the ArrayList as done or not done depending on String type.
     * <p>
     * String type requires "mark" or "unmark" to mark a task as done or not done.
-    * 
+    *
     * @param    taskIndex    the index of the Task object to be marked
     * @param    type         used to indicate if a task should be marked as done or not.
     * @return                the String of the reply to the user
@@ -106,11 +105,10 @@ public class TaskList {
         boolean markAsDone = false; // default is "unmark"
         if (type.equals("mark")) {
             markAsDone = true;
-        } 
-        
+        }
         if (taskIndex >= this.taskList.size()) { // invalid integer input
             throw new DukeException(NO_SUCH_TASK);
-        } 
+        }
 
         Task task = this.taskList.get(taskIndex);
         task.markTask(markAsDone);
@@ -128,7 +126,7 @@ public class TaskList {
     /**
     * Returns the String of the reply to the user, after deleting a Task
     * in the ArrayList.
-    * 
+    *
     * @param    taskIndex    the index of the Task object to be deleted
     * @return                the String of the reply to the user
     * @see      Task
@@ -143,15 +141,14 @@ public class TaskList {
         reply += "Very well Sir. I have removed this task:";
         reply += "\n   " + taskToRemove.toString();
         reply += "\n You now have " + taskListLength + " tasks in the agenda Sir.";
-        
         return reply;
     }
 
     /**
     * Returns the String of the reply to the user, after finding tasks
     * that containing the input taskName String, if any were found.
-    * 
-    * @param    taskIndex    the index of the Task object to be deleted
+    *
+    * @param    taskName     the name of the Task object to be found
     * @return                the String of the reply to the user
     * @see      Task
     */

@@ -1,20 +1,20 @@
 import java.util.Scanner;
 
 import chatbot.DukeException;
-import chatbot.Ui;
-import chatbot.TaskList;
-import chatbot.Storage;
 import chatbot.Parser;
+import chatbot.Storage;
+import chatbot.TaskList;
+import chatbot.Ui;
 
 /**
 * Duke class for the bot. Contains the main method.
 */
 public class Duke {
+    protected static final String FILEDIR = "./data";
+    protected static final String FILEPATH = "./data/duke.txt";
+
     private Storage storage;
     private TaskList taskList;
-
-    protected static String FILE_PATH = "./data/duke.txt";
-    protected static String FILE_DIR = "./data";
 
     ////////////////////////////////////////////////////////////////
     // Main Methods
@@ -26,7 +26,7 @@ public class Duke {
     * stored data text file for the bot
     */
     public Duke(String filePath) {
-        this.storage = new Storage(FILE_PATH, FILE_DIR);
+        this.storage = new Storage(FILEPATH, FILEDIR);
         this.taskList = new TaskList();
 
         try { // attempt to load saved data
@@ -62,6 +62,10 @@ public class Duke {
         String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
         Ui.displayMessage(introductionMessage);
     }
+
+    /**
+     * Main function that is run on startup of the bot.
+     */
     public static void main(String[] args) {
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
@@ -70,6 +74,6 @@ public class Duke {
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
 
-        new Duke(FILE_PATH).run();
+        new Duke(FILEPATH).run();
     }
 }

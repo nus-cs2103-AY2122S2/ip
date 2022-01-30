@@ -1,4 +1,14 @@
 package chatbot;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+// import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+// import java.time.format.DateTimeFormatter;
+// import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 import tasks.Deadline;
@@ -6,26 +16,15 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
-import java.io.File;
-import java.io.FileWriter;
-// import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.time.LocalDate;
-// import java.time.format.DateTimeFormatter;
-// import java.time.temporal.ChronoUnit;
-import java.time.LocalTime;
 /**
 * Storage class to define a location to store the data of the bot.
 */
 public class Storage {
-    private String filePath;
-    private String fileDirectory;
-
     public static final String LOAD_SUCCESS = "I have successfully loaded your saved agenda, Sir.";
     public static final String UNREADABLE_FILE = "Sorry Sir, I was unable to access the data file.";
+
+    private String filePath;
+    private String fileDirectory;
 
     /**
     * Class constructor.
@@ -38,25 +37,24 @@ public class Storage {
         this.fileDirectory = fileDirectory;
     }
 
-     /**
+    /**
     * Saves tasks in taskList into the data file duke.txt at filePath
     * <p>
     * The fileDirectory denotes the folder containing duke.txt
     *
     * @param  taskList      a TaskList containing all the tasks stored
-    * @throws DukeException
+    * @throws DukeException throws a DukeException
     */
     public void saveData(TaskList taskList) throws DukeException {
         // create a directory if it doesn't exist
         File dataFile = new File(this.fileDirectory);
-        if (!dataFile.exists()){
+        if (!dataFile.exists()) {
             dataFile.mkdirs();
         }
 
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, false);
             PrintWriter printWriter = new PrintWriter(fileWriter);
-            
             for (Task task : taskList.getTaskList()) {
                 String dataEntry = "";
                 if (task instanceof Todo) {
@@ -104,7 +102,7 @@ public class Storage {
     * Loads tasks into taskList from the data file duke.txt at filePath
     *
     * @param  taskList      a TaskList containing all the tasks stored
-    * @throws DukeException
+    * @throws DukeException throws a DukeException
     */
     public void loadData(TaskList taskList) throws DukeException {
         try {
@@ -113,7 +111,7 @@ public class Storage {
 
             // check if there is a file at all
             File dataFile = new File(this.filePath);
-            if (!dataFile.exists()){
+            if (!dataFile.exists()) {
                 return;
             }
 
@@ -122,44 +120,42 @@ public class Storage {
             while (scanner.hasNext()) {
                 dataEntry = scanner.nextLine();
                 String[] dataEntryArray = dataEntry.split("/;"); // assumes data file is formatted correctly
-                
                 // check whether task is done
                 boolean isDone = false;
-                    if (dataEntryArray[1].equals("DONE")) {
-                        isDone = true;
-                    }
-                
+                if (dataEntryArray[1].equals("DONE")) {
+                    isDone = true;
+                }
                 Task newTask;
-                LocalTime taskTime = null;
+                LocalTime taskTime;
                 switch (dataEntryArray[0]) {
-                    case "Todo": // to-do task
-                        newTask = new Todo(dataEntryArray[2], isDone);
-                        break;
-                    case "Deadline": // deadline task
-                        taskTime = null;
-                        if (!dataEntryArray[4].equals("null")) {
-                            taskTime = LocalTime.parse(dataEntryArray[4]);
-                        }
-                        newTask = new Deadline(
-                            dataEntryArray[2], 
-                            LocalDate.parse(dataEntryArray[3]), 
-                            taskTime,
-                            isDone);
-                        break;
-                    case "Event": // event task
-                        taskTime = null;
-                        if (!dataEntryArray[4].equals("null")) {
-                            taskTime = LocalTime.parse(dataEntryArray[4]);
-                        }
-                        newTask = new Event(
-                            dataEntryArray[2], 
-                            LocalDate.parse(dataEntryArray[3]), 
-                            taskTime,
-                            isDone);
-                        break;
-                    default: // unknown task - should not reach here
-                        newTask = new Todo(dataEntryArray[2], isDone);
-                        break;
+                case "Todo": // to-do task
+                    newTask = new Todo(dataEntryArray[2], isDone);
+                    break;
+                case "Deadline": // deadline task
+                    taskTime = null;
+                    if (!dataEntryArray[4].equals("null")) {
+                        taskTime = LocalTime.parse(dataEntryArray[4]);
+                    }
+                    newTask = new Deadline(
+                        dataEntryArray[2],
+                        LocalDate.parse(dataEntryArray[3]),
+                        taskTime,
+                        isDone);
+                    break;
+                case "Event": // event task
+                    taskTime = null;
+                    if (!dataEntryArray[4].equals("null")) {
+                        taskTime = LocalTime.parse(dataEntryArray[4]);
+                    }
+                    newTask = new Event(
+                        dataEntryArray[2],
+                        LocalDate.parse(dataEntryArray[3]),
+                        taskTime,
+                        isDone);
+                    break;
+                default: // unknown task - should not reach here
+                    newTask = new Todo(dataEntryArray[2], isDone);
+                    break;
                 }
                 taskList.addTask(newTask);
             }
