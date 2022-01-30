@@ -1,7 +1,6 @@
 package fileHandling;
 
 import tasks.Task;
-import tasks.Todo;
 
 import java.io.File;
 import java.io.IOException;
