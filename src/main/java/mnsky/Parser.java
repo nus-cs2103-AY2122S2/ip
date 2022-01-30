@@ -26,8 +26,8 @@ public class Parser {
     /**
      * Creates a new task by parsing the input.
      * @param input The input string.
-     * @throws MnskyMissingParameterException If the name parameter is missing.
      * @return The new task.
+     * @throws MnskyMissingParameterException If the name parameter is missing.
      */
     private static ArrayList<String> parseTask(String input) throws MnskyMissingParameterException {
         String[] inputSplit = input.split(" ", 2);
@@ -41,27 +41,27 @@ public class Parser {
     /**
      * Creates a new deadline (a task with a "by" parameter included) by parsing the input.
      * @param inputSplit The input, split into an array using space.
-     * @throws MnskyMissingParameterException Thrown if the name or the by parameter is missing.
      * @return The new deadline.
+     * @throws MnskyMissingParameterException Thrown if the name or the by parameter is missing.
      */
     private static ArrayList<String> parseDeadline(String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException("deadline", "name");
         }
 
-        int by_index = 1;
-        for (; by_index < inputSplit.length; by_index++) {
-            if (inputSplit[by_index].equals("/by")) {
+        int byIndex = 1;
+        for (; byIndex < inputSplit.length; byIndex++) {
+            if (inputSplit[byIndex].equals("/by")) {
                 break;
             }
         }
 
-        if (by_index >= inputSplit.length) {
+        if (byIndex >= inputSplit.length) {
             throw new MnskyMissingParameterException("deadline", "by");
         }
 
-        String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, by_index));
-        String by = String.join(" ", Arrays.copyOfRange(inputSplit, by_index + 1, inputSplit.length));
+        String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, byIndex));
+        String by = String.join(" ", Arrays.copyOfRange(inputSplit, byIndex + 1, inputSplit.length));
 
         return new ArrayList<>(List.of("deadline", deadlineName, by));
     }
@@ -69,27 +69,27 @@ public class Parser {
     /**
      * Creates a new event (a task with an "at" parameter included) by parsing the input.
      * @param inputSplit The input, split into an array using space.
-     * @throws MnskyMissingParameterException If the name or the at parameter is missing.
      * @return The new event.
+     * @throws MnskyMissingParameterException If the name or the at parameter is missing.
      */
     private static ArrayList<String> parseEvent(String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException("event", "name");
         }
 
-        int at_index = 1;
-        for (; at_index < inputSplit.length; at_index++) {
-            if (inputSplit[at_index].equals("/at")) {
+        int atIndex = 1;
+        for (; atIndex < inputSplit.length; atIndex++) {
+            if (inputSplit[atIndex].equals("/at")) {
                 break;
             }
         }
 
-        if (at_index >= inputSplit.length) {
+        if (atIndex >= inputSplit.length) {
             throw new MnskyMissingParameterException("event", "at");
         }
 
-        String eventName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, at_index));
-        String at = String.join(" ", Arrays.copyOfRange(inputSplit, at_index + 1, inputSplit.length));
+        String eventName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, atIndex));
+        String at = String.join(" ", Arrays.copyOfRange(inputSplit, atIndex + 1, inputSplit.length));
 
         return new ArrayList<>(List.of("event", eventName, at));
     }

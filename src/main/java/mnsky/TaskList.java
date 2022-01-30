@@ -43,8 +43,8 @@ public class TaskList {
 
     /**
      * Creates a new event (a task with an "at" parameter included) based on the parameters.
-     * @throws MnskyException If the name or the at parameter is missing.
      * @return The new event.
+     * @throws MnskyException If the name or the at parameter is missing.
      */
     public Event addEvent(String name, String at) throws MnskyException {
         String[] atSplit = at.split(" ");
@@ -68,8 +68,8 @@ public class TaskList {
 
     /**
      * Creates a new deadline (a task with a "by" parameter included) based on the parameters.
-     * @throws MnskyException If the name or the by parameter is missing.
      * @return The new deadline.
+     * @throws MnskyException If the name or the by parameter is missing.
      */
     public Deadline addDeadline(String name, String by) {
         String[] bySplit = by.split(" ");
@@ -141,7 +141,7 @@ public class TaskList {
      * @return The task that was deleted.
      * @throws MnskyInvalidParameterException If stringToIndex throws the exception.
      */
-    public Task delete(String stringIndex) throws MnskyInvalidParameterException  {
+    public Task delete(String stringIndex) throws MnskyInvalidParameterException {
         int index = stringToIndex("delete", stringIndex);
         Task deletedTask = tasks.get(index);
         tasks.remove(index);
@@ -184,20 +184,20 @@ public class TaskList {
         for (ArrayList<String> task : taskList) {
             Task actualTask;
             switch (task.get(0)) {
-                case "task":
-                    actualTask = addTask(task.get(1));
-                    break;
+            case "task":
+                actualTask = addTask(task.get(1));
+                break;
 
-                case "event":
-                    actualTask = addEvent(task.get(1), task.get(2));
-                    break;
+            case "event":
+                actualTask = addEvent(task.get(1), task.get(2));
+                break;
 
-                case "deadline":
-                    actualTask = addDeadline(task.get(1), task.get(2));
-                    break;
+            case "deadline":
+                actualTask = addDeadline(task.get(1), task.get(2));
+                break;
 
-                default:
-                    throw new MnskyException("????");
+            default:
+                throw new MnskyException("????");
             }
 
             if (actualTask != null) {
@@ -208,6 +208,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns all the tasks which have the search term in their name.
+     * @param searchTerm The search term used to find tasks.
+     * @return All the tasks which have the search term in their name.
+     */
     public ArrayList<String> find(String searchTerm) {
         ArrayList<String> foundTasks = new ArrayList<>();
 

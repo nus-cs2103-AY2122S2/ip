@@ -61,6 +61,6 @@ public class Deadline extends Task {
      */
     @Override
     public String getStorageData() {
-        return String.format("[D]%s /by %s",  super.getGenericTaskName(), by);
+        return String.format("[D]%s /by %s", super.getGenericTaskName(), by);
     }
 }

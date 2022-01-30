@@ -5,12 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import mnsky.exceptions.MnskyException;
-import mnsky.task.Task;
 
 public class Storage {
     private String dataFilePath;
@@ -48,7 +46,7 @@ public class Storage {
 
         try {
             fileWriter = new FileWriter(dataFilePath);
-            BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             ArrayList<String> storageDatas = taskList.getStorageDatas();
 
             for (String storageData : storageDatas) {

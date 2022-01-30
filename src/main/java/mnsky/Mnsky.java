@@ -101,6 +101,10 @@ public class Mnsky {
         ui.printBye();
     }
 
+    /**
+     * Creates a new MNSKY object and runs it.
+     * @param args Any arguments passed to main().
+     */
     public static void main(String[] args) {
         Mnsky mnsky = new Mnsky();
         mnsky.run();

@@ -1,11 +1,12 @@
 package mnsky;
 
-import mnsky.task.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import mnsky.task.Task;
 
 public class TaskListTest {
     class StorageStub extends Storage {

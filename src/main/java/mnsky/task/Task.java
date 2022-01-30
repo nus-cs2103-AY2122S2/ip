@@ -31,7 +31,9 @@ public class Task {
      * Returns the task name.
      * @return The task name.
      */
-    public String getName() {return taskName;}
+    public String getName() {
+        return taskName;
+    }
 
     /**
      * Returns the task name with info indicating if it's marked or not.
