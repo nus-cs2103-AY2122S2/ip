@@ -1,16 +1,9 @@
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 
+import duke.Storage;
+import duke.Ui;
 import exceptions.DukeException;
-import exceptions.DukeToDoEmptyException;
-import exceptions.DukeUnknownCommandException;
-
 
 
 public class Duke {

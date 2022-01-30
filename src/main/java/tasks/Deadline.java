@@ -1,4 +1,6 @@
-import java.time.LocalDateTime;
+package tasks;
+
+import tasks.Task;
 
 public class Deadline extends Task {
 
@@ -7,6 +9,10 @@ public class Deadline extends Task {
     public Deadline(String description, String time) {
         super(description);
         this.time = time;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     @Override

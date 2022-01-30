@@ -1,3 +1,11 @@
+package duke;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,16 +29,16 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(file, false);
             for (Task task : TaskList.dukeList) {
                 String text = "";
-                String description = task.description;
+                String description = task.getDescription();
                 //task.isDone = false;
                 if (task instanceof ToDo) {
-                    text = "T | " + (task.isDone ? "1" : "0") + " | " + description + '\n';
+                    text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + description + '\n';
                 } else if (task instanceof Event) {
                     Event event = ((Event) task);
-                    text = "E | " + (task.isDone ? "1" : "0") + " | " + event.description.trim() + " | " + event.time + '\n';
+                    text = "E | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription().trim() + " | " + event.getTime() + '\n';
                 } else {
                     Deadline deadline = ((Deadline) task);
-                    text = "D | " + (task.isDone ? "1" : "0") + " | " + deadline.description.trim() + " | " + deadline.time + '\n';
+                    text = "D | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription().trim() + " | " + deadline.getTime() + '\n';
                 }
                 fileWriter.write(text);
                 fileWriter.flush();
@@ -62,7 +70,7 @@ public class Storage {
                     break;
                 case "T":
                     task = new ToDo(commandWords[2]);
-                    String text = "T | " + (task.isDone ? "1" : "0") + " | " + task.description + '\n';
+                    String text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + '\n';
                     display(input);
                     break;
                 default:

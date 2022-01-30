@@ -1,6 +1,13 @@
+package duke;
+
 import exceptions.DukeException;
 import exceptions.DukeToDoEmptyException;
 import exceptions.DukeUnknownCommandException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -42,14 +49,14 @@ public class Ui {
         displayLine();
     }
 
-    void displayIncompleteTask(Task complete) {
+    public void displayIncompleteTask(Task complete) {
         displayLine();
         display("OK, I've marked this task as not done yet:");
         display(complete);
         displayLine();
     }
 
-    void displayTaskCompletion(Task incomplete) {
+    public void displayTaskCompletion(Task incomplete) {
         displayLine();
         display("Nice! I've marked this task as done:");
         display(incomplete);
@@ -58,20 +65,20 @@ public class Ui {
 
 
 
-    void executeCommand(String command, String description) throws DukeException, IOException {
+    public void executeCommand(String command, String description) throws DukeException, IOException {
         try {
             if (command.equals("list")) {
                 displayList();
             } else if (command.equals("mark")) {
                 int taskIndex = Integer.parseInt(description.substring(1));
                 Task toBeCompleted = TaskList.getTask(taskIndex - 1);
-                toBeCompleted.isDone = true;
+                toBeCompleted.setIsDone(true);
                 toBeCompleted.isComplete();
                 displayTaskCompletion(toBeCompleted);
             } else if (command.equals("unmark")) {
                 int taskIndex = Integer.parseInt(description.substring(1));
                 Task toBeCompleted = TaskList.getTask(taskIndex - 1);
-                toBeCompleted.isDone = false;
+                toBeCompleted.setIsDone(false);
                 //toBeCompleted.isComplete();
                 displayIncompleteTask(toBeCompleted);
             } else {
