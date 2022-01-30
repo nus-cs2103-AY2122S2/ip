@@ -31,17 +31,17 @@ public class Storage {
                     String initial = data[0];
                     Task history;
                     switch (initial) {
-                        case "T":
-                            history = new Todo(data[2]);
-                            break;
-                        case "D":
-                            history = new Deadline(data[2], Parser.convertDate(data[3]));
-                            break;
-                        case "E":
-                            history = new Event(data[2], Parser.convertDate(data[3]));
-                            break;
-                        default:
-                            throw new DukeException("Cannot understand the command");
+                    case "T":
+                        history = new Todo(data[2]);
+                        break;
+                    case "D":
+                        history = new Deadline(data[2], Parser.convertDate(data[3]));
+                        break;
+                    case "E":
+                        history = new Event(data[2], Parser.convertDate(data[3]));
+                        break;
+                    default:
+                        throw new DukeException("Cannot understand the command");
                     }
                     if (data[1].equals("mark")) {
                         history.markAsDone();
