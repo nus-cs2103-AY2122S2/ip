@@ -1,4 +1,4 @@
-// Abstract out the messages
+// Stretch goal: abstract out the messages
 package athena.ui;
 
 import athena.tasks.TaskList;

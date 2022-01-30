@@ -16,7 +16,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList) throws InputException {
         if (taskList.isValidTaskNumber(taskNumber)) {
-            taskList.markTaskAsNotDone(taskNumber);
+            taskList.setTaskAsNotDone(taskNumber);
             ui.sayText("Alright, I've marked the following task as not done:");
             ui.showTask(taskNumber);
         } else {
