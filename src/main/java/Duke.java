@@ -16,7 +16,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.setUpData());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
         ui = new Ui(tasks);
@@ -27,11 +26,13 @@ public class Duke {
         try {
             ui.startConversation(this.parser, this.storage);
         } catch (DukeException e) {
-            ui.showIllegalTextError();
+            ui.showIllegalTextError(e);
+            new Duke("data.txt").run();
         }
     }
 
     public static void main(String[] args) {
+        System.out.println("Hello! I'm Duke :) \nWhat can I do for you? :D");
         new Duke("data.txt").run();
     }
 }

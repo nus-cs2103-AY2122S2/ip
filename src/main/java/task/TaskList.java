@@ -1,8 +1,6 @@
 package task;
 
 import exception.DukeException;
-import task.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -43,24 +41,21 @@ public class TaskList {
             }
             if (stringToAdd[0].equals("todo")) {
                 if (containsBy) {
-                    throw new DukeException("task.Todo cannot have a due date. Create an deadline or event instead :)");
+                    throw new DukeException("Todo cannot have a due date. Create an deadline or event instead :)");
                 } else {
                     task = new Todo(returnString);
-                    System.out.println(task);
                 }
             } else if (stringToAdd[0].equals("deadline")) {
                 if (!containsBy) {
                     throw new DukeException("A deadline needs a due date. Create a todo instead.");
                 } else {
                     task = new Deadline(returnString, stringToAdd[stringToAdd.length - 1]);
-                    System.out.println(task);
                 }
             } else {
                 if (!containsBy) {
                     throw new DukeException("An event needs a due date. Create a todo instead.");
                 } else {
                     task = new Event(returnString, stringToAdd[stringToAdd.length - 1]);
-                    System.out.println(task);
                 }
             }
             tasks.add(task);
@@ -86,12 +81,17 @@ public class TaskList {
     }
 
     public void delete(String number) {
-        int num = Integer.parseInt(number);
-        Task temp = tasks.get(num - 1);
-        System.out.println("Noted. I've removed this task:\n [" + temp.symbol() + "][" +
-                temp.getStatusIcon() + "] " + temp +
-                "\nNow you have " + (tasks.size() - 1) + " tasks left in this list");
-        tasks.remove(num - 1);
+        if (number.equals("all")) {
+            this.tasks =  new ArrayList<>();
+            System.out.println("All right! I have deleted all tasks in your list.");
+        } else {
+            int num = Integer.parseInt(number);
+            Task temp = tasks.get(num - 1);
+            System.out.println("Noted. I've removed this task:\n [" + temp.symbol() + "][" +
+                    temp.getStatusIcon() + "] " + temp +
+                    "\nNow you have " + (tasks.size() - 1) + " tasks left in this list");
+            tasks.remove(num - 1);
+        }
     }
 
 }

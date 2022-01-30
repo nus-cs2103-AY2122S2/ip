@@ -2,7 +2,6 @@ package storage;
 
 import exception.DukeException;
 import task.*;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,6 +15,7 @@ public class Storage {
     public Storage(String path) {
         this.path = path;
     }
+
     public ArrayList<Task> setUpData() throws DukeException {
         try {
             FileReader myObj = new FileReader(this.path);
