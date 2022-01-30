@@ -19,10 +19,8 @@ class Parser {
      */
     public static Command parse(String userInput, TaskList taskList, Over over)
     throws NoTimeGivenException {
-        String[] words;
-        String firstWord;
-        words = userInput.split(" ");
-        firstWord = words[0];
+        String[] words = userInput.split(" ");
+        String firstWord = words[0];
         if (firstWord.equals("bye")) {
             return new CommandBye(over);
         } else if (firstWord.equals("list")) {
@@ -68,6 +66,10 @@ class Parser {
         } else if (firstWord.equals("delete") && words.length == 2) {
             int taskNo = Integer.parseInt(words[1]);
             return new CommandDelete(taskList, taskNo);
+        } else if (firstWord.equals("find") && words.length == 2){
+            String wordSecond = words[1];
+            System.out.println("reached line 58");
+            return new CommandFind(wordSecond, taskList);
         } else {
             return new CommandUnclear();
         }
