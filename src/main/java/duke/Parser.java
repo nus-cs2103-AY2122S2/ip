@@ -21,21 +21,13 @@ public class Parser {
         if (input.equals("bye")) {
             System.out.println("~BYE!~ Come back to Duke anytime");
             return true;
-        }
-
-        //Check if input == list
-        else if (input.equals("list")) {
+        } else if (input.equals("list")) { //Check if input == list
             taskList.printList();
-        }
-
-        //Instruction to reset the arraylist
-        else if (input.equals("reset")) {
+        } else if (input.equals("reset")) { //Instruction to reset the arraylist
             taskList.reset();
             System.out.println("List of tasks has been resetted");
-        }
-
-        //Check if input == unmark or delete or mark
-        else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
+        } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
+            //Check if input == unmark or delete or mark
             String[] splitString = input.split("\\s+");
             String instr = splitString[0];
             if (splitString.length < 2) {
@@ -56,10 +48,7 @@ public class Parser {
                     System.out.println(e);
                 }
             }
-        }
-
-        //input is find
-        else if (input.contains("find")) {
+        } else if (input.contains("find")) { //input is find
             String[] splitString = input.split(" ", 2);
             if (splitString.length < 2) {
                 throw new DukeException("Please input the keyword(s) for find");
@@ -71,10 +60,8 @@ public class Parser {
             } else {
                 throw new DukeException("You have entered an invalid command");
             }
-        }
-
-        //input is a new type of task
-        else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
+        } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
+            //input is a new type of task
             //identify type of task
             String[] stringArray = input.split(" ", 2);
 

@@ -56,8 +56,6 @@ public class Duke {
      * point of entry for the application
      *
      * @param args
-     *
-     * @return void
      */
     public static void main(String[] args) {
         new Duke("./src/main/data/data.txt", "./src/main/data").run();

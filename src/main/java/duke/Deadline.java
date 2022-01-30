@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline Class that is a subclass of task, has additional date and time attributes
  */
-public class Deadline extends Task{
-    LocalDate date;
-    LocalTime time = null;
+public class Deadline extends Task {
+    private LocalDate date;
+    private LocalTime time = null;
 
     /**
      * Constructor for Deadline Class
@@ -42,6 +42,23 @@ public class Deadline extends Task{
     }
 
     /**
+     * Getter for date
+     *
+     * @return date
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
+     * Getter for time
+     * @return time
+     */
+    public LocalTime getTime() {
+        return time;
+    }
+
+    /**
      * formats and prints the date into MMM d YYYY format
      */
     public void printDate() {
@@ -67,7 +84,7 @@ public class Deadline extends Task{
     public void printTask() {
         System.out.print("[D]");
 
-        if(this.getDone()){
+        if (this.getDone()) {
             System.out.print("[X] " + this.getTaskName() + " ");
         } else {
             System.out.print("[ ] " + this.getTaskName() + " ");
@@ -80,7 +97,7 @@ public class Deadline extends Task{
      * @return String that goes into the output
      */
     @Override
-    public String toString(){
+    public String toString() {
         String result = "";
         result += "[D]";
         if (this.getDone()) {

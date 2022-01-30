@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * TaskList class that contains an ArrayList of tasks
@@ -16,9 +15,12 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * prints out the list
+     */
     public void printList() {
         for (int i = 1; i <= tasks.size(); i++) {
-            Task task = tasks.get(i-1);
+            Task task = tasks.get(i - 1);
             System.out.print(i + ": ");
             task.printTask();
         }
@@ -63,7 +65,7 @@ public class TaskList {
             } else if (taskType.equals("deadline")) {
                 String[] spl = taskDetails.split("/by");
                 if (spl.length < 2) {
-                    throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
+                    throw new DukeException("Description must include a date/time! Did you miss out a /by?");
                 }
                 String details = spl[0].trim();
                 String dateTime = spl[1].trim();
@@ -159,11 +161,11 @@ public class TaskList {
      */
     public void find(String text) throws DukeException {
         ArrayList<String> toPrint = new ArrayList<>();
-        for (int i  = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String taskName = task.getTaskName().toLowerCase();
             if (taskName.contains(text.toLowerCase())) {
-                String result = "Index in taskList: " + (i+1) + " || Task Details: " + task.toString();
+                String result = "Index in taskList: " + (i + 1) + " || Task Details: " + task.toString();
                 toPrint.add(result);
             }
         }

@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Event Class that is a subclass of task, has additional date and time attributes
  */
-public class Event extends Task{
-    LocalDate date;
-    LocalTime time = null;
+public class Event extends Task {
+    private LocalDate date;
+    private LocalTime time = null;
 
     /**
      * Constructor for Event Class
@@ -42,6 +42,14 @@ public class Event extends Task{
         }
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      * formats and prints the date into MMM d YYYY format
      */
@@ -69,7 +77,7 @@ public class Event extends Task{
         //print task type
         System.out.print("[E]");
         //print task done symbol
-        if(this.getDone()){
+        if (this.getDone()) {
             System.out.print("[X] " + this.getTaskName() + " ");
         } else {
             System.out.print("[ ] " + this.getTaskName() + " ");
@@ -82,16 +90,16 @@ public class Event extends Task{
      * @return String that goes into the output
      */
     @Override
-    public String toString(){
+    public String toString() {
         String result = "";
         result += "[E]";
-        if(this.getDone()){
+        if (this.getDone()) {
             result += "[X]";
         } else {
             result += "[ ]";
         }
         result += " " + this.getTaskName() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if((this.time != null)){
+        if ((this.time != null)) {
             result += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
         }
         result += ")";
