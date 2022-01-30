@@ -1,4 +1,8 @@
-final class TaskNotFoundException extends DukeException {
+package task;
+
+import main.DukeException;
+
+public final class TaskNotFoundException extends DukeException {
 
 
     protected TaskNotFoundException(String message) {

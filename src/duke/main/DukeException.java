@@ -1,7 +1,9 @@
+package main;
+
 /**
- * An abstract clas that represents the exceptions related to Duke.
+ * An abstract clas that represents the exceptions related to main.Duke.
  */
-abstract class DukeException extends Exception {
+public abstract class DukeException extends Exception {
     private String message;
 
     protected DukeException(String message) {

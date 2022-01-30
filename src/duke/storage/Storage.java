@@ -1,3 +1,8 @@
+package storage;
+
+import task.Task;
+import task.TaskNotFoundException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +16,7 @@ import java.util.HashMap;
 /**
  * Encapsulates the operations related to hard-disk storage.
  */
-class Storage {
+public class Storage {
 
     private String filePath;
     private File taskFile;
@@ -22,7 +27,7 @@ class Storage {
      *
      * @param filePath The file path to be read from.
      */
-    protected Storage(String filePath) {
+    public Storage(String filePath) {
 
         this.taskFile = new File(filePath);
 
@@ -61,7 +66,7 @@ class Storage {
      * @return An <code>ArrayList</code> that stores the tasks.
      * @throws FileNotFoundException If the file path is invalid.
      */
-    protected ArrayList<Task> readTasks()
+    public ArrayList<Task> readTasks()
             throws FileNotFoundException {
 
         ArrayList<Task> result = new ArrayList<>();
@@ -92,7 +97,7 @@ class Storage {
      *
      * @param tasks The tasks to be written.
      */
-    protected void writeTasks(ArrayList<Task> tasks) {
+    public void writeTasks(ArrayList<Task> tasks) {
 
         try {
             FileOutputStream writeData = new FileOutputStream(this.taskFile);

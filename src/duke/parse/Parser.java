@@ -1,11 +1,17 @@
+package parse;
+
+import instruction.Instruction;
+import main.DukeException;
+import task.TaskManager;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * Represents the input parser for Duke.
- * This class is responsible for parsing user commands and interpret them as <code>Instruction</code>s.
+ * Represents the input parser for main.Duke.
+ * This class is responsible for parsing user commands and interpret them as <code>instruction.Instruction</code>s.
  */
-class Parser {
+public class Parser {
 
     private InputStream inputStream;
 

@@ -1,3 +1,8 @@
+package instruction;
+
+import task.TaskManager;
+import ui.Ui;
+
 /**
  * Represents the instruction 'quit'.
  */
@@ -20,7 +25,7 @@ final class Quit extends Instruction {
      * @return The see-you message.
      */
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
         ui.printMessage(Quit.SEE_YOU_MESSAGE);
     }
 }

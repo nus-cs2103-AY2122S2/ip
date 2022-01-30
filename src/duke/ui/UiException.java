@@ -1,3 +1,5 @@
+package ui;
+
 import java.io.IOException;
 
 /**
@@ -7,7 +9,7 @@ class UiException extends IOException {
 
 
     /**
-     * Constructs an <code>UiException</code> with the specified message.
+     * Constructs an <code>ui.UiException</code> with the specified message.
      *
      * @param message The message that describes the exception.
      */

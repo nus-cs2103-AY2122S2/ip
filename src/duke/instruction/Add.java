@@ -1,7 +1,13 @@
+package instruction;
+
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 /**
- * Represents the 'add' instruction to Duke.
+ * Represents the 'add' instruction to main.Duke.
  */
-final class Add extends Instruction{
+public final class Add extends Instruction {
 
     private Task task;
 
@@ -23,7 +29,7 @@ final class Add extends Instruction{
      * @param ui The UI to be used.
      */
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
         ui.printMessage(tasks.addTask(this.task));
     }
 }

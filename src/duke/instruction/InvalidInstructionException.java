@@ -1,3 +1,7 @@
+package instruction;
+
+import main.DukeException;
+
 /**
  * Represents the exception that occurs when the user input of command is invalid.
  */

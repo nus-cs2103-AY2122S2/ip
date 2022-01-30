@@ -1,3 +1,5 @@
+package task;
+
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.time.LocalDate;
@@ -80,7 +82,7 @@ final class Deadline extends Task {
     }
 
     @Override
-    protected HashMap<String, Object> getInfoTable() {
+    public HashMap<String, Object> getInfoTable() {
 
         var infoTable = this.initializeInfoTable();
         infoTable.put(DUE_TIME_FIELD, this.dueTime);

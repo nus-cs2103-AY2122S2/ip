@@ -1,3 +1,5 @@
+package task;
+
 import java.util.HashMap;
 
 /**
@@ -26,7 +28,7 @@ final class Event extends Task {
     }
 
     /**
-     * Constructs an <code>Event</code>.
+     * Constructs an <code>task.Event</code>.
      * Instantiates an event using a single string containing all the details.
      *
      * @param details Contains the description and time range for the event.
@@ -64,12 +66,12 @@ final class Event extends Task {
     }
 
     /**
-     * Turns the current <code>Task</code> into a <code>HashMap</code> that contains the necessary information to be
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
      * written into hard disk.
      *
      * @return A table contains the information.
      */
-    protected HashMap<String, Object> getInfoTable() {
+    public HashMap<String, Object> getInfoTable() {
 
         var infoTable = this.initializeInfoTable();
         infoTable.put(TIME_RANGE_FIELD, this.timeRange);

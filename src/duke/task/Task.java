@@ -1,9 +1,11 @@
+package task;
+
 import java.util.HashMap;
 
 /**
- * Represent a task that is stored by Duke.
+ * Represent a task that is stored by main.Duke.
  */
-abstract class Task {
+public abstract class Task {
 
     private boolean isDone;
     private String description;
@@ -43,7 +45,7 @@ abstract class Task {
      * @throws FailedToInterpretTaskException If the instruction (i) does not contain valid type of task; or
      * (ii) does not contain a valid description of task.
      */
-    protected static Task of(String instruction) throws FailedToInterpretTaskException {
+    public static Task of(String instruction) throws FailedToInterpretTaskException {
 
         String[] args = instruction.split(" ", 2);
         String type = args[0];
@@ -118,16 +120,16 @@ abstract class Task {
     protected abstract TaskType getType();
 
     /**
-     * Turns the current <code>Task</code> into a <code>HashMap</code> that contains the necessary information to be
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
      * written into hard disk.
      *
-     * @return The HashMap containing the information about the current <code>Task</code>.
+     * @return The HashMap containing the information about the current <code>task.Task</code>.
      */
-    protected abstract HashMap<String, Object> getInfoTable();
+    public abstract HashMap<String, Object> getInfoTable();
 
     /**
      * Initializes the information table for the current task. This table contains the (attribute, value) for all the
-     * common attributes that a <code>Task</code> contains.
+     * common attributes that a <code>task.Task</code> contains.
      *
      * @return
      */
@@ -142,12 +144,12 @@ abstract class Task {
     }
 
     /**
-     * Retrieves a <code>Task</code> from a hash table that contains the relevant data.
+     * Retrieves a <code>task.Task</code> from a hash table that contains the relevant data.
      *
-     * @param infoTable The <code>HashMap</code> that contains the data of a <code>Task</code>.
+     * @param infoTable The <code>HashMap</code> that contains the data of a <code>task.Task</code>.
      * @return The task obtained.
      */
-    protected static Task retrieveTask(HashMap<String, Object> infoTable) throws TaskNotFoundException {
+    public static Task retrieveTask(HashMap<String, Object> infoTable) throws TaskNotFoundException {
 
         TaskType taskType = (TaskType) infoTable.get(TASK_TYPE_FIELD);
 

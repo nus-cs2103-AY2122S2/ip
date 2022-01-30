@@ -1,3 +1,9 @@
+package instruction;
+
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 /**
  * Represents the instruction "unmark".
  */
@@ -17,7 +23,7 @@ final class UnmarkAsDone extends Instruction {
     }
 
     /**
-     * Constructor 2. Takes in the whole instruction line and initializes the UnmarkAsDone instruction.
+     * Constructor 2. Takes in the whole instruction line and initializes the instruction.UnmarkAsDone instruction.
      *
      * @param instruction The line of instruction. It has to be guaranteed that the first word is 'unmark'.
      * @param tasks The task manager to be used.
@@ -62,7 +68,7 @@ final class UnmarkAsDone extends Instruction {
     }
 
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
         TaskManager.markAsNotDone(this.toUnmark);
         ui.printMessage("I've marked this task as not done yet:\n" + this.toUnmark.toString());
     }

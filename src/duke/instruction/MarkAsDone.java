@@ -1,3 +1,9 @@
+package instruction;
+
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 /**
  * Represents the instruction "mark as done".
  */
@@ -18,7 +24,7 @@ final class MarkAsDone extends Instruction {
     }
 
     /**
-     * Constructor 2. Takes in the whole instruction line and initializes the MarkAsDone instruction.
+     * Constructor 2. Takes in the whole instruction line and initializes the instruction.MarkAsDone instruction.
      *
      * @param instruction The line of instruction. It has to be guaranteed that the first word is 'mark'.
      * @param tasks The task manager to be used.
@@ -63,8 +69,13 @@ final class MarkAsDone extends Instruction {
         return index;
     }
 
+    /**
+     * Performs the action to mark the encapsulated task as done.
+     *
+     * @param ui The UI to be used by this instruction.
+     */
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
         TaskManager.markAsDone(this.toMark);
         ui.printMessage("Nice! I've marked this task as done:\n     " + this.toMark.toString());
     }

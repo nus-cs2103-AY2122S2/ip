@@ -1,3 +1,5 @@
+package task;
+
 import java.util.HashMap;
 
 /**
@@ -29,8 +31,14 @@ final class ToDo extends Task {
         return TaskType.TODO;
     }
 
+
+    /**
+     * Returns a hash map that contains the data to be stored into hard disk.
+     *
+     * @return The hash map containing the data.
+     */
     @Override
-    protected HashMap<String, Object> getInfoTable() {
+    public HashMap<String, Object> getInfoTable() {
 
         var infoTable = this.initializeInfoTable();
         return infoTable;

@@ -1,3 +1,9 @@
+package instruction;
+
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 final class Delete extends Instruction {
 
     int toDeleteIndex;
@@ -51,7 +57,7 @@ final class Delete extends Instruction {
      * @return The message after deletion.
      */
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
 
         tasks.deleteIndex(toDeleteIndex);
 

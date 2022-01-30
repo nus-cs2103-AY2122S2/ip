@@ -1,3 +1,9 @@
+package instruction;
+
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 import java.util.*;
 
 /**
@@ -14,9 +20,11 @@ final class ListTasks extends Instruction {
 
     /**
      * Performs a search on the list of tasks, and return them as formatted strings.
+     *
+     * @param ui The UI to be used.
      */
     @Override
-    protected void act(Ui ui) {
+    public void act(Ui ui) {
         List<Task> tasks = this.tasks.listOfTasks();
 
         ui.printMessage(ListTasks.getTaskList(tasks));

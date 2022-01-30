@@ -1,3 +1,10 @@
+package main;
+
+import instruction.Instruction;
+import storage.Storage;
+import task.TaskManager;
+import ui.Ui;
+
 public class Duke {
 
     private Storage storage;
@@ -8,7 +15,7 @@ public class Duke {
     private static final String FILE_PATH = "data/tasks.txt";
 
     /**
-     * Constructs a Duke -- a personal task manager.
+     * Constructs a main.Duke -- a personal task manager.
      *
      * @param storage The storage to be used.
      * @param taskManager The task manager to be used.

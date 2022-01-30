@@ -1,8 +1,15 @@
+package instruction;
+
+import main.DukeException;
+import task.Task;
+import task.TaskManager;
+import ui.Ui;
+
 /**
- * A task represents an instruction inputted to Duke by a user.
+ * A task represents an instruction inputted to main.Duke by a user.
  * At this stage, a task has minimally a name (description).
  */
-abstract class Instruction {
+public abstract class Instruction {
 
     private String description;
     private static final String TERMINATE_INSTRUCTION = "bye";
@@ -31,7 +38,7 @@ abstract class Instruction {
      * @return A corresponding instance of instruction.
      * @throws DukeException If the instruction is invalid.
      */
-    protected static Instruction of(String instruction, TaskManager tasks)
+    public static Instruction of(String instruction, TaskManager tasks)
             throws DukeException {
 
         // Extract the words in the instruction. The first word should determine the type of instruction to be returned.
@@ -85,14 +92,14 @@ abstract class Instruction {
      * @param ui The UI to be used by this instruction.
      * @return The message once the instruction is executed.
      */
-    protected abstract void act(Ui ui);
+    public abstract void act(Ui ui);
 
     /**
      * Returns whether current instruction is a terminating instruction.
      *
      * @return True if current instruction is a terminating instruction.
      */
-    protected boolean isTerminatingInstruction() {
+    public boolean isTerminatingInstruction() {
         return this instanceof Quit;
     }
 }
