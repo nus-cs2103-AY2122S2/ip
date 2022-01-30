@@ -3,9 +3,8 @@ package duke.responses;
 /***
  * The response created at the start of the chatbot
  */
-public class StartResponse implements Response{
-
-    /**
+public class StartResponse implements Response {
+    /***
      * Callback function that displays the intended results
      */
     @Override

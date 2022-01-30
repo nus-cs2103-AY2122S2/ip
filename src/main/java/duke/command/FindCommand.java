@@ -6,7 +6,6 @@ import duke.responses.FindResponse;
 import duke.responses.Response;
 
 public class FindCommand extends Command {
-    
     public FindCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }

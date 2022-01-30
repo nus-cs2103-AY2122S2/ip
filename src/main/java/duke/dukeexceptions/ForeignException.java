@@ -2,7 +2,7 @@ package duke.dukeexceptions;
 
 
 public class ForeignException extends DukeException {
-    
+
     public ForeignException(String msg) {
         super(msg);
     }

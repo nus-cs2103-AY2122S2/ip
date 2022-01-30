@@ -10,8 +10,8 @@ import duke.responses.Response;
  */
 public class Command {
 
-    protected  Storage store;
-    protected  TaskList taskList;
+    protected Storage store;
+    protected TaskList taskList;
     protected String stringCmd;
 
     /***
@@ -19,10 +19,8 @@ public class Command {
      * @return Response class that would contains the UI message.
      * @throws DukeException To catch possible errors.
      */
-
-    
     public Response execute() throws DukeException {
-        return  null;
+        return null;
     };
 
     /***
@@ -30,7 +28,6 @@ public class Command {
      * @param store persist Storage
      * @param taskList local Taskist
      */
-    
     public void getResources(Storage store, TaskList taskList) {
         this.store = store;
         this.taskList = taskList;

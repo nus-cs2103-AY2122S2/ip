@@ -1,14 +1,15 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.responses.Response;
 
-import java.util.Scanner;
 
 /**
  * This is the User Interface
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructor of UI
@@ -20,7 +21,7 @@ public class Ui {
     /**
      * @return the String represent of the next line
      */
-    public String getNextLine() {   
+    public String getNextLine() {
         return sc.nextLine();
     }
 
@@ -31,6 +32,4 @@ public class Ui {
     public void callResponse(Response response) {
         response.callback();
     }
-      
-    
 }

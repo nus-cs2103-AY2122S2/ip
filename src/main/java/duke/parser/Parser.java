@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
+
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.ForeignException;
 import duke.responses.Response;
@@ -11,8 +21,7 @@ import duke.responses.WelcomeResponse;
  * Parser that deals with user inputs.
  */
 public class Parser {
-    
-    /**
+    /***
      * @return a WelcomeResponse.
      */
     public Response welcome() {
@@ -26,7 +35,7 @@ public class Parser {
     }
 
     /***
-     * 
+     * Takes in the string and returns the command
      * @param stringCmd this is the users input.
      * @return the appropriate Response based on the stringCmd.
      * @throws DukeException Error in the event of a unknown input.
@@ -50,9 +59,9 @@ public class Parser {
         case "deadline":
             return new DeadlineCommand(stringCmd);
         case "event":
-            return  new EventCommand(stringCmd);
+            return new EventCommand(stringCmd);
         case "find":
-            return  new FindCommand(stringCmd);
+            return new FindCommand(stringCmd);
         default:
             throw new ForeignException("");
         }

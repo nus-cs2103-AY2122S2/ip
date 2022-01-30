@@ -3,13 +3,12 @@ package duke.responses;
 import duke.data.TaskList;
 
 /**
- * Reponse that is created in the event of List command
+ * Response that is created in the event of List command
  */
-
 public class ListResponse implements Response {
 
-    TaskList iterate;
-    int count = 1;
+    private TaskList iterate;
+    private int count = 1;
 
     /**
      * Constructor for ListResponse.
