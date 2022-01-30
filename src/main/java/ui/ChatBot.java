@@ -10,8 +10,9 @@ import java.util.ArrayList;
  * and keeping track of its termination status.
  */
 public class ChatBot {
-    private final static String WELCOME_STRING = "Hello I'm Duke!\n"
-                                                + "What can I do for you?";
+
+    private static final String WELCOME_STRING = "Hello I'm Duke!\n"
+            + "What can I do for you?";
 
     /** Task list maintaining list of tasks for user */
     private final TaskList taskList;
@@ -23,6 +24,7 @@ public class ChatBot {
         this.taskList = taskList;
         this.hasTerminated = false;
     }
+
 
     /**
      * Performs initialisation of the ChatBot. Should be called

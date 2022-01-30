@@ -12,19 +12,10 @@ import java.util.ArrayList;
  */
 public abstract class Command {
     /** Constants for styling of printing command feedback */
-    private final static int FEEDBACK_DELIMITER_LENGTH = 25;
-    private final static int FEEDBACK_INDENT_SIZE = 4;
-    private final static String FEEDBACK_DELIMITER = "_".repeat(FEEDBACK_DELIMITER_LENGTH);
-    private final static String FEEDBACK_INDENT = " ".repeat(FEEDBACK_INDENT_SIZE);
-
-    /**
-     * Execute current command in ChatBot context.
-     *
-     * @return Whether the command is a terminating command.
-     * @throws IllegalArgumentException If the command is executed
-     * with invalid args.
-     */
-    public abstract boolean execute() throws IllegalArgumentException;
+    private static final int FEEDBACK_DELIMITER_LENGTH = 25;
+    private static final int FEEDBACK_INDENT_SIZE = 4;
+    private static final String FEEDBACK_DELIMITER = "_".repeat(FEEDBACK_DELIMITER_LENGTH);
+    private static final String FEEDBACK_INDENT = " ".repeat(FEEDBACK_INDENT_SIZE);
 
     /** Name of current command */
     private final String name;
@@ -36,6 +27,15 @@ public abstract class Command {
         this.name = name;
         this.args = args;
     }
+
+    /**
+     * Execute current command in ChatBot context.
+     *
+     * @return Whether the command is a terminating command.
+     * @throws IllegalArgumentException If the command is executed
+     * with invalid args.
+     */
+    public abstract boolean execute() throws IllegalArgumentException;
 
     /**
      * Parses user inputted command to extract

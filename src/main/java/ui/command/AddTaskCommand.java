@@ -74,6 +74,8 @@ class AddTaskCommand extends TaskListCommand {
             String time = eventInfo[1].strip();
             task = new Event(eventName, time);
             break;
+        default:
+            throw new IllegalArgumentException("Invalid task!");
         }
         return task;
     }

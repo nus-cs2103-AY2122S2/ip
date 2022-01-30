@@ -5,21 +5,16 @@ package task;
  * created by user of the ChatBot.
  */
 public abstract class Task {
-    /**
-     * Gets the string representation of current
-     * task with its name and any additional info.
-     *
-     * @return String representing current task.
-     */
-    public abstract String getDescription();
+    /** String description of current task */
+    private final String name;
 
-    /**
-     * Gets the serialised data of current task,
-     * separated by commas, for storage in disk file.
-     *
-     * @return String representing data of current task.
-     */
-    public abstract String encodeTaskData();
+    /** Whether the task is marked as done */
+    private boolean isDone;
+
+    protected Task(String name) {
+        this.name = name;
+        this.isDone = false;
+    }
 
     /**
      * Decodes task data previously saved to file to
@@ -52,17 +47,6 @@ public abstract class Task {
         return task;
     }
 
-    /** String description of current task */
-    private final String name;
-
-    /** Whether the task is marked as done */
-    private boolean isDone;
-
-    protected Task(String name) {
-        this.name = name;
-        this.isDone = false;
-    }
-
     /**
      * Get a checkbox describing whether the
      * task is done or not.
@@ -72,6 +56,22 @@ public abstract class Task {
     protected String getDoneStatusCheckbox() {
         return this.isDone ? "[X]" : "[ ]";
     }
+
+    /**
+     * Gets the string representation of current
+     * task with its name and any additional info.
+     *
+     * @return String representing current task.
+     */
+    public abstract String getDescription();
+
+    /**
+     * Gets the serialised data of current task,
+     * separated by commas, for storage in disk file.
+     *
+     * @return String representing data of current task.
+     */
+    public abstract String encodeTaskData();
 
     /**
      * Marks current task as done.

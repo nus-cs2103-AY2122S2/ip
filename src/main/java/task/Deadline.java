@@ -10,9 +10,9 @@ import java.util.Date;
  * be completed.
  */
 public class Deadline extends Task {
-    final static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
-    final static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
+    static final SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd MMM");
 
     /** Deadline for current task */
     private final Date deadline;
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      */
     private static Date parseDeadline(String dateString) throws IllegalArgumentException {
         try {
-            Date date = inputDateFormat.parse(dateString);
+            Date date = INPUT_DATE_FORMAT.parse(dateString);
             return date;
         } catch (ParseException e) {
             throw new IllegalArgumentException("Invalid date format: Dates should be in DD/MM/YYYY");
@@ -41,7 +41,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        String formattedDeadline = outputDateFormat.format(this.deadline);
+        String formattedDeadline = OUTPUT_DATE_FORMAT.format(this.deadline);
         return String.format("[D]%s %s (by: %s)",
                 super.getDoneStatusCheckbox(), super.getName(), formattedDeadline);
     }
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     @Override
     public String encodeTaskData() {
         String doneString = this.isDone() ? "Y" : "N";
-        String inputFormattedDeadline = inputDateFormat.format(this.deadline);
+        String inputFormattedDeadline = INPUT_DATE_FORMAT.format(this.deadline);
         return String.format("D,%s,%s,%s", super.getName(), doneString, inputFormattedDeadline);
     }
 }
