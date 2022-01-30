@@ -73,6 +73,7 @@ public class TaskManager {
     }
 
     public boolean markTaskUndone(int index){
+        // TODO refactor marking checks to Tasks
         if (tasks.size() <= 0){
             return false;
         } else {
