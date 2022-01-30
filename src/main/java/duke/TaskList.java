@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Represents all the tasks that the current user has.
@@ -101,7 +102,7 @@ public class TaskList {
 
         ArrayList<Task> foundTask = new ArrayList<>();
         for (Task task: taskArrayList) {
-            if (task.getDescription().contains(taskName)) {
+            if (task.getDescription().toLowerCase(Locale.ROOT).contains(taskName.toLowerCase(Locale.ROOT))) {
                 foundTask.add(task);
             }
         }
@@ -113,6 +114,7 @@ public class TaskList {
             return stringOfTasks;
         }
 
+        stringOfTasks.add(indentation + "Here are the matching tasks in your list:");
         for (Task task: foundTask) {
             stringOfTasks.add(indentation + String.valueOf(counter) + ". "  + task.toString() + task.getStatus() + " " + task.getDescription());
             counter++;
