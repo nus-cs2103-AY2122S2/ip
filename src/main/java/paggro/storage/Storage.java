@@ -23,14 +23,17 @@ import paggro.notableDate.NotableDate;
 
 public class Storage {
     File paggroData;
+    String filePath;
 
     public Storage(String filePath) {
         paggroData = new File(filePath);
+        this.filePath = filePath;
     }
 
     public Lister loadTasks() throws PaggroException {
         if (!paggroData.exists()) {
             try {
+                new File(Paths.get("").toAbsolutePath() + "/data/").mkdir();
                 paggroData.createNewFile();
             } catch (IOException e) {
                 throw new PaggroException("    Could not create paggro.txt");
@@ -112,7 +115,7 @@ public class Storage {
 
     public void addToStorage(Task task) throws IOException {
         try {
-            FileWriter fw = new FileWriter("../../../data/paggro.txt", true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(task.parseTask() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -134,8 +137,8 @@ public class Storage {
             j++;
         }
         fw.close();
-        Files.delete(Paths.get("../../../data/paggro.txt"));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+        Files.delete(Paths.get(filePath));
+        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 
@@ -155,8 +158,8 @@ public class Storage {
             j++;
         }
         fw.close();
-        Files.delete(Paths.get("../../../data/paggro.txt"));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+        Files.delete(Paths.get(filePath));
+        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 

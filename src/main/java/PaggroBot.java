@@ -43,6 +43,6 @@ public class PaggroBot {
     }
 
     public static void main(String[] args) throws IOException {
-        new PaggroBot(Paths.get("").toAbsolutePath() + "/data/paggro.txt").run();
+        new PaggroBot("./data/paggro.txt").run();
     }
 }
