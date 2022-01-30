@@ -64,24 +64,6 @@ public class TaskList {
     }
 
     /**
-     * Returns the tasks in the form of a String for printing.
-     * 
-     * @return The tasks as Strings to be printed.
-     */
-    public String getTasks() {
-        String listMsg = "";
-        int i = 1;
-        for (Task t : list) {
-            listMsg += "    " + i + "."
-                    + t.toString()
-                    + (i == list.size() ? "" : System.lineSeparator());
-            i++;
-        }
-        return listMsg;
-    }
-
-
-    /**
      * Marks the task and returns it.
      * 
      * @param idx The index of the task to be marked.
