@@ -1,12 +1,14 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of InvalidYesOrNoException.
+ * <h1>InvalidYesOrNoException</h1>
+ * <p>
  * InvalidYesOrNoException is used when conan expects the user to input only a yes or no command,
  * but the user has given a different response.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
 public class InvalidYesOrNoException extends IllegalCommandException {
 
     private final String userInput;

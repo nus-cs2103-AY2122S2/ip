@@ -1,19 +1,24 @@
 package Helper;
 
-/**
- * This file contains the implementation Storage class.
- * @author Saravanan Anuja Harish
- */
-
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+
 import Tasks.Task;
 
-
+/**
+ * <h1>Storage</h1>
+ * <p>
+ * Storage class handles the storing of tasks from the current run,
+ * and loading of tasks from the previous runs.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class Storage {
 
     // stores the location of previous task file.

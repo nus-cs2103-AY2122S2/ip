@@ -1,11 +1,13 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of WrongDateArgumentException.
+ * <h1>WrongDateArgumentException</h1>
+ * <p>
  * WrongDateArgumentException is used to raise error when the user inputs date in the wrong format.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
 public class WrongDateArgumentException extends IllegalCommandException {
 
     // Stores date string input by user.

@@ -1,13 +1,14 @@
 package Exceptions;
 
-
 /**
- * This file contains the implementation of FaultyTaskNumberException.
- * FaultyTaskNumberException is used to raise error when the user inputs a task number that is not present.
+ * <h1>FaultyTaskNumberException</h1>
+ * <p>
+ * FaultyTaskNumberException is used to raise error when the user inputs
+ * a task number that is not present.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
-
 public class FaultyTaskNumberException extends IllegalCommandException {
 
     // Stores the value of task num.

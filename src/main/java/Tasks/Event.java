@@ -1,13 +1,17 @@
 package Tasks;
 
-/**
- * @author Saravanan Anuja Harish
- * This file contains the implementation of Event class.
- */
-
 import Helper.DateHandler;
+
 import Exceptions.MissingTimeArgumentException;
 
+/**
+ * <h1>Event</h1>
+ * <p>
+ * Event handles tasks that occur at a certain time.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class Event extends Task{
 
     // Symbol for event class.
@@ -48,8 +52,6 @@ public class Event extends Task{
      * Constructor for event class.
      * @param message the text given by the user.
      * returns a new instance of Event class.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public Event(String message) {
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);

@@ -1,13 +1,15 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of EmptyCommandException.
- * EmptyCommandException is used to raise error when the user inputs an empty string or gives no input.
+ * <h1>EmptyCommandException</h1>
+ * <p>
+ * EmptyCommandException is used to raise error when the user inputs
+ * an empty string or gives no input.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
 public class EmptyCommandException extends IllegalCommandException {
-
 
     /**
      * Constructor for EmptyCommandException.

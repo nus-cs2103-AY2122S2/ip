@@ -1,13 +1,17 @@
 package Helper;
 
-/**
- * This file contains the implementation of TaskList.
- * @author Saravanan Anuja Harish
- */
-
 import java.util.ArrayList;
+
 import Tasks.Task;
 
+/**
+ * <h1>TaskList</h1>
+ * <p>
+ * TaskList is responsible for maintaining the list of user tasks.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class TaskList {
 
     // stores the list of tasks.
@@ -72,8 +76,6 @@ public class TaskList {
      * checks the tasks that are due on date.
      * @param date the due date.
      * @return a TaskList instance representing the same.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public TaskList tasksDueOn(String date) {
         DateHandler.checkValidDate(date);
@@ -91,8 +93,6 @@ public class TaskList {
      * checks the tasks that are due before date.
      * @param date the due date.
      * @return a TaskList instance representing the same.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public TaskList tasksDueBefore(String date) {
         DateHandler.checkValidDate(date);

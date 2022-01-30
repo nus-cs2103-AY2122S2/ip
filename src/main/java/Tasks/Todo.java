@@ -1,11 +1,14 @@
 package Tasks;
 
 /**
+ * <h1>Todo</h1>
+ * <p>
+ * Todo class handles the implementation of tasks that do not have
+ * time associated with them.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
- * This file contains the implementation of Todo Class.
  */
-
-
 public class Todo extends Task {
 
     // Symbol for Todo class.

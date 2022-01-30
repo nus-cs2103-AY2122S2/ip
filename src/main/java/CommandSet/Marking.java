@@ -1,14 +1,17 @@
 package CommandSet;
 
-/**
- * This file contains the implementation of Marking class.
- * @author Saravanan Anuja Harish
- */
 import Exceptions.FaultyTaskNumberException;
 import Helper.TaskList;
 import Helper.Ui;
 
-
+/**
+ * <h1>Marking</h1>
+ * <p>
+ * Marking class implements the methods are mark tasks as done or
+ * unmark them.
+ * </p>
+ * @author Saravanan Anuja Harish
+ */
 public class Marking extends Command{
 
     /**

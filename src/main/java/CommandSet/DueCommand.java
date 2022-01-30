@@ -1,13 +1,18 @@
 package CommandSet;
 
-/**
- * File contains the implementation of DueCommand class.
- * @author Saravanan Anuja Harish
- */
-
 import Helper.TaskList;
 import Helper.Ui;
 
+/**
+ * File contains the implementation of DueCommand class.
+ * <h1>DueCommand</h1>
+ * <p>
+ * DueCommand implements the command that the would returns the list of tasks
+ * that are due on a certain date or due before a certain date.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class DueCommand extends Command {
 
     // stores the command for due before.
@@ -28,8 +33,6 @@ public class DueCommand extends Command {
      * checks the tasks that are due on date.
      * @param date the due date.
      * @param taskList the list of user tasks.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public static void dueOn(String date, TaskList taskList) {
         date = date.substring(DUE_ON.length()).trim();
@@ -41,8 +44,6 @@ public class DueCommand extends Command {
      * checks the tasks that are due before date.
      * @param date the due date.
      * @param taskList the list of user tasks.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public static void dueBefore(String date, TaskList taskList) {
         date = date.substring(DUE_BEFORE.length()).trim();

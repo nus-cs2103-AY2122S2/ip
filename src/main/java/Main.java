@@ -1,18 +1,28 @@
-/**
- * @author Saravanan Anuja Harish
- * This file contains the implementation of Main class.
- */
+
 import java.util.Scanner;
 import Exceptions.EmptyCommandException;
 import Exceptions.IllegalCommandException;
 import Helper.CarryOn;
 import Helper.Ui;
+
 import Conan.Conan;
 
+/**
+ * <h1>Main</h1>
+ * <p>
+ * Main class serves as a mediator class between the user and Conan.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class Main {
 
     private final static String EMPTY_STRING = "";
 
+    /**
+     * starts the program.
+     * @param args parameter to start the main method.
+     */
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);

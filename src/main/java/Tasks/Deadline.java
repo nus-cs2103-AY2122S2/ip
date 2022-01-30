@@ -1,12 +1,18 @@
 package Tasks;
 
-/**
- * @author Saravanan Anuja Harish
- * This file contains the implementation of Deadline class.
- */
 import Helper.DateHandler;
+
 import Exceptions.MissingTimeArgumentException;
 
+/**
+ * <h1>Deadline</h1>
+ * <p>
+ * Deadline handles tasks that are supposed to be completed before
+ * a certain date.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class Deadline extends Task {
 
     // Symbol for Deadline class.
@@ -47,8 +53,6 @@ public class Deadline extends Task {
      * Constructor for Deadline class.
      * @param message the text given by the user.
      * return an instance of deadline.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public Deadline(String message) {
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
@@ -115,7 +119,6 @@ public class Deadline extends Task {
 
     /**
      * returns the string representation of the Deadline object.
->>>>>>> branch-Level-7
      * @return the string representation of the instance.
      */
     @Override

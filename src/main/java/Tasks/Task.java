@@ -1,11 +1,14 @@
 package Tasks;
 
 /**
+ * <h1>Task</h1>
+ * <p>
+ * Tasks contains the operations that can be performed on task.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Task class.
  */
-
-
 public class Task {
 
     // symbol for indicating task is completed.

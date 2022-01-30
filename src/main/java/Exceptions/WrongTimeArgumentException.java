@@ -1,11 +1,13 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of WrongTimeArgumentException.
+ * <h1>WrongTimeArgumentException</h1>
+ * <p>
  * WrongTimeArgumentException is used to raise error when the user inputs time in the wrong format.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
 public class WrongTimeArgumentException extends IllegalCommandException {
 
     // Stores date string input by user.

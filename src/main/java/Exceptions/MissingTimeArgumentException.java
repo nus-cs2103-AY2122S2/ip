@@ -1,13 +1,14 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of MissingTimeArgumentException.
+ * <h1>MissingTimeArgumentException</h1>
+ * <p>
  * MissingTimeArgumentException is used to raise error when the time argument of deadline
  * and event tasks are not specified in user input.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
-
 public class MissingTimeArgumentException extends MissingTaskArgumentException {
 
     // stores the user message.

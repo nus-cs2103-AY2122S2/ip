@@ -1,12 +1,13 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of MissingTaskArgumentException.
+ * <h1>MissingTaskArgumentException</h1>
+ * <p>
  * This Exception class throws exception when the task argument is missing in the user input.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
-
 public class MissingTaskArgumentException extends IllegalCommandException {
 
     // stores the user input.

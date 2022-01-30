@@ -1,16 +1,20 @@
 package Helper;
 
-/**
- * This file contains the implementation of DatHandler class.
- * @author  Saravanan Anuja Harish
- */
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+
 import Exceptions.WrongDateArgumentException;
 import Exceptions.WrongTimeArgumentException;
 
+/**
+ * <h1>DateHandler</h1>
+ * <p>
+ * DateHandler task handles the operation related to the dates associated with tasks.
+ * </p>
+ *
+ * @author  Saravanan Anuja Harish
+ */
 public class DateHandler {
 
     // Separator to split deadline substring.
@@ -69,6 +73,11 @@ public class DateHandler {
         }
     }
 
+    /**
+     * Constructor for DateHandler.
+     * @param date the date associated with the task from the previous runs.
+     * @param dummyVariable to differentiate between the constructors.
+     */
     public DateHandler(String date, int dummyVariable) {
 
         String[] strings = date.split(SPACE);

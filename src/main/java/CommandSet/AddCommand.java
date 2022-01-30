@@ -1,15 +1,24 @@
 package CommandSet;
 
-/**
- * File contains the implementation of AddCommand class.
- * @author Saravanan Anuja Harish
- */
 import Helper.Storage;
-import Exceptions.MissingTimeArgumentException;
 import Helper.TaskList;
 import Helper.Ui;
-import Tasks.*;
 
+import Tasks.Task;
+import Tasks.Todo;
+import Tasks.Deadline;
+import Tasks.Event;
+
+import Exceptions.MissingTimeArgumentException;
+
+/**
+ * <h1>AddCommand<h1/>
+ * <p>
+ * AddCommand class adds tasks to the list of user tasks.
+ *</p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class AddCommand extends Command {
 
     // space
@@ -43,8 +52,6 @@ public class AddCommand extends Command {
      * @param taskList the list of user tasks.
      * @param text the string of the task to be added.
      * @throws MissingTimeArgumentException if the user missed time argument out.
-     * @throw WrongDateArgumentException if the user inputs an invalid date.
-     * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public static void add(TaskList taskList, String text) {
 

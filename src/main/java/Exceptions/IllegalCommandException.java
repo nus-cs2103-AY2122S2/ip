@@ -1,11 +1,13 @@
 package Exceptions;
 
 /**
- * This file contains the implementation of IllegalCommandException.
+ * <h1>IllegalCommandException</h1>
+ * <p>
  * IllegalCommandException is used to raise an error when invalid arguments are fed.
+ * </p>
+ *
  * @author Saravanan Anuja Harish
  */
-
 public class IllegalCommandException extends IllegalArgumentException {
 
     /**

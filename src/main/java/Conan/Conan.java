@@ -1,18 +1,29 @@
 package Conan;
 
-/**
- * @author Saravanan Anuja Harish
- * This file contains the implementation of Conan class.
- */
 import Helper.TaskList;
 import Helper.Storage;
 import Helper.Ui;
 import Helper.CarryOn;
+
 import Exceptions.InvalidYesOrNoException;
 import Exceptions.IllegalCommandException;
-import CommandSet.*;
 
+import CommandSet.AddCommand;
+import CommandSet.ByeCommand;
+import CommandSet.CommandChecker;
+import CommandSet.Commands;
+import CommandSet.DeleteCommand;
+import CommandSet.DueCommand;
+import CommandSet.Marking;
 
+/**
+ * <h1>Conan</h1>
+ * <p>
+ * Conan class contains the implementation of the task manager.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class Conan {
 
     // used as a temporary value placeholder.
@@ -43,7 +54,7 @@ public class Conan {
     }
 
     /**
-     * updates the username, returns true if there was a simiar user previously.
+     * updates the username, returns true if there was a similar user previously.
      * @param username the name of the user.
      */
     public boolean tellName(String username) {
@@ -100,6 +111,12 @@ public class Conan {
 
     }
 
+    /**
+     * implements the user command.
+     * @param message the user input.
+     * @return CarryOn.NEXT if the user wants to continue;
+     * or CarryOn.STOP if the user wants to stop.
+     */
     public CarryOn tell(String message) {
         CarryOn carryOn = CarryOn.NEXT;
         try {

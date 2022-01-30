@@ -1,15 +1,20 @@
 package CommandSet;
 
-/**
- * This file contains the implementation of DeleteCommand class.
- * @author Saravanan Anuja Harish
- */
-
 import Helper.TaskList;
 import Helper.Ui;
+
 import Tasks.Task;
+
 import Exceptions.FaultyTaskNumberException;
 
+/**
+ * <h1>DeleteCommand</h1>
+ * <p>
+ * DeleteCommand deletes a task from the list of user tasks.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class DeleteCommand extends Command {
 
     /**

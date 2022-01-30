@@ -1,13 +1,17 @@
 package CommandSet;
 
-/**
- * This file contains the implementation of CommandChecker.
- * @author Saravanan Anuja Harish
- */
 import Exceptions.InvalidYesOrNoException;
 import Exceptions.MissingTaskArgumentException;
 import Exceptions.IllegalCommandException;
 
+/**
+ * <h1>CommandChecker</h1>
+ * <p>
+ * CommandChecker class checks the user input and returns the type of command input by the user.
+ * </p>
+ *
+ * @author Saravanan Anuja Harish
+ */
 public class CommandChecker {
 
     // space
