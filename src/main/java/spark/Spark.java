@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import spark.commands.commandtypes.Command;
@@ -96,6 +97,26 @@ public class Spark extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        /* Step 2: Formatting the window to look as expected */
+        stage.setTitle("Spark");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        mainLayout.setPrefSize(400.0, 600.0);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        tasksContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        userInput.setPrefWidth(325.0);
+        runButton.setPrefWidth(55.0);
+        // position list of tasks to the top of window
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        // position user-input to bottom left of window
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        // position run button to bottom-right of window
+        AnchorPane.setBottomAnchor(runButton, 1.0);
+        AnchorPane.setRightAnchor(runButton, 1.0);
     }
 
     public static void main(String[] args) {
