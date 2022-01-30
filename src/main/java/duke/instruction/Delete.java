@@ -20,12 +20,25 @@ final class Delete extends Instruction {
         this(parseInstruction(instruction, tasks), tasks);
     }
 
+    /**
+     * A helper constructor that helps to construct a delete instruction.
+     * @param index The index of the task to be deleted.
+     * @param tasks The task manager to be used.
+     */
     private Delete(int index, TaskManager tasks) {
         super("delete", tasks);
         this.toDeleteIndex = index;
         this.toDelete = tasks.getTaskIndex(index);
     }
 
+    /**
+     * Parses the instruction and returns the index to be deleted.
+     *
+     * @param instruction The instruction to be interpreted.
+     * @param tasks The task manager to be used.
+     * @return The index of the task to be deleted.
+     * @throws InvalidInstructionException If unable to interpret the instruction.
+     */
     private static int parseInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
         String[] args = instruction.split(" ");

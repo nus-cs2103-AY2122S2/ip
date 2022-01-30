@@ -78,11 +78,21 @@ final class Event extends Task {
         return infoTable;
     }
 
+    /**
+     * Returns the icon that represents the type of the task.
+     *
+     * @return The icon.
+     */
     @Override
     protected String getTypeIcon() {
         return "[E]";
     }
 
+    /**
+     * Returns the type of the current task.
+     *
+     * @return The type of the task.
+     */
     @Override
     protected TaskType getType() {
         return TaskType.EVENT;

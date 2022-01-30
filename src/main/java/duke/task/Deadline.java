@@ -46,6 +46,11 @@ final class Deadline extends Task {
         this(parseDetails(details));
     }
 
+    /**
+     * Constructs a <code>Deadline</code> task with a hash map that contains the necessary information.
+     *
+     * @param infoTable The hash map with the necessary information.
+     */
     public Deadline(HashMap<String, Object> infoTable) {
         super(infoTable);
         this.dueTime = (LocalDate) infoTable.get(DUE_TIME_FIELD);
@@ -71,16 +76,33 @@ final class Deadline extends Task {
         return args;
     }
 
+    /**
+     * Returns the icon that represents the type of the task.
+     *
+     * @return The icon.
+     */
     @Override
     protected String getTypeIcon() {
         return "[D]";
     }
 
+    /**
+     * Returns the type of the current task.
+     *
+     * @return The type of the task.
+     */
     @Override
     protected TaskType getType() {
         return TaskType.DEADLINE;
     }
 
+
+    /**
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
+     * written into hard disk.
+     *
+     * @return The HashMap containing the information about the current <code>task.Task</code>.
+     */
     @Override
     public HashMap<String, Object> getInfoTable() {
 

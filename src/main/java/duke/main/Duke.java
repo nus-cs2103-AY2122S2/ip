@@ -5,6 +5,9 @@ import main.java.duke.storage.Storage;
 import main.java.duke.task.TaskManager;
 import main.java.duke.ui.Ui;
 
+/**
+ * The main class that creates a Duke -- a task manager, and runs the program.
+ */
 public class Duke {
 
     private Storage storage;
@@ -27,6 +30,12 @@ public class Duke {
         this.ui = ui;
     }
 
+    /**
+     * The main method to be called.
+     * It initializes the task manager and cleans up when the program exits.
+     *
+     * @param args Not used.
+     */
     public static void main(String[] args) {
 
         Storage storage = new Storage(FILE_PATH);
@@ -40,6 +49,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the task manager, by taking user commands and executing them.
+     */
     private void run() {
 
         ui.printWelcomeMessage();

@@ -77,6 +77,11 @@ public abstract class Instruction {
         }
     }
 
+    /**
+     * Sets the description of the instruction.
+     *
+     * @param description The description of the instruction.
+     */
     protected void setDescription(String description) {
         this.description = description;
     }
