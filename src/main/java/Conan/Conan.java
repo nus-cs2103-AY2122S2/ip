@@ -1,3 +1,5 @@
+package Conan;
+
 /**
  * @author Saravanan Anuja Harish
  * This file contains the implementation of Conan class.
@@ -29,7 +31,7 @@ public class Conan {
      * Constructor returns a new Conan object.
      * returns a new Conan instance.
      */
-    Conan() {
+    public Conan() {
         Ui.printSeparator();
         Ui.greeting();
 
@@ -44,7 +46,7 @@ public class Conan {
      * updates the username, returns true if there was a simiar user previously.
      * @param username the name of the user.
      */
-    boolean tellName(String username) {
+    public boolean tellName(String username) {
 
         boolean isSimilarUser = false;
         String previousUser = EMPTY_STR_FILLER;
@@ -74,7 +76,7 @@ public class Conan {
      * @param userInput the userInput
      * @return true is successful, false if the user typed invalid input.
      */
-    boolean continueFromLastTime(String userInput) {
+    public boolean continueFromLastTime(String userInput) {
 
         boolean isSuccessful = true;
 
@@ -98,7 +100,7 @@ public class Conan {
 
     }
 
-    CarryOn tell(String message) {
+    public CarryOn tell(String message) {
         CarryOn carryOn = CarryOn.NEXT;
         try {
             Ui.printSeparator();
