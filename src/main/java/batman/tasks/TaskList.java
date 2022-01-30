@@ -133,8 +133,7 @@ public class TaskList {
         }
         if (temp.size() == 0) {
             sb.append("No matching tasks in your list.\n");
-        }
-        else {
+        } else {
             sb.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < temp.size(); i++) {
                 sb.append(i + 1).append(". ").append(temp.get(i)).append("\n");

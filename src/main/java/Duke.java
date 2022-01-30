@@ -42,9 +42,8 @@ public class Duke {
             ui.showLoadingError(e.getMessage());
         }
     }
-    
     /**
-     * Creates a Duke object and runs the chatbot
+     * Creates a Duke object and runs the chatbot.
      */
     public static void main(String[] args) {
         Duke chatBot = new Duke("/data/tasks.txt");
