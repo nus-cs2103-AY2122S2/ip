@@ -14,10 +14,7 @@ public class Storage {
 
     public void saveData() throws IOException {
         try {
-            File file = new File("../../../data/duke.txt");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            File file = new File(this.filePath);
 
             boolean createDirectory = file.getParentFile().mkdirs();
             boolean created = file.createNewFile();
@@ -45,10 +42,9 @@ public class Storage {
     }
 
     public void loadData() throws IOException {
-        File file = new File("../../../data/duke.txt");
-        if(!file.exists()) {
-            file.createNewFile();
-        }
+        File file = new File(this.filePath);
+        boolean createDirectory = file.getParentFile().mkdirs();
+        boolean created = file.createNewFile();
 
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
@@ -56,31 +52,33 @@ public class Storage {
             String[] commandWords = input.split(" \\| ", 4);
             Task task = null;
             switch (commandWords[0]) {
-                case "D" -> {
+                case "D":
                     task = new Deadline(commandWords[2], commandWords[3]);
                     display(input);
-                }
-                case "E" -> {
+                    break;
+                case "E":
                     task = new Event(commandWords[2], commandWords[3]);
                     display(input);
-                }
-                case "T" -> {
+                    break;
+                case "T":
                     task = new ToDo(commandWords[2]);
                     String text = "T | " + (task.isDone ? "1" : "0") + " | " + task.description + '\n';
                     display(input);
+                    break;
+                default:
+                    System.err.println("error!!");
+                    break;
+            }
+
+                if (commandWords[1].equals("1")) {
+                    task.isComplete();
                 }
-                default -> System.err.println("error!!");
+                TaskList.dukeList.add(task);
             }
-
-            if (commandWords[1].equals("1")) {
-                task.isComplete();
-            }
-            TaskList.dukeList.add(task);
+            sc.close();
         }
-        sc.close();
-    }
 
-    public void display(String string) {
-        System.out.println(string);
+        public void display (String string){
+            System.out.println(string);
+        }
     }
-}

@@ -23,18 +23,18 @@ public class Duke {
     public Duke() {
 
         ui = new Ui();
-        this.storage = new Storage("../../../data/duke.txt");
+        this.storage = new Storage("./data/duke.txt");
     }
 
-    public void startDuke() throws DukeException, IOException{
+    public void startDuke() throws DukeException, IOException {
         storage.loadData();
         ui.displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
-        while(!command.equals("Bye")) {
+        while(!command.equalsIgnoreCase("Bye")) {
             ui.executeCommand(command, description);
             command = sc.next();
-            if(!command.equals("Bye")) {
+            if(!command.equalsIgnoreCase("Bye")) {
                 description = sc.nextLine();
             }
             storage.saveData();
