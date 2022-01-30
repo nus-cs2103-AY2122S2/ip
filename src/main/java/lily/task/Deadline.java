@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Create a Deadline object.

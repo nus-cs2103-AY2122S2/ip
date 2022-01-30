@@ -1,7 +1,5 @@
 package lily.task;
 
-import lily.task.LilyException;
-
 import java.io.Serializable;
 
 /**
@@ -11,8 +9,8 @@ import java.io.Serializable;
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Task implements Serializable{
-    protected String desc;    
-    protected boolean isDone;    
+    private String desc;    
+    private boolean isDone;    
 
     /**
      * Create a Task.

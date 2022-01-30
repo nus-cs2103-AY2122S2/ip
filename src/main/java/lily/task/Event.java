@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Create an Event object.

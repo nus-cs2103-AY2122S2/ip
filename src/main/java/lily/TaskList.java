@@ -50,7 +50,7 @@ public class TaskList {
      * 
      * @return the number of elements in this list.
      */
-    public int size() {
+    public int getSize() {
         return list.size();
     }
 
@@ -89,8 +89,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index exceeds the list.
      * @throws LilyException If user has finished the task already.
      */
-    public Task mark(int idx) throws IndexOutOfBoundsException, 
-            LilyException {
+    public Task mark(int idx) throws IndexOutOfBoundsException, LilyException {
                     /*
                      * if input doesn't have an int, ask which number you want to mark .
                      */
@@ -107,8 +106,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index exceeds the list.
      * @throws LilyException If user hasn't done the task yet.
      */
-    public Task unmark(int idx) throws IndexOutOfBoundsException, 
-            LilyException {
+    public Task unmark(int idx) throws IndexOutOfBoundsException, LilyException {
         Task t = list.get(idx);
         t.unmark();
         return t;

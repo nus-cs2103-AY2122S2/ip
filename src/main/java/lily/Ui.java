@@ -13,8 +13,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String LS = System.lineSeparator();
     private static final String INDENT = "    ";
-    private static final String DIVIDER = 
-            "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼" + LS;
+    private static final String DIVIDER = "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼" + LS;
     private static Scanner userInput;
     private boolean couldLoad;
 
@@ -160,6 +159,7 @@ public class Ui {
      */
     public void showTaskAdded(Task t, int size) {
         String plural = size == 1 ? " task " : " tasks ";
+
         prettyPrint("i've dumped this into your list:" + LS
                 + INDENT + t.toString() + LS
                 + INDENT + "so now you have " + size + plural 

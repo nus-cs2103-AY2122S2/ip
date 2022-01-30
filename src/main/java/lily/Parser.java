@@ -12,9 +12,9 @@ import java.time.format.DateTimeParseException;
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Parser {
-    TaskList tasks;
-    Ui ui;
-    Storage st;
+    private TaskList tasks;
+    private Ui ui;
+    private Storage st;
     private String sentence;
     private String[] parsedSentence;
     private String command;
@@ -63,18 +63,19 @@ public class Parser {
                     break;
     
                 case "todo":
-                    ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.size());
+                    ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.getSize());
                     break;
                 case "deadline":
                     String[] parsedDeadline = findDeadlineDescStart(sentence);
-                    ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.size());
+                    ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.getSize());
                     break;
                 case "event":
                     String[] parsedEvent = findEventDescStart(sentence);
-                    ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.size());
+                    ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.getSize());
                     break;
     
                 case "delete":
+                // Fallthrough
                 case "remove":
                     ui.showTaskRemoved(tasks.remove(
                             Integer.parseInt(parsedSentence[1]) - 1), 
