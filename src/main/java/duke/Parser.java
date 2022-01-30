@@ -16,7 +16,7 @@ public class Parser {
         String firstWord = strArr[0];
         if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")
                 || firstWord.equals("list") || firstWord.equals("delete") || firstWord.equals("unmark")
-                || firstWord.equals("mark") || firstWord.equals("find")) {
+                || firstWord.equals("mark") || firstWord.equals("find") || firstWord.equals("bye")) {
             if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo"))
                     && strArr.length == 1) {
                 throw new MissingDescriptionException();

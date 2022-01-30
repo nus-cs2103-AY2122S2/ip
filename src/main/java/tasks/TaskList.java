@@ -63,6 +63,5 @@ public class TaskList {
      */
     public void addTask(Task t) {
         tasks.add(t);
-        System.out.println("Woofkay, I have added this task: \n " + t);
     }
 }

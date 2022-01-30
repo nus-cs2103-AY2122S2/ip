@@ -10,10 +10,10 @@ public class Ui {
     public Ui() {
         welcomeMessage =
                 "       __  \n"
-                + "(____()'`; \n"
-                + "/,    /` \n"
-                + "\\\\\"--\\\\\n"
-                + "Woof, I am (supposed to look like) a dog bot.\nWhat do you want from me?\n";
+                        + "(____()'`; \n"
+                        + "/,    /` \n"
+                        + "\\\\\"--\\\\\n"
+                        + "Woof, I am (supposed to look like) a dog bot.\nWhat do you want from me?\n";
 
         byeMessage = "Bye! Hope not to see you again :)";
     };
@@ -27,13 +27,13 @@ public class Ui {
     /**
      * Prints a welcome message to user.
      */
-    public void printWelcomeMessage() {
-        System.out.println(welcomeMessage);
+    public String getWelcomeMessage() {
+        return welcomeMessage;
     }
     /**
      * Prints a message to signal the termination of program.
      */
-    public void printByeMessage() {
-        System.out.println(byeMessage);
+    public String getByeMessage() {
+        return byeMessage;
     }
 }
