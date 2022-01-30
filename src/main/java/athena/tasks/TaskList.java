@@ -16,29 +16,41 @@ public class TaskList {
     // Known bug - code will break if user input includes |
     public TaskList(List<String> taskListSaveFormat) {
         this();
+
+        // Create the appropriate task based on each line of the save file and add to taskList
         for (int i = 0; i < taskListSaveFormat.size(); i++) {
+            // Extract parameters of tasks from the save format
             String taskSaveFormat = taskListSaveFormat.get(i);
             String[] taskParams = taskSaveFormat.split("\\|");
-            switch (taskParams[0]) {
+            String taskIcon = taskParams[0];
+            boolean isTaskDone = taskParams[1].equals("1");
+            String taskName = taskParams[2];
+            String taskDateTime = "";
+            if (taskParams.length >= 4) {
+                taskDateTime = taskParams[3];
+            }
+
+            // Add the task with corresponding parameters to the task list.
+            switch (taskIcon) {
             case "T":
-                taskList.add(new Todo(taskParams[2]));
+                taskList.add(new Todo(taskName));
                 break;
             case "E":
-                taskList.add(new Event(taskParams[2], taskParams[3]));
+                taskList.add(new Event(taskName, taskDateTime));
                 break;
             case "D":
-                taskList.add(new Deadline(taskParams[2], taskParams[3]));
+                taskList.add(new Deadline(taskName, taskDateTime));
                 break;
             default:
                 break;
             }
-            if (taskParams[1].equals("1")) {
-                markTaskAsDone(i + 1);
+            if (isTaskDone) {
+                setTaskAsDone(i + 1);
             }
         }
     }
 
-    public void resetLastModified() {
+    public void setNotModified() {
         wasModified = false;
     }
 
@@ -69,21 +81,18 @@ public class TaskList {
         return getNumberOfTasks();
     }
 
-    // Return the relevant Task in string form
-    public void markTaskAsDone(int taskNumber) {
+    public void setTaskAsDone(int taskNumber) {
         Task task = taskList.get(taskNumber - 1); // assume valid taskNumber
-        task.markAsDone();
+        task.setDone();
         wasModified = true;
     }
 
-    // Return the relevant Task in string form
-    public void markTaskAsNotDone(int taskNumber) {
+    public void setTaskAsNotDone(int taskNumber) {
         Task task = taskList.get(taskNumber - 1); // assume valid taskNumber
-        task.markAsNotDone();
+        task.setNotDone();
         wasModified = true;
     }
 
-    // Return the deleted Task in String form. Assume valid inputs.
     public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
         wasModified = true;

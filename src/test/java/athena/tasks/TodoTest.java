@@ -13,21 +13,21 @@ class TodoTest {
     static void init() {
         unmarkedTodo = new Todo("grocery shopping");
         markedTodo = new Todo("birthday");
-        markedTodo.markAsDone();
+        markedTodo.setDone();
     }
 
     @Test
     void markAsDone() {
         Todo todo = new Todo("a");
-        todo.markAsDone();
+        todo.setDone();
         assertEquals("[T][X] a", todo.toString());
     }
 
     @Test
     void markAsNotDone() {
         Todo todo = new Todo("a");
-        todo.markAsDone();
-        todo.markAsNotDone();
+        todo.setDone();
+        todo.setNotDone();
         assertEquals("[T][ ] a", todo.toString());
     }
 

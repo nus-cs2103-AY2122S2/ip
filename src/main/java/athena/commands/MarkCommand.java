@@ -31,7 +31,7 @@ public class MarkCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList) throws InputException {
         if (taskList.isValidTaskNumber(taskNumber)) {
-            taskList.markTaskAsDone(taskNumber);
+            taskList.setTaskAsDone(taskNumber);
             ui.sayText("Alright, I've marked the following task as done:");
             ui.showTask(taskNumber);
         } else {

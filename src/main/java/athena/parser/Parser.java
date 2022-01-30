@@ -35,31 +35,32 @@ public class Parser {
         // Separate out the command keyword from the other arguments given
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
-        String arguments = "";
+        String remainingInput = "";
         if (splitInput.length > 1) {
-            arguments = splitInput[1];
+            remainingInput = splitInput[1];
         }
+
         // Generate command object to return
         switch (command) {
         case "todo":
-            return new TodoCommand(getTaskNameFromInput(arguments));
+            return new TodoCommand(getTaskNameFromInput(remainingInput));
             // No fallthrough necessary
         case "deadline":
-            return new DeadlineCommand(getTaskNameFromInput(arguments),
-                    getDateTimeFromInput(arguments, "/by"));
+            return new DeadlineCommand(getTaskNameFromInput(remainingInput),
+                    getDateTimeFromInput(remainingInput, "/by"));
             // No fallthrough necessary
         case "event":
-            return new EventCommand(getTaskNameFromInput(arguments),
-                    getDateTimeFromInput(arguments, "/at"));
+            return new EventCommand(getTaskNameFromInput(remainingInput),
+                    getDateTimeFromInput(remainingInput, "/at"));
             // No fallthrough necessary
         case "mark":
-            return new MarkCommand(getTaskNumberFromInput(arguments));
+            return new MarkCommand(getTaskNumberFromInput(remainingInput));
             // No fallthrough necessary
         case "unmark":
-            return new UnmarkCommand(getTaskNumberFromInput(arguments));
+            return new UnmarkCommand(getTaskNumberFromInput(remainingInput));
             // No fallthrough necessary
         case "delete":
-            return new DeleteCommand(getTaskNumberFromInput(arguments));
+            return new DeleteCommand(getTaskNumberFromInput(remainingInput));
             // No fallthrough necessary
         case "list":
             return new ListCommand();
@@ -98,6 +99,7 @@ public class Parser {
         if (!input.contains(keyword)) {
             throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);
         } else {
+            // Split by keyword, take the latter part.
             String dateTimeString = input.split(keyword, 2)[1].strip();
             if (dateTimeString.isEmpty()) {
                 throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);

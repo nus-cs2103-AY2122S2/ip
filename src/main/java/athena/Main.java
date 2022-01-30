@@ -28,9 +28,8 @@ public class Main {
      * requisite objects and data structures.
      */
     public Main() {
-        // Load save data if present
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
-        initTaskList();
+        initTaskList(); // Load save data if present
         ui = new Ui(taskList);
         isActive = true;
         ui.sayText("Greetings! My name is Athena. What can I help you with?");
@@ -74,7 +73,7 @@ public class Main {
         if (taskList.wasModified()) {
             try {
                 storage.saveToDisk(taskList);
-                taskList.resetLastModified();
+                taskList.setNotModified();
             } catch (IOException e) {
                 ui.sayText("I encountered a problem saving to disk: " + e.getMessage());
             }
