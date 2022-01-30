@@ -33,6 +33,9 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 String taskNumber = input.substring(7);
                 taskList.deleteTask(taskNumber);
+            } else if (input.startsWith("find")) {
+                String description = input.substring(5);
+                taskList.findTask(taskList, description);
             } else {
                 throw new DukeException(ERROR_UNKNOWN);
             }
