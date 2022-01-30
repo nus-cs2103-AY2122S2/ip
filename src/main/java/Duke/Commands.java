@@ -8,15 +8,31 @@ public class Commands {
     private final ListStorage myStorage;
     private final Printer myPrinter;
 
+    /**
+     * Constructor for Commands. Commands contain a ListStorage
+     * and Printer class.
+     *
+     * @param listStorage Specifies a ListStorage to store commands
+     * @param printer Printer to print commands.
+     */
     public Commands(ListStorage listStorage, Printer printer) {
         this.myStorage = listStorage;
         this.myPrinter = printer;
     }
 
+    /**
+     * Prints goodbye message.
+     */
     public void cmdBye() {
         myPrinter.printBye();
     }
 
+    /**
+     * Parses ToDo command. Parses command and description.
+     *
+     * @param cmd Command to be parsed.
+     * @throws EmptyMessageException Throws exception when there is no description.
+     */
     public void cmdTodo(String cmd) throws EmptyMessageException {
         String[] parsedCmd = Parser.parseCmdAndDes(cmd);
         if (cmd.length() == 4) {
@@ -28,6 +44,13 @@ public class Commands {
         myPrinter.printTask(newTask, myStorage.length());
     }
 
+    /**
+     * Parses Deadline command. Parses description and deadline.
+     *
+     * @param cmd Command to be parsed.
+     * @throws EmptyMessageException Thrown when there is no description.
+     * @throws WrongDateFormatException Thrown when date format is wrong.
+     */
     public void cmdDeadline(String cmd) throws EmptyMessageException, WrongDateFormatException {
         if (cmd.length() == 8) {
             throw new EmptyMessageException("Deadline Error");
@@ -53,6 +76,13 @@ public class Commands {
         myPrinter.printTask(newTask, myStorage.length());
     }
 
+    /**
+     * Parses Event command. Parses description and event timing.
+     *
+     * @param cmd Command to be parsed
+     * @throws EmptyMessageException Thrown when there is no description.
+     * @throws WrongDateFormatException Thwon when date format is wrong.
+     */
     public void cmdEvent(String cmd) throws EmptyMessageException, WrongDateFormatException{
         if(cmd.length() == 5) {
             throw new EmptyMessageException("Event Error");
@@ -77,6 +107,10 @@ public class Commands {
         myPrinter.printTask(newTask, myStorage.length());
     }
 
+    /**
+     * Parses list command. Handles empty lists and
+     * lists with multiple tasks.
+     */
     public void cmdList() {
         if (myStorage.length() == 0) {
             myPrinter.printEmptyList();
@@ -85,16 +119,31 @@ public class Commands {
         }
     }
 
+    /**
+     * Handles Unmark command.
+     *
+     * @param taskNumber Task number of task to be unmarked.
+     */
     public void cmdUnmark(int taskNumber) {
         myStorage.findTask(taskNumber).unmark();
         myPrinter.printUnmark(myStorage, taskNumber);
     }
 
+    /**
+     * Handles mark command.
+     *
+     * @param taskNumber Task number of task to be marked.
+     */
     public void cmdMark(int taskNumber) {
         myStorage.findTask(taskNumber).markAsDone();
         myPrinter.printMark(myStorage, taskNumber);
     }
 
+    /**
+     * Handles delete command.
+     *
+     * @param taskNumber Task number of task to be deleted.
+     */
     public void cmdDelete(int taskNumber) {
         myPrinter.printDelete(myStorage, taskNumber);
         myStorage.deleteTask(taskNumber);
