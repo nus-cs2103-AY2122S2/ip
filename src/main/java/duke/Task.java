@@ -29,6 +29,8 @@ public class Task {
 
     /**
      * Prints out the status of the task and the details
+     *
+     * @return boolean value of whether task is or is not done
      */
     public boolean getDone() {
         return this.done;
