@@ -4,6 +4,6 @@ import spark.exceptions.SparkException;
 
 public class TaskNotFoundException extends SparkException {
     public TaskNotFoundException() {
-        super("I couldn't find the Task that you wanted :(");
+        super("Wait a minute... that Task does not seem to exist");
     }
 }
