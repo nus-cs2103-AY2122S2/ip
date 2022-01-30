@@ -43,6 +43,11 @@ public class Task {
         System.out.println("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
     }
 
+    @Override
+    public String toString() {
+        return "[" + (this.isCompleted ? "x" : " ") + "] " + this.description + "\n";
+    }
+
     /**
      * Returns String array of details of task
      * Index 1: Completed

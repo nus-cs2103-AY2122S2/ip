@@ -6,12 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /**
  * Main class
@@ -25,6 +26,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private TaskList list = DataStore.loadData();
 
     /**
      * Runs the Duke Program
@@ -46,19 +48,19 @@ public class Duke extends Application {
 
             switch (actionType) {
             case LIST:
-                list.print();
+                System.out.println(list.toString());
                 break;
             case MARK:
                 indexOfList = Integer.parseInt(parsedInput[0]);
                 list.markComplete(indexOfList);
                 System.out.println("Marked as complete");
-                list.print(indexOfList);
+                System.out.println(list.toString(indexOfList));
                 break;
             case UNMARK:
                 indexOfList = Integer.parseInt(parsedInput[0]);
                 list.markIncomplete(indexOfList);
                 System.out.println("Marked as incomplete");
-                list.print(indexOfList);
+                System.out.println(list.toString(indexOfList));
                 break;
             case EVENT:
                 try {
@@ -108,12 +110,12 @@ public class Duke extends Application {
             case DELETE:
                 indexOfList = Integer.parseInt(parsedInput[0]);
                 System.out.println("Noted. I've removed this task:");
-                list.print(indexOfList);
+                System.out.print(list.toString(indexOfList));
                 list.delete(indexOfList);
-                System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
+                System.out.println("Now you have " + list.getLength() + " tasks in the list.");
                 break;
             case FIND:
-                list.findTask(parsedInput[0]);
+                System.out.println(list.findTask(parsedInput[0]));
                 break;
             default:
                 break;
@@ -131,6 +133,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -179,7 +182,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-//Part 3. Add functionality to handle user input.
+        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -225,7 +228,106 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        // Parse input
+        String[] inputs = input.split(" ", 2);
+        Command actionType = null;
+        String[] parsedInputs = new String[2];
+        String output = "";
+        try {
+            actionType = Parser.parseCommand(inputs[0]);
+        } catch (CommandNotFoundException e) {
+            return e.getMessage();
+        }
+        if (inputs.length != 1) {
+            parsedInputs = Parser.parseInput(inputs[1]);
+        } else {
+            parsedInputs[0] = "";
+        }
+
+        int indexOfList = -1;
+        Boolean wasAddSuccess = null;
+
+
+        switch (actionType) {
+        case LIST:
+            output += list.toString();
+            break;
+        case MARK:
+            indexOfList = Integer.parseInt(parsedInputs[0]);
+            list.markComplete(indexOfList);
+            output += "Marked as complete \n";
+            output += list.toString(indexOfList);
+            break;
+        case UNMARK:
+            indexOfList = Integer.parseInt(parsedInputs[0]);
+            list.markIncomplete(indexOfList);
+            output += "Marked as incomplete \n";
+            output += list.toString(indexOfList);
+            break;
+        case EVENT:
+            try {
+                wasAddSuccess = list.add(TaskType.EVENT, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += "Number of tasks: ";
+            output += list.getLength();
+            break;
+        case DEADLINE:
+            try {
+                wasAddSuccess = list.add(TaskType.DEADLINE, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += "Number of tasks: ";
+            output += list.getLength();
+            break;
+        case TODO:
+            try {
+                wasAddSuccess = list.add(TaskType.TODO, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += ("Number of tasks: ");
+            output += (list.getLength());
+            break;
+        case DELETE:
+            indexOfList = Integer.parseInt(parsedInputs[0]);
+            output += "Noted. I've removed this task: \n";
+            output += (list.toString(indexOfList));
+            list.delete(indexOfList);
+            output += ("Now you have " + list.getLength() + " tasks in the list.");
+            break;
+        case FIND:
+            output += list.findTask(parsedInputs[0]);
+            break;
+        default:
+            break;
+        }
+
+        DataStore.saveData(list);
+
+
+        // Return String
+        return output;
     }
 
 

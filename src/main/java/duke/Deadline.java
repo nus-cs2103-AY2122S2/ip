@@ -49,6 +49,19 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public String toString() {
+        String description;
+        description = "[D]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description;
+        if (datetime == null) {
+            description += " (by: " + this.time + ")\n";
+        } else {
+            description += " (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")\n";
+        }
+        return description;
+    }
+
     /**
      * Returns details of Deadline as a String array
      *      * Index 0: TaskType

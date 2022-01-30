@@ -50,6 +50,19 @@ public class Event extends Task {
 
     }
 
+    @Override
+    public String toString() {
+        String description;
+        description = "[E]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description;
+        if (datetime == null) {
+            description += " (at: " + this.time + ")\n";
+        } else {
+            description += " (at: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")\n";
+        }
+        return description;
+    }
+
     /**
      * Returns details of Event as a String array
      * Index 0: TaskType

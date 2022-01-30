@@ -19,6 +19,11 @@ public class ToDo extends Task {
         System.out.println("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
     }
 
+    @Override
+    public String toString() {
+        return "[T]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description + "\n";
+    }
+
     /**
      * Returns details of task as a string array
      * Index 0: TaskType

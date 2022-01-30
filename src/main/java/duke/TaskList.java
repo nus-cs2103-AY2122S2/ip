@@ -21,7 +21,7 @@ public class TaskList {
      */
     public boolean add(TaskType type, String[] inputs) throws EmptyDescriptionException {
         if (inputs[0].trim().equals("")) {
-            throw new EmptyDescriptionException("ToDo cannot be empty");
+            throw new EmptyDescriptionException("Description of task can't be empty");
         }
 
         boolean isAddSuccess;
@@ -30,9 +30,15 @@ public class TaskList {
             isAddSuccess = actions.add(new ToDo(inputs[0]));
             break;
         case DEADLINE:
+            if (inputs[1].trim().equals("")) {
+                throw new EmptyDescriptionException("Time cant be empty");
+            }
             isAddSuccess = actions.add(new Deadline(inputs[0], inputs[1]));
             break;
         case EVENT:
+            if (inputs[1].trim().equals("")) {
+                throw new EmptyDescriptionException("Time cant be empty");
+            }
             isAddSuccess = actions.add(new Event(inputs[0], inputs[1]));
             break;
         default:
@@ -93,6 +99,22 @@ public class TaskList {
         actions.get(i - 1).print();
     }
 
+    @Override
+    public String toString() {
+        String description = "";
+        for (int i = 0; i < actions.size(); i++) {
+
+            description += (i + 1);
+            description += ".";
+            description += actions.get(i).toString();
+        }
+        return description;
+    }
+
+    public String toString(int index) {
+        return actions.get(index - 1).toString();
+    }
+
     /**
      * Marks a specific task as complete
      *
@@ -144,15 +166,16 @@ public class TaskList {
      *
      * @param search input String to search for
      */
-    public void findTask(String search) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findTask(String search) {
+        String output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < actions.size(); i++) {
             Task task = actions.get(i);
             if (task.getDetails()[2].contains(search)) {
-                System.out.print(i + 1);
-                System.out.print(".");
-                task.print();
+                output += (i + 1);
+                output += ".";
+                output += task.toString();
             }
         }
+        return output;
     }
 }
