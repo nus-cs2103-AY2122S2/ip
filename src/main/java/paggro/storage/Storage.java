@@ -29,6 +29,8 @@ import paggro.task.ToDo;
 public class Storage {
     /** The file in which the task data is stored. */
     File paggroData;
+    /** The path in which the file is stored */
+    String filePath;
 
     /**
      * Constructor of Storage.
@@ -36,6 +38,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         paggroData = new File(filePath);
+        this.filePath = filePath;
     }
 
     /**
@@ -46,6 +49,7 @@ public class Storage {
     public Lister loadTasks() throws PaggroException {
         if (!paggroData.exists()) {
             try {
+                new File(Paths.get("").toAbsolutePath() + "/data/").mkdir();
                 paggroData.createNewFile();
             } catch (IOException e) {
                 throw new PaggroException("    Could not create paggro.txt");
@@ -132,7 +136,7 @@ public class Storage {
      */
     public void addToStorage(Task task) throws IOException {
         try {
-            FileWriter fw = new FileWriter("../../../data/paggro.txt", true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(task.parseTask() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -159,8 +163,8 @@ public class Storage {
             j++;
         }
         fw.close();
-        Files.delete(Paths.get("../../../data/paggro.txt"));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+        Files.delete(Paths.get(filePath));
+        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 
@@ -186,8 +190,8 @@ public class Storage {
             j++;
         }
         fw.close();
-        Files.delete(Paths.get("../../../data/paggro.txt"));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+        Files.delete(Paths.get(filePath));
+        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
         Files.delete(Paths.get("../../../data/updated_paggro.txt"));
     }
 
