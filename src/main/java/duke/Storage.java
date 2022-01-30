@@ -41,24 +41,26 @@ public class Storage {
             Task task = new Task("");
             strArr = line.split(" \\| ");
             switch (strArr[0]) {
-                case "T":
-                    task = new Todo(strArr[2]);
-                    if (strArr[1].equals("1")) {
-                        task.setDone();
-                    }
-                    break;
-                case "D":
-                    task = new Deadline(strArr[2], strArr[3]);
-                    if (strArr[1].equals("X")) {
-                        task.setDone();
-                    }
-                    break;
-                case "E":
-                    task = new Event(strArr[2], strArr[3]);
-                    if (strArr[1].equals("X")) {
-                        task.setDone();
-                    }
-                    break;
+            case "T":
+                task = new Todo(strArr[2]);
+                if (strArr[1].equals("1")) {
+                    task.setDone();
+                }
+                break;
+            case "D":
+                task = new Deadline(strArr[2], strArr[3]);
+                if (strArr[1].equals("X")) {
+                    task.setDone();
+                }
+                break;
+            case "E":
+                task = new Event(strArr[2], strArr[3]);
+                if (strArr[1].equals("X")) {
+                    task.setDone();
+                }
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + strArr[0]);
             }
             loadedTasks.add(task);
         }

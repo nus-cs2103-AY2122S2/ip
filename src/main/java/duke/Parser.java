@@ -6,7 +6,6 @@ import java.util.Scanner;
  * Parser class to read what the user inputs.
  */
 public class Parser {
-
     private Scanner sc = new Scanner(System.in);
     private Ui ui;
     private TaskList taskList;
