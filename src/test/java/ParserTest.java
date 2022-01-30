@@ -1,10 +1,10 @@
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 import duke.parser.Parser;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 

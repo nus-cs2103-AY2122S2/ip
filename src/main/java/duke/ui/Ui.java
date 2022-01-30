@@ -3,10 +3,7 @@ package duke.ui;
 import duke.exception.ErrorMessage;
 import duke.task.Task;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a UI that deals with interactions with the user.

@@ -56,8 +56,10 @@ public class Storage {
                 switch(args[0]) {
                 case "D":
                     tasks.add(new Deadline(args[2], args[1].equals("1"), LocalDate.parse(args[3])));
+                    // Fallthrough
                 case "E":
                     tasks.add(new Event(args[2], args[1].equals("1"), LocalDate.parse(args[3])));
+                    // Fallthrough
                 default:
                     tasks.add(new Todo(args[2], args[1].equals("1")));
                 }
