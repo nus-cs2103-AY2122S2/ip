@@ -1,4 +1,6 @@
-class Deadline extends Task {
+package duke.task;
+
+public class Deadline extends Task {
   private String by;
 
   public Deadline(String name, String by) {
@@ -6,12 +8,12 @@ class Deadline extends Task {
     this.by = by;
   }
 
-  Type type() {
+  public Type type() {
     return Type.DEADLINE;
   }
 
   @Override
-  String toSave() {
+  public String toSave() {
     int doneBit = isDone ? 1 : 0;
     return String.format("D,.,%d,.,%s,.,%s\n", doneBit, name, by);
   }

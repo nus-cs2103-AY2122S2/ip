@@ -1,7 +1,9 @@
+package duke.util;
+
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     private static final String prefix = "    ";
     private static final String logo = " __   ___\n"
             + "/  | /  / _____  _    _  _____  _____    __\n"

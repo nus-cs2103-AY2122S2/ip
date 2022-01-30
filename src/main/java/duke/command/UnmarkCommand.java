@@ -1,4 +1,8 @@
-class UnmarkCommand extends Command {
+package duke.command;
+
+import duke.task.Task;
+
+public class UnmarkCommand extends Command {
     int toUnmarkIndex;
 
     public UnmarkCommand(int index) {
@@ -9,7 +13,7 @@ class UnmarkCommand extends Command {
     public String execute() {
         try{
             Task unmarkedTask = tasks.get(toUnmarkIndex).undone();
-            return String.format("I assume you weren't done with this one:%s", unmarkedTask);
+            return "I assume you weren't done with this one:\n%s" + unmarkedTask;
         } catch (IndexOutOfBoundsException e) {
             return "The archives contain no such task";
         }

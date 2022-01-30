@@ -1,4 +1,8 @@
-abstract class Command {
+package duke.command;
+
+import duke.util.TaskList;
+
+public abstract class Command {
     protected TaskList tasks;
 
     public abstract String execute();

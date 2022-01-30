@@ -1,15 +1,17 @@
-class ToDo extends Task {
+package duke.task;
+
+public class ToDo extends Task {
   public ToDo(String name) {
     super(name);
   }
 
   @Override
-  Type type() {
+  public Type type() {
     return Type.TODO;
   }
 
   @Override
-  String toSave() {
+  public String toSave() {
     int doneBit = isDone ? 1 : 0;
     return String.format("T,.,%d,.,%s\n", doneBit, name);
   }

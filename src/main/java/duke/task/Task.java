@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
   protected final String name;
   protected boolean isDone;
 
@@ -23,8 +25,8 @@ abstract class Task {
     return this;
   }
 
-  abstract Type type();
-  abstract String toSave();
+  public abstract Type type();
+  public abstract String toSave();
 
   @Override
   public String toString() {

@@ -1,7 +1,11 @@
-class DeleteCommand extends Command {
+package duke.command;
+
+import duke.task.Task;
+
+public class DeleteCommand extends Command {
     private int toDeleteIndex;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         toDeleteIndex = index -1;
     }
 
@@ -9,7 +13,7 @@ class DeleteCommand extends Command {
     public String execute() {
         try {
             Task deletedTask = tasks.remove(toDeleteIndex);
-            return String.format("I removed the following task:\n%s", deletedTask);
+            return "I removed the following task:\n" + deletedTask;
         } catch (IndexOutOfBoundsException e) {
             return "The task you are trying to delete is not in the archives.";
         }

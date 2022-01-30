@@ -1,4 +1,11 @@
-class AddCommand extends Command {
+package duke.command;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+public class AddCommand extends Command {
     private final Task toAdd;
 
     public AddCommand(String name) {
@@ -15,6 +22,6 @@ class AddCommand extends Command {
 
     public String execute() {
         tasks.add(toAdd);
-        return String.format("I have added the following task:\n%s", toAdd);
+        return "I have added the following task:\n" + toAdd;
     }
 }

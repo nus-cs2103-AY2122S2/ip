@@ -1,4 +1,6 @@
-class Event extends Task {
+package duke.task;
+
+public class Event extends Task {
   private String at;
 
   public Event(String name, String at) {
@@ -7,12 +9,12 @@ class Event extends Task {
   }
 
   @Override
-  Type type() {
+  public Type type() {
     return Type.EVENT;
   }
 
   @Override
-  String toSave() {
+  public String toSave() {
     int doneBit = isDone ? 1 : 0;
     return String.format("E,.,%d,.,%s,.,%s\n", doneBit, name, at);
   }

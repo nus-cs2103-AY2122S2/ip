@@ -1,10 +1,17 @@
+package duke.util;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     boolean isDirty;
     Path savePath;
 
@@ -13,7 +20,7 @@ class Storage {
         isDirty = false;
     }
 
-    TaskList load() {
+    public TaskList load() {
         TaskList tasks = new TaskList();
 
         if (!Files.exists(savePath)) {
@@ -30,7 +37,7 @@ class Storage {
                     t = new ToDo(taskString[2]);
                 } else if (taskString[0].equals("D")) {
                     t = new Deadline(taskString[2], taskString[3]);
-                } else {
+                } else { // "E"
                     t = new Event(taskString[2], taskString[3]);
                 }
 
@@ -47,7 +54,7 @@ class Storage {
         return tasks;
     }
 
-    void save(TaskList tasks) {
+    public void save(TaskList tasks) {
         try {
             Files.createDirectories(savePath.getParent());
 

@@ -1,6 +1,10 @@
+package duke.util;
+
+import duke.task.Task;
 import java.util.ArrayList;
 
-class TaskList extends ArrayList<Task> {
+
+public class TaskList extends ArrayList<Task> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

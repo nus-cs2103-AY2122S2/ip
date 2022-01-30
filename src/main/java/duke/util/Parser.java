@@ -1,4 +1,16 @@
-class Parser {
+package duke.util;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Task;
+
+public class Parser {
     public static Command parse(String str) {
         String[] cmd = str.split("\\s", 2);
         String[] fields;
