@@ -1,19 +1,23 @@
-package spark;
+package spark.parser;
 
-import spark.commands.commandtypes.*;
-import spark.commands.CommandKeyword;
+import spark.parser.commands.commandtypes.*;
+import spark.parser.commands.CommandKeyword;
 import spark.exceptions.SparkException;
 import spark.exceptions.formatexceptions.*;
+import spark.parser.params.AddDeadlineParams;
+import spark.parser.params.AddEventParams;
+import spark.parser.params.AddTodoParams;
 
-import java.nio.InvalidMarkException;
-import java.util.List;
-
-import static java.lang.Integer.parseInt;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Holds methods for interpreting user's input.
  */
 public class Parser {
+    private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
+
     /**
      * Returns a Command specific to the type of operation
      * that the user wishes to perform.
@@ -42,16 +46,16 @@ public class Parser {
             return new DeleteTaskCommand(getDeleteTaskParams(input, keyword));
 
         } else if (keyword == CommandKeyword.TODO) {
-            String name = getAddToDoParams(input, keyword);
-            return new AddToDoCommand(name.trim());
+            AddTodoParams params = getAddToDoParams(input, keyword);
+            return new AddToDoCommand(params);
 
         } else if (keyword == CommandKeyword.DEADLINE) {
-            String[] nameAndDate = getAddDeadlineParams(input, keyword);
-            return new AddDeadlineCommand(nameAndDate[0].trim(), nameAndDate[1].trim());
+            AddDeadlineParams params = getAddDeadlineParams(input, keyword);
+            return new AddDeadlineCommand(params);
 
         } else if (keyword == CommandKeyword.EVENT) {
-            String[] nameAndDate = getAddEventParams(input, keyword);
-            return new AddEventCommand(nameAndDate[0].trim(), nameAndDate[1].trim());
+            AddEventParams params = getAddEventParams(input, keyword);
+            return new AddEventCommand(params);
 
         } else if (keyword == CommandKeyword.FIND) {
             return new FindTaskCommand(getFindTaskParams(input, keyword));
@@ -83,18 +87,18 @@ public class Parser {
         }
     }
 
-    private static String getAddToDoParams(String input, CommandKeyword keyword) throws
+    private static AddTodoParams getAddToDoParams(String input, CommandKeyword keyword) throws
             InvalidToDoParamsException {
-        String params = removeCommandKeyword(input, keyword);
+        String title = removeCommandKeyword(input, keyword).trim();
 
-        if (params.isBlank()) {
+        if (title.isBlank()) {
             throw new InvalidToDoParamsException();
         }
 
-        return params;
+        return new AddTodoParams(title);
     }
 
-    private static String[] getAddDeadlineParams(String input, CommandKeyword keyword)
+    private static AddDeadlineParams getAddDeadlineParams(String input, CommandKeyword keyword)
             throws InvalidDeadlineParamsException {
         String params = removeCommandKeyword(input, keyword);
         String[] nameAndDate = params.split("/by");
@@ -103,14 +107,24 @@ public class Parser {
             throw new InvalidDeadlineParamsException();
         }
 
-        if (nameAndDate[0].isBlank()) {
+        String title = nameAndDate[0].trim();
+        String dateTimeString = nameAndDate[1].trim();
+        LocalDateTime localDateTime;
+
+        try {
+            localDateTime = LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+        } catch (DateTimeParseException e) {
             throw new InvalidDeadlineParamsException();
         }
 
-        return nameAndDate;
+        if (title.isBlank()) {
+            throw new InvalidDeadlineParamsException();
+        }
+
+        return new AddDeadlineParams(title, localDateTime);
     }
 
-    private static String[] getAddEventParams(String input, CommandKeyword keyword)
+    private static AddEventParams getAddEventParams(String input, CommandKeyword keyword)
             throws InvalidEventParamsException {
         String params = removeCommandKeyword(input, keyword);
         String[] nameAndDate = params.split("/at");
@@ -119,11 +133,21 @@ public class Parser {
             throw new InvalidEventParamsException();
         }
 
-        if (nameAndDate[0].isBlank()) {
+        String title = nameAndDate[0].trim();
+        String dateTimeString = nameAndDate[1].trim();
+        LocalDateTime localDateTime;
+
+        try {
+            localDateTime = LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+        } catch (DateTimeParseException e) {
             throw new InvalidEventParamsException();
         }
 
-        return nameAndDate;
+        if (title.isBlank()) {
+            throw new InvalidEventParamsException();
+        }
+
+        return new AddEventParams(title, localDateTime);
     }
 
     private static String getFindTaskParams(String input, CommandKeyword keyword) throws EmptyKeywordException {

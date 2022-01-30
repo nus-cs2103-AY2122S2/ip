@@ -1,23 +1,22 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
 import spark.exceptions.SparkException;
+import spark.parser.params.AddTodoParams;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.Ui;
 
-public class AddEventCommand extends Command {
-    private String title;
-    private String at;
+public class AddToDoCommand extends Command {
+    String title;
 
-    public AddEventCommand(String title, String at) {
-        this.title = title;
-        this.at = at;
+    public AddToDoCommand(AddTodoParams params) {
+        this.title = params.getTitle();
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addEvent(title, at);
+            tasks.addToDo(title);
             storage.writeTasksFile(tasks.encodeTasks());
             ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
         } catch (SparkException e) {
@@ -34,3 +33,5 @@ public class AddEventCommand extends Command {
         return String.format("Okay! I've added this task:\n   %s", tasks.getLastAddedTask());
     }
 }
+
+

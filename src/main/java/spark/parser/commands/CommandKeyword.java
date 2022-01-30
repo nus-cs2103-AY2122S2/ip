@@ -1,4 +1,4 @@
-package spark.commands;
+package spark.parser.commands;
 
 public enum CommandKeyword {
     BYE("bye"),

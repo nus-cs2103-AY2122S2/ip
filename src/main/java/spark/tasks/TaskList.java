@@ -12,6 +12,8 @@ import spark.tasks.tasktypes.Event;
 import spark.tasks.tasktypes.Task;
 import spark.tasks.tasktypes.ToDo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -52,7 +54,7 @@ public class TaskList {
      *
      *
      */
-    public void addDeadline(String title, String by) {
+    public void addDeadline(String title, LocalDateTime by) {
         Deadline deadline = new Deadline(title, by);
         tasks.add(deadline);
 
@@ -64,7 +66,7 @@ public class TaskList {
      *
      * @throws FileException
      */
-    public void addEvent(String title, String at) {
+    public void addEvent(String title, LocalDateTime at) {
 
         Event event = new Event(title, at);
         tasks.add(event);

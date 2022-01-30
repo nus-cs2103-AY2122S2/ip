@@ -1,4 +1,4 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
 import spark.Ui;
 import spark.exceptions.SparkException;

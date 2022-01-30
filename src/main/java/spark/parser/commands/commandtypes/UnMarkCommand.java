@@ -1,22 +1,23 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
+import spark.Ui;
 import spark.exceptions.SparkException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
-import spark.Ui;
 
-public class DeleteTaskCommand extends Command {
-    int index;
+public class UnMarkCommand extends Command {
+    private int index;
 
-    public DeleteTaskCommand(int index) {
+    public UnMarkCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.deleteTask(index);
+            tasks.unMarkTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
+            ui.printMessageWithDivider(getModifyTaskSuccessMessage(tasks));
         } catch (SparkException e) {
             ui.printException(e);
         }
@@ -27,7 +28,7 @@ public class DeleteTaskCommand extends Command {
         return false;
     }
 
-    private String getDeleteTaskSuccessMessage(TaskList tasks) {
-        return String.format("Okay! I've removed this task:\n   %s", tasks.getLastDeletedTask());
+    private String getModifyTaskSuccessMessage(TaskList tasks) {
+        return String.format("Okay! I've unmarked this task:\n   %s", tasks.getLastModifiedTask());
     }
 }

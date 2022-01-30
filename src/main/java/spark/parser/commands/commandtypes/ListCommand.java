@@ -1,18 +1,17 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
-import spark.Ui;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
+import spark.Ui;
 
-public class ExitCommand extends Command {
-
+public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessageWithDivider("Cool, see you around!");
+        ui.printMessage(tasks.getTaskList());
     }
 
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 }
