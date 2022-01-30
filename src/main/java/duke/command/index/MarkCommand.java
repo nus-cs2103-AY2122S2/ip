@@ -21,15 +21,6 @@ public class MarkCommand extends IndexCommand {
     private final boolean isMark;
 
     /**
-     * Returns the command format of a mark/unmark command.
-     * @param isMark whether the command is mark or unmark.
-     * @return mark/unmark command format.
-     */
-    public static String getFormat(boolean isMark) {
-        return (isMark ? COMMAND_FORMAT_MARK : COMMAND_FORMAT_UNMARK);
-    }
-
-    /**
      * Creates an instance of a MarkCommand object.
      *
      * @param index the index of the task in the task list.
@@ -39,6 +30,17 @@ public class MarkCommand extends IndexCommand {
         super(index);
         this.isMark = isMark;
     }
+
+    /**
+     * Returns the command format of a mark/unmark command.
+     * @param isMark whether the command is mark or unmark.
+     * @return mark/unmark command format.
+     */
+    public static String getFormat(boolean isMark) {
+        return (isMark ? COMMAND_FORMAT_MARK : COMMAND_FORMAT_UNMARK);
+    }
+
+
 
     /**
      * Returns a command feedback after the execution of the

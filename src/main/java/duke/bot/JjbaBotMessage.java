@@ -8,7 +8,7 @@ import duke.task.TaskList;
  * A <code>JJBABotMessage</code> object can be created to respond to the user
  * in the JJBA style.
  */
-public class JJBABotMessage extends BotMessage {
+public class JjbaBotMessage extends BotMessage {
     /**
      * Returns the message to be printed when a command of type 'list' is executed.
      *
@@ -107,7 +107,7 @@ public class JJBABotMessage extends BotMessage {
     }
 
     private String getTaskLeft(TaskList taskList) {
-        return String.format("You have %s task%s in your list.",
-                (taskList.size() > 0) ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s");
+        return String.format("You have %s task%s in your list.", (taskList.size() > 0)
+                ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s");
     }
 }

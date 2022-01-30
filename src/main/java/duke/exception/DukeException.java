@@ -6,8 +6,8 @@ package duke.exception;
  * specify the type of duke exception error occurring in the program.
  */
 public class DukeException extends Exception {
-    public boolean isHidden;
-    public boolean isInvalidCommand;
+    public final boolean isHidden;
+    public final boolean isInvalidCommand;
 
     /**
      * Creates an instance of a DukeException object.

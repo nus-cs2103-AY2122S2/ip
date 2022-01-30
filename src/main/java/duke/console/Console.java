@@ -1,29 +1,31 @@
 package duke.console;
 
-import duke.task.TaskList;
+import java.util.Scanner;
+
 import duke.bot.BotMessage;
 import duke.bot.BotType;
 import duke.bot.DioBotMessage;
-import duke.bot.JJBABotMessage;
+import duke.bot.JjbaBotMessage;
 import duke.command.CommandFeedback;
+import duke.task.TaskList;
 
-import java.util.Scanner;
 
 /**
  * Represents the UI system of the program. A <code>Console</code> object can be created to
  * print and format the output of the program.
  */
 public class Console {
+
+    public static final String LINE_FORMAT = "    ____________________________________________________________";
+
     private Scanner sc;
     private BotMessage bot;
-
-    public static final String lineFormat = "    ____________________________________________________________";
 
     /**
      * Creates a default instance of a Console object.
      */
-    public Console(){
-        this(new JJBABotMessage());
+    public Console() {
+        this(new JjbaBotMessage());
     }
 
     /**
@@ -31,7 +33,7 @@ public class Console {
      *
      * @param bot type of message bot to output messages.
      */
-    public Console(BotMessage bot){
+    public Console(BotMessage bot) {
         this.sc = new Scanner(System.in);
         this.bot = bot;
     }
@@ -66,12 +68,12 @@ public class Console {
      * Prints a welcome message of the program.
      */
     public void printWelcomeMessage() {
-        String logo = "   ___   _________  ___  \n" +
-                "  |_  | |_  | ___ \\/ _ \\ \n" +
-                "    | |   | | |_/ / /_\\ \\\n" +
-                "    | |   | | ___ \\  _  |\n" +
-                "/\\__/ /\\__/ / |_/ / | | |\n" +
-                "\\____/\\____/\\____/\\_| |_/";
+        String logo = "   ___   _________  ___  \n"
+                + "  |_  | |_  | ___ \\/ _ \\ \n"
+                + "    | |   | | |_/ / /_\\ \\\n"
+                + "    | |   | | ___ \\  _  |\n"
+                + "/\\__/ /\\__/ / |_/ / | | |\n"
+                + "\\____/\\____/\\____/\\_| |_/";
         print(logo);
         print("Welcome to JJBA Bot!");
         println(bot.getBotMessage());
@@ -98,7 +100,7 @@ public class Console {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("      %d. %s", i + 1, taskList.get(i).toString()));
         }
-        System.out.println(lineFormat);
+        System.out.println(LINE_FORMAT);
     }
 
     /**
@@ -110,7 +112,7 @@ public class Console {
      */
     private void println(String msg) {
         print(msg);
-        System.out.println(lineFormat);
+        System.out.println(LINE_FORMAT);
     }
 
     /**
@@ -168,7 +170,10 @@ public class Console {
             break;
         case EXIT:
             println(bot.getExitMessage());
-        break;
+            break;
+        default:
+            printError("Unexpected error found!");
+            break;
         }
     }
 
@@ -180,10 +185,13 @@ public class Console {
     public void setBot(BotType botType) {
         switch (botType) {
         case JJBA:
-            bot = new JJBABotMessage();
+            bot = new JjbaBotMessage();
             break;
         case DIO:
             bot = new DioBotMessage();
+            break;
+        default:
+            bot = new JjbaBotMessage();
             break;
         }
     }

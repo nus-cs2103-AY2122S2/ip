@@ -1,11 +1,16 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.bot.BotType;
+import duke.command.BotCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.BotCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.command.add.DeadlineCommand;
 import duke.command.add.EventCommand;
 import duke.command.add.TodoCommand;
@@ -17,19 +22,14 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a system to translate user input into respective objects.
  * <code>Parser</code> class methods are static, cannot be created and
  * is used to convert String of user input into its intended object.
  */
 public class Parser {
-    public static final String dateInputFormat = "dd-MM-yyyy";
-    public static final String timeInputFormat = "HHmm";
+    public static final String DATE_INPUT_FORMAT = "dd-MM-yyyy";
+    public static final String TIME_INPUT_FORMAT = "HHmm";
 
     /**
      * Returns a LocalDate object specified by the user input.
@@ -37,7 +37,7 @@ public class Parser {
      * @return a LocalDate object of the specified date.
      */
     public static LocalDate convertToDate(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateInputFormat);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_FORMAT);
 
         return LocalDate.parse(input, formatter);
     }
@@ -48,7 +48,7 @@ public class Parser {
      * @return a LocalTime object of the specified time.
      */
     public static LocalTime convertToTime(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeInputFormat);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_INPUT_FORMAT);
 
         return LocalTime.parse(input, formatter);
     }
