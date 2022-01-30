@@ -1,6 +1,6 @@
-package tasks;
+package main.tasks;
 
-import enums.TaskType;
+import main.enums.TaskType;
 
 public class ToDo extends Task{
     public ToDo(String description) {

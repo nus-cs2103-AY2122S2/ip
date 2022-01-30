@@ -1,6 +1,6 @@
-package tasks;
+package main.tasks;
 
-import enums.TaskType;
+import main.enums.TaskType;
 
 public class Event extends Task{
     protected String eventTime;
