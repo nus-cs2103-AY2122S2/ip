@@ -24,8 +24,8 @@ public interface Command {
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
-     * @throws DukeException If the task list is empty and if there are
-     * any errors when retrieving tasks
+     * @throws DukeException If the List of tasks in the task list is
+     * empty or if there are any errors when retrieving the tasks
      * @throws IOException If the tasks cannot be saved to the data file
      */
     void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;

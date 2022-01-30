@@ -11,7 +11,8 @@ public enum CommandType {
     DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
-    EVENT("event");
+    EVENT("event"),
+    PRINT("print");
 
     private final String label;
 

@@ -3,6 +3,8 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -74,6 +76,17 @@ public class Ui {
         displayLine();
         System.out.println("ERROR MESSAGE:");
         System.out.println("\t" + "☹ " + message);
+    }
+
+    /**
+     * Displays the filtered tasks message with proper formatting.
+     *
+     * @param message Filtered tasks message to be displayed
+     */
+    public void displayFilteredTasks(String message) {
+        displayLine();
+        System.out.println("[FILTERED TASKS]" + System.lineSeparator());
+        System.out.println(message);
     }
 
     /**
@@ -149,12 +162,55 @@ public class Ui {
      */
     public String tasksInListMessage(TaskList taskList) {
         return "\t" + "Here"
-                + (taskList.getNumOfTasks() > 1 ? " are the tasks  " : " is the task ")
+                + (taskList.getNumOfTasks() > 1 ? " are the tasks " : " is the task ")
                 + "in your list:"
                 + System.lineSeparator()
                 + "\t" + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator()
                 + taskList;
+    }
+
+    /**
+     * Returns the message with the tasks in the task list that
+     * occurs on the specified date.
+     *
+     * @param taskList Task list containing all the tasks
+     * @param dateStr Specified date
+     * @return The string representation of the message
+     */
+    public String tasksOnDateMessage(TaskList taskList, String dateStr) {
+        return "\t" + "Here"
+                + (taskList.getNumOfFilteredTasks() > 1 ? " are the tasks " : " is the task ")
+                + "on this date (" + processDateStr(dateStr) + "):"
+                + System.lineSeparator()
+                + "\t" +  "[Legend: T = todo, D = deadline, E = event]"
+                + System.lineSeparator()
+                + System.lineSeparator()
+                + taskList;
+    }
+
+    /**
+     * Returns the specified date string after processing.
+     *
+     * If the specified date is a valid date format accepted by
+     * the system, return the date in LocalDate (MMM d yyyy) format,
+     * otherwise return the original specified date.
+     *
+     * @param dateStr Specified date
+     * @return Specified date string after processing
+     */
+    private String processDateStr(String dateStr) {
+        LocalDate date;
+        String processedDateStr;
+
+        try {
+            date = LocalDate.parse(dateStr);
+            processedDateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (Exception e) {
+            processedDateStr = dateStr;
+        }
+
+        return processedDateStr;
     }
 }

@@ -46,13 +46,43 @@ public class UnmarkCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        Task taskNotDone = !taskList.hasFilter()
+                ? markTaskNotDoneBasedOnAllTasks(taskList)
+                : markTaskNotDoneBasedOnFilteredTasks(taskList);
+
+        String response = ui.taskNotDoneMessage(taskNotDone);
+        ui.displayResponse(response);
+
+        storage.saveTasksToFile(taskList);
+    }
+
+    /**
+     * Marks the task as not done yet based on the corresponding task number
+     * in the List of tasks and then returns the task.
+     *
+     * @param taskList Task list
+     * @return The task that was marked as not done yet
+     * @throws DukeException If the task is not found
+     */
+    public Task markTaskNotDoneBasedOnAllTasks(TaskList taskList) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.getNumOfTasks()) {
-            Task taskNotDone = taskList.markNotDone(taskNum);
+            return taskList.markNotDone(taskNum);
+        } else {
+            throw new DukeException("Task not found. Please try again!");
+        }
+    }
 
-            String response = ui.taskDoneMessage(taskNotDone);
-            ui.displayResponse(response);
-
-            storage.saveTasksToFile(taskList);
+    /**
+     * Marks the task as not done yet based on the corresponding task number
+     * in the List of filtered tasks and then returns the task.
+     *
+     * @param taskList Task list
+     * @return The task that was marked as not done yet
+     * @throws DukeException If the task is not found
+     */
+    public Task markTaskNotDoneBasedOnFilteredTasks(TaskList taskList) throws DukeException {
+        if (taskNum > 0 && taskNum <= taskList.getNumOfFilteredTasks()) {
+            return taskList.markNotDone(taskNum);
         } else {
             throw new DukeException("Task not found. Please try again!");
         }

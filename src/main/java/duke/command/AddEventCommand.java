@@ -41,6 +41,10 @@ public class AddEventCommand extends AddCommand {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task newEventTask = taskList.addEventTask(super.getTaskDescription(), taskDateTime);
 
+        // Reset the List of filteredTasks when AddCommand is executed
+        // This will clear the List of filteredTasks
+        taskList.resetFilteredTasks();
+
         String response = ui.taskAddedMessage(newEventTask)
                 + System.lineSeparator() + ui.numOfTasksInListMessage(taskList);
         ui.displayResponse(response);

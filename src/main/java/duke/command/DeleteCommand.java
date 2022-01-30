@@ -46,15 +46,51 @@ public class DeleteCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        Task taskDeleted = !taskList.hasFilter()
+                ? deleteTaskBasedOnAllTasks(taskList)
+                : deleteTaskBasedOnFilteredTasks(taskList);
+
+        if (taskList.getNumOfFilteredTasks() == 0) {
+            // Reset the List of filteredTasks when the List is empty
+            // This will clear the List of filteredTasks
+            taskList.resetFilteredTasks();
+        }
+
+        String response = ui.taskDeletedMessage(taskDeleted)
+                + System.lineSeparator()
+                + ui.numOfTasksInListMessage(taskList);
+        ui.displayResponse(response);
+
+        storage.saveTasksToFile(taskList);
+    }
+
+    /**
+     * Deletes the task based on the corresponding task number in the
+     * List of tasks and then returns the deleted task.
+     *
+     * @param taskList Task list
+     * @return The task that was deleted
+     * @throws DukeException If the task is not found
+     */
+    public Task deleteTaskBasedOnAllTasks(TaskList taskList) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.getNumOfTasks()) {
-            Task taskDeleted = taskList.deleteTask(taskNum);
+            return taskList.deleteTask(taskNum);
+        } else {
+            throw new DukeException("Task not found. Please try again!");
+        }
+    }
 
-            String response = ui.taskDeletedMessage(taskDeleted)
-                    + System.lineSeparator()
-                    + ui.numOfTasksInListMessage(taskList);
-            ui.displayResponse(response);
-
-            storage.saveTasksToFile(taskList);
+    /**
+     * Deletes the task based on the corresponding task number in the
+     * List of filtered tasks and then returns the deleted task.
+     *
+     * @param taskList Task list
+     * @return The task that was deleted
+     * @throws DukeException If the task is not found
+     */
+    public Task deleteTaskBasedOnFilteredTasks(TaskList taskList) throws DukeException {
+        if (taskNum > 0 && taskNum <= taskList.getNumOfFilteredTasks()) {
+            return taskList.deleteTask(taskNum);
         } else {
             throw new DukeException("Task not found. Please try again!");
         }

@@ -51,10 +51,22 @@ public abstract class Task {
     }
 
     /**
-     * Sets the isDone flag to false if the task is done.
+     * Sets the isDone flag to false if the task is not done.
      */
     public void setNotDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Checks if the date of the task is on the specified date.
+     * The method will be overridden in TaskWithDateTime class that
+     * represents Deadline and Event tasks with date attached.
+     *
+     * @param dateStr Specified date
+     * @return False as a general task does not have any date attached
+     */
+    public boolean isOnDate(String dateStr) {
+        return false;
     }
 
     /**

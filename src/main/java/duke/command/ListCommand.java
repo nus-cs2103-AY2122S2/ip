@@ -31,11 +31,15 @@ public class ListCommand implements Command {
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
-     * @throws DukeException If the task list is empty
+     * @throws DukeException If the List of tasks in the task list is empty
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getNumOfTasks() != 0) {
+            // Reset the List of filteredTasks when ListCommand is executed
+            // This will clear the List of filteredTasks
+            taskList.resetFilteredTasks();
+
             String response = ui.tasksInListMessage(taskList);
             ui.displayResponse(response);
         } else {

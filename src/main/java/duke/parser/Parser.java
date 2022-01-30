@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PrintCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 
@@ -58,6 +59,7 @@ public class Parser {
         int taskNum;
         String taskDescription;
         String taskInfo;
+        String date;
 
         switch (commandType) {
         case BYE:
@@ -90,10 +92,14 @@ public class Parser {
             taskInfo = processTaskInfoFromEventCommand(commandInfo);
             command = new AddEventCommand(taskInfo);
             break;
+        case PRINT:
+            date = getDateFromPrintCommand(commandInfo);
+            command = new PrintCommand(date);
+            break;
         default:
             // Error detection for any invalid commands has already been
-            // handled before this method. The switch statement should
-            // not reach the default case. However, this serves as an
+            // handled before this initialiseCommand method. Hence, the
+            // default case should not be reached, but serves as an
             // additional layer of check.
             throw new DukeException("INVALID COMMAND. Please try again!");
         }
@@ -290,6 +296,32 @@ public class Parser {
                         + System.lineSeparator() + "\t"
                         + "Enter /at before specifying the date/time!");
             }
+        }
+    }
+
+    private String getDateFromPrintCommand(String commandInfo) throws DukeException {
+        if (isCommandInfoPresent(commandInfo)) {
+            if (commandInfo.trim().startsWith("/on")) {
+                String[] specificDateParts = commandInfo.split("\\s+", 2);
+
+                if (specificDateParts.length == 2) {
+                    return specificDateParts[1];
+                } else {
+                    throw new DukeException("INCOMPLETE COMMAND"
+                            + System.lineSeparator() + "\t"
+                            + "The date is not specified!"
+                            + System.lineSeparator() + "\t"
+                            + "[Note: Enter /on before specifying the date]");
+                }
+            } else {
+                throw new DukeException("WRONG COMMAND"
+                        + System.lineSeparator() + "\t"
+                        + "Enter /on before specifying the date!");
+            }
+        } else {
+            throw new DukeException("INCOMPLETE COMMAND"
+                    + System.lineSeparator() + "\t"
+                    + "Enter /on before specifying the date!");
         }
     }
 }

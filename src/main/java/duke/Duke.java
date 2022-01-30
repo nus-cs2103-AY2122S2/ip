@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.PrintCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -45,16 +47,41 @@ public class Duke {
         ui.displayWelcome();
         boolean isExit = false;
 
+        Command command = null;
+
         while (!isExit) {
             try {
                 String commandLine = ui.readCommand();
-                Command command = parser.parse(commandLine);
+                command = parser.parse(commandLine);
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
             } catch (DukeException | IOException e) {
                 ui.displayError(e.getMessage());
             } finally {
+                checkAndDisplayFilteredTasks(command);
                 ui.displayLine();
+            }
+        }
+    }
+
+    /**
+     * Checks if the task list has filtered tasks.
+     * Displays the filtered tasks message if there are filtered tasks.
+     *
+     * @param command Executed command
+     */
+    public void checkAndDisplayFilteredTasks(Command command) {
+        if (taskList.hasFilter()) {
+            String filteredTasksMessage;
+
+            if (taskList.getFilterCommandType() == CommandType.PRINT && !(command instanceof PrintCommand)) {
+                filteredTasksMessage = ui.tasksOnDateMessage(taskList, taskList.getFilterInfo());
+            } else {
+                filteredTasksMessage = "";
+            }
+
+            if (!filteredTasksMessage.isEmpty()) {
+                ui.displayFilteredTasks(filteredTasksMessage);
             }
         }
     }

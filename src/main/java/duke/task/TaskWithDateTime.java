@@ -72,15 +72,10 @@ public abstract class TaskWithDateTime extends Task {
         date = processDateInput(dateInput);
 
         // Process time input
-        if (isTimeInputProper(timeInput)) {
-            time = processTimeInput(timeInput);
-        } else {
-            time = null;
-        }
+        time = isTimeInputProper(timeInput) ? processTimeInput(timeInput) : null;
 
         // Generate dateTime output
-        dateTimeOutput = generateDateTimeOutput(date, dateInput, time, timeInput,
-                isTimeInputProper(timeInput));
+        dateTimeOutput = generateDateTimeOutput(date, dateInput, time, timeInput, isTimeInputProper(timeInput));
     }
 
     /**
@@ -192,6 +187,27 @@ public abstract class TaskWithDateTime extends Task {
      * @return The string representation of the date/time information
      */
     public abstract String dateTimeInfo();
+
+    /**
+     * Checks if the date of the task is on the specified date.
+     *
+     * @param dateStr Specified date
+     * @return Flag to indicate if the date of the task is on the specified date
+     */
+    @Override
+    public boolean isOnDate(String dateStr) {
+        try {
+            LocalDate dateToSearch = LocalDate.parse(dateStr);
+
+            if (date != null) {
+                return date.equals(dateToSearch);
+            } else {
+                return dateInput.equals(dateStr);
+            }
+        } catch (DateTimeParseException e) {
+            return dateInput.equals(dateStr);
+        }
+    }
 
     /**
      * Returns the string representation of the task with date/time information.
