@@ -86,11 +86,14 @@ public class Parser {
         return new Deadline(taskName,date);
     }
 
+    // TODO parseToFileFromTask given a task, parses it in the correct form to be stored
+
     public static Task parseToTaskFromFile(String fileInput) throws DukeException {
         // <type>\t<done>\t<name>\t<date>
         char type;
         char done;
         String name;
+        String dateStr;
         LocalDateTime date;
         Task t;
 
@@ -99,6 +102,7 @@ public class Parser {
             type = split[0].toCharArray()[0];
             done = split[1].toCharArray()[0];
             name = split[2].strip();
+            dateStr = split[3];
             date = Parser.parseDateTime(split[3]);
         } catch (IndexOutOfBoundsException exception){
             throw new DukeException("Unable to load task from file!");
@@ -117,14 +121,14 @@ public class Parser {
 
         case 'D':
             if (date == null) {
-                throw new DukeException("Unable to load task from file!");
+                return new Deadline(name,dateStr);
             }
             t = new Deadline(name, date);
             break;
 
         case 'E':
             if (date == null) {
-                throw new DukeException("Unable to load task from file!");
+                return new Event(name,dateStr);
             }
             t = new Event(name, date);
             break;
