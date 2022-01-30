@@ -1,15 +1,23 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.IncorrectCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Parses user input.
@@ -85,8 +93,8 @@ public class Parser {
      */
     private Command prepareTodo(String request) {
         String[] parsedReq = request
-                        .strip()
-                        .split(" ");
+                .strip()
+                .split(" ");
 
         if (parsedReq.length == 1) {
             return new IncorrectCommand("The description of a todo cannot be empty.");
@@ -104,9 +112,9 @@ public class Parser {
      * @param request full user input
      * @return the prepared add command
      */
-    private Command prepareDeadline(String request)  {
+    private Command prepareDeadline(String request) {
         if (request.strip()
-                    .length() == 8) {
+                .length() == 8) {
             return new IncorrectCommand("The description of a deadline cannot be empty.");
         } else if (!request.contains(" /by ")) {
             return new IncorrectCommand("You left the date/time of the deadline empty!");
@@ -141,10 +149,10 @@ public class Parser {
                                 LocalTime.parse(by, timeIn)));
             case INVALID:
             default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n" +
-                        "    yyyy-MM-dd HHmm\n" +
-                        "    yyyy-MM-dd\n" +
-                        "    or HHmm");
+                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                        + "    yyyy-MM-dd HHmm\n"
+                        + "    yyyy-MM-dd\n"
+                        + "    or HHmm");
             }
         }
     }
@@ -157,7 +165,7 @@ public class Parser {
      */
     private Command prepareEvent(String request) {
         if (request.strip()
-                    .length() == 5) {
+                .length() == 5) {
             return new IncorrectCommand("The description of an event cannot be empty.");
         } else if (!request.contains(" /at ")) {
             return new IncorrectCommand("You left the date/time of the event empty!");
@@ -170,7 +178,7 @@ public class Parser {
 
         if (desc.length() == 0) {
             return new IncorrectCommand("The description of an event cannot be empty.");
-        } else if (at.length() == 0 ) {
+        } else if (at.length() == 0) {
             return new IncorrectCommand("You left the date/time of the event empty!");
         } else {
             Parser.Format f = Parser.parseDateTime(at);
@@ -192,10 +200,10 @@ public class Parser {
                                 LocalTime.parse(at, timeIn)));
             case INVALID:
             default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n" +
-                        "    yyyy-MM-dd HHmm\n" +
-                        "    yyyy-MM-dd\n" +
-                        "    or HHmm");
+                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                        + "    yyyy-MM-dd HHmm\n"
+                        + "    yyyy-MM-dd\n"
+                        + "    or HHmm");
             }
         }
     }

@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -12,8 +11,8 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command.
      *
-     * @param tasks the TaskList containing the current tasks
-     * @param ui the Ui of the chatbot
+     * @param tasks   the TaskList containing the current tasks
+     * @param ui      the Ui of the chatbot
      * @param storage the storage of the chatbot
      * @return the result of executing the exit command
      */

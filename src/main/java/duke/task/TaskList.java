@@ -82,10 +82,19 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Checks if the TaskList is empty.
+     * @return true if the TaskList is empty, false otherwise
+     */
     public boolean isEmpty() {
         return listSize() == 0;
     }
 
+    /**
+     * Filters the TaskList by a specified keyword.
+     * @param keyword the specified keyword
+     * @return a new TaskList with tasks matching the keyword
+     */
     public TaskList filter(String keyword) {
         TaskList filteredList = new TaskList(new ArrayList<>());
 

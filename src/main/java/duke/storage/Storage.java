@@ -1,8 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,12 +11,19 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * Represents the storage of the application.
  * Supports the loading of and saving of data to storage file.
  */
 public class Storage {
-    private static final String home = System.getProperty("user.home");
+    private static final String HOME = System.getProperty("user.home");
     private static File saveFile;
 
     /**
@@ -30,7 +34,7 @@ public class Storage {
      */
     public Storage(String dirPath) throws DukeException {
         try {
-            Path dir = Paths.get(home + dirPath);
+            Path dir = Paths.get(HOME + dirPath);
 
             // check if /ip/data directory exists, if not create
             if (!Files.exists(dir)) {
@@ -38,15 +42,15 @@ public class Storage {
             }
 
             // check if the file in /ip/data exists, if not create
-            Path p = Paths.get(home + dirPath + "/duke.txt");
+            Path p = Paths.get(HOME + dirPath + "/duke.txt");
             if (!Files.exists(p)) {
                 Files.createFile(p);
             }
 
             saveFile = new File(p.toString());
         } catch (IOException e) {
-            throw new DukeException("There was a problem with creating a save file at " + home + dirPath + ". " +
-                    "Please ensure that I have access to the directory.");
+            throw new DukeException("There was a problem with creating a save file at " + HOME + dirPath + ". "
+                    + "Please ensure that I have access to the directory.");
         }
     }
 
@@ -129,6 +133,9 @@ public class Storage {
                     }
                     break;
                 }
+                default: {
+                    break;
+                }
                 }
             }
         } catch (IOException e) {
@@ -144,7 +151,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(home + "/ip/data/duke.txt");
+            FileWriter fw = new FileWriter(HOME + "/ip/data/duke.txt");
             for (int i = 0; i < tasks.listSize(); i++) {
                 fw.write(tasks
                         .getTask(i)
@@ -163,7 +170,7 @@ public class Storage {
      */
     public void append(String textToAppend) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(home + "/ip/data/duke.txt",
+            FileWriter fw = new FileWriter(HOME + "/ip/data/duke.txt",
                     true);
             fw.write(textToAppend + "\n");
             fw.close();
