@@ -1,6 +1,10 @@
 package li.zhongfu.cs2103.chatbot.types;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class UserInterface {
     private static final String HLINE = "____________________________________________________________";
@@ -13,8 +17,10 @@ public class UserInterface {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private PrintStream output;
+    private Parser parser;
 
-    public UserInterface(PrintStream output) {
+    public UserInterface(InputStream input, PrintStream output) {
+        this.parser = new Parser(input);
         this.output = output;
     }
 
@@ -47,5 +53,16 @@ public class UserInterface {
 
     public void print(String str) {
         this.output.print(str);
+    }
+
+    public ParserResult getInput() throws IOException {
+        return this.parser.parseNext();
+    }
+
+    // i know this really really really doesn't belong here
+    // but i kinda can't be arsed
+    // todo fix this when you implement... idk... command objects, handlers, whatever
+    public LocalDateTime parseDateTime(String dateTimeString) throws DateTimeParseException {
+        return this.parser.parseDateTime(dateTimeString);
     }
 }

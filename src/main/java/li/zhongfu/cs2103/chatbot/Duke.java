@@ -20,15 +20,13 @@ import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 public class Duke {
     private final String botName;
 
-    private Parser parser;
     private UserInterface ui;
     private Storage storage;
     private TaskList tasks;
 
     public Duke(String botName, String filePath) {
         this.botName = botName;
-        this.parser = new Parser(System.in);
-        this.ui = new UserInterface(System.out);
+        this.ui = new UserInterface(System.in, System.out);
         this.storage = new Storage(filePath);
         this.init();
     }
@@ -59,7 +57,7 @@ public class Duke {
     public void loop() throws IOException {
         while (true) {
             try {
-                ParserResult result = this.parser.parseNext();
+                ParserResult result = this.ui.getInput();
                 String cmd = result.getCmd();
                 switch (cmd) {
                     case "mark":
@@ -115,7 +113,7 @@ public class Duke {
                             }
 
                             try {
-                                task = new Deadline(result.getPosArg(), this.parser.parseDateTime(result.getArg("by")));
+                                task = new Deadline(result.getPosArg(), this.ui.parseDateTime(result.getArg("by")));
                             } catch (DateTimeParseException e) {
                                 throw new DukeException(String.format("Unknown date format! Try: deadline %s /by 1 jan 2050 12:15", result.getPosArg()));
                             }
@@ -125,7 +123,7 @@ public class Duke {
                             }
 
                             try {
-                                task = new Event(result.getPosArg(), parser.parseDateTime(result.getArg("at")));
+                                task = new Event(result.getPosArg(), this.ui.parseDateTime(result.getArg("at")));
                             } catch (DateTimeParseException e) {
                                 throw new DukeException(String.format("Unknown date format! Try: event %s /at 1 jan 2050 12:15", result.getPosArg()));
                             }
