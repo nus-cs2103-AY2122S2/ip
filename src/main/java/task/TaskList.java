@@ -3,6 +3,9 @@ package task;
 import exception.DukeException;
 import java.util.ArrayList;
 
+/**
+ * Interface that stores list of tasks and contains methods that manipulate it.
+ */
 public class TaskList {
 
     public ArrayList<Task> tasks;
@@ -15,6 +18,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Prints all tasks in the task list.
+     */
     public void displayList() {
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -24,38 +30,43 @@ public class TaskList {
         System.out.println(returnString);
     }
 
-    public void addToList(String[] stringToAdd) throws DukeException {
-        if (stringToAdd.length < 2) {
-            throw new DukeException("OOPS!! The description of a " + stringToAdd[0] + " cannot be empty.");
+    /**
+     * Adds a new task to the task list.
+     * @param stringsToAdd array that contains details of the task user wants to add to the task list.
+     * @throws DukeException If input string does not comply with todo, deadline or event formats.
+     */
+    public void addToList(String[] stringsToAdd) throws DukeException {
+        if (stringsToAdd.length < 2) {
+            throw new DukeException("OOPS!! The description of a " + stringsToAdd[0] + " cannot be empty.");
         } else {
             Task task;
             String returnString = "";
             boolean containsBy = false;
-            for (int i = 1; i < stringToAdd.length; i++) {
-                if (stringToAdd[i].equals("by")) {
+            for (int i = 1; i < stringsToAdd.length; i++) {
+                if (stringsToAdd[i].equals("by")) {
                     containsBy = true;
                     break;
                 } else {
-                    returnString = returnString + stringToAdd[i] + " ";
+                    returnString = returnString + stringsToAdd[i] + " ";
                 }
             }
-            if (stringToAdd[0].equals("todo")) {
+            if (stringsToAdd[0].equals("todo")) {
                 if (containsBy) {
                     throw new DukeException("Todo cannot have a due date. Create an deadline or event instead :)");
                 } else {
                     task = new Todo(returnString);
                 }
-            } else if (stringToAdd[0].equals("deadline")) {
+            } else if (stringsToAdd[0].equals("deadline")) {
                 if (!containsBy) {
                     throw new DukeException("A deadline needs a due date. Create a todo instead.");
                 } else {
-                    task = new Deadline(returnString, stringToAdd[stringToAdd.length - 1]);
+                    task = new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]);
                 }
             } else {
                 if (!containsBy) {
                     throw new DukeException("An event needs a due date. Create a todo instead.");
                 } else {
-                    task = new Event(returnString, stringToAdd[stringToAdd.length - 1]);
+                    task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
                 }
             }
             tasks.add(task);
@@ -64,6 +75,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a specific task in the task list as completed.
+     * @param number String number that specifies task number in task list to mark as completed.
+     */
     public void mark(String number) {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsDone();
@@ -72,6 +87,10 @@ public class TaskList {
                 temp.getStatusIcon() + "] " + temp);
     }
 
+    /**
+     * Marks a specific task in the task list as not completed.
+     * @param number String number that specifies task number in task list to mark as not completed.
+     */
     public void unmark(String number) {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsNotDone();
@@ -80,6 +99,10 @@ public class TaskList {
                 temp.getStatusIcon() + "] " + temp);
     }
 
+    /**
+     * Deletes all or specific tasks from the task list based on string input.
+     * @param number string that specifies if a specific task number or all tasks are to be deleted.
+     */
     public void delete(String number) {
         if (number.equals("all")) {
             this.tasks =  new ArrayList<>();
@@ -94,4 +117,27 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints tasks in the task list that contain a specified keyword.
+     * @param inputStringsArray keyword used to filer tasks in task list.
+     */
+    public void find(String inputStringsArray) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String details = this.tasks.get(i).details;
+            String[] detailsArray = details.split(" ");
+            for (int j = 0; j < detailsArray.length; j++) {
+                if (detailsArray[j].equals(inputStringsArray)) {
+                    foundTasks.add(this.tasks.get(i));
+                    break;
+                }
+            }
+        }
+        String returnString = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < foundTasks.size(); i++) {
+            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
+                    + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
+        }
+        System.out.println(returnString);
+    }
 }
