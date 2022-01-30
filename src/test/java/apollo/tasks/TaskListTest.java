@@ -103,4 +103,19 @@ public class TaskListTest {
         assertEquals(deadlineExpected, taskList.getTaskString(1));
         assertEquals(eventExpected, taskList.getTaskString(2));
     }
+
+    @Test @Order(5)
+    void getTaskDescription_todoDeadlineEvent() {
+        taskList.addTask(todo);
+        taskList.addTask(deadline);
+        taskList.addTask(event);
+
+        String todoExpected = "todo task";
+        String deadlineExpected = "deadline task";
+        String eventExpected = "event task";
+
+        assertEquals(todoExpected, taskList.getTaskDescription(0));
+        assertEquals(deadlineExpected, taskList.getTaskDescription(1));
+        assertEquals(eventExpected, taskList.getTaskDescription(2));
+    }
 }

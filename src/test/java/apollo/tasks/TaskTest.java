@@ -59,4 +59,11 @@ public class TaskTest {
         assertEquals(Task.Type.DEADLINE.toString(), "D");
         assertEquals(Task.Type.EVENT.toString(), "E");
     }
+
+    @Test @Order(5)
+    void getDescription() {
+        String expected = "This is a test description. ";
+        Task task = new Task(expected, Task.Type.TODO);
+        assertEquals(expected, task.getDescription());
+    }
 }
