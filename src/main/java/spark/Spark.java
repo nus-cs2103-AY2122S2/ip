@@ -9,13 +9,12 @@ import spark.storage.Storage;
 import spark.tasks.TaskList;
 
 public class Spark {
+    private static final String defaultFilePathString = "spark_save_file.txt";
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
-    private static final String defaultFilePathString = "spark_save_file.txt";
 
-    /**
-     * Starts an instance of Spark that stores saved Tasks in
+    /** Starts an instance of Spark that stores saved Tasks in
      * the default relative file-path on the user's hard-disk.
      */
     public Spark() {

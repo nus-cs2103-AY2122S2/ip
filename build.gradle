@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+
+    // Use Shadow plugin to generate fat JAR files
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -10,9 +12,11 @@ repositories {
 }
 
 dependencies {
+    // Use JUnit Jupiter for testing.
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
+    // Use JavaFX
     String javaFxVersion = '11'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -26,6 +30,9 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+    // Use Natty to parse natural language dates e.g., today
+    implementation group: 'com.joestelmach', name: 'natty', version: '0.6'
 }
 
 test {
@@ -42,12 +49,11 @@ test {
     }
 }
 
-application {
-    mainClassName = "seedu.duke.Duke"
-}
+// Define the main class for the application.
+mainClassName = "spark.Spark"
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "spark"
     archiveClassifier = null
 }
 
@@ -55,6 +61,8 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
+    // To enable assertions when executing Java code
+    enableAssertions = true
 }
