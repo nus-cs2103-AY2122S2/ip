@@ -27,7 +27,7 @@ public class DeleteInst extends ModifyListedTaskInst {
      * @param taskNum the task number to delete.
      * @return the Delete Task Instruction.
      */
-    protected static DeleteInst of(int taskNum) {
+    public static DeleteInst of(int taskNum) {
         return new DeleteInst(taskNum);
     }
 
@@ -40,7 +40,7 @@ public class DeleteInst extends ModifyListedTaskInst {
      */
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException {
-        Task deleted = taskList.delete(super.getTaskNum() - 1);
+        Task deleted = taskList.delete(super.getTaskNum() - 1, true);
         return String.format("Okay, I've removed this task:\n%s\nThere are %d tasks left in the list!",
                 deleted.toString(), taskList.length());
     }

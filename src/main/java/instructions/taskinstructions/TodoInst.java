@@ -38,7 +38,7 @@ public class TodoInst extends NewTaskInst {
     @Override
     public String doInst(TaskList taskList) {
         ToDoTask task = ToDoTask.of(super.getTaskDesc());
-        taskList.add(task);
+        taskList.add(true, task);
         return String.format("Okay, added this task:\n%s\nThere are %d tasks "
                         + "in the list now.", task, taskList.length());
     }

@@ -26,7 +26,7 @@ public class UnmarkInst extends ModifyListedTaskInst {
      * @param taskNum the task number to mark as undone.
      * @return the Mark Task as Undone Instruction.
      */
-    protected static UnmarkInst of(int taskNum) {
+    public static UnmarkInst of(int taskNum) {
         return new UnmarkInst(taskNum);
     }
 
@@ -39,7 +39,7 @@ public class UnmarkInst extends ModifyListedTaskInst {
      */
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException {
-        taskList.markTask(super.getTaskNum() - 1, false);
+        taskList.markTask(super.getTaskNum() - 1, false, true);
         return String.format("Okay, this task needs to be done:\n%s",
                 taskList.displayTask(super.getTaskNum() - 1));
     }

@@ -69,7 +69,7 @@ public final class FileManager {
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 Task task = parseLine(data);
-                output.add(task);
+                output.add(true, task);
             }
             sc.close();
         } catch (FileNotFoundException e) {
@@ -110,7 +110,8 @@ public final class FileManager {
         Supplier<String> descSupplier = () -> input.substring
                 (indexAftNumber + 7, indexAftDesc - 1);
 
-        switch (input.charAt(indexAftNumber + 1)) { // the type of tasks
+        // the type of tasks
+        switch (input.charAt(indexAftNumber + 1)) {
         case 'T': // To Do task
             desc = input.substring(indexAftNumber + 7);
             output = ToDoTask.of(desc);
@@ -140,7 +141,9 @@ public final class FileManager {
         default: //unknown task
             throw new SaveFileModifiedException("Unknown task type detected!");
         }
-        switch (input.charAt(indexAftNumber + 4)) { // check if task is done
+
+        // check if task is done
+        switch (input.charAt(indexAftNumber + 4)) {
         case 'X':
             output.markAs(true);
             break;
@@ -149,7 +152,9 @@ public final class FileManager {
             break;
         default: //unknown state
             throw new SaveFileModifiedException("Unknown task state detected!");
-        } // the Task output
+        }
+
+        // the Task output
         return output;
     }
 }

@@ -48,10 +48,10 @@ public class Fluffers extends TaskManagerChatbot {
     }
 
     /** Name of the saved file */
-    private static String fileName = "saved-taskList.txt";
+    private static String fileName = "";
 
     /** Folder path to the saved file */
-    private static String filePath = "data";
+    private static String filePath = "";
 
     /**
      * Constructs an awake Fluffers.
@@ -60,8 +60,24 @@ public class Fluffers extends TaskManagerChatbot {
      *          not have been from the string representation of a task, indicating external
      *          modification to the file.
      */
-    public Fluffers() throws SaveFileModifiedException {
+    private Fluffers() throws SaveFileModifiedException {
         super(FileManager.loadTaskListFromFile(filePath, fileName));
+    }
+
+    /**
+     * Gets a Fluffers object and sets the file path and file name for Fluffers to save/load from.
+     *
+     * @param filePath the file path to the file that Fluffers saves/loads from.
+     * @param fileName the file name that Fluffer saves/loads from.
+     * @return the Fluffers object
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could
+     *          not have been from the string representation of a task, indicating external
+     *          modification to the file.
+     */
+    public static Fluffers get(String filePath, String fileName) throws SaveFileModifiedException {
+        Fluffers.filePath = filePath;
+        Fluffers.fileName = fileName;
+        return new Fluffers();
     }
 
     /**
@@ -126,15 +142,32 @@ public class Fluffers extends TaskManagerChatbot {
     }
 
     /**
+     * Represents the Fluffers object as a String, displaying the version and date last updated.
+     *
+     * @return the String representing Fluffers, with the version number and date last updated.
+     */
+    @Override
+    public String toString() {
+        return "Version 0.2, Last Updated: 30 Jan 2022";
+    }
+
+    /**
      * Starts the program/wakes Fluffers up.
      *
      * @param args input CLI arguments.
-     * @throws SaveFileModifiedException when the save file contains invalid symbols that could
-     *          not have been from the string representation of a task, indicating external
-     *          modification to the file.
      */
-    public static void main(String[] args) throws SaveFileModifiedException {
-        Fluffers f = new Fluffers();
+    public static void main(String[] args) {
+        Fluffers f;
+        String filePath = "data";
+        String fileName = "saved-taskList.txt";
+        try {
+            f = Fluffers.get(filePath, fileName);
+        } catch (SaveFileModifiedException e) {
+            System.out.println(String.format("The save file at %s/%s has been modified, and is unreadable."
+                    + " Either delete the file, or fix it manually by deleting any wrong entries.", filePath,
+                    fileName));
+            return;
+        }
 
         System.out.println(f.greet());
 
