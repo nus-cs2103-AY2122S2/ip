@@ -19,8 +19,8 @@ public class Ui {
     private static final String SEE_YOU_MESSAGE = "Bye!";
     private static final String PROMPT_INSTRUCTION_MESSAGE = "What else can I do for you?";
 
-    private PrintStream outputStream;
-    private Parser parser;
+    private final PrintStream outputStream;
+    private final Parser parser;
 
     /**
      * Constructs a UI, with the specified output stream.

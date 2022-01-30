@@ -8,7 +8,7 @@ import java.util.HashMap;
 public abstract class Task {
 
     private boolean isDone;
-    private String description;
+    private final String description;
 
     // Used for generating info table about the task.
     private static final String DESCRIPTION_FIELD = "description";
