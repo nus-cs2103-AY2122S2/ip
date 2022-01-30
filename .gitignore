@@ -18,3 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 /data/luke.txt
 */data/luke.txt
+
+src/main/java/META-INF/MANIFEST.MF
