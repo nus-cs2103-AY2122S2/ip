@@ -21,14 +21,29 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Return existing tasks from task list
+     *
+     * @return the list of tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Set a task as complete
+     *
+     * @param index the task number to set as complete
+     */
     public void completedTask(int index) {
         tasks.get(index).setComplete();
     }
 
+    /**
+     * Validate user input and create ToDo task
+     *
+     * @param userInput the input from user
+     */
     public boolean addToDoTask(String userInput) {
         String description = TaskValidator.validateToDo(userInput);
         boolean noDescription = description.equals("");
@@ -41,9 +56,13 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Validate user input and create Deadline task
+     *
+     * @param userInput the input from user
+     */
     public boolean addDeadlineTask(String userInput) {
         try {
-
             String[] information = TaskValidator.validateDeadline(userInput);
             boolean isDescriptionEmpty = information[0].equals("");
             boolean isDatelineEmpty = information[1].equals("");
@@ -60,6 +79,11 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Validate user input and create Event task
+     *
+     * @param userInput the input from user
+     */
     public boolean addEventTask(String userInput) {
         try {
             String[] information = TaskValidator.validateEvent(userInput);

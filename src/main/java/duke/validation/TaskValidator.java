@@ -8,6 +8,11 @@ import duke.exceptions.DukeException;
 
 public class TaskValidator {
 
+    /**
+     * Validate user input date and converts string to LocalDate if true
+     *
+     * @param date the string date input from user
+     */
     public static LocalDate convertDate(final String date) throws DukeException {
         boolean valid = false;
 
@@ -23,6 +28,13 @@ public class TaskValidator {
         }
     }
 
+    /**
+     * Validate user input for ToDo task
+     *
+     * @param userInput the input from user
+     *
+     * @return the validated ToDo description
+     */
     public static String validateToDo(String userInput) {
         String description = "";
 
@@ -45,6 +57,13 @@ public class TaskValidator {
         return description;
     }
 
+    /**
+     * Validate user input for Deadline task
+     *
+     * @param userInput the input from user
+     *
+     * @return the validated deadline information
+     */
     public static String[] validateDeadline(String userInput) {
         String[] information = new String[2];
         information[0] = "";
@@ -79,6 +98,13 @@ public class TaskValidator {
         return information;
     }
 
+    /**
+     * Validate user input for Event task
+     *
+     * @param userInput the input from user
+     *
+     * @return the validated event information
+     */
     public static String[] validateEvent(String userInput) {
         String[] information = new String[2];
         information[0] = "";

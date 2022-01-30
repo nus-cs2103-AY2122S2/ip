@@ -5,6 +5,12 @@ import duke.tasks.Task;
 
 public class UnmarkCommand {
 
+    /**
+     * Mark a task as incomplete
+     *
+     * @param taskList the list of tasks
+     * @param userInput the input from user
+     */
     public UnmarkCommand(TaskList taskList, String userInput) {
         try {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;

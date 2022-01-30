@@ -17,10 +17,6 @@ public class Deadline extends Task {
         return deadlineBy;
     }
 
-    public void setDeadlineBy(LocalDate deadlineBy) {
-        this.deadlineBy = deadlineBy;
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadlineBy + ")";

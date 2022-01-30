@@ -5,6 +5,12 @@ import duke.tasks.Task;
 
 public class RemoveCommand extends Command {
 
+    /**
+     * Removes a task from task list
+     *
+     * @param taskList the list of tasks
+     * @param userInput the input from user
+     */
     public RemoveCommand(TaskList taskList, String userInput) {
         try {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;

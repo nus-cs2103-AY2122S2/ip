@@ -8,6 +8,13 @@ import java.util.Locale;
 
 public class Parser {
 
+    /**
+     * Process and validate user input to instantiate intended class
+     *
+     * @param commandType the type of task
+     * @param userInput the input from the user
+     * @param taskList the list of tasks
+     */
     public static void processUserInput(CommandType commandType, String userInput,
                                         TaskList taskList) throws DukeException {
         switch (commandType) {
@@ -39,10 +46,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Types of valid commands
+     */
     public enum CommandType {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, BYE, NULL
     }
 
+    /**
+     * Converts user input into a valid command type
+     *
+     * @param userInput the input from user
+     */
     public static CommandType getCommandType(String userInput) {
         String command = userInput.split(" ")[0].toLowerCase(Locale.ROOT);
         switch (command) {
@@ -66,5 +81,4 @@ public class Parser {
                 return CommandType.NULL;
         }
     }
-
 }

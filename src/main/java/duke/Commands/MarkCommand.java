@@ -5,6 +5,12 @@ import duke.tasks.Task;
 
 public class MarkCommand {
 
+    /**
+     * Mark a task as complete
+     *
+     * @param taskList the list of tasks
+     * @param userInput the input from user
+     */
     public MarkCommand(TaskList taskList, String userInput) {
         try {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;

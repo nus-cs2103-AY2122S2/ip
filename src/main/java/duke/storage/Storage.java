@@ -24,6 +24,10 @@ public class Storage {
         this.filePath = input;
     }
 
+    /**
+     * Reads existing task text file from local folder
+     * If file does not exist, create new text file
+     */
     public void readFile() {
         try {
             Path dataFilePath = Paths.get("data/");
@@ -38,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save current task list into a text file
+     *
+     * @param tasks the list of tasks
+     */
     public void saveData(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -67,6 +76,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads all tasks in text file into a new TaskList instance
+     *
+     * @return the list of tasks from the saved text file
+     */
     public ArrayList<Task> loadData() {
         TaskList taskList = new TaskList();
         try {

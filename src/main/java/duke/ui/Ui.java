@@ -34,6 +34,11 @@ public class Ui {
         System.out.println("Command is invalid, please try again!");
     }
 
+    /**
+     * Iterates and prints through the tasks
+     *
+     * @param tasks the ArrayList of tasks
+     */
     public static void printTasks(ArrayList<Task> tasks) {
         int count = 1;
         for (Task task : tasks) {

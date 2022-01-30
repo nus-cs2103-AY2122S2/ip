@@ -15,10 +15,6 @@ public class Event extends Task {
         return eventBy;
     }
 
-    public void setEventBy(LocalDate eventBy) {
-        this.eventBy = eventBy;
-    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventBy + ")";
