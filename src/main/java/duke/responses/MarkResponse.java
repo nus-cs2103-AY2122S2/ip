@@ -7,14 +7,15 @@ import duke.task.Task;
  */
 
 public class MarkResponse implements Response {
-    Task currTask;
+
+    private Task currTask;
 
     /**
      * Constructs the response based on the Task
      * @param currTask
      */
     public MarkResponse(Task currTask) {
-        this.currTask = currTask;    
+        this.currTask = currTask;
     }
 
     /**

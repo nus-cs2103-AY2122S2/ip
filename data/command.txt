@@ -1,5 +1,7 @@
 T | 1 | a
-T | 0 | ahhh
+T | 1 | ahhh
 T | 0 | a
 T | 0 | b
 T | 0 | a
+T | 0 | a
+T | 0 | b

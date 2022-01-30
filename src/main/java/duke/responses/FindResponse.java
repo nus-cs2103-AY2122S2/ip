@@ -6,14 +6,13 @@ import duke.data.TaskList;
  * Response that is created in the event of FindCommand
  */
 public class FindResponse implements Response {
-    
+
     private TaskList iterate;
     private int count = 1;
-    
-    public FindResponse(TaskList iterate) {
-        this.iterate = iterate;    
-    }
 
+    public FindResponse(TaskList iterate) {
+        this.iterate = iterate;
+    }
     @Override
     public void callback() {
         System.out.println(

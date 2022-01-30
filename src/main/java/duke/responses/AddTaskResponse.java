@@ -8,20 +8,18 @@ import duke.task.Task;
  */
 
 public class AddTaskResponse implements Response {
-    Task currTask;
-    TaskList tasklist;
+    private Task currTask;
+    private TaskList tasklist;
 
     /**
      * Constructor for the AddTaskResponse.
      * @param currTask Task that is created.
      * @param tasklist The List of Task.
      */
-
     public AddTaskResponse(Task currTask, TaskList tasklist) {
         this.currTask = currTask;
         this.tasklist = tasklist;
     }
-
 
     /**
      * Callback function that displays the intended results.

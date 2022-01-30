@@ -1,11 +1,11 @@
 package duke.dukeexceptions;
 
 public class ToDoException extends DukeException {
-    
+
     public ToDoException(String msg) {
         super(msg);
     }
-    
+
     @Override
     public void callback() {
         System.out.println(

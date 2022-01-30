@@ -3,7 +3,7 @@ package duke.responses;
 /**
  * Response created at the termination of the Chatbot.
  */
-public class StopResponse implements Response{
+public class StopResponse implements Response {
 
     /**
      * Callback function that displays the intended results

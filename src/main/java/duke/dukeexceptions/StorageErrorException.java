@@ -1,6 +1,7 @@
 package duke.dukeexceptions;
 
 public class StorageErrorException extends DukeException {
+
     public StorageErrorException(String msg) {
         super(msg);
     }

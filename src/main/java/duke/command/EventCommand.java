@@ -6,24 +6,23 @@ import duke.responses.Response;
 import duke.task.Event;
 import duke.task.Task;
 
-/***
+/**
  * Command that is run when the user inputs a Event Task.
  */
-public class EventCommand extends  Command {
+public class EventCommand extends Command {
 
-    /***
-     * Constructors the Command using the user command 
-     * @param stringCmd String representation of the users command
+    /**
+     * Constructors the Command using the user command.
+     * @param stringCmd String representation of the users command.
      */
-    
     public EventCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }
 
-    /***
-     * Creates the Event Task and adds ot to the TaskList
+    /**
+     * Creates the Event Task and adds ot to the TaskList.
      * @return Response class that would contains the UI message.
-     * @throws DukeException thrown in the event of a invalid command
+     * @throws DukeException thrown in the event of a invalid command.
      */
     @Override
     public Response execute() throws DukeException {

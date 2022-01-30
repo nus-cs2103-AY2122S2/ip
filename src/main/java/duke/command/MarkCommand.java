@@ -5,21 +5,21 @@ import duke.dukeexceptions.DukeTaskListException;
 import duke.responses.MarkResponse;
 import duke.responses.Response;
 
-/***
- * Command that is created when user wants to Mark a Task as done
+/**
+ * Command that is created when user wants to Mark a Task as done.
  */
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
-    /***
-     * Constructors the Command using the user command 
+    /**
+     * Constructors the Command using the user command
      * @param stringCmd String representation of the users command
      */
-
     public MarkCommand(String stringCmd) {
         this.stringCmd = stringCmd;
     }
-    /***
+
+    /**
      * Marks a task as done from the TaskList and updates the Storage.
      * @return Response class that would contains the UI message.
      * @throws DukeException thrown in the event of a invalid index.

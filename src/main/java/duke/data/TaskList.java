@@ -1,8 +1,8 @@
 package duke.data;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * List containing all the Task
@@ -14,7 +14,6 @@ public class TaskList {
     /**
      * Constructs a empty TaskList
      */
-
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -36,7 +35,7 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    /***
+    /**
      * Gets the task at the specific index of the TaskList
      * @param index
      * @return the Task at that specific index
@@ -45,34 +44,34 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    /***
+    /**
      * @return Gets number of Task in the TaskList
      */
     public int taskLength() {
         return tasks.size();
     }
 
-    /***
+    /**
      * @return a ArrayList of Task
      */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
-    /***
+    /**
      * Marks the task at index to be done
      * @param index index in the task
      */
     public void markTask(int index) {
         tasks.get(index).setMark(true);
     }
-    
-    /***
+
+    /**
      * Marks the task at index to be undone
      * @param index index in the task
      */
     public void unmarkTask(int index) {
         tasks.get(index).setMark(false);
     }
-    
+
 }

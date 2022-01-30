@@ -1,6 +1,5 @@
 package duke.responses;
 
-
 import duke.task.Task;
 
 /***
@@ -8,11 +7,11 @@ import duke.task.Task;
  */
 
 public class UnMarkResponse implements Response {
-    Task currTask;
+    private Task currTask;
 
     /**
      * Constructs the response based on the Task
-     * @param currTask 
+     * @param currTask the task to unmark
      */
     public UnMarkResponse(Task currTask) {
         this.currTask = currTask;

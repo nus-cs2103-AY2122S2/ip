@@ -6,10 +6,9 @@ import duke.task.Task;
  * Type of response that is created when a task is deleted.
  */
 public class DeleteResponse implements Response {
-
-    Task del;
-    int index;
-    int size;
+    private Task del;
+    private int index;
+    private int size;
 
     /**
      * @param del This is the task deleted

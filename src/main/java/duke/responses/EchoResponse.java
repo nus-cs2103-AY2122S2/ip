@@ -4,7 +4,8 @@ package duke.responses;
  * Type of response that is created to echo a response.
  */
 public class EchoResponse implements Response {
-    String msg;
+
+    private String msg;
 
     /**
      * Constructor for Each Response.

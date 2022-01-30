@@ -4,7 +4,6 @@ package duke.responses;
  * Welcome response
  */
 public class WelcomeResponse implements Response {
-
     /**
      * Callback function that displays the intended results
      */
