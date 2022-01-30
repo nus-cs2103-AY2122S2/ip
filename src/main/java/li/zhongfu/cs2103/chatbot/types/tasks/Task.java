@@ -3,6 +3,7 @@ package li.zhongfu.cs2103.chatbot.types.tasks;
 import java.io.Serializable;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Object that represents a to-do list task. Contains a name and a state.
@@ -58,4 +59,18 @@ public abstract class Task implements Serializable {
      * @return task details in a human-readable string
      */
     abstract public String toString();
+
+    @Override
+    public boolean equals(Object o) {
+        if (o != null && this.getClass() == o.getClass()) {
+            Task task = (Task) o;
+            return this.name == task.name && this.done == task.done;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.done);
+    }
 }

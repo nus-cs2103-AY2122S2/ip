@@ -8,4 +8,6 @@ public class ToDo extends Task {
     public String toString() {
         return String.format("[T][%s] %s", this.getDone() ? "X" : " ", this.getName());
     }
+
+    // no equals() and hashCode() -- use Task implementation
 }
