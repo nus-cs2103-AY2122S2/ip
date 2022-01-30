@@ -55,22 +55,11 @@ public class Ui {
     }
 
     /**
-     * Prints a string with separators before and after it.
+     * Prints a variable number of strings with separators before and after it.
      *
-     * @param message The string to be printed with separators before and after it.
+     * @param messages An variable number of strings to be printed with separators before and after them.
      */
-    public static void prettyPrint(String message) {
-        printIndent(SEPARATOR);
-        printIndent(message);
-        printIndent(SEPARATOR + "\n");
-    }
-
-    /**
-     * Prints multiple string with separators before and after it.
-     *
-     * @param messages An array of strings string to be printed with separators before and after them.
-     */
-    public static void prettyPrint(String[] messages) {
+    public static void prettyPrint(String ... messages) {
         printIndent(SEPARATOR);
         for (String message : messages) {
             printIndent(message);
