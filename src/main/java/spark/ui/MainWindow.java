@@ -14,7 +14,9 @@ import spark.Spark;
  */
 public class MainWindow extends AnchorPane {
     @FXML // @FXML annotation marks a private or protected member and makes it accessible to FXML despite its modifier
-    private ScrollPane scrollPane;
+    private ScrollPane tasksScrollPane;
+    @FXML
+    private ScrollPane dialogScrollPane;
     @FXML
     private VBox tasksContainer;
     @FXML
@@ -30,7 +32,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(tasksContainer.heightProperty());
+        tasksScrollPane.vvalueProperty().bind(tasksContainer.heightProperty());
+        dialogScrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setSpark(Spark spark) {
@@ -46,6 +49,11 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = spark.getResponse(input);
         dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, sparkImage),
+                DialogBox.getDukeDialog(response, sparkImage)
+        );
+        // placeholder -> delete!
+        tasksContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, sparkImage),
                 DialogBox.getDukeDialog(response, sparkImage)
         );
