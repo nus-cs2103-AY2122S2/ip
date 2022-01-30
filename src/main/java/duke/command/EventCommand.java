@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.AddTaskResponse;
-import main.java.duke.responses.Response;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
+import duke.dukeexceptions.DukeException;
+import duke.responses.AddTaskResponse;
+import duke.responses.Response;
+import duke.task.Event;
+import duke.task.Task;
 
 /***
  * Command that is run when the user inputs a Event Task.

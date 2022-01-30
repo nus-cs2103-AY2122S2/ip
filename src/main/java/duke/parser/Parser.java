@@ -1,11 +1,11 @@
-package main.java.duke.parser;
+package duke.parser;
 
-import main.java.duke.command.*;
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.dukeexceptions.ForeignException;
-import main.java.duke.responses.Response;
-import main.java.duke.responses.StartResponse;
-import main.java.duke.responses.WelcomeResponse;
+import duke.command.*;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.ForeignException;
+import duke.responses.Response;
+import duke.responses.StartResponse;
+import duke.responses.WelcomeResponse;
 
 /***
  * Parser that deals with user inputs.

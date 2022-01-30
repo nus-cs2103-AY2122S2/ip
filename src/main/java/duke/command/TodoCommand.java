@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.AddTaskResponse;
-import main.java.duke.responses.Response;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import duke.dukeexceptions.DukeException;
+import duke.responses.AddTaskResponse;
+import duke.responses.Response;
+import duke.task.Task;
+import duke.task.ToDo;
 
 
 /***

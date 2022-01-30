@@ -1,6 +1,6 @@
-package main.java.duke.responses;
+package duke.responses;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * Type of response that is created when a task is deleted.

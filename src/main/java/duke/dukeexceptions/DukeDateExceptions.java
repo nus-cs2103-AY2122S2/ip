@@ -1,4 +1,4 @@
-package main.java.duke.dukeexceptions;
+package duke.dukeexceptions;
 
 /**
  * Duke exceptions that catch DateTime related errors

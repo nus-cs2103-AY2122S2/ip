@@ -1,6 +1,6 @@
-package main.java.duke.responses;
+package duke.responses;
 
-import main.java.duke.data.TaskList;
+import duke.data.TaskList;
 
 /**
  * Response that is created in the event of FindCommand

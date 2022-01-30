@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.data.Storage;
-import main.java.duke.data.TaskList;
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.Response;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.dukeexceptions.DukeException;
+import duke.responses.Response;
 
 /***
  * The base command class.

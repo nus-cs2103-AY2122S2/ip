@@ -1,7 +1,7 @@
-package main.java.duke.responses;
+package duke.responses;
 
-import main.java.duke.data.TaskList;
-import main.java.duke.task.Task;
+import duke.data.TaskList;
+import duke.task.Task;
 
 /**
  * Response when added a Task

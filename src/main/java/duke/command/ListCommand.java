@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.ListResponse;
-import main.java.duke.responses.Response;
+import duke.dukeexceptions.DukeException;
+import duke.responses.ListResponse;
+import duke.responses.Response;
 
 /***
  * Command that is created when user wants to list all the task in the 
