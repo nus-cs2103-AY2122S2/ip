@@ -15,8 +15,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with the specified description.
+     *
      * @param description The specified description for the task.
-     * @param by The datetime to indicate by when the task should be completed.
+     * @param by          The datetime to indicate by when the task should be completed.
      * @throws DateTimeParseException If the datetime is not one of the format accepted by {@code DateTimeParser}
      */
     public Deadline(String description, String by) throws DateTimeParseException {
@@ -26,6 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with the argument map.
+     *
      * @param args The map containing both the arguments required by Deadline class.
      * @throws DateTimeParseException If the datetime is not one of the format accepted by {@code DateTimeParser}
      */

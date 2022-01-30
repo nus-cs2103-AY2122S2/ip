@@ -34,6 +34,7 @@ public class Ui {
 
     /**
      * Shows the specific message, formatted with borders.
+     *
      * @param output The message to show.
      */
     public void showOutput(String output) {
@@ -50,6 +51,7 @@ public class Ui {
 
     /**
      * Returns the next line of input entered by the user.
+     *
      * @return The next line of input from the user.
      */
     public String readInput() {
@@ -58,6 +60,7 @@ public class Ui {
 
     /**
      * Displays the error message formatted with the chat bot's personality.
+     *
      * @param message The error message to display.
      */
     public void showError(String message) {

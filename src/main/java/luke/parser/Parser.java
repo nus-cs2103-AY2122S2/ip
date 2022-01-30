@@ -23,8 +23,6 @@ import luke.data.tasks.Deadline;
 import luke.data.tasks.Event;
 import luke.data.tasks.Todo;
 
-
-
 /**
  * Implements the parser class which parses user input and returns commands to execute.
  */
@@ -46,6 +44,7 @@ public class Parser {
 
     /**
      * Parses the specified input and returns the appropriate command.
+     *
      * @param input The specified input to parse.
      * @return The appropriate command based on the specified input.
      */
@@ -77,11 +76,17 @@ public class Parser {
         }
     }
 
-
-    public static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
+    /**
+     * Prepares and return the appropriate read command.
+     *
+     * @param cmdAction The command action tied to the user input.
+     * @param args      The arguments that the user have supplied.
+     * @return The appropriate read command based on user input.
+     */
+    private static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
         switch (cmdAction) {
         case FIND:
-            String keyword = parseFilterArgument(args);
+            String keyword = parseFindArgument(args);
             return new FindCommand(keyword);
         default:
             return new ListCommand();
@@ -91,8 +96,9 @@ public class Parser {
 
     /**
      * Prepares and return the appropriate update command.
+     *
      * @param cmdAction The command action tied to the user input.
-     * @param args The arguments that the user have supplied.
+     * @param args      The arguments that the user have supplied.
      * @return The appropriate update command based on user input.
      */
     private static UpdateCommand prepareUpdateCommand(CommandAction cmdAction, String[] args) {
@@ -109,8 +115,9 @@ public class Parser {
 
     /**
      * Prepares and return the appropriate add command.
+     *
      * @param cmdAction The command action tied to the user input.
-     * @param args The arguments that the user have supplied.
+     * @param args      The arguments that the user have supplied.
      * @return The appropriate add command based on user input.
      */
     private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
@@ -128,13 +135,14 @@ public class Parser {
 
     /**
      * Parses and return the arguments tied to the add commands.
+     *
      * @param cmdAction The command action tied to the user input.
-     * @param args The arguments that the user have supplied.
+     * @param args      The arguments that the user have supplied.
      * @return The arguments mapped to the keywords of the command.
      * @throws IllegalArgumentException If the argument does not fit the syntax of the command.
      */
     private static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
-        throws IllegalArgumentException {
+            throws IllegalArgumentException {
 
         Map<String, String> argsMap = new HashMap<>();
         if (args.length < 2) {
@@ -160,7 +168,14 @@ public class Parser {
         return argsMap;
     }
 
-    public static String parseFilterArgument(String[] args) throws IllegalArgumentException {
+    /**
+     * Parses and return the arguments tied to the find command
+     *
+     * @param args The arguments that the user have supplied.
+     * @return The arguments mapped to the keywords of the command.
+     * @throws IllegalArgumentException If the argument does not fit the syntax of the command.
+     */
+    public static String parseFindArgument(String[] args) throws IllegalArgumentException {
         if (args.length < 2) {
             throw new IllegalArgumentException(String.format("find command requires a keyword argument.", args[0]));
         }
@@ -171,8 +186,10 @@ public class Parser {
 
         return args[1];
     }
+
     /**
      * Parses and return the arguments tied to the update commands.
+     *
      * @param args The arguments that the user have supplied.
      * @return The arguments mapped to the keywords of the command.
      * @throws IllegalArgumentException If the argument does not fit the syntax of the command.

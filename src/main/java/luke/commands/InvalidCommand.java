@@ -22,6 +22,7 @@ public class InvalidCommand extends Command {
 
     /**
      * Constructs the invalid command with the error message, displaying the output as an error.
+     *
      * @param error The error message.
      */
     public InvalidCommand(String error) {

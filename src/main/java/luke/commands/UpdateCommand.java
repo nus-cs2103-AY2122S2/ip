@@ -9,6 +9,7 @@ public abstract class UpdateCommand extends Command {
 
     /**
      * Constructs the update command with the specified index.
+     *
      * @param index The specified index of the task to be updated in the task list.
      */
     UpdateCommand(int index) {

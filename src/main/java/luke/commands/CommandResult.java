@@ -8,6 +8,7 @@ public class CommandResult {
 
     /**
      * Constructs a command result with the specified result.
+     *
      * @param result The specified result for the command.
      */
     CommandResult(String result) {

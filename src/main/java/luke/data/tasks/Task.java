@@ -11,6 +11,7 @@ public abstract class Task {
     /**
      * Construct a task with the specified description.
      * All task by default are set to not done.
+     *
      * @param description The specified description for the task.
      */
     public Task(String description) {
@@ -21,6 +22,7 @@ public abstract class Task {
 
     /**
      * Returns an X if isDone is true, empty space if X is false.
+     *
      * @return An X if isDone is true, empty space if X is false.
      */
     private String getStatusIcon() {
@@ -43,6 +45,7 @@ public abstract class Task {
 
     /**
      * Returns true if this task is done.
+     *
      * @return True if this task is done.
      */
     public boolean isDone() {
@@ -68,6 +71,7 @@ public abstract class Task {
 
     /**
      * Returns the command string (user input) used to create this task.
+     *
      * @return The command string (user input) used to create this task.
      */
     public abstract String getCommandString();

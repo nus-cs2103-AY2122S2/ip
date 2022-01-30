@@ -15,8 +15,9 @@ public class Event extends Task {
 
     /**
      * Constructs an event task with the specified description.
+     *
      * @param description The specified description for the task.
-     * @param at The datetime to indicate at which time the event starts.
+     * @param at          The datetime to indicate at which time the event starts.
      * @throws DateTimeParseException If the datetime is not one of the format accepted by {@code DateTimeParser}
      */
     public Event(String description, String at) throws DateTimeParseException {
@@ -26,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event task with the argument map.
+     *
      * @param args The map containing both the arguments required by Event class.
      * @throws DateTimeParseException If the datetime is not one of the format accepted by {@code DateTimeParser}
      */

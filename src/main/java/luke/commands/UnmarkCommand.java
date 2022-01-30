@@ -12,19 +12,21 @@ public class UnmarkCommand extends UpdateCommand {
 
     /**
      * Constructs the unmark command with the specified index.
+     *
      * @param index The specified index of the task to be mark as not done in the task list.
      */
     public UnmarkCommand(int index) {
         super(index);
     }
 
-    @Override
     /**
      * Takes in a task list, marks the task at the specified index in the task list as not done.
      * Returns its command result.
+     *
      * @param taskList The task list to perform the action on.
      * @return The result of this command's execution.
      */
+    @Override
     public CommandResult execute(TaskList taskList) {
         try {
             taskList.get(getIndex() - 1).unmarkAsDone();

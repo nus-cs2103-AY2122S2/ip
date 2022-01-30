@@ -9,6 +9,7 @@ import java.util.List;
 public interface Storable {
     /**
      * Method invoked by StorageFile to get the data that needs to be stored into a file.
+     *
      * @return An ArrayList of String containing the data to be stored into a file.
      */
     List<String> getData();

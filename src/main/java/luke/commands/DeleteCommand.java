@@ -12,19 +12,20 @@ public class DeleteCommand extends UpdateCommand {
 
     /**
      * Constructs the delete command with the specified index.
+     *
      * @param index The specified index of the task to be deleted in the task list.
      */
     public DeleteCommand(int index) {
         super(index);
     }
 
-
-    @Override
     /**
      * Takes in a task list, remove the specified index from the task list and returns its command result.
+     *
      * @param taskList The task list to perform the action on.
      * @return The result of this command's execution.
      */
+    @Override
     public CommandResult execute(TaskList taskList) {
         try {
             Task removedTask = taskList.remove(getIndex() - 1);

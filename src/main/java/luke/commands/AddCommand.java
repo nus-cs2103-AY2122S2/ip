@@ -15,6 +15,7 @@ public abstract class AddCommand extends Command {
 
     /**
      * Constructs an add command with the specified task.
+     *
      * @param task The specified task to be added into the task list.
      */
     AddCommand(Task task) {
@@ -25,13 +26,13 @@ public abstract class AddCommand extends Command {
         return this.task;
     }
 
-
-    @Override
     /**
      * Takes in a task list, add the task into the task list and returns its command result.
+     *
      * @param taskList The task list to perform the action on.
      * @return The result of this command's execution.
      */
+    @Override
     public CommandResult execute(TaskList taskList) {
         taskList.add(task);
         return new CommandResult(String.format(DEFAULT_MESSAGE, this.task, taskList.size()));

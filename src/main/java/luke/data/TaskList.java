@@ -21,10 +21,6 @@ public class TaskList implements Storable {
         taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-
     @Override
     public List<String> getData() {
         List<String> list = new ArrayList<>();
@@ -37,6 +33,7 @@ public class TaskList implements Storable {
 
     /**
      * Returns true if the task list is empty.
+     *
      * @return True if the task list is empty.
      */
     public boolean isEmpty() {
@@ -45,6 +42,7 @@ public class TaskList implements Storable {
 
     /**
      * Returns the size of the task list.
+     *
      * @return The size of the task list.
      */
     public int size() {
@@ -53,6 +51,7 @@ public class TaskList implements Storable {
 
     /**
      * Returns the element at the specified index of the task list.
+     *
      * @param index The specified index.
      * @return The task at the specified index of the task list.
      */
@@ -62,6 +61,7 @@ public class TaskList implements Storable {
 
     /**
      * Adds the specified task to the task list.
+     *
      * @param task The specified task to add into the task list.
      */
     public void add(Task task) {
@@ -70,6 +70,7 @@ public class TaskList implements Storable {
 
     /**
      * Removes and returns the task at the specified index of the task list.
+     *
      * @param index The specified index.
      * @return The task removed at the specified index of the task list.
      */

@@ -24,6 +24,7 @@ public class Luke {
      * Constructs a new Luke chat bot with the specified file path as the data file.
      * If unable to read/write file or create a new file at the specified file path,
      * the system will print the error message and exit.
+     *
      * @param filePath The specified file path to the data file.
      */
     Luke(String filePath) {
@@ -83,6 +84,9 @@ public class Luke {
         ui.close();
     }
 
+    /**
+     * Entry point of the whole chat bot.
+     */
     public static void main(String[] args) {
         Luke luke = new Luke("data/luke.txt");
         luke.start();
