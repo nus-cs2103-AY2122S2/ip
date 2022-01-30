@@ -38,71 +38,96 @@ public class Ui {
      * @throws DukeException
      * @throws IOException
      */
-    void run() throws DukeException, IOException {
-        Scanner sc = new Scanner(System.in);
-        String intro = "Hello! I'm duke.Duke\n" +
-                "What can I do for you?";
-        System.out.println(intro);
+    String run(String cmd) {
 
-        String cmd = sc.next();
         Parser parser = new Parser(tasks);
+        String response;
 
-        while (!cmd.equals("bye")) {
-            if (cmd.equals(Ui.Commands.LIST.command)) {
-                parser.listTasks();
+        if (cmd.startsWith(Ui.Commands.LIST.command)) {
+            response = parser.listTasks();
 
-            } else if (cmd.equals(Ui.Commands.MARK.command)) {
-                int taskNumber = 0;
-                taskNumber = sc.nextInt();
-                parser.mark(taskNumber);
+        } else if (cmd.startsWith(Ui.Commands.MARK.command)) {
+            try {
+                int taskNumber = Integer.parseInt(cmd.split(" ")[1]);
+                response = parser.mark(taskNumber);
+            } catch (Exception e) {
+                return "The format should be \"mark [insert task number]\"\n" +
+                        "For example, \"mark 1\" to mark the first task";
+            }
 
-            } else if (cmd.equals(Ui.Commands.UNMARK.command)) {
-                int taskNumber = 0;
-                taskNumber = sc.nextInt();
-                parser.unmark(taskNumber);
 
-            } else if (cmd.equals(Ui.Commands.TODO.command)) {
-                String description = sc.nextLine();
-                if (description.length() == 0) {
-                    throw new DukeException("OOPS!!! The description of " +
-                            "a todo cannot be empty.");
-                }
-                ToDo todo = new ToDo(description);
-                parser.addToDo(todo);
+        } else if (cmd.startsWith(Ui.Commands.UNMARK.command)) {
+            try {
+                int taskNumber = Integer.parseInt(cmd.split(" ")[1]);
+                response = parser.unmark(taskNumber);
+            } catch (Exception e) {
+                return "The format should be \"unmark [insert task number]\"\n" +
+                        "For example, \"unmark 1\" to unmark the first task";
+            }
 
-            } else if (cmd.equals(Ui.Commands.DEADLINE.command)) {
-                String info = sc.nextLine();
+        } else if (cmd.startsWith(Ui.Commands.TODO.command)) {
+            String description = cmd.split(" ")[1];
+            if (description.length() == 0) {
+                return "OOPS!!! The description of " +
+                        "a todo cannot be empty.";
+            }
+            ToDo todo = new ToDo(description);
+            response = parser.addToDo(todo);
+
+        } else if (cmd.startsWith(Ui.Commands.DEADLINE.command)) {
+            try {
+                String info = cmd.split(" ", 2)[1];
                 String[] split = info.split(" /by ");
                 String description = split[0];
                 String time = split[1];
                 Deadline deadline = new Deadline(description, time);
-                parser.addDeadline(deadline);
+                response = parser.addDeadline(deadline);
+            } catch (Exception e) {
+                return "The format should be \"deadline return book /by yyyy-mm-dd\"";
+            }
 
-            } else if (cmd.equals(Ui.Commands.EVENT.command)) {
-                String info = sc.nextLine();
+        } else if (cmd.startsWith(Ui.Commands.EVENT.command)) {
+            try {
+                String info = cmd.split(" ", 2)[1];
                 String[] split = info.split(" /at ");
                 String description = split[0];
                 String time = split[1];
                 Event event = new Event(description, time);
-                parser.addEvent(event);
-
-            } else if (cmd.equals(Ui.Commands.DELETE.command)) {
-                int taskNumber = sc.nextInt();
-                parser.deleteTask(taskNumber);
-
-            } else if(cmd.equals(Ui.Commands.FIND.command)) {
-                String keyword = sc.next();
-                parser.findTask(keyword);
-                sc.nextLine();
-
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, " +
-                        "but I don't know what that means :-(");
+                response = parser.addEvent(event);
+            } catch (Exception e) {
+                return "The format should be \"deadline attend lesson /at yyyy-mm-dd\"";
             }
-            Storage.saveToFile(tasks);
-            cmd = sc.next();
+
+        } else if (cmd.startsWith(Ui.Commands.DELETE.command)) {
+            try {
+                int taskNumber = Integer.parseInt(cmd.split("")[1]);
+                response = parser.deleteTask(taskNumber);
+            } catch (Exception e) {
+                return "The format should be \"delete [insert task number]\"\n" +
+                        "For example, \"delete 1\" to delete the first task";
+            }
+
+        } else if (cmd.startsWith(Ui.Commands.FIND.command)) {
+            try {
+                String keyword = cmd.split(" ")[1];
+                response = parser.findTask(keyword);
+            } catch (Exception e) {
+                return "The format should be \"borrow book\"";
+            }
+
+        } else {
+            response = "OOPS!!! I'm sorry, " +
+                    "but I don't know what that means :-(";
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        try {
+            Storage.saveToFile(tasks);
+        } catch (Exception e) {
+            return "I'm sorry, I could not save that :(";
+        }
+
+//        System.out.println("Bye. Hope to see you again soon!");
+
+        return response;
     }
 
 

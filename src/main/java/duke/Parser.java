@@ -14,11 +14,12 @@ public class Parser {
     /**
      * prints the list of currently stored tasks
      */
-    void listTasks() {
-        System.out.println("Here are the tasks in your list:");
+    String listTasks() {
+        String response = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
+            response += i + ". " + tasks.get(i - 1) + "\n";
         }
+        return response;
     }
 
 
@@ -27,15 +28,16 @@ public class Parser {
      *
      * @param keyword word to be matched with task description
      */
-    void findTask(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    String findTask(String keyword) {
+        String response = "Here are the matching tasks in your list:\n";
         int currCount = 1;
         for (int i = 1; i <= tasks.size(); i++) {
             if (tasks.get(i - 1).getDescription().contains(keyword)) {
-                System.out.println(currCount++ + ". " + tasks.get(i - 1));
+                response += currCount++ + ". " + tasks.get(i - 1) +"\n";
             }
 
         }
+        return response;
     }
 
 
@@ -44,10 +46,11 @@ public class Parser {
      *
      * @param taskNumber represents which task to mark, 1 for the first task, 2 for the second, etc
      */
-    void mark(int taskNumber) {
+    String mark(int taskNumber) {
         tasks.get(taskNumber - 1).mark();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(taskNumber - 1));
+        String response = "Nice! I've marked this task as done:\n";
+        response += tasks.get(taskNumber - 1);
+        return response;
     }
 
     /**
@@ -55,10 +58,11 @@ public class Parser {
      *
      * @param taskNumber represents which task to unmark, 1 for the first task, 2 for the second, etc
      */
-    void unmark(int taskNumber) {
+    String unmark(int taskNumber) {
         tasks.get(taskNumber - 1).unmark();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(tasks.get(taskNumber - 1));
+        String response = "OK, I've marked this task as not done yet:";
+        response += tasks.get(taskNumber - 1);
+        return response;
     }
 
     /**
@@ -66,12 +70,12 @@ public class Parser {
      *
      * @param toDo ToDo object to be added to TaskList
      */
-    void addToDo(ToDo toDo) {
+    String addToDo(ToDo toDo) {
         tasks.add(toDo);
-        System.out.println("Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + toDo + "\n"
                 + String.format("Now you have %d tasks in the list."
-                , tasks.size()));
+                , tasks.size());
     }
 
     /**
@@ -79,12 +83,12 @@ public class Parser {
      *
      * @param deadline Deadline object to be added to TaskList
      */
-    void addDeadline(Deadline deadline) {
+    String addDeadline(Deadline deadline) {
         tasks.add(deadline);
-        System.out.println("Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + deadline + "\n"
                 + String.format("Now you have %d tasks in the list."
-                , tasks.size()));
+                , tasks.size());
     }
 
     /**
@@ -92,12 +96,13 @@ public class Parser {
      *
      * @param event Event object to be added to TaskList
      */
-    void addEvent(Event event) {
+    String addEvent(Event event) {
         tasks.add(event);
-        System.out.println("Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + event + "\n"
                 + String.format("Now you have %d tasks in the list."
-                , tasks.size()));
+                , tasks.size());
+
     }
 
     /**
@@ -105,12 +110,12 @@ public class Parser {
      *
      * @param number represents which task to delete, 1 for the first task, 2 for the second, etc
      */
-    void deleteTask(int number) {
+    String deleteTask(int number) {
         Task taskToDelete = tasks.get(number - 1);
         tasks.remove(number - 1);
-        System.out.println("Noted. I've removed this task:\n"
+       return "Noted. I've removed this task:\n"
                 + taskToDelete + "\n"
                 + String.format("Now you have %d tasks in the list."
-                , tasks.size()));
+                , tasks.size());
     }
 }
