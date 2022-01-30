@@ -24,8 +24,8 @@ public class Storage {
         try {
             File file = new File(this.filePath);
 
-            boolean createDirectory = file.getParentFile().mkdirs();
-            boolean created = file.createNewFile();
+            boolean hasCreatedDirectory = file.getParentFile().mkdirs();
+            boolean hasCreated = file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, false);
             for (Task task : TaskList.dukeList) {
                 String text = "";
@@ -51,8 +51,8 @@ public class Storage {
 
     public void loadData() throws IOException {
         File file = new File(this.filePath);
-        boolean createDirectory = file.getParentFile().mkdirs();
-        boolean created = file.createNewFile();
+        boolean hasCreateDirectory = file.getParentFile().mkdirs();
+        boolean hasCreated = file.createNewFile();
 
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
@@ -60,22 +60,22 @@ public class Storage {
             String[] commandWords = input.split(" \\| ", 4);
             Task task = null;
             switch (commandWords[0]) {
-                case "D":
-                    task = new Deadline(commandWords[2], commandWords[3]);
-                    display(input);
-                    break;
-                case "E":
-                    task = new Event(commandWords[2], commandWords[3]);
-                    display(input);
-                    break;
-                case "T":
-                    task = new ToDo(commandWords[2]);
-                    String text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + '\n';
-                    display(input);
-                    break;
-                default:
-                    System.err.println("error!!");
-                    break;
+            case "D":
+                task = new Deadline(commandWords[2], commandWords[3]);
+                display(input);
+                break;
+            case "E":
+                task = new Event(commandWords[2], commandWords[3]);
+                display(input);
+                break;
+            case "T":
+                task = new ToDo(commandWords[2]);
+                String text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + '\n';
+                display(input);
+                break;
+            default:
+                System.err.println("error!!");
+                break;
             }
 
                 if (commandWords[1].equals("1")) {
