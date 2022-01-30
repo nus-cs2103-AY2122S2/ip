@@ -10,6 +10,10 @@ import athena.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Provides the point of entry into the Athena program. Initializes the program and handles
+ * the main program logic.
+ */
 public class Main {
     private static final String SAVE_DIRECTORY = "data";
     private static final String SAVE_FILENAME = "athena.txt";
@@ -19,6 +23,10 @@ public class Main {
     private final Ui ui;
     private boolean isActive;
 
+    /**
+     * Initializes the program by loading task data from disk if any and initializing all
+     * requisite objects and data structures.
+     */
     public Main() {
         // Load save data if present
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
@@ -41,6 +49,11 @@ public class Main {
         }
     }
 
+    /**
+     * Starts running the main logic of the program, which is to keep reading and running user
+     * commands until the 'bye' command is given. Also, saves the task list to the disk
+     * when modified.
+     */
     public void run() {
         while (isActive) {
             String input = ui.readNextLine();

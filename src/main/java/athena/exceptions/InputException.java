@@ -1,12 +1,26 @@
 package athena.exceptions;
 
+/**
+ * Represents a specific error arising from incorrect or invalid user input given to Athena.
+ */
 public class InputException extends Exception {
     private final InputErrorCode inputErrorCode;
 
+    /**
+     * Constructs an InputException with the given InputErrorCode.
+     *
+     * @param inputErrorCode The type of input error made by the user.
+     */
     public InputException(InputErrorCode inputErrorCode) {
         this.inputErrorCode = inputErrorCode;
     }
 
+    /**
+     * Returns the String response made by Athena corresponding to the user's input error,
+     * to be displayed to the user.
+     *
+     * @return Specific response String to user input error.
+     */
     @Override
     public String getMessage() {
         switch (inputErrorCode) {

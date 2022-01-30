@@ -1,5 +1,8 @@
 package athena.exceptions;
 
+/**
+ * Represents a possible type of user input error when giving commands to Athena.
+ */
 public enum InputErrorCode {
     INVALID_COMMAND,
     MISSING_TASK_NUMBER,
