@@ -50,7 +50,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", isMark ? "X" : " ", description);
+        return String.format("[%s] %s", isMark ? "X" : "  ", description);
     }
 
     /**

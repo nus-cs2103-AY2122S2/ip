@@ -89,4 +89,18 @@ public class TaskList {
 
         return newTaskList;
     }
+
+    /**
+     * Returns the visual description of the task list.
+     *
+     * @return description of the task list.
+     */
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < taskArr.size(); i++) {
+            output += String.format("      %d. %s\n", i + 1, taskArr.get(i).toString());
+        }
+        return output;
+    }
 }

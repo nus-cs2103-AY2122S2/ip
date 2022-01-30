@@ -106,6 +106,16 @@ public class JjbaBotMessage extends BotMessage {
         return isEmpty ? "There are no matching tasks." : "Here are the matching task in your list:";
     }
 
+    /**
+     * Returns the image file path of the JJBABot.
+     *
+     * @return the image file path.
+     */
+    @Override
+    public String getImagePath() {
+        return "/images/JJBABot.png";
+    }
+
     private String getTaskLeft(TaskList taskList) {
         return String.format("You have %s task%s in your list.", (taskList.size() > 0)
                 ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s");

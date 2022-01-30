@@ -78,5 +78,12 @@ public abstract class BotMessage {
      * @return find message.
      */
     public abstract String getFindListMessage(boolean isEmpty);
+
+    /**
+     * Returns the image file path of the Bot.
+     *
+     * @return the image file path.
+     */
+    public abstract String getImagePath();
 }
 
