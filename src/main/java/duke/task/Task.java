@@ -36,6 +36,16 @@ public abstract class Task {
     }
 
     /**
+     * Determines whether the associated description contains a given keyword.
+     *
+     * @param keyword Keyword that is to be indexed.
+     * @return Boolean value of whether the associated description contains a given keyword.
+     */
+    public boolean hasKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    /**
      * Converts the task to a form legible by the storage.
      *
      * @return Data representation of the task.

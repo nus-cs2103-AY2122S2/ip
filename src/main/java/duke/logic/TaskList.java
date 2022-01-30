@@ -52,6 +52,19 @@ public class TaskList {
     }
 
     /**
+     * Filters a copy of the internal ArrayList of tasks with respect to a given keyword.
+     *
+     * @param keyword Keyword that is to be indexed in each task.
+     * @return Filtered copy of list of tasks.
+     */
+    public TaskList filter(String keyword) {
+        ArrayList<Task> newTaskList = new ArrayList<>(this.tasks);
+        newTaskList.removeIf(t -> !t.hasKeyword(keyword));
+
+        return new TaskList(newTaskList);
+    }
+
+    /**
      * Converts the associated list of tasks to a form legible by the storage.
      *
      * @return Data representation of the associated list of tasks.
