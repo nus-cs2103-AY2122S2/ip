@@ -14,9 +14,9 @@ public class Event extends Task {
      * @param title The title of the event.
      * @param at When the event is taking place.
      */
-    public Event(String title, String at) {
+    public Event(String title, LocalDateTime at) {
         super(title);
-        this.eventDateTime = LocalDateTime.parse(at, inputDateTimeFormatter);
+        this.eventDateTime = at;
     }
 
     /**

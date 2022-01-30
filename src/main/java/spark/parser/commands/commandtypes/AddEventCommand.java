@@ -1,23 +1,26 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
 import spark.exceptions.SparkException;
+import spark.parser.params.AddEventParams;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.Ui;
 
-public class AddDeadlineCommand extends Command {
-    private String title;
-    private String by;
+import java.time.LocalDateTime;
 
-    public AddDeadlineCommand(String title, String by) {
-        this.title = title;
-        this.by = by;
+public class AddEventCommand extends Command {
+    private String title;
+    private LocalDateTime at;
+
+    public AddEventCommand(AddEventParams params) {
+        this.title = params.getTitle();
+        this.at = params.getAt();
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addDeadline(title, by);
+            tasks.addEvent(title, at);
             storage.writeTasksFile(tasks.encodeTasks());
             ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
         } catch (SparkException e) {

@@ -1,14 +1,15 @@
 package spark;
 
 import org.junit.jupiter.api.Test;
-import spark.commands.commandtypes.AddDeadlineCommand;
-import spark.commands.commandtypes.AddToDoCommand;
-import spark.commands.commandtypes.Command;
-import spark.commands.commandtypes.MarkCommand;
+import spark.parser.commands.commandtypes.AddDeadlineCommand;
+import spark.parser.commands.commandtypes.AddToDoCommand;
+import spark.parser.commands.commandtypes.Command;
+import spark.parser.commands.commandtypes.MarkCommand;
 import spark.exceptions.SparkException;
 import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
 import spark.exceptions.formatexceptions.InvalidMarkParamsException;
 import spark.exceptions.formatexceptions.InvalidToDoParamsException;
+import spark.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 

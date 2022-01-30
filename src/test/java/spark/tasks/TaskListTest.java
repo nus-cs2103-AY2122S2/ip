@@ -1,14 +1,27 @@
 package spark.tasks;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import spark.exceptions.SparkException;
 import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
 import spark.exceptions.formatexceptions.InvalidToDoParamsException;
 import spark.exceptions.taskmodificationexceptions.TaskNotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
+    private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
+    private static LocalDateTime validDateTime;
+
+    @BeforeAll
+    public static void instantiateValidDateTime() {
+        String dateTimeString = "2-22-2022 1800";
+        validDateTime = LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+    }
+
     @Test
     public void testAddValidToDo() {
         // a unit test for TaskList#addToDo method
@@ -28,7 +41,7 @@ public class TaskListTest {
         // a unit test for TaskList#addDeadline method
         TaskList taskList = new TaskList();
 
-        taskList.addDeadline("Do homework", "2-22-2022 1800");
+        taskList.addDeadline("Do homework", validDateTime);
 
         assertEquals(true, !taskList.findTask("Do homework").isEmpty());
     }

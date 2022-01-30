@@ -1,22 +1,26 @@
-package spark.commands.commandtypes;
+package spark.parser.commands.commandtypes;
 
 import spark.exceptions.SparkException;
+import spark.parser.params.AddDeadlineParams;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.Ui;
-import spark.tasks.tasktypes.Task;
 
-public class AddToDoCommand extends Command {
-    String title;
+import java.time.LocalDateTime;
 
-    public AddToDoCommand(String title) {
-        this.title = title;
+public class AddDeadlineCommand extends Command {
+    private String title;
+    private LocalDateTime by;
+
+    public AddDeadlineCommand(AddDeadlineParams params) {
+        this.title = params.getTitle();
+        this.by = params.getBy();
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addToDo(title);
+            tasks.addDeadline(title, by);
             storage.writeTasksFile(tasks.encodeTasks());
             ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
         } catch (SparkException e) {
@@ -33,5 +37,3 @@ public class AddToDoCommand extends Command {
         return String.format("Okay! I've added this task:\n   %s", tasks.getLastAddedTask());
     }
 }
-
-

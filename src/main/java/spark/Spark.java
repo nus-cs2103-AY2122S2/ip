@@ -1,10 +1,11 @@
 package spark;
 
-import spark.commands.commandtypes.Command;
-import spark.commands.commandtypes.ListCommand;
+import spark.parser.commands.commandtypes.Command;
+import spark.parser.commands.commandtypes.ListCommand;
 import spark.exceptions.SparkException;
 import spark.exceptions.fileexceptions.FileException;
 import spark.exceptions.fileexceptions.TaskDecodingException;
+import spark.parser.Parser;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
