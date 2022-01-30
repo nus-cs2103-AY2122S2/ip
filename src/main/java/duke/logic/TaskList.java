@@ -1,4 +1,8 @@
+package duke.logic;
+
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
     private final ArrayList<Task> tasks;

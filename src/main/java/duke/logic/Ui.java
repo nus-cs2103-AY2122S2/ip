@@ -1,3 +1,5 @@
+package duke.logic;
+
 import java.util.Scanner;
 
 public class Ui {
