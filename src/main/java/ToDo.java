@@ -1,11 +1,8 @@
 public class ToDo extends Task {
     String prefix = "[T]";
 
-    ToDo(String name) throws EmptyDescriptionException {
+    ToDo(String name) {
         super(name);
-        if (name.length() == 0) {
-            throw new EmptyDescriptionException("");
-        }
     }
 
     @Override

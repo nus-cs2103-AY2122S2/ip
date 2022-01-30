@@ -1,16 +1,12 @@
 public class Event extends Task {
-    String prefix = "[D]";
+    String prefix = "[E]";
     String postfix;
 
-    Event(String name, String date) throws EmptyDescriptionException {
+    Event(String name, String date) {
         super(name);
-        try {
-            this.postfix = "("
-                    + new StringBuilder(date).insert(2, ":").toString()
-                    + ")";
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("");
-        }
+        this.postfix = "("
+                + new StringBuilder(date).insert(2, ":").toString()
+                + ")";
     }
 
     @Override

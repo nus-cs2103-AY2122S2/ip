@@ -16,6 +16,11 @@ public abstract class Task {
         this.state = false;
     }
 
+    public boolean isMarked() {
+        return this.state;
+    }
+
+
     @Override
     public String toString() {
         String box = "";

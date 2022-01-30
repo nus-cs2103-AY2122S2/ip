@@ -4,15 +4,11 @@ public class Deadline extends Task {
     String prefix = "[D]";
     String postfix;
 
-    Deadline(String name, String date) throws EmptyDescriptionException {
+    Deadline(String name, String date) {
         super(name);
-        try {
-            this.postfix = "("
-                    + new StringBuilder(date).insert(2, ":").toString()
-                    + ")";
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("");
-        }
+        this.postfix = "("
+                + new StringBuilder(date).insert(2, ":").toString()
+                + ")";
     }
 
     @Override
