@@ -1,5 +1,14 @@
 package spark;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import spark.commands.commandtypes.Command;
 import spark.commands.commandtypes.ListCommand;
 import spark.exceptions.SparkException;
@@ -8,8 +17,13 @@ import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
-public class Spark {
+public class Spark extends Application {
     private static final String defaultFilePathString = "spark_save_file.txt";
+    private ScrollPane scrollPane;
+    private VBox tasksContainer;
+    private TextField userInput;
+    private Button runButton;
+    private Scene scene;
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -62,6 +76,26 @@ public class Spark {
                 ui.printException(e);
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        /* Step 1: Setting up required components */
+        // The container for the content of the chat to scroll
+        scrollPane = new ScrollPane();
+        tasksContainer = new VBox();
+        scrollPane.setContent(tasksContainer);
+        // The input box for the user to input commands
+        userInput = new TextField();
+        runButton = new Button("Run");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, runButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
