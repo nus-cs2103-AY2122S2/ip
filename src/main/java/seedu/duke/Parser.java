@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 import storage.Storage;
 import storage.TaskList;

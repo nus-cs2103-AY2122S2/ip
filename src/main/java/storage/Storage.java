@@ -1,6 +1,6 @@
 package storage;
 
-import duke.DukeException;
+import seedu.duke.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Task;

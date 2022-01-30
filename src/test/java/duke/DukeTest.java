@@ -1,11 +1,11 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.DukeException;
+import seedu.duke.Parser;
 
-import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
