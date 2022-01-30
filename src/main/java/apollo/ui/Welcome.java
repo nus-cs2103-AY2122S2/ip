@@ -4,8 +4,17 @@ import java.time.LocalTime;
 
 import static apollo.messages.Messages.LINE_FEED;
 
+/**
+ * Class containing Welcome message.
+ */
 public class Welcome {
 
+    /**
+     * Returns String representation of the time of the day base on supplied time.
+     *
+     * @param now Current time.
+     * @return Time of the day.
+     */
     private static String dayTime(LocalTime now) {
         // define the border values
         LocalTime eleven = LocalTime.of(11, 0);
@@ -29,6 +38,9 @@ public class Welcome {
         else return "night";
     }
 
+    /**
+     * Prints program logo.
+     */
     public static void printLogo() {
         String logo = "\t   @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n"
                 + "\t   @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n"
@@ -47,6 +59,13 @@ public class Welcome {
         System.out.println(("Hello from\n" + logo).replace("\n", LINE_FEED));
     }
 
+    /**
+     * Greets and welcome user to the program.
+     *
+     * @param isLoaded Boolean if save file is loaded.
+     * @param now Current time.
+     * @return Welcome message.
+     */
     public static String welcomeMessage(boolean isLoaded, LocalTime now) {
         String greeting = isLoaded
                 ? "Welcome back sir. "

@@ -11,11 +11,17 @@ import apollo.ui.Ui;
 
 import java.time.LocalTime;
 
+/**
+ * Main class for program.
+ */
 public class Apollo {
 
     private static TaskList taskList;
     private static Ui ui;
 
+    /**
+     * Initialises the program and greets the user.
+     */
     private static void initialise() {
 
         ui = new Ui();
@@ -32,8 +38,10 @@ public class Apollo {
         ui.printMessage(Welcome.welcomeMessage(isLoaded, LocalTime.now()));
     }
 
+    /**
+     * Main response loop to run program while waiting for exit signal.
+     */
     private static void run() {
-
         Command command = null;
         do {
             String userCommand = ui.getUserCommand();
@@ -48,6 +56,11 @@ public class Apollo {
         while (!ExitCommand.isExit(command));
     }
 
+    /**
+     * Main method to start runnning the program.
+     *
+     * @param args Arguments supplied to program (not used).
+     */
     public static void main(String[] args) {
         initialise();
         run();

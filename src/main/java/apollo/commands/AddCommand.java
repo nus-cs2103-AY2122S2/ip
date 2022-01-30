@@ -7,18 +7,35 @@ import apollo.tasks.Todo;
 
 import java.time.LocalDateTime;
 
+/**
+ * Adds a {@code Task} to the taskList.
+ * Extends {@code Command} superclass.
+ */
 public class AddCommand extends Command {
 
     private final String description;
     private final LocalDateTime dateTime;
     private final Task.Type taskType;
 
+    /**
+     * Constructor for {@code AddCommand}.
+     *
+     * @param description Of task to be added.
+     * @param dateTime Due date and time of the task.
+     * @param taskType Type of task to be added.
+     */
     public AddCommand(String description, LocalDateTime dateTime, Task.Type taskType) {
         this.description = description;
         this.dateTime = dateTime;
         this.taskType = taskType;
     }
 
+    /**
+     * Adds new {@code Task} base on {@code taskType}.
+     * Tasks are added to the taskList.
+     *
+     * @return Message for successful execution.
+     */
     @Override
     public String execute() {
         Task newTask = null;
