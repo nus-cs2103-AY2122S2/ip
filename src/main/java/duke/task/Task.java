@@ -110,6 +110,11 @@ public abstract class Task {
         return this.isDone ? "[X]" : "[ ]";
     }
 
+    /**
+     * Returns the icon that represents the type of the task.
+     *
+     * @return The icon.
+     */
     protected abstract String getTypeIcon();
 
     /**

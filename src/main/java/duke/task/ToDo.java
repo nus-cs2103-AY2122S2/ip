@@ -21,11 +21,21 @@ final class ToDo extends Task {
     }
 
 
+    /**
+     * Returns the icon that represents the type of the task.
+     *
+     * @return The icon.
+     */
     @Override
     protected String getTypeIcon() {
         return "[T]";
     }
 
+    /**
+     * Returns the type of the current task.
+     *
+     * @return The type of the task.
+     */
     @Override
     protected TaskType getType() {
         return TaskType.TODO;
