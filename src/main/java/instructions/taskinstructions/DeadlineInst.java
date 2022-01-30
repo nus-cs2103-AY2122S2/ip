@@ -1,13 +1,12 @@
-package instructions._new.task.instructions;
+package instructions.taskinstructions;
 
+import java.time.LocalDateTime;
+
+import date.time.DateTimeParser;
 import exceptions.InvalidInputException;
-
 import tasks.DeadlineTask;
 import tasks.TaskList;
 
-import date.time.DateTimeParser;
-
-import java.time.LocalDateTime;
 
 /**
  * This class represents an instruction for a new Deadline task.
@@ -50,17 +49,17 @@ public class DeadlineInst extends NewTaskInst {
             split = taskDetails.split("/by");
             if (split.length == 2 && split[0].length() != 0) {
                 //happens in "deadline a/at b", "deadline a /atb" etc
-                throw NewTaskInst.MISSING_SPACES_EXCEPTION;
+                throw MISSING_SPACES_EXCEPTION;
             }
-            throw NewTaskInst.MISSING_TASK_DETAILS_EXCEPTION;
+            throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /by "s
-            throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
+            throw TOO_MANY_ARGUMENTS_EXCEPTION;
         }
 
         boolean isValidDateTimeFormat = DateTimeParser.checkValidFormat(split[1]);
         if (!isValidDateTimeFormat) {
-            throw NewTaskInst.INVALID_DATE_TIME_FORMAT;
+            throw INVALID_DATE_TIME_FORMAT;
         }
         LocalDateTime deadline = DateTimeParser.parse(split[1]);
 
@@ -86,7 +85,7 @@ public class DeadlineInst extends NewTaskInst {
     public String doInst(TaskList taskList) {
         DeadlineTask task = DeadlineTask.of(super.getTaskDesc(), this.deadline);
         taskList.add(task);
-        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now."
-                , task, taskList.length());
+        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now.",
+                task, taskList.length());
     }
 }

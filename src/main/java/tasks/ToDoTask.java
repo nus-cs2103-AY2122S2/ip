@@ -7,7 +7,7 @@ package tasks;
  *
  * @author Ong Han Yang
  */
-public class ToDoTask extends Task{
+public class ToDoTask extends Task {
     /**
      * Constructs a To Do task.
      *

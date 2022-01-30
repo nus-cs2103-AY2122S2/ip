@@ -2,12 +2,10 @@ package instructions;
 
 import exceptions.InvalidInputException;
 import exceptions.NoSuchTaskException;
-
-import instructions._new.task.instructions.NewTaskInst;
-import instructions.list.instructions.DisplayListInst;
-import instructions.list.instructions.FindInst;
-import instructions.list.instructions.ModifyListedTaskInst;
-
+import instructions.listinstructions.DisplayListInst;
+import instructions.listinstructions.FindInst;
+import instructions.listinstructions.ModifyListedTaskInst;
+import instructions.taskinstructions.NewTaskInst;
 import tasks.TaskList;
 
 /**
@@ -20,8 +18,8 @@ import tasks.TaskList;
  */
 public abstract class Instruction {
     /** Reusable Invalid Input Exception for when an unknown input is given to create an instruction */
-    private static final InvalidInputException UNKNOWN_INPUT
-            = new InvalidInputException("I don't understand what you said!");
+    private static final InvalidInputException UNKNOWN_INPUT =
+            new InvalidInputException("I don't understand what you said!");
 
     /**
      * Default constructor that takes in no arguments.

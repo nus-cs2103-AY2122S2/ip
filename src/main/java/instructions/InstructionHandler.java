@@ -1,7 +1,7 @@
 package instructions;
 
 import exceptions.NoSuchTaskException;
-import instructions.list.instructions.*;
+import instructions.listinstructions.ModifyListedTaskInst;
 import tasks.TaskList;
 
 /**

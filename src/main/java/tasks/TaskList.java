@@ -4,17 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
 import date.time.DateTimeParser;
-
 import exceptions.NoSuchTaskException;
 import exceptions.SaveFileModifiedException;
 
@@ -24,14 +21,14 @@ import exceptions.SaveFileModifiedException;
  * @author Ong Han Yang
  */
 public class TaskList {
-    /** The container for the items, implemented as an ArrayList */
-    private ArrayList<Task> list;
-
     /** Name of the saved file */
     private static String fileName = "saved-taskList.txt";
 
     /** Folder path to the saved file */
     private static String filePath = "data";
+
+    /** The container for the items, implemented as an ArrayList */
+    private ArrayList<Task> list;
 
     /**
      * Constructs a taskList.

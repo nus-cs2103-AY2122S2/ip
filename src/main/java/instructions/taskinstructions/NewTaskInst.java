@@ -1,4 +1,4 @@
-package instructions._new.task.instructions;
+package instructions.taskinstructions;
 
 import exceptions.InvalidInputException;
 import instructions.Instruction;
@@ -15,24 +15,24 @@ import instructions.Instruction;
  */
 public abstract class NewTaskInst extends Instruction {
     /** Reusable Invalid Input Exception for when there is no provided task number */
-    protected static final InvalidInputException MISSING_TASK_DETAILS_EXCEPTION
-            = new InvalidInputException("There are missing task details!");
+    protected static final InvalidInputException MISSING_TASK_DETAILS_EXCEPTION =
+            new InvalidInputException("There are missing task details!");
 
     /**
      * Reusable Invalid Input Exception for when too many arguments are specified. Happens
      * with multiple " /at "s or " /by "s in the input. Mainly used by subclasses.
      */
-    protected static final InvalidInputException TOO_MANY_ARGUMENTS_EXCEPTION
-            = new InvalidInputException("Too many arguments are supplied. "
+    protected static final InvalidInputException TOO_MANY_ARGUMENTS_EXCEPTION =
+            new InvalidInputException("Too many arguments are supplied. "
             + "Check your input format.");
 
     /** Reusable Invalid Input Exception for when the input command has missing spaces */
-    protected static final InvalidInputException MISSING_SPACES_EXCEPTION
-            = new InvalidInputException("There are missing spaces in the command!");
+    protected static final InvalidInputException MISSING_SPACES_EXCEPTION =
+            new InvalidInputException("There are missing spaces in the command!");
 
     /** Reusable Invalid Input Exception for when the input command has an invalid date format */
-    protected static final InvalidInputException INVALID_DATE_TIME_FORMAT
-            = new InvalidInputException("The date/time format is wrong!");
+    protected static final InvalidInputException INVALID_DATE_TIME_FORMAT =
+            new InvalidInputException("The date/time format is wrong!");
 
     /** The provided description for the task to be added */
     private String taskDesc;

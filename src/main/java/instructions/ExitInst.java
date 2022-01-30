@@ -15,8 +15,8 @@ public class ExitInst extends Instruction {
      * Use a fixed/static instruction as there are no differences between multiple different
      * exit instructions.
      */
-    private static final ExitInst FIXED_EXIT_INST
-            = new ExitInst();
+    private static final ExitInst FIXED_EXIT_INST =
+            new ExitInst();
 
     /**
      * Constructs an Exit Instruction.

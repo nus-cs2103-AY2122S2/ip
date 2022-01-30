@@ -1,4 +1,4 @@
-package instructions.list.instructions;
+package instructions.listinstructions;
 
 import exceptions.NoSuchTaskException;
 import tasks.Task;
@@ -41,7 +41,7 @@ public class DeleteInst extends ModifyListedTaskInst {
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException {
         Task deleted = taskList.delete(super.getTaskNum() - 1);
-        return String.format("Okay, I've removed this task:\n%s\nThere are %d tasks left in the list!"
-                , deleted.toString(), taskList.length());
+        return String.format("Okay, I've removed this task:\n%s\nThere are %d tasks left in the list!",
+                deleted.toString(), taskList.length());
     }
 }

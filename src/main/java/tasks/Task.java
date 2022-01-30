@@ -6,14 +6,14 @@ package tasks;
  * @author Ong Han Yang
  */
 public abstract class Task {
-    /** The description of the task.*/
-    private String desc;
+    /** The Cross symbol used to show that a class is marked as done. Original: ✓ or \u2713 */
+    private static final String TICK = "X";
 
     /** Whether the task is done or not.*/
     private boolean isDone;
 
-    /** The Cross symbol used to show that a class is marked as done. Original: ✓ or \u2713 */
-    private static String TICK = "X";
+    /** The description of the task.*/
+    private String desc;
 
     /**
      * Constructs a task.

@@ -42,9 +42,9 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)"
-                , super.toString()
-                , deadline.toLocalDate()
-                , deadline.toLocalTime());
+        return String.format("[D]%s (by: %s %s)",
+                super.toString(),
+                deadline.toLocalDate(),
+                deadline.toLocalTime());
     }
 }
