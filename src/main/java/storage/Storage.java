@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Interface that deals with pushing or pulling tasks from the storage.
+ */
 public class Storage {
 
     String path;
@@ -16,6 +19,11 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Retrieves tasks from the storage (if any) and adds them to a new task list.
+     * @return list of tasks retrieved from the storage, else an empty list.
+     * @throws DukeException If data file does not exist.
+     */
     public ArrayList<Task> setUpData() throws DukeException {
         try {
             FileReader myObj = new FileReader(this.path);
@@ -46,18 +54,21 @@ public class Storage {
         }
     }
 
-    public void updateData(TaskList tasklist) {
+    /**
+     * Adds or removes tasks from storage according to changes made by user.
+     * @param taskList updated list of tasks.
+     */
+    public void updateData(TaskList taskList) {
         try {
             FileWriter myObj = new FileWriter(this.path);
             myObj.flush();
-            for (int i = 0; i < tasklist.tasks.size(); i++) {
-                myObj.write(tasklist.tasks.get(i).symbol() + "/" + tasklist.tasks.get(i).getStatusIcon() + "/" +
-                        tasklist.tasks.get(i).toString() + "\n");
+            for (int i = 0; i < taskList.tasks.size(); i++) {
+                myObj.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() + "/" +
+                        taskList.tasks.get(i).toString() + "\n");
             }
             myObj.close();
         } catch (IOException e) {
             System.out.println("File does not exist.");
         }
     }
-
 }
