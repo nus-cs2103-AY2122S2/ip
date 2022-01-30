@@ -13,7 +13,7 @@ public class Event  extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")" ;
+        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.BASIC_ISO_DATE) + ")" ;
     }
 
     @Override

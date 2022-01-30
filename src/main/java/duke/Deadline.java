@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.BASIC_ISO_DATE) + ")";
     }
 
     @Override

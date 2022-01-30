@@ -1,12 +1,15 @@
 package duke;
-import java.util.Scanner;
-import java.util.Locale;
+
 import duke.command.Command;
 import duke.dukeException.NoTimeGivenException;
+
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Duke {
     private static TaskList taskList = new TaskList();
     private static Storage storage = new Storage();
+
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         storage.readData(taskList);
