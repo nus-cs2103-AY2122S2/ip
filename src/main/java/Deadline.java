@@ -1,16 +1,30 @@
-public class Deadline extends Task{
-    public String deadline;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 
-    public Deadline(String title, String deadline) {
+public class Deadline extends Task{
+    public LocalDate date;
+    public LocalTime time;
+
+    public Deadline(String title, String deadline) throws IndexOutOfBoundsException{
         super(title);
-        this.deadline = deadline;
+        try {
+            String[] deadlineList = deadline.split(" ");
+            this.date = LocalDate.parse(deadlineList[0].replace("/", "-"));
+            this.time = LocalTime.parse(deadlineList[1]);
+        } catch (NullPointerException e){
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     public String toString(){
+        int day = date.getDayOfMonth();
+        Month month = date.getMonth();
+        int year = date.getYear();
         if (this.checked) {
-            return "[D][X] " + this.title + "(by: " + this.deadline + ")";
+            return String.format("[D][X] %s (by: %d %s %d %s)", title, day, month, year, time);
         } else {
-            return "[D][ ] " + this.title + "(by: " + this.deadline + ")";
+            return String.format("[D][ ] %s (by: %d %s %d %s)", title, day, month, year, time);
         }
     }
 }
