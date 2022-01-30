@@ -12,7 +12,7 @@ import java.time.format.FormatStyle;
 final class Deadline extends Task {
 
     private final String DUE_TIME_FIELD = "due_time";
-    private LocalDate dueTime;
+    private final LocalDate dueTime;
 
     /**
      * Initializes a deadline with a name (description).

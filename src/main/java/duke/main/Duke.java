@@ -7,9 +7,9 @@ import main.java.duke.ui.Ui;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskManager taskManager;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskManager taskManager;
+    private final Ui ui;
 
     private static final String END_MESSAGE = "Bye!";
     private static final String FILE_PATH = "data/tasks.txt";

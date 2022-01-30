@@ -9,7 +9,7 @@ import main.java.duke.ui.Ui;
  */
 final class UnmarkAsDone extends Instruction {
 
-    private Task toUnmark;
+    private final Task toUnmark;
 
     /**
      * Constructor 1. Initializes the instruction using an index of task.

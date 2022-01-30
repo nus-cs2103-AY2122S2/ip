@@ -9,7 +9,7 @@ import main.java.duke.ui.Ui;
  */
 public final class Add extends Instruction {
 
-    private Task task;
+    private final Task task;
 
     /**
      * Constructor for an add instruction.

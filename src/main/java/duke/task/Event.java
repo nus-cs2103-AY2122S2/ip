@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 final class Event extends Task {
     // At this stage, the time range is treated as a string.
-    private String timeRange;
+    private final String timeRange;
 
     private final String TIME_RANGE_FIELD = "time_range";
 
