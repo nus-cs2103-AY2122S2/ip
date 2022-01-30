@@ -10,9 +10,4 @@ public class LilyException extends Exception {
     public LilyException(String msg) {
         super(msg);
     }
-
-    @Override
-    public String toString() {
-        return "error message bro";
-    }
 }

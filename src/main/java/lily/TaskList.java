@@ -1,10 +1,11 @@
 package lily;
+
+import lily.task.LilyException;
+
 import lily.task.Task;
 import lily.task.Todo;
 import lily.task.Deadline;
 import lily.task.Event;
-
-import lily.task.LilyException;
 
 import java.util.LinkedList;
 
