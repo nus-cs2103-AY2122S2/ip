@@ -15,22 +15,43 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Represents a parser that parses commands fed to Duke.
+ *
+ * @author Peter
+ */
 public class Parser {
     private enum CommandType {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, CLEAR
     }
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " +
+            "HH:mm");
 
     private static int parseIndex(String index) {
         return Integer.parseInt(index) - 1;
     }
 
+    /**
+     * Parses the time portion of a command.
+     *
+     * @param options Arguments to the command that is to be split and parsed.
+     * @param divider Divider that is used to split arguments.
+     * @return Description of task.
+     */
     private static String parseDescription(String options, String divider) {
         String[] splitCommand = options.split(divider);
         return splitCommand[0];
     }
 
+    /**
+     * Parses the time portion of a command.
+     *
+     * @param options Arguments to the command that is to be split and parsed.
+     * @param divider Divider that is used to split arguments.
+     * @return Date and time of task in LocalDateTime format.
+     * @throws DukeException If format of arguments passed is incorrect.
+     */
     private static LocalDateTime parseTime(String options, String divider) throws DukeException {
         String[] splitCommand = options.split(divider);
         if (splitCommand.length < 2) {
@@ -48,6 +69,13 @@ public class Parser {
         return time;
     }
 
+    /**
+     * Parses an input string to the corresponding command along with additional arguments.
+     *
+     * @param input String that is to be parsed.
+     * @return Command corresponding to the input string.
+     * @throws DukeException If format of command is incorrect.
+     */
     public static Command parse(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
 

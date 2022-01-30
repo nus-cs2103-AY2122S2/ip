@@ -4,13 +4,29 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
+/**
+ * Represents a list of tasks.
+ *
+ * @author Peter
+ */
 public class TaskList {
+    /**
+     * Internal ArrayList of tasks.
+     */
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructor for an empty list of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for a preset list of tasks.
+     *
+     * @param tasks List of tasks from which tasks are to be retrieved.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -35,6 +51,11 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Converts the associated list of tasks to a form legible by the storage.
+     *
+     * @return Data representation of the associated list of tasks.
+     */
     public String toData() {
         StringBuilder data = new StringBuilder();
         for (Task task : this.tasks) {
