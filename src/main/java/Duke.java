@@ -1,7 +1,10 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     public static List<Task> taskArray = new ArrayList<>();
@@ -15,11 +18,18 @@ public class Duke {
         System.out.println("__________________________________");
         System.out.println("Hello! I'm Duke\nWhat can I do for you");
         System.out.println("__________________________________");
+        try {
+            File myObj = new File("data/duke.txt");
+            myObj.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
         listen();
     }
 
-    public static void listen() {
+    public static void listen(){
         Scanner dukeScan = new Scanner(System.in);
         boolean running = true;
         while (running) {
@@ -45,9 +55,15 @@ public class Duke {
                     default:
                         addItem(command);
                 }
+                FileWriter myWriter =  new FileWriter("data/duke.txt");
+                myWriter.write(writeItem());
+                myWriter.close();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println("__________________________________");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
 
         }
@@ -66,9 +82,9 @@ public class Duke {
 
     public static void addItem(String[] command) throws DukeException{
         String input = command[0];
-        Task task = null;
-        String title = "";
-        String time = "";
+        Task task;
+        String title;
+        String time;
         switch (input) {
         case "todo":
             if (command[1].isEmpty()) {
@@ -148,5 +164,18 @@ public class Duke {
         System.out.println(taskArray.remove(index-1));
         System.out.printf("You have %d tasks left\n", taskArray.size());
         System.out.println("__________________________________");
+    }
+
+    public static String writeItem() {
+        StringBuilder list = new StringBuilder();
+        if (taskArray.size() == 0) {
+            list = new StringBuilder("No items in the list");
+        } else {
+            for (int i = 0; i < taskArray.size(); i++) {
+                String line = String.format("%d. " + taskArray.get(i)+ "\n", i+1);
+                list.append(line);
+            }
+        }
+        return list.toString();
     }
 }
