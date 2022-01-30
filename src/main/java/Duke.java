@@ -10,6 +10,13 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Duke class, a chatbot that assists in
+     * keeping track of tasks a person may have.
+     *
+     * @param filePath Path to indicate where the
+     *                 storage of the tasks will be located at.
+     */
     public Duke(String filePath) {
         ui = new Ui("Batman");
         storage = new Storage(filePath);
@@ -35,6 +42,7 @@ public class Duke {
             ui.showLoadingError(e.getMessage());
         }
     }
+    
     /**
      * Creates a Duke object and runs the chatbot
      */

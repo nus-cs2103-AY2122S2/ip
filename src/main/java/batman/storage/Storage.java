@@ -15,6 +15,12 @@ public class Storage {
 
     private static Path path;
 
+    /**
+     * Storage for tasks.
+     *
+     * @param filePath Path to indicate where the
+     *                 storage of the tasks will be located at.
+     */
     public Storage(String filePath) {
         //initialize Path object
         String dataPath = System.getProperty("user.dir") + filePath;
@@ -22,6 +28,9 @@ public class Storage {
         createFile();
     }
 
+    /**
+     * Creates file to store tasks.
+     */
     public static void createFile() {
         File dataDir = new File("./data");
         dataDir.mkdirs();
@@ -35,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes existing tasks to file.
+     *
+     * @param tasks An arrayList of existing tasks.
+     */
     public void writeToFile(ArrayList<Task> tasks) throws IOException {
         Files.write(path, "".getBytes());
         for (Task t : tasks) {
