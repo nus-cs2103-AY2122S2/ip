@@ -2,6 +2,8 @@ package duke;
 
 import duke.Task.Task;
 
+import java.util.ArrayList;
+
 /**
  * User Interface class, print beautiful output to user
  */
@@ -124,7 +126,7 @@ public class Ui {
 
     /**
      * Shows error message
-     * @param message
+     * @param message the error message
      */
     public void showError(String message) {
         System.out.println(message);
@@ -142,5 +144,20 @@ public class Ui {
      */
     public void showEndline() {
         System.out.println(endline);
+    }
+
+    /**
+     * Shows found task using find command
+     * @param searched_taskList founded task list, a string array
+     */
+    public void showFoundTask(ArrayList<String> searched_taskList) {
+        if (searched_taskList.size() == 0) {
+            System.out.println("There are no matching tasks in your list");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (String s : searched_taskList) {
+                System.out.println(s);
+            }
+        }
     }
 }

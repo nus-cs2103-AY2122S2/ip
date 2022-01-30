@@ -16,7 +16,7 @@ public class TodoCommand extends Command {
 
 
     /**
-     * Execeute the command according to the user's input
+     * Add a todo task to the task list, and save it to the data file
      *
      * @param taskList currentTaskList
      * @param ui ui class that helps to print suitable command

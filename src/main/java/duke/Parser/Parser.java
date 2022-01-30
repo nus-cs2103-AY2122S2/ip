@@ -24,6 +24,8 @@ public class Parser {
             return new EventCommand(input);
         case "delete":
             return new DeleteCommand(input);
+        case "find":
+            return new FindCommand(input);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
