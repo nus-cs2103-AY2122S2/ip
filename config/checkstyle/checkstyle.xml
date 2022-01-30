@@ -8,6 +8,7 @@
     https://oss-generic.github.io/process/codingstandards/coding-standards-java.html
 -->
 
+
 <module name="Checker">
 
     <module name="FileTabCharacter">
