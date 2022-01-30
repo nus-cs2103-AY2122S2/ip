@@ -25,7 +25,7 @@ public class Duke {
 
             Object[] parseResult = InputParser.parseInput(input);
             InputType inputType = (InputType) parseResult[0];
-            String value = (String) parseResult[1];
+            String[] value = (String[]) parseResult[1];
 
             processInput(inputType, value);
             if (inputType == InputType.BYE) {
@@ -34,22 +34,30 @@ public class Duke {
         }
     }
 
-    public static void processInput(InputType inputType, String value) {
+    public static void processInput(InputType inputType, String[] value) {
         switch(inputType) {
             case LIST:
                 wordList.printList();
                 break;
             case MARK:
-                wordList.markItem(Integer.parseInt(value));
+                wordList.markItem(Integer.parseInt(value[0]));
                 break;
             case UNMARK:
-                wordList.unmarkItem(Integer.parseInt(value));
+                wordList.unmarkItem(Integer.parseInt(value[0]));
+                break;
+            case TODO:
+                wordList.storeTodo(value[0]);
+                break;
+            case DEADLINE:
+                wordList.storeDeadline(value[0], value[1]);
+                break;
+            case EVENT:
+                wordList.storeEvent(value[0], value[1]);
                 break;
             case BYE:
                 replyBye();
                 break;
             case NONE:
-                wordList.storeWord(value);
                 break;
         }
     }

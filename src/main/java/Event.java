@@ -9,6 +9,6 @@ public class Event extends WordListItem{
 
     @Override
     public String toString() {
-        return SYMBOL + super.toString() + "(at: " + this.datetime + ")";
+        return SYMBOL + super.toString() + " (at: " + this.datetime + ")";
     }
 }

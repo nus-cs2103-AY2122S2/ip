@@ -9,6 +9,6 @@ public class Deadline extends WordListItem{
 
     @Override
     public String toString() {
-        return SYMBOL + super.toString() + "(by: " + this.datetime + ")";
+        return SYMBOL + super.toString() + " (by: " + this.datetime + ")";
     }
 }

@@ -7,11 +7,29 @@ public class WordList {
         this.wordList = new ArrayList<>();
     }
 
-    public void storeWord(String word) {
-        this.wordList.add(new WordListItem(word));
+    private void echoAddedItem(WordListItem wordListItem) {
         System.out.println("  ------------------------------------");
-        System.out.println("  added: " + word);
+        System.out.println("  Got it. I've added this task: ");
+        System.out.println("  " + wordListItem);
         System.out.println("  ------------------------------------");
+    }
+
+    public void storeTodo(String word) {
+        WordListItem todo = new Todo(word);
+        this.wordList.add(todo);
+        echoAddedItem(todo);
+    }
+
+    public void storeDeadline(String word, String datetime) {
+        WordListItem deadline = new Deadline(word, datetime);
+        this.wordList.add(deadline);
+        echoAddedItem(deadline);
+    }
+
+    public void storeEvent(String word, String datetime) {
+        WordListItem event = new Event(word, datetime);
+        this.wordList.add(event);
+        echoAddedItem(event);
     }
 
     public void markItem(int itemNumber) {
