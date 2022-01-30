@@ -1,10 +1,11 @@
 package bernie.parser;
 
-import bernie.enums.Type;
-import bernie.tasks.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import bernie.enums.Type;
+import bernie.tasks.TaskList;
 
 public class ParserTest {
     @Test

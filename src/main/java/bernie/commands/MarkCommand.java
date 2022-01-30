@@ -1,7 +1,6 @@
 package bernie.commands;
 
 import bernie.enums.Type;
-import bernie.exceptions.BernieException;
 import bernie.exceptions.InvalidArgumentException;
 import bernie.parser.Parser;
 import bernie.storage.Storage;
@@ -14,7 +13,7 @@ import bernie.ui.UiHandler;
  * by the user input
  */
 public class MarkCommand extends Command {
-    String[] parsedArr;
+    private final String[] parsedArr;
 
     /**
      * Constructs a MarkCommand Class. The parsedArr is determined by the parser,
@@ -33,12 +32,14 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Calls the TasList to mark or unmark a task number depending on the parsedArr
+     * Calls the TaskList to mark or unmark a task number depending on the parsedArr
      * which is the parsed user input
      */
     public void execute() {
         String action = parsedArr[0];
         String taskNum = parsedArr[1];
+        TaskList tasks = getTasks();
+        UiHandler uiHandler = getUiHandler();
         if (action.equals("mark")) {
             Task markedTask = tasks.markTask(Type.MARK, taskNum);
             uiHandler.showDoneMsg(markedTask);

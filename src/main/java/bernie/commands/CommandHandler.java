@@ -1,13 +1,13 @@
 package bernie.commands;
 
+import java.util.Scanner;
+
 import bernie.enums.Type;
 import bernie.exceptions.BernieException;
 import bernie.parser.Parser;
 import bernie.storage.Storage;
 import bernie.tasks.TaskList;
 import bernie.ui.UiHandler;
-
-import java.util.Scanner;
 
 /**
  * CommandHandler determines which Command to execute given the user input. Parser helps to
@@ -64,6 +64,7 @@ public class CommandHandler {
             case FIND:
                 FindCommand findCommand = new FindCommand(tasks, uiHandler, storage, parser, input);
                 findCommand.execute();
+                break;
             default:
                 break;
             }

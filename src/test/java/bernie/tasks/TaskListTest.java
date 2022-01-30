@@ -1,10 +1,12 @@
 package bernie.tasks;
 
-import bernie.enums.Type;
-import bernie.exceptions.InvalidArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import bernie.enums.Type;
+import bernie.exceptions.InvalidArgumentException;
+
 
 public class TaskListTest {
     @Test

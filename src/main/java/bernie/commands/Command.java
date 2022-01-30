@@ -11,28 +11,40 @@ import bernie.ui.UiHandler;
  * input of the user into the program.
  */
 public abstract class Command {
-     TaskList tasks;
-     UiHandler uiHandler;
-     Storage storage;
-     Parser parser;
-     String input;
+    private final TaskList tasks;
+    private final UiHandler uiHandler;
+    private final Storage storage;
+    private final Parser parser;
+    private final String input;
 
-     /**
-      * Constructs a Command Class
-      * @param tasks TaskList, contains all our Task we create
-      * @param uiHandler UiHandler, responsible for printing out messages to the user for any action done
-      * @param storage Storage, responsible for saving and loading of tasks into a text file
-      * @param parser Parser, helps to parse user inputs to perform subsequent actions
-      * @param input String, user input into the program
-      */
-     public Command(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input) {
-          this.tasks = tasks;
-          this.uiHandler = uiHandler;
-          this.storage = storage;
-          this.parser = parser;
-          this.input = input;
-     }
+    /**
+     * Constructs a Command Class
+     * @param tasks TaskList, contains all our Task we create
+     * @param uiHandler UiHandler, responsible for printing out messages to the user for any action done
+     * @param storage Storage, responsible for saving and loading of tasks into a text file
+     * @param parser Parser, helps to parse user inputs to perform subsequent actions
+     * @param input String, user input into the program
+     */
+    public Command(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input) {
+        this.tasks = tasks;
+        this.uiHandler = uiHandler;
+        this.storage = storage;
+        this.parser = parser;
+        this.input = input;
+    }
 
-     /** Executes an action */
-     public abstract void execute();
+    /** Executes an action */
+    public abstract void execute();
+
+    TaskList getTasks() {
+        return tasks;
+    }
+
+    UiHandler getUiHandler() {
+        return uiHandler;
+    }
+
+    Storage getStorage() {
+        return storage;
+    }
 }

@@ -13,8 +13,8 @@ import bernie.ui.UiHandler;
  * AddCommand is responsible for getting the TaskList to add the respective Type of tasks
  */
 public class AddCommand extends Command {
-    String[] parsedArr;
-    Type type;
+    private final String[] parsedArr;
+    private final Type type;
 
     /**
      * Constructs an AddCommand Class with the respective Type based on the user input. The parsedArr is
@@ -52,6 +52,9 @@ public class AddCommand extends Command {
      */
     public void execute() {
         Task newTask = null;
+        TaskList tasks = getTasks();
+        Storage storage = getStorage();
+        UiHandler uiHandler = getUiHandler();
         switch (type) {
         case TODO:
             newTask = tasks.addTask(parsedArr, Type.TODO);

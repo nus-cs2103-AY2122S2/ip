@@ -1,11 +1,11 @@
 package bernie.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import bernie.enums.Type;
 import bernie.exceptions.InvalidArgumentException;
 import bernie.tasks.TaskList;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parser Class helps to parse the inputs given by the user.
@@ -15,7 +15,7 @@ import java.time.format.DateTimeParseException;
  * and return parameters needed accordingly to perform actions
  */
 public class Parser {
-    TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructs a Parser class
@@ -135,7 +135,7 @@ public class Parser {
             tasks.getTask(taskIndex).checkUnmark();
         }
     }
-            
+
     /**
      * Checks for valid "mark" or "delete" action inputs. Throws error if it is not valid: wrong input format or
      * a task number is not given

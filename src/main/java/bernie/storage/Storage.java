@@ -1,23 +1,23 @@
 package bernie.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import bernie.tasks.Task;
 import bernie.tasks.TaskList;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 /**
  * Storage class handles the loading and saving of tasks in the file
  */
 public class Storage {
+    private static final String LINE_BREAK = "___________________________________________________________";
     private String root = System.getProperty("user.dir");
     private File tasksFile;
     private File dataDir;
-    private static final String LINE_BREAK = "___________________________________________________________";
 
     /**
      * Constructs the Storage class with the File tasksFile and dataDir.

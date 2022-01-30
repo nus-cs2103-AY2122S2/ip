@@ -13,7 +13,7 @@ import bernie.ui.UiHandler;
  * task number
  */
 public class DeleteCommand extends Command {
-    String[] parsedArr;
+    private final String[] parsedArr;
     /**
      * Constructs a DeleteCommand Class. The parsedArr is determined by the parser,
      * giving out the relevant arguments required to execute delete.
@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param input String, user input into the program
      * @throws InvalidArgumentException For a correct command with invalid arguments given by the user
      */
-    public DeleteCommand(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input) 
+    public DeleteCommand(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input)
             throws InvalidArgumentException {
         super(tasks, uiHandler, storage, parser, input);
         this.parsedArr = parser.getParams(Type.DELETE, input);
@@ -36,6 +36,9 @@ public class DeleteCommand extends Command {
      * relevant message.
      */
     public void execute() {
+        TaskList tasks = getTasks();
+        Storage storage = getStorage();
+        UiHandler uiHandler = getUiHandler();
         String taskNum = parsedArr[0];
         Task deletedTask = tasks.deleteTask(taskNum);
         storage.saveTasks(tasks);

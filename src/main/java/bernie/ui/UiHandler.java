@@ -4,7 +4,7 @@ import bernie.tasks.Task;
 import bernie.tasks.TaskList;
 
 /**
- * Class to deal with any interactions with the user. It is responsible for printing out 
+ * Class to deal with any interactions with the user. It is responsible for printing out
  * relevant messages to the user.
  */
 public class UiHandler {
@@ -58,7 +58,7 @@ public class UiHandler {
 
     /**
      * Prints out the current taskList when the user inputs list into the program
-     * @param tasks
+     * @param tasks TaskList
      */
     public void showListTasksMsg(TaskList tasks) {
         System.out.println("Here's what you need to do buddy:");

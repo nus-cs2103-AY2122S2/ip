@@ -1,11 +1,11 @@
 package bernie.tasks;
 
-import bernie.enums.Type;
-import bernie.exceptions.InvalidArgumentException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import bernie.enums.Type;
+import bernie.exceptions.InvalidArgumentException;
 
 /**
  * TaskList helps to store tasks that are created. TaskList is used for the adding,
@@ -65,22 +65,22 @@ public class TaskList {
         LocalDate by;
         String at;
         switch (taskType) {
-            case TODO:
-                description = parsedArr[0];
-                newTask = new ToDo(description);
-                break;
-            case DEADLINE:
-                description = parsedArr[0];
-                by = LocalDate.parse(parsedArr[1]);
-                newTask = new Deadline(description, by);
-                break;
-            case EVENT:
-                description = parsedArr[0];
-                at = parsedArr[1];
-                newTask = new Event(description, at);
-                break;
-            default:
-                break;
+        case TODO:
+            description = parsedArr[0];
+            newTask = new ToDo(description);
+            break;
+        case DEADLINE:
+            description = parsedArr[0];
+            by = LocalDate.parse(parsedArr[1]);
+            newTask = new Deadline(description, by);
+            break;
+        case EVENT:
+            description = parsedArr[0];
+            at = parsedArr[1];
+            newTask = new Event(description, at);
+            break;
+        default:
+            break;
         }
         tasks.add(newTask);
         return newTask;
