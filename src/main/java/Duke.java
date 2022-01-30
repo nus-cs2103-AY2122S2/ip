@@ -17,19 +17,26 @@ public class Duke {
         replyWelcomeMessage();
         String input;
         while (true) {
-            input = sc.nextLine();
-            if (input.isEmpty()) {
-                warnEmpty();
+            try {
+                input = sc.nextLine();
+                checkEmpty(input);
+                Object[] parseResult = InputParser.parseInput(input);
+                InputType inputType = (InputType) parseResult[0];
+                String[] value = (String[]) parseResult[1];
+
+                processInput(inputType, value);
+                if (inputType == InputType.BYE) {
+                    break;
+                }
+            } catch (EmptyInputException e) {
+                System.out.println(e);
                 continue;
-            }
-
-            Object[] parseResult = InputParser.parseInput(input);
-            InputType inputType = (InputType) parseResult[0];
-            String[] value = (String[]) parseResult[1];
-
-            processInput(inputType, value);
-            if (inputType == InputType.BYE) {
-                break;
+            } catch (EmptyDescriptionException e) {
+                System.out.println(e);
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }
@@ -67,8 +74,10 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public static void warnEmpty() {
-        System.out.println("input is Empty!");
+    public static void checkEmpty(String input) throws EmptyInputException {
+        if (input.isEmpty()) {
+            throw new EmptyInputException("Input cannot be empty!");
+        }
     }
     public static void replyBye() {
         System.out.println("Bye. Hope to see you again soon!");

@@ -1,5 +1,5 @@
 public class InputParser {
-    static Object[] parseInput(String input) {
+    static Object[] parseInput(String input) throws EmptyDescriptionException, UnknownInputException {
         InputType type = InputType.NONE;
         String[] value = new String[]{ input };
         for(InputType inputType: InputType.values()) {
@@ -12,8 +12,15 @@ public class InputParser {
                     value = new String[]{};
                 } else if (inputType == InputType.TODO || inputType == InputType.MARK
                         || inputType == InputType.UNMARK) {
-                    String description = input.substring(inputType.label.length() + 1);
-                    value = new String[]{description};
+                    try {
+                        String description = input.substring(inputType.label.length() + 1);
+                        if (description.isBlank()) {
+                            throw new EmptyDescriptionException("only blank characters found after command :(");
+                        }
+                        value = new String[]{description};
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new EmptyDescriptionException("No additional description :(");
+                    }
                 } else if (inputType == InputType.DEADLINE) {
                     int datetimeIndex = input.indexOf("/by");
                     String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1);
@@ -30,6 +37,7 @@ public class InputParser {
                 return new Object[]{type, value};
             }
         }
-        return new Object[]{type, value};
+
+        throw new UnknownInputException("Sorry, Duke doesn't know the command: '" + input + "' :(");
     }
 }
