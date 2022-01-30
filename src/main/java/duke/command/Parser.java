@@ -32,9 +32,9 @@ public final class Parser {
             case UNMARK:
                 return new MarkCommand(commandType, description, false);
             case TODO:
-                return new AddCommand(commandType, description);
+                // Fallthrough
             case EVENT:
-                return new AddCommand(commandType, description);
+                // Fallthrough
             case DEADLINE:
                 return new AddCommand(commandType, description);
             }
