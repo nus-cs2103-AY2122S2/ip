@@ -1,11 +1,8 @@
 package duke.main;
 
-import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.command.Command;
-import duke.parser.Parser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
