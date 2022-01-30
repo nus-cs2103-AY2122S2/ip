@@ -1,7 +1,5 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDate;
 
 public class Event extends Task {
@@ -26,5 +24,4 @@ public class Event extends Task {
     public String toString() {
         return super.toString() + "/" + this.date.toString();
     }
-
 }
