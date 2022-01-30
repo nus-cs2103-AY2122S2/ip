@@ -1,6 +1,6 @@
-package java.duke.ui;
+package duke.ui;
 
-import java.duke.action.Action;
+import duke.action.Action;
 import java.util.ArrayList;
 
 //contains the task list e.g., it has operations to add/delete tasks in the list

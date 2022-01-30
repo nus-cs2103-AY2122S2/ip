@@ -1,4 +1,4 @@
-package java.duke.action;
+package duke.action;
 
 public class Todo  extends Action {
 

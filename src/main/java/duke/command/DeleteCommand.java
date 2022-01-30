@@ -1,10 +1,10 @@
-package java.duke.command;
+package duke.command;
 
-import java.duke.ui.Storage;
-import java.duke.ui.TaskList;
-import java.duke.ui.Ui;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
 
-import java.duke.action.Action;
+import duke.action.Action;
 
 public class DeleteCommand extends Command {
     private final int taskNo;

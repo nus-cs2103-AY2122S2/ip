@@ -1,8 +1,8 @@
-package java.duke.command;
+package duke.command;
 
-import java.duke.ui.Storage;
-import java.duke.ui.TaskList;
-import java.duke.ui.Ui;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
 
 
 public abstract class Command {

@@ -1,6 +1,6 @@
-package java.duke.ui;
+package duke.ui;
 
-import java.duke.action.Action;
+import duke.action.Action;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;

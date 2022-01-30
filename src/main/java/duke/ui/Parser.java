@@ -1,13 +1,13 @@
-package java.duke.ui;
+package duke.ui;
 
-import java.duke.command.AddCommand;
-import java.duke.command.Command;
-import java.duke.command.DeleteCommand;
-import java.duke.command.ExitCommand;
-import java.duke.command.FindCommand;
-import java.duke.command.ListCommand;
-import java.duke.command.MarkCommand;
-import java.duke.command.UnmarkCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 //deals with making sense of the user duke.command
 public class Parser {

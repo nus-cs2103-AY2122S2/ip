@@ -1,4 +1,4 @@
-package java.duke.ui;
+package duke.ui;
 import java.util.Scanner;
 
 //Deals with interactions with users

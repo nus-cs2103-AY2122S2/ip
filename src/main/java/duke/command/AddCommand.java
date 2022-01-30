@@ -1,12 +1,12 @@
-package java.duke.command;
+package duke.command;
 
-import java.duke.action.Action;
-import java.duke.ui.Storage;
-import java.duke.ui.TaskList;
-import java.duke.ui.Ui;
-import java.duke.action.Deadline;
-import java.duke.action.Event;
-import java.duke.action.Todo;
+import duke.action.Action;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+import duke.action.Deadline;
+import duke.action.Event;
+import duke.action.Todo;
 
 public class AddCommand extends Command {
 
