@@ -17,7 +17,7 @@ public class AlfredUserInterfaceTest {
     for (int i = 0; i < 100; i++) {
       line += "-";
     }
-    String expected = line + "\n" + "expected\n" + line + "\n" + "\n";
+    String expected = line + "\n" + "expected" +"\n" + line + "\n" + "\n";
 
     // set
     System.setOut(new PrintStream(this.outContent));
@@ -25,7 +25,7 @@ public class AlfredUserInterfaceTest {
     // test
     AlfredUserInterface ui = new AlfredUserInterface();
     ui.sandwichAndPrint("expected");
-    assertEquals(expected, outContent.toString());
+    assertEquals(expected.trim().replace("\r",""), outContent.toString().trim().replace("\r",""));
   }
 
 }
