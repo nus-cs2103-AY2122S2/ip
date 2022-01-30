@@ -1,16 +1,19 @@
 package tasks;
-import duke.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+
 public class Deadline extends Task {
+
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     protected LocalDate by;
     protected LocalDateTime byTime;
-    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
 
 
     /**
@@ -26,8 +29,8 @@ public class Deadline extends Task {
         } else if (isDateTimeFormat(by)) {
             this.byTime = LocalDateTime.parse(by, dateTimeFormat);
         } else {
-            throw new DukeException("The date format parsed is incorrect!" +
-                    "It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
+            throw new DukeException("The date format parsed is incorrect!"
+                    + "It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
         }
     }
 
@@ -78,7 +81,7 @@ public class Deadline extends Task {
      * @param dateString duedate string
      * @return A boolean that indicates if a string is in date format
      */
-    private boolean isDateFormat(String dateString)  {
+    private boolean isDateFormat(String dateString) {
         try {
             LocalDate.parse(dateString, dateFormat);
             return true;
@@ -106,7 +109,7 @@ public class Deadline extends Task {
                 : "" + dateTime.getHour();
         String minute = dateTime.getMinute() < 10
                 ? "0" + dateTime.getMinute()
-                : "" +  dateTime.getMinute();
+                : "" + dateTime.getMinute();
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 

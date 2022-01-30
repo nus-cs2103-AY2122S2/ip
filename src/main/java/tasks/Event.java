@@ -1,20 +1,23 @@
 package tasks;
 
-import duke.DukeException;
-import tasks.Task;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+
+
+
+
+
+
 
 public class Event extends Task {
-
-    protected LocalDate at;
-    protected LocalDateTime atTime;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    protected LocalDate at;
+    protected LocalDateTime atTime;
 
     /**
      * Instantiates a new Event object
@@ -29,7 +32,8 @@ public class Event extends Task {
         } else if (isDateTimeFormat(at)) {
             this.atTime = LocalDateTime.parse(at, dateTimeFormat);
         } else {
-            throw new DukeException("The date format parsed is incorrect! It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
+            throw new DukeException("The date format parsed is incorrect!" + ""
+                    + "It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
         }
     }
 
@@ -108,7 +112,7 @@ public class Event extends Task {
                 : "" + dateTime.getHour();
         String minute = dateTime.getMinute() < 10
                 ? "0" + dateTime.getMinute()
-                : "" +  dateTime.getMinute();
+                : "" + dateTime.getMinute();
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 

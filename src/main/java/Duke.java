@@ -1,5 +1,8 @@
-import duke.*;
-import tasks.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TextUi;
+import tasks.TaskList;
 
 public class Duke {
     private final Storage storage;
