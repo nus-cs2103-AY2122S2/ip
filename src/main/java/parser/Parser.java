@@ -4,6 +4,9 @@ import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
 
+/**
+ * Interface that deals with making sense of the user commands.
+ */
 public class Parser {
 
     TaskList tasks;
@@ -12,6 +15,12 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * Calls appropriate TaskList methods for each command and updates storage.
+     * @param inputStringArray string array containing user instructions.
+     * @param storage Storage object that deals with storage updation.
+     * @throws DukeException If user input message does not make sense.
+     */
     public void userCommand(String[] inputStringArray, Storage storage) throws DukeException {
         switch (inputStringArray[0]) {
             case "list":
