@@ -1,6 +1,8 @@
-import data.Storage;
-import data.TaskList;
-import ui.ChatBot;
+package duke;
+
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.ui.ChatBot;
 
 import java.io.IOException;
 import java.nio.file.Path;

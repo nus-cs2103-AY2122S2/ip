@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * A concrete Task which contains

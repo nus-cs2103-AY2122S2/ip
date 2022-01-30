@@ -1,4 +1,4 @@
-package ui.command;
+package duke.ui.command;
 
 import java.util.ArrayList;
 

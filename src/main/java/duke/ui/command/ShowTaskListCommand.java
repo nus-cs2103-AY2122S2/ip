@@ -1,6 +1,6 @@
-package ui.command;
+package duke.ui.command;
 
-import data.TaskList;
+import duke.data.TaskList;
 
 import java.util.ArrayList;
 

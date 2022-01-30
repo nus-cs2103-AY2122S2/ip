@@ -1,22 +1,22 @@
-package ui.command;
+package duke.ui.command;
 
-import data.TaskList;
-import task.Task;
+import duke.data.TaskList;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
 /**
- * Command which unmarks a previously
- * added task.
+ * Command which marks a previously
+ * added task as done.
  */
-class UnmarkTaskCommand extends TaskListCommand {
+class MarkTaskCommand extends TaskListCommand {
 
-    public UnmarkTaskCommand(String name, String args, TaskList taskList) {
+    public MarkTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);
     }
 
     /**
-     * Marks a given task in taskList as undone,
+     * Marks a given task in taskList as done,
      * using index passed by user.
      *
      * @return False.
@@ -25,7 +25,7 @@ class UnmarkTaskCommand extends TaskListCommand {
     @Override
     public boolean execute() throws IllegalArgumentException {
         // Args for this command represents index of task to
-        // mark as undone
+        // mark as complete
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(super.getArgs()) - 1;
@@ -34,11 +34,11 @@ class UnmarkTaskCommand extends TaskListCommand {
         }
 
         TaskList taskList = this.getTaskList();
-        Task uncheckedTask = taskList.uncheckTask(taskIndex);
+        Task checkedTask = taskList.checkTask(taskIndex);
 
         ArrayList<String> response = new ArrayList<>();
-        response.add("The following task was marked undone:");
-        response.add(uncheckedTask.getDescription());
+        response.add("Congrats! The following task was marked as done:");
+        response.add(checkedTask.getDescription());
         Command.styledPrint(response);
         return false;
     }

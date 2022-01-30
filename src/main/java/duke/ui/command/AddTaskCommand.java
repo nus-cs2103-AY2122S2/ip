@@ -1,10 +1,10 @@
-package ui.command;
+package duke.ui.command;
 
-import data.TaskList;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import duke.data.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.util.ArrayList;
 
