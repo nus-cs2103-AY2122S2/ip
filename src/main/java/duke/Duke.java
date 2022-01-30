@@ -13,12 +13,12 @@ public class Duke {
     /** Global task list for all operations. */
     private static TaskList taskList;
 
-    public static void main(String[] args) {
-        new Duke().init().run();
-    }
-
     private Duke() {
 
+    }
+
+    public static void main(String[] args) {
+        new Duke().init().run();
     }
 
     /**

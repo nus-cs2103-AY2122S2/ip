@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.TaskList;
 import duke.util.Printable;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a handler for the schedule command.

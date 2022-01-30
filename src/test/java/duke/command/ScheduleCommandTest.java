@@ -1,17 +1,18 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.testutil.PrinterStub;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ScheduleCommandTest {
     @Test

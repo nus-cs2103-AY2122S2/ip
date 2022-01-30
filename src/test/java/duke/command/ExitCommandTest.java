@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.testutil.PrinterStub;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.TaskList;
+import duke.testutil.PrinterStub;
 
 public class ExitCommandTest {
     @Test

@@ -1,13 +1,13 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.DukeIoException;
-import duke.exception.DukeIllegalArgumentException;
-import duke.exception.DukeInvalidCommandException;
-import duke.util.Printable;
-
 import java.util.Scanner;
 import java.util.function.Function;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIllegalArgumentException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeIoException;
+import duke.util.Printable;
 
 public class Ui {
     private static final String SEPARATOR = "\t------------------------------------";

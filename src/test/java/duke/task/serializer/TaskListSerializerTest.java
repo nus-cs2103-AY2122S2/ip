@@ -1,19 +1,20 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIoException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
-import duke.testutil.StreamUtils;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeIoException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.testutil.StreamUtils;
 
 public class TaskListSerializerTest {
     @Test

@@ -1,5 +1,13 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,24 +15,17 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.testutil.PrinterStub;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
     @Test
     public void testParsing_valid_success() throws DukeIllegalArgumentException {
         Task[] sourceTasks = new Task[] {
-                new Todo("Test"),
-                new Event("Test", LocalDateTime.parse("2022-12-22T12:00")),
-                new Deadline("Test", LocalDateTime.parse("2022-12-22T13:00")),
-                new Deadline("Test", LocalDateTime.parse("2022-12-22T14:00")),
-                new Event("Test", LocalDateTime.parse("2022-12-23T15:00")),
-                new Event("Test", LocalDateTime.parse("2022-12-24T16:00"))
+            new Todo("Test"),
+            new Event("Test", LocalDateTime.parse("2022-12-22T12:00")),
+            new Deadline("Test", LocalDateTime.parse("2022-12-22T13:00")),
+            new Deadline("Test", LocalDateTime.parse("2022-12-22T14:00")),
+            new Event("Test", LocalDateTime.parse("2022-12-23T15:00")),
+            new Event("Test", LocalDateTime.parse("2022-12-24T16:00"))
         };
         TaskList list = new TaskList();
         Arrays.stream(sourceTasks).forEachOrdered(list::addTask);

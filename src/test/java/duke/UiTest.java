@@ -1,16 +1,17 @@
 package duke;
 
-import duke.exception.DukeIoException;
-import duke.exception.DukeIllegalArgumentException;
-import duke.exception.DukeInvalidCommandException;
-import duke.testutil.PrinterStub;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeIllegalArgumentException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeIoException;
+import duke.testutil.PrinterStub;
 
 public class UiTest {
     @Test

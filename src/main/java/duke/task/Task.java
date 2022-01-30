@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.util.Serializable;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import duke.util.Serializable;
 
 public abstract class Task implements Serializable {
     private final TaskType type;

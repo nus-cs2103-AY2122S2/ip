@@ -1,14 +1,14 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIoException;
-import duke.task.Task;
-import duke.task.TaskType;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import duke.exception.DukeIoException;
+import duke.task.Task;
+import duke.task.TaskType;
 
 /**
  * Serializes and Deserializes Task objects into byte arrays.

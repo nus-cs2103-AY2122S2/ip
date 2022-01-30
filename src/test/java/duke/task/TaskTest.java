@@ -1,16 +1,17 @@
 package duke.task;
 
-import duke.testutil.StreamUtils;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
+import duke.testutil.StreamUtils;
 
 public class TaskTest {
     private static class TaskStub extends Task {
@@ -131,7 +132,7 @@ public class TaskTest {
     }
 
     @Test
-    public void testInflate_invalid_Exception() throws IOException {
+    public void testInflate_invalid_exception() throws IOException {
         byte[] reference = StreamUtils.buildOutputStream((dOut) -> {
             dOut.write(256);
             dOut.write(222);

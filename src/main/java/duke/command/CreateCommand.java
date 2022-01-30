@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -8,8 +10,6 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.Todo;
 import duke.util.Printable;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a handler for the todo, deadline and event commands.

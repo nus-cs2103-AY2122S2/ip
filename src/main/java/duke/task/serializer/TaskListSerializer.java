@@ -1,13 +1,13 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIoException;
-import duke.task.TaskList;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import duke.exception.DukeIoException;
+import duke.task.TaskList;
 
 /**
  * Serializes and Deserializes custom formatted database files into {@link TaskList} objects.
