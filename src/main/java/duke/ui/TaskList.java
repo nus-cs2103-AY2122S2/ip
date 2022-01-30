@@ -1,21 +1,13 @@
 package duke.ui;
 
 import duke.action.Action;
+
 import java.util.ArrayList;
 
 //contains the task list e.g., it has operations to add/delete tasks in the list
 public class TaskList {
 
-    private final Storage storage;
     private final ArrayList<Action> list = new ArrayList<>();
-
-    public TaskList() {
-        storage = new Storage();
-    }
-
-    public TaskList(Storage storage) {
-        this.storage = storage;
-    }
 
     /**
      * Executes the adding of the task
@@ -107,15 +99,15 @@ public class TaskList {
      */
     public String listOut() {
         int count = 1;
-        String toBeAppended =  "Here are the tasks in your list:\n";
+        StringBuilder toBeAppended = new StringBuilder("Here are the tasks in your list:\n");
         if (list.isEmpty()) {
-            toBeAppended = "Oh, you have nothing to do, how free you are!";
+            toBeAppended = new StringBuilder("Oh, you have nothing to do, how free you are!");
         } else {
             for (Action act : list) {
-                toBeAppended += count + "." + act + "\n";
+                toBeAppended.append(count).append(".").append(act).append("\n");
                 count++;
             }
         }
-        return toBeAppended;
+        return toBeAppended.toString();
     }
 }

@@ -3,19 +3,32 @@ import duke.command.Command;
 
 public class Duke {
 
-    public final Storage storage;
-    public TaskList tasks;
-    public final Ui ui;
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            storage.load();
+            tasks = new TaskList();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 
     /**

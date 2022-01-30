@@ -1,9 +1,10 @@
 package duke.gui;
+
 import duke.command.Command;
 import duke.ui.Duke;
-
 import duke.ui.DukeException;
 import duke.ui.Parser;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/Red.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Green.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/Images/Red.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Green.png"));
 
     @FXML
     public void initialize() {
@@ -47,14 +49,14 @@ public class MainWindow extends AnchorPane {
         try {
             String input = userInput.getText();
             Command c = Parser.parse(input);
-            String response = c.execute(duke.tasks, duke.ui, duke.storage);
+            String response = c.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
             userInput.clear();
         } catch (DukeException e) {
-            duke.ui.showError(e.getMessage());
+            duke.getUi().showError(e.getMessage());
         }
     }
 }

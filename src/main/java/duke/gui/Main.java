@@ -3,6 +3,7 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.ui.Duke;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("C:/repos/ip/data/tasks.txt");
+    private final Duke duke = new Duke("C:/repos/ip/data/tasks.txt");
 
     @Override
     public void start(Stage stage) {
