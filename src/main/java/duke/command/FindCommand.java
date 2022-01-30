@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.data.TaskList;
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.FindResponse;
-import main.java.duke.responses.Response;
+import duke.data.TaskList;
+import duke.dukeexceptions.DukeException;
+import duke.responses.FindResponse;
+import duke.responses.Response;
 
 public class FindCommand extends Command {
     

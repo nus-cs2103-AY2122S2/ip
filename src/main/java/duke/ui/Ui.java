@@ -1,6 +1,6 @@
-package main.java.duke.ui;
+package duke.ui;
 
-import main.java.duke.responses.Response;
+import duke.responses.Response;
 
 import java.util.Scanner;
 

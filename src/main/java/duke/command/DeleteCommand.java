@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.dukeexceptions.DukeTaskListException;
-import main.java.duke.responses.DeleteResponse;
-import main.java.duke.responses.Response;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.DukeTaskListException;
+import duke.responses.DeleteResponse;
+import duke.responses.Response;
 
 
 /***

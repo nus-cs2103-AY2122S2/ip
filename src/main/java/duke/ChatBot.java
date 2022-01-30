@@ -1,13 +1,13 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.ByeCommand;
-import main.java.duke.command.Command;
-import main.java.duke.data.Storage;
-import main.java.duke.data.TaskList;
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.parser.Parser;
-import main.java.duke.responses.Response;
-import main.java.duke.ui.Ui;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.dukeexceptions.DukeException;
+import duke.parser.Parser;
+import duke.responses.Response;
+import duke.ui.Ui;
 
 /**
  * This is the chatbot object.

@@ -1,4 +1,4 @@
-package main.java.duke.dukeexceptions;
+package duke.dukeexceptions;
 
 public class DukeTaskListException extends DukeDateExceptions {
 

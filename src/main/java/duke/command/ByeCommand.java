@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.responses.Response;
-import main.java.duke.responses.StopResponse;
+import duke.dukeexceptions.DukeException;
+import duke.responses.Response;
+import duke.responses.StopResponse;
 
 /***
  * A Command that is run upon termination of the bot

@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.dukeexceptions.DukeTaskListException;
-import main.java.duke.responses.MarkResponse;
-import main.java.duke.responses.Response;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.DukeTaskListException;
+import duke.responses.MarkResponse;
+import duke.responses.Response;
 
 /***
  * Command that is created when user wants to Mark a Task as done

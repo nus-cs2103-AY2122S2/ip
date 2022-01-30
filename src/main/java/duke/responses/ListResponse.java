@@ -1,6 +1,6 @@
-package main.java.duke.responses;
+package duke.responses;
 
-import main.java.duke.data.TaskList;
+import duke.data.TaskList;
 
 /**
  * Reponse that is created in the event of List command

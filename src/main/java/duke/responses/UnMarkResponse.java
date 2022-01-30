@@ -1,7 +1,7 @@
-package main.java.duke.responses;
+package duke.responses;
 
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /***
  * Response to the UnMarkResponse Command

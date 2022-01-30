@@ -1,6 +1,6 @@
-package main.java.duke.data;
+package duke.data;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
