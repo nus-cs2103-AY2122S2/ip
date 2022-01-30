@@ -231,7 +231,7 @@ public class Parser {
         }
         Task task = new ToDo(title, 0);
         tasks.addTask(task);
-        successMessage.append(line).append("Added Todo task successfully!\n").append(line);
+        successMessage.append(line).append("Added Todo: ").append(task.toString()).append(line);
         return successMessage.toString();
     }
 
@@ -250,7 +250,7 @@ public class Parser {
         try {
             Task task = new Deadline(title, 0, obtainDate());
             tasks.addTask(task);
-            successMessage.append("Added Deadline task successfully!\n");
+            successMessage.append(line).append("Added Deadline").append(task.toString()).append(line);
             return successMessage.toString();
         } catch (DateTimeParseException e) {
             return e.getMessage();
@@ -272,7 +272,7 @@ public class Parser {
         try {
             Task task = new Event(title, 0, obtainDate());
             tasks.addTask(task);
-            successMessage.append("Added Event task successfully!\n");
+            successMessage.append(line).append("Added Event: ").append(task.toString()).append(line);
             return successMessage.toString();
         } catch (DateTimeParseException e) {
             return e.getMessage();
