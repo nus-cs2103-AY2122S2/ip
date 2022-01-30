@@ -107,7 +107,7 @@ public class Printer {
     }
 
     /**
-     * Pritns message when task is deleted
+     * Prints message when task is deleted
      *
      * @param myStorage ListStorage with Tasks.
      * @param taskNumber Task number of task to be deleted.

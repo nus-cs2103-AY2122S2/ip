@@ -148,4 +148,21 @@ public class Commands {
         myPrinter.printDelete(myStorage, taskNumber);
         myStorage.deleteTask(taskNumber);
     }
+
+    /**
+     * Handles find command. Prints our a list of tasks
+     * with keyword in description.
+     *
+     * @param cmd Command to find.
+     */
+    public void cmdFind(String cmd) {
+        String[] keyword = Parser.parseCmdAndDes(cmd);
+        ListStorage tempStorage = new ListStorage();
+        for (int i = 1; i <= myStorage.length(); i++) {
+            if(myStorage.findTask(i).description.contains(keyword[1])) {
+                tempStorage.addToList(myStorage.findTask(i));
+            }
+        }
+        myPrinter.printList(tempStorage);
+    }
 }

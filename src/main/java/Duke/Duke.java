@@ -89,6 +89,8 @@ public class Duke {
                     myDisk.saveToDisk();
                 } else if (cmd.contains("list")) {
                     commands.cmdList();
+                } else if (cmd.contains("find")) {
+                    commands.cmdFind(cmd);
                 } else {
                     int taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
                     if (cmd.contains("mark")) {

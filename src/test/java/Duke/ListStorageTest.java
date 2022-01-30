@@ -34,7 +34,7 @@ public class ListStorageTest {
         assertEquals("[T][ ] run 10km", myStorage.findTask(1).toString());
     }
     @Test
-    public void deleteTastTest() {
+    public void deleteTaskTest() {
         ListStorage myStorage = new ListStorage();
         myStorage.addToList(new ToDo("run 10km"));
         assertEquals(1, myStorage.length());
