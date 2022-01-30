@@ -1,30 +1,21 @@
-/*
-    ToDoList class creates a To Do List to simulate a normal day to day task list.
-*/
-
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
-class ToDoList {
-    ArrayList<Task> lst;
-    ArrayList<Deadline> dlLst;
-    ArrayList<Event> eLst;
+class Parser {
+    TaskList taskList;
 
-    public ToDoList() {
-        lst = new ArrayList<Task>(100);
-        dlLst = new ArrayList<Deadline>();
-        eLst = new ArrayList<Event>();
+    Parser(TaskList taskList) {
+        this.taskList = taskList;
     }
 
-    /*
-        Method to handle command pass to list
-    */
-    public void handleCommand(String s) throws SiriException{
+    //deals with making sense of the user command
+    
+    public int handleCommand(String s) throws SiriException{
 
         String[] inputSplit = s.split(" ", 2);
+        int continueToExecute = 1;
 
         if (inputSplit[0].equals("")) {
             throw new SiriException("Please ENTER something!!");
@@ -33,17 +24,17 @@ class ToDoList {
                 case "mark":
                     if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("Please ENTER the item number to mark!!");
-                    } else if (lst.size() == 0) {
+                    } else if (this.taskList.size() == 0) {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
                             int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
-                            if (index >= lst.size() || index < 0) {
+                            if (index >= this.taskList.size() || index < 0) {
                                 throw new SiriException("Please ENTER a number within the number of tasks!!");
                             } else {
-                                this.markItem(index);
+                                this.taskList.markItem(index);
                                 break;
                             }
                             
@@ -54,17 +45,17 @@ class ToDoList {
                 case "unmark":
                     if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("Please ENTER the item number to unmark!!");
-                    } else if (lst.size() == 0) {
+                    } else if (this.taskList.size() == 0) {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
                             int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
-                            if (index >= lst.size() || index < 0) {
+                            if (index >= this.taskList.size() || index < 0) {
                                 throw new SiriException("Please ENTER a number within the number of tasks!!");
                             } else {
-                                this.unmarkItem(index);
+                                this.taskList.unmarkItem(index);
                                 break;
                             }
                             
@@ -74,7 +65,7 @@ class ToDoList {
                     }
                 case "list":
                     if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                        this.print();
+                        this.taskList.print();
                         break;
                     } else {
                         throw new SiriException("OPPS!! list does not take in any parameter!!");
@@ -84,7 +75,7 @@ class ToDoList {
                         throw new SiriException("todo cannot be EMPTY!! Please ENTER something for todo!!");
                     } else {
                         ToDos todoTask = new ToDos(inputSplit[1].trim(), 0);
-                        this.addItem(todoTask);
+                        this.taskList.addItem(todoTask);
                         break;
                     }
                 case "deadline":
@@ -99,14 +90,14 @@ class ToDoList {
                             try {
                                 Deadline dlTask;
                                 String[] dlDateTime = dlSplit[1].split(" ", 2);
-                                LocalDate dlDate = ToDoList.getDate(dlDateTime[0].trim());
+                                LocalDate dlDate = Parser.getDate(dlDateTime[0].trim());
                                 if (dlDateTime.length == 1 || dlDateTime[1].trim().length() == 0) {
                                     dlTask = new Deadline(dlSplit[0], 0, dlDate);
                                 } else {
-                                    LocalTime dlTime = ToDoList.getTime(dlDateTime[1].trim());
+                                    LocalTime dlTime = Parser.getTime(dlDateTime[1].trim());
                                     dlTask = new Deadline(dlSplit[0], 0, dlDate, dlTime);
                                 }                        
-                                this.addItem(dlTask);
+                                this.taskList.addItem(dlTask);
                                 break;
                             } catch (DateTimeParseException dtpe) {
                                 throw new SiriException("deadline date/time format is wrong!!\nPlease ENTER your date time in DD-MM-YYYY HH:MM (if applicable) format!!");
@@ -124,15 +115,15 @@ class ToDoList {
                         } else {
                             try {
                                 String[] eventDateTime = eventSplit[1].split(" ", 2);
-                                LocalDate eDate = ToDoList.getDate(eventDateTime[0].trim());
+                                LocalDate eDate = Parser.getDate(eventDateTime[0].trim());
                                 Event eventTask;
                                 if (eventDateTime.length == 1 || eventDateTime[1].trim().length() == 0) {
                                     throw new SiriException("Missing date/time field!! Please ENTER date your date time in DD-MM-YYYY HH:MM format!!");
                                 } else {
-                                    LocalTime eTime = ToDoList.getTime(eventDateTime[1].trim());
+                                    LocalTime eTime = Parser.getTime(eventDateTime[1].trim());
                                     eventTask = new Event(eventSplit[0], 0, eDate, eTime);
                                 }
-                                this.addItem(eventTask);
+                                this.taskList.addItem(eventTask);
                                 break;
                             } catch (DateTimeParseException dtpe) {
                                 throw new SiriException("event date/time format is wrong!!\nPlease ENTER your date time in DD-MM-YYYY  HH:MM format!!");
@@ -142,17 +133,17 @@ class ToDoList {
                 case "delete":
                     if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("Please ENTER the item number to delete!!");
-                    } else if (lst.size() == 0) {
+                    } else if (this.taskList.size() == 0) {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
                             int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
-                            if (index >= lst.size() || index < 0) {
+                            if (index >= this.taskList.size() || index < 0) {
                                 throw new SiriException("Please ENTER a number within the number of tasks!!");
                             } else {
-                                this.deleteTask(index);
+                                this.taskList.deleteTask(index);
                                 break;
                             }
                             
@@ -165,8 +156,8 @@ class ToDoList {
                         throw new SiriException("Please ENTER a date!!");
                     } else {
                         try {
-                            LocalDate eCheckedDate = ToDoList.getDate(inputSplit[1].trim());
-                            this.printEventOn(eCheckedDate);
+                            LocalDate eCheckedDate = Parser.getDate(inputSplit[1].trim());
+                            this.taskList.printEventOn(eCheckedDate);
                         } catch (DateTimeParseException dtpe) {
                             throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
                         }
@@ -177,162 +168,22 @@ class ToDoList {
                         throw new SiriException("Please ENTER a date!!");
                     } else {
                         try {
-                            LocalDate dlCheckedDate = ToDoList.getDate(inputSplit[1].trim());
-                            this.printDeadlineOn(dlCheckedDate);
+                            LocalDate dlCheckedDate = Parser.getDate(inputSplit[1].trim());
+                            this.taskList.printDeadlineOn(dlCheckedDate);
                         } catch (DateTimeParseException dtpe) {
                             throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
                         }
                     }
                     break;
+                case "bye":
+                    continueToExecute = 0;
+                    break;
                 default:
-                    throw new SiriException("OPPS!! I do not understand what you had keyed!! Please try again!!");
-            }
-        }
-
-    }
-
-    /*
-        Method to add task item into the to do list.
-    */
-    public void addItem(Task task) {
-        lst.add(task);
-        if (task instanceof Deadline) {
-            Deadline tmp = (Deadline) task;
-            dlLst.add(tmp);
-        } else if (task instanceof Event) {
-            Event tmp = (Event) task;
-            eLst.add(tmp);
-        }
-        System.out.printf("Got it! I've added this task:\n%s\nTotal tasks on the list: %d\n",
-                            task.getItemAndStatus(), this.lst.size());
-    }
-
-    /*
-        Method to delete task from Task List
-    */
-    public void deleteTask(int index) {
-        Task removedTask = lst.remove(index);
-        if (removedTask instanceof Deadline) {
-            Deadline tmp = (Deadline) removedTask;
-            dlLst.remove(tmp);
-        } else if (removedTask instanceof Event) {
-            Event tmp = (Event) removedTask;
-            dlLst.remove(tmp);
-        }
-        System.out.printf("Successfully removed the following task:\n%s\nYou have %d tasks remaining!!\n", removedTask.getItemAndStatus(), this.lst.size());
-    }
-
-    /*
-        Method to print Task List out in order with status of each task.
-    */
-    public void print() {
-        if (lst.size() == 0) {
-            System.out.println("There is currently no item on the list!!");
-        } else {
-            System.out.println("Task List:");
-            lst.forEach((item) -> System.out.println((lst.indexOf(item)+1) + ". " + item.getItemAndStatus()));
-        }
-    }
-
-    /*
-        Method to mark item of to do list done.
-    */
-    public void markItem(int index) {
-        lst.get(index).markDone();
-    }
-
-    public void printEventOn(LocalDate date) {
-        ArrayList<Event> tmp = new ArrayList<Event>();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
-
-        if (eLst.size() != 0) {
-            for (int i = 0; i < eLst.size(); i++) {
-                if (eLst.get(i).dateCompare(date)) {
-                    tmp.add(eLst.get(i));
+                    throw new SiriException("OPPS!! I did not understand what you had keyed!! Please try again!!");
                 }
-            }
-
-            if (tmp.size() == 0) {
-                System.out.printf("No event on %s!!\n", date.format(dtf));
-            } else {
-                System.out.printf("%d events on %s:\n", tmp.size(), date.format(dtf));
-                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getItemAndStatus()));
-            }
-        } else {
-                System.out.printf("No event on %s!!\n", date.format(dtf));
-        }
-    }
-
-    public void printDeadlineOn(LocalDate date) {
-        ArrayList<Deadline> tmp = new ArrayList<Deadline>();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
-
-        if (dlLst.size() != 0) {
-            for (int i = 0; i < dlLst.size(); i++) {
-                if (dlLst.get(i).dateCompare(date)) {
-                    tmp.add(dlLst.get(i));
-                }
-            }
-
-            if (tmp.size() == 0) {
-                System.out.printf("No deadline on %s!!\n", date.format(dtf));
-            } else {
-                System.out.printf("%d deadlines on %s:\n", tmp.size(), date.format(dtf));
-                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getItemAndStatus()));
-            }
-        } else {
-            System.out.printf("No deadline on %s!!\n", date.format(dtf));
-        }
-    }
-
-    /*
-        Method to mark item of to do list undone.
-    */
-    public void unmarkItem(int index) {
-        lst.get(index).markUndone();
-    }
-
-    public void startUpAddTask(String input) {
-        String[] inputSplit = input.split(" ", 3);
-
-        try {
-            switch (inputSplit[0]) {
-                case "T":
-                    ToDos todo = new ToDos(inputSplit[2].trim(), Integer.parseInt(inputSplit[1].trim()));
-                    lst.add(todo);
-                    break;
-                case "D":
-                    String[] dlSubSplit = inputSplit[2].split(" /by ", 2);
-                    String[] dlSubSplit2 = dlSubSplit[1].split(" ", 2);
-                    Deadline dl;
-                    if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
-                        dl = new Deadline(dlSubSplit[0].trim(), Integer.parseInt(inputSplit[1].trim()), ToDoList.getDate(dlSubSplit[1].trim()));
-                    } else {
-                        dl = new Deadline(dlSubSplit[0].trim(), Integer.parseInt(inputSplit[1]).trim(), ToDoList.getDate(dlSubSplit2[0]), ToDoList.getTime(dlSubSplit2[1]));
-                    }
-                    lst.add(dl);
-                    dlLst.add(dl);
-                    break;
-                case "E":
-                    String[] eSubSplit = inputSplit[2].split(" /at ", 2);
-                    String[] eSubSplit2 = eSubSplit[1].split(" ", 2);
-                    Event e = new Event(eSubSplit[0].trim(), Integer.parseInt(inputSplit[1].trim()), ToDoList.getDate(eSubSplit2[0].trim()), ToDoList.getTime(eSubSplit2[1].trim()));
-                    lst.add(e);
-                    eLst.add(e);
-                    break;
-            }
-        } catch (DateTimeParseException dtpe) {
-            throw new SiriException("Error LOADING data!!");
         }
 
-    }
-
-    public String saveData() {
-        StringBuilder returned = new StringBuilder();
-
-        lst.forEach((item) -> returned.append(item.saveData() + "\n"));
-
-        return returned.toString();
+        return continueToExecute;
     }
 
     private static LocalDate getDate(String dateString) {
@@ -348,4 +199,5 @@ class ToDoList {
 
         return lt;
     }
+
 }
