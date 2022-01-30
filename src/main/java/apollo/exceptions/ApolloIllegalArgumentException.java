@@ -1,6 +1,6 @@
 package apollo.exceptions;
 
-import apollo.messages.Messages;
+import static apollo.messages.Messages.ILLEGAL_ARGUMENT_EXCEPTION;
 
 public class ApolloIllegalArgumentException extends ApolloException{
 
@@ -9,6 +9,6 @@ public class ApolloIllegalArgumentException extends ApolloException{
     }
 
     public ApolloIllegalArgumentException() {
-        this(Messages.ILLEGAL_ARGUMENT_EXCEPTION);
+        this(ILLEGAL_ARGUMENT_EXCEPTION);
     }
 }

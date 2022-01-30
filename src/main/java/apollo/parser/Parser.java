@@ -38,7 +38,7 @@ public class Parser {
     }
 
     public Command parseCommand(String userInput) throws ApolloIllegalArgumentException {
-        String[] args = userInput.split(" ", 2);
+        String[] args = userInput.trim().split(" ", 2);
         String command = args[0].toLowerCase();
         String description;
         switch (command) {

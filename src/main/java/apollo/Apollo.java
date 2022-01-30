@@ -9,6 +9,8 @@ import apollo.tasks.TaskList;
 import apollo.ui.Welcome;
 import apollo.ui.Ui;
 
+import java.time.LocalTime;
+
 public class Apollo {
 
     private static TaskList taskList;
@@ -26,7 +28,8 @@ public class Apollo {
             isLoaded = false;
         }
         Command.setTaskList(taskList);
-        ui.printMessage(Welcome.welcomeMessage(isLoaded));
+        Welcome.printLogo();
+        ui.printMessage(Welcome.welcomeMessage(isLoaded, LocalTime.now()));
     }
 
     private static void run() {

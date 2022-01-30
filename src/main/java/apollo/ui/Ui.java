@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import static apollo.messages.Messages.LINE_FEED;
+
 public class Ui {
 
     private final Scanner in;
@@ -23,9 +25,9 @@ public class Ui {
     }
 
     public void printMessage(String message) {
-        out.println("\t________________________________________________________________________\n\t "
-                + message.replace("\n","\n\t ")
-                + "\n\t________________________________________________________________________\n");
+        String border = "\t________________________________________________________________________\n";
+        String wrapMessage = border + "\t " + message.replace("\n", "\n\t ") + "\n" + border;
+        out.print(wrapMessage.replace("\n", LINE_FEED));
     }
 
 

@@ -1,6 +1,6 @@
 package apollo.exceptions;
 
-import apollo.messages.Messages;
+import static apollo.messages.Messages.OUT_OF_BOUNDS_EXCEPTION;
 
 public class ApolloOutOfBoundsException extends ApolloException {
 
@@ -9,6 +9,6 @@ public class ApolloOutOfBoundsException extends ApolloException {
     }
 
     public ApolloOutOfBoundsException() {
-        this(Messages.OUT_OF_BOUNDS_EXCEPTION);
+        this(OUT_OF_BOUNDS_EXCEPTION);
     }
 }
