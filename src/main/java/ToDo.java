@@ -4,6 +4,11 @@ class ToDo extends Task {
   }
 
   @Override
+  Type type() {
+    return Type.TODO;
+  }
+
+  @Override
   String toSave() {
     int doneBit = isDone ? 1 : 0;
     return String.format("T,.,%d,.,%s\n", doneBit, name);

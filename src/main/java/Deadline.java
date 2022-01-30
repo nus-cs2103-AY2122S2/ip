@@ -6,6 +6,10 @@ class Deadline extends Task {
     this.by = by;
   }
 
+  Type type() {
+    return Type.DEADLINE;
+  }
+
   @Override
   String toSave() {
     int doneBit = isDone ? 1 : 0;

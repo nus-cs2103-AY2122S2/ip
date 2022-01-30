@@ -2,19 +2,28 @@ abstract class Task {
   protected final String name;
   protected boolean isDone;
 
+  public enum Type {
+    DEADLINE,
+    EVENT,
+    TODO,
+  }
+
   public Task(String name) {
     this.name = name;
     this.isDone = false;
   }
 
-  public void done() {
+  public Task done() {
     isDone = true;
+    return this;
   }
 
-  public void undone() {
+  public Task undone() {
     isDone = false;
+    return this;
   }
 
+  abstract Type type();
   abstract String toSave();
 
   @Override

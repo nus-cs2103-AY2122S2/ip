@@ -1,9 +1,14 @@
-public class Event extends Task {
+class Event extends Task {
   private String at;
 
   public Event(String name, String at) {
     super(name);
     this.at = at;
+  }
+
+  @Override
+  Type type() {
+    return Type.EVENT;
   }
 
   @Override

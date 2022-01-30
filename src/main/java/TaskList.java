@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
 class TaskList extends ArrayList<Task> {
-    public TaskList() { }
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
