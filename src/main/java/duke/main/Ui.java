@@ -2,7 +2,6 @@ package duke.main;
 
 import duke.task.Task;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user
@@ -12,13 +11,6 @@ public class Ui {
 
     public Ui() {
         this.output = "";
-    }
-
-    /**
-     * Prints welcome message
-     */
-    public void showWelcome() {
-        output = "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -36,7 +28,7 @@ public class Ui {
     public void showList(ArrayList<Task> tasks) {
         output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            output += String.format("%d.%s\n", i + 1, tasks.get(i));
+            output += String.format("%d. %s\n", i + 1, tasks.get(i));
         }
     }
 
@@ -115,14 +107,6 @@ public class Ui {
         output = message;
     }
 
-    /**
-     * Reads user input and returns it
-     *
-     * @return user input
-     */
-  //  public String readCommand() {
-    //    return sc.nextLine();
-    //}
     public String toString() {
         return output;
     }

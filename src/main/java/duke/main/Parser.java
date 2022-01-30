@@ -2,7 +2,6 @@ package duke.main;
 
 import duke.command.*;
 import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -63,7 +62,7 @@ public class Parser {
                 }
             }
         } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
     }
 
