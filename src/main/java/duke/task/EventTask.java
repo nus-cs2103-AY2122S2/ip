@@ -6,33 +6,28 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task that is happening on the specified date.
  */
-public class EventTask extends Task{
+public class EventTask extends Task {
     private LocalDate d;
 
-    public EventTask(String ss, LocalDate date) {
-        this.taskName = ss;
-        this.isDone = false;
-        this.d = date;
-    }
-    public EventTask(String ss, boolean isDone, LocalDate date) {
-        this.taskName = ss;
+    /**
+     * Constructor for EventTask.
+     * @param taskName The name of the Task to be added.
+     * @param isDone If the Task that is being added is marked.
+     * @param date The date of the Task.
+     */
+    public EventTask(String taskName, boolean isDone, LocalDate date) {
+        this.taskName = taskName;
         this.isDone = isDone;
         this.d = date;
-    }
-
-    public String toFileString() {
-        return String.format("%s,%s,%s,%s",
-                'E',
-                this.isDone,
-                this.taskName, this.d.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
     }
 
     public LocalDate getDate() {
         return this.d;
     }
+
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at:%s)", this.isDone?"X":" ", this.taskName,
+        return String.format("[E][%s] %s (at:%s)", this.isDone ? "X" : " ", this.taskName,
                 this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 

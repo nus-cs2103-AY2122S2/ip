@@ -39,16 +39,16 @@ public class TaskList {
         taskTypePredicateList.add(t -> t instanceof DeadlineTask);
         taskTypePredicateList.add(t -> t instanceof EventTask);
 
-        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().equals(date));
-        taskDatePredicateList.add(t -> ((EventTask)t).getDate().equals(date));
-        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().isBefore(date));
-        taskDatePredicateList.add(t -> ((EventTask)t).getDate().isBefore(date));
-        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().isAfter(date));
-        taskDatePredicateList.add(t -> ((EventTask)t).getDate().isAfter(date));
+        taskDatePredicateList.add(t -> ((DeadlineTask) t).getDueDate().equals(date));
+        taskDatePredicateList.add(t -> ((EventTask) t).getDate().equals(date));
+        taskDatePredicateList.add(t -> ((DeadlineTask) t).getDueDate().isBefore(date));
+        taskDatePredicateList.add(t -> ((EventTask) t).getDate().isBefore(date));
+        taskDatePredicateList.add(t -> ((DeadlineTask) t).getDueDate().isAfter(date));
+        taskDatePredicateList.add(t -> ((EventTask) t).getDate().isAfter(date));
 
         ArrayList<Task> result = new ArrayList<>();
         int listIndex = comparisonType * 2;
-        for(Predicate<Task> p : taskTypePredicateList) {
+        for (Predicate<Task> p : taskTypePredicateList) {
             result.addAll(this.tasks.stream()
                     .filter(p)
                     .filter(taskDatePredicateList.get(listIndex++))
@@ -82,7 +82,7 @@ public class TaskList {
      * @param taskName The name of the Task to be added.
      * @param isMarked If the Task that is being added is marked.
      * @param date The date of the Task (null for TodoTask).
-     * @param isMarked The type task to be added.
+     * @param taskType The type task to be added.
      */
     public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
         switch (taskType) {
@@ -95,6 +95,8 @@ public class TaskList {
         case 2:
             this.tasks.add(new EventTask(taskName, isMarked, date));
             break;
+        default:
+            break;
         }
     }
 
@@ -102,10 +104,16 @@ public class TaskList {
         tasks.remove(index);
     }
 
+    /**
+     * Returns a list of tasks that contains the specified keyword.
+     *
+     * @param keyword The keyword to be searched.
+     * @return Returns a list of task that contains the specified keyword
+     */
     public ArrayList<Task> findTasksContaining(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
-        for(Task t : tasks) {
-            if(t.getTaskName().contains(keyword)) {
+        for (Task t : tasks) {
+            if (t.getTaskName().contains(keyword)) {
                 result.add(t);
             }
         }
