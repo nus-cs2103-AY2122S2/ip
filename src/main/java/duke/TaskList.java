@@ -30,6 +30,14 @@ public class TaskList {
         }
     }
 
+    public String getTasksAsString() {
+        String result = "";
+        for (int i = 0; i < ls.size(); i++) {
+            result = result + (i + 1) + ". " + ls.get(i) + "\n";
+        }
+        return result;
+    }
+
     /**
      * Prints tasks in the list that has name containing the specified keyword.
      * @param keyword
@@ -40,6 +48,18 @@ public class TaskList {
                 System.out.println((i + 1) + ". " + ls.get(i));
             }
         }
+    }
+
+    public String findAndGetTasks(String keyword) {
+
+        String result = "";
+
+        for (int i = 0; i < ls.size(); i++) {
+            if (ls.get(i).getName().contains(keyword)) {
+                result +=(i + 1) + ". " + ls.get(i) + "\n";
+            }
+        }
+        return result;
     }
 
     /**
