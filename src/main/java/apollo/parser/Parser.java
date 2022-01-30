@@ -8,11 +8,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user inputs for commands.
+ */
 public class Parser {
 
     private static final String PATTERN = "dd-MM-yyyy HH:mm";
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PATTERN);
 
+    /**
+     * Parses supplied arguments for date and time.
+     * Returns in {@code LocalDateTime} type.
+     *
+     * @param args To parse for date and time.
+     * @return Date and time.
+     * @throws ApolloIllegalArgumentException If args in wrong format to parse date and time.
+     */
     private LocalDateTime parseDateTime(String[] args) throws ApolloIllegalArgumentException {
         try {
             String dateTimeString = parseArgs(args)[1].trim();
@@ -22,6 +33,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments for description until "/at" or "/by".
+     *
+     * @param args To parse for description.
+     * @return String array containing description and other arguments.
+     * @throws ApolloIllegalArgumentException If not enough arguments are supplied.
+     */
     private String[] parseArgs(String[] args) throws ApolloIllegalArgumentException {
         if (args.length < 2) {
             throw new ApolloIllegalArgumentException("Insufficient Arguments. ");
@@ -29,6 +47,13 @@ public class Parser {
         return args[1].split(" */(at|by) *", 2);
     }
 
+    /**
+     * Parses arguments for index.
+     *
+     * @param args To parse for index.
+     * @return Index parsed as an Integer.
+     * @throws ApolloIllegalArgumentException If invalid Integer is supplied.
+     */
     private int parseIndex(String[] args) throws ApolloIllegalArgumentException {
         try {
             return Integer.parseInt(parseArgs(args)[0].trim()) - 1;

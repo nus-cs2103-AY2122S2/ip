@@ -1,7 +1,16 @@
 package apollo.commands;
 
+/**
+ * Lists {@code Tasks} in taskList.
+ * Extends {@code Command} superclass.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Prefixes each list item with index.
+     *
+     * @return Indexed list in string representation.
+     */
     private String getIndexedList() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < taskList.taskCount(); i++) {
@@ -11,6 +20,11 @@ public class ListCommand extends Command {
         return stringBuilder.toString();
     }
 
+    /**
+     * Lists all current tasks in taskList
+     *
+     * @return Message for successful execution.
+     */
     @Override
     public String execute() {
         if (taskList.taskCount() == 0) {
