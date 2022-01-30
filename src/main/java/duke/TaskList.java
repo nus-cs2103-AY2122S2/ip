@@ -70,7 +70,7 @@ public class TaskList {
      * Command to list out all of the Tasks in the TaskList.
      */
     public void list() {
-        int leng = tasks.toArray().length;
+        int leng = tasks.size();
         if (leng == 0) {
             System.out.println("There are no pending tasks!");
         } else {
@@ -118,7 +118,7 @@ public class TaskList {
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
         System.out.println("Added to your tasks: \n\t" + task.toString());
-        System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+        System.out.println("You now have " + tasks.size() + " tasks in your list");
     }
 
     /**
@@ -134,7 +134,7 @@ public class TaskList {
             Deadline task = new Deadline(taskName, false, "D", date);
             this.tasks.add(task);
             System.out.println("Added to your tasks: \n\t" + task.toString());
-            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+            System.out.println("You now have " + tasks.size() + " tasks in your list");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
         }
@@ -154,7 +154,7 @@ public class TaskList {
             Event task = new Event(taskName, false, "E", date);
             this.tasks.add(task);
             System.out.println("Added to your tasks: \n\t" + task.toString());
-            System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+            System.out.println("You now have " + tasks.size() + " tasks in your list");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
         }
@@ -172,7 +172,7 @@ public class TaskList {
             int deleteInd = Integer.parseInt(deleteIndStr) - 1;
             Task task = this.tasks.get(deleteInd);
             System.out.println("Removed from your tasks: \n\t" + task.toString());
-            int num = tasks.toArray().length - 1;
+            int num = tasks.size() - 1;
             System.out.println("You now have " + num + " tasks in your list");
             this.tasks.remove(deleteInd);
         } catch (NumberFormatException e) {
@@ -180,5 +180,48 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That index number is out of range! Please try again!");
         }
+    }
+
+    /**
+     * Method to help users find tasks of a certain "keyword" in TaskList.
+     *
+     * @param taskStr Command inputted by users.
+     */
+    public void find(String taskStr) {
+        String[] taskArr = parser.splitLimitTwo(taskStr);
+        TaskList foundTasks = new TaskList();
+        String keyword = taskArr[1];
+        for (Task currentTask : this.tasks) {
+            if (currentTask.toString().contains(keyword)) {
+                foundTasks.add(currentTask);
+            }
+        }
+
+        if (foundTasks.size() == 0) {
+            System.out.println("There are no pending tasks with keyword '" + keyword + "'!");
+        } else {
+            foundTasks.list();
+        }
+    }
+
+    /**
+     * Manual that users can use if they need help.
+     */
+    public void help() {
+        System.out.println("Looks like you need some help! Here is a list of commands that you can use!\n" +
+                "\n=> These are the utility commands that you can use!\n" +
+                "'save' : Use this to save all tasks that have been added to Duke into a local file.\n" +
+                "'bye'  : Use this to exit Duke. All tasks added will be saved upon this command as well.\n" +
+                "'list' : Use this to list out all the tasks added into Duke.\n" +
+                "'find *keyword*' : Use this to find all tasks with the *keyword*\n" +
+                "\n=> Next are the commands to use when you want to add a task!\n" +
+                "'todo *todo name*'  : Use this to add a todo task into Duke.\n" +
+                "'event *event name* /at *YYYY-MM-DD HH:MM*'       : Use this to add an event task into Duke.\n" +
+                "'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Use this to add a deadline task into Duke.\n" +
+                "\n=> Lastly, commands to edit a task on Duke.\n" +
+                "'mark *task #*' : Use this to mark a task as completed.\n" +
+                "'unmark *task #*' : Use this to un-mark a task as incomplete.\n" +
+                "'delete *task #*' : Use this to delete a task from Duke.\n"
+        );
     }
 }
