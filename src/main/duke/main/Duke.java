@@ -1,9 +1,9 @@
-package main;
+package main.duke.main;
 
-import instruction.Instruction;
-import storage.Storage;
-import task.TaskManager;
-import ui.Ui;
+import main.duke.instruction.Instruction;
+import main.duke.storage.Storage;
+import main.duke.task.TaskManager;
+import main.duke.ui.Ui;
 
 public class Duke {
 

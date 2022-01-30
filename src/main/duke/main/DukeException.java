@@ -1,4 +1,4 @@
-package main;
+package main.duke.main;
 
 /**
  * An abstract clas that represents the exceptions related to main.Duke.

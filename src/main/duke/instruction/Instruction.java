@@ -1,9 +1,9 @@
-package instruction;
+package main.duke.instruction;
 
-import main.DukeException;
-import task.Task;
-import task.TaskManager;
-import ui.Ui;
+import main.duke.main.DukeException;
+import main.duke.task.Task;
+import main.duke.task.TaskManager;
+import main.duke.ui.Ui;
 
 /**
  * A task represents an instruction inputted to main.Duke by a user.

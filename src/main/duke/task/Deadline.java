@@ -1,4 +1,4 @@
-package task;
+package main.duke.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;

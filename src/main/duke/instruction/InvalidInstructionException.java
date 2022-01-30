@@ -1,6 +1,6 @@
-package instruction;
+package main.duke.instruction;
 
-import main.DukeException;
+import main.duke.main.DukeException;
 
 /**
  * Represents the exception that occurs when the user input of command is invalid.

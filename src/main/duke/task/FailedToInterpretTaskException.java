@@ -1,6 +1,6 @@
-package task;
+package main.duke.task;
 
-import main.DukeException;
+import main.duke.main.DukeException;
 
 class FailedToInterpretTaskException extends DukeException {
 

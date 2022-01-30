@@ -1,8 +1,8 @@
-package instruction;
+package main.duke.instruction;
 
-import task.Task;
-import task.TaskManager;
-import ui.Ui;
+import main.duke.task.Task;
+import main.duke.task.TaskManager;
+import main.duke.ui.Ui;
 
 /**
  * Represents the 'add' instruction to main.Duke.

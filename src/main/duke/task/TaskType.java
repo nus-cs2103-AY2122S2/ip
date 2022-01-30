@@ -1,4 +1,4 @@
-package task;
+package main.duke.task;
 
 /**
  * Describes types of tasks.

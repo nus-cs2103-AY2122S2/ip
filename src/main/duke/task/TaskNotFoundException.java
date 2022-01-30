@@ -1,6 +1,6 @@
-package task;
+package main.duke.task;
 
-import main.DukeException;
+import main.duke.main.DukeException;
 
 public final class TaskNotFoundException extends DukeException {
 

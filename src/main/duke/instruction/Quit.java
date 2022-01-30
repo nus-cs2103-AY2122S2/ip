@@ -1,7 +1,7 @@
-package instruction;
+package main.duke.instruction;
 
-import task.TaskManager;
-import ui.Ui;
+import main.duke.task.TaskManager;
+import main.duke.ui.Ui;
 
 /**
  * Represents the instruction 'quit'.

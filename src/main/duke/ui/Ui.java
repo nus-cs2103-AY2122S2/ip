@@ -1,9 +1,9 @@
-package ui;
+package main.duke.ui;
 
-import instruction.Instruction;
-import main.DukeException;
-import parse.Parser;
-import task.TaskManager;
+import main.duke.instruction.Instruction;
+import main.duke.main.DukeException;
+import main.duke.parse.Parser;
+import main.duke.task.TaskManager;
 
 import java.io.InputStream;
 import java.io.PrintStream;

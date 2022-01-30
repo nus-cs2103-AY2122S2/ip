@@ -1,4 +1,4 @@
-package ui;
+package main.duke.ui;
 
 import java.io.IOException;
 

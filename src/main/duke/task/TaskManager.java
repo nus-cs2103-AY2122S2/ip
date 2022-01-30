@@ -1,6 +1,6 @@
-package task;
+package main.duke.task;
 
-import storage.Storage;
+import main.duke.storage.Storage;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

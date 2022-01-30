@@ -1,7 +1,7 @@
-package storage;
+package main.duke.storage;
 
-import task.Task;
-import task.TaskNotFoundException;
+import main.duke.task.Task;
+import main.duke.task.TaskNotFoundException;
 
 import java.io.File;
 import java.io.FileInputStream;
