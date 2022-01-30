@@ -1,10 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    static final String BYE = "bye";
-    static final String LIST = "list";
-    static final String MARK = "mark";
-    static final String UNMARK = "unmark";
     static WordList wordList;
 
     public static void main(String[] args) {
@@ -26,54 +22,36 @@ public class Duke {
                 warnEmpty();
                 continue;
             }
-            if (isList(input)) {
-                wordList.printList();
-                continue;
-            }
 
-            if (isMark(input)) {
-                int itemNumber = Integer.parseInt(input.substring(5));
-                wordList.markItem(itemNumber);
-                continue;
-            }
+            Object[] parseResult = InputParser.parseInput(input);
+            InputType inputType = (InputType) parseResult[0];
+            String value = (String) parseResult[1];
 
-            if (isUnmark(input)) {
-                int itemNumber = Integer.parseInt(input.substring(7));
-                wordList.unmarkItem(itemNumber);
-                continue;
-            }
-
-            if (isBye(input)) {
+            processInput(inputType, value);
+            if (inputType == InputType.BYE) {
                 break;
             }
-
-            echo(input);
-            wordList.storeWord(input);
         }
-        replyBye();
     }
 
-    public static void echo(String words) {
-        System.out.println("------------------------------------");
-        System.out.println("added: " + words);
-        System.out.println("------------------------------------");
-        System.out.println("");
-    }
-
-    public static boolean isBye(String word) {
-        return Duke.BYE.equals(word);
-    }
-
-    public static boolean isMark(String word) {
-        return word.startsWith(Duke.MARK);
-    }
-
-    public static boolean isUnmark(String word) {
-        return word.startsWith(Duke.UNMARK);
-    }
-
-    public static boolean isList(String word) {
-        return Duke.LIST.equals(word);
+    public static void processInput(InputType inputType, String value) {
+        switch(inputType) {
+            case LIST:
+                wordList.printList();
+                break;
+            case MARK:
+                wordList.markItem(Integer.parseInt(value));
+                break;
+            case UNMARK:
+                wordList.unmarkItem(Integer.parseInt(value));
+                break;
+            case BYE:
+                replyBye();
+                break;
+            case NONE:
+                wordList.storeWord(value);
+                break;
+        }
     }
 
     public static void replyWelcomeMessage() {

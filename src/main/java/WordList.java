@@ -9,6 +9,9 @@ public class WordList {
 
     public void storeWord(String word) {
         this.wordList.add(new WordListItem(word));
+        System.out.println("  ------------------------------------");
+        System.out.println("  added: " + word);
+        System.out.println("  ------------------------------------");
     }
 
     public void markItem(int itemNumber) {
@@ -25,6 +28,10 @@ public class WordList {
 
     public void printList() {
         System.out.println(this);
+    }
+
+    public int length() {
+        return this.wordList.size();
     }
 
     @Override
