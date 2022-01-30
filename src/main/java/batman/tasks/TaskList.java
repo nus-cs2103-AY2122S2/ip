@@ -1,11 +1,11 @@
 package batman.tasks;
 
-import batman.exception.DukeException;
-import batman.exception.Error;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import batman.exception.DukeException;
+import batman.exception.Error;
 
 public class TaskList {
 
@@ -57,10 +57,9 @@ public class TaskList {
         } catch (DukeException e) {
             return e.emptyDesc();
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "Missing argument(s) for tasks\n" +
-                    "e.g. <task> <desc> /(at or by) <datetime>\n";
-        }
-        catch (DateTimeParseException e) {
+            return "Missing argument(s) for tasks\n"
+                    + "e.g. <task> <desc> /(at or by) <datetime>\n";
+        } catch (DateTimeParseException e) {
             return "Get the date format right!\ndd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm\n";
         }
     }
@@ -87,13 +86,13 @@ public class TaskList {
             switch (action) {
             case "mark":
                 tasks.get(index).markItem();
-                sb.append("Alfred, mark it as done!\n  ").
-                        append(tasks.get(index).toString()).append("\n");
+                sb.append("Alfred, mark it as done!\n  ")
+                        .append(tasks.get(index).toString()).append("\n");
                 break;
-            case "unmark":
+            default:
                 tasks.get(index).unmarkItem();
-                sb.append("Make up your mind. Alfred, unmark it!\n  ").
-                        append(tasks.get(index).toString()).append("\n");
+                sb.append("Make up your mind. Alfred, unmark it!\n  ")
+                        .append(tasks.get(index).toString()).append("\n");
                 break;
             }
             return sb;
