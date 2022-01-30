@@ -27,6 +27,13 @@ event test4 /by 6pm
 mark abcd
 unmark efgh
 delete 1
+find abcdef
+list
+find book
+list
+find
+find return
+delete 5
 list
 delete 8
 mark 8
