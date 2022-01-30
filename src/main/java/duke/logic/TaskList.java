@@ -35,6 +35,13 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public TaskList filter(String keyword) {
+        ArrayList<Task> newTaskList = new ArrayList<>(this.tasks);
+        newTaskList.removeIf(t -> !t.hasKeyword(keyword));
+
+        return new TaskList(newTaskList);
+    }
+
     public String toData() {
         StringBuilder data = new StringBuilder();
         for (Task task : this.tasks) {
