@@ -27,6 +27,12 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Adds tasks depending on what type of task it is.
+     *
+     * @param command An array of strings containing the
+     *                details of a task.
+     */
     public static String addTask(String[] command) {
         try {
             String task;
@@ -65,6 +71,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes an existing task based on the index given.
+     *
+     * @param index The index of an existing task in the list.
+     */
     public static String deleteTask(int index) {
         try {
             if (index >= tasks.size() || index < 0) {
@@ -78,6 +89,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Toggles the status of the task.
+     *
+     * @param action Mark/Unmark task.
+     * @param index The index of an existing task in the list.
+     */
     public static StringBuilder toggleStatus(String action, int index) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -102,6 +119,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets tasks from specified file.
+     *
+     * @param lines A list of strings that is read from the file.
+     */
     public void getTasksFromFile(List<String> lines) {
         tasks = new ArrayList<>();
         if (lines != null) {
@@ -121,6 +143,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all existing tasks.
+     */
     public static String printList() {
         StringBuilder s = new StringBuilder();
         if (tasks.size() == 0) {

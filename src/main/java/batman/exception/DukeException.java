@@ -1,5 +1,7 @@
 package batman.exception;
 
+import java.time.format.DateTimeParseException;
+
 public class DukeException extends Exception {
 
     protected Error err;
@@ -8,6 +10,9 @@ public class DukeException extends Exception {
         this.err = err;
     }
 
+    /**
+     * Returns a string if an invalid input is encountered.
+     */
     public String invalidInput() {
 
         return "I'm sorry, but I don't know what that means.\n";

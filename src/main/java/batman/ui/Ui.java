@@ -8,11 +8,19 @@ public class Ui {
     private final Scanner sc;
     private final String botName;
 
+    /**
+     * Ui handles the interaction with the user
+     *
+     * @param botName Name of the chatbot
+     */
     public Ui(String botName) {
         sc = new Scanner(System.in);
         this.botName = botName;
     }
 
+    /**
+     * Displays the initialisation message
+     */
     public void greeting() {
         String logo = "          .  .\n" +
                 "          |\\_|\\\n" +
@@ -45,6 +53,9 @@ public class Ui {
         System.out.println(line + "\n" + input + line);
     }
 
+    /**
+     * Displays the exit message
+     */
     public void exit() {
         sc.close();
         StringBuilder sb = new StringBuilder();
@@ -63,6 +74,11 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Displays the error message
+     *
+     * @param error Message of error
+     */
     public void showLoadingError(String error) {
         StringBuilder sb = new StringBuilder();
         sb.append(error);

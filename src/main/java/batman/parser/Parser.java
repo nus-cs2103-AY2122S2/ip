@@ -6,6 +6,12 @@ import batman.tasks.TaskList;
 
 public class Parser {
 
+    /**
+     * Returns a StringBuilder by parsing user
+     * input and decides next action to take based on it.
+     *
+     * @param input User input.
+     */
     public static StringBuilder parseInput(String input) {
         StringBuilder sb = new StringBuilder();
         String[] command = input.split(" ", 2);
