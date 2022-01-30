@@ -36,6 +36,12 @@ Athena: Now you have 2 tasks in your list.
 Athena: Here's the current list of tasks:
 1. [D][ ] return book (by: Jan 29 2022 01:00PM)
 2. [D][ ] do homework (by: Apr 3 2020 11:59PM)
+Athena: Here are the tasks containing the phrase '[D][ ]'
+1. [D][ ] return book (by: Jan 29 2022 01:00PM)
+2. [D][ ] do homework (by: Apr 3 2020 11:59PM)
+Athena: Here are the tasks containing the phrase 'do homework'
+2. [D][ ] do homework (by: Apr 3 2020 11:59PM)
+Athena: Sorry, no tasks were found containing the phrase '1.'
 Athena: That's an invalid command. Please try again.
 Athena: That's an invalid command. Please try again.
 Athena: Error. Please provide a task name.
@@ -52,4 +58,5 @@ Athena: Error. There is no such task. Please try again.
 Athena: Error. Please provide a valid task number.
 Athena: Error. There is no such task. Please try again.
 Athena: Error. There is no such task. Please try again.
+Athena: Error. Please provide a search phrase.
 Athena: Farewell!

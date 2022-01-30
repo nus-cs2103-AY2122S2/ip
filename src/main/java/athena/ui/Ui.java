@@ -3,6 +3,7 @@ package athena.ui;
 
 import athena.tasks.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -16,6 +17,13 @@ public class Ui {
 
     public String readNextLine() {
         return scanner.nextLine();
+    }
+
+    public void showSpecificTasks(List<Integer> taskNumbers) {
+        for (int taskNumber : taskNumbers) {
+            System.out.printf("%d. %s", taskNumber, taskList.getTaskString(taskNumber));
+            System.out.println();
+        }
     }
 
     public void sayText(String text) {

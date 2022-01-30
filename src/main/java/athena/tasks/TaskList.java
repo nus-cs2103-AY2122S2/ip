@@ -107,6 +107,17 @@ public class TaskList {
         return taskList.get(taskNumber - 1).toString();
     }
 
+    public List<Integer> getTaskNumbersContainingPhrase(String searchPhrase) {
+        ArrayList<Integer> taskNumbers = new ArrayList<>();
+        for (int i = 1; i <= getNumberOfTasks(); i++) {
+            Task task = taskList.get(i - 1);
+            if (task.toString().contains(searchPhrase)) {
+                taskNumbers.add(i);
+            }
+        }
+        return taskNumbers;
+    }
+
     public ArrayList<String> getSaveFormat() {
         ArrayList<String> output = new ArrayList<>();
         for (Task task : taskList) {
