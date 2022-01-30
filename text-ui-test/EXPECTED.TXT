@@ -119,12 +119,16 @@ Now you have 2 tasks in the list.
 2. [D][ ] return book (by: Jan 1 2020 18:00)
 +--------------------------------------------------+
 +--------------------------------------------------+
-Get the date format right!
-dd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm
+Got it. Task added:
+  [E][ ] project meeting (at: Dec 12 2021 09:00)
+Now you have 3 tasks in the list.
 +--------------------------------------------------+
 +--------------------------------------------------+
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Jan 1 2020 18:00)
+No matching tasks in your list.
++--------------------------------------------------+
++--------------------------------------------------+
+Here are the matching tasks in your list:
+1. [E][ ] project meeting (at: Dec 12 2021 09:00)
 +--------------------------------------------------+
 +--------------------------------------------------+
 Bye. This city needs me. na na na na na na BATMAN
@@ -164,6 +168,7 @@ What can I do for you?
 +--------------------------------------------------+
 1. [T][ ] borrow book
 2. [D][ ] return book (by: Jan 1 2020 18:00)
+3. [E][ ] project meeting (at: Dec 12 2021 09:00)
 +--------------------------------------------------+
 +--------------------------------------------------+
 Bye. This city needs me. na na na na na na BATMAN

@@ -102,6 +102,26 @@ public class TaskList {
         }
     }
 
+    public static StringBuilder findTask(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(keyword)) {
+                temp.add(t);
+            }
+        }
+        if (temp.size() == 0) {
+            sb.append("No matching tasks in your list.\n");
+        }
+        else {
+            sb.append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < temp.size(); i++) {
+                sb.append(i + 1).append(". ").append(temp.get(i)).append("\n");
+            }
+        }
+        return sb;
+    }
+
     public void getTasksFromFile(List<String> lines) {
         tasks = new ArrayList<>();
         if (lines != null) {
