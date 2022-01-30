@@ -4,16 +4,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task with deadline, is a subclass of task.
+ * Represents a task that has deadline.
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Constructs a deadline task.
+     *
+     * @param description Task description.
+     * @param by The date time of the deadline.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructs a deadline task.
+     *
+     * @param description Task description.
+     * @param by The date time of the deadline.
+     * @param isDone If the task has is done or not.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/y HHmm"));

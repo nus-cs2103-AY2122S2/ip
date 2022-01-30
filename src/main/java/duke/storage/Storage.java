@@ -10,10 +10,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores the user data in a text file.
+ */
 public class Storage {
     private final File directory = new File("data");
     private final File file = new File("data/tasks.txt");
 
+    /**
+     * Constructs a storage pointing to a text file.
+     *
+     * @throws DukeException If there is error when creating file.
+     */
     public Storage() throws DukeException {
         if (!directory.exists()) {
             directory.mkdir();
@@ -26,6 +34,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves the tasks store in the storage text file.
+     *
+     * @return The tasks stored in an array list.
+     */
     public ArrayList<Task> retrieveTaskList() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
@@ -39,6 +52,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Stores the current tasks in program to the storage file.
+     *
+     * @param tasks The list of tasks currently in the program.
+     * @throws DukeException When error writing to file.
+     */
     public void saveTaskList(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);

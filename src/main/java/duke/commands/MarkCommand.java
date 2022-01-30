@@ -11,6 +11,11 @@ public class MarkCommand extends Command {
     protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as done:";
 
+    /**
+     * Constructs a mark command.
+     *
+     * @param index The index of task in the list.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }

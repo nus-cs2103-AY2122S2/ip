@@ -4,25 +4,54 @@ import duke.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs with an array list of tasks.
+     *
+     * @param tasks The array list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets the string description of a task.
+     *
+     * @param index The index of task in the list.
+     * @return The task string.
+     */
     public String getTaskString(int index) {
         return tasks.get(index).toString();
     }
 
+    /**
+     * Gets the tasks count string.
+     *
+     * @return The tasks count string.
+     */
     public String printTaskCount() {
         return "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
-    public void addTask(Task t) {
-        tasks.add(t);
+    /**
+     * Adds a new task to the task list.
+     * @param task The task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
+    /**
+     * Removes a task from the task list.
+     *
+     * @param index The index of the task in the list.
+     * @return The removed task.
+     */
     public Task deleteTask(int index) {
         try {
             return tasks.remove(index);
@@ -31,6 +60,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index The index of the task in the list.
+     */
     public void markTask(int index) {
         try {
             tasks.get(index).setDone(true);
@@ -39,6 +73,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as not done yet.
+     *
+     * @param index The index of the task in the list.
+     */
     public void unmarkTask(int index) {
         try {
             tasks.get(index).setDone(false);
@@ -47,6 +86,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds the tasks that match search string.
+     *
+     * @param search The string to match for.
+     * @return An array list of tasks that matches the search string.
+     */
     public ArrayList<Task> findTasks(String search) {
         ArrayList<Task> result = new ArrayList<Task>();
         for (Task t : tasks) {
@@ -57,6 +102,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Gets the string description of the whole task list.
+     *
+     * @return The string description.
+     */
     public String taskListToString() {
         StringBuilder result = new StringBuilder();
         String title = tasks.isEmpty() ? "You got no task now! Start by adding new tasks."
@@ -69,6 +119,11 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Gets the compact string description of the whole task list.
+     *
+     * @return The compact string description
+     */
     public String taskListFileString() {
         StringBuilder result = new StringBuilder();
         for (Task t : tasks) {

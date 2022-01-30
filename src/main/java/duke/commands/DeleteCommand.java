@@ -12,6 +12,11 @@ public class DeleteCommand extends Command {
     protected int index;
     private static final String MESSAGE = "Got it. I've removed this task:";
 
+    /**
+     * Constructs a delete command.
+     *
+     * @param index The index of task in the list.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

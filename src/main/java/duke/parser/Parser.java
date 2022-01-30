@@ -10,9 +10,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser to extract information from user input.
+ */
 public class Parser {
+
+    /**
+     * Parses user input into commands.
+     *
+     * @param input The user input string.
+     * @return The command corresponding to the input.
+     * @throws DukeException If the input string have errors in its format.
+     */
     public static Command parse(String input) throws DukeException {
         String[] details = input.split(" ", 2);
+
         switch (details[0].toLowerCase()) {
         case "bye":
             return new ExitCommand();

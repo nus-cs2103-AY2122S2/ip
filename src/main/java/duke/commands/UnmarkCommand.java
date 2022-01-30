@@ -11,6 +11,11 @@ public class UnmarkCommand extends Command {
     protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as not done yet:";
 
+    /**
+     * Constructs an unmark command.
+     *
+     * @param index The index of task in the list.
+     */
     public UnmarkCommand(int index) {
         this.index = index;
     }
