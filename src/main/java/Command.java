@@ -32,6 +32,7 @@ public class Command {
 
         switch (command) {
         case "bye":
+            Task.saveTasks();
             System.out.println(" See you again! :)");
             sc.close();
             System.exit(0);
