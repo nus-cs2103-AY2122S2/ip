@@ -1,27 +1,27 @@
 package duke.storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
-import duke.data.task.Task;
-import duke.data.task.TodoTask;
+import duke.data.exception.ResourceNotFoundException;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
-import duke.data.exception.ResourceNotFoundException;
+import duke.data.task.Task;
+import duke.data.task.TodoTask;
 
 /**
  * Represents a file used to store the task list data.
  */
 public class Storage {
-    public static File f;
+    private static File f;
 
     /**
      * Constructs a storage object that represents the file "data/duke.txt"
@@ -41,7 +41,7 @@ public class Storage {
 
         if (!data.exists()) {
             throw new ResourceNotFoundException("Folder ./data/ cannot be found");
-        } else if (!duke.exists()){
+        } else if (!duke.exists()) {
             throw new ResourceNotFoundException("File ./data/duke.txt cannot be found");
         }
 
@@ -87,7 +87,7 @@ public class Storage {
      * @param input string to be appended to the file.
      * @throws IOException if an input or output error occurs.
      */
-    public void appendToFile(String input) throws IOException{
+    public void appendToFile(String input) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt", true);
         fw.write(input);
         fw.close();
@@ -101,7 +101,8 @@ public class Storage {
      * @throws IOException if an input or output error occurs.
      */
     public void updateTask(String id, boolean done) throws IOException {
-        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"), StandardCharsets.UTF_8));
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"),
+                StandardCharsets.UTF_8));
         for (int i = 0; i < fileContent.size(); i++) {
             String line = fileContent.get(i);
             String[] a = line.split("\\|");
@@ -125,7 +126,8 @@ public class Storage {
      * @throws IOException if an input or output error occurs.
      */
     public void removeTask(String id) throws IOException {
-        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"), StandardCharsets.UTF_8));
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"),
+                StandardCharsets.UTF_8));
         for (int i = 0; i < fileContent.size(); i++) {
             String line = fileContent.get(i);
             String[] a = line.split("\\|");

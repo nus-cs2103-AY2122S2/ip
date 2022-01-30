@@ -33,15 +33,6 @@ public class EventTask extends Task {
     }
 
     /**
-     * Returns the deadline property of the task.
-     *
-     * @return the deadline of the task.
-     */
-    public String getDeadline() {
-        return this.deadlineString;
-    }
-
-    /**
      * Constructs a new event task from the description and the
      * deadline. Accepts date int he form of yyyy-mm-dd.
      *
@@ -52,6 +43,15 @@ public class EventTask extends Task {
         super(description);
         this.deadline = LocalDate.parse(deadline);
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    /**
+     * Returns the deadline property of the task.
+     *
+     * @return the deadline of the task.
+     */
+    public String getDeadline() {
+        return this.deadlineString;
     }
 
     /**

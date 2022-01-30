@@ -2,10 +2,10 @@ package duke.data;
 
 import java.util.ArrayList;
 
-import duke.data.task.Task;
-import duke.data.task.TodoTask;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
+import duke.data.task.Task;
+import duke.data.task.TodoTask;
 
 /**
  * Contains a list of tasks, and offers operations on the tasks.

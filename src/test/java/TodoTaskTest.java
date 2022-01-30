@@ -1,7 +1,8 @@
-import duke.data.task.TodoTask;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.data.task.TodoTask;
 
 /**
  * Tests the todo task.

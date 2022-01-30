@@ -30,6 +30,13 @@ public class UpdateCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the update command.
+     *
+     * @return response from the execution.
+     * @throws InvalidParameterException if the parameter provided is invalid.
+     * @throws IOException
+     */
     public String execute() throws InvalidParameterException, IOException {
         if (this.index > super.taskList.getSize()) {
             throw new InvalidParameterException("☹ OOPS!!! The index provided is invalid.");
