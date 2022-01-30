@@ -1,13 +1,15 @@
 package lily.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
- * A Task which records the time of the event
+ * A Task which records the time of the event as a LocalDate
  * 
  * @author Hong Yi En, Ian
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Event extends Task {
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Create a Event object.
@@ -17,7 +19,7 @@ public class Event extends Task {
      */
     public Event(String s, String at) throws LilyException {
         super(s);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     /**
@@ -26,6 +28,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " 
+        + at.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
     }
 } 

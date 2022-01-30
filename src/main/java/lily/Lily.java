@@ -1,12 +1,5 @@
 package lily;
-import lily.task.Deadline;
-import lily.task.Event;
 import lily.task.LilyException;
-import lily.task.Task;
-import lily.task.Todo;
-
-import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * Main class which runs an interactive CLI-based chatbot which manages your todos
@@ -22,13 +15,13 @@ public class Lily {
     private Parser parser;
 
     public Lily(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            ui = new Ui(true);
         } catch (LilyException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
+            ui = new Ui(false);
         }
         parser = new Parser(tasks, ui, storage);
     }
@@ -43,6 +36,7 @@ public class Lily {
     }
 }
 
+/*
 class OldLily {
     private static final String indent = "    ";
     private static LinkedList<Task> list;
@@ -183,13 +177,6 @@ class OldLily {
 
             case MARK:
                 int addIdx = Integer.parseInt(parsedSentence[1]) - 1;
-                /*
-                    * if (list.isEmpty())
-                    * throw new Error("you cant mark something that isn't there");
-                    * else if (already marked)
-                    * throw new error you've already finished this
-                    * if input doesn't have an int, ask which number you want to mark also.
-                    */
                 list.get(addIdx).mark();
                 String markMsg = "oh. you've finished it. okay\n"
                         + indent + (addIdx + 1) + "."
@@ -199,13 +186,6 @@ class OldLily {
 
             case UNMARK:
                 int delIdx = Integer.parseInt(parsedSentence[1]) - 1;
-                /*
-                    * if (list.isEmpty())
-                    * throw new Error("you can't unmark something thaj isn't there");
-                    * else if (not marked yet)
-                    * throw new error you havent done this
-                    * if input doesn't have an int, ask which number you want to mark also.
-                    */
                 list.get(delIdx).unmark();
                 String unmarkMsg = "hey, you gotta get it done later, okay?\n"
                         + indent + (delIdx + 1) + "."
@@ -223,12 +203,6 @@ class OldLily {
                 }
                 break;
             case DEADLINE:
-                /*
-                    if user didn't type "/by" (byIdx == -1)
-                        throw new Error "you didnt' type /by bro, try again"
-                    if user didnt' type a desc
-                        throw new error you didnt type a description man, try again
-                */
                 try {
                     String[] parsedDeadline = findDeadlineDescStart(sentence);
                     Deadline d = new Deadline(parsedDeadline[0], parsedDeadline[1]);
@@ -238,14 +212,7 @@ class OldLily {
                     errorPretty("Deadline description cannot be empty!");
                 }
                 break;
-            // broken, can't detect /at
             case EVENT:
-                /*
-                    if user didn't type "/at" (atIdx == -1)
-                        throw new Error "you didnt' type /at bro, try again"
-                    if user didnt' type a desc
-                        throew new error you didnt type a description man, try again
-                */
                 try {
                     String[] parsedEvent = findEventDescStart(sentence);
                     Event e = new Event(parsedEvent[0], parsedEvent[1]);
@@ -349,3 +316,4 @@ class OldLily {
                 + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
     }
 }
+*/

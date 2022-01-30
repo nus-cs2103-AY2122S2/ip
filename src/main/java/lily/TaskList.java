@@ -46,7 +46,7 @@ public class TaskList {
         return list;
     }
 
-    public String printTasks() {
+    public String getTasks() {
         String listMsg = "";
         int i = 1;
         for (Task t : list) {
@@ -97,10 +97,6 @@ public class TaskList {
         return t;
     }
 
-    public Task remove(int idx) throws IndexOutOfBoundsException {
-        return list.remove(idx);
-    }
-
     // in ui, print 'task added' else, todo desc cant be empty from lilyexception
     public Task addTodo(String desc) throws LilyException {
         Todo t = new Todo(desc);
@@ -132,5 +128,9 @@ public class TaskList {
         Event e = new Event(desc, at);
         list.add(e);
         return e;
+    }
+
+    public Task remove(int idx) throws IndexOutOfBoundsException {
+        return list.remove(idx);
     }
 }

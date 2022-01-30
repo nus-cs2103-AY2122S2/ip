@@ -19,7 +19,7 @@ import java.io.ObjectInputStream;
  * @version Jan 2022 (AY21/22 Sem 2)
  */
 public class Storage {
-    private String filePath = "data/list.txt";
+    private String filePath;
 
     /**
      * Create a new Storage manager.
@@ -32,7 +32,7 @@ public class Storage {
     /**
      * Returns a LinkedList from reading the savefile.
      * @return Saved tasks in the savefile.
-     * @throws IOException If there is no savefile or a problem arose.
+     * @throws LilyException If there is no savefile or a problem arose.
      */
     public LinkedList<Task> load() throws LilyException {
         LinkedList<Task> result = new LinkedList<>();
@@ -49,7 +49,7 @@ public class Storage {
         } catch (IOException e) {
             throw new LilyException("There's no save file.");
         } catch (ClassNotFoundException c) {
-           System.out.println("Class not found");
+            System.out.println("Class not found");
             c.printStackTrace();
         } 
         return result;
@@ -66,6 +66,7 @@ public class Storage {
             if (!dataFolder.exists()) {
                 dataFolder.mkdir();
             }
+
             FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(list.getContents());
