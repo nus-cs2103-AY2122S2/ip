@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Ui {
-    private final static String fromDuke = "From Duke_two: \n\t";
+    private final static String FROM_DUKE_TWO = "From Duke_two: \n\t";
     Storage storage;
     TaskList taskList;
 
@@ -22,7 +22,7 @@ public class Ui {
         while (true) {
             try {
                 String command = scanner.nextLine();
-                System.out.print(fromDuke);
+                System.out.print(FROM_DUKE_TWO);
                 String[] commandArr = command.split(" ");
                 firstWord = commandArr[0];
                 if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") ||

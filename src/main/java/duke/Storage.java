@@ -55,29 +55,23 @@ public class Storage {
                 String isMarked = commandArr[1].substring(1, 2);
                 boolean isMarkedBool = isMarked.equals("X");
 
-                switch (firstWord) {
-                    case "T": {
-                        ToDo task = new ToDo(taskName, isMarkedBool, "T");
-                        taskList.add(task);
-
-                        break;
-                    } case "D": {
-                        String[] detailsArr = taskName.split(" \\(by: ");
-                        String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                        String detailsFormat = parser.dataFormatHelper(detail);
-                        Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detailsFormat);
-                        taskList.add(task);
-                        break;
-                    } case "E": {
-                        String[] detailsArr = taskName.split(" \\(at: ");
-                        String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                        String detailsFormat = parser.dataFormatHelper(detail);
-                        Event task = new Event(detailsArr[0], isMarkedBool, "E", detailsFormat);
-                        taskList.add(task);
-                        break;
-                    } default: {
-                        System.out.println("Should not be in the default block for load function");
-                    }
+                if ("T".equals(firstWord)) {
+                    ToDo task = new ToDo(taskName, isMarkedBool, "T");
+                    taskList.add(task);
+                } else if ("D".equals(firstWord)) {
+                    String[] detailsArr = taskName.split(" \\(by: ");
+                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
+                    String detailsFormat = parser.dataFormatHelper(detail);
+                    Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detailsFormat);
+                    taskList.add(task);
+                } else if ("E".equals(firstWord)) {
+                    String[] detailsArr = taskName.split(" \\(at: ");
+                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
+                    String detailsFormat = parser.dataFormatHelper(detail);
+                    Event task = new Event(detailsArr[0], isMarkedBool, "E", detailsFormat);
+                    taskList.add(task);
+                } else {
+                    System.out.println("Should not be in the else block for load function");
                 }
             }
         } catch (ArrayIndexOutOfBoundsException | IOException e) {
