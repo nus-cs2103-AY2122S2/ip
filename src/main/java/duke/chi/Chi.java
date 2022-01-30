@@ -63,4 +63,8 @@ public class Chi {
         Chi myBot = new Chi("data/tasks.txt");
         myBot.run();
     }
+
+    public String getResponse(String msg) throws ChiException, IOException {
+             return parser.processMessage(msg, taskList, storage);
+    }
 }
