@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Response;
+import duke.Ui;
 
 public class CommandUnclear extends Command {
     @Override

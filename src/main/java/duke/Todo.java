@@ -10,6 +10,7 @@ public class Todo extends Task {
 
     /**
      * returns a string representation of the Task, to be read by the user.
+     *
      * @return a string representation of the Task, to be read by the user
      */
     @Override
@@ -19,6 +20,7 @@ public class Todo extends Task {
 
     /**
      * returns a string representation of the Task, to be stored locally.
+     *
      * @return a string representation of the Task, to be stored locally
      */
     @Override

@@ -33,6 +33,7 @@ public abstract class Task {
 
     /**
      * returns a string representation of the task to be read by users.
+     *
      * @return a string representation of the task
      */
     @Override
@@ -46,6 +47,7 @@ public abstract class Task {
 
     /**
      * returns a string representation of the task to be used in writing to a local file.
+     *
      * @return a string representation of the task
      */
     public String toData() {

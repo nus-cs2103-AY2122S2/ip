@@ -12,6 +12,7 @@ public class CommandBye extends Command {
 
     /**
      * Creates a new CommandBye instance.
+     *
      * @param over the boolean representation that kills Duke, used in the while loop of main logic.
      */
     public CommandBye(Over over) {

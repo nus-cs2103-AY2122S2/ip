@@ -1,9 +1,10 @@
 package duke;
+
+import duke.command.*;
+import duke.dukeException.NoTimeGivenException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import duke.command.Command;
-import duke.dukeException.NoTimeGivenException;
-import duke.command.*;
 
 /**
  * Encapsulates the parsing logic of string commands
@@ -11,14 +12,14 @@ import duke.command.*;
 class Parser {
     /**
      * returns the Command object that the user indicates through userInput
+     *
      * @param userInput the String value that the user typed
-     * @param taskList the current list of tasks that duke stores, encapsulated in TaskList class
-     * @param over the boolean value that decides when to kill the program, encapsulated in custom wrapper class
+     * @param taskList  the current list of tasks that duke stores, encapsulated in TaskList class
+     * @param over      the boolean value that decides when to kill the program, encapsulated in custom wrapper class
      * @return the Command object that can be executed
      * @throws NoTimeGivenException if the user types the wrong format of time
      */
-    public static Command parse(String userInput, TaskList taskList, Over over)
-    throws NoTimeGivenException {
+    public static Command parse(String userInput, TaskList taskList, Over over) throws NoTimeGivenException {
         String[] words = userInput.split(" ");
         String firstWord = words[0];
         if (firstWord.equals("bye")) {
@@ -66,7 +67,7 @@ class Parser {
         } else if (firstWord.equals("delete") && words.length == 2) {
             int taskNo = Integer.parseInt(words[1]);
             return new CommandDelete(taskList, taskNo);
-        } else if (firstWord.equals("find") && words.length == 2){
+        } else if (firstWord.equals("find") && words.length == 2) {
             String wordSecond = words[1];
             System.out.println("reached line 58");
             return new CommandFind(wordSecond, taskList);

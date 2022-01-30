@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * Provides the format that Duke's response will be displayed
  */
