@@ -1,12 +1,12 @@
-package duke.command;
+package java.duke.command;
 
-import duke.Ui;
-import duke.Storage;
-import duke.TaskList;
-import duke.action.Action;
-import duke.action.Deadline;
-import duke.action.Event;
-import duke.action.Todo;
+import java.duke.action.Action;
+import java.duke.ui.Storage;
+import java.duke.ui.TaskList;
+import java.duke.ui.Ui;
+import java.duke.action.Deadline;
+import java.duke.action.Event;
+import java.duke.action.Todo;
 
 public class AddCommand extends Command {
 
@@ -42,8 +42,9 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         //storage must save
         taskList.add(action);
-        System.out.println("Got it. I have added this task:\n  " + action +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+        System.out.println(new StringBuilder().append("Got it. I have added this task:\n  ")
+                .append(action).append("\nNow you have ").append(taskList.size())
+                .append(" tasks in the list.").toString());
         storage.save(taskList);
     }
 

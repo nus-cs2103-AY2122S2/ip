@@ -1,4 +1,4 @@
-package duke;
+package java.duke.ui;
 import java.util.Scanner;
 
 //Deals with interactions with users
@@ -7,7 +7,7 @@ public class Ui {
     /**
      * Prints out the statement "LOADING ERROR".
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("LOADING ERROR");
     }
 
@@ -15,9 +15,9 @@ public class Ui {
      * Prints out a welcome statement upon
      * starting up Duke.
      */
-    public void showWelcome(){
-        System.out.println("Hello!! I am Duke, your humble personal chatbot.\n" +
-                "What can I do for you?");
+    public void showWelcome() {
+        System.out.println("Hello!! I am Duke, your humble personal chatbot.\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -25,7 +25,7 @@ public class Ui {
      * into Duke.
      * @return user input
      */
-    public String readCommand(){
+    public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

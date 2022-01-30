@@ -1,5 +1,5 @@
-package duke;
-import duke.command.Command;
+package java.duke.ui;
+import java.duke.command.Command;
 
 public class Duke {
 

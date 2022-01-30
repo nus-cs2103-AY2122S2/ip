@@ -1,8 +1,8 @@
-package duke.command;
+package java.duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import java.duke.ui.TaskList;
+import java.duke.ui.Ui;
+import java.duke.ui.Storage;
 
 public class ExitCommand extends Command {
 

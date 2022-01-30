@@ -1,8 +1,8 @@
-package duke.command;
+package java.duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import java.duke.ui.Storage;
+import java.duke.ui.TaskList;
+import java.duke.ui.Ui;
 
 public class MarkCommand extends Command {
 
