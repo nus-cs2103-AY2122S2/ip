@@ -38,8 +38,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String atTimeFormatted = this.atTime.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd " +
-                "yyyy"));
+        String atTimeFormatted = this.atTime.format(DateTimeFormatter.ofPattern(
+                "HH:mm, MMM dd yyyy"));
         return "[E]" + super.toString() + " (at: " + atTimeFormatted + ")";
     }
 }

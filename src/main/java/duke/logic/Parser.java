@@ -25,8 +25,8 @@ public class Parser {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, CLEAR
     }
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " +
-            "HH:mm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+            "dd-MM-yyyy HH:mm");
 
     private static int parseIndex(String index) {
         return Integer.parseInt(index) - 1;
@@ -109,12 +109,14 @@ public class Parser {
                 command = new AddCommand(new Todo(splitInput[1], false));
                 break;
             case EVENT:
-                command = new AddCommand(new Event(parseDescription(splitInput[1], " /at "),
-                        false, parseTime(splitInput[1], " /at ")));
+                command = new AddCommand(
+                        new Event(parseDescription(splitInput[1], " /at "),
+                                false, parseTime(splitInput[1], " /at ")));
                 break;
             case DEADLINE:
-                command = new AddCommand(new Deadline(parseDescription(splitInput[1], " /by "),
-                        false, parseTime(splitInput[1], " /by ")));
+                command = new AddCommand(
+                        new Deadline(parseDescription(splitInput[1], " /by "),
+                                false, parseTime(splitInput[1], " /by ")));
                 break;
             case CLEAR:
                 command = new ClearCommand();
