@@ -148,8 +148,8 @@ public class Parser {
         case "DEADLINE":
             taskArgumentsList = taskArguments.split(" /by ", 2);
             if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify " +
-                        "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
+                throw new InvalidFormatException("You need to specify "
+                        + "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
             }
             taskDescription = taskArgumentsList[0];
             String deadline = taskArgumentsList[1];
@@ -164,8 +164,9 @@ public class Parser {
             String location = taskArgumentsList[1];
             newTask = new Event(taskDescription, location);
             return new AddCommand(newTask);
+        default:
+            throw new InvalidCommandException();
         }
-        throw new InvalidCommandException();
     }
 
     /**
@@ -175,7 +176,7 @@ public class Parser {
      * @return Whether the string can be converted to integer.
      */
     private static boolean isNumeric(String string) {
-        if(string == null || string.equals("")) {
+        if (string == null || string.equals("")) {
             return false;
         }
 

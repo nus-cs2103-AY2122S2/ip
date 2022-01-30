@@ -1,9 +1,9 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ToDoTest {
 

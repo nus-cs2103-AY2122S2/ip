@@ -1,12 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import saitama.Storage;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
-import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
 

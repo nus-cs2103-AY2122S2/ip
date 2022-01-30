@@ -1,13 +1,12 @@
 package saitama.tasks;
 
-import saitama.exceptions.InvalidFormatException;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import saitama.exceptions.InvalidFormatException;
 
 /**
  * A deadline task.

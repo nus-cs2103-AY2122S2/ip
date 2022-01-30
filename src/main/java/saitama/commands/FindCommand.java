@@ -1,12 +1,11 @@
 package saitama.commands;
 
+import java.util.List;
+
 import saitama.Storage;
 import saitama.TaskList;
 import saitama.Ui;
 import saitama.tasks.Task;
-
-import java.util.List;
-
 
 public class FindCommand extends Command {
     private String query;

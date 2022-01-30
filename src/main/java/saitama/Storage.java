@@ -1,17 +1,18 @@
 package saitama;
 
-import saitama.exceptions.InvalidFormatException;
-import saitama.tasks.Deadline;
-import saitama.tasks.Event;
-import saitama.tasks.Task;
-import saitama.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import saitama.exceptions.FileCorruptException;
+import saitama.exceptions.InvalidFormatException;
+import saitama.tasks.Deadline;
+import saitama.tasks.Event;
+import saitama.tasks.Task;
+import saitama.tasks.ToDo;
 
 /**
  * Helps with the storing and loading of the task list data.
@@ -30,54 +31,62 @@ public class Storage {
      * @return An array list of tasks.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> ls = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
         File f = new File(filePath);
 
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
-                boolean isDone = false;
+                boolean isDone;
                 Task newTask;
-                String[] substring;
+                String[] splitCommandArguments;
 
                 //split each line in text file into [task type, isDone, task description]
                 String[] data = sc.nextLine().split(" ", 3);
 
+                if (data.length < 3) {
+                    throw new FileCorruptException();
+                }
+
                 //assign isDone
                 switch(data[1]) {
-                case "":
+                case "0":
                     isDone = false;
                     break;
                 case "1":
                     isDone = true;
                     break;
+                default:
+                    throw new FileCorruptException();
                 }
 
                 //add task to array list
                 switch(data[0]) {
                 case "T":
-                    ls.add(new ToDo(data[2], isDone));
+                    taskList.add(new ToDo(data[2], isDone));
                     break;
                 case "D":
-                    substring = data[2].split(" /by ", 2);
+                    splitCommandArguments = data[2].split(" /by ", 2);
                     try {
-                        newTask = new Deadline(substring[0], substring[1], isDone);
-                        ls.add(newTask);
+                        newTask = new Deadline(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                        taskList.add(newTask);
                     } catch (InvalidFormatException e) {
-                        System.out.println("Data corrupted! Returning empty task list...");
-                        return new ArrayList<Task>();
+                        throw new FileCorruptException();
                     }
                     break;
                 case "E":
-                    substring = data[2].split(" /at ", 2);
-                    newTask = new Event(substring[0], substring[1], isDone);
-                    ls.add(newTask);
+                    splitCommandArguments = data[2].split(" /at ", 2);
+                    newTask = new Event(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                    taskList.add(newTask);
                     break;
+                default:
+                    throw new FileCorruptException();
                 }
             }
-            return ls;
-        } catch (FileNotFoundException e) {
-            return ls;
+        } catch (FileNotFoundException | FileCorruptException e) {
+            return new ArrayList<>();
+        } finally {
+            return taskList;
         }
     }
 

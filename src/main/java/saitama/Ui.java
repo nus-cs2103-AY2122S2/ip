@@ -30,7 +30,7 @@ public class Ui {
 
     /**
      * Reads the user input.
-     * 
+     *
      * @return The trimmed user input.
      */
     public String readCommand() {
@@ -40,7 +40,7 @@ public class Ui {
 
     /**
      * Prints the error message.
-     * 
+     *
      * @param errorMessage The error message to be printed.
      */
     public void showError(String errorMessage) {
