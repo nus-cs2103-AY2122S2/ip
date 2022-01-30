@@ -11,7 +11,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data.txt");
+        Storage storage = new Storage("./src/main/data.txt");
         ui.showWelcome();
         boolean isExit = false;
         DukeList list = new DukeList(storage);
