@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,12 +36,14 @@ public class Storage {
 
     /**
      * Updates the task data into the txt file.
+     *
+     * @throws DukeException if unable to write to txt file.
      */
-    public static void updateTextFile() {
+    public static void updateTextFile() throws DukeException {
         try {
             writeToFile(currWorkingDirectory + filePath);
         } catch (IOException e) {
-            System.out.println("Cannot write to txt file!");
+            throw new DukeException("Cannot write to txt file!");
         }
     }
 
@@ -97,13 +100,13 @@ public class Storage {
 
         // returns true if directory is created
         if (directory.mkdir()) {
-            System.out.println("Hmm kinda sussy you don't have the directory... it's aite, "
+            throw new IOException("Hmm kinda sussy you don't have the directory... it's aite, "
                     + "lemme help you with that.");
         }
 
         // returns true if file is created
         if (txtFile.createNewFile()) {
-            System.out.println("Hmm kinda sussy you don't have the txt save file... it's aite, "
+            throw new IOException("Hmm kinda sussy you don't have the txt save file... it's aite, "
                     + "lemme help you with that.");
         }
 

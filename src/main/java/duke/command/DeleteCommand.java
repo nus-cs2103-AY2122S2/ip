@@ -19,20 +19,15 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task into the arraylist.
      *
-     * @param tasks the task to be deleted from the arraylist.
+     * @param taskList the task to be deleted from the arraylist.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.deleteFromList(super.task);
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList) {
+        taskList.deleteFromList(super.task);
+        String firstMessage = "Hmm... kinda sus you deleted this task...";
+        String secondMessage = task.toString();
+        String totalNumOfTasks = taskList.totalTasks(taskList.getTaskArrayListSize());
+        return firstMessage + "\n   " + secondMessage + "\n" + totalNumOfTasks;
     }
 }

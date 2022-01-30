@@ -19,20 +19,14 @@ public class AddCommand extends Command {
     /**
      * Adds the task into the arraylist.
      *
-     * @param tasks the task to be added into the arraylist.
+     * @param taskList taskList the task to be added into the arraylist.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.addToList(super.task);
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList) {
+        taskList.addToList(super.task);
+        String output = "Task added!\n   " + task.toString();
+        String totalNumOfTasks = taskList.totalTasks(taskList.getTaskArrayListSize());
+        return output + "\n" + totalNumOfTasks;
     }
 }

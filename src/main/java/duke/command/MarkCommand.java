@@ -18,24 +18,18 @@ public class MarkCommand extends Command {
     /**
      * Marks the task in the arraylist.
      *
-     * @param tasks the task to be marked in the arraylist.
+     * @param taskList the task to be marked in the arraylist.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList taskList) {
         try {
-            tasks.mark(num);
+            taskList.mark(num);
+            String firstMessage = "The bar on the top left of your screen just increased! Keep going!";
+            String secondMessage = taskList.toString();
+            return firstMessage + "\n   " + secondMessage;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("The task number is kinda sus... it's outta bounds!");
+            return "The task number is kinda sus... it's outta bounds!";
         }
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

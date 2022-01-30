@@ -16,20 +16,12 @@ public class PrintCommand extends Command {
     /**
      * Prints the tasks in the arraylist.
      *
-     * @param tasks the tasks to be printed.
+     * @param taskList the tasks to be printed.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.printList();
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList) {
+        String firstMessage = "Here are the tasks in your device:";
+        return firstMessage + "\n   " + taskList.toString();
     }
 }

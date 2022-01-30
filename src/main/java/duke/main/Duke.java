@@ -21,49 +21,37 @@ public class Duke {
     private Ui ui;
 
     /**
-     * A Duke constructor to initialise a <code>Duke</code> object.
-     *
-     * @param currentWorkingDirectory the current working directory of the user.
-     * @param filePath the filePath to the txt file.
+     * Initializes a <code>Duke</code> object using a Duke constructor.
      */
-    public Duke(String currentWorkingDirectory, String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, currentWorkingDirectory);
-        try {
-            this.tasks = new TaskList();
-            storage.load();
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-            tasks = new TaskList();
-        }
+        tasks = new TaskList();
     }
 
     /**
-     * Runs the application and starts the interaction with the user.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showDukeError(e.getMessage());
-            }
-        }
-        ui.showGoodbye();
-    }
-
-    /**
-     * Initialises a <code>Duke</code> object and calls run().
+     * Initializes the Storage Class.
      *
-     * @param args none.
+     * @throws IOException if file/directory not found.
      */
-    public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        new Duke(home, "/DukeSaveDirectory/DukeSaveFile.txt").run();
+    public void initializeStorage() throws IOException {
+        storage = new Storage("/DukeSaveDirectory/DukeSaveFile.txt", System.getProperty("user.home"));
+        storage.load();
+    }
+
+    /**
+     * Generates a response to user input.
+     *
+     * @param input takes in the user input.
+     * @return a String to be printed in the GUI.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String output = c.execute(tasks);
+            Storage.updateTextFile();
+            return output;
+        } catch (DukeException e) {
+            return ui.showDukeError(e.getMessage());
+        }
     }
 }

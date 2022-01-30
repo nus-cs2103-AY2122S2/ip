@@ -18,24 +18,18 @@ public class UnmarkCommand extends Command {
     /**
      * Unmarks the task in the arraylist.
      *
-     * @param tasks the task to be marked in the arraylist.
+     * @param taskList the task to be marked in the arraylist.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList taskList) {
         try {
-            tasks.unmark(num);
+            taskList.unmark(num);
+            String firstMessage = "Surely you aren't the imposter... right??";
+            String secondMessage = taskList.toString();
+            return firstMessage + "\n   " + secondMessage;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("The task number is kinda sus... it's outta bounds!");
+            return "The task number is kinda sus... it's outta bounds!";
         }
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

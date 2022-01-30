@@ -9,6 +9,6 @@ public class IncompleteInputException extends DukeException {
      * Displays message if this exception is called.
      */
     public IncompleteInputException(String input) {
-        super("     ☹ " + input + " is an incomplete command! Please enter another command.");
+        super("☹ " + input + " is an incomplete command! Please enter another command.");
     }
 }

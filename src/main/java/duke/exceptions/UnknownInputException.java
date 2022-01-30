@@ -9,6 +9,6 @@ public class UnknownInputException extends DukeException {
      * Displays message if this exception is called.
      */
     public UnknownInputException() {
-        super("     ☹ This is an unrecognised command! Please enter another command.");
+        super("☹ This is an unrecognised command! Please enter another command.");
     }
 }
