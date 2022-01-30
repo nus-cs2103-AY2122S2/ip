@@ -9,7 +9,7 @@ public class Deadline extends Task {
     protected String type;
 
     /**
-     * Construct Deadline object.
+     * Constructs Deadline object.
      *
      * @param description Description of task.
      * @param by    Deadline of task.

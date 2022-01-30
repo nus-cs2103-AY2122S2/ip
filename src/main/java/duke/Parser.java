@@ -14,7 +14,7 @@ public class Parser {
     private Find finder = new Find();
 
     /**
-     * Construct Parser object to read what user inputs.
+     * Constructs Parser object to read what user inputs.
      *
      * @param ui    Ui object for interacting with the user.
      * @param taskList  Tasklist object for storing the tasks.
