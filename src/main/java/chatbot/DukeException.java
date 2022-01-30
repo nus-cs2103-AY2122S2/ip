@@ -15,7 +15,7 @@ public class DukeException extends Exception {
 
     /**
     * Returns the String message of the exception
-    * 
+    *
     * @return      the String describing the exception
     */
     public String toString() {

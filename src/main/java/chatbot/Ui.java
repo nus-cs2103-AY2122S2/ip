@@ -5,9 +5,8 @@ package chatbot;
 */
 public class Ui {
     private static final String STRAIGHT_LINE = "____________________________________________________________";
-    
     /**
-    * Returns a formatted String including straight lines above 
+    * Returns a formatted String including straight lines above
     * and below input String.
     *
     * @param  reply  a String to be formatted with straight lines

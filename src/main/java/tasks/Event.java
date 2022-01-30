@@ -1,8 +1,10 @@
 package tasks;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 // import java.time.temporal.ChronoUnit;
-import java.time.LocalTime;
+
 /**
 * A Event class extending the Task class to create a task for the user to do.
 * Includes date and time of said event.
@@ -92,7 +94,7 @@ public class Event extends Task {
 
     /**
     * Returns the formatted String of the task.
-    * 
+    *
     * @return      the formatted String
     */
     @Override

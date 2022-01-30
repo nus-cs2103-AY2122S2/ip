@@ -8,7 +8,6 @@ public class Task {
 
     ////////////////////////////////////////////////////////////////
     // Constructors
-    
     /**
     * Class constructor.
     *
@@ -43,7 +42,6 @@ public class Task {
     public String getTaskName() {
         return this.taskName;
     }
-    
     /**
     * Returns the boolean whether the task is done.
     *
@@ -62,13 +60,12 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-    
     ////////////////////////////////////////////////////////////////
     // Methods
 
     /**
     * Sets the boolean isDone to mark the task as done or not done.
-    * 
+    *
     * @param  bool the boolean to set isDone to
     */
     public void markTask(boolean bool) {
@@ -77,7 +74,7 @@ public class Task {
 
     /**
     * Returns the formatted String of the task.
-    * 
+    *
     * @return      the formatted String
     */
     public String toString() {
