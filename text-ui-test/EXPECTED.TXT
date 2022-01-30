@@ -263,6 +263,26 @@ Please try again!
 Time argument missing for: Event meet /at
 Please try again!
 ------------------------------------------------
+------------------------------------------------
+Task missing for: find
+Please try again
+Please let me know if there's anything else you would like to do, harish
+------------------------------------------------
+------------------------------------------------
+1.[T][X] buy lunch
+2.[T][X] buy shoes
+
+Please let me know if there's anything else you would like to do, harish
+------------------------------------------------
+------------------------------------------------
+1.[T][ ] edit pics
+
+Please let me know if there's anything else you would like to do, harish
+------------------------------------------------
+------------------------------------------------
+No task containing: boardmarkers, was found.
+Please let me know if there's anything else you would like to do, harish
+------------------------------------------------
 You have not input any command, please add some and try again.
 ------------------------------------------------
 ------------------------------------------------

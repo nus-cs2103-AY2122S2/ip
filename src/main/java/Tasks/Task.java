@@ -101,6 +101,15 @@ public class Task {
     }
 
     /**
+     * checks if the task contains word.
+     * @param word the word to check for.
+     * @return true if task contains the word; false otherwise.
+     */
+    public boolean contains(String word) {
+        return this.task.contains(word);
+    }
+
+    /**
      * toSting method returns the string representation of the object.
      * @return the string representing the task instance.
      */

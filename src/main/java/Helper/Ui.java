@@ -136,6 +136,13 @@ public class Ui {
     }
 
     /**
+     * prints that no tasks were found.
+     */
+    public static void printNoTasksFound(String word) {
+        System.out.println("No task containing: " + word + ", was found.");
+    }
+
+    /**
      * prints a message for the user.
      * @param message the message to be printed.
      */
