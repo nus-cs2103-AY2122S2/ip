@@ -1,21 +1,23 @@
 package tasks;
 
-import exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import exceptions.DukeException;
+
+
 /** A class that functions as an abstraction of an event task. */
 public class Event extends Task {
 
-    public static String WRONG_FORMAT_ERROR_STRING = "Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'";
-    DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-    DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public static final String WRONG_FORMAT_ERROR_STRING =
+            "Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'";
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+    private static final DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Task.TaskType taskType = Task.TaskType.EVENT;
-    public String taskName;
-    public LocalDateTime eventTime;
+    private final Task.TaskType taskType = Task.TaskType.EVENT;
+    private final String taskName;
+    private final LocalDateTime eventTime;
 
     /**
      * Constructor method for the Event task.

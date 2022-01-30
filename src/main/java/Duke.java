@@ -3,7 +3,7 @@ import user.Ui;
 /** The main Duke class, that allows the user to save tasks. */
 public class Duke {
 
-    public Ui ui;
+    private Ui ui;
 
     /**
      * Constructor for the Duke class.

@@ -3,8 +3,8 @@ package tasks;
 /** A class that functions as an abstraction of a todo task. */
 public class Todo extends Task {
 
-    public Task.TaskType taskType = Task.TaskType.TODO;
-    public String taskName;
+    private final Task.TaskType taskType = Task.TaskType.TODO;
+    private final String taskName;
 
     /**
      * Constructor method for the Todo task.

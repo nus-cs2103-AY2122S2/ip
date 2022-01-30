@@ -2,20 +2,21 @@ package tasks;
 
 import exceptions.DukeException;
 
+
 /** A class that functions as an abstraction of a task. */
 public abstract class Task {
 
-    public static String UNKNOWN_INPUT_ERROR_STRING = "I don't think I know what this is!";
-    public static String BAD_DESCRIPTION_ERROR_STRING = "Description cannot be empty!";
-    public static String INVALID_TASK_NUM_ERROR_STRING = "Not a valid task number!";
-    public static String TASK_NUM_DOES_NOT_EXIST_ERROR_STRING = "Task %d does not exist!";
+    public static final String UNKNOWN_INPUT_ERROR_STRING = "I don't think I know what this is!";
+    public static final String BAD_DESCRIPTION_ERROR_STRING = "Description cannot be empty!";
+    public static final String INVALID_TASK_NUM_ERROR_STRING = "Not a valid task number!";
+    public static final String TASK_NUM_DOES_NOT_EXIST_ERROR_STRING = "Task %d does not exist!";
 
     public enum TaskType {
         TODO,
         EVENT,
         DEADLINE
     }
-    public boolean isDone = false;
+    private boolean isDone = false;
 
     /**
      * Sets the Task as done or undone.
@@ -65,6 +66,8 @@ public abstract class Task {
             task = new Deadline(details[1], details[3]);
             task.setDone(Boolean.parseBoolean(details[2]));
             break;
+        default:
+            throw new DukeException("Invalid task string!");
         }
         return task;
     }

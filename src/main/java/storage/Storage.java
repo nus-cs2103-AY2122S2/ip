@@ -16,13 +16,13 @@ import tasks.Task;
 public class Storage {
 
     /** Directory which stores the tasks on a .txt file. */
-    public File DIRECTORY = new File("data");
+    private static final File DIRECTORY = new File("data");
 
     /** Path of the .txt file. */
-    public Path TASKS_PATH = Paths.get("data", "tasks.txt");
+    private static final Path TASKS_PATH = Paths.get("data", "tasks.txt");
 
     /** .txt file which stores the Duke tasks. */
-    public File TASKS_FILE = new File(TASKS_PATH.toString());
+    private static final File TASKS_FILE = new File(TASKS_PATH.toString());
 
     /**
      * Returns an ArrayList of tasks, if a valid .txt tasks file exist on disk.
@@ -45,7 +45,7 @@ public class Storage {
             throw new DukeException(err.getMessage());
         }
 
-        if (!directoryCreated && !didNotExist) {  // the file existed
+        if (!directoryCreated && !didNotExist) { // the file existed
             try {
                 Scanner s = new Scanner(TASKS_FILE); // create a Scanner using the File as the source
                 Task t;
@@ -54,10 +54,11 @@ public class Storage {
                     try {
                         t = Task.importFromString(someTask);
                         allTasks.add(t);
-                    } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ignored) {
+                    } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException err) {
+                        throw new DukeException(err.getMessage());
                     }
                 }
-            } catch (FileNotFoundException err) {  // will not reach here
+            } catch (FileNotFoundException err) { // will not reach here
                 throw new DukeException(err.getMessage());
             }
         }

@@ -1,22 +1,23 @@
 package tasks;
 
-import exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import exceptions.DukeException;
+
+
 /** A class that functions as an abstraction of a deadline task. */
 public class Deadline extends Task {
 
-    public static String WRONG_FORMAT_ERROR_STRING =
+    public static final String WRONG_FORMAT_ERROR_STRING =
             "Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'";
-    public DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-    public DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+    private static final DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Task.TaskType taskType = Task.TaskType.DEADLINE;
-    public String taskName;
-    public LocalDateTime deadline;
+    private final Task.TaskType taskType = Task.TaskType.DEADLINE;
+    private final String taskName;
+    private final LocalDateTime deadline;
 
     /**
      * Constructor method for the Deadline task.

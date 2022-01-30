@@ -1,16 +1,17 @@
 package tasks;
 
+import java.util.ArrayList;
+
 import exceptions.DukeException;
 import storage.Storage;
 import user.Ui;
 
-import java.util.ArrayList;
 
 /** A class that encapsulates the lists of tasks to be completed. */
 public class Tasklist {
 
-    public Storage storage = new Storage();
-    public ArrayList<Task> allTasks = new ArrayList<>();
+    private final Storage storage = new Storage();
+    private ArrayList<Task> allTasks = new ArrayList<>();
 
     /**
      * Loads the tasks from storage, if exists.
@@ -109,6 +110,12 @@ public class Tasklist {
             String.format("Now you have %d tasks in the list.", allTasks.size())};
     }
 
+    /**
+     * Finds tasks with descriptions that include specific keywords.
+     *
+     * @param keywords The search String to check every task against.
+     * @return An ArrayList of Tasks.
+     */
     public ArrayList<Task> findTasks(String keywords) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t : allTasks) {

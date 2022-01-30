@@ -18,12 +18,11 @@ public class Parser {
      * @throws DukeException If the task number provided is invalid.
      */
     public int handleMarkTask(String command, int numTasks) throws DukeException {
-        String taskString = command.substring(5);  // "mark " is 5 letters
+        String taskString = command.substring(5); // "mark " is 5 letters
         int taskToMark;
         try {
             taskToMark = Integer.parseInt(taskString);
-        }
-        catch (NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException(Task.INVALID_TASK_NUM_ERROR_STRING);
         }
 
@@ -43,12 +42,11 @@ public class Parser {
      * @throws DukeException If the task number provided is invalid.
      */
     public int handleUnmarkTask(String command, int numTasks) throws DukeException {
-        String taskString = command.substring(7);  // "unmark " is 7 letters
+        String taskString = command.substring(7); // "unmark " is 7 letters
         int taskToUnmark;
         try {
             taskToUnmark = Integer.parseInt(taskString);
-        }
-        catch (NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException(Task.INVALID_TASK_NUM_ERROR_STRING);
         }
 
@@ -68,12 +66,11 @@ public class Parser {
      * @throws DukeException If the task number provided is invalid.
      */
     public int handleDeleteTask(String command, int numTasks) throws DukeException {
-        String taskString = command.substring(7);  // "delete " is 7 letters
+        String taskString = command.substring(7); // "delete " is 7 letters
         int taskToDelete;
         try {
             taskToDelete = Integer.parseInt(taskString);
-        }
-        catch (NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException(Task.INVALID_TASK_NUM_ERROR_STRING);
         }
 
@@ -91,7 +88,7 @@ public class Parser {
      * @return The keywords given by the user.
      */
     public String handleFindTask(String command) {
-        return command.substring(5);  // "find " is 7 letters
+        return command.substring(5); // "find " is 7 letters
     }
 
     /**
@@ -105,7 +102,7 @@ public class Parser {
         if (taskString.length() <= 5) {
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
-            String taskName = taskString.substring(5);  // "todo " has 5 characters
+            String taskName = taskString.substring(5); // "todo " has 5 characters
             return new Todo(taskName);
         }
     }
@@ -122,12 +119,12 @@ public class Parser {
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
             int byIdx = taskString.indexOf("/by");
-            if (byIdx <= 9) {  // either -1, or 0 to 9
+            if (byIdx <= 9) { // either -1, or 0 to 9
                 throw new DukeException(Deadline.WRONG_FORMAT_ERROR_STRING);
             } else {
-                String taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
+                String taskName = taskString.substring(9, byIdx - 1); // "deadline " has 9 characters
                 try {
-                    String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
+                    String taskDeadline = taskString.substring(byIdx + 4); // "/by " has 4 characters
                     return new Deadline(taskName, taskDeadline);
                 } catch (StringIndexOutOfBoundsException err) {
                     throw new DukeException(Deadline.WRONG_FORMAT_ERROR_STRING);
@@ -148,12 +145,12 @@ public class Parser {
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
             int atIdx = taskString.indexOf("/at");
-            if (atIdx <= 6) {  // either -1, or 0 to 6
+            if (atIdx <= 6) { // either -1, or 0 to 6
                 throw new DukeException(Event.WRONG_FORMAT_ERROR_STRING);
             } else {
-                String taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
+                String taskName = taskString.substring(6, atIdx - 1); // "event " has 9 characters
                 try {
-                    String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
+                    String taskTime = taskString.substring(atIdx + 4); // "/at " has 4 characters
                     return new Event(taskName, taskTime);
                 } catch (StringIndexOutOfBoundsException err) {
                     throw new DukeException(Event.WRONG_FORMAT_ERROR_STRING);
