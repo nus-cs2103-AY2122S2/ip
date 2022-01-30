@@ -28,7 +28,7 @@ public class Duke {
 
     /**
      * Method that runs the Duke Program
-     * @throws DukeException if there is an error that occurs while parsing the input
+     * @throws duke.DukeException if there is an error that occurs while parsing the input
      */
     public void run() throws DukeException {
         ui.greeting();
