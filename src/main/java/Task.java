@@ -1,31 +1,31 @@
 public class Task {
 
-  private String str;
-  private boolean status;
+  private String description;
+  private boolean isMarked;
   
-  public Task(String str, boolean status) {
-    this.str = str;
-    this.status = status;
+  public Task(String description, boolean isMarked) {
+    this.description = description;
+    this.isMarked = isMarked;
   }
 
   public Task(String str) {
     Task(str, false);
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void mark() {
+    isMarked = true;
   }
 
-  public String getStr() {
-    return str;
+  public void unmark() {
+    isMarked = false;
   }
 
-  public boolean getStatus() {
-    return status;
+  public String getDescription() {
+    return description;
   }
 
-  public String getType() {
-    return type;
+  public boolean isMarked() {
+    return isMarked;
   }
 
   public abstract String toString();
