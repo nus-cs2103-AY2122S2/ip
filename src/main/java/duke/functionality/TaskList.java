@@ -17,6 +17,7 @@ public class TaskList {
     private static final String ALREADY_MARKED = "Tasked has already been marked...";
     private static final String ALREADY_UNMARKED = "Task has already been unmarked...";
     private static final String ALREADY_DELETED = "Task has already been deleted...";
+    private static final String MATCH = "Here are the matching tasks in your list:";
 
 
     private final ArrayList<Task> taskList;
@@ -35,6 +36,13 @@ public class TaskList {
 
     public void listItems() {
         System.out.println(LIST);
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println(i + 1 + "." + this.taskList.get(i));
+        }
+    }
+
+    public void listItemsMatch() {
+        System.out.println(MATCH);
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println(i + 1 + "." + this.taskList.get(i));
         }
@@ -103,6 +111,17 @@ public class TaskList {
 
     public void addGeneralTask(Task task) {
         this.taskList.add(task);
+    }
+
+    public void findTask(TaskList taskList, String userInput) {
+        TaskList foundTasks = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            String stringToSearch = taskList.get(i).description;
+            if (stringToSearch.contains(userInput)) {
+                foundTasks.addGeneralTask(taskList.get(i));
+            }
+        }
+        foundTasks.listItemsMatch();
     }
 
 }
