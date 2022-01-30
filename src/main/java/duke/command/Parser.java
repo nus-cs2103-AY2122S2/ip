@@ -1,10 +1,17 @@
 package duke.command;
 import duke.DukeException;
 
-// helper class to parse user input
+/**
+ * Helper class to parse user input. 
+ */
 public final class Parser {
     
-    // interpret user input & return correpsonding command 
+    /**
+     * Interprets user input & return correpsonding command. 
+     * @param userInput user input String representing user command. 
+     * @return A Command corrsponding to the user input. 
+     * @throws DukeException Error
+     */
     public static Command parse(String userInput) throws DukeException {
         //
         try {

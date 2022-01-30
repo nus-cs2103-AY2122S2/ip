@@ -1,6 +1,9 @@
 package duke.ui;
 import java.util.Scanner;
 
+/**
+ * Ui class to handle interactions with User. 
+ */
 public class Ui {
 
     // variables for indentation 
@@ -29,8 +32,15 @@ public class Ui {
         firstUserChat = true;
     }
 
+    /**
+     * Basic constructor to initialize the Ui object. 
+     */
     public Ui() {}
 
+    /**
+     * Method to greet & ask for user's name. 
+     * @return String representing the user's name. 
+     */
     public String showWelcome() {
         
         // Jarvis introduces himself 
@@ -46,12 +56,19 @@ public class Ui {
         return this.userName;
     }
 
+    /**
+     * Method to bid goodbye to the user, when the user wants to exit Duke. 
+     */
     public void showGoodbye() {
         // Jarvis says good bye & the scanner is closed
         showText("Goodbye for now. \n");
         sc.close();
     }
 
+    /**
+     * Method to read in command from user. 
+     * @return String representing user command. 
+     */
     public String readCommand() {
         showText(String.format("What %smay I assist you with today, %s? \n\t%s", (firstUserChat ? "" : "else "), this.userName, divider));
         firstUserChat = (firstUserChat==true) ? false : firstUserChat;
@@ -60,18 +77,33 @@ public class Ui {
         return userCommand;
     }
 
+    /**
+     * Method to print a text to screen. 
+     * @param text String of text to be printed. 
+     */
     public void showText(String text) {
         System.out.println(String.format("%s%s", indentationText, text));
     }
 
+    /**
+     * Method to print a task to screen. 
+     * @param task String of task to be printed. 
+     */
     public void showTask(String task) {
         System.out.println(String.format("%s%s", indentationTaskStatus, task));
     }
 
+    /**
+     * Method to show a line on the screen. 
+     */
     public void showLine() {
         System.out.println(String.format("%s%s", indentationBase, divider));
     }
 
+    /**
+     * Method to show an error on the screen. 
+     * @param errorMessage String of errorMessage to be printed. 
+     */
     public void showError(String errorMessage) {
         System.err.println(String.format("%s%s", indentationText, errorMessage));
     }

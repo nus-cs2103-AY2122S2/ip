@@ -8,15 +8,30 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * AddCommand represents the user's actions of adding Todo, Event & Deadline tasks.
+ */
 public class AddCommand extends Command {
 
     private String description;
 
+    /**
+     * Initializes the AddCommand with the CommandType Enum & a task description.
+     * @param commandType User requested CommandType Enum 
+     * @param description Task description 
+     */
     public AddCommand(CommandType commandType, String description) {
         super(commandType);
         this.description = description;
     }
 
+    /**
+     * The logic to execute the AddCommand
+     * @param taskList The TaskList object containing existing tasks. 
+     * @param ui The Ui object for interacting with the user. 
+     * @param storage The Storage object for saving & loading tasks. 
+     * @throws DukeException Error if the user specifies an invalid task index. 
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
@@ -68,6 +83,10 @@ public class AddCommand extends Command {
         storage.updateFileContents(taskList);
     }
 
+    /**
+     * A getter method to indicate if the chat session with Duke is active. 
+     * @return boolean indicating if the chat session is active or not.
+     */
     @Override
     public boolean isActive() {
         return super.active;

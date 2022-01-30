@@ -6,6 +6,10 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Storage;
 
+/** 
+* Represents a Duke chatbot. 
+* A Duke chatbot will save or load the user's tasks in a local file. 
+*/
 
 public class Duke {
 
@@ -14,11 +18,21 @@ public class Duke {
     String taskFilePath;
     Ui ui;
     Storage storage;
-
+    
+    /**
+     * The main method which intializes Duke & runs it. 
+     * @param args Unused. 
+     * return Nothing. 
+    */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /** 
+     * Constructor to initialize Duke & its various components. 
+     * @param filePath Path of savefile of tasks information 
+     * @return Nothing. 
+    */
     public Duke(String filePath) {
         taskFilePath = filePath;
         ui = new Ui();
@@ -27,6 +41,11 @@ public class Duke {
         taskList = new TaskList(storage.loadFileContents());
     }
 
+    /** 
+     * Runs the main logic of Duke. 
+     * @param Nothing. 
+     * @return Nothing. 
+    */
     public void run() {
         
         // Jarvis introduces himself, asks for user's name & greets user

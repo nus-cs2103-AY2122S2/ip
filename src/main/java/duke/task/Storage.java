@@ -8,17 +8,30 @@ import java.util.Scanner;
 import duke.DukeException;
 import duke.ui.Ui;
 
+/**
+ * A storage class to create a save file, load & save the user's tasks. 
+ */
 public class Storage {
     
     private String taskFilePath; 
     private Ui ui;
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Initializes the Storage object by specifiying a path for its save file.
+     * @param taskFilePath String of the path for the save file. 
+     * @param ui Ui object to handle user interaction. 
+     */
     public Storage(String taskFilePath, Ui ui) {
         this.taskFilePath = taskFilePath;
         this.ui = ui;
     }
 
+    /**
+     * A method that returns an ArrayList of current tasks if there are tasks in the save file
+     * or creates a new empty ArrayList. 
+     * @return ArrayList containing tasks or a new ArrayList. 
+     */
     public ArrayList<Task> loadFileContents() {
         // load tasklist data from save 
         try {
@@ -69,6 +82,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * A method to update the tasks in the save file with the user's current existing tasks. 
+     * @param taskList ArrayList of user's current existing tasks to save to disk. 
+     */
     public void updateFileContents(TaskList taskList) {
         ArrayList<Task> externalTaskList = taskList.getTasks();
         // write & update save data with current tasklist 
