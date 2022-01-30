@@ -48,7 +48,7 @@ public class Task {
 
     /**
      * Returns a description of task.
-     * 
+     *
      * @return description of task with status icon.
      */
     public String toString() {
