@@ -23,7 +23,15 @@ import luke.data.tasks.Deadline;
 import luke.data.tasks.Event;
 import luke.data.tasks.Todo;
 
+
+
+/**
+ * Implements the parser class which parses user input and returns commands to execute.
+ */
 public class Parser {
+    /**
+     * Map of accepted user commands tied to the respective command action type.
+     */
     private static Map<String, CommandAction> commandActionMap = new HashMap<>() {{
             put("bye", CommandAction.EXIT);
             put("list", CommandAction.LIST);
@@ -36,6 +44,11 @@ public class Parser {
             put("find", CommandAction.FIND);
         }};
 
+    /**
+     * Parses the specified input and returns the appropriate command.
+     * @param input The specified input to parse.
+     * @return The appropriate command based on the specified input.
+     */
     public static Command parse(String input) {
         String[] inputs = input.split(" ", 2);
         try {
@@ -64,6 +77,7 @@ public class Parser {
         }
     }
 
+
     public static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
         switch (cmdAction) {
         case FIND:
@@ -74,7 +88,14 @@ public class Parser {
         }
     }
 
-    public static UpdateCommand prepareUpdateCommand(CommandAction cmdAction, String[] args) {
+
+    /**
+     * Prepares and return the appropriate update command.
+     * @param cmdAction The command action tied to the user input.
+     * @param args The arguments that the user have supplied.
+     * @return The appropriate update command based on user input.
+     */
+    private static UpdateCommand prepareUpdateCommand(CommandAction cmdAction, String[] args) {
         int index = parseUpdateArguments(args);
         switch (cmdAction) {
         case MARK:
@@ -86,7 +107,13 @@ public class Parser {
         }
     }
 
-    public static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
+    /**
+     * Prepares and return the appropriate add command.
+     * @param cmdAction The command action tied to the user input.
+     * @param args The arguments that the user have supplied.
+     * @return The appropriate add command based on user input.
+     */
+    private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
         Map<String, String> argsMap = parseAddArguments(cmdAction, args);
         switch (cmdAction) {
         case DEADLINE:
@@ -98,8 +125,17 @@ public class Parser {
         }
     }
 
-    public static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
-            throws IllegalArgumentException {
+
+    /**
+     * Parses and return the arguments tied to the add commands.
+     * @param cmdAction The command action tied to the user input.
+     * @param args The arguments that the user have supplied.
+     * @return The arguments mapped to the keywords of the command.
+     * @throws IllegalArgumentException If the argument does not fit the syntax of the command.
+     */
+    private static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
+        throws IllegalArgumentException {
+
         Map<String, String> argsMap = new HashMap<>();
         if (args.length < 2) {
             throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
@@ -135,8 +171,13 @@ public class Parser {
 
         return args[1];
     }
-
-    public static int parseUpdateArguments(String[] args) throws IllegalArgumentException {
+    /**
+     * Parses and return the arguments tied to the update commands.
+     * @param args The arguments that the user have supplied.
+     * @return The arguments mapped to the keywords of the command.
+     * @throws IllegalArgumentException If the argument does not fit the syntax of the command.
+     */
+    private static int parseUpdateArguments(String[] args) throws IllegalArgumentException {
         if (args.length < 2) {
             throw new IllegalArgumentException(String.format("The index of %s cannot be empty.", args[0]));
         }

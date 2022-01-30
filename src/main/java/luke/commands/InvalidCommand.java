@@ -2,6 +2,9 @@ package luke.commands;
 
 import luke.data.TaskList;
 
+/**
+ * Implements the invalid command
+ */
 public class InvalidCommand extends Command {
 
     public static final CommandAction COMMAND_ACTION = CommandAction.INVALID;
@@ -10,10 +13,17 @@ public class InvalidCommand extends Command {
     private String error;
     private boolean isError;
 
+    /**
+     * Constructs the invalid command without triggering the error message.
+     */
     public InvalidCommand() {
         isError = false;
     }
 
+    /**
+     * Constructs the invalid command with the error message, displaying the output as an error.
+     * @param error The error message.
+     */
     public InvalidCommand(String error) {
         this.error = error;
         isError = true;
