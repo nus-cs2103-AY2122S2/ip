@@ -5,12 +5,12 @@ import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 
-public abstract class MarkCommand extends Command{
-    public MarkCommand(String userInput){
+public abstract class MarkCommand extends Command {
+    public MarkCommand(String userInput) {
         super(userInput);
     }
 
-    public static MarkCommand of(String userInput){
+    public static MarkCommand of(String userInput) {
         if (userInput.startsWith("mark")) {
             return new MarkDoneCommand(userInput);
         } else {

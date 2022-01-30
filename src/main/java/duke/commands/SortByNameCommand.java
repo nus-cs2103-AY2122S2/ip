@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByNameCommand extends Command{
+public class SortByNameCommand extends Command {
     @Override
     public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         ArrayList tasks = new ArrayList(taskManager.getTaskList());
@@ -22,7 +22,7 @@ public class SortByNameCommand extends Command{
 }
 
 class TaskByNameComparator implements Comparator<Task> {
-    public int compare(Task t1, Task t2){
+    public int compare(Task t1, Task t2) {
         return t1.getTaskName().compareTo(t2.getTaskName());
     }
 }

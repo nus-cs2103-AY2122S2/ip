@@ -7,10 +7,11 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String line =          "-------------------------------------------------------------------------------------";
-    private static final String doubleLine =    "=====================================================================================";
+    private static final String line =
+            "-------------------------------------------------------------------------------------";
+    private static final String doubleLine =
+            "=====================================================================================";
     private Scanner scanner = new Scanner(System.in);
-
     public PrintStream writer = System.out;
 
     public void showHelpMenu() {
@@ -178,17 +179,11 @@ public class Ui {
     public String getUserInputLine(){
         return scanner.nextLine();
     }
-
     public String getUserInput(){
         return scanner.next();
     }
 
     public void showMessage(String s){
         writer.println(s);
-    }
-
-    // Tests
-    public static void main(String[] args) {
-
     }
 }

@@ -3,14 +3,13 @@ package duke;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
-import java.util.Collections;
 
 public class Duke {
     private TaskManager manager;
     private Ui ui;
     private Storage storage;
 
-    public Duke(String filePath){
+    public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         try {
@@ -24,13 +23,13 @@ public class Duke {
         }
     }
 
-    public void run(){
+    public void run() {
         ui.showBanner();
         ui.showList(manager);
 
         boolean isExit = false;
 
-        while(!isExit){
+        while(!isExit) {
             try {
                 String userInput = ui.getUserInputLine();
 
@@ -45,7 +44,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
         new Duke("duke/data").run();
     }
 }

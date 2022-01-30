@@ -6,7 +6,7 @@ import duke.TaskManager;
 import duke.Ui;
 
 public class MarkUndoneCommand extends MarkCommand{
-    public MarkUndoneCommand(String userInput){
+    public MarkUndoneCommand(String userInput) {
         super(userInput);
     }
 
@@ -16,7 +16,7 @@ public class MarkUndoneCommand extends MarkCommand{
                 ui.showMarkEmptyList();
                 return false;
             } else {
-                int index = Integer.parseInt(userInput.replaceFirst("unmark", "").strip())-1;
+                int index = Integer.parseInt(userInput.replaceFirst("unmark", "").strip()) - 1;
 
                 if (index < 0 || index >= taskManager.size()) {
                     ui.showMarkOutOfBounds();

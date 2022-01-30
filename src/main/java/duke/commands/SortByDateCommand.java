@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByDateCommand extends Command{
+public class SortByDateCommand extends Command {
     @Override
     public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         ArrayList tasks = new ArrayList(taskManager.getTaskList());

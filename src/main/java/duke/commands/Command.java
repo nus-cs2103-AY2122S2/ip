@@ -11,23 +11,23 @@ public abstract class Command {
     TaskManager taskManager = new TaskManager();
     String userInput = "";
 
-    public Command(String userInput){
+    public Command(String userInput) {
         this.userInput = userInput;
     }
-    public Command(){}
+    public Command() { }
 
-    protected void save(Storage storage,Ui ui, TaskManager taskManager){
+    protected void save(Storage storage, Ui ui, TaskManager taskManager) {
         try {
             storage.saveTaskManager(taskManager);
             ui.showSavingComplete();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showSavingFailed();
         }
     }
 
     public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

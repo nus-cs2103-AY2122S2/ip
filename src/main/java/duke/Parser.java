@@ -26,7 +26,7 @@ public class Parser {
             return null;
         }
     }
-    private static Todo newToDo(String s) throws DukeException{
+    private static Todo newToDo(String s) throws DukeException {
         String taskName =  s.replaceFirst("todo","").strip();
 
         if (taskName.equals("")) {
@@ -38,7 +38,7 @@ public class Parser {
     private static Event newEvent(String s) throws DukeException {
         String[] fields =  s.replaceFirst("event","").split("/at");
 
-        if (fields.length != 2){
+        if (fields.length != 2) {
             throw new DukeException("Wrong format entered! Please enter <Event Name> /at <Event Date>");
         }
 
@@ -60,10 +60,10 @@ public class Parser {
 
         return new Event(taskName,date);
     }
-    private static Deadline newDeadline(String s) throws DukeException{
+    private static Deadline newDeadline(String s) throws DukeException {
         String[] fields =  s.replaceFirst("deadline","").split("/by");
 
-        if (fields.length != 2){
+        if (fields.length != 2) {
             throw new DukeException("Wrong format entered! Please enter <Deadline Name> /by <Deadline>");
         }
 
@@ -104,7 +104,7 @@ public class Parser {
             name = split[2].strip();
             dateStr = split[3];
             date = Parser.parseDateTime(split[3]);
-        } catch (IndexOutOfBoundsException exception){
+        } catch (IndexOutOfBoundsException exception) {
             throw new DukeException("Unable to load task from file!");
         }
 
@@ -114,27 +114,26 @@ public class Parser {
 
 
         switch(type) {
+        case 'T':
+            t = new Todo(name);
+            break;
 
-            case 'T':
-                t = new Todo(name);
-                break;
+        case 'D':
+            if (date == null) {
+                return new Deadline(name,dateStr);
+            }
+            t = new Deadline(name, date);
+            break;
 
-            case 'D':
-                if (date == null) {
-                    return new Deadline(name,dateStr);
-                }
-                t = new Deadline(name, date);
-                break;
+        case 'E':
+            if (date == null) {
+                return new Event(name,dateStr);
+            }
+            t = new Event(name, date);
+            break;
 
-            case 'E':
-                if (date == null) {
-                    return new Event(name,dateStr);
-                }
-                t = new Event(name, date);
-                break;
-
-            default:
-                throw new DukeException("Unable to load task from file!");
+        default:
+            throw new DukeException("Unable to load task from file!");
         }
 
         if (done == 'X') {
@@ -144,33 +143,33 @@ public class Parser {
         return t;
     }
 
-    public static Command parse(String input) throws DukeException{
-        if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
+    public static Command parse(String input) throws DukeException {
+
+        if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
             return new AddCommand(input);
-        } else if (input.equals("list")){
+        } else if (input.equals("list")) {
             return new ListCommand();
-        } else if (input.equals("list name")){
+        } else if (input.equals("list name")) {
             return new SortByNameCommand();
-        } else if (input.equals("list date")){
+        } else if (input.equals("list date")) {
             return new SortByDateCommand();
-        } else if (input.startsWith("mark") || input.startsWith("unmark")){
+        } else if (input.startsWith("mark") || input.startsWith("unmark")) {
             return MarkCommand.of(input);
         } else if (input.equals("bye")) {
             return new ExitCommand();
-        } else if (input.startsWith("delete")){
+        } else if (input.startsWith("delete")) {
             return new DeleteTaskCommand(input);
         }
-        throw new DukeException("Invalid Command!");
 
+        throw new DukeException("Invalid Command!");
     }
 
-    public static LocalDateTime parseDateTime(String input){
+    public static LocalDateTime parseDateTime(String input) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        //DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
         try {
             LocalDateTime date = LocalDateTime.parse(input, format);
             return date;
-        } catch (DateTimeParseException exception){
+        } catch (DateTimeParseException exception) {
             return null;
         }
     }
