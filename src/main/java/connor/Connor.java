@@ -1,13 +1,12 @@
 package connor;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import connor.command.ByeCommand;
 import connor.exception.InvalidTaskFileException;
 import connor.task.TaskList;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.util.Scanner;
 
 /**
  * Main class for Connor program to start running.

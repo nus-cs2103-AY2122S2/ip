@@ -1,23 +1,20 @@
 package connor;
 
-import connor.exception.InvalidTaskFileException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
+import connor.exception.InvalidTaskFileException;
 import connor.task.Deadline;
 import connor.task.Event;
 import connor.task.Task;
 import connor.task.TaskList;
 import connor.task.ToDo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Stores the task list in the hard drive via a text file that can be retrieved and edited.

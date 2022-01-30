@@ -1,7 +1,7 @@
 package connor.command;
 
-import connor.task.TaskStatus;
 import connor.task.TaskList;
+import connor.task.TaskStatus;
 
 /**
  * Represents a Change Status {@code Command}.
@@ -10,6 +10,12 @@ public class ChangeStatusCommand extends Command {
     private TaskStatus ts;
     private int index;
 
+    /**
+     * Constructor for the ChangeStatusCommand class.
+     *
+     * @param ts Status of the task to be changed to.
+     * @param index Index of the task to be changed.
+     */
     public ChangeStatusCommand(TaskStatus ts, int index) {
         this.ts = ts;
         this.index = index;

@@ -1,12 +1,13 @@
 package connor;
 
-import connor.task.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 
-import connor.task.TaskType;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import connor.task.TaskList;
+import connor.task.TaskType;
 
 class TaskListTest {
     @Test
@@ -16,30 +17,30 @@ class TaskListTest {
         assertEquals(0, TaskList.getNumberOfTasks());
 
         TaskList.addTask(TaskType.TODO, "Things");
-        assertEquals(1,TaskList.getNumberOfTasks());
+        assertEquals(1, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /by Monday");
-        assertEquals(2,TaskList.getNumberOfTasks());
+        assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /at Monday");
-        assertEquals(2,TaskList.getNumberOfTasks());
+        assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /at   ");
-        assertEquals(2,TaskList.getNumberOfTasks());
+        assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "     /at Monday");
-        assertEquals(2,TaskList.getNumberOfTasks());
+        assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "Thing /at Monday");
-        assertEquals(3,TaskList.getNumberOfTasks());
+        assertEquals(3, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "Thing/atMonday");
-        assertEquals(4,TaskList.getNumberOfTasks());
+        assertEquals(4, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "ThingMonday");
-        assertEquals(4,TaskList.getNumberOfTasks());
+        assertEquals(4, TaskList.getNumberOfTasks());
 
         TaskList.deleteTask(2);
-        assertEquals(3,TaskList.getNumberOfTasks());
+        assertEquals(3, TaskList.getNumberOfTasks());
         TaskList.deleteTask(999999);
-        assertEquals(3,TaskList.getNumberOfTasks());
+        assertEquals(3, TaskList.getNumberOfTasks());
         TaskList.deleteTask(-999999);
-        assertEquals(3,TaskList.getNumberOfTasks());
+        assertEquals(3, TaskList.getNumberOfTasks());
 
         TaskList.clearTasks();
-        assertEquals(0,TaskList.getNumberOfTasks());
+        assertEquals(0, TaskList.getNumberOfTasks());
     }
 }

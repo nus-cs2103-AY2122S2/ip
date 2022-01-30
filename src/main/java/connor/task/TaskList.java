@@ -1,11 +1,10 @@
 package connor.task;
 
-import connor.Connor;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
+
+import connor.Connor;
 
 /**
  * Stores and edits the task list.
@@ -38,9 +37,10 @@ public class TaskList {
             + "Event tasks must include \"at\" in the description.\nExample: \n"
             + ">>> event Birthday Party at May 5th";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
+    private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
     private static final String ERROR_UNMARK_EMPTY = "Error! I can't unmark an empty task list!";
-    
+
     private static ArrayList<Task> tasks;
 
     public static void setTasks(ArrayList<Task> t) {
@@ -99,7 +99,7 @@ public class TaskList {
             }
             String[] phrases = desc.split("/by", 2);
             String thing = phrases[0].trim();
-            String when  = phrases[1].trim();
+            String when = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_DL_DESC);
                 return;
@@ -127,7 +127,7 @@ public class TaskList {
             }
             String[] phrases = desc.split("/at", 2);
             String thing = phrases[0].trim();
-            String when  = phrases[1].trim();
+            String when = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_EVENT_DESC);
                 return;
@@ -148,10 +148,11 @@ public class TaskList {
             }
             break;
         }
-        default:
+        default: {
             // Something has gone wrong
             print(ERROR_INVALID_TASK_TYPE);
             return;
+        }
         }
         // After task is added show current number of tasks
         print("");
@@ -221,6 +222,11 @@ public class TaskList {
                 getNumberOfTasks();
             }
             break;
+        }
+        default: {
+            // Something has gone wrong
+            print(ERROR_INVALID_TASK_STATUS);
+            return;
         }
         }
     }

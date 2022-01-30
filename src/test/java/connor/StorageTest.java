@@ -1,17 +1,17 @@
 package connor;
 
-import connor.Storage;
-import connor.exception.InvalidTaskFileException;
-import connor.task.ToDo;
-import connor.task.Deadline;
-import connor.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import connor.exception.InvalidTaskFileException;
+import connor.task.Deadline;
+import connor.task.Event;
+import connor.task.ToDo;
 
 public class StorageTest {
     @Test
