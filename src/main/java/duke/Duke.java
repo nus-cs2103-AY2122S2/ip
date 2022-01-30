@@ -10,87 +10,85 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 
-
 /**
  * Represents the start of the program and the main run loop.
  */
 public class Duke {
     private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final TaskList tasks;
+    private final Ui ui;
+    private boolean isAlive;
 
     /**
      * Returns a Duke Object with helper classes initialized according to the /data/duke.txt file.
      */
     public Duke() {
         this.ui = new Ui();
-        ui.showStartUpMessage();
+        this.isAlive = true;
+        ui.formatStartUpMessage();
         this.tasks = new TaskList();
         try {
             this.storage = new Storage(this.tasks);
         } catch (IOException e) {
-            ui.showFeedbackMessage("\n\tError reading from duke.txt\n");
+            ui.formatFeedbackMessage("\n\tError reading from duke.txt\n");
         }
     }
 
     /**
      * Executes the instructions given by user until a Command.BYE is issued by the user.
      */
-    public void execute() {
-        boolean canExit = false;
-        String input;
-        while (!canExit) {
-            try {
-                input = ui.readCommand();
-                String[] commands = input.split(" ", 2);
-                Command command = Parser.parseString(commands);
-                switch (command) {
-                case BYE:
-                    canExit = true;
-                    ui.showFeedbackMessage("\n\tBye. Hope to see you again soon!\n");
-                    try {
-                        storage.saveTask();
-                    } catch (IOException e) {
-                        ui.showFeedbackMessage("\n\tError saving duke.txt file.\n");
-                    }
-                    break;
-                case LIST:
-                    ui.showFeedbackMessage(tasks.listTasks());
-                    break;
-                case MARK:
-                    ui.showFeedbackMessage(tasks.markAsDone(commands[1], true));
-                    break;
-                case UNMARK:
-                    ui.showFeedbackMessage(tasks.unmarkDone(commands[1]));
-                    break;
-                case DELETE:
-                    ui.showFeedbackMessage(tasks.deleteTask(commands[1]));
-                    break;
-                case INVALID:
-                    ui.showFeedbackMessage("\n\t" + commands[0] + " is not a valid command\n");
-                    break;
-                case EMPTY:
-                    break;
-                case FIND:
-                    ui.showFeedbackMessage(tasks.findKeyword(commands[1].trim()));
-                    break;
-                default:
-                    ui.showFeedbackMessage(tasks.addTask(command, commands[1], true));
-                    break;
+    private String executeInstruction(String input) {
+        try {
+            String[] commands = input.split(" ", 2);
+            Command command = Parser.parseString(commands);
+            switch (command) {
+            case BYE:
+                try {
+                    storage.saveTask();
+                    isAlive = false;
+                    return ui.formatFeedbackMessage("\n\tBye. Hope to see you again soon!\n");
+                } catch (IOException e) {
+                    return ui.formatFeedbackMessage("\n\tError saving duke.txt file.\n");
                 }
-            } catch (DukeException e) {
-                ui.showFeedbackMessage("\n\t" + e.getMessage() + "\n");
+            case LIST:
+                return ui.formatFeedbackMessage(tasks.listTasks());
+            case MARK:
+                return ui.formatFeedbackMessage(tasks.markAsDone(commands[1], true));
+            case UNMARK:
+                return ui.formatFeedbackMessage(tasks.unmarkDone(commands[1]));
+            case DELETE:
+                return ui.formatFeedbackMessage(tasks.deleteTask(commands[1]));
+            case INVALID:
+                return ui.formatFeedbackMessage("\n\t" + commands[0] + " is not a valid command\n");
+            case EMPTY:
+                return "";
+            case FIND:
+                return ui.formatFeedbackMessage(tasks.findKeyword(commands[1].trim()));
+            default:
+                return ui.formatFeedbackMessage(tasks.addTask(command, commands[1], true));
             }
+        } catch (DukeException e) {
+            return ui.formatFeedbackMessage("\n\t" + e.getMessage() + "\n");
         }
     }
 
     /**
-     * Starts the program.
+     * Returns isAlive boolean value;
      *
-     * @param args ignored
+     * @return boolean value of isAlive.
      */
-    public static void main(String[] args) {
-        Duke d = new Duke();
-        d.execute();
+    public boolean isAlive() {
+        return this.isAlive;
     }
+
+    /**
+     * Executes the command given and returns a response String.
+     *
+     * @param text command given by user.
+     * @return Response String.
+     */
+    public String getResponse(String text) {
+        return this.executeInstruction(text.trim());
+    }
+
 }
