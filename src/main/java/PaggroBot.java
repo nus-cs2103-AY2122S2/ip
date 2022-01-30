@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import paggro.storage.Storage;
 import paggro.ui.Ui;
@@ -42,6 +43,6 @@ public class PaggroBot {
     }
 
     public static void main(String[] args) throws IOException {
-        new PaggroBot("../../../data/paggro.txt").run();
+        new PaggroBot(Paths.get("").toAbsolutePath() + "/data/paggro.txt").run();
     }
 }
