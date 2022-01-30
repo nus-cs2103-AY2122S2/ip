@@ -47,8 +47,11 @@ public class Ui {
      * @param message To print to PrintStream.
      */
     public void printMessage(String message) {
-        String border = "\t________________________________________________________________________\n";
-        String wrapMessage = border + "\t " + message.replace("\n", "\n\t ") + "\n" + border;
+        String border = "\t_______________________________"
+                + "_________________________________________\n";
+        String wrapMessage = border + "\t "
+                + message.replace("\n", "\n\t ")
+                + "\n" + border;
         out.print(wrapMessage.replace("\n", LINE_FEED));
     }
 }

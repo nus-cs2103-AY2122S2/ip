@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
  * Extends {@code Task} superclass.
  */
 public class Deadline extends Task {
+
     private final LocalDateTime time;
 
     /**
@@ -29,6 +30,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), this.time.format(Parser.formatter));
+        return String.format("%s (by: %s)",
+                super.toString(),
+                this.time.format(Parser.formatter));
     }
 }

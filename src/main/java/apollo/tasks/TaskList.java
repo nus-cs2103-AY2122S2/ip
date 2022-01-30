@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * List of {@code Task} objects.
  * Implements {@code java.io.Serializable} interface.
  */
-public class TaskList implements java.io.Serializable {
+public class TaskList implements java.io.Serializable{
+
     private final ArrayList<Task> taskList;
 
     /**
@@ -32,9 +33,9 @@ public class TaskList implements java.io.Serializable {
      * @return Deleted task.
      */
     public Task deleteTask(int i) {
-        Task toDelete = taskList.get(i);
+        Task deleted = taskList.get(i);
         taskList.remove(i);
-        return toDelete;
+        return deleted;
     }
 
     /**

@@ -20,10 +20,19 @@ public class Apollo {
     private static Ui ui;
 
     /**
+     * Main method to start runnning the program.
+     *
+     * @param args Arguments supplied to program (not used).
+     */
+    public static void main(String[] args) {
+        initialise();
+        run();
+    }
+
+    /**
      * Initialises the program and greets the user.
      */
     private static void initialise() {
-
         ui = new Ui();
         boolean isLoaded;
         try {
@@ -33,9 +42,10 @@ public class Apollo {
             taskList = new TaskList();
             isLoaded = false;
         }
+
         Command.setTaskList(taskList);
         Welcome.printLogo();
-        ui.printMessage(Welcome.welcomeMessage(isLoaded, LocalTime.now()));
+        ui.printMessage(Welcome.greet(isLoaded, LocalTime.now()));
     }
 
     /**
@@ -52,17 +62,6 @@ public class Apollo {
             } catch (ApolloException e) {
                 ui.printMessage(e.getMessage());
             }
-        }
-        while (!ExitCommand.isExit(command));
-    }
-
-    /**
-     * Main method to start runnning the program.
-     *
-     * @param args Arguments supplied to program (not used).
-     */
-    public static void main(String[] args) {
-        initialise();
-        run();
+        } while (!ExitCommand.isExit(command));
     }
 }

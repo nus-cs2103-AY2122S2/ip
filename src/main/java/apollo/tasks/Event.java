@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
  * Extends {@code Task} superclass.
  */
 public class Event extends Task {
+
     private final LocalDateTime period;
 
     /**
@@ -29,6 +30,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), this.period.format(Parser.formatter));
+        return String.format("%s (at: %s)",
+                super.toString(),
+                this.period.format(Parser.formatter));
     }
 }

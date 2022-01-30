@@ -50,8 +50,10 @@ public class AddCommand extends Command {
             newTask = new Event(description, dateTime);
             break;
         }
+
         taskList.addTask(newTask);
-        return String.format("I've added this task:\n  %s\nThere's a total of %d tasks now. ",
+        return String.format("I've added this task:\n  %s\n"
+                        + "There's a total of %d tasks now. ",
                 newTask, taskList.taskCount());
     }
 }

@@ -5,9 +5,10 @@ package apollo.tasks;
  * Implements {@code java.io.Serializable} interface.
  */
 public class Task implements java.io.Serializable {
+
     private boolean isDone;
     private final String description;
-    private final Type type;
+    private final Type taskType;
 
     /**
      * Enum of types of tasks.
@@ -26,16 +27,17 @@ public class Task implements java.io.Serializable {
         }
     }
 
+
     /**
      * Constructor for {@code Task}.
      *
      * @param description Of task.
-     * @param type Enum type of task.
+     * @param taskType Enum type of task.
      */
-    public Task(String description, Type type) {
+    public Task(String description, Type taskType) {
         this.description = description;
         this.isDone = false;
-        this.type = type;
+        this.taskType = taskType;
     }
 
     /**
@@ -66,6 +68,9 @@ public class Task implements java.io.Serializable {
      * @return String representation of object.
      */
     public String toString() {
-        return String.format("[%s][%s] %s", type, this.getStatus(), this.description);
+        return String.format("[%s][%s] %s",
+                taskType,
+                this.getStatus(),
+                this.description);
     }
 }

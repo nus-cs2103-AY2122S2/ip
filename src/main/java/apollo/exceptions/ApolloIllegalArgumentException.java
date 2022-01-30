@@ -1,5 +1,6 @@
 package apollo.exceptions;
 
+
 /**
  * Thrown when arguments supplied are illegal.
  * Extends {@code ApolloException} superclass.
