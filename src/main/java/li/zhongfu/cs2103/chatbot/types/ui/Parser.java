@@ -52,7 +52,7 @@ public class Parser {
     public Map<String, String> parseArgString(String argString) {
         Map<String, String> args = new HashMap<>();
         String[] parts = argString.split("(^|\\s+)/");
-        args.put("", parts[0]);
+        args.put("", parts[0].strip());
 
         for (int i = 1; i < parts.length; i++) {
             String[] arg = parts[i].split("\\s+", 2);
