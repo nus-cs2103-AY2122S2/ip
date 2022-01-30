@@ -1,17 +1,19 @@
-public class Event extends Task {
-    protected String by;
+import java.time.LocalDateTime;
 
-    public Event(String desc, String by) {
+public class Event extends Task {
+    protected LocalDateTime by;
+
+    public Event(String desc, LocalDateTime by) {
         super(desc, "E");
-        this.by = "(at: " + by + ")";
+        this.by = by;
     }
-    public Event(String desc, String by, boolean done) {
+    public Event(String desc, LocalDateTime by, boolean done) {
         super(desc, done, "E");
         this.by = by;
     }
 
     @Override
-    public String getBy() {
+    public LocalDateTime getBy() {
         return this.by;
     }
     @Override
