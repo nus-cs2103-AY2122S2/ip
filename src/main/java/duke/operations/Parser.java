@@ -14,6 +14,7 @@ import duke.command.MarkCommand;
 import duke.command.PrintCommand;
 import duke.command.UnmarkCommand;
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.UnknownInputException;
 import duke.task.Deadline;
@@ -85,7 +86,9 @@ public class Parser {
         // Store first word as variable
         String firstWord = strs[0];
 
-        if (input.equalsIgnoreCase("bye")) {
+        if (input.equals("")) {
+            throw new EmptyInputException();
+        } else if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         } else if (input.equalsIgnoreCase("list")) {
             return new PrintCommand();
@@ -146,8 +149,6 @@ public class Parser {
 
     private static Command handleToDoInput(String str) {
         Task toDo = new ToDo(str);
-        Ui.line();
-        System.out.println("     Remember to do your task!");
         return new AddCommand(toDo);
     }
 
@@ -163,8 +164,6 @@ public class Parser {
                 LocalDate deadlineDate = convertStringToLocalDate(dateTimeArgs[0]);
                 LocalTime deadlineTime = convertStringToLocalTime(dateTimeArgs[1]);
                 Task deadline = new Deadline(inputArgs[0], deadlineDate, deadlineTime);
-                Ui.line();
-                System.out.println("     This task is on a timer!");
                 return new AddCommand(deadline);
             } catch (DateTimeParseException e) {
                 throw new DukeException("you sussy baka, that's the wrong date format!"
@@ -188,8 +187,6 @@ public class Parser {
                 LocalTime eventStartTime = convertStringToLocalTime(splitEventTimes[0]);
                 LocalTime eventEndTime = convertStringToLocalTime(splitEventTimes[1]);
                 Task event = new Event(inputArgs[0], eventDate, eventStartTime, eventEndTime);
-                Ui.line();
-                System.out.println("     Emergency event on this date!");
                 return new AddCommand(event);
             } catch (DateTimeParseException e) {
                 throw new DukeException("you sussy baka, that's the wrong date format! "

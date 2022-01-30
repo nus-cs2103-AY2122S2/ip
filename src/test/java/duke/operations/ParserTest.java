@@ -10,24 +10,6 @@ import duke.exceptions.DukeException;
 class ParserTest {
 
     @Test
-    public void deadLineIsExitIsFalse_addCommand_success() throws DukeException {
-        try {
-            assertEquals("false", String.valueOf(Parser.parse("do project /by 23-12-2022 1900").isExit()));
-        } catch (DukeException ignored) {
-            System.out.println("nothing");
-        }
-    }
-
-    @Test
-    public void byeIsExitIsTrue_exitCommand_success() throws DukeException {
-        try {
-            assertEquals("true", String.valueOf(Parser.parse("bye").isExit()));
-        } catch (DukeException ignored) {
-            System.out.println("nothing");
-        }
-    }
-
-    @Test
     public void deadLineOutput_stringToDate_exceptionThrown() throws DukeException {
         try {
             assertEquals(0,

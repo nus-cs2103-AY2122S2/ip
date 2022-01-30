@@ -28,14 +28,8 @@ public abstract class Command {
     /**
      * Executes tasks.
      *
-     * @param tasks the task to be executed.
+     * @param tasks tasks the task to be executed.
+     * @return the String to be printed depending on what has been executed.
      */
-    public abstract void execute(TaskList tasks);
-
-    /**
-     * Checks whether to terminate or not.
-     *
-     * @return if true terminate, else continue.
-     */
-    public abstract boolean isExit();
+    public abstract String execute(TaskList tasks);
 }

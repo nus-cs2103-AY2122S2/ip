@@ -18,20 +18,11 @@ public class FindCommand extends Command {
     /**
      * Finds the word in the task arraylist.
      *
-     * @param tasks the task to be found in the arraylist.
+     * @param taskList the task to be found in the arraylist.
+     * @return the task to be printed out by GUI.
      */
     @Override
-    public void execute(TaskList tasks) {
-        tasks.findTaskInList(keyword);
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return if false, continue receiving input, else terminate.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList) {
+        return taskList.findTaskInList(keyword);
     }
 }
