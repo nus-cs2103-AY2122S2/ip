@@ -44,20 +44,40 @@ public class Ui {
     }
 
     /**
-     * Returns string of stored data as an indexed list
+     * Returns list of tasks provided in arraylist as a single string
+     *
+     * @param tasks ArrayList of tasks
+     * @return List of tasks as a single string
+     */
+    public String renderTaskList(ArrayList<Task> tasks) {
+        String renderStr = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            String dataStr = String.format("%d. ", i+1)
+                    + tasks.get(i)
+                    + " \n";
+            renderStr += dataStr;
+        }
+        return renderStr;
+    }
+
+    /**
+     * Prints string of stored data as an indexed list
      *
      * @param data arrayList of Task data
      * @return     data as a list in a single string
      */
-    public void displayTaskList(ArrayList<Task> data) {
-        String renderStr = "";
-        for (int i = 0; i < data.size(); i++) {
-            String dataStr = String.format("%d. ", i+1)
-                    + data.get(i)
-                    + " \n";
-            renderStr += dataStr;
-        }
-        System.out.println(formatMsg(renderStr));
+    public void displayTaskList(ArrayList<Task> tasks) {
+        System.out.println(formatMsg(renderTaskList(tasks)));
+    }
+
+    /**
+     * Prints list of tasks found via FIND command
+     *
+     * @param foundTasks ArrayList of tasks found via FIND
+     */
+    public void displayFoundTaskList(TaskList foundTasks) {
+        String message = "Here are the matching tasks in your list:\n";
+        System.out.println(formatMsg(message + renderTaskList(foundTasks.getTasks())));
     }
 
     /**
