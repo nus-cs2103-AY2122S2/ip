@@ -46,16 +46,13 @@ public class Parser {
             return new DeleteTaskCommand(getDeleteTaskParams(input, keyword));
 
         } else if (keyword == CommandKeyword.TODO) {
-            AddTodoParams params = getAddToDoParams(input, keyword);
-            return new AddToDoCommand(params);
+            return new AddToDoCommand(getAddToDoParams(input, keyword));
 
         } else if (keyword == CommandKeyword.DEADLINE) {
-            AddDeadlineParams params = getAddDeadlineParams(input, keyword);
-            return new AddDeadlineCommand(params);
+            return new AddDeadlineCommand(getAddDeadlineParams(input, keyword));
 
         } else if (keyword == CommandKeyword.EVENT) {
-            AddEventParams params = getAddEventParams(input, keyword);
-            return new AddEventCommand(params);
+            return new AddEventCommand(getAddEventParams(input, keyword));
 
         } else if (keyword == CommandKeyword.FIND) {
             return new FindTaskCommand(getFindTaskParams(input, keyword));
