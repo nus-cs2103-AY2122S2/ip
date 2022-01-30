@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -5,14 +7,26 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Disk {
+    /** String to store path of where data will be stored */
     private final String path;
+    /** ListStorage to store tasks */
     private final ListStorage myStorage;
 
+    /**
+     * Constructor for Disk.
+     *
+     * @param path File path.
+     * @param myStorage ListStorage where Tasks are stored.
+     */
     public Disk(String path, ListStorage myStorage) {
         this.path = path;
         this.myStorage = myStorage;
     }
 
+    /**
+     * Saves contents in ListStorage to Disk specified in
+     * file path.
+     */
     public void saveToDisk() {
         try{
             BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
@@ -35,6 +49,11 @@ public class Disk {
         }
     }
 
+    /**
+     * Restores contents of file from disk to Duke
+     * when it is run.
+     * @throws IOException If file already exists.
+     */
     public void loadFromDisk() throws IOException {
         File file = new File(this.path);
         file.getParentFile().mkdir();
@@ -47,14 +66,14 @@ public class Disk {
             String [] separator = cmd.split(",", 4);
             Task currTask = null;
             switch(separator[0]) {
-                case "T":
-                    currTask = new ToDo(separator[2]);
-                    break;
-                case "D":
-                    currTask = new Deadline(separator[2], separator[3]);
-                    break;
-                case "E":
-                    currTask = new Event(separator[2], separator[3]);
+            case "T":
+                currTask = new ToDo(separator[2]);
+                break;
+            case "D":
+                currTask = new Deadline(separator[2], separator[3]);
+                break;
+            case "E":
+                currTask = new Event(separator[2], separator[3]);
             }
             if(separator[1].equals("1")) {
                 assert currTask != null;

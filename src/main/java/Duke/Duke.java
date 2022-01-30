@@ -1,13 +1,17 @@
-import Exceptions.EmptyMessageException;
-import Exceptions.WrongCommandException;
-import Exceptions.WrongDateFormatException;
+package Duke;
+
+import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.WrongCommandException;
+import Duke.Exceptions.WrongDateFormatException;
 
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Driver class of Duke
+ */
 public class Duke {
-    static String border = "    ____________________________________________________________\n";
-    static String spacing = "    ";
+
     static ListStorage myListStorage = new ListStorage();
     static Printer myPrinter = new Printer();
     static Disk myDisk;
@@ -26,7 +30,7 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * Loads existing ListStorage in Disk.
+     * Loads existing ListStorage in Disk
      * @param filePath filePath
      */
     public Duke(String filePath) {
@@ -42,6 +46,9 @@ public class Duke {
         new Duke("src/main/java/data/savedTasks.txt").dukeRunner();
     }
 
+    /*
+     * Runner method for Duke
+     */
     public void dukeRunner() {
         myPrinter.printGreeting();
         while(true){
@@ -54,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to parse commands entered by user
+     *
+     * @throws WrongCommandException if user enters invalid commands
+     */
     public static void parseCommand() throws WrongCommandException {
 
         Scanner myScanner = new Scanner(System.in);
