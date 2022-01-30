@@ -2,9 +2,6 @@ package echo.task;
 
 import java.util.ArrayList;
 
-import echo.ui.Ui;
-
-
 /**
  * This class encapsulates the list of tasks associated with Echo.
  */
@@ -114,7 +111,7 @@ public class TaskList {
         for (int i = 0; i < size(); i++) {
             String desc = TASKS.get(i).DESCRIPTION;
             if (desc.contains(s)) {
-                tasksString.append(Ui.addPrefix(taskStatus(i).concat("\n")));
+                tasksString.append(taskStatus(i).concat("\n"));
             }
         }
         if (tasksString.length() != 0) {
@@ -132,9 +129,7 @@ public class TaskList {
     public String toString() {
         StringBuilder listString = new StringBuilder();
         for (int i = 0; i < size(); i++) {
-            String taskStatus = taskStatus(i) + ("\n");
-            taskStatus = Ui.addPrefix(taskStatus);
-            listString.append(taskStatus);
+            listString.append(taskStatus(i).concat("\n"));
         }
         listString.setLength(listString.length() - 1);
         return listString.toString();

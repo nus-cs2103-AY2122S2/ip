@@ -1,4 +1,4 @@
-package echo.main;
+package echo.utils;
 
 /**
  * EchoException class that handles exceptions related to user inputs.

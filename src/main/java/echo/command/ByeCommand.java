@@ -7,10 +7,10 @@ import echo.ui.Ui;
 /**
  * This class inherits from the Command class and encapsulates the help command.
  */
-public class HelpCommand extends Command {
+public class ByeCommand extends Command {
 
     /** String that represents the help command. */
-    public static final String COMMAND = "help";
+    public static final String COMMAND = "bye";
 
     /**
      * Executes command.
@@ -23,6 +23,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showHelp();
+        return ui.sayBye();
     }
 }
