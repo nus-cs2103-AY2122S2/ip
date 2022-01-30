@@ -20,7 +20,7 @@ public class DukeTest {
 
     @Test
     public void testDate() throws IOException {
-        Storage s = new Storage();
+        storage.Storage s = new storage.Storage();
         assertThrows(ParseException.class, () -> {
             s.parse("this is not a date");
         });
