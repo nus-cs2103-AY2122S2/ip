@@ -11,7 +11,7 @@ public class Ui {
     /**
      * For receiving user input.
      */
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Initializes a Ui instance with a scanner receiving input from the System input.

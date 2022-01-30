@@ -11,11 +11,11 @@ public class EventTask extends Task {
     /**
      * Preposition describing the date (eg. on, by).
      */
-    String preposition;
+    private String preposition;
     /**
      * Date and time of the event.
      */
-    LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Initializes a new event.

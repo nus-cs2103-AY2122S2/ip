@@ -5,11 +5,11 @@ package duke.task;
  */
 
 public class Task {
-    String name;
+    private String name;
     /**
      * To indicate whether the task has been completed
      */
-    boolean isMarked;
+    private boolean isMarked;
 
     /**
      * Initializes a new task.

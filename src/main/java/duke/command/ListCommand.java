@@ -3,7 +3,6 @@ package duke.command;
 import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
-import duke.task.Task;
 
 /**
  * Represents a command to list out all current tasks.

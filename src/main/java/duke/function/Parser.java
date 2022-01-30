@@ -57,6 +57,8 @@ public class Parser {
         case "bye":
             command = new ExitCommand(fullCommand);
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + st.nextToken());
         }
 
         if (command != null) {

@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
     /**
      * Initializes the help command with user input.
      *
-     * @param fullCommand THe user input.
+     * @param fullCommand The user input.
      */
     public HelpCommand(String fullCommand) {
         super(fullCommand);

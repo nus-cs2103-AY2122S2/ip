@@ -5,12 +5,18 @@ import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
 
-import java.util.StringTokenizer;
-
+/**
+ * Represents a command to find a task with keywords.
+ */
 public class FindCommand extends Command {
-    String keyword;
-    DukeException exception;
+    private String keyword;
+    private DukeException exception;
 
+    /**
+     * Initializes the find command with user input.
+     *
+     * @param fullCommand The user input.
+     */
     public FindCommand(String fullCommand) {
         super(fullCommand);
 

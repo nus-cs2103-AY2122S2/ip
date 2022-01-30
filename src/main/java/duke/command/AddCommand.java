@@ -1,15 +1,15 @@
 package duke.command;
 
-import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import duke.exception.DukeException;
 import duke.function.Storage;
-import duke.function.Ui;
 import duke.function.TaskList;
+import duke.function.Ui;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -22,23 +22,23 @@ public class AddCommand extends Command {
     /**
      * Type of task. Can be 'todo', 'deadline', or 'event
      */
-    String taskType;
+    private String taskType;
     /**
      * The description and name of the task.
      */
-    String taskName;
+    private String taskName;
     /**
      * The preposition for the date time. Only applicable for deadlines and events.
      */
-    String taskPreposition;
+    private String taskPreposition;
     /**
      * The date time for the event. Only applicable for deadlines and events.
      */
-    LocalDateTime taskDate;
+    private LocalDateTime taskDate;
     /**
      * To store any exceptions that were thrown during the parsing of the command.
      */
-    DukeException exception;
+    private DukeException exception;
 
     /**
      * Initializes the add command from user input
@@ -58,9 +58,7 @@ public class AddCommand extends Command {
             String nextToken = st.nextToken();
             if (command.equals("todo") || nextToken.charAt(0) != '/') {
                 nameArray.add(nextToken);
-            }
-            //Only take in preposition if it is not a todo
-            else {
+            } else {
                 preposition = nextToken.substring(1);
                 break;
             }
@@ -84,12 +82,12 @@ public class AddCommand extends Command {
         }
         if ((date.equals("") || time.equals(""))) {
             if (command.equals("deadline")) {
-                this.exception = new DukeException("Please add a date and time for your deadline in the following" +
-                        "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                this.exception = new DukeException("Please add a date and time for your deadline in the following"
+                        + "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
                 return;
             } else if (command.equals("event")) {
-                this.exception = new DukeException("Please add a date and time for your event in the following" +
-                        "format:\n" + "'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                this.exception = new DukeException("Please add a date and time for your event in the following"
+                        + "format:\n" + "'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
                 return;
             }
         }
@@ -99,12 +97,12 @@ public class AddCommand extends Command {
                 dateTime = LocalDateTime.parse(date + "T" + time);
             } catch (DateTimeParseException e) {
                 if (command.equals("deadline")) {
-                    this.exception = new DukeException("Please add a date and time for your deadline in the following" +
-                            "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                    this.exception = new DukeException("Please add a date and time for your deadline in the following"
+                            + "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
                     return;
                 } else if (command.equals("event")) {
-                    this.exception = new DukeException("Please add a date and time for your event in the following" +
-                            "format:\n'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                    this.exception = new DukeException("Please add a date and time for your event in the following"
+                            + "format:\n'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
                     return;
                 }
             }

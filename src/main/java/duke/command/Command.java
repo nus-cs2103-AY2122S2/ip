@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * The full command input by the user.
      */
-    String fullCommand;
+    private String fullCommand;
 
     Command(String fullCommand) {
         this.fullCommand = fullCommand;

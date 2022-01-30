@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * A list of tasks.
      */
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Initializes the TaskList with an empty ArrayList of Tasks.
