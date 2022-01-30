@@ -15,5 +15,15 @@ public class TodoCommand extends Command {
         int taskNumber = taskList.addTodo(taskName);
         ui.sayTaskAddingLines(taskNumber);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof TodoCommand) {
+            TodoCommand otherCommand = (TodoCommand) other;
+            return this.taskName.equals(otherCommand.taskName);
+        } else {
+            return false;
+        }
+    }
 }
 

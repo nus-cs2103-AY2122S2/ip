@@ -1,7 +1,5 @@
 package athena;
 
-import java.io.IOException;
-
 import athena.commands.Command;
 import athena.commands.ShutdownCommand;
 import athena.exceptions.InputException;
@@ -10,7 +8,9 @@ import athena.storage.Storage;
 import athena.tasks.TaskList;
 import athena.ui.Ui;
 
-public class Athena {
+import java.io.IOException;
+
+public class Main {
     private static final String SAVE_DIRECTORY = "data";
     private static final String SAVE_FILENAME = "athena.txt";
 
@@ -19,7 +19,7 @@ public class Athena {
     private final Ui ui;
     private boolean isActive;
 
-    public Athena() {
+    public Main() {
         // Load save data if present
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
         initTaskList();
@@ -69,6 +69,6 @@ public class Athena {
     }
 
     public static void main(String[] args) {
-        new Athena().run();
+        new Main().run();
     }
 }
