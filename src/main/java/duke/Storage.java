@@ -1,8 +1,13 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 /**
  * Class that handles loading and storing data, from and to data.txt file
@@ -44,14 +49,14 @@ public class Storage {
                     } else if (taskType.equals("D")) {
                         String dateTime = taskLine[3];
                         //Time is added
-                        if(taskLine.length == 5) {
+                        if (taskLine.length == 5) {
                             dateTime += " " + taskLine[4];
                         }
                         task = new Deadline(taskLine[2], dateTime);
                     } else if (taskType.equals("E")) {
                         String dateTime = taskLine[3];
                         //Time is added
-                        if(taskLine.length == 5) {
+                        if (taskLine.length == 5) {
                             dateTime += " " + taskLine[4];
                         }
                         task = new Event(taskLine[2], dateTime);
@@ -83,13 +88,13 @@ public class Storage {
             if (!file.exists()) {
                 file.mkdir();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
 
         //Writing to empty txt file
         try {
-            FileWriter fileWriter = new FileWriter(path,false);
+            FileWriter fileWriter = new FileWriter(path, false);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             for (Task t: tasks) {
                 String taskToAppend = "";
@@ -97,38 +102,38 @@ public class Storage {
                 //Identify task type
                 if (t instanceof Todo) {
                     taskToAppend += "T~";
-                } else if(t instanceof Deadline) {
+                } else if (t instanceof Deadline) {
                     taskToAppend += "D~";
-                } else if(t instanceof Event) {
+                } else if (t instanceof Event) {
                     taskToAppend += "E~";
                 }
 
                 //Identify if task is done
-                if(t.getDone()) {
+                if (t.getDone()) {
                     taskToAppend += "X~";
                 } else {
                     taskToAppend += " ~";
                 }
                 taskToAppend += t.getTaskName() + "~";
-                if(t instanceof Deadline) {
+                if (t instanceof Deadline) {
                     Deadline tempTask = (Deadline) t;
-                    String date = tempTask.date.toString();
-                    if(tempTask.time != null) {
-                        date += "~" + tempTask.time.toString();
+                    String date = tempTask.getDate().toString();
+                    if (tempTask.getTime() != null) {
+                        date += "~" + tempTask.getTime().toString();
                     }
                     taskToAppend += date.trim();
                 } else if (t instanceof Event) {
                     Event tempTask = (Event) t;
-                    String date = tempTask.date.toString();
-                    if (tempTask.time != null) {
-                        date += "~" + tempTask.time.toString();
+                    String date = tempTask.getDate().toString();
+                    if (tempTask.getTime() != null) {
+                        date += "~" + tempTask.getTime().toString();
                     }
                     taskToAppend += date.trim();
                 }
                 printWriter.println(taskToAppend);
             }
             printWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }

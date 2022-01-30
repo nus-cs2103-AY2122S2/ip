@@ -13,7 +13,7 @@ public class Task {
      *
      * @param taskName name/details of the task
      */
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
     }
@@ -47,8 +47,8 @@ public class Task {
     /**
      * Prints out the status of the task and the details
      */
-    public void printTask(){
-        if(this.getDone()){
+    public void printTask() {
+        if (this.getDone()) {
             System.out.println("[X] " + this.getTaskName());
         } else {
             System.out.println("[ ] " + this.getTaskName());
