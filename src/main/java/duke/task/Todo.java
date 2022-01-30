@@ -1,3 +1,5 @@
+package duke.todo;
+
 public class Todo extends Task {
 
   public Todo(String str, boolean status) {
