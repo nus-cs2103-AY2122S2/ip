@@ -1,4 +1,5 @@
-package duke;
+package duke.DukeExceptions;
+
 //solution below adapted from https://stackify.com/specify-handle-exceptions-java/
 /**
  * Exception class handling todo task exception

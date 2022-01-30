@@ -35,6 +35,10 @@ public class Task {
         return this.toString();
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String dataFormatOfTask() {
         return null;
     }

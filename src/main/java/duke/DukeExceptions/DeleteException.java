@@ -1,4 +1,4 @@
-package duke;
+package duke.DukeExceptions;
 
 /**
  * Exception class handling delete task exception

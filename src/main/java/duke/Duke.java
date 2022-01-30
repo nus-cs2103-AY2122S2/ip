@@ -1,26 +1,26 @@
 package duke;
-import javax.swing.*;
+
+import duke.DukeExceptions.DukeException;
+import duke.Parser.Parser;
+import duke.Command.Command;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
     /**
      * A task taking chatbot
      */
-    private Storage storage;
-    private TaskList tasks;
+    private final Storage storage;
     private Ui ui;
-    private String lines = "____________________________" +
-            "            ________________________________";
-    private String endline = "___________________________" +
-            "            _________________________________\n";
+    private TaskList taskList;
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (IOException e) {
             System.out.println("No path exist");
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
 
     }
@@ -28,52 +28,25 @@ public class Duke {
     /**
      * Main method to activate chatbot
      *
-     * @throws IOException
+     * @throws IOException error when saving to the data file
      */
     public void run() throws IOException {
         ui = new Ui();
+        boolean isExit = false;
         Scanner sc = new Scanner(System.in);
-        while (true) {
-            storage.saveFile(tasks);
-            String input = sc.nextLine();
-            String[] parts = input.split(" ");
+        while (!isExit) {
             try {
-                if (input.equals("bye")) {
-                    ui.bye();
-                    break;
-                }
-                if (input.equals("list")) {
-                    ui.list(tasks);
-                    continue;
-                }
-                if (parts[0].equals("mark")) {
-                    ui.mark(tasks, parts);
-                    continue;
-                }
-                if (parts[0].equals("unmark")) {
-                    ui.unmark(tasks, parts);
-                    continue;
-                }
-                if (parts[0].equals("todo")) {
-                    ui.todo(tasks, parts, input);
-                    continue;
-                }
-                if (parts[0].equals("deadline")) {
-                    ui.event(tasks,parts,input);
-                    continue;
-                }
-                if (parts[0].equals("event")) {
-                    ui.event(tasks,parts,input);
-                    continue;
-                }
-                if (parts[0].equals("delete")) {
-                    ui.delete(tasks,parts);
-                    continue;
-                }
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.showLine();
+            String input = sc.nextLine();
+            Command c = Parser.parseCommand(input);
+            c.execute(taskList, ui,storage);
+            isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showEndline();
             }
+
 
         }
 
