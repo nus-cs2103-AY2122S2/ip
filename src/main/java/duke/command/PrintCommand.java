@@ -39,9 +39,9 @@ public class PrintCommand implements Command {
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
-     * @throws DukeException If the List of tasks in the task list is
-     * empty or if there are no deadlines/events that occurs on the
-     * specified date
+     * @throws DukeException If the List of tasks in the task list
+     * is empty or if there are no deadlines/events that occurs on
+     * the specified date
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
