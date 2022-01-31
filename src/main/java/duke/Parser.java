@@ -65,12 +65,38 @@ public class Parser {
             }
             case "delete" -> {
                 wf.flush(); // need to flush first cause updates were stored in buffer
-                int n = Integer.parseInt(words[1]) - 1;
+                int n = Integer.parseInt(words[1]) - 1; // get the task number to be deleted
                 Task t = tasks.get(n);
                 tasks.remove(n);
                 tasks.deleteTask(n + 1);
                 System.out.println("    Alright! This task has been deleted:\n      [" + t.getType() + "][" + t.getDone() + "] " + t.desc + t.getBy());
 
+            }
+            case "find" -> {
+                wf.flush(); // need to flush first cause updates were stored in buffer
+                String key = words[1]; // keyword to be found
+                int[] ind = new int[tasks.getNumberOfTasks()]; // indexes of task with keyword
+                int noOfMatched = 0;
+                for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
+                    String[] split = tasks.get(i).desc.split(" ");
+
+                    for(String s : split) {
+                        if(s.equals(key)) {
+                            ind[noOfMatched] = i;
+                            noOfMatched++;
+                            break;
+                        }
+                    }
+                }
+                System.out.println("    Here are the matching tasks in your list:\n");
+                for(int i = 0; i < noOfMatched; i++) {
+                    Task t = tasks.get(ind[i]);
+                    String by = "";
+                    if (t.getType().equals("D") || t.getType().equals("E"))
+                        by = t.getBy().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+                    System.out.println("    " + i+1 + ". [" + t.getType() + "][" + t.getDone() + "] " + t.desc + by);
+
+                }
             }
 
             // user add a todo task
