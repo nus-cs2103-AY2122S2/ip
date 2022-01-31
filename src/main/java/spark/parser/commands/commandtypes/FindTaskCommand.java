@@ -7,9 +7,19 @@ import spark.tasks.tasktypes.Task;
 
 import java.util.List;
 
+/**
+ * Represents a command for Spark to find a task.
+ */
 public class FindTaskCommand extends Command {
     private String searchTerm;
 
+    /**
+     * Creates a new command with the search-term that Spark
+     * should use to search for Tasks with titles containing
+     * the search-term.
+     *
+     * @param searchTerm search-term that Spark should like for in Task titles.
+     */
     public FindTaskCommand(String searchTerm) {
         this.searchTerm = searchTerm;
     }

@@ -5,9 +5,18 @@ import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.Ui;
 
+/**
+ * Represents a command to delete a Task.
+ */
 public class DeleteTaskCommand extends Command {
     int index;
 
+    /**
+     * Creates a command with the index of the Task to be deleted.
+     *
+     * @param index a positive integer identifying the Task to
+     *              be deleted.
+     */
     public DeleteTaskCommand(int index) {
         this.index = index;
     }

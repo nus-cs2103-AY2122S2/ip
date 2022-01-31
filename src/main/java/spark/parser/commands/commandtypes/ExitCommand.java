@@ -4,6 +4,9 @@ import spark.Ui;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
+/**
+ * Represents a command for Spark to stop running.
+ */
 public class ExitCommand extends Command {
 
     @Override

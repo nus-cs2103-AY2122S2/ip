@@ -8,10 +8,18 @@ import spark.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a command to add a new event to the task list.
+ */
 public class AddEventCommand extends Command {
     private String title;
     private LocalDateTime at;
 
+    /**
+     * Creates a new Event with the specified title and date.
+     *
+     * @param params contains the title and date the event should have
+     */
     public AddEventCommand(AddEventParams params) {
         this.title = params.getTitle();
         this.at = params.getAt();

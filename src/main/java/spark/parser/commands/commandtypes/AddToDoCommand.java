@@ -6,9 +6,17 @@ import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.Ui;
 
+/**
+ * Represents a command to add a new deadline to the task list.
+ */
 public class AddToDoCommand extends Command {
-    String title;
+    private String title;
 
+    /**
+     * Creates a new Todo with the specified title.
+     *
+     * @param params contains the title the Todo should have
+     */
     public AddToDoCommand(AddTodoParams params) {
         this.title = params.getTitle();
     }

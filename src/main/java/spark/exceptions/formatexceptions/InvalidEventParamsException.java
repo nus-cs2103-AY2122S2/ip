@@ -1,5 +1,9 @@
 package spark.exceptions.formatexceptions;
 
+/**
+ * This is an exception thrown when the user
+ * attempts to add an Event with an incorrect format.
+ */
 public class InvalidEventParamsException extends FormatException {
     public InvalidEventParamsException() {
         super(String.format("%s\n%s\n%s",

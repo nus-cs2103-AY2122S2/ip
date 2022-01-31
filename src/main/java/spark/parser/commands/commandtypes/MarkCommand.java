@@ -5,9 +5,18 @@ import spark.exceptions.SparkException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
+/**
+ * Represents a command to mark a Task as complete.
+ */
 public class MarkCommand extends Command {
     private int index;
 
+    /**
+     * Creates a command with the index of the Task to be marked as complete.
+     *
+     * @param index a positive integer identifying the Task to
+     *              be marked as complete.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }

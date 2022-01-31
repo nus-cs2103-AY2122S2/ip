@@ -5,9 +5,18 @@ import spark.exceptions.SparkException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
+/**
+ * Represents a command to mark a Task as incomplete.
+ */
 public class UnMarkCommand extends Command {
     private int index;
 
+    /**
+     * Creates a command with the index of the Task to be marked as incomplete.
+     *
+     * @param index a positive integer identifying the Task to
+     *              be marked as incomplete.
+     */
     public UnMarkCommand(int index) {
         this.index = index;
     }

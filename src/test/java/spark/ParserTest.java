@@ -8,7 +8,7 @@ import spark.parser.commands.commandtypes.MarkCommand;
 import spark.exceptions.SparkException;
 import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
 import spark.exceptions.formatexceptions.InvalidMarkParamsException;
-import spark.exceptions.formatexceptions.InvalidToDoParamsException;
+import spark.exceptions.formatexceptions.InvalidTodoParamsException;
 import spark.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +30,7 @@ public class ParserTest {
     public void parseInput_inputAddToDoNoTitle_throwsException() {
         // a unit test for Parser#parseInput
         String input = "todo"; // missing title
-        assertThrows(InvalidToDoParamsException.class, () -> Parser.parseInput(input));
+        assertThrows(InvalidTodoParamsException.class, () -> Parser.parseInput(input));
     }
 
     @Test

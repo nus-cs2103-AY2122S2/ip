@@ -8,10 +8,18 @@ import spark.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a command to add a new deadline to the task list.
+ */
 public class AddDeadlineCommand extends Command {
     private String title;
     private LocalDateTime by;
 
+    /**
+     * Creates a new Deadline with the specified title and date.
+     *
+     * @param params contains the title and date the deadline should have
+     */
     public AddDeadlineCommand(AddDeadlineParams params) {
         this.title = params.getTitle();
         this.by = params.getBy();

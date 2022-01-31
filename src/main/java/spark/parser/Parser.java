@@ -1,29 +1,30 @@
 package spark.parser;
 
-import spark.parser.commands.commandtypes.*;
-import spark.parser.commands.CommandKeyword;
-import spark.exceptions.SparkException;
-import spark.exceptions.formatexceptions.*;
-import spark.parser.params.AddDeadlineParams;
-import spark.parser.params.AddEventParams;
-import spark.parser.params.AddTodoParams;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import spark.exceptions.SparkException;
+import spark.parser.commands.CommandKeyword;
+import spark.exceptions.formatexceptions.*;
+import spark.parser.commands.commandtypes.*;
+import spark.parser.params.AddDeadlineParams;
+import spark.parser.params.AddEventParams;
+import spark.parser.params.AddTodoParams;
 
 /**
  * Holds methods for interpreting user's input.
  */
 public class Parser {
+    /** Specifies the accepted input-format for dates and times */
     private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
 
     /**
      * Returns a Command specific to the type of operation
      * that the user wishes to perform.
      *
-     * @param input
-     * @return
+     * @param input what the user has typed into the console
+     * @return      a Command
      */
     public static Command parseInput(String input) throws SparkException {
         String[] tokens = input.split(" "); // split command into individual keywords by single-space
@@ -85,11 +86,11 @@ public class Parser {
     }
 
     private static AddTodoParams getAddToDoParams(String input, CommandKeyword keyword) throws
-            InvalidToDoParamsException {
+            InvalidTodoParamsException {
         String title = removeCommandKeyword(input, keyword).trim();
 
         if (title.isBlank()) {
-            throw new InvalidToDoParamsException();
+            throw new InvalidTodoParamsException();
         }
 
         return new AddTodoParams(title);

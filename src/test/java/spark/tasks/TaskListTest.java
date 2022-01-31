@@ -3,8 +3,6 @@ package spark.tasks;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import spark.exceptions.SparkException;
-import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
-import spark.exceptions.formatexceptions.InvalidToDoParamsException;
 import spark.exceptions.taskmodificationexceptions.TaskNotFoundException;
 
 import java.time.LocalDateTime;
