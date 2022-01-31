@@ -2,6 +2,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     public static ArrayList<Task> taskList;
@@ -21,7 +25,15 @@ public class Duke {
         printLine();
         // Scanner object to detect input from CLI
         Scanner scanner = new Scanner(System.in);
-        // Loop to keep getting input until bye
+        // File object to specify filename and path.
+        String filePath = "./src/TaskListDB.txt";
+        // Read inputs from file
+        try {
+            readFromFile(filePath);
+        } catch (Exception E) {
+            File fileName = new File("./src/TaskListDB.txt");
+        }
+        //// Loop to keep getting input until bye
         while (true) {
             try {
                 String input = scanner.nextLine();
@@ -30,6 +42,7 @@ public class Duke {
                 setFirstChars(input,inputLength);
                 if (firstThreeChar.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
+                    saveToFile(filePath);
                     printLine();
                     break;
                 }
@@ -149,6 +162,38 @@ public class Duke {
         }
         if (inputLength >= 8) {
             firstEightChar = input.substring(0,8);
+        }
+    }
+
+    private static void saveToFile(String filePath) throws IOException{
+        FileWriter fileWriter = new FileWriter(filePath);
+        for (int i = 0; i < taskList.size(); i++) {
+            fileWriter.write(taskList.get(i).toStorageString() + "\n");
+        }
+        fileWriter.close();
+    }
+
+    private static void readFromFile(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String[] taskInfo = scanner.nextLine().split("#");
+            Task newTask = null;
+            switch (taskInfo[0]) {
+                case "T":
+                    newTask = new Todo(taskInfo[2]);
+                    break;
+                case "D":
+                    newTask = new Deadline(taskInfo[2],LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                    break;
+                case "E":
+                    newTask = new Event(taskInfo[2], LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                    break;
+            }
+            if (taskInfo[1].equals("X")) {
+                newTask.markAsDone();
+            }
+            taskList.add(newTask);
         }
     }
 }

@@ -19,6 +19,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String toStorageString() {
+        return "placeholder";
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);

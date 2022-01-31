@@ -11,6 +11,11 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("[E]%s(at: %s)", super.toString(), setAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        return String.format("[E]%s(at: %s)", super.toString(), this.setAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+    }
+
+    @Override
+    public String toStorageString() {
+        return String.format("E#%s#%s#%s", this.getStatusIcon(), this.description, this.setAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 }
