@@ -10,6 +10,7 @@ public class FindCommands extends Commands {
 
     public FindCommands(String input) {
         super(input);
+        this.input = input;
     }
 
     @Override

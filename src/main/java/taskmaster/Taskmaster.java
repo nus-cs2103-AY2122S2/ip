@@ -24,6 +24,7 @@ public class Taskmaster {
         this.ui = new UserInterface();
         this.taskList = new TaskList();
         this.storage = new Storage();
+        ui.loadExistingFile();
     }
 
     public String getResponse(String input) {

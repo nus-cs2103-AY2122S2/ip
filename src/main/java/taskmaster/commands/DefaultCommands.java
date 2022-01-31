@@ -9,6 +9,7 @@ public class DefaultCommands extends Commands {
 
     public DefaultCommands(String userInput) {
         super(userInput);
+        this.userInput = userInput;
     }
 
     @Override

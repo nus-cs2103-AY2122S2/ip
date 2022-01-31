@@ -1,5 +1,6 @@
 package taskmaster.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 import taskmaster.Taskmaster;
 import taskmaster.userinterface.UserInterface;
+import taskmaster.util.TaskList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -55,8 +57,15 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (ui.ifBye(input)) {
             ui.updateList();
-            Stage stage = (Stage) dialogContainer.getScene().getWindow();
-            stage.close();
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                Platform.exit();
+                System.exit(0);
+            }).start();
         }
     }
 }

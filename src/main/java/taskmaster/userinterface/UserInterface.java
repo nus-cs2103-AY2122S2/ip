@@ -65,7 +65,7 @@ public class UserInterface {
      * Adds all the tasks in the text file into the Task List.
      */
 
-    private void loadExistingFile() {
+    public void loadExistingFile() {
         System.out.println("Loading up saved task files ...\n");
         storage.loadFile(taskList);
     }
@@ -98,7 +98,7 @@ public class UserInterface {
 
     public String displayInvalidCommand(String input) {
         return "\n" + input + "?"
-                + "What are you on about? \n Type 'help' if "
+                + "\nWhat are you on about? \n Type 'help' if "
                 + "you want to know the commands, kid!\n";
     }
 
@@ -150,6 +150,7 @@ public class UserInterface {
         case "find":
             return new FindCommands(input);
         case "bye":
+            storage.updateList(taskList);
             return new ByeCommands();
         case "help":
             return new HelpCommands();
