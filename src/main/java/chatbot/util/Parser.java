@@ -191,7 +191,8 @@ public class Parser {
     }
 
     /**
-     * Either marks or unmarks a task in the task list. Both commands involve similar code, which is why they have been combined into this function.
+     * Either marks or unmarks a task in the task list.
+     * Both commands involve similar code, which is why they have been combined into this function.
      *
      * @param index The index of the task in the task list.
      * @param mark  If true, mark the task. Else, unmark the task.

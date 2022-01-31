@@ -1,17 +1,9 @@
 package chatbot.util;
 
-import chatbot.datetime.Timestamp;
-import chatbot.exception.ChatBotException;
-import chatbot.task.Deadline;
-import chatbot.task.Event;
-import chatbot.task.Task;
-import chatbot.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +11,13 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import chatbot.datetime.Timestamp;
+import chatbot.exception.ChatBotException;
+import chatbot.task.Deadline;
+import chatbot.task.Event;
+import chatbot.task.Task;
+import chatbot.task.ToDo;
 
 /**
  * Represents a list of Tasks managed by ChatBot for the user.
@@ -206,36 +205,36 @@ public class TaskList {
             );
         } else {
             switch (type) {
-                case DEADLINE:
-                    if (!timestampArgs[0].equals("by")) {
-                        throw new ChatBotException(
-                                "The correct format for adding a deadline is "
-                                        + "deadline <name of task> /by <date or timestamp of task>"
+            case DEADLINE:
+                if (!timestampArgs[0].equals("by")) {
+                    throw new ChatBotException(
+                            "The correct format for adding a deadline is "
+                                    + "deadline <name of task> /by <date or timestamp of task>"
                         );
-                    } else {
-                        Timestamp by = new Timestamp(other);
-                        Deadline deadline = new Deadline(title, by);
-                        list.add(deadline);
-                        set.add(title);
-                        return String.format(
-                            "This deadline has been added to your task list!%n%n             %s",
-                            deadline
-                        );
-                    }
-                case EVENT:
-                    if (!timestampArgs[0].equals("at")) {
-                        throw new ChatBotException(
-                                "The correct format for adding an event is "
-                                        + "event <name of task> /at <date or timestamp of task>"
-                        );
-                    } else {
-                        Timestamp at = new Timestamp(other);
-                        Event event = new Event(title, at);
-                        list.add(event);
-                        set.add(title);
-                        return String.format(
-                            "This event has been added to your task list!%n%n             %s",
-                            event
+                } else {
+                    Timestamp by = new Timestamp(other);
+                    Deadline deadline = new Deadline(title, by);
+                    list.add(deadline);
+                    set.add(title);
+                    return String.format(
+                        "This deadline has been added to your task list!%n%n             %s",
+                        deadline
+                    );
+                }
+            case EVENT:
+                if (!timestampArgs[0].equals("at")) {
+                    throw new ChatBotException(
+                            "The correct format for adding an event is "
+                                    + "event <name of task> /at <date or timestamp of task>"
+                    );
+                } else {
+                    Timestamp at = new Timestamp(other);
+                    Event event = new Event(title, at);
+                    list.add(event);
+                    set.add(title);
+                    return String.format(
+                        "This event has been added to your task list!%n%n             %s",
+                        event
                     );
                 }
             default:

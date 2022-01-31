@@ -8,16 +8,18 @@ import java.util.Random;
 public class Ui {
 
     private static final String BORDER =
-            "**********************************************************************************************************************";
+            "************************************************************************************************"
+                    + "**********************";
     private static final String[] GREETING_QUOTES = {
-            "Welcome to my inn",
-            "Pull up a chair by the hearth!",
-            "Come in, and shut the door, it's cold out there!",
-            "Don't be scared. Come in, have a seat!",
+        "Welcome to my inn",
+        "Pull up a chair by the hearth!",
+        "Come in, and shut the door, it's cold out there!",
+        "Don't be scared. Come in, have a seat!",
     };
     private static final String[] GUIDE = {
         "list                                                            View your task list",
-        "get <date*>                                                     View the tasks that you have on the specified date",
+        "get <date*>                                                     View the tasks that you have "
+                                                                                + "on the specified date",
         "todo <name of task>                                             Add a todo to your task list",
         "deadline <name of task> /by <date* or timestamp* of task>       Add a deadline to your task list",
         "event <name of task> /at <date* or timestamp* of task>          Add an event to your task list",

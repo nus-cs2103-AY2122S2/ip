@@ -1,8 +1,8 @@
 package chatbot.util;
 
-import chatbot.exception.ChatBotException;
-
 import java.io.File;
+
+import chatbot.exception.ChatBotException;
 
 /**
  * Represents a save file handler.
@@ -46,7 +46,8 @@ public class Storage {
      * Load data.
      *
      * @param taskList The task list to load the save file data into.
-     * @throws ChatBotException If I/O issues occur when reading the save file or the data in the save file is corrupted.
+     * @throws ChatBotException If I/O issues occur when reading the save file
+     * or if data in the save file is corrupted.
      */
     public void loadData(TaskList taskList) throws ChatBotException {
         taskList.load(file);

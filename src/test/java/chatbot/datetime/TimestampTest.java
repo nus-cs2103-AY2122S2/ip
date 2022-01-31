@@ -1,12 +1,15 @@
 package chatbot.datetime;
 
-import chatbot.exception.ChatBotException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import chatbot.exception.ChatBotException;
 
 public class TimestampTest {
 
