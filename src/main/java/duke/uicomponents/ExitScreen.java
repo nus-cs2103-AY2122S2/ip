@@ -1,6 +1,6 @@
 package duke.uicomponents;
 
-public class ExitScreen{
+public class ExitScreen {
     public void run() {
         System.out.println("============================");
         System.out.println("     We hope you have an    ");

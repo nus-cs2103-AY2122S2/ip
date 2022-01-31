@@ -10,25 +10,28 @@ public abstract class Task {
     protected static DateTimeFormatter initFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     protected String taskName;
-    protected boolean done;
+    protected boolean isMarked;
 
     protected Task(String taskName, boolean done) {
         this.taskName = taskName;
-        this.done = done;
+        this.isMarked = done;
     }
 
     public void setDone() {
-        this.done = true;
+        isMarked = true;
     }
 
     public void setUndone() {
-        this.done = false;
+        isMarked = false;
     }
 
     public abstract String updateIntoDatabase();
 
     public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
+        // Convert the task type to uppercase.
         type = type.toUpperCase();
+
+        // Creates a new task based on the task type.
         if (type.equals("TODO")) {
             return new ToDo(name, done);
         } else if (type.equals("DEADLINE")) {
@@ -42,7 +45,6 @@ public abstract class Task {
 }
 
 final class ToDo extends Task {
-
     protected ToDo(String taskName, boolean done) {
         super(taskName, done);
     }
@@ -50,65 +52,67 @@ final class ToDo extends Task {
     @Override
     public String toString() {
         String tag = "[T]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        return tag + doneIndicator + " " + this.taskName;
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
+        return tag + doneIndicator + " " + taskName;
     }
 
     public String updateIntoDatabase() {
-        return "TODO\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + "*** Next Task ***\n";
+        return "TODO\n" + isMarked + "\n" + taskName + "\n" + "*** Next Task ***\n";
     }
 }
 
 final class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     protected Deadline(String taskName, boolean done, String deadline) throws InvalidDate {
         super(taskName, done);
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.deadline = LocalDateTime.parse(deadline, initFormatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDate();
         }
-
     }
 
     @Override
     public String toString() {
         String tag = "[D]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
         String deadline = "(by: " + this.deadline.format(formatter) + ")";
-        return tag + doneIndicator + " " + this.taskName + deadline;
+        return tag + doneIndicator + " " + taskName + deadline;
     }
 
     public String updateIntoDatabase() {
-        return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline.format(initFormatter) + "\n"
+        return "DEADLINE\n" + isMarked + "\n" + taskName + "\n" + deadline.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }
 
 final class Event extends Task {
-    LocalDateTime eventDate;
+    private LocalDateTime eventDate;
 
     protected Event(String taskName, boolean done, String eventDate) throws InvalidDate {
         super(taskName, done);
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.eventDate = LocalDateTime.parse(eventDate, initFormatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDate();
         }
-
     }
 
     @Override
     public String toString() {
         String tag = "[E]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
         String eventDate = "(at: " + this.eventDate.format(formatter) + ")";
-        return tag + doneIndicator + " " + this.taskName + eventDate;
+        return tag + doneIndicator + " " + taskName + eventDate;
     }
 
     public String updateIntoDatabase() {
-        return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate.format(initFormatter) + "\n"
+        return "EVENT\n" + isMarked + "\n" + taskName + "\n" + eventDate.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }

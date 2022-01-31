@@ -1,6 +1,6 @@
 package duke.uicomponents;
 
-public class UnmarkedTaskDisplay{
+public class UnmarkedTaskDisplay {
     public void run(String task) {
         System.out.println("Alright, I've unmarked the duke.task: ");
         System.out.println(task);

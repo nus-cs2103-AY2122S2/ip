@@ -1,6 +1,6 @@
 package duke.uicomponents;
 
-public class ErrorMenu{
+public class ErrorMenu {
     public void run(String errorMessage) {
         System.out.println("============================");
         System.out.println("Error Detected: ");

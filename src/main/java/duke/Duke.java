@@ -16,12 +16,15 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filename) {
-        this.ui = new Ui();
+        // Creates the new UI for Duke.
+        ui = new Ui();
 
+        // Gets the data from filename and creates a new task list based on the data in filename.
         try {
-            this.storage = new Storage(filename);
-            this.taskList = storage.getData();
+            storage = new Storage(filename);
+            taskList = storage.getData();
         } catch (IOException e) {
+            // If file could not be found, create new file name and get fata from there.
             File newFile = new File("data/");
             if (!newFile.exists()) {
                 newFile.mkdir();
@@ -29,8 +32,7 @@ public class Duke {
             newFile = new File(filename);
             try {
                 newFile.createNewFile();
-                this.storage = new Storage(filename);
-                this.taskList = storage.getData();
+                storage = new Storage(filename);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -38,20 +40,28 @@ public class Duke {
     }
 
     void run() {
-        this.ui.showMenu();
+        // Creates a new scanner input for duke for user input.
         Scanner sc = new Scanner(System.in);
+
+        // Open the start menu for duke.
+        ui.showMenu();
+
+        // The main operartion for duke. Keeps on running until the user enters bye.
         while (true) {
             try {
+                // Waits for the user input, then run the command.
                 String userInput = sc.nextLine();
-                Command cmd = this.ui.showUserCommandLine(userInput);
-                cmd.run(this.taskList, this.ui, this.storage);
+                Command cmd = ui.showUserCommandLine(userInput);
+                cmd.run(taskList, ui, storage);
             } catch (DukeExceptions e) {
+                // Shows the custom duke expression message.
                 ui.showCommandError(e);
             }
         }
     }
 
     public static void main(String[] args) {
+        // Creates a new duke application and tells it to run.
         new Duke("data/duke.txt").run();
     }
 }

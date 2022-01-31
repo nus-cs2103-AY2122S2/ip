@@ -1,7 +1,6 @@
 package duke.dukeexceptions;
 
 public final class EmptyTask extends DukeExceptions{
-
     private EmptyTask(String s) {
         super(s);
     }

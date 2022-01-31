@@ -3,10 +3,17 @@ package duke.ui;
 import duke.command.Command;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.InvalidCommand;
-import duke.praser.Praser;
+import duke.praser.Parser;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.uicomponents.*;
+import duke.uicomponents.DeleteTaskDisplay;
+import duke.uicomponents.ErrorMenu;
+import duke.uicomponents.ExitScreen;
+import duke.uicomponents.MarkTaskDisplay;
+import duke.uicomponents.Menu;
+import duke.uicomponents.NewTaskDisplay;
+import duke.uicomponents.TaskListDisplay;
+import duke.uicomponents.UnmarkedTaskDisplay;
 
 public class Ui {
     Menu menu;
@@ -19,14 +26,14 @@ public class Ui {
     DeleteTaskDisplay deleteTaskDisplay;
 
     public Ui() {
-        this.menu = new Menu();
-        this.exitScreen = new ExitScreen();
-        this.taskListDisplay = new TaskListDisplay();
-        this.markTaskDisplay = new MarkTaskDisplay();
-        this.unmarkedTaskDisplay = new UnmarkedTaskDisplay();
-        this.newTaskDisplay = new NewTaskDisplay();
-        this.deleteTaskDisplay = new DeleteTaskDisplay();
-        this.errorMenu = new ErrorMenu();
+        menu = new Menu();
+        exitScreen = new ExitScreen();
+        taskListDisplay = new TaskListDisplay();
+        markTaskDisplay = new MarkTaskDisplay();
+        unmarkedTaskDisplay = new UnmarkedTaskDisplay();
+        newTaskDisplay = new NewTaskDisplay();
+        deleteTaskDisplay = new DeleteTaskDisplay();
+        errorMenu = new ErrorMenu();
     }
 
     public void showMenu() {
@@ -34,34 +41,34 @@ public class Ui {
     }
 
     public Command showUserCommandLine(String userInput) throws InvalidCommand {
-        return Praser.prase(userInput);
+        return Parser.parse(userInput);
     }
 
     public void showCommandError(DukeExceptions exceptions) {
-        this.errorMenu.run(exceptions.getMessage());
+        errorMenu.run(exceptions.getMessage());
     }
 
     public void showExitScreen() {
-        this.exitScreen.run();
+        exitScreen.run();
     }
 
     void showTaskListDisplay(TaskList taskList) {
-        this.taskListDisplay.run(taskList);
+        taskListDisplay.run(taskList);
     }
 
     public void showMarkedTaskDisplay(String task) {
-        this.markTaskDisplay.run(task);
+        markTaskDisplay.run(task);
     }
 
     public void showUnmarkedTaskDisplay(String task) {
-        this.unmarkedTaskDisplay.run(task);
+        unmarkedTaskDisplay.run(task);
     }
 
     public void newTaskDisplay(Task task, TaskList taskList) {
-        this.newTaskDisplay.run(task, taskList);
+        newTaskDisplay.run(task, taskList);
     }
 
     public void showDeleteTaskDisplay(String task, TaskList taskList) {
-        this.deleteTaskDisplay.run(task, taskList);
+        deleteTaskDisplay.run(task, taskList);
     }
 }
