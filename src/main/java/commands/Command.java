@@ -44,19 +44,17 @@ public class Command {
         case "mark":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" commands.Command format: mark task-number");
+                System.out.println(" Command format: mark task-number");
                 break;
             }
-            System.out.println(" Well done!");
             Task.markAsDone(Integer.parseInt(argument) - 1);
             break;
         case "unmark":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" commands.Command format: unmark task-number");
+                System.out.println(" Command format: unmark task-number");
                 break;
             }
-            System.out.println(" Oops! Fixed that for you.");
             Task.markAsNotDone(Integer.parseInt(argument) - 1);
             break;
         case "todo":
@@ -74,10 +72,9 @@ public class Command {
         case "delete":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" commands.Command format: delete task-number");
+                System.out.println(" Command format: delete task-number");
                 break;
             }
-            System.out.println(" Okay, I've deleted this task.");
             Task.removeFromList(Integer.parseInt(argument) - 1);
             break;
         default:

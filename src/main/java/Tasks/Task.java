@@ -21,19 +21,29 @@ public abstract class Task {
     }
 
     public static void markAsDone(int index) {
-        taskList.get(index).isDone = true;
-        System.out.println("  " + taskList.get(index).toString());
+        try {
+            taskList.get(index).isDone = true;
+            System.out.println(" Well done!");
+            System.out.println("  " + taskList.get(index).toString());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(" You have not added any tasks yet.");
+        }
     }
 
     public static void markAsNotDone(int index) {
-        taskList.get(index).isDone = false;
-        System.out.println("  " + taskList.get(index).toString());
+        try {
+            taskList.get(index).isDone = false;
+            System.out.println(" Oops! Fixed that for you.");
+            System.out.println("  " + taskList.get(index).toString());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(" You have not added any tasks yet.");
+        }
     }
 
     public static void addToList(Task task) {
         if (task.description == null) {
             System.out.println(" Please enter the description as well!");
-            System.out.println(" commands.Command format: task-type task-description /by task-duration OR /at task-deadline");
+            System.out.println(" Command format: task-type task-description /by task-duration OR /at task-deadline");
             return;
         }
 
@@ -41,7 +51,7 @@ public abstract class Task {
             Event event = (Event) task;
             if (event.duration == null) {
                 System.out.println(" Please enter the duration as well!");
-                System.out.println(" commands.Command format: task-type task-description /by YYYY-MM-DD");
+                System.out.println(" Command format: task-type task-description /by YYYY-MM-DD");
                 return;
             }
         }
@@ -50,7 +60,7 @@ public abstract class Task {
             Deadline taskWithDeadline = (Deadline) task;
             if (taskWithDeadline.deadline == null) {
                 System.out.println(" Please enter the deadline as well!");
-                System.out.println(" commands.Command format: task-type task-description /at YYYY-MM-DD");
+                System.out.println(" Command format: task-type task-description /at YYYY-MM-DD");
                 return;
             }
         }
@@ -66,9 +76,14 @@ public abstract class Task {
     }
 
     public static void removeFromList(int index) {
-        System.out.println("  " + taskList.get(index).toString());
-        taskList.remove(index);
-        taskCount--;
+        try {
+            taskList.remove(index);
+            System.out.println(" Okay, I've deleted this task.");
+            System.out.println("  " + taskList.get(index).toString());
+            taskCount--;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(" You have not added any tasks yet.");
+        }
     }
 
     public static void getSavedTasks() {
