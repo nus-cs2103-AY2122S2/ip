@@ -159,6 +159,8 @@ public class Parser {
             return new ExitCommand();
         } else if (input.startsWith("delete")){
             return new DeleteTaskCommand(input);
+        } else if (input.startsWith("find")){
+            return new FindCommand(input);
         }
         throw new DukeException("Invalid Command!");
 

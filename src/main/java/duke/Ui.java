@@ -118,6 +118,24 @@ public class Ui {
             writer.println(doubleLine);
         }
     }
+    public void showFindResults(TaskManager tm){
+        int i = 1;
+        String s;
+        if (tm.size() == 0){
+            writer.println(doubleLine);
+            writer.println("No tasks found!");
+            writer.println(doubleLine);
+
+        } else {
+            writer.println(doubleLine);
+            writer.println("Here are the matching tasks in your list:");
+            for (Task t : tm.getTaskList()) {
+                writer.printf("%d.%s\n", i, t.toString());
+                i++;
+            }
+            writer.println(doubleLine);
+        }
+    }
 
     // Add/Delete Messages
     public void showAddedTask(Task t,int numberOfTasks) {
@@ -176,6 +194,7 @@ public class Ui {
     }
 
     public String getUserInputLine(){
+        writer.print("--> ");
         return scanner.nextLine();
     }
 
