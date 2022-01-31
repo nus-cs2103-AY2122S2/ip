@@ -22,3 +22,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+   
+Attributions:
+<a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by smalllikeart - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/rottweiler" title="rottweiler icons">Rottweiler icons created by smalllikeart - Flaticon</a>
