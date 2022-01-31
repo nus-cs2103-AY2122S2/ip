@@ -26,7 +26,7 @@ public class UnMarkCommandTest {
 
 	@Test
 	void doesNotEnd() {
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test
@@ -43,7 +43,8 @@ public class UnMarkCommandTest {
 			cmd.execute(tasks, new Ui(), new Storage("data/tasks.txt"));
 			assertEquals("0", cmd.getList().get(2).getMark());
 		} catch (DukeException e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
+			fail();
 		}
 
 	}

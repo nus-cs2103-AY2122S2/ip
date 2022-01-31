@@ -9,8 +9,8 @@ import tasks.ToDo;
 import ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
@@ -28,7 +28,7 @@ public class DeleteCommandTest {
 
 	@Test
 	void doesNotEnd() {
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test
@@ -41,7 +41,8 @@ public class DeleteCommandTest {
 			cmd.execute(tasks, new Ui(), new Storage("data/tasks.txt"));
 			assertEquals(2, cmd.getList().size());
 		} catch (DukeException e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
+			fail();
 		}
 
 	}

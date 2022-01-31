@@ -7,9 +7,7 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListCommandTest {
 	ListCommand cmd;
@@ -26,7 +24,7 @@ public class ListCommandTest {
 
 	@Test
 	void doesNotEnd() {
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test

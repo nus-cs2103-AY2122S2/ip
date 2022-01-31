@@ -26,7 +26,7 @@ public class MarkCommandTest {
 
 	@Test
 	void doesNotEnd() {
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test
