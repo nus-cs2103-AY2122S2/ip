@@ -1,68 +1,139 @@
 package funbox.util;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import funbox.task.Task;
 
 public class Ui {
 
-    public void greetUser() {
-        System.out.println("Yo! I am FunBox [0 _ 0] \nWhat can I do for you?");
+    /**
+     * Returns a string which greets the user.
+     *
+     * @return Returns a string which greets the user.
+     */
+    public String greetUser() {
+        return "Yo! I am FunBox [0 _ 0] \nWhat can I do for you?";
     }
 
-    public void printListHeader() {
-        System.out.println("Here are the tasks in your list:");
+    /**
+     * Returns a string when list function is called.
+     *
+     * @return Returns a string when list function is called.
+     */
+    public String printListHeader() {
+        return "Here are the tasks in your list:";
     }
 
-    public void printBye() {
-        System.out.println("B-b-bbye. Hope to see you again soon [0 n 0]");
+    /**
+     * Returns a bye message when bye function is called.
+     *
+     * @return Returns a bye message when bye function is called.
+     */
+    public String printBye() {
+        return "B-b-bbye. Hope to see you again soon [0 n 0]";
     }
 
-    public void printDirSuccess() {
-        System.out.println("Directory 'data' has been created for you!");
+    /**
+     * Returns a success message when directory is found.
+     *
+     * @return Returns a success message when directory is found.
+     */
+    public String printDirSuccess() {
+        return "Directory 'data' has been created for you!";
     }
 
-    public void printDirAlreadyExist() {
-        System.out.println("Directory already exists!");
+    /**
+     * Returns a message when directory already exist.
+     *
+     * @return Returns a message when directory already exist.
+     */
+    public String printDirAlreadyExist() {
+       return "Directory already exists!";
     }
 
-    public void printFileSuccess() {
-        System.out.println("I have created tasks.txt for you!");
+    /**
+     * Returns a message of an item on the list.
+     *
+     * @param index The position which the item is listed on the list.
+     * @param task The task to be printed.
+     * @return Returns a message of an item on the list.
+     */
+    public String printTask(int index, Task task) {
+       return index + "." + task;
     }
 
-    public void printLoadData() {
-        System.out.println("Loading saved task ... beep ... boop");
+    /**
+     * Returns an error message.
+     *
+     * @param errorMessage The error message to be returned.
+     * @return Returns an error message.
+     */
+    public String showError(String errorMessage) {
+       return errorMessage;
     }
 
-    public void printTask(int index, Task task) {
-        System.out.println(index + "." + task);
+    /**
+     * Returns a header message when a task is being removed.
+     *
+     * @return Returns a header message when a task is being removed.
+     */
+    public String printNotice() {
+       return "Noted! I've removed this task:";
     }
 
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    /**
+     * Returns a message displaying the remaining items on the list.
+     *
+     * @param taskList The tasklist containing the remaining tasks.
+     * @return Returns a message displaying the remaining items on the list.
+     */
+    public String printRemainingTasks(TaskList taskList) {
+       return "Now you have " + taskList.getSize() + " tasks in the list";
     }
 
-    public void printNotice() {
-        System.out.println("Noted! I've removed this task:");
+    /**
+     * Returns a message when no task is found.
+     *
+     * @return Returns a message when no task is found.s
+     */
+    public String printNoTaskFound() {
+        return "No tasks found on this date! You are free!";
     }
 
-    public void printRemainingTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list");
+    /**
+     * Returns a header message when a task is marked as done.
+     *
+     * @return Returns a header message when a task is marked as done.
+     */
+    public String printMarkDone() {
+        return "Nice! I've marked this task as done:";
     }
 
-    public void emptyList() {
-        System.out.println("You have no tasks at the moment!");
+    /**
+     * Returns a header message when a task is marked as undone.
+     *
+     * @return Returns a header message when a task is marked as undone.
+     */
+    public String printMarkUndone() {
+        return "OK, I've marked this task as not done yet:";
     }
 
-    public void printDeletedTask(Task task) {
-        System.out.println(task);
+    /**
+     * Returns a header message when there is no task on the tasklist.
+     *
+     * @return Returns a header message when there is no task on the tasklist.
+     */
+    public String emptyList() {
+       return "You have no tasks at the moment!";
     }
 
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        sc.close();
-        return command;
+    /**
+     * Returns a message of the deleted task.
+     * 
+     * @param task The deleted task.
+     * @return Returns a message of the deleted task.
+     */
+    public String printDeletedTask(Task task) {
+       return task.toString();
     }
-
-
 }

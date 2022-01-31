@@ -28,17 +28,21 @@ public class ToDoCommand extends Command {
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
      * @param storage Stores user tasks locally.
+     * @return Returns a string to be displayed to the user.
      * @throws FunBoxExceptions If description == ""
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        String result = "";
         if (description.equals("")) {
             throw new FunBoxExceptions("`todo` command is missing a field!");
         } else {
             ToDo todo = new ToDo(this.description, "todo");
             taskList.add(todo);
-            ui.printTask(taskList.getSize(), todo);
+
+            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), todo);
             storage.writeTaskToStorage(todo, ui);
         }
+        return result;
     }
 }

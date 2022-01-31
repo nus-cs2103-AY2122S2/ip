@@ -18,68 +18,118 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
-    public void delete(int index, Ui ui) {
+    /**
+     * Deletes an item on the list.
+     *
+     * @param index The item to be deleted from the list.
+     * @param ui Interface which interact with users.
+     * @return Returns a string to be displayed to the user.
+     */
+    public String delete(int index, Ui ui) {
         Task temp = taskList.get(index);
         this.taskList.remove(index);
-        ui.printNotice();
-        ui.printDeletedTask(temp);
-        ui.printRemainingTasks(this);
+        String result = ui.printNotice() + "\n";
+        result += ui.printDeletedTask(temp) + "\n";
+        result += ui.printRemainingTasks(this);
+        return result;
     }
 
+    /**
+     * Adds a task to the list.
+     *
+     * @param task The task to be added.
+     */
     public void add(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Sets the task as done on the list.
+     *
+     * @param index The position of the task on the list.
+     */
     public void setTaskDone(int index) {
         this.taskList.get(index).setDone();
     }
 
+    /**
+     * Sets the task as done on the list during startup.
+     *
+     * @param index The position of the task on the list.
+     */
     public void setPreTaskDone(int index) {
         this.taskList.get(index).presetDone();
     }
 
-    public void getTask(Ui ui, int index) {
-        ui.printTask(index, this.taskList.get(index));
+    /**
+     * Gets the task on the list.
+     *
+     * @param ui Interface which interact with users.
+     * @param index The position of the task on the list.
+     * @return Returns a string to be displayed to the user.
+     */
+    public String getTask(Ui ui, int index) {
+        return ui.printTask(index + 1, this.taskList.get(index));
     }
 
-    public void printTasks(Ui ui) {
-
+    /**
+     * Prints the task on the list.
+     *
+     * @param ui Interface which interact with users.
+     * @return Returns a string to be displayed to the user.
+     */
+    public String printTasks(Ui ui) {
+        String result = "";
         if (this.getSize() >= 1) {
-            ui.printListHeader();
+            result = ui.printListHeader() + "\n";
             for (int i = 0; i < this.taskList.size(); i++) {
-                ui.printTask(i + 1, this.taskList.get(i));
+                result += ui.printTask(i + 1, this.taskList.get(i)) + "\n";
             }
         } else {
-            ui.emptyList();
+            result = ui.emptyList();
         }
-
+        return result;
     }
 
+    /**
+     * Sets the task as not done.
+     *
+     * @param index The position of the task on the list.
+     */
     public void setTaskUndone(int index) {
         this.taskList.get(index).setUndone();
     }
 
+    /**
+     * Gets the size of the list.
+     *
+     * @return Returns the size of the list.
+     */
     public int getSize() {
         return this.taskList.size();
     }
 
+    /**
+     * Gets the list of tasks.
+     *
+     * @return Returns a tasks of list.
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-<<<<<<< HEAD
-
-=======
     /**
      * Filter the list based on the date provided by the user.
      *
      * @param filterDate The date used to filter the list.
      * @param taskList The list containing the task.
      * @throws FunBoxExceptions If date is not formatted in `yyyy-mm-dd`.
+     * @return Returns a string to be displayed to the user.
      */
->>>>>>> branch-A-JavaDoc
-    public void filterTasks(String filterDate, TaskList taskList) throws FunBoxExceptions {
+
+    public String filterTasks(String filterDate, TaskList taskList, Ui ui) throws FunBoxExceptions {
         LocalDate date;
+        String result = "";
         try {
             date = LocalDate.parse(filterDate);
             ArrayList<Task> eventList = new ArrayList<>(taskList.getTaskList());
@@ -96,7 +146,7 @@ public class TaskList {
                 Event temp = (Event) eventList.get(i);
                 if (temp.date.equals(date)) {
                     counter++;
-                    System.out.println(counter + "." + temp);
+                    result += ui.printTask(counter, temp) + "\n";
                 }
             }
 
@@ -104,28 +154,40 @@ public class TaskList {
                 Deadline temp = (Deadline) deadlineList.get(i);
                 if (temp.date.equals(date)) {
                     counter++;
-                    System.out.println(counter + "." + temp);
+                    result += ui.printTask(counter, temp) + "\n";
                 }
             }
 
             if (counter == 0) {
-                System.out.println("No tasks found on this date! You are free!");
+                result = ui.printNoTaskFound();
             }
 
         } catch (DateTimeParseException e) {
             throw new FunBoxExceptions("ERROR! Please ensure date is in the correct format: yyyy-mm-dd");
         }
+
+        return result;
     }
 
-    public void findTasks(String filter, Ui ui, TaskList taskList) {
+    /**
+     * Finds a filtered task on the list.
+     *
+     * @param filter The filter used to filter the list.
+     * @param ui Interface which interact with users.
+     * @param taskList The tasklist use for filtering.
+     * @return Returns a string to be displayed to the user.
+     */
+    public String findTasks(String filter, Ui ui, TaskList taskList) {
+        String result = "";
         ArrayList<Task> tempTaskList = new ArrayList<>(taskList.getTaskList());
         String filterLowerCase = filter.toLowerCase();
         tempTaskList.removeIf(task -> !task.description.toLowerCase().contains(filterLowerCase));
 
         int counter = 1;
         for (Task task : tempTaskList) {
-            ui.printTask(counter, task);
+            result += ui.printTask(counter, task) + "\n";
             counter++;
         }
+        return result;
     }
 }

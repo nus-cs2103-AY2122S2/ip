@@ -1,6 +1,7 @@
 package funbox.command;
 
 import funbox.exception.FunBoxExceptions;
+import funbox.task.Task;
 import funbox.util.Ui;
 import funbox.util.TaskList;
 import funbox.util.Storage;
@@ -27,14 +28,19 @@ public class MarkCommand extends Command {
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
      * @param storage Stores user tasks locally.
+     * @return Returns a string to be displayed to the user.
      * @throws FunBoxExceptions If (index - 1) > taskList.getSize() or (index - 1) < 0.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        String result = "";
         if ((index - 1) > taskList.getSize() || (index - 1) < 0) {
             throw new FunBoxExceptions("Wrong index!");
         } else {
-            taskList.setTaskDone(this.index - 1);
+            int index = this.index - 1;
+            taskList.setTaskDone(index);
+            result = ui.printMarkDone() + "\n" + taskList.getTask(ui, index);
         }
+        return result;
     }
 }

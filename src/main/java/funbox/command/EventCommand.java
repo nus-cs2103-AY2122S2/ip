@@ -31,10 +31,12 @@ public class EventCommand extends Command {
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
      * @param storage Stores user tasks locally.
+     * @return Returns a string to be displayed to the user.
      * @throws FunBoxExceptions If description == ""
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        String result = "";
         if (description.equals("")) {
             throw new FunBoxExceptions("`event` command is missing a field!");
         } else {
@@ -43,8 +45,9 @@ public class EventCommand extends Command {
                     parser.stringToLocalDate(resultArr[1]),
                     parser.getTime(resultArr[1]), "event");
             taskList.add(event);
-            ui.printTask(taskList.getSize(), event);
+            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), event);
             storage.writeTaskToStorage(event, ui);
         }
+        return result;
     }
 }
