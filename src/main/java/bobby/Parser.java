@@ -1,9 +1,7 @@
 package bobby;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 public class Parser {
     private static String command;
@@ -11,7 +9,7 @@ public class Parser {
 
     }
 
-    public static void parse(TaskList tasks, String userInput, Bobby bobby) throws IOException {
+    public static void parse(TaskList tasks, String userInput, Bobby bobby) {
         String[] inputs = userInput.split(" ", 2);
         command = inputs[0];
         try {

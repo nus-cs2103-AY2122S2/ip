@@ -57,12 +57,16 @@ public class Storage {
         return taskArray;
     }
 
-    public void updateFile(ArrayList<Task> taskArray) throws IOException {
-        FileWriter fw = new FileWriter("bobby.txt");
-        for (int i = 0; i < taskArray.size(); i++) {
-            Task t = taskArray.get(i);
-            t.writeToFile(fw);
+    public void updateFile(ArrayList<Task> taskArray) {
+        try {
+            FileWriter fw = new FileWriter("bobby.txt");
+            for (int i = 0; i < taskArray.size(); i++) {
+                Task t = taskArray.get(i);
+                t.writeToFile(fw);
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error with updating file's contents");
         }
-        fw.close();
     }
 }

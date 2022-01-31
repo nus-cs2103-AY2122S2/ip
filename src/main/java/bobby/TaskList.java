@@ -1,6 +1,5 @@
 package bobby;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class TaskList {
         this.storage = storage;
     }
 
-    public void addToDo(String task) throws BobbyException, IOException {
+    public void addToDo(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             Todo newTodo = new Todo(inputs[1]);
@@ -28,7 +27,7 @@ public class TaskList {
         }
     }
 
-    public void addDeadline(String task) throws BobbyException, IOException {
+    public void addDeadline(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /by ", 2);
@@ -48,7 +47,7 @@ public class TaskList {
         }
 
     }
-    public void addEvent(String task) throws BobbyException, IOException {
+    public void addEvent(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /at ", 2);
@@ -67,7 +66,7 @@ public class TaskList {
             throw new BobbyException("Description cannot be empty");
         }
     }
-    public void delete(String task) throws BobbyException, IOException {
+    public void delete(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             int i = Integer.parseInt(inputs[1]) - 1;
@@ -84,14 +83,14 @@ public class TaskList {
         Ui.printList(taskArray);
     }
 
-    public void mark(int i) throws IOException {
+    public void mark(int i) {
         Task t = taskArray.get(i);
         t.markAsDone();
         storage.updateFile(taskArray);
         Ui.taskDone(t);
     }
 
-    public void unmark(int i) throws IOException {
+    public void unmark(int i) {
         Task t = taskArray.get(i);
         t.unmarkAsDone();
         storage.updateFile(taskArray);

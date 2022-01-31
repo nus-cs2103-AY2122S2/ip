@@ -2,22 +2,24 @@ package bobby;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+/**
+ * The Bobby program serves as a notepad, taking in various user
+ * inputs to execute commands such as adding different types of
+ * tasks, marking tasks as done and deleting tasks.
+ */
 public class Bobby {
 
     private Storage storage;
     private TaskList tasks;
     private boolean isExit;
 
+    /**
+     * Creates an instance of Bobby.
+     * @param filePath location in a directory where contents will be stored.
+     */
     public Bobby(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -29,11 +31,17 @@ public class Bobby {
         isExit = false;
     }
 
+    /**
+     * Stops the program from running.
+     */
     public void terminate() {
         isExit = true;
     }
 
-    public void run() throws IOException {
+    /**
+     * Runs the program and starts taking in user inputs.
+     */
+    public void run() {
         Scanner scannerObj = new Scanner(System.in);
         while (scannerObj.hasNextLine()) {
             String userInput = scannerObj.nextLine();
@@ -44,7 +52,11 @@ public class Bobby {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Main method that uses the run method
+     * @param args Unused.
+     */
+    public static void main(String[] args) {
         Ui.showWelcome();
         new Bobby("bobby.txt").run();
     }
