@@ -1,16 +1,13 @@
 package commands;
 
-import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 import storage.Storage;
 import tasks.TaskList;
-import tasks.ToDo;
 import ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
 	AddCommand cmd;
