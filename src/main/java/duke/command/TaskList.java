@@ -1,9 +1,9 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.InvalidActionException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /** A list to manage the tasks in Duke */
 public class TaskList {

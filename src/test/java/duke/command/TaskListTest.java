@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.exception.InvalidActionException;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidActionException;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 public class TaskListTest {
     @Test

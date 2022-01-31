@@ -1,17 +1,16 @@
 package duke.ui;
 
-import duke.exception.IncompleteInputException;
-import duke.exception.WrongInputException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
+
+import duke.exception.IncompleteInputException;
+import duke.exception.WrongInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /** Helps to make sense of user input */
 public class Parser {
@@ -31,8 +30,8 @@ public class Parser {
      */
     public String parseCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
-        String[] acceptableInputs = new String[]{
-                "mark","unmark","todo","deadline","event","delete","find"};
+        String[] acceptableInputs = new String[]
+            {"mark", "unmark", "todo", "deadline", "event", "delete", "find"};
         boolean isAcceptable = false;
         for (String acceptableInput : acceptableInputs) {
             if (acceptableInput.equals(inputs[0])) {
@@ -62,8 +61,8 @@ public class Parser {
             throw new WrongInputException("D: D: D: There are no items in the list D: D: D:");
         }
         if (inputs.length > 2) {
-            throw new WrongInputException("D: D: D: The " + command +
-                    " should be followed by a single number D: D: D:");
+            throw new WrongInputException("D: D: D: The " + command
+                    + " should be followed by a single number D: D: D:");
         }
 
         try {
@@ -92,8 +91,8 @@ public class Parser {
         try {
             String[] inputs = s.split(" " + format + " ");
             if (inputs.length < 2) {
-                throw new IncompleteInputException("D: D: D: The description of a " + command +
-                        " is incorrect or empty D: D: D:");
+                throw new IncompleteInputException("D: D: D: The description of a " + command
+                        + " is incorrect or empty D: D: D:");
             }
             String[] params = new String[2];
             if (inputs.length == 2) {
@@ -152,8 +151,8 @@ public class Parser {
     public String parseStringDescription(String s, String command) throws IncompleteInputException {
         String[] inputs = s.split(command + " ");
         if (inputs.length == 1) {
-            throw new IncompleteInputException("D: D: D: The description of a " + command +
-                    " cannot be empty D: D: D:");
+            throw new IncompleteInputException("D: D: D: The description of a " + command
+                    + " cannot be empty D: D: D:");
         }
         if (inputs.length == 2) {
             return inputs[1];

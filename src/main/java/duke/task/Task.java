@@ -34,7 +34,9 @@ public abstract class Task {
      * @throws InvalidActionException If already done.
      */
     public void markAsDone() throws InvalidActionException {
-        if (isDone) { throw new InvalidActionException("Task already done!"); }
+        if (isDone) {
+            throw new InvalidActionException("Task already done!");
+        }
         isDone = true;
     }
 
@@ -44,7 +46,9 @@ public abstract class Task {
      * @throws InvalidActionException If already undone.
      */
     public void markUndone() throws InvalidActionException {
-        if (!isDone) { throw new InvalidActionException("Task already not done!"); }
+        if (!isDone) {
+            throw new InvalidActionException("Task already not done!");
+        }
         isDone = false;
     }
 

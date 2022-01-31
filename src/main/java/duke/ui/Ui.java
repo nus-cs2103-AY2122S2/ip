@@ -1,14 +1,14 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /** Contains functionality relating to the Duke user interface */
 public class Ui {
     private Scanner sc;
-    String logo;
+    private String logo;
 
     /**
      * Creates a new Ui instance.
@@ -95,14 +95,14 @@ public class Ui {
      */
     public String printItems(ArrayList<Task> list) {
         if (list.size() == 0) {
-            return("There are no tasks on your list :O");
+            return "There are no tasks on your list :O";
         }
         StringBuilder s = new StringBuilder();
         s.append("Here are the tasks on your list :O\n");
         for (int i = 1; i <= list.size(); i++) {
             s.append(i);
             s.append(". ");
-            s.append(list.get(i-1));
+            s.append(list.get(i - 1));
             if (i < list.size()) {
                 s.append("\n");
             }
@@ -118,14 +118,14 @@ public class Ui {
      */
     public String printFoundItems(ArrayList<Task> list) {
         if (list.size() == 0) {
-            return("No items found :O");
+            return "No items found :O";
         }
         StringBuilder s = new StringBuilder();
         s.append("Here are the matching tasks on your list :O\n");
         for (int i = 1; i <= list.size(); i++) {
             s.append(i);
             s.append(". ");
-            s.append(list.get(i-1));
+            s.append(list.get(i - 1));
             if (i < list.size()) {
                 s.append("\n");
             }

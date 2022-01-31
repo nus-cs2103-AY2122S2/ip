@@ -1,23 +1,21 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.ui.Parser;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Task;
+import duke.ui.Parser;
+
 /** Manages the storage of data from Duke into a file */
 public class Storage {
-    BufferedReader reader;
-    Path dukePath;
+    private BufferedReader reader;
+    private Path dukePath;
 
     /**
      * Creates a new Storage instance.
