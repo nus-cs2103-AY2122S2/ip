@@ -1,14 +1,13 @@
 package ari.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class StorageTest {
     private static final String NON_EXISTENT_FILE_NAME = "src/test/data/doesNotExistInitially.txt";
@@ -20,6 +19,7 @@ class StorageTest {
         try {
             Files.delete(Paths.get(NON_EXISTENT_FILE_NAME));
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
