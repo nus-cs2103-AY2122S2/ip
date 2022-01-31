@@ -4,6 +4,7 @@ import kenobi.command.AddCommand;
 import kenobi.command.Command;
 import kenobi.command.DeleteCommand;
 import kenobi.command.ExitCommand;
+import kenobi.command.FindCommand;
 import kenobi.command.InvalidCommand;
 import kenobi.command.ListCommand;
 import kenobi.command.MarkCommand;
@@ -26,6 +27,9 @@ public class Parser {
 
         case "list":
             return new ListCommand();
+
+        case "find":
+            return new FindCommand(cmd[1]);
 
         case "mark":
             return new MarkCommand(parseInt(cmd[1]));
@@ -54,8 +58,9 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new ParseException("date");
             }
-        }
 
-        return new InvalidCommand();
+        default:
+            return new InvalidCommand();
+        }
     }
 }

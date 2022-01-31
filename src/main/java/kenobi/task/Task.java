@@ -28,6 +28,10 @@ public abstract class Task {
     return this;
   }
 
+  public boolean hasWord(String term) {
+    return name.contains(term);
+  }
+
   public String formatDate(LocalDate date) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy");
 
