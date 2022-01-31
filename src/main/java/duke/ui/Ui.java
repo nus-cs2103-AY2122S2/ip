@@ -1,13 +1,23 @@
-package duke;
+package duke.ui;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeIoException;
 import duke.util.Printable;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class Ui {
     private static final String SEPARATOR = "\t------------------------------------";
@@ -17,12 +27,23 @@ public class Ui {
     private static final String ERROR_IO = "I had a problem reading / writing my memory!";
 
     private static Ui instance;
-
-    /** Global scanner used by the Ui class. */
-    private final Scanner scanner;
+    private MainWindow mainWindowController;
 
     private Ui() {
-        this.scanner = new Scanner(System.in);
+
+    }
+
+    public void buildStage(Stage stage, Consumer<String> inputHandler) throws DukeIoException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            this.mainWindowController = fxmlLoader.getController();
+            this.mainWindowController.setInputHandler(inputHandler);
+        } catch (IOException e) {
+            throw new DukeIoException("Unable to read MainWindow Layout file");
+        }
     }
 
     /**
@@ -41,16 +62,6 @@ public class Ui {
     }
 
     /**
-     * Reads a line of input from {@link System#in}.
-     * @return Line of input read.
-     */
-    public String readInput() {
-        System.out.println("Enter a Command or New Task:");
-
-        return this.scanner.nextLine();
-    }
-
-    /**
      * Provides a {@link Printable} object that can be printed to.
      * Handles formatting of printed contents, including indentation and surrounding separators.
      * @param action A <code>Function</code> object that accepts the provided {@link Printable} object
@@ -58,11 +69,12 @@ public class Ui {
      * @return <code>Boolean</code> indicating if the application should continue running.
      */
     public boolean printCommand(Function<Printable, Boolean> action) {
-        System.out.println(SEPARATOR);
+        ArrayList<String> lines = new ArrayList<>();
         final boolean isRunning = action.apply((line) -> {
-            System.out.println("\t" + line);
+            lines.add(line);
         });
-        System.out.println(SEPARATOR);
+        String message = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
+        this.mainWindowController.printBotMessage(message);
         return isRunning;
     }
 

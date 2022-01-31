@@ -12,6 +12,7 @@ import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeIoException;
 import duke.testutil.PrinterStub;
+import duke.ui.Ui;
 
 public class UiTest {
     @Test

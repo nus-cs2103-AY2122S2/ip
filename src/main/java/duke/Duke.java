@@ -7,11 +7,10 @@ import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.task.TaskList;
 import duke.ui.MainWindow;
+import duke.ui.Ui;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
@@ -20,10 +19,17 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
     /** Global task list for all operations. */
-    private static TaskList taskList;
+    private TaskList taskList;
+    private MainWindow mainWindowController;
 
     public Duke() {
 
+    }
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+        this.initializeTaskList();
     }
 
     /**
@@ -53,36 +59,32 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Hand off to UI to build stage
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            primaryStage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(this);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Ui.getInstance().buildStage(primaryStage, this::processCommand);
+        } catch (DukeIoException ex) {
+            System.out.println(ex.getMessage());
+            Platform.exit();
         }
+        primaryStage.show();
+        Ui.getInstance().greet();
     }
 
     /**
      * Drives the main application Read-Evaluate-Print Loop.
      */
-    void run() {
-        Ui ui = Ui.getInstance().greet();
+    public void processCommand(String input) {
+        boolean isRunning = Ui.getInstance().printCommand((linePrinter) -> {
+            try {
+                return Parser.parse(input).execute(linePrinter, taskList);
+            } catch (DukeException ex) {
+                Ui.getInstance().printError(linePrinter, ex);
+            }
+            return true;
+        });
 
-        boolean isRunning = true;
-        while (isRunning) {
-            String command = ui.readInput();
-            isRunning = ui.printCommand((linePrinter) -> {
-                try {
-                    return Parser.parse(command).execute(linePrinter, taskList);
-                } catch (DukeException ex) {
-                    ui.printError(linePrinter, ex);
-                }
-                return true;
-            });
-            System.out.println();
+        if (!isRunning) {
+            Platform.exit();
         }
     }
 }

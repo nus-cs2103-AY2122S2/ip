@@ -1,6 +1,11 @@
 package duke.ui;
 
+import java.io.InputStream;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import duke.Duke;
+import duke.exception.DukeIoException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,18 +27,37 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
+    private Consumer<String> inputHandler;
+    private Image userImage;
+    private Image botImage;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        try {
+            userImage = loadAsset("/images/user.png");
+            botImage = loadAsset("/images/bot.png");
+        } catch (DukeIoException ex) {
+            System.out.println("[UI Load Error] Could not load application image");
+        }
+
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setInputHandler(Consumer<String> inputHandler) {
+        this.inputHandler = inputHandler;
+    }
+
+    private Image loadAsset(String assetPath) throws DukeIoException {
+        InputStream resourceStream = MainWindow.class.getResourceAsStream(assetPath);
+        if (resourceStream != null) {
+            return new Image(resourceStream);
+        }
+        throw new DukeIoException("Failed to load UI asset image");
+    }
+
+    public void printBotMessage(String message) {
+        dialogContainer.getChildren().add(DialogBox.getBotDialog(message, botImage));
     }
 
     /**
@@ -42,12 +66,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        // String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBotDialog("Bot Reply", dukeImage)
-        );
+        String input = this.userInput.getText();
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         userInput.clear();
+
+        this.inputHandler.accept(input);
     }
 }
