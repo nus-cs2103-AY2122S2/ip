@@ -5,10 +5,9 @@ package chatcat.util;
  */
 public class UI {
 
-    public UI() { }
-
     public void showWelcomeSMS() {
-        String welcome = "Hello! I'm ChatCat\n" + "What can I do for you?\n";
+        String welcome = "Hello! I'm ChatCat\n"
+                + "What can I do for you?\n";
         System.out.println(welcome);
     }
 

@@ -1,7 +1,10 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import chatcat.tasklist.TaskList;
 import chatcat.util.Parser;
 import chatcat.util.UI;
-import java.io.*;
 
 public class ChatCat {
     public static void main(String[] args) throws IOException {

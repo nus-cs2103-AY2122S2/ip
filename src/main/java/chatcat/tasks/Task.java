@@ -1,6 +1,7 @@
 package chatcat.tasks;
 
 import java.io.Serializable;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
@@ -44,7 +45,7 @@ public class Task implements Serializable {
      * @return string representing status of task {@code Task}.
      */
     public String getStatus() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[ ]");
     }
 
     /**
