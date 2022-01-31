@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -34,18 +34,7 @@ public class Duke {
             this.storage = new Storage(filename);
             this.taskList = storage.getData();
         } catch (IOException e) {
-            File newFile = new File("data/");
-            if (!newFile.exists()) {
-                newFile.mkdir();
-            }
-            newFile = new File(filename);
-            try {
-                newFile.createNewFile();
-                this.storage = new Storage(filename);
-                this.taskList = storage.getData();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            System.out.println(e.getMessage());
         }
     }
 
@@ -72,6 +61,6 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("src/main/java/data/duke.txt").run();
     }
 }
