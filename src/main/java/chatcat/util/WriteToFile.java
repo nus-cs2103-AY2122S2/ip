@@ -1,6 +1,6 @@
-package duke.util;
+package chatcat.util;
 
-import duke.tasks.Task;
+import chatcat.tasks.Task;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

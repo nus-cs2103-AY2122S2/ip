@@ -1,8 +1,8 @@
-package duke.util;
+package chatcat.util;
 
-import duke.tasklist.TaskList;
+import chatcat.tasklist.TaskList;
 
-import duke.dukeexception.DukeException;
+import chatcat.chatcatexception.ChatCatException;
 
 public class Parser {
 
@@ -42,9 +42,9 @@ public class Parser {
                     taskList.delete(input);
                     break;
                 default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
+                    throw new ChatCatException("OOPS!!! I'm sorry, but I don't know what that means");
             }
-        } catch (DukeException wrf) {
+        } catch (ChatCatException wrf) {
             wrf.printStackTrace();
         }
     }

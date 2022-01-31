@@ -1,9 +1,9 @@
-import duke.tasklist.TaskList;
-import duke.util.Parser;
-import duke.util.UI;
+import chatcat.tasklist.TaskList;
+import chatcat.util.Parser;
+import chatcat.util.UI;
 import java.io.*;
 
-public class Duke {
+public class ChatCat {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

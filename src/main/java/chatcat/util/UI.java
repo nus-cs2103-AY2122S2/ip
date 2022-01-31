@@ -1,4 +1,4 @@
-package duke.util;
+package chatcat.util;
 
 /**
  * Handles outputs to interact with user

@@ -1,4 +1,4 @@
-package duke.tasks;
+package chatcat.tasks;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
