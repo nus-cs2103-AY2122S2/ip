@@ -1,8 +1,10 @@
+package kenobi.util;
+
+import kenobi.task.Task;
 import java.util.ArrayList;
 
-class TaskList extends ArrayList<Task> {
-    public TaskList() { }
 
+public class TaskList extends ArrayList<Task> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
