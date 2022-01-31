@@ -44,23 +44,23 @@ public class Parser {
             return new AddCommand(cmd[1]);
 
         case "deadline":
-            try {
-                fields = cmd[1].split(" /by ");
-                return new AddCommand(Task.Type.DEADLINE, fields[0], LocalDate.parse(fields[1]));
-            } catch (DateTimeParseException e) {
-                throw new ParseException("date");
-            }
+            fields = cmd[1].split(" /by ");
+            return new AddCommand(Task.Type.DEADLINE, fields[0], parseDate(fields[1]));
 
         case "event":
-            try{
-                fields = cmd[1].split(" /at ");
-                return new AddCommand(Task.Type.EVENT, fields[0], LocalDate.parse(fields[1]));
-            } catch (DateTimeParseException e) {
-                throw new ParseException("date");
-            }
+            fields = cmd[1].split(" /at ");
+            return new AddCommand(Task.Type.EVENT, fields[0], parseDate(fields[1]));
 
         default:
             return new InvalidCommand();
+        }
+    }
+
+    private static LocalDate parseDate(String str) throws ParseException {
+        try {
+            return LocalDate.parse(str);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("date: " + str);
         }
     }
 }

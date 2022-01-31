@@ -3,6 +3,7 @@ package kenobi.util;
 import kenobi.task.Deadline;
 import kenobi.task.Event;
 import kenobi.task.Task;
+import kenobi.task.TaskException;
 import kenobi.task.ToDo;
 
 import java.io.BufferedWriter;
@@ -49,7 +50,10 @@ public class Storage {
                 tasks.add(t);
             }
         } catch (IOException e) {
-            System.out.println("Kenobi could not read the save files");
+            System.out.println("WARNING: Kenobi could not load the save files");
+        } catch (TaskException e) {
+            System.out.println("WARNING: The save files may have been corrupted");
+            tasks.clear();
         }
 
         return tasks;

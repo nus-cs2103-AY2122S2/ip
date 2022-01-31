@@ -13,7 +13,11 @@ public abstract class Task {
     TODO,
   }
 
-  public Task(String name) {
+  public Task(String name) throws TaskException {
+    if (name.matches("[\\s]*")) {
+      throw new TaskException("Task Description");
+    }
+
     this.name = name;
     this.isDone = false;
   }
