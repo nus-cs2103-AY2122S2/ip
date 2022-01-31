@@ -1,6 +1,6 @@
-package duke.util;
+package kenobi.util;
 
-import duke.task.Task;
+import kenobi.task.Task;
 import java.util.ArrayList;
 
 

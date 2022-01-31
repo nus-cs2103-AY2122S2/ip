@@ -1,4 +1,4 @@
-package duke.command;
+package kenobi.command;
 
 public class ListCommand extends Command {
     @Override

@@ -1,4 +1,4 @@
-package duke.command;
+package kenobi.command;
 
 public class ExitCommand extends Command {
     @Override

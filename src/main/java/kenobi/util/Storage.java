@@ -1,14 +1,15 @@
-package duke.util;
+package kenobi.util;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import kenobi.task.Deadline;
+import kenobi.task.Event;
+import kenobi.task.Task;
+import kenobi.task.ToDo;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
@@ -36,9 +37,9 @@ public class Storage {
                 if (taskString[0].equals("T")) {
                     t = new ToDo(taskString[2]);
                 } else if (taskString[0].equals("D")) {
-                    t = new Deadline(taskString[2], taskString[3]);
+                    t = new Deadline(taskString[2], LocalDate.parse(taskString[3]));
                 } else { // "E"
-                    t = new Event(taskString[2], taskString[3]);
+                    t = new Event(taskString[2], LocalDate.parse(taskString[3]));
                 }
 
                 if (taskString[1].equals("1")) {
