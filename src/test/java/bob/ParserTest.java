@@ -1,48 +1,54 @@
 package bob;
 
-import bob.command.*;
-import bob.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import bob.command.DeadlineCommand;
+import bob.command.DeleteCommand;
+import bob.command.EventCommand;
+import bob.command.ListCommand;
+import bob.command.MarkCommand;
+import bob.command.ToDoCommand;
+import bob.exception.DeadlineException;
+import bob.exception.EventException;
+import bob.exception.InvalidCommandException;
+import bob.exception.ToDoException;
+
+
 
 
 class ParserTest {
     @Test
     public void parse() {
-        String ToDoInput = "todo feed the dogs";
-        assertTrue(Parser.parse(ToDoInput) instanceof ToDoCommand);
-        String DeadlineInput = "deadline homework /by 2022-01-31T23:59";
-        assertTrue(Parser.parse(DeadlineInput) instanceof DeadlineCommand);
-        String EventInput = "Event seminar /at 2022-01-31T22:59-23:59";
-        assertTrue(Parser.parse(EventInput) instanceof EventCommand);
-        String MarkInput = "mark 1";
-        assertTrue(Parser.parse(MarkInput) instanceof MarkCommand);
-        String DeleteInput = "delete 1";
-        assertTrue(Parser.parse(DeleteInput) instanceof DeleteCommand);
-        String ListInput = "list";
-        assertTrue(Parser.parse(ListInput) instanceof ListCommand);
+        String toDoInput = "todo feed the dogs";
+        assertTrue(Parser.parse(toDoInput) instanceof ToDoCommand);
+        String deadlineInput = "deadline homework /by 2022-01-31T23:59";
+        assertTrue(Parser.parse(deadlineInput) instanceof DeadlineCommand);
+        String eventInput = "Event seminar /at 2022-01-31T22:59-23:59";
+        assertTrue(Parser.parse(eventInput) instanceof EventCommand);
+        String markInput = "mark 1";
+        assertTrue(Parser.parse(markInput) instanceof MarkCommand);
+        String deleteInput = "delete 1";
+        assertTrue(Parser.parse(deleteInput) instanceof DeleteCommand);
+        String listInput = "list";
+        assertTrue(Parser.parse(listInput) instanceof ListCommand);
     }
 
     @Test
     public void parse_exceptionThrown() {
-        String ToDoInput = "todo";
-        assertThrows(ToDoException.class,
-                () -> Parser.parse(ToDoInput));
-        String DeadlineInput = "deadline homework /by invalid date";
-        assertThrows(DeadlineException.class,
-                () -> Parser.parse(DeadlineInput));
-        String EventInput = "Event seminar /at invalid date";
-        assertThrows(EventException.class,
-                () -> Parser.parse(EventInput));
-        String MarkInput = "mark one";
-        assertThrows(InvalidCommandException.class,
-                () -> Parser.parse(MarkInput));
-        String DeleteInput = "delete two";
-        assertThrows(InvalidCommandException.class,
-                () -> Parser.parse(DeleteInput));
+        String toDoInput = "todo";
+        assertThrows(ToDoException.class, () -> Parser.parse(toDoInput));
+        String deadlineInput = "deadline homework /by invalid date";
+        assertThrows(DeadlineException.class, () -> Parser.parse(deadlineInput));
+        String eventInput = "Event seminar /at invalid date";
+        assertThrows(EventException.class, () -> Parser.parse(eventInput));
+        String markInput = "mark one";
+        assertThrows(InvalidCommandException.class, () -> Parser.parse(markInput));
+        String deleteInput = "delete two";
+        assertThrows(InvalidCommandException.class, () -> Parser.parse(deleteInput));
         String emptyInput = "invalid command";
-        assertThrows(InvalidCommandException.class,
-                () -> Parser.parse(emptyInput));
+        assertThrows(InvalidCommandException.class, () -> Parser.parse(emptyInput));
     }
 }
