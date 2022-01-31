@@ -10,4 +10,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D]%s(by: %s)", super.toString(), dueBy);
     }
+
+    @Override
+    public String toStorageString() {
+        return String.format("D#%s#%s#%s", this.getStatusIcon(), this.description, this.dueBy);
+    }
 }

@@ -8,4 +8,9 @@ public class Todo extends Task{
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    public String toStorageString() {
+        return String.format("T#%s#%s", this.getStatusIcon(), this.description);
+    }
 }

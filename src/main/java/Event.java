@@ -10,4 +10,9 @@ public class Event extends Task{
     public String toString() {
         return String.format("[E]%s(at: %s)", super.toString(), setAt);
     }
+
+    @Override
+    public String toStorageString() {
+        return String.format("E#%s#%s#%s", this.getStatusIcon(), this.description, this.setAt);
+    }
 }
