@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    ArrayList<Task> taskList;
+    ArrayList<Task> tasks;
 
     private Duke() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     private void printTask(Task curr) {
@@ -13,11 +13,11 @@ public class Duke {
     }
 
     private void printNoOfTasks() {
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
     private void processNewTask(Task curr) {
-        taskList.add(curr);
+        tasks.add(curr);
         printTask(curr);
         printNoOfTasks();
     }
@@ -45,17 +45,17 @@ public class Duke {
             } else if (command.matches(".*\\blist\\b.*")) {
                 System.out.println(bar);
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= taskList.size(); i++) {
-                    Task curr = taskList.get(i - 1);
+                for (int i = 1; i <= tasks.size(); i++) {
+                    Task curr = tasks.get(i - 1);
                     System.out.print(i + ".");
                     printTask(curr);
                 }
                 System.out.println(bar);
             } else if (command.matches(".*\\bmark\\b.*")) {
                 int number = Integer.parseInt(inputArray[1]);
-                Task curr = taskList.get(number - 1);
+                Task curr = tasks.get(number - 1);
 
-                curr.markAsDone();
+                curr.setDone();
                 System.out.println(bar);
                 System.out.println("Nice! I've marked this task as done:");
                 printTask(curr);
@@ -63,9 +63,9 @@ public class Duke {
 
             } else if (command.matches(".*\\bunmark\\b.*")) {
                 int number = Integer.parseInt(inputArray[1]);
-                Task curr = taskList.get(number - 1);
+                Task curr = tasks.get(number - 1);
 
-                curr.markAsUndone();
+                curr.setUndone();
                 System.out.println(bar);
                 System.out.println("OK, I've marked this task as not done yet:");
                 printTask(curr);
@@ -107,7 +107,7 @@ public class Duke {
                 int number = Integer.parseInt(inputArray[1]);
 
                 try {
-                    if (((number) <= 0) || ((number) > taskList.size())) {
+                    if (((number) <= 0) || ((number) > tasks.size())) {
                         throw new DukeException("Hey! That item does not exist!");
                     }
                 } catch (DukeException e) {
@@ -116,9 +116,9 @@ public class Duke {
                     continue;
                 }
 
-                Task curr = taskList.get(number - 1);
+                Task curr = tasks.get(number - 1);
                 String message = curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr;
-                taskList.remove(curr);
+                tasks.remove(curr);
 
                 System.out.println(bar);
                 System.out.println("Noted. I've removed this task: ");

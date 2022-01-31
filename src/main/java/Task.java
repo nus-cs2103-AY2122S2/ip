@@ -15,12 +15,12 @@ public class Task {
         return description;
     }
 
-    public String markAsDone() {
+    public String setDone() {
         this.isDone = true;
         return this.description + " is done!";
     }
 
-    public String markAsUndone() {
+    public String setUndone() {
         this.isDone = false;
         return this.description + " is undone!";
     }
