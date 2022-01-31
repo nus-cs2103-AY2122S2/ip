@@ -1,9 +1,11 @@
-package duke.task;
+package kenobi.task;
+
+import java.time.LocalDate;
 
 public class Deadline extends Task {
-  private String by;
+  private LocalDate by;
 
-  public Deadline(String name, String by) {
+  public Deadline(String name, LocalDate by) {
     super(name);
     this.by = by;
   }
@@ -20,6 +22,6 @@ public class Deadline extends Task {
 
   @Override
   public String toString() {
-    return String.format("[D]%s (by: %s)", super.toString(), this.by);
+    return String.format("[D]%s (by: %s)", super.toString(), formatDate(by));
   }
 }

@@ -1,6 +1,6 @@
-package duke.command;
+package kenobi.command;
 
-import duke.task.Task;
+import kenobi.task.Task;
 
 public class DeleteCommand extends Command {
     private int toDeleteIndex;

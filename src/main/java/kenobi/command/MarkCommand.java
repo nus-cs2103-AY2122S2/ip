@@ -1,6 +1,6 @@
-package duke.command;
+package kenobi.command;
 
-import duke.task.Task;
+import kenobi.task.Task;
 
 public class MarkCommand extends Command {
     int toMarkIndex;

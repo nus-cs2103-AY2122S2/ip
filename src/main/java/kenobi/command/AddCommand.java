@@ -1,9 +1,11 @@
-package duke.command;
+package kenobi.command;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import kenobi.task.Deadline;
+import kenobi.task.Event;
+import kenobi.task.Task;
+import kenobi.task.ToDo;
+
+import java.time.LocalDate;
 
 public class AddCommand extends Command {
     private final Task toAdd;
@@ -12,11 +14,11 @@ public class AddCommand extends Command {
         toAdd = new ToDo(name);
     }
 
-    public AddCommand(Task.Type type, String name, String details) {
+    public AddCommand(Task.Type type, String name, LocalDate date) {
         if (type.equals(Task.Type.DEADLINE)) {
-            toAdd = new Deadline(name, details);
+            toAdd = new Deadline(name, date);
         } else {
-            toAdd = new Event(name, details);
+            toAdd = new Event(name, date);
         }
     }
 

@@ -1,9 +1,11 @@
-package duke.task;
+package kenobi.task;
+
+import java.time.LocalDate;
 
 public class Event extends Task {
-  private String at;
+  private LocalDate at;
 
-  public Event(String name, String at) {
+  public Event(String name, LocalDate at) {
     super(name);
     this.at = at;
   }
@@ -21,6 +23,6 @@ public class Event extends Task {
 
   @Override
   public String toString() {
-    return String.format("[E]%s (at: %s)", super.toString(), this.at);
+    return String.format("[E]%s (at: %s)", super.toString(), formatDate(this.at));
   }
 }

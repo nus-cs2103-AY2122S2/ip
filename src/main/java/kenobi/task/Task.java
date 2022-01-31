@@ -1,4 +1,7 @@
-package duke.task;
+package kenobi.task;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
   protected final String name;
@@ -23,6 +26,12 @@ public abstract class Task {
   public Task undone() {
     isDone = false;
     return this;
+  }
+
+  public String formatDate(LocalDate date) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy");
+
+    return date.format(formatter);
   }
 
   public abstract Type type();

@@ -1,6 +1,6 @@
-package duke.command;
+package kenobi.command;
 
-import duke.util.TaskList;
+import kenobi.util.TaskList;
 
 public abstract class Command {
     protected TaskList tasks;
