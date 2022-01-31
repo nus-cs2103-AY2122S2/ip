@@ -1,6 +1,0 @@
-T|1|gijsagj
-D|0|eat|null
-E|0|run|2019-01-01
-T|0|gje
-T|1|eat book
-D|0|eat book reee|2012-01-20
