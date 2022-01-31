@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  * The exception when no index number is entered when the command needs one.
  */
-public final class EmptyNumber extends DukeExceptions{
+public final class EmptyNumber extends DukeExceptions {
     private EmptyNumber(String s) {
         super(s);
     }

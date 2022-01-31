@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  * The exception for when no date is entered for commands that requires dates.
  */
-public final class EmptyDate extends DukeExceptions{
+public final class EmptyDate extends DukeExceptions {
     private EmptyDate(String s) {
         super(s);
     }

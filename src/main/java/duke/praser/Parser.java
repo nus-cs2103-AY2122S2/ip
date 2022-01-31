@@ -3,6 +3,9 @@ package duke.praser;
 import duke.command.Command;
 import duke.dukeexceptions.InvalidCommand;
 
+/**
+ * The parser object make sures that the command entered by the user is correct.
+ */
 public class Parser {
     public static Command parse(String userInput) throws InvalidCommand {
         String command;

@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  * The exception when the command entered by the user is not valid.
  */
-public abstract class InvalidCommand extends DukeExceptions{
+public abstract class InvalidCommand extends DukeExceptions {
     protected InvalidCommand(String s) {
         super(s);
     }

@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  * Thrown when the user did not enter the keyword when the command requires one.
  */
-public class EmptyKeyword extends DukeExceptions{
+public class EmptyKeyword extends DukeExceptions {
     /**
      * Creates a new EmptyKeyword exception.
      */
