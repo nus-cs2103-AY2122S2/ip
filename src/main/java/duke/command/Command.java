@@ -34,6 +34,8 @@ public abstract class Command{
             return new EventCommand(parameter);
         } else if (command.equals("DELETE")) {
             return new DeleteCommand(parameter);
+        } else if (command.equals("FIND")) {
+            return new FindCommand(parameter);
         } else {
             throw InvalidCommand.createInvalidCommand(command);
         }
@@ -214,5 +216,33 @@ class DeleteCommand extends Command {
             e.printStackTrace();
         }
 
+    }
+}
+
+/**
+ * Finds all the tasks in the task list that contain the keyword entered by the user.
+ */
+class FindCommand extends Command {
+    /**
+     * Creates a new FindCommand object.
+     *
+     * @param parameter The parameter of the command entered by the user.
+     */
+    protected FindCommand(String parameter) {
+        super(parameter);
+    }
+
+    @Override
+    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+        // Check if the user did not enter a keyword, then throw the EmptyKeyword exception.
+        if (parameter.isBlank()) {
+            throw new EmptyKeyword();
+        }
+
+        // Gets a new task list which the tasks that contains the keyword.
+        TaskList filteredTaskList = taskList.findTasksFromKeyword(parameter);
+
+        // Gets the UI to show the filtered task list.
+        ui.showFilteredTaskListDisplay(parameter, filteredTaskList);
     }
 }

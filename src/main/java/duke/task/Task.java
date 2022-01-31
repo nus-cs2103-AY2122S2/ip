@@ -27,6 +27,15 @@ public abstract class Task {
 
     public abstract String updateIntoDatabase();
 
+    /**
+     * Get the task name of the task.
+     *
+     * @return The name of the task.
+     */
+    public String getTaskName() {
+        return taskName;
+    }
+
     public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
         type = type.toUpperCase();
         if (type.equals("TODO")) {

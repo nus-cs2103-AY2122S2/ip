@@ -7,6 +7,7 @@ import duke.praser.Praser;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.uicomponents.*;
+import duke.uicomponents.FilteredTaskListDisplay;
 
 public class Ui {
     Menu menu;
@@ -17,6 +18,7 @@ public class Ui {
     UnmarkedTaskDisplay unmarkedTaskDisplay;
     NewTaskDisplay newTaskDisplay;
     DeleteTaskDisplay deleteTaskDisplay;
+    private FilteredTaskListDisplay filteredTaskListDisplay;
 
     public Ui() {
         this.menu = new Menu();
@@ -27,6 +29,7 @@ public class Ui {
         this.newTaskDisplay = new NewTaskDisplay();
         this.deleteTaskDisplay = new DeleteTaskDisplay();
         this.errorMenu = new ErrorMenu();
+        filteredTaskListDisplay = new FilteredTaskListDisplay();
     }
 
     public void showMenu() {
@@ -63,5 +66,15 @@ public class Ui {
 
     public void showDeleteTaskDisplay(String task, TaskList taskList) {
         this.deleteTaskDisplay.run(task, taskList);
+    }
+
+    /**
+     * Shows the filtered task list which contains the keyword.
+     *
+     * @param keyword The keyword.
+     * @param filteredTaskList The task list which contains the tasks that have the keyword.
+     */
+    public void showFilteredTaskListDisplay(String keyword, TaskList filteredTaskList) {
+        filteredTaskListDisplay.run(keyword, filteredTaskList);
     }
 }

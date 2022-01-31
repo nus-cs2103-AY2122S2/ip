@@ -3,6 +3,8 @@ package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> taskList;
@@ -57,5 +59,27 @@ public class TaskList {
             result = result + task.updateIntoDatabase();
         }
         return result;
+    }
+
+    /**
+     * Returns a task list with all tasks that contains the keyword.
+     *
+     * @param keyword The keyword to be searched.
+     * @return A new task list with the tasks containing the keyword.
+     */
+    public TaskList findTasksFromKeyword(String keyword) {
+        TaskList filteredTaskList = new TaskList();
+
+        // Gets all the tasks that contains the keyword.
+        List<Task> filteredArrayList = taskList.stream()
+                .filter(task -> task.getTaskName().contains(keyword))
+                .collect(Collectors.toList());
+
+        // Puts all the tasks in the filteredArrayList into the new Task List.
+        for (Task task: filteredArrayList) {
+            filteredTaskList.addTask(task);
+        }
+
+        return filteredTaskList;
     }
 }
