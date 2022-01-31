@@ -1,7 +1,8 @@
 package tasks;
 
+import util.DateFormatter;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -18,6 +19,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return " [D]" + super.toString() + "\t (by " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return " [D]" + super.toString() + "\t (by " + DateFormatter.formatDateInLongForm(deadline) + ")";
     }
 }

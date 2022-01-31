@@ -1,3 +1,5 @@
+package commands;
+
 import java.util.Scanner;
 
 import tasks.Deadline;
@@ -42,7 +44,7 @@ public class Command {
         case "mark":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: mark task-number");
+                System.out.println(" commands.Command format: mark task-number");
                 break;
             }
             System.out.println(" Well done!");
@@ -51,7 +53,7 @@ public class Command {
         case "unmark":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: unmark task-number");
+                System.out.println(" commands.Command format: unmark task-number");
                 break;
             }
             System.out.println(" Oops! Fixed that for you.");
@@ -72,7 +74,7 @@ public class Command {
         case "delete":
             if (argument == null) {
                 System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: delete task-number");
+                System.out.println(" commands.Command format: delete task-number");
                 break;
             }
             System.out.println(" Okay, I've deleted this task.");

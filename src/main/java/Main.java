@@ -1,9 +1,23 @@
+import commands.Command;
 import tasks.Task;
 
 import java.util.Scanner;
 
-public class Heylo {
+public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Task.getSavedTasks();
+        greet();
+
+        while (true) {
+            String input = sc.nextLine();
+            Command cmd = new Command(input);
+            cmd.run(sc);
+        }
+    }
+
+    public static void greet() {
         String logo =
                 " _   _                  _\n" +
                         "| | | |   ___   _   _  | |   ___\n" +
@@ -12,17 +26,7 @@ public class Heylo {
                         "|_| |_|  \\___|  \\__, | |_|  \\___/\n" +
                         "                |___/\n";
 
-        Task.getSavedTasks();
-
         System.out.println(logo);
         System.out.println("Heylo! What can I do for you today? :)\n");
-
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            String input = sc.nextLine();
-            Command cmd = new Command(input);
-            cmd.run(sc);
-        }
     }
 }

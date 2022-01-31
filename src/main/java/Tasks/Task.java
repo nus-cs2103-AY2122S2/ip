@@ -33,7 +33,7 @@ public abstract class Task {
     public static void addToList(Task task) {
         if (task.description == null) {
             System.out.println(" Please enter the description as well!");
-            System.out.println(" Command format: task-type task-description /by task-duration OR /at task-deadline");
+            System.out.println(" commands.Command format: task-type task-description /by task-duration OR /at task-deadline");
             return;
         }
 
@@ -41,7 +41,7 @@ public abstract class Task {
             Event event = (Event) task;
             if (event.duration == null) {
                 System.out.println(" Please enter the duration as well!");
-                System.out.println(" Command format: task-type task-description /by YYYY-MM-DD");
+                System.out.println(" commands.Command format: task-type task-description /by YYYY-MM-DD");
                 return;
             }
         }
@@ -50,7 +50,7 @@ public abstract class Task {
             Deadline taskWithDeadline = (Deadline) task;
             if (taskWithDeadline.deadline == null) {
                 System.out.println(" Please enter the deadline as well!");
-                System.out.println(" Command format: task-type task-description /at YYYY-MM-DD");
+                System.out.println(" commands.Command format: task-type task-description /at YYYY-MM-DD");
                 return;
             }
         }

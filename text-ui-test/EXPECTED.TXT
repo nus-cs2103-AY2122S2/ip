@@ -51,19 +51,19 @@ __________________________________________________________
  Sorry, I don't understand what that means.
 __________________________________________________________
  Please enter the description as well!
- Command format: task-type task-description /by task-duration OR /at task-deadline
+ commands.Command format: task-type task-description /by task-duration OR /at task-deadline
 __________________________________________________________
  Please enter the duration as well!
- Command format: task-type task-description /by task-duration
+ commands.Command format: task-type task-description /by task-duration
 __________________________________________________________
  Please enter the deadline as well!
- Command format: task-type task-description /at task-deadline
+ commands.Command format: task-type task-description /at task-deadline
 __________________________________________________________
  Please enter the task number as well!
- Command format: mark task-number
+ commands.Command format: mark task-number
 __________________________________________________________
  Please enter the task number as well!
- Command format: unmark task-number
+ commands.Command format: unmark task-number
 __________________________________________________________
  Okay, I've deleted this task.
    [D][ ] return book 	 (by Sunday)
