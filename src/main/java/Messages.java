@@ -37,6 +37,10 @@ public class Messages {
 
     public static final String DELETE_SUCCESS = "Noted. I've removed this task:";
 
+    public static final String SAVE_ERROR = "Error saving file";
+
+    public static final String LIST_MSG = "Here are the tasks in your list:";
+
     public static final String OUT_OF_BOUNDS_MSG (int taskNumber) {
         return String.format("The task %d does not exist!", taskNumber);
     }

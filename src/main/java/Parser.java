@@ -1,7 +1,15 @@
-import java.io.IOException;
 
 public class Parser {
 
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+
+    public Parser(Ui ui, Storage storage, TaskList tasks) {
+        this.ui = ui;
+        this.storage = storage;
+        this.tasks = tasks;
+    }
 
     public static Command parse(String input) {
 
@@ -32,4 +40,18 @@ public class Parser {
             return new InvalidCommand();
         }
     }
+
+//    public String parseTodo(String input) {
+//
+//        try {
+//            String[] todoArr = input.split("\\s", 2);
+//            if (todoArr.length <= 1) {
+//                throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
+//            }
+//            tasks.add(new Todo(todoArr[1].trim()));
+//            tasks.printTaskAdded();
+//        } catch (InvalidArgumentException e) {
+//            ui.showError(e.getMessage());
+//        }
+//    }
 }

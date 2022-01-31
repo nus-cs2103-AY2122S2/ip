@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Ui {
     Scanner scanner;
 
-    public Ui() {
+    public Ui(TaskList tasks) {
         this.scanner = new Scanner(System.in);
     }
 
@@ -42,6 +42,16 @@ public class Ui {
 
     public void print(String message) {
         System.out.println(message);
+    }
+
+    public void printTaskCount(TaskList tasks) {
+        print(String.format("Now you have %d task(s) in your list.", tasks.getSize()));
+    }
+
+    public void printTaskAdded(TaskList tasks) {
+        print("Got it. I've added this task:");
+        print(tasks.get(tasks.getSize() - 1).toString());
+        printTaskCount(tasks);
     }
 
     public void showError(String message) {

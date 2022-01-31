@@ -12,7 +12,6 @@ public class AddCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
             switch (action) {
                 case TODO:
                     try {
@@ -21,9 +20,12 @@ public class AddCommand extends Command {
                             throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
                         }
                         tasks.add(new Todo(todoArr[1].trim()));
-                        tasks.printTaskAdded();
+                        ui.printTaskAdded(tasks);
+                        storage.save(tasks);
                     } catch (InvalidArgumentException e) {
                         ui.showError(e.getMessage());
+                    } catch (IOException e) {
+                        ui.showError(Messages.SAVE_ERROR);
                     } finally {
                         break;
                     }
@@ -40,11 +42,14 @@ public class AddCommand extends Command {
                         }
                         String description = deadlineSplit[1].trim();
                         tasks.add(new Deadline(description, deadlineArr[1].trim()));
-                        tasks.printTaskAdded();
+                        ui.printTaskAdded(tasks);
+                        storage.save(tasks);
                     } catch (InvalidArgumentException e) {
                         ui.showError(e.getMessage());
                     } catch (DateTimeParseException e) {
                         ui.showError(Messages.UNKNOWN_DATETIME);
+                    } catch (IOException e) {
+                        ui.showError(Messages.SAVE_ERROR);
                     } finally {
                         break;
                     }
@@ -61,16 +66,15 @@ public class AddCommand extends Command {
                         }
                         String description = eventSplit[1].trim();
                         tasks.add(new Event(description, eventArr[1].trim()));
-                        tasks.printTaskAdded();
+                        ui.printTaskAdded(tasks);
+                        storage.save(tasks);
                     } catch (InvalidArgumentException e) {
                         ui.showError(e.getMessage());
+                    } catch (IOException e) {
+                        ui.showError(Messages.SAVE_ERROR);
                     } finally {
                         break;
                     }
             }
-            storage.save(tasks);
-        } catch(IOException e) {
-            ui.showError(e.getMessage());
-        }
     }
 }

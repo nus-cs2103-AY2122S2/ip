@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
             ui.print(Messages.DELETE_SUCCESS);
             ui.print(tasks.getTaskStatement(taskNumber - 1));
             tasks.remove(taskNumber - 1);
-            tasks.printTaskCount();
+            ui.printTaskCount(tasks);
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             ui.showError(e.getMessage());

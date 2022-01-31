@@ -28,16 +28,6 @@ public class TaskList {
         this.tasks.remove(i);
     }
 
-    public void printTaskCount() {
-        System.out.println(String.format("Now you have %d task(s) in your list.", this.getSize()));
-    }
-
-    public void printTaskAdded() {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(this.get(this.getSize() - 1).toString());
-        printTaskCount();
-    }
-
     public String getTaskStatement(int i) {
         return this.get(i).toString();
     }
