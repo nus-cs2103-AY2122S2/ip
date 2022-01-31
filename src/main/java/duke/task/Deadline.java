@@ -17,6 +17,6 @@ public class Deadline extends TaskWithDateTime {
 
     @Override
     public String writeToFile() {
-        return "D | " + super.writeToFile() + " | " + by;
+        return "D | " + super.writeToFile();
     }
 }

@@ -16,8 +16,8 @@ public class TaskWithDateTime extends Task {
     public TaskWithDateTime(String description, String dateTime) {
         super(description);
 
-        String temp = dateTime;
-        this.dateTime = dateTime;
+        String temp = dateTime.trim();
+        this.dateTime = dateTime.trim();
 
         //extract date, if any
         String regexDate = "\\d{4}[-|/.]\\d{2}[-|/.]\\d{2}";
@@ -56,5 +56,10 @@ public class TaskWithDateTime extends Task {
     @Override
     public String toString() {
         return super.toString() + " (at: " + dateTime.trim() + ")";
+    }
+
+    @Override
+    public String writeToFile() {
+        return super.writeToFile() + " | " + dateTime.trim();
     }
 }

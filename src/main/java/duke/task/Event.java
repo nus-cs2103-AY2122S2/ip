@@ -15,6 +15,6 @@ public class Event extends TaskWithDateTime {
 
     @Override
     public String writeToFile() {
-        return "E | " + super.writeToFile() + " | " + at;
+        return "E | " + super.writeToFile();
     }
 }
