@@ -1,12 +1,7 @@
 package duke.command;
 
-import duke.Ui;
-import duke.exception.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TodoTask;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,8 +9,14 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 public class DeleteCommandTest {
     @Test
@@ -35,21 +36,21 @@ public class DeleteCommandTest {
             new DeleteCommand("2").execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Noted. I've removed this task:\n" +
-                    "       [T][ ] Test Title 1\n" +
-                    "     Now you have 3 tasks in the list.\n" +
-                    "    ____________________________________________________________\n\n" +
-                    "    ____________________________________________________________\n" +
-                    "     Noted. I've removed this task:\n" +
-                    "       [D][ ] Test Title 3 (by: 2022-01-01 11:11)\n" +
-                    "     Now you have 2 tasks in the list.\n" +
-                    "    ____________________________________________________________\n\n" +
-                    "    ____________________________________________________________\n" +
-                    "     Noted. I've removed this task:\n" +
-                    "       [E][ ] Test Title 4 (at: 2022-01-01 11:11)\n" +
-                    "     Now you have 1 task in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Noted. I've removed this task:\n"
+                    + "       [T][ ] Test Title 1\n"
+                    + "     Now you have 3 tasks in the list.\n"
+                    + "    ____________________________________________________________\n\n"
+                    + "    ____________________________________________________________\n"
+                    + "     Noted. I've removed this task:\n"
+                    + "       [D][ ] Test Title 3 (by: 2022-01-01 11:11)\n"
+                    + "     Now you have 2 tasks in the list.\n"
+                    + "    ____________________________________________________________\n\n"
+                    + "    ____________________________________________________________\n"
+                    + "     Noted. I've removed this task:\n"
+                    + "       [E][ ] Test Title 4 (at: 2022-01-01 11:11)\n"
+                    + "     Now you have 1 task in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
 
         } catch (DukeException | IOException e) {
             fail();

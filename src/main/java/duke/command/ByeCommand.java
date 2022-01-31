@@ -1,8 +1,9 @@
 package duke.command;
 
 import java.util.List;
-import duke.task.Task;
+
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Command invoked to exit the program.

@@ -1,11 +1,11 @@
 package duke.command;
 
 import java.util.List;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.Ui;
 
 import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class MarkCommand extends Command {
     private static final String MESSAGE_MARK = "Nice! I've marked this task as done:";
@@ -13,10 +13,10 @@ public class MarkCommand extends Command {
 
     private static final String ERROR_EMPTY_MARK = "OOPS!!! Task to mark cannot be empty:(";
     private static final String ERROR_EMPTY_UNMARK = "OOPS!!! Task to unmark cannot be empty:(";
-    private static final String ERROR_INVALID_MARK = "OOPS!!! Invalid task number, " +
-            "please select a valid task to mark using the task's number";
-    private static final String ERROR_INVALID_UNMARK = "OOPS!!! Invalid task number, " +
-            "please select a valid task to unmark using the task's number";
+    private static final String ERROR_INVALID_MARK = "OOPS!!! Invalid task number, "
+            + "please select a valid task to mark using the task's number";
+    private static final String ERROR_INVALID_UNMARK = "OOPS!!! Invalid task number, "
+            + "please select a valid task to unmark using the task's number";
 
     private int taskNumber;
     private boolean toMark;

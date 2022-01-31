@@ -1,9 +1,9 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTaskTest {
     @Test
@@ -11,7 +11,7 @@ public class DeadlineTaskTest {
         assertTrue(new DeadlineTask("Title 1", "2022-01-01") instanceof DeadlineTask);
         assertTrue(new DeadlineTask("Title 2", "2022-01-01", "11:11") instanceof DeadlineTask);
         assertTrue(new DeadlineTask("Title 3", true, "2022-01-01") instanceof DeadlineTask);
-        assertTrue(new DeadlineTask("Title 4", true,"2022-01-01", "11:11") instanceof DeadlineTask);
+        assertTrue(new DeadlineTask("Title 4", true, "2022-01-01", "11:11") instanceof DeadlineTask);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class DeadlineTaskTest {
                 "D | 0 | Title 2 | 2022-01-01 | 11:11");
         assertEquals(new DeadlineTask("Title 3", true, "2022-01-01").toOutputLine(),
                 "D | 1 | Title 3 | 2022-01-01");
-        assertEquals(new DeadlineTask("Title 4", true,"2022-01-01", "11:11").toOutputLine(),
+        assertEquals(new DeadlineTask("Title 4", true, "2022-01-01", "11:11").toOutputLine(),
                 "D | 1 | Title 4 | 2022-01-01 | 11:11");
     }
 

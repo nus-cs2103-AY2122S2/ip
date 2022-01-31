@@ -1,9 +1,10 @@
 package duke.command;
 
 import java.util.List;
+
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.Ui;
 
 /**
  * Abstract class to define Command superclass methods.

@@ -1,11 +1,7 @@
 package duke.command;
 
-import duke.Ui;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.TaskType;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,8 +9,12 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskType;
 
 public class CreateCommandTest {
     @Test
@@ -48,11 +48,11 @@ public class CreateCommandTest {
             new CreateCommand("Test Title", TaskType.TODO).execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [T][ ] Test Title\n" +
-                    "     Now you have 1 task in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Got it. I've added this task:\n"
+                    + "       [T][ ] Test Title\n"
+                    + "     Now you have 1 task in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
         } catch (DukeException | IOException e) {
             fail();
         }
@@ -70,11 +70,11 @@ public class CreateCommandTest {
             new CreateCommand("Test Title /by 2022-01-01 11:11", TaskType.DEADLINE).execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [D][ ] Test Title (by: 2022-01-01 11:11)\n" +
-                    "     Now you have 1 task in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Got it. I've added this task:\n"
+                    + "       [D][ ] Test Title (by: 2022-01-01 11:11)\n"
+                    + "     Now you have 1 task in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
         } catch (DukeException | IOException e) {
             fail();
         }
@@ -86,11 +86,11 @@ public class CreateCommandTest {
             new CreateCommand("Test Title 2 /by 2022-01-02", TaskType.DEADLINE).execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [D][ ] Test Title 2 (by: 2022-01-02)\n" +
-                    "     Now you have 2 tasks in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Got it. I've added this task:\n"
+                    + "       [D][ ] Test Title 2 (by: 2022-01-02)\n"
+                    + "     Now you have 2 tasks in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
         } catch (DukeException | IOException e) {
             fail();
         }
@@ -144,11 +144,11 @@ public class CreateCommandTest {
             new CreateCommand("Test Title /at 2022-01-01 11:11", TaskType.EVENT).execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [E][ ] Test Title (at: 2022-01-01 11:11)\n" +
-                    "     Now you have 1 task in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Got it. I've added this task:\n"
+                    + "       [E][ ] Test Title (at: 2022-01-01 11:11)\n"
+                    + "     Now you have 1 task in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
         } catch (DukeException | IOException e) {
             fail();
         }
@@ -160,11 +160,11 @@ public class CreateCommandTest {
             new CreateCommand("Test Title 2 /at 2022-01-02", TaskType.EVENT).execute(taskList, ui);
             outStream.flush();
             String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [E][ ] Test Title 2 (at: 2022-01-02)\n" +
-                    "     Now you have 2 tasks in the list.\n" +
-                    "    ____________________________________________________________\n\n", lines);
+            assertEquals("    ____________________________________________________________\n"
+                    + "     Got it. I've added this task:\n"
+                    + "       [E][ ] Test Title 2 (at: 2022-01-02)\n"
+                    + "     Now you have 2 tasks in the list.\n"
+                    + "    ____________________________________________________________\n\n", lines);
         } catch (DukeException | IOException e) {
             fail();
         }
