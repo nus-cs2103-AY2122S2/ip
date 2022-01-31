@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exception.LoadException;
-import duke.exception.RonException;
-
 import java.io.File;
 import java.io.IOException;
+
+import duke.exception.LoadException;
+import duke.exception.RonException;
 
 /**
  * Creates a .txt file to save tasks from Chatbot in the hard disk automatically

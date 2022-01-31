@@ -1,11 +1,11 @@
 package duke.parser;
 
+import java.time.format.DateTimeFormatter;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.format.DateTimeFormatter;
 
 /**
  * Parser type: Storage parser
@@ -21,18 +21,24 @@ public class StorageParser extends Parser {
     @Override
     public String toString() {
         String returnString = "";
+
         if (this.task instanceof Todo) {
-            returnString = returnString + "T | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription();
+            returnString = returnString + "T | " + (this.task.getIsDone() ? "1 | " : "0 | ")
+                    + this.task.getDescription();
         }
 
         if (this.task instanceof Deadline) {
-            String dateTime = ((Deadline) this.task).getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " " + ((Deadline) this.task).getTime().format(DateTimeFormatter.ofPattern("HHmm"));
-            returnString = returnString + "D | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + dateTime;
+            String dateTime = ((Deadline) this.task)
+                    .getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " " + ((Deadline) this.task)
+                    .getTime().format(DateTimeFormatter.ofPattern("HHmm"));
+            returnString = returnString + "D | " + (this.task.getIsDone() ? "1 | " : "0 | ")
+                    + this.task.getDescription() + "| " + dateTime;
         }
 
         if (this.task instanceof Event) {
             String dateTime = ((Event) this.task).getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy"));
-            returnString = returnString + "E | " + (this.task.getIsDone() ? "1 | " : "0 | ") + this.task.getDescription() + "| " + dateTime;
+            returnString = returnString + "E | " + (this.task.getIsDone() ? "1 | " : "0 | ")
+                    + this.task.getDescription() + "| " + dateTime;
         }
 
         return returnString + "\n";

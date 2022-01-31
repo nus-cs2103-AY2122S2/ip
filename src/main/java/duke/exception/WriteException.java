@@ -5,10 +5,10 @@ package duke.exception;
  * Exception thrown when error occurs while saving backup file on exit
  */
 public class WriteException extends RonException {
-    public static final String message = "Error while saving backup.";
+    public static final String MESSAGE = "Error while saving backup.";
 
     @Override
     public String toString() {
-        return super.toString() + message;
+        return super.toString() + MESSAGE;
     }
 }

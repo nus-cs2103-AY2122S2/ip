@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Task type: Event
  */
 public class Event extends Task {
-    public LocalDate date;
-    public String stringTime;
+    private LocalDate date;
+    private String stringTime;
 
     public Event(String input) {
         super(input.substring(6, input.indexOf("/")));
