@@ -1,5 +1,3 @@
-package TestClasses;
-
 import dukeclasses.ToDo;
 
 import org.junit.jupiter.api.Test;

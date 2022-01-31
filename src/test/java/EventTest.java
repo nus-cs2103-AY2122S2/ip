@@ -1,5 +1,3 @@
-package TestClasses;
-
 import dukeclasses.Event;
 import java.time.LocalDate;
 

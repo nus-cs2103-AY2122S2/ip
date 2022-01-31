@@ -1,5 +1,3 @@
-package TestClasses;
-
 import dukeclasses.TaskList;
 import dukeclasses.Task;
 import dukeclasses.ToDo;

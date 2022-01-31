@@ -1,5 +1,3 @@
-package TestClasses;
-
 import dukeclasses.DukeException;
 import dukeclasses.Storage;
 import dukeclasses.Task;
