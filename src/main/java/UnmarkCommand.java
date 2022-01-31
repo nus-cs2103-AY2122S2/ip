@@ -11,20 +11,22 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!(inputWords.length == 2)) {
-                throw new InvalidArgumentException("Please specify what to unmark clearly.");
+                throw new InvalidArgumentException(Messages.UNKNOWN_UNMARK);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
+                throw new OutOfBoundsException(Messages.OUT_OF_BOUNDS_MSG(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsUndone();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(tasks.getTaskStatement(taskNumber - 1));
+            ui.print(Messages.UNMARK_SUCCESS);
+            ui.print(tasks.getTaskStatement(taskNumber - 1));
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError("Error saving.");
+            ui.showError(Messages.DELETE_ERROR);
+        } catch (NumberFormatException e) {
+            ui.showError(Messages.UNKNOWN_UNMARK);
         }
     }
 }

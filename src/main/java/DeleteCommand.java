@@ -10,22 +10,23 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!(inputWords.length == 2)) {
-                throw new InvalidArgumentException("Please specify what to delete clearly.");
+                throw new InvalidArgumentException(Messages.UNKNOWN_DELETE);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-                throw new OutOfBoundsException(String.format("Cannot delete" +
-                        " as task %d does not exist!", taskNumber));
+                throw new OutOfBoundsException(Messages.OUT_OF_BOUNDS_MSG(taskNumber));
             }
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(tasks.getTaskStatement(taskNumber - 1));
+            ui.print(Messages.DELETE_SUCCESS);
+            ui.print(tasks.getTaskStatement(taskNumber - 1));
             tasks.remove(taskNumber - 1);
             tasks.printTaskCount();
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError("Error saving.");
+            ui.showError(Messages.DELETE_ERROR);
+        } catch (NumberFormatException e) {
+            ui.showError(Messages.UNKNOWN_DELETE);
         }
     }
 }

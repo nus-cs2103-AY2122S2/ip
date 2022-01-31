@@ -18,7 +18,7 @@ public class AddCommand extends Command {
                     try {
                         String[] todoArr = input.split("\\s", 2);
                         if (todoArr.length <= 1) {
-                            throw new InvalidArgumentException("todo.. todo what?");
+                            throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
                         }
                         tasks.add(new Todo(todoArr[1].trim()));
                         tasks.printTaskAdded();
@@ -33,19 +33,18 @@ public class AddCommand extends Command {
                         String[] deadlineArr = input.split("/by", 2);
                         String[] deadlineSplit = deadlineArr[0].split("\\s", 2);
                         if (deadlineSplit.length <= 1) {    // no description
-                            throw new InvalidArgumentException("Sorry but.. deadline of what??");
+                            throw new InvalidArgumentException(Messages.UNKNOWN_DEADLINE);
                         }
                         if (deadlineArr.length <= 1) { // don't have /by keyword
-                            throw new InvalidArgumentException("By when?? ..");
+                            throw new InvalidArgumentException(Messages.UNKNOWN_DATETIME);
                         }
                         String description = deadlineSplit[1].trim();
                         tasks.add(new Deadline(description, deadlineArr[1].trim()));
                         tasks.printTaskAdded();
                     } catch (InvalidArgumentException e) {
-                        System.out.println(e.getMessage());
+                        ui.showError(e.getMessage());
                     } catch (DateTimeParseException e) {
-                        System.out.println("Invalid date-time format! Format: <dd/MM/yyyy HHMM>."
-                                + System.lineSeparator() + "An example: 12/12/2222 0800");
+                        ui.showError(Messages.UNKNOWN_DATETIME);
                     } finally {
                         break;
                     }
@@ -55,16 +54,16 @@ public class AddCommand extends Command {
                         String[] eventArr = input.split("/at", 2);
                         String[] eventSplit = eventArr[0].split("\\s", 2);
                         if (eventSplit.length <= 1) {
-                            throw new InvalidArgumentException("What event? No event stated.");
+                            throw new InvalidArgumentException(Messages.UNKNOWN_EVENT);
                         }
                         if (eventArr.length <= 1) {
-                            throw new InvalidArgumentException("At where? Please specify again");
+                            throw new InvalidArgumentException(Messages.UNKNOWN_LOCATION);
                         }
                         String description = eventSplit[1].trim();
                         tasks.add(new Event(description, eventArr[1].trim()));
                         tasks.printTaskAdded();
                     } catch (InvalidArgumentException e) {
-                        System.out.println(e.getMessage());
+                        ui.showError(e.getMessage());
                     } finally {
                         break;
                     }

@@ -40,6 +40,10 @@ public class Ui {
         showToUser(DIVIDER, Messages.UNKNOWN_COMMAND, COMMANDS);
     }
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
     public void showError(String message) {
         showToUser(message);
     }

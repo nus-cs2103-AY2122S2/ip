@@ -11,20 +11,22 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!(inputWords.length == 2)) { //e.g mark 2, cannot be mark 2 2 or just mark
-                throw new InvalidArgumentException("Please specify what to mark clearly.");
+                throw new InvalidArgumentException(Messages.UNKNOWN_MARK);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
+                throw new OutOfBoundsException(Messages.OUT_OF_BOUNDS_MSG(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.getTaskStatement(taskNumber - 1));
+            ui.print(Messages.MARK_SUCCESS);
+            ui.print(tasks.getTaskStatement(taskNumber - 1));
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError("Error saving.");
+            ui.showError(Messages.DELETE_ERROR);
+        } catch (NumberFormatException e) {
+            ui.showError(Messages.UNKNOWN_MARK);
         }
     }
 }
