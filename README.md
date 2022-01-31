@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Tsundere
 
 > Soon is not as good as now. – Seth Godin ([source](https://dansilvestre.com/productivity-quotes/))
@@ -36,4 +37,3 @@ public Tsundere(String filePath) {
         }
     }
 ```
-
