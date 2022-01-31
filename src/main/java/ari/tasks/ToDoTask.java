@@ -1,4 +1,4 @@
-package main.java.ari.tasks;
+package ari.tasks;
 
 /**
  * Represents a Task to do

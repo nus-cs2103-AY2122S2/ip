@@ -1,6 +1,5 @@
-package main.java;
 
-import main.java.ari.Ari;
+import ari.Ari;
 
 /**
  * Starts the running of Ari

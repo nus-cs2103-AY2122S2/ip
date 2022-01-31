@@ -1,4 +1,4 @@
-package main.java.ari.command;
+package ari.command;
 
 /**
  * Represents a command that has incorrect inputs

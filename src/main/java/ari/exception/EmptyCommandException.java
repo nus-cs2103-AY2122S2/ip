@@ -1,4 +1,4 @@
-package main.java.ari.exception;
+package ari.exception;
 
 /**
  * Signals an error causes by empty message in command

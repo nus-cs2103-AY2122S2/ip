@@ -1,8 +1,8 @@
-package main.java.ari.command;
+package ari.command;
 
 import java.time.LocalDate;
 
-import main.java.ari.tasks.EventTask;
+import ari.tasks.EventTask;
 
 /**
  * Adds an EventCommand to TaskList

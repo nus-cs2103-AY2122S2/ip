@@ -1,4 +1,4 @@
-package main.java.ari.ui;
+package ari.ui;
 
 import java.util.Scanner;
 

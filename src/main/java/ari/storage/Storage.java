@@ -1,4 +1,4 @@
-package main.java.ari.storage;
+package ari.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.java.ari.command.Command;
-import main.java.ari.command.MarkCommand;
-import main.java.ari.parser.Parser;
-import main.java.ari.tasks.Task;
-import main.java.ari.tasks.TaskList;
+import ari.command.Command;
+import ari.command.MarkCommand;
+import ari.parser.Parser;
+import ari.tasks.Task;
+import ari.tasks.TaskList;
 
 /**
  * Deals with loading tasks from file and saving tasks into file

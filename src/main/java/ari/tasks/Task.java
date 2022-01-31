@@ -1,4 +1,4 @@
-package main.java.ari.tasks;
+package ari.tasks;
 
 /**
  * Encapsulates information regarding task that is stored

@@ -1,12 +1,12 @@
-package main.java.ari.parser;
+package ari.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import main.java.ari.command.*;
-import main.java.ari.exception.CommandFormatException;
-import main.java.ari.exception.EmptyCommandException;
+import ari.command.*;
+import ari.exception.CommandFormatException;
+import ari.exception.EmptyCommandException;
 
 /**
  * Deals with making sense of the USER command/input

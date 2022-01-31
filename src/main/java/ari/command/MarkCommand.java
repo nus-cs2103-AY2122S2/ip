@@ -1,4 +1,4 @@
-package main.java.ari.command;
+package ari.command;
 
 /**
  * Marks a Task

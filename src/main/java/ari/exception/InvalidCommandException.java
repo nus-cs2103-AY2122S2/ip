@@ -1,4 +1,4 @@
-package main.java.ari.exception;
+package ari.exception;
 
 /**
  * Signals an error that is caused by entering an invalid command

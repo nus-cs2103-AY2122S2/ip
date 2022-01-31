@@ -1,11 +1,11 @@
-package main.java.ari;
+package ari;
 
-import main.java.ari.command.ByeCommand;
-import main.java.ari.command.Command;
-import main.java.ari.parser.Parser;
-import main.java.ari.storage.Storage;
-import main.java.ari.tasks.TaskList;
-import main.java.ari.ui.Ui;
+import ari.command.ByeCommand;
+import ari.command.Command;
+import ari.parser.Parser;
+import ari.storage.Storage;
+import ari.tasks.TaskList;
+import ari.ui.Ui;
 
 /**
  * Represents Ari functions

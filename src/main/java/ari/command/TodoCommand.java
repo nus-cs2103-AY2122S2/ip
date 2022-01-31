@@ -1,6 +1,6 @@
-package main.java.ari.command;
+package ari.command;
 
-import main.java.ari.tasks.ToDoTask;
+import ari.tasks.ToDoTask;
 
 /**
  * Adds a ToDoTask to TaskList

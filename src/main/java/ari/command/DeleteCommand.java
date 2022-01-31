@@ -1,6 +1,6 @@
-package main.java.ari.command;
+package ari.command;
 
-import main.java.ari.tasks.Task;
+import ari.tasks.Task;
 
 /**
  * Deletes a Task from TaskList

@@ -1,6 +1,6 @@
-package main.java.ari.command;
+package ari.command;
 
-import main.java.ari.tasks.Task;
+import ari.tasks.Task;
 
 /**
  * Finds Task in TaskList that contains the keyword

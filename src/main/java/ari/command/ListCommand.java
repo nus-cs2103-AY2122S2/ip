@@ -1,4 +1,4 @@
-package main.java.ari.command;
+package ari.command;
 
 /**
  * Displays a list of Tasks that is recorded

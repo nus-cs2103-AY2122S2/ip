@@ -1,6 +1,6 @@
-package main.java.ari.command;
+package ari.command;
 
-import main.java.ari.tasks.TaskList;
+import ari.tasks.TaskList;
 
 /**
  * Represents an executable command
