@@ -82,7 +82,7 @@ public class Ui {
 
     public void showClearListConfirmationMessage() {
         System.out.println("Are you sure you want Ekud to clear your task list?\n"
-                + "Enter \"y\" if you would like to clear your task list, enter any other"
+                + "Enter \"y\" if you would like to clear your task list, enter any other "
                 + "characters if you would like to cancel this command");
     }
 

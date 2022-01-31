@@ -13,13 +13,11 @@ import java.time.LocalDate;
 public class AddCommand implements Command {
 
     private String fullCommand;
-    private String[] splitFullCommand;
     private String taskType;
 
     public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.splitFullCommand = fullCommand.split(" ", 2);
-        this.taskType = splitFullCommand[0];
+        this.taskType = fullCommand.split(" ",2)[0];
     }
 
     /**

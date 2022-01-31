@@ -62,8 +62,9 @@ public class TaskList {
         }
     }
 
-    public void clearTaskList() {
-        this.taskList = new ArrayList<>();
+    public void clearTaskList(TaskList tasks, Storage storage) throws IOException {
+        tasks.taskList = new ArrayList<>();
+        storage.writeToFile(tasks.taskList);
     }
 
     public int getTaskSize() {

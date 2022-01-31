@@ -6,6 +6,7 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+
 /**
  * Represents the main class that Ekud will run on.
  */
@@ -42,7 +43,7 @@ public class Duke {
             } catch (DukeException err) {
                 System.err.println(err);
             } catch (Exception e) {
-                System.err.println(e.toString());
+                e.printStackTrace();
             }
         }
         ui.closeScanner();

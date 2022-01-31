@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
 
     protected String description;
-    public boolean isDone;
+    protected boolean isDone;
     protected DateTimeFormatter outputDateFormat =
             DateTimeFormatter.ofPattern("MMM d yyyy");
     protected static DateTimeFormatter inputDateFormat =
@@ -19,20 +19,10 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * Getter method to return the format of the input date.
-     *
-     * @return Format of input date.
-     */
     public static DateTimeFormatter getInputDateFormat() {
         return inputDateFormat;
     }
 
-    /**
-     * Status icon of the task whether it is marked or not.
-     *
-     * @return Status icon of task.
-     */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
     }

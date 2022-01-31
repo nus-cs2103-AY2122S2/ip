@@ -10,7 +10,7 @@ public class CommandsTest {
 
     @Test
     public void testCommandTypeMapping() {
-        HashMap<String, String> h = DukeCommands.getTypeMap();
+        HashMap<String, String> h = DukeCommands.getTaskTypeMap();
         assertEquals("ADD_COMMAND", h.get("todo"));
         assertEquals("ADD_COMMAND", h.get("event"));
         assertEquals("ADD_COMMAND", h.get("deadline"));

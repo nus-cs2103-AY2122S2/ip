@@ -11,11 +11,11 @@ import java.util.HashMap;
 public class DukeCommands {
 
     public enum DUKE_COMMANDS {
-        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR
 
     }
 
-    public enum DUKE_DESCRIPTION_COMMANDS {
+    public enum DUKE_DESCRIPTIVE_COMMANDS {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND
     }
 
@@ -40,7 +40,7 @@ public class DukeCommands {
      * needing a description, false otherwise.
      */
     public static boolean isDukeDescriptionCommand(String string) {
-        return Arrays.stream(DUKE_DESCRIPTION_COMMANDS.values()).
+        return Arrays.stream(DUKE_DESCRIPTIVE_COMMANDS.values()).
                 anyMatch((command) -> command.name().
                         equalsIgnoreCase(string));
     }
@@ -51,7 +51,7 @@ public class DukeCommands {
      *
      * @return Hashmap of type <String, String> with key-value pair of <Ekud command, Command type>
      */
-    public static HashMap<String, String> getTypeMap() {
+    public static HashMap<String, String> getTaskTypeMap() {
         HashMap<String, String> h = new HashMap<>();
         h.put("list", "OUTPUT_COMMAND");
         h.put("todo", "ADD_COMMAND");
@@ -62,6 +62,7 @@ public class DukeCommands {
         h.put("delete", "DELETE_COMMAND");
         h.put("bye", "EXIT_COMMAND");
         h.put("find", "FIND_COMMAND");
+        h.put("clear", "CLEAR_COMMAND");
         return h;
     }
 }
