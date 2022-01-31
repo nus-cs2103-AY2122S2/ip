@@ -20,7 +20,6 @@ public class Storage {
         try {
             File file = new File("bobby.txt");
             if (file.exists()) {
-                Ui.fileExists();
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
                     String line = s.nextLine();
@@ -51,7 +50,6 @@ public class Storage {
                 }
             } else {
                 file.createNewFile();
-                Ui.newFileCreated();
             }
         } catch (IOException e) {
             System.out.println("An error has occurred.");
