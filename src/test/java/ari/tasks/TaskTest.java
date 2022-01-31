@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
 
-    private Task task = new Task("complete A-Junit");
+    private Task task = new Task("complete A-JUnit");
 
     @Test
     void testToString() {
@@ -15,7 +15,7 @@ class TaskTest {
 
     @Test
     void writeToFile() {
-        assertEquals("0 complete A-Junit", task.writeToFile());
+        assertEquals("0 complete A-JUnit", task.writeToFile());
     }
 
     @Test
