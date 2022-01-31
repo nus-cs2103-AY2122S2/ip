@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 /**
  * Displays when the user adds a new task.
  */
-public class NewTaskDisplay{
+public class NewTaskDisplay {
     /**
      * Runs the new task display.
      *

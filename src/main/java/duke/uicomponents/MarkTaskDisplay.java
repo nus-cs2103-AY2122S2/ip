@@ -3,7 +3,7 @@ package duke.uicomponents;
 /**
  * Shows the menu when the user marks a task.
  */
-public class MarkTaskDisplay{
+public class MarkTaskDisplay {
     /**
      * Runs the mark task display.
      *

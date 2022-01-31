@@ -3,7 +3,7 @@ package duke.uicomponents;
 /**
  * Shows the display when the exception is thrown.
  */
-public class ErrorMenu{
+public class ErrorMenu {
     /**
      * Runs the error display.
      *

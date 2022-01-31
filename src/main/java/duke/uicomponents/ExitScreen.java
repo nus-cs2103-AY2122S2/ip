@@ -3,7 +3,7 @@ package duke.uicomponents;
 /**
  * The display when the user exits duke.
  */
-public class ExitScreen{
+public class ExitScreen {
     /**
      * Runs the exit screen.
      */

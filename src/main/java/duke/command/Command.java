@@ -373,8 +373,10 @@ class EventCommand extends Command {
 /**
  * The delete command deletes a task in the task list.
  */
-class DeleteCommand extends Command {
-    /** Constructs the delete command with index number of the item in the task list as the parameter. */
+class DeleteCommand extends Command{
+    /**
+     * Constructs the delete command with index number of the item in the task list as the parameter.
+     */
     DeleteCommand(String parameter) {
         super(parameter);
     }
@@ -383,8 +385,8 @@ class DeleteCommand extends Command {
      * Deletes the task indicated by the index number in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param ui       The UI on which the command will act on.
+     * @param storage  The Storage on which the command will act on.
      * @throws DukeExceptions If the user did not enter a number.
      */
     @Override

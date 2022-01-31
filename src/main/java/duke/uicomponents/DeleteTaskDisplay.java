@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 /**
  * Displays to the user when a task is deleted.
  */
-public class DeleteTaskDisplay{
+public class DeleteTaskDisplay {
     /**
      * Runs the screen when a task is deleted.
      *

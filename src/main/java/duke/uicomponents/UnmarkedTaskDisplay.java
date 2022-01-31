@@ -3,7 +3,7 @@ package duke.uicomponents;
 /**
  * Shows the menu when the user unmarks a task.
  */
-public class UnmarkedTaskDisplay{
+public class UnmarkedTaskDisplay {
     /**
      * Runs the unmark task display.
      *
