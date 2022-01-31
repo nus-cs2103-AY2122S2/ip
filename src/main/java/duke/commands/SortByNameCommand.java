@@ -13,7 +13,7 @@ import java.util.Comparator;
 /**
  * Represents a command to display the current tasks in TaskManager, sorted by name.
  */
-public class SortByNameCommand extends Command{
+public class SortByNameCommand extends Command {
 
     /**
      * Executes and displays the given TaskManager to the Ui, ordered by their names.
@@ -41,7 +41,7 @@ public class SortByNameCommand extends Command{
  * @see Comparator
  */
 class TaskByNameComparator implements Comparator<Task> {
-    public int compare(Task t1, Task t2){
+    public int compare(Task t1, Task t2) {
         return t1.getTaskName().compareTo(t2.getTaskName());
     }
 }

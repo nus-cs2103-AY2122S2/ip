@@ -22,10 +22,10 @@ public abstract class Command {
     TaskManager taskManager = new TaskManager();
     String userInput = "";
 
-    public Command(String userInput){
+    public Command(String userInput) {
         this.userInput = userInput;
     }
-    public Command(){}
+    public Command() { }
 
     /**
      * Saves the given Tasks in the given TaskManager to the storage.
@@ -36,11 +36,11 @@ public abstract class Command {
      * @param ui The Ui to display after saving success or failure.
      * @param taskManager The TaskManager to save.
      */
-    protected void save(Storage storage,Ui ui, TaskManager taskManager){
+    protected void save(Storage storage, Ui ui, TaskManager taskManager) {
         try {
             storage.saveTaskManager(taskManager);
             ui.showSavingComplete();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showSavingFailed();
         }
     }
@@ -56,7 +56,7 @@ public abstract class Command {
      */
     public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

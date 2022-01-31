@@ -8,8 +8,8 @@ import duke.Ui;
 /**
  * Represents a command to delete a task.
  */
-public class DeleteTaskCommand extends Command{
-    public DeleteTaskCommand(String userInput){
+public class DeleteTaskCommand extends Command {
+    public DeleteTaskCommand(String userInput) {
         super(userInput);
     }
 
@@ -23,18 +23,18 @@ public class DeleteTaskCommand extends Command{
      * @return true if command executed successfully, false otherwise.
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager){
-        if (taskManager.size() == 0){
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+        if (taskManager.size() == 0) {
             ui.showDeleteEmptyList();
         } else {
-            int index = Integer.parseInt(userInput.replaceFirst("delete","").strip())-1;
+            int index = Integer.parseInt(userInput.replaceFirst("delete","").strip()) - 1;
 
-            if (index < 0 || index >= taskManager.size()){
+            if (index < 0 || index >= taskManager.size()) {
                 ui.showDeleteOutOfBounds(taskManager.size());
             } else {
                 Task t = taskManager.getTask(index);
                 boolean success = taskManager.deleteTask(t);
-                if (success){
+                if (success) {
                     save(storage, ui, taskManager);
                     ui.showDeletedTask(t, taskManager.size());
                 } else {
@@ -43,7 +43,6 @@ public class DeleteTaskCommand extends Command{
                 }
                 return true;
             }
-
         }
         return false;
     }

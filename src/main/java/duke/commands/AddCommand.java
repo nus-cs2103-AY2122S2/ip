@@ -8,8 +8,8 @@ import duke.tasks.Task;
 /**
  * Represents a command to Add a new Task.
  */
-public class AddCommand extends Command{
-    public AddCommand(String userInput){
+public class AddCommand extends Command {
+    public AddCommand(String userInput) {
         super(userInput);
     }
 
@@ -31,7 +31,7 @@ public class AddCommand extends Command{
             ui.showAddedTask(task, taskManager.size());
             save(storage,ui,taskManager);
             return true;
-        } catch (FailedTaskParseException exception){
+        } catch (FailedTaskParseException exception) {
             throw new DukeException("Wrong Format!");
         }
     }

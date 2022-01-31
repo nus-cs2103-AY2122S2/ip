@@ -8,8 +8,8 @@ import duke.Ui;
 /**
  * Represents a command to mark a task as done.
  */
-public class MarkDoneCommand extends MarkCommand{
-    public MarkDoneCommand(String userInput){
+public class MarkDoneCommand extends MarkCommand {
+    public MarkDoneCommand(String userInput) {
         super(userInput);
     }
 
@@ -31,7 +31,7 @@ public class MarkDoneCommand extends MarkCommand{
                 ui.showMarkEmptyList();
                 return false;
             } else {
-                int index = Integer.parseInt(userInput.replaceFirst("mark", "").strip())-1;
+                int index = Integer.parseInt(userInput.replaceFirst("mark", "").strip()) - 1;
 
                 if (index < 0 || index >= taskManager.size()) {
                     ui.showMarkOutOfBounds();

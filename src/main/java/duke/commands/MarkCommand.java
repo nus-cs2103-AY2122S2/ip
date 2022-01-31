@@ -8,8 +8,8 @@ import duke.Ui;
 /**
  * Represents a command to mark a task.
  */
-public abstract class MarkCommand extends Command{
-    public MarkCommand(String userInput){
+public abstract class MarkCommand extends Command {
+    public MarkCommand(String userInput) {
         super(userInput);
     }
 
@@ -22,7 +22,7 @@ public abstract class MarkCommand extends Command{
      * @see MarkDoneCommand
      * @see MarkUndoneCommand
      */
-    public static MarkCommand of(String userInput){
+    public static MarkCommand of(String userInput) {
         if (userInput.startsWith("mark")) {
             return new MarkDoneCommand(userInput);
         } else {

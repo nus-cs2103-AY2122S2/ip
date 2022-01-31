@@ -4,11 +4,12 @@ import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 
+
 /**
  * Represents a command to show all tasks in the TaskManager.
  */
-public class ListCommand extends Command{
-    public ListCommand(){
+public class ListCommand extends Command {
+    public ListCommand() {
         super();
     }
 
@@ -21,7 +22,7 @@ public class ListCommand extends Command{
      * @param taskManager The TaskManager that contains the tasks to be displayed.
      * @return true after the list is displayed.
      */
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager){
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
         ui.showList(taskManager);
         return true;
     }

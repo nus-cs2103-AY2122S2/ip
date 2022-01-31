@@ -1,17 +1,14 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Todo extends Task{
 
-    public Todo(String taskName){
+    public Todo(String taskName) {
         this.taskName = taskName;
     }
 
-    public char getType(){
+    public char getType() {
         return 'T';
     }
 
@@ -22,8 +19,8 @@ public class Todo extends Task{
      * @return The string representation of the todo in the format to be saved.
      */
     @Override
-    public String getDateForSaving(){
-        return String.format("%c\t%c\t%s\t%s\n",getType(),getDone(),getTaskName(),"None");
+    public String getDateForSaving() {
+        return String.format("%c\t%c\t%s\t%s\n", getType(), getDone(), getTaskName(), "None");
     }
 
     /**
@@ -34,12 +31,12 @@ public class Todo extends Task{
      * @see Event#getDate()
      */
     @Override
-    public LocalDateTime getDateObj(){
+    public LocalDateTime getDateObj() {
         return null;
     }
 
     @Override
-    public String getDate(){
+    public String getDate() {
         return "";
     }
 
@@ -52,8 +49,8 @@ public class Todo extends Task{
      * @return true if they are equivalent.
      */
     @Override
-    public boolean equals(Object o){
-        if (! (o instanceof Todo)){
+    public boolean equals(Object o) {
+        if (! (o instanceof Todo)) {
             return false;
         }
 

@@ -1,8 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 
 /**
  * Represents a general task created by the user.
@@ -11,16 +9,16 @@ import java.util.Comparator;
  * @see Event
  * @see Todo
  */
-public abstract class Task{
+public abstract class Task {
     protected String taskName;
     protected char done = ' ';
 
-    public Task(){}
+    public Task() { }
 
-    public void markDone(){
+    public void markDone() {
         this.done = 'X';
     }
-    public void markUndone(){
+    public void markUndone() {
         this.done = ' ';
     }
 
@@ -38,19 +36,20 @@ public abstract class Task{
      *
      * @return The name of the Task.
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
     public abstract String getDate();
     public abstract LocalDateTime getDateObj();
     public abstract String getDateForSaving();
 
+
     /**
      * Returns a String representation of the Task.
      *
      * @return The String representation of the Task.
      */
-    public String toString(){
+    public String toString() {
         String s = String.format("[%c][%c] %s",this.getType(),this.done,this.taskName);
         return s;
     }
@@ -58,6 +57,5 @@ public abstract class Task{
     public char getType() {
         return ' ';
     }
-
 }
 

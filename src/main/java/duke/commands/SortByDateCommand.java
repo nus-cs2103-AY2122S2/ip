@@ -13,7 +13,7 @@ import java.util.Comparator;
 /**
  * Represents a command to display the current tasks in TaskManager, sorted by Date.
  */
-public class SortByDateCommand extends Command{
+public class SortByDateCommand extends Command {
 
     /**
      * Executes and displays the given TaskManager to the Ui, ordered by their date.

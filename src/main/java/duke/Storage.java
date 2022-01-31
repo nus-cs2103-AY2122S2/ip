@@ -6,7 +6,6 @@ import duke.tasks.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Storage {
     private final String FILE_SEPERATOR = "/";
     File file;
 
-    public Storage(){}
+    public Storage() { }
     public Storage(String path) {
         FILE_PATH = System.getProperty("user.home") + FILE_SEPERATOR + path;
         String dir = path.substring(0,path.lastIndexOf("/"));
@@ -29,7 +28,7 @@ public class Storage {
         try {
             if (file.exists()) {
                 Scanner scanner = new Scanner(file);
-                while(scanner.hasNext()){
+                while(scanner.hasNext()) {
                     String fileInput = scanner.nextLine();
                     try {
                         Task t = Parser.parseToTaskFromFile(fileInput);
@@ -68,7 +67,7 @@ public class Storage {
 
             writer.close();
             return true;
-        } catch (IOException exception){
+        } catch (IOException exception) {
             throw new DukeException("Unable to save to disk!");
         }
     }
@@ -82,7 +81,7 @@ public class Storage {
         return dir.mkdir();
     }
 
-    public String getFullPath(){
+    public String getFullPath() {
         return this.FILE_PATH;
     }
 }
