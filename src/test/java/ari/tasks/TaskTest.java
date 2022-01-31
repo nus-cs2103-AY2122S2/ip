@@ -1,4 +1,4 @@
-package main.java.ari.tasks;
+package ari.tasks;
 
 import org.junit.jupiter.api.Test;
 
