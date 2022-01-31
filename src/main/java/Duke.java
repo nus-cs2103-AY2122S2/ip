@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a chatbot
+ */
 public class Duke {
     ArrayList<Task> tasks;
 
@@ -8,21 +11,33 @@ public class Duke {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * @param curr Task object to be printed
+     */
     private void printTask(Task curr) {
-        System.out.println(curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr);
+        System.out.println(curr.getTaskIcon() + " [" + curr.isDone() + "]" + curr);
     }
 
     private void printNoOfTasks() {
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
 
+    /**
+     * @param curr Task object to be added
+     */
     private void processNewTask(Task curr) {
         tasks.add(curr);
         printTask(curr);
         printNoOfTasks();
     }
 
-    private void Run() {
+    /**
+     * Main logic for the chatbot
+     * Gets called in the main method
+     * 
+     * @throws DukeException if user input is invalid
+     */
+    private void Run() throws DukeException {
         Scanner sc = new Scanner(System.in);
 
         String greeting = "Hello! I'm Kizer\nWhat can I do for you?";
@@ -117,7 +132,7 @@ public class Duke {
                 }
 
                 Task curr = tasks.get(number - 1);
-                String message = curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr;
+                String message = curr.getTaskIcon() + " [" + curr.isDone() + "]" + curr;
                 tasks.remove(curr);
 
                 System.out.println(bar);
@@ -134,6 +149,12 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Initializes a Duke chatbot object and calls Duke.Run()
+     * 
+     * @param args
+     * @throws DukeException if user input is invalid
+     */
     public static void main(String[] args) throws DukeException {
         Duke kizer = new Duke();
         kizer.Run();
