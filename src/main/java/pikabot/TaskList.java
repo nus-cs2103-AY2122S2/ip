@@ -59,11 +59,7 @@ public class TaskList {
      */
     public void delete(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        try {
-            taskList.remove(taskIndex);
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("Invalid task number!");
-        }
+        taskList.remove(taskIndex);
     }
 
     /**
@@ -73,12 +69,8 @@ public class TaskList {
      */
     public void markTaskAsDone(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        try {
-            Task currTask = taskList.get(taskIndex);
-            currTask.markAsDone();
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("Invalid task number!");
-        }
+        Task currTask = taskList.get(taskIndex);
+        currTask.markAsDone();
     }
 
     /**
@@ -88,12 +80,8 @@ public class TaskList {
      */
     public void markTaskAsUndone(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        try {
-            Task currTask = taskList.get(taskIndex);
-            currTask.markAsUndone();
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("Invalid task number!");
-        }
+        Task currTask = taskList.get(taskIndex);
+        currTask.markAsUndone();
     }
 
     /**

@@ -1,9 +1,10 @@
 package pikabot.command;
 
+import pikabot.Parser;
 import pikabot.TaskList;
 import pikabot.Storage;
 import pikabot.Ui;
-
+import pikabot.exception.NoIntegerException;
 import java.io.IOException;
 
 /**
@@ -30,16 +31,22 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Storage storage) {
-
-        int taskToUnmark = Integer.parseInt(unmarkCommand[1]);
-        taskList.markTaskAsUndone(taskToUnmark);
+        try {
+            Parser.parseIntegerCommand(unmarkCommand);
+            int taskToMark = Integer.parseInt(unmarkCommand[1]);
+            taskList.markTaskAsUndone(taskToMark);
+            Ui.indicateUnmarked(taskList.get(taskToMark - 1));
+        } catch (NoIntegerException e) {
+            Ui.printExceptionMessage(e);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
+        }
 
         try {
             storage.TaskListToFile(taskList);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
-
-        Ui.indicateUnmarked(taskList.get(taskToUnmark - 1));
     }
+
 }

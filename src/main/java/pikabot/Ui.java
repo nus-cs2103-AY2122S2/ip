@@ -54,7 +54,7 @@ public class Ui {
      */
     public static void printListOfMatchedTasks(TaskList taskList, String keyword) {
         System.out.println(INDENTATION + LINE);
-        System.out.println(INDENTATION + "Here are the tasks containing \"keyword\" in your list:");
+        System.out.println(INDENTATION + "Here are the tasks containing \"" + keyword + "\" in your list:");
 
         int taskNumber = 1;
         int length = taskList.noOfTasks();

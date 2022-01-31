@@ -1,10 +1,11 @@
 package pikabot.command;
-
 import pikabot.TaskList;
 import pikabot.Storage;
 import pikabot.Ui;
-
+import pikabot.Parser;
 import pikabot.task.Task;
+import pikabot.exception.NoIntegerException;
+
 
 import java.io.IOException;
 
@@ -32,16 +33,22 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        int taskNumberToDelete = Integer.parseInt(deleteCommand[1]);
-        Task taskToDelete = taskList.get(taskNumberToDelete - 1);
-        taskList.delete(taskNumberToDelete);
+        try {
+            Parser.parseIntegerCommand(deleteCommand);
+            int taskNumberToDelete = Integer.parseInt(deleteCommand[1]);
+            Task taskToDelete = taskList.get(taskNumberToDelete - 1);
+            taskList.delete(taskNumberToDelete);
+            Ui.indicateRemovedTask(taskToDelete, taskList);
+        } catch (NoIntegerException e) {
+            Ui.printExceptionMessage(e);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
+        }
 
         try {
             storage.TaskListToFile(taskList);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
-
-        Ui.indicateRemovedTask(taskToDelete, taskList);
     }
 }

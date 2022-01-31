@@ -11,14 +11,15 @@ import pikabot.command.MarkCommand;
 import pikabot.command.TodoCommand;
 import pikabot.command.UnmarkCommand;
 
-import pikabot.task.Deadline;
-import pikabot.task.Event;
-import pikabot.task.Todo;
-
+import pikabot.exception.TodoException;
 import pikabot.exception.DeadlineException;
 import pikabot.exception.EventException;
 import pikabot.exception.FindException;
-import pikabot.exception.TodoException;
+import pikabot.exception.NoIntegerException;
+import pikabot.task.Deadline;
+import pikabot.task.Event;
+import pikabot.task.Todo;
+import pikabot.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -149,4 +150,21 @@ public class Parser {
             throw new FindException();
         }
     }
+
+    /**
+     * Checks whether command contains an integer input.
+     *
+     * @param markArray String array containing input string from user.
+     * @throws NoIntegerException If no integer is given.
+     */
+    public static void parseIntegerCommand(String[] markArray) throws NoIntegerException {
+        if (markArray.length == 1) {
+            throw new NoIntegerException("Please enter a task number!");
+        } try {
+            Integer taskNo = Integer.parseInt(markArray[1]);
+        } catch (NumberFormatException e) {
+            throw new NoIntegerException("Please enter a valid task number!");
+        }
+    }
+
 }
