@@ -17,8 +17,8 @@ public class AddCommand extends Command {
 
     /**
      * Initializes the AddCommand with the CommandType Enum & a task description.
-     * @param commandType User requested CommandType Enum 
-     * @param description Task description 
+     * @param commandType User requested CommandType Enum
+     * @param description Task description
      */
     public AddCommand(CommandType commandType, String description) {
         super(commandType);
@@ -27,50 +27,51 @@ public class AddCommand extends Command {
 
     /**
      * The logic to execute the AddCommand
-     * @param taskList The TaskList object containing existing tasks. 
-     * @param ui The Ui object for interacting with the user. 
-     * @param storage The Storage object for saving & loading tasks. 
-     * @throws DukeException Error if the user specifies an invalid task index. 
+     * @param taskList The TaskList object containing existing tasks.
+     * @param ui The Ui object for interacting with the user.
+     * @param storage The Storage object for saving & loading tasks.
+     * @throws DukeException Error if the user specifies an invalid task index.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         // check if the user's input is just whitespaces
         if (description.trim().length() == 0) {
-            throw new DukeException("I'm sorry, your todo command is missing a task description. Please try again."); 
+            throw new DukeException("I'm sorry, your todo command is missing a task description. Please try again.");
         }
 
         Task task;
 
         switch (super.commandType) {
         case TODO:
-            task = new Todo(description, false); 
+            task = new Todo(description, false);
             taskList.add(task);
             ui.showText("Noted. I've added this task: ");
             ui.showTask(task.toString());
             break;
-
-        case EVENT: 
-            // Fallthrough 
+        case EVENT:
+            // Fallthrough
         case DEADLINE:
             String[] taskDescriptionStrings = description.split(super.commandType.getRegex());
             String taskDescriptionText = taskDescriptionStrings[0].strip();
             String taskDescriptionTime = taskDescriptionStrings[1].strip();
-    
-            // check if the user's input is just whitespace 
+
+            // check if the user's input is just whitespace
             if (taskDescriptionText.strip().length() == 0) {
-                throw new DukeException("I'm sorry, your " + commandType + " command is missing a task description. Please try again.");
+                throw new DukeException("I'm sorry, your " + commandType
+                        + " command is missing a task description. Please try again.");
             } else if (taskDescriptionTime.strip().length() == 0) {
-                throw new DukeException("I'm sorry, your " + commandType + " command is missing a time. Please try again.");
+                throw new DukeException("I'm sorry, your " + commandType
+                        + " command is missing a time. Please try again.");
             }
-    
+
             try {
                 if (commandType.equals(CommandType.EVENT)) {
                     task = new Event(taskDescriptionText, taskDescriptionTime, false);
                 } else {
                     task = new Deadline(taskDescriptionText, taskDescriptionTime, false);
                 }
-                
+
                 taskList.add(task);
                 ui.showText("Noted. I've added this task: ");
                 ui.showText(task.toString());
@@ -78,18 +79,32 @@ public class AddCommand extends Command {
                 ui.showError(e.getMessage());
             }
             break;
+        case BYE:
+            // Fallthrough
+        case FIND:
+            // Fallthrough
+        case LIST:
+            // Fallthrough
+        case DELETE:
+            // Fallthrough
+        case MARK:
+            // Fallthrough
+        case UNMARK:
+            // Fallthrough
+        default:
+            throw new DukeException("unexpected command!");
         }
 
         storage.updateFileContents(taskList);
     }
 
     /**
-     * A getter method to indicate if the chat session with Duke is active. 
+     * A getter method to indicate if the chat session with Duke is active.
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
     public boolean isActive() {
         return super.active;
     }
-    
+
 }

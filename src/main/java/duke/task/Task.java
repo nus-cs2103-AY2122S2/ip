@@ -1,17 +1,17 @@
 package duke.task;
 
 /**
- * Abstract class to represent the framework of a Task. 
+ * Abstract class to represent the framework of a Task.
  */
 public abstract class Task {
-    
-    protected String description; 
+
+    protected String description;
     protected boolean done;
 
     /**
-     * Initializes the Task object. 
-     * @param description String representing the task description. 
-     * @param done boolean to indicate if the task is done or not. 
+     * Initializes the Task object.
+     * @param description String representing the task description.
+     * @param done boolean to indicate if the task is done or not.
      */
     public Task(String description, boolean done) {
         this.description = description;
@@ -20,15 +20,15 @@ public abstract class Task {
 
     /**
      * Getter method to return the status of a Task.
-     * @return A String representing the status of a Task. 
+     * @return A String representing the status of a Task.
      */
     public String getStatusIcon() {
         return (done ? "X" : " "); // mark done task with X
     }
 
     /**
-     * Getter method to return the description of a Task. 
-     * @return A String representing the description of a Task. 
+     * Getter method to return the description of a Task.
+     * @return A String representing the description of a Task.
      */
     public String getDescription() {
         //
@@ -59,7 +59,7 @@ public abstract class Task {
 
     /**
      * Overriden method to print the Task in a custom format.
-     * @return A String representing the custom format of a Task. 
+     * @return A String representing the custom format of a Task.
      */
     @Override
     public String toString() {
@@ -67,8 +67,8 @@ public abstract class Task {
     }
 
     /**
-     * A getter method to print the Task in a custom format for saving to file. 
-     * @return A String representing the custom format of a Task. 
+     * A getter method to print the Task in a custom format for saving to file.
+     * @return A String representing the custom format of a Task.
      */
     public abstract String toStringSaveData();
 

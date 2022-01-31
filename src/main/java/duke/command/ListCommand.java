@@ -19,30 +19,29 @@ public class ListCommand extends Command {
 
     /**
      * The logic to execute the AddCommand
-     * @param taskList The TaskList object containing existing tasks. 
-     * @param ui The Ui object for interacting with the user. 
-     * @param storage The Storage object for saving & loading tasks. 
+     * @param taskList The TaskList object containing existing tasks.
+     * @param ui The Ui object for interacting with the user.
+     * @param storage The Storage object for saving & loading tasks.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.isEmpty()) {
             ui.showText("Your list is empty");
-        }
-        else {
+        } else {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                ui.showText((i+1) + ". " + task.toString());
+                ui.showText((i + 1) + ". " + task.toString());
             }
         }
     }
 
     /**
-     * A getter method to indicate if the chat session with Duke is active. 
+     * A getter method to indicate if the chat session with Duke is active.
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
     public boolean isActive() {
         return super.active;
     }
-    
+
 }

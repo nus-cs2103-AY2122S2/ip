@@ -6,23 +6,23 @@ import java.time.format.DateTimeParseException;
 import duke.DukeException;
 
 /**
- * Event represents Event tasks. 
+ * Event represents Event tasks.
  */
 public class Event extends Task {
 
-    protected LocalDate at;  
-    
+    protected LocalDate at;
+
     /**
      * Initializes the Event task with a task description, its regex, & boolean representing if it's done.
-     * @param description String of task description. 
-     * @param at String of regex. 
-     * @param done boolean indicating if the task is done. 
-     * @throws DukeException error if the user's date input is incorrectly formatted. 
+     * @param description String of task description.
+     * @param at String of regex.
+     * @param done boolean indicating if the task is done.
+     * @throws DukeException error if the user's date input is incorrectly formatted.
      */
     public Event(String description, String at, boolean done) throws DukeException {
         super(description, done);
         try {
-            this.at = LocalDate.parse(at); 
+            this.at = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             throw new DukeException("Date was incorrectly formatted! Please format it as yyyy-mm-dd");
         }
@@ -30,7 +30,7 @@ public class Event extends Task {
 
     /**
      * Overriden method to print the Event Task in a custom format.
-     * @return A String representing the custom format of an Event Task. 
+     * @return A String representing the custom format of an Event Task.
      */
     @Override
     public String toString() {
@@ -38,8 +38,8 @@ public class Event extends Task {
     }
 
     /**
-     * A getter method to print the Event Task in a custom format for saving to file. 
-     * @return A String representing the custom format of an Event Task. 
+     * A getter method to print the Event Task in a custom format for saving to file.
+     * @return A String representing the custom format of an Event Task.
      */
     @Override
     public String toStringSaveData() {

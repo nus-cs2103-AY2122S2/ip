@@ -9,18 +9,18 @@ import duke.DukeException;
 import duke.ui.Ui;
 
 /**
- * A storage class to create a save file, load & save the user's tasks. 
+ * A storage class to create a save file, load & save the user's tasks.
  */
 public class Storage {
-    
-    private String taskFilePath; 
+
+    private String taskFilePath;
     private Ui ui;
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Initializes the Storage object by specifiying a path for its save file.
-     * @param taskFilePath String of the path for the save file. 
-     * @param ui Ui object to handle user interaction. 
+     * @param taskFilePath String of the path for the save file.
+     * @param ui Ui object to handle user interaction.
      */
     public Storage(String taskFilePath, Ui ui) {
         this.taskFilePath = taskFilePath;
@@ -29,20 +29,20 @@ public class Storage {
 
     /**
      * A method that returns an ArrayList of current tasks if there are tasks in the save file
-     * or creates a new empty ArrayList. 
-     * @return ArrayList containing tasks or a new ArrayList. 
+     * or creates a new empty ArrayList.
+     * @return ArrayList containing tasks or a new ArrayList.
      */
     public ArrayList<Task> loadFileContents() {
-        // load tasklist data from save 
+        // load tasklist data from save
         try {
             File f = new File(taskFilePath);
-            
-            // checks if the user already has existing save data 
+
+            // checks if the user already has existing save data
             if (!f.createNewFile()) {
                 ui.showText("loading previous save data...");
                 Scanner s = new Scanner(f);
-                while(s.hasNext()) {
-                    
+                while (s.hasNext()) {
+
                     String task = s.nextLine();
                     String[] taskStrings = task.split(" \\| ");
                     String taskType = taskStrings[0];
@@ -50,17 +50,17 @@ public class Storage {
                     String taskDescription = taskStrings[2];
 
                     switch (taskType) {
-                        case "T":
-                            taskList.add(new Todo(taskDescription, taskStatus));
-                            break;
-                        case "E":
-                            taskList.add(new Event(taskDescription, taskStrings[3], taskStatus));
-                            break;
-                        case "D":
-                            taskList.add(new Deadline(taskDescription, taskStrings[3], taskStatus));
-                            break;
-                        default:
-                            throw new DukeException("Invalid save data");
+                    case "T":
+                        taskList.add(new Todo(taskDescription, taskStatus));
+                        break;
+                    case "E":
+                        taskList.add(new Event(taskDescription, taskStrings[3], taskStatus));
+                        break;
+                    case "D":
+                        taskList.add(new Deadline(taskDescription, taskStrings[3], taskStatus));
+                        break;
+                    default:
+                        throw new DukeException("Invalid save data");
                     }
                 }
                 s.close();
@@ -68,12 +68,12 @@ public class Storage {
             } else {
                 ui.showText("creating save data...");
             }
-            
-        // if the file cannot be read, generate an empty list 
+
+        // if the file cannot be read, generate an empty list
         } catch (IOException e) {
             ui.showError(e.getMessage());
             return new ArrayList<Task>();
-        // if the file contains corrupt data, generate an empty list 
+        // if the file contains corrupt data, generate an empty list
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             return new ArrayList<Task>();
@@ -83,12 +83,12 @@ public class Storage {
     }
 
     /**
-     * A method to update the tasks in the save file with the user's current existing tasks. 
-     * @param taskList ArrayList of user's current existing tasks to save to disk. 
+     * A method to update the tasks in the save file with the user's current existing tasks.
+     * @param taskList ArrayList of user's current existing tasks to save to disk.
      */
     public void updateFileContents(TaskList taskList) {
         ArrayList<Task> externalTaskList = taskList.getTasks();
-        // write & update save data with current tasklist 
+        // write & update save data with current tasklist
         try {
             FileWriter fw = new FileWriter(taskFilePath);
             for (Task t: externalTaskList) {

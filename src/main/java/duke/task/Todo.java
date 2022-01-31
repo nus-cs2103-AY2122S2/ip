@@ -1,14 +1,14 @@
 package duke.task;
 
 /**
- * Todo represents todo tasks. 
+ * Todo represents todo tasks.
  */
 public class Todo extends Task {
-    
+
     /**
      * Initializes the Todo task with a task description & boolean representing if it's done.
-     * @param description String of task description. 
-     * @param done boolean indicating if the task is done. 
+     * @param description String of task description.
+     * @param done boolean indicating if the task is done.
      */
     public Todo (String description, boolean done) {
         super(description, done);
@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     /**
      * Overriden method to print the Todo Task in a custom format.
-     * @return A String representing the custom format of a Todo Task. 
+     * @return A String representing the custom format of a Todo Task.
      */
     @Override
     public String toString() {
@@ -24,8 +24,8 @@ public class Todo extends Task {
     }
 
     /**
-     * A getter method to print the Todo Task in a custom format for saving to file. 
-     * @return A String representing the custom format of a Todo Task. 
+     * A getter method to print the Todo Task in a custom format for saving to file.
+     * @return A String representing the custom format of a Todo Task.
      */
     @Override
     public String toStringSaveData() {

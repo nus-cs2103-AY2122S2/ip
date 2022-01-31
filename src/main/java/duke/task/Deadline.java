@@ -6,18 +6,18 @@ import java.time.format.DateTimeParseException;
 import duke.DukeException;
 
 /**
- * Deadline represents deadline tasks. 
+ * Deadline represents deadline tasks.
  */
 public class Deadline extends Task {
 
     protected LocalDate by;
-    
+
     /**
      * Initializes the Deadline task with a task description, its regex & a boolean indicating if it's done.
-     * @param description String of task description. 
-     * @param by String of regex. 
-     * @param done boolean indicating if the task is done.  
-     * @throws DukeException error if the user's date input is incorrectly formatted. 
+     * @param description String of task description.
+     * @param by String of regex.
+     * @param done boolean indicating if the task is done.
+     * @throws DukeException error if the user's date input is incorrectly formatted.
      */
     public Deadline(String description, String by, boolean done) throws DukeException {
         super(description, done);
@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Overriden method to print the Deadline Task in a custom format.
-     * @return A String representing the custom format of a Deadline Task. 
+     * @return A String representing the custom format of a Deadline Task.
      */
     @Override
     public String toString() {
@@ -38,8 +38,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * A getter method to print the Deadline Task in a custom format for saving to file. 
-     * @return A String representing the custom format of a Deadline Task. 
+     * A getter method to print the Deadline Task in a custom format for saving to file.
+     * @return A String representing the custom format of a Deadline Task.
      */
     @Override
     public String toStringSaveData() {
