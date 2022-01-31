@@ -1,6 +1,13 @@
 package duke.parser;
 
-import duke.Commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.RemoveCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 import duke.tasklist.TaskList;
 import duke.exceptions.DukeException;
 
@@ -40,6 +47,9 @@ public class Parser {
         case REMOVE:
             new RemoveCommand(taskList, userInput);
             break;
+        case FIND:
+            new FindCommand(taskList, userInput);
+            break;
         case BYE:
             break;
         default:
@@ -51,7 +61,7 @@ public class Parser {
      * Types of valid commands
      */
     public enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, BYE, NULL
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, FIND, BYE, NULL
     }
 
     /**
@@ -61,6 +71,7 @@ public class Parser {
      */
     public static CommandType getCommandType(String userInput) {
         String command = userInput.split(" ")[0].toLowerCase(Locale.ROOT);
+
         switch (command) {
             case "list":
                 return CommandType.LIST;
@@ -76,6 +87,8 @@ public class Parser {
                 return CommandType.EVENT;
             case "remove":
                 return CommandType.REMOVE;
+            case "find":
+                return CommandType.FIND;
             case "bye":
                 return CommandType.BYE;
             default:

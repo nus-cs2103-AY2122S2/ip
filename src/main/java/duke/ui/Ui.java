@@ -30,6 +30,11 @@ public class Ui {
         System.out.println("Now you have " + taskList.getTasks().size() + " task(s) in the list");
     }
 
+    /** Prints message to inform user no matching task with given keyword */
+    public static void printNoTaskFound() {
+        System.out.println("No tasks found with given keyword. Please try again!");
+    }
+
     public static void printInvalidCommand() {
         System.out.println("Command is invalid, please try again!");
     }
