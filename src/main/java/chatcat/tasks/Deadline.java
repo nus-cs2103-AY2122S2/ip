@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
 /**
- * The default Deadline class. Inherited from {@code Task}.
+ * The default Deadline class inherited from {@code Task}.
  *
  * @see Task
  * @see DateTimeFormatter

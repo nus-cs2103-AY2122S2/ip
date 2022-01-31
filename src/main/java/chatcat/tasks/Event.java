@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
 /**
- * The default Event class. Inherited from {@code Task}.
+ * The default Event class inherited from {@code Task}.
  *
  * @see Task
  * @see DateTimeFormatter
