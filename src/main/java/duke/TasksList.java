@@ -37,6 +37,10 @@ public class TasksList {
     public String list() {
         StringBuilder response = new StringBuilder("");
 
+        if (tasks.size() == 0) {
+            return "You have 0 task";
+        }
+
         for (int i = 0; i < tasks.size(); i++) {
             response.append(String.format((i + 1) + ". " + tasks.get(i) + "\n"));
         }
@@ -65,6 +69,10 @@ public class TasksList {
             responses.add(task.toStorageString() + "\n");
         }
         return responses;
+    }
+
+    public int getSize() {
+        return this.tasks.size();
     }
 
     public String importStorageStrings(List<String> tasksStrings) throws InvalidArgumentException{
