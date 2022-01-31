@@ -27,22 +27,6 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a String representation of the event, in the form to be saved,
-     * such that it can be properly parsed when loaded back from the storage.
-     *
-     * @return The string representation of the event in the format to be saved.
-     */
-    @Override
-    public String getDateForSaving() {
-        if (this.date == null) {
-            return String.format("%c\t%c\t%s\t%s\n", getType(), getDone(), getTaskName(), this.dateString);
-        } else {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-            return String.format("%c\t%c\t%s\t%s\n", getType(), getDone(), getTaskName(), this.date.format(format));
-        }
-    }
-
-    /**
      * Gets the LocalDateTime object associated to this event, if it exists.
      * Returns null if it does not exist.
      *

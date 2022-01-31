@@ -13,17 +13,6 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-    public boolean addTask(String s) throws DukeException {
-        try {
-            Task t = Parser.parseToTask(s);
-            tasks.add(t);
-
-            return true;
-        } catch (DukeException e) {
-            String message = e.getMessage();
-            throw new DukeException(message + "/nUnable to add Task!");
-        }
-    }
     public void addTask(Task t) {
         this.tasks.add(t);
     }
@@ -54,12 +43,7 @@ public class TaskManager {
                 return false;
             } else {
                 Task t = tasks.get(index);
-                if (t.getDone() == ' ') {
-                    t.markDone();
-                    return true;
-                } else {
-                    return false;
-                }
+                return t.markDone();
             }
         }
     }
@@ -73,7 +57,6 @@ public class TaskManager {
 
 
     public boolean markTaskUndone(int index) {
-        // TODO refactor marking checks to Tasks
         if (tasks.size() <= 0) {
             return false;
         } else {
@@ -81,12 +64,7 @@ public class TaskManager {
                 return false;
             } else {
                 Task t = tasks.get(index);
-                if (t.getDone() == 'X') {
-                    t.markUndone();
-                    return true;
-                } else {
-                    return false;
-                }
+                return t.markUndone();
             }
         }
     }

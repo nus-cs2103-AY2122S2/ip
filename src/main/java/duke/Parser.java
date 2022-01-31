@@ -87,6 +87,19 @@ public class Parser {
     }
 
     // TODO parseToFileFromTask given a task, parses it in the correct form to be stored
+    public static String parseToFileFromTask(Task t) {
+        String dateStr = "";
+        if (t.getDateObj() == null) {
+            dateStr =  t.getDate();
+            if (dateStr.equals("")) {
+                dateStr = "None";
+            }
+        } else {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            dateStr = t.getDateObj().format(format);
+        }
+        return String.format("%c\t%c\t%s\t%s",t.getType(),t.getDone(),t.getTaskName(),dateStr);
+    }
 
     public static Task parseToTaskFromFile(String fileInput) throws DukeException {
         // <type>\t<done>\t<name>\t<date>
@@ -120,16 +133,18 @@ public class Parser {
 
         case 'D':
             if (date == null) {
-                return new Deadline(name,dateStr);
+                t = new Deadline(name,dateStr);
+            } else {
+                t = new Deadline(name, date);
             }
-            t = new Deadline(name, date);
             break;
 
         case 'E':
             if (date == null) {
-                return new Event(name,dateStr);
+                t = new Event(name,dateStr);
+            } else {
+                t = new Event(name, date);
             }
-            t = new Event(name, date);
             break;
 
         default:

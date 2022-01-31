@@ -61,8 +61,7 @@ public class Storage {
             FileWriter writer = new FileWriter(file);
 
             for ( Task task: taskManager.getTaskList()) {
-
-                writer.write(task.getDateForSaving());
+                writer.write(Parser.parseToFileFromTask(task) + "\n");
             }
 
             writer.close();

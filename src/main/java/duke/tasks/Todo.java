@@ -13,17 +13,6 @@ public class Todo extends Task{
     }
 
     /**
-     * Returns a String representation of the todo, in the form to be saved,
-     * such that it can be properly parsed when loaded back from the storage.
-     *
-     * @return The string representation of the todo in the format to be saved.
-     */
-    @Override
-    public String getDateForSaving() {
-        return String.format("%c\t%c\t%s\t%s\n", getType(), getDone(), getTaskName(), "None");
-    }
-
-    /**
      * Gets the LocalDateTime object associated to this event, if it exists.
      * Returns null if it does not exist.
      *

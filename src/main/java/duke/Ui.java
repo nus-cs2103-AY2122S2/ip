@@ -12,7 +12,7 @@ public class Ui {
     private static final String doubleLine =
             "=====================================================================================";
     private Scanner scanner = new Scanner(System.in);
-    public PrintStream writer = System.out;
+    private PrintStream writer = System.out;
 
     public void showHelpMenu() {
         String helpMenu = "List of available commands:\n\n" +

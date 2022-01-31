@@ -15,11 +15,19 @@ public abstract class Task {
 
     public Task() { }
 
-    public void markDone() {
-        this.done = 'X';
+    public boolean markDone() {
+        if (this.done == ' ') {
+            this.done = 'X';
+            return true;
+        }
+         return false;
     }
-    public void markUndone() {
-        this.done = ' ';
+    public boolean markUndone() {
+        if (this.done == 'X') {
+            this.done = ' ';
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -41,8 +49,6 @@ public abstract class Task {
     }
     public abstract String getDate();
     public abstract LocalDateTime getDateObj();
-    public abstract String getDateForSaving();
-
 
     /**
      * Returns a String representation of the Task.
@@ -50,8 +56,7 @@ public abstract class Task {
      * @return The String representation of the Task.
      */
     public String toString() {
-        String s = String.format("[%c][%c] %s",this.getType(),this.done,this.taskName);
-        return s;
+        return String.format("[%c][%c] %s", this.getType(), this.done, this.taskName);
     }
 
     public char getType() {

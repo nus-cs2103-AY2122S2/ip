@@ -26,22 +26,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String representation of the deadline Task, in the form to be saved,
-     * such that it can be properly parsed when loaded back from the storage.
-     *
-     * @return The string representation of the deadline in the format to be saved.
-     */
-    @Override
-    public String getDateForSaving() {
-        if (this.date == null){
-            return String.format("%c\t%c\t%s\t%s\n",getType(),getDone(),getTaskName(),this.dateString);
-        } else {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-            return String.format("%c\t%c\t%s\t%s\n",getType(),getDone(),getTaskName(),this.date.format(format));
-        }
-    }
-
-    /**
      * Returns a String representation of the deadline Task, to be displayed.
      *
      * @return The String representation of the deadline task, in the form of:<br>

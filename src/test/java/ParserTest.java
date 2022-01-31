@@ -160,4 +160,21 @@ public class ParserTest {
     public void parseDateTime_success() {
         assertEquals(LocalDateTime.parse("2011-11-11T15:00:00"),Parser.parseDateTime("11/11/2011 1500"));
     }
+
+    @Test
+    public void parseToFileFromTask_success() {
+        Todo todo = new Todo("Todo Name");
+        todo.markDone();
+        LocalDateTime date = LocalDateTime.parse("2011-11-11T15:00:00");
+        Event event = new Event("Event Name", date);
+        Event eventDateStr = new Event("Event Name String", "event date");
+        Deadline deadline = new Deadline("Deadline Name", date);
+        Deadline deadlineDateStr = new Deadline("Deadline Name String", "deadline");
+
+        assertEquals("T\tX\tTodo Name\tNone", Parser.parseToFileFromTask(todo));
+        assertEquals("E\t \tEvent Name\t11/11/2011 1500", Parser.parseToFileFromTask(event));
+        assertEquals("E\t \tEvent Name String\tevent date", Parser.parseToFileFromTask(eventDateStr));
+        assertEquals("D\t \tDeadline Name\t11/11/2011 1500", Parser.parseToFileFromTask(deadline));
+        assertEquals("D\t \tDeadline Name String\tdeadline", Parser.parseToFileFromTask(deadlineDateStr));
+    }
 }
