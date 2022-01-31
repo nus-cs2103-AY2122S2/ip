@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -35,10 +34,12 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Greets the user and initializes the nodes to be used.
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.greet(), dukeImage));
-        //duke.readStoredData();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
