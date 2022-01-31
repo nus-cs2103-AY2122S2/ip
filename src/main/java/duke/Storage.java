@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a storage for Duke. It deals with
@@ -36,9 +38,10 @@ public class Storage {
      * into a given TaskList object.
      *
      * @param taskList the TaskList object to populate with the data.
-     * @param ui the user interface of Duke.
+     * @param ui the text UI of Duke.
+     * @return a message showing whether the data was sucessfully loaded.
      */
-    public void loadData(TaskList taskList, Ui ui) {
+    public String loadData(TaskList taskList, Ui ui) {
         File taskDataDir = new File(this.dirPath);
         taskDataDir.mkdirs();
         try {
@@ -65,9 +68,9 @@ public class Storage {
                     }
                 }
             }
-            ui.showLoadingSuccess(taskList);
+            return ui.showLoadingSuccess(taskList);
         } catch (IOException e) {
-            ui.showLoadingError(e.getMessage());
+            return ui.showLoadingError(e.getMessage());
         }
     }
     /**
@@ -75,9 +78,8 @@ public class Storage {
      * with data from a given TaskList object.
      *
      * @param taskList the TaskList object you want to save.
-     * @param ui the user interface of Duke.
      */
-    public void saveData(TaskList taskList, Ui ui) {
+    public void saveData(TaskList taskList) throws DukeException {
         StringBuilder tasksToSave = new StringBuilder();
         for (int i = 1; i < taskList.getLength()+1; i++) {
             Task currTask = taskList.getTask(i);
@@ -98,7 +100,7 @@ public class Storage {
             writer.write(tasksToSave.toString());
             writer.close();
         } catch (IOException e) {
-            ui.showSavingError(e.getMessage());
+            throw new DukeException(e.getMessage());
         }
     }
 }

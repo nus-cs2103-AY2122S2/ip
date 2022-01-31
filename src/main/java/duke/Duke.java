@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates the Duke task manager bot.
@@ -15,34 +16,30 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    private boolean isExit;
 
-    private Duke(String dirPath, String fileName) {
-        this.ui = new Ui();
-        this.storage = new Storage(dirPath, fileName);
-        this.taskList = new TaskList();
-        this.storage.loadData(this.taskList, this.ui);
+    public Duke(String dirPath, String fileName) {
+        ui = new duke.ui.Ui();
+        storage = new Storage(dirPath, fileName);
+        taskList = new TaskList();
+        isExit = false;
     }
 
-    private void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            String userInput = this.ui.readCommand();
-            try {
-                Command command = Parser.parse(userInput, this.taskList.getLength());
-                command.execute(this.taskList, this.ui, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                this.ui.showCommandError(e.getMessage());
-            }
+    public String loadDataAndWelcome() {
+        return ui.showWelcome() + storage.loadData(taskList, ui);
+    }
+
+    public String getResponse(String userInput) {
+        try {
+            Command command = Parser.parse(userInput, taskList.getLength());
+            isExit = command.isExit();
+            return command.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.showCommandError(e.getMessage());
         }
     }
 
-    /**
-     * Starts the application by initialising and running a Duke bot.
-     *
-     * @param args command-line arguments, if any
-     */
-    public static void main(String[] args) {
-        new Duke("data", "duke.txt").run();
+    public boolean isExit() {
+        return isExit;
     }
 }

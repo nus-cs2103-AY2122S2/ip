@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command that finds a task containing a given string.
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param storage the storage of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList findResults = new TaskList();
         for (int i = 1; i < taskList.getLength() + 1; i++) {
             Task currTask = taskList.getTask(i);
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
                 findResults.addTask(currTask);
             }
         }
-        ui.showFindResult(findResults);
+        return ui.showFindResult(findResults);
     }
 
     /**

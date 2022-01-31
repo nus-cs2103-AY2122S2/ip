@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -23,15 +23,15 @@ public class DeleteCommand extends Command {
      * index from a given task list.
      *
      * @param taskList the task list to execute this command on.
-     * @param ui the user interface of Duke.
+     * @param ui the text UI of Duke.
      * @param storage the storage of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
         taskList.deleteTask(index);
-        ui.showTaskDeleted(task, taskList);
-        storage.saveData(taskList, ui);
+        return ui.showTaskDeleted(task, taskList) + this.saveData(taskList, ui, storage);
+
     }
 
     /**

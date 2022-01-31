@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Encapsulates an exception caused by invalid inputs into Duke.
+ * Encapsulates an exception that occurs in the Duke application.
  */
 public class DukeException extends Exception {
 

@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command that marks a task as not done.
@@ -30,11 +30,11 @@ public class UnmarkCommand extends Command {
      * @param storage the storage of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
         task.markAsNotDone();
-        ui.showTaskUnmarked(task);
-        storage.saveData(taskList, ui);
+        return ui.showTaskUnmarked(task)
+                + this.saveData(taskList, ui, storage);
     }
 
     /**

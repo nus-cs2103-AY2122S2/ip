@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command to show the task list.
@@ -17,8 +17,8 @@ public class ListCommand extends Command {
      * @param storage the storage of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showTaskList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showTaskList(taskList);
     }
 
     /**

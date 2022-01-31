@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates a command to exit the Duke application.
@@ -13,12 +13,13 @@ public class ByeCommand extends Command {
      * Displays the goodbye message.
      *
      * @param taskList the task list to execute this command on.
-     * @param ui the user interface of Duke.
+     * @param ui the text UI of Duke.
      * @param storage the storage of Duke.
+     * @return a goodbye message.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showGoodbye();
     }
 
     /**
