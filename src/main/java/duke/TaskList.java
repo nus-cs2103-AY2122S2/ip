@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -7,6 +8,10 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public TaskList() {
+      
     }
 
     public void addTask(Task task) {
@@ -27,9 +32,9 @@ public class TaskList {
 
     public String toString() {
         String string = "";
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            String status = task.getStatus() ? "X" : " ";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String status = task.isMarked() ? "X" : " ";
             string += String.format("%d. %s", i, task.toString());
         }
         return string;

@@ -1,13 +1,30 @@
 package duke;
 
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import java.time.LocalDate;
+
 public class Parser {
 
   public Parser() {
 
   }
 
-  public Command parse(String fullCommand) {
-      String fullCommandArray = fullCommand.split(" ");
+  public static Command parse(String fullCommand) {
+      String[] fullCommandArray = fullCommand.split(" ");
       String command = fullCommandArray[0];
       if (command.equals("deadline")) {
           String dataString = fullCommand.replaceFirst("deadline ", "");
@@ -32,18 +49,18 @@ public class Parser {
       }
       else if (command.equals("delete")) {
           String dataString = fullCommand.replaceFirst("delete ", "");
-          int taskNumber = String.parseInt(dataString);
+          int taskNumber = Integer.parseInt(dataString);
           return new DeleteCommand(taskNumber);
       }
       else if (command.equals("mark")) {
           String dataString = fullCommand.replaceFirst("mark ", "");
-          int taskNumber = String.parseInt(dataString);
+          int taskNumber = Integer.parseInt(dataString);
           return new MarkCommand(taskNumber);
       }
       else if (command.equals("unmark")) {
           String dataString = fullCommand.replaceFirst("unmark ", "");
-          int taskNumber = String.parseInt(dataString);
-          return new MarkCommand(taskNumber);
+          int taskNumber = Integer.parseInt(dataString);
+          return new UnmarkCommand(taskNumber);
       }
       else if (command.equals("bye")) {
           return new ExitCommand();
@@ -53,8 +70,4 @@ public class Parser {
       }
   }
 
-  public Command buildDeadlineCommand() {
-
-  }
-  
 }

@@ -1,9 +1,14 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import java.lang.Boolean;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -29,12 +34,12 @@ public class Storage {
                     tasks.add(new Todo(data[2], data[1]));
                 }
                 else if (data[0].equals("D")) {
-                    String date = data[3];
+                    LocalDate date = LocalDate.parse(data[3]);
                     tasks.add(new Deadline(text, status, date));
                 }
                 else if (data[0].equals("E")) {
-                    String date = data[3];
-                    tasks.add(new Deadline(text, status, date));
+                    LocalDate date = LocalDate.parse(data[3]);
+                    tasks.add(new Event(text, status, date));
                 }
             }
             fileScanner.close();

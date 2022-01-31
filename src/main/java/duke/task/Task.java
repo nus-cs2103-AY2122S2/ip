@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
 
   private String description;
   private boolean isMarked;
@@ -10,8 +10,8 @@ public class Task {
     this.isMarked = isMarked;
   }
 
-  public Task(String str) {
-    Task(str, false);
+  public Task(String description) {
+    this(description, false);
   }
 
   public void mark() {

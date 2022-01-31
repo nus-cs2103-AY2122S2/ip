@@ -1,15 +1,27 @@
 package duke;
 
+import duke.TaskList;
+import duke.task.Task;
+import java.util.Scanner;
+
 public class Ui {
 
-    public Ui();
+    private Scanner scanner;
+
+    public Ui() {
+      scanner = new Scanner(System.in);
+    }
+
+    public String readCommand() {
+      return scanner.nextLine();
+    }
 
     public void showWelcome() {
         System.out.println("Hello from Duke!");
     }
 
     public void showTaskAdded(Task task) {
-        System.out.println(String.format("added: %s", task.toString));
+        System.out.println(String.format("added: %s", task.toString()));
     }
 
     public void showTaskDeleted() {
@@ -30,6 +42,10 @@ public class Ui {
 
     public void showLine() {
         System.out.println("_____");
+    }
+
+    public void showLoadingError() {
+        System.out.println("Loading error");
     }
 
 }

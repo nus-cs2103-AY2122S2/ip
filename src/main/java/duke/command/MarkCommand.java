@@ -1,6 +1,11 @@
 package duke.command;
 
-public class MarkCommand {
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+
+public class MarkCommand extends Command {
   
   private int taskNumber;
 
