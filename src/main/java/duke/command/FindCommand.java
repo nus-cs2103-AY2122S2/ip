@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.manager.Storage;
 import duke.manager.TaskList;
 import duke.manager.Ui;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command that finds and prints all the tasks

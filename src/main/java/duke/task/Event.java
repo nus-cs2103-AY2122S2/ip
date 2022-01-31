@@ -1,16 +1,16 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.exception.DukeException;
+
 /**
  * Represents an Event Task that contains a date.
  */
-public class Event extends Task{
-    LocalDate date;
+public class Event extends Task {
+    private LocalDate date;
 
     /**
      * A constructor that stores the name of the task and its date.

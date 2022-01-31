@@ -1,17 +1,16 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.exception.DukeException;
 
 /**
  * Represents a Deadline Task that contains a due date.
  */
 public class Deadline extends Task {
-    LocalDate dueDate;
+    private LocalDate dueDate;
 
     /**
      * A constructor that stores the name of the task and its due date.

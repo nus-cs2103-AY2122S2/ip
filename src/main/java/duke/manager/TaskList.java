@@ -2,8 +2,9 @@ package duke.manager;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.task.Task;
+
 
 /**
  * Represents a list of tasks.
