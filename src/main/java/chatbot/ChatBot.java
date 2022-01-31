@@ -1,15 +1,17 @@
 package chatbot;
 
+import java.util.Scanner;
+
 import chatbot.exception.ChatBotException;
 import chatbot.util.Parser;
 import chatbot.util.Storage;
 import chatbot.util.TaskList;
 import chatbot.util.Ui;
 
-import java.util.Scanner;
 
 /**
- * Represents a ChatBot AI (taking on the persona of a cheerful innkeeper) that users (who are personified as passing travellers) can interact with to manage their schedule.
+ * Represents a ChatBot AI (taking on the persona of a cheerful innkeeper)
+ * that users (who are personified as passing travellers) can interact with to manage their schedule.
  */
 public class ChatBot {
 

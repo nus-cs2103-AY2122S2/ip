@@ -105,7 +105,7 @@ public class Task {
                         && t.getType().equals(type)
                         && t.getTimestamp().equals(timestamp)
                         && t.getDone().equals(done)
-            );
+                );
         } else {
             return false;
         }

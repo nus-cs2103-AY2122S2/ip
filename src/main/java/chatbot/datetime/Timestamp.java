@@ -1,13 +1,13 @@
 package chatbot.datetime;
 
-import chatbot.exception.ChatBotException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.ResolverStyle;
+
+import chatbot.exception.ChatBotException;
 
 /**
  * Represents a date or a combination of date and time.
