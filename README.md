@@ -5,7 +5,7 @@
 Tsundere frees your mind of having to remember things you need to do while scolding you for forgeting. It's
 - text-based
 - easy to learn
-- ~~ FAST~~ SUPER FAST to use
+- ~~FAST~~ SUPER FAST to use
 
 All you need to do is,
 
@@ -19,8 +19,8 @@ And it is **FREE**!
 Features:
 
 - [x] Managing tasks
-- [] Hot waifu anime girl (coming soon)
-- [] Reminders (coming soon)
+- [ ] Hot waifu anime girl (coming soon)
+- [ ] Reminders (coming soon)
 
 If you Java programmer, you can use it to practice Java too. Here's the constructor for `Tsundere`:
 
