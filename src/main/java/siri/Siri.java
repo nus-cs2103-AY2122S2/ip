@@ -1,3 +1,5 @@
+package siri;
+
 public class Siri {
 
     private static Ui ui;
