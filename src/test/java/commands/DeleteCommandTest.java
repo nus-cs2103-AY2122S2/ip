@@ -14,24 +14,41 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
 
+/**
+ * Class to test delete command
+ */
 public class DeleteCommandTest {
     private DeleteCommand cmd;
 
+    /**
+     * Method executed to set-up before each test
+     * ensures command contains a new delete command
+     */
     @BeforeEach
     void setUp() {
         cmd = new DeleteCommand(3);
     }
 
+    /**
+     * Tests command does not store task list across commands
+     */
     @Test
     void getListBeforeExecute() {
         assertNull(cmd.getList());
     }
 
+    /**
+     * Tests command returns correct boolean value
+     * for checking if program terminates
+     */
     @Test
     void doesNotEnd() {
         assertFalse(cmd.endsProgram());
     }
 
+    /**
+     * Tests command deletes a task from the list given a valid index
+     */
     @Test
     void deletes() {
         TaskList tasks = new TaskList();
@@ -48,6 +65,10 @@ public class DeleteCommandTest {
 
     }
 
+    /**
+     * Tests command does not delete a task from a list given invalid index
+     * tests that error message printed is the correct one
+     */
     @Test
     void throwsOutOfRangeException() {
         TaskList tasks = new TaskList();

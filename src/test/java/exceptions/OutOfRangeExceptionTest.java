@@ -4,8 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Class to test EmptyDescription exception
+ */
 public class OutOfRangeExceptionTest {
 
+    /**
+     * Tests correct error message is returned
+     */
     @Test
     void correctError() {
         OutOfRangeException e = new OutOfRangeException();

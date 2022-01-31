@@ -15,26 +15,41 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
 
-
-
+/**
+ * Class to test unmark command
+ */
 public class UnMarkCommandTest {
     private UnMarkCommand cmd;
 
+    /**
+     * Method executed to set-up before each test
+     * ensures command contains a new unmark command
+     */
     @BeforeEach
     void setUp() {
         cmd = new UnMarkCommand(3);
     }
 
+    /**
+     * Tests command does not store task list across commands
+     */
     @Test
     void getListBeforeExecute() {
         assertNull(cmd.getList());
     }
 
+    /**
+     * Tests command returns correct boolean value
+     * for checking if program terminates
+     */
     @Test
     void doesNotEnd() {
         assertFalse(cmd.endsProgram());
     }
 
+    /**
+     * Tests command unmarks a task from the list given a valid index
+     */
     @Test
     void unMarks() {
         TaskList tasks = new TaskList();
@@ -55,6 +70,10 @@ public class UnMarkCommandTest {
 
     }
 
+    /**
+     * Tests command does not delete a task from a list given invalid index
+     * tests that error message printed is the correct one
+     */
     @Test
     void throwsOutOfRangeException() {
         TaskList tasks = new TaskList();

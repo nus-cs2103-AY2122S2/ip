@@ -14,26 +14,41 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
 
-
-
+/**
+ * Class to test mark command
+ */
 public class MarkCommandTest {
     private MarkCommand cmd;
 
+    /**
+     * Method executed to set-up before each test
+     * ensures command contains a new mark command
+     */
     @BeforeEach
     void setUp() {
         cmd = new MarkCommand(3);
     }
 
+    /**
+     * Tests command does not store task list across commands
+     */
     @Test
     void getListBeforeExecute() {
         assertNull(cmd.getList());
     }
 
+    /**
+     * Tests command returns correct boolean value
+     * for checking if program terminates
+     */
     @Test
     void doesNotEnd() {
         assertFalse(cmd.endsProgram());
     }
 
+    /**
+     * Tests command marks a task from the list given a valid index
+     */
     @Test
     void marks() {
         TaskList tasks = new TaskList();
@@ -49,6 +64,10 @@ public class MarkCommandTest {
 
     }
 
+    /**
+     * Tests command does not delete a task from a list given invalid index
+     * tests that error message printed is the correct one
+     */
     @Test
     void throwsOutOfRangeException() {
         TaskList tasks = new TaskList();
