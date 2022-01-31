@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import spark.ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Duke implemented with FXML.
  */
 public class Main extends Application {
 
