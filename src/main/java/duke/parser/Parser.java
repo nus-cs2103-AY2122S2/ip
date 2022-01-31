@@ -1,32 +1,19 @@
 package duke.parser;
 
+import duke.commands.Command;
+import duke.commands.Keywords;
 import duke.exception.ChiException;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.Todo;
 import duke.tasklist.TaskList;
-import duke.task.Event;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Interprets messages sent by the user.
  */
 public class Parser {
+/*
 
-    /**
-     * Processes a Task index based on message sent by user.
-     *
-     * @param msg The message sent by the user.
-     * @param size The current size of the TaskList.
-     * @return An integer of the index.
-     * @throws ChiException If invalid messages are sent by the user.
-     */
     private int processNumberMsg(String msg, int size) throws ChiException {
         String refine = msg.trim();
         if (refine.split(" ").length > 1) {
@@ -46,16 +33,7 @@ public class Parser {
         }
     }
 
-    /**
-     * Adds a new Deadline task if message sent by user is given in the correct format.
-     *
-     * @param msg The body of the message sent by the user.
-     * @param tl The TaskList where the Deadline will be stored.
-     * @param sge The Storage which will write the new Deadline onto the data file.
-     * @return A String representing a successful Deadline addition.
-     * @throws ChiException If an invalid message is read.
-     * @throws IOException If problem occurs when writing the new Deadline onto the data file.
-     */
+
     private String processDeadlineMsg(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         String[] refineMore = msg.split("/by");
         System.out.println(refineMore[0]);
@@ -95,16 +73,6 @@ public class Parser {
 
     }
 
-    /**
-     * Adds a new Event task if message sent by user is given in the correct format.
-     *
-     * @param msg The body of the message sent by the user.
-     * @param tl The TaskList where the Event will be stored.
-     * @param sge The Storage which will write the new Event onto the data file.
-     * @return A String representing a successful Event addition.
-     * @throws ChiException If an invalid message is read.
-     * @throws IOException If problem occurs when writing the new Event onto the data file.
-     */
     private String processEventMsg(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         String[] refineMore = msg.split("/at");
         if (refineMore[0].equals(msg)) {
@@ -153,29 +121,14 @@ public class Parser {
                 newTask, tl.getSize());
     }
 
-    /**
-     * Finds tasks in the task list which match keywords in the message body.
-     *
-     * @param msg The message body.
-     * @param tl The TaskList containing tasks.
-     * @return A String response of matching tasks found.
-     */
+
     public String processFindMsg(String msg, TaskList tl) {
         // Assume that at this point there are some text
         String[] findWords = msg.split(" ");
         return "Here's what I could find!\n" + tl.checkWordsInTask(findWords);
     }
 
-    /**
-     * Carries out various operations if valid message is sent by the user.
-     *
-     * @param msg The raw message sent by the user.
-     * @param tl The TaskList storing the user's Tasks.
-     * @param sge Storage of the tasks in the hard-disk.
-     * @return A string of the expected response to the user's message.
-     * @throws ChiException If the message cannot be interpreted.
-     * @throws IOException If there are problems accessing the data file in Storage.
-     */
+
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
@@ -241,6 +194,34 @@ public class Parser {
                 throw new ChiException(msg);
                 // Fallthrough
             }
+        }
+    }
+    */
+    public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
+        String[] messageFragments = msg.trim().split(" ");
+        if (messageFragments.length == 0) {
+            throw new ChiException("Hey it's not like I want you to...but can you type something nyan!");
+        } else {
+            Keywords s = messageValidator(messageFragments);
+            Command r = Command.of(s, messageFragments);
+            return r.execute(tl, sge);
+            }
+    }
+
+    public Keywords messageValidator(String[] tokens) throws ChiException {
+        try {
+            Keywords res = Keywords.getKeyword(tokens[0].toUpperCase());
+            if ((res.equals(Keywords.ADD) || res.equals(Keywords.FIND)) && tokens.length < 2) {
+                throw new ChiException("Hey this command is too short nyan!");
+            } else if ((res.equals(Keywords.MARK) || res.equals(Keywords.UNMARK) || res.equals(Keywords.DELETE))
+                    && tokens.length < 2) {
+                throw new ChiException("Hey can you specify a number nyan!");
+            } else if (res.equals(Keywords.LIST) && tokens.length > 2) {
+                throw new ChiException("Hey list doesn't take in so many arguments nyan!");
+            }
+            return res;
+        } catch (ChiException e) {
+            throw new ChiException(e.getMessage());
         }
     }
 }

@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hi welcome to ChiBot", dukeImage));
     }
 
     public void setDuke(Chi d) {
@@ -78,7 +79,7 @@ public class MainWindow extends AnchorPane {
         } catch (IOException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("IO faulty", dukeImage)
+                    DialogBox.getDukeDialog("The IO is faulty nyan~!", dukeImage)
             );
             userInput.clear();
         }

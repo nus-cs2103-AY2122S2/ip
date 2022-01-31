@@ -21,6 +21,7 @@ public class Main extends Application {
             MainWindow app = new MainWindow(chi);
             Scene scene = new Scene(app);
             stage.setScene(scene);
+            stage.setTitle("ChiBot");
            // fxmlLoader.<MainWindow>getController().setDuke(chi);
             stage.show();
       /*  } catch (IOException e) {

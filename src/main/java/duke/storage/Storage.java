@@ -69,23 +69,28 @@ public class Storage {
                         DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
                         splitTask[1].equals("1"));
-            } else {
+            }
+            /*else {
                 return new Deadline(splitTask[2], LocalDate.parse(splitTask[3],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd")), splitTask[1].equals("1"));
             }
+
+             */
         } else {
             if (splitTask.length == 6) {
                 return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
                         LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern("HH:mm")),
                         splitTask[1].equals("1"));
-            } else {
+            }
+            /*else {
                 return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         splitTask[1].equals("1"));
-            }
-        }
-    }
+            }*/
 
+        }
+        return null;
+    }
     /**
      * Extracts the tasks stored in the data file.
      *
@@ -111,7 +116,7 @@ public class Storage {
             }
             File newDataFile = new File(dataFilePath);
             newDataFile.createNewFile();
-            throw new ChiException("File not found, restart program nyan!");
+            throw new ChiException("File not found");
         }
     }
 

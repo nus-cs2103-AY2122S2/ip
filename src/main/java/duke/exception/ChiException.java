@@ -24,14 +24,6 @@ public class ChiException extends Exception {
     @Override
     public String toString() {
         // Error messages based on message sent
-        if (msg.equals("todo") || msg.equals("deadline") || msg.equals("event")) {
-            return "Hey! This " + msg + " can't be empty nyaan~!";
-        } else if (msg.equals("mark") || msg.equals("unmark") || msg.equals("delete")) {
-            return "Hey! Please choose something to " + msg + " nyaan~!";
-        } else {
-            return msg;
-        }
+        return this.msg;
     }
-
-    // TBD - More errors will be added to handle other potential invalid inputs by the user
 }

@@ -37,33 +37,26 @@ public class Chi {
         try {
             this.taskList = new TaskList(storage.load());
         } catch (ChiException e) {
-            // print error for file not found
-            ui.printErrorMsg(e.getMessage());
             this.taskList = new TaskList();
         } catch (IOException e) {
             // print error for IO problems
-            ui.printErrorMsg("There's something wrong with the IO nyan!");
+            ui.printErrorMsg("There's something wrong with the IO nyan~!!");
         }
     }
 
-    /**
-     * Runs the UI component of Chat bot to start accepting and printing user input.
-     */
+/*
     public void run() {
         ui.printWelcome();
         ui.requestInput(this.taskList, this.storage, this.parser);
         ui.printGoodbye();
     }
 
-    /**
-     * Creates new Chi instance and starts running Chat bot.
-     * @param args The command line arguments supplied when program runs.
-     */
+
     public static void main(String[] args) {
         Chi myBot = new Chi("data/tasks.txt");
         myBot.run();
     }
-
+*/
     public String getResponse(String msg) throws ChiException, IOException {
              return parser.processMessage(msg, taskList, storage);
     }

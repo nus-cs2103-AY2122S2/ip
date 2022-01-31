@@ -16,22 +16,6 @@ public class Event extends Task {
     /** The ending time of the event */
     private LocalTime eventEndTime;
 
-    /**
-     * Constructor of Event class.
-     *
-     * @param description The description of the event.
-     * @param date The date of the event as a LocalDate object.
-     * @param isDone The completion status of the event.
-     */
-    public Event(String description, LocalDate date, boolean isDone ) {
-        super(description);
-        this.eventDate = date;
-        this.eventStartTime = LocalTime.parse("00:00", DateTimeFormatter.ofPattern("HH:mm"));
-        this.eventEndTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("HH:mm"));
-        if (isDone) {
-            this.markAsDone();
-        }
-    }
 
     /**
      * Constructor of Event class.
@@ -60,7 +44,7 @@ public class Event extends Task {
     @Override
     public String writeToFile() {
         return " E " + super.writeToFile() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
-                + this.eventEndTime;
+                + this.eventEndTime + "\n";
     }
 
     /**
