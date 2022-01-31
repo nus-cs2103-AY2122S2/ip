@@ -15,9 +15,10 @@ public class NotKnownCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return show error message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError("OOPS!!! I'm sorry, but I don't know what that means :<");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showError("OOPS!!! I'm sorry, but I don't know what that means :<");
     }
 
     /**

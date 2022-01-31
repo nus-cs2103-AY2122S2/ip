@@ -16,12 +16,12 @@ public class ExitCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return message saying goodbye.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks.getTaskList());
-        ui.showGoodBye();
+        return ui.showGoodBye();
     }
-
 
     /**
      * Checks if the user is exiting the program.

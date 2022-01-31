@@ -26,9 +26,10 @@ public class HandleErrorCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return error message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showError(errorMsg);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showError(errorMsg);
     }
 
     /**

@@ -27,20 +27,22 @@ public class DeleteCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return message stating task deleted. If not show error message to user.
      * @throws DukeException if user cannot delete tasks or key in wrong input.
+     *
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int currTaskNum = Integer.parseInt(taskNum);
             if (tasks.getTaskList().size() >= currTaskNum && currTaskNum > 0) {
                 Task currTask = tasks.getTaskList().get(currTaskNum - 1);
                 tasks.deleteTask(currTaskNum - 1);
-                ui.showTaskDeleted(currTask, tasks.getTaskList());
+                return ui.showTaskDeleted(currTask, tasks.getTaskList());
             } else {
-                ui.showError("You don't have such task");
+                return ui.showError("You don't have such task");
             }
         } catch (NumberFormatException e) {
-            ui.showError("Error! Please input a task number");
+            return ui.showError("Error! Please input a task number");
         }
     }
 

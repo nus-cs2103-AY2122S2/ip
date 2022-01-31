@@ -8,6 +8,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.DukeException;
 import duke.ui.Ui;
+import javafx.scene.image.Image;
 
 /**
  * Represent the main class of the program.
@@ -16,6 +17,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor for Duke.
@@ -34,29 +37,15 @@ public class Duke {
     }
 
     /**
-     * Runs the program.
-     *
-     * @throws DukeException exception thrown when error occurs.
+     * Returns the response base on the input.
      */
-    public void run() throws DukeException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String[] fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException | IOException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke("data/dukesave.txt").run();
     }
 }

@@ -26,10 +26,11 @@ public class AddCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return message stating task adeed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        ui.showTaskAdded(task, tasks.getTaskList());
+        return ui.showTaskAdded(task, tasks.getTaskList());
     }
 
     /**

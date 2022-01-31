@@ -21,25 +21,15 @@ public class Ui {
     /**
      * Prints greeting message when user run the program.
      */
-    public void showWelcome() {
-        String greet = "Hello! I'm Duke\n" + "What can I do for you?";
-        System.out.println(greet);
-    }
-
-    /**
-     * Reads the user command and return the list commands.
-     * Command list includes the keyword and description.
-     */
-    public String[] readCommand() {
-        String[] commandList = new String[]{sc.next(), sc.nextLine()};
-        return commandList;
+    public String showWelcome() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * Prints dash lines. For format purpose.
      */
-    public void showLine() {
-        System.out.println("----------------------------------");
+    public String showLine() {
+        return "----------------------------------";
     }
 
     /**
@@ -52,15 +42,15 @@ public class Ui {
     /**
      * Prints error message that was thrown in other class.
      */
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 
     /**
      * Prints goodbye message when user exit the program.
      */
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -69,10 +59,9 @@ public class Ui {
      * @param task task to be added into the list.
      * @param taskLists the list of task.
      */
-    public void showTaskAdded(Task task, ArrayList<Task> taskLists) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task + "\n" + "Now you have " + taskLists.size()
-                + " tasks in the list.");
+    public String showTaskAdded(Task task, ArrayList<Task> taskLists) {
+        return "Got it. I've added this task:" + "\n" + task + "\n"
+                + "Now you have " + taskLists.size() + " tasks in the list.";
     }
 
     /**
@@ -81,24 +70,24 @@ public class Ui {
      * @param task task to be deleted from the list.
      * @param taskLists the list of task.
      */
-    public void showTaskDeleted(Task task, ArrayList<Task> taskLists) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task + "\n" + "Now you have " + taskLists.size()
-                + " tasks in the list.");
+    public String showTaskDeleted(Task task, ArrayList<Task> taskLists) {
+        return "Noted. I've removed this task:" + "\n" + task + "\n"
+                + "Now you have " + taskLists.size() + " tasks in the list.";
     }
 
     /**
      * Displays the list of tasks the user has.
      */
-    public void showList(ArrayList<Task> taskLists) {
+    public String showList(ArrayList<Task> taskLists) {
         if (taskLists.size() == 0) {
-            System.out.println("No task for now");
+            return "No task for now";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String result = "Here are the tasks in your list:\n";
             for (int i = 1; i < taskLists.size() + 1; i++) {
                 Task currTask = taskLists.get(i - 1);
-                System.out.println(i + ". " + currTask);
+                result += i + ". " + currTask + "\n";
             }
+            return result;
         }
     }
 
@@ -107,9 +96,8 @@ public class Ui {
      *
      * @param currTask task to be mark.
      */
-    public void showTaskMarked(Task currTask) {
-        System.out.println("Nice! I've marked this task as done:\n"
-                + currTask);
+    public String showTaskMarked(Task currTask) {
+        return "Nice! I've marked this task as done:\n" + currTask;
     }
 
     /**
@@ -117,9 +105,8 @@ public class Ui {
      *
      * @param currTask task to be unmarked.
      */
-    public void showTaskUnmarked(Task currTask) {
-        System.out.println("OK, I've marked this task as not done yet:\n"
-                + currTask);
+    public String showTaskUnmarked(Task currTask) {
+        return "OK, I've marked this task as not done yet:\n" + currTask;
     }
 
     /**
@@ -127,15 +114,16 @@ public class Ui {
      *
      * @param resultLists result lists from the search keyword.
      */
-    public void displaySearchResult(ArrayList<Task> resultLists) {
+    public String displaySearchResult(ArrayList<Task> resultLists) {
         if (resultLists.size() == 0) {
-            System.out.println("Opps! No such results");
+            return "Opps! No such results";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < resultLists.size(); i++) {
                 Task currTask = resultLists.get(i);
-                System.out.println(i + 1 + ". " + currTask);
+                result += i + 1 + ". " + currTask;
             }
+            return result;
         }
     }
 

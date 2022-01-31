@@ -26,18 +26,19 @@ public class MarkCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
+     * @return message stating task mark. Else show error message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int currTaskNum = Integer.parseInt(taskNum);
             if (tasks.getTaskList().size() >= currTaskNum && currTaskNum > 0) {
                 Task currTask = tasks.markTask(currTaskNum);
-                ui.showTaskMarked(currTask);
+                return ui.showTaskMarked(currTask);
             } else {
-                ui.showError("You don't have such task");
+                return ui.showError("You don't have such task");
             }
         } catch (NumberFormatException e) {
-            ui.showError("Error! Please input a task number");
+            return ui.showError("Error! Please input a task number");
         }
 
     }

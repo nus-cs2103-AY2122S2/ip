@@ -23,11 +23,12 @@ public class Parser {
     /**
      * Handles the user inputs.
      *
-     * @param commandList the list of command includes keyword and description.
+     * @param command the command includes keyword and description.
      * @return the respective commands.
      */
-    public static Command parse(String[] commandList) {
-        String firstWord = commandList[0];
+    public static Command parse(String command) {
+        String[] commandList = command.split(" ", 2);
+        String firstWord = commandList[0].toLowerCase();
         String remainingWord = commandList[1].trim();
         try {
             switch (firstWord) {

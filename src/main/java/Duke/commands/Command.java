@@ -21,7 +21,7 @@ public abstract class Command {
      * @throws DukeException exception thrown when there is error occurs.
      * @throws IOException exception thrown when there is error occurs.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * returns true if is ExitCommand. Else false.
