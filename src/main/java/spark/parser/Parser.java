@@ -47,7 +47,7 @@ public class Parser {
             return new DeleteTaskCommand(getDeleteTaskParams(input, keyword));
 
         } else if (keyword == CommandKeyword.TODO) {
-            return new AddToDoCommand(getAddToDoParams(input, keyword));
+            return new AddTodoCommand(getAddToDoParams(input, keyword));
 
         } else if (keyword == CommandKeyword.DEADLINE) {
             return new AddDeadlineCommand(getAddDeadlineParams(input, keyword));

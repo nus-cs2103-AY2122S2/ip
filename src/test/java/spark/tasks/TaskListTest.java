@@ -26,7 +26,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
 
         try {
-            taskList.addToDo("Buy milk");
+            taskList.addTodo("Buy milk");
         } catch (SparkException e) {
             fail(e.getMessage());
         }
@@ -50,7 +50,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
 
         try {
-            taskList.addToDo("buy milk");
+            taskList.addTodo("buy milk");
             taskList.markTask(1);
             assertTrue(taskList.getLastAddedTask().isDone());
         } catch (SparkException e) {
@@ -63,7 +63,7 @@ public class TaskListTest {
         // a unit test for TaskList#mark method
         TaskList taskList = new TaskList();
         try {
-            taskList.addToDo("buy milk");
+            taskList.addTodo("buy milk");
         } catch (SparkException e) {
             fail(e.getMessage());
         }

@@ -32,7 +32,7 @@ public class TaskList {
     /**
      * Adds a Todo with a non-empty title.
      */
-    public void addToDo(String title) {
+    public void addTodo(String title) {
         Todo toDo = new Todo(title);
         tasks.add(toDo);
 

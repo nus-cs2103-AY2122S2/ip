@@ -2,7 +2,7 @@ package spark;
 
 import org.junit.jupiter.api.Test;
 import spark.parser.commands.commandtypes.AddDeadlineCommand;
-import spark.parser.commands.commandtypes.AddToDoCommand;
+import spark.parser.commands.commandtypes.AddTodoCommand;
 import spark.parser.commands.commandtypes.Command;
 import spark.parser.commands.commandtypes.MarkCommand;
 import spark.exceptions.SparkException;
@@ -20,7 +20,7 @@ public class ParserTest {
         String input = "todo buy milk";
         try {
             Command command = Parser.parseInput(input);
-            assertTrue(command instanceof AddToDoCommand);
+            assertTrue(command instanceof AddTodoCommand);
         } catch (SparkException e) {
             fail(e.getMessage());
         }
