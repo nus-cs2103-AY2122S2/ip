@@ -1,6 +1,7 @@
 package taskmaster.util;
 
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 import taskmaster.task.Task;
 
@@ -82,16 +83,18 @@ public class TaskList {
      * Display all the tasks in the list.
      */
 
-    public void list() {
+    public String list() {
+        StringBuilder sb = new StringBuilder();
         if (currentSize == 0) {
-            System.out.println("    \nYou haven't added any task, brat!\n");
+            sb.append("    \nYou haven't added any task, brat!\n");
         } else {
-            System.out.println("    \nHere are the tasks in your list:");
+            sb.append("    \nHere are the tasks in your list:");
             for (int i = 0; i < currentSize; i++) {
-                System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
+                sb.append("    " + (i + 1) + ". " + this.taskList.get(i));
             }
-            System.out.println("\n");
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
     /**
@@ -117,18 +120,21 @@ public class TaskList {
      * @param strToFind keyword to be present in the task description.
      */
 
-    public void find(String strToFind) {
+    public String find(String strToFind) {
+        StringBuilder sb = new StringBuilder();
         int count = 1;
         for (Task task:taskList) {
             if (task.containsKeyword(strToFind)) {
-                System.out.println(count + ". " + task);
+                sb.append(count + ". " + task + "\n");
                 count++;
             }
         }
 
         if (count == 1) {
-            System.out.println("No task with that keyword\n");
+           sb.append("No task with that keyword\n");
         }
+
+        return sb.toString();
     }
 
     /**
@@ -136,8 +142,8 @@ public class TaskList {
      * current tasks.
      */
 
-    public void printCurrentSize() {
-        System.out.println("Now you have " + this.currentSize + " tasks in the list.\n");
+    public String returnCurrentSize() {
+        return "Now you have " + this.currentSize + " tasks in the list.\n";
     }
 
     /**

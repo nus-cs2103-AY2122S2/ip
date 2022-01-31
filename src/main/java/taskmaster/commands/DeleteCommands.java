@@ -3,6 +3,10 @@ package taskmaster.commands;
 import taskmaster.exception.DukeExceptions;
 import taskmaster.task.Task;
 import taskmaster.util.TaskList;
+import taskmaster.task.Task;
+import taskmaster.exception.DukeExceptions;
+import taskmaster.userinterface.UserInterface;
+import taskmaster.util.Storage;
 
 
 /*
@@ -12,18 +16,15 @@ import taskmaster.util.TaskList;
  */
 
 public class DeleteCommands extends Commands {
-    private TaskList taskList;
 
     /**
      * Constructor for DeleteCommands
      *
      * @param command Type of command.
-     * @param taskList Task list that command is going to be added in.
      */
 
-    public DeleteCommands(String command, TaskList taskList) {
+    public DeleteCommands(String command) {
         super(command);
-        this.taskList = taskList;
     }
 
     /**
@@ -31,17 +32,17 @@ public class DeleteCommands extends Commands {
      * Extract the components of the command.
      */
 
-    private void parseCommand() {
+    private String parseCommand(TaskList taskList) throws DukeExceptions {
         String[] stringIntoParts = this.command.split(" ");
 
-        try {
-            if (stringIntoParts.length == 1) {
-                throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
-            } else if (stringIntoParts.length > 2) {
-                //Handle the case of having more than 2 inputs
-                throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
-            }
+        if (stringIntoParts.length == 1) {
+            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
+        } else if (stringIntoParts.length > 2) {
+            //Handle the case of having more than 2 inputs
+            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
+        }
 
+        try {
             //Handle error if the second input is not an integer
             //Gets the index of the task in the task list
             int index = Integer.parseInt(stringIntoParts[1]);
@@ -49,33 +50,31 @@ public class DeleteCommands extends Commands {
             //If index is out of range, throw illegal argument exception
             if (taskList.isNumberOutOfRange(index)) {
                 throw new DukeExceptions("BRAT ! Your index is out of range! "
-                                            + "Number has to in the range of the list\n");
+                        + "Number has to in the range of the list\n");
             }
 
-            deleteTask(index);
+            return deleteTask(index, taskList);
 
         } catch (NumberFormatException nfe) {
-            System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
-
-        } catch (DukeExceptions e) {
-            //Out of task range is thrown if the second input is out of range
-            System.out.println(e.getMessage());
+            throw new DukeExceptions("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
         }
     }
 
-    /**
+     /**
      * Helper function to delete task at the specified index
      * in the task list.
      *
      * @param index Index of the task in the task list.
      */
 
-    private void deleteTask(int index) {
+    private String deleteTask(int index, TaskList taskList) {
+        String result = "";
         Task selectedTask = taskList.get(index - 1);
-        System.out.println("YES! I've removed this task and soon I'll remove you as well!:\n");
-        printTask(selectedTask);
+        result += "YES! I've removed this task and soon I'll remove you as well!:\n";
+        result += printTask(selectedTask);
         taskList.delete(index - 1);
-        taskList.printCurrentSize();
+        result += taskList.returnCurrentSize();
+        return result;
     }
 
     /**
@@ -85,17 +84,17 @@ public class DeleteCommands extends Commands {
      * @param task Task that has been successfully added.
      */
 
-    private void printTask(Task task) {
-        System.out.println("    " + task.toString());
+    private String printTask(Task task) {
+        return "    " + task.toString();
     }
 
     /**
      * Execute Command.
      */
 
-    public void execute() {
-        parseCommand();
+    @Override
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
+        return parseCommand(taskList);
     }
-
 
 }

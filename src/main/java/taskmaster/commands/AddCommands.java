@@ -9,7 +9,9 @@ import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
 import taskmaster.task.Task;
 import taskmaster.task.TodoTask;
+import taskmaster.userinterface.UserInterface;
 import taskmaster.util.TaskList;
+import taskmaster.util.Storage;
 
 
 /*
@@ -19,18 +21,15 @@ import taskmaster.util.TaskList;
 
 public class AddCommands extends Commands {
     /** TaskList contains all the task. **/
-    private TaskList taskList;
 
     /**
      * Constructor for AddCommands.
      *
      * @param command Type of command.
-     * @param taskList Task list that command is going to be added in.
      */
 
-    public AddCommands(String command, TaskList taskList) {
+    public AddCommands(String command) {
         super(command);
-        this.taskList = taskList;
     }
 
     /**
@@ -39,26 +38,21 @@ public class AddCommands extends Commands {
      * Categorise it into either Todo Command or Deadline/Event task.
      */
 
-    private void parseCommand() {
+    private String parseCommand(TaskList taskList) throws DukeExceptions {
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
+        //Handle the case of having no second input
+        if (stringIntoParts.length == 1) {
+            throw new DukeExceptions("What?! Task description cannot be empty."
+                    + "Eg todo eat, deadline eat food /by 12pm,"
+                    + "event concert /at 8pm\n");
+        }
+        String taskName = command.substring(command.indexOf(" "));
 
-        try {
-            //Handle the case of having no second input
-            if (stringIntoParts.length == 1) {
-                throw new DukeExceptions("What?! Task description cannot be empty."
-                        + "Eg todo eat, deadline eat food /by 12pm,"
-                        + "event concert /at 8pm\n");
-            }
-            String taskName = command.substring(command.indexOf(" "));
-
-            if (firstWord.equals("todo")) {
-                addTodoTask(taskName);
-            } else {
-                parseDeadlineEventTasks();
-            }
-        } catch (DukeExceptions e) {
-            System.out.println(e.getMessage());
+        if (firstWord.equals("todo")) {
+            return addTodoTask(taskName, taskList);
+        } else {
+            return parseDeadlineEventTasks(taskList);
         }
     }
 
@@ -68,22 +62,22 @@ public class AddCommands extends Commands {
      * Categorise it into either Deadline Command or Event Command.
      */
 
-    private void parseDeadlineEventTasks() {
+    private String parseDeadlineEventTasks(TaskList taskList) throws DukeExceptions {
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         String taskName = command.substring(command.indexOf(" "));
+
+        if (!taskName.contains("/")) {
+            throw new DukeExceptions("Deadline and event tasks require /by and "
+                    + "/at to specify the deadline or time of occurrence.\n"
+                    + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
+        }
+
+        String temp = taskName.substring(taskName.indexOf("/"));
+        String taskNameWithoutBack = taskName.substring(0, taskName.indexOf("/"));
+        String oldDateTime = temp.substring(temp.indexOf(" ") + 1);
+
         try {
-            //Handle the case of having no "/" to specify deadline or time of occurrences for deadline and event tasks
-            if (!taskName.contains("/")) {
-                throw new DukeExceptions("Deadline and event tasks require /by and "
-                        + "/at to specify the deadline or time of occurrence.\n"
-                        + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
-            }
-
-            String temp = taskName.substring(taskName.indexOf("/"));
-            String taskNameWithoutBack = taskName.substring(0, taskName.indexOf("/"));
-            String oldDateTime = temp.substring(temp.indexOf(" ") + 1);
-
             DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(oldDateTime, oldFormat);
 
@@ -92,26 +86,25 @@ public class AddCommands extends Commands {
                 //Handle the case of deadline task having no /by
                 if (!temp.contains("by")) {
                     throw new DukeExceptions("Deadline tasks require /by specify the deadline."
-                                            + "Eg deadline eat food /by 12pm\n");
+                            + "Eg deadline eat food /by 12pm\n");
                 }
-                addDeadlineTask(taskNameWithoutBack, dateTime);
+
+                return addDeadlineTask(taskNameWithoutBack, dateTime, taskList);
+
             } else {
                 //Handle the case of event task having no /at
                 if (!temp.contains("at")) {
                     throw new DukeExceptions("Event tasks require /at specify the time of occurrence."
-                                                    + "music concert /at 8pm\n");
+                            + "music concert /at 8pm\n");
                 }
-                addEventTask(taskNameWithoutBack, dateTime);
+                return addEventTask(taskNameWithoutBack, dateTime, taskList);
+
             }
+        } catch (NumberFormatException nfe) {
+            throw new DukeExceptions("ERROR! Expected Numbers for date and time!\n");
 
-        } catch (DukeExceptions e) {
-            System.out.println(e.getMessage());
-
-        } catch (NumberFormatException e) {
-            System.out.println("ERROR! Expected Numbers for date and time!\n");
-
-        } catch (DateTimeParseException e) {
-            System.out.println("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
+        } catch (DateTimeParseException dt) {
+            throw new DukeExceptions("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
         }
     }
 
@@ -121,10 +114,10 @@ public class AddCommands extends Commands {
      * @param taskName Name of the To do Task.
      */
 
-    private void addTodoTask(String taskName) {
+    private String addTodoTask(String taskName, TaskList taskList) {
         TodoTask newTask = new TodoTask(taskName);
         taskList.add(newTask);
-        printTask(newTask);
+        return printTask(newTask, taskList);
     }
 
     /**
@@ -134,10 +127,10 @@ public class AddCommands extends Commands {
      * @param dateTime Deadline the task is due by.
      */
 
-    private void addDeadlineTask(String taskName, LocalDateTime dateTime) {
+    private String addDeadlineTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
         DeadlineTask newTask = new DeadlineTask(taskName, dateTime);
         taskList.add(newTask);
-        printTask(newTask);
+        return printTask(newTask, taskList);
     }
 
     /**
@@ -147,10 +140,10 @@ public class AddCommands extends Commands {
      * @param dateTime The date and time the task is occurring at.
      */
 
-    private void addEventTask(String taskName, LocalDateTime dateTime) {
+    private String addEventTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
         EventTask newTask = new EventTask(taskName, dateTime);
         taskList.add(newTask);
-        printTask(newTask);
+        return printTask(newTask, taskList);
     }
 
     /**
@@ -161,19 +154,19 @@ public class AddCommands extends Commands {
      */
 
 
-    private void printTask(Task newTask) {
-        System.out.println("Quit ordering me around!");
-        System.out.println("I've added this task to our list:");
-        System.out.println("    " + newTask.toString());
-        taskList.printCurrentSize();
+    private String printTask(Task newTask, TaskList taskList) {
+        return "Quit ordering me around!"
+                + "I've added this task to our list:"
+                + "    " + newTask.toString()
+                + taskList.returnCurrentSize();
     }
 
     /**
      * Execute Command.
      */
 
-    public void execute() {
-        parseCommand();
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
+        return parseCommand(taskList);
     }
 
 }

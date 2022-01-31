@@ -1,8 +1,10 @@
+package taskmaster;
+
+import taskmaster.commands.Commands;
 import taskmaster.exception.DukeExceptions;
 import taskmaster.userinterface.UserInterface;
-import taskmaster.util.TaskList;
 import taskmaster.util.Storage;
-import taskmaster.commands.Commands;
+import taskmaster.util.TaskList;
 
 /**
  * This class encapsulates the main program, Taskmaster.
@@ -18,8 +20,11 @@ public class Taskmaster {
      * Constructor for Taskmaster the chatbot.
      */
 
-    private Taskmaster () {
+    public Taskmaster () {
         this.ui = new UserInterface();
+        this.taskList = new TaskList();
+        this.storage = new Storage();
+        ui.loadExistingFile();
     }
 
     public String getResponse(String input) {
@@ -30,4 +35,5 @@ public class Taskmaster {
             return ui.displayErrorMessage(e.getMessage());
         }
     }
+
 }
