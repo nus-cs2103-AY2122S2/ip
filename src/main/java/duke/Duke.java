@@ -1,10 +1,16 @@
 package duke;
+
 import java.util.Scanner;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke class which is the main entry point when starting up the application
  */
-public class Duke {
+public class Duke extends Application {
 
     private Ui ui;
     private TaskList taskList;
@@ -13,13 +19,10 @@ public class Duke {
 
     /**
      * Constructor for Duke class
-     *
-     * @param path the path to the storage file from root
-     * @param file_dir the path to the storage directory from root
      */
-    public Duke(String path, String file_dir) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(path, file_dir);
+        this.storage = new Storage("./src/main/data/data.txt", "./src/main/data");
         this.parser = new Parser();
 
         //Reading arraylist from data.txt
@@ -58,6 +61,15 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("./src/main/data/data.txt", "./src/main/data").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
