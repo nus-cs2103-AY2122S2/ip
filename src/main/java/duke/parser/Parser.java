@@ -51,6 +51,9 @@ public class Parser {
 
     private static Command extractToDo(String[] details) {
         try {
+            if (details[1].trim().length() == 0) {
+                throw new IndexOutOfBoundsException("Empty description string");
+            }
             return new AddCommand(new ToDo(details[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Missing details! Please use the format: todo <description>", e);

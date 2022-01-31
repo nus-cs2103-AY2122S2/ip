@@ -7,4 +7,8 @@ public class DukeException extends RuntimeException {
     public DukeException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public DukeException(String message) {
+        super(message);
+    }
 }

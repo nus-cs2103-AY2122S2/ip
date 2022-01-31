@@ -89,7 +89,7 @@ public class TaskList {
     /**
      * Finds the tasks that match search string.
      *
-     * @param search The string to match for.
+     * @param search The string to match for, case-sensitive.
      * @return An array list of tasks that matches the search string.
      */
     public ArrayList<Task> findTasks(String search) {
