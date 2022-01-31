@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+
 public class Storage {
 
     private final File file;
@@ -12,12 +13,19 @@ public class Storage {
     FileWriter fw;
     PrintWriter wf;
 
+
+
     public Storage(String filePath) throws IOException {
         this.file =  new File(filePath);
         this.fw = new  FileWriter(filePath,true);
         this.wf = new  PrintWriter(fw);
         items = 0;
     }
+    /**
+     * Writes the string to file and flushes the buffer.
+     *
+     * @param s  String to be written to the file
+     */
     public void writeFile(String s) {
          this.wf.println(s);
          wf.flush();
@@ -25,7 +33,12 @@ public class Storage {
     public void flush() {
         wf.flush();
     }
-
+    /**
+     * Load tasks that is stored in the file
+     * and returns it in ArrayList
+     *
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> load() throws IOException {
         BufferedReader readFile
                 = new BufferedReader(new FileReader(this.file));

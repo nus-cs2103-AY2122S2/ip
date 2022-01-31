@@ -11,7 +11,13 @@ import java.util.Arrays;
 
 public class Parser {
     public String[] s;
-
+    /**
+     * Parse user input command and execute what user desires.
+     *
+     * @param command  Command input by user.
+     * @param tasks    TaskList of tasks.
+     * @param storage   Storage class to add or delete task on file.
+     */
     public Parser(String command, TaskList tasks, Storage storage) throws IOException {
         s = command.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
@@ -113,7 +119,12 @@ public class Parser {
        wf.close();
 
     }
-
+    /**
+     * Returns the date and time seperately from user's input command.
+     *
+     * @param full  Command input by user.
+     * @return Array of strings representing the date and time.
+     */
     public String[] findDate(String[] full) {
         StringBuilder sb = new StringBuilder();
         String[] end = new String[100];

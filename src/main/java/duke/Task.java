@@ -29,9 +29,7 @@ public class Task {
     public String getType() {
         return this.type;
     }
-//    public String getDesc() {
-//        return this.desc;
-//    }
+
     public Task mark() {
         return new Task(this.desc, true, this.type);
     }
@@ -43,8 +41,4 @@ public class Task {
         return null;
     }
 
-//    public String toString() {
-//        System.out.println("hey");
-//        return this.desc;
-//    }
 }
