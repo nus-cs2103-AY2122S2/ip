@@ -38,7 +38,7 @@ public class Storage {
                 System.out.println("New file created at " + filePath);
             }
         } catch (IOException e) {
-            System.out.println("IO Exception error occurred, unable to create file " + filePath);
+            System.out.println("Unable to create file " + filePath);
         }
     }
 
@@ -95,20 +95,20 @@ public class Storage {
                     String[] savedData = readFile.nextLine().split(" \\| ");
                     String command;
                     switch (savedData[0]) {
-                        case "T":
-                            command = "todo " + savedData[2];
-                            taskList.addToDoTask(command);
-                            break;
-                        case "D":
-                            command = "deadline " + savedData[2] + " /by " + savedData[3];
-                            taskList.addDeadlineTask(command);
-                            break;
-                        case "E":
-                            command = "event " + savedData[2] + " /at " + savedData[3];
-                            taskList.addEventTask(command);
-                            break;
-                        default:
-                            throw new DukeException("Unable to parse file: " + filePath);
+                    case "T":
+                        command = "todo " + savedData[2];
+                        taskList.addToDoTask(command);
+                        break;
+                    case "D":
+                        command = "deadline " + savedData[2] + " /by " + savedData[3];
+                        taskList.addDeadlineTask(command);
+                        break;
+                    case "E":
+                        command = "event " + savedData[2] + " /at " + savedData[3];
+                        taskList.addEventTask(command);
+                        break;
+                    default:
+                        throw new DukeException("Unable to parse file: " + filePath);
                     }
                     if (savedData[1].equals("1")) {
                         taskList.completedTask(numTaskAdded);
@@ -121,7 +121,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("IO exception error when loading data " + filePath);
+            System.out.println("Unable to load data from " + filePath);
         }
         return taskList.getTasks();
     }
