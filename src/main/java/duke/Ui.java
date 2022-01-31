@@ -7,7 +7,7 @@ import duke.task.Task;
  * Class for printing UI elements.
  */
 public class Ui {
-    private static final String MESSAGE_INTRO = "Hello! I'm Duke\n     What can I do for you?";
+    private static final String MESSAGE_INTRO = "Hello! I'm Dusk\n     What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
 
     /**

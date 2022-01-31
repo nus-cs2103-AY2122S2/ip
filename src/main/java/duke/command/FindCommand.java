@@ -15,15 +15,27 @@ public class FindCommand extends Command {
 
     private String searchTerm;
 
-    public FindCommand(String searchTerm) throws DukeException{
+    /**
+     * Constructor to the find command.
+     *
+     * @param searchTerm Text to be searched for
+     * @throws DukeException If the text is left empty
+     */
+    public FindCommand(String searchTerm) throws DukeException {
         if (searchTerm.equals("")) {
             throw new DukeException(ERROR_EMPTY_FIND);
         }
         this.searchTerm = searchTerm;
     }
 
+    /**
+     * Execution of the find command to search for tasks that match.
+     *
+     * @param tasks Task list
+     * @param ui UI object
+     */
     @Override
-    public void execute(List<Task> tasks, Ui ui) throws DukeException {
+    public void execute(List<Task> tasks, Ui ui) {
         List<Integer> foundIndexes = new ArrayList<Integer>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getTitle().contains(this.searchTerm)) {
@@ -38,8 +50,9 @@ public class FindCommand extends Command {
                 Task thisTask = tasks.get(foundIndexes.get(i));
                 foundList += (i + 1) + ". " + "[" + thisTask.getType() + "]"
                         + "[" + thisTask.getStatusIcon() + "] " + thisTask;
-                if (i != foundIndexes.size()-1)
+                if (i != foundIndexes.size() - 1) {
                     foundList += "\n     ";
+                }
             }
             ui.printContent(foundList);
         }
