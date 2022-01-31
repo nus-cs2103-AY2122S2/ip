@@ -2,13 +2,9 @@
 public class Parser {
 
     private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
 
-    public Parser(Ui ui, Storage storage, TaskList tasks) {
+    public Parser(Ui ui) {
         this.ui = ui;
-        this.storage = storage;
-        this.tasks = tasks;
     }
 
     public static Command parse(String input) {
@@ -41,17 +37,39 @@ public class Parser {
         }
     }
 
-//    public String parseTodo(String input) {
-//
-//        try {
-//            String[] todoArr = input.split("\\s", 2);
-//            if (todoArr.length <= 1) {
-//                throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
-//            }
-//            tasks.add(new Todo(todoArr[1].trim()));
-//            tasks.printTaskAdded();
-//        } catch (InvalidArgumentException e) {
-//            ui.showError(e.getMessage());
-//        }
-//    }
+    // returns the todo task description
+    public static String parseTodo(String input) throws InvalidArgumentException {
+
+        String[] todoArr = input.split("\\s", 2);
+        if (todoArr.length <= 1) {
+            throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
+        }
+        return todoArr[1].trim();
+    }
+
+    // returns Deadline description and dateTime in a String[] like a pair.
+    public static String[] parseDeadline(String input) throws InvalidArgumentException {
+        String[] deadlineArr = input.split("/by", 2);
+        String[] deadlineSplit = deadlineArr[0].split("\\s", 2);
+        if (deadlineSplit.length <= 1) {    // no description
+            throw new InvalidArgumentException(Messages.UNKNOWN_DEADLINE);
+        }
+        if (deadlineArr.length <= 1) { // don't have /by keyword
+            throw new InvalidArgumentException(Messages.UNKNOWN_DATETIME);
+        }
+        return new String[]{deadlineSplit[1].trim(), deadlineArr[1].trim()};
+    }
+
+    //returns pair of description and /at for event, so that an event Task can be created.
+    public static String[] parseEvent(String input) throws  InvalidArgumentException {
+        String[] eventArr = input.split("/at", 2);
+        String[] eventSplit = eventArr[0].split("\\s", 2);
+        if (eventSplit.length <= 1) {
+            throw new InvalidArgumentException(Messages.UNKNOWN_EVENT);
+        }
+        if (eventArr.length <= 1) {
+            throw new InvalidArgumentException(Messages.UNKNOWN_LOCATION);
+        }
+        return new String[]{eventSplit[1].trim(), eventArr[1].trim()};  // description, and at respectively
+    }
 }

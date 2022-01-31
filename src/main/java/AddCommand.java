@@ -15,11 +15,8 @@ public class AddCommand extends Command {
             switch (action) {
                 case TODO:
                     try {
-                        String[] todoArr = input.split("\\s", 2);
-                        if (todoArr.length <= 1) {
-                            throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
-                        }
-                        tasks.add(new Todo(todoArr[1].trim()));
+                        String description = Parser.parseTodo(this.input);
+                        tasks.add(new Todo(description));
                         ui.printTaskAdded(tasks);
                         storage.save(tasks);
                     } catch (InvalidArgumentException e) {
@@ -40,8 +37,8 @@ public class AddCommand extends Command {
                         if (deadlineArr.length <= 1) { // don't have /by keyword
                             throw new InvalidArgumentException(Messages.UNKNOWN_DATETIME);
                         }
-                        String description = deadlineSplit[1].trim();
-                        tasks.add(new Deadline(description, deadlineArr[1].trim()));
+                        String[] deadlineFields = Parser.parseDeadline(input);
+                        tasks.add(new Deadline(deadlineFields[0], deadlineFields[1]));
                         ui.printTaskAdded(tasks);
                         storage.save(tasks);
                     } catch (InvalidArgumentException e) {
@@ -64,8 +61,8 @@ public class AddCommand extends Command {
                         if (eventArr.length <= 1) {
                             throw new InvalidArgumentException(Messages.UNKNOWN_LOCATION);
                         }
-                        String description = eventSplit[1].trim();
-                        tasks.add(new Event(description, eventArr[1].trim()));
+                        String[] eventFields = Parser.parseEvent(input);
+                        tasks.add(new Event(eventFields[0], eventFields[1]));
                         ui.printTaskAdded(tasks);
                         storage.save(tasks);
                     } catch (InvalidArgumentException e) {
