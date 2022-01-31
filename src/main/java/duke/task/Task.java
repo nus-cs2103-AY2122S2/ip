@@ -55,7 +55,7 @@ public abstract class Task {
     /**
      * UnMark the task as not done.
      */
-    public void unmark() {
+    public void unMark() {
         this.isDone = false;
     }
 

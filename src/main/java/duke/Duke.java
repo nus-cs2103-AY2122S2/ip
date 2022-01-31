@@ -12,6 +12,8 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    private static final String DEFAULT_PATH = "data/duke.txt";
+
     /**
      * Create an instance of Duke
      *
@@ -31,24 +33,52 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program
+     * Create an instance of Duke with default path.
+     */
+    public Duke() {
+        this(DEFAULT_PATH);
+    }
+
+    /**
+     * Runs the Duke program in CLI.
      */
     public void run() {
-        ui.startMessage();
+        System.out.println(ui.startMessage());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String input = ui.readUserInput();
-                parser.parseInput(input);
+                System.out.println(parser.parseInput(input));
                 isExit = parser.commandIsExit();
             } catch (DukeException e) {
-                ui.showErrorMessage(e.toString());
-            } 
+                System.out.println(ui.showErrorMessage(e.toString()));
+            }
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * Handles program input and output from GUI.
+     *
+     * @return string of response from duke.
+     */
+    public String getResponse(String input) {
+        try {
+            return parser.parseInput(input);
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e.toString());
+        }
     }
 
+    /**
+     * Returns Ui.
+     *
+     * @return Ui.
+     */
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
 }

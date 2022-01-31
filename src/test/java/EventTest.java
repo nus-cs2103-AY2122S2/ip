@@ -21,7 +21,7 @@ public class EventTest {
         Event event = new Event("party", dateTime);
         event.mark();
         assertEquals("X", event.getStatusIcon());
-        event.unmark();
+        event.unMark();
         assertEquals(" ", event.getStatusIcon());
     }
 }

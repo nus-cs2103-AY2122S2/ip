@@ -20,7 +20,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline("homework", dateTime);
         deadline.mark();
         assertEquals("X", deadline.getStatusIcon());
-        deadline.unmark();
+        deadline.unMark();
         assertEquals(" ", deadline.getStatusIcon());
     }
 }

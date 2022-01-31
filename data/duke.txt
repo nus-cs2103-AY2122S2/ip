@@ -1,3 +1,4 @@
-T | 0 | borrow book
 E | 1 | project meeting | May 5 2022 23:59
-T | 0 | read book
+T | 0 | me
+T | 0 | you
+T | 0 | us

@@ -33,9 +33,11 @@ public class Parser {
     }
 
     /**
-     * Main login in handling user input based on commands entered.
+     * Main logic in handling user input based on commands entered.
+     *
+     * @return response after processing the input.
      */
-    public void parseInput(String input) throws DukeException {
+    public String parseInput(String input) throws DukeException {
         try {
             String[] commandLine = parseCommandLine(input);
             Command command = Command.getCommand(commandLine[0]);
@@ -43,38 +45,44 @@ public class Parser {
                 throw new DukeException.DukeInvalidCommandException();
             }
 
+            String output;
             switch (command) {
             case BYE:
                 parseBye(commandLine);
-                ui.endMessage();
+                output = ui.endMessage();
                 break;
             case LIST:
                 parseList(commandLine);
-                ui.listMessage();
+                output = ui.listMessage();
                 break;
             case MARK:
                 parseMark(commandLine);
-                ui.markMessage(Integer.parseInt(commandLine[1]));
+                output = ui.markMessage(Integer.parseInt(commandLine[1]));
                 break;
             case UNMARK:
                 parseUnMark(commandLine);
-                ui.unMarkMessage(Integer.parseInt(commandLine[1]));
+                output = ui.unMarkMessage(Integer.parseInt(commandLine[1]));
                 break;
             case ADD:
                 parseAdd(commandLine);
-                ui.addTaskMessage();
+                output = ui.addTaskMessage();
                 break;
             case DELETE:
                 String toDelete = parseDelete(commandLine);
-                ui.deleteMessage(toDelete);
+                output = ui.deleteMessage(toDelete);
                 break;
             case FIND:
                 String found = parseFind(commandLine);
-                ui.findMessage(found);
+                output = ui.findMessage(found);
                 break;
             default:
+                output = "Opps! something went wrong";
                 break;
             }
+
+            // save after every command.
+            taskList.save();
+            return output;
         } catch (DukeException e) {
             throw e;
         }
@@ -84,7 +92,6 @@ public class Parser {
         if (commandLine.length == 1) {
             throw new DukeException.DukeNoDescriptionFoundException();
         }
-
         return taskList.find(commandLine[1]);
     }
 
@@ -169,7 +176,6 @@ public class Parser {
             throw new DukeException.DukeInvalidCommandException();
         }
         isExit = true;
-        taskList.save();
     }
 
     private void parseMark(String[] commandLine) throws DukeException {
@@ -183,7 +189,7 @@ public class Parser {
         if (commandLine.length == 1) {
             throw new DukeException.DukeTaskNotFoundException();
         }
-        taskList.unmarkTask(stringToIndex(commandLine[1]));
+        taskList.unMarkTask(stringToIndex(commandLine[1]));
     }
 
     private String parseDelete(String[] commandLine) throws DukeException {

@@ -103,8 +103,8 @@ public class TaskList {
      *
      * @param taskId index of the task on the list.
      */
-    public void unmarkTask(int taskId) {
-        this.tasks.get(taskId - 1).unmark();
+    public void unMarkTask(int taskId) {
+        this.tasks.get(taskId - 1).unMark();
     }
 
     /**
