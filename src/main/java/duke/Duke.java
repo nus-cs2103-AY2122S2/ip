@@ -16,13 +16,13 @@ public class Duke {
 
     public static final String FILE_PATH = "data/duke.txt";
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadData());
     }
 
-    public void run() {
+    private void run() {
         storage.readFile();
         ui.printWelcomeMessage();
         runTillTerminate();
@@ -45,6 +45,6 @@ public class Duke {
             } catch(DukeException e) {
                 ui.printInvalidCommand();
             }
-        } while(commandType != Parser.CommandType.BYE);
+        } while (commandType != Parser.CommandType.BYE);
     }
 }

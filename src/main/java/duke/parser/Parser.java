@@ -11,31 +11,31 @@ public class Parser {
     public static void processUserInput(CommandType commandType, String userInput,
                                         TaskList taskList) throws DukeException {
         switch (commandType) {
-            case LIST:
-                new ListCommand(taskList);
-                break;
-            case MARK:
-                new MarkCommand(taskList, userInput);
-                break;
-            case UNMARK:
-                new UnmarkCommand(taskList, userInput);
-                break;
-            case DEADLINE:
-                new AddDeadlineCommand(taskList, userInput);
-                break;
-            case EVENT:
-                new AddEventCommand(taskList, userInput);
-                break;
-            case TODO:
-                new AddToDoCommand(taskList, userInput);
-                break;
-            case REMOVE:
-                new RemoveCommand(taskList, userInput);
-                break;
-            case BYE:
-                break;
-            default:
-                throw new DukeException("Invalid input");
+        case LIST:
+            new ListCommand(taskList);
+            break;
+        case MARK:
+            new MarkCommand(taskList, userInput);
+            break;
+        case UNMARK:
+            new UnmarkCommand(taskList, userInput);
+            break;
+        case DEADLINE:
+            new AddDeadlineCommand(taskList, userInput);
+            break;
+        case EVENT:
+            new AddEventCommand(taskList, userInput);
+            break;
+        case TODO:
+            new AddToDoCommand(taskList, userInput);
+            break;
+        case REMOVE:
+            new RemoveCommand(taskList, userInput);
+            break;
+        case BYE:
+            break;
+        default:
+            throw new DukeException("Invalid input");
         }
     }
 
