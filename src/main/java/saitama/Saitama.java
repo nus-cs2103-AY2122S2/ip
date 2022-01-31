@@ -2,9 +2,12 @@ package saitama;
 
 import saitama.commands.Command;
 import saitama.exceptions.SaitamaException;
+import saitama.parser.Parser;
+import saitama.storage.Storage;
+import saitama.tasks.TaskList;
+import saitama.ui.Ui;
 
 public class Saitama {
-    private static String filePath = "data/Saitama.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -20,29 +23,13 @@ public class Saitama {
         taskList = new TaskList(storage.load());
     }
 
-    /**
-     * Run the chatbot.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (SaitamaException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (SaitamaException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Saitama(filePath).run();
     }
 }
 

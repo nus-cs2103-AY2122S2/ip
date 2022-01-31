@@ -1,9 +1,10 @@
 package saitama.commands;
 
-import saitama.Storage;
-import saitama.TaskList;
-import saitama.Ui;
 import saitama.exceptions.InvalidTaskNumberException;
+import saitama.storage.Storage;
+import saitama.tasks.Task;
+import saitama.tasks.TaskList;
+import saitama.ui.Ui;
 
 /**
  * A Command object that unmarks a given task.
@@ -16,14 +17,13 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        System.out.println("OK...");
+        Task task = taskList.get(taskNumber);
         taskList.unmarkTask(taskNumber);
-        System.out.println("The following task has been marked as not done: ");
-        System.out.println(taskList.get(taskNumber));
+        return ui.showUnmarkTask(task, taskList);
     }
 
     @Override

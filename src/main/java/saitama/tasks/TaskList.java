@@ -1,9 +1,7 @@
-package saitama;
+package saitama.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import saitama.tasks.Task;
 
 /**
  * A task list to keep track of tasks.

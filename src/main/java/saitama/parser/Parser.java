@@ -1,4 +1,4 @@
-package saitama;
+package saitama.parser;
 
 import saitama.commands.AddCommand;
 import saitama.commands.Command;
@@ -110,6 +110,7 @@ public class Parser {
 
     /**
      * Creates a FindCommand object that searches for the corresponding query in the task list.
+     *
      * @param splitCommand The split command array.
      * @return A FindCommand object.
      */
@@ -123,6 +124,7 @@ public class Parser {
 
     /**
      * Creates an AddCommand object that adds the corresponding task to the task list.
+     *
      * @param splitCommand The split command array.
      * @return An AddCommand object.
      * @throws InvalidFormatException if command exists but is in the wrong format.
