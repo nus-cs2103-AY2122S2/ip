@@ -2,17 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILELOCATION = "data/duke.txt";
+    private String filePath;
     private File file;
 
-    public Storage() {
-        this.file = new File(FILELOCATION);
+    public Storage(String filePath) {
+        this.file = new File(filePath);
+        this.filePath = filePath;
         if (!file.exists()) {
             try {
                 File directory = new File(file.getParent());
@@ -28,15 +27,15 @@ public class Storage {
 
     //insert java docs here. save tasks into file
     public void save(TaskList tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(FILELOCATION);
+        FileWriter fileWriter = new FileWriter(this.filePath);
         for (int i = 0; i < tasks.getSize(); i++) {
             fileWriter.write(tasks.get(i).getTaskData() + System.lineSeparator());
         }
         fileWriter.close();
     }
 
-    public TaskList load() throws FileNotFoundException, IOException {
-        TaskList tasks = new TaskList();
+    public ArrayList<Task> load() throws FileNotFoundException, IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {

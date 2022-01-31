@@ -15,7 +15,3 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-data/duke.txttest
-data/txt
-data/version0/duke.txt
-eda/txt
