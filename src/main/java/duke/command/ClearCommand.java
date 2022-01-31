@@ -1,21 +1,20 @@
 package duke.command;
 
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.DukeException;
-
-/**
- * Represents a Command object that will inform users
- * of an invalid input.
- */
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class InvalidCommand extends Command {
+/**
+ * Represents a Command object that will clear all tasks in data and
+ * the tasklist.
+ */
+public class ClearCommand extends Command {
 
     /**
-     * Informs users that the text used was invalid.
+     * Will clear all tasks in data and tasklist.
      *
      * @param stg   The storage object to use file writing methods.
      * @param ui    The ui object to handle I/O requests.
@@ -24,8 +23,15 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
-        System.out.println("Please enter a valid command word (eg. list, mark, todo)!");
+        System.out.println("About to clear all data. Enter yes to confirm");
+        String input = ui.readFullLine();
+        if (input.equals("yes")) {
+            stg.clearData();
+            tasks.clearAllTask();
+            System.out.println("All data cleared!");
+        }
         ui.showLine();
+        return;
     }
 
     /**

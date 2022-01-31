@@ -3,6 +3,7 @@ package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Represents a TaskList that contains all added tasks.
@@ -55,6 +56,10 @@ public class TaskList {
      */
     public void deleteTask(int index) {
         this.tasks.remove(index);
+    }
+
+    public void clearAllTask() {
+        this.tasks.clear();
     }
 
 }

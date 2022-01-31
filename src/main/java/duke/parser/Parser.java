@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.command.ListCommand;
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.InvalidCommand;
-import duke.command.NumberedCommand;
-import duke.command.Command;
+import duke.command.*;
 
 /**
  * Represents a parser object that formats and retrieves
@@ -65,6 +60,8 @@ public class Parser {
             return new AddCommand(command, input);
         } else if (command.equals("find")) {
             return new FindCommand(input);
+        } else if (command.equals("clear")) {
+            return new ClearCommand();
         } else {
             return new InvalidCommand();
         }

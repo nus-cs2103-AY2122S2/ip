@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.FileHandler;
 import duke.task.Task;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Storage {
      * Constructor for a Storage object.
      *
      * @param path The file path of a file that will be used by
-     * the storage object.
+     *             the storage object.
      */
     public Storage(String path) {
         this.filePath = path;
@@ -55,6 +56,15 @@ public class Storage {
      */
     public void editData(String oldText, String newText) throws IOException {
         FileHandler.editFile(this.filePath, oldText, newText);
+    }
+
+    /**
+     * Removes all lines from a file.
+     *
+     * @throws IOException If I/O error occurs.
+     */
+    public void clearData() throws IOException {
+        FileHandler.clearFile(this.filePath);
     }
 
 }

@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Will find any tasks stored that contains a keyword provided.
+ * Represents a command that will find any tasks stored in the
+ * tasklist that contains a keyword provided.
  */
 public class FindCommand extends Command {
-
 
     private String textInput;
 
@@ -25,16 +25,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Constructor for a FindCommand object.
+     * Will find any tasks that have a give keyword.
      *
-     * @param stg   Storage object that will write information to a file.
-     * @param ui    Ui object that will handle I/O requests.
-     * @param tasks TaskList object that contains all tasks.
-     * @throws DukeException If an error related to the Duke app occurs.
-     * @throws IOException   If an I/O error occurs.
+     * @param stg   The storage object to use file writing methods.
+     * @param ui    The ui object to handle I/O requests.
+     * @param tasks The task list which holds all tasks available.
+     * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
+    public void execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
         String keyword = this.textInput.substring(4).trim();
         if (keyword.trim().length() == 0) {
             System.out.println("Please enter a valid keyword!");
@@ -62,7 +61,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Signifies to not terminate the current run.
+     * Signifies to the app to not terminate its current run.
      */
     @Override
     public boolean isExit() {

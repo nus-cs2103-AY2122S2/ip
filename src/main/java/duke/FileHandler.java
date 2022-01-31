@@ -5,7 +5,13 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -120,5 +126,18 @@ public class FileHandler {
         }
         fWriter.close();
         s.close();
+    }
+
+    public static void clearFile(String filePath) throws IOException {
+        File tempFile = new File("./data/temp.txt");
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
+        FileWriter fWriter = new FileWriter(filePath);
+        fWriter.write("");
+        fWriter.close();
+        FileWriter tempWriter = new FileWriter("./data/temp.txt");
+        tempWriter.write("");
+        tempWriter.close();
     }
 }
