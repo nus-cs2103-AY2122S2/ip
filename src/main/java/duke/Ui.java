@@ -1,5 +1,8 @@
-import java.util.List;
+package duke;
+
 import java.util.Scanner;
+
+import duke.task.TaskList;
 
 public class Ui {
     Scanner reader = new Scanner(System.in);
@@ -12,6 +15,7 @@ public class Ui {
         System.out.println("Bye, hope to see you again soon!");
         reader.close();
     }
+
 
     public String readInput() {
         System.out.print("| \r");

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.temporal.ChronoUnit;
 
-public class TaskWithDateTime extends Task{
+public class TaskWithDateTime extends Task {
     protected LocalDate day;
     protected LocalTime timeOfDay;
     protected String dateTime;

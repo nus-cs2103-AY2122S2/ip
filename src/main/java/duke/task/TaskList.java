@@ -1,19 +1,19 @@
-import java.util.ArrayList;
+package duke.task;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class TaskList {
     protected List<Task> tasks;
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList() {
         this.tasks = new LinkedList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            this.tasks.add(tasks.get(i));
-        }
     }
 
-    TaskList() {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = new LinkedList<>();
+        this.tasks.addAll(tasks);
     }
 
     public int size() {
