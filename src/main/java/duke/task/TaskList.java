@@ -181,12 +181,16 @@ public class TaskList {
     }
 
     /**
-     * Adds the task to the list.
+     * Adds the task to the List of tasks.
      *
      * @param task Task to be added
      */
     public void addTask(Task task) {
         tasks.add(task);
+
+        // Reset the List of filteredTasks when a new task is added to
+        // the List of tasks
+        resetFilteredTasks();
     }
 
     /**
@@ -198,7 +202,7 @@ public class TaskList {
      * @return The task that was marked as done
      */
     public Task markDone(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         task.setDone();
         return task;
     }
@@ -212,7 +216,7 @@ public class TaskList {
      * @return The task that was marked as not done yet
      */
     public Task markNotDone(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         task.setNotDone();
         return task;
     }
@@ -226,7 +230,7 @@ public class TaskList {
      * @return The task that was deleted
      */
     public Task deleteTask(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         tasks.remove(task);
 
         if (hasFilter()) {
@@ -234,6 +238,20 @@ public class TaskList {
         }
 
         return task;
+    }
+
+    /**
+     * Returns the task based on the corresponding task number in
+     * the List of tasks or List of filtered tasks.
+     *
+     * @param taskNum Corresponding task number of the task in the
+     *                respective list
+     * @return The task that was retrieved
+     */
+    public Task getTaskBasedOnFilterAndTaskNum(int taskNum) {
+        return !hasFilter()
+                ? getTask(taskNum - 1)
+                : getFilteredTask(taskNum - 1);
     }
 
     /**

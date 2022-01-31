@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -76,7 +77,7 @@ public class DeleteCommand implements Command {
         if (taskNum > 0 && taskNum <= taskList.getNumOfTasks()) {
             return taskList.deleteTask(taskNum);
         } else {
-            throw new DukeException("Task not found. Please try again!");
+            throw new DukeException(ErrorMessage.ERROR_TASK_NOT_FOUND.toString());
         }
     }
 
@@ -92,7 +93,7 @@ public class DeleteCommand implements Command {
         if (taskNum > 0 && taskNum <= taskList.getNumOfFilteredTasks()) {
             return taskList.deleteTask(taskNum);
         } else {
-            throw new DukeException("Task not found. Please try again!");
+            throw new DukeException(ErrorMessage.ERROR_TASK_NOT_FOUND.toString());
         }
     }
 }

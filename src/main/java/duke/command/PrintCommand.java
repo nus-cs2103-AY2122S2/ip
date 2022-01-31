@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -33,8 +34,8 @@ public class PrintCommand implements Command {
     }
 
     /**
-     * Executes the command of printing deadlines/events that occurs
-     * on the specified date.
+     * Executes the command of printing deadlines/events in the task
+     * list that occurs on the specified date.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
@@ -45,22 +46,22 @@ public class PrintCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (taskList.getNumOfTasks() != 0) {
-            taskList.setFilteredTasksByDate(dateStr);
-
-            if (taskList.getNumOfFilteredTasks() != 0) {
-                String response = ui.tasksOnDateMessage(taskList, dateStr);
-                ui.displayResponse(response);
-            } else {
-                // Reset the List of filteredTasks when PrintCommand is executed
-                // and there are no deadlines/events on the specified date
-                // This will clear the List of filteredTasks
-                taskList.resetFilteredTasks();
-
-                throw new DukeException("There are no tasks on this date!");
-            }
-        } else {
-            throw new DukeException("There are no tasks in your list!");
+        if (taskList.getNumOfTasks() == 0) {
+            throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
+
+        taskList.setFilteredTasksByDate(dateStr);
+
+        if (taskList.getNumOfFilteredTasks() == 0) {
+            // Reset the List of filteredTasks when PrintCommand is executed
+            // and there are no deadlines/events on the specified date
+            // This will clear the List of filteredTasks
+            taskList.resetFilteredTasks();
+
+            throw new DukeException(ErrorMessage.ERROR_NO_TASKS_ON_DATE.toString());
+        }
+
+        String response = ui.tasksOnDateMessage(taskList, dateStr);
+        ui.displayResponse(response);
     }
 }

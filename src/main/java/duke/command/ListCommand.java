@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -35,15 +36,15 @@ public class ListCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (taskList.getNumOfTasks() != 0) {
-            // Reset the List of filteredTasks when ListCommand is executed
-            // This will clear the List of filteredTasks
-            taskList.resetFilteredTasks();
-
-            String response = ui.tasksInListMessage(taskList);
-            ui.displayResponse(response);
-        } else {
-            throw new DukeException("There are no tasks in your list!");
+        if (taskList.getNumOfTasks() == 0) {
+            throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
+
+        // Reset the List of filteredTasks when ListCommand is executed
+        // This will clear the List of filteredTasks
+        taskList.resetFilteredTasks();
+
+        String response = ui.tasksInListMessage(taskList);
+        ui.displayResponse(response);
     }
 }

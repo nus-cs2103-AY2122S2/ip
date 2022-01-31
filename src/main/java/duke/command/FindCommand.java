@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -35,31 +36,32 @@ public class FindCommand implements Command {
     /**
      * Executes the command of finding tasks in the task list that
      * contains the keyword in the description.
+     *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
-     * @throws DukeException If the List of tasks in the task list is
-     * empty or if there are no tasks that contains the keyword in the
-     * description
+     * @throws DukeException If the List of tasks in the task list
+     * is empty or if there are no tasks that contains the keyword
+     * in the description
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (taskList.getNumOfTasks() != 0) {
-            taskList.setFilteredTasksByKeyword(keyword);
-
-            if (taskList.getNumOfFilteredTasks() != 0) {
-                String response = ui.tasksWithKeywordMessage(taskList, keyword);
-                ui.displayResponse(response);
-            } else {
-                // Reset the List of filteredTasks when FindCommand is executed
-                // and there are no matching tasks
-                // This will clear the List of filteredTasks
-                taskList.resetFilteredTasks();
-
-                throw new DukeException("There are no matching tasks!");
-            }
-        } else {
-            throw new DukeException("There are no tasks in your list!");
+        if (taskList.getNumOfTasks() == 0) {
+            throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
+
+        taskList.setFilteredTasksByKeyword(keyword);
+
+        if (taskList.getNumOfFilteredTasks() == 0) {
+            // Reset the List of filteredTasks when FindCommand is executed
+            // and there are no matching tasks
+            // This will clear the List of filteredTasks
+            taskList.resetFilteredTasks();
+
+            throw new DukeException(ErrorMessage.ERROR_NO_MATCHING_TASKS_IN_LIST.toString());
+        }
+
+        String response = ui.tasksWithKeywordMessage(taskList, keyword);
+        ui.displayResponse(response);
     }
 }
