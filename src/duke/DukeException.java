@@ -14,4 +14,8 @@ public class DukeException extends Exception {
     public DukeException(String msg) {
         message = msg;
     }
+
+    public String getMessage() {
+        return message;
+    }
 }

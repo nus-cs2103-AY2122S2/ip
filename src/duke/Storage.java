@@ -107,7 +107,7 @@ public class Storage {
     }
 
     /**
-     * Creates duke.Task based on the text provided in the given text file
+     * Creates Task based on the text provided in the given text file
      */
     public Task createTaskFromText(String[] line) {
         String type = line[0];

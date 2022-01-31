@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  * This is an Action class that obtains a sentence as input that
@@ -23,7 +22,7 @@ public class Parser {
     String line = "\n____________________________________________________________\n";
 
     enum Commands {
-        todo, deadline, event, list, mark, unmark, delete, find, bye;
+        todo, deadline, event, list, mark, unmark, delete, find, bye
     }
 
     public Parser(String input, TaskList list, Storage storage) {
@@ -51,11 +50,11 @@ public class Parser {
      */
     public String obtainTitle() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
-        String firstWordInTitle = "";
+        String firstWordInTitle;
         try {
             firstWordInTitle = listOfUserInput[1];
         } catch (Exception e) {
-            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.\n");
+            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.");
             errorMessage.append(line);
             throw new DukeException(errorMessage.toString());
         }
@@ -75,7 +74,7 @@ public class Parser {
      * Obtains date. Applicable for duke.Deadline, duke.Event
      */
     public LocalDate obtainDate() {
-        Boolean hasClue = false; //such as '/by' or '/at'
+        boolean hasClue = false; //such as '/by' or '/at'
         StringBuilder stringDate = new StringBuilder();
         for (int i = 1; i < listOfUserInput.length; i ++) {
             String currentWord = listOfUserInput[i];
@@ -86,10 +85,12 @@ public class Parser {
                 hasClue = true;
             }
         }
+        if (!hasClue) {
+            throw new IllegalArgumentException("\nPlease provide a '/by' or '/at' seperator in between the title and date\nof your Deadline/Event task respectively! Please try running the command again!\n");
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
-            LocalDate localDate = LocalDate.parse(stringDate, formatter);
-            return localDate;
+            return LocalDate.parse(stringDate, formatter);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException("The date input provided does not comply to any correct standards\n" +
                     "Please follow this format instead: yyyy/MMMM/dd (eg. 2022/May/19)\n" +
@@ -109,7 +110,14 @@ public class Parser {
      */
     public void parseInput() throws DukeException, IOException {
         splitUserInput();
-        Commands action = Commands.valueOf(obtainCommandWord());
+        Commands action;
+        try {
+            action = Commands.valueOf(obtainCommandWord());
+        } catch (IllegalArgumentException e) {
+            StringBuilder errorMessage = new StringBuilder();
+            errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\nTry another command!\n").append(line);
+            throw new IllegalArgumentException(errorMessage.toString());
+        }
         switch (action) {
             case todo:
                 System.out.println(createToDoTask());
@@ -136,12 +144,9 @@ public class Parser {
                 System.out.println(findTask());
                 break;
             case bye:
-                terminateAndSaveProgram(storage);
+                System.out.println(terminateAndSaveProgram(storage));
                 System.exit(0);
             default:
-                StringBuilder errorMessage = new StringBuilder();
-                errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\nTry another command!\n").append(line);
-                throw new IllegalArgumentException(errorMessage.toString());
         }
     }
 
@@ -203,7 +208,7 @@ public class Parser {
     /**
      * Makes a call on duke.TaskList's delete()
      */
-    public String deleteTask() throws DukeException {
+    public String deleteTask() {
         try {
             checkTaskNumber();
             StringBuilder successMessage = new StringBuilder();
@@ -221,9 +226,9 @@ public class Parser {
      * Checks if user input is valid, then
      * creates a Todo duke.Task and adds into the list
      */
-    public String createToDoTask() throws DukeException {
+    public String createToDoTask() {
         StringBuilder successMessage = new StringBuilder();
-        String title = "";
+        String title;
         try {
             title = obtainTitle();
         } catch (DukeException e) {
@@ -237,9 +242,9 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a Deatasksine duke.Task and adds to the list
+     * creates a Deadline Task and adds to the list
      */
-    public String createDeadlineTask() throws DukeException {
+    public String createDeadlineTask() {
         StringBuilder successMessage = new StringBuilder();
         String title = "";
         try {
@@ -252,7 +257,10 @@ public class Parser {
             tasks.addTask(task);
             successMessage.append(line).append("Added Deadline").append(task.toString()).append(line);
             return successMessage.toString();
-        } catch (DateTimeParseException e) {
+        } catch (IllegalArgumentException i) {
+            return i.getMessage();
+        }
+        catch (DateTimeParseException e) {
             return e.getMessage();
         }
     }
@@ -261,7 +269,7 @@ public class Parser {
      * Checks if user input is valid, then
      * creates a duke.Event duke.Task and adds to the list
      */
-    public String createEventTask() throws DukeException {
+    public String createEventTask() {
         StringBuilder successMessage = new StringBuilder();
         String title = "";
         try {
@@ -274,6 +282,8 @@ public class Parser {
             tasks.addTask(task);
             successMessage.append(line).append("Added Event: ").append(task.toString()).append(line);
             return successMessage.toString();
+        }  catch (IllegalArgumentException i) {
+            return i.getMessage();
         } catch (DateTimeParseException e) {
             return e.getMessage();
         }
@@ -282,7 +292,7 @@ public class Parser {
     /**
      * Finds task with given clue word
      */
-    public String findTask() throws DukeException {
+    public String findTask() {
         StringBuilder successMessage = new StringBuilder();
         StringBuilder noMatchMessage = new StringBuilder();
         String wordsProvided;
@@ -312,7 +322,7 @@ public class Parser {
     /**
      * Saves all content into file and stops the program
      */
-    public String terminateAndSaveProgram(Storage storage) throws IOException {
+    public String terminateAndSaveProgram(Storage storage) {
         StringBuilder successMessage = new StringBuilder();
         String byeMessage = "Bye. Hope to see you again soon!\n";
         successMessage.append(line).append(byeMessage).append(line);
