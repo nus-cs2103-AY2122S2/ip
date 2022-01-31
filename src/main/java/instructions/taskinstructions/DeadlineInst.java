@@ -51,7 +51,7 @@ public class DeadlineInst extends NewTaskInst {
             if (split.length == 2 && split[0].length() != 0) {
                 //happens in "deadline a/at b", "deadline a /atb" etc
                 throw MISSING_SPACES_EXCEPTION;
-            }   
+            }
             throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /by "s

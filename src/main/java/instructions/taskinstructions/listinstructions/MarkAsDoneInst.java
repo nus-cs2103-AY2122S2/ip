@@ -1,5 +1,6 @@
-package instructions.listinstructions;
+package instructions.taskinstructions.listinstructions;
 
+import exceptions.InvalidActionException;
 import exceptions.NoSuchTaskException;
 import tasks.TaskList;
 
@@ -38,7 +39,7 @@ public class MarkAsDoneInst extends ModifyListedTaskInst {
      * @throws NoSuchTaskException when there does not exist a task with the given index.
      */
     @Override
-    public String doInst(TaskList taskList) throws NoSuchTaskException {
+    public String doInst(TaskList taskList) throws NoSuchTaskException, InvalidActionException {
         taskList.markTask(super.getTaskNum() - 1, true, true);
         return String.format("Okay, this task is done:\n%s",
                 taskList.displayTask(super.getTaskNum() - 1));

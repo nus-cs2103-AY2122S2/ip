@@ -1,4 +1,4 @@
-package instructions.listinstructions;
+package instructions.taskinstructions.listinstructions;
 
 import exceptions.NoSuchTaskException;
 import tasks.Task;

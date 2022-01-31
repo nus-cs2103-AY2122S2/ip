@@ -1,83 +1,97 @@
 package chatbots;
 
-import java.util.Scanner;
-
 import exceptions.InvalidInputException;
 import exceptions.SaveFileModifiedException;
 import file.management.FileManager;
 import instructions.ExitInst;
+import instructions.HelloInst;
 import instructions.Instruction;
-import instructions.listinstructions.DisplayListInst;
-import instructions.listinstructions.FindInst;
+import instructions.taskinstructions.listinstructions.DisplayListInst;
+import instructions.taskinstructions.listinstructions.FindInst;
+import tasks.TaskList;
 
 /**
  * This class encapsulates the chatbot Fluffers for CS2103T's Individual Project.
  * Fluffers is a chatbot that helps to manage a task list.
  *
- * ASCII art credit: All ASCII art was found on https://www.asciiart.eu/animals/cats .
- *
  * @author Ong Han Yang
  */
 public class Fluffers extends TaskManagerChatbot {
-    private enum AsciiArt {
-        /** ASCII art for when Fluffers just wakes up */
-        AWAKE("    /\\_____/\\\n"
-                + "   /  o   o  \\\n"
-                + "  ( ==  ^  == )\n"
-                + "   )         (\n"
-                + "  (           )\n"
-                + " ( (  )   (  ) )\n"
-                + "(__(__)___(__)__)"
-        ),
-        /** ASCII art for when Fluffers goes back to sleep */
-        ASLEEP("      |\\      _,,,---,,_\n"
-                + "ZZZzz /,`.-'`'    -.  ;-;;,_\n"
-                + "     |,4-  ) )-,_. ,\\ (  `'-'\n"
-                + "    '---''(_/--'  `-'\\_)"
-        ),
-        /** ASCII art for when Fluffers is displaying a list */
-        LIST_TOP("    |\\__/,|   (`\\\n"
-                + "  _.|o o  |_   ) )\n"
-                + "-(((---(((--------"
-        );
-
-        private final String art;
-        private AsciiArt(String art) {
-            this.art = art;
-        }
-    }
 
     /** Name of the saved file */
-    private static String fileName = "";
+    private String fileName = "";
 
     /** Folder path to the saved file */
-    private static String filePath = "";
+    private String filePath = "";
 
     /**
-     * Constructs an awake Fluffers.
+     * Constructs an asleep Fluffers.
      *
+     * @param filePath the file path to the file to load from.
+     * @param fileName the file name to load from.
      * @throws SaveFileModifiedException when the save file contains invalid symbols that could
      *          not have been from the string representation of a task, indicating external
      *          modification to the file.
      */
-    private Fluffers() throws SaveFileModifiedException {
+    private Fluffers(String filePath, String fileName) throws SaveFileModifiedException {
         super(FileManager.loadTaskListFromFile(filePath, fileName));
+        this.fileName = fileName;
+        this.filePath = filePath;
     }
 
     /**
-     * Gets a Fluffers object and sets the file path and file name for Fluffers to save/load from.
+     * Constructs an asleep Fluffers without setting any file path or file name. This initialises
+     * Fluffers with an empty task list.
+     */
+    private Fluffers() {
+        super(new TaskList());
+    }
+
+    /**
+     * Produces a Fluffers object and sets the file path and file name for Fluffers to save/load from.
      *
      * @param filePath the file path to the file that Fluffers saves/loads from.
      * @param fileName the file name that Fluffer saves/loads from.
-     * @return the Fluffers object
+     * @return the Fluffers object, asleep
      * @throws SaveFileModifiedException when the save file contains invalid symbols that could
      *          not have been from the string representation of a task, indicating external
      *          modification to the file.
      */
-    public static Fluffers get(String filePath, String fileName) throws SaveFileModifiedException {
-        Fluffers.filePath = filePath;
-        Fluffers.fileName = fileName;
+    public static Fluffers of(String filePath, String fileName) throws SaveFileModifiedException {
+        return new Fluffers(filePath, fileName);
+    }
+
+    /**
+     * Produces a Fluffers object without setting the file path and file name. Fluffers will then
+     * contain an empty task list.
+     *
+     * @return The Fluffers object, asleep.
+     */
+    public static Fluffers of() {
         return new Fluffers();
+    }
+
+    /**
+     * Loads a file to use instead of the current task list. WARNING: THIS WILL OVERRIDE ALL CURRENT
+     * TASKS IN THE TASKLIST IF IT IS NOT SAVED.
+     *
+     * @param filePath the file path to the file that Fluffers saves/loads from.
+     * @param fileName the file name that Fluffer saves/loads from.
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could
+     *          not have been from the string representation of a task, indicating external
+     *          modification to the file.
+     */
+    public void loadFile(String filePath, String fileName) throws SaveFileModifiedException {
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.setTaskList(FileManager.loadTaskListFromFile(filePath, fileName));
+    }
+
+    /**
+     * Wakes Fluffers up.
+     */
+    public void wakeUp() {
+        this.isAwake = true;
     }
 
     /**
@@ -91,23 +105,12 @@ public class Fluffers extends TaskManagerChatbot {
     }
 
     /**
-     * Greets the user, with fancy formatting.
-     *
-     * @return String representation of the greeting.
-     */
-    protected String greet() {
-        return "Activating Cat Translator 2000...\nWaking Fluffers up...\n\nMeow! (Hello!)\n"
-                + AsciiArt.AWAKE.art;
-    }
-
-    /**
      * Says goodbye to the user, with fancy formatting.
      *
      * @return String representation of the Farewell.
      */
     protected String farewell() {
-        return "Meooow~ (Bye bye! See you again next time!)\n"
-                + AsciiArt.ASLEEP.art;
+        return "Meooow~ (Bye bye! See you again next time!)";
     }
 
     /**
@@ -117,23 +120,39 @@ public class Fluffers extends TaskManagerChatbot {
      * @return the response given with respect to the given input.
      */
     public String feedCommandAndReply(String input) {
+        if (!this.isAwake && !input.startsWith("hi")) {
+            return "Fluffers is asleep... (Type \"hi\" to wake her up!)";
+        }
         Instruction inst;
         try {
             inst = Instruction.of(input);
         } catch (InvalidInputException e) {
-            return this.speak(e.getMessage());
+            return e.getMessage();
         }
         // check for special inst
         if (inst instanceof ExitInst) {
             this.isAwake = false;
             return farewell();
         }
+        if (inst instanceof HelloInst) {
+            if (this.isAwake) {
+                return "Meow! (Hello!)";
+            } else {
+                this.isAwake = true;
+                return "Meoow~ (Hello again!)";
+            }
+        }
         if (inst instanceof DisplayListInst || inst instanceof FindInst) {
-            String output = String.format("%s\n%s------------------", AsciiArt.LIST_TOP.art,
-                    super.instHandler.doInstruction(inst));
+            String output = super.instHandler.doInstruction(inst);
+            if (inst instanceof DisplayListInst && output.length() == 0) {
+                return this.speak("Theres nothing in the list");
+            }
             if (inst instanceof FindInst) {
+                if (output.length() == 0) {
+                    return this.speak("Sorry, I found nothing...");
+                }
                 output = this.speak("Here's what I found! (the numbering is the kept the "
-                        + "same as the \"list\" command") + output;
+                        + "same as the \"list\" command)") + output;
             }
             return output;
         }
@@ -149,33 +168,5 @@ public class Fluffers extends TaskManagerChatbot {
     @Override
     public String toString() {
         return "Version 0.2, Last Updated: 30 Jan 2022";
-    }
-
-    /**
-     * Starts the program/wakes Fluffers up.
-     *
-     * @param args input CLI arguments.
-     */
-    public static void main(String[] args) {
-        Fluffers f;
-        String filePath = "data";
-        String fileName = "saved-taskList.txt";
-        try {
-            f = Fluffers.get(filePath, fileName);
-        } catch (SaveFileModifiedException e) {
-            System.out.println(String.format("The save file at %s/%s has been modified, and is unreadable."
-                    + " Either delete the file, or fix it manually by deleting any wrong entries.", filePath,
-                    fileName));
-            return;
-        }
-
-        System.out.println(f.greet());
-
-        Scanner sc = new Scanner(System.in);
-
-        while (f.isAwake) {
-            String input = sc.nextLine();
-            System.out.println(f.feedCommandAndReply(input));
-        }
     }
 }

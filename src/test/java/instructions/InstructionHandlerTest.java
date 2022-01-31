@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import exceptions.InvalidInputException;
 import exceptions.NoSuchTaskException;
-import instructions.listinstructions.DeleteInst;
-import instructions.listinstructions.DisplayListInst;
-import instructions.listinstructions.FindInst;
-import instructions.listinstructions.MarkAsDoneInst;
-import instructions.listinstructions.UnmarkInst;
 import instructions.taskinstructions.TodoInst;
-
+import instructions.taskinstructions.listinstructions.DeleteInst;
+import instructions.taskinstructions.listinstructions.DisplayListInst;
+import instructions.taskinstructions.listinstructions.FindInst;
+import instructions.taskinstructions.listinstructions.MarkAsDoneInst;
+import instructions.taskinstructions.listinstructions.UnmarkInst;
 import tasks.TaskList;
 
 /**

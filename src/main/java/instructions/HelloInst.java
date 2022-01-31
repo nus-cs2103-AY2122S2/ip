@@ -3,34 +3,34 @@ package instructions;
 import tasks.TaskList;
 
 /**
- * This class represents an exit instruction.
+ * This class represents an Hello instruction.
  * <br>
- * Format: {@code bye}
+ * Format: {@code hi}
  *
  * @author Ong Han Yang
  */
-public class ExitInst extends Instruction {
+public class HelloInst extends Instruction {
     /**
      * Use a fixed/static instruction as there are no differences between multiple different
-     * exit instructions.
+     * hello instructions.
      */
-    private static final ExitInst FIXED_EXIT_INST =
-            new ExitInst();
+    private static final HelloInst FIXED_HELLO_INST =
+            new HelloInst();
 
     /**
-     * Constructs an Exit Instruction.
+     * Constructs an Hello Instruction.
      */
-    private ExitInst() {
+    private HelloInst() {
 
     }
 
     /**
-     * Produces an Exit Instruction.
+     * Produces a Hello Instruction.
      *
-     * @return the Exit Instruction.
+     * @return the Hello Instruction.
      */
-    public static ExitInst of() {
-        return FIXED_EXIT_INST;
+    public static HelloInst of() {
+        return FIXED_HELLO_INST;
     }
 
     /**

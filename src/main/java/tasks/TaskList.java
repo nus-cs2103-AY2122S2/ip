@@ -3,6 +3,7 @@ package tasks;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.InvalidActionException;
 import exceptions.NoSuchTaskException;
 import file.management.FileManager;
 
@@ -111,11 +112,17 @@ public class TaskList {
      * @param saveToFile whether to save to the given file or not.
      * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
-    public void markTask(int taskIndex, boolean isDone, boolean saveToFile) throws NoSuchTaskException {
+    public void markTask(int taskIndex, boolean isDone, boolean saveToFile)
+            throws NoSuchTaskException, InvalidActionException {
         if (!isWithinIndex(taskIndex)) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
-        this.list.get(taskIndex).markAs(isDone);
+        Task toMark = this.list.get(taskIndex);
+        if (toMark.isDone() == isDone) {
+            throw new InvalidActionException("This task is already marked as "
+                    + (isDone ? "done!" : "not done!"));
+        }
+        toMark.markAs(isDone);
         if (saveToFile) {
             this.saveToFile();
         }

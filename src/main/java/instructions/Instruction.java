@@ -1,11 +1,12 @@
 package instructions;
 
+import exceptions.InvalidActionException;
 import exceptions.InvalidInputException;
 import exceptions.NoSuchTaskException;
-import instructions.listinstructions.DisplayListInst;
-import instructions.listinstructions.FindInst;
-import instructions.listinstructions.ModifyListedTaskInst;
 import instructions.taskinstructions.NewTaskInst;
+import instructions.taskinstructions.listinstructions.DisplayListInst;
+import instructions.taskinstructions.listinstructions.FindInst;
+import instructions.taskinstructions.listinstructions.ModifyListedTaskInst;
 import tasks.TaskList;
 
 /**
@@ -41,6 +42,8 @@ public abstract class Instruction {
         switch (instType) {
         case "list":
             return DisplayListInst.of();
+        case "hi":
+            return HelloInst.of();
         case "bye":
             return ExitInst.of();
         case "mark":
@@ -66,5 +69,5 @@ public abstract class Instruction {
      * @throws NoSuchTaskException when the instruction is a ModifyListedTaskInstruction and there
      *          is no specified task number.
      */
-    public abstract String doInst(TaskList taskList) throws NoSuchTaskException;
+    public abstract String doInst(TaskList taskList) throws NoSuchTaskException, InvalidActionException;
 }

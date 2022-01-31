@@ -13,33 +13,11 @@ public abstract class Chatbot {
     protected boolean isAwake;
 
     /**
-     * Constructs a chatbot.
+     * Constructs a chatbot. Initial state of the chatbot is that it is asleep.
      */
     protected Chatbot() {
-        this.isAwake = true;
+        this.isAwake = false;
     }
-
-    /**
-     * Asks the chatbot to speak with given input.
-     *
-     * @param input the input words to speak.
-     * @return the formatted string of the input words.
-     */
-    protected abstract String speak(String input);
-
-    /**
-     * Greets the user.
-     *
-     * @return a greeting.
-     */
-    protected abstract String greet();
-
-    /**
-     * Says goodbye to the user.
-     *
-     * @return a farewell message.
-     */
-    protected abstract String farewell();
 
     /**
      * Feeds a command and gives a reply based on the command.
