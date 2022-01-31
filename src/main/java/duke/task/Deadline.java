@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  * Task type: Deadline
  */
 public class Deadline extends Task {
-    public LocalDate date;
-    public LocalTime time;
-    public String stringTime;
+    private LocalDate date;
+    private LocalTime time;
+    private String stringTime;
 
     public Deadline(String input) {
         super(input.substring(9, input.indexOf("/")));
@@ -21,7 +21,8 @@ public class Deadline extends Task {
     }
 
     public String getFullDateTime() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h.mm a"));
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + this.time.format(DateTimeFormatter.ofPattern("h.mm a"));
     }
 
     public LocalDate getDate() {

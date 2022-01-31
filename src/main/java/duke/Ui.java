@@ -1,11 +1,11 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.LoadException;
 import duke.exception.RonException;
 import duke.exception.WriteException;
 import duke.parser.InputParser;
-
-import java.util.Scanner;
 
 /**
  * User Interface for Chatbot
