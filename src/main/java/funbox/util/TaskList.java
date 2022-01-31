@@ -1,15 +1,13 @@
 package funbox.util;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import funbox.exception.FunBoxExceptions;
-import funbox.task.Task;
 import funbox.task.Deadline;
 import funbox.task.Event;
+import funbox.task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -18,6 +16,12 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Delete the task from the list.
+     *
+     * @param index The index of the item on the list.4
+     * @param ui Interface which interact with users.
+     */
     public void delete(int index, Ui ui) {
         Task temp = taskList.get(index);
         this.taskList.remove(index);
@@ -42,8 +46,12 @@ public class TaskList {
         ui.printTask(index, this.taskList.get(index));
     }
 
+    /**
+     * Print the tasks on the list.
+     *
+     * @param ui Interface which interact with users.
+     */
     public void printTasks(Ui ui) {
-
         if (this.getSize() >= 1) {
             ui.printListHeader();
             for (int i = 0; i < this.taskList.size(); i++) {
@@ -67,9 +75,6 @@ public class TaskList {
         return this.taskList;
     }
 
-<<<<<<< HEAD
-
-=======
     /**
      * Filter the list based on the date provided by the user.
      *
@@ -77,7 +82,6 @@ public class TaskList {
      * @param taskList The list containing the task.
      * @throws FunBoxExceptions If date is not formatted in `yyyy-mm-dd`.
      */
->>>>>>> branch-A-JavaDoc
     public void filterTasks(String filterDate, TaskList taskList) throws FunBoxExceptions {
         LocalDate date;
         try {
@@ -102,7 +106,7 @@ public class TaskList {
 
             for (int i = 0; i < deadlineSize; i++) {
                 Deadline temp = (Deadline) deadlineList.get(i);
-                if (temp.date.equals(date)) {
+                if (temp.getDate().equals(date)) {
                     counter++;
                     System.out.println(counter + "." + temp);
                 }
@@ -117,6 +121,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find task from the list.
+     *
+     * @param filter The keyword use to filter the list.
+     * @param ui Interface which interact with users.
+     * @param taskList Stores the user lists.
+     */
     public void findTasks(String filter, Ui ui, TaskList taskList) {
         ArrayList<Task> tempTaskList = new ArrayList<>(taskList.getTaskList());
         String filterLowerCase = filter.toLowerCase();
