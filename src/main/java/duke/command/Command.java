@@ -77,10 +77,10 @@ class ByeCommand extends Command {
     /**
      * Causes the Duke application to exit.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
-     * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
+     * @throws DukeExceptions {@inheritDoc}
      */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
@@ -101,9 +101,9 @@ class ListCommand extends Command {
     /**
      * Shows all the tasks in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
      */
     @Override
@@ -124,9 +124,9 @@ class MarkCommand extends Command {
     /**
      * Marks the task indicated by the index in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
      */
     @Override
@@ -158,9 +158,9 @@ class UnmarkCommand extends Command {
     /**
      * Unmarks the task indicated by the index in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
      */
     @Override
@@ -192,9 +192,9 @@ class TodoCommand extends Command {
     /**
      * Adds a todo task in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions If the user did not indicate a name of the task.
      */
     @Override
@@ -225,9 +225,9 @@ class DeadlineCommand extends Command {
     /**
      * Adds a deadline command into the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
      */
     @Override
@@ -270,9 +270,9 @@ class EventCommand extends Command {
     /**
      * Adds an event task in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
      */
     @Override
@@ -315,9 +315,9 @@ class DeleteCommand extends Command {
     /**
      * Deletes the task indicated by the index number in the task list.
      *
-     * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
-     * @param storage The Storage on which the command will act on.
+     * @param taskList {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DukeExceptions If the user did not enter a number.
      */
     @Override
