@@ -25,9 +25,15 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/King.jpg"));
     private Image saitamaImage = new Image(this.getClass().getResourceAsStream("/images/Saitama.jpg"));
+    private Image initialSaitamaImage = new Image(this.getClass().getResourceAsStream("/images/InitialSaitama.jpg"));
 
+    /**
+     * Initialises the MainWindow.
+     */
     @FXML
     public void initialize() {
+        dialogContainer.getChildren().add(DialogBox.getSaitamaDialog(
+                "I'm Saitama, a hero for fun.\nWhat can I do for you?", initialSaitamaImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

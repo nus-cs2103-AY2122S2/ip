@@ -7,33 +7,6 @@ import saitama.tasks.TaskList;
 
 public class Ui {
     /**
-     * Shows the welcome logo and message.
-     */
-    public void showWelcome() {
-        String logo = "   _____       _ _                        \n"
-                + "  / ____|     (_) |                       \n"
-                + " | (___   __ _ _| |_ __ _ _ __ ___   __ _ \n"
-                + "  \\___ \\ / _` | | __/ _` | '_ ` _ \\ / _` |\n"
-                + "  ____) | (_| | | || (_| | | | | | | (_| |\n"
-                + " |_____/ \\__,_|_|\\__\\__,_|_| |_| |_|\\__,_|\n";
-
-        System.out.println(logo);
-        showLine();
-        System.out.println("I'm Saitama, a hero for fun.");
-        System.out.println("What can I do for you?");
-        showLine();
-    }
-
-    /**
-     * Returns a line.
-     *
-     * @return A line.
-     */
-    public String showLine() {
-        return "____________________________________________________________";
-    }
-
-    /**
      * Returns the error message.
      *
      * @param errorMessage The error message to be printed.
@@ -48,8 +21,8 @@ public class Ui {
      *
      * @return The save message.
      */
-    public String showSave() {
-        String reply = String.format("OK...\nYour tasks have been saved!");
+    public String showExit() {
+        String reply = String.format("OK...\nYour tasks have been saved!\nGoodbye!");
         return reply;
     }
 
