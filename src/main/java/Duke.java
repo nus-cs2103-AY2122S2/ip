@@ -8,16 +8,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static List<Task> taskArray = new ArrayList<>();
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("__________________________________");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you");
-        System.out.println("__________________________________");
         try {
             File myObj = new File("data/duke.txt");
             myObj.createNewFile();
@@ -25,17 +17,15 @@ public class Duke {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
-        listen();
+        new Duke().listen();
     }
 
-    public static void listen(){
-        Scanner dukeScan = new Scanner(System.in);
+    private void listen(){
+        Ui.printLogo();
         boolean running = true;
         while (running) {
             try  {
-                String userInput = dukeScan.nextLine();
-                String[] command = parseInput(userInput);
+                String[] command = Ui.run();
                 switch (command[0]) {
                     case "bye":
                         running = false;
@@ -67,20 +57,12 @@ public class Duke {
             }
 
         }
-
         System.out.println("__________________________________");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("__________________________________");
     }
 
-    public static String[] parseInput(String input) {
-        String[] inputArray = input.split(" ");
-        String[] tempArray = Arrays.copyOfRange(inputArray, 1, inputArray.length);
-        return new String[] {inputArray[0], String.join(" ", tempArray)};
-    }
-
-
-    public static void addItem(String[] command) throws DukeException{
+    private static void addItem(String[] command) throws DukeException{
         String input = command[0];
         Task task;
         String title;
@@ -119,7 +101,6 @@ public class Duke {
         default:
             throw new DukeException("Sorry I don't understand what that is :(");
         }
-
         taskArray.add(task);
         System.out.println("__________________________________");
         System.out.println("added: " + task);
@@ -127,7 +108,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    public static void listItem() {
+    private static void listItem() {
         System.out.println("__________________________________");
         if (taskArray.size() == 0) {
             System.out.println("No items in the list");
@@ -139,7 +120,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    public static void markItem(String[] command) {
+    private static void markItem(String[] command) {
         int index = Integer.parseInt(command[1]);
         taskArray.get(index-1).setChecked();
         System.out.println("__________________________________");
@@ -148,7 +129,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    public static void unmarkItem(String[] command) {
+    private static void unmarkItem(String[] command) {
         int index = Integer.parseInt(command[1]);
         taskArray.get(index-1).setUnChecked();
         System.out.println("__________________________________");
@@ -157,7 +138,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    public static void deleteItem(String[] command) {
+    private static void deleteItem(String[] command) {
         int index = Integer.parseInt(command[1]);
         System.out.println("__________________________________");
         System.out.println("Noted, I've removed this task from the list: ");
@@ -166,7 +147,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    public static String writeItem() {
+    private static String writeItem() {
         StringBuilder list = new StringBuilder();
         if (taskArray.size() == 0) {
             list = new StringBuilder("No items in the list");
