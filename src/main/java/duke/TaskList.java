@@ -19,10 +19,9 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
-    public TaskList add(Task task) {
+    public void add(Task task) {
         this.tasks.add(task);
         items++;
-        return this;
     }
     public int getNumberOfTasks() {
         return items;

@@ -5,12 +5,12 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     protected LocalDateTime by;
 
-    public Event(String desc, LocalDateTime by) {
-        super(desc, "E");
+    public Event(String description, LocalDateTime by) {
+        super(description, "E");
         this.by = by;
     }
-    public Event(String desc, LocalDateTime by, boolean done) {
-        super(desc, done, "E");
+    public Event(String description, LocalDateTime by, boolean done) {
+        super(description, done, "E");
         this.by = by;
     }
 
