@@ -41,6 +41,9 @@ public class Parser {
                 case "delete":
                     taskList.delete(input);
                     break;
+                case "find":
+                    taskList.filter(input);
+                    break;
                 default:
                     throw new ChatCatException("OOPS!!! I'm sorry, but I don't know what that means");
             }

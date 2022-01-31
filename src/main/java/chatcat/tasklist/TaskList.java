@@ -1,6 +1,8 @@
 package chatcat.tasklist;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import chatcat.tasks.Deadline;
 import chatcat.tasks.Event;
@@ -169,5 +171,27 @@ public class TaskList {
         writeToFile.toWrite(Tasks);
         ui.printOutPut("Noted. I've removed this task:\n" + removed);
         ui.printOutPut("Now you have " + Tasks.size() + " tasks in the list.");
+    }
+
+    public void filter(String str) throws ChatCatException {
+        Tasks = writeToFile.toRead();
+        ArrayList<Task> filteredList = new ArrayList<>();
+        String[] input = str.split(" ");
+
+        Tasks.forEach(task -> {
+            if (task.containsKeyWord(input[1])) {
+                filteredList.add(task);
+            }
+        });
+
+        if (filteredList.isEmpty()) {
+            throw new ChatCatException("No task with keyword: " + "str");
+        }
+
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < filteredList.size(); i++) {
+            System.out.println((i + 1) + ". " + filteredList.get(i));
+        }
+        System.out.println("");
     }
 }
