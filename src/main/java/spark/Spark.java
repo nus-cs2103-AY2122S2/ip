@@ -15,7 +15,8 @@ public class Spark {
     private Ui ui;
     private Storage storage;
 
-    /** Starts an instance of Spark that stores saved Tasks in
+    /**
+     * Starts an instance of Spark that stores saved Tasks in
      * the default relative file-path on the user's hard-disk.
      */
     public Spark() {

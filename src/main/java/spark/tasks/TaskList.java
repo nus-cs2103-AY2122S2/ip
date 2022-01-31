@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import spark.exceptions.fileexceptions.FileException;
-import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.exceptions.taskmodificationexceptions.TaskAlreadyMarked;
 import spark.exceptions.taskmodificationexceptions.TaskAlreadyUnMarked;
 import spark.exceptions.taskmodificationexceptions.TaskNotFoundException;
@@ -16,9 +14,6 @@ import spark.tasks.tasktypes.Todo;
 
 /**
  * Encapsulates a list of Tasks.
- *
- * @throws FileException if the save-file on the user's hard-disk cannot be accessed or modified.
- * @throws TaskDecodingException if the encoded data on the save-file cannot be read.
  */
 public class TaskList {
     protected List<Task> tasks;
