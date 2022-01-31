@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Deadline extends Task {
   private LocalDate by;
 
-  public Deadline(String name, LocalDate by) {
+  public Deadline(String name, LocalDate by) throws TaskException {
     super(name);
     this.by = by;
   }
