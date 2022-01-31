@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Arrays;
 
 public class Ui {
+
+    /**
+     * Prints a GAP added text for differentiating user and app texts.
+     * @param text Text to be printed.
+     */
     public void print(String text) {
         List<String> lines = Arrays.asList(text.split("\n"));
         for (String line : lines) {
@@ -14,6 +19,9 @@ public class Ui {
         System.out.println(Constants.LINE);
     }
 
+    /**
+     * Prints initial greetings when the app starts.
+     */
     public void initialGreet() {
         System.out.println(Constants.LINE);
         print("Hello from\n" + Constants.LOGO);
@@ -21,6 +29,9 @@ public class Ui {
                 "What can I do for you today?");
     }
 
+    /**
+     * Prints goodbye message before the app ends.
+     */
     public void finalBye() {
         print("Bye. Hope to see you again soon!");
     }

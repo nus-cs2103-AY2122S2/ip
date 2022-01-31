@@ -14,6 +14,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+
+    /**
+     * Saves current tasks snapshot to a file.
+     * The file is stored in "data/duke.txt".
+     * @param storageStrings List of texts to be saved. Each text represents 1 task.
+     * @param taskListString Text from Task.list method. For printing purposes.
+     * @return Response text to be printed.
+     */
     public String exportData(List<String> storageStrings, String taskListString) {
         String response = "The following tasks will be saved: \n" + taskListString;
         Path dir = Paths.get(Constants.DIR_PATH);
@@ -39,6 +47,11 @@ public class Storage {
 
     }
 
+    /**
+     * Imports previous tasks snapshot from a file if present.
+     * The file is stored in "data/duke.txt".
+     * @return Response text to be printed.
+     */
     public List<String> importData() {
         List<String> storageStrings = new ArrayList<>();
         if (Files.exists(Paths.get(Constants.STORAGE_PATH))) {

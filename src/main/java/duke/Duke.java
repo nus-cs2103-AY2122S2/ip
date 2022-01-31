@@ -1,16 +1,8 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.List;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-import duke.task.Task;
-import duke.util.Constants;
 
 public class Duke {
     private final Ui ui;
@@ -18,6 +10,10 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Constructs Duke object.
+     * Initializes the UI, TasksList, Storage, and Parser for use.
+     */
     public Duke() {
         this.ui = new Ui();
         this.taskslist = new TasksList();
@@ -25,6 +21,10 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Runs the main logic of Duke.
+     * Stops after user input == "bye".
+     */
     public void run() {
         this.ui.initialGreet();
 

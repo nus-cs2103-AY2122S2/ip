@@ -9,15 +9,28 @@ public class Task {
     private boolean isDone;
     //can make isDone final for good practice
 
+    /**
+     * Constructs Task class.
+     * The constructor takes in the description of the task.
+     * The default isDone status of the object is false.
+     * @param name description of the task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    /**
+     * Switches task isDone status.
+     */
     public void switchStatus() {
         this.isDone = !this.isDone;
     }
 
+    /**
+     * Switches task isDone status to true.
+     * @return Response text to indicate whether the action is successful.
+     */
     public String markAsDone() {
         String output;
         if (this.isDone) {
@@ -29,6 +42,10 @@ public class Task {
         return output;
     }
 
+    /**
+     * Switches task isDone status to false.
+     * @return Response text to indicate whether the action is successful.
+     */
     public String markAsNotDone() {
         String output;
         if (!this.isDone) {
@@ -40,6 +57,13 @@ public class Task {
         return output;
     }
 
+    /**
+     * Creates a Task object.
+     * This is a factory constructor that calls the factor constructor of its appropriate child classes.
+     * @param description Task description from user input.
+     * @return Response Text to be printed.
+     * @throws InvalidArgumentException If the user input format is invalid/unknown.
+     */
     public static Task createTask(List<String> description) throws InvalidArgumentException {
         if (description.get(0).equals("todo")) {
             return Todo.of(description);
@@ -51,23 +75,43 @@ public class Task {
         throw new InvalidArgumentException();
     }
 
+    /**
+     * Gets the isDone status in text format.
+     * @return isDone status in text.
+     */
     public String getStatusIcon() {
         return (isDone? "X" : " ");
     }
 
+    /**
+     * Gets the name variable.
+     * @return name variable.
+     */
     String getName() {
         return this.name;
     }
 
+    /**
+     * Gets the isDone status.
+     * @return isDone status.
+     */
     Boolean getStatus() {
         return this.isDone;
     }
 
+    /**
+     * Returns the tasks in text format for storage.
+     * The text format follows the initial user input.
+     */
     public String toStorageString() {
         String status = isDone? "X" : ".";
         return String.format(status + " task " + name);
     }
 
+    /**
+     * Returns text representing the task for User.
+     * @return Task in text format.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.name);

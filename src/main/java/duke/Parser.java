@@ -1,16 +1,21 @@
 package duke;
 
-import duke.TasksList;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.util.Constants;
-import duke.Storage;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Parser {
-    public String parse(String data, TasksList taskslist, Storage storage) {
+
+    /**
+     * Translates user inputs and performs the supposed actions.
+     * @param data User input.
+     * @param tasksList TasksList variable from Duke.
+     * @param storage Storage variable from Duke.
+     * @return Response text to be printed by the UI.
+     */
+    public String parse(String data, TasksList tasksList, Storage storage) {
         try {
             String[] instruction = data.split(" ");
 
@@ -22,30 +27,30 @@ public class Parser {
                 return "BYE";
 
             } else if (instruction[0].equals("list")) {
-                String response = taskslist.list();
+                String response = tasksList.list();
                 return response;
 
             } else if (instruction[0].equals("mark")) {
                 int taskNum = Integer.parseInt(instruction[1]);
-                String response = taskslist.mark(taskNum);
+                String response = tasksList.mark(taskNum);
                 return response;
 
             } else if (instruction[0].equals("unmark")) {
                 int taskNum = Integer.parseInt(instruction[1]);
-                String response = taskslist.unmark(taskNum);
+                String response = tasksList.unmark(taskNum);
                 return response;
 
             } else if (instruction[0].equals("delete")) {
                 int taskNum = Integer.parseInt(instruction[1]);
-                String response = taskslist.deleteTask(taskNum);
+                String response = tasksList.deleteTask(taskNum);
                 return response;
 
             } else if (instruction[0].equals("todo") || instruction[0].equals("event") || instruction[0].equals("deadline")) {
-                String response = taskslist.addTask(Arrays.asList(instruction));
+                String response = tasksList.addTask(Arrays.asList(instruction));
                 return response;
 
             } else if (instruction[0].equals("save")) {
-                String response = storage.exportData(taskslist.toStorageStrings(), taskslist.list());
+                String response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
                 return response;
             }
         }

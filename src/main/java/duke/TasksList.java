@@ -11,10 +11,20 @@ import java.util.List;
 public class TasksList {
     private List<Task> tasks;
 
+    /**
+     * TasksList constructor method.
+     * Uses ArrayList<Task> as its core.
+     */
     public TasksList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Adds user input task to the taskslist.
+     * @param instructions List of user input words.
+     * @return Response text to be printed.
+     * @throws InvalidArgumentException If user input argument format is unknown/invalid.
+     */
     public String addTask(List<String> instructions) throws InvalidArgumentException {
         Task newTask = Task.createTask(instructions);
         tasks.add(newTask);
@@ -24,6 +34,12 @@ public class TasksList {
         return response;
     }
 
+    /**
+     * Deletes task of certain index from the taskslist.
+     * @param index Index of the task (1 based).
+     * @return Response text to be printed.
+     * @throws InvalidIndexException If index is out of bounds.
+     */
     public String deleteTask(int index) throws InvalidIndexException {
         if (index > this.tasks.size()) {
             throw new InvalidIndexException();
@@ -34,6 +50,10 @@ public class TasksList {
         return response;
     }
 
+    /**
+     * Returns the list of tasks in the form of String / text.
+     * @return List of tasks with numberings in text format.
+     */
     public String list() {
         StringBuilder response = new StringBuilder("");
 
@@ -47,6 +67,12 @@ public class TasksList {
         return response.toString();
     }
 
+    /**
+     * Changes task status to marked.
+     * @param index Index of the task (1 based).
+     * @return Response text to be printed.
+     * @throws InvalidIndexException If index is out of bounds.
+     */
     public String mark(int index) throws InvalidIndexException {
         if (index > this.tasks.size()) {
             throw new InvalidIndexException();
@@ -55,6 +81,12 @@ public class TasksList {
         return response;
     }
 
+    /**
+     * Changes task status to unmarked.
+     * @param index Index of the task (1 based).
+     * @return Response text to be printed.
+     * @throws InvalidIndexException If index is out of bounds.
+     */
     public String unmark(int index) throws InvalidIndexException {
         if (index > this.tasks.size()) {
             throw new InvalidIndexException();
@@ -63,6 +95,11 @@ public class TasksList {
         return response;
     }
 
+    /**
+     * Returns the tasks list in text format for storage.
+     * The text format follows the initial user input.
+     * @return List of texts. Each text represents 1 task.
+     */
     public List<String> toStorageStrings() {
         List<String> responses = new ArrayList<>();
         for (Task task : tasks) {
@@ -71,10 +108,22 @@ public class TasksList {
         return responses;
     }
 
+    /**
+     * Gets the number of tasks in the taskslists.
+     * @return Number of tasks.
+     */
     public int getSize() {
         return this.tasks.size();
     }
 
+    /**
+     * Imports tasks from a list of strings (each representing 1 task).
+     * The tasksStrings is from history storage.
+     * This method is the counterpart of toStorageStrings().
+     * @param tasksStrings List of tasks in text format.
+     * @return Response text to be printed.
+     * @throws InvalidArgumentException If any of the task's format is unknown/invalid.
+     */
     public String importStorageStrings(List<String> tasksStrings) throws InvalidArgumentException{
         for (String taskString : tasksStrings) {
             List<String> description = Arrays.asList(taskString.split(" "));
