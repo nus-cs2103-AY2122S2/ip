@@ -1,12 +1,15 @@
 package spark.tasks.tasktypes;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event on the user's task list.
+ */
 public class Event extends Task {
-    private LocalDateTime eventDateTime;
     private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
     private static final DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
+    private LocalDateTime eventDateTime;
 
     /**
      * Creates a new Event.
@@ -36,6 +39,12 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(), this.eventDateTime.format(outputDateTimeFormatter));
     }
 
+    /**
+     * Returns an encoded-representation of the Event that can be
+     * stored in a text-file and decoded into a Event.
+     *
+     * @return a String containing the encoded-representation of the Event.
+     */
     @Override
     public String encodeTask() {
         return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.eventDateTime.format(inputDateTimeFormatter));

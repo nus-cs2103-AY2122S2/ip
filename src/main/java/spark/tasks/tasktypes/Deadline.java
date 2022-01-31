@@ -3,10 +3,13 @@ package spark.tasks.tasktypes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline in the task list.
+ */
 public class Deadline extends Task {
-    private LocalDateTime by;
     private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
     private static final DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
+    private LocalDateTime by;
 
     /**
      * Creates a new Deadline.
@@ -39,6 +42,12 @@ public class Deadline extends Task {
                 this.by.format(outputDateTimeFormatter));
     }
 
+    /**
+     * Returns an encoded-representation of the Deadline that can be
+     * stored in a text-file and decoded into a Deadline.
+     *
+     * @return a String containing the encoded-representation of the Deadline.
+     */
     @Override
     public String encodeTask() {
         return String.format("D @@@ %b @@@ %s @@@ %s",

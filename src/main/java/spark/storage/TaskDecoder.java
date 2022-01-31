@@ -4,12 +4,22 @@ import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.tasks.tasktypes.Deadline;
 import spark.tasks.tasktypes.Event;
 import spark.tasks.tasktypes.Task;
-import spark.tasks.tasktypes.ToDo;
+import spark.tasks.tasktypes.Todo;
 
 /**
- * Contains methods to decode Tasks saved in Storage.
+ * Contains methods to decode Tasks stored in the save-file on
+ * the user's hard-disk.
  */
 public class TaskDecoder {
+    /**
+     * Converts the encoded-representation of a Task to a Task object
+     * and returns it.
+     *
+     * @param encodedTask            the encoded-representation of a Task.
+     * @return                       the decoded Task object
+     * @throws TaskDecodingException if the encoded-representation of a Task
+     *                               could not be decoded to any known forms.
+     */
     public static Task decodeTask(String encodedTask) throws TaskDecodingException {
         String[] tokens = encodedTask.split(" @@@ ");
         String taskType = tokens[0];
@@ -34,7 +44,7 @@ public class TaskDecoder {
     }
 
     private static Task decodeTodo(String[] tokens) {
-        return new ToDo(parseCompletionStatus(tokens[1]), tokens[2]);
+        return new Todo(parseCompletionStatus(tokens[1]), tokens[2]);
     }
 
     private static Task decodeDeadline(String[] tokens) {

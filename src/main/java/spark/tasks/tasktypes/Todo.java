@@ -1,11 +1,13 @@
 package spark.tasks.tasktypes;
 
-public class ToDo extends Task {
+/**
+ * Represents a todo on the user's task list.
+ */
+public class Todo extends Task {
     /**
-     * Creates a new ToDo.
-     *
+     * Creates a new Todo.
      */
-    public ToDo (String name) {
+    public Todo(String name) {
         super(name);
     }
 
@@ -14,7 +16,7 @@ public class ToDo extends Task {
      * given completion status.
      *
      */
-    public ToDo(boolean isDone, String title) {
+    public Todo(boolean isDone, String title) {
         super(isDone, title);
     }
 
@@ -23,6 +25,12 @@ public class ToDo extends Task {
         return String.format("[T]%s", super.toString());
     }
 
+    /**
+     * Returns an encoded-representation of the Todo that can be
+     * stored in a text-file and decoded into a Todo.
+     *
+     * @return a String containing the encoded-representation of the Todo.
+     */
     @Override
     public String encodeTask() {
         return String.format("T @@@ %b @@@ %s", super.isDone(), super.getTitle());
