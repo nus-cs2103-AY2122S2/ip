@@ -3,9 +3,10 @@ package saitama.commands;
 import java.util.List;
 
 import saitama.storage.Storage;
+import saitama.tasks.Task;
 import saitama.tasks.TaskList;
 import saitama.ui.Ui;
-import saitama.tasks.Task;
+
 
 public class FindCommand extends Command {
     private String query;

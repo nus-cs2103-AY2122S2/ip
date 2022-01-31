@@ -25,53 +25,92 @@ public class Ui {
     }
 
     /**
-     * Prints a line.
+     * Returns a line.
+     *
+     * @return A line.
      */
     public String showLine() {
         return "____________________________________________________________";
     }
 
     /**
-     * Prints the error message.
+     * Returns the error message.
      *
      * @param errorMessage The error message to be printed.
+     * @return The error message.
      */
     public String showError(String errorMessage) {
         return errorMessage;
     }
 
     /**
-     * Prints the saving message.
+     * Returns the save message.
+     *
+     * @return The save message.
      */
     public String showSave() {
         String reply = String.format("OK...\nYour tasks have been saved!");
         return reply;
     }
 
+    /**
+     * Returns the add task message.
+     *
+     * @param task The Task to add.
+     * @param taskList The TaskList that tracks the current tasks.
+     * @return  The add task message.
+     */
     public String showAddTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has been added to the list:\n"
                 + "%s\nNow you have %d tasks in the list", task, taskList.numOfTasks());
         return reply;
     }
 
+    /**
+     * Returns the delete task message.
+     *
+     * @param task The Task to delete.
+     * @param taskList The TaskList that tracks the current tasks.
+     * @return  The delete task message.
+     */
     public String showDeleteTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has been removed from the list:\n"
                 + "%s\nNow you have %d tasks in the list", task, taskList.numOfTasks());
         return reply;
     }
 
+    /**
+     * Returns the mark task message.
+     *
+     * @param task The Task to mark.
+     * @param taskList The TaskList that tracks the current tasks.
+     * @return  The mark task message.
+     */
     public String showMarkTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has marked:\n%s",
                 task, taskList.numOfTasks());
         return reply;
     }
 
+    /**
+     * Returns the unmark task message.
+     *
+     * @param task The Task to unmark.
+     * @param taskList The TaskList that tracks the current tasks.
+     * @return  The unmark task message.
+     */
     public String showUnmarkTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has unmarked:\n%s",
                 task, taskList.numOfTasks());
         return reply;
     }
 
+    /**
+     * Returns the matching tasks message when FindCommand is run.
+     *
+     * @param matchingTasks The List of matching tasks.
+     * @return The matching tasks message.
+     */
     public String showMatchingTasks(List<Task> matchingTasks) {
         String reply = "OK...\n";
         int counter = 1;
@@ -87,6 +126,12 @@ public class Ui {
         return reply;
     }
 
+    /**
+     * Returns the list message.
+     *
+     * @param taskList The TaskList.
+     * @return The list message.
+     */
     public String showList(TaskList taskList) {
         String reply = "OK...\n";
         if (taskList.numOfTasks() == 0) {
