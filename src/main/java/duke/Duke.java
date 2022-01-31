@@ -1,24 +1,29 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.task.TaskList;
+import duke.ui.MainWindow;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Represents an instance of the Duke application.
  * Serves as the entry point for the entire application.
  */
-public class Duke {
+public class Duke extends Application {
     /** Global task list for all operations. */
     private static TaskList taskList;
 
-    private Duke() {
+    public Duke() {
 
-    }
-
-    public static void main(String[] args) {
-        new Duke().init().run();
     }
 
     /**
@@ -26,7 +31,7 @@ public class Duke {
      * Loads any existing database and attaches observers for saving the database to disk.
      * @return The current instance of the application being initialized.
      */
-    private Duke init() {
+    Duke initializeTaskList() {
         try {
             taskList = Storage.load();
             taskList.registerListener(store -> {
@@ -46,10 +51,24 @@ public class Duke {
         return this;
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            primaryStage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(this);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Drives the main application Read-Evaluate-Print Loop.
      */
-    private void run() {
+    void run() {
         Ui ui = Ui.getInstance().greet();
 
         boolean isRunning = true;
