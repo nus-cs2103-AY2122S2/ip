@@ -39,6 +39,7 @@ public class Duke {
             Scanner in = new Scanner(System.in);
             String userInput = in.nextLine();
             commandType = Parser.getCommandType(userInput);
+
             try {
                 Parser.processUserInput(commandType, userInput, tasks);
                 storage.saveData(tasks);

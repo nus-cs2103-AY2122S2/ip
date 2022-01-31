@@ -3,7 +3,7 @@ package duke.Commands;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-public class UnmarkCommand {
+public class UnmarkCommand extends Command {
 
     public UnmarkCommand(TaskList taskList, String userInput) {
         try {

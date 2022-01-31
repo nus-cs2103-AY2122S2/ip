@@ -3,7 +3,7 @@ package duke.Commands;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-public class MarkCommand {
+public class MarkCommand extends Command {
 
     public MarkCommand(TaskList taskList, String userInput) {
         try {
