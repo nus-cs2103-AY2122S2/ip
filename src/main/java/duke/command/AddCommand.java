@@ -8,7 +8,7 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    public execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         ui.showTaskAdded(task);
     }

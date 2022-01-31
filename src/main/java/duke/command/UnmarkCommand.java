@@ -1,6 +1,6 @@
 package duke.command;
 
-public class UnarkCommand {
+public class UnmarkCommand {
   
   private int taskNumber;
 

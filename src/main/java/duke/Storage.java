@@ -26,7 +26,7 @@ public class Storage {
                 Boolean status = Boolean.parseBoolean(data[1]);
                 String text = data[2];
                 if (data[0].equals("T")) {
-                    tasks.add(new Todo(data[2], data[1]))
+                    tasks.add(new Todo(data[2], data[1]));
                 }
                 else if (data[0].equals("D")) {
                     String date = data[3];

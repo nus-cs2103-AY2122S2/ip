@@ -52,4 +52,9 @@ public class Parser {
           throw new DukeException("I don't recognize that command.");
       }
   }
+
+  public Command buildDeadlineCommand() {
+
+  }
+  
 }

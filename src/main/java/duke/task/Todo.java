@@ -6,7 +6,7 @@ public class Todo extends Task {
     super(str, status);
   }
 
-  public Todo(str) {
+  public Todo(String str) {
     Todo(str, false);
   }
 
