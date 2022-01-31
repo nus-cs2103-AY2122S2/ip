@@ -25,16 +25,19 @@ public class DeleteCommand extends Command {
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
      * @param storage Stores user tasks locally.
+     * @return Returns a string to be displayed to the user.
      * @throws FunBoxExceptions If (index - 1) > taskList.getSize() or (index - 1) < 0.
      * @throws IOException Throws if file do not exist.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
+        String result = "";
         if ((index - 1) > taskList.getSize() || (index - 1) < 0) {
             throw new FunBoxExceptions("Wrong index!");
         } else {
-            taskList.delete(this.index - 1, ui);
+            result = taskList.delete(this.index - 1, ui);
             storage.deleteTask(index);
         }
+        return result;
     }
 }

@@ -15,6 +15,7 @@ public class FilterCommand extends Command {
      * The constructor for FilterCommand.
      *
      * @param description The string used to filter the list.
+     * @return Returns a string to be displayed to the user.
      */
     public FilterCommand(String description) {
         super(false);
@@ -30,7 +31,7 @@ public class FilterCommand extends Command {
      * @throws FunBoxExceptions If date is not formatted in `yyyy-mm-dd`.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
-        taskList.filterTasks(this.description, taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        return taskList.filterTasks(this.description, taskList, ui);
     }
 }

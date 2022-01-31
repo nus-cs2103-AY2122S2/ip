@@ -31,10 +31,12 @@ public class DeadlineCommand extends Command {
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
      * @param storage Stores user tasks locally.
-     * @throws FunBoxExceptions If description == ""
+     * @return Returns a string to be displayed to the user.
+     * @throws FunBoxExceptions Returns exceptions related to FunBox.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        String result = "";
         if (description.equals("")) {
             throw new FunBoxExceptions("`deadline` command is missing a field!");
         } else {
@@ -43,8 +45,9 @@ public class DeadlineCommand extends Command {
                     parser.stringToLocalDate(resultArr[1]),
                     parser.getTime(resultArr[1]), "deadline");
             taskList.add(deadline);
-            ui.printTask(taskList.getSize(), deadline);
             storage.writeTaskToStorage(deadline, ui);
+            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), deadline);
         }
+        return result;
     }
 }

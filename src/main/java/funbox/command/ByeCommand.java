@@ -16,14 +16,15 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Execute the command and print a goodbye message to users.
+     * Execute the command and returns a goodbye message to users.
      *
      * @param taskList List of tasks.
      * @param ui Interface which interact with users.
-     * @param storage Store user tasks locally.
+     * @param storage Stores user tasks locally.
+     * @return Returns a string to be displayed to users.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printBye();
     }
 }
