@@ -213,4 +213,25 @@ public class Ui {
 
         return processedDateStr;
     }
+
+    /**
+     * Returns the message with the tasks in the task list that
+     * contains the keyword in the description.
+     *
+     * @param taskList Task list containing all the tasks
+     * @param keyword Keyword in the description
+     * @return The string representation of the message
+     */
+    public String tasksWithKeywordMessage(TaskList taskList, String keyword) {
+        return "\t" + "Here"
+                + (taskList.getNumOfFilteredTasks() > 1 ? " are the matching tasks " : " is the matching task ")
+                + "in your list:"
+                + System.lineSeparator()
+                + "\t" + "[Keyword Search: " + keyword + "]"
+                + System.lineSeparator()
+                + "\t" + "[Legend: T = todo, D = deadline, E = event]"
+                + System.lineSeparator()
+                + System.lineSeparator()
+                + taskList;
+    }
 }

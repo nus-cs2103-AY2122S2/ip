@@ -70,6 +70,17 @@ public abstract class Task {
     }
 
     /**
+     * Checks if the description of the task contains the keyword.
+     *
+     * @param keyword Keyword
+     * @return Flag to indicate if the description of the task contains
+     * the keyword
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
      * Returns the string representation of the task.
      *
      * @return The string representation of the task
