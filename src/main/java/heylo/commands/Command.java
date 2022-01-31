@@ -1,11 +1,11 @@
-package commands;
+package heylo.commands;
 
 import java.util.Scanner;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import heylo.tasks.Deadline;
+import heylo.tasks.Event;
+import heylo.tasks.Task;
+import heylo.tasks.Todo;
 
 public class Command {
     private String command;

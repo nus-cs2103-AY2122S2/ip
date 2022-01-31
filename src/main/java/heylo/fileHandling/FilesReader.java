@@ -1,6 +1,6 @@
-package fileHandling;
+package heylo.fileHandling;
 
-import tasks.Task;
+import heylo.tasks.Task;
 
 import java.io.File;
 import java.io.IOException;

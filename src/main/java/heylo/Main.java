@@ -1,5 +1,7 @@
-import commands.Command;
-import tasks.Task;
+package heylo;
+
+import heylo.commands.Command;
+import heylo.tasks.Task;
 
 import java.util.Scanner;
 

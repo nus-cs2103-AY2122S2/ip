@@ -1,7 +1,7 @@
-package tasks;
+package heylo.tasks;
 
-import fileHandling.FilesReader;
-import fileHandling.FilesWriter;
+import heylo.fileHandling.FilesReader;
+import heylo.fileHandling.FilesWriter;
 
 import java.util.ArrayList;
 

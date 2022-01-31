@@ -7,24 +7,24 @@
 
 Heylo! What can I do for you today? :)
 
- You have not added any tasks yet.
+ You have not added any heylo.tasks yet.
 __________________________________________________________
- Added! Now you have 1 item in your tasks list.
+ Added! Now you have 1 item in your heylo.tasks list.
    [T][ ] borrow book
 __________________________________________________________
- Here are your tasks. Make things happen!
+ Here are your heylo.tasks. Make things happen!
    1. [T][ ] borrow book
 __________________________________________________________
- Added! Now you have 2 items in your tasks list.
+ Added! Now you have 2 items in your heylo.tasks list.
    [D][ ] return book 	 (by Sunday)
 __________________________________________________________
- Added! Now you have 3 items in your tasks list.
+ Added! Now you have 3 items in your heylo.tasks list.
    [E][ ] project meeting 	 (at Mon 2-4pm)
 __________________________________________________________
- Added! Now you have 4 items in your tasks list.
+ Added! Now you have 4 items in your heylo.tasks list.
    [D][ ] do homework 	 (by no idea :-p)
 __________________________________________________________
- Here are your tasks. Make things happen!
+ Here are your heylo.tasks. Make things happen!
    1. [T][ ] borrow book
    2. [D][ ] return book 	 (by Sunday)
    3. [E][ ] project meeting 	 (at Mon 2-4pm)
@@ -33,7 +33,7 @@ __________________________________________________________
  Well done!
    [D][X] return book 	 (by Sunday)
 __________________________________________________________
- Here are your tasks. Make things happen!
+ Here are your heylo.tasks. Make things happen!
    1. [T][ ] borrow book
    2. [D][X] return book 	 (by Sunday)
    3. [E][ ] project meeting 	 (at Mon 2-4pm)
@@ -42,7 +42,7 @@ __________________________________________________________
  Oops! Fixed that for you.
    [D][ ] return book 	 (by Sunday)
 __________________________________________________________
- Here are your tasks. Make things happen!
+ Here are your heylo.tasks. Make things happen!
    1. [T][ ] borrow book
    2. [D][ ] return book 	 (by Sunday)
    3. [E][ ] project meeting 	 (at Mon 2-4pm)
@@ -51,24 +51,24 @@ __________________________________________________________
  Sorry, I don't understand what that means.
 __________________________________________________________
  Please enter the description as well!
- commands.Command format: task-type task-description /by task-duration OR /at task-deadline
+ heylo.commands.Command format: task-type task-description /by task-duration OR /at task-deadline
 __________________________________________________________
  Please enter the duration as well!
- commands.Command format: task-type task-description /by task-duration
+ heylo.commands.Command format: task-type task-description /by task-duration
 __________________________________________________________
  Please enter the deadline as well!
- commands.Command format: task-type task-description /at task-deadline
+ heylo.commands.Command format: task-type task-description /at task-deadline
 __________________________________________________________
  Please enter the task number as well!
- commands.Command format: mark task-number
+ heylo.commands.Command format: mark task-number
 __________________________________________________________
  Please enter the task number as well!
- commands.Command format: unmark task-number
+ heylo.commands.Command format: unmark task-number
 __________________________________________________________
  Okay, I've deleted this task.
    [D][ ] return book 	 (by Sunday)
 __________________________________________________________
- Here are your tasks. Make things happen!
+ Here are your heylo.tasks. Make things happen!
    1. [T][ ] borrow book
    2. [E][ ] project meeting 	 (at Mon 2-4pm)
    3. [D][ ] do homework 	 (by no idea :-p)
