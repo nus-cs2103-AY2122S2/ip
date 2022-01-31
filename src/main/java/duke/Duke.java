@@ -28,7 +28,6 @@ public class Duke {
      * @param filename The file which contains the list of tasks.
      */
     public Duke(String filename) {
-        this.ui = new Ui();
         // Creates the new UI for Duke.
         ui = new Ui();
 
