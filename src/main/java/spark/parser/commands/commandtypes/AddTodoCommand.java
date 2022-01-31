@@ -15,7 +15,7 @@ public class AddTodoCommand extends Command {
     /**
      * Creates a new Todo with the specified title.
      *
-     * @param params contains the title the Todo should have
+     * @param params contains the title the Todo should have.
      */
     public AddTodoCommand(AddTodoParams params) {
         this.title = params.getTitle();

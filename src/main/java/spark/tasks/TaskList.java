@@ -101,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Displays all Tasks in the user's list.
+     * Returns a string with details of all Tasks in the user's list.
      */
     public String getTaskList() {
         // if there are no tasks, inform the user
