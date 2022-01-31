@@ -62,7 +62,7 @@ GUI Mode:
 
 Exporting and importing tasklists:
 1. Duke saves to task.txt for every modification to the task list
-2. WDuke will immediately import tasks from task.txt on startup
+2. Duke will immediately import tasks from task.txt on startup
 
 ### Some code snippets: 👩‍💻
 Startup run code:
