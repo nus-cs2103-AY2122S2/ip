@@ -1,11 +1,13 @@
+package jarvis;
+
+import java.util.HashMap;
+
 import enums.Command;
 import exception.JarvisException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
-
-import java.util.HashMap;
 
 public class Jarvis {
     private static Ui ui;

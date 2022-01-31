@@ -1,13 +1,13 @@
-import exception.JarvisException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import parser.Parser;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashMap;
+
+import org.junit.jupiter.api.Test;
+
+import exception.JarvisException;
+import parser.Parser;
 
 public class ParserTest {
     @Test

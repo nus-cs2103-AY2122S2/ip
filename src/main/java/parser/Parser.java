@@ -1,16 +1,16 @@
 package parser;
 
-import enums.Command;
-import exception.JarvisException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
+import enums.Command;
+import exception.JarvisException;
+
 public class Parser {
     /**
-     * Parses the input string into a command for Jarvis.
+     * Parses the input string into a command for jarvis.Jarvis.
      *
      * @param input The user input to parse.
      * @return The parsed command map.
@@ -22,9 +22,9 @@ public class Parser {
         parsedCommand.put("command", tokens[0].trim().toUpperCase());
 
         Command command = Command.valueOf((String) parsedCommand.get("command"));
-        if (command == Command.MARK ||
-                command == Command.UNMARK ||
-                command == Command.DELETE) {
+        if (command == Command.MARK
+                || command == Command.UNMARK
+                || command == Command.DELETE) {
             try {
                 int num = Integer.parseInt(tokens[1]) - 1;
                 parsedCommand.put("num", num);
@@ -50,8 +50,8 @@ public class Parser {
                 throw new JarvisException("The description of the deadline cannot be empty.");
             }
             if (split.length == 1) {
-                throw new JarvisException("Please specify the date of the deadline " +
-                        "(usage: `deadline <description> /by <date>`).");
+                throw new JarvisException("Please specify the date of the deadline "
+                        + "(usage: `deadline <description> /by <date>`).");
             }
             if (split[1].trim().equals("")) {
                 throw new JarvisException("The date of the deadline cannot be empty.");
@@ -67,8 +67,8 @@ public class Parser {
                 throw new JarvisException("The description of the event cannot be empty.");
             }
             if (split.length == 1) {
-                throw new JarvisException("Please specify the date of the event " +
-                        "(usage: `event <description> /at <date>`).");
+                throw new JarvisException("Please specify the date of the event "
+                        + "(usage: `event <description> /at <date>`).");
             }
             if (split[1].trim().equals("")) {
                 throw new JarvisException("The date of the event cannot be empty.");
