@@ -1,5 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private static Storage storage;
@@ -11,7 +18,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
-        } catch (IOException e) { //abstract to DukeException
+        } catch (IOException e) { //abstract to duke.exception.DukeException
             ui.showError("Error loading file.");
             this.tasks = new TaskList();
         }

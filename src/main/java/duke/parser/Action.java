@@ -1,3 +1,5 @@
+package duke.parser;
+
 public enum Action {
     BYE,
     LIST,

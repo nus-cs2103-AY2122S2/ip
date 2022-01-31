@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.ui.Messages;
+import duke.ui.Ui;
+import duke.command.*;
+import duke.exception.InvalidArgumentException;
 
 public class Parser {
 
@@ -47,7 +53,7 @@ public class Parser {
         return todoArr[1].trim();
     }
 
-    // returns Deadline description and dateTime in a String[] like a pair.
+    // returns duke.task.Deadline description and dateTime in a String[] like a pair.
     public static String[] parseDeadline(String input) throws InvalidArgumentException {
         String[] deadlineArr = input.split("/by", 2);
         String[] deadlineSplit = deadlineArr[0].split("\\s", 2);
@@ -60,7 +66,7 @@ public class Parser {
         return new String[]{deadlineSplit[1].trim(), deadlineArr[1].trim()};
     }
 
-    //returns pair of description and /at for event, so that an event Task can be created.
+    //returns pair of description and /at for event, so that an event duke.task.Task can be created.
     public static String[] parseEvent(String input) throws  InvalidArgumentException {
         String[] eventArr = input.split("/at", 2);
         String[] eventSplit = eventArr[0].split("\\s", 2);

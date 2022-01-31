@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.InvalidArgumentException;
+import duke.exception.OutOfBoundsException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Messages;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
