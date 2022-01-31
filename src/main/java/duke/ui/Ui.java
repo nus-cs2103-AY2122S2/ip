@@ -22,7 +22,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println("-------------------------------------------------");
-        System.out.println("Hi I'm Zen!\n" + "How can I help ?");
+        System.out.println("Hi I'm Duke!\n" + "How can I help ?");
         showLine();
     }
 
@@ -54,13 +54,6 @@ public class Ui {
      */
     public void showCount(TaskList tasks) {
         System.out.println("There are " + tasks.getCount() + " tasks in your list.");
-    }
-
-    /**
-     * Displays an indented space.
-     */
-    public String showSpace() {
-        return "      ";
     }
 
     /**
