@@ -10,9 +10,14 @@ import spark.tasks.TaskList;
  * that Spark does not know how to process the given input command.
  */
 public class UnrecognisedCommand extends Command {
+    private String responseMessage;
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printException(new UnrecognisedCommandException());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        UnrecognisedCommandException e = new UnrecognisedCommandException();
+        responseMessage = e.getMessage();
+        ui.printException(e);
+        return responseMessage;
     }
 
     @Override

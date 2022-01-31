@@ -10,6 +10,7 @@ import spark.tasks.TaskList;
  */
 public class MarkCommand extends Command {
     private int index;
+    private String responseMessage;
 
     /**
      * Creates a command with the index of the Task to be marked as complete.
@@ -22,13 +23,16 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.markTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
-            ui.printMessageWithDivider(getModifyTaskSuccessMessage(tasks));
+            responseMessage = getModifyTaskSuccessMessage(tasks);
+            ui.printMessageWithDivider(responseMessage);
+            return responseMessage;
         } catch (SparkException e) {
             ui.printException(e);
+            return e.getMessage();
         }
     }
 

@@ -11,6 +11,7 @@ import spark.tasks.TaskList;
  */
 public class AddTodoCommand extends Command {
     private String title;
+    private String responseMessage;
 
     /**
      * Creates a new Todo with the specified title.
@@ -22,13 +23,17 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTodo(title);
             storage.writeTasksFile(tasks.encodeTasks());
-            ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
+            responseMessage = getAddTaskSuccessMessage(tasks);
+            ui.printMessageWithDivider(responseMessage);
+
+            return responseMessage;
         } catch (SparkException e) {
             ui.printException(e);
+            return e.getMessage();
         }
     }
 

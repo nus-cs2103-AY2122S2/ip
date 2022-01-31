@@ -1,15 +1,16 @@
 package spark.parser.commands.commandtypes;
 
+import spark.Ui;
 import spark.exceptions.SparkException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
-import spark.Ui;
 
 /**
  * Represents a command to delete a Task.
  */
 public class DeleteTaskCommand extends Command {
-    int index;
+    private int index;
+    private String responseMessage;
 
     /**
      * Creates a command with the index of the Task to be deleted.
@@ -22,12 +23,16 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.deleteTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
+            responseMessage = getDeleteTaskSuccessMessage(tasks);
+            ui.printMessageWithDivider(responseMessage);
+            return responseMessage;
         } catch (SparkException e) {
             ui.printException(e);
+            return e.getMessage();
         }
     }
 

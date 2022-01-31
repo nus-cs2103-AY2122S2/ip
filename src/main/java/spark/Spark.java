@@ -1,13 +1,14 @@
 package spark;
 
-import spark.parser.commands.commandtypes.Command;
-import spark.parser.commands.commandtypes.ListCommand;
 import spark.exceptions.SparkException;
-import spark.exceptions.fileexceptions.FileException;
-import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.parser.Parser;
+import spark.parser.commands.commandtypes.ExitCommand;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
+import spark.parser.commands.commandtypes.Command;
+import spark.parser.commands.commandtypes.ListCommand;
+import spark.exceptions.fileexceptions.FileException;
+import spark.exceptions.fileexceptions.TaskDecodingException;
 
 public class Spark {
     private static final String defaultFilePathString = "spark_save_file.txt";
@@ -48,6 +49,12 @@ public class Spark {
         }
     }
 
+    /** DEPRECATED
+     * No longer need a CLI interface for Spark after
+     * creating a GUI.
+     *
+     * Todo: Remove this, along with all CLI-related code.
+     */
     public void run() {
         new ListCommand().execute(taskList, ui, storage);
         ui.printWelcomeMessage();
@@ -66,12 +73,20 @@ public class Spark {
         }
     }
 
-    public static void main(String[] args) {
-        new Spark().run();
+    public String executeCommand(String userInput) {
+        try {
+            Command command = Parser.parseInput(userInput);
+            String response = command.execute(taskList, ui, storage);
+            boolean isExit = command.isExit();
+            return response;
+        } catch (SparkException e) {
+            ui.printException(e);
+
+            return e.getMessage();
+        }
     }
 
-    public String getResponse(String input) {
-        // placeholder
-        return "Command received!";
+    public static void main(String[] args) {
+        new Spark().run();
     }
 }

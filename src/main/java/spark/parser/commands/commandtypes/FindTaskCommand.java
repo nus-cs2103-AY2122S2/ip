@@ -1,17 +1,18 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.List;
+
 import spark.Ui;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.tasks.tasktypes.Task;
-
-import java.util.List;
 
 /**
  * Represents a command for Spark to find a task.
  */
 public class FindTaskCommand extends Command {
     private String searchTerm;
+    private String responseMessage;
 
     /**
      * Creates a new command with the search-term that Spark
@@ -25,7 +26,7 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> matches = tasks.findTask(searchTerm);
 
         StringBuilder results = new StringBuilder();
@@ -42,7 +43,10 @@ public class FindTaskCommand extends Command {
             }
         }
 
-        ui.printMessageWithDivider(results.toString());
+        responseMessage = results.toString();
+        ui.printMessageWithDivider(responseMessage);
+
+        return responseMessage;
     }
 
     @Override

@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import spark.Spark;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -42,11 +44,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = spark.getResponse(input);
+        String response = spark.executeCommand(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, sparkImage),
-                DialogBox.getDukeDialog(response, sparkImage)
+                DialogBox.getSparkDialog(response, sparkImage)
         );
         userInput.clear();
+
+        // TODO: create a way to exit Spark while printing a message!
+        if (response.contains("Cool, see you around!")) {
+            System.exit(0);
+        }
     }
 }

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class AddEventCommand extends Command {
     private String title;
     private LocalDateTime at;
+    private String responseMessage;
 
     /**
      * Creates a new Event with the specified title and date.
@@ -26,13 +27,17 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addEvent(title, at);
             storage.writeTasksFile(tasks.encodeTasks());
-            ui.printMessageWithDivider(getAddTaskSuccessMessage(tasks));
+            responseMessage = getAddTaskSuccessMessage(tasks);
+            ui.printMessageWithDivider(responseMessage);
+
+            return responseMessage;
         } catch (SparkException e) {
             ui.printException(e);
+            return e.getMessage();
         }
     }
 
