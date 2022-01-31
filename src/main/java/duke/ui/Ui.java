@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
     Scanner scanner;
 
-    public Ui(TaskList tasks) {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 

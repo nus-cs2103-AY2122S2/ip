@@ -14,7 +14,7 @@ public class Duke {
     private static Ui ui;
 
     public Duke(String filePath) {
-        this.ui = new Ui(tasks);
+        this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
