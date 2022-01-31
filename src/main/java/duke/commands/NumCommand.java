@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOperationException;
 import duke.tasks.TaskManager;
 import duke.ui.UiManager;
@@ -35,17 +36,19 @@ public class NumCommand extends Command {
      * @throws IndexOutOfBoundsException if the index provided is invalid
      * @throws InvalidOperationException if the operation is invalid
      */
-    public void execute() throws IndexOutOfBoundsException, InvalidOperationException {
-            switch (type) {
-            case MARK:
-                taskManager.mark(num);
-                break;
-            case UNMARK:
-                taskManager.unmark(num);
-                break;
-            case DELETE:
-                taskManager.delete(num);
-                break;
-            }
+    public void execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException {
+        switch (type) {
+        case MARK:
+            taskManager.mark(num);
+            break;
+        case UNMARK:
+            taskManager.unmark(num);
+            break;
+        case DELETE:
+            taskManager.delete(num);
+            break;
+        default:
+            throw new DukeException();
+        }
     }
 }

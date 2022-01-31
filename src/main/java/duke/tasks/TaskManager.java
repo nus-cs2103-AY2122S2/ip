@@ -1,8 +1,9 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidOperationException;
 import duke.ui.UiManager;
-import java.util.ArrayList;
 
 /**
  * TaskManager Object that handles storage of Task Objects and changes in state of
@@ -87,7 +88,7 @@ public class TaskManager {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (currTask.toString().contains(string)) {
-                tasksFound += "\n" + currTask.toString() ;
+                tasksFound += "\n" + currTask.toString();
             }
         }
         return tasksFound;
@@ -129,7 +130,7 @@ public class TaskManager {
         String string = uiManager.getLine() + "\n";
         string += "Here's your list, Good Sir:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            string += i + 1 + ". "+ tasks.get(i).toString() + "\n";
+            string += i + 1 + ". " + tasks.get(i).toString() + "\n";
         }
         string += uiManager.getLine();
         this.taskList = string;

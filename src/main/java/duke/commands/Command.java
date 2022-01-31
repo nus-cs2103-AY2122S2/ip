@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOperationException;
 
 /**
@@ -12,6 +13,6 @@ public abstract class Command {
      *
      * @throws InvalidOperationException if operation is invalid
      */
-    public abstract void execute() throws InvalidOperationException;
+    public abstract void execute() throws InvalidOperationException, DukeException;
 
 }

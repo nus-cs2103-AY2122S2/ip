@@ -1,11 +1,11 @@
 package duke.ui;
 
-import duke.tasks.TaskManager;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+
+import duke.tasks.TaskManager;
 
 /**
  * ListStorage Object that handles storage of Tasks in a ser file.
@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
  * Creates ser file if absent.
  */
 public class ListStorage {
-    TaskManager taskManager;
+    private TaskManager taskManager;
 
     /**
      * Constructs the ListStorage Object.

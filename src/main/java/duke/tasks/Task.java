@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidOperationException;
-
 import java.io.Serializable;
+
+import duke.exceptions.InvalidOperationException;
 
 /**
  * Skeletal implementation of a Task Object.

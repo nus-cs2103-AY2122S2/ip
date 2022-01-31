@@ -1,9 +1,9 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidOperationException;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import duke.exceptions.InvalidOperationException;
 
 /**
  * Task Object of type Event.
@@ -60,16 +60,15 @@ public class Event extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[E]"+"[X] " + description + "(at: "
+            return "[E]" + "[X] " + description + "(at: "
                     + date.getDayOfMonth()
                     + " "
                     + date.getMonth()
                     + " "
                     + date.getYear()
                     + ")";
-        }
-        else {
-            return "[E]"+"[ ] " + description + "(at: "
+        } else {
+            return "[E]" + "[ ] " + description + "(at: "
                     + date.getDayOfMonth()
                     + " "
                     + date.getMonth()

@@ -1,14 +1,16 @@
 package duke.commands;
 
-import duke.tasks.TaskManager;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DateException;
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
+import duke.tasks.TaskManager;
 import duke.tasks.ToDo;
 import duke.ui.UiManager;
 
-import java.time.format.DateTimeParseException;
 
 /**
  * AddTaskCommand Object that adds Task Objects to task list
@@ -31,7 +33,7 @@ public class AddTaskCommand extends Command {
      * @param t Type of Task Object
      * @throws DateException if an invalid String is passed
      */
-    public AddTaskCommand(UiManager um, TaskManager tm, String task, Type t) throws DateException {
+    public AddTaskCommand(UiManager um, TaskManager tm, String task, Type t) throws DateException, DukeException {
         this.uiManager = um;
         this.taskManager = tm;
         this.type = t;
@@ -55,6 +57,8 @@ public class AddTaskCommand extends Command {
             this.description = eInput[0];
             this.date = eInput[1];
             break;
+        default:
+            throw new DukeException();
         }
     }
 
@@ -63,7 +67,7 @@ public class AddTaskCommand extends Command {
      *
      * @throws DateTimeParseException if an invalid String is passed for date
      */
-    public void execute() throws DateTimeParseException {
+    public void execute() throws DateTimeParseException, DukeException {
         switch (type) {
         case TODO:
             Task newToDo = new ToDo(this.description);
@@ -77,6 +81,8 @@ public class AddTaskCommand extends Command {
             Task newEvent = new Event(this.description, this.date);
             taskManager.addTask(newEvent);
             break;
+        default:
+            throw new DukeException();
         }
     }
 }

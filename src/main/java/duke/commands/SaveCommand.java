@@ -1,11 +1,11 @@
 package duke.commands;
 
-import duke.tasks.TaskManager;
-import duke.ui.UiManager;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.tasks.TaskManager;
+import duke.ui.UiManager;
 
 /**
  * SaveCommand Object that allows users to save
@@ -42,7 +42,7 @@ public class SaveCommand extends Command {
     /**
      * Saves and writes current tasks into a text file.
      */
-    public void execute()  {
+    public void execute() {
         try {
             this.writeToFile(this.directory);
             this.uiManager.printSave();

@@ -1,14 +1,14 @@
 package duke.ui;
 
-import duke.tasks.TaskManager;
 import duke.exceptions.TaskIndexException;
 import duke.tasks.Task;
+import duke.tasks.TaskManager;
 
 /**
  * UiManager Object that handles user input and output.
  */
 public class UiManager {
-    private final String LINE = "-------------------------------------------";
+    private static final String LINE = "-------------------------------------------";
 
     /**
      * Constructs the UiManager Object.
@@ -58,7 +58,7 @@ public class UiManager {
      */
     public void printAdd(Task t, int i) {
         this.showLine();
-        System.out.println("Got it, I added:\n"+ t);
+        System.out.println("Got it, I added:\n" + t);
         System.out.printf("Now you have %d item(s) in your list\n", i);
         this.showLine();
     }
@@ -175,7 +175,7 @@ public class UiManager {
                 || (spliced[0].equals("unmark"))
                 || (spliced[0].equals("find"))
                 || (spliced[0].equals("deadline")))) {
-            throw new TaskIndexException("'" +spliced[0] + "'");
+            throw new TaskIndexException("'" + spliced[0] + "'");
         }
         return spliced;
     }

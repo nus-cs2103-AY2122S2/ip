@@ -12,7 +12,7 @@ public class TaskIndexException extends Exception {
      *
      * @param text Type of the Task Object
      */
-    public TaskIndexException(String text){
+    public TaskIndexException(String text) {
         this.message = text;
     }
 
@@ -21,6 +21,6 @@ public class TaskIndexException extends Exception {
      */
     @Override
     public String toString() {
-        return "OOPS!!! You didn't give me a proper " + this.message +" typed task to include!";
+        return "OOPS!!! You didn't give me a proper " + this.message + " typed task to include!";
     }
 }

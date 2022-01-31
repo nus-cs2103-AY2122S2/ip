@@ -1,11 +1,12 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidOperationException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.InvalidOperationException;
 
 public class DeadlineTest {
     private Deadline deadline;

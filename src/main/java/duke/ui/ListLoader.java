@@ -1,10 +1,12 @@
 package duke.ui;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 import duke.tasks.Task;
 import duke.tasks.TaskManager;
-
-import java.io.*;
-import java.util.ArrayList;
 
 /**
  * ListLoader Object that handles loading of task list from

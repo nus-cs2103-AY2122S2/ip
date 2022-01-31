@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidOperationException;
-
 import java.io.Serializable;
+
+import duke.exceptions.InvalidOperationException;
 
 /**
  * Task Object of type ToDo.
@@ -53,10 +53,9 @@ public class ToDo extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[T]"+"[X] " + this.description;
-        }
-        else {
-            return "[T]"+"[ ] "+ this.description;
+            return "[T]" + "[X] " + this.description;
+        } else {
+            return "[T]" + "[ ] " + this.description;
         }
     }
 }

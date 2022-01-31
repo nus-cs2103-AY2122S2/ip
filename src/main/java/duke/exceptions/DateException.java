@@ -12,7 +12,7 @@ public class DateException extends Exception {
      *
      * @param type String containing the type of the Object
      */
-    public DateException(String type){
+    public DateException(String type) {
         this.taskType = type;
     }
 
@@ -25,8 +25,7 @@ public class DateException extends Exception {
             return "OOPS!!! You didn't specify date!\n"
                     + "use the format:\n"
                     + "'deadline your task here /by date'";
-        }
-        else if (taskType.equals("event")) {
+        } else if (taskType.equals("event")) {
             return "OOPS!!! You didn't specify date!\n"
                     + "use the format:\n"
                     + "'event your event here /at date'";

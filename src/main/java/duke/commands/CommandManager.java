@@ -1,15 +1,17 @@
 package duke.commands;
 
-import duke.exceptions.InvalidOperationException;
-import duke.tasks.TaskManager;
-import duke.exceptions.DateException;
-import duke.exceptions.DukeException;
-import duke.exceptions.TaskIndexException;
-import duke.ui.*;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.exceptions.DateException;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidOperationException;
+import duke.exceptions.TaskIndexException;
+import duke.tasks.TaskManager;
+import duke.ui.ListLoader;
+import duke.ui.ListStorage;
+import duke.ui.UiManager;
 
 /**
  * CommandManager Object that handles initialisation,
@@ -63,7 +65,7 @@ public class CommandManager {
         do {
             s = sc.nextLine();
             try {
-               String[] command = uiManager.parseCommand(s);
+                String[] command = uiManager.parseCommand(s);
                 switch (command[0]) {
                 case "bye":
                     this.setClose();

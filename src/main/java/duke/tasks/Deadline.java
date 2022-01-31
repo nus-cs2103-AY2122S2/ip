@@ -1,8 +1,9 @@
 package duke.tasks;
-import duke.exceptions.InvalidOperationException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import duke.exceptions.InvalidOperationException;
 
 /**
  * Task Object of type Deadline.
@@ -60,16 +61,15 @@ public class Deadline extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[D]"+"[X] " + description + "(by: "
+            return "[D]" + "[X] " + description + "(by: "
                     + date.getDayOfMonth()
                     + " "
                     + date.getMonth()
                     + " "
                     + date.getYear()
                     + ")";
-        }
-        else {
-            return "[D]"+"[ ] "+ description + "(by: "
+        } else {
+            return "[D]" + "[ ] " + description + "(by: "
                     + date.getDayOfMonth()
                     + " "
                     + date.getMonth()
