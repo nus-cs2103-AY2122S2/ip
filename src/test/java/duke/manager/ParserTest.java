@@ -1,17 +1,18 @@
 package duke.manager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
 
     @Test
-    public void testParse() throws Exception{
+    public void testParse() throws Exception {
         Parser parser = new Parser();
 
         //test case 1

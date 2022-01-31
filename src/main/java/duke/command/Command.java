@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage A Storage object to handle saving of data.
      * @throws DukeException If there is an issue saving the tasks.
      */
-    public abstract void execute(TaskList taskList,Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
 
     /**
