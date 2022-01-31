@@ -210,7 +210,7 @@ public class TaskList {
                     if (!timestampArgs[0].equals("by")) {
                         throw new ChatBotException(
                                 "The correct format for adding a deadline is "
-                                        + "deadline <name of task> /by <timestamp of task>"
+                                        + "deadline <name of task> /by <date or timestamp of task>"
                         );
                     } else {
                         Timestamp by = new Timestamp(other);
@@ -226,7 +226,7 @@ public class TaskList {
                     if (!timestampArgs[0].equals("at")) {
                         throw new ChatBotException(
                                 "The correct format for adding an event is "
-                                        + "event <name of task> /at <timestamp of task>"
+                                        + "event <name of task> /at <date or timestamp of task>"
                         );
                     } else {
                         Timestamp at = new Timestamp(other);
@@ -291,6 +291,7 @@ public class TaskList {
             );
         }
 
+        set.remove(getTask(index).getTitle());
         Task removedTask = list.remove(index);
         return String.format(
                 "This task has successfully been removed from your task list!%n%n             %s",
@@ -412,9 +413,5 @@ public class TaskList {
                     task
             );
         }
-    }
-
-    public Set<String> getSet() {
-        return set;
     }
 }

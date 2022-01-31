@@ -186,7 +186,6 @@ public class Parser {
             } catch (ChatBotException e) {
                 innkeeper.error(e.getMessage());
             }
-            System.out.println(taskList.getSet());
             return true;
         }
     }

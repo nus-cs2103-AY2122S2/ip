@@ -54,7 +54,7 @@ public class TaskListTest {
             taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"at", "24/04/2024"})
         );
         assertEquals("The correct format for adding a deadline is "
-                        + "deadline <name of task> /by <timestamp of task>",
+                        + "deadline <name of task> /by <date or timestamp of task>",
                 thrown.getMessage());
     }
 
@@ -81,7 +81,7 @@ public class TaskListTest {
         thrown = assertThrows(ChatBotException.class, () ->
             taskList.add(new String[]{"event", "someevent2"}, new String[]{"by", "23/03/2023 1800"})
         );
-        assertEquals("The correct format for adding an event is event <name of task> /at <timestamp of task>",
+        assertEquals("The correct format for adding an event is event <name of task> /at <date or timestamp of task>",
                 thrown.getMessage());
     }
 
