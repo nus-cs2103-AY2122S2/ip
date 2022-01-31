@@ -2,15 +2,15 @@ package duke.command;
 
 import java.time.DateTimeException;
 import java.util.List;
+
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.TodoTask;
-import duke.Ui;
-
-import duke.Storage;
 
 /**
  * Command to create new tasks.
@@ -21,13 +21,13 @@ public class CreateCommand extends Command {
 
     private static final String ERROR_INVALID_TITLE = "OOPS!!! The title of a task cannot be empty :(";
 
-    private static final String ERROR_EMPTY_DEADLINETASK_DEADLINE = "OOPS!!! The deadline cannot be " +
-            "empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
-    private static final String ERROR_EMPTY_EVENT_TIME = "OOPS!!! The time of an event cannot be " +
-            "empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
+    private static final String ERROR_EMPTY_DEADLINETASK_DEADLINE = "OOPS!!! The deadline cannot be "
+            + "empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
+    private static final String ERROR_EMPTY_EVENT_TIME = "OOPS!!! The time of an event cannot be "
+            + "empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
 
-    private static final String ERROR_INVALID_TIME = "OOPS!!! The time is in the wrong format :( " +
-            "Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
+    private static final String ERROR_INVALID_TIME = "OOPS!!! The time is in the wrong format :( "
+            + "Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
 
     private String args;
     private TaskType taskType;
@@ -80,7 +80,7 @@ public class CreateCommand extends Command {
             } catch (DateTimeException e) {
                 throw new DukeException(ERROR_INVALID_TIME);
             }
-            tasks.add(newTask);        
+            tasks.add(newTask);
         } else if (taskType == TaskType.EVENT) {
             if (!args.contains("/at")) {
                 throw new DukeException(ERROR_EMPTY_EVENT_TIME);

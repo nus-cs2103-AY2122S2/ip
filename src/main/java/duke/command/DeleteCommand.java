@@ -1,11 +1,11 @@
 package duke.command;
 
 import java.util.List;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.Ui;
 
 import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Command to delete tasks.
@@ -14,8 +14,8 @@ public class DeleteCommand extends Command {
     private static final String MESSAGE_TASKDELETE = "Noted. I've removed this task:";
 
     private static final String ERROR_EMPTY_DELETE = "OOPS!!! Task to delete cannot be empty:(";
-    private static final String ERROR_INVALID_DELETE = "OOPS!!! Invalid task number, " +
-            "please select a valid task to delete using the task's number";
+    private static final String ERROR_INVALID_DELETE = "OOPS!!! Invalid task number, "
+            + "please select a valid task to delete using the task's number";
     private int taskNumber;
 
 

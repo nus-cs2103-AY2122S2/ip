@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FindCommand extends Command {
     private static final String MESSAGE_FIND = "Here are the matching tasks in your list:";

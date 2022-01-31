@@ -1,12 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     @Test
@@ -18,9 +18,9 @@ public class UiTest {
         ui.showWelcome();
         outStream.flush();
         String lines = outStream.toString();
-        assertEquals("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n     What can I do for you?\n" +
-                "    ____________________________________________________________\n\n", lines);
+        assertEquals("    ____________________________________________________________\n"
+                + "     Hello! I'm Dusk\n     What can I do for you?\n"
+                + "    ____________________________________________________________\n\n", lines);
     }
 
     @Test
@@ -32,9 +32,9 @@ public class UiTest {
         ui.showExitMessage();
         outStream.flush();
         String lines = outStream.toString();
-        assertEquals("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________\n\n", lines);
+        assertEquals("    ____________________________________________________________\n"
+                + "     Bye. Hope to see you again soon!\n"
+                + "    ____________________________________________________________\n\n", lines);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class UiTest {
         ui.printContent("This is a test line to fit within the top and bottom borders");
         outStream.flush();
         String lines = outStream.toString();
-        assertEquals("    ____________________________________________________________\n" +
-                "     This is a test line to fit within the top and bottom borders\n" +
-                "    ____________________________________________________________\n\n", lines);
+        assertEquals("    ____________________________________________________________\n"
+                + "     This is a test line to fit within the top and bottom borders\n"
+                + "    ____________________________________________________________\n\n", lines);
     }
 }

@@ -1,9 +1,9 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTaskTest {
     @Test
@@ -11,7 +11,7 @@ public class EventTaskTest {
         assertTrue(new EventTask("Title 1", "2022-01-01") instanceof EventTask);
         assertTrue(new EventTask("Title 2", "2022-01-01", "11:11") instanceof EventTask);
         assertTrue(new EventTask("Title 3", true, "2022-01-01") instanceof EventTask);
-        assertTrue(new EventTask("Title 4", true,"2022-01-01", "11:11") instanceof EventTask);
+        assertTrue(new EventTask("Title 4", true, "2022-01-01", "11:11") instanceof EventTask);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class EventTaskTest {
                 "E | 0 | Title 2 | 2022-01-01 | 11:11");
         assertEquals(new EventTask("Title 3", true, "2022-01-01").toOutputLine(),
                 "E | 1 | Title 3 | 2022-01-01");
-        assertEquals(new EventTask("Title 4", true,"2022-01-01", "11:11").toOutputLine(),
+        assertEquals(new EventTask("Title 4", true, "2022-01-01", "11:11").toOutputLine(),
                 "E | 1 | Title 4 | 2022-01-01 | 11:11");
     }
 
