@@ -10,17 +10,14 @@ import ui.Ui;
 
 public class TaskList {
     private final List<Task> tasks;
-    private final Ui ui;
 
     /**
      * Constructs a TaskList object.
      *
      * @param tasks The initial task list.
-     * @param ui For printing messages to the standard output.
      */
-    public TaskList(List<Task> tasks, Ui ui) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
-        this.ui = ui;
     }
 
     public List<Task> getTasks() {
@@ -28,13 +25,14 @@ public class TaskList {
     }
 
     /**
-     * Prints the current task list.
+     * Returns the current task list as a formatted string.
+     *
+     * @return The formatted task list.
      */
-    public void printTasks() {
+    public String printTasks() {
         int count = tasks.size();
         if (count == 0) {
-            ui.echo("You have no tasks in your list. :-)");
-            return;
+            return "You have no tasks in your list. :-)";
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
@@ -43,7 +41,7 @@ public class TaskList {
                 sb.append("\n");
             }
         }
-        ui.echo(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -52,12 +50,12 @@ public class TaskList {
      * @param parsedCommand The input command containing the task number.
      * @throws JarvisException If task number is invalid.
      */
-    public void markAsDone(HashMap<String, Object> parsedCommand) throws JarvisException {
+    public String markAsDone(HashMap<String, Object> parsedCommand) throws JarvisException {
         checkIfEmpty();
         try {
             Task task = tasks.get((Integer) parsedCommand.get("num"));
             task.markAsDone();
-            ui.echo("I've marked the following task as completed:\n\t" + task);
+            return "I've marked the following task as completed:\n\t" + task;
         } catch (IndexOutOfBoundsException e) {
             throw new JarvisException("Please specify a valid task number (between 1 to "
                     + tasks.size() + " inclusive).");
@@ -70,12 +68,12 @@ public class TaskList {
      * @param parsedCommand The input command containing the task number.
      * @throws JarvisException If task number is invalid.
      */
-    public void markAsUndone(HashMap<String, Object> parsedCommand) throws JarvisException {
+    public String markAsUndone(HashMap<String, Object> parsedCommand) throws JarvisException {
         checkIfEmpty();
         try {
             Task task = tasks.get((Integer) parsedCommand.get("num"));
             task.markAsUndone();
-            ui.echo("I've marked the following task as incomplete:\n\t" + task);
+            return "I've marked the following task as incomplete:\n\t" + task;
         } catch (IndexOutOfBoundsException e) {
             throw new JarvisException("Please specify a valid task number (between 1 to "
                     + tasks.size() + " inclusive).");
@@ -88,14 +86,14 @@ public class TaskList {
      * @param parsedCommand The input command containing the task number.
      * @throws JarvisException If task number is invalid.
      */
-    public void delete(HashMap<String, Object> parsedCommand) throws JarvisException {
+    public String delete(HashMap<String, Object> parsedCommand) throws JarvisException {
         checkIfEmpty();
         try {
             Task task = tasks.get((Integer) parsedCommand.get("num"));
             tasks.remove(task);
-            ui.echo("Understood. I've removed the following task:\n\t"
+            return "Understood. I've removed the following task:\n\t"
                     + task + "\n"
-                    + "Now you have " + tasks.size() + " task(s) in your list.");
+                    + "Now you have " + tasks.size() + " task(s) in your list.";
         } catch (IndexOutOfBoundsException e) {
             throw new JarvisException("Please specify a valid task number (between 1 to "
                     + tasks.size() + " inclusive).");
@@ -107,12 +105,12 @@ public class TaskList {
      *
      * @param parsedCommand The input command containing the task.
      */
-    public void addTodo(HashMap<String, Object> parsedCommand) {
+    public String addTodo(HashMap<String, Object> parsedCommand) {
         Todo todo = new Todo((String) parsedCommand.get("description"));
         tasks.add(todo);
-        ui.echo("Got it. I've added this todo:\n\t"
+        return "Got it. I've added this todo:\n\t"
                 + todo + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
+                + "Now you have " + tasks.size() + " task(s) in your list.";
     }
 
     /**
@@ -120,13 +118,13 @@ public class TaskList {
      *
      * @param parsedCommand The input command containing the task.
      */
-    public void addDeadline(HashMap<String, Object> parsedCommand) {
+    public String addDeadline(HashMap<String, Object> parsedCommand) {
         Deadline deadline = new Deadline(
                 (String) parsedCommand.get("description"), (LocalDateTime) parsedCommand.get("date"));
         tasks.add(deadline);
-        ui.echo("Got it. I've added this deadline:\n\t"
+        return "Got it. I've added this deadline:\n\t"
                 + deadline + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
+                + "Now you have " + tasks.size() + " task(s) in your list.";
     }
 
     /**
@@ -134,13 +132,13 @@ public class TaskList {
      *
      * @param parsedCommand The input command containing the task.
      */
-    public void addEvent(HashMap<String, Object> parsedCommand) {
+    public String addEvent(HashMap<String, Object> parsedCommand) {
         Event event = new Event(
                 (String) parsedCommand.get("description"), (LocalDateTime) parsedCommand.get("date"));
         tasks.add(event);
-        ui.echo("Got it. I've added this event:\n\t"
+        return "Got it. I've added this event:\n\t"
                 + event + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
+                + "Now you have " + tasks.size() + " task(s) in your list.";
     }
 
     /**
@@ -148,7 +146,7 @@ public class TaskList {
      *
      * @param parsedCommand The input command containing the keyword.
      */
-    public void findTasks(HashMap<String, Object> parsedCommand) {
+    public String findTasks(HashMap<String, Object> parsedCommand) {
         String keyword = (String) parsedCommand.get("keyword");
         List<Task> filtered = tasks.stream()
                 .filter(task -> task.description.contains(keyword))
@@ -163,7 +161,7 @@ public class TaskList {
                 sb.append("\n");
             }
         }
-        ui.echo(sb.toString());
+        return sb.toString();
     }
 
     /**

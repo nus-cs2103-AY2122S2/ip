@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
+    private String output;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -49,8 +50,8 @@ public class Ui {
     /**
      * Prints a shutdown message and closes the standard output.
      */
-    public void shutdown() {
+    public String shutdown() {
         scanner.close();
-        echo("Goodbye. J.A.R.V.I.S. systems powering off...");
+        return "Goodbye. J.A.R.V.I.S. systems powering off...";
     }
 }

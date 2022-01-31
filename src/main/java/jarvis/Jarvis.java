@@ -10,59 +10,54 @@ import task.TaskList;
 import ui.Ui;
 
 public class Jarvis {
-    private static Ui ui;
-    private static TaskList tasks;
-    private static Storage storage;
+    private Ui ui;
+    private TaskList tasks;
+    private Storage storage;
 
-    private static boolean processNext = true;
+    private boolean processNext = true;
+
+    public Jarvis() {
+        startup();
+    }
 
     /**
      * Runs the main chat/program loop.
+     *
+     * @return The response given based on the input.
      */
-    public void getResponse() {
-        startup();
-
+    public String getResponse(String input) {
         while (processNext) {
             try {
-                String input = ui.readCommand();
                 HashMap<String, Object> parsedCommand = Parser.parseInput(input);
                 switch (Command.valueOf((String) parsedCommand.get("command"))) {
                 case BYE:
-                    shutdown();
-                    return;
+                    return shutdown();
                 case LIST:
-                    tasks.printTasks();
-                    break;
+                    return tasks.printTasks();
                 case MARK:
-                    tasks.markAsDone(parsedCommand);
-                    break;
+                    return tasks.markAsDone(parsedCommand);
                 case UNMARK:
-                    tasks.markAsUndone(parsedCommand);
-                    break;
+                    return tasks.markAsUndone(parsedCommand);
                 case DELETE:
-                    tasks.delete(parsedCommand);
-                    break;
+                    return tasks.delete(parsedCommand);
                 case TODO:
-                    tasks.addTodo(parsedCommand);
-                    break;
+                    return tasks.addTodo(parsedCommand);
                 case DEADLINE:
-                    tasks.addDeadline(parsedCommand);
-                    break;
+                    return tasks.addDeadline(parsedCommand);
                 case EVENT:
-                    tasks.addEvent(parsedCommand);
-                    break;
+                    return tasks.addEvent(parsedCommand);
                 case FIND:
-                    tasks.findTasks(parsedCommand);
-                    break;
+                    return tasks.findTasks(parsedCommand);
                 default:
                     break;
                 }
             } catch (IllegalArgumentException e) {
-                ui.echo("I'm afraid I don't understand your request.");
+                return "I'm afraid I don't understand your request.";
             } catch (JarvisException je) {
-                ui.echo("I'm afraid I wasn't able to fulfill your request.\n" + je.getMessage());
+                return "I'm afraid I wasn't able to fulfill your request.\n" + je.getMessage();
             }
         }
+        return "I'm afraid I wasn't able to fulfill your request.";
     }
 
     /**
@@ -72,7 +67,7 @@ public class Jarvis {
         try {
             storage = new Storage("data/data.txt");
             ui = new Ui();
-            tasks = new TaskList(storage.loadData(), ui);
+            tasks = new TaskList(storage.loadData());
             ui.welcome();
         } catch (JarvisException e) {
             ui.echo(e.getMessage());
@@ -83,14 +78,13 @@ public class Jarvis {
     /**
      * Saves the program state into local storage and closes open resources.
      */
-    public void shutdown() {
+    public String shutdown() {
         try {
             processNext = false;
             storage.saveChanges(tasks);
-            ui.shutdown();
+            return ui.shutdown();
         } catch (JarvisException e) {
-            ui.echo(e.getMessage());
-            System.exit(0);
+            return e.getMessage();
         }
     }
 }

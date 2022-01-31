@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import jarvis.Jarvis;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ui.MainWindow;
 
-import java.io.IOException;
-
 /**
  * A GUI for Jarvis using FXML.
  */
 public class Main extends Application {
 
-    private Jarvis jarvis = new Jarvis();
+    private final Jarvis jarvis = new Jarvis();
 
     @Override
     public void start(Stage stage) {
