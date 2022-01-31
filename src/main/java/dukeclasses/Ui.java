@@ -18,64 +18,79 @@ public class Ui {
 
     /**
      * Prints error if storage fail to load.
+     *
+     * @return String illustrating the load error message.
      */
-    public void showLoadingError() {
-        System.out.println("Storage load failed");
+    public String showLoadingError() {
+        return "Storage load failed\n";
     }
 
     /**
      * Prints error if file is invalid.
+     *
+     * @return String illustrating the file error message.
      */
-    public void showFileError() {
-        System.out.println("Invalid File");
+    public String showFileError() {
+        return "Invalid File\n";
     }
 
     /**
      * Prints error if storage fail to updates.
+     *
+     * @return String illustrating the storage error message.
      */
-    public void showStorageError() {
-        System.out.println("Fail to update storage");
+    public String showStorageError() {
+        return "Fail to update storage\n";
     }
 
     /**
      * Prints error if user gives an invalid input.
+     *
+     * @return String illustrating the input error message.
      */
-    public void showInputError() {
-        System.out.println("    Invalid input detected. Please check your input");
+    public String showInputError() {
+        return "    Invalid input detected. Please check your input\n";
     }
 
     /**
      * Prints greeting message.Usually immediately after boot up or when called using 'hi' command.
+     *
+     * @return String illustrating the greeting message.
      */
-    public void greet() {
-        System.out.println(Commands.HI.toString());
+    public String greet() {
+        return Commands.HI.toString();
     }
 
     /**
      * Prints bye message before the program closes.
+     *
+     * @return String illustrating the bye message.
      */
-    public void sayBye() {
-        System.out.println(Commands.BYE.toString());
+    public String sayBye() {
+        return Commands.BYE.toString();
     }
 
     /**
      * Prints a message indicating that task mentioned is not found.
+     *
+     * @return String illustrating the task cannot be found error message.
      */
-    public void sayTaskNotFound() {
-        System.out.println("Task not found.");
+    public String sayTaskNotFound() {
+        return "Task not found.\n";
     }
 
     /**
      * Prints the identity of the given task.
      *
      * @param task Task which will have its details printed.
+     * @return String to be printed which illustrates identity of the task.
      */
-    public void identifyTask(Task task) {
+    public String identifyTask(Task task) {
         if (task.getIsDone()) {
             String output = String.format("%s    %s", Commands.MARK.toString(), task.identify());
-            System.out.println(output);
+            return output;
         } else {
-            System.out.println(String.format("%s      %s", Commands.UNMARK.toString(), task.identify()));
+            return String.format("%s      %s", Commands.UNMARK.toString(), task.identify());
         }
     }
 
@@ -84,52 +99,62 @@ public class Ui {
      *
      * @param task Task that was added.
      * @param numOfTask Number of tasks in the list.
+     * @return String to be printed which illustrates identity of the new task.
      */
-    public void newTask(Task task, int numOfTask) {
-        System.out.println(String.format(
-            "%s      %s", Commands.ADD.toString(), task.identify()));
-        System.out.println(String.format("    Now you have %d tasks in the list.", numOfTask));
+    public String newTask(Task task, int numOfTask) {
+        return String.format("%s    %s    Now you have %d tasks in the list.",
+                Commands.ADD.toString(), task.identify(),  numOfTask);
     }
 
     /**
      * Prints list of task in storage file.
      *
      * @param filePath Path of storage file.
+     * @return String to be printed which illustrates the list of tasks.
      */
-    public void listTask(String filePath) {
-        System.out.println(Commands.LIST.toString());
+    public String listTask(String filePath) {
+        String output = Commands.LIST.toString();
         File file = new File(filePath);
         try {
             Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                System.out.println(sc.nextLine());
+            for (int i = 0; sc.hasNext(); i++) {
+                if (i == 0) {
+                    output = output  + sc.nextLine();
+                } else {
+                    output = output + "\n" + sc.nextLine();
+                }
+
             }
             sc.close();
         } catch (FileNotFoundException errorMessage) {
             showFileError();
         }
+        return output;
     }
 
     /**
      * Prints list of task with the given tasklist.
      *
      * @param tasks Tasklist which will have its tasks printed.
+     * @return String to be printed which illustrates list of tasks.
      */
-    public void listTaskUsingArrayList(TaskList tasks) {
-        System.out.println(Commands.MATCH.toString());
+    public String listTaskUsingArrayList(TaskList tasks) {
+        String output = Commands.MATCH.toString();
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             Task task = tasks.getTaskList().get(i);
-            System.out.println(String.format("    %s", task.identify()));
+            output = output + String.format("    %s", task.identify());
         }
+        return output;
     }
 
     /**
      * Prints message when task is deleted.
      *
      * @param task Task that was deleted.
+     * @return String to be printed which illustrates identity of the deleted task.
      */
-    public void deleteTask(Task task) {
-        System.out.println(String.format(
-                "%s      %s", Commands.DELETE.toString(), task.identify()));
+    public String deleteTask(Task task) {
+        return String.format(
+                "%s      %s", Commands.DELETE.toString(), task.identify());
     }
 }

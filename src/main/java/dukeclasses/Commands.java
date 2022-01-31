@@ -4,19 +4,19 @@ public enum Commands {
     HI{
         @Override
         public String toString() {
-            return "    Hello! I'm Duke\n    What can I do for you?";
+            return "    Hello! I'm Duke\n    What can I do for you?\n";
         }
     },
     BYE{
         @Override
         public String toString() {
-            return "    Bye. Hope to see you again soon!";
+            return "    Bye. Hope to see you again soon!\n";
         }
     },
     LIST{
         @Override
         public String toString() {
-            return "    Here are the tasks in your list:";
+            return "    Here are the tasks in your list:\n";
         }
     },
     MARK{
@@ -46,7 +46,7 @@ public enum Commands {
     MATCH{
         @Override
         public String toString(){
-            return "    Here are the matching tasks in your list:";
+            return "    Here are the matching tasks in your list:\n";
         }
     }
 

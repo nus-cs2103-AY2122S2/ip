@@ -23,9 +23,9 @@ public class ToDo extends Task{
     @Override
     public String identify() {
         if (super.getIsDone()) {
-            return String.format("[T][X] %s", super.getDescription());
+            return String.format("[T][X] %s\n", super.getDescription());
         } else {
-            return String.format("[T][ ] %s", super.getDescription());
+            return String.format("[T][ ] %s\n", super.getDescription());
         }
     }
 
