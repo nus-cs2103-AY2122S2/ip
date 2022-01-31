@@ -1,35 +1,48 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.handler.FileHandler;
 import duke.handler.Handlers;
 import duke.task.Tasklist;
 
 /**
- * Returns the main task manager, Duke as an object.
+ * Returns the service bot Duke.
  */
 public class Duke {
 
+    private Tasklist list;
+
     /**
-     * Handles the execution of the program.
+     * Returns the bot as an object.
      *
-     * @param args Arguments, if any, to be passed for execution.
+     * @param list Tasklist that is used to store the tasks.
      */
-    public static void main(String[] args) {
+    public Duke(Tasklist list) {
+        this.list = list;
+        FileHandler.readFromFile(this.list);
+    }
+
+    /**
+     * Greets the user upon startup.
+     *
+     * @return Customized greeting.
+     */
+    public static String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello I'm Duke!");
-        System.out.println("What can I do for you?\n");
+        StringBuilder str = new StringBuilder("Hello from\n");
+        return str.append(logo).append("What can I do for you?\n").toString();
+    }
 
-        Tasklist list = new Tasklist();
-        Scanner scn = new Scanner(System.in);
-        FileHandler.readFromFile(list);
-        System.out.println(list.toString());
-        Handlers.commandHandler(list, scn);
+    /**
+     * Returns responses from Duke to the GUI.
+     *
+     * @param input Input from user.
+     * @return Response from Duke.
+     */
+    public String handleInput(String input) {
+        return Handlers.commandHandler(this.list, input);
     }
 }

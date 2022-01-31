@@ -10,7 +10,7 @@ public class Tasklist {
     private LinkedList<Task> tasks;
 
     /**
-     * Returns the container. Only allows events, deadlines and todos.
+     * Returns the task container. Only allows events, deadlines and todos.
      */
     public Tasklist() {
         this.tasks = new LinkedList<Task>();

@@ -1,9 +1,9 @@
 package duke.ui;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import duke.Duke;
+import duke.task.Tasklist;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke(new Tasklist());
 
     @Override
     public void start(Stage stage) {
