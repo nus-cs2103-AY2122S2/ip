@@ -1,6 +1,5 @@
-package instructions.listinstructions;
+package instructions.taskinstructions.listinstructions;
 
-import exceptions.NoSuchTaskException;
 import instructions.Instruction;
 import tasks.TaskList;
 
@@ -43,7 +42,7 @@ public class DisplayListInst extends Instruction {
      * @return the feedback message after performing this instruction.
      */
     @Override
-    public String doInst(TaskList taskList) throws NoSuchTaskException {
+    public String doInst(TaskList taskList) {
         return taskList.toString();
     }
 }

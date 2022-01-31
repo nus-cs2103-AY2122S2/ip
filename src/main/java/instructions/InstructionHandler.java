@@ -1,7 +1,8 @@
 package instructions;
 
+import exceptions.InvalidActionException;
 import exceptions.NoSuchTaskException;
-import instructions.listinstructions.ModifyListedTaskInst;
+import instructions.taskinstructions.listinstructions.ModifyListedTaskInst;
 import tasks.TaskList;
 
 /**
@@ -44,10 +45,12 @@ public class InstructionHandler {
         try {
             return inst.doInst(taskList);
         } catch (NoSuchTaskException e) {
-            // This is okay as only methods that will throw a NoSuchTaskException are the ones that
+            // This is okay as the only methods that will throw a NoSuchTaskException are the ones that
             // need to modify the tasks in the task list.
             ModifyListedTaskInst castedInst = (ModifyListedTaskInst) inst;
             return String.format("There is no task %d!", castedInst.getTaskNum());
+        } catch (InvalidActionException e) {
+            return e.getMessage();
         }
     }
 }

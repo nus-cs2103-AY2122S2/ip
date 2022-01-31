@@ -36,6 +36,15 @@ public abstract class Task {
     }
 
     /**
+     * Gets the state of the task, if it is done or not.
+     *
+     * @return boolean value indicating if the task is done or not.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Represents the task as a String.
      *
      * @return String representation of the task.

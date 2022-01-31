@@ -1,4 +1,4 @@
-package instructions.listinstructions;
+package instructions.taskinstructions.listinstructions;
 
 import java.util.stream.Stream;
 
@@ -62,7 +62,10 @@ public class FindInst extends Instruction {
     @Override
     public String doInst(TaskList taskList) {
         String allTasks = taskList.toString();
-        Stream<String> filtered = allTasks.lines().filter(line -> line.contains(keywords));
+        Stream<String> filtered = allTasks.lines().filter(line -> {
+            int afterNumber = line.indexOf("[");
+            return line.substring(afterNumber).contains(keywords);
+        });
         StringBuilder sb = new StringBuilder();
         filtered.forEach(line -> sb.append(line).append("\n"));
         return sb.toString();

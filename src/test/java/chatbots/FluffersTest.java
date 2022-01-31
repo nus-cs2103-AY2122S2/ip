@@ -21,7 +21,7 @@ public class FluffersTest {
     @Test
     public void getTest_goodFile_success() throws SaveFileModifiedException {
         assertEquals("Version 0.2, Last Updated: 30 Jan 2022",
-                Fluffers.get("data", "saved-tasklist.txt").toString());
+                Fluffers.of("data", "saved-tasklist.txt").toString());
     }
 
     /**
@@ -31,7 +31,7 @@ public class FluffersTest {
     public void getTest_modifiedTaskFile_exceptionThrown() {
         try {
             assertEquals("Version 0.2, Last Updated: 30 Jan 2022",
-                    Fluffers.get("data", "bad-tasklist.txt").toString());
+                    Fluffers.of("data", "bad-tasklist.txt").toString());
             fail();
         } catch (SaveFileModifiedException e) {
             assertEquals("Unknown task type detected!", e.getMessage());
@@ -45,7 +45,7 @@ public class FluffersTest {
     public void getTest_modifiedTaskState_exceptionThrown() {
         try {
             assertEquals("Version 0.2, Last Updated: 30 Jan 2022",
-                    Fluffers.get("data", "modified-tasklist.txt").toString());
+                    Fluffers.of("data", "modified-tasklist.txt").toString());
             fail();
         } catch (SaveFileModifiedException e) {
             assertEquals("Unknown task state detected!", e.getMessage());
