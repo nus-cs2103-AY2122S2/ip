@@ -3,10 +3,16 @@ package duke.ui;
 import duke.command.Command;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.InvalidCommand;
-import duke.praser.Praser;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.uicomponents.*;
+import duke.uicomponents.DeleteTaskDisplay;
+import duke.uicomponents.ErrorMenu;
+import duke.uicomponents.ExitScreen;
+import duke.uicomponents.MarkTaskDisplay;
+import duke.uicomponents.Menu;
+import duke.uicomponents.NewTaskDisplay;
+import duke.uicomponents.TaskListDisplay;
+import duke.uicomponents.UnmarkedTaskDisplay;
 
 /**
  * The UI controls the user interactions.
@@ -33,14 +39,14 @@ public class Ui {
      * Creates a new UI for duke.
      */
     public Ui() {
-        this.menu = new Menu();
-        this.exitScreen = new ExitScreen();
-        this.taskListDisplay = new TaskListDisplay();
-        this.markTaskDisplay = new MarkTaskDisplay();
-        this.unmarkedTaskDisplay = new UnmarkedTaskDisplay();
-        this.newTaskDisplay = new NewTaskDisplay();
-        this.deleteTaskDisplay = new DeleteTaskDisplay();
-        this.errorMenu = new ErrorMenu();
+        menu = new Menu();
+        exitScreen = new ExitScreen();
+        taskListDisplay = new TaskListDisplay();
+        markTaskDisplay = new MarkTaskDisplay();
+        unmarkedTaskDisplay = new UnmarkedTaskDisplay();
+        newTaskDisplay = new NewTaskDisplay();
+        deleteTaskDisplay = new DeleteTaskDisplay();
+        errorMenu = new ErrorMenu();
     }
 
     /**
@@ -58,7 +64,7 @@ public class Ui {
      * @throws InvalidCommand If the user input is either empty or the user enters an invalid command.
      */
     public Command showUserCommandLine(String userInput) throws InvalidCommand {
-        return Praser.prase(userInput);
+        return Parser.parse(userInput);
     }
 
     /**
@@ -67,14 +73,14 @@ public class Ui {
      * @param exceptions The exception to be displayed.
      */
     public void showCommandError(DukeExceptions exceptions) {
-        this.errorMenu.run(exceptions.getMessage());
+        errorMenu.run(exceptions.getMessage());
     }
 
     /**
      * Shows the exit screen when the user exits duke.
      */
     public void showExitScreen() {
-        this.exitScreen.run();
+        exitScreen.run();
     }
 
     /**
@@ -83,7 +89,7 @@ public class Ui {
      * @param taskList The task list to be shown.
      */
     void showTaskListDisplay(TaskList taskList) {
-        this.taskListDisplay.run(taskList);
+        taskListDisplay.run(taskList);
     }
 
     /**
@@ -92,7 +98,7 @@ public class Ui {
      * @param task The task that was marked.
      */
     public void showMarkedTaskDisplay(String task) {
-        this.markTaskDisplay.run(task);
+        markTaskDisplay.run(task);
     }
 
     /**
@@ -101,7 +107,7 @@ public class Ui {
      * @param task The task that was unmarked.
      */
     public void showUnmarkedTaskDisplay(String task) {
-        this.unmarkedTaskDisplay.run(task);
+        unmarkedTaskDisplay.run(task);
     }
 
     /**
@@ -111,7 +117,7 @@ public class Ui {
      * @param taskList The task list which will then show the number of tasks now.
      */
     public void newTaskDisplay(Task task, TaskList taskList) {
-        this.newTaskDisplay.run(task, taskList);
+        newTaskDisplay.run(task, taskList);
     }
 
     /**
@@ -121,6 +127,6 @@ public class Ui {
      * @param taskList The task list which will show the number of tasks left.
      */
     public void showDeleteTaskDisplay(String task, TaskList taskList) {
-        this.deleteTaskDisplay.run(task, taskList);
+        deleteTaskDisplay.run(task, taskList);
     }
 }

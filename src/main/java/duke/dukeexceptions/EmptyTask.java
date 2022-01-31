@@ -4,7 +4,6 @@ package duke.dukeexceptions;
  * The exception when no task name is entered when the command needs it.
  */
 public final class EmptyTask extends DukeExceptions{
-
     private EmptyTask(String s) {
         super(s);
     }

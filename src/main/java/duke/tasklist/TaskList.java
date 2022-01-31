@@ -15,7 +15,7 @@ public class TaskList {
      * Creates a new Task List.
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        taskList = new ArrayList<Task>();
     }
 
     /**
@@ -27,10 +27,12 @@ public class TaskList {
      */
     public String markTask(int index) throws IndexOutOfBoundsException {
         try {
+            // Minus one as the index from the parameter is 1-based.
             Task task = taskList.get(index - 1);
             task.setDone();
             return task.toString();
         } catch (IndexOutOfBoundsException e) {
+            // If the index is out of bound of the task list.
             throw new IndexOutOfBoundsException();
         }
     }
@@ -44,10 +46,12 @@ public class TaskList {
      */
     public String unmarkTask(int index) throws IndexOutOfBoundsException {
         try {
+            // Minus one as the index from the parameter is 1-based.
             Task task = taskList.get(index - 1);
             task.setUndone();
             return task.toString();
         } catch (IndexOutOfBoundsException e) {
+            // If the index is out of bound of the task list.
             throw new IndexOutOfBoundsException();
         }
     }
@@ -74,7 +78,7 @@ public class TaskList {
      * Shows the number of tasks in the task list.
      */
     public void printNoTasks() {
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -84,8 +88,9 @@ public class TaskList {
      * @return The string representation of the task that was recently deleted.
      */
     public String deleteFromIndex(int index) {
-        String deletedTask = this.taskList.get(index - 1).toString();
-        this.taskList.remove(index - 1);
+        // Minus one as the index from the parameter is 1-based.
+        String deletedTask = taskList.get(index - 1).toString();
+        taskList.remove(index - 1);
         return deletedTask;
     }
 
@@ -96,7 +101,7 @@ public class TaskList {
      */
     public String updateDatabase() {
         String result = "";
-        for (Task task: this.taskList) {
+        for (Task task: taskList) {
             result = result + task.updateIntoDatabase();
         }
         return result;

@@ -17,7 +17,7 @@ public abstract class Task {
     /** The name of the task. */
     protected String taskName;
     /** Representing whether the task is done */
-    protected boolean done;
+    protected boolean isMarked;
 
     /**
      * Creates a new Task.
@@ -27,21 +27,21 @@ public abstract class Task {
      */
     protected Task(String taskName, boolean done) {
         this.taskName = taskName;
-        this.done = done;
+        this.isMarked = done;
     }
 
     /**
      * Sets the task to be complete.
      */
     public void setDone() {
-        this.done = true;
+        isMarked = true;
     }
 
     /**
      * Sets the task to be incomplete.
      */
     public void setUndone() {
-        this.done = false;
+        isMarked = false;
     }
 
     /**
@@ -62,7 +62,10 @@ public abstract class Task {
      * @throws InvalidDate If the task that requires a date encounters a date in an invalid format.
      */
     public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
+        // Convert the task type to uppercase.
         type = type.toUpperCase();
+
+        // Creates a new task based on the task type.
         if (type.equals("TODO")) {
             return new ToDo(name, done);
         } else if (type.equals("DEADLINE")) {
@@ -79,7 +82,6 @@ public abstract class Task {
  * The task representing TODO.
  */
 final class ToDo extends Task {
-
     protected ToDo(String taskName, boolean done) {
         super(taskName, done);
     }
@@ -92,8 +94,8 @@ final class ToDo extends Task {
     @Override
     public String toString() {
         String tag = "[T]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        return tag + doneIndicator + " " + this.taskName;
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
+        return tag + doneIndicator + " " + taskName;
     }
 
     /**
@@ -102,7 +104,7 @@ final class ToDo extends Task {
      * @return {@inheritDoc}
      */
     public String updateIntoDatabase() {
-        return "TODO\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + "*** Next Task ***\n";
+        return "TODO\n" + isMarked + "\n" + taskName + "\n" + "*** Next Task ***\n";
     }
 }
 
@@ -111,7 +113,7 @@ final class ToDo extends Task {
  */
 final class Deadline extends Task {
     /** The date of the dateline */
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * A task with a deadline.
@@ -123,12 +125,13 @@ final class Deadline extends Task {
      */
     protected Deadline(String taskName, boolean done, String deadline) throws InvalidDate {
         super(taskName, done);
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.deadline = LocalDateTime.parse(deadline, initFormatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDate();
         }
-
     }
 
     /**
@@ -139,9 +142,9 @@ final class Deadline extends Task {
     @Override
     public String toString() {
         String tag = "[D]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
         String deadline = "(by: " + this.deadline.format(formatter) + ")";
-        return tag + doneIndicator + " " + this.taskName + deadline;
+        return tag + doneIndicator + " " + taskName + deadline;
     }
 
     /**
@@ -151,14 +154,14 @@ final class Deadline extends Task {
      */
     @Override
     public String updateIntoDatabase() {
-        return "DEADLINE\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.deadline.format(initFormatter) + "\n"
+        return "DEADLINE\n" + isMarked + "\n" + taskName + "\n" + deadline.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }
 
 final class Event extends Task {
     /** The date of the event */
-    LocalDateTime eventDate;
+    private LocalDateTime eventDate;
 
     /**
      * Creates the event task.
@@ -170,12 +173,13 @@ final class Event extends Task {
      */
     protected Event(String taskName, boolean done, String eventDate) throws InvalidDate {
         super(taskName, done);
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.eventDate = LocalDateTime.parse(eventDate, initFormatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDate();
         }
-
     }
 
     /**
@@ -186,9 +190,9 @@ final class Event extends Task {
     @Override
     public String toString() {
         String tag = "[E]";
-        String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
+        String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
         String eventDate = "(at: " + this.eventDate.format(formatter) + ")";
-        return tag + doneIndicator + " " + this.taskName + eventDate;
+        return tag + doneIndicator + " " + taskName + eventDate;
     }
 
     /**
@@ -198,7 +202,7 @@ final class Event extends Task {
      */
     @Override
     public String updateIntoDatabase() {
-        return "EVENT\n" + String.valueOf(this.done) + "\n" + this.taskName + "\n" + this.eventDate.format(initFormatter) + "\n"
+        return "EVENT\n" + isMarked + "\n" + taskName + "\n" + eventDate.format(initFormatter) + "\n"
                 + "*** Next Task ***\n";
     }
 }

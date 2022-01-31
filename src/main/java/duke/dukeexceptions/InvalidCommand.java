@@ -1,12 +1,9 @@
 package duke.dukeexceptions;
 
-import duke.dukeexceptions.DukeExceptions;
-
 /**
  * The exception when the command entered by the user is not valid.
  */
 public abstract class InvalidCommand extends DukeExceptions{
-
     protected InvalidCommand(String s) {
         super(s);
     }
@@ -22,18 +19,15 @@ public abstract class InvalidCommand extends DukeExceptions{
     public static InvalidCommand createInvalidCommand(String cmd) throws InvalidCommand {
         throw cmd.isBlank() ? new MissingCommand() : new IncorrectCommand();
     }
-
 }
 
 /**
  * The missing command exception that represents the user enters an empty command.
  */
 final class MissingCommand extends InvalidCommand {
-
     MissingCommand() {
         super("Sorry, I don't see any commands!");
     }
-
 }
 
 /**

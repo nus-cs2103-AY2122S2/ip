@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Storage{
     /** The file which stores the tasks in the task list. */
-    File file;
+    private File file;
 
     /**
      * Creates a new Storage object with the filename to store and retrieves the data in the tasks list.
@@ -33,18 +33,25 @@ public class Storage{
      * @throws FileNotFoundException If the file filename could not be found in duke.
      */
     public TaskList getData() throws FileNotFoundException {
-        Scanner fileInput = new Scanner(this.file);
+        Scanner fileInput = new Scanner(file);
         TaskList taskList = new TaskList();
+
+        // Gets the data from the file and creates new task into the task list.
         while (fileInput.hasNextLine()) {
+            // Gets the properties for a task.
             String type = fileInput.nextLine();
             Boolean done = Boolean.parseBoolean(fileInput.nextLine());
             String name = fileInput.nextLine();
             String date = fileInput.nextLine();
+
+            // If the program finishes processing a task.
             if (date.equals("*** Next Task ***")) {
                 date = null;
             } else {
                 fileInput.nextLine();
             }
+
+            // Adds the task to the task list.
             try {
                 taskList.addTask(Task.createTask(type, done, name, date));
             } catch (DukeExceptions e) {
@@ -61,8 +68,13 @@ public class Storage{
      * @throws IOException If an IO error happens.
      */
     public void updateData(TaskList taskList) throws IOException {
+        // Creates a new filewriter.
         FileWriter fw = new FileWriter(file);
+
+        // Writes all the tasks in the task list into the file.
         fw.write(taskList.updateDatabase());
+
+        // Closes the filewriter.
         fw.close();
     }
 }
