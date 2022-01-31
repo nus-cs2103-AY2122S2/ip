@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.RequiredInformationMissingException;
 import duke.exceptions.UnknownCommandException;
-
-import java.util.ArrayList;
 
 /**
  * Class that has methods for handling user input
@@ -15,9 +15,9 @@ public class Parser {
      * index, and and relevant arguments from the input as the result.
      *
      * @param input
-     * @throws RequiredInformationMissingException if required info for a command not present in input.
-     * @throws UnknownCommandException if command is unknown.
      * @return List containing the parsedInput strings.
+     * @throws RequiredInformationMissingException if required info for a command not present in input.
+     * @throws UnknownCommandException             if command is unknown.
      */
     public static ArrayList<String> parseInput(String input) throws RequiredInformationMissingException,
             UnknownCommandException {
@@ -72,6 +72,7 @@ public class Parser {
 
     /**
      * Extracts the command from a given input.
+     *
      * @param input
      * @return the command
      */

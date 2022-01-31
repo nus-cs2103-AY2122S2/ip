@@ -7,12 +7,13 @@ import java.time.format.DateTimeParseException;
 /**
  * Deadline type of Task, with a date and time that the task must be completed.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
+    private LocalDate date;
     private String deadline;
-    LocalDate date;
 
     /**
      * Constructor for Deadline.
+     *
      * @param name
      * @param deadline
      */
@@ -29,6 +30,7 @@ public class Deadline extends Task{
 
     /**
      * Constructor for Deadline with completion status.
+     *
      * @param name
      * @param deadline
      * @param isCompleted
@@ -46,8 +48,10 @@ public class Deadline extends Task{
     public String toFileString() {
         return "D : " + (isCompleted ? "1 : " : "0 : ") + name + " : " + deadline;
     }
+
     /**
      * Overriden toString method for deadline object.
+     *
      * @return String representation of deadline object
      */
     @Override

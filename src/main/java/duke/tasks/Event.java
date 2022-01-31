@@ -7,12 +7,13 @@ import java.time.format.DateTimeParseException;
 /**
  * Event type of Task. Has specific time of occurence.
  */
-public class Event extends Task{
+public class Event extends Task {
     private String eventTime;
     private LocalDate date;
 
     /**
      * Constructor of Event.
+     *
      * @param name
      * @param eventTime
      */
@@ -30,6 +31,7 @@ public class Event extends Task{
 
     /**
      * Aleternative Construcotr of Event to set completion status.
+     *
      * @param name
      * @param eventTime
      * @param isCompleted
@@ -41,6 +43,7 @@ public class Event extends Task{
 
     /**
      * Returns the string representation of this event for storage.
+     *
      * @return
      */
     @Override
@@ -50,6 +53,7 @@ public class Event extends Task{
 
     /**
      * Overriden toString method for Event.
+     *
      * @return String representation of Event.
      */
     @Override

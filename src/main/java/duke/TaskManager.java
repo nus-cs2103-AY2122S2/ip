@@ -1,22 +1,23 @@
 package duke;
 
-import duke.exceptions.UnknownFileEntry;
-import duke.tasks.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.exceptions.UnknownFileEntry;
+import duke.tasks.Task;
 
 /**
  * duke.TaskManager that manages all the duke.tasks that we log in the chatbot.
  */
 
 public class TaskManager {
-    private ArrayList<Task> tasks;
-    private Storage storage;
+    private final ArrayList<Task> tasks;
+    private final Storage storage;
 
     /**
      * Initialises the taskManager
-     * @throws IOException if file io error occurs.
+     *
+     * @throws IOException      if file io error occurs.
      * @throws UnknownFileEntry if unknown file entry found.
      */
     public TaskManager() throws IOException, UnknownFileEntry {
@@ -26,6 +27,7 @@ public class TaskManager {
 
     /**
      * Add a task to the task manager.
+     *
      * @param task
      */
     public void addTask(Task task) {
@@ -34,6 +36,7 @@ public class TaskManager {
 
     /**
      * remove a task from the task manager.
+     *
      * @param index index to remove, indexed from 1.
      * @return the task that was removed.
      */
@@ -43,6 +46,7 @@ public class TaskManager {
 
     /**
      * return the total number of duke.tasks in the task manager list.
+     *
      * @return total number of duke.tasks in the task manager list.
      */
     public int getNumberOfTasks() {
@@ -51,6 +55,7 @@ public class TaskManager {
 
     /**
      * Complete the task at the given index of the task manager (indexed from 1 where 1 is first task).
+     *
      * @param index
      * @return the task we completed.
      */
@@ -61,6 +66,7 @@ public class TaskManager {
 
     /**
      * Uncomplete the task at the given index of the task manager (indexed from 1 where 1 is first task).
+     *
      * @param index
      * @return the task we made incomplete.
      */
@@ -71,13 +77,14 @@ public class TaskManager {
 
     /**
      * Return a nice printable numbered list of the duke.tasks.
+     *
      * @return a String representing the duke.tasks in nice format
      */
     public String getPrintableListOfTasks() {
         StringBuilder str = new StringBuilder();
         int i = 1;
         for (Task task : tasks) {
-            str.append(String.valueOf(i) + "." + task.toString() + "\n");
+            str.append(i + "." + task.toString() + "\n");
             i++;
         }
         return str.toString();
@@ -85,12 +92,13 @@ public class TaskManager {
 
     /**
      * Returns a list of tasks with name matching the expr.
+     *
      * @param expr the keyword used to search for matching tasks.
      * @return list of tasks with names matching the expr.
      */
     public ArrayList<Task> findListOfMatchingTasks(String expr) {
         ArrayList<Task> matches = new ArrayList<>();
-        for (Task task : tasks)  {
+        for (Task task : tasks) {
             if (task.nameMatchesKeyword(expr)) {
                 matches.add(task);
             }
@@ -100,9 +108,10 @@ public class TaskManager {
 
     /**
      * Saves all the duke.tasks in this task manager.
+     *
      * @throws IOException if a error occurs interacting with the task file.
      */
-    public void saveTasks() throws IOException{
+    public void saveTasks() throws IOException {
         storage.writeTasks(tasks);
     }
 

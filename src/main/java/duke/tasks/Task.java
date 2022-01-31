@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Construct a task.
+     *
      * @param name
      */
     public Task(String name) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * Alternative constructor for Task, to create a task with a preset completion status.
+     *
      * @param name
      * @param isCompleted
      */
@@ -42,6 +44,7 @@ public class Task {
 
     /**
      * Returns the file string representation of this task.
+     *
      * @return
      */
     public String toFileString() {
@@ -50,6 +53,7 @@ public class Task {
 
     /**
      * Returns a boolean representing if the task name has the given expr.
+     *
      * @param expr keyword to match in the task name.
      * @return true if keyword found in task name, false otherwise.
      */
@@ -60,6 +64,7 @@ public class Task {
     /**
      * Overriden toString function. Prints the completion status and the task name in this format:
      * "[ ] taskname" if incomplete, "[X] taskname" if complete.
+     *
      * @return String representation of this task.
      */
     @Override

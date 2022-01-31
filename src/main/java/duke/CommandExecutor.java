@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exceptions.RequiredInformationMissingException;
 import duke.exceptions.UnknownCommandException;
 import duke.exceptions.UnknownFileEntry;
@@ -7,19 +10,16 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Class that handles parsing and executing of inputs read from the GUI.
  */
 public class CommandExecutor {
-    private TaskManager taskManager;
+    private final TaskManager taskManager;
 
     /**
      * Creates instance of CommandExecutor.
      *
-     * @throws IOException if some error reading task file occurs.
+     * @throws IOException      if some error reading task file occurs.
      * @throws UnknownFileEntry if unknown line read in task file.
      */
     public CommandExecutor() throws IOException, UnknownFileEntry {
@@ -28,6 +28,7 @@ public class CommandExecutor {
 
     /**
      * Main method, exceutes a command passed from the GUI.
+     *
      * @param input
      * @returns string representing dukes response.
      */

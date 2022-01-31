@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -28,8 +27,9 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for a dialogbox.
+     *
      * @param text text to write in dialogbox.
-     * @param img profile picture for dialogbox.
+     * @param img  profile picture for dialogbox.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -46,17 +46,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.CENTER_LEFT);
-    }
-
-    /**
      * Returns a dialogbox containing user text and profile picture.
+     *
      * @param text
      * @param img
      * @return
@@ -67,6 +58,7 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialogbox containing duke text and profile picture.
+     *
      * @param text
      * @param img
      * @return
@@ -75,5 +67,15 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.CENTER_LEFT);
     }
 }

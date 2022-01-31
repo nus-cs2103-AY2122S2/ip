@@ -1,10 +1,5 @@
 package duke;
 
-import duke.exceptions.UnknownFileEntry;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,14 +8,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.UnknownFileEntry;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+
 /**
  * Handles all storage of duke.tasks to a file.
  */
 
 public class Storage {
 
-    private Path filePath;
-    private File file;
+    private final Path filePath;
+    private final File file;
 
     /**
      * Initializes storage object.
@@ -46,10 +46,11 @@ public class Storage {
 
     /**
      * Writes all the duke.tasks in the list to the file.
+     *
      * @param tasks list of duke.tasks to write.
      * @throws IOException if io failed.
      */
-    public void writeTasks(ArrayList<Task> tasks) throws IOException{
+    public void writeTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(file);
         for (Task task : tasks) {
             fw.write(task.toFileString() + "\n");
@@ -59,11 +60,12 @@ public class Storage {
 
     /**
      * Read entire file, return the duke.tasks as a list of duke.tasks.
+     *
      * @return list of all duke.tasks in the file.
-     * @throws IOException if file cannot be acessed or created.
+     * @throws IOException      if file cannot be acessed or created.
      * @throws UnknownFileEntry if file contains an unknown entry.
      */
-    public ArrayList<Task> readTasks() throws IOException, UnknownFileEntry{
+    public ArrayList<Task> readTasks() throws IOException, UnknownFileEntry {
         //create the file's parent directories if they do not exist
         file.getParentFile().mkdirs();
         //create the file itself if it does not exist
@@ -78,8 +80,8 @@ public class Storage {
             //create task based on the string read, add to duke.tasks
             if (sections[0].equals("T")) {
                 tasks.add(new Task(sections[2], sections[1] == "1"));
-            } else  if (sections[0].equals("D")) {
-                tasks.add(new Deadline(sections[2], sections[3],sections[1] == "1"));
+            } else if (sections[0].equals("D")) {
+                tasks.add(new Deadline(sections[2], sections[3], sections[1] == "1"));
             } else if (sections[0].equals("E")) {
                 tasks.add(new Event(sections[2], sections[3], sections[1] == "1"));
             } else {
