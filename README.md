@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Tsundere
 
 > Soon is not as good as now. – Seth Godin ([source](https://dansilvestre.com/productivity-quotes/))
@@ -19,9 +18,9 @@ And it is **FREE**!
 
 Features:
 
-[x] Managing tasks
-[] Hot waifu anime girl (coming soon)
-[] Reminders (coming soon)
+- [x] Managing tasks
+- [] Hot waifu anime girl (coming soon)
+- [] Reminders (coming soon)
 
 If you Java programmer, you can use it to practice Java too. Here's the constructor for `Tsundere`:
 
