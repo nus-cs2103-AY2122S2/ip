@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.DukeException;
-import duke.InvalidArgumentException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,6 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+
+import duke.DukeException;
+import duke.InvalidArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Responsible for loading the list of tasks from an existing and saving changes in the list to that file.

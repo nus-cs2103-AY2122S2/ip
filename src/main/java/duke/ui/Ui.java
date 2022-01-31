@@ -1,9 +1,10 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+
 
 /**
  * Responsible for interacting with the user by receiving input and displaying output.
@@ -40,13 +41,13 @@ public class Ui {
      * Displays a welcome message to the user with the Ace logo.
      */
     public void displayWelcome() {
-        String logo ="\n" +
-                "    ___   ____________\n" +
-                "   /   | / ____/ ____/\n" +
-                "  / /| |/ /   / __/   \n" +
-                " / ___ / /___/ /___   \n" +
-                "/_/  |_\\____/_____/   \n" +
-                "                      \n";
+        String logo = "\n"
+                + "    ___   ____________\n"
+                + "   /   | / ____/ ____/\n"
+                + "  / /| |/ /   / __/   \n"
+                + " / ___ / /___/ /___   \n"
+                + "/_/  |_\\____/_____/   \n"
+                + "                      \n";
         printWithStyle(logo + "\nHi, I'm Ace. What can I do for you?");
     }
 
