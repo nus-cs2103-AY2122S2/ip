@@ -2,6 +2,7 @@ package bobby;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
@@ -34,21 +35,23 @@ public class Parser {
                 try {
                     tasks.addToDo(userInput);
                 } catch (BobbyException e) {
-                    System.err.println(e);
+                    System.out.println("Description cannot be empty.");
                 }
                 break;
             case DEADLINE:
                 try {
                     tasks.addDeadline(userInput);
                 } catch (BobbyException e) {
-                    System.err.println(e);
+                    System.out.println("Description/Date cannot be empty.");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format. Please use YYYY-MM-DD");
                 }
                 break;
             case EVENT:
                 try {
                     tasks.addEvent(userInput);
                 } catch (BobbyException e) {
-                    System.err.println(e);
+                    System.out.println("Description/Time cannot be empty.");
                 }
                 break;
             case DELETE:
