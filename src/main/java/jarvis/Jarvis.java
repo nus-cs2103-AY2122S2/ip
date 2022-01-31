@@ -19,7 +19,7 @@ public class Jarvis {
     /**
      * Runs the main chat/program loop.
      */
-    public static void main(String[] args) throws JarvisException {
+    public void getResponse() {
         startup();
 
         while (processNext) {
@@ -67,24 +67,30 @@ public class Jarvis {
 
     /**
      * Initializes the UI and loads the data file in storage into the program.
-     *
-     * @throws JarvisException If storage initialization fails.
      */
-    public static void startup() throws JarvisException {
-        storage = new Storage("data/data.txt");
-        ui = new Ui();
-        tasks = new TaskList(storage.loadData(), ui);
-        ui.welcome();
+    public void startup() {
+        try {
+            storage = new Storage("data/data.txt");
+            ui = new Ui();
+            tasks = new TaskList(storage.loadData(), ui);
+            ui.welcome();
+        } catch (JarvisException e) {
+            ui.echo(e.getMessage());
+            System.exit(0);
+        }
     }
 
     /**
      * Saves the program state into local storage and closes open resources.
-     *
-     * @throws JarvisException If save to storage fails.
      */
-    public static void shutdown() throws JarvisException {
-        processNext = false;
-        storage.saveChanges(tasks);
-        ui.shutdown();
+    public void shutdown() {
+        try {
+            processNext = false;
+            storage.saveChanges(tasks);
+            ui.shutdown();
+        } catch (JarvisException e) {
+            ui.echo(e.getMessage());
+            System.exit(0);
+        }
     }
 }
