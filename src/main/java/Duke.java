@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ public class Duke {
     public static void main(String[] args) throws NoDescException, InvalidInputException{
         // Declare Task ArrayList to keep tasks and starting Task number
         taskList = new ArrayList<>();
+        // Declare DateTimeFormatter
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         // Print welcome message
         System.out.println("Hello, this is Belvedere, your virtual assistant!\nHow may i assist you?");
         printLine();
@@ -55,8 +59,10 @@ public class Duke {
                 }
                 if (firstFiveChar.equals("event")){
                     String descriptionAndSetAt = input.substring(6,inputLength);
-                    String[] split = descriptionAndSetAt.split("/");
-                    Event newTask = new Event(split[0], split[1]);
+                    String[] split = descriptionAndSetAt.split("/",2);
+                    String localDateTimeString = split[1].split(" ", 2)[1];
+                    LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, dateTimeFormatter);
+                    Event newTask = new Event(split[0], localDateTime);
                     taskList.add(newTask);
                     printAddedAck(newTask);
                     printLine();
@@ -80,8 +86,11 @@ public class Duke {
                 }
                 if (firstEightChar.equals("deadline")) {
                     String descriptionAndDueBy = input.substring(9,inputLength);
-                    String[] split = descriptionAndDueBy.split("/");
-                    Deadline newTask = new Deadline(split[0], split[1]);
+                    String[] split = descriptionAndDueBy.split("/",2);
+                    String localDateTimeString = split[1].split(" ", 2)[1];
+                    System.out.println(localDateTimeString);
+                    LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, dateTimeFormatter);
+                    Deadline newTask = new Deadline(split[0], localDateTime);
                     taskList.add(newTask);
                     printAddedAck(newTask);
                     printLine();
