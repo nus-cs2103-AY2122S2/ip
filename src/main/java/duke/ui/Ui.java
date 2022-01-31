@@ -14,6 +14,7 @@ import duke.uicomponents.Menu;
 import duke.uicomponents.NewTaskDisplay;
 import duke.uicomponents.TaskListDisplay;
 import duke.uicomponents.UnmarkedTaskDisplay;
+import duke.uicomponents.FilteredTaskListDisplay;
 
 /**
  * The UI controls the user interactions.
@@ -35,6 +36,7 @@ public class Ui {
     NewTaskDisplay newTaskDisplay;
     /** The screen that shows the task when a task is deleted */
     DeleteTaskDisplay deleteTaskDisplay;
+    private FilteredTaskListDisplay filteredTaskListDisplay;
 
     /**
      * Creates a new UI for duke.
@@ -48,6 +50,7 @@ public class Ui {
         newTaskDisplay = new NewTaskDisplay();
         deleteTaskDisplay = new DeleteTaskDisplay();
         errorMenu = new ErrorMenu();
+        filteredTaskListDisplay = new FilteredTaskListDisplay();
     }
 
     /**
@@ -129,5 +132,15 @@ public class Ui {
      */
     public void showDeleteTaskDisplay(String task, TaskList taskList) {
         deleteTaskDisplay.run(task, taskList);
+    }
+
+    /**
+     * Shows the filtered task list which contains the keyword.
+     *
+     * @param keyword The keyword.
+     * @param filteredTaskList The task list which contains the tasks that have the keyword.
+     */
+    public void showFilteredTaskListDisplay(String keyword, TaskList filteredTaskList) {
+        filteredTaskListDisplay.run(keyword, filteredTaskList);
     }
 }

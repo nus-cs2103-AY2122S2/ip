@@ -52,6 +52,15 @@ public abstract class Task {
     public abstract String updateIntoDatabase();
 
     /**
+     * Get the task name of the task.
+     *
+     * @return The name of the task.
+     */
+    public String getTaskName() {
+        return taskName;
+    }
+
+    /**
      * Creates a new task.
      *
      * @param type The type of task.
