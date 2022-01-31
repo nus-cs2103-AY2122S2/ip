@@ -7,17 +7,38 @@ import istjbot.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates the procedure of adding a task.
+ */
 public class AddCommand extends Command {
-
+    /**
+     * Constructor for this class.
+     *
+     * @param commandEnum CommandEnum indicating a specific type of command.
+     * @param fullCommand Full information required for execution.
+     */
     public AddCommand(CommandEnum commandEnum, String fullCommand) {
         super(commandEnum, fullCommand);
     }
 
+    /**
+     * Returns whether this command is a terminal command.
+     *
+     * @return False as AddCommand is not a terminal command.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the procedure of adding a specific type of task.
+     *
+     * @param tasks TaskList responsible for adding the task specified by the user.
+     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param storage Storage responsible for saving the added tasks into an external file.
+     * @throws BotException When the task cannot be generated due to incomplete information provided.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
