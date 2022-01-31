@@ -8,6 +8,8 @@ import duke.tasks.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,12 +19,18 @@ import java.util.Scanner;
 
 public class Storage {
 
-    File file = new File("src/main/data/duke.txt");
+    private Path filePath;
+    private File file;
 
     /**
      * Initializes storage object.
      */
-    public Storage() {}
+    public Storage() {
+        //gets the absolute file path in users home directory to store the saved tasks.
+        filePath = Paths.get(System.getProperty("user.home"), "dukeChatBot", "data", "savedTasks.txt");
+        file = new File(filePath.toString());
+
+    }
 
     /**
      * Writes a single task to the file.
@@ -56,7 +64,9 @@ public class Storage {
      * @throws UnknownFileEntry if file contains an unknown entry.
      */
     public ArrayList<Task> readTasks() throws IOException, UnknownFileEntry{
-        //create the file if it does not yet exist
+        //create the file's parent directories if they do not exist
+        file.getParentFile().mkdirs();
+        //create the file itself if it does not exist
         file.createNewFile();
         Scanner scanner = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
