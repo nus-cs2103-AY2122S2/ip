@@ -15,10 +15,10 @@ public class Ui {
         System.out.println("__________________________________");
     }
 
-    public static String[] run() {
+    public static boolean run(TaskList taskList) {
         Scanner dukeScan = new Scanner(System.in);
         String userInput = dukeScan.nextLine();
-        return Parser.parseInput(userInput);
+        return Parser.parseInput(userInput, taskList);
     }
 
 
