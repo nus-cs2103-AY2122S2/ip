@@ -17,14 +17,12 @@ public class Event extends Task {
     LocalDate time;
 
     DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder()
-            .append(DateTimeFormatter.ofPattern(
-                    "" +
-                    "[yyyy-MM-dd HH:mm:ss]" +
-                    "[yyyy-MM-dd]" +
-                    "[yyyy/MM/dd]" +
-                    "[yyyy-MM-dd HH:mm a]"
+            .append(DateTimeFormatter.ofPattern(""
+                    + "[yyyy-MM-dd HH:mm:ss]"
+                    + "[yyyy-MM-dd]"
+                    + "[yyyy/MM/dd]"
+                    + "[yyyy-MM-dd HH:mm a]"
             ));
-
     DateTimeFormatter dateTimeFormatter = dateTimeFormatterBuilder.toFormatter();
 
     /**
