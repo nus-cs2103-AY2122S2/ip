@@ -12,7 +12,8 @@ public enum CommandType {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    PRINT("print");
+    PRINT("print"),
+    FIND("find");
 
     private final String label;
 

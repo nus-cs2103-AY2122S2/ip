@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintCommand;
@@ -60,6 +61,7 @@ public class Parser {
         String taskDescription;
         String taskInfo;
         String date;
+        String keyword;
 
         switch (commandType) {
         case BYE:
@@ -95,6 +97,10 @@ public class Parser {
         case PRINT:
             date = getDateFromPrintCommand(commandInfo);
             command = new PrintCommand(date);
+            break;
+        case FIND:
+            keyword = getKeywordFromFindCommand(commandInfo);
+            command = new FindCommand(keyword);
             break;
         default:
             // Error detection for any invalid commands has already been
@@ -322,6 +328,14 @@ public class Parser {
             throw new DukeException("INCOMPLETE COMMAND"
                     + System.lineSeparator() + "\t"
                     + "Enter /on before specifying the date!");
+        }
+    }
+
+    private String getKeywordFromFindCommand(String commandInfo) throws DukeException {
+        if (isCommandInfoPresent(commandInfo)) {
+            return commandInfo;
+        } else {
+            throw new DukeException("Please enter the keyword to search for matching tasks!");
         }
     }
 }

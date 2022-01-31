@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandType;
+import duke.command.FindCommand;
 import duke.command.PrintCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -76,6 +77,8 @@ public class Duke {
 
             if (taskList.getFilterCommandType() == CommandType.PRINT && !(command instanceof PrintCommand)) {
                 filteredTasksMessage = ui.tasksOnDateMessage(taskList, taskList.getFilterInfo());
+            } else if (taskList.getFilterCommandType() == CommandType.FIND && !(command instanceof FindCommand)) {
+                filteredTasksMessage = ui.tasksWithKeywordMessage(taskList, taskList.getFilterInfo());
             } else {
                 filteredTasksMessage = "";
             }

@@ -124,6 +124,25 @@ public class TaskList {
     }
 
     /**
+     * Sets the filtered tasks with tasks that contains the keyword in the
+     * description.
+     *
+     * This will initialise List of filteredTasks with the tasks that
+     * contains the keyword in the description, filterCommandType as Find
+     * CommandType and filterInfo as the keyword.
+     *
+     * @param keyword Keyword in the description
+     */
+    public void setFilteredTasksByKeyword(String keyword) {
+        filteredTasks = tasks.stream()
+                .filter(task -> task.hasKeyword(keyword))
+                .collect(Collectors.toList());
+
+        filterCommandType = CommandType.FIND;
+        filterInfo = keyword;
+    }
+
+    /**
      * Adds the ToDo task to the list.
      *
      * @param taskDescription Description of the ToDo task to be added
