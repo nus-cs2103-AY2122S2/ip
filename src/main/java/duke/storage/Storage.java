@@ -46,6 +46,7 @@ public class Storage {
      * Save current task list into a text file
      *
      * @param tasks the list of tasks
+     * @throws DukeException if TaskList instance from user is invalid
      */
     public void saveData(TaskList tasks) {
         try {
@@ -80,6 +81,7 @@ public class Storage {
      * Loads all tasks in text file into a new TaskList instance
      *
      * @return the list of tasks from the saved text file
+     * @throws DukeException if unable to parse file into TaskList
      */
     public ArrayList<Task> loadData() {
         TaskList taskList = new TaskList();

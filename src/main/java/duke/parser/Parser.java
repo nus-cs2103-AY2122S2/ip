@@ -14,6 +14,7 @@ public class Parser {
      * @param commandType the type of task
      * @param userInput the input from the user
      * @param taskList the list of tasks
+     * @throws DukeException if input from user is invalid
      */
     public static void processUserInput(CommandType commandType, String userInput,
                                         TaskList taskList) throws DukeException {

@@ -12,6 +12,7 @@ public class TaskValidator {
      * Validate user input date and converts string to LocalDate if true
      *
      * @param date the string date input from user
+     * @throws DukeException if date input from user is invalid
      */
     public static LocalDate convertDate(final String date) throws DukeException {
         boolean valid = false;
@@ -34,6 +35,7 @@ public class TaskValidator {
      * @param userInput the input from user
      *
      * @return the validated ToDo description
+     * @throws DukeException if ToDo input from user is invalid
      */
     public static String validateToDo(String userInput) {
         String description = "";
@@ -63,6 +65,7 @@ public class TaskValidator {
      * @param userInput the input from user
      *
      * @return the validated deadline information
+     * @throws DukeException if Deadline input from user is invalid
      */
     public static String[] validateDeadline(String userInput) {
         String[] information = new String[2];
@@ -104,6 +107,7 @@ public class TaskValidator {
      * @param userInput the input from user
      *
      * @return the validated event information
+     * @throws DukeException if Event input from user is invalid
      */
     public static String[] validateEvent(String userInput) {
         String[] information = new String[2];
