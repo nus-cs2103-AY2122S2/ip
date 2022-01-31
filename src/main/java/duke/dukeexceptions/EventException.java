@@ -1,4 +1,4 @@
-package duke.DukeExceptions;
+package duke.dukeexceptions;
 //solution below adapted from https://stackify.com/specify-handle-exceptions-java/
 
 /**

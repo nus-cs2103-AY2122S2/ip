@@ -1,10 +1,10 @@
-package duke.Command;
+package duke.command;
 
 import duke.*;
-import duke.DukeExceptions.DukeException;
-import duke.DukeExceptions.TodoException;
-import duke.Task.Task;
-import duke.Task.Todo;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.TodoException;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.IOException;
 

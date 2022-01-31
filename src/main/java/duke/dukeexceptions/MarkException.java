@@ -1,4 +1,4 @@
-package duke.DukeExceptions;
+package duke.dukeexceptions;
 
 /**
  * Exception class handling mark task exception

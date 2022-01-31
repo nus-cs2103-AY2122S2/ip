@@ -1,8 +1,8 @@
 package duke;
 
-import duke.DukeExceptions.DukeException;
-import duke.Parser.Parser;
-import duke.Command.Command;
+import duke.dukeexceptions.DukeException;
+import duke.parser.Parser;
+import duke.command.Command;
 
 import java.io.IOException;
 import java.util.Scanner;

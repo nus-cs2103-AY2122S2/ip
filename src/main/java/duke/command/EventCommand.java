@@ -1,11 +1,11 @@
-package duke.Command;
+package duke.command;
 
 
 import duke.*;
-import duke.DukeExceptions.DukeException;
-import duke.DukeExceptions.EventException;
-import duke.Task.Event;
-import duke.Task.Task;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.EventException;
+import duke.task.Event;
+import duke.task.Task;
 
 import java.io.IOException;
 

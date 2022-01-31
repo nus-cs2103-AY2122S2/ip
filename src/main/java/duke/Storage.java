@@ -1,8 +1,8 @@
 package duke;
-import duke.Task.Deadline;
-import duke.Task.Event;
-import duke.Task.Task;
-import duke.Task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.*;
 import java.util.ArrayList;

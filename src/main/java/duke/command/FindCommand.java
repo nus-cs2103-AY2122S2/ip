@@ -1,6 +1,6 @@
-package duke.Command;
+package duke.command;
 
-import duke.DukeExceptions.DukeException;
+import duke.dukeexceptions.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;

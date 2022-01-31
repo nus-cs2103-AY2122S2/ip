@@ -1,10 +1,10 @@
-package duke.Command;
+package duke.command;
 
 import duke.*;
-import duke.DukeExceptions.DeadlineException;
-import duke.DukeExceptions.DukeException;
-import duke.Task.Deadline;
-import duke.Task.Task;
+import duke.dukeexceptions.DeadlineException;
+import duke.dukeexceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
 
 import java.io.IOException;
 
