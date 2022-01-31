@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import exception.JarvisException;
-import ui.Ui;
 
 public class TaskList {
     private final List<Task> tasks;
