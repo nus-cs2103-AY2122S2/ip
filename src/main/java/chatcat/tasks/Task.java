@@ -49,6 +49,15 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns a true if task contains a keyword, else returns false.
+     *
+     * @return true if task contains a keyword, else returns false.
+     */
+    public boolean containsKeyWord(String str) {
+        return task.contains(str);
+    }
+
+    /**
      * Returns a representation in string of {@code Task} task.
      *
      * @return a representation in string of {@code Task} task.
