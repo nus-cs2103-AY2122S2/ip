@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Task {
-    protected String description;
+    protected String description = "";
     protected boolean isDone;
 
     public Task(String description) {
@@ -16,6 +16,10 @@ public class Task {
 
     public void markIncomplete() {
         this.isDone = false;
+    }
+
+    public boolean isEmpty() {
+        return description.equals("");
     }
 
     public String getStatusIcon() {

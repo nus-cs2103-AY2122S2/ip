@@ -29,8 +29,8 @@ public class TaskWithDateTime extends Task{
 
                 temp = temp.replace(m.group(0), "");
             } catch (DateTimeException e) {
-                System.out.println("The date specified is invalid and has automatically been changed to today.");
-                this.dateTime = dateTime.replace(m.group(0), LocalDate.now().toString());
+                System.out.println("The date specified is invalid and has automatically been changed to tomorrow.");
+                this.dateTime = dateTime.replace(m.group(0), LocalDate.now().plus(1, ChronoUnit.DAYS).toString());
                 temp = temp.replace(m.group(0), "");
             }
 
