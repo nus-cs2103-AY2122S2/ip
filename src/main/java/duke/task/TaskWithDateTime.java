@@ -11,10 +11,7 @@ import java.time.format.DateTimeParseException;
 public abstract class TaskWithDateTime extends Task {
     private String dateTimeInput;
     private String dateInput;
-    private String timeInput;
-
     private LocalDate date;
-    private LocalTime time;
 
     /* DateTime of the task to be printed */
     private String dateTimeOutput;
@@ -54,6 +51,8 @@ public abstract class TaskWithDateTime extends Task {
     private void processDateTimeInput() {
         String[] dateTimeInputParts = dateTimeInput.split("\\s+", 2);
 
+        String timeInput;
+
         if (dateTimeInputParts.length == 2) {
             dateInput = dateTimeInputParts[0].trim();
             timeInput = dateTimeInputParts[1].trim();
@@ -72,7 +71,7 @@ public abstract class TaskWithDateTime extends Task {
         date = processDateInput(dateInput);
 
         // Process time input
-        time = isTimeInputProper(timeInput) ? processTimeInput(timeInput) : null;
+        LocalTime time = isTimeInputProper(timeInput) ? processTimeInput(timeInput) : null;
 
         // Generate dateTime output
         dateTimeOutput = generateDateTimeOutput(date, dateInput, time, timeInput, isTimeInputProper(timeInput));
@@ -150,12 +149,14 @@ public abstract class TaskWithDateTime extends Task {
                                           String timeInput, boolean isTimeInputProper) {
         String dateTimeOutput = "";
 
+        // Put date into String for output
         if (date != null) {
             dateTimeOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
             dateTimeOutput = dateInput;
         }
 
+        // Put time into String for output
         if (time != null) {
             dateTimeOutput += ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
         } else {
@@ -198,12 +199,7 @@ public abstract class TaskWithDateTime extends Task {
     public boolean isOnDate(String dateStr) {
         try {
             LocalDate dateToSearch = LocalDate.parse(dateStr);
-
-            if (date != null) {
-                return date.equals(dateToSearch);
-            } else {
-                return dateInput.equals(dateStr);
-            }
+            return date != null ? date.equals(dateToSearch) : dateInput.equals(dateStr);
         } catch (DateTimeParseException e) {
             return dateInput.equals(dateStr);
         }

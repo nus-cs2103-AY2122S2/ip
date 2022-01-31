@@ -66,10 +66,10 @@ public class TaskList {
     }
 
     /**
-     * Checks if the task list has filtered tasks, i.e., List of filtered
-     * tasks is not empty.
+     * Checks if the task list has filtered tasks, i.e., List of filtered tasks
+     * is not empty.
      *
-     * @return Flag to indicate if the List of filteredTasks is not empty
+     * @return True if the List of filteredTasks is not empty, false otherwise
      */
     public boolean hasFilter() {
         return !filteredTasks.isEmpty();
@@ -108,9 +108,9 @@ public class TaskList {
     /**
      * Sets the filtered tasks with tasks that occurs on the specified date.
      *
-     * This will initialise List of filteredTasks with the tasks that
-     * occurs on the specified date, filterCommandType as Print CommandType
-     * and filterInfo as the specified date.
+     * This will initialise List of filteredTasks with the tasks that occurs
+     * on the specified date, filterCommandType as Print CommandType and
+     * filterInfo as the specified date.
      *
      * @param dateStr Specified date
      */
@@ -124,7 +124,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the ToDo task to the list.
+     * Adds the ToDo task to the List of tasks.
      *
      * @param taskDescription Description of the ToDo task to be added
      * @return The ToDo task that was added
@@ -136,7 +136,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the Deadline task to the list.
+     * Adds the Deadline task to the List of tasks.
      *
      * @param taskDescription Description of the Deadline task to be added
      * @param taskDateTime Date/time of the Deadline task to be added
@@ -149,7 +149,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the Event task to the list.
+     * Adds the Event task to the List of tasks.
      *
      * @param taskDescription Description of the Event task to be added
      * @param taskDateTime Date/time of the Event task to be added
@@ -162,49 +162,56 @@ public class TaskList {
     }
 
     /**
-     * Adds the task to the list.
+     * Adds the task to the List of tasks.
      *
      * @param task Task to be added
      */
     public void addTask(Task task) {
         tasks.add(task);
+
+        // Reset the List of filteredTasks when a new task is added to
+        // the List of tasks
+        resetFilteredTasks();
     }
 
     /**
      * Marks the task as done based on the corresponding task number
      * in the List of tasks or List of filtered tasks.
      *
-     * @param taskNum Task number of the task to be marked as done
+     * @param taskNum Corresponding task number of the task in the
+     *                respective list to be marked as done
      * @return The task that was marked as done
      */
     public Task markDone(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         task.setDone();
         return task;
     }
 
     /**
-     * Marks the task as not done yet based on the corresponding task number
-     * in the List of tasks or List of filtered tasks.
+     * Marks the task as not done yet based on the corresponding
+     * task number in the List of tasks or List of filtered tasks.
      *
-     * @param taskNum Task number of the task to be marked as not done yet
+     * @param taskNum Corresponding task number of the task in the
+     *                respective list to be marked as not done yet
      * @return The task that was marked as not done yet
      */
     public Task markNotDone(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         task.setNotDone();
         return task;
     }
 
     /**
-     * Deletes the task based on the corresponding task number
-     * in the List of tasks or List of filtered tasks.
+     * Deletes the task based on the corresponding task number in
+     * the List of tasks or List of filtered tasks.
      *
-     * @param taskNum Task number of the task to be deleted
+     * @param taskNum Corresponding task number of the task in the
+     *                respective list to be deleted
      * @return The task that was deleted
      */
     public Task deleteTask(int taskNum) {
-        Task task = !hasFilter() ? getTask(taskNum - 1) : getFilteredTask(taskNum - 1);
+        Task task = getTaskBasedOnFilterAndTaskNum(taskNum);
         tasks.remove(task);
 
         if (hasFilter()) {
@@ -212,6 +219,20 @@ public class TaskList {
         }
 
         return task;
+    }
+
+    /**
+     * Returns the task based on the corresponding task number in
+     * the List of tasks or List of filtered tasks.
+     *
+     * @param taskNum Corresponding task number of the task in the
+     *                respective list
+     * @return The task that was retrieved
+     */
+    public Task getTaskBasedOnFilterAndTaskNum(int taskNum) {
+        return !hasFilter()
+                ? getTask(taskNum - 1)
+                : getFilteredTask(taskNum - 1);
     }
 
     /**

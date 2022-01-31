@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -52,11 +53,11 @@ public class Storage {
             hasDirectory = directory.mkdir();
         }
 
-        if (hasDirectory) {
-            return directory;
-        } else {
-            throw new DukeException("\t" + "Unable to initialise directory");
+        if (!hasDirectory) {
+            throw new DukeException("\t" + ErrorMessage.ERROR_UNABLE_INITIALISE_DIRECTORY);
         }
+
+        return directory;
     }
 
     /**
@@ -76,11 +77,11 @@ public class Storage {
             hasFile = file.createNewFile();
         }
 
-        if (hasFile) {
-            return file;
-        } else {
-            throw new IOException("\t" + "Unable to initialise file");
+        if (!hasFile) {
+            throw new IOException("\t" + ErrorMessage.ERROR_UNABLE_INITIALISE_FILE);
         }
+
+        return file;
     }
 
     /**
@@ -136,7 +137,7 @@ public class Storage {
                 // Error detection for any invalid type of tasks found in the
                 // storage file. This should not happen since the user is only
                 // allowed to create todo [T], deadline [D] and event [E] tasks.
-                throw new DukeException("INVALID TYPE OF TASK FOUND");
+                throw new DukeException(ErrorMessage.ERROR_INVALID_TYPE_OF_TASK.toString());
             }
         }
 
