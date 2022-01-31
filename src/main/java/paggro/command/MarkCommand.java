@@ -25,10 +25,11 @@ public class MarkCommand extends Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      * @throws PaggroException
      */
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
+    public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         int index;
         try {
             index = Integer.parseInt(this.getParameters());
@@ -40,12 +41,13 @@ public class MarkCommand extends Command {
         }
         lister.mark(index);
         Task task = lister.getTasks().get(index - 1);
-        ui.showMarked(task);
 
         try {
             storage.markInStorage(index, task);
         } catch (IOException e) {
             throw new PaggroException("    Could not mark in paggro.txt =.=");
         }
+
+        return ui.showMarked(task);
     }
 }

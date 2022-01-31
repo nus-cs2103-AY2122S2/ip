@@ -30,10 +30,11 @@ public class DeadlineCommand extends Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      * @throws PaggroException
      */
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
+    public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         String[] desArr = this.getParameters().split(" /", 2);
         Task task;
         try {
@@ -72,7 +73,6 @@ public class DeadlineCommand extends Command {
             throw new PaggroException("    Could not add to paggro.txt =.=");
         }
 
-        ui.showAdded(task);
-        ui.showNumber(lister.getTasks().size());
+        return ui.showAdded(task) + "\n" + ui.showNumber(lister.getTasks().size());
     }
 }

@@ -50,7 +50,8 @@ public abstract class Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      * @throws PaggroException
      */
-    public abstract void execute(Lister lister, Ui ui, Storage storage) throws PaggroException;
+    public abstract String execute(Lister lister, Ui ui, Storage storage) throws PaggroException;
 }

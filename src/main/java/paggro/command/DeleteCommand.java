@@ -28,10 +28,11 @@ public class DeleteCommand extends Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      * @throws PaggroException
      */
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
+    public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         int index;
         try {
             index = Integer.parseInt(this.getParameters());
@@ -62,14 +63,13 @@ public class DeleteCommand extends Command {
         }
 
         lister.delete(index);
-        ui.showDeleted(task);
-        ui.showNumber(lister.getTasks().size());
-
 
         try {
             storage.deleteFromStorage(index);
         } catch (IOException e) {
             throw new PaggroException("    Could not delete in paggro.txt =.=");
         }
+
+        return ui.showDeleted(task) + "\n" + ui.showNumber(lister.getTasks().size());
     }
 }

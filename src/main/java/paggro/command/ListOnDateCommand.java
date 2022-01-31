@@ -25,17 +25,18 @@ public class ListOnDateCommand extends Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      * @throws PaggroException
      */
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
+    public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         try {
             LocalDate date = LocalDate.parse(this.getParameters());
             if (!lister.getDateMap().containsKey(date)) {
-                ui.showEmptyDate();
+                return ui.showEmptyDate();
             } else {
                 NotableDate nDate = lister.getDateMap().get(date);
-                ui.showList(nDate.getTasks());
+                return ui.showList(nDate.getTasks());
             }
         } catch (DateTimeParseException e) {
             throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n"

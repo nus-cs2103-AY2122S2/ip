@@ -20,110 +20,109 @@ public class Ui {
     }
 
     /**
-     * Prints out welcome message.
+     * Returns the goodbye message.
+     * @return String of the message.
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println("    Hi I'm PaggroBot =.=\n    What do you want? =.=");
-        showLine();
+    public String showGoodbye() {
+        return "    Oh finally. Please don't come back anytime soon. =.=\n";
     }
 
     /**
-     * Prints out goodbye message.
+     * Returns a line separator.
+     * @return String of line.
      */
-    public void showGoodbye() {
-        System.out.println("    Oh finally. Please don't come back anytime soon. =.=");
+    public String showLine() {
+        return "   ____________________________________\n";
     }
 
     /**
-     * Prints out a line separator.
-     */
-    public void showLine() {
-        System.out.println("   ________________________________________");
-    }
-
-    /**
-     * Returns the user input as a String.
-     * @return String of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints out given error message.
+     * Returns the given error message.
      * @param msg The error message to be printed.
+     * @return String of the message.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return msg + "\n";
     }
 
     /**
-     * Prints out each task in the given list of tasks.
+     * Returns a String of each task in the given list of tasks.
      * @param tasks The given list of tasks.
+     * @return String of the tasks.
      */
-    public void showList(ArrayList<Task> tasks) {
+    public String showList(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            System.out.println("    Nothing to look at here... =.=");
+            return "    Nothing to look at here... =.=";
         }
+        StringBuilder list = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.isDone()) {
-                System.out.println("    " + Integer.toString(i + 1) + "." + task);
+                list.append("    " + Integer.toString(i + 1) + "." + task + "\n");
             } else {
-                System.out.println("    " + Integer.toString(i + 1) + "." + task);
+                list.append("    " + Integer.toString(i + 1) + "." + task + "\n");
             }
         }
+        return list.toString();
     }
 
     /**
-     * Prints out empty date message.
+     * Returns the empty date message.
+     * @return String of the message.
      */
-    public void showEmptyDate() {
-        System.out.println("    Nothing happening on this date... =.=");
+    public String showEmptyDate() {
+        return "    Nothing happening on this date... =.=\n";
     }
 
     /**
-     * Prints out marked task message.
+     * Returns the marked task message.
      * @param task Task that was marked.
+     * @return String of the message.
      */
-    public void showMarked(Task task) {
-        System.out.println("    You've finished this task. Good for you... =.=\n      " + task);
+    public String showMarked(Task task) {
+        return "    You've finished this task. Good for you... =.=\n      "
+                + task + "\n";
     }
 
     /**
-     * Prints out unmarked task message.
+     * Returns the unmarked task message.
      * @param task Task that was unmarked.
+     * @return String of the message.
      */
-    public void showUnmarked(Task task) {
-        System.out.println("    Marked undone. Stop slacking off... =.=\n      " + task);
+    public String showUnmarked(Task task) {
+        return "    Marked undone. Stop slacking off... =.=\n      "
+                + task + "\n";
     }
 
     /**
-     * Prints out deleted task message.
+     * Returns the deleted task message.
      * @param task Task that was deleted.
+     * @return String of the message.
      */
-    public void showDeleted(Task task) {
-        System.out.println("    Fine. I've removed this task:\n      " + task.toString());
+    public String showDeleted(Task task) {
+        return "    Fine. I've removed this task:\n      "
+                + task.toString() + "\n";
     }
 
     /**
-     * Prints out added task message.
-     * @param task Task that was added
+     * Returns the added task message.
+     * @param task Task that was added.
+     * @return String of the message.
      */
-    public void showAdded(Task task) {
-        System.out.println("    Fine I'll add this task in:\n      " + task);
+    public String showAdded(Task task) {
+        return "    Fine I'll add this task in:\n      "
+                + task + "\n";
     }
 
     /**
-     * Prints out given size of task list.
+     * Returns the given size of task list.
      * @param size Size of the task list.
+     * @return String of the message.
      */
-    public void showNumber(int size) {
+    public String showNumber(int size) {
         if (size == 1) {
-            System.out.println("    Now you have 1 task in the list. =.=");
+            return "    Now you have 1 task in the list. =.=\n";
         } else {
-            System.out.println("    Now you have " + size + " tasks in the list. =.=");
+            return "    Now you have " + size + " tasks in the list. =.=\n";
         }
     }
 

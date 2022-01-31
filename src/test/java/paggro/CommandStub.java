@@ -11,7 +11,7 @@ public class CommandStub extends Command{
     }
 
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) {
-        return;
+    public String execute(Lister lister, Ui ui, Storage storage) {
+        return "";
     }
 }

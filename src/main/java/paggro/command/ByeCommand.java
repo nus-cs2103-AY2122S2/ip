@@ -20,9 +20,10 @@ public class ByeCommand extends Command {
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.
+     * @return String of response to the command.
      */
     @Override
-    public void execute(Lister lister, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(Lister lister, Ui ui, Storage storage) {
+        return ui.showGoodbye();
     }
 }

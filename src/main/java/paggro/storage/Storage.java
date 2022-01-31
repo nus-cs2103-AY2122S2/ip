@@ -147,7 +147,7 @@ public class Storage {
      * @throws IOException
      */
     public void deleteFromStorage(int lineNum) throws IOException {
-        File updated = new File("../../../data/updated_paggro.txt");
+        File updated = new File("./data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
         FileWriter fw = new FileWriter(updated);
@@ -161,8 +161,8 @@ public class Storage {
         }
         fw.close();
         Files.delete(Paths.get(filePath));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
-        Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
+        Files.delete(Paths.get("./data/updated_paggro.txt"));
     }
 
     /**
@@ -172,7 +172,7 @@ public class Storage {
      * @throws IOException
      */
     public void markInStorage(int lineNum, Task task) throws IOException {
-        File updated = new File("../../../data/updated_paggro.txt");
+        File updated = new File("./data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
         FileWriter fw = new FileWriter(updated);
@@ -188,8 +188,8 @@ public class Storage {
         }
         fw.close();
         Files.delete(Paths.get(filePath));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get(filePath));
-        Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
+        Files.delete(Paths.get("./data/updated_paggro.txt"));
     }
 
     /**
@@ -199,7 +199,7 @@ public class Storage {
      * @throws IOException
      */
     public void unmarkInStorage(int lineNum, Task task) throws IOException {
-        File updated = new File("../../../data/updated_paggro.txt");
+        File updated = new File("./data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
         updated.createNewFile();
         FileWriter fw = new FileWriter(updated);
@@ -214,8 +214,8 @@ public class Storage {
             j++;
         }
         fw.close();
-        Files.delete(Paths.get("../../../data/paggro.txt"));
-        Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
-        Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        Files.delete(Paths.get(filePath));
+        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
+        Files.delete(Paths.get("./data/updated_paggro.txt"));
     }
 }
