@@ -14,33 +14,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    public String exportData(List<String> storageStrings, String taskListString) throws IOException {
+    public String exportData(List<String> storageStrings, String taskListString) {
         String response = "The following tasks will be saved: \n" + taskListString;
         Path dir = Paths.get(Constants.DIR_PATH);
         Path store = Paths.get(Constants.STORAGE_PATH);
-        if (!Files.exists(dir)) {
-            Files.createDirectory(dir);
-            Files.createFile(store);
-        } else if (!Files.exists(store)) {
-            Files.createFile(store);
+
+        try {
+            if (!Files.exists(dir)) {
+                Files.createDirectory(dir);
+                Files.createFile(store);
+            } else if (!Files.exists(store)) {
+                Files.createFile(store);
+            }
+
+            FileWriter writer = new FileWriter(Constants.STORAGE_PATH);
+            for (String task : storageStrings) {
+                writer.write(task);
+            }
+            writer.close();
+            return response;
+        } catch (IOException e) {
+            return e.getMessage();
         }
 
-        FileWriter writer = new FileWriter(Constants.STORAGE_PATH);
-        for (String task : storageStrings) {
-            writer.write(task);
-        }
-        writer.close();
-        return response;
     }
 
-    public List<String> importData() throws FileNotFoundException {
+    public List<String> importData() {
         List<String> storageStrings = new ArrayList<>();
         if (Files.exists(Paths.get(Constants.STORAGE_PATH))) {
             File f = new File(Constants.STORAGE_PATH);
-            Scanner fileScanner = new Scanner(f);
-            while(fileScanner.hasNextLine()) {
-                storageStrings.add(fileScanner.nextLine());
+
+            try {
+                Scanner fileScanner = new Scanner(f);
+                while(fileScanner.hasNextLine()) {
+                    storageStrings.add(fileScanner.nextLine());
+                }
+            } catch(FileNotFoundException e) {
+                return storageStrings;
             }
+
         }
         return storageStrings;
     }
