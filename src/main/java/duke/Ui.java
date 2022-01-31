@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Deals with interactions with User and passes accordingly to relevant classes
  *
@@ -9,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * A divider for design purposes
+     * A divider for design purposes (ONLY FOR TEXT-BASED OPERATIONS)
      */
     private static final String DIVIDER = "\n____________________________________________________________\n";
 
@@ -27,57 +25,41 @@ public class Ui {
      *
      * @param tasks   the list of tasks
      * @param storage the storage instance
+     * @param input   the user input
+     * @return the chatbot response
      */
-    public void userInput(TaskList tasks, Storage storage) {
-        Scanner sc = new Scanner(System.in);
-        String input = "";
-
-        while (!input.equals("bye")) {
-            input = sc.nextLine();
-
-            try {
-                String message = parser.processMessage(input, tasks, storage);
-
-                if (message == null) {
-                    break;
-                } else {
-                    showMessage(message);
-                }
-            } catch (DukeException e) {
-                showLoadingError(e);
-            }
+    public String userInput(TaskList tasks, Storage storage, String input) {
+        if (input.equals("bye")) {
+            return "Farewell then!";
         }
-    }
 
-    /**
-     * Outputs a message to the user in a particular design (enclosed with dividers)
-     *
-     * @param message The message string to be shown to the user
-     */
-    public void showMessage(String message) {
-        System.out.println(DIVIDER + message + DIVIDER);
+        try {
+            String message = parser.processMessage(input, tasks, storage);
+
+            if (message == null) {
+                return "";
+            } else {
+                return message;
+            }
+        } catch (DukeException e) {
+            return showLoadingError(e);
+        }
     }
 
     /**
      * Outputs an error message during runtime.
      *
      * @param e The exception that was thrown
+     * @return the error message
      */
-    public void showLoadingError(Exception e) {
-        showMessage(e.getMessage());
+    public String showLoadingError(Exception e) {
+        return e.getMessage();
     }
 
     /**
      * Returns the message the user will be shown upon starting the program.
      */
     public void showWelcomeMessage() {
-        showMessage("Why hello there! My name is Wensleydale.\nWhat do you need?");
-    }
-
-    /**
-     * Retruns the message the user will be shown upon exiting the program
-     */
-    public void showFarewellMessage() {
-        showMessage("Farewell then!");
+        //getMessage("Why hello there! My name is Wensleydale.\nWhat do you need?");
     }
 }
