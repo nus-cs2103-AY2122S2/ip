@@ -29,6 +29,13 @@ public class FindCommand extends Command {
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage) throws
             MissingInputException {
+        String out = this.response(ui, storage);
+        ui.sandwichAndPrint(out);
+    }
+
+    @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage) throws
+            MissingInputException {
         // validity check
         if ((this.text.length() < 1) || this.text.split(" ").length == 0) {
             throw new MissingInputException();
@@ -36,7 +43,7 @@ public class FindCommand extends Command {
         // do
         String out = "Here are the matching tasks, sir:\n";
         out += storage.find(this.text);
-        ui.sandwichAndPrint(out);
+        return out;
     }
 
     @Override

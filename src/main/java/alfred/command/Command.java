@@ -1,6 +1,7 @@
 package alfred.command;
 
 
+import alfred.Alfred;
 import alfred.exceptions.AlfredException;
 import alfred.exceptions.InvalidInputException;
 import alfred.storage.AlfredStorage;
@@ -15,4 +16,6 @@ public abstract class Command {
             AlfredException;
 
     public abstract boolean isExit();
+
+    public abstract String response(AlfredUserInterface ui, AlfredStorage storage) throws AlfredException;
 }

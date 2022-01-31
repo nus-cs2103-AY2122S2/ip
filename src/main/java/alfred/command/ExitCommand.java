@@ -22,6 +22,11 @@ public class ExitCommand extends Command {
     }
 
     @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage) {
+        return ui.getByeMessage();
+    }
+
+    @Override
     public boolean isExit() {
         return true;
     }

@@ -1,5 +1,6 @@
 package alfred.command;
 
+import alfred.Alfred;
 import alfred.exceptions.MissingInputException;
 import alfred.storage.AlfredStorage;
 import alfred.task.Task;
@@ -37,12 +38,25 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage)
             throws MissingInputException {
+        String out = this.response(ui, storage);
+        ui.sandwichAndPrint(out);
+    }
+
+    @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage) throws MissingInputException {
+        // validity check
         if ((this.description.length() < 1) || this.description.split(" ").length == 0) {
             throw new MissingInputException();
         }
         // modify data state
         Task todo = new ToDo(this.description);
-        storage.addTask(todo, ui);
+        storage.addTask(todo);
+
+        // response
+        String out = "Yes sir, I've added this task.\n";
+        out += todo.toString() + "\n";
+        out += storage.summarizeList();
+        return out;
     }
 
     @Override

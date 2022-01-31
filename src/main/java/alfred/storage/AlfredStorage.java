@@ -75,7 +75,7 @@ public class AlfredStorage {
      * @param taskId Integer as 0-indexed key.
      * @throws InvalidIndexException if index is out of bounds.
      */
-    public void deleteTasK(int taskId) throws InvalidIndexException {
+    public void deleteTask(int taskId) throws InvalidIndexException {
         this.checkValidListIndex(taskId);
         this.taskList.remove(taskId);
         this.saveToFile();
@@ -83,18 +83,34 @@ public class AlfredStorage {
 
     /**
      * Updates the internal data state to add a Task object
-     * to the list.
+     * to the list and calls the UI to print a response.
      *
      * @param task Task object.
      * @param ui   AlfredInterface object used by Alfred to handle inputs
      *             and outputs with the user.
      */
-    public void addTask(Task task, AlfredUserInterface ui) {
+    public void addTaskAndPrint(Task task, AlfredUserInterface ui) {
         this.taskList.add(task);
         String out = "Yes sir, I've added this task.\n";
         out += task.toString() + "\n";
         out += this.summarizeList();
         ui.sandwichAndPrint(out);
+        this.saveToFile();
+    }
+
+    /**
+     * Updates the internal data state to add a Task object
+     * to the list and returns the response.
+     *
+     * @param task Task object.
+     * @param ui   AlfredInterface object used by Alfred to handle inputs
+     *             and outputs with the user.
+     */
+    public void addTask(Task task) {
+        this.taskList.add(task);
+        String out = "Yes sir, I've added this task.\n";
+        out += task.toString() + "\n";
+        out += this.summarizeList();
         this.saveToFile();
     }
 
@@ -148,7 +164,7 @@ public class AlfredStorage {
         }
     }
 
-    private String summarizeList() {
+    public String summarizeList() {
         return "Now you have " + this.taskList.size() + " task(s) in the your list.";
     }
 

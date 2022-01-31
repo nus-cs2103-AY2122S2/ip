@@ -1,5 +1,6 @@
 package alfred.command;
 
+import alfred.Alfred;
 import alfred.storage.AlfredStorage;
 import alfred.ui.AlfredUserInterface;
 
@@ -17,10 +18,16 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage) {
+        String out = this.response(ui, storage);
+        ui.sandwichAndPrint(out);
+    }
+
+    @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage) {
         String out = "";
         out += "Sir, here are the things you need to do:\n";
         out += storage.listToString();
-        ui.sandwichAndPrint(out);
+        return out;
     }
 
     @Override

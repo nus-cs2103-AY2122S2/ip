@@ -1,5 +1,6 @@
 package alfred.command;
 
+import alfred.Alfred;
 import alfred.exceptions.InvalidIndexException;
 import alfred.exceptions.InvalidInputException;
 import alfred.storage.AlfredStorage;
@@ -35,6 +36,14 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage) throws InvalidInputException,
             InvalidIndexException {
+        String out = this.response(ui, storage);
+        ui.sandwichAndPrint(out);
+    }
+
+    @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage)
+            throws InvalidInputException,
+            InvalidIndexException {
         // check only two arguments
         if (arguments.length != 2) {
             throw new InvalidInputException();
@@ -49,10 +58,11 @@ public class UnmarkCommand extends Command {
         // modify in storage
         storage.unmarkTask(taskId);
 
-        // print out
+        // response
         String out = "I see, no worries sir. I've marked this as to-be-done.\n";
         out += storage.taskToString(taskId);
-        ui.sandwichAndPrint(out);
+
+        return out;
     }
 
     @Override

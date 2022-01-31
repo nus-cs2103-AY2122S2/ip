@@ -26,6 +26,16 @@ public class AlfredUserInterface {
         io = new Scanner(System.in);
     }
 
+    public String getByeMessage() {
+        return this.BYE;
+    }
+
+    public String getGreetingMessage() {
+        return this.GREETING;
+    }
+
+
+
     private static String line() {
         String out = "";
         for (int i = 0; i < AlfredUserInterface.BREAK_CHAR_LENGTH; i++) {

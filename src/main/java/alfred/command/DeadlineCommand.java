@@ -43,6 +43,14 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidDateTimeException, InvalidInputException {
+        String response = this.response(ui, storage);
+        ui.sandwichAndPrint(response);
+
+    }
+
+    @Override
+    public String response(AlfredUserInterface ui, AlfredStorage storage)
+            throws InvalidDateTimeException, InvalidInputException {
         // check validity of data
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
@@ -54,7 +62,13 @@ public class DeadlineCommand extends Command {
         }
         // modify data state
         Task event = new Deadline(this.arguments[0], this.arguments[1]);
-        storage.addTask(event, ui);
+        storage.addTask(event);
+
+        // response
+        String out = "Yes sir, I've added this task.\n";
+        out += event.toString() + "\n";
+        out += storage.summarizeList();
+        return out;
     }
 
     @Override
