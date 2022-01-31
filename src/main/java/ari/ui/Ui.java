@@ -6,8 +6,6 @@ import java.util.Scanner;
  * Deals with the interactions with the user
  */
 public class Ui {
-    private Scanner sc;
-
     private static final String LINE_BREAK = "____________________________________________________________";
     private static final String LOGO = "             ___      .______       __         \n"
             + "            /   \\     |   _  \\     |  |      \n"
@@ -18,6 +16,8 @@ public class Ui {
             + "\n";
     private static final String WELCOME_MESSAGE = "Dear Master, I am Ari, your Personal Assistant Chatbot";
     private static final String WELCOME_QUESTION = "What can I do for you?";
+
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
