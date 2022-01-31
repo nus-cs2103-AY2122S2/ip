@@ -1,16 +1,11 @@
 package commands;
 
-import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 import storage.Storage;
 import tasks.TaskList;
-import tasks.ToDo;
 import ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AddCommandTest {
 	AddCommand cmd;
@@ -24,7 +19,7 @@ public class AddCommandTest {
 	@Test
 	void doesNotEndToDo() {
 		cmd = new AddCommand("todo", "return book");
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test
@@ -36,7 +31,7 @@ public class AddCommandTest {
 	@Test
 	void doesNotEndEvent() {
 		cmd = new AddCommand("event", "return book /at 2/2/2022 1200");
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test
@@ -48,7 +43,7 @@ public class AddCommandTest {
 	@Test
 	void doesNotEndDeadline() {
 		cmd = new AddCommand("deadline", "return book /by 2/2/2022 1200");
-		assertTrue(!cmd.endsProgram());
+		assertFalse(cmd.endsProgram());
 	}
 
 	@Test

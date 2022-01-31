@@ -15,7 +15,7 @@ public abstract class Command {
 	 * Abstract method for the execution of command
 	 * @param tasks tasks list to be modified
 	 * @param ui to help with printing of messages
-	 * @param storage To deal with saving of tasklist
+	 * @param storage To deal with saving of task list
 	 */
 	public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
@@ -26,7 +26,7 @@ public abstract class Command {
 	public abstract boolean endsProgram();
 
 	/**
-	 * Abstract method to get the modified tasklist after command execution
+	 * Abstract method to get the modified task list after command execution
 	 * @return TaskList
 	 */
 	public abstract TaskList getList();

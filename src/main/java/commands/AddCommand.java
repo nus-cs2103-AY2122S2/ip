@@ -5,15 +5,17 @@ import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
+
 import ui.Ui;
+
 import storage.Storage;
 
 /**
- * Class which handles the adding of commands to tasklist
+ * Class which handles the adding of commands to task list
  */
 public class AddCommand extends Command {
-	private String input;
-	private String type;
+	private final String input;
+	private final String type;
 	private TaskList tasks;
 	private Task added;
 
@@ -24,7 +26,7 @@ public class AddCommand extends Command {
 	}
 
 	/**
-	 * Method to get the modified tasklist after command execution
+	 * Method to get the modified task list after command execution
 	 * @return TaskList
 	 */
 	@Override
@@ -46,7 +48,7 @@ public class AddCommand extends Command {
 	 * Adds respective task type depending on input
 	 * @param tasks tasks list to be modified
 	 * @param ui to help with printing of messages
-	 * @param storage To deal with saving of tasklist
+	 * @param storage To deal with saving of task list
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {

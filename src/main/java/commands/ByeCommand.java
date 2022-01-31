@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
 	private TaskList tasks;
 
 	/**
-	 * Method to get the modified tasklist after command execution
+	 * Method to get the modified task list after command execution
 	 * @return TaskList
 	 */
 	@Override
@@ -35,7 +35,7 @@ public class ByeCommand extends Command {
 	 * Prints bye message and saves the tasks created from the program loop to a text file
 	 * @param tasks tasks list to be modified
 	 * @param ui to help with printing of messages
-	 * @param storage To deal with saving of tasklist
+	 * @param storage To deal with saving of task list
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {

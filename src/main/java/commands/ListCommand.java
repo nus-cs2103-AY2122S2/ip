@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 	public ListCommand() {}
 
 	/**
-	 * Method to get the modified tasklist after command execution
+	 * Method to get the modified task list after command execution
 	 * @return TaskList
 	 */
 	@Override
@@ -32,10 +32,10 @@ public class ListCommand extends Command {
 
 	/**
 	 * Method to execute the list command
-	 * Lists out all tasks stored in the tasklist
+	 * Lists out all tasks stored in the task list
 	 * @param tasks tasks list to be modified
 	 * @param ui to help with printing of messages
-	 * @param storage To deal with saving of tasklist
+	 * @param storage To deal with saving of task list
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {

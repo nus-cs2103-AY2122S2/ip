@@ -43,7 +43,7 @@ public class Ui {
 	 * Prints out the input msg array in the correct format
 	 * @param msg Output or message to be printed
 	 */
-	public static void printFormatted(String[] msg) {
+	public void printFormatted(String[] msg) {
 		for (int i = 0; i < msg.length; i++) {
 			if (msg[i] != null) {
 				System.out.println(INDENT + msg[i]);

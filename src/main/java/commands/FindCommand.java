@@ -9,14 +9,14 @@ import ui.Ui;
  */
 public class FindCommand extends Command {
 	private TaskList tasks;
-	private String keyword;
+	private final String keyword;
 
 	public FindCommand(String keyword) {
 		this.keyword = keyword;
 	}
 
 	/**
-	 * Method to get the modified tasklist after command execution
+	 * Method to get the modified task list after command execution
 	 * @return TaskList
 	 */
 	@Override
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
 	 * Finds all tasks that contain the keyword
 	 * @param tasks tasks list to be modified
 	 * @param ui to help with printing of messages
-	 * @param storage To deal with saving of tasklist
+	 * @param storage To deal with saving of task list
 	 */
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
