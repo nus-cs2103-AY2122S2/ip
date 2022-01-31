@@ -16,9 +16,9 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    String filePath;
-    File file;
-    boolean isFileOpen = false;
+    private String filePath;
+    private File file;
+    private boolean isFileOpen = false;
 
     /**
      * Is a constructor for the instance of Storage. This also checks if the directory and file exists, if not
@@ -125,8 +125,8 @@ public class Storage {
      */
     public void rewriteTask(TaskList taskList) throws IOException {
         FileWriter rewriteWriter = new FileWriter(file, false);
-        for (Task task: taskList.taskArrayList) {
-            String toPrint = task.toString() + task.getStatus() +  task.getDescription();
+        for (Task task: taskList.getTaskArrayList()) {
+            String toPrint = task.toString() + task.getStatus() + task.getDescription();
             rewriteWriter.write(toPrint + "\n");
         }
 

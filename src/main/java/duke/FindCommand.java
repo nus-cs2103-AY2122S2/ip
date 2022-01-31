@@ -1,11 +1,8 @@
 package duke;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 public class FindCommand extends Command {
 
-    String taskToFind = null;
+    private String taskToFind = null;
 
     /**
      * Constructor for the command.

@@ -4,9 +4,9 @@ package duke;
  * Runs the command for user to delete a task in the list.
  */
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * This is a constructor to create a new command for the user.
@@ -28,8 +28,8 @@ public class DeleteCommand extends Command{
         String indentation = "    ";
         Task t = taskList.getTask(index);
         taskList.deleteTask(index);
-        String message = indentation + "Noted. I've removed this task: \n" +
-                indentation + "  " + t.toString() + t.getStatus() +  " " + t.getDescription();
+        String message = indentation + "Noted. I've removed this task: \n"
+                + indentation + "  " + t.toString() + t.getStatus() +  " " + t.getDescription();
         ui.outputMessage(message);
     }
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    Parser parser;
-    String line = "____________________________________________________________";
-    String indentation = "    ";
+    private Parser parser;
+    private String line = "____________________________________________________________";
+    private String indentation = "    ";
 
     /**
      * Constructor for the user interface, will print the logo of the program on the terminal.
@@ -25,9 +25,9 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println(indentation + line);
-        System.out.println(indentation + "Hello! I'm Duke\n" + indentation +
-                "What can I do for you?\n" + indentation +
-                "Type /help to see the commands that I can run :)");
+        System.out.println(indentation + "Hello! I'm Duke\n" + indentation
+                + "What can I do for you?\n" + indentation
+                + "Type /help to see the commands that I can run :)");
         System.out.println(indentation + line);
         parser = new Parser();
     }
@@ -58,8 +58,8 @@ public class Ui {
      */
     public void showWrongFormat(String methodType) {
         System.out.println(indentation + line);
-        System.out.println(indentation +
-                " OOPS!!! You have entered an incorrect format of " + methodType);
+        System.out.println(indentation
+                + " OOPS!!! You have entered an incorrect format of " + methodType);
         System.out.println(indentation + line);
     }
 

@@ -16,8 +16,8 @@ public class TaskCommand extends Command {
         todo, deadline, event
     }
 
-    TaskType taskType;
-    String command;
+    private TaskType taskType;
+    private String command;
 
     /**
      * Constructor to create a command to create a new task.
@@ -28,7 +28,6 @@ public class TaskCommand extends Command {
         this.taskType = taskType;
         this.command = command; 
     }
-
 
     /**
      * Executes the command proceeds to create a new task for the user, and appending it to the list.
@@ -43,23 +42,20 @@ public class TaskCommand extends Command {
     void runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
         String indentation = "    ";
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
-        String message = null; 
-        
+        String message = null;
         if (taskType == TaskType.todo) {
             try {
                 String newString = command.substring(5).trim();
-
-
                 if (newString.length() == 0) {
                     throw new StringIndexOutOfBoundsException();
                 }
                 ToDos newToDo = new ToDos(newString);
                 taskList.addTask(newToDo);
-                message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newToDo.toString() +
-                        newToDo.getStatus() + " " + newToDo.getDescription() + "\n" +
-                        indentation + "Now you have " +
-                        String.valueOf(taskList.getSize()) + " tasks in the list.";
+                message = "Got it. I've added this task:\n"
+                        + indentation + "  " + newToDo.toString()
+                        + newToDo.getStatus() + " " + newToDo.getDescription() + "\n"
+                        + indentation + "Now you have "
+                        + String.valueOf(taskList.getSize()) + " tasks in the list.";
                 storage.appendTask(newToDo);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showWrongFormat("ToDo");
@@ -72,11 +68,11 @@ public class TaskCommand extends Command {
                 Date dueDate = (Date) formatter.parse(date);
                 Event newEvent = new Event(description, dueDate);
                 taskList.addTask(newEvent);
-                message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newEvent.toString() +
-                        newEvent.getStatus() + " " + newEvent.getDescription() + "\n" +
-                        indentation + "Now you have " +
-                        String.valueOf(taskList.getSize()) + " tasks in the list.";
+                message = "Got it. I've added this task:\n"
+                        + indentation + "  " + newEvent.toString()
+                        + newEvent.getStatus() + " " + newEvent.getDescription() + "\n"
+                        + indentation + "Now you have "
+                        + String.valueOf(taskList.getSize()) + " tasks in the list.";
                 storage.appendTask(newEvent);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Event");
@@ -89,11 +85,11 @@ public class TaskCommand extends Command {
                 Date dueDate = (Date) formatter.parse(date);
                 Deadline newDeadline = new Deadline(description, dueDate);
                 taskList.addTask(newDeadline);
-                message = "Got it. I've added this task:\n" +
-                        indentation + "  " + newDeadline.toString() +
-                        newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n" +
-                        indentation + "Now you have " +
-                        String.valueOf(taskList.getSize() + " tasks in the list.");
+                message = "Got it. I've added this task:\n"
+                        + indentation + "  " + newDeadline.toString()
+                        + newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n"
+                        + indentation + "Now you have "
+                        + String.valueOf(taskList.getSize() + " tasks in the list.");
                 storage.appendTask(newDeadline);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Deadline");

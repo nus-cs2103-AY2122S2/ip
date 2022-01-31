@@ -4,14 +4,14 @@ package duke;
  * Runs the command for user to mark a particular task completed or uncompleted.
  */
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
     enum MarkTypes {
         Mark, Unmark
     }
 
-    MarkTypes markTypes;
-    int index;
+    private MarkTypes markTypes;
+    private int index;
 
     /**
      * Constructor to create a new instance of a mark command.

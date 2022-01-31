@@ -51,7 +51,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDescription() {
-        return this.description +
-                " (by: " + formatter.format(date).toString() + ")";
+        return this.description
+                + " (by: " + formatter.format(date).toString() + ")";
     }
 }
