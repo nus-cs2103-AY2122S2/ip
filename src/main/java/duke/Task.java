@@ -46,7 +46,7 @@ class Task {
      * To get the content of the task.
      * @return a string of the content of the task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

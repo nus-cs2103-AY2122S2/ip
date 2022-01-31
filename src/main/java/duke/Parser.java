@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    Scanner scanner;
-    String command;
+    private Scanner scanner;
+    private String command;
 
     /**
      * Constructor to create a new instance of a parser.
@@ -47,7 +47,7 @@ public class Parser {
             return new MarkCommand(MarkCommand.MarkTypes.Mark, index - 1);
         } else if (command.contains("delete")) {
             int index = Integer.parseInt(command.substring(7));
-            return new DeleteCommand(index-1);
+            return new DeleteCommand(index - 1);
         } else if (command.contains("todo")) {
             return new TaskCommand(TaskCommand.TaskType.todo, command);
         } else if (command.contains("event")) {

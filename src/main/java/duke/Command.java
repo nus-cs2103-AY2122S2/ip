@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 /**
  * Represents a command that an user will give to the software

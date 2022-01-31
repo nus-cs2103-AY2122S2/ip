@@ -54,7 +54,7 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return this.description +
-                " (at: " + formatter.format(date).toString() + ")";
+        return this.description
+                + " (at: " + formatter.format(date).toString() + ")";
     }
 }

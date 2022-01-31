@@ -8,7 +8,7 @@ import java.util.Locale;
  */
 public class TaskList {
 
-    ArrayList<Task> taskArrayList;
+    private ArrayList<Task> taskArrayList;
 
     /**
      * Constructor to create a new instance of a TaskList.
@@ -51,8 +51,8 @@ public class TaskList {
         }
 
         for (Task task: taskArrayList) {
-            stringOfTasks.add(indentation + String.valueOf(counter) + ". "  +
-                    task.toString() + task.getStatus() + " " + task.getDescription());
+            stringOfTasks.add(indentation + String.valueOf(counter) + ". "
+                    + task.toString() + task.getStatus() + " " + task.getDescription());
             counter++;
         }
         return stringOfTasks;
@@ -81,6 +81,14 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return taskArrayList.get(index);
+    }
+
+    /**
+     * To retrieve the ArrayList of tasks.
+     * @return the ArrayList of tasks.
+     */
+    public ArrayList<Task> getTaskArrayList() {
+        return taskArrayList;
     }
 
     /**
@@ -116,7 +124,8 @@ public class TaskList {
 
         stringOfTasks.add(indentation + "Here are the matching tasks in your list:");
         for (Task task: foundTask) {
-            stringOfTasks.add(indentation + String.valueOf(counter) + ". "  + task.toString() + task.getStatus() + " " + task.getDescription());
+            stringOfTasks.add(indentation + String.valueOf(counter) + ". "
+                    + task.toString() + task.getStatus() + " " + task.getDescription());
             counter++;
         }
 

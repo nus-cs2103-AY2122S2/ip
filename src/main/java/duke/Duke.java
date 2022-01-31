@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    Ui ui;
-    TaskList taskList;
-    Storage storage;
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
 
     /**
      * This is the constructor to create a new instance of Duke.
@@ -41,7 +41,7 @@ public class Duke {
 
         Parser parser = new Parser();
 
-        while(true) {
+        while (true) {
             try {
                 Command command = parser.readCommand();
                 command.runCommand(taskList, ui, storage);
@@ -61,7 +61,8 @@ public class Duke {
         System.out.println("    Hello. You can run a few commands with this machine.");
         System.out.println("    1. Type todo to create a task at hand. (eg. todo homework today)");
         System.out.println("    2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM)");
-        System.out.println("    3. Type deadline to create an deadline. (eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)");
+        System.out.println("    3. Type deadline to create an deadline. "
+                + "(eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)");
         System.out.println("    4. Type list to see what are the tasks on hand.");
 
     }
