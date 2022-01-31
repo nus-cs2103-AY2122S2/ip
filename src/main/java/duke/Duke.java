@@ -11,7 +11,6 @@ import duke.helper.Ui;
  */
 public class Duke {
 
-    //constructor
     private TaskList taskList;
     private Storage storage;
     private Ui ui;

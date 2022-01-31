@@ -31,6 +31,10 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the String representation of the event, including its type as [E] and when it happened.
+     * @return Return the String representation of the task.
+     */
     @Override
     public String toString() {
         if(ld == null) {
@@ -40,6 +44,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the detail of the task.
+     * @return the detail of the task.
+     */
     @Override
     public String getDetail(){
         int status = isDone ? 1 : 0;
