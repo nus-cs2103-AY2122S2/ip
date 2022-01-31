@@ -20,7 +20,7 @@ public class Event extends Task {
     /** {@inheritDoc} */
     @Override
     public String printTask() {
-        if (this.status) {
+        if (this.isMarked) {
             return "[" + type + "][X] " + activity + " (at " + at + ")";
         } else {
             return "[" + type + "][ ] " + activity + " (at " + at + ")";
@@ -30,7 +30,7 @@ public class Event extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return type + "|" + status + "|" + activity + "|" + at + "|\n";
+        return type + "|" + isMarked + "|" + activity + "|" + at + "|\n";
     }
 
 }
