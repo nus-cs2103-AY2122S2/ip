@@ -6,7 +6,11 @@ import duke.io.UserInput;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,8 +23,8 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String path = Paths.get("").toAbsolutePath() + "/data/";
-    private final File directory = new File(path);
     private static final File data = new File(path + "duke.txt");
+    private final File directory = new File(path);
 
     /**
      * Makes a "duke.txt" if it does not exist in the user's computer.

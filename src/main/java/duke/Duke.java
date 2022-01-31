@@ -4,10 +4,10 @@ import duke.exception.DukeCommandDoesNotExistException;
 import duke.exception.DukeException;
 import duke.io.Parser;
 import duke.io.UserInput;
+import java.io.IOException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -37,7 +37,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         new Duke().startProgram();
     }
 

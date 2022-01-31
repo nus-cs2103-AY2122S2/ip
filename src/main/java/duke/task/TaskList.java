@@ -7,8 +7,6 @@ import duke.exception.DukeNoTimeSpecifiedException;
 import duke.exception.DukeOutOfBoundException;
 import duke.io.UserInput;
 import duke.ui.Ui;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
