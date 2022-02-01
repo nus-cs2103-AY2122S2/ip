@@ -1,13 +1,13 @@
 package core.tasks;
 
-import core.exceptions.NoDescriptionGivenException;
-import core.exceptions.NoEventLocaleMentionedException;
-import utilities.OutputFormatter;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import core.exceptions.NoDescriptionGivenException;
+import core.exceptions.NoEventLocaleMentionedException;
+import utilities.OutputFormatter;
 
 /**
  * The Event class.
@@ -46,7 +46,8 @@ public class Event extends Task {
      * @throws NoEventLocaleMentionedException Throws an exception if the locale is absent for the event.
      * @throws NoDescriptionGivenException Throws an exception if the description is blank or empty.
      */
-    public static Event getInstance(String description, String at) throws DateTimeParseException, NoEventLocaleMentionedException, NoDescriptionGivenException {
+    public static Event getInstance(String description, String at) throws
+            DateTimeParseException, NoEventLocaleMentionedException, NoDescriptionGivenException {
         if (description.isBlank() || description.isBlank()) {
             throw new NoDescriptionGivenException();
         }
@@ -85,7 +86,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
-        outputFormatter.appendAll("[E]", super.toString(), " (at: ", atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        outputFormatter.appendAll("[E]", super.toString(), " (at: ",
+                atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         if (atTime != null) {
             outputFormatter.appendAll(" ", atTime.format(DateTimeFormatter.ofPattern("Ka")), ")");
             return outputFormatter.getFormattedOutput();

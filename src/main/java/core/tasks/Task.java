@@ -11,19 +11,20 @@ import utilities.OutputFormatter;
  * @version 0.1
  */
 public class Task {
+    private static int idCounter = 1;
     protected String taskDescription;
     protected boolean isCompleted;
     private final int taskId = createID();
 
-    private static int idCounter = 1;
 
     /**
-     * Method to create an id for the task.
+     * Overloaded constructor for the Task class with a default status of being incomplete.
      *
-     * @return The id of the task.
+     * @param taskDescription The description of the task.
      */
-    static int createID() {
-        return idCounter++;
+    public Task(String taskDescription) {
+        this.taskDescription = taskDescription;
+        this.isCompleted = false;
     }
 
     /**
@@ -38,13 +39,12 @@ public class Task {
     }
 
     /**
-     * Overloaded constructor for the Task class with a default status of being incomplete.
+     * Method to create an id for the task.
      *
-     * @param taskDescription The description of the task.
+     * @return The id of the task.
      */
-    public Task(String taskDescription) {
-        this.taskDescription = taskDescription;
-        this.isCompleted = false;
+    static int createID() {
+        return idCounter++;
     }
 
     /**

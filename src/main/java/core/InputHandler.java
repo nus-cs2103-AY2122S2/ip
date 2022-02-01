@@ -1,5 +1,15 @@
 package core;
 
+import static java.lang.Integer.parseInt;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import core.exceptions.EmptyArgumentException;
 import core.exceptions.FileIsCorruptException;
 import core.exceptions.InvalidDeleteIndexException;
@@ -16,16 +26,6 @@ import core.tasks.Task;
 import core.tasks.TaskList;
 import core.tasks.ToDo;
 import utilities.OutputFormatter;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Handles the input commands.
@@ -90,6 +90,8 @@ public class InputHandler {
         case UNKNOWN :
             handleUnknown(outputFormatter);
             break;
+        default :
+            break;
         }
         return outputFormatter.getFormattedOutput();
     }
@@ -152,7 +154,9 @@ public class InputHandler {
         try {
             String description = inputData.substring(4).trim();
             taskList.addTask(ToDo.getInstance(description));
-            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+            outputFormatter.appendAll("Got it. I've added this task:", "\n",
+                    taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(),
+                    " task(s) in the list.");
         } catch (ToDoEmptyException e) {
             outputFormatter.append(e.getMessage());
         }
@@ -166,7 +170,8 @@ public class InputHandler {
      */
     private void handleDeadline(String inputData, OutputFormatter outputFormatter) {
         try {
-            String deadlineBy, description;
+            String deadlineBy;
+            String description;
             String[] inputSequence = inputData.split("deadline ");
 
             if (inputSequence.length > 1) {
@@ -186,7 +191,9 @@ public class InputHandler {
                 description = "";
             }
             taskList.addTask(Deadline.getInstance(description, deadlineBy));
-            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+            outputFormatter.appendAll("Got it. I've added this task:", "\n",
+                    taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(),
+                    " task(s) in the list.");
         } catch (NoDescriptionGivenException | NoDeadlineMentionedException e) {
             outputFormatter.append(e.getMessage());
         } catch (DateTimeParseException e) {
@@ -202,7 +209,8 @@ public class InputHandler {
      */
     private void handleEvent(String inputData, OutputFormatter outputFormatter) {
         try {
-            String eventAt, description;
+            String eventAt;
+            String description;
             String[] inputSequence = inputData.split("event ");
 
             if (inputSequence.length > 1) {
@@ -222,7 +230,9 @@ public class InputHandler {
                 description = "";
             }
             taskList.addTask(Event.getInstance(description, eventAt));
-            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+            outputFormatter.appendAll("Got it. I've added this task:", "\n",
+                    taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(),
+                    " task(s) in the list.");
         } catch (NoDescriptionGivenException | NoEventLocaleMentionedException e) {
             outputFormatter.append(e.getMessage());
         } catch (DateTimeParseException e) {
@@ -254,9 +264,10 @@ public class InputHandler {
             } else {
                 toBeDeleted = this.taskList.deleteTask(indexRetriever[1]);
             }
-            outputFormatter.appendAll("Noted. I've removed this task:", "\n", toBeDeleted, "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+            outputFormatter.appendAll("Noted. I've removed this task:", "\n", toBeDeleted, "\n",
+                    "Now you have ", taskList.getLength(), " task(s) in the list.");
 
-        } catch ( NumberFormatException e) {
+        } catch (NumberFormatException e) {
             outputFormatter.append("Please provide a number index to delete!");
         } catch (InvalidDeleteIndexException | NoTaskToDeleteException e) {
             outputFormatter.append(e.getMessage());
@@ -327,6 +338,8 @@ public class InputHandler {
                 throw new FileIsCorruptException();
             }
             this.taskList.addTask(Event.getInstance(separatedInputSequence[2], separatedInputSequence[3]));
+            break;
+        default :
             break;
         }
 

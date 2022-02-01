@@ -1,13 +1,13 @@
 package core.tasks;
 
-import core.exceptions.NoDeadlineMentionedException;
-import core.exceptions.NoDescriptionGivenException;
-import utilities.OutputFormatter;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import core.exceptions.NoDeadlineMentionedException;
+import core.exceptions.NoDescriptionGivenException;
+import utilities.OutputFormatter;
 
 /**
  * The Deadline class.
@@ -66,7 +66,8 @@ public class Deadline extends Task {
      * @throws NoDescriptionGivenException Throws an exception if the description is empty or blank.
      * @throws DateTimeParseException Throws an exception if the deadline entered is in an incorrect format.
      */
-    public static Deadline getInstance(String description, String by) throws NoDeadlineMentionedException, NoDescriptionGivenException, DateTimeParseException {
+    public static Deadline getInstance(String description, String by) throws
+            NoDeadlineMentionedException, NoDescriptionGivenException, DateTimeParseException {
         if (description.isBlank() || description.isBlank()) {
             throw new NoDescriptionGivenException();
         }
@@ -85,7 +86,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
-        outputFormatter.appendAll("[D]", super.toString(), " (by: ", byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        outputFormatter.appendAll("[D]", super.toString(), " (by: ",
+                byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         if (byTime != null) {
             outputFormatter.appendAll(" ", byTime.format(DateTimeFormatter.ofPattern("Ka")), ")");
             return outputFormatter.getFormattedOutput();

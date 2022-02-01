@@ -1,11 +1,11 @@
 package core.tasks;
 
+import java.util.ArrayList;
+
 import core.exceptions.EmptyArgumentException;
 import core.exceptions.InvalidDeleteIndexException;
 import core.exceptions.NoTaskToDeleteException;
 import utilities.OutputFormatter;
-
-import java.util.ArrayList;
 
 /**
  * Class to maintain the list of tasks entered by the user.
@@ -89,7 +89,8 @@ public class TaskList {
      * @throws NoTaskToDeleteException Throws an error if the index to delete the task is not present.
      * @throws NumberFormatException Throws an error if the input is not parseable to an integer.
      */
-    public Task deleteTask(String input) throws InvalidDeleteIndexException, NoTaskToDeleteException, NumberFormatException {
+    public Task deleteTask(String input) throws InvalidDeleteIndexException, NoTaskToDeleteException,
+            NumberFormatException {
         if (input.isBlank() || input.isEmpty()) {
             throw new InvalidDeleteIndexException();
         }
@@ -212,7 +213,8 @@ public class TaskList {
             int runningLength = 1;
 
             for (Task task : this.taskList) {
-                if (task.getTaskDescription().contains(toBeFound) || task.getTaskDescription().contains(toBeFound.toLowerCase())) {
+                if (task.getTaskDescription().contains(toBeFound)
+                        || task.getTaskDescription().contains(toBeFound.toLowerCase())) {
                     outputFormatter.appendAll(count, ".", task.toString());
                     count++;
                     if (runningLength++ < this.taskList.size()) {
