@@ -86,7 +86,6 @@ public class Parser {
         return new Deadline(taskName,date);
     }
 
-    // TODO parseToFileFromTask given a task, parses it in the correct form to be stored
     public static String parseToFileFromTask(Task t) {
         String dateStr = "";
         if (t.getDateObj() == null) {
@@ -136,6 +135,7 @@ public class Parser {
                 t = new Deadline(name,dateStr);
             } else {
                 t = new Deadline(name, date);
+
             }
             break;
 
