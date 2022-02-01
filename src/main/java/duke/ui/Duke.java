@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.ui.components.DialogBox;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -152,6 +153,10 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        if (chatBot.hasTerminated()) {
+            Platform.exit();
+        }
     }
 
     /**
