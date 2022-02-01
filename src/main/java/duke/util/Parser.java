@@ -77,7 +77,7 @@ public class Parser {
         default:
         }
 
-        parsedTask.setMarked(status);
+        parsedTask.setStatus(status);
         return parsedTask;
     }
 

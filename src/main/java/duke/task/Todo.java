@@ -16,7 +16,7 @@ public class Todo extends Task {
     /** {@inheritDoc} */
     @Override
     public String printTask() {
-        if (this.isMarked) {
+        if (this.status) {
             return "[" + type + "][X] " + activity;
         } else {
             return "[" + type + "][ ] " + activity;
@@ -27,7 +27,7 @@ public class Todo extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return type + "|" + isMarked + "|" + activity + "|\n";
+        return type + "|" + status + "|" + activity + "|\n";
     }
 
 }
