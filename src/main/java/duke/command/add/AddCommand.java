@@ -33,7 +33,9 @@ public abstract class AddCommand extends Command {
      */
     @Override
     public CommandFeedback execute(TaskList taskList) {
+
         taskList.add(newTask);
+
         return new CommandFeedback(CommandType.ADD, taskList, newTask);
     }
 }

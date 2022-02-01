@@ -106,6 +106,15 @@ public class DioBotMessage extends BotMessage {
         return isEmpty ? "I reject my humanity, Jojo!" : "Oh? You're Approaching Me?";
     }
 
+    /**
+     * Returns the image file path of the DIOBot.
+     *
+     * @return the image file path.
+     */
+    @Override
+    public String getImagePath() {
+        return "/images/DIOBot.png";
+    }
 
     private String getTaskLeft(TaskList taskList) {
         String muda = "";
