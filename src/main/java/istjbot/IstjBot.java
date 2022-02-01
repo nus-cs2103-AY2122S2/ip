@@ -10,7 +10,7 @@ import istjbot.ui.Ui;
 import java.io.IOException;
 
 /**
- * Encapsulates a chat-bot in which it can interact with the user in a way that
+ * Encapsulates a chat-bot that can interact with the user in a way that
  * user gives out a command, which is then executed by the bot and prints out the
  * result back.
  */
