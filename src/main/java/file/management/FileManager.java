@@ -100,13 +100,15 @@ public final class FileManager {
         int indexAftNumber = input.indexOf("[");
         int indexAftDesc = input.lastIndexOf("(");
 
-        // so that the function does not call immediately because of indexAftDesc
+        // so that the function does not call immediately because of indexAftDesc (that index can be -1)
+        // supplies a deadline if the task is deadline task.
         Supplier<LocalDateTime> deadlineSupplier = () -> {
             String s = input.substring(indexAftDesc + 5, input.length() - 1);
             return DateTimeParser.parse(s);
         };
 
-        // so that the function does not call immediately because of indexAftDesc
+        // so that the function does not call immediately because of indexAftDesc (that index can be -1)
+        // supplies a description for a deadline task and an event task.
         Supplier<String> descSupplier = () -> input.substring
                 (indexAftNumber + 7, indexAftDesc - 1);
 
