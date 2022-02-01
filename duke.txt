@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-1. [T][ ] klsdjnfd
-2. [T][X] ahashsh
-3. [T][ ] aknsks
-4. [D][ ] akaksbs (by:Jan 30 2022)
-5. [E][ ] akndxs (at:.skcnxsd)
-6. [T][ ] skajdb
-=======
 1. [T][ ] skajdb
 2. [E][ ] skjdb (at:nwdlcfn)
-3. [D][ ] hello world (by:Dec 24 2022)
-4. [D][ ] next up (by:Oct 22 2022)
-5. [E][ ] read book (at:venue)
-6. [T][ ] say hello
->>>>>>> branch-Level-9
+3. [D][X] hello world (by:Dec 24 2022)
+4. [E][ ] read book (at:venue)
+5. [T][ ] say hello
