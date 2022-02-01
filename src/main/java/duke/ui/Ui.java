@@ -33,6 +33,13 @@ public class Ui {
 
     }
 
+    /**
+     * Inflates the MainWindow user-interface onto the supplied stage and attaches the supplied input
+     * handler.
+     * @param stage The JavaFX stage to create the user-interface on.
+     * @param inputHandler The handler to be fired when the user enters some input.
+     * @throws DukeIoException If the MainWindow layout FXML file cannot be found.
+     */
     public void buildStage(Stage stage, Consumer<String> inputHandler) throws DukeIoException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));

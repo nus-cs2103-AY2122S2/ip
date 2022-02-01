@@ -22,10 +22,6 @@ public class Duke extends Application {
     private TaskList taskList;
     private MainWindow mainWindowController;
 
-    public Duke() {
-
-    }
-
     @Override
     public void init() throws Exception {
         super.init();
@@ -71,7 +67,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Drives the main application Read-Evaluate-Print Loop.
+     * Passes the input string to <code>Parser</code> to process.
+     * @param input Input string to process.
      */
     public void processCommand(String input) {
         boolean isRunning = Ui.getInstance().printCommand((linePrinter) -> {
