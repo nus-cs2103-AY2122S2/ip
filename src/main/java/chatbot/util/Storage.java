@@ -22,7 +22,7 @@ public class Storage {
      * @param <T>      the type of the serializable item
      * @return returns true if the item was successfully saved, else returns false
      */
-    public static <T extends Serializable> boolean Save(String filePath, T item) {
+    public static <T extends Serializable> boolean save(String filePath, T item) {
         try {
             File file = new File(filePath);
             File parentFile = file.getParentFile();
@@ -49,7 +49,7 @@ public class Storage {
      * @param <T>      the type of the serializable item
      * @return returns the item if it was successfully loaded, else returns null
      */
-    public static <T extends Serializable> T Load(String fileName) {
+    public static <T extends Serializable> T load(String fileName) {
         try {
             ObjectInputStream objectInputStream =
                     new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));

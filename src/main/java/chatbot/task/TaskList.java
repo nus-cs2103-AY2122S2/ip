@@ -21,7 +21,7 @@ public class TaskList extends ArrayList<Task> implements Serializable {
      * @param saveFile the save file location
      */
     public static TaskList create(String saveFile) {
-        TaskList taskList = Storage.Load(saveFile);
+        TaskList taskList = Storage.load(saveFile);
         if (taskList == null) {
             taskList = new TaskList(saveFile);
         }
@@ -36,7 +36,7 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     public boolean add(Task task) {
         boolean ret = super.add(task);
         if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
+            Storage.save(saveFile, this);
         }
         return ret;
     }
@@ -44,9 +44,9 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     @Override
     public Task remove(int index) {
         Task ret = super.remove(index);
-        Storage.Save(saveFile, this);
+        Storage.save(saveFile, this);
         if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
+            Storage.save(saveFile, this);
         }
         return ret;
     }
@@ -54,9 +54,9 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     @Override
     public void clear() {
         super.clear();
-        Storage.Save(saveFile, this);
+        Storage.save(saveFile, this);
         if (!saveFile.isBlank()) {
-            Storage.Save(saveFile, this);
+            Storage.save(saveFile, this);
         }
     }
 
