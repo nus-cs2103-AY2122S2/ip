@@ -53,6 +53,9 @@ public class Parser {
             } else if (instruction[0].equals("save")) {
                 String response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
                 return response;
+            } else if (instruction[0].equals("find")) {
+                String response = tasksList.find(Arrays.asList(instruction));
+                return response;
             }
         } catch (DukeException e) {
             return e.getMessage();

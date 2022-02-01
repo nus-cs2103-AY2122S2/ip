@@ -150,4 +150,23 @@ public class TasksList {
         }
         return response;
     }
+
+    public String find(List<String> instruction) throws InvalidArgumentException {
+        if (instruction.size() == 1) {
+            throw new InvalidArgumentException();
+        }
+        StringBuilder response = new StringBuilder("");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(instruction.get(1))) {
+                response.append(String.format((i + 1) + ". " + tasks.get(i) + "\n"));
+            }
+        }
+
+        if (response.toString().equals("")) {
+            return "I did not find anything related to your search: " + instruction.get(1);
+        }
+
+        return "Found some tasks related to your search: " + instruction.get(1) + "\n" + response.toString();
+    }
 }
