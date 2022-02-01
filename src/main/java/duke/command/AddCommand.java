@@ -124,7 +124,7 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) {
             throw this.exception;
         }
@@ -144,15 +144,17 @@ public class AddCommand extends Command {
         //Adding the task
         tasks.add(newTask);
 
-        //Output to update user
-        ui.print("Got it. I've added this task *quack*:");
-        ui.print(String.format("  %s", newTask.toString()));
-        ui.print(String.format(
-                "Now you have %d task%s in the list *quack*.",
-                tasks.getSize(), tasks.getSize() == 1 ? "" : "s"));
-
         //Saving the task to the save file
         storage.save(tasks);
+
+        //Output to update user
+        String output = "";
+        output += ui.printReturn("Got it. I've added this task");
+        output += ui.printReturn(String.format("  %s", newTask.toString()));
+        output += ui.printReturn(String.format(
+                "Now you have %d task%s in the list.",
+                tasks.getSize(), tasks.getSize() == 1 ? "" : "s"));
+        return output;
     }
 
     /**

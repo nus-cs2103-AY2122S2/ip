@@ -25,8 +25,8 @@ public class ExitCommand extends Command {
      * @param storage The storage for the command to save and load tasks to an external file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Aww. Bye! See you again soon");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printReturn("Aww. Bye! See you again soon");
     }
 
     /**

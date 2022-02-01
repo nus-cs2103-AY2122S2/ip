@@ -57,7 +57,7 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) {
             throw this.exception;
         } else if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize()) {
@@ -65,14 +65,17 @@ public class MarkCommand extends Command {
         }
 
         Task task = tasks.getByNumber(this.taskNumber);
+        String output = "";
         if (this.isMark) {
             task.setMarked(true);
-            ui.print(String.format("I've marked task %d as done! *quack*", this.taskNumber));
+            output += ui.printReturn(String.format("I've marked task %d as done!", this.taskNumber));
         } else {
             task.setMarked(false);
-            ui.print(String.format("I've marked task %d as undone! *quack*", this.taskNumber));
+            output += ui.printReturn(String.format("I've marked task %d as undone!", this.taskNumber));
         }
-        ui.print(String.format("  %d. %s", this.taskNumber, task.toString()));
+        output += ui.printReturn(String.format("  %d. %s", this.taskNumber, task.toString()));
+
+        return output;
     }
 
     /**

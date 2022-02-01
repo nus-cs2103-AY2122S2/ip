@@ -29,12 +29,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) {
             throw this.exception;
         }
         TaskList filteredTasks = tasks.filterByKeyword(this.keyword);
-        filteredTasks.printTasks(ui);
+        return filteredTasks.toString(ui);
     }
 
     @Override
