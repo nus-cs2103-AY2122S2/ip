@@ -1,9 +1,13 @@
 public class Event extends Task {
+    private final String date;
+    private final String time;
     private final String postfix;
 
-    Event(String name, String date) {
+    Event(String name, String date, String time) {
         super(name);
-        this.postfix = DateManager.formatDate(date);
+        this.date = DateManager.formatDate(date);
+        this.time = new TimeManager(time).getFormat12();
+        this.postfix = this.date + " " + this.time;
     }
 
     public String getPrefix() {
@@ -17,6 +21,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String prefix = "[E]";
-        return prefix + super.toString() + " " + postfix;
+        return prefix + super.toString() + " on:" + postfix;
     }
 }

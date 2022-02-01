@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -115,6 +111,7 @@ public class Duke {
                 Task currentTask;
                 String name;
                 String date;
+                String time;
                 int taskNumber;
 
                 System.out.println(space + line);
@@ -159,8 +156,33 @@ public class Duke {
                         }
                     }
 
+                    // get time of task
+                    System.out.println(space + "Please input the time of the task in the format: HHMM");
+                    System.out.println(space + line);
+                    time = sc.nextLine();
+
+                    if (time.isBlank()) {
+                        System.out.println(space + "Time of the task cannot be blank!");
+                        System.out.println(space + line);
+                        break;
+                    }
+
+                    // checks for time length and date validity
+                    if (time.length() != 4) {
+                        System.out.println(space + "Invalid time format!");
+                        System.out.println(space + line);
+                        break;
+                    } else {
+                        TimeManager timeManager = new TimeManager(time);
+                        if (!timeManager.isTimeValid()) {
+                            System.out.println(space + "Invalid time!");
+                            System.out.println(space + line);
+                            break;
+                        }
+                    }
+
                     // create new deadline task
-                    currentTask = new TaskCreator('D', false, name, date).createTask();
+                    currentTask = new Deadline(name, date, time);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
@@ -186,7 +208,7 @@ public class Duke {
                     // get date of task
                     System.out.println(space + "Please input the date of the event");
                     System.out.println(space + line);
-                    date = sc.next();
+                    date = sc.nextLine();
 
                     if (date.isBlank()) {
                         System.out.println(space + "Date of the event cannot be blank!");
@@ -208,8 +230,33 @@ public class Duke {
                         }
                     }
 
+                    // get time of task
+                    System.out.println(space + "Please input the time of the task in the format: HHMM");
+                    System.out.println(space + line);
+                    time = sc.nextLine();
+
+                    if (time.isBlank()) {
+                        System.out.println(space + "Time of the task cannot be blank!");
+                        System.out.println(space + line);
+                        break;
+                    }
+
+                    // checks for time length and date validity
+                    if (time.length() != 4) {
+                        System.out.println(space + "Invalid time format!");
+                        System.out.println(space + line);
+                        break;
+                    } else {
+                        TimeManager timeManager = new TimeManager(time);
+                        if (!timeManager.isTimeValid()) {
+                            System.out.println(space + "Invalid time!");
+                            System.out.println(space + line);
+                            break;
+                        }
+                    }
+
                     // create new deadline task
-                    currentTask = new TaskCreator('E', false, name, date).createTask();
+                    currentTask = new Event(name, date, time);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
@@ -229,8 +276,8 @@ public class Duke {
                         break;
                     }
 
-                    // create new deadline task
-                    currentTask = new TaskCreator('T', false, name, "0000000").createTask();
+                    // create new todo task
+                    currentTask = new ToDo(name);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
