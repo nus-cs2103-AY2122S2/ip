@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 /**
  * Represents a task to be done. This task possesses a state/status that is by default not done.

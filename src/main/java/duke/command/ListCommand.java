@@ -1,10 +1,10 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.util.TaskList;
-import Duke.util.Storage;
-import Duke.util.Ui;
+import duke.util.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * This ListCommand class will show a list of added tasks when executed.

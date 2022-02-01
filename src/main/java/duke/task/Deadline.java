@@ -1,28 +1,28 @@
-package Duke.task;
+package duke.task;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an event to be done. This event is a task that possesses a state/status that is by default
+ * Represents a deadline to be fulfilled. This deadline is a task that possesses a state/status that is by default
  * not done
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected LocalDate date;
     protected String time;
     private final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Creates an event with a time, that is initially not done
+     * Creates a task with a deadline, that is initially not done
      *
-     * @param description A short description of the event
-     * @param date        Date and time (if applicable) of the event as a String
+     * @param description A short description of the deadline
+     * @param date        Date of the deadline as a String
      */
-    public Event(String description, String date) throws DukeException {
+    public Deadline(String description, String date) throws DukeException {
         super(description);
         time = "";
         String[] dateSplit = date.split(" ", 2);
@@ -37,21 +37,21 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of an Event
+     * Returns the String representation of a Deadline task
      *
      * @return String format of a Deadline
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(pattern) + " " + time +  ")";
+        return "[D]" + super.toString() + " (by: " + date.format(pattern) + " " + time +")";
     }
 
     /**
-     * Returns the String format of how the Event will be saved in the text file
+     * Returns the String format of how the Deadline will be saved in the text file
      *
-     * @return String format of the Event task to be saved
+     * @return String format of deadline task to be saved
      */
     public String toSave() {
-        return String.format("E | %d | %s | %s | %s", this.isDone ? 1 : 0, this.description, this.date, this.time);
+        return String.format("D | %d | %s | %s | %s", this.isDone ? 1 : 0, this.description, this.date, this.time);
     }
 }

@@ -1,4 +1,4 @@
-package Duke.exception;
+package duke.exception;
 
 /**
  * Print error messages

@@ -1,12 +1,12 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.task.Task;
+import duke.task.Task;
 
-import Duke.util.TaskList;
-import Duke.util.Storage;
-import Duke.util.Ui;
+import duke.util.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * This AddCommand class will add a task into a list of tasks when executed.

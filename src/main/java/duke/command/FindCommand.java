@@ -1,11 +1,10 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.task.Task;
-import Duke.util.TaskList;
-import Duke.util.Storage;
-import Duke.util.Ui;
+import duke.util.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * This FindCommand class will find a list of added tasks that match the keyword

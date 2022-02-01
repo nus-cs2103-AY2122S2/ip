@@ -1,6 +1,6 @@
-package Duke.util;
+package duke.util;
 
-import Duke.task.TaskStub;
+import duke.task.TaskStub;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,19 +1,19 @@
-package Duke.util;
+package duke.util;
 
-import Duke.command.AddCommand;
-import Duke.command.ByeCommand;
-import Duke.command.Command;
-import Duke.command.DeleteCommand;
-import Duke.command.FindCommand;
-import Duke.command.ListCommand;
-import Duke.command.MarkCommand;
-import Duke.command.UnmarkCommand;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.task.Event;
-import Duke.task.Deadline;
-import Duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.Todo;
 
 /**
  * Utility class to parse inputs that are retrieved from user.

@@ -1,8 +1,8 @@
-package Duke.util;
+package duke.util;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
-import Duke.task.Task;
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;

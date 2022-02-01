@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 /**
  * Represents a todolist task to be done. This event is a task that possesses a state/status
