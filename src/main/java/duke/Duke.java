@@ -9,6 +9,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class Duke {
+
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;

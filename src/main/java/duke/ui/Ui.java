@@ -5,6 +5,7 @@ import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
+
     Scanner scanner;
 
     public Ui() {

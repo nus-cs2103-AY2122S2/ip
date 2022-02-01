@@ -10,6 +10,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
+
     private String[] inputWords;
 
     public DeleteCommand(String[] inputWords) {

@@ -1,6 +1,10 @@
 package duke.storage;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,17 +54,17 @@ public class Storage {
                 String taskLine = task.substring(8);
                 Task taskToAdd = null;
                 switch (letter) {
-                    case 'T':
-                        taskToAdd = new Todo(taskLine, isDone);
-                        break;
-                    case 'D':
-                        String[] theTask = taskLine.split(" \\| ", 2);
-                        taskToAdd = new Deadline(theTask[0], theTask[1], isDone);
-                        break;
-                    case 'E':
-                        String[] eventTasking = taskLine.split(" \\| ", 2);
-                        taskToAdd = new Event(eventTasking[0], eventTasking[1], isDone);
-                        break;
+                case 'T':
+                    taskToAdd = new Todo(taskLine, isDone);
+                    break;
+                case 'D':
+                    String[] theTask = taskLine.split(" \\| ", 2);
+                    taskToAdd = new Deadline(theTask[0], theTask[1], isDone);
+                    break;
+                case 'E':
+                    String[] eventTasking = taskLine.split(" \\| ", 2);
+                    taskToAdd = new Event(eventTasking[0], eventTasking[1], isDone);
+                    break;
                 }
                 tasks.add(taskToAdd);
             }
