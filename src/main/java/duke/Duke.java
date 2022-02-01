@@ -4,21 +4,22 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.task.TaskList;
+import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 /**
  * Represents an instance of the Duke application.
- * Serves as the entry point for the entire application.
  */
-public class Duke {
+public class Duke extends Application {
     /** Global task list for all operations. */
-    private static TaskList taskList;
+    private TaskList taskList;
 
-    private Duke() {
-
-    }
-
-    public static void main(String[] args) {
-        new Duke().init().run();
+    @Override
+    public void init() throws Exception {
+        super.init();
+        this.initializeTaskList();
     }
 
     /**
@@ -26,7 +27,7 @@ public class Duke {
      * Loads any existing database and attaches observers for saving the database to disk.
      * @return The current instance of the application being initialized.
      */
-    private Duke init() {
+    Duke initializeTaskList() {
         try {
             taskList = Storage.load();
             taskList.registerListener(store -> {
@@ -46,24 +47,35 @@ public class Duke {
         return this;
     }
 
-    /**
-     * Drives the main application Read-Evaluate-Print Loop.
-     */
-    private void run() {
-        Ui ui = Ui.getInstance().greet();
+    @Override
+    public void start(Stage primaryStage) {
+        // Hand off to UI to build stage
+        try {
+            Ui.getInstance().buildStage(primaryStage, this::processCommand);
+        } catch (DukeIoException ex) {
+            System.out.println(ex.getMessage());
+            Platform.exit();
+        }
+        primaryStage.show();
+        Ui.getInstance().greet();
+    }
 
-        boolean isRunning = true;
-        while (isRunning) {
-            String command = ui.readInput();
-            isRunning = ui.printCommand((linePrinter) -> {
-                try {
-                    return Parser.parse(command).execute(linePrinter, taskList);
-                } catch (DukeException ex) {
-                    ui.printError(linePrinter, ex);
-                }
-                return true;
-            });
-            System.out.println();
+    /**
+     * Passes the input string to <code>Parser</code> to process.
+     * @param input Input string to process.
+     */
+    public void processCommand(String input) {
+        boolean isRunning = Ui.getInstance().printCommand((linePrinter) -> {
+            try {
+                return Parser.parse(input).execute(linePrinter, taskList);
+            } catch (DukeException ex) {
+                Ui.getInstance().printError(linePrinter, ex);
+            }
+            return true;
+        });
+
+        if (!isRunning) {
+            Platform.exit();
         }
     }
 }

@@ -1,10 +1,14 @@
 package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,36 +16,57 @@ import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeIoException;
 import duke.testutil.PrinterStub;
+import duke.ui.Ui;
+import duke.util.Printable;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class UiTest {
-    @Test
-    public void testGreet() throws IOException {
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outStream));
-
-        Ui.getInstance().greet();
-        outStream.flush();
-        String lines = outStream.toString();
-        assertEquals("\t------------------------------------\r\n"
-                + "\tHi! I'm Megumin\r\n"
-                + "\tWhat do you need?\r\n"
-                + "\t------------------------------------\r\n\r\n", lines);
+    private Ui initMockUi() throws DukeIoException {
+        Ui ui = mock(Ui.class);
+        Stage stage = mock(Stage.class);
+        doNothing().when(stage).setScene(any(Scene.class));
+        ui.buildStage(stage, (input) -> {});
+        return ui;
     }
 
     @Test
-    public void testPrintCommand() throws IOException {
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outStream));
+    public void testGreet() throws DukeIoException {
+        Ui ui = initMockUi();
+        ArrayList<String> lines = new ArrayList<>();
+        when(ui.printCommand(any())).thenAnswer((invocation) -> {
+            invocation.<Function<Printable, Boolean>>getArgument(0)
+                    .apply((message) -> {
+                        lines.add(message);
+                    });
+            return true;
+        });
+        when(ui.greet()).thenCallRealMethod();
+        ui.greet();
+        String actual = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
+        assertEquals("Hi! I'm Megumin\n"
+                + "What do you need?", actual);
+    }
 
-        Ui.getInstance().printCommand((linePrinter) -> {
+    @Test
+    public void testPrintCommand() throws DukeIoException {
+        Ui ui = initMockUi();
+        ArrayList<String> lines = new ArrayList<>();
+        when(ui.printCommand(any())).thenAnswer((invocation) -> {
+            invocation.<Function<Printable, Boolean>>getArgument(0)
+                    .apply((message) -> {
+                        lines.add(message);
+                    });
+            return true;
+        });
+
+        ui.printCommand((linePrinter) -> {
             linePrinter.print("test line");
             return false;
         });
-        outStream.flush();
-        String lines = outStream.toString();
-        assertEquals("\t------------------------------------\r\n"
-                + "\ttest line\r\n"
-                + "\t------------------------------------\r\n", lines);
+
+        String actual = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
+        assertEquals("test line", actual);
     }
 
     @Test
