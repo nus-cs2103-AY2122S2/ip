@@ -26,12 +26,19 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
+    public String guiPrintList() {
+        String output = "";
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task task = tasks.get(i - 1);
+            System.out.print(i + ": ");
+            output += i + ": ";
+            output += task.toString() + "\n";
+        }
+        return output;
     }
 
-    public int getSize() {
-        return tasks.size();
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     /**
@@ -39,54 +46,6 @@ public class TaskList {
      */
     public void reset() {
         tasks.clear();
-    }
-
-    /**
-     * Takes in a String input of a task to be added from the user that is passed by parser
-     *
-     * @param input String that contains task type, task details and task date/time if applicable
-     */
-    //Add from String input by user
-    public void addTask(String input) {
-        //identify type of task
-        String[] arr = input.split(" ", 2);
-        try {
-            if (arr.length < 2) {
-                throw new DukeException("Description of task cannot be empty!");
-            }
-
-            String taskType = arr[0];
-            String taskDetails = arr[1];
-
-            Task newTask = new Task("");
-
-            if (taskType.equals("todo")) {
-                newTask = new Todo(taskDetails);
-            } else if (taskType.equals("deadline")) {
-                String[] spl = taskDetails.split("/by");
-                if (spl.length < 2) {
-                    throw new DukeException("Description must include a date/time! Did you miss out a /by?");
-                }
-                String details = spl[0].trim();
-                String dateTime = spl[1].trim();
-                newTask = new Deadline(details, dateTime);
-            } else if (taskType.equals("event")) {
-                String[] splitString = taskDetails.split("/at");
-                if (splitString.length < 2) {
-                    throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
-                }
-                String details = splitString[0].trim();
-                String dateTime = splitString[1].trim();
-                newTask = new Event(details, dateTime);
-            }
-
-            tasks.add(newTask);
-            System.out.println("Got it. The task has been added:");
-            newTask.printTask();
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
     }
 
     /**
@@ -99,6 +58,15 @@ public class TaskList {
         System.out.println("Got it. The task has been added:");
         task.printTask();
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public String guiAddTask(Task task) {
+        String output = "";
+        tasks.add(task);
+        output += "Got it. The task has been added:\n";
+        output += task.toString() + "\n";
+        output += "Now you have " + tasks.size() + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -125,6 +93,15 @@ public class TaskList {
         }
     }
 
+    public String guiDeleteTask(int index) {
+        if (index > tasks.size() || index <= 0) {
+            return "Index out of bounds, please try again";
+        } else {
+            tasks.remove(index - 1);
+            return guiPrintList();
+        }
+    }
+
     /**
      * Marks a task from the ArrayList as done
      *
@@ -139,6 +116,15 @@ public class TaskList {
         }
     }
 
+    public String guiMarkTask(int index) {
+        if (index > tasks.size() || index <= 0) {
+            return "Index out of bounds, please try again";
+        } else {
+            tasks.get(index - 1).setDone(true);
+            return guiPrintList();
+        }
+    }
+
     /**
      * Marks a task from the ArrayList as not done
      *
@@ -150,6 +136,15 @@ public class TaskList {
         } else {
             tasks.get(index - 1).setDone(false);
             printList();
+        }
+    }
+
+    public String guiUnmarkTask(int index) {
+        if (index > tasks.size() || index <= 0) {
+            return "Index out of bounds, please try again";
+        } else {
+            tasks.get(index - 1).setDone(false);
+            return guiPrintList();
         }
     }
 
@@ -177,5 +172,25 @@ public class TaskList {
                 System.out.println(s);
             }
         }
+    }
+
+    public String guiFind(String text) throws DukeException {
+        String output = "";
+        ArrayList<String> toPrint = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String taskName = task.getTaskName().toLowerCase();
+            if (taskName.contains(text.toLowerCase())) {
+                String result = "Index in taskList: " + (i + 1) + " || Task Details: " + task.toString();
+                toPrint.add(result);
+            }
+        }
+        if (toPrint.size() == 0) {
+            throw new DukeException("no matches found for this keyword(s)");
+        } else {
+            output = String.join("\n", toPrint);
+            output = "Here are the matching tasks in your list: \n" + output;
+        }
+        return output;
     }
 }

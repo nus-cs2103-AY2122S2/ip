@@ -102,4 +102,86 @@ public class Parser {
         Ui.printSeparator();
         return false;
     }
+
+    public String guiTakeInput(String input, TaskList taskList) throws DukeException{
+        if (input.equals("bye")) {
+            return "~BYE!~ Come back to Duke anytime";
+        } else if (input.equals("list")) { //Check if input == list
+            return taskList.guiPrintList();
+        } else if (input.equals("reset")) { //Instruction to reset the arraylist
+            taskList.reset();
+            return "List of tasks has been resetted";
+        } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
+            //Check if input == unmark or delete or mark
+            String[] splitString = input.split("\\s+");
+            String instr = splitString[0];
+            if (splitString.length < 2) {
+                return "Did you miss out the index in your input?";
+            } else {
+                try {
+                    int index = Integer.parseInt(splitString[1]);
+                    if (instr.equals("unmark")) {
+                        return taskList.guiUnmarkTask(index);
+                    } else if (instr.equals("mark")) {
+                        return taskList.guiMarkTask(index);
+                    } else if (instr.equals("delete")) {
+                        return taskList.guiDeleteTask(index);
+                    } else {
+                        throw new DukeException("You have entered an invalid instruction");
+                    }
+                } catch (DukeException e) {
+                    return e.toString();
+                }
+            }
+        } else if (input.contains("find")) { //input is find
+            String[] splitString = input.split(" ", 2);
+            if (splitString.length < 2) {
+                throw new DukeException("Please input the keyword(s) for find");
+            }
+            String command = splitString[0];
+            String text = splitString[1];
+            if (command.equals("find")) {
+                return taskList.guiFind(text);
+            } else {
+                throw new DukeException("You have entered an invalid command");
+            }
+        } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
+            //input is a new type of task
+            //identify type of task
+            String[] stringArray = input.split(" ", 2);
+
+            //task has no task detail/name
+            if (stringArray.length < 2) {
+                throw new DukeException("Description of task cannot be empty!");
+            }
+
+            String taskType = stringArray[0];
+            String taskDetails = stringArray[1];
+
+            Task newTask = new Task("");
+
+            if (taskType.equals("todo")) {
+                newTask = new Todo(taskDetails);
+            } else if (taskType.equals("deadline")) {
+                String[] stringSplit = taskDetails.split("/by");
+                if (stringSplit.length < 2) {
+                    throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
+                }
+                String details = stringSplit[0].trim();
+                String dateTime = stringSplit[1].trim();
+                newTask = new Deadline(details,dateTime);
+            } else if (taskType.equals("event")) {
+                String[] splitString = taskDetails.split("/at");
+                if (splitString.length < 2) {
+                    throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
+                }
+                String details = splitString[0].trim();
+                String dateTime = splitString[1].trim();
+                newTask = new Event(details,dateTime);
+            }
+            return taskList.guiAddTask(newTask);
+        } else {
+            throw new DukeException("no such task type");
+        }
+    }
 }

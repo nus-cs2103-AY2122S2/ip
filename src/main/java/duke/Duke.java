@@ -1,4 +1,6 @@
 package duke;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,9 +15,6 @@ public class Duke {
 
     /**
      * Constructor for Duke class
-     *
-     * @param path the path to the storage file from root
-     * @param file_dir the path to the storage directory from root
      */
     public Duke(String path, String file_dir) {
         this.ui = new Ui();
@@ -59,5 +58,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("./src/main/data/data.txt", "./src/main/data").run();
+    }
+
+    public String getResponse(String input) throws DukeException, IOException {
+        try {
+            String output = parser.guiTakeInput(input, taskList);
+            return output;
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 }

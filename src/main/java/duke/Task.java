@@ -54,4 +54,14 @@ public class Task {
             System.out.println("[ ] " + this.getTaskName());
         }
     }
+
+    public String guiPrintTask() {
+        String output;
+        if (this.getDone()) {
+            output = "[X] " + this.getTaskName();
+        } else {
+            output = "[ ] " + this.getTaskName();
+        }
+        return output;
+    }
 }
