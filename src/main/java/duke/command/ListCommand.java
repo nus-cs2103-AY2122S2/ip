@@ -23,7 +23,7 @@ public class ListCommand extends Command {
             StringBuilder sb = new StringBuilder(ui.STR_PADDING + "Here are the tasks in your list: \n");
             int[] taskCount = {1};
 
-            tasks.forEach(task -> {
+            tasks.getTasks().forEach( task -> {
                 sb.append(String.format(ui.STR_PADDING + "  %d. " + task, taskCount[0]++));
 
                 if (taskCount[0] != tasks.size() + 1) {

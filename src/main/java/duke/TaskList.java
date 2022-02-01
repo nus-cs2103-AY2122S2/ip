@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TaskList implements Iterable<Task> {
+public class TaskList {
     private final List<Task> tasks;
 
     /** Instantiates a new empty TaskList. */
     public TaskList() {
         this.tasks = new ArrayList<>();
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -80,8 +84,4 @@ public class TaskList implements Iterable<Task> {
         this.tasks.add(task);
     }
 
-    @Override
-    public Iterator<Task> iterator() {
-        return tasks.iterator();
-    }
 }

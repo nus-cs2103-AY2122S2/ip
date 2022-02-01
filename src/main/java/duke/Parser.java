@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
@@ -60,6 +61,9 @@ public class Parser {
         case "remove":
         case "delete":
             cmd = new DeleteCommand(input[1]);
+            break;
+        case "clear":
+            cmd = new ClearCommand();
             break;
         case "find":
             cmd = new FindCommand(input[1]);
