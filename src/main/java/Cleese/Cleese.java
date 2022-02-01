@@ -4,17 +4,17 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Cleese {
-    private static TaskList taskList;
-    private static Storage storage;
     private static Ui ui;
     private static Parser parser;
+    private static Storage storage;
+    private static TaskList taskList;
 
     public static void main(String[] args) {
         String filePath = "./src/TaskListDB.txt";
-        storage = new Storage(filePath);
-        taskList = new TaskList();
         ui = new Ui();
         parser = new Parser();
+        storage = new Storage(filePath);
+        taskList = new TaskList();
         // Read inputs from file
         try {
             storage.readFromFile(taskList);
