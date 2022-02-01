@@ -3,6 +3,18 @@ package duke;
 import java.io.IOException;
 import duke.command.Command;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Duke {
 
@@ -18,13 +30,11 @@ public class Duke {
 
     /**
      * Constructs a {@code Duke} object with its name and path for storage.
-     * @param name Duke's name
-     * @param filePath path for storage
      */
-    public Duke(String name, String filePath) {
-        this.name = name;
+    public Duke() {
+        this.name = "Enkel";
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(System.getProperty("user.dir"));
         try {
             this.tasks = storage.load();
         } catch (Exception e) {
@@ -67,21 +77,8 @@ public class Duke {
         return "Hello! I'm " + name + "\nWhat can I do for you?";
     }
 
-    /**
-     * Asks the storage to update the records with the current list of tasks.
-     * @throws IOException if an I/O error occurred
-     */
-    public void updateRecords() throws IOException {
-        storage.update(tasks);
-    }
-
-    /**
-     * The main method.
-     * @param args not used
-     * @throws IOException if an I/O error occurred
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke("Enkel", System.getProperty("user.dir") + "../../../").run();
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
