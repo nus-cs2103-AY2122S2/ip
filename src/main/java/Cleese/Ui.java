@@ -1,3 +1,5 @@
+package Cleese;
+
 public class Ui {
 
     public void printLine() {
