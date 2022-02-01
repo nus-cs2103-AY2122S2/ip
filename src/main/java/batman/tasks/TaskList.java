@@ -102,12 +102,12 @@ public class TaskList {
             }
             switch (action) {
             case "mark":
-                tasks.get(index).markItem();
+                tasks.get(index).markDone();
                 sb.append("Alfred, mark it as done!\n  ")
                         .append(tasks.get(index).toString()).append("\n");
                 break;
             default:
-                tasks.get(index).unmarkItem();
+                tasks.get(index).unmarkDone();
                 sb.append("Make up your mind. Alfred, unmark it!\n  ")
                         .append(tasks.get(index).toString()).append("\n");
                 break;

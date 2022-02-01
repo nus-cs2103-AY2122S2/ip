@@ -18,11 +18,11 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markItem() {
+    public void markDone() {
         this.isDone = true;
     }
 
-    public void unmarkItem() {
+    public void unmarkDone() {
         this.isDone = false;
     }
 
@@ -30,7 +30,7 @@ public abstract class Task {
         return "Now you have " + totalTasks + " tasks in the list.";
     }
 
-    public abstract String appendtoFile();
+    public abstract String appendToFile();
 
     @Override
     public String toString() {
