@@ -25,4 +25,11 @@ public class TaskList {
     public Integer size() {
         return taskList.size();
     }
+    public void find(String keyword) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).toString().contains(keyword)) {
+                System.out.print(String.format("%d. %s \n", i+1, taskList.get(i).toString()));
+            }
+        }
+    }
 }

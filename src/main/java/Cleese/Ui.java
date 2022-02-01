@@ -24,4 +24,7 @@ public class Ui {
     public void printRemovedAck(Task task, TaskList taskList) {
         System.out.println(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list",task.toString(),taskList.size()));
     }
+    public void printFindMessage() {
+        System.out.println(String.format("Here are the matching tasks in your list:"));
+    }
 }

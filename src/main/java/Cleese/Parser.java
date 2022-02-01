@@ -54,7 +54,6 @@ public class Parser {
         case "event":
         case "deadline":
             if (command.equals("todo") && parameters.equals(null)) {
-                System.out.println("testing this part");
                 throw new NoDescException("todo");
             }
             String description = parameters;
@@ -77,6 +76,11 @@ public class Parser {
             ui.printAddedAck(newTask,taskList);
             ui.printLine();
             return "tasks";
+        case "find":
+            ui.printFindMessage();
+            taskList.find(parameters);
+            ui.printLine();
+            return "find";
         default:
             throw new InvalidInputException("Invalid Input");
         }
