@@ -1,17 +1,7 @@
 public class DateChecker {
-    private int day;
-    private int month;
-    private int year;
-
-    private final int[] daysPerMonth
-            = {31, 28, 31, 30,
-            31, 30, 31, 31,
-            30, 31, 30, 31};
-
-    private final int[] daysPerMonthLeapYear
-            = {31, 29, 31, 30,
-            31, 30, 31, 31,
-            30, 31, 30, 31};
+    private final int day;
+    private final int month;
+    private final int year;
 
     private final String[] nameOfMonths
             = {"January", "February", "March", "April",
@@ -30,12 +20,18 @@ public class DateChecker {
             // check for leap year
             if (this.year % 400 != 0) { // no leap year
                 // check for valid day
-                if (this.daysPerMonth[this.month - 1] >= this.day && this.day > 0) {
+                int[] daysPerMonth = {31, 28, 31, 30,
+                        31, 30, 31, 31,
+                        30, 31, 30, 31};
+                if (daysPerMonth[this.month - 1] >= this.day && this.day > 0) {
                     this.isValid = true;
                 }
             } else { // leap year
                 // check valid day
-                if (this.daysPerMonthLeapYear[this.month - 1] >= this.day && this.day > 0) {
+                int[] daysPerMonthLeapYear = {31, 29, 31, 30,
+                        31, 30, 31, 31,
+                        30, 31, 30, 31};
+                if (daysPerMonthLeapYear[this.month - 1] >= this.day && this.day > 0) {
                     this.isValid = true;
                 }
             }

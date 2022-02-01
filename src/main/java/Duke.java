@@ -2,14 +2,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        // task list to be initialized first
-        ArrayList<Task> taskList = new ArrayList<>();
 
+        // String helpers
         String space = "     ";
         String line = "____________________________________________________________";
 
@@ -24,27 +22,27 @@ public class Duke {
                 + space + "To List current tasks in Duke, please input List\n"
                 + space + "To Delete a task, please input Delete\n"
                 + space + "To Exit Duke, please input Exit\n"
-                + space + "Input anything to begin!\n"
                 + space + "(All inputs are NOT case-sensitive!)\n"
+                + space + "Input anything to begin!\n"
                 + space + line;
 
         System.out.println(greeting);
 
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
-            System.out.println(space + "What can I do for you?");
-            sc.nextLine();
-
-            boolean validCommand;
+            boolean isExitCommand;
             do {
+                System.out.println(space + "What can I do for you?");
+
                 String inputCommand  = sc.next();
 
-                validCommand = true;
+                isExitCommand = false;
                 Task currentTask;
                 String name;
                 String date;
                 int taskNumber;
+
+                System.out.println(space + line);
 
                 switch (inputCommand.toLowerCase()) {
                 case "deadline":
@@ -55,6 +53,7 @@ public class Duke {
 
                     if (name.isBlank()) {
                         System.out.println(space + "Task name cannot be blank!");
+                        System.out.println(space + line);
                         break;
                     }
 
@@ -64,17 +63,20 @@ public class Duke {
 
                     if (date.isBlank()) {
                         System.out.println(space + "Deadline of the task cannot be blank!");
+                        System.out.println(space + line);
                         break;
                     }
 
                     // checks for date length and date validity
                     if (date.length() != 8) {
                         System.out.println(space + "Invalid date format!");
+                        System.out.println(space + line);
                         break;
                     } else {
                         DateChecker dateChecker = new DateChecker(date);
                         if (!dateChecker.isDateValid()) {
                             System.out.println(space + "Invalid date!");
+                            System.out.println(space + line);
                             break;
                         }
                     }
@@ -83,15 +85,10 @@ public class Duke {
                     currentTask = new TaskCreator('D', false, name, date).createTask();
 
                     // add task to tasklist
-                    taskList.add(currentTask);
+                    TaskManager.add(currentTask);
                     System.out.println(space + "Task has been added to the list!");
 
-                    // display tasklist
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+                    System.out.println(space + line);
                     break;
 
                 case "event":
@@ -102,6 +99,7 @@ public class Duke {
 
                     if (name.isBlank()) {
                         System.out.println(space + "Task name cannot be blank!");
+                        System.out.println(space + line);
                         break;
                     }
 
@@ -111,17 +109,20 @@ public class Duke {
 
                     if (date.isBlank()) {
                         System.out.println(space + "Date of the event cannot be blank!");
+                        System.out.println(space + line);
                         break;
                     }
 
                     // checks for date length and date validity
                     if (date.length() != 8) {
                         System.out.println(space + "Invalid date format!");
+                        System.out.println(space + line);
                         break;
                     } else {
                         DateChecker dateChecker = new DateChecker(date);
                         if (!dateChecker.isDateValid()) {
                             System.out.println(space + "Invalid date!");
+                            System.out.println(space + line);
                             break;
                         }
                     }
@@ -130,25 +131,21 @@ public class Duke {
                     currentTask = new TaskCreator('E', false, name, date).createTask();
 
                     // add task to tasklist
-                    taskList.add(currentTask);
+                    TaskManager.add(currentTask);
                     System.out.println(space + "Task has been added to the list!");
 
-                    // display tasklist
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+                    System.out.println(space + line);
                     break;
 
                 case "todo":
                     // get name of task
-                    System.out.println(space + "Please input the name of the task\n");
+                    System.out.println(space + "Please input the name of the task");
                     sc.nextLine();
                     name = sc.nextLine();
 
                     if (name.isBlank()) {
                         System.out.println(space + "Task name cannot be blank!");
+                        System.out.println(space + line);
                         break;
                     }
 
@@ -156,133 +153,101 @@ public class Duke {
                     currentTask = new TaskCreator('T', false, name, "0000000").createTask();
 
                     // add task to tasklist
-                    taskList.add(currentTask);
+                    TaskManager.add(currentTask);
                     System.out.println(space + "Task has been added to the list!");
 
-                    // display tasklist
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+                    System.out.println(space + line);
                     break;
 
                 case "list":
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+                    // display tasklist
+                    System.out.println(space + "Here is a list of your task:");
+                    TaskManager.print();
+                    System.out.println(space + line);
                     break;
 
                 case "exit":
-                    System.out.println(space + line);
+                    isExitCommand = true;
                     System.out.println(space + "Bye! Hope to see you again soon!");
                     System.out.println(space + line);
                     break;
 
                 case "mark":
-                    if (taskList.size() == 0) {
+                    if (TaskManager.isEmpty()) {
                         System.out.println(space + "No available tasks to mark!");
+                        System.out.println(space + line);
                         break;
                     }
 
-                    System.out.println(space + "Here are the tasks in your list:\n");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+                    TaskManager.print();
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to mark as complete\n");
                     taskNumber = sc.nextInt();
 
-                    if (taskNumber > taskList.size()) {
-                        System.out.println(space + "Error! Task does not exist!");
-                        break;
-                    }
-
-                    if(taskList.get(taskNumber - 1).isMarked()) {
-                        System.out.println(space + "Error! Task has already been marked as complete!");
-                        break;
-                    }
-
-                    taskList.get(taskNumber - 1).mark();
+                    TaskManager.mark(taskNumber);
+                    System.out.println(space + line);
                     break;
 
                 case "unmark":
-                    if (taskList.size() == 0) {
+                    if (TaskManager.isEmpty()) {
                         System.out.println(space + "No available tasks to mark!");
+                        System.out.println(space + line);
                         break;
                     }
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+
+                    TaskManager.print();
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to mark as incomplete");
                     taskNumber = sc.nextInt();
 
-                    if (taskNumber > taskList.size()) {
-                        System.out.println(space + "Error! Task does not exist!");
-                        break;
-                    }
-
-                    if(taskList.get(taskNumber - 1).isMarked()) {
-                        System.out.println(space + "Error! Task has already been marked as incomplete!");
-                        break;
-                    }
-
-                    taskList.get(taskNumber - 1).unmark();
+                    TaskManager.unmark(taskNumber);
+                    System.out.println(space + line);
                     break;
 
                 case "delete":
-                    if (taskList.size() == 0) {
+                    if (TaskManager.isEmpty()) {
                         System.out.println(space + "No available tasks to delete!");
+                        System.out.println(space + line);
                         break;
                     }
-                    System.out.println(space + "Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
-                    }
+
+                    TaskManager.print();
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to delete");
                     taskNumber = sc.nextInt();
 
-                    if (taskNumber > taskList.size()) {
+                    if (!TaskManager.isValidTask(taskNumber)) {
                         System.out.println(space + "Error! Task does not exist!");
+                        System.out.println(space + line);
                         break;
                     }
 
                     System.out.println(space + "Are you sure you wish to delete\n"
-                            + space + taskList.get(taskNumber - 1) + " ?\n"
+                            + space + TaskManager.get(taskNumber) + " ?\n"
                             + space + "Input Y/N to continue.");
 
                     char deleteConfirmation = sc.next().toLowerCase().charAt(0);
 
                     if (deleteConfirmation ==  'y') {
-                        taskList.remove(taskNumber - 1);
+                        TaskManager.delete(taskNumber);
                         System.out.println(space + "Okie Dokie! Task has been deleted!");
-                    } else if (deleteConfirmation ==  'n') {
-                        System.out.println(space + "Delete action has been aborted! Your task is safe!");
-                    } else {
-                        System.out.println(space + "Invalid input!\n"
-                                + space + "(You only had to input one of 2 letters in the alphabet...)");
+                        break;
                     }
 
-                    System.out.println("Here are the tasks in your list:\n");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String bullet = space + (i + 1) + ".";
-                        System.out.println(bullet + taskList.get(i).toString());
+                    if (deleteConfirmation ==  'n') {
+                        System.out.println(space + "Delete action has been aborted! Your task is safe!");
+                        System.out.println(space + line);
+                        break;
                     }
+
+                    System.out.println(space + "Invalid input!");
+                    System.out.println(space + line);
                     break;
 
                 default:
-                    validCommand = false;
                     System.out.println(space + "Invalid input!!!\n"
                             + space + "Here is the list of valid commands:\n"
                             + space + "Deadline\n"
@@ -292,10 +257,10 @@ public class Duke {
                             + space + "Unmark\n"
                             + space + "Delete\n"
                             + space + "Exit");
+                    System.out.println(space + line);
                 }
 
-            } while (!validCommand);
-        }
+            } while (!isExitCommand);
         sc.close();
     }
 }

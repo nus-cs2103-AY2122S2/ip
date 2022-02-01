@@ -1,7 +1,7 @@
 public abstract class Task {
-    protected String name;
-    protected boolean state;
+    private final String name;
     // task state: true = done, false = not done
+    private boolean state;
 
     Task(String name) {
         this.name = name;
@@ -20,6 +20,9 @@ public abstract class Task {
         return this.state;
     }
 
+    public boolean isEmptyTask() {
+        return false;
+    }
 
     @Override
     public String toString() {
