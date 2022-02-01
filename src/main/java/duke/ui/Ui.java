@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -13,7 +12,6 @@ import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeIoException;
 import duke.util.Printable;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

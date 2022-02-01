@@ -2,9 +2,7 @@ package duke.ui;
 
 import java.io.InputStream;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-import duke.Duke;
 import duke.exception.DukeIoException;
 
 import javafx.fxml.FXML;

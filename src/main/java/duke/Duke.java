@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
