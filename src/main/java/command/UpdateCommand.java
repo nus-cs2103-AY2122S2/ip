@@ -1,10 +1,10 @@
 package command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import task.TaskList;
+import duke.Storage;
+import duke.Ui;
 import task.Task;
+import task.TaskList;
 
 /**
  * The UpdateCommand class is a type of Command that is used to update a particular task.
@@ -15,7 +15,9 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Executes the update command and updates the specified task from the TaskList and updates it in the Storage as well.
+     * Executes the update command and updates the specified task from the TaskList
+     * and updates it in the Storage as well.
+     *
      * @param tasks TaskList that stores the current list of tasks.
      * @param ui Ui of the bot application.
      * @param storage Storage to store the list of tasks.
@@ -35,6 +37,8 @@ public class UpdateCommand extends Command {
         case "unmark":
             t.markAsNotDone();
             outputMsg = "Okay, I've marked this task as not done yet:\n" + t;
+            break;
+        default:
             break;
         }
         storage.updateSavedTasks(oldDetails, t.getSaveFormat());

@@ -1,13 +1,13 @@
 package command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import task.TaskList;
-import task.Task;
-import task.Todo;
+import duke.Storage;
+import duke.Ui;
 import task.Deadline;
 import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 /**
  * The AddCommand class is a type of Command that is used to add new task.
@@ -44,9 +44,12 @@ public class AddCommand extends Command {
             String at = command.substring(indexOfAt + 4);
             t = new Event(desc, at);
             break;
+        default:
+            break;
         }
         tasks.addTask(t);
         storage.updateSavedTasks("", t.getSaveFormat());
-        ui.printMsg("Got it. I've added this task:\n  " + t + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
+        ui.printMsg("Got it. I've added this task:\n  " + t + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.");
     }
 }

@@ -1,10 +1,10 @@
 package command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import task.TaskList;
+import duke.Storage;
+import duke.Ui;
 import task.Task;
+import task.TaskList;
 
 /**
  * The DeleteCommand class is a type of Command that is used to delete a particular task.
@@ -15,7 +15,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command and deletes the specified task from the TaskList and removes it in the Storage as well.
+     * Executes the delete command and deletes the specified task from the TaskList
+     * and removes it in the Storage as well.
+     *
      * @param tasks TaskList that stores the current list of tasks.
      * @param ui Ui of the bot application.
      * @param storage Storage to store the list of tasks.
@@ -27,6 +29,7 @@ public class DeleteCommand extends Command {
         Task t = tasks.getTask(index);
         tasks.removeTask(t);
         storage.updateSavedTasks(t.getSaveFormat(), "");
-        ui.printMsg("Noted. I've removed this task:\n  " + t + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
+        ui.printMsg("Noted. I've removed this task:\n  " + t + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.");
     }
 }

@@ -1,11 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.Ui;
-import task.TaskList;
 import task.Task;
-
-import java.util.ArrayList;
+import task.TaskList;
 
 /**
  * The FindCommand class is a type of Command that is used to find the matching tasks.

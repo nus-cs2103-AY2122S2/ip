@@ -1,7 +1,7 @@
 package command;
 
-import duke.Ui;
 import duke.Storage;
+import duke.Ui;
 import task.TaskList;
 
 /**
@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
      * @param storage Storage to store the list of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)  {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         this.isRun = false;
         ui.showGoodbye();
     }

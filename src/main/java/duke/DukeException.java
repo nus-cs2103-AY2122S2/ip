@@ -37,10 +37,12 @@ public class DukeException extends Exception {
         case "delete":
             if (commandSplitBySpace.length > 1) {
                 if (!tasks.hasTask(Integer.parseInt(commandSplitBySpace[1]) - 1)) {
-                    throw new DukeException("☹ OOPS!!! The task to be " + commandSplitBySpace[0] + "ed does not exist.");
+                    throw new DukeException("☹ OOPS!!! The task to be "
+                            + commandSplitBySpace[0] + "ed does not exist.");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The task to be " + commandSplitBySpace[0] + "ed has to be indicated.");
+                throw new DukeException("☹ OOPS!!! The task to be "
+                        + commandSplitBySpace[0] + "ed has to be indicated.");
             }
             break;
         case "todo":
