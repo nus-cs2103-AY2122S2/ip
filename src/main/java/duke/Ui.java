@@ -2,34 +2,35 @@ package duke;
 
 import java.util.Scanner;
 
+
 /**
  * Class encompassing all the interactions of the bot with the user.
  */
-public class Ui {
+public class Ui  {
     private final Scanner sc;
 
     /**
      * Constructor for the Ui class, creates a new scanner which allows it to take input form a user.
      */
-    public Ui() {
+    public Ui(String... args) {
         this.sc = new Scanner(System.in);
     }
 
     /**
      * Function for printing the greeting to it user.
      */
-    public void greet() {
-        String greeting = encloseWithin("Hello! I'm duke.Duke\nWhat can I do for you?\n");
-        System.out.println(greeting);
+    public String greet() {
+        return encloseWithin("Hello! I'm duke.Duke\nWhat can I do for you?\n");
     }
 
     /**
      * Function for printing the goodbye after the user has finished using the application.
      */
-    public void sayGoodbye() {
+    public String sayGoodbye() {
         String goodbye = encloseWithin("Bye. Hope to see you again soon!\n");
-        System.out.println(goodbye);
         this.sc.close();
+        return goodbye;
+
     }
 
     /**
@@ -59,4 +60,5 @@ public class Ui {
         string.append(header).append("\n").append(str).append(header).append("\n");
         return string.toString();
     }
+
 }

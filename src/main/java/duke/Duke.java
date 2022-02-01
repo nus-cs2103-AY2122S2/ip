@@ -23,7 +23,6 @@ public class Duke {
     public void run() {
         this.ui.greet();
         String userInput = ui.askForInput();
-
         while (!userInput.equals("bye")) {
             String[] processedInput = Parser.parseInput(userInput);
             ui.say(Command.execute(processedInput, this.taskList));
@@ -31,6 +30,16 @@ public class Duke {
         }
         storage.writeToStorage(this.taskList);
         ui.sayGoodbye();
+    }
+
+    public String getResponse(String userInput) {
+        if (userInput.equals("bye")) {
+            storage.writeToStorage(this.taskList);
+            return ui.sayGoodbye();
+        }
+        String[] processedInput = Parser.parseInput(userInput);
+        String response = Command.execute(processedInput, this.taskList);
+        return response;
     }
 }
 
