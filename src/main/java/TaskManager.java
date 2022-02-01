@@ -14,12 +14,12 @@ public class TaskManager {
 
     public static void add(Task task) {
         taskList.add(task);
-
+        save();
     }
 
     public static void delete(int i) {
         taskList.remove(i - 1);
-
+        save();
     }
 
     public static Task get(int i) {
@@ -66,5 +66,29 @@ public class TaskManager {
         return !get(i).isEmptyTask();
     }
 
+    public static void save() {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt", false);
+            PrintWriter pw = new PrintWriter(fw);
 
+            pw.write(taskList.size() + "\n");
+
+            for (Task task : taskList) {
+                String prefix = task.getPrefix();
+                String postfix = task.getPostfix();
+                String completedMarker = task.isMarked() ? "X" : " ";
+                pw.write(prefix + "/"
+                        + completedMarker + "/"
+                        + task.getName() + "/"
+                        + postfix + "\n");
+            }
+
+            pw.flush();
+            pw.close();
+
+            System.out.println(SPACE + "Tasklist has been updated...");
+        } catch (IOException e) {
+            System.out.println(SPACE + "An error occurred. Tasklist cannot be saved!");
+        }
+    }
 }

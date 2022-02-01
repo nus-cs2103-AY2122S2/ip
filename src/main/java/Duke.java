@@ -11,7 +11,80 @@ public class Duke {
         String space = "     ";
         String line = "____________________________________________________________";
 
-        
+        // create file object
+        File dataFile = new File("data");
+
+        // checks if data directory exists
+        if (!dataFile.isDirectory()) {
+            boolean isDataFileCreated = dataFile.mkdir();
+            if (isDataFileCreated) {
+                System.out.println(space + "New user detected. Setting up Duke...");
+            } else {
+                System.out.println(space + "Error creating save file. Please check ");
+            }
+        } else {
+            System.out.println(space + "Previous data found. Now loading...");
+        }
+
+        // Create duke.txt if it doest not exist
+        try {
+            File dukeFile = new File("data/duke.txt");
+            if (dukeFile.createNewFile()) {
+                System.out.println(space + "A new Duke has been born...");
+            } else {
+                // read file
+                System.out.println(space + "Duke is waking up...");
+                BufferedReader br = new BufferedReader(new FileReader(dukeFile));
+
+                /*
+                 Populate task list with tasks from memory.
+                 taskAsText will store tasks in the form of their prefix,
+                 completed state, name, and postfix,
+                 separated by "|"
+                 For a todo task: todo clear the bin, taskAsText would be
+                 T| |clear the bin|*
+                 for the unmarked version, and
+                 T|X|clear the bin|*
+                 for the marked version.
+                 A * is appended to the end in place of the date
+                */
+
+                String firstLine;
+                int numOfExistingTasks = 0;
+
+                if (!(firstLine = br.readLine()).isEmpty()) {
+                    numOfExistingTasks = Integer.parseInt(firstLine);
+                }
+
+                while (numOfExistingTasks != 0) {
+                    // convert taskAsText into its string array form,
+                    // with 4 elements, being the prefix, completedState, name and date
+                    numOfExistingTasks--;
+                    String taskAsText = br.readLine();
+                    String[] taskAsArray = taskAsText.split("/");
+
+                    char prefix = taskAsArray[0].charAt(0);
+                    boolean isCompleted = taskAsArray[1].equals("X");
+                    String name = taskAsArray[2];
+                    String date = taskAsArray[3];
+
+                    // Initializes a TaskCreator to create a new Task
+                    TaskCreator taskCreator = new TaskCreator(prefix,
+                            isCompleted,
+                            name,
+                            date);
+                    Task currentTask = taskCreator.createTask();
+
+                    // Adds newly created task into tasklist
+                    TaskManager.add(currentTask);
+                }
+
+            }
+        } catch (IOException e) {
+            System.out.println("ERROR!!!\n"
+                    + "Path to Duke's memory bank has been obstructed!\n"
+                    + "This session will not be save!");
+        }
 
         String greeting = space + line + "\n"
                 + space + "Hello! I'm Duke\n"
