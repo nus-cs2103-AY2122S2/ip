@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -30,6 +31,16 @@ public class TaskList {
 
     public void add(Task t) {
         tasks.add(t);
+    }
+
+    public TaskList find(String word) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(word)) {
+                matchingTasks.add(tasks.get(i));
+            }
+        }
+        return new TaskList(matchingTasks);
     }
 
     public String toString() {
