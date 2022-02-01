@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Responsible for the functionality needed when listing out all the task.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructor to create List duke.command.Command.

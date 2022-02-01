@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * Responsible for the functionality needed when creating an Event task.
  */
-public class CreateEventCommand extends Command{
+public class CreateEventCommand extends Command {
 
     /** Event task created. */
     private Event event;

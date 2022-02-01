@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Responsible for the functionality needed when un-marking a Task.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
 
     /** 1-based index of the task in the list. */
     private int point;

@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the matching tasks in your list:\n");
         int startIndex = 0;
-        for(int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             if (task.getDescription().contains(keyword)) {
                 startIndex++;

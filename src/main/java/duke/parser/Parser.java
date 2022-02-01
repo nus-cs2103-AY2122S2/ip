@@ -195,7 +195,7 @@ public class Parser {
                             + "start and end times in the following format:\n"
                             + " yyyy-mm-dd HHMM HHMM in the 24 hour format");
                 }
-                i+=2;
+                i += 2;
             }
 
         }
@@ -263,37 +263,37 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         String[] tokens = input.split("\\s+");
         Command command;
-            switch (tokens[0]) {
-            case "list":
-                command = new ListCommand();
-                break;
-            case "mark":
-                command = parseMarkCommand(tokens);
-                break;
-            case "unmark":
-                command = parseUnmarkCommand(tokens);
-                break;
-            case "todo":
-                command = parseTodoCommand(tokens);
-                break;
-            case "deadline":
-                command = parseDeadlineCommand(tokens);
-                break;
-            case "event":
-                command = parseEventCommand(tokens);
-                break;
-            case "delete":
-                command = parseDeleteCommand(tokens);
-                break;
-            case "bye":
-                command = new ExitCommand();
-                break;
-            case "find":
-                command = parseFindCommand(tokens);
-                break;
-            default:
-                throw new UnkownCommandException();
-            }
+        switch (tokens[0]) {
+        case "list":
+            command = new ListCommand();
+            break;
+        case "mark":
+            command = parseMarkCommand(tokens);
+            break;
+        case "unmark":
+            command = parseUnmarkCommand(tokens);
+            break;
+        case "todo":
+            command = parseTodoCommand(tokens);
+            break;
+        case "deadline":
+            command = parseDeadlineCommand(tokens);
+            break;
+        case "event":
+            command = parseEventCommand(tokens);
+            break;
+        case "delete":
+            command = parseDeleteCommand(tokens);
+            break;
+        case "bye":
+            command = new ExitCommand();
+            break;
+        case "find":
+            command = parseFindCommand(tokens);
+            break;
+        default:
+            throw new UnkownCommandException();
+        }
         return command;
     }
 }

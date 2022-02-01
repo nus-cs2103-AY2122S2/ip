@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Responsible for the functionality needed when creating a ToDoo task.
  */
-public class CreateToDoCommand extends Command{
+public class CreateToDoCommand extends Command {
 
     /** ToDo task created. */
     private ToDo toDo;

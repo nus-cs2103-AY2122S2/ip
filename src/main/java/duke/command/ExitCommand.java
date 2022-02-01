@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Responsible for the functionality needed when exiting the chat bot.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /** Constructor to create ExitCommand. */
     public ExitCommand() {

@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Responsible for the functionality needed when marking a task.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
     /** 1-based index of the task in the list. */
     private int point;
