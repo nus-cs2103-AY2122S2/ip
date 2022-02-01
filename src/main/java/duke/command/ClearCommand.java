@@ -22,16 +22,10 @@ public class ClearCommand extends Command {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
-        System.out.println("About to clear all data. Enter yes to confirm");
-        String input = ui.readFullLine();
-        if (input.equals("yes")) {
-            stg.clearData();
-            tasks.clearAllTask();
-            System.out.println("All data cleared!");
-        }
-        ui.showLine();
-        return;
+    public String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
+        stg.clearData();
+        tasks.clearAllTask();
+        return "All data cleared!";
     }
 
     /**

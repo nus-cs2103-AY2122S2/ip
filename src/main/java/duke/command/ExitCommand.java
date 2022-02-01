@@ -22,8 +22,8 @@ public class ExitCommand extends Command {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
-        return;
+    public String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
+        return "bye!";
     }
 
     /**

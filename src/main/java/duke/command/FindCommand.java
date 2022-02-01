@@ -33,12 +33,12 @@ public class FindCommand extends Command {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
+    public String execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
         String keyword = this.textInput.substring(4).trim();
         if (keyword.trim().length() == 0) {
             System.out.println("Please enter a valid keyword!");
             ui.showLine();
-            return;
+            return "Please enter a valid keyword!";
         }
         int size = tasks.getCount();
         int count = 0;
@@ -53,11 +53,12 @@ public class FindCommand extends Command {
         if (count == 0) {
             System.out.println("Oops! There were no tasks that matches your search!");
             ui.showLine();
-            return;
+            return "Oops! There were no tasks that matches your search!";
         }
         System.out.println("Here are the matching tasks in your list!");
-        ui.displayList(count, new TaskList(resArr));
-        ui.showLine();
+        TaskList resTaskList = new TaskList(resArr);
+        ui.displayList(count, resTaskList);
+        return ui.showMatchingTasks(count, resTaskList);
     }
 
     /**

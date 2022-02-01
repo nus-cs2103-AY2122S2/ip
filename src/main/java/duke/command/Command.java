@@ -23,7 +23,7 @@ public abstract class Command {
      * @throws DukeException If any error related to the Duke app occurs.
      * @throws IOException If an I/O error occurs.
      */
-    public abstract void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException;
+    public abstract String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException;
 
     /**
      * Based on the Command type, will signify if the app should terminate

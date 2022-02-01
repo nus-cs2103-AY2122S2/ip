@@ -6,6 +6,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.command.Command;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
 
@@ -22,10 +23,11 @@ public class Duke {
     /**
      * Creates a new Duke object.
      */
-    public Duke() {
+    public Duke() throws FileNotFoundException {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("./data/duke.txt");
+        tasks = new TaskList(storage.retrieveData());
     }
 
     /**
@@ -52,11 +54,16 @@ public class Duke {
         while (!isExit) {
             String input = ui.readFullLine();
             Command c = parser.parse(input);
-            c.execute(storage, ui, tasks);
+            String res = c.execute(storage, ui, tasks);
             isExit = c.isExit();
         }
         ui.showClosing();
+    }
 
+    public String getResponse(String input) throws DukeException, IOException {
+        Command c = parser.parse(input);
+        String res = c.execute(storage, ui, tasks);
+        return res;
     }
 
     /**

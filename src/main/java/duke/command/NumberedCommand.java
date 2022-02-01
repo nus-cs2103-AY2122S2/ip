@@ -49,7 +49,7 @@ public class NumberedCommand extends Command {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
+    public String execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
         try {
             if (this.taskType.equals("mark")) {
                 Task task = tasks.get(this.number - 1);
@@ -59,6 +59,7 @@ public class NumberedCommand extends Command {
                 System.out.println(task.toString());
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
+                return ui.showSuccessfulMarkMessage() + "\n" + task;
             } else if (this.taskType.equals("unmark")) {
                 Task task = tasks.get(this.number - 1);
                 String oldMark = task.formatText();
@@ -67,6 +68,7 @@ public class NumberedCommand extends Command {
                 System.out.println(task.toString());
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
+                return ui.showSuccessfulUnmarkMessage() + "\n" + task;
             } else {
                 Task task = tasks.get(this.number - 1);
                 String oldDelete = task.formatText();
@@ -75,10 +77,11 @@ public class NumberedCommand extends Command {
                 System.out.println("Noted! I've removed this task:");
                 System.out.println(task.toString());
                 ui.showCount(tasks);
+                return ui.showSuccessfulDeleteMessage() + "\n" + task;
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid number!");
+            return "Please enter a valid number!";
         }
-        ui.showLine();
     }
 }

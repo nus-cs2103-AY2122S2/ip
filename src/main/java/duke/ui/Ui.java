@@ -72,4 +72,40 @@ public class Ui {
         }
     }
 
+    public String showSuccessfulAddMessage() {
+        return "Got it! I've added this task: ";
+    }
+
+    public String showSuccessfulMarkMessage() {
+        return "Got it! I've marked this task as completed: ";
+    }
+
+    public String showSuccessfulUnmarkMessage() {
+        return "Got it! I've marked this task as not done yet: ";
+    }
+
+    public String showSuccessfulDeleteMessage() {
+        return "Got it! I've removed this task: ";
+    }
+
+    public String showListedTasks(int lenOfArray, TaskList tasks) {
+        String res = "Here are the tasks in your list: " + "\n";
+        for (int i = 0; i < lenOfArray; i++) {
+            String temp = (i + 1) + ". " + tasks.get(i).toString()
+                    + "\n";
+            res += temp;
+        }
+        return res;
+    }
+
+    public String showMatchingTasks(int lenOfArray, TaskList tasks) {
+        String res = "Here are the matching tasks in your list: " + "\n";
+        for (int i = 0; i < lenOfArray; i++) {
+            String temp = (i + 1) + ". " + tasks.get(i).toString()
+                    + "\n";
+            res += temp;
+        }
+        return res;
+    }
+
 }
