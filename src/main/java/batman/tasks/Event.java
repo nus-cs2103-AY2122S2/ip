@@ -34,8 +34,9 @@ public class Event extends Task {
     }
 
     @Override
-    public String appendtoFile() {
-        return "E|" + (super.isDone ? "1" : "0") + "|" + super.description + "|" + DateUtil.dateToString(at) + "\n";
+    public String appendToFile() {
+        return "E|" + (super.isDone ? "1" : "0") + "|"
+                + super.description + "|" + DateUtil.dateToString(at) + "\n";
     }
 
     @Override

@@ -34,8 +34,9 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String appendtoFile() {
-        return "D|" + (super.isDone ? "1" : "0") + "|" + super.description + "|" + DateUtil.dateToString(by) + "\n";
+    public String appendToFile() {
+        return "D|" + (super.isDone ? "1" : "0")
+                + "|" + super.description + "|" + DateUtil.dateToString(by) + "\n";
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final String line = "+" + String.valueOf('-').repeat(50) + "+";
+    private static final String LINE = "+" + String.valueOf('-').repeat(50) + "+";
     private final Scanner sc;
     private final String botName;
 
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     public void printOutput(StringBuilder input) {
-        System.out.println(line + "\n" + input + line);
+        System.out.println(LINE + "\n" + input + LINE);
     }
 
     /**

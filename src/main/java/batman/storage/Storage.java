@@ -52,7 +52,7 @@ public class Storage {
     public void writeToFile(ArrayList<Task> tasks) throws IOException {
         Files.write(path, "".getBytes());
         for (Task t : tasks) {
-            Files.write(path, t.appendtoFile().getBytes(), StandardOpenOption.APPEND);
+            Files.write(path, t.appendToFile().getBytes(), StandardOpenOption.APPEND);
         }
     }
 
