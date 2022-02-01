@@ -79,7 +79,7 @@ public class Event extends Task {
             return false;
         }
 
-        @SuppressWarnings("Unchecked")
+        @SuppressWarnings("unchecked")
         Event event = (Event) o;
 
         if (event.taskName.equals(this.taskName)) {

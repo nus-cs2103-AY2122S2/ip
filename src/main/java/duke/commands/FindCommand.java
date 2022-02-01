@@ -9,10 +9,10 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a command to find all tasks containing the specified keyword.
+ */
 public class FindCommand extends Command{
-    /**
-     * Represents a command to find all tasks containing the specified keyword.
-     */
 
     public FindCommand(String userInput){
         super(userInput);

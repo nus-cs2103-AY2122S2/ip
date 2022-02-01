@@ -43,7 +43,7 @@ public class Todo extends Task{
             return false;
         }
 
-        @SuppressWarnings("Unchecked")
+        @SuppressWarnings("unchecked")
         Todo todo = (Todo) o;
 
         return todo.taskName.equals(this.taskName);
