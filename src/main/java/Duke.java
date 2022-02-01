@@ -1,15 +1,43 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+
+    public static void main(String[] args) throws DukeException, IOException {
+
         Scanner myObj = new Scanner(System.in);
         int counter = 0;
         ArrayList<Task> tasks = new ArrayList<Task>();
-
+        File f = new File("data/file.txt");
+        File f1 = new File("data");
+        String file1 = "data/file.txt";
+        //  System.out.println("full path: " + f.getAbsolutePath());
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+
+        if(!f.exists()) {
+            if (!f1.exists()) {
+                f1.mkdir();
+            }
+            f.createNewFile();
+        }
 
         while (true) {
             String input = myObj.nextLine();
@@ -28,8 +56,14 @@ public class Duke {
                     currentTask.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(currentTask);
+                    writeToFile(file1, tasks.get(0).toString());
+                    for(int i = 1; i < tasks.size(); i++) {
+                        appendToFile(file1, tasks.get(i).toString());
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! Please tell me which task to mark as done!");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
 
             } else if(input.length() > 5 && input.substring(0,6).equals("unmark")){
@@ -39,9 +73,14 @@ public class Duke {
                     currentTask.markAsUndone();
                     System.out.println("OK, I've marked this task as not done yet: ");
                     System.out.println(currentTask);
+                    writeToFile(file1, tasks.get(0).toString());
+                    for(int i = 1; i < tasks.size(); i++) {
+                        appendToFile(file1, tasks.get(i).toString());
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! Please tell me which task you want me to mark as not done!");
-
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
 
             } else if(input.length() > 3 && input.substring(0, 4).equals("todo")) {
@@ -51,6 +90,7 @@ public class Duke {
                     counter = counter + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(tasks.get(counter - 1));
+                    appendToFile(file1, tasks.get(counter - 1).toString());
                     if (counter == 1) {
                         System.out.println("Now you have " + String.valueOf(counter) + " task in the list.");
                     } else {
@@ -59,6 +99,8 @@ public class Duke {
 
                 } catch(ArrayIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
 
             } else if(input.length() > 7  && (input.substring(0, 8).equals("deadline"))) {
@@ -71,6 +113,7 @@ public class Duke {
                     counter = counter + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(tasks.get(counter - 1));
+                    appendToFile(file1, tasks.get(counter - 1).toString());
                     if (counter == 1) {
                         System.out.println("Now you have " + String.valueOf(counter) + " task in the list.");
                     } else {
@@ -80,7 +123,10 @@ public class Duke {
                 } catch(ArrayIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! Please provide a deadline for your task.");
 
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
+
             } else if(input.length() > 4 && input.substring(0, 5).equals("event")) {
                 try {
                     String[] arrOfStr = input.split(" ", 2);
@@ -91,14 +137,19 @@ public class Duke {
                     counter = counter + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(tasks.get(counter - 1));
+                    appendToFile(file1, tasks.get(counter - 1).toString());
                     if (counter == 1) {
                         System.out.println("Now you have " + String.valueOf(counter) + " task in the list.");
                     } else {
                         System.out.println("Now you have " + String.valueOf(counter) + " tasks in the list.");
                     }
+
                 } catch(ArrayIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! Please provide a timing for your event.");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
+
             } else if(input.length() > 5 && input.substring(0, 6).equals("delete")) {
                 try {
                     int toBeDeleted = Integer.parseInt(input.substring(7));
@@ -112,9 +163,15 @@ public class Duke {
                     } else {
                         System.out.println("Now you have " + String.valueOf(counter) + " tasks in the list.");
                     }
+                    writeToFile(file1, tasks.get(0).toString());
+                    for(int i = 1; i < tasks.size(); i++) {
+                        appendToFile(file1, tasks.get(i).toString());
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("☹ OOPS!!! Please tell me which task you want me to mark as not done!");
 
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
