@@ -1,4 +1,6 @@
-package duke;
+package duke.Commands;
+
+import duke.Exception.DukeException;
 
 /**
  * Class containing methods to process the user input into a easier to handle form.
@@ -55,7 +57,7 @@ public class Parser {
                         msg = temp.split(" /at");
                         if (msg.length != 2) {
                             throw new DukeException(
-                                    "☹ OOPS!!! I'm sorry, the duke.Event description cannot be empty\n");
+                                    "☹ OOPS!!! I'm sorry, the duke.Tasks.Event description cannot be empty\n");
                         }
                         msg = new String[] {"event", msg[0], msg[1]};
                     } else {

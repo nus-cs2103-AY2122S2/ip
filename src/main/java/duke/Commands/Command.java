@@ -1,4 +1,11 @@
-package duke;
+package duke.Commands;
+
+import duke.Exception.DukeException;
+import duke.Tasks.Deadlines;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+import duke.Tasks.ToDos;
 
 /**
  * Class responsible for executing the command from the userInput.
