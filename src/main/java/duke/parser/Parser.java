@@ -87,4 +87,5 @@ public class Parser {
         }
         return new String[]{eventSplit[1].trim(), eventArr[1].trim()};  // description, and at respectively
     }
+
 }
