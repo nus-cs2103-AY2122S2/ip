@@ -1,18 +1,12 @@
-public class DateChecker {
+public class DateManager {
     private final int day;
     private final int month;
     private final int year;
-
-    private final String[] nameOfMonths
-            = {"January", "February", "March", "April",
-            "May", "June", "July", "August",
-            "September", "October", "November", "December"};
-
     private boolean isValid = false;
 
-    DateChecker(String date) {
+    DateManager(String date) {
         this.day = Integer.parseInt(date.substring(0, 2));
-        this.month = Integer.parseInt(date.substring(2, 3));
+        this.month = Integer.parseInt(date.substring(2, 4));
         this.year = Integer.parseInt(date.substring(4, 8));
 
         // check valid month
@@ -42,7 +36,15 @@ public class DateChecker {
         return this.isValid;
     }
 
-    public String formatDate() {
-        return this.day + this.nameOfMonths[this.month] + this.year;
+    public static String formatDate(String date) {
+        String[] nameOfMonths
+                = {"January", "February", "March", "April",
+                "May", "June", "July", "August",
+                "September", "October", "November", "December"};
+        int day = Integer.parseInt(date.substring(0, 2));
+        int month = Integer.parseInt(date.substring(2, 4));
+        int year = Integer.parseInt(date.substring(4, 8));
+
+        return day + nameOfMonths[month] + year;
     }
 }

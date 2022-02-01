@@ -8,6 +8,9 @@ public abstract class Task {
         this.state = false;
     }
 
+    abstract String getPrefix();
+    abstract String getPostfix();
+
     public void mark() {
         this.state = true;
     }
@@ -22,6 +25,10 @@ public abstract class Task {
 
     public boolean isEmptyTask() {
         return false;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override

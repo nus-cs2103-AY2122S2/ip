@@ -1,3 +1,8 @@
+import jdk.jshell.spi.SPIResolutionException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -9,10 +14,12 @@ public class TaskManager {
 
     public static void add(Task task) {
         taskList.add(task);
+
     }
 
     public static void delete(int i) {
-        taskList.remove(i);
+        taskList.remove(i - 1);
+
     }
 
     public static Task get(int i) {
@@ -27,6 +34,7 @@ public class TaskManager {
         int i = 1;
         for(Task task : taskList) {
             System.out.println(SPACE + i + ". " + get(i));
+            i++;
         }
     }
 
@@ -57,4 +65,6 @@ public class TaskManager {
     public static boolean isValidTask(int i) {
         return !get(i).isEmptyTask();
     }
+
+
 }

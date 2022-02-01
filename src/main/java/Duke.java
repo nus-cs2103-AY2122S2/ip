@@ -11,6 +11,8 @@ public class Duke {
         String space = "     ";
         String line = "____________________________________________________________";
 
+        
+
         String greeting = space + line + "\n"
                 + space + "Hello! I'm Duke\n"
                 + space + "Nice to meet you!\n"
@@ -48,7 +50,9 @@ public class Duke {
                 case "deadline":
                     // get name of task
                     System.out.println(space + "Please input the name of the task");
+                    System.out.println(space + line);
                     sc.nextLine();
+
                     name = sc.nextLine();
 
                     if (name.isBlank()) {
@@ -59,6 +63,7 @@ public class Duke {
 
                     // get date of task
                     System.out.println(space + "Please input the deadline of the task in the format: DDMMYYYY");
+                    System.out.println(space + line);
                     date = sc.nextLine();
 
                     if (date.isBlank()) {
@@ -73,7 +78,7 @@ public class Duke {
                         System.out.println(space + line);
                         break;
                     } else {
-                        DateChecker dateChecker = new DateChecker(date);
+                        DateManager dateChecker = new DateManager(date);
                         if (!dateChecker.isDateValid()) {
                             System.out.println(space + "Invalid date!");
                             System.out.println(space + line);
@@ -94,7 +99,9 @@ public class Duke {
                 case "event":
                     // get name of task
                     System.out.println(space + "Please input the name of the task");
+                    System.out.println(space + line);
                     sc.nextLine();
+
                     name = sc.nextLine();
 
                     if (name.isBlank()) {
@@ -105,6 +112,7 @@ public class Duke {
 
                     // get date of task
                     System.out.println(space + "Please input the date of the event");
+                    System.out.println(space + line);
                     date = sc.next();
 
                     if (date.isBlank()) {
@@ -119,7 +127,7 @@ public class Duke {
                         System.out.println(space + line);
                         break;
                     } else {
-                        DateChecker dateChecker = new DateChecker(date);
+                        DateManager dateChecker = new DateManager(date);
                         if (!dateChecker.isDateValid()) {
                             System.out.println(space + "Invalid date!");
                             System.out.println(space + line);
@@ -133,7 +141,6 @@ public class Duke {
                     // add task to tasklist
                     TaskManager.add(currentTask);
                     System.out.println(space + "Task has been added to the list!");
-
                     System.out.println(space + line);
                     break;
 
@@ -154,8 +161,8 @@ public class Duke {
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
+                    System.out.println(currentTask.getPrefix());
                     System.out.println(space + "Task has been added to the list!");
-
                     System.out.println(space + line);
                     break;
 
@@ -183,6 +190,7 @@ public class Duke {
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to mark as complete\n");
+                    System.out.println(space + line);
                     taskNumber = sc.nextInt();
 
                     TaskManager.mark(taskNumber);
@@ -200,6 +208,8 @@ public class Duke {
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to mark as incomplete");
+                    System.out.println(space + line);
+
                     taskNumber = sc.nextInt();
 
                     TaskManager.unmark(taskNumber);
@@ -217,6 +227,7 @@ public class Duke {
 
                     System.out.println(space + "Please input the number of the task " +
                             "that you wish to delete");
+                    System.out.println(space + line);
                     taskNumber = sc.nextInt();
 
                     if (!TaskManager.isValidTask(taskNumber)) {
@@ -228,12 +239,14 @@ public class Duke {
                     System.out.println(space + "Are you sure you wish to delete\n"
                             + space + TaskManager.get(taskNumber) + " ?\n"
                             + space + "Input Y/N to continue.");
+                    System.out.println(space + line);
 
                     char deleteConfirmation = sc.next().toLowerCase().charAt(0);
 
                     if (deleteConfirmation ==  'y') {
                         TaskManager.delete(taskNumber);
                         System.out.println(space + "Okie Dokie! Task has been deleted!");
+                        System.out.println(space + line);
                         break;
                     }
 
