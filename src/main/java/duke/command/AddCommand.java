@@ -11,8 +11,8 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 
 public class AddCommand extends Command {
-    String description;
-    LocalDate date;
+    private String description;
+    private LocalDate date;
 
     public AddCommand(String keyword, String description, LocalDate date) {
         super(keyword);
@@ -38,6 +38,8 @@ public class AddCommand extends Command {
             break;
         case "deadline":
             task = new Deadline(description, date);
+            break;
+        default:
             break;
         }
         if (task != null) {
