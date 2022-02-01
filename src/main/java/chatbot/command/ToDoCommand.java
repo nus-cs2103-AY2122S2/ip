@@ -16,9 +16,9 @@ public class ToDoCommand implements Command {
         String desc = "";
         try {
             desc = String.join(" ", Arrays.asList(input).subList(1, input.length));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            // No need to handle exception here as the checks are done below.
         }
-
 
         if (desc.isBlank()) {
             return new CommandOutput("Error: Empty description\n" + FORMAT, "/audio/ding.wav");

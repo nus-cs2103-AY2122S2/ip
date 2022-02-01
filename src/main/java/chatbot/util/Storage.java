@@ -37,7 +37,7 @@ public class Storage {
             objectOutputStream.flush();
             objectOutputStream.close();
             return true;
-        } catch (IOException ignored) {
+        } catch (IOException e) {
             return false;
         }
     }

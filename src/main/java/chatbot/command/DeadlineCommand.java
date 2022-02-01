@@ -28,7 +28,8 @@ public class DeadlineCommand implements Command {
             desc = String.join(" ", Arrays.asList(input).subList(1, i));
             date = LocalDate.parse(input[i + 1]);
             time = LocalTime.parse(input[i + 2]);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            // No need to handle exception here as the checks are done below.
         }
 
         if (desc.isBlank()) {

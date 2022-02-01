@@ -32,9 +32,9 @@ public class EventCommand implements Command {
             startTime = LocalTime.parse(input[i + 2]);
             endDate = LocalDate.parse(input[i + 3]);
             endTime = LocalTime.parse(input[i + 4]);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            // No need to handle exception here as the checks are done below.
         }
-
 
         if (desc.isBlank()) {
             return new CommandOutput("Error: Invalid description\n" + FORMAT, "/audio/ding.wav");
