@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-class DukeAbsentInfoException extends DukeException {
+public class DukeAbsentInfoException extends DukeException {
 
     DukeAbsentInfoException(String message) {
         super(message);

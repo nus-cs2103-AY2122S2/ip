@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-class DukeIdxOOBException extends DukeException {
+public class DukeIdxOOBException extends DukeException {
 
     DukeIdxOOBException() {
         super("☹ OOPS!!! The index specified is out of bounds.");

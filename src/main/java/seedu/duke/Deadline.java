@@ -1,8 +1,8 @@
-package duke;
+package seedu.duke;
 
 import java.time.LocalDate;
 
-class Deadline extends Task {
+public class Deadline extends Task {
 
     Deadline(String description, LocalDate deadline) {
         super(description, deadline);

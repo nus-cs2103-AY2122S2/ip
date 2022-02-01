@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-class Storage {
+public class Storage {
     
     private String filepath;
     

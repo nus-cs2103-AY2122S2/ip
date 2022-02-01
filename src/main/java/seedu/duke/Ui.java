@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-class Ui {
+public class Ui {
 
     private static final int LIST = 0;
     private static final int TODO = 1;

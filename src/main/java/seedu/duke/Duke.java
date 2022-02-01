@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (Exception e) {
             ui.showLoadingError();
             System.out.println(e);
             tasks = new TaskList();

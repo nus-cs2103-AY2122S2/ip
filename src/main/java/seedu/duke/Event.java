@@ -1,8 +1,8 @@
-package duke;
+package seedu.duke;
 
 import java.time.LocalDate;
 
-class Event extends Task {
+public class Event extends Task {
 
     Event(String description, LocalDate time) {
         super(description, time);

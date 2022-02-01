@@ -1,7 +1,7 @@
-package duke;
+package seedu.duke;
 import java.time.LocalDate;
 
-class Parser {
+public class Parser {
     
     private static final int LIST = 0;
     private static final int TODO = 1;

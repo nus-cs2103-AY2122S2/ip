@@ -1,8 +1,8 @@
-package duke;
+package seedu.duke;
 
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     private ArrayList<Task> tasks;
 
