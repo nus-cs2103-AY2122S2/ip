@@ -1,40 +1,22 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.TaskStub;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListTest {
 
-    @Test
-    void getArrayList() {
-    }
-
-    @Test
-    void markDone() {
-    }
-
-    @Test
-    void unmarkDone() {
-    }
-
-    @Test
-    void add() {
-    }
-
-    @Test
-    void testAdd() {
-    }
-
-    @Test
-    void delete() {
-    }
+    ArrayList<Task> testArrList = new ArrayList<>();
+    TaskStub taskStub = new TaskStub("taskTest", false);
 
     @Test
     void getLast() {
-    }
-
-    @Test
-    void testToString() {
+        testArrList.add(taskStub);
+        List listTest = new List(testArrList);
+        assertEquals("taskTest", listTest.getLast().getDescription());
     }
 }

@@ -1,6 +1,4 @@
 Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [T][ ] borrow shirt
-3. [E][ ] project (at: Sun 4pm)
-4. [D][ ] project (by: Mar 23 2023 6:00 PM)
-5. [T][ ] borrow book
+1. [T][ ] study ACCA 
+2. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
+3. [E][ ] give tuition at Somerset (at: Monday 2pm)

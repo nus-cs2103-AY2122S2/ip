@@ -15,8 +15,15 @@ public class Parser {
     private static void checkIfUserInputValid(String userInput) throws DukeException {
         String str = userInput.trim();
 
-        if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("find")) {
+        if (str.equals("todo")
+                || str.equals("deadline")
+                || str.equals("event")
+                || str.equals("find")) {
             throw new DukeException(("OOPS!!! The description of a " + str + " cannot be empty."));
+        }
+
+        if (str.equals("mark") || str.equals("unmark") || str.equals("delete")) {
+            throw new DukeException(("OOPS!!! Please input the number of the task."));
         }
 
         if (!(userInput.startsWith("list")
