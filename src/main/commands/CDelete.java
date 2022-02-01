@@ -19,7 +19,7 @@ public class CDelete extends Command{
     @Override
     public void runCommand() throws DukeException {
         try {
-            Task deleteTask = Task.getTasks().get(this.getDeleteIndex());
+            Task deleteTask = Task.getTask(this.getDeleteIndex());
             Task.deleteTask(this.getDeleteIndex());
             System.out.printf("Noted. I've removed this task: \n" + "    %s\n"
                     + "%s\n", deleteTask, Task.taskCountToString());

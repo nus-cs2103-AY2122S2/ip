@@ -10,12 +10,12 @@ public class CList extends Command{
 
     @Override
     public void runCommand() {
-        int n = Task.getTasks().size();
+        int n = Task.getTasksCount();
         if (n == 0) {
             System.out.println("The list is currently empty.");
         } else {
             for (int i = 0; i < n; i++) {
-                System.out.printf("%d.%s%n", i + 1, Task.getTasks().get(i));
+                System.out.printf("%d.%s%n", i + 1, Task.getTask(i));
             }
         }
     }

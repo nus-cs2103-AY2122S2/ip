@@ -10,8 +10,18 @@ public class Deadline extends Task{
         this.dueDate = dueDate;
     }
 
+    public Deadline(String description, String dueDate, boolean isDone) {
+        super(description, TaskType.DEADLINE, isDone);
+        this.dueDate = dueDate;
+    }
+
     public String getDueDate() {
         return this.dueDate;
+    }
+
+    @Override
+    public String toStoreString() {
+        return super.toStoreString() + "~" + this.getDueDate();
     }
 
     @Override

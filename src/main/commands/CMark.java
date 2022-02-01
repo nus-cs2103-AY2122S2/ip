@@ -19,7 +19,7 @@ public class CMark extends Command{
     @Override
     public void runCommand() throws DukeException {
         try {
-            Task markTask = Task.getTasks().get(this.getMarkIndex());
+            Task markTask = Task.getTask(this.getMarkIndex());
             markTask.setIsDone(true);
             System.out.printf("Nice! I've marked this task as done: \n"
                     + "    %s\n", markTask);

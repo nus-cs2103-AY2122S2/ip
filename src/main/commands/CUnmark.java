@@ -19,7 +19,7 @@ public class CUnmark extends Command{
     @Override
     public void runCommand() throws DukeException {
         try {
-            Task unmarkTask = Task.getTasks().get(this.getUnmarkIndex());
+            Task unmarkTask = Task.getTask(this.getUnmarkIndex());
             unmarkTask.setIsDone(false);
             System.out.printf("Ok, I've marked this task as not done yet: \n"
                     + "    %s\n", unmarkTask);
