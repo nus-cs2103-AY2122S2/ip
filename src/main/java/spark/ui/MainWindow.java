@@ -9,8 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import spark.Spark;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -36,6 +34,20 @@ public class MainWindow extends AnchorPane {
 
     public void setSpark(Spark spark) {
         this.spark = spark;
+        showInitialisationMessage();
+    }
+
+    private void showInitialisationMessage() {
+        String welcomeMessage = "Greetings, erm, reclaimer...?" + "\n"
+                + "(why does he look so weird?)" + "\n\n"
+                + "Here are your tasks.";
+        String listOfTasks = spark.executeCommand("list");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSparkDialog(welcomeMessage, sparkImage)
+        );
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSparkDialog(listOfTasks, sparkImage)
+        );
     }
 
     /**
