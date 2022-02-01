@@ -8,59 +8,46 @@ import duke.constants.Constants;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Acts as a task manager that keeps tracks of all your tasks.
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * Creates a Duke object that initializes all the necessary components for the task manager program.
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.taskList = new TaskList();
+        this.storage = new Storage(Constants.FILE_PATH + Constants.FILE_NAME);
 
         try {
             this.taskList = new TaskList(storage.loadFromFile());
         } catch (IOException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
+            e.printStackTrace();
         }
     }
 
     /**
-     * Runs, handles and processes the commands input by the user.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.hello();
+    public String getResponse(String input) {
+        String response = "";
 
-        boolean isExit = false;
+        try {
+            Parser parser = new Parser(input);
+            Command c = parser.parse();
 
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Parser parser = new Parser(fullCommand);
-                Command c = parser.parse();
-
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.output(e.getMessage());
-            }
+            response = c.execute(taskList, storage);
+        } catch (DukeException e) {
+            response = e.getMessage();
         }
+
+        return response;
     }
 
-    /**
-     * Boots up the entire task manager application.
-     * @param args Args is the command line arguments received from user.
-     */
-    public static void main(String[] args) {
-        new Duke(Constants.FILE_PATH + Constants.FILE_NAME).run();
-    }
 }

@@ -11,7 +11,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Search task list based on keyword.
@@ -31,7 +30,9 @@ public class SearchCommand extends Command {
      * Executes the search command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        String response = "";
+
         try {
             if (this.args.length() == 0) {
                 throw new IllegalArgumentException();
@@ -44,8 +45,8 @@ public class SearchCommand extends Command {
             StringBuilder sb = new StringBuilder();
 
             if (length == 0) {
-                ui.output("No tasks found based on given date! Also, quit lazing around!");
-                return;
+                response = "No tasks found based on given date! Also, quit lazing around!";
+                return response;
             }
 
             sb.append("Here are the tasks with date, "
@@ -77,7 +78,9 @@ public class SearchCommand extends Command {
                 }
             }
 
-            ui.output((index > 0) ? sb.toString() : Constants.NO_TASK_SEARCH_MSG);
+            response = index > 0 ? sb.toString() : Constants.NO_TASK_SEARCH_MSG;
+
+            return response;
         } catch (Exception e) {
             throw new DukeException(Constants.INVALID_DATE_MSG);
         }

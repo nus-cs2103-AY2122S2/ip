@@ -1,7 +1,5 @@
 package duke.common;
 
-import duke.ui.Ui;
-
 /**
  * Provides utilities used when processing commands given by user.
  */
@@ -37,10 +35,9 @@ public class Utils {
     /**
      * Checks if user's input excluding the command itself, specifically the arguments, are numeric.
      * @param arg arg is the argument provided by user.
-     * @param ui ui displays feedback to the user.
      * @return If user input argument is numeric.
      */
-    public static boolean isNumeric(String arg, Ui ui) {
+    public static boolean isNumeric(String arg) {
         if (arg == null) {
             return false;
         }

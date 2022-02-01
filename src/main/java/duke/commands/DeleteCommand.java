@@ -7,7 +7,6 @@ import duke.common.Utils;
 import duke.constants.Constants;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Deletes task from list based on specified index by user.
@@ -25,15 +24,16 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command.
+     * @return Output message for GUI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         try {
             if (this.args.length() == 0) {
                 throw new IllegalArgumentException();
             }
 
-            if (!Utils.isNumeric(this.args, ui)) {
+            if (!Utils.isNumeric(this.args)) {
                 throw new NumberFormatException();
             }
 
@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
                     ? "  " + task + "\nNow you have " + noOfTasks + " " + pluralTask + " in the list."
                     : "  " + task + "\nNow you have no task left.";
 
-            ui.output(result);
+            return result;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Constants.INVALID_INDEX_MSG);
         } catch (IllegalArgumentException e) {

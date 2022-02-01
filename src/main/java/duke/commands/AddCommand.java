@@ -13,7 +13,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * Adds task to list based on user input.
@@ -31,14 +30,16 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command.
+     * @return Output message for GUI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         String[] taskArr = null;
         String type = "";
         String result = "Got it. I've added this task:\n";
         String textToAdd = "";
         Task task = null;
+        String response = "";
 
         try {
             taskArr = this.fullCommand.split(" ", 2);
@@ -84,21 +85,23 @@ public class AddCommand extends Command {
             int noOfTasks = taskList.size();
             String pluralTask = (noOfTasks > 1) ? "tasks" : "task";
 
-            result += "  " + task.toString() + "\n";
-            result += "Now you have " + noOfTasks + " " + pluralTask + " in the list.";
+            response += "  " + task.toString() + "\n";
+            response += "Now you have " + noOfTasks + " " + pluralTask + " in the list.";
 
-            ui.output(result);
+            return response;
         } catch (IndexOutOfBoundsException e) {
             if (Utils.isValidType(type)) {
                 if (Utils.isMissingData(taskArr)) {
-                    ui.output("OOPS!!! Some data of your " + type + " task is missing. :-(");
-                    return;
+                    response = "OOPS!!! Some data of your " + type + " task is missing. :-(";
+                    return response;
                 }
 
-                ui.output("OOPS!!! The description of a " + type + " cannot be empty. :-(");
+                response = "OOPS!!! The description of a " + type + " cannot be empty. :-(";
             } else {
-                ui.output(Constants.UNKNOWN_MSG);
+                response = Constants.UNKNOWN_MSG;
             }
+
+            return response;
         } catch (IOException e) {
             throw new DukeException(Constants.STORAGE_ADD_MSG);
         } catch (DateTimeParseException e) {
