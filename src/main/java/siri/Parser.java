@@ -180,6 +180,13 @@ class Parser {
                 case "bye":
                     continueToExecute = 0;
                     break;
+                case "find":
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
+                        throw new SiriException("Please ENTER a word to find!!");
+                    } else {
+                        this.taskList.find(inputSplit[1].trim());
+                    }
+                    break;
                 default:
                     throw new SiriException("OPPS!! I did not understand what you had keyed!! Please try again!!");
                 }
