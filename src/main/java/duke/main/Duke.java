@@ -8,17 +8,11 @@ import duke.constants.Constants;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.view.MainWindow;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * Acts as a task manager that keeps tracks of all your tasks.
  */
-public class Duke extends Application {
+public class Duke {
     private final Storage storage;
     private TaskList taskList;
 
@@ -28,26 +22,10 @@ public class Duke extends Application {
      */
     public Duke(String filePath) {
         this.taskList = new TaskList();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(Constants.FILE_PATH + Constants.FILE_NAME);
 
         try {
             this.taskList = new TaskList(storage.loadFromFile());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void start(Stage stage) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            Duke duke = new Duke(Constants.FILE_PATH + Constants.FILE_NAME);
-
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +42,7 @@ public class Duke extends Application {
             Parser parser = new Parser(input);
             Command c = parser.parse();
 
-            c.execute(taskList, storage);
+            response = c.execute(taskList, storage);
         } catch (DukeException e) {
             response = e.getMessage();
         }

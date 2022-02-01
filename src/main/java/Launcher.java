@@ -1,4 +1,4 @@
-import duke.main.Duke;
+import duke.view.Main;
 import javafx.application.Application;
 
 /**
@@ -10,6 +10,6 @@ public class Launcher {
      * @param args args is the input arguments of the application.
      */
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
 }
