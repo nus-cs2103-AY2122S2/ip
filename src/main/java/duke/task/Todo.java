@@ -1,4 +1,4 @@
-package duke.todo;
+package duke.task;
 
 import duke.task.Task;
 

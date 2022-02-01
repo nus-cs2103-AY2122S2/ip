@@ -23,7 +23,7 @@ public class Parser {
 
   }
 
-  public static Command parse(String fullCommand) {
+  public static Command parse(String fullCommand) throws DukeException {
       String[] fullCommandArray = fullCommand.split(" ");
       String command = fullCommandArray[0];
       if (command.equals("deadline")) {

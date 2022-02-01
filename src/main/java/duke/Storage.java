@@ -1,5 +1,6 @@
 package duke;
 
+import duke.DukeException;
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -19,10 +20,13 @@ public class Storage {
       this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             File file = new File("duke.txt");
+            if (!file.exists()) {
+              throw new DukeException("File not found");
+            }
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNextLine()) {
                 String taskString = fileScanner.nextLine();
@@ -31,7 +35,7 @@ public class Storage {
                 Boolean status = Boolean.parseBoolean(data[1]);
                 String text = data[2];
                 if (data[0].equals("T")) {
-                    tasks.add(new Todo(data[2], data[1]));
+                    tasks.add(new Todo(text, status));
                 }
                 else if (data[0].equals("D")) {
                     LocalDate date = LocalDate.parse(data[3]);
