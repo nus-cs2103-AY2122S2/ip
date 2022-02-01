@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * A class that consists of messages that the Ui will show to the user as needed.
+ */
 public class Messages {
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
@@ -43,6 +46,12 @@ public class Messages {
 
     public static final String LIST_MSG = "Here are the tasks in your list:";
 
+    /**
+     * Returns the message indicating the task number does not exist.
+     * @param taskNumber Task number that does not exist.
+     *
+     * @return The message indicating that that task number does not exist.
+     */
     public static final String OUT_OF_BOUNDS_MSG (int taskNumber) {
         return String.format("The task %d does not exist!", taskNumber);
     }

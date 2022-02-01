@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A type of Task, which is to be done at somewhere.
+ */
 public class Event extends Task{
     protected String at;
 

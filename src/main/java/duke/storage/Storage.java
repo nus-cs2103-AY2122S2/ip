@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class that saves and loads the tasks in a filepath.
+ */
 public class Storage {
     private String filePath;
     private File file;
@@ -29,7 +32,13 @@ public class Storage {
         }
     }
 
-    //insert java docs here. save tasks into file
+    /**
+     * Saves tasks into file.
+     *
+     * @param tasks Tasks to be saved.
+     *
+     * @throws IOException Exception if an I/O exception occurs.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -38,6 +47,16 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Loads up the tasks that were previously saved, and creates new file if required file
+     * does not exist in computer.
+     *
+     * @return the Arraylist of Task objects.
+     *
+     * @throws FileNotFoundException Exception if the input filepath is not found.
+     *
+     * @throws IOException Exception if an I/O exception occurs.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
