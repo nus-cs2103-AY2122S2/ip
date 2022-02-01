@@ -6,22 +6,17 @@ import doge.exception.DogeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
-
 /**
  * Represents the Doge bot where it encapsulates the storage space, user interface and task list.
  */
-public class Doge extends Application {
+public class Doge {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -30,8 +25,6 @@ public class Doge extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(new File("./src/main/resources/images/user.png").toURI().toString());
-    private Image doge = new Image(new File("./src/main/resources/images/doge.jpg").toURI().toString());
 
     /**
      * Constructor for class Doge.
@@ -77,40 +70,19 @@ public class Doge extends Application {
         }
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Doge's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String fullCommand = userInput.getText();
-        String errorMsg;
-        Command c;
-        Label userText;
-        Label dogeText;
+    public TaskList getTasks() {
+        return this.tasks;
+    }
 
-        userText = new Label(fullCommand);
+    public Storage getStorage() {
+        return this.storage;
+    }
 
-        try {
-            c = Parser.parse(fullCommand);
-            c.execute(this.tasks, this.ui, this.storage);
-            storage.save(this.tasks.getTaskList());
-            dogeText = new Label(ui.respond(c));
-            userInput.clear();
-        } catch (DogeException e) {
-            errorMsg = ui.showError(e.getMessage());
-            dogeText = new Label(errorMsg);
-        }
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDogeDialog(dogeText, new ImageView(doge))
-        );
-        userInput.clear();
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -167,4 +139,5 @@ public class Doge extends Application {
             handleUserInput();
         });
     }
+    */
 }
