@@ -1,5 +1,5 @@
 
-T | ✓ | borrow book
-D | ✓ | return book | DEADLINE: 20-Mar-2022 20:00
+T |   | borrow book
+D |   | return book | DEADLINE: 20-Mar-2022 20:00
 E |   | read book | AT: 19-Mar-2022 18:00
-T | ✓ | eat
+T |   | eat

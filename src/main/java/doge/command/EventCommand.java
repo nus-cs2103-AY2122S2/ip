@@ -1,6 +1,6 @@
 package doge.command;
 
-import doge.Doge;
+import doge.DateTime;
 import doge.Storage;
 import doge.TaskList;
 import doge.Ui;
@@ -41,7 +41,7 @@ public class EventCommand extends Command {
         } else if (curr.length == 1) {
             throw new EventException("Where is the END DATE?");
         } else {
-            LocalDateTime dateTime = Doge.getDateTime(curr[1].trim());
+            LocalDateTime dateTime = DateTime.getDateTime(curr[1].trim());
             this.task.setDescription(curr[0].trim());
             this.task.setDateTime(dateTime);
             tasks.addTask(this.task);

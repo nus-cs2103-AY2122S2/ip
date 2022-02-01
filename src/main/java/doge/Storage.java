@@ -1,6 +1,7 @@
 package doge;
 
 import doge.exception.DogeException;
+import doge.DateTime;
 import doge.task.Deadline;
 import doge.task.Event;
 import doge.task.Task;
@@ -91,7 +92,8 @@ public class Storage {
                     case "D":
                         dateTime = curr[3].trim().substring(9).trim().split(" ");
                         date = new SimpleDateFormat("dd-MMM-yyyy").parse(dateTime[0]);
-                        currTask = new Deadline(curr[2].trim(), Doge.getDateTime(sdf.format(date) + " " + dateTime[1]));
+                        currTask = new Deadline(curr[2].trim(),
+                                DateTime.getDateTime(sdf.format(date) + " " + dateTime[1]));
                         if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
@@ -100,7 +102,8 @@ public class Storage {
                     case "E":
                         dateTime = curr[3].trim().substring(3).trim().split(" ");
                         date = new SimpleDateFormat("dd-MMM-yyyy").parse(dateTime[0]);
-                        currTask = new Event(curr[2].trim(), Doge.getDateTime(sdf.format(date) + " " + dateTime[1]));
+                        currTask = new Event(curr[2].trim(),
+                                DateTime.getDateTime(sdf.format(date) + " " + dateTime[1]));
                         if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }

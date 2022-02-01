@@ -1,6 +1,6 @@
 package doge.command;
 
-import doge.Doge;
+import doge.DateTime;
 import doge.Storage;
 import doge.TaskList;
 import doge.Ui;
@@ -40,14 +40,14 @@ public class ListCommand extends Command {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         if (this.details.isEmpty()) {
             for (int i = 0; i < tasks.size(); i++) {
-                output.append("\n").append(i + 1).append(") ➜ ").append(tasks.getTask(i));
+                output.append("\n").append(i + 1).append(") ").append(tasks.getTask(i));
             }
         } else {
             LocalDateTime dueDateTime;
             String[] tempStr = this.details.split(" ");
 
             try {
-                dueDateTime = Doge.getDateTime(tempStr[1].trim() + " " + tempStr[2].trim());
+                dueDateTime = DateTime.getDateTime(tempStr[1].trim() + " " + tempStr[2].trim());
             } catch (IndexOutOfBoundsException e) {
                 throw new ListTasksDueException("Please state an appropriate duration for the occurrence?");
             }
@@ -99,7 +99,7 @@ public class ListCommand extends Command {
                         throw new DogeException("Invalid limiter specified!");
                     }
                 }
-                output.append("\n").append(numbering).append(") ➜ ").append(currTask);
+                output.append("\n").append(numbering).append(") ").append(currTask);
                 numbering++;
             }
         }

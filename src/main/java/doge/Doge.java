@@ -3,18 +3,35 @@ package doge;
 import doge.command.Command;
 import doge.exception.DogeException;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * Represents the Doge bot where it encapsulates the storage space, user interface and task list.
  */
-public class Doge {
+public class Doge extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(new File("./src/main/resources/images/user.png").toURI().toString());
+    private Image doge = new Image(new File("./src/main/resources/images/doge.jpg").toURI().toString());
 
     /**
      * Constructor for class Doge.
@@ -50,7 +67,7 @@ public class Doge {
                 Command c = Parser.parse(fullCommand);
                 c.execute(this.tasks, this.ui, this.storage);
                 storage.save(this.tasks.getTaskList());
-                ui.respond(c);
+                System.out.print(ui.respond(c));
                 isExit = c.isExit();
             } catch (DogeException e) {
                 ui.showError(e.getMessage());
@@ -61,30 +78,93 @@ public class Doge {
     }
 
     /**
-     * Returns a LocalDateTime when given a string input of a date and time.
-     *
-     * @param input a string input of date and time
-     * @return the date and time of LocalDateTime type
-     * @throws DogeException if date/time given does not exist or is of an incorrect format
+     * Creates two dialog boxes, one echoing user input and the other containing Doge's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
      */
-    public static LocalDateTime getDateTime(String input) throws DogeException {
-        LocalDateTime currDateTime = LocalDateTime.now();
+    private void handleUserInput() {
+        String fullCommand = userInput.getText();
+        String errorMsg;
+        Command c;
+        Label userText;
+        Label dogeText;
+
+        userText = new Label(fullCommand);
 
         try {
-            String[] temp = input.trim().split(" ");
-            String[] tempTime = temp[1].split(":");
-            LocalDate date = LocalDate.parse(temp[0]);
-            LocalTime time = LocalTime.of(Integer.parseInt(tempTime[0]), Integer.parseInt(tempTime[1]));
-            LocalDateTime inputDateTime = LocalDateTime.of(date, time);
-
-            if (inputDateTime.isAfter(currDateTime)) {
-                return inputDateTime;
-            } else {
-                throw new DateTimeException("Invalid date/time!");
-            }
-        } catch (DateTimeException e) {
-            throw new DogeException("Are you lacking common sense? Invalid date/time!");
+            c = Parser.parse(fullCommand);
+            c.execute(this.tasks, this.ui, this.storage);
+            storage.save(this.tasks.getTaskList());
+            dogeText = new Label(ui.respond(c));
+            userInput.clear();
+        } catch (DogeException e) {
+            errorMsg = ui.showError(e.getMessage());
+            dogeText = new Label(errorMsg);
         }
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDogeDialog(dogeText, new ImageView(doge))
+        );
+        userInput.clear();
     }
 
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    @Override
+    public void start(Stage stage) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        // Formatting chat window appearance
+        stage.setTitle("Doge");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+
+        // Adding functionality to handle user input
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
 }

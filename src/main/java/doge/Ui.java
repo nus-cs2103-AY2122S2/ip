@@ -26,10 +26,11 @@ public class Ui {
     /**
      * Prints out the greetings for Doge bot.
      */
-    public void greet() {
+    public String greet() {
         System.out.println("Doge: Oh it's you again...");
         System.out.println("Doge: " + "What kind of trouble would you " +
                 "inconvenience me with this time?");
+        return "Oh it's you again...\nWhat kind of trouble would you inconvenience me with this time?";
     }
 
     /**
@@ -46,20 +47,26 @@ public class Ui {
      * Prints out the error message.
      *
      * @param message the error message thrown by an Exception
+     * @return the error message as a String
      */
-    public void showError(String message) {
-        System.out.println("<ERROR> " + message);
+    public String showError(String message) {
+        String output = "<ERROR> " + message;
+        System.out.println(output);
+        return output;
     }
 
     /**
-     * Prints out the response after reading a Command.
+     * Returns the response as a String after reading a Command.
      *
      * @param c the Command read
+     * @return Doge's response as a String
      */
-    public void respond(Command c) {
-        System.out.println(c);
+    public String respond(Command c) {
+        StringBuilder output = new StringBuilder();
+        output.append(c.toString());
         if (c.haveTask()) {
-            System.out.println(c.getTask());
+            output.append("\n").append(c.getTask().toString());
         }
+        return output.toString();
     }
 }

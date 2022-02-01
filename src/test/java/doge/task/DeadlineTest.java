@@ -1,12 +1,10 @@
 package doge.task;
 
-import doge.stub.DeadlineStub;
-
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import doge.stub.DeadlineStub;
 
 public class DeadlineTest {
     @Test
