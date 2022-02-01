@@ -8,8 +8,6 @@ public abstract class Task {
     protected TaskType taskType;
     protected boolean isDone;
 
-    protected static final ArrayList<Task> TASKS = new ArrayList<>();
-
     public Task(String description, TaskType taskType) {
         this.description = description;
         this.taskType = taskType;
@@ -20,28 +18,6 @@ public abstract class Task {
         this.description = description;
         this.taskType = taskType;
         this.isDone = isDone;
-    }
-
-    public static ArrayList<Task> getTasks() {
-        return Task.TASKS;
-    }
-
-    public static void addTask(Task newTask) {
-        Task.TASKS.add(newTask);
-    }
-
-    public static void deleteTask(int taskIndex) { Task.TASKS.remove(taskIndex); }
-
-    public static Task getTask(int taskIndex) {
-        return Task.TASKS.get(taskIndex);
-    }
-
-    public static int getTasksCount() {
-        return Task.TASKS.size();
-    }
-
-    public static String taskCountToString() {
-        return String.format("Now you have %d task(s) in the list.", Task.getTasksCount());
     }
 
     public String getDescription() {

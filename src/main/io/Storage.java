@@ -1,6 +1,7 @@
 package main.io;
 
 import main.DukeException;
+import main.TaskList;
 import main.tasks.Deadline;
 import main.tasks.Event;
 import main.tasks.Task;
@@ -55,14 +56,14 @@ public class Storage {
         }
     }
 
-    public void readFile() {
+    public void readFile(TaskList taskList) {
         try {
             File dukeFile = new File(String.format("%s/%s", this.getDirname(), this.getFilename()));
             Scanner dukeReader = new Scanner(dukeFile);
             while (dukeReader.hasNextLine()) {
                 String taskString = dukeReader.nextLine();
                 String[] taskStringArray = taskString.split("~");
-                this.addToTasks(taskStringArray);
+                this.addToTasks(taskStringArray, taskList);
             }
             dukeReader.close();
         } catch (IOException e) {
@@ -72,24 +73,24 @@ public class Storage {
         }
     }
 
-    public void addToTasks(String[] taskStringArray) throws DukeException {
+    public void addToTasks(String[] taskStringArray, TaskList taskList) throws DukeException {
         String type = taskStringArray[0];
         boolean isDone = taskStringArray[1].equals("1");
         String description = taskStringArray[2];
         switch (type) {
         case "T":
-            Task.addTask(new ToDo(description, isDone));
+            taskList.addTask(new ToDo(description, isDone));
             break;
         case "D":
             try {
-                Task.addTask(new Deadline(description, taskStringArray[3], isDone));
+                taskList.addTask(new Deadline(description, taskStringArray[3], isDone));
             } catch (DateTimeParseException e){
                 throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
             }
             break;
         case "E":
             try {
-                Task.addTask(new Event(description, taskStringArray[3], isDone));
+                taskList.addTask(new Event(description, taskStringArray[3], isDone));
             } catch (DateTimeParseException e){
                 throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
             }
@@ -97,12 +98,12 @@ public class Storage {
         }
     }
 
-    public void writeFile() {
+    public void writeFile(TaskList taskList) {
         try {
             FileWriter dukeWriter = new FileWriter(String.format("%s/%s", this.getDirname(), this.getFilename()));
-            for (int i = 0; i < Task.getTasksCount(); i++) {
-                if (i != Task.getTasksCount()) {
-                    dukeWriter.write(Task.getTask(i).toStoreString() + "\n");
+            for (int i = 0; i < taskList.getTasksCount(); i++) {
+                if (i != taskList.getTasksCount()) {
+                    dukeWriter.write(taskList.getTask(i).toStoreString() + "\n");
                 }
             }
             dukeWriter.close();

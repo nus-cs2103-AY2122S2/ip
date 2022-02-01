@@ -1,5 +1,7 @@
 package main.commands;
 
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 import main.tasks.Event;
 import main.tasks.Task;
@@ -24,10 +26,9 @@ public class CEvent extends Command {
 
 
     @Override
-    public void runCommand() {
+    public void runCommand(Ui ui, TaskList taskList) {
         Task newEvent = new Event(this.getDescription(), this.getDateTime());
-        Task.addTask(newEvent);
-        System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
-                newEvent, Task.taskCountToString());
+        taskList.addTask(newEvent);
+        ui.respondAddTask(newEvent, taskList);
     }
 }

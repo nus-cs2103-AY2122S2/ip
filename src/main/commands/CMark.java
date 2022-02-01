@@ -1,6 +1,8 @@
 package main.commands;
 
 import main.DukeException;
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 import main.tasks.Task;
 
@@ -17,12 +19,11 @@ public class CMark extends Command{
     }
 
     @Override
-    public void runCommand() throws DukeException {
+    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
-            Task markTask = Task.getTask(this.getMarkIndex());
+            Task markTask = taskList.getTask(this.getMarkIndex());
             markTask.setIsDone(true);
-            System.out.printf("Nice! I've marked this task as done: \n"
-                    + "    %s\n", markTask);
+            ui.respondMark(markTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }
