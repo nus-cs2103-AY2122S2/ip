@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If the number given is out of the range of the task list
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) throws DukeException {
+    public String execute(List<Task> tasks, Ui ui) throws DukeException {
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
             throw new DukeException(ERROR_INVALID_DELETE);
         }
@@ -52,6 +52,6 @@ public class DeleteCommand extends Command {
         Task thisTask = tasks.get(index);
         tasks.remove(index);
         Storage.saveToFile(tasks);
-        ui.printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKDELETE);
+        return ui.getAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKDELETE);
     }
 }

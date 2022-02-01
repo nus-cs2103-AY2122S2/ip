@@ -55,7 +55,7 @@ public class CreateCommand extends Command {
      * @throws DukeException If there are incompatibilities or errors in the format for creating task
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) throws DukeException {
+    public String execute(List<Task> tasks, Ui ui) throws DukeException {
         Task newTask = null;
         if (taskType == TaskType.TODO) {
             newTask = new TodoTask(this.args);
@@ -104,6 +104,6 @@ public class CreateCommand extends Command {
             tasks.add(newTask);
         }
         Storage.saveToFile(tasks);
-        ui.printAddDeleteTaskSuccess(tasks, newTask, MESSAGE_TASKADD);
+        return ui.getAddDeleteTaskSuccess(tasks, newTask, MESSAGE_TASKADD);
     }
 }

@@ -56,7 +56,7 @@ public class MarkCommand extends Command {
      * @throws DukeException If the task number is out of range of the task list
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) throws DukeException {
+    public String execute(List<Task> tasks, Ui ui) throws DukeException {
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
             if (this.toMark) {
                 throw new DukeException(ERROR_INVALID_MARK);
@@ -67,12 +67,13 @@ public class MarkCommand extends Command {
         Task thisTask = tasks.get(this.taskNumber - 1);
         if (toMark) {
             thisTask.markAsDone();
-            ui.printContent(ui.getTaskLine(thisTask, MESSAGE_MARK));
+            Storage.saveToFile(tasks);
+            return ui.getTaskLine(thisTask, MESSAGE_MARK);
         } else {
             thisTask.markAsUndone();
-            ui.printContent(ui.getTaskLine(thisTask, MESSAGE_UNMARK));
+            Storage.saveToFile(tasks);
+            return ui.getTaskLine(thisTask, MESSAGE_UNMARK);
         }
-        Storage.saveToFile(tasks);
     }
 
 }
