@@ -61,8 +61,6 @@ public class Ui {
             linePrinter.print("What do you need?");
             return true;
         });
-        System.out.println();
-
         return this;
     }
 
