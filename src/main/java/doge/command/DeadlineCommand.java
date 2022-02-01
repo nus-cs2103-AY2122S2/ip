@@ -27,8 +27,11 @@ public class DeadlineCommand extends Command {
     /**
      * Executes the "deadline" command. It adds a task of "deadline" type into the TaskList.
      *
-     * {@inheritDoc}
-     * @throws DogeException if it fails to add the "deadline" task into the TaskList
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
+     * @throws DogeException if it fails to add the "deadline" task into the TaskList or user failed to provide
+     * necessary details to initialise a Deadline task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         String[] curr = this.task.getDescription().split("/");

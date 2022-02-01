@@ -24,7 +24,9 @@ public class TodoCommand extends Command {
     /**
      * Executes the "todo" command. It adds a task of "todo" type into the TaskList.
      *
-     * {@inheritDoc}
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DogeException if it fails to add the "todo" task into the TaskList
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {

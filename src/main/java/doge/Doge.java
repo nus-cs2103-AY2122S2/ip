@@ -8,11 +8,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Represents the Doge bot where it encapsulates the storage space, user interface and task list.
+ */
 public class Doge {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for class Doge.
+     */
     public Doge() {
         this.storage = new Storage();
         this.ui = new Ui();
@@ -28,6 +34,9 @@ public class Doge {
         new Doge().run();
     }
 
+    /**
+     * Runs Doge bot.
+     */
     public void run() {
         boolean isExit = false;
         this.ui.showLine();
@@ -51,6 +60,13 @@ public class Doge {
         }
     }
 
+    /**
+     * Returns a LocalDateTime when given a string input of a date and time.
+     *
+     * @param input a string input of date and time
+     * @return the date and time of LocalDateTime type
+     * @throws DogeException if date/time given does not exist or is of an incorrect format
+     */
     public static LocalDateTime getDateTime(String input) throws DogeException {
         LocalDateTime currDateTime = LocalDateTime.now();
 

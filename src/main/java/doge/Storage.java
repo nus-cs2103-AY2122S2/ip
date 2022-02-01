@@ -21,11 +21,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents the local storage that stores the TaskList.
+ */
 public class Storage {
 
+    /**
+     * Constructor for class Storage
+     */
     public Storage()  {
     }
 
+    /**
+     * Saves the tasks into local storage.
+     *
+     * @param tasks the list of tasks
+     * @throws DogeException if writing to local storage fails
+     */
     public void save(ArrayList<Task> tasks) throws DogeException {
         try {
             FileWriter fw = new FileWriter("./data/doge.txt");
@@ -38,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from local storage.
+     *
+     * @return the list of tasks
+     * @throws DogeException if it fails to create a new storage file or the parsing of data failed
+     */
     public ArrayList<Task> load() throws DogeException {
         try {
             Path p = Paths.get("./data");

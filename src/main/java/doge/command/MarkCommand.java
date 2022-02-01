@@ -21,7 +21,9 @@ public class MarkCommand extends Command {
     /**
      * Executes the "mark" command. It marks the specified task from the TskList.
      *
-     * {@inheritDoc}
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DogeException if it fails to mark the specified task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {

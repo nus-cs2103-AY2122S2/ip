@@ -23,7 +23,9 @@ public class UnmarkCommand extends Command {
     /**
      * Executes the "unmark" command. It unmarks the specified task from the TaskList.
      *
-     * {@inheritDoc}
+     * @param tasks {@inheritDoc}
+     * @param ui {@inheritDoc}
+     * @param storage {@inheritDoc}
      * @throws DogeException if it fails to unmark the specified task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
