@@ -41,7 +41,7 @@ public class AddTaskCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks,Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (type.equals("todo")) {
                 tasks.addTask(new ToDo(description));
@@ -53,7 +53,8 @@ public class AddTaskCommand extends Command {
             ui.showSucessfulAdd(tasks.getTask(tasks.size() - 1), tasks.size());
         } catch (DateTimeParseException e) {
             ui.showError("DateTimeParseException");
-        } try {
+        }
+        try {
             storage.writeToFile(tasks.getTaskArr());
         } catch (IOException e) {
             ui.showError("IOException");

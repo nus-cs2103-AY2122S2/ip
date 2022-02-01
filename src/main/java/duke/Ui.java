@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner sc;
+    private Scanner sc;
 
     /** Constructs an instance of Ui. */
     public Ui() {
@@ -17,7 +17,7 @@ public class Ui {
     }
 
     /** Prints the welcome message for the user. */
-    public void welcome(){
+    public void welcome() {
         horizontal();
         System.out.println("Greetings, NERD! I'm Duke");
         System.out.println("Fine, I'm programmed to be nice today. What can I do for you? :)");
@@ -89,7 +89,7 @@ public class Ui {
      * @param t Task that has been unmarked.
      */
     public void showUnmarkTask(Task t) {
-        System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!:");
+        System.out.println("Did you mess up something? I'll mark it as undone -- but I believe you can do it!:");
         System.out.println(t);
     }
 
@@ -102,7 +102,8 @@ public class Ui {
         switch (type) {
         case ("LoadingError"):
             System.out.println("Something went wrong with the loading of the file");
-            System.out.println("Try deleting the data/tasks.txt file, but this will wipe all previous tasks stored (if any).");
+            System.out.println("Try deleting the data/tasks.txt file, but this will "
+                    + "wipe all previous tasks stored (if any).");
             break;
         case ("UnknownCommand"):
             System.out.println("I'm sorry, but I can't execute this command!");
@@ -126,6 +127,9 @@ public class Ui {
             break;
         case ("DateTimeParseException"):
             System.out.println("Please enter the correct format for Datetime! yyyy-mm-dd HH:mm");
+            break;
+        default:
+            System.out.println("I don't understand this error!");
         }
     }
 
@@ -141,7 +145,7 @@ public class Ui {
             showEmptyTask();
         }
 
-        for (int i = 0; i < t.size(); i++ ) {
+        for (int i = 0; i < t.size(); i++) {
             showTask(i + 1, t.get(i));
         }
     }

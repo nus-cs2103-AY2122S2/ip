@@ -34,6 +34,7 @@ public class Deadline extends Task {
      * @return Deadline in file format.
      */
     public String toFileFormat() {
-        return "D," + String.valueOf(isDone) + "," + description + "," + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return "D," + String.valueOf(isDone) + "," + description + ","
+                + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

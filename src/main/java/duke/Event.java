@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected localDateTime at;
+    protected LocalDateTime at;
 
     /**
      * Constructs an instance of Event.
@@ -35,6 +35,7 @@ public class Event extends Task {
      * @return Event in file format.
      */
     public String toFileFormat() {
-        return "E," + String.valueOf(isDone) + "," + description + "," + at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return "E," + String.valueOf(isDone) + "," + description + ","
+                + at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

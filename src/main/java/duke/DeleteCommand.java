@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
-    int taskToDelete;
+    private int taskToDelete;
 
     /**
      * Constructs an instance of Delete Command.
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param ui Deals with interaction with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
-    public void execute(TaskList tasks,Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showRemoveTask(tasks.getTask(taskToDelete), tasks.size() - 1);
         tasks.delete(taskToDelete);
         try {

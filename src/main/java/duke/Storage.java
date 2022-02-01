@@ -41,19 +41,21 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<Task>();
 
             while (s.hasNext()) {
-                String words[] = s.nextLine().split(",");
-                String done = words[1];
-                String description = words[2];
-                switch (words[0]) {
+                String[] userInput = s.nextLine().split(",");
+                String done = userInput[1];
+                String description = userInput[2];
+                switch (userInput[0]) {
                 case ("T"):
                     tasks.add(new ToDo(description));
                     break;
                 case ("D"):
-                    tasks.add(new Deadline(description, words[3]));
+                    tasks.add(new Deadline(description, userInput[3]));
                     break;
                 case ("E"):
-                    tasks.add(new Event(description, words[3]));
+                    tasks.add(new Event(description, userInput[3]));
                     break;
+                default:
+                    System.out.println("Task not in correct format!");
                 } if (done.equals("true")) {
                     tasks.get(tasks.size() - 1).markDone();
                 }

@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks,Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.unmark(taskToUnmark);
         ui.showUnmarkTask(tasks.getTask(taskToUnmark));
         try {

@@ -11,13 +11,13 @@ public class ListCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks,Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> t = tasks.getTaskArr();
         if (t.size() == 0) {
             ui.showEmptyTask();
         }
 
-        for (int i = 0; i < t.size(); i++ ) {
+        for (int i = 0; i < t.size(); i++) {
             ui.showTask(i + 1, t.get(i));
         }
     }

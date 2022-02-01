@@ -12,42 +12,42 @@ public class Parser {
      */
     public static Command parse(String userCommand, Ui ui) throws UnsupportedOperationException {
 
-        String words[] = userCommand.split(" ", 2);
-        String command = words[0];
+        String[] descriptions = userCommand.split(" ", 2);
+        String command = descriptions[0];
         switch (command) {
         case ("list"):
             return new ListCommand();
         case ("mark"):
-            return new MarkCommand(Integer.parseInt(words[1]) - 1);
+            return new MarkCommand(Integer.parseInt(descriptions[1]) - 1);
         case ("unmark"):
-            return new UnmarkCommand(Integer.parseInt(words[1]) - 1);
+            return new UnmarkCommand(Integer.parseInt(descriptions[1]) - 1);
         case ("todo"):
             try {
-                return new AddTaskCommand(words[1], command);
+                return new AddTaskCommand(descriptions[1], command);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.showError("TodoFormatError");
                 throw new UnsupportedOperationException();
             }
         case ("deadline"):
             try {
-                String temp[] = words[1].split(" /by ", 2);
-                return new AddTaskCommand(temp[0], command, temp[1]);
+                String[] descriptionsSplitByTime = descriptions[1].split(" /by ", 2);
+                return new AddTaskCommand(descriptionsSplitByTime[0], command, descriptionsSplitByTime[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.showError("DeadlineFormatError");
                 throw new UnsupportedOperationException();
             }
         case ("event"):
             try {
-                String temp2[] = words[1].split(" /at ", 2);
-                return new AddTaskCommand(temp2[0], command, temp2[1]);
+                String[] descriptionsSplitAtTime = descriptions[1].split(" /at ", 2);
+                return new AddTaskCommand(descriptionsSplitAtTime[0], command, descriptionsSplitAtTime[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.showError("EventFormatError");
                 throw new UnsupportedOperationException();
             }
         case ("find"):
-            return new FindCommand(words[1]);
+            return new FindCommand(descriptions[1]);
         case ("delete"):
-            return new DeleteCommand(Integer.parseInt(words[1]) - 1);
+            return new DeleteCommand(Integer.parseInt(descriptions[1]) - 1);
         case ("bye"):
             return new ExitCommand();
         default:

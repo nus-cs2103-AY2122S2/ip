@@ -1,6 +1,6 @@
 package main.java.duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Constructs an instance of ToDo.
