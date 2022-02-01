@@ -8,7 +8,7 @@ public class EventTest {
 
     @Test
     public void eventToString_validInput_validOutput() {
-        assertEquals("E|0|hang out with friends|Vivo 2pm 2014-12-10|\n", new Event("hang out with friends","Vivo 2pm 2014-12-10").toString());
+        assertEquals("E|false|hang out with friends|Vivo 2pm 2014-12-10|\n", new Event("hang out with friends","Vivo 2pm 2014-12-10").toString());
     }
     @Test
     public void eventPrintTask_validInput_validOutput() {

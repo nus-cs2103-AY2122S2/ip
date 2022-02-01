@@ -8,7 +8,7 @@ public class DeadlineTest {
 
     @Test
     public void deadlineToString_validInput_validOutput() {
-        assertEquals("D|0|homework|Dec 10 2014|\n", new Deadline("homework","2014-12-10").toString());
+        assertEquals("D|false|homework|Dec 10 2014|\n", new Deadline("homework","2014-12-10").toString());
     }
 
     @Test
