@@ -85,7 +85,7 @@ public final class FileManager {
      *  2. [D][ ] task (by: yyyy-mm-dd hh:mm)
      *  3. [E][ ] event (at: yyyy-mm-dd hh:mm, until: yyyy-mm-dd hh:mm)
      *
-     *  An assumption is made where the time values are not modified to be invalid.
+     *  An assumption is made where the save file is not modified to be invalid.
      *  TODO: FIX THIS ASSUMPTION, maybe make this method cleaner
      *
      * @param input the String form of the Task.

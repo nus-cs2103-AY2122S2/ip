@@ -43,7 +43,6 @@ public abstract class NewTaskInst extends Instruction {
     }
 
     /**
-     /**
      * Produces a New Task Instruction, according to the specified instruction type.
      *
      * @param input the original command called.
@@ -52,7 +51,7 @@ public abstract class NewTaskInst extends Instruction {
      *          is wrong.
      */
     public static NewTaskInst of(String input) throws InvalidInputException {
-        //to do tasks examles are not shown to prevent improper highlighting of comments
+        //to do tasks examples are not shown to prevent improper highlighting of comments
         String[] split = input.split(" ", 2);
 
         if (split.length == 1) { // happens when: "deadline", "event"
@@ -65,7 +64,8 @@ public abstract class NewTaskInst extends Instruction {
         }
 
         // At this point, the instruction must be: "deadline <x>" with x being
-        // not completely full of spaces.
+        // not completely full of spaces. taskDetails also cannot start or end
+        // with a space after stripping.
         String instType = split[0];
         switch (instType) {
         case "todo":

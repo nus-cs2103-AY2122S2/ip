@@ -50,6 +50,7 @@ public class InstructionHandler {
             ModifyListedTaskInst castedInst = (ModifyListedTaskInst) inst;
             return String.format("There is no task %d!", castedInst.getTaskNum());
         } catch (InvalidActionException e) {
+            // Return the invalid action's exception message back to the user.
             return e.getMessage();
         }
     }

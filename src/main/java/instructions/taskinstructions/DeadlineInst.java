@@ -33,8 +33,8 @@ public class DeadlineInst extends NewTaskInst {
     /**
      * Produces a Deadline Instruction.
      *
-     * @param taskDetails the details of the instruction. This includes both
-     *                    the description and the deadline.
+     * @param taskDetails the details of the instruction. This includes both the description and the
+     *                    deadline, but cannot start/end with a space.
      * @return the Deadline Instruction.
      * @throws InvalidInputException when no details are provided, the wrong number of details
      *          provided, when either the timing or description is omitted, or when the given
@@ -46,12 +46,14 @@ public class DeadlineInst extends NewTaskInst {
         // a correct format will produce a String[2].
 
         if (split.length == 1) {
-            //happens in "deadline /by ", deadline  /by b", "deadline a /byb" etc
+            // happens in "deadline a /byb", "a/by b", "a/byb", or "abyb"
             split = taskDetails.split("/by");
-            if (split.length == 2 && split[0].length() != 0) {
-                //happens in "deadline a/at b", "deadline a /atb" etc
+            if (split.length == 2) {
+                // happens in "deadline a/by b", "a /byb", "a/by b".
+                // user included a "/by" but did not add appropriate spacing.
                 throw MISSING_SPACES_EXCEPTION;
             }
+            // user did not include a "/by" at all.
             throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /by "s

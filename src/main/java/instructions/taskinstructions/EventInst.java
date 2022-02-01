@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import date.time.DateTimeParser;
 import exceptions.InvalidInputException;
+import exceptions.InvalidTimeException;
 import tasks.EventTask;
 import tasks.TaskList;
 
@@ -39,8 +40,8 @@ public class EventInst extends NewTaskInst {
     /**
      * Produces an Event Instruction.
      *
-     * @param taskDetails the details of the instruction. This includes both
-     *                    the description and the timing.
+     * @param taskDetails the details of the instruction. This includes both the description and the
+     *                    timing, but cannot start/end with a space.
      * @return the Event Instruction.
      * @throws InvalidInputException when no details are provided, the wrong
      *                               number of details provided, when either
@@ -53,12 +54,14 @@ public class EventInst extends NewTaskInst {
 
         // check for the " /at " and figure out where the problem is if it is missing
         if (split.length == 1) {
-            //happens in "event /at ", event /at b", "event a /atb" etc
+            // happens in "event a/atb", "a /atb", "a/atb"
             split = taskDetails.split("/at");
-            if (split.length == 2 && split[0].length() != 0) {
-                //happens in "event a/at b", "event a /atb", "event a/atb"
+            if (split.length == 2) {
+                // happens in "event a/at b", "a /atb", "a/atb"
+                // user included a "/at" but did not add appropriate spacing.
                 throw MISSING_SPACES_EXCEPTION;
             }
+            // user did not include a "/at" at all.
             throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (split.length >= 3) { // happens with multiple " /at "s
@@ -67,16 +70,23 @@ public class EventInst extends NewTaskInst {
 
 
         String[] timings = split[1].split(" /until ");
-        // a correct format will produce a String[2].
+        // a correct format will produce a String[2] with timings[0] not being full of spaces.
 
         // check for the " /until " and figure out where the problem is if it is missing
         if (timings.length == 1) {
-            //happens in "/at /until", "/at a /until " or similar
+            //happens in "/until c", "b/untilc", "b/until c", "b /untilc"
             split = split[1].split("/until");
             if (split.length == 2 && split[0].length() != 0) {
-                // happens in "/at a/until b" or similar
+                // happens in "b/until c", "b /untilc", "b/untilc"
                 throw MISSING_SPACES_EXCEPTION;
             }
+            // happens in "/until c" or the user did not include a "/until" at all.
+            throw MISSING_TASK_DETAILS_EXCEPTION;
+        }
+        // will be invalid if the provided start timing is empty or full of spaces. ("" or "  ")
+        // ie when user inputs "event a /at  /until c" or "event a /at    /until c"
+        boolean isStartTimingValid = timings[0].strip().length() != 0;
+        if (timings.length == 2 && isStartTimingValid) {
             throw MISSING_TASK_DETAILS_EXCEPTION;
         }
         if (timings.length >= 3) {
@@ -86,12 +96,21 @@ public class EventInst extends NewTaskInst {
         // if either of the timings are invalid, an exception will be thrown
         DateTimeParser.checkValidFormat(timings[0]);
         DateTimeParser.checkValidFormat(timings[1]);
-        // TODO: check that endTime > startTime
 
         LocalDateTime startTime = DateTimeParser.parse(timings[0]);
         LocalDateTime endTime = DateTimeParser.parse(timings[1]);
 
+        boolean isStartTimeFirst = startTime.isBefore(endTime);
+        boolean isEndTimeFirst = startTime.isAfter(endTime);
+        if (!isStartTimeFirst && !isEndTimeFirst) {
+            // happens only when both are false, which only happens when startTime = endTime
+            throw new InvalidTimeException("The event cannot have no duration!");
+        } else if (isEndTimeFirst) {
+            // happens when end time is earlier.
+            throw new InvalidTimeException("Start Time needs to be before the End Time!");
+        }
         return new EventInst(split[0], startTime, endTime);
+
     }
 
     /**

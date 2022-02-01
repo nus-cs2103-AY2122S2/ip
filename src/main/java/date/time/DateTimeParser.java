@@ -80,6 +80,8 @@ public final class DateTimeParser {
         // 0123456789012345
         // yyyy-mm-dd xx:xx
         // if wrong format, return false
+        // Any "magic numbers" seen from this point onwards refer to the indexes of the specific
+        // string to check, as shown above in line 80.
         for (int i = 0; i < input.length(); i++) {
             if (i == 4 || i == 7) {
                 if (input.charAt(i) != '-') {

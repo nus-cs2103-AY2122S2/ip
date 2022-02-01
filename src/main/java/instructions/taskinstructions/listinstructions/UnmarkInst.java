@@ -37,6 +37,7 @@ public class UnmarkInst extends ModifyListedTaskInst {
      * @param taskList the taskList to modify.
      * @return the feedback message after performing this instruction.
      * @throws NoSuchTaskException when there does not exist a task with the given index.
+     * @throws InvalidActionException when the user tries to unmark an already unmarked instruction.
      */
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException, InvalidActionException {

@@ -68,6 +68,8 @@ public abstract class Instruction {
      * @return a String feedback onto the state of the instruction.
      * @throws NoSuchTaskException when the instruction is a ModifyListedTaskInstruction and there
      *          is no specified task number.
+     * @throws InvalidActionException when the user tries to mark/unmark an already marked/unmarked
+     *          instruction.
      */
     public abstract String doInst(TaskList taskList) throws NoSuchTaskException, InvalidActionException;
 }

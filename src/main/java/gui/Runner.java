@@ -35,6 +35,7 @@ public class Runner extends Application {
             null, BorderStrokeStyle.SOLID, null, null));
     /** Default inset to be reused. Left and right has insets of 5.*/
     private static final Insets LEFT_RIGHT_INSET = new Insets(0, 5, 0, 5);
+
     /** The overall container for everything.*/
     private VBox body;
     /** The scene for the overall container({@code body}) to be slotted in.*/
@@ -47,12 +48,14 @@ public class Runner extends Application {
     private ScrollPane main;
     /** The container for the chatlog of the GUI.*/
     private VBox dialogueContainer;
+
     /** The user's picture.*/
     private Image userPic;
     /** The GUI component for the user to input commands in.*/
     private TextField userInput;
     /** The GUI component for the user to send commands in.*/
     private Button sendButton;
+
     /** Fluffer's Profile picture.*/
     private Image fluffersPic;
     /** Fluffer's Profile picture, made smaller to fit the chatlog.*/
@@ -83,6 +86,7 @@ public class Runner extends Application {
         setUpInteractions();
         scene = new Scene(body);
         showStage(stage, scene);
+
         try {
             startFluffers();
         } catch (SaveFileModifiedException e) {
@@ -101,6 +105,7 @@ public class Runner extends Application {
         header = new HBox();
         main = new ScrollPane();
         footer = new HBox();
+
         // header
         fluffersPic = new Image(
                 "https://i.pinimg.com/originals/22/ab/93/22ab93a52e5e6eb12341bdc1f654988a.jpg",
@@ -115,9 +120,11 @@ public class Runner extends Application {
                 "https://image.flaticon.com/icons/png/512/40/40031.png",
                 40, 40, false, true)));
         header.getChildren().addAll(fluffersPicContainer, fluffersName, helpButton);
+
         // main
         dialogueContainer = new VBox();
         main.setContent(dialogueContainer);
+
         // footer
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -125,6 +132,7 @@ public class Runner extends Application {
         userPic = new Image(
                 "https://upload.wikimedia.org/wikipedia/commons/0/09/Man_Silhouette.png",
                 35, 35, false, true);
+
         // finally, add all of them together
         body.getChildren().addAll(header, main, footer);
     }
@@ -138,7 +146,9 @@ public class Runner extends Application {
         stage.setTitle("Cat Translator v2.103.0.3");
         stage.setResizable(false);
         body.setPrefSize(350, 600);
-        body.setBackground(new Background(new BackgroundFill(Color.valueOf("#91e5ff"), null, null)));
+        body.setBackground(new Background(new BackgroundFill(
+                Color.valueOf("#91e5ff"), null, null)));
+
         // header
         fluffersPicContainer.setPreserveRatio(true);
         fluffersPicContainer.setFitHeight(50);
@@ -149,6 +159,7 @@ public class Runner extends Application {
         helpButton.setVisible(false); // temporarily disable the setting button.
         header.setPadding(new Insets(10));
         HBox.setMargin(fluffersName, LEFT_RIGHT_INSET);
+
         // main
         dialogueContainer.setPrefHeight(500);
         dialogueContainer.setPrefWidth(335);
@@ -158,6 +169,7 @@ public class Runner extends Application {
                 Color.valueOf("#bdefff"), null, null)));
         main.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         main.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
         // footer
         userInput.setPrefSize(300, 35);
         sendButton.setPrefSize(50, 35);
