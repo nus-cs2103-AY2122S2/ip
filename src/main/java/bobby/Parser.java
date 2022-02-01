@@ -3,15 +3,25 @@ package bobby;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Parser class deals with converting user input into commands
+ * understood by the program and executes them accordingly.
+ */
 public class Parser {
-    private static String command;
     public Parser() {
 
     }
 
+    /**
+     * Converts user input into commands, passes the commands to TaskList
+     * to be executed, or terminates the Bobby program.
+     * @param tasks TaskList that handles the execution of commands.
+     * @param userInput user input to be parsed.
+     * @param bobby instance of Bobby to be terminated if BYE command given.
+     */
     public static void parse(TaskList tasks, String userInput, Bobby bobby) {
         String[] inputs = userInput.split(" ", 2);
-        command = inputs[0];
+        String command = inputs[0];
         try {
             switch (Commands.valueOf(command.toUpperCase())) {
             case BYE:
@@ -22,34 +32,42 @@ public class Parser {
                 tasks.list();
                 break;
             case MARK:
-                int i = Integer.parseInt(inputs[1]) - 1;
-                tasks.mark(i);
+                try {
+                    int i = Integer.parseInt(inputs[1]) - 1;
+                    tasks.mark(i);
+                } catch (BobbyException e) {
+                    System.out.println(e);
+                }
                 break;
             case UNMARK:
-                int k = Integer.parseInt(inputs[1]) - 1;
-                tasks.unmark(k);
+                try {
+                    int k = Integer.parseInt(inputs[1]) - 1;
+                    tasks.unmark(k);
+                } catch (BobbyException e) {
+                    System.out.println(e);
+                }
                 break;
             case TODO:
                 try {
                     tasks.addToDo(userInput);
                 } catch (BobbyException e) {
-                    System.out.println("Description cannot be empty.");
+                    System.out.println(e);
                 }
                 break;
             case DEADLINE:
                 try {
                     tasks.addDeadline(userInput);
                 } catch (BobbyException e) {
-                    System.out.println("Description/Date cannot be empty.");
+                    System.out.println(e);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Invalid date format. Please use YYYY-MM-DD");
+                    System.out.println("Invalid date format. Please use YYYY-MM-DD.");
                 }
                 break;
             case EVENT:
                 try {
                     tasks.addEvent(userInput);
                 } catch (BobbyException e) {
-                    System.out.println("Description/Time cannot be empty.");
+                    System.out.println(e);
                 }
                 break;
             case DELETE:

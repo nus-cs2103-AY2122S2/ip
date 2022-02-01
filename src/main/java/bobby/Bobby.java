@@ -1,6 +1,5 @@
 package bobby;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -22,12 +21,7 @@ public class Bobby {
      */
     public Bobby(String filePath) {
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadFile(), storage);
-        } catch (FileNotFoundException e) {
-            //ui.showLoadingError();
-            tasks = new TaskList(new ArrayList<Task>(), storage);
-        }
+        tasks = new TaskList(storage.loadFile(), storage);
         isExit = false;
     }
 

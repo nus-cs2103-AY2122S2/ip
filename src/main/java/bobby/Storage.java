@@ -8,14 +8,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage deals with loading tasks from file and saving tasks in the file.
+ */
 public class Storage {
     File file;
 
+    /**
+     * Constructor to create a Storage instance.
+     * @param filePath file path where the .txt file is loaded from or created.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
-    public ArrayList<Task> loadFile() throws FileNotFoundException {
+    /**
+     * Loads file from given file path if file exists. Creates an empty file
+     * if file does not exist.
+     * @return ArrayList of tasks loaded from file.
+     */
+    public ArrayList<Task> loadFile() {
         ArrayList<Task> taskArray = new ArrayList<Task>();
         try {
             File file = new File("bobby.txt");
@@ -57,6 +69,10 @@ public class Storage {
         return taskArray;
     }
 
+    /**
+     * Writes into the file with current list of tasks.
+     * @param taskArray ArrayList of current tasks to be written into file.
+     */
     public void updateFile(ArrayList<Task> taskArray) {
         try {
             FileWriter fw = new FileWriter("bobby.txt");
