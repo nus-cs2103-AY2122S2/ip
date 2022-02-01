@@ -1,6 +1,8 @@
 package duke.dukeexceptions;
 
 
+import duke.responses.Response;
+
 public class ForeignException extends DukeException {
 
     public ForeignException(String msg) {
@@ -11,13 +13,11 @@ public class ForeignException extends DukeException {
      * Prints a error msg
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += DukeException.DIVIDER + "\n";
+        uiResponse += "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

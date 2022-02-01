@@ -1,5 +1,7 @@
 package duke.dukeexceptions;
 
+import duke.responses.Response;
+
 public class ToDoException extends DukeException {
 
     public ToDoException(String msg) {
@@ -7,13 +9,11 @@ public class ToDoException extends DukeException {
     }
 
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("OOPS!!! The description of a todo cannot be empty.");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += DukeException.DIVIDER + "\n";
+        uiResponse += "OOPS!!! The description of a todo cannot be empty \n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

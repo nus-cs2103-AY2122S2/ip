@@ -1,5 +1,7 @@
 package duke.dukeexceptions;
 
+import duke.responses.Response;
+
 public class DukeTaskListException extends DukeDateExceptions {
 
     public DukeTaskListException(String msg) {
@@ -10,14 +12,11 @@ public class DukeTaskListException extends DukeDateExceptions {
      * Prints a error msg
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("This is not a valid index!");
-        System.out.println(
-                "____________________________________________________________"
-        );
-
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += DukeException.DIVIDER + "\n";
+        uiResponse += "This is not a valid index! \n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

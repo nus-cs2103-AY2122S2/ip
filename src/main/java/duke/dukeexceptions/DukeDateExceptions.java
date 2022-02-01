@@ -1,5 +1,8 @@
 package duke.dukeexceptions;
 
+import duke.Duke;
+import duke.responses.Response;
+
 /**
  * Duke exceptions that catch DateTime related errors
  */
@@ -17,13 +20,11 @@ public class DukeDateExceptions extends DukeException {
      * Prints a error msg
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("Please provide a valid date time format");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += DukeException.DIVIDER + "\n";
+        uiResponse += "Please provide a valid date time format \n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

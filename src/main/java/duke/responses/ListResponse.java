@@ -22,19 +22,14 @@ public class ListResponse implements Response {
      * Callback function that displays the intended results
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-
-        System.out.println("Here are the tasks in your list:");
-        iterate.getTaskList().forEach(x -> {
-            System.out.println(count + ". " + x.display());
-            count++;
-        });
-
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += "Here are the tasks in your list:\n";
+        for (int i = 0; i < iterate.taskLength(); i++) {
+            uiResponse += i + " " + iterate.getTask(i).display() + "\n";
+        }
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

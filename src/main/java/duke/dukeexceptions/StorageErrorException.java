@@ -1,5 +1,7 @@
 package duke.dukeexceptions;
 
+import duke.responses.Response;
+
 public class StorageErrorException extends DukeException {
 
     public StorageErrorException(String msg) {
@@ -10,13 +12,11 @@ public class StorageErrorException extends DukeException {
      * Prints a error msg
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("Invalid Storage");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += DukeException.DIVIDER + "\n";
+        uiResponse += "Invalid Storage \n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

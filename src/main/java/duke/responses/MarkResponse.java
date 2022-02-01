@@ -22,12 +22,12 @@ public class MarkResponse implements Response {
      * Callback function that displays the intended results
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________");
-        System.out.println("Nice! I've marked this task as done:\n");
-        System.out.println(this.currTask.display());
-        System.out.println(
-                "____________________________________________________________");
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += "Nice! I've marked this task as done:\n";
+        uiResponse += currTask.display() + "\n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

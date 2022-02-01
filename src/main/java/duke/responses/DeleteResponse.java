@@ -23,15 +23,13 @@ public class DeleteResponse implements Response {
      * Callback function that displays the intended results
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(del.display());
-        System.out.println("Now you have " + size + " in the list");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += "Noted. I've removed this task:\n";
+        uiResponse += del.display() + "\n";
+        uiResponse += "Now you have " + size + " in the list";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

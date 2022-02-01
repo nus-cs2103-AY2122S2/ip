@@ -1,4 +1,5 @@
 package duke;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.data.Storage;
@@ -29,6 +30,20 @@ public class Duke {
     }
 
     /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command result = commandHandler.getCommand(input);
+            result.getResources(store, taskList);
+            return result.execute().callback();
+        } catch (DukeException e) {
+            return e.callback();
+        }
+    }
+
+    /**
      * Starts Duke
      */
     public void run() {
@@ -42,7 +57,7 @@ public class Duke {
                 Command cmd = commandHandler.getCommand(stringCmd);
                 cmd.getResources(store, taskList);
                 if (cmd instanceof ByeCommand) {
-                    isRunning = false;
+                    this.stop();
                 }
                 Response feedback = cmd.execute();
                 cmdLine.callResponse(feedback);

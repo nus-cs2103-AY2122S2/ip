@@ -25,21 +25,12 @@ public class AddTaskResponse implements Response {
      * Callback function that displays the intended results.
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println(
-                "Got it. I've added this task:"
-        );
-        System.out.println(
-                currTask.display()
-        );
-        System.out.println(
-                "Now you have " + tasklist.getTaskList().size() + " tasks in this list"
-        );
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += currTask.display() + "\n";
+        uiResponse += "Now you have " + tasklist.getTaskList().size() + " tasks in this list. \n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }
