@@ -34,7 +34,7 @@ public class FindCommand extends Command<String> {
             throw new DukeException(err);
         }
         int n = 1;
-        System.out.print(Ui.lineDivider + "Here are the matching tasks in your list:\n");
+        System.out.print(Ui.getLineDivider() + "Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.getSize(); i++) {
             String taskDetail = list.getTask(i).toString();
             if (taskDetail.contains(description)) {
@@ -42,7 +42,7 @@ public class FindCommand extends Command<String> {
                 n = n + 1;
             }
         }
-        System.out.print(Ui.lineDivider);
+        System.out.print(Ui.getLineDivider());
     }
 
     /**

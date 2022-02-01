@@ -1,18 +1,18 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
 
 /**
  * Stores the tasks into a file and retrieve tasks from file when bot starts.
@@ -52,7 +52,7 @@ public class Storage {
      * @return tasks belonging to the user
      * @throws FileNotFoundException thrown when the file to load form does not exist
      */
-    public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException{
+    public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
         try {
             File f = new File(filePath);

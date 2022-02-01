@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import duke.commands.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -5,16 +7,14 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.io.FileNotFoundException;
-
 /**
  * A task tracker bot named Duke aka mum.
  * Stores list of tasks performed by the user.
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
     private String filePath;
 
     /**
@@ -50,7 +50,7 @@ public class Duke {
                 Command<String> c = Parser.parseInput(fullCommand, tasks, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.err.print(Ui.lineDivider + e + Ui.lineDivider);
+                System.err.print(Ui.getLineDivider() + e + Ui.getLineDivider());
             }
         }
         Ui.showGoodBye();

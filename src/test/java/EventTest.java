@@ -1,8 +1,9 @@
-import duke.exception.DukeException;
-import duke.tasks.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.DukeException;
+import duke.tasks.Event;
 
 /**
  * Test event class for JUnit testing

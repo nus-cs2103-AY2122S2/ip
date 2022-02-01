@@ -1,14 +1,12 @@
 package duke.commands;
 
-import duke.commands.Command;
+import java.io.IOException;
 
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.storage.Storage;
-import duke.exception.DukeException;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Command class mark the task specified as not done.
@@ -77,7 +75,7 @@ public class UnmarkCommand extends Command<String> {
      *
      * @return false to not stop the bot from running
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

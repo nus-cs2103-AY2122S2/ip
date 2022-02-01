@@ -1,8 +1,9 @@
-import duke.exception.DukeException;
-import duke.tasks.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
 
 /**
  * Test deadline class for JUnit testing

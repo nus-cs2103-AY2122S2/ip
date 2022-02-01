@@ -2,12 +2,12 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.tasks.TaskList;
-import duke.tasks.Deadline;
-
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Command class that adds a deadline task to list.
@@ -63,7 +63,7 @@ public class AddDeadlineCommand extends Command<String> {
      *
      * @return false to not stop the bot from running
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

@@ -1,12 +1,11 @@
 package duke.commands;
-import duke.commands.Command;
 
+import java.io.IOException;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import duke.storage.Storage;
-import duke.exception.DukeException;
-import java.io.IOException;
 import duke.ui.Ui;
 
 /**
@@ -60,7 +59,7 @@ public class DeleteCommand extends Command<String> {
         } else {
             Task curr = list.getTask(targetIndex - 1);
             list.deleteTask(targetIndex - 1);
-            Ui.showDeleteResponse(curr.toString(), size -1);
+            Ui.showDeleteResponse(curr.toString(), size - 1);
         }
         try {
             storage.writeToFile(list);
@@ -74,7 +73,7 @@ public class DeleteCommand extends Command<String> {
      *
      * @return false to not stop the bot from running
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

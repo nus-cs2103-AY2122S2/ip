@@ -55,7 +55,7 @@ public class Task {
      * @return unformatted form of the task
      */
     public String getTaskData() {
-        return "[" + getStatus() +"] " + description;
+        return "[" + getStatus() + "] " + description;
     }
 
     /**
@@ -64,6 +64,6 @@ public class Task {
      * @return formated form of the task
      */
     public String toString() {
-        return "[" + getStatus() +"] " + description;
+        return "[" + getStatus() + "] " + description;
     }
 }

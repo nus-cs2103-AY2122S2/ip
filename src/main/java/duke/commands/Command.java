@@ -15,7 +15,7 @@ public abstract class Command<T> {
      *
      * @return false to not stop the bot from running
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

@@ -1,14 +1,12 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 
 /**
  * List of tasks of this bot that the user has access to.
  */
 public class TaskList {
-    private ArrayList<Task> listOfTasks;
+    private final ArrayList<Task> listOfTasks;
 
     /**
      * Constructor of this TaskList class.

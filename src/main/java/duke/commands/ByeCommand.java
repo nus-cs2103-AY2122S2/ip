@@ -3,7 +3,7 @@ package duke.commands;
 /**
  * Command class to end the bot from running.
  */
-public class ByeCommand extends  Command<String> {
+public class ByeCommand extends Command<String> {
     /**
      * Constructor to execute the stopping of this bot.
      */

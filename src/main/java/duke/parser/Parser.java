@@ -1,10 +1,19 @@
 package duke.parser;
 
-import duke.commands.*;
-
-import duke.tasks.TaskList;
-import duke.storage.Storage;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.ShowAllCommands;
+import duke.commands.UnmarkCommand;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 
 /**
  * Parser that make sense of the input by user.
@@ -40,7 +49,7 @@ public class Parser {
             return new DeleteCommand(listOfTasks, echo.split(" ", 2), storage);
         } else if (echo.toLowerCase().contains("find")) {
             return new FindCommand(listOfTasks, echo.split(" ", 2));
-        }   else {
+        } else {
             throw new DukeException("Oh no! I fear I don't understand! Try again!\n");
         }
     }

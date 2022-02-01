@@ -2,17 +2,16 @@ package duke.commands;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
-
-import duke.storage.Storage;
-import duke.exception.DukeException;
 import duke.ui.Ui;
 
 /**
  * Command class that adds a event task to list.
  */
-public class AddEventCommand extends Command<String>{
+public class AddEventCommand extends Command<String> {
     private TaskList list;
     private String[] echo;
     private Storage storage;
@@ -63,7 +62,7 @@ public class AddEventCommand extends Command<String>{
      *
      * @return false to not stop the bot from running
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }
