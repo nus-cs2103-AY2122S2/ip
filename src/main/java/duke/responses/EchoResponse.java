@@ -19,13 +19,7 @@ public class EchoResponse implements Response {
      * Callback function that displays the intended results.
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println(msg);
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        return "";
     }
 }

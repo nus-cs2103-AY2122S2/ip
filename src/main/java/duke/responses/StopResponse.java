@@ -9,13 +9,11 @@ public class StopResponse implements Response {
      * Callback function that displays the intended results
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________"
-        );
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(
-                "____________________________________________________________"
-        );
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += "Bye hope to see you agian!\n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

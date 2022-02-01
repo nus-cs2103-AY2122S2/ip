@@ -21,12 +21,12 @@ public class UnMarkResponse implements Response {
      * Callback function that displays the intended results
      */
     @Override
-    public void callback() {
-        System.out.println(
-                "____________________________________________________________");
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(this.currTask.display());
-        System.out.println(
-                "____________________________________________________________");
+    public String callback() {
+        String uiResponse = "";
+        uiResponse += Response.DIVIDER + "\n";
+        uiResponse += "OK, I've marked this task as not done yet:\n";
+        uiResponse += currTask.display() + "\n";
+        uiResponse += Response.DIVIDER + "\n";
+        return uiResponse;
     }
 }

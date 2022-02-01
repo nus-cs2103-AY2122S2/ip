@@ -1,6 +1,9 @@
 package duke.dukeexceptions;
 
 public class DukeException extends Exception {
+
+    public static final String DIVIDER = "_________________________________________________";
+
     DukeException(String msg) {
         super(msg);
     }
@@ -8,7 +11,7 @@ public class DukeException extends Exception {
     /**
      * Prints a error msg
      */
-    public void callback() {
-
+    public String callback() {
+        return "";
     }
 }
