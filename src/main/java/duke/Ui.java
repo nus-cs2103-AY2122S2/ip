@@ -53,7 +53,7 @@ public class Ui {
      * @param message Template text for addition or deletion
      */
     public void printAddDeleteTaskSuccess(List<Task> tasks, Task task, String message) {
-        String content = taskLine(task, message) + "\n";
+        String content = getTaskLine(task, message) + "\n";
         content += listSizeLine(tasks);
         printContent(content);
     }
@@ -65,7 +65,7 @@ public class Ui {
      * @param message Template text for the printed task
      * @return Combined string mainly used for printing
      */
-    public String taskLine(Task task, String message) {
+    public String getTaskLine(Task task, String message) {
         return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString();
     }
 

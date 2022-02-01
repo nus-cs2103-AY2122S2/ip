@@ -67,10 +67,10 @@ public class MarkCommand extends Command {
         Task thisTask = tasks.get(this.taskNumber - 1);
         if (toMark) {
             thisTask.markAsDone();
-            ui.printContent(ui.taskLine(thisTask, MESSAGE_MARK));
+            ui.printContent(ui.getTaskLine(thisTask, MESSAGE_MARK));
         } else {
             thisTask.markAsUndone();
-            ui.printContent(ui.taskLine(thisTask, MESSAGE_UNMARK));
+            ui.printContent(ui.getTaskLine(thisTask, MESSAGE_UNMARK));
         }
         Storage.saveToFile(tasks);
     }
