@@ -23,14 +23,19 @@ public class UnmarkCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (index <= tasks.size()) {
             tasks.set(index - 1, tasks.get(index - 1).unmark());
-            ui.showMessage("OK, I've marked this task as not done yet:\n"
-                    + tasks.get(index - 1));
+            return "OK, I've marked this task as not done yet:\n"
+                    + tasks.get(index - 1);
         } else {
-            ui.showMessage("Index is invalid");
+            return "Index is invalid";
         }
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }

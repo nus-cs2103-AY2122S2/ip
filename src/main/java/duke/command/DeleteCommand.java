@@ -23,12 +23,19 @@ public class DeleteCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (index <= tasks.size()) {
-            ui.showMessage("Noted. I've removed this task:\n" + tasks.get(index - 1));
+            String res = "Noted. I've removed this task:\n" + tasks.get(index - 1);
             tasks.remove(index - 1);
+            return res;
         } else {
-            ui.showMessage("Index is invalid");
+            return "Index is invalid";
         }
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
 }

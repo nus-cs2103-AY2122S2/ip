@@ -18,13 +18,21 @@ public class ListCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            ui.showMessage("There are no tasks in your list~");
+            return "There are no tasks in your list~";
         } else {
-            ui.showMessage("Here are the tasks in your list:");
-            ui.showList(tasks);
+            String res = "Here are the tasks in your list:";
+            for (int i = 0; i < tasks.size(); i++) {
+                res += "\n" + tasks.get(i);
+            }
+            return res;
         }
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }

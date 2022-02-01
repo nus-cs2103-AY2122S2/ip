@@ -25,11 +25,16 @@ public class TodoCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Todo(description);
         tasks.add(t);
-        ui.showMessage("Got it. I've added this task:\n" + t
-                    + "\nNow you have " + tasks.size() + " tasks in your list.");
+        return "Got it. I've added this task:\n" + t
+                    + "\nNow you have " + tasks.size() + " tasks in your list.";
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }

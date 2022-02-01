@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class Duke {
 
@@ -58,9 +59,6 @@ public class Duke {
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
                 storage.update(tasks);
-            } catch (ExitException e) {
-                storage.update(tasks);
-                break;
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             } finally {
@@ -77,8 +75,18 @@ public class Duke {
         return "Hello! I'm " + name + "\nWhat can I do for you?";
     }
 
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public Pair<Boolean, String> getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String res = c.execute(tasks, ui, storage);
+            storage.update(tasks);
+            if (c.isExit()) {
+                return new Pair<>(true, res);
+            }
+            return new Pair<>(false, res);
+        } catch (Exception e) {
+            return new Pair<>(false, e.getMessage());
+        }
     }
 
 }

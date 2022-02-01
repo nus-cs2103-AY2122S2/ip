@@ -18,8 +18,13 @@ public class UnrecognizedCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("Sorry, but I don't know what that means :(");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Sorry, but I don't know what that means :(";
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }

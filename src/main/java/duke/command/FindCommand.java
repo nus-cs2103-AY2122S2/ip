@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      * @param storage the storage used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Integer> matchingIndexes = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -35,13 +35,19 @@ public class FindCommand extends Command {
             }
         }
         if (matchingIndexes.size() == 0) {
-            ui.showMessage("No matching tasks are found.");
+            return "No matching tasks are found.";
         } else {
-            ui.showMessage("Here are the matching tasks in your list:");
+            String res = "Here are the matching tasks in your list:";
             for (int i : matchingIndexes) {
-                ui.showListItem(tasks, i);
+                res += "\n" + tasks.get(i);
             }
+            return res;
         }
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }
