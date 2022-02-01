@@ -52,9 +52,11 @@ class TaskList {
                             task.getItemAndStatus(), this.lst.size());
     }
 
-    /*
-        Method to delete task from Task List
-    */
+    /**
+     * Method to delete task from Task List
+     * 
+     * @param index integer to indicate the index of the item that is selected to be deleted.
+     */
     public void deleteTask(int index) {
         Task removedTask = lst.remove(index);
         if (removedTask instanceof Deadline) {
@@ -67,9 +69,9 @@ class TaskList {
         System.out.printf("Successfully removed the following task:\n%s\nYou have %d tasks remaining!!\n", removedTask.getItemAndStatus(), this.lst.size());
     }
 
-    /*
-        Method to print Task List out in order with status of each task.
-    */
+    /**
+     * Method to print Task List out in order with status of each task.
+     */
     public void print() {
         if (lst.size() == 0) {
             System.out.println("There is currently no item on the list!!");
@@ -79,13 +81,19 @@ class TaskList {
         }
     }
 
-    /*
-        Method to mark item of to do list done.
-    */
+    /**
+     * Method to mark item of to do list done.
+     */
     public void markItem(int index) {
         lst.get(index).markDone();
     }
 
+
+    /**
+     * Method to print the events in the tasklist that falls on the date that is passed in as parameter.
+     * 
+     * @param date the date that the is being referenced to.
+     */
     public void printEventOn(LocalDate date) {
         ArrayList<Event> tmp = new ArrayList<Event>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
@@ -108,6 +116,11 @@ class TaskList {
         }
     }
 
+    /**
+     * Method to print the deadlines in the tasklist that falls on the date that is passed in as parameter.
+     * 
+     * @param date the date that the is being referenced to.
+     */
     public void printDeadlineOn(LocalDate date) {
         ArrayList<Deadline> tmp = new ArrayList<Deadline>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
@@ -130,9 +143,11 @@ class TaskList {
         }
     }
 
-    /*
-        Method to mark item of to do list undone.
-    */
+    /**
+     * Method to mark item of to do list undone.
+     * 
+     * @param index integer to indicate the item index to be unmarked.
+     */
     public void unmarkItem(int index) {
         lst.get(index).markUndone();
     }
@@ -172,6 +187,11 @@ class TaskList {
 
     }
 
+    /**
+     * Method to return the number of items in the tasklist.
+     * 
+     * @return the number of items in the tasklist.
+     */
     public int size() {
         return this.lst.size();
     }

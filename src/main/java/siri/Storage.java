@@ -4,8 +4,10 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 
+/**
+ * Class that deals with storing and loading of data.
+ */
 class Storage {
     //deals with loading tasks from the file and saving tasks in the file
     private File dirFile;
@@ -15,6 +17,12 @@ class Storage {
     private String filePath;
 
 
+    /**
+     * Constructor of Storage class.
+     * 
+     * @param filePath string representation of the file path to allow loading from the file. If file doesn't exist, file will be created based on the path provided. 
+     * If empty String is provided, cwd will create a data folder and a data.txt file inside to be saved.
+     */
     public Storage(String filePath) {
 
         if (filePath == "") {
@@ -22,11 +30,17 @@ class Storage {
         } else {
             this.filePath = filePath;
         }
-        this.fileDir = filePath.substring(0, filePath.lastIndexOf('/'));
+        this.fileDir = this.filePath.substring(0, filePath.lastIndexOf('/'));
         this.dirFile = new File(fileDir);
         this.dataFile = new File(filePath);
     }
 
+    /**
+     * Method to load the file data.
+     * 
+     * @return String representation of the data being loaded.
+     * @throws SiriException if file doesn't exist, directory doesn't exist, or when file consist no data.
+     */
     public String load() throws SiriException {
         String loadedData = "";
 
@@ -38,6 +52,8 @@ class Storage {
                     while (sc.hasNextLine()) {
                         loadedData = loadedData + sc.nextLine() + "\n";
                     }
+
+                    sc.close();
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
@@ -58,6 +74,11 @@ class Storage {
         }
     }
 
+    /**
+     * Method to save data into the destination as stated when Storage instance is being initialised.
+     * 
+     * @param dataToSave String representation of data to be saved.
+     */
     public void save(String dataToSave) {
         try {
             if (dataFile.exists() == false) {

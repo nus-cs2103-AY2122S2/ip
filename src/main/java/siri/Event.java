@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class for the event items of the tasklist, with int done to be indicative of whether the task had been completed, String item to be the name of the task,
+ * LocalDate eventDate as the date for the event, and LocalTime eventTime as time for the event.
+ */
+
 class Event extends Task {
     
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
@@ -11,12 +16,12 @@ class Event extends Task {
     private LocalTime eventTime;
 
     /**
-        Constructor for Event class.
-
-        @param item a String to description of the Event task.
-        @param done an int to indicate whether the item is done. 0 indicates not completed and 1 indicates completed.
-        @param eventDate a LocalDate to describe the Event date.
-        @param eventTime a LocalTime to describe the Event time.
+     * Constructor for Event class.
+     * 
+     * @param item a String to description of the Event task.
+     * @param done an int to indicate whether the item is done. 0 indicates not completed and 1 indicates completed.
+     * @param eventDate a LocalDate to represent the Event task date.
+     * @param eventTime a LocalTime to represent the Event task time.
      */
     public Event(String item, int done, LocalDate eventDate, LocalTime eventTime) {
         super(item, done);
@@ -24,16 +29,22 @@ class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Method for comparing date with the Event task occurance.
+     * 
+     * @param date the date that the Event task date is comparing to.
+     * @return true if date is the same as the Event task date and false if the date is not the same as the Task task date (ignores format).
+     */
     public boolean dateCompare(LocalDate date) {
         return this.eventDate.equals(date);
     }
 
 
     /**
-        Method to display the item name and status in listing standard.
-
-        @return String showing the task category, status and name.
-    */
+     * Method to get String of task status and task name.
+     * 
+     * @return String representation of the event task details, including E to represent event task, whether it is done and task name, and date and time of event occurance.
+     */
     @Override
     public String getItemAndStatus() {
         String returned = "[E]" + super.getItemAndStatus() + " (at: " + this.eventDate.format(Event.dtf) + " " + this.eventTime + ")";
@@ -41,9 +52,9 @@ class Event extends Task {
     }
 
     /**
-        Method to produce String for saving purposes.
-
-        @return String that consist of the details of the Event task details.
+     * Method to return the string representation of the data for saving.
+     * 
+     * @return a string representation of the task for saving.
      */
     @Override
     public String saveData() {

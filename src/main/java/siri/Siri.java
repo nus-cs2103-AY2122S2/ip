@@ -1,19 +1,33 @@
 package siri;
 
+/**
+ * Public class for the main program execution.
+ */
 public class Siri {
 
-    private static Ui ui;
-    private static Storage storage;
-    private static TaskList tasks;
-    private static Parser parser;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+    private Ui ui; 
 
+    /**
+     * Constructor for Siri class.
+     * 
+     * @param filePath in which data is to be loaded and saved.
+     */
     public Siri(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui();
-        
+        ui = new Ui("   -----      O    -----      O\n" +
+        " /   _   \\   __   |       \\   __\n" + 
+        " |  | |__|  |  |  |   O   |  |  |\n" +
+        " |   ----\\  |  |  |       /  |  |\n" +
+        "  \\ __   |  |  |  |   ---    |  |\n" +
+        " |---|   |  |  |  |       \\  |  |\n" +
+        "  \\______/  |__|  |___|\\___\\ |__|\n";);
+
         try {
             tasks = new TaskList(storage.load());
-            ui.startUpSavedData();
+            Ui.startUpSavedData();
             ui.startUp();
         } catch (SiriException se) {
             tasks = new TaskList();
@@ -27,20 +41,20 @@ public class Siri {
         new Siri("../data/data.txt").runApp();
     }
 
-    private static void runApp() {
+    private void runApp() {
         int continueToExecute = 1;
 
         while (continueToExecute == 1) {
             try {
-                continueToExecute = parser.handleCommand(ui.takeInput());
+                continueToExecute = parser.handleCommand(Ui.takeInput());
             } catch (SiriException se) {
                 System.out.println(se.getMessage());
             }
-            ui.separator();
+            Ui.separator();
         }
         
         storage.save(tasks.saveData());
-        ui.exit();
+        Ui.exit();
 
     }
 

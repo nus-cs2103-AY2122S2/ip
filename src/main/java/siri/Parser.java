@@ -4,19 +4,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
-
+/**
+ * Class to make sense of user commands and execute the commands.
+ */
 class Parser {
     TaskList taskList;
 
+    /**
+     * Constructor of Parser class.
+     * 
+     * @param taskList TaskList object in which execution of the commands will be carried out on.
+     */
     Parser(TaskList taskList) {
         this.taskList = taskList;
     }
-
-    //deals with making sense of the user command
     
-    public int handleCommand(String s) throws SiriException{
+    /**
+     * Method to handle the command being passed in.
+     * 
+     * @param command String representation of the command that is passed in.
+     * @return 1 to indicate further acceptance of command is allowed and 0 to indicate further acceptance of command is not allowed.
+     * @throws SiriException if command structure is invalid, command is not recognised or if there are missing or extra fields in command.
+     */
+    public int handleCommand(String command) throws SiriException{
 
-        String[] inputSplit = s.split(" ", 2);
+        String[] inputSplit = command.split(" ", 2);
         int continueToExecute = 1;
 
         if (inputSplit[0].equals("")) {
