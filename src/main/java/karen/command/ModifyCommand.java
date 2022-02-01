@@ -26,10 +26,12 @@ public class ModifyCommand extends Command {
             switch (this.modifyAction) {
             case MARK:
                 getTask.markDone();
+                storage.saveTasks();
                 ui.displayUserInput(String.format(DONE_FORMAT, getTask.toString()));
                 break;
             case UNMARK:
                 getTask.markUndone();
+                storage.saveTasks();
                 ui.displayUserInput(String.format(UNDONE_FORMAT, getTask.toString()));
                 break;
             }
