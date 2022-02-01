@@ -10,7 +10,7 @@ class DeadlineTest {
 
     @Test
     void getItemAndStatus() {
-        Deadline dlTask = new Deadline("return book", 0, LocalDate.now());
+        Deadline dlTask = new Deadline("return book", false, LocalDate.now());
         String expectedOutput = "[D][ ] return book" + " (by: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd-LLL-yyyy"))+ ")";
         assertEquals(expectedOutput, dlTask.getItemAndStatus());
     }

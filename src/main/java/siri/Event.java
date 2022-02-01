@@ -23,14 +23,14 @@ class Event extends Task {
      * @param eventDate a LocalDate to represent the Event task date.
      * @param eventTime a LocalTime to represent the Event task time.
      */
-    public Event(String item, int done, LocalDate eventDate, LocalTime eventTime) {
-        super(item, done);
+    public Event(String item, boolean isDone, LocalDate eventDate, LocalTime eventTime) {
+        super(item, isDone);
         this.eventDate = eventDate;
         this.eventTime = eventTime;
     }
 
     /**
-     * Method for comparing date with the Event task occurance.
+     * Compares date passed with the Event task occurance.
      * 
      * @param date the date that the Event task date is comparing to.
      * @return true if date is the same as the Event task date and false if the date is not the same as the Task task date (ignores format).
@@ -41,18 +41,18 @@ class Event extends Task {
 
 
     /**
-     * Method to get String of task status and task name.
+     * Returns the String consisting details of Event task.
      * 
      * @return String representation of the event task details, including E to represent event task, whether it is done and task name, and date and time of event occurance.
      */
     @Override
-    public String getItemAndStatus() {
-        String returned = "[E]" + super.getItemAndStatus() + " (at: " + this.eventDate.format(Event.dtf) + " " + this.eventTime + ")";
-        return returned;
+    public String getTaskDetails() {
+        String taskDetails = "[E]" + super.getTaskDetails() + " (at: " + this.eventDate.format(Event.dtf) + " " + this.eventTime + ")";
+        return taskDetails;
     }
 
     /**
-     * Method to return the string representation of the data for saving.
+     * Returns the string representation of the data for saving.
      * 
      * @return a string representation of the task for saving.
      */
@@ -60,7 +60,7 @@ class Event extends Task {
     public String saveData() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
-        String returned = "E " + this.done + " " + this.item + " /at " + this.eventDate.format(dateFormat) + " " + this.eventTime.format(timeFormat);
-        return returned;
+        String dataString = "E " + String.valueOf(this.isDone) + " " + this.item + " /at " + this.eventDate.format(dateFormat) + " " + this.eventTime.format(timeFormat);
+        return dataString;
     }
 }

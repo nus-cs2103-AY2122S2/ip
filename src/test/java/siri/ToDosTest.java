@@ -8,8 +8,8 @@ public class ToDosTest {
 
     @Test
     void saveDataTest() {
-        ToDos todo = new ToDos("return book", 0);
-        String expectedOuput = "T 0 return book";
+        ToDos todo = new ToDos("return book", false);
+        String expectedOuput = "T false return book";
         assertEquals(expectedOuput, todo.saveData());
     }
 }

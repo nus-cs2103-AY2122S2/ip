@@ -8,17 +8,17 @@ class ToDos extends Task {
      * @param item a String to description of the ToDos task.
      * @param done an int to indicate whether the item is done. 0 indicates not completed and 1 indicates completed.
      */
-    ToDos (String item, int done) {
-        super(item, done);
+    ToDos (String item, boolean isDone) {
+        super(item, isDone);
     }
 
     /**
      * Method to get String of task category, status and task name.
      */
     @Override
-    public String getItemAndStatus() {
-        String returned = "[T]" + super.getItemAndStatus();
-        return returned;
+    public String getTaskDetails() {
+        String taskDetails = "[T]" + super.getTaskDetails();
+        return taskDetails;
     }
 
     /**
@@ -28,7 +28,7 @@ class ToDos extends Task {
      */
     @Override
     public String saveData() {
-        String returned = "T " + this.done + " " + this.item;
-        return returned;
+        String dataString = "T " + String.valueOf(this.isDone) + " " + this.item;
+        return dataString;
     }
 }

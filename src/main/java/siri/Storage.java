@@ -1,6 +1,7 @@
 package siri;
 
 import java.util.Scanner;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -9,11 +10,10 @@ import java.io.FileWriter;
  * Class that deals with storing and loading of data.
  */
 class Storage {
-    //deals with loading tasks from the file and saving tasks in the file
-    private File dirFile;
+    private File directory;
     private File dataFile;
 
-    private String fileDir;
+    private String fileDirectoryPath;
     private String filePath;
 
 
@@ -30,13 +30,13 @@ class Storage {
         } else {
             this.filePath = filePath;
         }
-        this.fileDir = this.filePath.substring(0, filePath.lastIndexOf('/'));
-        this.dirFile = new File(fileDir);
+        this.fileDirectoryPath = this.filePath.substring(0, filePath.lastIndexOf('/'));
+        this.directory = new File(fileDirectoryPath);
         this.dataFile = new File(filePath);
     }
 
     /**
-     * Method to load the file data.
+     * Loads the file data (if there is a valid data file).
      * 
      * @return String representation of the data being loaded.
      * @throws SiriException if file doesn't exist, directory doesn't exist, or when file consist no data.
@@ -44,7 +44,7 @@ class Storage {
     public String load() throws SiriException {
         String loadedData = "";
 
-        if (dirFile.exists()) {
+        if (directory.exists()) {
             if (dataFile.exists()) {
                 try {
                     Scanner sc = new Scanner(dataFile);
@@ -63,7 +63,7 @@ class Storage {
             }
         } else {
             //dirFile don't exist
-            dirFile.mkdir();
+            directory.mkdir();
             throw new SiriException("Directory and file does not exist!!");
         }
 
@@ -75,7 +75,7 @@ class Storage {
     }
 
     /**
-     * Method to save data into the destination as stated when Storage instance is being initialised.
+     * Saves data passed into the destination as stated when Storage instance is being initialised.
      * 
      * @param dataToSave String representation of data to be saved.
      */

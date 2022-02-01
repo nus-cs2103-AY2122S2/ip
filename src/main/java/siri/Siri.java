@@ -17,13 +17,13 @@ public class Siri {
      */
     public Siri(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui("   -----      O    -----      O\n" +
-        " /   _   \\   __   |       \\   __\n" + 
-        " |  | |__|  |  |  |   O   |  |  |\n" +
-        " |   ----\\  |  |  |       /  |  |\n" +
-        "  \\ __   |  |  |  |   ---    |  |\n" +
-        " |---|   |  |  |  |       \\  |  |\n" +
-        "  \\______/  |__|  |___|\\___\\ |__|\n";);
+        ui = new Ui("   -----      O    -----      O\n"
+                + " /   _   \\   __   |       \\   __\n" 
+                + " |  | |__|  |  |  |   O   |  |  |\n"
+                + " |   ----\\  |  |  |       /  |  |\n"
+                + "  \\ __   |  |  |  |   ---    |  |\n"
+                + " |---|   |  |  |  |       \\  |  |\n"
+                + "  \\______/  |__|  |___|\\___\\ |__|\n");
 
         try {
             tasks = new TaskList(storage.load());
@@ -42,11 +42,11 @@ public class Siri {
     }
 
     private void runApp() {
-        int continueToExecute = 1;
+        boolean continueExecution = true;
 
-        while (continueToExecute == 1) {
+        while (continueExecution) {
             try {
-                continueToExecute = parser.handleCommand(Ui.takeInput());
+                continueExecution = parser.handleCommand(Ui.takeInput());
             } catch (SiriException se) {
                 System.out.println(se.getMessage());
             }

@@ -4,7 +4,7 @@ package siri;
  */
 
 class Task {
-    protected int done;
+    protected boolean isDone;
     protected String item;
 
     /**
@@ -13,59 +13,59 @@ class Task {
      * @param item a String to description of the Task.
      * @param done an int to indicate whether the item is done. 0 indicates not completed and 1 indicates completed.
      */
-    Task(String item, int done) {
-        this.done = done;
+    Task(String item, boolean isDone) {
+        this.isDone = isDone;
         this.item = item;
     }
 
     /**
-     * Method to return a symbol the doneness of the task. 
+     * Returns a symbol the doneness of the task. 
      * If task is done, return 'X', else return empty space to indicate task not done.
      * 
      * @param done integer to indicate whether done or undone. 1 represents the done and 0 represents undone.
      * @return a string " " to indicate the task had not been completed and "X" to indicate the task had be completed.
      */
-    private String donenessSymbol(int done) {
-        if (done == 0) {
-            return " ";
-        } else {
+    private String doneSymbol(boolean isDone) {
+        if (isDone) {
             return "X";
+        } else {
+            return " ";
         }
     }
 
     /**
-     * Method to mark the task as done.
+     * Changes isDone to true (mark task as done).
      */
-    public void markDone() {
-        done = 1;
-        System.out.printf("Great job for completing task:\n%s\n", this.getItemAndStatus());
+    public void markTaskDone() {
+        isDone = true;
+        System.out.printf("Great job for completing task:\n%s\n", this.getTaskDetails());
     }
 
     /**
-     * Method to mark task as undone.
+     * Changes isDone to false (mark task as undone).
      */
-    public void markUndone() {
-        done = 0;
-        System.out.printf("Task marked as uncompleted:\n%s\n", this.getItemAndStatus());
+    public void markTaskUndone() {
+        isDone = false;
+        System.out.printf("Task marked as uncompleted:\n%s\n", this.getTaskDetails());
     }
 
     /**
-     * Method to get String of task status and task name.
+     * Returns the String consisting details of Task.
      * 
      * @return String representation of the task details, including whether it is done and task name.
      */
-    public String getItemAndStatus() {
-        String returned = "[" + donenessSymbol(this.done) + "] " + this.item;
-        return returned;
+    public String getTaskDetails() {
+        String taskDetails = "[" + doneSymbol(this.isDone) + "] " + this.item;
+        return taskDetails;
     }
 
     /**
-     * Method to return the string representation of the data for saving.
+     * Returns the String representation of the data for saving.
      * 
      * @return a string representation of the task for saving.
      */
     public String saveData() {
-        String returned = this.done + " " + this.item;
-        return returned;
+        String dataString = String.valueOf(this.isDone) + " " + this.item;
+        return dataString;
     }
 }
