@@ -32,7 +32,7 @@ public class Duke {
                 String output = Parser.parse(sc.nextLine(), taskList);
                 if (output.equals("BYE")) break;
                 ui.log(output);
-                storage.update(taskList);
+                storage.updateStorage(taskList);
             } catch (Exception e) {
                 ui.showLoadingError(e);
             }
