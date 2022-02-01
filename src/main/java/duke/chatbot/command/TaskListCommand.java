@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 

@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 import duke.task.Task;
@@ -19,11 +19,12 @@ class DeleteTaskCommand extends TaskListCommand {
      * Deletes a task using the index of task
      * provided as an argument.
      *
-     * @return False.
+     * @return ArrayList containing string description of task deleted,
+     * and number of tasks remaining.
      * @throws IllegalArgumentException If invalid index is given.
      */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents index of task to delete
         int taskIndex;
         try {
@@ -40,7 +41,6 @@ class DeleteTaskCommand extends TaskListCommand {
         response.add("Noted. The following task has been deleted:");
         response.add(deletedTask.getDescription());
         response.add(String.format("You now have %d tasks!", taskList.getTaskListSize()));
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

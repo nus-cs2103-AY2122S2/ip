@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import java.util.ArrayList;
 
@@ -14,13 +14,13 @@ class EchoCommand extends Command {
     /**
      * Echoes original command passed in by user.
      *
-     * @return False.
+     * @return ArrayList containing one element, which is
+     * the original command.
      */
     @Override
-    public boolean execute() {
+    public ArrayList<String> execute() {
         ArrayList<String> response = new ArrayList<>();
         response.add(super.getOriginalCommand());
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

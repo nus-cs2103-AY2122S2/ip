@@ -1,16 +1,25 @@
-package duke.gui.components;
+package duke.ui.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * A HBox containing two elements: A text label
  * and an image avatar.
+ *
+ * Reused with modifications from JavaFX tutorial at
+ * https://se-education.org/guides/tutorials/javaFx.html
+ * by Jeffrey Lum.
  */
 public class DialogBox extends HBox {
 
@@ -29,6 +38,7 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(l, iv);
         this.setSpacing(10);
+        this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     /**

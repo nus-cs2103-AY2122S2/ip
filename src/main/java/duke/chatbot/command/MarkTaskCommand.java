@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 import duke.task.Task;
@@ -19,11 +19,11 @@ class MarkTaskCommand extends TaskListCommand {
      * Marks a given task in taskList as done,
      * using index passed by user.
      *
-     * @return False.
+     * @return ArrayList containing description of task marked successfully.
      * @throws IllegalArgumentException If the index is invalid.
      */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents index of task to
         // mark as complete
         int taskIndex;
@@ -39,7 +39,6 @@ class MarkTaskCommand extends TaskListCommand {
         ArrayList<String> response = new ArrayList<>();
         response.add("Congrats! The following task was marked as done:");
         response.add(checkedTask.getDescription());
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

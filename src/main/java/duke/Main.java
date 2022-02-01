@@ -1,10 +1,10 @@
 package duke;
 
-import duke.gui.Duke;
+import duke.ui.Duke;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Main entry class to run ChatBot application
  */
 public class Main {
     public static void main(String[] args) {

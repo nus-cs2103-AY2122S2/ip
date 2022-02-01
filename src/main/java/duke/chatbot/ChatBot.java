@@ -1,13 +1,15 @@
-package duke.ui;
+package duke.chatbot;
 
 import duke.data.TaskList;
-import duke.ui.command.Command;
+import duke.chatbot.command.Command;
+import duke.chatbot.command.ExitCommand;
 
 import java.util.ArrayList;
 
 /**
- * ChatBot class that allows for running of user command
- * and keeping track of its termination status.
+ * ChatBot class that serves as an interface between
+ * the JavaFX GUI application and execution of user
+ * inputted commands.
  */
 public class ChatBot {
 
@@ -25,7 +27,6 @@ public class ChatBot {
         this.hasTerminated = false;
     }
 
-
     /**
      * Performs initialisation of the ChatBot. Should be called
      * before receiving commands.
@@ -35,19 +36,24 @@ public class ChatBot {
     }
 
     /**
-     * Runs the command given by user input string.
+     * Runs the command given by user input string, and returns
+     * a response from the ChatBot for the command, in the form
+     * of an ArrayList of string.
      *
      * @param input String command by user to run.
+     * @return ArrayList of string containing response of command ran.
      */
-    public void runCommand(String input) {
+    public ArrayList<String> runCommand(String input) {
         try {
             Command command = Command.parseCommand(input, this.taskList);
-            this.hasTerminated = command.execute();
+            ArrayList<String> response = command.execute();
+            this.hasTerminated = command instanceof ExitCommand;
+            return response;
         } catch (IllegalArgumentException e) {
             ArrayList<String> response = new ArrayList<>();
             response.add("Sorry, the following problem has occurred:");
             response.add(e.getMessage());
-            Command.styledPrint(response);
+            return response;
         }
     }
 

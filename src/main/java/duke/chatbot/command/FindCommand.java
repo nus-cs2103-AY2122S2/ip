@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 import duke.task.Task;
@@ -20,11 +20,11 @@ public class FindCommand extends TaskListCommand {
      * Searches the TaskList using keyword passed in
      * by user, and displays it.
      *
-     * @return False.
+     * @return ArrayList containing string description of tasks matching keyword.
      * @throws IllegalArgumentException If no search term was passed to command.
      */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents keyword to search
         String keyword = super.getArgs();
         if (keyword == null) {
@@ -49,7 +49,6 @@ public class FindCommand extends TaskListCommand {
         } else {
             response.add("Sorry! No tasks matching your search was found!");
         }
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

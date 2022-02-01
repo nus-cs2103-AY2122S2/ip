@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 
@@ -29,13 +29,14 @@ public abstract class Command {
     }
 
     /**
-     * Execute current command in ChatBot context.
+     * Executes current command in ChatBot context and
+     * returns the response to the command ra.
      *
-     * @return Whether the command is a terminating command.
+     * @return ArrayList of string containing feedback to command.
      * @throws IllegalArgumentException If the command is executed
      * with invalid args.
      */
-    public abstract boolean execute() throws IllegalArgumentException;
+    public abstract ArrayList<String> execute() throws IllegalArgumentException;
 
     /**
      * Parses user inputted command to extract

@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 
@@ -18,10 +18,10 @@ class ShowTaskListCommand extends TaskListCommand {
      * Displays task stored by user in a list
      * format with numbering.
      *
-     * @return False.
+     * @return ArrayList containing string description of all tasks.
      */
     @Override
-    public boolean execute() {
+    public ArrayList<String> execute() {
         TaskList taskList = this.getTaskList();
         ArrayList<String> taskDescriptions = taskList.getTaskDescriptions();
         ArrayList<String> response = new ArrayList<>();
@@ -30,7 +30,6 @@ class ShowTaskListCommand extends TaskListCommand {
             String description = taskDescriptions.get(i);
             response.add(String.format("%d.%s", i + 1, description));
         }
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

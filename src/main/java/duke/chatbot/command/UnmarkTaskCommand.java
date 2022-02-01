@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 import duke.task.Task;
@@ -19,11 +19,11 @@ class UnmarkTaskCommand extends TaskListCommand {
      * Marks a given task in taskList as undone,
      * using index passed by user.
      *
-     * @return False.
+     * @return ArrayList containing string description of tasked unmarked.
      * @throws IllegalArgumentException If the index is invalid.
      */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents index of task to
         // mark as undone
         int taskIndex;
@@ -39,7 +39,6 @@ class UnmarkTaskCommand extends TaskListCommand {
         ArrayList<String> response = new ArrayList<>();
         response.add("The following task was marked undone:");
         response.add(uncheckedTask.getDescription());
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 }

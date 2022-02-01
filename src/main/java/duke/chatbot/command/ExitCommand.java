@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Command which causes the termination
  * of the ChatBot.
  */
-class ExitCommand extends Command {
+public class ExitCommand extends Command {
     private static final String GOODBYE_STRING = "Goodbye!";
 
     public ExitCommand(String name, String args) {
@@ -17,13 +17,12 @@ class ExitCommand extends Command {
      * Signals the termination of the ChatBot by
      * returning true.
      *
-     * @return True.
+     * @return ArrayList containing the goodbye string.
      */
     @Override
-    public boolean execute() {
+    public ArrayList<String> execute() {
         ArrayList<String> response = new ArrayList<>();
         response.add(GOODBYE_STRING);
-        styledPrint(response);
-        return true;
+        return response;
     }
 }

@@ -1,4 +1,4 @@
-package duke.ui.command;
+package duke.chatbot.command;
 
 import duke.data.TaskList;
 import duke.task.Deadline;
@@ -21,11 +21,12 @@ class AddTaskCommand extends TaskListCommand {
     /**
      * Adds a given task to TaskList.
      *
-     * @return False.
+     * @return ArrayList of string describing the task added, and number of
+     * tasks in list.
      * @throws IllegalArgumentException if the arguments are invalid for given task.
      */
     @Override
-    public boolean execute() throws IllegalArgumentException {
+    public ArrayList<String> execute() throws IllegalArgumentException {
         TaskList taskList = this.getTaskList();
         Task newTask = createTask(super.getName(), super.getArgs());
         taskList.addTask(newTask);
@@ -34,8 +35,7 @@ class AddTaskCommand extends TaskListCommand {
         response.add("The following new task has been added:");
         response.add(newTask.getDescription());
         response.add(String.format("You now have %d tasks!", taskList.getTaskListSize()));
-        Command.styledPrint(response);
-        return false;
+        return response;
     }
 
     /**
