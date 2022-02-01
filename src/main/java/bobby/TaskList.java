@@ -150,6 +150,10 @@ public class TaskList {
         Ui.taskNotDone(t);
     }
 
+    /**
+     * Find a task by searching for a key word.
+     * @param query keyword used to search.
+     */
     public void find(String query) {
         boolean isSuccessful = false;
         System.out.println("Bobby found these task(s):");
