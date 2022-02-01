@@ -77,12 +77,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (deadlineTime != null) {
-            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
-                    super.taskName + " (by: " + dateFormatter.format(deadlineDate)
+            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] "
+                    + super.taskName + " (by: " + dateFormatter.format(deadlineDate)
                     + " " + timeFormatter.format(deadlineTime) + ")";
         } else {
-            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
-                    super.taskName + " (by: " + dateFormatter.format(deadlineDate) + ")";
+            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] "
+                    + super.taskName + " (by: " + dateFormatter.format(deadlineDate) + ")";
         }
     }
 }
