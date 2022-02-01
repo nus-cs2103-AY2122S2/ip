@@ -30,6 +30,7 @@ public class Storage {
                     String[] tmp = line.split("\\|");
 
                     boolean isDone = tmp[1].trim().equals("D");
+
                     //assumes valid input
                     switch (tmp[0].trim()) {
                     case "T":
