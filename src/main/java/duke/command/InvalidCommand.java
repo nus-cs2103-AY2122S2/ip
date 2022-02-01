@@ -9,7 +9,7 @@ import duke.util.Ui;
  */
 public class InvalidCommand extends Command {
 
-    String errorMessage;
+    private String errorMessage;
 
     /**
      * Constructor for an invalid user command.

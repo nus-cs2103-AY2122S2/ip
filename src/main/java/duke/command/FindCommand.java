@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class FindCommand extends Command {
-    String findTask;
+    private String findTask;
 
     public FindCommand(String findTask) {
         this.findTask = findTask;

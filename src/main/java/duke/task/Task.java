@@ -6,9 +6,9 @@ package duke.task;
 public abstract class Task {
 
     // The variables that are common among all tasks.
-    String activity;
-    boolean isMarked = false;
-    String type = " ";
+    protected String activity;
+    protected boolean isMarked = false;
+    protected String type = " ";
 
     /**
      * Constructor that contains parameters for all types of tasks.

@@ -28,8 +28,8 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.taskList.add(task);
-        return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size() +
-                " tasks in the list.";
+        return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size()
+                + " tasks in the list.";
     }
 
     /**

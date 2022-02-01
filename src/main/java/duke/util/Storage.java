@@ -1,17 +1,15 @@
 package duke.util;
 
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,13 +26,13 @@ public class Storage {
      * A constructor for the Storage class.
      * @param filepath the relative filepath to store and load tasks from.
      */
-    public Storage(String filepath){
+    public Storage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
      * Loads the tasks from disk.
-     * @return ArrayList <Tasks> which contain the tasks that have been saved onto the disk.
+     * @return ArrayList which contain the tasks that have been saved onto the disk.
      */
     public ArrayList<Task> load() {
         File saveFile = new File(this.filepath);
@@ -56,7 +54,7 @@ public class Storage {
             e.printStackTrace();
             System.exit(1);
         }
-        while(readFile.hasNextLine()) {
+        while (readFile.hasNextLine()) {
             nextSavedTask = readFile.nextLine();
             taskList.add(Parser.parseFile(nextSavedTask));
         }
@@ -102,7 +100,7 @@ public class Storage {
         String currentLine;
         int i = 0;
         try {
-            while((currentLine = reader.readLine()) != null) {
+            while ((currentLine = reader.readLine()) != null) {
                 if (i == index) {
                     if (updatedTask != null) {
                         writer.write(updatedTask.toString());
@@ -119,7 +117,7 @@ public class Storage {
             System.exit(1);
         }
         try {
-            Files.copy(Paths.get(tempFilePath),Paths.get(filepath), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(Paths.get(tempFilePath), Paths.get(filepath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get(tempFilePath));
         } catch (IOException e) {
             e.printStackTrace();

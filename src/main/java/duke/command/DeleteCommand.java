@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -10,7 +9,7 @@ import duke.util.Ui;
  * Command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Constructor for the delete command.

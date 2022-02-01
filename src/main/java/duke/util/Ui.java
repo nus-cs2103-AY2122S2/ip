@@ -12,7 +12,7 @@ public class Ui {
     /**
      * Constructor for Ui.
      */
-    public Ui(){
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
@@ -43,7 +43,7 @@ public class Ui {
      * Reads the command from user and returns it.
      * @return the next user input.
      */
-    public String readCommand(){
+    public String readCommand() {
         return this.sc.nextLine();
     }
 
