@@ -1,9 +1,17 @@
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 class Duke {
 
+    // Check if a string can be converted to integer
     static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
@@ -14,10 +22,38 @@ class Duke {
     }
 
     public static void main(String[] args) {
+
+        // Initialise global objects
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<>();
+        try {
 
+            File folder = new File("../../../data");
+            File data = new File("../../../data/data.txt");
+            if (folder.mkdir()) {
+                System.out.println("Folder is created!");
+            } else {
+                System.out.println("Folder already exists.");
+            }
+            if (data.createNewFile()) {
+                System.out.println("File is created!");
+            } else {
+                System.out.println("File already exists.");
+                FileInputStream reader = new FileInputStream(data);
+                ObjectInputStream listInput = new ObjectInputStream(reader);
+                try {
 
+                    toDoList = (ArrayList<Task>) listInput.readObject();
+                    listInput.close();
+                } catch (ClassNotFoundException e) {
+                    System.out.println("class not found");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Initialisation message
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,7 +63,9 @@ class Duke {
         System.out.println("enter a command\n" +
                 "use command 'help' to see list of commands");
 
+        // Scan for user input
         String userInput = sc.nextLine();
+        // Split user input into individual words
         String[] split = userInput.split(" ");
 
         while (!(userInput.equals("bye"))) {
@@ -81,20 +119,25 @@ class Duke {
 
             } else if (split[0].equals("todo")) {
                 try {
+                    // Check if description is empty
                     String check = split[1];
+                    // Take the substring of user input after todo
                     String name = userInput.substring(5);
                     ToDo t = new ToDo(name);
                     toDoList.add(t);
                     System.out.printf("task added:\n%s", t);
                     System.out.printf("you now have %d tasks\n", toDoList.size());
-                } catch (Exception e) {
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println("the description of a todo cannot be empty!");
                 }
             } else if (split[0].equals("deadline")) {
                 try {
+                    // Check if description is empty
                     String check = split[1];
                     try {
+                        // Take the substring of user input after deadline
                         String item = userInput.substring(9);
+                        // Divide the substring into task name and deadline
                         String[] divide = item.split("/");
                         String name = divide[0];
                         String dueDate = divide[1];
@@ -113,9 +156,12 @@ class Duke {
 
             } else if (split[0].equals("event")) {
                 try {
+                    // Check if description is empty
                     String check = split[1];
                     try {
+                        // Take the substring of user input after event
                         String item = userInput.substring(6);
+                        // Divide the substring into task name and date
                         String[] divide = item.split("/");
                         String name = divide[0];
                         String time = divide[1];
@@ -132,6 +178,7 @@ class Duke {
 
             } else if (split[0].equals("delete")) {
                 try {
+                    // Checks if description is empty
                     int toDelete = Integer.parseInt(split[1]);
                     try {
                         Task t = toDoList.get(toDelete - 1);
@@ -149,12 +196,23 @@ class Duke {
 
 
             } else {
+                // If user input does not match any commands
                 System.out.println("invalid command! try 'help' for list of commands");
             }
             userInput = sc.nextLine();
             split = userInput.split(" ");
         }
         System.out.println("goodbye!");
+        try {
+            FileOutputStream writer = new FileOutputStream("../../../data/data.txt");
+            ObjectOutputStream saveList = new ObjectOutputStream(writer);
+            saveList.writeObject(toDoList);
+            saveList.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+        } catch (IOException e) {
+            System.out.println("failed to write to file");
+        }
         sc.close();
     }
 

@@ -1,4 +1,6 @@
-class Task {
+import java.io.Serializable;
+
+class Task implements Serializable {
 
     // 1 indicates done and 0 indicates not done
     private int status;
