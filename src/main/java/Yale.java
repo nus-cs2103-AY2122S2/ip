@@ -15,13 +15,22 @@ public class Yale {
      * Scanner and TaskList objects
      * @param args
      */
-    public static void main(String[] args) {
-        Ui ui = new Ui();
+
+    private static final String FILE_PATH = "data/yale.txt";
+    private Ui ui;
+    private Storage storage;
+    private Parser parser;
+    private TaskList list;
+
+    public Yale() {
+        ui = new Ui();
+        storage = new Storage(FILE_PATH);
+        parser = new Parser();
+        list = new TaskList();
+    }
+    public void run() {
         ui.welcomePrompt();
-        Storage storage = new Storage("data/yale.txt");
-        Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
-        TaskList list = new TaskList();
         String fileData = storage.loadFileContents();
         list.importIn(fileData);
 
@@ -33,6 +42,9 @@ public class Yale {
                 break;
             }
         }
+    }
+    public static void main(String[] args) {
+        new Yale().run();
     }
 }
 
