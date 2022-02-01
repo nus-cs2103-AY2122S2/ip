@@ -3,7 +3,6 @@ package duke.commands;
 import duke.common.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Requires individual command that extends this class to implement said methods.

@@ -50,11 +50,4 @@ public class Duke {
         return response;
     }
 
-//    Label userText = new Label(userInput.getText());
-//        userText.setFont(new Font("Roboto", 12.5));
-//        userText.setStyle("-fx-font-weight: bold");
-//
-//    Label abbyText = new Label(userInput.getText());
-//        abbyText.setFont(new Font("Roboto", 12.5));
-//        abbyText.setStyle("-fx-font-weight: bold");
 }

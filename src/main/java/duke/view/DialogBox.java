@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
@@ -45,6 +46,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(new Font("Roboto", 12.5));
         displayPicture.setImage(img);
     }
 
@@ -58,6 +60,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates a DialogBox to be displayed.
+     * @param text text is the feedback to display to user.
+     * @param image image is the user's image.
+     * @return Returns a DialogBox with text and image embedded.
+     */
     public static DialogBox getUserDialog(String text, Image image) {
         DialogBox userDialog = new DialogBox(text, image);
 
@@ -72,6 +80,12 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
+    /**
+     * Generates a DialogBox to be displayed.
+     * @param text text is the feedback to display to user.
+     * @param image image is the user's image.
+     * @return Returns a DialogBox with text and image embedded.
+     */
     public static DialogBox getAbbyDialog(String text, Image image) {
         DialogBox abbyDialog = new DialogBox(text, image);
 
