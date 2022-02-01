@@ -1,22 +1,22 @@
 package pikabot.command;
 
-import pikabot.TaskList;
-import pikabot.Storage;
-import pikabot.Parser;
-import pikabot.Ui;
-
-import pikabot.task.Event;
-import pikabot.exception.EventException;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+
+import pikabot.Parser;
+import pikabot.Storage;
+import pikabot.TaskList;
+import pikabot.Ui;
+import pikabot.exception.EventException;
+import pikabot.task.Event;
+
 
 /**
  * Represents a command to create an EventCommand.
  */
 public class EventCommand extends Command {
 
-    String[] eventCommand;
+    private String[] eventCommand;
 
     /**
      * Constructs an EventCommand.
@@ -45,8 +45,8 @@ public class EventCommand extends Command {
             Ui.printExceptionMessage(e);
 
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("The description of an event must" +
-                "contain a date in the numerical format YYYY-MM-DD");
+            Ui.printExceptionCustomisedMessage("The description of an event must"
+                    + "contain a date in the numerical format YYYY-MM-DD");
         }
     }
 }

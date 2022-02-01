@@ -9,6 +9,6 @@ public class FindException extends PikaBotException {
      * Constructs a FindException.
      */
     public FindException() {
-        super("☹ OOPS!!! "+ "Please enter a keyword to search for!");
+        super("☹ OOPS!!! " + "Please enter a keyword to search for!");
     }
 }

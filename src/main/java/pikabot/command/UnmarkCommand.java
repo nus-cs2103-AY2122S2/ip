@@ -1,18 +1,19 @@
 package pikabot.command;
 
+import java.io.IOException;
+
 import pikabot.Parser;
-import pikabot.TaskList;
 import pikabot.Storage;
+import pikabot.TaskList;
 import pikabot.Ui;
 import pikabot.exception.NoIntegerException;
-import java.io.IOException;
 
 /**
  * Represents a command that unmarks a marked task.
  */
 public class UnmarkCommand extends Command {
 
-    String[] unmarkCommand;
+    private String[] unmarkCommand;
 
     /**
      * Constructs an UnmarkCommand.
@@ -43,7 +44,7 @@ public class UnmarkCommand extends Command {
         }
 
         try {
-            storage.TaskListToFile(taskList);
+            storage.taskListToFile(taskList);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }

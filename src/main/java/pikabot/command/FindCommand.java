@@ -1,8 +1,8 @@
 package pikabot.command;
 
-import pikabot.TaskList;
-import pikabot.Storage;
 import pikabot.Parser;
+import pikabot.Storage;
+import pikabot.TaskList;
 import pikabot.Ui;
 import pikabot.exception.FindException;
 
@@ -11,7 +11,7 @@ import pikabot.exception.FindException;
  */
 public class FindCommand extends Command {
 
-    String[] findCommand;
+    private String[] findCommand;
 
     /**
      * Constructs a findCommand.

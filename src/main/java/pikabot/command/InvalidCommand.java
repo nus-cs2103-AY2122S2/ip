@@ -1,8 +1,8 @@
 package pikabot.command;
 
-import pikabot.Ui;
 import pikabot.Storage;
 import pikabot.TaskList;
+import pikabot.Ui;
 import pikabot.exception.InvalidTaskCommandException;
 
 /**
@@ -10,7 +10,7 @@ import pikabot.exception.InvalidTaskCommandException;
  */
 public class InvalidCommand extends Command {
 
-    String[] invalidCommand;
+    private String[] invalidCommand;
 
     /**
      * Constructs an InvalidCommand.

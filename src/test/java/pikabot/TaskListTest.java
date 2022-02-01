@@ -1,17 +1,20 @@
 package pikabot;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import pikabot.task.Task;
 import pikabot.task.Todo;
 
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
-    TaskList tasklist;
+    private TaskList tasklist;
 
-    public void initialiseDummy() {    //Dummy taskList containing a task
+    public void initialiseDummy() { //Dummy taskList containing a task
         ArrayList<Task> arrList = new ArrayList<>();
         Todo todo = new Todo("Testing!");
         arrList.add(todo);

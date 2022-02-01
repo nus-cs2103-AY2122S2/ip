@@ -1,15 +1,13 @@
 package pikabot;
 
-import pikabot.exception.TodoException;
-import pikabot.task.Deadline;
-import pikabot.task.Task;
-import pikabot.task.Todo;
-
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import pikabot.task.Deadline;
+import pikabot.task.Todo;
+
 
 public class ParserTest {
 
@@ -32,8 +30,8 @@ public class ParserTest {
             Deadline currDeadline = Parser.parseDeadline(strArr);
             fail();
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! Invalid deadline! Deadline " +
-                    "has to be a valid date in numerical format YYYY-MM-DD", e.getMessage());
+            assertEquals("☹ OOPS!!! Invalid deadline! Deadline "
+                    + "has to be a valid date in numerical format YYYY-MM-DD", e.getMessage());
         }
     }
 

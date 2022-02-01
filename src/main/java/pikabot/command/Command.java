@@ -1,7 +1,7 @@
 package pikabot.command;
 
-import pikabot.TaskList;
 import pikabot.Storage;
+import pikabot.TaskList;
 
 /**
  * Represents a command given by user.

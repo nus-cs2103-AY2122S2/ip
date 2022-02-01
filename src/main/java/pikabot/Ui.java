@@ -7,23 +7,23 @@ import pikabot.task.Task;
  */
 public class Ui {
 
-    static String LINE = "_________________________________";
-    static String INDENTATION = "     ";
+    public static final String LINE = "_________________________________";
+    public static final String INDENTATION = "     ";
 
     /**
      * Prints out welcome message when PikaBot starts running.
      */
     public static void printWelcomeText() {
-        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Hello! I'm PikaBot" +
-            "\n" + INDENTATION + "What can I do for you? シ\n" + INDENTATION + LINE);
+        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Hello! I'm PikaBot"
+                + "\n" + INDENTATION + "What can I do for you? シ\n" + INDENTATION + LINE);
     }
 
     /**
      * Prints out exit text when PikaBot is closed.
      */
     public static void printClosingText() {
-        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Bye. Hope to see you again!" +
-            "\n" + INDENTATION + LINE);
+        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Bye. Hope to see you again!"
+                + "\n" + INDENTATION + LINE);
     }
 
     /**
@@ -39,8 +39,8 @@ public class Ui {
         int length = taskList.noOfTasks();
 
         while (taskNumber <= length) {
-            System.out.println(INDENTATION + taskNumber + "." +
-                taskList.get(taskNumber - 1));
+            System.out.println(INDENTATION + taskNumber + "."
+                    + taskList.get(taskNumber - 1));
             taskNumber++;
         }
         System.out.println(INDENTATION + LINE);
@@ -60,8 +60,8 @@ public class Ui {
         int length = taskList.noOfTasks();
 
         while (taskNumber <= length) {
-            System.out.println(INDENTATION + taskNumber + "." +
-                taskList.get(taskNumber - 1));
+            System.out.println(INDENTATION + taskNumber + "."
+                    + taskList.get(taskNumber - 1));
             taskNumber++;
         }
 
@@ -99,11 +99,11 @@ public class Ui {
      * @param taskList TaskList that task has been added to.
      */
     public static void indicateAddedTask(Task task, TaskList taskList) {
-        System.out.println(INDENTATION + LINE + "\n" +
-            INDENTATION + "Got it. I've added this task:" + "\n" +
-            INDENTATION + "  " + task + "\n" +
-            INDENTATION + "Now you have " + taskList.noOfTasks() + " tasks in the list." +
-            "\n" + INDENTATION + LINE);
+        System.out.println(INDENTATION + LINE + "\n"
+                + INDENTATION + "Got it. I've added this task:" + "\n"
+                + INDENTATION + "  " + task + "\n"
+                + INDENTATION + "Now you have " + taskList.noOfTasks() + " tasks in the list."
+                + "\n" + INDENTATION + LINE);
     }
 
     /**

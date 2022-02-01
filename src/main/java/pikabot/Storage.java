@@ -1,23 +1,21 @@
 package pikabot;
 
-import pikabot.task.Task;
-import pikabot.task.Deadline;
-import pikabot.task.Event;
-import pikabot.task.Todo;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import pikabot.task.Deadline;
+import pikabot.task.Event;
+import pikabot.task.Task;
+import pikabot.task.Todo;
+
 
 /**
  * Saves the tasks in the computer whenever the task list changes and
@@ -25,7 +23,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Storage {
 
-    String filePath;
+    private String filePath;
 
     /**
      * Constructs a Storage object.
@@ -67,7 +65,7 @@ public class Storage {
             if (taskType == 'D') {
                 String[] taskDetails = taskStr.split("\\(by: ", 2);
                 String description = taskDetails[0];
-                String date = taskDetails[1].substring(0, taskDetails[1].length()-1);
+                String date = taskDetails[1].substring(0, taskDetails[1].length() - 1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-MMM-yyyy");
                 Deadline deadline = new Deadline(description, LocalDate.parse(date, dtf));
                 if (isTaskDone) {
@@ -78,7 +76,7 @@ public class Storage {
             } else if (taskType == 'E') {
                 String[] taskDetails = taskStr.split("\\(at: ", 2);
                 String description = taskDetails[0];
-                String date = taskDetails[1].substring(0, taskDetails[1].length()-1);
+                String date = taskDetails[1].substring(0, taskDetails[1].length() - 1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-MMM-yyyy");
                 Event event = new Event(description, LocalDate.parse(date, dtf));
                 if (isTaskDone) {
@@ -106,7 +104,7 @@ public class Storage {
      * does not exist but cannot be created, or cannot
      * be opened for any other reason.
      */
-    public void TaskListToFile(TaskList taskList) throws IOException {
+    public void taskListToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : taskList.getTaskList()) {
             fw.write(task.toString() + "\n");
@@ -122,8 +120,8 @@ public class Storage {
      * a directory rather than a regular file, does not exist
      * but cannot be created, or cannot be opened for any other reason.
      */
-    public void appendToFile(Task taskToAdd) throws IOException{
-        if (! doesFileExist()) {
+    public void appendToFile(Task taskToAdd) throws IOException {
+        if (!doesFileExist()) {
             String[] pathDetails = filePath.split("/", 2);
             String folderStr = pathDetails[0];
             File folder = new File(folderStr);

@@ -1,7 +1,7 @@
 package pikabot.command;
 
-import pikabot.TaskList;
 import pikabot.Storage;
+import pikabot.TaskList;
 import pikabot.Ui;
 
 /**
@@ -9,7 +9,7 @@ import pikabot.Ui;
  */
 public class ListCommand extends Command {
 
-    String[] listCommand;
+    private String[] listCommand;
 
     /**
      * Constructs a ListCommand.

@@ -1,22 +1,20 @@
 package pikabot.command;
 
-import pikabot.TaskList;
-import pikabot.Storage;
-import pikabot.Parser;
-import pikabot.Ui;
-
-import pikabot.task.Task;
-import pikabot.task.Todo;
-import pikabot.exception.TodoException;
-
 import java.io.IOException;
+
+import pikabot.Parser;
+import pikabot.Storage;
+import pikabot.TaskList;
+import pikabot.Ui;
+import pikabot.exception.TodoException;
+import pikabot.task.Todo;
 
 /**
  * Represents a command to create a Todo task.
  */
 public class TodoCommand extends Command {
 
-    String[] todoCommand;
+    private String[] todoCommand;
 
     /**
      * Constructs a TodoCommand.

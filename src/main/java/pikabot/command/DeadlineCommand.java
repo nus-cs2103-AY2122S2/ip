@@ -1,22 +1,22 @@
 package pikabot.command;
 
+
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import pikabot.Parser;
 import pikabot.Storage;
 import pikabot.TaskList;
 import pikabot.Ui;
-
-import pikabot.task.Deadline;
 import pikabot.exception.DeadlineException;
-
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
+import pikabot.task.Deadline;
 
 /**
  * Represents a command to create a Deadline task.
  */
 public class DeadlineCommand extends Command {
 
-    String[] deadlineCommand;
+    private String[] deadlineCommand;
 
     /**
      * Constructs a DeadlineCommand.
@@ -45,8 +45,8 @@ public class DeadlineCommand extends Command {
             Ui.printExceptionMessage(e);
 
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to " +
-                "be a valid date in numerical format YYYY-MM-DD.");
+            Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to "
+                    + "be a valid date in numerical format YYYY-MM-DD.");
         }
     }
 }

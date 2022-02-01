@@ -1,20 +1,20 @@
 package pikabot.command;
-import pikabot.TaskList;
-import pikabot.Storage;
-import pikabot.Ui;
-import pikabot.Parser;
-import pikabot.task.Task;
-import pikabot.exception.NoIntegerException;
-
 
 import java.io.IOException;
+
+import pikabot.Parser;
+import pikabot.Storage;
+import pikabot.TaskList;
+import pikabot.Ui;
+import pikabot.exception.NoIntegerException;
+import pikabot.task.Task;
 
 /**
  * Represents a command to delete a task.
  */
 public class DeleteCommand extends Command {
 
-    String[] deleteCommand;
+    private String[] deleteCommand;
 
     /**
      * Constructs a DeleteCommand.
@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
         }
 
         try {
-            storage.TaskListToFile(taskList);
+            storage.taskListToFile(taskList);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }

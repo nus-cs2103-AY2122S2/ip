@@ -1,5 +1,10 @@
 package pikabot;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 import pikabot.command.Command;
 import pikabot.command.DeadlineCommand;
 import pikabot.command.DeleteCommand;
@@ -10,21 +15,15 @@ import pikabot.command.ListCommand;
 import pikabot.command.MarkCommand;
 import pikabot.command.TodoCommand;
 import pikabot.command.UnmarkCommand;
-
-import pikabot.exception.TodoException;
 import pikabot.exception.DeadlineException;
 import pikabot.exception.EventException;
 import pikabot.exception.FindException;
 import pikabot.exception.NoIntegerException;
+import pikabot.exception.TodoException;
 import pikabot.task.Deadline;
 import pikabot.task.Event;
 import pikabot.task.Todo;
-import pikabot.TaskList;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  * Parses user input from CLI into a Task command.
@@ -86,7 +85,7 @@ public class Parser {
     }
 
     /**
-     * Returns a Deadline commmand after parsing input from user.
+     * Returns a Deadline command after parsing input from user.
      *
      * @param deadlineArray String array containing input string from user.
      * @return Deadline command.
@@ -98,15 +97,15 @@ public class Parser {
         } else {
             String[] deadlineDetails = deadlineArray[1].split("/by ", 2);
             if (deadlineDetails.length == 1) {
-                throw new DeadlineException("The description of a deadline must contain " +
-                    "a deadline in the numerical format YYYY-MM-DD");
+                throw new DeadlineException("The description of a deadline must contain "
+                        + "a deadline in the numerical format YYYY-MM-DD");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     return new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1], dtf));
                 } catch (DateTimeParseException e) {
-                    throw new DeadlineException("Invalid deadline! Deadline has to be a " +
-                        "valid date in numerical format YYYY-MM-DD");
+                    throw new DeadlineException("Invalid deadline! Deadline has to be a "
+                            + "valid date in numerical format YYYY-MM-DD");
                 }
             }
         }
@@ -125,15 +124,15 @@ public class Parser {
         } else {
             String[] eventDetails = eventArray[1].split("/at ", 2);
             if (eventDetails.length == 1) {
-                throw new EventException("The description of an event must contain a date in " +
-                    "the numerical format YYYY-MM-DD");
+                throw new EventException("The description of an event must contain a date in "
+                        + "the numerical format YYYY-MM-DD");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     return new Event(eventDetails[0], LocalDate.parse(eventDetails[1], dtf));
                 } catch (DateTimeParseException e) {
-                    throw new EventException("Invalid exception! Event has to have a valid date in " +
-                        "numerical format YYYY-MM-DD");
+                    throw new EventException("Invalid exception! Event has to have a valid date in "
+                            + "numerical format YYYY-MM-DD");
                 }
             }
         }
@@ -160,8 +159,9 @@ public class Parser {
     public static void parseIntegerCommand(String[] markArray) throws NoIntegerException {
         if (markArray.length == 1) {
             throw new NoIntegerException("Please enter a task number!");
-        } try {
-            Integer taskNo = Integer.parseInt(markArray[1]);
+        }
+        try {
+            Integer.parseInt(markArray[1]);
         } catch (NumberFormatException e) {
             throw new NoIntegerException("Please enter a valid task number!");
         }

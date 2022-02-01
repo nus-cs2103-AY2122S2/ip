@@ -1,13 +1,13 @@
 package pikabot;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import pikabot.command.Command;
 import pikabot.task.Task;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Runs the whole application PikaBot, an application
@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
  */
 public class PikaBot {
 
-    static String FILEPATH = "data/tasks.txt";
+    private static final String FILEPATH = "data/tasks.txt";
 
     /**
      * Boots up PikaBot application.
@@ -25,7 +25,7 @@ public class PikaBot {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage("data/tasks.txt");
+        Storage storage = new Storage(FILEPATH);
         Ui.printWelcomeText();
         TaskList taskList = new TaskList(new ArrayList<Task>());
 

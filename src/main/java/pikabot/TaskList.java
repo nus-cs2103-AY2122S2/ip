@@ -1,8 +1,8 @@
 package pikabot;
 
-import pikabot.task.Task;
-
 import java.util.ArrayList;
+
+import pikabot.task.Task;
 
 /**
  * Contains tasks and performs operations to add, delete, mark, and find tasks.
@@ -91,7 +91,7 @@ public class TaskList {
      * @return An arrayList containing tasks with the keyword.
      */
     public ArrayList<Task> find(String word) {
-        ArrayList<Task> matchedArr = new ArrayList<Task>();
+        ArrayList<Task> matchedArr = new ArrayList<>();
 
         for (Task task : taskList) {
             String description = task.getDescription();
