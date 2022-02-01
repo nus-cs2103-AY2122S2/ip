@@ -47,7 +47,7 @@ public class Duke {
                     break;
                 }
                 ui.log(output);
-                storage.update(taskList);
+                storage.updateStorage(taskList);
             } catch (Exception e) {
                 ui.showLoadingError(e);
             }

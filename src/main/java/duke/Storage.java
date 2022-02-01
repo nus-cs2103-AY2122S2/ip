@@ -35,22 +35,21 @@ public class Storage {
             }
         }
         File dataFile = new File(directory, Constants.FILE_NAME);
-
         if (!dataFile.createNewFile()) {
             Scanner sc = new Scanner(dataFile);
             while (sc.hasNext()) {
                 String[] line = sc.nextLine().strip().split(" <> ");
                 Task currentTask;
                 switch (line[0]) {
-                    case "T":
-                        currentTask = new ToDo(line[2], line[1].equals("1"));
-                        break;
-                    case "D":
-                        currentTask = new Deadline(line[2], line[1].equals("1"), line[3]);
-                        break;
-                    default:
-                        currentTask = new Event(line[2], line[1].equals("1"), line[3]);
-                        break;
+                case "T":
+                    currentTask = new ToDo(line[2], line[1].equals("1"));
+                    break;
+                case "D":
+                    currentTask = new Deadline(line[2], line[1].equals("1"), line[3]);
+                    break;
+                default:
+                    currentTask = new Event(line[2], line[1].equals("1"), line[3]);
+                    break;
                 }
                 taskList.addTask(currentTask);
             }
@@ -66,7 +65,7 @@ public class Storage {
      * @param taskList update taskList
      * @throws IOException if fails to write the data
      */
-    public void update(TaskList taskList) throws IOException {
+    public void updateStorage(TaskList taskList) throws IOException {
 
         this.taskList = taskList;
 
