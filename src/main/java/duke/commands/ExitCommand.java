@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.common.DukeException;
+import duke.constants.Constants;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Exits the program.
@@ -11,10 +11,11 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Executes the exit command.
+     * @return Output message for GUI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.bye();
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        return Constants.BYE;
     }
 
     /**

@@ -12,11 +12,11 @@ public abstract class Command {
     /**
      * Executes the individual command.
      * @param taskList taskList holds the list of tasks and its Create, Retrieve, Update, Delete functions.
-     * @param ui ui displays feedback to the user.
      * @param storage storage handles storage reads and writes.
+     * @return Output message for GUI.
      * @throws DukeException Throw when an error occurs during command execution.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
 
     /**
      * Notifies main class when user wants to exit the program.

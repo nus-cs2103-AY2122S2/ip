@@ -8,59 +8,75 @@ import duke.constants.Constants;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.view.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Acts as a task manager that keeps tracks of all your tasks.
  */
-public class Duke {
-    private Storage storage;
+public class Duke extends Application {
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * Creates a Duke object that initializes all the necessary components for the task manager program.
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
+        this.taskList = new TaskList();
         this.storage = new Storage(filePath);
 
         try {
             this.taskList = new TaskList(storage.loadFromFile());
         } catch (IOException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            Duke duke = new Duke(Constants.FILE_PATH + Constants.FILE_NAME);
+
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     /**
-     * Runs, handles and processes the commands input by the user.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.hello();
+    public String getResponse(String input) {
+        String response = "";
 
-        boolean isExit = false;
+        try {
+            Parser parser = new Parser(input);
+            Command c = parser.parse();
 
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Parser parser = new Parser(fullCommand);
-                Command c = parser.parse();
-
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.output(e.getMessage());
-            }
+            c.execute(taskList, storage);
+        } catch (DukeException e) {
+            response = e.getMessage();
         }
+
+        return response;
     }
 
-    /**
-     * Boots up the entire task manager application.
-     * @param args Args is the command line arguments received from user.
-     */
-    public static void main(String[] args) {
-        new Duke(Constants.FILE_PATH + Constants.FILE_NAME).run();
-    }
+//    Label userText = new Label(userInput.getText());
+//        userText.setFont(new Font("Roboto", 12.5));
+//        userText.setStyle("-fx-font-weight: bold");
+//
+//    Label abbyText = new Label(userInput.getText());
+//        abbyText.setFont(new Font("Roboto", 12.5));
+//        abbyText.setStyle("-fx-font-weight: bold");
 }

@@ -34,13 +34,15 @@ public class ToggleCommand extends Command {
      * Executes the toggle command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        String response = "";
+
         try {
             if (this.args.length() == 0) {
                 throw new IllegalArgumentException();
             }
 
-            if (!Utils.isNumeric(this.args, ui)) {
+            if (!Utils.isNumeric(this.args)) {
                 throw new NumberFormatException();
             }
 
@@ -82,7 +84,9 @@ public class ToggleCommand extends Command {
                     ? "Nice! I've marked this task as done:\n"
                     : "OK, I've marked this task as not done yet:\n";
 
-            ui.output(output + taskString);
+            response = output + taskString;
+
+            return response;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Constants.INVALID_INDEX_MSG);
         } catch (IOException e) {

@@ -8,7 +8,6 @@ import duke.common.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private String args;
@@ -18,15 +17,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        String response = "";
+
         try {
             ArrayList<Task> allTasks = taskList.getTasks();
             StringBuilder sb = new StringBuilder();
             int length = allTasks.size();
 
             if (length == 0) {
-                ui.output("No tasks found based on keyword! Also, quit lazing around!");
-                return;
+                response = "No tasks found based on keyword! Also, quit lazing around!";
+                return response;
             }
 
             sb.append("Here are the matching tasks in your list:\n");
@@ -39,8 +40,8 @@ public class FindCommand extends Command {
             int filteredLength = filteredTasks.size();
 
             if (filteredLength < 1) {
-                ui.output("No tasks found based on keyword! Also, quit lazing around!");
-                return;
+                response = "No tasks found based on keyword! Also, quit lazing around!";
+                return response;
             }
 
             for (int i = 0; i < filteredLength; ++i) {
@@ -51,9 +52,11 @@ public class FindCommand extends Command {
                 }
             }
 
-            ui.output(sb.toString());
+            response = sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return response;
     }
 }

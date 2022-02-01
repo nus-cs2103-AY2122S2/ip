@@ -15,13 +15,14 @@ public class ListCommand extends Command {
      * Executes the list command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        String response = "";
         int length = taskList.size();
         StringBuilder sb = new StringBuilder();
 
         if (length == 0) {
-            ui.output("No tasks found! Quit lazing around!");
-            return;
+            response = "No tasks found! Quit lazing around!";
+            return response;
         }
 
         ArrayList<Task> allTasks = taskList.getTasks();
@@ -36,6 +37,8 @@ public class ListCommand extends Command {
             }
         }
 
-        ui.output(sb.toString());
+        response = sb.toString();
+
+        return response;
     }
 }
