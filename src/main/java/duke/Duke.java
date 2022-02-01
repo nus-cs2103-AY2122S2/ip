@@ -32,6 +32,12 @@ public class Duke {
         ui.sayGoodbye();
     }
 
+    /**
+     * Returns the response to a userInput to the GUI.
+     *
+     * @param userInput the input from the user provided through the GUI
+     * @return the response to the userInput
+     */
     public String getResponse(String userInput) {
         if (userInput.equals("bye")) {
             storage.writeToStorage(this.taskList);

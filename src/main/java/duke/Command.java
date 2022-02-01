@@ -68,7 +68,9 @@ public class Command {
     }
 
     private static String listTasks(TaskList listOfTasks) {
-        StringBuilder toPrint = new StringBuilder("You have ").append(listOfTasks.size()).append(" tasks and they are:\n");
+        StringBuilder toPrint = new StringBuilder("You have ")
+                .append(listOfTasks.size())
+                .append(" tasks and they are:\n");
         for (int i = 0; i < listOfTasks.size(); i++) {
             int num = i + 1;
             String toAdd = num + "." + listOfTasks.get(i) + "\n";
