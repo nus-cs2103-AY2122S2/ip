@@ -1,7 +1,7 @@
-package duke;
+package nikki;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import nikki.task.Task;
+import nikki.task.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Class to abstract and encapsulate file interactions for Duke.
+ * Class to abstract and encapsulate file interactions for Nikki.
  *
  * File format:
  * tag||<0 or 1>||name[||additional arguments...]
@@ -60,9 +60,9 @@ public class Storage {
      *
      * @return TaskList populated with data from file
      * @throws IOException file access error
-     * @throws DukeException when format error is present in file
+     * @throws NikkiException when format error is present in file
      */
-    public TaskList loadTasks() throws IOException, DukeException {
+    public TaskList loadTasks() throws IOException, NikkiException {
         createIfNotExist();
 
         try {
@@ -73,8 +73,8 @@ public class Storage {
                 try {
                     Task task = Task.parseFileSaveFormat(fileReader.nextLine());
                     taskList.addTask(task);
-                } catch (DukeException e) {
-                    throw new DukeException(String.format("Wrong format in line %d", lineCount));
+                } catch (NikkiException e) {
+                    throw new NikkiException(String.format("Wrong format in line %d", lineCount));
                 }
             }
 

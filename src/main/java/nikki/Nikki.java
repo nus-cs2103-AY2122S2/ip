@@ -1,21 +1,21 @@
-package duke;
+package nikki;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
+import nikki.task.TaskList;
+import nikki.task.Task;
+import nikki.task.Todo;
+import nikki.task.Event;
+import nikki.task.Deadline;
 
-import duke.command.Command;
-import duke.command.CommandParser;
+import nikki.command.Command;
+import nikki.command.CommandParser;
 
 /**
  * Main class that abstracts the implementation of task list chatbot
  */
-public class Duke {
+public class Nikki {
     /** List of Tasks */
     private TaskList tasks;
 
@@ -33,11 +33,11 @@ public class Duke {
 
 
     /**
-     * Constructs a Duke instance
+     * Constructs a Nikki instance
      *
      * @param filename File to load and save Tasks
      */
-    public Duke(String filename) {
+    public Nikki(String filename) {
         ui.printBanner();
 
         String introduction = "Hello, I'm Nikki\n" +
@@ -47,7 +47,7 @@ public class Duke {
         try {
             storage = new Storage(filename);
             tasks = storage.loadTasks();
-        } catch (IOException| DukeException e) {
+        } catch (IOException| NikkiException e) {
             ui.warning("[!] Error reading file - initializing duke.task list as empty list");
             tasks = new TaskList();
         }
@@ -55,14 +55,14 @@ public class Duke {
     }
 
     /**
-     * Main driver method to run Duke
+     * Main driver method to run Nikki
      */
     public void run() {
         while (true) {
             try {
                 Command action = cmd.readAndParse();
                 handleAction(action);
-            } catch (DukeException e) {
+            } catch (NikkiException e) {
                 ui.error("!( ｀Д´)ﾉ  " + e.getLocalizedMessage());
             }
         }
@@ -72,9 +72,9 @@ public class Duke {
      * Handles behaviours according to the command passed.
      *
      * @param action command from user
-     * @throws DukeException general exception for invalid user command: invalid command, arguments, etc.
+     * @throws NikkiException general exception for invalid user command: invalid command, arguments, etc.
      */
-    private void handleAction(Command action) throws DukeException {
+    private void handleAction(Command action) throws NikkiException {
         switch (action.getName()) {
         case "bye":
             ui.say("Bye! See you later!");
@@ -148,12 +148,12 @@ public class Duke {
             break;
 
         default:
-            throw new DukeException("I don't know what to do");
+            throw new NikkiException("I don't know what to do");
 
         }
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Nikki("data/tasks.txt").run();
     }
 }

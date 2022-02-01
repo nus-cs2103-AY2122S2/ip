@@ -1,6 +1,6 @@
-package duke.command;
+package nikki.command;
 
-import duke.DukeException;
+import nikki.NikkiException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
@@ -45,7 +45,7 @@ public class CommandParserTest {
             assertEquals(cmd.getName(), "unmark");
             assertEquals(cmd.getArgs(), "3");
             assertEquals(cmd.getKwargs().size(), 0);
-        } catch (DukeException e) {
+        } catch (NikkiException e) {
             // Shouldn't happen
             assert false;
         }
@@ -57,6 +57,6 @@ public class CommandParserTest {
 
         CommandParser parser = new CommandParser(new Scanner(input));
 
-        assertThrows(DukeException.class, () -> parser.readAndParse());
+        assertThrows(NikkiException.class, () -> parser.readAndParse());
     }
 }

@@ -1,6 +1,6 @@
-package duke.task;
+package nikki.task;
 
-import duke.DukeException;
+import nikki.NikkiException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +29,7 @@ public class TaskListTest {
             tasks.addTask(new Task("new 2"));
 
             assertEquals(tasks.size(), 4);
-        } catch (DukeException e) {
+        } catch (NikkiException e) {
             // Shouldn't happen
             assert false;
         }
@@ -59,8 +59,8 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.getTask(-1));
-        assertThrows(DukeException.class, () -> tasks.getTask(3));
+        assertThrows(NikkiException.class, () -> tasks.getTask(-1));
+        assertThrows(NikkiException.class, () -> tasks.getTask(3));
     }
 
     @Test
@@ -71,8 +71,8 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.removeTask(-1));
-        assertThrows(DukeException.class, () -> tasks.removeTask(3));
+        assertThrows(NikkiException.class, () -> tasks.removeTask(-1));
+        assertThrows(NikkiException.class, () -> tasks.removeTask(3));
     }
 
     @Test
@@ -83,8 +83,8 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.markTask(-1));
-        assertThrows(DukeException.class, () -> tasks.markTask(3));
+        assertThrows(NikkiException.class, () -> tasks.markTask(-1));
+        assertThrows(NikkiException.class, () -> tasks.markTask(3));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.unmarkTask(-1));
-        assertThrows(DukeException.class, () -> tasks.unmarkTask(3));
+        assertThrows(NikkiException.class, () -> tasks.unmarkTask(-1));
+        assertThrows(NikkiException.class, () -> tasks.unmarkTask(3));
     }
 }

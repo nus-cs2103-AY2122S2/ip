@@ -1,10 +1,10 @@
-package duke.task;
+package nikki.task;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.DukeException;
+import nikki.NikkiException;
 
 /**
  * Class to encapsulate the behavior of a List of Tasks.
@@ -43,9 +43,9 @@ public class TaskList {
      *
      * @param index index of Task to remove
      * @return the removed Task
-     * @throws DukeException index out of range
+     * @throws NikkiException index out of range
      */
-    public Task removeTask(int index) throws DukeException {
+    public Task removeTask(int index) throws NikkiException {
         checkIndex(index);
         return this.tasks.remove(index);
     }
@@ -54,11 +54,11 @@ public class TaskList {
      * Checks if index is in range of current List
      *
      * @param index index to check
-     * @throws DukeException index out of range
+     * @throws NikkiException index out of range
      */
-    private void checkIndex(int index) throws DukeException {
+    private void checkIndex(int index) throws NikkiException {
         if (index < 0 || index >= this.size()) {
-            throw new DukeException(
+            throw new NikkiException(
                     this.size() == 0
                             ? "List is empty"
                             : String.format("Please choose tasks from 1 to %d", this.size())
@@ -71,9 +71,9 @@ public class TaskList {
      *
      * @param index index of Task to mark
      * @return true if the state of Task was changed by marking (not done -> done)
-     * @throws DukeException index out of range
+     * @throws NikkiException index out of range
      */
-    public Boolean markTask(int index) throws DukeException {
+    public Boolean markTask(int index) throws NikkiException {
         checkIndex(index);
         Task target = this.tasks.get(index);
         return target.mark();
@@ -84,9 +84,9 @@ public class TaskList {
      *
      * @param index index of Task to unmark
      * @return true if the state of Task was changed by unmarking (done -> not done)
-     * @throws DukeException index out of range
+     * @throws NikkiException index out of range
      */
-    public Boolean unmarkTask(int index) throws DukeException {
+    public Boolean unmarkTask(int index) throws NikkiException {
         checkIndex(index);
         Task target = this.tasks.get(index);
         return target.unmark();
@@ -97,9 +97,9 @@ public class TaskList {
      *
      * @param index index of Task to get
      * @return resulting Task
-     * @throws DukeException index out of range
+     * @throws NikkiException index out of range
      */
-    public Task getTask(int index) throws DukeException {
+    public Task getTask(int index) throws NikkiException {
         checkIndex(index);
         return this.tasks.get(index);
     }
@@ -123,7 +123,7 @@ public class TaskList {
         for (int i = 0; i < this.size(); i++) {
             try {
                 result += this.getTask(i).fileSaveFormat();
-            } catch (DukeException e) {
+            } catch (NikkiException e) {
                 // This won't happen, given the bounds of the for-loop
                 assert false;
             }
@@ -168,7 +168,7 @@ public class TaskList {
                         "%3d. %s",
                         i + 1,
                         current.nameWithStatus());
-            } catch (DukeException e) {
+            } catch (NikkiException e) {
                 // This won't happen, given the bounds of the for-loop
                 assert false;
             }

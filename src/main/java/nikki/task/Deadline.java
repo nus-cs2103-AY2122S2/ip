@@ -1,15 +1,15 @@
-package duke.task;
+package nikki.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.CommandParser;
+import nikki.command.CommandParser;
 
 /**
- * Encapsulates behavior of Event type of Task
+ * Encapsulates behavior of Deadline type of Task
  */
-public class Event extends Task {
+public class Deadline extends Task {
     private LocalDate date;
 
     /**
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param date date of duke.task.Deadline (in d/M/yyyy format)
      * @throws DateTimeParseException date format error
      */
-    public Event(String name, String date) throws DateTimeParseException {
+    public Deadline(String name, String date) throws DateTimeParseException {
         this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT));
     }
 
@@ -31,7 +31,7 @@ public class Event extends Task {
      * @param done status of completion
      * @throws DateTimeParseException date format error
      */
-    public Event(String name, String date, Boolean done) throws DateTimeParseException {
+    public Deadline(String name, String date, Boolean done) throws DateTimeParseException {
         this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT), done);
     }
 
@@ -41,7 +41,7 @@ public class Event extends Task {
      * @param name name for Deadline
      * @param date date of Deadline
      */
-    public Event(String name, LocalDate date) {
+    public Deadline(String name, LocalDate date) {
         this(name, date, false);
     }
 
@@ -52,29 +52,29 @@ public class Event extends Task {
      * @param date date of Deadline
      * @param done status of completion
      */
-    public Event(String name, LocalDate date, Boolean done) {
-        super(name, 'E', done);
+    public Deadline(String name, LocalDate date, Boolean done) {
+        super(name, 'D', done);
         this.date = date;
     }
 
     /**
-     * Returns the tag, status, name, and date of the Event, formatted.
+     * Returns the tag, status, name, and date of the Deadline, formatted.
      *
-     * @return formatted string of the Event info
+     * @return formatted string of the Deadline info
      */
     @Override
     public String nameWithStatus() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-        return String.format("%s (at: %s)",
+        return String.format("%s (by: %s)",
                 super.nameWithStatus(),
                 this.date.format(fmt));
     }
 
     /**
-     * Parses a formatted string from file storage, then returns the Event object
+     * Parses a formatted string from file storage, then returns the Deadline object
      *
-     * @return Event object represented by the string
+     * @return Deadline object represented by the string
      */
     @Override
     public String fileSaveFormat() {

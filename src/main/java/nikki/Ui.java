@@ -1,6 +1,6 @@
-package duke;
+package nikki;
 
-import duke.task.Task;
+import nikki.task.Task;
 
 public class Ui {
     /**
@@ -33,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print message in a formatted style
+     * Method for Nikki to print message in a formatted style
      *
      * @param message message to print
      */
@@ -52,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print error messages
+     * Method for Nikki to print error messages
      *
      * @param message error message to print
      */
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print warning messages
+     * Method for Nikki to print warning messages
      *
      * @param message warning message to print
      */

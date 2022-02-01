@@ -1,6 +1,6 @@
-package duke.task;
+package nikki.task;
 
-import duke.DukeException;
+import nikki.NikkiException;
 
 public class Task {
     /** Mark in checkbox of completed Task */
@@ -147,12 +147,12 @@ public class Task {
      *
      * @return Task object represented by the string
      */
-    public static Task parseFileSaveFormat(String fmt) throws DukeException {
+    public static Task parseFileSaveFormat(String fmt) throws NikkiException {
         // Split at "||"
         String[] taskInfo = fmt.split("\\|\\|");
 
         if (taskInfo.length < 3) {
-            throw new DukeException("Wrong format");
+            throw new NikkiException("Wrong format");
         }
 
         // Extract relevant duke.task information
@@ -171,7 +171,7 @@ public class Task {
                 String deadline = taskInfo[3];
                 task = new Deadline(taskName, deadline, taskStatus);
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("Wrong format");
+                throw new NikkiException("Wrong format");
             }
             break;
 
@@ -180,7 +180,7 @@ public class Task {
                 String eventDate = taskInfo[3];
                 task = new Event(taskName, eventDate, taskStatus);
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("Wrong format");
+                throw new NikkiException("Wrong format");
             }
             break;
 

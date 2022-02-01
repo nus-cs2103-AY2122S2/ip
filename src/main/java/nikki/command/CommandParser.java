@@ -1,4 +1,4 @@
-package duke.command;
+package nikki.command;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.format.DateTimeFormatter;
 
-import duke.DukeException;
+import nikki.NikkiException;
 
 /**
  * Class to encapsulate methods related to parsing user input
@@ -43,7 +43,7 @@ public class CommandParser {
     private final Scanner input;
 
     /**
-     * Instantiates parser for parsing commands for Duke
+     * Instantiates parser for parsing commands for Nikki
      *
      * @param input Scanner that takes in input
      */
@@ -56,9 +56,9 @@ public class CommandParser {
      *
      * @param cmd command to check validity
      * @return validity of the command
-     * @throws DukeException invalid command or syntax
+     * @throws NikkiException invalid command or syntax
      */
-    private static Command parseCommand(String cmd) throws DukeException {
+    private static Command parseCommand(String cmd) throws NikkiException {
         String cmdName = cmd.split(" ")[0];
         for (String[] command : CommandParser.COMMANDS) {
             // Not the target command
@@ -85,14 +85,14 @@ public class CommandParser {
                 }
             } else {
                 // Syntax error
-                throw new DukeException(String.format(
+                throw new NikkiException(String.format(
                         "Woi, that's not how you do it...\n" +
                         "\tUsage: %s",
                         command[2]));
             }
         }
 
-        throw new DukeException("What are you trying to do??");
+        throw new NikkiException("What are you trying to do??");
     }
 
 
@@ -101,9 +101,9 @@ public class CommandParser {
      * Parses command if the first token is a valid command (delimiter = " ")
      *
      * @return parsed command
-     * @throws DukeException invalid command or syntax
+     * @throws NikkiException invalid command or syntax
      */
-    public Command readAndParse() throws DukeException {
+    public Command readAndParse() throws NikkiException {
         String commandLine = this.input.nextLine();
         Command command = CommandParser.parseCommand(commandLine);
         return command;

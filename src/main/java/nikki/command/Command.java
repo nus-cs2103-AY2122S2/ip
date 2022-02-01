@@ -1,4 +1,4 @@
-package duke.command;
+package nikki.command;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class Command {
     }
 
     /**
-     * Creates a Commmand object with arg
+     * Creates a Command object with arg
      *
      * @param name name of command
      * @param arg argument of command

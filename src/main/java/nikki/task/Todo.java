@@ -1,4 +1,4 @@
-package duke.task;
+package nikki.task;
 
 /**
  * Encapsulates behavior of Todo type of Task

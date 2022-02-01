@@ -19,47 +19,47 @@ What can I do for you?
 [m
 [92m
 <<<<<<<<
-[+] Added following duke.task:
+[+] Added following nikki.task:
 	[T][ ] work
 Now you have 1 tasks in the list.
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[+] Added following duke.task:
+[+] Added following nikki.task:
 	[T][ ] more work
 Now you have 2 tasks in the list.
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[+] Added following duke.task:
+[+] Added following nikki.task:
 	[D][ ] many more work (by: now)
 Now you have 3 tasks in the list.
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[+] Added following duke.task:
+[+] Added following nikki.task:
 	[E][ ] show up at friend's party (at: when he calls me)
 Now you have 4 tasks in the list.
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[*] Marked the following duke.task as done:
+[*] Marked the following nikki.task as done:
 	[T][X] work
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[*] Marked the following duke.task as done:
+[*] Marked the following nikki.task as done:
 	[T][X] more work
 >>>>>>>>
 [m
 [92m
 <<<<<<<<
-[*] Marked the following duke.task as not done:
+[*] Marked the following nikki.task as not done:
 	[T][ ] more work
 >>>>>>>>
 [m
