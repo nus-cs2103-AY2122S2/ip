@@ -9,6 +9,7 @@ public class Ui {
 
     /**
      * Prints a GAP added text for differentiating user and app texts.
+     *
      * @param text Text to be printed.
      */
     public void print(String text) {

@@ -13,6 +13,7 @@ public class Task {
      * Constructs Task class.
      * The constructor takes in the description of the task.
      * The default isDone status of the object is false.
+     *
      * @param name description of the task.
      */
     public Task(String name) {
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Switches task isDone status to true.
+     *
      * @return Response text to indicate whether the action is successful.
      */
     public String markAsDone() {
@@ -44,6 +46,7 @@ public class Task {
 
     /**
      * Switches task isDone status to false.
+     *
      * @return Response text to indicate whether the action is successful.
      */
     public String markAsNotDone() {
@@ -60,6 +63,7 @@ public class Task {
     /**
      * Creates a Task object.
      * This is a factory constructor that calls the factor constructor of its appropriate child classes.
+     *
      * @param description Task description from user input.
      * @return Response Text to be printed.
      * @throws InvalidArgumentException If the user input format is invalid/unknown.
@@ -77,14 +81,16 @@ public class Task {
 
     /**
      * Gets the isDone status in text format.
+     *
      * @return isDone status in text.
      */
     public String getStatusIcon() {
-        return (isDone? "X" : " ");
+        return (isDone ? "X" : " ");
     }
 
     /**
      * Gets the name variable.
+     *
      * @return name variable.
      */
     String getName() {
@@ -93,6 +99,7 @@ public class Task {
 
     /**
      * Gets the isDone status.
+     *
      * @return isDone status.
      */
     Boolean getStatus() {
@@ -104,12 +111,13 @@ public class Task {
      * The text format follows the initial user input.
      */
     public String toStorageString() {
-        String status = isDone? "X" : ".";
+        String status = isDone ? "X" : ".";
         return String.format(status + " task " + name);
     }
 
     /**
      * Returns text representing the task for User.
+     *
      * @return Task in text format.
      */
     @Override

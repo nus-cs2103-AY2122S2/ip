@@ -38,12 +38,12 @@ public class Duke {
         }
 
         while (true) {
-                String instruction = sc.nextLine();
-                String log = parser.parse(instruction, taskslist, storage);
-                ui.print(log);
-                if (log == "BYE") {
-                    return;
-                }
+            String instruction = sc.nextLine();
+            String log = parser.parse(instruction, taskslist, storage);
+            ui.print(log);
+            if (log == "BYE") {
+                return;
+            }
         }
     }
 

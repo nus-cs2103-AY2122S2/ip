@@ -10,9 +10,10 @@ public class Parser {
 
     /**
      * Translates user inputs and performs the supposed actions.
-     * @param data User input.
+     *
+     * @param data      User input.
      * @param tasksList TasksList variable from Duke.
-     * @param storage Storage variable from Duke.
+     * @param storage   Storage variable from Duke.
      * @return Response text to be printed by the UI.
      */
     public String parse(String data, TasksList tasksList, Storage storage) {
@@ -53,8 +54,7 @@ public class Parser {
                 String response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
                 return response;
             }
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
         return "Nothing";

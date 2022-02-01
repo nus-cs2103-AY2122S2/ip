@@ -18,6 +18,7 @@ public class Storage {
     /**
      * Saves current tasks snapshot to a file.
      * The file is stored in "data/duke.txt".
+     *
      * @param storageStrings List of texts to be saved. Each text represents 1 task.
      * @param taskListString Text from Task.list method. For printing purposes.
      * @return Response text to be printed.
@@ -50,6 +51,7 @@ public class Storage {
     /**
      * Imports previous tasks snapshot from a file if present.
      * The file is stored in "data/duke.txt".
+     *
      * @return Response text to be printed.
      */
     public List<String> importData() {
@@ -59,10 +61,10 @@ public class Storage {
 
             try {
                 Scanner fileScanner = new Scanner(f);
-                while(fileScanner.hasNextLine()) {
+                while (fileScanner.hasNextLine()) {
                     storageStrings.add(fileScanner.nextLine());
                 }
-            } catch(FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 return storageStrings;
             }
 

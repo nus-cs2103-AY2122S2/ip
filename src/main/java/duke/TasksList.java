@@ -21,6 +21,7 @@ public class TasksList {
 
     /**
      * Adds user input task to the taskslist.
+     *
      * @param instructions List of user input words.
      * @return Response text to be printed.
      * @throws InvalidArgumentException If user input argument format is unknown/invalid.
@@ -36,6 +37,7 @@ public class TasksList {
 
     /**
      * Deletes task of certain index from the taskslist.
+     *
      * @param index Index of the task (1 based).
      * @return Response text to be printed.
      * @throws InvalidIndexException If index is out of bounds.
@@ -52,6 +54,7 @@ public class TasksList {
 
     /**
      * Returns the list of tasks in the form of String / text.
+     *
      * @return List of tasks with numberings in text format.
      */
     public String list() {
@@ -69,6 +72,7 @@ public class TasksList {
 
     /**
      * Changes task status to marked.
+     *
      * @param index Index of the task (1 based).
      * @return Response text to be printed.
      * @throws InvalidIndexException If index is out of bounds.
@@ -83,6 +87,7 @@ public class TasksList {
 
     /**
      * Changes task status to unmarked.
+     *
      * @param index Index of the task (1 based).
      * @return Response text to be printed.
      * @throws InvalidIndexException If index is out of bounds.
@@ -98,6 +103,7 @@ public class TasksList {
     /**
      * Returns the tasks list in text format for storage.
      * The text format follows the initial user input.
+     *
      * @return List of texts. Each text represents 1 task.
      */
     public List<String> toStorageStrings() {
@@ -110,6 +116,7 @@ public class TasksList {
 
     /**
      * Gets the number of tasks in the taskslists.
+     *
      * @return Number of tasks.
      */
     public int getSize() {
@@ -120,11 +127,12 @@ public class TasksList {
      * Imports tasks from a list of strings (each representing 1 task).
      * The tasksStrings is from history storage.
      * This method is the counterpart of toStorageStrings().
+     *
      * @param tasksStrings List of tasks in text format.
      * @return Response text to be printed.
      * @throws InvalidArgumentException If any of the task's format is unknown/invalid.
      */
-    public String importStorageStrings(List<String> tasksStrings) throws InvalidArgumentException{
+    public String importStorageStrings(List<String> tasksStrings) throws InvalidArgumentException {
         for (String taskString : tasksStrings) {
             List<String> description = Arrays.asList(taskString.split(" "));
             Boolean isDone = description.get(0).equals("X");
