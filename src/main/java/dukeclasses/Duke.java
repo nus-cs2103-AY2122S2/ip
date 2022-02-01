@@ -6,8 +6,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -38,13 +36,13 @@ import java.util.TimerTask;
  */
 public class Duke extends Application {
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
     private boolean isExit = false;
 
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
     private ScrollPane scrollPane;
 
@@ -72,7 +70,7 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String output = ui.showInputError();
-        String stringUserInput = userInput.getText().toString();
+        String stringUserInput = userInput.getText();
 
         ParsedCommand parsedCommand = null;
         try {
@@ -87,12 +85,7 @@ public class Duke extends Application {
             DialogBox dukeReply = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
             Timeline delayReply = new Timeline();
             delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
-                    new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            dialogContainer.getChildren().add(dukeReply);
-                        }
-                    }));
+                    (event) -> dialogContainer.getChildren().add(dukeReply)));
             delayReply.play();
             userInput.clear();
             return ;
@@ -185,7 +178,13 @@ public class Duke extends Application {
                 break;
             }
 
-            Task deletedTask = tasks.deleteTask(parsedCommand.getIndex());
+            Task deletedTask = null;
+            try {
+                deletedTask = tasks.deleteTask(parsedCommand.getIndex());
+            } catch (DukeException errorMessage) {
+                output = ui.showInputError();
+                break;
+            }
 
             try {
                 storage.updateStorage(tasks.getTaskList());
@@ -218,7 +217,7 @@ public class Duke extends Application {
 
         Timeline delayReply = new Timeline();
         delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
-                event -> dialogContainer.getChildren().add(dukeReply)));
+                (event) -> dialogContainer.getChildren().add(dukeReply)));
         delayReply.play();
 
         userInput.clear();

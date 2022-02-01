@@ -66,8 +66,13 @@ public class TaskList {
      * @param index Integer of the task to be deleted in the taskList.
      * @return Task that was deleted.
      */
-    public Task deleteTask(int index) {
-        return tasks.remove(index);
+    public Task deleteTask(int index) throws DukeException{
+        if (index > tasks.size() - 1) {
+            throw new DukeException();
+        } else {
+            return tasks.remove(index);
+        }
+
     }
 
 }
