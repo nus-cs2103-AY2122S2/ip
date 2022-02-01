@@ -2,8 +2,12 @@ package chatbot.command;
 
 import chatbot.task.TaskList;
 
-public class ListCommand implements Command {
-    public static final String TRIGGER = "list";
+public class ListCommand extends Command {
+    private static final String TRIGGER = "list";
+
+    public ListCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {

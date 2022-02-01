@@ -3,10 +3,14 @@ package chatbot.command;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
-public class UnmarkCommand implements Command {
-    public static final String TRIGGER = "unmark";
-    public static final String FORMAT =
+public class UnmarkCommand extends Command {
+    private static final String TRIGGER = "unmark";
+    private static final String FORMAT =
             "Command format: \"" + TRIGGER + " <index>\"\n" + "Index range: 1 to <size of list>";
+
+    public UnmarkCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {

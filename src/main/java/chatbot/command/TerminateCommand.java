@@ -2,11 +2,11 @@ package chatbot.command;
 
 import chatbot.task.TaskList;
 
-public class ResetCommand extends Command {
-    private static final String TRIGGER = "reset";
+public class TerminateCommand extends Command {
+    private static final String TRIGGER = "bye";
     private static final String FORMAT = "Command format: \"" + TRIGGER;
 
-    public ResetCommand() {
+    public TerminateCommand() {
         super(TRIGGER);
     }
 
@@ -15,8 +15,6 @@ public class ResetCommand extends Command {
         if (input.length > 1) {
             return new CommandOutput("Error: Invalid arguments\n" + FORMAT, "/audio/ding.wav");
         }
-
-        taskList.clear();
-        return new CommandOutput("All tasks removed from the task list.", "/audio/ding.wav");
+        return new CommandOutput("Bye. Hope to see you again soon!", "/audio/ding.wav", true);
     }
 }

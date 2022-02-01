@@ -8,11 +8,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
-public class DeadlineCommand implements Command {
-    public static final String TRIGGER = "deadline";
-    public static final String FORMAT =
+public class DeadlineCommand extends Command {
+    private static final String TRIGGER = "deadline";
+    private static final String FORMAT =
             "Command Format: \"" + TRIGGER + " <desc> /by <date> <time>\"\n" + "Date format: YYYY-MM-DD\n"
                     + "Time format: HH:MM or HH:MM:SS";
+
+    public DeadlineCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {

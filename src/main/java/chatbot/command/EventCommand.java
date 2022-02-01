@@ -8,11 +8,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
-public class EventCommand implements Command {
-    public static final String TRIGGER = "event";
-    public static final String FORMAT =
+public class EventCommand extends Command {
+    private static final String TRIGGER = "event";
+    private static final String FORMAT =
             "Command format: \"" + TRIGGER + " <desc> /at <start_date> <start_time> <end_date> <end_time>\"\n"
                     + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
+
+    public EventCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {

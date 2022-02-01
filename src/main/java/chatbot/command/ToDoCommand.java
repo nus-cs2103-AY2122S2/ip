@@ -6,9 +6,13 @@ import chatbot.task.ToDo;
 
 import java.util.Arrays;
 
-public class ToDoCommand implements Command {
-    public static final String TRIGGER = "todo";
-    public static final String FORMAT = "Command Format: \"" + TRIGGER + " <desc>\"";
+public class ToDoCommand extends Command {
+    private static final String TRIGGER = "todo";
+    private static final String FORMAT = "Command Format: \"" + TRIGGER + " <desc>\"";
+
+    public ToDoCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {

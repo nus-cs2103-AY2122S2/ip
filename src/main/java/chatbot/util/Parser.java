@@ -18,7 +18,7 @@ public class Parser {
      */
     public Parser() {
         this.commands = new Hashtable<>();
-        this.unrecognizedCommand = new Command() {
+        this.unrecognizedCommand = new Command("bye") {
             @Override
             public CommandOutput execute(String[] input, TaskList taskList) {
                 return new CommandOutput("Unrecognised command.", "/audio/ding.wav");
@@ -30,20 +30,24 @@ public class Parser {
      * Associates the specified trigger with the specified command in this map.
      * If the parser previously contained a mapping for the trigger, the old command is replaced.
      *
-     * @param trigger trigger with which the specified command is to be associated
      * @param command command to be associated with the specified trigger
      */
-    public void addCommand(String trigger, Command command) {
-        this.commands.put(trigger, command);
+    public <T extends Command> void addCommand(T command) {
+        this.commands.put(command.getTrigger(), command);
     }
 
     /**
-     * Returns the command to which the specified trigger is mapped, or a default command if this parser contains no mapping for the trigger.
-     *
-     * @param trigger the trigger whose associated command is to be returned
-     * @return the command to which the specified trigger is mapped, or a default command if this parser contains no mapping for the trigger.
+     * Returns the output of the command associated with the specified user input. If no command is associated, a default command is executed.
+     * @param input the user input
+     * @param taskList the task list to execute the command on
+     * @return the output of the command associated with the specified user input. If no command is associated, a default command is executed.
      */
-    public Command getCommand(String trigger) {
-        return commands.getOrDefault(trigger, unrecognizedCommand);
+    public CommandOutput executeCommand(String input, TaskList taskList) {
+        String[] inputArr = input.split("\\s+");
+        // Check for blank input.
+        if (inputArr.length == 0) {
+            return unrecognizedCommand.execute(inputArr, taskList);
+        }
+        return commands.getOrDefault(inputArr[0], unrecognizedCommand).execute(inputArr, taskList);
     }
 }

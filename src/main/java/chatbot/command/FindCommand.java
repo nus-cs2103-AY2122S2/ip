@@ -5,9 +5,13 @@ import chatbot.task.TaskList;
 
 import java.util.Arrays;
 
-public class FindCommand implements Command {
-    public static final String TRIGGER = "find";
-    public static final String FORMAT = "Command format: \"" + TRIGGER + " <keyword>\n";
+public class FindCommand extends Command {
+    private static final String TRIGGER = "find";
+    private static final String FORMAT = "Command format: \"" + TRIGGER + " <keyword>\n";
+
+    public FindCommand() {
+        super(TRIGGER);
+    }
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
