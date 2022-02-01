@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import duke.DukeException;
 
 public class Event extends Task {
-    private String[] DateAndTime;
+    private String[] dateAndTime;
     private LocalDate date;
     private String time;
 
@@ -21,9 +21,9 @@ public class Event extends Task {
         try {
             String[] strArr = description.split("/at ");
             this.description = strArr[0];
-            DateAndTime = strArr[1].split(" ");
-            date = LocalDate.parse(DateAndTime[0]);
-            time = DateAndTime[1];
+            dateAndTime = strArr[1].split(" ");
+            date = LocalDate.parse(dateAndTime[0]);
+            time = dateAndTime[1];
             super.saveFormat = "E," + this.description + "," + date + "," + time;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException();
@@ -34,10 +34,10 @@ public class Event extends Task {
      * Creates an Event task from previously saved list of tasks during initialisation of chat-bot.
      *
      * @param saveFormat Data saved in tasks list file.
-     * @param blean A Boolean value set to True to differentiate the creation of task from saved list and user input.
+     * @param isSaved A Boolean value set to True to differentiate the creation of task from saved list and user input.
      * @throws DukeException If the format is not followed or there are missing information.
      */
-    public Event(String saveFormat, boolean blean) throws DukeException {
+    public Event(String saveFormat, boolean isSaved) throws DukeException {
         super(saveFormat);
         try {
             String[] strArr = description.split(",");

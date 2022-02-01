@@ -10,6 +10,12 @@ import duke.DukeException;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
+
+    /**
+     * Constructor for TaskList.
+     * @param f The file to load the saved lists of tasks from.
+     * @throws DukeException
+     */
     public TaskList(File f) throws DukeException {
         try {
             Scanner s = new Scanner(f);
@@ -43,6 +49,10 @@ public class TaskList {
             tasks = new ArrayList<Task>();
         }
     }
+
+    /**
+     * Constructor for TaskList when saved file has a loading error or does not exist.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }

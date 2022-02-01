@@ -2,41 +2,27 @@ package duke;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.Todo;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
-    List<Task> tasks;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+    private List<Task> tasks;
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -46,8 +32,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
-        }
-        finally {
+        } finally {
             tasks = taskList.getTasks();
         }
     };
@@ -68,24 +53,25 @@ public class Duke {
         }
     }
 
-   /* public static void main(String[] args) throws DukeException, IOException {
-        new Duke("Data/tasks.txt").run();
-    }*/
+    /**
+     * Performs an action depending on user's input.
+     *
+     * @param command User's input after parsing.
+     * @return A string describing the action taken.
+     */
 
     public String handleCommand(String command) {
         try {
             String str = parser.parse(command);
-            if (str.equals("bye")){
-                return str;
-            }
-            else if (str.equals("list")) {
+            if (str.equals("bye")) {
+                return ui.getByeMessage();
+            } else if (str.equals("list")) {
                 String list = "";
                 for (Task t : tasks) {
                     list = list + t + "\n";
                 }
                 return list;
-            }
-            else if (str.equals("find")) {
+            } else if (str.equals("find")) {
                 String s = "";
                 for (Task t : taskList.getTasks()) {
                     if (t.toString().contains(str.substring(5))) {
@@ -136,7 +122,6 @@ public class Duke {
                         storage.save(taskList);
                         return "Added: " + deadline;
                     default:
-
                     }
                 }
             }
