@@ -2,12 +2,13 @@ package mcbot;
 
 import java.util.ArrayList;
 
-import mcbot.task.Task;
 import mcbot.exception.McBotException;
+import mcbot.task.Task;
+
 
 /**
  * Ui class is the user interface class.
- * This class handles inputs and outputs of the user. 
+ * This class handles inputs and outputs of the user.
  */
 public class Ui {
     private final String frameLine = "==========================================";
@@ -18,17 +19,17 @@ public class Ui {
     public Ui() {}
 
     /**
-     * Method to print the welcome line. 
+     * Method to print the welcome line.
      */
     public void welcomeLine() {
-        String logo = "\n" +
-                "___  ___    ______       _\n" +
-                "|  \\/  |    | ___ \\     | |\n" +
-                "| .  . | ___| |_/ / ___ | |_\n" +
-                "| |\\/| |/ __| ___ \\/ _ \\| __|\n" +
-                "| |  | | (__| |_/ / (_) | |_\n" +
-                "\\_|  |_/\\___\\____/ \\___/ \\__|\n" +
-                "\n\n";
+        String logo = "\n"
+                + "___  ___    ______       _\n"
+                + "|  \\/  |    | ___ \\     | |\n"
+                + "| .  . | ___| |_/ / ___ | |_\n"
+                + "| |\\/| |/ __| ___ \\/ _ \\| __|\n"
+                + "| |  | | (__| |_/ / (_) | |_\n"
+                + "\\_|  |_/\\___\\____/ \\___/ \\__|\n"
+                + "\n\n";
         System.out.println(logo);
         System.out.println(frameLine);
         System.out.println("Ahoy! Me name be McBot.\nTell me lad, what do you want?");

@@ -77,12 +77,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (eventTime != null) {
-            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
-                    super.taskName + " (at: " + dateFormatter.format(eventDate)
+            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] "
+                    + super.taskName + " (at: " + dateFormatter.format(eventDate)
                     + " " + timeFormatter.format(eventTime) + ")";
         } else {
-            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
-                    super.taskName + " (at: " + dateFormatter.format(eventDate) + ")";
+            return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] "
+                    + super.taskName + " (at: " + dateFormatter.format(eventDate) + ")";
         }
     }
 }

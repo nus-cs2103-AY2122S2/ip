@@ -8,18 +8,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import mcbot.task.Task;
-import mcbot.task.ToDo;
+import mcbot.exception.McBotException;
 import mcbot.task.Deadline;
 import mcbot.task.Event;
-
-import mcbot.exception.McBotException;
+import mcbot.task.Task;
+import mcbot.task.ToDo;
 
 /**
  * Storage class to store and load all the tasks. 
  */
 public class Storage {
-    String frameLine = "==========================================";
     private final String filePath;
 
     /**
@@ -44,12 +42,14 @@ public class Storage {
             File f = new File(filePath);
             if (!f.exists()) {
                 File folder = new File("./data");
+                String frameLine = "==========================================";
                 if (!folder.exists()) {
                     boolean isFolderCreated = folder.mkdir();
                     boolean isFileCreated = f.createNewFile();
                     if (isFolderCreated && isFileCreated) {
                         System.out.println(frameLine);
-                        System.out.println("I'ave created a new folder and file for ya, " + filePath + " to save yer list");
+                        System.out.println("I'ave created a new folder and file for ya, " 
+                                + filePath + " to save yer list");
                         System.out.println(frameLine);
                     }
                 } else {
@@ -100,7 +100,7 @@ public class Storage {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Data loaded is not format correctly, some data might be missing");
         }
-        return  arrList;
+        return arrList;
     }
 
     /**

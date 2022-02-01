@@ -5,16 +5,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import mcbot.exception.InvalidCommandException;
+import mcbot.exception.McBotException;
+import mcbot.task.Deadline;
+import mcbot.task.Event;
 import mcbot.task.Task;
 import mcbot.task.ToDo;
-import mcbot.task.Event;
-import mcbot.task.Deadline;
-
-import mcbot.exception.McBotException;
-import mcbot.exception.InvalidCommandException;
 
 /**
- * McBot class is the main class to initiate McBot chat-bot. 
+ * McBot class is the main class to initiate McBot chat-bot.
  */
 public class McBot {
     private final Storage storage;
@@ -24,9 +23,9 @@ public class McBot {
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
     /**
-     * Constructor for McBot. 
-     * 
-     * @param filePath is the path to the file that contains task details. 
+     * Constructor for McBot.
+     *
+     * @param filePath is the path to the file that contains task details.
      */
     public McBot(String filePath) {
         ui = new Ui();
@@ -40,13 +39,13 @@ public class McBot {
     }
 
     /**
-     * A method to start and run the McBot chat-bot. 
+     * A method to start and run the McBot chat-bot.
      */
     public void run() {
         boolean isRunning = true;
         ui.welcomeLine();
         Parser parser = new Parser();
-        while(isRunning) {
+        while (isRunning) {
             try {
                 parser.readFullCommand();
                 String keyCommand = parser.getKeyCommand();
@@ -227,8 +226,8 @@ public class McBot {
 
     /**
      * The main method of McBot.
-     * 
-     * @param args is to store any args when McBot is initiated. 
+     *
+     * @param args is to store any args when McBot is initiated.
      */
     public static void main(String[] args) {
         new McBot("data/tasks.txt").run();

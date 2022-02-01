@@ -51,8 +51,9 @@ public class Parser {
      */
     public String getDetails() throws InvalidCommandException {
         String details = fullCommand.split(" ", 2)[1];
-        if (details.isBlank())
+        if (details.isBlank()) {
             throw new InvalidCommandException();
+        }
         return details;
     }
 
