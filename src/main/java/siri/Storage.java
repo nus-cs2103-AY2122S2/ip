@@ -16,7 +16,12 @@ class Storage {
 
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+
+        if (filePath == "") {
+            this.filePath = "data/data.txt";
+        } else {
+            this.filePath = filePath;
+        }
         this.fileDir = filePath.substring(0, filePath.lastIndexOf('/'));
         this.dirFile = new File(fileDir);
         this.dataFile = new File(filePath);
