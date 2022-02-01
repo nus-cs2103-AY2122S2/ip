@@ -151,6 +151,13 @@ public class TasksList {
         return response;
     }
 
+    /**
+     * Finds all tasks that contain a certain keyword.
+     *
+     * @param instruction User input.
+     * @return Tasks in text format that contains keyword to be found.
+     * @throws InvalidArgumentException If there is no keyword inputted.
+     */
     public String find(List<String> instruction) throws InvalidArgumentException {
         if (instruction.size() == 1) {
             throw new InvalidArgumentException();
