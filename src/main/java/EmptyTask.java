@@ -7,7 +7,13 @@ public class EmptyTask extends Task {
         return "";
     }
 
-    public String getPostfix() {
+    @Override
+    public String getDate() {
+        return "";
+    }
+
+    @Override
+    public String getTime() {
         return "";
     }
 

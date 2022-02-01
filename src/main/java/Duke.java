@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -57,22 +61,8 @@ public class Duke {
                     // with 4 elements, being the prefix, completedState, name and date
                     numOfExistingTasks--;
                     String taskAsText = br.readLine();
-                    String[] taskAsArray = taskAsText.split("/");
 
-                    char prefix = taskAsArray[0].charAt(0);
-                    boolean isCompleted = taskAsArray[1].equals("X");
-                    String name = taskAsArray[2];
-                    String date = taskAsArray[3];
-
-                    // Initializes a TaskCreator to create a new Task
-                    TaskCreator taskCreator = new TaskCreator(prefix,
-                            isCompleted,
-                            name,
-                            date);
-                    Task currentTask = taskCreator.createTask();
-
-                    // Adds newly created task into tasklist
-                    TaskManager.add(currentTask);
+                    TaskManager.loadTask(taskAsText);
                 }
 
             }
@@ -148,8 +138,8 @@ public class Duke {
                         System.out.println(space + line);
                         break;
                     } else {
-                        DateManager dateChecker = new DateManager(date);
-                        if (!dateChecker.isDateValid()) {
+                        DateManager dateManager = new DateManager(date);
+                        if (!dateManager.isDateValid()) {
                             System.out.println(space + "Invalid date!");
                             System.out.println(space + line);
                             break;
@@ -222,8 +212,8 @@ public class Duke {
                         System.out.println(space + line);
                         break;
                     } else {
-                        DateManager dateChecker = new DateManager(date);
-                        if (!dateChecker.isDateValid()) {
+                        DateManager dateManager = new DateManager(date);
+                        if (!dateManager.isDateValid()) {
                             System.out.println(space + "Invalid date!");
                             System.out.println(space + line);
                             break;

@@ -45,6 +45,6 @@ public class DateManager {
         int month = Integer.parseInt(date.substring(2, 4));
         int year = Integer.parseInt(date.substring(4, 8));
 
-        return nameOfMonths[month] + " " + day + " " + year;
+        return nameOfMonths[month] + " " + String.format("%02d", day) + " " + year;
     }
 }

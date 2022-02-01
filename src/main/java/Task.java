@@ -9,7 +9,8 @@ public abstract class Task {
     }
 
     abstract String getPrefix();
-    abstract String getPostfix();
+    abstract String getDate();
+    abstract String getTime();
 
     public void mark() {
         this.state = true;

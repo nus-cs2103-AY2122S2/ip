@@ -3,20 +3,22 @@ public class TaskCreator {
     private final boolean isCompleted;
     private final String name;
     private final String date;
+    private final String time;
 
-    TaskCreator(char prefix, boolean isCompleted, String name, String date) {
+    TaskCreator(char prefix, boolean isCompleted, String name, String date, String time) {
         this.prefix = prefix;
         this.isCompleted = isCompleted;
         this.name = name;
         this.date = date;
+        this.time = time;
     }
 
     protected Task createTask() {
         Task task;
         if (prefix == 'D') {
-            task = new Deadline(this.name, date);
+            task = new Deadline(this.name, this.date, this.time);
         } else if (prefix == 'E') {
-            task = new Event(this.name, date);
+            task = new Event(this.name, this.date, this.time);
         } else if (prefix == 'T') {
             task = new ToDo(this.name);
         } else {
@@ -25,10 +27,10 @@ public class TaskCreator {
                     + "Please go to Duke's memory to check!\n"
                     + "(Found a task that is not a Deadline, Event or ToDo\n"
                     + "in data/duke.txt)\n");
-            task = null;
+            task = new EmptyTask();
         }
 
-        if (this.isCompleted && task != null) {
+        if (this.isCompleted && !task.isEmptyTask()) {
             task.mark();
         }
         return  task;

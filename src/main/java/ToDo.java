@@ -7,8 +7,14 @@ public class ToDo extends Task {
         return "T";
     }
 
-    public String getPostfix() {
-        return "00000000";
+    @Override
+    public String getDate() {
+        return "";
+    }
+
+    @Override
+    public String getTime() {
+        return "";
     }
 
 

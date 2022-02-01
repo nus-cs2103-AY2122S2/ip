@@ -41,4 +41,8 @@ public class TimeManager {
     public String getFormat12() {
         return this.format12;
     }
+
+    public String getFormat24() {
+        return this.format24;
+    }
 }

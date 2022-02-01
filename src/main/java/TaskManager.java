@@ -75,20 +75,43 @@ public class TaskManager {
 
             for (Task task : taskList) {
                 String prefix = task.getPrefix();
-                String postfix = task.getPostfix();
+                String date = task.getDate();
+                String time = task.getTime();
                 String completedMarker = task.isMarked() ? "X" : " ";
                 pw.write(prefix + "/"
                         + completedMarker + "/"
                         + task.getName() + "/"
-                        + postfix + "\n");
+                        + date + "/"
+                        + time + "\n");
             }
 
             pw.flush();
             pw.close();
 
-            System.out.println(SPACE + "Tasklist has been updated...");
+            System.out.println(SPACE + "Tasklist is updating...");
         } catch (IOException e) {
             System.out.println(SPACE + "An error occurred. Tasklist cannot be saved!");
         }
+    }
+
+    public static void loadTask(String input) {
+        String[] taskAsArray = input.split("/");
+
+        char prefix = taskAsArray[0].charAt(0);
+        boolean isCompleted = taskAsArray[1].equals("X");
+        String name = taskAsArray[2];
+        String date = taskAsArray[3];
+        String time = taskAsArray[4];
+
+        // Initializes a TaskCreator to create a new Task
+        TaskCreator taskCreator = new TaskCreator(prefix,
+                isCompleted,
+                name,
+                date,
+                time);
+        Task currentTask = taskCreator.createTask();
+
+        // Adds newly created task into tasklist
+        add(currentTask);
     }
 }
