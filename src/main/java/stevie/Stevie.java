@@ -1,11 +1,11 @@
 package stevie;
 
+import java.io.File;
+
 import stevie.command.Command;
 import stevie.exception.StevieException;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
-
-import java.io.File;
 
 /**
  * stevie.Stevie is a class that serves as a user interface to allow access to an underlying

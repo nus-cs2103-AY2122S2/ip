@@ -1,7 +1,7 @@
 package stevie.command;
 
-import stevie.exception.StevieException;
 import stevie.StevieUi;
+import stevie.exception.StevieException;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 

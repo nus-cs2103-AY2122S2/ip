@@ -1,8 +1,8 @@
 package stevie.task;
 
-import stevie.exception.TaskException;
-
 import java.util.ArrayList;
+
+import stevie.exception.TaskException;
 
 /**
  * Represents the a list of Tasks. <code>stevie.task.TaskList</code> object stores and handles users'

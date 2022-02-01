@@ -1,9 +1,9 @@
 package stevie.command;
 
 import stevie.StevieUi;
+import stevie.task.Task;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
-import stevie.task.Task;
 
 /**
  * AddCommand executes to add a task to the task list, and save the newly updated task list.

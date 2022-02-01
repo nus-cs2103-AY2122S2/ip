@@ -1,8 +1,8 @@
 package stevie.task;
 
-import stevie.exception.TaskException;
-
 import java.util.Date;
+
+import stevie.exception.TaskException;
 
 /**
  * Class to handle the creation of tasks. When a new task is added, update or add a new create method in

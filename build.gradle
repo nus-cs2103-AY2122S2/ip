@@ -19,7 +19,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -29,18 +28,25 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "stevie.Stevie"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "stevie"
     archiveClassifier = null
 }
 
 checkstyle {
     toolVersion = '8.29'
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
 }
 
-run{
+task Checkstyle(type: Checkstyle) {
+    source 'src/main/java'
+    include '**/*.java'
+    classpath = rootProject.files()
+}
+
+run {
     standardInput = System.in
 }

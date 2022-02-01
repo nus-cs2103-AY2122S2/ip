@@ -9,8 +9,8 @@ public abstract class Task {
     /**
      * A formatter to format Date object into a readable string.
      */
-    protected static SimpleDateFormat formatter
-            = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    protected static SimpleDateFormat formatter =
+            new SimpleDateFormat("dd/MM/yyyy HH:mm");
     /**
      * Name of the task
      */

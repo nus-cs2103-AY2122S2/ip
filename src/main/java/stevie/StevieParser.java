@@ -1,5 +1,10 @@
 package stevie;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Pattern;
+
 import stevie.command.AddCommand;
 import stevie.command.Command;
 import stevie.command.DeleteCommand;
@@ -10,11 +15,6 @@ import stevie.command.MarkCommand;
 import stevie.exception.StevieException;
 import stevie.task.TaskCreator;
 import stevie.task.TaskType;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Pattern;
 
 /**
  * StevieParser parses user's input to creates a Command. Command is used to alter the user's task list.

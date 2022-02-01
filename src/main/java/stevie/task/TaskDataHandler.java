@@ -1,7 +1,5 @@
 package stevie.task;
 
-import stevie.exception.TaskException;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -12,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import stevie.exception.TaskException;
 /**
  * Loads and saves Tasks added by stevie.Stevie chat bot.
  */

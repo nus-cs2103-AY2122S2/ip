@@ -1,13 +1,14 @@
 package stevie.task;
 
-import org.junit.jupiter.api.Test;
-import stevie.exception.TaskException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import stevie.exception.TaskException;
 
 class TaskCreatorTest {
 
