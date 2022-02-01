@@ -24,7 +24,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String appendToFile() {
+    public String appendtoFile() {
         return "T|" + (super.isDone ? "1" : "0") + "|" + super.description + "\n";
     }
 
