@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "bobby.Bobby"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "bobby"
     archiveClassifier = null
 }
 
@@ -41,6 +41,6 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
 }
