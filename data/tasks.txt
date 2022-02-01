@@ -1,0 +1,4 @@
+T||0||eat
+T||1||sleep
+E||0||party||2/11/2022
+T||0||repeat
