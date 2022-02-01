@@ -1,7 +1,5 @@
 package kenobi.command;
 
-import kenobi.task.Task;
-
 public class UnmarkCommand extends Command {
     int toUnmarkIndex;
 
@@ -12,8 +10,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute() {
         try{
-            Task unmarkedTask = tasks.get(toUnmarkIndex).undone();
-            return "I guess you weren't done with this one:\n" + unmarkedTask;
+            return "I guess you weren't done with this one:\n" + tasks.markTaskAsUndone(toUnmarkIndex);
         } catch (IndexOutOfBoundsException e) {
             return "The archives contain no such task";
         }

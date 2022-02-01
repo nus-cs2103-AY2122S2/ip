@@ -11,8 +11,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute() {
-        TaskList found = (TaskList) tasks.clone();
-        found.removeIf(e -> !e.hasWord(searchTerm));
+        TaskList found = tasks.search(searchTerm);
 
         if (found.size() == 0) {
             return "Nothing in the archives matches your search term";

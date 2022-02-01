@@ -3,7 +3,7 @@ package kenobi.command;
 public class ListCommand extends Command {
     @Override
     public String execute() {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             return "You don't have no tasks in the archives";
         }
 
