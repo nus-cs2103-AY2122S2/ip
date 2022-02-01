@@ -9,10 +9,10 @@ import java.util.ArrayList;
  * Represents a task added by the user.
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static int taskCount = 0;
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Sets description of child task classes.
