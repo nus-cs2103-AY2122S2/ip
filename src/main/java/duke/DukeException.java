@@ -1,3 +1,4 @@
+package duke;
 public class DukeException extends Throwable {
     public void noSuchTaskException() {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

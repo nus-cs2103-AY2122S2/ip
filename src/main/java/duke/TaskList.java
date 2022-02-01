@@ -1,5 +1,6 @@
-import java.io.*;
-import java.util.*;
+package duke;
+
+import java.util.ArrayList;
 
 public class TaskList {
     private static Ui ui;

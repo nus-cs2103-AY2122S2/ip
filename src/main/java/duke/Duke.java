@@ -1,13 +1,5 @@
-import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package duke;
+import java.util.Scanner;
 
 public class Duke {
     private final Ui ui;

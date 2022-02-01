@@ -1,4 +1,6 @@
-import java.util.*;
+package duke;
+
+import java.util.ArrayList;
 
 public class Ui {
 

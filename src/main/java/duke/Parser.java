@@ -1,15 +1,19 @@
+package duke;
+
+import java.util.ArrayList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+
 public class Parser {
 
         private final Storage storage;
         private final TaskList taskListObj;
         private final Ui ui;
         private final DukeException dukeException;
-        private ArrayList<Task> taskListArr;
+        private final ArrayList<Task> taskListArr;
         private boolean isExit;
 
         public Parser(Storage storage, TaskList taskListObj, Ui ui) {
