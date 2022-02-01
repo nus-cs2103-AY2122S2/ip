@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.command.Command;
 import duke.command.CreateDeadlineCommand;
 import duke.command.CreateEventCommand;
@@ -11,10 +15,6 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.common.DukeException;
-
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  *  Parses the user input.
@@ -187,8 +187,8 @@ public class Parser {
                                 + "start and end times in the following format:\n"
                                 + " yyyy-mm-dd HHMM HHMM in the 24 hour format");
                     }
-                        start = parseDateTime(tokens[i], tokens[i + 1]);
-                        end = parseDateTime(tokens[i], tokens[i + 2]);
+                    start = parseDateTime(tokens[i], tokens[i + 1]);
+                    end = parseDateTime(tokens[i], tokens[i + 2]);
 
                 } catch (NumberFormatException | DateTimeParseException exception) {
                     throw new InvalidDateTimeFormatException("Please enter the date and "
@@ -203,7 +203,7 @@ public class Parser {
             throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
                     + "cannot be empty.");
         }
-       return new CreateEventCommand(description, start, end);
+        return new CreateEventCommand(description, start, end);
     }
 
     /**

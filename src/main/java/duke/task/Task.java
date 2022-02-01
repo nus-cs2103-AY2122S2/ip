@@ -13,7 +13,7 @@ public class Task {
     protected boolean isDone;
 
     /** Type of task. */
-    public TaskType type;
+    private TaskType type;
 
     /**
      * Constructor to create Task object.

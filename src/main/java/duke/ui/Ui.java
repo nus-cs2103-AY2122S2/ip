@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.common.DukeException;
-
 import java.util.Scanner;
+
+import duke.common.DukeException;
 
 /**
  * Class responsible for the User Interface of the Chat bot.
@@ -86,7 +86,7 @@ public class Ui {
      */
     public void showMessage(String message) {
         System.out.println(
-          formatString(message)
+                formatString(message)
         );
     }
 

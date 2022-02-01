@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.common.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * Responsible for the functionality needed when creating a Deadline task.

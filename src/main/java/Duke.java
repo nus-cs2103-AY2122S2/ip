@@ -10,6 +10,9 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    /** File path used for storage. */
+    private static final String FILE_PATH = ".\\data\\duke.txt";
+
     /** Handles loading and saving of tasks. */
     private Storage storage;
 
@@ -18,9 +21,6 @@ public class Duke {
 
     /** Responsible for interactions with the user. */
     private Ui ui;
-
-    /** File path used for storage. */
-    private static final String FILE_PATH = ".\\data\\duke.txt";
 
     /**
      * Constructor to create Duke and load task from

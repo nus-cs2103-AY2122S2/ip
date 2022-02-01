@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             if (task.getDescription().contains(keyword)) {
                 startIndex++;
                 stringBuilder.append("" + startIndex + "." + task.toString() + "\n");
-            };
+            }
         }
 
         if (startIndex > 0) {

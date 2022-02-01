@@ -1,13 +1,5 @@
 package duke.storage;
 
-import duke.common.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.TaskType;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,17 +9,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.common.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
+
 /**
  * Class which handles loading and saving of data.
  */
 public class Storage {
 
     /** File used for storage. */
-    private final File STORAGE_FILE;
+    private final File storageFile;
 
     /** Constructor to create Storage object. */
     public Storage(String filePath) {
-        STORAGE_FILE = new File(filePath);
+        storageFile = new File(filePath);
     }
 
     /**
@@ -37,8 +37,8 @@ public class Storage {
      */
     private void createFile() throws FileIoException {
         try {
-            STORAGE_FILE.getParentFile().mkdirs();
-            STORAGE_FILE.createNewFile();
+            storageFile.getParentFile().mkdirs();
+            storageFile.createNewFile();
         } catch (IOException exception) {
             throw new FileIoException(exception.getMessage());
         }
@@ -105,7 +105,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(STORAGE_FILE));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(storageFile));
             String line;
             String[] tokens;
             Task task;
@@ -141,10 +141,10 @@ public class Storage {
      */
     public void saveToFile(TaskList taskList) throws FileIoException {
         try {
-            if (!STORAGE_FILE.exists()) {
+            if (!storageFile.exists()) {
                 createFile();
             }
-            FileWriter writer = new FileWriter(STORAGE_FILE);
+            FileWriter writer = new FileWriter(storageFile);
             Task task;
             TaskType type;
             for (int i = 0; i < taskList.size(); i++) {
@@ -163,6 +163,8 @@ public class Storage {
                     Event event = (Event) task;
                     writer.write(event.getStorageString());
                     break;
+                default:
+                    throw new FileIoException("Unable to write task: invalid task type.");
                 }
             }
             writer.close();
