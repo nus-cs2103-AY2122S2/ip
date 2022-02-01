@@ -11,8 +11,10 @@ import java.util.Scanner;
 public class Main {
     /**
      * Loads previously saved tasks, greets the user and accepts commands to run.
+     *
+     * @param args Input arguments.
      */
-    public static void main() {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         Task.getSavedTasks();

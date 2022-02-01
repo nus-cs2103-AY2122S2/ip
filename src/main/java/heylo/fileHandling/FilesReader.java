@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class FilesReader {
     /**
      * Returns the list of tasks previously added by the user.
+     *
      * @return List of tasks.
      */
     public static ArrayList<Task> getTaskListFromFile() {

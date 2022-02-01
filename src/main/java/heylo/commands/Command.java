@@ -5,7 +5,6 @@ import heylo.tasks.Event;
 import heylo.tasks.Task;
 import heylo.tasks.Todo;
 
-
 import java.util.Scanner;
 
 /**
@@ -18,6 +17,7 @@ public class Command {
 
     /**
      * Parses the command input by the user.
+     *
      * @param input String input in the command line
      */
     public Command(String input) {
@@ -37,6 +37,7 @@ public class Command {
 
     /**
      * Runs relevant function based on parsed command
+     *
      * @param sc Scanner used for command input for being closed on exit
      */
     public void run(Scanner sc) {

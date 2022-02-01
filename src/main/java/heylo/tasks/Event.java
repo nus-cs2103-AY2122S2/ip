@@ -12,8 +12,9 @@ public class Event extends Task {
 
     /**
      * Creates an event task with duration.
+     *
      * @param description String event description.
-     * @param duration String event start time.
+     * @param duration    String event start time.
      */
     public Event(String description, String duration) {
         super(description);
@@ -26,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Converts the event task and its data to string format.
+     *
      * @return String event.
      */
     @Override

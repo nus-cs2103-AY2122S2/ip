@@ -9,6 +9,7 @@ import java.io.IOException;
 public class FilesWriter {
     /**
      * Writes the given task to the data file.
+     *
      * @param task Task added by the user.
      */
     public static void writeToFile(String task) {

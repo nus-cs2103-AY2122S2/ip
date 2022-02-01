@@ -13,8 +13,9 @@ public class Deadline extends Task {
 
     /**
      * Create a task with a deadline.
+     *
      * @param description String description of the task.
-     * @param deadline String date of the deadline.
+     * @param deadline    String date of the deadline.
      */
     public Deadline(String description, String deadline) {
         super(description);
@@ -27,7 +28,8 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline task and its data to string format.
-     * @return String deadline
+     *
+     * @return String deadline.
      */
     @Override
     public String toString() {

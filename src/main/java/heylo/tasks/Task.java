@@ -16,6 +16,7 @@ public abstract class Task {
 
     /**
      * Sets description of child task classes.
+     *
      * @param description String task-description.
      */
     public Task(String description) {
@@ -24,15 +25,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns the done status of the task.
-     * @return String done status.
-     */
-    public String getStatusIcon() {
-        return this.isDone ? "[X]" : "[ ]";
-    }
-
-    /**
      * Marks the task as done if it exists.
+     *
      * @param index int Index of the task in the displayed list of tasks.
      */
     public static void markAsDone(int index) {
@@ -47,6 +41,7 @@ public abstract class Task {
 
     /**
      * Marks the task as not done if it exists.
+     *
      * @param index int Index of the task in the displayed list of tasks.
      */
     public static void markAsNotDone(int index) {
@@ -61,6 +56,7 @@ public abstract class Task {
 
     /**
      * Adds the given task to the task list if valid and increments task count.
+     *
      * @param task Task added by user.
      */
     public static void addToList(Task task) {
@@ -100,6 +96,7 @@ public abstract class Task {
 
     /**
      * Removes the task from the task list if it exists.
+     *
      * @param index int Index of the task in the displayed list of tasks.
      */
     public static void removeFromList(int index) {
@@ -142,6 +139,7 @@ public abstract class Task {
 
     /**
      * Converts the string format of the task to a Task object.
+     *
      * @param task String task.
      * @return Task object.
      */
@@ -206,7 +204,17 @@ public abstract class Task {
     }
 
     /**
+     * Returns the done status of the task.
+     *
+     * @return String done status.
+     */
+    public String getStatusIcon() {
+        return this.isDone ? "[X]" : "[ ]";
+    }
+
+    /**
      * Converts the task to string format.
+     *
      * @return String task.
      */
     @Override

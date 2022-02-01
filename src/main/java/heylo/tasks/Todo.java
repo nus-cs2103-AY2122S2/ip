@@ -6,6 +6,7 @@ package heylo.tasks;
 public class Todo extends Task {
     /**
      * Creates a todo task.
+     *
      * @param description String todo-description.
      */
     public Todo(String description) {
@@ -14,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Converts the todo task to String format.
+     *
      * @return String todo.
      */
     @Override

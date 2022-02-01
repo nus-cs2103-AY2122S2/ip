@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class DateFormatter {
     /**
      * Formats the given date in MMM d yyyy format.
+     *
      * @param date LocalDate date.
      * @return String date.
      */
