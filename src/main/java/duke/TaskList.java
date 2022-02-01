@@ -12,7 +12,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void mark(String input) throws DukeException {
+    public static void mark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException(
@@ -37,7 +37,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void unmark(String input) throws DukeException {
+    public static void unmark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException(
@@ -83,7 +83,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void todo(String input) throws DukeException {
+    public static void todo(String input) throws DukeException {
         if (stripDescription(input)[0] == "") {
             throw new DukeException(
                 "Oops, the description of todo cannot be empty! Please tell me what you want to do."
