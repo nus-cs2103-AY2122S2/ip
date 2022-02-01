@@ -68,6 +68,12 @@ public class TaskList {
         tasks.add(t);
     }
 
+    /**
+     * Searches for occurrences of a given word in tasks and returns a list of Tasks that contain it.
+     *
+     * @param word keyword to be searched for
+     * @return TaskList of the Tasks containing the specified word
+     */
     public TaskList find(String word) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -92,7 +98,7 @@ public class TaskList {
                 s += "  " + index + ". " + tasks.get(i) + "\n";
             }
             else {
-                s += "You now have " + i +" tasks on your list.";
+                s += "You have " + i +" tasks on your list.";
                 break;
             }
         }

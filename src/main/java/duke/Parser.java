@@ -4,8 +4,8 @@ package duke;
  * Represents a class that validates and interprets user input with a pre-generated list of allowable
  * input formats.
  * Note: Current allowable formats are "list", "bye", "do X", "undo X", "delete X", "todo S",
- * "deadline S by T", "event S at T", where X is an integer, S is a string descriptor of the task, and T
- * is a string descriptor of the date(s) and/or time(s) associated with the task.
+ * "deadline S by T", "event S at T", "find W", where X is an integer, S is a string descriptor of the task, W
+ * is a singular keyword and T is a string descriptor of the date(s) and/or time(s) associated with the task.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
@@ -13,8 +13,8 @@ package duke;
 public class Parser {
 
     /**
-     * Extracts the non-command contents of a given input string by stripping the string of leading whitespaces
-     * and removing the first word.
+     * Extracts the non-command contents of a given input string.
+     * Strips the string of leading whitespaces and removes the first word.
      *
      * @return input consisting of the non-command contents of the input string
      */
@@ -28,9 +28,9 @@ public class Parser {
 
     /**
      * Validates format of input and extracts command from the given input, if any.
-     * Note: Current allowable formats are "list", "bye", "do X", "undo X", "delete X", "todo S",
-     * "deadline S by T", "event S at T", where X is an integer, S is a string descriptor of the task, and T
-     * is a string descriptor of the date(s) and/or time(s) associated with the task.
+     * Note: Current allowable formats are "list", "bye", "do X", "undo X", "delete X", "todo S", "find W",
+     * "deadline S by T", "event S at T", where X is an integer, S is a string descriptor of the task, W is a
+     * singular keyword and T is a string descriptor of the date(s) and/or time(s) associated with the task.
      *
      * @return command from input string if input is of a valid format, "" otherwise
      */
@@ -92,6 +92,7 @@ public class Parser {
             return command;
         }
 
+        // Handle find
         if (firstWord.equals("find")) {
             input = input.substring(4).trim();
             if (input.equals("")) {

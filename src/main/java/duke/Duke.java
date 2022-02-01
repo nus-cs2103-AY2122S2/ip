@@ -19,8 +19,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor for Duke. This instantiates UI and storage objects (one of each),and loads Tasks from a
-     * specified filePath into tasks.
+     * Constructor for Duke that instantiates UI and storage, and loads Tasks from a file into tasks.
      * If there is an error with loading Tasks from the specified file, it initializes tasks to be an empty
      * TaskList.
      *
@@ -38,9 +37,9 @@ public class Duke {
     }
 
     /**
-     * Handles the execution and main logic of the Duke program. It polls for user input continuously, parses
-     * the user input and displays appropriate messages until user input is "bye", upon which it displays a
-     * goodbye message and terminates the program.
+     * Handles the execution and main logic of the Duke program.
+     * It polls for user input continuously, parses user input and displays appropriate messages until user
+     * input is "bye", upon which it displays a goodbye message and terminates the program.
      */
     public void run() {
         ui.showWelcome();

@@ -13,8 +13,8 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 
 /**
- * Represents a storage space for tasks on hard-drive. It deals with loading tasks from a file and
- * saving tasks to the same file.
+ * Represents a storage space for tasks on hard-drive.
+ * It handles the loading of tasks from a file and saving of tasks to the same file.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
@@ -59,9 +59,8 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[] tmp = line.split("\\|");
-
                 boolean isDone = tmp[1].trim().equals("D");
-                //assumes valid input
+
                 switch (tmp[0].trim()) {
                 case "T":
                     Todo t = new Todo(tmp[2].trim());
@@ -103,7 +102,6 @@ public class Storage {
 
     /**
      * Updates the list of Tasks saved on hard-drive at filePath by overwriting the existing file at filePath.
-     * If file does not exist, it creates the file.
      * Note: File creation is to be handled via load() prior this method as this assumes that filePath is
      * valid and that the file exists at filePath.
      *
