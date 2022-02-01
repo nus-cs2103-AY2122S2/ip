@@ -1,10 +1,5 @@
 package bobby;
 
-<<<<<<< HEAD
-import java.io.IOException;
-=======
-import java.io.FileNotFoundException;
->>>>>>> branch-A-CodingStandard
 import java.util.Scanner;
 
 /**
