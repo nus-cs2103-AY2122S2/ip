@@ -2,8 +2,6 @@ package duke.utils;
 
 
 import duke.task.Task;
-
-import java.util.Scanner;
 import java.util.ArrayList;
 
 
@@ -13,21 +11,9 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * Instance of scanner to handle user inputs
-     */
-    private Scanner sc;
-
-    /**
      * Stores the last command given by the user
      */
     private String lastCommand;
-
-    /**
-     * Constructor method for Ui class
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     /**
      * Print the list of tasks, handle
@@ -36,14 +22,16 @@ public class Ui {
      *
      * @param tasks Arraylist of tasks
      */
-    public static void printList(ArrayList<Task> tasks) {
+    public static String printList(ArrayList<Task> tasks) {
 
         if (tasks.size() == 0) {
-            System.out.println("No Tasks Right Now");
+            return "No Tasks Right Now";
         } else {
+            StringBuilder st = new StringBuilder();
             for (int x = 0; x < tasks.size(); x++) {
-                System.out.println((x + 1) + ". " + tasks.get(x).toString());
+                st.append((x + 1) + ". " + tasks.get(x).toString() + "\n");
             }
+            return st.toString();
         }
     }
 
@@ -57,12 +45,14 @@ public class Ui {
     public static String printSearchList(ArrayList<Task> tasks) {
 
         if(tasks.size() == 0) {
-            System.out.println("No Matching Tasks Found");
+            return "No Matching Tasks Found";
         } else {
-            System.out.println("The Following Matching Tasks were found: ");
+            StringBuilder st = new StringBuilder();
+            st.append("The Following Matching Tasks were found: \n");
             for (int x = 0; x < tasks.size(); x++) {
-                System.out.println((x + 1) + ". " + tasks.get(x).toString());
+                st.append((x + 1) + ". " + tasks.get(x).toString() + "\n");
             }
+            return st.toString();
         }
     }
 
@@ -72,10 +62,12 @@ public class Ui {
      * @param curr Task that has been added to the list
      * @param size number of tasks in the list
      */
-    public static void printTaskAddition(Task curr, int size) {
-        System.out.println("Got it! I've added this task:");
-        System.out.println(curr.toString());
-        System.out.println("Now you have " + size + " tasks in the list");
+    public static String printTaskAddition(Task curr, int size) {
+        StringBuilder st = new StringBuilder();
+        st.append("Got it! I've added this task: \n");
+        st.append(curr.toString() + "\n");
+        st.append("Now you have " + size + " tasks in the list \n");
+        return st.toString();
     }
 
 
@@ -85,10 +77,12 @@ public class Ui {
      * @param curr Task that has been removed from the list
      * @param size number of tasks in the list
      */
-    public static void printTaskDeletion(Task curr, int size) {
-        System.out.println("Got it! I've removed this task:");
-        System.out.println(curr.toString());
-        System.out.println("Now you have " + size + " tasks in the list");
+    public static String printTaskDeletion(Task curr, int size) {
+        StringBuilder st = new StringBuilder();
+        st.append("Got it! I've removed this task: \n");
+        st.append(curr.toString() + "\n");
+        st.append("Now you have " + size + " tasks in the list \n");
+        return st.toString();
     }
 
 
@@ -96,48 +90,16 @@ public class Ui {
     /**
      * Print the welcome message for the user
      */
-    public static void printHello() {
-        System.out.println("Hello! I'm Duke!");
-        System.out.println("What can I do for you?");
-    }
-
-
-    /**
-     * Print a line for interface
-     * between two actions
-     */
-    public static void printLine(){
-        System.out.println("-------------------");
+    public static String printHello() {
+        return "Hello! I'm Duke! \n What can I do for you?";
     }
 
     /**
      * Print the goodbye message for the user
      */
-    public static void printBye() {
-        System.out.println("Bye! Hope to see you again soon");
+    public static String printBye() {
+        return "Bye! Hope to see you again soon";
     }
-
-    /**
-     *  Read the user's input
-     *
-     *  @return the String input from the user
-     */
-    public String readCommand() {
-        String userInput = sc.nextLine();
-        lastCommand = userInput;
-        return userInput;
-    }
-
-    /**
-     * Return whether the last user
-     * command is to exit
-     *
-     * @return true if the last command is "bye"
-     */
-    public boolean isExit() {
-        return this.lastCommand.equals("bye");
-    }
-
 
     /**
      * Print a task has been marked
@@ -145,9 +107,11 @@ public class Ui {
      *
      * param t Task that has been marked as complete
      */
-    public static void printMarkCompletion(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t.toString());
+    public static String printMarkCompletion(Task t) {
+        StringBuilder st = new StringBuilder();
+        st.append("Nice! I've marked this task as done: \n");
+        st.append(t.toString());
+        return st.toString();
     }
 
     /**
@@ -156,9 +120,11 @@ public class Ui {
      *
      * param t Task that has been marked as not complete
      */
-    public static void printMarkUncompletion(Task t) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(t.toString());
+    public static String printMarkUncompletion(Task t) {
+        StringBuilder st = new StringBuilder();
+        st.append("OK, I've marked this task as not done yet: \n");
+        st.append(t.toString());
+        return st.toString();
     }
 
     /**
@@ -167,8 +133,8 @@ public class Ui {
      *
      * @param e Exception received
      */
-    public static void showError(DukeException e) {
-        System.out.println(e);
+    public static String showError(DukeException e) {
+        return (e.toString());
     }
 
 }

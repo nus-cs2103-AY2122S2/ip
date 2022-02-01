@@ -17,7 +17,7 @@ public class Parser {
      * @param tl Instance of the tasklist at this moment
      * @throws DukeException If the user's command is not valid
      */
-    public static void parse(String userInput, TaskList tl) throws DukeException {
+    public static String parse(String userInput, TaskList tl) throws DukeException {
 
         StringTokenizer st = new StringTokenizer(userInput, " ");
         String curr = st.nextToken();
@@ -26,40 +26,39 @@ public class Parser {
 
         case "list":
 
-            tl.printList();
-            break;
+            return tl.printList();
 
-        case "mark":
+            case "mark":
 
             try {
                 int toMark = Integer.parseInt(st.nextToken());
-                tl.markTaskAsCompleted(toMark);
+                return tl.markTaskAsCompleted(toMark);
             } catch (DukeException | NumberFormatException e) {
                 throw new DukeException.DukeInvalidNumberException();
             }
 
-            break;
+
 
         case "unmark":
 
             try {
                 int toUnmark = Integer.parseInt(st.nextToken());
-                tl.markTaskAsUncomplete(toUnmark);
+                return tl.markTaskAsUncomplete(toUnmark);
             } catch (DukeException | NumberFormatException e) {
                 throw new DukeException.DukeInvalidNumberException();
             }
 
-            break;
+
 
         case "todo":
 
             try {
-                tl.addToDo(st.nextToken(""));
+                return tl.addToDo(st.nextToken(""));
             } catch (NoSuchElementException e) {
                 throw new DukeException.DukeNoTaskGivenException();
             }
 
-            break;
+
 
         case "deadline":
 
@@ -69,12 +68,12 @@ public class Parser {
                 if (spl.length <= 1) {
                     throw new DukeException.DukeNoTimeProvided();
                 }
-                tl.addDeadline(spl[0], spl[1]);
+                return tl.addDeadline(spl[0], spl[1]);
             } catch (DukeException e) {
                 throw e;
             }
 
-            break;
+
 
         case "event":
 
@@ -84,37 +83,38 @@ public class Parser {
                 if (splo.length <= 1) {
                     throw new DukeException.DukeNoTimeProvided();
                 }
-                tl.addEvent(splo[0], splo[1]);
+                return tl.addEvent(splo[0], splo[1]);
             } catch (DukeException e) {
                 throw e;
             }
 
-            break;
+
 
         case "delete":
 
             try {
                 int toDelete = Integer.parseInt(st.nextToken());
-                tl.deleteTask(toDelete);
+                return tl.deleteTask(toDelete);
             } catch (NumberFormatException | DukeException e) {
                 throw new DukeException.DukeInvalidNumberException();
             }
 
-            break;
+
 
         case "find":
 
             try {
-                tl.findEvent(st.nextToken(""));
+                return tl.findEvent(st.nextToken(""));
             } catch (NoSuchElementException e) {
                 throw new DukeException.DukeNoTaskGivenException();
             }
 
-            break;
+
 
         case "bye":
 
-            break;
+            return Ui.printBye();
+
 
         default:
             throw new DukeException.DukeInvalidCommandException();

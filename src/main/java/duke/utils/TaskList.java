@@ -41,14 +41,14 @@ public class TaskList {
      * @param desc Description of ToDo
      * @throws DukeException.DukeNoTaskGivenException when no description is provided
      */
-    public void addToDo(String desc) throws DukeException.DukeNoTaskGivenException {
+    public String addToDo(String desc) throws DukeException.DukeNoTaskGivenException {
 
         if (desc.replace(" ", "").equals("")) {
             throw new DukeException.DukeNoTaskGivenException();
         }
         ToDo curr = new ToDo(desc, false);
         this.tasks.add(curr);
-        Ui.printTaskAddition(curr, getSize());
+        return Ui.printTaskAddition(curr, getSize());
     }
 
     /**
@@ -59,12 +59,12 @@ public class TaskList {
      * @param date date by which task has to be completed
      * @throws DukeException.DukeNoTimeProvided when an invalid date is entered
      */
-    public void addDeadline(String desc, String date) throws DukeException.DukeNoTimeProvided {
+    public String addDeadline(String desc, String date) throws DukeException.DukeNoTimeProvided {
 
         try {
             Deadline curr = new Deadline(desc, false, LocalDate.parse(date));
             this.tasks.add(curr);
-            Ui.printTaskAddition(curr, getSize());
+            return Ui.printTaskAddition(curr, getSize());
         } catch (DateTimeParseException e) {
             throw new DukeException.DukeNoTimeProvided();
         }
@@ -78,12 +78,12 @@ public class TaskList {
      * @param date Date of event
      * @throws DukeException.DukeNoTimeProvided when an invalid date is entered
      */
-    public void addEvent(String desc, String date) throws DukeException.DukeNoTimeProvided {
+    public String addEvent(String desc, String date) throws DukeException.DukeNoTimeProvided {
 
         try {
             Event curr = new Event(desc, false, LocalDate.parse(date));
             this.tasks.add(curr);
-            Ui.printTaskAddition(curr, getSize());
+            return Ui.printTaskAddition(curr, getSize());
         } catch (DateTimeParseException e) {
             throw new DukeException.DukeNoTimeProvided();
         }
@@ -97,13 +97,13 @@ public class TaskList {
      * @param toDelete index of task to be deleted
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
-    public void deleteTask(int toDelete) throws DukeException.DukeInvalidNumberException {
+    public String deleteTask(int toDelete) throws DukeException.DukeInvalidNumberException {
         if (toDelete < 0 || toDelete > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
         Task toBeRemoved = tasks.get(toDelete - 1);
         this.tasks.remove(toDelete - 1);
-        Ui.printTaskDeletion(toBeRemoved, getSize());
+        return Ui.printTaskDeletion(toBeRemoved, getSize());
     }
 
 
@@ -122,11 +122,11 @@ public class TaskList {
      * @param toMark index of task to be marked as completed
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
-    public void markTaskAsCompleted(int toMark) throws DukeException.DukeInvalidNumberException {
+    public String markTaskAsCompleted(int toMark) throws DukeException.DukeInvalidNumberException {
         if (toMark < 0 || toMark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
-        tasks.get(toMark - 1).markCompleted();
+        return tasks.get(toMark - 1).markCompleted();
     }
 
     /**
@@ -136,19 +136,19 @@ public class TaskList {
      * @param toUnmark index of task to be marked as completed
      * @throws DukeException.DukeInvalidNumberException when an invalid index is entered
      */
-    public void markTaskAsUncomplete(int toUnmark) throws DukeException.DukeInvalidNumberException {
+    public String markTaskAsUncomplete(int toUnmark) throws DukeException.DukeInvalidNumberException {
         if (toUnmark < 0 || toUnmark > tasks.size()) {
             throw new DukeException.DukeInvalidNumberException();
         }
-        tasks.get(toUnmark - 1).markNotCompleted();
+        return tasks.get(toUnmark - 1).markNotCompleted();
     }
 
 
     /**
      * Print the list of tasks
      */
-    public void printList() {
-        Ui.printList(tasks);
+    public String printList() {
+        return Ui.printList(tasks);
     }
 
     /**
@@ -167,7 +167,7 @@ public class TaskList {
      *
      * @param desc keyword to search for
      */
-    public void findEvent(String desc) throws DukeException.DukeNoTaskGivenException {
+    public String findEvent(String desc) throws DukeException.DukeNoTaskGivenException {
         ArrayList<Task> matches = new ArrayList<>();
 
         if (desc.replace(" ", "").equals("")){
@@ -180,7 +180,7 @@ public class TaskList {
             }
         }
 
-        Ui.printSearchList(matches);
+        return Ui.printSearchList(matches);
     }
 
 

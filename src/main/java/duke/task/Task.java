@@ -33,18 +33,18 @@ public abstract class Task implements Serializable {
      * Mark this instance of task
      * as completed
      */
-    public void markCompleted() {
+    public String markCompleted() {
         this.isFinished = true;
-        Ui.printMarkCompletion(this);
+        return Ui.printMarkCompletion(this);
     }
 
     /**
      * Mark this instance of task
      * as not completed
      */
-    public void markNotCompleted() {
+    public String markNotCompleted() {
         this.isFinished = false;
-        Ui.printMarkUncompletion(this);
+        return Ui.printMarkUncompletion(this);
     }
 
     /**
