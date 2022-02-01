@@ -4,7 +4,6 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.task.TaskList;
-import duke.ui.MainWindow;
 import duke.ui.Ui;
 
 import javafx.application.Application;
@@ -18,7 +17,6 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     /** Global task list for all operations. */
     private TaskList taskList;
-    private MainWindow mainWindowController;
 
     @Override
     public void init() throws Exception {
@@ -52,7 +50,7 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         // Hand off to UI to build stage
         try {
             Ui.getInstance().buildStage(primaryStage, this::processCommand);
