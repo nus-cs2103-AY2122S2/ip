@@ -5,8 +5,14 @@ import heylo.tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * Drives the Heylo program.
+ */
 public class Main {
-    public static void main(String[] args) {
+    /**
+     * Loads previously saved tasks, greets the user and accepts commands to run.
+     */
+    public static void main() {
         Scanner sc = new Scanner(System.in);
 
         Task.getSavedTasks();
@@ -19,6 +25,9 @@ public class Main {
         }
     }
 
+    /**
+     * Greets the user with a stylized logo.
+     */
     public static void greet() {
         String logo =
                 " _   _                  _\n" +

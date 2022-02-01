@@ -7,11 +7,18 @@ import heylo.tasks.Event;
 import heylo.tasks.Task;
 import heylo.tasks.Todo;
 
+/**
+ * Represents a commands input by the user in the command line.
+ */
 public class Command {
     private String command;
     private String argument;
     private String extraInfo;
 
+    /**
+     * Parses the command input by the user.
+     * @param input String input in the command line
+     */
     public Command(String input) {
         String[] inputArgs = input.trim().split(" ", 2);
         String[] extraArgs = input.trim().split("/", 2);
@@ -27,6 +34,10 @@ public class Command {
         }
     }
 
+    /**
+     * Runs relevant function based on parsed command
+     * @param sc Scanner used for command input for being closed on exit
+     */
     public void run(Scanner sc) {
         if (command.equals("")) {
             return;
