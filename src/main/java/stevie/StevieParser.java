@@ -1,6 +1,12 @@
 package stevie;
 
-import stevie.command.*;
+import stevie.command.AddCommand;
+import stevie.command.Command;
+import stevie.command.DeleteCommand;
+import stevie.command.ExitCommand;
+import stevie.command.FindCommand;
+import stevie.command.ListCommand;
+import stevie.command.MarkCommand;
 import stevie.exception.StevieException;
 import stevie.task.TaskCreator;
 import stevie.task.TaskType;

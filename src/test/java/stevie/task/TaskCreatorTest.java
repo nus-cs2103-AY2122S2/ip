@@ -18,7 +18,7 @@ class TaskCreatorTest {
             assertEquals(new EventTask("cs2103 lecture", date).toString(),
                     TaskCreator.create(TaskType.Event, false, "cs2103 lecture", date).toString());
         } catch (TaskException | ParseException ex) {
-
+            // Should not receive any exceptions
         }
     }
 
