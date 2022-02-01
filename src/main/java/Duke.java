@@ -38,6 +38,7 @@ public class Duke {
                 Task currentTask;
                 String name;
                 String date;
+                String time;
                 int taskNumber;
 
                 System.out.println(space + line);
@@ -82,8 +83,33 @@ public class Duke {
                         }
                     }
 
+                    // get time of task
+                    System.out.println(space + "Please input the time of the task in the format: HHMM");
+                    System.out.println(space + line);
+                    time = sc.nextLine();
+
+                    if (time.isBlank()) {
+                        System.out.println(space + "Time of the task cannot be blank!");
+                        System.out.println(space + line);
+                        break;
+                    }
+
+                    // checks for time length and date validity
+                    if (time.length() != 4) {
+                        System.out.println(space + "Invalid time format!");
+                        System.out.println(space + line);
+                        break;
+                    } else {
+                        TimeManager timeManager = new TimeManager(time);
+                        if (!timeManager.isTimeValid()) {
+                            System.out.println(space + "Invalid time!");
+                            System.out.println(space + line);
+                            break;
+                        }
+                    }
+
                     // create new deadline task
-                    currentTask = new Deadline(name, date);
+                    currentTask = new Deadline(name, date, time);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
@@ -109,7 +135,7 @@ public class Duke {
                     // get date of task
                     System.out.println(space + "Please input the date of the event");
                     System.out.println(space + line);
-                    date = sc.next();
+                    date = sc.nextLine();
 
                     if (date.isBlank()) {
                         System.out.println(space + "Date of the event cannot be blank!");
@@ -131,8 +157,33 @@ public class Duke {
                         }
                     }
 
+                    // get time of task
+                    System.out.println(space + "Please input the time of the task in the format: HHMM");
+                    System.out.println(space + line);
+                    time = sc.nextLine();
+
+                    if (time.isBlank()) {
+                        System.out.println(space + "Time of the task cannot be blank!");
+                        System.out.println(space + line);
+                        break;
+                    }
+
+                    // checks for time length and date validity
+                    if (time.length() != 4) {
+                        System.out.println(space + "Invalid time format!");
+                        System.out.println(space + line);
+                        break;
+                    } else {
+                        TimeManager timeManager = new TimeManager(time);
+                        if (!timeManager.isTimeValid()) {
+                            System.out.println(space + "Invalid time!");
+                            System.out.println(space + line);
+                            break;
+                        }
+                    }
+
                     // create new deadline task
-                    currentTask = new Event(name, date);
+                    currentTask = new Event(name, date, time);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
