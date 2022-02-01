@@ -61,7 +61,6 @@ public class Storage {
     }
 
     /**
-     *
      * Saves the list of Tasks locally in the relative path.
      *
      * @param taskList The list of tasks.

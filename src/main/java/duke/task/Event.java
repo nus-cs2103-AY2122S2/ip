@@ -21,7 +21,7 @@ public class Event extends Task {
      */
     public Event(String taskName, String at) throws DukeException {
         super(taskName);
-        boolean isCorrectFormat = formatChecker(at);
+        boolean isCorrectFormat = checkFormat(at);
         if (isCorrectFormat) {
             try {
                 this.date = LocalDate.parse(at);
@@ -51,7 +51,7 @@ public class Event extends Task {
      * @param date String representation of the date, in yyyy-mm-dd format.
      * @return A boolean depending on whether the String follow the correct format.
      */
-    public static boolean formatChecker(String date) {
+    public static boolean checkFormat(String date) {
         if (date.length() != 10) {
             return false;
         } else if (date.charAt(4) != '-' || date.charAt(7) != '-') {

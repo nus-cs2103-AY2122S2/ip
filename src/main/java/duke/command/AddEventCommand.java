@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.manager.Storage;
 import duke.manager.TaskList;
-import duke.manager.Ui;
 import duke.task.Event;
 
 /**
@@ -29,22 +28,23 @@ public class AddEventCommand extends Command {
      * Executes the command by adding an Event task into the TaskList.
      *
      * @param taskList A TaskList that stores the tasks.
-     * @param ui An Ui object to handle user interaction.
      * @param storage A Storage object to handle saving of data.
+     * @return A String which is Duke's response.
      * @throws DukeException If there is an issue saving the tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         Event event = new Event(task, at);
         taskList.add(event);
-        ui.print("Got it. I've added this task:");
-        ui.print(event.toString());
-        ui.print("Now you have " + taskList.numOfTasks() + " tasks in the list.");
+        String response = "Got it. I've added this task:" + "\n";
+        response += event.toString() + "\n";
+        response += "Now you have " + taskList.numOfTasks() + " tasks in the list." + "\n";
         try {
             storage.save(taskList);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
+        return response;
     }
 
     /**
