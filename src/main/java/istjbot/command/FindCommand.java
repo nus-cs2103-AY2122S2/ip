@@ -19,11 +19,14 @@ public class FindCommand extends Command {
         String[] commandInfo = this.getFullCommand().split(" ");
         StringBuilder keyword = new StringBuilder();
 
+        // Exception handling
         if (commandInfo.length == 1) {
             throw new BotException("As an IstjBot, I cannot find tasks with no keyword.");
         }
 
         for (int i = 1; i < commandInfo.length; i++) {
+
+            // For proper keyword spacing
             if (i == commandInfo.length - 1) {
                 keyword.append(commandInfo[i]);
             } else {
