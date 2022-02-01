@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -59,7 +60,12 @@ public class Duke {
         new Duke("./src/main/data/data.txt", "./src/main/data").run();
     }
 
-    public String getResponse(String input) {
-        return "Duke Heard: " + input;
+    public String getResponse(String input) throws DukeException, IOException {
+        try {
+            String output = parser.guiTakeInput(input, taskList);
+            return output;
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 }
