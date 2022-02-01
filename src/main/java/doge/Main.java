@@ -1,7 +1,9 @@
 package doge;
 
+import java.io.File;
 import java.io.IOException;
 
+import doge.Doge;
 import doge.view.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(new File("./src/main/resource/view/MainWindow.fxml").toURI().toURL());
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

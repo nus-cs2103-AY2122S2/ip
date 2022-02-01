@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for doge.view.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Doge doge;
-    private Image userImg = new Image(new File("./src/main/resources/images/user.png").toURI().toString());
-    private Image dogeImg = new Image(new File("./src/main/resources/images/doge.jpg").toURI().toString());
+    private Image userImg = new Image(new File("./src/main/resource/images/user.png").toURI().toString());
+    private Image dogeImg = new Image(new File("./src/main/resource/images/doge.jpg").toURI().toString());
 
     @FXML
     public void initialize() {
