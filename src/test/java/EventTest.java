@@ -1,5 +1,3 @@
-package duke.junit;
-
 import duke.exception.DukeException;
 import duke.tasks.Event;
 import org.junit.jupiter.api.Test;

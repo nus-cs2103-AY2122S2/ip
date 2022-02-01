@@ -1,5 +1,3 @@
-package duke.junit;
-
 import duke.commands.AddEventCommand;
 import duke.commands.AddTodoCommand;
 

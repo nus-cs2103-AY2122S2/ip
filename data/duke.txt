@@ -1,1 +1,2 @@
-[T][ ] sell eggs
+[T][X] sell eggs
+[T][ ] sell clothes
