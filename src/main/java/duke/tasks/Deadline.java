@@ -78,7 +78,7 @@ public class Deadline extends Task {
             return false;
         }
 
-        @SuppressWarnings("Unchecked")
+        @SuppressWarnings("unchecked")
         Deadline deadline = (Deadline) o;
 
         if (deadline.taskName.equals(this.taskName)) {
