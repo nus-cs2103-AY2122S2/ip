@@ -14,12 +14,15 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
 
+
     /**
      * Constructor for the Chatbot.
+     *
+     * @param filePath the filepath for the data file
      */
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
