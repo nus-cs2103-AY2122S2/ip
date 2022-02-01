@@ -18,6 +18,7 @@ public class Duke {
 
     /**
      * Creates a Duke object that initializes all the necessary components for the task manager program.
+     * 
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
     public Duke(String filePath) {

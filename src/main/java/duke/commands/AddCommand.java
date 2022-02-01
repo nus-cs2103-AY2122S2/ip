@@ -22,6 +22,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates new AddCommand object that receives user input.
+     * 
      * @param fullCommand fullCommand holds contents of the task to be added.
      */
     public AddCommand(String fullCommand) {
@@ -30,16 +31,16 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command.
+     * 
      * @return Output message for GUI.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         String[] taskArr = null;
         String type = "";
-        String result = "Got it. I've added this task:\n";
         String textToAdd = "";
         Task task = null;
-        String response = "";
+        String response = "Got it. I've added this task:\n";
 
         try {
             taskArr = this.fullCommand.split(" ", 2);

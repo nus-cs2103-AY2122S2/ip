@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Creates an Event task with its description and date of event.
+     * 
      * @param description description of event task.
      * @param date date of event.
      */
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Gets the date of event of this task.
+     * 
      * @return Returns the date of event of this task.
      */
     public LocalDate getDate() {

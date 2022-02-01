@@ -20,6 +20,7 @@ public class SearchCommand extends Command {
 
     /**
      * Creates SearchCommand object with user input keyword.
+     * 
      * @param args args is the keyword that user specified.
      */
     public SearchCommand(String args) {

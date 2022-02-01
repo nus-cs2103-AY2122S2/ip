@@ -21,6 +21,7 @@ public class ToggleCommand extends Command {
 
     /**
      * Creates new ToggleCommand object that receives user input.
+     * 
      * @param args args is used to check for user input.
      * @param isMark isMark indicates if a user has done the task.
      */

@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates new DeleteCommand object that receives the index by user.
+     * 
      * @param args args holds the task number to be deleted.
      */
     public DeleteCommand(String args) {
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command.
+     * 
      * @return Output message for GUI.
      */
     @Override

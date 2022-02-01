@@ -9,9 +9,17 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Finds for tasks based on keywords
+ */
 public class FindCommand extends Command {
     private String args;
 
+    /**
+     * Creates a FindCommand object.
+     * 
+     * @param args args is the keywords to use for finding tasks.
+     */
     public FindCommand(String args) {
         this.args = args;
     }

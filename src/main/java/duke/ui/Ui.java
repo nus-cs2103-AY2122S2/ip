@@ -26,6 +26,7 @@ public class Ui {
 
     /**
      * Displays any feedback to the user.
+     * 
      * @param output output is provided by functions that want to display text to the user.
      */
     public void output(String output) {
@@ -52,6 +53,7 @@ public class Ui {
 
     /**
      * Takes in user input and cleans up.
+     * 
      * @return Returns the trimmed (no whitespaces around) command for command processing.
      */
     public String readCommand() {
@@ -62,6 +64,7 @@ public class Ui {
 
     /**
      * Shows the error feedback to the user.
+     * 
      * @param errorMsg errorMsg is error feedback to be shown to user.
      */
     public void showGenericError(String errorMsg) {

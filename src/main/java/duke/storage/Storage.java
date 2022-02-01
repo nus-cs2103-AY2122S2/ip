@@ -26,6 +26,7 @@ public class Storage {
     /**
      * Creates a Storage object that allows program to perform storage
      * reads and writes throughout lifetime of program.
+     * 
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
     public Storage(String filePath) {
@@ -34,6 +35,7 @@ public class Storage {
 
     /**
      * Loads tasks from local disk file into program tasks list.
+     * 
      * @return List of tasks.
      * @throws IOException If error reading from local disk text file.
      */
@@ -86,6 +88,7 @@ public class Storage {
 
     /**
      * Writes to local disk text file.
+     * 
      * @param taskString taskString is the task to be written.
      * @throws IOException If error writing to local disk text file.
      */
@@ -99,6 +102,7 @@ public class Storage {
 
     /**
      * Writes to local disk text file. Used for updating and deleting task.
+     * 
      * @param taskString taskString is the task to be written.
      * @param index index is the task number of this transaction.
      * @param isDelete isDelete is an indicator of updating or deleting of task.

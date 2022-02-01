@@ -62,6 +62,7 @@ public class DialogBox extends HBox {
 
     /**
      * Generates a DialogBox to be displayed.
+     * 
      * @param text text is the feedback to display to user.
      * @param image image is the user's image.
      * @return Returns a DialogBox with text and image embedded.
@@ -82,6 +83,7 @@ public class DialogBox extends HBox {
 
     /**
      * Generates a DialogBox to be displayed.
+     * 
      * @param text text is the feedback to display to user.
      * @param image image is the user's image.
      * @return Returns a DialogBox with text and image embedded.

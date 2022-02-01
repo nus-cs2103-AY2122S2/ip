@@ -19,6 +19,7 @@ public class Parser {
 
     /**
      * Creates a new Parser object to be used throughout the lifetime of the program.
+     * 
      * @param fullCommand fullCommand is the entire string of the user input.
      */
     public Parser(String fullCommand) {
@@ -27,6 +28,7 @@ public class Parser {
 
     /**
      * Parses or processes commands given by user input. Also, processing the arguments if given.
+     * 
      * @return The individual command that the user has input.
      * @throws DukeException If the command is not known to Abby.
      */

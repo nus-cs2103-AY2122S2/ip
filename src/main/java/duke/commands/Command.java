@@ -10,6 +10,7 @@ import duke.task.TaskList;
 public abstract class Command {
     /**
      * Executes the individual command.
+     * 
      * @param taskList taskList holds the list of tasks and its Create, Retrieve, Update, Delete functions.
      * @param storage storage handles storage reads and writes.
      * @return Output message for GUI.
@@ -19,6 +20,7 @@ public abstract class Command {
 
     /**
      * Notifies main class when user wants to exit the program.
+     * 
      * @return Returns false always until exit command is run.
      */
     public boolean isExit() {
