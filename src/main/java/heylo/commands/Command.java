@@ -18,11 +18,11 @@ public class Command {
         this.command = inputArgs[0];
         if (inputArgs.length > 1) {
             this.argument = inputArgs[1];
-        }
-        if (extraArgs.length > 1) {
-            this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/"));
-            if (extraArgs[1].trim().split(" ", 2).length > 1) {
-                this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
+            if (extraArgs.length > 1 && extraArgs[0].length() > 0) {
+                this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/"));
+                if (extraArgs[1].trim().split(" ", 2).length > 1) {
+                    this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
+                }
             }
         }
     }
@@ -76,6 +76,14 @@ public class Command {
                 break;
             }
             Task.removeFromList(Integer.parseInt(argument) - 1);
+            break;
+        case "find":
+            if (argument == null) {
+                System.out.println(" Please enter what you want to look for as well!");
+                System.out.println(" Command format: find required-word(s)");
+                break;
+            }
+            Task.findInList(argument);
             break;
         default:
             System.out.println(" Sorry, I don't understand what that means.");
