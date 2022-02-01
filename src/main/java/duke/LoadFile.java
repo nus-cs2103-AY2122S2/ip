@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.io.File;
 
@@ -44,6 +45,8 @@ public class LoadFile {
                     list.add(task);
 
                 }
+
+                Collections.reverse(list);
             } catch (IOException e) {
                 System.out.println("Oops, I wasn't able to load the previously saved list. :(");
             }

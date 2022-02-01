@@ -128,6 +128,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes a task from the list.
+     * 
+     * @param input
+     * @throws DukeException
+     */
     protected static void delete(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
@@ -150,6 +156,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * To process the input string and separate the description and date (if applicable).
+     * @param s
+     * @return a string array [description, date] where date="" if not applicable.
+     * @throws DukeException
+     */
     private static String[] stripDescription(String s) throws DukeException {
 
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(s.split(" ")));
