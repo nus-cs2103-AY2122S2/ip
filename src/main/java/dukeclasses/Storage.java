@@ -118,7 +118,7 @@ public class Storage {
 
         for (int i = 0; i < dataArrList.size(); i++) {
             updatedFileContents = updatedFileContents.concat(
-                String.format("    %s\n", dataArrList.get(i).identify()));
+                String.format("    %s", dataArrList.get(i).identify()));
         }
 
         try {
@@ -140,7 +140,7 @@ public class Storage {
         File file = new File(filePath);
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(String.format("    %s\n", task.identify()));
+            fw.write(String.format("    %s", task.identify()));
             fw.close();
         } catch (IOException errorMessage) {
             throw new DukeException();
