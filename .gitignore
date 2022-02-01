@@ -13,8 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-uiHandler-test/ACTUAL.txt
-text-uiHandler-test/EXPECTED-UNIX.TXT
+/text-inputResponder-test/ACTUAL.txt
+text-inputResponder-test/EXPECTED-UNIX.TXT
 
 # class files
 *.class

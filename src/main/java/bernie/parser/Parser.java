@@ -131,7 +131,7 @@ public class Parser {
         int taskIndex = Integer.parseInt(parsedArr[1]) - 1;
         if (action.equals("mark")) {
             tasks.getTask(taskIndex).checkMark();
-        } else if (action.equals("unmarked")) {
+        } else if (action.equals("unmark")) {
             tasks.getTask(taskIndex).checkUnmark();
         }
     }

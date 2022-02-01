@@ -87,13 +87,16 @@ public class TaskList {
     }
 
     /**
-     * Prints out every item contained in the TaskList
+     * Returns a String of every item contained in the TaskList
+     * @return String, the list of tasks
      */
-    public void listTasks() {
+    public String listTasks() {
+        StringBuilder s = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            System.out.printf("%d. %s\n", i + 1, currentTask);
+            s.append(String.format("%d. %s\n", i + 1, currentTask));
         }
+        return s.toString();
     }
 
     /**
@@ -137,21 +140,26 @@ public class TaskList {
     }
 
     /**
-     * Finds all tasks that have description containing the input given and prints them out
+     * Finds all tasks that have description containing the input given and returns the
+     * resulting message
      * @param descriptionToFind String, user input
+     * @return String, the message
      */
-    public void findTasks(String descriptionToFind) {
+    public String findTasks(String descriptionToFind) {
+        StringBuilder s = new StringBuilder();
         int count = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String taskDescription = task.getDescription();
             if (taskDescription.contains(descriptionToFind)) {
                 count++;
-                System.out.printf("%d. %s\n", i + 1, task);
+                s.append(String.format("%d. %s\n", i + 1, task));
             }
         }
         if (count == 0) {
-            System.out.println("Nothing!");
+            return s.append("Nothing!")
+                    .toString();
         }
+        return s.toString();
     }
 }

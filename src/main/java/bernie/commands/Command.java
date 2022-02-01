@@ -3,7 +3,7 @@ package bernie.commands;
 import bernie.parser.Parser;
 import bernie.storage.Storage;
 import bernie.tasks.TaskList;
-import bernie.ui.UiHandler;
+import bernie.ui.InputResponder;
 
 /**
  * Command is the abstract class. Any subclass of Command is created in the CommandHandler
@@ -12,7 +12,7 @@ import bernie.ui.UiHandler;
  */
 public abstract class Command {
     private final TaskList tasks;
-    private final UiHandler uiHandler;
+    private final InputResponder inputResponder;
     private final Storage storage;
     private final Parser parser;
     private final String input;
@@ -20,28 +20,28 @@ public abstract class Command {
     /**
      * Constructs a Command Class
      * @param tasks TaskList, contains all our Task we create
-     * @param uiHandler UiHandler, responsible for printing out messages to the user for any action done
+     * @param inputResponder InputResponder, responsible for printing out messages to the user for any action done
      * @param storage Storage, responsible for saving and loading of tasks into a text file
      * @param parser Parser, helps to parse user inputs to perform subsequent actions
      * @param input String, user input into the program
      */
-    public Command(TaskList tasks, UiHandler uiHandler, Storage storage, Parser parser, String input) {
+    public Command(TaskList tasks, InputResponder inputResponder, Storage storage, Parser parser, String input) {
         this.tasks = tasks;
-        this.uiHandler = uiHandler;
+        this.inputResponder = inputResponder;
         this.storage = storage;
         this.parser = parser;
         this.input = input;
     }
 
-    /** Executes an action */
-    public abstract void execute();
+    /** Executes an action and returns the resulting message */
+    public abstract String execute();
 
     TaskList getTasks() {
         return tasks;
     }
 
-    UiHandler getUiHandler() {
-        return uiHandler;
+    InputResponder getInputResponder() {
+        return inputResponder;
     }
 
     Storage getStorage() {

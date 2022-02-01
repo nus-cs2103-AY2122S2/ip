@@ -14,7 +14,6 @@ import bernie.tasks.TaskList;
  * Storage class handles the loading and saving of tasks in the file
  */
 public class Storage {
-    private static final String LINE_BREAK = "___________________________________________________________";
     private String root = System.getProperty("user.dir");
     private File tasksFile;
     private File dataDir;
@@ -33,11 +32,13 @@ public class Storage {
     /**
      * Loads the data when Bernie starts up if it exists and reads. If doesn't
      * exist, creates the required files
+     * @return String, the resulting message
      */
-    public void loadTasks() {
+    public String loadTasks() {
+        StringBuilder s = new StringBuilder();
         try {
             if (tasksFile.exists() && dataDir.exists()) {
-                System.out.println("On the list:");
+                s.append("On the list:\n");
                 FileReader fileReader = new FileReader(tasksFile);
                 BufferedReader reader = new BufferedReader(fileReader);
                 while (true) {
@@ -45,18 +46,18 @@ public class Storage {
                     if (line == null) {
                         break;
                     }
-                    System.out.println(line);
+                    s.append(line + "\n");
                 }
                 reader.close();
-                System.out.println(LINE_BREAK);
+                return s.toString();
             } else {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
+                return "Didn't find any existing files, created one for you!";
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println(LINE_BREAK);
+            return e.getMessage();
         }
     }
 
@@ -65,20 +66,22 @@ public class Storage {
      * saving the tasks with the save function. If File doesn't exist,
      * the required files will be created before save.
      * @param tasks TaskList, takes in the current tasks
+     * @return String, the resulting message
      */
-    public void saveTasks(TaskList tasks) {
+    public String saveTasks(TaskList tasks) {
         try {
             if (dataDir.exists() && tasksFile.exists()) {
                 save(tasks);
+                return "Successfully saved current tasks.";
             } else {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
                 save(tasks);
+                return "Successfully saved current tasks.";
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println(LINE_BREAK);
+            return e.getMessage();
         }
     }
 
@@ -87,6 +90,7 @@ public class Storage {
      * delete or add by writing the file. The file is saved to ./data/Bernie.txt
      * @params tasks TaskList, takes in the current tasks
      * @throws IOException for any IO errors
+     * @return String, the resulting message
      */
     void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(tasksFile);
