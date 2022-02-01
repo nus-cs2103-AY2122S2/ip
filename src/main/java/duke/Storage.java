@@ -19,7 +19,7 @@ public class Storage {
     Storage(String filePath) {
         this.filePath = filePath;
         File data = new File(filePath);
-        data.getParentFile().mkdirs(); //make preceding directories, if any are not found
+        data.getParentFile().mkdirs();
 
         tasks = new ArrayList<>();
         try {

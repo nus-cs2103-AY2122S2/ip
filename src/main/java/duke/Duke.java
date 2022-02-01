@@ -61,6 +61,10 @@ public class Duke {
                         ui.showCommandMessage(command, tasks);
                         System.out.println(t);
                         break;
+                    case "find":
+                        ui.showCommandMessage(command, tasks);
+                        System.out.println(tasks.find(input));
+                        break;
                     case "deadline":
                         String datetime = input.replaceAll(".* by ", "");
                         input = input.replaceAll(" by .*", "");
