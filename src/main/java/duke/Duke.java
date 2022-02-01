@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -25,7 +24,6 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        parser = new Parser();
         storage = new Storage("Data/tasks.txt");
         try {
             taskList = new TaskList(storage.load());
@@ -34,6 +32,7 @@ public class Duke {
             taskList = new TaskList();
         } finally {
             tasks = taskList.getTasks();
+            parser = new Parser(taskList);
         }
     };
 
@@ -63,46 +62,33 @@ public class Duke {
     public String handleCommand(String command) {
         try {
             String str = parser.parse(command);
-            if (str.equals("bye")) {
+            switch (str) {
+            case "bye":
                 return ui.getByeMessage();
-            } else if (str.equals("list")) {
-                String list = "";
-                for (Task t : tasks) {
-                    list = list + t + "\n";
-                }
-                return list;
-            } else if (str.equals("find")) {
-                String s = "";
-                for (Task t : taskList.getTasks()) {
-                    if (t.toString().contains(str.substring(5))) {
-                        s = s + t;
-                    }
-                }
-                return s;
-            } else {
+            case "list":
+                return taskList.printList();
+            default:
                 String[] temp = str.split(" ");
                 if (temp[0].equals("unmark") || temp[0].equals("mark") || temp[0].equals("delete")) {
                     int taskNumber = Integer.parseInt(temp[1]);
-                    if (taskList.getTasks().size() < taskNumber) {
-                        return "Invalid Task number!";
-                    } else {
-                        if (temp[0].equals("mark")) {
-                            Task currTask = tasks.get(taskNumber - 1);
-                            currTask.setDone();
-                            storage.save(taskList);
-                            return "Nice! I've marked this task as done: \n" + "  " + currTask;
-                        } else if (temp[0].equals("delete")) {
-                            int index = Integer.parseInt(str.substring(7));
-                            Task task = tasks.get(index - 1);
-                            tasks.remove(index - 1);
-                            storage.save(taskList);
-                            return "Okay, I have deleted " + task;
-                        } else {
-                            Task currTask = tasks.get(taskNumber - 1);
-                            currTask.setNotDone();
-                            storage.save(taskList);
-                            return "OK, I've marked this task as not done yet:: \n" + "  " + currTask;
-                        }
+                    switch (temp[0]) {
+                    case "mark":
+                        Task currTask = tasks.get(taskNumber - 1);
+                        currTask.setDone();
+                        storage.save(taskList);
+                        return "Nice! I've marked this task as done: \n" + "  " + currTask;
+                    case "unmark":
+                        Task t = tasks.get(taskNumber - 1);
+                        t.setNotDone();
+                        storage.save(taskList);
+                        return "OK, I've marked this task as not done yet:: \n" + "  " + t;
+                    case "delete":
+                        Task task = tasks.get(taskNumber - 1);
+                        tasks.remove(taskNumber - 1);
+                        storage.save(taskList);
+                        return "Okay, I have deleted " + task;
+                    default:
+                        return "Invallid command!";
                     }
                 } else {
                     switch (temp[0]) {
@@ -121,6 +107,8 @@ public class Duke {
                         taskList.addTask(deadline);
                         storage.save(taskList);
                         return "Added: " + deadline;
+                    case "find":
+                        return taskList.find(str.substring(5));
                     default:
                     }
                 }
@@ -129,15 +117,6 @@ public class Duke {
             return e.getMessage();
         }
         return command;
-    }
-    /**
-     * Runs duke.Duke the chatbot and interacts with the user based on user input.
-     *
-     * @throws DukeException
-     * @throws IOException
-     */
-    public String getResponse(String input) {
-        return input;
     }
 }
 

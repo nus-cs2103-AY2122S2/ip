@@ -74,4 +74,31 @@ public class TaskList {
     public void addTask(Task t) {
         tasks.add(t);
     }
+
+    /**
+     * Prints the current list of tasks.
+     * @return A string containing the list of tasks.
+     */
+    public String printList() {
+        String list = "";
+        for (Task task : tasks) {
+            list = list + task + "\n";
+        }
+        return list;
+    }
+
+    /**
+     * Finds all the tasks containing the keyword(s) from user input.
+     * @param str User input
+     * @return A string that lists all the tasks containing the keyword(s).
+     */
+    public String find(String str) {
+        String list = "";
+        for (Task t : tasks) {
+            if (t.toString().contains(str.substring(5))) {
+                list = list + t;
+            }
+        }
+        return list;
+    }
 }

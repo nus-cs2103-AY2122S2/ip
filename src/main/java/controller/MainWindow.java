@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (response.equals("bye")) {
+        if (input.equals("bye")) {
             Timer tmr = new Timer();
             tmr.schedule(new TimerTask() {
                 @Override

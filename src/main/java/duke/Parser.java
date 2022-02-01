@@ -1,7 +1,12 @@
 package duke;
 
+import tasks.TaskList;
+
 public class Parser {
-    public Parser() {};
+    private TaskList taskList;
+    public Parser(TaskList tList) {
+        taskList = tList;
+    };
 
     /**
      * Parses the input from user and checks if there are any invalid commands or format.
@@ -11,12 +16,13 @@ public class Parser {
      * @throws MissingDescriptionException If a command is missing required information.
      * @throws DukeException If the command or format is invalid.
      */
-    public String parse(String str) throws MissingDescriptionException, DukeException {
+    public String parse(String str) throws MissingDescriptionException, DukeException, InvalidTaskException {
         String[] strArr = str.split(" ");
         String firstWord = strArr[0];
         if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")
                 || firstWord.equals("list") || firstWord.equals("delete") || firstWord.equals("unmark")
                 || firstWord.equals("mark") || firstWord.equals("find") || firstWord.equals("bye")) {
+
             if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo"))
                     && strArr.length == 1) {
                 throw new MissingDescriptionException();
@@ -27,8 +33,11 @@ public class Parser {
                 } else {
                     try {
                         int index = Integer.parseInt(strArr[1]);
-                    } catch (NumberFormatException e) {
-                        throw new DukeException();
+                        if (taskList.getTasks().size() < index) {
+                            throw new InvalidTaskException();
+                        }
+                    } catch (Exception e) {
+                        throw e;
                     }
                 }
             }
