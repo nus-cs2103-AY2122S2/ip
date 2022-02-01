@@ -2,20 +2,23 @@ package main.tasks;
 
 import main.enums.TaskType;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    protected String dueDate;
+    protected LocalDateTime dueDate;
 
     public Deadline(String description, String dueDate) {
         super(description, TaskType.DEADLINE);
-        this.dueDate = dueDate;
+        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
     }
 
     public Deadline(String description, String dueDate, boolean isDone) {
         super(description, TaskType.DEADLINE, isDone);
-        this.dueDate = dueDate;
+        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
     }
 
-    public String getDueDate() {
+    public LocalDateTime getDueDate() {
         return this.dueDate;
     }
 
@@ -26,6 +29,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (by: %s)", this.getDueDate());
+        return super.toString() + String.format(" (by: %s)",
+                this.getDueDate().format(DateTimeFormatter.ofPattern("dd/MMM/yyyy HH:mm")));
     }
 }
