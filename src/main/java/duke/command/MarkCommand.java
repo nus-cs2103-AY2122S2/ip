@@ -68,11 +68,11 @@ public class MarkCommand extends Command {
         if (toMark) {
             thisTask.markAsDone();
             Storage.saveToFile(tasks);
-            return ui.taskLine(thisTask, MESSAGE_MARK);
+            return ui.getTaskLine(thisTask, MESSAGE_MARK);
         } else {
             thisTask.markAsUndone();
             Storage.saveToFile(tasks);
-            return ui.taskLine(thisTask, MESSAGE_UNMARK);
+            return ui.getTaskLine(thisTask, MESSAGE_UNMARK);
         }
     }
 
