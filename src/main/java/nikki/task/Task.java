@@ -170,7 +170,7 @@ public class Task {
             try {
                 String deadline = taskInfo[3];
                 task = new Deadline(taskName, deadline, taskStatus);
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new NikkiException("Wrong format");
             }
             break;
@@ -179,7 +179,7 @@ public class Task {
             try {
                 String eventDate = taskInfo[3];
                 task = new Event(taskName, eventDate, taskStatus);
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new NikkiException("Wrong format");
             }
             break;

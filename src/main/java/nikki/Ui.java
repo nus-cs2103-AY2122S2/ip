@@ -26,7 +26,8 @@ public class Ui {
                     + "██║░╚███║██║██║░╚██╗██║░╚██╗██║　　　 (ノノ\n"
                     + "╚═╝░░╚══╝╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝　　　彡\n";
 
-        String description = "Your Personal Assistant Chatbot that helps you keep track of the important things in life";
+        String description =
+                "Your Personal Assistant Chatbot that helps you keep track of the important things in life";
 
         System.out.println(Color.PURPLE + logo + Color.NONE);
         System.out.println(description);
@@ -76,9 +77,9 @@ public class Ui {
      */
     public void logNewTask(Task task, int taskCount) {
         say(String.format(
-                "[+] Added following duke.task:\n" +
-                        "\t%s\n" +
-                        "Now you have %d tasks in the list.",
+                "[+] Added following duke.task:\n"
+                + "\t%s\n"
+                + "Now you have %d tasks in the list.",
                 task.nameWithStatus(), taskCount));
     }
 }
