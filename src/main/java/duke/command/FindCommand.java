@@ -4,7 +4,6 @@ import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
-import duke.task.Todo;
 
 public class FindCommand extends Command {
     String findDetail;
@@ -12,9 +11,10 @@ public class FindCommand extends Command {
             "Let's try again (๑•̀ㅁ•́๑)✧\n" +
             "Type 'help' if you need to know how to use this duke.command";
 
-    public FindCommand(String findString){
+    public FindCommand(String findString) {
         findDetail = findString;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (findDetail.length() == 0) {

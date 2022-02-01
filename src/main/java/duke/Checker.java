@@ -30,7 +30,6 @@ public class Checker {
     public Checker(String input) throws DukeException {
         command = input;
 
-
         if (this.command.equals("bye")) {
             this.state = Status.BYE;
         } else if (this.command.equals("help")) {

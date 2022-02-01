@@ -22,7 +22,7 @@ public class DukeException extends Exception {
      * @return Returns the error message specified.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return message;
     }
 }

@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.ListTaskCommand;
+import duke.command.FindCommand;
+import duke.command.AddEventCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddTodoCommand;
+import duke.command.UnmarkCommand;
+import duke.command.MarkCommand;
 
 /**
  * Parses the user input and triggers commands to run the input information.

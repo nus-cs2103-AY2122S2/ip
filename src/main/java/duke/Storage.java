@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Constructor of the Storage class.
      *
-     * @param path  file name of the text file.
+     * @param path file name of the text file.
      */
     public Storage(String path) {
         fileName = path;
@@ -62,7 +62,7 @@ public class Storage {
      */
     public TaskList readFile(String filepath) throws DukeException {
         try {
-            File myObj = new File(System.getProperty("user.dir")+ "/" + filepath);
+            File myObj = new File(System.getProperty("user.dir") + "/" + filepath);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 // Process the data such that it can see if this is event or deadline or todo,
@@ -105,7 +105,7 @@ public class Storage {
         }
         // 2. Check if marked
         if (state.equals("1")) {
-            tasks.getTask(tasks.getSize()-1).setDone();
+            tasks.getTask(tasks.getSize() - 1).setDone();
         }
     }
 }

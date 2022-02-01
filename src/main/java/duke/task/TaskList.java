@@ -20,7 +20,7 @@ public class TaskList {
      *
      * @param item Task that the user would like to add (e.g. Event, Deadline, Todo).
      */
-    public void addTask(Task item){
+    public void addTask(Task item) {
         tasks.add(item);
     }
 
@@ -40,7 +40,7 @@ public class TaskList {
      * @param id Index of the the task within the task list.
      * @return Returns the task that matches the index within the task list.
      */
-    public Task getTask(int id){
+    public Task getTask(int id) {
         return tasks.get(id);
     }
 
@@ -51,13 +51,13 @@ public class TaskList {
      * @param detail Detail to be found within each task's description.
      * @return Returns a formatted output string of tasks that have their descriptions match with the user input.
      */
-    public String findTasks(String detail){
+    public String findTasks(String detail) {
         String output = "";
         int count = 0;
         for (int i = 0; i < tasks.size(); i++) {
             String description = tasks.get(i).getDescription();
             String message = tasks.get(i).getTask();
-            if (i == tasks.size() -1 && description.contains(detail)) {
+            if (i == tasks.size() - 1 && description.contains(detail)) {
                 count++;
                 output += count + ". " + message;
             } else if (description.contains(detail)) {
@@ -84,7 +84,7 @@ public class TaskList {
             } else {
                 status = status + "0";
             }
-            if (i == tasks.size()-1) {
+            if (i == tasks.size() - 1) {
                 output = output + status + " | " + message;
             } else {
                 output = output + status + " | " + message + "\n";
@@ -98,7 +98,7 @@ public class TaskList {
      *
      * @return Number of tasks in the Task List.
      */
-    public Integer getSize(){
+    public Integer getSize() {
         return tasks.size();
     }
 }

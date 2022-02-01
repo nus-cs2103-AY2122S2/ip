@@ -1,7 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DateHelper;
+import duke.DukeException;
 import duke.task.Deadline;
+import duke.Storage;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -19,8 +22,8 @@ public class AddDeadlineCommand extends Command {
      * Constructor for the addition of deadlines.
      *
      * @param input Description of the task.
-     * @param time Due date of the task.
-     * @throws DukeException
+     * @param time  Due date of the task.
+     * @throws DukeException Exception is thrown when there is no time provided
      */
     public AddDeadlineCommand(String input, String time) throws DukeException {
         description = input;
@@ -36,8 +39,8 @@ public class AddDeadlineCommand extends Command {
     /**
      * Executes the addition of deadline task into the tasklist.
      *
-     * @param tasks TaskList that is maintained in Ducky.
-     * @param ui Ui that is maintained in Ducky.
+     * @param tasks   TaskList that is maintained in Ducky.
+     * @param ui      Ui that is maintained in Ducky.
      * @param storage Storage that is maintained in Ducky.
      * @throws DukeException thrown when there is no description written.
      */

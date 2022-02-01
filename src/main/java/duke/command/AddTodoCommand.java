@@ -17,6 +17,7 @@ public class AddTodoCommand extends Command {
 
     /**
      * Constructor method for adding todos.
+     *
      * @param input Description of the todo task.
      */
     public AddTodoCommand(String input) {
@@ -26,8 +27,8 @@ public class AddTodoCommand extends Command {
     /**
      * Executes the addition of todos into the task list.
      *
-     * @param tasks TaskList that is maintained in Ducky.
-     * @param ui Ui that is maintained in Ducky.
+     * @param tasks   TaskList that is maintained in Ducky.
+     * @param ui      Ui that is maintained in Ducky.
      * @param storage Storage that is maintained in Ducky.
      * @throws DukeException Thrown when there is no description provided to the task.
      */
@@ -36,7 +37,7 @@ public class AddTodoCommand extends Command {
         if (description.length() == 0) {
             throw new DukeException(DESC_RESPONSE);
         } else {
-            System.out.println("des"+ description);
+            System.out.println("des" + description);
             Todo entry = new Todo(description);
             tasks.addTask(entry);
             String message = entry.getTask();
