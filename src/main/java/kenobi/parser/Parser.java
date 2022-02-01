@@ -16,7 +16,17 @@ import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * The parser class encapsulates the parse functionality of Kenobi.
+ */
 public class Parser {
+    /**
+     * Parses the given command to a Command object.
+     *
+     * @param str The received command.
+     * @return a Command object encapsulating the parsed command.
+     * @throws ParseException if the Parser could not parse the command
+     */
     public static Command parse(String str) throws ParseException {
         String[] cmd = str.split("\\s", 2);
         String[] fields;
@@ -56,6 +66,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a string representing a date into a LocalDate object.
+     *
+     * @param str The date string to be parsed.
+     * @return a LocalDate object representing the parsed date string.
+     * @throws ParseException if the date string could not be parsed.
+     */
     private static LocalDate parseDate(String str) throws ParseException {
         try {
             return LocalDate.parse(str);

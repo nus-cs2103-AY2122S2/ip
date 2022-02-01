@@ -13,15 +13,28 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * The Storage class encapsulates the storage functionality of Kenobi.
+ */
 public class Storage {
     boolean isDirty;
     Path savePath;
 
+    /**
+     * Constructs a new Storage with the specified save path.
+     *
+     * @param savePath The path that directs to the storage that Kenobi uses.
+     */
     public Storage(String savePath) {
         this.savePath = Path.of(savePath);
         isDirty = false;
     }
 
+    /**
+     * Loads existing tasks in savePath if exists.
+     *
+     * @return a TaskList containing the tasks from savePath or an empty TaskList if savePath doesn't exist.
+     */
     public TaskList load() {
         TaskList tasks = new TaskList();
 
@@ -44,7 +57,7 @@ public class Storage {
                 }
 
                 if (taskString[1].equals("1")) {
-                    t.done();
+                    t.markAsDone();
                 }
 
                 tasks.add(t);
@@ -59,6 +72,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given TaskList to savePath.
+     *
+     * @param tasks The TaskList to be saved.
+     */
     public void save(TaskList tasks) {
         try {
             Files.createDirectories(savePath.getParent());
