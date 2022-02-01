@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class TaskList {
     /**
      * ArrayList that can contain
-     * elements of type Task
+     * elements of type Task.
      */
     ArrayList<Task> list;
 
     /**
-     * Constructor method
+     * Constructor method.
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Adds Task item into the ArrayList
-     * @param taskItem
+     * @param taskItem Task object to be added into list.
      */
     public void addToList(Task taskItem) {
         list.add(taskItem);
@@ -31,8 +31,8 @@ public class TaskList {
 
     /**
      * Returns a String containing the tasks
-     * that are in the list
-     * @return List of tasks
+     * that are in the list.
+     * @return Returns String listing all tasks.
      */
     public String listOut() {
         String output = "";
@@ -44,8 +44,9 @@ public class TaskList {
     }
 
     /**
-     * Exports out tasks in a custom String format
-     * @return
+     * Exports out tasks in a custom String format.
+     * @return Returns customised format or tasks
+     * that is written into specified file.
      */
     public String exportOut() {
         String output = "";
@@ -59,7 +60,7 @@ public class TaskList {
      * Reads the tasks in the specified file and
      * creates them. These tasks are then added to
      * the list
-     * @param fileData
+     * @param fileData String containing contents of file.
      */
     public void importIn(String fileData) {
         if (fileData.equals("")) {
@@ -86,26 +87,24 @@ public class TaskList {
     }
     /**
      * Getter method to retrieve Item
-     * from specific position in the list
-     * @param itemNo
-     * @return Task at specified position in list
+     * from specific position in the list.
+     * @param itemNo Integer assigned to Task.
+     * @return Task at specified position in list.
      */
     public Task getTask(int itemNo) {
         return list.get(itemNo);
     }
 
     /**
-     * Getter method to retrieve size
-     * of list
-     * @return Size of list
+     * Getter method to retrieve size of list.
+     * @return Size of list.
      */
     public int getSize() {
         return list.size();
     }
 
     /**
-     * Deletes item at specified position
-     * in list
+     * Deletes item at specified position in list.
      * @param itemNo
      */
     public void deleteTask(int itemNo) {
@@ -114,8 +113,8 @@ public class TaskList {
 
     /**
      * Calls listOut() method if there are any tasks in the list.
-     * @param command
-     * @param list
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void listFeature(String command, TaskList list) {
         if (list.getSize() == 0) {
@@ -128,8 +127,8 @@ public class TaskList {
 
     /**
      * Deletes a specific task from the list
-     * @param command
-     * @param list
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void deleteFeature(String command, TaskList list) {
         try {
@@ -153,8 +152,8 @@ public class TaskList {
 
     /**
      * Marks a specific task in the list
-     * @param command
-     * @param list
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void markFeature(String command, TaskList list) {
         try {
@@ -181,9 +180,9 @@ public class TaskList {
 
     /**
      * Creates a ToDo object if the user input contains
-     * "todo" and adds it into the list
-     * @param command
-     * @param list
+     * "todo" and adds it into the list.
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void todoFeature(String command, TaskList list) {
         try {
@@ -201,8 +200,8 @@ public class TaskList {
     /**
      * Creates a Deadline object if the user input contains
      * "deadline" and adds it into the list
-     * @param command
-     * @param list
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void deadlineFeature(String command, TaskList list) {
         try {
@@ -223,9 +222,9 @@ public class TaskList {
 
     /**
      * Creates an Event object if the user input contains
-     * "event" and adds it into the list
-     * @param command
-     * @param list
+     * "event" and adds it into the list.
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void eventFeature(String command, TaskList list) {
         try {

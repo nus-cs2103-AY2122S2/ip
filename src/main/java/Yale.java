@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Yale {
     /**
      * Creates Ui, Storage, Parser
-     * Scanner and TaskList objects
+     * Scanner and TaskList objects.
      * @param args
      */
 
@@ -30,7 +30,7 @@ public class Yale {
     }
 
     /**
-     * Starts the chatbot program
+     * Starts the chatbot program.
      */
     public void run() {
         ui.welcomePrompt();
@@ -47,7 +47,7 @@ public class Yale {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         new Yale().run();
     }

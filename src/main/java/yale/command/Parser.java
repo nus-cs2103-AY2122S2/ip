@@ -4,7 +4,7 @@ import yale.task.TaskList;
 
 /**
  * Class to deal with making sense of
- * user command
+ * user command.
  */
 public class Parser {
     /**
@@ -15,9 +15,9 @@ public class Parser {
 
     /**
      * Carries out the different feature
-     * operations depending on the user input
-     * @param command
-     * @param list
+     * operations depending on the user input.
+     * @param command User input of type String.
+     * @param list List of Task objects.
      */
     public void performAction(String command, TaskList list) {
         if (command.equals("bye")) {

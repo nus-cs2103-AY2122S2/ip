@@ -9,25 +9,25 @@ import java.util.Scanner;
 
 /**
  * Class to deal with loading tasks
- * from file and saving tasks in file
+ * from file and saving tasks in file.
  */
 public class Storage {
     /**
-     * String defining the file path
+     * String defining the file path.
      */
     protected String filePath;
 
     /**
-     * Constructor method
-     * @param filePath
+     * Constructor method.
+     * @param filePath Specified file location.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Loads contents from specified file
-     * @return
+     * Loads contents from specified file.
+     * @return Contents from specified file.
      */
     public String loadFileContents() {
         try {
@@ -51,8 +51,8 @@ public class Storage {
     }
 
     /**
-     * Writes content into specified file
-     * @param textToAdd
+     * Writes content into specified file.
+     * @param textToAdd Content to be written to specified file.
      * @throws IOException
      */
     public void writeToFile(String textToAdd) throws IOException {
@@ -69,8 +69,8 @@ public class Storage {
     }
 
     /**
-     * Writes String from list into specified file
-     * @param list
+     * Writes String from list into specified file.
+     * @param list List of Task objects.
      */
     public void writeTextTo(TaskList list) {
         String file2 = this.filePath;

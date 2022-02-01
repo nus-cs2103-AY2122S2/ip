@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 /**
  * Class to deal with interactions
- * with the user
+ * with the user.
  */
 public class Ui {
 
     /**
-     * Constructor method
+     * Constructor method.
      */
     public Ui() {
     }
 
     /**
      * Prints out welcome message
-     * to user when program starts
+     * to user when program starts.
      */
     public void welcomePrompt() {
         String logo = "-----YALE-----";
@@ -26,9 +26,9 @@ public class Ui {
 
     /**
      * Method to receive input from the scanner and
-     * returns that input in a String format
-     * @param scanner
-     * @return Input
+     * returns that input in a String format.
+     * @param scanner Scanner to read user input.
+     * @return Input.
      */
     public String receiveInput(Scanner scanner) {
         System.out.println("\nEnter command below:");
@@ -37,10 +37,10 @@ public class Ui {
     }
 
     /**
-     * Method to check if user input
-     * is equal to "bye"
-     * @param input
-     * @return
+     * Returns true if user input is equal
+     * to "bye" and false otherwise.
+     * @param input User input of type String
+     * @return True if input equals "bye", false otherwise.
      */
     public boolean checkExit(String input) {
         return input.equals("bye");
