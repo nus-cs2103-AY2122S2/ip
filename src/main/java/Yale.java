@@ -28,6 +28,10 @@ public class Yale {
         parser = new Parser();
         list = new TaskList();
     }
+
+    /**
+     * Starts the chatbot program
+     */
     public void run() {
         ui.welcomePrompt();
         Scanner scanner = new Scanner(System.in);
@@ -43,6 +47,7 @@ public class Yale {
             }
         }
     }
+    
     public static void main(String[] args) {
         new Yale().run();
     }
