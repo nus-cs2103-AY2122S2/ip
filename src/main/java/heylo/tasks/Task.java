@@ -6,18 +6,14 @@ import heylo.fileHandling.FilesWriter;
 import java.util.ArrayList;
 
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static int taskCount = 0;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return this.isDone ? "[X]" : "[ ]";
     }
 
     public static void markAsDone(int index) {
@@ -136,6 +132,9 @@ public abstract class Task {
         }
     }
 
+    public String getStatusIcon() {
+        return this.isDone ? "[X]" : "[ ]";
+    }
 
     @Override
     public String toString() {
