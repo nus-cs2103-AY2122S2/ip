@@ -63,6 +63,19 @@ public class Parser {
             return command;
         }
 
+        if (firstWord.equals("find")) {
+            input = input.substring(4).trim();
+            if (input.equals("")) {
+                System.out.println("Oops, you need to mention what the keyword is :c");
+                return "";
+            }
+            if (input.contains(" ")) {
+                System.out.println("Oops, you can only search for one keyword at a time :c");
+                return "";
+            }
+            return command;
+        }
+
         return "";
     }
 }

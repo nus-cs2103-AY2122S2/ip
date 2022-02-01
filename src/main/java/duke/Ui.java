@@ -50,6 +50,9 @@ public class Ui {
         case "todo":
             System.out.println("Got it! I have noted down the following task in your list.");
             break;
+        case "find":
+            System.out.println("Here are the matching tasks in your list:");
+            break;
         case "deadline":
             System.out.println("Got it! I have noted down the following task in your list. " +
                     "\nRemember the deadline!");
