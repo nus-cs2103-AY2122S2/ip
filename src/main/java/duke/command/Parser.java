@@ -22,7 +22,7 @@ public class Parser {
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
 
     /**
-     * Parser to process the entered comments.
+     * Parses entered comments.
      *
      * @param fullCommand Entire line entered by user
      * @return Command object of what the user entered
