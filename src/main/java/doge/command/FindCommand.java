@@ -5,6 +5,8 @@ import doge.TaskList;
 import doge.Ui;
 import doge.exception.DogeException;
 
+import java.util.Locale;
+
 public class FindCommand extends Command {
     String message;
 
