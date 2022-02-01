@@ -27,7 +27,7 @@ public class Parser {
      * @throws DukeException if task cannot be found within the tasklist
      * @throws NumberFormatException if taskId is not a number.
      */
-    public void taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
+    public String taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
         try {
             int taskId = Integer.parseInt(index);
             if (!(taskId > 0 && taskId < (TaskList.getTaskSize() + 1))) {
@@ -36,14 +36,11 @@ public class Parser {
 
             switch (commandType) {
             case DELETE:
-                TaskList.deleteTask(taskId);
-                break;
+                return TaskList.deleteTask(taskId);
             case UNMARK:
-                TaskList.markTask(taskId, false);
-                break;
+                return TaskList.markTask(taskId, false);
             case MARK:
-                TaskList.markTask(taskId, true);
-                break;
+                return TaskList.markTask(taskId, true);
             default:
                 throw new DukeException("Invalid Command Type!");
             }
@@ -60,15 +57,15 @@ public class Parser {
      * @return true if the command that has been inputted equals "bye", else return false
      * @throws DukeException if the command is invalid
      */
-    public boolean parseInput(String input) throws DukeException {
+    public String parseInput(String input) throws DukeException {
         String[] inputArray = input.split(" ");
 
         // single command
         if (inputArray.length == 1) {
             if (inputArray[0].equalsIgnoreCase("list")) {
-                TaskList.listTasks();
+                return TaskList.listTasks();
             } else if (inputArray[0].equalsIgnoreCase("bye")) {
-                return true;
+                return "bye";
             } else {
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
@@ -103,43 +100,36 @@ public class Parser {
 
             switch (commandType) {
             case FIND:
-                TaskList.findTask(inputArray[1]);
-                break;
+                return TaskList.findTask(inputArray[1]);
             case DELETE:
-                taskAction(CommandType.DELETE, inputArray[1]);
-                break;
+                return taskAction(CommandType.DELETE, inputArray[1]);
             case UNMARK:
-                taskAction(CommandType.UNMARK, inputArray[1]);
-                break;
+                return taskAction(CommandType.UNMARK, inputArray[1]);
             case MARK:
-                taskAction(CommandType.MARK, inputArray[1]);
-                break;
+                return taskAction(CommandType.MARK, inputArray[1]);
             case TODO:
                 Task todo = new Todo(taskDetails);
                 if (taskDetails.equals("")) {
                     throw new DukeException("Todo command is invalid!");
                 }
-                TaskList.addTask(todo);
-                break;
+                return TaskList.addTask(todo);
             case DEADLINE:
                 if (description.equals("") || date.equals("")) {
                     throw new DukeException("Deadline command is invalid!");
                 }
                 Task deadline = new Deadline(description, date);
-                TaskList.addTask(deadline);
-                break;
+                return TaskList.addTask(deadline);
             case EVENT:
                 if (dateTime.equals("") || description.equals("")) {
                     throw new DukeException("Event command is invalid");
                 }
                 Task event = new Event(description, dateTime);
-                TaskList.addTask(event);
-                break;
+                return TaskList.addTask(event);
             default:
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
         }
 
-        return false;
+        return "";
     }
 }

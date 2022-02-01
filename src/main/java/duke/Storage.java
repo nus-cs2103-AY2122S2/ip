@@ -50,7 +50,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException exception) {
-            throw new DukeException("Duke file cannot be found!! Make sure it exists in the data folder.");
+            throw new DukeException("duke.Duke file cannot be found!! Make sure it exists in the data folder.");
         }
     }
 
@@ -127,13 +127,19 @@ public class Storage {
                     System.out.println("No tasks in file!");
                 }
             }
-
-            System.out.println("Here is the list of tasks we have saved!");
-            TaskList.listTasks(tasks);
         } catch (FileNotFoundException e) {
             throw new DukeException("File cannot be found!");
         }
 
         return tasks;
     }
+
+    public String getStorageTasks() {
+        if (tasks.size() == 0) {
+            return "No tasks in file!";
+        } else {
+            return "Here is the list of tasks we have saved!" + TaskList.listTasks(tasks);
+        }
+    }
 }
+

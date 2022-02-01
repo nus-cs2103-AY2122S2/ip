@@ -30,12 +30,12 @@ public class TaskList {
      * @param taskId id of task
      * @throws DukeException if the task cannot be found in the list
      */
-    public static void deleteTask(int taskId) throws DukeException {
+    public static String deleteTask(int taskId) throws DukeException {
         Task preview = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
         Storage.writeToDukeFile();
-        System.out.println("Otsukaresamadeshita! You have finally completed one task.\n"
-                + preview);
+        return "Otsukaresamadeshita! You have finally completed one task.\n"
+                + preview;
     }
 
     /**
@@ -44,21 +44,21 @@ public class TaskList {
      * @param mark boolean indicating whether to mark the task as done
      * @throws DukeException if the task has yet to be done
      */
-    public static void markTask(int taskId, boolean mark) throws DukeException {
+    public static String markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
         if (mark) {
             toSet.markIsDone();
             tasks.set(taskId - 1, toSet);
             Storage.writeToDukeFile();
-            System.out.println("Sugoi! I have marked this task as done!\n"
-                    + tasks.get(taskId - 1).toString());
+            return "Sugoi! I have marked this task as done!\n"
+                    + tasks.get(taskId - 1).toString();
         } else {
             if (toSet.isDone) {
                 toSet.markUndone();
                 tasks.set(taskId - 1, toSet);
                 Storage.writeToDukeFile();
-                System.out.println("Daijoubu! I have unmarked this task for you!\n"
-                        + tasks.get(taskId - 1).toString());
+                return "Daijoubu! I have unmarked this task for you!\n"
+                        + tasks.get(taskId - 1).toString();
             } else {
                 throw new DukeException("This task has yet to be done!");
             }
@@ -70,41 +70,41 @@ public class TaskList {
      * @param task task object
      * @throws DukeException if unable to add task to tasks
      */
-    public static void addTask(Task task) throws DukeException {
+    public static String addTask(Task task) throws DukeException {
         System.out.println("Added as per your request: " + task);
         tasks.add(task);
         Storage.writeToDukeFile();
-        System.out.println("You now have a total of "
-                + tasks.size() + " tasks in your list! Subarashii!");
+        return "You now have a total of "
+                + tasks.size() + " tasks in your list! Subarashii!";
     }
 
     /**
      * Method that displays the list of tasks to the console
      */
-    public static void listTasks() {
+    public static String listTasks() {
         if (tasks.size() == 0) {
-            System.out.println("Empty much!");
+            return "Empty much!";
         }
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        System.out.println(listOfTasks);
+        return listOfTasks.toString();
     }
 
     /**
      * Method that takes in a list of tasks and displays the list of tasks to the console
      * @param tasks list of tasks
      */
-    public static void listTasks(ArrayList<Task> tasks) {
+    public static String listTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            System.out.println("Empty much!");
+            return "Empty much!";
         }
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        System.out.println(listOfTasks);
+        return listOfTasks.toString();
     }
 
     /**
@@ -119,7 +119,7 @@ public class TaskList {
      * Method that takes in a keyword and prints out the list of tasks that contains the keyword
      * @param keyWord task keyword
      */
-    public static void findTask(String keyWord) {
+    public static String findTask(String keyWord) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
             String taskDescription = task.getDescription().toLowerCase(Locale.ROOT);
@@ -128,8 +128,8 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
-        System.out.println("This is what we found!");
-        listTasks(matchingTasks);
+
+        return "This is what we found! \n" + listTasks(matchingTasks);
     }
 
 

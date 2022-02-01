@@ -1,7 +1,4 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TextUi;
+package duke;
 import tasks.TaskList;
 
 public class Duke {
@@ -12,7 +9,7 @@ public class Duke {
 
 
     /**
-     * Instantiates a Duke object with a directoryPath and filePath of the storageFile
+     * Instantiates a duke.Duke object with a directoryPath and filePath of the storageFile
      * @param directoryPath directoryPath to storage file
      * @param filePath filePath to storage file
      */
@@ -30,26 +27,15 @@ public class Duke {
     }
 
     /**
-     * Method that runs the Duke Program
-     * @throws duke.DukeException if there is an error that occurs while parsing the input
+     * Method that runs the duke.Duke Program
      */
-    public void run() throws DukeException {
-        ui.greeting();
-        boolean isExit = false;
-
-        while (!isExit) {
-            isExit = parser.parseInput(ui.readCommand());
-            ui.showDivider();
+    public String getResponse(String input) {
+        try {
+            return parser.parseInput(input);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-
-        ui.sayBye();
-        ui.closeScanner();
     }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke("./data", "./data/duke.txt").run();
-    }
-
 }
 
 

@@ -27,7 +27,7 @@ public class EventTest {
 
     @Test
     public void testWrongEventString() {
-        String eventExpected = "The date format parsed is incorrect! It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!";
+        String eventExpected = "The date format parsed is incorrect!It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!";
         String eventActual = "";
 
         try {
