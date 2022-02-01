@@ -13,6 +13,10 @@ import main.DukeException;
 
 import java.util.Arrays;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     public Command parse(String userInput) throws DukeException {
         String[] inputArray = userInput.split(" ");
@@ -68,30 +72,40 @@ public class Parser {
                 if (!userInput.contains("/by")) {
                     throw new DukeException("Please specify the due date using the /by keyword.");
                 } else {
-                    int byIndex = Arrays.asList(inputArray).indexOf("/by");
-                    String deadlineDescription = String.join(" ",
-                            Arrays.copyOfRange(inputArray, 1, byIndex));
-                    String dueDate = String.join(" ",
-                            Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
-                    if (deadlineDescription.equals("") || dueDate.equals("")) {
-                        throw new DukeException("Please specify the description/due date of the deadline task.");
+                    try {
+                        int byIndex = Arrays.asList(inputArray).indexOf("/by");
+                        String deadlineDescription = String.join(" ",
+                                Arrays.copyOfRange(inputArray, 1, byIndex));
+                        String dueDate = String.join(" ",
+                                Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
+                        LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        if (deadlineDescription.equals("") || dueDate.equals("")) {
+                            throw new DukeException("Please specify the description/due date of the deadline task.");
+                        }
+                        newCommand = new CDeadline(deadlineDescription, dueDate);
+                    } catch (DateTimeParseException e){
+                        throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
                     }
-                    newCommand = new CDeadline(deadlineDescription, dueDate);
                 }
                 break;
             case "event":
                 if (!userInput.contains("/at")) {
                     throw new DukeException("Please specify the date time using the /at keyword.");
                 } else {
-                    int byIndex = Arrays.asList(inputArray).indexOf("/at");
-                    String eventDescription = String.join(" ",
-                            Arrays.copyOfRange(inputArray, 1, byIndex));
-                    String dateTime= String.join(" ",
-                            Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
-                    if (eventDescription.equals("") || dateTime.equals("")) {
-                        throw new DukeException("Please specify the description/date time of the event task.");
+                    try {
+                        int byIndex = Arrays.asList(inputArray).indexOf("/at");
+                        String eventDescription = String.join(" ",
+                                Arrays.copyOfRange(inputArray, 1, byIndex));
+                        String dateTime = String.join(" ",
+                                Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
+                        LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        if (eventDescription.equals("") || dateTime.equals("")) {
+                            throw new DukeException("Please specify the description/date time of the event task.");
+                        }
+                        newCommand = new CEvent(eventDescription, dateTime);
+                    } catch (DateTimeParseException e){
+                        throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
                     }
-                    newCommand = new CEvent(eventDescription, dateTime);
                 }
                 break;
             default:

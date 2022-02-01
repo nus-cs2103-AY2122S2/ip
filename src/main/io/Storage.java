@@ -1,5 +1,6 @@
 package main.io;
 
+import main.DukeException;
 import main.tasks.Deadline;
 import main.tasks.Event;
 import main.tasks.Task;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Storage {
@@ -63,12 +65,14 @@ public class Storage {
                 this.addToTasks(taskStringArray);
             }
             dukeReader.close();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.printf("Error while trying to read save file: ", e.getMessage());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void addToTasks(String[] taskStringArray) {
+    public void addToTasks(String[] taskStringArray) throws DukeException {
         String type = taskStringArray[0];
         boolean isDone = taskStringArray[1].equals("1");
         String description = taskStringArray[2];
@@ -77,10 +81,18 @@ public class Storage {
             Task.addTask(new ToDo(description, isDone));
             break;
         case "D":
-            Task.addTask(new Deadline(description, taskStringArray[3], isDone));
+            try {
+                Task.addTask(new Deadline(description, taskStringArray[3], isDone));
+            } catch (DateTimeParseException e){
+                throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
+            }
             break;
         case "E":
-            Task.addTask(new Event(description, taskStringArray[3], isDone));
+            try {
+                Task.addTask(new Event(description, taskStringArray[3], isDone));
+            } catch (DateTimeParseException e){
+                throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
+            }
             break;
         }
     }

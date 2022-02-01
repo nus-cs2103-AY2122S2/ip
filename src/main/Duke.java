@@ -4,7 +4,6 @@ import main.commands.Command;
 import main.io.Parser;
 import main.io.Storage;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
