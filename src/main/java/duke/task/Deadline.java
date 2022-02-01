@@ -24,7 +24,7 @@ public class Deadline extends Task {
     /** {@inheritDoc} */
     @Override
     public String printTask() {
-        if (this.status) {
+        if (this.isMarked) {
             return "[" + type + "][X] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         } else {
             return "[" + type + "][ ] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
@@ -34,7 +34,7 @@ public class Deadline extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return type + "|" + status + "|" + activity + "|" + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "|\n";
+        return type + "|" + isMarked + "|" + activity + "|" + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "|\n";
     }
 
 }

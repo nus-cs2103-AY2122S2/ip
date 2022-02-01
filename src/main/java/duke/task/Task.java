@@ -7,7 +7,7 @@ public abstract class Task {
 
     // The variables that are common among all tasks.
     String activity;
-    boolean status = false;
+    boolean isMarked = false;
     String type = " ";
 
     /**
@@ -23,10 +23,10 @@ public abstract class Task {
     /**
      *
      * Sets the status of the task.
-     * @param status the status of the task, false for incomplete and true for completed.
+     * @param isMarked the status of the task, false for incomplete and true for completed.
      */
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setMarked(boolean isMarked) {
+        this.isMarked = isMarked;
     }
 
     /**
