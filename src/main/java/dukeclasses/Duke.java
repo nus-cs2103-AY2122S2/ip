@@ -1,9 +1,18 @@
 package dukeclasses;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,12 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
-import javafx.stage.Stage;
-
+import javafx.util.Duration;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,7 +39,7 @@ import java.util.TimerTask;
 public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
     private boolean isExit = false;
 
@@ -71,9 +82,18 @@ public class Duke extends Application {
 
             Label userText = new Label(userInput.getText());
             Label dukeText = new Label(output);
-            dialogContainer.getChildren().addAll(
-                    new DialogBox(userText, new ImageView(user)),
-                    new DialogBox(dukeText, new ImageView(duke)));
+            dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
+
+            DialogBox dukeReply = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
+            Timeline delayReply = new Timeline();
+            delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
+                    new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            dialogContainer.getChildren().add(dukeReply);
+                        }
+                    }));
+            delayReply.play();
             userInput.clear();
             return ;
         }
@@ -193,9 +213,14 @@ public class Duke extends Application {
 
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(output);
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
+        DialogBox dukeReply = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
+
+        Timeline delayReply = new Timeline();
+        delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
+                event -> dialogContainer.getChildren().add(dukeReply)));
+        delayReply.play();
+
         userInput.clear();
     }
 
@@ -215,15 +240,22 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.setPrefSize(400.0, 600.0);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, 0.1);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 0.1);
+        AnchorPane.setRightAnchor(sendButton, 0.1);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , 0.1);
+        AnchorPane.setBottomAnchor(userInput, 0.1);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        Image bgImage = new Image(this.getClass().getResource("/images/background.png").toString());
+        Background bg = new Background(new BackgroundImage(
+                bgImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0,
+                true, true, false, false)));
+        mainLayout.setBackground(bg);
+        scrollPane.setOpacity(0.9333);
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -234,7 +266,7 @@ public class Duke extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 573);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
@@ -242,8 +274,9 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(345.0);
         userInput.setOnAction((event) -> {
             handleUserInput();
             if (isExit) {
@@ -277,5 +310,6 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+
 
 }
