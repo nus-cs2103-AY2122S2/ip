@@ -25,14 +25,14 @@ public class ParserTest {
         try {
             parser.parse("mark");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please choose a task number", e.getMessage());
+            assertEquals("OOPS!!! Please choose a task number", e.getMessage());
         }
 
         //test case 4
         try {
             parser.parse("todo");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a todo cannot be empty", e.getMessage());
+            assertEquals("OOPS!!! The description of a todo cannot be empty", e.getMessage());
         }
     }
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.manager.Storage;
 import duke.manager.TaskList;
-import duke.manager.Ui;
 import duke.task.Task;
 
 /**
@@ -30,12 +29,12 @@ public class FindCommand extends Command {
      * then lists them all out.
      *
      * @param taskList A TaskList that stores the tasks.
-     * @param ui       An Ui object to handle user interaction.
-     * @param storage  A Storage object to handle saving of data.
-     * @throws DukeException If there is an issue retrieving the tasks.
+     * @param storage A Storage object to handle saving of data.
+     * @return A String which is Duke's response.
+     * @throws DukeException If there is an issue saving the tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         int numOfTasks = taskList.numOfTasks();
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (int i = 0; i < numOfTasks; i++) {
@@ -44,10 +43,11 @@ public class FindCommand extends Command {
                 matchedTasks.add(taskList.getTask(i));
             }
         }
-        ui.print("Here are the matching tasks in your list:");
+        String response = "Here are the matching tasks in your list:" + "\n";
         for (int i = 0; i < matchedTasks.size(); i++) {
-            ui.print(i + 1 + "." + matchedTasks.get(i).toString());
+            response += i + 1 + "." + matchedTasks.get(i).toString() + "\n";
         }
+        return response;
     }
 
     /**

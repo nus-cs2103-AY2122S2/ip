@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.manager.Storage;
 import duke.manager.TaskList;
-import duke.manager.Ui;
 
 /**
  * Represents a command that will either mark a task as completed or incomplete upon execution.
@@ -29,26 +28,27 @@ public class MarkCommand extends Command {
      * Executes the command by marking the specified task as complete or incomplete.
      *
      * @param taskList A TaskList that stores the tasks.
-     * @param ui An Ui object to handle user interaction.
      * @param storage A Storage object to handle saving of data.
+     * @return A String which is Duke's response.
      * @throws DukeException If there is an issue saving the tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        String response = "";
         if (isMark) {
             taskList.markDone(taskNo);
-            ui.print("Nice! I've marked this task as done:");
-            ui.print(taskList.getTask(taskNo).toString());
+            response += "Nice! I've marked this task as done:" + "\n";
         } else {
             taskList.markUndone(taskNo);
-            ui.print("OK, I've marked this task as not done yet:");
-            ui.print(taskList.getTask(taskNo).toString());
+            response += "OK, I've marked this task as not done yet:" + "\n";
         }
+        response += taskList.getTask(taskNo).toString();
         try {
             storage.save(taskList);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
+        return response;
     }
 
     /**

@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.manager.Storage;
 import duke.manager.TaskList;
-import duke.manager.Ui;
 
 
 /**
@@ -16,16 +15,17 @@ public class ListCommand extends Command {
      * Executes the command listing out all the tasks currently in the TaskList.
      *
      * @param taskList A TaskList that stores the tasks.
-     * @param ui An Ui object to handle user interaction.
      * @param storage A Storage object to handle saving of data.
-     * @throws DukeException If there is an issue retrieving the tasks.
+     * @return A String which is Duke's response.
+     * @throws DukeException If there is an issue saving the tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.print("Here are your tasks:");
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        String response = "Here are your tasks:" + "\n";
         for (int i = 0; i < taskList.numOfTasks(); i++) {
-            ui.print(i + 1 + "." + taskList.getTask(i).toString());
+            response += i + 1 + "." + taskList.getTask(i).toString() + "\n";
         }
+        return response;
     }
 
     /**

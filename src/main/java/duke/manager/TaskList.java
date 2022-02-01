@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-
 /**
  * Represents a list of tasks.
  */
@@ -46,7 +45,7 @@ public class TaskList {
      */
     public Task delete(int taskNo) throws DukeException {
         if (!isValidTaskNo(taskNo)) {
-            throw new DukeException("☹ OOPS!!! Invalid task number.");
+            throw new DukeException("OOPS!!! Invalid task number.");
         }
         return tasks.remove(taskNo);
     }
@@ -60,7 +59,7 @@ public class TaskList {
      */
     public Task getTask(int taskNo) throws DukeException {
         if (!isValidTaskNo(taskNo)) {
-            throw new DukeException("☹ OOPS!!! Invalid task number.");
+            throw new DukeException("OOPS!!! Invalid task number.");
         }
         return tasks.get(taskNo);
     }
@@ -91,7 +90,7 @@ public class TaskList {
      */
     public void markDone(int taskNo) throws DukeException {
         if (!isValidTaskNo(taskNo)) {
-            throw new DukeException("☹ OOPS!!! Invalid task number.");
+            throw new DukeException("OOPS!!! Invalid task number.");
         }
         tasks.get(taskNo).markDone();
     }
@@ -104,7 +103,7 @@ public class TaskList {
      */
     public void markUndone(int taskNo) throws DukeException {
         if (!isValidTaskNo(taskNo)) {
-            throw new DukeException("☹ OOPS!!! Invalid task number.");
+            throw new DukeException("OOPS!!! Invalid task number.");
         }
         tasks.get(taskNo).markUndone();
     }

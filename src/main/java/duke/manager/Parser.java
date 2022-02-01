@@ -36,14 +36,14 @@ public class Parser {
             }
             case "mark": {
                 if (fullCommand.split(" ").length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please choose a task number");
+                    throw new DukeException("OOPS!!! Please choose a task number");
                 }
                 int taskNo = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new MarkCommand(true, taskNo);
             }
             case "unmark": {
                 if (fullCommand.split(" ").length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please choose a task number");
+                    throw new DukeException("OOPS!!! Please choose a task number");
                 }
                 int taskNo = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new MarkCommand(false, taskNo);
@@ -51,7 +51,7 @@ public class Parser {
             case "todo": {
                 String task = fullCommand.replaceFirst("todo", "");
                 if (task.length() == 0 || task.trim().length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty");
                 }
                 return new AddToDoCommand(task);
             }
@@ -59,10 +59,10 @@ public class Parser {
                 String[] text = fullCommand.replaceFirst("deadline", "").split(" /by ");
                 String task = text[0];
                 if (task.trim().length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
                 if (text.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
+                    throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 String by = text[1];
                 return new AddDeadlineCommand(task, by);
@@ -71,14 +71,14 @@ public class Parser {
                 String[] text = fullCommand.replaceFirst("event", "").split(" /at ");
                 String task = text[0];
                 if (task.trim().length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                 }
                 String at = text[1];
                 return new AddEventCommand(task, at);
             }
             case "delete": {
                 if (fullCommand.split(" ").length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please choose a task number.");
+                    throw new DukeException("OOPS!!! Please choose a task number.");
                 }
                 int taskNo = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new DeleteTaskCommand(taskNo);
@@ -88,13 +88,13 @@ public class Parser {
             }
             case "find": {
                 if (fullCommand.split(" ").length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please enter something for me to find!");
+                    throw new DukeException("OOPS!!! Please enter something for me to find!");
                 }
                 String toFind = fullCommand.split(" ")[1];
                 return new FindCommand(toFind);
             }
             default: {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             }
         } catch (NumberFormatException e) {
