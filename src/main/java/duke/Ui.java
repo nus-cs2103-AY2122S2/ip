@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import duke.exception.DukeException;
-import duke.gui.MainWindow;
 import duke.task.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,19 +17,17 @@ public class Ui {
     private static final String MESSAGE_INTRO = "Hello! I'm Dusk\n     What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
 
-    private MainWindow mainWindowController;
-
-    public MainWindow getMainWindowController() {
-        return mainWindowController;
-    }
-
+    /**
+     * Handles building of stage for GUI
+     * @param stage Stage from Duke
+     * @throws DukeException if there are any errors from reading the file
+     */
     public void buildStage(Stage stage) throws DukeException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            this.mainWindowController = fxmlLoader.getController();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
