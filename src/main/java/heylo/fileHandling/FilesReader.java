@@ -10,7 +10,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles reading from files.
+ */
 public class FilesReader {
+    /**
+     * Returns the list of tasks previously added by the user.
+     * @return List of tasks.
+     */
     public static ArrayList<Task> getTaskListFromFile() {
         ArrayList<Task> taskList = new ArrayList<Task>();
         try {
