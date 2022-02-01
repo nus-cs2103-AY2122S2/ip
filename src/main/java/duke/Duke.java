@@ -34,6 +34,12 @@ public class Duke {
         System.out.printf("You now have %d item(s) in your list\n", taskList.size());
     }
 
+    public static void displayTaskDelete(Task deletedTask){
+        System.out.println("As you wish. The following task has been removed");
+        System.out.println(deletedTask.toString());
+        System.out.printf("You now have %d item(s) in your list\n", taskList.size());
+    }
+
     public static String[] parseArguments(String[] arguments) throws DukeInvalidArgumentException {
         if (arguments.length < 2) {
             throw new DukeInvalidArgumentException("There appears to be invalid arguments");
@@ -113,6 +119,18 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            commandProcessor();
+            break;
+        case "delete":
+            int taskToDeleteNumber = Integer.parseInt(parsedUserInput[1]);
+            if (taskToDeleteNumber > taskList.size()) {
+                System.out.println("I am afraid that's an invalid task! Please check your task number");
+                commandProcessor();
+                break;
+            }
+            Task taskToDelete = taskList.get(taskToDeleteNumber - 1);
+            taskList.remove(taskToDeleteNumber - 1);
+            displayTaskDelete(taskToDelete);
             commandProcessor();
             break;
         default:
