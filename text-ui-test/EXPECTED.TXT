@@ -17,10 +17,10 @@ Valid date and time must be given in this format: DD/MM/YYYY HHmm
 Eg: 24/12/2022 2359
 ----------------------------------------
 Got it. I've added this task:
-	[D][ ] iP (by: Dec 12 2022 6PM)
+	[D][ ] iP (by: Dec 12 2022 6:00PM)
 Now you have 1 task(s) in the list
 ----------------------------------------
-1. [D][ ] iP (by: Dec 12 2022 6PM)
+1. [D][ ] iP (by: Dec 12 2022 6:00PM)
 ----------------------------------------
 ☹ OOPS!!! The description of a todo cannot be empty.
 ----------------------------------------
@@ -28,7 +28,7 @@ Got it. I've added this task:
 	[T][ ] cut hair
 Now you have 2 task(s) in the list
 ----------------------------------------
-1. [D][ ] iP (by: Dec 12 2022 6PM)
+1. [D][ ] iP (by: Dec 12 2022 6:00PM)
 2. [T][ ] cut hair
 ----------------------------------------
 ☹ OOPS!!! The description/location of a event cannot be empty.
@@ -37,22 +37,22 @@ Got it. I've added this task:
 	[E][ ] movie (at: Waterway Plaza)
 Now you have 3 task(s) in the list
 ----------------------------------------
-1. [D][ ] iP (by: Dec 12 2022 6PM)
+1. [D][ ] iP (by: Dec 12 2022 6:00PM)
 2. [T][ ] cut hair
 3. [E][ ] movie (at: Waterway Plaza)
 ----------------------------------------
 Noted. I've marked this task as done:
-	[D][X] iP (by: Dec 12 2022 6PM)
+	[D][X] iP (by: Dec 12 2022 6:00PM)
 ----------------------------------------
 Noted. I've marked this task as done:
 	[E][X] movie (at: Waterway Plaza)
 ----------------------------------------
-1. [D][X] iP (by: Dec 12 2022 6PM)
+1. [D][X] iP (by: Dec 12 2022 6:00PM)
 2. [T][ ] cut hair
 3. [E][X] movie (at: Waterway Plaza)
 ----------------------------------------
 Noted. I've removed this task:
-	[D][X] iP (by: Dec 12 2022 6PM)
+	[D][X] iP (by: Dec 12 2022 6:00PM)
 ----------------------------------------
 1. [T][ ] cut hair
 2. [E][X] movie (at: Waterway Plaza)

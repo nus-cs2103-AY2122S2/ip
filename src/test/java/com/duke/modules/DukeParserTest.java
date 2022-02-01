@@ -1,3 +1,5 @@
+package com.duke.modules;
+
 import com.duke.command.CommandResult;
 import com.duke.modules.Parser;
 import org.junit.jupiter.api.Test;

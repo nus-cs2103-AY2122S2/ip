@@ -12,7 +12,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM dd YYYY Ka"));
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM dd YYYY K:mma"));
     }
 
     @Override
