@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 
 import duke.exception.DukeIoException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

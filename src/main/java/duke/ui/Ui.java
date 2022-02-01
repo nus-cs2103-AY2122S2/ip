@@ -11,7 +11,6 @@ import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.exception.DukeIoException;
 import duke.util.Printable;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

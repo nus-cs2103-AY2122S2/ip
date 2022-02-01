@@ -5,14 +5,12 @@ import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
  * Represents an instance of the Duke application.
- * Serves as the entry point for the entire application.
  */
 public class Duke extends Application {
     /** Global task list for all operations. */
