@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -87,7 +83,7 @@ public class Duke {
                     }
 
                     // create new deadline task
-                    currentTask = new TaskCreator('D', false, name, date).createTask();
+                    currentTask = new Deadline(name, date);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
@@ -136,7 +132,7 @@ public class Duke {
                     }
 
                     // create new deadline task
-                    currentTask = new TaskCreator('E', false, name, date).createTask();
+                    currentTask = new Event(name, date);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
@@ -156,8 +152,8 @@ public class Duke {
                         break;
                     }
 
-                    // create new deadline task
-                    currentTask = new TaskCreator('T', false, name, "0000000").createTask();
+                    // create new todo task
+                    currentTask = new ToDo(name);
 
                     // add task to tasklist
                     TaskManager.add(currentTask);
