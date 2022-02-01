@@ -38,8 +38,7 @@ public class Ui {
             System.out.println(tasks);
             break;
         case "do":
-            System.out.println("Task successfully updated.");
-            break;
+            //Fallthrough
         case "undo":
             System.out.println("Task successfully updated.");
             break;

@@ -1,12 +1,12 @@
 package duke.task;
 
 import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.temporal.ChronoUnit;
 
 public class TaskWithDateTime extends Task {
     protected LocalDate day;
@@ -19,7 +19,7 @@ public class TaskWithDateTime extends Task {
         String temp = dateTime.trim();
         this.dateTime = dateTime.trim();
 
-        //extract date, if any
+        // Extract date, if any
         String regexDate = "\\d{4}[-|/.]\\d{2}[-|/.]\\d{2}";
         Matcher m = Pattern.compile(regexDate).matcher(dateTime);
         if (m.find()) {
@@ -38,7 +38,7 @@ public class TaskWithDateTime extends Task {
 
         }
 
-        //extract time, if any
+        // Extract time, if any
         String regexTime = "\\d{4}";
         m = Pattern.compile(regexTime).matcher(temp);
         if (m.find()) {

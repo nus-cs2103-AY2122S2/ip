@@ -6,7 +6,6 @@ public class Deadline extends TaskWithDateTime {
     public Deadline(String description, String by) {
         super(description, by);
         this.by = by;
-        //LocalDate day = LocalDate.parse("2015-02-20");
     }
 
     @Override
