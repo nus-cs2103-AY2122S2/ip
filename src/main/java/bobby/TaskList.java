@@ -32,8 +32,7 @@ public class TaskList {
             System.out.println("Bobby heard: " + newTodo);
             taskArray.add(newTodo);
             storage.updateFile(taskArray);
-            System.out.println
-                    ("Bobby remembers " + taskArray.size() + " task(s).");
+            System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
         } else {
             throw new BobbyException("Description cannot be empty.");
         }

@@ -1,7 +1,6 @@
 package bobby;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ import java.util.Scanner;
  * Storage deals with loading tasks from file and saving tasks in the file.
  */
 public class Storage {
-    File file;
+    private File file;
 
     /**
      * Constructor to create a Storage instance.
@@ -58,6 +57,8 @@ public class Storage {
                         }
                         taskArray.add(newEvent);
                         break;
+                    default:
+                        System.out.println("Error with loading file.");
                     }
                 }
             } else {
