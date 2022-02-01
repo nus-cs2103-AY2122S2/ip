@@ -26,7 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Spark spark;
 
-    private Image sparkImage = new Image(this.getClass().getResourceAsStream("/images/blue-circle.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mister_chief.png"));
+    private Image sparkImage = new Image(this.getClass().getResourceAsStream("/images/343_guilty_spark.png"));
 
     @FXML
     public void initialize() {
@@ -46,7 +47,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = spark.executeCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, sparkImage),
+                DialogBox.getUserDialog(input, userImage),
                 DialogBox.getSparkDialog(response, sparkImage)
         );
         userInput.clear();
