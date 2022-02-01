@@ -15,9 +15,7 @@ public class TextUiTest {
 
     @Test
     public void testDivider() {
-        System.setOut(new PrintStream(byteArrayOutputStream));
         TextUi ui = new TextUi();
-        ui.showDivider();
-        assertEquals(DIVIDER, byteArrayOutputStream.toString().trim());
+        assertEquals(DIVIDER, ui.showDivider());
     }
 }
