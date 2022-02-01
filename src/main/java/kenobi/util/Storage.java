@@ -87,7 +87,7 @@ public class Storage {
             }
             out.close();
         } catch (IOException ioException) {
-            System.out.println("Kenobi could save the tasks");
+            System.out.println("Kenobi could not save the tasks");
         }
     }
 }

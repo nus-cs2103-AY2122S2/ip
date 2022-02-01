@@ -23,6 +23,11 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Java build files
 *.class
+**/META-INF/
 
 # User save files
 data/
+
+# JUnit-generated files
+out/
+**/.attach_pid*
