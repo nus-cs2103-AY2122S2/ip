@@ -4,7 +4,7 @@ package duke.tasks;
  * Task is a class which represents tasks to be done.
  */
 public abstract class Task {
-    public String description;
+    protected String description;
     protected boolean isDone;
 
     /**
@@ -48,6 +48,15 @@ public abstract class Task {
      * @return A String description that has been formatted.
      */
     public abstract String formatString();
+
+    /**
+     * Returns the description of the task object.
+     *
+     * @return The String description of the task object.
+     */
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Returns the string representation of the task.

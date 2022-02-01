@@ -1,14 +1,11 @@
 package duke.functionality;
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import duke.exceptions.DukeException;
 
 public class ParserTest {
     @Test

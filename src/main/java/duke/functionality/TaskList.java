@@ -1,10 +1,13 @@
 package duke.functionality;
+
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import java.util.ArrayList;
+
 
 /**
  * TaskList is a functionality class which enables a tracking feature
@@ -59,6 +62,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints a list of items that matches to the search.
+     */
     public void listItemsMatch() {
         System.out.println(MATCH);
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -180,7 +186,7 @@ public class TaskList {
     public void findTask(TaskList taskList, String userInput) {
         TaskList foundTasks = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            String stringToSearch = taskList.get(i).description;
+            String stringToSearch = taskList.get(i).getDescription();
             if (stringToSearch.contains(userInput)) {
                 foundTasks.addGeneralTask(taskList.get(i));
             }

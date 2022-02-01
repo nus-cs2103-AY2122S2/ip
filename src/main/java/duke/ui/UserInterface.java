@@ -1,6 +1,8 @@
 package duke.ui;
-import duke.exceptions.DukeException;
+
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
 
 /**
  * UserInterface is an ui class that represents the user interface

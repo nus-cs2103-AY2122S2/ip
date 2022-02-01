@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline is a class which represents the deadline task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate by;
 
     /**
@@ -40,7 +40,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
