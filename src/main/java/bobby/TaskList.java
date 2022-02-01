@@ -3,6 +3,7 @@ package bobby;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TaskList {
     private ArrayList<Task> taskArray;
@@ -95,5 +96,22 @@ public class TaskList {
         t.unmarkAsDone();
         storage.updateFile(taskArray);
         Ui.taskNotDone(t);
+    }
+
+    public void find(String query) {
+        boolean isSuccessful = false;
+        System.out.println("Bobby found these task(s):");
+        for (Task t : taskArray) {
+            String[] contents = t.description.split(" ");
+            for (String content : contents) {
+                if (Objects.equals(content, query)) {
+                    Ui.printTask(t);
+                    isSuccessful = true;
+                }
+            }
+        }
+        if (!isSuccessful) {
+            System.out.println("Bobby could not find any matching tasks.");
+        }
     }
 }

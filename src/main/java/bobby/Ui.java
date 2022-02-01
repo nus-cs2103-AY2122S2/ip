@@ -36,4 +36,8 @@ public class Ui {
     public static void taskNotDone(Task t) {
         System.out.println("Bobby will remember that this task is not yet done:\n" + t);
     }
+
+    public static void printTask(Task t) {
+        System.out.println(t);
+    }
 }
