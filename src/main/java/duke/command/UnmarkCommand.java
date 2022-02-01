@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 /**
  * UnmarkCommand class
  */
-public class UnmarkCommand extends Command<String>{
+public class UnmarkCommand extends Command<String> {
 
     private String text;
     private TaskList list;

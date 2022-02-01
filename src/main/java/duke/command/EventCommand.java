@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.task.Event;
 import duke.storage.Storage;
+import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
  * EventCommand class
  */
-public class EventCommand extends Command<String>{
+public class EventCommand extends Command<String> {
 
     private TaskList list;
     private String description;

@@ -1,8 +1,8 @@
 package duke.storage;
 
-import duke.tasklist.TaskList;
 import duke.exception.DukeException;
 import duke.task.*;
+import duke.tasklist.TaskList;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,7 +25,7 @@ public class Storage {
             try {
                 File saveTask = new File(filePath);
                 saveTask.createNewFile();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (directory.exists()) {
@@ -42,7 +42,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(storedFilePath);
             int counter = 1;
-            for (int i = 0; i < taskList.getSize(); i++ ) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 try {
                     fw.write(counter + "." + taskList.getTask(i) + "\n");
                     counter++;

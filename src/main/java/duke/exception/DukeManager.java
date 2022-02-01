@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.exception.DukeException;
-
 /**
  * DukeManager class
  */
@@ -20,8 +18,8 @@ public class DukeManager {
      * @throws DukeException if command not valid
      */
     public String test(String command) throws DukeException {
-        if ((command.replaceAll("\\s+", "")).equals("list") ||
-                (command.replaceAll("\\s+", "")).equals("bye")) {
+        if ((command.replaceAll("\\s+", "")).equals("list")
+                || (command.replaceAll("\\s+", "")).equals("bye")) {
             return command;
         }
         String[] keyWords = {"todo", "event", "deadline", "mark", "unmark", "delete", "find"};

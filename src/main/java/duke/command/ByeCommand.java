@@ -3,7 +3,7 @@ package duke.command;
 /**
  * ByeCommand class
  */
-public class ByeCommand extends Command<String>{
+public class ByeCommand extends Command<String> {
 
     /**
      * Constructor for ByeCommand object

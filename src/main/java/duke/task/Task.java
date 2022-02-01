@@ -35,6 +35,6 @@ public class Task {
     @Override
     public String toString() {
         return "[" + (this.done ? "X" : " ") + "] "
-        + this.description;
+            + this.description;
     }
 }

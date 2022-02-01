@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 /**
  * MarkCommand class
  */
-public class MarkCommand extends Command<String>{
+public class MarkCommand extends Command<String> {
 
     private String text;
     private TaskList list;

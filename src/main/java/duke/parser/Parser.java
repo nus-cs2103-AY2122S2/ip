@@ -3,8 +3,8 @@ package duke.parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.command.*;
+import duke.ui.Ui;
 
 /**
  * Parser class
@@ -41,7 +41,7 @@ public class Parser {
         } else if (command.startsWith("deadline")) {
             return new DeadlineCommand(command, list, storage, ui);
         } else if (command.startsWith("event")) {
-            return new EventCommand(command, list, storage,ui);
+            return new EventCommand(command, list, storage, ui);
         } else if (command.startsWith("unmark")) {
             return new UnmarkCommand(command, list, storage);
         } else if (command.startsWith("mark")) {

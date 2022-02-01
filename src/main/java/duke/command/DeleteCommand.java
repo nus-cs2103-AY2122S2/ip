@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 /**
  * DeleteCommand class
  */
-public class DeleteCommand extends Command<String>{
+public class DeleteCommand extends Command<String> {
 
     private String text;
     private TaskList list;
@@ -43,6 +43,11 @@ public class DeleteCommand extends Command<String>{
         }
     }
 
+    /**
+     * Format string to obtain index
+     * @param text unformatted string
+     * @return index of task to mark
+     */
     public int intSearch(String text) {
         String[] splicedString = text.split(" ");
         return Integer.parseInt(splicedString[1]);

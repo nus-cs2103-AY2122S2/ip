@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 /**
  * list class
  */
-public class ListCommand extends Command<String>{
+public class ListCommand extends Command<String> {
 
     private TaskList list;
 

@@ -13,10 +13,10 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    public static int COUNTER = 1;
     private Storage storage;
     private TaskList task;
     private Ui ui;
-    public static int COUNTER = 1;
 
     /**
      * Constructor for Duke object
@@ -46,7 +46,7 @@ public class Duke {
                 String testCommand = dukeManager.test(inputCommand);
                 Command<String> newTask = Parser.parseCommand(testCommand, task, storage, ui);
                 isRunning = newTask.isRunning();
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 System.err.print(e + "\n");
             }
         }
