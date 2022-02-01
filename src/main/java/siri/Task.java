@@ -23,7 +23,7 @@ class Task {
         Method to return a symbol the doneness of the task:
         If task is done, return 'X', else return empty space to indicate task not done.
      */
-    private String donenessSymbol(int done) {
+    private String doneSymbol(int done) {
         if (done == 0) {
             return " ";
         } else {
@@ -34,24 +34,24 @@ class Task {
     /*
         Method to mark the task as completed.
     */
-    public void markDone() {
+    public void markTaskDone() {
         done = 1;
-        System.out.printf("Great job for completing task:\n%s\n", this.getItemAndStatus());
+        System.out.printf("Great job for completing task:\n%s\n", this.getTaskDetails());
     }
 
     /*
         Method to mark task as uncompleted.
     */
-    public void markUndone() {
+    public void markTaskUndone() {
         done = 0;
-        System.out.printf("Task marked as uncompleted:\n%s\n", this.getItemAndStatus());
+        System.out.printf("Task marked as uncompleted:\n%s\n", this.getTaskDetails());
     }
 
     /*
         Method to get String of task status and task name.
     */
-    public String getItemAndStatus() {
-        String returned = "[" + donenessSymbol(this.done) + "] " + this.item;
+    public String getTaskDetails() {
+        String returned = "[" + doneSymbol(this.done) + "] " + this.item;
         return returned;
     }
 

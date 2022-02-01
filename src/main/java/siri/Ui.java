@@ -1,4 +1,5 @@
 package siri;
+
 import java.util.Scanner;
 
 class Ui {

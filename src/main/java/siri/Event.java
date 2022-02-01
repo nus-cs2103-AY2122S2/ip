@@ -35,8 +35,8 @@ class Event extends Task {
         @return String showing the task category, status and name.
     */
     @Override
-    public String getItemAndStatus() {
-        String returned = "[E]" + super.getItemAndStatus() + " (at: " + this.eventDate.format(Event.dtf) + " " + this.eventTime + ")";
+    public String getTaskDetails() {
+        String returned = "[E]" + super.getTaskDetails() + " (at: " + this.eventDate.format(Event.dtf) + " " + this.eventTime + ")";
         return returned;
     }
 
