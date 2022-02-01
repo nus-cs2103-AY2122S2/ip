@@ -1,5 +1,7 @@
-//package DukeTaskBot;
-import java.util.Locale;
+package duke;
+
+import duke.exceptions.DukeInvalidArgumentException;
+import duke.tasks.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ public class Duke {
     private static Scanner getUserInput;
 
     private static void initialize(){
-        taskList = new ArrayList<>();
+        taskList = new ArrayList<Task>();
         getUserInput = new Scanner(System.in);
     }
 
@@ -30,6 +32,14 @@ public class Duke {
         System.out.println("This task has been added as requested:");
         System.out.println(addedTask.toString());
         System.out.printf("You now have %d item(s) in your list\n", taskList.size());
+    }
+
+    public static String[] parseArguments(String[] arguments) throws DukeInvalidArgumentException {
+        if (arguments.length < 2) {
+            throw new DukeInvalidArgumentException("There appears to be invalid arguments");
+        }
+
+        return arguments[1].split(" /([Aa][Tt]|[Bb][Yy]) ", 2);
     }
 
     public static void commandProcessor() {
@@ -73,27 +83,40 @@ public class Duke {
             commandProcessor();
             break;
         case "todo":
-            Todo newTodo = new Todo(parsedUserInput[1]);
-            taskList.add(newTodo);
-            displayTaskAdd(newTodo);
+            try {
+                String[] parsedArguments = parseArguments(parsedUserInput);
+                Todo newTodo = new Todo(parsedArguments[0]);
+                taskList.add(newTodo);
+                displayTaskAdd(newTodo);
+            } catch (DukeInvalidArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             commandProcessor();
             break;
         case "deadline":
-            String[] deadlineParse = parsedUserInput[1].split(" /[Bb][Yy] ", 2);
-            Deadline newDeadline = new Deadline(deadlineParse[0], deadlineParse[1]);
-            taskList.add(newDeadline);
-            displayTaskAdd(newDeadline);
+            try {
+                String[] parsedArguments = parseArguments(parsedUserInput);
+                Deadline newDeadline = new Deadline(parsedArguments[0], parsedArguments[1]);
+                taskList.add(newDeadline);
+                displayTaskAdd(newDeadline);
+            } catch (DukeInvalidArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             commandProcessor();
             break;
         case "event":
-            String[] eventParse = parsedUserInput[1].split(" /[Aa][Tt] ", 2);
-            Event newEvent = new Event(eventParse[0], eventParse[1]);
-            taskList.add(newEvent);
-            displayTaskAdd(newEvent);
+            try {
+                String[] parsedArguments = parseArguments(parsedUserInput);
+                Event newEvent = new Event(parsedArguments[0], parsedArguments[1]);
+                taskList.add(newEvent);
+                displayTaskAdd(newEvent);
+            } catch (DukeInvalidArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             commandProcessor();
             break;
         default:
-            System.out.println("I am unable to process your request. Please try again");
+            System.out.println("I am unable to comprehend your request. Please try again");
             commandProcessor();
         }
     }

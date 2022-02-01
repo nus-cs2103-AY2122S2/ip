@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Task {
     String content;
     boolean markedDone = false;
