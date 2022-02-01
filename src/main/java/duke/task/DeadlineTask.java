@@ -11,30 +11,21 @@ public class DeadlineTask extends Task {
     protected LocalTime taskTime;
 
     /**
-     * Constructor for deadline task with date only.
+     * Constructor for deadline task with date and time using varargs.
+     * Depending on the length of the taskDateTime, determine whether to accommodate
      *
      * @param title Title of task
-     * @param taskDate Date of task deadline
+     * @param taskDateTime Date of task deadline
      */
-    public DeadlineTask(String title, String taskDate) {
+    public DeadlineTask(String title, String... taskDateTime) {
         super(title);
         this.type = TaskType.DEADLINE;
-        this.taskDate = LocalDate.parse(taskDate);
-        this.taskTime = null;
-    }
-
-    /**
-     * Constructor for deadline task with date and time.
-     *
-     * @param title Title of task
-     * @param taskDate Date of task deadline
-     * @param taskTime Time of task deadline
-     */
-    public DeadlineTask(String title, String taskDate, String taskTime) {
-        super(title);
-        this.type = TaskType.DEADLINE;
-        this.taskDate = LocalDate.parse(taskDate);
-        this.taskTime = LocalTime.parse(taskTime);
+        if (taskDateTime.length >= 1) {
+            this.taskDate = LocalDate.parse(taskDateTime[0]);
+        }
+        if (taskDateTime.length == 2) {
+            this.taskTime = LocalTime.parse(taskDateTime[1]);
+        }
     }
 
     /**
