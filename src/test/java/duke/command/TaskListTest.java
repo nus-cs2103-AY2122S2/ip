@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidActionException;
 import duke.task.Todo;
-import duke.ui.Ui;
+import duke.ui.ResponseGenerator;
 
 public class TaskListTest {
     @Test
@@ -38,12 +38,12 @@ public class TaskListTest {
     @Test
     public void testDeleteItem() {
         TaskList tl = new TaskList();
-        Ui ui = new Ui();
+        ResponseGenerator generator = new ResponseGenerator();
         tl.addTask(new Todo("this week iP"));
         assertEquals("Here are the tasks on your list :O\n1. [T][ ] this week iP",
-                ui.printItems(tl.getItems()));
+                generator.printItems(tl.getItems()));
         assertEquals("deleted this item O_O:\n  [T][ ] this week iP\nNow there are 0 tasks on the list x)",
                 tl.deleteItem(0));
-        assertEquals("There are no tasks on your list :O", ui.printItems(tl.getItems()));
+        assertEquals("There are no tasks on your list :O", generator.printItems(tl.getItems()));
     }
 }

@@ -1,20 +1,17 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.task.Task;
 
-/** Contains functionality relating to the Duke user interface */
-public class Ui {
-    private Scanner sc;
+/** Contains functionality relating to generating Duke's responses */
+public class ResponseGenerator {
     private String logo;
 
     /**
      * Creates a new Ui instance.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
+    public ResponseGenerator() {
         logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,7 +24,7 @@ public class Ui {
      *
      * @return A setup message.
      */
-    public String getSetupMessage() {
+    public String getStartupMessage() {
         StringBuilder s = new StringBuilder();
         s.append("Hello! I'm\n");
         s.append(logo);
@@ -75,16 +72,6 @@ public class Ui {
         s.append(latestTask.toString());
         s.append("\nNow there are " + size + " tasks on the list x)");
         return s.toString();
-    }
-
-    /**
-     * Reads input from the user.
-     *
-     * @return The line read from the user input.
-     */
-    public String readLine() {
-        String command = sc.nextLine();
-        return command;
     }
 
     /**

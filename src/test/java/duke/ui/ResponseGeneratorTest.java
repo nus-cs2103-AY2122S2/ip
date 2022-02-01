@@ -10,16 +10,16 @@ import duke.command.TaskList;
 import duke.task.Deadline;
 import duke.task.Todo;
 
-public class UiTest {
+public class ResponseGeneratorTest {
     @Test
     public void testGetAddTaskMessage() {
         assertEquals("added o.O:\n  [T][ ] this week iP\nNow there are 3 tasks on the list x)",
-                new Ui().getAddTaskMessage(new Todo("this week iP"), 3));
+                new ResponseGenerator().getAddTaskMessage(new Todo("this week iP"), 3));
     }
 
     @Test
     public void printItems_emptyList_success() {
-        assertEquals("There are no tasks on your list :O", new Ui().printItems(new ArrayList<>()));
+        assertEquals("There are no tasks on your list :O", new ResponseGenerator().printItems(new ArrayList<>()));
     }
 
     @Test
@@ -29,6 +29,6 @@ public class UiTest {
         taskList.addTask(new Todo("write junit tests"));
         assertEquals("Here are the tasks on your list :O\n"
                 + "1. [D][ ] this week iP (by: Jan 27 2022)\n"
-                + "2. [T][ ] write junit tests", new Ui().printItems(taskList.getItems()));
+                + "2. [T][ ] write junit tests", new ResponseGenerator().printItems(taskList.getItems()));
     }
 }
