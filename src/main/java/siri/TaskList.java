@@ -152,6 +152,27 @@ class TaskList {
         }
     }
 
+    public void find(String keyword) {
+        ArrayList<Task> tmp = new ArrayList<Task>();
+
+        if (list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).item.contains(keyword)) {
+                    tmp.add(list.get(i));
+                }
+            }
+
+            if (tmp.size() == 0) {
+                System.out.printf("No item on the list contains \"%s\"!!\n", keyword);
+            } else {
+                System.out.println("Here are the matching tasks in you list:");
+                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getTaskDetails()));
+            }
+        } else {
+            System.out.println("There are currently no item on the list!!");
+        }
+    } 
+
     private void startUpAddTask(String input) {
         String[] inputSplit = input.split(" ", 3);
 

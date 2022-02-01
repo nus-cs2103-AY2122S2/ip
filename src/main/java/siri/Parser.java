@@ -190,6 +190,13 @@ class Parser {
                     }
                 }
                 break;
+            case "find":
+                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
+                    throw new SiriException("Please ENTER a word to find!!");
+                } else {
+                    this.taskList.find(inputSplit[1].trim());
+                }
+                break;
             case "bye":
                 continueExecution = false;
                 break;
