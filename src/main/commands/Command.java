@@ -1,6 +1,8 @@
 package main.commands;
 
 import main.DukeException;
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 
 public abstract class Command {
@@ -18,5 +20,5 @@ public abstract class Command {
 
     public CommandType getCommandType() { return this.commandType; }
 
-    public abstract void runCommand() throws DukeException;
+    public abstract void runCommand(Ui ui, TaskList taskList) throws DukeException;
 }

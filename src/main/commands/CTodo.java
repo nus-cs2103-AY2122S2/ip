@@ -1,5 +1,7 @@
 package main.commands;
 
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 import main.tasks.Task;
 import main.tasks.ToDo;
@@ -17,10 +19,9 @@ public class CTodo extends Command{
     }
 
     @Override
-    public void runCommand() {
+    public void runCommand(Ui ui, TaskList taskList) {
         Task newToDo = new ToDo(this.getDescription());
-        Task.addTask(newToDo);
-        System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
-                newToDo, Task.taskCountToString());
+        taskList.addTask(newToDo);
+        ui.respondAddTask(newToDo, taskList);
     }
 }

@@ -1,6 +1,8 @@
 package main.commands;
 
 import main.DukeException;
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 import main.tasks.Task;
 
@@ -17,12 +19,11 @@ public class CDelete extends Command{
     }
 
     @Override
-    public void runCommand() throws DukeException {
+    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
-            Task deleteTask = Task.getTask(this.getDeleteIndex());
-            Task.deleteTask(this.getDeleteIndex());
-            System.out.printf("Noted. I've removed this task: \n" + "    %s\n"
-                    + "%s\n", deleteTask, Task.taskCountToString());
+            Task deleteTask = taskList.getTask(this.getDeleteIndex());
+            taskList.deleteTask(this.getDeleteIndex());
+            ui.respondDeleteTask(deleteTask, taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }

@@ -10,12 +10,12 @@ public class Event extends Task{
 
     public Event(String description, String eventTime) {
         super(description, TaskType.Event);
-        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     public Event(String description, String eventTime, boolean isDone) {
         super(description, TaskType.Event, isDone);
-        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     public LocalDateTime getEventTime() {
@@ -24,7 +24,7 @@ public class Event extends Task{
 
     @Override
     public String toStoreString() {
-        return super.toStoreString() + "~" + this.getEventTime();
+        return super.toStoreString() + "~" + this.getEventTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     @Override

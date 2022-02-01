@@ -1,17 +1,18 @@
 package main.commands;
 
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 
 public class CBye extends Command{
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     public CBye() {
         super(CommandType.BYE);
     }
 
     @Override
-    public void runCommand() {
+    public void runCommand(Ui ui, TaskList taskList) {
         Command.exitDuke();
-        System.out.println(GOODBYE_MESSAGE);
+        ui.respondBye();
     }
 }

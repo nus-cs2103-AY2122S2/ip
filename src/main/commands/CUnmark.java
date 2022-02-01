@@ -1,6 +1,8 @@
 package main.commands;
 
 import main.DukeException;
+import main.TaskList;
+import main.Ui;
 import main.enums.CommandType;
 import main.tasks.Task;
 
@@ -17,12 +19,11 @@ public class CUnmark extends Command{
     }
 
     @Override
-    public void runCommand() throws DukeException {
+    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
-            Task unmarkTask = Task.getTask(this.getUnmarkIndex());
+            Task unmarkTask = taskList.getTask(this.getUnmarkIndex());
             unmarkTask.setIsDone(false);
-            System.out.printf("Ok, I've marked this task as not done yet: \n"
-                    + "    %s\n", unmarkTask);
+            ui.respondUnmark(unmarkTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }

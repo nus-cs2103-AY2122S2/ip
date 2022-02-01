@@ -10,12 +10,12 @@ public class Deadline extends Task{
 
     public Deadline(String description, String dueDate) {
         super(description, TaskType.DEADLINE);
-        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     public Deadline(String description, String dueDate, boolean isDone) {
         super(description, TaskType.DEADLINE, isDone);
-        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     public LocalDateTime getDueDate() {
@@ -24,7 +24,7 @@ public class Deadline extends Task{
 
     @Override
     public String toStoreString() {
-        return super.toStoreString() + "~" + this.getDueDate();
+        return super.toStoreString() + "~" + this.getDueDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     @Override
