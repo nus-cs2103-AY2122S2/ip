@@ -8,11 +8,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a task with an associated date and/or time.
+ *
+ * Note: the allowable formats for date and time to be interpreted correctly by TaskWithDateTime
+ * is YYYY/MM/DD (with ./| being valid separators) and HHMM.
+ *
+ * @author  Elumalai Oviya Dharshini
+ * @version 0.1
+ */
 public class TaskWithDateTime extends Task {
     protected LocalDate day;
     protected LocalTime timeOfDay;
     protected String dateTime;
 
+    /**
+     * Constructor for TaskWithDateTime that initializes the Task with a given description and dateTime.
+     *
+     * @param description description of task
+     * @param dateTime datetime associated with task in string format
+     */
     public TaskWithDateTime(String description, String dateTime) {
         super(description);
 
@@ -53,11 +68,21 @@ public class TaskWithDateTime extends Task {
         }
     }
 
+    /**
+     * Default toString method that returns a formatted string of the contents of TaskWithDateTime
+     *
+     * @return formatted string of description, dateTime and completion status of the TaskWithDateTime object
+     */
     @Override
     public String toString() {
         return super.toString() + " (at: " + dateTime.trim() + ")";
     }
 
+    /**
+     * Parses contents of TaskWithDateTime into a csv-like format delimited by '|'
+     *
+     * @return formatted string of TaskWithDateTime, its completion status and associated dateTime
+     */
     @Override
     public String writeToFile() {
         return super.writeToFile() + " | " + dateTime.trim();
