@@ -44,27 +44,17 @@ public class EventTask extends Task {
      * @param isDone Done state
      * @param eventDate Date of event
      */
-    public EventTask(String title, Boolean isDone, String eventDate) {
+    public EventTask(String title, Boolean isDone, String... eventDateTime) {
         super(title, isDone);
         this.type = TaskType.EVENT;
-        this.eventDate = LocalDate.parse(eventDate);
-        this.eventTime = null;
+        if (eventDateTime.length >= 1) {
+            this.eventDate = LocalDate.parse(eventDateTime[0]);
+        }
+        if (eventDateTime.length == 2) {
+            this.eventTime = LocalTime.parse(eventDateTime[1]);
+        }
     }
 
-    /**
-     * Constructor for event with speficied done state, date and time.
-     *
-     * @param title Title of event
-     * @param isDone Done state
-     * @param eventDate Date of event
-     * @param eventTime Time of event
-     */
-    public EventTask(String title, Boolean isDone, String eventDate, String eventTime) {
-        super(title, isDone);
-        this.type = TaskType.EVENT;
-        this.eventDate = LocalDate.parse(eventDate);
-        this.eventTime = LocalTime.parse(eventTime);
-    }
 
     /**
      * Concatenate event date and time printing string.
