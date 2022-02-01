@@ -84,13 +84,16 @@ public class Parser {
      */
     int parseForMark(String command) throws DukeException {
         int indexAfterCommand = 5;
+
         if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
             throw new NoValidTaskIndexException();
         }
+
         //-1 because index in taskList is 0 based but command uses 1-based index
         int indexOfTaskToMark = Integer
                 .parseInt(command
                         .substring(indexAfterCommand, indexAfterCommand + 1)) - 1;
+
         return indexOfTaskToMark;
     }
 
@@ -102,12 +105,15 @@ public class Parser {
      */
     int parseForUnmark(String command) throws DukeException {
         int indexAfterCommand = 7;
+
         if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
             throw new NoValidTaskIndexException();
         }
+
         int indexToUnmark = Integer
                 .parseInt(command
                         .substring(indexAfterCommand)) - 1;
+
         return indexToUnmark;
     }
 
@@ -120,14 +126,17 @@ public class Parser {
     int parseForDelete(String command) throws DukeException {
         int indexTaskName = 7;
         //command is given as "delete <taskIndex>"
+
         if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
             throw new NoValidTaskIndexException();
         }
         //+1 in substring is in case of extra space at the end
         //-1 is because 1 based index is used in command
+
         int indexToUnmark = Integer
                 .parseInt(command
                         .substring(indexTaskName, indexTaskName + 1)) - 1;
+
         return indexToUnmark;
     }
 
@@ -139,10 +148,13 @@ public class Parser {
      */
     Task parseForTodo(String command) throws DukeException {
         int indexTaskName = 5;
+
         if (command.length() <= 5) {
             throw new IncompleteCommandException();
         }
+
         String taskName = command.substring(indexTaskName);
+
         return new ToDo(taskName);
     }
 
@@ -170,21 +182,26 @@ public class Parser {
      */
     Task parseForDeadline(String command) throws DukeException {
         int indexTaskName= 9;
+
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)
             throw new IncompleteCommandException();
         }
+
         int dateMarkerIndex = command.indexOf("/by");
         if (dateMarkerIndex == -1) { // "/" does not exist
             throw new NoDateException();
         }
+
         String taskName = command
                 .substring(indexTaskName, dateMarkerIndex);
         int indexStartOfDate = dateMarkerIndex + 4;  //"/by yyyy-mm-dd hh:mm"
         if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
+
         String dateString = command.substring(indexStartOfDate);
         LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
+
         return new Deadline(taskName, date);
     }
 
@@ -196,9 +213,11 @@ public class Parser {
      */
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
+
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
             throw new IncompleteCommandException();
         }
+
         int dateMarkerIndex = command.indexOf("/at");
         if (dateMarkerIndex == -1) {
             throw new NoDateException();
@@ -210,8 +229,10 @@ public class Parser {
         if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
+
         String dateString = command.substring(indexStartOfDate);
         LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
+
         return new Event(taskName, date);
     }
 

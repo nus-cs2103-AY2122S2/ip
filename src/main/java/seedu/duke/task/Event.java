@@ -1,6 +1,5 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //fix the dateTime for event

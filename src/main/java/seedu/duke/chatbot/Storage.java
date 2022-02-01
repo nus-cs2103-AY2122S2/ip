@@ -113,13 +113,17 @@ public class Storage {
     public String createSummaryFromTask(Task task) {
         String taskType = task.getTaskType();
         String  summary = taskType + " ";
+
         summary += (task.isDone()) ? "1 " : "0 ";
+
         summary += task.getTaskName() + " ";
+
         if (taskType.equals("E") || taskType.equals("D")) {
             LocalDateTime date = task.getDate();
             String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             summary += "/ " + dateString; //24 Dec 2019 --> 2019-12-24
         }
+
         return summary + "\n";
     }
 

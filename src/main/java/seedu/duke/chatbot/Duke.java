@@ -11,7 +11,6 @@ import java.io.IOException;
  * Also helps in giving out specified outputs.
  */
 public class Duke {
-
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -53,7 +52,7 @@ public class Duke {
      * Runs the chatbot Duke with a specified path to the database file.
      */
     public static void main(String[] args) {
-        String filePath = "C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt";
+        String filePath = "files/record.txt";
         new Duke(filePath).run();
     }
 }

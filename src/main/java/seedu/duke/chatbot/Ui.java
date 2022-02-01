@@ -38,11 +38,15 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Thanks for waiting, let me introduce myself! Hello from\n" + logo);
+
         System.out.println("What is your name?");
+
         Scanner in = new Scanner(System.in);
         String name = in.nextLine();
         System.out.println("Hello " + name);
+
         return name;
     }
 

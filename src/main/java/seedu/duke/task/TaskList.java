@@ -71,10 +71,12 @@ public class TaskList {
         if (taskToUpdate.isDone()) {
             throw new TaskAlreadyMarkedException();
         }
+
         Task newTask = taskToUpdate.changeTaskStatus(true);
         ArrayList<Task> newTasks = this.copyTaskList();
         newTasks.set(index, newTask);
         Ui.showMarkedResult(newTask);
+
         return new TaskList(newTasks);
     }
 
@@ -87,14 +89,17 @@ public class TaskList {
         if (index > this.getNumberOfTasks() - 1 || index < 0) {
             throw new NoValidTaskIndexException();
         }
+
         Task taskToUpdate = this.tasks.get(index);
         if (!taskToUpdate.isDone()) { //if task is already unmarked
             throw new TaskAlreadyMarkedException();
         }
+
         Task newTask = taskToUpdate.changeTaskStatus(false);
         ArrayList<Task> newTasks = this.copyTaskList();
         newTasks.set(index, newTask);
         Ui.showUnmarkedResult(newTask);
+
         return new TaskList(newTasks);
     }
 
@@ -106,7 +111,9 @@ public class TaskList {
     public TaskList add(Task task) {
         //increase size of taskList by 1
         ArrayList<Task> newTasks = this.copyTaskList();
+
         newTasks.add(task);
+
         return new TaskList(newTasks);
     }
 
@@ -120,8 +127,10 @@ public class TaskList {
         if (index > this.getNumberOfTasks() - 1 || index < 0) {
             throw new NoValidTaskIndexException();
         }
+
         ArrayList<Task> updatedTasks = this.copyTaskList();
         updatedTasks.remove(index);
+
         return new TaskList(updatedTasks);
     }
 
@@ -132,6 +141,7 @@ public class TaskList {
      */
     public TaskList find(String search) {
         TaskList newTaskList = new TaskList();
+
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             Task currentTask = this.tasks.get(i);
             String taskString = currentTask.toString();
@@ -139,6 +149,7 @@ public class TaskList {
                 newTaskList = newTaskList.add(currentTask);
             }
         }
+
         return newTaskList;
     }
 }
