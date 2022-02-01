@@ -1,13 +1,13 @@
 package nikki;
 
-import nikki.task.Task;
-import nikki.task.TaskList;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import nikki.task.Task;
+import nikki.task.TaskList;
 
 /**
  * Class to abstract and encapsulate file interactions for Nikki.

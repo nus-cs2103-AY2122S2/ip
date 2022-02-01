@@ -128,7 +128,9 @@ public class TaskList {
                 assert false;
             }
 
-            if (i != this.size() - 1) result += "\n";
+            if (i != this.size() - 1) {
+                result += "\n";
+            }
         }
 
         return result;
@@ -173,7 +175,9 @@ public class TaskList {
                 assert false;
             }
 
-            if (i != this.size() - 1) result += "\n";
+            if (i != this.size() - 1) {
+                result += "\n";
+            }
         }
 
         return result;
