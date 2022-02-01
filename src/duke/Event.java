@@ -19,8 +19,8 @@ public class Event extends Task {
     /**
      * Creates duke.Event object with provided LocalDate variable
      */
-    public Event(String name, int isDone, LocalDate at) {
-        super(name, isDone);
+    public Event(String name, int done, LocalDate at) {
+        super(name, done);
         super.type = 'E';
         this.at = at;
     }
@@ -29,8 +29,8 @@ public class Event extends Task {
      * Creates duke.Event object without provided LocalDate variable
      * Used when there is the need to parse text into date first
      */
-    public Event(String name, int isDone) {
-        super(name, isDone);
+    public Event(String name, int done) {
+        super(name, done);
         super.type = 'E';
     }
 
@@ -41,7 +41,7 @@ public class Event extends Task {
     /**
      * Setting duke.Event object's date it is held on
      */
-    public void setStringToLocalDate(String date) {
+    public void setLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         setAt(localDate);
@@ -62,7 +62,7 @@ public class Event extends Task {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(getTaskIcon()).append(" - ");
-        result.append(isDone).append(" - ");
+        result.append(done).append(" - ");
         result.append(name).append(" - ");;
         result.append(convertLocalDateToString()).append("\n");
         return result.toString();

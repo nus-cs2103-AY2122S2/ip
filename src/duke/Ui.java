@@ -41,10 +41,10 @@ public class Ui {
 
     /** Returns a pre-made command message to users  */
     public String askForCommand() {
-        StringBuilder commandLine = new StringBuilder();
+        StringBuilder commandMessage = new StringBuilder();
         String command = "What is your command: \n";
-        commandLine.append(command);
-        return commandLine.toString();
+        commandMessage.append(command);
+        return commandMessage.toString();
     }
 
     /** Takes in TaskList and Storage objects to parse the user input  */

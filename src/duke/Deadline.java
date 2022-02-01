@@ -19,8 +19,8 @@ public class Deadline extends Task {
     /**
      * Creates duke.Deadline object with provided LocalDate variable
      */
-    public Deadline(String name, int isDone, LocalDate by) {
-        super(name, isDone);
+    public Deadline(String name, int done, LocalDate by) {
+        super(name, done);
         super.type = 'D';
         this.by = by;
     }
@@ -29,8 +29,8 @@ public class Deadline extends Task {
      * Creates duke.Deadline object without provided LocalDate variable
      * Used when there is the need to parse text into date first
      */
-    public Deadline(String name, int isDone) {
-        super(name, isDone);
+    public Deadline(String name, int done) {
+        super(name, done);
         super.type = 'D';
     }
 
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     /**
      * Setting duke.Deadline object's date it should end by
      */
-    public void setStringToLocalDate(String date) {
+    public void setLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         setBy(localDate);
@@ -62,7 +62,7 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(getTaskIcon()).append(" - ");
-        result.append(isDone).append(" - ");
+        result.append(done).append(" - ");
         result.append(name).append(" - ");
         result.append(convertLocalDateToString()).append("\n");
         return result.toString();

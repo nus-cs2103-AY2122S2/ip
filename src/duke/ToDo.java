@@ -12,8 +12,8 @@ package duke;
 
 public class ToDo extends Task {
 
-    public ToDo(String name, int isDone) {
-        super(name, isDone);
+    public ToDo(String name, int done) {
+        super(name, done);
         super.type = 'T';
     }
 
@@ -21,7 +21,7 @@ public class ToDo extends Task {
     public String toString() {
         StringBuilder successMessage = new StringBuilder();
         successMessage.append(getTaskIcon()).append(" - ");
-        successMessage.append(isDone).append(" - ");
+        successMessage.append(done).append(" - ");
         successMessage.append(name).append("\n");;
         return successMessage.toString();
     }

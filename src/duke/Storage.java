@@ -17,8 +17,8 @@ public class Storage {
     protected String filepath;
     protected FileWriter fileWriter;
     protected FileReader fileReader;
-    protected BufferedWriter writer;
-    protected BufferedReader reader;
+    protected BufferedWriter buffWriter;
+    protected BufferedReader buffReader;
     protected TaskList tasks;
 
     public Storage(String path, TaskList tasks) {
@@ -31,7 +31,7 @@ public class Storage {
      */
     public void saveTask(String cont) throws IOException {
         try {
-            writer.write(cont);
+            buffWriter.write(cont);
         } catch (IOException e) {
             throw new IOException("\nUnexpected error occurred where Tasks cannot be saved in file!\n");
         }
@@ -42,7 +42,7 @@ public class Storage {
      */
     public void startWriter() throws IOException {
         fileWriter = new FileWriter(filepath);
-        writer = new BufferedWriter(fileWriter);
+        buffWriter = new BufferedWriter(fileWriter);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Storage {
      */
     public void closeWriteFile() throws IOException {
         try {
-            writer.close();
+            buffWriter.close();
         } catch (IOException e) {
             throw new IOException("\nUnexpected error occurred where file writer cannot be closed!\n");
         }
@@ -68,7 +68,7 @@ public class Storage {
      */
     public void closeReadFile() throws IOException {
         try {
-            reader.close();
+            buffReader.close();
         } catch (IOException e) {
             throw new IOException("\nUnexpected error occurred where file reader cannot be closed!\n");
         }
@@ -89,14 +89,14 @@ public class Storage {
      * Reads tasks saved in the hard drive file provided by the user and
      * places duke.Task objects into the current DukeList
      */
-    public void readTasksFromFile() throws FileNotFoundException {
+    public void tasksThatHaveBeenRead() throws FileNotFoundException {
         ArrayList<Task> readTasks = new ArrayList<>();
         String line = "";
         fileReader = new FileReader(filepath);
-        reader = new BufferedReader(fileReader);
+        buffReader = new BufferedReader(fileReader);
 
         try {
-            while ((line = reader.readLine()) != null) {
+            while ((line = buffReader.readLine()) != null) {
                 String[] arrOfString = line.split(" - ");
                 readTasks.add(createTaskFromText(arrOfString));
             }
@@ -122,12 +122,12 @@ public class Storage {
             case "D":
                  date = line[3];
                 newT = new Deadline(title, Integer.valueOf(done));
-                ((Deadline) newT).setStringToLocalDate(date);
+                ((Deadline) newT).setLocalDate(date);
                 break;
             case "E":
                 date = line[3];
                 newT = new Event(title, Integer.valueOf(done));
-                ((Event) newT).setStringToLocalDate(date);
+                ((Event) newT).setLocalDate(date);
                 break;
             default:
                 System.out.println("Invalid Task type found in file!\n");

@@ -26,7 +26,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath, tasks);
         try {
-            storage.readTasksFromFile();
+            storage.tasksThatHaveBeenRead();
             storage.closeReadFile();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to read provided file!\n");

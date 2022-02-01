@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * This is an Action class that obtains a sentence as input that
@@ -17,12 +18,13 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     protected String userInput;
     protected TaskList tasks;
-    protected String[] listOfUserInput;
+    protected String[] listOfUserInputs;
     protected Storage storage;
     String line = "\n____________________________________________________________\n";
 
+    //Must be in SNAKE_CASE
     enum Commands {
-        todo, deadline, event, list, mark, unmark, delete, find, bye
+        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE
     }
 
     public Parser(String input, TaskList list, Storage storage) {
@@ -35,36 +37,36 @@ public class Parser {
      * First split of user input to obtain Action word from other user input words
      */
     public void splitUserInput() {
-        listOfUserInput = userInput.split(" ");
+        listOfUserInputs = userInput.split(" ");
     }
 
     /**
      * Obtains the Action word from user input
      */
     public String obtainCommandWord() {
-        return listOfUserInput[0];
+        return listOfUserInputs[0];
     }
 
     /**
-     * Obtains title. Applicable for creating Todo, duke.Deadline and duke.Event
+     * Obtains description of Tasks. Applicable for creating Todo, duke.Deadline and duke.Event
      */
-    public String obtainTitle() throws DukeException {
+    public String obtainTitleOfTask() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
         String firstWordInTitle;
         try {
-            firstWordInTitle = listOfUserInput[1];
+            firstWordInTitle = listOfUserInputs[1];
         } catch (Exception e) {
             errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.");
             errorMessage.append(line);
             throw new DukeException(errorMessage.toString());
         }
         StringBuilder title = new StringBuilder();
-        for (int i = 1; i < listOfUserInput.length; i ++) {
-            String currentWord = listOfUserInput[i];
+        for (int i = 1; i < listOfUserInputs.length; i ++) {
+            String currentWord = listOfUserInputs[i];
             if (currentWord.equals("/by") || currentWord.equals("/at")) {
                 break;
             } else {
-                title.append(listOfUserInput[i]).append(" ");
+                title.append(listOfUserInputs[i]).append(" ");
             }
         }
         return title.toString().trim();
@@ -76,10 +78,10 @@ public class Parser {
     public LocalDate obtainDate() {
         boolean hasClue = false; //such as '/by' or '/at'
         StringBuilder stringDate = new StringBuilder();
-        for (int i = 1; i < listOfUserInput.length; i ++) {
-            String currentWord = listOfUserInput[i];
+        for (int i = 1; i < listOfUserInputs.length; i ++) {
+            String currentWord = listOfUserInputs[i];
             if (hasClue) {
-                stringDate.append(listOfUserInput[i]);
+                stringDate.append(listOfUserInputs[i]);
             }
             if (currentWord.equals("/by") || currentWord.equals("/at")) {
                 hasClue = true;
@@ -102,7 +104,7 @@ public class Parser {
      * Obtains integer. Applicable for mark, unmark and delete
      */
     public int obtainTaskNumber() {
-        return Integer.valueOf(listOfUserInput[1]);
+        return Integer.valueOf(listOfUserInputs[1]);
     }
 
     /**
@@ -112,38 +114,39 @@ public class Parser {
         splitUserInput();
         Commands action;
         try {
-            action = Commands.valueOf(obtainCommandWord());
+            action = Commands.valueOf(obtainCommandWord().toUpperCase());
         } catch (IllegalArgumentException e) {
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\nTry another command!\n").append(line);
+            errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(")
+                    .append("Try another command!\n").append(line);
             throw new IllegalArgumentException(errorMessage.toString());
         }
         switch (action) {
-            case todo:
+            case TODO:
                 System.out.println(createToDoTask());
                 break;
-            case deadline:
+            case DEADLINE:
                 System.out.println(createDeadlineTask());
                 break;
-            case event:
+            case EVENT:
                 System.out.println(createEventTask());
                 break;
-            case list:
+            case LIST:
                 System.out.println(listOutTasks());
                 break;
-            case mark:
+            case MARK:
                 System.out.println(markTaskAsDone());
                 break;
-            case unmark:
+            case UNMARK:
                 System.out.println(unmarkTask());
                 break;
-            case delete:
+            case DELETE:
                 System.out.println(deleteTask());
                 break;
-            case find:
+            case FIND:
                 System.out.println(findTask());
                 break;
-            case bye:
+            case BYE:
                 System.out.println(terminateAndSaveProgram(storage));
                 System.exit(0);
             default:
@@ -167,7 +170,8 @@ public class Parser {
     public void checkTaskNumber() throws DukeException {
         int taskNumber = obtainTaskNumber();
         if (taskNumber >= tasks.getTaskListSize() || taskNumber < 1) {
-            throw new DukeException("Please provide the correct Task number! Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!\n");
+            throw new DukeException("Please provide the correct Task number! " +
+                    "Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!\n");
         }
     }
 
@@ -230,7 +234,7 @@ public class Parser {
         StringBuilder successMessage = new StringBuilder();
         String title;
         try {
-            title = obtainTitle();
+            title = obtainTitleOfTask();
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -248,7 +252,7 @@ public class Parser {
         StringBuilder successMessage = new StringBuilder();
         String title = "";
         try {
-            title = obtainTitle();
+            title = obtainTitleOfTask();
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -273,7 +277,7 @@ public class Parser {
         StringBuilder successMessage = new StringBuilder();
         String title = "";
         try {
-            title = obtainTitle();
+            title = obtainTitleOfTask();
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -298,7 +302,7 @@ public class Parser {
         String wordsProvided;
         try {
             successMessage.append(line).append("Here are the matching tasks in your list:\n");
-            wordsProvided = obtainTitle();
+            wordsProvided = obtainTitleOfTask();
             boolean hasMatch = false;
             for (int i = 0; i < tasks.getTaskListSize(); i ++) {
                 Task task = tasks.getParticularTask(i);
