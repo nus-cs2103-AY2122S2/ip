@@ -82,7 +82,7 @@ public class TaskList {
      */
     public Task markTask(int i) {
         Task task = tasks.get(i - 1);
-        task.setIsDone(1);
+        task.setDone(1);
         return task;
     }
 
@@ -92,7 +92,7 @@ public class TaskList {
      */
     public Task unmarkTask(int i) {
         Task task = tasks.get(i - 1);
-        task.setIsDone(0);
+        task.setDone(0);
         return task;
     }
 }

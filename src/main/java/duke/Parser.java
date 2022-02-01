@@ -69,6 +69,10 @@ public class Parser {
                 title.append(listOfUserInputs[i]).append(" ");
             }
         }
+        if (title.toString().equals("")) { //when there is no description provided to a Task
+            errorMessage.append(line).append("☹ OOPS!!! The description cannot be empty.").append(line);
+            throw new DukeException(errorMessage.toString());
+        }
         return title.toString().trim();
     }
 
@@ -88,7 +92,8 @@ public class Parser {
             }
         }
         if (!hasClue) {
-            throw new IllegalArgumentException("\nPlease provide a '/by' or '/at' seperator in between the title and date\nof your Deadline/Event task respectively! Please try running the command again!\n");
+            throw new IllegalArgumentException("\nPlease provide a '/by' or '/at' seperator in between the title and date" +
+                    "\nof your Deadline/Event task respectively! Please try running the command again!\n");
         }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
@@ -103,8 +108,14 @@ public class Parser {
     /**
      * Obtains integer. Applicable for mark, unmark and delete
      */
-    public int obtainTaskNumber() {
-        return Integer.valueOf(listOfUserInputs[1]);
+    public int obtainTaskNumber() throws DukeException {
+        StringBuilder errorMessage = new StringBuilder();
+        try {
+            return Integer.valueOf(listOfUserInputs[1]);
+        } catch (Exception e) {
+            errorMessage.append(line).append("Please provide the Task number to mark/unmark/delete!").append(line);
+            throw new DukeException(errorMessage.toString());
+        }
     }
 
     /**
@@ -118,7 +129,7 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             StringBuilder errorMessage = new StringBuilder();
             errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(")
-                    .append("Try another command!\n").append(line);
+                    .append("\nTry another command!\n").append(line);
             throw new IllegalArgumentException(errorMessage.toString());
         }
         switch (action) {
@@ -168,10 +179,12 @@ public class Parser {
     }
 
     public void checkTaskNumber() throws DukeException {
+        StringBuilder errorMessage = new StringBuilder();
         int taskNumber = obtainTaskNumber();
         if (taskNumber >= tasks.getTaskListSize() || taskNumber < 1) {
-            throw new DukeException("Please provide the correct Task number! " +
-                    "Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!\n");
+            errorMessage.append(line).append("Please provide the correct Task number!");
+            errorMessage.append("Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!").append(line);
+            throw new DukeException(errorMessage.toString());
         }
     }
 
@@ -259,7 +272,7 @@ public class Parser {
         try {
             Task task = new Deadline(title, 0, obtainDate());
             tasks.addTask(task);
-            successMessage.append(line).append("Added Deadline").append(task.toString()).append(line);
+            successMessage.append(line).append("Added Deadline: \n").append(task.toString()).append(line);
             return successMessage.toString();
         } catch (IllegalArgumentException i) {
             return i.getMessage();
