@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Deals with interactions with User and passes accordingly to relevant classes
+ * Deals with interactions with User and passes accordingly to relevant classes.
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */
@@ -21,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Processes the inputs and outputs of the Duke class
+     * Processes the inputs and outputs of the Duke class.
      *
      * @param tasks   the list of tasks
      * @param storage the storage instance
@@ -54,12 +54,5 @@ public class Ui {
      */
     public String showLoadingError(Exception e) {
         return e.getMessage();
-    }
-
-    /**
-     * Returns the message the user will be shown upon starting the program.
-     */
-    public void showWelcomeMessage() {
-        //getMessage("Why hello there! My name is Wensleydale.\nWhat do you need?");
     }
 }

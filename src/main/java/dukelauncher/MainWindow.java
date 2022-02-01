@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     /**
-     * Initializes the GUI variable
+     * Initializes the GUI variable.
      */
     @FXML
     public void initialize() {

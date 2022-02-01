@@ -3,7 +3,7 @@ package dukelauncher;
 import javafx.application.Application;
 
 /**
- * A launcher class for the duke program
+ * A launcher class for the duke program.
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */
