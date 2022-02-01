@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 class Deadline extends Task {
 
-    private final String dueDate;
+    private final LocalDate dueDate;
 
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, LocalDate dueDate) {
         super(name);
         this.dueDate = dueDate;
     }
@@ -10,9 +15,11 @@ class Deadline extends Task {
     @Override
     public String toString() {
         if (super.getStatus() == 1) {
-            return "[D][X] " + super.getName() + " (by: " + dueDate + ")\n";
+            return "[D][X] " + super.getName() + " (by: "
+                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
         } else {
-            return "[D][ ] " + super.getName() + " (by: " + dueDate + ")\n";
+            return "[D][ ] " + super.getName() + " (by: "
+                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
         }
     }
 }

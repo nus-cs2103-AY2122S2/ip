@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -5,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -141,7 +143,7 @@ class Duke {
                         String[] divide = item.split("/");
                         String name = divide[0];
                         String dueDate = divide[1];
-                        Deadline d = new Deadline(name, dueDate.substring(3));
+                        Deadline d = new Deadline(name, LocalDate.parse(dueDate.substring(3)));
                         toDoList.add(d);
                         System.out.printf("task added:\n%s", d);
                         System.out.printf("you now have %d tasks\n", toDoList.size());
@@ -165,7 +167,7 @@ class Duke {
                         String[] divide = item.split("/");
                         String name = divide[0];
                         String time = divide[1];
-                        Event e = new Event(name, time.substring(3));
+                        Event e = new Event(name, LocalDate.parse(time.substring(3)));
                         toDoList.add(e);
                         System.out.printf("task added:\n%s", e);
                         System.out.printf("you now have %d tasks\n", toDoList.size());
