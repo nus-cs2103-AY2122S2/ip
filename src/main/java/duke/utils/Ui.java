@@ -54,7 +54,7 @@ public class Ui {
      *
      * @param tasks Arraylist of tasks
      */
-    public static void printSearchList(ArrayList<Task> tasks) {
+    public static String printSearchList(ArrayList<Task> tasks) {
 
         if(tasks.size() == 0) {
             System.out.println("No Matching Tasks Found");
