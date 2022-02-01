@@ -1,7 +1,6 @@
 package bobby;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    File file;
+    private File file;
 
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -46,6 +45,8 @@ public class Storage {
                         }
                         taskArray.add(newEvent);
                         break;
+                    default:
+                        System.out.println("Error with loading file.");
                     }
                 }
             } else {

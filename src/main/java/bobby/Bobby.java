@@ -1,9 +1,7 @@
 package bobby;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * The Bobby program serves as a notepad, taking in various user

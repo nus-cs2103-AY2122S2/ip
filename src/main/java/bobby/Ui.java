@@ -16,6 +16,10 @@ public class Ui {
         System.out.println("Bobby has created a new list.");
     }
 
+    /**
+     * Prints the tasks currently in the list of tasks.
+     * @param taskArray ArrayList containing current tasks to be printed.
+     */
     public static void printList(ArrayList<Task> taskArray) {
         System.out.println("Here is what you told Bobby:");
         for (int i = 0; i < taskArray.size(); i++) {

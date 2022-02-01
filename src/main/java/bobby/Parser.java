@@ -1,6 +1,5 @@
 package bobby;
 
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
