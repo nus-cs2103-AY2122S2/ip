@@ -61,6 +61,25 @@ public class TaskList {
     }
 
     /**
+     * Returns string of tasks out with their index (1-based).
+     *
+     * @param ui
+     */
+    public String toString(Ui ui) {
+        if (tasks.size() == 0) {
+            return ui.printReturn("You currently do not have any tasks *quack*, please add some more");
+        } else {
+            String output = "";
+            output += ui.printReturn("These are your tasks:");
+            for (int i = 1; i <= this.getSize(); i++) {
+                Task task = this.getByNumber(i);
+                output += ui.printReturn(String.format("%d. %s", i, task.toString()));
+            }
+            return output;
+        }
+    }
+
+    /**
      * Returns a new TaskList after filtering tasks with provided keyword.
      *
      * @param keyword Provided keyword.

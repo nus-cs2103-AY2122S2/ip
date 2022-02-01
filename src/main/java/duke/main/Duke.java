@@ -7,6 +7,7 @@ import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
 
+
 /**
  * Duke is a Todo list command line application that allows you to create, delete, mark, and save tasks
  */
@@ -27,11 +28,9 @@ public class Duke {
 
     /**
      * Returns a Duke application that loads previously saved tasks.
-     *
-     * @param filePath File path from where to load the saved tasks.
      */
-
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = "src/main/data/save.txt";
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -43,31 +42,39 @@ public class Duke {
         }
     }
 
+    //    /**
+    //     * Runs the Duke application
+    //     */
+    //    public void run() {
+    //        this.ui.printBootUp();
+    //        boolean isExit = false;
+    //
+    //        // Program will keep taking in new user input until terminated
+    //        while (!isExit) {
+    //            try {
+    //                String fullCommand = ui.readCommand();
+    //                this.ui.printLineSeparator();
+    //                Command command = Parser.parse(fullCommand);
+    //                command.execute(this.tasks, this.ui, this.storage);
+    //                isExit = command.isExit();
+    //            } catch (DukeException e) {
+    //                this.ui.printException(e);
+    //            } finally {
+    //                this.ui.printLineSeparator();
+    //            }
+    //        }
+    //    }
+
     /**
-     * Runs the Duke application
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-
-    public void run() {
-        this.ui.printBootUp();
-        boolean isExit = false;
-
-        // Program will keep taking in new user input until terminated
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                this.ui.printLineSeparator();
-                Command command = Parser.parse(fullCommand);
-                command.execute(this.tasks, this.ui, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                this.ui.printException(e);
-            } finally {
-                this.ui.printLineSeparator();
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.tasks, this.ui, this.storage);
+        } catch (Exception e) {
+            return e.toString();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("src/main/data/save.txt").run();
     }
 }

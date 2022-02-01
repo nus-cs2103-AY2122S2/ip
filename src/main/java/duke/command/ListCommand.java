@@ -25,8 +25,8 @@ public class ListCommand extends Command {
      * @param storage The storage for the command to save and load tasks to an external file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printTasks(ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.toString(ui);
     }
 
     /**

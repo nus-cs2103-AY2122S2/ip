@@ -51,10 +51,20 @@ public class Ui {
     }
 
     /**
+     * Returns the message of the provided exception with Duke's personality.
+     *
+     * @param e The provided exception.
+     * @return The error message after adding personality.
+     */
+    public String printExceptionReturn(DukeException e) {
+        return String.format("%s *quack*", e.getMessage());
+    }
+
+    /**
      * Prints a list of commands the user can use to interact with Duke.
      */
     public void printHelp() {
-        System.out.println("These are the commands you can use *quack*:");
+        System.out.println("These are the commands you can use *quack*:\n");
         System.out.println("  'list' to list out all your tasks");
         System.out.println("  'todo <description>' to add a todo task");
         System.out.println("  'deadline /<preposition> <description>' to add a task with a deadline");
@@ -67,12 +77,41 @@ public class Ui {
     }
 
     /**
+     * Returns a list of commands the user can use to interact with Duke.
+     *
+     * @return List of commands.
+     */
+    public String printHelpReturn(Ui ui) {
+        String output = "";
+        output += ui.printReturn("These are the commands you can use:");
+        output += ui.printReturn("  'list' to list out all your tasks");
+        output += ui.printReturn("  'todo <description>' to add a todo task");
+        output += ui.printReturn("  'deadline <description> /<preposition> <YYYY-MM-DD> <HH:MM>' to add a task with a deadline");
+        output += ui.printReturn("  'event <description> /<preposition> <YYYY-MM-DD> <HH:MM>' to add an event with a date");
+        output += ui.printReturn("  'mark <task number>' to mark a task as done");
+        output += ui.printReturn("  'unmark <task number>' to unmark a task as done");
+        output += ui.printReturn("  'delete <task number>' to delete a task");
+        output += ui.printReturn("  'bye' to close your Duck app");
+        return output;
+    }
+
+    /**
      * Prints any provided message with Duke's personality.
      *
      * @param message The provided message.
      */
     public void print(String message) {
         System.out.println(String.format("%s *quack*", message));
+    }
+
+    /**
+     * Returns any provided message with Duke's personality.
+     *
+     * @param message The provided message.
+     * @return The message after adding personality.
+     */
+    public String printReturn(String message) {
+        return String.format("%s *quack*\n", message);
     }
 
     /**

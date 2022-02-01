@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.exception.DukeException;
@@ -58,14 +59,11 @@ public class Parser {
             command = new ExitCommand(fullCommand);
             break;
         default:
-            throw new IllegalStateException("Unexpected value: " + st.nextToken());
+            command = new InvalidCommand(fullCommand);
+            break;
         }
 
-        if (command != null) {
-            return command;
-        } else {
-            throw new DukeException("That is not a valid command\nPlease type 'help' to see a list of valid commands");
-        }
+        return command;
 
     }
 }
