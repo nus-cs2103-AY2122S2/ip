@@ -17,8 +17,8 @@ public class ByeCommand extends Command {
      * @param ui UI object
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) {
-        //do nothing as it is a bye command
+    public String execute(List<Task> tasks, Ui ui) {
+        return ui.getExitMessage();
     }
 
     /**

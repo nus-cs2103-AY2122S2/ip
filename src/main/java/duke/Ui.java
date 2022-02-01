@@ -1,8 +1,15 @@
 package duke;
 
+import java.io.IOException;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.gui.MainWindow;
 import duke.task.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Class for printing UI elements.
@@ -10,6 +17,24 @@ import duke.task.Task;
 public class Ui {
     private static final String MESSAGE_INTRO = "Hello! I'm Dusk\n     What can I do for you?";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+
+    private MainWindow mainWindowController;
+
+    public MainWindow getMainWindowController() {
+        return mainWindowController;
+    }
+
+    public void buildStage(Stage stage) throws DukeException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            this.mainWindowController = fxmlLoader.getController();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
 
     /**
      * Prints the set welcome message with the borders.
@@ -23,6 +48,10 @@ public class Ui {
      */
     public void showExitMessage() {
         printContent(MESSAGE_BYE);
+    }
+
+    public String getExitMessage() {
+        return MESSAGE_BYE;
     }
 
     /**
@@ -56,6 +85,12 @@ public class Ui {
         String content = taskLine(task, message) + "\n";
         content += listSizeLine(tasks);
         printContent(content);
+    }
+
+    public String getAddDeleteTaskSuccess(List<Task> tasks, Task task, String message) {
+        String content = taskLine(task, message) + "\n";
+        content += listSizeLine(tasks);
+        return content;
     }
 
     /**

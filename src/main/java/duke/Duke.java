@@ -1,23 +1,63 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
+import duke.gui.MainWindow;
 import duke.task.Task;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Main Duke class that runs the task management program, Duke.
  */
-public class Duke {
+public class Duke extends Application {
     private static final String FILE_PATH = "./data/test.txt";
 
     private static final Ui UI = new Ui();
 
-    public static void main(String[] args) {
-        run();
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private List<Task> taskList = Storage.loadFromFile(FILE_PATH);
+
+    @Override
+    public void start (Stage stage) {
+        try {
+            UI.buildStage(stage);
+        } catch (DukeException e){
+            System.out.println(e.getMessage());
+            Platform.exit();
+        }
+        stage.show();
+    }
+
+    public String getResponse(String userInput){
+        try {
+            Command c = Parser.parse(userInput);
+            if (c instanceof ByeCommand)
+                Platform.exit();
+            return c.execute(taskList, UI);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**

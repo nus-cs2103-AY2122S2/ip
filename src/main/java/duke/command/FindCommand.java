@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      * @param ui UI object
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) {
+    public String execute(List<Task> tasks, Ui ui) {
         List<Integer> foundIndexes = new ArrayList<Integer>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getTitle().contains(this.searchTerm)) {
@@ -43,7 +43,7 @@ public class FindCommand extends Command {
             }
         }
         if (foundIndexes.size() == 0) {
-            ui.printContent(ERROR_FOUND_NOTHING);
+            return ERROR_FOUND_NOTHING;
         } else {
             String foundList = MESSAGE_FIND + "\n     ";
             for (int i = 0; i < foundIndexes.size(); i++) {
@@ -54,7 +54,8 @@ public class FindCommand extends Command {
                     foundList += "\n     ";
                 }
             }
-            ui.printContent(foundList);
+            return foundList;
+            //ui.printContent(foundList);
         }
     }
 }

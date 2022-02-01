@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param ui UI object
      */
     @Override
-    public void execute(List<Task> tasks, Ui ui) {
+    public String execute(List<Task> tasks, Ui ui) {
         String list = MESSAGE_LIST + "\n     ";
         if (tasks.size() == 0) {
             list += "~~List is currently empty~~";
@@ -31,5 +31,6 @@ public class ListCommand extends Command {
         }
         ui.printContent(list);
         Storage.saveToFile(tasks);
+        return list;
     }
 }

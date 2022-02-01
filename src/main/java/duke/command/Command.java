@@ -18,7 +18,7 @@ public abstract class Command {
      * @param ui UI object
      * @throws DukeException Depending on implementation of the different tasks, throw for errors
      */
-    public abstract void execute(List<Task> tasks, Ui ui) throws DukeException;
+    public abstract String execute(List<Task> tasks, Ui ui) throws DukeException;
 
     /**
      * Default method to check if command should exit.
