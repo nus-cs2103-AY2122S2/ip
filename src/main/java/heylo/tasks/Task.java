@@ -104,12 +104,13 @@ public abstract class Task {
      */
     public static void removeFromList(int index) {
         try {
+            String outputTask = "  " + taskList.get(index).toString();
             taskList.remove(index);
             System.out.println(" Okay, I've deleted this task.");
-            System.out.println("  " + taskList.get(index).toString());
+            System.out.println(outputTask);
             taskCount--;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(" You have not added any tasks yet.");
+            System.out.println(" This task does not exist.");
         }
     }
 
@@ -166,6 +167,33 @@ public abstract class Task {
     /**
      * Prints the list of tasks in the task list.
      */
+    public static void findInList(String subString) {
+        if (taskCount == 0) {
+            System.out.println(" You have not added any tasks yet.");
+            return;
+        }
+
+        int[] foundIndexes = new int[taskCount];
+        int foundCount = 0;
+
+        for (int i = 0; i < taskCount; i++) {
+            if (taskList.get(i).description.contains(subString)) {
+                foundIndexes[foundCount] = i;
+                foundCount++;
+            }
+        }
+
+        if (foundCount == 0) {
+            System.out.println(" Sorry, I couldn't find any matching tasks :(");
+        } else {
+            System.out.println(" Here are the tasks you may be looking for!");
+        }
+
+        for (int i = 0; i < foundCount; i++) {
+            System.out.println("   " + (i + 1) + "." + taskList.get(foundIndexes[i]).toString());
+        }
+    }
+
     public static void printAllTasks() {
         if (taskCount == 0) {
             System.out.println(" You have not added any tasks yet.");
