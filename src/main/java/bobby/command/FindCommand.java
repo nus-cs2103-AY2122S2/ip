@@ -1,5 +1,7 @@
 package bobby.command;
 
+import java.util.ArrayList;
+
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
@@ -7,8 +9,6 @@ import bobby.exception.FindException;
 import bobby.task.Task;
 import bobby.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class FindCommand extends Command {
     private String fullCommand;

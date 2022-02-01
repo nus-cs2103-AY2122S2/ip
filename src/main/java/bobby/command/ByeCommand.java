@@ -1,8 +1,8 @@
 package bobby.command;
 
 import bobby.Storage;
-import bobby.task.TaskList;
 import bobby.Ui;
+import bobby.task.TaskList;
 
 /**
  * Represents a 'bye' command.

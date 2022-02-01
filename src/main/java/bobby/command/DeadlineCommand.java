@@ -1,14 +1,14 @@
 package bobby.command;
 
-import bobby.exception.BobbyException;
-import bobby.task.Deadline;
-import bobby.exception.DeadlineException;
-import bobby.Storage;
-import bobby.task.TaskList;
-import bobby.Ui;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import bobby.Storage;
+import bobby.Ui;
+import bobby.exception.BobbyException;
+import bobby.exception.DeadlineException;
+import bobby.task.Deadline;
+import bobby.task.TaskList;
 
 /**
  * Represents a 'deadline' command
@@ -39,8 +39,7 @@ public class DeadlineCommand extends Command {
             SIMPLE_DATE_FORMAT.setLenient(false);
             SIMPLE_DATE_FORMAT.parse(input);
             return true;
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             return false;
         }
     }
@@ -56,13 +55,13 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         ui.printLongLine();
-        if (fullCommand.substring(8).isBlank()) {                                     // nothing after command
+        if (fullCommand.substring(8).isBlank()) { // nothing after command
             throw new DeadlineException("blank");
-        } else if (!fullCommand.contains("/")) {                                      // no "/"
+        } else if (!fullCommand.contains("/")) {  // no "/"
             throw new DeadlineException("no_slash");
-        } else if (fullCommand.substring(fullCommand.indexOf("/") + 1).isBlank()) {             // nothing after time
+        } else if (fullCommand.substring(fullCommand.indexOf("/") + 1).isBlank()) { // nothing after time
             throw new DeadlineException("no_date");
-        } else if (!isValidDate(fullCommand.substring(fullCommand.length() - 10))) {            // invalid date
+        } else if (!isValidDate(fullCommand.substring(fullCommand.length() - 10))) { // invalid date
             throw new DeadlineException("invalid_date");
         }
         Deadline newDeadline = new Deadline(fullCommand.substring(fullCommand.indexOf(" ") + 1,

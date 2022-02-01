@@ -1,11 +1,12 @@
 package bobby.command;
 
-import bobby.exception.BobbyException;
 import bobby.Storage;
+import bobby.Ui;
+import bobby.exception.BobbyException;
+import bobby.exception.ToDoException;
 import bobby.task.TaskList;
 import bobby.task.ToDo;
-import bobby.exception.ToDoException;
-import bobby.Ui;
+
 
 /**
  * Represents a 'todo' command
@@ -38,7 +39,7 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         ui.printLongLine();
-        if (fullCommand.substring(4).isBlank()) {                   // nothing after command
+        if (fullCommand.substring(4).isBlank()) { // nothing after command
             throw new ToDoException("todo");
         }
         ToDo newToDo = new ToDo(fullCommand.substring(5));

@@ -1,6 +1,16 @@
 package bobby;
 
-import bobby.command.*;
+import bobby.command.ByeCommand;
+import bobby.command.Command;
+import bobby.command.DeadlineCommand;
+import bobby.command.DeleteCommand;
+import bobby.command.EventCommand;
+import bobby.command.FindCommand;
+import bobby.command.InvalidCommand;
+import bobby.command.ListCommand;
+import bobby.command.MarkCommand;
+import bobby.command.ToDoCommand;
+import bobby.command.UnmarkCommand;
 
 public class Parser {
 

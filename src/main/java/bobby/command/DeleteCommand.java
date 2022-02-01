@@ -1,11 +1,12 @@
 package bobby.command;
 
+import bobby.Storage;
+import bobby.Ui;
 import bobby.exception.BobbyException;
 import bobby.exception.DeleteException;
-import bobby.Storage;
 import bobby.task.Task;
 import bobby.task.TaskList;
-import bobby.Ui;
+
 
 /**
  * Represents a 'delete' command.
@@ -46,15 +47,15 @@ public class DeleteCommand extends Command {
             ui.deleteAllMessage();
         } else {
             try {
-                if (fullCommand.substring(6).isBlank()) {                             // no argument
+                if (fullCommand.substring(6).isBlank()) { // no argument
                     throw new DeleteException("empty");
-                } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) {   // out of bounds
+                } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
                     throw new DeleteException("OOB");
                 } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
                     throw new DeleteException("negative");
                 }
             } catch (NumberFormatException e) {
-                throw new DeleteException("letter");                  // contains letter(s)
+                throw new DeleteException("letter"); // contains letter(s)
             }
             Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
             ui.deleteMessage(task);

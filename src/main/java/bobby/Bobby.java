@@ -1,13 +1,13 @@
 package bobby;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import bobby.command.ByeCommand;
 import bobby.command.Command;
 import bobby.exception.BobbyException;
 import bobby.task.TaskList;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Bobby {
     private static final String FILE_LOCATION = "./Bobby.txt";
@@ -15,7 +15,7 @@ public class Bobby {
     private Storage storage;
     private TaskList tasks;
 
-    public Bobby(String filePath) {
+    public Bobby() {
         ui = new Ui(new Scanner(System.in));
         try {
             storage = new Storage(new File(FILE_LOCATION));
@@ -45,6 +45,6 @@ public class Bobby {
     }
 
     public static void main(String[] args) {
-        new Bobby(FILE_LOCATION).run();
+        new Bobby().run();
     }
 }

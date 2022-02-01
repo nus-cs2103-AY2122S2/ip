@@ -1,8 +1,5 @@
 package bobby;
 
-import bobby.exception.StorageException;
-import bobby.task.Task;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +8,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import bobby.exception.StorageException;
+import bobby.task.Task;
+
+
 
 public class Storage {
     private File bobbyFile;
