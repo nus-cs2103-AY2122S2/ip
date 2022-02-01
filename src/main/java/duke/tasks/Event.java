@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Event class is a class which represents the event task.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate at;
 
     /**
@@ -40,7 +40,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

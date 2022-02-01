@@ -1,8 +1,12 @@
 package duke.functionality;
-import duke.exceptions.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
+
+
 
 /**
  * Parser is a functionality class that helps Duke to understand what the user inputs are.
@@ -47,7 +51,7 @@ public class Parser {
             } else {
                 throw new DukeException(ERROR_UNKNOWN);
             }
-        } catch(IndexOutOfBoundsException error) {
+        } catch (IndexOutOfBoundsException error) {
             throw new DukeException(ERROR_DESCRIPTION);
         }
     }
