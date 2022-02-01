@@ -3,7 +3,7 @@ package jose;
 /**
  * A basic exception class that allows for more personalised error handling and messaging.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Class constructor.
      *

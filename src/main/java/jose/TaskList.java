@@ -1,7 +1,11 @@
 package jose;
 
 import java.util.ArrayList;
-import jose.task.*;
+
+import jose.task.Deadline;
+import jose.task.Event;
+import jose.task.Task;
+import jose.task.ToDo;
 
 /**
  * Class that represents a task list.
@@ -40,6 +44,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and returns tasks that contain the given query in its description.
+     *
+     * @param query An ArrayList containing tasks.
+     * @return An ArrayList containing tasks with descriptions that contain the given query.
+     */
     public ArrayList<Task> findTasks(String query) {
         ArrayList<Task> results = new ArrayList<>();
 

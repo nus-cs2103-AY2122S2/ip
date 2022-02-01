@@ -2,7 +2,11 @@ package jose;
 
 import java.io.IOException;
 import java.util.Scanner;
-import jose.task.*;
+
+import jose.task.Deadline;
+import jose.task.Event;
+import jose.task.Task;
+import jose.task.ToDo;
 
 /**
  * The main class used to run Jose. Is called Duke for consistency.
@@ -100,6 +104,9 @@ public class Duke {
                     isModified = true;
                     ui.showAddMessage(tempTask);
                     ui.showRemainingTasks(tasks);
+                    break;
+                default:
+                    System.out.println("?");
                 }
 
                 if (isModified) {

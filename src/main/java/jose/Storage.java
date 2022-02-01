@@ -7,7 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import jose.task.*;
+
+import jose.task.Task;
 
 /**
  * A class that handles the reading and writing of data stored in the data file.

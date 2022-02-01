@@ -3,7 +3,7 @@ package jose;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import jose.task.*;
+import jose.task.Task;
 
 /**
  * The class that handles the UI
@@ -49,8 +49,8 @@ public class Ui {
      * @param task A task.
      */
     public void showUnmarkMessage(Task task) {
-        out.println(DIVIDER + LS + "Bien, he marcado esta tarea como aún no realizada:" +
-                LS + task + LS + DIVIDER);
+        out.println(DIVIDER + LS + "Bien, he marcado esta tarea como aún no realizada:"
+                + LS + task + LS + DIVIDER);
     }
 
     /**

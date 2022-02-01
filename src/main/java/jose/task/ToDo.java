@@ -3,7 +3,7 @@ package jose.task;
 /**
  * A class representing the todo task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Constructor that sets isDone to false.
      *
