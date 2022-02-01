@@ -11,6 +11,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -18,6 +19,7 @@ public class Duke {
             System.out.println(e);
             tasks = new TaskList();
         }
+
     }
 
     public void run() {
@@ -33,6 +35,7 @@ public class Duke {
         }
 
         sc.close();
+        storage.save(tasks);
         ui.exit();
 
     }
