@@ -12,6 +12,6 @@ public class DukeException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! " + this.getMessage();
+        return "OOPS!!! " + this.getMessage();
     }
 }
