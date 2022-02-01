@@ -1,11 +1,11 @@
 package com.duke.modules;
 
-import com.duke.command.CommandResult;
-import com.duke.modules.Parser;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
+
+import com.duke.command.CommandResult;
 
 public class DukeParserTest {
     @Test

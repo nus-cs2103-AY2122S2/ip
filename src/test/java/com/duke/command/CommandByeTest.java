@@ -1,10 +1,8 @@
 package com.duke.command;
 
-import com.duke.modules.Storage;
-import com.duke.modules.TaskList;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class CommandByeTest {
     @Test

@@ -1,7 +1,5 @@
 package com.duke.command;
 
-import java.util.Objects;
-
 /**
  * Represents a result of a Command execution.
  * Acts as a wrapper around a string describing the command execution result.

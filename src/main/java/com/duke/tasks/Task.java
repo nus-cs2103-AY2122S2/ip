@@ -4,8 +4,12 @@ public class Task {
     protected boolean status;
     protected String description;
 
-    public static enum TaskType {TODO, DEADLINE, EVENT}
+    public static enum TaskType { TODO, DEADLINE, EVENT }
 
+    /**
+     * Constructor for a Todo Task object.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.status = false;

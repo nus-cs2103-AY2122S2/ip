@@ -1,6 +1,14 @@
 package com.duke.modules;
 
-import com.duke.command.*;
+import com.duke.command.CommandAdd;
+import com.duke.command.CommandBye;
+import com.duke.command.CommandClear;
+import com.duke.command.CommandDelete;
+import com.duke.command.CommandFind;
+import com.duke.command.CommandList;
+import com.duke.command.CommandMark;
+import com.duke.command.CommandResult;
+import com.duke.command.CommandUnmark;
 
 /**
  * A class responsible for parsing user inputs.
@@ -12,11 +20,18 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parses the first word of the user input, and executes the corresponding command.
+     * @param string String of user input.
+     * @return A command result from the execution of the command.
+     */
     public CommandResult parse(String string) {
         CommandResult cmdResult = null;
         String[] strArr = string.split(" ");
         String str = "";
-        if (strArr.length != 1) str = string.substring(string.indexOf(" ") + 1);
+        if (strArr.length != 1) {
+            str = string.substring(string.indexOf(" ") + 1);
+        }
         switch (strArr[0]) {
         case "":
             cmdResult = new CommandResult("*crickets*");

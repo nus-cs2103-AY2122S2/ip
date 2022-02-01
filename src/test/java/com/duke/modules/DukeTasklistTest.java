@@ -1,13 +1,13 @@
 package com.duke.modules;
 
-import com.duke.modules.TaskList;
-import com.duke.tasks.Task;
-import com.duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.duke.tasks.Task;
+import com.duke.tasks.Todo;
 
 public class DukeTasklistTest {
     @Test

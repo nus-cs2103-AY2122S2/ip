@@ -1,13 +1,14 @@
 package com.duke.command;
 
-import com.duke.modules.Storage;
-import com.duke.modules.TaskList;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+
+import com.duke.modules.Storage;
+import com.duke.modules.TaskList;
 
 public class CommandDeleteTest {
     @Test
@@ -18,8 +19,8 @@ public class CommandDeleteTest {
         addCommand.execute();
         CommandDelete deleteCommand = new CommandDelete("1", taskList);
         assertEquals(deleteCommand.execute().getResultMessage(),
-                "Noted. I've removed this task:\n" +
-                "\t[T][ ] groceries");
+                "Noted. I've removed this task:\n"
+                        + "\t[T][ ] groceries");
     }
 
     @Test

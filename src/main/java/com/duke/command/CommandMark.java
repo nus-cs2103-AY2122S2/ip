@@ -1,12 +1,12 @@
 package com.duke.command;
 
-import com.duke.exception.DukeInvalidArgumentException;
+import java.io.IOException;
+
 import com.duke.exception.DukeEmptyListException;
+import com.duke.exception.DukeInvalidArgumentException;
 import com.duke.modules.Storage;
 import com.duke.modules.TaskList;
 import com.duke.tasks.Task;
-
-import java.io.IOException;
 
 /**
  * Represents a chatbot command for marking Tasks in the TaskList
@@ -46,8 +46,8 @@ public class CommandMark extends Command {
             return new CommandResult(
                     "Invalid task chosen, please ensure that the number given is correct");
         } catch (IOException e) {
-            return new CommandResult("Unable to save list." +
-                    "Please check if you have permission to write to files in the following directory: "
+            return new CommandResult("Unable to save list."
+                    + "Please check if you have permission to write to files in the following directory: "
                     + Storage.getInstance().getDirectoryPath());
         }
     }

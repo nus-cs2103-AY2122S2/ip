@@ -1,15 +1,16 @@
 package com.duke.modules;
 
-import com.duke.tasks.Task;
-import com.duke.tasks.Todo;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+
+import com.duke.tasks.Task;
+import com.duke.tasks.Todo;
 
 public class DukeStorageTest {
     @Test

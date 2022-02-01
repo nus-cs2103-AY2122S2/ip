@@ -1,3 +1,5 @@
+package com.duke;
+
 import com.duke.modules.Parser;
 import com.duke.modules.Storage;
 import com.duke.modules.TaskList;
@@ -9,10 +11,14 @@ public class Duke {
     public Duke() {
     }
 
+    /**
+     * Runs the chatbot.
+     * @param args
+     */
     public static void main(String[] args) {
-        Duke Lumu = new Duke();
+        Duke lumu = new Duke();
 
-        Lumu.botInitialize();
+        lumu.botInitialize();
     }
 
     private void botInitialize() {

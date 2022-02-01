@@ -1,7 +1,5 @@
 package com.duke.command;
 
-import com.duke.modules.TaskList;
-
 /**
  * Represents a chatbot command for shutting down the chatbot.
  */

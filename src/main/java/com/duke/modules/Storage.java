@@ -1,10 +1,5 @@
 package com.duke.modules;
 
-import com.duke.tasks.Deadline;
-import com.duke.tasks.Event;
-import com.duke.tasks.Task;
-import com.duke.tasks.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,11 +11,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import com.duke.tasks.Deadline;
+import com.duke.tasks.Event;
+import com.duke.tasks.Task;
+import com.duke.tasks.Todo;
+
 /**
  * A class responsible for saving/loading a task list into/from a text file.
  */
 public class Storage {
-    public static Storage INSTANCE;
+    private static Storage STORAGE_INSTANCE;
     private String directoryPath = System.getProperty("user.dir") + "/data/";
     private String listFile = "listData.txt";
 
@@ -28,8 +28,8 @@ public class Storage {
     }
 
     public static Storage getInstance() {
-        INSTANCE = (INSTANCE == null) ? new Storage() : INSTANCE;
-        return INSTANCE;
+        STORAGE_INSTANCE = (STORAGE_INSTANCE == null) ? new Storage() : STORAGE_INSTANCE;
+        return STORAGE_INSTANCE;
     }
 
     /**
@@ -80,24 +80,27 @@ public class Storage {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] task = line.split(" \\| ");
                 switch (task[0]) {
-                case "com.duke.tasks.Todo":
+                case "Todo":
                     Todo todoTask = new Todo(task[2]);
                     todoTask.setStatus((task[1].equals("1") ? true : false));
                     taskList.add(todoTask);
                     break;
-                case "com.duke.tasks.Deadline":
+                case "Deadline":
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
                     LocalDateTime dateTime = LocalDateTime.parse(task[3], dateTimeFormatter);
                     Deadline deadlineTask = new Deadline(task[2], dateTime);
                     deadlineTask.setStatus((task[1].equals("1") ? true : false));
                     taskList.add(deadlineTask);
                     break;
-                case "com.duke.tasks.Event":
+                case "Event":
                     Event eventTask = new Event(task[2], task[3]);
                     eventTask.setStatus((task[1].equals("1") ? true : false));
                     taskList.add(eventTask);
                     break;
+                default:
+                    break;
                 }
+
             }
 
             bufferedReader.close();
@@ -105,8 +108,8 @@ public class Storage {
             System.out.println(
                     "Invalid save file format. Save file may have been edited or corrupted.");
         } catch (IOException e) {
-            System.out.println("Unable to load list." +
-                    "Please check if you have permission to read from files in the following directory: "
+            System.out.println("Unable to load list."
+                    + "Please check if you have permission to read from files in the following directory: "
                     + directoryPath);
         }
         return success;

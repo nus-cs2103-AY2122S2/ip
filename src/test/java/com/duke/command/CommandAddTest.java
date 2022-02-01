@@ -1,14 +1,14 @@
 package com.duke.command;
 
-import com.duke.exception.DukeInvalidArgumentException;
-import com.duke.modules.Storage;
-import com.duke.modules.TaskList;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+
+import com.duke.modules.Storage;
+import com.duke.modules.TaskList;
 
 public class CommandAddTest {
     @Test
@@ -17,9 +17,9 @@ public class CommandAddTest {
         CommandAdd addCommand = new CommandAdd(
                 "deadline", "project /by 20/12/2022 2359", taskList);
         assertEquals(addCommand.execute().getResultMessage(),
-                "Got it. I've added this task:" +
-                        "\n\t[D][ ] project (by: Dec 20 2022 11:59pm)\n" +
-                        "Now you have 1 task(s) in the list");
+                "Got it. I've added this task:"
+                        + "\n\t[D][ ] project (by: Dec 20 2022 11:59PM)\n"
+                        + "Now you have 1 task(s) in the list");
 
         //Invalid date format
         addCommand = new CommandAdd(

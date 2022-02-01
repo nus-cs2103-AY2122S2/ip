@@ -1,8 +1,8 @@
 package com.duke.modules;
 
-import com.duke.command.CommandResult;
-
 import java.util.Scanner;
+
+import com.duke.command.CommandResult;
 
 /**
  * A class responsible for dealing with user interactions.
@@ -28,7 +28,9 @@ public class Ui {
             String commands = scanner.nextLine().trim();
             CommandResult cmdResult = parser.parse(commands);
             showMessage(cmdResult.getResultMessage());
-            if (cmdResult.isShutdown()) break;
+            if (cmdResult.isShutdown()) {
+                break;
+            }
         }
     }
 

@@ -1,9 +1,9 @@
 package com.duke.command;
 
+import java.io.IOException;
+
 import com.duke.modules.Storage;
 import com.duke.modules.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a chatbot command for clearing all Tasks from the TaskList
@@ -41,8 +41,8 @@ public class CommandClear extends Command {
                 return new CommandResult("List successfully cleared");
             }
         } catch (IOException e) {
-            return new CommandResult("Unable to save list." +
-                    "Please check if you have permission to write to files in the following directory: "
+            return new CommandResult("Unable to save list."
+                    + "Please check if you have permission to write to files in the following directory: "
                     + Storage.getInstance().getDirectoryPath());
         }
     }

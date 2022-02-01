@@ -1,9 +1,9 @@
 package com.duke.modules;
 
-import com.duke.tasks.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.duke.tasks.Task;
 
 /**
  * A class responsible for dealing with operations on a task list.
@@ -15,6 +15,10 @@ public class TaskList {
     public TaskList() {
     }
 
+    /**
+     * Constructor for a Tasklist.
+     * @param storage A storage instance.
+     */
     public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
         this.storage = storage;

@@ -1,5 +1,10 @@
 package com.duke.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import com.duke.exception.DukeInvalidArgumentException;
 import com.duke.modules.Storage;
 import com.duke.modules.TaskList;
@@ -7,11 +12,6 @@ import com.duke.tasks.Deadline;
 import com.duke.tasks.Event;
 import com.duke.tasks.Task;
 import com.duke.tasks.Todo;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a chatbot command for adding Tasks to the TaskList
@@ -53,8 +53,8 @@ public class CommandAdd extends Command {
                     "Valid date and time must be given in this format: DD/MM/YYYY HHmm"
                             + "\nEg: 24/12/2022 2359");
         } catch (IOException e) {
-            return new CommandResult("Unable to save list." +
-                    "Please check if you have permission to write to files in the following directory: "
+            return new CommandResult("Unable to save list."
+                    + "Please check if you have permission to write to files in the following directory: "
                     + Storage.getInstance().getDirectoryPath());
         }
     }
@@ -122,6 +122,8 @@ public class CommandAdd extends Command {
         case EVENT:
             task = new Event(args.substring(0, args.indexOf(" /at ")),
                     args.substring(args.indexOf(" /at ") + 5));
+            break;
+        default:
             break;
         }
         taskList.addTask(task);
