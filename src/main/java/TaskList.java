@@ -11,14 +11,14 @@ public class TaskList {
             System.out.print(String.format("%d. %s \n", i+1, taskList.get(i).toString()));
         }
     }
-    public void add(Task task) {
-        taskList.add(task);
-    }
     public boolean removeFromTaskList(Task selectedTaskToDelete) {
         return taskList.remove(selectedTaskToDelete);
     }
     public Task get(Integer i) {
         return taskList.get(i);
+    }
+    public void add(Task task) {
+        taskList.add(task);
     }
     public Integer size() {
         return taskList.size();
