@@ -76,6 +76,15 @@ public class Parser {
                     System.err.println(e);
                 }
                 break;
+            case FIND:
+                String[] queries = inputs[1].split(" ");
+                if (queries.length > 1) {
+                    System.out.println("Bobby can only search using 1 keyword.");
+                } else {
+                    String query = inputs[1];
+                    tasks.find(query);
+                }
+                break;
             default:
                 try {
                     throw new BobbyException("Bobby does not understand you. Please use valid inputs.");

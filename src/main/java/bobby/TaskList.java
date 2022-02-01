@@ -2,6 +2,7 @@ package bobby;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * The TaskList class executes commands and updates the list accordingly.
@@ -147,5 +148,22 @@ public class TaskList {
         t.unmarkAsDone();
         storage.updateFile(taskArray);
         Ui.taskNotDone(t);
+    }
+
+    public void find(String query) {
+        boolean isSuccessful = false;
+        System.out.println("Bobby found these task(s):");
+        for (Task t : taskArray) {
+            String[] contents = t.description.split(" ");
+            for (String content : contents) {
+                if (Objects.equals(content, query)) {
+                    Ui.printTask(t);
+                    isSuccessful = true;
+                }
+            }
+        }
+        if (!isSuccessful) {
+            System.out.println("Bobby could not find any matching tasks.");
+        }
     }
 }
