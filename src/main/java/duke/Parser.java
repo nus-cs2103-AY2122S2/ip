@@ -6,25 +6,41 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    static ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event", "deadline", "mark",
-            "unmark", "list", "bye", "delete", "find"));
+    private static final ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event",
+            "deadline", "mark", "unmark", "list", "bye", "delete", "find"));
 
-    static String LINES = "    ---------------------------------";
+    private static final String LINES = "    ---------------------------------";
 
-    // deal with the list command
+    /**
+     * Manages the listing of task list.
+     *
+     * @param taskLists list of tasks.
+     */
     static void parserList(TaskList taskLists) {
         taskLists.list();
     }
 
-    // deal with the todo command
+    /**
+     * Manages the todo command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputTask user input task.
+     * @throws DukeException
+     */
     static void parserTodo(TaskList taskLists, String userInputTask) throws DukeException {
-        Parser.taskDescriptionValidator("todo" ,userInputTask);
+        Parser.taskDescriptionValidator("todo", userInputTask);
 
         // adding task to todoList
         Todo userToDoTask = new Todo(userInputTask);
         taskLists.addTask(userToDoTask);
     }
 
+    /**
+     * Validates deadline command.
+     *
+     * @param userInputTask user input task.
+     * @throws DukeException
+     */
     static void parserDeadlineValidator(String userInputTask) throws DukeException {
         // handle error from empty task description
         try {
@@ -57,6 +73,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Manages deadline command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputTask user input task.
+     */
     static void parserDeadline(TaskList taskLists, String userInputTask) {
         // splitting deadline into description and by
         String[] deadlineTaskArr = userInputTask.split(" /by ");
@@ -73,6 +95,12 @@ public class Parser {
         taskLists.addTask(userDeadlineTask);
     }
 
+    /**
+     * Validates event command.
+     *
+     * @param userInputTask user input task.
+     * @throws DukeException
+     */
     static void parserEventValidator(String userInputTask) throws DukeException {
         // handle error from empty task description
         try {
@@ -105,6 +133,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Manages event command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputTask user input task.
+     */
     static void parserEvent(TaskList taskLists, String userInputTask) {
 
         // splitting event into description and dateTime
@@ -125,16 +159,35 @@ public class Parser {
         taskLists.addTask(userEventTask);
     }
 
+    /**
+     * Manages mark command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputs user input task.
+     */
     static void parserMark(TaskList taskLists, String[] userInputs) {
         int taskToMark = Integer.parseInt(userInputs[1]);
         taskLists.setTaskAsDone(taskToMark);
     }
 
+    /**
+     * Manages unmark command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputs user input task.
+     */
     static void parserUnmark(TaskList taskLists, String[] userInputs) {
         int taskToUnmark = Integer.parseInt(userInputs[1]);
         taskLists.setTaskAsUnDone(taskToUnmark);
     }
 
+    /**
+     * Validates delete command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputTask user input task.
+     * @throws DukeException
+     */
     static void parserDeleteValidator(TaskList taskLists, String userInputTask) throws DukeException {
         // handle error when there is no specified task number to be deleted
         try {
@@ -157,6 +210,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Manages delete command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputs user input of task to delete.
+     */
     static void parserDelete(TaskList taskLists, String[] userInputs) {
         int taskToDelete = Integer.parseInt(userInputs[1]);
 
@@ -164,6 +223,12 @@ public class Parser {
         taskLists.removeTask(taskToDelete);
     }
 
+    /**
+     * Manages find command.
+     *
+     * @param taskLists list of tasks.
+     * @param userInputTask user input task.
+     */
     static void parserFind(TaskList taskLists, String userInputTask) {
         TaskList tasks = new TaskList(new ArrayList<Task>());
 
@@ -181,37 +246,61 @@ public class Parser {
         System.out.println(LINES);
     }
 
-
-    // check for error when there is no task description
+    /**
+     * Validates if there is task description for input task.
+     *
+     * @param userCommand
+     * @param description description of task.
+     * @throws DukeException
+     */
     static void taskDescriptionValidator(String userCommand, String description) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("Invalid task description for " + userCommand);
         }
     }
 
-    // check for error when there is invalid deadline without by
+    /**
+     * Validates if there is invalid deadline for deadline task.
+     *
+     * @param description description of deadline task.
+     * @throws DukeException
+     */
     static void deadlineTaskValidator(String description) throws DukeException {
         if (!description.contains("/by")) {
             throw new DukeException("Invalid by deadline for deadline task: " + description);
         }
     }
 
-    // check for error when there is no dateTime
+    /**
+     * Validates event task if there is no dateTime.
+     *
+     * @param description description of event task.
+     * @throws DukeException
+     */
     static void eventTaskValidator(String description) throws DukeException {
         if (!description.contains("/at")) {
             throw new DukeException("Invalid at date for event task: " + description);
         }
     }
 
-
-    // check for error when there is invalid userCommand
+    /**
+     * Validates if the user has input invalid command.
+     *
+     * @param userCommand user input command.
+     * @throws DukeException
+     */
     static void userCommandValidator(String userCommand) throws DukeException {
         if (!VALID_USER_COMMAND.contains(userCommand)) {
             throw new DukeException("Invalid user command for input task");
         }
     }
 
-    // check for when there is more than one by deadline day
+    /**
+     * Validates deadline task if there is more than one deadline day.
+     *
+     * @param description description of deadline task.
+     * @throws DukeException
+     */
     static void deadlineByDayValidator(String description) throws DukeException {
         String temp = description.replaceFirst("/by", "");
 
@@ -220,7 +309,12 @@ public class Parser {
         }
     }
 
-    // check for when there is invalid date symbols
+    /**
+     * Validates if there is invalid date format.
+     *
+     * @param by the deadline of this task.
+     * @throws DukeException
+     */
     static void deadlineDateFormatValidator(String by) throws DukeException {
         if (by.contains("/") || by.contains(".")) {
             throw new DukeException("Deadline date needs to be in the YYYY-MM-DD format");
@@ -231,7 +325,12 @@ public class Parser {
         }
     }
 
-    // check for when there is more than one at event date
+    /**
+     * Validates if there is more than one event date.
+     *
+     * @param description description of an event task.
+     * @throws DukeException
+     */
     static void eventAtDateTimeValidator(String description) throws DukeException {
         String temp = description.replaceFirst("/at", "");
 
@@ -240,7 +339,12 @@ public class Parser {
         }
     }
 
-    // check for when there is invalid date symbols
+    /**
+     * Validates if there is invalid date format for event task.
+     *
+     * @param by event date.
+     * @throws DukeException
+     */
     static void eventDateFormatValidator(String by) throws DukeException {
         if (by.contains("/") || by.contains(".")) {
             throw new DukeException("Event date needs to be in the YYYY-MM-DD format");
@@ -251,18 +355,28 @@ public class Parser {
         }
     }
 
-    // check for when there is no task specify for delete
+    /**
+     * Validates if there is a task specify to delete.
+     *
+     * @param taskNumber task number to be deleted.
+     * @throws DukeException
+     */
     static void deleteValidator(String taskNumber) throws DukeException {
         if (taskNumber.isEmpty()) {
             throw new DukeException("Empty task number for delete task");
         }
     }
 
-    // check for when the task number specified is invalid for delete task
+    /**
+     * Validates if the task number specified to be deleted is valid.
+     *
+     * @param taskLists list of tasks.
+     * @param taskNumber task number to be deleted.
+     * @throws DukeException
+     */
     static void deleteTaskNumberValidator(TaskList taskLists, String taskNumber) throws DukeException {
         if (Integer.parseInt(taskNumber) > taskLists.size()) {
             throw new DukeException("Invalid task number for delete task");
         }
     }
-
 }

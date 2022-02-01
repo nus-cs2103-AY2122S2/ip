@@ -17,7 +17,7 @@ public class Todo extends Task {
      */
     @Override
     public String toStringForSave() {
-        return "T "+ super.toStringForSave();
+        return "T " + super.toStringForSave();
     }
 
     /**

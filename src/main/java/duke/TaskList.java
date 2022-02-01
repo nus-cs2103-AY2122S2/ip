@@ -3,10 +3,10 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    // divider
-    String LINES = "    ---------------------------------";
-
     protected ArrayList<Task> taskLists;
+
+    // divider
+    private final String LINES = "    ---------------------------------";
 
     /**
      * Constructs a TaskList object.

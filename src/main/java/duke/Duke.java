@@ -2,18 +2,27 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Duke class that contains the main method to run Duke.
+ */
 public class Duke {
 
+    /**
+     * Main method to run Duke.
+     *
+     * @param args
+     * @throws IOException
+     * @throws DukeException
+     */
     public static void main(String[] args) throws IOException, DukeException {
         // divider
-        String LINES = "    ---------------------------------";
+        final String LINES = "    ---------------------------------";
 
         Ui ui = new Ui();
         ui.greet();

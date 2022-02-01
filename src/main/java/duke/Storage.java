@@ -13,12 +13,15 @@ import java.util.Scanner;
 
 public class Storage {
 
-
     // initializing saver to save todoList tasks to relativePath
-    String fileSeparator = System.getProperty("file.separator");
-    String relativePath = "data" + fileSeparator + "duke.txt";
+    private String fileSeparator = System.getProperty("file.separator");
+    private String relativePath = "data" + fileSeparator + "duke.txt";
 
-
+    /**
+     * Constructor of Storage object.
+     *
+     * @throws IOException
+     */
     public Storage() throws IOException {
 
         File f = new File(this.relativePath);
