@@ -1,5 +1,8 @@
 package mcbot.task;
 
+/**
+ * ToDo class implements the Task class to capture basic task information.
+ */
 public class ToDo extends Task {
     
     /**

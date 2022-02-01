@@ -1,5 +1,8 @@
 package mcbot.task;
 
+/**
+ * The Task class function as a basic task container.  
+ */
 public class Task {
     protected String taskName;
     protected boolean isDone;

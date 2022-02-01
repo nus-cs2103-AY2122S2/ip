@@ -15,15 +15,28 @@ import mcbot.task.Event;
 
 import mcbot.exception.McBotException;
 
+/**
+ * Storage class to store and load all the tasks. 
+ */
 public class Storage {
     String frameLine = "==========================================";
+    private final String filePath;
 
-    private String filePath;
-    
+    /**
+     * Constructor for the storage. 
+     * 
+     * @param filePath is the path of the file to be read. 
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
+    /**
+     * To read the file and load each task into the task list.
+     * 
+     * @return Arraylist containing all the task from the file. 
+     * @throws McBotException if there is an error reading the file. 
+     */
     public ArrayList<Task> load() throws McBotException {
         ArrayList<Task> arrList = new ArrayList<>(100);
         //Load data from filePath, create folder or file or both if missing

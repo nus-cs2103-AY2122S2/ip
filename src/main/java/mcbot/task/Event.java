@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class implements the Task class with additional event information. 
+ */
 public class Event extends Task {
     protected DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
     protected DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");

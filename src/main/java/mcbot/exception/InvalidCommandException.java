@@ -1,6 +1,8 @@
 package mcbot.exception;
 
-
+/**
+ * Class to catch invalid commands when parsed in McBot 
+ */
 public class InvalidCommandException extends McBotException {
 
     /**

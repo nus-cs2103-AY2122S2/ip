@@ -13,18 +13,23 @@ import mcbot.task.Deadline;
 import mcbot.exception.McBotException;
 import mcbot.exception.InvalidCommandException;
 
+/**
+ * McBot class is the main class to initiate McBot chat-bot. 
+ */
 public class McBot {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private String filePath;
-    private boolean isRunning;
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-    
+    private final Ui ui;
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+    /**
+     * Constructor for McBot. 
+     * 
+     * @param filePath is the path to the file that contains task details. 
+     */
     public McBot(String filePath) {
         ui = new Ui();
-        this.filePath = filePath;
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -33,9 +38,12 @@ public class McBot {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * A method to start and run the McBot chat-bot. 
+     */
     public void run() {
-        isRunning = true;
+        boolean isRunning = true;
         ui.welcomeLine();
         Parser parser = new Parser();
         while(isRunning) {
@@ -216,7 +224,12 @@ public class McBot {
         }
         parser.close();
     }
-    
+
+    /**
+     * The main method of McBot.
+     * 
+     * @param args is to store any args when McBot is initiated. 
+     */
     public static void main(String[] args) {
         new McBot("data/tasks.txt").run();
     }

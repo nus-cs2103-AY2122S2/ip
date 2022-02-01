@@ -1,5 +1,8 @@
 package mcbot.exception;
 
+/**
+ * Class to catch exceptions under McBot
+ */
 public class McBotException extends Exception {
 
     /**

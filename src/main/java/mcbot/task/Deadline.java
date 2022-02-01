@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class implements the Task class with additional deadline information. 
+ */
 public class Deadline extends Task {
     protected DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
     protected DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
@@ -22,7 +25,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs an deadline task with a task name, deadline date and time. 
+     * Constructs a deadline task with a task name, deadline date and time. 
      *
      * @param taskName The name of the deadline.
      * @param deadlineDate The date of the deadline.
