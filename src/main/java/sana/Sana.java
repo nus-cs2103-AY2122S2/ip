@@ -1,15 +1,16 @@
 package sana;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.LinkedList;
+
 import sana.exception.IncompleteCommandException;
 import sana.exception.OutOfBoundsTaskException;
+import sana.exception.UnknownCommandException;
 import sana.task.Deadline;
 import sana.task.Event;
 import sana.task.Task;
 import sana.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.LinkedList;
 
 /**
  * Sana is a BIG program!
@@ -101,7 +102,11 @@ public class Sana {
             case "find":
                 findTasks(parsedCmd[1]);
                 break;
+            default:
+                throw new UnknownCommandException();
             }
+        } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
         } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
         } catch (IncompleteCommandException e) {
@@ -210,11 +215,18 @@ public class Sana {
         ui.printTaskInList(userTasks.getTask(taskIndex));
     }
 
-    /** Lists the history of user inputs to Sana */
+    /**
+     * Lists the history of user inputs to Sana
+     */
     private void list() {
         ui.printTaskList(userTasks.toList(), false);
     }
 
+    /**
+     * Initialises Sana
+     *
+     * @param args  input arguments supplied when calling the Sana.java file
+     */
     public static void main(String[] args) {
         Sana sana = new Sana();
         sana.run();

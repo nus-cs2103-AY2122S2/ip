@@ -12,11 +12,11 @@ import sana.task.Task;
  * @version 1.0
  */
 public class Ui {
-    /** The scanner used to read from system input */
-    private Scanner in;
-
     /** The border for Sana's replies */
     private static final String border = "_____________________________________________";
+
+    /** The scanner used to read from system input */
+    private Scanner in;
 
     /** Constructor for the Ui object */
     public Ui() {
