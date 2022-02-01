@@ -22,6 +22,10 @@ public class Duke extends Application {
 
     private List<Task> taskList = Storage.loadFromFile(FILE_PATH);
 
+    public Ui getUi(){
+        return UI;
+    }
+
     @Override
     public void start (Stage stage) {
         try {

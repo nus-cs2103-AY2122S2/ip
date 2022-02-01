@@ -16,8 +16,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke = new Duke();
 
@@ -27,10 +25,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void printBotMessage(String message) {
-        dialogContainer.getChildren().add(DialogBox.getBotDialog(message, botImage));
+        dialogContainer.getChildren().add(DialogBox.getBotDialog(duke.getUi().getWelcomeMessage(), botImage));
     }
 
     @FXML

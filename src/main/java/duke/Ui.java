@@ -40,6 +40,10 @@ public class Ui {
         printContent(MESSAGE_INTRO);
     }
 
+    public String getWelcomeMessage(){
+        return MESSAGE_INTRO;
+    }
+
     /**
      * Prints the set exit message with the borders.
      */
