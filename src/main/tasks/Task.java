@@ -1,6 +1,6 @@
-package tasks;
+package main.tasks;
 
-import enums.TaskType;
+import main.enums.TaskType;
 import java.util.ArrayList;
 
 public abstract class Task {
@@ -14,6 +14,12 @@ public abstract class Task {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
+    }
+
+    public Task(String description, TaskType taskType, boolean isDone) {
+        this.description = description;
+        this.taskType = taskType;
+        this.isDone = isDone;
     }
 
     public static ArrayList<Task> getTasks() {
@@ -30,12 +36,12 @@ public abstract class Task {
         return Task.TASKS.get(taskIndex);
     }
 
-    public static int getTaskCount() {
+    public static int getTasksCount() {
         return Task.TASKS.size();
     }
 
     public static String taskCountToString() {
-        return String.format("Now you have %d task(s) in the list.", Task.getTaskCount());
+        return String.format("Now you have %d task(s) in the list.", Task.getTasksCount());
     }
 
     public String getDescription() {
@@ -50,6 +56,13 @@ public abstract class Task {
 
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public String toStoreString() {
+        return String.format("%s~%d~%s",
+                this.getTaskType(),
+                this.getStatusIcon() == "X" ? 1 : 0,
+                this.getDescription());
     }
 
     @Override

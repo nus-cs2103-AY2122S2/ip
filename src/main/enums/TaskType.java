@@ -1,7 +1,9 @@
-package enums;
+package main.enums;
 
 public enum TaskType {
-    TODO("T"), DEADLINE("D"), Event("E");
+    TODO("T"),
+    DEADLINE("D"),
+    Event("E");
 
     private String icon;
 
