@@ -2,6 +2,7 @@ package command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.UiForGUI;
 import task.TaskList;
 
 /**
@@ -19,7 +20,7 @@ public class ListCommand extends Command {
      * @param storage Storage to store the list of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UiForGUI ui, Storage storage) {
         ui.printMsg(tasks.toString());
     }
 }

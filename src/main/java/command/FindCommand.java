@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.Ui;
+import duke.UiForGUI;
 import task.Task;
 import task.TaskList;
 
@@ -22,7 +23,7 @@ public class FindCommand extends Command {
      * @param storage Storage to store the list of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UiForGUI ui, Storage storage) {
         ArrayList<Task> tasksToBeFound = tasks.findTasks(command.substring(5));
         ui.printMsg(tasks.displayTasks("Here are the matching tasks in your list: ", tasksToBeFound, true));
     }

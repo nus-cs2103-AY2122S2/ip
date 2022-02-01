@@ -3,6 +3,7 @@ package command;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.UiForGUI;
 import task.TaskList;
 
 /**
@@ -26,7 +27,7 @@ public abstract class Command {
      * @param storage Storage to store the list of tasks.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, UiForGUI ui, Storage storage) throws DukeException;
 
     public boolean isRunProgram() {
         return this.isRun;

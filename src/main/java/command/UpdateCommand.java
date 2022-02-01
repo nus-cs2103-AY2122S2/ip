@@ -3,6 +3,7 @@ package command;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.UiForGUI;
 import task.Task;
 import task.TaskList;
 
@@ -24,7 +25,7 @@ public class UpdateCommand extends Command {
      * @throws DukeException If Storage is unable to save the updated task successfully.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiForGUI ui, Storage storage) throws DukeException {
         int index = Integer.parseInt(this.tokenizedCommand[1]) - 1;
         Task t = tasks.getTask(index);
         String oldDetails = t.getSaveFormat();

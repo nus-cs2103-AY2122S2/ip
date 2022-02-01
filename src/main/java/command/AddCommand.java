@@ -2,7 +2,7 @@ package command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.UiForGUI;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
      * @throws DukeException If Storage is unable to save the new task successfully.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiForGUI ui, Storage storage) throws DukeException {
         Task t = null;
         String desc = "";
         switch (this.tokenizedCommand[0]) {
