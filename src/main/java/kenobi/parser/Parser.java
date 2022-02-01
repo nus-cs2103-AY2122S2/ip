@@ -39,27 +39,55 @@ public class Parser {
             return new ListCommand();
 
         case "find":
-            return new FindCommand(cmd[1]);
+            try {
+                return new FindCommand(cmd[1]);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "mark":
-            return new MarkCommand(parseInt(cmd[1]));
+            try {
+                return new MarkCommand(parseInt(cmd[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "unmark":
-            return new UnmarkCommand(parseInt(cmd[1]));
+            try {
+                return new UnmarkCommand(parseInt(cmd[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "delete":
-            return new DeleteCommand(parseInt(cmd[1]));
+            try {
+                return new DeleteCommand(parseInt(cmd[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "todo":
-            return new AddCommand(cmd[1]);
+            try {
+                return new AddCommand(cmd[1]);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "deadline":
-            fields = cmd[1].split(" /by ");
-            return new AddCommand(Task.Type.DEADLINE, fields[0], parseDate(fields[1]));
+            try {
+                fields = cmd[1].split(" /by ");
+                return new AddCommand(Task.Type.DEADLINE, fields[0], parseDate(fields[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         case "event":
-            fields = cmd[1].split(" /at ");
-            return new AddCommand(Task.Type.EVENT, fields[0], parseDate(fields[1]));
+            try {
+                fields = cmd[1].split(" /at ");
+                return new AddCommand(Task.Type.EVENT, fields[0], parseDate(fields[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new ParseException("the command seems to be incomplete");
+            }
 
         default:
             return new InvalidCommand();
@@ -77,7 +105,7 @@ public class Parser {
         try {
             return LocalDate.parse(str);
         } catch (DateTimeParseException e) {
-            throw new ParseException("date: " + str);
+            throw new ParseException("I don't understand that date");
         }
     }
 }
