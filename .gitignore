@@ -20,3 +20,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Save file
 data/
 /src/main/java/META-INF/MANIFEST.MF
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/gradlew
+/gradlew.bat
