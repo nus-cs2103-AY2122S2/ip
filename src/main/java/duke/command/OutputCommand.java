@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which outputs to the user. A MarkCommand
@@ -14,6 +14,10 @@ public class OutputCommand implements Command {
     private String[] splitFullCommand;
     private String taskType;
 
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input.
+     */
     public OutputCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splitFullCommand = fullCommand.split(" ", 2);
@@ -30,11 +34,11 @@ public class OutputCommand implements Command {
      * @param ui      Ui object.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) {
         if (tasks.getTaskSize() == 0) {
-            ui.showEmptyListMessage();
+            return ui.showEmptyListMessage();
         } else {
-            ui.showListMessage(tasks);
+            return ui.showListMessage(tasks);
         }
     }
 

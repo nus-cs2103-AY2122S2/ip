@@ -9,7 +9,11 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
-
+    /**
+     * Constructor for this class.
+     * @param description Task description.
+     * @param by Deadline due date.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
@@ -30,6 +34,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(super.outputDateFormat) + ")";
+                + " (by: " + by.format(super.getOutputDateFormat()) + ")";
     }
 }

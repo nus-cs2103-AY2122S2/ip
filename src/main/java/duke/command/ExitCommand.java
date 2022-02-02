@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which tells the main programme to exit. An ExitCommand
@@ -19,8 +19,8 @@ public class ExitCommand implements Command {
      */
 
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        ui.showExitMessage();
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) {
+        return ui.showExitMessage();
     }
 
     /**

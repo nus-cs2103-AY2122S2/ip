@@ -1,8 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.MessageUi;
 
 /**
  * Represents an abstract class for the various commands that Ekud supports.
@@ -18,7 +19,7 @@ public interface Command {
      * @param ui      Ui object.
      * @throws Exception If directory or file cannot be found.
      */
-    public abstract void execute(TaskList tasks, Storage storage, Ui ui) throws Exception;
+    public abstract String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException;
 
     /**
      * Provides the boolean value whether to exit the programme.

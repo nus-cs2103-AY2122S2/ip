@@ -7,20 +7,20 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
 
+    static final DateTimeFormatter OUTPUT_DATE_FORMAT =
+            DateTimeFormatter.ofPattern("MMM d yyyy");
+    static final DateTimeFormatter INPUT_DATE_FORMAT =
+            DateTimeFormatter.ofPattern("d/M/uuuu");
     protected String description;
     protected boolean isDone;
-    protected DateTimeFormatter outputDateFormat =
-            DateTimeFormatter.ofPattern("MMM d yyyy");
-    protected static DateTimeFormatter inputDateFormat =
-            DateTimeFormatter.ofPattern("d/M/uuuu");
 
+    /**
+     * Contructor for the Task class.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public static DateTimeFormatter getInputDateFormat() {
-        return inputDateFormat;
     }
 
     public String getStatusIcon() {
@@ -57,5 +57,13 @@ public class Task {
      */
     public String taskDescriptionForFile() {
         return null;
+    }
+
+    public DateTimeFormatter getOutputDateFormat() {
+        return OUTPUT_DATE_FORMAT;
+    }
+
+    public static DateTimeFormatter getInputDateFormat() {
+        return INPUT_DATE_FORMAT;
     }
 }

@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
-import duke.task.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.io.IOException;
+import duke.task.TaskList;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which deletes task to the task list. DeleteCommand
@@ -19,6 +19,10 @@ public class DeleteCommand implements Command {
     private String[] splitFullCommand;
     private int index;
 
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input.
+     */
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splitFullCommand = this.fullCommand.split(" ", 2);
@@ -38,15 +42,15 @@ public class DeleteCommand implements Command {
      * @throws IOException   If directory or file cannot be found.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage,
-                        Ui ui) throws DukeException, IOException {
+    public String execute(TaskList tasks, Storage storage,
+                        MessageUi ui) throws DukeException {
         if (index < 0 || index > tasks.getTaskSize()) {
             throw new DukeException("Task do not exist!");
         } else {
             Task task = tasks.getTask(index);
             tasks.removeTask(index);
             storage.writeToFile(tasks.getTaskList());
-            ui.showDeleteMessage(task, tasks.getTaskSize());
+            return ui.showDeleteMessage(task, tasks.getTaskSize());
         }
     }
 

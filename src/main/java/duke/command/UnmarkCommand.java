@@ -3,22 +3,26 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which unmark a task in the task list. A MarkCommand
  * object corresponds a valid Ekud command, which can then be executed.
  */
-public class UnMarkCommand implements Command {
+public class UnmarkCommand implements Command {
 
     private String fullCommand;
     private String[] splitFullCommand;
     private int position;
 
-    public UnMarkCommand(String fullCommand) {
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input.
+     */
+    public UnmarkCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splitFullCommand = this.fullCommand.split(" ", 2);
         this.position = Integer.parseInt(splitFullCommand[1]);
@@ -37,8 +41,8 @@ public class UnMarkCommand implements Command {
      * @throws IOException   If directory or file cannot be found.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage,
-                        Ui ui) throws DukeException, IOException {
+    public String execute(TaskList tasks, Storage storage,
+                        MessageUi ui) throws DukeException {
         if (position < 1 || position > tasks.getTaskSize()) {
             throw new DukeException("Task do not exist!");
         } else {
@@ -49,7 +53,7 @@ public class UnMarkCommand implements Command {
             } else {
                 task.unmark();
                 storage.setInFile(position, task.taskDescriptionForFile());
-                ui.showUnMarkMessage(task);
+                return ui.showUnMarkMessage(task);
             }
         }
     }

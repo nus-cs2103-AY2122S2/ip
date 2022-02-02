@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.Storage;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which find tasks in the task list. A FindCommand
@@ -19,6 +20,10 @@ public class FindCommand implements Command {
     private String[] splitFullCommand;
     private String taskType;
 
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input.
+     */
     public FindCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splitFullCommand = fullCommand.split(" ", 2);
@@ -26,7 +31,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws Exception {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         String find = splitFullCommand[1];
         List<Task> taskList = tasks.getTaskList();
         List<Task> l = new ArrayList<>();
@@ -36,12 +41,14 @@ public class FindCommand implements Command {
             }
         }
         if (l.isEmpty()) {
-            System.out.println("No match found!");
+            return ("No match found!");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < l.size(); i++) {
-                System.out.println(i + 1 + "." + l.get(i).toString());
+                stringBuilder.append(i + 1 + "." + l.get(i).toString() + "\n");
             }
+            return stringBuilder.toString();
         }
     }
 

@@ -5,17 +5,17 @@ import java.util.HashMap;
 
 /**
  * Represents valid Ekud commands. Ekud commands are categorised into
- * those needing a description and those without. A DukeCommands object
+ * those needing a description and those without. A DukeCommand object
  * will provide method necessarily to check if a user input is a valid command.
  */
-public class DukeCommands {
+public class DukeCommand {
 
-    public enum DUKE_COMMANDS {
+    public enum DukeCommands {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR
 
     }
 
-    public enum DUKE_DESCRIPTIVE_COMMANDS {
+    public enum DescriptiveDukeCommands {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND
     }
 
@@ -26,7 +26,7 @@ public class DukeCommands {
      * @return True if the command is a valid Ekud command, false otherwise.
      */
     public static boolean isDukeCommand(String string) {
-        return Arrays.stream(DUKE_COMMANDS.values())
+        return Arrays.stream(DukeCommands.values())
                 .anyMatch((command) -> command.name()
                         .equalsIgnoreCase(string));
     }
@@ -40,16 +40,16 @@ public class DukeCommands {
      * needing a description, false otherwise.
      */
     public static boolean isDukeDescriptionCommand(String string) {
-        return Arrays.stream(DUKE_DESCRIPTIVE_COMMANDS.values()).
-                anyMatch((command) -> command.name().
-                        equalsIgnoreCase(string));
+        return Arrays.stream(DescriptiveDukeCommands.values())
+                .anyMatch((command) -> command.name()
+                        .equalsIgnoreCase(string));
     }
 
     /**
      * A method that returns a hash map that has value of the type of command
      * corresponding to its key.
      *
-     * @return Hashmap of type <String, String> with key-value pair of <Ekud command, Command type>
+     * @return Hashmap of type String, String with key-value pair of Ekud command, Command type.
      */
     public static HashMap<String, String> getTaskTypeMap() {
         HashMap<String, String> h = new HashMap<>();

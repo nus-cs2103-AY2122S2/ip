@@ -1,35 +1,41 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.Storage;
-import duke.Ui;
-
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Storage;
+import duke.exception.DukeException;
+import duke.ui.MessageUi;
+
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
-    // Constructor for making new file
+    /**
+     * Contructor for the TaskList class.
+     * @throws DukeException
+     */
     public TaskList() throws DukeException {
         try {
             Storage.createNewFolderAndTextFile();
-            taskList = new ArrayList<>();
+            tasks = new ArrayList<>();
         } catch (IOException err) {
             throw new DukeException("Could not create file for you!");
         }
     }
 
-    // Constructor for loading existing file
+    /**
+     * Constructor for when there is a text file in the specified directory.
+     * @param data String list containing the information of task list.
+     * @throws DukeException If task list is not found.
+     */
     public TaskList(List<String> data) throws DukeException {
         if (data == null) {
             throw new DukeException("Oops Ekud could not find the file");
         } else {
-            taskList = new ArrayList<>();
+            tasks = new ArrayList<>();
             for (String d : data) {
                 String[] splitData = d.split(" , ");
                 switch (splitData[0]) {
@@ -38,7 +44,7 @@ public class TaskList {
                     if (splitData[1].equals("1")) {
                         toDo.mark();
                     }
-                    this.taskList.add(toDo);
+                    this.tasks.add(toDo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(splitData[2],
@@ -46,7 +52,7 @@ public class TaskList {
                     if (splitData[1].equals("1")) {
                         deadline.mark();
                     }
-                    this.taskList.add(deadline);
+                    this.tasks.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(splitData[2],
@@ -54,7 +60,7 @@ public class TaskList {
                     if (splitData[1].equals("1")) {
                         event.mark();
                     }
-                    this.taskList.add(event);
+                    this.tasks.add(event);
                     break;
                 default:
                 }
@@ -62,34 +68,53 @@ public class TaskList {
         }
     }
 
-    public void clearTaskList(TaskList tasks, Storage storage) throws IOException {
-        tasks.taskList = new ArrayList<>();
-        storage.writeToFile(tasks.taskList);
+    /**
+     * Clear the task list and creates a overwrites exising text file
+     * with empty text.
+     * @param tasks Existing task list.
+     * @param storage Storage class.
+     * @throws DukeException If text file is not found.
+     */
+    public void clearTaskList(TaskList tasks, Storage storage) throws DukeException {
+        tasks.tasks = new ArrayList<>();
+        storage.writeToFile(tasks.tasks);
     }
 
     public int getTaskSize() {
-        return this.taskList.size();
+        return tasks.size();
     }
 
     public Task getTask(int position) {
-        return this.taskList.get(position - 1);
+        return tasks.get(position - 1);
     }
 
     public void removeTask(int position) {
-        this.taskList.remove(position - 1);
+        tasks.remove(position - 1);
     }
 
     public List<Task> getTaskList() {
-        return this.taskList;
+        return tasks;
     }
 
-    public void addToList(Task task, Ui ui, Storage storage) throws IOException {
-        taskList.add(task);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(task.taskDescriptionForFile()
-                + System.lineSeparator());
-        storage.appendToFile(stringBuilder.toString());
-        ui.showAddTaskMessage(this, task);
+    /**
+     * Add a task to the task list.
+     * @param task Task.
+     * @param ui MessageUi class.
+     * @param storage Storage class.
+     * @return Task added message.
+     * @throws DukeException If text file cannot be found.
+     */
+    public String addToList(Task task, MessageUi ui, Storage storage) throws DukeException {
+        try {
+            tasks.add(task);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(task.taskDescriptionForFile()
+                    + System.lineSeparator());
+            storage.appendToFile(stringBuilder.toString());
+            return ui.showAddTaskMessage(this, task);
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }
 

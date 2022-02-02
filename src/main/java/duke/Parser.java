@@ -1,12 +1,21 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+
+import duke.command.AddCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DukeCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.MarkCommand;
+import duke.command.OutputCommand;
+import duke.command.UnmarkCommand;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Contains method to check validity of user input.
@@ -27,13 +36,13 @@ public class Parser {
         } else {
             String[] splitInput = input.split(" ", 2);
             // Check if the first word in the input is a valid command
-            if (!DukeCommands.isDukeCommand(splitInput[0])) {
+            if (!DukeCommand.isDukeCommand(splitInput[0])) {
                 throw new DukeException("I'm so very sorry,"
                         + " please make sure you enter a valid Ekud command");
                 // Check if the command requires a description
             } else if (splitInput.length == 1) {
-                if (DukeCommands.isDukeCommand(splitInput[0])
-                        && DukeCommands.isDukeDescriptionCommand(splitInput[0])) {
+                if (DukeCommand.isDukeCommand(splitInput[0])
+                        && DukeCommand.isDukeDescriptionCommand(splitInput[0])) {
                     throw new DukeException("I'm so very sorry, the description of a "
                             + splitInput[0] + " cannot be empty.");
                 }
@@ -49,9 +58,9 @@ public class Parser {
                             + splitInput[0] + " cannot be empty.");
                 }
                 try {
-                    String event_date = input.split("event ", 2)[1]
+                    String eventDate = input.split("event ", 2)[1]
                             .split("/at ")[1];
-                    LocalDate.parse(event_date, Task.getInputDateFormat());
+                    LocalDate.parse(eventDate, Task.getInputDateFormat());
                 } catch (DateTimeParseException err) {
                     throw new DukeException("Please enter a valid date! [dd/mm/yyyy]");
                 }
@@ -67,9 +76,9 @@ public class Parser {
                             + splitInput[0] + " cannot be empty.");
                 }
                 try {
-                    String deadline_date = input.split("deadline ", 2)[1]
+                    String deadlineDate = input.split("deadline ", 2)[1]
                             .split("/by ")[1];
-                    LocalDate.parse(deadline_date, Task.getInputDateFormat());
+                    LocalDate.parse(deadlineDate, Task.getInputDateFormat());
                 } catch (DateTimeParseException err) {
                     throw new DukeException("Please enter a valid date! [dd/mm/yyyy]");
                 }
@@ -93,7 +102,7 @@ public class Parser {
             }
         }
         // Get the respective command type and return its corresponding type
-        HashMap<String, String> commandTypeMap = DukeCommands.getTaskTypeMap();
+        HashMap<String, String> commandTypeMap = DukeCommand.getTaskTypeMap();
         String type = commandTypeMap.get(input.split(" ", 2)[0]);
         switch (type) {
         case "ADD_COMMAND":
@@ -103,7 +112,7 @@ public class Parser {
         case "MARK_COMMAND":
             return new MarkCommand(input);
         case "UNMARK_COMMAND":
-            return new UnMarkCommand(input);
+            return new UnmarkCommand(input);
         case "OUTPUT_COMMAND":
             return new OutputCommand(input);
         case "EXIT_COMMAND":
