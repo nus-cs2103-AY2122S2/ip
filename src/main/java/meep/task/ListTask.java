@@ -110,40 +110,6 @@ public class ListTask {
     }
 
     /**
-     * Print task list.
-     */
-    public void printTaskList() {
-        int i = 1;
-        for (Task task : tasks) {
-            System.out.println("     " + i + "  " + task.toString());
-            i++;
-        }
-    }
-
-    /**
-     * Prints task list before given datetime.
-     *
-     * @param date the datetime given by user.
-     */
-    public void printTaskList(LocalDateTime date) {
-        int i = 1;
-        for (Task task : tasks) {
-            if (task instanceof Deadline) {
-                if (((Deadline) task).getDate().isBefore(date)) {
-                    System.out.println("     " + i + "  "
-                            + task.toString());
-                }
-            } else if (task instanceof Event) {
-                if (((Event) task).getDate().isBefore(date)) {
-                    System.out.println("     " + i + "  "
-                            + task.toString());
-                }
-            }
-            i++;
-        }
-    }
-
-    /**
      * Generates task list string.
      *
      * @return the task list string.
@@ -170,16 +136,20 @@ public class ListTask {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
         int i = 1;
+        boolean isBeforeDate;
+
         for (Task task : tasks) {
-            if (task instanceof Deadline) {
-                if (((Deadline) task).getDate().isBefore(date)) {
-                    stringBuilder.append("     " + i + ".  "
-                            + task.toString() + System.lineSeparator());
+            boolean isDeadline = (task instanceof Deadline);
+            boolean isEvent = (task instanceof Event);
+            if (isDeadline) {
+                isBeforeDate = ((Deadline) task).getDate().isBefore(date);
+                if (isBeforeDate) {
+                    stringBuilder.append("     " + i + ".  " + task.toString() + System.lineSeparator());
                 }
-            } else if (task instanceof Event) {
-                if (((Event) task).getDate().isBefore(date)) {
-                    stringBuilder.append("     " + i + ".  "
-                            + task.toString() + System.lineSeparator());
+            } else if (isEvent) {
+                isBeforeDate = ((Event) task).getDate().isBefore(date);
+                if (isBeforeDate) {
+                    stringBuilder.append("     " + i + ".  " + task.toString() + System.lineSeparator());
                 }
             }
             i++;

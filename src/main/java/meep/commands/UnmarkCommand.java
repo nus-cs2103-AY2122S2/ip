@@ -6,7 +6,7 @@ import meep.task.Task;
 /**
  * Marks a task as undone in task list.
  */
-public class UnMarkCommand extends Command {
+public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:\n";
@@ -19,7 +19,7 @@ public class UnMarkCommand extends Command {
      *
      * @param index index of task to unmark
      */
-    public UnMarkCommand(int index) {
+    public UnmarkCommand(int index) {
         this.index = index;
     }
 

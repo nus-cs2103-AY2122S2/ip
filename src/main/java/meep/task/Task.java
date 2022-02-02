@@ -6,7 +6,7 @@ package meep.task;
  */
 public class Task {
     private final String title;
-    private Boolean done;
+    private Boolean isDone;
 
 
     /**
@@ -16,7 +16,7 @@ public class Task {
      */
     protected Task(String title) {
         this.title = title;
-        this.done = false;
+        this.isDone = false;
     }
 
 
@@ -24,11 +24,11 @@ public class Task {
      * Constructor for class Task.
      *
      * @param title title of task.
-     * @param done  status of the task.
+     * @param isDone  status of the task.
      */
-    protected Task(String title, boolean done) {
+    protected Task(String title, boolean isDone) {
         this.title = title;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -41,26 +41,26 @@ public class Task {
     }
 
     /**
-     * Gets done.
+     * Gets isDone.
      *
-     * @return the done.
+     * @return the isDone.
      */
-    public Boolean getDone() {
-        return done;
+    public Boolean isDone() {
+        return isDone;
     }
 
     /**
-     * Mark task done.
+     * Mark task isDone.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Unmark task.
      */
     public void unmarkDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
 
@@ -68,7 +68,7 @@ public class Task {
      * To String.
      */
     public String toString() {
-        String isDone = (done == true) ? "X" : " ";
+        String isDone = (this.isDone) ? "X" : " ";
         return "[" + isDone + "] " + getTitle();
     }
 }

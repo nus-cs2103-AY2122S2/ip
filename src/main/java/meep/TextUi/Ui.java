@@ -1,4 +1,4 @@
-package meep.ui;
+package meep.TextUi;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -53,6 +53,10 @@ public class Ui {
      */
     public void printLogo() {
         print(DIVIDER, Messages.MESSAGE_LOGO, Messages.MESSAGE_HI, DIVIDER);
+    }
+
+    public void printInstruction() {
+        print(DIVIDER, Messages.MESSAGE_INSTRUCTIONS, DIVIDER);
     }
 
     /**

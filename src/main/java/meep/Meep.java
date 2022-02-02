@@ -3,13 +3,13 @@ package meep;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import meep.TextUi.Ui;
 import meep.commands.Command;
 import meep.commands.ExitCommand;
 import meep.exception.InvalidInputException;
 import meep.parser.Parser;
 import meep.storage.Storage;
 import meep.task.ListTask;
-import meep.ui.Ui;
 
 
 
@@ -48,8 +48,9 @@ public class Meep {
             this.ui = new Ui();
             this.parser = new Parser();
             this.taskList = new ListTask();
-            this.storage = new Storage("/java/data.txt", taskList);
+            this.storage = new Storage("data.txt", taskList);
             ui.printLogo();
+            ui.printInstruction();
         } catch (IOException | InvalidInputException e) {
             ui.printMsg(e.getMessage());
         }

@@ -1,6 +1,6 @@
 package meep.commands;
 
-import static meep.commands.UnMarkCommand.MESSAGE_UNMARK;
+import static meep.commands.UnmarkCommand.MESSAGE_UNMARK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import meep.task.ListTask;
 import meep.task.ToDo;
 
 
-public class UnMarkCommandTest {
+public class UnmarkCommandTest {
 
     @Test
     public void unmarkCommandExecute_normalInput_success() {
@@ -33,9 +33,9 @@ public class UnMarkCommandTest {
         tasks.addTask(event);
         tasks.addTask(todo);
 
-        UnMarkCommand c1 = new UnMarkCommand(1);
-        UnMarkCommand c2 = new UnMarkCommand(2);
-        UnMarkCommand c3 = new UnMarkCommand(3);
+        UnmarkCommand c1 = new UnmarkCommand(1);
+        UnmarkCommand c2 = new UnmarkCommand(2);
+        UnmarkCommand c3 = new UnmarkCommand(3);
 
         deadline2.unmarkDone();
         event2.unmarkDone();

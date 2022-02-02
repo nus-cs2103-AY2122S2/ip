@@ -12,7 +12,7 @@ import meep.commands.ExitCommand;
 import meep.commands.FindCommand;
 import meep.commands.ListCommand;
 import meep.commands.MarkCommand;
-import meep.commands.UnMarkCommand;
+import meep.commands.UnmarkCommand;
 import meep.exception.InvalidInputException;
 import meep.task.Deadline;
 import meep.task.Event;
@@ -142,9 +142,9 @@ public class Parser {
                 return new MarkCommand(parseListIndex(arr[1], tasks));
             }
             break;
-        case UnMarkCommand.COMMAND_WORD:
+        case UnmarkCommand.COMMAND_WORD:
             if (commandLen == 2) {
-                return new UnMarkCommand(parseListIndex(arr[1], tasks));
+                return new UnmarkCommand(parseListIndex(arr[1], tasks));
             }
             break;
         case DeleteCommand.COMMAND_WORD:
@@ -153,8 +153,10 @@ public class Parser {
             }
             break;
         case AddCommand.COMMAND_TODO:
-            return new AddCommand(new ToDo(checkEmptyTask(arr[1])));
-            // Fallthrough
+            if (commandLen == 2) {
+                return new AddCommand(new ToDo(checkEmptyTask(arr[1])));
+            }
+            break;
         case AddCommand.COMMAND_DEADLINE:
             String[] deadline = parseTaskFormat(arr[1]);
             String deadlineDate = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
@@ -204,7 +206,7 @@ public class Parser {
      * @return the datetime string.
      */
     public static String printDate(LocalDateTime date) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
         return date.format(format);
     }
 

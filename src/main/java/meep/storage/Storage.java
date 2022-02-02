@@ -1,6 +1,7 @@
 package meep.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,7 +25,7 @@ import meep.task.ToDo;
  */
 public class Storage {
 
-    public static final String DEFAULT_FILEPATH = "/src/main/java/Meep/data.txt";
+    public static final String DEFAULT_FILEPATH = "/data.txt";
 
     public final String path;
 
@@ -50,11 +51,24 @@ public class Storage {
      */
     public String getPath() {
         String home = System.getProperty("user.dir");
+
         // works on *nix
         // works on Windows
         String path = home + DEFAULT_FILEPATH;
         boolean directoryExists = new java.io.File(path).exists();
         return path;
+    }
+
+    /**
+     * Checks data file existence and create it if its not exist.
+     */
+    public void checkFileExists() throws InvalidInputException {
+        try {
+            File dataFile = new File(path);
+            dataFile.createNewFile(); // if file already exists will do nothing
+        } catch (IOException e) {
+            throw new InvalidInputException("Sryy something is wrong when create your file.");
+        }
     }
 
     /**
@@ -67,15 +81,13 @@ public class Storage {
      */
     public List<Task> readTaskFile(String path) throws IOException, InvalidInputException {
 
+        checkFileExists();
         List<Task> result = new ArrayList<>();
-        // String path = getPath();
-        // Open the file
         FileInputStream fstream = null;
 
         try {
             fstream = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            //System.out.println("File not found under " + path);
             throw new FileNotFoundException("File not found under " + path);
         }
 
@@ -85,8 +97,6 @@ public class Storage {
 
         // Read File Line By Line
         while ((strLine = br.readLine()) != null) {
-            // Print the content on the console
-            System.out.println(strLine);
             String[] parts = strLine.split("\\|");
             //  remove leading and trailing spaces
             for (int i = 0; i < parts.length; i++) {
@@ -102,12 +112,9 @@ public class Storage {
             } else if (parts[0].equals("E")) {
                 result.add(new Event(parts[2],
                         parts[1].equals("1"), parser.parseDate(parts[3])));
-            } else {
-                System.out.println(parts[0]);
             }
         }
 
-        // Close the input stream
         fstream.close();
         return result;
     }
@@ -127,14 +134,14 @@ public class Storage {
             FileWriter fw = new FileWriter(path);
             for (Task task : taskList) {
                 if (task.getClass() == ToDo.class) {
-                    fw.write("T | " + (task.getDone() ? "1 | " : "0 | ")
+                    fw.write("T | " + (task.isDone() ? "1 | " : "0 | ")
                             + task.getTitle() + System.lineSeparator());
                 } else if (task.getClass() == Deadline.class) {
-                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ")
+                    fw.write("D | " + (task.isDone() ? "1 | " : "0 | ")
                             + task.getTitle() + " | "
                             + ((Deadline) task).getDate().format(format) + System.lineSeparator());
                 } else if (task.getClass() == Event.class) {
-                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ")
+                    fw.write("E | " + (task.isDone() ? "1 | " : "0 | ")
                             + task.getTitle() + " | "
                             + ((Event) task).getDate().format(format) + System.lineSeparator());
                 }

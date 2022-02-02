@@ -31,8 +31,8 @@ public class ListCommandTest {
 
         ListCommand c1 = new ListCommand();
 
-        String result = "\n     1.  [D][ ] report1 (by: Jul 29 2015 07:30 PM)\n"
-                + "     2.  [E][ ] report2 (on: Jul 29 2015 07:30 PM)\n"
+        String result = "\n     1.  [D][ ] report1 (by: Jul 29 2015 19:30)\n"
+                + "     2.  [E][ ] report2 (on: Jul 29 2015 19:30)\n"
                 + "     3.  [T][ ] report3\n";
 
         assertEquals(result, c1.execute(tasks));

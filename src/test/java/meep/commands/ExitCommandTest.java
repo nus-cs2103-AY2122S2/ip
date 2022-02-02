@@ -27,7 +27,7 @@ public class ExitCommandTest {
         DeleteCommand c3 = new DeleteCommand(1);
         ListCommand c4 = new ListCommand();
         MarkCommand c5 = new MarkCommand(1);
-        UnMarkCommand c6 = new UnMarkCommand(1);
+        UnmarkCommand c6 = new UnmarkCommand(1);
 
         assertTrue(ExitCommand.isExit(c1));
         assertFalse(ExitCommand.isExit(c2));
