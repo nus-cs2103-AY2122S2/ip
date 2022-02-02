@@ -3,10 +3,10 @@ public class Ui {
     /**
      * Print welcome message.
      */
-    public void welcome() {
-        System.out.println("I'm Narcibot, the best bot ever created.\n" +
+    public String welcome() {
+        return "I'm Narcibot, the best bot ever created.\n" +
                 "Oh it's you, what a bother.\n" +
-                "Here's a hello as a formality. What do you want this time?\n");
+                "Here's a hello as a formality. What do you want this time?\n";
     }
 
     /**
