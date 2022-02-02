@@ -1,18 +1,18 @@
 package puke.io;
 
-import puke.exception.PukeException;
-import puke.task.Deadline;
-import puke.task.Event;
-import puke.task.Task;
-import puke.task.TaskList;
-import puke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import puke.exception.PukeException;
+import puke.task.Deadline;
+import puke.task.Event;
+import puke.task.Task;
+import puke.task.TaskList;
+import puke.task.Todo;
 
 /**
  * Handles the storage of tasks on file for saving between sessions.
@@ -54,7 +54,7 @@ public class Storage {
      * @param tasks List of tasks for the current session.
      * @param s Scanner loaded with the storage file.
      */
-    private void populateTasks(TaskList tasks, Scanner s) {
+    private void populateTasks(TaskList tasks, Scanner s) throws PukeException {
         while (s.hasNext()) {
             String[] taskInfo = s.nextLine().split("@@");
             Task t = null;
@@ -70,6 +70,8 @@ public class Storage {
             case "E":
                 t = new Event(taskInfo[2], LocalDateTime.parse(taskInfo[3], formatter));
                 break;
+            default:
+                throw new PukeException("Invalid task storage format!");
             }
 
             if (taskInfo[1].equals("1")) {
