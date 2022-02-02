@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -65,9 +66,9 @@ public class Duke {
                 try {
                     String[] arrOfStr = input.split(" ", 2);
                     String[] arrOfStr2 = arrOfStr[1].split("/", 2);
-                    String[] arrOfStr3 = arrOfStr2[1].split(" ", 2);
+                    String[] arrOfStr3 = arrOfStr2[1].split(" ", 3);
 
-                    tasks.add(new Deadline(arrOfStr2[0], arrOfStr3[1]));
+                    tasks.add(new Deadline(arrOfStr2[0], LocalDate.parse(arrOfStr3[1]), arrOfStr3[2]));
                     counter = counter + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(tasks.get(counter - 1));
