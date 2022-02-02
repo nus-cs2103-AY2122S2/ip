@@ -15,7 +15,8 @@ public class MissingTaskArgumentException extends IllegalCommandException {
 
     /**
      * Constructor for MissingTaskArgumentException.
-     * @param message the user input
+     *
+     * @param message the user input.
      */
     public MissingTaskArgumentException(String message) {
         super(message);
@@ -24,6 +25,7 @@ public class MissingTaskArgumentException extends IllegalCommandException {
 
     /**
      * gives the string representation of the MissingTaskArgumentException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

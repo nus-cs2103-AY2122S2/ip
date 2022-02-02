@@ -11,10 +11,12 @@ package Exceptions;
  */
 public class InvalidYesOrNoException extends IllegalCommandException {
 
+    // stores user input.
     private final String userInput;
 
     /**
      * Constructor for InvalidYesOrNoException.
+     *
      * @param userInput the user input.
      */
     public InvalidYesOrNoException(String userInput) {
@@ -24,6 +26,7 @@ public class InvalidYesOrNoException extends IllegalCommandException {
 
     /**
      * gives the string representation of the InvalidYesOrNoException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

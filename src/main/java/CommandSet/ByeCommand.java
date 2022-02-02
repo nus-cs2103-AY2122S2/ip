@@ -23,11 +23,12 @@ public class ByeCommand extends Command {
 
     /**
      * stores the user tasks and username and closes the program.
+     *
      * @param username the name of the user.
      * @param storage the storage instance associated with the current program.
      * @param taskList the list of user tasks.
      */
-    public static void bye(String username, Storage storage, TaskList taskList) {
+    public static void executeBye(String username, Storage storage, TaskList taskList) {
 
         String toStore = username + "\n" + taskList.getTasks();
         storage.storeTasks(toStore);

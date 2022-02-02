@@ -19,6 +19,7 @@ public class FindCommand extends Command {
 
     /**
      * checks for tasks containing the word given by user.
+     *
      * @param word the user input.
      * @param taskList the list of user tasks.
      */

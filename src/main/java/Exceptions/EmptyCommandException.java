@@ -13,7 +13,8 @@ public class EmptyCommandException extends IllegalCommandException {
 
     /**
      * Constructor for EmptyCommandException.
-     * @param message the user input
+     *
+     * @param message the user input.
      */
     public EmptyCommandException(String message) {
         super(message);
@@ -21,6 +22,7 @@ public class EmptyCommandException extends IllegalCommandException {
 
     /**
      * gives the string representation of the EmptyCommandException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

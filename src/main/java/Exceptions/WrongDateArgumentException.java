@@ -15,6 +15,7 @@ public class WrongDateArgumentException extends IllegalCommandException {
 
     /**
      * Constructor for WrongDateExceptionException.
+     *
      * @param date input given by user.
      */
     public WrongDateArgumentException(String date) {
@@ -24,6 +25,7 @@ public class WrongDateArgumentException extends IllegalCommandException {
 
     /**
      * gives the string representation of the WrongDateArgumentException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

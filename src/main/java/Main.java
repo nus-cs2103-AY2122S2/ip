@@ -21,6 +21,7 @@ public class Main {
 
     /**
      * starts the program.
+     *
      * @param args parameter to start the main method.
      */
     public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class Main {
         CarryOn carryOn = CarryOn.NEXT;
         String userInput = sc.nextLine();
 
-        //keep asking the user for name till u get a valid name
+        //keep asking the user for name till u get a valid name.
         while (userInput.trim().equalsIgnoreCase(EMPTY_STRING)) {
             Ui.printSeparator();
             Ui.printAskValidName();

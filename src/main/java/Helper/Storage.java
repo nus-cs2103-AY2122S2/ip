@@ -24,19 +24,19 @@ public class Storage {
     // stores the location of previous task file.
     private static final String PATH_TASK_FILE = "taskList.txt";
 
-    // the index of array list that stores the username
+    // the index of array list that stores the username.
     private static final int USER_INDEX = 0;
 
-    // stores empty string
+    // stores empty string.
     private static final String EMPTY_STR = "";
 
-    // a file object
+    // a file object.
     private final File file;
 
-    // tell of there is a file already present
+    // tell of there is a file already present.
     private final boolean isTaskFilePresent;
 
-    // stores the username and previous tasks from the file
+    // stores the username and previous tasks from the file.
     private final ArrayList<String> previousTasks;
 
     /**
@@ -51,6 +51,7 @@ public class Storage {
 
     /**
      * reads the file contents and stores each line in previousTasks.
+     *
      * @throws FileNotFoundException raise an error if the file is not found
      */
     private void readFile() throws FileNotFoundException {
@@ -68,6 +69,7 @@ public class Storage {
 
     /**
      * gets the previous userName.
+     *
      * @return the name of the previous user
      */
     public String getPreviousUser() {
@@ -82,7 +84,8 @@ public class Storage {
 
     /**
      * tells if there was a file from previous runs.
-     * @return returns true of there was a file from previous runs; false otherwise
+     *
+     * @return returns true of there was a file from previous runs; false otherwise.
      */
     public boolean isFilePresent() {
         return this.isTaskFilePresent;
@@ -90,6 +93,7 @@ public class Storage {
 
     /**
      * loads the previous tasks in string representation.
+     *
      * @return the list of previous tasks.
      */
     public ArrayList<String> loadPreviousTasks() {
@@ -98,6 +102,7 @@ public class Storage {
 
     /**
      * stores the tasks in the file.
+     *
      * @param tasks the list of tasks the user told conan.
      * @param username the name of the user.
      */
@@ -124,6 +129,7 @@ public class Storage {
 
     /**
      * stores the tasks in the file.
+     *
      * @param tasks the list of tasks the user told conan.
      */
     public void storeTasks(String tasks) {

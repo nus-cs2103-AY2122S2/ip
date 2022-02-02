@@ -16,7 +16,8 @@ public class MissingTimeArgumentException extends MissingTaskArgumentException {
 
     /**
      * Constructor for MissingTimeArgumentException.
-     * @param message the user input
+     *
+     * @param message the user input.
      */
     public MissingTimeArgumentException(String message) {
         super(message);
@@ -25,6 +26,7 @@ public class MissingTimeArgumentException extends MissingTaskArgumentException {
 
     /**
      * gives the string representation of the MissingTimeArgumentException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

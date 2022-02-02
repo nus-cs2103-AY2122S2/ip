@@ -24,6 +24,7 @@ public class Marking extends Command{
 
     /**
      * marks a task as done.
+     *
      * @param message the user command.
      * @param taskList the list of user tasks.
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.
@@ -41,6 +42,7 @@ public class Marking extends Command{
 
     /**
      * marks a task as not done.
+     *
      * @param message the user command.
      * @param taskList the list of user tasks.
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.

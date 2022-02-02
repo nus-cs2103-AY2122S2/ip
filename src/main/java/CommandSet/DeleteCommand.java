@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
 
     /**
      * deletes the task at taskNum.
+     *
      * @param taskList the list of user tasks.
      * @param message the user command.
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.

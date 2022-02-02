@@ -15,6 +15,7 @@ public class WrongTimeArgumentException extends IllegalCommandException {
 
     /**
      * Constructor for WrongTimeExceptionException.
+     *
      * @param time input given by user.
      */
     public WrongTimeArgumentException(String time) {
@@ -24,6 +25,7 @@ public class WrongTimeArgumentException extends IllegalCommandException {
 
     /**
      * gives the string representation of the WrongTimeArgumentException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

@@ -31,6 +31,7 @@ public class Ui {
 
     /**
      * prints a farewell message to the user.
+     *
      * @param username the name of the user.
      */
     public static void printFarewell(String username) {
@@ -42,6 +43,7 @@ public class Ui {
 
     /**
      * prints an introductory message.
+     *
      * @param username the name of the user.
      */
     public static void printSayHello(String username) {
@@ -52,6 +54,7 @@ public class Ui {
 
     /**
      * prints a message saying that a user under a similar name was found.
+     *
      * @param previousUser the previous username.
      */
     public static void printFoundSimilarName(String previousUser) {
@@ -64,6 +67,7 @@ public class Ui {
 
     /**
      * prints a message asking if there is anything else the user wants to do.
+     *
      * @param username the name of the user.
      */
     public static void printAsk(String username) {
@@ -80,6 +84,7 @@ public class Ui {
 
     /**
      * prints the number of tasks the users has to do.
+     *
      * @param num the number of tasks.
      */
     public static void printNumOfTasks(int num) {
@@ -88,6 +93,7 @@ public class Ui {
 
     /**
      * prints that task was added successfully to the list of tasks.
+     *
      * @param task the task that was added.
      */
     public static void printAdded(String task) {
@@ -96,6 +102,7 @@ public class Ui {
 
     /**
      * prints that the task has been removed from the list of tasks.
+     *
      * @param task the task that was removed.
      */
     public static void printRemoved(Task task) {
@@ -112,6 +119,7 @@ public class Ui {
 
     /**
      * tells the users that the task they have completed is marked.
+     *
      * @param task the task that was completed.
      */
     public static void printTaskCompleted(Task task) {
@@ -121,6 +129,7 @@ public class Ui {
 
     /**
      * tells the user that the task is unmarked.
+     *
      * @param task the task that was unmarked.
      */
     public static void printUnmarked(Task task) {

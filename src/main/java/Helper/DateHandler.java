@@ -55,6 +55,7 @@ public class DateHandler {
 
     /**
      * Constructor for DateHandler class.
+     *
      * @param date the string representation of the date.
      * returns an instance of DateHandler.
      */
@@ -75,6 +76,7 @@ public class DateHandler {
 
     /**
      * Constructor for DateHandler.
+     *
      * @param date the date associated with the task from the previous runs.
      * @param dummyVariable to differentiate between the constructors.
      */
@@ -112,6 +114,7 @@ public class DateHandler {
 
     /**
      * checks if the userDate is of the valid format.
+     *
      * @param userDate the date input by user.
      * @throw WrongDateArgumentException if the user inputs an invalid date.
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
@@ -161,8 +164,9 @@ public class DateHandler {
 
     /**
      * checks whether the date is before the given date.
-     * @param maxDate the value if the date limit
-     * @return true if the true; false otherwise
+     *
+     * @param maxDate the value if the date limit.
+     * @return true if the true; false otherwise.
      */
     public boolean isBefore(String maxDate) {
         return this.date.isBefore(LocalDate.parse(maxDate.trim()));
@@ -170,6 +174,7 @@ public class DateHandler {
 
     /**
      * checks if the date is same.
+     *
      * @param onDate the date given.
      * @return return true if onDate matches the date of instance; false otherwise.
      */

@@ -21,13 +21,13 @@ import Exceptions.MissingTimeArgumentException;
  */
 public class AddCommand extends Command {
 
-    // space
+    // stores space.
     private static final String SPACE = " ";
 
     // starting index of a list or a char in string.
     private static final int START_INDEX = 0;
 
-    // used to differentiate between constructors
+    // used to differentiate between constructors.
     private static final int DUMMY_VARIABLE = 1;
 
     // Stores the command TODO.
@@ -49,6 +49,7 @@ public class AddCommand extends Command {
 
     /**
      * adds the task to taskList.
+     *
      * @param taskList the list of user tasks.
      * @param text the string of the task to be added.
      * @throws MissingTimeArgumentException if the user missed time argument out.
@@ -85,6 +86,7 @@ public class AddCommand extends Command {
 
     /**
      * adds the previous tasks to the list.
+     *
      * @param taskList the list of user tasks.
      * @param storage the string of the task to be added.
      */

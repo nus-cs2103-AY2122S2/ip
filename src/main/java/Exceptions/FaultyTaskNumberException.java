@@ -16,6 +16,7 @@ public class FaultyTaskNumberException extends IllegalCommandException {
 
     /**
      * Constructor for FaultyTaskNumberException.
+     *
      * @param message the user input task number.
      */
     public FaultyTaskNumberException(int message) {
@@ -25,6 +26,7 @@ public class FaultyTaskNumberException extends IllegalCommandException {
 
     /**
      * gives the string representation of the FaultyTaskNumberException.
+     *
      * @return the string representation of the exception object.
      */
     @Override

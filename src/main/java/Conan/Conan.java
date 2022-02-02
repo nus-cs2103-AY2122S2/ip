@@ -36,7 +36,7 @@ public class Conan {
     // instance of storage class to deal with storing user tasks.
     private final Storage storage;
 
-    // instance of taskList
+    // instance of taskList.
     private final TaskList taskList;
 
     /**
@@ -56,6 +56,7 @@ public class Conan {
 
     /**
      * updates the username, returns true if there was a similar user previously.
+     *
      * @param username the name of the user.
      */
     public boolean tellName(String username) {
@@ -84,8 +85,9 @@ public class Conan {
     }
 
     /**
-     * checks is the user wants to add the previous tasks to list
-     * @param userInput the userInput
+     * checks is the user wants to add the previous tasks to list.
+     *
+     * @param userInput the userInput.
      * @return true is successful, false if the user typed invalid input.
      */
     public boolean continueFromLastTime(String userInput) {
@@ -130,7 +132,7 @@ public class Conan {
                 AddCommand.add(taskList, message);
                 break;
             case BYE:
-                ByeCommand.bye(this.username, this.storage, this.taskList);
+                ByeCommand.executeBye(this.username, this.storage, this.taskList);
                 Ui.printFarewell(this.username);
                 Ui.printSeparator();
                 carryOn = CarryOn.STOP;
@@ -138,10 +140,10 @@ public class Conan {
                 DeleteCommand.delete(this.taskList, message);
                 break;
             case DUEBEFORE:
-                DueCommand.tasksDueBefore(message, this.taskList);
+                DueCommand.getTasksDueBefore(message, this.taskList);
                 break;
             case DUEON:
-                DueCommand.tasksDueOn(message, this.taskList);
+                DueCommand.getTasksDueOn(message, this.taskList);
                 break;
             case FIND:
                 FindCommand.findTasksContaining(message, this.taskList);
@@ -156,7 +158,7 @@ public class Conan {
                 Marking.unmarkTask(message, this.taskList);
                 break;
             default:
-                // do nothing
+                // do nothing.
             }
 
             Ui.printAsk(this.username);

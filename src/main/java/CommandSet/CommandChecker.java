@@ -14,7 +14,7 @@ import Exceptions.IllegalCommandException;
  */
 public class CommandChecker {
 
-    // space
+    // stores space.
     private static final String SPACE = " ";
 
     // starting index of a list or a char in string.
@@ -56,11 +56,12 @@ public class CommandChecker {
     // the user input when they don't want to continue with the previous task list.
     private static final String NO = "no";
 
-    // LIST variable store the list command
+    // LIST variable store the list command.
     private static final String LIST = "LIST";
 
     /**
      * finds and checks if the user command is valid.
+     *
      * @param message the user input message.
      * @return the respective command enum.
      */
@@ -72,15 +73,15 @@ public class CommandChecker {
                 return Commands.BYE;
             }
 
-            // Checks if the user wants to display the tasks
+            // Checks if the user wants to display the tasks.
             if (message.equalsIgnoreCase(LIST)) {
                 return Commands.LIST;
             }
 
             // Primary error handling for commands.
             if (!message.contains(SPACE)) {
-                // check if the commands are empty
-                // or else its invalid command
+                // check if the commands are empty,
+                // or else its invalid command.
                 if (message.equalsIgnoreCase(TODO)) {
                     throw new MissingTaskArgumentException(TODO);
                 } else if (message.equalsIgnoreCase(DEADLINE)) {
@@ -132,6 +133,7 @@ public class CommandChecker {
 
     /**
      * checks whether the user wants to continue from previous tasks.
+     *
      * @param message the user input.
      * @return either YES or NO.
      * @throws InvalidYesOrNoException if the user inputs a command other than yes or no.

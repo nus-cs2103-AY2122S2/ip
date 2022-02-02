@@ -31,22 +31,24 @@ public class DueCommand extends Command {
 
     /**
      * checks the tasks that are due on date.
+     *
      * @param date the due date.
      * @param taskList the list of user tasks.
      */
-    public static void tasksDueOn(String date, TaskList taskList) {
+    public static void getTasksDueOn(String date, TaskList taskList) {
         date = date.substring(DUE_ON.length()).trim();
-        Ui.printMessage(taskList.tasksDueOn(date).toString());
+        Ui.printMessage(taskList.getTasksDueOn(date).toString());
     }
 
 
     /**
      * checks the tasks that are due before date.
+     *
      * @param date the due date.
      * @param taskList the list of user tasks.
      */
-    public static void tasksDueBefore(String date, TaskList taskList) {
+    public static void getTasksDueBefore(String date, TaskList taskList) {
         date = date.substring(DUE_BEFORE.length()).trim();
-        Ui.printMessage(taskList.tasksDueBefore(date).toString());
+        Ui.printMessage(taskList.getTasksDueBefore(date).toString());
     }
 }

@@ -12,6 +12,7 @@ public class IllegalCommandException extends IllegalArgumentException {
 
     /**
      * Constructor for IllegalCommandException.
+     *
      * @param message the user input.
      */
     public IllegalCommandException(String message) {
@@ -20,6 +21,7 @@ public class IllegalCommandException extends IllegalArgumentException {
 
     /**
      * gives the string representation of the IllegalCommandException.
+     *
      * @return the string representation of the exception object.
      */
     @Override
