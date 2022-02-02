@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
@@ -14,8 +13,6 @@ import li.zhongfu.cs2103.chatbot.types.tasks.Task;
  * A task list for storing and handling a collection of Tasks.
  */
 public class TaskList {
-    private static Logger logger = Logger.getLogger(TaskList.class.getName());
-
     private List<Task> list;
 
     private TaskList(List<Task> list) {
