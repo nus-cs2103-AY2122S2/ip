@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException {
         if (index < 0 || index >= taskList.getSize()) {
-            throw new Exception_handler("Index out of range")
+            throw new Exception_handler("Index out of range");
         }
         Task temp = taskList.removeTask(index);
         System.out.println("Noted. I've removed this task:");
