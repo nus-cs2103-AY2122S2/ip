@@ -1,5 +1,11 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
@@ -12,12 +18,6 @@ import duke.command.ListAllTasksCommand;
 import duke.command.MarkAsDoneCommand;
 import duke.command.MarkAsUndoneCommand;
 import duke.taskobjects.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.fail;
-
 
 public class ParserTest { // Just need to ensure it is returning the correct Command
     @Test
@@ -138,7 +138,8 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
             Command resultCommand = parser.parseCommand("event project meeting /not a date");
             assertInstanceOf(ErrorCommand.class, resultCommand);
             ErrorCommand errorCommand = (ErrorCommand) resultCommand;
-            assertEquals("Please enter /by followed by a date in this format YYYY-MM-DD", errorCommand.runCommand().toString());
+            assertEquals("Please enter /by followed by a date in this format YYYY-MM-DD",
+                    errorCommand.runCommand().toString());
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -166,7 +167,8 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
             Command resultCommand = parser.parseCommand("deadline project meeting /not a date");
             assertInstanceOf(ErrorCommand.class, resultCommand);
             ErrorCommand errorCommand = (ErrorCommand) resultCommand;
-            assertEquals("Please enter /by followed by a date in this format YYYY-MM-DD", errorCommand.runCommand().toString());
+            assertEquals("Please enter /by followed by a date in this format YYYY-MM-DD",
+                    errorCommand.runCommand().toString());
         } catch (Exception e) {
             fail(e.getMessage());
         }

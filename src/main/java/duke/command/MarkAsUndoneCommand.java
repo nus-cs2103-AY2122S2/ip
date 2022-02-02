@@ -11,6 +11,11 @@ public class MarkAsUndoneCommand extends TaskListCommand {
 
     private final int taskNo;
 
+    /**
+     * Default constructor for MarkAsUndoneCommand
+     * @param taskList Provided task list where a task inside will be marked as undone
+     * @param taskNo The task with the same ID will be marked as undone
+     */
     public MarkAsUndoneCommand(TaskList taskList, int taskNo) {
         super(taskList);
         this.taskNo = taskNo;

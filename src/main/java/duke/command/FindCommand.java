@@ -6,6 +6,12 @@ public class FindCommand extends TaskListCommand {
     public static final String COMMAND_WORD = "find";
     private final String searchQuery;
 
+    /**
+     * Default constructor for FindCommand
+     * @param taskList Provided task list where the search query will be
+     *                 matched with tasks from this list
+     * @param searchQuery Inputted search query where the task with matching text will be returned
+     */
     public FindCommand(TaskList taskList, String searchQuery) {
         super(taskList);
         this.searchQuery = searchQuery;

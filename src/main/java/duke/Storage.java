@@ -1,17 +1,21 @@
 package duke;
 
-import duke.taskobjects.*;
-
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.ArrayList;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.io.IOException;
+
+import duke.taskobjects.Deadline;
+import duke.taskobjects.Event;
+import duke.taskobjects.Task;
+import duke.taskobjects.TaskWithDate;
+import duke.taskobjects.Todo;
+import duke.taskobjects.Types;
 
 /**
  * Storage object that deals with exporting and importing task list items to a file
@@ -50,13 +54,18 @@ class Storage {
 
             // Parse input into array
             Task newTask = null;
-
-            if (type.equals("T")) {
+            switch (type) {
+            case "T":
                 newTask = new Todo(description, isDone);
-            } else if (type.equals("E")) {
+                break;
+            case "E":
                 newTask = new Event(description, isDone, inputArray[3]);
-            } else if (type.equals("D")) {
+                break;
+            case "D":
                 newTask = new Deadline(description, isDone, inputArray[3]);
+                break;
+            default:
+                break;
             }
 
             if (newTask != null) {
@@ -66,7 +75,8 @@ class Storage {
         return taskList;
     }
 
-    protected boolean exportTasks(List<Task> taskList) { // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
+    // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
+    protected boolean exportTasks(List<Task> taskList) {
         // Opening file for writing
         BufferedWriter writer;
         try {

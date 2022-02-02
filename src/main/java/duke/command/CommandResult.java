@@ -17,6 +17,11 @@ public class CommandResult {
         this.message = message;
     }
 
+    /**
+     * Alternative Constructor for CommandResult
+     * @param message Resulting message after executing the command
+     * @param isModified Boolean to show if the task list has been modified or not
+     */
     public CommandResult(String message, boolean isModified) {
         this.message = message;
         this.isModified = isModified;

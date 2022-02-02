@@ -9,7 +9,7 @@ import duke.taskobjects.Task;
  * TaskList object that is just a container for the task list
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Default constructor for TaskList
@@ -90,6 +90,11 @@ public class TaskList {
         return newString.toString();
     }
 
+    /**
+     * Searches and returns the list of tasks with the matching search query.
+     * @param searchQuery Search query that user enters
+     * @return A string representation of the list of tasks with the matching search query
+     */
     public String search(String searchQuery) {
         StringBuilder newString = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -100,16 +105,4 @@ public class TaskList {
         }
         return newString.toString();
     }
-
-//    public boolean markAsDone(int taskNo) {
-//        Task currentTask = taskList.get(taskNo);
-//        currentTask.markAsDone();
-//        return true;
-//    }
-//
-//    public boolean markAsUndone(int taskNo) {
-//        Task currentTask = taskList.get(taskNo);
-//        currentTask.markAsUndone();
-//        return true;
-//    }
 }

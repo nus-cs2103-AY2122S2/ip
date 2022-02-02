@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.command.CommandResult;
-
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import duke.command.CommandResult;
 
 /**
  * TextUi object that handles terminal Input and Output of the program

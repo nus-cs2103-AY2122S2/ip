@@ -11,6 +11,11 @@ public class MarkAsDoneCommand extends TaskListCommand {
 
     private final int taskNo;
 
+    /**
+     * Default constructor for MarkAsDoneCommand
+     * @param taskList Provided task list where a task inside will be marked as done
+     * @param taskNo The task with the same ID will be marked as done
+     */
     public MarkAsDoneCommand(TaskList taskList, int taskNo) {
         super(taskList);
         this.taskNo = taskNo;

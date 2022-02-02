@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
@@ -13,9 +16,6 @@ import duke.command.MarkAsDoneCommand;
 import duke.command.MarkAsUndoneCommand;
 import duke.exceptions.NullDateProvidedException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Parser object that takes in user input and returns a {@code Command} type.
  */
@@ -24,8 +24,7 @@ public class Parser {
 
     /**
      * Main parse command that takes in user input and returns a {@code Command} type.
-     *
-     * It also checks for erroneous input
+     * It also checks for erroneous input.
      * @param input User input
      * @return A {@code Command} type based on user's input
      */
@@ -45,16 +44,16 @@ public class Parser {
 
         } else if (command.equals(MarkAsDoneCommand.COMMAND_WORD)) {
             Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
-            if (result.first) {
-                return new ErrorCommand(result.second);
+            if (result.first()) {
+                return new ErrorCommand(result.second());
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
             return new MarkAsDoneCommand(taskList, taskNo);
         } else if (command.equals(MarkAsUndoneCommand.COMMAND_WORD)) {
             Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
-            if (result.first) {
-                return new ErrorCommand(result.second);
+            if (result.first()) {
+                return new ErrorCommand(result.second());
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
@@ -116,8 +115,8 @@ public class Parser {
 
         } else if (command.equals(DeleteCommand.COMMAND_WORD)) {
             Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
-            if (result.first) {
-                return new ErrorCommand(result.second);
+            if (result.first()) {
+                return new ErrorCommand(result.second());
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
@@ -160,11 +159,19 @@ public class Parser {
 }
 
 class Pair<T, V> {
-    public T first;
-    public V second;
+    private final T first;
+    private final V second;
 
     protected Pair(T first, V second) {
         this.first = first;
         this.second = second;
+    }
+
+    public T first() {
+        return first;
+    }
+
+    public V second() {
+        return second;
     }
 }
