@@ -26,30 +26,35 @@ public class Parser {
         } else {
             String[] task = input.split(" ");
             String command = task[0];
-            if (command.equals("mark")) {
+            switch (command) {
+            case "mark":
                 return Command.MARK;
-            } else if (command.equals("unmark")) {
+            case "unmark":
                 return Command.UNMARK;
-            } else if (command.equals("delete")) {
+            case "delete":
                 return Command.DELETE;
-            } else if (command.equals("find")) {
+            case "find":
                 return Command.FIND;
-            } else {
-                if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                    if (task.length > 1) {
-                        if (command.equals("todo")) {
-                            return Command.TODO;
-                        } else if (command.equals("deadline")) {
-                            return Command.DEADLINE;
-                        } else {
-                            return Command.EVENT;
-                        }
-                    } else {
-                        throw new DukeException(command + " requires additional info");
-                    }
+            case "todo":
+                if (task.length > 1) {
+                    return Command.TODO;
                 } else {
-                    throw new DukeException("Nani?! No comprende por favor");
+                    throw new DukeException(command + " requires additional info");
                 }
+            case "deadline":
+                if (task.length > 1) {
+                    return Command.DEADLINE;
+                } else {
+                    throw new DukeException(command + " requires additional info");
+                }
+            case "event":
+                if (task.length > 1) {
+                    return Command.EVENT;
+                } else {
+                    throw new DukeException(command + " requires additional info");
+                }
+            default:
+                throw new DukeException("Nani?! No comprende por favor");
             }
         }
     }

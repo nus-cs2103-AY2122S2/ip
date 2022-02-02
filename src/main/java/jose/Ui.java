@@ -1,6 +1,5 @@
 package jose;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import jose.task.Task;
@@ -10,28 +9,19 @@ import jose.task.Task;
  */
 public class Ui {
     private static final String LS = System.lineSeparator();
-    private static final String DIVIDER = "-----------------------------------------";
-    private final PrintStream out;
-
-    /**
-     * The default constructor also initializes the PrintStream.
-     */
-    public Ui() {
-        this.out = new PrintStream(System.out);
-    }
 
     /**
      * Shows the welcome message.
      */
-    public void showGreeting() {
-        out.println("Hola! soy José\nQué puedo hacer por ti? UwU");
+    public String showGreeting() {
+        return "Hola! soy Jose" + LS + "Que puedo hacer por ti? UwU";
     }
 
     /**
      * Says goodbye.
      */
-    public void showExitMessage() {
-        out.println(DIVIDER + LS + "Adiós. Espero volver a verte pronto!" + LS + DIVIDER);
+    public String showExitMessage() {
+        return "Adios. Espero volver a verte pronto!";
     }
 
     /**
@@ -39,8 +29,8 @@ public class Ui {
      *
      * @param task A task.
      */
-    public void showMarkMessage(Task task) {
-        out.println(DIVIDER + LS + "¡Bonito! He marcado esta tarea como hecha:" + LS + task + LS + DIVIDER);
+    public String showMarkMessage(Task task) {
+        return "Bonito! He marcado esta tarea como hecha:" + LS + task;
     }
 
     /**
@@ -48,9 +38,8 @@ public class Ui {
      *
      * @param task A task.
      */
-    public void showUnmarkMessage(Task task) {
-        out.println(DIVIDER + LS + "Bien, he marcado esta tarea como aún no realizada:"
-                + LS + task + LS + DIVIDER);
+    public String showUnmarkMessage(Task task) {
+        return "Bien, he marcado esta tarea como aun no realizada:" + LS + task;
     }
 
     /**
@@ -58,8 +47,8 @@ public class Ui {
      *
      * @param task A task.
      */
-    public void showAddMessage(Task task) {
-        out.println(DIVIDER + LS + "Entendido. he añadido esta tarea:" + LS + task);
+    public String showAddMessage(Task task) {
+        return "Entendido. he anadido esta tarea:" + LS + task + LS;
     }
 
     /**
@@ -67,8 +56,8 @@ public class Ui {
      *
      * @param task A task.
      */
-    public void showDeleteMessage(Task task) {
-        out.println(DIVIDER + LS + "Señalado. He eliminado esta tarea:" + LS + task);
+    public String showDeleteMessage(Task task) {
+        return "Senalado. He eliminado esta tarea:" + LS + task + LS;
     }
 
     /**
@@ -76,8 +65,8 @@ public class Ui {
      *
      * @param tasks A task list.
      */
-    public void showRemainingTasks(TaskList tasks) {
-        out.println("Ahora tienes " + tasks.getSize() + " tareas en la lista." + LS + DIVIDER);
+    public String showRemainingTasks(TaskList tasks) {
+        return "Ahora tienes " + tasks.getSize() + " tareas en la lista.";
     }
 
     /**
@@ -85,11 +74,13 @@ public class Ui {
      *
      * @param tasks A task list.
      */
-    public void showList(ArrayList<Task> tasks) {
-        out.println(DIVIDER + LS + "Aquí están las tareas en su lista:");
+    public String showList(ArrayList<Task> tasks) {
+        String list = "Aqui estan las tareas en su lista:" + LS;
+
         for (int i = 0; i < tasks.size(); i++) {
-            out.println(i + 1 + ": " + tasks.get(i));
+            list += i + 1 + ": " + tasks.get(i) + LS;
         }
-        out.println(DIVIDER);
+
+        return list;
     }
 }

@@ -57,10 +57,12 @@ public class Storage {
      */
     public void update(TaskList tasks) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+
         for (Task t : tasks.getTasks()) {
             bw.write(t.formatData());
             bw.newLine();
         }
+
         bw.close();
     }
 }
