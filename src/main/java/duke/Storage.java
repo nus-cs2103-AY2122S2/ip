@@ -10,7 +10,6 @@ import java.util.Scanner;
 /**
  * Class responsible for writing to and reading from disk
  */
-
 public class Storage {
 
     static File saveData;
@@ -54,7 +53,7 @@ public class Storage {
      * Finds previous save data if exists. If not found, creates new save data
      * If found, calls readSavedData
      */
-    public static TaskList load(){
+    public static TaskList load() {
         TaskList tasklist= null;
         try {
             String currDir = System.getProperty("user.dir");
@@ -86,7 +85,7 @@ public class Storage {
      */
     public static void readSavedData(TaskList taskList) throws FileNotFoundException {
         Scanner s = new Scanner(saveData);
-        while(s.hasNext()){
+        while (s.hasNext()) {
             taskList.tasklist.add(parser.parseFileData(s.nextLine()));
         }
     }

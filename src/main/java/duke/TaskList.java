@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class TaskList {
     public ArrayList<Task> tasklist;
 
-    public TaskList(){
+    public TaskList() {
         tasklist = new ArrayList<Task>();
     }
 
 
-    public void markTaskNum(int taskNum, String isTrue){
+    public void markTaskNum(int taskNum, String isTrue) {
         if (isTrue.equals("true") && (taskNum > 0)) {
             this.tasklist.get(taskNum).mark();
         }
@@ -26,13 +26,13 @@ public class TaskList {
      *
      * @param num index (starts from 1) to delete
      */
-    public void deleteTask(int num){
-        if (num > 0 && num <= Task.totalTask){
+    public void deleteTask(int num) {
+        if (num > 0 && num <= Task.totalTask) {
             num--;
             Ui.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
             Task.totalTask--;
-            for(int i = num; i <Task.totalTask; i++){
+            for(int i = num; i <Task.totalTask; i++) {
                 this.tasklist.get(i).decrementNum();
             }
             Ui.printTotalTasks();
@@ -48,11 +48,11 @@ public class TaskList {
      *
      * @param input Original input string that was entered
      */
-    public void markTask(String input){
+    public void markTask(String input) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
         Task curr = tasklist.get(taskNum);
-        if (input.startsWith("mark")){
+        if (input.startsWith("mark")) {
             curr.mark();
             Ui.printMarkTaskDone(curr);
         } else {
@@ -62,11 +62,11 @@ public class TaskList {
         Storage.writeAllToFile(this);
     }
 
-    public void addTask(String name, String time, String type, boolean isReading){
+    public void addTask(String name, String time, String type, boolean isReading) {
         Task task;
-        if (type.equals("D")){
+        if (type.equals("D")) {
             task = new Deadline(name, Task.totalTask, time, isReading);
-        } else if (type.equals("E")){
+        } else if (type.equals("E")) {
             task = new Event(name, Task.totalTask, time, isReading);
         } else {
             task = new ToDo(name, Task.totalTask, isReading);
@@ -74,10 +74,10 @@ public class TaskList {
         tasklist.add(task);
     }
 
-    public void findTask(String keyword){
+    public void findTask(String keyword) {
         TaskList matchTasks = new TaskList();
-        for(int i=0; i<Task.totalTask; i++){
-            if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)){
+        for(int i = 0; i < Task.totalTask; i++) {
+            if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)) {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }

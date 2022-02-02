@@ -27,7 +27,7 @@ public class Task {
      * @param type type of task. 'E' for duke.Event, 'T' for Todo and 'D' for duke.Deadline
      * @param isReading flag to check if input is being read from file data
      */
-    public Task(String name, int number, String time, String type, boolean isReading){
+    public Task(String name, int number, String time, String type, boolean isReading) {
         try {
             if (name.equals("")) {
                 throw new EmptyDescriptorExceptions();
@@ -60,11 +60,11 @@ public class Task {
      * Gets string representation of how task will be formatted into disk
      * @return string representation of how task will be formatted into disk
      */
-    public String getDataRepresentation(){
+    public String getDataRepresentation() {
         return String.format("%s---%s---%s---%s\n", this.type, this.isDone, this.name, this.time);
     }
 
-    private void setDate(String input, boolean isReading){
+    private void setDate(String input, boolean isReading) {
         try {
             if ((this.type.equals("D") || this.type.equals("E")) && input != null) {
                 input = input.replaceAll("/", "-");
@@ -74,7 +74,7 @@ public class Task {
                 this.time = lt.format(out);
             }
         }
-        catch(DateTimeParseException e){
+        catch (DateTimeParseException e){
             if (!isReading)
                 System.out.println("Note that dates should be in <<YYYY-MM-DD HHMM>> format");
             this.time = input;
@@ -100,7 +100,7 @@ public class Task {
      *
      * @return X if task is done and empty string if task is not done
      */
-    public String getStatus(){
+    public String getStatus() {
         if (this.isDone){
             return "X";
         } else {
@@ -121,8 +121,8 @@ public class Task {
      * @return String representation of task.
      */
     @Override
-    public String toString(){
-        String s = String.format("%d. [%s] %s\n", number+1, getStatus(), name);
+    public String toString() {
+        String s = String.format("%d. [%s] %s\n", number + 1, getStatus(), name);
         return s;
     }
 }

@@ -8,7 +8,7 @@ package duke;
  */
 public class Duke {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ui ui = new Ui();
         Parser parser = new Parser();
         Storage storage = new Storage();

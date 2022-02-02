@@ -16,7 +16,7 @@ public class Parser {
      * @param input input entered by user into Duke
      * @return true if input is bye, false otherwise
      */
-    public static boolean parseIsBye(String input,TaskList tasklist){
+    public static boolean parseIsBye(String input, TaskList tasklist){
         if (input.equals("bye")){
             return true;
         } else {
@@ -54,7 +54,7 @@ public class Parser {
      * @param input user input into Duke
      * @return task based on input parameters
      */
-    public static Task parseCreateNewTask(String input){
+    public static Task parseCreateNewTask(String input) {
         Task task = null;
         try {
             if (input.startsWith("todo")) {
@@ -64,7 +64,7 @@ public class Parser {
                 if (inputArr.length == 1) {
                     throw new EmptyDescriptorExceptions();
                 }
-                task = new Deadline(inputArr[0].substring(8),Task.totalTask, inputArr[1], false);
+                task = new Deadline(inputArr[0].substring(8), Task.totalTask, inputArr[1], false);
             } else {
                 String[] inputArr = input.split("/at ");
                 if (inputArr.length == 1) {
@@ -83,20 +83,20 @@ public class Parser {
      * @param input one line of file data in the form of (Task_Type---Task_status---Task_name---date)
      * @return task based on file data information provided
      */
-    public static Task parseFileData(String input){
+    public static Task parseFileData(String input) {
         if (input == null || input == ""){
             return null;
         }
         String[] stringArr = input.split("---");
         Task task;
-        if (stringArr[0].equals("T")){
-            task = new ToDo(stringArr[2],Task.totalTask, true);
-        } else if (stringArr[0].equals("D")){
+        if (stringArr[0].equals("T")) {
+            task = new ToDo(stringArr[2], Task.totalTask, true);
+        } else if (stringArr[0].equals("D")) {
             task = new Deadline(stringArr[2],Task.totalTask, stringArr[3], true);
         } else {
             task = new Event(stringArr[2],Task.totalTask, stringArr[3], true);
         }
-        if (stringArr[1].equals("true")){
+        if (stringArr[1].equals("true")) {
             task.mark();
         }
         return task;

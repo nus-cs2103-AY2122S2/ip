@@ -25,8 +25,8 @@ public class Deadline extends Task {
      * @return String representation of task.
      */
     @Override
-    public String toString(){
-        String s = String.format("%d. [D][%s] %s (by: %s)\n", number+1, getStatus(), name, time);
+    public String toString() {
+        String s = String.format("%d. [D][%s] %s (by: %s)\n", number + 1, getStatus(), name, time);
         return s;
     }
 }
