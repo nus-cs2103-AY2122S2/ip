@@ -24,7 +24,9 @@ public class Deadline extends Task {
             tempStr = "X";
         }
 
-        return "[D][" + tempStr + "] " + description + "(" + time.get().format(dateFormatter) + ")";
+        return "[D][" + tempStr + "] " 
+                + description 
+                + "(" + time.get().format(DATE_FORMATTER) + ")";
     }
 
 }

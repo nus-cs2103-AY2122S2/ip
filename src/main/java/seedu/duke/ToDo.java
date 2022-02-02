@@ -21,7 +21,8 @@ public class ToDo extends Task {
             tempStr = "X";
         }
 
-        return "[T][" + tempStr + "] " + description;
+        return "[T][" + tempStr + "] " 
+                + description;
     }
 
 }

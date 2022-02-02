@@ -23,7 +23,9 @@ public class Event extends Task {
             tempStr = "X";
         }
 
-        return "[E][" + tempStr + "] " + description + "(" + time.get().format(dateFormatter) + ")";
+        return "[E][" + tempStr + "] " 
+                + description + "(" 
+                + time.get().format(DATE_FORMATTER) + ")";
     }
 }
 

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
 
-    protected static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("LLL dd yyyy");
 
     protected boolean isDone;
     protected String description;
