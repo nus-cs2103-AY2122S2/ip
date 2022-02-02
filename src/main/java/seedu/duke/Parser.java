@@ -10,7 +10,15 @@ public class Parser {
     private static final int MARK = 4;
     private static final int UNMARK = 5;
     private static final int DELETE = 6;
-    
+    private static final int FIND = 7;
+
+    /**
+     * Reads the String input and determines the type of command to execute and returns it as an integer
+     *
+     * @param input User input for the <code>Duke</code> program
+     * @return An integer to represent the type of command to execute
+     * @throws DukeException When String input doesn't match any type of command
+     */
     public static int getCommand(String input) throws DukeException {
         String str = input.split(" ", 2)[0];
         
@@ -28,7 +36,9 @@ public class Parser {
             return UNMARK;
         } else if (str.equals("delete")) {
             return DELETE;
-        } else {
+        } else if (str.equals("find")) {
+            return FIND;
+        }else {
             throw new DukeException("OOPS!!! I don't understand what that means");
         }
         
