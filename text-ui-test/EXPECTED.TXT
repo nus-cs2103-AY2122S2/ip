@@ -1,18 +1,23 @@
 FUNNY FELLA WEIIIIII! 
 How can I help Mr Singhhhhh?
-read book
 ---------------
- ok added alr bro: go get a coffee
----------------
-return book
+ ok added alr bro: go get a coffee 
 ---------------
  ok added alr bro: meditate
 ---------------
-buy bread
----------------
  ok added alr bro: eat caifan
 ---------------
-bye
+Got it. I added this deadline already bro:
+ [D][ ] return book (by:  Sunday)
+
+Now you have 4 tasks in the list.
+
 ---------------
- Byeeeee, come back again ah!
----------------`
+Got it. I added this event already bro:
+ [E][ ] project meeting (at:  Mon 2-4pm)
+
+Now you have 5 tasks in the list.
+
+---------------
+Byeeeee, come back again ah!
+---------------

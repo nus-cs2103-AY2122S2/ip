@@ -54,7 +54,6 @@ public class Chat {
                         break;
                     }
                 }
-                System.out.println(LINE_BREAK);
             } else if (command[0].equals("mark")) {
 
                 int number = Integer.parseInt(command[1]) - 1;
@@ -66,7 +65,6 @@ public class Chat {
                 System.out.println(LINE_BREAK);
                 System.out.println("   " + MARK_MESSAGE);
                 System.out.println("        [X] " + currTask.getDescription());
-                System.out.println(LINE_BREAK);
             } else if (command[0].equals("unmark")) {
                 int number = Integer.parseInt(command[1]) - 1;
 
@@ -77,7 +75,6 @@ public class Chat {
                 System.out.println(LINE_BREAK);
                 System.out.println("   " + UNMARK_MESSAGE);
                 System.out.println("        [ ] " + currTask.getDescription());
-                System.out.println(LINE_BREAK);
             } else if (command[0].equals("deadline")) {
                 // deadline make some cups /by the day after
 
@@ -93,7 +90,6 @@ public class Chat {
                 System.out.println(LINE_BREAK);
                 System.out.println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
                 System.out.println("Now you have " + counter + " tasks in the list. \n");
-                System.out.println(LINE_BREAK);
             } else if (command[0].equals("event")) {
 
                 // event project meeting /at Mon 2-4pm
@@ -110,7 +106,6 @@ public class Chat {
                 System.out.println(LINE_BREAK);
                 System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
                 System.out.println("Now you have " + counter + " tasks in the list. \n");
-                System.out.println(LINE_BREAK);
             } else {
                 // here we declare the new task to be added (TODO)
                 Task t = new ToDos(input);
@@ -118,7 +113,6 @@ public class Chat {
                 list[counter] = t;
                 System.out.println(LINE_BREAK);
                 System.out.println(" ok added alr bro: " + input);
-                System.out.println(LINE_BREAK);
                 ++counter;
             }
         }
