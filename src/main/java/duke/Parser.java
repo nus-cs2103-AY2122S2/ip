@@ -27,7 +27,8 @@ public class Parser {
         TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE
     }
 
-    public Parser(TaskList list, Storage storage) {
+    public Parser(String input, TaskList list, Storage storage) {
+        userInput = input;
         tasks = list;
         this.storage = storage;
     }
@@ -120,8 +121,7 @@ public class Parser {
     /**
      * Based on supplied Action word, run the action
      */
-    public String parseInput(String input) throws DukeException, IOException {
-        userInput = input;
+    public void parseInput() throws DukeException, IOException {
         splitUserInput();
         Commands action;
         try {
@@ -134,26 +134,34 @@ public class Parser {
         }
         switch (action) {
             case TODO:
-                return createToDoTask();
+                System.out.println(createToDoTask());
+                break;
             case DEADLINE:
-                return createDeadlineTask();
+                System.out.println(createDeadlineTask());
+                break;
             case EVENT:
-                return createEventTask();
+                System.out.println(createEventTask());
+                break;
             case LIST:
-                return listOutTasks();
+                System.out.println(listOutTasks());
+                break;
             case MARK:
-                return markTaskAsDone();
+                System.out.println(markTaskAsDone());
+                break;
             case UNMARK:
-                return unmarkTask();
+                System.out.println(unmarkTask());
+                break;
             case DELETE:
-                return deleteTask();
+                System.out.println(deleteTask());
+                break;
             case FIND:
-                return findTask();
+                System.out.println(findTask());
+                break;
             case BYE:
-                return terminateAndSaveProgram(storage);
+                System.out.println(terminateAndSaveProgram(storage));
+                System.exit(0);
             default:
         }
-        return "";
     }
 
     /**
