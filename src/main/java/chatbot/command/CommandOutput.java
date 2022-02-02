@@ -23,8 +23,8 @@ public class CommandOutput {
     /**
      * Constructs a command with a specified output and sfx file and terminate flag.
      *
-     * @param output  the command output
-     * @param sfxFile the sfx file
+     * @param output    the command output
+     * @param sfxFile   the sfx file
      * @param terminate the terminate flag
      */
     public CommandOutput(String output, String sfxFile, boolean terminate) {

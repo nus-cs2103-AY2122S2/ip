@@ -10,6 +10,7 @@ public abstract class Command {
 
     /**
      * Constructs a command with a specified trigger.
+     *
      * @param trigger the command trigger
      */
     public Command(String trigger) {

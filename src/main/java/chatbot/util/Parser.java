@@ -38,7 +38,8 @@ public class Parser {
 
     /**
      * Returns the output of the command associated with the specified user input. If no command is associated, a default command is executed.
-     * @param input the user input
+     *
+     * @param input    the user input
      * @param taskList the task list to execute the command on
      * @return the output of the command associated with the specified user input. If no command is associated, a default command is executed.
      */
