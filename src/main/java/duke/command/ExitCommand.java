@@ -8,7 +8,7 @@ import duke.command.Command;
 public class ExitCommand extends Command {
 
     public ExitCommand() {
-      super();
+        super();
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {

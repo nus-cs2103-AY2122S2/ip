@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.task.Task;
 
 public class AddCommand extends Command {
+    
     public Task task;
 
     public AddCommand(Task task) {
