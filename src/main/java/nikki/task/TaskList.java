@@ -117,7 +117,7 @@ public class TaskList {
      *
      * @return formatted string of Tasks for saving to file
      */
-    public String tasksFileSaveFormat() {
+    public String listFileSaveFormat() {
         String result = "";
 
         for (int i = 0; i < this.size(); i++) {

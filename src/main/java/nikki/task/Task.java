@@ -2,12 +2,15 @@ package nikki.task;
 
 import nikki.NikkiException;
 
+/**
+ * Class to encapsulate basic properties and methods of a Task
+ */
 public class Task {
     /** Mark in checkbox of completed Task */
-    private static final char completedMark = 'X';
+    private static final char COMPLETED_MARK = 'X';
 
     /** Mark in checkbox of uncompleted Task */
-    private static final char incompleteMark = ' ';
+    private static final char INCOMPLETE_MARK = ' ';
 
     /** Name of Task */
     private String name;
@@ -126,7 +129,7 @@ public class Task {
     public String nameWithStatus() {
         return String.format("[%c][%c] %s",
                 this.getTag(),
-                this.isDone() ? Task.completedMark : Task.incompleteMark,
+                this.isDone() ? Task.COMPLETED_MARK : Task.INCOMPLETE_MARK,
                 this.name);
     }
 
