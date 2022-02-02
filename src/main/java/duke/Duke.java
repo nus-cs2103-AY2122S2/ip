@@ -142,13 +142,13 @@ import java.io.IOException;
 //    }
 public class Duke {
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
+        taskList = new TaskList(storage.load());
     }
 
     public void run() {
@@ -159,7 +159,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (Exception_handler | IOException e) {
                 ui.showError(e.getMessage());
