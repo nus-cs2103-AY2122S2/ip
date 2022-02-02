@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -9,18 +8,38 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AddCommand extends Command{
+/**
+ * Represents a command to add a new task (ToDo, Deadline, Event) to the Duke application.
+ *
+ * @author Zheng Teck
+ * @version 1.0
+ */
+public class AddCommand extends Command {
 
     CommandType commandType;
     String description;
     LocalDate date;
     LocalTime time;
 
+    /**
+     * Constructor to create a ToDo Command.
+     *
+     * @param commandType Type of this Command.
+     * @param description Description of task stored.
+     */
     public AddCommand(CommandType commandType, String description) {
         this.commandType = commandType;
         this.description = description;
     }
 
+    /**
+     * Constructor to create a Deadline or Event Command.
+     *
+     * @param commandType Type of this Command.
+     * @param description Description of task stored.
+     * @param date        The due date or occurring time of the task in the description.
+     * @param time        The corresponding time of the due date.
+     */
     public AddCommand(CommandType commandType, String description, LocalDate date, LocalTime time) {
         this.commandType = commandType;
         this.description = description;
@@ -28,7 +47,15 @@ public class AddCommand extends Command{
         this.time = time;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    /**
+     * Execute the command stored in this instance to add a task to list.
+     *
+     * @param taskList The list of task in the Duke application.
+     * @param storage  Storage of task in local persistent disk.
+     * @exception IOException
+     * @see IOException
+     */
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         int taskId = -1;
         switch (commandType) {
         case TODO:
@@ -46,7 +73,6 @@ public class AddCommand extends Command{
         default:
             break;
         }
-
 
         ui.print(ui.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1));
         storage.writeToFile(taskList);

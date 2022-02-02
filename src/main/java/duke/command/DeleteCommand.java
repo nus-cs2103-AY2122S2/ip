@@ -8,12 +8,33 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents a command to delete task from the Duke application.
+ *
+ * @author Zheng Teck
+ * @version 1.0
+ */
 public class DeleteCommand extends Command {
     int taskId;
 
+    /**
+     * Constructor to create a Delete Command.
+     *
+     * @param taskId Zero index task id to be removed from the task list.
+     */
     public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
+
+    /**
+     * Execute the command to delete the given task.
+     *
+     * @param taskList The list of task in the Duke application.
+     * @param storage  Storage of task in local persistent disk.
+     * @throws DukeException Custom error message by the Duke application.
+     * @exception IOException
+     * @see IOException
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskId > taskList.getTotalTasks() || taskId < 0) {
             throw new DukeException(ui.MSG_INVALIDTASKID);

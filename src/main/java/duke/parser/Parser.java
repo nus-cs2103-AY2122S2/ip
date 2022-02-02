@@ -15,11 +15,22 @@ public class Parser {
     Ui ui;
     Storage storage;
 
+    /**
+     * Represents the parser to decode user's input in the Duke application.
+     *
+     * @param storage Storage of task in local persistent disk.
+     */
     public Parser(Ui ui, Storage storage) {
         this.ui = ui;
         this.storage = storage;
     }
 
+    /**
+     * This method formats the user's input into a Command type.
+     *
+     * @param inputTxt User's input line.
+     * @return Returns the command to be executed.
+     */
     public Command parse(String inputTxt) {
         try {
             if (inputTxt.isEmpty()) {
@@ -30,7 +41,7 @@ public class Parser {
             command = inputTxt.split(" ")[0].toUpperCase();
             CommandType action = CommandType.valueOf(command);
             switch (action) {
-                case BYE:
+            case BYE:
                 return new ExitCommand();
             case LIST:
                 return new ListCommand();
@@ -41,25 +52,25 @@ public class Parser {
                 } else {
                     return new AddCommand(CommandType.TODO, description);
                 }
-                case DEADLINE:
-                    return formatCmdWithTime(CommandType.DEADLINE, inputTxt);
-                case EVENT:
-                    return formatCmdWithTime(CommandType.EVENT, inputTxt);
-                case DONE:
-                    return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
-                case DELETE:
-                    return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
-                default:
-                    throw new DukeException(ui.MSG_INVALIDCMD);
-        }
+            case DEADLINE:
+                return formatCmdWithTime(CommandType.DEADLINE, inputTxt);
+            case EVENT:
+                return formatCmdWithTime(CommandType.EVENT, inputTxt);
+            case DONE:
+                return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
+            case DELETE:
+                return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
+            default:
+                throw new DukeException(ui.MSG_INVALIDCMD);
+            }
 
         } catch (DukeException e) {
             ui.print(e.getMessage());
         } catch (NumberFormatException e) {
             ui.print(Ui.MSG_INVALIDTASKID);
-        } catch (ArrayIndexOutOfBoundsException|StringIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
             ui.print(Ui.MSG_INVLIADCMDFORMAT);
-        }  catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.print(Ui.MSG_INVALIDTASKID);
         } catch (DateTimeParseException e) {
             ui.print(Ui.MSG_INVALIDDATETIMEFORMAT);
@@ -114,6 +125,15 @@ public class Parser {
         }
     }
 
+    /**
+     * This method formats the date input.
+     *
+     * @param sDate User's date input in String format.
+     * @return The formatted date.
+     * @exception DateTimeParseException
+     * @throws DukeException          Invalid date format.
+     * @see DateTimeParseException
+     */
     public static LocalDate formatDate(String sDate) throws DateTimeParseException, DukeException {
         LocalDate inputDate = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         if (inputDate.isBefore(LocalDate.now())) {
@@ -123,6 +143,14 @@ public class Parser {
         }
     }
 
+    /**
+     * @param date  Formatted input date.
+     * @param sTime User's time input in String format.
+     * @return Returns the formatted time.
+     * @exception  DateTimeParseException
+     * @throws DukeException          Invalid time format.
+     * @see DateTimeParseException
+     */
     public static LocalTime formatTime(LocalDate date, String sTime) throws DateTimeParseException, DukeException {
         LocalTime inputTime = LocalTime.parse(sTime, DateTimeFormatter.ofPattern("HH:mm"));
         if (date.equals(LocalDate.now()) && inputTime.isBefore(LocalTime.now())) {
@@ -131,5 +159,4 @@ public class Parser {
             return inputTime;
         }
     }
-
 }

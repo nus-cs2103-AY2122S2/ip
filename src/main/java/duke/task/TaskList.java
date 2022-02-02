@@ -24,21 +24,21 @@ public class TaskList {
         return tasks.size() - 1;
     }
 
-    public int addDeadline(String description, boolean isDone, LocalDate date, LocalTime time) throws DukeException {
+    public int addDeadline(String description, boolean isDone, LocalDate date, LocalTime time) {
         this.tasks.add(new Deadline(description, isDone, date, time));
         return tasks.size() - 1;
     }
 
-    public int addDeadline(String description, LocalDate date, LocalTime time) throws DukeException {
+    public int addDeadline(String description, LocalDate date, LocalTime time) {
         return addDeadline(description, false, date, time);
     }
 
-    public int addEvent(String description, boolean isDone, LocalDate date, LocalTime time) throws DukeException {
+    public int addEvent(String description, boolean isDone, LocalDate date, LocalTime time) {
         this.tasks.add(new Event(description, isDone, date, time));
         return tasks.size() - 1;
     }
 
-    public int addEvent(String description, LocalDate date, LocalTime time) throws DukeException {
+    public int addEvent(String description, LocalDate date, LocalTime time) {
         return addEvent(description, false, date, time);
     }
 

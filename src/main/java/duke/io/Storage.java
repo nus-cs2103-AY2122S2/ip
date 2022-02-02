@@ -14,11 +14,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+/**
+ * Represents the local persistent storage in Duke application.
+ *
+ * @author Zheng Teck
+ * @version 1.0
+ */
 public class Storage {
 
     public static final String PATH = String.join(File.separator,"data","duke.txt");
     private File file;
 
+    /**
+     * Load the storage instance from local storage if exist else create a new instance.
+     */
     public Storage() {
         this.file = new File(PATH);
         if (!this.file.getParentFile().exists())  {
@@ -26,6 +35,13 @@ public class Storage {
         }
     }
 
+    /**
+     * This method writes data in the task list to local storage.
+     *
+     * @param tasks The list of task in the Duke application.
+     * @exception IOException
+     * @see IOException
+     */
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(PATH);
         StringBuffer result = new StringBuffer();
@@ -36,6 +52,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * This method read the local storage to import tasks from the local persistent storage.
+     *
+     * @return Returns the imported list of task from the local persistent storage.
+     * @exception IOException
+     * @see IOException
+     */
     public TaskList importTasks() throws IOException {
         TaskList taskList = new TaskList();
         try {
