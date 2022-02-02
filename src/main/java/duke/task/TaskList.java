@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import duke.DukeException;
 
@@ -9,7 +8,6 @@ import duke.DukeException;
  * Represents a list of Tasks.
  */
 public class TaskList extends ArrayList<Task> {
-
     /**
      * Marks the Task at a specified index as done.
      *
@@ -42,7 +40,7 @@ public class TaskList extends ArrayList<Task> {
      * @param keyword The keyword to search for.
      * @return The Tasks with descriptions containing the keyword.
      */
-    public List<Task> search(String keyword) {
+    public TaskList search(String keyword) {
         TaskList matchingTasks = new TaskList();
 
         for (Task task : this) {

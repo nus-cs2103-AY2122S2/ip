@@ -37,7 +37,11 @@ public abstract class Task {
         return description;
     }
 
-    void setDone(boolean isDone) {
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
