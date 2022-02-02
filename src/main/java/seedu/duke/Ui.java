@@ -1,5 +1,9 @@
 package seedu.duke;
 
+/**
+ * The user interface.
+ * Interacts with user to receive inputs and print outputs.
+ */
 public class Ui {
 
     private static final int LIST = 0;
@@ -9,13 +13,22 @@ public class Ui {
     private static final int MARK = 4;
     private static final int UNMARK = 5;
     private static final int DELETE = 6;
-    
+
+    /**
+     * Prints an error message for failure in loading files
+     */
     public void showLoadingError() {
 
         System.out.println("Failed to retrieve data from storage");
 
     }
 
+    /**
+     * Interprets the user input and prints outputs according to them
+     *
+     * @param input User input
+     * @param tasks Current TaskList in the Duke program
+     */
     public void nextInput(String input, TaskList tasks) {
         try {
             int cmd = Parser.getCommand(input);
@@ -48,6 +61,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the starting logo and introduction for the Duke program
+     */
     public void start() {
         String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
@@ -59,10 +75,18 @@ public class Ui {
         myPrint("Hello! I'm Duke\n    What can I do for you?");
     }
 
+    /**
+     * Prints the exiting sentence of the Duke program
+     */
     public void exit() {
         myPrint("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints out the String input in a specific format as a response from Duke
+     *
+     * @param toPrint String to be printed as Duke output
+     */
     public static void myPrint(String toPrint) {
         System.out.println("    ________________________________________________________________");
         System.out.println("    " + toPrint);

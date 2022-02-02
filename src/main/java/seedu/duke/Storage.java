@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
+/**
+ * A class to manage the saving and loading of files in the <code>Duke</code> program
+ */
 public class Storage {
     
     private String filepath;
@@ -13,7 +16,13 @@ public class Storage {
     Storage(String filepath) {
         this.filepath = filepath;
     }
-    
+
+    /**
+     * Reads the save file from this.filepath and returns an ArrayList<Task> that represents the save file.
+     *
+     * @return ArrayList<Task> that represents the save file.
+     * @throws DukeException If the duke.txt file doesn't exist.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(this.filepath);
@@ -35,6 +44,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes in a list of tasks and save them in a duke.txt file.
+     * If duke.txt file already exists, the new save will overwrite the existing one.
+     *
+     * @param tasks List of tasks
+     */
     public void save(TaskList tasks) {
 
         String saveFormat = "";

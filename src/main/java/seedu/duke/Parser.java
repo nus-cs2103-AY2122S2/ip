@@ -1,6 +1,10 @@
 package seedu.duke;
 import java.time.LocalDate;
 
+/**
+ * Parser for the <code>Duke</code> that includes static methods to interpret user inputs.
+ * Also includes a method to parse and read save files.
+ */
 public class Parser {
     
     private static final int LIST = 0;
@@ -10,7 +14,14 @@ public class Parser {
     private static final int MARK = 4;
     private static final int UNMARK = 5;
     private static final int DELETE = 6;
-    
+
+    /**
+     * Reads the String input and determines the type of command to execute and returns it as an integer
+     *
+     * @param input User input for the <code>Duke</code> program
+     * @return An integer to represent the type of command to execute
+     * @throws DukeException When String input doesn't match any type of command
+     */
     public static int getCommand(String input) throws DukeException {
         String str = input.split(" ", 2)[0];
         
@@ -33,7 +44,14 @@ public class Parser {
         }
         
     }
-    
+
+    /**
+     * Reads the String input and returns the description of the Task according to the input line
+     *
+     * @param input User input for the <code>Duke</code> program
+     * @return The description of the <code>Task</code> of the user input
+     * @throws DukeException If <code>Task</code> description not specified correctly.
+     */
     public static String getDescription(String input) throws DukeException {
         try {
             return input.split(" ", 2)[1].split("/", 2)[0];  
@@ -42,7 +60,14 @@ public class Parser {
         }
         
     }
-    
+
+    /**
+     * Reads the String input and returns the index to apply the command
+     *
+     * @param input User input for the <code>Duke</code> program.
+     * @return The index of the <code>Task</code> to apply the command.
+     * @throws DukeException If parsing of the String input fails.
+     */
     public static int getIndex(String input) throws DukeException {
         try {
             return Integer.parseInt(input.split(" ", 2)[1].split("/", 2)[0]);  
@@ -51,7 +76,14 @@ public class Parser {
         }
         
     }
-    
+
+    /**
+     * Reads the String input and returns the date of the Task according to the input line
+     *
+     * @param input User input for the <code>Duke</code> program.
+     * @return The date of the <code>Task</code> of the user input
+     * @throws DukeException If date provided is not in correct format ([task] [description]/yyyy-mm-dd)
+     */
     public static LocalDate getDate(String input) throws DukeException {
         try {
             return LocalDate.parse(input.split(" ", 2)[1].split("/", 2)[1]);
@@ -60,7 +92,14 @@ public class Parser {
         }
         
     }
-    
+
+    /**
+     * Returns a <code>Task</code> that is derived from the input String
+     *
+     * @param input String inputs from the save file.
+     * @return <code>Task</code> corresponding to the given line of input.
+     * @throws DukeException If the input line is not is the correct save format.
+     */
     public static Task getTask(String input) throws DukeException {
         
         String[] stringArr = input.split("#");
