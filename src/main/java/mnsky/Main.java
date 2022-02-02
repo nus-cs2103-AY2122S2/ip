@@ -15,6 +15,10 @@ public class Main extends Application {
 
     private Mnsky mnsky = new Mnsky();
 
+    /**
+     * Starts the stage for the JavaFX GUI.
+     * @param stage The stage for the JavaFX GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

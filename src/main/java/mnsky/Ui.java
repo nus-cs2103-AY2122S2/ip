@@ -14,47 +14,53 @@ public class Ui {
     }
 
     /**
-     * Prints out the bye messages.
+     * Returns the bye message.
+     * @return The bye message.
      */
     public String printBye() {
         return "[MNSKY has shut itself down]";
     }
 
     /**
-     * Prints out the exception messages.
+     * Returns the message for when an exception occurs.
      * @param e The exception to be printed out.
+     * @return The message for when an exception occurs.
      */
     public String printException(MnskyException e) {
         return "..?\n" + e.getMessage();
     }
 
     /**
-     * Prints out the string representation of the task.
+     * Returns the string representation of the task.
      * @param task The task to be printed out.
+     * @return The string representation of the task.
      */
     public String printTask(Task task) {
         return task.toString();
     }
 
     /**
-     * Prints out the message for adding a new task to the list.
+     * Returns the message for adding a new task to the list.
      * @param task The new task that was added.
+     * @return The message for adding a new task to the list.
      */
     public String printAddedTask(Task task) {
         return String.format("[MNSKY added task %s to their list]\n", task.getName());
     }
 
     /**
-     * Prints out the message for deleting a task to the list.
+     * Returns the message for deleting a task.
      * @param task The task that was deleted.
+     * @return The message for deleting a task.
      */
     public String printDeletedTask(Task task) {
         return String.format("[MNSKY deleted the task %s from the list.]\n", task.getName());
     }
 
     /**
-     * Prints out all the strings in th l ist.
+     * Combines groups of 5 strings in the list of strings into one string, then returns these strings.
      * @param listStrings The list of strings.
+     * @return The list of strings after combining groups of 5 strings into one string.
      */
     public ArrayList<String> printListStrings(ArrayList<String> listStrings) {
         ArrayList<String> newListStrings = new ArrayList<>();

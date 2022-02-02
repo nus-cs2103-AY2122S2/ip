@@ -28,11 +28,18 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the scroll pane to connect it to the height of the dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Mnsky attribute to a Mnsky object.
+     * @param m The Mnsky object.
+     */
     public void setMnsky(Mnsky m) {
         mnsky = m;
     }

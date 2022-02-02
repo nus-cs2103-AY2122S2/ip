@@ -39,7 +39,8 @@ public class Mnsky {
     }
 
     /**
-     * Runs the main loop of Mnsky, including retrieving, parsing, and processing user input.
+     * Parses and processes the input to get Mnsky's responses for the user.
+     * @return Mnsky's responses to the input
      */
     public ArrayList<String> getResponses(String input) {
         ArrayList<String> responses = new ArrayList<>();
@@ -95,13 +96,3 @@ public class Mnsky {
         return responses;
     }
 }
-
-    /*
-    /**
-     * Creates a new MNSKY object and runs it.
-     * @param args Any arguments passed to main().
-
-    public static void main(String[] args) {
-        Mnsky mnsky = new Mnsky();
-        mnsky.run();
-    }*/
