@@ -49,7 +49,7 @@ public class Duke {
             break;
         case EVENT:
             try {
-                wasAddSuccess = list.add(TaskType.EVENT, parsedInputs);
+                wasAddSuccess = list.addTask(TaskType.EVENT, parsedInputs);
             } catch (EmptyDescriptionException e) {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
@@ -64,7 +64,7 @@ public class Duke {
             break;
         case DEADLINE:
             try {
-                wasAddSuccess = list.add(TaskType.DEADLINE, parsedInputs);
+                wasAddSuccess = list.addTask(TaskType.DEADLINE, parsedInputs);
             } catch (EmptyDescriptionException e) {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
@@ -79,7 +79,7 @@ public class Duke {
             break;
         case TODO:
             try {
-                wasAddSuccess = list.add(TaskType.TODO, parsedInputs);
+                wasAddSuccess = list.addTask(TaskType.TODO, parsedInputs);
             } catch (EmptyDescriptionException e) {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
@@ -96,7 +96,7 @@ public class Duke {
             indexOfList = Integer.parseInt(parsedInputs[0]);
             output += "Noted. I've removed this task: \n";
             output += (list.toString(indexOfList));
-            list.delete(indexOfList);
+            list.deleteTask(indexOfList);
             output += ("Now you have " + list.getLength() + " tasks in the list.");
             break;
         case FIND:

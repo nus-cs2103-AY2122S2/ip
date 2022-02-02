@@ -39,7 +39,7 @@ public class Ui {
      *
      * @return String array with parsed inputs from user
      */
-    public static String[] getInputs() {
+    public static String[] getUserInputs() {
         String input = sc.nextLine();
         return Parser.parseInput(input);
     }

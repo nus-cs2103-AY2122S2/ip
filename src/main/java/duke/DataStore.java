@@ -64,7 +64,7 @@ public class DataStore {
                 String row = csvReader.readLine();
                 while (row != null) {
                     String[] inputs = row.split(",");
-                    tasks.load(parseTaskType(inputs[0]), Arrays.copyOfRange(inputs, 1, 4));
+                    tasks.loadTasks(parseTaskType(inputs[0]), Arrays.copyOfRange(inputs, 1, 4));
                     row = csvReader.readLine();
                 }
                 csvReader.close();
