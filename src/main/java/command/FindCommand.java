@@ -1,12 +1,9 @@
-package Command;
+package command;
 
-import Main.Storage;
-import Main.TsundereException;
-import Main.Ui;
-import Task.Deadline;
-import Task.Event;
-import Task.TaskList;
-import Task.ToDo;
+import tsundere.Storage;
+import tsundere.TsundereException;
+import tsundere.Ui;
+import task.TaskList;
 
 
 public class FindCommand extends Command {

@@ -1,6 +1,4 @@
-package Task;
-
-import Task.Task;
+package task;
 
 /**
  * a type of task with no date

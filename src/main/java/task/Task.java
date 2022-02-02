@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 /**
  * a task which is inherited by ToDo, Deadline or Event

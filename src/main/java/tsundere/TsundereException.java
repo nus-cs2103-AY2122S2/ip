@@ -1,4 +1,4 @@
-package Main;
+package tsundere;
 
 /**
  * Exception class mostly used for incorrect string format

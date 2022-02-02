@@ -1,7 +1,7 @@
-package Main;
+package tsundere;
 
-import Command.Command;
-import Task.TaskList;
+import command.Command;
+import task.TaskList;
 
 /**
  * A chatbot that manages tasks and stores them in data/tasks.txt

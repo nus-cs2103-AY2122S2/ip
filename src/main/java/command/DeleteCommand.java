@@ -1,9 +1,9 @@
-package Command;
+package command;
 
-import Main.TsundereException;
-import Task.TaskList;
-import Main.Ui;
-import Main.Storage;
+import tsundere.TsundereException;
+import task.TaskList;
+import tsundere.Ui;
+import tsundere.Storage;
 
 /**
  * Delete task in tasklist and storage saves it

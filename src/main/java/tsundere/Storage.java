@@ -1,6 +1,6 @@
-package Main;
+package tsundere;
 
-import Task.Task;
+import task.Task;
 
 import java.io.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Task.ToDo;
-import Task.Deadline;
-import Task.Event;
+import task.ToDo;
+import task.Deadline;
+import task.Event;
 
 /**
  * Storage for managing save file

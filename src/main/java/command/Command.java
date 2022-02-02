@@ -1,10 +1,10 @@
-package Command;
+package command;
 
-import Task.TaskList;
+import task.TaskList;
 
-import Main.Ui;
-import Main.Storage;
-import Main.TsundereException;
+import tsundere.Ui;
+import tsundere.Storage;
+import tsundere.TsundereException;
 
 /**
  * abstract class Command for various different command with different execute

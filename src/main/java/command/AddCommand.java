@@ -1,13 +1,13 @@
-package Command;
+package command;
 
-import Task.TaskList;
-import Task.ToDo;
-import Task.Event;
-import Task.Deadline;
+import task.TaskList;
+import task.ToDo;
+import task.Event;
+import task.Deadline;
 
-import Main.Ui;
-import Main.Storage;
-import Main.TsundereException;
+import tsundere.Ui;
+import tsundere.Storage;
+import tsundere.TsundereException;
 
 /**
  * Add a new task into tasklist and storage saves it

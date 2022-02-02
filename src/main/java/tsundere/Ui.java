@@ -1,4 +1,4 @@
-package Main;
+package tsundere;
 
 import java.util.Scanner;
 

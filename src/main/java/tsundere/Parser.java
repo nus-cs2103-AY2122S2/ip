@@ -1,12 +1,12 @@
-package Main;
+package tsundere;
 
-import Command.Command;
-import Command.AddCommand;
-import Command.ExitCommand;
-import Command.ListCommand;
-import Command.MarkCommand;
-import Command.DeleteCommand;
-import Command.FindCommand;
+import command.Command;
+import command.AddCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.DeleteCommand;
+import command.FindCommand;
 
 /**
  * Parser that parse input into commands
