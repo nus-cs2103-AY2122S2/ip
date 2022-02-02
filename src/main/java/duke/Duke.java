@@ -1,5 +1,21 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -8,21 +24,142 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 /**
  * Duke class that contains the main method to run Duke.
  */
-public class Duke {
+public class Duke extends Application {
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/kirby1.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/kirby2.png"));
+
+
+    /**
+     * Override start method from the abstract Application class.
+     *
+     * @param stage
+     */
+    @Override
+    public void start(Stage stage) {
+        // Step 1. Setting up required components
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                "Hi there! 👋 I'm Duke. What can I do for you?", duke));
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        // Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        userInput.setOnAction((event) -> {
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        // scroll down to the end every time dialogContainer's height changes
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add.
+     * @return a label with the specidied text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() throws DukeException, IOException {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws DukeException, IOException {
+        return reply(input);
+    }
     /**
      * Main method to run Duke.
      *
-     * @param args
+     * @param
      * @throws IOException
      * @throws DukeException
      */
-    public static void main(String[] args) throws IOException, DukeException {
-        // divider
-        final String LINES = "    ---------------------------------";
+    public String reply(String userInput) throws IOException, DukeException {
 
         Ui ui = new Ui();
         ui.greet();
@@ -48,18 +185,14 @@ public class Duke {
             e.printStackTrace();
         }
 
-        String userInput = sc.nextLine();
-
         while (!isBye) {
             // A string to display the remaining task number
             String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoLists.size() + 1);
 
             if (userInput.equals("bye")) {
                 isBye = true;
+                return "    Bye. See you again next time! Have a nice day 😊!";
 
-                System.out.println(LINES);
-                System.out.println("    Bye. See you again next time! Have a nice day 😊!");
-                System.out.println(LINES);
             } else {
                 // storing input task in todoLists
                 String[] userInputArr = userInput.split(" ");
@@ -70,35 +203,33 @@ public class Duke {
                 try {
                     Parser.userCommandValidator(userCommand);
                 } catch (DukeException e) {
-                    System.out.println(LINES);
-                    System.out.println("    OOPS!!! I'm sorry, but I don't know what that means.");
-                    System.out.println(LINES);
+
+                   return "    OOPS!!! I'm sorry, but I don't know what that means.";
+
                 }
 
                 switch (userCommand) {
                 case "list":
-                    Parser.parserList(taskLists);
-                    break;
+                    return Parser.parserList(taskLists);
                 case "todo":
                     // handle error from empty task description
                     try {
-                        Parser.parserTodo(taskLists, userInputTask);
+                        return Parser.parserTodo(taskLists, userInputTask, storage);
                     } catch (DukeException e) {
-                        System.out.println(LINES);
-                        System.out.println("    OOPS!!! The description of a todo cannot be empty.");
-                        System.out.println(LINES);
-                        break;
+                        return "    OOPS!!! The description of a todo cannot be empty.";
                     }
-
-                    // save tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
                 case "deadline":
                     // handle error from empty task description
                     try {
                         Parser.parserDeadlineValidator(userInputTask);
                     } catch (DukeException e) {
-                        break;
+                        if (e.getMessage().equals("The description of a deadline cannot be empty.")) {
+                            return "The description of a deadline cannot be empty.";
+                        } else if (e.getMessage().equals("Deadline tasks require a by day.")) {
+                            return "Deadline tasks require a by day.";
+                        } else if (e.getMessage().equals("Deadline tasks can only have one by day.")) {
+                            return "Deadline tasks can only have one by day.";
+                        }
                     }
 
                     // splitting deadline into description and by
@@ -109,10 +240,7 @@ public class Duke {
                     try {
                         String deadlineTime = byAndTime[1];
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(LINES);
-                        System.out.println("    Deadline time is required");
-                        System.out.println(LINES);
-                        break;
+                        return "    Deadline time is required";
                     }
 
                     String deadlineTime = byAndTime[1];
@@ -121,27 +249,18 @@ public class Duke {
                     try {
                         LocalTime.parse(deadlineTime);
                     } catch (DateTimeParseException e) {
-                        System.out.println(LINES);
-                        System.out.println("    Time must be in the hh:mm 24hr format");
-                        System.out.println(LINES);
-                        break;
+                        return "    Time must be in the hh:mm 24hr format";
                     }
 
                     // handle error when there is invalid deadline date format
                     try {
                         Parser.deadlineDateFormatValidator(by);
                     } catch (DukeException e) {
-                        System.out.println(LINES);
-                        System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                        System.out.println(LINES);
-                        break;
+                        return "    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.";
                     }
 
-                    Parser.parserDeadline(taskLists, userInputTask);
+                    return Parser.parserDeadline(taskLists, userInputTask, storage);
 
-                    // save tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
                 case "event":
 
                     try {
@@ -158,10 +277,7 @@ public class Duke {
                     try {
                         String eventTime = eventDateAndTime[1];
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(LINES);
-                        System.out.println("    Event time is required");
-                        System.out.println(LINES);
-                        break;
+                        return "    Event time is required";
                     }
 
                     String eventTime = eventDateAndTime[1];
@@ -170,10 +286,7 @@ public class Duke {
                     try {
                         LocalTime.parse(eventTime);
                     } catch (DateTimeParseException e) {
-                        System.out.println(LINES);
-                        System.out.println("    Time must be in the hh:mm 24hr format");
-                        System.out.println(LINES);
-                        break;
+                        return "    Time must be in the hh:mm 24hr format";
                     }
 
                     LocalTime atTime = LocalTime.parse(eventTime);
@@ -182,47 +295,27 @@ public class Duke {
                     try {
                         Parser.eventDateFormatValidator(eventDate);
                     } catch (DukeException e) {
-                        System.out.println(LINES);
-                        System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                        System.out.println(LINES);
-                        break;
+                        return "    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.";
                     }
 
-                    Parser.parserEvent(taskLists, userInputTask);
-
-                    // save tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
+                    return Parser.parserEvent(taskLists, userInputTask, storage);
                 case "mark":
-                    Parser.parserMark(taskLists, userInputArr);
-
-                    // save update tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
+                    return Parser.parserMark(taskLists, userInputArr, storage);
                 case "unmark":
-                    Parser.parserUnmark(taskLists, userInputArr);
-
-                    // save update tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
+                    return Parser.parserUnmark(taskLists, userInputArr, storage);
                 case "delete":
                     try {
                         Parser.parserDeleteValidator(taskLists, userInputTask);
                     } catch (DukeException e) {
                         break;
                     }
-
-                    Parser.parserDelete(taskLists, userInputArr);
-
-                    // save update tasks to duke.txt
-                    storage.save(taskLists);
-                    break;
+                    return Parser.parserDelete(taskLists, userInputArr, storage);
                 case "find":
-                    Parser.parserFind(taskLists, userInputTask);
-                    break;
+                    return Parser.parserFind(taskLists, userInputTask);
                 }
-                userInput = sc.nextLine();
+
             }
         }
+        return userInput;
     }
 }

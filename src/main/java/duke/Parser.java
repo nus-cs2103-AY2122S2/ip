@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class Parser {
      *
      * @param taskLists list of tasks.
      */
-    static void parserList(TaskList taskLists) {
-        taskLists.list();
+    static String parserList(TaskList taskLists) {
+        return taskLists.list();
     }
 
     /**
@@ -27,12 +28,15 @@ public class Parser {
      * @param userInputTask user input task.
      * @throws DukeException
      */
-    static void parserTodo(TaskList taskLists, String userInputTask) throws DukeException {
+    static String parserTodo(TaskList taskLists, String userInputTask, Storage storage) throws DukeException, IOException {
         Parser.taskDescriptionValidator("todo", userInputTask);
 
         // adding task to todoList
         Todo userToDoTask = new Todo(userInputTask);
-        taskLists.addTask(userToDoTask);
+        taskLists.addWithoutPrint(userToDoTask);
+
+        storage.save(taskLists);
+        return taskLists.addTask(userToDoTask);
     }
 
     /**
@@ -46,9 +50,7 @@ public class Parser {
         try {
             Parser.taskDescriptionValidator("deadline", userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
             System.out.println("    OOPS!!! The description of a deadline cannot be empty.");
-            System.out.println(LINES);
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
@@ -56,9 +58,7 @@ public class Parser {
         try {
             Parser.deadlineTaskValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
             System.out.println("    OOPS!!! Deadline tasks require a by day.");
-            System.out.println(LINES);
             throw new DukeException("Deadline tasks require a by day.");
         }
 
@@ -66,9 +66,7 @@ public class Parser {
         try {
             Parser.deadlineByDayValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
             System.out.println("    OOPS!!! Deadline tasks can only have one by day.");
-            System.out.println(LINES);
             throw new DukeException("Deadline tasks can only have one by day.");
         }
     }
@@ -79,7 +77,7 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputTask user input task.
      */
-    static void parserDeadline(TaskList taskLists, String userInputTask) {
+    static String parserDeadline(TaskList taskLists, String userInputTask, Storage storage) throws IOException {
         // splitting deadline into description and by
         String[] deadlineTaskArr = userInputTask.split(" /by ");
         String deadlineDescription = deadlineTaskArr[0];
@@ -92,7 +90,9 @@ public class Parser {
 
         // adding task to todoList
         Deadline userDeadlineTask = new Deadline(deadlineDescription, deadlineDate, time);
-        taskLists.addTask(userDeadlineTask);
+        taskLists.addWithoutPrint(userDeadlineTask);
+        storage.save(taskLists);
+        return taskLists.addTask(userDeadlineTask);
     }
 
     /**
@@ -139,7 +139,7 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputTask user input task.
      */
-    static void parserEvent(TaskList taskLists, String userInputTask) {
+    static String parserEvent(TaskList taskLists, String userInputTask, Storage storage) throws IOException {
 
         // splitting event into description and dateTime
         String[] eventTaskArr = userInputTask.split(" /at ");
@@ -156,7 +156,9 @@ public class Parser {
 
         // adding task to todoList
         Event userEventTask = new Event(eventDescription, atDate, atTime);
-        taskLists.addTask(userEventTask);
+        taskLists.addWithoutPrint(userEventTask);
+        storage.save(taskLists);
+        return taskLists.addTask(userEventTask);
     }
 
     /**
@@ -165,9 +167,11 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputs user input task.
      */
-    static void parserMark(TaskList taskLists, String[] userInputs) {
+    static String parserMark(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
         int taskToMark = Integer.parseInt(userInputs[1]);
-        taskLists.setTaskAsDone(taskToMark);
+        taskLists.get(taskToMark - 1).markAsDone();
+        storage.save(taskLists);
+        return taskLists.setTaskAsDone(taskToMark);
     }
 
     /**
@@ -176,9 +180,11 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputs user input task.
      */
-    static void parserUnmark(TaskList taskLists, String[] userInputs) {
+    static String parserUnmark(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
         int taskToUnmark = Integer.parseInt(userInputs[1]);
-        taskLists.setTaskAsUnDone(taskToUnmark);
+        taskLists.get(taskToUnmark - 1).markAsNotDone();
+        storage.save(taskLists);
+        return taskLists.setTaskAsUnDone(taskToUnmark);
     }
 
     /**
@@ -216,11 +222,11 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputs user input of task to delete.
      */
-    static void parserDelete(TaskList taskLists, String[] userInputs) {
+    static String parserDelete(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
         int taskToDelete = Integer.parseInt(userInputs[1]);
 
         // deleting task from the array list
-        taskLists.removeTask(taskToDelete);
+        return taskLists.removeTask(taskToDelete, storage);
     }
 
     /**
@@ -229,7 +235,7 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputTask user input task.
      */
-    static void parserFind(TaskList taskLists, String userInputTask) {
+    static String parserFind(TaskList taskLists, String userInputTask) {
         TaskList tasks = new TaskList(new ArrayList<Task>());
 
         for (int i = 0; i < taskLists.size(); i++) {
@@ -238,12 +244,11 @@ public class Parser {
             }
         }
 
-        System.out.println(LINES);
-        System.out.println("    These are my finding tasks in your list 😄:");
+        String output = "    These are my finding tasks in your list 😄:/n";
         for (int j = 0; j < tasks.size(); j++) {
-            System.out.println("    " + (j + 1) + "." + tasks.get(j).toString());
+            output += "    " + (j + 1) + "." + tasks.get(j).toString() + "/n";
         }
-        System.out.println(LINES);
+        return output;
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -36,15 +37,18 @@ public class TaskList {
         return taskLists.get(num);
     }
 
-    /**Lists and print the all the Task in the TaskList.*/
-    public void list() {
-        System.out.println(LINES);
-        System.out.println("    Here are the tasks in your list:");
+    /**
+     * Lists and print the all the Task in the TaskList.
+     *
+     * @return string of tasks.
+     */
+    public String list() {
+        String output = "    Here are the tasks in your list: /n";
         for (int i = 0; i < taskLists.size(); i++) {
             String display = String.format("    %d.%s", i + 1, taskLists.get(i).toString());
-            System.out.println(display);
+            output += display;
         }
-        System.out.println(LINES);
+        return output;
     }
 
     /**
@@ -52,16 +56,16 @@ public class TaskList {
      *
      * @param num position to remove task.
      */
-    public void removeTask(int num) {
+    public String removeTask(int num, Storage storage) throws IOException {
 
-        System.out.println(LINES);
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("        " + taskLists.get(num - 1).toString());
+        String output = "    Noted. I've removed this task:/n";
+        String taskRemove = "        " + taskLists.get(num - 1).toString() + "/n";
         taskLists.remove(num - 1);
-
+        TaskList tempTaskList = new TaskList(taskLists);
+        storage.save(tempTaskList);
         String taskRemainingString = String.format("    Now you have %d tasks in the list.", taskLists.size());
-        System.out.println(taskRemainingString);
-        System.out.println(LINES);
+        return output + taskRemove + taskRemainingString;
+
     }
 
     /**
@@ -69,17 +73,19 @@ public class TaskList {
      *
      * @param task a Task to be added.
      */
-    public void addTask(Task task) {
-        taskLists.add(task);
+    public String addTask(Task task) {
+//        taskLists.add(task);
 
         String displayTaskAmount = String.format("Now you have %d tasks in the list.", taskLists.size());
 
-        System.out.println(LINES);
+
         // display to do task
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + task.toString());
-        System.out.println("    " + displayTaskAmount);
-        System.out.println(LINES);
+        String output = "    Got it. I've added this task:/n";
+        String addOn = "        " + task.toString() + "/n";
+        String taskAmount =  "    " + displayTaskAmount;
+
+        return output + addOn + taskAmount;
+
     }
 
     /**
@@ -96,15 +102,14 @@ public class TaskList {
      *
      * @param taskToMark an integer rank of Task in TaskList.
      */
-    public void setTaskAsDone(int taskToMark) {
+    public String setTaskAsDone(int taskToMark) {
         taskLists.get(taskToMark - 1).markAsDone();
 
-        System.out.println(LINES);
-        System.out.println("    Nice! I've marked this task as done:");
+        String output = "    Nice! I've marked this task as done:/n";
 
         String taskMarkString = String.format("%s", taskLists.get(taskToMark - 1).toString());
-        System.out.println("    " + taskMarkString);
-        System.out.println(LINES);
+        return output + "    " + taskMarkString;
+
     }
 
     /**
@@ -112,14 +117,12 @@ public class TaskList {
      *
      * @param taskToUnmark an integer rank of task to mark as undone.
      */
-    public void setTaskAsUnDone(int taskToUnmark) {
+    public String setTaskAsUnDone(int taskToUnmark) {
         taskLists.get(taskToUnmark - 1).markAsNotDone();
-
-        System.out.println(LINES);
-        System.out.println("    OK, I've marked this task as not done yet:");
+        String output = "    OK, I've marked this task as not done yet:/n";
 
         String taskString = String.format("%s", taskLists.get(taskToUnmark - 1).toString());
-        System.out.println("    " + taskString);
-        System.out.println(LINES);
+        return output + "    " + taskString;
+
     }
 }
