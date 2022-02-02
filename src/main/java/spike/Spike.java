@@ -1,12 +1,13 @@
 package spike;
 
 import spike.command.Command;
-import spike.command.ExitCommand;
+import spike.command.FindCommand;
+import spike.command.IncorrectCommand;
+import spike.command.ListCommand;
 import spike.exception.SpikeException;
 import spike.parser.Parser;
 import spike.storage.Storage;
 import spike.task.TaskList;
-import spike.ui.Ui;
 
 /**
  * Starting point of the Spike chatbot program.
@@ -14,7 +15,6 @@ import spike.ui.Ui;
  */
 public class Spike {
     private Storage storage;
-    private Ui ui;
     private TaskList tasks;
 
     /**
@@ -25,36 +25,57 @@ public class Spike {
      * @return A Spike instance with all components initialized
      */
     public Spike(String directory, String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(directory, filePath);
+        tasks = new TaskList();
+    }
+
+    /**
+     * Gets number of tasks.
+     * @return
+     */
+    public int getNumOfTasks() {
+        return tasks.getListSize();
+    }
+
+    /**
+     * Loads file from disk.
+     */
+    public void loadFile() {
         try {
             tasks = new TaskList(storage.load());
         } catch (SpikeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    private void run() {
-        ui.greet(tasks.getListSize());
+    /**
+     * Gets response based on user input.
+     *
+     * @param input input text from user
+     * @return bot response text
+     */
+    public String getResponseCommand(String input) {
         Command command;
-        do {
-            String input = ui.getCommand();
-            command = new Parser().parseCommand(input, tasks);
-            String executionResult = command.execute(tasks);
-            ui.printMsg(executionResult);
-        } while (!(command instanceof ExitCommand));
-        storage.saveChanges(tasks);
-        System.exit(0);
+        command = new Parser().parseCommand(input, tasks);
+        String executionResult = command.execute(tasks);
+        if (!(command instanceof FindCommand || command instanceof IncorrectCommand
+                || command instanceof ListCommand)) {
+            saveChanges();
+        }
+        return executionResult;
     }
 
     /**
-     * Entry point of the program.
-     *
-     * @param args
+     * Saves changes made.
      */
-    public static void main(String[] args) {
-        new Spike("/data", "/data/Spike.txt").run();
-        return;
+    public void saveChanges() {
+        storage.saveChanges(tasks);
+    }
+
+    /**
+     * Returns the tasksList object stored
+     */
+    public TaskList getTasks() {
+        return this.tasks;
     }
 }
