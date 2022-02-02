@@ -17,7 +17,8 @@ public class ListCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) {
-        taskList.list();
+        String printStr = taskList.list();
+        ui.print(printStr);
         return true;
     }
 }

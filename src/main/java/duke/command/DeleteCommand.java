@@ -22,7 +22,8 @@ public class DeleteCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(index);
+        String printStr = taskList.deleteTask(index);
+        ui.print(printStr);
         storage.saveUpdatedTask(index, null);
         return true;
     }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Map;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.util.Storage;
@@ -24,8 +26,9 @@ public class MarkCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task markedTask = taskList.mark(index);
-        storage.saveUpdatedTask(index, markedTask);
+        Map.Entry<Task, String> markedTask = taskList.mark(index);
+        ui.print(markedTask.getValue());
+        storage.saveUpdatedTask(index, markedTask.getKey());
         return true;
     }
 }

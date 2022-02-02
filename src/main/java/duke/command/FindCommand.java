@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class FindCommand extends Command {
-    private String findTask;
+    private final String findTask;
 
     public FindCommand(String findTask) {
         this.findTask = findTask;
@@ -14,7 +14,8 @@ public class FindCommand extends Command {
 
     @Override
     public boolean exec(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.find(findTask);
+        String printStr = taskList.find(findTask);
+        ui.print(printStr);
         return true;
     }
 }

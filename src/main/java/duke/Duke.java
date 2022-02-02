@@ -48,7 +48,7 @@ public class Duke {
         ui.showWelcome();
         boolean shouldRun = true;
         while (shouldRun) {
-            System.out.print("Me   : ");
+            ui.print("Me   : ");
             String message = ui.readCommand();
             ui.showLine();
             try {
@@ -59,5 +59,4 @@ public class Duke {
             }
         }
     }
-
 }

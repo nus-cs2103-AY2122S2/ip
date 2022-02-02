@@ -2,6 +2,7 @@ package duke.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
@@ -24,7 +25,7 @@ public class TaskList {
     /**
      * Adds a task into the task list.
      * @param task the input task which will be added into the task list.
-     * @return the string which will be prints out the task that has been added and the current tasks in the list.
+     * @return the String which will be prints out the task that has been added and the current tasks in the list.
      */
     public String addTask(Task task) {
         this.taskList.add(task);
@@ -35,27 +36,27 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      * @param index the index of the task to be deleted.
+     * @return the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
      */
-    public void deleteTask(int index) throws InvalidIndexException {
+    public String deleteTask(int index) throws InvalidIndexException {
         Task deletedTask;
         try {
             deletedTask = this.taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask.printTask());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        return "Noted. I've removed this task:\n" + deletedTask.printTask() + "Now you have " + taskList.size()
+                + " tasks in the list.";
     }
 
     /**
      * Marks a task as completed in the task list.
      * @param index the index of the task to be marked as completed.
-     * @return the completed task.
+     * @return Pair containing the marked Task and the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
      */
-    public Task mark(int index) throws InvalidIndexException {
+    public Map.Entry<Task, String> mark(int index) throws InvalidIndexException {
         Task markTask;
         try {
             markTask = taskList.get(index);
@@ -63,18 +64,17 @@ public class TaskList {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
         markTask.setMarked(true);
-        System.out.println("Nice! I've marked this task as done");
-        System.out.println(markTask.printTask());
-        return markTask;
+        return Map.entry(markTask, "Nice! I've marked this task as done\n"
+                + markTask.printTask());
     }
 
     /**
      * Marks a task as incomplete in the task list.
      * @param index the index of the task to be marked as incomplete.
-     * @return the incomplete task.
+     * @return Pair containing the unmarked Task and the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
      */
-    public Task unmark(int index) throws InvalidIndexException {
+    public Map.Entry<Task, String> unmark(int index) throws InvalidIndexException {
         Task unmarkTask;
         try {
             unmarkTask = taskList.get(index);
@@ -82,34 +82,38 @@ public class TaskList {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
         unmarkTask.setMarked(false);
-        System.out.println("Oof! I've marked this task as undone");
-        System.out.println(unmarkTask.printTask());
-        return unmarkTask;
+        return Map.entry(unmarkTask, "Oof! I've marked this task as undone\n"
+                + unmarkTask.printTask());
     }
 
     /**
-     * Prints a list of all the tasks currently in the task list.
+     * List of all the tasks currently in the task list.
+     * @return the String to be printed.
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        StringBuilder printStr = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             int num = i + 1;
-            System.out.print(num + ". ");
-            System.out.println(taskList.get(i).printTask());
+            printStr.append(num);
+            printStr.append(". ");
+            printStr.append(taskList.get(i).printTask());
+            printStr.append("\n");
         }
+        return printStr.toString();
     }
 
     /**
      * Finds a task with partial-match to taskName in task list.
      * @param taskName the task to find in task list.
+     * @return the String to be printed.
      */
-    public void find(String taskName) {
+    public String find(String taskName) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         Iterator<Task> iter = taskList.iterator();
+        StringBuilder printStr = new StringBuilder();
 
         if (taskName.trim().equals("")) {
-            System.out.println("No matching tasks were found in your list.");
-            return;
+            return "No matching tasks were found in your list.\n";
         }
 
         while (iter.hasNext()) {
@@ -120,14 +124,17 @@ public class TaskList {
         }
 
         if (foundTasks.size() > 0) {
-            System.out.println("Here are the marching tasks in your list:");
+            printStr.append("Here are the marching tasks in your list:\n");
             for (int i = 0; i < foundTasks.size(); i++) {
                 int num = i + 1;
-                System.out.print(num + ". ");
-                System.out.println(foundTasks.get(i).printTask());
+                printStr.append(num);
+                printStr.append(". ");
+                printStr.append(foundTasks.get(i).printTask());
+                printStr.append("\n");
             }
         } else {
-            System.out.println("No matching tasks were found in your list.");
+            printStr.append("No matching tasks were found in your list.");
         }
+        return printStr.toString();
     }
 }
