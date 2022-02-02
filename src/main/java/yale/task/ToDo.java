@@ -21,7 +21,7 @@ public class ToDo extends Task {
      */
     @Override
     public String export() {
-        return "T " + "| " + (isMarked? 1 : 0) + " | " + this.name;
+        return "T " + "| " + (isMarked ? 1 : 0) + " | " + this.name;
     }
     /**
      * Returns a customised String.

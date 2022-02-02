@@ -21,7 +21,7 @@ public class Ui {
     public void welcomePrompt() {
         String logo = "-----YALE-----";
         System.out.println("Allow me to introduce myself\n" + logo);
-        System.out.println("The name's Yale." );
+        System.out.println("The name's Yale.");
     }
 
     /**
