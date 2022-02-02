@@ -20,12 +20,4 @@ public interface Command {
      * @throws Exception If directory or file cannot be found.
      */
     public abstract String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException;
-
-    /**
-     * Provides the boolean value whether to exit the programme.
-     *
-     * @return Boolean value to exit programme.
-     */
-
-    public abstract boolean isExit();
 }

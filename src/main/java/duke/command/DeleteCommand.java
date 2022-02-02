@@ -53,14 +53,4 @@ public class DeleteCommand implements Command {
             return ui.showDeleteMessage(task, tasks.getTaskSize());
         }
     }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     *
-     * @return Boolean value false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

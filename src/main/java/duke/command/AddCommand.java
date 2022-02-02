@@ -16,7 +16,6 @@ import duke.ui.MessageUi;
  * Represents commands which add task to the task list. An AddCommand
  * object corresponds a valid Ekud command, which can then be executed.
  */
-
 public class AddCommand implements Command {
 
     private String fullCommand;
@@ -67,14 +66,5 @@ public class AddCommand implements Command {
         default:
             return ("ERROR");
         }
-    }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     * @return Boolean value false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

@@ -41,14 +41,4 @@ public class OutputCommand implements Command {
             return ui.showListMessage(tasks);
         }
     }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     *
-     * @return Boolean value false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

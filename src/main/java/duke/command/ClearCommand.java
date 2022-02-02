@@ -5,7 +5,12 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
 
+/**
+ * Represents commands which clears the task list. A ClearCommand
+ * object corresponds a valid Ekud command, which can then be executed.
+ */
 public class ClearCommand implements Command {
+
     @Override
     public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         try {
@@ -18,10 +23,5 @@ public class ClearCommand implements Command {
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

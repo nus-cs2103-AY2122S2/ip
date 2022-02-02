@@ -20,6 +20,7 @@ public class MarkCommand implements Command {
 
     /**
      * Constructor for this class.
+     *
      * @param fullCommand User's input.
      */
     public MarkCommand(String fullCommand) {
@@ -54,15 +55,5 @@ public class MarkCommand implements Command {
                 return ui.showMarkMessage(task);
             }
         }
-    }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     *
-     * @return Boolean value false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

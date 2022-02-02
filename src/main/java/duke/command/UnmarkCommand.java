@@ -57,14 +57,4 @@ public class UnmarkCommand implements Command {
             }
         }
     }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     *
-     * @return Boolean value false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

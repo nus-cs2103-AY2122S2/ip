@@ -51,9 +51,4 @@ public class FindCommand implements Command {
             return stringBuilder.toString();
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

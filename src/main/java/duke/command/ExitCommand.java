@@ -22,14 +22,4 @@ public class ExitCommand implements Command {
     public String execute(TaskList tasks, Storage storage, MessageUi ui) {
         return ui.showExitMessage();
     }
-
-    /**
-     * Returns a boolean value that tells the programme to exit.
-     *
-     * @return Boolean value true.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
