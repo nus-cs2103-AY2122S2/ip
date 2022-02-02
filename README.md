@@ -21,8 +21,6 @@ Features:
 
 And did you know that it's **Free**?
  
-## Setting up in Intellij
-
 If you'd like to personalize your Narcibot, you can change it with Java. Here's the `main` method.
 ```java
 public static void main(String[] args) {
