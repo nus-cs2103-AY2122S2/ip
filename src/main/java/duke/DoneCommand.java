@@ -1,4 +1,5 @@
-import java.io.EOFException;
+package duke;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
