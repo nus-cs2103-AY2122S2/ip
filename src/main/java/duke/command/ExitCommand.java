@@ -9,8 +9,6 @@ import duke.util.Ui;
  */
 public class ExitCommand extends Command {
 
-    public ExitCommand() {}
-
     /**
      * Prints goodbye message.
      *
@@ -23,7 +21,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
      * @return True.
      */

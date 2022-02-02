@@ -9,10 +9,8 @@ import duke.util.Ui;
  */
 public class InvalidCommand extends Command {
 
-    public InvalidCommand() {}
-
     /**
-     * Executes the invalid command.
+     * Executes the invalid command and prints error message.
      *
      * @param taskList The current list of tasks.
      * @param ui The ui of the program.
@@ -23,7 +21,7 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
      * @return False.
      */

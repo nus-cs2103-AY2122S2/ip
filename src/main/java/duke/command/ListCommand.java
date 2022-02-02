@@ -9,10 +9,8 @@ import duke.util.Ui;
  */
 public class ListCommand extends Command {
 
-    public ListCommand() {}
-
     /**
-     * Executes the list command and print out list.
+     * Executes the list command and prints out list.
      *
      * @param taskList The current list of tasks.
      * @param ui The ui of the program.
@@ -24,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
      * @return False.
      */

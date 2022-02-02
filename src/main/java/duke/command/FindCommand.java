@@ -20,7 +20,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command to find tasks containing the keyword and print them.
+     * Executes the find command to find tasks containing the keyword and prints them.
+     *
      * @param taskList The current list of tasks.
      * @param ui The ui of the program.
      * @param storage The storage of the program.
@@ -31,7 +32,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
      * @return False.
      */
