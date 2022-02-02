@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
+import sana.command.*;
 import sana.exception.IncompleteCommandException;
 import sana.exception.OutOfBoundsTaskException;
 import sana.exception.UnknownCommandException;
@@ -57,44 +58,27 @@ public class Sana {
         try {
             switch (command) {
             case "bye":
-                return sanaResponse.bye();
+                return new ByeCommand().executeCommand(parsedCmd, userTasks);
             case "list":
-                return list();
+                return new ListCommand().executeCommand(parsedCmd, userTasks);
             case "mark":
-                int markIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                return mark(markIndex, true);
+                return new MarkCommand().executeCommand(parsedCmd, userTasks);
             case "unmark":
-                int unmarkIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                return mark(unmarkIndex, false);
+                return new UnmarkCommand().executeCommand(parsedCmd, userTasks);
             case "todo":
-                return addToDo(parsedCmd[1]);
             case "event":
-                LocalDate eventDate = LocalDate.parse(parsedCmd[2]);
-                return addEvent(parsedCmd[1], eventDate);
             case "deadline":
-                LocalDate deadlineDate = LocalDate.parse(parsedCmd[2]);
-                return addDeadline(parsedCmd[1], deadlineDate);
+                    return new AddTask().executeCommand(parsedCmd, userTasks);
             case "delete":
-                int deleteIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                return delete(deleteIndex);
+                return new DeleteCommand().executeCommand(parsedCmd, userTasks);
             case "find":
-                return findTasks(parsedCmd[1]);
+                return new FindCommand().executeCommand(parsedCmd, userTasks);
             default:
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
-        } catch (OutOfBoundsTaskException e) {
-            System.out.println(e.getMessage());
-        } catch (IncompleteCommandException e) {
-            System.out.println(e.getMessage());
-        } catch (DateTimeParseException e) {
-            System.out.println("Give your date in YYYY-MM-DD format!");
-        } catch (NumberFormatException e) {
-            System.out.println("I don't know what sana task you're referring to!");
+            return e.getMessage();
         }
-        taskMem.updateMemory(userTasks.toList());
-        return "";
     }
 
     /**
@@ -216,7 +200,6 @@ public class Sana {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        String response = doCommand(input);
-        return "Sana heard: " + response;
+        return doCommand(input);
     }
 }

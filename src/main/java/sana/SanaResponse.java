@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import sana.task.Task;
+import sana.task.ToDo;
 
 /**
  * Ui represents the user interface object that deals with user interaction
@@ -15,6 +16,23 @@ public class SanaResponse {
     /** Constructor for the Ui object */
     public SanaResponse() {}
 
+    public String addNewTask(Task taskAdded, Integer totalTaskAmount) {
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(addTaskText());
+        responseText.append(printTaskInList(taskAdded));
+        responseText.append(taskNumberText(totalTaskAmount));
+
+        return responseText.toString();
+    }
+
+    public String deleteTask(Task taskDeleted, Integer totalTaskAmount) {
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(deleteTaskText());
+        responseText.append(printTaskInList(taskDeleted));
+        responseText.append(taskNumberText(totalTaskAmount));
+
+        return responseText.toString();
+    }
     /**
      * Prints the string representation of the sana.task
      *
@@ -65,6 +83,14 @@ public class SanaResponse {
         }
     }
 
+    public String dateFormatError() {
+        return "Give your date in YYYY-MM-DD format!\n";
+    }
+
+    public String taskNumberFormatError() {
+        return "I don't know what sana task you're referring to!\n";
+    }
+
     /** Prints to system IO Sana's greeting */
     public void greet() {
         System.out.println("Hi! I'm BEEEEEEEG\nWhats up?");
@@ -82,7 +108,7 @@ public class SanaResponse {
 
     /** Returns Sana's goodbye message */
     public String bye() {
-        return "See you next time!";
+        return "See you next time!\n";
     }
 
 }
