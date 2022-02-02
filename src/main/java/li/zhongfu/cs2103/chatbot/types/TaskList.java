@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
 import li.zhongfu.cs2103.chatbot.types.tasks.Task;
@@ -35,6 +36,19 @@ public class TaskList {
 
     public Task remove(int idx) {
         return this.list.remove(idx);
+    }
+
+    /**
+     * Returns a TaskList containing only Tasks with a name that contains the search string.
+     *
+     * @param query the search string
+     * @return a TaskList containing only Tasks with a name that contains the search string
+     */
+    public TaskList find(String query) {
+        return new TaskList(this.list
+                .stream()
+                .filter(task -> task.getName().contains(query))
+                .collect(Collectors.toList()));
     }
 
     public boolean isEmpty() {
