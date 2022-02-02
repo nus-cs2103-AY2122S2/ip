@@ -1,13 +1,14 @@
 package duke.test;
 
-import duke.Duke;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.Duke;
 
 public class DukeTest {
     @Test
-    public void runningTest(){
+    public void runDuke_run() {
         Duke duke = new Duke();
         assertTrue(duke.isRunning());
     }

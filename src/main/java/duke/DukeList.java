@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidTaskException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 public class DukeList {
     private static final int CAPACITY = 100;
@@ -39,7 +39,9 @@ public class DukeList {
      * Update the data in the storage.
      */
     public void updateStorage() {
-        if (useStorage) this.storage.writeData(taskList);
+        if (useStorage) {
+            this.storage.writeData(taskList);
+        }
     }
 
     /**
@@ -57,7 +59,9 @@ public class DukeList {
      * @param taskString string representation of the task
      */
     public String add(String taskString) throws InvalidTaskException {
-        if (taskList.size() > CAPACITY) throw new InvalidTaskException("Capacity has been reached");
+        if (taskList.size() > CAPACITY) {
+            throw new InvalidTaskException("Capacity has been reached");
+        }
 
         Task task = Task.of(taskString);
         this.taskList.add(task);
@@ -123,7 +127,9 @@ public class DukeList {
     public String find(String keyword) {
         ArrayList<Task> matches = new ArrayList<>();
         for (Task task: taskList) {
-            if (task.matches(keyword)) matches.add(task);
+            if (task.matches(keyword)) {
+                matches.add(task);
+            }
         }
 
         StringBuilder result;

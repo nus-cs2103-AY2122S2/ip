@@ -1,15 +1,20 @@
 package duke.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import duke.DukeList;
 import duke.Storage;
 import duke.exceptions.InvalidTaskException;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
 
 public class DukeListTest {
     private static Storage storage;
@@ -34,14 +39,14 @@ public class DukeListTest {
     }
 
     @Test
-    public void createListTest() {
+    public void createList_emptyList() {
         DukeList dl = new DukeList(taskList);
         String expected = "List is empty. Add items to the list.";
         assertEquals(expected, dl.toString());
     }
 
     @Test
-    public void addTaskTest() throws InvalidTaskException {
+    public void addTask_validTask() throws InvalidTaskException {
         DukeList dl = new DukeList(taskList);
         String taskString = "todo borrow book";
         Task expected = new Todo("borrow book");
@@ -51,7 +56,7 @@ public class DukeListTest {
     }
 
     @Test
-    public void markTaskTest() throws InvalidTaskException {
+    public void markTask_validTask() throws InvalidTaskException {
         Task task = new Todo("borrow book");
         taskList.add(task);
         DukeList dl = new DukeList(taskList);
@@ -62,7 +67,7 @@ public class DukeListTest {
     }
 
     @Test
-    public void deleteTaskTest() throws InvalidTaskException {
+    public void deleteTask_validTask() throws InvalidTaskException {
         Task task = new Todo("borrow book");
         taskList.add(task);
         DukeList dl = new DukeList(taskList);
@@ -72,7 +77,7 @@ public class DukeListTest {
     }
 
     @Test
-    public void findTaskTest() {
+    public void findTask_validKeyword() {
         taskList.add(new Todo("borrow book"));
         taskList.add(new Todo("test"));
         taskList.add(new Todo("bla bla"));
@@ -82,7 +87,7 @@ public class DukeListTest {
     }
 
     @Test
-    public void findInvalidTaskTest() {
+    public void findTask_invalidTask() {
         taskList.add(new Todo("borrow book"));
         taskList.add(new Todo("test"));
         taskList.add(new Todo("bla bla"));

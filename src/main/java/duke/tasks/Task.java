@@ -1,10 +1,10 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidTaskException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
+
+import duke.exceptions.InvalidTaskException;
 
 public abstract class Task {
     private static final String TODO = "todo";
@@ -17,7 +17,7 @@ public abstract class Task {
     /**
      * Constructor for the task object.
      *
-     * @param description  description of the task
+     * @param description description of the task
      */
     public Task(String description) {
         this.description = description;
@@ -38,48 +38,48 @@ public abstract class Task {
         String[] params;
 
         switch (taskType) {
-            case TODO:
-                if (taskArr.length <= 1) {
-                    throw new InvalidTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                task = new duke.tasks.Todo(taskArr[1]);
-                break;
+        case TODO:
+            if (taskArr.length <= 1) {
+                throw new InvalidTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            task = new duke.tasks.Todo(taskArr[1]);
+            break;
 
-            case DEADLINE:
-                if (taskArr.length <= 1) {
-                    throw new InvalidTaskException("☹ OOPS!!! The description of a task cannot be empty.");
-                }
-                params = taskArr[1].split(" /by ");
-                if (params.length <= 1) {
-                    throw new InvalidTaskException("☹ OOPS!!! The deadline of a task cannot be empty.");
-                }
-                try {
-                    LocalDate date = LocalDate.parse(params[1]);
-                    task = new Deadline(params[0], date);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
-                }
+        case DEADLINE:
+            if (taskArr.length <= 1) {
+                throw new InvalidTaskException("☹ OOPS!!! The description of a task cannot be empty.");
+            }
+            params = taskArr[1].split(" /by ");
+            if (params.length <= 1) {
+                throw new InvalidTaskException("☹ OOPS!!! The deadline of a task cannot be empty.");
+            }
+            try {
+                LocalDate date = LocalDate.parse(params[1]);
+                task = new Deadline(params[0], date);
+            } catch (DateTimeParseException e) {
+                throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
+            }
 
-                break;
+            break;
 
-            case EVENT:
-                if (taskArr.length <= 1) {
-                    throw new InvalidTaskException("☹ OOPS!!! The description of a event cannot be empty.");
-                }
-                params = taskArr[1].split(" /at ");
-                if (params.length <= 1) {
-                    throw new InvalidTaskException("☹ OOPS!!! The time of an event cannot be empty.");
-                }
-                try {
-                    LocalDate date = LocalDate.parse(params[1]);
-                    task = new duke.tasks.Event(params[0], date);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
-                }
-                break;
+        case EVENT:
+            if (taskArr.length <= 1) {
+                throw new InvalidTaskException("☹ OOPS!!! The description of a event cannot be empty.");
+            }
+            params = taskArr[1].split(" /at ");
+            if (params.length <= 1) {
+                throw new InvalidTaskException("☹ OOPS!!! The time of an event cannot be empty.");
+            }
+            try {
+                LocalDate date = LocalDate.parse(params[1]);
+                task = new duke.tasks.Event(params[0], date);
+            } catch (DateTimeParseException e) {
+                throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
+            }
+            break;
 
-            default:
-                throw new InvalidTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            throw new InvalidTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return task;
     }
@@ -88,7 +88,7 @@ public abstract class Task {
      * Convert a string from csv format to task.
      *
      * @param taskString csv string of task
-     * @param delimiter separator
+     * @param delimiter  separator
      * @return task object
      * @throws InvalidTaskException invalid task
      */
@@ -96,31 +96,39 @@ public abstract class Task {
         Task task;
         String[] taskArr = taskString.split(delimiter);
 
-        if (taskArr.length < 3) throw new InvalidTaskException("Insufficient values");
+        if (taskArr.length < 3) {
+            throw new InvalidTaskException("Insufficient values");
+        }
 
         String taskCode = taskArr[0];
         boolean taskCompleted = Objects.equals(taskArr[1], "x");
         String taskDescription = taskArr[2];
 
         switch (taskCode) {
-            case duke.tasks.Todo.TASK_CODE:
-                task = new duke.tasks.Todo(taskDescription);
-                break;
-            case Deadline.TASK_CODE:
-                if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
-                LocalDate by = LocalDate.parse(taskArr[3]);
-                task = new Deadline(taskDescription, by);
-                break;
-            case duke.tasks.Event.TASK_CODE:
-                if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
-                LocalDate at = LocalDate.parse(taskArr[3]);
-                task = new duke.tasks.Event(taskDescription, at);
-                break;
-            default:
-                throw new InvalidTaskException("Task format is invalid");
+        case duke.tasks.Todo.TASK_CODE:
+            task = new duke.tasks.Todo(taskDescription);
+            break;
+        case Deadline.TASK_CODE:
+            if (taskArr.length < 4) {
+                throw new InvalidTaskException("Insufficient values");
+            }
+            LocalDate by = LocalDate.parse(taskArr[3]);
+            task = new Deadline(taskDescription, by);
+            break;
+        case duke.tasks.Event.TASK_CODE:
+            if (taskArr.length < 4) {
+                throw new InvalidTaskException("Insufficient values");
+            }
+            LocalDate at = LocalDate.parse(taskArr[3]);
+            task = new duke.tasks.Event(taskDescription, at);
+            break;
+        default:
+            throw new InvalidTaskException("Task format is invalid");
         }
 
-        if (taskCompleted) task.markAsCompleted();
+        if (taskCompleted) {
+            task.markAsCompleted();
+        }
         return task;
     }
 

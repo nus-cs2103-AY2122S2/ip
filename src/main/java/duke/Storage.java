@@ -1,12 +1,17 @@
 package duke;
 
-import duke.exceptions.InvalidTaskException;
-import duke.tasks.Task;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import duke.exceptions.InvalidTaskException;
+import duke.tasks.Task;
 
 public class Storage {
     private static final String DELIMITER = ",";
@@ -47,7 +52,7 @@ public class Storage {
     public ArrayList<Task> readData() {
         ArrayList<Task> taskList = new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(FILE_PATH.toString()))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH.toString()))) {
             String line = br.readLine();
             while (line != null) {
                 try {
@@ -73,12 +78,13 @@ public class Storage {
         if (!fileExist()) {
             try {
                 initFile();
-            } catch (IOException ignored) {
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH.toString()))) {
-            for (Task t: taskList) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH.toString()))) {
+            for (Task t : taskList) {
                 bw.write(t.toCsv(DELIMITER) + "\n");
             }
         } catch (IOException e) {
