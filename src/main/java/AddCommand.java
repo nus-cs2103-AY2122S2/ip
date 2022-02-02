@@ -15,11 +15,11 @@ public class AddCommand extends Command{
     public void execute(TaskList tasks, Ui userInt, Storage storage) {
         switch (this.taskType) {
         case "todo":
-            addTodo(taskBody, userInt, storage);
+            addTodo(taskBody, userInt, storage, tasks);
         case "deadline":
-            addDeadline(taskBody, userInt, storage);
+            addDeadline(taskBody, userInt, storage, tasks);
         case "event":
-            addEvent(taskBody, userInt, storage);
+            addEvent(taskBody, userInt, storage, tasks);
         }
     }
 
@@ -28,8 +28,8 @@ public class AddCommand extends Command{
         return false;
     }
 
-    public void addTodo(String taskKey, Ui userInt, Storage storage) {
-        writeToFile(taskKey, "T", false);
+    public void addTodo(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+        storage.writeToFile(taskKey, "T", false);
         String[] tokens = taskKey.split("todo ");
         String taskTitle = "";
         try {
@@ -43,19 +43,19 @@ public class AddCommand extends Command{
             return;
         }
         Task newTask = new TodoTask(taskTitle);
-        this.itemList.add(newTask);
+        itemList.add(newTask);
         System.out.println(
                 "----------------------------" +
                         "----------------------------\n" +
                         "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "Now you have " + itemList.size() + " tasks in the list."
                         + "\n"
                         + "--------------------------------------------------------"
         );
     }
 
-    public void addEvent(String taskKey, Ui userInt, Storage storage) {
+    public void addEvent(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         String[] tokens = taskKey.split("event ");
         String taskTitle = "";
         try {
@@ -86,14 +86,14 @@ public class AddCommand extends Command{
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
-            writeToFile(taskKey, "E", false);
-            this.itemList.add(newTask);
+            storage.writeToFile(taskKey, "E", false);
+            itemList.add(newTask);
             System.out.println(
                     "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
-                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
                             + "--------------------------------------------------------"
             );
@@ -102,7 +102,7 @@ public class AddCommand extends Command{
         }
     }
 
-    public void addDeadline(String taskKey, Ui userInt, Storage storage) {
+    public void addDeadline(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         String[] tokens = taskKey.split("deadline ");
         String taskTitle = "";
         try {
@@ -135,14 +135,14 @@ public class AddCommand extends Command{
             //when printing, check date time and print format.
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
-            writeToFile(taskKey, "D", false);
-            this.itemList.add(newTask);
+            storage.writeToFile(taskKey, "D", false);
+            itemList.add(newTask);
             System.out.println(
                     "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
-                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
                             + "--------------------------------------------------------"
             );

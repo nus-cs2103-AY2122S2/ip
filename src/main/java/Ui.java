@@ -12,9 +12,14 @@ public class Ui {
             + " GGGG    eeee   n    n   eeee ";
     private final static String GOODBYE = "Bye. Hope to see you again soon!";
     //command keys to enum
-    private final static String EXITKEY = "bye";
-    private final static String LISTKEY = "list";
-    private final static String DELETEKEY = "delete";
+
+    public void print() {
+
+    }
+
+    public void print(String toPrint) {
+
+    }
 
 
     public static void exitProg() {

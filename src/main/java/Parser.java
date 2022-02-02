@@ -11,44 +11,43 @@ public class Parser {
     public Parser() {
     }
 
-    public static Command parseCommand(String toParse) {
-        try {
-            if (isListCommand(toParse)) {
-                return new ListCommand();
-            }
-
-            if (isDeleteCommand(toParse)) {
-                return new DeleteCommand(toParse);
-            }
-
-            if (isMarkCommand(toParse)) {
-                return new EditCommand(toParse, "1");
-            }
-
-            if (isUnmarkCommad(toParse)) {
-                return new EditCommand(toParse, "0");
-            }
-
-            if (isTodoCommand(toParse)) {
-                return new AddCommand(toParse, "todo");
-            }
-
-            if (isDeadlineCommand(toParse)) {
-                return new AddCommand(toParse, "deadline");
-            }
-
-            if (isEventCommand(toParse)) {
-                return new AddCommand(toParse, "event");
-            }
-
-            if (isExitCommand(toParse)) {
-                return new ExitCommand();
-            }
-        } catch (Exception err) {
-
+    public static Command parseCommand(String toParse) throws Exception {
+        if (isListCommand(toParse)) {
+            return new ListCommand();
         }
 
-        return new ExitCommand();
+        if (isDeleteCommand(toParse)) {
+            return new DeleteCommand(toParse);
+        }
+
+        if (isMarkCommand(toParse)) {
+            return new EditCommand(toParse, "1");
+        }
+
+        if (isUnmarkCommad(toParse)) {
+            return new EditCommand(toParse, "0");
+        }
+
+        if (isTodoCommand(toParse)) {
+            return new AddCommand(toParse, "todo");
+        }
+
+        if (isDeadlineCommand(toParse)) {
+            return new AddCommand(toParse, "deadline");
+        }
+
+        if (isEventCommand(toParse)) {
+            return new AddCommand(toParse, "event");
+        }
+
+        if (isExitCommand(toParse)) {
+            return new ExitCommand();
+        }
+
+        else {
+            throw new UnrecognizedCommandException("");
+        }
+
     }
 
     public static boolean isExitCommand(String nextKey) {

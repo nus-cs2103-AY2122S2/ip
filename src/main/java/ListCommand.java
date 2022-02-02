@@ -9,7 +9,8 @@ public class ListCommand extends Command{
             initList.append(tasks.get(i - 1));
             initList.append("\n");
         }
-        Ui.print(initList.toString());
+        
+        userInt.print(initList.toString());
     }
 
     @Override

@@ -21,8 +21,8 @@ public class EditCommand extends Command{
         }
 
         tasks.set(index, newTask);
-        storage.editFile(index, "1");
-        ui.print();
+        storage.updatesToFile(index, "1");
+        userInt.print();
 
         System.out.println(
                 "----------------------------" +
