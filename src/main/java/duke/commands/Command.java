@@ -10,7 +10,9 @@ public abstract class Command {
      *
      * @return boolean whether to terminate
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Function to execute the command.

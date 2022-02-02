@@ -1,6 +1,13 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.QuitCommand;
+import duke.commands.UnmarkCommand;
 import duke.exceptions.InvalidCommandException;
 
 public class Parser {
@@ -23,33 +30,33 @@ public class Parser {
         Command cmd;
 
         switch (action) {
-            case QUIT_COMMAND:
-                cmd = new QuitCommand();
-                break;
+        case QUIT_COMMAND:
+            cmd = new QuitCommand();
+            break;
 
-            case LIST_COMMAND:
-                cmd = new ListCommand();
-                break;
+        case LIST_COMMAND:
+            cmd = new ListCommand();
+            break;
 
-            case MARK_COMMAND:
-                cmd = new MarkCommand(getIdx(argv));
-                break;
+        case MARK_COMMAND:
+            cmd = new MarkCommand(getIdx(argv));
+            break;
 
-            case UNMARK_COMMAND:
-                cmd = new UnmarkCommand(getIdx(argv));
-                break;
+        case UNMARK_COMMAND:
+            cmd = new UnmarkCommand(getIdx(argv));
+            break;
 
-            case DELETE_COMMAND:
-                cmd = new DeleteCommand(getIdx(argv));
-                break;
+        case DELETE_COMMAND:
+            cmd = new DeleteCommand(getIdx(argv));
+            break;
 
-            case FIND_COMMAND:
-                cmd = new FindCommand(getKeyword(argv));
-                break;
+        case FIND_COMMAND:
+            cmd = new FindCommand(getKeyword(argv));
+            break;
 
-            default:
-                cmd = new AddCommand(cmdString);
-                break;
+        default:
+            cmd = new AddCommand(cmdString);
+            break;
         }
         return cmd;
     }
@@ -72,7 +79,9 @@ public class Parser {
      * @throws InvalidCommandException command is invalid
      */
     public static String getAction(String[] argv) throws InvalidCommandException {
-        if (argv[0].equals("")) throw new InvalidCommandException("No command specified");
+        if (argv[0].equals("")) {
+            throw new InvalidCommandException("No command specified");
+        }
 
         return argv[0];
     }
@@ -85,8 +94,12 @@ public class Parser {
      * @throws InvalidCommandException index is invalid
      */
     public static int getIdx(String[] argv) throws InvalidCommandException {
-        if (argv.length < 2) throw new InvalidCommandException("No index specified");
-        if (!isNumeric(argv[1])) throw new InvalidCommandException("Invalid index");
+        if (argv.length < 2) {
+            throw new InvalidCommandException("No index specified");
+        }
+        if (!isNumeric(argv[1])) {
+            throw new InvalidCommandException("Invalid index");
+        }
 
         return Integer.parseInt(argv[1]);
     }
@@ -99,7 +112,9 @@ public class Parser {
      * @throws InvalidCommandException keyword is invalid
      */
     public static String getKeyword(String[] argv) throws InvalidCommandException {
-        if (argv.length < 2) throw new InvalidCommandException("No keyword specified");
+        if (argv.length < 2) {
+            throw new InvalidCommandException("No keyword specified");
+        }
 
         return argv[1];
     }
@@ -111,14 +126,15 @@ public class Parser {
      * @return whether the string is numeric
      */
     public static boolean isNumeric(String string) {
-        if(string == null || string.equals("")) {
+        if (string == null || string.equals("")) {
             return false;
         }
 
         try {
             Integer.parseInt(string);
             return true;
-        } catch (NumberFormatException ignored) {
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
         }
         return false;
     }

@@ -42,13 +42,20 @@ public class Duke {
                 String cmdString = ui.nextCmd();
                 Command cmd = Parser.parse(cmdString);
                 cmd.execute(dukeList, ui);
-                if (cmd.isExit()) this.status = STATUS_STOPPED;
+                if (cmd.isExit()) {
+                    this.status = STATUS_STOPPED;
+                }
             } catch (DukeException e) {
                 ui.printMsg(e.getMessage());
             }
         }
     }
 
+    /**
+     * Entry point for duke app.
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.handler();
