@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Write all current information in Tasklist to disk
+     * @param taskList tasklist to write all data to file to
      */
     public static void writeAllToFile(TaskList taskList) {
         try {
@@ -80,6 +81,7 @@ public class Storage {
 
     /**
      * reads information from disk to taskList
+     * @param taskList tasklist to read save data from
      * @throws FileNotFoundException when file is not found
      */
     public static void readSavedData(TaskList taskList) throws FileNotFoundException {

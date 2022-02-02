@@ -1,9 +1,6 @@
 package duke;
 
 
-import java.util.ArrayList;
-
-
 /**
  * This is the class that parses through inputs
  */
@@ -37,7 +34,7 @@ public class Parser {
         if (input.equals("list")) {
             Ui.printAllTasks(taskList);
         } else if (input.startsWith("delete")) {
-            taskList.deleter(Integer.parseInt(input.substring(7)));
+            taskList.deleteTask(Integer.parseInt(input.substring(7)));
         } else if (input.startsWith("mark") || input.startsWith("unmark")) {
             taskList.markTask(input);
         } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")) {

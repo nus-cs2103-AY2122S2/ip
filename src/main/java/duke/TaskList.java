@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * This is the class that stores the task in a list format
  * and provide methods to modify the list
  */
-
 public class TaskList {
     public ArrayList<Task> tasklist;
 
@@ -15,8 +14,8 @@ public class TaskList {
     }
 
 
-    public void markTaskNum(int taskNum, String check){
-        if (check.equals("true") && (taskNum > 0)) {
+    public void markTaskNum(int taskNum, String isTrue){
+        if (isTrue.equals("true") && (taskNum > 0)) {
             this.tasklist.get(taskNum).mark();
         }
     }
@@ -27,7 +26,7 @@ public class TaskList {
      *
      * @param num index (starts from 1) to delete
      */
-    public void deleter(int num){
+    public void deleteTask(int num){
         if (num > 0 && num <= Task.totalTask){
             num--;
             Ui.printRemovedThisTask(num, this);

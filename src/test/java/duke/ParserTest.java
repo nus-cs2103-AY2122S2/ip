@@ -11,12 +11,12 @@ public class ParserTest {
     }
 
     @Test
-    public void parseIsByeTest(){
+    public void parseIsByeTest_success(){
         assertEquals(false, Parser.parseIsBye("Bye", null));
     }
 
     @Test
-    public void parseFileDataTest(){
+    public void parseFileDataTest_success(){
         Deadline expectedDeadline = new Deadline("eat", 1, "tmr", true);
         Deadline actualDeadline = (Deadline) Parser.parseFileData("D---false---eat---tmr");
         assertEquals(expectedDeadline.toString(), actualDeadline.toString());

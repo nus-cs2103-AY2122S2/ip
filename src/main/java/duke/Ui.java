@@ -14,7 +14,7 @@ public class Ui {
     }
 
     /**
-     * Main program that Duke runs on, will loop till input is 'bye'
+     * Loops user input until a "bye" is received. This is the main program that Dukes runs on.
      */
     public void loop(TaskList tasklist){
         Scanner sc = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * startup logo
+     * Prints startup logo
      */
     public static void startup(){
         String logo = " ____        _        \n"
@@ -47,21 +47,22 @@ public class Ui {
     }
 
     /**
-     * print when user enters input not recognised by Duke
+     * prints when user enters input not recognised by Duke
      */
     public static void printWhatDoesThatMean(){
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(");
     }
 
     /**
-     * print when user leaves description of task empty
+     * prints when user leaves description of task empty
      */
     public static void printEmptyDescriptionException(){
         System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
     }
 
     /**
-     * print all task currently found in the Tasklist
+     * prints all task currently found in the Tasklist
+     * @param tasklist tasklist to print from
      */
     public static void printAllTasks(TaskList tasklist){
         System.out.print("Here are the tasks in your list:\n");
@@ -82,8 +83,9 @@ public class Ui {
 
 
     /**
-     * print the task that got removed
+     * prints the task that got removed
      * @param num index of task to remove (zero indexed)
+     * @param taskList tasklist to remove task from
      */
     public static void printRemovedThisTask(int num, TaskList taskList){
         System.out.println(" Noted. I've removed this task: ");
@@ -91,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * print when task is marked as done
+     * prints when task is marked as done
      * @param curr task to be marked as done
      */
     public static void printMarkTaskDone(Task curr){

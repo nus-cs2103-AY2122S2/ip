@@ -25,6 +25,7 @@ public class Task {
      * @param number Number associated with task
      * @param time time associated with task
      * @param type type of task. 'E' for duke.Event, 'T' for Todo and 'D' for duke.Deadline
+     * @param isReading flag to check if input is being read from file data
      */
     public Task(String name, int number, String time, String type, boolean isReading){
         try {
