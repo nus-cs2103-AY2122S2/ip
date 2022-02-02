@@ -52,7 +52,7 @@ public class Deadline extends Task {
             doneness = "[ ] ";
         }
         String deadlineName = super.toString();
-        String time = " (by: " + deadlineTimeToString() + ")";
+        String time = " (by: " + deadlineTimeToString() + ")\n";
         return box1 + doneness + deadlineName + time;
     }
 

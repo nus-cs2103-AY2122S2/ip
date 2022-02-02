@@ -40,7 +40,7 @@ public class ToDo extends Task {
         } else {
             doneness = "[ ] ";
         }
-        return box1 + doneness + super.toString();
+        return box1 + doneness + super.toString() + "\n";
     }
 
     /**

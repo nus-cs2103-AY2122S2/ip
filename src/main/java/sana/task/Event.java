@@ -51,7 +51,7 @@ public class Event extends Task {
             doneness = "[ ] ";
         }
         String eventName = super.toString();
-        String time = " (at: " + eventTimeToString() + ")";
+        String time = " (at: " + eventTimeToString() + ")\n";
         return box1 + doneness + eventName + time;
     }
 

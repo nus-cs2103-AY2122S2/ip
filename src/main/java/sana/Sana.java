@@ -27,7 +27,7 @@ public class Sana {
     private Memory taskMem;
 
     /** ui handles the user interface portion of the program */
-    private Ui ui;
+    private SanaResponse sanaResponse;
 
     /** parser parses the user command */
     private Parser parser;
@@ -38,21 +38,8 @@ public class Sana {
     public Sana() {
         this.taskMem = new Memory();
         this.userTasks = new TaskList(taskMem.memToList());
-        this.ui = new Ui();
+        this.sanaResponse = new SanaResponse();
         this.parser = new Parser();
-    }
-
-    /** This method runs Sana */
-    public void run() {
-        ui.greet();
-
-        while (true) {
-            String input = ui.nextLine();
-            doCommand(input);
-            if (input.equals("bye")) {
-                break;
-            }
-        }
     }
 
     /**
@@ -60,48 +47,38 @@ public class Sana {
      *
      * @param userCommand   the user command
      */
-    public void doCommand(String userCommand) {
-        ui.border();
+    public String doCommand(String userCommand) {
         String[] parsedCmd = parser.parseCommand(userCommand);
         if (parsedCmd.length == 0) {
-            return;
+            return new UnknownCommandException().getMessage();
         }
         String command = parsedCmd[0];
+
         try {
             switch (command) {
             case "bye":
-                ui.closeScanner();
-                ui.bye();
-                break;
+                return sanaResponse.bye();
             case "list":
-                list();
-                break;
+                return list();
             case "mark":
                 int markIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                mark(markIndex, true);
-                break;
+                return mark(markIndex, true);
             case "unmark":
                 int unmarkIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                mark(unmarkIndex, false);
-                break;
+                return mark(unmarkIndex, false);
             case "todo":
-                addToDo(parsedCmd[1]);
-                break;
+                return addToDo(parsedCmd[1]);
             case "event":
                 LocalDate eventDate = LocalDate.parse(parsedCmd[2]);
-                addEvent(parsedCmd[1], eventDate);
-                break;
+                return addEvent(parsedCmd[1], eventDate);
             case "deadline":
                 LocalDate deadlineDate = LocalDate.parse(parsedCmd[2]);
-                addDeadline(parsedCmd[1], deadlineDate);
-                break;
+                return addDeadline(parsedCmd[1], deadlineDate);
             case "delete":
                 int deleteIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                delete(deleteIndex);
-                break;
+                return delete(deleteIndex);
             case "find":
-                findTasks(parsedCmd[1]);
-                break;
+                return findTasks(parsedCmd[1]);
             default:
                 throw new UnknownCommandException();
             }
@@ -114,10 +91,10 @@ public class Sana {
         } catch (DateTimeParseException e) {
             System.out.println("Give your date in YYYY-MM-DD format!");
         } catch (NumberFormatException e) {
-            System.out.println("I don't know what sana.task you're referring to!");
+            System.out.println("I don't know what sana task you're referring to!");
         }
         taskMem.updateMemory(userTasks.toList());
-        ui.border();
+        return "";
     }
 
     /**
@@ -125,9 +102,9 @@ public class Sana {
      *
      * @param keyword   keyword to find in task names
      */
-    private void findTasks(String keyword) {
+    private String findTasks(String keyword) {
         LinkedList<Task> matchingTasks = userTasks.findMatchingTasks(keyword);
-        ui.printTaskList(matchingTasks, true);
+        return sanaResponse.printTaskList(matchingTasks, true);
     }
 
     /**
@@ -136,14 +113,16 @@ public class Sana {
      * @param taskIndex                     The index of the sana.task to be removed
      * @throws OutOfBoundsTaskException     When task index is not in current task list
      */
-    private void delete(int taskIndex) throws OutOfBoundsTaskException {
+    private String delete(int taskIndex) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
             throw new OutOfBoundsTaskException();
         }
-        ui.deleteTaskText();
-        ui.printTaskInList(userTasks.getTask(taskIndex));
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(sanaResponse.deleteTaskText());
+        responseText.append(sanaResponse.printTaskInList(userTasks.getTask(taskIndex)));
         userTasks.removeTask(taskIndex);
-        ui.taskNumberText(userTasks.taskAmt());
+        responseText.append(sanaResponse.taskNumberText(userTasks.taskAmt()));
+        return responseText.toString();
     }
 
     /**
@@ -153,15 +132,17 @@ public class Sana {
      * @param deadlineDate                  time of the deadline
      * @throws IncompleteCommandException   when command given is incomplete
      */
-    private void addDeadline(String deadlineName, LocalDate deadlineDate) throws IncompleteCommandException {
+    private String addDeadline(String deadlineName, LocalDate deadlineDate) throws IncompleteCommandException {
         if (deadlineName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        ui.addTaskText();
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(sanaResponse.addTaskText());
         Deadline newDeadline = new Deadline(deadlineName, deadlineDate);
         userTasks.addTask(newDeadline);
-        ui.printTaskInList(newDeadline);
-        ui.taskNumberText(userTasks.taskAmt());
+        responseText.append(sanaResponse.printTaskInList(newDeadline));
+        responseText.append(sanaResponse.taskNumberText(userTasks.taskAmt()));
+        return responseText.toString();
     }
 
     /**
@@ -171,32 +152,36 @@ public class Sana {
      * @param eventTime                     time of the event
      * @throws IncompleteCommandException   when command given is incomplete
      */
-    private void addEvent(String eventName, LocalDate eventTime) throws IncompleteCommandException {
+    private String addEvent(String eventName, LocalDate eventTime) throws IncompleteCommandException {
         if (eventName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        ui.addTaskText();
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(sanaResponse.addTaskText());
         Event newEvent = new Event(eventName, eventTime);
         userTasks.addTask(newEvent);
-        ui.printTaskInList(newEvent);
-        ui.taskNumberText(userTasks.taskAmt());
+        responseText.append(sanaResponse.printTaskInList(newEvent));
+        responseText.append(sanaResponse.taskNumberText(userTasks.taskAmt()));
+        return responseText.toString();
     }
 
     /**
      * Adds a ToDo to userTasks
      *
-     * @param taskName                      the name of the todoTask
+     * @param todoName                      the name of the todoTask
      * @throws IncompleteCommandException   when command given is incomplete
      */
-    private void addToDo(String taskName) throws IncompleteCommandException {
-        if (taskName.isBlank()) {
+    private String addToDo(String todoName) throws IncompleteCommandException {
+        if (todoName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        ui.addTaskText();
-        ToDo newTodo = new ToDo(taskName);
+        StringBuilder responseText = new StringBuilder();
+        responseText.append(sanaResponse.addTaskText());
+        ToDo newTodo = new ToDo(todoName);
         userTasks.addTask(newTodo);
-        ui.printTaskInList(newTodo);
-        ui.taskNumberText(userTasks.taskAmt());
+        responseText.append(sanaResponse.printTaskInList(newTodo));
+        responseText.append(sanaResponse.taskNumberText(userTasks.taskAmt()));
+        return responseText.toString();
     }
 
     /**
@@ -206,29 +191,32 @@ public class Sana {
      * @param isComplete                the completion of the sana.task
      * @throws OutOfBoundsTaskException when task index is not in current task list
      */
-    private void mark(int taskIndex, boolean isComplete) throws OutOfBoundsTaskException {
+    private String mark(int taskIndex, boolean isComplete) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
             throw new OutOfBoundsTaskException();
         }
         userTasks.getTask(taskIndex).setDone(isComplete);
-        ui.markText(isComplete);
-        ui.printTaskInList(userTasks.getTask(taskIndex));
+        return sanaResponse.markText(isComplete)
+                + sanaResponse.printTaskInList(userTasks.getTask(taskIndex));
+
     }
 
     /**
      * Lists the history of user inputs to Sana
      */
-    private void list() {
-        ui.printTaskList(userTasks.toList(), false);
+    private String list() {
+        return sanaResponse.printTaskList(userTasks.toList(), false);
     }
 
+
+    // GUI code portion
+
     /**
-     * Initialises Sana
-     *
-     * @param args  input arguments supplied when calling the Sana.java file
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Sana sana = new Sana();
-        sana.run();
+    public String getResponse(String input) {
+        String response = doCommand(input);
+        return "Sana heard: " + response;
     }
 }
