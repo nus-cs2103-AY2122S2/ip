@@ -6,16 +6,31 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 /**
  * A task tracker bot named Duke aka mum.
  * Stores list of tasks performed by the user.
  */
 public class Duke {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
-    private String filePath;
+    private Ui ui;
+    private String filePath = "./data/duke.txt";
+    private ScrollPane scrollPane;
+    private GridPane gridPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * A constructor that initialize this Duke class.
@@ -25,6 +40,20 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.filePath = filePath;
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            this.tasks = new TaskList(storage.loadTasksFromFile());
+        } catch (FileNotFoundException e) {
+            Ui.showLoadingError();
+            this.tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Constructor that initializes this Duke Class.
+     */
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -54,6 +83,33 @@ public class Duke {
             }
         }
         Ui.showGoodBye();
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    public String handleUserInput(String fullCommand) {
+        boolean isExit = false;
+        String response = "";
+        try {
+            Command<String> c = Parser.parseInput(fullCommand, tasks, storage);
+            if (c.isExit()) {
+                return "Bye. Click on the close button to put me to sleep.";
+            }
+            response = c.execute();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return response;
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**

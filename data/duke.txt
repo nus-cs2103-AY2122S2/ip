@@ -1,2 +1,4 @@
 [T][X] sell eggs
-[T][ ] sell clothes
+[T][X] sell clothes
+[T][ ] sell eggs 2
+[D][ ] sell dogs (by: 2020-12-12 13:00)

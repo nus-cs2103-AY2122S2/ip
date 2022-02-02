@@ -28,11 +28,17 @@ public class AddTodoCommand extends Command<String> {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
-        execute();
     }
 
-    private void execute() throws DukeException {
+    /**
+     * Executes the creation of To Do task.
+     *
+     * @return a output response for creating a deadline task
+     * @throws DukeException thrown when to do cannot be created
+     */
+    public String execute() throws DukeException {
         String err = "Oh no! The description of todo cannot be empty... Try again :)\n";
+        String response = "";
         if (echo.length == 1) {
             throw new DukeException(err);
         }
@@ -42,12 +48,13 @@ public class AddTodoCommand extends Command<String> {
         }
         Todo curr = new Todo(description);
         list.addTask(curr);
-        Ui.showAddResponse(curr.toString(), list.getSize());
+        response = Ui.showAddResponse(curr.toString(), list.getSize());
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 
     /**

@@ -11,8 +11,14 @@ public class ByeCommand extends Command<String> {
         execute();
     }
 
-    private void execute() {
+    /**
+     * Runs this command to tell the program to end the app.
+     *
+     * @return a empty string
+     */
+    public String execute() {
         isExit();
+        return "";
     }
 
     /**

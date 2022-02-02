@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.exception.DukeException;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Command that lists out the task previously added.
@@ -18,7 +17,6 @@ public class ListCommand extends Command<String> {
      */
     public ListCommand(TaskList list) throws DukeException {
         this.list = list;
-        execute();
     }
 
     /**
@@ -26,12 +24,13 @@ public class ListCommand extends Command<String> {
      *
      * @throws DukeException if execution is not possible
      */
-    private void execute() throws DukeException {
-        System.out.print(Ui.getLineDivider() + "Here are the tasks in your list:\n");
+    public String execute() throws DukeException {
+        String response = "";
+        response = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.getSize(); i++) {
-            System.out.printf("%d." + list.getTask(i).toString() + "\n", i + 1);
+            response = response + (i + 1) + "." + list.getTask(i).toString() + "\n";
         }
-        System.out.print(Ui.getLineDivider());
+        return response;
     }
 
     /**

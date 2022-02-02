@@ -28,7 +28,6 @@ public class UnmarkCommand extends Command<String> {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
-        execute();
     }
 
     /**
@@ -36,10 +35,11 @@ public class UnmarkCommand extends Command<String> {
      *
      * @throws DukeException thrown when the input format is wrong
      */
-    private void execute() throws DukeException {
+    public String execute() throws DukeException {
         String err = "Oh no! Which task do you wish to unmark? Try again :)\n";
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
+        String response = "";
         int targetIndex;
         int size = list.getSize();
         if (echo.length == 1) {
@@ -61,13 +61,14 @@ public class UnmarkCommand extends Command<String> {
             curr.unMark();
             String status = curr.getStatus();
             String description = curr.getDescription();
-            Ui.showUnmarkRes(status, description);
+            response = Ui.showUnmarkRes(status, description);
         }
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 
     /**

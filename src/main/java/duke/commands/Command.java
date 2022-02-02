@@ -8,7 +8,9 @@ import duke.exception.DukeException;
  * @param <T>
  */
 public abstract class Command<T> {
-    private void execute() throws DukeException, DukeException {}
+    public String execute() throws DukeException, DukeException {
+        return "";
+    }
 
     /**
      * Hint to stop the bot from running.
