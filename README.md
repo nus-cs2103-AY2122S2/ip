@@ -1,6 +1,7 @@
 # Doge project template
 
-This is a project template for a greenfield Java project. Its name is **_Doge_**, a person who occasionally pisses you off but at the end of the day, you still love them. Given below are instructions on how to use it.
+Its name is **_Doge_**, a person who occasionally ~~pisses~~ annoys you but at the end of the day, you still love them. You can download me [here](https://drive.google.com/file/d/1awN6tT8uNJPXamfNgMrCKOAhq0H9qMdz/view?usp=sharing)! Below are the instructions on how to use it.
+>Doge: I swear I'm nice! 😉
 
 ```
          ▄              ▄    
@@ -26,11 +27,11 @@ This is a project template for a greenfield Java project. Its name is **_Doge_**
 
 ## Features of Doge
 1. Task tracker
-   1. Able to track different kinds of tasks (Todo, Event, Deadline)
-   2. Mark completed tasks
-   3. Unmark completed tasks
-   4. Delete unwanted tasks
-   5. List the current tasks
+   - [x] Able to track different kinds of tasks (Todo, Event, Deadline)
+   - [x] Mark completed tasks
+   - [x] Unmark completed tasks
+   - [x] Delete unwanted tasks
+   - [x] List the current tasks
 
 ## Basic Commands for Doge
 ### 1. Adding a task:
@@ -88,4 +89,13 @@ Examples:
 Examples:
 - list l/< d/2022-02-10 o/14:00
 - list l/>= d/2022-03-15 o/19:00
+```
+
+## Launcher class for Doge:
+```java
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
 ```
