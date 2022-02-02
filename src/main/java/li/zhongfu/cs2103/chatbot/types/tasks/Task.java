@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * Object that represents a to-do list task. Contains a name and a state.
+ * A representation of to-do list task that contains a name and a state.
  * 
  * Currently, it probably isn't possible for the state to be inconsistent e.g. after deserializing
  * a (potentially malicious) serialized object, but keep this in mind if implementing subclasses
@@ -60,6 +60,12 @@ public abstract class Task implements Serializable {
      */
     abstract public String toString();
 
+    /**
+     * Indicates whether the Object {@code o} is equal to this Task.
+     * 
+     * @param o the Object to compare this Task against
+     * @returns true if {@code o} is equal to this Task, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (o != null && this.getClass() == o.getClass()) {
@@ -69,6 +75,11 @@ public abstract class Task implements Serializable {
         return false;
     }
 
+    /**
+     * Returns a hash code value for this Task.
+     * 
+     * @returns a hash code value for this Task
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.name, this.done);
