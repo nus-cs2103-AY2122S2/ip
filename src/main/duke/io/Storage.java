@@ -42,6 +42,9 @@ public class Storage {
                 String.format("%s/%s", this.getDirname(), this.getFilename()));
     }
 
+    /**
+     * create the required directory and file to store the list if it doesn't exist
+     */
     private void createFile(){
         try {
             if (!Files.exists(this.getDirPath())) {
@@ -55,6 +58,10 @@ public class Storage {
         }
     }
 
+    /**
+     * read the file for the saved list and update the list of tasks
+     * @param taskList empty list of task
+     */
     public void readFile(TaskList taskList) {
         try {
             File dukeFile = new File(String.format("%s/%s", this.getDirname(), this.getFilename()));
@@ -72,6 +79,11 @@ public class Storage {
         }
     }
 
+    /**
+     * decipher the array and add the appropriate task to the list
+     * @param taskStringArray array of strings representing a task
+     * @param taskList current list of tasks
+     */
     public void addToTasks(String[] taskStringArray, TaskList taskList) throws DukeException {
         String type = taskStringArray[0];
         boolean isDone = taskStringArray[1].equals("1");
@@ -97,6 +109,10 @@ public class Storage {
         }
     }
 
+    /**
+     * save the list back into the save file
+     * @param taskList current list of tasks
+     */
     public void writeFile(TaskList taskList) {
         try {
             FileWriter dukeWriter = new FileWriter(String.format("%s/%s", this.getDirname(), this.getFilename()));

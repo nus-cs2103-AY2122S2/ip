@@ -9,6 +9,10 @@ public class Ui {
         System.out.println(Ui.GOODBYE_MESSAGE);
     }
 
+    /**
+     * prints out all the tasks in the current list
+     * @param taskList the current list of tasks
+     */
     public void respondList(TaskList taskList) {
         int n = taskList.getTasksCount();
         if (n == 0) {
@@ -20,21 +24,39 @@ public class Ui {
         }
     }
 
+    /**
+     * prints out the task that has been marked
+     * @param markTask the targeted task to mark
+     */
     public void respondMark(Task markTask) {
         System.out.printf("Nice! I've marked this task as done: \n"
                 + "    %s\n", markTask);
     }
 
+    /**
+     * prints out the task that has been unmarked
+     * @param unmarkTask the targeted task to unmark
+     */
     public void respondUnmark(Task unmarkTask) {
         System.out.printf("Nice! I've marked this task as done: \n"
                 + "    %s\n", unmarkTask);
     }
 
+    /**
+     * prints out the task that has been added as well as the current number of tasks after adding
+     * @param newTask the targeted task to add
+     * @param taskList the current list of tasks
+     */
     public void respondAddTask(Task newTask, TaskList taskList) {
         System.out.printf("Got it. I've added this task:\n" + "%s\n" + "%s\n",
                 newTask, taskList.taskCountToString());
     }
 
+    /**
+     * prints out the task that has been added as well as the current number of tasks after removing
+     * @param deleteTask the targeted task to add
+     * @param taskList the current list of tasks
+     */
     public void respondDeleteTask(Task deleteTask, TaskList taskList) {
         System.out.printf("Noted. I've removed this task: \n" + "    %s\n"
                 + "%s\n", deleteTask, taskList.taskCountToString());

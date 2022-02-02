@@ -18,6 +18,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+
+    /**
+     * @param userInput the whole console command line from the user
+     * @return Command to be executed
+     * @throws DukeException when invalid input detected
+     */
     public Command parse(String userInput) throws DukeException {
         String[] inputArray = userInput.split(" ");
         String userCommand = inputArray[0];
@@ -79,6 +85,7 @@ public class Parser {
                         String dueDate = String.join(" ",
                                 Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
                         LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        // check if the date and time input is in the right format
                         if (deadlineDescription.equals("") || dueDate.equals("")) {
                             throw new DukeException("Please specify the description/due date of the deadline task.");
                         }
@@ -99,6 +106,7 @@ public class Parser {
                         String dateTime = String.join(" ",
                                 Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
                         LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        // check if the date and time input is in the right format
                         if (eventDescription.equals("") || dateTime.equals("")) {
                             throw new DukeException("Please specify the description/date time of the event task.");
                         }

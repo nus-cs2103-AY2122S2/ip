@@ -33,6 +33,9 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * format the task into a string to be stored in the save file
+     */
     public String toStoreString() {
         return String.format("%s~%d~%s",
                 this.getTaskType(),
