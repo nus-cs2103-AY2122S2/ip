@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents the list of tasks.
@@ -56,7 +56,7 @@ public class TaskList {
             int index = 1;
             for (int n = 0; n < totalTasks; n++) {
                 Task t = tasks.get(n);
-                list += "\n    "  + index + "." + t.toString();
+                list += "\n    " + index + "." + t.toString();
                 index++;
             }
         }
@@ -147,7 +147,7 @@ public class TaskList {
             Task task = tasks.get(n);
             if (task.hasKeyword(keyword)) {
                 count++;
-                list += "\n    "  + count + "." + task;
+                list += "\n    " + count + "." + task;
             }
             index++;
         }

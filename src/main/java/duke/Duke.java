@@ -1,9 +1,13 @@
 package duke;
 
-import duke.command.Command;
-import duke.util.*;
-
 import java.io.IOException;
+
+import duke.command.Command;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a user to keep track of various things.

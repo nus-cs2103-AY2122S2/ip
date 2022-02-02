@@ -8,11 +8,9 @@ import java.io.InputStreamReader;
  * Represents the user interaction function of the program.
  */
 public class Ui {
-    private BufferedReader br;
-
     // Divider and indentation for design purpose
-    private static final String dashLine = "    -------------------------------------------------------------\n";
     private static final String curlyLine = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private static final String dashLine = "    -------------------------------------------------------------\n";
     private static final String indent = "    ";
 
     private static final String logo = "     ____        _\n"
@@ -22,6 +20,8 @@ public class Ui {
             + "    |____/ \\__,_|_|\\_\\___|\n";
 
     private static final String intro = indent + "Hello! I'm Duke!\n" + indent + "What can I do for you?";
+
+    private BufferedReader br;
 
     /**
      * Class constructor.
