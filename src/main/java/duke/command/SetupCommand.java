@@ -19,8 +19,15 @@ public class SetupCommand extends Command {
      * @throws DukeException when an exception is thrown in the process of executing this command.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
-        taskList.populateWith(storage.loadTasksFromFile());
-        ui.greet();
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
+        try {
+            taskList.populateWith(storage.loadTasksFromFile());
+        } catch (DukeException exception) {
+            ui.showErrorMessage(exception.getMessage());
+            taskList.clear();
+        }
+
+        ui.showMessage("Hello! I am Duke");
+        ui.showMessage("How can I help you?");
     }
 }
