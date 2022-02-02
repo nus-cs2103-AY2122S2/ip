@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Inherits from the Task class.
+ * Stores the description and date of an Event object.
+ * Provides to String method to print event details in specific format.
+ */
 public class Event extends Task {
 
     protected LocalDate at;

@@ -19,16 +19,19 @@ public class TaskList {
             case 'T':
                 String tTodo = t.substring(7);
                 this.tasksList.add(new Todo(tTodo, tIsDone));
+                break;
             case 'E':
                 String[] tEvent = t.substring(7).split(" - at: ");
                 this.tasksList.add(new Event(tEvent[0], tIsDone,
                         LocalDate.parse(tEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+                break;
             case 'D':
                 String[] tDeadline = t.substring(7).split(" - by: ");
                 this.tasksList.add(new Deadline(tDeadline[0], tIsDone,
                         LocalDate.parse(tDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+                break;
             }
         }
     }

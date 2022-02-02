@@ -1,8 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     private static Storage storage;

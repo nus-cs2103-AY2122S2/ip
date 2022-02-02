@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dc3dd6b6-4149-4eaf-b742-b681614af8ee" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/java/duke/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/duke/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/duke/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/duke/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/duke/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/duke/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/duke/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/duke/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/main/duke/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/main/duke/Deadline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/main/duke/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/main/duke/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/main/duke/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/main/duke/Parser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/main/duke/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/main/duke/Todo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../text-ui-test/EXPECTED.TXT" beforeDir="false" afterPath="$PROJECT_DIR$/../../text-ui-test/EXPECTED.TXT" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../text-ui-test/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../text-ui-test/input.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="24OlFbrnEAXuC3y9wFO7kiktvrh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc3dd6b6-4149-4eaf-b742-b681614af8ee" name="Changes" comment="" />
+      <created>1643509411927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643509411927</updated>
+    </task>
+    <servers />
+  </component>
+</project>
