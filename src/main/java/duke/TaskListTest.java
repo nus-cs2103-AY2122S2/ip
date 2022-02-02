@@ -1,10 +1,10 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 
@@ -14,6 +14,9 @@ class TaskListTest {
             assertEquals("Okayy!! I've added this task:\n" +
                     " T | [ ] read book\n" +
                     " You have 1 tasks in the list.", ts.toDo("read book"));
+    }
+
+    private void assertEquals(String s, String read_book) {
     }
 
     @Test
