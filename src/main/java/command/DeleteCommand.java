@@ -1,9 +1,9 @@
 package command;
 
-import tsundere.TsundereException;
 import task.TaskList;
-import tsundere.Ui;
 import tsundere.Storage;
+import tsundere.TsundereException;
+import tsundere.Ui;
 
 /**
  * Delete task in tasklist and storage saves it
@@ -26,12 +26,12 @@ public class DeleteCommand extends Command {
         if (t.getCount() < this.num || this.num <= 0) {
             throw new TsundereException("Your number is not valid!!!");
         }
-        u.printWrapper("Deleting the following task. You're not being lazy, are you?\n" + t.getTaskStr(this.num));
+        u.wrapText("Deleting the following task. You're not being lazy, are you?\n" + t.getTaskStr(this.num));
         t.delete(this.num);
         s.saveFile(t.tasksToString());
     }
 
     public boolean isExit() {
-        return  false;
+        return false;
     }
 }

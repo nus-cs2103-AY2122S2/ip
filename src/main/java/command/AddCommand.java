@@ -1,13 +1,12 @@
 package command;
 
+import task.Deadline;
+import task.Event;
 import task.TaskList;
 import task.ToDo;
-import task.Event;
-import task.Deadline;
-
-import tsundere.Ui;
 import tsundere.Storage;
 import tsundere.TsundereException;
+import tsundere.Ui;
 
 /**
  * Add a new task into tasklist and storage saves it
@@ -29,12 +28,17 @@ public class AddCommand extends Command {
      * @param body string description of the task
      */
     public AddCommand(String s, String body) {
-        if (s.equals("TODO")) {
+        switch (s) {
+        case "TODO":
             this.ty = Type.TODO;
-        } else if (s.equals("DEADLINE")) {
+            break;
+        case "DEADLINE":
             this.ty = Type.DEADLINE;
-        } else if (s.equals("EVENT")) {
+            break;
+        case "EVENT":
             this.ty = Type.EVENT;
+            break;
+        default:
         }
         this.body = body;
     }
@@ -45,11 +49,10 @@ public class AddCommand extends Command {
      * @param t TaskList for managing and adding tasks
      * @param u UI for displaying text
      * @param s Storage for saving to file
-     * @throws TsundereException
+     * @throws TsundereException for incorrect input format
      */
     public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
-
-       String[] splitStr;
+        String[] splitStr;
         switch (this.ty) {
         case TODO:
             t.addTask(new ToDo(body));
@@ -57,21 +60,26 @@ public class AddCommand extends Command {
         case DEADLINE:
             splitStr = body.split("/by");
             if (splitStr.length < 2) {
-                throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by 2019-01-15");
+                throw new TsundereException("Hmph you baka, gimme a correct format."
+                        + " For example, deadline sleep/by 2019-01-15");
             }
             t.addTask(new Deadline(splitStr[0], splitStr[1]));
             break;
         case EVENT:
             splitStr = body.split("/at");
             if (splitStr.length < 2) {
-                throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at 2019-01-15");
+                throw new TsundereException("Hmph you baka, gimme a correct format. "
+                        + "For example, event sleep/at 2019-01-15");
             }
             t.addTask(new Event(splitStr[0], splitStr[1]));
             break;
+        default:
         }
 
-        u.printWrapper("New task! You better do it.\n" + t.getTaskStr(t.getCount()) + "\nYou have " + t.getCount() + " task(s) to do you lazy bum!");
+        u.wrapText("New task! You better do it.\n" + t.getTaskStr(t.getCount())
+                + "\nYou have " + t.getCount() + " task(s) to do you lazy bum!");
         s.saveFile(t.tasksToString());
+
     }
 
     /**

@@ -25,7 +25,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(strBy);
             useLocalDate = true;
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             this.strBy = strBy;
         }
     }
@@ -48,9 +48,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (useLocalDate) {
-            return "[D]" +  super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
-            return "[D]" +  super.toString() + " (by: " + strBy + ")";
+            return "[D]" + super.toString() + " (by: " + strBy + ")";
         }
     }
 }

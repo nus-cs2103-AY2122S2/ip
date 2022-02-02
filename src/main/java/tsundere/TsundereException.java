@@ -3,7 +3,7 @@ package tsundere;
 /**
  * Exception class mostly used for incorrect string format
  */
-public class TsundereException extends Exception{
+public class TsundereException extends Exception {
 
     /**
      * create a new TsundereException

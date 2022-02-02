@@ -1,10 +1,9 @@
 package command;
 
 import task.TaskList;
-
-import tsundere.Ui;
 import tsundere.Storage;
 import tsundere.TsundereException;
+import tsundere.Ui;
 
 /**
  * abstract class Command for various different command with different execute
@@ -23,7 +22,7 @@ public abstract class Command {
      * @param t TaskList for managing and adding tasks
      * @param u UI for displaying text
      * @param s Storage for saving to file
-     * @throws TsundereException
+     * @throws TsundereException for any wrong input format
      */
     public abstract void execute(TaskList t, Ui u, Storage s) throws TsundereException;
 }

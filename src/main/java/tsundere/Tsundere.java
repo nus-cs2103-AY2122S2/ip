@@ -40,7 +40,7 @@ public class Tsundere {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (TsundereException e) {
-                ui.showError(e.getMessage());
+                ui.showErrorMsg(e.getMessage());
             }
         }
     }

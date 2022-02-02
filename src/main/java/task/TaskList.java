@@ -1,7 +1,7 @@
 package task;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * manage the list of tasks
@@ -13,8 +13,8 @@ public class TaskList {
     /**
      * Create a new TaskList class
      */
-    public  TaskList () {
-        tasks = new ArrayList<Task>();
+    public TaskList() {
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      * @param num index + 1 of the task to be deleted
      */
     public void delete(int num) {
-        tasks.remove(num -1);
+        tasks.remove(num - 1);
         count--;
     }
 
@@ -91,7 +91,7 @@ public class TaskList {
      */
     public String listTasks() {
         if (count == 0) {
-            return  "You got no task!!";
+            return "You got no task!!";
         }
 
         String s = "You forgetful baka... here are your tasks: ";
@@ -122,7 +122,13 @@ public class TaskList {
         return strReturn;
     }
 
-    public String tasksFinder(String toFind) {
+    /**
+     * find the tasks that contain keywords input by user
+     *
+     * @param toFind the keyword by user to find
+     * @return String of the found tasks
+     */
+    public String findTask(String toFind) {
         String s = "";
         int counter = 1;
         for (int i = 0; i < count; i++) {

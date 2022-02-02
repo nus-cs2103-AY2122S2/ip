@@ -3,38 +3,56 @@ package tsundere;
 import java.util.Scanner;
 
 /**
- *
+ * Display text by printing
  */
 public class Ui {
 
-    static final private String lines = "------------------------------------------------------------------------";
+    private static final String LINES = "------------------------------------------------------------------------";
 
+    /**
+     * Read the user input
+     *
+     * @return user input
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        String userInput =  sc.nextLine();
-        System.out.println(lines);
+        String userInput = sc.nextLine();
+        System.out.println(LINES);
         return userInput;
     }
 
-    public void unknownCommand() {
-        printWrapper("I don't know what you want! Say something valid.");
-    }
-
-    public void printWrapper(String s) {
-        System.out.println(lines);
+    /**
+     * Wrap and print input string with Lines
+     *
+     * @param s Wrapped string
+     */
+    public void wrapText(String s) {
+        System.out.println(LINES);
         System.out.println(s);
-        System.out.println(lines);
+        System.out.println(LINES);
     }
-
+    /**
+     * Print the first statement when the program starts
+     */
     public void showIntro() {
-        printWrapper("Hmph, it's you again...\n");
+        wrapText("Hmph, it's you again...\n");
     }
 
-    public void showError(String e) {
-        printWrapper(e);
+    /**
+     * wrap and show the error message
+     *
+     * @param e wrapped error message
+     */
+    public void showErrorMsg(String e) {
+        wrapText(e);
     }
 
+    /**
+     * wrap the message for when save file cannot be read
+     */
     public void showLoadingError() {
-        printWrapper("Save File Corrupted... some task(s) can't be read!");
+        wrapText("Save File Corrupted... some task(s) can't be read!");
     }
 }
+
+

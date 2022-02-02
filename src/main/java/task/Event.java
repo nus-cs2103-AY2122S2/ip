@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    boolean useLocalDate = false;
+    protected boolean useLocalDate = false;
     protected LocalDate at;
     protected String strAt = "";
 
@@ -25,7 +25,7 @@ public class Event extends Task {
         try {
             this.at = LocalDate.parse(strAt);
             useLocalDate = true;
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             this.strAt = strAt;
         }
     }
