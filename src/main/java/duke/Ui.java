@@ -36,7 +36,7 @@ public class Ui {
     /** Takes in TaskList and Storage objects so that they can be updated with user's commands  */
     public void displayCommandMessage(TaskList tasks, Storage storage) throws DukeException, IOException {
         System.out.println(askForCommand());
-        parseUserInput(tasks, storage);
+        //parseUserInput(tasks, storage);
     }
 
     /** Returns a pre-made command message to users  */
@@ -48,13 +48,12 @@ public class Ui {
     }
 
     /** Takes in TaskList and Storage objects to parse the user input  */
-    public void parseUserInput(TaskList tasks, Storage storage) throws DukeException, IOException {
-        String userInput = scanner.nextLine();
+    public String parseUserInput(TaskList tasks, Storage storage, String userInput) throws DukeException, IOException {
         parser = new Parser(tasks, storage);//Calls Parser to parse information of userInput
         try {
-            parser.parseInput(userInput);//and do the respective action from duke.TaskList
+            return parser.parseInput(userInput);//and do the respective action from duke.TaskList
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
 
     }

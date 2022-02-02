@@ -43,4 +43,8 @@ public class Duke {
         //"C:\\NUS\\CS2103\\iP\\data\\duke.txt"
         new Duke().run();
     }
+
+    public String getResponse(String userInput) throws DukeException, IOException {
+        return ui.parseUserInput(tasks, storage, userInput);
+    }
 }
