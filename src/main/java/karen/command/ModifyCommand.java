@@ -20,19 +20,24 @@ public class ModifyCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage) throws KarenException {
+    public String execute(Ui ui, Storage storage) throws KarenException {
         try {
             Task getTask = storage.getTask(this.taskIndex);
+            String outputResult = null;
+
             switch (this.modifyAction) {
             case MARK:
                 getTask.markDone();
-                ui.displayUserInput(String.format(DONE_FORMAT, getTask.toString()));
+                storage.saveTasks();
+                outputResult = ui.displayUserInput(String.format(DONE_FORMAT, getTask.toString()));
                 break;
             case UNMARK:
                 getTask.markUndone();
-                ui.displayUserInput(String.format(UNDONE_FORMAT, getTask.toString()));
+                storage.saveTasks();
+                outputResult = ui.displayUserInput(String.format(UNDONE_FORMAT, getTask.toString()));
                 break;
             }
+            return outputResult;
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
                     String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex+1));

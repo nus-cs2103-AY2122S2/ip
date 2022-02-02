@@ -25,5 +25,5 @@ public abstract class Command {
      * @param storage To access and modify Tasks stored in Storage
      * @throws KarenException If there are runtime exceptions during execute
      */
-    public abstract void execute(Ui ui, Storage storage) throws KarenException;
+    public abstract String execute(Ui ui, Storage storage) throws KarenException;
 }

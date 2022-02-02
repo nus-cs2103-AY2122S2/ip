@@ -9,25 +9,12 @@ import java.util.Scanner;
 
 /**
  * Handles receiving and formatting of input and output
+ * Partially adapted from: https://github.com/se-edu/addressbook-level2
  */
 public class Ui {
-    public static final String STD_DIVIDER = "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
-    public static final String ERR_DIVIDER = "------------------------------------------------";
     public static final String WELCOME = "Hello, my name is Karen.\nI'll be speaking (to) as your manager today.";
     public static final String GOODBYE = "Goodbye - I'll be seeing your manager's manager next.\nI'll remember this.";
     public static final String NO_TASKS = "Nothing can be found.";
-
-    private final Scanner in;
-    private final PrintStream out;
-
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-    }
 
     /**
      * Gets formatted string of item at (1-based) index.
@@ -55,45 +42,11 @@ public class Ui {
     }
 
     /**
-     * Gets input from user.
-     * @return String input from user
-     */
-    public String readInput() {
-        String fullCommand = this.in.nextLine();
-        return fullCommand;
-    }
-
-    /**
-     * Prints welcome message
-     */
-    public void showWelcome() {
-        // more customisation and cleanup in future
-        out.println(STD_DIVIDER);
-        out.println(WELCOME);
-        out.println(STD_DIVIDER);
-        out.print("\n");
-    }
-
-    /**
-     * Prints goodbye message
-     */
-    public void showGoodbye() {
-        // more customisation and cleanup in future
-        out.println(STD_DIVIDER);
-        out.println(GOODBYE);
-        out.println(STD_DIVIDER);
-        out.print("\n");
-    }
-
-    /**
      * Prints message for inputs and outputs with STD_DIVIDER wrapped around.
      * @param message Message generated from determined inputs and subsequent outputs.
      */
-    public void displayUserInput(String message) {
-        out.println(STD_DIVIDER);
-        out.println(message);
-        out.println(STD_DIVIDER);
-        out.print("\n");
+    public String displayUserInput(String message) {
+        return String.format("%s\n\n", message);
     }
 
     /**
@@ -101,11 +54,8 @@ public class Ui {
      * missing configurations etc.
      * @param message Message generated
      */
-    public void displayWarning(String message) {
-        out.println(ERR_DIVIDER);
-        out.println(message);
-        out.println(ERR_DIVIDER);
-        out.print("\n");
+    public String displayWarning(String message) {
+        return String.format("%s\n\n", message);
     }
 
     /**
@@ -122,7 +72,7 @@ public class Ui {
         }
 
         // If the taskList is empty, return with default message
-        if (taskList.size()==0) {
+        if (taskList.size() == 0) {
             formatString.append(NO_TASKS);
         }
         return formatString.toString();

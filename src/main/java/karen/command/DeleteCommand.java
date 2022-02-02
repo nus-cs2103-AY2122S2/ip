@@ -16,13 +16,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage) throws KarenException {
+    public String execute(Ui ui, Storage storage) throws KarenException {
         try {
             Task item = storage.getTask(this.taskIndex);
             storage.deleteTask(this.taskIndex);
             storage.saveTasks();
 
-            ui.displayUserInput(ui.formatCount("removed", item, storage.getTaskCount()));
+            return ui.displayUserInput(ui.formatCount("removed", item, storage.getTaskCount()));
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
                     String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex+1));

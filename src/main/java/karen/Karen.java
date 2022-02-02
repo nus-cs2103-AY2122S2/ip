@@ -6,22 +6,31 @@ import karen.command.Command;
  * App interface for managing between UI, Parser, Storage.
  */
 public class Karen {
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        Parser parser = new Parser();
-        Storage storage = new Storage(ui);
-        boolean isExit = false;
+    private Ui ui;
+    private Parser parser;
+    private Storage storage;
 
-        ui.showWelcome();
-        while (!isExit) {
-            try {
-                String fullInput = ui.readInput();
-                Command cmd = parser.parseInput(fullInput);
-                cmd.execute(ui, storage);
-                isExit = cmd.isExit();
-            } catch (KarenException err) {
-                ui.displayUserInput(err.message);
-            }
-        }
+    public Karen() {
+        this.ui = new Ui();
+        this.parser = new Parser();
+        this.storage = new Storage(this.ui);
     }
+
+    /**
+     * Receives input from user. Executes the command based on the input
+     * and returns the result to be displayed to the GUI.
+     * @param fullInput input by the user
+     * @return Response string
+     */
+    public String getResponse(String fullInput) {
+        String response;
+        try {
+            Command cmd = this.parser.parseInput(fullInput);
+            response = cmd.execute(this.ui, this.storage);
+        } catch (KarenException err) {
+            response = err.toString();
+        }
+        return response;
+    }
+
 }
