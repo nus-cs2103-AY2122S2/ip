@@ -1,14 +1,19 @@
 package duke.ui.controller;
 
 import duke.ui.Duke;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  *
@@ -62,7 +67,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (duke.hasTerminated()) {
-            Platform.exit();
+            // Disables input field and sets gray fill over application
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            dialogContainer.setBackground(
+                    new Background(new BackgroundFill(
+                            Color.rgb(169, 169, 169), CornerRadii.EMPTY, Insets.EMPTY)
+                    ));
         }
     }
 }
