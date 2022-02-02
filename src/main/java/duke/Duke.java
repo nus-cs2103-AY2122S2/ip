@@ -19,6 +19,11 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -26,7 +31,7 @@ import java.util.function.Function;
 /**
  * Duke chatbot behavior and data.
  */
-public class Duke {
+public class Duke extends Application{
     private final TaskList taskList;
     private final Ui ui;
     private final Parser parser;
@@ -77,6 +82,15 @@ public class Duke {
         commands.put("delete", new DeleteCommand("delete"));
 
         parser = new Parser(commands);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public static void main(String[] args) {
