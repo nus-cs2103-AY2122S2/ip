@@ -19,12 +19,16 @@ public class Task {
         this.isDone = false;
     }
 
+    String finished() {
+        if(this.isDone) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
     @Override
     public String toString() {
-        if(this.isDone) {
-            return String.format("[X] %s", this.description);
-        } else {
-            return String.format("[ ] %s", this.description);
-        }
+        return String.format(this.description); 
     }
 }

@@ -1,8 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,7 +20,42 @@ public class Duke {
         String intro = "Hello! I'm Duke \n" +
                     "What can I do for you? \n";
         System.out.println(intro);
+        String task = "";
+        FileWriter fw = new  FileWriter("test.txt",true);
+        File f1 = new File("test.txt");
+        FileReader fr = new FileReader(f1);
+        BufferedReader br = new BufferedReader(fr);
         List<Task> ls = new ArrayList<>();
+
+        while(br.readLine() != null) {
+            task = br.readLine();
+            String[] different = task.split("|");
+            if(different[0] == "T") {
+                todo next = new todo(different[0]);
+                if(different[1] == "1") {
+                    next.isDone = true;
+                }
+                ls.add(next);
+            } else if (different[0] == "D") {
+                Deadline next = new Deadline(different[2], different[3]);
+                if(different[1] == "1") {
+                    next.isDone = true;
+                }
+                ls.add(next);
+            } else {
+               Event next = new Event(different[2], different[3]);
+               if(different[1] == "1") {
+                next.isDone = true;
+            }
+            ls.add(next);
+            }
+        }
+        fr.close();
+        br.close();
+        PrintWriter pr1 = new PrintWriter(f1);
+        pr1.print("");
+        pr1.close();
+
         while(true) {
             try { 
                 Scanner sc = new Scanner(System.in);
@@ -46,23 +89,19 @@ public class Duke {
                         throw new DukeException("Nothings here");
                     } else {
                         ls.add(a);
-                        System.out.println("Added the following todo");
-                        System.out.println("added: " + a);
-                        System.out.println("New list size is " + ls.size());
+                        System.out.println("Added the following todo " + a);
                     }
+
                 } else if(n.description.startsWith("deadline")) {
                     String[] parts = n.description.substring(9).split(" /by ");
                     Deadline d = new Deadline(parts[0], parts[1]);
                     ls.add(d);
-                    System.out.println("Added the following todo");
-                    System.out.println("added: " + d);
-                    System.out.println("New list size is " + ls.size());
+                    System.out.println("Added the following deadline " + d);
                 } else if(n.description.startsWith("event")) {
                     String[] parts = n.description.substring(6).split(" /at ");
                     Event e = new Event(parts[0], parts[1]);
                     ls.add(e);
-                    System.out.println("added: " + e);
-                    System.out.println("New list size is " + ls.size());
+                    System.out.println("Added the following event " + e);
                 } else if(n.description.startsWith("delete")) {
                     String number = n.description.substring(7);
                     int x = Integer.parseInt(number);
@@ -78,9 +117,15 @@ public class Duke {
             } catch (IndexOutOfBoundsException a) {
                 System.out.println("Nothing inside");
             }
-
         } 
         System.out.println("Bye. Hope to see you again");
-        
+        BufferedWriter out = new BufferedWriter(fw);
+        for (Task task2 : ls) {
+            System.out.println("test");
+            out.write(task2.toString());
+            out.append("\n");
+            //out.write("Pain");
+        }
+            out.close();
     }
 }

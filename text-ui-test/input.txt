@@ -1,4 +1,4 @@
-read book
-return book
+event eat /at 5pm
+todo read book
+deadline jump /by 10pm
 list
-bye
