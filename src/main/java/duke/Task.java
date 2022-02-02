@@ -36,11 +36,9 @@ public class Task {
         this.isCompleted = false;
     }
 
-    /**
-     * Prints details of task
-     */
-    public void print() {
-        System.out.println("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
+    @Override
+    public String toString() {
+        return "[" + (this.isCompleted ? "x" : " ") + "] " + this.description + "\n";
     }
 
     /**

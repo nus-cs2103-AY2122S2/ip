@@ -12,7 +12,7 @@ public class Deadline extends Task {
     /**
      * String of time indicating when task is due
      */
-    private String time;
+    private final String time;
     /**
      * Datetime indicating when task is due
      * Null if time cannot be converted to datetime
@@ -47,6 +47,19 @@ public class Deadline extends Task {
             System.out.println(" (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
                     + ")");
         }
+    }
+
+    @Override
+    public String toString() {
+        String description;
+        description = "[D]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description;
+        if (datetime == null) {
+            description += " (by: " + this.time + ")\n";
+        } else {
+            description += " (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")\n";
+        }
+        return description;
     }
 
     /**

@@ -11,12 +11,9 @@ public class ToDo extends Task {
         super(description);
     }
 
-    /**
-     * Prints out task details
-     */
-    public void print() {
-        System.out.print("[T]");
-        System.out.println("[" + (this.isCompleted ? "x" : " ") + "] " + this.description);
+    @Override
+    public String toString() {
+        return "[T]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description + "\n";
     }
 
     /**

@@ -64,7 +64,7 @@ public class DataStore {
                 String row = csvReader.readLine();
                 while (row != null) {
                     String[] inputs = row.split(",");
-                    tasks.load(parseTaskType(inputs[0]), Arrays.copyOfRange(inputs, 1, 4));
+                    tasks.loadTasks(parseTaskType(inputs[0]), Arrays.copyOfRange(inputs, 1, 4));
                     row = csvReader.readLine();
                 }
                 csvReader.close();
@@ -84,13 +84,15 @@ public class DataStore {
      */
     private static TaskType parseTaskType(String taskType) {
         taskType = taskType.toLowerCase();
-        if (taskType.equals("todo")) {
+        switch (taskType) {
+        case "todo":
             return TaskType.TODO;
-        } else if (taskType.equals("event")) {
+        case "event":
             return TaskType.EVENT;
-        } else if (taskType.equals("deadline")) {
+        case "deadline":
             return TaskType.DEADLINE;
+        default:
+            return null;
         }
-        return null;
     }
 }

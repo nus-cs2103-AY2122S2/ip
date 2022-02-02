@@ -12,7 +12,7 @@ public class Event extends Task {
     /**
      * String of time indicating when task is occurring
      */
-    private String time;
+    private final String time;
     /**
      * Datetime indicating when task is occurring
      * Null if time cannot be converted to datetime
@@ -48,6 +48,19 @@ public class Event extends Task {
                     + ")");
         }
 
+    }
+
+    @Override
+    public String toString() {
+        String description;
+        description = "[E]" + "[" + (this.isCompleted ? "x" : " ") + "] " + this.description;
+        if (datetime == null) {
+            description += " (at: " + this.time + ")\n";
+        } else {
+            description += " (at: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
+                    + ")\n";
+        }
+        return description;
     }
 
     /**

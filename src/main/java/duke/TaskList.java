@@ -9,7 +9,7 @@ public class TaskList {
     /**
      * Arraylist of Tasks
      */
-    private final ArrayList<Task> actions = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Adds Task to the TaskList
@@ -19,21 +19,27 @@ public class TaskList {
      * @return Boolean representing success of add operation
      * @throws EmptyDescriptionException if description is empty
      */
-    public boolean add(TaskType type, String[] inputs) throws EmptyDescriptionException {
+    public boolean addTask(TaskType type, String[] inputs) throws EmptyDescriptionException {
         if (inputs[0].trim().equals("")) {
-            throw new EmptyDescriptionException("ToDo cannot be empty");
+            throw new EmptyDescriptionException("Description of task can't be empty");
         }
 
         boolean isAddSuccess;
         switch (type) {
         case TODO :
-            isAddSuccess = actions.add(new ToDo(inputs[0]));
+            isAddSuccess = tasks.add(new ToDo(inputs[0]));
             break;
         case DEADLINE:
-            isAddSuccess = actions.add(new Deadline(inputs[0], inputs[1]));
+            if (inputs[1].trim().equals("")) {
+                throw new EmptyDescriptionException("Time cant be empty");
+            }
+            isAddSuccess = tasks.add(new Deadline(inputs[0], inputs[1]));
             break;
         case EVENT:
-            isAddSuccess = actions.add(new Event(inputs[0], inputs[1]));
+            if (inputs[1].trim().equals("")) {
+                throw new EmptyDescriptionException("Time cant be empty");
+            }
+            isAddSuccess = tasks.add(new Event(inputs[0], inputs[1]));
             break;
         default:
             isAddSuccess = false;
@@ -49,7 +55,7 @@ public class TaskList {
      * @param type TaskType of task to be added
      * @param inputs Parsed input array
      */
-    public void load(TaskType type, String[] inputs) {
+    public void loadTasks(TaskType type, String[] inputs) {
         Task task = null;
         switch (type) {
         case TODO :
@@ -70,27 +76,23 @@ public class TaskList {
         } else {
             task.markIncompleted();
         }
-        actions.add(task);
+        tasks.add(task);
     }
 
-    /**
-     * Prints out Tasks in the TaskList
-     */
-    public void print() {
-        for (int i = 0; i < actions.size(); i++) {
-            System.out.print(i + 1);
-            System.out.print(".");
-            actions.get(i).print();
+    @Override
+    public String toString() {
+        String description = "";
+        for (int i = 0; i < tasks.size(); i++) {
+
+            description = description + (i + 1);
+            description = description + ".";
+            description = description + tasks.get(i).toString();
         }
+        return description;
     }
 
-    /**
-     * Prints out a specific task
-     *
-     * @param i Task index that is to be printed out
-     */
-    public void print(int i) {
-        actions.get(i - 1).print();
+    public String toString(int index) {
+        return tasks.get(index - 1).toString();
     }
 
     /**
@@ -99,7 +101,7 @@ public class TaskList {
      * @param index Task index to be marked as complete
      */
     public void markComplete(int index) {
-        this.actions.get(index - 1).markCompleted();
+        this.tasks.get(index - 1).markCompleted();
     }
 
     /**
@@ -108,7 +110,7 @@ public class TaskList {
      * @param index Task index to be marked as incomplete
      */
     public void markIncomplete(int index) {
-        this.actions.get(index - 1).markIncompleted();
+        this.tasks.get(index - 1).markIncompleted();
     }
 
     /**
@@ -117,7 +119,7 @@ public class TaskList {
      * @return int representing number of task stored
      */
     public int getLength() {
-        return this.actions.size();
+        return this.tasks.size();
     }
 
     /**
@@ -125,8 +127,8 @@ public class TaskList {
      *
      * @param i index of task to be deleted
      */
-    public void delete(int i) {
-        actions.remove(i - 1);
+    public void deleteTask(int i) {
+        tasks.remove(i - 1);
     }
 
     /**
@@ -136,7 +138,7 @@ public class TaskList {
      * @return task at index i
      */
     public Task getTask(int i) {
-        return actions.get(i - 1);
+        return tasks.get(i - 1);
     }
 
     /**
@@ -144,15 +146,16 @@ public class TaskList {
      *
      * @param search input String to search for
      */
-    public void findTask(String search) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < actions.size(); i++) {
-            Task task = actions.get(i);
+    public String findTask(String search) {
+        String output = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             if (task.getDetails()[2].contains(search)) {
-                System.out.print(i + 1);
-                System.out.print(".");
-                task.print();
+                output = output + (i + 1);
+                output = output + ".";
+                output = output + task;
             }
         }
+        return output;
     }
 }

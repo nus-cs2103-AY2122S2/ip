@@ -1,111 +1,134 @@
 package duke;
 
 /**
- * Main class
+ * Class to get response from user inputs
  */
 public class Duke {
+    private final TaskList list = DataStore.loadData();
 
     /**
-     * Runs the Duke Program
-     *
-     * @param args No Args needed
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Ui.printWelcome();
-
-        TaskList list = DataStore.loadData();
-
-        Command actionType = Ui.getCommand();
-        String[] parsedInput = Ui.getInputs();
-
-        while (actionType != Command.BYE) {
-            int indexOfList = -1;
-            Boolean wasAddSuccess = null;
-
-
-            switch (actionType) {
-            case LIST:
-                list.print();
-                break;
-            case MARK:
-                indexOfList = Integer.parseInt(parsedInput[0]);
-                list.markComplete(indexOfList);
-                System.out.println("Marked as complete");
-                list.print(indexOfList);
-                break;
-            case UNMARK:
-                indexOfList = Integer.parseInt(parsedInput[0]);
-                list.markIncomplete(indexOfList);
-                System.out.println("Marked as incomplete");
-                list.print(indexOfList);
-                break;
-            case EVENT:
-                try {
-                    wasAddSuccess = list.add(TaskType.EVENT, parsedInput);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Description of task can't be empty");
-                    wasAddSuccess = false;
-                }
-                if (wasAddSuccess) {
-                    System.out.println("added: " + parsedInput[0].strip());
-                } else {
-                    System.out.println("Failed to add " + parsedInput[0].strip());
-                }
-                System.out.print("Number of tasks: ");
-                System.out.println(list.getLength());
-                break;
-            case DEADLINE:
-                try {
-                    wasAddSuccess = list.add(TaskType.DEADLINE, parsedInput);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Description of task can't be empty");
-                    wasAddSuccess = false;
-                }
-                if (wasAddSuccess) {
-                    System.out.println("added: " + parsedInput[0].strip());
-                } else {
-                    System.out.println("Failed to add " + parsedInput[0].strip());
-                }
-                System.out.print("Number of tasks: ");
-                System.out.println(list.getLength());
-                break;
-            case TODO:
-                try {
-                    wasAddSuccess = list.add(TaskType.TODO, parsedInput);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println("Description of task can't be empty");
-                    wasAddSuccess = false;
-                }
-                if (wasAddSuccess) {
-                    System.out.println("added: " + parsedInput[0].strip());
-                } else {
-                    System.out.println("Failed to add " + parsedInput[0].strip());
-                }
-                System.out.print("Number of tasks: ");
-                System.out.println(list.getLength());
-                break;
-            case DELETE:
-                indexOfList = Integer.parseInt(parsedInput[0]);
-                System.out.println("Noted. I've removed this task:");
-                list.print(indexOfList);
-                list.delete(indexOfList);
-                System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
-                break;
-            case FIND:
-                list.findTask(parsedInput[0]);
-                break;
-            default:
-                break;
-            }
-
-            DataStore.saveData(list);
-
-            actionType = Ui.getCommand();
-            parsedInput = Ui.getInputs();
+    String getResponse(String input) {
+        // Parse input
+        String[] inputs = input.split(" ", 2);
+        Command actionType;
+        String[] parsedInputs = new String[2];
+        String output = "";
+        try {
+            actionType = Parser.parseCommand(inputs[0]);
+        } catch (CommandNotFoundException e) {
+            return e.getMessage();
+        }
+        if (inputs.length != 1) {
+            parsedInputs = Parser.parseInput(inputs[1]);
+        } else {
+            parsedInputs[0] = "";
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        int indexOfList;
+        Boolean wasAddSuccess = null;
 
+
+        switch (actionType) {
+        case LIST:
+            output += list.toString();
+            break;
+        case MARK:
+            try {
+                indexOfList = Integer.parseInt(parsedInputs[0]);
+                list.markComplete(indexOfList);
+                output += "Marked as complete \n";
+                output += list.toString(indexOfList);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                output += "Integer required for Unmark command";
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                output += "Integer provided is not in the list";
+            }
+            break;
+        case UNMARK:
+            try {
+                indexOfList = Integer.parseInt(parsedInputs[0]);
+                list.markIncomplete(indexOfList);
+                output += "Marked as incomplete \n";
+                output += list.toString(indexOfList);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                output += "Integer required for Unmark command";
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                output += "Integer provided is not in the list";
+            }
+            break;
+        case EVENT:
+            try {
+                wasAddSuccess = list.addTask(TaskType.EVENT, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += "Number of tasks: ";
+            output += list.getLength();
+            break;
+        case DEADLINE:
+            try {
+                wasAddSuccess = list.addTask(TaskType.DEADLINE, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += "Number of tasks: ";
+            output += list.getLength();
+            break;
+        case TODO:
+            try {
+                wasAddSuccess = list.addTask(TaskType.TODO, parsedInputs);
+            } catch (EmptyDescriptionException e) {
+                output += (e.getMessage() + "\n");
+                wasAddSuccess = false;
+            }
+            if (wasAddSuccess) {
+                output += ("added: " + parsedInputs[0].strip() + "\n");
+            } else {
+                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
+            }
+            output += ("Number of tasks: ");
+            output += (list.getLength());
+            break;
+        case DELETE:
+            indexOfList = Integer.parseInt(parsedInputs[0]);
+            output += "Noted. I've removed this task: \n";
+            output += (list.toString(indexOfList));
+            list.deleteTask(indexOfList);
+            output += ("Now you have " + list.getLength() + " tasks in the list.");
+            break;
+        case FIND:
+            output += list.findTask(parsedInputs[0]);
+            break;
+        default:
+            break;
+        }
+
+        DataStore.saveData(list);
+
+
+        // Return String
+        return output;
     }
+
+
 
 }
