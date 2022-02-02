@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * This class tests methods from the Parser class.
@@ -15,7 +15,7 @@ public class ParserTest {
      *  Tests the constructor of the parser class.
      */
     @Test
-    public void testInputParser(){
+    public void testInputParser() {
         // First Testcase
         Parser tc1 = new Parser("deadline testing deadline z /by 2022-02-03");
         assertEquals(tc1.getCmd(), "deadline");

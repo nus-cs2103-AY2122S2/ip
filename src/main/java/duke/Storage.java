@@ -1,14 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+import java.util.Scanner;
 
 /**
  * This class deals with loading tasks from the file and saving tasks in the file.
