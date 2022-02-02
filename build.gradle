@@ -21,6 +21,10 @@ application {
     mainClassName = "duke.Duke"
 }
 
+run {
+    standardInput = System.in
+}
+
 
 //sourceSets {
 //    main {
