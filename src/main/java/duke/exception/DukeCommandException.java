@@ -23,11 +23,11 @@ public class DukeCommandException extends DukeException {
     @Override
     public String toString() {
         if (getMessage().isEmpty()) {
-            return Ui.divider + "\n" + "    Please specify a command! \n" + Ui.divider;
+            return Ui.DIVIDER + "\n" + "    Please specify a command! \n" + Ui.DIVIDER;
         }
-        String result = Ui.divider + "\n";
+        String result = Ui.DIVIDER + "\n";
         result += "    Unknown command: " + this.getMessage() + "\n";
-        result += Ui.divider;
+        result += Ui.DIVIDER;
         return result;
     }
 }

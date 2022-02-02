@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
 
 public class Event extends Task {
     /**
@@ -35,10 +36,10 @@ public class Event extends Task {
     public String toString() {
         if (getIsDone()) {
             return "[E][X] " + getContent() + " (at: " + date
-                    .format(Ui.formatter) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")";
         } else {
             return "[E][ ] " + getContent() + " (at: " + date
-                    .format(Ui.formatter) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")";
         }
     }
 }
