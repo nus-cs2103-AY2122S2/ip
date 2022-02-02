@@ -16,9 +16,13 @@ public class Event extends Task {
         this.endTime = LocalTime.parse(endTime, inputFormatterEnd);
     }
 
+    public String outputTime() {
+        return dateAndStartTime.format(outputFormatterStart)
+                + endTime.format(outputFormatterEnd);
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + dateAndStartTime.format(outputFormatterStart)
-                + endTime.format(outputFormatterEnd) + ")";
+        return "[E]" + super.toString() + "(at: " + outputTime() + ")";
     }
 }

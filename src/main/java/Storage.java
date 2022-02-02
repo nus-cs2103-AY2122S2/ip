@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.Scanner;
 
 public class Storage {
@@ -30,7 +29,11 @@ public class Storage {
                 } else if (details[0].equals("D")) {
                     currTask = new Deadline(details[2].trim(), details[3].trim());
                 } else {
-                    currTask = new Event(details[2].trim(), details[3].trim());
+                    String eventInformation = details[3];
+                    int indexOfDifferentiator = eventInformation.indexOf("-");
+                    String dateAndStartTime = eventInformation.substring(0, indexOfDifferentiator).trim();
+                    String endTime = eventInformation.substring(indexOfDifferentiator + 1).trim();
+                    currTask = new Event(details[2].trim(), dateAndStartTime, endTime);
                 }
 
                 if (status == 1) {
@@ -57,9 +60,9 @@ public class Storage {
                 if (t instanceof Todo) {
                     output = "T ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description;
                 } else if (t instanceof Deadline) {
-                    output = "D ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Deadline) t).time;
+                    output = "D ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Deadline) t).outputTime();
                 } else {
-                    output = "E ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Event) t).time;
+                    output = "E ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Event) t).outputTime();
                 }
                 writer.write(output + "\n");
                 writer.flush();

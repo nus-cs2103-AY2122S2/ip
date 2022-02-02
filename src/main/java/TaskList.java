@@ -4,7 +4,7 @@ public class TaskList {
     protected static ArrayList<Task> MANAGER;
 
     public TaskList() {
-        this.MANAGER = new ArrayList<>();
+        MANAGER = new ArrayList<>();
     }
 
 //    public TaskList(ArrayList<Task> manager) {
@@ -68,7 +68,10 @@ public class TaskList {
             if (index != -1) {
                 String description = instruction.substring(6, index);
                 String time = instruction.substring(index + 4);
-                toAdd = new Event(description, time);
+                int indexOfDifferentiator = time.indexOf("-");
+                String dateAndStartTime = time.substring(0, indexOfDifferentiator).trim();
+                String endTime = time.substring(indexOfDifferentiator + 1).trim();
+                toAdd = new Event(description, dateAndStartTime, endTime);
             } else {
                 throw new CustomException("Incorrect time format: ensure to prefix time with '/at'");
             }
@@ -82,7 +85,7 @@ public class TaskList {
     public static void deleteTask(int num) throws CustomException {
         if (num <= 0) {
             throw new CustomException("Invalid task ID: number must be a positive integer:)");
-        } else if ( num > MANAGER.size()) {
+        } else if (num > MANAGER.size()) {
             throw new CustomException("Invalid task ID: this task number does not exist as of now.");
         } else {
             MANAGER.remove(num - 1);

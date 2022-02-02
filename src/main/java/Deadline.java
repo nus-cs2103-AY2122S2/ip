@@ -11,7 +11,12 @@ public class Deadline extends Task {
         this.time = LocalDateTime.parse(time, inputFormatter);
     }
 
+    public String outputTime() {
+        return time.format(outputFormatter);
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + time.format(outputFormatter) + ")";
+        return "[D]" + super.toString() + "(by: " + outputTime() + ")";
     }
 }
