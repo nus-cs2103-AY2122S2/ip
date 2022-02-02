@@ -2,7 +2,6 @@ package puke.parser;
 
 import puke.exception.PukeException;
 import puke.task.TaskList;
-import puke.ui.Ui;
 
 /**
  * Handles the user inputs.

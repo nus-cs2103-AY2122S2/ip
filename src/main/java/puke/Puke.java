@@ -3,10 +3,10 @@ package puke;
 import java.util.Scanner;
 
 import puke.exception.PukeException;
-import puke.ui.Ui;
-import puke.task.TaskList;
 import puke.io.Storage;
 import puke.parser.Parser;
+import puke.task.TaskList;
+import puke.ui.Ui;
 
 /**
  * Main class for Puke.
