@@ -16,7 +16,7 @@ public class Deadline extends Task {
     protected LocalTime time;
 
     /**
-     * Constructor for duke.Deadline class
+     * Constructor for Deadline class
      *
      * @param d    a string representing a description of the task
      * @param date the date of the task
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for duke.Deadline class
+     * Constructor for Deadline class
      *
      * @param d    a string representing a description of the task
      * @param date the date of the task

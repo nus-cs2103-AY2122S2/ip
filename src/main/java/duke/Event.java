@@ -17,7 +17,7 @@ public class Event extends Task {
     protected LocalTime timeEnd;
 
     /**
-     * Constructor for duke.Event class
+     * Constructor for Event class
      *
      * @param d     a string representing a description of the task
      * @param date  the date of the task

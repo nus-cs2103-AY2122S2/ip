@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a task without a time or date and has the same behavior as parent class duke.Task.
+ * Represents a task without a time or date and has the same behavior as parent class Task.
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */

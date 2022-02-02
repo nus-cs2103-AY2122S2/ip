@@ -127,13 +127,12 @@ public class Parser {
     }
 
     /**
-     * Parses the message contents and returns the suitable duke.Task object.
+     * Parses the message contents and returns the suitable Task object.
      *
      * @param message the message from the User
      * @param type    The type of the task
-     * @return duke.Task object
+     * @return Task object
      */
-    @SuppressWarnings("checkstyle:Regexp")
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
         LocalDate date;
         LocalTime timeBegin;
@@ -264,13 +263,13 @@ public class Parser {
         throw new DukeException("Pardon me, but the description of a todo cannot be empty.");
     }
     private void throwWrongDeadlineFormatException() throws DukeException {
-        throw new DukeException("Pardon me, but the duke.Deadline format is incorrect."
+        throw new DukeException("Pardon me, but the Deadline format is incorrect."
             + " The format should be:\n\t[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\""
             + " empty if no time in current task)");
     }
 
     private void throwWrongEventFormatException() throws DukeException {
-        throw new DukeException("Pardon me, but the duke.Event format is incorrect."
+        throw new DukeException("Pardon me, but the Event format is incorrect."
             + " The format should be:\n\t[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
     }
     private void throwEmptyDescriptionException() throws DukeException {

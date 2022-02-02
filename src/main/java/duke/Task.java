@@ -11,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for duke.Task class
+     * Constructor for Task class
      *
      * @param d a string representing a description of the task
      */

@@ -1,14 +1,14 @@
 package duke;
 
 /**
- * Exception class for handling errors in duke.Duke Project
+ * Exception class for handling errors in Duke Project
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructor of duke.DukeException class
+     * Constructor of DukeException class
      *
      * @param message Error message to be displayed
      */
