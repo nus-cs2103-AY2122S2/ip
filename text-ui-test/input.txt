@@ -1,6 +1,6 @@
-go get a coffee
-meditate
-eat caifan
+todo go get a coffee
+todo meditate
+todo eat caifan
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 bye

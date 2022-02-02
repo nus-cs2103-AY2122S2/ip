@@ -1,5 +1,7 @@
 import java.util.*;
 
+import exception.DukeException;
+
 public class Duke {
 
     /**
@@ -77,43 +79,64 @@ public class Duke {
                 System.out.println("        [ ] " + currTask.getDescription());
             } else if (command[0].equals("deadline")) {
                 // deadline make some cups /by the day after
-
-                String[] deadlineInput = input.split("/by");
-                String deadline = deadlineInput[1];
-                String left = deadlineInput[0];
-                String description = left.substring(9, left.length() - 1);
-                // create a new deadline
-                Task newTask = new Deadlines(description, deadline);
-                // adding to the array
-                list[counter] = newTask;
-                ++counter;
-                System.out.println(LINE_BREAK);
-                System.out.println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
-                System.out.println("Now you have " + counter + " tasks in the list. \n");
+                if (command.length == 1) {
+                    DukeException e = new DukeException("bro why la");
+                    System.err.println(e.getMessage());
+                } else {
+                    String[] deadlineInput = input.split("/by");
+                    String deadline = deadlineInput[1];
+                    String left = deadlineInput[0];
+                    String description = left.substring(9, left.length() - 1);
+                    // create a new deadline
+                    Task newTask = new Deadlines(description, deadline);
+                    // adding to the array
+                    list[counter] = newTask;
+                    ++counter;
+                    System.out.println(LINE_BREAK);
+                    System.out
+                            .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
+                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                }
             } else if (command[0].equals("event")) {
 
                 // event project meeting /at Mon 2-4pm
-
-                String[] deadlineInput = input.split("/at");
-                String deadline = deadlineInput[1];
-                String left = deadlineInput[0];
-                String description = left.substring(6, left.length() - 1);
-                // create a new deadline
-                Task newTask = new Events(description, deadline);
-                // adding to the array
-                list[counter] = newTask;
-                ++counter;
-                System.out.println(LINE_BREAK);
-                System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
-                System.out.println("Now you have " + counter + " tasks in the list. \n");
-            } else {
+                if (command.length == 1) {
+                    DukeException e = new DukeException("OOPS!!! The description of an event cannot be empty.");
+                    System.out.println(LINE_BREAK);
+                    System.out.println(e.getMessage());
+                } else {
+                    String[] deadlineInput = input.split("/at");
+                    String deadline = deadlineInput[1];
+                    String left = deadlineInput[0];
+                    String description = left.substring(6, left.length() - 1);
+                    // create a new deadline
+                    Task newTask = new Events(description, deadline);
+                    // adding to the array
+                    list[counter] = newTask;
+                    ++counter;
+                    System.out.println(LINE_BREAK);
+                    System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
+                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                }
+            } else if (command[0].equals("todo")) {
                 // here we declare the new task to be added (TODO)
-                Task t = new ToDos(input);
 
-                list[counter] = t;
-                System.out.println(LINE_BREAK);
-                System.out.println(" ok added alr bro: " + input);
-                ++counter;
+                if (command.length == 1) {
+                    DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(LINE_BREAK);
+                    System.out.println(e.getMessage());
+                } else {
+
+                    Task t = new ToDos(input);
+
+                    list[counter] = t;
+                    System.out.println(LINE_BREAK);
+                    System.out.println(" ok added alr bro: " + input);
+                    ++counter;
+                }
+            } else {
+                DukeException e = new DukeException("Tak faham banggg, speak in my language la bayi....");
+                System.out.println(e.getMessage());
             }
         }
     }
