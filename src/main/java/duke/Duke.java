@@ -36,16 +36,32 @@ public class Duke {
             output += list.toString();
             break;
         case MARK:
-            indexOfList = Integer.parseInt(parsedInputs[0]);
-            list.markComplete(indexOfList);
-            output += "Marked as complete \n";
-            output += list.toString(indexOfList);
+            try {
+                indexOfList = Integer.parseInt(parsedInputs[0]);
+                list.markComplete(indexOfList);
+                output += "Marked as complete \n";
+                output += list.toString(indexOfList);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                output += "Integer required for Unmark command";
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                output += "Integer provided is not in the list";
+            }
             break;
         case UNMARK:
-            indexOfList = Integer.parseInt(parsedInputs[0]);
-            list.markIncomplete(indexOfList);
-            output += "Marked as incomplete \n";
-            output += list.toString(indexOfList);
+            try {
+                indexOfList = Integer.parseInt(parsedInputs[0]);
+                list.markIncomplete(indexOfList);
+                output += "Marked as incomplete \n";
+                output += list.toString(indexOfList);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                output += "Integer required for Unmark command";
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                output += "Integer provided is not in the list";
+            }
             break;
         case EVENT:
             try {
