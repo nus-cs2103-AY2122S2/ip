@@ -9,6 +9,9 @@ import java.time.temporal.ChronoField;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A class encapsulating various parsing functions.
+ */
 public class Parser {
     private static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
@@ -25,10 +28,18 @@ public class Parser {
 
     private DateTimeFormatter dtFormatter;
 
+    /**
+     * Creates a new Parser instance that uses the given DateTimeFormatter to parse date-time strings.
+     * 
+     * @param dateTimeFormatter DateTimeFormatter to be used for parsing date-time strings
+     */
     public Parser(DateTimeFormatter dateTimeFormatter) {
         this.dtFormatter = dateTimeFormatter;
     }
 
+    /**
+     * Cretes a new Parser instance that uses the default DateTimeFormatter to parse date-time strings.
+     */
     public Parser() {
         this(DEFAULT_DATE_TIME_FORMATTER);
     }
@@ -69,6 +80,13 @@ public class Parser {
     }
 
     // er, probably not the best place for this, but whatever
+    /**
+     * Parses a LocalDateTime from a given date-time string.
+     * 
+     * @param dateTimeString a string containing a date and time to be parsed
+     * @return a parsed date/time in the form of a LocalDateTime instances
+     * @throws DateTimeParseException if dateTimeString contains an unrecognized date-time format
+     */
     public LocalDateTime parseDateTime(String dateTimeString) throws DateTimeParseException {
         return LocalDateTime.parse(dateTimeString, this.dtFormatter);
     }

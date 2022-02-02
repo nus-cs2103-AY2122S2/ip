@@ -16,6 +16,9 @@ import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 import li.zhongfu.cs2103.chatbot.types.ui.ParserResult;
 import li.zhongfu.cs2103.chatbot.types.ui.UserInterface;
 
+/**
+ * A chat bot.
+ */
 public class Duke {
     private final String botName;
 
@@ -23,6 +26,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates a new Duke instance with the given chatbot name and Task storage path.
+     * 
+     * @param botName the name of the chatbot
+     * @param filePath the path for Task persistent storage
+     */
     public Duke(String botName, String filePath) {
         this.botName = botName;
         this.ui = new UserInterface(System.in, System.out);
@@ -30,6 +39,13 @@ public class Duke {
         this.init();
     }
 
+    /**
+     * Creates a new Duke instance with the given chatbot name.
+     * 
+     * Uses the default Task storage path.
+     * 
+     * @param botName the name of the chatbot
+     */
     public Duke(String botName) {
         this(botName, "data/tasks.dat");
     }
@@ -53,6 +69,11 @@ public class Duke {
         });
     }
 
+    /**
+     * Runs the chatbot REPL loop.
+     * 
+     * @throws IOException if there was an error reading user input or printing messages to the output
+     */
     public void loop() throws IOException {
         while (true) {
             try {
@@ -168,6 +189,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method.
+     * 
+     * @param args command line args
+     */
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("Duke");
         duke.loop();

@@ -18,21 +18,42 @@ import java.util.logging.Logger;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
 
+/**
+ * A class that presents an interface for loading and storing serializable objects to a file.
+ */
 public class Storage {
     private static Logger logger = Logger.getLogger(Storage.class.getName());
 
     private final File DATA_FILE;
     private final ObjectInputFilter OBJECT_FILTER;
 
+    /**
+     * Creates a new Storage instance with the given data file path and object filter.
+     * 
+     * @param filePath the path to load objects from, or save objects to
+     * @param objectFilter the ObjectInputFilter to use when loading objects from file
+     */
     public Storage(String filePath, ObjectInputFilter objectFilter) {
         this.DATA_FILE = new File(filePath);
         this.OBJECT_FILTER = objectFilter;
     }
     
+    /**
+     * Creates a new Storage instance with the given data file path.
+     * 
+     * @param filePath the path to load objects from, or save objects to
+     */
     public Storage(String filePath) {
         this(filePath, TaskFilter::checkInput);
     }
 
+    /**
+     * Loads objects from the configured file path.
+     * 
+     * @return a list of loaded objects
+     * @throws FileNotFoundException if the configured file path does not exist
+     * @throws StorageException if there was any error while loading objects, e.g. objects rejected by filter
+     */
     public List<Object> load() throws FileNotFoundException, StorageException {
         List<Object> objs = new ArrayList<>();
 
@@ -59,6 +80,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves objects to the configured file path.
+     * 
+     * @param objs a list of Serializable objects to save
+     * @throws IOException if there was an error while saving objects
+     */
     public void save(List<? extends Object> objs) throws IOException {
         File parent = this.DATA_FILE.getParentFile();
         parent.mkdirs(); // attempt to make all parent dirs, and ignore if already exists
