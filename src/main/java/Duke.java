@@ -1,3 +1,4 @@
+import duke.command.ClearTaskCommand;
 import duke.command.Command;
 import duke.command.SetupCommand;
 import duke.exception.DukeException;
@@ -25,6 +26,7 @@ public class Duke {
             new SetupCommand().execute(ui, taskList, storage);
         } catch (DukeException exception) {
             ui.showErrorMessage(exception.getMessage());
+            new ClearTaskCommand().execute(ui, taskList, storage);
         }
         
         boolean isQuitting = false;

@@ -7,6 +7,7 @@ import duke.command.AddDeadlineTaskCommand;
 import duke.command.AddEventTaskCommand;
 import duke.command.AddToDoTaskCommand;
 import duke.command.ByeCommand;
+import duke.command.ClearTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteTaskCommand;
 import duke.command.FindTaskCommand;
@@ -35,6 +36,8 @@ public class Parser {
             switch (commandTokens[0]) {
             case "bye":
                 return new ByeCommand();
+            case "clear":
+                return new ClearTaskCommand();
             case "list":
                 return new ListTaskCommand();
             case "find":

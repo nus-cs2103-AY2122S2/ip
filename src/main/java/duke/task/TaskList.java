@@ -173,4 +173,14 @@ public class TaskList {
         
         return taskToBeDeleted;
     }
+
+    /**
+     * Removes all tasks from the task list.
+     */
+    public void clear() {
+        while (numberOfTasks != 0) {
+            tasks.remove(numberOfTasks - 1);
+            numberOfTasks--;
+        }
+    }
 }

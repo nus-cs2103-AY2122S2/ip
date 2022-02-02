@@ -22,7 +22,7 @@ public class Task {
      * 
      * @return the icon representing the status (done/not done) of this task.
      */
-    protected String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark task that is done with X
     }
 
