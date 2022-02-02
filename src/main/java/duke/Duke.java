@@ -1,10 +1,9 @@
+package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.io.Storage;
-import duke.parser.Parser;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,39 +12,38 @@ public class Duke {
 
     private static TaskList taskList;
     private static Storage storage;
-    private static final Ui ui = new Ui();
 
     private Duke() {
         storage = new Storage();
         try {
             taskList = storage.importTasks();
         } catch (IOException e) {
-            ui.print(ui.MSG_FILEREADERROR);
+            Ui.print(Ui.MSG_FILEREADERROR);
         }
     }
 
     public void run() {
-        final Parser parser = new Parser(ui, storage);
+        final Parser parser = new Parser(storage);
         final Scanner sc = new Scanner(System.in);
-        ui.printWelcome();
+        Ui.printWelcome();
         boolean status = true;
         String inputTxt;
         while (status && sc.hasNext()) {
             try {
                 inputTxt = sc.nextLine();
                 Command c = parser.parse(inputTxt);
-                c.execute(taskList, ui, storage);
-                status = c.isExit();
+                c.execute(taskList, storage);
+                status = !c.isExit();
             } catch (DukeException e) {
-                ui.print(e.getMessage());
+                Ui.print(e.getMessage());
             } catch (IOException e) {
-                ui.printFileWriteError();
+                Ui.print(Ui.MSG_FILEWRITEERROR);
             }
         }
-        ui.printExit();
+        Ui.printExit();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke().run();
     }
 }

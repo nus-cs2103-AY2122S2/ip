@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.Ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -28,27 +28,26 @@ public class AddCommand extends Command{
         this.time = time;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public void execute(TaskList taskList, Storage storage) throws IOException, DukeException {
         int taskId = -1;
         switch (commandType) {
         case TODO:
             taskId = taskList.addToDo(description);
-            ui.print(ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
+            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         case DEADLINE:
             taskId = taskList.addDeadline(description, date, time);
-            ui.print(ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
+            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         case EVENT:
             taskId = taskList.addEvent(description, date, time);
-            ui.print(ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
+            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         default:
             break;
         }
 
-
-        ui.print(ui.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1));
+        Ui.print(Ui.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1));
         storage.writeToFile(taskList);
     }
 }

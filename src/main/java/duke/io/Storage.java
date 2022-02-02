@@ -1,10 +1,10 @@
 package duke.io;
 
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.Parser;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Storage {
 
     public static final String PATH = String.join(File.separator,"data","duke.txt");
-    private File file;
+    private final File file;
 
     public Storage() {
         this.file = new File(PATH);
@@ -28,7 +28,7 @@ public class Storage {
 
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(PATH);
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         for (Task task : tasks.getTaskList()) {
             result.append(task.formatToSave()).append("\n");
         }

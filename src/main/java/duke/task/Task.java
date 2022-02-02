@@ -1,12 +1,5 @@
 package duke.task;
 
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public abstract class Task {
     protected String description;
     protected boolean isDone;

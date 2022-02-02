@@ -3,18 +3,18 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.Ui;
 
 public class ListCommand extends Command{
 
     public ListCommand() {
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         if (taskList.isEmpty()) {
-            throw new DukeException(ui.MSG_EMPTYTASK);
+            throw new DukeException(Ui.MSG_EMPTYTASK);
         } else {
-            ui.print(ui.taskListMsg(taskList));
+            Ui.print(Ui.taskListMsg(taskList));
         }
     }
 
