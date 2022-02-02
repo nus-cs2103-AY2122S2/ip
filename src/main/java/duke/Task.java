@@ -2,17 +2,29 @@ package duke;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * parent class for task
+ */
 public class Task {
     protected String d;
     protected String type;
     protected boolean isDone;
     protected final DateTimeFormatter OUT_DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * constructor for Task
+     * @param d task descriptiom
+     */
     public Task(String d) {
         this.d = d;
         this.isDone = false;
     }
 
+    /**
+     * constructor for Task
+     * @param d task description
+     * @param done check if task is done
+     */
     public Task(String d, String done){
         this.d = d;
         if(done.equals("1")) {
@@ -22,6 +34,10 @@ public class Task {
         }
     }
 
+    /**
+     * method to return the description of the task
+     * @return A string representing the description
+     */
     public String getDescription(){
         return this.d;
     }

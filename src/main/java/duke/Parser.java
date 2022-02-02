@@ -4,9 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * to understand user input commands
+ */
 public class Parser {
     public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Method to parse input
+     * @param input input string
+     * @return a command
+     * @throws Exception_handler
+     */
     public static Command parse(String input) throws Exception_handler {
         String[] temp = input.split(" ");
         if (temp[0].equals("todo")) {

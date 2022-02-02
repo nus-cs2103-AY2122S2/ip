@@ -19,6 +19,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * method to load tasks from file
+     * @return a List<Task> which has tasks loaded from the file
+     */
     public List<Task> load() {
         List<Task> tempList = new ArrayList<>();
         File file = new File(filePath);
@@ -50,6 +54,11 @@ public class Storage {
         return tempList;
     }
 
+    /**
+     * method to write to file
+     * @param tasks tasks to be written to the file
+     * @throws IOException
+     */
     public void writeToFile(List<Task> tasks) throws IOException {
         File file = new File(filePath);
         PrintWriter pw = new PrintWriter(file);
