@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.managers.Storage;
 import duke.managers.Ui;
 import duke.tasks.TaskList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a find command recognized by the parser.
- * FindCommand object stores a String that is to be used for searching. Upon
+ * It stores a String that is to be used for searching. Upon
  * execution of the object, it will attempt to search for tasks in the task list
  * with description matching that of searchString.
  */
@@ -17,13 +18,36 @@ public class FindCommand extends Command {
     protected String searchString;
 
     /**
-     * Creates an instance of a FindCommand object.
+     * Handles user input and stores the String that is used to search for
+     * tasks with matching substrings.
      *
-     * @param searchString the String that is used to search for
-     *                     tasks with matching substrings.
+     * @param tokens a String array that represents the user input.
+     * @throws DukeException when the user input provided is insufficient to filter the tasks.
      */
-    public FindCommand(String searchString) {
-        this.searchString = searchString;
+    @Override
+    public void handleParam(String[] tokens) throws DukeException {
+        if (tokens.length < 2)
+            throw new DukeException("Invalid input! Please specify a description for the tasks to search!");
+        String searchString = "";
+        for (String token : tokens) {
+            if (token.equals("find")) {
+                continue;
+            }
+            else {
+                searchString += " " + token;
+            }
+        }
+        this.searchString = searchString.trim();
+    }
+
+    /**
+     * Returns a boolean that specifies whether the user input matches the Command.
+     *
+     * @return a boolean that indicates whether this object is the correct Command.
+     */
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("find");
     }
 
     /**

@@ -6,20 +6,20 @@ import duke.tasks.TaskList;
 import duke.managers.Ui;
 
 /**
- * Represents a event command recognized by the parser.
- * Upon execution, StoreEventCommand objects will attempt to store a event into
+ * Represents an event command recognized by the parser.
+ * Upon execution, it will attempt to store an event into
  * the task list.
- * StoreEventCommand object stores the tokens which represents the input of the user.
  */
 public class StoreEventCommand extends StoreCommand {
 
     /**
-     * Creates an instance of a StoreEventCommand object.
+     * Returns a boolean that specifies whether the user input matches the Command.
      *
-     * @param tokens represents the input that was given by the user
+     * @return a boolean that indicates whether this object is the correct Command.
      */
-    public StoreEventCommand(String[] tokens) {
-        super(tokens);
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("event");
     }
 
     /**

@@ -14,6 +14,24 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
 
     /**
+     * This command does not need any additional user input.
+     *
+     * @param tokens a String array that represents the user input.
+     */
+    @Override
+    public void handleParam(String[] tokens) { }
+
+    /**
+     * Returns a boolean that specifies whether the user input matches the Command.
+     *
+     * @return a boolean that indicates whether this object is the correct Command.
+     */
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("list");
+    }
+
+    /**
      * Executes the ListCommand object.
      *
      * @param taskList a container of existing tasks in the program.

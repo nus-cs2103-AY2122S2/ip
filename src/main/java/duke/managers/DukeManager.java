@@ -1,7 +1,7 @@
 package duke.managers;
 
+import duke.commands.*;
 import duke.exceptions.DukeException;
-import duke.commands.Command;
 import duke.tasks.TaskList;
 
 /**
@@ -14,6 +14,7 @@ public class DukeManager {
     protected Storage storage;
     protected TaskList taskList;
     protected Ui ui;
+    protected Parser parser;
 
     /**
      * Creates an instance of DukeManager.
@@ -24,7 +25,9 @@ public class DukeManager {
     public DukeManager(String storagePath) {
         storage = new Storage(storagePath);
         ui = new Ui();
+        parser = new Parser();
 
+        initializeCommands();
         try {
             taskList = storage.load();
         } catch (DukeException e) {
@@ -34,12 +37,27 @@ public class DukeManager {
     }
 
     /**
+     * Initializes all the commands that should be recognized by Duke.
+     * Further extensions in regard to new commands should be done here.
+     */
+    protected void initializeCommands() {
+        parser.addCommand(new DeleteCommand());
+        parser.addCommand(new ExitCommand());
+        parser.addCommand(new FindCommand());
+        parser.addCommand(new ListCommand());
+        parser.addCommand(new MarkCommand(true));
+        parser.addCommand(new MarkCommand(false));
+        parser.addCommand(new StoreDeadlineCommand());
+        parser.addCommand(new StoreEventCommand());
+        parser.addCommand(new StoreTodoCommand());
+    }
+
+    /**
      * Executes the program loop of Duke.
      */
     public void run() {
         ui.greet();
         boolean exited = false;
-        Parser parser = new Parser();
         while (!exited) {
             try {
                 String input = ui.getInput();

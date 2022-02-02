@@ -6,23 +6,54 @@ import duke.managers.Storage;
 import duke.exceptions.DukeException;
 /**
  * Represents a mark command recognized by the parser.
- * MarkCommand object stores the index of the task that is to be marked/unmarked. Upon
+ * It stores the index of the task that is to be marked/unmarked. Upon
  * execution of the object, it will attempt to mark/unmark the indexed task in the
  * task list.
  */
 public class MarkCommand extends Command {
+
     protected boolean isMark;
     protected int index;
 
     /**
-     * Creates an instance of a MarkCommand object.
+     * Creates a MarkCommand object.
      *
-     * @param index the index of the task that is to be marked/unmarked.
-     * @param isMark the boolean which determines if a task is to be marked or unmarked.
+     * @param isMark determines whether to mark or unmark a task upon command execution.
      */
-    public MarkCommand(int index, Boolean isMark) {
+    public MarkCommand(boolean isMark) {
         this.isMark = isMark;
+    }
+
+    /**
+     * Handles user input and stores the index of the task that
+     * is to be marked/unmarked.
+     *
+     * @param tokens a String array that represents the user input.
+     * @throws DukeException when the input provided is not a valid index.
+     */
+    @Override
+    public void handleParam(String[] tokens) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (Exception exception) {
+            throw new DukeException("Invalid input! Please enter the number of the task you want to mark/unmark.");
+        }
         this.index = index;
+    }
+
+    /**
+     * Returns a boolean that specifies whether the user input matches the Command.
+     *
+     * @return a boolean that indicates whether this object is the correct Command.
+     */
+    @Override
+    public boolean checkIdentifier(String input) {
+        if (isMark) {
+            return input.equals("mark");
+        } else {
+            return input.equals("unmark");
+        }
     }
 
     /**
@@ -34,6 +65,7 @@ public class MarkCommand extends Command {
      *           used to print notifications to the user.
      * @param storage a manager that deals with storing and loading of files,
      *                used to save changes to taskList to file.
+     * @throws DukeException when the index provided by the user is invalid.
      */
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {

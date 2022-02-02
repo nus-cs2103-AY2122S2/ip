@@ -7,19 +7,19 @@ import duke.exceptions.DukeException;
 
 /**
  * Represents a deadline command recognized by the parser.
- * Upon execution, StoreDeadlineCommand objects will attempt to store a deadline into
+ * Upon execution, it will attempt to store a deadline into
  * the task list.
- * StoreDeadlineCommand object stores the tokens which represents the input of the user.
  */
 public class StoreDeadlineCommand extends StoreCommand {
 
     /**
-     * Creates an instance of a StoreDeadlineCommand object.
+     * Returns a boolean that specifies whether the user input matches the Command.
      *
-     * @param tokens represents the input that was given by the user
+     * @return a boolean that indicates whether this object is the correct Command.
      */
-    public StoreDeadlineCommand(String[] tokens) {
-        super(tokens);
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("deadline");
     }
 
     /**

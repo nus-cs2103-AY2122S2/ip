@@ -7,19 +7,19 @@ import duke.managers.Ui;
 
 /**
  * Represents a todo command recognized by the parser.
- * Upon execution, StoreTodoCommand objects will attempt to store a todo into
+ * Upon execution, it will attempt to store a todo into
  * the task list.
- * StoreTodoCommand object stores the tokens which represents the input of the user.
  */
 public class StoreTodoCommand extends StoreCommand {
 
     /**
-     * Creates an instance of a StoreTodoCommand object.
+     * Returns a boolean that specifies whether the user input matches the Command.
      *
-     * @param tokens represents the input that was given by the user
+     * @return a boolean that indicates whether this object is the correct Command.
      */
-    public StoreTodoCommand(String[] tokens) {
-        super(tokens);
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("todo");
     }
 
     /**

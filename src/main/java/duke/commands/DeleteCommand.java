@@ -6,7 +6,7 @@ import duke.managers.Storage;
 import duke.exceptions.DukeException;
 /**
  * Represents a delete command recognized by the parser.
- * DeleteCommand object stores the index of the task that is to be deleted. Upon
+ * It stores the index of the task that is to be deleted. Upon
  * execution of the object, it will attempt to remove the indexed task from the
  * task list.
  */
@@ -14,12 +14,30 @@ public class DeleteCommand extends Command {
     protected int index;
 
     /**
-     * Creates an instance of a DeleteCommand object.
+     * Handles user input and stores the index of the task to be deleted.
      *
-     * @param index the index of the task that is to be deleted.
+     * @param tokens a String array that represents the user input.
+     * @throws DukeException when the input provided is not a valid index.
      */
-    public DeleteCommand(int index) {
+    @Override
+    public void handleParam(String[] tokens) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (Exception exception) {
+            throw new DukeException("Invalid input! Please enter the number of the task you want to delete.");
+        }
         this.index = index;
+    }
+
+    /**
+     * Returns a boolean that specifies whether the user input matches the Command.
+     *
+     * @return a boolean that indicates whether this object is the correct Command.
+     */
+    @Override
+    public boolean checkIdentifier(String input) {
+        return input.equals("delete");
     }
 
     /**
@@ -31,6 +49,7 @@ public class DeleteCommand extends Command {
      *           used to print notifications to the user.
      * @param storage a manager that deals with storing and loading of files,
      *                used to save changes to taskList to file.
+     * @throws DukeException when the index provided by the user is invalid.
      */
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
