@@ -48,11 +48,23 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Displays text and img in a set format by the User.
+     * @param text to be displayed alongside image
+     * @param img to be displayed alongside text
+     * @return Formatted image and text by the User
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Displays text and img in a set format by Karen.
+     * @param text to be displayed alongside image
+     * @param img to be displayed alongside text
+     * @return Formatted image and text by Karen
+     */
+    public static DialogBox getKarenDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

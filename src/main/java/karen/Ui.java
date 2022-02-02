@@ -12,23 +12,9 @@ import java.util.Scanner;
  * Partially adapted from: https://github.com/se-edu/addressbook-level2
  */
 public class Ui {
-    public static final String STD_DIVIDER = "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
-    public static final String ERR_DIVIDER = "------------------------------------------------";
     public static final String WELCOME = "Hello, my name is Karen.\nI'll be speaking (to) as your manager today.";
     public static final String GOODBYE = "Goodbye - I'll be seeing your manager's manager next.\nI'll remember this.";
     public static final String NO_TASKS = "Nothing can be found.";
-
-    private final Scanner in;
-    private final PrintStream out;
-
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-    }
 
     /**
      * Gets formatted string of item at (1-based) index.
@@ -53,31 +39,6 @@ public class Ui {
     public String formatCount(String action, Task item, int count) {
         return String.format("Fine. Task %s:\n %s\nNow you have %d in total.",
                 action, item.toString(), count);
-    }
-
-    /**
-     * Gets input from user.
-     * @return String input from user
-     */
-    public String readInput() {
-        String fullCommand = this.in.nextLine();
-        return fullCommand;
-    }
-
-    /**
-     * Prints welcome message
-     */
-    public String showWelcome() {
-        // more customisation and cleanup in future
-        return String.format("%s\n\n", WELCOME);
-    }
-
-    /**
-     * Prints goodbye message
-     */
-    public String showGoodbye() {
-        // more customisation and cleanup in future
-        return String.format("%s", GOODBYE);
     }
 
     /**
@@ -111,7 +72,7 @@ public class Ui {
         }
 
         // If the taskList is empty, return with default message
-        if (taskList.size()==0) {
+        if (taskList.size() == 0) {
             formatString.append(NO_TASKS);
         }
         return formatString.toString();

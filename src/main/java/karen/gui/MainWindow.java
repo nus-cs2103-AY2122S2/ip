@@ -14,8 +14,6 @@ import javafx.util.Duration;
 import karen.Karen;
 import karen.Ui;
 
-import java.util.Objects;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  * Adapted from: https://se-education.org/guides/tutorials/javaFxPart4.html
@@ -42,7 +40,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(Ui.WELCOME, dukeImage)
+                DialogBox.getKarenDialog(Ui.WELCOME, dukeImage)
         );
     }
 
@@ -63,7 +61,7 @@ public class MainWindow extends AnchorPane {
         String response = this.karen.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getKarenDialog(response, dukeImage)
         );
         userInput.clear();
 

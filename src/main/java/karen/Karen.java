@@ -17,25 +17,11 @@ public class Karen {
     }
 
     /**
-     * Access point for Karen application to manage the start, parsing and
-     * termination of application.
+     * Receives input from user. Executes the command based on the input
+     * and returns the result to be displayed to the GUI.
+     * @param fullInput input by the user
+     * @return Response string
      */
-    public void start() {
-        boolean isExit = false;
-
-        ui.showWelcome();
-        while (!isExit) {
-            try {
-                String fullInput = ui.readInput();
-                Command cmd = parser.parseInput(fullInput);
-                cmd.execute(ui, storage);
-                isExit = cmd.isExit();
-            } catch (KarenException err) {
-                ui.displayUserInput(err.message);
-            }
-        }
-    }
-
     public String getResponse(String fullInput) {
         String response;
         try {
