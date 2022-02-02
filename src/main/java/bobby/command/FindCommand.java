@@ -17,9 +17,17 @@ public class FindCommand extends Command {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param tasks   TaskList object containing a list of Tasks.
+     * @param ui      Ui object to allow for Bobby to print messages.
+     * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
+     * @throws BobbyException
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         if (fullCommand.substring(4).isBlank()) {
             throw new FindException("empty_command");
         } else if (tasks.isEmpty()) {
@@ -33,9 +41,15 @@ public class FindCommand extends Command {
             }
         }
         TaskList tempTaskList = new TaskList(tempTasks);
-        ui.printFindTaskList(tempTaskList);
+        return ui.printFindTaskList(tempTaskList);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param obj The other Command object to compare with.
+     * @return True if both objects are FindCommand objects. False otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof FindCommand;

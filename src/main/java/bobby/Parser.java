@@ -13,7 +13,11 @@ import bobby.command.ToDoCommand;
 import bobby.command.UnmarkCommand;
 
 public class Parser {
-
+    /**
+     * Parses the command to allow Bobby to understand input.
+     * @param fullCommand The command the user inputs.
+     * @return The right Command object for execution.
+     */
     public static Command parse(String fullCommand) {
         String[] fullCommandArr = fullCommand.split(" ");
         Command command;

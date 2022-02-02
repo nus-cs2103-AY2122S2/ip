@@ -45,19 +45,19 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         if (fullCommand.substring(8).isBlank()) { // nothing after command
             throw new DeadlineException("blank");
-        } else if (!fullCommand.contains("/")) {  // no "/"
+        } else if (!fullCommand.contains("/")) { // no "/"
             throw new DeadlineException("no_slash");
         } else if (fullCommand.substring(fullCommand.indexOf("/") + 1).isBlank()) { // nothing after time
             throw new DeadlineException("no_date");
@@ -67,10 +67,9 @@ public class DeadlineCommand extends Command {
         Deadline newDeadline = new Deadline(fullCommand.substring(fullCommand.indexOf(" ") + 1,
                 fullCommand.indexOf("/") - 1),
                 fullCommand.substring(fullCommand.length() - 10));
-        ui.deadlineMessage(newDeadline);
         tasks.addTask(newDeadline);
         storage.saveTasks(tasks.getTaskList());
-        ui.printNumTasks(tasks);
+        return ui.deadlineMessage(newDeadline) + "\n" + ui.printNumTasks(tasks);
     }
 
     /**

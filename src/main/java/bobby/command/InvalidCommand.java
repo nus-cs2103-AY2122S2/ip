@@ -16,15 +16,16 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.invalidMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.invalidMessage();
     }
 
     /**

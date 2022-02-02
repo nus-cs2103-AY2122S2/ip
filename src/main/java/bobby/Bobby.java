@@ -11,10 +11,13 @@ import bobby.task.TaskList;
 
 public class Bobby {
     private static final String FILE_LOCATION = "./Bobby.txt";
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private static Ui ui;
+    private static Storage storage;
+    private static TaskList tasks;
 
+    /**
+     * Constructor for Bobby
+     */
     public Bobby() {
         ui = new Ui(new Scanner(System.in));
         try {
@@ -25,6 +28,9 @@ public class Bobby {
         }
     }
 
+    /**
+     * Driver method for Bobby
+     */
     public void run() {
         ui.printLogo();
         ui.printGreeting();
@@ -37,14 +43,30 @@ public class Bobby {
                     break;
                 }
             } catch (BobbyException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             } finally {
                 ui.printLongLine(2);
             }
         }
     }
 
+    /**
+     * Main method of Bobby
+     *
+     * @param args User inputs
+     */
     public static void main(String[] args) {
         new Bobby().run();
+    }
+
+    public static String getResponse(String input) {
+        String replyMessage;
+        try {
+            Command c = Parser.parse(input);
+            replyMessage = c.execute(tasks, ui, storage);
+        } catch (BobbyException e) {
+            replyMessage = e.toString();
+        }
+        return replyMessage;
     }
 }

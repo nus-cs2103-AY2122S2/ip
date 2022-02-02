@@ -13,22 +13,22 @@ public class DeleteException extends BobbyException {
         String errorMsg;
         switch (errType) {
         case "empty":
-            errorMsg = "\tDelete which task?";
+            errorMsg = "Delete which task?\nTell me by inputting delete {number}";
             break;
         case "letter":
-            errorMsg = "\tThat is neither a number nor \"all\"";
+            errorMsg = "That is neither a number nor \"all\"";
             break;
         case "OOB":
-            errorMsg = "\tNumber too big, count properly!";
+            errorMsg = "Number too big, count properly!";
             break;
         case "negative":
-            errorMsg = "\tInvalid number man, cannot be 0 or negative";
+            errorMsg = "Invalid number man, cannot be 0 or negative";
             break;
         case "list_empty":
-            errorMsg = "\tList is already empty, nothing to delete";
+            errorMsg = "List is already empty, nothing to delete";
             break;
         default:
-            errorMsg = "\tI cannot understand this..";
+            errorMsg = "I cannot understand this..";
         }
         return errorMsg;
     }

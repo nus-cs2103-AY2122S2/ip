@@ -21,9 +21,9 @@ public class Ui {
            + "─████████████████─██████████████─████████████████─████████████████───────██████───────\n";
     private final String line1 = "\t====================================================================\n";
     private final String line2 = "\t====================================================================";
-    private final String greeting = "\tHowdy! I'm Bobby\t\t(｡◕‿‿◕｡)\n\tWhat can I do for you?";
-    private final String goodbye = "\tBye! Hope to see you again soon! (｡^‿‿^｡)";
-    private final String invalid = "\tInvalid command!   (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)";
+    private final String greeting = "Howdy! I'm Bobby\t\t(｡◕‿‿◕｡)\nWhat can I do for you?";
+    private final String goodbye = "Bye! Hope to see you again soon!\n(｡^‿‿^｡)";
+    private final String invalid = "Invalid command!\n(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)";
 
     public Ui(Scanner sc) {
         this.sc = sc;
@@ -55,84 +55,80 @@ public class Ui {
         printLongLine(2);
     }
 
-    public void goodbyeMessage() {
-        printLongLine(1);
-        System.out.println(goodbye);
+    public String goodbyeMessage() {
+        return goodbye;
     }
 
-    public void invalidMessage() {
-        printLongLine(1);
-        System.out.println(invalid);
+    public String invalidMessage() {
+        return invalid;
     }
 
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void markMessage(Task task) {
-        System.out.println("\tFinally... I've marked this task as done:");
-        System.out.println("\t  " + task);
+    public String markMessage(Task task) {
+        return "Finally... I've marked this task as done:" + task;
     }
 
-    public void unmarkMessage(Task task) {
-        System.out.println("\tCould you be any more lazy? I've marked this task as not done yet:");
-        System.out.println("\t  " + task);
+    public String unmarkMessage(Task task) {
+        return "Could you be any more lazy? I've marked this task as not done yet:" + task;
+
     }
 
-    public void todoMessage(Task todo) {
-        System.out.println("\tOK you better do this today, or else... (ㆆ _ ㆆ) Added task:");
-        System.out.println("\t  " + todo);
+    public String todoMessage(Task todo) {
+        return "OK you better do this today, or else... (ㆆ _ ㆆ)\nAdded task:" + todo;
     }
 
-    public void deadlineMessage(Task deadline) {
-        System.out.println("\tOh boy, another deadline? (ㆆ _ ㆆ) Added task:");
-        System.out.println("\t  " + deadline);
+    public String deadlineMessage(Task deadline) {
+        return "Oh boy, another deadline? (ㆆ _ ㆆ)\nAdded task:" + deadline;
     }
 
-    public void eventMessage(Task event) {
-        System.out.println("\tLet's see... A new event! Added task:");
-        System.out.println("\t  " + event);
+    public String eventMessage(Task event) {
+        return "Let's see... A new event!\nAdded task:" + event;
     }
 
-    public void deleteMessage(Task task) {
-        System.out.println("\tAlright I'm deleting this task:");
-        System.out.println("\t  " + task);
+    public String deleteMessage(Task task) {
+        return "Alright I'm deleting this task:\n" + task;
     }
 
-    public void deleteAllMessage() {
-        System.out.println("\tAlright I'm deleting ALL tasks \t(*・‿・)ノ⌒*:･ﾟ✧");
-        System.out.println("\tWow the list is so empty");
+    public String deleteAllMessage() {
+        return "Alright I'm deleting ALL tasks \n(*・‿・)ノ⌒*:･ﾟ✧";
     }
 
-    public void printNumTasks(TaskList tasks) {
-        System.out.println("\t" + "Now you have " + tasks.getSize() + " in the list.");
+    public String printNumTasks(TaskList tasks) {
+        return "Now you have " + tasks.getSize() + " in the list.";
     }
 
-    public void printTaskList(TaskList tasks) {
+    public String printTaskList(TaskList tasks) {
+        String replyMessage;
         Task currTask;
         if (tasks.isEmpty()) {
-            System.out.println("\tWow you are very free now! Enjoy~ ༼ つ ◕_◕ ༽つ");
+            replyMessage = "Wow you are very free now! Enjoy~ \n༼ つ ◕_◕ ༽つ";
         } else {
-            System.out.println("\tI've sorted and put the any deadlines/events to the top for you :)");
-        }
-        for (int i = 0; i < tasks.getSize(); i++) {
-            currTask = tasks.getIndex(i);
-            int index = i + 1;
-            System.out.println("\t" + index + "." + currTask);
-        }
-    }
-
-    public void printFindTaskList(TaskList tasks) {
-        Task currTask;
-        if (tasks.isEmpty()) {
-            System.out.println("\tNo matching tasks in your list \t(≧︿≦)");
-        } else {
-            System.out.println("\tHere are the matching tasks in your list:");
+            replyMessage = "I've sorted and put the any deadlines/events to the top for you :)\n";
             for (int i = 0; i < tasks.getSize(); i++) {
                 currTask = tasks.getIndex(i);
                 int index = i + 1;
-                System.out.println("\t" + index + "." + currTask);
+                replyMessage += index + "." + currTask + "\n";
             }
         }
+        return replyMessage;
+    }
+
+    public String printFindTaskList(TaskList tasks) {
+        String replyMessage;
+        Task currTask;
+        if (tasks.isEmpty()) {
+            replyMessage = "No matching tasks in your list (≧︿≦)";
+        } else {
+            replyMessage = "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < tasks.getSize(); i++) {
+                currTask = tasks.getIndex(i);
+                int index = i + 1;
+                replyMessage += index + "." + currTask + "\n";
+            }
+        }
+        return replyMessage;
     }
 }

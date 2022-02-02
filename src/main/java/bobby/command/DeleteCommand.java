@@ -29,22 +29,23 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+        String replyMessage;
         if (fullCommandArr[1].equalsIgnoreCase("all")) {
             if (tasks.isEmpty()) {
                 throw new DeleteException("list_empty");
             }
             tasks.removeAll();
-            ui.deleteAllMessage();
+            replyMessage = ui.deleteAllMessage();
         } else {
             try {
                 if (fullCommand.substring(6).isBlank()) { // no argument
@@ -58,11 +59,11 @@ public class DeleteCommand extends Command {
                 throw new DeleteException("letter"); // contains letter(s)
             }
             Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
-            ui.deleteMessage(task);
+            replyMessage = ui.deleteMessage(task);
             tasks.removeTask(task);
         }
         storage.saveTasks(tasks.getTaskList());
-        ui.printNumTasks(tasks);
+        return replyMessage + "\n" + ui.printNumTasks(tasks);
     }
 
     /**

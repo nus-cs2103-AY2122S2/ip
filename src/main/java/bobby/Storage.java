@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import bobby.exception.StorageException;
 import bobby.task.Task;
 
-
-
 public class Storage {
     private File bobbyFile;
 
@@ -23,17 +21,17 @@ public class Storage {
 
     @SuppressWarnings("unchecked")
     public ArrayList<Task> loadTasks() throws StorageException, FileNotFoundException {
-        ArrayList<Task> task;
+        ArrayList<Task> tasks;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(bobbyFile));
-            task = (ArrayList<Task>) ois.readObject();
+            tasks = (ArrayList<Task>) ois.readObject();
             ois.close();
         } catch (ClassNotFoundException | FileNotFoundException e) {
             throw new StorageException("no_file");
         } catch (IOException e) {
             throw new StorageException("empty_file");
         }
-        return task;
+        return tasks;
     }
 
     public void saveTasks(ArrayList<Task> tasks) {

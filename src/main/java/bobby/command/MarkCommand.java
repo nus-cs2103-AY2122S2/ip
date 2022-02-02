@@ -28,16 +28,16 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         if (fullCommand.substring(4).isBlank()) { // no argument
             throw new MarkException("empty");
         } else if (Character.isLetter(fullCommand.charAt(5))) { // contains letter instead of number
@@ -53,7 +53,7 @@ public class MarkCommand extends Command {
         }
         task.markDone();
         storage.saveTasks(tasks.getTaskList());
-        ui.markMessage(task);
+        return ui.markMessage(task);
     }
 
     /**

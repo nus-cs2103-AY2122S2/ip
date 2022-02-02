@@ -22,9 +22,10 @@ public abstract class Command {
      * @param tasks   TaskList object containing a list of Tasks.
      * @param ui      Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException;
 
     /**
      * Overrides the default equals() method. Compares if 2 objects are of the same Command type.

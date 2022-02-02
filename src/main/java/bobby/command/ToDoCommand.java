@@ -29,24 +29,23 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         if (fullCommand.substring(4).isBlank()) { // nothing after command
             throw new ToDoException("todo");
         }
         ToDo newToDo = new ToDo(fullCommand.substring(5));
-        ui.todoMessage(newToDo);
         tasks.addTask(newToDo);
         storage.saveTasks(tasks.getTaskList());
-        ui.printNumTasks(tasks);
+        return ui.todoMessage(newToDo) + "\n" + ui.printNumTasks(tasks);
     }
 
     /**

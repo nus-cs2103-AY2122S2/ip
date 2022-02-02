@@ -29,15 +29,16 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Carries out the respective command's actions.
+     * {@inheritDoc}
      *
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
+     * @return Bobby's reply to the command.
      * @throws BobbyException if an invalid command is given by the user's input.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         ui.printLongLine();
         if (fullCommand.substring(4).isBlank()) { // no argument
             throw new MarkException("empty");
@@ -54,7 +55,7 @@ public class UnmarkCommand extends Command {
         }
         task.unmarkDone();
         storage.saveTasks(tasks.getTaskList());
-        ui.unmarkMessage(task);
+        return ui.unmarkMessage(task);
     }
 
     /**

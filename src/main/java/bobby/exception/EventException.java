@@ -13,19 +13,19 @@ public class EventException extends BobbyException {
         String errorMsg;
         switch (errType) {
         case "blank":
-            errorMsg = "\tThere is no description after the event command :(";
+            errorMsg = "There is no description after the event command :(";
             break;
         case "no_slash":
-            errorMsg = "\tI cannot tell the time of the event, put the time after a \"/\"";
+            errorMsg = "I cannot tell the time of the event, put the time after a \"/\"";
             break;
         case "no_date":
-            errorMsg = "\tThere is nothing after the \"/\"! When is this event happening?";
+            errorMsg = "There is nothing after the \"/\"! When is this event happening?";
             break;
         case "invalid_date":
-            errorMsg = "\tWrong date format! I only accept dd-mm-yyyy!";
+            errorMsg = "Wrong date format! I only accept dd-mm-yyyy!";
             break;
         default:
-            errorMsg = "\tI cannot understand this..";
+            errorMsg = "I cannot understand this..";
         }
         return errorMsg;
     }
