@@ -124,6 +124,22 @@ public class Duke {
                     }
                     break;
 
+                case "find":
+                    if (!result.hasNonblankPosArg()) {
+                        throw new DukeException("No search query provided! Try 'find meeting'.");
+                    } else {
+                        TaskList matchingTasks = this.tasks.find(result.getPosArg());
+                        List<String> output = new ArrayList<>();
+                        if (matchingTasks.isEmpty()) {
+                            output.add("No tasks with that query found!");
+                        } else {
+                            output.add(String.format("Tasks containing '%s':", result.getPosArg()));
+                            output.addAll(matchingTasks.toEnumeratedList());
+                        }
+                        this.ui.printDialog(output.toArray(String[]::new));
+                    }
+                    break;
+
                 case "todo":
                 case "deadline":
                 case "event":
