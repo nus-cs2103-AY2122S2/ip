@@ -142,7 +142,7 @@ public class Duke {
      */
     private void run() {
         Storage storageHandler = new Storage();
-        storageHandler.loadTasksFromFile();
+        this.tasks = (ArrayList<Task>) storageHandler.loadTasksFromFile();
 
         Scanner sc = new Scanner(System.in);
 

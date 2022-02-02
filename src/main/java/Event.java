@@ -14,6 +14,16 @@ public class Event extends Task {
         this.metaInfo = metaInfo;
     }
 
+    public Event(boolean isDone, String description, String metaInfo) {
+        super(description);
+        if (isDone) {
+            setDone();
+        } else {
+            setUndone();
+        }
+        this.metaInfo = metaInfo;
+    }
+
     
     /** 
      * @return String "[E]" task icon

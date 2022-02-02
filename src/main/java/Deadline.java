@@ -6,16 +6,26 @@ class Deadline extends Task {
 
     /**
      * Default constructor
+     * 
      * @param description description of the task
-     * @param metaInfo deadline information of the task
+     * @param metaInfo    deadline information of the task
      */
     public Deadline(String description, String metaInfo) {
         super(description);
         this.metaInfo = metaInfo;
     }
 
-    
-    /** 
+    public Deadline(boolean isDone, String description, String metaInfo) {
+        super(description);
+        if (isDone) {
+            setDone();
+        } else {
+            setUndone();
+        }
+        this.metaInfo = metaInfo;
+    }
+
+    /**
      * @return String "[D]" task icon
      */
     @Override
@@ -23,8 +33,7 @@ class Deadline extends Task {
         return "[D]";
     }
 
-    
-    /** 
+    /**
      * @return String default string representation of a deadline
      */
     @Override
