@@ -49,18 +49,18 @@ public class Parser {
     /**
      * Parses a string in the form {@code positional argument /arg1 foo bar /arg2 baz bax /arg3}
      * and returns a {@code Map<String, String>} containing the parsed arguments, e.g.:
-     * 
+     *
      * <pre>{
      *      "": "positional argument",
      *      "arg1": "foo bar",
      *      "arg2": "baz bax",
      *      "arg3": ""
      * }</pre>
-     * 
+     *
      * Empty argument names will be dropped; other duplicate argument names will have the value of
      * the last occurrence of the argument.
-     * 
-     * @param args a string containing unparsed arguments
+     *
+     * @param argString a string containing unparsed arguments
      * @return a Map containing parsed arguments
      */
     public Map<String, String> parseArgString(String argString) {
@@ -73,7 +73,7 @@ public class Parser {
             if ("".equals(arg[0])) {
                 continue;
             }
-            args.put(arg[0], arg.length == 2 ? arg[1].strip(): "");
+            args.put(arg[0], arg.length == 2 ? arg[1].strip() : "");
         }
 
         return args;

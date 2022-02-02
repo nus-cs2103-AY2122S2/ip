@@ -36,7 +36,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getDone() ? "X" : " ", this.getName(), this.getEventTime().format(DATE_TIME_FORMAT));
+        return String.format(
+                "[E][%s] %s (at: %s)", this.getDone() ? "X" : " ",
+                this.getName(),
+                this.getEventTime().format(DATE_TIME_FORMAT));
     }
 
     /**

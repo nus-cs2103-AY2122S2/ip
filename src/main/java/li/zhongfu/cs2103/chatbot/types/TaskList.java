@@ -91,11 +91,11 @@ public class TaskList {
     /**
      * Returns a list of strings representing the tasks in this TaskList as
      * an (1-indexed) ordered list.
-     * 
+     *
      * Each string in the list is of the form {@code n. foo}, where {@code n} is the
      * index of the item (starting from 1)
      * and {@code foo} is the string representation of the item.
-     * 
+     *
      * @return a list of strings representing the tasks in this TaskList as an 1-indexed ordered list
      */
     public List<String> toEnumeratedList() {
@@ -124,7 +124,9 @@ public class TaskList {
                     tasks.add((Task) o);
                 } else {
                     // is this a good idea? but it catches null too
-                    throw new ClassCastException(String.format("Expected Task, got %s", o instanceof Object ? o.getClass().getName() : "null"));
+                    throw new ClassCastException(String.format(
+                            "Expected Task, got %s",
+                            o instanceof Object ? o.getClass().getName() : "null"));
                 }
             }
         } catch (ClassCastException e) {
