@@ -39,6 +39,16 @@ public class Messages {
 
     public static final String DELETE_SUCCESS = "Noted. I've removed this task:";
 
+    public static final String UNKNOWN_FIND = "Please provide a keyword to search for your task.";
+
+    public static final String FIND_MSG = "Here are the matching tasks in your list:";
+
+    public static final String NO_FIND_MATCH_MSG = "I cannot find any task associated with the given keyword!";
+
+    public static final String MATCH_COUNT_MSG (int matchCount) {
+        return String.format("There are %d task(s) that match your keyword.", matchCount);
+    }
+
     public static final String SAVE_ERROR = "Error saving file";
 
     public static final String LIST_MSG = "Here are the tasks in your list:";

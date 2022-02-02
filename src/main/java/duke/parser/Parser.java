@@ -35,6 +35,8 @@ public class Parser {
                     return new UnmarkCommand(inputWords);
                 case DELETE:
                     return new DeleteCommand(inputWords);
+                case FIND:
+                    return new FindCommand(input);
                 default:
                     return new InvalidCommand();
             }
@@ -44,13 +46,17 @@ public class Parser {
     }
 
     // returns the todo task description
-    public static String parseTodo(String input) throws InvalidArgumentException {
+    public static String parseDescription(String input) throws InvalidArgumentException {
 
-        String[] todoArr = input.split("\\s", 2);
-        if (todoArr.length <= 1) {
-            throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
+        String[] arr = input.split("\\s", 2);
+        if (arr.length <= 1) {  //no keyword given by user
+            if (arr[0].equals("todo")) {    // action is either find or todo.
+                throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
+            } else {
+                throw new InvalidArgumentException(Messages.UNKNOWN_FIND);
+            }
         }
-        return todoArr[1].trim();
+        return arr[1].trim();
     }
 
     // returns duke.task.Deadline description and dateTime in a String[] like a pair.

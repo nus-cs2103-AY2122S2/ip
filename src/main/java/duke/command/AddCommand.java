@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             switch (action) {
                 case TODO:
                     try {
-                        String description = Parser.parseTodo(this.input);
+                        String description = Parser.parseDescription(this.input);
                         tasks.add(new Todo(description));
                         ui.printTaskAdded(tasks);
                         storage.save(tasks);
