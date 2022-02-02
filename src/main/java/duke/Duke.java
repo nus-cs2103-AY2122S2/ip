@@ -2,11 +2,24 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Includes the Main driver class.
+ * Stores public static instances of storage, task and ui objects.
+ * Contains methods to run and instantiate the object instances.
+ * Handles the result from the parsed commands to print out different
+ * results back to the user.
+ */
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates the ui, storage and tasklist objects.
+     * Stores the tasks loaded into the tasklist object.
+     *
+     * @param filePath Indicates the path where the task history will be written to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +31,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Shows the welcome line when Duke chat-bot starts running.
+     * Interacts with user inputs by calling getNextInput() from ui class.
+     * Calls Parser class methods to parse in the user inputs.
+     * Switches between cases based on the command passed in.
+     * Exits the running chat-bot when the 'bye' command is read from user input.
+     */
     public void run() {
         ui.showWelcome();
         String nextInput = ui.getNextInput();
@@ -137,6 +157,9 @@ public class Duke {
         ui.showExit();
     }
 
+    /**
+     * Main method calls chained methods Duke() and run() to initialise the chat-bot.
+     */
     public static void main(String[] args) {
         new Duke("taskHistory.txt").run();
     }
