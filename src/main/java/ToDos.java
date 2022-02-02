@@ -1,12 +1,12 @@
 public class ToDos extends Task {
-    protected static String type = "[T]";
+    protected static String type = "T";
 
     public ToDos(String description, boolean isDone) {
-        super(description, isDone);
+        super(type, description, isDone);
     }
 
     public ToDos(String description) {
-        super(description);
+        super(type, description);
     }
 
     @Override

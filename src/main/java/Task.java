@@ -1,24 +1,24 @@
 public class Task {
+    protected String type;
     protected String description;
     protected boolean isDone;
 
-    public Task(String description, boolean isDone) {
+    public Task(String type, String description, boolean isDone) {
+        this.type = type;
         this.description = description;
         this.isDone = isDone;
     }
 
-    public Task(String description) {
-        this(description, false);
+    public Task(String type, String description) {
+        this(type, description, false);
     }
 
     public void mark() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n" + this.toString());
     }
 
     public void unmark() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:\n" + this.toString());
     }
 
     @Override

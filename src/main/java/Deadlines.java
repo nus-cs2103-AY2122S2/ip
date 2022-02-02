@@ -4,12 +4,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadlines extends Task {
-    protected static String type = "[D]";
+    protected static String type = "D";
+    protected String printed;
     protected LocalDate date;
     protected LocalTime time;
 
     public Deadlines(String description, boolean isDone) throws DukeException {
-        super(description, isDone);
+        super(type, description, isDone);
         try {
             String[] temp = description.split("/by ");
             if (temp.length > 1) {
@@ -19,7 +20,7 @@ public class Deadlines extends Task {
                     this.date = LocalDate.parse(temp2[0]);
                     this.time = LocalTime.parse(temp2[1]);
 
-                    this.description = temp[0] + " (by: "
+                    this.printed = temp[0] + " (by: "
                             + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                             + this.time.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
                 } else {
@@ -40,7 +41,7 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return this.isDone ? "[D][X] " + this.description
-                : "[D][ ] " + this.description;
+        return this.isDone ? "[D][X] " + this.printed
+                : "[D][ ] " + this.printed;
     }
 }

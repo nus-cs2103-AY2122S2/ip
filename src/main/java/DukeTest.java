@@ -44,7 +44,7 @@ public class DukeTest {
             int marked = mark ? 1 : 0;
 
             FileWriter saveWriter = new FileWriter(save, true);
-            saveWriter.write(type + " xxx " + marked + " xxx " + description);
+            saveWriter.write(type + " xxx " + marked + " xxx " + description + "\n");
             saveWriter.close();
         } catch (IOException e) {
             System.out.println("Unable to new task [" + type + "] to hard disk due to an IO error.");
@@ -121,7 +121,7 @@ public class DukeTest {
         }
     }
 
-    private static void load(String data) {
+    private static void load(String data) throws DukeException {
         String[] dataArr = data.split(" xxx ");
 
         boolean marked = (Integer.valueOf(dataArr[1]) > 0);

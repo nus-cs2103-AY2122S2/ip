@@ -4,12 +4,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Events extends Task {
-    protected static String type = "[E]";
+    protected static String type = "E";
+    protected String printed;
     protected LocalDate date;
     protected LocalTime time;
 
     public Events(String description, boolean isDone) throws DukeException {
-        super(description, isDone);
+        super(type, description, isDone);
         try {
             String[] temp = description.split("/at ");
             if (temp.length > 1) {
@@ -19,7 +20,7 @@ public class Events extends Task {
                     this.date = LocalDate.parse(temp2[0]);
                     this.time = LocalTime.parse(temp2[1]);
 
-                    this.description = temp[0] + " (by: "
+                    this.printed = temp[0] + " (by: "
                             + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                             + this.time.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
                 } else {
@@ -40,8 +41,8 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return this.isDone ? "[E][X] " + this.description
-                : "[E][ ] " + this.description;
+        return this.isDone ? "[E][X] " + this.printed
+                : "[E][ ] " + this.printed;
     }
 
 }
