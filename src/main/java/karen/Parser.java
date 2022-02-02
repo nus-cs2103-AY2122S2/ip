@@ -207,10 +207,9 @@ public class Parser {
      * @param fullInput full input from user
      * @return Command object
      */
-    public Command parseInput(String fullInput){
+    public Command parseInput(String fullInput) {
         Command cmd;
         cmd = this.createCommand(fullInput);
         return cmd;
     }
-
 }

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Handles receiving and formatting of input and output
+ * Partially adapted from: https://github.com/se-edu/addressbook-level2
  */
 public class Ui {
     public static final String STD_DIVIDER = "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
@@ -66,34 +67,25 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void showWelcome() {
+    public String showWelcome() {
         // more customisation and cleanup in future
-        out.println(STD_DIVIDER);
-        out.println(WELCOME);
-        out.println(STD_DIVIDER);
-        out.print("\n");
+        return String.format("%s\n\n", WELCOME);
     }
 
     /**
      * Prints goodbye message
      */
-    public void showGoodbye() {
+    public String showGoodbye() {
         // more customisation and cleanup in future
-        out.println(STD_DIVIDER);
-        out.println(GOODBYE);
-        out.println(STD_DIVIDER);
-        out.print("\n");
+        return String.format("%s", GOODBYE);
     }
 
     /**
      * Prints message for inputs and outputs with STD_DIVIDER wrapped around.
      * @param message Message generated from determined inputs and subsequent outputs.
      */
-    public void displayUserInput(String message) {
-        out.println(STD_DIVIDER);
-        out.println(message);
-        out.println(STD_DIVIDER);
-        out.print("\n");
+    public String displayUserInput(String message) {
+        return String.format("%s\n\n", message);
     }
 
     /**
@@ -101,11 +93,8 @@ public class Ui {
      * missing configurations etc.
      * @param message Message generated
      */
-    public void displayWarning(String message) {
-        out.println(ERR_DIVIDER);
-        out.println(message);
-        out.println(ERR_DIVIDER);
-        out.print("\n");
+    public String displayWarning(String message) {
+        return String.format("%s\n\n", message);
     }
 
     /**

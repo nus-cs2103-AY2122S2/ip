@@ -20,11 +20,11 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage) throws KarenException {
+    public String execute(Ui ui, Storage storage) throws KarenException {
         throw new KarenException(this.message);
     }
 
-    public void execute() throws KarenException {
+    public String execute() throws KarenException {
         // temp fix for mocking - to be done later
         throw new KarenException(this.message);
     }

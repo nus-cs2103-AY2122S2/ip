@@ -24,10 +24,11 @@ public class FindCommand extends Command {
      * to output with UI.
      * @param ui To control outputs related to execution
      * @param storage To access and modify Tasks stored in Storage
+     * @return String output after successful execution of command
      * @throws KarenException
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws KarenException {
+    public String execute(Ui ui, Storage storage) throws KarenException {
         Pattern keyTermFormat = Pattern.compile(this.keyTerm);
         ArrayList<Task> matchingList = new ArrayList<>();
 
@@ -43,6 +44,6 @@ public class FindCommand extends Command {
             formatString.append("You made me find to just get this:\n");
         }
         formatString.append(ui.formatTaskList(matchingList));
-        ui.displayUserInput(formatString.toString());
+        return ui.displayUserInput(formatString.toString());
     }
 }
