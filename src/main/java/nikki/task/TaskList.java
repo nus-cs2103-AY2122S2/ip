@@ -122,7 +122,7 @@ public class TaskList {
 
         for (int i = 0; i < this.size(); i++) {
             try {
-                result += this.getTask(i).fileSaveFormat();
+                result += this.getTask(i).toFileSaveFormat();
             } catch (NikkiException e) {
                 // This won't happen, given the bounds of the for-loop
                 assert false;

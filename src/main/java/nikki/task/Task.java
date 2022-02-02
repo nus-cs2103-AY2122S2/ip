@@ -138,7 +138,7 @@ public class Task {
      *
      * @return formatted string for saving Task
      */
-    public String fileSaveFormat() {
+    public String toFileSaveFormat() {
         return String.format("%c||%c||%s",
                 this.getTag(),
                 this.isDone() ? '1' : '0',

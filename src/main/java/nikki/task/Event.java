@@ -77,9 +77,9 @@ public class Event extends Task {
      * @return Event object represented by the string
      */
     @Override
-    public String fileSaveFormat() {
+    public String toFileSaveFormat() {
         return String.format("%s||%s",
-                super.fileSaveFormat(),
+                super.toFileSaveFormat(),
                 this.date.format(CommandParser.DATE_FORMAT));
     }
 }
