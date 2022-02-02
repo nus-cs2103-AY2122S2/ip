@@ -235,11 +235,11 @@ public class Parser {
      * @param taskLists list of tasks.
      * @param userInputTask user input task.
      */
-    static String parserFind(TaskList taskLists, String userInputTask) {
+    static String parserFind(TaskList taskLists, String ...userInputTask) {
         TaskList tasks = new TaskList(new ArrayList<Task>());
 
         for (int i = 0; i < taskLists.size(); i++) {
-            if (taskLists.get(i).getDescription().contains(userInputTask)) {
+            if (taskLists.get(i).getDescription().contains(userInputTask[0])) {
                 tasks.addWithoutPrint(taskLists.get(i));
             }
         }
