@@ -21,7 +21,7 @@ public abstract class Command {
 
     /**
      * Checks if this command is a goodbye command.
-     * 
+     *
      * @return false.
      */
     public boolean isBye() {

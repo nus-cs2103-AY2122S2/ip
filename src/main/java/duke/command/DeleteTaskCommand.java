@@ -14,8 +14,8 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Class constructor.
-     * 
-     * @param taskIndex index of the task to be deleted. 
+     *
+     * @param taskIndex index of the task to be deleted.
      */
     public DeleteTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -24,7 +24,7 @@ public class DeleteTaskCommand extends Command {
     /**
      * Invokes <code>deleteTask</code> method of <code>taskList</code> to delete the designated task.
      * After that, prompts <code>ui</code> to display response messages to user.
-     * 
+     *
      * @param ui user interface of the application.
      * @param taskList task list of the application.
      * @param storage disk storage of the application.
@@ -33,7 +33,7 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
         Task deletedTask = taskList.deleteTask(taskIndex);
-        
+
         ui.showMessage("Noted. I have deleted this task:");
         ui.showMessage(deletedTask.toString());
         ui.showMessage("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");

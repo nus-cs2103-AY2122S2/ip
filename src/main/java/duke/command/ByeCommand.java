@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
     /**
      * Prompts <code>ui</code> to show goodbye message to user.
-     * After that, gets the formatted task list from <code>taskList</code> 
+     * After that, gets the formatted task list from <code>taskList</code>
      * and directs <code>storage</code> to store it into disk.
      *
      * @param ui user interface of the application.
@@ -27,7 +27,7 @@ public class ByeCommand extends Command {
 
     /**
      * Checks if this command is a goodbye command.
-     * 
+     *
      * @return true.
      */
     @Override

@@ -27,7 +27,7 @@ public class ParserTest {
             assertEquals(e.getMessage(), "Seems like the command is incomplete");
         }
     }
-    
+
     @Test
     public void parse_invalidDeadlineCommandFormat() {
         try {

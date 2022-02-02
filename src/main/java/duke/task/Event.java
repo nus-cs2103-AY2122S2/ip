@@ -8,7 +8,7 @@ public class Event extends Task {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param description description of this event.
      * @param at the time of this event.
      */

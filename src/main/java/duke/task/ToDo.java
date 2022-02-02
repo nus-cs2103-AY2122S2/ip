@@ -6,7 +6,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Class constructor.
-     * 
+     *
      * @param description description of this task.
      */
     public ToDo(String description) {
@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "T," + super.toFileFormat() + ",," + getStatusIcon();    
+        return "T," + super.toFileFormat() + ",," + getStatusIcon();
     }
 
     /**

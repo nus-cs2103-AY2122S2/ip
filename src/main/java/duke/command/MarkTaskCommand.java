@@ -13,7 +13,7 @@ public class MarkTaskCommand extends Command {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param taskIndex index of the task to be marked.
      */
     public MarkTaskCommand(int taskIndex) {

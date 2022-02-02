@@ -14,7 +14,7 @@ public class FindTaskCommand extends Command {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param keyword keyword used to match tasks.
      */
     public FindTaskCommand(String keyword) {
@@ -32,7 +32,7 @@ public class FindTaskCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         ArrayList<String> matches = new ArrayList<>();
-        
+
         int numberOfTasks = taskList.getNumberOfTasks();
         for (int i = 0; i < numberOfTasks; i++) {
             String taskDescription = taskList.getDescriptionOfTaskAtIndex(i);
@@ -40,7 +40,7 @@ public class FindTaskCommand extends Command {
                 matches.add(taskDescription);
             }
         }
-        
+
         if (matches.size() == 0) {
             ui.showMessage("There are no matching tasks in your list");
         } else {

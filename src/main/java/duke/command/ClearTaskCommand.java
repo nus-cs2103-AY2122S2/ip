@@ -11,7 +11,7 @@ public class ClearTaskCommand extends Command {
     /**
      * Invokes <code>clear</code> method of <code>taskList</code> to clear all tasks.
      * After that, prompts <code>ui</code> to display response messages to user.
-     *      
+     *
      * @param ui user interface of the application.
      * @param taskList task list of the application.
      * @param storage disk storage of the application.

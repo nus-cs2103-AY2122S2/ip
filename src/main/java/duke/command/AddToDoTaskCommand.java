@@ -30,7 +30,7 @@ public class AddToDoTaskCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         taskList.addToDoTask(description);
-        
+
         int taskIndex = taskList.getNumberOfTasks() - 1;
         ui.showMessage("Got it. I've added this task: ");
         ui.showMessage(taskList.getDescriptionOfTaskAtIndex(taskIndex));

@@ -15,7 +15,7 @@ public class AddDeadlineTaskCommand extends Command {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param description description of the deadline task.
      * @param date deadline of the task expressed in date.
      */
@@ -27,7 +27,7 @@ public class AddDeadlineTaskCommand extends Command {
     /**
      * Invokes <code>addDeadlineTask</code> method of <code>taskList</code> to add a deadline task.
      * After that, prompts <code>ui</code> to display response messages to user.
-     * 
+     *
      * @param ui user interface of the application.
      * @param taskList task list of the application.
      * @param storage disk storage of the application.

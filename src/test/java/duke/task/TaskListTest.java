@@ -20,7 +20,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void populateWith_IllegalData_exceptionThrown() {
+    public void populateWith_illegalData_exceptionThrown() {
         String[] data = new String[] {"T,task1,, ", "E,task2,8pm,X", "D,task3,helloError, "};
         TaskList taskList = new TaskList();
         try {

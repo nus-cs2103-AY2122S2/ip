@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Populates this task list with the task data stored in disk.
-     * 
+     *
      * @param data data read from storage.
      * @throws DukeException upon encountering incorrect format of data record.
      */
@@ -31,7 +31,7 @@ public class TaskList {
         try {
             numberOfTasks = data.length;
             for (int i = 0; i < numberOfTasks; i++) {
-                String tokens[] = data[i].split(",");
+                String[] tokens = data[i].split(",");
                 if (tokens[0].equals("T")) {
                     tasks.add(new ToDo(tokens[1]));
                 } else if (tokens[0].equals("E")) {
@@ -52,7 +52,7 @@ public class TaskList {
 
     /**
      * Returns the representation of this task list formatted as the way it is to be stored in disk.
-     * 
+     *
      * @return the representation of this task list formatted as the way it is to be stored in disk.
      */
     public String[] formatAsFileData() {
@@ -65,7 +65,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
-     * 
+     *
      * @return the number of tasks in the task list.
      */
     public int getNumberOfTasks() {
@@ -74,7 +74,7 @@ public class TaskList {
 
     /**
      * Checks if a task index is valid with respect to the task list.
-     * 
+     *
      * @param index task index.
      * @return true if <code>index</code> is in the valid range, false otherwise.
      */
@@ -84,7 +84,7 @@ public class TaskList {
 
     /**
      * Returns the string representation of a designated task.
-     * 
+     *
      * @param index task index.
      * @return the string representation of a designated task.
      */
@@ -137,7 +137,7 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
-        
+
         tasks.get(taskIndex).mark();
     }
 
@@ -151,13 +151,13 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
-        
+
         tasks.get(taskIndex).unmark();
     }
 
     /**
      * Deletes a designated task from the task list.
-     * 
+     *
      * @param taskIndex index of the task to be deleted.
      * @return the task to be deleted.
      * @throws DukeException when <code>taskIndex</code> is invalid.
@@ -166,11 +166,11 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
-        
+
         Task taskToBeDeleted = tasks.get(taskIndex);
         tasks.remove(taskIndex);
         numberOfTasks--;
-        
+
         return taskToBeDeleted;
     }
 

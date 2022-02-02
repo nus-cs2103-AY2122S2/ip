@@ -24,14 +24,14 @@ public class Parser {
 
     /**
      * Parses the input string entered by user into a command known to the application.
-     * 
+     *
      * @param command the command entered by user.
      * @return a command to be executed by the application.
      * @throws DukeException when <code>command</code> is invalid or its format is incorrect.
      */
     public static Command parse(String command) throws DukeException {
         String[] commandTokens = command.split(" ", 2);
-        
+
         try {
             switch (commandTokens[0]) {
             case "bye":

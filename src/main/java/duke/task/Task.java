@@ -9,7 +9,7 @@ public class Task {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param description description of the task.
      */
     public Task(String description) {
@@ -19,7 +19,7 @@ public class Task {
 
     /**
      * Returns the icon representing the status (done/not done) of this task.
-     * 
+     *
      * @return the icon representing the status (done/not done) of this task.
      */
     public String getStatusIcon() {
@@ -42,7 +42,7 @@ public class Task {
 
     /**
      * Returns the string representation of this task formatted as the way it is to be stored in disk.
-     * 
+     *
      * @return the string representation of this task formatted as the way it is to be stored in disk.
      */
     public String toFileFormat() {
@@ -51,7 +51,7 @@ public class Task {
 
     /**
      * Returns the string representation of this task.
-     * 
+     *
      * @return the string representation of this task.
      */
     @Override

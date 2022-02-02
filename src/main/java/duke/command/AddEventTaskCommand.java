@@ -13,7 +13,7 @@ public class AddEventTaskCommand extends Command {
 
     /**
      * Class constructor.
-     * 
+     *
      * @param description description of the event task.
      * @param at the time of the event expressed in a <code>String</code>.
      */
