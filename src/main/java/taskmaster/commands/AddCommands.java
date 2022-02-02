@@ -10,9 +10,8 @@ import taskmaster.task.EventTask;
 import taskmaster.task.Task;
 import taskmaster.task.TodoTask;
 import taskmaster.userinterface.UserInterface;
-import taskmaster.util.TaskList;
 import taskmaster.util.Storage;
-
+import taskmaster.util.TaskList;
 
 /*
  * This class inherits from the Command class.
@@ -20,7 +19,6 @@ import taskmaster.util.Storage;
  */
 
 public class AddCommands extends Commands {
-    /** TaskList contains all the task. **/
 
     /**
      * Constructor for AddCommands.
@@ -162,7 +160,11 @@ public class AddCommands extends Commands {
     }
 
     /**
-     * Execute Command.
+     * Execute the command.
+     * @param ui The User interface.
+     * @param storage The file that is storing the task information.
+     * @return Returns a string confirmation that the task has been executed.
+     * @throws DukeExceptions Throws an exception if execution fails.
      */
 
     public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {

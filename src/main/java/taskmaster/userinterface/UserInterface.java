@@ -1,7 +1,4 @@
 package taskmaster.userinterface;
-
-import java.util.Scanner;
-
 import taskmaster.commands.AddCommands;
 import taskmaster.commands.ByeCommands;
 import taskmaster.commands.Commands;
@@ -11,7 +8,6 @@ import taskmaster.commands.FindCommands;
 import taskmaster.commands.HelpCommands;
 import taskmaster.commands.ListCommands;
 import taskmaster.commands.MarkCommands;
-
 import taskmaster.exception.DukeExceptions;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
@@ -27,10 +23,8 @@ public class UserInterface {
     /** Taskmaster's logo. **/
     protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
                                     + "  |||||\n" + "  |||||\n";
-
     protected Storage storage;
     protected TaskList tasklist;
-
 
     /**
      * Prints the opening message when the program runs.

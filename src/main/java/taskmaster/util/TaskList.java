@@ -1,7 +1,6 @@
 package taskmaster.util;
 
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 import taskmaster.task.Task;
 
@@ -131,7 +130,7 @@ public class TaskList {
         }
 
         if (count == 1) {
-           sb.append("No task with that keyword\n");
+            sb.append("No task with that keyword\n");
         }
 
         return sb.toString();

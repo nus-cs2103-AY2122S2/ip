@@ -4,19 +4,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import taskmaster.commands.DeleteCommands;
+import taskmaster.exception.DukeExceptions;
 import taskmaster.task.TodoTask;
+import taskmaster.userinterface.UserInterface;
+import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
 public class DeleteCommandsTest {
     private TaskList taskList = new TaskList();
+    private Storage storage = new Storage();
+    private UserInterface ui = new UserInterface();
 
     @Test
     @DisplayName("Test Delete 1")
     public void testDelete1Task() {
         taskList.add(new TodoTask("Hello World"));
-        DeleteCommands command = new DeleteCommands("delete 1", taskList);
-        command.execute();
-        assertTrue(taskList.isEmpty());
+        DeleteCommands command = new DeleteCommands("delete 1");
+        try {
+            command.execute(taskList, ui, storage);
+            assertTrue(taskList.isEmpty());
+        } catch (DukeExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -27,13 +36,17 @@ public class DeleteCommandsTest {
         taskList.add(new TodoTask("Mummy"));
         taskList.add(new TodoTask("Goomba"));
         taskList.add(new TodoTask("Oi"));
-        DeleteCommands command = new DeleteCommands("delete 1", taskList);
-        command.execute();
-        command.execute();
-        command.execute();
-        command.execute();
-        command.execute();
-        assertTrue(taskList.isEmpty());
+        DeleteCommands command = new DeleteCommands("delete 1");
+        try {
+            command.execute(taskList, ui, storage);
+            command.execute(taskList, ui, storage);
+            command.execute(taskList, ui, storage);
+            command.execute(taskList, ui, storage);
+            command.execute(taskList, ui, storage);
+            assertTrue(taskList.isEmpty());
+        } catch (DukeExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 

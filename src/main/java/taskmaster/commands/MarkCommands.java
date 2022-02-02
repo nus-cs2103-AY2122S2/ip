@@ -100,9 +100,12 @@ public class MarkCommands extends Commands {
     }
 
     /**
-     * Execute Command.
+     * Execute the command.
+     * @param ui The User interface.
+     * @param storage The file that is storing the task information.
+     * @return Returns a string confirmation that the task has been executed.
+     * @throws DukeExceptions Throws an exception if execution fails.
      */
-
     public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
         return parseCommand(taskList);
     }

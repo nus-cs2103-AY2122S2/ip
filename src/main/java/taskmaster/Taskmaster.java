@@ -6,8 +6,6 @@ import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
-import java.lang.StringBuilder;
-
 /**
  * This class encapsulates the main program, Taskmaster.
  */
@@ -17,7 +15,7 @@ public class Taskmaster {
     protected UserInterface ui;
     protected TaskList taskList;
     protected Storage storage;
-    public boolean isExit = false;
+    protected boolean isExit = false;
 
     /**
      * Constructor for Taskmaster the chatbot.
@@ -30,17 +28,20 @@ public class Taskmaster {
         storage.loadFile(taskList);
     }
 
+    public boolean isExit() {
+        return this.isExit;
+    }
+
     public String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
         try {
             Commands command = ui.performCommand(input, taskList);
             sb.append(command.execute(this.taskList, this.ui, this.storage));
             isExit = command.isExit();
+
         } catch (DukeExceptions e) {
             sb.append(ui.displayErrorMessage(e.getMessage()));
-        } finally {
-            return sb.toString();
         }
+        return sb.toString();
     }
-
 }

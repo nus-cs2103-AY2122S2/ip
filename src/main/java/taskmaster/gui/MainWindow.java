@@ -8,12 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import taskmaster.Taskmaster;
-import taskmaster.userinterface.UserInterface;
-import taskmaster.util.Storage;
-import taskmaster.util.TaskList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,7 +24,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Taskmaster taskmaster;
-    private UserInterface ui;
 
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/beluga.png"));
@@ -54,12 +48,10 @@ public class MainWindow extends AnchorPane {
         String response = taskmaster.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getTaskmasterDialog(response, dukeImage)
         );
         userInput.clear();
-        if (taskmaster.isExit) {
-            String byeMsg = ui.displayByeMessage();
-            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(byeMsg, dukeImage));
+        if (taskmaster.isExit()) {
             new Thread(() -> {
                 try {
                     Thread.sleep(3000);

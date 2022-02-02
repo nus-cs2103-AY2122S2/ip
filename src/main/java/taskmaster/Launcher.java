@@ -1,7 +1,7 @@
 package taskmaster;
-
-import taskmaster.gui.Main;
 import javafx.application.Application;
+import taskmaster.gui.Main;
+
 
 public class Launcher {
     public static void main(String[] args) {
