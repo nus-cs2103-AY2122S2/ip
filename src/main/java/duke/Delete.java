@@ -4,8 +4,11 @@ package duke;
  * delete the tasks from list
  * inherit from task
  */
-public class Delete extends Task{
+public class Delete extends Task {
 
+    /**
+     * @param description
+     */
     public Delete(String description) {
         super(description);
 
@@ -13,7 +16,7 @@ public class Delete extends Task{
 
     @Override
     public String message() {
-        return "Noted. I've deleted this task:\n" + super.message() ;
+        return "Noted. I've deleted this task:\n" + super.message();
     }
 }
 
