@@ -5,17 +5,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class Storage {
     private ArrayList<Task> tasks;
 
     Path dirPath = Paths.get("../data/");
-    Path filePath = Paths.get("../data/data.txt");
+    static Path filePath = Paths.get("../data/data.txt");
 
+    /**
+     * Default constructor
+     */
     public Storage() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * @return List<Task> list of task objects read from file
+     */
     public List<Task> loadTasksFromFile() {
 
         if (!Files.exists(dirPath)) {
@@ -28,6 +35,22 @@ public class Storage {
         return this.tasks;
     }
 
+    /**
+     * @param tasks list of task objects to be saved to disk
+     */
+    public void saveTaskstoFile(List<Task> tasks) {
+        try {
+            Files.deleteIfExists(filePath);
+            createBlankFile(dirPath, filePath);
+            for (Task t : tasks) {
+                Files.write(filePath, (t.getPrintString() + System.lineSeparator()).getBytes(),
+                        StandardOpenOption.APPEND);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void createBlankFile(Path dirPath, Path filePath) {
         try {
             Files.createDirectories(dirPath);
@@ -37,6 +60,9 @@ public class Storage {
         }
     }
 
+    /**
+     * @return List<String> list of tasks in raw string format that are read from file
+     */
     private List<String> readFile() {
         try {
             return Files.readAllLines(filePath);
@@ -46,6 +72,9 @@ public class Storage {
         }
     }
 
+    /**
+     * @param fileData list of tasks in String format to be converted to List<Task>
+     */
     public void convertStringToTasks(List<String> fileData) {
         if (fileData != null) {
             for (String line : fileData) {
@@ -64,6 +93,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Prints the current working directory of this running instance of the program
+     */
     public void printCurrentDirectory() {
         File directory = new File("./");
         System.out.println(directory.getAbsolutePath());

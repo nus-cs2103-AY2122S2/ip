@@ -6,16 +6,23 @@ public class Event extends Task {
 
     /**
      * Default constructor
+     * 
      * @param description description of the task
-     * @param metaInfo duration information of the task
+     * @param metaInfo    duration information of the task
      */
     public Event(String description, String metaInfo) {
-        super(description);
+        super(description, "E");
         this.metaInfo = metaInfo;
     }
 
+    /**
+     * This constructor initializes event objects with isDone specified
+     * @param isDone whether this task is done or not
+     * @param description description of the task
+     * @param metaInfo duration information of the task
+     */
     public Event(boolean isDone, String description, String metaInfo) {
-        super(description);
+        super(description, "E");
         if (isDone) {
             setDone();
         } else {
@@ -24,21 +31,20 @@ public class Event extends Task {
         this.metaInfo = metaInfo;
     }
 
-    
-    /** 
-     * @return String "[E]" task icon
-     */
-    @Override
-    public String getTaskIcon() {
-        return "[E]";
-    }
-
-    
-    /** 
+    /**
      * @return String default string representation of an event
      */
     @Override
     public String toString() {
         return super.toString() + "(at:" + this.metaInfo + ")";
+    }
+
+    
+    /** 
+     * @return String string representation of this task to be saved to file
+     */
+    @Override
+    public String getPrintString() {
+        return super.getPrintString() + "|" + this.metaInfo;
     }
 }

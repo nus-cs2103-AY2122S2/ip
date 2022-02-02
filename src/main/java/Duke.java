@@ -50,6 +50,10 @@ public class Duke {
         System.out.println(BAR);
     }
 
+    
+    /** 
+     * @param inputArray
+     */
     private void handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
@@ -61,6 +65,10 @@ public class Duke {
         System.out.println(BAR);
     }
 
+    
+    /** 
+     * @param inputArray
+     */
     private void handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
@@ -72,6 +80,11 @@ public class Duke {
         System.out.println(BAR);
     }
 
+    
+    /** 
+     * @param inputArray
+     * @param originalInput
+     */
     private void handleTodo(String[] inputArray, String originalInput) {
         try {
             if (inputArray.length <= 1) {
@@ -190,6 +203,7 @@ public class Duke {
                     break;
             }
         }
+        storageHandler.saveTaskstoFile(tasks);
     }
 
     /**
