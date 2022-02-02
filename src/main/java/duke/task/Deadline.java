@@ -54,7 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String writeToFile() {
-        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime + "\n";
+        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime;
     }
 
     /**

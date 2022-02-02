@@ -44,7 +44,7 @@ public class Event extends Task {
     @Override
     public String writeToFile() {
         return " E " + super.writeToFile() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
-                + this.eventEndTime + "\n";
+                + this.eventEndTime;
     }
 
     /**

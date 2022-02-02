@@ -3,6 +3,7 @@ package duke.controllers;
 import duke.Main;
 import duke.chi.Chi;
 import duke.exception.ChiException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -64,6 +65,9 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             input = userInput.getText();
+            if (input.toLowerCase().equals("bye")) {
+                Platform.exit();
+            }
             response = chi.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
