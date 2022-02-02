@@ -1,8 +1,7 @@
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Gene {
-    private final static Identity thisIdentity = new Identity();
+    private final static Ui thisIdentity = new Ui();
     private final static TaskList thisList = new TaskList("gene.txt");
 
     public static void main(String[] args) {
@@ -22,11 +21,11 @@ public class Gene {
             try {
                 String nextKey = scanner.nextLine();
 
-                if (Identity.exitMatch(nextKey)) {
+                if (Ui.exitMatch(nextKey)) {
                     break;
                 }
 
-                if (Identity.listMatch(nextKey)) {
+                if (Ui.listMatch(nextKey)) {
                     System.out.println(
                             "----------------------------" +
                                     "----------------------------\n"
@@ -36,31 +35,31 @@ public class Gene {
                     continue;
                 }
 
-                if (Identity.deleteMatch(nextKey)) {
+                if (Ui.deleteMatch(nextKey)) {
                     //mark
                     Gene.thisList.deleteTask(nextKey);
                     continue;
                 }
 
-                if (Identity.markMatch(nextKey)) {
+                if (Ui.markMatch(nextKey)) {
                     //mark
                     Gene.thisList.markTask(nextKey);
                     continue;
                 }
 
-                if (Identity.unmarkMatch(nextKey)) {
+                if (Ui.unmarkMatch(nextKey)) {
                     //unmark
                     Gene.thisList.unmarkTask(nextKey);
                     continue;
                 }
 
-                if (Identity.todoMatch(nextKey)) {
+                if (Ui.todoMatch(nextKey)) {
                     //unmark
                     Gene.thisList.addTodo(nextKey);
                     continue;
                 }
 
-                if (Identity.eventMatch(nextKey)) {
+                if (Ui.eventMatch(nextKey)) {
                     //unmark
                     Gene.thisList.addEvent(nextKey);
                     continue;
@@ -69,7 +68,7 @@ public class Gene {
                 //printmatch all/incomplete/complete events
                 //printmatch all/incomplete/comlete events in a date
 
-                if (Identity.deadlineMatch(nextKey)) {
+                if (Ui.deadlineMatch(nextKey)) {
                     //unmark
                     Gene.thisList.addDeadline(nextKey);
                     continue;
@@ -88,6 +87,6 @@ public class Gene {
             }
         }
 
-        Identity.exitProg();
+        Ui.exitProg();
     }
 }
