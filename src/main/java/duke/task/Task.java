@@ -46,6 +46,10 @@ public abstract class Task {
     return isMarked;
   }
 
+  public boolean contains(String str) {
+      return description.matches(".*?\\b" + str + "\\b.*?");
+  }
+
   /**
    * Returns string representation of this class.
    *

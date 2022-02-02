@@ -49,6 +49,16 @@ public class TaskList {
     public void unmarkTask(int n) {
         tasks.get(n).unmark();
     }
+    
+    public TaskList find(String str) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.contains(str)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
+    }
 
     /**
      * Returns string representation of list.

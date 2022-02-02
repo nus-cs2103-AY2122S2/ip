@@ -51,6 +51,10 @@ public class Ui {
         System.out.println(tasks.toString());
     }
 
+    public void showMessage(String str) {
+        System.out.println(str);
+    }
+
     /**
      * Shows display when user exits app.
      */
