@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ public abstract class Command {
      * @exception IOException
      * @see IOException
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract void execute(TaskList taskList, Storage storage) throws DukeException, IOException;
 
     /**
      * This method is used to check if this command closes the Duke Application.
@@ -32,6 +31,6 @@ public abstract class Command {
      * @return This returns if this command closes the Duke application.
      */
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

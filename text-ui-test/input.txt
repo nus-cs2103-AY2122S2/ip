@@ -23,5 +23,5 @@ event fff
 bye
 
 catch (IllegalArgumentException e) {
-            duke.ui.print(duke.ui.Ui.MSG_INVLIADCMDFORMAT);
+            duke.ui.print(duke.Ui.MSG_INVLIADCMDFORMAT);
         }

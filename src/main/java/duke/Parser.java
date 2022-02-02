@@ -1,9 +1,15 @@
-package duke.parser;
+package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.io.Storage;
-import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,7 +18,6 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    Ui ui;
     Storage storage;
 
     /**
@@ -20,8 +25,7 @@ public class Parser {
      *
      * @param storage Storage of task in local persistent disk.
      */
-    public Parser(Ui ui, Storage storage) {
-        this.ui = ui;
+    public Parser(Storage storage) {
         this.storage = storage;
     }
 
@@ -34,11 +38,10 @@ public class Parser {
     public Command parse(String inputTxt) {
         try {
             if (inputTxt.isEmpty()) {
-                throw new DukeException(ui.MSG_EMPTYINPUT);
+                throw new DukeException(Ui.MSG_EMPTYINPUT);
             }
 
-            String command;
-            command = inputTxt.split(" ")[0].toUpperCase();
+            String command = inputTxt.split(" ")[0].toUpperCase();
             CommandType action = CommandType.valueOf(command);
             switch (action) {
             case BYE:
@@ -48,34 +51,32 @@ public class Parser {
             case TODO:
                 String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
                 if (description.isEmpty()) {
-                    throw new DukeException(ui.MSG_EMPTYINPUT);
+                    throw new DukeException(Ui.MSG_EMPTYINPUT);
                 } else {
-                    return new AddCommand(CommandType.TODO, description);
+                    return new AddCommand(action, description);
                 }
             case DEADLINE:
-                return formatCmdWithTime(CommandType.DEADLINE, inputTxt);
             case EVENT:
-                return formatCmdWithTime(CommandType.EVENT, inputTxt);
+                return formatCmdWithTime(action, inputTxt);
             case DONE:
-                return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
             case DELETE:
-                return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
+                return formatCmdWithIdSelection(action, inputTxt);
             default:
-                throw new DukeException(ui.MSG_INVALIDCMD);
+                throw new DukeException(Ui.MSG_INVALIDCMD);
             }
 
         } catch (DukeException e) {
-            ui.print(e.getMessage());
-        } catch (NumberFormatException e) {
-            ui.print(Ui.MSG_INVALIDTASKID);
+            Ui.print(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            ui.print(Ui.MSG_INVLIADCMDFORMAT);
+            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
+        } catch (NumberFormatException e) {
+            Ui.print(Ui.MSG_INVALDTASKIDFORMAT);
         } catch (IndexOutOfBoundsException e) {
-            ui.print(Ui.MSG_INVALIDTASKID);
+            Ui.print(Ui.MSG_INVALIDTASKID);
         } catch (DateTimeParseException e) {
-            ui.print(Ui.MSG_INVALIDDATETIMEFORMAT);
+            Ui.print(Ui.MSG_INVALIDDATETIMEFORMAT);
         } catch (IllegalArgumentException e) {
-            ui.print(Ui.MSG_INVLIADCMDFORMAT);
+            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
         }
         return new InvalidCommand();
     }
@@ -83,7 +84,7 @@ public class Parser {
     private Command formatCmdWithIdSelection(CommandType commandType, String inputTxt) throws DukeException {
         String[] formatInputTxt = inputTxt.split(" ");
         if (formatInputTxt.length != 2) {
-            throw new DukeException(ui.MSG_INVLIADCMDFORMAT);
+            throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
         }
         int taskId = Integer.parseInt(formatInputTxt[1]) - 1;
         if (commandType.equals(CommandType.DONE)) {
@@ -108,12 +109,12 @@ public class Parser {
         description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
         due = formatInputTxt[1].trim();
         if (description.isEmpty() || due.isEmpty()) {
-            throw new DukeException(ui.MSG_INVLIADCMDFORMAT);
+            throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
         }
 
         dateTime = due.split(" ");
         if (dateTime.length != 2) {
-            throw new DukeException(ui.MSG_INVALIDDATETIMEFORMAT);
+            throw new DukeException(Ui.MSG_INVALIDDATETIMEFORMAT);
         }
         date = formatDate(dateTime[0]);
         time = formatTime(date, dateTime[1]);
