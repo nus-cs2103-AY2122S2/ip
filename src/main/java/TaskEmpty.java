@@ -1,5 +1,5 @@
-public class EmptyTask extends Task {
-    EmptyTask() {
+public class TaskEmpty extends Task {
+    public TaskEmpty() {
         super("EMPTY");
     }
 

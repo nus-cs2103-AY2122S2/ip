@@ -1,9 +1,9 @@
-public class TimeManager {
+public class ManagerTime {
     private final String format24;
     private final String format12;
     boolean isValid = false;
 
-    TimeManager(String time) {
+    public ManagerTime(String time) {
         int hour = Integer.parseInt(time.substring(0, 2));
         int minute = Integer.parseInt(time.substring(2, 4));
 

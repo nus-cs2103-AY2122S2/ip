@@ -16,18 +16,18 @@ public class TaskCreator {
     protected Task createTask() {
         Task task;
         if (prefix == 'D') {
-            task = new Deadline(this.name, this.date, this.time);
+            task = new TaskDeadline(this.name, this.date, this.time);
         } else if (prefix == 'E') {
-            task = new Event(this.name, this.date, this.time);
+            task = new TaskEvent(this.name, this.date, this.time);
         } else if (prefix == 'T') {
-            task = new ToDo(this.name);
+            task = new TaskToDo(this.name);
         } else {
             System.out.println("Help!\n"
                     + "Weird looking task found in Duke's memory!\n"
                     + "Please go to Duke's memory to check!\n"
                     + "(Found a task that is not a Deadline, Event or ToDo\n"
                     + "in data/duke.txt)\n");
-            task = new EmptyTask();
+            task = new TaskEmpty();
         }
 
         if (this.isCompleted && !task.isEmptyTask()) {

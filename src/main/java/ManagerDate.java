@@ -1,10 +1,10 @@
-public class DateManager {
+public class ManagerDate {
     private final int day;
     private final int month;
     private final int year;
     private boolean isValid = false;
 
-    DateManager(String date) {
+    public ManagerDate(String date) {
         this.day = Integer.parseInt(date.substring(0, 2));
         this.month = Integer.parseInt(date.substring(2, 4));
         this.year = Integer.parseInt(date.substring(4, 8));

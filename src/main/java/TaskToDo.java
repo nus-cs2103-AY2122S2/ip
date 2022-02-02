@@ -1,5 +1,5 @@
-public class ToDo extends Task {
-    ToDo(String name) {
+public class TaskToDo extends Task {
+    TaskToDo(String name) {
         super(name);
     }
 
@@ -9,12 +9,12 @@ public class ToDo extends Task {
 
     @Override
     public String getDate() {
-        return "";
+        return "00000000";
     }
 
     @Override
     public String getTime() {
-        return "";
+        return "0000";
     }
 
 

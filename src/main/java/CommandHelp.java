@@ -1,6 +1,6 @@
-public class CommandList extends Command {
+public class CommandHelp extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showList(tasks.tasksAsString());
+        ui.showTutorial();
     }
 }

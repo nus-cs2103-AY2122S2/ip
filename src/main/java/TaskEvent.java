@@ -1,15 +1,15 @@
-public class Deadline extends Task {
+public class TaskEvent extends Task {
     private final String date;
     private final String time;
 
-    Deadline(String name, String date, String time) {
+    TaskEvent(String name, String date, String time) {
         super(name);
         this.date = date;
-        this.time = new TimeManager(time).getFormat24();
+        this.time = new ManagerTime(time).getFormat24();
     }
 
     public String getPrefix() {
-        return "D";
+        return "E";
     }
 
     @Override
@@ -24,9 +24,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String prefix = "[D]";
+        String prefix = "[E]";
         return prefix + super.toString() + " on: "
-                + DateManager.formatDate(this.date) + " "
+                + ManagerDate.formatDate(this.date) + " "
                 + this.time;
     }
 }
