@@ -5,6 +5,8 @@ import duke.command.CommandResult;
 import duke.command.ExitCommand;
 import duke.ui.TextUi;
 
+import javafx.application.Application;
+
 public class Duke {
     // Global Variables
     private static final String FILENAME = "task.txt";
@@ -21,7 +23,11 @@ public class Duke {
      * Creates an instance of Duke and starts the application
      */
     public static void main(String[] args) {
-        new Duke().run();
+        if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
+            new Duke().run();
+        } else { // GUI mode
+            Application.launch(duke.ui.GraphicsUi.class, args);
+        }
     }
 
     /**
