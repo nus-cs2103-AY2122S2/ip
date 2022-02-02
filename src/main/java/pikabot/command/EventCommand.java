@@ -34,18 +34,16 @@ public class EventCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Event currEvent = Parser.parseEvent(eventCommand);
             taskList.add(currEvent);
-            Ui.indicateAddedTask(currEvent, taskList);
             storage.appendToFile(currEvent);
-
+            return Ui.indicateAddedTask(currEvent, taskList);
         } catch (EventException | IOException e) {
-            Ui.printExceptionMessage(e);
-
+            return Ui.printExceptionMessage(e);
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("The description of an event must"
+            return Ui.printExceptionCustomisedMessage("The description of an event must"
                     + "contain a date in the numerical format YYYY-MM-DD");
         }
     }

@@ -32,23 +32,19 @@ public class DeleteCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Parser.parseIntegerCommand(deleteCommand);
             int taskNumberToDelete = Integer.parseInt(deleteCommand[1]);
             Task taskToDelete = taskList.get(taskNumberToDelete - 1);
             taskList.delete(taskNumberToDelete);
-            Ui.indicateRemovedTask(taskToDelete, taskList);
-        } catch (NoIntegerException e) {
-            Ui.printExceptionMessage(e);
-        } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
-        }
-
-        try {
             storage.taskListToFile(taskList);
-        } catch (IOException e) {
-            Ui.printExceptionMessage(e);
+            return Ui.indicateRemovedTask(taskToDelete, taskList);
+        } catch (NoIntegerException | IOException e) {
+            return Ui.printExceptionMessage(e);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
+                    + "The task number you entered does not exist.");
         }
     }
 }

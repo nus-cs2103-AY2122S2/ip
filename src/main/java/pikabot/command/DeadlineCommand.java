@@ -34,18 +34,18 @@ public class DeadlineCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Deadline currDeadline = Parser.parseDeadline(deadlineCommand);
             taskList.add(currDeadline);
-            Ui.indicateAddedTask(currDeadline, taskList);
             storage.appendToFile(currDeadline);
+            return Ui.indicateAddedTask(currDeadline, taskList);
 
         } catch (DeadlineException | IOException e) {
-            Ui.printExceptionMessage(e);
+            return Ui.printExceptionMessage(e);
 
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to "
+            return Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to "
                     + "be a valid date in numerical format YYYY-MM-DD.");
         }
     }
