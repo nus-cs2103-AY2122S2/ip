@@ -107,7 +107,10 @@ public class Duke {
             if (index != -1) {
                 String description = instruction.substring(6, index);
                 String time = instruction.substring(index + 4);
-                toAdd = new Event(description, time);
+                int indexOfDifferentiator = time.indexOf("-");
+                String dateAndStartTime = time.substring(0, indexOfDifferentiator).trim();
+                String endTime = time.substring(indexOfDifferentiator + 1).trim();
+                toAdd = new Event(description, dateAndStartTime, endTime);
             } else {
                 throw new CustomException("Incorrect time format: ensure to prefix time with '/at'");
             }
@@ -121,7 +124,7 @@ public class Duke {
     public static void deleteTask(int num) throws CustomException {
         if (num <= 0) {
             throw new CustomException("Invalid task ID: number must be a positive integer:)");
-        } else if ( num > manager.size()) {
+        } else if (num > manager.size()) {
             throw new CustomException("Invalid task ID: this task number does not exist as of now.");
         } else {
             manager.remove(num - 1);

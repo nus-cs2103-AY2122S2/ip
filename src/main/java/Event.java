@@ -1,18 +1,24 @@
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
-    protected LocalDateTime time;
+    private final DateTimeFormatter inputFormatterStart = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final DateTimeFormatter inputFormatterEnd = DateTimeFormatter.ofPattern("HHmm");
+    private final DateTimeFormatter outputFormatterStart = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm -");
+    private final DateTimeFormatter outputFormatterEnd = DateTimeFormatter.ofPattern(" HH:mm");
+    protected LocalDateTime dateAndStartTime;
+    protected LocalTime endTime;
 
-    public Event(String description, String time) {
+    public Event(String description, String dateAndStartTime, String endTime) {
         super(description);
-        this.time = time;
+        this.dateAndStartTime = LocalDateTime.parse(dateAndStartTime, inputFormatterStart);
+        this.endTime = LocalTime.parse(endTime, inputFormatterEnd);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time + ")";
+        return "[E]" + super.toString() + "(at: " + dateAndStartTime.format(outputFormatterStart)
+                + endTime.format(outputFormatterEnd) + ")";
     }
 }
