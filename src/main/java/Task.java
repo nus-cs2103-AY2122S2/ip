@@ -46,14 +46,14 @@ public class Task {
 
     /**
      * @override
-     * @return String version of task, with marked and name. E.g. [X] Task
+     * @return String version of task, with marked and name. E.g. [X] Task vs [✓] Task
      */
     public String toString() {
         if (this.mark) {
-            String marked = "[X] ";
+            String marked = "[✓] ";
             return marked + this.name;
         } else {
-            String unmarked = "[ ] ";
+            String unmarked = "[X] ";
             return unmarked + this.name;
         }
     }

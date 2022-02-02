@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.IOException;
 
 /**
  * Handles input in main in Duke.java. Receives String from Scanner in main
  * Processes the input into 7 categories: Todo, Event, Deadline, list, mark, unmark, bye and throws error
  */
 public class InputHandler {
-    private ArrayList<Task> arr;
-    public InputHandler() {
-        this.arr = new ArrayList<>();
+    private Storage storage;
+
+    /**
+     * Constructs an InputHandler for Duke.java to handle inputs from user
+     * @throws IOException If Storage class fails to initialise
+     */
+    public InputHandler() throws IOException {
+        this.storage = new Storage();
     }
 
 
@@ -18,7 +24,7 @@ public class InputHandler {
      * @return boolean representing isChatEnded variable in main. If "bye" command is given, a true boolean is returned, else false is returned
      * @throws DukeException Invalid input types, or unrecognisable commands
      */
-    public boolean handleInput(String input) throws DukeException {
+    public boolean handleInput(String input) throws DukeException, IOException {
         String[] splitInput = input.split(" ");
         String inputCommand = splitInput[0];
         switch (inputCommand) {
@@ -27,7 +33,7 @@ public class InputHandler {
                     String[] nameArray = Arrays.copyOfRange(splitInput, 1, splitInput.length);
                     String name = String.join(" ", nameArray);
                     Todo newTodo = new Todo(name);
-                    arr.add(newTodo);
+                    this.storage.writeData(newTodo);
                     printAddTaskMessage(newTodo);
                     return false;
                 } else {
@@ -41,7 +47,7 @@ public class InputHandler {
                     String name = nameAndTimeArray[0];
                     String time = nameAndTimeArray[1];
                     Event newEvent = new Event(name, time);
-                    arr.add(newEvent);
+                    this.storage.writeData(newEvent);
                     printAddTaskMessage(newEvent);
                     return false;
                 } else {
@@ -55,7 +61,7 @@ public class InputHandler {
                     String name = nameAndTimeArray[0];
                     String time = nameAndTimeArray[1];
                     Deadline newDeadline = new Deadline(name, time);
-                    arr.add(newDeadline);
+                    this.storage.writeData(newDeadline);
                     printAddTaskMessage(newDeadline);
                     return false;
                 } else {
@@ -65,14 +71,7 @@ public class InputHandler {
                 if (splitInput.length == 1) {
                     System.out.println("Here are the tasks in your list:");
                     int i = 0;
-                    for (Task item : arr) {
-                        i += 1;
-                        if (item.isMark()) {
-                            System.out.println(i + ". " + item);
-                        } else {
-                            System.out.println(i + ". " + item);
-                        }
-                    }
+                    System.out.println(this.storage.list());
                     return false;
                 } else {
                     throw new DukeException("Wrong usage of list! Correct usage: list");
@@ -81,7 +80,7 @@ public class InputHandler {
                 if (splitInput.length == 2) {
                     System.out.println("Nice! I've marked this task as done:\n");
                     int idx = Integer.parseInt(splitInput[1]) - 1;
-                    Task taskToBeMarked = arr.get(idx);
+                    Task taskToBeMarked = this.storage.get(idx);
                     taskToBeMarked.markTask();
                     return false;
                 } else {
@@ -91,7 +90,7 @@ public class InputHandler {
                 if (splitInput.length == 2) {
                     System.out.println("OK, I've marked this task as not done yet:\n");
                     int idx = Integer.parseInt(splitInput[1]) - 1;
-                    Task taskToBeUnmarked = arr.get(idx);
+                    Task taskToBeUnmarked = this.storage.get(idx);
                     taskToBeUnmarked.unmarkTask();
                     return false;
                 } else {
@@ -100,9 +99,9 @@ public class InputHandler {
             case "delete":
                 if (splitInput.length == 2) {
                     int idx = Integer.parseInt(splitInput[1]) - 1;
-                    Task taskToBeDeleted = arr.get(idx);
-                    arr.remove(idx);
-                    System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + arr.size() + " tasks in the list");
+                    Task taskToBeDeleted = storage.get(idx);
+                    this.storage.deleteData(idx);
+                    System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + this.storage.taskListSize() + " tasks in the list");
                     return false;
                 } else {
                     throw new DukeException("Wrong usage of delete! Correct usage: delete [index]");
@@ -121,7 +120,7 @@ public class InputHandler {
      * @param task The task that has been added
      */
     public void printAddTaskMessage(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task + "\nNow you have " + arr.size() + " tasks in the list." );
+        System.out.println("Got it. I've added this task:\n" + task + "\nNow you have " + this.storage.taskListSize() + " tasks in the list." );
     }
 }
 

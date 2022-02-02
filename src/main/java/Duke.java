@@ -1,9 +1,10 @@
 import java.util.Scanner; //import Scanner
 import java.util.ArrayList; //import ArrayList
 import java.util.Arrays; //import Arrays
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

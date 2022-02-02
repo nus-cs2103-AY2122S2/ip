@@ -8,12 +8,12 @@ import java.util.Arrays;
  * Includes a dueDate attribute. Overrides toString() from Task
  */
 public class Deadline extends Task {
-    private String dueDate;
+    public String dueDate;
     public Deadline(String name, String time) {super(name); this.dueDate = time;}
 
     /**
      * @override
-     * @return String of Deadline task, eg [D][X] Deadline (by:XX)
+     * @return String of Deadline task, eg [D][X] Deadline (by:XX) vs [D][✓] Deadline (by;XX)
      */
 
     public String toString() { return "[D]" + super.toString() + "(by:" + this.dueDate + ")"; }
