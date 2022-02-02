@@ -23,7 +23,7 @@ public class DeadlineCommand extends DukeCommand {
      * @param storage The object that deals with the management of the database
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
         String deadlineName = Parser.parseDescription(this.commandBody);
         LocalDateTime localDateTime = Parser.parseDateTime(this.commandBody, "deadline");
@@ -32,7 +32,7 @@ public class DeadlineCommand extends DukeCommand {
         tasks.add(deadlineTask);
 
         storage.save(tasks);
-        ui.showSuccessfulAdd(deadlineTask, tasks.getSize());
+        return ui.showSuccessfulAdd(deadlineTask, tasks.getSize());
 
     }
 }

@@ -25,34 +25,37 @@ public class Parser {
     public static DukeCommand parse(String fullCommand) throws DukeException {
         String commandParts[] = fullCommand.split(" ");
         String command = commandParts[0];
-
-        if (command.equals("list")) {
-            return new ListCommand("list");
-        } else if (command.equals("todo")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new ToDoCommand(fullCommand.substring(5));
-        } else if (command.equals("deadline")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new DeadlineCommand(fullCommand.substring(9));
-        } else if (command.equals("event")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new EventCommand(fullCommand.substring(6));
-        } else if (command.equals("mark")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new MarkCommand(fullCommand.substring(5));
-        } else if (command.equals("unmark")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new UnmarkCommand(fullCommand.substring(7));
-        } else if (command.equals("delete")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new DeleteCommand(fullCommand.substring(7));
-        } else if (command.equals("find")) {
-            Parser.exceptionCheck(commandParts.length, command);
-            return new FindCommand(fullCommand.substring(5));
-        } else if (command.equals("bye")) {
-            return new ByeCommand("bye");
-        } else {
-            throw new InvalidMessageException();
+        try {
+            if (command.equals("list")) {
+                return new ListCommand("list");
+            } else if (command.equals("todo")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new ToDoCommand(fullCommand.substring(5));
+            } else if (command.equals("deadline")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new DeadlineCommand(fullCommand.substring(9));
+            } else if (command.equals("event")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new EventCommand(fullCommand.substring(6));
+            } else if (command.equals("mark")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new MarkCommand(fullCommand.substring(5));
+            } else if (command.equals("unmark")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new UnmarkCommand(fullCommand.substring(7));
+            } else if (command.equals("delete")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new DeleteCommand(fullCommand.substring(7));
+            } else if (command.equals("find")) {
+                Parser.exceptionCheck(commandParts.length, command);
+                return new FindCommand(fullCommand.substring(5));
+            } else if (command.equals("bye")) {
+                return new ByeCommand("bye");
+            } else {
+                throw new InvalidMessageException();
+            }
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 

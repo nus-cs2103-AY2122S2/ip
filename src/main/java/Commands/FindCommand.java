@@ -14,7 +14,7 @@ public class FindCommand extends DukeCommand {
         super(description);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         TaskList arrList = new TaskList();
 
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -25,9 +25,9 @@ public class FindCommand extends DukeCommand {
         }
 
         if (arrList.getSize() == 0 ){
-            ui.showEmptyFind();
+            return ui.showEmptyFind();
         } else {
-            ui.showTaskList(arrList);
+            return ui.showTaskList(arrList);
         }
     }
 }

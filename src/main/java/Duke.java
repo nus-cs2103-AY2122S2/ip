@@ -6,16 +6,17 @@ import util.Storage;
 import util.Ui;
 
 import java.io.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
-    }
 
     /**
      * Constructor for the Duke class
@@ -35,6 +36,7 @@ public class Duke {
     /**
      * Runs the application
      */
+    /*
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -56,5 +58,20 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+     */
+
+    public String executeCommand(String input) throws IOException, DukeException {
+        DukeCommand c = Parser.parse(input);
+        return c.execute(tasks, ui, storage);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
