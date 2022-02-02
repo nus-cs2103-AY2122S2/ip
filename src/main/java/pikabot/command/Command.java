@@ -14,5 +14,5 @@ public abstract class Command {
      * @param taskList TaskList containing existing list of tasks.
      * @param storage Storage to update data file in computer.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 }

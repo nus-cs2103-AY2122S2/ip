@@ -28,15 +28,15 @@ public class FindCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Parser.parseFindCommand(findCommand);
             String keyword = findCommand[1];
             TaskList taskListWithMatchedTasks = new TaskList(taskList.find(keyword));
-            System.out.println(Ui.printListOfMatchedTasks(taskListWithMatchedTasks, keyword));
+            return Ui.printListOfMatchedTasks(taskListWithMatchedTasks, keyword);
 
         } catch (FindException e) {
-            System.out.println(Ui.printExceptionMessage(e));
+            return Ui.printExceptionMessage(e);
         }
     }
 }

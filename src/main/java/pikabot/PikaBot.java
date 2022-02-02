@@ -39,6 +39,7 @@ public class PikaBot extends Application {
 
     @Override
     public void start(Stage stage) {
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -133,15 +134,19 @@ public class PikaBot extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
+        System.out.println(input + "hi");
         String[] strInputArr = input.split(" ", 2);
+        String response = "";
 
         if (!strInputArr[0].equals("bye")) {
             Command command = Parser.parseCommand(strInputArr);
-            command.execute(taskList, storage);
+            response = command.execute(taskList, storage);
+        } else {
+            response = Ui.printClosingText();
         }
 
-        return "PikaBot heard: " + input;
+        return response;
     }
 
     private static final String FILEPATH = "data/tasks.txt";
@@ -165,6 +170,7 @@ public class PikaBot extends Application {
      *
      * @param args Command line arguments entered by user.
      */
+    /*
     public static void main(String[] args) {
 
         PikaBot pikaBot = new PikaBot();
@@ -184,4 +190,5 @@ public class PikaBot extends Application {
         System.out.println(Ui.printClosingText());
         sc.close();
     }
+    */
 }

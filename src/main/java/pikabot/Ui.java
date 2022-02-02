@@ -7,8 +7,8 @@ import pikabot.task.Task;
  */
 public class Ui {
 
-    public static final String LINE = "_________________________________";
-    public static final String INDENTATION = "     ";
+    public static final String LINE = "";
+    public static final String INDENTATION = "";
 
     /**
      * Prints out welcome message when PikaBot starts running.

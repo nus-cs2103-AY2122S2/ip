@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        System.out.println(Ui.printListOfTasks(taskList));
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.printListOfTasks(taskList);
     }
 }

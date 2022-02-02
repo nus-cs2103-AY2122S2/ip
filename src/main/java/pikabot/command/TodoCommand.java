@@ -32,15 +32,15 @@ public class TodoCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Todo currTodo = Parser.parseTodo(todoCommand);
             taskList.add(currTodo);
-            System.out.println(Ui.indicateAddedTask(currTodo, taskList));
             storage.appendToFile(currTodo);
+            return Ui.indicateAddedTask(currTodo, taskList);
 
         } catch (TodoException | IOException e) {
-            System.out.println(Ui.printExceptionMessage(e));
+            return Ui.printExceptionMessage(e);
         }
     }
 }

@@ -31,23 +31,18 @@ public class MarkCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Parser.parseIntegerCommand(markCommand);
             int taskToMark = Integer.parseInt(markCommand[1]);
             taskList.markTaskAsDone(taskToMark);
-            System.out.println(Ui.indicateMarked(taskList.get(taskToMark - 1)));
-        } catch (NoIntegerException e) {
-            System.out.println(Ui.printExceptionMessage(e));
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
-                    + "The task number you entered does not exist."));
-        }
-
-        try {
             storage.taskListToFile(taskList);
-        } catch (IOException e) {
-            System.out.println(Ui.printExceptionMessage(e));
+            return Ui.indicateMarked(taskList.get(taskToMark - 1));
+        } catch (NoIntegerException | IOException e) {
+            return Ui.printExceptionMessage(e);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
+                    + "The task number you entered does not exist.");
         }
     }
 }

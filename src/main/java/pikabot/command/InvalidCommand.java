@@ -37,11 +37,12 @@ public class InvalidCommand extends Command {
      * @param storage Storage to update data file in computer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             invalidTask();
+            return "";
         } catch (InvalidTaskCommandException e) {
-            System.out.println(Ui.printExceptionMessage(e));
+            return Ui.printExceptionMessage(e);
         }
     }
 }
