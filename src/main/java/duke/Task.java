@@ -38,7 +38,8 @@ public class Task {
      * @return Returns string containing status of whether the task is done.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

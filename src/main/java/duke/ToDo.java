@@ -2,10 +2,10 @@ package duke;
 
 /**
  * Inherits from the Task class.
- * Stores the description of a Todo object.
+ * Stores the description of a ToDo object.
  * Provides to String method to print event details in specific format.
  */
-public class Todo extends Task {
+public class ToDo extends Task {
 
     /**
      * Creates an instance of a todo object.
@@ -13,7 +13,7 @@ public class Todo extends Task {
      *
      * @param description Description of the todo task.
      */
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
@@ -24,7 +24,7 @@ public class Todo extends Task {
      * @param description Description of the todo task.
      * @param isDone Boolean value of whether the todo task is marked or unmarked.
      */
-    public Todo(String description, boolean isDone) {
+    public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 

@@ -57,7 +57,7 @@ public class Duke {
                         Deadline d = new Deadline(task[0], task[1]);
                         tasks.add(d);
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException de) {
                             System.out.println("Something went wrong: " + de.getMessage());
                         }
@@ -71,10 +71,10 @@ public class Duke {
                         throw new DukeException("The description of a todo cannot be empty.");
                     } else {
                         String task = Parser.getTodoDetails(nextInput);
-                        Todo t = new Todo(task);
+                        ToDo t = new ToDo(task);
                         tasks.add(t);
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException te) {
                             System.out.println("Something went wrong: " + te.getMessage());
                         }
@@ -91,7 +91,7 @@ public class Duke {
                         Event e = new Event(task[0], task[1]);
                         tasks.add(e);
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException ee) {
                             System.out.println("Something went wrong: " + ee.getMessage());
                         }
@@ -107,7 +107,7 @@ public class Duke {
                         int taskId = Parser.getTaskId(nextInput);
                         tasks.getTask(taskId - 1).markDone();
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
@@ -122,7 +122,7 @@ public class Duke {
                         int taskId = Parser.getTaskId(nextInput);
                         tasks.getTask(taskId - 1).markUndone();
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
@@ -139,7 +139,7 @@ public class Duke {
                         System.out.println(tasks.getTask(taskId - 1).toString());
                         tasks.delete(taskId - 1);
                         try {
-                            storage.write(tasks.getTasksList());
+                            storage.write(tasks.getTaskList());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }

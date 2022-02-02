@@ -57,7 +57,7 @@ public class Storage {
      */
     public void write(ArrayList<Task> textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for(Task t: textToAdd) {
+        for (Task t: textToAdd) {
             fw.write(t.toString() + System.lineSeparator());
         }
         fw.close();

@@ -10,17 +10,17 @@ import java.util.ArrayList;
  * information (i.e. size of the tasks list).
  */
 public class TaskList {
-    private ArrayList<Task> tasksList = new ArrayList<Task>();
+    private ArrayList<Task> taskList = new ArrayList<Task>();
 
     /**
      * Creates an instance of a tasklist object based on the current
      * existing list of tasks passed in (if not empty).
      *
-     * @param tasksList Current lists of tasks, each as a string in the array list.
+     * @param taskList Current lists of tasks, each as a string in the array list.
      * @throws DukeException To catch any errors when creating the tasklist.
      */
-    public TaskList(ArrayList<String> tasksList) throws DukeException {
-        for (String t : tasksList) {
+    public TaskList(ArrayList<String> taskList) throws DukeException {
+        for (String t : taskList) {
             String tType = t.substring(0, 7);
             boolean tIsDone = false;
             if (tType.charAt(4) == 'X') {
@@ -29,17 +29,17 @@ public class TaskList {
             switch (tType.charAt(1)) {
             case 'T':
                 String tTodo = t.substring(7);
-                this.tasksList.add(new Todo(tTodo, tIsDone));
+                this.taskList.add(new ToDo(tTodo, tIsDone));
                 break;
             case 'E':
                 String[] tEvent = t.substring(7).split(" - at: ");
-                this.tasksList.add(new Event(tEvent[0], tIsDone,
+                this.taskList.add(new Event(tEvent[0], tIsDone,
                         LocalDate.parse(tEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
                 break;
             case 'D':
                 String[] tDeadline = t.substring(7).split(" - by: ");
-                this.tasksList.add(new Deadline(tDeadline[0], tIsDone,
+                this.taskList.add(new Deadline(tDeadline[0], tIsDone,
                         LocalDate.parse(tDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
                 break;
@@ -51,21 +51,21 @@ public class TaskList {
      * Creates an instance of a tasklist object with no existing tasks.
      */
     public TaskList() {
-        this.tasksList = new ArrayList<Task>();
+        this.taskList = new ArrayList<Task>();
     }
 
     /**
      * Adds a new task to the task list.
      */
     public void add(Task t) {
-        this.tasksList.add(t);
+        this.taskList.add(t);
     }
 
     /**
      * Deletes an existing task from the task list.
      */
     public void delete(int taskId) {
-        tasksList.remove(taskId);
+        taskList.remove(taskId);
     }
 
     /**
@@ -74,16 +74,16 @@ public class TaskList {
      * @return Number of tasks in the list as an integer.
      */
     public int size() {
-        return tasksList.size();
+        return taskList.size();
     }
 
     /**
      * Gets and returns the current existing tasks list.
      *
-     * @return Taskslist as an array list of task objects..
+     * @return Task list as an array list of task objects..
      */
-    public ArrayList<Task> getTasksList() {
-        return tasksList;
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     /**
@@ -92,7 +92,7 @@ public class TaskList {
      * @return Specific task object in the tasks list.
      */
     public Task getTask(int taskId) {
-        return tasksList.get(taskId);
+        return taskList.get(taskId);
     }
 
     /**
@@ -105,7 +105,7 @@ public class TaskList {
         String result = "";
         int count = 1;
         result += "Here are the tasks in your list: \n";
-        for (Task record : tasksList) {
+        for (Task record : taskList) {
             result += count + ". " + record.toString() + "\n";
             count++;
         }
