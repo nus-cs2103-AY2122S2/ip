@@ -2,9 +2,9 @@ package duke;
 
 import duke.commands.Command;
 import duke.parser.Parser;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 /**
  * Initializes and starts the duke program.
