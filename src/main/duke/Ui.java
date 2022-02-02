@@ -2,6 +2,8 @@ package main.duke;
 
 import main.duke.tasks.Task;
 
+import java.util.ArrayList;
+
 public class Ui {
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
@@ -60,5 +62,21 @@ public class Ui {
     public void respondDeleteTask(Task deleteTask, TaskList taskList) {
         System.out.printf("Noted. I've removed this task: \n" + "    %s\n"
                 + "%s\n", deleteTask, taskList.taskCountToString());
+    }
+
+    /**
+     * prints out the task that was filtered by the user
+     * @param foundTasks the targeted task to add
+     */
+    public void respondFindTask(ArrayList<Task> foundTasks) {
+        int n = foundTasks.size();
+        if (n == 0) {
+            System.out.println("Cannot find any related tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < n; i++) {
+                System.out.printf("%d.%s%n", i + 1, foundTasks.get(i));
+            }
+        }
     }
 }

@@ -8,5 +8,6 @@ public enum CommandType {
     LIST,
     MARK,
     TODO,
-    UNMARK;
+    UNMARK,
+    FIND,
 }

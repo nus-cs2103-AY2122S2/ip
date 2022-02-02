@@ -1,14 +1,6 @@
 package main.duke.io;
 
-import main.duke.commands.Command;
-import main.duke.commands.CBye;
-import main.duke.commands.CMark;
-import main.duke.commands.CDelete;
-import main.duke.commands.CList;
-import main.duke.commands.CTodo;
-import main.duke.commands.CDeadline;
-import main.duke.commands.CEvent;
-import main.duke.commands.CUnmark;
+import main.duke.commands.*;
 import main.duke.DukeException;
 
 import java.util.Arrays;
@@ -115,6 +107,11 @@ public class Parser {
                         throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
                     }
                 }
+                break;
+            case "find":
+                String findString = String.join(" ",
+                        Arrays.copyOfRange(inputArray, 1, inputArray.length));
+                newCommand = new CFind(findString);
                 break;
             default:
                 throw new DukeException("Sorry. I do not understand your input.");
