@@ -2,6 +2,7 @@ package exceptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.exceptions.UnknownCommandException;
 import org.junit.jupiter.api.Test;
 
 /**
