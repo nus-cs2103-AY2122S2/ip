@@ -29,12 +29,12 @@ public class Duke {
 
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String userInput = ui.getUserInputLine();
 
                 Command command = Parser.parse(userInput);
-                command.execute(storage,ui,manager);
+                command.execute(storage, ui, manager);
 
                 isExit = command.isExit();
             } catch (DukeException e) {

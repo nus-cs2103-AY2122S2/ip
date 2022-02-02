@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a command to mark a task.

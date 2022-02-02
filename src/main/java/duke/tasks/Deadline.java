@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%c][%c] %s (by: %s)", this.getType(),this.done,this.taskName,this.getDate());
+        return String.format("[%c][%c] %s (by: %s)", this.getType(), this.done, this.taskName, this.getDate());
     }
 
     /**
@@ -74,7 +74,7 @@ public class Deadline extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (! (o instanceof Deadline)) {
+        if (!(o instanceof Deadline)) {
             return false;
         }
 

@@ -1,15 +1,23 @@
 package duke;
 
-import duke.commands.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteTaskCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.SortByDateCommand;
+import duke.commands.SortByNameCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -27,7 +35,7 @@ public class Parser {
         }
     }
     private static Todo newToDo(String s) throws DukeException {
-        String taskName =  s.replaceFirst("todo","").strip();
+        String taskName = s.replaceFirst("todo", "").strip();
 
         if (taskName.equals("")) {
             throw new DukeException("Todo Name is empty!");
@@ -36,7 +44,7 @@ public class Parser {
         return new Todo(taskName);
     }
     private static Event newEvent(String s) throws DukeException {
-        String[] fields =  s.replaceFirst("event","").split("/at");
+        String[] fields = s.replaceFirst("event", "").split("/at");
 
         if (fields.length != 2) {
             throw new DukeException("Wrong format entered! Please enter <Event Name> /at <Event Date>");
@@ -55,13 +63,13 @@ public class Parser {
         LocalDateTime date = Parser.parseDateTime(dateString);
 
         if (date == null) {
-            return new Event(taskName,dateString);
+            return new Event(taskName, dateString);
         }
 
-        return new Event(taskName,date);
+        return new Event(taskName, date);
     }
     private static Deadline newDeadline(String s) throws DukeException {
-        String[] fields =  s.replaceFirst("deadline","").split("/by");
+        String[] fields = s.replaceFirst("deadline", "").split("/by");
 
         if (fields.length != 2) {
             throw new DukeException("Wrong format entered! Please enter <Deadline Name> /by <Deadline>");
@@ -80,16 +88,16 @@ public class Parser {
         LocalDateTime date = Parser.parseDateTime(dateString);
 
         if (date == null) {
-            return new Deadline(taskName,dateString);
+            return new Deadline(taskName, dateString);
         }
 
-        return new Deadline(taskName,date);
+        return new Deadline(taskName, date);
     }
 
     public static String parseToFileFromTask(Task t) {
         String dateStr = "";
         if (t.getDateObj() == null) {
-            dateStr =  t.getDate();
+            dateStr = t.getDate();
             if (dateStr.equals("")) {
                 dateStr = "None";
             }
@@ -97,7 +105,7 @@ public class Parser {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             dateStr = t.getDateObj().format(format);
         }
-        return String.format("%c\t%c\t%s\t%s",t.getType(),t.getDone(),t.getTaskName(),dateStr);
+        return String.format("%c\t%c\t%s\t%s", t.getType(), t.getDone(), t.getTaskName(), dateStr);
     }
 
     public static Task parseToTaskFromFile(String fileInput) throws DukeException {
@@ -132,7 +140,7 @@ public class Parser {
 
         case 'D':
             if (date == null) {
-                t = new Deadline(name,dateStr);
+                t = new Deadline(name, dateStr);
             } else {
                 t = new Deadline(name, date);
 
@@ -141,7 +149,7 @@ public class Parser {
 
         case 'E':
             if (date == null) {
-                t = new Event(name,dateStr);
+                t = new Event(name, dateStr);
             } else {
                 t = new Event(name, date);
             }
@@ -174,7 +182,7 @@ public class Parser {
             return new ExitCommand();
         } else if (input.startsWith("delete")) {
             return new DeleteTaskCommand(input);
-        } else if (input.startsWith("find")){
+        } else if (input.startsWith("find")) {
             return new FindCommand(input);
         }
 

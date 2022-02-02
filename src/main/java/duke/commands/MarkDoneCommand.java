@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a command to mark a task as done.
@@ -40,7 +40,7 @@ public class MarkDoneCommand extends MarkCommand {
                     boolean isSuccess = taskManager.markTaskDone(index);
                     if (isSuccess) {
                         ui.showMarked(taskManager.getTask(index));
-                        save(storage,ui,taskManager);
+                        save(storage, ui, taskManager);
                     } else {
                         ui.showMarkNotNeeded(taskManager.getTask(index));
                     }

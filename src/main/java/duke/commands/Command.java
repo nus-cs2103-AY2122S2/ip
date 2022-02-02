@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a general command entered by the user.
@@ -17,10 +17,10 @@ import duke.Ui;
  * @see SortByNameCommand
  */
 public abstract class Command {
-    Storage storage = new Storage();
-    Ui ui = new Ui();
-    TaskManager taskManager = new TaskManager();
-    String userInput = "";
+    protected String userInput = "";
+    private Storage storage = new Storage();
+    private Ui ui = new Ui();
+    private TaskManager taskManager = new TaskManager();
 
     public Command(String userInput) {
         this.userInput = userInput;
