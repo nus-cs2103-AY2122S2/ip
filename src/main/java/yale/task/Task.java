@@ -55,7 +55,7 @@ public class Task {
      */
     public String export() {
         return " " + "| "
-                + (isMarked? 1 : 0) + " | " + this.name;
+                + (isMarked ? 1 : 0) + " | " + this.name;
     }
 
     /**

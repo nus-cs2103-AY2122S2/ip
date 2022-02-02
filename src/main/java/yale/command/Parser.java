@@ -28,7 +28,7 @@ public class Parser {
             list.deleteFeature(command, list);
         } else if (command.contains("mark") || command.contains("unmark")) {
             list.markFeature(command, list);
-        }  else if (command.contains("todo")) {
+        } else if (command.contains("todo")) {
             list.todoFeature(command, list);
         } else if (command.contains("deadline")) {
             list.deadlineFeature(command, list);

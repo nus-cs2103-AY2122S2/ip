@@ -32,7 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String export() {
-        return "E " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.at;
+        return "E " + "| " + (isMarked ? 1 : 0) + " | " + this.name + " | " + this.at;
     }
     /**
      * Returns a customised String.

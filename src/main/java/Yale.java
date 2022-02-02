@@ -22,6 +22,9 @@ public class Yale {
     private Parser parser;
     private TaskList list;
 
+    /**
+     * Constructor method
+     */
     public Yale() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);

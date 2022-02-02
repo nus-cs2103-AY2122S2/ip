@@ -30,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String export() {
-        return "D " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.by;
+        return "D " + "| " + (isMarked ? 1 : 0) + " | " + this.name + " | " + this.by;
     }
     /**
      * Returns a customised String.
