@@ -38,15 +38,15 @@ public class DeadlineCommand extends Command {
         try {
             Deadline currDeadline = Parser.parseDeadline(deadlineCommand);
             taskList.add(currDeadline);
-            Ui.indicateAddedTask(currDeadline, taskList);
+            System.out.println(Ui.indicateAddedTask(currDeadline, taskList));
             storage.appendToFile(currDeadline);
 
         } catch (DeadlineException | IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
 
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to "
-                    + "be a valid date in numerical format YYYY-MM-DD.");
+            System.out.println(Ui.printExceptionCustomisedMessage("Invalid deadline! Deadline has to "
+                    + "be a valid date in numerical format YYYY-MM-DD."));
         }
     }
 }

@@ -36,11 +36,11 @@ public class TodoCommand extends Command {
         try {
             Todo currTodo = Parser.parseTodo(todoCommand);
             taskList.add(currTodo);
-            Ui.indicateAddedTask(currTodo, taskList);
+            System.out.println(Ui.indicateAddedTask(currTodo, taskList));
             storage.appendToFile(currTodo);
 
         } catch (TodoException | IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 }

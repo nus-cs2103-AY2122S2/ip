@@ -38,17 +38,18 @@ public class DeleteCommand extends Command {
             int taskNumberToDelete = Integer.parseInt(deleteCommand[1]);
             Task taskToDelete = taskList.get(taskNumberToDelete - 1);
             taskList.delete(taskNumberToDelete);
-            Ui.indicateRemovedTask(taskToDelete, taskList);
+            System.out.println(Ui.indicateRemovedTask(taskToDelete, taskList));
         } catch (NoIntegerException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
+            System.out.println(Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
+                    + "The task number you entered does not exist."));
         }
 
         try {
             storage.taskListToFile(taskList);
         } catch (IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 }

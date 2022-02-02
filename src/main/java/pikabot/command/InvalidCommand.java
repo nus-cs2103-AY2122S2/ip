@@ -41,7 +41,7 @@ public class InvalidCommand extends Command {
         try {
             invalidTask();
         } catch (InvalidTaskCommandException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 }

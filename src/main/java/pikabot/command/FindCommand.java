@@ -33,10 +33,10 @@ public class FindCommand extends Command {
             Parser.parseFindCommand(findCommand);
             String keyword = findCommand[1];
             TaskList taskListWithMatchedTasks = new TaskList(taskList.find(keyword));
-            Ui.printListOfMatchedTasks(taskListWithMatchedTasks, keyword);
+            System.out.println(Ui.printListOfMatchedTasks(taskListWithMatchedTasks, keyword));
 
         } catch (FindException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 }

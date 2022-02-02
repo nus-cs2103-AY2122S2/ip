@@ -36,17 +36,18 @@ public class UnmarkCommand extends Command {
             Parser.parseIntegerCommand(unmarkCommand);
             int taskToMark = Integer.parseInt(unmarkCommand[1]);
             taskList.markTaskAsUndone(taskToMark);
-            Ui.indicateUnmarked(taskList.get(taskToMark - 1));
+            System.out.println(Ui.indicateUnmarked(taskList.get(taskToMark - 1)));
         } catch (NoIntegerException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
+            System.out.println(Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
+                    + "The task number you entered does not exist."));
         }
 
         try {
             storage.taskListToFile(taskList);
         } catch (IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 

@@ -28,6 +28,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Storage storage) {
-        Ui.printListOfTasks(taskList);
+        System.out.println(Ui.printListOfTasks(taskList));
     }
 }

@@ -38,15 +38,15 @@ public class EventCommand extends Command {
         try {
             Event currEvent = Parser.parseEvent(eventCommand);
             taskList.add(currEvent);
-            Ui.indicateAddedTask(currEvent, taskList);
+            System.out.println(Ui.indicateAddedTask(currEvent, taskList));
             storage.appendToFile(currEvent);
 
         } catch (EventException | IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
 
         } catch (DateTimeParseException e) {
-            Ui.printExceptionCustomisedMessage("The description of an event must"
-                    + "contain a date in the numerical format YYYY-MM-DD");
+            System.out.println(Ui.printExceptionCustomisedMessage("The description of an event must"
+                    + "contain a date in the numerical format YYYY-MM-DD"));
         }
     }
 }

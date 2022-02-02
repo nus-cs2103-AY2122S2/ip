@@ -36,17 +36,18 @@ public class MarkCommand extends Command {
             Parser.parseIntegerCommand(markCommand);
             int taskToMark = Integer.parseInt(markCommand[1]);
             taskList.markTaskAsDone(taskToMark);
-            Ui.indicateMarked(taskList.get(taskToMark - 1));
+            System.out.println(Ui.indicateMarked(taskList.get(taskToMark - 1)));
         } catch (NoIntegerException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         } catch (IndexOutOfBoundsException e) {
-            Ui.printExceptionCustomisedMessage("☹ OOPS!!! " + "The task number you entered does not exist.");
+            System.out.println(Ui.printExceptionCustomisedMessage("☹ OOPS!!! "
+                    + "The task number you entered does not exist."));
         }
 
         try {
             storage.taskListToFile(taskList);
         } catch (IOException e) {
-            Ui.printExceptionMessage(e);
+            System.out.println(Ui.printExceptionMessage(e));
         }
     }
 }
