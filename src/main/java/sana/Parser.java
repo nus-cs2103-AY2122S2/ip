@@ -10,6 +10,7 @@ import sana.exception.UnknownCommandException;
  * @version 1.0
  */
 public class Parser {
+    private static SanaResponse sanaResponse = new SanaResponse();
 
     /**
      * Parses the command given to Sana
@@ -78,13 +79,8 @@ public class Parser {
             } else {
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
-        } catch (IncompleteCommandException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("Where's my number!");
+        } catch (UnknownCommandException | IncompleteCommandException | NumberFormatException e) {
+            return new String[0];
         }
-        return new String[] {};
     }
 }
