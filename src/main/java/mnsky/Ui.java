@@ -56,12 +56,17 @@ public class Ui {
      * Prints out all the strings in th l ist.
      * @param listStrings The list of strings.
      */
-    public String printListStrings(ArrayList<String> listStrings) {
-        StringBuilder sb = new StringBuilder();
-        for (String string : listStrings) {
-            sb.append(string);
-            sb.append("\n");
+    public ArrayList<String> printListStrings(ArrayList<String> listStrings) {
+        ArrayList<String> newListStrings = new ArrayList<>();
+        for (int i = 0; i < listStrings.size(); i += 5) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = i; j < listStrings.size() && j < i + 5; j++) {
+                sb.append(listStrings.get(j));
+                sb.append("\n");
+            }
+            newListStrings.add(sb.toString());
         }
-        return sb.toString();
+
+        return newListStrings;
     }
 }

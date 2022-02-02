@@ -51,7 +51,7 @@ public class Mnsky {
                 responses.add(ui.printBye());
                 break;
             case "list":
-                responses.add(ui.printListStrings(taskList.getListStrings()));
+                responses = ui.printListStrings(taskList.getListStrings());
                 break;
             case "mark":
                 Task markedTask = taskList.mark(parsedInput.get(1));
@@ -78,7 +78,7 @@ public class Mnsky {
                 responses.add(ui.printDeletedTask(deleted));
                 break;
             case "find":
-                responses.add(ui.printListStrings(taskList.find(parsedInput.get(1))));
+                responses = ui.printListStrings(taskList.find(parsedInput.get(1)));
                 break;
             default:
                 responses.add("...");
