@@ -43,7 +43,7 @@ public class Storage {
             if (t instanceof ToDo) {
                 saveFormat += "T#";
                 saveFormat += t.isDone ? "true" : "false";
-                saveFormat += "#" + t.description;
+                saveFormat += "#" + t.description + "\n";
                 continue;
             } else if (t instanceof Deadline) {
                 saveFormat += "D";

@@ -85,4 +85,25 @@ public class TaskList {
         return "\n    Now you have " + tasks.size() + " task" + isSingular + " in your list.";
     }
 
+    public String find(String keyword) {
+        String resultStr = "";
+        boolean keywordFound = false;
+        int i = 1;
+
+        for (Task t : this.tasks) {
+            if (t.description.contains(keyword)) {
+                keywordFound = true;
+                resultStr += i++ + ". " + t + "\n      ";
+            }
+        }
+
+        if (keywordFound) {
+            resultStr = "Here are the matching tasks in your list:\n      " + resultStr;
+        } else {
+            resultStr = "No matching results found in the list.";
+        }
+
+        return resultStr;
+    }
+
 }

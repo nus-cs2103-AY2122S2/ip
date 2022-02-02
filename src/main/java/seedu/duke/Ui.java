@@ -9,7 +9,11 @@ public class Ui {
     private static final int MARK = 4;
     private static final int UNMARK = 5;
     private static final int DELETE = 6;
-    
+    private static final int FIND = 7;
+
+    /**
+     * Prints an error message for failure in loading files
+     */
     public void showLoadingError() {
 
         System.out.println("Failed to retrieve data from storage");
@@ -41,6 +45,9 @@ public class Ui {
                 break;
             case DELETE:
                 myPrint(tasks.delete(Parser.getIndex(input)));
+                break;
+            case FIND:
+                myPrint(tasks.find(Parser.getDescription(input)));
                 break;
             }
         } catch (DukeException e) {
