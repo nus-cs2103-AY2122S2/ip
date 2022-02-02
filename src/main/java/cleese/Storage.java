@@ -4,7 +4,7 @@ import task.Task;
 import task.Todo;
 import task.Event;
 import task.Deadline;
-import task.TasksList;
+import task.TaskList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,28 +22,28 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.file = new File(filePath);
+        file = new File(filePath);
     }
 
     /**
      * Saves the current state of the TasksList to the file in a custom format
-     * @param tasksList specified TasksList to save to file
+     * @param taskList specified TasksList to save to file
      * @throws IOException
      */
-    public static void saveToFile(TasksList tasksList) throws IOException {
+    public static void saveToFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
-        for (int i = 0; i < tasksList.size(); i++) {
-            fileWriter.write(tasksList.get(i).toStorageString() + "\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            fileWriter.write(taskList.get(i).toStorageString() + "\n");
         }
         fileWriter.close();
     }
 
     /**
      * Reads the custom format representing a saved state of the TasksList and restores it in the program
-     * @param tasksList
+     * @param taskList
      * @throws FileNotFoundException exception thrown when the file does not exist in the expected location
      */
-    public static void readFromFile(TasksList tasksList) throws FileNotFoundException {
+    public static void readFromFile(TaskList taskList) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNext()) {
@@ -67,7 +67,7 @@ public class Storage {
             if (taskInfo[1].equals("X")) {
                 newTask.setDone();
             }
-            tasksList.add(newTask);
+            taskList.add(newTask);
         }
     }
 }

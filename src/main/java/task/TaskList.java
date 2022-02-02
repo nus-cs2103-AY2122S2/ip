@@ -5,10 +5,10 @@ import java.util.ArrayList;
 /**
  * Represents a collection of Tasks using an ArrayList
  */
-public class TasksList {
+public class TaskList {
     private final ArrayList<Task> taskList;
 
-    public TasksList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 

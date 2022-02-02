@@ -1,6 +1,6 @@
 package cleese;
 
-import task.TasksList;
+import task.TaskList;
 import exceptions.NoDescException;
 import java.util.Scanner;
 import java.io.File;
@@ -10,17 +10,17 @@ public class Cleese {
     private static Ui ui;
     private static Parser parser;
     private static Storage storage;
-    private static TasksList tasksList;
+    private static TaskList taskList;
 
     public static void main(String[] args) {
         String filePath = "./src/TaskListDB.txt";
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
-        tasksList = new TasksList();
+        taskList = new TaskList();
         // Read inputs from file
         try {
-            storage.readFromFile(tasksList);
+            storage.readFromFile(taskList);
         } catch (FileNotFoundException e) {
             File fileName = new File("./src/TaskListDB.txt");
         }
@@ -33,7 +33,7 @@ public class Cleese {
         String response = "default";
         while (!response.equals("bye")) {
             try {
-                response = parser.handleCommand(scanner.nextLine(), tasksList, ui, storage);
+                response = parser.handleCommand(scanner.nextLine(), taskList, ui, storage);
             } catch(NoDescException error) {
                 System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 ui.printLine();

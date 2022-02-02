@@ -4,7 +4,7 @@ import task.Task;
 import task.Todo;
 import task.Event;
 import task.Deadline;
-import task.TasksList;
+import task.TaskList;
 import exceptions.InvalidInputException;
 import exceptions.NoDescException;
 import java.time.LocalDateTime;
@@ -15,14 +15,14 @@ public class Parser {
      * Processes the request from the user by decoding the user input and executes the necessary functions for
      * said request
      * @param string a whole line of raw user input
-     * @param tasksList to reference for any operations that involves TasksList
+     * @param taskList to reference for any operations that involves TasksList
      * @param ui to reference for any operations that requires messages to be printed to console
      * @param storage to reference for any operations that involves reading or storing to file
      * @return a string which represents which operation was just carried out
      * @throws NoDescException exception thrown when no description is given for a Task
      * @throws InvalidInputException exception thrown when an invalid input is given by the user
      */
-    public String handleCommand(String string, TasksList tasksList, Ui ui, Storage storage) throws NoDescException, InvalidInputException {
+    public String handleCommand(String string, TaskList taskList, Ui ui, Storage storage) throws NoDescException, InvalidInputException {
         // Declare and initialise DateTimeFormatter for expected format for date and time from user input
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         // splits the first word and the rest from the string read from user input
@@ -38,20 +38,20 @@ public class Parser {
         case "bye":
             ui.printGoodByeMessage();
             try {
-                storage.saveToFile(tasksList);
+                storage.saveToFile(taskList);
             } catch (Exception e) {
                 System.out.println("Error faced when trying to save to file");
             }
             ui.printLine();
             return "bye";
         case "list":
-            tasksList.printTaskList();
+            taskList.printTaskList();
             ui.printLine();
             return "list";
         case "mark":
         case "unmark":
             int selectedTaskNum =  Integer.parseInt(parameters);
-            Task selectedTask = tasksList.get(selectedTaskNum-1);
+            Task selectedTask = taskList.get(selectedTaskNum-1);
 
             if (command.equals("mark")) {
                 selectedTask.setDone();
@@ -66,11 +66,11 @@ public class Parser {
             ui.printLine();
             return "mark/unmark";
         case "delete":
-            int deleteSelectedTaskNum = Integer.parseInt(parameters);
-            System.out.println(deleteSelectedTaskNum);
-            Task deleteSelectedTask = tasksList.get(deleteSelectedTaskNum-1);
-            tasksList.removeFromTaskList(deleteSelectedTask);
-            ui.printRemovedAck(deleteSelectedTask, tasksList);
+            int taskToDeleteIndex = Integer.parseInt(parameters) - 1;
+            System.out.println(taskToDeleteIndex);
+            Task taskToDelete = taskList.get(taskToDeleteIndex);
+            taskList.removeFromTaskList(taskToDelete);
+            ui.printRemovedAck(taskToDelete, taskList);
             ui.printLine();
             return "delete";
         case "todo":
@@ -101,13 +101,13 @@ public class Parser {
                     newTask = new Deadline(split[0], localDateTime);
                 }
             }
-            tasksList.add(newTask);
-            ui.printAddedAck(newTask,tasksList);
+            taskList.add(newTask);
+            ui.printAddedAck(newTask, taskList);
             ui.printLine();
             return "tasks";
         case "find":
             ui.printFindMessage();
-            tasksList.find(parameters);
+            taskList.find(parameters);
             ui.printLine();
             return "find";
         default:

@@ -1,7 +1,7 @@
 package cleese;
 
 import task.Task;
-import task.TasksList;
+import task.TaskList;
 
 /**
  * Handles all printing of messages to console for specific commands or situations
@@ -36,13 +36,13 @@ public class Ui {
     }
 
     /** Prints acknowledgment message as well as task that user has added to the TasksList */
-    public void printAddedAck(Task task, TasksList taskList) {
+    public void printAddedAck(Task task, TaskList taskList) {
         System.out.println(String.format("Got it. I've added this task:\n%s\n"
                                             + "Now you have %d tasks in the list",task.toString(),taskList.size()));
     }
 
     /** Prints acknowledgment message as well as task that user has removed from the TasksList */
-    public void printRemovedAck(Task task, TasksList taskList) {
+    public void printRemovedAck(Task task, TaskList taskList) {
         System.out.println(String.format("Noted. I've removed this task:\n%s\n"
                                             + "Now you have %d tasks in the list",task.toString(),taskList.size()));
     }
