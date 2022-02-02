@@ -14,7 +14,7 @@ public abstract class Task {
     /**
      * done records if a task has been marked as complete.
      */
-    private final boolean done;
+    private final boolean isDone;
     private final LocalDateTime date;
 
     /**
@@ -23,7 +23,7 @@ public abstract class Task {
      */
     Task(String name) {
         this.taskName = name;
-        this.done = false;
+        this.isDone = false;
         //do null pointer exception check
         this.date = null;
     }
@@ -35,7 +35,7 @@ public abstract class Task {
      */
     Task(String name, boolean doneStatus, LocalDateTime date) {
         this.taskName = name;
-        this.done = doneStatus;
+        this.isDone = doneStatus;
         this.date = date;
     }
 
@@ -44,7 +44,7 @@ public abstract class Task {
      * @return boolean of this done.
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public String getTaskName() {
@@ -66,7 +66,7 @@ public abstract class Task {
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter
      */
-    public abstract Task changeTaskStatus(boolean status);
+    public abstract Task changeTaskStatus(boolean isDone);
 
     public abstract String getTaskType();
 

@@ -1,6 +1,7 @@
 package seedu.duke.chatbot;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.LoadingException;
 import seedu.duke.exceptions.UnableToUpdateDatabaseException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
@@ -46,36 +47,43 @@ public class Storage {
      * @throws DukeException if database file is not found or unable to create the {@link TaskList}
      */
     TaskList getOldTaskList() throws DukeException {
-        TaskList oldTaskList = new TaskList();
         System.out.println("Hold on, I am checking if you have tasks saved.");
-        // If the file does not exist,we create the file.
-        // If the file exists, then we scan it to update the taskList
+        TaskList oldTaskList = new TaskList();
         File myObj;
+
         try {
             myObj = new File(this.filePath);
+            //if the file does not exist, then ui can tell user that a new file will be created
             if (myObj.createNewFile()) {
                 ui.showFileCreated(myObj);
             } else {
-                try {
-                    Scanner sc = new Scanner(myObj);
-                    StringBuilder sb = new StringBuilder();
-                    while (sc.hasNext()) {
-                        String taskDetails = sc.nextLine();
-                        Task taskToAdd = getTaskFromSummary(taskDetails);
-                        oldTaskList = oldTaskList.add(taskToAdd);
-                    }
-                    sc.close();
-                    ui.showLoadingResult(oldTaskList);
-                } catch (FileNotFoundException e) {
-                    throw new DukeException("Hmmm seems like the file doesn't exist.");
-                }
+                //if the file exists, a taskList will be created to store the previous tasks
+                oldTaskList = this.createTaskListFromDatabase(myObj);
             }
+            return oldTaskList;
         } catch (IOException e) {
             throw new DukeException("An error occured. I will restart the list");
         }
-        return oldTaskList;
     }
 
+    TaskList createTaskListFromDatabase(File myObj) throws DukeException {
+        try {
+            TaskList taskList = new TaskList();
+            Scanner sc = new Scanner(myObj);
+            StringBuilder sb = new StringBuilder();
+            while (sc.hasNext()) {
+                String taskDetails = sc.nextLine();
+                Task taskToAdd = getTaskFromSummary(taskDetails);
+                taskList = taskList.add(taskToAdd);
+            }
+            sc.close();
+            //ui to show the old task list to user
+            ui.showLoadingResult(taskList);
+            return taskList;
+        } catch (FileNotFoundException e) {
+            throw new LoadingException();
+        }
+    }
     /**
      * Creates a task from a summarised string saved in the database.
      * @param taskDetails which is the summarised string of the task

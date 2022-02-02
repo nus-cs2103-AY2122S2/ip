@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.add(taskToAdd);
-        ui.showAddResult(newTaskList,taskToAdd);
+        ui.showAddResult(newTaskList, taskToAdd);
         String lineToAdd = storage.createSummaryFromTask(this.taskToAdd);
         storage.addLine(storage.getFilePath(), lineToAdd);
         return newTaskList;
