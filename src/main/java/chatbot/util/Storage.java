@@ -27,8 +27,10 @@ public class Storage {
             File file = new File(filePath);
             File parentFile = file.getParentFile();
             if (parentFile != null) {
+                //noinspection ResultOfMethodCallIgnored
                 file.getParentFile().mkdirs();
             }
+            //noinspection ResultOfMethodCallIgnored
             file.createNewFile();
 
             ObjectOutputStream objectOutputStream =
