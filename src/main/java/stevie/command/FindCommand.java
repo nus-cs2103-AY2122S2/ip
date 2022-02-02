@@ -32,8 +32,9 @@ public class FindCommand extends Command {
      * @return false to indicate that command does not terminate Stevie
      */
     @Override
-    public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
-        ui.outputMessage(tasks.find(query));
-        return false;
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+        String out = tasks.find(query);
+        ui.outputMessage(out);
+        return out;
     }
 }

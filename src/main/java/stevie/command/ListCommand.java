@@ -17,8 +17,9 @@ public class ListCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
-        ui.outputMessage(tasks.toString());
-        return false;
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+        String out = tasks.toString();
+        ui.outputMessage(out);
+        return out;
     }
 }

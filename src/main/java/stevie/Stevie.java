@@ -35,7 +35,10 @@ public class Stevie {
      */
     private final TaskDataHandler storage;
 
-    private Stevie() {
+    /**
+     * Constructor for Stevie
+     */
+    public Stevie() {
         ui = new StevieUi();
         storage = new TaskDataHandler(path);
         tasks = new TaskList(storage.loadTasks());
@@ -43,6 +46,18 @@ public class Stevie {
 
     public static void main(String[] args) {
         new Stevie().run();
+    }
+
+    public String getResponse(String userInput) {
+        String out;
+        try {
+            Command command = StevieParser.parse(userInput);
+            out = command.execute(tasks, storage, ui);
+        } catch (StevieException ex) {
+            ui.outputMessage(ex.getMessage());
+            out = ex.getMessage();
+        }
+        return out;
     }
 
     private void run() {
@@ -53,7 +68,8 @@ public class Stevie {
             try {
                 userIn = ui.getUserInput();
                 Command command = StevieParser.parse(userIn);
-                isExit = command.execute(tasks, storage, ui);
+                command.execute(tasks, storage, ui);
+                isExit = command.isExit();
             } catch (StevieException ex) {
                 ui.outputMessage(ex.getMessage());
             }

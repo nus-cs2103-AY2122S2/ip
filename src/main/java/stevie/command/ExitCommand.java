@@ -17,8 +17,17 @@ public class ExitCommand extends Command {
      * @return true to terminate the session
      */
     @Override
-    public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         ui.outputMessage("Bye! Hope to see you again!");
+        return "Bye! Hope to see you again!";
+    }
+
+    /**
+     * ExitCommand causes program to terminate.
+     * @return true as ExitCommand causes program to terminate
+     */
+    @Override
+    public boolean isExit() {
         return true;
     }
 }

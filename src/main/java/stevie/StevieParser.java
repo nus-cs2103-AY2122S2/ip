@@ -10,6 +10,7 @@ import stevie.command.Command;
 import stevie.command.DeleteCommand;
 import stevie.command.ExitCommand;
 import stevie.command.FindCommand;
+import stevie.command.HelpCommand;
 import stevie.command.ListCommand;
 import stevie.command.MarkCommand;
 import stevie.exception.StevieException;
@@ -31,6 +32,8 @@ public class StevieParser {
     public static Command parse(String userIn) throws StevieException {
         if (userIn.equals("bye")) {
             return new ExitCommand();
+        } else if (userIn.equals("help")) {
+            return new HelpCommand();
         } else if (userIn.equals("list")) {
             return new ListCommand();
         } else if (Pattern.matches("^mark\\s\\d+", userIn)) {

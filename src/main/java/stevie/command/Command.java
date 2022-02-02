@@ -18,5 +18,13 @@ public abstract class Command {
      * @param ui      to pass a response string for output
      * @return false if Command does not terminate session with Stevie, else true
      */
-    public abstract boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui);
+    public abstract String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui);
+
+    /**
+     * Returns true if command causes program to terminate, else return false.
+     * @return false as command is non-terminating by default
+     */
+    public boolean isExit() {
+        return false;
+    }
 }

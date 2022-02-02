@@ -41,7 +41,7 @@ public class MarkCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out;
         try {
             if (isDone) {
@@ -51,10 +51,10 @@ public class MarkCommand extends Command {
             }
         } catch (StevieException ex) {
             ui.outputMessage(ex.getMessage());
-            return false;
+            return ex.getMessage();
         }
         tasks.save(storage);
         ui.outputMessage(out);
-        return false;
+        return out;
     }
 }

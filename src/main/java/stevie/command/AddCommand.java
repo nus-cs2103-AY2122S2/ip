@@ -34,10 +34,10 @@ public class AddCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public boolean execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out = tasks.add(task);
         tasks.save(storage);
         ui.outputMessage(out);
-        return false;
+        return out;
     }
 }
