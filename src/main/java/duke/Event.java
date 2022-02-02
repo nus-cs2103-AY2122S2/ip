@@ -11,6 +11,10 @@ public class Event extends Task {
     protected String date;
     protected String time;
 
+    /**
+     * @param description
+     * @param at
+     */
     public Event (String description, String at) {
         super(description);
         this.at = at;
@@ -21,7 +25,7 @@ public class Event extends Task {
 
     @Override
     public String message() {
-        return "E | " + "[" +  this.getStatusIcon() + "] "
+        return "E | " + "[" + this.getStatusIcon() + "] "
                 + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
     }
 
@@ -32,7 +36,7 @@ public class Event extends Task {
      */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate d = LocalDate.parse(dateTime,formatter);
+        LocalDate d = LocalDate.parse(dateTime, formatter);
 
         return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }

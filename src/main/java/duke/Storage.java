@@ -1,5 +1,8 @@
 package duke;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +13,10 @@ public class Storage {
     private String directory;
     private String filePath;
 
+    /**
+     * @param directory
+     * @param filePath
+     */
     public Storage(String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;
@@ -17,16 +24,16 @@ public class Storage {
 
     /**
      * rewrite the file with newly edited tasks after the user quits the app
-     * @param list_of_inputs
+     * @param listOfInputs
      * @throws IOException
      */
-    public void reSavingFiles (ArrayList<Task> list_of_inputs) throws IOException {
+    public void reSavingFiles (ArrayList<Task> listOfInputs) throws IOException {
         //start saving the results for next return
-        for (int i = 0; i < list_of_inputs.size(); i++) {
+        for (int i = 0; i < listOfInputs.size(); i++) {
             if (i == 0) {
-                writeToFile(list_of_inputs.get(i).message(),filePath);
+                writeToFile(listOfInputs.get(i).message(), filePath);
             } else {
-                list_of_inputs.get(i).updateData(filePath);
+                listOfInputs.get(i).updateData(filePath);
 
             }
         }
@@ -66,10 +73,10 @@ public class Storage {
      * @param filePath
      * @throws IOException
      */
-    public void updateData(String message,String filePath) throws IOException {
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write("\n" + message);
-            fw.close();
+    public void updateData(String message, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write("\n" + message);
+        fw.close();
 
     }
 

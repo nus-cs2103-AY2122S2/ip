@@ -12,15 +12,19 @@ import java.util.ArrayList;
 public class TaskList {
 
     ArrayList<Task> listOfInputs = new ArrayList<>();
-    String directory;
-    String filePath;
+    private String directory;
+    private String filePath;
 
+    private Storage storage = new Storage(directory, filePath);
+    /**
+     * @param directory
+     * @param filePath
+     */
     public TaskList (String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;
 
     }
-    Storage storage = new Storage(directory,filePath);
 
     /**
      * print out the lists of tasks
@@ -32,7 +36,9 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * @param word
+     */
     public void find(String word) {
         boolean hasWord = false;
         for (int i = 0; i < listOfInputs.size(); i++) {
@@ -47,21 +53,25 @@ public class TaskList {
         }
     }
 
-    public void mark( int curr_no) throws IOException {
-        Task task_done = listOfInputs.get(curr_no);
-        System.out.println("Good work!! I have marked it done:\n" + task_done.markedDone());
-        storage.updateData(task_done.message(),filePath);
+    /**
+     * @param currNo
+     * @throws IOException
+     */
+    public void mark(int currNo) throws IOException {
+        Task taskDone = listOfInputs.get(currNo);
+        System.out.println("Good work!! I have marked it done:\n" + taskDone.markedDone());
+        storage.updateData(taskDone.message(), filePath);
     }
 
     /**
      * unmark the list as undone once it is called
-     * @param curr_no
+     * @param currNo
      * @throws IOException
      */
-    public void unMark(int curr_no) throws IOException {
-        Task task_undone = listOfInputs.get(curr_no);
-        System.out.println("Alrightt! I have marked it undone:\n" + task_undone.markedUndone());
-        storage.updateData(task_undone.message(),filePath);
+    public void unMark(int currNo) throws IOException {
+        Task taskUndone = listOfInputs.get(currNo);
+        System.out.println("Alrightt! I have marked it undone:\n" + taskUndone.markedUndone());
+        storage.updateData(taskUndone.message(), filePath);
     }
 
     /**
@@ -74,7 +84,8 @@ public class TaskList {
         Todos todo = new Todos(str);
         listOfInputs.add(todo);
         storage.updateData(todo.message() , filePath);
-        return "Okayy!! I've added this task:\n " + todo.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
+        return ("Okayy!! I've added this task:\n " + todo.message() + "\n You have "
+                + listOfInputs.size() + " tasks in the list.");
 
     }
 
@@ -88,8 +99,9 @@ public class TaskList {
         String[] deadL = str.split("/by ", 2);
         DeadLine deadLineTemp = new DeadLine(deadL[0], deadL[1]);
         listOfInputs.add(deadLineTemp);
-        storage.updateData(deadLineTemp.message(),filePath);
-        return "Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
+        storage.updateData(deadLineTemp.message(), filePath);
+        return ("Deadline for this task:\n " + deadLineTemp.message() + "\n You have "
+                + listOfInputs.size() + " tasks in the list.");
 
     }
 
@@ -103,8 +115,9 @@ public class TaskList {
         String[] event = str.split("/at ", 2);
         Event eventTemp = new Event(event[0], event[1]);
         listOfInputs.add(eventTemp);
-        storage.updateData(eventTemp.message(),filePath);
-        return "I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
+        storage.updateData(eventTemp.message(), filePath);
+        return ("I have added this task and the event time is:\n "
+                + eventTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.");
 
     }
 
@@ -113,9 +126,9 @@ public class TaskList {
      * @param str
      */
     public void delete(String str) {
-        int curr_no = Integer.parseInt(str) - 1;
-        listOfInputs.remove(curr_no);
-        Delete deleteTemp = new Delete(listOfInputs.get(curr_no).description);
+        int currNo = Integer.parseInt(str) - 1;
+        listOfInputs.remove(currNo);
+        Delete deleteTemp = new Delete(listOfInputs.get(currNo).description);
         System.out.println(deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.");
     }
 

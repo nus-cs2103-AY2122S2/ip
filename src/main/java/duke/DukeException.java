@@ -4,10 +4,10 @@ import java.util.Arrays;
 /**
  * deals with invalid commands from user's input
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     //all the commands
-    String[] commands = new String[] {"deadline", "todo", "event", "delete","mark","unmark","find"};
+    private String[] commands = new String[] {"deadline", "todo", "event", "delete", "mark", "unmark", "find"};
 
     public DukeException(String message) {
         super(message);
@@ -20,12 +20,12 @@ public class DukeException extends Exception{
      * @param inp
      * @throws DukeException
      */
-    public void invalidCommands (String inp) throws DukeException{
-        String[] temp =  inp.split(" ",2);
+    public void invalidCommands (String inp) throws DukeException {
+        String[] temp = inp.split(" ", 2);
         String cmd = temp[0];
         int size = temp.length;
 
-        if (inp.equals("list")  || inp.equals("bye")) {
+        if (inp.equals("list") || inp.equals("bye")) {
 
         } else {
 
@@ -47,11 +47,11 @@ public class DukeException extends Exception{
      * @throws DukeException
      */
     public void invalidDeadline (String descrip) throws DukeException {
-         if ((descrip.split("/by",2)[0].equals(""))) {
+        if ((descrip.split("/by", 2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this deadline");
-        } else if ( descrip.indexOf("/by") == -1) {
+        } else if (descrip.indexOf("/by") == -1) {
             throw new DukeException("Please indicate the deadline for this task");
-        } else if ((descrip.split("/by",2)[1].equals(""))) {
+        } else if ((descrip.split("/by", 2)[1].equals(""))) {
             throw new DukeException("Please indicate the a deadline for this task, e.g /by Sunday");
         }
     }
@@ -62,11 +62,11 @@ public class DukeException extends Exception{
      * @throws DukeException
      */
     public void invalidEvent (String descrip) throws DukeException {
-        if ((descrip.split("/at",2)[0].equals(""))) {
+        if ((descrip.split("/at", 2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this event");
-        } else if ( descrip.indexOf("/at") == -1) {
+        } else if (descrip.indexOf("/at") == -1) {
             throw new DukeException("Please indicate the time for this event");
-        } else if ((descrip.split("/at",2)[1].equals(""))) {
+        } else if ((descrip.split("/at", 2)[1].equals(""))) {
             throw new DukeException("Please indicate the a time for this event, e.g /at 4pm");
         }
     }

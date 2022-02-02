@@ -10,6 +10,9 @@ public class Task {
     protected boolean isDone;
 
 
+    /**
+     * @param description
+     */
     public Task (String description) {
         this.description = description;
         this.isDone = false;
@@ -30,7 +33,7 @@ public class Task {
      */
     public String markedDone() {
         this.isDone = true;
-        return  this.message();
+        return this.message();
 
     }
 
@@ -40,7 +43,7 @@ public class Task {
      */
     public String markedUndone() {
         this.isDone = false;
-        return  this.message();
+        return this.message();
     }
 
     public String message() {
@@ -53,8 +56,8 @@ public class Task {
      * @throws IOException
      */
     public void updateData (String path) throws IOException {
-        FileWriter fw = new FileWriter(path,true);
-        fw.write( "\n" + this.getStatusIcon() + " | " + this.description);
+        FileWriter fw = new FileWriter(path, true);
+        fw.write("\n" + this.getStatusIcon() + " | " + this.description);
         fw.close();
     }
 

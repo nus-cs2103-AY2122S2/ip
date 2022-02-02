@@ -7,9 +7,13 @@ import java.io.FileNotFoundException;
  */
 public class Parser {
 
-    String directory;
-    String filePath;
+    private String directory;
+    private String filePath;
 
+    /**
+     * @param directory
+     * @param filePath
+     */
     public Parser(String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;

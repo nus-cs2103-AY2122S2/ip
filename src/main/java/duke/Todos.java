@@ -6,6 +6,9 @@ package duke;
  */
 public class Todos extends Task {
 
+    /**
+     * @param description
+     */
     public Todos(String description) {
         super(description);
 
@@ -17,7 +20,7 @@ public class Todos extends Task {
      */
     @Override
     public String message() {
-        return "T | " + "[" +  this.getStatusIcon() + "] " + super.message() ;
+        return "T | " + "[" + this.getStatusIcon() + "] " + super.message();
     }
 
 

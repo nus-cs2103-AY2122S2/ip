@@ -14,6 +14,10 @@ public class DeadLine extends Task {
     protected String date;
     protected String time;
 
+    /**
+     * @param description
+     * @param by
+     */
     public DeadLine(String description, String by) {
         super(description);
         this.by = by;
@@ -24,7 +28,7 @@ public class DeadLine extends Task {
 
     @Override
     public String message() {
-        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message()
+        return "D | " + "[" + this.getStatusIcon() + "] " + super.message()
                 + "(by:" + dateTimeFormat(date) + " " + time + ")";
     }
 
@@ -35,8 +39,7 @@ public class DeadLine extends Task {
      */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate d = LocalDate.parse(dateTime,formatter);
-
-       return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        LocalDate d = LocalDate.parse(dateTime, formatter);
+        return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }
