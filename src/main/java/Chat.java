@@ -46,12 +46,9 @@ public class Chat {
                 int internalCounter = 1;
 
                 // iterate through the list
-                for (Task item : list) {
-                    if (item != null) {
-
-                        String description = item.getDescription();
-                        System.out.println(
-                                " " + internalCounter + ". " + "[" + item.getStatusIcon() + "] " + description);
+                for (Task task : list) {
+                    if (task != null) {
+                        System.out.println(" " + internalCounter + ". " + task);
                         ++internalCounter;
                     } else {
                         break;
@@ -71,7 +68,7 @@ public class Chat {
                 System.out.println("        [X] " + currTask.getDescription());
                 System.out.println(LINE_BREAK);
             } else if (command[0].equals("unmark")) {
-                int number = Integer.parseInt(command[1]);
+                int number = Integer.parseInt(command[1]) - 1;
 
                 Task currTask = list[number];
                 boolean currState = currTask.getIsDone();
@@ -81,9 +78,42 @@ public class Chat {
                 System.out.println("   " + UNMARK_MESSAGE);
                 System.out.println("        [ ] " + currTask.getDescription());
                 System.out.println(LINE_BREAK);
+            } else if (command[0].equals("deadline")) {
+                // deadline make some cups /by the day after
+
+                String[] deadlineInput = input.split("/by");
+                String deadline = deadlineInput[1];
+                String left = deadlineInput[0];
+                String description = left.substring(9, left.length() - 1);
+                // create a new deadline
+                Task newTask = new Deadlines(description, deadline);
+                // adding to the array
+                list[counter] = newTask;
+                ++counter;
+                System.out.println(LINE_BREAK);
+                System.out.println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
+                System.out.println("Now you have " + counter + " tasks in the list. \n");
+                System.out.println(LINE_BREAK);
+            } else if (command[0].equals("event")) {
+
+                // event project meeting /at Mon 2-4pm
+
+                String[] deadlineInput = input.split("/at");
+                String deadline = deadlineInput[1];
+                String left = deadlineInput[0];
+                String description = left.substring(6, left.length() - 1);
+                // create a new deadline
+                Task newTask = new Events(description, deadline);
+                // adding to the array
+                list[counter] = newTask;
+                ++counter;
+                System.out.println(LINE_BREAK);
+                System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
+                System.out.println("Now you have " + counter + " tasks in the list. \n");
+                System.out.println(LINE_BREAK);
             } else {
-                // here we declare the new task to be added
-                Task t = new Task(input);
+                // here we declare the new task to be added (TODO)
+                Task t = new ToDos(input);
 
                 list[counter] = t;
                 System.out.println(LINE_BREAK);

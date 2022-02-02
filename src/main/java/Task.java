@@ -1,4 +1,3 @@
-import java.util.*;
 
 /**
  * Each task will hold the status of done or not done, plus description of the

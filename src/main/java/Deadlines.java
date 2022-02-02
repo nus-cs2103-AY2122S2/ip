@@ -1,18 +1,22 @@
-import java.util.*;
 
 /**
  * Tasks that need to be done before a specific time/date.
  */
 public class Deadlines extends Task {
 
-    public Deadlines(String description) {
+    private String by;
+
+    /**
+     * Deadline will take in a description and a by timeline.
+     */
+    public Deadlines(String description, String by) {
         super(description);
-        // TODO Auto-generated constructor stub
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() + " " + super.getDescription();
+        return "[D]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (by: " + by + ")";
     }
 
 }

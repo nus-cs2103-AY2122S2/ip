@@ -5,14 +5,15 @@ import java.util.*;
  */
 public class Events extends Task {
 
-    public Events(String description) {
+    private String at;
+
+    public Events(String description, String at) {
         super(description);
-        // TODO Auto-generated constructor stub
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() + " " + super.getDescription();
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
     }
-
 }
