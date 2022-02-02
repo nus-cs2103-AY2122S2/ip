@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Inherits from the Task class.
+ * Stores the description and deadline (date) of a Deadline object.
+ * Provides to String method to print deadline details in specific format.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

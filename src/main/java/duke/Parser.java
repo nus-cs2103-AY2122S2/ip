@@ -8,11 +8,12 @@ public class Parser {
     }
 
     public static int getLength(String nextInput) {
-        return nextInput.length();
+        String[] words = nextInput.split(" ");
+        return words.length;
     }
 
     public static String[] getDeadlineDetails(String nextInput) {
-        return nextInput.split(" ", 2)[1].split("/by ");
+        return nextInput.split(" ", 2)[1].split(" - by: ");
     }
 
     public static String getTodoDetails(String nextInput) {
@@ -20,7 +21,7 @@ public class Parser {
     }
 
     public static String[] getEventDetails(String nextInput) {
-        return nextInput.split(" ", 2)[1].split("/at ");
+        return nextInput.split(" ", 2)[1].split(" - at: ");
     }
 
     public static int getTaskId(String nextInput) {

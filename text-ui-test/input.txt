@@ -4,10 +4,10 @@ blah blah /by blah
 list
 todo wake up in the morning
 mark 1
-event go to sleep /at home
+event go to sleep - at: 01-01-2020
 unmark 1
+deadline find food - by: 01-01-2020
 mark 2
-deadline find food /by noon
 list
 todo
 event

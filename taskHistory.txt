@@ -1,2 +1,2 @@
-[D][ ] addthis - by: Jan 01 2020
-[D][X] do this  - by: Jan 01 2020
+[E][ ] go to sleep - at: Jan 01 2020
+[D][ ] find food - by: Jan 01 2020
