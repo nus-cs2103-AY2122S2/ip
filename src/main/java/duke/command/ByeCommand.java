@@ -9,7 +9,7 @@ import duke.util.Ui;
  * Bye command for Duke.
  */
 public class ByeCommand extends Command {
-    private final static String BYE = "See ya!";
+    private static final String BYE = "See ya!";
 
     /**
      * Bye Command constructor.

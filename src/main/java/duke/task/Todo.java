@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * <p>e.g., visit new theme park.</>
  */
 public class Todo extends Task {
-    static final char TODO_SYMBOL = 'T';
+    private static final char TODO_SYMBOL = 'T';
 
     /**
      * Default constructor for Todo.
@@ -46,7 +46,7 @@ public class Todo extends Task {
      *             Data format: T|true/false|taskDescription
      */
     @Override
-    public void extractFileData(String data) {
+    public void extractDataFromLine(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
 
         st.nextToken(); // remove the type symbol

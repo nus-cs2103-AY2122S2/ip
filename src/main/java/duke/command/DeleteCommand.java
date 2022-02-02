@@ -10,8 +10,8 @@ import duke.util.Ui;
  * Command to delete a task from a task list.
  */
 public class DeleteCommand extends Command {
-    private final static String NO_INPUT = "You need to put the task number you want to delete!";
-    private final static String INVALID_INPUT = "Invalid input, you need to give a number/integer";
+    private static final String NO_INPUT = "You need to put the task number you want to delete!";
+    private static final String INVALID_INPUT = "Invalid input, you need to give a number/integer";
 
     /**
      * Delete Task Command constructor.
@@ -48,7 +48,8 @@ public class DeleteCommand extends Command {
         Task task = taskList.removeTask(taskIndex);
         storage.saveList(taskList.getTaskList());
         ui.printResponse(
-                "Got it, task has been removed: \n" + task.toString() + "\nNow you have " + taskList.getTaskListSize()
-                        + " tasks in your list.");
+                "Got it, task has been removed: \n"
+                + task.toString() + "\nNow you have " + taskList.getTaskListSize()
+                + " tasks in your list.");
     }
 }

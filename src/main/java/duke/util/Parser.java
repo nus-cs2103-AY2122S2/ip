@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  * Deals with making sense of the user command.
  */
 public class Parser {
-    private final static String COMMAND_DONT_EXIST = "HEY! I don't know what this mean, command doesn't exist.";
+    private static final String COMMAND_DONT_EXIST = "HEY! I don't know what this mean, command doesn't exist.";
     private final HashMap<String, Command> commands;
 
     /**

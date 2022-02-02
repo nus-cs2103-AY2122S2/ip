@@ -13,16 +13,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Add event command.
+ * Adds event command.
  *
  * <p>Extends from TaskCommand, as this class adds new Events task
  * to the task list</>
  */
 public class EventCommand extends TaskCommand {
-    private final static String TASK_FORMAT_WRONG
+    private static final String TASK_FORMAT_WRONG
             = "Did you remember to put in the date after /at? Or did u remember to add /at?";
-    private final static String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
-    private final static String TIME_FORMAT_WRONG = "duke.task.Event time format is wrong. HHmm";
+    private static final String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
+    private static final String TIME_FORMAT_WRONG = "duke.task.Event time format is wrong. HHmm";
 
     /**
      * Constructor for event command to init values.

@@ -14,10 +14,10 @@ import java.util.function.Function;
  */
 public class Storage {
     // exception messages
-    private final static String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
-    private final static String FILE_LOADING_ERROR_MSG
+    private static final String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
+    private static final String FILE_LOADING_ERROR_MSG
             = "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
-    private final static String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
+    private static final String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
     private final String fileDirPath;
     private final String fullFilePath;
     private File file;
@@ -71,9 +71,7 @@ public class Storage {
      * @param <T> Object that should extend Loading.
      * @throws DukeException If there are issues reading the file or format of file is wrong.
      */
-    public <T extends Loading> void loadFromSave(ArrayList<T> list,
-            Function<String, T> factory)
-            throws DukeException {
+    public <T extends Loading> void loadFromSave(ArrayList<T> list, Function<String, T> factory) throws DukeException {
         try {
             // read file
             Scanner scanner = new Scanner(file);
@@ -81,7 +79,7 @@ public class Storage {
                 String nextLine = scanner.nextLine();
                 T newTask = factory.apply(nextLine); // create the proper obj type
 
-                newTask.extractFileData(nextLine);
+                newTask.extractDataFromLine(nextLine);
                 list.add(newTask);
             }
 

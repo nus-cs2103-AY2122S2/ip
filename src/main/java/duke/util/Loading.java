@@ -9,5 +9,5 @@ public interface Loading {
      *
      * @param data The string to extract data from.
      */
-    void extractFileData(String data);
+    void extractDataFromLine(String data);
 }

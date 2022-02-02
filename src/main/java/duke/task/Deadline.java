@@ -51,9 +51,9 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFileFormat() {
-        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.deadlineDate.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy")) + "|" + this.deadlineTime.format(
-                DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
+        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" 
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "|" 
+                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
     }
 
     /**
@@ -63,7 +63,7 @@ public class Deadline extends Task {
      *             Data format: D|true/false|taskDescription|MMM d yyyy|hh:mm a
      */
     @Override
-    public void extractFileData(String data) {
+    public void extractDataFromLine(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");

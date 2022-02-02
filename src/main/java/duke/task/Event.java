@@ -63,7 +63,7 @@ public class Event extends Task {
      *             Data format: E|true/false|taskDescription|MMM d yyyy|hh:mm a
      */
     @Override
-    public void extractFileData(String data) {
+    public void extractDataFromLine(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");

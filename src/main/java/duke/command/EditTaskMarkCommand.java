@@ -10,10 +10,10 @@ import duke.util.Ui;
  * Command to edit the task to be either marked or unmarked.
  */
 public class EditTaskMarkCommand extends Command {
-    private final static String NO_INPUT = "You need to put the task number you want to delete!";
-    private final static String INVALID_INPUT = "Invalid input, you need to give a number/integer";
-    private final static String MARK_TASK = "Nice I've marked this task as done: \n";
-    private final static String UNMARK_TASK = "Alright, I've unmarked the task: \n ";
+    private static final String NO_INPUT = "You need to put the task number you want to delete!";
+    private static final String INVALID_INPUT = "Invalid input, you need to give a number/integer";
+    private static final String MARK_TASK = "Nice I've marked this task as done: \n";
+    private static final String UNMARK_TASK = "Alright, I've unmarked the task: \n ";
     private final boolean isMarkDoneTask;
 
     /**

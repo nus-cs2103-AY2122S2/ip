@@ -19,10 +19,10 @@ import java.time.format.DateTimeParseException;
  * to the task list</>
  */
 public class DeadlineCommand extends TaskCommand {
-    private final static String TASK_FORMAT_WRONG
+    private static final String TASK_FORMAT_WRONG
             = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
-    private final static String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
-    private final static String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
+    private static final String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
+    private static final String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
 
     /**
      * Constructor for command to init values.

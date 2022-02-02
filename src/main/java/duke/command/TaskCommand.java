@@ -12,7 +12,7 @@ import duke.util.Ui;
  * <p>All future commands about adding new tasks to the list should inherit from this class</>
  */
 public abstract class TaskCommand extends Command {
-    private final static String TASK_DESC_EMPTY = "The description of your task cannot be empty.";
+    private static final String TASK_DESC_EMPTY = "The description of your task cannot be empty.";
 
     /**
      * Constructor for command to init values.

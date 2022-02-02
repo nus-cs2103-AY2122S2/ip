@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
     // tasklist exception messages
-    private final static String INDEX_NO_EXIST = "Yo yo yo, this task don't exist. Give a legitimate task number.";
+    private static final String INVALID_INDEX_TEXT = "Yo yo yo, this task don't exist. Give a legitimate task number.";
     private final ArrayList<Task> tasks;
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      */
     public Task markTask(int taskIndex, boolean isMark) throws DukeException {
         if (taskIndex >= tasks.size()) {
-            throw new DukeException(INDEX_NO_EXIST);
+            throw new DukeException(INVALID_INDEX_TEXT);
         }
 
         Task task = tasks.get(taskIndex);
@@ -67,7 +67,7 @@ public class TaskList {
      */
     public Task removeTask(int taskIndex) throws DukeException {
         if (taskIndex >= tasks.size()) {
-            throw new DukeException(INDEX_NO_EXIST);
+            throw new DukeException(INVALID_INDEX_TEXT);
         }
 
         Task task = tasks.get(taskIndex);
