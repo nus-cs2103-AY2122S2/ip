@@ -1,4 +1,11 @@
+package duke;
+
 import java.util.ArrayList;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -58,6 +65,6 @@ public class TaskList {
     }
 
     public Task at(int idx) {
-        return tasks.get(idx - 1);
+        return tasks.get(idx);
     }
 }

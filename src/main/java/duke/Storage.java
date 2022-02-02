@@ -1,9 +1,13 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.task.Task;
 
 public class Storage {
     private File file;
@@ -42,10 +46,10 @@ public class Storage {
 
     public void updateAfterAdd(Task task) throws DukeException {
         try {
-            int marked = task.isDone ? 1 : 0;
+            int marked = task.isDone() ? 1 : 0;
 
             FileWriter writer = new FileWriter(file, true);
-            writer.write(task.type + buffer + marked + buffer + task.description + "\n");
+            writer.write(task.type() + buffer + marked + buffer + task.description() + "\n");
             writer.close();
         } catch (IOException e) {
             throw new DukeException("Cannot update addition in save file!! :-(");

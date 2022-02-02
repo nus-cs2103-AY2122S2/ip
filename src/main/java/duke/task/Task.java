@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String type;
     protected String description;
@@ -25,5 +27,17 @@ public class Task {
     public String toString() {
         return this.isDone ? "[X] " + this.description
                 : "[ ] " + this.description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String type() {
+        return type;
+    }
+
+    public String description() {
+        return description;
     }
 }

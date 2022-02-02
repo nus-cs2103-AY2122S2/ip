@@ -1,7 +1,11 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 public class Events extends Task {
     protected static String type = "E";

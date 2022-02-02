@@ -1,10 +1,14 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.TaskList;
+
 public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        for (int i = 1; i <= tasks.length(); i++) {
-            System.out.println(i + ". " + tasks.at(i).toString());
-        }
+        tasks.list();
     }
 
     @Override

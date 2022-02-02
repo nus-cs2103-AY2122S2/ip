@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -32,6 +36,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("duke.txt").run();
+        new Duke("./src/main/java/duke/data/duke.txt").run();
     }
 }

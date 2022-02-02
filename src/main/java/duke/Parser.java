@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 public class Parser {
     private static String description;
