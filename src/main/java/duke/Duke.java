@@ -16,13 +16,9 @@ public class Duke {
     private TaskList tasks = new TaskList();
     private Ui ui;
 
-    /**
-     * Constructor.
-     *
-     * @param filePath (required) Filepath of a text file which retrieves or saves Tasks
-     * generated from this application.
-     */
-    public Duke(String filePath) {
+    private String filePath = "data/duke.txt";
+
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath, tasks);
         try {
@@ -37,15 +33,12 @@ public class Duke {
 
     /** Starts up the simple display of Duke application.  */
     public void run() throws DukeException, IOException {
-        boolean isTerminated = false;
-        while (!isTerminated) {
-            ui.displayCommandMessage(tasks, storage);
-        }
+
     }
 
     /** Obtains Tasks from provided text file */
     public static void main(String[] args) throws DukeException, IOException {
         //"C:\\NUS\\CS2103\\iP\\data\\duke.txt"
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }

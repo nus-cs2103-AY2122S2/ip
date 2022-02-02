@@ -1,15 +1,15 @@
 package duke;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import java.io.IOException;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
     Ui ui = new Ui();
 
     @Test
-    public void validWelcomeMessage() {
-        String expected = "Welcome to Duke, your personal Task assistant!\n";
+    public void UiAskForCommandTest_success() {
+        String expected = "What is your command: \n";
         String output = ui.createWelcomeMessage();
         assertEquals(expected, output);
     }

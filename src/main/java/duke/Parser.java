@@ -27,8 +27,7 @@ public class Parser {
         TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE
     }
 
-    public Parser(String input, TaskList list, Storage storage) {
-        userInput = input;
+    public Parser(TaskList list, Storage storage) {
         tasks = list;
         this.storage = storage;
     }
@@ -121,7 +120,8 @@ public class Parser {
     /**
      * Based on supplied Action word, run the action
      */
-    public void parseInput() throws DukeException, IOException {
+    public String parseInput(String input) throws DukeException, IOException {
+        userInput = input;
         splitUserInput();
         Commands action;
         try {
@@ -134,34 +134,26 @@ public class Parser {
         }
         switch (action) {
             case TODO:
-                System.out.println(createToDoTask());
-                break;
+                return createToDoTask();
             case DEADLINE:
-                System.out.println(createDeadlineTask());
-                break;
+                return createDeadlineTask();
             case EVENT:
-                System.out.println(createEventTask());
-                break;
+                return createEventTask();
             case LIST:
-                System.out.println(listOutTasks());
-                break;
+                return listOutTasks();
             case MARK:
-                System.out.println(markTaskAsDone());
-                break;
+                return markTaskAsDone();
             case UNMARK:
-                System.out.println(unmarkTask());
-                break;
+                return unmarkTask();
             case DELETE:
-                System.out.println(deleteTask());
-                break;
+                return deleteTask();
             case FIND:
-                System.out.println(findTask());
-                break;
+                return findTask();
             case BYE:
-                System.out.println(terminateAndSaveProgram(storage));
-                System.exit(0);
+                return terminateAndSaveProgram(storage);
             default:
         }
+        return "";
     }
 
     /**
