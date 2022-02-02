@@ -1,9 +1,16 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
 import java.io.IOException;
 import java.time.LocalDate;
+
+import duke.Storage;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which add task to the task list. An AddCommand
@@ -15,9 +22,13 @@ public class AddCommand implements Command {
     private String fullCommand;
     private String taskType;
 
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input
+     */
     public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.taskType = fullCommand.split(" ",2)[0];
+        this.taskType = fullCommand.split(" ", 2)[0];
     }
 
     /**
@@ -29,13 +40,12 @@ public class AddCommand implements Command {
      * @throws IOException If directory or file cannot be found.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws IOException {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         switch (taskType) {
         case "todo":
             String todo = fullCommand.split("todo ", 2)[1];
             ToDo toDoTask = new ToDo(todo);
-            tasks.addToList(toDoTask, ui, storage);
-            break;
+            return tasks.addToList(toDoTask, ui, storage);
         case "deadline":
             String deadline = fullCommand.split("deadline ",
                     2)[1].split("/by ")[0];
@@ -44,8 +54,7 @@ public class AddCommand implements Command {
             LocalDate deadlineDate = LocalDate.parse(by,
                     Task.getInputDateFormat());
             Deadline deadlineTask = new Deadline(deadline, deadlineDate);
-            tasks.addToList(deadlineTask, ui, storage);
-            break;
+            return tasks.addToList(deadlineTask, ui, storage);
         case "event":
             String event = fullCommand.split("event ",
                     2)[1].split("/at ")[0];
@@ -54,8 +63,9 @@ public class AddCommand implements Command {
             LocalDate eventDate = LocalDate.parse(at,
                     Task.getInputDateFormat());
             Event eventTask = new Event(event, eventDate);
-            tasks.addToList(eventTask, ui, storage);
-            break;
+            return tasks.addToList(eventTask, ui, storage);
+        default:
+            return ("ERROR");
         }
     }
 

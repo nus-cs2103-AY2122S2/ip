@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.*;
+import java.io.IOException;
+
+import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
+import duke.ui.MessageUi;
 
 /**
  * Represents commands which mark a task in the task list. A MarkCommand
@@ -17,6 +18,10 @@ public class MarkCommand implements Command {
     private String[] splicedFullCommand;
     private int position;
 
+    /**
+     * Constructor for this class.
+     * @param fullCommand User's input.
+     */
     public MarkCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splicedFullCommand = this.fullCommand.split(" ", 2);
@@ -36,17 +41,17 @@ public class MarkCommand implements Command {
      * @throws IOException   If directory or file cannot be found.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         if (position < 1 || position > tasks.getTaskSize()) {
             throw new DukeException("Task do not exist!");
         } else {
             Task task = tasks.getTask(position);
             if (task.isDone()) {
-                throw new DukeException("duke.task.Task is already marked as done!");
+                throw new DukeException("Task is already marked as done!");
             } else {
                 task.mark();
                 storage.setInFile(position, task.taskDescriptionForFile());
-                ui.showMarkMessage(task);
+                return ui.showMarkMessage(task);
             }
         }
     }

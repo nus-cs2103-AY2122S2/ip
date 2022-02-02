@@ -1,8 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,18 +9,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.ui.MessageUi;
+
 /**
  * A class that interacts with the directory of the file. A file in this context
  * refers to the text file that stores the content of the task list.
  */
 public class Storage {
 
-    private Ui ui;
+    private MessageUi ui;
     private String filePath;
 
+    /**
+     * Coonstructor for the Storage class.
+     * @param path Directory of the text file.
+     */
     public Storage(String path) {
         this.filePath = path;
-        this.ui = new Ui();
+        this.ui = new MessageUi();
     }
 
     /**
@@ -58,11 +63,15 @@ public class Storage {
      * @param data       The content of the task in the file.
      * @throws IOException If directory or file cannot be found.
      */
-    public void setInFile(int lineNumber, String data) throws IOException {
-        Path path = Paths.get(filePath);
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        lines.set(lineNumber - 1, data);
-        Files.write(path, lines, StandardCharsets.UTF_8);
+    public void setInFile(int lineNumber, String data) throws DukeException {
+        try {
+            Path path = Paths.get(filePath);
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            lines.set(lineNumber - 1, data);
+            Files.write(path, lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     /**
@@ -72,15 +81,19 @@ public class Storage {
      * @param taskList The task list.
      * @throws IOException If directory or file cannot be found.
      */
-    public void writeToFile(List<Task> taskList) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Task task : taskList) {
-            stringBuilder.append(task.taskDescriptionForFile()
-                    + System.lineSeparator());
+    public void writeToFile(List<Task> taskList) throws DukeException {
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Task task : taskList) {
+                stringBuilder.append(task.taskDescriptionForFile()
+                        + System.lineSeparator());
+            }
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(stringBuilder.toString());
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
         }
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(stringBuilder.toString());
-        fw.close();
     }
 
     /**
@@ -90,22 +103,16 @@ public class Storage {
      * @throws DukeException If there is an error reading the file.
      * @throws IOException   If there is an error reading the file.
      */
-    public List<String> loadFileContents() throws DukeException, IOException {
+    public List<String> loadFileContents() throws DukeException {
         boolean gotError = false;
+        List<String> data = null;
         try {
             Path path = Paths.get(filePath);
             Files.readAllLines(path, StandardCharsets.UTF_8);
+            data = Files.readAllLines(path, StandardCharsets.UTF_8);
         } catch (IOException err) {
-            gotError = true;
             throw new DukeException("Error loading file!");
-        } finally {
-            if (!gotError) {
-                Path path = Paths.get(filePath);
-                List<String> data = Files.readAllLines(path, StandardCharsets.UTF_8);
-                return data;
-            } else {
-                return null;
-            }
         }
+        return data;
     }
 }

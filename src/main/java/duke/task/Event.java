@@ -9,6 +9,11 @@ public class Event extends Task {
 
     protected LocalDate at;
 
+    /**
+     * Constructor for this class.
+     * @param description Task description.
+     * @param at Event date.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
@@ -29,6 +34,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: " + at.format(super.outputDateFormat) + ")";
+                + " (at: " + at.format(super.getOutputDateFormat()) + ")";
     }
 }
