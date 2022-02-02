@@ -51,7 +51,9 @@ public abstract class Task {
         return this.taskName;
     }
 
-    public LocalDateTime getDate() { return this.date; }
+    public LocalDateTime getDate() {
+        return this.date;
+    }
 
     public String getFormattingDateString() {
         try {

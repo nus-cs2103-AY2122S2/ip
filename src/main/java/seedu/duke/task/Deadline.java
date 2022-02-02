@@ -46,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public String toString() {

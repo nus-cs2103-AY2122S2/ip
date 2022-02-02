@@ -39,7 +39,7 @@ public class Event extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public Task changeTaskStatus(boolean status) {
@@ -47,7 +47,7 @@ public class Event extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public String getTaskType() {
@@ -55,7 +55,7 @@ public class Event extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public String toString() {

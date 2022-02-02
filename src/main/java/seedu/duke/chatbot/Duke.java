@@ -52,7 +52,7 @@ public class Duke {
      * Runs the chatbot Duke with a specified path to the database file.
      */
     public static void main(String[] args) {
-        String filePath = "files/record.txt";
+        String filePath = System.getProperty("user.dir")  + "/data/OldTasks.txt";
         new Duke(filePath).run();
     }
 }

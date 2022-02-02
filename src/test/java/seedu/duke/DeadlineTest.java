@@ -22,6 +22,7 @@ public class DeadlineTest {
         LocalDateTime date = LocalDateTime.from(ta);
         deadline = new Deadline("testing",date);
     }
+
     @Test
     @DisplayName("Task type should be D")
     void testGetTaskType() {

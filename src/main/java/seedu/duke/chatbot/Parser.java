@@ -25,7 +25,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
 /**
- * Handles commands from users in String and filters the information needed to create {@link Command}
+ * Handles commands from users in String and filters the information needed to create {@link Command}.
  */
 public class Parser {
     private final String userName;
@@ -184,7 +184,7 @@ public class Parser {
      * @throws DukeException if an incomplete command is given from user
      */
     Task parseForDeadline(String command) throws DukeException {
-        int indexTaskName= 9;
+        int indexTaskName = 9;
         //command is given as "deadline <taskname> /by <date>" so index 9 is where task name starts
 
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)

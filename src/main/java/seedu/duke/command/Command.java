@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public abstract class Command {
     /**
-     *Executes a command
+     *Executes a command.
      * @param tasks is taken in as many commands involve updating the {@link TaskList}
      * @param ui is taken in for the commands to interact with the user after executing
      * @param storage is taken in to update the database after executing a command

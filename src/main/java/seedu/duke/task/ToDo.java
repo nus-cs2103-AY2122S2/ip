@@ -30,7 +30,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public Task changeTaskStatus(boolean status) {
@@ -38,7 +38,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public String getTaskType() {
@@ -46,7 +46,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * {inheritDoc}
+     * {inheritDoc}.
      */
     @Override
     public String toString() {

@@ -8,7 +8,8 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.task.ToDo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TaskListTest {
     TaskList taskList;

@@ -15,7 +15,7 @@ public class Ui {
     private final Scanner sc;
 
     /**
-     * Creates a Ui object that can take in commands from the user
+     * Creates a Ui object that can take in commands from the user.
      */
     Ui() {
         this.sc = new Scanner(System.in);

@@ -84,6 +84,7 @@ public class Storage {
             throw new LoadingException();
         }
     }
+
     /**
      * Creates a task from a summarised string saved in the database.
      * @param taskDetails which is the summarised string of the task
@@ -157,6 +158,7 @@ public class Storage {
      * @param taskList which is the updated {@link TaskList}
      * @throws DukeException when unable to update the database
      */
+
     public void convertTaskListToFile(TaskList taskList) throws DukeException {
         //rewrite to a new file
         File f = new File(this.filePath);
@@ -172,7 +174,9 @@ public class Storage {
     }
 
     /**
-     * @see Parser#getLocalDateTimeFromDate(String).
+     * Used to convert a string to a LocalDateTime object.
+     * @param string which contains information in "yyyy-MM-dd HH:mm"
+     * @return LocalDateTime with the correct date information
      */
     LocalDateTime getLocalDateTimeFromDate(String string) {
         try {
