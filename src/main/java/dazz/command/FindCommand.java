@@ -10,7 +10,8 @@ public class FindCommand extends Command {
         this.search = description;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showSearches(taskList, search);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+//        ui.showSearches(taskList, search);
+        return ui.messageForSearches(taskList, search);
     }
 }

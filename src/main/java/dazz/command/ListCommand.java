@@ -6,8 +6,9 @@ import dazz.Ui;
 
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+//        ui.showList(taskList);
+        return ui.messageForList(taskList);
     }
 
 }

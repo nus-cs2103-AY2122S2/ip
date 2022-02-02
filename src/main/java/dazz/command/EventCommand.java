@@ -15,10 +15,12 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(this.event);
-        ui.showAdd(event, taskList);
+//        ui.showAdd(event, taskList);
+        String message = ui.messageForAdd(event, taskList);
         storage.updateList(taskList);
+        return message;
     }
 
 }

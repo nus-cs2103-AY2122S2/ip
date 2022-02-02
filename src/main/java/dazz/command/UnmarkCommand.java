@@ -12,9 +12,11 @@ public class UnmarkCommand extends Command {
         this.index = index;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException {
         taskList.unmark(this.index);
-        ui.showUnmark(taskList.getTask(this.index));
+//        ui.showUnmark(taskList.getTask(this.index));
+        String message = ui.messageForUnmark(taskList.getTask(this.index));
         storage.updateList(taskList);
+        return message;
     }
 }

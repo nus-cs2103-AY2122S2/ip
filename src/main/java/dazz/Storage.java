@@ -26,15 +26,14 @@ public class Storage {
 
     /**
      * Constructs a <code>Storage</code> object. Directory and file will be created if not exists.
-     * @param filePath relative path of a text file.
      */
-    public Storage(String filePath) {
+    public Storage() {
         try {
             Path path = Paths.get("data/");
             if (!Files.exists(path)) {
                 Files.createDirectory(path);
             }
-            this.file = new File(filePath);
+            this.file = new File("data/tasks.txt");
             this.file.createNewFile();
         } catch (FileAlreadyExistsException e) {
             e.getStackTrace();

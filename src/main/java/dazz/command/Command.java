@@ -6,7 +6,7 @@ import dazz.Ui;
 import dazz.exception.InvalidTaskIndexException;
 
 public abstract class Command {
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException;
     public boolean isExit() {
         return false;
     }

@@ -12,9 +12,11 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException {
-        ui.showDelete(taskList.getTask(this.index));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskIndexException {
+        String message = ui.messageForDelete(taskList.getTask(this.index));
+//        ui.showDelete(taskList.getTask(this.index));
         taskList.delete(this.index);
         storage.updateList(taskList);
+        return message;
     }
 }
