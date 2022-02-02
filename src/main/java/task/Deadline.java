@@ -1,8 +1,6 @@
-package tesseract.task;
+package task;
 
-import tesseract.main.Date;
-
-import tesseract.task.Task;
+import main.Date;
 
 /**
  * Represent a deadline, which is a type of task.

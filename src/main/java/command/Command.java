@@ -1,19 +1,10 @@
-package tesseract.command;
+package command;
 
-import tesseract.command.CreateTaskCommand;
-import tesseract.command.DeleteCommand;
-import tesseract.command.ExitCommand;
-import tesseract.command.FilterCommand;
-import tesseract.command.FindCommand;
-import tesseract.command.ListCommand;
-import tesseract.command.MarkCommand;
-import tesseract.command.UnmarkCommand;
-
-import tesseract.main.Date;
-import tesseract.main.Storage;
-import tesseract.main.TaskList;
-import tesseract.main.TessUi;
-import tesseract.main.TesseractException;
+import main.Date;
+import main.Storage;
+import main.TaskList;
+import main.TessUi;
+import main.TesseractException;
 
 
 /**
@@ -39,7 +30,7 @@ public class Command {
      */
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         ui.admitBug();
-    };
+    }
 
     /**
      * Process the input to check if it is a valid command.

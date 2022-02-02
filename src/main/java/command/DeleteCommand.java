@@ -1,12 +1,10 @@
-package tesseract.command;
+package command;
 
-import tesseract.command.Command;
+import main.Storage;
+import main.TaskList;
+import main.TessUi;
 
-import tesseract.main.Storage;
-import tesseract.main.TaskList;
-import tesseract.main.TessUi;
-
-import tesseract.task.Task;
+import task.Task;
 
 /**
  * Represent a command to delete a task.

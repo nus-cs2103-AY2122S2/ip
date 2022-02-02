@@ -1,6 +1,4 @@
-package tesseract.task;
-
-import tesseract.task.Task;
+package task;
 
 /**
  * Represent a todo, a type of task.

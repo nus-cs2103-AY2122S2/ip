@@ -1,6 +1,6 @@
-package tesseract.task;
+package task;
 
-import tesseract.main.Date;
+import main.Date;
 
 /**
  * Represent a task, comprising of event, todo, deadline.

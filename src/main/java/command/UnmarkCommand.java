@@ -1,10 +1,8 @@
-package tesseract.command;
+package command;
 
-import tesseract.command.Command;
-
-import tesseract.main.Storage;
-import tesseract.main.TaskList;
-import tesseract.main.TessUi;
+import main.Storage;
+import main.TaskList;
+import main.TessUi;
 
 /**
  * Represent a command to unmark a task.

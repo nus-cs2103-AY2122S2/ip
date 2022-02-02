@@ -1,16 +1,14 @@
-package tesseract.command;
+package command;
 
-import tesseract.command.Command;
+import main.Storage;
+import main.TaskList;
+import main.TessUi;
+import main.Date;
 
-import tesseract.main.Storage;
-import tesseract.main.TaskList;
-import tesseract.main.TessUi;
-import tesseract.main.Date;
-
-import tesseract.task.Deadline;
-import tesseract.task.Event;
-import tesseract.task.Task;
-import tesseract.task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Represent a command to create a new task.

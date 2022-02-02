@@ -1,4 +1,4 @@
-package tesseract.main;
+package main;
 
 import java.util.Scanner;
 

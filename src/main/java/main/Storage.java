@@ -1,7 +1,7 @@
-package tesseract.main;
+package main;
 
-import tesseract.main.TaskList;
-import tesseract.main.TesseractException;
+import main.TaskList;
+import main.TesseractException;
 
 import java.io.File;
 import java.io.FileWriter;

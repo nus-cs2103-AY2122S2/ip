@@ -1,5 +1,5 @@
-import tesseract.command.Command;
-import tesseract.main.TesseractException;
+import command.Command;
+import main.TesseractException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

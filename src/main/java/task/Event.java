@@ -1,8 +1,6 @@
-package tesseract.task;
+package task;
 
-import tesseract.main.Date;
-
-import tesseract.task.Task;
+import main.Date;
 
 import java.time.LocalDate;
 

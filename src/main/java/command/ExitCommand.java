@@ -1,11 +1,9 @@
-package tesseract.command;
+package command;
 
-import tesseract.command.Command;
-
-import tesseract.main.Storage;
-import tesseract.main.TaskList;
-import tesseract.main.TessUi;
-import tesseract.main.TesseractException;
+import main.Storage;
+import main.TaskList;
+import main.TessUi;
+import main.TesseractException;
 
 /**
  * Represent a command to exit Tesseract.

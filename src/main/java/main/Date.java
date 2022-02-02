@@ -1,6 +1,6 @@
-package tesseract.main;
+package main;
 
-import tesseract.main.TesseractException;
+import main.TesseractException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
