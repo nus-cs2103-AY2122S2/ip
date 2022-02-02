@@ -1,10 +1,10 @@
-package main.commands;
+package main.duke.commands;
 
-import main.DukeException;
-import main.TaskList;
-import main.Ui;
-import main.enums.CommandType;
-import main.tasks.Task;
+import main.duke.DukeException;
+import main.duke.TaskList;
+import main.duke.Ui;
+import main.duke.enums.CommandType;
+import main.duke.tasks.Task;
 
 public class CDelete extends Command{
     protected int deleteIndex;

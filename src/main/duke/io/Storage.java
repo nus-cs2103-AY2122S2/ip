@@ -1,10 +1,10 @@
-package main.io;
+package main.duke.io;
 
-import main.DukeException;
-import main.TaskList;
-import main.tasks.Deadline;
-import main.tasks.Event;
-import main.tasks.ToDo;
+import main.duke.DukeException;
+import main.duke.TaskList;
+import main.duke.tasks.Deadline;
+import main.duke.tasks.Event;
+import main.duke.tasks.ToDo;
 
 import java.io.File;
 import java.io.FileWriter;
