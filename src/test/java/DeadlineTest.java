@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Deadline;
+import luca.task.Deadline;
 /**
  * Tests the Deadline class.
  */

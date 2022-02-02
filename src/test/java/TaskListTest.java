@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import luca.task.Task;
+import luca.task.TaskList;
+import luca.task.ToDo;
 
 /**
  * Tests the TaskList class.

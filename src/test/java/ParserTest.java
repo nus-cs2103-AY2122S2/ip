@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import duke.command.ListCommand;
-import duke.common.DukeException;
-import duke.parser.Parser;
-import duke.parser.UnkownCommandException;
+import luca.command.ListCommand;
+import luca.common.DukeException;
+import luca.parser.Parser;
+import luca.parser.UnkownCommandException;
 
 /**
  * Test the parser class.

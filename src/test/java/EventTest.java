@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Event;
+import luca.task.Event;
 
 /**
  * Tests the Event class.
