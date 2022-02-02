@@ -30,6 +30,16 @@ public class TaskList {
         tasks.get(n).unmark();
     }
 
+    public TaskList find(String str) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.contains(str)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public String toString() {
         String string = "";
         for (int i = 0; i < tasks.size(); i++) {

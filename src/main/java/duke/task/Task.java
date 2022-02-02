@@ -30,6 +30,10 @@ public abstract class Task {
     return isMarked;
   }
 
+  public boolean contains(String str) {
+      return description.matches(".*?\\b" + str + "\\b.*?");
+  }
+
   public abstract String toString();
 
 }

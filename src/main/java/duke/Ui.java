@@ -32,6 +32,10 @@ public class Ui {
         System.out.println(tasks.toString());
     }
 
+    public void showMessage(String str) {
+        System.out.println(str);
+    }
+
     public void showExit() {
         System.out.println("Goodbye!");
     }
