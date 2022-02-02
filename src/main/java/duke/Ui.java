@@ -57,6 +57,11 @@ public class Ui {
         System.out.println(LINES);
     }
 
+    /**
+     * Overloaded listTasks function that takes in an ArrayList instead
+     *
+     * @param tasks List of tasks to print
+     */
     public void listTasks(List<Task> tasks) {
         System.out.println(LINES);
         System.out.println("Here are the matching tasks in your list:");
@@ -64,5 +69,34 @@ public class Ui {
             System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
         System.out.println(LINES);
+    }
+
+    /**
+     * Lists all tasks in a string format
+     *
+     * @param tasks tasks to list
+     * @return All tasks in a string format
+     */
+    public String listTasksAsString(TaskList tasks) {
+        String response = "Here are the tasks in your list:\n";
+        List<Task> list = tasks.getTasks();
+        for (int i = 0; i < list.size(); i++) {
+            response += ((i + 1) + "." + list.get(i).toString() + "\n");
+        }
+        return response;
+    }
+
+    /**
+     * Overloaded listTasksAsString function that takes in an ArrayList
+     *
+     * @param tasks tasks to list
+     * @return All tasks in a string format
+     */
+    public String listTasksAsString(List<Task> tasks) {
+        String response = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            response += ((i + 1) + "." + tasks.get(i).toString() + "\n");
+        }
+        return response;
     }
 }
