@@ -24,7 +24,7 @@ public class Taskmaster {
 
     public String getResponse(String input) {
         try {
-            Commands command = ui.performCommand(input);
+            Commands command = ui.performCommand(input, taskList);
             return command.execute(taskList, ui, storage);
         } catch (DukeExceptions e) {
             return ui.displayErrorMessage(e.getMessage());

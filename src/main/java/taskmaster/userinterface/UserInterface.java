@@ -16,6 +16,7 @@ import taskmaster.exception.DukeExceptions;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
+
 /**
  * This class encapsulates the UserInterface which interacts with
  * the user. The user will communicate with Taskmaster through
@@ -23,33 +24,21 @@ import taskmaster.util.TaskList;
  */
 
 public class UserInterface {
-    /** Task list containing all the tasks. **/
-    protected TaskList taskList;
-
-    /** Storage which handles reading and writing of files. **/
-    protected Storage storage;
-
     /** Taskmaster's logo. **/
     protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
                                     + "  |||||\n" + "  |||||\n";
 
-    /**
-     * Constructor for UserInterface.
-     */
+    protected Storage storage;
+    protected TaskList tasklist;
 
-    public UserInterface() {
-        this.taskList = new TaskList();
-        this.storage = new Storage();
-    }
 
     /**
      * Prints the opening message when the program runs.
      */
 
-    private void displayOpeningMessage() {
-        System.out.println(logo);
-        System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
-        System.out.println("Okay, what do you want?\n");
+    public String displayOpeningMessage() {
+        return logo + "\nGreetings, I'm Taskmaster, I'm super grumpy 24/7"
+                + "\nOkay, what do you want?\n";
     }
 
     /**
@@ -60,36 +49,6 @@ public class UserInterface {
         return "See you around kiddo, I'm an angsty dude but deep down i'm a lonely man";
     }
 
-    /**
-     * Loads the text file at the startup of the program.
-     * Adds all the tasks in the text file into the Task List.
-     */
-
-    public void loadExistingFile() {
-        System.out.println("Loading up saved task files ...\n");
-        storage.loadFile(taskList);
-    }
-
-    /**
-     * Updates the list of tasks in the text file when the
-     * program exits.
-     */
-
-    public void updateList() {
-        storage.updateList(taskList);
-    }
-
-    /**
-     * Method that returns True if the exit command "bye"
-     * is entered by the user.
-     *
-     * @param userInput The input entered by the user.
-     * @return True if input is "bye" and false otherwise.
-     */
-
-    public boolean ifBye(String userInput) {
-        return userInput.equals("bye");
-    }
 
     /**
      * Display Message when the user enters an invalid command.
@@ -135,7 +94,7 @@ public class UserInterface {
      * @param input Input the user entered.
      */
 
-    public Commands performCommand(String input) throws DukeExceptions {
+    public Commands performCommand(String input, TaskList tasklist) throws DukeExceptions {
         String[] stringIntoParts = input.split(" ");
         String firstWord = stringIntoParts[0];
         switch (firstWord) {
@@ -150,7 +109,6 @@ public class UserInterface {
         case "find":
             return new FindCommands(input);
         case "bye":
-            storage.updateList(taskList);
             return new ByeCommands();
         case "help":
             return new HelpCommands();

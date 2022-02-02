@@ -30,4 +30,8 @@ public abstract class Commands {
 
     public abstract String execute(TaskList tasklist, UserInterface ui, Storage storage) throws DukeExceptions;
 
+
+    public boolean isExit() {
+        return this instanceof ByeCommands;
+    }
 }

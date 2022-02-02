@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import taskmaster.Taskmaster;
 import taskmaster.userinterface.UserInterface;
+import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
 /**
@@ -30,6 +31,7 @@ public class MainWindow extends AnchorPane {
     private Taskmaster taskmaster;
     private UserInterface ui;
 
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/beluga.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/guy.jpg"));
 
@@ -38,7 +40,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Taskmaster t) {
+    public void setTaskmaster(Taskmaster t) {
         taskmaster = t;
     }
 
@@ -55,8 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (ui.ifBye(input)) {
-            ui.updateList();
+        if (taskmaster.isExit) {
+            String byeMsg = ui.displayByeMessage();
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(byeMsg, dukeImage));
             new Thread(() -> {
                 try {
                     Thread.sleep(3000);

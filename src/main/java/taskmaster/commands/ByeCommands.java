@@ -12,6 +12,7 @@ public class ByeCommands extends Commands {
 
     @Override
     public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws DukeExceptions {
+        storage.updateList(tasklist);
         return ui.displayByeMessage();
     }
 }
