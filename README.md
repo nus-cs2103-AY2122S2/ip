@@ -24,16 +24,58 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    ```
 
 
-## Level-1
+# Conan
+**_Conan_** is a task manager, who can hep you manage your day easily :v:.
+> "The key is not spending time, but investing it." - Stephen R. Covey [(Source)](https://www.inc.com/dan-scalco/22-time-management-quotes-to-inspire-you-to-achieve-your-goals.html) </br>
 
-#### UserGuide
-The task manager Conan, is at his infancy stage. He is able to remember your name for the session and <br/>
-echoes your messages or tasks. Given below are the instructions on how you could interact with conan.
+Conan draws inspiration from [Project Duke](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/projectDuke/index.html), that was designed to help learn Software Engineering Techniques.
 
-Your Interaction Guide:
+## Features
++ Run _**Conan**_ on your command line.
++ _**Conan**_ can remember your tasks from previous runs and can recollect them if you want to. :wink:
 
-+ run the program and let Conan get to know you!
-+ First type in your name, so that he knows who is talking to him.
-+ Type in your message and see what conan could do!
-+ Conan echoes your messages or tasks that you type in.
-+ If you would like to exit, please tell conan "Bye" in the command line.
+## User guide
+
+Once you run the program in your Command line, Conan will introduce himself and ask for your name.
+Once you are acquainted you could tell Conan the tasks you want to do.
+
+#### Tasks
+There are :four: kinds of tasks that Conan can store.
+1. **Todo** - Keeps track of the task that do not have to be completed without sometime. </br> Enter : todo {Task} in the command line for such commands.
+2. **Event** - Any event that you have to attend an certain date and time, Conan can keep track of that for you. :stopwatch:
+   Enter : event {Task} /by YYYY-MM-DD HHMM
+3. **Deadline** - Tasks that need to be completed within a time frame. :hourglass:
+   Enter : deadline {Task} /by YYYY-MM-DD HHMM
+4. **Task** - any general tasks to keep track of.
+   Enter : {Task , more than 2 words}
+
+**Note**: Time argument HHMM is not necessary to enter.
+
+#### Operations
++ list : To view the list of tasks lined up.
++ mark {Task Number}: Mark that task as complete.
++ unmark {Task Number}: Mark that task as not complete.
++ delete {Task Number}: Delete that task from the list.
++ due-on {YYYY-MM-DD}: To view tasks that are due on this date.
++ due-before {YYYY-MM-DD}: To view tasks that are due before this date.
++ find {Keyword}: To find tasks containing that keyword.
++ bye: To close the program. Conan stores all your tasks so that you can visit them later.
+
+#### Remembering Tasks
+Conan has the ability to remember tasks from your previous runs. If you want to access them, then run the program under the same name you used last time. :smile_cat:
+And then type **yes** if you want to continue from last time, otherwise press **no**.
+
+#### Abilities
+
+- [X] Remember Tasks from previous runs, of a single user.
+- [ ] Be able to save data of different users on the same Pc.
+***
+#### For programmers
+Open IDE and run `Main.main()`;
+```java
+public class Main {
+    public static void main(String[] args) {
+       // Code implementation
+    }
+}
+```
