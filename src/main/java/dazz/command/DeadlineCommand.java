@@ -1,14 +1,14 @@
 package dazz.command;
 
+import java.time.LocalDateTime;
+
 import dazz.Storage;
 import dazz.TaskList;
 import dazz.Ui;
 import dazz.task.Deadline;
 
-import java.time.LocalDateTime;
-
-public class DeadlineCommand extends Command{
-    Deadline deadline;
+public class DeadlineCommand extends Command {
+    private Deadline deadline;
 
     public DeadlineCommand(String description, LocalDateTime dateTime) {
         this.deadline = new Deadline(description, dateTime);

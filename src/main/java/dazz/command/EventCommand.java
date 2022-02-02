@@ -1,14 +1,14 @@
 package dazz.command;
 
+import java.time.LocalDateTime;
+
 import dazz.Storage;
 import dazz.TaskList;
 import dazz.Ui;
 import dazz.task.Event;
 
-import java.time.LocalDateTime;
-
-public class EventCommand extends Command{
-    Event event;
+public class EventCommand extends Command {
+    private Event event;
 
     public EventCommand(String description, LocalDateTime dateTime) {
         this.event = new Event(description, dateTime);

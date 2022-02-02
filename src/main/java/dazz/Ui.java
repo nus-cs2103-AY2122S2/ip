@@ -1,31 +1,29 @@
 package dazz;
 
-import dazz.exception.ErrorType;
-import dazz.exception.InvalidDateFormatException;
-
-import dazz.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
+import dazz.exception.ErrorType;
+import dazz.exception.InvalidDateFormatException;
+import dazz.task.Task;
 
 /**
  * Represents the user interface of Dazz (chatbot)
  */
 public class Ui {
+    private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+    private static final String LOGO = "\t  ____       _       _____   _____\n"
+            + "\t |  _\"\\  U  /\"\\  u  |\"_  / u |\"_  / u\n"
+            + "\t/| | | |  \\/ _ \\/   U / / /  U / / /\n"
+            + "\tU| |_| |\\ / ___ \\   \\/ /_   \\/ /_\n"
+            + "\t |____/ u/_/   \\_\\  /____|  /____|\n"
+            + "\t  |||_    \\\\    >>  _//<<,- _//<<,-\n"
+            + "\t (__)_)  (__)  (__)(__) (_/(__) (_/";
     private final Scanner scanner;
-    private final String HORIZONTAL_LINE = "\t____________________________________________________________";
-    private final String LOGO = "\t  ____       _       _____   _____\n" +
-            "\t |  _\"\\  U  /\"\\  u  |\"_  / u |\"_  / u\n" +
-            "\t/| | | |  \\/ _ \\/   U / / /  U / / /\n" +
-            "\tU| |_| |\\ / ___ \\   \\/ /_   \\/ /_\n" +
-            "\t |____/ u/_/   \\_\\  /____|  /____|\n" +
-            "\t  |||_    \\\\    >>  _//<<,- _//<<,-\n" +
-            "\t (__)_)  (__)  (__)(__) (_/(__) (_/";
 
     /**
      * Constructs the user interface.
@@ -124,7 +122,6 @@ public class Ui {
         }
     }
 
-
     /**
      * Prints the default message.
      */
@@ -134,7 +131,8 @@ public class Ui {
         List<Task> tasks = taskList.getTaskList();
         tasks.forEach(x -> {
             if (x.getDescription().toLowerCase(Locale.ROOT).contains(finalSearch)) {
-            System.out.println("\t" + x);}
+                System.out.println("\t" + x);
+            }
         });
     }
 
@@ -150,9 +148,9 @@ public class Ui {
      */
     public static LocalDateTime toLocalDateTime(String date) throws InvalidDateFormatException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy HHmm]" +
-                    "[dd/MM/yyyy HHmm]" +
-                    "[dd MMM yyyy, hh:mma]");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy HHmm]"
+                    + "[dd/MM/yyyy HHmm]"
+                    + "[dd MMM yyyy, hh:mma]");
             return LocalDateTime.parse(date, formatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException();

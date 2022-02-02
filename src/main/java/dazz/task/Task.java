@@ -31,19 +31,25 @@ public class Task {
      * "X" if done and " " otherwise.
      * @return Icon representing the task is done or undone
      */
-    public String getStatusIcon() { return (isDone ? "X" : " "); }
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    }
 
     /**
      * Gets the boolean representation of whether the task is done.
      * @return True if done and false otherwise.
      */
-    public boolean getIsDone() { return this.isDone;}
+    public boolean getIsDone() {
+        return this.isDone;
+    }
 
     /**
      * Gets the description of the task.
      * @return Description of the task.
      */
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 
     private boolean hasAlreadyMark() {
         return this.isDone;
@@ -56,12 +62,20 @@ public class Task {
     /**
      * Sets the task to done.
      */
-    public void setDone() { if (!hasAlreadyMark()) { this.isDone = true; } }
+    public void setDone() {
+        if (!hasAlreadyMark()) {
+            this.isDone = true;
+        }
+    }
 
     /**
      * Sets the task to undone.
      */
-    public void setUndone() { if (!hasAlreadyUnmark()) { this.isDone = false; } }
+    public void setUndone() {
+        if (!hasAlreadyUnmark()) {
+            this.isDone = false;
+        }
+    }
 
     /**
      * Reformats the task to be stored in a text file.
@@ -77,5 +91,7 @@ public class Task {
      * @return String representation of the deadline task.
      */
     @Override
-    public String toString() { return "[" + this.getStatusIcon() + "] " + this.description; }
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }

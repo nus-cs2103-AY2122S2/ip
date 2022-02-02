@@ -1,25 +1,22 @@
 package dazz;
 
-import dazz.exception.InvalidDateFormatException;
-
-import dazz.task.Deadline;
-import dazz.task.Event;
-import dazz.task.Task;
-import dazz.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import dazz.exception.InvalidDateFormatException;
+import dazz.task.Deadline;
+import dazz.task.Event;
+import dazz.task.Task;
+import dazz.task.Todo;
 
 /**
  * Represents the backend of Dazz (chatbot)
@@ -34,7 +31,9 @@ public class Storage {
     public Storage(String filePath) {
         try {
             Path path = Paths.get("data/");
-            if (!Files.exists(path)) { Files.createDirectory(path); }
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
+            }
             this.file = new File(filePath);
             this.file.createNewFile();
         } catch (FileAlreadyExistsException e) {
@@ -90,7 +89,7 @@ public class Storage {
      * Updates the text file whenever there is a change to the list of tasks.
      * @param taskList <code>TaskList</code> task list
      */
-    public void updateList(TaskList taskList)  {
+    public void updateList(TaskList taskList) {
         try {
             String filePath = file.getPath();
             FileWriter fw = new FileWriter(filePath);

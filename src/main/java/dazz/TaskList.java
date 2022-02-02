@@ -1,10 +1,9 @@
 package dazz;
 
-import dazz.exception.InvalidTaskIndexException;
-
-import dazz.task.Task;
-
 import java.util.List;
+
+import dazz.exception.InvalidTaskIndexException;
+import dazz.task.Task;
 
 /**
  *
@@ -24,7 +23,9 @@ public class TaskList {
      *
      * @param task
      */
-    public void add(Task task) { taskList.add(task); }
+    public void add(Task task) {
+        taskList.add(task);
+    }
 
     /**
      *
@@ -68,7 +69,7 @@ public class TaskList {
     /**
      *
      * @param position
-     * @return
+     * @return Task
      * @throws InvalidTaskIndexException
      */
     public Task getTask(int position) throws InvalidTaskIndexException {
