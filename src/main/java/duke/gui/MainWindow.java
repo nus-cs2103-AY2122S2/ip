@@ -78,23 +78,23 @@ public class MainWindow extends AnchorPane {
                     userInput.clear();
                     return 0;
                 }
-            } else {
-                try {
-                    String response = duke.getResponse(input);
-                    dialogContainer.getChildren().addAll(
-                            DialogBox.getUserDialog(input, userImage),
-                            DialogBox.getDukeDialog(response, dukeImage)
-                    );
-                    return 0;
-                } catch (DukeException e) {
-                    AlertUi.makeErrorAlert("DukeException", e.getMessage());
-                    return 0;
-                } finally {
-                    userInput.clear();
-                    return 0;
-                }
+            }
+            try {
+                String response = duke.getResponse(input);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+                return 0;
+            } catch (DukeException e) {
+                AlertUi.makeErrorAlert("DukeException", e.getMessage());
+                return 0;
+            } finally {
+                userInput.clear();
+                return 0;
             }
         }
-        return 0;
     }
 }
+
+
