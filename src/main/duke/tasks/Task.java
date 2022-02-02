@@ -1,6 +1,6 @@
-package main.tasks;
+package main.duke.tasks;
 
-import main.enums.TaskType;
+import main.duke.enums.TaskType;
 
 public abstract class Task {
     protected String description;
@@ -33,6 +33,9 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * format the task into a string to be stored in the save file
+     */
     public String toStoreString() {
         return String.format("%s~%d~%s",
                 this.getTaskType(),

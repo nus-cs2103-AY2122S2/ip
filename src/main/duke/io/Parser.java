@@ -1,15 +1,15 @@
-package main.io;
+package main.duke.io;
 
-import main.commands.Command;
-import main.commands.CBye;
-import main.commands.CMark;
-import main.commands.CDelete;
-import main.commands.CList;
-import main.commands.CTodo;
-import main.commands.CDeadline;
-import main.commands.CEvent;
-import main.commands.CUnmark;
-import main.DukeException;
+import main.duke.commands.Command;
+import main.duke.commands.CBye;
+import main.duke.commands.CMark;
+import main.duke.commands.CDelete;
+import main.duke.commands.CList;
+import main.duke.commands.CTodo;
+import main.duke.commands.CDeadline;
+import main.duke.commands.CEvent;
+import main.duke.commands.CUnmark;
+import main.duke.DukeException;
 
 import java.util.Arrays;
 
@@ -18,6 +18,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+
+    /**
+     * @param userInput the whole console command line from the user
+     * @return Command to be executed
+     * @throws DukeException when invalid input detected
+     */
     public Command parse(String userInput) throws DukeException {
         String[] inputArray = userInput.split(" ");
         String userCommand = inputArray[0];
@@ -79,6 +85,7 @@ public class Parser {
                         String dueDate = String.join(" ",
                                 Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
                         LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        // check if the date and time input is in the right format
                         if (deadlineDescription.equals("") || dueDate.equals("")) {
                             throw new DukeException("Please specify the description/due date of the deadline task.");
                         }
@@ -99,6 +106,7 @@ public class Parser {
                         String dateTime = String.join(" ",
                                 Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
                         LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                        // check if the date and time input is in the right format
                         if (eventDescription.equals("") || dateTime.equals("")) {
                             throw new DukeException("Please specify the description/date time of the event task.");
                         }

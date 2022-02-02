@@ -1,8 +1,8 @@
-import main.DukeException;
-import main.commands.CBye;
-import main.commands.CDeadline;
-import main.commands.Command;
-import main.io.Parser;
+import main.duke.DukeException;
+import main.duke.commands.CBye;
+import main.duke.commands.CDeadline;
+import main.duke.commands.Command;
+import main.duke.io.Parser;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;

@@ -1,8 +1,8 @@
-package main.commands;
+package main.duke.commands;
 
-import main.TaskList;
-import main.Ui;
-import main.enums.CommandType;
+import main.duke.TaskList;
+import main.duke.Ui;
+import main.duke.enums.CommandType;
 
 public class CList extends Command {
     public CList() {

@@ -1,8 +1,8 @@
-package main;
+package main.duke;
 
-import main.commands.Command;
-import main.io.Parser;
-import main.io.Storage;
+import main.duke.commands.Command;
+import main.duke.io.Parser;
+import main.duke.io.Storage;
 
 import java.util.Scanner;
 
