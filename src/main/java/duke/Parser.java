@@ -73,4 +73,15 @@ public class Parser {
     public static int getTaskId(String nextInput) {
         return Integer.valueOf(nextInput.split(" ", 2)[1]);
     }
+
+    /**
+     * Parses the user input command for finding tasks with a specific keyword to return
+     * the search keyword.
+     *
+     * @param nextInput Next line of user input read in by the scanner in main class.
+     * @return Returns a string containing the keyword to be found.
+     */
+    public static String getKeyword(String nextInput) {
+        return nextInput.split(" ", 2)[1];
+    }
 }

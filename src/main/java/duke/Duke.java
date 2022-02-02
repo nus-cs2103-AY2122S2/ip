@@ -47,6 +47,7 @@ public class Duke {
             try {
                 switch (command) {
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     System.out.println(tasks.toString());
                     break;
                 case "deadline":
@@ -105,14 +106,14 @@ public class Duke {
                         throw new DukeException("You did not provide a task to mark.");
                     } else {
                         int taskId = Parser.getTaskId(nextInput);
-                        tasks.getTask(taskId - 1).markDone();
+                        tasks.getTasks(taskId - 1).markDone();
                         try {
                             storage.write(tasks.getTaskList());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks.getTask(taskId - 1).toString());
+                        System.out.println(tasks.getTasks(taskId - 1).toString());
                     }
                     break;
                 case "unmark":
@@ -120,14 +121,14 @@ public class Duke {
                         throw new DukeException("You did not provide a task to unmark.");
                     } else {
                         int taskId = Parser.getTaskId(nextInput);
-                        tasks.getTask(taskId - 1).markUndone();
+                        tasks.getTasks(taskId - 1).markUndone();
                         try {
                             storage.write(tasks.getTaskList());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                         System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println(tasks.getTask(taskId - 1).toString());
+                        System.out.println(tasks.getTasks(taskId - 1).toString());
                     }
                     break;
                 case "delete":
@@ -136,7 +137,7 @@ public class Duke {
                     } else {
                         int taskId = Parser.getTaskId(nextInput);
                         System.out.println("Noted. I've removed this task:");
-                        System.out.println(tasks.getTask(taskId - 1).toString());
+                        System.out.println(tasks.getTasks(taskId - 1).toString());
                         tasks.delete(taskId - 1);
                         try {
                             storage.write(tasks.getTaskList());
@@ -144,6 +145,15 @@ public class Duke {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                    break;
+                case "find":
+                    if (Parser.getLength(nextInput) == 1) {
+                        throw new DukeException("You did not provide a keyword to search.");
+                    } else {
+                        String keyword = Parser.getKeyword(nextInput);
+                        System.out.println("Here are the matching tasks in your list:");
+                        System.out.println(tasks.findTasks(keyword).toString());
                     }
                     break;
                 default:
