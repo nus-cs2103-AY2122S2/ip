@@ -1,4 +1,4 @@
-package main.duke.enums;
+package main.enums;
 
 public enum CommandType {
     BYE,

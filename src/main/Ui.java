@@ -1,6 +1,6 @@
-package main.duke;
+package main;
 
-import main.duke.tasks.Task;
+import main.tasks.Task;
 
 public class Ui {
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";

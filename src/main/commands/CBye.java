@@ -1,8 +1,8 @@
-package main.duke.commands;
+package main.commands;
 
-import main.duke.TaskList;
-import main.duke.Ui;
-import main.duke.enums.CommandType;
+import main.TaskList;
+import main.Ui;
+import main.enums.CommandType;
 
 public class CBye extends Command{
 

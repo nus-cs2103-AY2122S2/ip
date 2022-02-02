@@ -1,6 +1,6 @@
-package main.duke.tasks;
+package main.tasks;
 
-import main.duke.enums.TaskType;
+import main.enums.TaskType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

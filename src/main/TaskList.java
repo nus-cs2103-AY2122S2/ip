@@ -1,6 +1,6 @@
-package main.duke;
+package main;
 
-import main.duke.tasks.Task;
+import main.tasks.Task;
 
 import java.util.ArrayList;
 

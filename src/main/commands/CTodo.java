@@ -1,10 +1,10 @@
-package main.duke.commands;
+package main.commands;
 
-import main.duke.TaskList;
-import main.duke.Ui;
-import main.duke.enums.CommandType;
-import main.duke.tasks.Task;
-import main.duke.tasks.ToDo;
+import main.TaskList;
+import main.Ui;
+import main.enums.CommandType;
+import main.tasks.Task;
+import main.tasks.ToDo;
 
 public class CTodo extends Command{
     protected String description;

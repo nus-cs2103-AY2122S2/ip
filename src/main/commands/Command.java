@@ -1,9 +1,9 @@
-package main.duke.commands;
+package main.commands;
 
-import main.duke.DukeException;
-import main.duke.TaskList;
-import main.duke.Ui;
-import main.duke.enums.CommandType;
+import main.DukeException;
+import main.TaskList;
+import main.Ui;
+import main.enums.CommandType;
 
 public abstract class Command {
     protected CommandType commandType;

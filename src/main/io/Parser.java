@@ -1,15 +1,15 @@
-package main.duke.io;
+package main.io;
 
-import main.duke.commands.Command;
-import main.duke.commands.CBye;
-import main.duke.commands.CMark;
-import main.duke.commands.CDelete;
-import main.duke.commands.CList;
-import main.duke.commands.CTodo;
-import main.duke.commands.CDeadline;
-import main.duke.commands.CEvent;
-import main.duke.commands.CUnmark;
-import main.duke.DukeException;
+import main.commands.Command;
+import main.commands.CBye;
+import main.commands.CMark;
+import main.commands.CDelete;
+import main.commands.CList;
+import main.commands.CTodo;
+import main.commands.CDeadline;
+import main.commands.CEvent;
+import main.commands.CUnmark;
+import main.DukeException;
 
 import java.util.Arrays;
 

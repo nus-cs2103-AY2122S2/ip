@@ -1,6 +1,6 @@
-package main.duke.tasks;
+package main.tasks;
 
-import main.duke.enums.TaskType;
+import main.enums.TaskType;
 
 public abstract class Task {
     protected String description;
