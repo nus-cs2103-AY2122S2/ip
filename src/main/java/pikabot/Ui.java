@@ -7,16 +7,14 @@ import pikabot.task.Task;
  */
 public class Ui {
 
-    public static final String LINE = "";
-    public static final String INDENTATION = "";
 
     /**
      * Prints out welcome message when PikaBot starts running.
      */
     public static String printWelcomeText() {
         String str = "";
-        str = str + INDENTATION + LINE + "\n" + INDENTATION + "Hello! I'm PikaBot"
-                + "\n" + INDENTATION + "What can I do for you? シ\n" + INDENTATION + LINE;
+        str = str + "Hello! I'm PikaBot" + "\n"
+                + "What can I do for you? シ\n";
         return str;
     }
 
@@ -24,10 +22,7 @@ public class Ui {
      * Prints out exit text when PikaBot is closed.
      */
     public static String printClosingText() {
-        String str = "";
-        str = str + INDENTATION + LINE + "\n" + INDENTATION + "Bye. Hope to see you again!"
-                + "\n" + INDENTATION + LINE;
-        return str;
+        return "Bye. Hope to see you again!";
     }
 
     /**
@@ -37,18 +32,16 @@ public class Ui {
      */
     public static String printListOfTasks(TaskList taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append(INDENTATION).append(LINE).append("\n").append(INDENTATION);
         sb.append("Here are the tasks in your list:").append("\n");
 
         int taskNumber = 1;
         int length = taskList.noOfTasks();
 
         while (taskNumber <= length) {
-            sb.append(INDENTATION).append(taskNumber).append(".");
+            sb.append(taskNumber).append(".");
             sb.append(taskList.get(taskNumber - 1)).append("\n");
             taskNumber++;
         }
-        sb.append(INDENTATION).append(LINE);
         return sb.toString();
     }
 
@@ -61,20 +54,17 @@ public class Ui {
     public static String printListOfMatchedTasks(TaskList taskList, String keyword) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(INDENTATION).append(LINE).append("\n");
-        sb.append(INDENTATION).append("Here are the tasks containing \"");
+        sb.append("Here are the tasks containing \"");
         sb.append(keyword).append("\" in your list:").append("\n");
 
         int taskNumber = 1;
         int length = taskList.noOfTasks();
 
         while (taskNumber <= length) {
-            sb.append(INDENTATION).append(taskNumber).append(".");
+            sb.append(taskNumber).append(".");
             sb.append(taskList.get(taskNumber - 1)).append("\n");
             taskNumber++;
         }
-
-        sb.append(INDENTATION).append(LINE);
         return sb.toString();
     }
 
@@ -85,10 +75,8 @@ public class Ui {
      */
     public static String indicateMarked(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(INDENTATION).append(LINE).append("\n");
-        sb.append(INDENTATION).append("Nice! I've marked this task as done:").append("\n");
-        sb.append(INDENTATION).append("  ").append(task).append("\n");
-        sb.append(INDENTATION).append(LINE);
+        sb.append("Nice! I've marked this task as done:").append("\n");
+        sb.append("  ").append(task);
         return sb.toString();
     }
 
@@ -99,10 +87,8 @@ public class Ui {
      */
     public static String indicateUnmarked(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(INDENTATION).append(LINE).append("\n");
-        sb.append(INDENTATION).append("Nice! I've marked this task as not done yet:").append("\n");
-        sb.append(INDENTATION).append("  ").append(task).append("\n");
-        sb.append(INDENTATION).append(LINE);
+        sb.append("Nice! I've marked this task as not done yet:").append("\n");
+        sb.append("  ").append(task);
         return sb.toString();
     }
 
@@ -114,11 +100,10 @@ public class Ui {
      */
     public static String indicateAddedTask(Task task, TaskList taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append(INDENTATION).append(LINE).append("\n");
-        sb.append(INDENTATION).append("Got it. I've added this task:").append("\n");
-        sb.append(INDENTATION).append("  ").append(task).append("\n");
-        sb.append(INDENTATION).append("Now you have ").append(taskList.noOfTasks());
-        sb.append(" tasks in the list.").append("\n").append(INDENTATION + LINE);
+        sb.append("Got it. I've added this task:").append("\n");
+        sb.append("  ").append(task).append("\n");
+        sb.append("Now you have ").append(taskList.noOfTasks());
+        sb.append(" tasks in the list.");
         return sb.toString();
     }
 
@@ -130,11 +115,10 @@ public class Ui {
      */
     public static String indicateRemovedTask(Task task, TaskList taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append(INDENTATION).append(LINE).append("\n");
-        sb.append(INDENTATION).append("Noted. I've removed this task:").append("\n");
-        sb.append(INDENTATION).append("  ").append(task).append("\n");
-        sb.append(INDENTATION).append("Now you have ").append(taskList.noOfTasks());
-        sb.append(" tasks in the list").append("\n").append(INDENTATION + LINE);
+        sb.append("Noted. I've removed this task:").append("\n");
+        sb.append("  ").append(task).append("\n");
+        sb.append("Now you have ").append(taskList.noOfTasks());
+        sb.append(" tasks in the list");
         return sb.toString();
     }
 
@@ -144,10 +128,7 @@ public class Ui {
      * @param e Exception caught.
      */
     public static String printExceptionMessage(Exception e) {
-        String str = "";
-        str = str + INDENTATION + LINE + "\n" + INDENTATION + e.getMessage() + "\n"
-                + INDENTATION + LINE;
-        return str;
+        return e.getMessage();
     }
 
     /**
@@ -156,9 +137,6 @@ public class Ui {
      * @param message Customised message.
      */
     public static String printExceptionCustomisedMessage(String message) {
-        String str = "";
-        str = str + INDENTATION + LINE + "\n" + INDENTATION + message + "\n"
-                + INDENTATION + LINE;
-        return str;
+        return message;
     }
 }
