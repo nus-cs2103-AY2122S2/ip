@@ -1,3 +1,12 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import dazz.TaskList;
 import dazz.Ui;
 import dazz.exception.DazzException;
@@ -6,14 +15,6 @@ import dazz.task.Deadline;
 import dazz.task.Event;
 import dazz.task.Task;
 import dazz.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
@@ -26,7 +27,9 @@ public class TaskListTest {
             TaskList taskList = new TaskList(tasks);
             taskList.add(new Event("meeting", Ui.toLocalDateTime("12/12/2021 1800")));
             assertEquals(3, taskList.getSize());
-        } catch (DazzException e) {}
+        } catch (DazzException e) {
+            System.out.println("This is not supposed to run");
+        }
     }
 
     @Test
@@ -38,7 +41,9 @@ public class TaskListTest {
             TaskList taskList = new TaskList(tasks);
             taskList.mark(1);
             assertTrue(taskList.getTask(1).getIsDone());
-        } catch (DazzException e) {}
+        } catch (DazzException e) {
+            System.out.println("This is not supposed to run");
+        }
     }
 
     @Test
@@ -50,7 +55,9 @@ public class TaskListTest {
             TaskList taskList = new TaskList(tasks);
             taskList.unmark(1);
             assertFalse(taskList.getTask(1).getIsDone());
-        } catch (DazzException e) {}
+        } catch (DazzException e) {
+            System.out.println("This is not supposed to run");
+        }
     }
 
     @Test

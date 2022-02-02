@@ -46,4 +46,3 @@ public class Dazz {
         new Dazz("data/tasks.txt").run();
     }
 }
-
