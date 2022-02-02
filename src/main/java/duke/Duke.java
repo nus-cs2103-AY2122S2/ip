@@ -8,6 +8,7 @@ import duke.data.exception.ResourceNotFoundException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 public class Duke {
     private static boolean running;
@@ -34,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Starts the program
+     * Starts the program (CLI)
      */
     public void run() {
         ui.greet();
@@ -43,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Takes input from user until exit command is issued
+     * Takes CLI input from user until exit command is issued
      */
     public void commandLoop() {
         while (true) {
@@ -68,11 +69,26 @@ public class Duke {
     }
 
     /**
-     * The main method.
+     * The main method, starts the GUI.
      *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
+            command.setData(taskList, this, storage);
+            String response = command.execute();
+            if (response.equals("EXIT")) {
+                Platform.exit();
+                System.exit(0);
+            }
+            return(response);
+        } catch (Exception exception) {
+            return "ERROR: " + exception.getMessage();
+        }
     }
 }
