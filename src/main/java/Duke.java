@@ -141,6 +141,9 @@ public class Duke {
      * @throws DukeException if user input is invalid
      */
     private void run() {
+        Storage storageHandler = new Storage();
+        storageHandler.loadTasksFromFile();
+
         Scanner sc = new Scanner(System.in);
 
         String greeting = "Hello! I'm Kizer\nWhat can I do for you?";
