@@ -6,7 +6,7 @@ package li.zhongfu.cs2103.chatbot.exceptions;
 public class StorageException extends Exception {
     /**
      * Constructs a StorageException with the specified detail message.
-     * 
+     *
      * @param message a String containing a detail message
      */
     public StorageException(String message) {
@@ -15,7 +15,7 @@ public class StorageException extends Exception {
 
     /**
      * Constructs a StorageException with the specified detail message and the cause of the exception.
-     * 
+     *
      * @param message a String containing a detail message
      * @param cause a Throwable representing the cause of the exception
      */

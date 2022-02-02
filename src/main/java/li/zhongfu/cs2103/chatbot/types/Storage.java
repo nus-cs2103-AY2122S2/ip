@@ -29,7 +29,7 @@ public class Storage {
 
     /**
      * Creates a new Storage instance with the given data file path and object filter.
-     * 
+     *
      * @param filePath the path to load objects from, or save objects to
      * @param objectFilter the ObjectInputFilter to use when loading objects from file
      */
@@ -37,10 +37,10 @@ public class Storage {
         this.dataFile = new File(filePath);
         this.objectFilter = objectFilter;
     }
-    
+
     /**
      * Creates a new Storage instance with the given data file path.
-     * 
+     *
      * @param filePath the path to load objects from, or save objects to
      */
     public Storage(String filePath) {
@@ -49,7 +49,7 @@ public class Storage {
 
     /**
      * Loads objects from the configured file path.
-     * 
+     *
      * @return a list of loaded objects
      * @throws FileNotFoundException if the configured file path does not exist
      * @throws StorageException if there was any error while loading objects, e.g. objects rejected by filter
@@ -82,7 +82,7 @@ public class Storage {
 
     /**
      * Saves objects to the configured file path.
-     * 
+     *
      * @param objs a list of Serializable objects to save
      * @throws IOException if there was an error while saving objects
      */

@@ -28,7 +28,7 @@ public class TaskList {
 
     /**
      * Adds a task to this task list.
-     * 
+     *
      * @param task the task to be added
      */
     public void add(Task task) {
@@ -40,7 +40,7 @@ public class TaskList {
 
     /**
      * Returns the task at the given index.
-     * 
+     *
      * @param idx the index of the task to be retrieved
      * @return the task at the given index
      */
@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * Removes the task at the given index, and returns it.
-     * 
+     *
      * @param idx the index of the task to be removed
      * @return the removed task
      */
@@ -73,7 +73,7 @@ public class TaskList {
 
     /**
      * Returns a boolean indicating whether this list is empty.
-     * 
+     *
      * @return true if the list is empty, false otherwise
      */
     public boolean isEmpty() {
@@ -82,7 +82,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in this list.
-     * 
+     *
      * @return the number of tasks in this list
      */
     public int size() {
@@ -91,7 +91,7 @@ public class TaskList {
 
     /**
      * Saves all tasks in this list to the given Storage.
-     * 
+     *
      * @param storage the Storage to be used to save tasks
      * @throws IOException if there was an error while saving tasks
      */
@@ -120,7 +120,7 @@ public class TaskList {
 
     /**
      * Loads tasks from the given Storage into a List of tasks.
-     * 
+     *
      * @param storage the Storage to load tasks with
      * @return a List of Tasks
      * @throws FileNotFoundException if the file configured in the Storage instance doesn't exist
@@ -148,7 +148,7 @@ public class TaskList {
 
     /**
      * Loads tasks from the given Storage into a TaskList.
-     * 
+     *
      * @param storage the Storage to load tasks with
      * @return a TaskList containing the tasks loaded from the given Storage
      * @throws FileNotFoundException if the file configured in the Storage instance doesn't exist

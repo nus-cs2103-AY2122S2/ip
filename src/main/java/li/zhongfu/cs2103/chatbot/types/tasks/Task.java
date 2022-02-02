@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * A representation of to-do list task that contains a name and a state.
- * 
+ *
  * Currently, it probably isn't possible for the state to be inconsistent e.g. after deserializing
  * a (potentially malicious) serialized object, but keep this in mind if implementing subclasses
  * with more advanced logic.
@@ -61,7 +61,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Indicates whether the Object {@code o} is equal to this Task.
-     * 
+     *
      * @param o the Object to compare this Task against
      * @returns true if {@code o} is equal to this Task, false otherwise
      */
@@ -76,7 +76,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns a hash code value for this Task.
-     * 
+     *
      * @returns a hash code value for this Task
      */
     @Override

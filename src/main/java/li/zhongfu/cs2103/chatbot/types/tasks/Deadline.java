@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new deadline task item with the specified task name and deadline date and time.
-     * 
+     *
      * @param name the name of the task
      * @param eventTime the date and time of the deadilne
      */
@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the date and time representing the deadline of this task item.
-     * 
+     *
      * @return the date and time representing the deadline of this task item.
      */
     public LocalDateTime getDeadline() {
@@ -31,7 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of this deadline task item.
-     * 
+     *
      * @returns a string representation of this deadline task item
      */
     @Override
@@ -45,7 +45,7 @@ public class Deadline extends Task {
 
     /**
      * Indicates whether the Object {@code o} is equal to this Deadline.
-     * 
+     *
      * @param o the Object to compare this Deadline against
      * @returns true if {@code o} is equal to this Deadline, false otherwise
      */
@@ -60,7 +60,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a hash code value for this Deadline.
-     * 
+     *
      * @returns a hash code value for this Deadline
      */
     @Override

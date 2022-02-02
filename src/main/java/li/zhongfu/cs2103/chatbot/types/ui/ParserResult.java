@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * A class used to encapsulate the result of parsing a user command.
- * 
+ *
  * Parsed commands consist of the command keyword, a optional positional arg, and optional named args.
  */
 public class ParserResult {
@@ -24,7 +24,7 @@ public class ParserResult {
 
     /**
      * Returns the command keyword.
-     * 
+     *
      * @return the command keyword
      */
     public String getCmd() {
@@ -33,7 +33,7 @@ public class ParserResult {
 
     /**
      * Returns a boolean indicating whether the named argument was in the parsed command.
-     * 
+     *
      * @param key the named argument key to search for
      * @return true if the named argument exists, false otherwise
      */
@@ -43,7 +43,7 @@ public class ParserResult {
 
     /**
      * Returns a boolean indicating whether the named argument was in the parsed command, and is non-blank.
-     * 
+     *
      * @param key the named argument key to search for
      * @return true if the named argument exists and is non-blank, false otherwise
      */
@@ -53,7 +53,7 @@ public class ParserResult {
 
     /**
      * Returns the named argument value associated with the argument key.
-     * 
+     *
      * @param key the named argument key to search for
      * @return the associated named argument value if it exists, or null otherwise
      */
@@ -63,7 +63,7 @@ public class ParserResult {
 
     /**
      * Returns a boolean indicating whether a positional argument was parsed.
-     * 
+     *
      * @return true if a positional argument was parsed, false otherwise
      */
     public boolean hasPosArg() {
@@ -72,7 +72,7 @@ public class ParserResult {
 
     /**
      * Returns a boolean indicating whether a positional argument was parsed, and is non-blank.
-     * 
+     *
      * @return true if a positional argument was parsed and is non-blank, false otherwise
      */
     public boolean hasNonblankPosArg() {
@@ -90,7 +90,7 @@ public class ParserResult {
 
     /**
      * Returns a {@code Map<String, String>} containing all parsed arguments.
-     * 
+     *
      * @return a {@code Map<String, String>} containing all parsed arguments
      */
     public Map<String, String> getArgs() {

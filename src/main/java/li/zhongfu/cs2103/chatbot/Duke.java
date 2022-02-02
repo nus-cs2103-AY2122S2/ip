@@ -28,7 +28,7 @@ public class Duke {
 
     /**
      * Creates a new Duke instance with the given chatbot name and Task storage path.
-     * 
+     *
      * @param botName the name of the chatbot
      * @param filePath the path for Task persistent storage
      */
@@ -41,9 +41,9 @@ public class Duke {
 
     /**
      * Creates a new Duke instance with the given chatbot name.
-     * 
+     *
      * Uses the default Task storage path.
-     * 
+     *
      * @param botName the name of the chatbot
      */
     public Duke(String botName) {
@@ -71,7 +71,7 @@ public class Duke {
 
     /**
      * Runs the chatbot REPL loop.
-     * 
+     *
      * @throws IOException if there was an error reading user input or printing messages to the output
      */
     public void loop() throws IOException {
@@ -160,7 +160,8 @@ public class Duke {
                         } catch (DateTimeParseException e) {
                             throw new DukeException(String.format(
                                     "Unknown date format! Try: deadline %s /by 1 jan 2050 12:15",
-                                    result.getPosArg()));                        }
+                                    result.getPosArg()));
+                        }
                     } else if ("event".equals(cmd)) {
                         if (!result.hasNonblankArg("at")) {
                             throw new DukeException(String.format(
@@ -220,7 +221,7 @@ public class Duke {
 
     /**
      * The main method.
-     * 
+     *
      * @param args command line args
      */
     public static void main(String[] args) throws IOException {
