@@ -15,6 +15,7 @@ public class Deadline extends Task {
         return this.eventTime;
     }
 
+    @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", this.getDone() ? "X" : " ", this.getName(), this.getDeadline().format(DATE_TIME_FORMAT));
     }

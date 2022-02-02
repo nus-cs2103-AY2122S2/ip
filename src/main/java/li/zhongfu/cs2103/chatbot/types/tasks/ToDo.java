@@ -5,6 +5,7 @@ public class ToDo extends Task {
         super(name);
     }
 
+    @Override
     public String toString() {
         return String.format("[T][%s] %s", this.getDone() ? "X" : " ", this.getName());
     }
