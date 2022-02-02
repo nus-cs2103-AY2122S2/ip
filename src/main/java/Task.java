@@ -1,4 +1,5 @@
 public class Task {
+    protected String type = "GENERAL";
     protected String description;
     protected Boolean isDone;
 
