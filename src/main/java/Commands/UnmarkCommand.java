@@ -18,18 +18,18 @@ public class UnmarkCommand extends DukeCommand {
      * @param storage The object that deals with the management of the database
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(this.commandBody) - 1;
             Task task = tasks.get(index);
             task.toggleUncompleted();
             storage.save(tasks);
-            ui.showUnmarkReply(task);
+            return ui.showUnmarkReply(task);
         } catch(IndexOutOfBoundsException | IOException e) {
             if (tasks.getSize() == 0) {
-                System.out.println("List is empty! Please add a task before removing/marking it.\n");
+                return ("List is empty! Please add a task before removing/marking it.\n");
             } else {
-                System.out.println("Please enter a valid number in the list!\n");
+                return ("Please enter a valid number in the list!\n");
             }
         }
     }

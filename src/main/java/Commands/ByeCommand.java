@@ -16,8 +16,8 @@ public class ByeCommand extends DukeCommand{
      * @param storage The object that deals with the management of the database
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showByeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showByeMessage();
     }
 
     @Override

@@ -25,11 +25,11 @@ public class ToDoCommand extends DukeCommand {
      * @param storage The object that deals with the management of the database
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
         Tasks.ToDo toDoTask = new Tasks.ToDo(this.commandBody);
         tasks.add(toDoTask);
         storage.save(tasks);
-        ui.showSuccessfulAdd(toDoTask, tasks.getSize());
+        return ui.showSuccessfulAdd(toDoTask, tasks.getSize());
     }
 }

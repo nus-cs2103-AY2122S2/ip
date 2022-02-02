@@ -9,81 +9,58 @@ import java.io.*;
  * Ui is a class that deals with user interaction
  */
 public class Ui {
-    private BufferedReader br = new BufferedReader(new
-            InputStreamReader(System.in));
-    private PrintWriter pr = new PrintWriter(new
-            BufferedWriter((new OutputStreamWriter((System.out)))));
 
-    public void showSuccessfulAdd(Task task, int listSize) {
-        pr.print("Got it. I've added this task:\n" + task.toString() + "\n" +
-                "Now you have " + listSize + " tasks in the list.\n");
-        pr.flush();
+    public String showSuccessfulAdd(Task task, int listSize) {
+        return String.format("Got it. I've added this task:\n" + " %s\n" +
+                "Now you have %s tasks in the list.\n", task.toString(), listSize);
     }
 
-    public void showWelcome() {
-        pr.print("Hello! I'm Duke \nWhat can I do for you?\n");
-        pr.flush();
+    public String showWelcome() {
+        return "Hello! I'm Duke \nWhat can I do for you?\n";
     }
 
-    public String readCommand() throws IOException {
-        return br.readLine();
+    public String showLine() {
+        return "_____________________________\n";
     }
 
-    public void showLine() {
-        pr.print("_____________________________\n");
-        pr.flush();
+    public String showDeleteReply(Task task, int taskListSize) {
+        return String.format("Noted. I've removed this task:\n" + "%s" +
+                "\nNow you have %s tasks in the list.\n", task.toString(), taskListSize);
     }
 
-    public void showDeleteReply(Task task, int taskListSize) {
-        pr.print("Noted. I've removed this task:\n");
-        pr.print(task.toString());
-        pr.print("\nNow you have " + taskListSize + " tasks in the list.\n");
-        pr.flush();
+    public String showMarkReply(Task task) {
+        return String.format("Nice! I've marked this task as done: \n %s \n", task.toString());
     }
 
-    public void showMarkReply(Task task) {
-        pr.print("Nice! I've marked this task as done:" + "\n");
-        pr.print(task.toString() + "\n");
-        pr.flush();
-    }
-
-    public void showUnmarkReply(Task task) {
-        pr.print("OK, I've marked this task as not done yet:" + "\n");
-        pr.print(task.toString() + "\n");
-        pr.flush();
+    public String showUnmarkReply(Task task) {
+        return String.format("OK, I've marked this task as not done yet: \n %s \n", task.toString());
     }
 
 
-    public void showTaskList(TaskList taskList) {
-        pr.print("Here are the items in your list: \n");
+    public String showTaskList(TaskList taskList) {
+        StringBuilder stringBuilder = new StringBuilder("Here are the items in your list: \n");
         for (int i = 0; i < taskList.getSize(); i++) {
             Tasks.Task task = taskList.get(i);
 
-            pr.print((i + 1) + ".");
-            pr.print(task.toString());
-            pr.print("\n");
+            stringBuilder.append((i + 1) + ".");
+            stringBuilder.append(task.toString() + "\n");
         }
-        pr.flush();
+        return stringBuilder.toString();
     }
 
-    public void showLoadingError(String message) {
-        pr.print("Error loading the file: " + message);
-        pr.flush();
+    public String showLoadingError(String message) {
+        return String.format("Error loading the file: %s", message);
     }
 
-    public void showEmptyFind() {
-        pr.print("Sorry, there are no tasks corresponding to the keyword entered \n");
-        pr.flush();
+    public String showEmptyFind() {
+        return ("Sorry, there are no tasks corresponding to the keyword entered \n");
     }
 
-    public void showErrorMessage(String err) {
-        pr.print(err + "\n");
-        pr.flush();
+    public String showErrorMessage(String err) {
+        return String.format("%s\n", err);
     }
 
-    public void showByeMessage() {
-        pr.print("Bye. Hope to see you again soon!");
-        pr.flush();
-        pr.close();
+    public String showByeMessage() {
+        return ("Bye. Hope to see you again soon!");
     }
 }

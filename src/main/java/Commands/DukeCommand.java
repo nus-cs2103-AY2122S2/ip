@@ -19,7 +19,7 @@ public class DukeCommand {
         return false;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException, IOException {
-
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException, IOException {
+        return "Empty";
     }
 }
