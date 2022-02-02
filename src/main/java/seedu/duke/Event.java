@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.time.LocalDate;
 
+/**
+ * A Task that specifies a date of occurrence.
+ */
 public class Event extends Task {
 
     Event(String description, LocalDate time) {

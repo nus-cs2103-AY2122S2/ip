@@ -4,6 +4,9 @@ import java.util.Optional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A skeleton for Tasks
+ */
 public abstract class Task {
 
     protected static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("LLL dd yyyy");

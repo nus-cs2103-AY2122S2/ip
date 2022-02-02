@@ -2,6 +2,10 @@ package seedu.duke;
 
 import java.time.LocalDate;
 
+/**
+ * A Task that specifies the date required for the task to be completed
+ */
+
 public class Deadline extends Task {
 
     Deadline(String description, LocalDate deadline) {

@@ -2,6 +2,11 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * Main executable for the Duke program.
+ * Helps user record the tasks to be completed and their deadlines.
+ */
+
 public class Duke {
 
     private Storage storage;
@@ -22,6 +27,10 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the Duke program by starting the UI interface and awaits for input from user.
+     * When "bye" command is used, saves the current list of tasks and exits the program
+     */
     public void run() {
 
         ui.start();
