@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
     /**
-     * Creates an instance of a tasklist object based on the current
+     * Creates an instance of a task list object based on the current
      * existing list of tasks passed in (if not empty).
      *
      * @param taskList Current lists of tasks, each as a string in the array list.
@@ -91,8 +91,24 @@ public class TaskList {
      *
      * @return Specific task object in the tasks list.
      */
-    public Task getTask(int taskId) {
+    public Task getTasks(int taskId) {
         return taskList.get(taskId);
+    }
+
+    /**
+     * Finds and returns tasks with the specified keyword as a new task list object.
+     *
+     * @param keyword Keyword to be found in the tasks' descriptions.
+     * @return Returns a new task list object with the specified keyword.
+     */
+    public TaskList findTasks(String keyword) throws DukeException {
+        ArrayList<String> result = new ArrayList<String>();
+        for (Task t : taskList) {
+            if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(t.toString());
+            }
+        }
+        return new TaskList(result);
     }
 
     /**
@@ -104,7 +120,6 @@ public class TaskList {
     public String toString() {
         String result = "";
         int count = 1;
-        result += "Here are the tasks in your list: \n";
         for (Task record : taskList) {
             result += count + ". " + record.toString() + "\n";
             count++;
