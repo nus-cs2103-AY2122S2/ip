@@ -19,6 +19,31 @@ application {
     mainClassName = "Yale"
 }
 
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+
+shadowJar {
+    archiveBaseName = "Yale"
+    archiveClassifier = null
+}
+
 checkstyle {
     toolVersion = '8.29'
     configFile = rootProject.file("${rootDir}/config/checkstyle/checkstyle.xml")
