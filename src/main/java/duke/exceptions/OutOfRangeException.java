@@ -14,6 +14,6 @@ public class OutOfRangeException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "☹ OOPS!!! The value input is not in the list";
+        return "OOPS!!! The value input is not in the list";
     }
 }

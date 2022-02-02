@@ -12,6 +12,6 @@ public class IncorrectValueException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "☹ OOPS!!! The value input is incorrect";
+        return "OOPS!!! The value input is incorrect";
     }
 }

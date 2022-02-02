@@ -49,7 +49,7 @@ public class ByeCommand extends Command {
             System.out.println("An error occurred");
             e.printStackTrace();
         }
-//        ui.printFormatted(new String[]{"Bye. Hope to see you again soon!"});
+
         return "Bye. Hope to see you again soon!";
     }
 }

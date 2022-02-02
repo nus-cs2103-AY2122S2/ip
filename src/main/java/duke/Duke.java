@@ -14,7 +14,7 @@ import duke.ui.Ui;
 /**
  * duke.Main class which runs the program
  */
-public class Duke{
+public class Duke {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;

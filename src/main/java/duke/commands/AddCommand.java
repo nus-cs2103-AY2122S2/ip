@@ -74,12 +74,8 @@ public class AddCommand extends Command {
         }
         this.tasks.add(added);
 
-//        ui.printFormatted(new String[]{
-//            "Got it. I've added this task:",
-//            "  " + added,
-//            "Now you have " + tasks.size() + " tasks in the list"});
-        return ("Got it. I've added this task:\n" +
-                "  " + added + "\n" +
-                "Now you have " + tasks.size() + " tasks in the list");
+        return ("Got it. I've added this task:\n"
+            + "  " + added + "\n"
+            + "Now you have " + tasks.size() + " tasks in the list");
     }
 }

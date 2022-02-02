@@ -51,15 +51,6 @@ public class FindCommand extends Command {
             }
         }
 
-//        if (temp.size() == 0) {
-//            ui.printFormatted(new String[]{"There are no tasks matching in your list"});
-//        } else {
-//            System.out.println(INDENT + "Here are the matching tasks in your list");
-//            for (int i = 0; i < temp.size(); i++) {
-//                System.out.println(INDENT + (i + 1) + "." + temp.get(i));
-//            }
-//        }
-
         if (temp.size() == 0) {
             output = "There are no tasks matching in your list";
         } else {
