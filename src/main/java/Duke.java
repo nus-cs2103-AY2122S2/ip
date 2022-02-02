@@ -1,9 +1,15 @@
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.NoSuchElementException;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.charset.StandardCharsets;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -20,6 +26,21 @@ public class Duke {
 
         ArrayList<Task> list = new ArrayList<Task>();
 
+        Path newFile;
+//        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get("../../../data");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        try {
+            if (!directoryExists) {
+                java.nio.file.Files.createDirectories(path);
+            }
+            Path dukeFile = path.resolve("duke.txt");
+            newFile = Files.createFile(dukeFile);
+        } catch (FileAlreadyExistsException e) {
+            newFile = Paths.get("../../../data/duke.txt");
+            list = populateList(newFile.toString());
+        }
+        System.out.println(newFile.toString());
         while (!nextLine.equals("bye")) {
             System.out.println("__________________________________________________");
             String firstWord = nextLine.split(" ")[0];
@@ -113,6 +134,11 @@ public class Duke {
             }
 
             System.out.println("__________________________________________________");
+            ArrayList<String> data = new ArrayList<String>();
+            for (Task task : list) {
+                data.add(task.toString());
+            }
+            java.nio.file.Files.write(newFile, data, StandardCharsets.UTF_8);
             nextLine = br.readLine().strip().replaceAll(" +", " ");
         }
 
@@ -120,5 +146,50 @@ public class Duke {
                 + "Bye. Hope to see you again soon!"
                 + "\n__________________________________________________");
         br.close();
+    }
+
+    static ArrayList<Task> populateList(String fileName) throws IOException {
+        ArrayList<Task> list = new ArrayList<Task>();
+        BufferedReader file = new BufferedReader(new FileReader(fileName));
+        String line = file.readLine();
+        while (line != null) {
+            boolean isMarked = String.valueOf(line.charAt(4)).equals("X");
+            if (String.valueOf(line.charAt(1)).equals("T")) {
+                Task task = new Todo(line.substring(7));
+                if (isMarked) {
+                    task = task.mark();
+                }
+                list.add(task);
+            } else if (String.valueOf(line.charAt(1)).equals("D")) {
+                String tempDescription = line.split("by: ")[0].substring(7);
+                int tempDescLength = tempDescription.length();
+                String description = tempDescription.substring(0, tempDescLength - 2);
+                String tempTimeBy = line.split("by: ")[1];
+                int endIdx = tempTimeBy.lastIndexOf(")");
+                String timeBy = tempTimeBy.substring(0, endIdx);
+                Task task = new Event(description, timeBy);
+                if (isMarked) {
+                    task = task.mark();
+                }
+                list.add(task);
+            } else if (String.valueOf(line.charAt(1)).equals("E")) {
+                String tempDescription = line.split("at: ")[0].substring(7);
+                int tempDescLength = tempDescription.length();
+                String description = tempDescription.substring(0, tempDescLength - 2);
+                String tempTimeBy = line.split("at: ")[1];
+                int endIdx = tempTimeBy.lastIndexOf(")");
+                String timeBy = tempTimeBy.substring(0, endIdx);
+                Task task = new Event(description, timeBy);
+                if (isMarked) {
+                    task = task.mark();
+                }
+                list.add(task);
+            }
+            line = file.readLine();
+        }
+        file.close();
+        return list;
+
+
     }
 }
