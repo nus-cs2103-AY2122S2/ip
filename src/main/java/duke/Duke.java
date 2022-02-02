@@ -35,31 +35,64 @@ public class Duke {
         storage.saveTasks(tasks);
     }
 
+    /**
+     * Adds a ToDo to the list of tasks.
+     *
+     * @param description Description of the task.
+     */
     public void addToDo(String description) {
         tasks.add(new ToDo(description));
         saveData();
     }
 
+    /**
+     * Adds a Deadline to the list of tasks.
+     *
+     * @param description Description of the task.
+     * @param dateTime    Date and time of the deadline.
+     */
     public void addDeadline(String description, String dateTime) {
         tasks.add(new Deadline(description, parseDateTime(dateTime)));
         saveData();
     }
 
+    /**
+     * Adds an Event to the list of tasks.
+     *
+     * @param description Description of the task.
+     * @param dateTime    Date and time of the event.
+     * @param duration    Duration of the event.
+     */
     public void addEvent(String description, String dateTime, String duration) {
         tasks.add(new Event(description, parseDateTime(dateTime), parseDuration(duration)));
         saveData();
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index Index of the task to mark as done.
+     */
     public void markTask(int index) {
         tasks.mark(index);
         saveData();
     }
 
+    /**
+     * Marks a taask as not done.
+     *
+     * @param index Index of the task to mark as not done.
+     */
     public void unmarkTask(int index) {
         tasks.unmark(index);
         saveData();
     }
 
+    /**
+     * Deletes a task.
+     *
+     * @param index Index of the task to delete.
+     */
     public void deleteTask(int index) {
         tasks.remove(index);
         saveData();

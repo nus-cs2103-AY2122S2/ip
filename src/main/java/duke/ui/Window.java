@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller for Window.
+ */
 public class Window extends BorderPane {
     @FXML
     private TextField searchTaskInput;
@@ -97,6 +100,9 @@ public class Window extends BorderPane {
         }
     }
 
+    /**
+     * Updates the Tasks displayed in the Window.
+     */
     public void update() {
         taskContainer.getChildren().clear();
         TaskList tasks;

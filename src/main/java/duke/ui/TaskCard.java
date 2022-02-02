@@ -11,11 +11,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+/**
+ * Represents a card consisting of a Text containing the description of the Task,
+ * a RadioButton to toggle the Task's status, and a Button to delete the Task.
+ */
 public class TaskCard extends HBox {
-    private final Duke duke;
-    private final Task task;
-    private final Window window;
-    private final int index;
     @FXML
     private Button deleteButton;
     @FXML
@@ -23,6 +23,19 @@ public class TaskCard extends HBox {
     @FXML
     private Text taskText;
 
+    private final Duke duke;
+    private final Task task;
+    private final Window window;
+    private final int index;
+
+    /**
+     * Constructs a TaskCard instance.
+     *
+     * @param window The window that this TaskCard belongs to.
+     * @param duke   Duke instance.
+     * @param task   The Task to be displayed.
+     * @param index  The index of the Task.
+     */
     public TaskCard(Window window, Duke duke, Task task, int index) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("/view/TaskCard.fxml"));
@@ -43,12 +56,18 @@ public class TaskCard extends HBox {
         markButton.setSelected(task.isDone());
     }
 
+    /**
+     * Deletes the Task shown in this card.
+     */
     @FXML
     public void handleDelete() {
         duke.deleteTask(index);
         window.update();
     }
 
+    /**
+     * Marks the Task shown in this card as done or not done.
+     */
     @FXML
     public void handleMark() {
         if (markButton.isSelected()) {
