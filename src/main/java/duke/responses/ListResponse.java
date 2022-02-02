@@ -8,7 +8,6 @@ import duke.data.TaskList;
 public class ListResponse implements Response {
 
     private TaskList iterate;
-    private int count = 1;
 
     /**
      * Constructor for ListResponse.
@@ -24,12 +23,16 @@ public class ListResponse implements Response {
     @Override
     public String callback() {
         String uiResponse = "";
-        uiResponse += Response.DIVIDER + "\n";
-        uiResponse += "Here are the tasks in your list:\n";
-        for (int i = 0; i < iterate.taskLength(); i++) {
-            uiResponse += i + " " + iterate.getTask(i).display() + "\n";
+        if (iterate.taskLength() == 0) {
+            uiResponse += "There are no task in the list currently.\n";
+        } else {
+            uiResponse += Response.DIVIDER + "\n";
+            uiResponse += "Here are the tasks in your list:\n";
+            for (int i = 0; i < iterate.taskLength(); i++) {
+                uiResponse += i + " " + iterate.getTask(i).display() + "\n";
+            }
+            uiResponse += Response.DIVIDER + "\n";
         }
-        uiResponse += Response.DIVIDER + "\n";
         return uiResponse;
     }
 }

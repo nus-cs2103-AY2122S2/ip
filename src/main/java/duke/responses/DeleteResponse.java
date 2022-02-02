@@ -28,7 +28,7 @@ public class DeleteResponse implements Response {
         uiResponse += Response.DIVIDER + "\n";
         uiResponse += "Noted. I've removed this task:\n";
         uiResponse += del.display() + "\n";
-        uiResponse += "Now you have " + size + " in the list";
+        uiResponse += "Now you have " + size + " in the list\n";
         uiResponse += Response.DIVIDER + "\n";
         return uiResponse;
     }

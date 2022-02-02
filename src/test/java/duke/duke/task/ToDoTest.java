@@ -8,6 +8,7 @@ import duke.task.ToDo;
 
 
 public class ToDoTest {
+    @Test
     void test_toStore() {
         assertEquals("T | 0 | name",
                 new ToDo("name").toStore());
