@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * The TaskTest class tests the functionality of the Task class.
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Rdac0
  */
 public class TaskTest {
-    Task task = new Task("test");
+    private Task task = new Task("test");
 
     /**
      * DummyTest, always passes.

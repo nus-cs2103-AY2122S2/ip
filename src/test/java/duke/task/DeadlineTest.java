@@ -1,11 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * The DeadlineTest class tests the functionality of the Deadline class.
@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * @author Rdac0
  */
 public class DeadlineTest {
-    Deadline deadline = new Deadline("test", "2000-01-01");
+    private Deadline deadline = new Deadline("test", "2000-01-01");
 
     /**
      * Tests getName functionality.
@@ -40,10 +40,10 @@ public class DeadlineTest {
         try {
             deadline = new Deadline("test2", "02-12-2000");
             // fail
-            assertEquals(1,2);
+            assertEquals(1, 2);
         } catch (DateTimeParseException e) {
             // pass
-            assertEquals(2,2);
+            assertEquals(2, 2);
         }
     }
 }

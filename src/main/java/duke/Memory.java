@@ -1,15 +1,13 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 /**
  * The Memory class handles the storage and access to available Tasks.
@@ -81,7 +79,7 @@ public class Memory {
         } else {
             String str = "Here's what you got:";
             for (int i = 1; i <= size; i++) {
-                str = str + "\n " + i + ". " + this.getString(i-1);
+                str = str + "\n " + i + ". " + this.getString(i - 1);
             }
             return str;
         }
@@ -195,8 +193,8 @@ public class Memory {
         } else {
             getTask(address).setUndone();
             parser.updateAll();
-            return "This task is now undone:\n  " +
-                    getString(address);
+            return "This task is now undone:\n  "
+                    + getString(address);
         }
     }
 
@@ -234,7 +232,7 @@ public class Memory {
             echo.echoString("Task data file does not exist. Creating file...");
             try {
                 file.createNewFile();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 echo.echoString(e.getMessage());
             }
         }

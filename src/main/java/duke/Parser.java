@@ -1,16 +1,14 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
-
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 /**
  * The Parser class handles the parsing and interaction between Duke and files on the disk.
@@ -59,7 +57,7 @@ public class Parser {
         String errorMessage = "These lines have been skipped:\n";
         int loadUnsuccess = 0;
 
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             String temp = scanner.nextLine();
             String[] tempStrArray = temp.split(regex, 0);
 

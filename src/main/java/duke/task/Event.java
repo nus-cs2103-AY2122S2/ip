@@ -1,15 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
 
 /**
  * The Event class extends the Task class by adding an event time.
  *
  * @author Rdac0
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate time;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 

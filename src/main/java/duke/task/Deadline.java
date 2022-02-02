@@ -1,15 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
 
 /**
  * The Deadline class extends the Task class by adding a due time.
  *
  * @author Rdac0
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate time;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 

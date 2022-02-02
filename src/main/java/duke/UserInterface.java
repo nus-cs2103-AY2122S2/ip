@@ -16,7 +16,7 @@ public class UserInterface {
     private Memory memory;
 
     private String tempString;
-    boolean isLooping = true;
+    private boolean isLooping = true;
 
     /**
      * Creates a UserInterface object.
@@ -58,10 +58,10 @@ public class UserInterface {
         String unknown = "Sorry, I don't quite understand what you mean by '";
 
         // First line
-        echo.echoString("Heya! I'm Duke!\n"
+        echo.echoString("Heya! I'm Duke! I'm on Gradle now!\n"
                 + "What can I do for ya?");
 
-        while(isLooping) {
+        while (isLooping) {
 
             tempString = scanner.nextLine();
             String[] tempStrArray = tempString.split(" ", 2);
@@ -153,8 +153,8 @@ public class UserInterface {
 
             case "mark":
                 if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to mark as done?\n" +
-                            tryMark);
+                    echo.echoString(specific + "Which task do you want me to mark as done?\n"
+                            + tryMark);
                 } else {
                     String testString = tempStrArray[1];
 
@@ -163,16 +163,16 @@ public class UserInterface {
                         int address = Integer.parseInt(testString);
                         echo.echoString(memory.setDone(address));
                     } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n" +
-                                tryMark);
+                        echo.echoString("You need to give me a number doc!\n"
+                                + tryMark);
                     }
                 }
                 break;
 
             case "unmark":
                 if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to mark as undone?\n" +
-                            tryUnmark);
+                    echo.echoString(specific + "Which task do you want me to mark as undone?\n"
+                            + tryUnmark);
                 } else {
                     String testString = tempStrArray[1];
 
@@ -181,16 +181,16 @@ public class UserInterface {
                         int address = Integer.parseInt(testString);
                         echo.echoString(memory.setUndone(address));
                     } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n" +
-                                tryUnmark);
+                        echo.echoString("You need to give me a number doc!\n"
+                                + tryUnmark);
                     }
                 }
                 break;
 
             case "delete":
                 if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to delete?\n" +
-                            tryDelete);
+                    echo.echoString(specific + "Which task do you want me to delete?\n"
+                            + tryDelete);
                 } else {
                     String testString = tempStrArray[1];
 
@@ -199,8 +199,8 @@ public class UserInterface {
                         int address = Integer.parseInt(testString);
                         echo.echoString(memory.deleteTask(address));
                     } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n" +
-                                tryDelete);
+                        echo.echoString("You need to give me a number doc!\n"
+                                + tryDelete);
                     }
                 }
                 break;
