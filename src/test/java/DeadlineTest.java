@@ -29,7 +29,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline();
         String data = "T|true|Cycle 15km|Dec 12 2022|09:05 AM";
 
-        deadline.extractFileData(data);
+        deadline.extractDataFromLine(data);
         assertEquals("[D][X] Cycle 15km (by: Dec 12 2022 09:05 AM)", deadline.toString());
     }
 
@@ -38,7 +38,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline();
         String data = "T|false|Swim 5km|Nov 1 2022|05:15 AM";
 
-        deadline.extractFileData(data);
+        deadline.extractDataFromLine(data);
         assertEquals("[D][ ] Swim 5km (by: Nov 1 2022 05:15 AM)", deadline.toString());
     }
 

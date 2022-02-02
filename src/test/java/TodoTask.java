@@ -14,7 +14,7 @@ public class TodoTask {
     @Test
     public void extractFileDataMarkTrue() {
         Todo todo = new Todo();
-        todo.extractFileData("T|true|Help someone");
+        todo.extractDataFromLine("T|true|Help someone");
 
         assertEquals("[T][X] Help someone", todo.toString());
     }
@@ -22,7 +22,7 @@ public class TodoTask {
     @Test
     public void extractFileDataMarkFalse() {
         Todo todo = new Todo();
-        todo.extractFileData("T|false|Buy a new printer");
+        todo.extractDataFromLine("T|false|Buy a new printer");
 
         assertEquals("[T][ ] Buy a new printer", todo.toString());
     }

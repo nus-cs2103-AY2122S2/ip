@@ -29,7 +29,7 @@ public class EventTest {
         Event event = new Event();
         String data = "T|true|Cycling Competition|Dec 12 2022|09:05 AM";
 
-        event.extractFileData(data);
+        event.extractDataFromLine(data);
         assertEquals("[E][X] Cycling Competition (at: Dec 12 2022 09:05 AM)", event.toString());
     }
 
@@ -38,7 +38,7 @@ public class EventTest {
         Event event = new Event();
         String data = "T|false|Swim meet|Nov 1 2022|05:15 AM";
 
-        event.extractFileData(data);
+        event.extractDataFromLine(data);
         assertEquals("[E][ ] Swim meet (at: Nov 1 2022 05:15 AM)", event.toString());
     }
 
