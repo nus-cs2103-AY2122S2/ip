@@ -13,7 +13,6 @@ public class Yale {
     /**
      * Creates Ui, Storage, Parser
      * Scanner and TaskList objects.
-     * @param args
      */
 
     private static final String FILE_PATH = "data/yale.txt";
