@@ -1,20 +1,21 @@
 package li.zhongfu.cs2103.chatbot.types.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 public class ParserTest {
     private Parser parser;
 
-    @Before
+    @BeforeEach
     public void setup() {
         parser = new Parser();
     }
@@ -56,7 +57,8 @@ public class ParserTest {
         assertEquals("", result.get("arg2"));
         assertEquals("val2", result.get("arg3"));
 
-        result = parser.parseArgString(" here's a pos arg /and here are some /more keyword arguments  /and_one_without_a_value   /one_more? why not ");
+        result = parser.parseArgString(" here's a pos arg /and here are some /more keyword arguments  "
+                + "/and_one_without_a_value   /one_more? why not ");
         assertEquals(5, result.size());
         assertEquals("here's a pos arg", result.get(""));
         assertEquals("here are some", result.get("and"));

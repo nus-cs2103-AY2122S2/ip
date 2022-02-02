@@ -1,9 +1,10 @@
 package li.zhongfu.cs2103.chatbot.types;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,10 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
 import li.zhongfu.cs2103.chatbot.types.tasks.Deadline;
@@ -23,14 +23,14 @@ import li.zhongfu.cs2103.chatbot.types.tasks.Task;
 import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 
 public class StorageTest {
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
+    @TempDir
+    File tempDir;
 
     private Storage storage;
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException {
-        storage = new Storage(folder.newFile().toString());
+        storage = new Storage(File.createTempFile("DukeStorageTest", ".dat", tempDir).toString());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class StorageTest {
 
         storage.save(objects);
         List<Object> objects2 = storage.load();
-        assertTrue(objects.size() == objects2.size());
+        assertEquals(objects.size(), objects2.size());
     }
 
     @Test
