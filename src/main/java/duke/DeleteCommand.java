@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.IOException;
 
@@ -22,13 +22,14 @@ public class DeleteCommand extends Command {
      * @param ui Deals with interaction with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showRemoveTask(tasks.getTask(taskToDelete), tasks.size() - 1);
-        tasks.delete(taskToDelete);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
         try {
+            Task t = tasks.delete(taskToDelete);
             storage.writeToFile(tasks.getTaskArr());
+            return ui.showRemoveTask(t, tasks.size());
         } catch (IOException e) {
-            ui.showError("IOException");
+            return ui.showError("IOException");
         }
     }
 
