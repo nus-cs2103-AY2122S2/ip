@@ -1,10 +1,11 @@
 plugins {
-  id 'com.github.johnrengelman.shadow' version '7.1.2'
-  id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
+    id 'java'
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 apply plugin: 'java'
@@ -12,16 +13,20 @@ sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
 jar {
-  manifest {
-    attributes 'Main-Class': 'li.zhongfu.cs2103.chatbot.Duke'
-  }
+    manifest {
+        attributes 'Main-Class': 'li.zhongfu.cs2103.chatbot.Duke'
+    }
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 dependencies {
-  testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.2')
-  testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.2')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
 }
 
 test {
-  useJUnitPlatform()
+    useJUnitPlatform()
 }
