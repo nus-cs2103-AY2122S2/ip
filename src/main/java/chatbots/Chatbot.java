@@ -25,7 +25,7 @@ public abstract class Chatbot {
      * @param input the command as input.
      * @return the reply based on the command.
      */
-    public abstract String feedCommandAndReply(String input);
+    public abstract String getReply(String input);
 
     /**
      * Gets the state of isAwake.

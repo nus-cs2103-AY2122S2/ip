@@ -46,12 +46,12 @@ public abstract class Instruction {
             return HelloInst.of();
         case "bye":
             return ExitInst.of();
-        case "mark":
-        case "unmark":
+        case "mark": // Fallthrough
+        case "unmark": // Fallthrough
         case "delete":
             return ModifyListedTaskInst.of(input);
-        case "todo":
-        case "deadline":
+        case "todo": // Fallthrough
+        case "deadline": // Fallthrough
         case "event":
             return NewTaskInst.of(input);
         case "find":

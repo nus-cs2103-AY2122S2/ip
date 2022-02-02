@@ -180,14 +180,14 @@ public class Runner extends Application {
      */
     private void setUpInteractions() {
         sendButton.setOnMouseClicked((event) -> {
-            if (userInput.getText().length() == 0) {
+            if (userInput.getText().length() == 0) { // Don't do anything if user does not enter anything
                 return;
             }
             sendAndReceiveMsg(userInput.getText());
         });
 
         userInput.setOnAction((event) -> {
-            if (userInput.getText().length() == 0) {
+            if (userInput.getText().length() == 0) { // Don't do anything if user does not enter anything
                 return;
             }
             sendAndReceiveMsg(userInput.getText());
@@ -223,7 +223,7 @@ public class Runner extends Application {
     }
 
     /**
-     * Generates the text message from the user's input to simulate a messaging app.
+     * Generates the text message object from the user's input to simulate a message from a messaging app.
      *
      * @param input the user's input
      * @return the nodes that correspond to the user's input, to be slotted into the {@code dialogueContainer}.
@@ -247,7 +247,7 @@ public class Runner extends Application {
      * @return the response from Fluffers, to be slotted into the {@code dialogueContainer}.
      */
     private Node[] rcvMessageFromFluffers(String input) {
-        Label textToAdd = generateLabel(fluffers.feedCommandAndReply(input));
+        Label textToAdd = generateLabel(fluffers.getReply(input));
         HBox messageAndPic = new HBox();
         messageAndPic.getChildren().addAll(new ImageView(fluffersPicSmall), textToAdd);
 

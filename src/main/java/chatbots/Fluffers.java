@@ -119,7 +119,7 @@ public class Fluffers extends TaskManagerChatbot {
      * @param input the input String or command to be given to Fluffers.
      * @return the response given with respect to the given input.
      */
-    public String feedCommandAndReply(String input) {
+    public String getReply(String input) {
         if (!this.isAwake && !input.startsWith("hi")) {
             return "Fluffers is asleep... (Type \"hi\" to wake her up!)";
         }

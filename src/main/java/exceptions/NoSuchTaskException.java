@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * This class encapsulates a "No Such tasks.Task" exception, that occurs when trying to access a
+ * This class encapsulates a "No Such Task" exception, that occurs when trying to access a
  * task that is not in a taskList.
  *
  * @author Ong Han Yang
