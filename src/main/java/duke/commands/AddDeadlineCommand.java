@@ -29,12 +29,18 @@ public class AddDeadlineCommand extends Command<String> {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
-        execute();
     }
 
-    private void execute() throws DukeException {
+    /**
+     * Executes the creation of deadline task.
+     *
+     * @return a output response for creating a deadline task
+     * @throws DukeException thrown when deadline cannot be created
+     */
+    public String execute() throws DukeException {
         String err = "Oh no! The description of deadline cannot be empty... Try again :)\n";
         String wrongFormat = "Oh no! The format for deadline task is wrong... Try again :)\n";
+        String response = "";
         if (echo.length == 1) {
             throw new DukeException(err);
         }
@@ -50,12 +56,13 @@ public class AddDeadlineCommand extends Command<String> {
         String date = details[1];
         Deadline curr = new Deadline(info, date);
         list.addTask(curr);
-        Ui.showAddResponse(curr.toString(), list.getSize());
+        response = Ui.showAddResponse(curr.toString(), list.getSize());
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 
     /**

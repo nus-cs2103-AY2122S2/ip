@@ -28,7 +28,6 @@ public class DeleteCommand extends Command<String> {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
-        execute();
     }
 
     /**
@@ -36,10 +35,11 @@ public class DeleteCommand extends Command<String> {
      *
      * @throws DukeException when the task to delete cannot be found
      */
-    private void execute() throws DukeException {
+    public String execute() throws DukeException {
         String err = "Oh no! Which task do you wish to delete? Try again :)\n";
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
+        String response = "";
         int targetIndex;
         int size = list.getSize();
         if (echo.length == 1) {
@@ -59,13 +59,14 @@ public class DeleteCommand extends Command<String> {
         } else {
             Task curr = list.getTask(targetIndex - 1);
             list.deleteTask(targetIndex - 1);
-            Ui.showDeleteResponse(curr.toString(), size - 1);
+            response = Ui.showDeleteResponse(curr.toString(), size - 1);
         }
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 
     /**

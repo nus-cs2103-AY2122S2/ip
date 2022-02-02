@@ -66,8 +66,9 @@ public class Ui {
      * @param output description of the task
      * @param n the number of tasks in list
      */
-    public static void showAddResponse(String output, int n) {
-        System.out.printf(addedTask, output, n);
+    public static String showAddResponse(String output, int n) {
+        return "Got it. I've added this task:\n   " + output
+                + "\nNow you have " + n + " tasks in the list.\n";
     }
 
     /**
@@ -76,8 +77,9 @@ public class Ui {
      * @param output description of the task
      * @param n the number of tasks in list
      */
-    public static void showDeleteResponse(String output, int n) {
-        System.out.printf(deleteTask, output, n);
+    public static String showDeleteResponse(String output, int n) {
+        return "Noted. I've removed this task:\n" + output
+                + "\nNow you have " + n + " tasks in the list\n";
     }
 
     /**
@@ -86,8 +88,9 @@ public class Ui {
      * @param status the mark: X on the task
      * @param output description of the task
      */
-    public static void showMarkRes(String status, String output) {
-        System.out.printf(markedTask, status, output);
+    public static String showMarkRes(String status, String output) {
+        return "Nice! I've marked this task as done:\n"
+                + "[" + status + "] " + output + "\n";
     }
 
     /**
@@ -96,8 +99,9 @@ public class Ui {
      * @param status unmark on the task
      * @param output description of the task
      */
-    public static void showUnmarkRes(String status, String output) {
-        System.out.printf(unmarkedTask, status, output);
+    public static String showUnmarkRes(String status, String output) {
+        return "Ok, I've marked this task as not done yet:\n"
+                + "[" + status + "] " + output + "\n";
     }
 
     /**
