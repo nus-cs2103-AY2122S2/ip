@@ -40,10 +40,6 @@ public abstract class Command {
 
     protected String[] commandArray;
 
-    public String[] getCommandArray() {
-        return commandArray;
-    }
-
     /**
      * Instantiates Command object with an empty commandArray.
      * Represents an invalid command.
@@ -59,6 +55,10 @@ public abstract class Command {
      */
     public Command(String[] commandArray) {
         this.commandArray = commandArray;
+    }
+
+    public String[] getCommandArray() {
+        return commandArray;
     }
 
     /**

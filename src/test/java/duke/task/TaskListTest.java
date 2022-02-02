@@ -1,9 +1,8 @@
 package duke.task;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests whether TaskList functions work as intended.
@@ -33,7 +32,7 @@ public class TaskListTest {
     public void addTaskTest() {
         taskList.addTask(new ToDo("content"));
         initialList.getTasks().add(new ToDo("content"));
-        assertEquals(taskList, initialList);
+        Assertions.assertEquals(taskList, initialList);
     }
 
     /**
@@ -43,6 +42,6 @@ public class TaskListTest {
     public void deleteTaskTest() {
         taskList.getTasks().add(new ToDo("what"));
         taskList.deleteTask(3);
-        assertEquals(taskList, initialList);
+        Assertions.assertEquals(taskList, initialList);
     }
 }

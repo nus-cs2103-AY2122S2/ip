@@ -1,51 +1,77 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
 
 public class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String content;
     protected LocalDateTime date;
 
+    /**
+     * Constructs a Task object with content string.
+     *
+     * @param content String content to be put in the task.
+     */
     public Task(String content) {
         this.isDone = false;
         this.content = content;
         this.date = null;
     }
 
+    /**
+     * Constructs a Task object with content string and whether the task is done.
+     *
+     * @param content String content to be put in the task.
+     * @param isDone boolean boolean to show whether task is done.
+     */
     public Task(String content, boolean isDone) {
         this.isDone = isDone;
         this.content = content;
     }
 
+    /**
+     * Constructs a Task object with content string and date.
+     *
+     * @param content String content to be put in the task.
+     * @param date LocalDateTime date of Task.
+     */
     public Task(String content, LocalDateTime date) {
         this.isDone = false;
         this.content = content;
         this.date = date;
     }
 
+    /**
+     * Constructs a Task object with content string, date, and whether the task is done.
+     *
+     * @param content String content to be put in the task.
+     * @param date LocalDateTime date of Task.
+     * @param isDone boolean boolean to show whether task is done.
+     */
     public Task(String content, LocalDateTime date, boolean isDone) {
         this.isDone = isDone;
         this.content = content;
         this.date = date;
     }
 
+    /**
+     * Returns isDone instance variable.
+     *
+     * @return boolean isDone instance variable.
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
-    public void setIsDone(boolean done) {
-        isDone = done;
-    }
-
+    /**
+     * Returns the content string.
+     * @return String content instance variable.
+     */
     public String getContent() {
         return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     /**

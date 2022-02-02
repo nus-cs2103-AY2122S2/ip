@@ -1,9 +1,11 @@
 package duke.ui;
 
-import org.junit.jupiter.api.BeforeAll;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.BeforeAll;
+
+
 
 public class UiTest {
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
 
 /**
  * Task object with non-null LocalDateTime variable.
@@ -38,10 +39,10 @@ public class Deadline extends Task {
     public String toString() {
         if (getIsDone()) {
             return "[D][X] " + getContent() + " (by: " + date
-                    .format(Ui.formatter) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")";
         } else {
             return "[D][ ] " + getContent() + " (by: " + date
-                    .format(Ui.formatter) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")";
         }
     }
 }

@@ -22,9 +22,9 @@ public class DukeInvalidArgumentException extends DukeException {
      */
     @Override
     public String toString() {
-        String result = Ui.divider + "\n";
+        String result = Ui.DIVIDER + "\n";
         result += "    Invalid argument(s): " + this.getMessage() + "\n";
-        result += Ui.divider;
+        result += Ui.DIVIDER;
         return result;
     }
 }

@@ -1,13 +1,23 @@
 package duke.storage;
 
-import duke.task.*;
-import duke.ui.Ui;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Saves files to data/duke.txt and loads saved file.
@@ -22,8 +32,8 @@ public class Storage {
     /**
      * Loads the duke.txt file to get data from previous runs of Duke.
      *
-     * @return ArrayList<Task> ArrayList that is populated with duke.txt save file.
-     * @throws FileNotFoundException
+     * @return ArrayList of Tasks ArrayList that is populated with duke.txt save file.
+     * @throws FileNotFoundException Exception thrown when file is not found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
@@ -53,7 +63,7 @@ public class Storage {
                         if (type.equals("D")) {
                             content = line.substring(7, line.lastIndexOf(" (by: "));
                             dateString = line.substring(line.lastIndexOf("by: ") + 4, line.lastIndexOf(")"));
-                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.formatter);
+                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
                             if (isDone.equals("X")) {
                                 taskList.add(new Deadline(content, dateTime, true));
                             } else {
@@ -62,7 +72,7 @@ public class Storage {
                         } else {
                             content = line.substring(7, line.lastIndexOf(" (at: "));
                             dateString = line.substring(line.lastIndexOf("at: ") + 4, line.lastIndexOf(")"));
-                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.formatter);
+                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
                             if (isDone.equals("X")) {
                                 taskList.add(new Event(content, dateTime, true));
                             } else {

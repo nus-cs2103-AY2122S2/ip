@@ -1,10 +1,11 @@
 package duke.task;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 import duke.exception.DukeInvalidArgumentException;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+
 
 /**
  * Stores data in an ArrayList and executes commands.

@@ -1,17 +1,30 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.DukeCommandException;
-import duke.exception.DukeException;
-import duke.exception.DukeInvalidArgumentException;
-import duke.exception.DukeMissingArgumentException;
-import duke.task.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SortCommand;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeMissingArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 
 /**
  * Parses input String into a more decipherable object.
@@ -20,7 +33,7 @@ public class Parser {
     /**
      * Formats an input String into a LocalDateTime object.
      */
-    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter INPUT_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("yyyy-MM-dd HHmm")
             .toFormatter(Locale.ENGLISH);
@@ -80,7 +93,7 @@ public class Parser {
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
                     try {
-                        date = LocalDateTime.parse(by, formatter);
+                        date = LocalDateTime.parse(by, INPUT_FORMATTER);
                         Task taskObj = new Deadline(content, date);
                         return new AddCommand(taskObj, inputArray);
                     } catch (DateTimeParseException e) {
@@ -101,7 +114,7 @@ public class Parser {
                     content = inputCommand.substring(6, indexOfAt - 1);
                     LocalDateTime date = null;
                     try {
-                        date = LocalDateTime.parse(by, formatter);
+                        date = LocalDateTime.parse(by, INPUT_FORMATTER);
                         Task taskObj = new Event(content, date);
                         return new AddCommand(taskObj, inputArray);
                     } catch (DateTimeParseException e) {

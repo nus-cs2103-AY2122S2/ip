@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -5,10 +8,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.FileNotFoundException;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.*;
 
 /**
  * Contains main method for Duke chatbot.
@@ -25,6 +24,7 @@ public class Duke {
     /**
      * Loads the Duke chatbot with a given filePath to the saved file.
      * If there is no file in the filePath, Storage will create a new file.
+     *
      * @param filePath File's path.
      */
     public Duke(String filePath) {
@@ -57,6 +57,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the bot.
+     *
+     * @param args String[] arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke(filePath);
         duke.run();

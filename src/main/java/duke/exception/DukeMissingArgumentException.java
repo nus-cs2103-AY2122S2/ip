@@ -22,9 +22,9 @@ public class DukeMissingArgumentException extends DukeException {
      */
     @Override
     public String toString() {
-        String result = Ui.divider + "\n";
+        String result = Ui.DIVIDER + "\n";
         result += "    We are missing the following argument: " + this.getMessage() + "\n";
-        result += Ui.divider;
+        result += Ui.DIVIDER;
         return result;
     }
 }
