@@ -18,4 +18,5 @@ src/main/resources/docs/
 # vscode config
 /.vscode/
 
+# app data
 /data/
