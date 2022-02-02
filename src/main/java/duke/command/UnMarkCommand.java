@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.*;
+import java.io.IOException;
+
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents commands which unmark a task in the task list. A MarkCommand

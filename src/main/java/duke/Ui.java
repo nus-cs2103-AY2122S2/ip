@@ -89,8 +89,9 @@ public class Ui {
     public void showClearListMessage(String response) {
         if (response.equals("y")) {
             System.out.println("Got it, Ekud has cleared your task list");
-        } else
+        } else {
             System.out.println("Very well");
+        }
     }
 }
 
