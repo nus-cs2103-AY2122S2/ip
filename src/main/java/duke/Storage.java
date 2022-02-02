@@ -17,9 +17,15 @@ public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
-      this.filePath = filePath;
+        this.filePath = filePath;
     }
 
+    /**
+     * Loads list of tasks from file.
+     *
+     * @throws DukeException If file not found.
+     * @return List of tasks.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
