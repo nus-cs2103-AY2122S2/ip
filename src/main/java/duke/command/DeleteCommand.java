@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute the delete command, print confirmation message and saves the updated task list to file.
+     * Executes the delete command, prints confirmation message and saves the updated task list to file.
      *
      * @param taskList The current list of tasks.
      * @param ui The ui of the program.
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
      * @return False.
      */

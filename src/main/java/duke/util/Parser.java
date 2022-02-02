@@ -1,11 +1,22 @@
 package duke.util;
 
-import duke.command.*;
-import duke.task.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents the parse function of the program. Deals with parsing user input.
@@ -30,31 +41,30 @@ public class Parser {
             switch(command) {
             case "list":
                 return new ListCommand();
-
             case "delete":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new DeleteCommand(taskNum);
                 }
-
+                break;
             case "mark":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new MarkCommand(taskNum);
                 }
-
+                break;
             case "unmark":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new UnmarkCommand(taskNum);
                 }
-
+                break;
             case "todo":
                 if (descriptionExists(inputArr, "Oops, a todo description cannot be left empty!")) {
                     Task task = new Todo(description);
                     return new AddCommand(task);
                 }
-
+                break;
             case "deadline":
                 if (descriptionExists(inputArr, "Oops, a deadline description cannot be left empty!")) {
                     String[] descrArr = description.split(" /by ");
@@ -64,7 +74,7 @@ public class Parser {
                         return new AddCommand(task);
                     }
                 }
-
+                break;
             case "event":
                 if (descriptionExists(inputArr, "Oops, an event description cannot be left empty!")) {
                     String[] descrArr = description.split(" /at ");
@@ -74,7 +84,7 @@ public class Parser {
                         return new AddCommand(task);
                     }
                 }
-
+                break;
             case "find":
                 if (descriptionExists(inputArr, "Please specify a keyword!")) {
                     if (inputArr.length > 2) {
@@ -83,10 +93,9 @@ public class Parser {
                         return new FindCommand(description);
                     }
                 }
-
+                break;
             case "bye":
                 return new ExitCommand();
-
             default:
                 throw new DukeException("Oh no! I don't understand what that means...");
             }
@@ -94,6 +103,7 @@ public class Parser {
             throw new DukeException("Invalid date/time format.\n    "
                     + "Please use the following format: yyyy-mm-dd HH:mm");
         }
+        return new InvalidCommand();
     }
 
     /**

@@ -1,12 +1,15 @@
 package duke.util;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents the storage function of the program. Deals with loading and saving tasks to a file.

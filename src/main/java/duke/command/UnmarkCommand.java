@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Executes the unmark command, prints confirmation message and save updated list to file.
+     * Executes the unmark command, prints confirmation message and saves updated list to file.
      *
      * @param taskList The current list of tasks.
      * @param ui The ui of the program.
@@ -41,9 +41,9 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Returns whether this is an exit command.
+     * Returns true if command is an ExitCommand, else returns false.
      *
-     * @return True.
+     * @return False.
      */
     public boolean isExit() {
         return false;
