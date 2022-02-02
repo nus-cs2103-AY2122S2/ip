@@ -20,7 +20,7 @@ public abstract class Task {
             this.done = 'X';
             return true;
         }
-         return false;
+        return false;
     }
     public boolean markUndone() {
         if (this.done == 'X') {
@@ -35,7 +35,7 @@ public abstract class Task {
      *
      * @return 'X' if it is done, ' ' otherwise.
      */
-    public char getDone(){
+    public char getDone() {
         return this.done;
     }
 

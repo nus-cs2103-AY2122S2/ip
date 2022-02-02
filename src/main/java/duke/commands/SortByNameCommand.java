@@ -1,14 +1,14 @@
 package duke.commands;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Represents a command to display the current tasks in TaskManager, sorted by name.
@@ -27,7 +27,7 @@ public class SortByNameCommand extends Command {
     @Override
     public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         ArrayList tasks = new ArrayList(taskManager.getTaskList());
-        Collections.sort(tasks,new TaskByNameComparator());
+        Collections.sort(tasks, new TaskByNameComparator());
 
         ui.showList(new TaskManager(tasks));
         return true;

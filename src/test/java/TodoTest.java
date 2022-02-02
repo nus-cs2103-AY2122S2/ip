@@ -1,10 +1,11 @@
-import duke.tasks.Todo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.tasks.Todo;
 
 public class TodoTest {
 
@@ -12,7 +13,7 @@ public class TodoTest {
     private Todo todo;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         todo = new Todo("Todo Name");
     }
 
@@ -23,8 +24,8 @@ public class TodoTest {
 
     @Test
     public void toString_noInputs_success() {
-        assertEquals("[T][ ] Todo Name",todo.toString());
+        assertEquals("[T][ ] Todo Name", todo.toString());
         todo.markDone();
-        assertEquals("[T][X] Todo Name",todo.toString());
+        assertEquals("[T][X] Todo Name", todo.toString());
     }
 }

@@ -1,7 +1,7 @@
 package duke.exceptions;
 
-public class DukeException extends Exception{
-    public DukeException(String s){
+public class DukeException extends Exception {
+    public DukeException(String s) {
         super(s);
     }
 }

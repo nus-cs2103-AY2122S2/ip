@@ -1,34 +1,34 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
 public class Storage {
-    private String FILE_PATH = "";
-    private String DIR_PATH = "";
-    private final String FILE_SEPERATOR = "/";
-    File file;
+    private String filePath = "";
+    private String dirPath = "";
+    private File file;
 
     public Storage() { }
     public Storage(String path) {
-        FILE_PATH = System.getProperty("user.home") + FILE_SEPERATOR + path;
-        String dir = path.substring(0,path.lastIndexOf("/"));
-        DIR_PATH = System.getProperty("user.home") + FILE_SEPERATOR + dir;
+        String fileSeparator = "/";
+        filePath = System.getProperty("user.home") + fileSeparator + path;
+        String dir = path.substring(0, path.lastIndexOf("/"));
+        dirPath = System.getProperty("user.home") + fileSeparator + dir;
     }
 
     public TaskManager loadTaskManagerFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
-        file = new File(FILE_PATH);
+        file = new File(filePath);
         try {
             if (file.exists()) {
                 Scanner scanner = new Scanner(file);
-                while(scanner.hasNext()) {
+                while (scanner.hasNext()) {
                     String fileInput = scanner.nextLine();
                     try {
                         Task t = Parser.parseToTaskFromFile(fileInput);
@@ -49,18 +49,18 @@ public class Storage {
 
         try {
 
-            file = new File(FILE_PATH);
+            file = new File(filePath);
 
             if (!dirExists()) {
                 boolean dirCreated = createDir();
-                if (!dirCreated){
+                if (!dirCreated) {
                     throw new IOException("Unable to create directory!");
                 }
             }
 
             FileWriter writer = new FileWriter(file);
 
-            for ( Task task: taskManager.getTaskList()) {
+            for (Task task: taskManager.getTaskList()) {
                 writer.write(Parser.parseToFileFromTask(task) + "\n");
             }
 
@@ -72,15 +72,15 @@ public class Storage {
     }
 
     public boolean dirExists() {
-        File dir = new File(DIR_PATH);
+        File dir = new File(dirPath);
         return dir.exists();
     }
     public boolean createDir() {
-        File dir = new File(DIR_PATH);
+        File dir = new File(dirPath);
         return dir.mkdir();
     }
 
     public String getFullPath() {
-        return this.FILE_PATH;
+        return this.filePath;
     }
 }

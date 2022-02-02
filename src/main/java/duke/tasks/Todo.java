@@ -2,7 +2,7 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     public Todo(String taskName) {
         this.taskName = taskName;
@@ -39,7 +39,7 @@ public class Todo extends Task{
      */
     @Override
     public boolean equals(Object o) {
-        if (! (o instanceof Todo)) {
+        if (!(o instanceof Todo)) {
             return false;
         }
 

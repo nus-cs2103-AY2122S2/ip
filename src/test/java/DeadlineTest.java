@@ -1,17 +1,18 @@
-import duke.tasks.Deadline;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.tasks.Deadline;
 
 public class DeadlineTest {
     private LocalDateTime date;
     private Deadline deadline;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         date = LocalDateTime.parse("2007-12-03T10:15:30");
         deadline = new Deadline("Deadline Name", date);
     }
