@@ -16,14 +16,4 @@ public class InvalidCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showError("Invalid command.");
     }
-
-    /**
-     * Returns `true` if the `Command` is `ExitCommand`.
-     *
-     * @return `true` if the `Command` is `ExitCommand`
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

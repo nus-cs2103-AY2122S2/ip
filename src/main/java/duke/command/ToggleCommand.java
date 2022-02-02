@@ -50,14 +50,4 @@ public class ToggleCommand extends Command {
             ui.showError(e.getMessage());
         }
     }
-
-    /**
-     * Returns `true` if the `Command` is `ExitCommand`.
-     *
-     * @return `true` if the `Command` is `ExitCommand`
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

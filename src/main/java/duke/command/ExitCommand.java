@@ -25,9 +25,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns `true` to terminate the program.
-     *
-     * @return `true` if the `Command` is `ExitCommand`
+     * Returns `true` so that the program can proceed to gracefully close.
+     * @return true to signal the application to close.
      */
     @Override
     public boolean isExit() {

@@ -61,14 +61,4 @@ public class AddCommand extends Command {
             break;
         }
     }
-
-    /**
-     * Returns `true` if the `Command` is `ExitCommand`.
-     *
-     * @return `true` if the `Command` is `ExitCommand`
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
