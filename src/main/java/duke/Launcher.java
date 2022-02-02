@@ -1,13 +1,13 @@
 package duke;
 
-import duke.ui.Duke;
+import duke.ui.Main;
 import javafx.application.Application;
 
 /**
  * Main entry class to run ChatBot application
  */
-public class Main {
+public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(Main.class, args);
     }
 }
