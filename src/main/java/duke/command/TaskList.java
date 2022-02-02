@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +52,7 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
-    public void addItem(String[] command) throws DukeException{
+    public void addItem(String[] command) throws DukeException {
         String input = command[0];
         System.out.println("__________________________________");
         switch (input) {

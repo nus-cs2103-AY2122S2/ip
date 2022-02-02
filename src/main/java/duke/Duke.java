@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+
 public class Duke {
     public static TaskList taskList = new TaskList();
     public static Storage storage = new Storage("data/duke.txt", taskList);

@@ -1,22 +1,26 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Deadline extends Task{
     private final String title;
     private final LocalDate date;
     private final LocalTime time;
 
-    public Event(String command) throws DukeException {
+    public Deadline(String command) throws DukeException {
         try {
-            this.title = command.split(" /at ")[0];
-            String deadline = command.split(" /at ")[1];
+            this.title = command.split(" /by ")[0];
+            String deadline = command.split(" /by ")[1];
             String[] deadlineList = deadline.split(" ");
             this.date = LocalDate.parse(deadlineList[0].replace("/", "-"));
             this.time = LocalTime.parse(deadlineList[1]);
         } catch (IndexOutOfBoundsException | DateTimeParseException e){
-            throw new DukeException("Please tell me the deadline in this format: <Activity> /at YYYY/MM/DD HH:MM");
+            throw new DukeException("Please tell me the deadline in this format: <Activity> /by YYYY/MM/DD HH:MM");
         }
         System.out.println("added: " + this.toString());
     }
@@ -26,9 +30,9 @@ public class Event extends Task{
         Month month = date.getMonth();
         int year = date.getYear();
         if (this.checked) {
-            return String.format("[D][X] %s (at: %d %s %d %s)", title, day, month, year, time);
+            return String.format("[D][X] %s (by: %d %s %d %s)", title, day, month, year, time);
         } else {
-            return String.format("[D][ ] %s (at: %d %s %d %s)", title, day, month, year, time);
+            return String.format("[D][ ] %s (by: %d %s %d %s)", title, day, month, year, time);
         }
     }
 }
