@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -52,14 +55,14 @@ public class Duke {
                     }
                 } else if(n.description.startsWith("deadline")) {
                     String[] parts = n.description.substring(9).split(" /by ");
-                    Deadline d = new Deadline(parts[0], parts[1]);
+                    Deadline d = new Deadline(parts[0], convert(parts[1]));
                     ls.add(d);
                     System.out.println("Added the following todo");
                     System.out.println("added: " + d);
                     System.out.println("New list size is " + ls.size());
                 } else if(n.description.startsWith("event")) {
                     String[] parts = n.description.substring(6).split(" /at ");
-                    Event e = new Event(parts[0], parts[1]);
+                    Event e = new Event(parts[0], convert(parts[1]));
                     ls.add(e);
                     System.out.println("added: " + e);
                     System.out.println("New list size is " + ls.size());
@@ -82,5 +85,13 @@ public class Duke {
         } 
         System.out.println("Bye. Hope to see you again");
         
+    }
+
+    static LocalDate convert(String date) throws DukeException {
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Smth is wrong" + e);
+        }
     }
 }
