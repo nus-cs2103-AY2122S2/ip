@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-
 import java.util.Scanner;
 
 /**
@@ -11,6 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    /** Welcome message*/
     public static void startMessage() {
         System.out.println("IF YOU ARE NEW TO THIS PROGRAM, ENTER ? TO SEE A LIST OF AVAILABLE COMMANDS.");
         System.out.println("---------------------------------------------------------------------------");
@@ -29,7 +29,7 @@ public class Ui {
         System.out.println("event {task description} /at {DATE}             Add Event into list");
         System.out.println("mark {Task ID}                                  Mark specific task as done");
         System.out.println("unmark {Task ID}                                Mark specific task as not done");
-        System.out.println("find {keyword}                                  Find tasks with a specific keyword from list");
+        System.out.println("find {keyword}                                  Find tasks with a specific keyword");
         System.out.println("delete {Task ID}                                Delete specific task from list");
         System.out.println("bye                                             End the Duke program");
     }

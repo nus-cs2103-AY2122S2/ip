@@ -1,9 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * This class contains the task list and deals with add/delete list operations.
@@ -32,7 +31,7 @@ public class TaskList {
             Task task = list.remove(index);
             System.out.println("NOTED. I'VE REMOVED THIS TASK:");
             System.out.println(task);
-            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
         }
     }
 
@@ -50,7 +49,7 @@ public class TaskList {
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
         System.out.println(newTask);
-        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
     }
 
     /**
@@ -74,7 +73,7 @@ public class TaskList {
             list.add(newTask);
             System.out.println("GOT IT. I'VE ADDED THIS TASK:");
             System.out.println(newTask);
-            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
         } catch (DateTimeParseException ex) {
             throw new DukeException("INVALID DATE FORMAT.");
         }
@@ -101,7 +100,7 @@ public class TaskList {
             list.add(newTask);
             System.out.println("GOT IT. I'VE ADDED THIS TASK:");
             System.out.println(newTask);
-            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
         } catch (DateTimeParseException ex) {
             throw new DukeException("INVALID DATE FORMAT.");
         }

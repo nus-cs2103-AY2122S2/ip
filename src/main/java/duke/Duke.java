@@ -9,6 +9,12 @@ import java.io.IOException;
  */
 public class Duke {
 
+    /**
+     * Executes main method
+     * @param args argument
+     * @throws IOException ioexception
+     * @throws DukeException exception for duke program
+     */
     public static void main(String[] args) throws IOException, DukeException {
         // Start Message
         Ui.startMessage();
