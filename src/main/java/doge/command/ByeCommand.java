@@ -35,6 +35,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public String toString() {
-        return "Doge:   Please don't ever bother me again, bye.";
+        return "Please don't ever bother me again, bye.";
     }
 }

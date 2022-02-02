@@ -3,9 +3,11 @@ package doge.view;
 import doge.Doge;
 
 import doge.Parser;
+import doge.command.ByeCommand;
 import doge.command.Command;
 import doge.exception.DogeException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -38,6 +40,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+
     public void setDoge(Doge d) {
         doge = d;
     }
@@ -55,6 +58,9 @@ public class MainWindow extends AnchorPane {
 
         try {
             c = Parser.parse(userText);
+            if (c instanceof ByeCommand) {
+                Platform.exit();
+            }
             c.execute(doge.getTasks(), doge.getUi(), doge.getStorage());
             doge.getStorage().save(doge.getTasks().getTaskList());
             dogeText = doge.getUi().respond(c);

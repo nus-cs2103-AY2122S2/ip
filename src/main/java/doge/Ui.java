@@ -27,8 +27,8 @@ public class Ui {
      * Prints out the greetings for Doge bot.
      */
     public String greet() {
-        System.out.println("Doge: Oh it's you again...");
-        System.out.println("Doge: " + "What kind of trouble would you " +
+        System.out.println("Oh it's you again...");
+        System.out.println("What kind of trouble would you " +
                 "inconvenience me with this time?");
         return "Oh it's you again...\nWhat kind of trouble would you inconvenience me with this time?";
     }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import doge.Doge;
+import doge.command.ByeCommand;
+import doge.exception.DogeException;
 import doge.view.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,15 +22,23 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(new File("./src/main/resource/view/MainWindow.fxml").toURI().toURL());
-            Parent ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            scene.setRoot(ap);
-            stage.setScene(scene);
-
+            AnchorPane ap = fxmlLoader.load();
+            stage.setScene(new Scene(ap));
             fxmlLoader.<MainWindow>getController().setDoge(this.doge);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stop() {
+        try {
+            new ByeCommand().execute(doge.getTasks(), doge.getUi(), doge.getStorage());
+            doge.getStorage().save(doge.getTasks().getTaskList());
+            System.out.println("exit successful");
+        } catch (DogeException e) {
+            System.out.println(doge.getUi().showError(e.getMessage()));
         }
     }
 }

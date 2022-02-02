@@ -29,7 +29,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the "list" command. It either list all tasks or tasks that are due by a certain period if stated.
+     * Executes the "list" command. It either lists all tasks or tasks that are due by a certain period if stated.
      *
      * @param tasks {@inheritDoc}
      * @param ui {@inheritDoc}

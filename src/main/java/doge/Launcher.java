@@ -1,4 +1,4 @@
-package doge.view;
+package doge;
 
 import doge.Main;
 import javafx.application.Application;

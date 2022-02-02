@@ -84,7 +84,7 @@ public class Storage {
                     switch(curr[0].trim()) {
                     case "T":
                         currTask = new Todo(curr[2].trim());
-                        if (taskStatus.equals("✓")) {
+                        if (taskStatus.equals("X")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
@@ -94,7 +94,7 @@ public class Storage {
                         date = new SimpleDateFormat("dd-MMM-yyyy").parse(dateTime[0]);
                         currTask = new Deadline(curr[2].trim(),
                                 DateTime.getDateTime(sdf.format(date) + " " + dateTime[1]));
-                        if (taskStatus.equals("✓")) {
+                        if (taskStatus.equals("X")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
@@ -104,7 +104,7 @@ public class Storage {
                         date = new SimpleDateFormat("dd-MMM-yyyy").parse(dateTime[0]);
                         currTask = new Event(curr[2].trim(),
                                 DateTime.getDateTime(sdf.format(date) + " " + dateTime[1]));
-                        if (taskStatus.equals("✓")) {
+                        if (taskStatus.equals("X")) {
                             currTask.mark();
                         }
                         temp.add(currTask);

@@ -40,7 +40,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             String curr = tasks.getTask(i).getDescription();
             if (curr.contains(this.details)) {
-                output.append("\n").append(numbering).append(") ➜ ").append(tasks.getTask(i).toString());
+                output.append("\n").append(numbering).append(") ").append(tasks.getTask(i).toString());
                 numbering++;
             }
         }
