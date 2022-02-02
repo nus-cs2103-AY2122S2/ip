@@ -21,7 +21,7 @@ public class Storage {
     private static final String DATA_FOLDER_PATH = "data/";
 
     /** Name of the database file. */
-    private static final String DB_FILENAME = "store.db";
+    private static final String DATABASE_FILENAME = "store.db";
 
     /**
      * Loads any previous data, if any, that was saved by a previous run of the application.
@@ -74,7 +74,7 @@ public class Storage {
     private static FileInputStream openDatabaseRead() throws DukeIoException {
         initDataStore(); // throws DukeIoException
 
-        final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
+        final File database = Paths.get(DATA_FOLDER_PATH, DATABASE_FILENAME).toFile();
         try {
             return new FileInputStream(database);
         } catch (FileNotFoundException ex) {
@@ -93,7 +93,7 @@ public class Storage {
     private static FileOutputStream openDatabaseWrite() throws DukeIoException {
         initDataStore(); // throws DukeIoException
 
-        final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
+        final File database = Paths.get(DATA_FOLDER_PATH, DATABASE_FILENAME).toFile();
         try {
             if (!database.exists()) {
                 if (!database.createNewFile()) {
