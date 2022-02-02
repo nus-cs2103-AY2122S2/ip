@@ -101,7 +101,7 @@ public class TaskList {
     public String checkWordsInTask(String[] wordsToCheck) {
         StringBuilder s = new StringBuilder();
         for (Task t: this.tasks) {
-            if (t.checkDescription(wordsToCheck)) {
+            if (t.checkDescriptionForWords(wordsToCheck)) {
                 s.append(t).append("\n");
             }
         }

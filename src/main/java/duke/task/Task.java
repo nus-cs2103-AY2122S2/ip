@@ -27,7 +27,7 @@ public class Task {
      * @param wordsToCheck Array of keywords.
      * @return Boolean of whether task matches all keywords.
      */
-    public boolean checkDescription(String[] wordsToCheck) {
+    public boolean checkDescriptionForWords(String[] wordsToCheck) {
         boolean isIn = true;
         for (String s: wordsToCheck) {
             if (!this.description.contains(s.trim())) {

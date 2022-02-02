@@ -52,7 +52,7 @@ public class Storage {
      * @param task A single task stored in the data file.
      * @return A Task instance of the task read from the data file.
      */
-    private Task manageFileData(String task) {
+    private Task convertFileDataToTask(String task) {
         // We assume the task stored inside is correct
         String[] splitTask = task.split("\\|");
         for (int i = 0; i < splitTask.length; i++) {
@@ -104,8 +104,10 @@ public class Storage {
             this.dataFile = new File(dataFilePath);
             Scanner s = new Scanner(dataFile);
             while (s.hasNext()) {
+                // Obtain the next line from the data file
                 String task = s.nextLine();
-                Task t = manageFileData(task);
+                // Create new task based on content of task string
+                Task t = convertFileDataToTask(task);
                 loadedTasks.add(t);
             }
             return loadedTasks;
