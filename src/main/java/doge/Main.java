@@ -7,6 +7,7 @@ import doge.Doge;
 import doge.view.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -19,9 +20,11 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(new File("./src/main/resource/view/MainWindow.fxml").toURI().toURL());
-            AnchorPane ap = fxmlLoader.load();
+            Parent ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.setRoot(ap);
             stage.setScene(scene);
+
             fxmlLoader.<MainWindow>getController().setDoge(this.doge);
             stage.show();
         } catch (IOException e) {
