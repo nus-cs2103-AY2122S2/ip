@@ -10,6 +10,11 @@ public class ExitCommand extends Command {
         ui.farewell();  //includes closing scanner
     }
 
+    /**
+     * Returns true so that the Duke exits.
+     *
+     * @return true.
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * A chatbot that helps manage tasks of user.
+ */
 public class Duke {
 
     private static Storage storage;
@@ -25,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot application.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

@@ -14,6 +14,9 @@ import duke.command.UnmarkCommand;
 
 import duke.exception.InvalidArgumentException;
 
+/**
+ * Parser that reads and analyzes strings.
+ */
 public class Parser {
 
     private Ui ui;
@@ -22,6 +25,13 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Reads user input and outputs the desired Command.
+     *
+     * @param input Input by the user.
+     *
+     * @return Command that is desired according to input.
+     */
     public static Command parse(String input) {
 
         try {
@@ -52,7 +62,15 @@ public class Parser {
         }
     }
 
-    // returns the todo task description
+    /**
+     * Returns the Description of Todo task.
+     *
+     * @param input Input Todo to parse.
+     *
+     * @return Description.
+     *
+     * @throws InvalidArgumentException
+     */
     public static String parseTodo(String input) throws InvalidArgumentException {
 
         String[] todoArr = input.split("\\s", 2);
@@ -63,6 +81,16 @@ public class Parser {
     }
 
     // returns duke.task.Deadline description and dateTime in a String[] like a pair.
+
+    /**
+     * Returns the description and dateTime of Deadline task in a String array.
+     *
+     * @param input Input Deadline to parse.
+     *
+     * @return String array of description and dateTime.
+     *
+     * @throws InvalidArgumentException when invalid format is given in user input.
+     */
     public static String[] parseDeadline(String input) throws InvalidArgumentException {
         String[] deadlineArr = input.split("/by", 2);
         String[] deadlineSplit = deadlineArr[0].split("\\s", 2);
@@ -76,6 +104,16 @@ public class Parser {
     }
 
     //returns pair of description and /at for event, so that an event duke.task.Task can be created.
+
+    /**
+     * Returns the description and 'at' of Event task in a String array.
+     *
+     * @param input Input Event to parse.
+     *
+     * @return String array of description and 'at'.
+     *
+     * @throws InvalidArgumentException when invalid is given in user input.
+     */
     public static String[] parseEvent(String input) throws  InvalidArgumentException {
         String[] eventArr = input.split("/at", 2);
         String[] eventSplit = eventArr[0].split("\\s", 2);
