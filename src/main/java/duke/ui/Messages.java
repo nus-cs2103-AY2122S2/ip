@@ -22,7 +22,7 @@ public class Messages {
 
     public static final String UNKNOWN_DEADLINE = "Sorry but.. deadline of what??";
 
-    public static final String UNKNOWN_DATETIME = "Invalid date-time format! Format: <dd/MM/yyyy HHMM>."
+    public static final String UNKNOWN_DATETIME = "Invalid date-time format! Format: /by <dd/MM/yyyy HHMM>."
             + System.lineSeparator() + "An example: 12/12/2222 0800";
 
     public static final String UNKNOWN_EVENT = "What event? No event stated.";
@@ -42,6 +42,16 @@ public class Messages {
     public static final String UNKNOWN_DELETE = "Please specify what task number to delete clearly.";
 
     public static final String DELETE_SUCCESS = "Noted. I've removed this task:";
+
+    public static final String UNKNOWN_FIND = "Please provide a keyword to search for your task.";
+
+    public static final String FIND_MSG = "Finding matching tasks in your list:";
+
+    public static final String NO_FIND_MATCH_MSG = "I cannot find any task associated with the given keyword!";
+
+    public static final String MATCH_COUNT_MSG (int matchCount) {
+        return String.format("There are %d task(s) that match your keyword.", matchCount);
+    }
 
     public static final String SAVE_ERROR = "Error saving file";
 

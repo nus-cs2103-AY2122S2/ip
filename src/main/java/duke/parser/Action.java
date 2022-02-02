@@ -11,5 +11,6 @@ public enum Action {
     EVENT,
     MARK,
     UNMARK,
-    DELETE;
+    DELETE,
+    FIND
 }

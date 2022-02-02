@@ -25,9 +25,9 @@ class ParserTest {
     }
 
     @Test
-    void testParseTodo() throws InvalidArgumentException {
+    void testParseDescription() throws InvalidArgumentException {
         Parser parser = new Parser(new Ui());
-        assertEquals("TodoDescription", parser.parseTodo("todo TodoDescription"));
+        assertEquals("TodoDescription", parser.parseDescription("todo TodoDescription"));
     }
 
     @Test

@@ -17,6 +17,15 @@ public class MarkCommand extends Command {
         this.inputWords = inputWords;
     }
 
+    /**
+     * Marks the task as done.
+     *
+     * @param tasks TaskList that command is executed on.
+     *
+     * @param ui User interface that interacts with the user.
+     *
+     * @param storage Storage that saves and loads tasks after Command is executed.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!(inputWords.length == 2)) { //e.g mark 2, cannot be mark 2 2 or just mark
