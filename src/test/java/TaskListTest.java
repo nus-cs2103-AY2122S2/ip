@@ -1,11 +1,12 @@
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import luca.task.Task;
+import luca.task.TaskList;
+import luca.task.ToDo;
 
 /**
  * Tests the TaskList class.

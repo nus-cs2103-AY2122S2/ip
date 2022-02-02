@@ -1,18 +1,19 @@
-import duke.command.ListCommand;
-import duke.parser.UnkownCommandException;
-import duke.common.DukeException;
-import duke.parser.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import luca.command.ListCommand;
+import luca.common.DukeException;
+import luca.parser.Parser;
+import luca.parser.UnkownCommandException;
 
 /**
  * Test the parser class.
@@ -45,10 +46,10 @@ public class ParserTest {
     @Test
     public void parseTokens_unkownCommand_exceptionThrown() {
 
-        UnkownCommandException thrown = assertThrows(UnkownCommandException.class,
-                () -> Parser.parse("hello").getCommandType());
+        UnkownCommandException thrown = assertThrows(UnkownCommandException.class, () ->
+            Parser.parse("hello").getCommandType());
         Assertions.assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(",
-                thrown.getMessage());
+            thrown.getMessage());
 
     }
 }
