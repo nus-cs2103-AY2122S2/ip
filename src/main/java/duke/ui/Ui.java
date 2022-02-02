@@ -45,4 +45,8 @@ public class Ui {
     public static void drawDivider() {
         System.out.println("________________________________________");
     }
+
+    public String endProgramFX() {
+        return "Bye. Hope to see you again soon!";
+    }
 }
