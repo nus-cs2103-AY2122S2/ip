@@ -20,7 +20,7 @@ public class Duke {
     public static void main(String[] args) {
 
         // an array of tasks
-        Task[] list = new Task[100];
+        // Task[] list = new Task[100];
         int counter = 0;
         System.out.println(GREETING);
         // new Data Structure to hold the tasks
@@ -48,7 +48,7 @@ public class Duke {
                 int internalCounter = 1;
 
                 // iterate through the list
-                for (Task task : list) {
+                for (Task task : tasks) {
                     if (task != null) {
                         System.out.println(" " + internalCounter + ". " + task);
                         ++internalCounter;
@@ -60,7 +60,8 @@ public class Duke {
 
                 int number = Integer.parseInt(command[1]) - 1;
 
-                Task currTask = list[number];
+                // Task currTask = list[number];
+                Task currTask = tasks.get(number);
                 boolean currState = currTask.getIsDone();
                 currTask.setDone(!currState);
 
@@ -70,7 +71,8 @@ public class Duke {
             } else if (command[0].equals("unmark")) {
                 int number = Integer.parseInt(command[1]) - 1;
 
-                Task currTask = list[number];
+                // Task currTask = list[number];
+                Task currTask = tasks.get(number);
                 boolean currState = currTask.getIsDone();
                 currTask.setDone(!currState);
 
@@ -90,7 +92,8 @@ public class Duke {
                     // create a new deadline
                     Task newTask = new Deadlines(description, deadline);
                     // adding to the array
-                    list[counter] = newTask;
+                    // list[counter] = newTask;
+                    tasks.add(newTask);
                     ++counter;
                     System.out.println(LINE_BREAK);
                     System.out
@@ -112,7 +115,8 @@ public class Duke {
                     // create a new deadline
                     Task newTask = new Events(description, deadline);
                     // adding to the array
-                    list[counter] = newTask;
+                    // list[counter] = newTask;
+                    tasks.add(newTask);
                     ++counter;
                     System.out.println(LINE_BREAK);
                     System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
@@ -129,11 +133,23 @@ public class Duke {
 
                     Task t = new ToDos(input);
 
-                    list[counter] = t;
+                    // list[counter] = t;
+                    tasks.add(t);
                     System.out.println(LINE_BREAK);
                     System.out.println(" ok added alr bro: " + input);
                     ++counter;
                 }
+            } else if (command[0].equals("delete")) {
+                // deleting a task
+                // find the index to be deleted
+                int number = Integer.parseInt(command[1]) - 1;
+                // task being deleted
+                Task beingDeleted = tasks.get(number);
+                // deleting operation
+                tasks.remove(number);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println("  " + beingDeleted);
+                System.out.println("Now you have " + tasks.size() + " in the list.");
             } else {
                 DukeException e = new DukeException("Tak faham banggg, speak in my language la bayi....");
                 System.out.println(e.getMessage());
