@@ -1,5 +1,6 @@
 public class Deadline extends Task {
     protected String time;
+    protected static String type = "DEADLINE";
 
     public Deadline(String description, String time) {
         super(description);
