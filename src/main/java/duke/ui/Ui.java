@@ -61,7 +61,7 @@ public class Ui {
      * Displays the available commands Duke chatbot consists of.
      */
     public void showCommands() {
-        showToUser(DIVIDER, Messages.UNKNOWN_COMMAND, COMMANDS);
+        showToUser(Messages.UNKNOWN_COMMAND, COMMANDS);
     }
 
     /**
