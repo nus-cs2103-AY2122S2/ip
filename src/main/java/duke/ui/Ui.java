@@ -121,7 +121,7 @@ public class Ui {
     public void print(String ss) {
         Label dukeText = new Label(ss);
         v.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText, new ImageView(d))
+                DialogBox.getDukeDialog(ss, d)
         );
     }
 

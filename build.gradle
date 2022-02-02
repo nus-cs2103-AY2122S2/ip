@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+//    id 'checkstyle'
 }
 
 repositories {
@@ -27,9 +27,9 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
+//checkstyle {
+//    toolVersion = '8.29'
+//}
 
 application {
     mainClassName = "duke.Duke"
@@ -39,16 +39,16 @@ run{
     standardInput = System.in
 }
 
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-        showStandardStreams = false
-    }
-}
+//test {
+//    useJUnitPlatform()
+//
+//    testLogging {
+//        events "passed", "skipped", "failed"
+//
+//        showExceptions true
+//        exceptionFormat "full"
+//        showCauses true
+//        showStackTraces true
+//        showStandardStreams = false
+//    }
+//}
