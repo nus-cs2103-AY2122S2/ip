@@ -4,6 +4,8 @@ import duke.Duke;
 import duke.DukeException;
 import duke.task.TaskList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -65,10 +67,13 @@ public class Window extends BorderPane {
             default:
                 break;
             }
-        } catch (DukeException e) {
-            e.printStackTrace();
-        } finally {
+
             descriptionText.clear();
+        } catch (DukeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.toString(), ButtonType.OK);
+            alert.setHeaderText("Something went wrong!");
+            alert.show();
+        } finally {
             dateTimeText.clear();
             durationText.clear();
             update();
