@@ -10,8 +10,8 @@ public class MarkCommand extends Command {
   private int taskNumber;
 
     public MarkCommand(int taskNumber) {
-      super();
-      this.taskNumber = taskNumber;
+        super();
+        this.taskNumber = taskNumber;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {

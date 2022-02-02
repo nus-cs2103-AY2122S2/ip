@@ -7,7 +7,7 @@ import duke.command.Command;
 
 public class UnmarkCommand extends Command {
   
-  private int taskNumber;
+    private int taskNumber;
 
     public UnmarkCommand(int taskNumber) {
         super();
