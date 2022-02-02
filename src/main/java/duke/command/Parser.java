@@ -101,7 +101,7 @@ public class Parser {
             ui.print(taskList.findTasksContaining(args[1]), "Here are the matching tasks in your list:");
             return 1;
         default:
-            ui.print("Unknown Command");
+            ui.print("MEOW?");
             return 0;
         }
     }

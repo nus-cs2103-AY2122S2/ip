@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private TaskList taskList;
     private Parser parser;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tom.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tom.png"));
 
     @FXML
     public void initialize() {

@@ -39,6 +39,9 @@ public class Duke extends Application {
             fxmlLoader.<MainWindow>getController().setTaskList(taskList);
             Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);
             fxmlLoader.<MainWindow>getController().setTaskList(taskList);
+            stage.setTitle("Duke");
+            stage.setResizable(false);
+            ui.print("Aye. Wassup young lad.");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
