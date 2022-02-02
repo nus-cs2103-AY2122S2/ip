@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public class TaskCreator {
     private final char prefix;
     private final boolean isCompleted;
@@ -5,7 +7,7 @@ public class TaskCreator {
     private final String date;
     private final String time;
 
-    TaskCreator(char prefix, boolean isCompleted, String name, String date, String time) {
+    public TaskCreator(char prefix, boolean isCompleted, String name, String date, String time) {
         this.prefix = prefix;
         this.isCompleted = isCompleted;
         this.name = name;
@@ -13,7 +15,7 @@ public class TaskCreator {
         this.time = time;
     }
 
-    protected Task createTask() {
+    public Task createTask() {
         Task task;
         if (prefix == 'D') {
             task = new TaskDeadline(this.name, this.date, this.time);

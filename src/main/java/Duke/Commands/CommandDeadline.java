@@ -1,9 +1,20 @@
-public class CommandEvent extends Command {
+package Duke.Commands;
+
+import Duke.DukeException.DukeException;
+import Duke.System.Storage;
+import Duke.System.TaskList;
+import Duke.System.Ui;
+import Duke.Tasks.Task;
+import Duke.Tasks.TaskDeadline;
+import Duke.Time.ManagerDate;
+import Duke.Time.ManagerTime;
+
+public class CommandDeadline extends Command {
     private final String name;
     private final String date;
     private final String time;
 
-    public CommandEvent(String name, String date, String time) {
+    public CommandDeadline(String name, String date, String time) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -15,7 +26,7 @@ public class CommandEvent extends Command {
         ManagerTime mt = new ManagerTime(time);
 
         if (md.isDateValid() && mt.isTimeValid()) {
-            Task task = new TaskEvent(this.name, this.date, this.time);
+            Task task = new TaskDeadline(this.name, this.date, this.time);
             tasks.add(task);
             storage.save(tasks);
             ui.showTaskAdded();

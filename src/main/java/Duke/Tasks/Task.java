@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public abstract class Task {
     private final String name;
     // task state: true = done, false = not done
@@ -8,9 +10,9 @@ public abstract class Task {
         this.state = false;
     }
 
-    abstract String getPrefix();
-    abstract String getDate();
-    abstract String getTime();
+    public abstract String getPrefix();
+    public abstract String getDate();
+    public abstract String getTime();
 
     public void mark() {
         this.state = true;

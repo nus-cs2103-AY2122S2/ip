@@ -1,7 +1,14 @@
-public class CommandMark extends Command{
+package Duke.Commands;
+
+import Duke.DukeException.DukeException;
+import Duke.System.Storage;
+import Duke.System.TaskList;
+import Duke.System.Ui;
+
+public class CommandDelete extends Command {
     private final int taskNum;
 
-    public CommandMark(String str) throws DukeException {
+    public CommandDelete(String str) throws DukeException {
         try {
             this.taskNum = Integer.parseInt(str);
         } catch (NumberFormatException e) {
@@ -11,8 +18,8 @@ public class CommandMark extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.mark(this.taskNum);
+        tasks.delete(this.taskNum);
         storage.save(tasks);
-        ui.showTaskMarked();
+        ui.showTaskDeleted();
     }
 }

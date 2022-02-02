@@ -1,3 +1,5 @@
+package Duke.Time;
+
 public class ManagerTime {
     private final String format24;
     private final String format12;

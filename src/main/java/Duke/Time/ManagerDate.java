@@ -1,3 +1,5 @@
+package Duke.Time;
+
 public class ManagerDate {
     private final int day;
     private final int month;

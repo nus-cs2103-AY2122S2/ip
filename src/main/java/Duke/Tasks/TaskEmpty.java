@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public class TaskEmpty extends Task {
     public TaskEmpty() {
         super("EMPTY");
