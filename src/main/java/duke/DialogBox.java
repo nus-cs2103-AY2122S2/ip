@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 
 
 public class DialogBox extends HBox {
@@ -45,7 +48,10 @@ public class DialogBox extends HBox {
         this.setSpacing(15);
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(dialog, displayPicture);
-        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(1), new Insets(5, 0, 0, 0))));
+        this.setBackground(new Background(
+                new BackgroundFill(Color.BEIGE,
+                        new CornerRadii(1),
+                        new Insets(5, 0, 0, 0))));
     }
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);

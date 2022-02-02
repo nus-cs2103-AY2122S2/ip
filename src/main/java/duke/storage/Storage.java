@@ -35,11 +35,14 @@ public class Storage {
     private void loadTask() throws IOException {
         try {
             Path path = Paths.get(".", "data", "duke.txt");
+
             if (Files.notExists(path)) {
                 Files.createDirectories(Paths.get(".", "data"));
                 Files.createFile(path);
             }
+
             List<String> list = Files.readAllLines(path);
+
             for (String s : list) {
                 if (s.equals("")) {
                     continue;

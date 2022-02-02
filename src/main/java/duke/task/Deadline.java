@@ -34,9 +34,11 @@ public class Deadline extends Task {
      */
     private LocalDateTime parseDeadline(String deadLine) throws DukeException {
         String[] temp = deadLine.split(" ", 2);
+
         if (temp.length <= 1 || temp[1].length() < 4) {
             throw new DukeWrongInputFormatException("Format for deadline is wrong. Please refer to list of commands.");
         }
+
         try {
             return LocalDateTime.parse(temp[0] + "T" + temp[1].charAt(0) + temp[1].charAt(1)
                     + ":" + temp[1].charAt(2) + temp[1].charAt(3) + ":00");

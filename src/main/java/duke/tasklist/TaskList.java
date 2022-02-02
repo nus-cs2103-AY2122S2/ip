@@ -69,11 +69,13 @@ public class TaskList {
      */
     private ArrayList<Task> findKeywordHelper(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
+
         for (int i = 0; i < this.tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 result.add(tasks.get(i));
             }
         }
+
         return result;
     }
 
@@ -97,28 +99,34 @@ public class TaskList {
      */
     public String addTask(Command c, String task, boolean canShowMessage) throws DukeException {
         Task t;
+
         switch (c) {
         case TODO:
             t = new ToDo(task.trim());
             break;
         case DEADLINE:
             String[] descriptionAndDate = task.split(" /by ", 2);
+
             if (descriptionAndDate.length <= 1) {
                 throw new DukeWrongInputFormatException("Missing deadline by date.");
             }
+
             t = new Deadline(descriptionAndDate[0].trim(), descriptionAndDate[1].trim());
             break;
         case EVENT:
             String[] descriptionAndTime = task.split(" /at ", 2);
+
             if (descriptionAndTime.length <= 1) {
                 throw new DukeWrongInputFormatException("Missing event at date.");
             }
+
             t = new Event(descriptionAndTime[0].trim(), descriptionAndTime[1].trim());
             break;
         default:
             t = null;
             break;
         }
+
         this.tasks.add(t);
         if (canShowMessage) {
             return "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t"
@@ -215,11 +223,14 @@ public class TaskList {
      */
     public Iterable<? extends CharSequence> saveToFile() {
         Iterator<Task> it = this.tasks.iterator();
+
         return (Iterable<String>) () -> new Iterator<>() {
+
             @Override
             public boolean hasNext() {
                 return it.hasNext();
             }
+
             @Override
             public String next() {
                 return it.next().formatSave();

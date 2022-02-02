@@ -25,8 +25,8 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.isAlive = true;
-        ui.formatStartUpMessage();
         this.tasks = new TaskList();
+
         try {
             this.storage = new Storage(this.tasks);
         } catch (IOException e) {
@@ -41,6 +41,7 @@ public class Duke {
         try {
             String[] commands = input.split(" ", 2);
             Command command = Parser.parseString(commands);
+
             switch (command) {
             case BYE:
                 try {
