@@ -1,14 +1,20 @@
+package Duke.Processing;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import Duke.Exception.DukeException;
+import Duke.tasks.Event;
+import Duke.tasks.Task;
+import Duke.tasks.todo;
+import Duke.tasks.Deadline;
 
 public class Storage {
     protected String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

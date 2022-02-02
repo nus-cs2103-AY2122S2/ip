@@ -1,6 +1,8 @@
+package Duke.Processing;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import Duke.Exception.DukeException;
 
 public class Parser {
     
@@ -12,7 +14,7 @@ public class Parser {
         }
     }
 
-    static void use(String input, TaskList tasklist) throws DukeException{
+    public static void use(String input, TaskList tasklist) throws DukeException{
         try {
             if(input.equalsIgnoreCase("list")) {
                 tasklist.list();

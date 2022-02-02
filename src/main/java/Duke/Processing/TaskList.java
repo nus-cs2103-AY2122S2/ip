@@ -1,4 +1,10 @@
+package Duke.Processing;
 import java.util.ArrayList;
+import Duke.Exception.DukeException;
+import Duke.tasks.Deadline;
+import Duke.tasks.Event;
+import Duke.tasks.Task;
+import Duke.tasks.todo;
 
 public class TaskList {
     static final String LIST = "Here are the things the covenent are after\n";
@@ -9,7 +15,7 @@ public class TaskList {
 
     private final ArrayList<Task> tasklist;
 
-    TaskList() {
+    public TaskList() {
         this.tasklist = new ArrayList<>();
     }
 

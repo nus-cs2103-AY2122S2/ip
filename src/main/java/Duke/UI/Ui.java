@@ -1,3 +1,6 @@
+package Duke.UI;
+import Duke.Exception.DukeException;
+
 import java.util.Scanner;
 public class Ui {
     static final String logo = " ____        _        \n"
@@ -18,20 +21,20 @@ public class Ui {
         return this.sc.nextLine();
     }
 
-    void startmessage() {
+    public void startmessage() {
         String message = logo + intro + seperator;
         System.out.println(message);
     }
 
-    void endmessage() {
+    public void endmessage() {
         System.out.println(bye);
     }
 
-    void errorMessage(DukeException error) {
+    public void errorMessage(DukeException error) {
         System.out.println(error.getMessage());
     }
 
-    void divider() {
+    public void divider() {
         System.out.println(seperator);
     }
 
