@@ -77,11 +77,11 @@ public class Ui {
     }
 
     public String todoMessage(Task todo) {
-        return "OK you better do this today, or else... (ㆆ _ ㆆ)\nAdded task:" + todo;
+        return "OK you better do this today, or else...\n(ㆆ _ ㆆ)\nAdded task:" + todo;
     }
 
     public String deadlineMessage(Task deadline) {
-        return "Oh boy, another deadline? (ㆆ _ ㆆ)\nAdded task:" + deadline;
+        return "Oh boy, another deadline?\n(ㆆ _ ㆆ)\nAdded task:" + deadline;
     }
 
     public String eventMessage(Task event) {
