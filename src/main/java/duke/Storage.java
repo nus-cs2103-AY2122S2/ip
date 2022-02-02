@@ -78,24 +78,7 @@ class Storage {
 
         // Export taskList to string
         try {
-            for (Task task : taskList) {
-                String finalOutput = "";
-
-                if (task.getType() == Types.TODO) {
-                    finalOutput = "T`" + (task.isDone() ? "X`" : "O`")
-                            + task.getTaskName() + "\n";
-                } else if (task.getType() == Types.EVENT) {
-                    TaskWithDate taskWithDate = (TaskWithDate) task;
-                    finalOutput = "E`" + (task.isDone() ? "X`" : "O`")
-                            + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
-                } else if (task.getType() == Types.DEADLINE) {
-                    TaskWithDate taskWithDate = (TaskWithDate) task;
-                    finalOutput = "D`" + (task.isDone() ? "X`" : "O`")
-                            + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
-                }
-                writer.write(finalOutput);
-            }
-
+            writer.write(exportTaskListToString(taskList));
             writer.flush();
         } catch (IOException e) {
             System.out.println("Something went wrong while writing to file (2)");
@@ -103,6 +86,28 @@ class Storage {
         }
 
         return true;
+    }
+
+    private String exportTaskListToString(List<Task> taskList) {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : taskList) {
+            String finalOutput = "";
+
+            if (task.getType() == Types.TODO) {
+                finalOutput = "T`" + (task.isDone() ? "X`" : "O`")
+                        + task.getTaskName() + "\n";
+            } else if (task.getType() == Types.EVENT) {
+                TaskWithDate taskWithDate = (TaskWithDate) task;
+                finalOutput = "E`" + (task.isDone() ? "X`" : "O`")
+                        + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
+            } else if (task.getType() == Types.DEADLINE) {
+                TaskWithDate taskWithDate = (TaskWithDate) task;
+                finalOutput = "D`" + (task.isDone() ? "X`" : "O`")
+                        + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
+            }
+            sb.append(finalOutput);
+        }
+        return sb.toString();
     }
 
 }
