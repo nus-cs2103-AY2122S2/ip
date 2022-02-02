@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeCommandDoesNotExistException;
 import duke.exception.DukeException;
 import duke.exception.DukeNoDescriptionException;
@@ -7,7 +9,6 @@ import duke.exception.DukeNoTimeSpecifiedException;
 import duke.exception.DukeOutOfBoundException;
 import duke.io.UserInput;
 import duke.ui.Ui;
-import java.util.ArrayList;
 
 /**
  * This is a TaskList class that used to store the tasks in an ArrayList.

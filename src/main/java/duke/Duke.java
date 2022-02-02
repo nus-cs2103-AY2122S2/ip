@@ -1,14 +1,15 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.DukeCommandDoesNotExistException;
 import duke.exception.DukeException;
 import duke.io.Parser;
 import duke.io.UserInput;
-import java.io.IOException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.util.Scanner;
 
 /**
  * Duke is a task tracker interactive chatbot.

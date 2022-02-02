@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.io.Parser;
-import duke.io.UserInput;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.io.Parser;
+import duke.io.UserInput;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * This is a Storage class used in Duke.

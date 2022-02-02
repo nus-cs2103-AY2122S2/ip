@@ -1,9 +1,10 @@
 package duke.io;
 
-import duke.exception.DukeWrongTimeFormatException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.DukeWrongTimeFormatException;
 
 /**
  * This is a Parser class that handles user's string input and re-format it for Duke to understand.
