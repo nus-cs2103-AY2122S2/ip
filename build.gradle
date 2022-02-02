@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -37,10 +37,20 @@ shadowJar {
     archiveClassifier = null
 }
 
+apply plugin: 'checkstyle'
 checkstyle {
     toolVersion = '8.29'
+    configFile file("config/checkstyle/checkstyle.xml")
 }
 
-run{
+checkstyleMain {
+    source ='src/main/java'
+}
+
+checkstyleTest {
+    source ='src/test/java'
+}
+
+run {
     standardInput = System.in
 }
