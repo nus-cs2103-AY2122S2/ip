@@ -84,13 +84,15 @@ public class DataStore {
      */
     private static TaskType parseTaskType(String taskType) {
         taskType = taskType.toLowerCase();
-        if (taskType.equals("todo")) {
+        switch (taskType) {
+        case "todo":
             return TaskType.TODO;
-        } else if (taskType.equals("event")) {
+        case "event":
             return TaskType.EVENT;
-        } else if (taskType.equals("deadline")) {
+        case "deadline":
             return TaskType.DEADLINE;
+        default:
+            return null;
         }
-        return null;
     }
 }

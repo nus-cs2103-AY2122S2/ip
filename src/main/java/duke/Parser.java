@@ -14,25 +14,26 @@ public class Parser {
      */
     public static Command parseCommand(String command) throws CommandNotFoundException {
         command = command.toLowerCase();
-        if (command.equals("list")) {
+        switch (command) {
+        case "list":
             return Command.LIST;
-        } else if (command.equals("mark")) {
+        case "mark":
             return Command.MARK;
-        } else if (command.equals("unmark")) {
+        case "unmark":
             return Command.UNMARK;
-        } else if (command.equals("event")) {
+        case "event":
             return Command.EVENT;
-        } else if (command.equals("deadline")) {
+        case "deadline":
             return Command.DEADLINE;
-        } else if (command.equals("todo")) {
+        case "todo":
             return Command.TODO;
-        } else if (command.equals("bye")) {
+        case "bye":
             return Command.BYE;
-        } else if (command.equals("delete")) {
+        case "delete":
             return Command.DELETE;
-        } else if (command.equals("find")) {
+        case "find":
             return Command.FIND;
-        } else {
+        default:
             throw new CommandNotFoundException("Unrecognised Command");
         }
     }
@@ -48,11 +49,11 @@ public class Parser {
      */
     public static String[] parseInput(String input) {
         String[] inputs = new String[2];
-        if (input.indexOf("/by") != -1) {
+        if (input.contains("/by")) {
             int indexOfTime = input.indexOf("/by");
             inputs[0] = input.substring(0, indexOfTime);
             inputs[1] = input.substring(indexOfTime + 4);
-        } else if (input.indexOf("/at") != -1) {
+        } else if (input.contains("/at")) {
             int indexOfTime = input.indexOf("/at");
             inputs[0] = input.substring(0, indexOfTime);
             inputs[1] = input.substring(indexOfTime + 4);

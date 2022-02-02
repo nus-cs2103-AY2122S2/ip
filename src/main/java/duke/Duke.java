@@ -4,7 +4,7 @@ package duke;
  * Class to get response from user inputs
  */
 public class Duke {
-    private TaskList list = DataStore.loadData();
+    private final TaskList list = DataStore.loadData();
 
     /**
      * You should have your own function to generate a response to user input.
@@ -13,7 +13,7 @@ public class Duke {
     String getResponse(String input) {
         // Parse input
         String[] inputs = input.split(" ", 2);
-        Command actionType = null;
+        Command actionType;
         String[] parsedInputs = new String[2];
         String output = "";
         try {
@@ -27,7 +27,7 @@ public class Duke {
             parsedInputs[0] = "";
         }
 
-        int indexOfList = -1;
+        int indexOfList;
         Boolean wasAddSuccess = null;
 
 

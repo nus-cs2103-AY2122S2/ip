@@ -79,34 +79,14 @@ public class TaskList {
         tasks.add(task);
     }
 
-    /**
-     * Prints out Tasks in the TaskList
-     */
-    public void print() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print(i + 1);
-            System.out.print(".");
-            tasks.get(i).print();
-        }
-    }
-
-    /**
-     * Prints out a specific task
-     *
-     * @param i Task index that is to be printed out
-     */
-    public void print(int i) {
-        tasks.get(i - 1).print();
-    }
-
     @Override
     public String toString() {
         String description = "";
         for (int i = 0; i < tasks.size(); i++) {
 
-            description += (i + 1);
-            description += ".";
-            description += tasks.get(i).toString();
+            description = description + (i + 1);
+            description = description + ".";
+            description = description + tasks.get(i).toString();
         }
         return description;
     }
@@ -171,9 +151,9 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getDetails()[2].contains(search)) {
-                output += (i + 1);
-                output += ".";
-                output += task.toString();
+                output = output + (i + 1);
+                output = output + ".";
+                output = output + task;
             }
         }
         return output;

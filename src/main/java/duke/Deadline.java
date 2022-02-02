@@ -12,7 +12,7 @@ public class Deadline extends Task {
     /**
      * String of time indicating when task is due
      */
-    private String time;
+    private final String time;
     /**
      * Datetime indicating when task is due
      * Null if time cannot be converted to datetime

@@ -12,7 +12,7 @@ public class Event extends Task {
     /**
      * String of time indicating when task is occurring
      */
-    private String time;
+    private final String time;
     /**
      * Datetime indicating when task is occurring
      * Null if time cannot be converted to datetime
