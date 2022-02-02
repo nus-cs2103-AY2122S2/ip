@@ -6,7 +6,7 @@ import Duke.Tasks.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -59,8 +59,11 @@ public class TaskList {
         int i = 0;
         while (i < this.tasks.size()) {
             Task curr = this.get(i + 1);
+            String isMarked = curr.isMarked()
+                    ? "T"
+                    : "F";
             taskAsData += curr.getPrefix() + "/"
-                    + curr.isMarked() + "/"
+                    + isMarked + "/"
                     + curr.getName() + "/"
                     + curr.getDate() + "/"
                     + curr.getTime() + "\n";
@@ -101,6 +104,10 @@ public class TaskList {
             i++;
         }
         return taskAsString;
+    }
+
+    public void clear() {
+        this.tasks = new ArrayList<>();
     }
 
     public boolean isEmpty() {

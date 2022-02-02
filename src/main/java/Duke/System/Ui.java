@@ -28,6 +28,8 @@ public class Ui {
                 + "input: mark/<task number based on the most recent list call>\n"
                 + SPACE + "To delete a task, "
                 + "input: delete/<task number based on the most recent list call>\n"
+                + SPACE + "To search for a task by keyword, input: Find/<keyword>\n"
+                + SPACE + "To clear the tasklist, input: Clear\n"
                 + SPACE + "To exit duke, input: exit\n"
                 + SPACE + "To view this manual again, input: help\n"
                 + SPACE + "The first word of each command is not case-sensitive!\n"
@@ -85,6 +87,10 @@ public class Ui {
             System.out.println(SPACE + "Here is a List of your Tasks that matches your search:");
             System.out.print(tasks);
         }
+    }
+
+    public void showClear() {
+        System.out.println(SPACE + "TaskList has been cleared!");
     }
 
     public void showException(Exception e) {

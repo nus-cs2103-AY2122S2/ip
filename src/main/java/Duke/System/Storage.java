@@ -46,7 +46,7 @@ public class Storage {
         } catch (IOException e){
             throw new DukeException("Failed to create tasks file!");
         }
-        return new ArrayList<Task>();
+        return new ArrayList<>();
     }
 
     public ArrayList<Task> read(File filePath) throws DukeException {
@@ -76,7 +76,7 @@ public class Storage {
         String[] taskAsArray = taskAsText.split("/");
 
         char prefix = taskAsArray[0].charAt(0);
-        boolean isCompleted = taskAsArray[1].equals("X");
+        boolean isCompleted = taskAsArray[1].equals("T");
         String name = taskAsArray[2];
         String date = taskAsArray[3];
         String time = taskAsArray[4];

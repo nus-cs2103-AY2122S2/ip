@@ -14,7 +14,7 @@ public class ManagerDate {
         // check valid month
         if (this.month < 13 && this.month > 0) {
             // check for leap year
-            if (this.year % 400 != 0) { // no leap year
+            if (this.year % 4 != 0) { // no leap year
                 // check for valid day
                 int[] daysPerMonth = {31, 28, 31, 30,
                         31, 30, 31, 31,
@@ -47,6 +47,6 @@ public class ManagerDate {
         int month = Integer.parseInt(date.substring(2, 4));
         int year = Integer.parseInt(date.substring(4, 8));
 
-        return nameOfMonths[month] + " " + String.format("%02d", day) + " " + year;
+        return nameOfMonths[month - 1] + " " + String.format("%02d", day) + " " + year;
     }
 }
