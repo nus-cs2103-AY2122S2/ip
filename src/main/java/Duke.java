@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,8 +7,18 @@ public class Duke {
         // Constant strings
         final String INTRO = "Duke initialised";
 
-        // Init
+        // Init text scanner
         Scanner sc = new Scanner(System.in);
+
+        // Init file if it is not there
+        File f = new File("./tasklist.txt");
+        if (!f.isFile()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
 
         // Printing Duke's intro
         String formattedIntroText = Duke.indent(INTRO, 1);
@@ -38,6 +50,7 @@ public class Duke {
 
     /**
      * Formats the given input between lines
+     *
      * @param input Formatted input with proper indents and newlines.
      */
     public static String formatLines(String input) {
