@@ -32,11 +32,15 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Allows VBox to scroll automatically as content overflows
+     * Allows VBox to scroll automatically as content overflows, and
+     * adds start up message to dialog container.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Duke.getWelcomeMessage(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

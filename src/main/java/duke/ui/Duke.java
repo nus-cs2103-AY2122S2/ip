@@ -17,8 +17,12 @@ public class Duke {
     /** Default path for data file: data/duke.txt */
     private static final Path DEFAULT_FILE_PATH = Paths.get("data", "duke.txt");
 
+    /** Start up message for duke */
+    private static final String WELCOME_MESSAGE = "Hi I'm Duke!\nWhat can I do for you?";
+
     /** ChatBot instance for running of user commands */
     private ChatBot chatBot = null;
+
 
     /**
      * Creates a duke instance initialised with default data file path.
@@ -54,5 +58,14 @@ public class Duke {
         ArrayList<String> response = chatBot.runCommand(input);
         // Show each item in response in a new line
         return response.stream().reduce("", (first, second) -> first + "\n" + second);
+    }
+
+    /**
+     * Returns start up message to display in application.
+     *
+     * @return String describing start up message to show.
+     */
+    public static String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
     }
 }
