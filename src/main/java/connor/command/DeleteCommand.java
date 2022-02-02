@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      * Deletes the {@code Task} in the task list with the given index.
      */
     @Override
-    public void activate() {
-        TaskList.deleteTask(index);
+    public String activate() {
+        return TaskList.deleteTask(index);
     }
 }

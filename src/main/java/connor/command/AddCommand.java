@@ -25,8 +25,8 @@ public class AddCommand extends Command {
      * Adds a {@code Task} to the task list.
      */
     @Override
-    public void activate() {
-        TaskList.addTask(tt, desc);
+    public String activate() {
+        return TaskList.addTask(tt, desc);
     }
 
 

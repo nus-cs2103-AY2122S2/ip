@@ -12,8 +12,9 @@ public class ByeCommand extends Command {
      * Sets {@code Connor} to be inactive, exiting the program.
      */
     @Override
-    public void activate() {
+    public String activate() {
         System.out.println("Farewell. See you next time!");
         Connor.setActive(false);
+        return "Farewell. See you next time!";
     }
 }

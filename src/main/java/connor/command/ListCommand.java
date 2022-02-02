@@ -12,8 +12,8 @@ public class ListCommand extends Command {
      * Lists the {@code Task}s in the task list.
      */
     @Override
-    public void activate() {
-        TaskList.viewTasks();
+    public String activate() {
+        return TaskList.viewTasks();
     }
 
 }

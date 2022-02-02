@@ -25,7 +25,7 @@ public class ChangeStatusCommand extends Command {
      * Changes the status of the {@code Task} in the task list with the given index.
      */
     @Override
-    public void activate() {
-        TaskList.markStatus(ts, index);
+    public String activate() {
+        return TaskList.markStatus(ts, index);
     }
 }

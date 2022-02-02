@@ -1,13 +1,12 @@
 package connor;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-
 import connor.command.ByeCommand;
 import connor.exception.InvalidTaskFileException;
 import connor.task.TaskList;
-import javafx.fxml.FXML;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Main class for Connor program to start running.
@@ -24,6 +23,9 @@ public class Connor {
     private static final String TASK_FILEPATH = "data/connor.txt";
 
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
+    private static final String ERROR_FIX_TASK_FILE_START = "ERROR: ";
+    private static final String ERROR_FIX_TASK_FILE_END = "Please fix the appropriate typo "
+            + "in the task file or clear it completely.";
 
     private static boolean isActive = true;
     private static final Scanner sc = new Scanner(System.in);
@@ -59,11 +61,9 @@ public class Connor {
         } catch (FileNotFoundException e) {
             print(ERROR_FILE_NOT_FOUND);
             e.printStackTrace();
-            return;
         } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
-            print("ERROR: " + e.getMessage());
-            print("Please fix the appropriate typo in the task file or clear it completely.");
-            return;
+            print(ERROR_FIX_TASK_FILE_START + e.getMessage());
+            print(ERROR_FIX_TASK_FILE_END);
         }
         TaskList.viewTasks();
         print(LINE);
@@ -78,6 +78,29 @@ public class Connor {
             storage.updateFile();
         }
         sc.close();
+    }
+
+    // TODO: Javadoc for this
+    public String runGui() {
+        StringBuilder sb = new StringBuilder(ui.greetings());
+        try {
+            storage.loadTasks();
+        } catch (FileNotFoundException e) {
+            sb.append(ERROR_FILE_NOT_FOUND);
+            return sb.toString();
+        } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
+            sb.append(ERROR_FIX_TASK_FILE_START + e.getMessage() + "\n" + ERROR_FIX_TASK_FILE_END);
+            return sb.toString();
+        }
+        sb.append(TaskList.viewTasks());
+        return sb.toString();
+    }
+
+    public String getResponse(String input) {
+        Parser p = new Parser(input);
+        String response = p.parse();
+        storage.updateFile();
+        return response;
     }
 
     /**
@@ -106,11 +129,6 @@ public class Connor {
      */
     public static String getFilePath() {
         return TASK_FILEPATH;
-    }
-
-
-    public String getResponse(String input) {
-        return "Connor heard: " + input;
     }
 
     /**

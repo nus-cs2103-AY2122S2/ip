@@ -13,7 +13,7 @@ public class Ui {
     /**
      * Prints the Connor logo and user greeting.
      */
-    public void greetings() {
+    public String greetings() {
         String logo = " .d8888b.\n"
                 + "d88P  Y88b\n"
                 + "888    888\n"
@@ -27,6 +27,7 @@ public class Ui {
         print("Hi, my name is Connor! I'm your personalised android assistant.\n"
                 + "Loading your current tasks...");
         print(Connor.LINE);
+        return "Hi, my name is Connor! I'm your personalised android assistant. ";
     }
 
     /**

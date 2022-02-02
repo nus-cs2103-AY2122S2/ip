@@ -10,7 +10,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void activate() {
-        TaskList.findTasks(desc);
+    public String activate() {
+        return TaskList.findTasks(desc);
     }
 }

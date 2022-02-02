@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
      * Clears all {@code Task}s in the task list.
      */
     @Override
-    public void activate() {
-        TaskList.clearTasks();
+    public String activate() {
+        return TaskList.clearTasks();
     }
 }

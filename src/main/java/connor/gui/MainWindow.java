@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 /**
  * Controller for MainWindow.
  */
@@ -29,7 +31,16 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        try {
+            connor = new Connor(Connor.getFilePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String startup = connor.runGui();
+        dialogContainer.getChildren().add(
+                DialogBox.getConnorDialog(startup, connorImage)
+        );
     }
 
     public void setConnor(Connor c) {

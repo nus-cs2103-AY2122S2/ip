@@ -14,6 +14,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -36,6 +37,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         avatar.setImage(img);
+        avatar.setClip(getCircleClip());
+        this.setBackground(getColorBackground("#D3D3D3"));
     }
 
     private void flip() {
@@ -47,8 +50,12 @@ public class DialogBox extends HBox {
 
     private Background getColorBackground(String colorString) {
         Paint paint = Paint.valueOf(colorString);
-        BackgroundFill bf = new BackgroundFill(paint, new CornerRadii(5, false), null);
+        BackgroundFill bf = new BackgroundFill(paint, new CornerRadii(10, false), null);
         return new Background(bf);
+    }
+
+    private Circle getCircleClip() {
+        return new Circle(50, 50, 50);
     }
 
     public static DialogBox getUserDialog(String s, Image img) {
