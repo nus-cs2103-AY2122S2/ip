@@ -25,7 +25,7 @@ public class NarcibotTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         ToDo todo = new ToDo("eat");
-        assertEquals("[T][ ] eat", out.toString().replace ("\r",""));
+        assertEquals("[T][ ] eat", out.toString().replace ("\r","").replace("\n",""));
     }
 
     @Test
