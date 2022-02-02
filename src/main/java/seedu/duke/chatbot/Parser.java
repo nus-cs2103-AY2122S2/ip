@@ -84,6 +84,7 @@ public class Parser {
      */
     int parseForMark(String command) throws DukeException {
         int indexAfterCommand = 5;
+        //command is given as "mark 5" so index 5 is where "5" is at
 
         if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
             throw new NoValidTaskIndexException();
@@ -105,6 +106,7 @@ public class Parser {
      */
     int parseForUnmark(String command) throws DukeException {
         int indexAfterCommand = 7;
+        //command is given as "unmark 5" so index 7 is where the task index to parse, "5" is at
 
         if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
             throw new NoValidTaskIndexException();
@@ -125,7 +127,7 @@ public class Parser {
      */
     int parseForDelete(String command) throws DukeException {
         int indexTaskName = 7;
-        //command is given as "delete <taskIndex>"
+        //command is given as "delete <taskIndex>" so taskIndex is at index 7
 
         if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
             throw new NoValidTaskIndexException();
@@ -148,6 +150,7 @@ public class Parser {
      */
     Task parseForTodo(String command) throws DukeException {
         int indexTaskName = 5;
+        //command is given as "todo <taskName>" so task name starts at index 5
 
         if (command.length() <= 5) {
             throw new IncompleteCommandException();
@@ -182,11 +185,14 @@ public class Parser {
      */
     Task parseForDeadline(String command) throws DukeException {
         int indexTaskName= 9;
+        //command is given as "deadline <taskname> /by <date>" so index 9 is where task name starts
 
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)
             throw new IncompleteCommandException();
         }
 
+        //command is given as "deadline <taskname> /at <date>" so find "/by"
+        // to find where to cut the string for <date>
         int dateMarkerIndex = command.indexOf("/by");
         if (dateMarkerIndex == -1) { // "/" does not exist
             throw new NoDateException();
@@ -194,8 +200,12 @@ public class Parser {
 
         String taskName = command
                 .substring(indexTaskName, dateMarkerIndex);
+        //command is given as "deadline <taskname> /by <date>" so <date> can be found
+        // +4 away from index of "/"
         int indexStartOfDate = dateMarkerIndex + 4;  //"/by yyyy-mm-dd hh:mm"
-        if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
+        if (indexStartOfDate >= command.length()) {
+            //e.g."deadline /" is invalid ; "deadline /by " is also invalid
+            // because there is no date after "/by"
             throw new NoDateException();
         }
 
@@ -213,11 +223,14 @@ public class Parser {
      */
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
+        //command is given as "event <taskname> /at <date>" so index 7 is where the task index to parse, "5" is at
 
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
             throw new IncompleteCommandException();
         }
 
+        //command is given as "event <taskname> /at <date>" so find "/at"
+        // to find where to cut the string for <date>
         int dateMarkerIndex = command.indexOf("/at");
         if (dateMarkerIndex == -1) {
             throw new NoDateException();
@@ -225,6 +238,9 @@ public class Parser {
         //+2 is because of "at " that occurs before the date then +1 for a space "at "
         String taskName = command
                 .substring(indexTaskName, dateMarkerIndex);
+
+        //command is given as "event <taskname> /at <date>" so <date> can be found
+        // +4 away from index of "/"
         int indexStartOfDate = dateMarkerIndex + 4;  //"/at <date>"
         if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
@@ -242,7 +258,7 @@ public class Parser {
      * @return String Keyword to search in {@link seedu.duke.task.TaskList}
      */
     String parseForSearch(String command) {
-        int indexToStart = 5;
-        return command.substring(5); //"find "
+        int indexToStart = 5; //command is given as "find <keyword>", the keyword starts at index 5
+        return command.substring(5);
     }
 }
