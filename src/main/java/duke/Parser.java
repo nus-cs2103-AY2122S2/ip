@@ -6,6 +6,7 @@ import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
@@ -49,12 +50,8 @@ public class Parser {
             case LIST:
                 return new ListCommand();
             case TODO:
-                String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
-                if (description.isEmpty()) {
-                    throw new DukeException(Ui.MSG_EMPTYINPUT);
-                } else {
-                    return new AddCommand(action, description);
-                }
+            case FIND:
+                return formatCmdWithSingleInput(action, inputTxt);
             case DEADLINE:
             case EVENT:
                 return formatCmdWithTime(action, inputTxt);
@@ -64,7 +61,6 @@ public class Parser {
             default:
                 throw new DukeException(Ui.MSG_INVALIDCMD);
             }
-
         } catch (DukeException e) {
             Ui.print(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
@@ -79,6 +75,17 @@ public class Parser {
             Ui.print(Ui.MSG_INVLIADCMDFORMAT);
         }
         return new InvalidCommand();
+    }
+
+    private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {
+        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+        if (description.isEmpty()) {
+            throw new DukeException(Ui.MSG_EMPTYINPUT);
+        } else if (commandType.equals(CommandType.TODO)) {
+            return new AddCommand(CommandType.TODO, description);
+        } else {
+            return new FindCommand(description.toLowerCase());
+        }
     }
 
     private Command formatCmdWithIdSelection(CommandType commandType, String inputTxt) throws DukeException {
@@ -131,7 +138,7 @@ public class Parser {
      *
      * @param sDate User's date input in String format.
      * @return The formatted date.
-     * @exception DateTimeParseException
+     * @throws DateTimeParseException
      * @throws DukeException          Invalid date format.
      * @see DateTimeParseException
      */
@@ -148,7 +155,7 @@ public class Parser {
      * @param date  Formatted input date.
      * @param sTime User's time input in String format.
      * @return Returns the formatted time.
-     * @exception  DateTimeParseException
+     * @throws DateTimeParseException
      * @throws DukeException          Invalid time format.
      * @see DateTimeParseException
      */

@@ -8,7 +8,8 @@ public enum CommandType
     DEADLINE("deadline"),
     EVENT("event"),
     DONE("done"),
-    DELETE("delete");
+    DELETE("delete"),
+    FIND("find");
 
     private String command;
 
