@@ -89,6 +89,20 @@ public class TaskList {
         }
     }
 
+    public String find(String keyword) throws DukeException {
+        String taskAsString = "";
+        int i = 0;
+        while (i < this.tasks.size()) {
+            String SPACE = "     ";
+            Task curr = this.get(i + 1);
+            if (curr.getName().contains(keyword)) {
+                taskAsString += SPACE + (i + 1) + ". " + curr + "\n";
+            }
+            i++;
+        }
+        return taskAsString;
+    }
+
     public boolean isEmpty() {
         return this.tasks.isEmpty();
     }

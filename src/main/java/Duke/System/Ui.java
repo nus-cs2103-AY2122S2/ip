@@ -3,7 +3,6 @@ package Duke.System;
 import java.util.Scanner;
 
 public class Ui {
-    // String helpers
     private final String SPACE = "     ";
 
     public void showLine() {
@@ -49,26 +48,47 @@ public class Ui {
     }
 
     public void showTaskAdded() {
+        this.showLine();
         System.out.println(SPACE + "Task has been added!");
     }
 
     public void showTaskMarked() {
+        this.showLine();
         System.out.println(SPACE + "Task has been marked!");
     }
 
     public void showTaskUnmarked() {
+        this.showLine();
         System.out.println(SPACE + "Task has been unmarked!");
     }
 
     public void showTaskDeleted() {
+        this.showLine();
         System.out.println(SPACE + "Task has been deleted!");
     }
 
     public void showList(String tasks) {
-        System.out.println(tasks);
+        this.showLine();
+        if(tasks.isBlank()) {
+            System.out.println(SPACE + "There is nothing in the TaskList!");
+        } else {
+            System.out.println(SPACE + "Here is a List of your Tasks:");
+            System.out.print(tasks);
+        }
+    }
+
+    public void showResult(String tasks) {
+        this.showLine();
+        if(tasks.isBlank()) {
+            System.out.println(SPACE + "There is nothing in the TaskList that matches your search!");
+        } else {
+            System.out.println(SPACE + "Here is a List of your Tasks that matches your search:");
+            System.out.print(tasks);
+        }
     }
 
     public void showException(Exception e) {
+        this.showLine();
         System.out.println(e.toString());
     }
 
@@ -77,6 +97,7 @@ public class Ui {
     }
 
     public void showExit() {
+        this.showLine();
         System.out.println(SPACE + "Bye! Hope to see you again soon!");
     }
 }

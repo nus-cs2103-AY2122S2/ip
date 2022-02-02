@@ -5,6 +5,7 @@ import Duke.Commands.CommandDeadline;
 import Duke.Commands.CommandDelete;
 import Duke.Commands.CommandEvent;
 import Duke.Commands.CommandExit;
+import Duke.Commands.CommandFind;
 import Duke.Commands.CommandHelp;
 import Duke.Commands.CommandList;
 import Duke.Commands.CommandMark;
@@ -99,6 +100,12 @@ public class Parser {
                         + "Input /chelp to see the full list of commands!");
             }
             return new CommandHelp();
+        case 9: // find
+            if (params.length != 2) {
+                throw new DukeException("Invalid command! "
+                        + "Input /chelp to see the full list of commands!");
+            }
+            return new CommandFind(params[1]);
         default: // invalid
             throw new DukeException("Invalid command! "
                     + "Input /chelp to see the full list of commands!");
