@@ -8,7 +8,7 @@ public class ParserResult {
 
     /**
      * Class used to encapsulate the result from Parser.
-     * 
+     *
      * @param cmd the parsed command
      * @param args the parsed arguments
      */
@@ -43,15 +43,15 @@ public class ParserResult {
 
     /**
      * Returns the positional argument
-     * 
+     *
      * @return the positional argument
      */
     public String getPosArg() {
         return this.getArg("");
     }
-    
+
     public Map<String, String> getArgs() {
         return this.args;
     }
-    
+
 }
