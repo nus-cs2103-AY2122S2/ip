@@ -22,18 +22,19 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the given task from the list, displays the result to the user, and saves the change to the list.
+     * Deletes the given task to the list, saves the change, and returns a message highlighting the change.
      *
      * @param taskList The list of tasks.
      * @param ui The UI object responsible for user interaction.
      * @param storage The Storage object responsible for saving the change.
+     * @return The message informing the user of the deleted task.
      * @throws DukeException If the indexed task does not exist or the change cannot be saved.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task deletedTask = taskList.deleteTask(index);
-        ui.displayDeletedTask(deletedTask);
-        ui.displayNumberOfTasks(taskList.getTasks());
         storage.write(taskList.getTasks());
+
+        return ui.displayDeletedTask(deletedTask) + "\n" + ui.displayNumberOfTasks(taskList.getTasks());
     }
 }

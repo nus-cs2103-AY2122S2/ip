@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param storage The Storage object responsible for saving the change.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.displayMatchingTasks(taskList.getTasksByKeyword(this.keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.displayMatchingTasks(taskList.getTasksByKeyword(this.keyword));
     }
 }

@@ -22,18 +22,19 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the given task to the list, displays the result to the user, and saves the change to the list.
+     * Adds the given task to the list, saves the change, and returns a message highlighting the change.
      *
      * @param taskList The list of tasks.
      * @param ui The UI object responsible for user interaction.
      * @param storage The Storage object responsible for saving the change.
+     * @return The message informing the user of the added task.
      * @throws FileSaveException If the change cannot be saved.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws FileSaveException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FileSaveException {
         taskList.addTask(task);
-        ui.displayAddedTask(task);
-        ui.displayNumberOfTasks(taskList.getTasks());
         storage.write(taskList.getTasks());
+
+        return ui.displayAddedTask(task) + "\n" + ui.displayNumberOfTasks(taskList.getTasks());
     }
 }

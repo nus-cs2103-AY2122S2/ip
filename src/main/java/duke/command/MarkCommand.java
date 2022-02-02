@@ -30,10 +30,10 @@ public class MarkCommand extends Command {
      * @throws DukeException If the indexed task does not exist or the change cannot be saved.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task selectedTask = taskList.getTask(index);
         selectedTask.markAsComplete();
-        ui.displayMarkedTask(selectedTask);
         storage.write(taskList.getTasks());
+        return ui.displayMarkedTask(selectedTask);
     }
 }

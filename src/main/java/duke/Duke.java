@@ -30,28 +30,17 @@ public class Duke {
     }
 
     /**
-     * Begins running Duke.
+     * Parses the user's input and generates the proper response.
+     *
+     * @param input The user's input.
+     * @return Duke's response.
      */
-    public void run() {
-        boolean exit = false;
-        ui.displayWelcome();
-
-        while (!exit) {
-            try {
-                String strCommand = ui.readCommand();
-                Command command = Parser.parse(strCommand);
-                command.execute(taskList, ui, storage);
-                exit = command.isExit();
-            } catch (DukeException e) {
-                ui.displayError(e.getMessage());
-            } finally {
-                ui.displayLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

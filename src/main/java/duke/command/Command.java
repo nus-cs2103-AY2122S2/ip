@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Abstract class that represents a command given by the user, which is performed upon calling execute().
  */
-abstract public class Command {
+public abstract class Command {
     /**
      * Executes the command.
      *
@@ -17,7 +17,7 @@ abstract public class Command {
      * @param storage The Storage object responsible for saving the change.
      * @throws DukeException If an error is encountered during execution.
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Indicates whether the command is an exit command or not.
