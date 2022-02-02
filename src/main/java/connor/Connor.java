@@ -7,6 +7,7 @@ import java.util.Scanner;
 import connor.command.ByeCommand;
 import connor.exception.InvalidTaskFileException;
 import connor.task.TaskList;
+import javafx.fxml.FXML;
 
 /**
  * Main class for Connor program to start running.
@@ -40,6 +41,8 @@ public class Connor {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
     }
+
+    public Connor() {}
 
     /**
      * Runs the Connor program. Greets the user first, shows their current tasks,
@@ -94,6 +97,20 @@ public class Connor {
      */
     public static void setActive(boolean isActive) {
         Connor.isActive = isActive;
+    }
+
+    /**
+     * Returns a {@code String} of the task file path.
+     *
+     * @return String of the task file path.
+     */
+    public static String getFilePath() {
+        return TASK_FILEPATH;
+    }
+
+
+    public String getResponse(String input) {
+        return "Connor heard: " + input;
     }
 
     /**
