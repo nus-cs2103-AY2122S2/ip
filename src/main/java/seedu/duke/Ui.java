@@ -11,9 +11,7 @@ public class Ui {
     private static final int DELETE = 6;
     
     public void showLoadingError() {
-
         System.out.println("Failed to retrieve data from storage");
-
     }
 
     public void nextInput(String input, TaskList tasks) {

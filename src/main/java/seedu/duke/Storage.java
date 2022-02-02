@@ -63,7 +63,7 @@ public class Storage {
         }
 
         try {
-            FileWriter fw = new FileWriter(this.filepath);
+            FileWriter fw = new FileWriter(filepath);
             fw.write(saveFormat);
             fw.close();
         } catch (Exception e) {

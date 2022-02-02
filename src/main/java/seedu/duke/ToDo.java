@@ -14,11 +14,11 @@ public class ToDo extends Task {
     public String toString() {
         String tempStr = " ";
 
-        if (this.isDone) {
+        if (isDone) {
             tempStr = "X";
         }
 
-        return "[T][" + tempStr + "] " + this.description;
+        return "[T][" + tempStr + "] " + description;
     }
 
 }

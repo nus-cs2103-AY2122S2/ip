@@ -16,11 +16,11 @@ public class Event extends Task {
     public String toString() {
         String tempStr = " ";
 
-        if (this.isDone) {
+        if (isDone) {
             tempStr = "X";
         }
 
-        return "[E][" + tempStr + "] " + this.description + "(" + this.time.get().format(dateFormatter) + ")";
+        return "[E][" + tempStr + "] " + description + "(" + time.get().format(dateFormatter) + ")";
     }
 }
 

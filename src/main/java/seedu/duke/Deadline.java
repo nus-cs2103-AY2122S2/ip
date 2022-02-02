@@ -16,11 +16,11 @@ public class Deadline extends Task {
     public String toString() {
         String tempStr = " ";
 
-        if (this.isDone) {
+        if (isDone) {
             tempStr = "X";
         }
 
-        return "[D][" + tempStr + "] " + this.description + "(" + this.time.get().format(dateFormatter) + ")";
+        return "[D][" + tempStr + "] " + description + "(" + time.get().format(dateFormatter) + ")";
     }
 
 }
