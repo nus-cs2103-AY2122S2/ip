@@ -1,8 +1,11 @@
-package Cleese;
+package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline, a type of Task that is due by a given time
+ */
 public class Deadline extends Task {
     protected LocalDateTime dueBy;
 

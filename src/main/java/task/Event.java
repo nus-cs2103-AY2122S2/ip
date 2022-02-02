@@ -1,8 +1,11 @@
-package Cleese;
+package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event, a type of Task that is set at a given time
+ */
 public class Event extends Task{
     protected LocalDateTime setAt;
 

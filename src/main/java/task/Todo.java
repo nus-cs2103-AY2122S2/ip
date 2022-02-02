@@ -1,7 +1,9 @@
-package Cleese;
+package task;
 
+/**
+ * Represents a Todo, the most basic type of task
+ */
 public class Todo extends Task{
-
     public Todo(String description) {
         super(description);
     }
