@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 import java.io.IOException;
 
 public class UnmarkCommand extends Command {
@@ -22,13 +22,14 @@ public class UnmarkCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.unmark(taskToUnmark);
-        ui.showUnmarkTask(tasks.getTask(taskToUnmark));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
         try {
+            tasks.unmark(taskToUnmark);
             storage.writeToFile(tasks.getTaskArr());
+            return ui.showUnmarkTask(tasks.getTask(taskToUnmark));
         } catch (IOException e) {
-            ui.showError("IOException");
+            return ui.showError("IOException");
         }
     }
 

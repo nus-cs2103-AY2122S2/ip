@@ -1,10 +1,10 @@
-package main.java.duke;
+package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
 
-    private Scanner sc;
+    private final Scanner sc;
 
     /** Constructs an instance of Ui. */
     public Ui() {
@@ -12,16 +12,13 @@ public class Ui {
     }
 
     /** Prints a horizontal line. */
-    public void horizontal() {
-        System.out.println("--------------------------------------------------");
+    public String horizontal() {
+        return "--------------------------------------------------";
     }
 
     /** Prints the welcome message for the user. */
-    public void welcome() {
-        horizontal();
-        System.out.println("Greetings, NERD! I'm Duke");
-        System.out.println("Fine, I'm programmed to be nice today. What can I do for you? :)");
-        horizontal();
+    public String welcome() {
+        return "Greetings, NERD! I'm Duke\n" + "Fine, I'm programmed to be nice today. What can I do for you? :)";
     }
 
     /**
@@ -40,13 +37,13 @@ public class Ui {
      * @param taskNum Current position of task in Tasklist.
      * @param t Task to be printed.
      */
-    public void showTask(int taskNum, Task t) {
-        System.out.println(taskNum + ". " + t);
+    public String showTask(int taskNum, Task t) {
+        return taskNum + ". " + t;
     }
 
     /** Prints the empty task message for the user. */
-    public void showEmptyTask() {
-        System.out.println("No tasks added yet!");
+    public String showEmptyTask() {
+        return "No tasks added yet!";
     }
 
     /**
@@ -54,9 +51,8 @@ public class Ui {
      *
      * @param t Task that has been completed.
      */
-    public void showMarkTask(Task t) {
-        System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done:");
-        System.out.println(t);
+    public String showMarkTask(Task t) {
+        return "Cool! You seemed to have been productive just like me! I've marked this task as done:\n" + t;
     }
 
     /**
@@ -65,10 +61,8 @@ public class Ui {
      * @param num Total number of tasks currently.
      * @param t Task that has been added.
      */
-    public void showSucessfulAdd(Task t, int num) {
-        System.out.println("Roger, I got you. I've added this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + num + " tasks in the list.");
+    public String showSucessfulAdd(Task t, int num) {
+        return "Roger, I got you. I've added this task:\n" + t + "\nNow you have " + num + " tasks in the list.\n";
     }
 
     /**
@@ -77,10 +71,8 @@ public class Ui {
      * @param num Total number of tasks currently.
      * @param t Task that has been removed.
      */
-    public void showRemoveTask(Task t, int num) {
-        System.out.println("Noted, I have removed this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + num + " tasks in the list.");
+    public String showRemoveTask(Task t, int num) {
+        return "Noted, I have removed this task:\n" + t + "\nNow you have " + num + " tasks in the list.";
     }
 
     /**
@@ -88,9 +80,8 @@ public class Ui {
      *
      * @param t Task that has been unmarked.
      */
-    public void showUnmarkTask(Task t) {
-        System.out.println("Did you mess up something? I'll mark it as undone -- but I believe you can do it!:");
-        System.out.println(t);
+    public String showUnmarkTask(Task t) {
+        return "Did you mess up something? I'll mark it as undone -- but I believe you can do it!:\n" + t;
     }
 
     /**
@@ -98,38 +89,34 @@ public class Ui {
      *
      * @param type Type of error.
      */
-    public void showError(String type) {
+    public String showError(String type) {
         switch (type) {
         case ("LoadingError"):
-            System.out.println("Something went wrong with the loading of the file");
-            System.out.println("Try deleting the data/tasks.txt file, but this will "
-                    + "wipe all previous tasks stored (if any).");
-            break;
+            return "Something went wrong with the loading of the file\n" +
+                    "Try deleting the data/tasks.txt file, but this will wipe all previous tasks stored (if any).";
+
         case ("UnknownCommand"):
-            System.out.println("I'm sorry, but I can't execute this command!");
-            break;
+            return "I'm sorry, but I can't execute this command!";
+
         case ("TodoFormatError"):
-            System.out.println("Follow this format:");
-            System.out.println("todo YOUR_TASK");
-            break;
+            return "Follow this format:\n" + "todo YOUR_TASK";
+
         case ("DeadlineFormatError"):
-            System.out.println("Follow this format:");
-            System.out.println("deadline YOUR_TASK /by yyyy-mm-dd TIME");
-            System.out.println("eg: deadline return book /by 2019-10-15 18:00");
-            break;
+            return "Follow this format:\n" +  "deadline YOUR_TASK /by yyyy-mm-dd TIME\n"
+                    + "eg: deadline return book /by 2019-10-15 18:00";
+
         case ("EventFormatError"):
-            System.out.println("Follow this format:");
-            System.out.println("event YOUR_TASK /at yyyy-mm-dd TIME");
-            System.out.println("eg: event project meeting /at 2019-10-15 18:00");
-            break;
+            return "Follow this format:\n" + "event YOUR_TASK /at yyyy-mm-dd TIME\n"
+            + "eg: event project meeting /at 2019-10-15 18:00";
+
         case ("IOException"):
-            System.out.println("Something went wrong with the writing to the file");
-            break;
+            return "Something went wrong with the writing to the file";
+
         case ("DateTimeParseException"):
-            System.out.println("Please enter the correct format for Datetime! yyyy-mm-dd HH:mm");
-            break;
+            return "Please enter the correct format for Datetime! yyyy-mm-dd HH:mm";
+
         default:
-            System.out.println("I don't understand this error!");
+            return "I don't understand this error!";
         }
     }
 
@@ -138,24 +125,24 @@ public class Ui {
      *
      * @param tasks Tasks that have been loaded from previous execution of Duke.
      */
-    public void showTasksLoaded(TaskList tasks) {
-        System.out.println("Here are the tasks we loaded up from your previous usage!");
-        ArrayList<Task> t = tasks.getTaskArr();
-        if (t.size() == 0) {
-            showEmptyTask();
-        }
-
-        for (int i = 0; i < t.size(); i++) {
-            showTask(i + 1, t.get(i));
-        }
+    public String showTasksLoaded(TaskList tasks) {
+        return "Here are the tasks we loaded up from your previous usage!";
+//        ArrayList<Task> t = tasks.getTaskArr();
+//        if (t.size() == 0) {
+//            showEmptyTask();
+//        }
+//
+//        for (int i = 0; i < t.size(); i++) {
+//            showTask(i + 1, t.get(i));
+//        }
     }
 
     /** Prints the exit statement to the user. */
-    public void sayGoodbye() {
-        System.out.println("Bye! I'm sure you'll start talking to a real human now. Haha...");
+    public String sayGoodbye() {
+        return "Bye! I'm sure you'll start talking to a real human now. Haha...";
     }
 
-    public void showKeywords() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showKeywords() {
+        return "Here are the matching tasks in your list:";
     }
 }

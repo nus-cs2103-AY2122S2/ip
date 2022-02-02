@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 import java.io.IOException;
 
 public class MarkCommand extends Command {
@@ -17,13 +17,14 @@ public class MarkCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.mark(taskToMark);
-        ui.showMarkTask(tasks.getTask(taskToMark));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
         try {
+            tasks.mark(taskToMark);
             storage.writeToFile(tasks.getTaskArr());
+            return ui.showMarkTask(tasks.getTask(taskToMark));
         } catch (IOException e) {
-            ui.showError("IOException");
+            return ui.showError("IOException");
         }
     }
 

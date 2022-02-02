@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.ArrayList;
 
@@ -60,9 +60,9 @@ public class TaskList {
      *
      * @param taskNum Position of task in Tasklist to be deleted.
      */
-    public void delete(int taskNum) {
-        taskArr.remove(taskNum);
+    public Task delete(int taskNum) {
         currTask--;
+        return taskArr.remove(taskNum);
     }
 
     public int size() {
