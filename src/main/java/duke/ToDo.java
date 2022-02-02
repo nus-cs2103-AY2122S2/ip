@@ -2,16 +2,16 @@ package duke;
 
 /**
  * Inherits from the Task class.
- * Stores the description of a Todo object.
+ * Stores the description of a ToDo object.
  * Provides to String method to print event details in specific format.
  */
-public class Todo extends Task {
+public class ToDo extends Task {
 
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
-    public Todo(String description, boolean isDone) {
+    public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 
