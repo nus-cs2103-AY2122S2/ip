@@ -13,8 +13,6 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-    private static final String hyphenate = "    ____________________________________________________________";
-
     public Duke(String databasePath) {
         ui = new Ui();
         storage = new Storage(databasePath);
@@ -53,6 +51,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./DukeDatabase.txt").run();
+        new Duke("./src/main/java/data/DukeDatabase.txt").run();
     }
 }
