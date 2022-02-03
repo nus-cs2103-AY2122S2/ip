@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import taskmaster.exception.DukeExceptions;
 import taskmaster.task.Task;
 
 
@@ -17,6 +18,19 @@ import taskmaster.task.Task;
  */
 
 public class Storage {
+    /** The file storing the task data. **/
+    private File dataFile;
+    /** The path in data file is located **/
+    private String filePath;
+
+    /**
+     * Constructor of Storage.
+     * @param filePath The path for the data file.
+     */
+    public Storage(String filePath) {
+        dataFile = new File(filePath);
+        this.filePath = filePath;
+    }
 
     /**
      * Helper function to create directory if it does not exist.
@@ -42,12 +56,9 @@ public class Storage {
      */
 
     private void createFile() {
-        String path = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
-        File filename = new File(path);
-
         try {
-            if (filename.createNewFile()) {
-                System.out.println("\nI've created the file " + filename.getName());
+            if (dataFile.createNewFile()) {
+                System.out.println("\nI've created the file " + dataFile.getName());
                 System.out.println("You better be grateful, kid");
             }
 
@@ -63,32 +74,28 @@ public class Storage {
      * @param taskList task list the tasks will be added to.
      */
 
-    public void loadFile(TaskList taskList) {
+    public void loadFile(TaskList taskList) throws DukeExceptions {
+        String dir = Paths.get("").toAbsolutePath() + "/data/";
+        File directory = new File(dir);
+
+        if (!directory.exists()) {
+            System.out.println("\nHUH? The directory doesn't exist?!");
+            createDirectory();
+        }
+        if (!dataFile.exists()) {
+            System.out.println("HUH? The file doesn't exist?!");
+            createFile();
+        }
         try {
-            String dir = Paths.get("").toAbsolutePath() + "/data/";
-            String filename = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
-            File directory = new File(dir);
-            File fileToBeLoaded = new File(filename);
-
-            if (!directory.exists()) {
-                System.out.println("\nHUH? The directory doesn't exist?!");
-                createDirectory();
-            }
-            if (!fileToBeLoaded.exists()) {
-                System.out.println("HUH? The file doesn't exist?!");
-                createFile();
-            }
-
-            Scanner reader = new Scanner(fileToBeLoaded);
+            Scanner reader = new Scanner(dataFile);
             ParseFiles parser = new ParseFiles();
             while (reader.hasNextLine()) {
                 Task currentTask = parser.parseTask(reader.nextLine());
                 taskList.add(currentTask);
             }
-
             reader.close();
         } catch (IOException e) {
-            System.out.println("\nWhat's this? An error occurred when I tried to load the file");
+            throw new DukeExceptions("Unable to read or write to storage!");
         }
     }
 

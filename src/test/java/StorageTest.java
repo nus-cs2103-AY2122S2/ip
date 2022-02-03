@@ -11,18 +11,25 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import taskmaster.exception.DukeExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.TodoTask;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
 public class StorageTest {
-    private Storage storage = new Storage();
+    /** The file path of the data file. **/
+    private static final String FILE_PATH = "./data/Duke.txt";
+    private Storage storage = new Storage(FILE_PATH);
     private TaskList taskList = new TaskList();
 
     private void setUpParameters() {
         StorageTest testStorage = new StorageTest();
-        testStorage.storage.loadFile(taskList);
+        try {
+            testStorage.storage.loadFile(taskList);
+        } catch (DukeExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void populateTaskList() {
