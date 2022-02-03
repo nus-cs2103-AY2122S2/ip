@@ -34,6 +34,16 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
 
+            //modify window
+            stage.setTitle("Duke");
+            stage.setResizable(false);
+            stage.setMinHeight(600.0);
+            stage.setMinWidth(400.0);
+
+            Image icon = new Image(
+                    Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Icon.png")));
+            stage.getIcons().add(icon);
+
             //set background
             Image img = new Image(
                     Objects.requireNonNull(this.getClass().getResourceAsStream("/images/background.png")));
