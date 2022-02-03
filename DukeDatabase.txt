@@ -1,14 +1,4 @@
-D |   | finish eating a burger | 2015-01-23
-D |   | finish eating a burger | 2015-01-22
-D |   | finish eating a hamburger | 2015-01-25
-D |   | finish eating a zenburger | 2015-01-25
-D |   | finish eating a hamburger | 2015-01-25
-D |   | finish eating a burger | 2015-01-22
-D |   | finish eating a zenburger | 2015-01-25
-D |   | finish eating a zenburger | 2015-01-25
-T |   | hello bird
-T |   | hello bird
-T |   | hello bird
-T |   | hello bird
-T |   | hello bird
-E |   | hibyefriend | 5pm
+T |   | hello sir
+D |   | hello sir | 2012-05-03
+T |   | hello sir
+T |   | hello sir

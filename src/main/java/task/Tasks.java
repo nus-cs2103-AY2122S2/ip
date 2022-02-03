@@ -17,13 +17,13 @@ public class Tasks {
     }
 
     // Completion of task
-    void completeTask() {
-        this.completed = true;
+    public Tasks completeTask() {
+        return new Tasks(name, true);
     }
 
     // Uncomplete the task
-    void uncompleteTask() {
-        this.completed = false;
+    public Tasks uncompleteTask() {
+        return new Tasks(name, false);
     }
 
     // Get timing of task - overriden in todos and events
