@@ -1,14 +1,14 @@
-hello im duke wassup
+hello im duke.main wassup
  what can I help you?
-ok i have added this task:
+ok i have added this duke.task:
 [T][] todo read book
 here are the stuffs in your list:
 1[]todo read book
 Now you have 1 tasks in your list
-ok i have added this task:
+ok i have added this duke.task:
 [D][]deadline return book /by 2pm by by 2pm
-ok i have added this task:
+ok i have added this duke.task:
 [T][] todo take bath
-ok i have added this task:
+ok i have added this duke.task:
 [E][]at(at: at NUS)
 byebye see u!

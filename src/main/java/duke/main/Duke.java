@@ -1,26 +1,33 @@
-package duke;
+package duke.main;
 
-import command.Command;
-import exception.DukeException;
-import task.TaskList;
-import utility.UI;
-import utility.Parser;
-import utility.Storage;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.utility.UI;
+import duke.task.TaskList;
+import duke.utility.Parser;
+import duke.utility.Storage;
 
 
 /**
- * Main class for Duke
- *
+ * Duke is a Todo list command line application that allows you to create, delete, mark, and save tasks
  */
-public class Duke {
 
-    public UI ui;
-    public TaskList tasks;
-    public Storage storage;
+public class Duke {
+    /**
+     * To load and save tasks into the specified file path
+     */
+    private Storage storage;
+    /**
+     * To maintain the current list of tasks
+     */
+    private TaskList tasks;
+    /**
+     * To handle any input output interaction with users
+     */
+    private UI ui;
 
     /**
-     * constructor for Duke
-     * @param filePath
+     * Returns a Duke application that loads previously saved tasks.
      */
     public Duke(String filePath){
         this.ui = new UI();
@@ -33,6 +40,16 @@ public class Duke {
         }
     }
 
+
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.tasks, this.ui, this.storage);
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
     public void run() {
         this.ui.startMessage();
         boolean bye = false;

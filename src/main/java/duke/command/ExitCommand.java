@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import task.TaskList;
-import utility.UI;
-import utility.Storage;
+import duke.task.TaskList;
+import duke.utility.UI;
+import duke.utility.Storage;
 
 /**
  * Command for Exit Duke app
@@ -14,8 +14,9 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         ui.print("Aww. Bye! See you again soon");
+        return null;
     }
 
     @Override

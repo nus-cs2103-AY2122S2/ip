@@ -1,6 +1,6 @@
-package utility;
+package duke.utility;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
 import java.util.Scanner;
 
