@@ -218,7 +218,8 @@ public class TaskList {
                     list.add(deadline);
                     set.add(title);
                     return String.format(
-                        "This deadline has been added to your task list!%n%n             %s",
+                        "This deadline has been added to your task list!%n             %d. %s",
+                        getNumTasks(),
                         deadline
                     );
                 }
@@ -234,7 +235,8 @@ public class TaskList {
                     list.add(event);
                     set.add(title);
                     return String.format(
-                        "This event has been added to your task list!%n%n             %s",
+                        "This event has been added to your task list!%n             %d. %s",
+                        getNumTasks(),
                         event
                     );
                 }
@@ -271,7 +273,8 @@ public class TaskList {
             list.add(todo);
             set.add(title);
             return String.format(
-                    "This todo has been added to your task list!%n%n             %s",
+                    "This todo has been added to your task list!%n             %d. %s",
+                    getNumTasks(),
                     todo
             );
         }
@@ -294,7 +297,8 @@ public class TaskList {
         set.remove(getTask(index).getTitle());
         Task removedTask = list.remove(index);
         return String.format(
-                "This task has successfully been removed from your task list!%n%n             %s",
+                "This task has successfully been removed from your task list!%n             %d. %s",
+                index + 1,
                 removedTask
         );
     }
@@ -347,6 +351,9 @@ public class TaskList {
      */
     public String getTasksByKeyword(String[] input) {
         String keyword = combineArgs(input);
+        if (keyword.isBlank()) {
+            return "You need to key in a keyword traveller!";
+        }
         List<Task> filtered = filter(t -> keyword.equals(t.getTitle())
                 || keyword.contains(t.getTitle())
                 || t.getTitle().contains(keyword));
@@ -390,7 +397,8 @@ public class TaskList {
         } else {
             task.mark();
             return String.format(
-                    "This task has been marked as completed in your task list!%n%n             %s",
+                    "This task has been marked as completed in your task list!%n             %d. %s",
+                    index + 1,
                     task
             );
         }
@@ -409,7 +417,8 @@ public class TaskList {
         } else {
             task.unmark();
             return String.format(
-                    "This task has been unmarked in your task list!%n%n             %s",
+                    "This task has been unmarked in your task list!%n             %d. %s",
+                    index + 1,
                     task
             );
         }

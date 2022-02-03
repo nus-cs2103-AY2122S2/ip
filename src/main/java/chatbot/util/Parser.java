@@ -9,19 +9,19 @@ import chatbot.exception.ChatBotException;
  */
 public class Parser {
 
-    private final Ui innkeeper;
+    private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
 
     /**
      * Instantiates a new Parser.
      *
-     * @param innkeeper The UI.
+     * @param ui The UI.
      * @param storage   The storage.
      * @param taskList  The task list.
      */
-    public Parser(Ui innkeeper, Storage storage, TaskList taskList) {
-        this.innkeeper = innkeeper;
+    public Parser(Ui ui, Storage storage, TaskList taskList) {
+        this.ui = ui;
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -37,7 +37,7 @@ public class Parser {
         String response;
         switch (input[0]) {
         case "bye":
-            return innkeeper.bye();
+            return ui.bye();
         case "list":
             response = taskList.summary();
             return response;
@@ -52,7 +52,7 @@ public class Parser {
                     return response;
                 }
             } catch (ChatBotException e) {
-                return innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
         case "find":
             response = taskList.getTasksByKeyword(input);
@@ -74,24 +74,24 @@ public class Parser {
                     return response;
                 }
             } catch (ChatBotException e) {
-                return innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
-                return innkeeper.error(
+                return ui.error(
                         "You should mark and unmark tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
-                return innkeeper.error(
+                return ui.error(
                         "You need to key in the index of the task you wish to mark or unmark traveller!"
                 );
             }
         case "todo":
             try {
                 response = taskList.addToDo(input);
-                response = response.concat(innkeeper.printNumTasks(taskList.getNumTasks()));
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                 storage.saveChanges(taskList);
                 return response;
             } catch (ChatBotException e) {
-                return innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
         case "delete":
             try {
@@ -107,23 +107,23 @@ public class Parser {
                     response = taskList.delete(
                             Integer.parseInt(input[1]) - 1
                     );
-                    response = response.concat(innkeeper.printNumTasks(taskList.getNumTasks()));
+                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                     storage.saveChanges(taskList);
                     return response;
                 }
             } catch (ChatBotException e) {
-                return innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
-                return innkeeper.error(
+                return ui.error(
                         "You should delete tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
-                return innkeeper.error(
+                return ui.error(
                         "You need to key in the index of the task you wish to delete traveller!"
                 );
             }
         case "guide":
-            return innkeeper.printGuide();
+            return ui.printGuide();
         default:
             String[] temp = rawInput.split("/", 2);
             try {
@@ -162,12 +162,12 @@ public class Parser {
                         temp[0].split(" "),
                         temp[1].split(" ")
                     );
-                    response = response.concat(innkeeper.printNumTasks(taskList.getNumTasks()));
+                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                     storage.saveChanges(taskList);
                     return response;
                 }
             } catch (ChatBotException e) {
-                return innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
         }
     }

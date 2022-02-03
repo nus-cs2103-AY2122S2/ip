@@ -1,4 +1,4 @@
-package chatbot.controller;
+package chatbot.gui.controller;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +39,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(80, 50, 50));
     }
 
     /**
@@ -51,13 +54,17 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         System.out.println("getting user dialog!");
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        System.out.println("getting duke dialog!");
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    public static DialogBox getInnkeeperDialog(String text, Image img) {
+        System.out.println("getting innkeeper dialog!");
+        return new DialogBox(text, img);
+    }
+
+    public static DialogBox getStartPrompt(String text, Image img) {
+        return new DialogBox(text, img);
     }
 }

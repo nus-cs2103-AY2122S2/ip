@@ -23,11 +23,15 @@ public class ChatBot {
     /**
      * Instantiates a new ChatBot.
      */
-    public ChatBot() throws ChatBotException {
+    public ChatBot() {
         this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage(SAVE_FILE_DIRECTORY, SAVE_FILE_NAME);
-        storage.loadData(this.taskList);
+        try {
+            storage.loadData(this.taskList);
+        } catch (ChatBotException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -38,5 +42,9 @@ public class ChatBot {
         System.out.println("getting response!");
         Parser parser = new Parser(ui, storage, taskList);
         return parser.parse(input);
+    }
+
+    public String getGreeting() {
+        return ui.greet(taskList.isEmpty());
     }
 }

@@ -1,20 +1,23 @@
-package chatbot;
+package chatbot.gui;
 
 import java.io.IOException;
+import java.util.Objects;
 
-import chatbot.controller.MainWindow;
+import chatbot.ChatBot;
+import chatbot.gui.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for innkeeper using FXML.
  */
 public class Main extends Application {
 
-    private ChatBot duke = new ChatBot();
+    private ChatBot innkeeper = new ChatBot();
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +26,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setInnkeeper(innkeeper);
+            stage.setTitle("Innkeeper ChatBot");
+            stage.getIcons().add(new Image(Objects.requireNonNull(
+                    Main.class.getResourceAsStream("/images/hslogo.jpg")
+            )));
+            fxmlLoader.<MainWindow>getController().start(innkeeper.getGreeting());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
