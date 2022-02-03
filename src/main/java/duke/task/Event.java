@@ -1,7 +1,11 @@
 package duke.task;
 
+import duke.dukeexceptions.DeadlineException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A type of tasks, have a specific ddate
  */
@@ -10,16 +14,24 @@ public class Event extends Task {
     protected String at;
     private LocalDate date;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DeadlineException {
         super(description);
-        this.at = at;
-        this.date = LocalDate.parse(at);
+        try {
+            this.at = at;
+            this.date = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new DeadlineException("Sorry I am stupid, you need to tell me the date as this format:Year-Month-Day e.g: 2022-02-15");
+        }
     }
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) throws DeadlineException {
         super(description, isDone);
-        this.at = at;
-        this.date = LocalDate.parse(at);
+        try {
+            this.at = at;
+            this.date = LocalDate.parse(at);
+        } catch (DateTimeParseException e) {
+            throw new DeadlineException("Sorry I am stupid, you need to tell me the date as this format:Year-Month-Day e.g: 2022-02-15");
+        }
     }
 
     /**

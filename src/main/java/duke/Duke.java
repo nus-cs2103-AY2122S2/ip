@@ -36,11 +36,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (!isExit) {
             try {
-            ui.showLine();
-            String input = sc.nextLine();
-            Command c = Parser.parseCommand(input);
-            c.execute(taskList, ui,storage);
-            isExit = c.isExit();
+                String input = sc.nextLine();
+                ui.showLine();
+                Command c = Parser.parseCommand(input);
+                c.execute(taskList, ui,storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {

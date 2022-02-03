@@ -1,4 +1,6 @@
 package duke;
+
+import duke.dukeexceptions.DeadlineException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -20,7 +22,7 @@ public class Storage {
     /**
      * Will load the data if it exist, if it does not exist, it will create a new file named "tasks.txt"
      * @return An array of loaded tasks
-     * @throws IOException
+     * @throws IOException error loading the file
      */
     public ArrayList<Task> load() throws IOException {
         // TODO: 26/1/2022
@@ -46,7 +48,7 @@ public class Storage {
             }
 
 
-        } catch(IOException e) {
+        } catch(IOException | DeadlineException e) {
             System.out.println(e);
             return result;
         }
@@ -57,21 +59,17 @@ public class Storage {
      * Method to load file line by line and translate them into list of tasks
      * @param path file path to the data
      * @return An array of tasks
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException the file is missing
+     * @throws IOException error loading the file
      */
-    public ArrayList<Task> loadFile(File path) throws FileNotFoundException, IOException {
+    public ArrayList<Task> loadFile(File path) throws FileNotFoundException, IOException, DeadlineException {
         FileReader reader = new FileReader(path);
         BufferedReader br = new BufferedReader(reader);
         ArrayList<Task> result = new ArrayList<>();
         while(br.ready()) {
             String[] task = br.readLine().split(" \\| ");
             boolean done;
-            if (task[1].equals("1")) {
-                done = true;
-            } else {
-                done = false;
-            }
+            done = task[1].equals("1");
             switch (task[0]) {
             case "T":
                 result.add(new Todo(task[2], done));
@@ -90,7 +88,7 @@ public class Storage {
     /**
      * Write current list of tasks into the file
      * @param taskList Current list of tasks
-     * @throws IOException
+     * @throws IOException error loading the file
      */
     public void saveFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
