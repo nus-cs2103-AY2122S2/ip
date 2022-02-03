@@ -11,15 +11,19 @@ import juke.common.Ui;
 public class Juke {
     private static final Juke INSTANCE = new Juke();
     
-    private Ui ui = new Ui();
-    private TaskList taskList = new TaskList();
-    private final Storage storage = new Storage();
-    private boolean hasExited = false;
+    private TaskList taskList;
+    private Ui ui;
+    private Storage storage;
+    private boolean hasExited;
     
     /**
      * Constructor that initializes the application.
      */
     public Juke() {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage(this);
+        this.hasExited = false;
         CommandHandler.registerCommands();
     }
     
@@ -221,21 +225,21 @@ public class Juke {
     */
     
     /**
-     * Returns the UI class used to handle inputs and outputs.
-     *
-     * @return Ui.
-     */
-    public Ui getUi() {
-        return this.ui;
-    }
-    
-    /**
      * Returns the list used to store tasks.
      *
      * @return TaskList.
      */
     public TaskList getTaskList() {
         return this.taskList;
+    }
+    
+    /**
+     * Returns the UI class used to handle inputs and outputs.
+     *
+     * @return Ui.
+     */
+    public Ui getUi() {
+        return this.ui;
     }
     
     /**

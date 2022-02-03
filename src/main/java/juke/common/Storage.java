@@ -20,13 +20,14 @@ public class Storage {
     /**
      * Reference to the Juke instance.
      */
-    private final Juke juke = Juke.getInstance();
+    private final Juke juke;
     
     private static final String PATH_NAME = "data/juke.txt";
     
     private File file = new File(PATH_NAME);;
     
-    public Storage() {
+    public Storage(Juke instance) {
+        this.juke = instance;
         this.initialiseFile();
     }
     
@@ -49,7 +50,9 @@ public class Storage {
             try {
                 Task task = this.decode(args);
                 if (task != null) {
-                    this.juke.getTaskList().add(task);
+                    this.juke
+                        .getTaskList()
+                        .add(task);
                 }
             } catch (JukeException e) {
                 this.juke.getUi().formattedPrint(e.getMessage());
