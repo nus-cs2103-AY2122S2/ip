@@ -36,9 +36,13 @@ public class Ui {
     }
 
     public static void printInvalidCommand() {
-        System.out.println("Command is invalid, please try again!");
+        System.out.println("☹ OOPS!!! command is invalid, please try again!");
     }
 
+    public static void printFindResultHeader(String keyword) {
+        System.out.println("Here are the matching tasks in your list containing "
+                + "\"" + keyword + "\"" + ":");
+    }
     /**
      * Iterates and prints through the tasks
      *

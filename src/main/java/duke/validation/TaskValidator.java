@@ -15,7 +15,6 @@ public class TaskValidator {
      * @throws DukeException if date input from user is invalid
      */
     public static LocalDate convertDate(final String date) throws DukeException {
-        boolean valid = false;
 
         try {
             // ResolverStyle.STRICT for 30, 31 days checking, and also leap year.

@@ -30,9 +30,7 @@ public class FindCommand extends Command {
                 return;
             }
 
-            System.out.println("Here are the matching tasks in your list containing "
-                                + "\"" + keyword + "\"" + ":");
-
+            Ui.printFindResultHeader(keyword);
             Ui.printTasks(foundTasks);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter keyword of task to search!");

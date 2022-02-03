@@ -73,26 +73,26 @@ public class Parser {
         String command = userInput.split(" ")[0].toLowerCase(Locale.ROOT);
 
         switch (command) {
-            case "list":
-                return CommandType.LIST;
-            case "mark":
-                return CommandType.MARK;
-            case "unmark":
-                return CommandType.UNMARK;
-            case "todo":
-                return CommandType.TODO;
-            case "deadline":
-                return CommandType.DEADLINE;
-            case "event":
-                return CommandType.EVENT;
-            case "remove":
-                return CommandType.REMOVE;
-            case "find":
-                return CommandType.FIND;
-            case "bye":
-                return CommandType.BYE;
-            default:
-                return CommandType.NULL;
+        case "list":
+            return CommandType.LIST;
+        case "mark":
+            return CommandType.MARK;
+        case "unmark":
+            return CommandType.UNMARK;
+        case "todo":
+            return CommandType.TODO;
+        case "deadline":
+            return CommandType.DEADLINE;
+        case "event":
+            return CommandType.EVENT;
+        case "remove":
+            return CommandType.REMOVE;
+        case "find":
+            return CommandType.FIND;
+        case "bye":
+            return CommandType.BYE;
+        default:
+            return CommandType.NULL;
         }
     }
 }
