@@ -1,6 +1,6 @@
 Hello from
 ----YALE----
-Hi, I'm Yale!
+Hi, I'm yale.Yale!
 
 Enter command below:
 Got it! I've added this task:

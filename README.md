@@ -1,4 +1,4 @@
-# Yale project template
+# yale.Yale project template
 
 This is a project template for a greenfield Java project. It's named after Yale-NUS. Given below are instructions on how to use it.
 
@@ -13,11 +13,11 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Yale.java` file, right-click it, and choose `Run Yale.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+3. After that, locate the `src/main/java/yale.Yale.java` file, right-click it, and choose `Run yale.Yale.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
 
 Allow me to introduce myself
 -----YALE-----
-The name's Yale.
+The name's yale.Yale.
 
 
 Enter command below:

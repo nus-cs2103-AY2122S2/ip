@@ -19,26 +19,26 @@ public class Parser {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void performAction(String command, TaskList list) {
+    public String performAction(String command, TaskList list) {
         if (command.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
+            return "Bye. Hope to see you again soon!";
         } else if (command.equals("list")) {
-            list.listFeature(command, list);
+            return list.listFeature(command, list);
         } else if (command.contains("delete")) {
-            list.deleteFeature(command, list);
+            return list.deleteFeature(command, list);
         } else if (command.contains("mark") || command.contains("unmark")) {
-            list.markFeature(command, list);
+            return list.markFeature(command, list);
         } else if (command.contains("todo")) {
-            list.todoFeature(command, list);
+            return list.todoFeature(command, list);
         } else if (command.contains("deadline")) {
-            list.deadlineFeature(command, list);
+            return list.deadlineFeature(command, list);
         } else if (command.contains("event")) {
-            list.eventFeature(command, list);
+            return list.eventFeature(command, list);
         } else if (command.contains("find")) {
-            list.findFeature(command, list);
+            return list.findFeature(command, list);
         } else {
-            System.out.println("Error: " + command
-                    + " is not a valid command. Please try again.");
+            return "Error: " + command
+                    + " is not a valid command. Please try again.";
         }
     }
 }

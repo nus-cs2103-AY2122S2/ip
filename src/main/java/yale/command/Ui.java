@@ -7,6 +7,10 @@ import java.util.Scanner;
  * with the user.
  */
 public class Ui {
+    private static final String LOGO = "-----YALE-----";
+    private static final String WELCOME_MESSAGE = "Allow me to introduce myself\n"
+            + LOGO + "\nThe name's Yale.";
+    private static final String ENTER_COMMAND = "\nEnter command below:";
 
     /**
      * Constructor method.
@@ -18,10 +22,16 @@ public class Ui {
      * Prints out welcome message
      * to user when program starts.
      */
-    public void welcomePrompt() {
-        String logo = "-----YALE-----";
-        System.out.println("Allow me to introduce myself\n" + logo);
-        System.out.println("The name's Yale.");
+    public static String welcomePrompt() {
+        return WELCOME_MESSAGE + ENTER_COMMAND;
+    }
+
+    public static String getEnterCommand() {
+        return ENTER_COMMAND;
+    }
+
+    public String showExceptionError(Exception e) {
+        return e.getMessage();
     }
 
     /**
@@ -31,7 +41,7 @@ public class Ui {
      * @return Input.
      */
     public String receiveInput(Scanner scanner) {
-        System.out.println("\nEnter command below:");
+        System.out.println(ENTER_COMMAND);
         String input = scanner.nextLine();
         return input;
     }

@@ -1,3 +1,5 @@
+package yale;
+
 import yale.command.Parser;
 import yale.command.Storage;
 import yale.command.Ui;
@@ -26,9 +28,28 @@ public class Yale {
      */
     public Yale() {
         ui = new Ui();
-        storage = new Storage(FILE_PATH);
         parser = new Parser();
-        list = new TaskList();
+        storage = new Storage(FILE_PATH);
+        try {
+            ui.welcomePrompt();
+            String fileData = storage.loadFileContents();
+            list = new TaskList();
+            list.importIn(fileData);
+        } catch (Exception e) {
+            ui.showExceptionError(e);
+            list = new TaskList();
+        }
+
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String output = parser.performAction(input, list);
+        storage.writeTextTo(list);
+        return output;
     }
 
     /**
