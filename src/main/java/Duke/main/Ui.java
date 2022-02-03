@@ -4,7 +4,7 @@ package Duke.main;
  * user interface class
  */
 public class Ui {
-    public static final String LINE = "\n_______________________^_^__________________________________\n";
+    public static final String LINE = "_______________________^_^__________________________________\n";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -53,7 +53,7 @@ public class Ui {
      */
     public static void markErrorMessage() {
         System.out.println(LINE + "☹ OOPS!!! this task number is invalid\n"
-                + "enter: 'list' for all available task" + LINE);
+                + "enter: 'list' for all available task\n" + LINE);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Ui {
      */
     public static void deadlineErrorMessage() {
         System.out.println(LINE + "☹ OOPS!!! deadline task need to be in this format:\n"
-                + "(deadline description /by yyyy-mm-dd)" + LINE);
+                + "(deadline description /by yyyy-mm-dd)\n" + LINE);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Ui {
      */
     public static void eventErrorMessage() {
         System.out.println(LINE + "☹ OOPS!!! event task need to be in this format:\n"
-                + "(event description /at yyyy-mm-dd)" + LINE);
+                + "(event description /at yyyy-mm-dd)\n" + LINE);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Ui {
      */
     public static void localDateErrorMessage() {
         System.out.println(LINE + "☹ OOPS!!! the Date need to be in this format:\n"
-                + "yyyy-mm-dd" + LINE);
+                + "yyyy-mm-dd\n" + LINE);
     }
 
     /**
@@ -123,7 +123,7 @@ public class Ui {
                 + "To view all task available: list\n"
                 + "To add more task: todo ...   deadline .../...    event .../...  or mark/unmark taskNumber\n"
                 + "To delete any task available: delete taskNumber\n"
-                + "please try again" + LINE);
+                + "please try again\n" + LINE);
     }
 
 

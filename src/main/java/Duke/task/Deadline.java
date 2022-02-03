@@ -34,7 +34,7 @@ public class Deadline extends Task implements Serializable {
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + super.getStatusIcon() + "] " + super.getDescription() +
-                "by (" + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] " + super.getDescription()
+                + "by (" + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

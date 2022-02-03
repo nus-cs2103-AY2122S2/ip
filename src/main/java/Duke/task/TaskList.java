@@ -41,7 +41,7 @@ public class TaskList extends ArrayList<Task> {
         taskList.add(t);
         Ui.addTaskMessage();
         System.out.println(t);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n" + Ui.LINE);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskList extends ArrayList<Task> {
         taskList.add(d);
         Ui.addTaskMessage();
         System.out.println(d);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n" + Ui.LINE);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList extends ArrayList<Task> {
         taskList.add(e);
         Ui.addTaskMessage();
         System.out.println(e);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n" + Ui.LINE);
     }
 
     /**
@@ -74,7 +74,7 @@ public class TaskList extends ArrayList<Task> {
         Ui.deleteTaskMessage();
         System.out.println(taskList.get(taskNum));
         taskList.remove(taskNum);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n" + Ui.LINE);
     }
 
 }

@@ -34,7 +34,7 @@ public class Event extends Task implements Serializable {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() +
-                "at (" + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription()
+                + "at (" + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

@@ -68,7 +68,7 @@ public class Parser {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks.getTaskList().get(taskNum).markAsDone();
                 Ui.markMessage();
-                System.out.println(tasks.getTaskList().get(taskNum) + Ui.LINE);
+                System.out.println(tasks.getTaskList().get(taskNum) + "\n" + Ui.LINE);
                 storage.writeToFile(tasks);
             } catch (IndexOutOfBoundsException exp) {
                 Ui.markErrorMessage();
@@ -79,7 +79,7 @@ public class Parser {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks.getTaskList().get(taskNum).markAsNotDone();
                 Ui.unmarkMessage();
-                System.out.println(tasks.getTaskList().get(taskNum) + Ui.LINE);
+                System.out.println(tasks.getTaskList().get(taskNum) + "\n" + Ui.LINE);
                 storage.writeToFile(tasks);
             } catch (IndexOutOfBoundsException exp) {
                 Ui.markErrorMessage();
@@ -140,7 +140,7 @@ public class Parser {
                     for (int i = 1; i <= foundTasks.size(); i++) {
                         System.out.println(i + "." + foundTasks.get(i - 1));
                     }
-                    System.out.println(Ui.LINE);
+                    System.out.println("\n" + Ui.LINE);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.findErrorMessage();
