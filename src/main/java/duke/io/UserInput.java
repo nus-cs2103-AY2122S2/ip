@@ -50,6 +50,7 @@ public class UserInput {
 
     /**
      * A method to get the time of a task.
+     *
      * @return String of the time.
      */
     public String getTime() {
@@ -58,6 +59,7 @@ public class UserInput {
 
     /**
      * A method to check if a task is done.
+     *
      * @return Boolean value of the task being done or undone.
      */
     public boolean getIsDone() {
@@ -66,7 +68,8 @@ public class UserInput {
 
     /**
      * Set the user's input command as another.
-     * @param command Another command in String
+     *
+     * @param command Another command in String.
      */
     public void setCommand(String command) {
         this.command = command;
@@ -74,7 +77,8 @@ public class UserInput {
 
     /**
      * Set the user's input description as another.
-     * @param description Another description in String
+     *
+     * @param description Another description in String.
      */
     public void setDescription(String description) {
         this.description = description;
@@ -82,7 +86,8 @@ public class UserInput {
 
     /**
      * Set the user's input time as another.
-     * @param time Another time in String
+     *
+     * @param time Another time in String.
      */
     public void setTime(String time) {
         this.time = time;

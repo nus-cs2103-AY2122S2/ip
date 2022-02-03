@@ -203,7 +203,7 @@ public class TaskList {
     /**
      * Getter method to retrieve the task list.
      *
-     * @return task list
+     * @return task list.
      */
     public ArrayList<Task> getList() {
         return this.list;

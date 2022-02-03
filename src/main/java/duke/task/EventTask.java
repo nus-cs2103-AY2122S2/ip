@@ -3,27 +3,27 @@ package duke.task;
 /**
  * Inherit from Task.
  * This is an EventTask.
- * Has extra time field to capture the date of event of this task.
+ * Has extra deadline field to capture the date of event of this task.
  */
 public class EventTask extends Task {
-    private String time;
+    private String deadline;
 
-    public EventTask(String taskName, String time) {
+    public EventTask(String taskName, String deadline) {
         super(taskName);
-        this.time = time;
+        this.deadline = deadline;
     }
 
-    public EventTask(String taskName, String time, boolean isDone) {
+    public EventTask(String taskName, String deadline, boolean isDone) {
         super(taskName, isDone);
-        this.time = time;
+        this.deadline = deadline;
     }
 
-    public String getTime() {
-        return this.time;
+    public String getDeadline() {
+        return this.deadline;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]" + super.toString() + "(%s)", this.time.replaceFirst(" ", ": "));
+        return String.format("[E]" + super.toString() + "(%s)", this.deadline.replaceFirst(" ", ": "));
     }
 }

@@ -26,14 +26,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Duke is a task tracker interactive chatbot.
+ * Duke is a task tracker interactive chat-bot.
  *
  * @author Chen Yu An
- * @version v0.1
+ * @version v0.2
  */
 public class Duke extends Application {
     private final Scanner scanner = new Scanner(System.in);
-    private boolean endProgram = false; // state to terminate the program
+    private boolean isRunning = false; // state to terminate the program
 
     private Storage storage;
     private TaskList taskList;
@@ -70,7 +70,7 @@ public class Duke extends Application {
         storage.loadFile(taskList);
         ui.welcomeMessage();
 
-        while (!endProgram) {
+        while (!isRunning) {
             try {
                 String input = scanner.nextLine(); // user input
 
@@ -81,7 +81,7 @@ public class Duke extends Application {
                 // exit program when user input "bye"
                 if (command.equals("bye")) {
                     ui.endProgram();
-                    endProgram = true;
+                    isRunning = true;
                     break;
                 }
 
@@ -250,8 +250,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Process the response based on the user's input.
+     *
+     * @param input User's input.
+     * @return Response in String.
      */
     private String getResponse(String input) {
         try {
@@ -261,7 +263,7 @@ public class Duke extends Application {
             // exit program when user input "bye"
             if (command.equals("bye")) {
                 String returnMessage = ui.endProgramFX();
-                endProgram = true;
+                isRunning = true;
                 return returnMessage;
             }
 
