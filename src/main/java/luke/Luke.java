@@ -6,17 +6,18 @@ import java.util.List;
 
 import luke.commands.Command;
 import luke.commands.CommandResult;
+import luke.commands.Result;
 import luke.data.TaskList;
 import luke.parser.Parser;
 import luke.storage.StorageFile;
-import luke.ui.Ui;
 
 /**
  * Implements the Luke chat bot.
  */
 public class Luke {
 
-    private Ui ui;
+    private static final String DATABASE_SUCCESS_MESSAGE = "Database initialized successfully!";
+
     private TaskList taskList;
     private StorageFile storageFile;
 
@@ -28,14 +29,14 @@ public class Luke {
      * @param filePath The specified file path to the data file.
      */
     Luke(String filePath) {
-        ui = new Ui();
         taskList = new TaskList();
         try {
             storageFile = new StorageFile(filePath);
         } catch (IOException e) {
-            ui.showError(e.getMessage() + "\n Goodbye...");
+            System.err.println(e.getMessage());
             System.exit(1);
         }
+        initializeStorage();
     }
 
     /**
@@ -56,39 +57,26 @@ public class Luke {
                 }
             }
         } catch (FileNotFoundException e) {
-            ui.showError(e.getMessage());
+            System.err.println(e.getMessage());
         } catch (NumberFormatException e) {
-            ui.showError(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
     /**
-     * Starts the chat bot by initalizing storage and printing greeting message.
-     * Loops until the exit command is issued.
+     * Returns the response from the bot based on the user input.
+     *
+     * @param input The user input to interpret.
+     * @return The result from the bot.
      */
-    public void start() {
-        initializeStorage();
-        boolean isExit = false;
-        ui.greeting();
-        while (!isExit) {
-            try {
-                Command cmd = Parser.parse(ui.readInput());
-                CommandResult response = cmd.execute(taskList);
-                ui.showOutput(response.getResult());
-                isExit = cmd.isExitCmd();
-                storageFile.save(taskList);
-            } catch (IOException e) {
-                ui.showError(e.getMessage());
-            }
+    public Result getResponse(String input) {
+        Command cmd = Parser.parse(input);
+        CommandResult response = cmd.execute(taskList);
+        try {
+            storageFile.save(taskList);
+        } catch (IOException e) {
+            return new CommandResult(e.getMessage());
         }
-        ui.close();
-    }
-
-    /**
-     * Entry point of the whole chat bot.
-     */
-    public static void main(String[] args) {
-        Luke luke = new Luke("data/luke.txt");
-        luke.start();
+        return response;
     }
 }
