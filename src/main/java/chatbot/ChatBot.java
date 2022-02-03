@@ -1,80 +1,30 @@
 package chatbot;
 
-import chatbot.command.CommandOutput;
-import chatbot.command.DeadlineCommand;
-import chatbot.command.DeleteCommand;
-import chatbot.command.EventCommand;
-import chatbot.command.FindCommand;
-import chatbot.command.ListCommand;
-import chatbot.command.MarkCommand;
-import chatbot.command.ResetCommand;
-import chatbot.command.TerminateCommand;
-import chatbot.command.ToDoCommand;
-import chatbot.command.UnmarkCommand;
-import chatbot.task.TaskList;
-import chatbot.util.Parser;
-import chatbot.util.Ui;
+import chatbot.gui.MainWindow;
 
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Task management chat bot.
  */
-public class ChatBot {
-    private static final String BOT_NAME = "Delphine";
-    private static final String SAVE_FILE_PATH = "./data/save_file";
-    private static final String LOGO =
-              "⣿⡟⠙⠛⠋⠩⠭⣉⡛⢛⠫⠭⠄⠒⠄⠄⠄⠈⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
-            + "⣿⡇⠄⠄⠄⠄⣠⠖⠋⣀⡤⠄⠒⠄⠄⠄⠄⠄⠄⠄⠄⠄⣈⡭⠭⠄⠄⠄⠉⠙\n"
-            + "⣿⡇⠄⠄⢀⣞⣡⠴⠚⠁⠄⠄⢀⠠⠄⠄⠄⠄⠄⠄⠄⠉⠄⠄⠄⠄⠄⠄⠄⠄\n"
-            + "⣿⡇⠄⡴⠁⡜⣵⢗⢀⠄⢠⡔⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄\n"
-            + "⣿⡇⡜⠄⡜⠄⠄⠄⠉⣠⠋⠠⠄⢀⡄⠄⠄⣠⣆⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸\n"
-            + "⣿⠸⠄⡼⠄⠄⠄⠄⢰⠁⠄⠄⠄⠈⣀⣠⣬⣭⣛⠄⠁⠄⡄⠄⠄⠄⠄⠄⢀⣿\n"
-            + "⣏⠄⢀⠁⠄⠄⠄⠄⠇⢀⣠⣴⣶⣿⣿⣿⣿⣿⣿⡇⠄⠄⡇⠄⠄⠄⠄⢀⣾⣿\n"
-            + "⣿⣸⠈⠄⠄⠰⠾⠴⢾⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⣾⢀⠁⠄⠄⠄⢠⢸⣿⣿\n"
-            + "⣿⣿⣆⠄⠆⠄⣦⣶⣦⣌⣿⣿⣿⣿⣷⣋⣀⣈⠙⠛⡛⠌⠄⠄⠄⠄⢸⢸⣿⣿\n"
-            + "⣿⣿⣿⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠈⠄⠄⠄⠄⠄⠈⢸⣿⣿\n"
-            + "⣿⣿⣿⠄⠄⠄⠘⣿⣿⣿⡆⢀⣈⣉⢉⣿⣿⣯⣄⡄⠄⠄⠄⠄⠄⠄⠄⠈⣿⣿\n"
-            + "⣿⣿⡟⡜⠄⠄⠄⠄⠙⠿⣿⣧⣽⣍⣾⣿⠿⠛⠁⠄⠄⠄⠄⠄⠄⠄⠄⠃⢿⣿\n"
-            + "⣿⡿⠰⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠩⠔⠒⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠐⠘⣿\n"
-            + "⣿⠃⠃⠄⠄⠄⠄⠄⠄⣀⢀⠄⠄⡀⡀⢀⣤⣴⣤⣤⣀⣀⠄⠄⠄⠄⠄⠄⠁⢹";
-
-    private final Parser parser;
-
-    /**
-     * Constructs a chat bot.
-     */
-    public ChatBot() {
-        this.parser = new Parser();
-        this.parser.addCommand(new TerminateCommand());
-        this.parser.addCommand(new DeadlineCommand());
-        this.parser.addCommand(new DeleteCommand());
-        this.parser.addCommand(new EventCommand());
-        this.parser.addCommand(new ListCommand());
-        this.parser.addCommand(new MarkCommand());
-        this.parser.addCommand(new ToDoCommand());
-        this.parser.addCommand(new UnmarkCommand());
-        this.parser.addCommand(new ResetCommand());
-        this.parser.addCommand(new FindCommand());
-    }
-
-    /**
-     * Runs the chat bot.
-     */
-    public void run() {
-        Ui.println(LOGO + String.format("\nHello! I'm %s!\nWhat can I do for you?", BOT_NAME));
-        TaskList taskList = TaskList.create(SAVE_FILE_PATH);
-
-        // User interaction.
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            // Execute command.
-            CommandOutput commandOutput = parser.executeCommand(scanner.nextLine(), taskList);
-            Ui.println(commandOutput.output);
-            Ui.playSound(commandOutput.sfxFile);
-            if (commandOutput.terminate) {
-                break;
-            }
+public class ChatBot extends Application {
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ChatBot.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

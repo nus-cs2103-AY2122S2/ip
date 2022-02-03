@@ -41,19 +41,19 @@ public class EventCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid description\n" + FORMAT, "/audio/notification.wav");
         } else if (startDate == null) {
-            return new CommandOutput("Error: Invalid start date\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid start date\n" + FORMAT, "/audio/notification.wav");
         } else if (startTime == null) {
-            return new CommandOutput("Error: Invalid start time\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid start time\n" + FORMAT, "/audio/notification.wav");
         } else if (endDate == null) {
-            return new CommandOutput("Error: Invalid end date\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid end date\n" + FORMAT, "/audio/notification.wav");
         } else if (endTime == null) {
-            return new CommandOutput("Error: Invalid end time\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid end time\n" + FORMAT, "/audio/notification.wav");
         } else if (startDate.isAfter(endDate)) {
-            return new CommandOutput("Error: Start date cannot be after end date\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Start date cannot be after end date\n" + FORMAT, "/audio/notification.wav");
         } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
-            return new CommandOutput("Error: Start time cannot be after end time\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Start time cannot be after end time\n" + FORMAT, "/audio/notification.wav");
         }
 
         // Add event.
@@ -61,6 +61,6 @@ public class EventCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task,
-                        taskList.size()), "/audio/ding.wav");
+                        taskList.size()), "/audio/notification.wav");
     }
 }

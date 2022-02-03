@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (taskList.isEmpty()) {
-            return new CommandOutput("Task list empty.", "/audio/ding.wav");
+            return new CommandOutput("Task list empty.", "/audio/notification.wav");
         }
 
         StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
@@ -20,6 +20,6 @@ public class ListCommand extends Command {
             output.append(
                     String.format("%d. %s%s", i + 1, taskList.get(i).toString(), i < taskList.size() - 1 ? "\n" : ""));
         }
-        return new CommandOutput(output.toString(), "/audio/ding.wav");
+        return new CommandOutput(output.toString(), "/audio/notification.wav");
     }
 }

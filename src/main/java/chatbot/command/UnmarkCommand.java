@@ -19,9 +19,9 @@ public class UnmarkCommand extends Command {
             Task task = taskList.get(index - 1);
             task.setDone(false);
             return new CommandOutput(String.format("OK, I've marked this task as not done yet:\n  %s", task),
-                    "/audio/ding.wav");
+                    "/audio/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Error: Invalid index\n" + FORMAT, "/audio/notification.wav");
         }
     }
 }

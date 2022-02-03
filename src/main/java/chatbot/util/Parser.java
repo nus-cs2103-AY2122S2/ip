@@ -21,7 +21,7 @@ public class Parser {
         this.unrecognizedCommand = new Command("bye") {
             @Override
             public CommandOutput execute(String[] input, TaskList taskList) {
-                return new CommandOutput("Unrecognised command.", "/audio/ding.wav");
+                return new CommandOutput("Unrecognised command.", "/audio/notification.wav");
             }
         };
     }

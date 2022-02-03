@@ -37,11 +37,11 @@ public class DeadlineCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Invalid description\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Invalid description\n" + FORMAT, "/audio/notification.wav");
         } else if (date == null) {
-            return new CommandOutput("Invalid date\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Invalid date\n" + FORMAT, "/audio/notification.wav");
         } else if (time == null) {
-            return new CommandOutput("Invalid time\n" + FORMAT, "/audio/ding.wav");
+            return new CommandOutput("Invalid time\n" + FORMAT, "/audio/notification.wav");
         }
 
         // Add event.
@@ -49,6 +49,6 @@ public class DeadlineCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task,
-                        taskList.size()), "/audio/ding.wav");
+                        taskList.size()), "/audio/notification.wav");
     }
 }
