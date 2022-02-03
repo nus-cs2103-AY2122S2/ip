@@ -90,7 +90,27 @@ public class TaskList {
             System.out.println(i + "." + tasks.get(i - 1).toString());
         }
     }
+    
+    /**
+     * Prints out all the tasks in the task list that contains the keyword.
+     * 
+     * @param keyword keyword to be contained by the tasks
+     */
+    public void find(String keyword) {
+        ArrayList<Task> searchResults = new ArrayList<>();
 
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                searchResults.add(tasks.get(i));
+            }
+        }
+
+        System.out.println("Here are the matching tasks in your list:");
+        for (int j = 1; j <= searchResults.size(); j++) {
+            System.out.println(j + ". " + searchResults.get(j - 1).toString());
+        }
+    }
+    
     /**
      * Marks the task indexed by the index as done.
      * 
