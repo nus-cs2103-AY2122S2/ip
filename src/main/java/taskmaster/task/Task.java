@@ -1,16 +1,13 @@
 package taskmaster.task;
-
 /**
  * This class encapsulates the information necessary for a user task.
  */
-
-
 public abstract class Task {
     /** Name of the task. **/
     protected String taskName;
 
     /** Status of the task. **/
-    protected Boolean isCompleted;
+    protected boolean isCompleted;
 
     /**
      * Constructor for Task Objects.
