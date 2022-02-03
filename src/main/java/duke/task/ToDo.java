@@ -27,8 +27,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * toString method is overriden to ensure that the String representation of the
-     * ToDo task is readable
+     * Returns the String representation of todo task.
+     * 
+     * @return string representation of todo task
      */
     @Override
     public String toString() {

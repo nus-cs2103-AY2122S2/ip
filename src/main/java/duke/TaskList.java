@@ -19,30 +19,30 @@ public class TaskList {
      * Constructor for TaskList that takes in data from the storage file and
      * constructs a task list from there.
      * 
-     * @param data data read from the storage file
+     * @param tasksArr data read from the storage file
      * @throws DukeException exception when data is corrupted or task list cannot be
      *                       created as intended
      */
-    public TaskList(String[] data) throws DukeException {
+    public TaskList(String[] tasksArr) throws DukeException {
         try {
             tasks = new ArrayList<>();
 
-            for (String task : data) {
-                String[] splitTask = task.split(buffer);
+            for (String task : tasksArr) {
+                String[] taskDetails = task.split(buffer);
 
-                String type = splitTask[0];
-                Boolean marked = (Integer.parseInt(splitTask[1]) > 0);
-                String description = splitTask[2];
+                String type = taskDetails[0];
+                Boolean isMarked = (Integer.parseInt(taskDetails[1]) > 0);
+                String description = taskDetails[2];
 
                 switch (type) {
                     case "T":
-                        tasks.add(new ToDo(description, marked));
+                        tasks.add(new ToDo(description, isMarked));
                         break;
                     case "D":
-                        tasks.add(new Deadline(description, marked));
+                        tasks.add(new Deadline(description, isMarked));
                         break;
                     case "E":
-                        tasks.add(new Event(description, marked));
+                        tasks.add(new Event(description, isMarked));
                         break;
                     default:
                         break;
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * add method takes in a task as input and adds the task to the task list.
+     * Adds the task specified to the task list.
      * 
      * @param task the task to be added
      */
@@ -70,20 +70,20 @@ public class TaskList {
     }
 
     /**
-     * delete method takes in an index and deletes the task indexed by the index.
+     * Deletes the task indexed by the index specified.
      * 
-     * @param idx the index of the task that is to be deleted
+     * @param index the index of the task that is to be deleted
      * @return the task after it is deleted from the task list
      */
-    public Task delete(int idx) {
-        Task temp = tasks.get(idx);
-        tasks.remove(idx);
+    public Task delete(int index) {
+        Task deletedTask = tasks.get(index);
+        tasks.remove(index);
 
-        return temp;
+        return deletedTask;
     }
 
     /**
-     * list method prints out all the tasks in the task list and their index.
+     * Prints out all the tasks in the task list and their index.
      */
     public void list() {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -92,37 +92,37 @@ public class TaskList {
     }
 
     /**
-     * mark method takes in an index and marks the task indexed by the index as
-     * done.
+     * Marks the task indexed by the index as done.
      * 
-     * @param idx the index of the task that is to be marked as done
+     * @param index the index of the task that is to be marked as done
      * @return the task after it is marked as done
      */
-    public Task mark(int idx) {
-        tasks.get(idx).mark();
+    public Task mark(int index) {
+        Task indexedTask = tasks.get(index);
+        indexedTask.mark();
 
-        return tasks.get(idx);
+        return indexedTask;
     }
 
     /**
-     * unmark method takes in an index and marks the task indexed by the index as
-     * not yet done.
+     * Marks the task indexed by the index as not yet done.
      * 
-     * @param idx the index of the task that is to be marked as not yet done
+     * @param index the index of the task that is to be marked as not yet done
      * @return the task after it is marked as not yet done
      */
-    public Task unmark(int idx) {
-        tasks.get(idx).unmark();
+    public Task unmark(int index) {
+        Task indexedTask = tasks.get(index);
+        indexedTask.unmark();
 
-        return tasks.get(idx);
+        return indexedTask;
     }
 
     /**
-     * length method returns the size of the task list.
+     * Returns the number of tasks in the task list.
      * 
      * @return number of tasks in the task list
      */
-    public int length() {
+    public int getNumberOfTasks() {
         return tasks.size();
     }
 }

@@ -27,8 +27,7 @@ public class Duke {
     }
 
     /**
-     * run method initiates the program and outlines the operation backbone of the
-     * program.
+     * Initiates the program and outlines the operation backbone of the program.
      */
     public void run() {
         ui.welcome();
@@ -49,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * main method of Duke is called when code is run.
+     * Runs the Duke program.
      * 
      * @param args
      */

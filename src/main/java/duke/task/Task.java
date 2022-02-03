@@ -36,21 +36,21 @@ public class Task {
     }
 
     /**
-     * mark method marks the task as done.
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * unmark method marks the task as not yet done.
+     * Marks the task as not yet done.
      */
     public void unmark() {
         this.isDone = false;
     }
 
     /**
-     * isDone method returns a boolean value depending on whether the task is done,
+     * Returns a boolean value depending on whether the task is done,
      * if it is then the method returns true.
      * 
      * @return true if the task has been marked as done
@@ -60,20 +60,20 @@ public class Task {
     }
 
     /**
-     * type method returns the type of the task.
+     * Returns the type of the task.
      * 
      * @return the type of task
      */
-    public String type() {
+    public String getType() {
         return type;
     }
 
     /**
-     * description method returns the description of the task.
+     * Returns the description of the task.
      * 
      * @return the description of the task
      */
-    public String description() {
+    public String getDescription() {
         return description;
     }
 }

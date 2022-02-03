@@ -12,7 +12,7 @@ import src.main.java.duke.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Execute method for ListCommand lists out the tasks stored in the tasks list.
+     * Lists out the tasks stored in the tasks list.
      * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
@@ -24,8 +24,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * isExit method checks if this is an exit command, and only returns yes for an
-     * exit command.
+     * Checks if this is an exit command, and only returns true for an exit command.
      */
     @Override
     public boolean isExit() {

@@ -12,9 +12,9 @@ import src.main.java.duke.DukeException;
  */
 public class Event extends Task {
     private static String type = "E";
-    private String printed;
-    private LocalDate date;
-    private LocalTime time;
+    private String printedString;
+    private LocalDate eventDate;
+    private LocalTime eventTime;
 
     /**
      * Constructor for Event that takes in a description of the Event task and
@@ -29,17 +29,17 @@ public class Event extends Task {
     public Event(String description, boolean isDone) throws DukeException {
         super(type, description, isDone);
         try {
-            String[] temp = description.split("/at ");
-            if (temp.length > 1) {
-                String[] temp2 = temp[1].split(" ");
+            String[] splitDescription = description.split("/at ");
+            if (splitDescription.length > 1) {
+                String[] dateTimeArray = splitDescription[1].split(" ");
 
-                if (temp2.length > 1) {
-                    this.date = LocalDate.parse(temp2[0]);
-                    this.time = LocalTime.parse(temp2[1]);
+                if (dateTimeArray.length > 1) {
+                    this.eventDate = LocalDate.parse(dateTimeArray[0]);
+                    this.eventTime = LocalTime.parse(dateTimeArray[1]);
 
-                    this.printed = temp[0] + " (by: "
-                            + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                            + this.time.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
+                    this.printedString = dateTimeArray[0] + " (by: "
+                            + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                            + this.eventTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
                 } else {
                     throw new DukeException(
                             "Please include the time in the deadline in the following manner: yyyy-mm-dd hh:mm");
@@ -65,13 +65,14 @@ public class Event extends Task {
     }
 
     /**
-     * toString method is overriden to ensure that the String representation of the
-     * Event task is readable
+     * Returns the String representation of event task.
+     * 
+     * @return string representation of event task
      */
     @Override
     public String toString() {
-        return this.isDone ? "[E][X] " + this.printed
-                : "[E][ ] " + this.printed;
+        return this.isDone ? "[E][X] " + this.printedString
+                : "[E][ ] " + this.printedString;
     }
 
 }

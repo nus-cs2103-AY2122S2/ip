@@ -11,21 +11,21 @@ import src.main.java.duke.TaskList;
  * the program.
  */
 public class DeleteCommand extends Command {
-    private int idx;
+    private int index;
 
     /**
      * Constructor for DeleteCommand that takes in the index of the task to be
      * deleted from the program.
      * 
-     * @param idx index of task to be deleted
+     * @param index index of task to be deleted
      */
-    public DeleteCommand(int idx) {
-        this.idx = idx;
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
-     * Execute function for DeleteCommand deletes the indexed task from task list,
-     * storage file and updates the user when the task is deleted.
+     * Deletes the indexed task from task list and storage file and updates the user
+     * when the task is deleted.
      * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
@@ -33,14 +33,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task temp = tasks.delete(idx);
-        storage.updateAfterDelete(idx);
-        ui.deleteMessage(temp, tasks.length());
+        Task deletedTask = tasks.delete(index);
+        storage.updateAfterDelete(index);
+        ui.deleteMessage(deletedTask, tasks.getNumberOfTasks());
     }
 
     /**
-     * isExit method checks if this is an exit command, and only returns yes for an
-     * exit command.
+     * Checks if this is an exit command, and only returns true for an exit command.
      */
     @Override
     public boolean isExit() {

@@ -10,7 +10,7 @@ import src.main.java.duke.TaskList;
 public class ExitCommand extends Command {
 
     /**
-     * isExit method checks if this is an exit command, and only returns yes for an
+     * Checks if this is an exit command, and only returns yes for an
      * exit command.
      */
     @Override
@@ -19,8 +19,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Execute method for ExitCommand prints a farewell message to the user and
-     * exits the program.
+     * Prints a farewell message to the user and exits the program.
      * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user

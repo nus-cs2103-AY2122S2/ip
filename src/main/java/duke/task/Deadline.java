@@ -12,9 +12,9 @@ import src.main.java.duke.DukeException;
  */
 public class Deadline extends Task {
     private static String type = "D";
-    private String printed;
-    private LocalDate date;
-    private LocalTime time;
+    private String printedString;
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
 
     /**
      * Constructor for Deadline that takes in a description of the Deadline task and
@@ -29,17 +29,17 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone) throws DukeException {
         super(type, description, isDone);
         try {
-            String[] temp = description.split("/by ");
-            if (temp.length > 1) {
-                String[] temp2 = temp[1].split(" ");
+            String[] splitDescription = description.split("/by ");
+            if (splitDescription.length > 1) {
+                String[] dateTimeArray = splitDescription[1].split(" ");
 
-                if (temp2.length > 1) {
-                    this.date = LocalDate.parse(temp2[0]);
-                    this.time = LocalTime.parse(temp2[1]);
+                if (dateTimeArray.length > 1) {
+                    this.deadlineDate = LocalDate.parse(dateTimeArray[0]);
+                    this.deadlineTime = LocalTime.parse(dateTimeArray[1]);
 
-                    this.printed = temp[0] + " (by: "
-                            + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                            + this.time.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
+                    this.printedString = splitDescription[0] + " (by: "
+                            + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                            + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
                 } else {
                     throw new DukeException(
                             "Please include the time in the deadline in the following manner: yyyy-mm-dd hh:mm");
@@ -66,12 +66,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * toString method is overriden to ensure that the String representation of the
-     * Deadline task is readable
+     * Returns the String representation of deadline task.
+     * 
+     * @return string representation of deadline task
      */
     @Override
     public String toString() {
-        return this.isDone ? "[D][X] " + this.printed
-                : "[D][ ] " + this.printed;
+        return this.isDone ? "[D][X] " + this.printedString
+                : "[D][ ] " + this.printedString;
     }
 }

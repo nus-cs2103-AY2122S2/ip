@@ -29,8 +29,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute function for AddCommand adds the task to TaskList, update the storage
-     * file and notify the user when it's done
+     * Adds the task to TaskList, updates the storage file and notifies the user
+     * when it's done
      * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
@@ -54,12 +54,11 @@ public class AddCommand extends Command {
 
         tasks.add(task);
         storage.updateAfterAdd(task);
-        ui.addMessage(task, tasks.length());
+        ui.addMessage(task, tasks.getNumberOfTasks());
     }
 
     /**
-     * isExit method checks if this is an exit command, and only returns yes for an
-     * exit command.
+     * Checks if this is an exit command, and only returns true for an exit command.
      */
     @Override
     public boolean isExit() {
