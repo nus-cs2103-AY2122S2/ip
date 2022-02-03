@@ -20,7 +20,7 @@ import duke.task.Todo;
  * Parse all user inputs for addition into tasklist
  */
 public class InputParser extends Parser {
-    public void parseInput(String input, TaskList tasks) throws RonException {
+    public String parseInput(String input, TaskList tasks) throws RonException {
         String trimmedText = input.trim();
         if (input.contains("unmark")) {
             int index = Integer.parseInt(input.substring(7)) - 1;
@@ -30,9 +30,8 @@ public class InputParser extends Parser {
             if (!tasks.get(index).getIsDone()) {
                 throw new ToggleException(false);
             }
-            System.out.println("No problem! The following task is marked as not done yet:");
             tasks.get(index).toggleStatus();
-            System.out.println(tasks.get(index));
+            return "No problem! The following task is marked as not done yet:\n" + tasks.get(index);
         } else if (input.contains("mark")) {
             int index = Integer.parseInt(input.substring(5)) - 1;
             if (index >= tasks.size() || index < 0) {
@@ -41,9 +40,8 @@ public class InputParser extends Parser {
             if (tasks.get(index).getIsDone()) {
                 throw new ToggleException(true);
             }
-            System.out.println("Good job! The following task is marked as done:");
             tasks.get(index).toggleStatus();
-            System.out.println(tasks.get(index));
+            return "Good job! The following task is marked as done:\n" + tasks.get(index);
         } else if (input.contains("delete")) {
             if (trimmedText.length() == "delete".length()) {
                 throw new DeleteIndexException();
@@ -52,15 +50,13 @@ public class InputParser extends Parser {
             if (index > tasks.size()) {
                 throw new InvalidIndexException();
             }
-            System.out.println("OK, the following task is removed:");
-            System.out.println(tasks.remove(index - 1));
-            System.out.println("There are " + tasks.size() + " task(s) in the list.");
+            return "OK, the following task is removed:\n" + tasks.remove(index - 1)
+                    + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.equals("list")) {
             if (tasks.size() == 0) {
-                System.out.println("You have no pending tasks on your list :)");
+                return "You have no pending tasks on your list :)";
             } else {
-                System.out.println("The tasks on your list are as follows:");
-                tasks.printTasks();
+                return "The tasks on your list are as follows:\n" + tasks.printTasks();
             }
         } else if (input.contains("todo")) {
             if (input.replace("todo", "").trim().length() == 0) {
@@ -68,9 +64,7 @@ public class InputParser extends Parser {
             }
             Task task = new Todo(input);
             tasks.add(task);
-            System.out.println("Task added!");
-            System.out.println(task);
-            System.out.println("There are " + tasks.size() + " task(s) in the list.");
+            return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("deadline")) {
             if (input.replace("deadline", "").trim().length() == 0) {
                 throw new EmptyDescriptionException("deadline");
@@ -84,9 +78,7 @@ public class InputParser extends Parser {
                 throw new EmptyDescriptionException("deadline");
             }
             tasks.add(task);
-            System.out.println("Task added!");
-            System.out.println(task);
-            System.out.println("There are " + tasks.size() + " task(s) in the list.");
+            return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("event")) {
             if (input.replace("event", "").trim().length() == 0) {
                 throw new EmptyDescriptionException("event");
@@ -97,15 +89,12 @@ public class InputParser extends Parser {
             }
             Task task = new Event(input);
             tasks.add(task);
-            System.out.println("Task added!");
-            System.out.println(task);
-            System.out.println("There are " + tasks.size() + " task(s) in the list.");
+            return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("find")) {
             if (input.replace("find", "").trim().length() == 0) {
                 throw new EmptyDescriptionException("find");
             }
-            System.out.println("Here are some tasks that match your request:");
-            tasks.findTasks(input.substring(5));
+            return "Here are some tasks that match your request:\n" + tasks.findTasks(input.substring(5));
         } else {
             throw (new UnidentifiedException());
         }
