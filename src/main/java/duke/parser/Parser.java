@@ -30,6 +30,7 @@ public class Parser {
      *
      * @param inputTxt The raw input containing the command and parameters.
      * @param tasks    The task store which the user wishes to query or update.
+     * @return A boolean which determines if the input was successfully processed
      */
     public boolean processInput(String inputTxt, Ui ui, TaskStore tasks) {
         String[] split = inputTxt.split(" ");

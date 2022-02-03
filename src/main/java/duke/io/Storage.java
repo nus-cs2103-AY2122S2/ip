@@ -1,6 +1,12 @@
 package duke.io;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.TaskStore;
+import duke.task.Timeable;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +20,7 @@ import java.util.Scanner;
 public class Storage {
     //    Support for OS independent paths
     public static final String PATH = String.join(File.separator, "data", "duke.txt");
-    private File file;
+    private final File file;
 
     public Storage() {
         this.file = new File(PATH);

@@ -5,23 +5,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public interface Timeable {
-    public LocalDate getDate();
+    LocalDate getDate();
 
-    public String getDateString(DateTimeFormatter dateTimeFormat);
+    String getDateString(DateTimeFormatter dateTimeFormat);
 
-    public boolean isSameDate(LocalDate date);
+    boolean isSameDate(LocalDate date);
 
-    public static LocalDate of(String date) throws DateTimeParseException {
+    static LocalDate of(String date) throws DateTimeParseException {
         return LocalDate.parse(date);
     }
 
-    public static DateTimeFormatter getPrintableFormat() {
+    static DateTimeFormatter getPrintableFormat() {
         return DateTimeFormatter.ofPattern("MMM dd yyyy");
     }
 
-    public static DateTimeFormatter getWritableFormat() {
+    static DateTimeFormatter getWritableFormat() {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd");
     }
 
-    ;
 }

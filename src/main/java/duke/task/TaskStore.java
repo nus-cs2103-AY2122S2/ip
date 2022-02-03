@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Represents a collection of the tasks stored in the program.
  */
 public class TaskStore {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskStore() {
         this.tasks = new ArrayList<>(100);

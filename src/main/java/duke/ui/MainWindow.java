@@ -24,18 +24,13 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
-//    private Duke duke;
     private TaskStore tasks;
     private Storage storage;
     private Ui ui;
     private Parser parser;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    TODO: Change if got time
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
     @FXML
     public void initialize() {
@@ -45,10 +40,6 @@ public class MainWindow extends AnchorPane {
     public VBox getDialogContainer() {
         return this.dialogContainer;
     }
-
-//    public void setDuke(Duke d) {
-//        this.duke = d;
-//    }
 
     public void setUi(Ui u) {
         this.ui = u;
@@ -74,11 +65,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
-//        String response = this.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage)
-//                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage));
         boolean isSuccessful = parser.processInput(userInput.getText(),this.ui, this.tasks);
 
         if (isSuccessful) {
@@ -86,10 +73,5 @@ public class MainWindow extends AnchorPane {
         }
 
         userInput.clear();
-    }
-
-//    Temp - to be deleted
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }
