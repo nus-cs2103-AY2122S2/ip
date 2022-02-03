@@ -36,7 +36,7 @@ public class AddCommand extends Command {
         storage.append(
                 task.getAppendData());
 
-        return "Task added:\n" + ui.tab(task.toString());
+        return "Task added:\n" + ui.addTab(task.toString());
     }
 
     @Override

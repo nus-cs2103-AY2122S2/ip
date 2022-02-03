@@ -4,13 +4,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import duke.Duke;
-import duke.Main;
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.task.TaskList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +16,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import duke.Duke;
+import duke.Main;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+
+/**
+ * This control represents the main window of the GUI, consisting of an AnchorPane which contains a dialogue container,
+ * a text field and a send button.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -38,8 +43,8 @@ public class MainWindow extends AnchorPane {
     private Storage storage;
     private TaskList tasks;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates a new main window.
@@ -64,7 +69,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets up the main window.
-     * Binds the scroll pane to the height of the dialogue container so it follows the latest dialogue box.
+     * Binds the scroll pane to the height of the dialogue container, so it follows the latest dialogue box.
      */
     @FXML
     public void initialize() {
@@ -99,9 +104,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets a tasklist object in the main window.
+     * Sets a TaskList object in the main window.
      *
-     * @param tasks the tasklist object to be set
+     * @param tasks the TaskList object to be set
      */
     public void setTaskList(TaskList tasks) {
         this.tasks = tasks;

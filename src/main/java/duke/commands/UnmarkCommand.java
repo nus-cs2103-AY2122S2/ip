@@ -40,7 +40,7 @@ public class UnmarkCommand extends Command {
         Task t = tasks.unmarkTask(targetIndex);
         storage.save(tasks);
 
-        return "No problem, I've marked the task as uncompleted:\n" + ui.tab(t.toString());
+        return "No problem, I've marked the task as uncompleted:\n" + ui.addTab(t.toString());
     }
 
     @Override
