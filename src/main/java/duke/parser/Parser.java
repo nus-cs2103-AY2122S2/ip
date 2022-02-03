@@ -1,6 +1,9 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,10 +16,20 @@ public class Parser {
     }
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    public static final Pattern KEYWORDS_ARGS_FORMAT =
+            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
     public static final Pattern TODO_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)");
-    public static final Pattern EVENT_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)" + " /at (?<time>[^/]+)");
-    public static final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)" + " /by (?<time>[^/]+)");
+
+    public static final Pattern EVENT_ARGS_FORMAT =
+            Pattern.compile("(?<description>[^/]+)" + " /at (?<time>[^/]+)");
+
+    public static final Pattern DEADLINE_ARGS_FORMAT =
+            Pattern.compile("(?<description>[^/]+)" + " /by (?<time>[^/]+)");
+
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 
@@ -64,6 +77,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
             
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -131,6 +147,25 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+    }
+
+    /**
+     * Parses arguments in the context of the find person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private static Command prepareFind(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindCommand(keywordSet);
     }
 
     /**

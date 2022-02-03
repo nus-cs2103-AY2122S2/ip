@@ -1,5 +1,8 @@
 package duke.data.task;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -47,5 +50,9 @@ public class Task {
     public String toStoreInfo() {
         String status = isDone ? "1" : "0";
         return " | " + status + " | " + this.description + "\n";
+    }
+
+    public List<String> getWordsInDescription() {
+        return Arrays.asList(this.description.split("\\s+"));
     }
 }
