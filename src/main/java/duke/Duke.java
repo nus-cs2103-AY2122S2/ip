@@ -31,16 +31,12 @@ public class Duke {
     }
 
     /** Starts up the simple display of Duke application.  */
-    public void run() throws DukeException, IOException {
-        boolean isTerminated = false;
-        while (!isTerminated) {
-            ui.displayCommandMessage(tasks, storage);
-        }
+    public String run() throws DukeException, IOException {
+        return ui.createWelcomeMessage();
     }
 
     /** Obtains Tasks from provided text file */
     public static void main(String[] args) throws DukeException, IOException {
-        //"C:\\NUS\\CS2103\\iP\\data\\duke.txt"
         new Duke().run();
     }
 

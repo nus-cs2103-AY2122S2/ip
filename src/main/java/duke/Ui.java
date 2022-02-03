@@ -16,6 +16,16 @@ public class Ui {
     String line = "____________________________________________________________\n";
     Scanner scanner;
 
+    String listOfCommands = "todo <Description of Task>\n" +
+            "deadline <Description of Task> /by <eg. 2020/May/19>\n" +
+            "event <Description of Task> /at <eg. 2020/May/19>\n" +
+            "list\n" +
+            "mark <Task number>\n" +
+            "unmark <Task number>\n" +
+            "delete <Task number>\n" +
+            "find <Task number>\n" +
+            "bye\n";
+
     /**
      * Constructor.
      * Initialises a scanner for user input and starts up application welcome message.
@@ -29,8 +39,16 @@ public class Ui {
     public String createWelcomeMessage() {
         StringBuilder welcomeMessage = new StringBuilder();
         String welcome = "Welcome to Duke, your personal Task assistant!\n";
-        welcomeMessage.append(line).append(welcome).append(line);
+        welcomeMessage.append(welcome);
+        welcomeMessage.append(createInstructionMessage());
         return welcomeMessage.toString();
+    }
+
+    public String createInstructionMessage() {
+        StringBuilder instructionString = new StringBuilder();
+        String instructions = "These are some of the instructions I can follow: \n";
+        instructionString.append(instructions).append(listOfCommands);
+        return instructionString.toString();
     }
 
     /** Takes in TaskList and Storage objects so that they can be updated with user's commands  */

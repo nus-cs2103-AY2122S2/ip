@@ -31,6 +31,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
     }
 
@@ -44,12 +45,15 @@ public class DialogBox extends HBox {
 
     /** Obtains dialog box for user */
     public static DialogBox getUserDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_RIGHT);
         return new DialogBox(text, img);
     }
 
     /** Obtains dialog box for Duke */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_LEFT);
         db.flip();
         return db;
     }
