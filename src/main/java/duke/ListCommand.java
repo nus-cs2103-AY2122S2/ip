@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Command;
-
 /**
  * Command to show all list items in tasklist
  */

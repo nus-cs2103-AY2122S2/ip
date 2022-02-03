@@ -3,7 +3,6 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 /**
  * Class containing UI functions
  */

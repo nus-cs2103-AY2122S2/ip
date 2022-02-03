@@ -152,26 +152,20 @@ public class Ui {
         return isValidTask(fullCommand) && fullCommand.contains("/at");
     }
 
-    public boolean isValidMark(String fullCommand) {
+    public boolean isValidMarkFormat(String fullCommand) {
         try {
             Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("Wrong mark format!");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             return false;
         }
     }
 
-    public boolean isValidUnmark(String fullCommand) {
+    public boolean isValidUnmarkFormat(String fullCommand) {
         try {
             Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("Wrong unmark format!");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             return false;
         }
     }

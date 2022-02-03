@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 class Parser {
-    private static Ui ui;
+    private final Ui ui;
 
     Parser() {
+        this.ui = new Ui();
     }
 
-    public static Command parse(String command) throws DukeException {
+    public Command parse(String command) throws DukeException {
         String fullCommand = command.toLowerCase();
+        String commandWord = ui.getCommandWord(fullCommand);
         if (fullCommand.equals("bye")) {
             ExitCommand c = new ExitCommand(fullCommand);
             return c;
@@ -20,71 +22,66 @@ class Parser {
         } else if (fullCommand.equals("list")) {
             ListCommand c = new ListCommand(fullCommand);
             return c;
-        } else if (ui.getCommandWord(fullCommand).equals("todo")) {
+        } else if (commandWord.equals("todo")) {
             if (ui.isValidTask(fullCommand)) {
                 String taskName = ui.getTaskName(fullCommand);
                 ToDo todo = new ToDo(taskName);
                 AddCommand addCommand = new AddCommand("todo", todo);
                 return addCommand;
             } else {
-                throw new EmptyDescriptionException("Invalid task!");
+                throw new EmptyDescriptionException("Todo description cannot be empty!");
             }
-        } else if (ui.getCommandWord(fullCommand).equals("deadline")) {
+        } else if (commandWord.equals("deadline")) {
             if (ui.isValidTask(fullCommand)) {
                 if (ui.isValidDeadline(fullCommand)) {
-                    try {
-                        String taskName = ui.getTaskName(fullCommand);
-                        LocalDate localDate = ui.getTaskDate(fullCommand);
-                        Deadline deadline = new Deadline(taskName, localDate);
-                        AddCommand addCommand = new AddCommand("deadline", deadline);
-                        return addCommand;
-                    } catch (DateTimeParseException e) {
-                        ui.showDateTimeParseException();
-                    }
+                    String taskName = ui.getTaskName(fullCommand);
+                    LocalDate localDate = ui.getTaskDate(fullCommand);
+                    Deadline deadline = new Deadline(taskName, localDate);
+                    AddCommand addCommand = new AddCommand("deadline", deadline);
+                    return addCommand;
                 } else {
-                    ui.showInvalidDeadline();
+                    throw new InvalidCommandFormatException("Deadlines must include \"/by\"");
                 }
             } else {
-                ui.showEmptyTask();
+                throw new EmptyDescriptionException("Deadline description cannot be empty!");
             }
-        } else if (ui.getCommandWord(fullCommand).equals("event")) {
+        } else if (commandWord.equals("event")) {
             if (ui.isValidTask(fullCommand)) {
                 if (ui.isValidEvent(fullCommand)) {
-                    try {
-                        String taskName = ui.getTaskName(fullCommand);
-                        LocalDate localDate = ui.getTaskDate(fullCommand);
-                        Event event = new Event(taskName, localDate);
-                        AddCommand addCommand = new AddCommand("event", event);
-                        return addCommand;
-                    } catch (DateTimeParseException e) {
-                        ui.showDateTimeParseException();
-                    }
+                    String taskName = ui.getTaskName(fullCommand);
+                    LocalDate localDate = ui.getTaskDate(fullCommand);
+                    Event event = new Event(taskName, localDate);
+                    AddCommand addCommand = new AddCommand("event", event);
+                    return addCommand;
                 } else {
-                    ui.showInvalidEvent();
+                    throw new InvalidCommandFormatException("Events must include \"/at\"");
                 }
             } else {
-                ui.showEmptyTask();
+                throw new EmptyDescriptionException("Event description cannot be empty!");
             }
-        } else if (ui.getCommandWord(fullCommand).equals("mark")) {
-            if (ui.isValidMark(fullCommand)) {
-                MarkCommand markCommand = new MarkCommand(fullCommand,
-                        ui.markIndex(fullCommand));
+        } else if (commandWord.equals("mark")) {
+            if (ui.isValidMarkFormat(fullCommand)) {
+                MarkCommand markCommand = new MarkCommand(fullCommand, ui.markIndex(fullCommand));
                 return markCommand;
+            } else {
+                throw new InvalidCommandFormatException("Please include item index!");
             }
-        } else if (ui.getCommandWord(fullCommand).equals("unmark")) {
-            if (ui.isValidUnmark(fullCommand)) {
-                UnmarkCommand unmarkCommand = new UnmarkCommand(fullCommand,
-                        ui.markIndex(fullCommand));
+        } else if (commandWord.equals("unmark")) {
+            if (ui.isValidUnmarkFormat(fullCommand)) {
+                UnmarkCommand unmarkCommand = new UnmarkCommand(fullCommand, ui.markIndex(fullCommand));
                 return unmarkCommand;
+            } else {
+                throw new InvalidCommandFormatException("Please include item index!");
             }
-        } else if (ui.getCommandWord(fullCommand).equals("find")) {
+        } else if (commandWord.equals("find")) {
             if (ui.isValidTask(fullCommand)) {
                 FindCommand findCommand = new FindCommand(fullCommand);
                 return findCommand;
             } else {
-                ui.showGeneralException();
+                throw new InvalidCommandFormatException("Invalid find!");
             }
+        } else {
+            throw new InvalidCommandFormatException("INVALID COMMAND WORD TEST!!!");
         }
-        return null;
     }
 }

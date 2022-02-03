@@ -1,8 +1,8 @@
 package duke;
 
-public class InvalidCommandException extends DukeException {
+public class InvalidCommandFormatException extends DukeException {
 
-    InvalidCommandException(String message) {
+    InvalidCommandFormatException(String message) {
         super(message);
     }
 

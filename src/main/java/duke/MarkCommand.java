@@ -14,9 +14,9 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.length()) {
-            ui.showOutOfBounds();
+            throw new OutOfBoundsException("Out of bounds!");
         } else {
             taskList.mark(index);
             ui.showMark(taskList.getTask(index));
