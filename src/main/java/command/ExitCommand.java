@@ -36,7 +36,7 @@ public class ExitCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         if (storage.isUpdated()) {
             try {
                 storage.updateStorage(taskList, taskList.size());
@@ -45,6 +45,6 @@ public class ExitCommand extends Command {
                 ui.admitBug();
             }
         }
-        ui.sayBye();
+        return ui.sayBye();
     }
 }

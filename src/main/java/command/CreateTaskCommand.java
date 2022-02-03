@@ -34,7 +34,7 @@ public class CreateTaskCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         Task newTask;
         String description = generateDescription(cmdArr);
         int cmdLen = cmdArr.length;
@@ -50,7 +50,7 @@ public class CreateTaskCommand extends Command {
         }
         taskList.addTask(newTask);
         storage.needUpdate();
-        ui.addTaskRes(newTask.toString(), taskList.size());
+        return ui.addTaskRes(newTask.toString(), taskList.size());
     }
 
     /** Generate the description of the task from the command String[] */

@@ -28,8 +28,8 @@ public class Command {
      * @param ui The user interface.
      * @param storage The memory storage.
      */
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
-        ui.admitBug();
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
+        return ui.admitBug();
     }
 
     /**

@@ -30,9 +30,9 @@ public class DeleteCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         Task task = taskList.deleteTask(this.index);
         storage.needUpdate();
-        ui.deleteTaskRes(task.toString(), taskList.size());
+        return ui.deleteTaskRes(task.toString(), taskList.size());
     }
 }

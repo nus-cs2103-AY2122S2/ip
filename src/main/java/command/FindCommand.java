@@ -32,11 +32,10 @@ public class FindCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         if (this.command.equals("find")) {
-            ui.filterRes(keyword, taskList.filterByKeyword(keyword).toString());
-        } else {
-            ui.admitBug();
+            return ui.filterRes(keyword, taskList.filterByKeyword(keyword).toString());
         }
+        return ui.admitBug();
     }
 }

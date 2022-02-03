@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
-        ui.listTasks(taskList.toString());
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
+        return ui.listTasks(taskList.toString());
     }
 }

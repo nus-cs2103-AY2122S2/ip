@@ -34,12 +34,12 @@ public class FilterCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         if (this.keyword.equals("date")) {
             Date date = new Date(this.condition);
-            ui.filterRes(this.condition, taskList.filterByDate(date).toString());
+            return ui.filterRes(this.condition, taskList.filterByDate(date).toString());
         } else {
-            ui.admitBug();
+            return ui.admitBug();
         }
     }
 }

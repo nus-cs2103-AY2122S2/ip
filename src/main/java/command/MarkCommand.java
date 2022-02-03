@@ -28,9 +28,9 @@ public class MarkCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         taskList.markAsDone(this.index);
         storage.needUpdate();
-        ui.markAsDoneRes(taskList.get(index).toString());
+        return ui.markAsDoneRes(taskList.get(index).toString());
     }
 }

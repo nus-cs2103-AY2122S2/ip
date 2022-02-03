@@ -28,8 +28,8 @@ public class UnmarkCommand extends Command {
      * @param storage The memory storage.
      */
     @Override
-    public void execute(TaskList taskList, TessUi ui, Storage storage) {
+    public String execute(TaskList taskList, TessUi ui, Storage storage) {
         taskList.markAsUndone(this.index);
-        ui.markAsUndoneRes(taskList.get(index).toString());
+        return ui.markAsUndoneRes(taskList.get(index).toString());
     }
 }
