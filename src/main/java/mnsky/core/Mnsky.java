@@ -1,4 +1,4 @@
-package mnsky;
+package mnsky.core;
 
 import java.util.ArrayList;
 
@@ -49,7 +49,7 @@ public class Mnsky {
             ArrayList<String> parsedInput = Parser.parseInput(input);
             switch (parsedInput.get(0)) {
             case "bye":
-                responses.add(ui.printBye());
+                responses.add("bye");
                 break;
             case "list":
                 responses = ui.printListStrings(taskList.getListStrings());

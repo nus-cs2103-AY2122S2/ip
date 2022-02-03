@@ -1,4 +1,4 @@
-package mnsky;
+package mnsky.core;
 
 import java.io.BufferedWriter;
 import java.io.File;

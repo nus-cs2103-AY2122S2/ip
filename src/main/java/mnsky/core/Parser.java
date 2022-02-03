@@ -1,4 +1,4 @@
-package mnsky;
+package mnsky.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;

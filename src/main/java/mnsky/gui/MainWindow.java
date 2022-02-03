@@ -1,7 +1,8 @@
-package mnsky;
+package mnsky.gui;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import mnsky.core.Mnsky;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -55,6 +57,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
 
         for (String response : responses) {
+            if (response.equals("bye")) {
+                Platform.exit();
+            }
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
         }
 
