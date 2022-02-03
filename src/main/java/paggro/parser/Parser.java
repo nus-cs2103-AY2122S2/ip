@@ -19,6 +19,7 @@ import paggro.exception.PaggroException;
 public class Parser {
     /**
      * Parses the String of user input into a command.
+     *
      * @param input String given by user.
      * @return Command object associated with the input.
      * @throws PaggroException

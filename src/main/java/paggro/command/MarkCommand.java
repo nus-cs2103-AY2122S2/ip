@@ -14,6 +14,7 @@ import paggro.ui.Ui;
 public class MarkCommand extends Command {
     /**
      * Constructor of MarkCommand
+     *
      * @param parameters String of index to be marked as done.
      */
     public MarkCommand(String parameters) {
@@ -22,6 +23,7 @@ public class MarkCommand extends Command {
 
     /**
      * Carries out the execution of the mark command which marks the given task as done.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

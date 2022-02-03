@@ -15,6 +15,8 @@ import paggro.ui.Ui;
 public class ListOnDateCommand extends Command {
     /**
      * Constructor of ListOnDateCommand
+     *
+     * @param parameters String of date to be searched for.
      */
     public ListOnDateCommand(String parameters) {
         super(parameters);
@@ -22,6 +24,7 @@ public class ListOnDateCommand extends Command {
 
     /**
      * Carries out the execution of a listOnDate command which lists out the tasks on a specific date.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

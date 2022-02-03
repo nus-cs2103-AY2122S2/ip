@@ -19,6 +19,7 @@ import paggro.ui.Ui;
 public class EventCommand extends Command {
     /**
      * Constructor of EventCommand object.
+     *
      * @param parameters String containing event description.
      */
     public EventCommand(String parameters) {
@@ -27,6 +28,7 @@ public class EventCommand extends Command {
 
     /**
      * Carries out the execution of a event command which creates a new Event object.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

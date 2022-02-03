@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Returns the goodbye message.
+     *
      * @return String of the message.
      */
     public String showGoodbye() {
@@ -29,6 +30,7 @@ public class Ui {
 
     /**
      * Returns a line separator.
+     *
      * @return String of line.
      */
     public String showLine() {
@@ -37,6 +39,7 @@ public class Ui {
 
     /**
      * Returns the given error message.
+     *
      * @param msg The error message to be printed.
      * @return String of the message.
      */
@@ -46,6 +49,7 @@ public class Ui {
 
     /**
      * Returns a String of each task in the given list of tasks.
+     *
      * @param tasks The given list of tasks.
      * @return String of the tasks.
      */
@@ -67,6 +71,7 @@ public class Ui {
 
     /**
      * Returns the empty date message.
+     *
      * @return String of the message.
      */
     public String showEmptyDate() {
@@ -75,6 +80,7 @@ public class Ui {
 
     /**
      * Returns the marked task message.
+     *
      * @param task Task that was marked.
      * @return String of the message.
      */
@@ -85,6 +91,7 @@ public class Ui {
 
     /**
      * Returns the unmarked task message.
+     *
      * @param task Task that was unmarked.
      * @return String of the message.
      */
@@ -95,6 +102,7 @@ public class Ui {
 
     /**
      * Returns the deleted task message.
+     *
      * @param task Task that was deleted.
      * @return String of the message.
      */
@@ -105,6 +113,7 @@ public class Ui {
 
     /**
      * Returns the added task message.
+     *
      * @param task Task that was added.
      * @return String of the message.
      */
@@ -115,6 +124,7 @@ public class Ui {
 
     /**
      * Returns the given size of task list.
+     *
      * @param size Size of the task list.
      * @return String of the message.
      */

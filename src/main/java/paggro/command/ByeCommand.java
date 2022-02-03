@@ -17,6 +17,7 @@ public class ByeCommand extends Command {
 
     /**
      * Carries out the execution of the Bye command which terminates PaggroBot.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

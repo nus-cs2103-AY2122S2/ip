@@ -11,12 +11,13 @@ import paggro.task.Task;
  */
 public class NotableDate {
     /** The date of the NotableDate object. */
-    LocalDate localDate;
+    private LocalDate localDate;
     /** The list of tasks on the NotableDate. */
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor of NotableDate.
+     *
      * @param date The date of this NotableDate object.
      */
     public NotableDate(LocalDate date) {
@@ -26,6 +27,7 @@ public class NotableDate {
 
     /**
      * Returns the localDate of this NotableDate object.
+     *
      * @return LocalDate of the NotableDate.
      */
     public LocalDate getLocalDate() {
@@ -34,6 +36,7 @@ public class NotableDate {
 
     /**
      * Returns the tasks list of the NotableDate object.
+     *
      * @return ArrayList of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -42,6 +45,7 @@ public class NotableDate {
 
     /**
      * Adds the given task to this NotableDate object's list of task.
+     *
      * @param task Task to be added to the list.
      */
     public void addTask(Task task) {
@@ -50,6 +54,7 @@ public class NotableDate {
 
     /**
      * Returns the String representation of this NotableDate object.
+     *
      * @return String representing this NotableDate.
      */
     @Override

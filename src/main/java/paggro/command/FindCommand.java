@@ -14,6 +14,7 @@ import paggro.ui.Ui;
 public class FindCommand extends Command {
     /**
      * Constructor of FindCommand
+     *
      * @param parameters String key to be searched for.
      */
     public FindCommand(String parameters) {
@@ -22,6 +23,7 @@ public class FindCommand extends Command {
 
     /**
      * Carries out the execution of the find command which prints a list of tasks containing a given search key.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

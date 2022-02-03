@@ -37,6 +37,7 @@ public class PaggroBot {
 
     /**
      * Returns a String response based on the user input.
+     *
      * @param input String of the user input.
      * @return String response based on given input.
      */
@@ -51,7 +52,7 @@ public class PaggroBot {
             response.append(ui.showError(e.getMessage()));
         } finally {
             response.append(ui.showLine());
-            return response.toString();
         }
+        return response.toString();
     }
 }

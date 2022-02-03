@@ -6,6 +6,7 @@ package paggro.exception;
 public class PaggroException extends Exception {
     /**
      * Constructor of PaggroException.
+     *
      * @param msg String of error message related to exception.
      */
     public PaggroException(String msg) {

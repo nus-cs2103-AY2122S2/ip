@@ -17,6 +17,7 @@ import paggro.ui.Ui;
 public class DeleteCommand extends Command {
     /**
      * Constructor of DeleteCommand.
+     *
      * @param parameters String of index to be deleted
      */
     public DeleteCommand(String parameters) {
@@ -25,6 +26,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Carries out the execution of a delete command which removes a task from the list.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

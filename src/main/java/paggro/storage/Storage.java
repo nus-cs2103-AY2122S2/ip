@@ -31,6 +31,7 @@ public class Storage {
 
     /**
      * Constructor of Storage.
+     *
      * @param filePath The path of the file to be used for storage.
      */
     public Storage(String filePath) {
@@ -40,6 +41,7 @@ public class Storage {
 
     /**
      * Loads the list of stored tasks into the Lister object.
+     *
      * @return The Lister object with uploaded tasks from storage.
      * @throws PaggroException
      */
@@ -73,9 +75,9 @@ public class Storage {
                 Task t;
                 switch (type) {
                 case 'T':
-                    details = taskString.split(" ");
-                    isDone = Boolean.parseBoolean(details[2]);
-                    des = details[4];
+                    details = taskString.split(" \\| ", 3);
+                    isDone = Boolean.parseBoolean(details[1]);
+                    des = details[2];
                     tasks.add(new ToDo(des, isDone));
                     break;
                 case 'E':
@@ -128,6 +130,7 @@ public class Storage {
 
     /**
      * Adds a given task to the data file to be stored.
+     *
      * @param task Task to be stored.
      * @throws IOException
      */
@@ -143,6 +146,7 @@ public class Storage {
 
     /**
      * Removes a tasks at a given line of the file from the storage.
+     *
      * @param lineNum The line number containing the task to be removed.
      * @throws IOException
      */
@@ -167,6 +171,7 @@ public class Storage {
 
     /**
      * Marks the task at a given line of the file as done in storage.
+     *
      * @param lineNum The line number containing the task to be marked.
      * @param task The task to be marked as done.
      * @throws IOException
@@ -194,6 +199,7 @@ public class Storage {
 
     /**
      * Unmarks the task at a given line of the file as not done in storage.
+     *
      * @param lineNum The line number containing the task to be unmarked.
      * @param task The task to be unmarked as done.
      * @throws IOException

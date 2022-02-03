@@ -14,6 +14,7 @@ import paggro.ui.Ui;
 public class UnmarkCommand extends Command {
     /**
      * Constructor of UnmarkCommand
+     *
      * @param parameters String of index to be unmarked as not done.
      */
     public UnmarkCommand(String parameters) {
@@ -22,6 +23,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Carries out the execution of the unmark command which unmarks the given task as not done.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

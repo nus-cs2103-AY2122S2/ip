@@ -12,7 +12,7 @@ public abstract class Command {
     /**
      * The arguments of a command, if applicable
      */
-    String parameters;
+    private String parameters;
     /**
      * Default constructor for commands with no parameters.
      */
@@ -30,6 +30,7 @@ public abstract class Command {
 
     /**
      * Returns parameters of the command.
+     *
      * @return String of parameters.
      */
     public String getParameters() {
@@ -47,6 +48,7 @@ public abstract class Command {
 
     /**
      * Carries out execution of given command.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

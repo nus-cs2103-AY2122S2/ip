@@ -12,9 +12,9 @@ import paggro.task.Task;
  */
 public class Lister {
     /** The list of tasks in the Lister object */
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     /** A HashMap mapping LocalDates with a NotableDate object */
-    public HashMap<LocalDate, NotableDate> dateMap;
+    private HashMap<LocalDate, NotableDate> dateMap;
 
     /**
      * Default constructor of Lister object when Storage is empty.
@@ -26,6 +26,7 @@ public class Lister {
 
     /**
      * Constructor of Lister when there are tasks to load from Storage.
+     *
      * @param tasks ArrayList of tasks from storage.
      * @param dateMap HashMap loaded from storage.
      */
@@ -36,6 +37,7 @@ public class Lister {
 
     /**
      * Returns the tasks list of the Lister object.
+     *
      * @return ArrayList of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -52,6 +54,7 @@ public class Lister {
 
     /**
      * Adds the given task to the tasks list.
+     *
      * @param task Task that is given as input.
      */
     public void add(Task task) {
@@ -60,6 +63,7 @@ public class Lister {
 
     /**
      * Marks the task at index i of the list as done.
+     *
      * @param i The index of the list to be marked.
      */
     public void mark(int i) {
@@ -69,6 +73,7 @@ public class Lister {
 
     /**
      * Unmarks the task at index i of the list as done.
+     *
      * @param i The index of the list to be unmarked.
      */
     public void unmark(int i) {
@@ -78,6 +83,7 @@ public class Lister {
 
     /**
      * Deletes the task at index i of the list.
+     *
      * @param i The index of the list to be deleted.
      */
     public void delete(int i) {
@@ -86,6 +92,7 @@ public class Lister {
 
     /**
      * Checks if the given LocalDate has already been noted.
+     *
      * @param lDate The LocalDate in question.
      * @return The mapped NotableDate if it has already been stored, else a newly initialised NotableDate.
      */
@@ -102,6 +109,7 @@ public class Lister {
 
     /**
      * Returns a list of tasks that contain the given keyword.
+     *
      * @param key String of the keyword to search for.
      * @return ArrayList of tasks with keyword.
      */

@@ -15,6 +15,7 @@ import paggro.ui.Ui;
 public class ToDoCommand extends Command {
     /**
      * Constructor of ToDoCommand object.
+     *
      * @param parameters String containing event description.
      */
     public ToDoCommand(String parameters) {
@@ -23,6 +24,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Carries out the execution of a ToDocommand which creates a new ToDo object.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

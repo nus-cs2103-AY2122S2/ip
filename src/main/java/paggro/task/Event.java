@@ -16,6 +16,7 @@ public class Event extends Task {
 
     /**
      * Default constructor of Event.
+     *
      * @param des String description of the Event object.
      * @param date The date on which the Task is due.
      * @param isDone A boolean indicating if the task is done.
@@ -27,6 +28,7 @@ public class Event extends Task {
 
     /**
      * Constructor of the Event object specifying if the task is complete.
+     *
      * @param des String description of the Event object.
      * @param date The date on which the event is occurring.
      * @param isDone A boolean indicating if the task is done.
@@ -39,6 +41,7 @@ public class Event extends Task {
 
     /**
      * Returns the NotableDate of the Event object.
+     *
      * @return NotableDate of the event.
      */
     public NotableDate getDate() {
@@ -47,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Parses the task into a string formatted to be saved to storage.
+     *
      * @return String to be saved to storage.
      */
     @Override
@@ -64,6 +68,7 @@ public class Event extends Task {
 
     /**
      * Returns a String representation of the Event object.
+     *
      * @return String representing the Event object.
      */
     @Override

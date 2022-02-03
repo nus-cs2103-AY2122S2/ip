@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Default constructor of Deadline.
+     *
      * @param des String description of the Deadline object.
      * @param date The date on which the Task is due.
      * @param isDone A boolean indicating if the task is done.
@@ -27,6 +28,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of Deadline object specifying if the task is complete.
+     *
      * @param des String description of the Deadline object.
      * @param date The date on which the Task is due.
      * @param isDone A boolean indicating if the task is done.
@@ -39,6 +41,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the NotableDate of the Deadline object.
+     *
      * @return NotableDate of the deadline.
      */
     public NotableDate getDate() {
@@ -47,6 +50,7 @@ public class Deadline extends Task {
 
     /**
      * Parses the task into a string formatted to be saved to storage.
+     *
      * @return String to be saved to storage.
      */
     @Override
@@ -64,6 +68,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a String representation of the Deadline object.
+     *
      * @return String representing the Deadline object.
      */
     @Override

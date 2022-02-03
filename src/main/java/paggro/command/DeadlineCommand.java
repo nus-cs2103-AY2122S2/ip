@@ -19,6 +19,7 @@ import paggro.ui.Ui;
 public class DeadlineCommand extends Command {
     /**
      * Constructor of DeadlineCommand object.
+     *
      * @param parameters String containing deadline description.
      */
     public DeadlineCommand(String parameters) {
@@ -27,6 +28,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Carries out the execution of a deadline command which creates a new Deadline object.
+     *
      * @param lister The Lister object for the command to execute on.
      * @param ui The Ui object for the command to execute on.
      * @param storage The Storage object for the command to execute on.

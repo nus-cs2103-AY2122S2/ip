@@ -5,12 +5,13 @@ package paggro.task;
  */
 public abstract class Task {
     /** The description of the Task object. */
-    String description;
+    private String description;
     /** The boolean indicating if the task is complete. */
-    boolean isDone;
+    private boolean isDone;
 
     /**
      * Default constructor of Task.
+     *
      * @param des String description of Task object.
      */
     public Task(String des) {
@@ -20,6 +21,7 @@ public abstract class Task {
 
     /**
      * Constructor of Task specifying if it is complete.
+     *
      * @param des String description of Task object.
      * @param isDone A boolean indicating if the task is complete.
      */
@@ -30,6 +32,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the Task object.
+     *
      * @return String description of the task.
      */
     public String getDescription() {
@@ -38,6 +41,7 @@ public abstract class Task {
 
     /**
      * Checks if the Task object is done.
+     *
      * @return True if the task is done and false otherwise.
      */
     public boolean isDone() {
@@ -54,6 +58,7 @@ public abstract class Task {
 
     /**
      * Parses the task into a string formatted to be saved to storage.
+     *
      * @return String to be saved to storage.
      */
     public abstract String parseTask();
