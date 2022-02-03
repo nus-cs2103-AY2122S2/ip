@@ -218,4 +218,178 @@ public class Parser {
             throw new InvalidArgumentException("Please enter deadline date in: yyyy-mm-dd");
         }
     }
+
+    /**
+     * Takes in the line that is read by the FileReader and parses the line to create the arguments required
+     * to create the respective tasks upon loading the file on start up. This is assuming that the file does exist.
+     * @param line String, the line of the text file that contains the text for a singular task.
+     *             Format is:
+     *             Todo objects: taskNumber. [T][ ] borrow book
+     *             Deadline objects: taskNumber. [D][ ] buy equipment (by: Feb 1 2022)
+     *             Event objects: taskNumber. [E][ ] project meeting (at: Mon 2-4pm)
+     * @return String[][], an array of arguments required create the object:
+     *          [ [taskArgs], [ type ], [ isDone ] ]
+     */
+    public String[][] parseFileLine(String line) {
+        String[] splitArr = line.split("\\[");
+        // Task type
+        String type = parseTaskInLine(splitArr);
+        // done or not
+        String isDone = isDoneStatusInLine(splitArr);
+        // Task args
+        String[] taskArgs = null;
+        switch (type) {
+        case "todo":
+            taskArgs = parseToDoInLine(splitArr);
+            break;
+        case "deadline":
+            taskArgs = parseDeadlineInLine(splitArr);
+            break;
+        case "event":
+            taskArgs = parseEventInLine(splitArr);
+            break;
+        default:
+            break;
+        }
+        return new String[][]{ taskArgs, new String[]{ type }, new String[]{ isDone } };
+    }
+
+    /**
+     * Takes in the result of the split array by open brackets and
+     * parses out the task type
+     * @param splitArr
+     * @return String, the task type
+     */
+    String parseTaskInLine(String[] splitArr) {
+        String letter = splitArr[1].substring(0, 1);
+        String type = null;
+        switch (letter) {
+        case "T":
+            type = "todo";
+            break;
+        case "D":
+            type = "deadline";
+            break;
+        case "E":
+            type = "event";
+            break;
+        default:
+            break;
+        }
+        return type;
+    }
+
+    /**
+     * Parses the splitArr to get the done status of the task
+     * @param splitArr, array split by [
+     * @return String, indicating the done status: " " or "X"
+     */
+    String isDoneStatusInLine(String[] splitArr) {
+        return splitArr[2].substring(0, 1);
+    }
+
+    /**
+     * Parses the event in the line inside the text file to return its
+     * description and timing at, in a String[]
+     * @param splitArr String[], array split by [
+     * @return String[], args for creating event
+     */
+    String[] parseEventInLine(String[] splitArr) {
+        String parsingPart = splitArr[2];
+        String[] parsedArr = parsingPart.split(" \\(at: ");
+        String description = parsedArr[0].split(".] ")[1];
+        String at = removeEndBracket(parsedArr[1]);
+        return new String[]{ description, at };
+    }
+
+    /**
+     * Parses the deadline in the line inside the text file to return its
+     * description and timing by, in a String[]
+     * @param splitArr String[], array split by [
+     * @return String[], args for creating deadline
+     */
+    String[] parseDeadlineInLine(String[] splitArr) {
+        String parsingPart = splitArr[2];
+        String[] parsedArr = parsingPart.split(" \\(by: ");
+        String description = parsedArr[0].split(".] ")[1];
+        String by = removeEndBracket(parsedArr[1]);
+        String byInLocalDateFormat = changeDateFormat(by);
+        return new String[]{ description, byInLocalDateFormat };
+    }
+
+    /**
+     * Parses the ToDo in the line inside the text file to return its
+     * description, in a String[]
+     * @param splitArr String[], array split by [
+     * @return String[], args for creating todo
+     */
+    String[] parseToDoInLine(String[] splitArr) {
+        String parsingPart = splitArr[2];
+        String description = parsingPart.split(".] ")[1];
+        return new String[]{ description };
+    }
+
+    /**
+     * Takes in a String that is partially parsed of form ....)
+     * @param str String
+     * @return String, without end bracket
+     */
+    String removeEndBracket(String str) {
+        return str.substring(0, str.length() - 1);
+    }
+
+    /**
+     * Takes in the date in the line of text file and converts it to
+     * yyyy-mm-dd format so we can create it as LocalDate object
+     * @param date, in format mmm dd yyyy
+     * @return date in yyyy-mm-dd format
+     */
+    String changeDateFormat(String date) {
+        String[] splitArr = date.split(" ");
+        String year = splitArr[2];
+        String day = splitArr[1];
+        String month = splitArr[0];
+        String numericMonth = null;
+        switch (month) {
+        case "Jan":
+            numericMonth = "01";
+            break;
+        case "Feb":
+            numericMonth = "02";
+            break;
+        case "Mar":
+            numericMonth = "03";
+            break;
+        case "Apr":
+            numericMonth = "04";
+            break;
+        case "May":
+            numericMonth = "05";
+            break;
+        case "Jun":
+            numericMonth = "06";
+            break;
+        case "Jul":
+            numericMonth = "07";
+            break;
+        case "Aug":
+            numericMonth = "08";
+            break;
+        case "Sep":
+            numericMonth = "09";
+            break;
+        case "Oct":
+            numericMonth = "10";
+            break;
+        case "Nov":
+            numericMonth = "11";
+            break;
+        case "Dec":
+            numericMonth = "12";
+            break;
+        default:
+            break;
+        }
+        return String.format("%s-%s-%s", year, numericMonth, day);
+    }
 }

@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import bernie.Bernie;
+import bernie.storage.Storage;
+import bernie.commands.CommandHandler;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Bernie bernie;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image bernieImage = new Image(this.getClass().getResourceAsStream("/images/DaBernie.png"));
+    private Image bernieImage = new Image(this.getClass().getResourceAsStream("/images/DaBernie.jpg"));
 
     @FXML
     public void initialize() {
@@ -36,6 +38,10 @@ public class MainWindow extends AnchorPane {
 
     public void setBernie(Bernie b) {
         bernie = b;
+        CommandHandler commandHandler = b.getCommandHandler();
+        InputResponder inputResponder = commandHandler.getInputResponder();
+        Storage storage = commandHandler.getStorage();
+        handleStartUp(inputResponder.greet(), storage.loadTasks(commandHandler));
     }
 
     /**
@@ -55,5 +61,14 @@ public class MainWindow extends AnchorPane {
         if (response == "See ya!") {
             Platform.exit();
         }
+    }
+
+    private void handleStartUp(String greetMsg, String loadMsg) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBernieDialog(greetMsg, bernieImage)
+        );
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBernieDialog(loadMsg, bernieImage)
+        );
     }
 }

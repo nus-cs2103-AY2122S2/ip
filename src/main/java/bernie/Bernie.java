@@ -12,19 +12,9 @@ public class Bernie {
         this.commandHandler = new CommandHandler();
     }
 
-    /**
-     * Runs Bernie to help you remember your tasks. CommandHandler
-     * is responsible for handling user inputs accordingly.
-     * @param args String[]
-     */
-    /**
-    public static void main(String[] args) {
-        CommandHandler commandHandler = new CommandHandler();
-        commandHandler.run();
+    public CommandHandler getCommandHandler() {
+        return commandHandler;
     }
-
-     */
-
     /**
      * Returns the appropriate response based on the user input given
      * @param input String, the user input

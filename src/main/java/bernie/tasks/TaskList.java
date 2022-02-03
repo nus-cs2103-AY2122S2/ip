@@ -162,4 +162,47 @@ public class TaskList {
         }
         return s.toString();
     }
+
+    /**
+     * Initialises the tasks that are loaded via the Storage on start up
+     * @param taskArgs String[], parsed by the parser, for creation of tasks
+     * @param type Task type
+     * @param isDone if the task is done or not: in symbol "X" for done, " " for not done
+     */
+    public void initTask(String[] taskArgs, String type, String isDone) {
+        Task newTask = null;
+        String description;
+        String by;
+        String at;
+        switch (type) {
+        case "todo":
+            description = taskArgs[0];
+            newTask = new ToDo(description);
+            if (isDone.equals("X")) {
+                newTask.markDone();
+            }
+            break;
+        case "deadline":
+            description = taskArgs[0];
+            // need convert Jan 28 2022 to 2022-01-28 LocalDate
+            by = taskArgs[1];
+            LocalDate localDate = LocalDate.parse(by);
+            newTask = new Deadline(description, localDate);
+            if (isDone.equals("X")) {
+                newTask.markDone();
+            }
+            break;
+        case "event":
+            description = taskArgs[0];
+            at = taskArgs[1];
+            newTask = new Event(description, at);
+            if (isDone.equals("X")) {
+                newTask.markDone();
+            }
+            break;
+        default:
+            break;
+        }
+        tasks.add(newTask);
+    }
 }

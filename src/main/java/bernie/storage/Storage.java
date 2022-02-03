@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import bernie.commands.CommandHandler;
 import bernie.tasks.Task;
 import bernie.tasks.TaskList;
 
@@ -32,13 +33,17 @@ public class Storage {
     /**
      * Loads the data when Bernie starts up if it exists and reads. If doesn't
      * exist, creates the required files
+     * @param commandHandler, to initialize the tasks on load
      * @return String, the resulting message
      */
-    public String loadTasks() {
-        StringBuilder s = new StringBuilder();
+    public String loadTasks(CommandHandler commandHandler) {
         try {
+            if (tasksFile.length() == 0) {
+                return "Nothing on your previous list!";
+            }
             if (tasksFile.exists() && dataDir.exists()) {
-                s.append("On the list:\n");
+                StringBuilder s = new StringBuilder();
+                s.append("Previously on the list:\n");
                 FileReader fileReader = new FileReader(tasksFile);
                 BufferedReader reader = new BufferedReader(fileReader);
                 while (true) {
@@ -46,6 +51,7 @@ public class Storage {
                     if (line == null) {
                         break;
                     }
+                    commandHandler.initTaskOnLoad(line);
                     s.append(line + "\n");
                 }
                 reader.close();
@@ -54,7 +60,7 @@ public class Storage {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
-                return "Didn't find any existing files, created one for you!";
+                return "Didn't find any existing task files, created one for you!";
             }
         } catch (IOException e) {
             return e.getMessage();

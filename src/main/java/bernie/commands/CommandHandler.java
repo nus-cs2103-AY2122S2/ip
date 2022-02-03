@@ -29,6 +29,14 @@ public class CommandHandler {
         this.parser = new Parser(tasks);
     }
 
+    public InputResponder getInputResponder() {
+        return inputResponder;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
     /**
      * Commands are performed according to the input, done by creating the respective commands and
      * executing it. Parser helps to determine the Type given the user input. inputResponder displays to
@@ -75,6 +83,15 @@ public class CommandHandler {
         } catch (Exception e) {
             return inputResponder.showErrorMsg(e.getMessage());
         }
+    }
 
+    public void initTaskOnLoad(String line) {
+        // calls parser to parse line
+        String[][] args = parser.parseFileLine(line);
+        String[] taskArgs = args[0];
+        String type = args[1][0];
+        String isDone = args[2][0];
+        // gets tasks to createTask
+        tasks.initTask(taskArgs, type, isDone);
     }
 }
