@@ -1,20 +1,25 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
-public class UI {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+public class TextUI {
+    private static final String LOGO = "                                                           \n"
+        + "    /$$$$$  /$$$$$$  /$$$$$$$  /$$    /$$ /$$$$$$  /$$$$$$ \n"
+        + "   |__  $$ /$$__  $$| $$__  $$| $$   | $$|_  $$_/ /$$__  $$\n"
+        + "      | $$| $$  \\ $$| $$  \\ $$| $$   | $$  | $$  | $$  \\__/\n"
+        + "      | $$| $$$$$$$$| $$$$$$$/|  $$ / $$/  | $$  |  $$$$$$ \n"
+        + " /$$  | $$| $$__  $$| $$__  $$ \\  $$ $$/   | $$   \\____  $$\n"
+        + "| $$  | $$| $$  | $$| $$  \\ $$  \\  $$$/    | $$   /$$  \\ $$\n"
+        + "|  $$$$$$/| $$  | $$| $$  | $$   \\  $/    /$$$$$$|  $$$$$$/\n"
+        + " \\______/ |__/  |__/|__/  |__/    \\_/    |______/ \\______/ \n"
+        + "                                                           ";
     private static final String SEPARATOR = "____________________________________________________________";
     private static final String EXIT_MSG = "Bye. Hope to see you again soon!";
     private static final String GREET_MSG = "Hello! I'm Jarvis\nWhat can I do for you?";
 
     private final Scanner sc;
 
-    public UI() {
+    public TextUI() {
         this.sc = new Scanner(System.in);
     }
 
@@ -52,6 +57,7 @@ public class UI {
      * Prints the greeting message.
      */
     public void greet() {
+        System.out.println(LOGO);
         printMsg(GREET_MSG);
     }
 
