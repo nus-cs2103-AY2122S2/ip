@@ -70,9 +70,6 @@ public class Duke {
                     pastTasks.add(parser.parseTodos(command));
                     storage.save();
 
-                    pastTasks.add(parser.parseTodos(command));
-                    storage.save();
-
                     ui.printMessage(String.format("""
                             Got it. I've added this task:
                             %s
