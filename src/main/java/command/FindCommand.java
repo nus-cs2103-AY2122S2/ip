@@ -26,7 +26,8 @@ public class FindCommand extends Command {
      * @param s Storage for saving to file
      */
     public String execute(TaskList t, Storage s) {
-        String foundTasks = t.findTask(this.body);
+        String[] st = this.body.split(" ");
+        String foundTasks = t.findTask(st);
 
         if (foundTasks.equals("")) {
             return ("Cannot find the task you want!");

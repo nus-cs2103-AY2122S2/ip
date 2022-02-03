@@ -127,13 +127,15 @@ public class TaskList {
      * @param toFind the keyword by user to find
      * @return String of the found tasks
      */
-    public String findTask(String toFind) {
+    public String findTask(String... toFind) {
         String s = "";
         int counter = 1;
         for (int i = 0; i < count; i++) {
-            if (tasks.get(i).description.contains(toFind)) {
-                s += "\n" + counter + ". " + tasks.get(i).toString();
-                counter++;
+            for (String si : toFind) {
+                if (tasks.get(i).description.contains(si)) {
+                    s += "\n" + counter + ". " + tasks.get(i).toString();
+                    counter++;
+                }
             }
         }
 
