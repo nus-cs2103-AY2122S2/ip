@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
-import duke.util.TaskList;
 import duke.util.Storage;
+import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
@@ -12,8 +11,8 @@ import duke.util.Ui;
  */
 public class FindCommand extends Command {
 
-    private final String keyword;
     public static final String COMMAND_WORD = "find";
+    private final String keyword;
 
 
     /**

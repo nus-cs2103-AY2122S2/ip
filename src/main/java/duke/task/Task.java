@@ -7,6 +7,11 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a Task that is initially undone.
+     *
+     * @param description Description of Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -32,5 +37,5 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.getTaskDescription();
     }
 
-    abstract public String toSave();
+    public abstract String toSave();
 }

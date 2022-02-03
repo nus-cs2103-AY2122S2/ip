@@ -1,7 +1,6 @@
 package duke.util;
 
 import java.io.PrintStream;
-
 import java.util.Scanner;
 
 /**
@@ -9,20 +8,20 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final static PrintStream OUT = System.out;
-    private final static Scanner IN = new Scanner(System.in);
+    private static final PrintStream OUT = System.out;
+    private static final Scanner IN = new Scanner(System.in);
 
-    private final String HELP = "\tA 'bye' command will exit the program, yarr.\n";
-    private final String LINE = "\t___________________________________________________________\n";
-    private final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
-    private final String REQUEST_NEXT_COMMAND_ANGRY = "\tAye Aye, better get it right this time. Your next command:";
-    private final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
-    private final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
-    private final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
-    private final String TASK_MATCH = "\tAvast ye Matey. Here goes your matching tasks in your task list:\n";
-    private final String TASK_UNCHECKED = "\tAlright matey, hurry up and finish up this task arrr:\n";
-    private final String WELCOME_MESSAGE = "\tAhoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
-    private final String WELCOME_QUESTION = "\tWhat can I do for you? Your command:\n";
+    private static final String HELP = "\tA 'bye' command will exit the program, yarr.\n";
+    private static final String LINE = "\t___________________________________________________________\n";
+    private static final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
+    private static final String REQUEST_NEXT_COMMAND_ANGRY = "\tAye Aye, better get it right this time. Your next command:";
+    private static final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
+    private static final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
+    private static final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
+    private static final String TASK_MATCH = "\tAvast ye Matey. Here goes your matching tasks in your task list:\n";
+    private static final String TASK_UNCHECKED = "\tAlright matey, hurry up and finish up this task arrr:\n";
+    private static final String WELCOME_MESSAGE = "\tAhoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
+    private static final String WELCOME_QUESTION = "\tWhat can I do for you? Your command:\n";
 
     /**
      * Reads the user input.
@@ -87,7 +86,7 @@ public class Ui {
     }
 
     /**
-     * Prints a line separator.
+     * Prints a LINE separator.
      */
     public void showLine() {
         OUT.println(LINE);

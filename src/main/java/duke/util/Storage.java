@@ -1,30 +1,27 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Utility class to load a saved file, or save to a file.
  */
 public class Storage {
 
-    private static String FILE_PATH;
+    private static String filePath;
 
     /**
      * Creates a new instance of Storage that loads the history from a specific path
      * or creates a new file for saving tasks
      */
     public Storage(String filePath) {
-        this.FILE_PATH = filePath;
+        Storage.filePath = filePath;
     }
 
     /**
@@ -32,10 +29,10 @@ public class Storage {
      */
     public Scanner load() throws DukeException {
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(filePath);
             return new Scanner(file);
         } catch (IOException e) {
-            File fileDir = new File("src/main/java/Duke/data");
+            File fileDir = new File("src/main/java/duke/data");
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "duke.txt");
             Scanner sc = null;
@@ -56,7 +53,7 @@ public class Storage {
      */
     public static void append(String content) {
         try {
-            FileWriter writer = new FileWriter(FILE_PATH, true);
+            FileWriter writer = new FileWriter(filePath, true);
             writer.write(content);
             writer.close();
         } catch (IOException e) {
@@ -74,7 +71,7 @@ public class Storage {
         }
 
         try {
-            FileWriter writer = new FileWriter(FILE_PATH, false);
+            FileWriter writer = new FileWriter(filePath, false);
             writer.write(result);
             writer.close();
         } catch (IOException e) {

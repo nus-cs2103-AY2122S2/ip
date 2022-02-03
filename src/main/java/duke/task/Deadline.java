@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a deadline to be fulfilled. This deadline is a task that possesses a state/status that is by default
@@ -43,7 +43,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(pattern) + " " + time +")";
+        return "[D]" + super.toString() + " (by: " + date.format(pattern) + " " + time + ")";
     }
 
     /**

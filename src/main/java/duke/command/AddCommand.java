@@ -1,11 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.task.Task;
-
-import duke.util.TaskList;
 import duke.util.Storage;
+import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
@@ -13,8 +11,8 @@ import duke.util.Ui;
  */
 public class AddCommand extends Command {
 
-    private final Task task;
     public static final String COMMAND_WORD = "add";
+    private final Task task;
 
     /**
      * Constructor for AddCommand which adds the provided task.

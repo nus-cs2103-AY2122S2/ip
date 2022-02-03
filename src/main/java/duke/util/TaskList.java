@@ -1,26 +1,24 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Utility class to keep track of list of added task.
  */
 public class TaskList {
 
+    private static final String TASK_ADDED = "\tTask Added, arrgh:\n";
     private final ArrayList<Task> taskList;
-    private final String TASK_ADDED = "\tTask Added, arrgh:\n";
     private int taskCount = 0;
     private Ui ui = new Ui();
 
@@ -72,7 +70,6 @@ public class TaskList {
             if (savedData[1].equals("1")) {
                 task.markAsDone();
             }
-//            System.out.println("Task added.\n");
             taskList.add(task);
         }
     }
@@ -87,7 +84,8 @@ public class TaskList {
             this.taskList.add(task);
             this.taskCount++;
             System.out.println(TASK_ADDED + "\t" + taskList.get(this.taskCount - 1).toString());
-            System.out.println("\tNow you have " + this.taskCount + " tasks in your task list arrr, better get workin' aye!\n");
+            System.out.println("\tNow you have " + this.taskCount
+                    + " tasks in your task list arrr, better get workin' aye!\n");
             ui.requestNextCommand();
         } else {
             ui.showError("\tTask is invalid matey :-(, please try again!\n");
@@ -112,12 +110,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task or tasks that matches the given keyword
+     *
+     * @param keyword keyword to be found in list of tasks
+     */
     public void findTaskMatchingKeyword(String keyword) {
         List<Task> matchingTask = new ArrayList<>();
-//        this.taskList.forEach(x -> {
-//            boolean hasKeyword = x.getTaskDescription().contains(keyword);
-//            keywordMatchedList.add(hasKeyword);
-//        });
         matchingTask = this.taskList.stream()
                 .filter(str -> str.getTaskDescription().trim().contains(keyword))
                 .collect(Collectors.toList());

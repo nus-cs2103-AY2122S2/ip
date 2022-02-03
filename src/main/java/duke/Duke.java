@@ -1,16 +1,14 @@
 package duke;
 
-import duke.command.Command;
+import java.io.FileNotFoundException;
+
 import duke.command.ByeCommand;
-
+import duke.command.Command;
 import duke.exception.DukeException;
-
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.io.FileNotFoundException;
 
 /**
  * Represents a chat-bot program named Duke.
@@ -22,7 +20,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke chat-bot program which initialises with a saved file (if applicable), list of tasks, and system Ui.
+     * Constructor for Duke chat-bot program which initialises with a saved file (if applicable),
+     * list of tasks, and system Ui.
      */
     public Duke(String filePath) {
         ui = new Ui();

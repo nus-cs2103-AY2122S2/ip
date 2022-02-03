@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Represents an event to be done. This event is a task that possesses a state/status that is by default
@@ -43,7 +43,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(pattern) + " " + time +  ")";
+        return "[E]" + super.toString() + " (at: " + date.format(pattern) + " " + time +")";
     }
 
     /**
