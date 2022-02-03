@@ -1,8 +1,9 @@
 package Duke.task;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.Serializable;
+
 
 /**
  * a subclass of task
