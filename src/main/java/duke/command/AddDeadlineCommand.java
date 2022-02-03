@@ -42,19 +42,19 @@ public class AddDeadlineCommand extends Command {
      * @throws DateTimeParseException if wrong format datetime
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException, DateTimeParseException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException, DateTimeParseException {
         String[] deadlineDetail = commandArgument.split(PREFIX_BY_DEADLINE, 2);
         if (deadlineDetail.length != 2) {
             throw new MissingDateTimeException();
         }
 
-            Task currentTask = new Deadline(deadlineDetail[0], deadlineDetail[1]);
-            tasks.addTask(currentTask);
+        Task currentTask = new Deadline(deadlineDetail[0], deadlineDetail[1]);
+        tasks.addTask(currentTask);
 
-            ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
-            storage.writeTaskToFile(tasks);
-
-    }
+        storage.writeTaskToFile(tasks);
+        return ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
 
     }
+
+}
 

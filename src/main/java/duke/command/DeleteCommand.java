@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
      * @throws IOException if file not found
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, IOException {
         int index = Integer.parseInt(commandArgument) - 1;
         if (index < 0 || index > tasks.getNumberOfTasks() - 1) {
             throw new InvalidIndexException();
@@ -43,8 +43,8 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.getTaskByIndex(index);
         tasks.removeTaskByIndex(index);
 
-        ui.printConfirmDelete(deletedTask, tasks.getNumberOfTasks());
         storage.writeTaskToFile(tasks);
+        return ui.printConfirmDelete(deletedTask, tasks.getNumberOfTasks());
 
     }
 }

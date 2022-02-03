@@ -31,11 +31,11 @@ public class AddTodoCommand extends Command {
      * @throws IOException if file not found
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Task currentTask = new Todo(commandArgument);
         tasks.addTask(currentTask);
 
-        ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
         storage.writeTaskToFile(tasks);
+        return ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
     }
 }

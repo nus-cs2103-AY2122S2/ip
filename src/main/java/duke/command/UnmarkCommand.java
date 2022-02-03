@@ -35,14 +35,14 @@ public class UnmarkCommand extends Command {
      * @throws IOException if file not found
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, IOException {
         int index = Integer.parseInt(commandArgument) - 1;
         if (index < 0 || index > tasks.getNumberOfTasks() - 1) {
             throw new InvalidIndexException();
         }
         Task currentTask = tasks.getTaskByIndex(index);
         currentTask.markAsNotDone();
-        ui.printConfirmUnmark(currentTask);
         storage.writeTaskToFile(tasks);
+        return ui.printConfirmUnmark(currentTask);
     }
 }
