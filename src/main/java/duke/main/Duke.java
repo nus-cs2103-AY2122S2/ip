@@ -4,17 +4,17 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 public class Duke {
+    private static final String FILE_PATH = "data/tasks.txt";
     private final Ui ui;
     private TaskList tasks;
     private final Storage storage;
 
     /**
      * Constructs a Duke program that stores task data at the specified file path.
-     * @param filePath String representing path for storage
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
