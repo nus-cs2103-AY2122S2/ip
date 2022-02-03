@@ -1,24 +1,24 @@
 package baron.util;
 
-import baron.exceptions.BaronException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import baron.exceptions.BaronException;
 
 public class DateTimeUtilTest {
     @Test
     public void getDateTime_validString_success() throws BaronException {
-        assertEquals(LocalDateTime.of(2022,12,1,0,11),
+        assertEquals(LocalDateTime.of(2022, 12, 1, 0, 11),
                 DateTimeUtil.getDateTime("1/12/2022 00:11"));
     }
 
     @Test
     public void getDateTime_validStringWithPadding_success() throws BaronException {
-        assertEquals(LocalDateTime.of(2022,2,1,0,11),
+        assertEquals(LocalDateTime.of(2022, 2, 1, 0, 11),
                 DateTimeUtil.getDateTime("01/02/2022 00:11"));
     }
 
@@ -54,11 +54,11 @@ public class DateTimeUtilTest {
 
     @Test
     public void getSaveString_validLocalDateTime_success() {
-        assertEquals("12/2/2011 01:02", DateTimeUtil.getSaveString(LocalDateTime.of(2011,2,12,1,2)));
+        assertEquals("12/2/2011 01:02", DateTimeUtil.getSaveString(LocalDateTime.of(2011, 2, 12, 1, 2)));
     }
 
     @Test
     public void getDisplayString_validLocalDateTime_success() {
-        assertEquals("Feb 12 2011, 01:02", DateTimeUtil.getDisplayString(LocalDateTime.of(2011,2,12,1,2)));
+        assertEquals("Feb 12 2011, 01:02", DateTimeUtil.getDisplayString(LocalDateTime.of(2011, 2, 12, 1, 2)));
     }
 }

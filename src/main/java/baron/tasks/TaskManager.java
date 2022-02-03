@@ -1,11 +1,11 @@
 package baron.tasks;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import baron.exceptions.BaronException;
 import baron.message.Message;
 import baron.util.DateTimeUtil;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Represents a manager that keeps track of all the tasks in an {@code ArrayList},

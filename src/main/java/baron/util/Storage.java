@@ -1,13 +1,5 @@
 package baron.util;
 
-import baron.exceptions.BaronException;
-import baron.message.Message;
-import baron.tasks.Deadline;
-import baron.tasks.Event;
-import baron.tasks.Task;
-import baron.tasks.TaskType;
-import baron.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +7,14 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import baron.exceptions.BaronException;
+import baron.message.Message;
+import baron.tasks.Deadline;
+import baron.tasks.Event;
+import baron.tasks.Task;
+import baron.tasks.TaskType;
+import baron.tasks.ToDo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the data file.

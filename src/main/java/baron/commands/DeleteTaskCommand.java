@@ -4,7 +4,6 @@ import baron.exceptions.BaronException;
 import baron.message.Message;
 import baron.tasks.Task;
 import baron.tasks.TaskManager;
-import baron.tasks.TaskType;
 import baron.util.Storage;
 
 /**

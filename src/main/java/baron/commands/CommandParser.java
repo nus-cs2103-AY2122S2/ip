@@ -13,7 +13,7 @@ public class CommandParser {
      * @param arg the argument of {@code String} type.
      * @return the integer represented by the given string.
      * @throws BaronException if NumberFormatException is thrown by Integer.parseInt.
-     * @see Integer#parseInt(String) 
+     * @see Integer#parseInt(String)
      */
     public static int parseTaskIntArg(String arg) throws BaronException {
         if (arg.isBlank()) {

@@ -1,11 +1,11 @@
 package baron.util;
 
-import baron.exceptions.BaronException;
-import baron.message.Message;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import baron.exceptions.BaronException;
+import baron.message.Message;
 
 /**
  * A utility class used to process DateTime with all static members, mainly used to convert
@@ -26,7 +26,7 @@ public class DateTimeUtil {
      * @param dateTimeString the string to be parsed.
      * @return date/time of {@code LocalDateTime} type from {@code dateTimeString}.
      * @throws BaronException If {@code DateTimeParseException} is thrown by {@code LocalDateTime.parse}
-     * @see LocalDateTime#parse(CharSequence, DateTimeFormatter) 
+     * @see LocalDateTime#parse(CharSequence, DateTimeFormatter)
      */
     public static LocalDateTime getDateTime(String dateTimeString) throws BaronException {
         try {

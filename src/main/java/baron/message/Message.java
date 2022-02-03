@@ -16,7 +16,8 @@ public class Message {
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Data file format is invalid.";
     public static final String MESSAGE_FILE_CREATION_FAIL = "Data file cannot be created.";
     public static final String MESSAGE_FILE_WRITE_FAIL = "Data file cannot be written to.";
-    public static final String MESSAGE_DATE_TIME_FORMAT_INVALID = "The date/time should be in the following format: d/M/yyyy HH:mm";
+    public static final String MESSAGE_DATE_TIME_FORMAT_INVALID = "The date/time should be in the "
+            + "following format: d/M/yyyy HH:mm";
 
     /**
      * Generates the message to show the number of tasks.

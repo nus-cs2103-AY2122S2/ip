@@ -1,7 +1,5 @@
 package baron.tasks;
 
-import baron.exceptions.BaronException;
-
 /**
  * An abstract class that represents a basic task in real-life that contains all the basic
  * characteristics and behaviour of a basic task.

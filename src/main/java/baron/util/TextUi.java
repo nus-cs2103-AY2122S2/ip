@@ -23,12 +23,12 @@ public class TextUi {
      * Shows welcome message and shows how many tasks user has.
      */
     public void showWelcomeMessage() {
-        String logo = "______                       \n" +
-                "| ___ \\                      \n" +
-                "| |_/ / __ _ _ __ ___  _ __  \n" +
-                "| ___ \\/ _` | '__/ _ \\| '_ \\ \n" +
-                "| |_/ / (_| | | | (_) | | | |\n" +
-                "\\____/ \\__,_|_|  \\___/|_| |_|\n";
+        String logo = "______                       \n"
+                + "| ___ \\                      \n"
+                + "| |_/ / __ _ _ __ ___  _ __  \n"
+                + "| ___ \\/ _` | '__/ _ \\| '_ \\ \n"
+                + "| |_/ / (_| | | | (_) | | | |\n"
+                + "\\____/ \\__,_|_|  \\___/|_| |_|\n";
         String message = "What can I do for you?";
         System.out.println("Hello from\n" + logo + Message.generateNoOfTasksMessage(this.taskManager.getTaskCount())
                 + "\n" + message);

@@ -1,13 +1,13 @@
 package baron;
 
+import java.util.Scanner;
+
 import baron.commands.Command;
 import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
 import baron.util.TextUi;
-
-import java.util.Scanner;
 
 /**
  * Main class for the Baron application that user uses to run. The Baron application keeps and

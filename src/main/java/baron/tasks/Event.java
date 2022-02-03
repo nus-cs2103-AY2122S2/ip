@@ -1,8 +1,8 @@
 package baron.tasks;
 
-import baron.util.DateTimeUtil;
-
 import java.time.LocalDateTime;
+
+import baron.util.DateTimeUtil;
 
 /**
  * Represents a task to attend an event that consists of one additional characteristic: 'at' when
