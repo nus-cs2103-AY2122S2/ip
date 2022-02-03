@@ -1,1 +1,4 @@
 T,0,run 10km
+T,0,event run 10km
+D,0,run more,2022-10-02 8:00AM
+D,1,run more,2022-02-22
