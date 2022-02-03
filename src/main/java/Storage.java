@@ -8,10 +8,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class DukeFile {
+public class Storage {
     private String path;
 
-    public DukeFile(String path) {
+    public Storage(String path) throws DukeException {
         // Splits pathname into relative path and filename
         // Creates missing dir/ file
         this.path = path;
@@ -25,19 +25,19 @@ public class DukeFile {
         try {
             f.createNewFile();
         } catch (IOException e) {
-            System.out.printf(e.getMessage());
+            throw new DukeException("WHERE YOUR NOTEPAD RECRUIT? YOU BETTER GO FIND IT NOW!");
         }
     }
 
-    public void updateTasks(ArrayList<Task> tasks) throws IOException {
+    public void updateTasks(TaskList taskList) throws IOException {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         FileWriter log = new FileWriter(path);
-        if (tasks.isEmpty()) {
+        if (taskList.isEmpty()) {
             log.write("");
         } else {
-            int size = tasks.size();
+            int size = taskList.size();
             for (int i = 0; i < size; i ++) {
-                Task curr = tasks.get(i);
+                Task curr = taskList.get(i);
                 String toWrite = curr.getType() + " | " + curr.getDone() + " | " + curr.getName();
                 if (curr.getType() == "D") {
                     toWrite += " | " + curr.getDate() + " | " + curr.getTime();
