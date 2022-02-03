@@ -1,13 +1,13 @@
 package istjbot;
 
+import java.io.IOException;
+
 import istjbot.command.Command;
 import istjbot.exception.BotException;
 import istjbot.parser.Parser;
 import istjbot.storage.Storage;
 import istjbot.task.TaskList;
 import istjbot.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Encapsulates a chat-bot that interacts with a user in a way that

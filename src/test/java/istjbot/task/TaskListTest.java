@@ -1,5 +1,12 @@
 package istjbot.task;
 
+import static istjbot.command.CommandEnum.DEADLINE;
+import static istjbot.command.CommandEnum.EVENT;
+import static istjbot.command.CommandEnum.TODO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.format.DateTimeParseException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -7,20 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.time.format.DateTimeParseException;
-
-import static istjbot.command.CommandEnum.DEADLINE;
-import static istjbot.command.CommandEnum.EVENT;
-import static istjbot.command.CommandEnum.TODO;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TaskListTest {
-    TaskList taskList;
+    private TaskList taskList = new TaskList();
 
     @BeforeEach
     public void setup() {
-        taskList = new TaskList();
         // Make use of Stubs?
         taskList.addTask(TODO, "a todo task", "");
         taskList.addTask(EVENT, "an event task", "2021-02-03");
@@ -29,7 +27,7 @@ public class TaskListTest {
 
     @Test
     public void taskSize_threeEvents_three() {
-        assertEquals(3, taskList.tasksSize());
+        assertEquals(3, taskList.taskListSize());
     }
 
     @Test

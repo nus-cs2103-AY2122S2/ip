@@ -5,16 +5,38 @@ import istjbot.storage.Storage;
 import istjbot.task.TaskList;
 import istjbot.ui.Ui;
 
+/**
+ * Encapsulates the procedure of finding the task(s) with user inputted keyword.
+ */
 public class FindCommand extends Command {
+    /**
+     * Constructor for this class.
+     *
+     * @param commandEnum CommandEnum indicating a specific type of command.
+     * @param fullCommand Full information required for execution.
+     */
     public FindCommand(CommandEnum commandEnum, String fullCommand) {
         super(commandEnum, fullCommand);
     }
 
+    /**
+     * Returns whether this command is a terminal command.
+     *
+     * @return False as FindCommand is not a terminal command.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the procedure of finding the task(s) with user inputted keyword.
+     *
+     * @param tasks TaskList responsible for searching of the task(s).
+     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param storage Storage.
+     * @throws BotException When the keyword is not specified by the user.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
         StringBuilder keyword = new StringBuilder();

@@ -1,11 +1,11 @@
 package istjbot.command;
 
+import java.time.format.DateTimeParseException;
+
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
 import istjbot.task.TaskList;
 import istjbot.ui.Ui;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates the procedure of adding a task.
@@ -46,7 +46,6 @@ public class AddCommand extends Command {
         if (commandInfo.length == 1) {
             throw new BotException("As an IstjBot, I cannot find any description for your task.");
         }
-        
         String description = "";
         int modifier = -1;
         boolean modifierFound = false;
@@ -100,6 +99,6 @@ public class AddCommand extends Command {
         storage.save(tasks);
 
         // Ui
-        ui.showTaskAdded(tasks.tasksSize(), tasks.taskString(tasks.tasksSize()));
+        ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
     }
 }

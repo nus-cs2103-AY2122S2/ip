@@ -1,11 +1,11 @@
 package istjbot.storage;
 
-import istjbot.exception.BotException;
-import istjbot.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import istjbot.exception.BotException;
+import istjbot.task.TaskList;
 
 /**
  * Encapsulates the concept of a storage.

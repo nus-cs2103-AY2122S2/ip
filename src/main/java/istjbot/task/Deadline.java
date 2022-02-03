@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toTxtString() {
-        String marked = this.isDone? "1" : "0";
+        String marked = this.isDone ? "1" : "0";
         String txtString = "deadline / " + marked + " / " + this.description + " / "
                 + this.date.orElseThrow().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return txtString;

@@ -30,7 +30,7 @@ public class ModifyCommand extends Command {
         } catch (NumberFormatException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper index.");
         }
-        if (taskNumber < 1 || taskNumber > tasks.tasksSize()) {
+        if (taskNumber < 1 || taskNumber > tasks.taskListSize()) {
             throw new BotException("As an IstjBot, I don't think that is a proper index.");
         }
 
@@ -50,8 +50,10 @@ public class ModifyCommand extends Command {
         case DELETE:
             String deletedTask = tasks.deletedTaskString(taskNumber);
             storage.save(tasks);
-            ui.showTaskDeleted(tasks.tasksSize(), deletedTask);
+            ui.showTaskDeleted(tasks.taskListSize(), deletedTask);
             break;
+
+        default:
         }
     }
 }

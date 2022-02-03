@@ -1,7 +1,6 @@
 package istjbot.parser;
 
 import istjbot.command.AddCommand;
-import istjbot.exception.BotException;
 import istjbot.command.ByeCommand;
 import istjbot.command.Command;
 import istjbot.command.CommandEnum;
@@ -9,6 +8,7 @@ import istjbot.command.DateCommand;
 import istjbot.command.FindCommand;
 import istjbot.command.ListCommand;
 import istjbot.command.ModifyCommand;
+import istjbot.exception.BotException;
 
 /**
  * Encapsulates a Parser that is responsible for parsing the user's String command

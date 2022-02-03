@@ -45,12 +45,12 @@ public class Ui {
      * @param addedTask String of the task added.
      */
     public void showTaskAdded(int tasksSize, String addedTask) {
-        String messageStart = "As an IstjBot, I will add this task right now. \n";
-        // May refactor messageLast?
-        String messageLast = "Now you have " + tasksSize + " ";
+        String initialMessage = "As an IstjBot, I will add this task right now. \n";
+        // May refactor finalMessage?
+        String finalMessage = "Now you have " + tasksSize + " ";
         String plural = tasksSize > 1 ? "tasks" : "task";
-        messageLast += plural + " in the list.";
-        System.out.println(messageStart + addedTask + "\n" + messageLast);
+        finalMessage += plural + " in the list.";
+        System.out.println(initialMessage + addedTask + "\n" + finalMessage);
     }
 
     /**
@@ -80,11 +80,11 @@ public class Ui {
      * @param deletedTask String of the task that has just been deleted.
      */
     public void showTaskDeleted(int tasksSize, String deletedTask) {
-        String messageStart = "As an IstjBot, I've removed this task: \n";
-        String messageLast = "Now you have " + tasksSize + " ";
+        String initialMessage = "As an IstjBot, I've removed this task: \n";
+        String finalMessage = "Now you have " + tasksSize + " ";
         String plural = tasksSize > 1 ? "tasks" : "task";
-        messageLast += plural + " in the list.";
-        System.out.println(messageStart + deletedTask + "\n" + messageLast);
+        finalMessage += plural + " in the list.";
+        System.out.println(initialMessage + deletedTask + "\n" + finalMessage);
     }
 
     /**
@@ -93,9 +93,9 @@ public class Ui {
      * @param searchList String of all tasks that are filtered with user's input date.
      */
     public void showTasksByDate(String searchList) {
-        String messageStart = "As an IstjBot, I present you the task(s) with that date.";
-        messageStart += searchList.isEmpty() ? "" : "\n";
-        System.out.println(messageStart + searchList);
+        String initialMessage = "As an IstjBot, I present you the task(s) with that date.";
+        initialMessage += searchList.isEmpty() ? "" : "\n";
+        System.out.println(initialMessage + searchList);
     }
 
     /**
@@ -104,9 +104,9 @@ public class Ui {
      * @param searchList String of all tasks that are filtered with user's input keyword.
      */
     public void showTasksByKeyword(String searchList) {
-        String messageStart = "As an IstjBot, I present you the task(s) with that keyword.";
-        messageStart += searchList.isEmpty() ? "" : "\n";
-        System.out.println(messageStart + searchList);
+        String initialMessage = "As an IstjBot, I present you the task(s) with that keyword.";
+        initialMessage += searchList.isEmpty() ? "" : "\n";
+        System.out.println(initialMessage + searchList);
     }
 
     /**
@@ -115,9 +115,9 @@ public class Ui {
      * @param list String of all tasks.
      */
     public void showTasks(String list) {
-        String messageStart = "As an IstjBot, I present you the task(s) in your list:";
-        messageStart += list.isEmpty() ? "" : "\n";
-        System.out.println(messageStart + list);
+        String initialMessage = "As an IstjBot, I present you the task(s) in your list:";
+        initialMessage += list.isEmpty() ? "" : "\n";
+        System.out.println(initialMessage + list);
     }
 
     /**

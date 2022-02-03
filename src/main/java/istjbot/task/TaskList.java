@@ -1,16 +1,14 @@
 package istjbot.task;
 
-import istjbot.exception.BotException;
-import istjbot.command.CommandEnum;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import istjbot.command.CommandEnum;
+import istjbot.exception.BotException;
 
 /**
  * Encapsulates a list of tasks that are stored in an ArrayList, and supports
@@ -70,6 +68,8 @@ public class TaskList {
                     taskAdded.mark();
                 }
                 break;
+
+            default:
             }
         }
     }
@@ -96,6 +96,8 @@ public class TaskList {
         case EVENT:
             this.tasks.add(new Event(description, modifierMessage));
             break;
+
+        default:
         }
     }
 
@@ -104,7 +106,7 @@ public class TaskList {
      *
      * @return The number of tasks stored.
      */
-    public int tasksSize() {
+    public int taskListSize() {
         return this.tasks.size();
     }
 
