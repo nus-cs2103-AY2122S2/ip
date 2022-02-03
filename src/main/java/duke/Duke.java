@@ -27,6 +27,8 @@ public class Duke {
         this.store = new Storage(taskList);
         this.commandHandler = new Parser();
         this.cmdLine = new Ui();
+        store.initialiseStorage();
+        taskList = store.loadFromDisk();
     }
 
     /**
@@ -47,8 +49,6 @@ public class Duke {
      * Starts Duke
      */
     public void run() {
-        store.initialiseStorage();
-        taskList = store.loadFromDisk();
         cmdLine.callResponse(commandHandler.welcome());
         cmdLine.callResponse(commandHandler.start());
         while (isRunning) {

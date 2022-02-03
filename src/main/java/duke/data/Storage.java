@@ -77,6 +77,7 @@ public class Storage {
      */
     public TaskList loadFromDisk() {
         try {
+            System.out.println("Load From List");
             Scanner fileReader = null;
             fileReader = new Scanner(persistStore);
             TaskList taskList = new TaskList();
@@ -99,6 +100,7 @@ public class Storage {
     public void loadToDisk(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(persistStore);
+            System.out.println("Load to List");
             for (int i = 0; i < taskList.taskLength(); i++) {
                 fileWriter.write(taskList.getTask(i).toStore() + "\n");
             }
