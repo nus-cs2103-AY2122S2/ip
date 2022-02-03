@@ -44,7 +44,7 @@ public class Storage {
     }
 
     /**
-     * Load user save file from FILE_PATH.
+     * Loads user save file from FILE_PATH.
      *
      * @return TaskList loaded from FILE_PATH.
      *
@@ -121,7 +121,7 @@ public class Storage {
     }
 
     /**
-     * Save TaskList to FILE_PATH.
+     * Saves TaskList to FILE_PATH.
      *
      * @param tasks TaskList to be saved.
      *

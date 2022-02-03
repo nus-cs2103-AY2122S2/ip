@@ -26,7 +26,7 @@ public class Parser {
     private static boolean isExit = false;
 
     /**
-     * Parse user command and determines action to perform.
+     * Parses user command and determines action to perform.
      *
      * @param input Input command from user.
      * @return Command to be executed.
@@ -43,7 +43,9 @@ public class Parser {
             case ListCommand.COMMAND:
                 return prepareListCommand();
             case TodoCommand.COMMAND:
+                // Fallthrough
             case DeadlineCommand.COMMAND:
+                // Fallthrough
             case EventCommand.COMMAND:
                 // Split input based on /.
                 String[] splitSlash = input.split("/");
@@ -84,7 +86,9 @@ public class Parser {
                     }
                 }
             case MarkCommand.COMMAND:
+                // Fallthrough
             case UnmarkCommand.COMMAND:
+                // Fallthrough
             case DeleteCommand.COMMAND:
                 if (splitSpace.length == 1) {
                     // If second input (task number) is not specified
@@ -132,7 +136,7 @@ public class Parser {
     }
 
     /**
-     * Prepare list command.
+     * Prepares list command.
      *
      * @return ListCommand.
      */
@@ -141,7 +145,7 @@ public class Parser {
     }
 
     /**
-     * Prepare list command.
+     * Prepares Todo command.
      *
      * @param desc Description of todo command.
      * @return TodoCommand.
@@ -151,7 +155,7 @@ public class Parser {
     }
 
     /**
-     * Prepare deadline command.
+     * Prepares deadline command.
      *
      * @param input Input from user.
      * @param desc Description of deadline command.
@@ -172,7 +176,7 @@ public class Parser {
     }
 
     /**
-     * Prepare event command.
+     * Prepares event command.
      *
      * @param input Input from user.
      * @param desc Description of event command.
@@ -193,7 +197,7 @@ public class Parser {
     }
 
     /**
-     * Prepare mark command.
+     * Prepares mark command.
      *
      * @param i Index of task.
      *
@@ -204,7 +208,7 @@ public class Parser {
     }
 
     /**
-     * Prepare unmark command.
+     * Prepares unmark command.
      *
      * @param i Index of task.
      *
@@ -215,7 +219,7 @@ public class Parser {
     }
 
     /**
-     * Prepare delete command.
+     * Prepares delete command.
      *
      * @param i Index of task.
      *
@@ -226,7 +230,7 @@ public class Parser {
     }
 
     /**
-     * Prepare find command.
+     * Prepares find command.
      *
      * @param desc Description to find.
      * @return FindCommand.
@@ -236,7 +240,7 @@ public class Parser {
     }
 
     /**
-     * Prepare help command.
+     * Prepares help command.
      *
      * @return HelpCommand.
      */
@@ -245,7 +249,7 @@ public class Parser {
     }
 
     /**
-     * Prepare bye command.
+     * Prepares bye command.
      *
      * @return ByeCommand.
      */

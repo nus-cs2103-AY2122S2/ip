@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Execute command.
+     * Executes command.
      *
      * @param tasks TaskList containing list of tasks.
      * @param ui Ui that deals with user interactions.

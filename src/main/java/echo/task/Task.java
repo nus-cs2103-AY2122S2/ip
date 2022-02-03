@@ -28,7 +28,7 @@ public class Task {
     }
 
     /**
-     * Marks task.
+     * Unmarks task.
      */
     public void unmark() {
         this.isDone = false;

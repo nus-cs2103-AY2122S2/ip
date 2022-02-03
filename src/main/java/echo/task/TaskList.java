@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to task list.
+     * Adds task to task list.
      *
      * @param task Task.
      */
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task.
+     * Deletes task.
      *
      * @param i Task index.
      */
@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task.
+     * Marks task.
      *
      * @param i Task index.
      */
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark task.
+     * Unmarks task.
      *
      * @param i Task index.
      */
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Return string representation of task index and description.
+     * Returns string representation of task index and description.
      *
      * @param i Task index.
      *
@@ -91,7 +91,7 @@ public class TaskList {
     }
 
     /**
-     * Check if TaskList is empty.
+     * Checks if TaskList is empty.
      *
      * @return True if empty; Otherwise false.
      */
@@ -100,7 +100,7 @@ public class TaskList {
     }
 
     /**
-     * Find task containing the description.
+     * Finds task containing the description.
      *
      * @param s Description to find.
      *

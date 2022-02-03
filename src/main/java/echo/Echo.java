@@ -39,7 +39,7 @@ public class Echo {
     }
 
     /**
-     * Gets response to user input
+     * Gets response to user input.
      *
      * @param input Input from user.
      *

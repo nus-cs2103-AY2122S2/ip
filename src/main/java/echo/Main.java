@@ -18,7 +18,7 @@ public class Main extends Application {
     private Echo echo = new Echo(Paths.get("").toAbsolutePath() + "/data/echo.txt");
 
     /**
-     * Start GUI for Echo using JavaFX.
+     * Starts GUI for Echo using JavaFX.
      * @param stage Stage
      */
     @Override

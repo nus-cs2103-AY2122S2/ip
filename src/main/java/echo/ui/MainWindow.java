@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
             this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
     /**
-     * Initialize the main window.
+     * Initializes the main window.
      */
     @FXML
     public void initialize() {
