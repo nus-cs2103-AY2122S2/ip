@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import duke.data.task.Task;
 import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
-import duke.data.task.Task;
 
 public class FindCommand extends Command{
 

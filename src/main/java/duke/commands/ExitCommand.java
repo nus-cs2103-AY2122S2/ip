@@ -1,10 +1,10 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
-
-import java.io.IOException;
 
 /**
  * Terminates the program.
