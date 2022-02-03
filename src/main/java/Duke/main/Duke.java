@@ -64,7 +64,6 @@ public class Duke {
      * @param input read user inputs
      * @return
      */
-
     String getResponse(String input) {
         ByteArrayOutputStream outPuts = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(outPuts);
