@@ -61,10 +61,10 @@ public class Storage {
     }
 
     /**
-     * deletes the Duke.task from local file by creating a temp file
-     * and copy every Duke.task except the one to be deleted
+     * Deletes the task from local file by creating a temp file
+     * and copy every task except the one to be deleted
      *
-     * @param taskToDelete the index of Duke.task to delete
+     * @param taskToDelete the index of task to delete
      */
     public void deleteFromFile(int taskToDelete) {
         String oldFileName = "src/main/data/duke.txt";
