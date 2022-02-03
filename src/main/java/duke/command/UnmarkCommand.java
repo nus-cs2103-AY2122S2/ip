@@ -14,7 +14,7 @@ import java.io.IOException;
  * A representation of the command for unmarking a task.
  */
 public class UnmarkCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.
@@ -42,6 +42,7 @@ public class UnmarkCommand extends Command {
         }
         Task currentTask = tasks.getTaskByIndex(index);
         currentTask.markAsNotDone();
+
         storage.writeTaskToFile(tasks);
         return ui.printConfirmUnmark(currentTask);
     }

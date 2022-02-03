@@ -1,12 +1,9 @@
 package duke.component;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 
 import static duke.constant.Message.GOOD_BYE;
 import static duke.constant.Message.GREETING;
-import static duke.constant.Message.HORIZONTAL_LINE;
 import static duke.constant.Message.LINE_PREFIX;
 import static duke.constant.Message.LINE_SEPARATOR;
 import static duke.constant.Message.CONFIRM_MARK;
@@ -24,27 +21,10 @@ public class Ui {
     }
 
     /**
-     * Reads input from user.
-     *
-     * @param sc Scanner class
-     * @return String userInput
-     */
-    public String readCommand(Scanner sc) {
-        return sc.nextLine();
-    }
-
-    /**
      * Prints goodbye message.
      */
     public String printGoodBye() {
         return printMessage(GOOD_BYE);
-    }
-
-    /**
-     * Prints a horizontal line.
-     */
-    public String printLine() {
-        return HORIZONTAL_LINE;
     }
 
     /**
@@ -53,15 +33,6 @@ public class Ui {
      * @param message String
      */
     public String printMessage(String message) {
-        return HORIZONTAL_LINE + LINE_SEPARATOR + message + LINE_SEPARATOR + HORIZONTAL_LINE;
-    }
-
-    /**
-     * Prints a single message.
-     *
-     * @param message String
-     */
-    public String printMessageWithoutLine(String message) {
         return message;
     }
 

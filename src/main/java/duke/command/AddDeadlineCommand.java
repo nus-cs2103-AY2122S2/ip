@@ -20,7 +20,7 @@ import duke.task.Task;
  * A representation of the command for adding a Deadline.
  */
 public class AddDeadlineCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.

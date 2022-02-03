@@ -14,7 +14,7 @@ import java.io.IOException;
  * A representation of the command for deleting task.
  */
 public class DeleteCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.

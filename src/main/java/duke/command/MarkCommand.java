@@ -14,7 +14,7 @@ import java.io.IOException;
  * A representation of the command for marking a task.
  */
 public class MarkCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.

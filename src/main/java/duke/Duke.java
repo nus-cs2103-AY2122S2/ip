@@ -36,7 +36,6 @@ public class Duke {
      * Reads and executes commands from user inputs.
      */
     public String run(String userInput) {
-//        ui.printGreeting();
         while (true) {
             try {
                 Command command = parser.parse(userInput);
@@ -49,12 +48,8 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Main function to run Duke
-//     * @param args Unused
-//     */
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
+    public String greet() {
+        return ui.printGreeting();
+    }
 
 }
