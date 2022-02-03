@@ -18,6 +18,43 @@ public class UserInterface {
     private String tempString;
     private boolean isLooping = true;
 
+    // Strings
+    private String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private String textGreeting = "Heya! I'm Duke! You can see me now!\nWhat can I do for ya?";
+    private String guiGreeting = "Heya! I'm Duke! You can see me now!\nWhat can I do for ya?";
+
+    private String nothing = "I can't read your mind, doc! Not yet, anyway.";
+    private String saving = "Saving data...";
+
+    private String specific = "You're gonna need to be more specific.\n";
+    private String tryFind = "Try 'find keyword'";
+    private String tryTodo = "Try 'todo An exciting human task'";
+    private String tryDeadline = "Try 'deadline A task /by Sunday'";
+    private String tryEvent = "Try 'event An event /at 7PM'";
+    private String tryMark = "Try 'mark 2'";
+    private String tryUnmark = "Try 'unmark 1'";
+    private String tryDelete = "Try 'delete 3'";
+
+    private String dontForgetTaskName = "Don't forget the task's name";
+    private String dontForgetTaskDate = "Don't forget the task's deadline";
+
+    private String dontForgetEventName = "Don't forget the Event's name";
+    private String dontForgetEventDate = "Don't forget the Event's date";
+
+    private String whichMark = "Which task do you want me to mark as done?\n";
+    private String whichUnmark = "Which task do you want me to mark as undone?\n";
+    private String whichDelete = "Which task do you want me to delete?\n";
+    private String giveNumber = "You need to give me a number doc!\n";
+
+    private String unknown = "Sorry, I don't quite understand what you mean by '";
+
+    private String exitGoodbye = "Ok then, see ya!";
+
     /**
      * Creates a UserInterface object.
      *
@@ -28,191 +65,174 @@ public class UserInterface {
     }
 
     /**
-     * Runs the main loop for UserInterface.
-     * Scans user input through CLI and checks for syntax.
-     * Runs appropriate methods in Memory.
+     * Runs the main loop for UserInterface in CLI.
+     *
+     * Not used, but useful for debugging maybe.
      */
-    public void uiLoop() {
+    public void uiStart() {
         scanner = new Scanner(System.in);
 
-        // Strings
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        String nothing = "I can't read your mind, doc! Not yet, anyway.";
-        String saving = "Saving data...";
-
-        String specific = "You're gonna need to be more specific.\n";
-        String tryFind = "Try 'find keyword'";
-        String tryTodo = "Try 'todo An exciting human task'";
-        String tryDeadline = "Try 'deadline A task /by Sunday'";
-        String tryEvent = "Try 'event An event /at 7PM'";
-        String tryMark = "Try 'mark 2'";
-        String tryUnmark = "Try 'unmark 1'";
-        String tryDelete = "Try 'delete 3'";
-
-        String unknown = "Sorry, I don't quite understand what you mean by '";
-
         // First line
-        echo.echoString("Heya! I'm Duke! I'm on Gradle now!\n"
-                + "What can I do for ya?");
+        echo.echoString(textGreeting);
 
         while (isLooping) {
 
             tempString = scanner.nextLine();
-            String[] tempStrArray = tempString.split(" ", 2);
-            String retStr;
+            echo.echoString(uiParse(tempString));
 
-            switch (tempStrArray[0]) {
-            case "":
-                echo.echoString(nothing);
-                break;
-
-            case "bye":
-                echo.echoString(saving);
-                memory.parseUpdateAll();
-                isLooping = false;
-                break;
-
-            case "list":
-                echo.echoString(memory.listAll());
-                break;
-
-            case "find":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + tryFind);
-                } else {
-                    //Empty to-do
-                    if (tempStrArray[1].equals("")) {
-                        echo.echoString(specific + tryFind);
-                    } else {
-                        echo.echoString(memory.findAll(tempStrArray[1]));
-                    }
-                }
-                break;
-
-            case "todo":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + tryTodo);
-                } else {
-                    //Empty to-do
-                    if (tempStrArray[1].equals("")) {
-                        echo.echoString(specific + tryTodo);
-                    } else {
-                        retStr = memory.addTask(tempStrArray[1]);
-                        echo.echoString(retStr);
-                    }
-                }
-                break;
-
-            case "deadline":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + tryDeadline);
-                } else {
-                    String[] tempDeadArray = tempStrArray[1].split(" /by ", 2);
-
-                    if (tempDeadArray.length == 1) {
-                        echo.echoString(specific + tryDeadline);
-                    } else {
-                        if (tempDeadArray[0].equals("")) {
-                            echo.echoString(specific + "Don't forget the task's name");
-                        } else if (tempDeadArray[1].equals("")) {
-                            echo.echoString(specific + "Don't forget the task's deadline");
-                        } else {
-                            retStr = memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
-                            echo.echoString(retStr);
-                        }
-                    }
-                }
-                break;
-
-            case "event":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + tryEvent);
-                } else {
-                    String[] tempEventArray = tempStrArray[1].split(" /at ", 2);
-
-                    if (tempEventArray.length == 1) {
-                        echo.echoString(specific + tryEvent);
-                    } else {
-                        if (tempEventArray[0].equals("")) {
-                            echo.echoString(specific + "Don't forget the event's name");
-                        } else if (tempEventArray[1].equals("")) {
-                            echo.echoString(specific + "Don't forget the event's time");
-                        } else {
-                            retStr = memory.addEvent(tempEventArray[0], tempEventArray[1]);
-                            echo.echoString(retStr);
-                        }
-                    }
-                }
-                break;
-
-            case "mark":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to mark as done?\n"
-                            + tryMark);
-                } else {
-                    String testString = tempStrArray[1];
-
-                    // Test if single number after 'mark'
-                    try {
-                        int address = Integer.parseInt(testString);
-                        echo.echoString(memory.setDone(address));
-                    } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n"
-                                + tryMark);
-                    }
-                }
-                break;
-
-            case "unmark":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to mark as undone?\n"
-                            + tryUnmark);
-                } else {
-                    String testString = tempStrArray[1];
-
-                    // Test if single number after 'unmark'
-                    try {
-                        int address = Integer.parseInt(testString);
-                        echo.echoString(memory.setUndone(address));
-                    } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n"
-                                + tryUnmark);
-                    }
-                }
-                break;
-
-            case "delete":
-                if (tempStrArray.length == 1) {
-                    echo.echoString(specific + "Which task do you want me to delete?\n"
-                            + tryDelete);
-                } else {
-                    String testString = tempStrArray[1];
-
-                    // Test if single number after 'delete'
-                    try {
-                        int address = Integer.parseInt(testString);
-                        echo.echoString(memory.deleteTask(address));
-                    } catch (NumberFormatException exception) {
-                        echo.echoString("You need to give me a number doc!\n"
-                                + tryDelete);
-                    }
-                }
-                break;
-
-            // If input is unexpected
-            default:
-                echo.echoString(unknown + tempStrArray[0] + "'");
-                break;
-            }
         }
+    }
 
-        // The last thing Duke says
-        echo.echoString("Ok then, see ya!");
+    /**
+     * Returns Duke's greeting for GUI.
+     * @return Greeting message.
+     */
+    public String guiStart() {
+        return guiGreeting;
+    }
+
+    public boolean getIsLooping() {
+        return isLooping;
+    }
+
+    /**
+     * Parses user input and executes actions accordingly.
+     * Not to be confused with the Parser class, which parses the save file.
+     *
+     * @param tempString Raw input string, probably from the user.
+     * @return Duke's response upon succeeding or failing to execute the action.
+     */
+    public String uiParse(String tempString) {
+        String[] tempStrArray = tempString.split(" ", 2);
+        String retStr;
+
+        switch (tempStrArray[0]) {
+        case "":
+            return nothing;
+
+        case "bye":
+            memory.parseUpdateAll();
+            isLooping = false;
+            return saving + "\n" + exitGoodbye;
+
+        case "list":
+            return memory.listAll();
+
+        case "find":
+            if (tempStrArray.length == 1) {
+                return specific + tryFind;
+            } else {
+                //Empty to-do
+                if (tempStrArray[1].equals("")) {
+                    return specific + tryFind;
+                } else {
+                    return memory.findAll(tempStrArray[1]);
+                }
+            }
+
+        case "todo":
+            if (tempStrArray.length == 1) {
+                return specific + tryTodo;
+            } else {
+                //Empty to-do
+                if (tempStrArray[1].equals("")) {
+                    return specific + tryTodo;
+                } else {
+                    retStr = memory.addTask(tempStrArray[1]);
+                    return retStr;
+                }
+            }
+
+        case "deadline":
+            if (tempStrArray.length == 1) {
+                return specific + tryDeadline;
+            } else {
+                String[] tempDeadArray = tempStrArray[1].split(" /by ", 2);
+
+                if (tempDeadArray.length == 1) {
+                    return specific + tryDeadline;
+                } else {
+                    if (tempDeadArray[0].equals("")) {
+                        return specific + dontForgetTaskName;
+                    } else if (tempDeadArray[1].equals("")) {
+                        return specific + dontForgetTaskDate;
+                    } else {
+                        retStr = memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
+                        return retStr;
+                    }
+                }
+            }
+
+        case "event":
+            if (tempStrArray.length == 1) {
+                return specific + tryEvent;
+            } else {
+                String[] tempEventArray = tempStrArray[1].split(" /at ", 2);
+
+                if (tempEventArray.length == 1) {
+                    return specific + tryEvent;
+                } else {
+                    if (tempEventArray[0].equals("")) {
+                        return specific + dontForgetEventName;
+                    } else if (tempEventArray[1].equals("")) {
+                        return specific + dontForgetEventDate;
+                    } else {
+                        retStr = memory.addEvent(tempEventArray[0], tempEventArray[1]);
+                        return retStr;
+                    }
+                }
+            }
+
+        case "mark":
+            if (tempStrArray.length == 1) {
+                return specific + whichMark + tryMark;
+            } else {
+                String testString = tempStrArray[1];
+
+                // Test if single number after 'mark'
+                try {
+                    int address = Integer.parseInt(testString);
+                    return memory.setDone(address);
+                } catch (NumberFormatException exception) {
+                    return giveNumber + tryMark;
+                }
+            }
+
+        case "unmark":
+            if (tempStrArray.length == 1) {
+                return specific + whichUnmark + tryUnmark;
+            } else {
+                String testString = tempStrArray[1];
+
+                // Test if single number after 'unmark'
+                try {
+                    int address = Integer.parseInt(testString);
+                    return memory.setUndone(address);
+                } catch (NumberFormatException exception) {
+                    return giveNumber + tryUnmark;
+                }
+            }
+
+        case "delete":
+            if (tempStrArray.length == 1) {
+                return specific + whichDelete + tryDelete;
+            } else {
+                String testString = tempStrArray[1];
+
+                // Test if single number after 'delete'
+                try {
+                    int address = Integer.parseInt(testString);
+                    return memory.deleteTask(address);
+                } catch (NumberFormatException exception) {
+                    return giveNumber + tryDelete;
+                }
+            }
+
+        // If input is unexpected
+        default:
+            return unknown + tempStrArray[0] + "'";
+        }
     }
 }
