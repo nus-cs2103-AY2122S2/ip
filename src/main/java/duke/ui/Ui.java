@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 import duke.data.task.Task;
@@ -66,6 +67,13 @@ public class Ui {
     public void list(TaskList tasks) {
         String msg = tasks.toString();
         System.out.print("\t Here are the tasks in your list:\n" + msg);
+    }
+
+    public void find(List<Task> tasks) {
+        System.out.println("\t Here are the matching tasks in your list:");
+        for (Task t : tasks) {
+            System.out.println("\t " + t.toString());
+        }
     }
 
     /**
