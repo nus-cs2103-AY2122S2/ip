@@ -1,29 +1,40 @@
-# User Guide
+# Duke 
 
-## Features 
+> “The way to get started is to quit talking and begin doing.” – Walt Disney [(source)](https://dansilvestre.com/productivity-quotes/#10_Life_is_too_complicated_not_to_be_orderly_-_Martha_Stewart)
 
-### Feature-ABC
 
-Description of the feature.
+### Duke frees your mind of having to remember things you need to do. It's,
 
-### Feature-XYZ
+- text-based
+- very easy to learn
+- ~~FAST~~ SUPER FAST to use
 
-Description of the feature.
+All you need to do is,
 
-## Usage
+1. download it from [here](https://github.com/hqhqhq1/ip).
+2. double-click it.
+3. add your tasks.
+4. let it manage your tasks for you 😊
 
-### `Keyword` - Describe action
+And it is **FREE**!!!!!!😄
 
-Describe the action and its outcome.
+   ```
+    ____        _        
+   |  _ \ _   _| | _____ 
+   | | | | | | | |/ / _ \
+   | |_| | |_| |   <  __/
+   |____/ \__,_|_|\_\___|
+   ```
+Features:
 
-Example of usage: 
+- [x] Managing tasks
+- [ ] Managing deadlines (coming soon)
+- [ ]  Reminders (coming soon)
 
-`keyword (optional arguments)`
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
+```ruby
+public static void main(String[] args) throws IOException, ClassNotFoundException {
+        new Duke("duke_Saved.txt").run();
+}
 ```
