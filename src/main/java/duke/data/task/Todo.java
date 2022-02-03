@@ -1,3 +1,5 @@
+package duke.data.task;
+
 /**
  * Represent tasks without any date/time attached to it.
  */
