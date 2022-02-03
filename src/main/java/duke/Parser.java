@@ -32,6 +32,7 @@ class Parser {
                 throw new EmptyDescriptionException("Todo description cannot be empty!");
             }
         } else if (commandWord.equals("deadline")) {
+            // include date exception!
             if (ui.isValidTask(fullCommand)) {
                 if (ui.isValidDeadline(fullCommand)) {
                     String taskName = ui.getTaskName(fullCommand);
@@ -81,7 +82,18 @@ class Parser {
                 throw new InvalidCommandFormatException("Invalid find!");
             }
         } else {
-            throw new InvalidCommandFormatException("INVALID COMMAND WORD TEST!!!");
+            String generalFormatExceptionString = "Please give a proper command!\n" +
+                    "List of commands: \n" +
+                    "1. todo\n" +
+                    "2. deadline\n" +
+                    "3. event\n" +
+                    "4. list\n" +
+                    "5. mark\n" +
+                    "6. unmark\n" +
+                    "7. find\n" +
+                    "8. delete \n" +
+                    "9. bye";
+            throw new InvalidCommandFormatException(generalFormatExceptionString);
         }
     }
 }

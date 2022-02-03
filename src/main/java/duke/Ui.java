@@ -76,25 +76,11 @@ public class Ui {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public void showGeneralException() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Please give a proper command!");
-        System.out.println("List of commands: ");
-        System.out.println("1. todo\n2. deadline\n3. event\n4. list\n5. mark\n6. unmark\n7. delete \n8. bye");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
     public void showDelete(Task task, int taskListSize) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
         System.out.println(String.format("Now you have %d task(s) in the list.", taskListSize));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    public void showEmptyTask() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("OOPS!!! Task description cannot be empty.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
@@ -184,24 +170,12 @@ public class Ui {
         }
     }
 
-    public LocalDate getTaskDate(String fullCommand) {
+    public LocalDate getTaskDate(String fullCommand) throws InvalidDateException {
         if (getCommandWord(fullCommand).equals("deadline")) {
             return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/by") + 4));
         } else {
             return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/at") + 4));
         }
-    }
-
-    public void showInvalidDeadline() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Deadlines must include \"/by\"");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    public void showInvalidEvent() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Events must include \"/at\"");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public void findTask(String fullCommand, TaskList taskList) {
