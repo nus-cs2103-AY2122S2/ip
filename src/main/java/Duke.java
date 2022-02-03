@@ -23,14 +23,21 @@ public class Duke {
      */
     private final Ui ui;
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /**
      * Constructor for Duke
-     * @param filePath Relative file path(from project root) to access saved tasks
-     *                 from previous instance.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage("./data/duke.txt");
         this.tasks = new TaskList(storage.load());
     }
 
@@ -47,6 +54,6 @@ public class Duke {
      * @param args CLI input for Main.
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke().run();
     }
 }
