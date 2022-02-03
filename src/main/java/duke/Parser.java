@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class Parser {
             case EVENT:
                 return formatCmdWithTime(action, inputTxt);
             case DONE:
+            case UNDO:
             case DELETE:
                 return formatCmdWithIdSelection(action, inputTxt);
             default:
@@ -85,6 +87,8 @@ public class Parser {
         int taskId = Integer.parseInt(formatInputTxt[1]) - 1;
         if (commandType.equals(CommandType.DONE)) {
             return new DoneCommand(taskId);
+        } else if (commandType.equals(commandType.UNDO)) {
+            return new UndoCommand(taskId);
         } else {
             return new DeleteCommand(taskId);
         }

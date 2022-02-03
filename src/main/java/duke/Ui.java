@@ -38,6 +38,8 @@ public class Ui {
 
     public static final String MSG_TASKALREADYDONE = "☹ OOPS!!! Task already completed!";
 
+    public static final String MSG_TASKNOTCOMPLETE = "☹ OOPS!!! Task not yet completed!";
+
     public static final String MSG_EMPTYTASK = "☹ OOPS!!! No task exists!";
 
     public static final String MSG_FILEREADERROR = "☹ OOPS!!! There was an error loading the file.";
@@ -104,8 +106,8 @@ public class Ui {
      * @param description Description of the task.
      * @return The formatted String to be printed.
      */
-    public static String completeTaskMsg(String description) {
-        return "Nice! I've marked this task as done: \n  " + description;
+    public static String updateTaskMsg(String description) {
+        return "Alright! I've updated the task: \n  " + description;
     }
 
     /**

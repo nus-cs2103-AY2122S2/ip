@@ -50,6 +50,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    protected void markAsUnDone() {
+        this.isDone = false;
+    }
+
     public String getDescription() {
         return this.description;
     }

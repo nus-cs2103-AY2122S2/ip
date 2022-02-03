@@ -69,6 +69,10 @@ public class TaskList {
         tasks.get(i).markAsDone();
     }
 
+    public void uncompleteTask(int i) {
+        tasks.get(i).markAsUnDone();
+    }
+
     @Override
     public String toString(){
         return Ui.taskListMsg(this);
