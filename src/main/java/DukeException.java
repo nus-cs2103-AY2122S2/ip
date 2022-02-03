@@ -5,7 +5,7 @@ public class DukeException extends Exception{
     }
 
     /**
-     * @override
+     * @override Returns customised error message for DukeException when input is incorrect
      * @return String errorMessage
      */
     public String getMessage() {return this.errorMessage;}

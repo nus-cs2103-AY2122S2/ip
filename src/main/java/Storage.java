@@ -24,28 +24,28 @@ public class Storage {
                 String[] nextLineArr = nextLine.split(" ");
                 String taskType = nextLineArr[0];
                 switch (taskType) {
-                    case "[T]":
-                        Todo newTodo = new Todo(nextLineArr[2]);
-                        if (nextLineArr[1].equals("[✓]")) {
-                            newTodo.markTask();
-                        }
-                        newArr.add(newTodo);
-                        break;
-                    case "[D]":
-                        Deadline newDeadline = new Deadline(nextLineArr[2], nextLineArr[4]);
-                        if (nextLineArr[1].equals("[✓]")) {
-                            newDeadline.markTask();
-                        }
-                        newArr.add(newDeadline);
-                        break;
-                    case "[E]":
-                        Event newEvent = new Event(nextLineArr[2], nextLineArr[4]);
-                        if (nextLineArr[1].equals("[✓]")) {
-                            newEvent.markTask();
-                        }
-                        newArr.add(newEvent);
-                        break;
-                    default:
+                case "[T]":
+                    Todo newTodo = new Todo(nextLineArr[2]);
+                    if (nextLineArr[1].equals("[✓]")) {
+                        newTodo.setMarkedTask();
+                    }
+                    newArr.add(newTodo);
+                    break;
+                case "[D]":
+                    Deadline newDeadline = (nextLineArr[6].equals("null")) ? new Deadline(nextLineArr[2], nextLineArr[4]) : new Deadline(nextLineArr[2], nextLineArr[4], nextLineArr[6]);
+                    if (nextLineArr[1].equals("[✓]")) {
+                        newDeadline.setMarkedTask();
+                    }
+                    newArr.add(newDeadline);
+                    break;
+                case "[E]":
+                    Event newEvent = (nextLineArr[6].equals("null")) ? new Event(nextLineArr[2], nextLineArr[4]) : new Event(nextLineArr[2], nextLineArr[4], nextLineArr[6]);
+                    if (nextLineArr[1].equals("[✓]")) {
+                        newEvent.setMarkedTask();
+                    }
+                    newArr.add(newEvent);
+                    break;
+                default:
                 }
             }
             this.arr = newArr;
@@ -63,19 +63,19 @@ public class Storage {
     /**
      *
      * @param task Converts task to string format for storage in the data.txt file for records
-     * @return String format of the task eg: [D] [✓] deadline | duedate
+     * @return String format of the task eg: [D] [✓] deadline | duedate | duetime
      */
     public String taskToStringConverter(Task task) {
         String output = "";
         if (task instanceof Todo) {
-            String mark = (task.isMark()) ? "[✓]" : "[X]";
+            String mark = (task.hasBeenMarked()) ? "[✓]" : "[X]";
             output = "[T] " + mark + " " + task.name + "\n";
         } else if (task instanceof Deadline deadline) {
-            String mark = (deadline.isMark()) ? "[✓]" : "[X]";
-            output = "[D] " + mark + " " + deadline.name + "|" + deadline.dueDate +"\n";
+            String mark = (deadline.hasBeenMarked()) ? "[✓]" : "[X]";
+            output = "[D] " + mark + " " + deadline.name + "| " + deadline.dueDate + " | " + deadline.dueTime + "\n";
         } else if (task instanceof Event event) {
-            String mark = (event.isMark()) ? "[✓]" : "[X]";
-            output = "[E] " + mark + " " + event.name + "|" + event.dueDate + "\n";
+            String mark = (event.hasBeenMarked()) ? "[✓]" : "[X]";
+            output = "[E] " + mark + " " + event.name + "| " + event.dueDate + " | " + event.dueTime + "\n";
         }
         return output;
     }
@@ -117,7 +117,7 @@ public class Storage {
         int i = 0;
         for (Task item : this.arr) {
             i += 1;
-            if (item.isMark()) {
+            if (item.hasBeenMarked()) {
                 listOfTasks += i + ". " + item + "\n";
             } else {
                 listOfTasks += i + ". " + item + "\n";
