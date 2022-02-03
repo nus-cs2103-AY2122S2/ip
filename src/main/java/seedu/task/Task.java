@@ -1,58 +1,40 @@
-package task;
+package seedu.task;
+
+import java.time.format.DateTimeFormatter;
 
 public class Task {
 
+    private boolean isCompleted;
     private final String description;
-    private boolean completed;
+    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
 
-    /**
-     * Creates new Task object
-     * @param description of task
-     */
     public Task(String description) {
         this(description, false);
     }
 
-    /**
-     * Creates new Task object
-     * @param description of task
-     * @param completed task is completed or not
-     */
-    public Task(String description, boolean completed) {
-        this.description = description.trim();
-        this.completed = completed;
+    public Task(String description, boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        this.description = description;
     }
 
-    /**
-     * Marks the task as completed or not completed
-     * @param completed States whether the task is completed or not
-     */
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void mark() {
+        isCompleted = true;
     }
 
-    /**
-     * If task is completed return X else return <space>
-     * @return A string of either X or <space>
-     */
+    public void unmark() {
+        isCompleted = false;
+    }
+
     public String getDescription() {
         return description;
     }
 
     private String getCompleted() {
-        return completed ? "X" : " ";
-    }
-
-    /**
-     * Returns the string of task to be place into the save file
-     * @return string of task to be saved in file
-     */
-    public String toFile() {
-        return this.completed + "\t" + this.description;
+        return isCompleted ? "X" : " ";
     }
 
     @Override
     public String toString() {
-        return "[" + this.getCompleted() + "] " + this.description;
+        return "[" + getCompleted() + "] " + description;
     }
 }

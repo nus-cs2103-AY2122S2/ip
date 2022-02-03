@@ -1,32 +1,23 @@
-package task;
+package seedu.task;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Event extends Task {
 
-    private final Date duration;
-    private final SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
+    private final LocalDateTime at;
 
-    public Event(String description, Date duration) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        this.duration = duration;
+        this.at = at;
     }
 
-    public Event(String description, Date duration, boolean completed) {
-        super(description, completed);
-        this.duration = duration;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public String toFile() {
-        return "E\t" + super.toFile() + "\t" + ft.format(this.duration);
+    public Event(String description, boolean isCompleted, LocalDateTime at) {
+        super(description, isCompleted);
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + ft.format(this.duration) + ")";
+        return "[E]" + super.toString() + " (by: " + at.format(formatter) + ")";
     }
 }

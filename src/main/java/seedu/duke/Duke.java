@@ -1,57 +1,46 @@
 package seedu.duke;
-import storage.Storage;
-import storage.TaskList;
 
-import java.io.IOException;
-import java.text.ParseException;
+import seedu.storage.Storage;
+import seedu.storage.TaskList;
+import seedu.commands.Command;
 
 public class Duke {
 
     private final Ui ui;
+    private TaskList tasks;
     private final Parser parser;
     private final Storage storage;
-    private final TaskList tasks;
 
-    private Duke() throws IOException, ParseException {
+    public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage();
-        tasks = new TaskList(storage.read());
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
-    private void run() {
-
+    public void run() {
         ui.showWelcome();
-        boolean isQuit = false;
-
-        while (!isQuit) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-
-                String input = ui.getCommand();
-                String[] cmd = parser.splitCmd(input);
-
-                if (parser.checkQuit(cmd[0].trim())) {
-                    isQuit = true;
-                } else {
-                    String task = cmd.length < 2 ? "" : cmd[1];
-                    parser.runCmd(cmd[0].trim(), task.trim(), tasks, ui, storage);
-                }
-
-            } catch (DukeException | IOException e) {
-                ui.showError(e.toString());
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
-
-        ui.showGoodBye();
     }
-
-    /**
-     * Runs the program
-     * @param args
-     * @throws IOException
-     * @throws ParseException
-     */
-    public static void main(String[] args) throws IOException, ParseException {
-        new Duke().run();
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

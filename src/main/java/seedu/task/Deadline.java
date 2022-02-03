@@ -1,33 +1,23 @@
-package task;
+package seedu.task;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-    private final Date deadline;
-    private final SimpleDateFormat ft = new SimpleDateFormat("dd MMM yyy h.mma");
+    private final LocalDateTime deadline;
 
-    public Deadline(String description, Date deadline) {
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
-    public Deadline(String description, Date deadline, boolean completed) {
-        super(description, completed);
+    public Deadline(String description, boolean isCompleted, LocalDateTime deadline) {
+        super(description, isCompleted);
         this.deadline = deadline;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public String toFile() {
-        System.out.println(this.deadline);
-        return "D\t" + super.toFile() + "\t" + ft.format(this.deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + ft.format(this.deadline) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
     }
 }
