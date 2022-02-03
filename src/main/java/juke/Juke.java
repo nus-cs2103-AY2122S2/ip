@@ -28,6 +28,7 @@ public class Juke {
     private TaskList taskList = new TaskList();
     private final int taskListSize = 100;
     private final FileManager fileManager = new juke.FileManager();
+    private boolean hasExited = false;
     
     /**
      * Constructor that initializes the application.
@@ -39,70 +40,153 @@ public class Juke {
     private void run() {
         this.ui.greet();
         this.loadFile();
-        while (true) {
+        while (!this.hasExited) {
             PrintHelper.getInstance().printMarker();
             
             String[] args = ui.getInput();
             Command cmd;
             if (args.length > 0) {
-                try {
-                    switch (args[0]) {
-                    case "":
-                        break;
-                    case "bye":
-                        this.bye();
-                        break;
-                    case "list":
-                        this.displayTaskList();
-                        break;
-                    case "todo":
-                        this.addTodoToTaskList(args);
-                        this.saveFile();
-                        break;
-                    case "deadline":
-                        this.addDeadlineToTaskList(args);
-                        this.saveFile();
-                        break;
-                    case "event":
-                        this.addEventToTaskList(args);
-                        this.saveFile();
-                        break;
-                    case "mark":
-                        this.markTaskAsDone(args);
-                        this.saveFile();
-                        break;
-                    case "unmark":
-                        this.markTaskAsNotDone(args);
-                        this.saveFile();
-                        break;
-                    case "delete":
-                        this.deleteTaskFromTaskList(args);
-                        this.saveFile();
-                        break;
-                    case "echo":
-                        String s = "";
-                        if (args.length > 1) {
-                            for (int i = 1; i < args.length; i++) {
-                                s += args[i] + " ";
-                            }
-                            s = s.strip();
+                switch (args[0]) {
+                case "":
+                    break;
+                case "bye":
+                    String s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
                         }
-                        cmd = CommandHandler.COMMANDS.get("echo").get()
-                                .addParameter("", s)
-                                .execute();
-                        ui.displayResult(cmd.getResult());
-                        break;
-                    case "find":
-                        this.find(args);
-                        break;
-                    default:
-                        this.echo(args);
+                        s = s.strip();
                     }
-                } catch (JukeException e) {
-                    PrintHelper.getInstance().errorPrint(e);
+                    cmd = CommandHandler.COMMANDS.get("bye").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "list":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("list").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "todo":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("todo").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "deadline":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("deadline").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "event":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("event").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "mark":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("mark").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "unmark":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("unmark").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "delete":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("delete").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "echo":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("echo").get()
+                            .addParameter("", s)
+                            .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                case "find":
+                    s = "";
+                    if (args.length > 1) {
+                        for (int i = 1; i < args.length; i++) {
+                            s += args[i] + " ";
+                        }
+                        s = s.strip();
+                    }
+                    cmd = CommandHandler.COMMANDS.get("find").get()
+                        .addParameter("", s)
+                        .execute();
+                    this.ui.displayResult(cmd.getResult());
+                    break;
+                default:
+                    this.echo(args);
                 }
             }
         }
+        
+        // Exits the program when exit command is called.
+        System.exit(0);
     }
     
     private void loadFile() {
@@ -120,7 +204,7 @@ public class Juke {
         }
     }
     
-    private void saveFile() {
+    public void saveFile() {
         ArrayList<String[]> writeArr = new ArrayList<>();
         for (Task task : this.taskList) {
             String[] args = this.fileManager.encode(task);
@@ -131,9 +215,8 @@ public class Juke {
         this.fileManager.write(writeArr);
     }
     
-    private void bye() {
-        ui.formattedPrint("Until we meet again!");
-        System.exit(0);
+    public void exit() {
+        this.hasExited = true;
     }
     
     private void echo(String[] args) {
@@ -317,6 +400,23 @@ public class Juke {
         }
     }
     
+    /**
+     * Returns the list used to store tasks.
+     *
+     * @return TaskList.
+     */
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+    
+    /**
+     * Returns the singleton instance of Juke.
+     *
+     * @return Juke.
+     */
+    public static Juke getInstance() {
+        return INSTANCE;
+    }
     
     /**
      * Main class for the Juke application.

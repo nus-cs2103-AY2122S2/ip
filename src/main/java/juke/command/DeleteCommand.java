@@ -2,12 +2,7 @@ package juke.command;
 
 import juke.exception.JukeException;
 
-/**
- * Command for echo.
- */
-public class EchoCommand extends Command {
-    private String message;
-    
+public class DeleteCommand extends Command {
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -32,8 +27,19 @@ public class EchoCommand extends Command {
         if (this.isErranous()) {
             return this;
         }
-        this.message = this.getDefaultArgument();
-        this.result = new Result.Success(this.message);
+        try {
+            int index = Integer.parseInt(this.getDefaultArgument()) - 1;
+            if (index < 0 || index >= juke.getTaskList().size()) {
+                this.result = Result.error(new JukeException("Invalid index"));
+                return this;
+            }
+            this.juke.getTaskList().remove(index);
+            this.result = Result.success("Successfully deleted.");
+        } catch (NumberFormatException e) {
+            this.result = Result.error(e);
+            return this;
+        }
+        this.juke.saveFile();
         return this;
     }
 }

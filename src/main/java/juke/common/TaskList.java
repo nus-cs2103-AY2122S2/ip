@@ -1,5 +1,6 @@
 package juke.common;
 
+import juke.exception.JukeTaskListEmptyException;
 import juke.task.Task;
 
 import java.util.ArrayList;
@@ -77,6 +78,17 @@ public class TaskList implements Iterable<Task> {
      */
     public int size() {
         return this.taskList.size();
+    }
+    
+    public String[] list() throws JukeTaskListEmptyException {
+        if (this.taskList.size() == 0) {
+            throw new JukeTaskListEmptyException("list");
+        }
+        String[] strs = new String[this.taskList.size()];
+        for (int i = 0; i < this.taskList.size(); i++) {
+            strs[i] = this.taskList.get(i).toString();
+        }
+        return strs;
     }
     
     /**

@@ -1,11 +1,16 @@
 package juke.task;
 
 /**
- * Abstraction for the status of a task.
+ * Enum for the status of a task.
  */
 public enum TaskStatus {
-    NOT_DONE("\u2610"),
-    DONE("\u2612");
+    NOT_DONE("unmark", "\u2610"),
+    DONE("mark", "\u2612");
+    
+    /**
+     * String for command use.
+     */
+    private final String commandName;
     
     /**
      * Status icon.
@@ -13,12 +18,23 @@ public enum TaskStatus {
     private final String statusIcon;
     
     /**
-     * Constructor to include the status icon.
+     * Constructor to initialize the task statuses.
      *
+     * @param commandName Command name.
      * @param statusIcon Status icon.
      */
-    private TaskStatus(String statusIcon) {
+    TaskStatus(String commandName, String statusIcon) {
+        this.commandName = commandName;
         this.statusIcon = statusIcon;
+    }
+    
+    /**
+     * Returns the command name.
+     *
+     * @return Command name.
+     */
+    public String getCommandName() {
+        return commandName;
     }
     
     /**

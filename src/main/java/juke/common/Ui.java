@@ -60,7 +60,7 @@ public class Ui {
      */
     public void displayResult(Result result) {
         try {
-            String string = result.getOrThrow();
+            String[] string = result.getOrThrow();
             this.formattedPrint(string);
         } catch (Exception e) {
             this.formattedPrint(e.getMessage());

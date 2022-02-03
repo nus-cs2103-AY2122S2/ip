@@ -2,12 +2,7 @@ package juke.command;
 
 import juke.exception.JukeException;
 
-/**
- * Command for echo.
- */
-public class EchoCommand extends Command {
-    private String message;
-    
+public class ExitCommand extends Command {
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -16,8 +11,8 @@ public class EchoCommand extends Command {
                 return this;
             }
         }
-        if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+        if (this.hasDefaultArgument()) {
+            this.result = Result.error(new JukeException("Default argument not needed"));
             return this;
         }
         return this;
@@ -32,8 +27,8 @@ public class EchoCommand extends Command {
         if (this.isErranous()) {
             return this;
         }
-        this.message = this.getDefaultArgument();
-        this.result = new Result.Success(this.message);
+        this.juke.exit();
+        this.result = Result.success("Until we meet again!");
         return this;
     }
 }

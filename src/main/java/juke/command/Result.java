@@ -6,20 +6,20 @@ import juke.exception.JukeException;
  * Abstraction for the result of the execution of a command.
  */
 public abstract class Result {
-    private String message;
+    private String[] messages;
     
-    private Result(String message) {
-        this.message = message;
+    private Result(String... messages) {
+        this.messages = messages;
     }
     
     /**
      * Creates a new success result.
      *
-     * @param message Message.
+     * @param messages Messages.
      * @return Success result.
      */
-    public static Result success(String message) {
-        return new Result.Success(message);
+    public static Result success(String... messages) {
+        return new Result.Success(messages);
     }
     
     /**
@@ -46,8 +46,8 @@ public abstract class Result {
      *
      * @return Stored string.
      */
-    public String get() {
-        return this.message;
+    public String[] get() {
+        return this.messages;
     }
     
     /**
@@ -56,16 +56,16 @@ public abstract class Result {
      * @return Stored string.
      * @throws Exception Exception.
      */
-    public String getOrThrow() throws Exception {
-        return this.message;
+    public String[] getOrThrow() throws Exception {
+        return this.messages;
     }
     
     /**
      * A successful execution of a command.
      */
     public static class Success extends Result {
-        public Success(String message) {
-            super(message);
+        public Success(String... messages) {
+            super(messages);
         }
     }
     
@@ -87,7 +87,7 @@ public abstract class Result {
          * @throws Exception Exception.
          */
         @Override
-        public String getOrThrow() throws Exception {
+        public String[] getOrThrow() throws Exception {
             throw this.exception;
         }
     }
@@ -111,7 +111,7 @@ public abstract class Result {
          * @throws Exception Empty result exception.
          */
         @Override
-        public String getOrThrow() throws Exception {
+        public String[] getOrThrow() throws Exception {
             throw EMPTY_EXCEPTION;
         }
     }

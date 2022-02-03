@@ -1,12 +1,9 @@
 package juke.command;
 
 import juke.exception.JukeException;
+import juke.exception.JukeTaskListEmptyException;
 
-/**
- * Command for echo.
- */
-public class EchoCommand extends Command {
-    private String message;
+public class ListCommand extends Command {
     
     @Override
     public Command checkParametersAndArguments() {
@@ -16,8 +13,8 @@ public class EchoCommand extends Command {
                 return this;
             }
         }
-        if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+        if (this.hasDefaultArgument()) {
+            this.result = Result.error(new JukeException("Default argument not needed"));
             return this;
         }
         return this;
@@ -32,8 +29,13 @@ public class EchoCommand extends Command {
         if (this.isErranous()) {
             return this;
         }
-        this.message = this.getDefaultArgument();
-        this.result = new Result.Success(this.message);
+        try {
+            String[] strs = this.juke.getTaskList().list();
+            this.result = Result.success(strs);
+        } catch (JukeTaskListEmptyException e) {
+            this.result = Result.error(e);
+            return this;
+        }
         return this;
     }
 }

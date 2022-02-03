@@ -1,5 +1,6 @@
 package juke.command;
 
+import juke.Juke;
 import juke.exception.JukeException;
 
 import java.util.HashMap;
@@ -9,6 +10,11 @@ import java.util.Optional;
  * Abstraction for a command.
  */
 public abstract class Command {
+    /**
+     * Reference to the Juke instance.
+     */
+    protected final Juke juke = Juke.getInstance();
+    
     /**
      * Mapping for the first argument in a command.
      */
@@ -174,5 +180,25 @@ public abstract class Command {
      */
     public boolean isSuccessful() {
         return this.result instanceof Result.Success;
+    }
+    
+    /**
+     * Checks if the result is an error.
+     * Returns true if it is, false otherwise.
+     *
+     * @return Boolean result.
+     */
+    public boolean isErranous() {
+        return this.result instanceof Result.Error;
+    }
+    
+    /**
+     * Checks if the result is empty.
+     * Returns true if it is, false otherwise.
+     *
+     * @return Boolean result.
+     */
+    public boolean isEmpty() {
+        return this.result instanceof Result.Empty;
     }
 }

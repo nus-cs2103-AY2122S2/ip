@@ -1,13 +1,11 @@
 package juke.command;
 
 import juke.exception.JukeException;
+import juke.task.Task;
 
-/**
- * Command for echo.
- */
-public class EchoCommand extends Command {
-    private String message;
-    
+import java.util.List;
+
+public class FindCommand extends Command {
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -32,8 +30,16 @@ public class EchoCommand extends Command {
         if (this.isErranous()) {
             return this;
         }
-        this.message = this.getDefaultArgument();
-        this.result = new Result.Success(this.message);
+        List<Task> tasks = this.juke.getTaskList().search(this.getDefaultArgument());
+        if (tasks.size() == 0) {
+            this.result = Result.error(new JukeException("No results found"));
+            return this;
+        }
+        String[] descriptions = new String[tasks.size()];
+        for (int i = 0; i < tasks.size(); i++) {
+            descriptions[i] = tasks.get(i).toString();
+        }
+        this.result = new Result.Success(descriptions);
         return this;
     }
 }
