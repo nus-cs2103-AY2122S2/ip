@@ -1,4 +1,4 @@
-package duke;
+package tsohg;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,14 +16,14 @@ public class DeadlineTask extends Task {
      * Constructor of the class.
      * @param name Name of the task.
      * @param date Deadline of the task.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public DeadlineTask(String name, String date) throws DukeException {
+    public DeadlineTask(String name, String date) throws TsohgException {
         super(name);
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date!");
+            throw new TsohgException("Invalid date!");
         }
     }
 

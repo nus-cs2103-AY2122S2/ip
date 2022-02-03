@@ -1,5 +1,5 @@
-import duke.DukeException;
-import duke.TaskList;
+import tsohg.TsohgException;
+import tsohg.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +13,7 @@ public class TaskListTest {
             taskList.addTodo("Item1");
             taskList.addTodo("Item2");
             assertEquals("1.[T][ ] Item1\n2.[T][ ] Item2\n", taskList.toString());
-        } catch (DukeException e) {
+        } catch (TsohgException e) {
             e.printStackTrace();
         }
     }
@@ -26,7 +26,7 @@ public class TaskListTest {
             taskList.addDeadline("Item2", "2022-02-02");
             assertEquals("1.[D][ ] Item1 (by: Jan 01 2022)\n2.[D][ ] Item2 (by: Feb 02 2022)\n",
                     taskList.toString());
-        } catch (DukeException e) {
+        } catch (TsohgException e) {
             e.printStackTrace();
         }
     }
@@ -39,7 +39,7 @@ public class TaskListTest {
             taskList.addTodo("Item2");
             taskList.deleteItem(0);
             assertEquals("1.[T][ ] Item2\n", taskList.toString());
-        } catch (DukeException e) {
+        } catch (TsohgException e) {
             e.printStackTrace();
         }
     }
@@ -52,7 +52,7 @@ public class TaskListTest {
             taskList.addTodo("Item2");
             taskList.markItem(0);
             assertEquals("1.[T][X] Item1\n2.[T][ ] Item2\n", taskList.toString());
-        } catch (DukeException e) {
+        } catch (TsohgException e) {
             e.printStackTrace();
         }
     }

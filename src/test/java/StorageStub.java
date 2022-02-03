@@ -1,5 +1,5 @@
-import duke.DukeException;
-import duke.Storage;
+import tsohg.TsohgException;
+import tsohg.Storage;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class StorageStub extends Storage {
 
     private String data = "";
 
-    StorageStub(String filePath) throws DukeException {
+    StorageStub(String filePath) throws TsohgException {
         super(filePath);
     }
 

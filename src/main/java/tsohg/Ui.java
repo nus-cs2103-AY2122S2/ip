@@ -1,4 +1,4 @@
-package duke;
+package tsohg;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class Ui {
         while (true) {
             try {
                 if (!takeInput()) break;
-            } catch (DukeException e) {
+            } catch (TsohgException e) {
                 OUT.println(e.getMessage());
             }
         }
@@ -56,7 +56,7 @@ public class Ui {
         OUT.println(greet);
     }
 
-    private boolean takeInput() throws DukeException {
+    private boolean takeInput() throws TsohgException {
         printLine();
         String input = IN.nextLine();
         printLine();
@@ -90,7 +90,7 @@ public class Ui {
             event(argument);
             break;
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new TsohgException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return true;
     }
@@ -100,38 +100,38 @@ public class Ui {
         OUT.print(tasks.toString());
     }
 
-    private void delete(String argument) throws DukeException {
+    private void delete(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
         OUT.println("Noted. I've removed this task:");
         OUT.println(tasks.deleteItem(index));
         OUT.println(tasks.listCount());
     }
 
-    private void mark(String argument) throws DukeException {
+    private void mark(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
         OUT.println("Nice! I've marked this task as done:");
         OUT.println(tasks.markItem(index));
     }
 
-    private void unmark(String argument) throws DukeException {
+    private void unmark(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
         OUT.println("OK, I've marked this task as not done yet:");
         OUT.println(tasks.unmarkItem(index));
     }
 
-    private void todo(String argument) throws DukeException {
+    private void todo(String argument) throws TsohgException {
         if (argument == null)
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new TsohgException("OOPS!!! The description of a todo cannot be empty.");
         String response = tasks.addTodo(argument);
         OUT.println("Got it. I've added this task:");
         OUT.println(response);
         OUT.println(tasks.listCount());
     }
 
-    private void deadline(String argument) throws DukeException {
+    private void deadline(String argument) throws TsohgException {
         String[] split = argument.split(" /by ", 2);
         if (split.length != 2) {
-            throw new DukeException("Date is not provided!");
+            throw new TsohgException("Date is not provided!");
         }
         String name = split[0];
         String date = split[1];
@@ -141,10 +141,10 @@ public class Ui {
         OUT.println(tasks.listCount());
     }
 
-    private void event(String argument) throws DukeException {
+    private void event(String argument) throws TsohgException {
         String[] split = argument.split(" /at ", 2);
         if (split.length != 2) {
-            throw new DukeException("Date is not provided!");
+            throw new TsohgException("Date is not provided!");
         }
         String name = split[0];
         String date = split[1];

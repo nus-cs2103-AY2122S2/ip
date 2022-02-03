@@ -1,15 +1,15 @@
-package duke;
+package tsohg;
 
 /**
  * The class to handle exception in the program.
  */
-public class DukeException extends Exception {
+public class TsohgException extends Exception {
 
     /**
      * Constructor of the class.
      * @param message Error Message.
      */
-    public DukeException(String message) {
+    public TsohgException(String message) {
         super(message);
     }
 

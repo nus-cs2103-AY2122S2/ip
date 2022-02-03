@@ -1,4 +1,4 @@
-package duke;
+package tsohg;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,9 +15,9 @@ public class TaskList {
     /**
      * Constructor of the class.
      * @param storage Storage object to store the list.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public TaskList(Storage storage) throws DukeException {
+    public TaskList(Storage storage) throws TsohgException {
         items = new ArrayList<>();
         this.storage = storage;
         readFromFile();
@@ -27,9 +27,9 @@ public class TaskList {
      * Deletes an item from the list.
      * @param index The index of the item.
      * @return A success message after deletion.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String deleteItem(int index) throws DukeException {
+    public String deleteItem(int index) throws TsohgException {
         Task item = items.get(index);
         items.remove(index);
         saveToFile();
@@ -40,9 +40,9 @@ public class TaskList {
      * Marks an item as completed.
      * @param index The index of the item.
      * @return A success message after marking.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String markItem(int index) throws DukeException {
+    public String markItem(int index) throws TsohgException {
         items.get(index).mark();
         saveToFile();
         return items.get(index).toString();
@@ -52,9 +52,9 @@ public class TaskList {
      * Unmarks an item from completed.
      * @param index The index of the item.
      * @return A success message after marking.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String unmarkItem(int index) throws DukeException {
+    public String unmarkItem(int index) throws TsohgException {
         items.get(index).unmark();
         saveToFile();
         return items.get(index).toString();
@@ -64,9 +64,9 @@ public class TaskList {
      * Adds a todo task to the list.
      * @param name The name of the task.
      * @return A success message after adding.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String addTodo(String name) throws DukeException {
+    public String addTodo(String name) throws TsohgException {
         Task item = new TodoTask(name);
         items.add(item);
         saveToFile();
@@ -78,9 +78,9 @@ public class TaskList {
      * @param name The name of the task.
      * @param date The deadline of the task.
      * @return A success message after adding.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String addDeadline(String name, String date) throws DukeException {
+    public String addDeadline(String name, String date) throws TsohgException {
         Task item = new DeadlineTask(name, date);
         items.add(item);
         saveToFile();
@@ -92,9 +92,9 @@ public class TaskList {
      * @param name The name of the task.
      * @param date The event date of the task.
      * @return A success message after adding.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    public String addEvent(String name, String date) throws DukeException {
+    public String addEvent(String name, String date) throws TsohgException {
         Task item = new EventTask(name, date);
         items.add(item);
         saveToFile();
@@ -103,9 +103,9 @@ public class TaskList {
 
     /**
      * Reads from the storage and populate the content as a list.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    private void readFromFile() throws DukeException {
+    private void readFromFile() throws TsohgException {
         Scanner scanner = storage.read();
         while (scanner.hasNext()) {
             String[] data = scanner.nextLine().split(" \\| ");
@@ -133,9 +133,9 @@ public class TaskList {
 
     /**
      * Saves the list to the storage.
-     * @throws DukeException If something wrong happens.
+     * @throws TsohgException If something wrong happens.
      */
-    private void saveToFile() throws DukeException{
+    private void saveToFile() throws TsohgException{
         String result = "";
         for (Task item : items) {
             result = result.concat(item.toStore() + "\n");

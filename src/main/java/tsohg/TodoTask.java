@@ -1,4 +1,4 @@
-package duke;
+package tsohg;
 
 /**
  * Represents the todo task.

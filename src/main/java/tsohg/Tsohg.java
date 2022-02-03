@@ -1,9 +1,9 @@
-package duke;
+package tsohg;
 
 /**
  * The main class of the program.
  */
-public class Duke {
+public class Tsohg {
 
     private Storage storage;
     private TaskList tasks;
@@ -13,12 +13,12 @@ public class Duke {
      * Constructor of the class.
      * @param filePath The filepath of the stored data.
      */
-    Duke(String filePath) {
+    Tsohg(String filePath) {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage);
             ui = new Ui(tasks);
-        } catch (DukeException e) {
+        } catch (TsohgException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -31,6 +31,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Tsohg("data.txt").run();
     }
 }
