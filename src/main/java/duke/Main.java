@@ -16,6 +16,10 @@ public class Main extends Application {
     private String pathToFile = "./data/duke.txt";
     private Duke duke = new Duke(pathToFile);
 
+    /**
+     * Show the stage for defined javafx configurations
+     * @param stage stage foundation to build whey GUI
+     */
     @Override
     public void start(Stage stage) {
         try {

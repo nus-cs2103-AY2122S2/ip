@@ -52,8 +52,9 @@ public class Duke {
         }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Function to convert system out from Whey to String
+     * @param input input from text input
+     * @return string output from whey
      */
     public String getResponse(String input) {
         ByteArrayOutputStream responseOutput = new ByteArrayOutputStream();
@@ -65,14 +66,5 @@ public class Duke {
         System.setOut(old);
         return responseOutput.toString();
     }
-
-//    /**
-//     * entry method to run program
-//     * @param args inputs
-//     */
-//    public static void main(String[] args) {
-//        String pathToFile = "./data/duke.txt";
-//        new Duke(pathToFile).getResponse();
-//    }
 }
 

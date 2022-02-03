@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/slime.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mushroom.jpeg"));
 
+    /**
+     * Initialise the program
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -32,6 +35,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
+    /**
+     * Set duke in javafx
+     * @param d Duke object to be set
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
