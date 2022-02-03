@@ -14,7 +14,8 @@ public class Ui {
     private static final String HELP = "\tA 'bye' command will exit the program, yarr.\n";
     private static final String LINE = "\t___________________________________________________________\n";
     private static final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
-    private static final String REQUEST_NEXT_COMMAND_ANGRY = "\tAye Aye, better get it right this time. Your next command:";
+    private static final String REQUEST_NEXT_COMMAND_ANGRY
+            = "\tAye Aye, better get it right this time. Your next command:";
     private static final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
     private static final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
     private static final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
