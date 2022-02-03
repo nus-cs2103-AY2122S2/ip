@@ -38,6 +38,7 @@ public class Storage {
                 String taskString = fileScanner.nextLine();
                 String[] data = taskString.split(",");
                 String type = data[0];
+                assert data[1].equals("true") || data[1].equals("false") : throw DukeException("Invalid file input");
                 Boolean status = Boolean.parseBoolean(data[1]);
                 String text = data[2];
                 if (data[0].equals("T")) {
