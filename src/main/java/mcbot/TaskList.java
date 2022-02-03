@@ -94,4 +94,24 @@ public class TaskList {
             ui.noMatch();
         }
     }
+
+    public String find(String taskName, Gui gui) {
+        boolean anyMatch = false;
+        boolean isHeaderPrinted = false;
+        StringBuilder sb = new StringBuilder();
+        for (Task t : taskList) {
+            if (t.getTaskName().contains(taskName)) {
+                anyMatch = true;
+                if (!isHeaderPrinted && anyMatch) {
+                    sb.append(gui.printFind() + "\n");
+                    isHeaderPrinted = true;
+                }
+                sb.append(gui.printTask(t) + "\n");
+            }
+        }
+        if (!anyMatch) {
+            return gui.noMatch();
+        }
+        return sb.toString();
+    }
 }
