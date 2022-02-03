@@ -17,7 +17,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -104,7 +104,7 @@ public class Duke {
     }
 
     /**
-     * Runs duke logic and behavior.
+     * Runs duke logic and behavior in text form.
      */
     public void runDuke() {
         ui.startGreeting();
