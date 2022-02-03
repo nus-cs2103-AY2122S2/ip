@@ -14,7 +14,7 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public Task deleteTask(int index) throws Exception_handler {
+    public Task removeTask(int index) throws Exception_handler {
         if (index < 0 || index >= taskList.size()) {
             throw new Exception_handler("Invalid index");
         }
@@ -25,9 +25,9 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public Task removeTask(int index){
-        return taskList.remove(index);
-    }
+//    public Task removeTask(int index){
+//        return taskList.remove(index);
+//    }
 
     public List<Task> getListOfTasks(){
         return taskList;

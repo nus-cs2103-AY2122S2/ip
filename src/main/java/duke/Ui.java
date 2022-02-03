@@ -37,7 +37,7 @@ public class Ui {
     }
 
     public void println(Task task){
-        System.out.print(task);
+        System.out.println(task);
     }
 
     public void showLoadingError() {
