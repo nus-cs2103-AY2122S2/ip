@@ -69,14 +69,14 @@ public class Ui {
     }
 
     public String outputUiText(String text) {
-        return text;
+        return "Pyke: \n" + text;
     }
 
     public String outputUiGreeting() {
-        return GREETINGS;
+        return "Pyke: \n" + GREETINGS;
     }
 
     public String outputUiFarewell() {
-        return FAREWELL;
+        return "Pyke: \n" + FAREWELL;
     }
 }
