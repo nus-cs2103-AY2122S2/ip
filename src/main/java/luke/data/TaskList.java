@@ -21,6 +21,12 @@ public class TaskList implements Storable {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Returns a List of string to be stored in a file.
+     * This method is called by {@code StorageFile}.
+     *
+     * @return The list of tasks formatted as their command equivalent.
+     */
     @Override
     public List<String> getData() {
         List<String> list = new ArrayList<>();
