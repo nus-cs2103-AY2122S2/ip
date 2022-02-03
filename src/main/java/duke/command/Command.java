@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.datetime.DateTable;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /**
  * Super class for all the Command classes
@@ -22,7 +22,7 @@ public abstract class Command {
      * @throws IOException If an I/O error occur
      */
     public abstract void execute(TaskList taskList, Ui ui,
-            BotStoring botStorage, DateTable dateTable) throws IOException;
+            BotStorage botStorage, DateTable dateTable) throws IOException;
 
     /**
      * Checks if the command is the exit command

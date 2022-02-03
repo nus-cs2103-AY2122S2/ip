@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.datetime.DateTable;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 /**
@@ -20,7 +20,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui,
-            BotStoring botStorage, DateTable dateTable) {
+            BotStorage botStorage, DateTable dateTable) {
         ui.endChat();
     }
 

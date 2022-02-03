@@ -3,7 +3,7 @@ package duke.util;
 /**
  * Checks whether the input can be parsed to number
  */
-public class NumericCheck {
+public class NumericChecker {
 
     /**
      * Checks whether the input string can be parsed into integer

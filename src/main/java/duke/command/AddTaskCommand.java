@@ -1,24 +1,30 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /**
  * Adds task to the respective storage command
  */
-public class AddCommand extends Command {
+public class AddTaskCommand extends Command {
     private final String description;
     private final String fullInput;
     private final String type;
     private final BotException exception = new BotException();
 
-    public AddCommand(String fullInput, String description, String type) {
+    /**
+     * Initialize an Add Task Command
+     * @param fullInput Full input from user
+     * @param description The description of the task
+     * @param type The type of the task
+     */
+    public AddTaskCommand(String fullInput, String description, String type) {
         this.description = description;
         this.fullInput = fullInput;
         this.type = type;
@@ -32,7 +38,7 @@ public class AddCommand extends Command {
      * @param task       The task need to be added
      * @throws IOException If an I/O error occurs
      */
-    private void addTaskDatabase(DateTable dateTable, BotStoring botStorage, Task task,
+    private void addTaskDatabase(DateTable dateTable, BotStorage botStorage, Task task,
             TaskList taskList) throws IOException {
         if (!task.getType().equals("T")) {
             dateTable.addDate(task);
@@ -53,7 +59,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui,
-            BotStoring botStorage, DateTable dateTable) throws IOException {
+            BotStorage botStorage, DateTable dateTable) throws IOException {
         if (type.equals("T") && fullInput.length() == 4) {
             exception.printEmptyDescriptionError("todo");
         } else if (type.equals("D") && fullInput.length() == 8) {

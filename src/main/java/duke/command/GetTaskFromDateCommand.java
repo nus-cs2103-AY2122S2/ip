@@ -2,17 +2,22 @@ package duke.command;
 
 import duke.datetime.DateTable;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 /**
  * Extracts events on a specific date command
  */
-public class DateCommand extends duke.command.Command {
+public class GetTaskFromDateCommand extends duke.command.Command {
     private final DateTable dateTable;
     private final String description;
 
-    public DateCommand(DateTable dateTable, String description) {
+    /**
+     * Initialize a Get Task From Date Command
+     * @param dateTable Collections of dates and tasks
+     * @param description The date that we need to find task on
+     */
+    public GetTaskFromDateCommand(DateTable dateTable, String description) {
         this.dateTable = dateTable;
         this.description = description;
     }
@@ -27,7 +32,7 @@ public class DateCommand extends duke.command.Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable) {
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
         dateTable.getEventOnDate(description);
     }
 

@@ -1,19 +1,19 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.datetime.DateTable;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /**
  * Finds task that match with specific keyword
  */
-public class FindCommand extends Command {
+public class FindTaskCommand extends Command {
     private String keyWord;
 
-    public FindCommand(String keyWord) {
+    public FindTaskCommand(String keyWord) {
         this.keyWord = keyWord;
     }
 
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @throws IOException If an I/O error occur
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable)
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         taskList.findTasksByKeyWord(keyWord);
     }

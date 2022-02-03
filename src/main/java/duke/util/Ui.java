@@ -1,9 +1,9 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents a helper program to read from and write to interface
@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
+    /**
+     * Initialize an Ui interface
+     * @param sc System scanner
+     */
     public Ui(Scanner sc) {
         //String logo = " ____        _        \n"
         //        + "|  _ \\ _   _| | _____ \n"

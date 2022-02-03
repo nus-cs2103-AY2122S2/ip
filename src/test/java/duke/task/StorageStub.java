@@ -1,14 +1,19 @@
 package duke.task;
 
-import duke.util.Storing;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class StoringStub implements Storing {
+import duke.util.Storage;
+
+public class StorageStub implements Storage {
     private long length;
 
-    public StoringStub(String path, String directory) {
+    /**
+     * Initialize a stub for database class
+     * @param path Relative path to the database
+     * @param directory Relative directory to the database
+     */
+    public StorageStub(String path, String directory) {
         if (path.equals("data/duke.Duke.txt") && directory.equals("data")) {
             this.length = 1;
         } else {
@@ -36,7 +41,7 @@ public class StoringStub implements Storing {
     }
 
     @Override
-    public boolean isDatabaseExists() throws IOException {
+    public boolean doesDatabaseExists() throws IOException {
         return false;
     }
 

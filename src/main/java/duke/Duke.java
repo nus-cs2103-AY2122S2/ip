@@ -1,33 +1,39 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.datetime.DateTable;
 import duke.task.TaskList;
+import duke.util.BotStorage;
 import duke.util.Parser;
-import duke.util.BotStoring;
 import duke.util.Ui;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * The bot main class
  */
 public class Duke {
 
-    private final static String DIRECTORY = "data";
-    private final static String FILE_NAME = "Duke.txt";
-    private final static String PATH = DIRECTORY + "/" + FILE_NAME;
+    private static final String DIRECTORY = "data";
+    private static final String FILE_NAME = "Duke.txt";
+    private static final String PATH = DIRECTORY + "/" + FILE_NAME;
 
-    private final BotStoring botStorage;
+    private final BotStorage botStorage;
     private final TaskList taskList;
     private final Ui ui;
     private final DateTable dateTable;
 
+    /**
+     * Initialize the Duke bot
+     * @param path Relative path where the database is located
+     * @param directory Directory where database is located
+     * @throws IOException If an I/O exception occur
+     */
     public Duke(String path, String directory) throws IOException {
         TaskList taskList1 = new TaskList();
 
-        botStorage = new BotStoring(path, directory);
+        botStorage = new BotStorage(path, directory);
         Scanner sc = new Scanner(System.in);
         ui = new Ui(sc);
         dateTable = new DateTable(ui);

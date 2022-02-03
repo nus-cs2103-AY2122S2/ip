@@ -13,6 +13,11 @@ public class Task {
     private LocalDate time;
     private String timeCommand;
 
+    /**
+     * Initialize a task object
+     * @param description Description of the task
+     * @param type Type of the task
+     */
     public Task(String description, String type) {
         int slashIndex = parseDescription(description, type);
         this.description = description.substring(0, slashIndex);
@@ -32,7 +37,7 @@ public class Task {
         int slashIndex = -1;
         int command = -1;
 
-        if (! type.equals("T")) {
+        if (!type.equals("T")) {
             slashIndex = description.indexOf("/");
             command = description.indexOf(" ", slashIndex);
             String timeString = description.substring(command + 1);
@@ -78,8 +83,8 @@ public class Task {
         if (this.timeCommand.equals("")) {
             timeDue = " |";
         } else {
-            timeDue = "| " + timeCommand + " " +
-                    this.time.format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " |";
+            timeDue = "| " + timeCommand + " "
+                    + this.time.format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " |";
         }
 
         return "| " + type + " | " + done + " | " + description + timeDue;
@@ -107,9 +112,9 @@ public class Task {
             bracketString = "[X]";
         }
 
-        if (! this.timeCommand.equals("")) {
-            timeCommandString = "(" + this.timeCommand + ": " +
-                    time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        if (!this.timeCommand.equals("")) {
+            timeCommandString = "(" + this.timeCommand + ": "
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
         return "[" + type + "]" + bracketString + " " + description + timeCommandString;
     }

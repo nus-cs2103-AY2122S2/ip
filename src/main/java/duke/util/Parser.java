@@ -1,6 +1,15 @@
 package duke.util;
 
-import duke.command.*;
+
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.FindTaskCommand;
+import duke.command.GetTaskFromDateCommand;
+import duke.command.ShowListCommand;
+import duke.command.UpdateMarkCommand;
+import duke.command.WrongSyntaxCommand;
 import duke.datetime.DateTable;
 
 /**
@@ -71,19 +80,19 @@ public class Parser {
         case "unmark":
             return new UpdateMarkCommand(description, false);
         case "todo":
-            return new AddCommand(fullInput, description, "T");
+            return new AddTaskCommand(fullInput, description, "T");
         case "deadline":
-            return new AddCommand(fullInput, description, "D");
+            return new AddTaskCommand(fullInput, description, "D");
         case "event":
-            return new AddCommand(fullInput, description, "E");
+            return new AddTaskCommand(fullInput, description, "E");
         case "delete":
-            return new DeleteCommand(description);
+            return new DeleteTaskCommand(description);
         case "date":
-            return new DateCommand(dateTable, description);
+            return new GetTaskFromDateCommand(dateTable, description);
         case "bye":
             return new ByeCommand();
         case "find":
-            return new FindCommand(description);
+            return new FindTaskCommand(description);
         default:
             return new WrongSyntaxCommand();
         }

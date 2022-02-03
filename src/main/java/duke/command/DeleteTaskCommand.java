@@ -1,23 +1,23 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.BotStoring;
-import duke.util.NumericCheck;
+import duke.util.BotStorage;
+import duke.util.NumericChecker;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /**
  * Deletes a specific task
  */
-public class DeleteCommand extends duke.command.Command {
+public class DeleteTaskCommand extends duke.command.Command {
     private String description;
     private final BotException exception = new BotException();
 
-    public DeleteCommand(String description) {
+    public DeleteTaskCommand(String description) {
         this.description = description;
     }
 
@@ -33,9 +33,9 @@ public class DeleteCommand extends duke.command.Command {
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable)
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
-        if (!NumericCheck.isNumeric(description)) {
+        if (!NumericChecker.isNumeric(description)) {
             exception.printNotNumericError("delete");
         } else {
             int taskNumber = Integer.parseInt(description);

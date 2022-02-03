@@ -1,21 +1,21 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Interface represent object that can store things
  */
-public interface Storing {
+public interface Storage {
     /**
      * Checks whether the database file exist or not
      *
      * @return True if the database file exists and false otherwise
      * @throws IOException If an I/O error occur
      */
-    boolean isDatabaseExists() throws IOException;
+    boolean doesDatabaseExists() throws IOException;
 
     /**
      * Reads the database file and append all the tasks into a collection

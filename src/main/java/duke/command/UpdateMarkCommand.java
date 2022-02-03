@@ -1,14 +1,15 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.BotStoring;
-import duke.util.NumericCheck;
+import duke.util.BotStorage;
+import duke.util.NumericChecker;
 import duke.util.Ui;
 
-import java.io.IOException;
 
 /**
  * Updates the state of the task
@@ -18,6 +19,11 @@ public class UpdateMarkCommand extends duke.command.Command {
     private boolean isDone;
     private final BotException exception = new BotException();
 
+    /**
+     * Initialize an Update Mark Command
+     * @param description The task id need to be updated
+     * @param isDone True if we want to update the task as done, false otherwise
+     */
     public UpdateMarkCommand(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -34,7 +40,7 @@ public class UpdateMarkCommand extends duke.command.Command {
      * @throws IOException If an I/O error occur
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable)
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         String stateDescription = "";
 
@@ -44,7 +50,7 @@ public class UpdateMarkCommand extends duke.command.Command {
             stateDescription = "unmark";
         }
 
-        if (!NumericCheck.isNumeric(description)) {
+        if (!NumericChecker.isNumeric(description)) {
             exception.printNotNumericError(stateDescription);
         } else {
             int taskNumber = Integer.parseInt(description);

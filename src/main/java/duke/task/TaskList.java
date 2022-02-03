@@ -1,38 +1,52 @@
 package duke.task;
 
-import duke.datetime.DateTable;
-import duke.exception.BotException;
-import duke.util.Storing;
-import duke.util.Ui;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.datetime.DateTable;
+import duke.exception.BotException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * Stores and performs operation on a collection of tasks
  */
 public class TaskList {
     private final ArrayList<Task> storingList = new ArrayList<>();
-    private final Storing botStoring;
+    private final Storage botStorage;
     private int totalTask = 0;
     private final Ui ui;
     private final BotException exception = new BotException();
     private final DateTable dateTable;
 
+    /**
+     * Initialize an empty reference of task list, for testing purposes
+     */
     public TaskList() {
-        this.botStoring = null;
+        this.botStorage = null;
         this.ui = null;
         this.dateTable = null;
     }
 
-    public TaskList(Storing botStoring) {
-        this.botStoring = botStoring;
+    /**
+     * Initialize an empty reference of task list with only storage, for testing purposes
+     * @param botStorage The input storage reference
+     */
+    public TaskList(Storage botStorage) {
+        this.botStorage = botStorage;
         this.ui = null;
         this.dateTable = null;
     }
 
-    public TaskList(Storing botStorage, Ui ui, DateTable dateTable) throws IOException {
-        this.botStoring = botStorage;
+    /**
+     * Initialize the task-list object for Duke bot to use
+     * @param botStorage The database for offline data storing
+     * @param ui The ui interface that interact with user
+     * @param dateTable Collections of dates and tasks
+     * @throws IOException If an I/O exception occur
+     */
+    public TaskList(Storage botStorage, Ui ui, DateTable dateTable) throws IOException {
+        this.botStorage = botStorage;
         this.ui = ui;
         this.dateTable = dateTable;
         isFileHasText();
@@ -45,8 +59,8 @@ public class TaskList {
      * @throws IOException If an I/O error occur
      */
     public boolean isFileHasText() throws IOException {
-        if (!(botStoring.getDatabaseLength() == 0)) {
-            botStoring.readFileContent(storingList);
+        if (!(botStorage.getDatabaseLength() == 0)) {
+            botStorage.readFileContent(storingList);
             totalTask = storingList.size();
             return true;
         } else {

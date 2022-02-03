@@ -3,7 +3,7 @@ package duke.command;
 import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.TaskList;
-import duke.util.BotStoring;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 /**
@@ -20,7 +20,7 @@ public class WrongSyntaxCommand extends duke.command.Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable) {
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
         BotException exception = new BotException();
         exception.printWrongSyntaxError();
     }

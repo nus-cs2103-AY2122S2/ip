@@ -1,27 +1,37 @@
 package duke.util;
 
-import duke.task.Task;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Task;
+
+
 /**
  * Reads and writes input history into a database file
  */
-public class BotStoring implements Storing {
+public class BotStorage implements Storage {
 
     private final String path;
     private final String directory;
     private final File database;
 
-
-    public BotStoring(String path, String directory) throws IOException {
+    /**
+     * Initialize the database helper for Duke bot
+     * @param path Relative path where the database is located
+     * @param directory Directory where database is located
+     * @throws IOException If an I/O exception occur
+     */
+    public BotStorage(String path, String directory) throws IOException {
         this.path = path;
         database = new File(path);
         this.directory = directory;
-        isDatabaseExists();
+        doesDatabaseExists();
     }
 
     /**
@@ -30,7 +40,7 @@ public class BotStoring implements Storing {
      * @return True if the database file exists and false otherwise
      * @throws IOException If an I/O error occur
      */
-    public boolean isDatabaseExists() throws IOException {
+    public boolean doesDatabaseExists() throws IOException {
         if (!database.exists()) {
             File directoryFile = new File(this.directory);
             directoryFile.mkdir();
