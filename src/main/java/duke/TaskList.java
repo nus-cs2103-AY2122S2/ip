@@ -1,22 +1,23 @@
 package duke;
 
+import gui.Output;
+
 import java.util.ArrayList;
 
 /**
  * This is the class that stores the task in a list format
  * and provide methods to modify the list
  */
-
 public class TaskList {
     public ArrayList<Task> tasklist;
 
-    public TaskList(){
+    public TaskList() {
         tasklist = new ArrayList<Task>();
     }
 
-
-    public void markTaskNum(int taskNum, String check){
-        if (check.equals("true") && (taskNum > 0)) {
+    //Depreciated
+    public void markTaskNum(int taskNum, String isTrue) {
+        if (isTrue.equals("true") && (taskNum > 0)) {
             this.tasklist.get(taskNum).mark();
         }
     }
@@ -27,20 +28,21 @@ public class TaskList {
      *
      * @param num index (starts from 1) to delete
      */
-    public void deleter(int num){
-        if (num > 0 && num <= Task.totalTask){
+    public String deleteTask(int num) {
+        if (num > 0 && num <= Task.totalTask) {
             num--;
-            Ui.printRemovedThisTask(num, this);
+            String s = Output.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
             Task.totalTask--;
-            for(int i = num; i <Task.totalTask; i++){
+            for(int i = num; i <Task.totalTask; i++) {
                 this.tasklist.get(i).decrementNum();
             }
-            Ui.printTotalTasks();
+            s += Output.printTotalTasks();
+            Storage.writeAllToFile(this);
+            return s;
         } else {
-            System.out.println("☹ OOPS!!! There is no such task found.");
+            return "☹ OOPS!!! There is no such task found.";
         }
-        Storage.writeAllToFile(this);
     }
 
     /**
@@ -49,40 +51,43 @@ public class TaskList {
      *
      * @param input Original input string that was entered
      */
-    public void markTask(String input){
+    public String markTask(String input) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
+        String s = "";
         Task curr = tasklist.get(taskNum);
-        if (input.startsWith("mark")){
+        if (input.startsWith("mark")) {
             curr.mark();
-            Ui.printMarkTaskDone(curr);
+            s += Output.printMarkTaskDone(curr);
         } else {
             curr.unmark();
-            Ui.printMarkTaskNotDone(curr);
+            s += Output.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile(this);
+        return s;
     }
 
-    public void addTask(String name, String time, String type, boolean isReading){
+    public String addTask(String name, String time, String type, boolean isReading) {
         Task task;
-        if (type.equals("D")){
+        if (type.equals("D")) {
             task = new Deadline(name, Task.totalTask, time, isReading);
-        } else if (type.equals("E")){
+        } else if (type.equals("E")) {
             task = new Event(name, Task.totalTask, time, isReading);
         } else {
             task = new ToDo(name, Task.totalTask, isReading);
         }
         tasklist.add(task);
+        return task.toString();
     }
 
-    public void findTask(String keyword){
+    public String findTask(String keyword) {
         TaskList matchTasks = new TaskList();
-        for(int i=0; i<Task.totalTask; i++){
-            if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)){
+        for(int i = 0; i < Task.totalTask; i++) {
+            if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)) {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }
-        Ui.printMatchTasks(matchTasks.tasklist);
+        return Output.printMatchTasks(matchTasks.tasklist);
     }
 
 }

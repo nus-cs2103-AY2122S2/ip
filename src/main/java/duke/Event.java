@@ -4,7 +4,7 @@ package duke;
  * This is a type of duke.Task: duke.Event
  *
  */
-public class Event extends Task{
+public class Event extends Task {
 
     /**
      * Constructor of event.
@@ -13,9 +13,10 @@ public class Event extends Task{
      * @param input descriptor of task
      * @param number task number
      * @param time duration of event
+     * @param isReading flag to check if input is being read from file data
      */
-    public Event(String input, int number, String time, boolean reading) {
-        super(input, number, time, "E", reading);
+    public Event(String input, int number, String time, boolean isReading) {
+        super(input, number, time, "E", isReading);
     }
 
     /**
@@ -25,6 +26,6 @@ public class Event extends Task{
      */
     @Override
     public String toString(){
-        return String.format("%d. [E][%s] %s (at: %s)\n", number+1, getStatus(), name, this.time);
+        return String.format("%d. [E][%s] %s (at: %s)\n", number + 1, getStatus(), name, this.time);
     }
 }

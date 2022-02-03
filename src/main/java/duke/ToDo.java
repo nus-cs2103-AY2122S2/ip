@@ -10,9 +10,10 @@ public class ToDo extends Task {
      *
      * @param input descriptor of task
      * @param number task number
+     * @param isReading flag to check if input is being read from file data
      */
-    public ToDo(String input, int number, boolean reading){
-        super(input, number, null, "T", reading);
+    public ToDo(String input, int number, boolean isReading){
+        super(input, number, null, "T", isReading);
     }
 
     /**
@@ -22,7 +23,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString(){
-        String s = String.format("%d. [T][%s] %s\n", number+1, getStatus(), name);
+        String s = String.format("%d. [T][%s] %s\n", number + 1, getStatus(), name);
         return s;
     }
 }

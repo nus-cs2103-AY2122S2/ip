@@ -2,11 +2,11 @@ E---false--- eat ---2222 1900-01-01 1100
 D---false--- daaa ---Jan 01 2000 11:00 AM
 D---true--- aa ---2021-22-01 2100
 D---true--- bac ---Jan 22 2021 09:00 PM
-T---false--- die---null
-T---false--- 1---null
-T---true--- 2---null
-T---true--- 3---null
-T---true--- 4---null
+T---false--- die---
+T---false--- 1---
+T---true--- 2---
+T---true--- 3---
+T---true--- 4---
 D---false--- aaa ---Apr 04 1998 02:00 PM
 D---false--- eat dinner ---2022-1-27 2400
 D---false--- eat dinner ---Jan 28 2022 12:00 AM
@@ -14,11 +14,11 @@ D---true--- eat some fish ---Oct 10 1998 10:00 AM
 D---false--- eat dinner ---Jan 28 2022 12:00 AM
 E---false--- have cake for supper ---1998-25-03 1200
 E---true--- have cat for supper ---Mar 25 1998 12:00 PM
-T---false--- BAC deposit /at 2000-01-01 1100---null
+T---false--- BAC deposit /at 2000-01-01 1100---
 E---false--- eat cake ---1200
 D---false--- BACK deposit ---Jan 01 2000 11:00 AM
-T---false--- eventor /at tmr---null
-E---false--- eventor ---tmr
 D---false--- eat cake ---tmr
 D---false--- eat cake NOW ---Jan 01 2022 11:00 AM
 E---false--- eat bread now ---Jul 07 2001 10:00 PM
+D---false--- eat cat ---Jan 01 2021 07:00 PM
+D---false--- eat water ---Jan 01 2020 07:00 PM
