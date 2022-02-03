@@ -24,6 +24,7 @@ public class Parser {
 
     /**
      * Creates a {@link Command} object based on the supplied command string.
+     *
      * @param command Command string to be translated.
      * @return An instance of the associated <code>Command</code> object for handling the command.
      * @throws DukeInvalidCommandException If an invalid command string is supplied.

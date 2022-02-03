@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets the handler that should be fired on input events.
+     *
      * @param inputHandler The handler that should be fired on input events.
      */
     public void setInputHandler(Consumer<String> inputHandler) {
@@ -57,6 +58,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Loads the image asset located at the supplied path as an <code>Image</code> object.
+     *
      * @param assetPath Path of the image asset to load within the resources folder.
      * @return The <code>Image</code> object loaded from the supplied path.
      * @throws DukeIoException If the image at the supplied path cannot be loaded.
@@ -71,6 +73,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Prints a message as the bot in the Ui.
+     *
      * @param message The message to be printed.
      */
     public void printBotMessage(String message) {

@@ -18,6 +18,7 @@ import duke.task.TaskList;
 public class TaskListSerializer {
     /**
      * Creates a {@link TaskList} object from the data in the supplied input stream.
+     *
      * @param dbStream Input stream to read data from for <code>TaskList</code> creation.
      * @return Inflated <code>TaskList</code> object.
      * @throws DukeIoException If any error occurs while reading the input stream.
@@ -50,6 +51,7 @@ public class TaskListSerializer {
 
     /**
      * Flattens and writes the {@link TaskList} object provided to the supplied output stream.
+     *
      * @param taskList <code>TaskList</code> object to flatten and write.
      * @param dbStream Output stream to write the data to.
      * @throws DukeIoException If any error occurs while writing to the output stream.

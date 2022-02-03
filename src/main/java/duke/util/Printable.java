@@ -6,6 +6,7 @@ package duke.util;
 public interface Printable {
     /**
      * Prints the provided <code>String</code> input.
+     *
      * @param input String to be printed.
      */
     public void print(String input);

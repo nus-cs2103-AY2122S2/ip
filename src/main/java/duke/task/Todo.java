@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 public class Todo extends Task {
     /**
      * Creates a todo type task with the supplied description.
+     *
      * @param task Description of the task.
      */
     public Todo(String task) {

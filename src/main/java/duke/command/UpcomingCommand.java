@@ -13,6 +13,7 @@ import duke.util.Printable;
 public class UpcomingCommand extends Command {
     /**
      * Creates a handler for the upcoming command.
+     *
      * @param args Arguments supplied to the command handler.
      */
     UpcomingCommand(String args) {

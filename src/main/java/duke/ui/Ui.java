@@ -33,6 +33,7 @@ public class Ui {
     /**
      * Inflates the MainWindow user-interface onto the supplied stage and attaches the supplied input
      * handler.
+     *
      * @param stage The JavaFX stage to create the user-interface on.
      * @param inputHandler The handler to be fired when the user enters some input.
      * @throws DukeIoException If the MainWindow layout FXML file cannot be found.
@@ -52,6 +53,7 @@ public class Ui {
 
     /**
      * Prints a greeting for the initial startup.
+     *
      * @return The global instance of the <code>Ui</code> class.
      */
     public Ui greet() {
@@ -66,6 +68,7 @@ public class Ui {
     /**
      * Provides a {@link Printable} object that can be printed to.
      * Handles formatting of printed contents, including indentation and surrounding separators.
+     *
      * @param action A <code>Function</code> object that accepts the provided {@link Printable} object
      *               and returns a boolean to indicate if the application should continue running.
      * @return <code>Boolean</code> indicating if the application should continue running.
@@ -83,6 +86,7 @@ public class Ui {
     /**
      * Prints an error message onto the {@link Printable} object provided.
      * Error message printer depends on the type of the provided {@link DukeException} object.
+     *
      * @param linePrinter {@link Printable} object that the error should be printed to.
      * @param ex Exception object that the error message should be printed for.
      */
@@ -99,6 +103,7 @@ public class Ui {
 
     /**
      * Returns the global instance of the {@link Ui} class.
+     *
      * @return Global instance of the <code>Ui</code> class.
      */
     public static Ui getInstance() {

@@ -10,6 +10,7 @@ import duke.util.Printable;
 public class FindCommand extends Command {
     /**
      * Creates a handler for the find command.
+     *
      * @param args Arguments supplied to the command handler.
      */
     FindCommand(String args) {

@@ -26,6 +26,7 @@ public class Storage {
     /**
      * Loads any previous data, if any, that was saved by a previous run of the application.
      * Inflates the <code>TaskList</code> object stored by the previous run.
+     *
      * @return <code>TaskList</code> object read from database file.
      * @throws DukeIoException If an error occurs during any I/O operation or the database file read is
      *                         in an invalid format.
@@ -39,6 +40,7 @@ public class Storage {
     /**
      * Saves the provided <code>TaskList</code> object to disk.
      * Serializes and writes the object to a predetermined location on the file system.
+     *
      * @param taskList <code>TaskList</code> object to save.
      * @throws DukeIoException If an error occurs during the write operation.
      */
@@ -50,6 +52,7 @@ public class Storage {
 
     /**
      * Creates the directory structure required for saving the database file.
+     *
      * @throws DukeIoException If an error occurs during folder creation.
      */
     private static void initDataStore() throws DukeIoException {
@@ -68,6 +71,7 @@ public class Storage {
 
     /**
      * Creates a read-stream from the database file on disk.
+     *
      * @return <Code>FileInputStream</Code> for the database file.
      * @throws DukeIoException If an error occurs during the internal {@link #initDataStore()} operation.
      */
@@ -86,6 +90,7 @@ public class Storage {
     /**
      * Creates a write-stream to the database file stored on disk.
      * Overwrites any existing data in the file.
+     *
      * @return <code>FileOutputStream</code> for the database file.
      * @throws DukeIoException If an error occurs during the internal {@link #initDataStore()} or write
      *                         operation.

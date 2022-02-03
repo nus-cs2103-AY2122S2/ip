@@ -9,6 +9,7 @@ import duke.util.Printable;
 public class ListCommand extends Command {
     /**
      * Creates a handler for the list command.
+     *
      * @param args Arguments supplied to the command handler.
      */
     ListCommand(String args) {

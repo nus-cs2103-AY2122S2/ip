@@ -14,6 +14,7 @@ public class MarkCommand extends Command {
 
     /**
      * Creates a handler for the mark or unmark command, depending on the supplied argument.
+     *
      * @param args Arguments supplied to the command handler.
      * @param isDone The new completion state that the handler should set a task to.
      */

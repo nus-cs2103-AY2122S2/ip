@@ -16,6 +16,7 @@ public class Event extends Task {
 
     /**
      * Creates an event type task.
+     *
      * @param task Description of the event.
      * @param at Date associated with the event.
      */

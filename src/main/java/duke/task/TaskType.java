@@ -23,6 +23,7 @@ public enum TaskType {
 
     /**
      * Returns a single alphabet that represents the type of task.
+     *
      * @return String containing a single alphabet representing the type of task.
      */
     public String getShorthand() {
@@ -31,6 +32,7 @@ public enum TaskType {
 
     /**
      * Returns a numeric identifier for the type of task.
+     *
      * @return Integer associated with the type of task.
      */
     public int getTypeId() {
@@ -39,6 +41,7 @@ public enum TaskType {
 
     /**
      * Returns the {@link TaskType} with the supplied numeric identifier.
+     *
      * @param typeId Numeric identifier of the type of task.
      * @return The matching {@link TaskType}, or null if the provided identifier is invalid.
      */

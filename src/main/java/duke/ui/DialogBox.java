@@ -25,6 +25,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new instance of <code>DialogBox</code>. Sole constructor for <code>DialogBox</code>.
+     *
      * @param text The text to be inserted into the chat row.
      * @param image The profile picture of the user chatting.
      */
@@ -56,6 +57,7 @@ public class DialogBox extends HBox {
      * Creates a new instance of <code>DialogBox</code> to represent a row in the chat box for the user.
      * Performs an inversion of the horizontal ordering of the chat row to make it opposite of that of a
      * bot chat row.
+     *
      * @param text The text to be inserted into the chat row.
      * @param image The profile picture of the user chatting.
      * @return The created instance of <code>DialogBox</code>
@@ -70,6 +72,7 @@ public class DialogBox extends HBox {
      * Creates a new instance of <code>DialogBox</code> to represent a row in the chat box for the user.
      * Performs an inversion of the horizontal ordering of the chat row to make it opposite of that of a
      * bot chat row.
+     *
      * @param text The text to be inserted into the chat row.
      * @param image The profile picture of the bot.
      * @return The created instance of <code>DialogBox</code>

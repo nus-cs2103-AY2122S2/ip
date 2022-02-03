@@ -12,6 +12,7 @@ import java.io.IOException;
 public class StreamUtils {
     /**
      * Creates a writable stream and returns all the content written in by the supplied consumer.
+     *
      * @param writer Consumer writing into the writable stream.
      * @return All data written into the stream.
      * @throws IOException If any write errors occur.
@@ -30,6 +31,7 @@ public class StreamUtils {
 
     /**
      * Creates a readable stream from the supplied input data, and passes it to the supplied consumer.
+     *
      * @param reader Consumer reading data from the stream.
      * @param data Data contained in the readable stream.
      * @throws IOException If any read errors occur.

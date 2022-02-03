@@ -25,6 +25,7 @@ public class Duke extends Application {
     /**
      * Performs pre-execution initialization of resources required throughout the application lifecycle.
      * Loads any existing database and attaches observers for saving the database to disk.
+     *
      * @return The current instance of the application being initialized.
      */
     Duke initializeTaskList() {
@@ -62,6 +63,7 @@ public class Duke extends Application {
 
     /**
      * Passes the input string to <code>Parser</code> to process.
+     *
      * @param input Input string to process.
      */
     public void processCommand(String input) {

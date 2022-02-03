@@ -18,6 +18,7 @@ import duke.task.TaskType;
 public class TaskSerializer {
     /**
      * Creates a {@link Task} object from data in the provided byte array.
+     *
      * @param data Byte array containing serialized data for a Task object.
      * @return <code>Task</code> object inflated from the byte array.
      * @throws DukeIoException If any format errors are encountered in the provided data.
@@ -40,6 +41,7 @@ public class TaskSerializer {
 
     /**
      * Serializes the {@link Task} object into a custom format binary block.
+     *
      * @param task <code>Task</code> object to be serialized.
      * @return Byte array containing the deflated data of the supplied <code>Task</code> object.
      * @throws DukeIoException If any write error occurs during serialization.

@@ -12,6 +12,7 @@ import duke.util.Printable;
 public class ScheduleCommand extends Command {
     /**
      * Creates a handler for the schedule command.
+     *
      * @param args Arguments supplied to the command handler.
      */
     ScheduleCommand(String args) {

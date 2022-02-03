@@ -15,6 +15,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Sole Constructor for {@link Task}.
+     *
      * @param type Type of the task to be created.
      * @param description Description of the task.
      */
@@ -26,6 +27,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Marks the task as completed or uncompleted, depending on the argument.
+     *
      * @param isDone New completion status of the task.
      */
     void setDone(boolean isDone) {
@@ -34,6 +36,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns the user-provided description of the task.
+     *
      * @return Description of the task.
      */
     public String getDescription() {
@@ -42,6 +45,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns the completion status of the task.
+     *
      * @return Completion status of the task.
      */
     public boolean isDone() {
@@ -50,6 +54,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns an icon associated with the current completion status of the task.
+     *
      * @return X if the task is completed, single whitespace otherwise.
      */
     public String getStatusIcon() {
@@ -58,6 +63,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns the date, if any, associated with the task.
+     *
      * @return {@link Optional} object containing a {@link LocalDateTime} object.
      */
     public Optional<LocalDateTime> getDate() {
@@ -66,6 +72,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Returns a summary string containing all the current attributes of the task.
+     *
      * @return Human-readable String that contains the current attributes.
      */
     public String getReadableString() {
@@ -75,6 +82,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Flattens and writes the task object into the supplied {@link DataOutputStream}.
+     *
      * @param dOut Output stream for the current instance to be serialized to.
      * @throws IOException If an error occurs during any write operation.
      */
@@ -88,6 +96,7 @@ public abstract class Task implements Serializable {
     /**
      * Populates the attributes of this instance with attribute data read from the
      * supplied {@link DataInputStream}.
+     *
      * @param dIn Input stream to read attribute data from.
      * @return The current instance of the task.
      * @throws IOException If an error occurs during any read operation.
@@ -103,6 +112,7 @@ public abstract class Task implements Serializable {
      * Creates subtypes of <code>Task</code> depending on the {@link TaskType} supplied.
      * Depends on the {@link #readSerializedData(DataInputStream)} method for actual population of object
      * attributes.
+     *
      * @param type Type of task to be created.
      * @param dIn Input stream to read attribute data from.
      * @return Task created, or null if an invalid {@link TaskType} is supplied.

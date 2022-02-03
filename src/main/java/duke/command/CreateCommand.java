@@ -20,6 +20,7 @@ public class CreateCommand extends Command {
 
     /**
      * Creates a handler for a creation command.
+     *
      * @param args Arguments supplied to the command handler.
      * @param taskType The type of task to be created.
      */
@@ -43,6 +44,7 @@ public class CreateCommand extends Command {
 
     /**
      * Parses and creates a Todo object.
+     *
      * @param linePrinter Object that the command handler outputs responses to.
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string is empty.
@@ -60,6 +62,7 @@ public class CreateCommand extends Command {
 
     /**
      * Parses and creates a Deadline object.
+     *
      * @param linePrinter Object that the command handler outputs responses to.
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.
@@ -83,6 +86,7 @@ public class CreateCommand extends Command {
 
     /**
      * Parses and creates a Event object.
+     *
      * @param linePrinter Object that the command handler outputs responses to.
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.

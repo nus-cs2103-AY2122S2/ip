@@ -29,6 +29,7 @@ public class PrinterStub implements Printable {
 
     /**
      * Clears all the lines that have been printed to this instance.
+     *
      * @return This instance of PrinterStub.
      */
     public PrinterStub clear() {
