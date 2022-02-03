@@ -3,12 +3,12 @@ package siri;
 import java.util.Scanner;
 
 class Ui {
+    private Scanner sc;
     private String logo;
     public Ui(String logo) {
         this.logo = logo;
+        sc = new Scanner(System.in);
     }
-
-    public static Scanner sc = new Scanner(System.in);
 
     /**
      * Class method to print the start up message.
@@ -25,13 +25,13 @@ class Ui {
     }
 
     /**
-     * Class method to allow for input to be taken in.
-     * 
+     * Scans for next user input.
+     *
      * @return String of the input that is taken in.
      */
-    public static String takeInput() {
+    public String takeInput() {
         System.out.println("What can I do for you?");
-        return sc.nextLine();
+        return this.sc.nextLine();
     }
 
     /**
@@ -40,12 +40,12 @@ class Ui {
     public static void separator() {
         System.out.println("====================");
     }
-    
+
     /**
-     * Class method to be printed when exiting the application.
+     * Closes scanner and print exit message.
      */
-    public static void exit() {
-        sc.close();
+    public void exit() {
+        this.sc.close();
         System.out.println("Bye!! Hope to see you again soon!!");
     }
 }

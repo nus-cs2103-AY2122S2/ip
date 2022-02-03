@@ -8,17 +8,17 @@ public class Siri {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
-    private Ui ui; 
+    private Ui ui;
 
     /**
      * Constructor for Siri class.
-     * 
+     *
      * @param filePath in which data is to be loaded and saved.
      */
     public Siri(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui("   -----      O    -----      O\n"
-                + " /   _   \\   __   |       \\   __\n" 
+                + " /   _   \\   __   |       \\   __\n"
                 + " |  | |__|  |  |  |   O   |  |  |\n"
                 + " |   ----\\  |  |  |       /  |  |\n"
                 + "  \\ __   |  |  |  |   ---    |  |\n"
@@ -46,16 +46,13 @@ public class Siri {
 
         while (continueExecution) {
             try {
-                continueExecution = parser.handleCommand(Ui.takeInput());
+                continueExecution = parser.handleCommand(ui.takeInput());
             } catch (SiriException se) {
                 System.out.println(se.getMessage());
             }
             Ui.separator();
         }
-        
         storage.save(tasks.saveData());
-        Ui.exit();
-
+        ui.exit();
     }
-
 }

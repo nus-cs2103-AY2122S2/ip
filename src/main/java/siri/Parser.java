@@ -13,21 +13,23 @@ class Parser {
 
     /**
      * Constructor of Parser class.
-     * 
+     *
      * @param taskList TaskList object in which execution of the commands will be carried out on.
      */
     Parser(TaskList taskList) {
         this.taskList = taskList;
     }
-    
+
     /**
      * Method to handle the command being passed in.
-     * 
+     *
      * @param command String representation of the command that is passed in.
-     * @return true to indicate further acceptance of command is allowed and false to indicate further acceptance of command is not allowed.
-     * @throws SiriException if command structure is invalid, command is not recognised or if there are missing or extra fields in command.
+     * @return true to indicate further acceptance of command is allowed and false to indicate
+     * further acceptance of command is not allowed.
+     * @throws SiriException if command structure is invalid, command is not recognised or
+     * if there are missing or extra fields in command.
      */
-    public boolean handleCommand(String command) throws SiriException{
+    public boolean handleCommand(String command) throws SiriException {
 
         String[] inputSplit = command.split(" ", 2);
         boolean continueExecution = true;
@@ -52,7 +54,6 @@ class Parser {
                             this.taskList.markItem(index);
                             break;
                         }
-                        
                     } catch (NumberFormatException nfe) {
                         throw new SiriException("Please ENTER a valid item number to mark!!");
                     }
@@ -73,7 +74,6 @@ class Parser {
                             this.taskList.unmarkItem(index);
                             break;
                         }
-                        
                     } catch (NumberFormatException nfe) {
                         throw new SiriException("Please ENTER a valid item number to unmark!!");
                     }
@@ -111,11 +111,12 @@ class Parser {
                             } else {
                                 LocalTime dlTime = Parser.stringToTime(dlDateTime[1].trim());
                                 dlTask = new Deadline(dlSplit[0], false, dlDate, dlTime);
-                            }                        
+                            }
                             this.taskList.addItem(dlTask);
                             break;
                         } catch (DateTimeParseException dtpe) {
-                            throw new SiriException("deadline date/time format is wrong!!\nPlease ENTER your date time in DD-MM-YYYY HH:MM (if applicable) format!!");
+                            throw new SiriException("deadline date/time format is wrong!!\n"
+                                    + "Please ENTER your date time in DD-MM-YYYY HH:MM (if applicable) format!!");
                         }
                     }
                 }
@@ -133,7 +134,8 @@ class Parser {
                             LocalDate eDate = Parser.stringToDate(eventDateTime[0].trim());
                             Event eventTask;
                             if (eventDateTime.length == 1 || eventDateTime[1].trim().length() == 0) {
-                                throw new SiriException("Missing date/time field!! Please ENTER date your date time in DD-MM-YYYY HH:MM format!!");
+                                throw new SiriException("Missing date/time field!!\n"
+                                        + "Please ENTER date your date time in DD-MM-YYYY HH:MM format!!");
                             } else {
                                 LocalTime eTime = Parser.stringToTime(eventDateTime[1].trim());
                                 eventTask = new Event(eventSplit[0], false, eDate, eTime);
@@ -141,7 +143,8 @@ class Parser {
                             this.taskList.addItem(eventTask);
                             break;
                         } catch (DateTimeParseException dtpe) {
-                            throw new SiriException("event date/time format is wrong!!\nPlease ENTER your date time in DD-MM-YYYY  HH:MM format!!");
+                            throw new SiriException("event date/time format is wrong!!\n"
+                                    + "Please ENTER your date time in DD-MM-YYYY  HH:MM format!!");
                         }
                     }
                 }
@@ -161,7 +164,6 @@ class Parser {
                             this.taskList.deleteTask(index);
                             break;
                         }
-                        
                     } catch (NumberFormatException nfe) {
                         throw new SiriException("Please ENTER a valid item number to unmark!!");
                     }

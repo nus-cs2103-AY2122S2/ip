@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeadlineTest {
 
     @Test
-    void getItemAndStatus() {
+    void getTaskDetails_noTimeField() {
         Deadline dlTask = new Deadline("return book", false, LocalDate.now());
         String expectedOutput = "[D][ ] return book" + " (by: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd-LLL-yyyy"))+ ")";
-        assertEquals(expectedOutput, dlTask.getItemAndStatus());
+        assertEquals(expectedOutput, dlTask.getTaskDetails());
     }
 }

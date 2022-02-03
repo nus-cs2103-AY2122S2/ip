@@ -6,7 +6,7 @@ package siri;
 class SiriException extends RuntimeException {
     /**
      * Constructor for the class.
-     * 
+     *
      * @param errMsg message to describe the exception faced.
      */
     public SiriException(String errMsg) {

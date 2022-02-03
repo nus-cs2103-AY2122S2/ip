@@ -15,7 +15,7 @@ public class UiTest {
         ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputContent));
         String expectedOutput = "====================\n";
-        new Ui().separator();
+        Ui.separator();
         assertEquals(expectedOutput, outputContent.toString());
     }
 

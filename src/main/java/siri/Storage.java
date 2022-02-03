@@ -1,10 +1,9 @@
 package siri;
 
-import java.util.Scanner;
-
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Class that deals with storing and loading of data.
@@ -19,8 +18,9 @@ class Storage {
 
     /**
      * Constructor of Storage class.
-     * 
-     * @param filePath string representation of the file path to allow loading from the file. If file doesn't exist, file will be created based on the path provided. 
+     *
+     * @param filePath string representation of the file path to allow loading from the file.
+     * If file doesn't exist, file will be created based on the path provided.
      * If empty String is provided, cwd will create a data folder and a data.txt file inside to be saved.
      */
     public Storage(String filePath) {
@@ -37,7 +37,7 @@ class Storage {
 
     /**
      * Loads the file data (if there is a valid data file).
-     * 
+     *
      * @return String representation of the data being loaded.
      * @throws SiriException if file doesn't exist, directory doesn't exist, or when file consist no data.
      */
@@ -76,7 +76,7 @@ class Storage {
 
     /**
      * Saves data passed into the destination as stated when Storage instance is being initialised.
-     * 
+     *
      * @param dataToSave String representation of data to be saved.
      */
     public void save(String dataToSave) {
@@ -88,8 +88,8 @@ class Storage {
                 dataFile.createNewFile();
             }
         } catch (IOException ioe) {
-                System.out.println("Error creating data file!");
-                System.out.println(ioe.getMessage());
+            System.out.println("Error creating data file!");
+            System.out.println(ioe.getMessage());
         }
 
         try {

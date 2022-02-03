@@ -1,13 +1,10 @@
 package siri;
 
-import java.util.ArrayList;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-
+import java.util.ArrayList;
 
 class TaskList {
     private ArrayList<Task> list;
@@ -24,9 +21,8 @@ class TaskList {
         list = new ArrayList<Task>(100);
         deadlineList = new ArrayList<Deadline>();
         eventList = new ArrayList<Event>();
-        
         String[] loadDataSplit = loadData.split("\n");
-        
+
         for (int i = 0; i < loadDataSplit.length; i++) {
             String curr = loadDataSplit[i].trim();
             startUpAddTask(curr);
@@ -37,7 +33,7 @@ class TaskList {
 
     /**
      * Adds the passed task into the TaskList.
-     * 
+     *
      * @param task to be added.
      */
     public void addItem(Task task) {
@@ -55,7 +51,7 @@ class TaskList {
 
     /**
      * Deletes item of the given index from TaskList.
-     * 
+     *
      * @param index integer to indicate the index of the item that is selected to be deleted.
      */
     public void deleteTask(int index) {
@@ -67,7 +63,8 @@ class TaskList {
             Event tmp = (Event) removedTask;
             eventList.remove(tmp);
         }
-        System.out.printf("Successfully removed the following task:\n%s\nYou have %d tasks remaining!!\n", removedTask.getTaskDetails(), this.list.size());
+        System.out.printf("Successfully removed the following task:\n%s\n"
+                + "You have %d tasks remaining!!\n", removedTask.getTaskDetails(), this.list.size());
     }
 
     /**
@@ -78,7 +75,7 @@ class TaskList {
             System.out.println("There is currently no item on the list!!");
         } else {
             System.out.println("Task List:");
-            list.forEach((item) -> System.out.println((list.indexOf(item)+1) + ". " + item.getTaskDetails()));
+            list.forEach((item) -> System.out.println((list.indexOf(item) + 1) + ". " + item.getTaskDetails()));
         }
     }
 
@@ -91,7 +88,7 @@ class TaskList {
 
     /**
      * Marks item of the given index of tasklist undone.
-     * 
+     *
      * @param index integer to indicate the item index to be unmarked.
      */
     public void unmarkItem(int index) {
@@ -100,7 +97,7 @@ class TaskList {
 
     /**
      * Prints the events in the tasklist that falls on the date that is passed in as parameter.
-     * 
+     *
      * @param date the date that the is being referenced to.
      */
     public void printEventOn(LocalDate date) {
@@ -121,13 +118,13 @@ class TaskList {
                 tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getTaskDetails()));
             }
         } else {
-                System.out.printf("No event on %s!!\n", date.format(dtf));
+            System.out.printf("No event on %s!!\n", date.format(dtf));
         }
     }
 
     /**
      * Prints the deadlines in the tasklist that falls on the date that is passed in as parameter.
-     * 
+     *
      * @param date the date that the is being referenced to.
      */
     public void printDeadlineOn(LocalDate date) {
@@ -152,6 +149,11 @@ class TaskList {
         }
     }
 
+    /**
+     * Prints items which contains the keyword passed.
+     *
+     * @param keyword to search through the list of tasks.
+     */
     public void find(String keyword) {
         ArrayList<Task> tmp = new ArrayList<Task>();
 
@@ -171,36 +173,41 @@ class TaskList {
         } else {
             System.out.println("There are currently no item on the list!!");
         }
-    } 
+    }
 
     private void startUpAddTask(String input) {
         String[] inputSplit = input.split(" ", 3);
 
         try {
             switch (inputSplit[0]) {
-                case "T":
-                    ToDos todo = new ToDos(inputSplit[2].trim(), Boolean.valueOf(inputSplit[1].trim()));
-                    list.add(todo);
-                    break;
-                case "D":
-                    String[] dlSubSplit = inputSplit[2].split(" /by ", 2);
-                    String[] dlSubSplit2 = dlSubSplit[1].split(" ", 2);
-                    Deadline dl;
-                    if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
-                        dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()), TaskList.stringToDate(dlSubSplit[1].trim()));
-                    } else {
-                        dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()), TaskList.stringToDate(dlSubSplit2[0]), TaskList.stringToTime(dlSubSplit2[1]));
-                    }
-                    list.add(dl);
-                    deadlineList.add(dl);
-                    break;
-                case "E":
-                    String[] eSubSplit = inputSplit[2].split(" /at ", 2);
-                    String[] eSubSplit2 = eSubSplit[1].split(" ", 2);
-                    Event e = new Event(eSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()), TaskList.stringToDate(eSubSplit2[0].trim()), TaskList.stringToTime(eSubSplit2[1].trim()));
-                    list.add(e);
-                    eventList.add(e);
-                    break;
+            case "T":
+                ToDos todo = new ToDos(inputSplit[2].trim(), Boolean.valueOf(inputSplit[1].trim()));
+                list.add(todo);
+                break;
+            case "D":
+                String[] dlSubSplit = inputSplit[2].split(" /by ", 2);
+                String[] dlSubSplit2 = dlSubSplit[1].split(" ", 2);
+                Deadline dl;
+                if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
+                    dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()),
+                            TaskList.stringToDate(dlSubSplit[1].trim()));
+                } else {
+                    dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()),
+                            TaskList.stringToDate(dlSubSplit2[0]), TaskList.stringToTime(dlSubSplit2[1]));
+                }
+                list.add(dl);
+                deadlineList.add(dl);
+                break;
+            case "E":
+                String[] eSubSplit = inputSplit[2].split(" /at ", 2);
+                String[] eSubSplit2 = eSubSplit[1].split(" ", 2);
+                Event e = new Event(eSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()),
+                        TaskList.stringToDate(eSubSplit2[0].trim()), TaskList.stringToTime(eSubSplit2[1].trim()));
+                list.add(e);
+                eventList.add(e);
+                break;
+            default:
+                throw new SiriException("Error in data format!!");
             }
         } catch (DateTimeParseException dtpe) {
             throw new SiriException("Error LOADING data!!");
@@ -210,7 +217,7 @@ class TaskList {
 
     /**
      * Returns the number of items in the tasklist.
-     * 
+     *
      * @return the number of items in the tasklist.
      */
     public int size() {
