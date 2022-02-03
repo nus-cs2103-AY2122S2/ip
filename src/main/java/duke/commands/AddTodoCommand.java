@@ -7,16 +7,16 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * Add a todo to the tasklist.
+ * Adds a to-do to the tasklist.
  */
 public class AddTodoCommand extends Command {
     
     public static final String COMMAND_WORD = "todo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the task list. "
-            + "Parameters: DESCRIPTION\n"
+            + "Parameters: DESCRIPTION\n\t\t"
             + "Example: " + COMMAND_WORD
-            + " todo read books";
+            + " read books";
 
     private final Task toAdd;
 

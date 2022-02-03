@@ -34,26 +34,53 @@ public class TaskList {
         return this.tasks.remove(index);
     }
 
+    /**
+     * Marks the task in the specified index as done.
+     *
+     * @param index the index of the task
+     * @return the task that has been marked
+     */
     public Task mark(int index) {
         Task t = this.tasks.get(index);
         t.markAsDone();
         return t;
     }
 
+    /**
+     * Removes the mark of the task in the specified index.
+     *
+     * @param index the index of the task
+     * @return the task that has been unmarked
+     */
     public Task unmark(int index) {
         Task t = this.tasks.get(index);
         t.unmarkAsDone();
         return t;
     }
 
+    /**
+     * Gets the number of tasks in the task list。
+     *
+     * @return the number of tasks
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Turns the task list to java List.
+     *
+     * @return a list of tasks
+     */
     public List<Task> toList() {
         return tasks;
     }
 
+    /**
+     * Shows the information of all tasks in the task list.
+     *
+     * @return the string representation of task list
+     */
     public String toString() {
         String msg = "";
         for (int i = 1; i <= tasks.size(); i++) {
