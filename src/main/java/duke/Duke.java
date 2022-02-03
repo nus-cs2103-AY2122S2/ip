@@ -1,16 +1,13 @@
 package duke;
 
-import duke.commands.Command;
 import duke.exceptions.DukeException;
-import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.MainWindow;
 import duke.ui.Ui;
 
 /**
  * Represents a Duke chatbot object.
- * Entry point of the chatbot.
- * Initialises the application and starts the interaction with the user.
  */
 public class Duke {
     private TaskList tasks;
@@ -26,35 +23,18 @@ public class Duke {
             storage = new Storage("/ip/data");
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.replyUser(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
     /**
-     * Starts up the program.
+     * Sets the ui, tasks and storage into the main window.
      *
-     * @param args arguments supplied by the user at program launch
+     * @param window the window to be shown to the user
      */
-    public static void main(String... args) {
-        new Duke().run();
-    }
-
-    private void run() {
-        ui.greetUser();
-        boolean isExit = false;
-
-        do {
-            try {
-                String request = ui.readCommand();
-                Command c = new Parser().parseCommand(request);
-                String result = c.execute(tasks, ui, storage);
-                ui.replyUser(result);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.replyUser(e.getMessage());
-            }
-        } while (!isExit);
+    public void run(MainWindow window) {
+        window.setUi(ui);
+        window.setTaskList(tasks);
+        window.setStorage(storage);
     }
 }
-
-
