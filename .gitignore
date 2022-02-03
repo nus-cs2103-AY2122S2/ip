@@ -15,3 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+data/task_list.txt
+data/tasks.txt
+test/StorageTest.txt
+text-ui-test/data/tasks.txt
