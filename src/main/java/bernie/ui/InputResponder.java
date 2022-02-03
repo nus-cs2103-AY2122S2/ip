@@ -101,8 +101,8 @@ public class InputResponder {
 
     /**
      * Returns the message for matching tasks in the list
-     * @param tasks, the current tasklist
-     * @param description, the description which we want to find within the tasks
+     * @param tasks TaskList, the current tasklist
+     * @param description String, the description which we want to find within the tasks
      * @return String, the message
      */
     public String showFoundTasksMsg(TaskList tasks, String description) {

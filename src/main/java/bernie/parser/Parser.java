@@ -281,8 +281,9 @@ public class Parser {
 
     /**
      * Parses the splitArr to get the done status of the task
-     * @param splitArr, array split by [
-     * @return String, indicating the done status: " " or "X"
+     * @param splitArr String[], array split by an open square bracket
+     * @return String, indicating the done status by a whitespace (indicatingg not done)
+     *          or X (indicates done)
      */
     String isDoneStatusInLine(String[] splitArr) {
         return splitArr[2].substring(0, 1);
@@ -341,7 +342,7 @@ public class Parser {
     /**
      * Takes in the date in the line of text file and converts it to
      * yyyy-mm-dd format so we can create it as LocalDate object
-     * @param date, in format mmm dd yyyy
+     * @param date String, in format mmm dd yyyy
      * @return date in yyyy-mm-dd format
      */
     String changeDateFormat(String date) {

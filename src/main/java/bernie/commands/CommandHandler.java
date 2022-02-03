@@ -1,7 +1,5 @@
 package bernie.commands;
 
-import java.util.Scanner;
-
 import bernie.enums.Type;
 import bernie.exceptions.BernieException;
 import bernie.parser.Parser;
@@ -89,6 +87,12 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * This fn is called by Storage to trigger commandHandler to get
+     * TaskList to initialise the task on load.
+     * @param line String, the line read from the text file created previously if
+     *             the user has used the app before.
+     */
     public void initTaskOnLoad(String line) {
         // calls parser to parse line
         String[][] args = parser.parseFileLine(line);

@@ -33,7 +33,7 @@ public class Storage {
     /**
      * Loads the data when Bernie starts up if it exists and reads. If doesn't
      * exist, creates the required files
-     * @param commandHandler, to initialize the tasks on load
+     * @param commandHandler CommandHandler, to initialize the tasks on load
      * @return String, the resulting message
      */
     public String loadTasks(CommandHandler commandHandler) {
@@ -46,16 +46,9 @@ public class Storage {
                 s.append("Previously on the list:\n");
                 FileReader fileReader = new FileReader(tasksFile);
                 BufferedReader reader = new BufferedReader(fileReader);
-                while (true) {
-                    String line = reader.readLine();
-                    if (line == null) {
-                        break;
-                    }
-                    commandHandler.initTaskOnLoad(line);
-                    s.append(line + "\n");
-                }
+                String outputMsg = loadLines(s, commandHandler, reader);
                 reader.close();
-                return s.toString();
+                return outputMsg;
             } else {
                 // create dir and file
                 dataDir.mkdir();
@@ -65,6 +58,30 @@ public class Storage {
         } catch (IOException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Gets the reader to read each line. Each line will be concatenated
+     * via the StringBuilder to display the resulting output message for
+     * the user while simultaneously getting commandHandler to initialise
+     * these tasks by taking the line as input.
+     * @param s StringBuilder, to build output message
+     * @param commandHandler CommandHandler, to initialise tasks via the line
+     * @param reader BufferedReader, to read the lines of our text file
+     * @return String, the resuling output message after reading lines
+     * @throws IOException in the case of errors
+     */
+    String loadLines(StringBuilder s, CommandHandler commandHandler,
+                     BufferedReader reader) throws IOException {
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) {
+                break;
+            }
+            commandHandler.initTaskOnLoad(line);
+            s.append(line + "\n");
+        }
+        return s.toString();
     }
 
     /**
@@ -95,8 +112,8 @@ public class Storage {
      * Saves the most updated tasks whenever the tasks changes upon
      * delete or add by writing the file. The file is saved to ./data/Bernie.txt
      * @params tasks TaskList, takes in the current tasks
-     * @throws IOException for any IO errors
      * @return String, the resulting message
+     * @throws IOException for any IO errors
      */
     void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(tasksFile);

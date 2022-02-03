@@ -1,5 +1,8 @@
 package bernie.ui;
 
+import bernie.Bernie;
+import bernie.commands.CommandHandler;
+import bernie.storage.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,10 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import bernie.Bernie;
-import bernie.storage.Storage;
-import bernie.commands.CommandHandler;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

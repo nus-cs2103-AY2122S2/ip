@@ -2,6 +2,8 @@ package bernie;
 
 import java.io.IOException;
 
+import bernie.ui.InputResponder;
+import bernie.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import bernie.ui.InputResponder;
-import bernie.ui.MainWindow;
 /**
  * A GUI for Bernie using FXML.
  */

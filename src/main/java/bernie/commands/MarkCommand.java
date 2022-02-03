@@ -41,12 +41,19 @@ public class MarkCommand extends Command {
         String taskNum = parsedArr[1];
         TaskList tasks = getTasks();
         InputResponder inputResponder = getInputResponder();
-        if (action.equals("mark")) {
+        String outputMsg = null;
+        switch (action) {
+        case "mark":
             Task markedTask = tasks.markTask(Type.MARK, taskNum);
-            return inputResponder.showDoneMsg(markedTask);
-        } else {
+            outputMsg = inputResponder.showDoneMsg(markedTask);
+            break;
+        case "unmark":
             Task unmarkedTask = tasks.markTask(Type.UNMARK, taskNum);
-            return inputResponder.showUndoneMsg(unmarkedTask);
+            outputMsg = inputResponder.showUndoneMsg(unmarkedTask);
+            break;
+        default:
+            break;
         }
+        return outputMsg;
     }
 }
