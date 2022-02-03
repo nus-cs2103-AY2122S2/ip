@@ -62,17 +62,19 @@ public class InputResponder {
 
     /**
      * Returns the current taskList when the user inputs list into the program
-     * @param tasks TaskList
+     * @param tasks TaskList, empty if no tasks, length of 1 tasks if tasks contains tasks
      * @return String, the message of the tasks containing in the task list currently
      */
-    public String showListTasksMsg(TaskList tasks) {
+    public String showListTasksMsg(TaskList... tasks) {
         StringBuilder s = new StringBuilder();
         s.append("Here's what you need to do buddy:\n");
-        if (tasks.isEmpty()) {
+        if (tasks.length == 0) {
             s.append("NOTHING! :D");
+            return s.toString();
+        } else {
+            return s.append(tasks[0].listTasks())
+                    .toString();
         }
-        return s.append(tasks.listTasks())
-                .toString();
     }
 
     /**

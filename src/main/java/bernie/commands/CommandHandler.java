@@ -51,7 +51,11 @@ public class CommandHandler {
         try {
             switch (type) {
             case LIST:
-                executeOutput = inputResponder.showListTasksMsg(tasks);
+                if (tasks.isEmpty()) {
+                    executeOutput = inputResponder.showListTasksMsg();
+                } else {
+                    executeOutput = inputResponder.showListTasksMsg(tasks);
+                }
                 break;
             case BYE:
                 executeOutput = inputResponder.showLeaveMsg();
