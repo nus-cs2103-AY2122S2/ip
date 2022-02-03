@@ -15,7 +15,7 @@ public class DeadlineTaskTest {
 
     @Test
     @DisplayName("Should return expected save format")
-    public void testSaveFormat() {
+    public void saveFormat_validDeadlineTask_expectedSaveFormat() {
         LocalDateTime localDateTime = LocalDateTime.parse("2022-1-1 1800",
                 DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
         String desc = "return book";
@@ -25,7 +25,7 @@ public class DeadlineTaskTest {
 
     @Test
     @DisplayName("Should return expected toString format")
-    public void testToString() {
+    public void toString_validDeadlineTask_expectedToString() {
         LocalDateTime localDateTime = LocalDateTime.parse("2022-1-1 1800",
                 DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
         String desc = "return book";

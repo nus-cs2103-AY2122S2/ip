@@ -14,7 +14,7 @@ public class EventTaskTest {
 
     @Test
     @DisplayName("Should return expected save format")
-    public void testSaveFormat() {
+    public void saveFormat_validEventTask_expectedSaveFormat() {
         LocalDateTime localDateTime = LocalDateTime.parse("2022-2-4 0400",
                 DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
         String desc = "project meeting";
@@ -24,7 +24,7 @@ public class EventTaskTest {
 
     @Test
     @DisplayName("Should return expected toString format")
-    public void testToString() {
+    public void toString_validEventTask_expectedToString() {
         LocalDateTime localDateTime = LocalDateTime.parse("2022-2-4 0400",
                 DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
         String desc = "project meeting";

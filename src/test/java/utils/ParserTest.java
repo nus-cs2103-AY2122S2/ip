@@ -23,7 +23,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to ListCommand")
-    public void testListCommand() {
+    public void parse_validListCommand_success() {
         try {
             assertTrue(Parser.parse("list") instanceof ListCommand);
         } catch (EchoException e) {
@@ -34,7 +34,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to TodoCommand")
-    public void testTodoCommand() {
+    public void parse_validTodoCommand_success() {
         try {
             assertTrue(Parser.parse("todo borrow book") instanceof TodoCommand);
         } catch (EchoException e) {
@@ -45,7 +45,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to DeadlineCommand")
-    public void testDeadlineCommand() {
+    public void parse_validDeadlineCommand_success() {
         try {
             assertTrue(Parser.parse("deadline sell book /by 2022-01-01 1800") instanceof DeadlineCommand);
         } catch (EchoException e) {
@@ -56,7 +56,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to EventCommand")
-    public void testEventCommand() {
+    public void parse_validEventCommand_success() {
         try {
             assertTrue(Parser.parse("event get rich /at 2022-04-20 0400") instanceof EventCommand);
         } catch (EchoException e) {
@@ -67,7 +67,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to MarkCommand")
-    public void testMarkCommand() {
+    public void parse_validMarkCommand_success() {
         try {
             assertTrue(Parser.parse("mark 1") instanceof MarkCommand);
         } catch (EchoException e) {
@@ -78,7 +78,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to UnmarkCommand")
-    public void testUnmarkCommand() {
+    public void parse_validUnmarkCommand_success() {
         try {
             assertTrue(Parser.parse("unmark 1") instanceof UnmarkCommand);
         } catch (EchoException e) {
@@ -89,7 +89,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to DeleteCommand")
-    public void testDeleteCommand() {
+    public void parse_validDeleteCommand_success() {
         try {
             assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
         } catch (EchoException e) {
@@ -100,7 +100,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to HelpCommand")
-    public void testHelpCommand() {
+    public void parse_validHelpCommand_success() {
         try {
             assertTrue(Parser.parse("hi") instanceof HelpCommand);
         } catch (EchoException e) {
@@ -111,7 +111,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to ByeCommand")
-    public void testByeCommand() {
+    public void parse_validByeCommand_success() {
         try {
             assertTrue(Parser.parse("bye") instanceof ByeCommand);
         } catch (EchoException e) {
@@ -122,7 +122,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to FindCommand")
-    public void testFindCommand() {
+    public void parse_validFindCommand_success() {
         try {
             assertTrue(Parser.parse("find book") instanceof FindCommand);
         } catch (EchoException e) {
