@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 
-public class Save {
+public class Storage {
 
     public static void checkFile() throws IOException {
         try {
@@ -53,6 +53,7 @@ public class Save {
             }
 
         }
+        TaskList.listCount = TaskList.list.size();
     }
 
     public static void save() {
