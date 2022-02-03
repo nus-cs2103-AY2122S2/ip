@@ -1,11 +1,11 @@
-package duke;
+package src.main.java.duke;
 
 import java.util.ArrayList;
 
-import duke.task.Deadlines;
-import duke.task.Events;
-import duke.task.Task;
-import duke.task.ToDos;
+import src.main.java.duke.task.Deadlines;
+import src.main.java.duke.task.Events;
+import src.main.java.duke.task.Task;
+import src.main.java.duke.task.ToDos;
 
 public class TaskList {
     private ArrayList<Task> tasks;

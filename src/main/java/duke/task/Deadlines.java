@@ -1,11 +1,11 @@
-package duke.task;
+package src.main.java.duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import src.main.java.duke.DukeException;
 
 public class Deadlines extends Task {
     protected static String type = "D";

@@ -1,4 +1,4 @@
-package duke.task;
+package src.main.java.duke.task;
 
 public class ToDos extends Task {
     protected static String type = "T";

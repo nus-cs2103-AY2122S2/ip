@@ -1,12 +1,12 @@
-package duke;
+package src.main.java.duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import src.main.java.duke.command.AddCommand;
+import src.main.java.duke.command.Command;
+import src.main.java.duke.command.DeleteCommand;
+import src.main.java.duke.command.ExitCommand;
+import src.main.java.duke.command.ListCommand;
+import src.main.java.duke.command.MarkCommand;
+import src.main.java.duke.command.UnmarkCommand;
 
 public class Parser {
     private static String description;

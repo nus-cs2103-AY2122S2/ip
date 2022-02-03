@@ -1,6 +1,6 @@
-package duke;
+package src.main.java.duke;
 
-import duke.command.Command;
+import src.main.java.duke.command.Command;
 
 public class Duke {
     private Storage storage;

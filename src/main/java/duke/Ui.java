@@ -1,8 +1,8 @@
-package duke;
+package src.main.java.duke;
 
 import java.util.Scanner;
 
-import duke.task.Task;
+import src.main.java.duke.task.Task;
 
 public class Ui {
 
