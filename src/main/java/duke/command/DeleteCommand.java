@@ -14,12 +14,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         if (index < 0 || index >= tasks.size()) {
-            System.out.println("Invalid index, please try again.");
+            response.append("Invalid index, please try again.");
         } else {
             Task task = tasks.remove(index);
-            ui.taskDeleteMessage(task, tasks.size());
+            response.append(ui.taskDeleteMessage(task, tasks.size()));
             storage.save(tasks.list());
         }
     }

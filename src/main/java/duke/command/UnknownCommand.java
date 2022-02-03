@@ -10,7 +10,7 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Sorry, I don't understand that command :/");
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
+        response.append("Sorry, I don't understand that command :/");
     }
 }

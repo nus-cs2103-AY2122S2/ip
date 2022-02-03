@@ -25,8 +25,9 @@ public class Command {
      * @param tasks TaskList to act on.
      * @param ui Ui to use when printing messages.
      * @param storage Storage to call for loading and saving tasks.
+     * @param response StringBuilder object to append results to.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
     }
 
     /**

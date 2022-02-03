@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -13,65 +14,41 @@ public class UiTest {
     int numberOfTask = 1;
 
     @Test
-    void testGoodbyeMessage(){
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.goodbye();
-        assertEquals("Bye. Hope to see you again soon!\r\n",outContent.toString());
+    void testGoodbyeMessage() {
+        assertEquals("Bye. Hope to see you again soon!\r\n", ui.goodbye());
     }
 
     @Test
-    void testTaskAddedMessage(){
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.taskAddedMessage(task, numberOfTask);
-
+    void testTaskAddedMessage() {
         assertEquals("Got it. I've added this task:\n" + "[ ] test"
-                + "\nNow you have " + numberOfTask + " tasks in the list.\r\n", outContent.toString());
+                + "\nNow you have " + numberOfTask + " tasks in the list.\r\n", ui.taskAddedMessage(task, numberOfTask));
     }
 
     @Test
     void greet() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.greet();
-        assertEquals("-------------------------------\n"
-                + "Hello! I'm Duke\nWhat can I do for you?\n"
-                + "-------------------------------\n\r\n", outContent.toString());
+        assertEquals("Hello! I'm Duke\nWhat can I do for you?\n", ui.greet());
     }
 
     @Test
     void showLine() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.showLine();
-        assertEquals("-------------------------------\n\r\n",outContent.toString());
+        assertEquals("-------------------------------\n\r\n", ui.showLine());
     }
 
     @Test
     void taskMarkedMessage() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.taskMarkedMessage(task);
         assertEquals("Nice! I've marked this task as done:\n" + task.toString() + "\r\n",
-                outContent.toString());
+                ui.taskMarkedMessage(task));
     }
 
     @Test
     void taskUnmarkedMessage() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.taskUnmarkedMessage(task);
         assertEquals("OK! I've marked this task as not done yet:\n" + task.toString() + "\r\n",
-                outContent.toString());
+                ui.taskUnmarkedMessage(task));
     }
 
     @Test
     void taskDeleteMessage() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        ui.taskDeleteMessage(task,numberOfTask);
         assertEquals("OK! I've deleted this task:\n" + task.toString() + "\nNow you have "
-                + numberOfTask + " tasks in the list.\r\n", outContent.toString());
+                + numberOfTask + " tasks in the list.\r\n", ui.taskDeleteMessage(task, numberOfTask));
     }
 }
