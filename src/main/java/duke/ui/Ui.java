@@ -21,11 +21,13 @@ public class Ui {
     /**
      * Print exit message.
      */
-    public void exit() {
+    public static String exit() {
         String goodByeMessage = Ui.createLine()
                 + "       " + "Bye. I hope to see you soon." +"\n"
                 + Ui.createLine();
         System.out.println(goodByeMessage);
+
+        return goodByeMessage;
     }
 
     /**

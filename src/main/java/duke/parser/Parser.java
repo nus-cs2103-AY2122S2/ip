@@ -25,9 +25,9 @@ public class Parser {
      *
      * @return False if the command is "bye", True otherwise
      */
-    public boolean processInput() {
+    public String processInput() {
         if(userInput.equals("bye")) {
-            return false;
+            return "bye";
         } else if (userInput.equals("list")) {
             String listTask = Task.printArray();
             String output = Ui.createLine()
@@ -35,7 +35,7 @@ public class Parser {
                     + Ui.createLine();
             System.out.println(output);
 
-            return true;
+            return output;
         } else if (userInput.split(" ")[0].equals("mark")) {
             String[] input = userInput.split(" ");
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
@@ -48,7 +48,7 @@ public class Parser {
 
             System.out.println(output);
 
-            return true;
+            return output;
         } else if (userInput.split(" ")[0].equals("unmark")) {
             String[] input = userInput.split(" ");
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
@@ -60,7 +60,7 @@ public class Parser {
                     + Ui.createLine();
             System.out.println(output);
 
-            return true;
+            return output;
         } else if (userInput.split(" ")[0].equals("delete")) {
             String[] input = userInput.split(" ");
             Task task = Task.getTaskList()[Integer.parseInt(input[1]) - 1];
@@ -73,7 +73,7 @@ public class Parser {
                     + Ui.createLine();
             System.out.println(output);
 
-            return true;
+            return output;
         } else if (userInput.split(" ")[0].equals("find")) {
             String[] input = userInput.split(" ");
             Integer[] foundTask = Task.findTask(userInput.substring(5));
@@ -85,6 +85,7 @@ public class Parser {
                         + Task.printArray(foundTask) + "\n"
                         + Ui.createLine();
                 System.out.println(output);
+                return output;
 
             } else {
                 String errorMsg = Ui.createLine()
@@ -92,27 +93,29 @@ public class Parser {
                         + "       What do you want to find?\n"
                         + Ui.createLine();
                 System.out.println(errorMsg);
+                return errorMsg;
             }
 
-
-            return true;
 
         } else {
 
             try {
                 String newTaskMessage = Parser.createTask(userInput);
                 System.out.println(newTaskMessage);
+                return newTaskMessage;
             } catch (InvalidTypeException e) {
                 String errorMsg = Ui.createLine()
                         + "       Opps, the command \"" + userInput + "\" is not supported :(\n"
                         + Ui.createLine();
                 System.out.println(errorMsg);
+                return errorMsg;
             } catch (MissingNameException e ) {
                 String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include name after command!\n"
                         + Ui.createLine();
                 System.out.println(errorMsg);
+                return errorMsg;
             } catch (MissingEventDateException e) {
                 String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
@@ -120,6 +123,7 @@ public class Parser {
                         + "       Please follow format [event <name>/at <date>]\n"
                         + Ui.createLine();
                 System.out.println(errorMsg);
+                return errorMsg;
             } catch (MissingDeadlineDateException e ) {
                 String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
@@ -127,9 +131,9 @@ public class Parser {
                         + "       Follow format [deadline <name>/by <date>]\n"
                         + Ui.createLine();
                 System.out.println(errorMsg);
+                return errorMsg;
             }
 
-            return true;
         }
     }
 
@@ -207,7 +211,7 @@ public class Parser {
     }
 
     public static void updateFile() {
-        Storage storage = new Storage(Storage.filePath);
+        Storage storage = new Storage("data/duke.txt");
         storage.writeToPath(Task.printArray());
     }
 

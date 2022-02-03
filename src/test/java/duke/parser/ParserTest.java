@@ -14,6 +14,6 @@ public class ParserTest {
     @Test
     public void parseCommand_byeCommand() {
         Parser parser = new Parser("bye");
-        assertFalse(parser.processInput());
+        assertEquals(parser, "bye");
     }
 }
