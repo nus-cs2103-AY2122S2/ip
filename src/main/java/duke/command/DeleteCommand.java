@@ -4,9 +4,15 @@ import duke.DukeException;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskIdx;
 
+    /**
+     * Constructor for DeleteCommand
+     *
+     * @param userTaskString
+     * @param taskIdx
+     */
     public DeleteCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
         this.taskIdx = taskIdx;

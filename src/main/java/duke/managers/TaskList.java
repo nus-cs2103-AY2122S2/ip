@@ -1,10 +1,10 @@
 package duke.managers;
+import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> userTaskList;
@@ -13,7 +13,7 @@ public class TaskList {
     /**
      * Constructor for TaskList
      */
-    public TaskList(){
+    public TaskList() {
         userTaskList = new ArrayList<Task>();
         ui = new Ui();
     }
@@ -24,7 +24,7 @@ public class TaskList {
      * @param taskIdx
      * @return Task
      */
-    public Task getTask(int taskIdx){
+    public Task getTask(int taskIdx) {
         return this.userTaskList.get(taskIdx);
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      *
      * @return Size of TaskList
      */
-    public int getSize(){
+    public int getSize() {
         return this.userTaskList.size();
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @return TaskList
      */
-    public ArrayList<Task> getArrayList(){
+    public ArrayList<Task> getArrayList() {
         return this.userTaskList;
     }
 
@@ -55,12 +55,14 @@ public class TaskList {
     public void addTask(Task task, Boolean toPrint) {
         this.userTaskList.add(task);
         if (toPrint) {
-            if (task.getTag() == "T"){
+            if (task.getTag() == "T") {
                 ui.print("Fantabulous! You have added this Todo Item:\n" + task);
-            } else if (task.getTag() == "D"){
-                ui.print("Perfect! You have added this Deadline Item:\n" + task + "\nRemember to stick to your objective date!");
-            } else if (task.getTag() == "E"){
-                ui.print("Magnifico! You have added this Event Item:\n" + task + "\nRemember to be there 5 minutes early!");
+            } else if (task.getTag() == "D") {
+                ui.print("Perfect! You have added this Deadline Item:\n" + task
+                        + "\nRemember to stick to your objective date!");
+            } else if (task.getTag() == "E") {
+                ui.print("Magnifico! You have added this Event Item:\n" + task
+                        + "\nRemember to be there 5 minutes early!");
             }
         }
     }
@@ -69,7 +71,8 @@ public class TaskList {
      * Deletes specified user Task from Task List
      *
      * @param taskIndex exact task index to be deleted
-     * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
+     * @throws DukeException if specified taskIndex is not valid in the case of
+     * taskIndex <=0 or taskIndex > total size of TaskList)
      */
     public void deleteTask(int taskIndex) throws DukeException {
         if (this.checkValidTask(taskIndex)) {
@@ -87,7 +90,7 @@ public class TaskList {
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
     public boolean checkValidTask(int taskIndex) throws DukeException {
-        if ((taskIndex > this.userTaskList.size()-1) || (taskIndex <0)) {
+        if ((taskIndex > this.userTaskList.size() - 1) || (taskIndex < 0)) {
             ui.throwDukeException("There is no such task! Maybe you entered the wrong task?");
         }
         return true;
@@ -99,7 +102,7 @@ public class TaskList {
     public void printUserTasks() {
         int numberOfTasks = this.userTaskList.size();
         int counter = 0;
-        if (numberOfTasks == 0){
+        if (numberOfTasks == 0) {
             ui.print("You currently do not have any outstanding tasks! Great job! :D");
         } else {
             ui.println("Here are your tasks:");
@@ -123,7 +126,7 @@ public class TaskList {
      */
     public void printUserTasks(String userFindTask) {
         int numberOfTasks = this.userTaskList.size();
-        if (numberOfTasks == 0){
+        if (numberOfTasks == 0) {
             ui.print("You currently do not have any outstanding tasks! Great job! :D");
         } else {
             ui.println("Here are your tasks that satisfy your criteria:");

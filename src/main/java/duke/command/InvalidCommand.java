@@ -5,9 +5,14 @@ import duke.Ui;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
     private Ui ui;
 
+    /**
+     * Constructor for InvalidCommand
+     *
+     * @param userTaskString
+     */
     public InvalidCommand(String userTaskString) {
         super(userTaskString);
         this.ui = new Ui();

@@ -10,7 +10,7 @@ public abstract class Task {
      * @param taskDescription
      * @param tag
      */
-    public Task (String taskDescription, String tag){
+    public Task (String taskDescription, String tag) {
         this.taskDescription = taskDescription;
         this.isDone = false;
         this.tag = tag;
@@ -21,7 +21,7 @@ public abstract class Task {
      *
      * @return
      */
-    public boolean checkIsDone(){
+    public boolean checkIsDone() {
         return this.isDone;
     }
 
@@ -30,25 +30,26 @@ public abstract class Task {
      *
      * @return
      */
-    public String getTaskDescription(){
+    public String getTaskDescription() {
         return this.taskDescription;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public void markAsNotDone(){
+    public void markAsNotDone() {
         this.isDone = false;
     }
 
-    public String getTag(){
+    public String getTag() {
         return this.tag;
     }
 
     public abstract String toSaveDataFormat();
 
-    public String toString(){
+    @Override
+    public String toString() {
         String isDoneRepresentation;
         if (this.checkIsDone() == true) {
             isDoneRepresentation = "[Done!] ";

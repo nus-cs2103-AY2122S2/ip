@@ -4,10 +4,16 @@ import duke.DukeException;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String userFindTask;
 
-    public FindCommand(String userTaskString, String userFindTask){
+    /**
+     * Constructor for FindCommand
+     *
+     * @param userTaskString
+     * @param userFindTask
+     */
+    public FindCommand(String userTaskString, String userFindTask) {
         super(userTaskString);
         this.userFindTask = userFindTask;
     }

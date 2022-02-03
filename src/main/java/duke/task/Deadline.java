@@ -13,7 +13,7 @@ public class Deadline extends Task {
      * @param description description of the deadline
      * @param deadlineDate exact deadline date in string format, will be converted into date object
      */
-    public Deadline(String description, String deadlineDate){
+    public Deadline(String description, String deadlineDate) {
         super(description, "D");
         this.deadlineDate = LocalDate.parse(deadlineDate);
     }
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      *
      * @return string representing deadline date in "MMM dd yyyy"
      */
-    public String getDeadlineDate(){
+    public String getDeadlineDate() {
         return this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
@@ -34,7 +34,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveDataFormat() {
         String isDone = (super.checkIsDone() == true) ? "1" : "0";
-        return String.format("%s|%s|%s|%s\n", super.getTag(), isDone, super.getTaskDescription(), this.getDeadlineDate());
+        return String.format("%s|%s|%s|%s\n", super.getTag(), isDone,
+                super.getTaskDescription(), this.getDeadlineDate());
     }
 
     @Override

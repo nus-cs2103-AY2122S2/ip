@@ -5,9 +5,14 @@ import duke.Ui;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     private Ui ui;
 
+    /**
+     * Constructor for ByeCommand
+     *
+     * @param userTaskString
+     */
     public ByeCommand(String userTaskString) {
         super(userTaskString);
         this.ui = new Ui();

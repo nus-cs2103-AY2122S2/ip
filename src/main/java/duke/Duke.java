@@ -1,23 +1,22 @@
 package duke;
+import java.util.Scanner;
 
 import duke.command.Command;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 import duke.misc.Quote;
 
-import java.util.Scanner;
-
 public class Duke {
     private TaskList userTaskList;
     private FileManager fileManager;
-    Ui ui;
+    private Ui ui;
 
     /**
      * Duke Constructor
      *
      * @param savedTasksPath final path of saved tasks file
      */
-    public Duke(String savedTasksPath){
+    public Duke(String savedTasksPath) {
         this.userTaskList = new TaskList();
         this.fileManager = new FileManager(savedTasksPath);
         ui = new Ui();
@@ -34,20 +33,24 @@ public class Duke {
         Parser parser = new Parser();
         ui.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
-//        duke.print(quoteOfTheDay.generateQuote());
+        // duke.print(quoteOfTheDay.generateQuote());
         ui.print("What can i do for you today?");
         while (true) {
             try {
                 String userTaskString = sc.nextLine();
                 Command c = parser.parseUserCommand(userTaskString);
                 c.executeTask(this.userTaskList, this.fileManager);
-//                this.performCommand(parser.parseUserCommand(userTaskString), userTaskString);
             } catch (DukeException exception) {
                 ui.print(exception);
             }
         }
     }
 
+    /**
+     * Main method which runs duke
+     * @param args
+     * @throws DukeException
+     */
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("./data/duke.txt");
         duke.run();

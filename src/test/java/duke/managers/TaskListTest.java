@@ -1,16 +1,16 @@
-package task.managers;
-
-import duke.DukeException;
-import duke.managers.TaskList;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+package duke.managers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.task.Todo;
+
 public class TaskListTest {
     @Test
-    void TaskList_getSize_success() throws DukeException {
-        TaskList taskList  = new TaskList();
+    void taskList_getSize_success() throws DukeException {
+        TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Go for a jog"), false);
         taskList.addTask(new Todo("Go for a run"), false);
         taskList.addTask(new Todo("Go for a hike"), false);
@@ -18,8 +18,8 @@ public class TaskListTest {
     }
 
     @Test
-    void TaskList_deleteTask_success() throws DukeException {
-        TaskList taskList  = new TaskList();
+    void taskList_deleteTask_success() throws DukeException {
+        TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Go for a jog"), false);
         taskList.addTask(new Todo("Go for a run"), false);
         taskList.addTask(new Todo("Go for a hike"), false);
@@ -28,8 +28,8 @@ public class TaskListTest {
     }
 
     @Test
-    void TaskList_markTaskDone_success() throws DukeException {
-        TaskList taskList  = new TaskList();
+    void taskList_markTaskDone_success() throws DukeException {
+        TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Go for a jog"), false);
         taskList.addTask(new Todo("Go for a run"), false);
         taskList.addTask(new Todo("Go for a hike"), false);
@@ -38,8 +38,8 @@ public class TaskListTest {
     }
 
     @Test
-    void TaskList_markTaskNotDone_success() throws DukeException {
-        TaskList taskList  = new TaskList();
+    void taskList_markTaskNotDone_success() throws DukeException {
+        TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Go for a jog"), false);
         taskList.addTask(new Todo("Go for a run"), false);
         taskList.addTask(new Todo("Go for a hike"), false);

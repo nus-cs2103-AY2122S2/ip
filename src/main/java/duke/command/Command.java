@@ -11,7 +11,7 @@ public abstract class Command {
         this.userTaskString = userTaskString;
     }
 
-    public String getUserTaskString(){
+    public String getUserTaskString() {
         return this.userTaskString;
     }
 

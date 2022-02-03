@@ -7,6 +7,12 @@ import duke.task.Task;
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructor for AddCommand
+     *
+     * @param userTaskString
+     * @param task
+     */
     public AddCommand(String userTaskString, Task task) {
         super(userTaskString);
         this.task = task;

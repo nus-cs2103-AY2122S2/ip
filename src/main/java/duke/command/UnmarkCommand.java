@@ -4,9 +4,15 @@ import duke.DukeException;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private int taskIdx;
 
+    /**
+     * Constructor for UnmarkCommand
+     *
+     * @param userTaskString
+     * @param taskIdx
+     */
     public UnmarkCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
         this.taskIdx = taskIdx;
