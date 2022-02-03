@@ -25,7 +25,7 @@ public class Task {
      * @param d task description
      * @param done check if task is done
      */
-    public Task(String d, String done){
+    public Task(String d, String done) {
         this.d = d;
         if(done.equals("1")) {
             this.isDone = true;
@@ -38,12 +38,12 @@ public class Task {
      * method to return the description of the task
      * @return A string representing the description
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.d;
     }
 
-    public String getIsDone(){
-        if(isDone){
+    public String getIsDone() {
+        if(isDone) {
             return "1";
         }
         else{
@@ -51,7 +51,7 @@ public class Task {
         }
     }
 
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
@@ -63,7 +63,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public void setUndone(){
+    public void setUndone() {
         this.isDone = false;
     }
 

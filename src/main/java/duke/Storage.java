@@ -37,9 +37,9 @@ public class Storage {
                     tempList.add(new ToDos(token[2], token[1]));
                 } else if(token[0].equals("D")) {
                     tempList.add(new Deadline(token[2], token[1], LocalDateTime.parse(token[3], dtf)));
-                } else if(token[0].equals("E")){
+                } else if(token[0].equals("E")) {
                     tempList.add(new Event(token[2], token[1], token[3]));
-                } else{
+                } else {
                     throw new Exception_handler("Invalid task type");
                 }
             }

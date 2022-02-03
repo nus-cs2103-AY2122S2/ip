@@ -20,7 +20,7 @@ public class Event extends Task{
      * @param done check if task is done
      * @param place location of task to be held at
      */
-    public Event(String d, String done, String place){
+    public Event(String d, String done, String place) {
         super(d, done);
         this.place = place;
         this.type = "E";

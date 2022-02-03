@@ -21,16 +21,16 @@ public class TaskList {
         return taskList.remove(index - 1);
     }
 
+    public List<Task> getListOfTasks(){
+        return taskList;
+    }
+
     public void addTask(Task task) {
         taskList.add(task);
     }
 
     public Task removeTask(int index){
         return taskList.remove(index);
-    }
-
-    public List<Task> getListOfTasks(){
-        return taskList;
     }
 
     public int getSize(){

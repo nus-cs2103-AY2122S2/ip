@@ -9,7 +9,7 @@ public class DoneCommand extends Command {
      * Constructor for DoneCommand
      * @param index of the task in the task list
      */
-    public DoneCommand(int index){
+    public DoneCommand(int index) {
         this.index = index;
     }
 
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException {
-        if (index < 0 || index > taskList.getSize() - 1){
+        if (index < 0 || index > taskList.getSize() - 1) {
             throw new Exception_handler("Invalid task number");
         }
         taskList.getListOfTasks().get(index).setDone();
@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
      * Method to check for exit command
      * @return A boolean to check if an exit command is entered
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

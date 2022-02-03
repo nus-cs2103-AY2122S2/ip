@@ -31,21 +31,22 @@ public class Parser {
             if (temp.length <= 2) {
                 throw new Exception_handler("The description of a event cannot be empty.");
             }
-            String temp2 = "";
+
             String time = "";
+            String str = "";
             int index = 0;
             for (int i = 1; i < temp.length; i++) {
                 if (temp[i].equals("/at")) {
                     index = i + 1;
                     break;
                 } else {
-                    temp2 = temp2 + temp[i] + " ";
+                    str = str + temp[i] + " ";
                 }
             }
             for (int j = index; j < temp.length; j++) {
                 time = time + temp[j] + " ";
             }
-            return new AddCommand(new Event(temp2, time));
+            return new AddCommand(new Event(str, time));
         } else if (temp[0].equals("deadline")) {
             if (temp.length <= 2) {
                 throw new Exception_handler("The description of a deadline cannot be empty.");
@@ -67,20 +68,20 @@ public class Parser {
             LocalDateTime dateTime = null;
             try {
                 dateTime = LocalDateTime.parse(time.trim(), dtf);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 throw new Exception_handler("Please enter deadline in dd/mm/yyyy HHmm format");
             }
             return new AddCommand(new Deadline(temp2, dateTime));
-        } else if(temp[0].equals("bye")){
+        } else if(temp[0].equals("bye")) {
             return new ExitCommand();
-        } else if(temp[0].equals("done")){
+        } else if(temp[0].equals("done")) {
             return new DoneCommand(Integer.parseInt(temp[1]) - 1);
-        } else if(temp[0].equals("list")){
+        } else if(temp[0].equals("list")) {
             return new ListCommand();
-        } else if(temp[0].equals("delete")){
+        } else if(temp[0].equals("delete")) {
             return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
         }
-        else{
+        else {
             throw new Exception_handler("I'm sorry, but I don't know what that means :-(");
         }
     }
