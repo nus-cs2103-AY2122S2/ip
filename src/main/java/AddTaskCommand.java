@@ -45,18 +45,11 @@ public class AddTaskCommand extends Command {
         }
 
         // Adding task to TaskManager
-        TaskManager.taskList.add(newTask);
-
-        // Updating tasklist.txt
         try {
-            FileWriter writer = new FileWriter("tasklist.txt", true);
-            writer.write(newTask.toString());
-            writer.write("\n");
-            writer.close();
+            TaskManager.addTask(newTask);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         // System prints
         String output = formatOutput(newTask);

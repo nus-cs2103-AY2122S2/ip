@@ -38,6 +38,14 @@ public class Duke {
             nextLine = sc.nextLine(); // Update nextLine variable with next input
         }
 
+        // Cleanup
+
+        // Close FileWriter to tasklist.txt
+        try {
+            TaskManager.writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
