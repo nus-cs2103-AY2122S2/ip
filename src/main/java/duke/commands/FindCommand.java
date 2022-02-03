@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.DukeList;
-import duke.UI;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -16,13 +15,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Function to execute the command.
+     * Function to execute the command and get the result.
      *
      * @param dukeList dukeList object
-     * @param ui ui object
      */
     @Override
-    public void execute(DukeList dukeList, UI ui) {
-        ui.printMsg(dukeList.find(keyword));
+    public String getResult(DukeList dukeList) {
+        return dukeList.find(keyword);
     }
 }

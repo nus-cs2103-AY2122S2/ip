@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.DukeList;
-import duke.UI;
+import duke.TextUI;
 import duke.exceptions.InvalidTaskException;
 
 public abstract class Command {
@@ -21,5 +21,14 @@ public abstract class Command {
      * @param ui ui object
      * @throws InvalidTaskException invalid task
      */
-    public abstract void execute(DukeList dukeList, UI ui) throws InvalidTaskException;
+    public void execute(DukeList dukeList, TextUI ui) throws InvalidTaskException {
+        ui.printMsg(getResult(dukeList));
+    }
+
+    /**
+     * Function to execute the command and get the result.
+     * @param dukeList dukeList object
+     * @throws InvalidTaskException invalid task
+     */
+    public abstract String getResult(DukeList dukeList) throws InvalidTaskException;
 }

@@ -1,4 +1,4 @@
-package duke.ui;
+package duke;
 
 import java.util.Scanner;
 
@@ -54,6 +54,14 @@ public class TextUI {
     }
 
     /**
+     * Get greeting message.
+     * @return greet msg
+     */
+    public static String getGreetMsg() {
+        return GREET_MSG;
+    }
+
+    /**
      * Prints the greeting message.
      */
     public void greet() {
@@ -61,7 +69,7 @@ public class TextUI {
         printMsg(GREET_MSG);
     }
 
-    public String getGoodbyeMsg() {
+    public static String getGoodbyeMsg() {
         return EXIT_MSG;
     }
 }

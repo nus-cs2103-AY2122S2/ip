@@ -40,18 +40,18 @@ public abstract class Task {
         switch (taskType) {
         case TODO:
             if (taskArr.length <= 1) {
-                throw new InvalidTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidTaskException("The description of a todo cannot be empty.");
             }
             task = new duke.tasks.Todo(taskArr[1]);
             break;
 
         case DEADLINE:
             if (taskArr.length <= 1) {
-                throw new InvalidTaskException("☹ OOPS!!! The description of a task cannot be empty.");
+                throw new InvalidTaskException("The description of a task cannot be empty.");
             }
             params = taskArr[1].split(" /by ");
             if (params.length <= 1) {
-                throw new InvalidTaskException("☹ OOPS!!! The deadline of a task cannot be empty.");
+                throw new InvalidTaskException("The deadline of a task cannot be empty.");
             }
             try {
                 LocalDate date = LocalDate.parse(params[1]);
@@ -64,11 +64,11 @@ public abstract class Task {
 
         case EVENT:
             if (taskArr.length <= 1) {
-                throw new InvalidTaskException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidTaskException("The description of a event cannot be empty.");
             }
             params = taskArr[1].split(" /at ");
             if (params.length <= 1) {
-                throw new InvalidTaskException("☹ OOPS!!! The time of an event cannot be empty.");
+                throw new InvalidTaskException("The time of an event cannot be empty.");
             }
             try {
                 LocalDate date = LocalDate.parse(params[1]);
@@ -79,7 +79,7 @@ public abstract class Task {
             break;
 
         default:
-            throw new InvalidTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidTaskException("Invalid command!\nType help to see the list of commands");
         }
         return task;
     }

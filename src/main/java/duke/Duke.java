@@ -8,16 +8,16 @@ public class Duke {
     private static final String STATUS_STOPPED = "stopped";
 
     private String status;
-    private final UI ui;
+    private final TextUI ui;
     private final Storage storage;
     private final DukeList dukeList;
 
     /**
-     * Constructor for the Duke.Duke bot
+     * Constructor for the Duke bot
      */
     public Duke() {
         this.status = STATUS_RUNNING;
-        this.ui = new UI();
+        this.ui = new TextUI();
         this.storage = new Storage();
         this.dukeList = new DukeList(storage);
     }
@@ -48,6 +48,24 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printMsg(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Get response from executing the command.
+     * @param cmdString command to execute
+     * @return result
+     */
+    public String getResponse(String cmdString) {
+        try {
+            Command cmd = Parser.parse(cmdString);
+            String result = cmd.getResult(dukeList);
+            if (cmd.isExit()) {
+                this.status = STATUS_STOPPED;
+            }
+            return result;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

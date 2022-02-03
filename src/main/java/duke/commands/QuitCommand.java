@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.DukeList;
-import duke.UI;
+import duke.TextUI;
 
 public class QuitCommand extends Command {
     /**
@@ -15,13 +15,12 @@ public class QuitCommand extends Command {
     }
 
     /**
-     * Function to execute the command.
+     * Function to execute the command and get the result.
      *
      * @param dukeList dukeList object
-     * @param ui ui object
      */
     @Override
-    public void execute(DukeList dukeList, UI ui) {
-        ui.printMsg(ui.getGoodbyeMsg());
+    public String getResult(DukeList dukeList) {
+        return TextUI.getGoodbyeMsg();
     }
 }

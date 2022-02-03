@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.DukeList;
-import duke.UI;
 
 public class MarkCommand extends Command {
     private final int idx;
@@ -16,13 +15,12 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Function to execute the command.
+     * Function to execute the command and get the result.
      *
      * @param dukeList dukeList object
-     * @param ui ui object
      */
     @Override
-    public void execute(DukeList dukeList, UI ui) {
-        ui.printMsg(dukeList.markTask(idx));
+    public String getResult(DukeList dukeList) {
+        return dukeList.markTask(idx);
     }
 }

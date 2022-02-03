@@ -4,6 +4,7 @@ import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.QuitCommand;
@@ -17,6 +18,7 @@ public class Parser {
     private static final String UNMARK_COMMAND = "unmark";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String HELP_COMMAND = "help";
 
     /**
      * Parse the user command.
@@ -33,27 +35,24 @@ public class Parser {
         case QUIT_COMMAND:
             cmd = new QuitCommand();
             break;
-
         case LIST_COMMAND:
             cmd = new ListCommand();
             break;
-
         case MARK_COMMAND:
             cmd = new MarkCommand(getIdx(argv));
             break;
-
         case UNMARK_COMMAND:
             cmd = new UnmarkCommand(getIdx(argv));
             break;
-
         case DELETE_COMMAND:
             cmd = new DeleteCommand(getIdx(argv));
             break;
-
         case FIND_COMMAND:
             cmd = new FindCommand(getKeyword(argv));
             break;
-
+        case HELP_COMMAND:
+            cmd = new HelpCommand();
+            break;
         default:
             cmd = new AddCommand(cmdString);
             break;
