@@ -38,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskIcon() {
-        return "[D]";
+        return TaskType.DEADLINE.getTaskIcon();
     }
     
     /**

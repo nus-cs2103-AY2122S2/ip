@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
             this.result = Result.error(e);
             return this;
         }
-        this.juke.saveFile();
+        this.juke.getStorage().saveTasks();
         return this;
     }
 }

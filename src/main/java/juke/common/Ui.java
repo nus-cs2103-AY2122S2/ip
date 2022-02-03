@@ -43,7 +43,9 @@ public class Ui {
         this.printPrefix();
         try {
             Command cmd = this.getCommand(this.getInput());
-            this.executeAndPrint(cmd);
+            if (cmd != null) {
+                this.executeAndPrint(cmd);
+            }
         } catch (JukeInvalidCommandException e) {
             this.formattedPrint(e.getMessage());
         }
@@ -55,6 +57,9 @@ public class Ui {
     
     public Command getCommand(String input) throws JukeInvalidCommandException {
         ArrayList<String[]> paramSplit = Parser.parseInput(input);
+        if (paramSplit.get(0)[0].isBlank()) {
+            return null;
+        }
         Supplier<Command> cmdSup = CommandHandler.COMMANDS.get(paramSplit.get(0)[0]);
         if (cmdSup == null) {
             throw new JukeInvalidCommandException(paramSplit.get(0)[0]);

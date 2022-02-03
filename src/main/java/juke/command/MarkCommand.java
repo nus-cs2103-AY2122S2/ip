@@ -58,6 +58,7 @@ public class MarkCommand extends Command {
             this.result = Result.error(e);
             return this;
         }
+        this.juke.getStorage().saveTasks();
         return this;
     }
 }

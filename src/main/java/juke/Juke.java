@@ -1,21 +1,9 @@
 package juke;
 
 import juke.command.CommandHandler;
+import juke.common.Storage;
 import juke.common.TaskList;
 import juke.common.Ui;
-import juke.exception.JukeException;
-import juke.exception.JukeInvalidArgumentCountException;
-import juke.exception.JukeInvalidArgumentException;
-import juke.exception.JukeMissingArgumentException;
-import juke.exception.JukeTaskListEmptyException;
-import juke.exception.JukeTaskListFullException;
-import juke.task.Deadline;
-import juke.task.Event;
-import juke.task.Task;
-import juke.task.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Entry point for the Juke application.
@@ -25,8 +13,7 @@ public class Juke {
     
     private Ui ui = new Ui();
     private TaskList taskList = new TaskList();
-    private final int taskListSize = 100;
-    private final FileManager fileManager = new juke.FileManager();
+    private final Storage storage = new Storage();
     private boolean hasExited = false;
     
     /**
@@ -38,45 +25,19 @@ public class Juke {
     
     private void run() {
         this.ui.greet();
-        this.loadFile();
+        this.storage.loadTasks();
         while (!this.hasExited) {
             this.ui.runUiLoop();
         }
-        
-        // Exits the program when exit command is called.
-        System.exit(0);
     }
     
-    private void loadFile() {
-        ArrayList<String[]> parseArr = this.fileManager.parse();
-        for (String[] args : parseArr) {
-            try {
-                Task task = this.fileManager.decode(args);
-                if (task != null) {
-                    this.taskList.add(task);
-                }
-            } catch (JukeException e) {
-                PrintHelper.getInstance().errorPrint(e);
-                System.exit(-1);
-            }
-        }
-    }
-    
-    public void saveFile() {
-        ArrayList<String[]> writeArr = new ArrayList<>();
-        for (Task task : this.taskList) {
-            String[] args = this.fileManager.encode(task);
-            if (args != null) {
-                writeArr.add(args);
-            }
-        }
-        this.fileManager.write(writeArr);
-    }
-    
+    /**
+     * Begins the process of exiting Juke.
+     */
     public void exit() {
         this.hasExited = true;
     }
-    
+    /*
     private void echo(String[] args) {
         PrintHelper.getInstance().formattedPrint(String.join(" ", args));
     }
@@ -257,6 +218,16 @@ public class Juke {
             throw new JukeInvalidArgumentCountException("delete", 2, args.length);
         }
     }
+    */
+    
+    /**
+     * Returns the UI class used to handle inputs and outputs.
+     *
+     * @return Ui.
+     */
+    public Ui getUi() {
+        return this.ui;
+    }
     
     /**
      * Returns the list used to store tasks.
@@ -265,6 +236,15 @@ public class Juke {
      */
     public TaskList getTaskList() {
         return this.taskList;
+    }
+    
+    /**
+     * Returns the storage class used to handle file storage.
+     *
+     * @return Storage.
+     */
+    public Storage getStorage() {
+        return this.storage;
     }
     
     /**

@@ -4,9 +4,9 @@ package juke.task;
  * Enum for task types.
  */
 public enum TaskType {
-    TODO("todo", "T"),
-    EVENT("event", "E"),
-    DEADLINE("deadline", "D");
+    TODO("todo", "[T]"),
+    EVENT("event", "[E]"),
+    DEADLINE("deadline", "[D]");
     
     /**
      * String for command use.
@@ -35,7 +35,7 @@ public enum TaskType {
      * @return Command name.
      */
     public String getCommandName() {
-        return commandName;
+        return this.commandName;
     }
     
     /**
@@ -44,6 +44,6 @@ public enum TaskType {
      * @return Task icon.
      */
     public String getTaskIcon() {
-        return taskIcon;
+        return this.taskIcon;
     }
 }

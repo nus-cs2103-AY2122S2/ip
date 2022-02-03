@@ -38,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     String getTaskIcon() {
-        return "[E]";
+        return TaskType.EVENT.getTaskIcon();
     }
     
     /**
