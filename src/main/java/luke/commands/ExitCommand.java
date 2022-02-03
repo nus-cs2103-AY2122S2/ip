@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList taskList) {
-        return new CommandResult(DEFAULT_MESSAGE);
+        return new CommandResult(DEFAULT_MESSAGE, true);
     }
 
     /**
