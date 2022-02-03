@@ -22,7 +22,7 @@ public class Ui {
      * Outputs the greeting message of the chatbot.
      */
     public void outputGreeting() {
-        myBossOutput(" Hello! I'm YourBoss.\n" +
+        outputMyBoss(" Hello! I'm YourBoss.\n" +
                 INDENT +
                 " What can you do for me?");
     }
@@ -31,7 +31,7 @@ public class Ui {
      * Outputs the farewell message of the chatbot.
      */
     public void outputFarewell() {
-        myBossOutput(" Bye. Hope I never see you again!");
+        outputMyBoss(" Bye. Hope I never see you again!");
         scanner.close();
     }
 
@@ -54,10 +54,10 @@ public class Ui {
         for (int i = 0; i < taskList.size(); i++) {
             tempOut.append(" " + INDENT).append((i + 1) + ".").append(taskList.get(i).toString());
         }
-        hLineBreak();
+        horizontalLineBreak();
         printlnWithIndent(" Here are the tasks in your list:");
         System.out.print(tempOut); // newline in tempOut
-        hLineBreak();
+        horizontalLineBreak();
     }
 
     /**
@@ -70,10 +70,10 @@ public class Ui {
         for (int i = 0; i < taskList.size(); i++) {
             tempOut.append(" " + INDENT).append((i + 1) + ".").append(taskList.get(i).toString());
         }
-        hLineBreak();
+        horizontalLineBreak();
         printlnWithIndent(" Here are the matching tasks in your list:");
         System.out.print(tempOut); // newline in tempOut
-        hLineBreak();
+        horizontalLineBreak();
     }
 
     /**
@@ -82,7 +82,7 @@ public class Ui {
      * @param task the specified task marked as done.
      */
     public void outputMarked(Task task) {
-        myBossOutput(task.markAsDone(true));
+        outputMyBoss(task.markAsDone(true));
     }
 
     /**
@@ -91,13 +91,13 @@ public class Ui {
      * @param task the specified task marked as not done.
      */
     public void outputUnmarked(Task task) {
-        myBossOutput(task.markAsDone(false));
+        outputMyBoss(task.markAsDone(false));
     }
 
     /**
-     * Outputs a formatted line break.
+     * Output a formatted line break.
      */
-    static void hLineBreak() {
+    static void horizontalLineBreak() {
         System.out.println(INDENT +"____________________________________________________________");
     }
 
@@ -116,35 +116,35 @@ public class Ui {
      *
      * @param output string to be outputted.
      */
-    static void myBossOutput(String output) {
-        hLineBreak();
+    static void outputMyBoss(String output) {
+        horizontalLineBreak();
         printlnWithIndent(output);
-        hLineBreak();
+        horizontalLineBreak();
     }
 
     /**
-     * Outputs the predefined output when adding a task.
+     * Output the predefined output when adding a task.
      *
      * @param task task added.
      */
     void addTaskOutput(Task task) {
-        hLineBreak();
+        horizontalLineBreak();
         printlnWithIndent(" Got it. I've added this task:");
         System.out.print(INDENT + "   " + task);
         printlnWithIndent(" Now you have "+ TaskList.getSize() +" tasks in the list.");
-        hLineBreak();
+        horizontalLineBreak();
     }
 
     /**
-     * Outputs the predefined output when deleting a task.
+     * Output the predefined output when deleting a task.
      *
      * @param task task deleted.
      */
     void outputDeleteTask(Task task) {
-        hLineBreak();
+        horizontalLineBreak();
         printlnWithIndent(" Noted. I've removed this task:");
         System.out.print(INDENT + "   " + task);
         printlnWithIndent(" Now you have "+ TaskList.getSize() +" tasks in the list.");
-        hLineBreak();
+        horizontalLineBreak();
     }
 }

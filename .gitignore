@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 data/tasks.txt
 test/StorageTest.txt
 text-ui-test/data/tasks.txt
+data/task_list.txt

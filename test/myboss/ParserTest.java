@@ -29,7 +29,7 @@ class ParserTest {
     }
 
     @Test
-    void testGetRemainingUserCmd_ExitCase_EmptyString() {
+    void getRemainingUserCmd_exitCommand_emptyString() {
         String[] input = {"bye"};
         String expected = "";
         assertEquals(expected, Parser.getRemainingUserCmd(input));
