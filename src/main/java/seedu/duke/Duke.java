@@ -4,6 +4,8 @@ import seedu.storage.Storage;
 import seedu.storage.TaskList;
 import seedu.commands.Command;
 
+import java.io.IOException;
+
 public class Duke {
 
     private final Ui ui;
@@ -18,7 +20,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -32,6 +34,7 @@ public class Duke {
                 ui.showLine(); // show the divider line ("_______")
                 Command c = parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
+                storage.saveAll(tasks.getTasks());
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -40,7 +43,7 @@ public class Duke {
             }
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt").run();
     }
 }

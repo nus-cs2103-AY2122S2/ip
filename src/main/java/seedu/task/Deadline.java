@@ -1,5 +1,7 @@
 package seedu.task;
 
+import seedu.duke.DukeException;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -14,6 +16,11 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isCompleted, LocalDateTime deadline) {
         super(description, isCompleted);
         this.deadline = deadline;
+    }
+
+    @Override
+    public String toFile() {
+        return "D\t" + super.toFile() + "\t" + deadline.format(formatter);
     }
 
     @Override

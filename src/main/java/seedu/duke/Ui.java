@@ -13,8 +13,8 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public void showLoadingError() {
-        System.out.println("No file is found.");
+    public void showLoadingError(String message) {
+        System.out.println("File info: " + message);
     }
 
     public void showError(String message) {

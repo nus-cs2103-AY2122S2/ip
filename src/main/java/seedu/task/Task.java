@@ -6,7 +6,7 @@ public class Task {
 
     private boolean isCompleted;
     private final String description;
-    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
 
     public Task(String description) {
         this(description, false);
@@ -31,6 +31,14 @@ public class Task {
 
     private String getCompleted() {
         return isCompleted ? "X" : " ";
+    }
+
+    public static DateTimeFormatter getFormatter() {
+        return formatter;
+    }
+
+    public String toFile() {
+        return description + "\t" + isCompleted;
     }
 
     @Override

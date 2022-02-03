@@ -11,6 +11,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toFile() {
+        return "T\t" + super.toFile();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
