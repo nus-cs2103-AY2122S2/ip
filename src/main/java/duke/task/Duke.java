@@ -14,14 +14,6 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Creates and runs a new <code>Duke</code> object.
-     * @param args an array of Strings.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
      * Creates a new instance of <code>Duke</code>> object and initializes its attributes.
      */
     public Duke() {
@@ -41,6 +33,15 @@ public class Duke {
 
         parser = new Parser();
     }
+
+    /**
+     * Creates and runs a new <code>Duke</code> object.
+     * @param args an array of Strings.
+     */
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 
     /**
      * Runs the <code>Duke</code> object, and saves its data after the run finishes.

@@ -16,10 +16,10 @@ public class Ui {
      * Prints the greeting message.
      */
     public void greeting() {
-        String logo = "__  __ ____________\n" +
-                "\\ \\/ /|_  /_  /_  /\n" +
-                " >  <  / / / / / / \n" +
-                "/_/\\_\\/___/___/___|";
+        String logo = "__  __ ____________\n"
+                + "\\ \\/ /|_  /_  /_  /\n"
+                + " >  <  / / / / / / \n"
+                + "/_/\\_\\/___/___/___|";
         System.out.println(logo);
         System.out.println("Hello uwu! I'm xzzz,");
         System.out.println("You can check your schedwle here (ɔ◔‿◔)ɔ ♥!");
@@ -58,8 +58,8 @@ public class Ui {
      * Print the error caused by incomplete argument.
      */
     public void showIncompleteArgumentError() {
-        System.out.println("UH-OH!! you gotta fill in the description and deadline date " +
-                "/ event date to create a valid task (> <ლ)");
+        System.out.println("UH-OH!! you gotta fill in the description and deadline date "
+                + "/ event date to create a valid task (> <ლ)");
     }
 
     /**
@@ -68,9 +68,9 @@ public class Ui {
      * @param toDoList List for the task to be added to.
      */
     public void confirmAddition(Task newTask, ArrayList<Task> toDoList) {
-        System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
-                newTask + "\n" +
-                "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+        System.out.println("okie!! (✿◠‿◠)  i have added: \n"
+                + newTask + "\n"
+                + "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
     }
 
     /**
@@ -107,17 +107,16 @@ public class Ui {
      * @param toDoList List for the task to be removed from.
      */
     public void confirmRemoval(Task removed, ArrayList<Task> toDoList) {
-        System.out.println("OKI!! i have removed this task: \n" +
-                removed + "\n" +
-                "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+        System.out.println("OKI!! i have removed this task: \n" + removed + "\n"
+                + "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
     }
 
     /**
      * Print the error caused by invalid loading of the file.
      */
     public void showLoadingError() {
-        System.out.println("UH-OH!! seems like the file is not in the right format... (⊙.⊙) \n" +
-                "don't worry! I'll start a new file for you!");
+        System.out.println("UH-OH!! seems like the file is not in the right format... (⊙.⊙) \n"
+                + "don't worry! I'll start a new file for you!");
     }
 
     /**

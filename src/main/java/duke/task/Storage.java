@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,12 +25,12 @@ public class Storage {
     public void checkFile() {
         try {
             Files.createDirectory(Paths.get("data"));
-        } catch (IOException ignored) {
+        } finally {
         }
 
         try {
             Files.createFile(Paths.get("data/duke.txt"));
-        } catch (IOException ignored) {
+        } finally {
         }
     }
 
@@ -83,6 +82,8 @@ public class Storage {
                 case "E":
                     toDoList.add(new Event(taskLine[2], taskLine[3]));
                     break;
+                default:
+                    throw new LoadingException("Wrong input");
                 }
 
                 if (taskLine[1].equals("1")) {
@@ -91,10 +92,10 @@ public class Storage {
             }
 
             return toDoList;
-        } catch (FileNotFoundException ignored) {
         } catch (IndexOutOfBoundsException ex) {
             throw new LoadingException("Index Out of Bounds");
         }
+
         return new ArrayList<Task> (100);
     }
 }

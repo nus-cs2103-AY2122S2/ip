@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> toDoList;
-    
+
     /**
      * Returns a new instance of the <code>TaskList</code> object with the specified ArrayList.
      * @param arr ArrayList of tasks.
