@@ -17,10 +17,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -39,7 +41,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
+                Command c = parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {

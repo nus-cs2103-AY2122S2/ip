@@ -36,7 +36,7 @@ public class Parser {
     /**
      * Changes from String to LocalDate.
      */
-    private static LocalDate strToDate(String str) {
+    private LocalDate strToDate(String str) {
         return LocalDate.parse(str);
     }
 
@@ -46,7 +46,7 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public static Command parse(String userInput) {
+    public Command parse(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -90,7 +90,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareAddTodo(String args) {
+    private Command prepareAddTodo(String args) {
         final Matcher matcher = TODO_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -100,7 +100,7 @@ public class Parser {
         return new AddTodoCommand(matcher.group("description"));
     }
 
-    private static Command prepareAddEvent(String args) {
+    private Command prepareAddEvent(String args) {
         final Matcher matcher = EVENT_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -110,7 +110,7 @@ public class Parser {
         return new AddEventCommand(matcher.group("description"), strToDate(matcher.group("time")));
     }
 
-    private static Command prepareAddDeadline(String args) {
+    private Command prepareAddDeadline(String args) {
         final Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -120,7 +120,7 @@ public class Parser {
         return new AddDeadlineCommand(matcher.group("description"), strToDate(matcher.group("time")));
     }
 
-    private static Command prepareMark(String args, boolean isMark) {
+    private Command prepareMark(String args, boolean isMark) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args) - 1;
             return isMark ? new MarkCommand(targetIndex) : new UnmarkCommand(targetIndex);
@@ -138,7 +138,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private static Command prepareDelete(String args) {
+    private Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args) - 1;
             return new DeleteCommand(targetIndex);
@@ -155,7 +155,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private static Command prepareFind(String args) {
+    private Command prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -176,7 +176,7 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private static int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException("Could not find index number to parse");
@@ -187,7 +187,7 @@ public class Parser {
     /**
      * Signals that the user input could not be parsed.
      */
-    public static class ParseException extends Exception {
+    public class ParseException extends Exception {
         ParseException(String message) {
             super(message);
         }
