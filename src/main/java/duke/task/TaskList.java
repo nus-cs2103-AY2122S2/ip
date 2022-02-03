@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.command.CommandType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.command.CommandType;
 
 /**
  * A class that represents the List of tasks and List of filtered tasks.

@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * An abstract class that represents a command to add a task.

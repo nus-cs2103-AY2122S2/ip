@@ -1,13 +1,16 @@
 package duke.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
 import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
@@ -20,7 +23,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addToDoCommand_missingDescription_exceptionThrown() {
+    public void parse_addToDoCommand_missingDescription() {
         Parser parser = new Parser();
         String commandLine = "todo";
 
@@ -44,7 +47,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addDeadlineCommand_missingDescription_exceptionThrown() {
+    public void parse_addDeadlineCommand_missingDescription() {
         Parser parser = new Parser();
         String commandLine = "deadline /by 2022-01-30 2359";
 
@@ -61,7 +64,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addDeadlineCommand_wrongCommand_exceptionThrown() {
+    public void parse_addDeadlineCommand_wrongCommand() {
         Parser parser = new Parser();
         String commandLine = "deadline Test Deadline Task /at 2022-01-30 2359";
 
@@ -78,7 +81,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addDeadlineCommand_missingDescriptionAndWrongCommand_exceptionThrown() {
+    public void parse_addDeadlineCommand_missingDescriptionAndWrongCommand() {
         Parser parser = new Parser();
         String commandLine = "deadline /at 2022-01-30 2359";
 
@@ -106,7 +109,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addEventCommand_missingDescription_exceptionThrown() {
+    public void parse_addEventCommand_missingDescription() {
         Parser parser = new Parser();
         String commandLine = "event /at 2022-01-31 7-10pm";
 
@@ -123,7 +126,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addEventCommand_wrongCommand_exceptionThrown() {
+    public void parse_addEventCommand_wrongCommand() {
         Parser parser = new Parser();
         String commandLine = "event Test Event Task /by 2022-01-31 7-10pm";
 
@@ -140,7 +143,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addEventCommand_missingDescriptionAndWrongCommand_exceptionThrown() {
+    public void parse_addEventCommand_missingDescriptionAndWrongCommand() {
         Parser parser = new Parser();
         String commandLine = "event /by 2022-01-31 7-10pm";
 

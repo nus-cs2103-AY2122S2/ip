@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * A class that represents a command to mark a task as not done yet.

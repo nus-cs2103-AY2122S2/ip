@@ -1,11 +1,11 @@
 package duke.ui;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * A class that handles the interactions with the user.
@@ -184,7 +184,7 @@ public class Ui {
                 + (taskList.getNumOfFilteredTasks() > 1 ? " are the tasks " : " is the task ")
                 + "on this date (" + processDateStr(dateStr) + "):"
                 + System.lineSeparator()
-                + "\t" +  "[Legend: T = todo, D = deadline, E = event]"
+                + "\t" + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator()
                 + taskList;

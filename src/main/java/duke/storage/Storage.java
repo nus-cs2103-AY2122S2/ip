@@ -1,5 +1,12 @@
 package duke.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 import duke.task.Deadline;
@@ -8,13 +15,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.ToDo;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * A class that handles create, read and write file operations.
@@ -153,7 +153,7 @@ public class Storage {
      * @throws IOException If the tasks cannot be saved to the data file
      */
     public void saveTasksToFile(TaskList taskList) throws IOException {
-        FileWriter fileWriter = new FileWriter(dataFile,false);
+        FileWriter fileWriter = new FileWriter(dataFile, false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         for (int i = 0; i < taskList.getNumOfTasks(); i++) {

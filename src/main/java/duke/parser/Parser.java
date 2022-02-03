@@ -38,7 +38,8 @@ public class Parser {
         CommandType commandType = validateCommandType(commandLineParts[0].toLowerCase());
 
         if (commandType == null) {
-            throw new DukeException(ErrorMessage.ERROR_INVALID_COMMAND.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_INVALID_COMMAND.toString());
         }
 
         String commandInfo = (commandLineParts.length == 2) ? commandLineParts[1] : "";
@@ -50,7 +51,8 @@ public class Parser {
         // If user inputs extra information for "bye" or "list" commands,
         // then it is not a valid command
         if ((isCommandTypeBye || isCommandTypeList) && !isCommandInfoEmpty) {
-            throw new DukeException(ErrorMessage.ERROR_INVALID_COMMAND.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_INVALID_COMMAND.toString());
         }
 
         return initialiseCommand(commandType, commandInfo);
@@ -134,7 +136,8 @@ public class Parser {
             // handled before this initialiseCommand method. Hence, the
             // default case should not be reached, but serves as an
             // additional layer of check.
-            throw new DukeException(ErrorMessage.ERROR_INVALID_COMMAND.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_INVALID_COMMAND.toString());
         }
 
         return command;
@@ -148,8 +151,11 @@ public class Parser {
      * @throws DukeException If the task number is empty or not a valid integer
      */
     private int getTaskNumFromMarkCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage.ERROR_MARK_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage.ERROR_MARK_TASK_NUM_INVALID.toString();
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_MARK_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_MARK_TASK_NUM_INVALID.toString();
+
         return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
     }
 
@@ -161,8 +167,11 @@ public class Parser {
      * @throws DukeException If the task number is empty or not a valid integer
      */
     private int getTaskNumFromUnmarkCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage.ERROR_UNMARK_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage.ERROR_UNMARK_TASK_NUM_INVALID.toString();
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_UNMARK_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_UNMARK_TASK_NUM_INVALID.toString();
+
         return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
     }
 
@@ -174,8 +183,11 @@ public class Parser {
      * @throws DukeException If the task number is empty or not a valid integer
      */
     private int getTaskNumFromDeleteCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage.ERROR_DELETE_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage.ERROR_DELETE_TASK_NUM_INVALID.toString();
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_DELETE_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_DELETE_TASK_NUM_INVALID.toString();
+
         return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
     }
 
@@ -210,7 +222,8 @@ public class Parser {
      */
     private String getTaskDescriptionFromToDoCommand(String commandInfo) throws DukeException {
         if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(ErrorMessage.ERROR_ADD_TODO_DESC_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_TODO_DESC_EMPTY.toString());
         }
 
         return commandInfo;
@@ -226,15 +239,15 @@ public class Parser {
      */
     private String getTaskInfoFromDeadlineCommand(String commandInfo) throws DukeException {
         if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
         }
 
         String[] taskInfoParts = commandInfo.split("/", 2);
 
         if (taskInfoParts.length != 2) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
         }
 
         String taskDescription = taskInfoParts[0];
@@ -242,12 +255,12 @@ public class Parser {
 
         if (!taskDateTime.startsWith(DATETIME_COMMAND_FOR_DEADLINE)) {
             if (!isTaskDescriptionPresent(taskDescription)) {
-                throw new DukeException(ErrorMessage.
-                        ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME.toString());
+                throw new DukeException(ErrorMessage
+                        .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME.toString());
             }
 
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_DEADLINE_WRONG_COMMAND_DATETIME.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_DEADLINE_WRONG_COMMAND_DATETIME.toString());
         }
 
         String dateTime = taskDateTime.trim();
@@ -255,17 +268,17 @@ public class Parser {
 
         if (dateTimeParts.length != 2) {
             if (!isTaskDescriptionPresent(taskDescription)) {
-                throw new DukeException(ErrorMessage.
-                        ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
+                throw new DukeException(ErrorMessage
+                        .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
             }
 
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
         }
 
         if (!isTaskDescriptionPresent(taskDescription)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY.toString());
         }
 
         return commandInfo;
@@ -281,15 +294,15 @@ public class Parser {
      */
     private String getTaskInfoFromEventCommand(String commandInfo) throws DukeException {
         if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
         }
 
         String[] taskInfoParts = commandInfo.split("/", 2);
 
         if (taskInfoParts.length != 2) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
         }
 
         String taskDescription = taskInfoParts[0];
@@ -297,12 +310,12 @@ public class Parser {
 
         if (!taskDateTime.startsWith(DATETIME_COMMAND_FOR_EVENT)) {
             if (!isTaskDescriptionPresent(taskDescription)) {
-                throw new DukeException(ErrorMessage.
-                        ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME.toString());
+                throw new DukeException(ErrorMessage
+                        .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME.toString());
             }
 
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_EVENT_WRONG_COMMAND_DATETIME.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_EVENT_WRONG_COMMAND_DATETIME.toString());
         }
 
         String dateTime = taskDateTime.trim();
@@ -310,17 +323,17 @@ public class Parser {
 
         if (dateTimeParts.length != 2) {
             if (!isTaskDescriptionPresent(taskDescription)) {
-                throw new DukeException(ErrorMessage.
-                        ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
+                throw new DukeException(ErrorMessage
+                        .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY.toString());
             }
 
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY.toString());
         }
 
         if (!isTaskDescriptionPresent(taskDescription)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY.toString());
         }
 
         return commandInfo;
@@ -336,20 +349,20 @@ public class Parser {
      */
     private String getDateFromPrintCommand(String commandInfo) throws DukeException {
         if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_PRINT_INCOMPLETE_COMMAND.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_PRINT_INCOMPLETE_COMMAND.toString());
         }
 
         if (!commandInfo.trim().startsWith(DATE_COMMAND_FOR_PRINT)) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_PRINT_WRONG_COMMAND_DATE.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_PRINT_WRONG_COMMAND_DATE.toString());
         }
 
         String[] specificDateParts = commandInfo.split("\\s+", 2);
 
         if (specificDateParts.length != 2) {
-            throw new DukeException(ErrorMessage.
-                    ERROR_PRINT_INCOMPLETE_COMMAND_DATE_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_PRINT_INCOMPLETE_COMMAND_DATE_EMPTY.toString());
         }
 
         return specificDateParts[1];
@@ -364,7 +377,8 @@ public class Parser {
      */
     private String getKeywordFromFindCommand(String commandInfo) throws DukeException {
         if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(ErrorMessage.ERROR_FIND_KEYWORD_EMPTY.toString());
+            throw new DukeException(ErrorMessage
+                    .ERROR_FIND_KEYWORD_EMPTY.toString());
         }
 
         return commandInfo;
