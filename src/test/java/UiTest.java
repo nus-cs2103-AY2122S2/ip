@@ -1,11 +1,12 @@
-import duke.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Ui;
 
 public class UiTest {
 
@@ -21,8 +22,8 @@ public class UiTest {
     public void testGoodbye() {
         Ui ui = new Ui();
         ui.goodbye();
-        String expected = "------------------------------------------------------\n" +
-                "Bye. Have a great day!\n======================================================";
+        String expected = "------------------------------------------------------\n"
+                + "Bye. Have a great day!\n======================================================";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
@@ -30,9 +31,9 @@ public class UiTest {
     public void testGreet() {
         Ui ui = new Ui();
         ui.greet();
-        String expected = "Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n" +
-                "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the " +
-                "task number!\n======================================================";
+        String expected = "Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n"
+                + "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the "
+                + "task number!\n======================================================";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
