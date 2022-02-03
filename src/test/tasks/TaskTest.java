@@ -38,10 +38,10 @@ class TaskTest {
      */
     @Test
     void testReturnDate() {
-       assertEquals("12312312312412412", tasks.returnDate("12312312312412412"));
-       assertEquals("13-2020-15", tasks.returnDate("13-2020-15"));
-       assertEquals("Oct-2020-15", tasks.returnDate("Oct-2020-15"));
-       assertEquals("Jan 20 2015", tasks.returnDate("2015-01-20"));
-       assertEquals("Dec 10 1990", tasks.returnDate("Dec 10 1990"));
+       assertEquals("12312312312412412", Tasks.returnDate("12312312312412412"));
+       assertEquals("13-2020-15", Tasks.returnDate("13-2020-15"));
+       assertEquals("Oct-2020-15", Tasks.returnDate("Oct-2020-15"));
+       assertEquals("Jan 20 2015", Tasks.returnDate("2015-01-20"));
+       assertEquals("Dec 10 1990", Tasks.returnDate("Dec 10 1990"));
     }
 }

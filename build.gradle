@@ -41,9 +41,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+}
 
-    filter {
-        includeTestsMatching "Test"
+sourceSets {
+
+    test {
+        java.srcDirs = ['src/test/tasks']
     }
 }
 
@@ -63,3 +66,4 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
