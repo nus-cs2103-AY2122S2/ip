@@ -1,10 +1,5 @@
 package mcbot;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import mcbot.exception.InvalidCommandException;
 import mcbot.exception.McBotException;
 import mcbot.task.Deadline;
@@ -12,60 +7,35 @@ import mcbot.task.Event;
 import mcbot.task.Task;
 import mcbot.task.ToDo;
 
-/**
- * McBot class is the main class to initiate McBot chat-bot.
- */
-public class McBot {
-    protected final Storage storage;
-    protected TaskList tasks;
-    private final Ui ui;
-    protected final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-    protected final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
-    /**
-     * Constructor for McBot.
-     *
-     * @param filePath is the path to the file that contains task details.
-     */
-    public McBot(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (McBotException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+public class McBotGui extends McBot {
+    private final Gui gui;
+    
+    public McBotGui() {
+        super("data/tasks.txt");
+        gui = new Gui();
     }
-
-    /**
-     * A method to start and run the McBot chat-bot UI based.
-     */
-    public void run() {
-        boolean isRunning = true;
-        ui.welcomeLine();
-        Parser parser = new Parser();
-        while (isRunning) {
+    
+    public String getResponse(String input) {
+        Parser parser = new Parser(input);
             try {
-                parser.readFullCommand();
                 String keyCommand = parser.getKeyCommand();
-                ui.printFrame();
                 switch(keyCommand) {
                 case "bye": {
-                    ui.byeLine();
-                    isRunning = false;
-                    break;
+                    return gui.byeLine();
                 }
                 case "list":
                     try {
                         if (tasks.size() == 0) {
                             throw new McBotException("Your list is empty boi");
                         }
-                        ui.listTask(tasks.getList());
+                        return gui.listTask(tasks.getList());
                     } catch (McBotException e) {
-                        ui.printError(e);
+                        return gui.printError(e);
                     }
-                    break;
                 case "mark":
                     try {
                         String numStr = parser.getDetails();
@@ -77,19 +47,17 @@ public class McBot {
                         if (!t.isMarked()) {
                             t.markDone();
                             storage.updateData(tasks.getList());
-                            ui.markLine();
-                            ui.printTask(t);
+                            return gui.markLine() + "\n" + gui.printTask(t);
                         } else {
-                            ui.markDuplication();
+                            return gui.markDuplication();
                         }
                     } catch (ArrayIndexOutOfBoundsException | InvalidCommandException e) {
-                        ui.markError("missingData");
+                        return gui.markError("missingData");
                     } catch (NumberFormatException e) {
-                        ui.markError("notInteger");
+                        return gui.markError("notInteger");
                     } catch (McBotException e) {
-                        ui.markError("integerNotFound");
+                        return gui.markError("integerNotFound");
                     }
-                    break;
                 case "unmark":
                     try {
                         String numStr = parser.getDetails();
@@ -101,30 +69,27 @@ public class McBot {
                         if (t.isMarked()) {
                             t.undoDone();
                             storage.updateData(tasks.getList());
-                            ui.unmarkLine();
-                            ui.printTask(t);
+                            return gui.unmarkLine() + "\n" + gui.printTask(t);
                         } else {
-                            ui.unmarkDuplication();
+                            return gui.unmarkDuplication();
                         }
                     } catch (ArrayIndexOutOfBoundsException | InvalidCommandException e) {
-                        ui.markError("missingData");
+                        return gui.markError("missingData");
                     } catch (NumberFormatException e) {
-                        ui.markError("notInteger");
+                        return gui.markError("notInteger");
                     } catch (McBotException e) {
-                        ui.markError("integerNotFound");
+                        return gui.markError("integerNotFound");
                     }
-                    break;
                 case "todo":
                     try {
                         String taskName = parser.getDetails();
                         Task t = new ToDo(taskName);
                         tasks.add(t);
                         storage.appendData(t);
-                        ui.addTodoLine(t, tasks.size());
+                        return gui.addTodoLine(t, tasks.size());
                     } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
-                        ui.taskError("emptyTask");
+                        return gui.taskError("emptyTask");
                     }
-                    break;
                 case "deadline":
                     try {
                         String taskName = parser.getDeadlineTask();
@@ -146,15 +111,14 @@ public class McBot {
                         }
                         tasks.add(t);
                         storage.appendData(t);
-                        ui.addDeadlineLine(t, tasks.size());
+                        return gui.addDeadlineLine(t, tasks.size());
                     } catch (InvalidCommandException e) {
-                        ui.printError(e);
+                        return gui.printError(e);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        ui.taskError("deadlineFormat");
+                        return gui.taskError("deadlineFormat");
                     } catch (DateTimeParseException e) {
-                        ui.taskError("datetimeFormat");
+                        return gui.taskError("datetimeFormat");
                     }
-                    break;
                 case "event":
                     try {
                         String taskName = parser.getEventTask();
@@ -176,15 +140,14 @@ public class McBot {
                         }
                         tasks.add(t);
                         storage.appendData(t);
-                        ui.addEventLine(t, tasks.size());
+                        return gui.addEventLine(t, tasks.size());
                     } catch (InvalidCommandException e) {
-                        ui.printError(e);
+                        return gui.printError(e);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        ui.taskError("eventFormat");
+                        return gui.taskError("eventFormat");
                     } catch (DateTimeParseException e) {
-                        ui.taskError("datetimeFormat");
+                        return gui.taskError("datetimeFormat");
                     }
-                    break;
                 case "delete":
                     try {
                         String numStr = parser.getDetails();
@@ -195,42 +158,28 @@ public class McBot {
                         Task t = tasks.get(num - 1);
                         tasks.remove(num - 1);
                         storage.updateData(tasks.getList());
-                        ui.deleteLine(t, tasks.size());
+                        return gui.deleteLine(t, tasks.size());
                     } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
-                        ui.deleteError("empty");
+                        return gui.deleteError("empty");
                     } catch (McBotException e) {
-                        ui.printError(e);
+                        return gui.printError(e);
                     } catch (NumberFormatException e) {
-                        ui.deleteError("notInteger");
+                        return gui.deleteError("notInteger");
                     }
-                    break;
                 case "find":
                     try {
                         String taskName = parser.getDetails();
-                        tasks.find(taskName, ui);
+                        return tasks.find(taskName, gui);
                     } catch (InvalidCommandException | ArrayIndexOutOfBoundsException e) {
-                        ui.taskError("emptyFindTask");
+                        return gui.taskError("emptyFindTask");
                     }
-                    break;
                 default:
                     throw new InvalidCommandException("I don't understand a word ye're sayin'");
                 }
             } catch (McBotException e) {
-                ui.printError(e);
+                return gui.printError(e);
             } finally {
-                ui.printFrame();
+                parser.close();
             }
-        }
-        parser.close();
     }
-
-    /**
-     * The main method of McBot.
-     *
-     * @param args is to store any args when McBot is initiated.
-     */
-    public static void main(String[] args) {
-        new McBot("data/tasks.txt").run();
-    }
-    
 }

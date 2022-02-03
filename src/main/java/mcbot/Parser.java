@@ -8,7 +8,7 @@ import mcbot.exception.InvalidCommandException;
  * Parser class to handle parsing of command inputs. 
  */
 public class Parser {
-    private final Scanner sc;
+    private Scanner sc;
     private String fullCommand;
 
     /**
@@ -17,6 +17,14 @@ public class Parser {
     public Parser() { 
         Scanner sc = new Scanner(System.in);
         this.sc = sc;
+    }
+
+    /**
+     * Constructor for the parser given input in Gui.
+     * @param input that is sent by user through Gui.
+     */
+    public Parser(String input) {
+        fullCommand = input;
     }
 
     /**
@@ -40,7 +48,9 @@ public class Parser {
      * Method to close the parser.
      */
     public void close() {
-        sc.close();
+        if (sc != null) {
+            sc.close();
+        }
     }
 
     /**
