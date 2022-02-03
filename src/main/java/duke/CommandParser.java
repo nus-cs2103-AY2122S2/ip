@@ -13,29 +13,28 @@ public class CommandParser {
      * Parses command to see what type of command it is
      *
      * @param command Command given by the user
-     * @param storeList List of Tasks the chat bot restored from memory
      * @return Nothing
      * @throws IOException If command is blank
      */
-    public static void parseCommand(String command, ArrayList<Task> storeList) throws IOException {
+    public static String parseCommand(String command) throws IOException {
         if (command.equals("list")) {
-            TaskList.printTheList(storeList);
+            return TaskList.printTheList(Duke.storeList);
         } else if (command.startsWith("mark ")) {
-            TaskList.markCommand(command, storeList);
+            return TaskList.markCommand(command, Duke.storeList);
         } else if (command.startsWith("unmark ")) {
-            TaskList.unmarkCommand(command, storeList);
+            return TaskList.unmarkCommand(command, Duke.storeList);
         } else if (command.startsWith("deadline")) {
-            TaskList.addDeadline(command, storeList);
+            return TaskList.addDeadline(command, Duke.storeList);
         } else if (command.startsWith("todo")) {
-            TaskList.addTodo(command, storeList);
+            return TaskList.addTodo(command, Duke.storeList);
         } else if (command.startsWith("event")) {
-            TaskList.addEvent(command, storeList);
+            return TaskList.addEvent(command, Duke.storeList);
         } else if (command.startsWith("delete")) {
-            TaskList.deleteTask(command, storeList);
+            return TaskList.deleteTask(command, Duke.storeList);
         }  else if (command.startsWith("find")) {
-            TaskList.findTask(command, storeList);
+            return TaskList.findTask(command, Duke.storeList);
         } else {
-            Ui.unknownCommand();
+            return Ui.unknownCommand();
         }
     }
 }

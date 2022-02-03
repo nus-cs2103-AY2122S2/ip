@@ -20,26 +20,23 @@ public class Ui {
                 Storage.saveList(storeList);
                 break;
             } else {
-                CommandParser.parseCommand(command, storeList);
+                CommandParser.parseCommand(command);
             }
         }
         sc.close();
     }
 
-    public static void unknownCommand() {
-        System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
-                " Please wish again");
+    public static String unknownCommand() {
+        return "Master, I have all the knowledge in the world but I do not recognise that command," +
+                " Please wish again";
     }
 
-    public static void startGoodbye() {
-        System.out.println("Rub my lamp to summon me again");
-        System.out.println("Good bye for now master");
-        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+    public static String startGoodbye() {
+        return "Rub my lamp to summon me again, Good bye for now master";
     }
 
-    public static void startGreeting() {
-        System.out.println("A very good day to you master, I'm Blue the Genie");
-        System.out.println("What do you wish for today? Your wish is my command");
-        System.out.println("****-**-****-**-****-**-****-**-****-**-****-**-****-**-****-**");
+    public static String startGreeting() {
+        return "A very good day to you master, I'm Blue the Genie " +
+                "What do you wish for today? Your wish is my command";
     }
 }
