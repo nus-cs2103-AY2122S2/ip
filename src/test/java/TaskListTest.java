@@ -1,8 +1,10 @@
-import tsohg.TsohgException;
-import tsohg.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import tsohg.TaskList;
+import tsohg.TsohgException;
+
 
 public class TaskListTest {
 
@@ -66,8 +68,8 @@ public class TaskListTest {
             taskList.addTodo("item3");
             assertEquals("1.[T][ ] read book\n2.[T][ ] return book\n",
                     taskList.find("book"));
-        } catch (DukeException e) {
-
+        } catch (TsohgException e) {
+            e.printStackTrace();
         }
     }
 

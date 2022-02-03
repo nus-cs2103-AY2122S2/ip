@@ -8,8 +8,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final static Scanner IN = new Scanner(System.in);
-    private final static PrintStream OUT = System.out;
+    private static final Scanner IN = new Scanner(System.in);
+    private static final PrintStream OUT = System.out;
     private TaskList tasks;
 
     public Ui(TaskList tasks) {
@@ -23,7 +23,9 @@ public class Ui {
         printMenu();
         while (true) {
             try {
-                if (!takeInput()) break;
+                if (!takeInput()) {
+                    break;
+                }
             } catch (TsohgException e) {
                 OUT.println(e.getMessage());
             }
@@ -32,25 +34,25 @@ public class Ui {
     }
 
     private void printLine() {
-        String line = "\n~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"" +
-                "~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\n";
+        String line = "\n~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\""
+                + "~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\n";
         OUT.println(line);
     }
 
     private void printMenu() {
-        String art = "                      .-.\n" +
-                "         heehee      /aa \\_\n" +
-                "                   __\\-  / )                 .-.\n" +
-                "         .-.      (__/    /        haha    _/oo \\\n" +
-                "       _/ ..\\       /     \\               ( \\v  /__\n" +
-                "      ( \\  u/__    /       \\__             \\/   ___)\n" +
-                "       \\    \\__)   \\_.-._._   )  .-.       /     \\\n" +
-                "       /     \\             `-`  / ee\\_    /       \\_\n" +
-                "    __/       \\               __\\  o/ )   \\_.-.__   )\n" +
-                "   (   _._.-._/     hoho     (___   \\/           '-'\n" +
-                "jgs '-'                        /     \\\n" +
-                "                             _/       \\    teehee\n" +
-                "                            (   __.-._/\n";
+        String art = "                      .-.\n"
+                + "         heehee      /aa \\_\n"
+                + "                   __\\-  / )                 .-.\n"
+                + "         .-.      (__/    /        haha    _/oo \\\n"
+                + "       _/ ..\\       /     \\               ( \\v  /__\n"
+                + "      ( \\  u/__    /       \\__             \\/   ___)\n"
+                + "       \\    \\__)   \\_.-._._   )  .-.       /     \\\n"
+                + "       /     \\             `-`  / ee\\_    /       \\_\n"
+                + "    __/       \\               __\\  o/ )   \\_.-.__   )\n"
+                + "   (   _._.-._/     hoho     (___   \\/           '-'\n"
+                + "jgs '-'                        /     \\\n"
+                + "                             _/       \\    teehee\n"
+                + "                            (   __.-._/\n";
         String greet = "Heee hooo I'm Tsohg! How can I help you?";
         OUT.println(art);
         OUT.println(greet);
@@ -123,8 +125,9 @@ public class Ui {
     }
 
     private void todo(String argument) throws TsohgException {
-        if (argument == null)
+        if (argument == null) {
             throw new TsohgException("OOPS!!! The description of a todo cannot be empty.");
+        }
         String response = tasks.addTodo(argument);
         OUT.println("Got it. I've added this task:");
         OUT.println(response);
@@ -158,8 +161,9 @@ public class Ui {
     }
 
     private void find(String argument) throws TsohgException {
-        if (argument == null)
+        if (argument == null) {
             throw new TsohgException("OOPS!!! The description of find cannot be empty.");
+        }
         String response = tasks.find(argument);
         OUT.println("Here are the matching tasks in your list:");
         OUT.println(response);

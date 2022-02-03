@@ -150,7 +150,7 @@ public class TaskList {
      * Saves the list to the storage.
      * @throws TsohgException If something wrong happens.
      */
-    private void saveToFile() throws TsohgException{
+    private void saveToFile() throws TsohgException {
         String result = "";
         for (Task item : items) {
             result = result.concat(item.toStore() + "\n");
