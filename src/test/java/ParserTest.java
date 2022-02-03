@@ -1,9 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
-
 import duke.DukeException;
 import duke.Parser;
 import duke.command.AddCommand;
@@ -15,6 +9,11 @@ import duke.command.ToggleCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     /**
@@ -38,9 +37,9 @@ public class ParserTest {
     @Test
     public void parseCommandTest() {
         String[] commands = {
-            "exit", "list", "mark 0", "unmark 0", "todo todo",
-            "event e /at 29/01/2022 16:00", "deadline d /by 29/01/2022 16:00",
-            "remove 0", "delete 0", "invalid"
+                "exit", "list", "mark 0", "unmark 0", "todo todo",
+                "event e /at 29/01/2022 16:00", "deadline d /by 29/01/2022 16:00",
+                "remove 0", "delete 0", "invalid"
         };
 
         assertTrue(Parser.parseCommand(commands[0]) instanceof ExitCommand);
@@ -61,10 +60,10 @@ public class ParserTest {
     @Test
     public void parseStringToTaskTest() {
         String[] inputs = {
-            "T | 1 | read book",
-            "D | 0 | return book | 06/06/2022 15:00",
-            "E | 0 | project meeting | 06/08/2022 14:00",
-            "X | 3 | false value"
+                "T | 1 | read book",
+                "D | 0 | return book | 06/06/2022 15:00",
+                "E | 0 | project meeting | 06/08/2022 14:00",
+                "X | 3 | false value"
         };
 
         try {

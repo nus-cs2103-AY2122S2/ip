@@ -87,7 +87,7 @@ public class Parser {
         Task newTask;
         switch (input[0]) {
         case "T":
-            newTask = new ToDo(input[2], input[1]);
+            newTask = new ToDo(input[2],input[1]);
             break;
         case "D":
             newTask = new Deadline(input[2], input[3], input[1]);

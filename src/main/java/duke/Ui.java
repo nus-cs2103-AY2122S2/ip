@@ -1,14 +1,15 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Task;
 
 public class Ui {
     /** Padding string used to format the bot's responses*/
-    public final String paddingString = "      ";
+    public final String STR_PADDING = "      ";
     private final Scanner sc = new Scanner(System.in);
 
     /** Print exit message and close {@link #sc}*/
@@ -93,8 +94,8 @@ public class Ui {
     /** Show a welcome message with the bot's name. */
     public void showWelcome() {
         String botName = "Duke, the Task Master";
-        String greeting = "Greetings, I am " + botName + ".\n"
-                + paddingString + "I'm here to help you with your... tasks, obviously!";
+        String greeting = "Greetings, I am " + botName + ".\n" +
+                STR_PADDING + "I'm here to help you with your... tasks, obviously!";
 
         this.printWithDivider(greeting);
     }
@@ -107,7 +108,7 @@ public class Ui {
     public void printWithDivider(List<String> messages) {
         System.out.println("    -----------------------------------------------------------");
         for (String s : messages) {
-            System.out.println(paddingString + s);
+            System.out.println(STR_PADDING + s);
         }
         System.out.println("    -----------------------------------------------------------");
     }
@@ -130,7 +131,7 @@ public class Ui {
      */
     public void printWithDivider(String message) {
         System.out.println("    -----------------------------------------------------------");
-        System.out.println(paddingString + message);
+        System.out.println(STR_PADDING + message);
         System.out.println("    -----------------------------------------------------------");
     }
 }

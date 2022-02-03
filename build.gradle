@@ -5,6 +5,12 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -34,11 +40,11 @@ application {
 
 shadowJar {
     archiveBaseName = "duke"
-//    archiveClassifier = null
+    archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.32'
+    toolVersion = '8.29'
 }
 
 run{
