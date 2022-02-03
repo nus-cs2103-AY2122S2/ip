@@ -21,7 +21,8 @@ public class Duke {
         lineOne();
         do {
             String text = sc.nextLine();
-            String[] textSplit = text.split(" ");
+            String[] textSplitOne = text.split("/"); //by and at
+            String[] textSplit = textSplitOne[0].split(" ");
             switch(textSplit[0]) {
                 case "bye": num = 1;
                             System.out.println("See you soon! Have a good day ^_^");
@@ -48,11 +49,29 @@ public class Duke {
                                lineOne();
                                break;
                 default: lineTwo();
-                         System.out.println("added: " + text);
-                         lineTwo();
-                         Task t = new Task(text);
-                         lists.add(t);
+                         System.out.println("New task added:");
+                         String newText = "";
+                         for(int i = 1; i < textSplit.length; i++) {
+                             newText = newText + textSplit[i] + " ";
+                         }
+                         if(textSplit[0].equals("todo")) {
+                             Task t = new ToDo(newText);
+                             lists.add(t);
+                             System.out.println(t);
+                         }
+                         else if(textSplit[0].equals("event")) {
+                             Task t = new Event(newText, textSplitOne[1]);
+                             lists.add(t);
+                             System.out.println(t);
+                         }
+                         else {
+                             Task t = new Deadline(newText, textSplitOne[1]);
+                             lists.add(t);
+                             System.out.println(t);
+                         }
                          counter++;
+                         System.out.println("You have " + counter + " tasks in the list now! ^_^");
+                         lineTwo();
                          break;
             }
         }
