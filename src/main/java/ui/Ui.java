@@ -53,7 +53,7 @@ public class Ui {
      * and appends the list of commands.
      */
     public void showWelcome() {
-        String welcome = "Hello! I'm Duke. Here is a list of commands for your reference!\n\n";
+        String welcome = "Hello! I'm duke.Duke. Here is a list of commands for your reference!\n\n";
         System.out.println(welcome);
         showCommands();
     }
@@ -70,7 +70,7 @@ public class Ui {
         welcome.append("5. mark X (mark X task as done)\n");
         welcome.append("6. unmark X (mark X task as undone)\n");
         welcome.append("7. delete X (delete X task from the list)\n");
-        welcome.append("8. bye - exit Duke bot\n");
+        welcome.append("8. bye - exit duke.Duke bot\n");
         System.out.println(welcome.toString());
     }
 
@@ -154,7 +154,7 @@ public class Ui {
      * Displays loading error message when cache file cannot be located.
      */
     public void showLoadingError() {
-        System.out.println("Cache conversation not detected. Creating a new session with Duke bot.");
+        System.out.println("Cache conversation not detected. Creating a new session with duke.Duke bot.");
     }
 
     /**

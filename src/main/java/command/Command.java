@@ -23,7 +23,7 @@ public abstract class Command {
 
     /**
      * Requires child classes to implement the method to ensure that every command has an executable function.
-     * If an exception occurs, throws Duke Exception.
+     * If an exception occurs, throws duke.Duke Exception.
      *
      * @param tasks TaskList which stores the list of tasks
      * @param ui Ui to display necessary responses

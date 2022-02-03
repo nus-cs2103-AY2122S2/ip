@@ -2,7 +2,7 @@ package exception;
 
 /**
  * Extends Exception to handle custom errors specific to
- * the Duke bot.
+ * the duke.Duke bot.
  */
 public class DukeException extends Exception {
     protected String message;

@@ -31,7 +31,7 @@ public class Parser {
 
     /**
      * Processes a raw String command and decides the command.
-     * If an error is detected, Duke exception is thrown.
+     * If an error is detected, duke.Duke exception is thrown.
      *
      * @param fullCommand Raw String command
      * @return Command to be executed
