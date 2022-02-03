@@ -32,14 +32,14 @@ public class Output {
      * prints when user enters input not recognised by Duke
      */
     public static String printWhatDoesThatMean() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(";
+        return " OOPS!!! I'm sorry, but I don't know what does that mean :-(";
     }
 
     /**
      * prints when user leaves description of task empty
      */
     public static String printEmptyDescriptionException() {
-        return "☹ OOPS!!! The description of a task cannot be empty.";
+        return " OOPS!!! The description of a task cannot be empty.";
     }
 
     /**

@@ -2,6 +2,7 @@ package duke;
 
 
 import gui.Output;
+import javafx.application.Platform;
 
 /**
  * This is the class that parses through inputs
@@ -20,6 +21,7 @@ public class Parser {
      */
     public static String parseIsBye(String input, TaskList tasklist){
         if (input.equals("bye")){
+            Platform.exit();
             return Output.printBye();
         } else {
             return parseInput(input, tasklist);
