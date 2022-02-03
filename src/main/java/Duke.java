@@ -1,8 +1,7 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 /**
  * Project Duke is a educational software project designed to take you
@@ -47,6 +46,23 @@ public class Duke {
     }
 
     public static void main(String[] args) throws Exception {
+
+        String home =  System.getProperty("user.home"); // base directory
+        // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
+        java.nio.file.Path path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
+        boolean directoryExists = java.nio.file.Files.exists(path);
+        System.out.println(directoryExists);
+        // if path doesn't exist, make new directory and file
+        if (!directoryExists) {
+            File dataDirectory = new File(path.toString());
+            File dukeStore = new File(path + "\\duke.txt");
+            System.out.println("I tried creating a new directory " + dataDirectory);
+            System.out.println("I tried creating a new file " + dukeStore);
+
+        }
+        System.out.println("Does this directory " + path + " exist? " + directoryExists);
+        System.exit(0);
+        //java.nio.file.Path path = java.nio.file.Paths.get(home, "");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String logo = " ____        _        \n"
