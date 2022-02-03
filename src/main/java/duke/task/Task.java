@@ -4,13 +4,13 @@ package duke.task;
  * Represents a general task which the user has inserted.
  */
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
-    private TaskType taskType;
+    private final TaskType taskType;
 
-    public Task(TaskType type, String description) {
-        this(type, false, description);
-    }
+//    public Task(TaskType type, String description) {
+//        this(type, false, description);
+//    }
 
     public Task(TaskType type, boolean isDone, String description) {
         this.description = description;
@@ -19,11 +19,11 @@ public class Task {
     }
 
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public String getStatusIcon() {
@@ -31,11 +31,11 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void markAsUndone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -49,11 +49,11 @@ public class Task {
      */
     public String writeToFile() {
         String isDone = this.isDone ? "1" : "0";
-        return String.join(" | ", this.taskType.toString(), isDone, this.description);
+        return String.join(" | ", taskType.toString(), isDone, description);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.taskType.toString(), this.getStatusIcon(), this.description);
+        return String.format("[%s][%s] %s", taskType.toString(), getStatusIcon(), description);
     }
 }
