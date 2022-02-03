@@ -4,10 +4,14 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
     private TaskList tasks;
-    private Storage storage;
+    private final Storage storage;
 
+    /**
+     * Constructs a Duke program that stores task data at the specified file path.
+     * @param filePath String representing path for storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

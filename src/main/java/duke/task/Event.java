@@ -4,8 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    LocalDateTime time;
+    private LocalDateTime time;
 
+    /**
+     * Creates an Event with the given description and time.
+     *
+     * @param description The name of the event.
+     * @param time The time of the event.
+     */
     public Event(String description, LocalDateTime time) {
         super(description, TaskType.EVENT);
         this.time = time;

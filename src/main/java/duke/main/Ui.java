@@ -1,13 +1,13 @@
 package duke.main;
 
-import duke.exception.DukeException;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+
+import duke.exception.DukeException;
 
 /**
  * Ui is a utility class for reading and writing input to the Duke program.
@@ -24,9 +24,8 @@ public class Ui {
     public static final String MARK_MESSAGE = "Charizard breathe out fire and burned the task.";
     public static final String UNMARK_MESSAGE = "Oh no! The task was not burnt completely!";
     private static final int BORDER_LENGTH = 80;
-    private static final String GREET_MESSAGE
-            = "Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.\n" +
-            "Which task shall we burn today?";
+    private static final String GREET_MESSAGE = "Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.\n"
+            + "Which task shall we burn today?";
     private static final String QUESTION_MESSAGE = "What should Charizard do next?";
     private BufferedReader reader;
     private PrintWriter writer;
@@ -60,7 +59,7 @@ public class Ui {
         try {
             return reader.readLine();
         } catch (IOException e) {
-            throw new DukeException(DukeException.ERROR_IO_Input);
+            throw new DukeException(DukeException.ERROR_IO_INPUT);
         }
     }
 

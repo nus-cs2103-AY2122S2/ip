@@ -8,7 +8,7 @@ import duke.main.Ui;
 /**
  * Represents a Command which, when executed, marks or unmarks a Task from the given TaskList instance.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private static final boolean IS_EXIT = false;
     private int taskIndex;
     private boolean isDone;
