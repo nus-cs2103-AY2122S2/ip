@@ -16,6 +16,10 @@ application {
     mainClassName "duke.Duke"
 }
 
+checkstyle {
+    toolVersion = '8.29'
+}
+
 test {
     useJUnitPlatform()
 }
