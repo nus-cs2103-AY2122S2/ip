@@ -30,135 +30,109 @@ public class Pikachu {
      *
      * @param str Input from user.
      */
-    public void parseInput(String str) {
+    public String parseInput(String str) {
         String[] split = str.split(" ");
 
-        /**
-         * "commands"
-         * Prints list of available commands.
-         * Syntax: commands
-         */
+        //"commands"
+        //Prints list of available commands.
+        //Syntax: commands
         if (str.toLowerCase().equals("commands")) {
-            UI.printCommands();
-            return;
+            return UI.printCommands();
         }
 
-        /**
-         * "list"
-         * Prints current list of tasks in tasklist.
-         * Syntax: list
-         */
+        //"list"
+        //Prints current list of tasks in tasklist.
+        //Syntax: list
         if (str.toLowerCase().equals("list")) {
             //System.out.println("list command reached!");
-            System.out.println("Here are the tasks in your list:");
+            String result;
+            result = "Here are the tasks in your list:\n";
             int count = 1;
             for (Task t : inputList) {
-                System.out.println("   " + count + ". " + t);
+                result += ("   " + count + ". " + t + "\n");
                 count += 1;
             }
             count -= 1;
-            System.out.println("Now you have " + count + " task(s) in the list.");
-            return;
+            result += "Now you have " + count + " task(s) in the list.";
+            return result;
         }
 
-        /**
-         * "mark"
-         * Marks the task at the given index as done.
-         * Syntax: mark <index of task>
-         */
+        //"mark"
+        //Marks the task at the given index as done.
+        //Syntax: mark <index of task>
         if (split[0].toLowerCase().equals("mark")) {
             int index = 0;
             try {
                 index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) {
-                System.out.println("Invalid input for mark!");
-                return;
+                return "Invalid input for mark!";
             }
             if (index >= inputList.size() || index <= -1) { //Prevent invalid array accesses
-                System.out.println("Invalid task number!");
-                return;
+                return "Invalid task number!";
             }
             Task t = inputList.get(index);
             t.mark();
 
-            System.out.println("Pikachu has marked this task as done!\n   > " + t);
-            return;
+            return "Pikachu has marked this task as done!\n   > " + t;
         }
 
-        /**
-         * "unmark"
-         * Marks the task at the given index as not done.
-         * Syntax: unmark <index of task>
-         */
+        //"unmark"
+        //Marks the task at the given index as not done.
+        //Syntax: unmark <index of task>
         if (split[0].toLowerCase().equals("unmark")) {
             int index = 0;
             try {
                 index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) {
-                System.out.println("Invalid input for unmark!");
-                return;
+                return "Invalid input for unmark!";
             }
             if (index >= inputList.size() || index <= -1) {
-                System.out.println("Invalid task number!");
-                return;
+                return "Invalid task number!";
             }
             Task t = inputList.get(index);
             t.unmark();
 
-            System.out.println("Pikachu has marked this task as not done yet!\n   > " + t);
-            return;
+            return "Pikachu has marked this task as not done yet!\n   > " + t;
         }
 
-        /**
-         * "delete"
-         * Deletes the task at the given index.
-         * Syntax: delete <index of task>
-         */
+        //"delete"
+        //Deletes the task at the given index.
+        //Syntax: delete <index of task>
         if (split[0].toLowerCase().equals("delete")) {
             int index = 0;
             try {
                 index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) {
-                System.out.println("Invalid input for delete!");
-                return;
+                return "Invalid input for delete!";
             }
             if (index >= inputList.size() || index <= -1) { //Prevent invalid array accesses
-                System.out.println("Invalid task number!");
-                return;
+                return "Invalid task number!";
             }
             Task t = inputList.remove(index);
 
-            System.out.println("Pikachu has deleted this task!\n   > " + t);
-            System.out.println("You now have " + inputList.size() + " tasks in the list.");
-            return;
+            return "Pikachu has deleted this task!\n   > " + t + "\n"
+                    + "You now have " + inputList.size() + " tasks in the list.";
         }
 
-        /**
-         * "todo"
-         * Creates a todo task.
-         * Syntax: todo <taskname>
-         */
+        //"todo"
+        //Creates a todo task.
+        //Syntax: todo <taskname>
         if (split[0].toLowerCase().equals("todo")) {
             String[] split2 = str.split(" ", 2);
             //System.out.printf("For debugging. split2[1] = %s\n", split2[1]);
             try {
                 ToDo t = new ToDo(split2[1]);
                 inputList.add(t);
-                System.out.println("Pikachu has added this task to the list!");
-                System.out.println("   > " + t);
-                System.out.println("You now have " + inputList.size() + " tasks in the list.");
-                return;
+                return "Pikachu has added this task to the list!\n" + "   > " + t + "\n"
+                        + "You now have " + inputList.size() + " tasks in the list.";
             } catch (Exception e) {
-                System.out.println("Task description is empty!");
-                return;
+                return "Task description is empty!";
             }
         }
 
-        /**
-         * "deadline"
-         * Creates a deadline task.
-         * Syntax: deadline <taskname> /<yyyy-mm-dd hhmm of deadline>
-         */
+        //"deadline"
+        //Creates a deadline task.
+        //Syntax: deadline <taskname> /<yyyy-mm-dd hhmm of deadline>
         if (split[0].toLowerCase().equals("deadline")) {
             try {
                 String[] split2 = str.split("/");
@@ -174,21 +148,16 @@ public class Pikachu {
                 //System.out.printf("For debugging. split2[1] = %s, split3[1] = %s\n", split2[1], split3[1]);
                 Deadline d = new Deadline(name, deadline);
                 inputList.add(d);
-                System.out.println("Pikachu has added this task to the list!");
-                System.out.println("   > " + d);
-                System.out.println("You now have " + inputList.size() + " tasks in the list.");
-                return;
+                return "Pikachu has added this task to the list!\n" + "   > " + d + "\n"
+                        + "You now have " + inputList.size() + " tasks in the list.";
             } catch (Exception e) {
-                System.out.println("Task description is empty/Empty or invalid deadline timing has been specified!");
-                return;
+                return "Task description is empty/Empty or invalid deadline timing has been specified!";
             }
         }
 
-        /**
-         * "event"
-         * Creates an event task.
-         * Syntax: event <taskname> /<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>
-         */
+        //"event"
+        //Creates an event task.
+        //Syntax: event <taskname> /<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>
         if (split[0].toLowerCase().equals("event")) {
             try {
                 String[] split2 = str.split("/");
@@ -208,40 +177,34 @@ public class Pikachu {
                         Integer.parseInt(yymmddEnd[2]), Integer.parseInt(timeEnd.substring(0, 2)),
                         Integer.parseInt(timeEnd.substring(2, 4)));
                 if (end.isBefore(start)) {
-                    System.out.println("End time cannot be earlier than start time!");
-                    return;
+                    return "End time cannot be earlier than start time!";
                 }
                 //System.out.printf("For debugging. split2[1] = %s, split3[1] = %s\n", split2[1], split3[1]);
                 Event e = new Event(name, start, end);
                 inputList.add(e);
-                System.out.println("Pikachu has added this task to the list!");
-                System.out.println("   > " + e);
-                System.out.println("You now have " + inputList.size() + " tasks in the list.");
-                return;
+                return "Pikachu has added this task to the list!\n" + "   > " + e + "\n"
+                        + "You now have " + inputList.size() + " tasks in the list.";
             } catch (Exception e) {
-                System.out.println("Task description is empty/Empty or invalid event duration has been specified!");
-                return;
+                return "Task description is empty/Empty or invalid event duration has been specified!";
             }
         }
 
-        /**
-         * "find"
-         * Returns a list of all tasks containing the given keyword.
-         * Syntax: find <keyword>
-         */
+        //"find"
+        //Returns a list of all tasks containing the given keyword.
+        //Syntax: find <keyword>
         if (split[0].toLowerCase().equals("find")) {
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "Here are the matching tasks in your list:\n";
             int count = 1;
             String[] split2 = str.split(" ", 2);
             for (Task t : inputList) {
                 if (!t.getName().contains(split2[1])) continue; //Current task does not contain the keyword
-                System.out.println("   " + count + ". " + t);
+                result += ("   " + count + ". " + t + "\n");
                 count += 1;
             }
-            return;
+            return result;
         }
 
         //For non-recognizable inputs
-        System.out.println("Pikachu does not understand...");
+        return "Pikachu does not understand...";
     }
 }
