@@ -4,6 +4,7 @@ import src.main.java.duke.command.AddCommand;
 import src.main.java.duke.command.Command;
 import src.main.java.duke.command.DeleteCommand;
 import src.main.java.duke.command.ExitCommand;
+import src.main.java.duke.command.FindCommand;
 import src.main.java.duke.command.ListCommand;
 import src.main.java.duke.command.MarkCommand;
 import src.main.java.duke.command.UnmarkCommand;
@@ -67,6 +68,8 @@ public class Parser {
                 }
             case "bye":
                 return new ExitCommand();
+            case "find":
+                return new FindCommand(description);
             default:
                 throw new DukeException("Invalid command :-(");
         }

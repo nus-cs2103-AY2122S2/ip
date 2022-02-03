@@ -60,6 +60,21 @@ public class TaskList {
         }
     }
 
+    public void find(String keyword) {
+        ArrayList<Task> searchResults = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                searchResults.add(tasks.get(i));
+            }
+        }
+
+        System.out.println("Here are the matching tasks in your list:");
+        for (int j = 1; j <= searchResults.size(); j++) {
+            System.out.println(j + ". " + searchResults.get(j - 1).toString());
+        }
+    }
+
     public int length() {
         return tasks.size();
     }
