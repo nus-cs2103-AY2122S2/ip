@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,8 +6,12 @@ public class Duke {
         // Constant strings
         final String INTRO = "Duke initialised";
 
-        // Init
+        // Init scanner
         Scanner sc = new Scanner(System.in);
+
+        // Init tasklist file if it does not exist
+        File f = new File("./tasklist.txt");
+
 
         // Printing Duke's intro
         String formattedIntroText = Duke.indent(INTRO, 1);
