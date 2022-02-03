@@ -21,6 +21,7 @@ public class Main extends Application {
             //this.connor = new Connor(Connor.getFilePath());
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setResizable(false);
             //loader.<MainWindow>getController().setConnor(connor);
             stage.show();
         } catch (IOException e) {

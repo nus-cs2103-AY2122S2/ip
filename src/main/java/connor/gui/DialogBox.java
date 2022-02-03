@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView avatar;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader loader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             loader.setController(this);
@@ -38,6 +38,9 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         avatar.setImage(img);
         avatar.setClip(getCircleClip());
+        if (isUser) {
+            dialog.setAlignment(Pos.CENTER_RIGHT);
+        }
         this.setBackground(getColorBackground("#D3D3D3"));
     }
 
@@ -55,15 +58,15 @@ public class DialogBox extends HBox {
     }
 
     private Circle getCircleClip() {
-        return new Circle(50, 50, 50);
+        return new Circle(25, 25, 25);
     }
 
     public static DialogBox getUserDialog(String s, Image img) {
-        return new DialogBox(s, img);
+        return new DialogBox(s, img, true);
     }
 
     public static DialogBox getConnorDialog(String s, Image img) {
-        var db = new DialogBox(s, img);
+        var db = new DialogBox(s, img, false);
         db.flip();
         return db;
     }

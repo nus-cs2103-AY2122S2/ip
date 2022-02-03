@@ -33,9 +33,15 @@ public class TaskList {
     private static final String ERROR_INVALID_DL_FORMAT = "Error! Wrong format for deadlines.\n\n"
             + "Deadline tasks must include \"by\" in the description.\nExample: \n"
             + ">>> deadline Finish project /by Monday Morning";
+    private static final String ERROR_INVALID_DL_FORMAT_GUI = "Error! Wrong format for deadlines.\n\n"
+            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
+            + "'deadline Finish project /by Monday Morning'";
     private static final String ERROR_INVALID_EVENT_FORMAT = "Error! Wrong format for events.\n\n"
             + "Event tasks must include \"at\" in the description.\nExample: \n"
             + ">>> event Birthday Party at May 5th";
+    private static final String ERROR_INVALID_EVENT_FORMAT_GUI = "Error! Wrong format for events.\n\n"
+            + "Event tasks must include \"at\" in the description.\nExample: \n"
+            + "'event Birthday Party at May 5th'";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
@@ -103,7 +109,7 @@ public class TaskList {
         case DEADLINE: {
             if (!desc.contains("/by")) {
                 print(ERROR_INVALID_DL_FORMAT);
-                return ERROR_INVALID_DL_FORMAT;
+                return ERROR_INVALID_DL_FORMAT_GUI;
             }
             String[] phrases = desc.split("/by", 2);
             String thing = phrases[0].trim();
@@ -133,7 +139,7 @@ public class TaskList {
         case EVENT: {
             if (!desc.contains("/at")) {
                 print(ERROR_INVALID_EVENT_FORMAT);
-                return ERROR_INVALID_EVENT_FORMAT;
+                return ERROR_INVALID_EVENT_FORMAT_GUI;
             }
             String[] phrases = desc.split("/at", 2);
             String thing = phrases[0].trim();
@@ -277,7 +283,7 @@ public class TaskList {
             taskListString.append(SHOW_MATCHING_TASKS + "\n");
             for (int i = 1; i <= matchingTasks.size(); i++) {
                 print(INDENT + i + ". " + matchingTasks.get(i - 1));
-                taskListString.append(INDENT + i + ". " + matchingTasks.get(i - 1));
+                taskListString.append(INDENT + i + ". " + matchingTasks.get(i - 1) + "\n");
             }
         }
         return taskListString.toString();
