@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             input = userInput.getText();
-            if (input.toLowerCase().equals("bye")) {
+            if (input.equalsIgnoreCase("bye")) {
                 Platform.exit();
             }
             response = chi.getResponse(input);

@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
             if (!isValidMarkCommand) {
                 throw new ChiException("Hey there is something wrong with this delete command nyan!");
             } else {
-                int index = getIndexInMessage(tokens[1]);
+                int index = getIndexInMessage(msg);
                 Task toDelete = tl.getTask(index);
                 tl.deleteTask(toDelete);
                 sge.updateFile(toDelete, tl, "delete");

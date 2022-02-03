@@ -46,20 +46,6 @@ public class Chi {
         }
     }
 
-/*
-    public void run() {
-        ui.printWelcome();
-        ui.requestInput(this.taskList, this.storage, this.parser);
-        ui.printGoodbye();
-    }
-
-
-    public static void main(String[] args) {
-        Chi myBot = new Chi("data/tasks.txt");
-        myBot.run();
-    }
-*/
-
     /**
      * Returns a response to the message sent by the user.
      *
