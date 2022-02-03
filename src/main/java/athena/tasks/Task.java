@@ -27,7 +27,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String completionMark = (this.isDone? "X" : " ");
+        String completionMark = (this.isDone ? "X" : " ");
         return String.format("[%s][%s] %s", getIcon(), completionMark, this.description);
     }
 }

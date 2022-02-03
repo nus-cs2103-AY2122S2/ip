@@ -1,12 +1,12 @@
 package athena.storage;
 
-import athena.tasks.TaskList;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import athena.tasks.TaskList;
 
 /**
  * Contains methods for saving and loading the current state of the

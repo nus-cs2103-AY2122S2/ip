@@ -1,9 +1,9 @@
 package athena.commands;
 
+import java.time.LocalDateTime;
+
 import athena.tasks.TaskList;
 import athena.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a deadline command given to Athena by the user. When executed, sets a new

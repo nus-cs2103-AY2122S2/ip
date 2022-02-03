@@ -1,10 +1,10 @@
 // Stretch goal: abstract out the messages
 package athena.ui;
 
-import athena.tasks.TaskList;
-
 import java.util.List;
 import java.util.Scanner;
+
+import athena.tasks.TaskList;
 
 public class Ui {
     private final TaskList taskList;

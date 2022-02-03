@@ -1,9 +1,9 @@
 package athena.commands;
 
+import java.util.List;
+
 import athena.tasks.TaskList;
 import athena.ui.Ui;
-
-import java.util.List;
 
 /**
  * Represents a find command given to Athena by the user. When executed, displays

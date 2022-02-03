@@ -1,10 +1,13 @@
 package athena.parser;
 
-import athena.commands.TodoCommand;
-import athena.exceptions.InputException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import athena.commands.TodoCommand;
+import athena.exceptions.InputException;
 
 class ParserTest {
 

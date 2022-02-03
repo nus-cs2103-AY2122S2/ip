@@ -1,5 +1,9 @@
 package athena.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import athena.commands.Command;
 import athena.commands.DeadlineCommand;
 import athena.commands.DeleteCommand;
@@ -12,10 +16,6 @@ import athena.commands.TodoCommand;
 import athena.commands.UnmarkCommand;
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates helper methods to parse user input given to Athena.

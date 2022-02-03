@@ -1,5 +1,7 @@
 package athena;
 
+import java.io.IOException;
+
 import athena.commands.Command;
 import athena.commands.ShutdownCommand;
 import athena.exceptions.InputException;
@@ -7,8 +9,6 @@ import athena.parser.Parser;
 import athena.storage.Storage;
 import athena.tasks.TaskList;
 import athena.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Provides the point of entry into the Athena program. Initializes the program and handles
@@ -65,11 +65,11 @@ public class Main {
             } catch (InputException e) {
                 ui.sayText(e.getMessage());
             }
-            SaveIfTaskListModified();
+            saveIfTaskListModified();
         }
     }
 
-    private void SaveIfTaskListModified() {
+    private void saveIfTaskListModified() {
         if (taskList.wasModified()) {
             try {
                 storage.saveToDisk(taskList);
