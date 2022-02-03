@@ -39,6 +39,21 @@ public class MarkCommand extends Command{
             }
         }
     }
+
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, IOException {
+        if (taskId <= 0 || taskId > taskList.getSize()) {
+            throw new InvalidNumberException();
+        } else {
+            taskList.setTaskStatus(taskId - 1, markType);
+            storage.saveFile(taskList);
+            if (!markType) {
+                return ui.outputUiText("OK, I've marked this task as not done yet: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+            } else {
+                return ui.outputUiText("Nice! I've marked this task as done: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+            }
+        }
+    }
     /**
      * To know if this command will exit the program
      *

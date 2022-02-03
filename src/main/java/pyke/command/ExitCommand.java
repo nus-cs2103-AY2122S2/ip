@@ -12,10 +12,15 @@ public class ExitCommand extends Command{
      * @param ui the interface for output information
      * @param storage in charge of file IO
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.sayFarewell();
     }
 
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) {
+        return ui.outputUiFarewell();
+    }
     /**
      * To know if this command will exit the program
      *

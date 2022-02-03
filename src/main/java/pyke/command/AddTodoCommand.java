@@ -39,6 +39,19 @@ public class AddTodoCommand extends Command{
         }
     }
 
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, IOException {
+        if (taskName.isEmpty()) {
+            throw new EmptyDescriptionException();
+        } else {
+            taskList.addTask(new ToDo(taskName));
+            storage.saveFile(taskList);
+            return ui.outputUiText("Got it. I've added this task:\n    "
+                    + taskList.getTaskOutputStyle(taskList.getSize() - 1)
+                    + "\nNow you have " + taskList.getSize() + " tasks in the list.");
+        }
+    }
+
     /**
      * To know if this command will exit the program
      *

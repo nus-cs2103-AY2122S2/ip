@@ -32,6 +32,7 @@ public class AddDeadlineCommand extends Command{
      * @throws DateTimeParseException if the input dates are not in the correct format for parsing
      * @throws IOException if there is an error when writing to the local file
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
@@ -41,6 +42,21 @@ public class AddDeadlineCommand extends Command{
             taskList.addTask(new Deadline(taskName, LocalDate.parse(ddl)));
             storage.saveFile(taskList);
             ui.outputText("Got it. I've added this task:\n    "
+                    + taskList.getTaskOutputStyle(taskList.getSize() - 1)
+                    + "\nNow you have " + taskList.getSize() + " tasks in the list.");
+        }
+    }
+
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
+        if (taskName.isEmpty()) {
+            throw new EmptyDescriptionException();
+        } else if (ddl.isEmpty()) {
+            throw new EmptyTimeException();
+        } else {
+            taskList.addTask(new Deadline(taskName, LocalDate.parse(ddl)));
+            storage.saveFile(taskList);
+            return ui.outputUiText("Got it. I've added this task:\n    "
                     + taskList.getTaskOutputStyle(taskList.getSize() - 1)
                     + "\nNow you have " + taskList.getSize() + " tasks in the list.");
         }

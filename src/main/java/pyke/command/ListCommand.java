@@ -25,6 +25,20 @@ public class ListCommand extends Command{
         }
     }
 
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) {
+        if (taskList.isEmpty()) {
+            return ui.outputUiText("Currently the list is empty. There is nothing to output.");
+        } else {
+            String outputText = "";
+            for (int i = 1; i <= taskList.getSize(); i++) {
+                outputText = outputText.concat(i + "." + taskList.getTaskOutputStyle(i - 1));
+                if (i != taskList.getSize()) outputText = outputText.concat("\n");
+            }
+            return ui.outputUiText(outputText);
+        }
+    }
+
     /**
      * To know if this command will exit the program
      *
