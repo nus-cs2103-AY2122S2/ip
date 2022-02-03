@@ -3,24 +3,25 @@ package chatbot.util;
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
 
+
 /**
  * Represents an interpreter for user inputs.
  */
 public class Parser {
 
-    private final Ui innkeeper;
+    private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
 
     /**
      * Instantiates a new Parser.
      *
-     * @param innkeeper The UI.
+     * @param ui The UI.
      * @param storage   The storage.
      * @param taskList  The task list.
      */
-    public Parser(Ui innkeeper, Storage storage, TaskList taskList) {
-        this.innkeeper = innkeeper;
+    public Parser(Ui ui, Storage storage, TaskList taskList) {
+        this.ui = ui;
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -31,88 +32,72 @@ public class Parser {
      * @param rawInput The input given by the user.
      * @return The boolean indicating whether the ChatBot should continue prompting the user for inputs or not.
      */
-    public boolean parse(String rawInput) {
+    public String parse(String rawInput) {
         String[] input = rawInput.split(" ");
         String response;
-        System.out.println();
         switch (input[0]) {
         case "bye":
-            innkeeper.bye();
-            return false;
+            return ui.bye();
         case "list":
             response = taskList.summary();
-            innkeeper.print(response);
-            return true;
+            return response;
         case "get":
             try {
                 if (input.length > 2) {
-                    throw new ChatBotException(
-                            "That's too many inputs traveller! You only need to key in the "
-                                    + "date or timestamp for which you want to view your tasks!"
-                    );
+                    return "That's too many inputs traveller! You only need to key in the "
+                                    + "date or timestamp for which you want to view your tasks!";
                 } else {
                     Timestamp date = new Timestamp(input[1]);
                     response = taskList.getTasksOnDate(date);
-                    innkeeper.print(response);
+                    return response;
                 }
             } catch (ChatBotException e) {
-                innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
-            return true;
         case "find":
             response = taskList.getTasksByKeyword(input);
-            innkeeper.print(response);
-            return true;
+            return response;
         case "mark":
         case "unmark":
             try {
                 if (taskList.isEmpty()) {
-                    throw new ChatBotException(
-                            "Your task list is empty traveller! "
-                                    + "Add some tasks first before attempting to mark or unmark!"
-                    );
+                    return "Your task list is empty traveller! "
+                                    + "Add some tasks first before attempting to mark or unmark!";
                 } else if (input.length > 2) {
-                    throw new ChatBotException(
-                            "That's too many inputs traveller! "
-                                    + "You only need to key in the index of the task you wish to mark or unmark!"
-                    );
+                    return "That's too many inputs traveller! "
+                            + "You only need to key in the index of the task you wish to mark or unmark!";
                 } else {
                     response = markOrUnmark(
                             Integer.parseInt(input[1]) - 1,
                             input[0].equals("mark")
                     );
-                    innkeeper.chat(response);
+                    return response;
                 }
             } catch (ChatBotException e) {
-                innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
-                innkeeper.error(
+                return ui.error(
                         "You should mark and unmark tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
-                innkeeper.error(
+                return ui.error(
                         "You need to key in the index of the task you wish to mark or unmark traveller!"
                 );
             }
-
-            return true;
         case "todo":
             try {
                 response = taskList.addToDo(input);
-                innkeeper.chat(response);
-                innkeeper.printNumTasks(taskList.getNumTasks());
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                 storage.saveChanges(taskList);
+                return response;
             } catch (ChatBotException e) {
-                innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
-            return true;
         case "delete":
             try {
                 if (taskList.isEmpty()) {
-                    throw new ChatBotException(
-                            "Your task list is empty traveller! "
-                                    + "Add some tasks first before attempting to delete!"
-                    );
+                    return "Your task list is empty traveller! "
+                            + "Add some tasks first before attempting to delete!";
                 } else if (input.length > 2) {
                     throw new ChatBotException(
                             "That's too many inputs traveller! "
@@ -122,25 +107,23 @@ public class Parser {
                     response = taskList.delete(
                             Integer.parseInt(input[1]) - 1
                     );
-                    innkeeper.chat(response);
-                    innkeeper.printNumTasks(taskList.getNumTasks());
+                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                     storage.saveChanges(taskList);
+                    return response;
                 }
             } catch (ChatBotException e) {
-                innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
-                innkeeper.error(
+                return ui.error(
                         "You should delete tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
-                innkeeper.error(
+                return ui.error(
                         "You need to key in the index of the task you wish to delete traveller!"
                 );
             }
-            return true;
         case "guide":
-            innkeeper.printGuide();
-            return true;
+            return ui.printGuide();
         default:
             String[] temp = rawInput.split("/", 2);
             try {
@@ -179,14 +162,13 @@ public class Parser {
                         temp[0].split(" "),
                         temp[1].split(" ")
                     );
-                    innkeeper.chat(response);
-                    innkeeper.printNumTasks(taskList.getNumTasks());
+                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
                     storage.saveChanges(taskList);
+                    return response;
                 }
             } catch (ChatBotException e) {
-                innkeeper.error(e.getMessage());
+                return ui.error(e.getMessage());
             }
-            return true;
         }
     }
 

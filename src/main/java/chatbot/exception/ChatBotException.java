@@ -1,5 +1,6 @@
 package chatbot.exception;
 
+
 /**
  * Represents the exception used by ChatBot for error handling.
  */
