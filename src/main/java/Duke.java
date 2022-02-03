@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,8 +51,7 @@ public class Duke {
         System.out.println(BAR);
     }
 
-    
-    /** 
+    /**
      * @param inputArray
      */
     private void handleMark(String[] inputArray) {
@@ -65,8 +65,7 @@ public class Duke {
         System.out.println(BAR);
     }
 
-    
-    /** 
+    /**
      * @param inputArray
      */
     private void handleUnMark(String[] inputArray) {
@@ -80,8 +79,7 @@ public class Duke {
         System.out.println(BAR);
     }
 
-    
-    /** 
+    /**
      * @param inputArray
      * @param originalInput
      */
@@ -93,6 +91,7 @@ public class Duke {
         } catch (DukeException e) {
             System.err.println(e.getMessage());
             System.out.println("Please try again:");
+            System.out.println(BAR);
             return;
         }
 
@@ -107,8 +106,16 @@ public class Duke {
         String metaInfo = originalInput.split("/by")[1];
         String strippedCommand = originalInput.replaceAll(".*\\bdeadline\\.*", "");
         System.out.println(BAR);
+        Task curr = null;
+        try {
+            curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
+        } catch (DateTimeParseException ex) {
+            System.err.println("Kindly input Date and Time in dd/mm/yyyy hhmm");
+            System.out.println("Please try again:");
+            System.out.println(BAR);
+            return;
+        }
         System.out.println("Got it. I've added this task:");
-        Task curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
         processNewTask(curr);
         System.out.println(BAR);
     }
@@ -133,6 +140,7 @@ public class Duke {
         } catch (DukeException e) {
             System.err.println(e.getMessage());
             System.out.println("Please try again:");
+            System.out.println(BAR);
             return;
         }
 
