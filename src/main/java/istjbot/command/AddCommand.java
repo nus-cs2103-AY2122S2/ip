@@ -100,6 +100,6 @@ public class AddCommand extends Command {
         storage.save(tasks);
 
         // Ui
-        ui.showTaskAdded(tasks.tasksSize(), tasks.TaskString(tasks.tasksSize()));
+        ui.showTaskAdded(tasks.tasksSize(), tasks.taskString(tasks.tasksSize()));
     }
 }

@@ -114,7 +114,7 @@ public class TaskList {
      * @param taskNumber Number (order) of the task that appear in tasks ArrayList. (1-based)
      * @return String representation of the given task.
      */
-    public String TaskString(int taskNumber) {
+    public String taskString(int taskNumber) {
         return this.tasks.get(taskNumber - 1).toString();
     }
 

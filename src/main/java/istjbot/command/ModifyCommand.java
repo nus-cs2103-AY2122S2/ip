@@ -38,13 +38,13 @@ public class ModifyCommand extends Command {
         case MARK:
             tasks.markTask(taskNumber);
             storage.save(tasks);
-            ui.showTaskMarked(tasks.TaskString(taskNumber));
+            ui.showTaskMarked(tasks.taskString(taskNumber));
             break;
 
         case UNMARK:
             tasks.unmarkTask(taskNumber);
             storage.save(tasks);
-            ui.showTaskUnmarked(tasks.TaskString(taskNumber));
+            ui.showTaskUnmarked(tasks.taskString(taskNumber));
             break;
 
         case DELETE:
