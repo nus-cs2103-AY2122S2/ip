@@ -1,3 +1,5 @@
+package yale.gui;
+
 import javafx.application.Application;
 
 /**

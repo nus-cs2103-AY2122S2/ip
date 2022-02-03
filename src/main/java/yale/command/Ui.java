@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String LOGO = "-----YALE-----";
     private static final String WELCOME_MESSAGE = "Allow me to introduce myself\n"
-            + LOGO + "\nThe name's Yale.";
+            + LOGO + "\nThe name's yale.Yale.";
     private static final String ENTER_COMMAND = "\nEnter command below:";
 
     /**

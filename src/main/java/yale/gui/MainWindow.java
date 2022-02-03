@@ -1,3 +1,5 @@
+package yale.gui;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,9 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import yale.Yale;
+import yale.gui.DialogBox;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for yale.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML

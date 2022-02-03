@@ -1,3 +1,5 @@
+package yale.gui;
+
 import java.io.IOException;
 
 import javafx.collections.FXCollections;

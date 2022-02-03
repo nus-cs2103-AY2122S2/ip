@@ -1,9 +1,9 @@
+package yale;
+
 import yale.command.Parser;
 import yale.command.Storage;
 import yale.command.Ui;
 import yale.task.TaskList;
-
-import javafx.scene.control.Label;
 
 import java.util.Scanner;
 
