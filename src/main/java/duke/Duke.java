@@ -1,35 +1,29 @@
 package duke;
-import java.io.*;
-import java.util.*;
 
-import duke.tasks.*;
-import duke.tasklist.*;
-import duke.UI.*;
+import duke.tasklist.Storage;
 
 public class Duke {
+    private final Pikachu pikachu;
+    private final Storage storage;
 
-    public static void main(String[] args) throws IOException {
-        UI.printGreeting();
-        UI.printCommands();
-        Scanner sc = new Scanner(System.in);
-        String currInput = null;
-        Pikachu pikachu = new Pikachu();
-        Storage storage = new Storage("Tasklist.txt", pikachu);
-        storage.readTaskList();
+    //Constructor
+    public Duke() {
+        this.pikachu = new Pikachu();
+        this.storage = new Storage("Tasklist.txt", pikachu);
+    }
 
-        //Start accepting commands
-        while (true) {
-            currInput = sc.nextLine(); //scan in user input
-            if (currInput.toLowerCase().equals("bye")) break; //if user input == bye, exit programme
+    //Accessor
+    public Storage getStorage() {
+        return this.storage;
+    }
 
-            System.out.println("________________________________________________________________");
-            System.out.println("Pikachu says:");
-            pikachu.parseInput(currInput); //passes the current input to pikachu
-            System.out.println("________________________________________________________________");
-        }
-
-        storage.writeTaskList();
-        UI.printGoodbye();
-        sc.close();
+    /**
+     * Method that GUI calls to respond to user input.
+     *
+     * @param input Input from user.
+     * @return Output from chatbot after parsing input.
+     */
+    public String getResponse(String input) {
+        return pikachu.parseInput(input);
     }
 }
