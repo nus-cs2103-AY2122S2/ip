@@ -13,7 +13,7 @@ public class Task {
      * 
      * @param task The task name to be saved as. 
      */
-    public Task(String task){
+    public Task(String task) {
         this.taskName = task;
         this.isDone = false;
     }
