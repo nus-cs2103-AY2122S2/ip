@@ -1,13 +1,5 @@
 package duke.storage;
 
-import duke.exception.ErrorMessage;
-import duke.exception.StorageException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.util.TaskList;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,11 +8,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.ErrorMessage;
+import duke.exception.StorageException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.util.TaskList;
+
 /**
  * Represents a storage object that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    public static final String DEFAULT_FILEPATH = "duke.txt";
+    public static final String DEFAULT_FILEPATH = "data/tasks.txt";
     private final Path filePath;
 
     public Storage() {
@@ -39,7 +39,7 @@ public class Storage {
     /**
      * Loads and decodes the saved tasks from file if they exist.
      *
-     * @return Saved tasks, else empty list.
+     * @return Saved tasks, else a new  empty list.
      * @throws StorageException if the file cannot be loaded.
      */
     public ArrayList<Task> load() throws StorageException {
@@ -56,10 +56,10 @@ public class Storage {
                 switch(args[0]) {
                 case "D":
                     tasks.add(new Deadline(args[2], args[1].equals("1"), LocalDate.parse(args[3])));
-                    // Fallthrough
+                    break;
                 case "E":
                     tasks.add(new Event(args[2], args[1].equals("1"), LocalDate.parse(args[3])));
-                    // Fallthrough
+                    break;
                 default:
                     tasks.add(new Todo(args[2], args[1].equals("1")));
                 }
@@ -80,7 +80,7 @@ public class Storage {
         try {
             StringBuilder content = new StringBuilder();
             for (Task t: tasks.getAllTasks()) {
-                content.append(t.formatForFile());
+                content.append(t.formatForFile()).append("\n");
             }
             Files.write(filePath, content.toString().getBytes());
         } catch (IOException e) {
@@ -99,7 +99,8 @@ public class Storage {
             }
 
             Path parentDir = filePath.getParent();
-            if (!Files.exists(parentDir)) { // check if data folder exists
+            // check if data folder exists
+            if (!Files.exists(parentDir)) {
                 Files.createDirectories(parentDir);
             }
 

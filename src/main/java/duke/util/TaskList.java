@@ -1,16 +1,16 @@
 package duke.util;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Contains a list of tasks and has operations to manipulate tasks in the list.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Creates an empty task list.
@@ -30,6 +30,10 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        return new ArrayList<>(tasks);
     }
 
     /**
@@ -60,14 +64,17 @@ public class TaskList {
      * Removes the task at the specified index.
      *
      * @param index One-based index of the task to be deleted.
+     * @return The deleted task.
      * @throws DukeException if the index is invalid.
      */
-    public void deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) throws DukeException {
         int zeroBasedIndex = index - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_INDEX);
         }
+        Task t = getTask(index);
         tasks.remove(zeroBasedIndex);
+        return t;
     }
 
     /**
@@ -88,10 +95,6 @@ public class TaskList {
      */
     public void unmarkAsDone(int index) throws DukeException {
         getTask(index).unmarkAsDone();
-    }
-
-    public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(tasks);
     }
 
     /**

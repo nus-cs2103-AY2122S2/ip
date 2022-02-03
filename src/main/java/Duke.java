@@ -15,7 +15,7 @@ public class Duke {
     /**
      * Creates a Duke chatbot with the required objects, and loads up the data from the storage file.
      *
-     * @param filePath Path of the file containing data.
+     * @param filePath Path of the file containing the stored tasks.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -31,7 +31,7 @@ public class Duke {
      * Gets user input and executes the corresponding command.
      *
      * @param input User input.
-     * @return Result of the executed command or error message.
+     * @return Result of the executed command.
      */
     public String getResponse(String input) {
         try {
