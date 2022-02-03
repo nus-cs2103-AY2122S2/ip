@@ -24,6 +24,10 @@ public class Ui {
         System.out.println("-".repeat(24));
     }
 
+    /**
+     * Gets the user input.
+     * @return User input.
+     */
     public String readCommand() {
         System.out.print("Command: ");
         return sc.nextLine();

@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.io.IOException;
-
 import seedu.commands.Command;
 import seedu.storage.Storage;
 import seedu.storage.TaskList;
@@ -52,7 +50,7 @@ public class Duke {
             }
         }
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 }
