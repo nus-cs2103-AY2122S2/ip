@@ -3,9 +3,15 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
-    LocalDateTime deadline;
+public class Deadline extends Task {
+    private LocalDateTime deadline;
 
+    /**
+     * Creates a Deadline with the given description and deadline.
+     *
+     * @param description The name of the Deadline task.
+     * @param deadline The deadline of the Deadline task.
+     */
     public Deadline(String description, LocalDateTime deadline) {
         super(description, TaskType.DEADLINE);
         this.deadline = deadline;

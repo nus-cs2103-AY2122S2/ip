@@ -1,5 +1,12 @@
 package duke.main;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
@@ -7,12 +14,6 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.exception.DukeException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
@@ -120,24 +121,22 @@ public class ParserTest {
 
     @Test
     void parserTest_invalidAddDeadline_throwsDukeException() {
-        assertAll("Invalid Add Deadline",
-                () -> {
-                    try {
-                        Parser.parseCommand("deadline testDeadline /by /by anything");
-                        Assertions.fail("Parser fails to catch deadline command with invalid structure");
-                    } catch (DukeException e) {
-                        assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
-                                + DukeException.FORMAT_DEADLINE);
-                    }
-                },
-                () -> {
-                    try {
-                        Parser.parseCommand("deadline testDeadline /by notADate format");
-                        Assertions.fail("Parser fails to catch deadline command with invalid date format");
-                    } catch (DukeException e) {
-                        assertEquals(e.getMessage(), DukeException.FORMAT_DATE);
-                    }
+        assertAll("Invalid Add Deadline", () -> {
+            try {
+                Parser.parseCommand("deadline testDeadline /by /by anything");
+                Assertions.fail("Parser fails to catch deadline command with invalid structure");
+            } catch (DukeException e) {
+                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
+                        + DukeException.FORMAT_DEADLINE);
+            }
+        }, () -> {
+                try {
+                    Parser.parseCommand("deadline testDeadline /by notADate format");
+                    Assertions.fail("Parser fails to catch deadline command with invalid date format");
+                } catch (DukeException e) {
+                    assertEquals(e.getMessage(), DukeException.FORMAT_DATE);
                 }
+            }
         );
     }
 
@@ -152,24 +151,22 @@ public class ParserTest {
 
     @Test
     void parserTest_invalidAddEvent_throwsDukeException() {
-        assertAll("Invalid Add Event",
-                () -> {
-                    try {
-                        Parser.parseCommand("event /at anything");
-                        Assertions.fail("Parser fails to catch event command with invalid structure");
-                    } catch (DukeException e) {
-                        assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
-                                + DukeException.FORMAT_EVENT);
-                    }
-                },
-                () -> {
-                    try {
-                        Parser.parseCommand("event testEvent /at notADate format");
-                        Assertions.fail("Parser fails to catch event command with invalid date format");
-                    } catch (DukeException e) {
-                        assertEquals(e.getMessage(), DukeException.FORMAT_DATE);
-                    }
+        assertAll("Invalid Add Event", () -> {
+            try {
+                Parser.parseCommand("event /at anything");
+                Assertions.fail("Parser fails to catch event command with invalid structure");
+            } catch (DukeException e) {
+                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
+                        + DukeException.FORMAT_EVENT);
+            }
+        }, () -> {
+                try {
+                    Parser.parseCommand("event testEvent /at notADate format");
+                    Assertions.fail("Parser fails to catch event command with invalid date format");
+                } catch (DukeException e) {
+                    assertEquals(e.getMessage(), DukeException.FORMAT_DATE);
                 }
+            }
         );
     }
 }

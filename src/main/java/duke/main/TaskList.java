@@ -1,10 +1,10 @@
 package duke.main;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Represents a list of Task objects.
@@ -102,8 +102,8 @@ public class TaskList {
     /**
      * Returns an ArrayList of tasks that matches the description.
      *
-     * @return ArrayList of tasks that matches the description.
      * @param searchDescription Search text to be partially matched with task's description.
+     * @return ArrayList of tasks that matches the description.
      */
     public ArrayList<Task> findTasks(String searchDescription) {
         return new ArrayList<Task>(tasks.stream()

@@ -5,6 +5,12 @@ public abstract class Task {
     private boolean isDone;
     private TaskType type;
 
+    /**
+     * Creates a Task with the given description and type.
+     *
+     * @param description The name of the task.
+     * @param type The type of the task, such as TODO, DEADLINE, or EVENT.
+     */
     public Task(String description, TaskType type) {
         this.description = description;
         this.type = type;
