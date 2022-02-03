@@ -1,6 +1,14 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls' ]
 }
 
 group 'duke'
@@ -17,10 +25,28 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+application {
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
     manifest {
         attributes "Main-Class": "duke.Duke"
     }
+}
+
+checkstyle {
+    toolVersion = '8.1'
 }

@@ -1,3 +1,4 @@
+todo read book
 deadline return book /by 4/12/2020 1800
 event project meeting /at 3/12/2019 1900 to 2100
 event 2.4km run /at 28/12/2019 1600 to 1800

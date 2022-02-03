@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="duke.TodoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-28T14:40:15" hostname="DESKTOP-73NEEJC" time="0.028">
-  <properties/>
-  <testcase name="todoToString()" classname="duke.TodoTest" time="0.028"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
