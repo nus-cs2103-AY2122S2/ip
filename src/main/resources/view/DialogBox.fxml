@@ -6,10 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 
 <fx:root
-        alignment="TOP_RIGHT"
+        alignment="CENTER_RIGHT"
         maxHeight="1.7976931348623157E308"
-        maxWidth="1.7976931348623157E308"
+        maxWidth="-Infinity"
         prefWidth="400.0"
+        minHeight="-Infinity"
+        minWidth="-Infinity"
         type="javafx.scene.layout.HBox"
         xmlns="http://javafx.com/javafx/8.0.171"
         xmlns:fx="http://javafx.com/fxml/1"
@@ -21,7 +23,7 @@
                 wrapText="true"
                 style="-fx-background-color: #c3efee;
                 -fx-border-color: #61e4c4;
-                -fx-border-width: 3 3;
+                -fx-border-width: 2 2;
                 -fx-border-radius: 15;
                 -fx-label-padding: 15;
                 -fx-background-radius: 15;"

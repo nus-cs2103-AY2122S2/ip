@@ -103,7 +103,7 @@ public enum Handlers {
             }
             list.addTask(task);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder("Deadline Added: " + task.toString());
+            StringBuilder str = new StringBuilder("Deadline Added: " + task.toString() + "\n");
             str.append("There are now ").append(list.getTotalTasks()).append(" tasks in the list.\n");
             return str.toString();
         } catch (DukeException | DateTimeException err) {
@@ -120,10 +120,9 @@ public enum Handlers {
     public static String deleteHandler(Tasklist list, String input) {
         try {
             int index = DukeException.isIndexValid(input, list);
-            System.out.println("Noted. Deleting this task...");
             Task t = list.delete(index);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder(t.toString());
+            StringBuilder str = new StringBuilder(t.toString() + "\n");
             str.append("There are now ").append(list.getTotalTasks()).append(" tasks in the list.\n");
             return str.toString();
         } catch (DukeException err) {
@@ -152,7 +151,7 @@ public enum Handlers {
             }
             list.addTask(task);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder("Event Added: " + task.toString());
+            StringBuilder str = new StringBuilder("Event Added: " + task.toString() + "\n");
             str.append("There are now ").append(list.getTotalTasks()).append(" tasks in the list.\n");
             return str.toString();
         } catch (DukeException | DateTimeException err) {
@@ -180,7 +179,7 @@ public enum Handlers {
                 str.append("Sorry, but we could not find any tasks containing the search term.\n");
                 return str.toString();
             } else {
-                str.append("Here are the matching tasks!").append(Tasklist.taskFormatter(filtered));
+                str.append("Here are the matching tasks!\n").append(Tasklist.taskFormatter(filtered));
                 return str.toString();
             }
         } catch (DukeException err) {
@@ -199,7 +198,7 @@ public enum Handlers {
             int index = DukeException.isIndexValid(input, list);
             Task t = list.mark(index);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder("Nice! I've marked this task as done!");
+            StringBuilder str = new StringBuilder("Nice! I've marked this task as done!" + "\n");
             str.append(t.toString()).append("\n");
             return str.toString();
         } catch (DukeException err) {
@@ -210,7 +209,7 @@ public enum Handlers {
     /**
      * Handles the command 'list'.
      *
-     * @param list
+     * @param list Tasklist that contains all tasks.
      */
     public static String listHandler(Tasklist list) {
         return list.toString();
@@ -228,7 +227,7 @@ public enum Handlers {
             Todo task = new Todo(false, input.substring(5));
             list.addTask(task);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder("Todo Added: " + task.toString());
+            StringBuilder str = new StringBuilder("Todo Added: " + task.toString() + "\n");
             str.append("There are now ").append(list.getTotalTasks()).append(" tasks in the list.\n");
             return str.toString();
         } catch (DukeException err) {
@@ -247,7 +246,7 @@ public enum Handlers {
             int index = DukeException.isIndexValid(input, list);
             Task t = list.unmark(index);
             FileHandler.writeToFile(list);
-            StringBuilder str = new StringBuilder("Okay! I've marked this as undone!");
+            StringBuilder str = new StringBuilder("Okay! I've marked this as undone!" + "\n");
             str.append(t.toString()).append("\n");
             return str.toString();
         } catch (DukeException err) {
