@@ -78,7 +78,7 @@ public class Duke {
 
         parser = new Parser(commands);
     }
-    
+
     /**
      * Gets Duke response from an input.
      *
