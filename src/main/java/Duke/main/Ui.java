@@ -16,8 +16,8 @@ public class Ui {
      */
     public static void greeting() {
         System.out.println("Hello from\n" + LOGO);
-        System.out.println(LINE + "Hello! I'm Duke\n" +
-                "What can I do for you?\n" + LINE);
+        System.out.println(LINE + "Hello! I'm Duke\n"
+                + "What can I do for you?\n" + LINE);
     }
 
     /**
@@ -52,8 +52,8 @@ public class Ui {
      * mark/unmark error message
      */
     public static void markErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! this task number is invalid\n" +
-                "enter: 'list' for all available task" + LINE);
+        System.out.println(LINE + "☹ OOPS!!! this task number is invalid\n"
+                + "enter: 'list' for all available task" + LINE);
     }
 
     /**
@@ -74,24 +74,24 @@ public class Ui {
      * delete task error message
      */
     public static void deadlineErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! deadline task need to be in this format:\n" +
-                "(deadline description /by yyyy-mm-dd)" + LINE);
+        System.out.println(LINE + "☹ OOPS!!! deadline task need to be in this format:\n"
+                + "(deadline description /by yyyy-mm-dd)" + LINE);
     }
 
     /**
      * event error message
      */
     public static void eventErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! event task need to be in this format:\n" +
-                "(event description /at yyyy-mm-dd)" + LINE);
+        System.out.println(LINE + "☹ OOPS!!! event task need to be in this format:\n"
+                + "(event description /at yyyy-mm-dd)" + LINE);
     }
 
     /**
      * local date error message
      */
     public static void localDateErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! the Date need to be in this format:\n" +
-                "yyyy-mm-dd" + LINE);
+        System.out.println(LINE + "☹ OOPS!!! the Date need to be in this format:\n"
+                + "yyyy-mm-dd" + LINE);
     }
 
     /**
@@ -104,7 +104,7 @@ public class Ui {
     /**
      * task not found message
      */
-    public static void NotFoundMessage() {
+    public static void notFoundMessage() {
         System.out.println(LINE + "☹ OOPS!!! There are no task matching to this description\n" + LINE);
     }
 
@@ -119,11 +119,11 @@ public class Ui {
      * general error message
      */
     public static void generalErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
-                "To view all task available: list\n" +
-                "To add more task: todo…… deadline……/……  event……/……  or mark/unmark taskNumber\n" +
-                "To delete any task available: delete taskNumber\n" +
-                "please try again" + LINE);
+        System.out.println(LINE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
+                + "To view all task available: list\n"
+                + "To add more task: todo…… deadline……/……  event……/……  or mark/unmark taskNumber\n"
+                + "To delete any task available: delete taskNumber\n"
+                + "please try again" + LINE);
     }
 
 

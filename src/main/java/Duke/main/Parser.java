@@ -1,10 +1,10 @@
 package Duke.main;
 
 import Duke.task.Deadline;
-import Duke.task.ToDo;
+import Duke.task.Event;
 import Duke.task.Task;
 import Duke.task.TaskList;
-import Duke.task.Event;
+import Duke.task.ToDo;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -134,7 +134,7 @@ public class Parser {
                     }
                 }
                 if (foundTasks.size() == 0) {
-                    Ui.NotFoundMessage();
+                    Ui.notFoundMessage();
                 } else {
                     Ui.findMessage();
                     for (int i = 1; i <= foundTasks.size(); i++) {
