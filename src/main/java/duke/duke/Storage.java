@@ -28,7 +28,8 @@ public class Storage {
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         FileInputStream readData = new FileInputStream("data/duke.ser");
         ObjectInputStream readStream = new ObjectInputStream(readData);
-
+        @SuppressWarnings("unchecked")
+        // The object read will always be an ArrayList as it always loads from the previously saved ArrayList.
         ArrayList<Task> arr = (ArrayList<Task>) readStream.readObject();
         readStream.close();
         return arr;
@@ -55,8 +56,7 @@ public class Storage {
             writeStream.writeObject(arr);
             writeStream.flush();
             writeStream.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Something went wrong. I think I may be corrupted.");
         }
     }

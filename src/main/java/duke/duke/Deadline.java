@@ -28,8 +28,7 @@ public class Deadline extends Task {
             String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
             String day = String.valueOf(date.getDayOfMonth());
             return month + " " + day + " " + year;
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return dueDate;
         }
     }

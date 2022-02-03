@@ -1,12 +1,13 @@
-import duke.duke.Event;
-import duke.duke.Task;
-import duke.duke.Ui;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.duke.Event;
+import duke.duke.Task;
+import duke.duke.Ui;
 
 public class DukeTest {
 
@@ -22,9 +23,9 @@ public class DukeTest {
         // Call Method
         ui.showWelcome();
         String[] lines = baos.toString().split(System.lineSeparator());
-        String actual = lines[lines.length-1];
+        String actual = lines[lines.length - 1];
         // Compare
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -33,7 +34,7 @@ public class DukeTest {
         Task task = new Task("Hello");
         String expected = "Hello";
         // Compare
-        assertEquals(expected,task.getName());
+        assertEquals(expected, task.getName());
     }
 
     @Test
@@ -42,6 +43,6 @@ public class DukeTest {
         Event event = new Event("Hello", "1111-11-11");
         String expected = "[E][ ] Hello (at: Nov 11 1111)";
         // Compare
-        assertEquals(expected,event.toString());
+        assertEquals(expected, event.toString());
     }
 }

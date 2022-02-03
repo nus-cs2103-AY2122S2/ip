@@ -27,8 +27,7 @@ public class Task implements Serializable {
     public String isDone() {
         if (this.isDone) {
             return mark;
-        }
-        else {
+        } else {
             return unmarked;
         }
     }

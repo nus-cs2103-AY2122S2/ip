@@ -34,22 +34,18 @@ public class TaskList {
     public void mark(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
-            int clean = Integer.parseInt(s) - 1;  // Parse to find what number in list to toggle
+            int clean = Integer.parseInt(s) - 1; // Parse to find what number in list to toggle
             // Edge Case
             if (clean > arr.size()) {
                 System.out.println("Error! No tasked added");
-            }
-            // Mark
-            else if (input.toCharArray()[0] != 'u') {
+            } else if (input.toCharArray()[0] != 'u') {
                 arr.get(clean).setMarked();
-                System.out.println("Nice! I've marked this task as done:\n " +
-                        "   " + arr.get(clean).toString());
-            }
-            // Unmark
-            else {
+                System.out.println("Nice! I've marked this task as done:\n "
+                        + "   " + arr.get(clean).toString());
+            } else {
                 arr.get(clean).setUnmarked();
-                System.out.println("OK, I've marked this task as not done yet:\n " +
-                        "   " + arr.get(clean).toString());
+                System.out.println("OK, I've marked this task as not done yet:\n "
+                        + "   " + arr.get(clean).toString());
             }
         } catch (NumberFormatException e) {
             System.out.println("Don't be cheeky. Please write something that makes sense.");
@@ -68,13 +64,13 @@ public class TaskList {
     public void delete(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
-            int delete = Integer.parseInt(s) - 1;  // Parse to find what number in list to delete
+            int delete = Integer.parseInt(s) - 1; // Parse to find what number in list to delete
             // Edge Case
             if (delete > arr.size()) {
                 System.out.println("Error! Nothing to delete!");
             } else {
-                System.out.println("Noted. I've removed this task: \n   " +
-                        arr.get(delete).toString());
+                System.out.println("Noted. I've removed this task: \n   "
+                       + arr.get(delete).toString());
                 arr.remove(delete);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
             }
@@ -100,9 +96,9 @@ public class TaskList {
             String date = unprocessed.split(" /by ", 2)[1]; // Split to date
             Deadline newDeadline = new Deadline(task, date);
             arr.add(newDeadline);
-            System.out.println("Got it! I've added this task: \n    " +
-                    newDeadline + "\n" +
-                    "Now you have " + arr.size() + " tasks in the list.");
+            System.out.println("Got it! I've added this task: \n    "
+                   + newDeadline + "\n"
+                   + "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
         }
@@ -125,9 +121,9 @@ public class TaskList {
             String date = nonevent.split(" /at ", 2)[1]; // Split to date
             Event newEvent = new Event(task, date);
             arr.add(newEvent);
-            System.out.println("Got it! I've added this task: \n    " +
-                    newEvent + "\n" +
-                    "Now you have " + arr.size() + " tasks in the list.");
+            System.out.println("Got it! I've added this task: \n    "
+                   + newEvent + "\n"
+                   + "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me an event to record.");
         }
@@ -138,12 +134,12 @@ public class TaskList {
             String word = input.split(" ", 2)[1]; // Remove instruction
             int counter = 1;
             boolean hasFound = false;
-            for (int i = 0; i < arr.size(); i++) {
-                if (arr.get(i).getName().contains(word) && !word.equals("")) {
+            for (Task task : arr) {
+                if (task.getName().contains(word) && !word.equals("")) {
                     if (!hasFound) {
                         System.out.println("I found the matching items you requested:");
                     }
-                    System.out.println(counter + "." + arr.get(i).toString());
+                    System.out.println(counter + "." + task);
                     counter++;
                     hasFound = true;
                 }
@@ -171,9 +167,9 @@ public class TaskList {
             String word = input.split(" ", 2)[1]; // Remove instruction
             ToDo newToDo = new ToDo(word);
             arr.add(newToDo);
-            System.out.println("Got it! I've added this task: \n    " +
-                    newToDo.toString() + "\n" +
-                    "Now you have " + arr.size() + " tasks in the list.");
+            System.out.println("Got it! I've added this task: \n    "
+                   + newToDo + "\n"
+                   + "Now you have " + arr.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Don't be cheeky. Give me something to do.");
         }

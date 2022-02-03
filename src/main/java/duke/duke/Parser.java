@@ -7,37 +7,21 @@ public class Parser {
     public void parse(String commandString, TaskList tasks, Storage storage) {
         if (commandString.equals("bye")) {
             storage.exit(tasks.arr);
-        }
-        // List Feature
-        else if (commandString.equals("list")) {
+        } else if (commandString.equals("list")) {
             tasks.list(tasks.arr);
-        }
-        // Mark & Unmark Feature
-        else if (commandString.contains("mark")) {
+        } else if (commandString.contains("mark")) {
             tasks.mark(commandString, tasks.arr);
-        }
-        // Delete Feature
-        else if (commandString.contains("delete")) {
+        } else if (commandString.contains("delete")) {
             tasks.delete(commandString, tasks.arr);
-        }
-        // Deadline Feature
-        else if (commandString.contains("deadline")) {
+        } else if (commandString.contains("deadline")) {
             tasks.deadline(commandString, tasks.arr);
-        }
-        // Event Feature
-        else if (commandString.contains("event")) {
+        } else if (commandString.contains("event")) {
             tasks.event(commandString, tasks.arr);
-        }
-        // To Do Feature
-        else if (commandString.contains("todo")) {
+        } else if (commandString.contains("todo")) {
             tasks.toDo(commandString, tasks.arr);
-        }
-        // Find Feature
-        else if (commandString.contains("find")) {
+        } else if (commandString.contains("find")) {
             tasks.find(commandString, tasks.arr);
-        }
-        // Edge Case
-        else {
+        } else {
             System.out.println(commandString + " is not a valid command. Please try again.");
         }
     }

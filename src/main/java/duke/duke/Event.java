@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected String time;
 
@@ -28,8 +28,7 @@ public class Event extends Task{
             String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
             String day = String.valueOf(date.getDayOfMonth());
             return month + " " + day + " " + year;
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return dueDate;
         }
     }
