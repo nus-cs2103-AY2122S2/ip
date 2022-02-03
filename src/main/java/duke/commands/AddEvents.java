@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.tasklist.DukeList;
 import duke.task.Events;
+import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
 public class AddEvents extends Command {
@@ -14,7 +14,7 @@ public class AddEvents extends Command {
      * @param msg Task description of the Event
      * @param date Date that the task is happening
      */
-    public AddEvents(String msg, String date){
+    public AddEvents(String msg, String date) {
         this.msg = msg;
         this.date = date;
     }
