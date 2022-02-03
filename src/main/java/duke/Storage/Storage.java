@@ -5,7 +5,7 @@ import duke.Tasks.Deadlines;
 import duke.Tasks.Event;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
-import duke.Tasks.ToDos;
+import duke.Tasks.ToDo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -63,7 +63,7 @@ public class Storage {
                 String[] compactTask = st.split("-");
                 switch (compactTask[0]) {
                 case "T":
-                    task = new ToDos(compactTask[2]);
+                    task = new ToDo(compactTask[2]);
                     if (compactTask[1].equals("1")) {
                         task.mark();
                     }
@@ -105,9 +105,9 @@ public class Storage {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath
                                                         + File.separator + this.filename));
-            for (Task i : listOfTasks.getList()) {
+            for (Task task : listOfTasks.getList()) {
                 try {
-                    writer.write(formatTask(i));
+                    writer.write(formatTask(task));
                 } catch (IOException e) {
                     System.out.println("Unable to write");
                 }

@@ -5,7 +5,7 @@ import duke.Tasks.Deadlines;
 import duke.Tasks.Event;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
-import duke.Tasks.ToDos;
+import duke.Tasks.ToDo;
 
 /**
  * Class responsible for executing the command from the userInput.
@@ -24,7 +24,7 @@ public class Command {
     }
 
     private static String addTodo(String task, TaskList listOfTasks) throws DukeException {
-        Task newTask = new ToDos(task);
+        Task newTask = new ToDo(task);
         listOfTasks.add(newTask);
         return taskAddedMessage(newTask, listOfTasks);
     }

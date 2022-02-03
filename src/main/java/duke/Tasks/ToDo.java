@@ -5,7 +5,7 @@ import duke.Exception.DukeException;
 /**
  * Inherits from Task and is the implementation of a simple Todo.
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
     /**
      * Constructor for the todo task.
@@ -13,7 +13,7 @@ public class ToDos extends Task {
      * @param task the description of the task
      * @throws DukeException if the description is empty
      */
-    public ToDos(String task) throws DukeException {
+    public ToDo(String task) throws DukeException {
         super(task);
         this.initials = "T";
         if (task.length() < 1) {

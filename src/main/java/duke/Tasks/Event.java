@@ -13,7 +13,7 @@ public class Event extends Task {
     /**
      * Constructor for Event task.
      *
-     * @param task description of the event
+     * @param task Description of the event
      * @param timing time of the event
      * @throws DukeException if description is empty or timing is not in the correct format
      */
