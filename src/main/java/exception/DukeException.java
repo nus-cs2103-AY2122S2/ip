@@ -5,8 +5,6 @@ public class DukeException extends Exception {
 
     /** Constructor helps format error message. */
     public DukeException(String errorMessage) {
-        super("____________________________________________________________\n"
-                + "☹ OOPS!!! " + errorMessage
-                + "\n____________________________________________________________");
+        super("OOPS!!! " + errorMessage);
     }
 }

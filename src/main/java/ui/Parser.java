@@ -1,3 +1,5 @@
+package ui;
+
 import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
