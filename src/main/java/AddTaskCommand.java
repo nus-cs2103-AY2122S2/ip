@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Generates the correct type of task and adds it to the task list
  */
@@ -39,6 +45,17 @@ public class AddTaskCommand extends Command {
 
         // Adding task to TaskManager
         TaskManager.taskList.add(newTask);
+
+        // Updating tasklist.txt
+        try {
+            FileWriter writer = new FileWriter("tasklist.txt", true);
+            writer.write("Hello\n");
+            writer.close();
+            System.out.println("after write to txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // System prints
         String output = formatOutput(newTask);
