@@ -15,9 +15,28 @@ import Duke.Commands.CommandUnmark;
 import Duke.DukeException.DukeException;
 import Duke.Enums.Commands;
 
+/**
+ * The Parser class will allow Duke to
+ * understand and act upon the user's input.
+ *
+ * @author  Melvin Chan Zijun
+ */
 public class Parser {
-    public Parser() {}
-
+    /**
+     * This method processes the user's input by splitting it at each
+     * regex: "/" into a String array params.
+     * If params is not empty, a valid input in assumed at this stage.
+     * The first element of params will be the name of the command, which
+     * will be compared against an enum of commands.
+     * If the enum contains the command, the select method will be called on
+     * params, and the ordinal of the command in the enum.
+     * Else a DukeException will be thrown.
+     *
+     * @param fullCommand the unprocessed command input by the user
+     * @return Command - returns a Command object
+     * @throws DukeException - if input or command is invalid
+     *
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] params = fullCommand.split("/");
 
@@ -45,6 +64,25 @@ public class Parser {
         return select(commandNum, params);
     }
 
+    /**
+     * This method processes the user's input by splitting it at each
+     * regex: "/" into a String array params.
+     * If params is not empty, a valid input in assumed at this stage.
+     * The first element of params will be the name of the command, which
+     * will be compared against an enum of commands.
+     * If the enum contains the command, the select method will be called on
+     * params, and the ordinal of the command in the enum.
+     * Else a DukeException will be thrown.
+     *
+     * @param num the int used for the switch case statement
+     * @param params the String array containing all the
+     *               parameters of the command
+     * @return Command the Command to be returned to the parse
+     *                 method
+     * @throws DukeException - If params size does not match the number
+     *                         of required parameters of the command
+     *
+     */
     public static Command select(int num, String[] params) throws DukeException {
         switch(num) {
         case 0: // todo

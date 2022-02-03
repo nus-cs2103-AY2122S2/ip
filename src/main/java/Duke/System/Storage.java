@@ -17,13 +17,40 @@ import java.nio.file.Path;
 
 import java.util.ArrayList;
 
+/**
+ * The Storage class loads data from previous sessions
+ * of duke stores data from current session.
+ *
+ * @author  Melvin Chan Zijun
+ */
 public class Storage {
+    /**
+     * The file path for the directory where the data will
+     * be stored.
+     */
     private final String filePath;
 
+    /**
+     * Sole constructor.
+     *
+     * @param filePath - the file path of the directory where
+     *                   the data of duke will be stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * This method creates the directory which the data from
+     * the current session of duke will be stored in.
+     * If directory already exists, user will be notified.
+     * The text file tasks.txt will be created in the directory.
+     *
+     * @return ArrayList<Task> - returns an arraylist of tasks loaded
+     *                           from tasks.txt
+     * @throws DukeException - if unsuccessful creation of directory
+     *                         or file
+     */
     public ArrayList<Task> load() throws DukeException {
         File dukeFile = new File(this.filePath);
 
@@ -49,6 +76,17 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * This method reads the tasks.txt and adds the exisiting tasks
+     * on the file into a arraylist and returns it.
+     *
+     * @param filePath - the file path of the directory where
+     *                   the data of duke will be stored
+     * @return ArrayList<Task> - returns an arraylist of tasks loaded
+     *                           from tasks.txt
+     * @throws DukeException - if FileNotFoundException or
+     *                         IOException is caught
+     */
     public ArrayList<Task> read(File filePath) throws DukeException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -72,8 +110,15 @@ public class Storage {
         }
     }
 
-    public Task create(String taskAsText) {
-        String[] taskAsArray = taskAsText.split("/");
+    /**
+     * This method takes in the data form of a task
+     * and returns the Task object.
+     *
+     * @param taskAsData - data form of a task
+     * @return Task - returns the Task object
+     */
+    public Task create(String taskAsData) {
+        String[] taskAsArray = taskAsData.split("/");
 
         char prefix = taskAsArray[0].charAt(0);
         boolean isCompleted = taskAsArray[1].equals("T");
@@ -89,6 +134,13 @@ public class Storage {
         return taskCreator.createTask();
     }
 
+    /**
+     * This method overwrites the tasks.txt with the given
+     * list of tasks in String form.
+     *
+     * @param tasks - the list of tasks in String form
+     * @throws DukeException - if IOException is caught
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter("data/tasks.txt", false);

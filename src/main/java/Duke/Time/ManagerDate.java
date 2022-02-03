@@ -1,11 +1,40 @@
 package Duke.Time;
 
+import Duke.DukeException.DukeException;
+
+/**
+ * The ManagerDate class handles validation check for
+ * dates and formatting dates into the String form
+ * from the number form.
+ *
+ * @author  Melvin Chan Zijun
+ */
 public class ManagerDate {
+    /**
+     * int format of day
+     */
     private final int day;
+
+    /**
+     * int format of month
+     */
     private final int month;
+
+    /**
+     * int format of year
+     */
     private final int year;
+
+    /**
+     * flag to indicate whether date is valid
+     */
     private boolean isValid = false;
 
+    /**
+     * Sole constructor.
+     *
+     * @param date - date in DDMMYYYY format
+     */
     public ManagerDate(String date) {
         this.day = Integer.parseInt(date.substring(0, 2));
         this.month = Integer.parseInt(date.substring(2, 4));
@@ -34,10 +63,23 @@ public class ManagerDate {
         }
     }
 
+    /**
+     * This method returns the validity of the date
+     *
+     * @return boolean - whether date is valid
+     */
     public boolean isDateValid() {
         return this.isValid;
     }
 
+    /**
+     * This method returns a more user-friendly format of
+     * the input date. Date validity should be checked
+     * before using this method.
+     *
+     * @param date date in DDMMYYYY format
+     * @return boolean - whether date is valid
+     */
     public static String formatDate(String date) {
         String[] nameOfMonths
                 = {"January", "February", "March", "April",
