@@ -1,12 +1,12 @@
 package command;
 
+import java.util.ArrayList;
+
 import exception.DukeException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents a type of Command - Find.

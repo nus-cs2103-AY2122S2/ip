@@ -2,8 +2,8 @@ import command.Command;
 import exception.DukeException;
 import parser.Parser;
 import storage.Storage;
-import ui.Ui;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * Duke bot allows users to interact with a "smart" bot that tracks tasks,

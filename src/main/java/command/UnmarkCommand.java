@@ -42,5 +42,4 @@ public class UnmarkCommand extends Command {
             ui.showInvalidRange();
         }
     }
-
 }

@@ -1,10 +1,10 @@
 package parser;
 
-import exception.DukeException;
-import org.junit.jupiter.api.Test;
-import task.Deadline;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import exception.DukeException;
 
 public class ParserTest {
     @Test

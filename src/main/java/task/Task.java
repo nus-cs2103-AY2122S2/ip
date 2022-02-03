@@ -52,7 +52,9 @@ public abstract class Task implements Serializable {
      * Empty string - incomplete
      * @return Task's status
      */
-    public String getStatusIcon() { return (isDone ? "X" : " "); } // mark done java.task with X
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    } // mark done java.task with X
 
     /**
      * Returns task's basic details.

@@ -1,6 +1,5 @@
-package task;
 
-import exception.DukeException;
+package task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,14 +14,14 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    protected String by;
-    protected LocalDateTime datetime = null;
-    protected LocalDate date = null;
-
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HHmm";
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String DATETIME_OUTPUT_FORMAT = "MMM dd yyyy HHmm";
     public static final String TIME_OUTPUT_FORMAT = "MMM dd yyyy";
+
+    protected String by;
+    protected LocalDateTime datetime = null;
+    protected LocalDate date = null;
 
     /**
      * Class constructor.

@@ -12,7 +12,7 @@ import ui.Ui;
  */
 public abstract class Command {
 
-    public static boolean isExit = false;
+    private static boolean isExit = false;
 
     /**
      * Default class constructor.

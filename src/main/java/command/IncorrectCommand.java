@@ -39,10 +39,11 @@ public class IncorrectCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.errorMessage.equals(""))
+        if (this.errorMessage.equals("")) {
             throw new DukeException(ui.showIncorrectMessage());
-        else
+        } else {
             throw new DukeException(this.errorMessage);
+        }
     }
 
 }

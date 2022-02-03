@@ -2,7 +2,6 @@ package task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Implements Serializable package to
@@ -87,11 +86,12 @@ public class TaskList implements Serializable {
      */
     public ArrayList<Task> find (String search) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for(Task t : tasks){
-            if(t.getDescription() != null && t.getDescription().toLowerCase().contains(search)) {
+        for (Task t : tasks) {
+            if (t.getDescription() != null && t.getDescription().toLowerCase().contains(search)) {
                 foundTasks.add(t);
             }
         }
         return foundTasks;
     }
 }
+

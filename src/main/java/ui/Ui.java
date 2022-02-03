@@ -1,12 +1,12 @@
 package ui;
 
-import exception.DukeException;
-import task.Task;
-import task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import exception.DukeException;
+import task.Task;
+import task.TaskList;
 
 public class Ui {
 
@@ -114,20 +114,22 @@ public class Ui {
      */
     public void showResponseMessage(String res) {
         switch (res) {
-            case "mark":
-                System.out.println("Nice! I've marked this task as done:");
-                break;
-            case "unmark":
-                System.out.println("OK, I've marked this task as not done yet:");
-                break;
-            case "delete":
-                System.out.println("Noted. I've removed this java.task:");
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                System.out.println("Got it. I've added this task:");
-                break;
+        case "mark":
+            System.out.println("Nice! I've marked this task as done:");
+            break;
+        case "unmark":
+            System.out.println("OK, I've marked this task as not done yet:");
+            break;
+        case "delete":
+            System.out.println("Noted. I've removed this java.task:");
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            System.out.println("Got it. I've added this task:");
+            break;
+        default:
+            break;
         }
     }
 
