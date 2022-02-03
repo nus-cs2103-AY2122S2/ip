@@ -19,25 +19,25 @@ public class Parser {
      * @return a Command.
      */
     public static Command parse(String input) {
-        if(input.toLowerCase().equals("bye")) {
+        if (input.toLowerCase().equals("bye")) {
             return new ExitCommand();
         } else if (input.toLowerCase().equals("list")){
             return new ListCommand();
         } else if (input.length() < 3) {
             return new IncorrectCommand("Oops! Please enter a valid command!");
-        } else if(input.substring(0, 3).toLowerCase().equals("add")) {
+        } else if (input.substring(0, 3).toLowerCase().equals("add")) {
             return handleAdd(input.substring(3));
-        } else if(input.length() < 4) {
+        } else if (input.length() < 4) {
             return new IncorrectCommand("Oops! Please enter a valid command!");
-        } else if(input.substring(0, 4).toLowerCase().equals("find")) {
+        } else if (input.substring(0, 4).toLowerCase().equals("find")) {
             return handleFind(input.substring(4));
-        } else if(input.substring(0, 4).toLowerCase().equals("mark")) {
+        } else if (input.substring(0, 4).toLowerCase().equals("mark")) {
             return handleMark(input.substring(4));
-        } else if(input.length() < 6) {
+        } else if (input.length() < 6) {
             return new IncorrectCommand("Oops! Please enter a valid command!");
-        } else if(input.substring(0, 6).toLowerCase().equals("unmark")) {
+        } else if (input.substring(0, 6).toLowerCase().equals("unmark")) {
             return handleUnmark(input.substring(6));
-        } else if(input.substring(0, 6).toLowerCase().equals("delete")) {
+        } else if (input.substring(0, 6).toLowerCase().equals("delete")) {
             return handleDelete(input.substring(6));
         } else {
             return new IncorrectCommand("Oops! Please enter a valid command!");
@@ -51,21 +51,21 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleAdd(String input) {
-        if(input.isBlank()) {
+        if (input.isBlank()) {
             return new IncorrectCommand("Oops! Please specify the task you wish to add!");
-        } else if(input.charAt(0) != ' ') {
+        } else if (input.charAt(0) != ' ') {
             return new IncorrectCommand("Oops! Please enter a valid command!");
         } else {
             String taskType = input.split(" ")[1].toLowerCase();
             switch (taskType) {
-                case "todo":
-                    return handleTodo(input.substring(6));
-                case "event":
-                    return handleEvent(input.substring(7));
-                case "deadline":
-                    return handleDeadline(input.substring(10));
-                default:
-                    return new IncorrectCommand("Oops! Please enter a valid task type!");
+            case "todo":
+                return handleTodo(input.substring(6));
+            case "event":
+                return handleEvent(input.substring(7));
+            case "deadline":
+                return handleDeadline(input.substring(10));
+            default:
+                return new IncorrectCommand("Oops! Please enter a valid task type!");
             }
         }
     }
@@ -77,7 +77,7 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleMark(String index) {
-        if(index.isBlank()) {
+        if (index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nmark [task number]");
         } else {
             try {
@@ -96,7 +96,7 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleUnmark(String index) {
-        if(index.isBlank()) {
+        if (index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nunmark [task number]");
         } else {
             try {
@@ -115,7 +115,7 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleDelete(String index) {
-        if(index.isBlank()) {
+        if (index.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\ndelete [task number]");
         } else {
             try {
@@ -134,7 +134,7 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleTodo(String todoContent) {
-        if(todoContent.isBlank()) {
+        if (todoContent.isBlank()) {
             return new IncorrectCommand("Oops! Please add a description for the todo!");
         } else {
             return new AddCommand(TaskType.TODO, new String[] {todoContent});
@@ -148,17 +148,17 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleEvent(String eventComponents) {
-        if(eventComponents.isBlank()) {
+        if (eventComponents.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm");
         } else {
             String[] eventComponentsArray = eventComponents.split(" /at ");
-            if(eventComponentsArray.length <= 1) {
+            if (eventComponentsArray.length <= 1) {
                 return new IncorrectCommand("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm");
-            } else if(eventComponentsArray[0].isBlank()) {
+            } else if (eventComponentsArray[0].isBlank()) {
                 return new IncorrectCommand("Oops! Please add a description for the event!");
-            } else if(eventComponentsArray[1].isBlank()) {
+            } else if (eventComponentsArray[1].isBlank()) {
                 return new IncorrectCommand("Oops! Please add a date and time for the event!");
-            } else if(!InputPattern.isValidDateTimeString(eventComponentsArray[1])) {
+            } else if (!InputPattern.isValidDateTimeString(eventComponentsArray[1])) {
                 return new IncorrectCommand("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm");
             } else {
                 return new AddCommand(TaskType.EVENT, eventComponentsArray);
@@ -173,17 +173,17 @@ public class Parser {
      * @return an appropriate Command object.
      */
     private static Command handleDeadline(String deadlineComponents) {
-        if(deadlineComponents.isBlank()) {
+        if (deadlineComponents.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nadd deadline [content] /by yyyy-MM-dd HH:mm");
         } else {
             String[] deadlineComponentsArray = deadlineComponents.split(" /by ");
-            if(deadlineComponentsArray.length <= 1) {
+            if (deadlineComponentsArray.length <= 1) {
                 return new IncorrectCommand("Oops! Please use the following format:\nadd deadline [content] /by yyyy-MM-dd HH:mm");
-            } else if(deadlineComponentsArray[0].isBlank()) {
+            } else if (deadlineComponentsArray[0].isBlank()) {
                 return new IncorrectCommand("Oops! Please add a description for the deadline!");
-            } else if(deadlineComponentsArray[1].isBlank()) {
+            } else if (deadlineComponentsArray[1].isBlank()) {
                 return new IncorrectCommand("Oops! Please add a deadline for the deadline!");
-            } else if(!InputPattern.isValidDateTimeString(deadlineComponentsArray[1])) {
+            } else if (!InputPattern.isValidDateTimeString(deadlineComponentsArray[1])) {
                 return new IncorrectCommand("Oops! Please use the following format:\nadd deadline [content] /by yyyy-MM-dd HH:mm");
             } else {
                 return new AddCommand(TaskType.DEADLINE, deadlineComponentsArray);
@@ -192,7 +192,7 @@ public class Parser {
     }
 
     private static Command handleFind(String findKeyWords) {
-        if(findKeyWords.isBlank()) {
+        if (findKeyWords.isBlank()) {
             return new IncorrectCommand("Oops! Please use the following format:\nfind [key word(s)]");
         } else {
             return new FindCommand(findKeyWords.trim());

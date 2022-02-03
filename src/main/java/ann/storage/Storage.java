@@ -30,7 +30,7 @@ public class Storage {
      * @throws StorageOperationException
      */
     public Storage() throws StorageOperationException {
-        if(!isValidFileName(DEFAULT_STORAGE_FILE_NAME)) {
+        if (!isValidFileName(DEFAULT_STORAGE_FILE_NAME)) {
             throw new InvalidStorageFilePathException("Default storage file should end with '.txt'");
         }
         openFolder(DEFAULT_STORAGE_FOLDER_NAME);
@@ -45,7 +45,7 @@ public class Storage {
      * @throws StorageOperationException if the storage file's name does not end with '.txt'.
      */
     public Storage(String folderName, String fileName) throws StorageOperationException{
-        if(!isValidFileName(fileName)) {
+        if (!isValidFileName(fileName)) {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
         openFolder(folderName);
@@ -60,9 +60,9 @@ public class Storage {
      */
     private void openFolder(String folderName) throws StorageOperationException {
         Path path = Paths.get(folderName);
-        if(!Files.exists(path)) {
+        if (!Files.exists(path)) {
             File f1 = new File(folderName);
-            if(!f1.mkdirs()) {
+            if (!f1.mkdirs()) {
                 throw new StorageOperationException("Error opening folder: " + folderName);
             }
         }
@@ -78,7 +78,7 @@ public class Storage {
      */
     private void openFile(String folderName, String fileName) throws StorageOperationException {
         Path filePath = Paths.get(folderName + fileName);
-        if(!Files.exists(filePath)) {
+        if (!Files.exists(filePath)) {
             file = new File(folderName, fileName);
             try {
                 file.createNewFile();

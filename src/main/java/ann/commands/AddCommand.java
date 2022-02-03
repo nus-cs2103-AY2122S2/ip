@@ -36,14 +36,14 @@ public class AddCommand extends Command{
      */
     private void setTask(String[] taskComponents) {
         switch (taskType) {
-            case TODO:
-                task = new Task(taskComponents[0]);
-                break;
-            case DEADLINE:
-                task = new Deadline(taskComponents[0], taskComponents[1]);
-                break;
-            case EVENT:
-                task = new Event(taskComponents[0], taskComponents[1]);
+        case TODO:
+            task = new Task(taskComponents[0]);
+            break;
+        case DEADLINE:
+            task = new Deadline(taskComponents[0], taskComponents[1]);
+            break;
+        case EVENT:
+            task = new Event(taskComponents[0], taskComponents[1]);
         }
     }
 
