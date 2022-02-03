@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 /**
  * Contains methods to parse user input to be understood based on the

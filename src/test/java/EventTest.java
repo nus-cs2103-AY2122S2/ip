@@ -1,4 +1,4 @@
-import duke.Event;
+import seedu.duke.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

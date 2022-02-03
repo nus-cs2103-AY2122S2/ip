@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 /**
  * Contains the basic fields for a generic task.
