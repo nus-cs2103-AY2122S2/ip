@@ -16,8 +16,9 @@ public class ListCommand extends Command{
      * @param storage The file system for reading and writing into the database.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException {
         ui.printList(taskList.convertListToString());
         storage.rewriteTask(taskList);
+        return taskList.toString();
     }
 }

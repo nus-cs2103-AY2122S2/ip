@@ -8,7 +8,7 @@ import java.text.ParseException;
  */
 abstract class Command {
 
-    abstract void runCommand(TaskList taskList, Ui ui, Storage storage)
+    abstract String runCommand(TaskList taskList, Ui ui, Storage storage)
             throws IOException, ParseException;
 
     @Override

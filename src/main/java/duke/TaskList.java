@@ -132,5 +132,17 @@ public class TaskList {
         foundTask.clear();
         return stringOfTasks;
     }
+
+    @Override
+    public String toString() {
+        String s = new String();
+        int counter = 1;
+        for (Task task: taskArrayList) {
+            s += (String.valueOf(counter) + ". "
+                    + task.toString() + task.getStatus() + " " + task.getDescription() + "\n");
+            counter++;
+        }
+        return s;
+    }
 }
 

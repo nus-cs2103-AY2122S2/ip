@@ -14,9 +14,10 @@ public class ByeCommand extends Command {
      * @param storage The file system for reading and writing into the database.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) {
-        ui.outputMessage("Thank you for using Duke App. Have a nice day");
-        System.exit(1);
+    String runCommand(TaskList taskList, Ui ui, Storage storage) {
+        String exitMessage = "Thank you for using Duke App. Have a nice day";
+        ui.outputMessage(exitMessage);
+        return exitMessage;
     }
 
 

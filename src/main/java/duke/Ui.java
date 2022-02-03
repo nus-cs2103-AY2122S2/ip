@@ -77,12 +77,15 @@ public class Ui {
      * To print all the tasks current user has neatly.
      * @param stringArrayList the ArrayList of tasks to be printed.
      */
-    public void printList(ArrayList<String> stringArrayList) {
+    public String printList(ArrayList<String> stringArrayList) {
+        String string = new String();
         System.out.println(indentation + line);
         for (String s: stringArrayList) {
             System.out.println(indentation + s);
+            string.concat(s);
         }
         System.out.println(indentation + line);
+        return string;
     }
 
 }

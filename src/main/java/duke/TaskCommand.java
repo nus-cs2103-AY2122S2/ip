@@ -39,7 +39,7 @@ public class TaskCommand extends Command {
      * @throws ParseException when there is an error in recognising the text.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
         String indentation = "    ";
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
         String message = null;
@@ -59,7 +59,7 @@ public class TaskCommand extends Command {
                 storage.appendTask(newToDo);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showWrongFormat("ToDo");
-                return;
+                return "Error";
             }
         } else if (taskType == TaskType.event) {
             try {
@@ -76,7 +76,7 @@ public class TaskCommand extends Command {
                 storage.appendTask(newEvent);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Event");
-                return;
+                return "Error";
             }
         } else if (taskType == TaskType.deadline) {
             try {
@@ -93,10 +93,11 @@ public class TaskCommand extends Command {
                 storage.appendTask(newDeadline);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 ui.showWrongFormat("Deadline");
-                return;
+                return "Error";
             }
         }
 
         ui.outputMessage(message);
+        return message;
     }
 }

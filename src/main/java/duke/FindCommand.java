@@ -19,7 +19,14 @@ public class FindCommand extends Command {
      * @param storage the storage helper for the program.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) {
         ui.printList(taskList.find(taskToFind));
+
+        String s = new String();
+        for (String str : taskList.find(taskToFind)) {
+            s += str + "\n";
+        }
+
+        return s;
     }
 }

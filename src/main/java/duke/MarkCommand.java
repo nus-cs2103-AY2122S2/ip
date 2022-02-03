@@ -31,7 +31,7 @@ public class MarkCommand extends Command {
      * @param storage The file system for reading and writing into the database.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) {
         String indentation = "    ";
         Task t = taskList.getTask(index);
         String message;
@@ -46,6 +46,7 @@ public class MarkCommand extends Command {
         }
 
         ui.outputMessage(message);
+        return message;
     }
 
 }

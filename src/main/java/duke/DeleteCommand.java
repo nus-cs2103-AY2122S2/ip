@@ -24,12 +24,13 @@ public class DeleteCommand extends Command {
      * @param storage The file system for reading and writing into the database.
      */
     @Override
-    void runCommand(TaskList taskList, Ui ui, Storage storage) {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) {
         String indentation = "    ";
         Task t = taskList.getTask(index);
         taskList.deleteTask(index);
         String message = indentation + "Noted. I've removed this task: \n"
                 + indentation + "  " + t.toString() + t.getStatus() +  " " + t.getDescription();
         ui.outputMessage(message);
+        return message;
     }
 }
