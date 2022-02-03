@@ -1,6 +1,10 @@
 package baron;
 
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import baron.commands.Command;
 import baron.commands.CommandManager;
@@ -13,12 +17,17 @@ import baron.util.TextUi;
  * Main class for the Baron application that user uses to run. The Baron application keeps and
  * tracks tasks like a to-do list.
  */
-public class Baron {
+public class Baron extends Application {
+    private static final String DEFAULT_STORAGE_FILE_PATH = "data/baron.txt";
     private final Scanner inputScanner;
     private final TaskManager taskManager;
     private final CommandManager commandManager;
     private final Storage storage;
     private final TextUi textUi;
+
+    public Baron() {
+        this(Baron.DEFAULT_STORAGE_FILE_PATH);
+    }
 
     /**
      * Constructs a {@code Baron} object with the specified relative file path.
@@ -68,5 +77,14 @@ public class Baron {
      */
     public static void main(String[] args) {
         new Baron("data/baron.txt").start();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
