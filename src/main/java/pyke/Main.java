@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pyke.ui.controller.MainWindow;
@@ -25,6 +26,8 @@ public class Main extends Application {
             stage.setScene(scene);
             pyke.UiInit();
             fxmlLoader.<MainWindow>getController().setPyke(pyke);
+            stage.setTitle("Pyke");
+            stage.getIcons().add(new Image(Pyke.class.getResourceAsStream("/images/icon.png")));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

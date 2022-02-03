@@ -1,7 +1,8 @@
 T | 1 | read book
-D | 1 | shopping    | 2012-06-25
-D | 1 | aa bb cc    | 2012-06-25
+D | 1 | shopping       | 2012-06-25
+D | 1 | aa bb cc       | 2012-06-25
 T | 0 | borrow book
 T | 0 | borrow comicbook
-D | 0 | cut woods   | 2002-06-25
-D | 0 | go to hollywood   | 2002-06-25
+D | 0 | cut woods      | 2002-06-25
+D | 0 | go to hollywood      | 2002-06-25
+T | 1 | homework
