@@ -7,7 +7,7 @@ package duke;
 public class UI {
 
     /**
-     * Staring message for marking tasks.
+     * String message for marking tasks.
      */
     static final String mark = "Nice! I've marked this task as";
 
@@ -54,15 +54,16 @@ public class UI {
     /**
      * Prints custom line for Duke.
      */
-    public static void printLine() {
-        System.out.println(line);
+    public static String printLine() {
+        return line;
     }
 
     /**
      * Prints bye message for Duke.
+     * @return
      */
-    public static void printTerminate() {
-        System.out.println(line + "Bye yo. Hope I helped you!" + line);
+    public static String printTerminate() {
+        return "Bye yo. Hope I helped you!";
     }
 
     /**
@@ -70,8 +71,8 @@ public class UI {
      *
      * @param text Text to be printed.
      */
-    public static void printWithLines(String text) {
-        System.out.println(line + text + line);
+    public static String printWithLines(String text) {
+        return line + text + line;
     }
 
     /**
@@ -80,11 +81,11 @@ public class UI {
      * @param text Description of task.
      * @param n Index of task.
      */
-    public static void printAddMessage(String text, int n) {
+    public static String printAddMessage(String text, int n) {
         String gotit = "Got it. I've added this task:\n ";
         String now1 = "Now you have ";
         String now2 = " tasks in the list.";
-        System.out.println(line + gotit + text + "\n" + now1 + (n + 1) + now2 + line);
+        return gotit + text + "\n" + now1 + (n + 1) + now2;
     }
 
     /**
@@ -92,9 +93,9 @@ public class UI {
      *
      * @param text description of deleted Task.
      */
-    public static void deleteMessage(String text) {
+    public static String deleteMessage(String text) {
         String deleted = "Noted. I've removed this task:\n";
-        System.out.println(line + deleted + text + line);
+        return deleted + text;
     }
 
     /**
@@ -102,8 +103,8 @@ public class UI {
      *
      * @param text description of Marked Task.
      */
-    public static void printMarked(String text) {
-        System.out.println(line + mark + " as done:\n" + text + line);
+    public static String printMarked(String text) {
+        return mark + " as done:\n" + text;
     }
 
     /**
@@ -111,8 +112,8 @@ public class UI {
      *
      * @param text description of Unmarked Task.
      */
-    public static void printUnMarked(String text) {
-        System.out.println(line + mark + " as not done yet:\n" + text + line);
+    public static String printUnMarked(String text) {
+        return mark + " as not done yet:\n" + text;
     }
 
 }

@@ -28,33 +28,32 @@ public class Duke {
      * @param filePath Name of the path where Duke is to be stored.
      * @throws Exception If something unexpected happens.
      */
-    public Duke(String filePath) throws Exception {
-        ui = new UI();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.readData());
+
+    private Parser parser;
+    String filePath = "data/duke.txt";
+
+    public Duke() throws Exception {
+        try {
+            ui = new UI();
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.readData());
+            parser = new Parser(tasks);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    /**
-     * Runs Duke program from the introduction
-     * to termination.
-     *
-     * @throws Exception If program fails.
-     */
-    public void run() throws Exception {
-        ui.printIntro(); // start
-        Parser parser = new Parser();
-        parser.processData(tasks);
-        storage.writeData(tasks.getList());
-        ui.printTerminate(); // end
+    public String getResponse(String cmd) {
+        try {
+            if (cmd.equals("bye")) {
+                storage.writeData(tasks.getList());
+                return UI.printTerminate();
+            } else {
+                return parser.processData(cmd);
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Main method which runs Duke program.
-     * 
-     * @param args The command line arguments.
-     * @throws Exception If unexpected error occurs.
-     */
-    public static void main(String[] args) throws Exception {
-        new Duke("data/duke.txt").run();
-    }
 }

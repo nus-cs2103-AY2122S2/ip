@@ -45,11 +45,10 @@ public class TaskList {
      * Adds Task to the list.
      *
      * @param task Task to be added.
-     * @param n Index of Task added.
      */
-    public void add(Task task, int n) {
+    public String add(Task task) {
         list.add(task);
-        UI.printAddMessage(list.get(n).toString(), n);
+        return UI.printAddMessage(list.get(getSize()-1).toString(), getSize()-1);
     }
 
     /**
@@ -58,8 +57,8 @@ public class TaskList {
      *
      * @param no Number of Task to be deleted.
      */
-    public void delete(int no) {
-        UI.deleteMessage(list.remove(no).toString());
+    public String delete(int no) {
+        return UI.deleteMessage(list.remove(no).toString());
     }
 
     /**
@@ -68,9 +67,9 @@ public class TaskList {
      *
      * @param n Number of Task to be marked.
      */
-    public void mark(int n) {
+    public String mark(int n) {
         list.get(n).markAsDone();
-        UI.printMarked(list.get(n).toString());
+        return UI.printMarked(list.get(n).toString());
     }
 
     /**
@@ -79,24 +78,24 @@ public class TaskList {
      *
      * @param n Number of Task to be unmarked.
      */
-    public void unMark(int n) {
+    public String unMark(int n) {
         list.get(n).markAsUnDone();
-        UI.printUnMarked(list.get(n).toString());
+        return UI.printUnMarked(list.get(n).toString());
     }
 
     /**
      * Prints the Tasks in the Task list.
      */
-    public void printTaskList() {
-        UI.printLine();
+    public String printTaskList() {
+        String str = "";
         for(int m = 0; m < list.size(); m++) {
-            System.out.println((m + 1) + "." + list.get(m).toString());
+            str+= (m + 1) + "." + list.get(m).toString() +"\n";
         }
-        UI.printLine();
+        return str;
     }
 
-    public void find(String str) {
-        printSearchList(generateList(str));
+    public String find(String str) {
+        return printSearchList(generateList(str));
     }
 
     private ArrayList<Task> generateList(String str) {
@@ -125,11 +124,11 @@ public class TaskList {
         return isPresent;
     }
 
-    private void printSearchList(ArrayList<Task> list) {
-        UI.printLine();
+    private String printSearchList(ArrayList<Task> list) {
+        String str = "";
         for(int m = 0; m < list.size(); m++) {
-            System.out.println((m + 1) + "." + list.get(m).toString());
+            str+= (m + 1) + "." + list.get(m).toString() + "\n";
         }
-        UI.printLine();
+        return str;
     }
 }
