@@ -7,8 +7,9 @@ import dazz.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showExit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+//        ui.showExit();
+        return ui.messageForExit();
     }
 
     @Override

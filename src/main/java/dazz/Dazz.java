@@ -13,10 +13,9 @@ public class Dazz {
 
     /**
      * Creates a Dazz (chat box).
-     * @param filePath relative path of a text file to load past task.
      */
-    public Dazz(String filePath) {
-        this.storage = new Storage(filePath);
+    public Dazz() {
+        this.storage = new Storage();
         this.taskList = new TaskList(storage.loadList());
         this.ui = new Ui();
     }
@@ -42,7 +41,20 @@ public class Dazz {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command responseCommand = Parser.parse(input);
+            String response = responseCommand.execute(taskList, ui, storage);
+            if (responseCommand.isExit()) {
+                response = response + "\n Click on 'X' to close the window";
+            }
+            return response;
+        } catch (DazzException e) {
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
-        new Dazz("data/tasks.txt").run();
+        new Dazz().run();
     }
 }

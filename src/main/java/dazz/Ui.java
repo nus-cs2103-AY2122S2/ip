@@ -55,11 +55,20 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    public String messageForExit() {
+        return "Bye. Hope to see you again soon!";
+    }
     /**
      * Prints the exit message when user exits the program.
      */
     public void showExit() {
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("\t" + messageForExit());
+    }
+
+    public String messageForAdd(Task task, TaskList taskList) {
+        return "Got it. I've added this task:\n"
+                + task + "\nNow you have "
+                + taskList.getSize() + "tasks in the list";
     }
 
     /**
@@ -68,9 +77,13 @@ public class Ui {
      * @param taskList Task list
      */
     public void showAdd(Task task, TaskList taskList) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + taskList.getSize() + " tasks in the list.");
+        System.out.println("\tGot it. I've added this task:"
+                + "\n\t  " + task
+                + "\n\tNow you have " + taskList.getSize() + " tasks in the list.");
+    }
+
+    public String messageForError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -78,7 +91,11 @@ public class Ui {
      * @param errorMessage The error message to be printed
      */
     public void showError(String errorMessage) {
-        System.out.println("\t" + errorMessage);
+        System.out.println("\t" + messageForError(errorMessage));
+    }
+
+    public String messageForMark(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -90,6 +107,10 @@ public class Ui {
         System.out.println("\t  " + task);
     }
 
+    public String messageForUnmark(Task task) {
+        return "OK, I've unmarked this task as not done yet:\n" + task;
+    }
+
     /**
      * Shows the task that has been unmarked
      * @param task Task (i.e Todo, Deadline or Event) to be unmarked (i.e Todo, Deadline or Event)
@@ -99,6 +120,10 @@ public class Ui {
         System.out.println("\t  " + task);
     }
 
+    public String messageForDelete(Task task) {
+        return "Noted. I've removed this task:\n" + task;
+    }
+
     /**
      * Shows the task that has been deleted
      * @param task Task (i.e Todo, Deadline or Event) to be deleted
@@ -106,6 +131,19 @@ public class Ui {
     public void showDelete(Task task) {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + task);
+    }
+
+    public String messageForList(TaskList taskList) {
+        String showListMessage = "Here are the tasks in your list:\n";
+        if (taskList.getSize() == 0) {
+            showListMessage = showListMessage + "\nYou have no task in your list.";
+        } else {
+            taskList.list();
+            for (Task task : taskList.getTaskList()) {
+                showListMessage = showListMessage + "\n" + task;
+            }
+        }
+        return showListMessage;
     }
 
     /**
@@ -122,6 +160,18 @@ public class Ui {
         }
     }
 
+    public String messageForSearches(TaskList taskList, String search) {
+        String finalSearch = search.toLowerCase(Locale.ROOT);
+        String searchesMessage = "Here are the matching tasks in your list:\n";
+        List<Task> tasks = taskList.getTaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase(Locale.ROOT).contains(finalSearch)) {
+                searchesMessage = searchesMessage + task + "\n";
+            }
+        }
+        return searchesMessage;
+    }
+
     /**
      * Prints the default message.
      */
@@ -136,8 +186,12 @@ public class Ui {
         });
     }
 
+    public String messageForDefault() {
+        return ErrorType.INVALID_COMMAND.getErrorMessage();
+    }
+
     public void showDefault() {
-        System.out.println("\t" + ErrorType.INVALID_COMMAND.getErrorMessage());
+        System.out.println("\t" + messageForDefault());
     }
 
     /**

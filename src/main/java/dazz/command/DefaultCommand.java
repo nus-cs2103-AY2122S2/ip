@@ -6,8 +6,9 @@ import dazz.Ui;
 
 public class DefaultCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showDefault();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+//        ui.showDefault();
+        return ui.messageForDefault();
     }
 
     @Override
