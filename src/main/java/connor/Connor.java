@@ -1,12 +1,12 @@
 package connor;
 
-import connor.command.ByeCommand;
-import connor.exception.InvalidTaskFileException;
-import connor.task.TaskList;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import connor.command.ByeCommand;
+import connor.exception.InvalidTaskFileException;
+import connor.task.TaskList;
 
 /**
  * Main class for Connor program to start running.
@@ -21,6 +21,8 @@ public class Connor {
     public static final String INPUT_HERE = ">>> ";
 
     private static final String TASK_FILEPATH = "data/connor.txt";
+
+    private static final String GOODBYE = "Farewell. See you next time!";
 
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
     private static final String ERROR_FIX_TASK_FILE_START = "ERROR: ";
@@ -43,8 +45,6 @@ public class Connor {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
     }
-
-    public Connor() {}
 
     /**
      * Runs the Connor program. Greets the user first, shows their current tasks,
@@ -80,7 +80,17 @@ public class Connor {
         sc.close();
     }
 
-    // TODO: Javadoc for this
+    /**
+     * Runs the Connor Program in a GUI. Greets the user first, shows their current tasks,
+     * and finally asks for the user's input.
+     * <p>
+     * Once the user has inputted their command,
+     * the program attempts to parse and activate the input if the input is valid,
+     * before asking for another input. This process loops indefinitely until the user exits.
+     *
+     * @return A {@code String} message that greets the user followed by either an error
+     * or a list of their tasks.
+     */
     public String runGui() {
         StringBuilder sb = new StringBuilder(ui.greetings());
         try {
@@ -96,11 +106,21 @@ public class Connor {
         return sb.toString();
     }
 
+    /**
+     * Gets a {@code String} of Connor's response to the given input.
+     *
+     * @param input
+     * @return {@code String} of Connor's response to the given input.
+     */
     public String getResponse(String input) {
         Parser p = new Parser(input);
         String response = p.parse();
         storage.updateFile();
         return response;
+    }
+
+    public static String getGoodbye() {
+        return GOODBYE;
     }
 
     /**

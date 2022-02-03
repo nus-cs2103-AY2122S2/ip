@@ -13,8 +13,8 @@ public class ByeCommand extends Command {
      */
     @Override
     public String activate() {
-        System.out.println("Farewell. See you next time!");
+        System.out.println(Connor.getGoodbye());
         Connor.setActive(false);
-        return "Farewell. See you next time!";
+        return Connor.getGoodbye();
     }
 }

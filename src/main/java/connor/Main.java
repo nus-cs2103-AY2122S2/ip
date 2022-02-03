@@ -1,18 +1,25 @@
 package connor;
 
-import connor.gui.MainWindow;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+/**
+ * Main class for GUI.
+ */
 public class Main extends Application {
 
     private Connor connor;
 
+    /**
+     * Starts the GUI.
+     *
+     * @param stage The main stage of the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
