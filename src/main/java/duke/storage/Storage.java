@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.parser.DukeParser;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.parser.DukeParser;
+import duke.task.Task;
 
 public class Storage {
 
@@ -18,7 +18,7 @@ public class Storage {
      * Creates a Storage instance
      * @param p Path to file to be used in Storage methods
      */
-    public Storage(String p){
+    public Storage(String p) {
         this.filePath = p;
     }
 
@@ -28,7 +28,7 @@ public class Storage {
      * not, creates file at the location and returns a new List.
      * @return ArrayList which may contain previously stored tasks.
      */
-    public List<Task> load(){
+    public List<Task> load() {
         File data = new File(filePath);
         try {
             if (data.createNewFile()) {

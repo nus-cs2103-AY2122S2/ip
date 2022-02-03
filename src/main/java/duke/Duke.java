@@ -9,6 +9,10 @@ import duke.ui.Ui;
 
 public class Duke {
 
+    /**
+     * Main method to run the Duke list
+     * @param args input
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage("./src/main/data.txt");
@@ -18,7 +22,7 @@ public class Duke {
         while (!isExit) {
             String inp = ui.readInput();
             Command c = DukeParser.parseInput(inp);
-            c.execute(ui,list);
+            c.execute(ui, list);
             isExit = c.isExit();
         }
     }

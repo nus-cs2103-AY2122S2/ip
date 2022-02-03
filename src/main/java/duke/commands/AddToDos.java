@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.tasklist.DukeList;
 import duke.task.ToDos;
+import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
 public class AddToDos extends Command {
@@ -12,7 +12,7 @@ public class AddToDos extends Command {
      * Creates a new AddToDos Command
      * @param x Task description of the ToDo
      */
-    public AddToDos(String x){
+    public AddToDos(String x) {
         this.body = x;
     }
 

@@ -6,7 +6,7 @@ public class ToDos extends Task {
      * Creates a ToDos instance
      * @param s Description of the ToDos task
      */
-    public ToDos(String s){
+    public ToDos(String s) {
         super(s);
     }
 
@@ -15,11 +15,10 @@ public class ToDos extends Task {
      * @return String representation of this Todos
      */
     @Override
-    public String show(){
-        if(super.getDone()){
+    public String show() {
+        if (super.getDone()) {
             return "[T][X] " + super.taskDescription();
-        }
-        else{
+        } else {
             return "[T][ ] " + super.taskDescription();
         }
     }
@@ -29,7 +28,7 @@ public class ToDos extends Task {
      * @return String format of this Todos to store
      */
     @Override
-    public String storeFormat(){
+    public String storeFormat() {
         return "T" + "|" + super.getDone() + "|" + super.taskDescription() + "\n";
     }
 

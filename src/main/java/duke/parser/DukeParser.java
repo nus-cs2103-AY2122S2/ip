@@ -1,18 +1,34 @@
 package duke.parser;
 
-import duke.task.Deadlines;
-import duke.task.Events;
-import duke.task.Task;
-import duke.task.ToDos;
-import duke.commands.*;
-import duke.exceptions.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.commands.AddDeadline;
+import duke.commands.AddEvents;
+import duke.commands.AddToDos;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.TodayTask;
+import duke.commands.TryAgain;
+import duke.commands.UnMarkCommand;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.MissingArgumentException;
+import duke.exceptions.WrongFormatException;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 
 public class DukeParser {
 
@@ -27,25 +43,23 @@ public class DukeParser {
     public static ArrayList<Task> readData(File f) throws IOException {
         Scanner s = new Scanner(f);
         ArrayList<Task> ans = new ArrayList<Task>();
-        while(s.hasNext()){
+        while (s.hasNext()) {
             String[] k = s.nextLine().split("\\|");
-            if(k[0].equals("T")){
+            if (k[0].equals("T")) {
                 Task j = new ToDos(k[2]);
-                if(k[1].equals("true")){
+                if (k[1].equals("true")) {
                     j.mark();
                 }
                 ans.add(j);
-            }
-            else if(k[0].equals("D")){
-                Task j = new Deadlines(k[2],k[3]);
-                if(k[1].equals("true")){
+            } else if (k[0].equals("D")) {
+                Task j = new Deadlines(k[2], k[3]);
+                if (k[1].equals("true")) {
                     j.mark();
                 }
                 ans.add(j);
-            }
-            else if(k[0].equals("E")){
-                Task j = new Events(k[2],k[3]);
-                if(k[1].equals("true")){
+            } else if (k[0].equals("E")) {
+                Task j = new Events(k[2], k[3]);
+                if (k[1].equals("true")) {
                     j.mark();
                 }
                 ans.add(j);
@@ -61,10 +75,10 @@ public class DukeParser {
      * @return Boolean which tells if String is in valid format
      */
     public static boolean isValidDate(String k) {
-        try{
+        try {
             LocalDate d = LocalDate.parse(k);
             return true;
-        }catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
@@ -75,8 +89,8 @@ public class DukeParser {
      * @param i String to be checked
      * @return Boolean which tells if String is Integer
      */
-    public static boolean isInt(String i){
-        try{
+    public static boolean isInt(String i) {
+        try {
             int n = Integer.parseInt(i);
         } catch (NumberFormatException e) {
             return false;
@@ -112,7 +126,7 @@ public class DukeParser {
         } else if (cmd.equals("unmark")) {
             if (arg.length == 1) {
                 throw new MissingArgumentException();
-            } else if (!isInt(arg[1])){
+            } else if (!isInt(arg[1])) {
                 throw new WrongFormatException();
             } else {
                 return new UnMarkCommand(Integer.parseInt(arg[1].trim()));
@@ -186,12 +200,12 @@ public class DukeParser {
      * @param inp String input from user
      * @return A Command instance
      */
-    public static Command parseInput(String inp){
+    public static Command parseInput(String inp) {
         String[] arg = inp.split(" ", 2);
         try {
             Command c = createCommand(arg, arg[0]);
             return c;
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
             return new TryAgain();
         }

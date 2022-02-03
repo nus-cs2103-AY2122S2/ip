@@ -1,18 +1,23 @@
 package duke.tasklist;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import duke.storage.Storage;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.util.List;
 
 public class DukeList {
 
     private List<Task> a;
     private Storage storage;
 
+    /**
+     * Constructor to load a previously stored list of tasks into a new instance of
+     * DukeList using the Storage load method
+     * @param s Instance of Storage
+     */
     public DukeList(Storage s) {
         this.a = s.load();
         this.storage = s;
@@ -62,7 +67,7 @@ public class DukeList {
      * @return String representation of list.
      */
     @Override
-    public String toString(){
+    public String toString() {
         if (a.isEmpty()) {
             return "NO TASKS\n";
         }
@@ -82,14 +87,14 @@ public class DukeList {
      * @param x Index of task in list to delete
      */
     public void delete(int x) {
-        try{
-            Task t = a.get(x-1);
-            a.remove(x-1);
+        try {
+            Task t = a.get(x - 1);
+            a.remove(x - 1);
             System.out.println("\nDuke: Noted. I've removed this task:\n      "
                     + t.show() + "\n      Now you have "
                     + this.a.size() + " tasks in the list.\n");
             storage.store(a);
-        } catch( IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n");
         }
     }
@@ -97,11 +102,11 @@ public class DukeList {
     /**
      * Prints a list of tasks due on current date to the console
      */
-    public void todayTask(){
+    public void todayTask() {
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
-        for(Task t: a){
+        for (Task t: a) {
             if (t instanceof Events || t instanceof Deadlines) {
                 if (t.getDate().isEqual(cur)) {
                     b = false;
@@ -115,6 +120,10 @@ public class DukeList {
         System.out.println(day);
     }
 
+    /**
+     * This method finds and prints out the tasks from the list that matches the input keyword
+     * @param arg
+     */
     public void findTasks(String arg) {
         String found = "\nDuke: Here are the matching tasks in your list\n";
         int n = 0;
