@@ -5,7 +5,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Add todo command.
@@ -35,15 +34,15 @@ public class TodoCommand extends TaskCommand {
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return New todo task added string description.
      * @throws DukeException If no task descriptor
      */
     @Override
-    public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         Task newTask = null;
         String taskDescription = getTaskDescription(input);
 
         newTask = new Todo(taskDescription);
-        updateTaskList(newTask, taskList, storage, ui);
+        return updateTaskList(newTask, taskList, storage);
     }
 }

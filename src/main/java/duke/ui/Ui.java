@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 /**
  * Deals with interactions with the user.

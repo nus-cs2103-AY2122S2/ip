@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Abstract class for commands.
@@ -24,14 +23,14 @@ public abstract class Command {
 
     /**
      * Abstract function for execution of a command behavior.
-     *
+     * 
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return Command response.
      * @throws DukeException If certain conditions in function are met.
      */
-    public abstract void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException;
+    public abstract String execute(String input, TaskList taskList, Storage storage) throws DukeException;
 
     /**
      * Get description of the task after the command keyword.

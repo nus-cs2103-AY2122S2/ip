@@ -17,7 +17,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -79,14 +79,32 @@ public class Duke {
         parser = new Parser(commands);
     }
 
+    /**
+     * Gets Duke response from an input.
+     *
+     * @param input User input.
+     * @return Duke response.
+     */
+    public String getResponse(String input) {
+        String response = "";
+
+        try {
+            Command command = parser.parse(input);
+            response = command.execute(input, taskList, storage);
+        } catch(DukeException error) {
+            return error.getMessage();
+        }
+
+        return response;
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
-
         duke.runDuke();
     }
 
     /**
-     * Runs duke logic and behavior.
+     * Runs duke logic and behavior in text form.
      */
     public void runDuke() {
         ui.startGreeting();
@@ -97,10 +115,12 @@ public class Duke {
 
             try {
                 Command command = parser.parse(userResponse);
-                command.execute(userResponse, taskList, storage, ui);
+                String response = command.execute(userResponse, taskList, storage);
                 if (command.getKey().equals("bye")) {
                     this.isRunning = false;
                 }
+
+                ui.printResponse(response);
             } catch (DukeException error) {
                 ui.printError(error.getMessage());
             }

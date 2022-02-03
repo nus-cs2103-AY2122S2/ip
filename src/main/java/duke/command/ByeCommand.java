@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Bye command for Duke.
@@ -30,11 +29,11 @@ public class ByeCommand extends Command {
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return Bye response.
      * @throws DukeException Does not throw exception.
      */
     @Override
-    public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        ui.printResponse(BYE);
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
+        return BYE;
     }
 }

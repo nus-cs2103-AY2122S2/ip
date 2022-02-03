@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * List command for Duke to list out all current tasks.
@@ -28,11 +27,11 @@ public class ListCommand extends Command {
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
-     * @throws DukeException
+     * @return The task list description.
+     * @throws DukeException No exeception.
      */
     @Override
-    public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        ui.printResponse(("Here are the tasks in your list: \n" + taskList.getTaskListStr()));
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
+        return "Here are the tasks in your list: \n" + taskList.getTaskListStr();
     }
 }

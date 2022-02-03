@@ -5,7 +5,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,14 +44,14 @@ public class EventCommand extends TaskCommand {
      * @param input User input.
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return Add new event task response.
      * @throws DukeException If no task descriptor or
      * event task format is wrong (no /at)
      * or date format is wrong (yy-mm-dd)
      * or time format is wrong (HHmm)
      */
     @Override
-    public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         Task newTask = null;
         String taskDescription = getTaskDescription(input);
 
@@ -86,6 +85,6 @@ public class EventCommand extends TaskCommand {
         }
 
         newTask = new Event(statement, localDate, localTime);
-        updateTaskList(newTask, taskList, storage, ui);
+        return updateTaskList(newTask, taskList, storage);
     }
 }

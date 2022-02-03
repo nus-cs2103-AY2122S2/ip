@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Abstract class for add task commands.
@@ -49,16 +48,16 @@ public abstract class TaskCommand extends Command {
      * @param newTask The new task to be added into the list.
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return New task added statement.
      * @throws DukeException If there are issues with saving the updated
      * list into the file.
      */
-    protected void updateTaskList(Task newTask, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    protected String updateTaskList(Task newTask, TaskList taskList, Storage storage) throws DukeException {
         taskList.addTask(newTask);
         storage.saveList(taskList.getTaskList());
         String printStr = "Gotcha. Added the task: \n   " + newTask.toString() + "\nNow you have "
                 + taskList.getTaskListSize() + " tasks in your list.";
 
-        ui.printResponse(printStr);
+        return printStr;
     }
 }

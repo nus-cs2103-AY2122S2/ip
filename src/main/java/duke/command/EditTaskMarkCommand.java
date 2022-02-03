@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Command to edit the task to be either marked or unmarked.
@@ -38,11 +37,11 @@ public class EditTaskMarkCommand extends Command {
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
-     * @param ui Duke UI to print what the command wants.
+     * @return Edited task description.
      * @throws DukeException If no task description or invalid input (User must write the task number in int) or task index does not exist.
      */
     @Override
-    public void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         int taskIndex = 0;
         String taskDesc = getTaskDescription(input, NO_INPUT);
 
@@ -55,6 +54,6 @@ public class EditTaskMarkCommand extends Command {
         Task updatedTask = taskList.markTask(taskIndex, isMarkDoneTask);
         String cmdDescription = isMarkDoneTask ? MARK_TASK : UNMARK_TASK;
 
-        ui.printResponse(cmdDescription + updatedTask.toString());
+        return cmdDescription + updatedTask.toString();
     }
 }
