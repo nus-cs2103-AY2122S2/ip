@@ -52,15 +52,11 @@ public class FindCommand extends Command {
             return ui.printMessage(NO_TASK_MATCHED);
         } else {
             String result = "";
-            result += ui.printLine();
-            result += LINE_SEPARATOR;
             result += FOUND_TASK;
             result += LINE_SEPARATOR;
-//            System.out.println(FOUND_TASK);
             for (int i = 0; i < foundTasks.getNumberOfTasks(); i++) {
-                result += ui.printMessageWithoutLine(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
+                result += ui.printMessage(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
             }
-            result += ui.printLine();
             return result;
         }
 

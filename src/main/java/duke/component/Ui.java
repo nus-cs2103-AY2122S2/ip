@@ -41,27 +41,11 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal line.
-     */
-    public String printLine() {
-        return HORIZONTAL_LINE;
-    }
-
-    /**
      * Prints a message between two horizontal lines
      *
      * @param message String
      */
     public String printMessage(String message) {
-        return HORIZONTAL_LINE + LINE_SEPARATOR + message + LINE_SEPARATOR + HORIZONTAL_LINE;
-    }
-
-    /**
-     * Prints a single message.
-     *
-     * @param message String
-     */
-    public String printMessageWithoutLine(String message) {
         return message;
     }
 
