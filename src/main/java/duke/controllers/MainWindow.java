@@ -30,6 +30,11 @@ public class MainWindow extends AnchorPane {
 
     private Chi chi;
 
+    /**
+     * Constructor of the class.
+     *
+     * @param chi The new Chi instance.
+     */
     public MainWindow(Chi chi) {
         try {
             this.chi = chi;
@@ -48,7 +53,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hi welcome to ChiBot", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getChiDialog("Hi welcome to ChiBot", dukeImage));
     }
 
     public void setDuke(Chi d) {
@@ -71,19 +76,19 @@ public class MainWindow extends AnchorPane {
             response = chi.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getChiDialog(response, dukeImage)
             );
             userInput.clear();
         } catch (ChiException e){
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+                    DialogBox.getChiDialog(e.getMessage(), dukeImage)
             );
             userInput.clear();
         } catch (IOException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("The IO is faulty nyan~!", dukeImage)
+                    DialogBox.getChiDialog("The IO is faulty nyan~!", dukeImage)
             );
             userInput.clear();
         }
