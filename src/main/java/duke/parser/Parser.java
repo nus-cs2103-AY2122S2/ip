@@ -24,14 +24,6 @@ public class Parser {
     public static final String TASKS_ON = "taskon";
     public static final String FIND = "find";
 
-    private Ui ui;
-    private Storage storage;
-
-    public Parser(Ui ui, Storage storage) {
-        this.ui = ui;
-        this.storage = storage;
-    }
-
     /**
      * Processes the raw input from the user and performs the action on the task store. If the executed action
      * encounters an error, it will display the error message.
@@ -39,7 +31,7 @@ public class Parser {
      * @param inputTxt The raw input containing the command and parameters.
      * @param tasks    The task store which the user wishes to query or update.
      */
-    public void processInput(String inputTxt, TaskStore tasks) {
+    public boolean processInput(String inputTxt, Ui ui, TaskStore tasks) {
         String[] split = inputTxt.split(" ");
         String command = split[0].toLowerCase();
         String commandArgs = inputTxt.substring(command.length()).trim();
@@ -47,69 +39,73 @@ public class Parser {
         try {
             switch (command) {
             case BYE:
-                this.ui.bye();
+                ui.bye();
                 break;
 
             case LIST:
-                this.ui.printMessage(tasks.toString());
+                ui.printMessage(tasks.toString());
                 break;
 
             case MARK:
                 task = validateMarkCommand(command, commandArgs, tasks);
                 task.markAsDone();
-                this.ui.printTaskMarking(task);
+                ui.printTaskMarking(task);
                 break;
 
             case UNMARK:
                 task = validateMarkCommand(command, commandArgs, tasks);
                 task.markAsUndone();
-                this.ui.printTaskMarking(task);
+                ui.printTaskMarking(task);
                 break;
 
             case DELETE:
                 task = validateMarkCommand(command, commandArgs, tasks);
                 tasks.removeTask(task);
-                this.ui.printTaskDelete(task, tasks);
+                ui.printTaskDelete(task, tasks);
                 break;
 
             case MAKE_DEADLINE:
             case MAKE_EVENT:
             case MAKE_TODO:
                 task = tasks.addTask(command, commandArgs);
-                this.ui.printTaskAdd(task, tasks);
+                ui.printTaskAdd(task, tasks);
                 break;
 
             case TASKS_ON:
                 LocalDate date = LocalDate.parse(commandArgs);
-                this.ui.printMessage(tasks.getTasksOn(date));
+                ui.printMessage(tasks.getTasksOn(date));
                 break;
 
             case FIND:
                 if (commandArgs.equals("")) {
                     throw new DukeException("Please enter a keyword for me to find.");
                 }
-                this.ui.printMessage(tasks.getTaskWithKeyword(commandArgs));
+                ui.printMessage(tasks.getTaskWithKeyword(commandArgs));
                 break;
 
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
 
+            return true;
+//            TODO Refactor out
 //            Write the new changes to file (commands that are not bye, list and taskon)
-            if (!(command.equals(BYE) || command.equals(LIST) || command.equals(TASKS_ON) || command.equals(FIND))) {
-                this.storage.writeToFile(tasks);
-            }
+//            if (!(command.equals(BYE) || command.equals(LIST) || command.equals(TASKS_ON) || command.equals(FIND))) {
+//                this.storage.writeToFile(tasks);
+//            }
 
         } catch (DukeException e) {
-            this.ui.printError(e.getMessage());
+            ui.printError(e.getMessage());
+            return false;
         } catch (NumberFormatException e) {
-            this.ui.printError("I don't think you gave me a valid number.");
+            ui.printError("I don't think you gave me a valid number.");
+            return false;
         } catch (IndexOutOfBoundsException e) {
-            this.ui.printError("I think you may have given me something that's out of range.");
-        } catch (IOException e) {
-            this.ui.printError("Unable to write to file");
+            ui.printError("I think you may have given me something that's out of range.");
+            return false;
         } catch (DateTimeParseException e) {
-            this.ui.printError("Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
+            ui.printError("Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
+            return false;
         }
     }
 
