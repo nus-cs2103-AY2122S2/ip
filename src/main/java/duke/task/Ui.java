@@ -13,126 +13,140 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message.
+     * Returns the greeting message
+     * @return Greeting message is returned.
      */
-    public void greeting() {
+    public String greeting() {
         String logo = "__  __ ____________\n"
                 + "\\ \\/ /|_  /_  /_  /\n"
                 + " >  <  / / / / / / \n"
-                + "/_/\\_\\/___/___/___|";
-        System.out.println(logo);
-        System.out.println("Hello uwu! I'm xzzz,");
-        System.out.println("You can check your schedwle here (ɔ◔‿◔)ɔ ♥!");
+                + "/_/\\_\\/___/___/___| \n";
+        return logo + "Hello uwu! I'm xzzz, \n" + "You can check your schedwle here! \n";
     }
 
     /**
-     * Prints the goodbye message.
+     * Returns the goodbye message.
+     * @return Goodbye message is returned.
      */
-    public void goodbye() {
-        System.out.println("Cya later~ ≧◉◡◉≦");
+    public String goodbye() {
+        return "Cya later~\n";
     }
 
 
     /**
-     * Prints the list for display.
+     * Returns the list for display.
      * @param toDoList List to be displayed.
+     * @return A display of the list is returned.
      */
-    public void displayList(ArrayList<Task> toDoList) {
+    public String displayList(ArrayList<Task> toDoList) {
         int number = 1;
-        System.out.println("here are your tasks ☜(ˆ▿ˆc)");
+        String result = "here are your tasks\n";
         for (Task item : toDoList) {
-            System.out.println(number + ". " + item.toString());
+            result += number + ". " + item.toString() + "\n";
             number++;
+        }
+        if (toDoList.isEmpty()) {
+            return "you have no tasks as of now! \n";
+        } else {
+            return result;
         }
     }
 
     /**
-     * Print the error caused by illegal argument.
+     * Returns the error caused by illegal argument.
      * @param ex IllegalArgument error.
+     * @return The error message for illegal argument is returned.
      */
-    public void showIllegalArgumentError(Exception ex) {
-        System.out.println(ex);
+    public String showIllegalArgumentError(Exception ex) {
+        return ex.toString();
     }
 
     /**
-     * Print the error caused by incomplete argument.
+     * Returns the error caused by incomplete argument.
+     * @return The error message for incomplete argument is returned.
      */
-    public void showIncompleteArgumentError() {
-        System.out.println("UH-OH!! you gotta fill in the description and deadline date "
-                + "/ event date to create a valid task (> <ლ)");
+    public String showIncompleteArgumentError() {
+        return "UH-OH!! you gotta fill in the description and deadline date "
+                + "/ event date to create a valid task\n";
     }
 
     /**
-     * Prints the confirmation for addition of a <code>Task</code> to the <code>toDoList</code>.
+     * Returns the confirmation for addition of a <code>Task</code> to the <code>toDoList</code>.
      * @param newTask Task to be added.
      * @param toDoList List for the task to be added to.
+     * @return The confirmation for addition is returned.
      */
-    public void confirmAddition(Task newTask, ArrayList<Task> toDoList) {
-        System.out.println("okie!! (✿◠‿◠)  i have added: \n"
+    public String confirmAddition(Task newTask, ArrayList<Task> toDoList) {
+        return "okie!! i have added: \n"
                 + newTask + "\n"
-                + "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+                + "now there are " + toDoList.size() + " tasks in the list! get to work \n";
     }
 
     /**
-     * Prints a message to indicate the bot does not understand the command.
+     * Returns a message to indicate the bot does not understand the command.
+     * @return The default response for unrecognizable command is returned.
      */
-    public void doNotUnderstand() {
-        System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
+    public String doNotUnderstand() {
+        return "sowwy i don't understand what that means try something else pwease?? \n";
     }
 
 
     /**
-     * Prints a confirmation that a <code>Task</code> at the index in the list has been marked as done.
+     * Returns a confirmation that a <code>Task</code> at the index in the list has been marked as done.
      * @param toDoList List of tasks.
      * @param idx Index of the task that has been marked.
+     * @return The confirmation of the marking is returned.
      */
-    public void markAsDone(ArrayList<Task> toDoList, int idx) {
-        System.out.println("yay!!! this task is now marked as done ٩(˘◡˘)۶");
-        System.out.println(toDoList.get(idx - 1).toString());
+    public String markAsDone(ArrayList<Task> toDoList, int idx) {
+        return "yay!!! this task is now marked as done \n" + toDoList.get(idx - 1).toString();
     }
 
     /**
-     * Prints a confirmation that a <code>Task</code> at the index in the list has been marked as undone.
+     * Returns a confirmation that a <code>Task</code> at the index in the list has been marked as undone.
      * @param toDoList List of tasks.
      * @param idx Index of the task that has been unmarked.
+     * @return The confirmation of the unmarking is returned.
      */
-    public void unmarkAsDone(ArrayList<Task> toDoList, int idx) {
-        System.out.println("this task is now marked as not done yet... do it soon! ᕙ(`▿´)ᕗ");
-        System.out.println(toDoList.get(idx - 1).toString());
+    public String unmarkAsDone(ArrayList<Task> toDoList, int idx) {
+        return "this task is now marked as not done yet... do it soon! \n" + toDoList.get(idx - 1).toString();
     }
 
     /**
-     * Prints the confirmation for removal of a <code>Task</code> from the <code>toDoList</code>.
+     * Returns the confirmation for removal of a <code>Task</code> from the <code>toDoList</code>.
      * @param removed Task to be removed.
      * @param toDoList List for the task to be removed from.
+     * @return The confirmation of the removal is returned.
      */
-    public void confirmRemoval(Task removed, ArrayList<Task> toDoList) {
-        System.out.println("OKI!! i have removed this task: \n" + removed + "\n"
-                + "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+    public String confirmRemoval(Task removed, ArrayList<Task> toDoList) {
+        return "OKI!! i have removed this task: \n" + removed + "\n"
+                + "now there are " + toDoList.size() + " tasks in the list! get to work \n";
     }
 
     /**
-     * Print the error caused by invalid loading of the file.
+     * Returns the error caused by invalid loading of the file.
+     * @return The error message of a loading error is returned.
      */
-    public void showLoadingError() {
-        System.out.println("UH-OH!! seems like the file is not in the right format... (⊙.⊙) \n"
-                + "don't worry! I'll start a new file for you!");
+    public String showLoadingError() {
+        return "UH-OH!! seems like the file is not in the right format...\n"
+                + "don't worry! I'll start a new file for you! \n";
     }
 
     /**
-     * Prints the specified relevant tasks for the user.
+     * Returns the specified relevant tasks for the user.
      * @param relevantTasks List of relevant tasks containing a keyword.
+     * @return The result of the find operation is returned.
      */
-    public void showFindResult(ArrayList<Task> relevantTasks) {
+    public String showFindResult(ArrayList<Task> relevantTasks) {
         if (relevantTasks.isEmpty()) {
-            System.out.println("There are no matching tasks (・_・)");
+            return "There are no matching tasks \n";
         } else {
-            System.out.println("Here are the matching tasks in the list (｡◕‿◕｡) :");
+            String result = "Here are the matching tasks in the list : \n";
             int counter = 1;
             for (Task task : relevantTasks) {
-                System.out.println(counter + ". " + task);
+                result += counter + ". " + task;
                 counter++;
             }
+            return result;
         }
     }
 }

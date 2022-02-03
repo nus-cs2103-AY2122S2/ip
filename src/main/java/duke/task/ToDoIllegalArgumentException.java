@@ -19,6 +19,6 @@ public class ToDoIllegalArgumentException extends IllegalArgumentException {
      */
     @Override
     public String toString() {
-        return "UH-OH!! you gotta fill in the description to create a valid todo (> <ლ)";
+        return "UH-OH!! you gotta fill in the description to create a valid todo";
     }
 }
