@@ -47,9 +47,12 @@ public class Parser {
         } else if (splitInput.length == 1) {
             String command = splitInput[0];
             switch (command) {
-            case "todo" -> throw new ToDosException();
-            case "deadline" -> throw new DeadlineException();
-            case "event" -> throw new EventException();
+            case "todo":
+                throw new ToDosException();
+            case "deadline":
+                throw new DeadlineException();
+            case "event":
+                throw new EventException();
             }
         } else {
             String command = splitInput[0];

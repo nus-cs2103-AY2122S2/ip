@@ -3,6 +3,7 @@ import DukeComponent.TaskList;
 import DukeComponent.Ui;
 import java.util.Scanner;
 
+
 /**
  *  A class that encapsulates the logic of Duke - A todo list program
  *  that helps user keep track of tasks.
@@ -22,15 +23,6 @@ public class Duke {
      * {@link Ui}
      */
     private final Ui ui;
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
 
     /**
      * Constructor for Duke
@@ -55,5 +47,9 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
