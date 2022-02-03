@@ -2,14 +2,8 @@ package chatcat.tasks;
 
 import java.io.Serializable;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-
 /**
- * The default Deadline class. Inherited from {@code Task}.
- *
- * @see DateTimeFormatter
- * @see DateTimeFormatterBuilder
+ * The default Task class.
  */
 public class Task implements Serializable {
     private final String task;

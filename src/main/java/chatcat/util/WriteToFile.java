@@ -41,6 +41,7 @@ public class WriteToFile  {
             writeStream.close();
         } catch (IOException e) {
             System.out.println("An error occurred while writing to tasklist.");
+            e.printStackTrace();
         }
     }
 

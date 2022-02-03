@@ -1,16 +1,15 @@
 package chatcat.tasklist;
 
 import java.util.ArrayList;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import chatcat.tasks.Deadline;
 import chatcat.tasks.Event;
-import chatcat.util.UI;
 import chatcat.tasks.Task;
 import chatcat.tasks.Todo;
 import chatcat.util.WriteToFile;
+import chatcat.util.DateTimeUtil;
 import chatcat.chatcatexception.ChatCatException;
+import chatcat.commands.Commands;
 
 /**
  * Handles writing and reading to list of tasks represented as an {@code ArrayList}.
@@ -19,15 +18,17 @@ import chatcat.chatcatexception.ChatCatException;
 public class TaskList {
     ArrayList<Task> Tasks = new ArrayList<>();
     WriteToFile writeToFile;
-    UI ui;
+    Commands commands;
+    DateTimeUtil dateTimeUtil;
 
     /**
      * Creates {@code TaskList} object containing an empty Task List {@code ArrayList}.
-     * Creates {@code UI} object.
+     * Creates {@code WriteToFile} object.
+     * Creates {@code Commands} object.
      */
     public TaskList() {
-        ui = new UI();
         writeToFile = new WriteToFile();
+        commands = new Commands();
     }
 
     /**
@@ -35,28 +36,29 @@ public class TaskList {
      *
      * @see WriteToFile
      * @see Task
+     * @see Commands
      */
     public void listTasks() {
         Tasks = writeToFile.toRead();
+        commands.outputList(Tasks);
+    }
 
-        if (Tasks.size() == 0) {
-            System.out.println("empty list!");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < Tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + Tasks.get(i));
-            }
-        }
-        System.out.println("");
+    /**
+     * Prints out exit message.
+     *
+     * @see Commands
+     */
+    public void exitChatCat() {
+        commands.outputByeMessage();
     }
 
     /**
      * Marks task at specified location.
      *
      * @param str containing the task to be marked.
-     * @see UI
      * @see Task
      * @see WriteToFile
+     * @see Commands
      */
     public void mark(String str) {
         String[] input = str.split(" ");
@@ -65,17 +67,16 @@ public class TaskList {
         Tasks.get(taskID).setDone();
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("Nice! I've marked this task as done:\n"
-                + Tasks.get(taskID));
+        commands.outputMarkMessage(Tasks.get(taskID));
     }
 
     /**
      * Unmark task at specified location.
      *
      * @param str containing the task to be marked.
-     * @see UI
      * @see Task
      * @see WriteToFile
+     * @see Commands
      */
     public void unmark(String str) {
         String[] input = str.split(" ");
@@ -84,8 +85,7 @@ public class TaskList {
         Tasks.get(taskID).setUnDone();
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("OK, I've marked this task as not done yet:\n"
-                + Tasks.get(taskID));
+        commands.outputUnmarkMessage(Tasks.get(taskID));
     }
 
     /**
@@ -93,12 +93,13 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @throws ChatCatException if description of todo is empty.
-     * @see UI
      * @see Todo
      * @see WriteToFile
+     * @see Commands
      */
     public void setTodo(String str) throws ChatCatException {
         String[] input = str.split(" ");
+
         if (input.length == 1) {
             throw new ChatCatException(
                     "OOPS!!! The description of a todo cannot be empty.");
@@ -108,10 +109,7 @@ public class TaskList {
         Tasks.add(todo);
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("Got it. I've added this task:\n"
-                + todo);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list.");
+        commands.outputTaskMessage(todo, Tasks.size());
     }
 
     /**
@@ -119,9 +117,10 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @throws ChatCatException if description of deadline is empty.
-     * @see UI
      * @see Deadline
      * @see WriteToFile
+     * @see Commands
+     * @see DateTimeUtil
      */
     public void setDeadline(String str) throws ChatCatException {
         String[] input = str.split(" ");
@@ -131,15 +130,13 @@ public class TaskList {
         }
 
         String[] split = str.split("/by ");
-        Deadline deadline = new Deadline(split[0].substring(9), split[1]);
+        dateTimeUtil = new DateTimeUtil(split[1]);
+        Deadline deadline = new Deadline(split[0].substring(9), dateTimeUtil.getTime());
 
         Tasks.add(deadline);
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("Got it. I've added this task:\n"
-                + deadline);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list.");
+        commands.outputTaskMessage(deadline, Tasks.size());
     }
 
     /**
@@ -147,9 +144,10 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @throws ChatCatException if description of event is empty.
-     * @see UI
      * @see Event
      * @see WriteToFile
+     * @see Commands
+     * @see DateTimeUtil
      */
     public void setEvent(String str) throws ChatCatException {
         String[] input = str.split(" ");
@@ -159,24 +157,22 @@ public class TaskList {
         }
 
         String[] split = str.split("/at ");
-        Event event = new Event(split[0].substring(6), split[1]);
+        dateTimeUtil = new DateTimeUtil(split[1]);
+        Event event = new Event(split[0].substring(6), dateTimeUtil.getTime());
 
         Tasks.add(event);
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("Got it. I've added this task:\n"
-                + event);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list." + "\n");
+        commands.outputTaskMessage(event, Tasks.size());
     }
 
     /**
      * Deletes a specified task {@code Task} in the tasklist {@code taskList}.
      *
      * @param str containing the task to be deleted.
-     * @see UI
      * @see Task
      * @see WriteToFile
+     * @see Commands
      */
     public void delete(String str) {
         Tasks = writeToFile.toRead();
@@ -186,12 +182,16 @@ public class TaskList {
         Task removed = Tasks.remove(toDelete);
         writeToFile.toWrite(Tasks);
 
-        ui.printOutPut("Noted. I've removed this task:\n"
-                + removed);
-        ui.printOutPut("Now you have " + Tasks.size()
-                + " tasks in the list.");
+        commands.outputDeleteMessage(removed, Tasks.size());
     }
 
+    /**
+     * Displays the tasks {@code Task} in tasklist {@code taskList} that includes a specified keyword.
+     *
+     * @param str containing the keyword.
+     * @see Task
+     * @see Commands
+     */
     public void filter(String str) throws ChatCatException {
         Tasks = writeToFile.toRead();
         ArrayList<Task> filteredList = new ArrayList<>();
@@ -207,10 +207,6 @@ public class TaskList {
             throw new ChatCatException("No task with keyword: " + "str");
         }
 
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < filteredList.size(); i++) {
-            System.out.println((i + 1) + ". " + filteredList.get(i));
-        }
-        System.out.println("");
+        commands.outputFilterMessage(filteredList);
     }
 }

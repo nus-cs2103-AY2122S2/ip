@@ -21,7 +21,7 @@ public class Parser {
                     taskList.listTasks();
                     break;
                 case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
+                    taskList.exitChatCat();
                     break;
                 case "mark":
                     taskList.mark(input);

@@ -11,7 +11,11 @@ public class UI {
         System.out.println(welcome);
     }
 
-    public void printOutPut(String commandOutput) {
+    public void printOutPutWithSpace(String commandOutput) {
         System.out.println(commandOutput + "\n");
+    }
+
+    public void printOutPutWithoutSpace(String commandOutput) {
+        System.out.println(commandOutput);
     }
 }
