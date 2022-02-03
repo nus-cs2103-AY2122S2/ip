@@ -15,7 +15,9 @@ public enum CommandType
     EVENT("event"),
     DONE("done"),
     DELETE("delete"),
-    FIND("find");
+    FIND("find"),
+    HELP("help"),
+    UNDO("undo");
 
     private String command;
 

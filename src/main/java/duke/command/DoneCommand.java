@@ -46,4 +46,18 @@ public class DoneCommand extends Command {
             storage.writeToFile(taskList);
         }
     }
+
+    /**
+     * Generate the usage guide for this command.
+     *
+     * @return Returns the formatted String value for printing for the usage guide.
+     */
+    public static String usage() {
+        return """
+                To mark a task as complete, use the done command followed by the task number.
+                (Hint: Use the list command to find the task number)
+                  Usage: done <Task Id> | i.e. done 3
+
+                """;
+    }
 }

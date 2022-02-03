@@ -27,4 +27,17 @@ public class ListCommand extends Command{
             Ui.print(Ui.taskListMsg(taskList));
         }
     }
+
+    /**
+     * Generate the usage guide for this command.
+     *
+     * @return Returns the formatted String value for printing for the usage guide.
+     */
+    public static String usage() {
+        return """
+                To list all task(s), use the list command.
+                  Usage: list
+
+                """;
+    }
 }

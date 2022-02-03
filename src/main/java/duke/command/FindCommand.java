@@ -44,4 +44,17 @@ public class FindCommand extends Command {
             Ui.print(result.toString().trim());
         }
     }
+
+    /**
+     * Generate the usage guide for this command.
+     *
+     * @return Returns the formatted String value for printing for the usage guide.
+     */
+    public static String usage() {
+        return """
+                To find a task, use the find command.
+                  Usage: find <search term> | i.e. find homework\s
+
+                """;
+    }
 }

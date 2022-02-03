@@ -21,6 +21,19 @@ public class ExitCommand extends Command {
     }
 
     /**
+     * Generate the usage guide for this command.
+     *
+     * @return Returns the formatted String value for printing for the usage guide.
+     */
+    public static String usage() {
+        return """
+                To close the application, use the bye command.
+                  Usage: bye
+
+                """;
+    }
+
+    /**
      * This method is used to check if this command closes the Duke Application.
      *
      * @return This return true as this command closes the Duke application.

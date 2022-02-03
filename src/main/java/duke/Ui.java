@@ -1,9 +1,18 @@
 package duke;
 
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ui {
 
@@ -47,7 +56,10 @@ public class Ui {
      * Print welcome message.
      */
     public static void printWelcome() {
-        print("Hello! I'm DatoDato! Your personal helper bot. :) \n" + "What can I do for you?");
+        print("""
+                Hello! I'm DatoDato! Your personal helper bot. :)\s
+                (Hint: Type help and hit enter for assistance)\s
+                What can I do for you?""");
     }
 
     /**
@@ -55,6 +67,17 @@ public class Ui {
      */
     public static void printExit() {
         print("Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n" + "Hope to see you again soon!");
+    }
+
+    public static void printHelp() {
+        StringBuffer out = new StringBuffer("Hi below are the list of commands available in the current version. \n\n");
+        out.append(AddCommand.usage());
+        out.append(ListCommand.usage());
+        out.append(FindCommand.usage());
+        out.append(DoneCommand.usage());
+        out.append(DeleteCommand.usage());
+        out.append(ExitCommand.usage());
+        print(out.toString().trim());
     }
 
     /**
@@ -65,7 +88,7 @@ public class Ui {
      */
     public static String taskListMsg(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
-        StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
+        StringBuffer result = new StringBuffer("Here are the tasks in your list: \n\n");
         for (int i = 1; i <= tasks.size(); i++) {
             result.append(String.format("%d.%s", i, tasks.get(i - 1)));
             if (i != tasks.size()) {
