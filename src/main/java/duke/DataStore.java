@@ -24,6 +24,11 @@ public class DataStore {
      * @param tasks TaskList containing all tasks to be saved
      */
     public static void saveData(TaskList tasks) {
+        File folder = new File("data");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
         File csvFile = new File(PATH);
         try {
             if (!csvFile.isFile()) {

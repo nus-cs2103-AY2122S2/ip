@@ -109,11 +109,21 @@ public class Duke {
             output += (list.getLength());
             break;
         case DELETE:
-            indexOfList = Integer.parseInt(parsedInputs[0]);
-            output += "Noted. I've removed this task: \n";
-            output += (list.toString(indexOfList));
-            list.deleteTask(indexOfList);
-            output += ("Now you have " + list.getLength() + " tasks in the list.");
+            try {
+                indexOfList = Integer.parseInt(parsedInputs[0]);
+                String outputToAdd = "Noted. I've removed this task: \n";
+                outputToAdd += (list.toString(indexOfList));
+                list.deleteTask(indexOfList);
+                output += outputToAdd;
+                output += ("Now you have " + list.getLength() + " tasks in the list.");
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                output += "Integer required for Delete command";
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                output += "Integer provided is not in the list";
+            }
+
             break;
         case FIND:
             output += list.findTask(parsedInputs[0]);

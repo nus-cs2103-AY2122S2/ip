@@ -82,6 +82,11 @@ public class TaskList {
     @Override
     public String toString() {
         String description = "";
+
+        if (tasks.isEmpty()) {
+            return "You have no tasks";
+        }
+
         for (int i = 0; i < tasks.size(); i++) {
 
             description = description + (i + 1);
@@ -148,13 +153,18 @@ public class TaskList {
      */
     public String findTask(String search) {
         String output = "Here are the matching tasks in your list:\n";
+        int numOfTasks = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getDetails()[2].contains(search)) {
                 output = output + (i + 1);
                 output = output + ".";
                 output = output + task;
+                numOfTasks++;
             }
+        }
+        if (numOfTasks == 0) {
+            return "Sorry, there were no tasks that matched your search";
         }
         return output;
     }
