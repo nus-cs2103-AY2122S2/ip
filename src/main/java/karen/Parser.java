@@ -1,14 +1,22 @@
 package karen;
 
-import karen.command.*;
-import karen.task.Deadline;
-import karen.task.Event;
-import karen.task.ToDo;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import karen.command.AddCommand;
+import karen.command.ByeCommand;
+import karen.command.Command;
+import karen.command.DeleteCommand;
+import karen.command.FindCommand;
+import karen.command.InvalidCommand;
+import karen.command.ListCommand;
+import karen.command.ModifyCommand;
+import karen.command.ModifyType;
+import karen.task.Deadline;
+import karen.task.Event;
+import karen.task.ToDo;
 
 /**
  * Validates and parses arguments to create Command objects.
@@ -91,7 +99,7 @@ public class Parser {
             // indicates that the format isn't valid - can't parse it
             return prepareInvalid(keyWord, fullInput);
         } catch (KarenException err) {
-            return new InvalidCommand(err.message);
+            return new InvalidCommand(err.toString());
         }
     }
 
@@ -111,10 +119,10 @@ public class Parser {
         Command cmd;
         switch (keyWord) {
         case "mark":
-            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.MARK);
+            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index")) - 1, ModifyType.MARK);
             break;
         case "unmark":
-            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index"))-1, ModifyType.UNMARK);
+            cmd = new ModifyCommand(Integer.valueOf(matcher.group("index")) - 1, ModifyType.UNMARK);
             break;
         default:
             return new InvalidCommand("How did this even get here.");
@@ -136,7 +144,7 @@ public class Parser {
         }
 
         try {
-            return new DeleteCommand(Integer.valueOf(matcher.group("index"))-1);
+            return new DeleteCommand(Integer.valueOf(matcher.group("index")) - 1);
         } catch (IllegalStateException err) {
             return new InvalidCommand("Missing arguments for delete command");
         }

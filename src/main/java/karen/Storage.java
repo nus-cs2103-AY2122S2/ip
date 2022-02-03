@@ -1,13 +1,23 @@
 package karen;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import karen.task.Deadline;
 import karen.task.Event;
 import karen.task.Task;
 import karen.task.ToDo;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Loads, manages and subsequently saves the user's task list
@@ -20,8 +30,12 @@ public class Storage {
     public static final String ERR_FILE_MESSAGE = "Something went wrong with reading the previous session..";
 
     private ArrayList<Task> taskList;
-    public Ui ui;
+    private Ui ui;
 
+    /**
+     * Constructor for Storage object
+     * @param ui For parsing out messages related to the managing of Storage-related objects
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         this.taskList = this.loadTasks();
@@ -49,7 +63,7 @@ public class Storage {
             br = new BufferedReader(new InputStreamReader(in));
 
             String readLine;
-            while ((readLine=br.readLine()) != null) {
+            while ((readLine = br.readLine()) != null) {
                 String[] data = readLine.split("\\|");
                 Task item = this.createTask(data[0], Arrays.copyOfRange(data, 2, data.length));
                 if (Boolean.parseBoolean(data[1])) {
@@ -58,20 +72,17 @@ public class Storage {
                 taskList.add(item);
             }
             in.close();
-        }
-        catch (FileNotFoundException err) {
+        } catch (FileNotFoundException err) {
             this.ui.displayWarning(NO_FILE_MESSAGE);
             File dir = new File(DATA_DIR);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
             return taskList;
-        }
-        catch (IOException err) {
+        } catch (IOException err) {
             this.ui.displayWarning(ERR_FILE_MESSAGE);
             return taskList;
-        }
-        finally {
+        } finally {
             try {
                 br.close();
             } catch (Exception err) {
@@ -98,19 +109,15 @@ public class Storage {
             OutputStreamWriter out = new OutputStreamWriter(writeStream);
             writer = new BufferedWriter(out);
             writer.write(data);
-        }
-        catch (FileNotFoundException err) {
+        } catch (FileNotFoundException err) {
             this.ui.displayWarning(
-                    String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
-        }
-        catch (IOException err) {
+                    String.format("Improper access for file writing.\n\tCheck if %s exists.", DATA_DIR));
+        } catch (IOException err) {
             this.ui.displayWarning("Something went wrong with writing to file");
-        }
-        finally {
+        } finally {
             try {
                 writer.close();
-            }
-            catch (Exception err) {
+            } catch (Exception err) {
                 // do nothing
             }
         }

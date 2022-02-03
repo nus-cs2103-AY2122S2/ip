@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import javafx.util.Duration;
 import karen.Karen;
 import karen.Ui;
@@ -44,6 +43,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets Karen object
+     * @param karen Karen object associated with MainWindow used in GUI
+     */
     public void setKaren(Karen karen) {
         this.karen = karen;
     }

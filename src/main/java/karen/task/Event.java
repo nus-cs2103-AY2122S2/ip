@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Stores the (/at) date in which the Event occurs at
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate at;
 
     public Event(String description, String at) {
@@ -16,7 +16,7 @@ public class Event extends Task{
 
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", this.isDone, this.description, this.at);
+        return String.format("E|%s|%s|%s", this.isDone, this.getDescription(), this.at);
     }
 
     @Override

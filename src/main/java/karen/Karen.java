@@ -10,6 +10,9 @@ public class Karen {
     private Parser parser;
     private Storage storage;
 
+    /**
+     * Constructor for creating Karen
+     */
     public Karen() {
         this.ui = new Ui();
         this.parser = new Parser();

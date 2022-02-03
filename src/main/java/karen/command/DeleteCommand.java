@@ -2,8 +2,8 @@ package karen.command;
 
 import karen.KarenException;
 import karen.Storage;
-import karen.task.Task;
 import karen.Ui;
+import karen.task.Task;
 
 /**
  * To delete Task object from Storage.
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             return ui.displayUserInput(ui.formatCount("removed", item, storage.getTaskCount()));
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
-                    String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex+1));
+                    String.format("Are you sure that [%d] is even in the 'list' command?", this.taskIndex + 1));
         }
 
     }

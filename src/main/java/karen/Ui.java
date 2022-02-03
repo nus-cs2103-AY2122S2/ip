@@ -1,11 +1,8 @@
 package karen;
 
-import karen.task.Task;
-
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import karen.task.Task;
 
 /**
  * Handles receiving and formatting of input and output

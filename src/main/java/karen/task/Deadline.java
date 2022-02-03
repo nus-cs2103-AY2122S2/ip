@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Stores the (/by) date in which the Deadline occurs by
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate by;
     public Deadline(String description, String by) {
         super(description);
@@ -15,7 +15,7 @@ public class Deadline extends Task{
 
     @Override
     public String toSaveData() {
-        return String.format("D|%s|%s|%s", this.isDone, this.description, this.by);
+        return String.format("D|%s|%s|%s", this.isDone, this.getDescription(), this.by);
     }
 
     @Override

@@ -1,19 +1,18 @@
 package karen;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import karen.gui.MainWindow;
 
-import java.io.IOException;
 
 public class Main extends Application {
     public static final String USER_IMAGE_PATH = "/images/DaUser.png";
@@ -38,6 +37,8 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            stage.setTitle("Karen");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setKaren(this.karen);
             stage.show();

@@ -10,9 +10,9 @@ public class InvalidCommandTest {
     @Test
     public void constructorOverload() {
         assertEquals("I don't understand anything - I want to speak with your manager",
-                new InvalidCommand().message);
+                new InvalidCommand().getMessage());
         assertEquals("Override message",
-                new InvalidCommand("Override message").message);
+                new InvalidCommand("Override message").getMessage());
     }
 
     @Test

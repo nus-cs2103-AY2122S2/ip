@@ -1,8 +1,8 @@
 package karen.command;
 
 import karen.Storage;
-import karen.task.Task;
 import karen.Ui;
+import karen.task.Task;
 
 /**
  * To add Task objects into Storage.

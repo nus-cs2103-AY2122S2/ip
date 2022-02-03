@@ -1,13 +1,13 @@
 package karen.command;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import karen.KarenException;
 import karen.Storage;
 import karen.Ui;
 import karen.task.Task;
-
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * To search Task's descriptions to match with a given keyword.
