@@ -126,7 +126,7 @@ public class Ui {
      */
     public void showFindResult(ArrayList<Task> relevantTasks) {
         if (relevantTasks.isEmpty()) {
-            System.out.println("There are no matching tasks （・⊝・）");
+            System.out.println("There are no matching tasks (・_・)");
         } else {
             System.out.println("Here are the matching tasks in the list (｡◕‿◕｡) :");
             int counter = 1;
