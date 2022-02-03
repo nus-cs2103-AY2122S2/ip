@@ -19,159 +19,168 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from the list.
+     * Deletes task from the list and returns
+     * a string indicating that the task is deleted.
      *
      * @param index the position of the task.
-     * @throws DukeException if position of the task exceeds what we have on the list.
+     * @return a string indicating that the task is deleted
      */
-    public void deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
+            return "Opps!!! I'm sorry, can't find task";
         } else {
             Task task = list.remove(index);
-            System.out.println("NOTED. I'VE REMOVED THIS TASK:");
-            System.out.println(task);
-            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
+            return "Noted. I've removed this task:\n"
+                    + task + "\n"
+                    + "Now you have " + list.size() + " tasks in the list";
         }
     }
 
     /**
-     * Adds to do task into our current list.
+     * Adds to do task into our current list and returns
+     * a string indicating that the task is added.
      *
-     * @param desc the task description entered by the user
-     * @throws DukeException if task description is empty.
+     * @param desc the task description entered by the user.
+     * @return a string indicating that the task is added.
      */
-    public void addToDo(String desc, boolean done) throws DukeException {
+    public String addToDo(String desc, boolean done) {
         if (desc == null) {
-            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+            return "Please include task description in your command.";
         }
         Task newTask = new ToDo(desc, done);
         list.add(newTask);
-        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask);
-        System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
+        return "Got it. I've added this task:\n"
+                + newTask + "\n"
+                + "Now you have " + list.size() + " tasks in the list.";
     }
 
     /**
-     * Adds deadline task into our current list.
+     * Adds deadline task into our current list and returns
+     * a string indicating that the task is added.
      *
      * @param desc the task description entered by the user.
      * @param date the date entered by the user.
      * @param done the current status of the task
-     * @throws DukeException if task description or date is empty.
+     * @return a string indicating that the task is added.
      */
-    public void addDeadline(String desc, String date, boolean done) throws DukeException {
+    public String addDeadline(String desc, String date, boolean done) {
         if (desc == null) {
-            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+            return "Please include task description in your command.";
         }
         if (date == null) {
-            throw new DukeException("PLEASE INCLUDE THE DATE IN YOUR COMMAND.");
+            return "Please include the date in your command.";
         }
         try {
             LocalDate date2 = LocalDate.parse(date);
             Task newTask = new Deadline(desc, date2, done);
             list.add(newTask);
-            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-            System.out.println(newTask);
-            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
+            return "Got it. I've added this task:\n"
+                    + newTask + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.";
         } catch (DateTimeParseException ex) {
-            throw new DukeException("INVALID DATE FORMAT.");
+            return "Invalid date format";
         }
     }
 
     /**
-     * Adds event task into our current list.
+     * Adds event task into our current list and returns
+     * a string indicating that the task is added.
      *
      * @param desc the task description entered by the user.
      * @param date the date entered by the user.
      * @param done the current status of the task
-     * @throws DukeException if task description or date is empty.
+     * @return a string indicating that the task is added.
      */
-    public void addEvent(String desc, String date, boolean done) throws DukeException {
+    public String addEvent(String desc, String date, boolean done) {
         if (desc == null) {
-            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+            return "Please include task description in your command.";
         }
         if (date == null) {
-            throw new DukeException("PLEASE INCLUDE THE DATE IN YOUR COMMAND.");
+            return "Please include the date in your command.";
         }
         try {
             LocalDate date2 = LocalDate.parse(date);
             Task newTask = new Event(desc, date2, done);
             list.add(newTask);
-            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-            System.out.println(newTask);
-            System.out.println("NOW YOU HAVE " + list.size() + " TASKS IN THE LIST.");
+            return "Got it. I've added this task:\n"
+                    + newTask + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.";
         } catch (DateTimeParseException ex) {
-            throw new DukeException("INVALID DATE FORMAT.");
+            return "Invalid date format";
         }
     }
 
     /**
-     * Prints out all the tasks in the list.
+     * Returns a string containing all the tasks in the list.
      */
-    public void listTask() {
+    public String listTask() {
         int num = 1;
-        System.out.println("HERE ARE THE TASKS IN YOUR LIST:");
+        String str = "Here are the tasks in your list:\n";
         for (Task task: list) {
-            System.out.println(num + "." + task);
+            str += num + "." + task + "\n";
             num++;
         }
+        return str;
     }
 
     /**
-     * Changes the completion status of the task
+     * Changes the completion status of the task and returns
+     * a string indicating that the task is marked
      *
      * @param index position of the task in the list
-     * @throws DukeException if position of the task exceeds what we have on the list
+     * @return string indicating that the task is marked
      */
-    public void markTask(int index) throws DukeException {
+    public String markTask(int index) {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
+            return "Opps!!! I'm sorry, can't find task";
         } else {
             Task task = list.get(index);
             task.setAsDone();
-            System.out.println("NICE! I'VE MARKED THIS TASK AS DONE:");
-            System.out.println(task);
+            return "Nice! I've marked this task as done\n"
+                    + task;
         }
     }
 
     /**
-     * Changes the completion status of the task
+     * Changes the completion status of the task and returns
+     * a string indicating that the task is marked
      *
      * @param index position of the task in the list
-     * @throws DukeException if position of the task exceeds what we have on the list
+     * @return string indicating that the task is marked
      */
-    public void unMarkTask(int index) throws DukeException {
+    public String unMarkTask(int index) {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
+            return "Opps!!! I'm sorry, can't find task";
         } else {
             Task task = list.get(index);
             task.setAsNotDone();
-            System.out.println("OKAY! I'VE MARKED THIS TASK AS NOT DONE:");
-            System.out.println(task);
+            return "Nice! I've marked this task as not done\n"
+                    + task;
         }
     }
 
     /**
-     * Finds a list of tasks with a keyword specified by the user.
+     * Returns a list of tasks with a keyword specified by the user.
      *
      * @param taskName the keyword entered by the user.
+     * @return a string that indicate matches found.
      */
-    public void findTask(String taskName) {
+    public String findTask(String taskName) {
         int num = 1;
         int matchNum = 0;
-        System.out.println("HERE ARE THE MATCHING TASKS IN YOUR LIST:");
+        String str = "Here are the matching tasks in your list:\n";
         for (Task task : list) {
-            String str = task.getDesc();
+            String temp = task.getDesc();
             if (taskName == null) {
                 break;
-            } else if (str.contains(taskName)) {
-                System.out.println(num + "." + task);
+            } else if (temp.contains(taskName)) {
+                str += num + ". " + task + "\n";
                 matchNum++;
             }
             num++;
         }
-        System.out.println("MATCH FOUND: " + matchNum);
+        str += "Match Found: " + matchNum;
+        return str;
     }
 
     /**

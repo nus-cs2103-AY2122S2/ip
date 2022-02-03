@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 import java.io.IOException;
 
 /**
@@ -9,31 +11,43 @@ import java.io.IOException;
  */
 public class Duke {
 
-    /**
-     * Executes main method
-     * @param args argument
-     * @throws IOException ioexception
-     * @throws DukeException exception for duke program
-     */
-    public static void main(String[] args) throws IOException, DukeException {
-        // Start Message
-        Ui.startMessage();
+    private TaskList list = new TaskList();
+    public Duke() throws IOException, DukeException {
+        list = Storage.loadFile();
+    }
 
-        // Load file data into task list
-        TaskList list = new TaskList();
-        try {
-            list = Storage.loadFile();
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
+    public String getResponse(String input) throws IOException {
+        String str = "";
+        Parser parse = new Parser(input);
+        if (parse.getCmd().equals("?")) {
+            str = Ui.getHelp();
+        } else if (parse.getCmd().equals("mark")) {
+            int index = Integer.parseInt(parse.getDesc()) - 1;
+            str = list.markTask(index);
+        } else if (parse.getCmd().equals("unmark")) {
+            int index = Integer.parseInt(parse.getDesc()) - 1;
+            str = list.unMarkTask(index);
+        } else if (parse.getCmd().equals("list")) {
+            str = list.listTask();
+        } else if (parse.getCmd().equals("todo")) {
+            str = list.addToDo(parse.getDesc(), false);
+        } else if (parse.getCmd().equals("deadline")) {
+            str = list.addDeadline(parse.getDesc(), parse.getDate(), false);
+        } else if (parse.getCmd().equals("event")) {
+            str = list.addEvent(parse.getDesc(), parse.getDate(), false);
+        } else if (parse.getCmd().equals("delete")) {
+            int index = Integer.parseInt(parse.getDesc()) - 1;
+            str = list.deleteTask(index);
+        } else if (parse.getCmd().equals("find")) {
+            str = list.findTask(parse.getDesc());
+        } else if (parse.getCmd().equals("bye")) {
+            str = "Bye. See you again!";
+            Storage.writeFile(list);
+            Platform.exit();
+        } else {
+            str = "Opps!! The command doesn't exist. Please try again.";
         }
-
-        // Deal with user inputs
-        try {
-            Ui.allowUserInput(list);
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
-        }
-
+        return str;
     }
 
 }
