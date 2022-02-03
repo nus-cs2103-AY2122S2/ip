@@ -1,4 +1,0 @@
-T |   | hello sir
-D |   | hello sir | 2012-05-03
-T |   | hello sir
-T |   | hello sir
