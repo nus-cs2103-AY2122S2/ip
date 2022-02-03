@@ -58,15 +58,16 @@ public class Ui {
     }
 
     /**
-     * Combines groups of 5 strings in the list of strings into one string, then returns these strings.
+     * Combines groups of 3 strings in the list of strings into one string, then returns these strings.
      * @param listStrings The list of strings.
-     * @return The list of strings after combining groups of 5 strings into one string.
+     * @return The list of strings after combining groups of 3 strings into one string.
      */
     public ArrayList<String> printListStrings(ArrayList<String> listStrings) {
+        int group = 3;
         ArrayList<String> newListStrings = new ArrayList<>();
-        for (int i = 0; i < listStrings.size(); i += 5) {
+        for (int i = 0; i < listStrings.size(); i += group) {
             StringBuilder sb = new StringBuilder();
-            for (int j = i; j < listStrings.size() && j < i + 5; j++) {
+            for (int j = i; j < listStrings.size() && j < i + group; j++) {
                 sb.append(listStrings.get(j));
                 sb.append("\n");
             }

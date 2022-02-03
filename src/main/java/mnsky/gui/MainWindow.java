@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import mnsky.core.Mnsky;
 
 /**
@@ -28,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Mnsky mnsky;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image mnskyImage = new Image(this.getClass().getResourceAsStream("/images/mnsky.png"));
 
     /**
      * Initializes the scroll pane to connect it to the height of the dialog container.
@@ -36,6 +37,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setFont(Font.font(20));
+        sendButton.setFont(Font.font(20));
     }
 
     /**
@@ -60,7 +63,7 @@ public class MainWindow extends AnchorPane {
             if (response.equals("bye")) {
                 Platform.exit();
             }
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, mnskyImage));
         }
 
         userInput.clear();
