@@ -9,11 +9,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-}
-
 test {
     useJUnitPlatform()
 
@@ -28,12 +23,17 @@ test {
     }
 }
 
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+}
+
 application {
     mainClassName = "seedu.duke.Duke"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Pyke"
     archiveClassifier = null
 }
 
