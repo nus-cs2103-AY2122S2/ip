@@ -1,7 +1,6 @@
 package duke.managers;
 
 import duke.commands.*;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +10,15 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_valid_success() {
         Parser parser = new Parser();
+        parser.addCommand(new DeleteCommand());
+        parser.addCommand(new ExitCommand());
+        parser.addCommand(new FindCommand());
+        parser.addCommand(new ListCommand());
+        parser.addCommand(new MarkCommand(true));
+        parser.addCommand(new MarkCommand(false));
+        parser.addCommand(new StoreDeadlineCommand());
+        parser.addCommand(new StoreEventCommand());
+        parser.addCommand(new StoreTodoCommand());
 
         try {
             //test case 1
@@ -47,6 +55,7 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_unrecognizedCommand_error() {
         Parser parser = new Parser();
+
         try {
             parser.parse("abcd");
             System.out.println("Exception missed! Test failed");
@@ -58,6 +67,8 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_invalidDelete_error() {
         Parser parser = new Parser();
+        parser.addCommand(new DeleteCommand());
+
         try {
             parser.parse("delete a");
         } catch (Exception e) {
@@ -68,6 +79,8 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_invalidMark_error() {
         Parser parser = new Parser();
+        parser.addCommand(new MarkCommand(true));
+
         try {
             parser.parse("mark b");
         } catch (Exception e) {
@@ -78,6 +91,8 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_invalidUnmark_error() {
         Parser parser = new Parser();
+        parser.addCommand(new MarkCommand(false));
+
         try {
             parser.parse("unmark b");
         } catch (Exception e) {
@@ -88,6 +103,8 @@ public class ParserTest {
     @Test
     public void handleCommandFeedback_invalidFind_error() {
         Parser parser = new Parser();
+        parser.addCommand(new FindCommand());
+
         try {
             parser.parse("find");
         } catch (Exception e) {
