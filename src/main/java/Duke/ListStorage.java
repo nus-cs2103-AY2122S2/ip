@@ -5,8 +5,9 @@ import java.util.List;
 
 public class ListStorage {
     /** Single List to store Tasks */
-    public List<Task> myTasks;
-    String SPACING = "    ";
+    private List<Task> myTasks;
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final String SPACING = "    ";
 
     /**
      * Constructor for ListStorage
@@ -25,12 +26,19 @@ public class ListStorage {
     }
 
     /**
+     * Returns list of tasks.
+     * @return List of tasks.
+     */
+    public List<Task> getMyTasks() {
+        return this.myTasks;
+    }
+    /**
      * Adds a Task to storage.
      *
      * @param task task to be added.
      * @return message to indicate success.
      */
-    public String addToList(Task task){
+    public String addToList(Task task) {
         myTasks.add(task);
         return "added: " + task.description;
     }
@@ -40,7 +48,7 @@ public class ListStorage {
      *
      * @return list of tasks in storage.
      */
-    public String printList(){
+    public String printList() {
         int i = 1;
         StringBuilder toPrint = new StringBuilder();
         for (Task item : myTasks) {

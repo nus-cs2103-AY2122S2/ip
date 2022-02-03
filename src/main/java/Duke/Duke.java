@@ -12,12 +12,12 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    static ListStorage myListStorage = new ListStorage();
-    static Printer myPrinter = new Printer();
-    static Disk myDisk;
+    private static final ListStorage myListStorage = new ListStorage();
+    private static final Printer myPrinter = new Printer();
+    private static Disk myDisk;
 
-    /*
-     * Empty constructor for Duke
+    /**
+     * Empty contructor for Duke
      */
     public Duke() {
         myDisk = new Disk("src/main/java/data/savedTasks.txt", myListStorage);
@@ -46,13 +46,13 @@ public class Duke {
         new Duke("src/main/java/data/savedTasks.txt").dukeRunner();
     }
 
-    /*
+    /**
      * Runner method for Duke
      */
     public void dukeRunner() {
         myPrinter.printGreeting();
-        while(true){
-            try{
+        while (true) {
+            try {
                 parseCommand();
                 break;
             } catch (WrongCommandException e) {
@@ -71,9 +71,9 @@ public class Duke {
         Scanner myScanner = new Scanner(System.in);
         Commands commands = new Commands(myListStorage, myPrinter);
 
-        while(myScanner.hasNextLine()) {
+        while (myScanner.hasNextLine()) {
             String cmd = myScanner.nextLine();
-            try{
+            try {
                 if (cmd.equals("bye")) {
                     commands.cmdBye();
                     myDisk.saveToDisk();

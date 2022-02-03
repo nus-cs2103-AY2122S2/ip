@@ -26,7 +26,7 @@ public class Task {
     /**
      * Marks task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -52,7 +52,7 @@ public class Task {
      * @return description of task with status icon.
      */
     public String toString() {
-        return "[" +getStatusIcon()+ "] " + this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
 }

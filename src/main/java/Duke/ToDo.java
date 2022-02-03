@@ -12,7 +12,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a descipriton of Todo.
+     * Returns a description of Todo.
      *
      * @return description of ToDo with status icon.
      */

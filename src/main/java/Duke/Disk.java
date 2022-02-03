@@ -28,17 +28,17 @@ public class Disk {
      * file path.
      */
     public void saveToDisk() {
-        try{
+        try {
             BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
             String tasks = "";
-            for (Task task : this.myStorage.myTasks) {
+            for (Task task : this.myStorage.getMyTasks()) {
                 if (task instanceof Event) {
                     Event currEvent = (Event) task;
                     tasks += 'E' + "," + task.isDone() + "," + task.description + "," + currEvent.at + '\n';
                 } else if (task instanceof Deadline) {
                     Deadline currDeadline = (Deadline) task;
-                    tasks += 'D' + "," + task.isDone() + "," + task.description +  "," + currDeadline.by + '\n';
-                } else if (task instanceof ToDo){
+                    tasks += 'D' + "," + task.isDone() + "," + task.description + "," + currDeadline.by + '\n';
+                } else if (task instanceof ToDo) {
                     tasks += 'T' + "," + task.isDone() + "," + task.description + '\n';
                 }
             }
@@ -75,7 +75,7 @@ public class Disk {
             case "E":
                 currTask = new Event(separator[2], separator[3]);
             }
-            if(separator[1].equals("1")) {
+            if (separator[1].equals("1")) {
                 assert currTask != null;
                 currTask.markAsDone();
             }

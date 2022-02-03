@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * @return True if Deadline has LocalTime, else false.
      */
     public boolean hasTime() {
-       return this.localTime != null;
+        return this.localTime != null;
     }
 
     /**
@@ -51,6 +51,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dTF.format(atLocalDate) + (hasTime() ? ", " + localTime.toString() + ")" : ")");
+        return "[D]"
+                + super.toString()
+                + " (by: " + dTF.format(atLocalDate)
+                + (hasTime() ? ", " + localTime.toString() + ")" : ")");
     }
 }

@@ -1,13 +1,14 @@
 package Duke;
 
 public class Printer {
-    private static final String BORDER = "    ____________________________________________________________\n";
-    private static final String SPACING = "    ";
     public static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"
                                     + "| | | | | | | |/ / _ \\\n"
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String BORDER = "    ____________________________________________________________\n";
+    private static final String SPACING = "    ";
+
 
     /**
      * Prints default greeting from Duke.
@@ -15,10 +16,10 @@ public class Printer {
     public void printGreeting() {
         System.out.println("Hello from\n" + LOGO);
 
-        System.out.println(BORDER + SPACING +
-                "Hello! I'm Duke\n" + SPACING +
-                "What can I do for you?\n" +
-                BORDER);
+        System.out.println(BORDER + SPACING
+                + "Hello! I'm Duke\n" + SPACING
+                + "What can I do for you?\n"
+                + BORDER);
     }
 
     /**
@@ -34,7 +35,7 @@ public class Printer {
      * @param task Task added to storage.
      * @param numberOfTasks Number of Tasks in storage.
      */
-    public void  printTask(Task task, int numberOfTasks) {
+    public void printTask(Task task, int numberOfTasks) {
         System.out.println(BORDER
                 + SPACING
                 + "Got it. I've added this task:\n"

@@ -51,7 +51,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dTF.format(atLocalDate) + (hasTime() ? ", " + localTime.toString() + ")" : ")");
+        return "[E]"
+                + super.toString()
+                + " (at: " + dTF.format(atLocalDate)
+                + (hasTime() ? ", " + localTime.toString() + ")" : ")");
     }
 }
 //testing

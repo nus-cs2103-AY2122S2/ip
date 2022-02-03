@@ -82,8 +82,8 @@ public class Commands {
      * @throws EmptyMessageException Thrown when there is no description.
      * @throws WrongDateFormatException Thwon when date format is wrong.
      */
-    public void cmdEvent(String cmd) throws EmptyMessageException, WrongDateFormatException{
-        if(cmd.length() == 5) {
+    public void cmdEvent(String cmd) throws EmptyMessageException, WrongDateFormatException {
+        if (cmd.length() == 5) {
             throw new EmptyMessageException("Event Error");
         }
         String[] parsedCmd = Parser.parseCmdAndDes(cmd);
@@ -158,7 +158,7 @@ public class Commands {
         String[] keyword = Parser.parseCmdAndDes(cmd);
         ListStorage tempStorage = new ListStorage();
         for (int i = 1; i <= myStorage.length(); i++) {
-            if(myStorage.findTask(i).description.contains(keyword[1])) {
+            if (myStorage.findTask(i).description.contains(keyword[1])) {
                 tempStorage.addToList(myStorage.findTask(i));
             }
         }
