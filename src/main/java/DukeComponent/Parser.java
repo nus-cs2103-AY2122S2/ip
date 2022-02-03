@@ -29,9 +29,9 @@ public class Parser {
      * Execute the command for tasks.
      * @param tasks Pass the TaskList into {@link DukeComponent.Command} class for manipulation.
      */
-    public void executeCommand(TaskList tasks) {
+    public String executeCommand(TaskList tasks) {
         Command c = new Command(input, tasks);
-        c.execute();
+        return c.execute();
     }
 
     /**

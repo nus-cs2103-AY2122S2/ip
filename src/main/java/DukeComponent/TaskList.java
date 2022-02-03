@@ -58,14 +58,16 @@ public class TaskList implements Iterable<Tasks> {
      * Prints out a list of Task in that TaskList that matches the description.
      * @param description  Description of the Task.
      */
-    public void find(String description) {
+    public String find(String description) {
         int count = 1;
+        StringBuilder res = new StringBuilder();
         for (Tasks t : ls) {
             if (t.getTask().contains(description)) {
-                System.out.println(count + "." + t);
+                res.append(count).append(".").append(t).append("\n");
                 count++;
             }
         }
+        return res.toString();
     }
 
     /**

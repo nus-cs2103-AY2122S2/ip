@@ -36,20 +36,12 @@ public class Duke {
     /**
      * Run Duke program.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.run(sc, tasks, storage);
+    public String initUi() {
+        return ui.initUi();
     }
 
-    /**
-     * Driver method for duke.
-     * @param args CLI input for Main.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return ui.run(tasks, storage, input);
     }
 }

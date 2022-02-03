@@ -29,7 +29,7 @@ public class Command {
     /**
      * Execution of command logic in Duke.
      */
-    public void execute() {
+    public String execute() {
         String[] wordSplit = userInput.split(" ");
         String action = wordSplit[0];
         String[] split = userInput.split("/");
@@ -38,35 +38,25 @@ public class Command {
         String task = end == -1 ? "" : userInput.substring(start, end - 1);
         String details = split.length > 1 ? split[1].substring(3) : "";
 
-        if (userInput.equals("bye")) {
-            sayBye();
-            return;
-        }
-
         switch (action) {
         case "list":
-            printList();
-            break;
+            return printList();
         case "mark":
-            mark(Integer.parseInt(wordSplit[1]) - 1);
-            break;
+            return mark(Integer.parseInt(wordSplit[1]) - 1);
         case "unmark":
-            unmark(Integer.parseInt(wordSplit[1]) - 1);
-            break;
+            return unmark(Integer.parseInt(wordSplit[1]) - 1);
         case "todo":
-            addTask(new ToDos(userInput.substring(start), false));
-            break;
+            return addTask(new ToDos(userInput.substring(start), false));
         case "deadline":
-            addTask(new DeadLines(task, false, details));
-            break;
+            return addTask(new DeadLines(task, false, details));
         case "event":
-            addTask(new Events(task, false, details));
-            break;
+            return addTask(new Events(task, false, details));
         case "delete":
-            deleteTask(Integer.parseInt(wordSplit[1]) - 1);
-            break;
+            return deleteTask(Integer.parseInt(wordSplit[1]) - 1);
         case "find":
-            find(userInput.substring(5));
+            return find(userInput.substring(5));
+        default:
+            return sayBye();
         }
     }
 
@@ -74,9 +64,10 @@ public class Command {
      * Finds Task that matches that description from the TaskList.
      * @param description Description to be used for matching.
      */
-    private void find(String description) {
-        System.out.println("Here are the matching task in your list: ");
-        tasks.find(description);
+    private String find(String description) {
+        String s = "Here are the matching task in your list: ";
+        return s + "\n" + tasks.find(description);
+
     }
 
 
@@ -84,63 +75,63 @@ public class Command {
      * Deletes the task in the TaskList.
      * @param i 0-based index for deletion of Task in the TaskList.
      */
-    private void deleteTask(int i) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.remove(i));
-        String s = String.format("Now you have %d tasks in the list.", tasks.size());
-        System.out.println(s);
+    private String deleteTask(int i) {
+        String s = "Noted. I've removed this task:" + "\n" + tasks.remove(i);
+        String res = String.format("Now you have %d tasks in the list.", tasks.size());
+        return s + "\n" + res;
     }
 
     /**
      * Marks the task in the TaskList.
      * @param i 0-based index for users to mark the Task in the TaskList.
      */
-    private void mark(int i) {
-        System.out.println("Nice! I've marked this task as done:");
+    private String mark(int i) {
+        String s = "Nice! I've marked this task as done:";
         Tasks t = tasks.get(i);
         t.setMarked(true);
-        System.out.println(t);
+        return s + "\n" + t;
     }
 
     /**
      * Un-marks the task in the TaskList.
      * @param i  0-based index for users to unmark the task in the TaskList.
      */
-    private void unmark(int i) {
-        System.out.println("OK, I've marked this task as not done yet:");
+    private String unmark(int i) {
+        String s = "OK, I've marked this task as not done yet:";
         Tasks t = tasks.get(i);
         t.setMarked(false);
-        System.out.println(t);
+        return s + "\n" + t;
     }
 
     /**
      * Adds task to the TaskList.
      * @param t Task to be added.
      */
-    private void addTask(Tasks t) {
+    private String addTask(Tasks t) {
         tasks.add(t);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + t);
-        String s = String.format("Now you have %d tasks in the list.", tasks.size());
-        System.out.println(s);
+        String s = "Got it. I've added this task:" + "\n" +  " " + t;
+        String res = String.format("Now you have %d tasks in the list.", tasks.size());
+        return s + "\n" + res;
     }
 
     /**
      * Prints the TaskList in the Ui.
      */
-    private void printList() {
-        System.out.println("Here are the tasks in your list:");
+    private String printList() {
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             String num = String.format("%d. ", i + 1);
-            System.out.println(num + tasks.get(i).toString());
+            String res = num + tasks.get(i).toString();
+            result.append("\n").append(res);
         }
+        return result.toString();
     }
 
     /**
      * Prints the bye Ui for the user.
      */
-    private void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    private String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }
