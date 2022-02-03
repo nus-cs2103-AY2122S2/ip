@@ -74,14 +74,24 @@ public class Parser {
             return new AddCommand(new Deadline(temp2, dateTime));
         } else if(temp[0].equals("bye")) {
             return new ExitCommand();
-        } else if(temp[0].equals("done")) {
+        } else if(temp[0].equals("mark")) {
+            if(temp.length > 2) {
+                throw new Exception_handler("Invalid index");
+            }
             return new DoneCommand(Integer.parseInt(temp[1]) - 1);
         } else if(temp[0].equals("list")) {
             return new ListCommand();
         } else if(temp[0].equals("delete")) {
+            if (temp.length>2) {
+                throw new Exception_handler("Invalid index");
+            }
             return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
-        }
-        else {
+        } else if (temp[0].equals("find")) {
+            if(temp.length > 2) {
+                throw new Exception_handler("Invalid keyword");
+            }
+            return new FindCommand(temp[1]);
+        } else {
             throw new Exception_handler("I'm sorry, but I don't know what that means :-(");
         }
     }
