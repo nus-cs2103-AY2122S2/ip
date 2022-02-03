@@ -1,6 +1,8 @@
 package duke.managers;
 
-import duke.external.FastIO;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Represents the manager that deals with user interaction.
@@ -8,13 +10,14 @@ import duke.external.FastIO;
  */
 public class Ui {
 
-    protected FastIO io;
+    private BufferedReader br;
 
     /**
      * Creates an instance of Ui.
      */
     public Ui() {
-        io = new FastIO();
+        br = new BufferedReader(new
+                InputStreamReader(System.in));
     }
 
     /**
@@ -23,7 +26,13 @@ public class Ui {
      * @return a String which represents the line input by the user.
      */
     public String getInput() {
-        return io.nextLine();
+        String line = "";
+        try {
+            line = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return line;
     }
 
     /**
@@ -39,8 +48,8 @@ public class Ui {
      * Prints a greeting message to the user.
      */
     public void greet() {
-        echo("Hello! I'm Duke\n" +
-                "     What can I do for you?");
+        echo("Hello! I'm Duke\n"
+                + "     What can I do for you?");
     }
 
     /**
@@ -66,7 +75,11 @@ public class Ui {
      * program execution.
      */
     public void close() {
-        io.close();
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

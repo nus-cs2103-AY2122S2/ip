@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
 import duke.exceptions.DukeException;
 
 /**
@@ -45,9 +46,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (hasTime) {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                    + time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 
@@ -62,7 +66,7 @@ public class Deadline extends Task {
     protected static Deadline createTask(String[] tokens) throws DukeException {
         String item = "";
         int idx = 0;
-        for (;idx < tokens.length; idx++) {
+        for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("deadline")) {
                 continue;
             } else if (tokens[idx].equals("/by")) {
@@ -73,8 +77,9 @@ public class Deadline extends Task {
         }
 
 
-        if (item.equals(""))
+        if (item.equals("")) {
             throw new DukeException("The description of a deadline task cannot be empty!");
+        }
 
         LocalDate date;
         LocalTime time;
@@ -86,9 +91,9 @@ public class Deadline extends Task {
             throw new DukeException("Please specify a valid date!");
         }
 
-        if (idx == tokens.length)
+        if (idx == tokens.length) {
             return new Deadline(item.trim(), date);
-        else {
+        } else {
             try {
                 time = LocalTime.parse(tokens[idx]);
                 return new Deadline(item.trim(), date, time);

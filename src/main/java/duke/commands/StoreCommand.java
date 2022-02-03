@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.tasks.TaskList;
-import duke.managers.Ui;
 import duke.managers.Storage;
+import duke.managers.Ui;
+import duke.tasks.TaskList;
 
 /**
  * Represents a generic store command recognized by the parser.

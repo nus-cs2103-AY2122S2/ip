@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
-import duke.managers.Ui;
-import duke.managers.Storage;
-
 import java.util.ArrayList;
+
+import duke.managers.Storage;
+import duke.managers.Ui;
+import duke.tasks.TaskList;
 
 /**
  * Represents a list command recognized by the parser.

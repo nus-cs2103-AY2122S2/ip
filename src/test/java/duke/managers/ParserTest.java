@@ -1,10 +1,21 @@
 package duke.managers;
 
-import duke.commands.*;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.StoreDeadlineCommand;
+import duke.commands.StoreEventCommand;
+import duke.commands.StoreTodoCommand;
+
+
+
 
 public class ParserTest {
     @Test
@@ -84,7 +95,8 @@ public class ParserTest {
         try {
             parser.parse("mark b");
         } catch (Exception e) {
-            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number of the task you want to mark/unmark.");
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number "
+                    + "of the task you want to mark/unmark.");
         }
     }
 
@@ -96,7 +108,8 @@ public class ParserTest {
         try {
             parser.parse("unmark b");
         } catch (Exception e) {
-            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number of the task you want to mark/unmark.");
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number"
+                    + " of the task you want to mark/unmark.");
         }
     }
 
