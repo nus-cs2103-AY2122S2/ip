@@ -13,6 +13,8 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
+     * Creates a Deadline object which has date and time included.
+     *
      * @param isDone Whether the task is done.
      * @param description Description of the task.
      * @param by Format: "yyyy-mm-dd hh:mm" or "dd/mm/yyyy hh:mm" (24h time).
@@ -25,6 +27,8 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates a Deadline object which has date and time included.
+     *
      * @param description Description of the task.
      * @param by Format: "yyyy-mm-dd hh:mm" or "dd/mm/yyyy hh:mm" (24h time).
      * @throws DateTimeParseException  If by is wrongly formatted.

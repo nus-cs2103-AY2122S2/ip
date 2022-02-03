@@ -9,7 +9,10 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import batman.tasks.Deadline;
+import batman.tasks.Event;
 import batman.tasks.Task;
+import batman.tasks.Todo;
 
 public class Storage {
 
@@ -56,7 +59,25 @@ public class Storage {
         }
     }
 
-    public List<String> load() throws IOException {
-        return Files.readAllLines(path);
+    /**
+     * Returns tasks from specified file.
+     */
+    public ArrayList<Task> load() throws IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        List<String> lines = Files.readAllLines(path);
+        for (String line : lines) {
+            String[] item = line.split("\\|");
+            switch (item[0]) {
+            case "D":
+                tasks.add(new Deadline(item[1].equals("1"), item[2], item[3]));
+                break;
+            case "E":
+                tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
+                break;
+            default:
+                tasks.add(new Todo(item[1].equals("1"), item[2]));
+            }
+        }
+        return tasks;
     }
 }

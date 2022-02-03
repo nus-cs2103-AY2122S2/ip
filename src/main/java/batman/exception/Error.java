@@ -2,6 +2,6 @@ package batman.exception;
 
 public enum Error {
     INVALID,
-    EMPTYDESC,
-    LISTERROR
+    EMPTY_DESC,
+    LIST_ERROR
 }

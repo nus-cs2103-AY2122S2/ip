@@ -3,6 +3,7 @@ package batman.tasks;
 import java.time.format.DateTimeParseException;
 
 public class Todo extends Task {
+
     protected boolean status;
 
     /**
