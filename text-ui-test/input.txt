@@ -21,7 +21,3 @@ event project meeting /by
 wwww
 event fff
 bye
-
-catch (IllegalArgumentException e) {
-            duke.ui.print(duke.Ui.MSG_INVLIADCMDFORMAT);
-        }

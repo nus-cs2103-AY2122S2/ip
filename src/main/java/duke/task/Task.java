@@ -24,7 +24,7 @@ public abstract class Task {
      * Constructor to create a task.
      *
      * @param description Description of task stored.
-     * @param isDone If the task is completed.
+     * @param isDone      If the task is completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -50,6 +50,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * This method formats this event into a format that is used for saving.
      *
@@ -57,7 +61,9 @@ public abstract class Task {
      */
     public String formatToSave() {
         return this.getType() + "|" + (this.getIsDone() ? "1" : "0") + "|" + this.description;
-    };
+    }
+
+    ;
 
     @Override
     public String toString() {

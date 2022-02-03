@@ -24,11 +24,14 @@ public class Storage {
 
     public static final String PATH = String.join(File.separator,"data","duke.txt");
     private final File file;
+    private final Parser parser;
 
     /**
      * Load the storage instance from local storage if exist else create a new instance.
+     * @param parser
      */
-    public Storage() {
+    public Storage(Parser parser) {
+        this.parser = parser;
         this.file = new File(PATH);
         if (!this.file.getParentFile().exists())  {
             this.file.getParentFile().mkdir();
@@ -79,8 +82,8 @@ public class Storage {
                         if (input.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);
                         }
-                        date = Parser.formatDate(input[0]);
-                        time = Parser.formatTime(date, input[1]);
+                        date = parser.formatDate(input[0]);
+                        time = parser.formatTime(date, input[1]);
                         taskList.addEvent(inputLine[2],isDone, date, time);
                         break;
                     case "D":
@@ -88,8 +91,8 @@ public class Storage {
                         if (input.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);
                         }
-                        date = Parser.formatDate(input[0]);
-                        time = Parser.formatTime(date, input[1]);
+                        date = parser.formatDate(input[0]);
+                        time = parser.formatTime(date, input[1]);
                         taskList.addDeadline(inputLine[2],date,time);
                 }
             }

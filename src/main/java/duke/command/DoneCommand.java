@@ -36,11 +36,10 @@ public class DoneCommand extends Command {
      * @see IOException
      */
     public void execute(TaskList taskList, Storage storage) throws IOException, DukeException {
-        if (taskList.isDone(taskId)) {
-            throw new DukeException(Ui.MSG_TASKALREADYDONE);
-        }
-        else if (taskId > taskList.getTotalTasks() || taskId < 0) {
+        if (taskId >= taskList.getTotalTasks() || taskId < 0) {
             throw new DukeException(Ui.MSG_INVALIDTASKID);
+        } else if (taskList.isDone(taskId)) {
+            throw new DukeException(Ui.MSG_TASKALREADYDONE);
         } else {
             taskList.completeTask(taskId);
             Ui.print(Ui.completeTaskMsg(taskList.getTask(taskId).toString()));

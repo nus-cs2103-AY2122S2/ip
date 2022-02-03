@@ -18,20 +18,20 @@ public class Ui {
     }
 
     public static void printExit() {
-        print("Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n" + "Hope to see you again soon!)");
+        print("Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n" + "Hope to see you again soon!");
     }
 
     public static final String MSG_EMPTYINPUT = "☹ OOPS!!! I'm sorry, input cannot be empty!";
 
-    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, taskId should be a number. " + "You can use the list duke.command to find the tasks.";
+    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, task Id should be a number. " + "You can use the list command to find the tasks.";
 
     public static final String MSG_INVALIDCMD = "☹ OOPS!!! I'm sorry, but I don't know what that means!";
 
-    public static final String MSG_INVALIDTASKID = "☹ OOPS!!! I'm sorry, task not found! Please select a task in " + "range. You can use the list duke.command to find the tasks.";
+    public static final String MSG_INVALIDTASKID = "☹ OOPS!!! I'm sorry, task not found! Please select a task in " + "range. You can use the list command to find the tasks.";
 
     public static final String MSG_INVLIADCMDFORMAT = "☹ OOPS!!! I'm sorry, your formatting for your message isn't right!";
 
-    public static final String MSG_TASKALREADYDONE = "☹ OOPS!!! task.Task already completed!";
+    public static final String MSG_TASKALREADYDONE = "☹ OOPS!!! Task already completed!";
 
     public static final String MSG_EMPTYTASK = "☹ OOPS!!! No task exists!";
 
@@ -42,6 +42,8 @@ public class Ui {
     public static final String MSG_INVALIDDATETIME = "☹ OOPS!!! You can't set a task in the past!";
 
     public static final String MSG_FILEWRITEERROR = "☹ OOPS!!! We can't save your records! This is likely due to write permissions on your system.";
+
+    public static final String MSG_NOMATCH = "☹ OOPS!!! We can't find anything!";
 
     public static String taskListMsg(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();

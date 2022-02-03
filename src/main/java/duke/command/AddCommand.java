@@ -60,15 +60,12 @@ public class AddCommand extends Command {
         switch (commandType) {
         case TODO:
             taskId = taskList.addToDo(description);
-            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         case DEADLINE:
             taskId = taskList.addDeadline(description, date, time);
-            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         case EVENT:
             taskId = taskList.addEvent(description, date, time);
-            Ui.print(Ui.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1));
             break;
         default:
             break;

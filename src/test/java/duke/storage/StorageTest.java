@@ -12,6 +12,6 @@ public class StorageTest {
 
     @Test
     public void importTasks_fileNotExist_emptyList() throws IOException, DateTimeParseException {
-        assertEquals(0,new Storage().importTasks().getTotalTasks());
+        assertEquals(0,new Storage(parser).importTasks().getTotalTasks());
     }
 }

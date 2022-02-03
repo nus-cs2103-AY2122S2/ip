@@ -10,7 +10,6 @@ import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
-import duke.io.Storage;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,17 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-
-    Storage storage;
-
-    /**
-     * Represents the parser to decode user's input in the Duke application.
-     *
-     * @param storage Storage of task in local persistent disk.
-     */
-    public Parser(Storage storage) {
-        this.storage = storage;
-    }
 
     /**
      * This method formats the user's input into a Command type.
@@ -63,22 +51,20 @@ public class Parser {
             }
         } catch (DukeException e) {
             Ui.print(e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
         } catch (NumberFormatException e) {
             Ui.print(Ui.MSG_INVALDTASKIDFORMAT);
+        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException | IllegalArgumentException e) {
+            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
         } catch (IndexOutOfBoundsException e) {
             Ui.print(Ui.MSG_INVALIDTASKID);
         } catch (DateTimeParseException e) {
             Ui.print(Ui.MSG_INVALIDDATETIMEFORMAT);
-        } catch (IllegalArgumentException e) {
-            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
         }
         return new InvalidCommand();
     }
 
     private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {
-        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim().replaceAll("\\|","-");
         if (description.isEmpty()) {
             throw new DukeException(Ui.MSG_EMPTYINPUT);
         } else if (commandType.equals(CommandType.TODO)) {
@@ -102,29 +88,23 @@ public class Parser {
     }
 
     private Command formatCmdWithTime(CommandType commandType, String inputTxt) throws DukeException {
-        String[] formatInputTxt, dateTime;
-        LocalDate date;
-        LocalTime time;
-        String due, description;
 
-        if (commandType.equals(CommandType.DEADLINE)) {
-            formatInputTxt = inputTxt.split(" /by ");
-        } else {
-            formatInputTxt = inputTxt.split(" /at ");
-        }
+        String[] formatInputTxt = commandType.equals(CommandType.DEADLINE)
+                ? inputTxt.split(" /by ")
+                : inputTxt.split(" /at ");
+        String description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim().replaceAll("\\|","-");
+        String due = formatInputTxt[1].trim();
 
-        description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
-        due = formatInputTxt[1].trim();
         if (description.isEmpty() || due.isEmpty()) {
             throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
         }
 
-        dateTime = due.split(" ");
+        String[] dateTime = due.split(" ");
         if (dateTime.length != 2) {
             throw new DukeException(Ui.MSG_INVALIDDATETIMEFORMAT);
         }
-        date = formatDate(dateTime[0]);
-        time = formatTime(date, dateTime[1]);
+        LocalDate date = formatDate(dateTime[0]);
+        LocalTime time = formatTime(date, dateTime[1]);
 
         if (commandType.equals(CommandType.DEADLINE)) {
             return new AddCommand(CommandType.DEADLINE, description, date, time);
@@ -142,7 +122,7 @@ public class Parser {
      * @throws DukeException          Invalid date format.
      * @see DateTimeParseException
      */
-    public static LocalDate formatDate(String sDate) throws DateTimeParseException, DukeException {
+    public LocalDate formatDate(String sDate) throws DateTimeParseException, DukeException {
         LocalDate inputDate = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         if (inputDate.isBefore(LocalDate.now())) {
             throw new DukeException(Ui.MSG_INVALIDDATETIME);
@@ -159,7 +139,7 @@ public class Parser {
      * @throws DukeException          Invalid time format.
      * @see DateTimeParseException
      */
-    public static LocalTime formatTime(LocalDate date, String sTime) throws DateTimeParseException, DukeException {
+    public LocalTime formatTime(LocalDate date, String sTime) throws DateTimeParseException, DukeException {
         LocalTime inputTime = LocalTime.parse(sTime, DateTimeFormatter.ofPattern("HH:mm"));
         if (date.equals(LocalDate.now()) && inputTime.isBefore(LocalTime.now())) {
             throw new DukeException(Ui.MSG_INVALIDDATETIME);

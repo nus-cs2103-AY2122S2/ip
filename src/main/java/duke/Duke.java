@@ -12,9 +12,11 @@ public class Duke {
 
     private static TaskList taskList;
     private static Storage storage;
+    private static final Parser parser = new Parser();
+    private static final Scanner sc = new Scanner(System.in);
 
     private Duke() {
-        storage = new Storage();
+        storage = new Storage(parser);
         try {
             taskList = storage.importTasks();
         } catch (IOException e) {
@@ -22,13 +24,11 @@ public class Duke {
         }
     }
 
-    public void run() {
-        final Parser parser = new Parser(storage);
-        final Scanner sc = new Scanner(System.in);
+    private void run() {
         Ui.printWelcome();
         boolean status = true;
         String inputTxt;
-        while (status && sc.hasNext()) {
+        while (status) {
             try {
                 inputTxt = sc.nextLine();
                 Command c = parser.parse(inputTxt);

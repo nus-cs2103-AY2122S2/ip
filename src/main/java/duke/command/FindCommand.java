@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.util.Locale;
 
@@ -14,7 +14,7 @@ public class FindCommand extends Command {
         this.searchInput = searchInput;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) {
         StringBuffer result = new StringBuffer("Here are the matching task(s) in your list:\n");
         int count = 1;
         for (int i = 0; i < taskList.getTotalTasks(); i++) {
@@ -24,9 +24,9 @@ public class FindCommand extends Command {
             }
         }
         if (count == 1) {
-            ui.print(ui.MSG_NOMATCH);
+            Ui.print(Ui.MSG_NOMATCH);
         } else {
-            ui.print(result.toString().trim());
+            Ui.print(result.toString().trim());
         }
     }
 }
