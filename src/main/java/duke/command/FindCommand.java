@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         List<Task> result = new ArrayList<>();
         for (Task task : tasks.list()) {
             if (task.toString().contains(input)) {
@@ -26,9 +26,9 @@ public class FindCommand extends Command {
         }
 
         if (result.size() != 0) {
-            ui.listFindResults(result);
+            response.append(ui.listFindResults(result));
         } else {
-            ui.taskNotFound();
+            response.append(ui.taskNotFound());
         }
     }
 }

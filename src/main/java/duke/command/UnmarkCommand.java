@@ -14,12 +14,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         if (index < 0 || index >= tasks.size()) {
-            System.out.println("Invalid index, please try again.");
+            response.append("Invalid index, please try again.");
         } else {
             Task task = tasks.unmark(index);
-            ui.taskUnmarkedMessage(task);
+            response.append(ui.taskUnmarkedMessage(task));
             storage.save(tasks.list());
         }
     }

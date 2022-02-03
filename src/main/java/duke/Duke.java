@@ -1,11 +1,12 @@
+package duke;
+
 import duke.command.Command;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * A text based chatbot able to keep track of tasks.
@@ -35,34 +36,23 @@ public class Duke {
      *
      * @param input user instruction to be executed.
      */
-    public void run(String input) {
-
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
         try {
             Command c = Parser.parse(input);
-            ui.showLine();
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, response);
             isListening = !c.isExit();
-            ui.showLine();
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.notEnoughFieldsMessage();
+            response.append(ui.notEnoughFieldsMessage());
         } catch (NumberFormatException e) {
-            ui.invalidIndex();
+            response.append(ui.invalidIndex());
         } catch (DateTimeParseException e) {
-            ui.invalidDate();
+            response.append(ui.invalidDate());
         }
+        return response.toString();
     }
 
-    /**
-     * Runs the main program.
-     *
-     * @param args inputs to the program.
-     */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Duke chatbot = new Duke("data/data.bin");
-        chatbot.ui.greet();
-        while (chatbot.isListening) {
-            chatbot.run(sc.nextLine());
-        }
+    public String greet() {
+        return ui.greet();
     }
 }

@@ -13,115 +13,138 @@ public class Ui {
     private String goodbyeMessage = "Bye. Hope to see you again soon!";
 
     /**
-     * Prints welcome message to the screen.
+     * Returns Ui welcome message.
+     *
+     * @return Welcome message.
      */
-    public void greet() {
-        System.out.println(lineBreak + welcomeMessage + lineBreak);
+    public String greet() {
+        return welcomeMessage;
     }
 
     /**
-     * Prints goodbye message to the screen.
+     * Returns Ui goodbye message.
+     *
+     * @return Goodbye message.
      */
-    public void goodbye() {
-        System.out.println(goodbyeMessage);
+    public String goodbye() {
+        return goodbyeMessage;
     }
 
     /**
-     * Prints line divider to the screen.
+     * Returns Ui Line divider.
+     *
+     * @return Line divider.
      */
-    public void showLine() {
-        System.out.println(lineBreak);
+    public String showLine() {
+        return lineBreak;
     }
 
     /**
-     * Prints the successful task added message to the screen.
+     * Returns the successful task added message.
      *
      * @param task Task that was added.
      * @param noOfTasks Number of tasks that are currently in the list of tasks.
+     * @return Task added message.
      */
-    public void taskAddedMessage(Task task, int noOfTasks) {
-        System.out.println("Got it. I've added this task:\n"
+    public String taskAddedMessage(Task task, int noOfTasks) {
+        return "Got it. I've added this task:\n"
                 + task.toString()
-                + "\nNow you have " + noOfTasks + " tasks in the list.");
+                + "\nNow you have " + noOfTasks + " tasks in the list.";
     }
 
     /**
-     * Prints out the contents of a list of tasks.
+     * Returns the contents of a list of tasks.
      *
      * @param tasks List of tasks to be printed.
+     * @return String message of the contents of list.
      */
-    public void list(List<Task> tasks) {
-        System.out.printf("You currently have %d task in your list:\n", tasks.size());
+    public String list(List<Task> tasks) {
+        String response = String.format("You currently have %d task in your list:\n", tasks.size());
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
+            response += String.format("%d. %s\n", i + 1, tasks.get(i).toString());
         }
+        return response;
     }
 
     /**
-     * Prints out message of a successfully marked task.
+     * Returns message of a successfully marked task.
      *
      * @param task Task that was successfully marked.
+     * @return Task marked message.
      */
-    public void taskMarkedMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+    public String taskMarkedMessage(Task task) {
+        return String.format("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
-     * Prints out message of a successfully unmarked task.
+     * Returns message of a successfully unmarked task.
      *
      * @param task Task that was successfully unmarked.
+     * @return Task unmarked message.
      */
-    public void taskUnmarkedMessage(Task task) {
-        System.out.println("OK! I've marked this task as not done yet:\n" + task.toString());
+    public String taskUnmarkedMessage(Task task) {
+        return String.format("OK! I've marked this task as not done yet:\n" + task.toString());
     }
 
     /**
-     * Prints out message of a successfully deleted task.
+     * Returns message of a successfully deleted task.
      *
      * @param task Task that was successfully deleted.
      * @param noOfTasks Number of Tasks that are currently in the list of tasks.
+     * @return Task deleted message.
      */
-    public void taskDeleteMessage(Task task, int noOfTasks) {
-        System.out.println("OK! I've deleted this task:\n" + task.toString()
+    public String taskDeleteMessage(Task task, int noOfTasks) {
+        return String.format("OK! I've deleted this task:\n" + task.toString()
                 + "\nNow you have " + noOfTasks + " tasks in the list.");
     }
 
     /**
-     * Prints out message to the user to check the number of fields in their input.
+     * Returns message to the user to check the number of fields in their input.
+     *
+     * @return Not enough fields message.
      */
-    public void notEnoughFieldsMessage() {
-        showLine();
-        System.out.println("Not enough fields, please check your inputs and try again.");
-        showLine();
+    public String notEnoughFieldsMessage() {
+        return "Not enough fields, please check your inputs and try again.";
     }
 
     /**
      * Prints out message to the user to check the index given in their input.
+     *
+     * @return Invalid index message.
      */
-    public void invalidIndex() {
-        showLine();
-        System.out.println("Index provided is not an integer. Please try again");
-        showLine();
+    public String invalidIndex() {
+        return "Index provided is not an integer. Please try again";
     }
 
     /**
-     * Prints out message to the user to check the format of the date in their input.
+     * Returns message to the user to check the format of the date in their input.
+     *
+     * @return Invalid date message.
      */
-    public void invalidDate() {
-        showLine();
-        System.out.println("Invalid date: Please format date as yyyy-mm-dd");
-        showLine();
+    public String invalidDate() {
+        return "Invalid date: Please format date as yyyy-mm-dd";
     }
 
-    public void listFindResults(List<Task> result) {
-        System.out.println("Here are the matching tasks in your list:");
+    /**
+     * Returns the contents of a list of task in a String.
+     *
+     * @return String contents of a list of task.
+     */
+    public String listFindResults(List<Task> result) {
+        String response = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < result.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, result.get(i).toString());
+            response += String.format("%d. %s\n", i + 1, result.get(i).toString());
         }
+        return response;
     }
 
-    public void taskNotFound() {
-        System.out.println("Sorry! There are no matching tasks found.");
+    /**
+     * Returns task not found message.
+     *
+     * @return Task not found message.
+     */
+    public String taskNotFound() {
+        return "Sorry! There are no matching tasks found.";
     }
 }
 

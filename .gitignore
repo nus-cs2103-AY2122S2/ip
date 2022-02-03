@@ -27,3 +27,9 @@ src/test/.idea/.gitignore
 src/test/.idea/misc.xml
 src/test/.idea/modules.xml
 src/test/.idea/vcs.xml
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/vcs.xml
+src/.idea/workspace.xml
+src/main/data/data.bin
+src/main/java/META-INF/MANIFEST.MF

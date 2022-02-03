@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         Task task = null;
         switch (keyword) {
         case "todo":
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
         if (task != null) {
             tasks.add(task);
             storage.save(tasks.list());
-            ui.taskAddedMessage(task, tasks.size());
+            response.append(ui.taskAddedMessage(task, tasks.size()));
         }
     }
 }
