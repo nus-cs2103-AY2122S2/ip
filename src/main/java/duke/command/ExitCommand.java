@@ -19,8 +19,12 @@ public class ExitCommand extends Command {
      * @return <code>false</code> upon successful execution.
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showBye();
-        return false;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showBye();
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return true;
     }
 }

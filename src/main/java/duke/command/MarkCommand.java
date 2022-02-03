@@ -20,17 +20,17 @@ public class MarkCommand extends Command {
     /**
      * Boolean flag that determines whether to mark or unmark task.
      */
-    private final boolean isMark;
+    private final boolean isMarkCommand;
 
     /**
      * Constructor for a task mark command.
      *
-     * @param index  Index of task in a list of tasks that is to be marked.
-     * @param isMark Boolean flag that determines whether to mark or unmark task.
+     * @param index         Index of task in a list of tasks that is to be marked.
+     * @param isMarkCommand Boolean flag that determines whether to mark or unmark task.
      */
-    public MarkCommand(int index, boolean isMark) {
+    public MarkCommand(int index, boolean isMarkCommand) {
         this.index = index;
-        this.isMark = isMark;
+        this.isMarkCommand = isMarkCommand;
     }
 
     /**
@@ -44,16 +44,22 @@ public class MarkCommand extends Command {
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.get(index);
-        if (isMark) {
+        String output;
+        if (isMarkCommand) {
             task.markAsDone();
-            ui.showMessage("TASK DONE:\n" + task);
+            output = "TASK DONE:\n" + task;
         } else {
             task.markAsUndone();
-            ui.showMessage("TASK UNDONE:\n" + task);
+            output = "TASK UNDONE:\n" + task;
         }
         storage.writeToFile(taskList);
-        return true;
+        return output;
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return false;
     }
 }

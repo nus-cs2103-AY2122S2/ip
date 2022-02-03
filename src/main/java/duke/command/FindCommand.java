@@ -34,9 +34,15 @@ public class FindCommand extends Command {
      * @return <code>true</code> upon successful execution.
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList newTaskList = taskList.filter(this.keyword);
+        String output = "MATCHING TASKS HERE:" + newTaskList;
         ui.showMessage("MATCHING TASKS HERE:" + newTaskList);
-        return true;
+        return output;
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return false;
     }
 }
