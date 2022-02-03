@@ -1,14 +1,14 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
 
+import seedu.commands.ByeCommand;
 import seedu.commands.DeadlineCommand;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
 import seedu.task.Todo;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DukeTest {
 
@@ -30,6 +30,16 @@ public class DukeTest {
 
     @Test
     public void eventTask() {
-        assertEquals("[T][ ] 1", new Todo("1").toString());
+        Todo t = new Todo("1");
+        assertEquals("[T][ ] 1", t.toString());
+        assertEquals("T\t1\tfalse", t.toFile());
+    }
+
+    @Test
+    public void testDefaultExit() {
+        ByeCommand b = new ByeCommand();
+        assertFalse(b.isExit());
+        b.execute(null, null, null);
+        assertTrue(b.isExit());
     }
 }
