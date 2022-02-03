@@ -37,6 +37,19 @@ public class DelCommand extends Command{
         }
     }
 
+    @Override
+    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, IOException {
+        if (taskId <= 0 || taskId > taskList.getSize()) {
+            throw new InvalidNumberException();
+        } else {
+            String outputText = taskList.getTaskOutputStyle(taskId - 1);
+            taskList.delTask(taskId - 1);
+            storage.saveFile(taskList);
+            return ui.outputUiText(" Noted. I've removed this task:\n    " + outputText
+                    + "\nNow you have " + taskList.getSize() + " tasks in the list.");
+        }
+    }
+
     /**
      * To know if this command will exit the program
      *

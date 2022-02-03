@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            pyke.UiInit();
             fxmlLoader.<MainWindow>getController().setPyke(pyke);
             stage.show();
         } catch (IOException e) {

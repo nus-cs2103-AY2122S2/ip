@@ -33,8 +33,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setPyke(Pyke d) {
-        pyke = d;
+    public void setPyke(Pyke p) {
+        pyke = p;
     }
 
     /**
@@ -44,18 +44,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input);
+        String response = pyke.processCommand(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, pykeImage)
+                DialogBox.getPykeDialog(response, pykeImage)
         );
         userInput.clear();
-    }
-
-    /**
-     * Generate a response to user input.
-     */
-    private String getResponse(String input) {
-        return "Pyke: " + input;
     }
 }

@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
+    private final String GREETINGS = "Hello! I'm Pyke\n" + "What can I do for you?";
+    private final String FAREWELL = "Bye. Hope to see you again soon!";
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -15,9 +17,13 @@ public class Ui {
      * @return chat-box style output text : String
      */
     private String convertToChatBox(String text) {
+        /*
         return "    ____________________________________________________________\n"
                 + text.replaceAll("(?m)^", "     ") + "\n"
                 + "    ____________________________________________________________\n";
+
+         */
+        return text;
     }
 
     /**
@@ -38,10 +44,10 @@ public class Ui {
         System.out.println(convertToChatBox(logo));
     }
     public void sayGreeting() {
-        System.out.println(convertToChatBox("Hello! I'm Pyke\n" + "What can I do for you?"));
+        System.out.println(convertToChatBox(GREETINGS));
     }
     public void sayFarewell() {
-        System.out.println(convertToChatBox("Bye. Hope to see you again soon!"));
+        System.out.println(convertToChatBox(FAREWELL));
     }
 
     /**
@@ -60,5 +66,17 @@ public class Ui {
      */
     public void outputException(String exceptionInfo) {
         System.out.println(convertToChatBox(exceptionInfo));
+    }
+
+    public String outputUiText(String text) {
+        return text;
+    }
+
+    public String outputUiGreeting() {
+        return GREETINGS;
+    }
+
+    public String outputUiFarewell() {
+        return FAREWELL;
     }
 }
