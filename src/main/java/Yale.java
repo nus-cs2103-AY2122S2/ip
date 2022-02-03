@@ -2,7 +2,7 @@ import yale.command.Parser;
 import yale.command.Storage;
 import yale.command.Ui;
 import yale.task.TaskList;
-import yale.DialogBox;
+import yale.controller.DialogBox;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -150,7 +150,7 @@ public class Yale extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getYaleDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
