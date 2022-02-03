@@ -1,7 +1,1 @@
-T | 1 | read book
-D | 0 | return book | 06/06/2022 15:00
-E | 0 | project meeting | 06/08/2022 14:00
-T | 0 | borrow book
-D | 0 | return book | 30/01/2022 11:00
-E | 0 | project meeting | 24/01/2022 21:30
-T | 1 | test save function
+T | 0 | write test
