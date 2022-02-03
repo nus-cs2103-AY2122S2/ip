@@ -3,7 +3,7 @@ package duke.commands;
 /**
  * Represents a task to be done by the user. It contains a description of the task, type of task and mark status.
  */
-public class Task  {
+public class Task {
 
     private String description;
     private String type;
@@ -23,7 +23,9 @@ public class Task  {
      *
      * @return character that represents type of Task.
      */
-    public String getType() { return this.type; }
+    public String getType() {
+        return this.type;
+    }
 
     /**
      * Returns description of Task
@@ -48,14 +50,18 @@ public class Task  {
      *
      * @return time of Task
      */
-    public String getTime() { return ""; };
+    public String getTime() {
+        return "";
+    };
 
     /**
      * Returns date of Task
      *
      * @return date of Task
      */
-    public String getDate() { return ""; };
+    public String getDate() {
+        return "";
+    };
 
     /**
      * Marks Task as completed.

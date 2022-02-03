@@ -1,9 +1,8 @@
 package duke.commands;
 
-import org.junit.jupiter.api.Test;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     private Deadline deadline = new Deadline("do homework", "20-12-2001 1322");

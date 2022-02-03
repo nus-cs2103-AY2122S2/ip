@@ -9,23 +9,23 @@ import java.time.format.DateTimeParseException;
  * Represents a Event to be attended by the user with a specified date and/or time.
  */
 public class Event extends Task {
+    private static final String[] DATE_FORMATS = {
+        "dd/MM/yyyy",
+        "dd MM yyyy",
+        "yyyy/MM/dd",
+        "yyyy MM dd",
+        "MMM dd yyyy",
+    };
+    private static final String[] TIME_FORMATS = {
+        "HHmm",
+        "HH:mm",
+    };
     private String at;
     private LocalDate date;
     private LocalTime time;
     private String dateFormat;
     private String timeFormat;
 
-    private static final String[] DATE_FORMATS = {
-            "dd/MM/yyyy",
-            "dd MM yyyy",
-            "yyyy/MM/dd",
-            "yyyy MM dd",
-            "MMM dd yyyy",
-    };
-    private static final String[] TIME_FORMATS = {
-            "HHmm",
-            "HH:mm",
-    };
 
     /**
      * Constructs an Event object.
@@ -56,6 +56,7 @@ public class Event extends Task {
                     return false;
                 }
             } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
         return false;
@@ -76,6 +77,7 @@ public class Event extends Task {
                 this.dateFormat = format;
                 return true;
             } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
         return false;
