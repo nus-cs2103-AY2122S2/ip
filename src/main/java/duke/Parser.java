@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 class Parser {
     private final Ui ui;
