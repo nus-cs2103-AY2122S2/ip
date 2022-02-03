@@ -58,7 +58,7 @@ public class Duke extends Exception {
     /**
      * Start point of the project
      *
-     * @param args
+     * @param args Default parameters string
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
