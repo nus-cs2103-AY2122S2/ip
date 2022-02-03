@@ -9,12 +9,12 @@ public class Event extends Task {
      * @param description description of event task
      * @param eventTiming timing of event
      */
-    public Event(String description, String eventTiming){
+    public Event(String description, String eventTiming) {
         super(description, "E");
         this.eventTiming = eventTiming;
     }
 
-    public String getEventTiming(){
+    public String getEventTiming() {
         return this.eventTiming;
     }
 
@@ -26,7 +26,8 @@ public class Event extends Task {
     @Override
     public String toSaveDataFormat() {
         String isDone = (super.checkIsDone() == true) ? "1" : "0";
-        return String.format("%s|%s|%s|%s\n", super.getTag(), isDone, super.getTaskDescription(), this.getEventTiming());
+        return String.format("%s|%s|%s|%s\n", super.getTag(),
+                isDone, super.getTaskDescription(), this.getEventTiming());
     }
 
     @Override

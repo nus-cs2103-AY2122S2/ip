@@ -4,9 +4,15 @@ import duke.DukeException;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int taskIdx;
 
+    /**
+     * Constructor for MarkCommand
+     *
+     * @param userTaskString
+     * @param taskIdx
+     */
     public MarkCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
         this.taskIdx = taskIdx;
