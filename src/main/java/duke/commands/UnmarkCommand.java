@@ -1,9 +1,9 @@
 package duke.commands;
 
+import duke.data.task.Task;
 import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.data.task.Task;
 
 public class UnmarkCommand extends Command {
 

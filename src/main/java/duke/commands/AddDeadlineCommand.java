@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.time.LocalDate;
+
 import duke.data.task.Deadline;
 import duke.data.task.Task;
 import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
-
-import java.time.LocalDate;
 
 /**
  * Adds a deadline to the tasklist.
