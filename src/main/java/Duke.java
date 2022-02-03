@@ -59,14 +59,13 @@ public class Duke {
     public static void mark(int taskNumber) {
         Task task = taskList.get(taskNumber - 1);
         task.markAsDone();
-
         System.out.println("Good job! This task is done:");
         System.out.println("  " + task);
     }
 
     public static void unmark(int taskNumber) {
         Task task = taskList.get(taskNumber - 1);
-        task.unmark();
+        task.unmarkAsDone();
         System.out.println("Hurry up and get it done!");
         System.out.println("  " + task);
     }
