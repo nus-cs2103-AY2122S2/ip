@@ -38,12 +38,12 @@ public class Storage {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] strArr;
-            Task task = new Task("");
+            Task task;
             strArr = line.split(" \\| ");
             switch (strArr[0]) {
             case "T":
                 task = new Todo(strArr[2]);
-                if (strArr[1].equals("1")) {
+                if (strArr[1].equals("X")) {
                     task.setDone();
                 }
                 break;

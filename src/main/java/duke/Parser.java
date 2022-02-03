@@ -1,16 +1,15 @@
 package duke;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Parser class to read what the user inputs.
  */
 public class Parser {
-    private Scanner sc = new Scanner(System.in);
-    private Ui ui;
-    private TaskList taskList;
-    private Storage storage;
-    private Find finder = new Find();
+    private final Ui ui;
+    private final TaskList taskList;
+    private final Storage storage;
+    private final Find finder = new Find();
 
     /**
      * Constructs Parser object to read what user inputs.
@@ -28,97 +27,63 @@ public class Parser {
     /**
      * Read user input and execute commands according to user input
      *
+     * @param input User input.
+     * @return Duke's reply to user input.
      * @throws IOException  If user inputs invalid command.
      */
-    public void readUserInput() throws IOException {
-        whileLoop:
-        while (sc.hasNextLine()) {
-            String usrInput = sc.next();
-            String task;
-            switch (usrInput) {
-            case "bye":
-                ui.exit();
-                sc.close();
-                break whileLoop;
-            case "list":
-                ui.list(taskList);
-                break;
-            case "mark": {
-                int taskNum = Integer.parseInt(sc.next());
-                Task markedTask = taskList.mark(taskNum);
-                ui.markTask(markedTask);
+    public String readUserInput(String input) throws IOException {
+        if (input.startsWith("bye")) {
+            return ui.exit();
+        } else if (input.startsWith("list")) {
+            return ui.list(taskList);
+        } else if (input.startsWith("mark")) {
+            int taskNum = Integer.parseInt(input.substring(5));
+            Task markedTask = taskList.mark(taskNum);
+            String outputLabel = ui.markTask(markedTask);
+            storage.save(taskList);
+            return outputLabel;
+        } else if (input.startsWith("unmark")) {
+            int taskNum = Integer.parseInt(input.substring(7));
+            Task unmarkedTask = taskList.unmark(taskNum);
+            String outputLabel = ui.unmarkTask(unmarkedTask);
+            storage.save(taskList);
+            return outputLabel;
+        } else if (input.startsWith("delete")) {
+            int taskNum = Integer.parseInt(input.substring(7));
+            Task deletedTask = taskList.delete(taskNum);
+            String outputLabel = ui.deleteTask(taskList, deletedTask);
+            storage.save(taskList);
+            return outputLabel;
+        } else if (input.startsWith("todo")) {
+            if (input.split(" ").length == 1) {
+                return ui.throwError("todo");
+            } else {
+                String userInput = input.substring(5);
+                taskList.addTodo(userInput);
+                String outputLabel = ui.addTask(taskList);
                 storage.save(taskList);
-                break;
+                return outputLabel;
             }
-            case "unmark": {
-                int taskNum = Integer.parseInt(sc.next());
-                Task unmarkedTask = taskList.unmark(taskNum);
-                ui.unmarkTask(unmarkedTask);
-                storage.save(taskList);
-                break;
-            }
-            case "delete": {
-                int taskNum = Integer.parseInt(sc.next());
-                Task deletedTask = taskList.delete(taskNum);
-                ui.deleteTask(taskList, deletedTask);
-                storage.save(taskList);
-                break;
-            }
-            case "todo": {
-                usrInput = sc.nextLine();
-                if (usrInput.equals("")) {
-                    ui.throwError("todo");
-                    break;
-                }
-                taskList.addTodo(usrInput.substring(1));
-                ui.addTask(taskList);
-                storage.save(taskList);
-                break;
-            }
-            case "deadline": {
-                task = sc.next();
-                while (sc.hasNext()) {
-                    String currStr = sc.next();
-                    if (currStr.equals("/by")) {
-                        String time = sc.nextLine();
-                        time = time.substring(1);
-                        taskList.addDeadline(task, time);
-                        ui.addTask(taskList);
-                        storage.save(taskList);
-                        break;
-                    } else {
-                        task += " " + currStr;
-                    }
-                }
-                break;
-            }
-            case "event": {
-                task = sc.next();
-                while (sc.hasNext()) {
-                    String currStr = sc.next();
-                    if (currStr.equals("/at")) {
-                        String time = sc.nextLine();
-                        time = time.substring(1);
-                        taskList.addEvent(task, time);
-                        ui.addTask(taskList);
-                        storage.save(taskList);
-                        break;
-                    } else {
-                        task += " " + currStr;
-                    }
-                }
-                break;
-            }
-            case "find": {
-                String keyword = sc.next();
-                TaskList matchingTasks = finder.find(taskList, keyword);
-                ui.listMatching(matchingTasks);
-                break;
-            }
-            default:
-                ui.throwError("");
-                break;
-            }
+        } else if (input.startsWith("deadline")) {
+            String userInput = input.substring(9);
+            String[] strArr = userInput.split(" /by ");
+            taskList.addDeadline(strArr[0], strArr[1]);
+            String outputLabel = ui.addTask(taskList);
+            storage.save(taskList);
+            return outputLabel;
+        } else if (input.startsWith("event")) {
+            String userInput = input.substring(6);
+            String[] strArr = userInput.split(" /at ");
+            taskList.addEvent(strArr[0], strArr[1]);
+            String outputLabel = ui.addTask(taskList);
+            storage.save(taskList);
+            return outputLabel;
+        } else if (input.startsWith("find")) {
+            String keyword = input.substring(5);
+            TaskList matchingTasks = finder.find(taskList, keyword);
+            return ui.listMatching(matchingTasks);
+        } else {
+            return ui.throwError("");
         }
     }
 }

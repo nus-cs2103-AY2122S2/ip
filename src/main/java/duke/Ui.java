@@ -4,9 +4,6 @@ package duke;
  * Ui class to interact with the user in console.
  */
 public class Ui {
-
-    public static final String LINE = "____________________________________________________________";
-
     /**
      * Construct a Ui object.
      */
@@ -15,22 +12,24 @@ public class Ui {
 
     /**
      * Prints out the greeting message.
+     *
+     * @return Greeting message in Label format.
      */
-    public void greet() {
-        String output = LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE;
-        System.out.println(output);
+    public String greet() {
+        return "Hello! I'm Duke\n What can I do for you?";
     }
 
     /**
      * Adds a task to the tasklist.
      *
      * @param taskList  TaskList object containing the ArrayList of tasks.
+     * @return  Duke's reply.
      */
-    public void addTask(TaskList taskList) {
-        System.out.println(LINE + "\n Got it. I've added this task:");
-        System.out.println("   " + taskList.getTaskList().get(taskList.getTaskList().size() - 1).toString());
-        System.out.printf(" Now you have %d tasks in the list.\n", taskList.getTaskList().size());
-        System.out.println(LINE);
+    public String addTask(TaskList taskList) {
+        String output = "Got it. I've added this task:";
+        output += "\n   " + taskList.getTaskList().get(taskList.getTaskList().size() - 1).toString();
+        output += String.format("\nNow you have %d tasks in the list.", taskList.getTaskList().size());
+        return output;
     }
 
     /**
@@ -38,83 +37,89 @@ public class Ui {
      *
      * @param taskList  TaskList object containing the ArrayList of tasks.
      * @param removedTask   Task object to be removed.
+     * @return  Duke's reply.
      */
-    public void deleteTask(TaskList taskList, Task removedTask) {
-        System.out.println(LINE + "\n Noted. I've removed this task:");
-        System.out.println("   " + removedTask.toString());
-        System.out.printf(" Now you have %d tasks in the list.\n", taskList.getTaskList().size());
-        System.out.println(LINE);
+    public String deleteTask(TaskList taskList, Task removedTask) {
+        String output = "Noted. I've removed this task:";
+        output += "\n   " + removedTask.toString();
+        output += String.format("\nNow you have %d tasks in the list.", taskList.getTaskList().size());
+        return output;
     }
 
     /**
      * Marks a task as done.
      *
      * @param markedTask    Task object which is done.
+     * @return  Duke's reply.
      */
-    public void markTask(Task markedTask) {
-        System.out.println(LINE + "\n Nice! I've marked this task as done:");
-        System.out.println("   " + markedTask.toString());
-        System.out.println(LINE);
+    public String markTask(Task markedTask) {
+        String output = "Nice! I've marked this task as done:";
+        output += "\n   " + markedTask.toString();
+        return output;
     }
 
     /**
      * Marks a task as not done.
      *
      * @param unmarkedTask  Task object which is not done.
+     * @return  Duke's reply.
      */
-    public void unmarkTask(Task unmarkedTask) {
-        System.out.println(LINE + "\n OK, I've marked this task as not done yet:");
-        System.out.println("   " + unmarkedTask.toString());
-        System.out.println(LINE);
+    public String unmarkTask(Task unmarkedTask) {
+        String output = "OK, I've marked this task as not done yet:";
+        output += "\n   " + unmarkedTask.toString();
+        return output;
     }
 
     /**
      * Prints out a list of all tasks in the tasklist.
      *
      * @param taskList  Tasklist containing all tasks.
+     * @return  Duke's reply.
      */
-    public void list(TaskList taskList) {
-        System.out.println(LINE + "\n Here are the tasks in your list:");
+    public String list(TaskList taskList) {
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.getTaskList().size(); i++) {
-            System.out.printf(" %d.%s\n", i, taskList.getTaskList().get(i - 1).toString());
+            output.append(String.format("\n %d.%s", i, taskList.getTaskList().get(i - 1).toString()));
         }
-        System.out.println(LINE);
+        return output.toString();
     }
 
     /**
      * Prints out a list of all matching tasks in the tasklist.
      *
      * @param taskList  Tasklist containing all matching tasks.
+     * @return  Duke's reply.
      */
-    public void listMatching(TaskList taskList) {
-        System.out.println(LINE + "\n Here are the matching tasks in your list:");
+    public String listMatching(TaskList taskList) {
+        String output = "Here are the matching tasks in your list:";
         for (int i = 1; i <= taskList.getTaskList().size(); i++) {
-            System.out.printf(" %d.%s\n", i, taskList.getTaskList().get(i - 1).toString());
+            output += String.format("\n %d.%s", i, taskList.getTaskList().get(i - 1).toString());
         }
-        System.out.println(LINE);
+        return output;
     }
 
     /**
      * Throws error depending on what kind of error it is.
      *
      * @param type  The type of error to be thrown.
+     * @return  Duke's reply.
      */
-    public void throwError(String type) {
-        System.out.println(LINE);
+    public String throwError(String type) {
         DukeException error;
         if (type.equals("")) {
             error = new DukeException();
         } else {
             error = new DukeException(type);
         }
-        System.out.println(error);
-        System.out.println(LINE);
+        return error.toString();
     }
 
     /**
      * Print out a goodbye line.
+     *
+     * @return  Duke's reply.
      */
-    public void exit() {
-        System.out.println(LINE + "\n Bye. Hope to see you again soon!\n" + LINE);
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 }
