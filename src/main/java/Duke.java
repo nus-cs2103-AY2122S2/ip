@@ -95,6 +95,7 @@ public class Duke {
         try {
             Command<String> c = Parser.parseInput(fullCommand, tasks, storage);
             if (c.isExit()) {
+                System.exit(0);
                 return "Bye. Click on the close button to put me to sleep.";
             }
             response = c.execute();
