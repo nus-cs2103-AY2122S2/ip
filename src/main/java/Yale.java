@@ -2,6 +2,7 @@ import yale.command.Parser;
 import yale.command.Storage;
 import yale.command.Ui;
 import yale.task.TaskList;
+import yale.DialogBox;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.util.Scanner;
 
@@ -36,6 +39,10 @@ public class Yale extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    // ...
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Yale.png"));
+    // ...
 
     /**
      * Constructor method
@@ -109,6 +116,15 @@ public class Yale extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
+
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
     /**
      * Iteration 1:
@@ -122,6 +138,29 @@ public class Yale extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Yale heard: " + input;
     }
 
     /**
