@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" fillHeight="false" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" style="-fx-border-color: #EDABAB; -fx-background-color: #96e8ff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2.5; -fx-text-fill: black;" text="Label" textOverrun="CLIP" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #EDABAB; -fx-background-color: #96e8ff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2.5; -fx-text-fill: black;" text="Label" textOverrun="CLIP" wrapText="true" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets left="12.0" right="12.0" />
          </HBox.margin>
@@ -18,7 +18,7 @@
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font></Label>
-      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="35.0" stroke="#3c97ff" strokeType="INSIDE">
+      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="35.0" stroke="#3c97ff" strokeType="INSIDE" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets left="5.0" right="5.0" />
          </HBox.margin>
