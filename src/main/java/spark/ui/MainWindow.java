@@ -43,10 +43,10 @@ public class MainWindow extends AnchorPane {
                 + "Here are your tasks.";
         String listOfTasks = spark.executeCommand("list");
         dialogContainer.getChildren().addAll(
-                DialogBox.getSparkDialog(welcomeMessage, sparkImage)
+                SparkDialogBox.getSparkDialog(welcomeMessage, sparkImage)
         );
         dialogContainer.getChildren().addAll(
-                DialogBox.getSparkDialog(listOfTasks, sparkImage)
+                SparkDialogBox.getSparkDialog(listOfTasks, sparkImage)
         );
     }
 
@@ -59,8 +59,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = spark.executeCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSparkDialog(response, sparkImage)
+                UserDialogBox.getUserDialog(input, userImage),
+                SparkDialogBox.getSparkDialog(response, sparkImage)
         );
         userInput.clear();
 

@@ -22,7 +22,10 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            // change the font
+            scene.getRoot().setStyle("-fx-font-family: Courier; -fx-font-size: 20");
             stage.setScene(scene);
+
             fxmlLoader.<MainWindow>getController().setSpark(spark);
             stage.show();
         } catch (IOException e) {

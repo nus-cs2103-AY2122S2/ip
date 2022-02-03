@@ -111,8 +111,9 @@ public class TaskList {
             StringBuilder listOfTasks = new StringBuilder();
 
             listOfTasks.append("\n"
-                    + "█▄█ █▀█ █░█ █▀█   ▀█▀ ▄▀█ █▀ █▄▀ █▀\n"
-                    + "░█░ █▄█ █▄█ █▀▄   ░█░ █▀█ ▄█ █░█ ▄█\n\n");
+                    + "Here are your tasks:"
+                    + "\n"
+            );
 
             for (int i = 0; i < tasks.size(); i++) {
                 listOfTasks.append(String.format("    %d. %s\n", i + 1, tasks.get(i)));
