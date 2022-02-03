@@ -56,6 +56,13 @@ public class Task {
         return Arrays.asList(this.description.split("\\s+"));
     }
 
+    /**
+     * Compares two objects and checks whether they are the same.
+     *
+     * @param obj the other object to compared with
+     * @return true if the two tasks have the same description and status;
+     *         false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

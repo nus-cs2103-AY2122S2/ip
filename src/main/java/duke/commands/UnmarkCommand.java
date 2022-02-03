@@ -10,8 +10,8 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes the mark of the task identified by the index number.\n"
-            + "Parameters: INDEX\n"
+            + ": Removes the mark of the task identified by the index number.\n\t\t"
+            + "Parameters: INDEX\n\t\t"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final int index;

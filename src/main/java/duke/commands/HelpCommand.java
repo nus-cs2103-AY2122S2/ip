@@ -11,18 +11,18 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n\t\t"
             + "Example: " + COMMAND_WORD;
 
     @Override
     public void execute(TaskList task, Ui ui, Storage storage) {
         System.out.println(
-                AddTodoCommand.MESSAGE_USAGE
-                + "\n" + AddEventCommand.MESSAGE_USAGE
-                + "\n" + AddDeadlineCommand.MESSAGE_USAGE
-                + "\n" + DeleteCommand.MESSAGE_USAGE
-                + "\n" + ListCommand.MESSAGE_USAGE
-                + "\n" + HelpCommand.MESSAGE_USAGE
-                + "\n" + ExitCommand.MESSAGE_USAGE);
+                "\t" + AddTodoCommand.MESSAGE_USAGE
+                + "\n\t" + AddEventCommand.MESSAGE_USAGE
+                + "\n\t" + AddDeadlineCommand.MESSAGE_USAGE
+                + "\n\t" + DeleteCommand.MESSAGE_USAGE
+                + "\n\t" + ListCommand.MESSAGE_USAGE
+                + "\n\t" + HelpCommand.MESSAGE_USAGE
+                + "\n\t" + ExitCommand.MESSAGE_USAGE);
     }
 }

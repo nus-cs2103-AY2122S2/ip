@@ -17,15 +17,26 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Read a line of command.
+     *
+     * @return the command line
+     */
     public String readCommand() {
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
 
+    /**
+     * Prints the loading error message.
+     */
     public void showLoadingError() {
         System.out.println("\t An error occurs when loading data");
     }
 
+    /**
+     * Prints the divider.
+     */
     public void showLine() {
         System.out.print(Ui.DIVIDER);
     }
@@ -44,6 +55,11 @@ public class Ui {
         System.out.println("\t Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints out the error message.
+     *
+     * @param errorMsg the message to be printed
+     */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
@@ -51,7 +67,7 @@ public class Ui {
     /**
      * Prints the msg between line breaks.
      *
-     * @param msg A string of message to be printed.
+     * @param msg A string of message to be printed
      */
     private void printMsg(String msg) {
         System.out.println(Ui.DIVIDER + msg + Ui.DIVIDER);
@@ -62,13 +78,18 @@ public class Ui {
     /**
      * Lists out the current tasks as well as their status.
      *
-     * @param tasks A list of all tasks.
+     * @param tasks a list of all tasks
      */
     public void list(TaskList tasks) {
         String msg = tasks.toString();
         System.out.print("\t Here are the tasks in your list:\n" + msg);
     }
 
+    /**
+     * Shows all the tasks which match the searching keywords.
+     *
+     * @param tasks a list of tasks to be printed
+     */
     public void find(List<Task> tasks) {
         System.out.println("\t Here are the matching tasks in your list:");
         for (Task t : tasks) {
@@ -79,7 +100,7 @@ public class Ui {
     /**
      * Prints the marking message.
      *
-     * @param t A task that has been marked.
+     * @param t a task that has been marked.
      */
     public void mark(Task t) {
         System.out.println("\t Nice! I've marked this task as done:\n\t   " + t.toString());
@@ -88,7 +109,7 @@ public class Ui {
     /**
      * Prints the unmarking message.
      *
-     * @param t A task that has been unmarked.
+     * @param t a task that has been unmarked.
      */
     public void unmark(Task t) {
         System.out.println("\t OK, I've marked this task as not done yet:\n\t   " + t.toString());
@@ -97,8 +118,8 @@ public class Ui {
     /**
      * Prints out the message after a task is added to the list.
      *
-     * @param t The task which was just added.
-     * @param size The size of the tasklist after removing the above task.
+     * @param t the task which was just added.
+     * @param size the size of the tasklist after removing the above task.
      */
     public void showAddTask(Task t, int size) {
         System.out.println("\t Got it. I've added this task:\n\t   " + t.toString()
@@ -108,8 +129,8 @@ public class Ui {
     /**
      * Deletes a task in the specified index.
      *
-     * @param t The task to be removed.
-     * @param size The size of the tasklist after removing the above task.
+     * @param t the task to be removed.
+     * @param size the size of the task list after removing the above task.
      */
     public void delete(Task t, int size) {
         System.out.println("\t Noted. I've removed this task:\n\t   " + t.toString()

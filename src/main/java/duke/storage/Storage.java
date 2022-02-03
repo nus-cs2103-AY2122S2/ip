@@ -26,7 +26,8 @@ public class Storage {
     /**
      * Loads the list of tasks from the hard disk when Duke starts up.
      * 
-     * @throws IOException TODO
+     * @throws IOException when failed to read the file
+     * @return a list of tasks
      */
     public List<Task> load() throws IOException {
         File f = new File(filePath);
@@ -75,6 +76,8 @@ public class Storage {
 
     /**
      * Stores the list of tasks in hard disk.
+     *
+     * @throws IOException when failed to write to the file
      */
     public void store(List<Task> lst) throws IOException {
         FileWriter fw = new FileWriter(filePath);

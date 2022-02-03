@@ -32,6 +32,13 @@ public class Event extends Task {
         return "E | " + status + " | " + this.description + " | " + this.time + "\n";
     }
 
+    /**
+     * Compares two objects and checks whether they are the same.
+     *
+     * @param obj the other object to compared with
+     * @return true if the two events have the same description, status and time;
+     *         false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

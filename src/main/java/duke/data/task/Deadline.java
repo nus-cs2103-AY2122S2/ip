@@ -33,6 +33,13 @@ public class Deadline extends Task {
         return "D | " + status + " | " + this.description + " | " + this.time + "\n";
     }
 
+    /**
+     * Compares two objects and checks whether they are the same.
+     *
+     * @param obj the other object to compared with
+     * @return true if the two deadlines have the same description, status and time;
+     *         false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

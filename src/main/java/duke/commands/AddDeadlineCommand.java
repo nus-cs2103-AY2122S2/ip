@@ -9,16 +9,16 @@ import duke.storage.Storage;
 import java.time.LocalDate;
 
 /**
- * Add a deadline to the tasklist.
+ * Adds a deadline to the tasklist.
  */
 public class AddDeadlineCommand extends Command {
     
     public static final String COMMAND_WORD = "deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline to the task list. "
-            + "Parameters: DESCRIPTION /by TIME\n"
+            + "Parameters: DESCRIPTION /by TIME\n\t\t"
             + "Example: " + COMMAND_WORD
-            + " deadline Do homework /by 2022-02-01";
+            + " Do homework /by 2022-02-01";
 
     private final Task toAdd;
 
