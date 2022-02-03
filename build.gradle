@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'com.github.johnrengelman.shadow' version "7.1.2"
 }
 
 repositories {
@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -38,9 +38,10 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    configDir = file("$rootProject.projectDir/etc/checkstyle")
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
