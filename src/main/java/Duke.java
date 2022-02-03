@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,13 @@ public class Duke {
 
         // Init tasklist file if it does not exist
         File f = new File("./tasklist.txt");
+        if (!f.isFile()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
 
 
         // Printing Duke's intro
