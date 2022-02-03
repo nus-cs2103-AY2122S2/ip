@@ -21,10 +21,10 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.unmarkTask(index);
         storage.saveTaskList(tasks);
-        ui.showMessage(MESSAGE + "\n  " + tasks.getTaskString(index));
+        return ui.showMessage(MESSAGE + "\n  " + tasks.getTaskString(index));
     }
 
     @Override

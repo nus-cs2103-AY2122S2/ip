@@ -16,7 +16,7 @@ public abstract class Command {
      * @param ui Ui used to show result messages.
      * @param storage Local storage file.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Checks for it is an exit command.

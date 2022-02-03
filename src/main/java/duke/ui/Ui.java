@@ -25,9 +25,8 @@ public class Ui {
     /**
      * Prints the exit message.
      */
-    public void showExitMessage() {
-        showMessage(EXIT_MESSAGE);
-        sc.close();
+    public String showExitMessage() {
+        return EXIT_MESSAGE;
     }
 
     /**
@@ -45,9 +44,7 @@ public class Ui {
      *
      * @param message The string message to be printed.
      */
-    public void showMessage(String message) {
-        System.out.println(DIVIDER);
-        System.out.println(message);
-        System.out.println(DIVIDER);
+    public String showMessage(String message) {
+        return DIVIDER + "\n" + message + "\n" + DIVIDER + "\n";
     }
 }

@@ -11,8 +11,8 @@ public class UnknownCommand extends Command {
     private static final String MESSAGE = "I'm sorry, but I don't know what that means :-(";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(MESSAGE);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showMessage(MESSAGE);
     }
 
     @Override

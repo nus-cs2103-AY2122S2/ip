@@ -22,10 +22,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.deleteTask(index);
         storage.saveTaskList(tasks);
-        ui.showMessage(MESSAGE + "\n  " + t.toString() + "\n" + tasks.printTaskCount());
+        return ui.showMessage(MESSAGE + "\n  " + t.toString() + "\n" + tasks.printTaskCount());
     }
 
     @Override
