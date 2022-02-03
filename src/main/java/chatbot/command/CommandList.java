@@ -1,22 +1,20 @@
-package chatbot.util;
+package chatbot.command;
 
-import chatbot.command.Command;
-import chatbot.command.CommandOutput;
 import chatbot.task.TaskList;
 
 import java.util.Hashtable;
 
 /**
- * Parser of user input.
+ * A collection of commands.
  */
-public class Parser {
+public class CommandList {
     private final Hashtable<String, Command> commands;
     private final Command unrecognizedCommand;
 
     /**
-     * Constructs an empty parser.
+     * Constructs an empty command list.
      */
-    public Parser() {
+    public CommandList() {
         this.commands = new Hashtable<>();
         this.unrecognizedCommand = new Command("bye") {
             @Override

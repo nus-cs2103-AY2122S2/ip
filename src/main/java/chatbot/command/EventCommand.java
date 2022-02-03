@@ -51,9 +51,11 @@ public class EventCommand extends Command {
         } else if (endTime == null) {
             return new CommandOutput("Error: Invalid end time\n" + FORMAT, "/audio/notification.wav");
         } else if (startDate.isAfter(endDate)) {
-            return new CommandOutput("Error: Start date cannot be after end date\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Error: Start date cannot be after end date\n" + FORMAT,
+                    "/audio/notification.wav");
         } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
-            return new CommandOutput("Error: Start time cannot be after end time\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Error: Start time cannot be after end time\n" + FORMAT,
+                    "/audio/notification.wav");
         }
 
         // Add event.

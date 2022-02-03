@@ -5,23 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
 public class DialogBox extends VBox {
     @FXML
     private Label name;
     @FXML
     private Label message;
 
-    public DialogBox(String name, String message) {
+    public DialogBox(String name, String message, String fxmlFile) {
+        // Since DialogBox is simple, combine the MVC into one.
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/BotDialogBox.fxml"));
-            fxmlLoader.setController(this);
+            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource(fxmlFile));
+            fxmlLoader.setController(this); // Only the controller has access to the FXML objects.
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
             this.name.setText(name);
             this.message.setText(message);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
