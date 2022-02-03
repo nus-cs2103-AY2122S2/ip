@@ -54,6 +54,13 @@ public class Duke {
                     }
 
                     ui.printMessage(results.toString());
+                } else if (parser.getType(command).equals("mark")) {
+                    int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                    pastTasks.get(index).isDone = true;
+
+                    ui.printMessage("OK, I've marked this task as done:\n  "
+                            + pastTasks.get(index)
+                    );
                 } else if (parser.getType(command).equals("unmark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
                     pastTasks.get(index).isDone = false;
