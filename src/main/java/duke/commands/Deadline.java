@@ -9,24 +9,22 @@ import java.time.format.DateTimeParseException;
  * Represents a Deadline to be met by the user with a specified date and/or time.
  */
 public class Deadline extends Task {
-
+    private static final String[] DATE_FORMATS = {
+        "dd/MM/yyyy",
+        "dd MM yyyy",
+        "MMM dd yyyy",
+        "yyyy/MM/dd",
+        "yyyy MM dd",
+    };
+    private static final String[] TIME_FORMATS = {
+        "HHmm",
+        "HH:mm",
+    };
     private String by;
     private LocalDate date;
     private LocalTime time;
     private String dateFormat;
     private String timeFormat;
-
-    private static final String[] DATE_FORMATS = {
-            "dd/MM/yyyy",
-            "dd MM yyyy",
-            "yyyy/MM/dd",
-            "yyyy MM dd",
-            "MMM dd yyyy",
-    };
-    private static final String[] TIME_FORMATS = {
-            "HHmm",
-            "HH:mm",
-    };
 
     /**
      * Constructs a Deadline object.
@@ -57,6 +55,7 @@ public class Deadline extends Task {
                     return false;
                 }
             } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
         return false;
@@ -77,6 +76,7 @@ public class Deadline extends Task {
                 this.dateFormat = format;
                 return true;
             } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
             }
         }
         return false;
@@ -125,3 +125,4 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + (this.getDate() + " " + this.getTime()).trim() + ")";
     }
 }
+

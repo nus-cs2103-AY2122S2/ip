@@ -1,12 +1,12 @@
 package duke.helpers;
 
+import java.util.regex.Pattern;
+
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EmptyTimeException;
 import duke.exceptions.InvalidCommandException;
-import duke.commands.Command;
-
-import java.util.regex.Pattern;
 
 /**
  * Represents a parser which makes sense of user inputs and calls the calls the corresponding commands.
@@ -52,12 +52,18 @@ public class Parser {
             missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
             missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
             break;
-            case FIND:
-                res = res = Pattern.matches("find .+", s);
-                break;
+        case FIND:
+            res = res = Pattern.matches("find .+", s);
+            break;
+        default:
+            break;
         }
-        if (missingDesc) { throw new EmptyDescriptionException(command.toString()); }
-        if (missingTime) { throw new EmptyTimeException(command.toString()); }
+        if (missingDesc) {
+            throw new EmptyDescriptionException(command.toString());
+        }
+        if (missingTime) {
+            throw new EmptyTimeException(command.toString());
+        }
         return res;
     }
 

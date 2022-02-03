@@ -4,17 +4,15 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-
 import java.util.ArrayList;
 
 import duke.commands.Deadline;
 import duke.commands.Event;
-import duke.commands.ToDo;
 import duke.commands.Task;
+import duke.commands.ToDo;
 
 /**
  * Represents a storage for all Task data a Duke object saves according to user input.
@@ -58,7 +56,7 @@ public class Storage {
             java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
             BufferedReader reader = java.nio.file.Files.newBufferedReader(path);
             String line;
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] temp = line.split("#");
                 String command = temp[0];
                 boolean isMarked = temp[1].equals("X");

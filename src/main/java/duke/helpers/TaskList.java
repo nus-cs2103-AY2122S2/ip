@@ -1,15 +1,14 @@
 package duke.helpers;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidDateException;
-import duke.exceptions.InvalidIndexException;
+import java.util.ArrayList;
 
 import duke.commands.Deadline;
 import duke.commands.Event;
-import duke.commands.ToDo;
 import duke.commands.Task;
-
-import java.util.ArrayList;
+import duke.commands.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidIndexException;
 
 /**
  * Represents an array of Tasks which the user can perform operations on including adding,
@@ -29,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * Constructs a TaskList object that stores an empty ArrayList<Task>.
+     * Constructs a TaskList object that stores an empty array of Tasks.
      */
     public TaskList() {
         tasks = new ArrayList<Task>();
@@ -56,8 +55,11 @@ public class TaskList {
         if (index >= 0 && index < len()) {
             Task t = getTask(index);
             tasks.remove(t);
-            ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
-                    "\n\tNow you have " + getNumOfTasks() + " in the list.";;
+            ans += "Noted. I've removed this task:\n\t\t"
+                    + t.toString()
+                    + "\n\tNow you have "
+                    + getNumOfTasks()
+                    + " in the list.";;
         } else {
             throw new InvalidIndexException();
         }
@@ -119,8 +121,11 @@ public class TaskList {
         ToDo t = new ToDo(desc);
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + getNumOfTasks() + " in the list.";
+        ans += "Got it. I've added this task:\n\t\t"
+                + t.toString()
+                + "\n\tNow you have "
+                + getNumOfTasks()
+                + " in the list.";
         System.out.println(ans);
     }
 
@@ -141,8 +146,11 @@ public class TaskList {
         }
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + getNumOfTasks() + " in the list.";
+        ans += "Got it. I've added this task:\n\t\t"
+                + t.toString()
+                + "\n\tNow you have "
+                + getNumOfTasks()
+                + " in the list.";
         System.out.println(ans);
     }
 
@@ -163,8 +171,11 @@ public class TaskList {
         }
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + getNumOfTasks() + " in the list.";
+        ans += "Got it. I've added this task:\n\t\t"
+                + t.toString()
+                + "\n\tNow you have "
+                + getNumOfTasks()
+                + " in the list.";
         System.out.println(ans);
     }
 
@@ -210,7 +221,7 @@ public class TaskList {
         String ans = "\tHere are the matching tasks in your list:";
         for (int i = 0; i < len(); i++) {
             Task t = tasks.get(i);
-            if(t.matchDescription(keyword)) {
+            if (t.matchDescription(keyword)) {
                 ans += String.format("\n\t%d.%s", i + 1, t.toString());
                 isMatched = true;
             }

@@ -1,18 +1,18 @@
 package duke.helpers;
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 public class DukeTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Ui ui;
+    private Ui ui;
 
     @Test
     public void uiWelcome_welcomePrinted() {

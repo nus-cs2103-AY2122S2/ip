@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.helpers.Parser;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a chatbot. A Duke object corresponds to
