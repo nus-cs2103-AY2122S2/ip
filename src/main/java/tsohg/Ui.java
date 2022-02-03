@@ -157,9 +157,9 @@ public class Ui {
         OUT.println(tasks.listCount());
     }
 
-    private void find(String argument) throws DukeException {
+    private void find(String argument) throws TsohgException {
         if (argument == null)
-            throw new DukeException("OOPS!!! The description of find cannot be empty.");
+            throw new TsohgException("OOPS!!! The description of find cannot be empty.");
         String response = tasks.find(argument);
         OUT.println("Here are the matching tasks in your list:");
         OUT.println(response);
