@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,16 +23,10 @@ public class Storage {
      * Creates a file at Path "data/duke.txt" if it does not exist.
      * If the file exists, do nothing.
      */
-    public void checkFile() {
-        try {
-            Files.createDirectory(Paths.get("data"));
-        } finally {
-        }
+    public void checkFile() throws IOException {
+        Files.createDirectory(Paths.get("data"));
 
-        try {
-            Files.createFile(Paths.get("data/duke.txt"));
-        } finally {
-        }
+        Files.createFile(Paths.get("data/duke.txt"));
     }
 
 
@@ -51,7 +46,6 @@ public class Storage {
             fw.write(textToAdd.toString());
             fw.close();
         } catch (IOException ex) {
-            checkFile();
             saveFile(toDoList);
         }
     }
@@ -92,10 +86,8 @@ public class Storage {
             }
 
             return toDoList;
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException | FileNotFoundException ex) {
             throw new LoadingException("Index Out of Bounds");
         }
-
-        return new ArrayList<Task> (100);
     }
 }

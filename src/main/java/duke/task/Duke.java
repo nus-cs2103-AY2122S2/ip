@@ -1,17 +1,18 @@
 package duke.task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Represents the Duke Chatbot. A <code>Duke</code> object corresponds to a Duke chatbot.
  */
-
 public class Duke {
     private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
+
 
     /**
      * Creates a new instance of <code>Duke</code>> object and initializes its attributes.
@@ -22,13 +23,18 @@ public class Duke {
         ui.greeting();
 
         storage = new Storage();
-        storage.checkFile();
+
+        try {
+            storage.checkFile();
+        } catch (IOException ex) {
+            ui.showLoadingError();
+        }
 
         try {
             taskList = new TaskList(storage.readFile());
         } catch (LoadingException ex) {
             ui.showLoadingError();
-            taskList = new TaskList(new ArrayList<Task> (100));
+            taskList = new TaskList(new ArrayList<Task>(100));
         }
 
         parser = new Parser();
@@ -154,5 +160,7 @@ public class Duke {
         ui.confirmRemoval(removed, taskList.getToDoList());
     }
 
-
+    String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }
