@@ -1,11 +1,16 @@
 package duke.managers;
 
-import duke.exceptions.DukeException;
-import duke.tasks.TaskList;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import duke.exceptions.DukeException;
+import duke.tasks.TaskList;
 
 /**
  * Represents a storage that handles the saving/loading of
@@ -34,8 +39,7 @@ public class Storage {
      *
      * @return a TaskList that was saved previously by the program.
      */
-    public TaskList load() throws DukeException  {
-
+    public TaskList load() throws DukeException {
         try {
             FileInputStream fis = new FileInputStream(absoluteFilePath.toString());
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -61,7 +65,9 @@ public class Storage {
         file.getParentFile().mkdirs();
         try {
             file.createNewFile();
-        } catch (IOException e) {      }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             FileOutputStream fos = new FileOutputStream(absoluteFilePath.toString());

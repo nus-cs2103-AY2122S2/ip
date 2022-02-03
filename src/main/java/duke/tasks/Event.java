@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
 import duke.exceptions.DukeException;
 
 /**
@@ -35,7 +36,7 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + startTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + " to "
-                + endTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) +")";
+                + endTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
     }
 
     /**
@@ -53,7 +54,7 @@ public class Event extends Task {
         String endString = "";
         int idx = 0;
 
-        for (;idx < tokens.length; idx++) {
+        for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("event")) {
                 continue;
             } else if (tokens[idx].equals("/at")) {
@@ -63,12 +64,13 @@ public class Event extends Task {
             item += tokens[idx] + " ";
         }
 
-        if (item.equals(""))
+        if (item.equals("")) {
             throw new DukeException("The description of an event task cannot be empty!");
+        }
 
         LocalDate date;
-        LocalTime startTime, endTime;
-
+        LocalTime startTime;
+        LocalTime endTime;
         try {
             date = LocalDate.parse(tokens[idx]);
             idx++;

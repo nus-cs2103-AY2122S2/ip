@@ -1,11 +1,12 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.managers.Storage;
 import duke.managers.Ui;
 import duke.tasks.TaskList;
 
-import java.util.ArrayList;
 
 /**
  * Represents a find command recognized by the parser.
@@ -26,14 +27,14 @@ public class FindCommand extends Command {
      */
     @Override
     public void handleParam(String[] tokens) throws DukeException {
-        if (tokens.length < 2)
+        if (tokens.length < 2) {
             throw new DukeException("Invalid input! Please specify a description for the tasks to search!");
+        }
         String searchString = "";
         for (String token : tokens) {
             if (token.equals("find")) {
                 continue;
-            }
-            else {
+            } else {
                 searchString += " " + token;
             }
         }

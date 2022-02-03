@@ -2,8 +2,9 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.managers.Storage;
-import duke.tasks.TaskList;
 import duke.managers.Ui;
+import duke.tasks.TaskList;
+
 
 /**
  * Represents a todo command recognized by the parser.

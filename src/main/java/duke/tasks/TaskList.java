@@ -3,7 +3,6 @@ package duke.tasks;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import duke.tasks.*;
 import duke.exceptions.DukeException;
 
 /**

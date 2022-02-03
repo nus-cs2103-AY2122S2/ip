@@ -1,9 +1,11 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
-import duke.managers.Ui;
-import duke.managers.Storage;
 import duke.exceptions.DukeException;
+import duke.managers.Storage;
+import duke.managers.Ui;
+import duke.tasks.TaskList;
+
+
 /**
  * Represents a delete command recognized by the parser.
  * It stores the index of the task that is to be deleted. Upon

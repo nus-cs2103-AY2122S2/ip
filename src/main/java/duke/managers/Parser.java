@@ -1,22 +1,22 @@
 package duke.managers;
 
-import duke.commands.*;
-import duke.exceptions.DukeException;
-
 import java.util.ArrayList;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a manager that handles recognition of user input.
  */
 public class Parser {
 
-    protected ArrayList<Command> commandList;
+    protected ArrayList<Command> commands;
 
     /**
      * Creates an instance of a Parser and initializes its internal command list.
      */
     public Parser() {
-        commandList = new ArrayList<>();
+        commands = new ArrayList<>();
     }
 
     /**
@@ -25,7 +25,7 @@ public class Parser {
      * @param command the command to be added.
      */
     public void addCommand(Command command) {
-        commandList.add(command);
+        commands.add(command);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Parser {
     public Command parse(String input) throws DukeException {
         String[] tokens = input.split(" ");
         Command recognizedCommand = null;
-        for (Command c : commandList) {
+        for (Command c : commands) {
             if (c.checkIdentifier(tokens[0])) {
                 recognizedCommand = c;
                 break;

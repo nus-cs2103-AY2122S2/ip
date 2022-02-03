@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.TaskList;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {

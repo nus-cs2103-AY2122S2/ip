@@ -32,6 +32,10 @@ public abstract class Task implements Serializable {
         isCompleted = value;
     }
 
+    /**
+     * Prints the completion status and description of todo.
+     * @return the object representation of a todo.
+     */
     public String toString() {
         String display = isCompleted ? "[X]" : "[ ]";
         return display + " " + description.toString();
