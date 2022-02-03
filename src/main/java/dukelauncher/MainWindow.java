@@ -56,6 +56,8 @@ public class MainWindow extends AnchorPane {
         );
 
         if (input.equalsIgnoreCase("bye")) {
+            userInput.setDisable(true); //disables these features to prevent further user input
+            sendButton.setDisable(true);
             new Timer().schedule(new TimerTask() {
                 public void run() {
                     System.exit(0);
