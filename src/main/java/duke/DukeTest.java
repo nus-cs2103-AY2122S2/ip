@@ -3,10 +3,10 @@ package src.main.java.duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import src.main.java.duke.task.Deadline;
-import src.main.java.duke.task.Event;
+import src.main.java.duke.task.Deadlines;
+import src.main.java.duke.task.Events;
 import src.main.java.duke.task.Task;
-import src.main.java.duke.task.ToDo;
+import src.main.java.duke.task.ToDos;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -135,13 +135,13 @@ public class DukeTest {
 
         switch (dataArr[0]) {
             case "D":
-                taskList.add(new Deadline(dataArr[2], marked));
+                taskList.add(new Deadlines(dataArr[2], marked));
                 break;
             case "T":
-                taskList.add(new ToDo(dataArr[2], marked));
+                taskList.add(new ToDos(dataArr[2], marked));
                 break;
             case "E":
-                taskList.add(new Event(dataArr[2], marked));
+                taskList.add(new Events(dataArr[2], marked));
                 break;
             default:
                 break;
@@ -199,7 +199,7 @@ public class DukeTest {
                         if (splitInput.length < 2) {
                             throw new DukeException("The description of a todo cannot be empty.");
                         } else {
-                            addTask(new ToDo(splitInput[1]));
+                            addTask(new ToDos(splitInput[1]));
                             addToSave(save, "T", false, splitInput[1]);
                             break;
                         }
@@ -207,7 +207,7 @@ public class DukeTest {
                         if (splitInput.length < 2) {
                             throw new DukeException("The description of a deadline cannot be empty.");
                         } else {
-                            addTask(new Deadline(splitInput[1]));
+                            addTask(new Deadlines(splitInput[1]));
                             addToSave(save, "D", false, splitInput[1]);
                             break;
                         }
@@ -215,7 +215,7 @@ public class DukeTest {
                         if (splitInput.length < 2) {
                             throw new DukeException("The description of an event cannot be empty.");
                         } else {
-                            addTask(new Event(splitInput[1]));
+                            addTask(new Events(splitInput[1]));
                             addToSave(save, "E", false, splitInput[1]);
                             break;
                         }

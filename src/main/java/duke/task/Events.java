@@ -7,26 +7,13 @@ import java.time.format.DateTimeParseException;
 
 import src.main.java.duke.DukeException;
 
-/**
- * Event is a Task that should be attended at a certain date and time.
- */
-public class Event extends Task {
-    private static String type = "E";
-    private String printed;
-    private LocalDate date;
-    private LocalTime time;
+public class Events extends Task {
+    protected static String type = "E";
+    protected String printed;
+    protected LocalDate date;
+    protected LocalTime time;
 
-    /**
-     * Constructor for Event that takes in a description of the Event task and
-     * whether it is marked as done.
-     * 
-     * @param description the description of the event task, containing the date and
-     *                    time of the event
-     * @param isDone      true if the event task has been marked as done
-     * @throws DukeException exception thrown when the event datetime is invalid due
-     *                       to missing input or improper input format
-     */
-    public Event(String description, boolean isDone) throws DukeException {
+    public Events(String description, boolean isDone) throws DukeException {
         super(type, description, isDone);
         try {
             String[] temp = description.split("/at ");
@@ -52,22 +39,10 @@ public class Event extends Task {
         }
     }
 
-    /**
-     * Constructor for Event that takes in a description of the Event task.
-     * 
-     * @param description the description of the event task, containing the date and
-     *                    time of the event
-     * @throws DukeException exception thrown when the event datetime is invalid due
-     *                       to missing input or improper input format
-     */
-    public Event(String description) throws DukeException {
+    public Events(String description) throws DukeException {
         this(description, false);
     }
 
-    /**
-     * toString method is overriden to ensure that the String representation of the
-     * Event task is readable
-     */
     @Override
     public String toString() {
         return this.isDone ? "[E][X] " + this.printed

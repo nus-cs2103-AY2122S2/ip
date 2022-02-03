@@ -8,22 +8,9 @@ import src.main.java.duke.command.ListCommand;
 import src.main.java.duke.command.MarkCommand;
 import src.main.java.duke.command.UnmarkCommand;
 
-/**
- * Parser class parses the command passed in as a String and represents it as a
- * Command that the program can manage.
- */
 public class Parser {
     private static String description;
 
-    /**
-     * parse method is a static method that takes in a command as a String and
-     * return the relevent Command object to be executed.
-     * 
-     * @param fullCommand the command as a String
-     * @return Command object that triggers an action from the program based on the
-     *         command
-     * @throws DukeException exception thrown when command is invalid or improper
-     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String action = splitCommand[0];

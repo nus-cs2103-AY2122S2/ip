@@ -9,9 +9,6 @@ import java.io.IOException;
 
 import src.main.java.duke.task.Task;
 
-/**
- * Storage class manages the storage file and the actions on the storage file.
- */
 public class Storage {
     private File file;
     private static String buffer = " xxx ";
@@ -20,25 +17,10 @@ public class Storage {
         ADD, MODIFY, DELETE, RESET;
     }
 
-    /**
-     * Constructor for Storage that takes in a file path that points to the storage
-     * file
-     * 
-     * @param filePath
-     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
-    /**
-     * load method reads the content of the storage file and passes the data to be
-     * processed by the program.
-     * 
-     * @return an array of Strings each representing the tasks stored in the storage
-     *         file
-     * @throws DukeException exception thrown when file cannot be found or is
-     *                       corrupted
-     */
     public String[] load() throws DukeException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
@@ -62,14 +44,6 @@ public class Storage {
         }
     }
 
-    /**
-     * updateAfterAdd method takes in a task that has just been added as input and
-     * reflects the addition of the task in the storage list.
-     * 
-     * @param task the task that has just been added to the task list
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
     public void updateAfterAdd(Task task) throws DukeException {
         try {
             int marked = task.isDone() ? 1 : 0;
@@ -82,38 +56,14 @@ public class Storage {
         }
     }
 
-    /**
-     * updateAfterMark method takes in an index that references a task that has just
-     * been marked as done and reflects the change in the storage list.
-     * 
-     * @param idx the index of the task that has just been marked as done
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
     public void updateAfterMark(int idx) throws DukeException {
         this.modifyFile(idx, true);
     }
 
-    /**
-     * updateAfterUnmark method takes in an index that references a task that has
-     * just been marked as not yet done and reflects the change in the storage list.
-     * 
-     * @param idx the index of the task that has just been marked as not yet done
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
     public void updateAfterUnmark(int idx) throws DukeException {
         this.modifyFile(idx, false);
     }
 
-    /**
-     * updateAfterDelete method takes in an index that references a taskm taht has
-     * just been deleted and reflects the deletion in the storage list.
-     * 
-     * @param idx the index of the task that has just been deleted
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
     public void updateAfterDelete(int idx) throws DukeException {
         try {
             int lineCounter = 0;
@@ -142,15 +92,9 @@ public class Storage {
         }
     }
 
-    /**
-     * modifyFile method updates the storage file when there has just been a change
-     * to whether a task has been marked as done or not yet done.
-     * 
-     * @param idx  index of the task which the action is performed on
-     * @param mark true if the action marked the task as done, otherwise false
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
+    public void resetFile() throws DukeException {
+        this.reset();
+    }
 
     private void modifyFile(int idx, boolean mark) throws DukeException {
         try {
@@ -189,13 +133,7 @@ public class Storage {
         }
     }
 
-    /**
-     * resetFile method wipes the storage file of all its data.
-     * 
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
-    public void resetFile() throws DukeException {
+    private void reset() throws DukeException {
         try {
             FileWriter writer = new FileWriter(file, false);
             writer.write("");

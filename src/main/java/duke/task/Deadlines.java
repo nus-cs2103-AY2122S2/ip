@@ -7,26 +7,13 @@ import java.time.format.DateTimeParseException;
 
 import src.main.java.duke.DukeException;
 
-/**
- * Deadline is a Task that should be done by a certain date and time.
- */
-public class Deadline extends Task {
-    private static String type = "D";
-    private String printed;
-    private LocalDate date;
-    private LocalTime time;
+public class Deadlines extends Task {
+    protected static String type = "D";
+    protected String printed;
+    protected LocalDate date;
+    protected LocalTime time;
 
-    /**
-     * Constructor for Deadline that takes in a description of the Deadline task and
-     * whether it is marked as done.
-     * 
-     * @param description the description of the deadline task, containing the date
-     *                    and time of deadline
-     * @param isDone      true if the deadline task has been marked as done
-     * @throws DukeException exception thrown when the deadline is invalid due to
-     *                       missing deadline or improper input format
-     */
-    public Deadline(String description, boolean isDone) throws DukeException {
+    public Deadlines(String description, boolean isDone) throws DukeException {
         super(type, description, isDone);
         try {
             String[] temp = description.split("/by ");
@@ -52,23 +39,10 @@ public class Deadline extends Task {
         }
     }
 
-    /**
-     * Constructor for Deadline that takes in a description of the Deadline task
-     * 
-     * @param description the description of the deadline task, containing the date
-     *                    and time of deadline
-     * @throws DukeException exception thrown when the deadline is invalid due to
-     *                       missing deadline or improper input format
-     */
-
-    public Deadline(String description) throws DukeException {
+    public Deadlines(String description) throws DukeException {
         this(description, false);
     }
 
-    /**
-     * toString method is overriden to ensure that the String representation of the
-     * Deadline task is readable
-     */
     @Override
     public String toString() {
         return this.isDone ? "[D][X] " + this.printed
