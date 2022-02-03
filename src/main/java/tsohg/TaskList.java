@@ -102,6 +102,21 @@ public class TaskList {
     }
 
     /**
+     * Finds list of tasks that matches a keyword.
+     * @param keyword The keyword to be searched for.
+     * @return A string representing of list of tasks that matches the keyword.
+     */
+    public String find(String keyword) {
+        String result = "";
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).contains(keyword)) {
+                result = result.concat(String.format("%d.%s\n", i + 1, items.get(i)));
+            }
+        }
+        return result;
+    }
+
+    /**
      * Reads from the storage and populate the content as a list.
      * @throws TsohgException If something wrong happens.
      */
@@ -163,7 +178,4 @@ public class TaskList {
         }
         return result;
     }
-
-
-
 }
