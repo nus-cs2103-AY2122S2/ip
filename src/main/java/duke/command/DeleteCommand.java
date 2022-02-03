@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
         if (index > taskList.taskLength() || index < 1) {
             throw new DukeTaskListException("");
         }
+        
         return new DeleteResponse(this.taskList.removeTask(index - 1), taskList.taskLength());
     }
 }

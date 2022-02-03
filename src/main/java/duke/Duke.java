@@ -39,6 +39,7 @@ public class Duke {
         try {
             Command result = commandHandler.getCommand(input);
             result.getResources(store, taskList);
+            store.loadToDisk(taskList);
             return result.execute().callback();
         } catch (DukeException e) {
             return e.callback();
