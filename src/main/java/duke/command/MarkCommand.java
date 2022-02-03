@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import task.Task;
-import utility.UI;
-import task.TaskList;
-import utility.Storage;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.utility.UI;
+import duke.task.TaskList;
+import duke.utility.Storage;
 
 /**
  * Command for mark and unmark for tasks
@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (this.dukeException != null) {
             throw this.dukeException;
         } else if (this.index <= 0 || this.index > tasks.getSize()) {
@@ -45,8 +45,9 @@ public class MarkCommand extends Command {
         } else {
             task.setMarked(false);
         }
-        ui.print(String.format("I've marked task %d!", this.index));
+        ui.print(String.format("I've marked duke.task %d!", this.index));
         storage.save(tasks);
+        return null;
     }
 
     @Override

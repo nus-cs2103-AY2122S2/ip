@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import task.TaskList;
-import utility.Storage;
-import utility.UI;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.utility.Storage;
+import duke.utility.UI;
 
 public class FindCommand extends Command{
 
@@ -22,12 +22,13 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if(this.dukeException != null) {
             throw this.dukeException;
         }
         TaskList findTasks = tasks.filterByKeyword(this.keyword);
         findTasks.printTasks(ui);
+        return null;
     }
 
     @Override

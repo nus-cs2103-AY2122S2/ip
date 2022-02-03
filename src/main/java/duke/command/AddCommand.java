@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import task.*;
-import utility.UI;
-import utility.Storage;
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.utility.Storage;
+import duke.utility.UI;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Add new task for command class
+ * Add new duke.task for duke.command class
  */
 public class AddCommand extends Command {
     String type;
@@ -69,7 +69,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if(this.dukeException != null) {
             throw this.dukeException;
         }
@@ -84,9 +84,10 @@ public class AddCommand extends Command {
             throw new DukeException("invalid type");
         }
         tasks.add(t);
-        ui.print("i added this task: ");
+        ui.print("i added this duke.task: ");
         ui.print(t.toString());
         storage.save(tasks);
+        return null;
     }
 
     /**

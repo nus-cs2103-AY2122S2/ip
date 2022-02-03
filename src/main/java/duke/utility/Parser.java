@@ -1,7 +1,7 @@
-package utility;
+package duke.utility;
 
-import command.*;
-import exception.DukeException;
+import duke.command.*;
+import duke.exception.DukeException;
 
 import java.util.StringTokenizer;
 
@@ -41,7 +41,7 @@ public class Parser {
         if (command != null) {
             return command;
         } else {
-            throw new DukeException("That is not a valid command");
+            throw new DukeException("That is not a valid duke.command");
         }
 
     }

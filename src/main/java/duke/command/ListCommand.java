@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import task.TaskList;
-import utility.UI;
-import utility.Storage;
+import duke.task.TaskList;
+import duke.utility.UI;
+import duke.utility.Storage;
 
 /**
- * Command for list out items in task list
+ * Command for list out items in duke.task list
  */
 public class ListCommand extends Command{
 
@@ -14,8 +14,9 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList task, UI ui, Storage storage) {
+    public String execute(TaskList task, UI ui, Storage storage) {
         task.printTasks(ui);
+        return null;
     }
 
     @Override
