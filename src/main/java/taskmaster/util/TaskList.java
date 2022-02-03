@@ -89,9 +89,8 @@ public class TaskList {
         } else {
             sb.append("    \nHere are the tasks in your list:");
             for (int i = 0; i < currentSize; i++) {
-                sb.append("    " + (i + 1) + ". " + this.taskList.get(i));
+                sb.append("    " + (i + 1) + ". " + this.taskList.get(i) + "\n");
             }
-            sb.append("\n");
         }
         return sb.toString();
     }
@@ -122,9 +121,10 @@ public class TaskList {
     public String find(String strToFind) {
         StringBuilder sb = new StringBuilder();
         int count = 1;
+        sb.append("Finding Tasks with keyword " + strToFind + " \n");
         for (Task task:taskList) {
             if (task.containsKeyword(strToFind)) {
-                sb.append(count + ". " + task + "\n");
+                sb.append("     " + count + ". " + task + "\n");
                 count++;
             }
         }

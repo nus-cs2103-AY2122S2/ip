@@ -68,7 +68,7 @@ public class DeleteCommands extends Commands {
         String result = "";
         Task selectedTask = taskList.get(index - 1);
         result += "YES! I've removed this task and soon I'll remove you as well!:\n";
-        result += printTask(selectedTask);
+        result += printTask(selectedTask) + "\n";
         taskList.delete(index - 1);
         result += taskList.returnCurrentSize();
         return result;

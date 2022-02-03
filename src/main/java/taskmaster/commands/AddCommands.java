@@ -153,10 +153,10 @@ public class AddCommands extends Commands {
 
 
     private String printTask(Task newTask, TaskList taskList) {
-        return "Quit ordering me around!"
+        return "Quit ordering me around!\n"
                 + "I've added this task to our list:"
-                + "    " + newTask.toString()
-                + taskList.returnCurrentSize();
+                + "    \n" + newTask.toString()
+                + "\n" + taskList.returnCurrentSize();
     }
 
     /**

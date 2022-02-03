@@ -30,7 +30,7 @@ public class UserInterface {
      */
 
     public String displayByeMessage() {
-        return "See you around kiddo, I'm an angsty dude but deep down i'm a lonely man";
+        return "   See you around kiddo, I'm an angsty dude but deep down i'm a lonely man";
     }
 
 
@@ -40,8 +40,8 @@ public class UserInterface {
      */
 
     public String displayInvalidCommand(String input) {
-        return "\n" + input + "?"
-                + "\nWhat are you on about? \n Type 'help' if "
+        return "\n   " + input + "?"
+                + "\n   What are you on about? \n Type 'help' if "
                 + "you want to know the commands, kid!\n";
     }
 
@@ -51,26 +51,24 @@ public class UserInterface {
 
     public String displayListOfCommand() {
         String result = "";
-        result += "____________________________________________________________\n";
-        result += "\nCommands: ";
-        result += "    List                                    -List out all your current tasks\n";
-        result += "    todo <task name>                        -Add a todo task without any deadline"
+        result += "   Commands:\n";
+        result += "   List\n     -List out all your current tasks\n";
+        result += "   todo <task name>\n     -Add a todo task without any deadline"
                             + " specified\n";
-        result += "    deadline <task name> /by <Date><Time>   -Adds a task that has to be done before "
-                            + "the specified deadline\n";
-        result += "    event <task name> /at <Date><Time>      -Adds a task that occurs at the specified "
-                            + "time and date\n";
-        result += "    mark <task number>                      -Marks task as completed\n";
-        result += "    unmark <task number>                    -Marks a completed task as uncompleted\n";
-        result += "    delete <task number>                    -Deletes the task at the specified index\n";
-        result += "    bye                                     -Exits the program\n";
-        result += "    find <keyword>                          -Retrieves all tasks that contains the "
-                            + "specified keyword\n";
-        result += "____________________________________________________________\n";
+        result += "   deadline <taskname> /by <Date><Time>\n     -Adds a task due by "
+                            + "specified deadline\n";
+        result += "   event <taskname> /at <Date><Time>\n     -Adds a task that occurs at the specified "
+                            + "time\n";
+        result += "   mark <task number>\n     -Marks task as completed\n";
+        result += "   unmark <task number>\n     -Marks a completed task as uncompleted\n";
+        result += "   delete <task number>\n     -Deletes the task at the specified index\n";
+        result += "   bye\n     -Exits the program\n";
+        result += "   find <keyword>\n     -Retrieves all tasks that contains the "
+                            + "keyword\n";
         return result;
     }
 
     public String displayErrorMessage(String errorMsg) {
-        return errorMsg;
+        return "   " + errorMsg;
     }
 }
