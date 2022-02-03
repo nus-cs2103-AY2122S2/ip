@@ -8,6 +8,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  * Duke class
  */
@@ -17,7 +20,6 @@ public class Duke {
     private Storage storage;
     private TaskList task;
     private Ui ui;
-
     /**
      * Constructor for Duke object
      * @param filePath filepath of data to be saved/retrieved
@@ -36,30 +38,41 @@ public class Duke {
     /**
      * run the program
      */
-    public void run() {
-        ui.showWelcome();
+    public void run(String input) {
         DukeManager dukeManager = new DukeManager();
-        boolean isRunning = true;
-        while (isRunning) {
             try {
-                String inputCommand = ui.readCommand();
-                String testCommand = dukeManager.test(inputCommand);
+                String testCommand = dukeManager.test(input);
                 Command<String> newTask = Parser.parseCommand(testCommand, task, storage, ui);
-                isRunning = newTask.isRunning();
+                if (!newTask.isRunning()) {
+                    System.exit(0);
+                }
             } catch (DukeException e) {
-                System.err.print(e + "\n");
+                System.out.print(e.getMessage() + "\n");
             }
         }
-        ui.showBye();
-    }
 
     /**
-     * entry method to run program
-     * @param args inputs
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        String pathToFile = "./data/duke.txt";
-        new Duke(pathToFile).run();
+    public String getResponse(String input) {
+        ByteArrayOutputStream responseOutput = new ByteArrayOutputStream();
+        PrintStream stringConvert = new PrintStream(responseOutput);
+        PrintStream old = System.out;
+        System.setOut(stringConvert);
+        run(input);
+        System.out.flush();
+        System.setOut(old);
+        return responseOutput.toString();
     }
+
+//    /**
+//     * entry method to run program
+//     * @param args inputs
+//     */
+//    public static void main(String[] args) {
+//        String pathToFile = "./data/duke.txt";
+//        new Duke(pathToFile).getResponse();
+//    }
 }
 
