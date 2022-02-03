@@ -92,6 +92,38 @@ public class TaskList implements Iterable<Task> {
     }
     
     /**
+     * Marks the task at the given index.
+     * Returns false if the index is invalid.
+     *
+     * @param index Index to return.
+     * @return Boolean.
+     */
+    public boolean markTask(int index) {
+        try {
+            this.taskList.get(index).markAsDone();
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+    
+    /**
+     * Unmarks the task at the given index.
+     * Returns false if the index is invalid.
+     *
+     * @param index Index to return.
+     * @return Boolean.
+     */
+    public boolean unmarkTask(int index) {
+        try {
+            this.taskList.get(index).markAsNotDone();
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+    
+    /**
      * Queries for all tasks containing the given string.
      *
      * @param query Query string.

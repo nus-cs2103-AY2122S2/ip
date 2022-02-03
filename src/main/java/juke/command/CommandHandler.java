@@ -14,7 +14,7 @@ public class CommandHandler {
     /**
      * Collection of command objects mapped to its command name.
      */
-    public static final HashMap<String, Supplier<? extends Command>> COMMANDS = new HashMap<>();
+    public static final HashMap<String, Supplier<Command>> COMMANDS = new HashMap<>();
     
     /**
      * Initializes the commands.

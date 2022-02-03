@@ -1,8 +1,13 @@
 package juke.common;
 
+import juke.command.Command;
+import juke.command.CommandHandler;
 import juke.command.Result;
+import juke.exception.JukeInvalidCommandException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 /**
  * Manages the user interface involving user input and console output.
@@ -34,8 +39,36 @@ public class Ui {
         this.in = new Scanner(System.in);
     }
     
-    public String[] getInput() {
-        return this.in.nextLine().trim().split("\\s+");
+    public void runUiLoop() {
+        this.printPrefix();
+        try {
+            Command cmd = this.getCommand(this.getInput());
+            this.executeAndPrint(cmd);
+        } catch (JukeInvalidCommandException e) {
+            this.formattedPrint(e.getMessage());
+        }
+    }
+    
+    public String getInput() {
+        return this.in.nextLine();
+    }
+    
+    public Command getCommand(String input) throws JukeInvalidCommandException {
+        ArrayList<String[]> paramSplit = Parser.parseInput(input);
+        Supplier<Command> cmdSup = CommandHandler.COMMANDS.get(paramSplit.get(0)[0]);
+        if (cmdSup == null) {
+            throw new JukeInvalidCommandException(paramSplit.get(0)[0]);
+        }
+        Command cmd = cmdSup.get().addParameter("", paramSplit.remove(0)[1]);
+        for (String[] args : paramSplit) {
+            cmd = cmd.addParameter(args[0], args[1]);
+        }
+        return cmd;
+    }
+    
+    public void executeAndPrint(Command command) {
+        command.execute();
+        this.displayResult(command.getResult());
     }
     
     /**
@@ -51,6 +84,10 @@ public class Ui {
      */
     public void printLogo() {
         System.out.println(LOGO);
+    }
+    
+    public void printPrefix() {
+        System.out.print(LINE_PREFIX);
     }
     
     /**

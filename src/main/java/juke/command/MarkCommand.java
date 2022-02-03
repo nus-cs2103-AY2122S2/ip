@@ -1,7 +1,6 @@
 package juke.command;
 
 import juke.exception.JukeException;
-import juke.task.Task;
 import juke.task.TaskStatus;
 
 public class MarkCommand extends Command {
@@ -37,19 +36,22 @@ public class MarkCommand extends Command {
         }
         try {
             int index = Integer.parseInt(this.getDefaultArgument()) - 1;
-            if (index < 0 || index >= juke.getTaskList().size()) {
-                this.result = Result.error(new JukeException("Invalid index"));
-                return this;
-            }
-            Task task = this.juke.getTaskList().get(index);
             switch (this.status) {
             case DONE:
-                task.markAsDone();
-                this.result = Result.success("Marked task as done.");
+                if (this.juke.getTaskList().markTask(index)) {
+                    this.result = Result.success("Marked task as done.");
+                } else {
+                    this.result = Result.error(new JukeException("Invalid index"));
+                    return this;
+                }
                 break;
             case NOT_DONE:
-                task.markAsNotDone();
-                this.result = Result.success("Marked task as not done");
+                if (this.juke.getTaskList().unmarkTask(index)) {
+                    this.result = Result.success("Marked task as not done");
+                } else {
+                    this.result = Result.error(new JukeException("Invalid index"));
+                    return this;
+                }
                 break;
             }
         } catch (NumberFormatException e) {
