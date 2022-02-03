@@ -7,17 +7,17 @@ import connor.task.TaskType;
  * Represents an Add {@code Command}.
  */
 public class AddCommand extends Command {
-    private TaskType tt;
+    private TaskType taskType;
     private String desc;
 
     /**
      * Constructor for {@code AddCommand} class.
      *
-     * @param tt Type of Task.
+     * @param taskType Type of Task.
      * @param desc Description of the task.
      */
-    public AddCommand(TaskType tt, String desc) {
-        this.tt = tt;
+    public AddCommand(TaskType taskType, String desc) {
+        this.taskType = taskType;
         this.desc = desc;
     }
 
@@ -25,8 +25,8 @@ public class AddCommand extends Command {
      * Adds a {@code Task} to the task list.
      */
     @Override
-    public void activate() {
-        TaskList.addTask(tt, desc);
+    public String activate() {
+        return TaskList.addTask(taskType, desc);
     }
 
 

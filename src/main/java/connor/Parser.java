@@ -25,6 +25,7 @@ public class Parser {
     private CommandType commandType;
     private Command command;
     private boolean canActivate = true;
+    private StringBuilder message = new StringBuilder();
 
     /**
      * Constructor for {@code Parser} class. Parses the user's input and creates the corresponding
@@ -39,6 +40,7 @@ public class Parser {
         String commandRaw = statements[0];
         String command = statements[0].toLowerCase();
         String desc = statements[1].trim();
+
         switch (command) {
         case "exit":
         case "bye": {
@@ -73,6 +75,7 @@ public class Parser {
                 this.command = new DeleteCommand(taskNo);
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_INDEX_NOT_INTEGER);
+                message.append(ERROR_INDEX_NOT_INTEGER);
                 canActivate = false;
             }
             break;
@@ -89,6 +92,7 @@ public class Parser {
                 this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_INDEX_NOT_INTEGER);
+                message.append(ERROR_INDEX_NOT_INTEGER);
                 canActivate = false;
             }
             break;
@@ -100,6 +104,7 @@ public class Parser {
                 this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_INDEX_NOT_INTEGER);
+                message.append(ERROR_INDEX_NOT_INTEGER);
                 canActivate = false;
             }
             break;
@@ -112,6 +117,7 @@ public class Parser {
         default: {
             this.commandType = CommandType.UNKNOWN;
             System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+            message.append(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
             canActivate = false;
         }
         }
@@ -120,11 +126,11 @@ public class Parser {
     /**
      * Parses the command, if it is a valid command.
      */
-    public void parse() {
+    public String parse() {
         if (!canActivate) {
-            return;
+            return message.toString();
         }
-        command.activate();
+        return command.activate();
     }
 
 }

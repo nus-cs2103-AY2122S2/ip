@@ -33,9 +33,15 @@ public class TaskList {
     private static final String ERROR_INVALID_DL_FORMAT = "Error! Wrong format for deadlines.\n\n"
             + "Deadline tasks must include \"by\" in the description.\nExample: \n"
             + ">>> deadline Finish project /by Monday Morning";
+    private static final String ERROR_INVALID_DL_FORMAT_GUI = "Error! Wrong format for deadlines.\n\n"
+            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
+            + "'deadline Finish project /by Monday Morning'";
     private static final String ERROR_INVALID_EVENT_FORMAT = "Error! Wrong format for events.\n\n"
             + "Event tasks must include \"at\" in the description.\nExample: \n"
             + ">>> event Birthday Party at May 5th";
+    private static final String ERROR_INVALID_EVENT_FORMAT_GUI = "Error! Wrong format for events.\n\n"
+            + "Event tasks must include \"at\" in the description.\nExample: \n"
+            + "'event Birthday Party at May 5th'";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
@@ -55,16 +61,21 @@ public class TaskList {
      * Prints the {@code Task}s on the console, with one {@code Task} in each line.
      * If there are no {@code Task}s in the task list, the method will print that
      * there are no {@code Task}s on the console.
+     *
+     * @return A String listing all the tasks.
      */
-    public static void viewTasks() {
+    public static String viewTasks() {
         if (tasks.size() == 0) {
             print(EMPTY_TASK_LIST);
-            return;
+            return EMPTY_TASK_LIST;
         }
         print(SHOW_TASKS);
+        StringBuilder tasksToString = new StringBuilder(SHOW_TASKS + "\n");
         for (int i = 1; i <= tasks.size(); i++) {
             print(INDENT + i + ". " + tasks.get(i - 1));
+            tasksToString.append(INDENT + i + ". " + tasks.get(i - 1) + "\n");
         }
+        return tasksToString.toString();
     }
 
     /**
@@ -79,30 +90,33 @@ public class TaskList {
      * @param taskType Type of {@code Task}.
      * @param desc Description of the task and also the occasion if the {@code Task} is a
      *             {@code Deadline} or an {@code Event}.
+     * @return Message containing confirmation that a task was added or an error.
      */
-    public static void addTask(TaskType taskType, String desc) {
+    public static String addTask(TaskType taskType, String desc) {
         if (desc.isEmpty()) {
             print(ERROR_EMPTY_TASK_DESC);
-            return;
+            return ERROR_EMPTY_TASK_DESC;
         }
+        StringBuilder message = new StringBuilder();
         switch (taskType) {
         case TODO:
             ToDo todo = new ToDo(desc);
             tasks.add(todo);
             print(ADD_NEW_TASK);
             print(INDENT + todo);
+            message.append(ADD_NEW_TASK + "\n" + INDENT + todo + "\n");
             break;
         case DEADLINE: {
             if (!desc.contains("/by")) {
                 print(ERROR_INVALID_DL_FORMAT);
-                return;
+                return ERROR_INVALID_DL_FORMAT_GUI;
             }
             String[] phrases = desc.split("/by", 2);
             String thing = phrases[0].trim();
             String when = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_DL_DESC);
-                return;
+                return ERROR_EMPTY_TASK_DESC;
             }
             try {
                 // Check if 'when' is a valid date
@@ -111,26 +125,28 @@ public class TaskList {
                 tasks.add(deadline);
                 print(ADD_NEW_TASK);
                 print(INDENT + deadline);
+                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
             } catch (DateTimeParseException e) {
                 // Otherwise, treat it as a normal String
                 Deadline deadline = new Deadline(thing, when);
                 tasks.add(deadline);
                 print(ADD_NEW_TASK);
                 print(INDENT + deadline);
+                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
             }
             break;
         }
         case EVENT: {
             if (!desc.contains("/at")) {
                 print(ERROR_INVALID_EVENT_FORMAT);
-                return;
+                return ERROR_INVALID_EVENT_FORMAT_GUI;
             }
             String[] phrases = desc.split("/at", 2);
             String thing = phrases[0].trim();
             String when = phrases[1].trim();
             if (thing.isBlank() || when.isBlank()) {
                 print(ERROR_EMPTY_EVENT_DESC);
-                return;
+                return ERROR_EMPTY_EVENT_DESC;
             }
             try {
                 // Check if 'when' is a valid date
@@ -139,48 +155,57 @@ public class TaskList {
                 tasks.add(event);
                 print(ADD_NEW_TASK);
                 print(INDENT + event);
+                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
             } catch (DateTimeParseException e) {
                 // Otherwise, treat it as a normal String
                 Event event = new Event(thing, when);
                 tasks.add(event);
                 print(ADD_NEW_TASK);
                 print(INDENT + event);
+                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
             }
             break;
         }
         default: {
             // Something has gone wrong
             print(ERROR_INVALID_TASK_TYPE);
-            return;
+            return ERROR_INVALID_TASK_TYPE;
         }
         }
         // After task is added show current number of tasks
         print("");
         getNumberOfTasks();
+        message.append(getNumberOfTasksString());
+        return message.toString();
     }
 
     /**
      * Deletes a {@code Task} in the task list with the given index.
      *
      * @param index Index of the task to be deleted.
+     * @return Message containing confirmation that a task was deleted or an error.
      */
-    public static void deleteTask(int index) {
+    public static String deleteTask(int index) {
         try {
             Task t = tasks.get(index);
             tasks.remove(index);
             print(DELETE_TASK);
             print(INDENT + t);
+            return DELETE_TASK + "\n" + INDENT + t;
         } catch (IndexOutOfBoundsException e) {
             print(ERROR_INDEX_OUT_OF_RANGE);
+            return ERROR_INDEX_OUT_OF_RANGE;
         }
     }
 
     /**
      * Clears all {@code Task}s from the task list.
+     * @return Message containing confirmation that all tasks were cleared.
      */
-    public static void clearTasks() {
+    public static String clearTasks() {
         tasks.clear();
         print(CLEAR_TASKS_CONFIRMED);
+        return CLEAR_TASKS_CONFIRMED;
     }
 
     /**
@@ -188,8 +213,9 @@ public class TaskList {
      *
      * @param ts Status of the task to be applied.
      * @param index Index of the task to be marked/unmarked.
+     * @return Message containing confirmation that a task was marked/unmarked or an error.
      */
-    public static void markStatus(TaskStatus ts, int index) {
+    public static String markStatus(TaskStatus ts, int index) {
         switch (ts) {
         case MARK: {
             try {
@@ -197,15 +223,16 @@ public class TaskList {
                 t.mark();
                 print(MARK_TASK);
                 print(INDENT + t);
+                return MARK_TASK + "\n" + INDENT + t;
             } catch (IndexOutOfBoundsException e) {
                 if (tasks.isEmpty()) {
                     print(ERROR_MARK_EMPTY);
-                    return;
+                    return ERROR_MARK_EMPTY;
                 }
                 print(ERROR_INDEX_OUT_OF_RANGE);
                 getNumberOfTasks();
+                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
             }
-            break;
         }
         case UNMARK: {
             try {
@@ -213,20 +240,21 @@ public class TaskList {
                 t.unmark();
                 print(UNMARK_TASK);
                 print(INDENT + t);
+                return UNMARK_TASK + "\n" + INDENT + t;
             } catch (IndexOutOfBoundsException e) {
                 if (tasks.isEmpty()) {
                     print(ERROR_UNMARK_EMPTY);
-                    return;
+                    return ERROR_MARK_EMPTY;
                 }
                 print(ERROR_INDEX_OUT_OF_RANGE);
                 getNumberOfTasks();
+                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
             }
-            break;
         }
         default: {
             // Something has gone wrong
             print(ERROR_INVALID_TASK_STATUS);
-            return;
+            return ERROR_INVALID_TASK_STATUS;
         }
         }
     }
@@ -236,10 +264,11 @@ public class TaskList {
      * prints out the matching tasks and returns an {@code ArrayList} with the matching tasks.
      *
      * @param keyword Keyword used to find matching {@code Task}s.
-     * @return An {@code ArrayList} of the matching tasks.
+     * @return A String listing all matching tasks.
      */
-    public static ArrayList<Task> findTasks(String keyword) {
+    public static String findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
+        StringBuilder taskListString = new StringBuilder();
         for (Task t : TaskList.getTasks()) {
             // Search is not case-sensitive
             if (t.getDesc().toLowerCase().contains(keyword.trim().toLowerCase())) {
@@ -248,13 +277,16 @@ public class TaskList {
         }
         if (matchingTasks.size() == 0) {
             print(NO_MATCHING_TASKS);
+            return NO_MATCHING_TASKS;
         } else {
             print(SHOW_MATCHING_TASKS);
+            taskListString.append(SHOW_MATCHING_TASKS + "\n");
             for (int i = 1; i <= matchingTasks.size(); i++) {
                 print(INDENT + i + ". " + matchingTasks.get(i - 1));
+                taskListString.append(INDENT + i + ". " + matchingTasks.get(i - 1) + "\n");
             }
         }
-        return matchingTasks;
+        return taskListString.toString();
     }
 
     /**
@@ -267,6 +299,11 @@ public class TaskList {
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
         return tasks.size();
+    }
+
+    public static String getNumberOfTasksString() {
+        String plurality = tasks.size() == 1 ? "" : "s";
+        return "You have " + tasks.size() + " task" + plurality + ".";
     }
 
     private static void print(String s) {

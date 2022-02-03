@@ -22,7 +22,12 @@ public class Connor {
 
     private static final String TASK_FILEPATH = "data/connor.txt";
 
+    private static final String GOODBYE = "Farewell. See you next time!";
+
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
+    private static final String ERROR_FIX_TASK_FILE_START = "ERROR: ";
+    private static final String ERROR_FIX_TASK_FILE_END = "Please fix the appropriate typo "
+            + "in the task file or clear it completely.";
 
     private static boolean isActive = true;
     private static final Scanner sc = new Scanner(System.in);
@@ -56,11 +61,9 @@ public class Connor {
         } catch (FileNotFoundException e) {
             print(ERROR_FILE_NOT_FOUND);
             e.printStackTrace();
-            return;
         } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
-            print("ERROR: " + e.getMessage());
-            print("Please fix the appropriate typo in the task file or clear it completely.");
-            return;
+            print(ERROR_FIX_TASK_FILE_START + e.getMessage());
+            print(ERROR_FIX_TASK_FILE_END);
         }
         TaskList.viewTasks();
         print(LINE);
@@ -75,6 +78,49 @@ public class Connor {
             storage.updateFile();
         }
         sc.close();
+    }
+
+    /**
+     * Runs the Connor Program in a GUI. Greets the user first, shows their current tasks,
+     * and finally asks for the user's input.
+     * <p>
+     * Once the user has inputted their command,
+     * the program attempts to parse and activate the input if the input is valid,
+     * before asking for another input. This process loops indefinitely until the user exits.
+     *
+     * @return A {@code String} message that greets the user followed by either an error
+     * or a list of their tasks.
+     */
+    public String runGui() {
+        StringBuilder sb = new StringBuilder(ui.greetings());
+        try {
+            storage.loadTasks();
+        } catch (FileNotFoundException e) {
+            sb.append(ERROR_FILE_NOT_FOUND);
+            return sb.toString();
+        } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
+            sb.append(ERROR_FIX_TASK_FILE_START + e.getMessage() + "\n" + ERROR_FIX_TASK_FILE_END);
+            return sb.toString();
+        }
+        sb.append(TaskList.viewTasks());
+        return sb.toString();
+    }
+
+    /**
+     * Gets a {@code String} of Connor's response to the given input.
+     *
+     * @param input
+     * @return {@code String} of Connor's response to the given input.
+     */
+    public String getResponse(String input) {
+        Parser p = new Parser(input);
+        String response = p.parse();
+        storage.updateFile();
+        return response;
+    }
+
+    public static String getGoodbye() {
+        return GOODBYE;
     }
 
     /**
@@ -94,6 +140,15 @@ public class Connor {
      */
     public static void setActive(boolean isActive) {
         Connor.isActive = isActive;
+    }
+
+    /**
+     * Returns a {@code String} of the task file path.
+     *
+     * @return String of the task file path.
+     */
+    public static String getFilePath() {
+        return TASK_FILEPATH;
     }
 
     /**

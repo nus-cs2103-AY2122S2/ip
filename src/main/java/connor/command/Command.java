@@ -7,5 +7,5 @@ public abstract class Command {
     /**
      * Activates the command.
      */
-    public abstract void activate();
+    public abstract String activate();
 }
