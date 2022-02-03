@@ -1,6 +1,8 @@
 package duke;
 
 import duke.exception.RonException;
+import duke.exception.WriteException;
+import duke.parser.InputParser;
 
 /**
  * Custom chatbot adapted from Duke
@@ -14,8 +16,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String filePath = "data/tasks.txt";
+    private InputParser inputParser = new InputParser();
 
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -26,11 +30,28 @@ public class Duke {
         }
     }
 
+    public String showWriteError() {
+        return new WriteException().toString();
+    }
+
     public void run() {
         this.ui.start(tasks);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String backupTasks() {
+        try {
+            tasks.backup();
+            return "Bye. Stay safe and have a nice day!";
+        } catch (RonException e) {
+            return showWriteError();
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            return inputParser.parseInput(input, tasks);
+        } catch (RonException e) {
+            return e.toString();
+        }
     }
 }

@@ -78,16 +78,17 @@ public class TaskList {
         return this.store.get(index);
     }
 
-    public void printTasks() {
+    public String printTasks() {
+        String string = "";
         int i = 1;
         for (Task task : this.store) {
-            System.out.print(i + ".");
-            System.out.println(task);
+            string += i + "." + task + "\n";
             i++;
         }
+        return string;
     }
 
-    public void findTasks(String substring) {
+    public String findTasks(String substring) {
         List<Task> tempList = new ArrayList<>();
         for (Task task : this.store) {
             if (task.getDescription().contains(substring)) {
@@ -95,12 +96,14 @@ public class TaskList {
             }
         }
 
+        String string = "";
+
         int i = 1;
         for (Task task : tempList) {
-            System.out.print(i + ".");
-            System.out.println(task);
+            string += i + "." + task + "\n";
             i++;
         }
+        return string;
     }
 
     /**
