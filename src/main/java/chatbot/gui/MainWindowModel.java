@@ -5,6 +5,7 @@ import chatbot.command.DeadlineCommand;
 import chatbot.command.DeleteCommand;
 import chatbot.command.EventCommand;
 import chatbot.command.FindCommand;
+import chatbot.command.HelpCommand;
 import chatbot.command.ListCommand;
 import chatbot.command.MarkCommand;
 import chatbot.command.ResetCommand;
@@ -32,6 +33,7 @@ public class MainWindowModel {
         this.commandList.addCommand(new UnmarkCommand());
         this.commandList.addCommand(new ResetCommand());
         this.commandList.addCommand(new FindCommand());
+        this.commandList.addCommand(new HelpCommand());
     }
 
     public CommandList getCommandList() {

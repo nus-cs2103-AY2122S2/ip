@@ -10,18 +10,18 @@ import javafx.scene.layout.VBox;
 
 class UserDialogBox extends DialogBox {
     public UserDialogBox(String message) {
-        super("/view/UserDialogBox.fxml", "/view/user.png", message);
+        super("/view/fxml/UserDialogBox.fxml", "/view/png/user.png", message);
     }
 }
 
 class BotDialogBox extends DialogBox {
     public BotDialogBox(String message) {
-        super("/view/BotDialogBox.fxml", "/view/bot.png", message);
+        super("/view/fxml/BotDialogBox.fxml", "/view/png/bot.png", message);
     }
 }
 
 public class MainWindowController {
-    public static final String NOTIFICATION_SOUND_FILE = "/audio/notification.wav";
+    public static final String NOTIFICATION_SOUND_FILE = "/audio/wav/notification.wav";
     private final MainWindowModel model;
     @FXML
     private ScrollPane scrollPane;
@@ -45,6 +45,8 @@ public class MainWindowController {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(new BotDialogBox("Hello! I'm Delphine. How may I help you today?"));
+        Ui.playSound(NOTIFICATION_SOUND_FILE);
     }
 
     /**

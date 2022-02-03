@@ -7,8 +7,8 @@ import chatbot.task.ToDo;
 import java.util.Arrays;
 
 public class ToDoCommand extends Command {
-    private static final String TRIGGER = "todo";
-    private static final String FORMAT = "Command Format: \"" + TRIGGER + " <desc>\"";
+    public static final String TRIGGER = "todo";
+    public static final String FORMAT = TRIGGER + " <desc>";
 
     public ToDoCommand() {
         super(TRIGGER);
@@ -25,7 +25,7 @@ public class ToDoCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Empty description\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Error: Empty description\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         }
 
         // Add event.
@@ -33,6 +33,6 @@ public class ToDoCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                        taskList.size()), "/audio/notification.wav");
+                        taskList.size()), "/audio/wav/notification.wav");
     }
 }

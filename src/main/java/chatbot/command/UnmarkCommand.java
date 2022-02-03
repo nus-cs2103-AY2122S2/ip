@@ -4,9 +4,9 @@ import chatbot.task.Task;
 import chatbot.task.TaskList;
 
 public class UnmarkCommand extends Command {
-    private static final String TRIGGER = "unmark";
-    private static final String FORMAT =
-            "Command format: \"" + TRIGGER + " <index>\"\n" + "Index range: 1 to <size of list>";
+    public static final String TRIGGER = "unmark";
+    public static final String FORMAT =
+            TRIGGER + " <index>\n" + "Index range: 1 to <size of list>";
 
     public UnmarkCommand() {
         super(TRIGGER);
@@ -19,9 +19,9 @@ public class UnmarkCommand extends Command {
             Task task = taskList.get(index - 1);
             task.setDone(false);
             return new CommandOutput(String.format("OK, I've marked this task as not done yet:\n  %s", task),
-                    "/audio/notification.wav");
+                    "/audio/wav/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         }
     }
 }

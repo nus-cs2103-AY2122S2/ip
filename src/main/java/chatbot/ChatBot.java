@@ -19,7 +19,7 @@ public class ChatBot extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/fxml/MainWindow.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
             fxmlLoader.<MainWindowController>getController().setTerminateCallback(() -> {
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));

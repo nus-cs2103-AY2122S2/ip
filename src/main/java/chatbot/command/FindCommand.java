@@ -6,8 +6,8 @@ import chatbot.task.TaskList;
 import java.util.Arrays;
 
 public class FindCommand extends Command {
-    private static final String TRIGGER = "find";
-    private static final String FORMAT = "Command format: \"" + TRIGGER + " <keyword>\n";
+    public static final String TRIGGER = "find";
+    public static final String FORMAT = TRIGGER + " <keyword>";
 
     public FindCommand() {
         super(TRIGGER);
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length < 2) {
-            return new CommandOutput("Error: Blank keyword\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Error: Blank keyword\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         }
 
         String keyword = String.join(" ", Arrays.asList(input).subList(1, input.length));
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
         // No tasks found
         if (tasks.length == 0) {
-            return new CommandOutput("No matching tasks found.", "/audio/notification.wav");
+            return new CommandOutput("No matching tasks found.", "/audio/wav/notification.wav");
         }
 
         // Tasks found
@@ -32,6 +32,6 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.length; ++i) {
             output.append(i + 1).append(". ").append(tasks[i].toString());
         }
-        return new CommandOutput(output.toString(), "/audio/notification.wav");
+        return new CommandOutput(output.toString(), "/audio/wav/notification.wav");
     }
 }

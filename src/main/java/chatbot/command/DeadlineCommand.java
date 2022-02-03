@@ -9,9 +9,9 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 public class DeadlineCommand extends Command {
-    private static final String TRIGGER = "deadline";
-    private static final String FORMAT =
-            "Command Format: \"" + TRIGGER + " <desc> /by <date> <time>\"\n" + "Date format: YYYY-MM-DD\n"
+    public static final String TRIGGER = "deadline";
+    public static final String FORMAT =
+            TRIGGER + " <desc> /by <date> <time>\n" + "Date format: YYYY-MM-DD\n"
                     + "Time format: HH:MM or HH:MM:SS";
 
     public DeadlineCommand() {
@@ -37,11 +37,11 @@ public class DeadlineCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Invalid description\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Invalid description\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         } else if (date == null) {
-            return new CommandOutput("Invalid date\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Invalid date\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         } else if (time == null) {
-            return new CommandOutput("Invalid time\n" + FORMAT, "/audio/notification.wav");
+            return new CommandOutput("Invalid time\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         }
 
         // Add event.
@@ -49,6 +49,6 @@ public class DeadlineCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task,
-                        taskList.size()), "/audio/notification.wav");
+                        taskList.size()), "/audio/wav/notification.wav");
     }
 }
