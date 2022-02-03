@@ -58,7 +58,7 @@ public class Ui {
      * Bids farewell to the user when the ChatBot is closed.
      */
     public String bye() {
-        return "Goodbye traveller! Hope to see you again soon!";
+        return "Goodbye traveller! Hope to see you again soon!\nThe application will close shortly.";
     }
 
     /**

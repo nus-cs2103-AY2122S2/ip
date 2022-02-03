@@ -3,6 +3,8 @@ package chatbot.gui.controller;
 import static javafx.application.Platform.exit;
 
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import chatbot.ChatBot;
 import javafx.fxml.FXML;
@@ -55,16 +57,19 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("clear")) {
             dialogContainer.getChildren().clear();
+            userInput.clear();
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getInnkeeperDialog(response, innkeeperImage)
             );
+            userInput.clear();
             if (input.equals("bye")) {
-                exit();
+                CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(() -> {
+                    exit();
+                });
             }
         }
-        userInput.clear();
     }
 
     /**
