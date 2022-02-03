@@ -1,14 +1,20 @@
 package van;
 
 public class Van {
-    public static void main(String[] args) {
-        boolean isExit = false;
-        Storage storage = new Storage("storage.txt");
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList(Parser.parseArray(storage.getTasks()));
-        while (!(isExit)) {
-            Command nextCommand = Parser.parseCommand(ui.standBy());
-            isExit = nextCommand.executeCommand(ui, taskList, storage);
-        }
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
+
+
+    public Van() {
+        storage = new Storage("storage.txt");
+        ui = new Ui();
+        taskList = new TaskList(Parser.parseArray(storage.getTasks()));
+    }
+
+    public String getResponse(String input) {
+        Command nextCommand = Parser.parseCommand(input);
+        nextCommand.executeCommand(ui, taskList, storage);
+        return ui.printString();
     }
 }

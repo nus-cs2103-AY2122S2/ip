@@ -15,9 +15,9 @@ public class ExitCommand implements Command {
      * @return returns true only when command executed is an ExitCommand
      */
     public boolean executeCommand(Ui ui, TaskList taskList, Storage storage) {
-        ui.printDivider();
         storage.saveTasks(taskList.getList());
         ui.exitMessage();
+        System.exit(0);
         return true;
     }
 }
