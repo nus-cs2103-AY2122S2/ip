@@ -1,4 +1,4 @@
-package dazz;
+package dazz.gui;
 
 import java.io.IOException;
 import java.util.Collections;

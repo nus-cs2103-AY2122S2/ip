@@ -19,13 +19,14 @@ import dazz.task.Task;
 import dazz.task.Todo;
 
 /**
- * Represents the backend of Dazz (chatbot)
+ * Represents the backend of Dazz
  */
 public class Storage {
     private File file;
 
     /**
-     * Constructs a <code>Storage</code> object. Directory and file will be created if not exists.
+     * Constructs a <code>Storage</code> object.
+     * Directory and file will be created if not exists.
      */
     public Storage() {
         try {
@@ -43,27 +44,27 @@ public class Storage {
     }
 
     /**
-     * Loads the text file containing different tasks.
-     * @return Lists of tasks read.
+     * Loads the text file containing different <code>Task</code>.
+     * @return The list of <code>Task</code> read.
      */
     public List<Task> loadList() {
-        List<Task> list = null;
+        List<Task> tasks = null;
         try {
             Scanner scanner = new Scanner(this.file);
-            list = new ArrayList<>();
+            tasks = new ArrayList<>();
             while (scanner.hasNext()) {
-                list.add(parseInput(scanner.nextLine()));
+                tasks.add(parseInputFromTextFile(scanner.nextLine()));
             }
-            return list;
+            return tasks;
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             return new ArrayList<>();
         } catch (InvalidDateFormatException e) {
-            return list;
+            return tasks;
         }
     }
 
-    private Task parseInput(String input) throws InvalidDateFormatException {
+    private Task parseInputFromTextFile(String input) throws InvalidDateFormatException {
         String[] arr = input.split("===");
         String taskType = arr[0].trim();
         boolean isDone = arr[1].trim().equals("1");
@@ -85,14 +86,14 @@ public class Storage {
     }
 
     /**
-     * Updates the text file whenever there is a change to the list of tasks.
-     * @param taskList <code>TaskList</code> task list
+     * Updates the text file whenever there is a change to the <code>TaskList</code>.
+     * @param taskList The <code>TaskList</code> that has changed.
      */
     public void updateList(TaskList taskList) {
         try {
             String filePath = file.getPath();
             FileWriter fw = new FileWriter(filePath);
-            List<Task> list = taskList.getTaskList();
+            List<Task> list = taskList.getTasks();
             for (Task task : list) {
                 fw.write(task.writeToFile() + System.lineSeparator());
             }

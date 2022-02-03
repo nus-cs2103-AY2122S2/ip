@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task that is an event.
+ * Represents a <code>Task</code> that is an event.
  */
 public class Event extends Task {
     private static final String TYPE = "E";
@@ -12,8 +12,8 @@ public class Event extends Task {
 
     /**
      * Constructs an <code>Event</code> task and is not completed by default.
-     * @param description Description of the event
-     * @param date Date of the event
+     * @param description Description of this <code>Event</code>.
+     * @param date Date of this <code>Event</code>.
      */
     public Event(String description, LocalDateTime date) {
         super(description);
@@ -22,9 +22,9 @@ public class Event extends Task {
 
     /**
      * Constructs an <code>Event</code> task and is completed depending on <code>isDone</code>.
-     * @param description Description of the event
-     * @param isDone Done or undone.
-     * @param date Date of the event
+     * @param description Description of this <code>Event</code>.
+     * @param isDone Done or undone <code>Event</code>.
+     * @param date Date of this <code>Event</code>.
      */
     public Event(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
@@ -32,8 +32,8 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the date and time of the task.
-     * @return Date and time of the task.
+     * Gets the date and time of this <code>Event</code>.
+     * @return Date and time of this <code>Event</code>.
      */
     public String getDateTimeFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd MMM yyyy, hh:mma]");
@@ -50,8 +50,8 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the event task.
-     * @return String representation of the event task.
+     * String representation of this <code>Event</code>.
+     * @return String representation of this <code>Event</code>.
      */
     @Override
     public String toString() {

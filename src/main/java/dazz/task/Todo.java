@@ -1,30 +1,30 @@
 package dazz.task;
 
 /**
- * Represent a task that is a todo.
+ * Represent a <code>Task</code> that is a todo.
  */
 public class Todo extends Task {
     private static final String TYPE = "T";
 
     /**
-     * Constructs a todo task.
-     * @param description Description of the todo.
+     * Constructs a <code>Todo</code>.
+     * @param description Description of this <code>Todo</code>.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Constructs a todo task and is completed depending on <code>isDone</code>
-     * @param description Description of the todo
-     * @param isDone Done or undone
+     * Constructs a <code>Todo</code> and is completed depending on <code>isDone</code>
+     * @param description Description of this <code>Todo</code>.
+     * @param isDone Done or undone <code>Todo</code>.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
     /**
-     * Reformats the task to be stored in a text file.
+     * Reformats this <code>Todo</code> to be stored in a text file.
      * @return Text that would be stored as in a file.
      */
     @Override
@@ -33,8 +33,8 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of the deadline task.
-     * @return String representation of the deadline task.
+     * String representation of this <code>Todo</code>.
+     * @return String representation of this <code>Todo</code>.
      */
     @Override
     public String toString() {

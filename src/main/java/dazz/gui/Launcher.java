@@ -1,4 +1,4 @@
-package dazz;
+package dazz.gui;
 
 import javafx.application.Application;
 

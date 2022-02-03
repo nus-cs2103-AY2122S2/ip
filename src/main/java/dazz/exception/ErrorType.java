@@ -1,5 +1,8 @@
 package dazz.exception;
 
+/**
+ * Represents all the possible error message from Dazz.
+ */
 public enum ErrorType {
     EMPTY_DATE("OOPS!!! Your date is empty! Please check!"),
     EMPTY_DESCRIPTION("OOPS!!! Your description is empty! Please check!"),
@@ -14,6 +17,10 @@ public enum ErrorType {
         taskType = s;
     }
 
+    /**
+     * Gets the error message.
+     * @return The error message.
+     */
     public String getErrorMessage() {
         return taskType;
     }

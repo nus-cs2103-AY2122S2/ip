@@ -12,7 +12,7 @@ public class Dazz {
     private final TaskList taskList;
 
     /**
-     * Creates a Dazz (chat box).
+     * Creates Dazz.
      */
     public Dazz() {
         this.storage = new Storage();
@@ -21,7 +21,7 @@ public class Dazz {
     }
 
     /**
-     * Runs the chatbot, allowing it to receive user inputs
+     * Runs Dazz, allowing it to receive user inputs.
      */
     public void run() {
         ui.showWelcome();
@@ -41,6 +41,11 @@ public class Dazz {
         }
     }
 
+    /**
+     * Gets the response of Dazz based on user input.
+     * @param input The user input.
+     * @return Response of Dazz based on the user input.
+     */
     public String getResponse(String input) {
         try {
             Command responseCommand = Parser.parse(input);

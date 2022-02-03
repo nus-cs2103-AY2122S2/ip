@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task that has a deadline
+ * Represents <code>Task</code> that has a deadline
  */
 public class Deadline extends Task {
     private static final String TYPE = "D";
@@ -12,8 +12,8 @@ public class Deadline extends Task {
 
     /**
      * Constructs a <code>Deadline</code> task and is not completed by default.
-     * @param description Description of the task.
-     * @param date Due date of the task.
+     * @param description Description of this <code>Deadline</code>.
+     * @param date Due date of this <code>Deadline</code>.
      */
     public Deadline(String description, LocalDateTime date) {
         super(description);
@@ -22,9 +22,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs a <code>Deadline</code> task and is completed depending on <code>isDone</code>.
-     * @param description Description of the task.
-     * @param isDone Done or undone task.
-     * @param date Due date of the task.
+     * @param description Description of this <code>Deadline</code>.
+     * @param isDone Done or undone <code>Deadline</code>.
+     * @param date Due date of this <code>Deadline</code>.
      */
     public Deadline(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
@@ -32,8 +32,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the date and time of the task.
-     * @return Date and time of the task.
+     * Gets the date and time of this <code>Deadline</code>.
+     * @return Date and time of this <code>Deadline</code>.
      */
     public String getDateTimeFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd MMM yyyy, hh:mma]");
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Reformats the task to be stored in a text file.
+     * Reformats this <code>Deadline</code> to be stored in a text file.
      * @return Text that would be stored as in a file.
      */
     @Override
@@ -50,8 +50,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of the deadline task.
-     * @return String representation of the deadline task.
+     * String representation of this <code>Deadline</code>.
+     * @return String representation of the this <code>Deadline</code>.
      */
     @Override
     public String toString() {

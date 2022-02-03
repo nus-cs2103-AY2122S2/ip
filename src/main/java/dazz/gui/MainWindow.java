@@ -1,5 +1,6 @@
-package dazz;
+package dazz.gui;
 
+import dazz.Dazz;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

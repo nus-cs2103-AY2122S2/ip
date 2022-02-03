@@ -1,7 +1,8 @@
-package dazz;
+package dazz.gui;
 
 import java.io.IOException;
 
+import dazz.Dazz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

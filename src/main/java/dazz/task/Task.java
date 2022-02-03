@@ -1,15 +1,15 @@
 package dazz.task;
 
 /**
- * Represents a generic task
+ * Represents a generic <code>Task</code>
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructs a task and is not completed by default.
-     * @param description Description of the task.
+     * Constructs a <code>Task</code> and is not completed by default.
+     * @param description Description of this <code>Task</code>.
      */
     public Task(String description) {
         this.description = description;
@@ -18,8 +18,8 @@ public class Task {
 
     /**
      * Constructs a task and is completed depending on <code>isDone</code>.
-     * @param description Description of the task.
-     * @param isDone Done or undone.
+     * @param description Description of this <code>Task</code>.
+     * @param isDone Done or undone <code>Task</code>.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -27,16 +27,16 @@ public class Task {
     }
 
     /**
-     * Gets the icon that represents a task is done or undone.
+     * Gets the icon that represents this <code>Task</code> is done or undone.
      * "X" if done and " " otherwise.
-     * @return Icon representing the task is done or undone
+     * @return Icon representing this <code>Task</code>. is done or undone
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * Gets the boolean representation of whether the task is done.
+     * Gets the boolean representation of whether this <code>Task</code> is done.
      * @return True if done and false otherwise.
      */
     public boolean getIsDone() {
@@ -44,8 +44,8 @@ public class Task {
     }
 
     /**
-     * Gets the description of the task.
-     * @return Description of the task.
+     * Gets the description of this <code>Task</code>.
+     * @return Description of this <code>Task</code>.
      */
     public String getDescription() {
         return this.description;
@@ -60,7 +60,7 @@ public class Task {
     }
 
     /**
-     * Sets the task to done.
+     * Sets this <code>Task</code> to done.
      */
     public void setDone() {
         if (!hasAlreadyMark()) {
@@ -69,7 +69,7 @@ public class Task {
     }
 
     /**
-     * Sets the task to undone.
+     * Sets this <code>Task</code> to undone.
      */
     public void setUndone() {
         if (!hasAlreadyUnmark()) {
@@ -78,7 +78,7 @@ public class Task {
     }
 
     /**
-     * Reformats the task to be stored in a text file.
+     * Reformats this <code>Task</code> to be stored in a text file.
      * @return Text that would be stored as in a file.
      */
     public String writeToFile() {
@@ -87,8 +87,8 @@ public class Task {
     }
 
     /**
-     * String representation of the deadline task.
-     * @return String representation of the deadline task.
+     * String representation of this <code>Task</code>.
+     * @return String representation of this <code>Task</code>.
      */
     @Override
     public String toString() {
