@@ -1,18 +1,18 @@
-package DukeComponent;
+package component;
 
-import Exceptions.TaskException;
-import Exceptions.EventException;
-import Exceptions.ToDosException;
-import Exceptions.IncorrectInputException;
-import Exceptions.DeadlineException;
-import Exceptions.WrongInputException;
+import exceptions.DeadlineException;
+import exceptions.EventException;
+import exceptions.IncorrectInputException;
+import exceptions.TaskException;
+import exceptions.ToDosException;
+import exceptions.WrongInputException;
 
 /**
  * A class that belongs to the DukeComponent Package.
  * This class encapsulates the Parser logic from users in Duke.
  */
 public class Parser {
-    String input;
+    private final String input;
 
     /**
      * Constructor for Parser.
@@ -27,7 +27,7 @@ public class Parser {
 
     /**
      * Execute the command for tasks.
-     * @param tasks Pass the TaskList into {@link DukeComponent.Command} class for manipulation.
+     * @param tasks Pass the TaskList into {@link component.Command} class for manipulation.
      */
     public void executeCommand(TaskList tasks) {
         Command c = new Command(input, tasks);
@@ -47,9 +47,12 @@ public class Parser {
         } else if (splitInput.length == 1) {
             String command = splitInput[0];
             switch (command) {
-            case "todo" -> throw new ToDosException();
-            case "deadline" -> throw new DeadlineException();
-            case "event" -> throw new EventException();
+            case "todo":
+                throw new ToDosException();
+            case "deadline":
+                throw new DeadlineException();
+            default: //case "event":
+                throw new EventException();
             }
         } else {
             String command = splitInput[0];
@@ -71,8 +74,8 @@ public class Parser {
     private static boolean notCommand(String command) {
         return (!command.equals("bye") && !command.equals("list")
                 && !command.equals("delete") && !command.equals("mark") && !command.equals("unmark")
-                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event") &&
-                !command.equals("find"));
+                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event")
+                && !command.equals("find"));
     }
 
 }

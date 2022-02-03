@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,9 +8,9 @@ import java.time.format.DateTimeParseException;
  * A class that belongs to the Tasks Package.
  * This class encapsulates the logic of how Tasks should be represented in Duke.
  */
-abstract public class Tasks {
+public abstract class Tasks {
 
-    private String task;
+    private final String task;
     private Boolean marked;
 
     /**
@@ -53,7 +53,7 @@ abstract public class Tasks {
      * a file.
      * @return
      */
-    abstract public String cacheString();
+    public abstract String cacheString();
 
     /**
      * Converts a date of format "yyyy-MM-dd" to "MMM dd yyyy".
@@ -74,6 +74,5 @@ abstract public class Tasks {
      * Converts Tasks to a String representation.
      * @return Task as a string.
      */
-    @Override
-    abstract public String toString();
+    public abstract String toString();
 }

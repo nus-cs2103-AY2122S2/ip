@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * A class that belongs to the Tasks Package.
@@ -25,7 +25,7 @@ public class Events extends Tasks {
     @Override
     public String cacheString() {
         String s = getMarked() ? "1" : "0";
-        return "E" + "|" + s + "|" + this.getTask() + "|"  + returnDate(this.date);
+        return "E" + "|" + s + "|" + this.getTask() + "|" + returnDate(this.date);
     }
 
     /**

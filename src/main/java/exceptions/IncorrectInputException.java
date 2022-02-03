@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * A class that belongs to the Exceptions Package.

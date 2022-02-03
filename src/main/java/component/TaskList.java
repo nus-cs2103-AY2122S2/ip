@@ -1,9 +1,9 @@
-package DukeComponent;
+package component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import Tasks.Tasks;
+import tasks.Tasks;
 
 /**
  * A class that belongs to DukeComponent Package.

@@ -1,9 +1,10 @@
-package DukeComponent;
+package component;
 
-import Tasks.Tasks;
-import Tasks.ToDos;
-import Tasks.Events;
-import Tasks.DeadLines;
+import tasks.DeadLines;
+import tasks.Events;
+import tasks.Tasks;
+import tasks.ToDos;
+
 
 /**
  * A class that belongs to the DukeComponent Package.
@@ -12,7 +13,7 @@ import Tasks.DeadLines;
 public class Command {
     private final String userInput;
     /**
-     * {@link DukeComponent.TaskList}
+     * {@link component.TaskList}
      */
     private final TaskList tasks;
 
@@ -44,14 +45,29 @@ public class Command {
         }
 
         switch (action) {
-        case "list" -> printList();
-        case "mark" -> mark(Integer.parseInt(wordSplit[1]) - 1);
-        case "unmark" -> unmark(Integer.parseInt(wordSplit[1]) - 1);
-        case "todo" -> addTask(new ToDos(userInput.substring(start), false));
-        case "deadline" -> addTask(new DeadLines(task, false, details));
-        case "event" -> addTask(new Events(task, false, details));
-        case "delete" -> deleteTask(Integer.parseInt(wordSplit[1]) - 1);
-        case "find" -> find(userInput.substring(5));
+        case "list":
+            printList();
+            break;
+        case "mark":
+            mark(Integer.parseInt(wordSplit[1]) - 1);
+            break;
+        case "unmark":
+            unmark(Integer.parseInt(wordSplit[1]) - 1);
+            break;
+        case "todo":
+            addTask(new ToDos(userInput.substring(start), false));
+            break;
+        case "deadline":
+            addTask(new DeadLines(task, false, details));
+            break;
+        case "event":
+            addTask(new Events(task, false, details));
+            break;
+        case "delete":
+            deleteTask(Integer.parseInt(wordSplit[1]) - 1);
+            break;
+        default: //case "find":
+            find(userInput.substring(5));
         }
     }
 

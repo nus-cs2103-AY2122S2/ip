@@ -1,6 +1,5 @@
-package DukeComponent;
+package component;
 
-import Tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,13 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tasks.DeadLines;
+import tasks.Events;
+import tasks.Tasks;
+import tasks.ToDos;
+
 /**
  * A class that belongs to the DukeComponent Package.
  * This class deals with loading tasks from a pre-constructed file and saving tasks to the file
  * from the Duke program.
  */
 public class Storage {
-    String pathName;
+    private final String pathName;
 
     /**
      * Constructor for Storage.
@@ -49,15 +53,15 @@ public class Storage {
                     ls.add(new Events(str.substring(4, str.lastIndexOf("|")),
                             marked, remainingStr));
                     break;
-                case "T":
+                default: //case "T":
                     ls.add(new ToDos(remainingStr, marked));
                     break;
                 }
             }
             s.close();
         } catch (FileNotFoundException e) {
-            System.out.println("There is no cache, " +
-                    "duke will be initialised as per normal.");
+            System.out.println("There is no cache, "
+                    + "duke will be initialised as per normal.");
         }
         return ls;
     }

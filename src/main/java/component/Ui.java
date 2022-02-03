@@ -1,7 +1,8 @@
-package DukeComponent;
+package component;
 
-import Exceptions.TaskException;
 import java.util.Scanner;
+
+import exceptions.TaskException;
 
 /**
  * A class that belongs to the DukeComponent Package.
@@ -19,8 +20,8 @@ public class Ui {
     /**
      * Runs the Ui for the Duke program.
      * @param sc Scanner to allow continuous user input from the CLI.
-     * @param tasks TaskList that is manipulated by the {@link DukeComponent.Command} class.
-     * @param storage Storage that is manipulated by the {@link DukeComponent.Command} class.
+     * @param tasks TaskList that is manipulated by the {@link component.Command} class.
+     * @param storage Storage that is manipulated by the {@link component.Command} class.
      */
     public void run(Scanner sc, TaskList tasks, Storage storage) {
         while (sc.hasNext()) {
@@ -34,7 +35,9 @@ public class Ui {
                 System.out.println(e.getMessage());
             }
             printHorizontalLine();
-            if (userInput.equals("bye")) break;
+            if (userInput.equals("bye")) {
+                break;
+            }
         }
     }
 
@@ -52,7 +55,7 @@ public class Ui {
      * Private helper method to print the horizontal lines in Duke Ui.
      */
     private static void printHorizontalLine() {
-        System.out.println("_____________" +
-                "_______________________________________________");
+        System.out.println("_____________"
+                + "_______________________________________________");
     }
 }

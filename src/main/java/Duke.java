@@ -1,7 +1,8 @@
-import DukeComponent.Storage;
-import DukeComponent.TaskList;
-import DukeComponent.Ui;
 import java.util.Scanner;
+
+import component.Storage;
+import component.TaskList;
+import component.Ui;
 
 /**
  *  A class that encapsulates the logic of Duke - A todo list program

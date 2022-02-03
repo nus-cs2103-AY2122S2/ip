@@ -26,10 +26,14 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    filter {
+        includeTestsMatching "Test"
+    }
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 shadowJar {

@@ -1,9 +1,9 @@
-package Exceptions;
+package exceptions;
 
 /**
  * A class that belongs to the Exceptions Package.
  * This class encapsulates the message that should be displayed when users parsed a wrong input for the
- * commands in {@link DukeComponent.Command} class.
+ * commands in {@link component.Command} class.
  */
 public class WrongInputException extends TaskException {
     public WrongInputException() {
