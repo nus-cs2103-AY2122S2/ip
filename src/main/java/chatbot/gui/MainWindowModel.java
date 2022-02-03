@@ -14,10 +14,7 @@ import chatbot.command.UnmarkCommand;
 import chatbot.task.TaskList;
 
 public class MainWindowModel {
-    public static final String BOT_NAME = "Delphine";
-    public static final String USER_NAME = "You";
     public static final String SAVE_FILE = "./data/save_file";
-    public static final String NOTIFICATION_SOUND_FILE = "/audio/notification.wav";
 
     private final CommandList commandList;
     private final TaskList taskList;
