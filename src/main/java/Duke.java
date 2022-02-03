@@ -2,8 +2,8 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.command.Command;
 import duke.Ui;
+import duke.command.Command;
 
 public class Duke {
 
@@ -30,7 +30,7 @@ public class Duke {
     private void run() {
         ui.showWelcome();
         boolean hasExit = false;
-        while(!hasExit) {
+        while (!hasExit) {
             // default case in Parser::parseCommand handles invalid commands
             String fullCommand = ui.readCommand();
             if (fullCommand.isBlank()) {
