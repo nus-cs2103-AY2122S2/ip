@@ -1,9 +1,8 @@
 package seedu.duke;
 
-import seedu.task.Task;
-import seedu.task.Todo;
-
 import java.util.Scanner;
+
+import seedu.task.Task;
 
 public class Ui {
 

@@ -4,14 +4,19 @@ import java.time.format.DateTimeFormatter;
 
 public class Task {
 
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     private boolean isCompleted;
     private final String description;
-    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
 
     public Task(String description) {
         this(description, false);
     }
 
+    /**
+     * Constructor for Task class
+     * @param description Description of Task
+     * @param isCompleted Marks whether task is completed or not
+     */
     public Task(String description, boolean isCompleted) {
         this.isCompleted = isCompleted;
         this.description = description;
@@ -34,7 +39,7 @@ public class Task {
     }
 
     public static DateTimeFormatter getFormatter() {
-        return formatter;
+        return FORMATTER;
     }
 
     public String toFile() {

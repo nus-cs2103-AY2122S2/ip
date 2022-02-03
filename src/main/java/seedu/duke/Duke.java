@@ -1,10 +1,10 @@
 package seedu.duke;
 
+import java.io.IOException;
+
+import seedu.commands.Command;
 import seedu.storage.Storage;
 import seedu.storage.TaskList;
-import seedu.commands.Command;
-
-import java.io.IOException;
 
 public class Duke {
 
@@ -13,6 +13,10 @@ public class Duke {
     private final Parser parser;
     private final Storage storage;
 
+    /**
+     * Constructor for Duke class
+     * @param filePath The file path of the save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -25,6 +29,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runner for the program.
+     * Saves task list into save file for every command run.
+     * Stops if command == "bye".
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

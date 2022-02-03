@@ -1,12 +1,12 @@
 package seedu.commands;
 
+import java.time.LocalDateTime;
+
 import seedu.duke.DukeException;
 import seedu.duke.Ui;
 import seedu.storage.Storage;
 import seedu.storage.TaskList;
 import seedu.task.Event;
-
-import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
 

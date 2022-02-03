@@ -1,6 +1,5 @@
 package seedu.commands;
 
-import seedu.duke.DukeException;
 import seedu.duke.Ui;
 import seedu.storage.Storage;
 import seedu.storage.TaskList;

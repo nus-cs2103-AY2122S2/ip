@@ -1,11 +1,5 @@
 package seedu.storage;
 
-import seedu.task.Deadline;
-import seedu.task.Event;
-import seedu.task.Task;
-import seedu.duke.DukeException;
-import seedu.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +9,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import seedu.duke.DukeException;
+import seedu.task.Deadline;
+import seedu.task.Event;
+import seedu.task.Task;
+import seedu.task.Todo;
+
+
 public class Storage {
 
     private final File file;
@@ -23,6 +24,11 @@ public class Storage {
         file = Paths.get(filePath).toFile();
     }
 
+    /**
+     * Reads contents of save file and initialises list.
+     * @return Arraylist of tasks read from save file.
+     * @throws DukeException Throws any error occurred during reading process.
+     */
     public ArrayList<Task> load() throws DukeException {
 
         if (Paths.get(file.getParent()).toFile().mkdirs()) {
@@ -58,9 +64,9 @@ public class Storage {
                     default:
                         throw new DukeException("Unknown task type found: " + task[0]);
                     }
-            }
+                }
 
-            return tasks;
+                return tasks;
             } catch (FileNotFoundException e) {
                 throw new DukeException("File for some reason cannot be found lol.");
             }
@@ -76,7 +82,12 @@ public class Storage {
         }
     }
 
-    public void saveAll(ArrayList<Task> tasks) throws DukeException{
+    /**
+     * Saves entire list into the save file.
+     * @param tasks Arraylist of tasks to be saved
+     * @throws DukeException Throws error occurred when saving
+     */
+    public void saveAll(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
 
