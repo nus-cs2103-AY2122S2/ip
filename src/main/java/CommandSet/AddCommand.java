@@ -12,7 +12,7 @@ import Tasks.Event;
 import Exceptions.MissingTimeArgumentException;
 
 /**
- * <h1>AddCommand<h1/>
+ * <h1>AddCommand</h1>
  * <p>
  * AddCommand class adds tasks to the list of user tasks.
  *</p>
