@@ -19,8 +19,14 @@ public class ListCommand extends Command {
      * @return <code>true</code> upon successful execution.
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("YOUR TASKS:" + taskList);
-        return true;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String output = "YOUR TASKS:" + taskList;
+        System.out.println(output);
+        return output;
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return false;
     }
 }

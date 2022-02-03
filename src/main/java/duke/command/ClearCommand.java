@@ -21,10 +21,16 @@ public class ClearCommand extends Command {
      * @return <code>true</code> upon successful execution.
      * @throws DukeException If file truncation is unsuccessful.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.clearFile();
         taskList.clear();
-        ui.showMessage("ALL TASKS CLEARED");
-        return true;
+        String output = "ALL TASKS CLEARED";
+        ui.showMessage(output);
+        return output;
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return false;
     }
 }

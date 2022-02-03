@@ -38,13 +38,19 @@ public class DeleteCommand extends Command {
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.get(index);
         taskList.remove(index);
-        ui.showMessage("TASK REMOVED:\n"
-                + task + "\n"
-                + taskList.size() + " TASK(S) NOW.");
         storage.writeToFile(taskList);
-        return true;
+        String output = "TASK REMOVED:\n"
+                + task + "\n"
+                + taskList.size() + " TASK(S) NOW.";
+        ui.showMessage(output);
+        return output;
+    }
+
+    @Override
+    public boolean isExitCommand() {
+        return false;
     }
 }
