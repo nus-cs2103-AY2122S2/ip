@@ -8,9 +8,21 @@ import src.main.java.duke.command.ListCommand;
 import src.main.java.duke.command.MarkCommand;
 import src.main.java.duke.command.UnmarkCommand;
 
+/**
+ * Parser class parses the command passed in as a String and represents it as a
+ * Command that the program can manage.
+ */
 public class Parser {
     private static String description;
 
+    /**
+     * Returns the relevent Command object to be executed from the string input.
+     * 
+     * @param fullCommand the command as a String
+     * @return Command object that triggers an action from the program based on the
+     *         command
+     * @throws DukeException exception thrown when command is invalid or improper
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String action = splitCommand[0];
@@ -30,15 +42,15 @@ public class Parser {
                 if (splitCommand.length < 2) {
                     throw new DukeException("I don't know what to mark!! :-(");
                 } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new MarkCommand(idx);
+                    int index = Integer.parseInt(description) - 1;
+                    return new MarkCommand(index);
                 }
             case "unmark":
                 if (splitCommand.length < 2) {
                     throw new DukeException("I don't know what to unmark!! :-(");
                 } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new UnmarkCommand(idx);
+                    int index = Integer.parseInt(description) - 1;
+                    return new UnmarkCommand(index);
                 }
             case "todo":
                 if (splitCommand.length < 2) {
@@ -62,8 +74,8 @@ public class Parser {
                 if (splitCommand.length < 2) {
                     throw new DukeException("I don't know what to delete!! :-(");
                 } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new DeleteCommand(idx);
+                    int index = Integer.parseInt(description) - 1;
+                    return new DeleteCommand(index);
                 }
             case "bye":
                 return new ExitCommand();
