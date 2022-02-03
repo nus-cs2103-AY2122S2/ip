@@ -21,7 +21,7 @@ import java.time.format.DateTimeParseException;
  * Encapsulates helper methods to parse user input given to Athena.
  */
 public class Parser {
-    private static final DateTimeFormatter inputFormatter =
+    private static final DateTimeFormatter INPUT_FORMATTER =
             DateTimeFormatter.ofPattern("d/M/yyyy Hmm");
 
     /**
@@ -115,7 +115,7 @@ public class Parser {
                 throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);
             } else {
                 try {
-                    dateTime = LocalDateTime.parse(dateTimeString, inputFormatter);
+                    dateTime = LocalDateTime.parse(dateTimeString, INPUT_FORMATTER);
                 } catch (DateTimeParseException e) {
                     throw new InputException(InputErrorCode.INVALID_TASK_DATETIME);
                 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 // STRETCH GOAL: Add a duration for event?
 public class Event extends Task {
-    private static final DateTimeFormatter outputFormatter =
+    private static final DateTimeFormatter OUTPUT_FORMATTER =
             DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
     private final LocalDateTime eventDate;
 
@@ -16,12 +16,12 @@ public class Event extends Task {
 
     public Event(String description, String eventDate) {
         super(description);
-        this.eventDate = LocalDateTime.parse(eventDate, outputFormatter);
+        this.eventDate = LocalDateTime.parse(eventDate, OUTPUT_FORMATTER);
     }
 
     @Override
     public String getSaveFormat() {
-        return super.getSaveFormat() + SAVE_SEPARATOR + eventDate.format(outputFormatter);
+        return super.getSaveFormat() + SAVE_SEPARATOR + eventDate.format(OUTPUT_FORMATTER);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (at: %s)", eventDate.format(outputFormatter));
+        return super.toString() + String.format(" (at: %s)", eventDate.format(OUTPUT_FORMATTER));
     }
 }
