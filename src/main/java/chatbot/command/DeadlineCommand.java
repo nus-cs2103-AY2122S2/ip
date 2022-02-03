@@ -11,8 +11,7 @@ import java.util.Arrays;
 public class DeadlineCommand extends Command {
     public static final String TRIGGER = "deadline";
     public static final String FORMAT =
-            TRIGGER + " <desc> /by <date> <time>\n" + "Date format: YYYY-MM-DD\n"
-                    + "Time format: HH:MM or HH:MM:SS";
+            TRIGGER + " <desc> /by <date> <time>\n" + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
 
     public DeadlineCommand() {
         super(TRIGGER);
@@ -37,7 +36,8 @@ public class DeadlineCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Invalid description\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Invalid description\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (date == null) {
             return new CommandOutput("Invalid date\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
         } else if (time == null) {

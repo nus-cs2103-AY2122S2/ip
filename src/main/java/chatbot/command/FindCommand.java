@@ -16,7 +16,8 @@ public class FindCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length < 2) {
-            return new CommandOutput("Error: Blank keyword\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Blank keyword\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
 
         String keyword = String.join(" ", Arrays.asList(input).subList(1, input.length));

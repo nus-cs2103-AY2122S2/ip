@@ -25,7 +25,8 @@ public class ToDoCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Empty description\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Empty description\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
 
         // Add event.

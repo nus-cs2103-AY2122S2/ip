@@ -1,9 +1,6 @@
 package chatbot.command;
 
-import chatbot.task.Task;
 import chatbot.task.TaskList;
-
-import java.util.Arrays;
 
 public class HelpCommand extends Command {
     public static final String TRIGGER = "help";
@@ -16,7 +13,8 @@ public class HelpCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
 
         String output = "Commands:\n";

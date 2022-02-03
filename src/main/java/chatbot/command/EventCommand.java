@@ -11,8 +11,8 @@ import java.util.Arrays;
 public class EventCommand extends Command {
     public static final String TRIGGER = "event";
     public static final String FORMAT =
-            TRIGGER + " <desc> /at <start_date> <start_time> <end_date> <end_time>\n"
-                    + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
+            TRIGGER + " <desc> /at <start_date> <start_time> <end_date> <end_time>\n" + "Date format: YYYY-MM-DD\n"
+                    + "Time format: HH:MM or HH:MM:SS";
 
     public EventCommand() {
         super(TRIGGER);
@@ -41,15 +41,20 @@ public class EventCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid description\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (startDate == null) {
-            return new CommandOutput("Error: Invalid start date\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid start date\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (startTime == null) {
-            return new CommandOutput("Error: Invalid start time\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid start time\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (endDate == null) {
-            return new CommandOutput("Error: Invalid end date\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid end date\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (endTime == null) {
-            return new CommandOutput("Error: Invalid end time\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid end time\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         } else if (startDate.isAfter(endDate)) {
             return new CommandOutput("Error: Start date cannot be after end date\n" + "Command format: " + FORMAT,
                     "/audio/wav/notification.wav");

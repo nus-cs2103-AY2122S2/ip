@@ -5,8 +5,7 @@ import chatbot.task.TaskList;
 
 public class MarkCommand extends Command {
     public static final String TRIGGER = "mark";
-    public static final String FORMAT =
-            TRIGGER + " <index>\n" + "Index range: 1 to <size of list>";
+    public static final String FORMAT = TRIGGER + " <index>\n" + "Index range: 1 to <size of list>";
 
     public MarkCommand() {
         super(TRIGGER);
@@ -21,7 +20,8 @@ public class MarkCommand extends Command {
             return new CommandOutput(String.format("Nice! I've marked this task as done:\n  %s", task),
                     "/audio/wav/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
     }
 }

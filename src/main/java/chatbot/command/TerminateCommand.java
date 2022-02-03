@@ -13,7 +13,8 @@ public class TerminateCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
         return new CommandOutput("Bye. Hope to see you again soon!", "/audio/wav/notification.wav", true);
     }

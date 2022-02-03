@@ -5,8 +5,7 @@ import chatbot.task.TaskList;
 
 public class DeleteCommand extends Command {
     public static final String TRIGGER = "delete";
-    public static final String FORMAT =
-            TRIGGER + " <index>\n" + "Index range: 1 to <size of list>";
+    public static final String FORMAT = TRIGGER + " <index>\n" + "Index range: 1 to <size of list>";
 
     public DeleteCommand() {
         super(TRIGGER);
@@ -20,7 +19,8 @@ public class DeleteCommand extends Command {
             return new CommandOutput(String.format("Noted. I've removed this task:\n  %s", task),
                     "/audio/wav/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
     }
 }

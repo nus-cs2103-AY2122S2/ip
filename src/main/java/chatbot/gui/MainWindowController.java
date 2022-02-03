@@ -45,7 +45,8 @@ public class MainWindowController {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(new BotDialogBox("Hello! I'm Delphine. How may I help you today?\nType \"help\" for a list of commands."));
+        dialogContainer.getChildren().addAll(new BotDialogBox(
+                "Hello! I'm Delphine. How may I help you today?\nType \"help\" for a list of commands."));
         Ui.playSound(NOTIFICATION_SOUND_FILE);
     }
 
