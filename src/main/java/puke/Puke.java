@@ -1,18 +1,14 @@
 package puke;
 
-import java.util.Scanner;
-
 import puke.exception.PukeException;
 import puke.io.Storage;
 import puke.parser.Parser;
 import puke.task.TaskList;
-import puke.ui.Ui;
 
 /**
  * Main class for Puke.
  */
 public class Puke {
-    private static Ui ui;
     private static TaskList tasks;
     private static Storage storage;
     private static Parser parser;
@@ -23,43 +19,46 @@ public class Puke {
      * @param filePath Path of storage file.
      */
     public Puke(String filePath) {
-        ui = new Ui();
         tasks = new TaskList();
         storage = new Storage(filePath);
         parser = new Parser();
+    }
 
+    public void loadTasksFromFile() {
         try {
             storage.loadTasks(tasks);
         } catch (PukeException e) {
-            ui.printError(e);
+            return;
+        }
+    }
+
+    public void saveTasksToFile() {
+        try {
+            storage.saveTasks(tasks);
+        } catch (PukeException e) {
+            return;
         }
     }
 
     /**
-     * Reads inputs from user.
+     * Gets the response of the chatbot for the user input.
+     *
+     * @param input User input.
+     * @return Response from the chatbot.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.printWelcomeMessage();
-
+    public String getResponse(String input) {
         String response = "";
-        while (true) {
-            ui.printCommandHead();
 
-            try {
-                response = parser.processInput(sc.nextLine(), tasks);
+        try {
+            response = parser.processInput(input, tasks);
 
-                if (response == null) {
-                    storage.saveTasks(tasks);
-                    ui.printExit();
-                    break;
-                }
-            } catch (PukeException e) {
-                ui.printError(e);
-                continue;
+            if (response == null) {
+                saveTasksToFile();
             }
 
-            ui.printResponse(response);
+            return response;
+        } catch (PukeException e) {
+            return e.getMessage();
         }
     }
 }
