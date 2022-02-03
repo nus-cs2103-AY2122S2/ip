@@ -3,7 +3,7 @@ public class Task {
     protected boolean isComplete = false;
     protected String type;
     protected String description = ""; // Display format for Duke
-    
+
     public Task(String input) {
         this.input = input;
     }
@@ -16,8 +16,13 @@ public class Task {
         this.isComplete = false;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     /**
      * Gets the symbol for whether this task is complete or not
+     *
      * @return A string symbol
      */
     protected String getDoneSymbol() {
@@ -30,6 +35,7 @@ public class Task {
 
     /**
      * Returns description of task
+     *
      * @return Description string
      */
     protected String getDescription() {
@@ -38,6 +44,7 @@ public class Task {
 
     /**
      * Gets the symbol for the type of this task
+     *
      * @return A string symbol
      */
     protected String getTaskTypeSymbol() {
