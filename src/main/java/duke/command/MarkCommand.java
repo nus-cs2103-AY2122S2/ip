@@ -9,6 +9,7 @@ import duke.util.TaskList;
  * Represents a command that marks the specified task as done.
  */
 public class MarkCommand extends Command {
+    private static final String MESSAGE_TO_SHOW = "Meow! Task is done!\n%s\n";
     private int index;
 
     public MarkCommand(int index) {
@@ -18,6 +19,6 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.markAsDone(index);
-        return ui.showMessage("Meow! Task is done!\n" + tasks.getTask(index) + "\n");
+        return ui.showMessage(String.format(MESSAGE_TO_SHOW, tasks.getTask(index)));
     }
 }
