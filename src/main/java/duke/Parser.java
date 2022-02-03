@@ -1,6 +1,8 @@
 package duke;
 
 
+import gui.Output;
+
 /**
  * This is the class that parses through inputs
  */
@@ -16,12 +18,11 @@ public class Parser {
      * @param input input entered by user into Duke
      * @return true if input is bye, false otherwise
      */
-    public static boolean parseIsBye(String input, TaskList tasklist){
+    public static String parseIsBye(String input, TaskList tasklist){
         if (input.equals("bye")){
-            return true;
+            return Output.printBye();
         } else {
-            parseInput(input, tasklist);
-            return false;
+            return parseInput(input, tasklist);
         }
     }
 
@@ -30,23 +31,28 @@ public class Parser {
      * @param input user input into Duke (after making sure it is not 'bye')
      * @param taskList current tasklist
      */
-    public static void parseInput(String input, TaskList taskList) {
+    public static String parseInput(String input, TaskList taskList) {
+        String s;
         if (input.equals("list")) {
-            Ui.printAllTasks(taskList);
+            s = Output.printAllTasks(taskList);
         } else if (input.startsWith("delete")) {
-            taskList.deleteTask(Integer.parseInt(input.substring(7)));
+            s =  taskList.deleteTask(Integer.parseInt(input.substring(7)));
         } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-            taskList.markTask(input);
+            s = taskList.markTask(input);
         } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")) {
             Task task = parseCreateNewTask(input);
             if (task != null) {
                 taskList.tasklist.add(task);
+                s = task.printFirstAddition;
+            } else {
+                s = Output.printEmptyDescriptionException();
             }
         } else if (input.startsWith("find ")){
-            taskList.findTask(input.substring(6));
+            s = taskList.findTask(input.substring(6));
         } else {
-            Ui.printWhatDoesThatMean();
+            s = Output.printWhatDoesThatMean();
         }
+        return s;
     }
 
     /**
@@ -73,8 +79,9 @@ public class Parser {
                 task = new Event(inputArr[0].substring(5), Task.totalTask, inputArr[1], false);
             }
         } catch (EmptyDescriptorExceptions e) {
-            Ui.printEmptyDescriptionException();
+            Output.printEmptyDescriptionException();
         }
+
         return task;
     }
 
