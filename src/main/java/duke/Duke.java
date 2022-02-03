@@ -2,8 +2,8 @@ package duke;
 import java.io.*;
 
 public class Duke {
-    private static Storage storage;
-    private static TaskList tasks;
+    public static Storage storage;
+    public static TaskList tasks;
 
     public Duke(String filePath) throws IOException {
         Ui ui = new Ui();
