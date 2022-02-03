@@ -292,7 +292,6 @@ public class Duke extends Application {
                 int index = parser.parseIndex(input);
                 if (index < tasks.getTasks().size()) {
                     tasks.markTaskDone(index);
-                    //ui.sayMessage("Nice! I've marked this task as done:\n" + tasks.getTask(index).toString());
                     response = "Nice! I've marked this task as done:\n" + tasks.getTask(index).toString();
                 } else {
                     throw new DukeException("No such task exists.");
@@ -304,7 +303,6 @@ public class Duke extends Application {
                 int index = parser.parseIndex(input);
                 if (index < tasks.getTasks().size()) {
                     tasks.markTaskNotDone(index);
-                    //ui.sayMessage("Nice! I've marked this task as not done:\n" + tasks.getTask(index).toString());
                     response = "Nice! I've marked this task as not done:\n" + tasks.getTask(index).toString();
                 } else {
                     throw new DukeException("No such task exists.");
@@ -316,8 +314,7 @@ public class Duke extends Application {
                 int index = parser.parseIndex(input);
                 if (index < tasks.getTasks().size()) {
                     Task removedTask = tasks.removeTask(index);
-                    //ui.sayMessage("Noted. I've removed this task:\n" + removedTask.toString());
-                    response = "Nice! I've marked this task as not done:\n" + tasks.getTask(index).toString();
+                    response = "Nice! I've removed this task:\n" + removedTask.toString();
                 } else {
                     throw new DukeException("No such task exists.");
                 }
@@ -326,11 +323,6 @@ public class Duke extends Application {
             case TODO: {
                 Todo newTodo = new Todo(parser.parseTodo(input));
                 tasks.addTask(newTodo);
-                /*ui.sayMessage(
-                        "Got it. I've added this task:\n" + newTodo + "\n" + "Now you have " + tasks.getTasks()
-                                .size() + " tasks in the list.");
-
-                 */
                 response = "Got it. I've added this task:\n" + newTodo + "\n" + "Now you have " + tasks.getTasks()
                         .size() + " tasks in the list.";
                 storage.OverwriteFile(tasks.getTasks());
@@ -340,12 +332,6 @@ public class Duke extends Application {
                 String[] deadlineInput = parser.parseDeadline(input);
                 Deadline newDeadline = new Deadline(deadlineInput[0], deadlineInput[1]);
                 tasks.addTask(newDeadline);
-                /*
-                ui.sayMessage(
-                        "Got it. I've added this task:\n" + newDeadline + "\n" + "Now you have " + tasks.getTasks()
-                                .size() + " tasks in the list.");
-
-                 */
                 response = "Got it. I've added this task:\n" + newDeadline + "\n" + "Now you have " + tasks.getTasks()
                         .size() + " tasks in the list.";
                 storage.OverwriteFile(tasks.getTasks());
@@ -354,19 +340,12 @@ public class Duke extends Application {
                 String[] eventInput = parser.parseEvent(input);
                 Event newEvent = new Event(eventInput[0], eventInput[1]);
                 tasks.addTask(newEvent);
-                /*
-                ui.sayMessage(
-                        "Got it. I've added this task:\n" + newEvent + "\n" + "Now you have " + tasks.getTasks()
-                                .size() + " tasks in the list.");
-
-                 */
                 response = "Got it. I've added this task:\n" + newEvent + "\n" + "Now you have " + tasks.getTasks()
                         .size() + " tasks in the list.";
                 storage.OverwriteFile(tasks.getTasks());
                 break;
             case FIND:
                 String word = parser.parseFind(input);
-                //ui.listTasks(tasks.findTasks(word));
                 response = ui.listTasksAsString(tasks.findTasks(word));
                 break;
             case ERROR:
@@ -374,7 +353,6 @@ public class Duke extends Application {
             }
             return response;
         } catch (DukeException e) {
-            //ui.sayMessage(e.getErrorMsg());
             return e.getErrorMsg();
         }
     }
