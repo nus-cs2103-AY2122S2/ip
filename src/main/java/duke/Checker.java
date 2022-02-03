@@ -27,6 +27,7 @@ public class Checker {
      * @param input Command inputted by the user. E.g. help, delete, event.
      * @throws DukeException Thrown if the command inputted does not match any in-built commands.
      */
+    @SuppressWarnings("checkstyle:OperatorWrap")
     public Checker(String input) throws DukeException {
         command = input;
 
@@ -51,8 +52,8 @@ public class Checker {
         } else if (this.command.equals("find")) {
             this.state = Status.FIND;
         } else {
-            throw new DukeException("Sorry, I did not catch that! \\(T.T)/\n" +
-                    "Please type 'help' to see all commands I can help with.");
+            throw new DukeException(String.format("Sorry, I did not catch that! \\(T.T)/\n"
+                    + "type 'help' to see all commands I can help with."));
         }
     }
 
@@ -61,7 +62,7 @@ public class Checker {
      *
      * @return State based on the input. E.g. help, delete, event.
      */
-    public Status getStatus(){
+    public Status getStatus() {
         return state;
     }
 }
