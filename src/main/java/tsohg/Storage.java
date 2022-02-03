@@ -69,7 +69,7 @@ public class Storage {
      * @param content The content to be appended.
      * @throws TsohgException If something wrong happens.
      */
-    public void append(String content) throws TsohgException{
+    public void append(String content) throws TsohgException {
         try {
             FileWriter writer = new FileWriter(filePath, true);
             writer.write(content);

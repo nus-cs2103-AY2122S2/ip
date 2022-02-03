@@ -1,7 +1,7 @@
-import tsohg.TsohgException;
-import tsohg.Storage;
-
 import java.util.Scanner;
+
+import tsohg.Storage;
+import tsohg.TsohgException;
 
 public class StorageStub extends Storage {
 

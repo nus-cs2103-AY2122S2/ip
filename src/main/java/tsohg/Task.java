@@ -53,6 +53,6 @@ public abstract class Task {
      * Returns the stored data representation.
      * @return The stored data representation.
      */
-    abstract public String toStore();
+    public abstract String toStore();
 
 }
