@@ -170,66 +170,66 @@ public class DukeTest {
 
             while (!(isExit(command))) {
                 switch (command) {
-                    case "list":
-                        if (splitInput.length > 1) {
-                            throw new DukeException("There should not be anything else after list.");
-                        } else {
-                            list();
-                            break;
-                        }
-                    case "mark":
-                        if (splitInput.length < 2) {
-                            throw new DukeException("Please indicate which task you want to mark!");
-                        } else {
-                            int idx = Integer.parseInt(splitInput[1]) - 1;
-                            taskList.get(idx).mark();
-                            modifyFromSave(save, idx, true);
-                            break;
-                        }
-                    case "unmark":
-                        if (splitInput.length < 2) {
-                            throw new DukeException("Please indicate which task you want to unmark!");
-                        } else {
-                            int idx = Integer.parseInt(splitInput[1]) - 1;
-                            taskList.get(idx).unmark();
-                            modifyFromSave(save, idx, false);
-                            break;
-                        }
-                    case "todo":
-                        if (splitInput.length < 2) {
-                            throw new DukeException("The description of a todo cannot be empty.");
-                        } else {
-                            addTask(new ToDo(splitInput[1]));
-                            addToSave(save, "T", false, splitInput[1]);
-                            break;
-                        }
-                    case "deadline":
-                        if (splitInput.length < 2) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
-                        } else {
-                            addTask(new Deadline(splitInput[1]));
-                            addToSave(save, "D", false, splitInput[1]);
-                            break;
-                        }
-                    case "event":
-                        if (splitInput.length < 2) {
-                            throw new DukeException("The description of an event cannot be empty.");
-                        } else {
-                            addTask(new Event(splitInput[1]));
-                            addToSave(save, "E", false, splitInput[1]);
-                            break;
-                        }
-                    case "delete":
-                        int idx = Integer.parseInt(splitInput[1]);
-                        if (taskList.size() <= idx) {
-                            throw new DukeException("Invalid index input");
-                        } else {
-                            deleteTask(idx);
-                            deleteFromSave(save, idx);
-                            break;
-                        }
-                    default:
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                case "list":
+                    if (splitInput.length > 1) {
+                        throw new DukeException("There should not be anything else after list.");
+                    } else {
+                        list();
+                        break;
+                    }
+                case "mark":
+                    if (splitInput.length < 2) {
+                        throw new DukeException("Please indicate which task you want to mark!");
+                    } else {
+                        int idx = Integer.parseInt(splitInput[1]) - 1;
+                        taskList.get(idx).mark();
+                        modifyFromSave(save, idx, true);
+                        break;
+                    }
+                case "unmark":
+                    if (splitInput.length < 2) {
+                        throw new DukeException("Please indicate which task you want to unmark!");
+                    } else {
+                        int idx = Integer.parseInt(splitInput[1]) - 1;
+                        taskList.get(idx).unmark();
+                        modifyFromSave(save, idx, false);
+                        break;
+                    }
+                case "todo":
+                    if (splitInput.length < 2) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    } else {
+                        addTask(new ToDo(splitInput[1]));
+                        addToSave(save, "T", false, splitInput[1]);
+                        break;
+                    }
+                case "deadline":
+                    if (splitInput.length < 2) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    } else {
+                        addTask(new Deadline(splitInput[1]));
+                        addToSave(save, "D", false, splitInput[1]);
+                        break;
+                    }
+                case "event":
+                    if (splitInput.length < 2) {
+                        throw new DukeException("The description of an event cannot be empty.");
+                    } else {
+                        addTask(new Event(splitInput[1]));
+                        addToSave(save, "E", false, splitInput[1]);
+                        break;
+                    }
+                case "delete":
+                    int idx = Integer.parseInt(splitInput[1]);
+                    if (taskList.size() <= idx) {
+                        throw new DukeException("Invalid index input");
+                    } else {
+                        deleteTask(idx);
+                        deleteFromSave(save, idx);
+                        break;
+                    }
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
 
                 input = scanner.nextLine();

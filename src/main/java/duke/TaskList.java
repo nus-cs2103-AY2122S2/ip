@@ -35,17 +35,17 @@ public class TaskList {
                 String description = taskDetails[2];
 
                 switch (type) {
-                    case "T":
-                        tasks.add(new ToDo(description, isMarked));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(description, isMarked));
-                        break;
-                    case "E":
-                        tasks.add(new Event(description, isMarked));
-                        break;
-                    default:
-                        break;
+                case "T":
+                    tasks.add(new ToDo(description, isMarked));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(description, isMarked));
+                    break;
+                case "E":
+                    tasks.add(new Event(description, isMarked));
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (Exception e) {

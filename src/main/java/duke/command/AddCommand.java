@@ -39,17 +39,17 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (type) {
-            case "T":
-                task = new ToDo(description);
-                break;
-            case "D":
-                task = new Deadline(description);
-                break;
-            case "E":
-                task = new Event(description);
-                break;
-            default:
-                break;
+        case "T":
+            task = new ToDo(description);
+            break;
+        case "D":
+            task = new Deadline(description);
+            break;
+        case "E":
+            task = new Event(description);
+            break;
+        default:
+            break;
         }
 
         tasks.add(task);
