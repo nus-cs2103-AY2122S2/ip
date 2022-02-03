@@ -106,6 +106,8 @@ public class Storage {
                                 Boolean.parseBoolean(breakdown[1]),
                                 LocalDateTime.parse(breakdown[3])));
                         break;
+                    default:
+                        throw new IllegalArgumentException();
                     }
                 } catch (IllegalArgumentException e) {
                     throw new DukeException("INVALID TASK TYPE");

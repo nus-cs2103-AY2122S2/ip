@@ -12,7 +12,7 @@ public class Event extends Task {
     /**
      * Time associated with the event task.
      */
-    public LocalDateTime atTime;
+    private final LocalDateTime atTime;
 
     /**
      * Constructor for an event task.

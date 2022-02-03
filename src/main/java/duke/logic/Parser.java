@@ -34,7 +34,7 @@ public class Parser {
     }
 
     /**
-     * Parses the time portion of a command.
+     * Parses the description portion of a command.
      *
      * @param options Arguments to the command that is to be split and parsed.
      * @param divider Divider that is used to split arguments.

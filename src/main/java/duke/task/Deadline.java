@@ -12,7 +12,7 @@ public class Deadline extends Task {
     /**
      * Time associated with the deadline task.
      */
-    protected LocalDateTime byTime;
+    private final LocalDateTime byTime;
 
     /**
      * Constructor for a deadline task.

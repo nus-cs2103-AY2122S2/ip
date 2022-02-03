@@ -7,11 +7,24 @@ import duke.logic.Storage;
 import duke.logic.TaskList;
 import duke.logic.Ui;
 
+/**
+ * Encapsulates the main Duke programme.
+ */
 public class Duke {
+    /** Storage responsible for reading from and writing to local file. */
     private Storage storage;
+
+    /** List of tasks stored at run-time. */
     private TaskList taskList;
+
+    /** UI responsible for displaying messages to user. */
     private Ui ui;
 
+    /**
+     * Constructor for an instance of Duke.
+     *
+     * @param filePath Path at which local file is stored.
+     */
     public Duke(String filePath) {
         try {
             this.ui = new Ui();
@@ -23,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Boots up instance of Duke programme.
+     */
     public void run() {
         this.ui.showIntro();
         boolean hasExited = false;
