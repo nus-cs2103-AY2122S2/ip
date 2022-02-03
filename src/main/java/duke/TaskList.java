@@ -47,33 +47,7 @@ public class TaskList {
      * Deletes Tasks from the list
      */
     public Task deleteTask(int i) throws DukeException {
-        Task task;
-        try {
-            task = tasks.get(i - 1);
-            tasks.remove(i - 1);
-        } catch (Exception e) {
-            StringBuilder error = new StringBuilder();
-            error.append(line ).append("☹ OOPS!!! Fam, you do not even have this numbered duke.Task in your list.\n");
-            error.append(line);
-            throw new DukeException(error.toString());
-        }
-        return task;
-    }
-
-    /**
-     * Displays all Tasks in the list
-     */
-    public String printTasks() {
-        StringBuilder successMessage = new StringBuilder();
-        String line = "____________________________________________________________ \n";
-        successMessage.append(line);
-        successMessage.append("Here are the tasks in your list: \n");
-        for (int i = 0; i < tasks.size(); i ++) {
-            successMessage.append(String.format("%o.", i + 1));
-            successMessage.append(tasks.get(i).toString());
-        }
-        successMessage.append(line);
-        return successMessage.toString();
+        return tasks.remove(i - 1);
     }
 
     /**

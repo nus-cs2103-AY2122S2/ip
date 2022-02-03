@@ -55,8 +55,7 @@ public class Parser {
         try {
             firstWordInTitle = listOfUserInputs[1];
         } catch (Exception e) {
-            errorMessage.append(line).append("☹ OOPS!!! The description of a Todo/Deadline/Event cannot be empty.");
-            errorMessage.append(line);
+            errorMessage.append("\nOOPS!!! The description of a Todo/Deadline/Event cannot be empty.\n");
             throw new DukeException(errorMessage.toString());
         }
         StringBuilder title = new StringBuilder();
@@ -69,7 +68,7 @@ public class Parser {
             }
         }
         if (title.toString().equals("")) { //when there is no description provided to a Task
-            errorMessage.append(line).append("☹ OOPS!!! The description cannot be empty.").append(line);
+            errorMessage.append("OOPS!!! The description cannot be empty.");
             throw new DukeException(errorMessage.toString());
         }
         return title.toString().trim();
@@ -112,7 +111,7 @@ public class Parser {
         try {
             return Integer.valueOf(listOfUserInputs[1]);
         } catch (Exception e) {
-            errorMessage.append(line).append("Please provide the Task number to mark/unmark/delete!").append(line);
+            errorMessage.append("\nPlease provide the Task number to mark/unmark/delete!\n");
             throw new DukeException(errorMessage.toString());
         }
     }
@@ -128,8 +127,8 @@ public class Parser {
             action = Commands.valueOf(obtainCommandWord().toUpperCase());
         } catch (IllegalArgumentException e) {
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.append(line).append("☹ OOPS!!! I'm sorry, but I don't know what that means :-(")
-                    .append("\nTry another command!\n").append(line);
+            errorMessage.append("\nOOPS!!! I'm sorry, but I don't know what that means :-(\n")
+                    .append("Try another command!\n");
             throw new IllegalArgumentException(errorMessage.toString());
         }
         switch (action) {
@@ -161,21 +160,20 @@ public class Parser {
      */
     public String listOutTasks() {
         StringBuilder successMessage = new StringBuilder();
-        successMessage.append(line).append("Here are the tasks in your list: \n");
+        successMessage.append("Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.getTaskListSize(); i ++) {
             successMessage.append(String.format("%o. ", i + 1));
             successMessage.append(tasks.getParticularTask(i).toString());
         }
-        successMessage.append(line);
         return successMessage.toString();
     }
 
     public void checkTaskNumber() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
         int taskNumber = obtainTaskNumber();
-        if (taskNumber >= tasks.getTaskListSize() || taskNumber < 1) {
-            errorMessage.append(line).append("Please provide the correct Task number!");
-            errorMessage.append("Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!").append(line);
+        if (taskNumber > tasks.getTaskListSize() || taskNumber < 1) {
+            errorMessage.append("\nPlease provide the correct Task number! ");
+            errorMessage.append("Maybe review the list of tasks first,\nAnd then execute the command for mark/unmark/delete!");
             throw new DukeException(errorMessage.toString());
         }
     }
@@ -186,11 +184,11 @@ public class Parser {
     public String markTaskAsDone() {
         Task task;
         StringBuilder successMessage = new StringBuilder();
-        successMessage.append(line).append("Nice! I've marked this task as done: \n");
+        successMessage.append("\nNice! I've marked this task as done: \n");
         try {
             checkTaskNumber();
             task = tasks.markTask(obtainTaskNumber());
-            successMessage.append(task.toString()).append(line);
+            successMessage.append(task.toString());
             return successMessage.toString();
         } catch (DukeException e) {
             return e.getMessage();
@@ -203,11 +201,11 @@ public class Parser {
     public String unmarkTask() {
         Task task;
         StringBuilder successMessage = new StringBuilder();
-        successMessage.append(line).append("Nice! I've unmarked this task: \n");
+        successMessage.append("\nNice! I've unmarked this task: \n");
         try {
             checkTaskNumber();
             task = tasks.unmarkTask(obtainTaskNumber());
-            successMessage.append(task.toString()).append(line);
+            successMessage.append(task.toString());
             return successMessage.toString();
         } catch (DukeException e) {
             return e.getMessage();
@@ -218,13 +216,14 @@ public class Parser {
      * Makes a call on duke.TaskList's delete()
      */
     public String deleteTask() {
+        StringBuilder successMessage = new StringBuilder();
+        successMessage.append("Noted. I've removed this task: \n");
         try {
             checkTaskNumber();
-            StringBuilder successMessage = new StringBuilder();
-            successMessage.append(line).append("Noted. I've removed this task: \n");
-            successMessage.append(tasks.deleteTask(obtainTaskNumber()).toString()).append("\n");
+            String deletedTask = tasks.deleteTask(obtainTaskNumber()).toString();
+            successMessage.append(deletedTask);
             successMessage.append("Now you have ").append(tasks.getTaskListSize());
-            successMessage.append(" tasks in the list.\n").append(line);
+            successMessage.append(" tasks in the list.\n");
             return successMessage.toString();
         } catch (DukeException e) {
             return e.getMessage();
@@ -245,7 +244,7 @@ public class Parser {
         }
         Task task = new ToDo(title, 0);
         tasks.addTask(task);
-        successMessage.append(line).append("Added Todo: ").append(task.toString()).append(line);
+        successMessage.append("Added Todo: ").append(task.toString());
         return successMessage.toString();
     }
 
@@ -264,7 +263,7 @@ public class Parser {
         try {
             Task task = new Deadline(title, 0, obtainDate());
             tasks.addTask(task);
-            successMessage.append(line).append("Added Deadline: \n").append(task.toString()).append(line);
+            successMessage.append("Added Deadline: \n").append(task.toString());
             return successMessage.toString();
         } catch (IllegalArgumentException i) {
             return i.getMessage();
@@ -289,7 +288,7 @@ public class Parser {
         try {
             Task task = new Event(title, 0, obtainDate());
             tasks.addTask(task);
-            successMessage.append(line).append("Added Event: ").append(task.toString()).append(line);
+            successMessage.append("Added Event: ").append(task.toString());
             return successMessage.toString();
         }  catch (IllegalArgumentException i) {
             return i.getMessage();
@@ -306,7 +305,7 @@ public class Parser {
         StringBuilder noMatchMessage = new StringBuilder();
         String wordsProvided;
         try {
-            successMessage.append(line).append("Here are the matching tasks in your list:\n");
+            successMessage.append("Here are the matching tasks in your list:\n");
             wordsProvided = obtainTitleOfTask();
             boolean hasMatch = false;
             for (int i = 0; i < tasks.getTaskListSize(); i ++) {
@@ -317,10 +316,9 @@ public class Parser {
                 }
             }
             if (hasMatch) {
-                successMessage.append(line);
                 return successMessage.toString();
             } else {
-                noMatchMessage.append(line).append("There are no Tasks that match the string inputted!").append(line);
+                noMatchMessage.append("\nThere are no Tasks that match the string inputted!\n");
                 return noMatchMessage.toString();
             }
         } catch (DukeException e) {
@@ -334,7 +332,7 @@ public class Parser {
     public String terminateAndSaveProgram(Storage storage) {
         StringBuilder successMessage = new StringBuilder();
         String byeMessage = "Bye. Hope to see you again soon!\n";
-        successMessage.append(line).append(byeMessage).append(line);
+        successMessage.append(byeMessage);
         try {
             storage.saveAllTasks(tasks);
             storage.closeWriteFile();
