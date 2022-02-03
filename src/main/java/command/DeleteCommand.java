@@ -3,7 +3,6 @@ package command;
 import task.TaskList;
 import tsundere.Storage;
 import tsundere.TsundereException;
-import tsundere.Ui;
 
 /**
  * Delete task in tasklist and storage saves it
@@ -22,13 +21,14 @@ public class DeleteCommand extends Command {
      * @param s Storage for saving to file
      * @throws TsundereException exception for invalid number
      */
-    public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
+    public String execute(TaskList t, Storage s) throws TsundereException {
         if (t.getCount() < this.num || this.num <= 0) {
             throw new TsundereException("Your number is not valid!!!");
         }
-        u.wrapText("Deleting the following task. You're not being lazy, are you?\n" + t.getTaskStr(this.num));
+        String rs = ("Deleting the following task. You're not being lazy, are you?\n" + t.getTaskStr(this.num));
         t.delete(this.num);
         s.saveFile(t.tasksToString());
+        return rs;
     }
 
     public boolean isExit() {

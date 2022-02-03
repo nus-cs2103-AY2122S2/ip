@@ -1,7 +1,5 @@
 T|1|gijsagj
-D|0|eat|null
 E|1|run|2019-01-01
-D|0|eat book reee|2012-01-20
-T|1|sleep
-D|1|eat book jasifjs|2019-01-19
 T|0|eat book gokgopke
+D|0|eat book saokdsok|2015-01-02
+E|0|eat book again|2019-01-01

@@ -2,7 +2,6 @@ package command;
 
 import task.TaskList;
 import tsundere.Storage;
-import tsundere.Ui;
 
 /**
  * Find tasks that contain user input keyword
@@ -24,17 +23,15 @@ public class FindCommand extends Command {
      * Execute finding of keyword by using t.findTask
      *
      * @param t TaskList for managing and adding tasks
-     * @param u UI for displaying text
      * @param s Storage for saving to file
      */
-    public void execute(TaskList t, Ui u, Storage s) {
+    public String execute(TaskList t, Storage s) {
         String foundTasks = t.findTask(this.body);
 
         if (foundTasks.equals("")) {
-            u.wrapText("Cannot find the task you want!");
+            return ("Cannot find the task you want!");
         } else {
-            u.wrapText("Found the task(s)! I would "
-                    + "appreciate a thanks or that i need it or anything." + foundTasks);
+            return ("Found! Not that i need a thanks or anything." + foundTasks);
         }
     }
 

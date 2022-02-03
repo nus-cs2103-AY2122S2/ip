@@ -3,7 +3,6 @@ package command;
 import task.TaskList;
 import tsundere.Storage;
 import tsundere.TsundereException;
-import tsundere.Ui;
 
 /**
  * Mark task from tasklist and uses UI to print it
@@ -41,7 +40,7 @@ public class MarkCommand extends Command {
      * @param s Storage for saving to file
      * @throws TsundereException exception for invalid number
      */
-    public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
+    public String execute(TaskList t, Storage s) throws TsundereException {
         String say = "";
         if (t.getCount() < this.num || this.num <= 0) {
             throw new TsundereException("Your number is not valid!!!");
@@ -53,12 +52,12 @@ public class MarkCommand extends Command {
             break;
         case UNMARK:
             t.unmarkTask(this.num);
-            say = "You didn't actually finish?!";
+            say = "You didn't actually finish?!\n";
             break;
         default:
         }
-        u.wrapText(say + t.getTaskStr(this.num));
         s.saveFile(t.tasksToString());
+        return (say + t.getTaskStr(this.num));
     }
 
     /**

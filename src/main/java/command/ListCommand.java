@@ -2,7 +2,6 @@ package command;
 
 import task.TaskList;
 import tsundere.Storage;
-import tsundere.Ui;
 
 /**
  * List all tasks from tasklist and uses UI to print it
@@ -12,11 +11,10 @@ public class ListCommand extends Command {
      * List all tasks from tasklist and uses UI to print it
      *
      * @param t TaskList for managing and adding tasks
-     * @param u UI for displaying text
      * @param s Storage for saving to file
      */
-    public void execute(TaskList t, Ui u, Storage s) {
-        u.wrapText(t.listTasks());
+    public String execute(TaskList t, Storage s) {
+        return (t.listTasks());
     }
 
     /**

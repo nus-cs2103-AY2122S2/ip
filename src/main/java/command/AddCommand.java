@@ -6,7 +6,6 @@ import task.TaskList;
 import task.ToDo;
 import tsundere.Storage;
 import tsundere.TsundereException;
-import tsundere.Ui;
 
 /**
  * Add a new task into tasklist and storage saves it
@@ -51,7 +50,7 @@ public class AddCommand extends Command {
      * @param s Storage for saving to file
      * @throws TsundereException for incorrect input format
      */
-    public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
+    public String execute(TaskList t, Storage s) throws TsundereException {
         String[] splitStr;
         switch (this.ty) {
         case TODO:
@@ -76,9 +75,9 @@ public class AddCommand extends Command {
         default:
         }
 
-        u.wrapText("New task! You better do it.\n" + t.getTaskStr(t.getCount())
-                + "\nYou have " + t.getCount() + " task(s) to do you lazy bum!");
         s.saveFile(t.tasksToString());
+        return ("New task! You better do it.\n" + t.getTaskStr(t.getCount())
+                + "\nYou have " + t.getCount() + " task(s) to do you lazy bum!");
 
     }
 

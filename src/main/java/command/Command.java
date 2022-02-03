@@ -3,7 +3,6 @@ package command;
 import task.TaskList;
 import tsundere.Storage;
 import tsundere.TsundereException;
-import tsundere.Ui;
 
 /**
  * abstract class Command for various different command with different execute
@@ -24,5 +23,5 @@ public abstract class Command {
      * @param s Storage for saving to file
      * @throws TsundereException for any wrong input format
      */
-    public abstract void execute(TaskList t, Ui u, Storage s) throws TsundereException;
+    public abstract String execute(TaskList t, Storage s) throws TsundereException;
 }

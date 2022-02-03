@@ -9,49 +9,32 @@ import task.TaskList;
 public class Tsundere {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private static String FILE_PATH = "data/tasks.txt";
 
     /**
      * A chatbot that manages tasks and stores them in data/tasks.txt
-     *
-     * @param filePath string of the file path for the save file
      */
-    public Tsundere(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Tsundere() {
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (TsundereException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * runs the chatbot
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showIntro();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (TsundereException e) {
-                ui.showErrorMsg(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (TsundereException e) {
+            return e.getMessage();
         }
     }
 
-    /**
-     * creates a new Tsundere class and runs it
-     *
-     * @param args unused param
-     */
-    public static void main(String[] args) {
-        new Tsundere("data/tasks.txt").run();
-    }
 
 }

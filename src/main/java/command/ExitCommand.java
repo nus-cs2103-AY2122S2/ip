@@ -2,7 +2,6 @@ package command;
 
 import task.TaskList;
 import tsundere.Storage;
-import tsundere.Ui;
 
 /**
  * Print the string before exiting
@@ -16,8 +15,8 @@ public class ExitCommand extends Command {
      * @param u UI for displaying text
      * @param s Storage for saving to file
      */
-    public void execute(TaskList t, Ui u, Storage s) {
-        u.wrapText("Finally, you're leaving!\nIt's not like i will miss you or anything...");
+    public String execute(TaskList t, Storage s) {
+        return ("Finally, you're leaving!\nIt's not like i will miss you or anything...");
     }
 
     /**
