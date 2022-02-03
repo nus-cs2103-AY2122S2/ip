@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+
 public class Ui {
     private static final String NORMAL_SPACE = "      ";
     private static final String TASK_SPACE = "        ";

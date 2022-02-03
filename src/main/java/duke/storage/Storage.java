@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -62,11 +67,11 @@ public class Storage {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
                 String curr = fileToRead.nextLine();
-                // taskComponent[0]: Type of Task
-                // taskComponent[1]: Completion of Task, can be either "1" or "0"
-                // taskComponent[2]: Name of Task
-                // taskComponent[3]: Date of Task
-                // taskComponent[4]: Time of Task
+                // taskComponent[0]: Type of duke.task.Task
+                // taskComponent[1]: Completion of duke.task.Task, can be either "1" or "0"
+                // taskComponent[2]: Name of duke.task.Task
+                // taskComponent[3]: Date of duke.task.Task
+                // taskComponent[4]: Time of duke.task.Task
                 // \\| needed to split "|"
                 String[] taskComponent = curr.split(" \\| ");
                 switch (taskComponent[0]) {
