@@ -13,7 +13,6 @@ public class ToDos extends Task {
 
     @Override
     public String toString() {
-        return this.isDone ? "[T][X] " + this.description
-                : "[T][ ] " + this.description;
+        return this.isDone ? "[T][X] " + this.description : "[T][ ] " + this.description;
     }
 }

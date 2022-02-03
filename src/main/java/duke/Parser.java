@@ -20,55 +20,55 @@ public class Parser {
         }
 
         switch (action) {
-            case "list":
-                if (splitCommand.length > 1) {
-                    throw new DukeException("There should not be anything else after list.");
-                } else {
-                    return new ListCommand();
-                }
-            case "mark":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("I don't know what to mark!! :-(");
-                } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new MarkCommand(idx);
-                }
-            case "unmark":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("I don't know what to unmark!! :-(");
-                } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new UnmarkCommand(idx);
-                }
-            case "todo":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                } else {
-                    return new AddCommand("T", description);
-                }
-            case "deadline":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
-                } else {
-                    return new AddCommand("D", description);
-                }
-            case "event":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("The description of an event cannot be empty.");
-                } else {
-                    return new AddCommand("E", description);
-                }
-            case "delete":
-                if (splitCommand.length < 2) {
-                    throw new DukeException("I don't know what to delete!! :-(");
-                } else {
-                    int idx = Integer.parseInt(description) - 1;
-                    return new DeleteCommand(idx);
-                }
-            case "bye":
-                return new ExitCommand();
-            default:
-                throw new DukeException("Invalid command :-(");
+        case "list":
+            if (splitCommand.length > 1) {
+                throw new DukeException("There should not be anything else after list.");
+            } else {
+                return new ListCommand();
+            }
+        case "mark":
+            if (splitCommand.length < 2) {
+                throw new DukeException("I don't know what to mark!! :-(");
+            } else {
+                int idx = Integer.parseInt(description) - 1;
+                return new MarkCommand(idx);
+            }
+        case "unmark":
+            if (splitCommand.length < 2) {
+                throw new DukeException("I don't know what to unmark!! :-(");
+            } else {
+                int idx = Integer.parseInt(description) - 1;
+                return new UnmarkCommand(idx);
+            }
+        case "todo":
+            if (splitCommand.length < 2) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            } else {
+                return new AddCommand("T", description);
+            }
+        case "deadline":
+            if (splitCommand.length < 2) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            } else {
+                return new AddCommand("D", description);
+            }
+        case "event":
+            if (splitCommand.length < 2) {
+                throw new DukeException("The description of an event cannot be empty.");
+            } else {
+                return new AddCommand("E", description);
+            }
+        case "delete":
+            if (splitCommand.length < 2) {
+                throw new DukeException("I don't know what to delete!! :-(");
+            } else {
+                int idx = Integer.parseInt(description) - 1;
+                return new DeleteCommand(idx);
+            }
+        case "bye":
+            return new ExitCommand();
+        default:
+            throw new DukeException("Invalid command :-(");
         }
     }
 }

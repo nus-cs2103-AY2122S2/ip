@@ -23,17 +23,17 @@ public class TaskList {
                 String description = splitTask[2];
 
                 switch (type) {
-                    case "T":
-                        tasks.add(new ToDos(description, marked));
-                        break;
-                    case "D":
-                        tasks.add(new Deadlines(description, marked));
-                        break;
-                    case "E":
-                        tasks.add(new Events(description, marked));
-                        break;
-                    default:
-                        break;
+                case "T":
+                    tasks.add(new ToDos(description, marked));
+                    break;
+                case "D":
+                    tasks.add(new Deadlines(description, marked));
+                    break;
+                case "E":
+                    tasks.add(new Events(description, marked));
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (Exception e) {

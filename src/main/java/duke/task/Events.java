@@ -45,8 +45,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return this.isDone ? "[E][X] " + this.printed
-                : "[E][ ] " + this.printed;
+        return this.isDone ? "[E][X] " + this.printed : "[E][ ] " + this.printed;
     }
 
 }

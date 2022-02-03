@@ -45,7 +45,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return this.isDone ? "[D][X] " + this.printed
-                : "[D][ ] " + this.printed;
+        return this.isDone ? "[D][X] " + this.printed : "[D][ ] " + this.printed;
     }
 }
