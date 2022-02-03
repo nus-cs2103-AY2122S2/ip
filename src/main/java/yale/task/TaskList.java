@@ -116,12 +116,12 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void listFeature(String command, TaskList list) {
+    public String listFeature(String command, TaskList list) {
         if (list.getSize() == 0) {
-            System.out.println("You have no tasks at the moment!");
+            return "You have no tasks at the moment!";
         } else {
-            System.out.println("Here are the tasks in your list\n"
-                    + list.listOut());
+            return "Here are the tasks in your list\n"
+                    + list.listOut();
         }
     }
 
@@ -130,23 +130,23 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void deleteFeature(String command, TaskList list) {
+    public String deleteFeature(String command, TaskList list) {
         try {
             String[] commandArray = command.split(" ");
             int itemNo = Integer.parseInt(commandArray[1]);
             // Edge cases
             if (itemNo > list.getSize() || itemNo < 1) {
-                System.out.println("Error: That task does not exist!");
+                return "Error: That task does not exist!";
             } else {
-                System.out.println("Noted. I've removed this task:\n   "
-                        + list.getTask(itemNo - 1).toString());
+                String noted = "Noted. I've removed this task:\n   "
+                        + list.getTask(itemNo - 1).toString();
                 list.deleteTask(itemNo - 1);
-                System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+                return noted + "Now you have " + list.getSize() + " tasks in the list.";
             }
         } catch (NumberFormatException e) {
-            System.out.println("Error: Please enter a valid task number");
+            return "Error: Please enter a valid task number";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: You forgot to indicate the task number!");
+            return "Error: You forgot to indicate the task number!";
         }
     }
 
@@ -155,26 +155,26 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void markFeature(String command, TaskList list) {
+    public String markFeature(String command, TaskList list) {
         try {
             String[] commandArray = command.split(" ");
             String markStatus = commandArray[0];
             int itemNo = Integer.parseInt(commandArray[1]);
             if (itemNo > list.getSize() || itemNo < 1) { // Edge cases
-                System.out.println("Error: That task does not exist!");
+                return "Error: That task does not exist!";
             } else if (markStatus.equals("mark")) { // Mark
                 list.getTask(itemNo - 1).markTask();
-                System.out.println("Nice! I've marked this task as done:\n"
-                        + list.getTask(itemNo - 1).toString());
+                return "Nice! I've marked this task as done:\n"
+                        + list.getTask(itemNo - 1).toString();
             } else { // Unmark
                 list.getTask(itemNo - 1).unmarkTask();
-                System.out.println("OK, I've marked this task as not done yet:\n"
-                        + list.getTask(itemNo - 1).toString());
+                return "OK, I've marked this task as not done yet:\n"
+                        + list.getTask(itemNo - 1).toString();
             }
         } catch (NumberFormatException e) {
-            System.out.println("Error: Please enter a valid task number");
+            return "Error: Please enter a valid task number";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: You forgot to indicate the task number!");
+            return "Error: You forgot to indicate the task number!";
         }
     }
 
@@ -184,16 +184,16 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void todoFeature(String command, TaskList list) {
+    public String todoFeature(String command, TaskList list) {
         try {
             String task = command.split("todo ", 2)[1]; // Remove word
             ToDo newToDo = new ToDo(task, false);
             list.addToList(newToDo);
-            System.out.println("Got it! I've added this task:\n    "
+            return "Got it! I've added this task:\n    "
                     + newToDo.toString() + "\n"
-                    + "Now you have " + list.getSize() + " tasks in the list.");
+                    + "Now you have " + list.getSize() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: The description of a todo cannot be empty.");
+            return "Error: The description of a todo cannot be empty.";
         }
     }
 
@@ -203,20 +203,20 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void deadlineFeature(String command, TaskList list) {
+    public String deadlineFeature(String command, TaskList list) {
         try {
             String removeDeadline = command.split("deadline ", 2)[1]; // Remove Deadline word
             String task = removeDeadline.split(" /by ", 2)[0]; // Retrieve task name
             String date = removeDeadline.split(" /by ", 2)[1]; // Retrieve date
             Deadline newDeadline = new Deadline(task, false, date);
             list.addToList(newDeadline);
-            System.out.println("Got it! I've added this task:\n    "
+            return "Got it! I've added this task:\n    "
                     + newDeadline.toString() + "\n"
-                    + "Now you have " + list.getSize() + " tasks in the list.");
+                    + "Now you have " + list.getSize() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: The description of an event cannot be empty.");
+            return "Error: The description of an event cannot be empty.";
         } catch (DateTimeException e) {
-            System.out.println("Error: Invalid date entered.");
+            return "Error: Invalid date entered.";
         }
     }
 
@@ -226,20 +226,20 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void eventFeature(String command, TaskList list) {
+    public String eventFeature(String command, TaskList list) {
         try {
             String removeEvent = command.split("event ", 2)[1]; // Remove Event word
             String task = removeEvent.split(" /at ", 2)[0]; // Retrieve task name
             String date = removeEvent.split(" /at ", 2)[1]; // Retrieve date
             Event newEvent = new Event(task, false, date);
             list.addToList(newEvent);
-            System.out.println("Got it! I've added this task:\n    "
+            return "Got it! I've added this task:\n    "
                     + newEvent.toString() + "\n"
-                    + "Now you have " + list.getSize() + " tasks in the list.");
+                    + "Now you have " + list.getSize() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: The description of an event cannot be empty.");
+            return "Error: The description of an event cannot be empty.";
         } catch (DateTimeException e) {
-            System.out.println("Error: Invalid date entered.");
+            return "Error: Invalid date entered.";
         }
     }
 
@@ -248,7 +248,7 @@ public class TaskList {
      * @param command User input of type String.
      * @param list List of Task objects.
      */
-    public void findFeature(String command, TaskList list) {
+    public String findFeature(String command, TaskList list) {
         String taskName = command.split("find ", 2)[1]; // Retrieve task name
         int count = 1;
         String output = "Here are the matching tasks in your list:\n";
@@ -259,9 +259,9 @@ public class TaskList {
             }
         }
         if (output.equals("Here are the matching tasks in your list:\n") || taskName.equals(" ")) {
-            System.out.println("There are no matching tasks!");
+            return "There are no matching tasks!";
         } else {
-            System.out.println(output);
+            return output;
         }
     }
 

@@ -26,6 +26,10 @@ public class Ui {
         System.out.println(WELCOME_MESSAGE);
     }
 
+    public String showExceptionError(Exception e) {
+        return e.getMessage();
+    }
+
     /**
      * Method to receive input from the scanner and
      * returns that input in a String format.
