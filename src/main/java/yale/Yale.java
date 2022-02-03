@@ -31,6 +31,7 @@ public class Yale {
         parser = new Parser();
         storage = new Storage(FILE_PATH);
         try {
+            ui.welcomePrompt();
             String fileData = storage.loadFileContents();
             list = new TaskList();
             list.importIn(fileData);

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String LOGO = "-----YALE-----";
     private static final String WELCOME_MESSAGE = "Allow me to introduce myself\n"
-            + LOGO + "\nThe name's yale.Yale.";
+            + LOGO + "\nThe name's Yale.";
     private static final String ENTER_COMMAND = "\nEnter command below:";
 
     /**
@@ -22,8 +22,12 @@ public class Ui {
      * Prints out welcome message
      * to user when program starts.
      */
-    public void welcomePrompt() {
-        System.out.println(WELCOME_MESSAGE);
+    public static String welcomePrompt() {
+        return WELCOME_MESSAGE + ENTER_COMMAND;
+    }
+
+    public static String getEnterCommand() {
+        return ENTER_COMMAND;
     }
 
     public String showExceptionError(Exception e) {
