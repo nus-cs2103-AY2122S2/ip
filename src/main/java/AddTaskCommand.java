@@ -20,6 +20,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Formats the echo for the task that was added to the user as confirmation
+     *
      * @return Formatted echo
      */
     private String formatOutput(Task newTask) {
@@ -49,9 +50,9 @@ public class AddTaskCommand extends Command {
         // Updating tasklist.txt
         try {
             FileWriter writer = new FileWriter("tasklist.txt", true);
-            writer.write("Hello\n");
+            writer.write(newTask.toString());
+            writer.write("\n");
             writer.close();
-            System.out.println("after write to txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
