@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DukeList;
 
 public class HelpCommand extends Command {
-    private static String HELP_MSG = "List of commands:\n"
+    private static final String HELP_MSG = "List of commands:\n"
         + "* add tasks - [todo|deadline|event] desc\n"
         + "* delete task - delete idx\n"
         + "* find task - find idx\n"
