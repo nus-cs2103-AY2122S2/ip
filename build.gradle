@@ -12,6 +12,9 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 test {
@@ -29,7 +32,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }
 
 shadowJar {
@@ -38,7 +41,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '8.32'
 }
 
 run{

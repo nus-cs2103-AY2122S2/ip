@@ -1,30 +1,33 @@
-import util.Parser;
-import util.Storage;
-import util.Ui;
-
-import task.TaskList;
-import task.Event;
-import task.Deadline;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
+import util.Parser;
+import util.Storage;
+import util.Ui;
+
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private File newFile;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Parser parser;
+
+    /**
+     * initialise the util classes of Duke
+     * @param filePath filePath of text file to store tasks
+     */
 
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        newFile = new File(filePath);
+        File newFile = new File(filePath);
         tasks = new TaskList();
         parser = new Parser();
 
@@ -40,6 +43,10 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the program
+     */
+
     public void run() {
         Scanner sc = new Scanner(System.in);
 
@@ -53,14 +60,16 @@ public class Duke {
 
 
         while (!task.equals("bye")) {
-            if (task.equals("todo")) {
+            switch (task) {
+            case "todo":
                 if (!item.equals("")) {
                     tasks.add(new Todo(item));
                 } else {
                     ui.reply("Can read instructions or not? Todo cannot be empty :/");
                 }
 
-            } else if (task.equals("deadline")) {
+                break;
+            case "deadline":
                 if (!item.equals("")) {
                     String thing = item.split(" /by ")[0];
                     String time = item.split(" /by ")[1];
@@ -69,7 +78,8 @@ public class Duke {
                     ui.reply("Can read instructions or not? Deadline cannot be empty :/");
                 }
 
-            } else if (task.equals("event")) {
+                break;
+            case "event":
                 if (!item.equals("")) {
                     String thing = item.split(" /at ")[0];
                     String time = item.split(" /at ")[1];
@@ -78,18 +88,20 @@ public class Duke {
                     ui.reply("Can read instructions or not? Event cannot be empty :/");
                 }
 
-            } else if (task.equals("list")){
-                String lists = "";
+                break;
+            case "list":
+                StringBuilder lists = new StringBuilder();
                 for (int i = 0; i < tasks.size(); i++) {
                     if (i != 0) {
-                        lists += "\n" + tab;
+                        lists.append("\n").append(tab);
                     }
-                    lists += String.format("%d. %s", i + 1, tasks.get(i).toString());
+                    lists.append(String.format("%d. %s", i + 1, tasks.get(i).toString()));
 
                 }
-                ui.reply(lists);
+                ui.reply(lists.toString());
 
-            } else if (task.equals("mark")) {
+                break;
+            case "mark":
                 try {
                     int index = Integer.parseInt(item);
                     tasks.get(index - 1).markAsDone();
@@ -99,7 +111,8 @@ public class Duke {
                     ui.reply("You can't do that! It's not in the list!");
                 }
 
-            } else if (task.equals("unmark")) {
+                break;
+            case "unmark":
                 try {
                     int index = Integer.parseInt(item);
                     tasks.get(index - 1).markAsUndone();
@@ -109,14 +122,18 @@ public class Duke {
                     System.out.println("You can't do that! It's not in the list!");
                 }
 
-            } else if (task.equals("delete")) {
+                break;
+            case "delete":
                 tasks.deleteItem(item);
 
-            } else if (task.equals("find")) {
+                break;
+            case "find":
                 tasks.find(item);
 
-            } else {
+                break;
+            default:
                 ui.reply("What is this? Can you read English?");
+                break;
             }
 
             parser.parse(sc.nextLine());
@@ -139,10 +156,8 @@ public class Duke {
     
 
     public static void main(String[] args) {
-
         new Duke("data/duke.txt").run();
-        }
-
+    }
 
 
 }

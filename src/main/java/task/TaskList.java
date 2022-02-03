@@ -1,3 +1,4 @@
+
 package task;
 
 import util.Ui;
@@ -73,7 +74,7 @@ public class TaskList {
      * adds the task to the list
      * @param task task to be added
      * @param total total number of tasks after adding this task to the list
-     * @return
+     * @return string depicting number of tasks
      */
 
     public String addTask(Task task, int total) {
@@ -91,6 +92,10 @@ public class TaskList {
 
     }
 
+    /**
+     * prints the UI for find item
+     * @param item keyword to be found
+     */
     public void find(String item) {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
         String tab = "    ";
@@ -103,12 +108,12 @@ public class TaskList {
         }
 
         String firstLine = "Here are the matching tasks in you list:\n" + tab;
-        String lists = "";
+        StringBuilder lists = new StringBuilder();
         for (int i = 0; i < foundTasks.size(); i++) {
             if (i != 0) {
-                lists += "\n" + tab;
+                lists.append("\n").append(tab);
             }
-            lists += String.format("%d. %s", i + 1, foundTasks.get(i).toString());
+            lists.append(String.format("%d. %s", i + 1, foundTasks.get(i).toString()));
 
         }
 

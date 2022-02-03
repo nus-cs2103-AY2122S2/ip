@@ -1,3 +1,4 @@
+
 package task;
 
 import java.time.LocalDateTime;
@@ -6,8 +7,9 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    protected LocalDateTime ldt;
     public String at;
+    protected LocalDateTime ldt;
+
 
     public Event(String description, String at) {
         super(description);
