@@ -9,7 +9,11 @@ import duke.task.TaskList;
  */
 public class Ui {
 
-
+    /**
+     * Gives the welcome message.
+     *
+     * @return a message from duke welcoming the user.
+     */
     public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,9 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import duke.Duke;
 
 public class MainWindow extends AnchorPane {
+
+    private static double exitDelayInSeconds = 1;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,11 +26,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-    private static double exitDelayInSeconds = 1;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private Duke duke;
 
     @FXML
     public void initialize() {
