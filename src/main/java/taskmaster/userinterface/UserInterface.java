@@ -11,8 +11,8 @@ import taskmaster.util.TaskList;
 
 public class UserInterface {
     /** Taskmaster's logo. **/
-    protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
-                                    + "  |||||\n" + "  |||||\n";
+    protected String logo = "  _____\n" + " /     \\\n" + " | () () |\n" + " \\  ^  /\n"
+                                    + "   |||||\n" + "   |||||\n";
     protected Storage storage;
     protected TaskList tasklist;
 

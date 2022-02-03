@@ -39,6 +39,13 @@ public class Taskmaster {
     }
 
     /**
+     * Returns
+     */
+    public String getOpeningMessage() {
+        return ui.displayOpeningMessage();
+    }
+
+    /**
      * Returns True if the bye command has been performed.
      * @return Returns True if the bye command is performed.
      */
