@@ -21,10 +21,11 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("-".repeat(12));
+        System.out.println("-".repeat(24));
     }
 
     public String readCommand() {
+        System.out.print("Command: ");
         return sc.nextLine();
     }
 
