@@ -105,6 +105,6 @@ public class TaskList {
                 s.append(t).append("\n");
             }
         }
-        return s.length() == 0 ? "Chi couldn't find anything nyan~!" : s.toString();
+        return s.toString();
     }
 }
