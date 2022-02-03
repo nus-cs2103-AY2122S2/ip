@@ -1,10 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -14,9 +14,6 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
 
     /**
      * Instantiates a new TaskList and populates it with the content of the
@@ -33,6 +30,10 @@ public class TaskList {
                 e.printStackTrace();
             }
         });
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
