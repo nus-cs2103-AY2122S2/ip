@@ -12,7 +12,7 @@ public class ParserTest {
             assertEquals(0, Parser.parse("nonsense command", "random stuff"));
             fail();
         } catch (DukeException de){
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", de.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", de.getMessage());
         }
     }
 
@@ -22,7 +22,7 @@ public class ParserTest {
             assertEquals(0, Parser.parse("deadline", "cs2013 homework /by 2022/20/01"));
             fail();
         } catch (DukeException de){
-            assertEquals("Please enter a date with the format yyyy-mm-dd", de.getMessage());
+            assertEquals("Please use /at and type the date with the format yyyy-mm-dd after it", de.getMessage());
         }
     }
 
