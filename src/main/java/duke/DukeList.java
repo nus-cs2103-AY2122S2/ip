@@ -121,14 +121,17 @@ public class DukeList {
     /**
      * Find tasks that contain the keyword.
      *
-     * @param keyword string to search for
+     * @param keywords strings to search for
      * @return an array list of tasks that matches
      */
-    public String find(String keyword) {
+    public String find(String... keywords) {
         ArrayList<Task> matches = new ArrayList<>();
         for (Task task: taskList) {
-            if (task.matches(keyword)) {
-                matches.add(task);
+            for (String keyword: keywords) {
+                if (task.matches(keyword)) {
+                    matches.add(task);
+                    break;
+                }
             }
         }
 
