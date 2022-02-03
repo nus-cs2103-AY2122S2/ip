@@ -14,6 +14,11 @@ public enum TaskType {
         this.type = type;
     }
 
+    /**
+     * Generates a TaskType Instance
+     * @param from The keyword of the TaskType (T,E,D)
+     * @return Generated TaskType
+     */
     public static TaskType fromString(String from) {
         for (TaskType tt : TaskType.values()) {
             if (tt.toString().equals(from)) {

@@ -13,6 +13,12 @@ public class Event extends Task implements Timeable {
         this(description, false, at);
     }
 
+    /**
+     * Initializes an Event instance.
+     * @param description Description of the event
+     * @param isDone Marks the task as done
+     * @param at Date of the event
+     */
     public Event(String description, boolean isDone, LocalDate at) {
         super(TaskType.EVENT, isDone, description);
         this.at = at;

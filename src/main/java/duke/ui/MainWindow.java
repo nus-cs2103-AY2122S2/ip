@@ -1,18 +1,16 @@
 package duke.ui;
+import java.io.IOException;
 
-import duke.Duke;
 import duke.io.Storage;
 import duke.parser.Parser;
 import duke.task.TaskStore;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -53,7 +51,7 @@ public class MainWindow extends AnchorPane {
         this.storage = storage;
     }
 
-    public void setParser(Parser p){
+    public void setParser(Parser p) {
         this.parser = p;
     }
 
@@ -66,7 +64,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage));
-        boolean isSuccessful = parser.processInput(userInput.getText(),this.ui, this.tasks);
+        boolean isSuccessful = parser.processInput(userInput.getText(), this.ui, this.tasks);
 
         if (isSuccessful) {
             this.storage.writeToFile(this.tasks);

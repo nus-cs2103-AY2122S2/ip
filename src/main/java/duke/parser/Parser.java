@@ -1,13 +1,10 @@
 package duke.parser;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-import duke.io.Storage;
 import duke.task.Task;
 import duke.task.TaskStore;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the logic which would make sense of the user's commands.
@@ -89,12 +86,6 @@ public class Parser {
             }
 
             return true;
-//            TODO Refactor out
-//            Write the new changes to file (commands that are not bye, list and taskon)
-//            if (!(command.equals(BYE) || command.equals(LIST) || command.equals(TASKS_ON) || command.equals(FIND))) {
-//                this.storage.writeToFile(tasks);
-//            }
-
         } catch (DukeException e) {
             ui.printError(e.getMessage());
             return false;

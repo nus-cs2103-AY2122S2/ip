@@ -1,11 +1,10 @@
 package duke.task;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class TaskStoreTest {
     @Test
@@ -39,8 +38,8 @@ public class TaskStoreTest {
         LocalDate date = LocalDate.parse("2022-01-29");
         ts.addTask(new Deadline("Complete Assignment", date));
         ts.addTask(new Event("Project Meeting", date));
-        String expected = "Here are your tasks on Jan 29 2022\n" + ts.getTask(0).toString() + "\n" +
-                ts.getTask(1).toString() + "\n";
+        String expected = "Here are your tasks on Jan 29 2022\n" + ts.getTask(0).toString() + "\n"
+                + ts.getTask(1).toString() + "\n";
         assertEquals(expected, ts.getTasksOn(date),
                 "Failed: TaskStore should output the 2 tasks that fall on that day.");
     }
