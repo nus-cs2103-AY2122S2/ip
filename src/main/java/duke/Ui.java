@@ -13,18 +13,18 @@ public class Ui {
         startup();
     }
 
-//    /**
-//     * Loops user input until a "bye" is received. This is the main program that Dukes runs on.
-//     */
-//    public void loop(TaskList tasklist) {
-//        Scanner sc = new Scanner(System.in);
-//        boolean isBye = false;
-//        while (!isBye) {
-//            String input = sc.nextLine();
-//            isBye = Parser.parseIsBye(input, tasklist);
-//        }
-//        printBye();
-//    }
+    /**
+     * Loops user input until a "bye" is received. This is the main program that Dukes runs on.
+     */
+    public void loop(TaskList tasklist) {
+        Scanner sc = new Scanner(System.in);
+        boolean isBye = false;
+        while (!isBye) {
+            String input = sc.nextLine();
+            isBye = Parser.parseIsBye(input, tasklist);
+        }
+        printBye();
+    }
 
     /**
      * Prints startup logo

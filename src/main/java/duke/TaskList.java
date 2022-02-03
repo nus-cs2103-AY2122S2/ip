@@ -1,7 +1,5 @@
 package duke;
 
-import gui.Output;
-
 import java.util.ArrayList;
 
 /**
@@ -15,7 +13,7 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
-    //Depreciated
+
     public void markTaskNum(int taskNum, String isTrue) {
         if (isTrue.equals("true") && (taskNum > 0)) {
             this.tasklist.get(taskNum).mark();
@@ -28,21 +26,20 @@ public class TaskList {
      *
      * @param num index (starts from 1) to delete
      */
-    public String deleteTask(int num) {
+    public void deleteTask(int num) {
         if (num > 0 && num <= Task.totalTask) {
             num--;
-            String s = Output.printRemovedThisTask(num, this);
+            Ui.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
             Task.totalTask--;
             for(int i = num; i <Task.totalTask; i++) {
                 this.tasklist.get(i).decrementNum();
             }
-            s += Output.printTotalTasks();
-            Storage.writeAllToFile(this);
-            return s;
+            Ui.printTotalTasks();
         } else {
-            return "☹ OOPS!!! There is no such task found.";
+            System.out.println("☹ OOPS!!! There is no such task found.");
         }
+        Storage.writeAllToFile(this);
     }
 
     /**
@@ -51,23 +48,21 @@ public class TaskList {
      *
      * @param input Original input string that was entered
      */
-    public String markTask(String input) {
+    public void markTask(String input) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
-        String s = "";
         Task curr = tasklist.get(taskNum);
         if (input.startsWith("mark")) {
             curr.mark();
-            s += Output.printMarkTaskDone(curr);
+            Ui.printMarkTaskDone(curr);
         } else {
             curr.unmark();
-            s += Output.printMarkTaskNotDone(curr);
+            Ui.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile(this);
-        return s;
     }
 
-    public String addTask(String name, String time, String type, boolean isReading) {
+    public void addTask(String name, String time, String type, boolean isReading) {
         Task task;
         if (type.equals("D")) {
             task = new Deadline(name, Task.totalTask, time, isReading);
@@ -77,17 +72,16 @@ public class TaskList {
             task = new ToDo(name, Task.totalTask, isReading);
         }
         tasklist.add(task);
-        return task.toString();
     }
 
-    public String findTask(String keyword) {
+    public void findTask(String keyword) {
         TaskList matchTasks = new TaskList();
         for(int i = 0; i < Task.totalTask; i++) {
             if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)) {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }
-        return Output.printMatchTasks(matchTasks.tasklist);
+        Ui.printMatchTasks(matchTasks.tasklist);
     }
 
 }

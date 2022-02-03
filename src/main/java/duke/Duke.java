@@ -8,24 +8,11 @@ package duke;
  */
 public class Duke {
 
-    static TaskList tasklist;
-
-    public Duke() {
+    public static void main(String[] args) {
         Ui ui = new Ui();
         Parser parser = new Parser();
         Storage storage = new Storage();
-        tasklist = storage.tasklist;
-    }
-
-//    public static void main(String[] args) {
-//        Ui ui = new Ui();
-//        Parser parser = new Parser();
-//        Storage storage = new Storage();
-//        tasklist = storage.tasklist;
-//    }
-
-    public String getResponse(String input){
-        return Parser.parseIsBye(input, tasklist);
+        ui.loop(storage.tasklist);
     }
 
 }

@@ -1,25 +1,22 @@
 package duke;
 
-import gui.Output;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 
 /**
  * Class task that duke.Duke creates
  */
 public class Task {
 
-    public String time = "";
-    public String name;
-    public String type;
+    String time = "";
+    String name;
+    String type;
     int number;
-    public static int totalTask = 0;
+    static int totalTask = 0;
     boolean isDone = false;
-    boolean isCorrectDateFormat;
-    String printFirstAddition = "";
 
     /**
      * Constructor of task
@@ -38,18 +35,13 @@ public class Task {
             this.name = name;
             this.number = number;
             this.type = type;
-            isCorrectDateFormat = setDate(time, isReading);
-
-            if (!isCorrectDateFormat) {
-                printFirstAddition += Output.WRONG_DATE_FORMAT;
-            }
-
+            setDate(time, isReading);
             this.type = type;
             if (!isReading) {
-                printFirstAddition += Output.printAddThisTask(this);
+                Ui.printAddThisTask(this);
                 Storage.addLineToFile(this.getDataRepresentation());
                 totalTask++;
-                printFirstAddition += Output.printTotalTasks();
+                Ui.printTotalTasks();
             }
             else {
                 totalTask++;
@@ -72,7 +64,7 @@ public class Task {
         return String.format("%s---%s---%s---%s\n", this.type, this.isDone, this.name, this.time);
     }
 
-    private boolean setDate(String input, boolean isReading) {
+    private void setDate(String input, boolean isReading) {
         try {
             if ((this.type.equals("D") || this.type.equals("E")) && input != null) {
                 input = input.replaceAll("/", "-");
@@ -81,13 +73,11 @@ public class Task {
                 DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd uuuu hh:mm a");
                 this.time = lt.format(out);
             }
-            return true;
         }
         catch (DateTimeParseException e){
             if (!isReading)
                 System.out.println("Note that dates should be in <<YYYY-MM-DD HHMM>> format");
             this.time = input;
-            return false;
         }
     }
 
