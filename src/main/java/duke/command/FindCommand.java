@@ -8,6 +8,7 @@ import duke.task.Task;
 
 import static duke.constant.Message.FOUND_TASK;
 import static duke.constant.Message.LINE_PREFIX;
+import static duke.constant.Message.LINE_SEPARATOR;
 import static duke.constant.Message.NO_TASK;
 import static duke.constant.Message.NO_TASK_MATCHED;
 
@@ -34,10 +35,10 @@ public class FindCommand extends Command {
      * @param storage Storage class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumberOfTasks() == 0) {
-            ui.printMessage(NO_TASK);
-            return;
+            return ui.printMessage(NO_TASK);
+//            return;
         }
 
         TaskList foundTasks = new TaskList();
@@ -48,14 +49,19 @@ public class FindCommand extends Command {
         }
 
         if (foundTasks.getNumberOfTasks() == 0) {
-            ui.printMessage(NO_TASK_MATCHED);
+            return ui.printMessage(NO_TASK_MATCHED);
         } else {
-            ui.printLine();
-            System.out.println(FOUND_TASK);
+            String result = "";
+            result += ui.printLine();
+            result += LINE_SEPARATOR;
+            result += FOUND_TASK;
+            result += LINE_SEPARATOR;
+//            System.out.println(FOUND_TASK);
             for (int i = 0; i < foundTasks.getNumberOfTasks(); i++) {
-                ui.printMessageWithoutLine(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
+                result += ui.printMessageWithoutLine(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
             }
-            ui.printLine();
+            result += ui.printLine();
+            return result;
         }
 
 

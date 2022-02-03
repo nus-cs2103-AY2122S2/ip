@@ -19,5 +19,5 @@ public abstract class Command {
      * @throws DukeException if Duke-specified exception
      * @throws Exception if other exception
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, Exception;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, Exception;
 }

@@ -19,8 +19,8 @@ public class Ui {
     /**
      * Prints Greeting message.
      */
-    public void printGreeting() {
-        printMessage(GREETING);
+    public String printGreeting() {
+        return printMessage(GREETING);
     }
 
     /**
@@ -36,15 +36,15 @@ public class Ui {
     /**
      * Prints goodbye message.
      */
-    public void printGoodBye() {
-        printMessage(GOOD_BYE);
+    public String printGoodBye() {
+        return printMessage(GOOD_BYE);
     }
 
     /**
      * Prints a horizontal line.
      */
-    public void printLine() {
-        System.out.println(HORIZONTAL_LINE);
+    public String printLine() {
+        return HORIZONTAL_LINE;
     }
 
     /**
@@ -52,10 +52,8 @@ public class Ui {
      *
      * @param message String
      */
-    public void printMessage(String message) {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(message);
-        System.out.println(HORIZONTAL_LINE);
+    public String printMessage(String message) {
+        return HORIZONTAL_LINE + LINE_SEPARATOR + message + LINE_SEPARATOR + HORIZONTAL_LINE;
     }
 
     /**
@@ -63,8 +61,8 @@ public class Ui {
      *
      * @param message String
      */
-    public void printMessageWithoutLine(String message) {
-        System.out.println(message);
+    public String printMessageWithoutLine(String message) {
+        return message;
     }
 
     /**
@@ -72,8 +70,8 @@ public class Ui {
      *
      * @param currentTask Task that been marked
      */
-    public void printConfirmMark(Task currentTask) {
-        printMessage(CONFIRM_MARK + LINE_PREFIX + LINE_SEPARATOR + LINE_PREFIX + currentTask);
+    public String printConfirmMark(Task currentTask) {
+        return printMessage(CONFIRM_MARK + LINE_PREFIX + LINE_SEPARATOR + LINE_PREFIX + currentTask);
     }
 
     /**
@@ -81,8 +79,8 @@ public class Ui {
      *
      * @param currentTask Task that been unmarked
      */
-    public void printConfirmUnmark(Task currentTask) {
-        printMessage(CONFIRM_UNMARK + LINE_PREFIX + LINE_SEPARATOR + LINE_PREFIX + currentTask);
+    public String printConfirmUnmark(Task currentTask) {
+        return printMessage(CONFIRM_UNMARK + LINE_PREFIX + LINE_SEPARATOR + LINE_PREFIX + currentTask);
     }
 
     /**
@@ -90,11 +88,11 @@ public class Ui {
      * @param deletedTask Task that been deleted
      * @param numberOfTasks Integer that shows number of tasks in list.
      */
-    public void printConfirmDelete(Task deletedTask, int numberOfTasks) {
+    public String printConfirmDelete(Task deletedTask, int numberOfTasks) {
         String message = LINE_PREFIX + "Noted. I've removed this task:" + LINE_SEPARATOR;
         message += LINE_PREFIX + deletedTask + LINE_SEPARATOR;
         message += LINE_PREFIX + "Now you have " + numberOfTasks + " tasks in the list.";
-        printMessage(message);
+        return printMessage(message);
     }
 
     /**
@@ -102,10 +100,10 @@ public class Ui {
      * @param currentTask Task that been added
      * @param numberOfTasks Integer that shows number of tasks in list.
      */
-    public void printConfirmAdd(Task currentTask, int numberOfTasks) {
+    public String printConfirmAdd(Task currentTask, int numberOfTasks) {
         String message = LINE_PREFIX + "Got it. I've added this task:" + LINE_SEPARATOR;
         message += LINE_PREFIX + currentTask.toString() + LINE_SEPARATOR;
         message += LINE_PREFIX + "Now you have " + numberOfTasks + " tasks in the list.";
-        printMessage(message);
+        return printMessage(message);
     }
 }

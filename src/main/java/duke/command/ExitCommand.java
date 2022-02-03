@@ -16,8 +16,8 @@ public class ExitCommand extends Command {
      * @param storage Storage class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printGoodBye();
-        System.exit(0);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printGoodBye();
+//        System.exit(0);
     }
 }

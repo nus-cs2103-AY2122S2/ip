@@ -4,14 +4,14 @@ package duke.constant;
  * A class that contains constants related to message printing.
  */
 public final class Message {
-    public static final String LINE_PREFIX = "\t";
+    public static final String LINE_PREFIX = "";
     public static final String OPEN_BRACKET = "[";
     public static final String CLOSE_BRACKET = "]";
     public static final String SPACE = " ";
     public static final String LINE_SEPARATOR = System.lineSeparator();
     public static final String VERTICAL_BAR_WITH_SPACE = " | ";
     public static final String VERTICAL_BAR_REGEX = " \\| ";
-    public static final String HORIZONTAL_LINE = LINE_PREFIX + "____________________________________________________________";
+    public static final String HORIZONTAL_LINE = "";
     public static final String GOOD_BYE = LINE_PREFIX + "Bye. Hope to see you again soon!";
     public static final String GREETING = LINE_PREFIX + "Hello! I'm Duke" + LINE_SEPARATOR + LINE_PREFIX + "What can I do for you?";
     public static final String LIST_TASK = LINE_PREFIX + "Here are the tasks in your list:";

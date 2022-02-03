@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import java.util.Scanner;
 
 import duke.command.Command;
 
@@ -36,28 +35,26 @@ public class Duke {
     /**
      * Reads and executes commands from user inputs.
      */
-    public void run() {
-        ui.printGreeting();
-        Scanner sc = new Scanner(System.in);
+    public String run(String userInput) {
+//        ui.printGreeting();
         while (true) {
-            String userInput = ui.readCommand(sc);
             try {
                 Command command = parser.parse(userInput);
-                command.execute(tasks, ui, storage);
+                return command.execute(tasks, ui, storage);
             } catch (DukeException e) {
-                exceptionHandler.handleDukeException(e);
+                return exceptionHandler.handleDukeException(e);
             } catch (Exception e) {
-                exceptionHandler.handleOtherException(e);
+                return exceptionHandler.handleOtherException(e);
             }
         }
     }
 
-    /**
-     * Main function to run Duke
-     * @param args Unused
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+//    /**
+//     * Main function to run Duke
+//     * @param args Unused
+//     */
+//    public static void main(String[] args) {
+//        new Duke().run();
+//    }
 
 }

@@ -39,14 +39,14 @@ public class AddEventCommand extends Command {
      * @throws IOException if file not found
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         String[] eventDetail = commandArgument.split(PREFIX_AT_EVENT, 2);
         if (eventDetail.length != 2) {
             throw new MissingDateTimeException();
         }
         Task currentTask = new Event(eventDetail[0], eventDetail[1]);
         tasks.addTask(currentTask);
-        ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
         storage.writeTaskToFile(tasks);
+        return ui.printConfirmAdd(currentTask, tasks.getNumberOfTasks());
     }
 }

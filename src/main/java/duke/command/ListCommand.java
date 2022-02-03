@@ -5,6 +5,7 @@ import duke.component.TaskList;
 import duke.component.Ui;
 
 import static duke.constant.Message.LINE_PREFIX;
+import static duke.constant.Message.LINE_SEPARATOR;
 import static duke.constant.Message.LIST_TASK;
 import static duke.constant.Message.NO_TASK;
 
@@ -20,19 +21,24 @@ public class ListCommand extends Command {
      * @param storage Storage class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumberOfTasks() == 0) {
-            ui.printMessage(NO_TASK);
-            return;
+            return ui.printMessage(NO_TASK);
+//            return;
         }
+        String result = "";
 
-        ui.printLine();
-        ui.printMessageWithoutLine(LIST_TASK);
+        result += ui.printLine();
+        result += LINE_SEPARATOR;
+        result += ui.printMessageWithoutLine(LIST_TASK);
+        result += LINE_SEPARATOR;
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             int index = i + 1;
-            ui.printMessageWithoutLine(LINE_PREFIX + index + "." + tasks.getTaskByIndex(i));
+            result += ui.printMessageWithoutLine(LINE_PREFIX + index + "." + tasks.getTaskByIndex(i));
+            result += LINE_SEPARATOR;
         }
 
-        ui.printLine();
+        result += ui.printLine();
+        return result;
     }
 }

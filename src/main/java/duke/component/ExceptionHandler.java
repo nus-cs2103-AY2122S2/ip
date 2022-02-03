@@ -28,17 +28,17 @@ public class ExceptionHandler {
      * Handles Duke exception by printing the error message.
      * @param e Specified-Duke exception
      */
-    public void handleDukeException(DukeException e) {
+    public String handleDukeException(DukeException e) {
         if (e instanceof EmptyTaskException) {
-            ui.printMessage(MESSAGE_EMPTY_TASK_EXCEPTION);
+            return ui.printMessage(MESSAGE_EMPTY_TASK_EXCEPTION);
         } else if (e instanceof MissingDateTimeException) {
-            ui.printMessage(MESSAGE_MISSING_DATE_TIME_EXCEPTION);
+            return ui.printMessage(MESSAGE_MISSING_DATE_TIME_EXCEPTION);
         } else if (e instanceof InvalidIndexException) {
-            ui.printMessage(MESSAGE_INVALID_INDEX_EXCEPTION);
+            return ui.printMessage(MESSAGE_INVALID_INDEX_EXCEPTION);
         } else if (e instanceof UnknownCommandException) {
-            ui.printMessage(MESSAGE_UNKNOWN_COMMAND_EXCEPTION);
+            return ui.printMessage(MESSAGE_UNKNOWN_COMMAND_EXCEPTION);
         } else {
-            ui.printMessage(MESSAGE_DUKE_EXCEPTION);
+            return ui.printMessage(MESSAGE_DUKE_EXCEPTION);
         }
     }
 
@@ -46,13 +46,13 @@ public class ExceptionHandler {
      * Handles other common exception by printing the error message.
      * @param e Default Exception class.
      */
-    public void handleOtherException(Exception e) {
+    public String handleOtherException(Exception e) {
         if (e instanceof IOException) {
-            ui.printMessage(MESSAGE_FILE_NOT_FOUND);
+            return ui.printMessage(MESSAGE_FILE_NOT_FOUND);
         } else if (e instanceof DateTimeException) {
-            ui.printMessage(MESSAGE_DATE_TIME_FORMAT_EXCEPTION);
+            return ui.printMessage(MESSAGE_DATE_TIME_FORMAT_EXCEPTION);
         } else {
-            ui.printMessage(MESSAGE_DUKE_EXCEPTION);
+            return ui.printMessage(MESSAGE_DUKE_EXCEPTION);
         }
     }
 }
