@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
         Task t = tasks.markTask(targetIndex);
         storage.save(tasks);
 
-        return "Great job! I've marked the task as completed:\n" + ui.tab(t.toString());
+        return "Great job! I've marked the task as completed:\n" + ui.addTab(t.toString());
     }
 
     @Override

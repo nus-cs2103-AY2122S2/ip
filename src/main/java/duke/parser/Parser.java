@@ -24,14 +24,14 @@ import duke.task.Todo;
  */
 public class Parser {
     // Input formats of date and times
-    private static final DateTimeFormatter dateTimeIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static final DateTimeFormatter dateIn = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter timeIn = DateTimeFormatter.ofPattern("HHmm");
+    private static final DateTimeFormatter DATE_TIME_IN = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DATE_IN = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_IN = DateTimeFormatter.ofPattern("HHmm");
 
     // Output formats of date and times
-    private static final DateTimeFormatter dateTimeOut = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-    private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
+    private static final DateTimeFormatter DATE_TIME_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+    private static final DateTimeFormatter DATE_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
 
     private enum Format {
         DATE,
@@ -48,7 +48,7 @@ public class Parser {
      */
     private static boolean isValidDateTime(String dt) {
         try {
-            LocalDateTime.parse(dt, dateTimeIn);
+            LocalDateTime.parse(dt, DATE_TIME_IN);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -63,7 +63,7 @@ public class Parser {
      */
     private static boolean isValidDate(String d) {
         try {
-            LocalDate.parse(d, dateIn);
+            LocalDate.parse(d, DATE_IN);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -78,7 +78,7 @@ public class Parser {
      */
     private static boolean isValidTime(String t) {
         try {
-            LocalTime.parse(t, timeIn);
+            LocalTime.parse(t, TIME_IN);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -137,16 +137,16 @@ public class Parser {
                 String[] s = by.split(" ");
                 return new AddCommand(
                         new Deadline(desc,
-                                LocalDate.parse(s[0], dateIn),
-                                LocalTime.parse(s[1], timeIn)));
+                                LocalDate.parse(s[0], DATE_IN),
+                                LocalTime.parse(s[1], TIME_IN)));
             case DATE:
                 return new AddCommand(
                         new Deadline(desc,
-                                LocalDate.parse(by, dateIn)));
+                                LocalDate.parse(by, DATE_IN)));
             case TIME:
                 return new AddCommand(
                         new Deadline(desc,
-                                LocalTime.parse(by, timeIn)));
+                                LocalTime.parse(by, TIME_IN)));
             case INVALID:
             default:
                 return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
@@ -188,16 +188,16 @@ public class Parser {
                 String[] s = at.split(" ");
                 return new AddCommand(
                         new Event(desc,
-                                LocalDate.parse(s[0], dateIn),
-                                LocalTime.parse(s[1], timeIn)));
+                                LocalDate.parse(s[0], DATE_IN),
+                                LocalTime.parse(s[1], TIME_IN)));
             case DATE:
                 return new AddCommand(
                         new Event(desc,
-                                LocalDate.parse(at, dateIn)));
+                                LocalDate.parse(at, DATE_IN)));
             case TIME:
                 return new AddCommand(
                         new Event(desc,
-                                LocalTime.parse(at, timeIn)));
+                                LocalTime.parse(at, TIME_IN)));
             case INVALID:
             default:
                 return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
