@@ -24,44 +24,66 @@ public class Ui {
         this.container = c;
     }
 
+    /**
+     * Sends a greeting dialog box to the user.
+     */
     public void greet() {
-        this.container.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Waldo\nWhat can I do for you?",dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Waldo\nWhat can I do for you?",
+                dukeImage));
     }
 
     public void printMessage(String inputTxt) {
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(inputTxt,dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(inputTxt, dukeImage));
     }
 
     public String getTaskSizeString(TaskStore tasks) {
         return String.format(TASKS_SIZE, tasks.getSize());
     }
 
+    /**
+     * Generates an error dialog box to the user.
+     * @param errorMsg The error message to display to the user
+     */
     public void printError(String errorMsg) {
         String em = String.format("☹ OOPS!!! %s", errorMsg);
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(em,dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(em, dukeImage));
     }
 
+    /**
+     * Generates a dialog box on task added. This will also display all tasks in the list.
+     * @param task The newly added task
+     * @param tasks The task list
+     */
     public void printTaskAdd(Task task, TaskStore tasks) {
         String template = TASK_ADD + this.getTaskSizeString(tasks);
         String taskAddMessage = String.format(template, task, tasks.getSize());
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskAddMessage,dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskAddMessage, dukeImage));
     }
 
+    /**
+     * Generates a dialog when a task has been marked as done/undone. This will also display all tasks in the list.
+     * @param t The task that has been marked as done/undone
+     */
     public void printTaskMarking(Task t) {
         if (t.getIsDone()) {
-            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_MARKED, t),dukeImage));
+            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_MARKED, t), dukeImage));
         } else {
-            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_UNMARKED, t),dukeImage));
+            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_UNMARKED, t), dukeImage));
         }
     }
 
+    /**
+     * Generates a dialog box when a task has been deleted. This will also display the remaining tasks in the list.
+     * @param task The task that has been deleted
+     * @param tasks The task list that contains the remaining tasks
+     */
     public void printTaskDelete(Task task, TaskStore tasks) {
         String template = TASK_DELETE + this.getTaskSizeString(tasks);
         String taskDeleteMessage = String.format(template, task, tasks.getSize());
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskDeleteMessage,dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskDeleteMessage, dukeImage));
     }
 
     public void bye() {
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(BYE,dukeImage));
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(BYE, dukeImage));
     }
 }

@@ -1,18 +1,18 @@
 package duke.io;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskType;
-import duke.task.TaskStore;
-import duke.task.Timeable;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskStore;
+import duke.task.TaskType;
+import duke.task.Timeable;
+import duke.task.Todo;
+
 
 /**
  * Represents an interface to perform file reading and writing the tasks to the drive.
@@ -82,6 +82,8 @@ public class Storage {
                 case DEADLINE:
                     tasks.addTask(new Deadline(line[2], isDone, Timeable.of(line[3])));
                     break;
+                default:
+
                 }
             }
 

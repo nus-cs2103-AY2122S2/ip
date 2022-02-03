@@ -1,11 +1,12 @@
 package duke.task;
 
-import duke.parser.DukeException;
-import duke.parser.Parser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.parser.DukeException;
+import duke.parser.Parser;
+
 
 /**
  * Represents a collection of the tasks stored in the program.
@@ -68,11 +69,11 @@ public class TaskStore {
     public String getTasksOn(LocalDate date) {
         StringBuilder sb = new StringBuilder();
         for (Task t : this.tasks) {
-//            Find all timeable tasks
+            // Find all timeable tasks
             if (t instanceof Timeable) {
                 Timeable timeableTask = (Timeable) t;
 
-//                Checks if the date is the same as input
+                // Checks if the date is the same as input
                 if (timeableTask.isSameDate(date)) {
                     sb.append(t).append("\n");
                 }
@@ -101,7 +102,7 @@ public class TaskStore {
         int count = 1;
         for (Task t : this.tasks) {
             if (t.getDescription().contains(keyword)) {
-//              Task Format: <count>.<task>\n
+                // Task Format: <count>.<task>\n
                 sb.append(String.format("%d.", count++)).append(t).append("\n");
             }
         }
@@ -135,15 +136,16 @@ public class TaskStore {
             String delimiter = Parser.getDelimiter(command);
             String[] taskParams = args.split(delimiter);
 
-//            Checks for syntax correctness
+            // Checks for syntax correctness
             if (taskParams.length == 1) {
-                String errorMsg = String.format("Make sure your command follows this format: %s <task>%s<time>", command, delimiter);
+                String errorMsg = String.format("Make sure your command follows this format: %s <task>%s<time>",
+                        command, delimiter);
                 throw new DukeException(errorMsg);
             }
 
             LocalDate date = Timeable.of(taskParams[1]);
 
-//            At this point it can only be a deadline or an event
+            // At this point it can only be a deadline or an event
             if (command.equals(Parser.MAKE_DEADLINE)) {
                 return new Deadline(taskParams[0], date);
             } else {

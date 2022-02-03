@@ -13,6 +13,12 @@ public class Deadline extends Task implements Timeable {
         this(description, false, by);
     }
 
+    /**
+     * Initializes a Deadline Instance.
+     * @param description The description of the deadline
+     * @param isDone Marks the task as done
+     * @param by The deadline of the task (date)
+     */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(TaskType.DEADLINE, isDone, description);
         this.by = by;

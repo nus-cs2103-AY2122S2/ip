@@ -8,10 +8,12 @@ public class Task {
     private boolean isDone;
     private final TaskType taskType;
 
-//    public Task(TaskType type, String description) {
-//        this(type, false, description);
-//    }
-
+    /**
+     * Generates a Task Instance.
+     * @param type The type of task (Todo, Event, Deadline)
+     * @param isDone Mark if the task is done
+     * @param description The description of the task
+     */
     public Task(TaskType type, boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
