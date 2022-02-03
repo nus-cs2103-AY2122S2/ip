@@ -35,29 +35,21 @@ public class Parser {
         String command = fullCommandArray[0];
         if (command.equals("deadline")) {
             return parseAddDeadlineCommand(fullCommand);
-        }
-        else if (command.equals("event")) {
+        } else if (command.equals("event")) {
             return parseAddEventCommand(fullCommand);
-        }
-        else if (command.equals("todo")) {
+        } else if (command.equals("todo")) {
             return parseTodoCommand(fullCommand);
-        }
-        else if (command.equals("list")) {
+        } else if (command.equals("list")) {
             return new parseListCommand();
-        }
-        else if (command.equals("delete")) {
+        } else if (command.equals("delete")) {
             return parseDeleteCommand(fullCommand);
-        }
-        else if (command.equals("mark")) {
+        } else if (command.equals("mark")) {
             return parseMarkCommand(fullCommand);
-        }
-        else if (command.equals("unmark")) {
+        } else if (command.equals("unmark")) {
             return parseUnmarkCommand(fullCommand);
-        }
-        else if (command.equals("bye")) {
+        } else if (command.equals("bye")) {
             return new ExitCommand();
-        }
-        else {
+        } else {
             throw new DukeException("I don't recognize that command.");
         }
     }
