@@ -11,18 +11,18 @@ import duke.logic.Ui;
  */
 public class FindCommand extends Command {
     /**
-     * Keyword that is to be used to filter a list of tasks.
+     * Keywords that are to be used to filter a list of tasks.
      */
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Constructor for a find task command.
      *
-     * @param keyword Keyword that is to be used to filter a list of tasks.
+     * @param keywords Keywords that are to be used to filter a list of tasks.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String[] keywords) {
         super();
-        this.keyword = keyword;
+        this.keywords = keywords;
     }
 
     /**
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        TaskList newTaskList = taskList.filter(this.keyword);
+        TaskList newTaskList = taskList.filter(this.keywords);
         String output = "MATCHING TASKS HERE:" + newTaskList;
         ui.showMessage("MATCHING TASKS HERE:" + newTaskList);
         return output;

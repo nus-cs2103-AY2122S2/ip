@@ -1,6 +1,7 @@
 package duke.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.task.Task;
 
@@ -54,12 +55,12 @@ public class TaskList {
     /**
      * Filters a copy of the internal ArrayList of tasks with respect to a given keyword.
      *
-     * @param keyword Keyword that is to be indexed in each task.
+     * @param keywords Keyword that is to be indexed in each task.
      * @return Filtered copy of list of tasks.
      */
-    public TaskList filter(String keyword) {
+    public TaskList filter(String... keywords) {
         ArrayList<Task> newTaskList = new ArrayList<>(this.tasks);
-        newTaskList.removeIf(t -> !t.hasKeyword(keyword));
+        newTaskList.removeIf(t -> Arrays.stream(keywords).noneMatch(t::hasKeyword));
 
         return new TaskList(newTaskList);
     }

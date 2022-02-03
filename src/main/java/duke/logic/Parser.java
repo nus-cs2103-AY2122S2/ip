@@ -3,6 +3,7 @@ package duke.logic;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 
 import duke.command.AddCommand;
 import duke.command.ClearCommand;
@@ -120,7 +121,8 @@ public class Parser {
                                 false, parseTime(splitInput[1], " /by ")));
                 break;
             case FIND:
-                command = new FindCommand(splitInput[1]);
+                command = new FindCommand(Stream.of(splitInput[1].split(","))
+                        .map(String::trim).toArray(String[]::new));
                 break;
             case CLEAR:
                 command = new ClearCommand();
