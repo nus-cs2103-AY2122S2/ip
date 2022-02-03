@@ -15,6 +15,10 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
+    }
+
     public Task get(int index) {
         return tasks.get(index);
     }
@@ -40,7 +44,7 @@ public class TaskList {
             String description;
             String details;
             if (command.length <= 1) {
-                throw new DukeException(Error.EMPTYDESC);
+                throw new DukeException(Error.EMPTY_DESC);
             }
             task = command[1];
             switch (command[0]) {
@@ -74,11 +78,12 @@ public class TaskList {
      * Deletes an existing task based on the index given.
      *
      * @param index The index of an existing task in the list.
+     * @return String object of deleted task and existing list.
      */
     public static String deleteTask(int index) {
         try {
             if (index >= tasks.size() || index < 0) {
-                throw new DukeException(Error.LISTERROR);
+                throw new DukeException(Error.LIST_ERROR);
             }
             Task t = tasks.get(index);
             tasks.remove(index);
@@ -93,12 +98,13 @@ public class TaskList {
      *
      * @param action Mark/Unmark task.
      * @param index The index of an existing task in the list.
+     * @return StringBuilder object of the task's changed status.
      */
     public static StringBuilder toggleStatus(String action, int index) {
         StringBuilder sb = new StringBuilder();
         try {
             if (index >= tasks.size() || index < 0) {
-                throw new DukeException(Error.LISTERROR);
+                throw new DukeException(Error.LIST_ERROR);
             }
             switch (action) {
             case "mark":
@@ -122,6 +128,7 @@ public class TaskList {
      * Finds tasks using given keyword.
      *
      * @param keyword A word given by user.
+     * @return StringBuilder object of the tasks found.
      */
     public static StringBuilder findTask(String keyword) {
         StringBuilder sb = new StringBuilder();
@@ -143,31 +150,9 @@ public class TaskList {
     }
 
     /**
-     * Gets tasks from specified file.
-     *
-     * @param lines A list of strings that is read from the file.
-     */
-    public void getTasksFromFile(List<String> lines) {
-        tasks = new ArrayList<>();
-        if (lines != null) {
-            for (String line : lines) {
-                String[] item = line.split("\\|");
-                switch (item[0]) {
-                case "D":
-                    tasks.add(new Deadline(item[1].equals("1"), item[2], item[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
-                    break;
-                default:
-                    tasks.add(new Todo(item[1].equals("1"), item[2]));
-                }
-            }
-        }
-    }
-
-    /**
      * Prints all existing tasks.
+     *
+     * @return String object of task list.
      */
     public static String printList() {
         StringBuilder s = new StringBuilder();

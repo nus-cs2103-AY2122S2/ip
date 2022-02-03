@@ -1,11 +1,10 @@
-import java.io.IOException;
-
 import batman.parser.Parser;
 import batman.storage.Storage;
 import batman.tasks.TaskList;
 import batman.ui.Ui;
 
 public class Duke {
+
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
@@ -21,32 +20,23 @@ public class Duke {
         ui = new Ui("Batman");
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList();
+            taskList = new TaskList(storage.load());
         } catch (Exception e) {
             ui.showLoadingError(e.getMessage());
         }
     }
 
-    private void run() {
+    public String getResponse(String input) {
         try {
-            taskList.getTasksFromFile(storage.load());
             ui.greeting();
-            String userInput = ui.read();
-            while (!userInput.equals("bye")) {
-                ui.printOutput(Parser.parseInput(userInput));
-                userInput = ui.read();
+            String result = Parser.parseInput(input).toString();
+            if (input.equals("bye")) {
                 storage.writeToFile(taskList.getTaskList());
+                return ui.exit();
             }
-            ui.exit();
-        } catch (IOException e) {
-            ui.showLoadingError(e.getMessage());
+            return result;
+        } catch (Exception e) {
+            return ui.showLoadingError(e.getMessage());
         }
-    }
-    /**
-     * Creates a Duke object and runs the chatbot.
-     */
-    public static void main(String[] args) {
-        Duke chatBot = new Duke("/data/tasks.txt");
-        chatBot.run();
     }
 }
