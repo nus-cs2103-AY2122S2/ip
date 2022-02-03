@@ -29,4 +29,17 @@ public class AddTodoCommand extends Command {
         tasks.add(toAdd);
         ui.showAddTask(toAdd, tasks.getSize());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof AddTodoCommand)) {
+            return false;
+        }
+
+        AddTodoCommand command = (AddTodoCommand) obj;
+        return this.toAdd.equals(command.toAdd);
+    }
 }

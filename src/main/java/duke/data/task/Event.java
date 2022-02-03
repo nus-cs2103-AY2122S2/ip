@@ -31,4 +31,19 @@ public class Event extends Task {
         String status = isDone ? "1" : "0";
         return "E | " + status + " | " + this.description + " | " + this.time + "\n";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event t = (Event) obj;
+        return t.description.equals(this.description)
+                && t.isDone == this.isDone
+                && t.time.equals(this.time);
+    }
 }

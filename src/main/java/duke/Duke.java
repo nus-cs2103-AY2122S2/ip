@@ -34,7 +34,7 @@ public class Duke {
     /**
      * Runs the program until termination.
      */
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

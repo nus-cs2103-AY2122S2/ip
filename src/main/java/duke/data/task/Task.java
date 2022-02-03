@@ -55,4 +55,17 @@ public class Task {
     public List<String> getWordsInDescription() {
         return Arrays.asList(this.description.split("\\s+"));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+
+        Task t = (Task) obj;
+        return t.description.equals(this.description) && t.isDone == this.isDone;
+    }
 }

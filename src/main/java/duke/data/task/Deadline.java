@@ -32,4 +32,19 @@ public class Deadline extends Task {
         String status = isDone ? "1" : "0";
         return "D | " + status + " | " + this.description + " | " + this.time + "\n";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline t = (Deadline) obj;
+        return t.description.equals(this.description)
+                && t.isDone == this.isDone
+                && t.time.equals(this.time);
+    }
 }
