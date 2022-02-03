@@ -8,6 +8,12 @@ import duke.task.TaskList;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the Duke Application.
+ *
+ * @author Zheng Teck
+ * @version 1.0
+ */
 public class Duke {
 
     private static TaskList taskList;
@@ -15,6 +21,9 @@ public class Duke {
     private static final Parser parser = new Parser();
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Initialization of Duke application.
+     */
     private Duke() {
         storage = new Storage(parser);
         try {
@@ -24,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Running instance of Duke application.
+     */
     private void run() {
         Ui.printWelcome();
         boolean status = true;
@@ -43,6 +55,9 @@ public class Duke {
         Ui.printExit();
     }
 
+    /**
+     * Initiation of the Duke application.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

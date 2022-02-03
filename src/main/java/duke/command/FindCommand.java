@@ -4,16 +4,31 @@ import duke.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
 
-import java.util.Locale;
-
+/**
+ * Represents a command to find matching input in the Duke application.
+ *
+ * @author Zheng Teck
+ * @version 1.0
+ */
 public class FindCommand extends Command {
 
     private String searchInput;
 
+    /**
+     *  Constructor to create a Find Command.
+     *
+     * @param searchInput Input text to be search for task to be searched.
+     */
     public FindCommand(String searchInput) {
         this.searchInput = searchInput;
     }
 
+    /**
+     * Execute the command to find the task(s).
+     *
+     * @param taskList The list of task in the Duke application.
+     * @param storage  Storage of task in local persistent disk.
+     */
     public void execute(TaskList taskList, Storage storage) {
         StringBuffer result = new StringBuffer("Here are the matching task(s) in your list:\n");
         int count = 1;

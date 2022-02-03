@@ -74,6 +74,4 @@ public class TaskList {
         return Ui.taskListMsg(this);
     }
 
-
-
 }

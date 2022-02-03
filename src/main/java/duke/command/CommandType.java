@@ -1,5 +1,11 @@
 package duke.command;
 
+/**
+ * Represents the list of commands available to the Duke application.
+ *
+ *  @author Zheng Teck
+ *  @version 1.0
+ */
 public enum CommandType
 {
     BYE("bye"),

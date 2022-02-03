@@ -7,18 +7,14 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    /**
+     * Represents messages, formatter of messages and printer for Duke application.
+     *
+     * @author Zheng Teck
+     * @version 1.0
+     */
     private Ui() {
 
-    }
-
-    private static final String MSG_LINE_SEPARATOR = "____________________________________________________________\n";
-
-    public static void printWelcome() {
-        print("Hello! I'm DatoDato! Your personal helper bot. :) \n" + "What can I do for you?");
-    }
-
-    public static void printExit() {
-        print("Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n" + "Hope to see you again soon!");
     }
 
     public static final String MSG_EMPTYINPUT = "☹ OOPS!!! I'm sorry, input cannot be empty!";
@@ -45,6 +41,28 @@ public class Ui {
 
     public static final String MSG_NOMATCH = "☹ OOPS!!! We can't find anything!";
 
+    private static final String MSG_LINE_SEPARATOR = "____________________________________________________________\n";
+
+    /**
+     * Print welcome message.
+     */
+    public static void printWelcome() {
+        print("Hello! I'm DatoDato! Your personal helper bot. :) \n" + "What can I do for you?");
+    }
+
+    /**
+     * Print exit message
+     */
+    public static void printExit() {
+        print("Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n" + "Hope to see you again soon!");
+    }
+
+    /**
+     * Formats the task list for printing.
+     *
+     * @param taskList The list of task in the Duke application.
+     * @return The formatted String to be printed.
+     */
     public static String taskListMsg(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
         StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
@@ -57,18 +75,43 @@ public class Ui {
         return result.toString();
     }
 
+    /**
+     * Formats the task complete message for printing.
+     *
+     * @param description Description of the task.
+     * @return The formatted String to be printed.
+     */
     public static String completeTaskMsg(String description) {
         return "Nice! I've marked this task as done: \n  " + description;
     }
 
+    /**
+     * Formats the task delete message for printing.
+     *
+     * @param description Description of task deleted.
+     * @param totalTask Total number of task in the task list.
+     * @return The formatted String to be printed.
+     */
     public static String deleteTaskMsg(String description, int totalTask) {
         return String.format("Noted. I've removed this task: \n  %s\nNow you have %d tasks in the list.", description, totalTask);
     }
 
+    /**
+     * Formats the task added message for printing.
+     *
+     * @param description Description of task stored.
+     * @param totalTask Total number of task in the task list.
+     * @return The formatted String to be printed.
+     */
     public static String addTaskMsg(String description, int totalTask) {
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", description, totalTask);
     }
 
+    /**
+     * Print message in Duke application format.
+     *
+     * @param input String value to be printed.
+     */
     public static void print(String input) {
         System.out.println(MSG_LINE_SEPARATOR + input + "\n" + MSG_LINE_SEPARATOR);
     }
