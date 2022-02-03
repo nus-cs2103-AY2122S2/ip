@@ -11,9 +11,8 @@ import main.TesseractException;
  * @version 0.1.0
  * @since 0.1.0
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /** The specific command keyword */
-    protected String cmdWord;
 
     ExitCommand(String[] cmdArr) {
         super(cmdArr[0]);
@@ -47,5 +46,5 @@ public class ExitCommand extends Command{
             }
         }
         ui.sayBye();
-    };
+    }
 }

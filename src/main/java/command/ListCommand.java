@@ -26,5 +26,5 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         ui.listTasks(taskList.toString());
-    };
+    }
 }

@@ -12,14 +12,14 @@ public class Tesseract {
     static final String SCHEDULE_PATH = "src/main/Data/Schedule.txt";
 
     /** A storage to access memory from hard disk */
-    private Storage storage;
+    private final Storage storage;
     /** A list of all current tasks */
     private TaskList taskList;
     /** A UI to interact with user */
-    private TessUi ui;
+    private final TessUi ui;
 
     Tesseract(String filePath) {
-        this.storage = new Storage(filePath); // try getstorage
+        this.storage = new Storage(filePath); // try getStorage
         this.ui = new TessUi();
         try {
             taskList = new TaskList(storage.getStorage());

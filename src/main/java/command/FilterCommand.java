@@ -41,5 +41,5 @@ public class FilterCommand extends Command {
         } else {
             ui.admitBug();
         }
-    };
+    }
 }

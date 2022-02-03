@@ -2,8 +2,6 @@ package task;
 
 import main.Date;
 
-import java.time.LocalDate;
-
 /**
  * Represent an event, which is a type of task.
  * @author Fan Jue
@@ -11,7 +9,7 @@ import java.time.LocalDate;
  * @since 0.1.0
  */
 public class Event extends Task {
-    /** String representation of the time the event taks place */
+    /** String representation of the time the event tasks place */
     protected String at;
     /** Date at which the event occurs */
     protected Date date;

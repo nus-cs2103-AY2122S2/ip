@@ -3,7 +3,6 @@ package command;
 import main.Storage;
 import main.TaskList;
 import main.TessUi;
-
 import task.Task;
 
 /**
@@ -35,5 +34,5 @@ public class DeleteCommand extends Command {
         Task task = taskList.deleteTask(this.index);
         storage.needUpdate();
         ui.deleteTaskRes(task.toString(), taskList.size());
-    };
+    }
 }

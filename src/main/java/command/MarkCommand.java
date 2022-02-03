@@ -32,5 +32,5 @@ public class MarkCommand extends Command {
         taskList.markAsDone(this.index);
         storage.needUpdate();
         ui.markAsDoneRes(taskList.get(index).toString());
-    };
+    }
 }

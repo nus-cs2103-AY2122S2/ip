@@ -3,8 +3,6 @@ package command;
 import main.Storage;
 import main.TaskList;
 import main.TessUi;
-import main.Date;
-
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -39,7 +37,6 @@ public class CreateTaskCommand extends Command {
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         Task newTask;
         String description = generateDescription(cmdArr);
-        Date date;
         int cmdLen = cmdArr.length;
         switch (taskType) {
         case "event":

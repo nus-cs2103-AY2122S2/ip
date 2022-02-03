@@ -31,5 +31,5 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         taskList.markAsUndone(this.index);
         ui.markAsUndoneRes(taskList.get(index).toString());
-    };
+    }
 }

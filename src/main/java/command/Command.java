@@ -61,7 +61,7 @@ public class Command {
             }
             break;
         case "filter":
-            if (cmdLen < 4 || fullCmd.indexOf("/by") < 0) {
+            if (cmdLen < 4 || !fullCmd.contains("/by")) {
                 throw new TesseractException("What do you want to filter by again?");
             } else if (cmdArr[2].equals("date")) {
                 Date.checkValidTime(cmdArr[3]);
@@ -77,7 +77,7 @@ public class Command {
         case "event":
             if (cmdLen == 1) {
                 throw new TesseractException("Nah you need to provide me with the details of this event *_*");
-            } else if (fullCmd.indexOf("/at") < 0) {
+            } else if (!fullCmd.contains("/at")) {
                 throw new TesseractException("When is the timing for your event again?");
             }
             Date.checkValidTime(cmdArr[cmdLen - 1]);
@@ -85,7 +85,7 @@ public class Command {
         case "deadline":
             if (cmdLen == 1) {
                 throw new TesseractException("Sorry I can't create deadline without its details )-:");
-            } else if (fullCmd.indexOf("/by") < 0) {
+            } else if (!fullCmd.contains("/by")) {
                 throw new TesseractException("When do you need to do this by again?");
             }
             Date.checkValidTime(cmdArr[cmdLen - 1]);
@@ -129,6 +129,8 @@ public class Command {
         case "deadline":
         case "event":
             return new CreateTaskCommand(cmdArr);
+        default:
+            // Do nothing
         }
         return new Command(""); // dummy command
     }

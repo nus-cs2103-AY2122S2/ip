@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 public class TessUi {
     // deals with interactions with the user
-    protected static String INDENT1 = "    ";
-    protected static String INDENT2 = "        ";
-    protected static String BREAKER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    protected static final String INDENT_ONE = "    ";
+    protected static final String INDENT_TWO = "        ";
+    protected static final String BREAKER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     protected Scanner sc;
 
     TessUi() {
@@ -45,16 +45,16 @@ public class TessUi {
     }
 
     void display(String msg) {
-        String res = INDENT1 + BREAKER + "\n"
-                + INDENT1 + msg + "\n"
-                + INDENT1 + BREAKER + "\n";
+        String res = INDENT_ONE + BREAKER + "\n"
+                + INDENT_ONE + msg + "\n"
+                + INDENT_ONE + BREAKER + "\n";
         System.out.println(res);
     }
 
     /**
      * Display the list of tasks to the user.
      */
-    public void listTasks(String msg){
+    public void listTasks(String msg) {
         String res = "Look what I have noted down for you~ \n" + msg;
         display(res);
     }
@@ -64,8 +64,8 @@ public class TessUi {
      */
     public void deleteTaskRes(String msg, int numOfTask) {
         String res = "Okies the following task has been removed:\n"
-                + INDENT2 + msg + "\n"
-                + INDENT1 + "Now you have " + numOfTask + " tasks in the list~\n";
+                + INDENT_TWO + msg + "\n"
+                + INDENT_ONE + "Now you have " + numOfTask + " tasks in the list~\n";
         display(res);
     }
 
@@ -74,8 +74,8 @@ public class TessUi {
      */
     public void addTaskRes(String msg, int numOfTask) {
         String res = "This has been added to your schedule. Wish you can finish it on time\n"
-                + INDENT2 + msg + "\n"
-                + INDENT1 + "Now you have "
+                + INDENT_TWO + msg + "\n"
+                + INDENT_ONE + "Now you have "
                 + numOfTask + " tasks waiting to be finished.\n";
         display(res);
     }
@@ -85,7 +85,7 @@ public class TessUi {
      */
     public void markAsDoneRes(String msg) {
         String res = "Wow you have finished a task! Excellent! \n"
-                + INDENT2 + msg + "\n";
+                + INDENT_TWO + msg + "\n";
         display(res);
     }
 
@@ -94,7 +94,7 @@ public class TessUi {
      */
     public void markAsUndoneRes(String msg) {
         String res = "Seems like you have successfully undone your done task \n"
-                + INDENT2 + msg + "\n";
+                + INDENT_TWO + msg + "\n";
         display(res);
     }
 

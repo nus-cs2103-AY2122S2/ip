@@ -1,14 +1,13 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.time.LocalDate;
 
 /**
  * Represent a list of task.
@@ -33,8 +32,8 @@ public class TaskList {
     /** Create a TaskList from information obtained from storage memory */
     public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
-        for (int i = 0; i < storageMemory.size(); i++) {
-            String[] tasks = storageMemory.get(i).split("@", 4); // format: D@1@do something
+        for (String str : storageMemory) {
+            String[] tasks = str.split("@", 4); // format: D@1@do something
             Task taskNew;
             if (tasks.length < 3) {
                 break;
@@ -108,7 +107,7 @@ public class TaskList {
      * Return a new TaskList of tasks filtered by the given keyword.
      *
      * @param keyword The keyword to filter all match task description.
-     * @return
+     * @return A TaskList instance containing all tasks containing the keyword.
      */
     public TaskList filterByKeyword(String keyword) {
         List<Task> tasks = new ArrayList<Task>();
@@ -167,7 +166,7 @@ public class TaskList {
 
     /**
      * Return a string representation of the list of all tasks to be printed out.
-     * @return A string represention of the TaskList.
+     * @return A string representation of the TaskList.
      */
     @Override
     public String toString() {

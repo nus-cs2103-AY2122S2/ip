@@ -1,11 +1,9 @@
 package main;
 
-import main.TesseractException;
-
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.DateTimeException;
+
 
 /**
  * Represent a date.
@@ -14,8 +12,8 @@ import java.time.DateTimeException;
  * @since 0.1.0
  */
 public class Date {
-    LocalDate date;
-    String time;
+    private final LocalDate date;
+    private final String time;
 
     /**
      * Create a Date object to represent a date.

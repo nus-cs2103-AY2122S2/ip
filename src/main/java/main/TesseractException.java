@@ -1,7 +1,5 @@
 package main;
 
-import java.security.cert.Extension;
-
 /**
  * Represent exceptions specific to Tesseract.
  * @author Fan Jue

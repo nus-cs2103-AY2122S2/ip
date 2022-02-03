@@ -1,14 +1,10 @@
 package main;
 
-import main.TaskList;
-import main.TesseractException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -22,7 +18,7 @@ public class Storage {
     protected File file;
     /** A string of the relative path of the file */
     protected String path;
-    /** A boolean of whether the storage has been modified */
+    /** A boolean value of whether the storage has been modified */
     protected boolean updated;
 
     /**
