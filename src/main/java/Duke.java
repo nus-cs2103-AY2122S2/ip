@@ -55,9 +55,12 @@ public class Duke {
         // if path doesn't exist, make new directory and file
         if (!directoryExists) {
             File dataDirectory = new File(path.toString());
-            File dukeStore = new File(path + "\\duke.txt");
+            dataDirectory.mkdir();
+            File dukeStore = new File(path + "/duke.txt");
             System.out.println("I tried creating a new directory " + dataDirectory);
             System.out.println("I tried creating a new file " + dukeStore);
+            directoryExists = java.nio.file.Files.exists(dukeStore.toPath());
+
 
         }
         System.out.println("Does this directory " + path + " exist? " + directoryExists);
