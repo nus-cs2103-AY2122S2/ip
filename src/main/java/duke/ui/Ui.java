@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.exception.ErrorMessage;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a UI that deals with interactions with the user.
