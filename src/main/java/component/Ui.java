@@ -1,7 +1,5 @@
 package component;
 
-import java.util.Scanner;
-
 import exceptions.TaskException;
 
 /**
@@ -11,51 +9,27 @@ import exceptions.TaskException;
 public class Ui {
 
     /**
-     * Constructor for Ui class.
-     */
-    public Ui() {
-        initUi();
-    }
-
-    /**
-     * Runs the Ui for the Duke program.
-     * @param sc Scanner to allow continuous user input from the CLI.
      * @param tasks TaskList that is manipulated by the {@link component.Command} class.
      * @param storage Storage that is manipulated by the {@link component.Command} class.
+     * @param userInput input that is given by the user.
      */
-    public void run(Scanner sc, TaskList tasks, Storage storage) {
-        while (sc.hasNext()) {
-            String userInput = sc.nextLine();
-            try {
-
-                Parser p = new Parser(userInput);
-                p.executeCommand(tasks);
-                storage.write(tasks);
-            } catch (TaskException e) {
-                System.out.println(e.getMessage());
-            }
-            printHorizontalLine();
-            if (userInput.equals("bye")) {
-                break;
-            }
+    public String run(TaskList tasks, Storage storage, String userInput) {
+        try {
+            Parser p = new Parser(userInput);
+            String s = p.executeCommand(tasks);
+            storage.write(tasks);
+            return s;
+        } catch (TaskException e) {
+            return e.getMessage();
         }
     }
+
 
     /**
      * Initialise the Duke Ui.
      */
-    private void initUi() {
-        printHorizontalLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println(" What can I do for you?");
-        printHorizontalLine();
+    public String initUi() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
-    /**
-     * Private helper method to print the horizontal lines in Duke Ui.
-     */
-    private static void printHorizontalLine() {
-        System.out.println("_____________"
-                + "_______________________________________________");
-    }
 }

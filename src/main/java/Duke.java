@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.nio.file.Paths;
 
 import component.Storage;
 import component.TaskList;
@@ -26,28 +26,21 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * @param filePath Relative file path(from project root) to access saved tasks
-     *                 from previous instance.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(Paths.get("").toAbsolutePath() + "/data/duke.txt");
         this.tasks = new TaskList(storage.load());
     }
 
     /**
      * Run Duke program.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.run(sc, tasks, storage);
+    public String initUi() {
+        return ui.initUi();
     }
 
-    /**
-     * Driver method for duke.
-     * @param args CLI input for Main.
-     */
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+    public String getResponse(String input) {
+        return ui.run(tasks, storage, input);
     }
 }

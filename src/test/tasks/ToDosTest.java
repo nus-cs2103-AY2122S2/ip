@@ -1,8 +1,8 @@
 package tasks;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.assert;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for ToDos.

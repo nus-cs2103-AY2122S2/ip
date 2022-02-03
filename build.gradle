@@ -51,11 +51,11 @@ sourceSets {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Launcher"
     archiveClassifier = null
 }
 

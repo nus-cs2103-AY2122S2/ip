@@ -29,9 +29,9 @@ public class Parser {
      * Execute the command for tasks.
      * @param tasks Pass the TaskList into {@link component.Command} class for manipulation.
      */
-    public void executeCommand(TaskList tasks) {
+    public String executeCommand(TaskList tasks) {
         Command c = new Command(input, tasks);
-        c.execute();
+        return c.execute();
     }
 
     /**
@@ -44,7 +44,7 @@ public class Parser {
         if (splitInput.length == 0 || notCommand(splitInput[0])) {
             throw new IncorrectInputException();
 
-        } else if (splitInput.length == 1) {
+        } else if (splitInput.length == 1 && !userInput.equals("list") && !userInput.equals("bye")) {
             String command = splitInput[0];
             switch (command) {
             case "todo":
