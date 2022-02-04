@@ -19,4 +19,6 @@ Unmark Tasks: `unmark <index>`
 Delete Tasks: `delete <index>` (deletes the task at the specified index), `reset` (deletes all tasks)
 Find Tasks: `find <keyword>`  
 List Tasks: `list`  
+UwU: `uwu`  
+OwO: `owo`  
 Terminate Program: `bye`  

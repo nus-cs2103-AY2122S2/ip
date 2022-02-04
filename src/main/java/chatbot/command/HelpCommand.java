@@ -32,6 +32,9 @@ public class HelpCommand extends Command {
         output += DeleteCommand.TRIGGER + ": delete task\n";
         output += ResetCommand.TRIGGER + ": clear task list\n";
 
+        output += UwuCommand.TRIGGER + ": UwU";
+        output += OwoCommand.TRIGGER + ": OwO";
+
         output += TerminateCommand.TRIGGER + ": terminate program";
 
         return new CommandOutput(output, "/audio/wav/notification.wav");

@@ -1,7 +1,10 @@
 package chatbot.gui;
 
+import chatbot.command.CommandList;
 import chatbot.command.CommandOutput;
+import chatbot.task.TaskList;
 import chatbot.util.Ui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,9 +23,11 @@ class BotDialogBox extends DialogBox {
     }
 }
 
-public class MainWindowController {
-    public static final String NOTIFICATION_SOUND_FILE = "/audio/wav/notification.wav";
-    private final MainWindowModel model;
+public class MainWindow {
+    private CommandList commandList;
+    private TaskList taskList;
+    private Runnable terminateCallback;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -31,15 +36,20 @@ public class MainWindowController {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    private Runnable terminateCallback;
 
-    public MainWindowController() {
-        // Since MainWindow is complicated, we split it into MVC.
-        model = new MainWindowModel();
+    public MainWindow() {
     }
 
     public void setTerminateCallback(Runnable terminateCallback) {
         this.terminateCallback = terminateCallback;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public void setCommandList(CommandList commandList) {
+        this.commandList = commandList;
     }
 
     @FXML
@@ -47,7 +57,6 @@ public class MainWindowController {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(new BotDialogBox(
                 "Hello! I'm Delphine. How may I help you today?\nType \"help\" for a list of commands."));
-        Ui.playSound(NOTIFICATION_SOUND_FILE);
     }
 
     /**
@@ -61,8 +70,7 @@ public class MainWindowController {
             return;
         }
         dialogContainer.getChildren().addAll(new UserDialogBox(text));
-        Ui.playSound(NOTIFICATION_SOUND_FILE);
-        CommandOutput output = model.getCommandList().executeCommand(text, model.getTaskList());
+        CommandOutput output = commandList.executeCommand(text, taskList);
         dialogContainer.getChildren().addAll(new BotDialogBox(output.output));
         Ui.playSound(output.sfxFile);
         userInput.clear();
