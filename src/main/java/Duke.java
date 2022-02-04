@@ -44,6 +44,12 @@ public class Duke {
             }
             nextLine = sc.nextLine(); // Update nextLine variable with next input
         }
+
+        try {
+            TaskManager.saveTaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -19,6 +20,17 @@ public class TaskManager {
         writer.close();
     }
 
+    /**
+     * Marks task in tasklist and updates accordingly in tasklist.txt
+     *
+     * @param taskIndex Index of task to be marked
+     * @throws IOException
+     */
+    public static void markTask(int taskIndex) throws IOException {
+        // Mark in tasklist array
+
+
+    }
 
     /**
      * Removes task from tasklist.txt and updates the task array
@@ -27,6 +39,7 @@ public class TaskManager {
      * @throws IOException
      */
     public static void removeTask(int taskIndex) throws IOException {
+        // Remove from tasklist array
         taskList.remove(taskIndex);
 
         // Create new file to write into
@@ -88,6 +101,22 @@ public class TaskManager {
         }
         reader.close();
 
+    }
+
+    /**
+     * Writes the current task list into tasklist.txt
+     */
+    public static void saveTaskList() throws IOException {
+        File f = new File("tasklist.txt");
+        f.delete(); // Delete current copy
+        f.createNewFile();
+
+        FileWriter writer = new FileWriter(f);
+        for (Task task : taskList) {
+            writer.write(task.toString() + "\n");
+        }
+
+        writer.close();
     }
 }
 

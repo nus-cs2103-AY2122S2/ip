@@ -55,11 +55,7 @@ public class AddTaskCommand extends Command {
         newTask.isComplete = this.isComplete;
 
         // Adding task to TaskManager
-        try {
-            TaskManager.addTask(newTask);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        TaskManager.taskList.add(newTask);
 
         // System prints
         String output = formatOutput(newTask);

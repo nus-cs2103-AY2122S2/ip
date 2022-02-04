@@ -35,11 +35,7 @@ public class DeleteCommand extends Command {
         String output = formatOutput();
         System.out.println(output);
 
-        try {
-            TaskManager.removeTask(index);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        TaskManager.taskList.remove(index);
 
     }
 }
