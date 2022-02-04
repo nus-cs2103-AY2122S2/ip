@@ -95,7 +95,7 @@ public class Parser {
     private static AddDeadlineCommand parseDeadlineCommand(String input) throws DukeException {
         String[] splitInputs = input.split("/by");
         if (!validateDeadlineEventSplit(splitInputs)) {
-            throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_DEADLINE);
+            throw new DukeException(DukeException.ERROR_WRONG_FORMAT + DukeException.FORMAT_DEADLINE);
         }
         String description = splitInputs[0].trim();
         String deadlineString = splitInputs[1].trim();
@@ -106,7 +106,7 @@ public class Parser {
     private static AddEventCommand parseEventCommand(String input) throws DukeException {
         String[] splitInputs = input.split("/at");
         if (!validateDeadlineEventSplit(splitInputs)) {
-            throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_EVENT);
+            throw new DukeException(DukeException.ERROR_WRONG_FORMAT + DukeException.FORMAT_EVENT);
         }
         String description = splitInputs[0].trim();
         String timeString = splitInputs[1].trim();

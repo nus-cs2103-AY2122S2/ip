@@ -12,7 +12,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -24,6 +32,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private final Circle imageShape = new Circle(48, 48, 48);
 
     private DialogBox(String text, Image img) {
         try {
@@ -31,13 +40,26 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            this.getStylesheets().add("/view/dialogBox.css");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+        setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
+        displayPicture.setClip(imageShape);
+
+        //set background
+        Image image = new Image(this.getClass().getResourceAsStream("/images/FireBackground2.jpg"));
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, true));
+        Background background = new Background(backgroundImage);
+        dialog.setBackground(background);
     }
+
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.

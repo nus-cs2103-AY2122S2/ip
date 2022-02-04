@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -25,9 +26,12 @@ public class ListCommand extends Command {
      * @param ui The Ui object used for displaying the Task objects.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String message = "Charizard's burning wish list:\n";
+            String message = "Charizard's burning wish list:";
+            ui.appendMessage(message);
+            ui.appendBorder();
+            message = "";
             for (int i = 0; i < tasks.getSize(); i++) {
                 message += String.format("%d. %s", i + 1, tasks.getTask(i).toString());
                 if (i < tasks.getSize() - 1) {
@@ -35,8 +39,9 @@ public class ListCommand extends Command {
                 }
             }
             ui.appendMessage(message);
+            ui.setRespondImage(ImageType.GENERAL);
         } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
+            throw new DukeException(DukeException.ERROR_INTERNAL);
         }
     }
 }

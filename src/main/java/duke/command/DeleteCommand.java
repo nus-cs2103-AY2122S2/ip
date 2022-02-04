@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -28,18 +29,17 @@ public class DeleteCommand extends Command {
      * Displays the error message on Ui if the given Task cannot be deleted successfully.
      *
      * @param tasks The TaskList instance in which the Task object is deleted from.
-     * @param ui The Ui object used for displaying messages.
+     * @param ui    The Ui object used for displaying messages.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task task = tasks.getTask(taskIndex);
-            tasks.delete(taskIndex);
-            String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",
-                    Ui.REMOVE_MESSAGE, task.toString(), tasks.getSize());
-            ui.appendMessage(message);
-        } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
-        }
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.getTask(taskIndex);
+        tasks.delete(taskIndex);
+        ui.appendMessage(Ui.REMOVE_MESSAGE);
+        ui.appendBorder();
+        ui.appendMessage(task.toString());
+        ui.appendBorder();
+        ui.appendMessage(String.format("\nThere are %d tasks in the burning list.", tasks.getSize()));
+        ui.setRespondImage(ImageType.ADD_OR_DELETE);
     }
 }

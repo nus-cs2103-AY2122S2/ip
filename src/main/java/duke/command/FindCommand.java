@@ -2,6 +2,7 @@ package duke.command;
 
 import java.util.ArrayList;
 
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -33,7 +34,10 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchedTasks = tasks.findTasks(searchDescription);
-        String message = "Charizard found some stuff from the burning list:\n";
+        String message = "Charizard found some stuff from the burning list:";
+        ui.appendMessage(message);
+        ui.appendBorder();
+        message = "";
         for (int i = 0; i < matchedTasks.size(); i++) {
             message += String.format("%d. %s", i + 1, matchedTasks.get(i));
             if (i < matchedTasks.size() - 1) {
@@ -41,5 +45,6 @@ public class FindCommand extends Command {
             }
         }
         ui.appendMessage(message);
+        ui.setRespondImage(ImageType.GENERAL);
     }
 }

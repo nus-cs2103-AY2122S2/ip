@@ -2,6 +2,7 @@ package duke.main;
 
 import java.io.IOException;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,12 +10,21 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String LOADING_ERROR_MESSAGE = "Unable to read saved task from file.\n"
+            + "Starting with a new task list..";
+    private static final String CLOSING_MESSAGE = "Closing this app in 3 seconds..";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,10 +34,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Ash.png"));
 
     public MainWindow() {
         try {
@@ -35,18 +44,46 @@ public class MainWindow extends AnchorPane {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            this.getStylesheets().add("/view/mainWindow.css");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //set main background
+        Image fireImage1 = new Image(this.getClass().getResourceAsStream("/images/Background.jpg"));
+        BackgroundImage mainBackgroundImage = new BackgroundImage(fireImage1,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, true));
+        Background background = new Background(mainBackgroundImage);
+        this.setBackground(background);
+
+        //set input background
+        Image fireImage2 = new Image(this.getClass().getResourceAsStream("/images/FireBackground.jpg"));
+        BackgroundImage inputBackgroundImage = new BackgroundImage(fireImage2,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, true));
+        Background inputBackground = new Background(inputBackgroundImage);
+        userInput.setBackground(inputBackground);
+        sendButton.setBackground(inputBackground);
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
+        String welcomeMessage = duke.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, Ui.GENERAL_IMAGE)
+        );
+        if (duke.hasLoadingError()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(LOADING_ERROR_MESSAGE, Ui.GENERAL_IMAGE)
+            );
+            duke.setHasLoadingError(false);
+        }
     }
 
     /**
@@ -56,11 +93,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        Pair<String, Image> dukeResponse = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(dukeResponse.getFirst(), dukeResponse.getSecond())
         );
         userInput.clear();
+        if (duke.hasExited()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(CLOSING_MESSAGE, dukeResponse.getSecond())
+            );
+            sendButton.setDisable(true);
+            userInput.setDisable(true);
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> javafx.application.Platform.exit());
+            delay.play();
+        }
     }
 }
