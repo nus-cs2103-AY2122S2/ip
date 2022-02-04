@@ -19,7 +19,7 @@ public class ToDo extends Task {
      */
     @Override
     public String save() {
-        return "T | " + super.save()  + System.lineSeparator();
+        return "T | " + super.save() + System.lineSeparator();
     }
 
     /**

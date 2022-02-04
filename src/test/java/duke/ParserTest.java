@@ -1,9 +1,12 @@
 package duke;
 
-import duke.command.Command;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.Command;
 
 public class ParserTest {
     @Test
@@ -12,7 +15,7 @@ public class ParserTest {
             Command c = Parser.parse("bye");
             assertTrue(c.isExit());
         } catch (DukeException e) {
-
+            fail();
         }
     }
 

@@ -7,8 +7,12 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
-
+    private LocalDateTime by;
+    /**
+     * Constructs a deadline.
+     * @param description The deadline description.
+     * @param by The deadline date and time.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -26,7 +30,7 @@ public class Deadline extends Task {
     @Override
     public String save() {
         String dateTime = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return "D | " + super.save() + " | " + dateTime  + System.lineSeparator();
+        return "D | " + super.save() + " | " + dateTime + System.lineSeparator();
     }
 
     /**

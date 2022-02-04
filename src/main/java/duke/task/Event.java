@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime at;
 
+    /**
+     * Constructs an event.
+     * @param description The event description.
+     * @param at The event date and time.
+     * @param isDone The event status, whether it is done or not.
+     */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -20,7 +26,6 @@ public class Event extends Task {
 
     /**
      * Returns the event as a string which can be saved and loaded as an event again.
-     *
      * @return Event as a string which can be saved and loaded as an event again.
      */
     @Override
@@ -31,7 +36,6 @@ public class Event extends Task {
 
     /**
      * Returns the event as a readable string.
-     *
      * @return Event as a readable string.
      */
     @Override

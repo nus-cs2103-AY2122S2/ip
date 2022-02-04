@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents the list of tasks.
@@ -37,13 +37,18 @@ public class TaskList {
     public void unmark(int index) {
         tasks.get(index).markAsNotDone();
     }
-
+    /**
+     * Deletes a task.
+     * @param index The index of the task in the task list.
+     */
     public Task delete(int index) {
         Task task = tasks.get(index);
         tasks.remove(index);
         return task;
     }
-
+    /**
+     * Filter the tasks according to a keyword.
+     */
     public TaskList filter(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {

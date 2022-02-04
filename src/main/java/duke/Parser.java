@@ -1,10 +1,26 @@
 package duke;
-import duke.command.*;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Represents the parser for user commands.
  */
 public class Parser {
+    /**
+     * Parses the command.
+     * @param fullCommand The command.
+     * @return A Command object.
+     * @throws DukeException when the command is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new ByeCommand();
