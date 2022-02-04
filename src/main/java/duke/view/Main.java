@@ -7,6 +7,7 @@ import duke.main.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private final Duke duke = new Duke(Constants.FILE_PATH + Constants.FILE_NAME);
+    private Image appIcon = new Image(this.getClass().getResourceAsStream("/images/todo-64.png"));
 
     @Override
     public void start(Stage stage) {
@@ -25,6 +27,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Abby");
+            stage.getIcons().addAll(appIcon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
