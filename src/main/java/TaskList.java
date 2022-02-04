@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class TaskList {
     public void addDdl(String s) {
         int i = s.indexOf(" /by ");
         if (i > 0 && i + 5 < s.length()) {
-            Deadline t = new Deadline(s.substring(0, i), s.substring(i + 5));
+            Deadline t = new Deadline(s.substring(0, i), LocalDate.parse(s.substring(i + 5)));
             tasks.add(t);
             this.printAdd();
         } else {
