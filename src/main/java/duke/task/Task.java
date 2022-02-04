@@ -38,6 +38,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return done? "[✓] " + task: "[ ] " + task;
+        return done ? "[✓] " + task : "[ ] " + task;
     }
 }

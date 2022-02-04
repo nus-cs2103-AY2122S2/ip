@@ -1,14 +1,16 @@
 package duke.ui;
 
-import java.util.Scanner;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
+
 import duke.data.DukeException;
 
 public class Ui {
+    private static final String DIVIDER = "    ____________________________________________________________";
+
     private final Scanner in;
     private final PrintStream out;
-    private static final String DIVIDER = "    ____________________________________________________________";
 
     public Ui() {
         this(System.in, System.out);
@@ -66,7 +68,7 @@ public class Ui {
         out.println(output("New file has been created for first time"));
     }
 
-    public void showIOException() {
+    public void showIoException() {
         out.println(output("I/O error happened"));
     }
 

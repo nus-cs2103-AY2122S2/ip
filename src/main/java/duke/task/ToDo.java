@@ -21,12 +21,12 @@ public class ToDo extends Task {
 
     @Override
     public String saveData() {
-        int done = super.done? 1 : 0;
+        int done = super.done ? 1 : 0;
         return Type.T + " | " + done + " | " + task;
     }
 
     @Override
     public String toString() {
-        return "["+ Type.T+"]" + super.toString();
+        return "[" + Type.T + "]" + super.toString();
     }
 }

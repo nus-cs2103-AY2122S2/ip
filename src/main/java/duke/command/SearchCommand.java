@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a search command to display all the matches
@@ -33,7 +33,8 @@ public class SearchCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder searchText = new StringBuilder();
-        searchText.append("Here are the tasks on ").append(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))).append(" \n");
+        searchText.append("Here are the tasks on ")
+                .append(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))).append(" \n");
         for (int i = 0; i < tasks.getSize(); i++) {
             if (tasks.getByIndex(i).getDate() != null && tasks.getByIndex(i).getDate().equals(date)) {
                 searchText.append("    ").append(i + 1).append(". ")
