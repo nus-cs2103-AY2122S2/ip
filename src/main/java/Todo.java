@@ -3,13 +3,13 @@ public class Todo extends Task {
         super(content);
     }
 
-    public Todo(String content, boolean done) {
-        super(content, done);
+    public Todo(String content, boolean isDone) {
+        super(content, isDone);
     }
 
     @Override
-    public Todo mark(boolean done) {
-        return new Todo(super.getContent(), done);
+    public Todo mark(boolean isDone) {
+        return new Todo(super.getContent(), isDone);
     }
 
     @Override

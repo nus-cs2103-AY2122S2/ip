@@ -6,14 +6,14 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public Deadline(String content, String time, boolean done) {
-        super(content, done);
+    public Deadline(String content, String time, boolean isDone) {
+        super(content, isDone);
         this.time = time;
     }
 
     @Override
-    public Deadline mark(boolean done) {
-        return new Deadline(super.getContent(), time, done);
+    public Deadline mark(boolean isDone) {
+        return new Deadline(super.getContent(), time, isDone);
     }
 
     @Override

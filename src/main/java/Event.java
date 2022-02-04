@@ -6,14 +6,14 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public Event(String content, String time, boolean done) {
-        super(content, done);
+    public Event(String content, String time, boolean isDone) {
+        super(content, isDone);
         this.time = time;
     }
 
     @Override
-    public Event mark(boolean done) {
-        return new Event(super.getContent(), time, done);
+    public Event mark(boolean isDone) {
+        return new Event(super.getContent(), time, isDone);
     }
 
     @Override

@@ -1,35 +1,35 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String segLine = "    ____________________________________________________________";
-    private static final String indent = "    ";
-    private static final String logo = indent + " ____        _        \n"
-            + indent + "|  _ \\ _   _| | _____ \n"
-            + indent + "| | | | | | | |/ / _ \\\n"
-            + indent + "| |_| | |_| |   <  __/\n"
-            + indent + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String byePhrase = "Bye. Hope to see you again soon!";
+    private static final String SEG_LINE = "    ____________________________________________________________";
+    private static final String INDENT = "    ";
+    private static final String LOGO = INDENT + " ____        _        \n"
+            + INDENT + "|  _ \\ _   _| | _____ \n"
+            + INDENT + "| | | | | | | |/ / _ \\\n"
+            + INDENT + "| |_| | |_| |   <  __/\n"
+            + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final String name;
     private final TaskList tasks;
 
-    private Duke(String name) {
+    public Duke(String name, String path) throws FileNotFoundException {
         this.name = name;
-        this.tasks = new TaskList();
+        this.tasks = new TaskList(path);
     }
 
-    private void run() {
-        System.out.println(logo);
-        System.out.println(segLine);
-        System.out.println(indent + "Hello! I'm " + name + ".");
-        System.out.println(indent + "What can I do for you?");
-        System.out.println(segLine);
+    public void run() {
+        System.out.println(LOGO);
+        System.out.println(SEG_LINE);
+        System.out.println(INDENT + "Hello! I'm " + name + ".");
+        System.out.println(INDENT + "What can I do for you?");
+        System.out.println(SEG_LINE);
 
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
                 String s = sc.nextLine();
-                System.out.println(segLine);
+                System.out.println(SEG_LINE);
                 if (s.startsWith("list")) {
                     tasks.list();
                 } else if (s.startsWith("todo")) {
@@ -69,23 +69,35 @@ public class Duke {
                         throw new DukeException("Please enter an index to delete.");
                     }
                 } else if (s.startsWith("bye")) {
-                    System.out.println(indent + byePhrase);
+                    System.out.println(INDENT + "Bye. Hope to see you again soon!");
                     break;
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             }
             catch (DukeException e) {
-                System.out.println(indent + e);
+                System.out.println(INDENT + e);
             }
             finally {
-                System.out.println(segLine);
+                System.out.println(SEG_LINE);
             }
         }
     }
 
     public static void main(String[] args) {
-        Duke cindy = new Duke("Duke-Cindy");
-        cindy.run();
+        try {
+            Duke cindy = new Duke("Duke-Cindy", "../../data/duke.txt");
+            cindy.run();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
+
+
+
+
+
+
+
+

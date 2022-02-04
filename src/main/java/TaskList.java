@@ -1,12 +1,47 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskList {
-    private static final String indent = "    ";
+    private static final String INDENT = "    ";
     private final List<Task> tasks;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
+    public TaskList(String path) throws FileNotFoundException {
+        File file = new File(path);
+        Scanner sc = new Scanner(file);
+        sc.useDelimiter(" | ");
+        tasks = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String taskType = sc.next();
+            String isDoneSymbol = sc.next();
+            boolean isDone;
+            String content = sc.next();
+            switch (isDoneSymbol) {
+            case "0":
+                isDone = false;
+                break;
+            case "1":
+                isDone = true;
+                break;
+            default:
+                throw new DukeException("I cannot read the file. It is not in the expected format.");
+            };
+            switch (taskType) {
+            case "T":
+                tasks.add(new Todo(content, isDone));
+                break;
+            case "D":
+                tasks.add(new Deadline(content, sc.next(), isDone));
+                break;
+            case "E":
+                tasks.add(new Event(content, sc.next(), isDone));
+                break;
+            default:
+                throw new DukeException("I cannot read the file. It is not in the expected format.");
+            }
+        }
     }
 
     public void addTodo(String s) {
@@ -38,19 +73,19 @@ public class TaskList {
     }
 
     private void printAdd() {
-        System.out.println(indent + "Got it. I've added this task:");
+        System.out.println(INDENT + "Got it. I've added this task:");
         int n = tasks.size();
-        System.out.println(indent + "  " + tasks.get(n - 1));
-        System.out.println(indent + "Now you have " + n + " tasks in the list.");
+        System.out.println(INDENT + "  " + tasks.get(n - 1));
+        System.out.println(INDENT + "Now you have " + n + " tasks in the list.");
     }
 
     public void list() {
         if (tasks.size() == 0) {
-            System.out.println(indent + "You don't have tasks listed.");
+            System.out.println(INDENT + "You don't have tasks listed.");
         } else {
-            System.out.println(indent + "Here are the tasks in your list:");
+            System.out.println(INDENT + "Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.print(indent);
+                System.out.print(INDENT);
                 System.out.print(i + 1);
                 System.out.println("." + tasks.get(i));
             }
@@ -63,11 +98,11 @@ public class TaskList {
         }
         tasks.set(index, tasks.get(index).mark(done));
         if (done) {
-            System.out.println(indent + "Nice! I've marked this task as done:");
+            System.out.println(INDENT + "Nice! I've marked this task as done:");
         } else {
-            System.out.println(indent + "OK, I've marked this task as not done yet:");
+            System.out.println(INDENT + "OK, I've marked this task as not done yet:");
         }
-        System.out.println(indent + "  " + tasks.get(index));
+        System.out.println(INDENT + "  " + tasks.get(index));
     }
 
     public void delete(int index) {
@@ -75,8 +110,8 @@ public class TaskList {
             throw new DukeException("Please enter a valid index.");
         }
         Task t = tasks.remove(index);
-        System.out.println(indent + "Noted. I've removed this task:");
-        System.out.println(indent + "  " + t);
-        System.out.println(indent + "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(INDENT + "Noted. I've removed this task:");
+        System.out.println(INDENT + "  " + t);
+        System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }
