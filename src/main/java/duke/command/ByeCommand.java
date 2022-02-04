@@ -1,12 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class ByeCommand extends Command {
-    private Ui ui;
 
     /**
      * Constructor for ByeCommand
@@ -15,7 +13,6 @@ public class ByeCommand extends Command {
      */
     public ByeCommand(String userTaskString) {
         super(userTaskString);
-        this.ui = new Ui();
     }
 
     /**
@@ -27,7 +24,7 @@ public class ByeCommand extends Command {
      */
     public void executeTask(TaskList taskList, FileManager fileManager) throws DukeException {
         fileManager.saveTasks();
-        ui.printBye();
+        taskList.getUi().printBye();
         System.exit(0);
     }
 

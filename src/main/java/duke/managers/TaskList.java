@@ -5,7 +5,6 @@ import duke.DukeException;
 import duke.Ui;
 import duke.task.Task;
 
-
 public class TaskList {
     protected ArrayList<Task> userTaskList;
     protected Ui ui;
@@ -16,6 +15,10 @@ public class TaskList {
     public TaskList() {
         userTaskList = new ArrayList<Task>();
         ui = new Ui();
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**

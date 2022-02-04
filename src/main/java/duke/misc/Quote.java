@@ -42,6 +42,6 @@ public class Quote {
     public String generateQuote() {
         Random randGenerator = new Random();
         int randomNumber = randGenerator.nextInt(alQuotes.size());
-        return "Heres your quote of the day! \n" + alQuotes.get(randomNumber);
+        return "Heres your quote of the day! \n\n" + alQuotes.get(randomNumber) + "\n\n";
     }
 }
