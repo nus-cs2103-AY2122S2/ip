@@ -12,6 +12,7 @@ import duke.command.DeleteCommand;
 import duke.command.SearchCommand;
 import duke.command.AddTodoCommand;
 import duke.command.AddEventCommand;
+import duke.command.FindCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -112,6 +113,13 @@ public class Parser {
                 LocalDate date = convertDate(input.get(1));
                 if (date != null) {
                     return new SearchCommand(date);
+                }
+            case "find":
+                try {
+                    String keyword = input.get(1);
+                    return new FindCommand(keyword);
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand("Please put in keyword");
                 }
             default:
                 return new ErrorCommand("OOPS!!! I'm sorry, but I don't know what that means");
