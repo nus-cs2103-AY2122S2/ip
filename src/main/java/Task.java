@@ -30,6 +30,10 @@ public class Task {
         return null;
     }
 
+    public String getTask() {
+        return task;
+    }
+
     @Override
     public String toString() {
         return done? "[✓] " + task: "[ ] " + task;
