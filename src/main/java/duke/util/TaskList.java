@@ -32,6 +32,10 @@ public class TaskList {
         return tasks.size();
     }
 
+    public ArrayList<Task> getAllTasks() {
+        return new ArrayList<>(tasks);
+    }
+    
     private int convertIndexToZeroBased(int index) throws DukeException {
         int zeroBasedIndex = index - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
@@ -64,6 +68,7 @@ public class TaskList {
      * Removes the task at the specified index.
      *
      * @param index One-based index of the task to be deleted.
+     * @return The deleted task.
      * @throws DukeException if the index is invalid.
      */
     public Task deleteTask(int index) throws DukeException {
@@ -90,10 +95,6 @@ public class TaskList {
     public void unmarkAsDone(int index) throws DukeException {
         getTask(index).unmarkAsDone();
         assert !getTask(index).getIsDone() : "Task should be unmarked as done";
-    }
-
-    public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(tasks);
     }
 
     /**

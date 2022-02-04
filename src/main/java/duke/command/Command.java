@@ -10,7 +10,9 @@ import duke.util.TaskList;
  */
 public abstract class Command {
     /**
-     * Returns false if the command is not an ExitCommand.
+     * Returns False if the user has not decided to exit the application.
+     *
+     * @return False if the command is not an ExitCommand, otherwise True.
      */
     public boolean isExit() {
         return false;

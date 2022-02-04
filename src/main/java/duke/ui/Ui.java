@@ -17,8 +17,9 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
     private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?";
     private static final String GOODBYE = "Bye. Meow!";
-    private static final String MESSAGE_NUM_LIST_ITEMS = "Number of tasks in list: ";
-    private static final String MESSAGE_TASK_WITH_KEYWORD = "Here are the matching tasks with keyword: ";
+    private static final String MESSAGE_NUM_LIST_ITEMS = "%sNumber of tasks in list: %d";
+    private static final String MESSAGE_LIST_ITEM = "%d. %s\n";
+    private static final String MESSAGE_TASK_WITH_KEYWORD = "Here are the matching tasks with keyword: %s\n";
 
     public Ui() {
     }
@@ -61,41 +62,28 @@ public class Ui {
     }
 
     /**
-     * Prints an error when data cannot be loaded.
+     * Prints an error when stored data cannot be loaded.
      */
     public void showLoadingError() {
-        System.out.print(showMessage(ErrorMessage.MESSAGE_LOADING_ERROR));
+        System.out.print(ErrorMessage.MESSAGE_LOADING_ERROR);
     }
 
     /**
      * Formats and returns the tasks to be shown to the user.
+     * If a keyword is given, the keyword will be shown as well.
      *
-     * @param listItems ArrayList of tasks to be printed.
+     * @param listItems List of tasks to be shown.
+     * @param keyword Keyword to be shown.
      * @return The formatted tasks string.
      */
-    public String showAllTasks(ArrayList<Task> listItems) {
+    public String showTasks(ArrayList<Task> listItems, String keyword) {
         StringBuilder formatted = new StringBuilder();
-        for (int i = 0; i < listItems.size(); i++) {
-            formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
+        if (!keyword.isBlank()) {
+            formatted.append(String.format(MESSAGE_TASK_WITH_KEYWORD, keyword));
         }
-        formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
-        return showMessage(formatted.toString());
-    }
-
-    /**
-     * Formats and returns the tasks with a given keyword to be shown to the user.
-     *
-     * @param listItems ArrayList of tasks to be printed.
-     * @param keyword Keyword to be searched for.
-     * @return The formatted tasks string.
-     */
-    public String showFoundTasks(ArrayList<Task> listItems, String keyword) {
-        StringBuilder formatted = new StringBuilder();
-        formatted.append(MESSAGE_TASK_WITH_KEYWORD).append(keyword).append(" \n");
         for (int i = 0; i < listItems.size(); i++) {
-            formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
+            formatted.append(String.format(MESSAGE_LIST_ITEM, i + 1, listItems.get(i)));
         }
-        formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
-        return showMessage(formatted.toString());
+        return showMessage(String.format(MESSAGE_NUM_LIST_ITEMS, formatted, listItems.size()));
     }
 }

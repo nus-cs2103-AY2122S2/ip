@@ -38,10 +38,6 @@ public class Task {
         return description;
     }
 
-    public boolean getIsDone() {
-        return isDone;
-    }
-
     /**
      * Returns status icon "X" of the task.
      * If the task is not done, " " is returned.
@@ -66,10 +62,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public TaskType getType() {
-        return type;
-    }
-
     /**
      * Returns a prefix denoting the task type.
      *
@@ -79,10 +71,8 @@ public class Task {
         switch(type) {
         case DEADLINE:
             return "D";
-            // Fallthrough
         case EVENT:
             return "E";
-            // Fallthrough
         default:
             return "T";
         }

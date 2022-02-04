@@ -21,14 +21,16 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Initializes the Duke Chatbot UI.
+     */
     @FXML
     public void initialize() {
-        ui = new Ui();
+        Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getLogoDialog(ui.showLogo()),

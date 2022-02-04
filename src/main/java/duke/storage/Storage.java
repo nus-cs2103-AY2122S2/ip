@@ -20,7 +20,7 @@ import duke.util.TaskList;
  * Represents a storage object that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    public static final String DEFAULT_FILEPATH = "duke.txt";
+    public static final String DEFAULT_FILEPATH = "data/tasks.txt";
     private final Path filePath;
 
     public Storage() {
@@ -39,7 +39,7 @@ public class Storage {
     /**
      * Loads and decodes the saved tasks from file if they exist.
      *
-     * @return Saved tasks, else empty list.
+     * @return Saved tasks, else a new  empty list.
      * @throws StorageException if the file cannot be loaded.
      */
     public ArrayList<Task> load() throws StorageException {
@@ -81,7 +81,7 @@ public class Storage {
         try {
             StringBuilder content = new StringBuilder();
             for (Task t: tasks.getAllTasks()) {
-                content.append(t.formatForFile());
+                content.append(t.formatForFile()).append("\n");
             }
             Files.write(filePath, content.toString().getBytes());
         } catch (IOException e) {
@@ -100,7 +100,8 @@ public class Storage {
             }
 
             Path parentDir = filePath.getParent();
-            if (!Files.exists(parentDir)) { // check if data folder exists
+            // check if data folder exists
+            if (!Files.exists(parentDir)) {
                 Files.createDirectories(parentDir);
             }
 
