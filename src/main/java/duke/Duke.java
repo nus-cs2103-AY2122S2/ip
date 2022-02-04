@@ -123,12 +123,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(400.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 400.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(600.0, 365.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -138,9 +138,11 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(535.0);
+        userInput.setPrefHeight(25.0);
 
         sendButton.setPrefWidth(55.0);
+        sendButton.setPrefHeight(25.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -153,7 +155,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         dialogContainer.getChildren().add(
-                new DialogueBox(new Label(ui.showIntro()), new ImageView(duke)));
+                new DialogueBox(new Label(ui.showIntro()), new ImageView(duke), false));
 
         sendButton.setOnMouseClicked((event) -> handleUserInput());
 
@@ -167,8 +169,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogueBox(userText, new ImageView(user)),
-                new DialogueBox(dukeText, new ImageView(duke))
+                new DialogueBox(userText, new ImageView(user), true),
+                new DialogueBox(dukeText, new ImageView(duke), false)
         );
         userInput.clear();
     }
@@ -184,7 +186,7 @@ public class Duke extends Application {
                         Platform.exit();
                         System.exit(0);
                     }
-                }, 2 * 1000);
+                }, 1000);
             }
             return command.execute(taskList, ui, storage);
         } catch (DukeException e) {

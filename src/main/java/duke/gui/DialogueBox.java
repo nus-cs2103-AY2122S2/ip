@@ -15,7 +15,8 @@ public class DialogueBox extends HBox {
      * @param l  Text to be displayed.
      * @param iv Window to contain text.
      */
-    public DialogueBox(Label l, ImageView iv) {
+    public DialogueBox(Label l, ImageView iv, boolean isUser) {
+        l.setStyle("-fx-font-family: 'monospaced'; -fx-font-weight: bold; -fx-font-size: 14");
         text = l;
         displayPicture = iv;
 
@@ -23,7 +24,12 @@ public class DialogueBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        if (isUser) {
+            this.setAlignment(Pos.TOP_RIGHT);
+            this.getChildren().addAll(text, displayPicture);
+        } else {
+            this.setAlignment(Pos.TOP_LEFT);
+            this.getChildren().addAll(displayPicture, text);
+        }
     }
 }
