@@ -28,16 +28,12 @@ public class CommandFactory {
      */
     private String isolateParameters(String input) {
         int whiteSpaceIndex = input.indexOf(" "); // Index of first whitespace
-        try {
-            if (whiteSpaceIndex == -1) { // If the input string has no whitespaces (i.e. one word)
-                throw new DukeException();
-            }
-        } catch (DukeException e) {
-            System.out.println("No input provided after command");
-            System.exit(1);
-        }
 
-        return input.substring(whiteSpaceIndex + 1); // Return the rest of the word, starting from after whitespace
+        try {
+            return input.substring(whiteSpaceIndex + 1); // Return the rest of the word, starting from after whitespace
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**

@@ -37,4 +37,11 @@ public class Ui {
         System.out.println(Ui.line());
     }
 
+    public static void printExit() {
+        String EXIT = "Duke terminated";
+        System.out.println(Ui.line());
+        System.out.println(EXIT);
+        System.out.println(Ui.line());
+    }
+
 }
