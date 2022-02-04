@@ -26,9 +26,4 @@ public class AddCommand extends Command {
         storage.saveAddedTask(this.task);
         return message;
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }

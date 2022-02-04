@@ -16,6 +16,10 @@ public class Main extends Application {
 
     private final Duke duke = new Duke("data/data.txt");
 
+    /**
+     * The entry point to all javafx applications.
+     * @param stage the primary stage for this application.
+     */
     @Override
     public void start(Stage stage) {
         try {

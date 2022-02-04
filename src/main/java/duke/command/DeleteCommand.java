@@ -25,9 +25,4 @@ public class DeleteCommand extends Command {
         storage.saveUpdatedTask(index, null);
         return printStr;
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }

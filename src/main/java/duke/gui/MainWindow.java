@@ -13,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -43,6 +41,10 @@ public class MainWindow extends AnchorPane {
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I am Duke.\n", dukeImage));
     }
 
+    /**
+     * Setter for Duke.
+     * @param d the duke task manager to be set into MainWindow.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

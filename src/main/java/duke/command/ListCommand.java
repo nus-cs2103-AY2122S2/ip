@@ -18,9 +18,4 @@ public class ListCommand extends Command {
     public String exec(TaskList taskList, Storage storage) {
         return taskList.list();
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }

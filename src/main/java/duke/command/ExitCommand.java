@@ -21,6 +21,10 @@ public class ExitCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Method that checks if Duke should exit.
+     * @return true since this is the Exit Command.
+     */
     @Override
     public boolean shouldAbort() {
         return true;

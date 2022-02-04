@@ -7,6 +7,10 @@ import duke.util.TaskList;
 public class FindCommand extends Command {
     private final String findTask;
 
+    /**
+     * Constructor for Find command.
+     * @param findTask the task to be found.
+     */
     public FindCommand(String findTask) {
         this.findTask = findTask;
     }
@@ -14,10 +18,5 @@ public class FindCommand extends Command {
     @Override
     public String exec(TaskList taskList, Storage storage) throws DukeException {
         return taskList.find(findTask);
-    }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
     }
 }

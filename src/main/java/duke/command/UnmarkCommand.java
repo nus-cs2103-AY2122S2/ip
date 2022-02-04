@@ -29,9 +29,4 @@ public class UnmarkCommand extends Command {
         storage.saveUpdatedTask(index, unmarkedTask.getKey());
         return unmarkedTask.getValue();
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }

@@ -29,9 +29,4 @@ public class MarkCommand extends Command {
         storage.saveUpdatedTask(index, markedTask.getKey());
         return markedTask.getValue();
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }

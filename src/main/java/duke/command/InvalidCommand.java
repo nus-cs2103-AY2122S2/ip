@@ -23,9 +23,4 @@ public class InvalidCommand extends Command {
     public String exec(TaskList taskList, Storage storage) {
         return errorMessage;
     }
-
-    @Override
-    public boolean shouldAbort() {
-        return false;
-    }
 }
