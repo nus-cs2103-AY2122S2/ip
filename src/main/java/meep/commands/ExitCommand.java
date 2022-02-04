@@ -9,7 +9,7 @@ import meep.task.ListTask;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
-
+    public static final int COMMAND_LENGTH = 1;
 
     /**
      * Returns boolean to check command is ExitCommand or not.

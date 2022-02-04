@@ -32,7 +32,8 @@ public class Parser {
      * @throws InvalidInputException If the input can't be split into two part.
      */
     public String checkEmptyTask(String task) throws InvalidInputException {
-        if (task.trim().length() == 0) {
+        boolean isEmptyInput = task.trim().length() == 0;
+        if (isEmptyInput) {
             throw new InvalidInputException("Task description can not be empty!");
         }
         return task.trim();
@@ -48,13 +49,14 @@ public class Parser {
      * @throws InvalidInputException If the index is out of bound.
      */
     public int parseListIndex(String index, List<Task> tasks) throws InvalidInputException {
-        int num = 0;
+        int num;
         try {
             num = Integer.parseInt(index);
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Invalid task number. Please enter a valid integer.");
         }
-        if (num < 0 || num > tasks.size()) {
+        boolean isOutOfBound = num < 0 || num > tasks.size();
+        if (isOutOfBound) {
             throw new InvalidInputException("Task number out of range.");
         }
         return num;
@@ -69,8 +71,8 @@ public class Parser {
      */
     public String[] parseTaskFormat(String str) throws InvalidInputException {
         String[] output = str.split("/", 2);
-
-        if (output.length == 1) {
+        boolean isValidFormat = output.length == 1;
+        if (isValidFormat) {
             throw new InvalidInputException("Invalid format. "
                     + "eg. deadline return book /by 02/12/2019 18:00.");
         }
@@ -88,21 +90,37 @@ public class Parser {
      */
     public String checkPrepositionFormat(String str, String command) throws InvalidInputException {
         String[] date = str.split(" ", 2);
-
-        if (date.length != 2) {
+        boolean isValidFormat = date.length != 2;
+        if (isValidFormat) {
             throw new InvalidInputException("Invalid format. eg. deadline return book /by 02/12/2019 18:00.");
         }
 
         String pre = date[0];
         // check Prepositions of Time/Date
-        if (command.equals(AddCommand.COMMAND_DEADLINE) && !pre.equals("by")) {
+        boolean isDeadlineCommand = command.equals(AddCommand.COMMAND_DEADLINE);
+        boolean isValidDeadlinePrepositions = pre.equals("by");
+        if (isDeadlineCommand && !isValidDeadlinePrepositions) {
             throw new InvalidInputException("Invalid Prepositions for deadline command. eg. '/by'.");
         }
-        if (command.equals(AddCommand.COMMAND_EVENT) && !pre.equals("on") && !pre.equals("at")) {
+
+        boolean isEventCommand = command.equals(AddCommand.COMMAND_EVENT);
+        boolean isValidEventPrepositions = pre.equals("on") || pre.equals("at");
+        if (isEventCommand && !isValidEventPrepositions) {
             throw new InvalidInputException("Invalid Prepositions for event command. eg. '/on' or '/at' .");
         }
 
         return date[1];
+    }
+
+    /**
+     * Checks command length.
+     *
+     * @param length the correct length of the command.
+     * @param input the input array.
+     * @return is valid command length or not.
+     */
+    private boolean isValidCommandLength(int length, String[] input) {
+        return length == input.length;
     }
 
 
@@ -115,51 +133,50 @@ public class Parser {
      * @throws InvalidInputException If the input is invalid.
      */
     public Command parseUserInput(String userInput, List<Task> tasks) throws InvalidInputException {
-        // catch empty input
-        if (userInput.trim().length() == 0) {
+        boolean isEmptyInput = userInput.trim().length() == 0;
+        if (isEmptyInput) {
             throw new InvalidInputException("Empty Command");
         }
 
         String[] arr = userInput.split(" ", 2);
-        int commandLen = arr.length;
         switch (arr[0]) {
         case ExitCommand.COMMAND_WORD:
-            if (commandLen == 1) {
+            if (isValidCommandLength(ExitCommand.COMMAND_LENGTH, arr)) {
                 return new ExitCommand();
             }
             break;
         case ListCommand.COMMAND_WORD:
-            if (commandLen == 1) {
+            if (isValidCommandLength(ListCommand.COMMAND_LIST_LENGTH, arr)) {
                 // list without date
                 return new ListCommand();
-            } else if (commandLen == 2) {
+            } else if (isValidCommandLength(ListCommand.COMMAND_LIST_DATE_LENGTH, arr)) {
                 // list with date given
                 return new ListCommand(true, parseDate(arr[1]));
             }
             break;
         case MarkCommand.COMMAND_WORD:
-            if (commandLen == 2) {
+            if (isValidCommandLength(MarkCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
                 assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
                 return new MarkCommand(index);
             }
             break;
         case UnmarkCommand.COMMAND_WORD:
-            if (commandLen == 2) {
+            if (isValidCommandLength(UnmarkCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
                 assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
                 return new UnmarkCommand(index);
             }
             break;
         case DeleteCommand.COMMAND_WORD:
-            if (commandLen == 2) {
+            if (isValidCommandLength(DeleteCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
                 assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
                 return new DeleteCommand(index);
             }
             break;
         case AddCommand.COMMAND_TODO:
-            if (commandLen == 2) {
+            if (isValidCommandLength(AddCommand.COMMAND_LENGTH, arr)) {
                 String taskTitle = checkEmptyTask(arr[1]);
                 assert taskTitle.length() > 0 : "task title should not be empty";
                 return new AddCommand(new ToDo(taskTitle));
@@ -182,7 +199,7 @@ public class Parser {
             return new AddCommand(new Event(eventTitle, parseDate(eventDate)));
             // Fallthrough
         case FindCommand.COMMAND_WORD:
-            if (commandLen == 2) {
+            if (isValidCommandLength(FindCommand.COMMAND_LENGTH, arr)) {
                 return new FindCommand(arr[1]);
             }
             break;

@@ -1,6 +1,5 @@
 package meep.TextUi;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import meep.commands.Command;
@@ -79,7 +78,7 @@ public class Meep {
     private void saveTaskToFile() {
         try {
             storage.saveTaskToFile(taskList.getList());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.printMsg(e.getMessage());
         }
     }

@@ -51,9 +51,6 @@ public class Storage {
      */
     public String getPath() {
         String home = System.getProperty("user.dir");
-
-        // works on *nix
-        // works on Windows
         String path = home + DEFAULT_FILEPATH;
         boolean directoryExists = new java.io.File(path).exists();
         return path;
@@ -104,14 +101,18 @@ public class Storage {
             }
 
             Parser parser = new Parser();
-            if (parts[0].equals("T")) {
-                result.add(new ToDo(parts[2], parts[1].equals("1")));
-            } else if (parts[0].equals("D")) {
-                result.add(new Deadline(parts[2],
-                        parts[1].equals("1"), parser.parseDate(parts[3])));
-            } else if (parts[0].equals("E")) {
-                result.add(new Event(parts[2],
-                        parts[1].equals("1"), parser.parseDate(parts[3])));
+
+            boolean isTodo = parts[0].equals("T");
+            boolean isDeadline = parts[0].equals("D");
+            boolean isEvent = parts[0].equals("E");
+            boolean isMarked = parts[1].equals("1");
+
+            if (isTodo) {
+                result.add(new ToDo(parts[2], isMarked));
+            } else if (isDeadline) {
+                result.add(new Deadline(parts[2], isMarked, parser.parseDate(parts[3])));
+            } else if (isEvent) {
+                result.add(new Event(parts[2], isMarked, parser.parseDate(parts[3])));
             } else {
                 throw new AssertionError("Invalid Task!");
             }
@@ -129,32 +130,32 @@ public class Storage {
      * @return status of saving.
      * @throws FileNotFoundException If the file not found.
      */
-    public boolean saveTaskToFile(List<Task> taskList) throws FileNotFoundException {
+    public boolean saveTaskToFile(List<Task> taskList) throws IOException {
         String path = getPath();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        try {
-            FileWriter fw = new FileWriter(path);
-            for (Task task : taskList) {
-                if (task.getClass() == ToDo.class) {
-                    fw.write("T | " + (task.isDone() ? "1 | " : "0 | ")
-                            + task.getTitle() + System.lineSeparator());
-                } else if (task.getClass() == Deadline.class) {
-                    fw.write("D | " + (task.isDone() ? "1 | " : "0 | ")
-                            + task.getTitle() + " | "
-                            + ((Deadline) task).getDate().format(format) + System.lineSeparator());
-                } else if (task.getClass() == Event.class) {
-                    fw.write("E | " + (task.isDone() ? "1 | " : "0 | ")
-                            + task.getTitle() + " | "
-                            + ((Event) task).getDate().format(format) + System.lineSeparator());
-                } else {
-                    throw new AssertionError("Invalid Task!");
-                }
-            }
+        FileWriter fw = new FileWriter(path);
 
-            fw.close();
-        } catch (IOException e) {
-            throw new FileNotFoundException("File not found under " + path);
+        for (Task task : taskList) {
+            boolean isTodo = task.getClass() == ToDo.class;
+            boolean isDeadline = task.getClass() == Deadline.class;
+            boolean isEvent = task.getClass() == Event.class;
+            if (isTodo) {
+                fw.write("T | " + (task.isDone() ? "1 | " : "0 | ")
+                        + task.getTitle() + System.lineSeparator());
+            } else if (isDeadline) {
+                fw.write("D | " + (task.isDone() ? "1 | " : "0 | ")
+                        + task.getTitle() + " | "
+                        + ((Deadline) task).getDate().format(format) + System.lineSeparator());
+            } else if (isEvent) {
+                fw.write("E | " + (task.isDone() ? "1 | " : "0 | ")
+                        + task.getTitle() + " | "
+                        + ((Event) task).getDate().format(format) + System.lineSeparator());
+            } else {
+                throw new AssertionError("Invalid Task!");
+            }
         }
+
+        fw.close();
         return true;
     }
 }

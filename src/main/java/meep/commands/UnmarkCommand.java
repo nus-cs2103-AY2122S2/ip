@@ -10,6 +10,7 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:\n";
+    public static final int COMMAND_LENGTH = 2;
 
     private final int index;
 

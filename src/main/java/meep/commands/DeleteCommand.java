@@ -10,6 +10,7 @@ import meep.task.Task;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_DELETE = "Noted. I've removed this task:\n";
+    public static final int COMMAND_LENGTH = 2;
 
     private final int index;
 

@@ -1,6 +1,5 @@
 package meep.ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -192,7 +191,7 @@ public class Gui extends Application {
         try {
             storage.saveTaskToFile(taskList.getList());
             return true;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             return false;
         }
     }
