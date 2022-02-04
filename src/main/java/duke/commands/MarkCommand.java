@@ -33,7 +33,7 @@ public class MarkCommand extends Command<Integer> {
      */
     public void runCommand(TaskList toDoList, Integer numberToMark) throws DukeException {
         try {
-            // Mark the task
+            // Set the task as being marked.
             Task taskToMark = toDoList.get(numberToMark);
             taskToMark.mark();
 
