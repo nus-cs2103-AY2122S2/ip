@@ -8,7 +8,6 @@ import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.tasks.Event;
-import duke.tasks.Task;
 
 /**
  * AddEventCommand is a Command.
