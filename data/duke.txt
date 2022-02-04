@@ -3,4 +3,4 @@ D,1,return book,2019-10-15
 E,0,project meeting,Aug 6th 2-4pm
 T,1,join sports club
 E,1,reunion dinner,31 jan 6pm
-D,0,assignment 1,2019-10-15
+D,1,assignment 1,2019-10-15
