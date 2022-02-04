@@ -5,6 +5,7 @@ import storage.Storage;
 import task.Event;
 import task.Task;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -39,9 +40,9 @@ public class EventCommand extends Command {
         try {
             tasks.add(event);
             storage.store(tasks);
-            ui.showResponseMessage("event");
-            ui.showTaskMessage(event);
-            ui.printTasksCountMessage(tasks);
+            this.response = new Response(ui.getResponseMessage("event"),
+                    ui.getTaskMessage(event),
+                    ui.getTasksCountMessage(tasks));
         } catch (DukeException e) {
             // e.printStackTrace();
         }

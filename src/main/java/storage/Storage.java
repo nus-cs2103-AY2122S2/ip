@@ -33,7 +33,7 @@ public class Storage {
 
     /**
      * Reads the information from a file indicated from the file path.
-     * If an error is detected, throws Duke exception to indicate
+     * If an error is detected, throws duke.Duke exception to indicate
      * there was an issue processing the cached data.
      *
      * @return An ArrayList of tasks
@@ -65,7 +65,7 @@ public class Storage {
 
     /**
      * Saves the information from a file indicated from the file path.
-     * If an error is detected, throws Duke exception to indicate
+     * If an error is detected, throws duke.Duke exception to indicate
      * there was an issue processing the cached data.
      *
      * @throws DukeException If unable to detect file

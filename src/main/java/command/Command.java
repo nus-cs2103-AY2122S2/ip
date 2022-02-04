@@ -3,6 +3,7 @@ package command;
 import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -13,17 +14,16 @@ import ui.Ui;
 public abstract class Command {
 
     private static boolean isExit = false;
-
+    protected Response response;
     /**
      * Default class constructor.
      */
     public Command() {
-
     }
 
     /**
      * Requires child classes to implement the method to ensure that every command has an executable function.
-     * If an exception occurs, throws Duke Exception.
+     * If an exception occurs, throws duke.Duke Exception.
      *
      * @param tasks TaskList which stores the list of tasks
      * @param ui Ui to display necessary responses
@@ -48,5 +48,14 @@ public abstract class Command {
      */
     public boolean isExit() {
         return isExit;
+    }
+
+    /**
+     * Get the bot's response.
+     *
+     * @return Bot response object to reply the user
+     */
+    public Response getResponse() {
+        return this.response;
     }
 }

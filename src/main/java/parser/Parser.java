@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.ArrayList;
+
 import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
@@ -31,7 +33,7 @@ public class Parser {
 
     /**
      * Processes a raw String command and decides the command.
-     * If an error is detected, Duke exception is thrown.
+     * If an error is detected, duke.Duke exception is thrown.
      *
      * @param fullCommand Raw String command
      * @return Command to be executed
@@ -100,5 +102,19 @@ public class Parser {
      */
     public static String removeSubString(String response, String word) {
         return response.replace(word, "");
+    }
+
+    /**
+     * Converts an ArrayList of content into a single String.
+     *
+     * @param l ArrayList to convert from
+     * @return Single string the represents the content of the ArrayList
+     */
+    public static String arrayListToString(ArrayList<String> l) {
+        StringBuilder sb = new StringBuilder();
+        for (String con : l) {
+            sb.append(con);
+        }
+        return sb.toString();
     }
 }
