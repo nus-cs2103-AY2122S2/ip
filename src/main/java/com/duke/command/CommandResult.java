@@ -43,7 +43,7 @@ public class CommandResult {
      */
     public static CommandResult unknownResult() {
         CommandResult result = new CommandResult(
-                "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                "OOPS!!! I'm sorry, but I don't know what that means :-(");
         return result;
     }
 

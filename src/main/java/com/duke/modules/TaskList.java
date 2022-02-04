@@ -119,7 +119,7 @@ public class TaskList {
     public String displayList() {
         String output = "";
         if (taskList.size() == 0) {
-            output = "LUMU: Your list is empty!";
+            output = "Your list is empty!";
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 Task currTask = taskList.get(i);

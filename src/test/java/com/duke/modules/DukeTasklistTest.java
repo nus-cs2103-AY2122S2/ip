@@ -25,6 +25,6 @@ public class DukeTasklistTest {
         TaskList testModule = new TaskList();
         ArrayList<Task> testList = new ArrayList<>();
         testModule.setListWithoutSaving(testList);
-        assertEquals(testModule.displayList(), "LUMU: Your list is empty!");
+        assertEquals(testModule.displayList(), "Your list is empty!");
     }
 }

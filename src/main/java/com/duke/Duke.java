@@ -7,26 +7,25 @@ import com.duke.modules.Ui;
 
 public class Duke {
     private Parser cmdParser;
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
+        storage = Storage.getInstance();
+        taskList = new TaskList(storage);
+        ui = new Ui();
     }
 
     /**
-     * Runs the chatbot.
-     * @param args
+     * Gets a string response to the user's input.
+     * @param input User input.
+     * @return A response string.
      */
-    public static void main(String[] args) {
-        Duke lumu = new Duke();
-
-        lumu.botInitialize();
+    public String getResponse(String input) {
+        return ui.initialize(input, taskList);
     }
-
-    private void botInitialize() {
-        Storage storage = Storage.getInstance();
-        TaskList taskList = new TaskList(storage);
-        Ui ui = new Ui();
-        ui.initialize(taskList);
-
-    }
-
 }

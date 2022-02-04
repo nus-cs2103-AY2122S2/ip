@@ -1,7 +1,5 @@
 package com.duke.modules;
 
-import java.util.Scanner;
-
 import com.duke.command.CommandResult;
 
 /**
@@ -19,19 +17,11 @@ public class Ui {
      * Gets user input and passes it to a Parser to be read.
      * Prints out the given string in the CommandResult object given by the Parser object.
      */
-    public void initialize(TaskList taskList) {
-        showStartMessage();
-
-        Scanner scanner = new Scanner(System.in);
+    public String initialize(String userInput, TaskList taskList) {
         Parser parser = new Parser(taskList);
-        while (scanner.hasNextLine()) {
-            String commands = scanner.nextLine().trim();
-            CommandResult cmdResult = parser.parse(commands);
-            showMessage(cmdResult.getResultMessage());
-            if (cmdResult.isShutdown()) {
-                break;
-            }
-        }
+        String commands = userInput.trim();
+        CommandResult cmdResult = parser.parse(commands);
+        return showMessage(cmdResult.getResultMessage());
     }
 
     private void showStartMessage() {
@@ -39,8 +29,13 @@ public class Ui {
         System.out.println(outputMessage);
     }
 
-    private void showMessage(String message) {
+    private void displayMessage(String message) {
         String outputMessage = String.format("%s\n%s", message, LINE_BREAK);
         System.out.println(outputMessage);
+    }
+
+    private String showMessage(String message) {
+        String outputMessage = String.format("%s", message);
+        return outputMessage;
     }
 }
