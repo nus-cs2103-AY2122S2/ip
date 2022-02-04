@@ -16,7 +16,6 @@ public class Duke {
     private TextUi ui;
     private Parser parser;
 
-
     /**
      * The main entry point to the application
      *
@@ -24,18 +23,22 @@ public class Duke {
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
-            new Duke().run();
+            new Duke().run_cmd();
         } else { // GUI mode
             Application.launch(duke.ui.GraphicsUi.class, args);
         }
     }
 
+    public String getResponse(String string) {
+        return "I got " + string;
+    }
+
     /**
-     * Starts the main logic of the program
+     * Starts the main logic of the program (command line mode)
      *
      * Instantiates TextUi, Storage, TaskList, and Parser objects and starts input loop
      */
-    public void run() {
+    public void run_cmd() {
         // Setting up the goods
         ui = new TextUi();
         fh = new Storage(FILENAME);
@@ -48,14 +51,14 @@ public class Duke {
         // Starting input loop
         while (true) {
             String input = ui.getInput();
-            if (processInput(input)) {
+            if (processInput_cmd(input)) {
                 break;
             }
         }
         ui.printGoodbye();
     }
 
-    private boolean processInput(String input) {
+    private boolean processInput_cmd(String input) {
         Command parsedCommand = parser.parseCommand(input);
         CommandResult runCommand = parsedCommand.runCommand();
 

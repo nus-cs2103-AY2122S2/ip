@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main
+
 plugins {
     id 'java'
     id 'application'
@@ -33,13 +35,20 @@ dependencies {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClass = "duke.Duke"
 }
 
 run {
     standardInput = System.in
 }
 
+//task runCmd(type: JavaExec) {
+//    group = "application"
+//    description = "Run Duke with --cmd mode"
+//    main = "Main"
+//    classpath = sourceSets.main.runtimeClasspath
+//    args = ["--cmd"]
+//}
 
 //sourceSets {
 //    main {
