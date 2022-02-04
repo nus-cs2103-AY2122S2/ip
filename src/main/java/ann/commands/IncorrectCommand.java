@@ -6,8 +6,7 @@ package ann.commands;
  * @author Hong Anh
  * @version 0.1
  */
-public class IncorrectCommand extends Command{
-
+public class IncorrectCommand extends Command {
     /**
      * Creates a new IncorrectCommand with the specified message.
      *

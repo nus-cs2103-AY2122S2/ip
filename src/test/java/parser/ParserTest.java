@@ -1,12 +1,13 @@
 package parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ann.commands.Command;
 import ann.data.TaskList;
 import ann.data.tasks.Task;
 import ann.parser.Parser;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
@@ -15,7 +16,8 @@ public class ParserTest {
         Command command = Parser.parse("add deadline finish IP /by 2022-01-27 18:00");
         command.setTaskList(new TaskList());
         command.executeCommand();
-        assertEquals("Alright! I've added this task:\n[D][ ] finish IP (by 27 Jan 2022 06:00 PM)\nNow there is 1 task in your list.", command.getMessage());
+        assertEquals("Alright! I've added this task:\n[D][ ] finish IP (by 27 Jan 2022 06:00 PM)\n"
+                + "Now there is 1 task in your list.", command.getMessage());
     }
 
     @Test
@@ -31,7 +33,8 @@ public class ParserTest {
         Command command = Parser.parse("add event meeting /at 12-03-2022 17:00");
         command.setTaskList(new TaskList());
         command.executeCommand();
-        assertEquals("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm", command.getMessage());
+        assertEquals("Oops! Please use the following format:\nadd event [content] /at yyyy-MM-dd HH:mm",
+                command.getMessage());
     }
 
     @Test

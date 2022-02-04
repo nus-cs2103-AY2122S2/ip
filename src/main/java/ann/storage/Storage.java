@@ -19,10 +19,11 @@ import ann.data.TaskList;
  * @version 0.1
  */
 public class Storage {
-    private final static String DEFAULT_STORAGE_FOLDER_NAME = "data";
-    private final static String DEFAULT_STORAGE_FILE_NAME = "ann.txt";
+    private static final String DEFAULT_STORAGE_FOLDER_NAME = "data";
+    private static final String DEFAULT_STORAGE_FILE_NAME = "ann.txt";
     private File file;
-    private String folderName, fileName;
+    private String folderName;
+    private String fileName;
 
     /**
      * Creates a new Storage object from the default folder and file names.
@@ -44,7 +45,7 @@ public class Storage {
      * @param fileName a String which is the name of the storage file.
      * @throws StorageOperationException if the storage file's name does not end with '.txt'.
      */
-    public Storage(String folderName, String fileName) throws StorageOperationException{
+    public Storage(String folderName, String fileName) throws StorageOperationException {
         if (!isValidFileName(fileName)) {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
@@ -95,7 +96,7 @@ public class Storage {
      * @return an ArrayList of Strings which represent the Tasks.
      * @throws AssertionError
      */
-    public ArrayList<String> load() throws AssertionError{
+    public ArrayList<String> load() throws AssertionError {
         ArrayList<String> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
