@@ -51,14 +51,12 @@ public class Storage {
                 Task t;
                 while (s.hasNext()) {
                     String someTask = s.nextLine();
-                    try {
-                        t = Task.importFromString(someTask);
-                        allTasks.add(t);
-                    } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException err) {
-                        throw new DukeException(err.getMessage());
-                    }
+                    t = Task.importFromString(someTask);
+                    allTasks.add(t);
                 }
-            } catch (FileNotFoundException err) { // will not reach here
+            } catch (FileNotFoundException
+                    | IllegalArgumentException
+                    | ArrayIndexOutOfBoundsException err) { // will not reach here
                 throw new DukeException(err.getMessage());
             }
         }
