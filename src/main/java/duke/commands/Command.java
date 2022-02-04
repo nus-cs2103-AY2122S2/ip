@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 /**
  * An abstract class representing a command in Chi Bot.
+ *
+ * @author WJunHong-reused
+ * Reused from https://github.com/mslevis/ip/blob/master/src/main/java/aoi/commands/Command.java
+ * with modifications.
  */
 public abstract class Command {
 

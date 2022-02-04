@@ -7,6 +7,11 @@ import java.util.HashMap;
 /**
  * Enum of command keywords.
  */
+/*
+    @author WJunHong-reused
+    Reused from https://github.com/mslevis/ip/blob/master/src/main/java/aoi/commands/Keyword.java
+    with some modifications
+ */
 public enum Keywords {
     ADD("todo","deadline","event"),
     LIST("list"),

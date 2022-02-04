@@ -48,7 +48,12 @@ public class Parser {
      */
     public Keywords messageValidator(String[] tokens) throws ChiException {
         try {
-            // Check if the 1st word is a valid command
+            /* Check if the 1st word is a valid command
+               @author WJunHong-reused
+               Reused from https://github.com/mslevis/ip/tree/master/src/main/java/aoi/parser
+               with modification
+
+             */
             Keywords res = Keywords.getKeyword(tokens[0].toUpperCase());
             // Check if it is an add task or find command that has at least 1 word defined
             if ((res.equals(Keywords.ADD) || res.equals(Keywords.FIND)) && tokens.length < 2) {
