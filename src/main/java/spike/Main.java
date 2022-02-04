@@ -13,7 +13,7 @@ import spike.ui.MainWindow;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    // Initializing the Spike instance
     private Spike spike = new Spike("/data", "/data/Spike.txt");
 
     @Override

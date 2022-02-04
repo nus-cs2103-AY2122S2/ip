@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Removes and printed the deleted task.
+     * Removes and prints the deleted task.
      *
      * @param tasks current task list
      * @return deletion response string
@@ -33,6 +33,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns the message needed for printing when deleting task.
+     *
+     * @return response after deleting task
      */
     private String getDeletedTaskText(Task task, TaskList tasks) {
         String result = " Noted. I've removed this task: \n"

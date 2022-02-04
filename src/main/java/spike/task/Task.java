@@ -33,6 +33,8 @@ public class Task {
 
     /**
      * Retrieve the task status icon.
+     *
+     * @return status icon
      */
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -54,21 +56,26 @@ public class Task {
 
     /**
      * Returns the representative string for saving in data file.
+     *
+     * @return string format for saving
      */
     public String toFileFormat() {
         return "";
     }
 
     /**
-     * Format the string representation of spike.task.Task objects.
      * Gets the date and time for tasks with such information.
+     *
+     * @return object containing the date and time information
      */
     public LocalDateTime getDateTime() {
         return this.dateTime;
     }
 
     /**
-     * Formats the string representation of spike.task.Task objects.
+     * Formats the string representation of Task objects.
+     *
+     * @return string representation of a task
      */
     @Override
     public String toString() {

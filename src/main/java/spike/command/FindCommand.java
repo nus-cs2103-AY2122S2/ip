@@ -7,15 +7,15 @@ import spike.task.TaskList;
  * Finds task based on keyword given.
  */
 public class FindCommand extends Command {
-    private String keyWord;
+    private String keyword;
 
     /**
      * Constructor using keyword string.
      *
-     * @param keyWord the word used to find tasks
+     * @param keyword the word used to find tasks
      */
-    public FindCommand(String keyWord) {
-        this.keyWord = keyWord;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         int i = 1;
         String result = "Here are the matching tasks in your list:\n";
         for (Task task : tasks.getTasks()) {
-            if (task.toString().contains(keyWord)) {
+            if (task.toString().contains(keyword)) {
                 result = result + i + "." + task + "\n";
             }
             i++;

@@ -1,4 +1,5 @@
 package spike.parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -52,11 +53,14 @@ public class Parser {
      * @return a proper command to be executed
      */
     public Command parseCommand(String inputLine, TaskList tasks) {
+        // Extract the words
         String[] commandWords = inputLine.split(" ");
+        // Get the command name and check validity
         CommandName type = validateCommand(commandWords[0]);
         if (type == null) {
             return new IncorrectCommand("Sorry, I am not programmed to do this yet :(");
         }
+        // Start to generate command
         switch (type) {
         case LIST:
             try {
@@ -100,6 +104,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the find command.
+     *
+     * @param inputLine user raw input
+     * @return a command object ready to be executed
+     * @throws SpikeException if the keyword for find is missing
+     */
     private Command parseFind(String inputLine) throws SpikeException {
         if (inputLine.length() <= 5) {
             throw new SpikeException("Kindly enter the keyword for finding task");
@@ -107,7 +118,13 @@ public class Parser {
         return new FindCommand(inputLine.substring(5));
     }
 
-
+    /**
+     * Parses the list command.
+     *
+     * @param inputLine user raw input
+     * @return a command object ready to be executed
+     * @throws SpikeException if the keyword for list by date is missing
+     */
     private Command parseList(String inputLine) throws SpikeException {
         if (inputLine.length() >= 5) {
             // User tries to list task by date
@@ -122,6 +139,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the add command
+     *
+     * @param c command name
+     * @param command whole command in string
+     * @param commandWords command broken down into words
+     * @return a command object ready to be executed
+     * @throws SpikeException if any parameter is missing
+     */
     private Command parseAdd(CommandName c, String command, String[] commandWords) throws SpikeException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         switch (c) {
@@ -163,6 +189,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses delete command.
+     *
+     * @param commandWords command broken down into words
+     * @param tasks current task list
+     * @return a command object ready to be executed
+     * @throws SpikeException if any parameter is missing
+     */
     private Command parseDelete(String[] commandWords, TaskList tasks) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > tasks.getListSize()) {
@@ -172,6 +206,15 @@ public class Parser {
         return new DeleteCommand(toDelete);
     }
 
+    /**
+     * Parses mark or unmark command
+     *
+     * @param c command name
+     * @param commandWords command broken down into words
+     * @param tasks current task list
+     * @return a command object ready to be executed
+     * @throws SpikeException if any parameter is missing
+     */
     private Command parseToggleMark(CommandName c, String[] commandWords, TaskList tasks) throws SpikeException {
         if (c.getCommand().equals("mark")) {
             if (commandWords.length != 2 || isInt(commandWords[1]) == -1
@@ -190,6 +233,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses exit command
+     *
+     * @return a command ready to be executed
+     */
     private Command parseExit() {
         return new ExitCommand();
     }
@@ -197,6 +245,8 @@ public class Parser {
 
     /**
      * Parses date and time input by user and returns valid LocalDateTime object
+     *
+     * @return object containing date and time information
      */
     private static LocalDateTime parseDateTime(String s, DateTimeFormatter dtf) {
         try {
@@ -210,6 +260,8 @@ public class Parser {
     /**
      * Checks whether the input string is integer.
      * If yes, return it, else return -1.
+     *
+     * @return indicator of whether the input is an integer
      */
     private static int isInt(String str) {
         try {
@@ -224,6 +276,8 @@ public class Parser {
     /**
      * Checks whether it is a valid command.
      * If valid, return that command enum number, else return null.
+     *
+     * @return command name if the input is valid
      */
     private CommandName validateCommand(String input) {
         for (CommandName c : CommandName.values()) {

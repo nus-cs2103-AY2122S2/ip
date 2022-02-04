@@ -50,7 +50,7 @@ public class ListCommand extends Command {
      * Lists all tasks.
      *
      * @param tasks
-     * @return
+     * @return all tasks
      */
     private String getTaskListText(TaskList tasks) {
         int i = 1;
@@ -62,6 +62,12 @@ public class ListCommand extends Command {
         return result.trim();
     }
 
+    /**
+     * Lists all tasks by date.
+     *
+     * @param tasks
+     * @return all task filtered by date
+     */
     private String getTaskListTextByDate(TaskList tasks) {
         int i = 1;
         String result = "Here are the task(s) in your list filtered by date:\n";

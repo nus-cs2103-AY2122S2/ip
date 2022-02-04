@@ -31,7 +31,7 @@ public class Spike {
 
     /**
      * Gets number of tasks.
-     * @return
+     * @return number of tasks
      */
     public int getNumOfTasks() {
         return tasks.getListSize();

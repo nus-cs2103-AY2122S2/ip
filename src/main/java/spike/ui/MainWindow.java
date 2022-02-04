@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import spike.Spike;
-import spike.command.ExitCommand;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -67,16 +66,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = spike.getResponseCommand(input);
-        if (response.equals(ExitCommand.EXIT_MESSAGE)) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getSpikeDialog(response, spikeImage)
-            );
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getSpikeDialog(response, spikeImage)
-            );
-        }
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getSpikeDialog(response, spikeImage)
+        );
         userInput.clear();
     }
 }

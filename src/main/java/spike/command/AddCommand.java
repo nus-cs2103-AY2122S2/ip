@@ -19,6 +19,12 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks current task list
+     * @return execution result string
+     */
     @Override
     public String execute(TaskList tasks) {
         tasks.addTask(task);
