@@ -15,7 +15,6 @@ public class Duke {
     private Ui ui;
 
     private final String filepath = "./tasklist.txt";
-    private boolean isFirstStartup = true;
 
     /**
      * Constructor for Duke.

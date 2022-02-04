@@ -52,20 +52,16 @@ public class Storage {
 
             switch (cmdSplit[1]) {
             case "T":
-                // ToDo(String task, boolean isDone)
                 toDoList.add(new ToDo(cmdSplit[2], mark));
                 break;
             case "E":
-                // Event(String task, boolean isDone, String dateTime)
                 toDoList.add(new Event(cmdSplit[2], mark, cmdSplit[3]));
                 break;
             case "D":
-                // Deadline(String task, boolean isDone, String deadline)
                 toDoList.add(new Deadline(cmdSplit[2], mark, cmdSplit[3]));
                 break;
             default:
                 // do nothing
-                System.out.println("aaaa");
                 break;
             }
         }

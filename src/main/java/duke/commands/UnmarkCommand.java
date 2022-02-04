@@ -33,7 +33,7 @@ public class UnmarkCommand extends Command<Integer> {
      */
     public void runCommand(TaskList toDoList, Integer numberToUnmark) throws DukeException {
         try {
-            // Unmark the task
+            // Set the task as being unmarked
             Task taskToUnmark = toDoList.get(numberToUnmark);
             assert taskToUnmark instanceof Task;
             taskToUnmark.unmark();

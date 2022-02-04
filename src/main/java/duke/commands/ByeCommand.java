@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.main.DukeException;
 import duke.main.TaskList;
 import javafx.application.Platform;
 
@@ -12,11 +11,10 @@ import javafx.application.Platform;
 public class ByeCommand extends Command<String> {
     /**
      * Constructor for WrongCommand.
-     * When this class is instantiated, it immediately throws a new DukeException.
+     * When this class is instantiated, it immediately closes the GUI application
      *
-     * @throws DukeException when this class is instantiated
      */
-    public ByeCommand() throws DukeException {
+    public ByeCommand() {
         Platform.exit();
     }
 
