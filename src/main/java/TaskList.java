@@ -30,7 +30,7 @@ public class TaskList {
                     tasks.add(new Todo(content, isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(content, sc.next(), isDone));
+                    tasks.add(new Deadline(content, LocalDate.parse(sc.next()), isDone));
                     break;
                 case "E":
                     tasks.add(new Event(content, sc.next(), isDone));
