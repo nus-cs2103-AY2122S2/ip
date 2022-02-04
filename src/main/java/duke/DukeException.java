@@ -1,12 +1,12 @@
 package duke;
 
 /**
- * Represents Exceptions specific to Duke.
+ * Represents Exceptions specific to duke.Duke.
  */
 public class DukeException extends Exception {
 
     /**
-     * Creates custom exception for Duke.
+     * Creates custom exception for duke.Duke.
      *
      * @param s Error Message.
      */

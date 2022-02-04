@@ -5,9 +5,7 @@ import task.Event;
 import task.TaskList;
 import task.Todo;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,56 +15,47 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+    TaskList tasklist;
+
+    public Parser(TaskList list) {
+        tasklist = list;
+    }
 
     /**
      * Processes the TaskList according to the input
      * entered by the user.
      *
-     * @param tasklist TaskList to process on
      * @throws IOException If unexpected input is entered.
      */
-    public void processData(TaskList tasklist) throws IOException {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String cmd = br.readLine();
-        int n = tasklist.getSize();
-
-        while(!cmd.equals("bye")){
-            String[] c = cmd.split(" ");
-            try {
-                if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
-                    throw new DukeException(UI.gdes);
-                } else if (cmd.equals("mark") || cmd.equals("unmark") || cmd.equals("delete")) {
-                    throw new DukeException(UI.gnum);
-                } else if (c[0].equals("list")) {
-                    tasklist.printTaskList();
-                } else if (c[0].equals("mark")) {
-                    int no = Integer.parseInt(c[1]) - 1;
-                    tasklist.mark(no);
-                } else if (c[0].equals("unmark")) {
-                    int no = Integer.parseInt(c[1]) - 1;
-                    tasklist.unMark(no);
-                } else if (c[0].equals("todo")) {
-                    tasklist.add(new Todo(cmd.substring(4)), n);
-                } else if (c[0].equals("deadline")) {
-                    String[] x = cmd.substring(8).split("/by ");
-                    tasklist.add(new Deadline(x[0], formatDate(x[1])), n);
-                } else if (c[0].equals("event")) {
-                    String[] x = cmd.substring(5).split("/at ");
-                    tasklist.add(new Event(x[0], x[1]), n);
-                } else if (c[0].equals("delete")) {
-                    int no = Integer.parseInt(c[1]) - 1;
-                    tasklist.delete(no);
-                } else if (c[0].equals("find")) {
-                    tasklist.find(c[1]);
-                } else {
-                    throw new DukeException(UI.invalid);
-                }
-            } catch (DukeException e) {
-                UI.printWithLines(e.getMessage());
-            }
-            n = tasklist.getSize();
-            cmd = br.readLine();
+    public String processData(String cmd) {
+        String[] c = cmd.split(" ");
+        if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
+            return new DukeException(UI.gdes).getMessage();
+        } else if (cmd.equals("mark") || cmd.equals("unmark") || cmd.equals("delete")) {
+            return new DukeException(UI.gnum).getMessage();
+        } else if (c[0].equals("list")) {
+            return tasklist.printTaskList();
+        } else if (c[0].equals("mark")) {
+            int no = Integer.parseInt(c[1]) - 1;
+            return tasklist.mark(no);
+        } else if (c[0].equals("unmark")) {
+            int no = Integer.parseInt(c[1]) - 1;
+            return tasklist.unMark(no);
+        } else if (c[0].equals("todo")) {
+            return tasklist.add(new Todo(cmd.substring(4)));
+        } else if (c[0].equals("deadline")) {
+            String[] x = cmd.substring(8).split("/by ");
+            return tasklist.add(new Deadline(x[0], formatDate(x[1])));
+        } else if (c[0].equals("event")) {
+            String[] x = cmd.substring(5).split("/at ");
+            return tasklist.add(new Event(x[0], x[1]));
+        } else if (c[0].equals("delete")) {
+            int no = Integer.parseInt(c[1]) - 1;
+            return tasklist.delete(no);
+        } else if (c[0].equals("find")) {
+            return tasklist.find(c[1]);
+        } else {
+            return new DukeException(UI.invalid).getMessage();
         }
     }
 
