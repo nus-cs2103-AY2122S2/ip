@@ -10,6 +10,7 @@ This is Delphine, a friendly bot to help you keep track of your tasks!
 
 Here are some things Delphine can do for you.
 
+Hello: `hello`  
 List All Commands: `help`
 Track To-Dos: `todo <desc>`  
 Track Deadlines: `deadline <desc> /by <date> <time>`  
