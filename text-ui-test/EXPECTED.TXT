@@ -1,3 +1,13 @@
+
+    /$$$$$  /$$$$$$  /$$$$$$$  /$$    /$$ /$$$$$$  /$$$$$$
+   |__  $$ /$$__  $$| $$__  $$| $$   | $$|_  $$_/ /$$__  $$
+      | $$| $$  \ $$| $$  \ $$| $$   | $$  | $$  | $$  \__/
+      | $$| $$$$$$$$| $$$$$$$/|  $$ / $$/  | $$  |  $$$$$$
+ /$$  | $$| $$__  $$| $$__  $$ \  $$ $$/   | $$   \____  $$
+| $$  | $$| $$  | $$| $$  \ $$  \  $$$/    | $$   /$$  \ $$
+|  $$$$$$/| $$  | $$| $$  | $$   \  $/    /$$$$$$|  $$$$$$/
+ \______/ |__/  |__/|__/  |__/    \_/    |______/ \______/
+
 ____________________________________________________________
 Hello! I'm Jarvis
 What can I do for you?
@@ -5,60 +15,70 @@ ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-	[T][ ] borrow book
-Now you have 1 duke.tasks in the list.
+	[T] [ ] borrow book
+Now you have 6 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][ ] borrow book
+1. [D] [ ] return book (by: Dec 1 2019)
+2. [D] [x] test (by: Dec 1 2019)
+3. [T] [x] blah blah
+4. [E] [ ] test event (at: Dec 1 2019)
+5. [T] [ ] borrow book
+6. [T] [ ] borrow book
 
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-	[D][ ] return book (by: Sunday)
-Now you have 2 duke.tasks in the list.
+Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-	[E][ ] project meeting (at: Mon 2-4pm)
-Now you have 3 duke.tasks in the list.
+Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+1. [D] [ ] return book (by: Dec 1 2019)
+2. [D] [x] test (by: Dec 1 2019)
+3. [T] [x] blah blah
+4. [E] [ ] test event (at: Dec 1 2019)
+5. [T] [ ] borrow book
+6. [T] [ ] borrow book
 
 ____________________________________________________________
 
 ____________________________________________________________
 Nice! I've marked this task as done:
-	[T][x] borrow book
+	[D] [x] return book (by: Dec 1 2019)
 ____________________________________________________________
 
 ____________________________________________________________
 Nice! I've marked this task as done:
-	[E][x] project meeting (at: Mon 2-4pm)
+	[T] [x] blah blah
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][x] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][x] project meeting (at: Mon 2-4pm)
+1. [D] [x] return book (by: Dec 1 2019)
+2. [D] [x] test (by: Dec 1 2019)
+3. [T] [x] blah blah
+4. [E] [ ] test event (at: Dec 1 2019)
+5. [T] [ ] borrow book
+6. [T] [ ] borrow book
 
 ____________________________________________________________
 
 ____________________________________________________________
 OK, I've marked this task as not done yet:
-	[T][ ] borrow book
+	[D] [ ] return book (by: Dec 1 2019)
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][x] project meeting (at: Mon 2-4pm)
+1. [D] [ ] return book (by: Dec 1 2019)
+2. [D] [x] test (by: Dec 1 2019)
+3. [T] [x] blah blah
+4. [E] [ ] test event (at: Dec 1 2019)
+5. [T] [ ] borrow book
+6. [T] [ ] borrow book
 
 ____________________________________________________________
 
