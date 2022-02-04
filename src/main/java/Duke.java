@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.NoSuchElementException;
+import java.time.format.DateTimeParseException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -109,6 +110,8 @@ public class Duke {
                         System.out.println("Eh? Did you mistype the format?");
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("Uh-oh! There's no deadline here!");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please type a valid date! (Format: YYYY-MM-DD)");
                     }
                 } else if (taskType.equals("event")) {
                     try {
@@ -119,6 +122,8 @@ public class Duke {
                         System.out.println("Eh? Did you mistype the format?");
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("Uh-oh! There's no event here!");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please type a valid date! (Format: YYYY-MM-DD)");
                     }
                 } else {
                     System.out.println("Sorry! Please speak Duke :(");
