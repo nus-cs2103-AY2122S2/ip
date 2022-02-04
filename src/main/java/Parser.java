@@ -70,13 +70,13 @@ public class Parser {
                 if (!input.contains("/at")) {
                     throw new InvalidInputException("\n" + Ui.BLANK_LINE
                             + "    Please input the 'event' command in the following format:\n"
-                            + "    event <description> /by <time>\n" + Ui.BLANK_LINE);
+                            + "    event <description> /at <time>\n" + Ui.BLANK_LINE);
                 }
                 String[] eventString = input.substring(input.indexOf(' ')).split("/at");
                 if (eventString.length < 2) {
                     throw new InvalidInputException("\n" + Ui.BLANK_LINE
                             + "    Please input the 'event' command in the following format:\n"
-                            + "    event <description> /by <time>\n" + Ui.BLANK_LINE);
+                            + "    event <description> /at <time>\n" + Ui.BLANK_LINE);
                 }
                 String eventName = eventString[0];
                 if (eventName.equals(" ")) {

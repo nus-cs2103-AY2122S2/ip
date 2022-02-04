@@ -3,6 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private String filePath;
@@ -38,23 +40,32 @@ public class Storage {
             if (current.equals("")) {
                 break;
             }
+            System.out.println(current);
             String descriptionWithTime = current.substring(9);
+            System.out.println(descriptionWithTime);
+            int descriptionWithTimeIndex = descriptionWithTime.length() - 1;
             Task taskToAdd;
             String taskLetter = Character.toString(current.charAt(3));
             boolean isDone = (current.charAt(6) == 'X');
+            DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-            switch (taskLetter) {
-                case("E"):
-                    String[] eventSplit = descriptionWithTime.split("at: ");
-                    taskToAdd = new Event(eventSplit[0], eventSplit[1]);
-                    break;
-                case("D"):
-                    String[] deadlineSplit = descriptionWithTime.split("by: ");
-                    taskToAdd = new Event(deadlineSplit[0], deadlineSplit[1]);
-                    break;
-                default:
-                    taskToAdd = new Todo(descriptionWithTime);
-                    break;
+            if (taskLetter == "E") {
+                int eventAtIndex = descriptionWithTime.indexOf(" (at:");
+                String eventDesc = descriptionWithTime.substring(0, eventAtIndex);
+                int eventDateIndex = eventAtIndex + 5;
+                String eventDate = descriptionWithTime.substring(eventDateIndex, descriptionWithTimeIndex).trim();
+                LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
+                taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
+            } else if (taskLetter == "=D") {
+                int deadlineAtIndex = descriptionWithTime.indexOf(" (by:");
+                String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
+                int deadlineDateIndex = deadlineAtIndex + 4;
+                String deadlineDate = descriptionWithTime.substring(deadlineDateIndex, descriptionWithTimeIndex).trim();
+                LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
+                taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
+            } else {
+                taskToAdd = new Todo(descriptionWithTime);
             }
             TaskList.add(taskToAdd);
         }
