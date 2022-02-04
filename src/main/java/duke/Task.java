@@ -1,8 +1,8 @@
 package duke;
 
 /**
- * This is an abstract duke.Task class that creates task instances with a title,
- * whether task is completed and the type of task.
+ * This is an abstract Task class that creates Task instances with a title,
+ * whether task is completed and the type of Task.
  *
  *
  * @author  Hsiao Jiet
@@ -45,7 +45,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets the duke.Task's type of: Todo, duke.Deadline, duke.Event
+     * Sets the Task's type of: Todo (T), Deadline (D), Event (E)
      */
     public String getTaskIcon() {
         return String.format("%c", type);

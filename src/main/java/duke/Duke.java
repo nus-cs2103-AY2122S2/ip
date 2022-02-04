@@ -17,6 +17,10 @@ public class Duke {
     private Ui ui;
     private String filePath = "data/duke.txt";
 
+    /**
+     * Initializes Ui and Storage objects.
+     * Loads information of Tasks from Duke text file into the Duke application
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath, tasks);
@@ -35,11 +39,15 @@ public class Duke {
         return ui.createWelcomeMessage();
     }
 
-    /** Obtains Tasks from provided text file */
+    /** Creates a Duke object and starts up the simple display of Duke application. */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke().run();
     }
 
+    /**
+     * Provides the response of Duke based on user's input to be shown in the application GUI
+     * @param userInput is the command that user provides in the GUI
+     */
     public String getResponse(String userInput) throws DukeException, IOException {
         return ui.parseUserInput(tasks, storage, userInput);
     }

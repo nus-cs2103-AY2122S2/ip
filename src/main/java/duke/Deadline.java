@@ -1,12 +1,12 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /**
- * This is a child class of duke.Task, duke.Deadline.
- * duke.Deadline accepts another variable, 'by' that
- * stores the time this duke.Deadline has to be completed
+ * This is a child class of a type of Task, Deadline.
+ * Deadline accepts another variable, 'by' that
+ * stores the time that this Deadline has to be completed
  *
  * @author  Hsiao Jiet
  * @version 1.0
@@ -17,7 +17,10 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Creates duke.Deadline object with provided LocalDate variable
+     * Creates Deadline object with provided LocalDate variable
+     * @param name of the Task (description)
+     * @param done whether the Task is completed or not
+     * @param by the date when this Task should be completed
      */
     public Deadline(String name, int done, LocalDate by) {
         super(name, done);
@@ -26,8 +29,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates duke.Deadline object without provided LocalDate variable
+     * Creates Deadline object without provided LocalDate variable
      * Used when there is the need to parse text into date first
+     * @param name of the Task (description)
+     * @param done whether the Task is completed or not
      */
     public Deadline(String name, int done) {
         super(name, done);
@@ -39,7 +44,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Setting duke.Deadline object's date it should end by
+     * Setting Deadline object's date it should end by
+     * @param date provided in the format of "yyyy/MM/dd" by user
      */
     public void setLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
@@ -56,7 +62,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Producing a user-friendly view of a duke.Deadline task
+     * Producing a user-friendly view of a Deadline Task's information
      */
     @Override
     public String toString() {

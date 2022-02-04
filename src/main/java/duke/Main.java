@@ -8,9 +8,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+/**
+ * This is a Main class that acts as the logic behind the starting
+ * of the Duke JavaFX application.
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-2-1
+ */
 
+public class Main extends Application {
     private Duke duke = new Duke();
+
+    /**
+     * Starts up the GUI of the Duke application with JavaFX
+     * @param stage is the screen of the Duke application
+     */
     @Override
     public void start(Stage stage) throws Exception {
         try {

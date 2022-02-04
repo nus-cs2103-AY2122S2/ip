@@ -1,6 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -28,10 +33,11 @@ public class Storage {
 
     /**
      * Saves content of Tasks into given file
+     * @param content is the information of a Task object
      */
-    public void saveTask(String cont) throws IOException {
+    public void saveTask(String content) throws IOException {
         try {
-            buffWriter.write(cont);
+            buffWriter.write(content);
         } catch (IOException e) {
             throw new IOException("\nUnexpected error occurred where Tasks cannot be saved in file!\n");
         }
@@ -43,13 +49,6 @@ public class Storage {
     public void startWriter() throws IOException {
         fileWriter = new FileWriter(filepath);
         buffWriter = new BufferedWriter(fileWriter);
-    }
-
-    /**
-     * Asks for user input to change file read/to be written to what user inputted
-     */
-    public void requestChangeFile(String fileName) {
-        filepath = fileName;
     }
 
     /**
@@ -75,8 +74,9 @@ public class Storage {
     }
 
     /**
-     * Saves the current instances of duke.Task items in Tasks list into
+     * Saves the current instances of Task items in Tasklist into
      * provided text file
+     * @param tasks is the current instance of the TaskList in this Duke application
      */
     public void saveAllTasks(TaskList tasks) throws IOException {
         startWriter();
@@ -86,8 +86,8 @@ public class Storage {
     }
 
     /**
-     * Reads tasks saved in the hard drive file provided by the user and
-     * places duke.Task objects into the current DukeList
+     * Reads tasks saved in a hard drive file provided by the user and
+     * places Task objects into the current instance of Duke
      */
     public void tasksThatHaveBeenRead() throws FileNotFoundException {
         ArrayList<Task> readTasks = new ArrayList<>();
@@ -108,6 +108,7 @@ public class Storage {
 
     /**
      * Creates Task based on the text provided in the given text file
+     * @param line is the lines of text in the text file read
      */
     public Task createTaskFromText(String[] line) {
         String type = line[0];

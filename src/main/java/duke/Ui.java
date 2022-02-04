@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
+
 /**
  * Ui class that handles the display and obtaining of user input
  * of Duke application
@@ -13,7 +14,6 @@ import java.util.Scanner;
 
 public class Ui {
     Parser parser;
-    String line = "____________________________________________________________\n";
     Scanner scanner;
 
     String listOfCommands = "todo <Description of Task>\n" +
@@ -26,10 +26,6 @@ public class Ui {
             "find <Task number>\n" +
             "bye\n";
 
-    /**
-     * Constructor.
-     * Initialises a scanner for user input and starts up application welcome message.
-     */
     public Ui() {
         scanner = new Scanner(System.in);
         System.out.println(createWelcomeMessage());
@@ -44,6 +40,7 @@ public class Ui {
         return welcomeMessage.toString();
     }
 
+    /** Returns a pre-made Instruction message to users  */
     public String createInstructionMessage() {
         StringBuilder instructionString = new StringBuilder();
         String instructions = "These are some of the instructions I can follow: \n";
@@ -51,7 +48,10 @@ public class Ui {
         return instructionString.toString();
     }
 
-    /** Takes in TaskList and Storage objects so that they can be updated with user's commands  */
+    /** Takes in TaskList and Storage objects so that they can be updated with user's commands
+     * @param tasks is the TaskList instance
+     * @param storage is the Storage instance
+     */
     public void displayCommandMessage(TaskList tasks, Storage storage) throws DukeException, IOException {
         System.out.println(askForCommand());
         //parseUserInput(tasks, storage);
@@ -65,7 +65,11 @@ public class Ui {
         return commandMessage.toString();
     }
 
-    /** Takes in TaskList and Storage objects to parse the user input  */
+    /** Takes in TaskList and Storage objects to parse the user input
+     * @param tasks is the TaskList instance
+     * @param storage is the Storage instance
+     * @param userInput is the input provided by the user
+     */
     public String parseUserInput(TaskList tasks, Storage storage, String userInput) throws DukeException, IOException {
         parser = new Parser(tasks, storage);//Calls Parser to parse information of userInput
         try {

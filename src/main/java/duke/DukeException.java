@@ -1,7 +1,8 @@
 package duke;
 
 /**
- * This is a custom duke.Duke Exception class
+ * This is a custom Duke Exception class that calls
+ * error when faced with invalid processes in Duke application
  *
  *
  * @author  Hsiao Jiet

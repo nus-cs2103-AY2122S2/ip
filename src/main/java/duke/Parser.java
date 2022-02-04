@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
- * This is an Action class that obtains a sentence as input that
- * can be deciphered to create tasks in the duke.Duke system
+ * This is the Parser class that obtains a sentence as input that
+ * can be deciphered to perform commands in the Duke application
  *
  * @author  Hsiao Jiet
  * @version 1.0
- * @since   2022-1-15
+ * @since   2022-2-1
  */
 
 public class Parser {
@@ -20,39 +19,44 @@ public class Parser {
     protected TaskList tasks;
     protected String[] listOfUserInputs;
     protected Storage storage;
-    String line = "\n____________________________________________________________\n";
 
     //Must be in SNAKE_CASE
     enum Commands {
         TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE
     }
 
+    /**
+     * Sets up the Parser instance.
+     * @param list is the TaskList instance
+     * @param storage is the Storage instance
+     */
     public Parser(TaskList list, Storage storage) {
         tasks = list;
         this.storage = storage;
     }
 
     /**
-     * First split of user input to obtain Action word from other user input words
+     * First split of user input to obtain Command from other user inputs
      */
     public void splitUserInput() {
         listOfUserInputs = userInput.split(" ");
     }
 
     /**
-     * Obtains the Action word from user input
+     * Obtains the command from user input
      */
     public String obtainCommandWord() {
         return listOfUserInputs[0];
     }
 
     /**
-     * Obtains description of Tasks. Applicable for creating Todo, duke.Deadline and duke.Event
+     * Obtains description of Tasks. Applicable for creating Todo, Deadline and Event
      */
     public String obtainTitleOfTask() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
         String firstWordInTitle;
         try {
+            //Used to check if there is a description of the Task provided
             firstWordInTitle = listOfUserInputs[1];
         } catch (Exception e) {
             errorMessage.append("\nOOPS!!! The description of a Todo/Deadline/Event cannot be empty.\n");
@@ -68,14 +72,14 @@ public class Parser {
             }
         }
         if (title.toString().equals("")) { //when there is no description provided to a Task
-            errorMessage.append("OOPS!!! The description cannot be empty.");
+            errorMessage.append("\nOOPS!!! The description cannot be empty.\n");
             throw new DukeException(errorMessage.toString());
         }
         return title.toString().trim();
     }
 
     /**
-     * Obtains date. Applicable for duke.Deadline, duke.Event
+     * Obtains date part of user input. Applicable for Deadline, Event.
      */
     public LocalDate obtainDate() {
         boolean hasClue = false; //such as '/by' or '/at'
@@ -97,14 +101,14 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
             return LocalDate.parse(stringDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new DateTimeParseException("The date input provided does not comply to any correct standards\n" +
+            throw new DateTimeParseException("\nThe date input provided does not comply to any correct standards\n" +
                     "Please follow this format instead: yyyy/MMMM/dd (eg. 2022/May/19)\n" +
                     "Please try running the command again!\n", userInput, 0);
         }
     }
 
     /**
-     * Obtains integer. Applicable for mark, unmark and delete
+     * Obtains TaskNumber from user input. Applicable for mark, unmark and delete
      */
     public int obtainTaskNumber() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
@@ -117,7 +121,8 @@ public class Parser {
     }
 
     /**
-     * Based on supplied Action word, run the action
+     * Based on supplied command by user input, run the command
+     * @param input by the user for Duke to process
      */
     public String parseInput(String input) throws DukeException, IOException {
         userInput = input;
@@ -149,14 +154,15 @@ public class Parser {
             case FIND:
                 return findTask();
             case BYE:
-                return terminateAndSaveProgram(storage);
+                terminateAndSaveProgram(storage);
+                System.exit(0);
             default:
         }
         return "";
     }
 
     /**
-     * Makes a call to TaskList's printTasks()
+     * Prints out Tasks present in the Duke application currently.
      */
     public String listOutTasks() {
         StringBuilder successMessage = new StringBuilder();
@@ -168,6 +174,9 @@ public class Parser {
         return successMessage.toString();
     }
 
+    /**
+     * Checking of the validity of TaskNumber provided by user.
+     */
     public void checkTaskNumber() throws DukeException {
         StringBuilder errorMessage = new StringBuilder();
         int taskNumber = obtainTaskNumber();
@@ -179,7 +188,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on TaskList's mark()
+     * Makes a call on TaskList's mark() to mark specified Task as done.
      */
     public String markTaskAsDone() {
         Task task;
@@ -196,7 +205,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on duke.TaskList's unmark()
+     * Makes a call on TaskList's unmark() to unmark specified Task as not done.
      */
     public String unmarkTask() {
         Task task;
@@ -213,7 +222,7 @@ public class Parser {
     }
 
     /**
-     * Makes a call on duke.TaskList's delete()
+     * Makes a call on TaskList's delete() to delete specified Task.
      */
     public String deleteTask() {
         StringBuilder successMessage = new StringBuilder();
@@ -232,7 +241,7 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a Todo duke.Task and adds into the list
+     * creates a Todo Task and adds into the Tasklist
      */
     public String createToDoTask() {
         StringBuilder successMessage = new StringBuilder();
@@ -250,7 +259,7 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a Deadline Task and adds to the list
+     * creates a Deadline Task and adds to the Tasklist
      */
     public String createDeadlineTask() {
         StringBuilder successMessage = new StringBuilder();
@@ -275,7 +284,7 @@ public class Parser {
 
     /**
      * Checks if user input is valid, then
-     * creates a duke.Event duke.Task and adds to the list
+     * creates an Event Task and adds to the Tasklist
      */
     public String createEventTask() {
         StringBuilder successMessage = new StringBuilder();
@@ -298,7 +307,7 @@ public class Parser {
     }
 
     /**
-     * Finds task with given clue word
+     * Finds Task with given clue word
      */
     public String findTask() {
         StringBuilder successMessage = new StringBuilder();
