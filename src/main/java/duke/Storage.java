@@ -54,14 +54,14 @@ public class Storage {
                 case "D":
                     Deadline deadline = new Deadline(data[2], LocalDate.parse(data[3], formatter));
                     tasks.add(deadline);
-                    if (data[1].equals('1')) {
+                    if (data[1].equals("1")) {
                         deadline.mark();
                     }
                     break;
                 case "E":
                     Event event = new Event(data[2], LocalDate.parse(data[3], formatter));
                     tasks.add(event);
-                    if (data[1].equals('1')) {
+                    if (data[1].equals("1")) {
                         event.mark();
                     }
                     break;

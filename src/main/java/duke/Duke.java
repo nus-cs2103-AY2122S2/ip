@@ -21,11 +21,6 @@ public class Duke {
         this.taskMaster = new TaskMaster(storage.loadTasks());
     }
 
-//    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        duke.run();
-//    }
-
 //    /**
 //     * Kickstarts the Duke bot to begin taking in and reacting to user input.
 //     */
