@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Deadline extends Task{
+import duke.DukeException;
+
+public class Deadline extends Task {
 
     /** The `Date` of when this `Deadline` is held. */
     private final Date by;

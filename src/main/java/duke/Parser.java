@@ -14,7 +14,29 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * An instance of Parser, used to parse user input to the respective commands.
+ */
 public class Parser {
+    private static boolean isExit = false;
+
+    /**
+     * Is exit boolean.
+     *
+     * @return the boolean
+     */
+    public static boolean isExit() {
+        return isExit;
+    }
+
+    /**
+     * Sets is exit.
+     *
+     * @param flag the flag
+     */
+    public static void setIsExit(boolean flag) {
+        isExit = flag;
+    }
 
     /**
      * Parses `String` to `Integer`.
@@ -87,7 +109,7 @@ public class Parser {
         Task newTask;
         switch (input[0]) {
         case "T":
-            newTask = new ToDo(input[2],input[1]);
+            newTask = new ToDo(input[2], input[1]);
             break;
         case "D":
             newTask = new Deadline(input[2], input[3], input[1]);

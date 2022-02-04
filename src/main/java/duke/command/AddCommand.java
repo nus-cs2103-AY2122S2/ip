@@ -9,6 +9,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * An instance of AddCommand
+ */
 public class AddCommand extends Command {
     private final String taskType;
     private final String taskDetails;
@@ -30,35 +33,33 @@ public class AddCommand extends Command {
      * @param tasks   the tasks in `TaskList`
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
+     * @return string to inform the user that the specific task has been added.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task;
         switch (taskType) {
         case "todo":
             tasks.addTask(task = new ToDo(taskDetails));
-            ui.showAddition(tasks.size(), task);
-            break;
+            return ui.showAddition(tasks.size(), task);
         case "event":
             String[] eventDetails = taskDetails.split(" /at ", 2);
             try {
                 tasks.addTask(task = new Event(eventDetails[0], eventDetails[1]));
-                ui.showAddition(tasks.size(), task);
+                return ui.showAddition(tasks.size(), task);
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            break;
         case "deadline":
             String[] deadlineDetails = taskDetails.split(" /by ", 2);
             try {
                 tasks.addTask(task = new Deadline(deadlineDetails[0], deadlineDetails[1]));
-                ui.showAddition(tasks.size(), task);
+                return ui.showAddition(tasks.size(), task);
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            break;
         default:
-            break;
+            return ui.showError("Invalid command detected in AddCommand.");
         }
     }
 }

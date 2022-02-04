@@ -6,6 +6,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * An instance of DeleteCommand.
+ */
 public class DeleteCommand extends Command {
 
     private final String entryNumber;
@@ -25,23 +28,23 @@ public class DeleteCommand extends Command {
      * @param tasks   the tasks in `TaskList`
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
+     * @return string to indicate that the specified task has been removed from the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (tasks.isEmpty()) {
-                ui.printWithDivider("Your list is empty!");
-                return;
+                return "Your list is empty!";
             }
 
             int deletionIndex = Parser.parseInt(entryNumber) - 1;
             if (deletionIndex < 0 || deletionIndex >= tasks.size()) {
-                ui.showError("Invalid entry number!");
+                return ui.showError("Invalid entry number!");
             } else {
-                ui.showDeletion(tasks.size(), tasks.removeTask(deletionIndex));
+                return ui.showDeletion(tasks.size(), tasks.removeTask(deletionIndex));
             }
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 }
