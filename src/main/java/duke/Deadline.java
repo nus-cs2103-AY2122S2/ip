@@ -3,6 +3,7 @@ package duke;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
+
 /**
  * This is a child class of a type of Task, Deadline.
  * Deadline accepts another variable, 'by' that
@@ -17,11 +18,12 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Creates Deadline object with provided LocalDate variable
+     * Creates Deadline object with provided LocalDate variable.
+     *
      * @param name of the Task (description)
      * @param done whether the Task is completed or not
      * @param by the date when this Task should be completed
-     */
+     * */
     public Deadline(String name, int done, LocalDate by) {
         super(name, done);
         super.type = 'D';
@@ -29,8 +31,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates Deadline object without provided LocalDate variable
-     * Used when there is the need to parse text into date first
+     * Creates Deadline object without provided LocalDate variable.
+     * Used when there is the need to parse text into date first.
+     *
      * @param name of the Task (description)
      * @param done whether the Task is completed or not
      */
@@ -44,7 +47,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Setting Deadline object's date it should end by
+     * Setting Deadline object's date it should end by.
+     *
      * @param date provided in the format of "yyyy/MM/dd" by user
      */
     public void setLocalDate(String date) {
@@ -54,7 +58,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converting LocalDate variable to String
+     * Converting LocalDate variable to String.
      */
     public String convertLocalDateToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
@@ -62,7 +66,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Producing a user-friendly view of a Deadline Task's information
+     * Producing a user-friendly view of a Deadline Task's information.
      */
     @Override
     public String toString() {
