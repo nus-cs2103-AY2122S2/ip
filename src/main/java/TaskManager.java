@@ -40,7 +40,6 @@ public class TaskManager {
         String currentLine;
         while ((currentLine = reader.readLine()) != null) { // Read till end of file
             counter += 1;
-            System.out.print(currentLine + "\n");
             if (counter == taskIndex) {
                 continue;
             } else {
@@ -87,6 +86,7 @@ public class TaskManager {
             TaskManager.taskList.add(task);
 
         }
+        reader.close();
 
     }
 }
