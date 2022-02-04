@@ -35,6 +35,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+        // Clips the image into a circle
         displayPicture.setImage(img);
         Circle clip = new Circle(50);
         clip.setCenterX(displayPicture.getFitWidth() / 2);

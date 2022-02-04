@@ -10,6 +10,7 @@ import duke.util.TaskList;
  * Represents a command that adds the specified task to the task list.
  */
 public class AddCommand extends Command {
+    private static final String MESSAGE_TO_SHOW = "Meow! %s is added!\nNumber of tasks in list: %d";
     private Task taskToAdd;
 
     public AddCommand(Task taskToAdd) {
@@ -19,7 +20,6 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(taskToAdd);
-        return ui.showMessage("Meow! Task is added!\n" + taskToAdd + "\n"
-                + "Number of tasks in list: " + tasks.getSize());
+        return ui.showMessage(String.format(MESSAGE_TO_SHOW, taskToAdd, tasks.getSize()));
     }
 }

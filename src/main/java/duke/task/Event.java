@@ -32,10 +32,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public LocalDate getAt() {
-        return at;
-    }
-
     @Override
     public String formatForFile() {
         return super.formatForFile() + " | " + this.at.toString();

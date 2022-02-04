@@ -34,6 +34,18 @@ public class TaskList {
         return tasks.size();
     }
 
+    public ArrayList<Task> getAllTasks() {
+        return new ArrayList<>(tasks);
+    }
+    
+    private int convertIndexToZeroBased(int index) throws DukeException {
+        int zeroBasedIndex = index - 1;
+        if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
+            throw new DukeException(ErrorMessage.MESSAGE_INVALID_INDEX);
+        }
+        return zeroBasedIndex;
+    }
+
     /**
      * Returns the task at the specified index.
      *
@@ -42,11 +54,7 @@ public class TaskList {
      * @throws DukeException if the index is invalid.
      */
     public Task getTask(int index) throws DukeException {
-        int zeroBasedIndex = index - 1;
-        if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
-            throw new DukeException(ErrorMessage.MESSAGE_INVALID_INDEX);
-        }
-        return tasks.get(zeroBasedIndex);
+        return tasks.get(convertIndexToZeroBased(index));
     }
 
     /**
@@ -62,17 +70,11 @@ public class TaskList {
      * Removes and returns the task at the specified index.
      *
      * @param index One-based index of the task to be deleted.
-     * @return The task to be deleted.
+     * @return The deleted task.
      * @throws DukeException if the index is invalid.
      */
     public Task deleteTask(int index) throws DukeException {
-        int zeroBasedIndex = index - 1;
-        if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
-            throw new DukeException(ErrorMessage.MESSAGE_INVALID_INDEX);
-        }
-        Task t = tasks.get(zeroBasedIndex);
-        tasks.remove(zeroBasedIndex);
-        return t;
+        return tasks.remove(convertIndexToZeroBased(index));
     }
 
     /**
@@ -83,20 +85,18 @@ public class TaskList {
      */
     public void markAsDone(int index) throws DukeException {
         getTask(index).markAsDone();
+        assert getTask(index).getIsDone() : "Task should be marked as done";
     }
 
     /**
-     * Unmarks the task at the specified index as not done.
+     * Unmarks the task at the specified index as done.
      *
      * @param index One-based index of the task to be unmarked.
      * @throws DukeException if the index is invalid.
      */
     public void unmarkAsDone(int index) throws DukeException {
         getTask(index).unmarkAsDone();
-    }
-
-    public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(tasks);
+        assert !getTask(index).getIsDone() : "Task should be unmarked as done";
     }
 
     /**

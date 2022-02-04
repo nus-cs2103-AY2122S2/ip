@@ -10,6 +10,7 @@ import duke.util.TaskList;
  * Represents a command that deletes the specified task from the task list.
  */
 public class DeleteCommand extends Command {
+    private static final String MESSAGE_TO_SHOW = "Meow! %s is deleted!\nNumber of tasks in list: %d";
     private int index;
 
     public DeleteCommand(int index) {
@@ -18,9 +19,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = tasks.getTask(index);
-        tasks.deleteTask(index);
-        return ui.showMessage("Meow! Task is removed!\n" + t + "\n"
-                + "Number of tasks in list: " + tasks.getSize());
+        Task deletedTask = tasks.deleteTask(index);
+        return ui.showMessage(String.format(MESSAGE_TO_SHOW, deletedTask, tasks.getSize()));
     }
 }

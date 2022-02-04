@@ -3,6 +3,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -10,9 +11,9 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    private final String DEFAULT_FILE_PATH = "data/tasks.txt";
+    private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
     private Duke duke = new Duke(DEFAULT_FILE_PATH);
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -21,6 +22,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
+            stage.getIcons().add(dukeImage);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
