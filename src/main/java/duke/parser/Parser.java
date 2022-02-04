@@ -1,5 +1,7 @@
 package duke.parser;
 
+import java.time.LocalDate;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -13,8 +15,6 @@ import duke.exception.ErrorMessage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.time.LocalDate;
 
 /**
  * Represents a parser that deals with parsing user input and returning the correct command.
@@ -59,6 +59,7 @@ public class Parser {
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
             }
+            assert args[1].contains("/by") : "Deadline should contain '/by'";
             String[] deadline = args[1].split("/by", 2);
             if (deadline.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
@@ -69,6 +70,7 @@ public class Parser {
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
             }
+            assert args[1].contains("/at") : "Event should contain '/at'";
             String[] event = args[1].split("/at", 2);
             if (event.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
