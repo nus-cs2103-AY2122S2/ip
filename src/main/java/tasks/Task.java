@@ -53,22 +53,21 @@ public abstract class Task {
         throws DukeException {
         String[] details = exportedTask.split(" ");
         Task task;
+        boolean taskIsDone = Boolean.parseBoolean(details[2]);
         switch (TaskType.valueOf(details[0])) {
         case TODO:
             task = new Todo(details[1]);
-            task.setDone(Boolean.parseBoolean(details[2]));
             break;
         case EVENT:
             task = new Event(details[1], details[3]);
-            task.setDone(Boolean.parseBoolean(details[2]));
             break;
         case DEADLINE:
             task = new Deadline(details[1], details[3]);
-            task.setDone(Boolean.parseBoolean(details[2]));
             break;
         default:
             throw new DukeException("Invalid task string!");
         }
+        task.setDone(taskIsDone);
         return task;
     }
 }
