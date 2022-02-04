@@ -1,3 +1,5 @@
-T,1,asdfasdf
-T,0,23342342
+T,0,asdfasdf
+T,1,23342342
 T,1,234234
+T,0,blahla
+T,0,wahha

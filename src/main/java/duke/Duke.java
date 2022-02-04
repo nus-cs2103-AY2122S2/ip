@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,27 +28,13 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args) {
-//        Ui ui = new Ui();
-//        ui.showWelcomeMessage();
-//        Storage storage = new Storage();
-//        storage.load();
-//
-//        while (true) {
-//            Scanner scanner = new Scanner(System.in);
-//            String input = scanner.nextLine();
-//
-//            Parser p = new Parser(input);
-//            ParsedAnswer pa = p.parse();
-//
-//            ParsedAnswerHandler parsedAnswerHandler = new ParsedAnswerHandler(pa);
-//            parsedAnswerHandler.execute();
-//        }
-
-    }
+    static boolean isGoodbye = false;
 
     @Override
     public void start(Stage stage) {
+        Storage storage = new Storage();
+        storage.load();
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -66,10 +54,6 @@ public class Duke extends Application {
         stage.show();
 
         // more code to be added here later
-
-        //Step 1. Formatting the window to look as expected.
-
-        //...
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -139,6 +123,14 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+
+
+        Parser p = new Parser(input);
+        ParsedAnswer pa = p.parse();
+
+        ParsedAnswerHandler parsedAnswerHandler = new ParsedAnswerHandler(pa);
+        String output = parsedAnswerHandler.execute();
+
+        return output;
     }
 }

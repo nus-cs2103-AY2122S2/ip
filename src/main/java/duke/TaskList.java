@@ -11,35 +11,40 @@ public class TaskList {
         Storage.taskList.add(task);
     }
 
-    static void delete(int idx) {
+    static String delete(int idx) {
         try {
             Storage.taskList.remove(idx - 1);
             Storage s = new Storage();
             s.save();
-            System.out.println("Successfully deleted file.");
+            return "Successfully deleted file.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Item not found in list.");
+            return "Item not found in list.";
         }
     }
 
-    static void list() {
+    static String list() {
         ArrayList<Task> taskArrayList = Storage.taskList;
-        System.out.println("Here are the tasks in your list: " + "\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list: " + "\n");
         for (int i = 0; i < taskArrayList.size(); i++) {
-            System.out.println( (i + 1) + ". "  + taskArrayList.get(i) + "\n");
+            stringBuilder.append(i + 1).append(". ").append(taskArrayList.get(i)).append("\n");
         }
+        return stringBuilder.toString();
     }
 
-    static void find(String term){
+    static String find(String term){
+        StringBuilder stringBuilder = new StringBuilder();
         boolean hasResults = false;
         for (Task t : Storage.taskList) {
             if (t.getDescription().contains(term)) {
                 hasResults = true;
-                System.out.println(t);
+                stringBuilder.append(t).append('\n');
             }
         }
         if (!hasResults) {
-            System.out.println("Sorry, we didn't find anything related to your search terms.");
+            return "Sorry, we didn't find anything related to your search terms.";
+        } else {
+            return stringBuilder.toString();
         }
     }
 }
