@@ -67,6 +67,16 @@ public class Duke {
                         System.out.println(lists.get(tNo - 1));
                         lineOne();
                         break;
+                    case "delete" :
+                        lineOne();
+                        System.out.println("Noted. I've removed this task:");
+                        //System.out.println("Complete it soon! ^_^");
+                        int t2No = Integer.parseInt(textSplit[1]);
+                        System.out.println(lists.get(t2No - 1));
+                        lists.remove(t2No - 1);
+
+                        lineOne();
+                        break;
                     case "todo":
                         try {
                             if(fullDesc.equals(" ") || fullDesc.equals("")) {
