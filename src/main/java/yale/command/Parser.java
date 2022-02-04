@@ -38,7 +38,7 @@ public class Parser {
             return list.findFeature(command, list);
         } else {
             return "Error: " + command
-                    + " is not a valid command. Please try again.";
+                    + " is not a valid command.\nPlease try again.";
         }
     }
 }

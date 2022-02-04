@@ -141,7 +141,7 @@ public class TaskList {
                 String noted = "Noted. I've removed this task:\n   "
                         + list.getTask(itemNo - 1).toString();
                 list.deleteTask(itemNo - 1);
-                return noted + "Now you have " + list.getSize() + " tasks in the list.";
+                return noted + "\nNow you have " + list.getSize() + " tasks in the list.";
             }
         } catch (NumberFormatException e) {
             return "Error: Please enter a valid task number";
