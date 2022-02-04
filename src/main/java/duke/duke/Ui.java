@@ -32,14 +32,4 @@ public class Ui {
         System.out.println(line);
     }
 
-    /**
-     * Returns user input when called.
-     *
-     * @return User input.
-     */
-
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 }

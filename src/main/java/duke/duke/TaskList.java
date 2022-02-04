@@ -16,10 +16,12 @@ public class TaskList {
      * @param arr The given ArrayList of tasks that the user currently has.
      */
 
-    public void list(ArrayList<Task> arr) {
+    public String list(ArrayList<Task> arr) {
+        String listToPrint = "";
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println(i + 1 + "." + arr.get(i).toString());
+            listToPrint += i + 1 + "." + arr.get(i).toString() + "\n";
         }
+        return listToPrint;
     }
 
     /**
@@ -31,24 +33,24 @@ public class TaskList {
      * @throws NumberFormatException If input is less than or equals to zero.
      */
 
-    public void mark(String input, ArrayList<Task> arr) {
+    public String mark(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
             int clean = Integer.parseInt(s) - 1; // Parse to find what number in list to toggle
             // Edge Case
             if (clean > arr.size()) {
-                System.out.println("Error! No tasked added");
+                return "Error! No tasked added";
             } else if (input.toCharArray()[0] != 'u') {
                 arr.get(clean).setMarked();
-                System.out.println("Nice! I've marked this task as done:\n "
-                        + "   " + arr.get(clean).toString());
+                return "Nice! I've marked this task as done:\n "
+                        + "   " + arr.get(clean).toString();
             } else {
                 arr.get(clean).setUnmarked();
-                System.out.println("OK, I've marked this task as not done yet:\n "
-                        + "   " + arr.get(clean).toString());
+                return "OK, I've marked this task as not done yet:\n "
+                        + "   " + arr.get(clean).toString();
             }
         } catch (NumberFormatException e) {
-            System.out.println("Don't be cheeky. Please write something that makes sense.");
+            return "Don't be cheeky. Please write something that makes sense.";
         }
     }
 
@@ -61,21 +63,23 @@ public class TaskList {
      * @throws NumberFormatException If input is less than or equals to zero.
      */
 
-    public void delete(String input, ArrayList<Task> arr) {
+    public String delete(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
             int delete = Integer.parseInt(s) - 1; // Parse to find what number in list to delete
             // Edge Case
             if (delete > arr.size()) {
-                System.out.println("Error! Nothing to delete!");
+                return "Error! Nothing to delete!";
             } else {
-                System.out.println("Noted. I've removed this task: \n   "
-                       + arr.get(delete).toString());
+                String deleteStringToReturn = "";
+                deleteStringToReturn += "Noted. I've removed this task: \n   "
+                       + arr.get(delete).toString();
                 arr.remove(delete);
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                deleteStringToReturn += "Now you have " + arr.size() + " tasks in the list.";
+                return deleteStringToReturn;
             }
         } catch (Exception e) {
-            System.out.println("Error! Nothing to delete!");
+            return "Error! Nothing to delete!";
         }
     }
 
@@ -89,18 +93,18 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If there are no details in input.
      */
 
-    public void deadline(String input, ArrayList<Task> arr) {
+    public String deadline(String input, ArrayList<Task> arr) {
         try {
             String unprocessed = input.split("deadline ", 2)[1]; // Remove instruction
             String task = unprocessed.split(" /by ", 2)[0]; // Split to task
             String date = unprocessed.split(" /by ", 2)[1]; // Split to date
             Deadline newDeadline = new Deadline(task, date);
             arr.add(newDeadline);
-            System.out.println("Got it! I've added this task: \n    "
+            return "Got it! I've added this task: \n    "
                    + newDeadline + "\n"
-                   + "Now you have " + arr.size() + " tasks in the list.");
+                   + "Now you have " + arr.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
+            return "Don't be cheeky. Give me a deadline to stress you over.";
         }
     }
 
@@ -114,41 +118,44 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If there are no details in input.
      */
 
-    public void event(String input, ArrayList<Task> arr) {
+    public String event(String input, ArrayList<Task> arr) {
         try {
             String nonevent = input.split("event ", 2)[1]; // Remove instruction
             String task = nonevent.split(" /at ", 2)[0]; // Split to task
             String date = nonevent.split(" /at ", 2)[1]; // Split to date
             Event newEvent = new Event(task, date);
             arr.add(newEvent);
-            System.out.println("Got it! I've added this task: \n    "
+            return "Got it! I've added this task: \n    "
                    + newEvent + "\n"
-                   + "Now you have " + arr.size() + " tasks in the list.");
+                   + "Now you have " + arr.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Don't be cheeky. Give me an event to record.");
+            return "Don't be cheeky. Give me an event to record.";
         }
     }
 
-    public void find(String input, ArrayList<Task> arr) {
+    public String find(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
             int counter = 1;
             boolean hasFound = false;
+            String stringToFind = ""; // contains all words that have been found / not found.
             for (Task task : arr) {
                 if (task.getName().contains(word) && !word.equals("")) {
                     if (!hasFound) {
-                        System.out.println("I found the matching items you requested:");
+                        stringToFind += "I found the matching items you requested: \n";
                     }
-                    System.out.println(counter + "." + task);
+                    stringToFind += counter + "." + task + "\n";
                     counter++;
                     hasFound = true;
                 }
             }
             if (!hasFound) {
-                System.out.println("Unfortunately, I couldn't find anything related to " + word);
+                return "Unfortunately, I couldn't find anything related to " + word;
+            } else {
+                return stringToFind;
             }
         } catch (Exception e) {
-            System.out.println("Don't be cheeky. Give me something to look for");
+            return "Don't be cheeky. Give me something to look for";
         }
     }
 
@@ -162,16 +169,16 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If there are no details in input.
      */
 
-    public void toDo(String input, ArrayList<Task> arr) {
+    public String toDo(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
             ToDo newToDo = new ToDo(word);
             arr.add(newToDo);
-            System.out.println("Got it! I've added this task: \n    "
-                   + newToDo + "\n"
-                   + "Now you have " + arr.size() + " tasks in the list.");
+            return "Got it! I've added this task: \n "
+                    + newToDo + "\n"
+                    + "Now you have " + arr.size() + " tasks in the list";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Don't be cheeky. Give me something to do.");
+            return "Don't be cheeky. Give me something to do.";
         }
     }
 }

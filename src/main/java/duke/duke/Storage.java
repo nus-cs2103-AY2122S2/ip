@@ -61,8 +61,8 @@ public class Storage {
         }
     }
 
-    public void exit(ArrayList<Task> arr) {
+    public String exit(ArrayList<Task> arr) {
         save(arr);
-        System.out.println("Goodbye! I'll be here if you need anything else.");
+        return "Goodbye! I'll be here if you need anything else.";
     }
 }
