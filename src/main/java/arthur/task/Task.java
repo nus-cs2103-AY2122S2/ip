@@ -4,7 +4,7 @@ package arthur.task;
  * A class that creates task objects
  */
 public class Task {
-    private final String description;     // Task.Task description
+    private final String description; // Task.Task description
     private boolean isDone;
 
     /**

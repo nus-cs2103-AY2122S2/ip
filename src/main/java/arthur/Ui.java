@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
  * Handles interactions with the user.
  */
 public class Ui {
-    BufferedReader io;
+    private final BufferedReader io;
 
     /**
      * Constructor for Ui object.

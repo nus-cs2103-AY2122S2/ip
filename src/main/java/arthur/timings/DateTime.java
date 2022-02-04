@@ -12,8 +12,8 @@ public class DateTime {
     private LocalDate date;
     private LocalTime time;
     private final String str;
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
-    DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
+    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
 
     /**
      * Converts input string to date and time objects.

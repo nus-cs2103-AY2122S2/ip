@@ -8,7 +8,7 @@ import arthur.timings.DateTime;
  */
 public class Deadline extends Task {
     private final String by;
-    private final DateTime timings;
+    private final DateTime timing;
 
     /**
      * Constructor for deadline
@@ -17,8 +17,8 @@ public class Deadline extends Task {
      */
     public Deadline(String e, String by) {
         super(e);
-        timings = new DateTime(by);
-        this.by = timings.getString();
+        timing = new DateTime(by);
+        this.by = timing.getString();
     }
 
     @Override

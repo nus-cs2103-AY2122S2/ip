@@ -1,13 +1,14 @@
 package arthur;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import arthur.task.Deadline;
 import arthur.task.Event;
 import arthur.task.Task;
 import arthur.task.Todo;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Handles the list of tasks and operations on it.
@@ -16,6 +17,10 @@ public class TaskList {
     private final ArrayList<Task> taskList;
     private final Storage storage;
 
+    /**
+     * Constructs the taskList object
+     * @param storage Storage object to use to store files
+     */
     public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
         this.storage = storage;
@@ -161,6 +166,8 @@ public class TaskList {
                     taskInfo = taskInfo.replaceFirst("\\)", "");
                     event(taskInfo);
                     break;
+                default:
+                    break;
                 }
 
                 if (marking == 'X') {
@@ -190,6 +197,11 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Finds tasks matching the given str.
+     * @param str Used to find task similar to this input.
+     * @return A string of all the matching tasks.
+     */
     public String find(String str) {
         StringBuilder temp = new StringBuilder("Here are the matching tasks in your list: \n");
         int tempCounter = 1;

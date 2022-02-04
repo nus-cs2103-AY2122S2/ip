@@ -1,19 +1,19 @@
 package arthur;
 
-import arthur.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import arthur.task.Task;
+
 /**
  * Handles creating and editing data file.
  */
 public class Storage {
     private final File storage;
-    private final String FILE_PATH = "data/Tasks.txt";
+    private static final String FILE_PATH = "data/Tasks.txt";
     private final Ui ui;
 
     /**
@@ -83,6 +83,8 @@ public class Storage {
                         break;
                     // For delete, by skipping append
                     case 2:
+                        break;
+                    default:
                         break;
                     }
                 } else {

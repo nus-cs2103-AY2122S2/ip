@@ -24,7 +24,7 @@ public class Parser {
      * @param ui The arthur.Ui class to use for user interaction
      */
     public String execute(TaskList taskList, Storage storage, Ui ui) {
-        String[] temp = this.command.split(" ", 2);    // Gets the first word
+        String[] temp = this.command.split(" ", 2); // Helps to isolate the first word
         String inst = temp[0];
 
         try {
@@ -59,6 +59,8 @@ public class Parser {
             case "bye":
                 this.isEnd = true;
                 this.command = "Bye!" + "\n" + "Have a great day!";
+                break;
+            default: // Future improvement: throw invalid command exception here
                 break;
             }
         } catch (IndexOutOfBoundsException e) {
