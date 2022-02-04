@@ -14,6 +14,14 @@ public abstract class Task {
 
     public abstract Task mark(boolean isDone);
 
+    public String fileFormat() {
+        if (isDone) {
+            return " | 1 | " + content;
+        } else {
+            return " | 0 | " + content;
+        }
+    }
+
     public String getContent() {
         return content;
     }

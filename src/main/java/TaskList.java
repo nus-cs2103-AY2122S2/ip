@@ -1,5 +1,5 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,39 +8,38 @@ public class TaskList {
     private static final String INDENT = "    ";
     private final List<Task> tasks;
 
-    public TaskList(String path) throws FileNotFoundException {
-        File file = new File(path);
-        Scanner sc = new Scanner(file);
-        sc.useDelimiter(" | ");
-        tasks = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String taskType = sc.next();
-            String isDoneSymbol = sc.next();
-            boolean isDone;
-            String content = sc.next();
-            switch (isDoneSymbol) {
-            case "0":
-                isDone = false;
-                break;
-            case "1":
-                isDone = true;
-                break;
-            default:
-                throw new DukeException("I cannot read the file. It is not in the expected format.");
-            };
-            switch (taskType) {
-            case "T":
-                tasks.add(new Todo(content, isDone));
-                break;
-            case "D":
-                tasks.add(new Deadline(content, sc.next(), isDone));
-                break;
-            case "E":
-                tasks.add(new Event(content, sc.next(), isDone));
-                break;
-            default:
-                throw new DukeException("I cannot read the file. It is not in the expected format.");
+    public TaskList(String path) {
+        try {
+            File file = new File(path);
+            file.createNewFile();
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter(" | ");
+            tasks = new ArrayList<>();
+            while (sc.hasNextLine()) {
+                String taskType = sc.next();
+                String isDoneSymbol = sc.next();
+                String content = sc.next();
+                boolean isDone = switch (isDoneSymbol) {
+                    case "0" -> false;
+                    case "1" -> true;
+                    default -> throw new DukeException("I cannot read the file. It is not in the expected format.");
+                };
+                switch (taskType) {
+                case "T":
+                    tasks.add(new Todo(content, isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(content, sc.next(), isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(content, sc.next(), isDone));
+                    break;
+                default:
+                    throw new DukeException("I cannot read the file. It is not in the expected format.");
+                }
             }
+        } catch (IOException e) {
+            throw new DukeException("I cannot create the data file.");
         }
     }
 
@@ -113,5 +112,13 @@ public class TaskList {
         System.out.println(INDENT + "Noted. I've removed this task:");
         System.out.println(INDENT + "  " + t);
         System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public String fileUpdated() {
+        String result = "";
+        for (Task t : tasks) {
+            result += t.fileFormat() + System.lineSeparator();
+        }
+        return result;
     }
 }

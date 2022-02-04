@@ -17,6 +17,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String fileFormat() {
+        return "E" + super.fileFormat() + " | " + time;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
     }

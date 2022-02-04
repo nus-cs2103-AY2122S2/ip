@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,13 +11,14 @@ public class Duke {
             + INDENT + "| | | | | | | |/ / _ \\\n"
             + INDENT + "| |_| | |_| |   <  __/\n"
             + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String PATH = "./duke.txt";
 
     private final String name;
     private final TaskList tasks;
 
-    public Duke(String name, String path) throws FileNotFoundException {
+    public Duke(String name) throws FileNotFoundException {
         this.name = name;
-        this.tasks = new TaskList(path);
+        this.tasks = new TaskList(PATH);
     }
 
     public void run() {
@@ -69,6 +72,13 @@ public class Duke {
                         throw new DukeException("Please enter an index to delete.");
                     }
                 } else if (s.startsWith("bye")) {
+                    try {
+                        FileWriter fw = new FileWriter(PATH, false);
+                        fw.write(tasks.fileUpdated());
+                        fw.close();
+                    } catch (IOException e) {
+                        throw new DukeException("I cannot save changes to file.");
+                    }
                     System.out.println(INDENT + "Bye. Hope to see you again soon!");
                     break;
                 } else {
@@ -86,7 +96,7 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
-            Duke cindy = new Duke("Duke-Cindy", "../../data/duke.txt");
+            Duke cindy = new Duke("Duke-Cindy");
             cindy.run();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
