@@ -10,8 +10,7 @@ public class ListCommand extends Command {
 
         // Formatting task list to be printed
         String formattedTaskList = formatTaskList(taskList);
-        String formattedTaskListWithLines = Duke.formatLines(formattedTaskList);
-        System.out.println(formattedTaskListWithLines);
+        Ui.printTaskList(formattedTaskList);
     }
 
     /**
@@ -27,7 +26,7 @@ public class ListCommand extends Command {
 
         for (Task i : taskList) {
             String item = String.valueOf(indexCounter) + ". " + i.toString();
-            formattedTaskList += Duke.indent(Duke.newLine(item), 1);
+            formattedTaskList += Duke.newLine(item);
             indexCounter += 1;
         }
 

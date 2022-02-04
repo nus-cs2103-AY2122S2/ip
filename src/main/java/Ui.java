@@ -44,4 +44,10 @@ public class Ui {
         System.out.println(Ui.line());
     }
 
+    public static void printTaskList(String formattedTaskList) {
+        System.out.println(Ui.line());
+        System.out.println(formattedTaskList);
+        System.out.println(Ui.line());
+    }
+
 }
