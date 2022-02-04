@@ -25,6 +25,8 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
             Scanner sc = new Scanner(f);
             ArrayList<Task> tasks = new ArrayList<>();
             while(sc.hasNext()) {
@@ -48,7 +50,7 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }

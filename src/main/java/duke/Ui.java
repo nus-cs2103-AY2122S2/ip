@@ -37,8 +37,12 @@ public class Ui {
     }
 
     public void showTaskList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks);
+        if (tasks.size() == 0) {
+            System.out.println("You have no tasks in your list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            System.out.println(tasks);
+        }
     }
 
     public void showFoundTaskList(TaskList tasks) {
