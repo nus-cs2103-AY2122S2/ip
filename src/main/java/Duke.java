@@ -1,3 +1,7 @@
+import exceptions.DukeExceptions;
+import exceptions.DukeInvalidInput;
+import exceptions.DukeInvalidTodo;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,7 +14,16 @@ public class Duke {
         System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|");
     }
 
-    public static void main(String[] args) {
+    public static String makeDesc(String[] text, int len) {
+        String newText = "";
+        for (int i = 1; i < len; i++) {
+            newText = newText + text[i] + " ";
+        }
+        return newText.trim();
+    }
+
+    public static void main(String[] args) throws DukeExceptions {
+
         Scanner sc = new Scanner(System.in);
         int num = 0;
         int counter = 0;
@@ -23,58 +36,73 @@ public class Duke {
             String text = sc.nextLine();
             String[] textSplitOne = text.split("/"); //by and at
             String[] textSplit = textSplitOne[0].split(" ");
-            switch(textSplit[0]) {
-                case "bye": num = 1;
-                            System.out.println("See you soon! Have a good day ^_^");
-                            lineOne();
-                            break;
-                case "list": for(int i = 0; i < counter; i++) {
-                                 System.out.println(i+1 + ". " + lists.get(i));
-                             }
-                             break;
-                case "mark": lineOne();
-                             System.out.println("Good Job! ^_^");
-                             System.out.println("Task number " + textSplit[1] + " has been marked as done!");
-                             int tNum = Integer.parseInt(textSplit[1]);
-                             lists.get(tNum - 1).done();
-                             System.out.println(lists.get(tNum - 1));
-                             lineOne();
-                             break;
-                case "unmark": lineOne();
-                               System.out.println("I've unmarked task number " + textSplit[1]);
-                               System.out.println("Complete it soon! ^_^");
-                               int tNo = Integer.parseInt(textSplit[1]);
-                               lists.get(tNo - 1).undo();
-                               System.out.println(lists.get(tNo- 1));
-                               lineOne();
-                               break;
-                default: lineTwo();
-                         System.out.println("New task added:");
-                         String newText = "";
-                         for(int i = 1; i < textSplit.length; i++) {
-                             newText = newText + textSplit[i] + " ";
-                         }
-                         if(textSplit[0].equals("todo")) {
-                             Task t = new ToDo(newText);
-                             lists.add(t);
-                             System.out.println(t);
-                         }
-                         else if(textSplit[0].equals("event")) {
-                             Task t = new Event(newText, textSplitOne[1]);
-                             lists.add(t);
-                             System.out.println(t);
-                         }
-                         else {
-                             Task t = new Deadline(newText, textSplitOne[1]);
-                             lists.add(t);
-                             System.out.println(t);
-                         }
-                         counter++;
-                         System.out.println("You have " + counter + " tasks in the list now! ^_^");
-                         lineTwo();
-                         break;
+            String fullDesc = makeDesc(textSplit, textSplit.length);
+            try {
+                switch (textSplit[0]) {
+                    case "bye":
+                        num = 1;
+                        System.out.println("See you soon! Have a good day ^_^");
+                        lineOne();
+                        break;
+                    case "list":
+                        for (int i = 0; i < lists.size(); i++) {
+                            System.out.println(i + 1 + ". " + lists.get(i));
+                        }
+                        break;
+                    case "mark":
+                        lineOne();
+                        System.out.println("Good Job! ^_^");
+                        System.out.println("Task number " + textSplit[1] + " has been marked as done!");
+                        int tNum = Integer.parseInt(textSplit[1]);
+                        lists.get(tNum - 1).done();
+                        System.out.println(lists.get(tNum - 1));
+                        lineOne();
+                        break;
+                    case "unmark":
+                        lineOne();
+                        System.out.println("I've unmarked task number " + textSplit[1]);
+                        System.out.println("Complete it soon! ^_^");
+                        int tNo = Integer.parseInt(textSplit[1]);
+                        lists.get(tNo - 1).undo();
+                        System.out.println(lists.get(tNo - 1));
+                        lineOne();
+                        break;
+                    case "todo":
+                        try {
+                            if(fullDesc.equals(" ") || fullDesc.equals("")) {
+                                throw new DukeInvalidTodo();
+                            }
+                        }
+                        catch(DukeInvalidTodo e) {
+                            System.err.println(e.getMessage());
+                            continue;
+                        }
+                        System.out.println("New task added:");
+                        Task t = new ToDo(fullDesc);
+                        lists.add(t);
+                        System.out.println(t);
+                        break;
+                    case "event":
+                        System.out.println("New task added:");
+                        Task t1 = new Event(fullDesc, textSplitOne[1]);
+                        lists.add(t1);
+                        System.out.println(t1);
+                        break;
+                    case "deadline":
+                        System.out.println("New task added:");
+                        Task t2 = new Deadline(fullDesc, textSplitOne[1]);
+                        lists.add(t2);
+                        System.out.println(t2);
+                        break;
+                    default:
+                        throw new DukeInvalidInput();
+
+                }
+            } catch (DukeInvalidInput e) {
+                System.err.println(e.getMessage());
             }
         }
-        while(num == 0);
+            while (num == 0) ;
+
     }
 }
