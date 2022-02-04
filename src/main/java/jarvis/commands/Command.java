@@ -1,8 +1,8 @@
 package jarvis.commands;
 
+import jarvis.exceptions.InvalidTaskException;
 import jarvis.tasks.TaskList;
 import jarvis.utils.TextUI;
-import jarvis.exceptions.InvalidTaskException;
 
 public abstract class Command {
     /**

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import jarvis.utils.Parser;
 import jarvis.commands.AddCommand;
 import jarvis.commands.Command;
 import jarvis.commands.DeleteCommand;
@@ -14,6 +13,7 @@ import jarvis.commands.MarkCommand;
 import jarvis.commands.QuitCommand;
 import jarvis.commands.UnmarkCommand;
 import jarvis.exceptions.InvalidCommandException;
+import jarvis.utils.Parser;
 
 public class ParserTest {
     @Test

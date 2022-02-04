@@ -1,7 +1,7 @@
 package jarvis.commands;
 
-import jarvis.tasks.TaskList;
 import jarvis.exceptions.InvalidTaskException;
+import jarvis.tasks.TaskList;
 
 public class AddCommand extends Command {
     private final String taskString;
