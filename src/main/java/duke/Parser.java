@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * This is the Parser class that obtains a sentence as input that
@@ -319,7 +320,7 @@ public class Parser {
             boolean hasMatch = false;
             for (int i = 0; i < tasks.getTaskListSize(); i ++) {
                 Task task = tasks.getParticularTask(i);
-                if (task.getName().toLowerCase().contains(wordsProvided)) {
+                if (task.getName().toLowerCase().contains(wordsProvided.toLowerCase())) {
                     hasMatch = true;
                     successMessage.append(task.toString());
                 }

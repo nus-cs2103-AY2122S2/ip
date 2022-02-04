@@ -7,6 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * This is a Main class that acts as the logic behind the starting
@@ -27,6 +31,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
+            assertTrue(Files.exists(Path.of("src/main/resources/duke/view/MainWindow.fxml"))); //Assumes there is this file in the project
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/duke/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

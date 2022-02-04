@@ -2,6 +2,11 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.Assert.assertTrue;
+
 
 /**
  * This is a Duke class that orchestrates the running of the Duke
@@ -22,6 +27,7 @@ public class Duke {
      * Loads information of Tasks from Duke text file into the Duke application
      */
     public Duke() {
+        assertTrue(Files.exists(Path.of(filePath))); //assumes the file provided is a valid text file
         ui = new Ui();
         storage = new Storage(filePath, tasks);
         try {

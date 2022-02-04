@@ -44,6 +44,16 @@ public class Ui {
     public String createInstructionMessage() {
         StringBuilder instructionString = new StringBuilder();
         String instructions = "These are some of the instructions I can follow: \n";
+        //Assumes current list of commands of Duke is provided below
+        assert listOfCommands == "todo <Description of Task>\n" +
+                "deadline <Description of Task> /by <eg. 2020/May/19>\n" +
+                "event <Description of Task> /at <eg. 2020/May/19>\n" +
+                "list\n" +
+                "mark <Task number>\n" +
+                "unmark <Task number>\n" +
+                "delete <Task number>\n" +
+                "find <Task number>\n" +
+                "bye\n";
         instructionString.append(instructions).append(listOfCommands);
         return instructionString.toString();
     }

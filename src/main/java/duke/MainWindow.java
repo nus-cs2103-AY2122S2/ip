@@ -50,6 +50,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws DukeException, IOException {
         String input = userInput.getText();
+        assert input != ""; //Assumes all text by user WILL have something
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
