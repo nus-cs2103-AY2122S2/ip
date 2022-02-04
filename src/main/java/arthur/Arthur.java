@@ -30,16 +30,17 @@ public class Arthur {
     /**
      * Runs the given instructions till "bye" command is given
      */
-    public void run() {
+    public String run(String string) {
         ui.showWelcome();
         boolean isExit = false;
+        String result = string;
         while (!isExit) {
-            String inst = ui.readInst();
+            String inst = string;
             try {
                 ArthurException.checkException(inst);
                 Parser commander = new Parser(inst);
-                commander.execute(tasks, storage, ui);
-                isExit = commander.isEnd();
+                result = commander.execute(tasks, storage, ui);
+                isExit = true;
             } catch (DateTimeParseException e) {
                 ui.printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
                         + "You can also enter time or date only");
@@ -47,9 +48,6 @@ public class Arthur {
                 ui.printFormat(f.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Arthur().run();
+        return result;
     }
 }

@@ -23,7 +23,7 @@ public class Parser {
      * @param storage The object to access data file in storage
      * @param ui The arthur.Ui class to use for user interaction
      */
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         String[] temp = this.command.split(" ", 2);    // Gets the first word
         String inst = temp[0];
 
@@ -64,7 +64,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             this.command = "Please enter a valid number!";
         }
-        ui.printFormat(this.command);
+        return this.command;
     }
 
     /**
