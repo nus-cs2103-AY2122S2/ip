@@ -23,7 +23,8 @@ class Storage {
             if (!fileExists) {
                 Files.createFile(filePath);
             }
-            BufferedWriter myWriter = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+            BufferedWriter myWriter = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
             myWriter.write(taskList.toData());
             myWriter.close();
         } catch (IOException e) {

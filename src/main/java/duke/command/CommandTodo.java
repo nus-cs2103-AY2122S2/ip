@@ -6,8 +6,8 @@ import duke.Todo;
 import duke.Ui;
 
 public class CommandTodo extends Command {
-    TaskList taskList;
-    String todoContent;
+    private TaskList taskList;
+    private String todoContent;
 
     public CommandTodo(TaskList taskList, String todoContent) {
         this.taskList = taskList;

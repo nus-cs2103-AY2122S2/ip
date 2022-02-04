@@ -4,8 +4,8 @@ import duke.TaskList;
 import duke.Ui;
 
 public class CommandMark extends Command {
-    TaskList taskList;
-    int taskNo;
+    private TaskList taskList;
+    private int taskNo;
 
     public CommandMark(TaskList taskList, int taskNo) {
         this.taskList = taskList;

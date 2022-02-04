@@ -4,7 +4,7 @@ package duke;
  * Encapsulates boolean value to be used like a mutable object.
  */
 public class Over {
-    boolean isOver;
+    private boolean isOver;
 
     /**
      * Creates an Over object
@@ -18,5 +18,9 @@ public class Over {
      */
     public void setOver() {
         this.isOver = true;
+    }
+
+    public boolean isOver() {
+        return isOver;
     }
 }

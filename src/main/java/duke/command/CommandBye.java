@@ -8,7 +8,7 @@ import duke.Ui;
  * Represents the 'bye' command that shuts off Duke.
  */
 public class CommandBye extends Command {
-    Over over;
+    private final Over over;
 
     /**
      * Creates a new CommandBye instance.

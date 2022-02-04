@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.dukeException.NoTimeGivenException;
-
 import java.util.Locale;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.dukeexception.NoTimeGivenException;
 
 /**
  * The main logic of Duke
@@ -21,7 +21,7 @@ class Duke {
         Ui.wrapPrint(Response.RESPONSE_WELCOME);
         Over over = new Over();
 
-        while (!over.isOver) {
+        while (!over.isOver()) {
             String userInput = myScanner.nextLine();
             try {
                 Command command = Parser.parse(userInput, taskList, over);

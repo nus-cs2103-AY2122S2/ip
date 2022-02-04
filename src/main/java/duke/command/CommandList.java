@@ -4,7 +4,7 @@ import duke.TaskList;
 import duke.Ui;
 
 public class CommandList extends Command {
-    TaskList taskList;
+    private TaskList taskList;
 
     public CommandList(TaskList taskList) {
         this.taskList = taskList;

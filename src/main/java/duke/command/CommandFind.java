@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 
 public class CommandFind extends Command {
-    String keyword;
-    TaskList taskList;
+    private String keyword;
+    private TaskList taskList;
 
     public CommandFind(String keyword, TaskList taskList) {
         this.keyword = keyword;

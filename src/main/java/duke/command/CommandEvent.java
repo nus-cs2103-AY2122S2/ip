@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Event;
 import duke.Response;
 import duke.TaskList;
 import duke.Ui;
 
-import java.time.LocalDate;
-
 public class CommandEvent extends Command {
-    TaskList taskList;
-    LocalDate time;
-    String eventContent;
+    private TaskList taskList;
+    private LocalDate time;
+    private String eventContent;
 
     public CommandEvent(TaskList taskList, String eventContent, LocalDate time) {
         this.eventContent = eventContent;

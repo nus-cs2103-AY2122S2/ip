@@ -1,16 +1,18 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Deadline;
 import duke.Response;
 import duke.TaskList;
 import duke.Ui;
 
-import java.time.LocalDate;
-
 public class CommandDeadline extends Command {
-    String deadlineContent;
-    LocalDate date;
-    TaskList taskList;
+    private final String deadlineContent;
+    private final LocalDate date;
+    private final TaskList taskList;
+
+
 
     public CommandDeadline(TaskList taskList, String deadlineContent, LocalDate date) {
         this.deadlineContent = deadlineContent;
