@@ -9,6 +9,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_FOUND = "Got it. I've found matched tasks:\n";
     public static final String MESSAGE_NOT_FOUND = "Sorry. There are no matched task";
+    public static final int COMMAND_LENGTH = 2;
 
     private final String keyword;
 

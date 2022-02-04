@@ -10,6 +10,8 @@ import meep.task.ListTask;
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
+    public static final int COMMAND_LIST_LENGTH = 1;
+    public static final int COMMAND_LIST_DATE_LENGTH = 2;
     private final boolean isDateGiven;
     private final LocalDateTime date;
 

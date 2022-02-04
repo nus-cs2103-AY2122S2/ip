@@ -11,6 +11,7 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_MARK = "Nice! I've marked this task as done:\n";
+    public static final int COMMAND_LENGTH = 2;
 
     private final int index;
 

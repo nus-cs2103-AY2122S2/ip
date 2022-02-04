@@ -79,7 +79,7 @@ public class Meep {
     private void saveTaskToFile() {
         try {
             storage.saveTaskToFile(taskList.getList());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.printMsg(e.getMessage());
         }
     }

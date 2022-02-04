@@ -12,6 +12,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_DEADLINE = "deadline";
     public static final String COMMAND_EVENT = "event";
     public static final String MESSAGE_ADD = "Got it. I've added this task:\n";
+    public static final int COMMAND_LENGTH = 2;
 
     private final Task task;
 
