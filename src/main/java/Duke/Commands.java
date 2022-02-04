@@ -7,6 +7,7 @@ public class Commands {
 
     private final ListStorage myStorage;
     private final Printer myPrinter;
+    private final UiPrinter myUiPrinter = new UiPrinter();
 
     /**
      * Constructor for Commands. Commands contain a ListStorage
@@ -23,8 +24,9 @@ public class Commands {
     /**
      * Prints goodbye message.
      */
-    public void cmdBye() {
+    public String cmdBye() {
         myPrinter.printBye();
+        return myUiPrinter.printBye();
     }
 
     /**
@@ -33,7 +35,7 @@ public class Commands {
      * @param cmd Command to be parsed.
      * @throws EmptyMessageException Throws exception when there is no description.
      */
-    public void cmdTodo(String cmd) throws EmptyMessageException {
+    public String cmdTodo(String cmd) throws EmptyMessageException {
         String[] parsedCmd = Parser.parseCmdAndDes(cmd);
         if (cmd.length() == 4) {
             throw new EmptyMessageException("Todo Error");
@@ -42,6 +44,7 @@ public class Commands {
         Task newTask = new ToDo(parsedCmd[1]);
         myStorage.addToList(newTask);
         myPrinter.printTask(newTask, myStorage.length());
+        return myUiPrinter.printTask(newTask, myStorage.length());
     }
 
     /**
@@ -51,7 +54,7 @@ public class Commands {
      * @throws EmptyMessageException Thrown when there is no description.
      * @throws WrongDateFormatException Thrown when date format is wrong.
      */
-    public void cmdDeadline(String cmd) throws EmptyMessageException, WrongDateFormatException {
+    public String cmdDeadline(String cmd) throws EmptyMessageException, WrongDateFormatException {
         if (cmd.length() == 8) {
             throw new EmptyMessageException("Deadline Error");
         }
@@ -73,6 +76,7 @@ public class Commands {
         Task newTask = new Deadline(deadline[0], deadline[1]);
         myStorage.addToList(newTask);
         myPrinter.printTask(newTask, myStorage.length());
+        return myUiPrinter.printTask(newTask, myStorage.length());
     }
 
     /**
@@ -82,7 +86,7 @@ public class Commands {
      * @throws EmptyMessageException Thrown when there is no description.
      * @throws WrongDateFormatException Thwon when date format is wrong.
      */
-    public void cmdEvent(String cmd) throws EmptyMessageException, WrongDateFormatException {
+    public String cmdEvent(String cmd) throws EmptyMessageException, WrongDateFormatException {
         if (cmd.length() == 5) {
             throw new EmptyMessageException("Event Error");
         }
@@ -104,17 +108,20 @@ public class Commands {
         Task newTask = new Event(event[0], event[1]);
         myStorage.addToList(newTask);
         myPrinter.printTask(newTask, myStorage.length());
+        return myUiPrinter.printTask(newTask, myStorage.length());
     }
 
     /**
      * Parses list command. Handles empty lists and
      * lists with multiple tasks.
      */
-    public void cmdList() {
+    public String cmdList() {
         if (myStorage.length() == 0) {
             myPrinter.printEmptyList();
+            return myUiPrinter.printEmptyList();
         } else {
             myPrinter.printList(myStorage);
+            return myUiPrinter.printList(myStorage);
         }
     }
 
@@ -123,9 +130,10 @@ public class Commands {
      *
      * @param taskNumber Task number of task to be unmarked.
      */
-    public void cmdUnmark(int taskNumber) {
+    public String cmdUnmark(int taskNumber) {
         myStorage.findTask(taskNumber).unmark();
         myPrinter.printUnmark(myStorage, taskNumber);
+        return myUiPrinter.printUnmark(myStorage, taskNumber);
     }
 
     /**
@@ -133,9 +141,10 @@ public class Commands {
      *
      * @param taskNumber Task number of task to be marked.
      */
-    public void cmdMark(int taskNumber) {
+    public String cmdMark(int taskNumber) {
         myStorage.findTask(taskNumber).markAsDone();
         myPrinter.printMark(myStorage, taskNumber);
+        return myUiPrinter.printMark(myStorage, taskNumber);
     }
 
     /**
@@ -143,9 +152,11 @@ public class Commands {
      *
      * @param taskNumber Task number of task to be deleted.
      */
-    public void cmdDelete(int taskNumber) {
+    public String cmdDelete(int taskNumber) {
         myPrinter.printDelete(myStorage, taskNumber);
+        String result = myUiPrinter.printDelete(myStorage, taskNumber);
         myStorage.deleteTask(taskNumber);
+        return result;
     }
 
     /**
@@ -154,7 +165,7 @@ public class Commands {
      *
      * @param cmd Command to find.
      */
-    public void cmdFind(String cmd) {
+    public String cmdFind(String cmd) {
         String[] keyword = Parser.parseCmdAndDes(cmd);
         ListStorage tempStorage = new ListStorage();
         for (int i = 1; i <= myStorage.length(); i++) {
@@ -163,5 +174,6 @@ public class Commands {
             }
         }
         myPrinter.printList(tempStorage);
+        return myUiPrinter.printList(tempStorage);
     }
 }

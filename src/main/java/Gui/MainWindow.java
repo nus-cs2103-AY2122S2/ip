@@ -1,6 +1,8 @@
 package Gui;
 
 import Duke.Duke;
+import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.WrongDateFormatException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -44,7 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws EmptyMessageException, WrongDateFormatException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

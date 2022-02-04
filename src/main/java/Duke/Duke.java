@@ -14,6 +14,7 @@ public class Duke {
 
     private static final ListStorage myListStorage = new ListStorage();
     private static final Printer myPrinter = new Printer();
+    private static final UiPrinter myUiPrinter = new UiPrinter();
     private static Disk myDisk;
     /**
      * Empty contructor for Duke
@@ -117,7 +118,57 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws EmptyMessageException, WrongDateFormatException {
+        String result;
+        int taskNumber;
+        String[] cmds = Parser.parseCmdAndDes(input);
+        Commands commands = new Commands(myListStorage, myPrinter);
+        try {
+            switch (cmds[0]) {
+            case "hi":
+                return myUiPrinter.printGreeting();
+            case "todo":
+                result = commands.cmdTodo(input);
+                myDisk.saveToDisk();
+                return result;
+            case "deadline":
+                result = commands.cmdDeadline(input);
+                myDisk.saveToDisk();
+                return result;
+            case "event":
+                result = commands.cmdEvent(input);
+                myDisk.saveToDisk();
+                return result;
+            case "find":
+                result = commands.cmdFind(input);
+                return result;
+            case "mark":
+                taskNumber = Character.getNumericValue(input.charAt(input.length() - 1));
+                result = commands.cmdMark(taskNumber);
+                myDisk.saveToDisk();
+                return result;
+            case "unmark":
+                taskNumber = Character.getNumericValue(input.charAt(input.length() - 1));
+                result = commands.cmdUnmark(taskNumber);
+                myDisk.saveToDisk();
+                return result;
+            case "list":
+                result = commands.cmdList();
+                return result;
+            case "delete":
+                taskNumber = Character.getNumericValue(input.charAt(input.length() - 1));
+                result = commands.cmdDelete(taskNumber);
+                myDisk.saveToDisk();
+                return result;
+            case "bye":
+                result = commands.cmdBye();
+                return result;
+            default:
+                return "That is not in my defined features! Try again please!";
+            }
+        } catch (EmptyMessageException | WrongDateFormatException e) {
+            myPrinter.printExceptions(e);
+            return myUiPrinter.printExceptions(e);
+        }
     }
 }
