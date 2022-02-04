@@ -1,3 +1,8 @@
+package gene.component;
+
+import gene.command.*;
+import gene.exception.UnrecognizedCommandException;
+
 public class Parser {
     private final static String EXITKEY = "bye";
     private final static String LISTKEY = "list";

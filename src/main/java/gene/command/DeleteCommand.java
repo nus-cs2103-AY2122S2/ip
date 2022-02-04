@@ -1,3 +1,10 @@
+package gene.command;
+
+import gene.component.Storage;
+import gene.component.TaskList;
+import gene.component.Ui;
+import gene.task.Task;
+
 public class DeleteCommand extends Command{
     private final String taskBody;
 

@@ -1,3 +1,12 @@
+package gene;
+
+import gene.command.Command;
+import gene.component.Parser;
+import gene.component.Storage;
+import gene.component.TaskList;
+import gene.component.Ui;
+import gene.exception.UnrecognizedCommandException;
+
 import java.util.Scanner;
 
 public class Gene {

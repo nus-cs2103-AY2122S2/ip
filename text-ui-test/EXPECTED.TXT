@@ -6,12 +6,12 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [E][ ] meeting tomorrow (at: Sunday 6pm)
 Now you have 1 tasks in the list.
 --------------------------------------------------------
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [E][ ] lunch (at: Sunday 12pm)
 Now you have 2 tasks in the list.
 --------------------------------------------------------
@@ -20,12 +20,12 @@ Now you have 2 tasks in the list.
 2.[E][ ] lunch (at: Sunday 12pm)
 --------------------------------------------------------
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [D][ ] meeting slides (by: Sunday 4pm)
 Now you have 3 tasks in the list.
 --------------------------------------------------------
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [D][ ] lunch (by: Sunday 11am)
 Now you have 4 tasks in the list.
 --------------------------------------------------------
@@ -36,12 +36,12 @@ Now you have 4 tasks in the list.
 4.[D][ ] lunch (by: Sunday 11am)
 --------------------------------------------------------
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [T][ ] meeting
 Now you have 5 tasks in the list.
 --------------------------------------------------------
 --------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this gene:
   [T][ ] lunch
 Now you have 6 tasks in the list.
 --------------------------------------------------------
@@ -54,7 +54,7 @@ Now you have 6 tasks in the list.
 6.[T][ ] lunch
 --------------------------------------------------------
 --------------------------------------------------------
-Nice! I've marked this task as done:
+Nice! I've marked this gene as done:
   [E][X] meeting tomorrow (at: Sunday 6pm)
 --------------------------------------------------------
 --------------------------------------------------------
@@ -66,11 +66,11 @@ Nice! I've marked this task as done:
 6.[T][ ] lunch
 --------------------------------------------------------
 --------------------------------------------------------
-OK, I've marked this task as not done yet:
+OK, I've marked this gene as not done yet:
   [E][ ] meeting tomorrow (at: Sunday 6pm)
 --------------------------------------------------------
 --------------------------------------------------------
-Nice! I've marked this task as done:
+Nice! I've marked this gene as done:
   [E][X] lunch (at: Sunday 12pm)
 --------------------------------------------------------
 --------------------------------------------------------
@@ -82,7 +82,7 @@ Nice! I've marked this task as done:
 6.[T][ ] lunch
 --------------------------------------------------------
 --------------------------------------------------------
-OK, I've marked this task as not done yet:
+OK, I've marked this gene as not done yet:
   [E][ ] lunch (at: Sunday 12pm)
 --------------------------------------------------------
 --------------------------------------------------------

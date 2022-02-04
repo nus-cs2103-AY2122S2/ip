@@ -1,3 +1,9 @@
+package gene.command;
+
+import gene.component.Storage;
+import gene.component.TaskList;
+import gene.component.Ui;
+
 public class ExitCommand extends Command{
 
     @Override

@@ -1,3 +1,5 @@
+package gene.exception;
+
 public class BadDescriptionException extends Exception {
     private final String taskType;
 

@@ -1,3 +1,5 @@
+package gene.component;
+
 public class Ui {
     //Greeting
     //Logo

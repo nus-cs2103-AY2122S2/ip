@@ -1,3 +1,10 @@
+package gene.component;
+
+import gene.task.DeadlineTask;
+import gene.task.EventTask;
+import gene.task.Task;
+import gene.task.TodoTask;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

@@ -1,3 +1,5 @@
+package gene.task;
+
 public class TodoTask extends Task {
     private final String taskTitle;
     private final String taskType = "T";

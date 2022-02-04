@@ -1,3 +1,5 @@
+package gene.exception;
+
 public class BadDeadlineException extends Exception {
     private final String taskType;
 

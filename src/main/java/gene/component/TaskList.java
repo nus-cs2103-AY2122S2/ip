@@ -1,12 +1,8 @@
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package gene.component;
+
+import gene.task.Task;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TaskList {
     private ArrayList<Task> itemList = new ArrayList<>(0);
