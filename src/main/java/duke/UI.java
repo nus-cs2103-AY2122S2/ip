@@ -2,7 +2,7 @@ package duke;
 
 /**
  * Representation containing all string representation and methods
- * used in Duke.
+ * used in duke.Duke.
  */
 public class UI {
 
@@ -12,7 +12,7 @@ public class UI {
     static final String mark = "Nice! I've marked this task as";
 
     /**
-     * String representation of custom line for Duke.
+     * String representation of custom line for duke.Duke.
      */
     static final String line = "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 
@@ -52,14 +52,14 @@ public class UI {
     }
 
     /**
-     * Prints custom line for Duke.
+     * Prints custom line for duke.Duke.
      */
     public static String printLine() {
         return line;
     }
 
     /**
-     * Prints bye message for Duke.
+     * Prints bye message for duke.Duke.
      * @return
      */
     public static String printTerminate() {
@@ -67,7 +67,7 @@ public class UI {
     }
 
     /**
-     * Prints text in between custom lines of Duke.
+     * Prints text in between custom lines of duke.Duke.
      *
      * @param text Text to be printed.
      */

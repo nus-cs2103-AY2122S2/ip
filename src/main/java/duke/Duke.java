@@ -1,6 +1,4 @@
-import duke.Parser;
-import duke.Storage;
-import duke.UI;
+package duke;
 
 import task.TaskList;
 
@@ -10,24 +8,17 @@ import task.TaskList;
 public class Duke {
 
     /**
-     * File where Duke is stored, read and written.
+     * File where duke.Duke is stored, read and written.
      */
     private Storage storage;
     /**
-     * List containing Tasks for Duke to process.
+     * List containing Tasks for duke.Duke to process.
      */
     private TaskList tasks;
     /**
-     * User Interface point of Duke.
+     * User Interface point of duke.Duke.
      */
     private UI ui;
-
-    /**
-     * Creates Duke to process.
-     *
-     * @param filePath Name of the path where Duke is to be stored.
-     * @throws Exception If something unexpected happens.
-     */
 
     private Parser parser;
     String filePath = "data/duke.txt";
@@ -55,5 +46,4 @@ public class Duke {
             return e.getMessage();
         }
     }
-
 }
