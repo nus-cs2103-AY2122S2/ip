@@ -3,9 +3,11 @@ package command;
 import java.util.ArrayList;
 
 import exception.DukeException;
+import parser.Parser;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -36,7 +38,8 @@ public class FindCommand extends Command {
             throw new DukeException("You are searching for nothing! Please try again.");
         } else {
             ArrayList<Task> foundTasks = tasks.find(this.words);
-            ui.showFoundTasksMessage(new TaskList(foundTasks));
+            String res = Parser.arrayListToString(ui.getFoundTasksMessage(new TaskList(foundTasks)));
+            this.response = new Response(res);
         }
     }
 

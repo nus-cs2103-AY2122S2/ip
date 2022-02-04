@@ -5,6 +5,7 @@ import storage.Storage;
 import task.Task;
 import task.TaskList;
 import task.Todo;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -39,9 +40,9 @@ public class TodoCommand extends Command {
         try {
             tasks.add(todo);
             storage.store(tasks);
-            ui.showResponseMessage("todo");
-            ui.showTaskMessage(todo);
-            ui.printTasksCountMessage(tasks);
+            this.response = new Response(ui.getResponseMessage("todo"),
+                    ui.getTaskMessage(todo),
+                    ui.getTasksCountMessage(tasks));
         } catch (DukeException e) {
             // e.printStackTrace();
         }

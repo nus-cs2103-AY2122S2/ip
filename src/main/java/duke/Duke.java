@@ -4,6 +4,7 @@ import command.Command;
 import controller.DialogBox;
 import exception.DukeException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -29,7 +30,7 @@ public class Duke extends Application {
 
     private Storage storage = new Storage("");
     private TaskList tasks;
-    private Ui ui = new Ui();
+    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -39,57 +40,53 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private boolean isExit = false;
     /**
      * Starts an instance of the duke.Duke bot.
-     *
-     * @param filePath location of the chat history file
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } finally {
+        //            run(); // Redundant
         }
     }
 
-    public Duke() {
+    //    /**
+    //     * Run the instance of the duke.Duke bot.
+    //     * Acts as the start point which encapsulates
+    //     * the program logic.
+    //     */
+    //    public void run() {
+    //        ui.showWelcome();
+    //        boolean isExit = false;
+    //        while (!isExit) {
+    //            try {
+    //                String fullCommand = ui.readCommand();
+    //                Command c = Parser.parse(fullCommand);
+    //                c.execute(tasks, ui, storage);
+    //                isExit = c.isExit();
+    //            } catch (DukeException e) {
+    //                ui.showError(e.getMessage());
+    //            } finally {
+    //                ui.showLine();
+    //            }
+    //        }
+    //    }
 
-    }
-
-    /**
-     * Run the instance of the duke.Duke bot.
-     * Acts as the start point which encapsulates
-     * the program logic.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * Start point of the project
-     *
-     * @param args Default parameters string
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+    //    /**
+    //     * Start point of the project
+    //     *
+    //     * @param args Default parameters string
+    //     */
+    //    public static void main(String[] args) {
+    //        new Duke("data/tasks.txt").run();
+    //    }
 
     @Override
     public void start(Stage stage) {
@@ -154,19 +151,19 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
+    //    /**
+    //     * Iteration 1:
+    //     * Creates a label with the specified text and adds it to the dialog container.
+    //     * @param text String containing text to add
+    //     * @return a label with the specified text that has word wrap enabled.
+    //     */
+    //    private Label getDialogLabel(String text) {
+    //        // You will need to import `javafx.scene.control.Label`.
+    //        Label textToAdd = new Label(text);
+    //        textToAdd.setWrapText(true);
+    //
+    //        return textToAdd;
+    //    }
 
     /**
      * Iteration 2:
@@ -176,6 +173,7 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -188,6 +186,17 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c;
+        try {
+            c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            if (isExit == true) {
+                Platform.exit();
+            }
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
+        return Parser.arrayListToString(c.getResponse().getResponseList());
     }
 }

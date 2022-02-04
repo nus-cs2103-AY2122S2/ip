@@ -3,6 +3,7 @@ package command;
 import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -34,15 +35,15 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (this.index > 0 && this.index <= tasks.size()) {
-            ui.showResponseMessage("delete");
-            ui.showTaskMessage(tasks.get(index - 1));
             tasks.removeTask(this.index - 1);
             try {
                 storage.store(tasks);
             } catch (DukeException e) {
                 e.printStackTrace();
             }
-            ui.printTasksCountMessage(tasks);
+            this.response = new Response(ui.getResponseMessage("delete"),
+                    ui.getTaskMessage(tasks.get(index - 1)),
+                    ui.getTasksCountMessage(tasks));
         } else {
             ui.showInvalidRange();
         }

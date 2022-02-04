@@ -1,7 +1,9 @@
 package command;
 
+import parser.Parser;
 import storage.Storage;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -19,7 +21,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printTasksCountMessage(tasks);
-        ui.showListOfTasksMessage(tasks);
+        this.response = new Response(ui.getTasksCountMessage(tasks),
+                Parser.arrayListToString(ui.getListOfTasksMessage(tasks)));
     }
 }

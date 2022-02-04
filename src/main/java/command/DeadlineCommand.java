@@ -7,6 +7,7 @@ import storage.Storage;
 import task.Deadline;
 import task.Task;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -49,8 +50,8 @@ public class DeadlineCommand extends Command {
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        ui.showResponseMessage("deadline");
-        ui.showTaskMessage(deadline);
-        ui.printTasksCountMessage(tasks);
+        this.response = new Response(ui.getResponseMessage("deadline"),
+                ui.getTaskMessage(deadline),
+                ui.getTasksCountMessage(tasks));
     }
 }

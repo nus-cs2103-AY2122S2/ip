@@ -3,6 +3,7 @@ package command;
 import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -13,12 +14,11 @@ import ui.Ui;
 public abstract class Command {
 
     private static boolean isExit = false;
-
+    protected Response response;
     /**
      * Default class constructor.
      */
     public Command() {
-
     }
 
     /**
@@ -48,5 +48,14 @@ public abstract class Command {
      */
     public boolean isExit() {
         return isExit;
+    }
+
+    /**
+     * Get the bot's response.
+     *
+     * @return Bot response object to reply the user
+     */
+    public Response getResponse() {
+        return this.response;
     }
 }

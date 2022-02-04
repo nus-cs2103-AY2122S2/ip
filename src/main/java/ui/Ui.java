@@ -3,6 +3,7 @@ package ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import exception.DukeException;
 import task.Task;
@@ -55,13 +56,13 @@ public class Ui {
     public void showWelcome() {
         String welcome = "Hello! I'm duke.Duke. Here is a list of commands for your reference!\n\n";
         System.out.println(welcome);
-        showCommands();
+        getCommands();
     }
 
     /**
      * Displays the list of commands.
      */
-    public void showCommands() {
+    public String getCommands() {
         StringBuilder welcome = new StringBuilder(
                 "1. todo [task]\n");
         welcome.append("2. deadline [task] /by [date]\n");
@@ -71,7 +72,7 @@ public class Ui {
         welcome.append("6. unmark X (mark X task as undone)\n");
         welcome.append("7. delete X (delete X task from the list)\n");
         welcome.append("8. bye - exit duke.Duke bot\n");
-        System.out.println(welcome.toString());
+        return welcome.toString();
     }
 
     /**
@@ -79,31 +80,38 @@ public class Ui {
      *
      * @param tasks TaskList that stores user's tasks
      */
-    public void showListOfTasksMessage(TaskList tasks) {
+    public ArrayList<String> getListOfTasksMessage(TaskList tasks) {
+        ArrayList<String> taskMessages = new ArrayList<>();
         if (tasks.size() == 0) {
-            System.out.println("Start by adding these commands:\n");
-            showCommands();
+            taskMessages.add("Start by adding these commands:\n");
+            taskMessages.add(getCommands());
         } else {
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+                String message = i + 1 + ". " + tasks.get(i).toString() + "\n";
+                taskMessages.add(message);
             }
         }
+        return taskMessages;
     }
 
     /**
      * Displays found tasks stored in the TaskList object.
      *
      * @param tasks TaskList that contains the found tasks
+     * @return List of tasks into an Arraylist
      */
-    public void showFoundTasksMessage(TaskList tasks) {
+    public ArrayList<String> getFoundTasksMessage(TaskList tasks) {
+        ArrayList<String> taskMessages = new ArrayList<>();
         if (tasks.size() == 0) {
-            System.out.println("Nothing was found :(");
+            taskMessages.add("Nothing was found :(");
         } else {
             System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+                String message = i + 1 + ". " + tasks.get(i).toString() + "\n";
+                taskMessages.add(message);
             }
         }
+        return taskMessages;
     }
 
     /**
@@ -112,24 +120,20 @@ public class Ui {
      *
      * @param res Bot's response
      */
-    public void showResponseMessage(String res) {
+    public String getResponseMessage(String res) {
         switch (res) {
         case "mark":
-            System.out.println("Nice! I've marked this task as done:");
-            break;
+            return "Nice! I've marked this task as done:";
         case "unmark":
-            System.out.println("OK, I've marked this task as not done yet:");
-            break;
+            return "OK, I've marked this task as not done yet:";
         case "delete":
-            System.out.println("Noted. I've removed this java.task:");
-            break;
+            return "Noted. I've removed this java.task:";
         case "todo":
         case "deadline":
         case "event":
-            System.out.println("Got it. I've added this task:");
-            break;
+            return "Got it. I've added this task:";
         default:
-            break;
+            return "Sorry! I do not really have a response for you :(";
         }
     }
 
@@ -161,9 +165,10 @@ public class Ui {
      * Displays the total amount of user's tasks.
      *
      * @param tasks TaskList that stores user's tasks
+     * @return String response of the bot
      */
-    public void printTasksCountMessage(TaskList tasks) {
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    public String getTasksCountMessage(TaskList tasks) {
+        return "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -177,17 +182,19 @@ public class Ui {
      * Displays task's details.
      *
      * @param task Specific user's task
+     * @return String message of a task
      */
-    public void showTaskMessage(Task task) {
-        System.out.println(task.toString());
+    public String getTaskMessage(Task task) {
+        return task.toString();
     }
 
     /**
      * Displays error details.
      *
      * @param errorMessage Message to be displayed to the user.
+     * @return Error message
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 }

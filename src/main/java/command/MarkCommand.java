@@ -4,6 +4,7 @@ import exception.DukeException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -33,11 +34,11 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.index > 0 && this.index <= tasks.size()) {
-            ui.showResponseMessage("mark");
             Task task = tasks.get(index - 1);
             task.mark();
             storage.store(tasks);
-            ui.showTaskMessage(task);
+            this.response = new Response(ui.getResponseMessage("mark"),
+                    ui.getTaskMessage(task));
         } else {
             ui.showInvalidRange();
         }
