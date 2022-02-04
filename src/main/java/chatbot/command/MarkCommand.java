@@ -17,11 +17,10 @@ public class MarkCommand extends Command {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
             task.setDone(true);
-            return new CommandOutput(String.format("Nice! I've marked this task as done:\n  %s", task),
+            return new CommandOutput(String.format("Good job! I've marked this task as done:\n  %s", task),
                     "/audio/wav/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
         }
     }
 }

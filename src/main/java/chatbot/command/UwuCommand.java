@@ -13,7 +13,7 @@ public class UwuCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         }
         return new CommandOutput("(⁄˘⁄ ⁄ ω⁄ ⁄ ˘⁄)♡", "/audio/wav/notification.wav");

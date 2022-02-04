@@ -17,11 +17,10 @@ public class UnmarkCommand extends Command {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
             task.setDone(false);
-            return new CommandOutput(String.format("OK, I've marked this task as not done yet:\n  %s", task),
+            return new CommandOutput(String.format("Okay, I've marked this task as not yet done:\n  %s", task),
                     "/audio/wav/notification.wav");
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\n" + "Command format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
         }
     }
 }

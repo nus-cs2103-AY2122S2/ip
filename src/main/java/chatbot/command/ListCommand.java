@@ -12,11 +12,16 @@ public class ListCommand extends Command {
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
-        if (taskList.isEmpty()) {
-            return new CommandOutput("Task list empty.", "/audio/wav/notification.wav");
+        if (input.length > 1) {
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT,
+                    "/audio/wav/notification.wav");
         }
 
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
+        if (taskList.isEmpty()) {
+            return new CommandOutput("You have no tasks.", "/audio/wav/notification.wav");
+        }
+
+        StringBuilder output = new StringBuilder("Here are your tasks:\n");
         for (int i = 0; i < taskList.size(); ++i) {
             output.append(
                     String.format("%d. %s%s", i + 1, taskList.get(i).toString(), i < taskList.size() - 1 ? "\n" : ""));

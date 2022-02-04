@@ -25,7 +25,7 @@ public class ToDoCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Empty description\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Blank description\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         }
 
@@ -33,7 +33,7 @@ public class ToDoCommand extends Command {
         Task task = new ToDo(desc);
         taskList.add(task);
         return new CommandOutput(
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
+                String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                         taskList.size()), "/audio/wav/notification.wav");
     }
 }

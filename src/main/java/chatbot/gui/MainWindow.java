@@ -4,7 +4,6 @@ import chatbot.command.CommandList;
 import chatbot.command.CommandOutput;
 import chatbot.task.TaskList;
 import chatbot.util.Ui;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

@@ -13,11 +13,11 @@ public class ResetCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         }
 
         taskList.clear();
-        return new CommandOutput("All tasks removed from the task list.", "/audio/wav/notification.wav");
+        return new CommandOutput("I've removed all your tasks.", "/audio/wav/notification.wav");
     }
 }

@@ -19,7 +19,8 @@ public class CommandList {
         this.unrecognizedCommand = new Command("bye") {
             @Override
             public CommandOutput execute(String[] input, TaskList taskList) {
-                return new CommandOutput("Unrecognised command.", "/audio/wav/notification.wav");
+                return new CommandOutput("Unrecognised command.\nType \"help\" for a list of commands.",
+                        "/audio/wav/notification.wav");
             }
         };
     }

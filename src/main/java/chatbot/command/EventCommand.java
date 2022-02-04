@@ -41,25 +41,25 @@ public class EventCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid description\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (startDate == null) {
-            return new CommandOutput("Error: Invalid start date\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid start date\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (startTime == null) {
-            return new CommandOutput("Error: Invalid start time\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid start time\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (endDate == null) {
-            return new CommandOutput("Error: Invalid end date\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid end date\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (endTime == null) {
-            return new CommandOutput("Error: Invalid end time\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid end time\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (startDate.isAfter(endDate)) {
-            return new CommandOutput("Error: Start date cannot be after end date\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Start date cannot be after end date\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
-            return new CommandOutput("Error: Start time cannot be after end time\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Start time cannot be after end time\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         }
 
@@ -67,7 +67,7 @@ public class EventCommand extends Command {
         Task task = new Event(desc, startDate, startTime, endDate, endTime);
         taskList.add(task);
         return new CommandOutput(
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task,
+                String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                         taskList.size()), "/audio/wav/notification.wav");
     }
 }

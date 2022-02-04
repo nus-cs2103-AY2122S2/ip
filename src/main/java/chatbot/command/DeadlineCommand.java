@@ -36,19 +36,19 @@ public class DeadlineCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Invalid description\n" + "Command format: " + FORMAT,
+            return new CommandOutput("Error: Invalid description\nCommand format: " + FORMAT,
                     "/audio/wav/notification.wav");
         } else if (date == null) {
-            return new CommandOutput("Invalid date\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid date\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
         } else if (time == null) {
-            return new CommandOutput("Invalid time\n" + "Command format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid time\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
         }
 
         // Add event.
         Task task = new Deadline(desc, date, time);
         taskList.add(task);
         return new CommandOutput(
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task,
+                String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                         taskList.size()), "/audio/wav/notification.wav");
     }
 }

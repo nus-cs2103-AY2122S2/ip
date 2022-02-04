@@ -5,6 +5,7 @@ import chatbot.command.DeadlineCommand;
 import chatbot.command.DeleteCommand;
 import chatbot.command.EventCommand;
 import chatbot.command.FindCommand;
+import chatbot.command.HelloCommand;
 import chatbot.command.HelpCommand;
 import chatbot.command.ListCommand;
 import chatbot.command.MarkCommand;
@@ -16,7 +17,6 @@ import chatbot.command.UnmarkCommand;
 import chatbot.command.UwuCommand;
 import chatbot.gui.MainWindow;
 import chatbot.task.TaskList;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +52,7 @@ public class ChatBot extends Application {
         this.commandList.addCommand(new HelpCommand());
         this.commandList.addCommand(new UwuCommand());
         this.commandList.addCommand(new OwoCommand());
+        this.commandList.addCommand(new HelloCommand());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ChatBot extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/fxml/MainWindow.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
 
-            MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
+            MainWindow mainWindow = fxmlLoader.getController();
             mainWindow.setCommandList(commandList);
             mainWindow.setTaskList(taskList);
             mainWindow.setTerminateCallback(() -> {
