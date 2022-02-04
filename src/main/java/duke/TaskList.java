@@ -20,6 +20,7 @@ public class TaskList {
      * all subsequent task numbers accordingly by +1.
      *
      * @param num index (starts from 1) to delete
+     * @return String output of deleted Task
      */
     public String deleteTask(int num) {
         if (num > 0 && num <= Task.totalTask) {
@@ -43,6 +44,7 @@ public class TaskList {
      * same with unmarking unmarked tasks.
      *
      * @param input Original input string that was entered
+     * @return String output of marked task
      */
     public String markTask(String input) {
         String[] inputArr = input.split(" ");
@@ -60,6 +62,12 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Finds tasks based on keyword provided
+     *
+     * @param keyword matching word to search for in Tasklist
+     * @return String output of tasks containing keyword provided
+     */
     public String findTask(String keyword) {
         TaskList matchTasks = new TaskList();
         for(int i = 0; i < Task.totalTask; i++) {

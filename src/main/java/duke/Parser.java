@@ -15,7 +15,7 @@ public class Parser {
     /**
      * Checks if input is 'bye'
      * @param input input entered by user into Duke
-     * @return true if input is bye, false otherwise
+     * @return String to output to gui
      */
     public static String parseIsBye(String input, TaskList tasklist){
         if (input.equals("bye")){
@@ -30,6 +30,7 @@ public class Parser {
      * Checks and processes user input (provided that it is not 'bye')
      * @param input user input into Duke (after making sure it is not 'bye')
      * @param taskList current tasklist
+     * @return String to output
      */
     public static String parseInput(String input, TaskList taskList) {
         String s;

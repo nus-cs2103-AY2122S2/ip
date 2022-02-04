@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Output {
 
-    static public String WRONG_DATE_FORMAT = "Note that dates should be in <<YYYY-MM-DD HHMM>> format";
+    static public String WRONG_DATE_FORMAT = "Note that dates should be in <<YYYY-MM-DD HHMM>> format\n";
 
     public static String startup() {
         String s;
@@ -23,6 +23,8 @@ public class Output {
 
     /**
      * prints output when user enters bye
+     *
+     * @return string output during exit
      */
     public static String printBye() {
         return "Bye. I hope to see you sometime soon! :)";
@@ -30,6 +32,8 @@ public class Output {
 
     /**
      * prints when user enters input not recognised by Duke
+     *
+     * @return string output when unrecognised input is entered
      */
     public static String printWhatDoesThatMean() {
         return " OOPS!!! I'm sorry, but I don't know what does that mean :-(";
@@ -37,6 +41,8 @@ public class Output {
 
     /**
      * prints when user leaves description of task empty
+     *
+     * @return string output of empty descriptor
      */
     public static String printEmptyDescriptionException() {
         return " OOPS!!! The description of a task cannot be empty.";
@@ -44,7 +50,9 @@ public class Output {
 
     /**
      * prints all task currently found in the Tasklist
+     *
      * @param tasklist tasklist to print from
+     * @return string representation of all tasks
      */
     public static String printAllTasks(TaskList tasklist) {
         String s = "Here are the tasks in your list:\n";
@@ -55,7 +63,12 @@ public class Output {
         return s;
     }
 
-
+    /**
+     * prints task that matches keyword
+     *
+     * @param tasklist list of tasks that contains keyword
+     * @return string representation of task that matches keyword
+     */
     public static String printMatchTasks(ArrayList<Task> tasklist) {
         String s = "Here are the match tasks in your list:\n";
         for (int i = 0; i < tasklist.size(); i++){
@@ -68,8 +81,10 @@ public class Output {
 
     /**
      * prints the task that got removed
+     *
      * @param num index of task to remove (zero indexed)
      * @param taskList tasklist to remove task from
+     * @return string representation of task that have been removed
      */
     public static String printRemovedThisTask(int num, TaskList taskList) {
         String s = " Noted. I've removed this task: ";
@@ -81,6 +96,8 @@ public class Output {
     /**
      * prints when task is marked as done
      * @param curr task to be marked as done
+     *
+     * @return string representation of task that have been marked
      */
     public static String printMarkTaskDone(Task curr) {
        String s = "Nice! I've marked this task as done: ";
@@ -91,6 +108,8 @@ public class Output {
     /**
      * print when task is marked as not done
      * @param curr task to be marked as not done
+     *
+     * @return string representation of task that have been unmarked
      */
     public static String printMarkTaskNotDone(Task curr) {
         String s = "OK, I've marked this task as not done yet: ";
@@ -100,6 +119,8 @@ public class Output {
 
     /**
      * print number of tasks left inside Tasklist
+     *
+     * @return string representation of total tasks
      */
     public static String printTotalTasks() {
         return String.format("Now you have %d task on the list.\n", Task.totalTask);
@@ -108,7 +129,9 @@ public class Output {
 
     /**
      * print when user adds Task
+     *
      * @param task task to add into TaskList
+     * @return string representation of printed task
      */
     public static String printAddThisTask(Task task) {
         String s;
