@@ -1,26 +1,35 @@
-package bob.Task;
+package bob.task;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.io.Serializable;
 
 /**
  * Represents the task that the bob program will record.
  */
 public abstract class Task implements Serializable {
-    private String name;
-    private int status;
-    public String type;
     protected static String[] statusSymbols = new String[]{"[ ]", "[✓]"};
+    private String name;
+    private String type;
+    private int status;
 
     public Task(String name) {
         this.name = name;
     }
 
-    public String getName() { return this.name; }
+    public String getType() {
+        return type;
+    }
 
-    public int getStatus() { return this.status; }
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
 
     public abstract String printStatus();
 

@@ -1,11 +1,11 @@
 package bob.command;
 
-import bob.Task.Todo;
-import bob.exception.BobException;
+import bob.Storage;
 import bob.TaskList;
 import bob.Ui;
-import bob.Storage;
-import bob.Task.Task;
+import bob.exception.BobException;
+import bob.task.Task;
+import bob.task.Todo;
 /**
  * {@inheritDoc}
  */
@@ -18,8 +18,8 @@ public class ToDoCommand extends AddCommand {
      * Creates a new ToDo object and adds it to the task list and store.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws BobException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task task = new Todo(getTaskName());
-        addAndUpdate(task, tasks, ui, store);
+        return addAndUpdate(task, tasks, ui, store);
     }
 }

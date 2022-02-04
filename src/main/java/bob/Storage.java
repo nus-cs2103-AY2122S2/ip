@@ -1,9 +1,5 @@
 package bob;
 
-import bob.Task.Task;
-import bob.command.ListCommand;
-import bob.exception.FileException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,12 +9,14 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import bob.task.Task;
+
 /**
  * Represents the file storage for the Bob program
  */
 public class Storage {
+    private static String fileName;
     private File store;
-    public static String fileName;
 
     /**
      * Constructor for the Storage class.
@@ -34,6 +32,10 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("File exception while creating new file");
         }
+    }
+
+    public static String getFileName() {
+        return fileName;
     }
 
     /**

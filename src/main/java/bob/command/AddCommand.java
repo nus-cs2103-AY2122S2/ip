@@ -1,9 +1,9 @@
 package bob.command;
 
 import bob.Storage;
-import bob.Task.Task;
 import bob.TaskList;
 import bob.Ui;
+import bob.task.Task;
 
 /**
  * {@inheritDoc}
@@ -29,9 +29,9 @@ public abstract class AddCommand extends Command {
      * @param ui a class that deals with interactions with the user
      * @param store represents the file storage of the class
      */
-    public void addAndUpdate(Task task, TaskList tasks, Ui ui, Storage store) {
+    public String addAndUpdate(Task task, TaskList tasks, Ui ui, Storage store) {
         tasks.addTask(task);
         store.updateStore(tasks);
-        ui.newTask(task, tasks);
+        return ui.newTask(task, tasks);
     }
 }

@@ -17,10 +17,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import bob.Task.Deadline;
-import bob.Task.Event;
-import bob.Task.Task;
-import bob.Task.Todo;
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 
 class StorageTest {

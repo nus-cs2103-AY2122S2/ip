@@ -1,10 +1,9 @@
 package bob.command;
 
-import bob.exception.BobException;
-
+import bob.Storage;
 import bob.TaskList;
 import bob.Ui;
-import bob.Storage;
+import bob.exception.BobException;
 
 /**
  * {@inheritDoc}
@@ -31,21 +30,23 @@ public class ListCommand extends Command {
      * Lists out the tasks present in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws BobException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         if (tasks.isEmpty()) {
             if (isGreetList) {
-                ui.noTasks();
+                return ui.noTasks();
             } else {
-                ui.free();
+                return ui.free();
             }
         } else {
+            StringBuilder reply = new StringBuilder();
             if (!isGreetList) {
-                ui.preListReply();
+                reply.append(ui.preListReply() + "\n");
             }
             for (int i = 1; i <= tasks.size(); i++) {
-                ui.say(String.format("\t %o . %s", i, tasks.getTask(i - 1).printStatus()));
+                reply.append(ui.say(String.format("\t %o . %s\n", i, tasks.getTask(i - 1).printStatus())));
             }
-            ui.postListFace();
+            reply.append(ui.postListFace());
+            return reply.toString();
         }
     }
 }

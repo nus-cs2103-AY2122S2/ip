@@ -1,10 +1,10 @@
 package bob;
 
-import bob.exception.BobException;
-import bob.Task.Task;
-import bob.exception.InvalidIndexException;
-
 import java.util.List;
+
+import bob.exception.BobException;
+import bob.exception.InvalidIndexException;
+import bob.task.Task;
 
 public class TaskList {
     private List<Task> taskList;

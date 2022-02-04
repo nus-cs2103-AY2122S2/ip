@@ -1,18 +1,25 @@
 package bob.command;
 
-import bob.exception.BobException;
+import java.time.LocalDateTime;
+
 import bob.Storage;
-import bob.Task.Task;
-import bob.Task.Deadline;
 import bob.TaskList;
 import bob.Ui;
+import bob.exception.BobException;
+import bob.task.Deadline;
+import bob.task.Task;
 
-import java.time.LocalDateTime;
 /**
  * {@inheritDoc}
  */
 public class DeadlineCommand extends AddCommand {
-    public LocalDateTime dateTime;
+    private LocalDateTime dateTime;
+
+    /**
+     * Constructor for the deadline command
+     * @param taskName name of the deadline to be created
+     * @param dateTime date and time of the deadline
+     */
     public DeadlineCommand(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
@@ -22,8 +29,8 @@ public class DeadlineCommand extends AddCommand {
      * Creates a new Deadline object and adds it to the task list and store.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws BobException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task task = new Deadline(getTaskName(), this.dateTime);
-        addAndUpdate(task, tasks, ui, store);
+        return addAndUpdate(task, tasks, ui, store);
     }
 }

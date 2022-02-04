@@ -1,13 +1,26 @@
 package bob;
 
-import bob.command.*;
-import bob.exception.*;
-
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
+import bob.command.ByeCommand;
+import bob.command.Command;
+import bob.command.DeadlineCommand;
+import bob.command.DeleteCommand;
+import bob.command.EventCommand;
+import bob.command.FindCommand;
+import bob.command.ListCommand;
+import bob.command.MarkCommand;
+import bob.command.ToDoCommand;
+import bob.exception.BobException;
+import bob.exception.DeadlineException;
+import bob.exception.EventException;
+import bob.exception.FindException;
+import bob.exception.InvalidCommandException;
+import bob.exception.ToDoException;
+
 
 /**
  * Represents the parser for the Bob program.
@@ -25,7 +38,7 @@ public class Parser {
         String firstWord = input.split(" ")[0];
         if (firstWord.equalsIgnoreCase("list")) {
             return new ListCommand();
-        } else if (firstWord.equalsIgnoreCase("mark") ) {
+        } else if (firstWord.equalsIgnoreCase("mark")) {
             try {
                 int index = Integer.parseInt(input.substring(4).trim()) - 1;
                 return new MarkCommand(index);
@@ -54,7 +67,7 @@ public class Parser {
         } else if (firstWord.equalsIgnoreCase("todo")) {
             String taskName = input.substring(4).trim();
             String[] strArr = input.substring(4).split(" ");
-            if (strArr.length <= 0  || (strArr.length == 1 && strArr[0].isBlank())) {
+            if (strArr.length <= 0 || (strArr.length == 1 && strArr[0].isBlank())) {
                 throw new ToDoException();
             }
             return new ToDoCommand(taskName);
@@ -83,7 +96,7 @@ public class Parser {
             }
             return new FindCommand(searchInput);
         } else {
-                throw new InvalidCommandException();
+            throw new InvalidCommandException();
         }
     }
 }

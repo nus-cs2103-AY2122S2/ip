@@ -1,100 +1,103 @@
 package bob;
 
-import bob.Task.Task;
-
 import java.util.Scanner;
 
+import bob.task.Task;
+
 public class Ui {
-    private final String lineSplit = "====================================================================";
-    private final String logo = "██╗░░██╗██╗  ██╗██╗███╗░░░███╗  ██████╗░░█████╗░██████╗░\n"
-                              + "██║░░██║██║  ██║╚█║████╗░████║  ██╔══██╗██╔══██╗██╔══██╗\n"
-                              + "███████║██║  ██║░╚╝██╔████╔██║  ██████╦╝██║░░██║██████╦╝\n"
-                              + "██╔══██║██║  ██║░░░██║╚██╔╝██║  ██╔══██╗██║░░██║██╔══██╗\n"
-                              + "██║░░██║██║  ██║░░░██║░╚═╝░██║  ██████╦╝╚█████╔╝██████╦╝\n"
-                              + "╚═╝░░╚═╝╚═╝  ╚═╝░░░╚═╝░░░░░╚═╝  ╚═════╝░░╚════╝░╚═════╝░\n";
     private Scanner sc;
     public Ui() {
         sc = new Scanner(System.in);
+    }
+
+    public String unknownError() {
+        return "Bob: iDK what went wrong O_O";
     }
 
     public String readInput() {
         return sc.nextLine();
     }
 
-    public void logo() {
-        System.out.println(logo);
-        line();
-    }
-    public void line() {
-        System.out.println(lineSplit);
+    public String greetMessage() {
+        return "Bob: What tasks are you adding to the list today? \t¯\\(°_o)/¯";
     }
 
-    public void greetMessage() {
-        System.out.println("Bob: What tasks are you adding to the list today? \t¯\\(°_o)/¯");
+    public String badReply() {
+        return "Bob: ╭∩╮༼ಠ益ಠ╭∩╮༽";
     }
 
-    public void badReply() {
-        System.out.println("Bob: ╭∩╮༼ಠ益ಠ╭∩╮༽");
+    public String showError(String error) {
+        return "Bob: " + error;
     }
 
-    public void showError(String error) {
-        System.out.println("Bob: " + error);
+    public String noSearchResults() {
+        return "Bob: I could not find such a task, did you even tell me about it?????";
     }
 
-    public void noSearchResults() {
-        System.out.println("Bob: I could not find such a task, did you even tell me about it?????");
+    /**
+     * Prints reply when there are search results.
+     */
+    public String searchHasResults() {
+        return "Bob: I found these tasks";
     }
 
-    public void searchHasResults() {
-        System.out.println("Bob: I found these tasks");
+    /**
+     * Prints the user input line.
+     */
+    public String userReply() {
+        return "You: ";
     }
 
-    public void userReply() {
-        line();
-        System.out.print("You: ");
+    public String noTasks() {
+        return "\tNo tasks saved previously~";
+    }
+    public String printTask(Task task) {
+        return "\t" + task.printStatus();
     }
 
-    public void noTasks() {
-        System.out.println("\tNo tasks saved previously~");
-    }
-    public void printTask(Task task) {
-        System.out.println("\t" + task.printStatus());
+    public String finishTask() {
+        return "Bob: Great job in completing your task! I've marked it as done. ᕕ(⌐■_■)ᕗ ♪♬";
     }
 
-    public void finishTask() {
-        System.out.println("Bob: Great job in completing your task! I've marked it as done. ᕕ(⌐■_■)ᕗ ♪♬");
+    public String free() {
+        return "Bob: You are very free rn \t※\\(^o^)/※";
     }
 
-    public void free() {
-        System.out.println("Bob: You are very free rn \t※\\(^o^)/※");
+    public String doneBefore() {
+        return "Bob: You already did this task... or did you? (ಠ_⊙)";
     }
 
-    public void doneBefore() {
-        System.out.println("Bob: You already did this task... or did you? (ಠ_⊙)");
+    /**
+     * Prints reply when task is deleted.
+     */
+    public String deletedTask() {
+        return "Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ";
     }
 
-    public void deletedTask() {
-        System.out.println("Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ");
+    /**
+     * Prints reply when a new task is added.
+     *
+     * @param newTask a task that has been created
+     * @param tasks the list of tasks the user has
+     */
+    public String newTask(Task newTask, TaskList tasks) {
+        return "Bob: I have added " + newTask + " to your tasks! You have " + tasks.size() + " tasks now "
+                + "._.)/\\(._.\n";
     }
 
-    public void newTask(Task newTask, TaskList tasks) {
-        System.out.print("Bob: I have added " + newTask + " to your tasks! You have " + tasks.size() + " tasks now "
-                + "._.)/\\(._.\n");
+    public String preListReply() {
+        return "Bob: Okay, these are your tasks";
     }
 
-    public void preListReply() {
-        System.out.println("Bob: Okay, these are your tasks");
+    public String postListFace() {
+        return "      (づ｡◕‿‿◕｡)づ";
     }
 
-    public void postListFace() {
-        System.out.println("      (づ｡◕‿‿◕｡)づ");
+    public String say(String input) {
+        return input;
     }
 
-    public void say(String input) {
-        System.out.println(input);
-    }
-
-    public void sayBye() {
-        System.out.println("Bob: "+ "bye bye c u next time (ʘ‿ʘ)╯ \n" + lineSplit);
+    public String sayBye() {
+        return "Bob: " + "bye bye c u next time (ʘ‿ʘ)╯ \n";
     }
 }

@@ -1,15 +1,15 @@
 package bob.command;
 
-import bob.exception.BobException;
 import bob.Storage;
-import bob.Task.Task;
 import bob.TaskList;
 import bob.Ui;
+import bob.exception.BobException;
+import bob.task.Task;
 /**
  * {@inheritDoc}
  */
 public class DeleteCommand extends Command {
-    public int index;
+    private int index;
     public DeleteCommand(int index) {
         this.index = index;
     }
@@ -18,11 +18,13 @@ public class DeleteCommand extends Command {
      * Removes the task from the task list and updates the store.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws BobException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task toDelete = tasks.getTask(index);
         tasks.deleteTask(toDelete);
         store.updateStore(tasks);
-        ui.deletedTask();
-        ui.printTask(toDelete);
+        StringBuilder reply = new StringBuilder();
+        reply.append(ui.deletedTask() + "\n");
+        reply.append(ui.printTask(toDelete));
+        return reply.toString();
     }
 }
