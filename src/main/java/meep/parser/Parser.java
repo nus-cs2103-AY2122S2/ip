@@ -139,33 +139,47 @@ public class Parser {
             break;
         case MarkCommand.COMMAND_WORD:
             if (commandLen == 2) {
-                return new MarkCommand(parseListIndex(arr[1], tasks));
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                return new MarkCommand(index);
             }
             break;
         case UnmarkCommand.COMMAND_WORD:
             if (commandLen == 2) {
-                return new UnmarkCommand(parseListIndex(arr[1], tasks));
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                return new UnmarkCommand(index);
             }
             break;
         case DeleteCommand.COMMAND_WORD:
             if (commandLen == 2) {
-                return new DeleteCommand(parseListIndex(arr[1], tasks));
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                return new DeleteCommand(index);
             }
             break;
         case AddCommand.COMMAND_TODO:
             if (commandLen == 2) {
-                return new AddCommand(new ToDo(checkEmptyTask(arr[1])));
+                String taskTitle = checkEmptyTask(arr[1]);
+                assert taskTitle.length() > 0 : "task title should not be empty";
+                return new AddCommand(new ToDo(taskTitle));
             }
             break;
         case AddCommand.COMMAND_DEADLINE:
             String[] deadline = parseTaskFormat(arr[1]);
+            assert deadline.length == 2 : "arr length should be 2";
             String deadlineDate = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
-            return new AddCommand(new Deadline(checkEmptyTask(deadline[0]), parseDate(deadlineDate)));
+            String deadlineTitle = checkEmptyTask(deadline[0]);
+            assert deadlineTitle.length() > 0 : "task title should not be empty";
+            return new AddCommand(new Deadline(deadlineTitle, parseDate(deadlineDate)));
             // Fallthrough
         case AddCommand.COMMAND_EVENT:
             String[] event = parseTaskFormat(arr[1]);
+            assert event.length == 2 : "arr length should be 2";
             String eventDate = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
-            return new AddCommand(new Event(checkEmptyTask(event[0]), parseDate(eventDate)));
+            String eventTitle = checkEmptyTask(event[0]);
+            assert eventTitle.length() > 0 : "task title should not be empty";
+            return new AddCommand(new Event(eventTitle, parseDate(eventDate)));
             // Fallthrough
         case FindCommand.COMMAND_WORD:
             if (commandLen == 2) {
