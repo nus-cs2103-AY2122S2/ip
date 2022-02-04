@@ -45,5 +45,4 @@ public class Duke {
         System.out.println("Hello! I'm Duke :) \nWhat can I do for you? :D");
         new Duke("data.txt").run();
     }
-    //test
 }
