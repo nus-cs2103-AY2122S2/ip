@@ -6,7 +6,7 @@ package ann.commands;
  * @author Hong Anh
  * @version 0.1
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int index;
 
     /**

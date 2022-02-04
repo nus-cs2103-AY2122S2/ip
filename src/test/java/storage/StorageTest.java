@@ -1,10 +1,11 @@
 package storage;
 
-import ann.storage.Storage;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import ann.storage.Storage;
 
 public class StorageTest {
 
@@ -13,7 +14,7 @@ public class StorageTest {
         try {
             Storage storage = new Storage("data", "hello");
             fail();
-        } catch (Exception e){
+        } catch (Exception e) {
             assertEquals("Storage file should end with '.txt'", e.getMessage());
         }
     }

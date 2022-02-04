@@ -6,8 +6,7 @@ package ann.commands;
  * @author Hong Anh
  * @version 0.1
  */
-public class ListCommand extends Command{
-
+public class ListCommand extends Command {
     /**
      * Creates a new ListCommand.
      */

@@ -6,7 +6,7 @@ package ann.commands;
  * @author Hong Anh
  * @version 0.1
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Creates a new ExitCommand.

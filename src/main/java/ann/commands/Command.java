@@ -9,10 +9,9 @@ import ann.data.TaskList;
  * @version 0.1
  */
 public abstract class Command {
-    private String message;
     /** Represents the task list that the user is giving commands on. */
     protected TaskList taskList;
-
+    private String message;
     /**
      * Sets the 'message' field to the given string.
      *

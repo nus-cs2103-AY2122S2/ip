@@ -31,7 +31,6 @@ public class Ann {
 
     /**
      * Drives the program.
-     * 
      * @param args the initial input (folder and file name for storage).
      */
     private void run(String[] args) {
@@ -42,7 +41,6 @@ public class Ann {
 
     /**
      * Starts the program by initializing the user interface, storage and task list.
-     * 
      * @param args the initial input (folder and file name for storage).
      */
     public void start(String[] args) {

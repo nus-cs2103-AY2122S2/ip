@@ -1,9 +1,9 @@
 package ann.commands;
 
-import ann.data.tasks.TaskType;
-import ann.data.tasks.Task;
-import ann.data.tasks.Event;
 import ann.data.tasks.Deadline;
+import ann.data.tasks.Event;
+import ann.data.tasks.Task;
+import ann.data.tasks.TaskType;
 
 /**
  * Represents a user command to add a task to the user's task list.
@@ -11,7 +11,7 @@ import ann.data.tasks.Deadline;
  * @author Hong Anh
  * @version 0.1
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     /** Represents the type of task being added. */
     private TaskType taskType;
     /** Represents the task being added. */
@@ -36,14 +36,14 @@ public class AddCommand extends Command{
      */
     private void setTask(String[] taskComponents) {
         switch (taskType) {
-        case TODO:
-            task = new Task(taskComponents[0]);
+        case EVENT:
+            task = new Event(taskComponents[0], taskComponents[1]);
             break;
         case DEADLINE:
             task = new Deadline(taskComponents[0], taskComponents[1]);
             break;
-        case EVENT:
-            task = new Event(taskComponents[0], taskComponents[1]);
+        default:
+            task = new Task(taskComponents[0]);
         }
     }
 

@@ -1,6 +1,6 @@
 package ann.commands;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String findKeyWords;
 
     public FindCommand(String kw) {
