@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
 
@@ -17,7 +18,7 @@ public class DeadlineTask extends Task {
     private void updateDescription() {
         this.description += this.getInfo();
         this.description += "(by: ";
-        this.description += this.getDate();
+        this.description += this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         this.description += ")";
     }
 
