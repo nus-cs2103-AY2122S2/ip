@@ -1,58 +1,58 @@
 package duke;
-import java.util.Scanner;
 
 import duke.command.Command;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
-import duke.misc.Quote;
+import javafx.scene.image.Image;
 
 public class Duke {
     private TaskList userTaskList;
     private FileManager fileManager;
     private Ui ui;
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    public Duke() {
+
+    }
+
     /**
      * Duke Constructor
      *
      * @param savedTasksPath final path of saved tasks file
      */
-    public Duke(String savedTasksPath) {
-        this.userTaskList = new TaskList();
+    public Duke(String savedTasksPath) throws DukeException {
+        this.ui = new Ui();
         this.fileManager = new FileManager(savedTasksPath);
-        ui = new Ui();
-    }
-
-    /**
-     * Main duke run method which starts duke Chat Bot
-     *
-     * @throws DukeException if exceptions occur throughout the program
-     */
-    public void run() throws DukeException {
-        Scanner sc = new Scanner(System.in);
         this.userTaskList = this.fileManager.loadTasks();
-        Parser parser = new Parser();
-        ui.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
-        Quote quoteOfTheDay = new Quote();
-        // duke.print(quoteOfTheDay.generateQuote());
-        ui.print("What can i do for you today?");
-        while (true) {
-            try {
-                String userTaskString = sc.nextLine();
-                Command c = parser.parseUserCommand(userTaskString);
-                c.executeTask(this.userTaskList, this.fileManager);
-            } catch (DukeException exception) {
-                ui.print(exception);
-            }
-        }
     }
 
     /**
      * Main method which runs duke
+     *
      * @param args
      * @throws DukeException
      */
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("./data/duke.txt");
-        duke.run();
+        // duke.run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String userTaskString) {
+        String dukeResponse = null;
+        try {
+            Parser parser = new Parser();
+            Command c = parser.parseUserCommand(userTaskString);
+            c.executeTask(this.userTaskList, this.fileManager);
+            dukeResponse = this.userTaskList.getUi().returnResponse();
+        } catch (DukeException exception) {
+            return exception.toString();
+        }
+        return dukeResponse;
     }
 }

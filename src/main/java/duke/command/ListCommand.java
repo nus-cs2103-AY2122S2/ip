@@ -4,7 +4,6 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class ListCommand extends Command {
-    private int taskIdx;
 
     /**
      * Consturctor for ListCommand
