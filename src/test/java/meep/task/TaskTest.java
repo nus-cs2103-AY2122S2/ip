@@ -47,17 +47,17 @@ public class TaskTest {
 
     @Test
     public void generateTaskList_withoutDate_success() {
-        String expected = "\n     1.  [D][ ] test1 (by: Jul 29 2015 19:30)\n"
-                + "     2.  [E][ ] test2 (on: Jul 29 2015 19:30)\n"
-                + "     3.  [T][ ] test3\n";
+        String expected = "\n     1.  [ D ][   ] test1 (by: Jul 29 2015 19:30)\n"
+                + "     2.  [ E ][   ] test2 (on: Jul 29 2015 19:30)\n"
+                + "     3.  [ T ][   ] test3\n";
 
         assertEquals(expected, tasks.generateTaskList());
     }
 
     @Test
     public void generateTaskList_withDateGiven_success() {
-        String expected = "\n     1.  [D][ ] test1 (by: Jul 29 2015 19:30)\n"
-                + "     2.  [E][ ] test2 (on: Jul 29 2015 19:30)\n";
+        String expected = "\n     1.  [ D ][   ] test1 (by: Jul 29 2015 19:30)\n"
+                + "     2.  [ E ][   ] test2 (on: Jul 29 2015 19:30)\n";
 
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
