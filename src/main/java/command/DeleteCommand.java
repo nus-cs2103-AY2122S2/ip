@@ -34,18 +34,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+
         if (this.index > 0 && this.index <= tasks.size()) {
+            String taskMessage = ui.getTaskMessage(tasks.get(index - 1));
             tasks.removeTask(this.index - 1);
             try {
                 storage.store(tasks);
+                this.response = new Response(ui.getResponseMessage("delete"),
+                        taskMessage,
+                        ui.getTasksCountMessage(tasks));
             } catch (DukeException e) {
                 e.printStackTrace();
             }
-            this.response = new Response(ui.getResponseMessage("delete"),
-                    ui.getTaskMessage(tasks.get(index - 1)),
-                    ui.getTasksCountMessage(tasks));
         } else {
-            ui.showInvalidRange();
+            this.response = new Response(ui.showInvalidRange());
         }
     }
 

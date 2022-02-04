@@ -123,15 +123,15 @@ public class Ui {
     public String getResponseMessage(String res) {
         switch (res) {
         case "mark":
-            return "Nice! I've marked this task as done:";
+            return "Nice! I've marked this task as done:\n";
         case "unmark":
-            return "OK, I've marked this task as not done yet:";
+            return "OK, I've marked this task as not done yet:\n";
         case "delete":
-            return "Noted. I've removed this java.task:";
+            return "Noted. I've removed this task:\n";
         case "todo":
         case "deadline":
         case "event":
-            return "Got it. I've added this task:";
+            return "Got it. I've added this task:\n";
         default:
             return "Sorry! I do not really have a response for you :(";
         }
@@ -150,15 +150,15 @@ public class Ui {
     /**
      * Displays final message when the program is terminated.
      */
-    public void showTerminatingMessage () {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String getTerminatingMessage () {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Displays loading error message when cache file cannot be located.
      */
     public void showLoadingError() {
-        System.out.println("Cache conversation not detected. Creating a new session with duke.Duke bot.");
+        System.out.println("Cache conversation not detected. Creating a new session with duke.Duke bot.\n");
     }
 
     /**
@@ -168,14 +168,14 @@ public class Ui {
      * @return String response of the bot
      */
     public String getTasksCountMessage(TaskList tasks) {
-        return "Now you have " + tasks.size() + " task(s) in the list.";
+        return "Now you have " + tasks.size() + " task(s) in the list.\n";
     }
 
     /**
      * Displays invalid TaskList index range message.
      */
-    public void showInvalidRange() {
-        System.out.println("Invalid number. Try again!");
+    public String showInvalidRange() {
+        return "Invalid number. Try again!";
     }
 
     /**

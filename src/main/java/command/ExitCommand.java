@@ -2,6 +2,7 @@ package command;
 
 import storage.Storage;
 import task.TaskList;
+import ui.Response;
 import ui.Ui;
 
 /**
@@ -19,7 +20,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTerminatingMessage();
+        this.response = new Response(ui.getTerminatingMessage());
         setIsExit(true);
     }
 
