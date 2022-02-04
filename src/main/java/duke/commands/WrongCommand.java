@@ -25,9 +25,9 @@ public class WrongCommand extends Command<String> {
     /**
      * Unused
      *
-     * @param todoList the user's list of Tasks
+     * @param toDoList the user's list of Tasks
      * @param cmd      the user input to Burp
      */
-    public void runCommand(TaskList todoList, String cmd) {
+    public void runCommand(TaskList toDoList, String cmd) {
     }
 }

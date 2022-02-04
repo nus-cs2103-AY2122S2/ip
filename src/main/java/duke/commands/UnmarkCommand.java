@@ -1,7 +1,10 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.main.DukeException;
 import duke.main.Parser;
+import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.tasks.Task;
@@ -11,6 +14,8 @@ import duke.tasks.Task;
  * This Command is used to Mark a certain Task as being not done.
  */
 public class UnmarkCommand extends Command<Integer> {
+    private final Storage storage;
+
     /**
      * Constructor for UnmarkCommand.
      * When this class is instantiated, it automatically runs runCommand().
@@ -19,7 +24,8 @@ public class UnmarkCommand extends Command<Integer> {
      * @param numberToUnmark the item number to unmark
      * @throws DukeException when the item number to unmark does not exist
      */
-    public UnmarkCommand(TaskList toDoList, Integer numberToUnmark) throws DukeException {
+    public UnmarkCommand(TaskList toDoList, Integer numberToUnmark, Storage storage) throws DukeException {
+        this.storage = storage;
         this.runCommand(toDoList, numberToUnmark);
     }
 
@@ -40,9 +46,12 @@ public class UnmarkCommand extends Command<Integer> {
 
             // Print out the formatted message after unmarking
             Ui.setDukeResponse(Parser.formatMsg("OK, I've marked this task as not done yet:\n" + taskToUnmark));
+            storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
             Ui.setDukeResponseError(Parser.formatMsg("OOPS!!! Item to unmark does not exist."));
             throw new DukeException(Parser.formatMsg("OOPS!!! Item to unmark does not exist."));
+        } catch (IOException e) {
+            throw new DukeException(Parser.formatMsg("IOException caught") + e);
         }
     }
 }
