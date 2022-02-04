@@ -16,10 +16,10 @@ class Deadline extends Task {
     public String toString() {
         if (super.getStatus() == 1) {
             return "[D][X] " + super.getName() + " (by: "
-                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
+                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         } else {
             return "[D][ ] " + super.getName() + " (by: "
-                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
+                    + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         }
     }
 }

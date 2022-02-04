@@ -21,10 +21,10 @@ class Event extends Task {
     public String toString() {
         if (super.getStatus() == 1) {
             return "[E][X] " + super.getName() + " (at: "
-                    + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
+                    + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         } else {
             return "[E][ ] " + super.getName() + " (at: "
-                    + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")\n";
+                    + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         }
     }
 }

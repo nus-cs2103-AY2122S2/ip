@@ -30,9 +30,9 @@ class Task implements Serializable {
     @Override
     public String toString() {
         if (status == 1) {
-            return "[X] " + name + "\n";
+            return "[X] " + name;
         } else {
-            return "[ ] " + name + "\n";
+            return "[ ] " + name;
         }
     }
 }
