@@ -4,7 +4,10 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.glass.ui.PlatformFactory;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +20,7 @@ import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Duke extends Application {
     private ScrollPane scrollPane;
@@ -116,6 +120,12 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        if (isGoodbye) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished( event -> Platform.exit());
+            delay.play();
+        }
     }
 
     /**
@@ -123,8 +133,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-
-
         Parser p = new Parser(input);
         ParsedAnswer pa = p.parse();
 
