@@ -52,7 +52,7 @@ public abstract class Task {
     public static Task importFromString(String exportedTask)
         throws DukeException {
         String[] details = exportedTask.split(" ");
-        Task task = null;
+        Task task;
         switch (TaskType.valueOf(details[0])) {
         case TODO:
             task = new Todo(details[1]);

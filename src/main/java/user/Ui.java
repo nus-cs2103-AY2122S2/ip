@@ -89,20 +89,15 @@ public class Ui {
      */
     public String[] displayTasks() {
         String[] result;
-        // printIndent(SEPARATOR);
         if (tasklist.getNumTasks() == 0) {
-            // printIndent("You have no tasks!");
             result = new String[] {"You have no tasks!"};
         } else {
             result = new String[1 + tasklist.getNumTasks()];
-            // printIndent("Here are the tasks in your list:");
             result[0] = "Here are the tasks in your list:";
             for (int i = 0; i < tasklist.getNumTasks(); i++) {
-                // printIndent(String.format("%d. %s", i + 1, tasklist.getTask(i)));
                 result[i + 1] = String.format("%d. %s", i + 1, tasklist.getTask(i));
             }
         }
-        // printIndent(SEPARATOR + "\n");
         return result;
     }
 
@@ -113,20 +108,15 @@ public class Ui {
      */
     public String[] displayFoundTasks(ArrayList<Task> foundTasks) {
         String[] result;
-        // printIndent(SEPARATOR);
         if (foundTasks.size() == 0) {
-            // printIndent("No tasks are found!");
             result = new String[] {"No tasks are found!"};
         } else {
             result = new String[1 + foundTasks.size()];
-            // printIndent("Here are the matching tasks in your list:");
             result[0] = "Here are the matching tasks in your list:";
             for (int i = 0; i < foundTasks.size(); i++) {
-                // printIndent(String.format("%d. %s", i + 1, foundTasks.get(i)));
                 result[i + 1] = String.format("%d. %s", i + 1, foundTasks.get(i));
             }
         }
-        // printIndent(SEPARATOR + "\n");
         return result;
     }
 
