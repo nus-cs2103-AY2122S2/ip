@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -32,12 +33,12 @@ public class MarkCommand extends Command {
     /**
      * Executes the mark/unmark command using TaskList object.
      *
-     * @param taskList TaskList input taskList object from Duke.
-     * @param ui       Ui input ui object from Duke.
-     * @param storage  Storage input storage object from Duke.
+     * @param taskList TaskList input taskList object from duke.Duke.
+     * @param ui       Ui input ui object from duke.Duke.
+     * @param storage  Storage input storage object from duke.Duke.
      */
     @Override
-    public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
+    public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (mark.equals(Mark.MARK)) {
             taskList.markTask(index);
             storage.save(taskList);

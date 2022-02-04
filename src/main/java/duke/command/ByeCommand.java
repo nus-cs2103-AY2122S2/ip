@@ -17,11 +17,11 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Shows UI for bye command. Duke and Parser handles the termination.
+     * Shows UI for bye command. duke.Duke and Parser handles the termination.
      *
-     * @param taskList TaskList input taskList object from Duke.
-     * @param ui Ui input ui object from Duke.
-     * @param storage Storage input storage object from Duke.
+     * @param taskList TaskList input taskList object from duke.Duke.
+     * @param ui Ui input ui object from duke.Duke.
+     * @param storage Storage input storage object from duke.Duke.
      */
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {

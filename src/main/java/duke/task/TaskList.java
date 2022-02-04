@@ -1,10 +1,10 @@
 package duke.task;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import duke.exception.DukeInvalidArgumentException;
 import duke.ui.Ui;
-
 
 
 /**
@@ -68,17 +68,13 @@ public class TaskList {
      *
      * @param index Index of the task to mark (starts from 1).
      */
-    public void markTask(int index) {
+    public void markTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
             Ui.printDivider();
             System.out.println("    No tasks are in the list right now!");
             Ui.printDivider();
         } else if (index < 1 || index > tasks.size()) {
-            try {
-                throw new DukeInvalidArgumentException("index is not in the list");
-            } catch (DukeInvalidArgumentException e) {
-                System.out.println(e.toString());
-            }
+            throw new DukeInvalidArgumentException("index is not in the list");
         }
         tasks.get(index - 1).mark();
     }
@@ -88,17 +84,13 @@ public class TaskList {
      *
      * @param index Index of the task to unmark (starts from 1).
      */
-    public void unmarkTask(int index) {
+    public void unmarkTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
             Ui.printDivider();
             System.out.println("    No tasks are in the list right now!");
             Ui.printDivider();
         } else if (index < 1 || index > tasks.size()) {
-            try {
-                throw new DukeInvalidArgumentException("index is not in the list");
-            } catch (DukeInvalidArgumentException e) {
-                System.out.println(e.toString());
-            }
+            throw new DukeInvalidArgumentException("index is not in the list");
         }
         tasks.get(index - 1).unmark();
     }
@@ -119,17 +111,13 @@ public class TaskList {
      *
      * @param index Index of the task to be deleted (starts from 1)
      */
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
             Ui.printDivider();
             System.out.println("    No tasks are in the list right now!");
             Ui.printDivider();
         } else if (index < 1 || index > tasks.size()) {
-            try {
-                throw new DukeInvalidArgumentException("index is not in the list");
-            } catch (DukeInvalidArgumentException e) {
-                System.out.println(e.toString());
-            }
+            throw new DukeInvalidArgumentException("index is not in the list");
         } else {
             Task removedTask = tasks.remove(index - 1);
             ui.showUiForDelete(removedTask, tasks.size());

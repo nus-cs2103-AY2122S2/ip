@@ -30,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * Loads the duke.txt file to get data from previous runs of Duke.
+     * Loads the duke.txt file to get data from previous runs of duke.Duke.
      *
      * @return ArrayList of Tasks ArrayList that is populated with duke.txt save file.
      * @throws FileNotFoundException Exception thrown when file is not found.

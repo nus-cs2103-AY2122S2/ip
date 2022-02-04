@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Exceptions raised by features of Duke chatbot extends this class.
+ * Exceptions raised by features of duke.Duke chatbot extends this class.
  */
 public class DukeException extends Exception {
     /**
