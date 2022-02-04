@@ -112,6 +112,8 @@ public class Storage {
             } else if (parts[0].equals("E")) {
                 result.add(new Event(parts[2],
                         parts[1].equals("1"), parser.parseDate(parts[3])));
+            } else {
+                throw new AssertionError("Invalid Task!");
             }
         }
 
@@ -144,6 +146,8 @@ public class Storage {
                     fw.write("E | " + (task.isDone() ? "1 | " : "0 | ")
                             + task.getTitle() + " | "
                             + ((Event) task).getDate().format(format) + System.lineSeparator());
+                } else {
+                    throw new AssertionError("Invalid Task!");
                 }
             }
 
