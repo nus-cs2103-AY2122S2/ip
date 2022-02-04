@@ -35,11 +35,7 @@ public class Storage {
     private void loadTask() throws IOException {
         try {
             Path path = Paths.get(".", "data", "duke.txt");
-
-            if (Files.notExists(path)) {
-                Files.createDirectories(Paths.get(".", "data"));
-                Files.createFile(path);
-            }
+            createPathIfNotExist(path);
 
             List<String> list = Files.readAllLines(path);
 
@@ -47,28 +43,32 @@ public class Storage {
                 if (s.equals("")) {
                     continue;
                 }
+
                 if (s.charAt(0) == 'T') {
-                    String[] temp = s.split(" ", 3);
-                    tasks.addTask(Command.TODO, temp[2], false);
-                    if (temp[1].charAt(1) == '1') {
-                        tasks.markAsDone(String.valueOf(tasks.size()), false);
-                    }
+                    addToList(s, Command.TODO);
                 } else if (s.charAt(0) == 'D') {
-                    String[] temp = s.split(" ", 3);
-                    tasks.addTask(Command.DEADLINE, temp[2], false);
-                    if (temp[1].charAt(1) == '1') {
-                        tasks.markAsDone(String.valueOf(tasks.size()), false);
-                    }
+                    addToList(s, Command.DEADLINE);
                 } else if (s.charAt(0) == 'E') {
-                    String[] temp = s.split(" ", 3);
-                    tasks.addTask(Command.EVENT, temp[2], false);
-                    if (temp[1].charAt(1) == '1') {
-                        tasks.markAsDone(String.valueOf(tasks.size()), false);
-                    }
+                    addToList(s, Command.EVENT);
                 }
             }
         } catch (DukeException ignored) {
             //meant to be empty
+        }
+    }
+
+    private void createPathIfNotExist(Path path) throws IOException {
+        if (Files.notExists(path)) {
+            Files.createDirectories(Paths.get(".", "data"));
+            Files.createFile(path);
+        }
+    }
+
+    private void addToList(String task, Command command) throws DukeException {
+        String[] temp = task.split(" ", 3);
+        tasks.addTask(command, temp[2], false);
+        if (temp[1].charAt(1) == '1') {
+            tasks.markAsDone(String.valueOf(tasks.size()), false);
         }
     }
 

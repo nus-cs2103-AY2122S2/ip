@@ -38,21 +38,11 @@ public class DialogBox extends HBox {
         dialog = new Label(text);
         displayPicture = new ImageView(img);
 
-        dialog.setWrapText(true);
-        dialog.setFont(new Font(10));
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
-
-        this.displayPicture.setFitWidth(90);
-        this.displayPicture.setFitHeight(90);
-
-        this.setSpacing(15);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(dialog, displayPicture);
-        this.setBackground(new Background(
-                new BackgroundFill(Color.BEIGE,
-                        new CornerRadii(1),
-                        new Insets(5, 0, 0, 0))));
+        initializeDialog();
+        initializePicture();
+        formatDialogBox();
     }
+
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -69,4 +59,25 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-}
+
+    private void formatDialogBox() {
+        this.setSpacing(15);
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(dialog, displayPicture);
+        this.setBackground(new Background(
+                new BackgroundFill(Color.BEIGE,
+                        new CornerRadii(1),
+                        new Insets(5, 0, 0, 0))));
+    }
+
+    private void initializeDialog() {
+        dialog.setWrapText(true);
+        dialog.setFont(new Font(10));
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+    }
+
+    private void initializePicture() {
+        displayPicture.setFitWidth(90);
+        displayPicture.setFitHeight(90);
+    }
+ }

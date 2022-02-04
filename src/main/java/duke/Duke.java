@@ -44,13 +44,7 @@ public class Duke {
 
             switch (command) {
             case BYE:
-                try {
-                    storage.saveTask();
-                    isAlive = false;
-                    return ui.formatFeedbackMessage("\n\tBye. Hope to see you again soon!\n");
-                } catch (IOException e) {
-                    return ui.formatFeedbackMessage("\n\tError saving duke.txt file.\n");
-                }
+                return ui.formatFeedbackMessage(exitProgram());
             case LIST:
                 return ui.formatFeedbackMessage(tasks.listTasks());
             case MARK:
@@ -90,6 +84,16 @@ public class Duke {
      */
     public String getResponse(String text) {
         return this.executeInstruction(text.trim());
+    }
+
+    private String exitProgram() {
+        try {
+            storage.saveTask();
+            isAlive = false;
+            return "\n\tBye. Hope to see you again soon!\n";
+        } catch (IOException e) {
+            return "\n\tError saving duke.txt file.\n";
+        }
     }
 
 }

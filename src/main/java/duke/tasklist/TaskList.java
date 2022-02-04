@@ -147,16 +147,18 @@ public class TaskList {
     public String markAsDone(String in, boolean canShowMessage) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
+            }
+
+            this.tasks.get(index - 1).setDone(true);
+
+            if (canShowMessage) {
+                return "\n\tNice! I've marked this task as done:\n\t\t"
+                        + this.tasks.get(index - 1).toString() + "\n";
             } else {
-                this.tasks.get(index - 1).setDone(true);
-                if (canShowMessage) {
-                    return "\n\tNice! I've marked this task as done:\n\t\t"
-                            + this.tasks.get(index - 1).toString() + "\n";
-                } else {
-                    return null;
-                }
+                return null;
             }
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
@@ -176,13 +178,14 @@ public class TaskList {
     public String unmarkDone(String in) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
-            } else {
-                this.tasks.get(index - 1).setDone(false);
-                return "\n\tOK, I've marked this task as not done yet:\n\t\t"
-                        + this.tasks.get(index - 1).toString() + "\n";
             }
+
+            this.tasks.get(index - 1).setDone(false);
+            return "\n\tOK, I've marked this task as not done yet:\n\t\t"
+                    + this.tasks.get(index - 1).toString() + "\n";
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
                     + "after typing unmark: unmark <taskNum>");
@@ -201,13 +204,14 @@ public class TaskList {
     public String deleteTask(String in) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
-            } else {
-                Task deleted = tasks.remove(index - 1);
-                return "\n\tNoted. I've removed this task:\n\t\t" + deleted.toString()
-                        + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
             }
+
+            Task deleted = tasks.remove(index - 1);
+            return "\n\tNoted. I've removed this task:\n\t\t" + deleted.toString()
+                    + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
                     + "after typing delete: delete <taskNum>");
