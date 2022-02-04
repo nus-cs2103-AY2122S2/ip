@@ -1,4 +1,4 @@
-package heylo.fileHandling;
+package heylo.storage;
 
 import java.io.FileWriter;
 import java.io.IOException;

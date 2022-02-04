@@ -1,6 +1,4 @@
-package heylo.fileHandling;
-
-import heylo.tasks.Task;
+package heylo.storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import heylo.tasks.Task;
+
 
 /**
  * Handles reading from files.

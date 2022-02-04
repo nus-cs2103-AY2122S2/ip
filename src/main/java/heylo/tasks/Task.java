@@ -1,9 +1,9 @@
 package heylo.tasks;
 
-import heylo.fileHandling.FilesReader;
-import heylo.fileHandling.FilesWriter;
-
 import java.util.ArrayList;
+
+import heylo.storage.FilesReader;
+import heylo.storage.FilesWriter;
 
 /**
  * Represents a task added by the user.
@@ -126,13 +126,21 @@ public abstract class Task {
         for (Task task : taskList) {
             if (task instanceof Todo) {
                 Todo todo = (Todo) task;
-                FilesWriter.writeToFile("T : " + (todo.isDone ? "1 : " : "0 : ") + todo.description + "\n");
+                FilesWriter.writeToFile("T : "
+                        + (todo.isDone ? "1 : " : "0 : ")
+                        + todo.description + "\n");
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                FilesWriter.writeToFile("E : " + (event.isDone ? "1 : " : "0 : ") + event.description + " : " + event.duration + "\n");
+                FilesWriter.writeToFile("E : "
+                        + (event.isDone ? "1 : " : "0 : ")
+                        + event.description + " : "
+                        + event.duration + "\n");
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                FilesWriter.writeToFile("D : " + (deadline.isDone ? "1 : " : "0 : ") + deadline.description + " : " + deadline.deadline + "\n");
+                FilesWriter.writeToFile("D : "
+                        + (deadline.isDone ? "1 : " : "0 : ")
+                        + deadline.description + " : "
+                        + deadline.deadline + "\n");
             }
         }
     }
@@ -158,8 +166,9 @@ public abstract class Task {
             Deadline deadline = new Deadline(input[2], input[3]);
             deadline.isDone = Integer.parseInt(input[1]) == 1;
             return deadline;
+        default:
+            return null;
         }
-        return null;
     }
 
     /**
@@ -192,6 +201,9 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Prints all the existing tasks as a numbered list.
+     */
     public static void printAllTasks() {
         if (taskCount == 0) {
             System.out.println(" You have not added any tasks yet.");

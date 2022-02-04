@@ -1,8 +1,8 @@
 package heylo.tasks;
 
-import heylo.util.DateFormatter;
-
 import java.time.LocalDate;
+
+import heylo.util.DateFormatter;
 
 /**
  * Represents a task with a deadline.

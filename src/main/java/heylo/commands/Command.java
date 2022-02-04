@@ -1,11 +1,11 @@
 package heylo.commands;
 
+import java.util.Scanner;
+
 import heylo.tasks.Deadline;
 import heylo.tasks.Event;
 import heylo.tasks.Task;
 import heylo.tasks.Todo;
-
-import java.util.Scanner;
 
 /**
  * Represents a commands input by the user in the command line.
@@ -51,6 +51,7 @@ public class Command {
             System.out.println(" See you again! :)");
             sc.close();
             System.exit(0);
+            break;
         case "list":
             Task.printAllTasks();
             break;
