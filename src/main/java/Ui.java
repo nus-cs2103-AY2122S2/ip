@@ -33,6 +33,7 @@ public class Ui {
      */
     public static void printAddTask(Task task) {
         System.out.println(Ui.line());
+        System.out.println("Added:");
         System.out.println(task.toString());
         System.out.println(Ui.line());
     }
