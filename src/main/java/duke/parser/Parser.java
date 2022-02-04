@@ -1,6 +1,5 @@
 package duke.parser;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import duke.command.AddCommand;
@@ -93,6 +92,7 @@ public class Parser {
         }
         switch(taskType) {
         case "deadline":
+            assert args[1].contains("/by") : "Deadline should contain '/by'";
             String[] deadline = args[1].split("/by");
             if (deadline.length == 0 || deadline[0].isBlank()) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
@@ -100,6 +100,7 @@ public class Parser {
             checkIfDateExists(deadline.length);
             return new AddCommand(new Deadline(deadline[0].trim(), parseDate(deadline[1])));
         case "event":
+            assert args[1].contains("/at") : "Event should contain '/at'";
             String[] event = args[1].split("/at");
             if (event.length == 0 || event[0].isBlank()) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);

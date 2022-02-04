@@ -61,6 +61,7 @@ public class Storage {
                     tasks.add(new Event(args[2], args[1].equals("1"), LocalDate.parse(args[3])));
                     break;
                 default:
+                    assert args[0].equals("T");
                     tasks.add(new Todo(args[2], args[1].equals("1")));
                 }
             }
@@ -105,6 +106,7 @@ public class Storage {
             }
 
             Files.createFile(filePath);
+            assert Files.exists(filePath) : "File should exist in the given path";
         } catch (IOException e) {
             throw new StorageException(ErrorMessage.MESSAGE_FILE_SAVE_ERROR + filePath);
         }
