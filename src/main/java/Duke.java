@@ -11,7 +11,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Init file if it is not there
-        File f = new File("./tasklist.txt");
+        File f = new File("tasklist.txt");
         if (!f.isFile()) {
             try {
                 f.createNewFile();
