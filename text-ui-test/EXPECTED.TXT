@@ -5,3 +5,71 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+  > Heya! I'm Duke!
+What can I do for ya?
+
+  > Sorry, I don't quite understand what you mean by 'task'
+
+  > added task: [T][ ] Task 1
+
+  > I can't read your mind, doc! Not yet, anyway.
+
+  > You're gonna need to be more specific.
+Try 'deadline A task /by Sunday'
+
+  > added deadline: [D][ ] Task 2 (by: 8 pm)
+
+  > You're gonna need to be more specific.
+Try 'event An event /at 7PM'
+
+  > You're gonna need to be more specific.
+Don't forget the event's name
+
+  > added event: [E][ ] Event 3 (at: 4 pm, Sunday)
+
+  > You're gonna need to be more specific.
+Which task do you want me to mark as done?
+Try 'mark 2'
+
+  > You need to give me a number doc!
+Try 'mark 2'
+
+  > Cool! You've done this task:
+  [T][X] Task 1
+
+  > Cool! You've done this task:
+  [D][X] Task 2 (by: 8 pm)
+
+  > You're gonna need to be more specific.
+Which task do you want me to mark as undone?
+Try 'unmark 1'
+
+  > This task is now undone:
+  [T][ ] Task 1
+
+  > 1. [T][ ] Task 1
+
+  > 2. [D][X] Task 2 (by: 8 pm)
+
+  > 3. [E][ ] Event 3 (at: 4 pm, Sunday)
+
+  > You're gonna need to be more specific.
+Which task do you want me to delete?
+Try 'delete 3'
+
+  > Memory address requested out of bounds!
+
+  > removed: [T][ ] Task 1
+
+  > This task is now undone:
+  [D][ ] Task 2 (by: 8 pm)
+
+  > Cool! You've done this task:
+  [E][X] Event 3 (at: 4 pm, Sunday)
+
+  > 1. [D][ ] Task 2 (by: 8 pm)
+
+  > 2. [E][X] Event 3 (at: 4 pm, Sunday)
+
+  > Ok then, see ya!
+

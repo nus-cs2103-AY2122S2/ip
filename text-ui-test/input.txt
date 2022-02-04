@@ -1,0 +1,22 @@
+task 1
+todo Task 1
+
+deadline Task 2
+deadline Task 2 /by 8 pm
+event Event 3 /at
+event  /at 4 pm, Sunday
+event Event 3 /at 4 pm, Sunday
+mark
+mark task 1
+mark 1
+mark 2
+unmark
+unmark 1
+list please
+delete
+delete 4
+delete 1
+unmark 1
+mark 2
+list
+bye
