@@ -8,18 +8,19 @@ public class Deadline extends Task{
         this.by = by;
     }
 
-    public Deadline(String task, boolean done) {
+    public Deadline(String task, LocalDate by, boolean done) {
         super(task, done);
+        this.by = by;
     }
 
     @Override
     public Deadline mark() {
-        return new Deadline(task, true);
+        return new Deadline(task, by, true);
     }
 
     @Override
     public Deadline unmark() {
-        return new Deadline(task, false);
+        return new Deadline(task, by, false);
     }
 
     @Override

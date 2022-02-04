@@ -8,18 +8,19 @@ public class Event extends Task{
         this.at = at;
     }
 
-    public Event(String task, boolean done) {
+    public Event(String task, LocalDate at, boolean done) {
         super(task, done);
+        this.at = at;
     }
 
     @Override
     public Event mark() {
-        return new Event(task, true);
+        return new Event(task, at,true);
     }
 
     @Override
     public Event unmark() {
-        return new Event(task, false);
+        return new Event(task, at, false);
     }
 
     @Override

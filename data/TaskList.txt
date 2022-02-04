@@ -1,5 +1,6 @@
 T | 1 | read book
 D | 0 | return book | 2022-12-20
-E | 0 | project meeting | 2022-12-21
+E | 0 | project meeting | 2022-12-20
 T | 1 | join sports club
 T | 0 | borrow book
+E | 1 | group meeting | 1234-12-21
