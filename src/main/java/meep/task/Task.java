@@ -69,6 +69,6 @@ public class Task {
      */
     public String toString() {
         String isDone = (this.isDone) ? "X" : " ";
-        return "[" + isDone + "] " + getTitle();
+        return "[ " + isDone + " ] " + getTitle();
     }
 }

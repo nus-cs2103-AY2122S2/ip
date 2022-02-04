@@ -67,7 +67,7 @@ public class Storage {
             File dataFile = new File(path);
             dataFile.createNewFile(); // if file already exists will do nothing
         } catch (IOException e) {
-            throw new InvalidInputException("Sryy something is wrong when create your file.");
+            throw new InvalidInputException("Sry something is wrong when create your file.");
         }
     }
 

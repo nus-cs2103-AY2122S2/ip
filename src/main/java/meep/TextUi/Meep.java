@@ -1,17 +1,14 @@
-package meep;
+package meep.TextUi;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import meep.TextUi.Ui;
 import meep.commands.Command;
 import meep.commands.ExitCommand;
 import meep.exception.InvalidInputException;
 import meep.parser.Parser;
 import meep.storage.Storage;
 import meep.task.ListTask;
-
-
 
 
 /**
