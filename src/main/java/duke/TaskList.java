@@ -61,7 +61,8 @@ public class TaskList {
     /**
      * Command to signal to the program to close.
      */
-    public void bye() {
+    public void bye(Storage storage) {
+        storage.writeTasksToFile();
         String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
     }
@@ -209,19 +210,19 @@ public class TaskList {
      */
     public void help() {
         System.out.println("Looks like you need some help! Here is a list of commands that you can use!\n" +
-                "\n=> These are the utility commands that you can use!\n" +
-                "'save' : Use this to save all tasks that have been added to Duke into a local file.\n" +
-                "'bye'  : Use this to exit Duke. All tasks added will be saved upon this command as well.\n" +
-                "'list' : Use this to list out all the tasks added into Duke.\n" +
-                "'find *keyword*' : Use this to find all tasks with the *keyword*\n" +
-                "\n=> Next are the commands to use when you want to add a task!\n" +
-                "'todo *todo name*'  : Use this to add a todo task into Duke.\n" +
-                "'event *event name* /at *YYYY-MM-DD HH:MM*'       : Use this to add an event task into Duke.\n" +
-                "'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Use this to add a deadline task into Duke.\n" +
-                "\n=> Lastly, these are the commands to edit a task on Duke.\n" +
-                "'mark *task #*' : Use this to mark a task as completed.\n" +
-                "'unmark *task #*' : Use this to un-mark a task as incomplete.\n" +
-                "'delete *task #*' : Use this to delete a task from Duke."
+                "\n==> These are the utility commands that you can use!\n" +
+                "- 'save' : Use this to save all tasks that have been added to Duke into a local file.\n" +
+                "- 'bye'  : Use this to exit Duke. All tasks added will be saved upon this command as well.\n" +
+                "- 'list' : Use this to list out all the tasks added into Duke.\n" +
+                "- 'find *keyword*' : Use this to find all tasks with the *keyword*\n" +
+                "\n==> Next are the commands to use when you want to add a task!\n" +
+                "- 'todo *todo name*'  : Use this to add a todo task into Duke.\n" +
+                "- 'event *event name* /at *YYYY-MM-DD HH:MM*'       : Use this to add an event task into Duke.\n" +
+                "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Use this to add a deadline task into Duke.\n" +
+                "\n==> Lastly, these are the commands to edit a task on Duke.\n" +
+                "- 'mark *task#*' : Use this to mark a task as completed.\n" +
+                "- 'unmark *task#*' : Use this to un-mark a task as incomplete.\n" +
+                "- 'delete *task#*' : Use this to delete a task from Duke."
         );
     }
 }

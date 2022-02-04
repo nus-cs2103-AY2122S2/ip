@@ -7,7 +7,7 @@ package duke;
  */
 public class Parser {
     /**
-     * Empty COnstructor.
+     * Empty Constructor.
      */
     public Parser() {}
 
@@ -17,7 +17,7 @@ public class Parser {
      * @param inst Instruction from user
      * @return String Array of 2 Strings
      */
-    public String[] splitLimitTwo (String inst) {
+    public String[] splitLimitTwo(String inst) {
         return inst.split(" ", 2);
     }
 

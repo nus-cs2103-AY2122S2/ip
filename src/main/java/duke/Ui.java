@@ -42,7 +42,7 @@ public class Ui {
     /**
      * Method to run Duke.
      */
-    public void uiHandler() {
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         String firstWord = "";
         while (true) {
@@ -59,8 +59,7 @@ public class Ui {
 
                     // One word commands
                 } else if (firstWord.equals("bye")) {
-                    storage.writeTasksToFile();
-                    taskList.bye();
+                    taskList.bye(storage);
                     break;
                 } else if (firstWord.equals("save")) {
                     storage.save();

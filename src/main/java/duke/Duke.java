@@ -25,7 +25,7 @@ public class Duke {
         Storage storage = new Storage(taskList);
         Ui ui = new Ui(taskList, storage);
 
-        ui.uiHandler();
+        ui.run();
     }
 }
 
