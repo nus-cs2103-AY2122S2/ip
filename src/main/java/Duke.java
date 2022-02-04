@@ -9,10 +9,10 @@ import ui.Ui;
  */
 public class Duke {
 
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
-    private Parser parser;
+    private final Parser parser;
 
     Duke(String filePath) {
         storage = new Storage(filePath);
