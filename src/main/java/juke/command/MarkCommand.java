@@ -61,4 +61,8 @@ public class MarkCommand extends Command {
         this.juke.getStorage().saveTasks();
         return this;
     }
+    
+    public TaskStatus getStatus() {
+        return this.status;
+    }
 }

@@ -26,6 +26,6 @@ public class JukeException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "Exception with " + this.getCommand();
+        return this.getCommand();
     }
 }

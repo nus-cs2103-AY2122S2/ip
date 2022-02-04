@@ -107,4 +107,8 @@ public class AddCommand extends Command {
         this.juke.getStorage().saveTasks();
         return this;
     }
+    
+    public TaskType getType() {
+        return this.type;
+    }
 }
