@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,9 +23,8 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
-        File f = new File(filePath);
         try {
-            f.createNewFile();
+            File f = new File(filePath);
             Scanner sc = new Scanner(f);
             ArrayList<Task> tasks = new ArrayList<>();
             while(sc.hasNext()) {
@@ -48,7 +48,7 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
         }
     }

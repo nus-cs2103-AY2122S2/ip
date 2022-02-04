@@ -32,10 +32,6 @@ public class Ui {
         System.out.println("What can I do for you?");
     }
 
-    public void showLoadingError() {
-        System.out.println("There was an error loading the tasks.");
-    }
-
     public void showError(String message) {
         System.out.println(message);
     }
