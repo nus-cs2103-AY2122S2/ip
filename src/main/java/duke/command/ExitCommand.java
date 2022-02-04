@@ -19,15 +19,14 @@ public class ExitCommand extends Command {
      * @param storage Storage that is maintained in Ducky.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Your tasks have been saved in " + storage.getFileName());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         for (int i = 0; i < tasks.getSize(); i++) {
             Task currentTask = tasks.getTask(i);
             String message = currentTask.getTask();
             output = output + (i + 1 + ". " + message) + "\n";
         }
-        System.out.println(BYE_RESPONSE);
         setExit();
+        return ("Your tasks have been saved in " + storage.getFileName() + "\n" + BYE_RESPONSE);
     }
 }

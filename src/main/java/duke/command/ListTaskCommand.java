@@ -20,16 +20,18 @@ public class ListTaskCommand extends Command {
      * @throws DukeException When there is no task in the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
             throw new DukeException("Please add some tasks first *(^.^)*");
         } else {
-            System.out.println("Here are your tasks:");
+            String topLine = ("Here are your tasks:\n");
+            String output = "";
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task currentTask = tasks.getTask(i);
                 String message = currentTask.getTask();
-                System.out.println(i + 1 + ". " + message);
+                output = output + ("\n" + (i + 1) + ". " + message);
             }
+            return topLine + output;
         }
     }
 }

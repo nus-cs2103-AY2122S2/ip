@@ -33,7 +33,7 @@ public class AddTodoCommand extends Command {
      * @throws DukeException Thrown when there is no description provided to the task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (description.length() == 0) {
             throw new DukeException(DESC_RESPONSE);
         } else {
@@ -41,8 +41,8 @@ public class AddTodoCommand extends Command {
             Todo entry = new Todo(description);
             tasks.addTask(entry);
             String message = entry.getTask();
-            System.out.println("I have added the following todo:\n" + message);
-            System.out.println("You now have " + tasks.getSize() + " tasks");
+            return ("I have added the following todo:\n" + message
+                    + "\nYou now have " + tasks.getSize() + " tasks");
         }
     }
 }

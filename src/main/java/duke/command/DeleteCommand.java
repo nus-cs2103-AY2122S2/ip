@@ -11,8 +11,8 @@ import duke.task.TaskList;
  */
 public class DeleteCommand extends Command {
     private String deleteId;
-    static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n" +
-            "Please type 'list' to view your current entries.";
+    static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
+            + "Please type 'list' to view your current entries.";
 
     /**
      * Constructor for the DeleteCommand.
@@ -26,17 +26,17 @@ public class DeleteCommand extends Command {
     /**
      * Executes the deletion of the task.
      *
-     * @param tasks Tasklist that was declared in the Duke class.
-     * @param ui Ui that was declared in the Duke class.
+     * @param tasks   Tasklist that was declared in the Duke class.
+     * @param ui      Ui that was declared in the Duke class.
      * @param storage Storage that was declared in the Duke class.
      * @throws DukeException When the Index of the task is non-existent.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task currTask = tasks.removeTask(Integer.parseInt(deleteId) - 1);
-            System.out.println("I have removed this from your tasks:\n" + currTask.getTask());
-            System.out.println("You now have " + tasks.getSize() + " tasks");
+            return ("I have removed this from your tasks:\n" + currTask.getTask()
+                    + "\nYou now have " + tasks.getSize() + " tasks");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(OOB_RESPONSE);
         }

@@ -2,8 +2,8 @@ package duke;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * DateHelper is used to help convert Strings into the proper date time formats.
@@ -11,8 +11,8 @@ import java.text.DateFormat;
  * If the date input is invalid, (e.g. missing the day, short form months), it throws a DukeException.
  */
 public class DateHelper {
-    Date formattedDatetime;
-    static final String INVALID_DATE = "Oops, please put a valid time format!\n" +
+    private Date formattedDatetime;
+    private static final String INVALID_DATE = "Oops, please put a valid time format!\n" +
             "Let's try again ~(^.^)~\n" +
             "Type 'help' if you need to know how to use this duke.command";
 
@@ -30,7 +30,7 @@ public class DateHelper {
             Date date = simpleDateFormat.parse(time);
             formattedDatetime = date;
         } catch (ParseException e) {
-           try {
+            try {
                 String pattern = "dd MMMM yyyy";
                 DateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 simpleDateFormat.setLenient(false);
