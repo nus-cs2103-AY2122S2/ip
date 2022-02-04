@@ -1,6 +1,8 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
@@ -65,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Removes the task at the specified index.
+     * Removes and returns the task at the specified index.
      *
      * @param index One-based index of the task to be deleted.
      * @return The deleted task.
@@ -98,18 +100,15 @@ public class TaskList {
     }
 
     /**
-     * Returns task(s) that contain(s) the specified keyword.
+     * Filters and returns the task(s) that contain(s) the specified keyword.
      *
      * @param keyword Keyword to find the tasks with.
      * @return ArrayList of tasks containing the specified keyword.
      */
     public ArrayList<Task> getTasksWithKeyword(String keyword) {
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        for (Task t: tasks) {
-            if (t.getDescription().contains(keyword.trim())) {
-                matchedTasks.add(t);
-            }
-        }
-        return matchedTasks;
+        String regex = ".*\\b" + Pattern.quote(keyword.trim()) + "\\b.*";
+        return tasks.stream()
+                .filter(task -> task.getDescription().matches(regex))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
