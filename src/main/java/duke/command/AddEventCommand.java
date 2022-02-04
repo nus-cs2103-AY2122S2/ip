@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -37,8 +38,11 @@ public class AddEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Event newEvent = new Event(description, dateTime);
         tasks.add(newEvent);
-        String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",
-                Ui.ADD_MESSAGE, newEvent, tasks.getSize());
-        ui.appendMessage(message);
+        ui.appendMessage(Ui.ADD_MESSAGE);
+        ui.appendBorder();
+        ui.appendMessage(newEvent.toString());
+        ui.appendBorder();
+        ui.appendMessage(String.format("\nThere are %d tasks in the burning list.", tasks.getSize()));
+        ui.setRespondImage(ImageType.ADD_OR_DELETE);
     }
 }

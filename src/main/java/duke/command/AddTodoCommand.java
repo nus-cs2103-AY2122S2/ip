@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -32,8 +33,11 @@ public class AddTodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ToDo newTodo = new ToDo(description);
         tasks.add(newTodo);
-        String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",
-                Ui.ADD_MESSAGE, newTodo, tasks.getSize());
-        ui.appendMessage(message);
+        ui.appendMessage(Ui.ADD_MESSAGE);
+        ui.appendBorder();
+        ui.appendMessage(newTodo.toString());
+        ui.appendBorder();
+        ui.appendMessage(String.format("\nThere are %d tasks in the burning list.", tasks.getSize()));
+        ui.setRespondImage(ImageType.ADD_OR_DELETE);
     }
 }

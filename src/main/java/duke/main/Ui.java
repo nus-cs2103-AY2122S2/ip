@@ -1,13 +1,6 @@
 package duke.main;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-
-import duke.exception.DukeException;
+import javafx.scene.image.Image;
 
 /**
  * Ui is a utility class for reading and writing input to the Duke program.
@@ -23,20 +16,23 @@ public class Ui {
     public static final String REMOVE_MESSAGE = "Charizard got tired of waiting and deleted this task";
     public static final String MARK_MESSAGE = "Charizard breathe out fire and burned the task.";
     public static final String UNMARK_MESSAGE = "Oh no! The task was not burnt completely!";
-    private static final int BORDER_LENGTH = 80;
+    public static final Image GENERAL_IMAGE = new Image(Ui.class.getResourceAsStream("/images/General.png"));
+
+    private static final int BORDER_LENGTH = 38;
     private static final String GREET_MESSAGE = "Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.\n"
             + "Which task shall we burn today?";
-    private static final String QUESTION_MESSAGE = "What should Charizard do next?";
-    private BufferedReader reader;
-    private PrintWriter writer;
+
+    private static final Image ADD_OR_DELETE_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Add.png"));
+    private static final Image MARK_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Mark.png"));
+    private static final Image UNMARK_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Unmark.png"));
+    private static final Image ERROR_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Error.png"));
+    private Image responseImage = GENERAL_IMAGE;
     private StringBuilder message;
 
     /**
      * Constructs a new Ui instance.
      */
     public Ui() {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         message = new StringBuilder();
     }
 
@@ -49,104 +45,56 @@ public class Ui {
         this.message.append(message);
     }
 
-    /**
-     * Returns the raw input command typed by the user.
-     *
-     * @return The raw input command typed by the user.
-     * @throws DukeException If unable to read from the input.
-     */
-    String readFullCommand() throws DukeException {
-        try {
-            return reader.readLine();
-        } catch (IOException e) {
-            throw new DukeException(DukeException.ERROR_IO_INPUT);
+    public void appendBorder() {
+        appendMessage("\n");
+        for (int i = 0; i < BORDER_LENGTH; i++) {
+            appendMessage("-");
         }
+        appendMessage("\n");
+    }
+
+    public void setRespondImage(ImageType imageType) {
+        if (imageType == ImageType.ADD_OR_DELETE) {
+            responseImage = ADD_OR_DELETE_IMAGE;
+        } else if (imageType == ImageType.MARK) {
+            responseImage = MARK_IMAGE;
+        } else if (imageType == ImageType.UNMARK) {
+            responseImage = UNMARK_IMAGE;
+        } else if (imageType == ImageType.ERROR) {
+            responseImage = ERROR_IMAGE;
+        } else {
+            responseImage = GENERAL_IMAGE;
+        }
+    }
+
+    public void clear() {
+        message.setLength(0);
     }
 
     /**
      * Flushes the stored message in the Ui and displays the message to the user.
      */
-    void showResponse() {
+    public String getResponse() {
         if (message.length() < 1) {
-            return;
+            return "";
         }
         String respondMessage = message.toString();
         message.setLength(0);
-        showMessageInBorder(respondMessage);
+        return respondMessage;
     }
 
-    /**
-     * Displays an error message to the user. This method does not store the message in the Ui
-     * instance, and instead immediately displays the error message.
-     *
-     * @param errorMessage The error message to be displayed.
-     */
-    public void showErrorMessage(String errorMessage) {
-        showMessageInBorder(errorMessage);
+    public Image getResponseImage() {
+        return responseImage;
     }
 
-    /**
-     * Displays a prompt to the user to signify request for user input.
-     * This method does not store the message in the Ui instance,
-     * and instead immediately displays the error message.
-     */
-    void showQuestionPrompt() {
-        showMessageOutsideBorder(QUESTION_MESSAGE);
-    }
-
-    /**
-     * Immediately displays loading error to the user.
-     */
-    void showLoadingError() {
-        showMessageOutsideBorder("Unable to read saved task from file.\nStarting with a new task list..");
+    public Image getErrorImage() {
+        return ERROR_IMAGE;
     }
 
     /**
      * Immediately displays the welcome message to the user.
      */
-    void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        showMessageOutsideBorder("Hello from\n" + logo);
-        showBorder(false);
-        showMessageInBorder(GREET_MESSAGE);
-        showBorder(true);
-    }
-
-    /**
-     * Immediately draws the border surrounding the response to the user.
-     *
-     * @param haveEmptyLineAfter If true, displays an empty line after the border.
-     */
-    void showBorder(boolean haveEmptyLineAfter) {
-        drawBorder(BORDER_LENGTH);
-        if (haveEmptyLineAfter) {
-            showMessageOutsideBorder("");
-        }
-    }
-
-    private void showMessageOutsideBorder(String message) {
-        writer.println(message);
-        writer.flush();
-    }
-
-    private void showMessageInBorder(String message) {
-        String[] lines = message.split("\n");
-        for (String line: lines) {
-            writer.println("    " + line);
-        }
-        writer.flush();
-    }
-
-    private void drawBorder(int length) {
-        for (int i = 0; i < length; i++) {
-            writer.print("*");
-        }
-        ;
-        writer.println("");
-        writer.flush();
+    String getWelcomeMessage() {
+        return GREET_MESSAGE;
     }
 }

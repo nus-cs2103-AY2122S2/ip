@@ -1,3 +1,6 @@
+E | 1 | cs2010 lect | 2022/01/24 0800
 T | 0 | test
-D | 1 | cs2103 level 8 | 2022/01/24 0200
-E | 0 | cs2010 lect | 2022/01/24 0800
+T | 0 | read book
+D | 0 | return book | 2022/01/26 0200
+E | 0 | project meeting | 2022/01/26 0200
+T | 0 | testAdd

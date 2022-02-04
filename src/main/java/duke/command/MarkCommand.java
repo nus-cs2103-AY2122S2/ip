@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -17,9 +18,9 @@ public class MarkCommand extends Command {
      * Creates a new MarkCommand instance with the initialized index and action.
      *
      * @param taskIndex Zero based index of the Task to be marked or unmarked.
-     * @param isDone The intended state of the Task after execution of Command.
-     *               true if the intended action is to mark the task, false if the
-     *               intended action is to unmark the task.
+     * @param isDone    The intended state of the Task after execution of Command.
+     *                  true if the intended action is to mark the task, false if the
+     *                  intended action is to unmark the task.
      */
     public MarkCommand(int taskIndex, boolean isDone) {
         super(IS_EXIT);
@@ -32,22 +33,24 @@ public class MarkCommand extends Command {
      * Displays the error message on Ui if the given Task cannot be marked or unmarked successfully.
      *
      * @param tasks The TaskList instance containing the Task object to be marked or unmarked.
-     * @param ui The Ui object used for displaying messages.
+     * @param ui    The Ui object used for displaying messages.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            tasks.markTask(taskIndex, isDone);
-            String message;
-            if (isDone) {
-                message = Ui.MARK_MESSAGE;
-            } else {
-                message = String.format(Ui.UNMARK_MESSAGE);
-            }
-            message += String.format("\n  %s", tasks.getTask(taskIndex).toString());
-            ui.appendMessage(message);
-        } catch (DukeException e) {
-            ui.showErrorMessage(e.getMessage());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.markTask(taskIndex, isDone);
+        String message;
+        if (isDone) {
+            message = Ui.MARK_MESSAGE;
+        } else {
+            message = String.format(Ui.UNMARK_MESSAGE);
+        }
+        ui.appendMessage(message);
+        ui.appendBorder();
+        ui.appendMessage(tasks.getTask(taskIndex).toString());
+        if (isDone) {
+            ui.setRespondImage(ImageType.MARK);
+        } else {
+            ui.setRespondImage(ImageType.UNMARK);
         }
     }
 }

@@ -1,0 +1,9 @@
+.label {
+   -fx-wrap-text: true;
+   -fx-font-size: 13;
+   -fx-label-padding: 10 15 10 15;
+   -fx-border-style: solid;
+   -fx-border-width: 2;
+   -fx-border-color: #D61E1E;
+   -fx-text-fill: #b90a0a;
+}
