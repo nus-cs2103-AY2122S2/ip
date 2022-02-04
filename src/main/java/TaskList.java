@@ -1,22 +1,19 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    protected static ArrayList<Task> MANAGER;
+    protected static ArrayList<Task> manager;
+    private static Parser parser;
 
     public TaskList() {
-        MANAGER = new ArrayList<>();
+        manager = new ArrayList<>();
+        parser = new Parser();
     }
 
-//    public TaskList(ArrayList<Task> manager) {
-//        this.MANAGER = manager;
-//
-//    }
-
     public static void reportList() throws CustomException {
-        int len = MANAGER.size();
+        int len = manager.size();
         if (len != 0) {
             for (int i = 0; i < len; i++) {
-                System.out.println((i + 1) + ". " + MANAGER.get(i).toString());
+                System.out.println((i + 1) + ". " + manager.get(i).toString());
             }
         } else {
             throw new CustomException("your task list is currently empty. " +
@@ -26,12 +23,12 @@ public class TaskList {
 
     public static Task findTask(int num) throws CustomException {
         Task desiredTask = new Task("empty task");
-        int len = MANAGER.size();
+        int len = manager.size();
 
         if ((num <= len) && (len > 0) && (num > 0)) {
             for (int i = 1; i <= len; i++) {
                 if (i == num) {
-                    desiredTask = MANAGER.get(i - 1);
+                    desiredTask = manager.get(i - 1);
                 }
             }
             return desiredTask;
@@ -45,50 +42,24 @@ public class TaskList {
         }
     }
 
-    public static void addTask(String taskType, String instruction) throws CustomException {
-        Task toAdd = new Task("empty task");
-        if (taskType.equals("todo")) {
-            String description = instruction.substring(4);
-            if (description.isBlank()) {
-                throw new CustomException("todo description cannot be blank! Please add task details");
-            } else {
-                toAdd = new Todo(description.substring(1));
-            }
-        } else if (taskType.equals("deadline")) {
-            int index = instruction.indexOf("/by");
-            if (index != -1) {
-                String description = instruction.substring(9, index);
-                String time = instruction.substring(index + 4);
-                toAdd = new Deadline(description, time);
-            } else {
-                throw new CustomException("Incorrect time format: ensure to prefix time with '/by'");
-            }
-        } else {
-            int index = instruction.indexOf("/at");
-            if (index != -1) {
-                String description = instruction.substring(6, index);
-                String time = instruction.substring(index + 4);
-                int indexOfDifferentiator = time.indexOf("-");
-                String dateAndStartTime = time.substring(0, indexOfDifferentiator).trim();
-                String endTime = time.substring(indexOfDifferentiator + 1).trim();
-                toAdd = new Event(description, dateAndStartTime, endTime);
-            } else {
-                throw new CustomException("Incorrect time format: ensure to prefix time with '/at'");
-            }
-
+    public static void addTask(String taskType, String instruction) {
+        try {
+            Task toAdd = parser.parseCommandFromUser(taskType, instruction);
+            manager.add(toAdd);
+            Ui.showSuccessfulMessage("Rodger that! Task item added:");
+            Ui.displayTask(toAdd);
+        } catch (CustomException e) {
+            Ui.displayError(e.getMessage());
         }
-        MANAGER.add(toAdd);
-        System.out.println("Rodger that! Task item added:");
-        System.out.println(toAdd);
     }
 
     public static void deleteTask(int num) throws CustomException {
         if (num <= 0) {
             throw new CustomException("Invalid task ID: number must be a positive integer:)");
-        } else if (num > MANAGER.size()) {
+        } else if (num > manager.size()) {
             throw new CustomException("Invalid task ID: this task number does not exist as of now.");
         } else {
-            MANAGER.remove(num - 1);
+            manager.remove(num - 1);
             System.out.println("Sure! Task item " + num + " has now been deleted:)");
         }
     }

@@ -15,6 +15,10 @@ public class Deadline extends Task {
         return time.format(outputFormatter);
     }
 
+    public String displayTimeInOriginalFormat() {
+        return time.format(inputFormatter);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + outputTime() + ")";

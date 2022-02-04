@@ -21,6 +21,11 @@ public class Event extends Task {
                 + endTime.format(outputFormatterEnd);
     }
 
+    public String displayTimeInOriginalFormat() {
+        return dateAndStartTime.format(inputFormatterStart) + " - "
+                + endTime.format(inputFormatterEnd);
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + outputTime() + ")";

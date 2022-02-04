@@ -40,7 +40,7 @@ public class Storage {
                     currTask.markDone();
                 }
 
-                TaskList.MANAGER.add(currTask);
+                TaskList.manager.add(currTask);
             }
             sc.close();
         } catch (IOException e) {
@@ -55,14 +55,16 @@ public class Storage {
                 f.createNewFile();
             }
             FileWriter writer = new FileWriter(f);
-            for (Task t : TaskList.MANAGER) {
+            for (Task t : TaskList.manager) {
                 String output;
                 if (t instanceof Todo) {
                     output = "T ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description;
                 } else if (t instanceof Deadline) {
-                    output = "D ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Deadline) t).outputTime();
+                    output = "D ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; "
+                            + ((Deadline) t).displayTimeInOriginalFormat();
                 } else {
-                    output = "E ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; " + ((Event) t).outputTime();
+                    output = "E ; " + (t.isDone ? "1 ; " : "0 ; ") + t.description + " ; "
+                            + ((Event) t).displayTimeInOriginalFormat();
                 }
                 writer.write(output + "\n");
                 writer.flush();
