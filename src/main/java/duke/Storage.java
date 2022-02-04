@@ -5,10 +5,10 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.io.FileWriter; // Import the File class
-import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.FileWriter; // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
 /**
@@ -57,7 +57,8 @@ public class Storage {
      * Reads the txt file and generates the TaskList based on historical tasks that the user has inputted into Ducky.
      *
      * @param filepath path in which the text file exists.
-     * @return TaskList which holds the historical tasks that the user inputted into Ducky previously.
+     * @return TaskList                                                       holds the historical tasks that the user
+     * inputted into Ducky previously.
      * @throws DukeException Exception is thrown when there is an issue with the inputs in the text file.
      */
     public TaskList readFile(String filepath) throws DukeException {

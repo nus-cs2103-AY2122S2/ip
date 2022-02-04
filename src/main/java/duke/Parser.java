@@ -1,16 +1,16 @@
 package duke;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListTaskCommand;
-import duke.command.FindCommand;
-import duke.command.AddEventCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddDeadlineCommand;
-import duke.command.AddTodoCommand;
-import duke.command.UnmarkCommand;
 import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Parses the user input and triggers commands to run the input information.
@@ -23,10 +23,10 @@ public class Parser {
     private Storage storage;
     private Command parsedCommand;
 
-    private static final String DESC_RESPONSE = "Oops! \\(@.@)/ You have not keyed in a description for the duke" +
-            ".task!\n" +
-            "Let's try again ~(^.^)~\n" +
-            "Type 'help' if you need to know how to use this duke.command";
+    private static String DESC_RESPONSE = "Oops! \\(@.@)/ You have not keyed in a description for the duke"
+            + ".task!\n"
+            + "Let's try again ~(^.^)~\n"
+            + "Type 'help' if you need to know how to use this command";
 
     /**
      * Constructor method for Parser.
@@ -40,8 +40,8 @@ public class Parser {
     /**
      * Parses the user input to determine the commands to be used.
      *
-     * @throws DukeException Throws a DukeException if there is missing or incorrect information from the user input.
      * @return Command that is to be called based on the user's input.
+     * @throws DukeException Throws a DukeException if there is missing or incorrect information from the user input.
      */
     public Command parse() throws DukeException {
         textEntered = userInput.split(" ", 2);
@@ -63,9 +63,9 @@ public class Parser {
                 String deleteId = textEntered[1];
                 parsedCommand = new DeleteCommand(deleteId);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! \\(@.@)/ You have not keyed in an ID!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this duke.command");
+                System.out.println("Oops! \\(@.@)/ You have not keyed in an ID!\n"
+                        + "Let's try again ~(^.^)~\n"
+                        + "Type 'help' if you need to know how to use this command");
             }
             break;
         case TODO:
@@ -121,6 +121,10 @@ public class Parser {
         case FIND:
             String findString = textEntered[1];
             parsedCommand = new FindCommand(findString);
+            break;
+        default:
+            throw new DukeException(String.format("Sorry, I did not catch that! \\(T.T)/\n"
+                    + "type 'help' to see all commands I can help with."));
         }
         return parsedCommand;
     }

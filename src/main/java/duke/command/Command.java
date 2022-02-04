@@ -28,9 +28,9 @@ public abstract class Command {
      * @param storage Storage that is maintained in Ducky.
      * @throws DukeException When the Index of the task is non-existent or there is no description of the task.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    public boolean isExit(){
+    public boolean isExit() {
         return isBye;
     }
 

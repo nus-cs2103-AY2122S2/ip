@@ -27,7 +27,7 @@ public class Checker {
      * @param input Command inputted by the user. E.g. help, delete, event.
      * @throws DukeException Thrown if the command inputted does not match any in-built commands.
      */
-    @SuppressWarnings("checkstyle:OperatorWrap")
+
     public Checker(String input) throws DukeException {
         command = input;
 
