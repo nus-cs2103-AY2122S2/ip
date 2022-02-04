@@ -48,8 +48,10 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "DukeLauncher"
     archiveClassifier = null
+    archiveVersion = "0.1"
+    mainClassName = "Launcher"
 }
 
 checkstyle {
