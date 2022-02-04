@@ -15,7 +15,6 @@ public class Duke {
     private static final ListStorage myListStorage = new ListStorage();
     private static final Printer myPrinter = new Printer();
     private static Disk myDisk;
-
     /**
      * Empty contructor for Duke
      */
@@ -27,7 +26,6 @@ public class Duke {
             myPrinter.printExceptions(e);
         }
     }
-
     /**
      * Constructor for Duke
      * Loads existing ListStorage in Disk
@@ -113,5 +111,13 @@ public class Duke {
                 //cmd = myScanner.nextLine();
             }
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
