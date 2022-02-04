@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,6 +30,7 @@ public class Duke {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
                     List<String> input = Arrays.asList(sc.nextLine().split(" \\| "));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
                     switch (input.get(0)) {
                         case "T":
                             ToDo newTodo = new ToDo(input.get(2).trim());
@@ -36,14 +40,14 @@ public class Duke {
                             }
                             break;
                         case "D":
-                            Deadline newDeadline = new Deadline(input.get(2).trim(), input.get(3).trim());
+                            Deadline newDeadline = new Deadline(input.get(2).trim(), LocalDate.parse(input.get(3).trim()));
                             list.add(newDeadline);
                             if (input.get(1).equals("1")) {
                                 list.set(list.indexOf(newDeadline), newDeadline.mark());
                             }
                             break;
                         case "E":
-                            Event newEvent = new Event(input.get(2).trim(), input.get(3).trim());
+                            Event newEvent = new Event(input.get(2).trim(), LocalDate.parse(input.get(3).trim()));
                             list.add(newEvent);
                             if (input.get(1).equals("1")) {
                                 list.set(list.indexOf(newEvent), newEvent.mark());
@@ -142,10 +146,13 @@ public class Duke {
                             for (int i = byIndex + 1; i < input.size(); i++) {
                                 deadlineBy.append(input.get(i)).append(" ");
                             }
-                            list.add(new Deadline(deadline.toString(), deadlineBy.toString()));
-                            saveTaskList(list);
-                            System.out.println(output("Got it. I've added this task: \n        "
-                                    + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
+                            LocalDate date = convertDate(deadlineBy.toString().trim());
+                            if (date != null) {
+                                list.add(new Deadline(deadline.toString(), date));
+                                saveTaskList(list);
+                                System.out.println(output("Got it. I've added this task: \n        "
+                                        + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
+                            }
                         }
                         break;
                     case "event":
@@ -165,10 +172,14 @@ public class Duke {
                             for (int i = atIndex + 1; i < input.size(); i++) {
                                 eventAt.append(input.get(i)).append(" ");
                             }
-                            list.add(new Event(event.toString(), eventAt.toString()));
-                            saveTaskList(list);
-                            System.out.println(output("Got it. I've added this task: \n        "
-                                    + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
+                            LocalDate date = convertDate(eventAt.toString().trim());
+                            if (date != null) {
+                                list.add(new Event(event.toString(), date));
+                                saveTaskList(list);
+                                System.out.println(output("Got it. I've added this task: \n        "
+                                        + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
+
+                            }
                         }
                         break;
                     case "delete":
@@ -184,12 +195,38 @@ public class Duke {
                             System.out.println(output(exception.toString()));
                         }
                         break;
+                    case "search":
+                        LocalDate date = convertDate(input.get(1));
+                        if (date != null) {
+                            StringBuilder searchText = new StringBuilder();
+                            searchText.append("Here are the tasks on ").append(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))).append(" \n");
+                            for (int i = 0; i < list.size(); i++) {
+                                if (list.get(i).getDate() != null && list.get(i).getDate().equals(date)) {
+                                    searchText.append("    ").append(i + 1).append(". ")
+                                            .append(list.get(i))
+                                            .append("\n");
+                                }
+                            }
+                            searchText.delete(searchText.length() - 1, searchText.length());
+                            System.out.println(output(searchText.toString()));
+                        }
+                        break;
                     default:
                         DukeException exception = new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         System.out.println(output(exception.toString()));
                         break;
                 }
             }
+        }
+    }
+
+    public static LocalDate convertDate (String dateText) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return LocalDate.parse(dateText, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println(output("Sorry, date time format wrong, please use yyyy-MM-dd"));
+            return null;
         }
     }
 

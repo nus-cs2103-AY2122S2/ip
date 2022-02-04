@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String task;
     protected boolean done;
@@ -22,6 +24,10 @@ public class Task {
 
     public String saveData() {
         return task;
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override
