@@ -12,6 +12,7 @@ import tasks.ToDo;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Ui {
 
@@ -105,10 +106,22 @@ public class Ui {
                     //System.out.println(deadlineTime);
 //                LocalDateTime dateTime = (LocalDateTime.parse(((descriptionAndTime[1].split(" ",2))[1]), inputFormat));
                     Deadline newDeadline = new Deadline(deadlineDescription, deadlineTime);
-
                     TaskList.dukeList.add(newDeadline);
                     display(newDeadline);
-                } else if (command.equals("todo")) {
+                } else if (command.equals("find")){
+                    ArrayList<Task> temp = new ArrayList<Task>();
+
+                    for (Task task : TaskList.dukeList) {
+                        if (task.getDescription().contains(description.substring(1))) {
+                            temp.add(task);
+                        }
+                    }
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < temp.size(); i++) {
+                        System.out.println(i+1 + "." + " " + temp.get(i));
+                    }
+                }
+                else if (command.equals("todo")) {
                     if (description.trim().equals("")) {
                         throw new DukeToDoEmptyException();
                     }

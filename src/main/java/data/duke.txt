@@ -1,0 +1,3 @@
+T | 0 | read book
+T | 0 | go away
+T | 0 | go home
