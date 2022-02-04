@@ -97,11 +97,12 @@ public class TaskList {
 
         int index = Integer.parseInt(input) - 1;
 
-        if (Integer.parseInt(input) >= this.taskList.size()) {
+        if (index > this.taskList.size() - 1 || index < 0) {
             throw new NoTaskToDeleteException();
         }
+
         Task toDelete = getTaskByIndex(index);
-        this.taskList.remove(toDelete);
+        this.taskList.remove(index);
         return toDelete;
     }
 

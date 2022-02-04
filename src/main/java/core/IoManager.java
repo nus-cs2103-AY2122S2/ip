@@ -1,5 +1,7 @@
 package core;
 
+import core.exceptions.FileIsCorruptException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -36,25 +38,14 @@ public class IoManager {
     }
 
     /**
-     * Overloaded constructor for the IOManager class with a specified input stream and print writer.
+     * Factory method to obtain an instance of IoManager.
      *
-     * @param inputStream The input stream used to take inputs from the user.
-     * @param printWriter The print writer used to display appropriate output to the user.
-     */
-    private IoManager(InputStream inputStream, PrintWriter printWriter) {
-        this.inputStream = inputStream;
-        this.printWriter = printWriter;
-        this.inputHandler = InputHandler.getInstance();
-    }
-
-    /**
-     * Factory method to obtain an instance of IOManager.
-     *
-     * @return An instance of IOManager class.
+     * @return An instance of IoManager class.
      */
     public static IoManager getInstance() {
         return new IoManager();
     }
+
 
     /**
      * Factory method to obtain an instance of IOManager with a specified input stream and print writer.
@@ -67,6 +58,16 @@ public class IoManager {
         return new IoManager(inputStream, printWriter);
     }
 
+    /**
+     *
+     * @param inputStream The input stream used to take inputs from the user.
+     * @param printWriter The print writer used to display appropriate output to the user.
+     */
+    private IoManager(InputStream inputStream, PrintWriter printWriter) {
+        this.inputStream = inputStream;
+        this.printWriter = printWriter;
+        this.inputHandler = InputHandler.getInstance();
+    }
 
 
     /**
@@ -109,6 +110,7 @@ public class IoManager {
         displayWelcomeMessage();
         try {
             File file = new File(filePath);
+
             if (file.exists()) {
                 inputHandler.initializeWithFile(file);
             }
