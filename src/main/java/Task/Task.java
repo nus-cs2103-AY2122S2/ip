@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 import java.util.ArrayList;
 
@@ -28,39 +28,45 @@ public class Task {
 
     /**
      * Marks a Task as completed.
+     *
+     * @return String message to print on GUI
      */
-    public void mark() {
+    public String mark() {
         if (!isDone) {
             isDone = true;
-            System.out.println("Nice! I've marked this task as done: \n"
-                    + toString());
+            return "Nice! I've marked this task as done: \n"
+                    + toString();
         } else {
-            System.out.println("This task is already done! \n"
-                    + toString());
+            return "This task is already done! \n"
+                    + toString();
         }
     }
 
     /**
      * Unmarks a Task as completed.
+     *
+     * @return String message to print on GUI
      */
-    public void unmark() {
+    public String unmark() {
         if (isDone) {
             isDone = false;
-            System.out.println("OK, I've marked this task as not done yet: \n"
-                    + toString());
+            return "OK, I've marked this task as not done yet: \n"
+                    + toString();
         } else {
-            System.out.println("This task has not been completed! \n"
-                    + toString());
+            return "This task has not been completed! \n"
+                    + toString();
         }
     }
 
     /**
-     * Removes a Task from list of Tasks.
+     * Removes a Task from a list at given index.
+     *
+     * @param list list of Tasks
+     * @param index index of the Task to be deleted
+     * @return list of Tasks without deleted task
      */
     public ArrayList<Task> delete(ArrayList<Task> list, int index) {
         list.remove(index);
-        System.out.println("Noted. I've removed this task: \n"
-                + toString());
         return list;
     }
 
