@@ -39,8 +39,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.get(index);
-        taskList.remove(index);
+        Task task;
+
+        if (taskList.isValidIndex(index)) {
+            task = taskList.get(index);
+            taskList.remove(index);
+        } else {
+            throw new DukeException("INVALID INDEX");
+        }
+
         storage.writeToFile(taskList);
         String output = "TASK REMOVED:\n"
                 + task + "\n"

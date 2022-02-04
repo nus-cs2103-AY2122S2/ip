@@ -52,6 +52,10 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public boolean isValidIndex(int idx) {
+        return 0 <= idx && idx < tasks.size();
+    }
+
     /**
      * Filters a copy of the internal ArrayList of tasks with respect to a given keyword.
      *

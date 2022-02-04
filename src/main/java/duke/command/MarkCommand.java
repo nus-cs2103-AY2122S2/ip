@@ -45,8 +45,15 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.get(index);
+        Task task;
         String output;
+
+        if (taskList.isValidIndex(index)) {
+            task = taskList.get(index);
+        } else {
+            throw new DukeException("INVALID INDEX");
+        }
+
         if (isMarkCommand) {
             task.markAsDone();
             output = "TASK DONE:\n" + task;
