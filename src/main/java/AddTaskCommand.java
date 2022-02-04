@@ -58,7 +58,6 @@ public class AddTaskCommand extends Command {
         TaskManager.taskList.add(newTask);
 
         // System prints
-        String output = formatOutput(newTask);
-        System.out.println(output);
+        Ui.printAddTask(newTask);
     }
 }

@@ -3,12 +3,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         // Constant strings
         final String INTRO = "Duke initialised";
 
-        // Init text scanner
-        Scanner sc = new Scanner(System.in);
+        // Init UI
+        Ui ui = new Ui();
 
         // Init saved tasks
         try {
@@ -33,16 +34,14 @@ public class Duke {
         System.out.println(formattedIntro);
 
         // Reading and processing inputs
-        String nextLine = sc.nextLine();
         CommandFactory commandFactory = new CommandFactory();
         while (true) {
-            Command nextCommand = commandFactory.makeCommand(nextLine); // Creating the appropriate command
+            Command nextCommand = commandFactory.makeCommand(ui.getNextLine()); // Creating the appropriate command
             nextCommand.execute();
 
             if (nextCommand instanceof ByeCommand) { // Check for exit command
                 break;
             }
-            nextLine = sc.nextLine(); // Update nextLine variable with next input
         }
 
         try {
@@ -73,6 +72,8 @@ public class Duke {
 
         return output;
     }
+
+    // TODO: Deprecate, UI provides the line
 
     /**
      * Provides a formatting line for Duke's responses
