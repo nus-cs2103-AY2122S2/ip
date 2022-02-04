@@ -10,6 +10,7 @@ import meep.commands.Command;
 import meep.commands.DeleteCommand;
 import meep.commands.ExitCommand;
 import meep.commands.FindCommand;
+import meep.commands.HelpCommand;
 import meep.commands.ListCommand;
 import meep.commands.MarkCommand;
 import meep.commands.UnmarkCommand;
@@ -18,6 +19,7 @@ import meep.task.Deadline;
 import meep.task.Event;
 import meep.task.Task;
 import meep.task.ToDo;
+import meep.ui.Messages;
 
 
 /**
@@ -34,7 +36,7 @@ public class Parser {
     public String checkEmptyTask(String task) throws InvalidInputException {
         boolean isEmptyInput = task.trim().length() == 0;
         if (isEmptyInput) {
-            throw new InvalidInputException("Task description can not be empty!");
+            throw new InvalidInputException(Messages.MESSAGE_EMPTY_TASK);
         }
         return task.trim();
 
@@ -53,11 +55,11 @@ public class Parser {
         try {
             num = Integer.parseInt(index);
         } catch (NumberFormatException e) {
-            throw new InvalidInputException("Invalid task number. Please enter a valid integer.");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_NUMBER);
         }
         boolean isOutOfBound = num < 0 || num > tasks.size();
         if (isOutOfBound) {
-            throw new InvalidInputException("Task number out of range.");
+            throw new InvalidInputException(Messages.MESSAGE_OUTBOUND_NUMBER);
         }
         return num;
     }
@@ -73,8 +75,7 @@ public class Parser {
         String[] output = str.split("/", 2);
         boolean isValidFormat = output.length == 1;
         if (isValidFormat) {
-            throw new InvalidInputException("Invalid format. "
-                    + "eg. deadline return book /by 02/12/2019 18:00.");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
         }
 
         return output;
@@ -92,7 +93,7 @@ public class Parser {
         String[] date = str.split(" ", 2);
         boolean isValidFormat = date.length != 2;
         if (isValidFormat) {
-            throw new InvalidInputException("Invalid format. eg. deadline return book /by 02/12/2019 18:00.");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
         }
 
         String pre = date[0];
@@ -100,13 +101,13 @@ public class Parser {
         boolean isDeadlineCommand = command.equals(AddCommand.COMMAND_DEADLINE);
         boolean isValidDeadlinePrepositions = pre.equals("by");
         if (isDeadlineCommand && !isValidDeadlinePrepositions) {
-            throw new InvalidInputException("Invalid Prepositions for deadline command. eg. '/by'.");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_DEADLINE_PREPOSITION);
         }
 
         boolean isEventCommand = command.equals(AddCommand.COMMAND_EVENT);
         boolean isValidEventPrepositions = pre.equals("on") || pre.equals("at");
         if (isEventCommand && !isValidEventPrepositions) {
-            throw new InvalidInputException("Invalid Prepositions for event command. eg. '/on' or '/at' .");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_EVENT_PREPOSITION);
         }
 
         return date[1];
@@ -135,7 +136,7 @@ public class Parser {
     public Command parseUserInput(String userInput, List<Task> tasks) throws InvalidInputException {
         boolean isEmptyInput = userInput.trim().length() == 0;
         if (isEmptyInput) {
-            throw new InvalidInputException("Empty Command");
+            throw new InvalidInputException(Messages.MESSAGE_EMPTY_INPUT);
         }
 
         String[] arr = userInput.split(" ", 2);
@@ -143,6 +144,11 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             if (isValidCommandLength(ExitCommand.COMMAND_LENGTH, arr)) {
                 return new ExitCommand();
+            }
+            break;
+        case HelpCommand.COMMAND_WORD:
+            if (isValidCommandLength(HelpCommand.COMMAND_LENGTH, arr)) {
+                return new HelpCommand();
             }
             break;
         case ListCommand.COMMAND_WORD:
@@ -157,45 +163,45 @@ public class Parser {
         case MarkCommand.COMMAND_WORD:
             if (isValidCommandLength(MarkCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
                 return new MarkCommand(index);
             }
             break;
         case UnmarkCommand.COMMAND_WORD:
             if (isValidCommandLength(UnmarkCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
                 return new UnmarkCommand(index);
             }
             break;
         case DeleteCommand.COMMAND_WORD:
             if (isValidCommandLength(DeleteCommand.COMMAND_LENGTH, arr)) {
                 int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : "index should >= 0 and less than task list size";
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
                 return new DeleteCommand(index);
             }
             break;
         case AddCommand.COMMAND_TODO:
             if (isValidCommandLength(AddCommand.COMMAND_LENGTH, arr)) {
                 String taskTitle = checkEmptyTask(arr[1]);
-                assert taskTitle.length() > 0 : "task title should not be empty";
+                assert taskTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
                 return new AddCommand(new ToDo(taskTitle));
             }
             break;
         case AddCommand.COMMAND_DEADLINE:
             String[] deadline = parseTaskFormat(arr[1]);
-            assert deadline.length == 2 : "arr length should be 2";
+            assert deadline.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
             String deadlineDate = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
             String deadlineTitle = checkEmptyTask(deadline[0]);
-            assert deadlineTitle.length() > 0 : "task title should not be empty";
+            assert deadlineTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
             return new AddCommand(new Deadline(deadlineTitle, parseDate(deadlineDate)));
             // Fallthrough
         case AddCommand.COMMAND_EVENT:
             String[] event = parseTaskFormat(arr[1]);
-            assert event.length == 2 : "arr length should be 2";
+            assert event.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
             String eventDate = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
             String eventTitle = checkEmptyTask(event[0]);
-            assert eventTitle.length() > 0 : "task title should not be empty";
+            assert eventTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
             return new AddCommand(new Event(eventTitle, parseDate(eventDate)));
             // Fallthrough
         case FindCommand.COMMAND_WORD:
@@ -205,11 +211,9 @@ public class Parser {
             break;
 
         default:
-            throw new InvalidInputException("Invalid command. "
-                    + "Please try 'list/bye/mark/unmark/event/deadline/todo/find'. ");
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
         }
-        throw new InvalidInputException("Invalid command. "
-                + "Please try 'list/bye/mark/unmark/event/deadline/todo/find'. ");
+        throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
     }
 
     /**
@@ -225,8 +229,7 @@ public class Parser {
             LocalDateTime formattedDate = LocalDateTime.parse(date, format);
             return formattedDate;
         } catch (DateTimeException e) {
-            throw new InvalidInputException("'" + date + "' can't be formatted! "
-                    + "Please format the date/time as dd/MM/yyyy HH:mm");
+            throw new InvalidInputException("'" + date + "'" + Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
     }
 

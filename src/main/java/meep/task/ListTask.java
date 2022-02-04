@@ -1,5 +1,7 @@
 package meep.task;
 
+import meep.ui.Messages;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +117,9 @@ public class ListTask {
      * @return the task list string.
      */
     public String generateTaskList() {
+        if (tasks.isEmpty()) {
+            return Messages.MESSAGE_EMPTY_TASK_LIST;
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
         int i = 1;
@@ -133,6 +138,9 @@ public class ListTask {
      * @return the task list string.
      */
     public String generateTaskList(LocalDateTime date) {
+        if (tasks.isEmpty()) {
+            return Messages.MESSAGE_EMPTY_TASK_LIST;
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
         int i = 1;

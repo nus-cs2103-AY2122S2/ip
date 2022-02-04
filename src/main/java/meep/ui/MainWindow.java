@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import meep.commands.ExitCommand;
+import meep.commands.HelpCommand;
 import meep.exception.InvalidInputException;
 
 
@@ -42,7 +43,7 @@ public class MainWindow extends BorderPane {
             gui.setup();
             dialogContainer.getChildren().addAll(
                     DialogBox.getMeepDialog(Messages.MESSAGE_HI, meepImage),
-                    DialogBox.getMeepDialog(Messages.MESSAGE_INSTRUCTIONS, meepImage),
+                    DialogBox.getMeepDialog(HelpCommand.MESSAGE_HELP, meepImage),
                     DialogBox.getMeepDialog(gui.showTasks(), meepImage)
             );
         } catch (InvalidInputException e) {
