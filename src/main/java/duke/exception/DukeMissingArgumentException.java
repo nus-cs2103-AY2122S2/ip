@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception occurs when a necessary argument is missing.
  */
@@ -22,9 +20,7 @@ public class DukeMissingArgumentException extends DukeException {
      */
     @Override
     public String toString() {
-        String result = Ui.DIVIDER + "\n";
-        result += "    We are missing the following argument: " + this.getMessage() + "\n";
-        result += Ui.DIVIDER;
+        String result = "We are missing the following argument: " + this.getMessage() + "\n";
         return result;
     }
 }

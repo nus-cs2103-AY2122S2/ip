@@ -16,9 +16,11 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.SortCommand;
 import duke.exception.DukeCommandException;
+import duke.exception.DukeDateTimeFormatException;
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeNumberFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -39,6 +41,27 @@ public class Parser {
             .toFormatter(Locale.ENGLISH);
 
     /**
+     * Parses a String to an int, but throws DukeNumberFormatException instead.
+     *
+     * @return int Integer value of the String.
+     */
+    private static int parseInt(String input) throws DukeNumberFormatException {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeNumberFormatException();
+        }
+    }
+
+    private static LocalDateTime parseDateTime(String input) throws DukeDateTimeFormatException {
+        try {
+            return LocalDateTime.parse(input, INPUT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeFormatException();
+        }
+    }
+
+    /**
      * Parses a given inputCommand into a Command object for the ease of interpreting commands.
      *
      * @param inputCommand String String of input command.
@@ -46,13 +69,8 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String inputCommand) throws DukeException {
-        if (inputCommand.length() == 0) {
-            try {
-                throw new DukeCommandException("");
-            } catch (DukeCommandException e) {
-                System.out.println(e);
-                return new InvalidCommand();
-            }
+        if (inputCommand.trim().length() == 0) {
+            throw new DukeCommandException("");
         }
         String[] inputArray = inputCommand.split(" ");
         String firstArg = inputArray[0];
@@ -62,7 +80,7 @@ public class Parser {
             } else if (Command.CommandType.LIST.equals(firstArg)) {
                 return new ListCommand(inputArray);
             } else {
-                throw new DukeMissingArgumentException(firstArg);
+                throw new DukeCommandException(firstArg);
             }
         } else {
             String secondArg = inputArray[1];
@@ -74,12 +92,8 @@ public class Parser {
                     throw new DukeMissingArgumentException("target");
                 }
             } else if (Command.CommandType.DELETE.equals(firstArg)) {
-                try {
-                    int index = Integer.parseInt(secondArg);
-                    return new DeleteCommand(index, inputArray);
-                } catch (NumberFormatException e) {
-                    System.out.println("    index must be a number!");
-                }
+                int index = parseInt(secondArg);
+                return new DeleteCommand(index, inputArray);
             } else if (Command.CommandType.DEADLINE.equals(firstArg)) {
                 if (secondArg.equals("\\by")) {
                     throw new DukeMissingArgumentException("task description");
@@ -92,14 +106,9 @@ public class Parser {
                     String by = inputCommand.substring(indexOfBy + 4);
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
-                    try {
-                        date = LocalDateTime.parse(by, INPUT_FORMATTER);
-                        Task taskObj = new Deadline(content, date);
-                        return new AddCommand(taskObj, inputArray);
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Wrong date format!");
-                        e.printStackTrace();
-                    }
+                    date = parseDateTime(by);
+                    Task taskObj = new Deadline(content, date);
+                    return new AddCommand(taskObj, inputArray);
                 }
             } else if (Command.CommandType.EVENT.equals(firstArg)) {
                 if (secondArg.equals("\\by")) {
@@ -113,14 +122,9 @@ public class Parser {
                     String by = inputCommand.substring(indexOfAt + 4);
                     content = inputCommand.substring(6, indexOfAt - 1);
                     LocalDateTime date = null;
-                    try {
-                        date = LocalDateTime.parse(by, INPUT_FORMATTER);
-                        Task taskObj = new Event(content, date);
-                        return new AddCommand(taskObj, inputArray);
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Wrong date format!");
-                        e.printStackTrace();
-                    }
+                    date = parseDateTime(by);
+                    Task taskObj = new Event(content, date);
+                    return new AddCommand(taskObj, inputArray);
                 }
             } else if (Command.CommandType.TODO.equals(firstArg)) {
                 String content = "";
@@ -130,19 +134,11 @@ public class Parser {
                 Task taskObj = new ToDo(content);
                 return new AddCommand(taskObj, inputArray);
             } else if (Command.CommandType.MARK.equals(firstArg)) {
-                try {
-                    int index = Integer.parseInt(secondArg);
-                    return new MarkCommand(index, MarkCommand.Mark.MARK, inputArray);
-                } catch (NumberFormatException e) {
-                    System.out.println("    index must be a number!");
-                }
+                int index = parseInt(secondArg);
+                return new MarkCommand(index, MarkCommand.Mark.MARK, inputArray);
             } else if (Command.CommandType.UNMARK.equals(firstArg)) {
-                try {
-                    int index = Integer.parseInt(secondArg);
-                    return new MarkCommand(index, MarkCommand.Mark.UNMARK, inputArray);
-                } catch (NumberFormatException e) {
-                    System.out.println("    index must be a number!");
-                }
+                int index = parseInt(secondArg);
+                return new MarkCommand(index, MarkCommand.Mark.UNMARK, inputArray);
             } else if (Command.CommandType.SORT.equals(firstArg)) {
                 if (TaskList.SortType.CONTENT.equals(secondArg)) {
                     return new SortCommand(TaskList.SortType.CONTENT, inputArray);
@@ -152,9 +148,8 @@ public class Parser {
                     throw new DukeInvalidArgumentException("sort type");
                 }
             } else {
-                return new InvalidCommand();
+                return new InvalidCommand(inputCommand);
             }
         }
-        return new InvalidCommand();
     }
 }
