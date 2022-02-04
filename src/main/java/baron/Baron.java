@@ -4,17 +4,22 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import baron.commands.Command;
 import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
 import baron.tasks.TaskManager;
+import baron.ui.DialogBox;
 import baron.util.Storage;
 import baron.util.TextUi;
 
@@ -24,6 +29,10 @@ import baron.util.TextUi;
  */
 public class Baron extends Application {
     private static final String DEFAULT_STORAGE_FILE_PATH = "data/baron.txt";
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image baron = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     private final Scanner inputScanner;
     private final TaskManager taskManager;
     private final CommandManager commandManager;
@@ -69,7 +78,7 @@ public class Baron extends Application {
 
         do {
             String fullCommand = inputScanner.nextLine();
-            command = commandManager.parseCommand(fullCommand);
+            command = this.commandManager.parseCommand(fullCommand);
             TextUi.printCommandOutput(command.execute());
         }
         while (!command.isByeCommand());
@@ -135,6 +144,51 @@ public class Baron extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+
+        userInput.setOnAction((event) -> handleUserInput());
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
         stage.show();
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getBaronDialog(dukeText, new ImageView(baron))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return this.commandManager.parseCommand(input).execute();
     }
 }
