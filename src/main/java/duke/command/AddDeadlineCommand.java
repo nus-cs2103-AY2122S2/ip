@@ -2,11 +2,11 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
 import duke.task.Deadline;
+import duke.ui.ImageType;
+import duke.ui.Ui;
 
 /**
  * Represents a Command which, when executed, adds a Deadline object into a given TaskList instance.

@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
 import duke.task.ToDo;
+import duke.ui.ImageType;
+import duke.ui.Ui;
+
 
 /**
  * Represents a Command which, when executed, adds a ToDo object into a given TaskList instance.

@@ -2,11 +2,12 @@ package duke.command;
 
 import java.util.ArrayList;
 
-import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
 import duke.task.Task;
+import duke.ui.ImageType;
+import duke.ui.Ui;
+
 
 /**
  * Represents a Command which, when executed, finds all matching Task objects in the TaskList instance.

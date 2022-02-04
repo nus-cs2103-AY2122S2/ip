@@ -1,4 +1,4 @@
-package duke.main;
+package duke.ui;
 
 import javafx.scene.image.Image;
 
@@ -94,7 +94,7 @@ public class Ui {
     /**
      * Immediately displays the welcome message to the user.
      */
-    String getWelcomeMessage() {
+    public String getWelcomeMessage() {
         return GREET_MESSAGE;
     }
 }

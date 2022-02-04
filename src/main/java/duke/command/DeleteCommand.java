@@ -1,11 +1,12 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
 import duke.task.Task;
+import duke.ui.ImageType;
+import duke.ui.Ui;
+
 
 /**
  * Represents a Command which, when executed, deletes a Task from the given TaskList instance.

@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.main.ImageType;
+import duke.ui.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents a Command which, when executed, marks or unmarks a Task from the given TaskList instance.

@@ -1,4 +1,4 @@
-package duke.main;
+package duke.utils;
 
 public class Pair<T, U> {
     private final T first;

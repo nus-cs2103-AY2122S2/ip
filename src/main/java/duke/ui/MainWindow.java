@@ -1,7 +1,9 @@
-package duke.main;
+package duke.ui;
 
 import java.io.IOException;
 
+import duke.main.Duke;
+import duke.utils.Pair;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,6 +50,26 @@ public class MainWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        initializeBackgrounds();
+    }
+
+    @FXML
+    private void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
+        String welcomeMessage = duke.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, Ui.GENERAL_IMAGE)
+        );
+        if (duke.hasLoadingError()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(LOADING_ERROR_MESSAGE, Ui.GENERAL_IMAGE)
+            );
+            duke.setHasLoadingError(false);
+        }
+    }
+
+    private void initializeBackgrounds() {
         //set main background
         Image fireImage1 = new Image(this.getClass().getResourceAsStream("/images/Background.jpg"));
         BackgroundImage mainBackgroundImage = new BackgroundImage(fireImage1,
@@ -68,22 +90,6 @@ public class MainWindow extends AnchorPane {
         Background inputBackground = new Background(inputBackgroundImage);
         userInput.setBackground(inputBackground);
         sendButton.setBackground(inputBackground);
-    }
-
-    @FXML
-    private void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
-        String welcomeMessage = duke.getWelcomeMessage();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, Ui.GENERAL_IMAGE)
-        );
-        if (duke.hasLoadingError()) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(LOADING_ERROR_MESSAGE, Ui.GENERAL_IMAGE)
-            );
-            duke.setHasLoadingError(false);
-        }
     }
 
     /**

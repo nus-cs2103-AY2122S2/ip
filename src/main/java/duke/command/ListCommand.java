@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.main.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.ImageType;
+import duke.ui.Ui;
 
 /**
  * Represents a Command which, when executed, lists all Task objects in the TaskList instance.

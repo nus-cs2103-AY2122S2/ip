@@ -2,6 +2,8 @@ package duke.main;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.utils.Pair;
 import javafx.scene.image.Image;
 
 public class Duke {

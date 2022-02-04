@@ -1,4 +1,4 @@
-package duke.main;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,7 +20,6 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -48,7 +47,20 @@ public class DialogBox extends HBox {
         setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
         displayPicture.setClip(imageShape);
+        initializeBackground();
+    }
 
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    private void initializeBackground() {
         //set background
         Image image = new Image(this.getClass().getResourceAsStream("/images/FireBackground2.jpg"));
         BackgroundImage backgroundImage = new BackgroundImage(image,
@@ -60,7 +72,6 @@ public class DialogBox extends HBox {
         dialog.setBackground(background);
     }
 
-
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -69,15 +80,5 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
     }
 }
