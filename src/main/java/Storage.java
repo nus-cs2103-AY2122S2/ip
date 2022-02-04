@@ -45,7 +45,7 @@ public class Storage {
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/mm/yyyy HHmm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             String line;
             while((line  = bufferedReader.readLine()) != null) {
                 //write to arraylist
@@ -59,12 +59,12 @@ public class Storage {
                         break;
                     case "event":
                         String eventTitle = "event " + tokens[1];
-                        String eventDeadline = tokens[3];
+                        String eventDeadline = tokens[2];
                         this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
                         break;
                     case "deadline":
                         String deadlineTitle = "deadline " + tokens[1];
-                        String deadlineDeadline = tokens[3];
+                        String deadlineDeadline = tokens[2];
                         this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
                         break;
                 }
@@ -146,7 +146,7 @@ public class Storage {
                 case "T":
                     String[] todoTokens = taskKey.split("todo ");
                     toWrite = "todo / " + todoTokens[1] + " / " + mark;
-                    bufferedWriter.append(newLine).append(toWrite);
+                    bufferedWriter.append(newLine + toWrite);
                     break;
                 case "E":
                     String[] eventTokens = taskKey.split("event ");
@@ -159,10 +159,10 @@ public class Storage {
                 case "D":
                     String[] deadlineTokens = taskKey.split("deadline ");
                     toWrite = deadlineTokens[1];
-                    String[] dSplit = toWrite.split(" by/ ");
+                    String[] dSplit = toWrite.split(" /by ");
                     toWrite = String.join(" / ", dSplit );
                     toWrite = "deadline / " + toWrite + " / " + mark;
-                    bufferedWriter.append(newLine).append(toWrite);
+                    bufferedWriter.append(newLine + toWrite);
                     break;
             }
             bufferedWriter.close();

@@ -10,7 +10,12 @@ public class ListCommand extends Command{
             initList.append("\n");
         }
         
-        userInt.print(initList.toString());
+        userInt.print(
+                "----------------------------" +
+                        "----------------------------\n" +
+                initList.toString() +
+                        "--------------------------------------------------------\n"
+        );
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Gene {
 
                 currCommand.execute(geneList, geneUi, geneStorage);
             } catch (UnrecognizedCommandException e) {
-                geneUi.printUnrecognised();
+                geneUi.print(e.getMessage());
             } catch (Exception e) {
                 e.printStackTrace();
             }

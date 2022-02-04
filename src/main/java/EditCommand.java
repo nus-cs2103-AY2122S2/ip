@@ -35,7 +35,7 @@ public class EditCommand extends Command{
         }
 
         tasks.set(index, newTask);
-        storage.updatesToFile(index, "1");
+        storage.updatesToFile(index, mark);
 
         userInt.print(toPrint);
 

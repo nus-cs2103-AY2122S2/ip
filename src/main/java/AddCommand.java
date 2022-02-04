@@ -101,7 +101,10 @@ public class AddCommand extends Command{
                             + "--------------------------------------------------------\n"
             );
         } catch(DateTimeParseException err) {
-            System.out.println(err.getMessage());
+            userInt.print(
+                    "Bad date time format used, please use this date time format instead: "
+                    + "d/MM/yyyy HHmm."
+            );
         }
     }
 
