@@ -1,0 +1,5 @@
+todo borrow book
+event wake up /at 8am
+deadline submit assignment /by Sunday
+list
+bye
