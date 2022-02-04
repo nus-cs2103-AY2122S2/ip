@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "myboss.MyBoss"
+    mainClassName = "myboss.Launcher"
 }
 
 shadowJar {
