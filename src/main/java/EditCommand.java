@@ -23,10 +23,15 @@ public class EditCommand extends Command{
                     "Nice! I've marked this task as done:"
                     + "\n" + "  " + targetTask
                     + "\n"
-                    + "--------------------------------------------------------");
+                    + "--------------------------------------------------------\n";
         } else {
             newTask = targetTask.unmarkTask();
-            toPrint =
+            toPrint = "----------------------------" +
+                    "----------------------------\n" +
+                    "OK, I've marked this task as not done yet:"
+                    + "\n" + "  " + targetTask
+                    + "\n"
+                    + "--------------------------------------------------------\n";
         }
 
         tasks.set(index, newTask);

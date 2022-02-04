@@ -16,10 +16,13 @@ public class AddCommand extends Command{
         switch (this.taskType) {
         case "todo":
             addTodo(taskBody, userInt, storage, tasks);
+            break;
         case "deadline":
             addDeadline(taskBody, userInt, storage, tasks);
+            break;
         case "event":
             addEvent(taskBody, userInt, storage, tasks);
+            break;
         }
     }
 
@@ -44,14 +47,14 @@ public class AddCommand extends Command{
         }
         Task newTask = new TodoTask(taskTitle);
         itemList.add(newTask);
-        System.out.println(
-                "----------------------------" +
+
+        userInt.print("----------------------------" +
                         "----------------------------\n" +
                         "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
                         + "Now you have " + itemList.size() + " tasks in the list."
                         + "\n"
-                        + "--------------------------------------------------------"
+                        + "--------------------------------------------------------\n"
         );
     }
 
@@ -88,14 +91,14 @@ public class AddCommand extends Command{
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "E", false);
             itemList.add(newTask);
-            System.out.println(
+            userInt.print(
                     "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------"
+                            + "--------------------------------------------------------\n"
             );
         } catch(DateTimeParseException err) {
             System.out.println(err.getMessage());
@@ -137,14 +140,14 @@ public class AddCommand extends Command{
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "D", false);
             itemList.add(newTask);
-            System.out.println(
+            userInt.print(
                     "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------"
+                            + "--------------------------------------------------------\n"
             );
         } catch(DateTimeParseException err) {
             System.out.println(err.getMessage());

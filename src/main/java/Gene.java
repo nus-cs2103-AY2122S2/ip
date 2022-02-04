@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Gene {
     private final static Ui geneUi = new Ui();
-    private final static Storage geneStorage = new Storage("");
+    private final static Storage geneStorage = new Storage("gene.txt");
     private final static TaskList geneList = new TaskList(geneStorage);
 
     public static void main(String[] args) {
@@ -17,6 +17,7 @@ public class Gene {
             try {
                 Command currCommand = Parser.parseCommand(scanner.nextLine());
                 if (currCommand.isExit()) {
+                    currCommand.execute(geneList, geneUi, geneStorage);
                     break;
                 }
 
