@@ -1,6 +1,7 @@
 public class EditCommand extends Command{
     private final String taskBody;
     private final String mark;
+    private String toPrint;
 
     public EditCommand(String body, String mark) {
         this.taskBody = body;
@@ -14,24 +15,25 @@ public class EditCommand extends Command{
         int index = Integer.parseInt(strIndex);
         Task targetTask = tasks.get(index); //have to edit tasklist
         Task newTask;
+
         if (this.mark.equals("1")) {
             newTask = targetTask.markTask();
+            toPrint = "----------------------------" +
+                    "----------------------------\n" +
+                    "Nice! I've marked this task as done:"
+                    + "\n" + "  " + targetTask
+                    + "\n"
+                    + "--------------------------------------------------------");
         } else {
             newTask = targetTask.unmarkTask();
+            toPrint =
         }
 
         tasks.set(index, newTask);
         storage.updatesToFile(index, "1");
-        userInt.print();
 
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Nice! I've marked this task as done:"
-                        + "\n" + "  " + targetTask
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+        userInt.print(toPrint);
+
     }
 
     @Override

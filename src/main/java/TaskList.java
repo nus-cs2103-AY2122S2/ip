@@ -41,4 +41,8 @@ public class TaskList {
         return this.itemList.size();
     }
 
+    public void remove(int index) {
+        this.itemList.remove(index);
+    }
+
 }

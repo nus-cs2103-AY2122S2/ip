@@ -18,9 +18,19 @@ public class Ui {
     }
 
     public void print(String toPrint) {
-
+        System.out.print(toPrint);
     }
 
+    public void printGreeting() {
+        System.out.println("Hello from\n" + LOGO);
+    }
+
+    public void printUnrecognised() {
+        System.out.println("----------------------------" +
+                "----------------------------\n" +
+                "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
+                + "--------------------------------------------------------");
+    }
 
     public static void exitProg() {
         System.out.println("--------------------------------" +
@@ -29,6 +39,4 @@ public class Ui {
                 + "\n"
                 + "--------------------------------------------------------");
     }
-
-
 }
