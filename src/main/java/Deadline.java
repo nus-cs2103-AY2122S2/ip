@@ -20,6 +20,12 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String saveData() {
+        int done = super.done? 1 : 0;
+        return Type.D + " | " + done + " | " + task + " | " + by;
+    }
+
+    @Override
     public String toString() {
         return "["+Type.D+"]" + super.toString() + " (by: " + by + ")";
     }

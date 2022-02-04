@@ -20,6 +20,12 @@ public class Event extends Task{
     }
 
     @Override
+    public String saveData() {
+        int done = super.done? 1 : 0;
+        return Type.E + " | " + done + " | " + task + " | " + at;
+    }
+
+    @Override
     public String toString() {
         return "["+Type.E+"]" + super.toString() + " (at: " + at + ")";
     }

@@ -20,6 +20,10 @@ public class Task {
         return new Task(task, false);
     }
 
+    public String saveData() {
+        return task;
+    }
+
     @Override
     public String toString() {
         return done? "[✓] " + task: "[ ] " + task;
