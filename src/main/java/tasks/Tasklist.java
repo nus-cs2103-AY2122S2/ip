@@ -74,6 +74,7 @@ public class Tasklist {
             throw new DukeException("This task is already done!");
         } else {
             thisTask.setDone(true);
+            assert thisTask.isDone();
             return new String[] {"Nice! I've marked this task as done:", thisTask.toString()};
         }
     }
@@ -91,6 +92,7 @@ public class Tasklist {
             throw new DukeException("This task has not been done yet!");
         } else {
             thisTask.setDone(false);
+            assert !thisTask.isDone();
             return new String[] {"Ok, I've marked this task as not done yet:", thisTask.toString()};
         }
     }
