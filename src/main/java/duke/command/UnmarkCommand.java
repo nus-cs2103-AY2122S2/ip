@@ -6,8 +6,6 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
-
 
 /**
  * Command to mark a task in the task list as incomplete.
@@ -26,10 +24,14 @@ public class UnmarkCommand extends Command {
 
     /** {@inheritDoc} */
     @Override
-    public boolean exec(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String exec(TaskList taskList, Storage storage) throws DukeException {
         Map.Entry<Task, String> unmarkedTask = taskList.unmark(index);
-        ui.print(unmarkedTask.getValue());
         storage.saveUpdatedTask(index, unmarkedTask.getKey());
-        return true;
+        return unmarkedTask.getValue();
+    }
+
+    @Override
+    public boolean shouldAbort() {
+        return false;
     }
 }

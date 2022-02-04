@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Command to delete a task from the task list.
@@ -21,10 +20,14 @@ public class DeleteCommand extends Command {
 
     /** {@inheritDoc} */
     @Override
-    public boolean exec(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String exec(TaskList taskList, Storage storage) throws DukeException {
         String printStr = taskList.deleteTask(index);
-        ui.print(printStr);
         storage.saveUpdatedTask(index, null);
-        return true;
+        return printStr;
+    }
+
+    @Override
+    public boolean shouldAbort() {
+        return false;
     }
 }

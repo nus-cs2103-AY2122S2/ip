@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Command to add a task onto the task list.
@@ -22,10 +21,14 @@ public class AddCommand extends Command {
 
     /** {@inheritDoc} */
     @Override
-    public boolean exec(TaskList taskList, Ui ui, Storage storage) {
+    public String exec(TaskList taskList, Storage storage) {
         String message = taskList.addTask(this.task);
         storage.saveAddedTask(this.task);
-        ui.print(message);
-        return true;
+        return message;
+    }
+
+    @Override
+    public boolean shouldAbort() {
+        return false;
     }
 }

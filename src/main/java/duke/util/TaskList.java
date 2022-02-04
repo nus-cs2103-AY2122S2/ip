@@ -46,7 +46,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
-        return "Noted. I've removed this task:\n" + deletedTask.printTask() + "Now you have " + taskList.size()
+        return "Noted. I've removed this task:\n" + deletedTask.printTask() + "\n" + "Now you have " + taskList.size()
                 + " tasks in the list.";
     }
 

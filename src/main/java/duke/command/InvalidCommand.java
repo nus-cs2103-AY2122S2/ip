@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Command to print error message if the user has given invalid input.
@@ -21,8 +20,12 @@ public class InvalidCommand extends Command {
 
     /** {@inheritDoc} */
     @Override
-    public boolean exec(TaskList taskList, Ui ui, Storage storage) {
-        ui.print(errorMessage);
-        return true;
+    public String exec(TaskList taskList, Storage storage) {
+        return errorMessage;
+    }
+
+    @Override
+    public boolean shouldAbort() {
+        return false;
     }
 }
