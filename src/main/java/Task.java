@@ -1,6 +1,6 @@
 public class Task {
     protected String input;
-    protected boolean isComplete = false;
+    public boolean isComplete = false;
     protected String type;
     protected String description = ""; // Display format for Duke
 
@@ -32,6 +32,7 @@ public class Task {
             return "[ ]";
         }
     }
+    
 
     /**
      * Returns description of task

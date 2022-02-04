@@ -12,10 +12,17 @@ public class AddTaskCommand extends Command {
 
     private String input; // Details of the task
     private String type; // Type of task
+    private boolean isComplete = false;
 
     public AddTaskCommand(String input, String type) {
         this.input = input;
         this.type = type;
+    }
+
+    public AddTaskCommand(String input, String type, boolean isComplete) {
+        this.input = input;
+        this.type = type;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -43,6 +50,9 @@ public class AddTaskCommand extends Command {
         } else {
             newTask = null;
         }
+
+        // Set indicated completion state
+        newTask.isComplete = this.isComplete;
 
         // Adding task to TaskManager
         try {

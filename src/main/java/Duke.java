@@ -10,6 +10,13 @@ public class Duke {
         // Init text scanner
         Scanner sc = new Scanner(System.in);
 
+        // Init saved tasks
+        try {
+            TaskManager.loadTasks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Init file if it is not there
         File f = new File("./tasklist.txt");
         if (!f.isFile()) {

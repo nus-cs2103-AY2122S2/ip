@@ -19,6 +19,7 @@ public class TaskManager {
         writer.close();
     }
 
+
     /**
      * Removes task from tasklist.txt and updates the task array
      *
@@ -55,6 +56,37 @@ public class TaskManager {
         deleteFile.delete();
         File newTaskListFile = new File("temp.txt");
         newTaskListFile.renameTo(new File("tasklist.txt"));
+
+    }
+
+    /**
+     * Loads existing tasks into the tasklist array (for use at start of program)
+     */
+    public static void loadTasks() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("tasklist.txt"));
+        String currentLine;
+        while ((currentLine = reader.readLine()) != null) {
+            // Getting task type
+            String taskType = currentLine.substring(0, 3); // First 3 characters eg. "[T]"
+            if (taskType.equals("[T]")) {
+                taskType = "todo";
+            } else if (taskType.equals("[D]")) {
+                taskType = "deadline";
+            } else {
+                taskType = "event";
+            }
+
+            // Getting completion state
+            String completion = currentLine.substring(3, 6); // 4th - 6th characters eg. "[X]"
+            boolean isComplete = completion.equals("[X]");
+
+            // Getting description string (already formatted)
+            String description = currentLine.substring(6);
+
+            CustomTask task = new CustomTask(taskType, isComplete, description);
+            TaskManager.taskList.add(task);
+
+        }
 
     }
 }
