@@ -11,7 +11,6 @@ public class Duke {
     static TaskList tasklist;
 
     public Duke() {
-        Ui ui = new Ui();
         Parser parser = new Parser();
         Storage storage = new Storage();
         tasklist = storage.tasklist;

@@ -1,13 +1,11 @@
 package duke;
 
-
 import gui.Output;
 import javafx.application.Platform;
 
 /**
  * This is the class that parses through inputs
  */
-
 public class Parser {
 
     public Parser(){

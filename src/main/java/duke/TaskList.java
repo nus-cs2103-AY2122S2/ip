@@ -15,13 +15,6 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
-    //Depreciated
-    public void markTaskNum(int taskNum, String isTrue) {
-        if (isTrue.equals("true") && (taskNum > 0)) {
-            this.tasklist.get(taskNum).mark();
-        }
-    }
-
     /**
      * Deletes a specified index (starts from 1) from the input ArrayList and shifts
      * all subsequent task numbers accordingly by +1.
@@ -65,19 +58,6 @@ public class TaskList {
         }
         Storage.writeAllToFile(this);
         return s;
-    }
-
-    public String addTask(String name, String time, String type, boolean isReading) {
-        Task task;
-        if (type.equals("D")) {
-            task = new Deadline(name, Task.totalTask, time, isReading);
-        } else if (type.equals("E")) {
-            task = new Event(name, Task.totalTask, time, isReading);
-        } else {
-            task = new ToDo(name, Task.totalTask, isReading);
-        }
-        tasklist.add(task);
-        return task.toString();
     }
 
     public String findTask(String keyword) {

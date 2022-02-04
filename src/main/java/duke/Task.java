@@ -56,7 +56,7 @@ public class Task {
             }
         }
         catch (EmptyDescriptorExceptions e){
-            Ui.printEmptyDescriptionException();
+            Output.printEmptyDescriptionException();
         }
         catch (IOException e) {
             e.printStackTrace();
