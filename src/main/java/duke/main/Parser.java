@@ -7,11 +7,13 @@ import duke.commands.AddToDoCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
+import duke.commands.DuplicateCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.commands.WrongCommand;
+import duke.tasks.Task;
 
 
 /**
@@ -20,7 +22,6 @@ import duke.commands.WrongCommand;
  * based on the user input.
  */
 public class Parser {
-
     /**
      * This method determines what Burp should do when the user gives an input
      *
@@ -33,6 +34,44 @@ public class Parser {
     public static Command parseCommands(Ui.Reply type, TaskList toDoList,
                                         String cmd, Storage storage) throws DukeException {
         String[] cmdSplit = cmd.split(" ");
+        boolean isAddCommand = false;
+        boolean isDuplicateTask = false;
+        switch (type) {
+        case DEADLINE:
+            isAddCommand = true;
+            break;
+        case EVENT:
+            isAddCommand = true;
+            break;
+        case TODO:
+            isAddCommand = true;
+            break;
+        default:
+            isAddCommand = false;
+            break;
+        }
+        System.out.println(isAddCommand);
+
+        // then check for duplicates
+        if (isAddCommand) {
+            // because the word immediately after deadline/event/todo is the task description
+            String taskDescription = cmdSplit[1];
+            for (int i = 0; i < toDoList.size(); i++) {
+                Task current = toDoList.get(i);
+                String currentTaskDescription = current.isDoneStatus()
+                        ? current.toString().split(" ")[1] // if it is done, then there's only 1 whitespace
+                        : current.toString().split(" ")[2]; // otherwise, there's 2 whitespaces so we take the second
+                if (taskDescription.equals(currentTaskDescription)) {
+                    isDuplicateTask = true;
+                    break;
+                }
+            }
+        }
+
+        if (isDuplicateTask) {
+            return new DuplicateCommand();
+        }
+
         switch (type) {
         case LIST:
             return new ListCommand(toDoList, cmd);
@@ -43,11 +82,11 @@ public class Parser {
         case EVENT:
             return new AddEventCommand(toDoList, cmd, storage);
         case MARK:
-            return new MarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+            return new MarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1, storage);
         case UNMARK:
-            return new UnmarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+            return new UnmarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1, storage);
         case DELETE:
-            return new DeleteCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+            return new DeleteCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1, storage);
         case FIND:
             return new FindCommand(toDoList, cmd);
         case BYE:

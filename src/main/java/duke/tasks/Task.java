@@ -40,6 +40,15 @@ public abstract class Task {
     }
 
     /**
+     * Gets the boolean version of the status of this task
+     *
+     * @return true if it is done, otherwise false
+     */
+    public boolean isDoneStatus() {
+        return this.isDone;
+    }
+
+    /**
      * Gets the task's description.
      *
      * @return description of the Task
