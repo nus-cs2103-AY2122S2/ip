@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * An instance of storage which is used to read/write to the data file of the user.
+ */
 public class Storage {
 
     private final File dataFile;

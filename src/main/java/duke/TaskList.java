@@ -1,21 +1,21 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import duke.task.Task;
+
+/**
+ * An instance of TaskList that stores all the tasks.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
-    /** Instantiates a new empty TaskList. */
+    /**
+     * Instantiates a new empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
     }
 
     /**
@@ -33,6 +33,15 @@ public class TaskList {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * Gets tasks.
+     *
+     * @return the tasks
+     */
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
