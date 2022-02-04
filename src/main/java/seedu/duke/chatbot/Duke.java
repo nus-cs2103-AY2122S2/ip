@@ -60,7 +60,6 @@ public class Duke {
         new Duke(filePath).run();
     }
 
-
     public String getResponse(String input) {
         return "Duke heard: " + input;
     }
