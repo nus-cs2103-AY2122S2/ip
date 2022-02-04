@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "baron.Baron"
+    mainClassName = "baron.Launcher"
 }
 
 shadowJar {
