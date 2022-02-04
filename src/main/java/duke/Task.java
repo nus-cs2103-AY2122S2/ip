@@ -47,6 +47,9 @@ public abstract class Task implements Comparable<Task> {
     }
 
     @Override
+    /**
+     * Allows lexicographical comparison of Task title
+     */
     public int compareTo(Task task) {
         return name.compareTo(task.name);
     }
