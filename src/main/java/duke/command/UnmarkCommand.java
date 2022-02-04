@@ -4,14 +4,31 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents unmark command.
+ * inherit from Command.
+ */
 public class UnmarkCommand extends Command {
     private final int unmarkIndex;
 
+    /**
+     * Returns an unmark command with index.
+     *
+     * @param unmarkIndex index to be mark.
+     */
     public UnmarkCommand(int unmarkIndex) {
         super();
         this.unmarkIndex = unmarkIndex;
     }
 
+    /**
+     * Change one task of tasks after unmark.
+     * Update the storage.
+     *
+     * @param tasks the entire TaskList.
+     * @param ui the ui interface and messages.
+     * @param storage the storage operations.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

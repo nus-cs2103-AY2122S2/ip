@@ -4,14 +4,31 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents mark command.
+ * inherit from Command.
+ */
 public class MarkCommand extends Command {
     private final int markIndex;
 
+    /**
+     * Returns a mark command with index.
+     *
+     * @param markIndex index to be mark.
+     */
     public MarkCommand(int markIndex) {
         super();
         this.markIndex = markIndex;
     }
 
+    /**
+     * Change one task of tasks after mark.
+     * Update the storage.
+     *
+     * @param tasks the entire TaskList.
+     * @param ui the ui interface and messages.
+     * @param storage the storage operations.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
