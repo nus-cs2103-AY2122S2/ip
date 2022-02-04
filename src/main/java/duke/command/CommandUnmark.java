@@ -13,8 +13,8 @@ public class CommandUnmark extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String change = taskList.unmarkFinished(taskNo);
-        Ui.wrapPrint(change);
+        return change;
     }
 }

@@ -1,8 +1,5 @@
 package duke;
 
-import java.util.Locale;
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.dukeexception.NoTimeGivenException;
 
@@ -10,42 +7,35 @@ import duke.dukeexception.NoTimeGivenException;
  * The main logic of Duke
  */
 class Duke {
-    private static final TaskList taskList = new TaskList();
-    private static final Storage storage = new Storage();
+    private TaskList taskList;
+    private Storage storage;
 
-    public static void main(String[] args) {
-        Locale.setDefault(Locale.US);
+    public Duke(Storage storage, TaskList taskList) {
+        this.storage = storage;
+        this.taskList = taskList;
         storage.readData(taskList);
-        Scanner myScanner = new Scanner(System.in);
-        System.out.println("Hello from\n" + Response.LOGO);
-        Ui.wrapPrint(Response.RESPONSE_WELCOME);
-        Over over = new Over();
+    }
 
-        while (!over.isOver()) {
-            String userInput = myScanner.nextLine();
-            try {
-                Command command = Parser.parse(userInput, taskList, over);
-                command.execute();
-            } catch (NumberFormatException e) {
-                //mark command
-                //unmark command
-                Ui.wrapPrint("mark command must precede with a decimal number!");
-                //delete command
-                Ui.wrapPrint("delet command must precede with a decimal number!");
-            } catch (IndexOutOfBoundsException e) {
-                //todo command
-                Ui.wrapPrint("please specify what to do");
-                //deadline command
-                Ui.wrapPrint(Response.RESPONSE_MISSINGDATE);
-                //event command
-                Ui.wrapPrint(Response.RESPONSE_MISSINGTIME);
-                //} catch (DukeCannotUnderstandException e) {
-                //Format.wrapPrint(Response.RESPONSE_CANTUNDERSTAND);
-            } catch (NoTimeGivenException e) {
-                Ui.wrapPrint("specify the time please\n");
-            }
+    public String getResponse(String userInput) {
+        try {
+            Command command = Parser.parse(userInput, taskList);
+            String response = command.execute();
+            storage.writeData(taskList);
+            return response;
+        } catch (NumberFormatException e) {
+            //mark command
+            //unmark command
+            return "mark command must precede with a decimal number!";
+            //delete command
+        } catch (IndexOutOfBoundsException e) {
+            //todo command
+            return "please specify what to do";
+        } catch (NoTimeGivenException e) {
+            return "specify the time please\n";
         }
+    }
+
+    private void writeData() {
         storage.writeData(taskList);
-        myScanner.close();
     }
 }

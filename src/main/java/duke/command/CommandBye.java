@@ -23,8 +23,9 @@ public class CommandBye extends Command {
      * Execution of this command.
      */
     @Override
-    public void execute() {
-        Ui.wrapPrint(Response.RESPONSE_GOODBYE);
+    public String execute() {
+        String msg = Response.RESPONSE_GOODBYE;
         over.setOver();
+        return msg;
     }
 }

@@ -14,9 +14,9 @@ public class CommandFind extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         System.out.println("CommandFind Executed");
         TaskList searchResult = this.taskList.search(this.keyword);
-        Ui.wrapPrint(Response.RESPONSE_SEARCH + "\n" + searchResult.toString());
+        return Response.RESPONSE_SEARCH + "\n" + searchResult.toString();
     }
 }

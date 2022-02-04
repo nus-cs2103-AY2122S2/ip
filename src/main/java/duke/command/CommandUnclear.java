@@ -5,7 +5,7 @@ import duke.Ui;
 
 public class CommandUnclear extends Command {
     @Override
-    public void execute() {
-        Ui.wrapPrint(Response.RESPONSE_CANTUNDERSTAND);
+    public String execute() {
+        return Response.RESPONSE_CANTUNDERSTAND;
     }
 }

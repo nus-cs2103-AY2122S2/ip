@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.command.Command;
-import duke.command.CommandBye;
 import duke.command.CommandDeadline;
 import duke.command.CommandDelete;
 import duke.command.CommandEvent;
@@ -25,16 +24,13 @@ class Parser {
      *
      * @param userInput the String value that the user typed
      * @param taskList  the current list of tasks that duke stores, encapsulated in TaskList class
-     * @param over      the boolean value that decides when to kill the program, encapsulated in custom wrapper class
      * @return the Command object that can be executed
      * @throws NoTimeGivenException if the user types the wrong format of time
      */
-    public static Command parse(String userInput, TaskList taskList, Over over) throws NoTimeGivenException {
+    public static Command parse(String userInput, TaskList taskList) throws NoTimeGivenException {
         String[] words = userInput.split(" ");
         String firstWord = words[0];
-        if (firstWord.equals("bye")) {
-            return new CommandBye(over);
-        } else if (firstWord.equals("list")) {
+        if (firstWord.equals("list")) {
             return new CommandList(taskList);
         } else if (firstWord.equals("mark") && words.length == 2) {
             int taskNo = Integer.parseInt(words[1]);

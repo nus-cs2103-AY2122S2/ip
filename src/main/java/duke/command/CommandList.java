@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class CommandList extends Command {
     private TaskList taskList;
@@ -11,7 +10,8 @@ public class CommandList extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.wrapPrint(taskList.toString());
+    public String execute() {
+        return taskList.toString();
     }
 }
+

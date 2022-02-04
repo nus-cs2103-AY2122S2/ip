@@ -15,9 +15,9 @@ public class CommandTodo extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Todo newTask = new Todo(todoContent);
         taskList.addTask(newTask);
-        Ui.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size()));
+        return Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size());
     }
 }

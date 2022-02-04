@@ -13,8 +13,8 @@ public class CommandMark extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String change = taskList.markFinished(taskNo);
-        Ui.wrapPrint(change);
+        return change;
     }
 }

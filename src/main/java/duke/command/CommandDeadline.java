@@ -21,9 +21,9 @@ public class CommandDeadline extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Deadline newTask = new Deadline(deadlineContent, date);
         taskList.addTask(newTask);
-        Ui.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size()));
+        return Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size());
     }
 }

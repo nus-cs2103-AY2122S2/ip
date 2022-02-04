@@ -19,9 +19,9 @@ public class CommandEvent extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Event newTask = new Event(eventContent, time);
         taskList.addTask(newTask);
-        Ui.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask + "\n");
+        return Response.RESPONSE_ADDED + "\n" + newTask + "\n";
     }
 }

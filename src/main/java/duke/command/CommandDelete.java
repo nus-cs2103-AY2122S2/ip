@@ -16,8 +16,8 @@ public class CommandDelete extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Task deletee = taskList.deleteTask(taskNo);
-        Ui.wrapPrint(Response.RESPONSE_DELETED + "\n" + deletee.toString() + "\n" + Response.taskNo(taskList.size()));
+        return Response.RESPONSE_DELETED + "\n" + deletee.toString() + "\n" + Response.taskNo(taskList.size());
     }
 }

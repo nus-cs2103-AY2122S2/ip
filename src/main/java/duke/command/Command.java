@@ -7,5 +7,5 @@ public abstract class Command {
     /**
      * Executes what the command specifies.
      */
-    public abstract void execute();
+    public abstract String execute();
 }
