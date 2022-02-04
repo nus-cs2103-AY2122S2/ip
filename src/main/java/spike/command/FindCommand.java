@@ -26,6 +26,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        assert keyword != null : "Keyword should not be null";
         int i = 1;
         String result = "Here are the matching tasks in your list:\n";
         for (Task task : tasks.getTasks()) {

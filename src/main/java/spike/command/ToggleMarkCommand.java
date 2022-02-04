@@ -30,6 +30,7 @@ public class ToggleMarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        assert task != null : "Task should not be null";
         if (action == 1) {
             task.markAsDone();
             return "Great! One more task done:\n" + task.toString();

@@ -65,11 +65,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (isInputEmpty(input)) {
+            userInput.clear();
+            return;
+        }
         String response = spike.getResponseCommand(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getSpikeDialog(response, spikeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Checks if the input consists of only space
+     *
+     * @param input String input
+     * @return true if the input is not empty, else false
+     */
+    private boolean isInputEmpty(String input) {
+        return input.trim().equals("");
     }
 }
