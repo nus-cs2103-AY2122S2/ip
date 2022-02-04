@@ -8,6 +8,7 @@ import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddToDoCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.DuplicateCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
@@ -26,9 +27,11 @@ public class ParserTest {
         assertTrue(Parser.parseCommands(Ui.Reply.LIST, toDoList, "list", storage) instanceof ListCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.TODO, toDoList, "todo smth", storage) instanceof AddToDoCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.DEADLINE, toDoList,
-                "deadline smth /by smth", storage) instanceof AddDeadlineCommand);
+                "deadline smthElse /by smth", storage) instanceof AddDeadlineCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.EVENT, toDoList,
-                "event smth /at somewhere", storage) instanceof AddEventCommand);
+                "event smthElse2 /at somewhere", storage) instanceof AddEventCommand);
+        assertTrue(Parser.parseCommands(Ui.Reply.EVENT, toDoList,
+                "event smthElse2 /at somewhere", storage) instanceof DuplicateCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.MARK, toDoList, "mark 1", storage) instanceof MarkCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.UNMARK, toDoList, "unmark 1", storage) instanceof UnmarkCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.DELETE, toDoList, "delete 1", storage) instanceof DeleteCommand);
