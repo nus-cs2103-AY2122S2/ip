@@ -17,7 +17,7 @@ import duke.task.Todo;
  */
 public class TaskList {
 
-    private static final String TASK_ADDED = "\tTask Added, arrgh:\n";
+    private static final String TASK_ADDED = "Task Added, arrgh:\n";
     private final ArrayList<Task> taskList;
     private int taskCount = 0;
     private Ui ui = new Ui();
@@ -79,16 +79,19 @@ public class TaskList {
      *
      * @param task List of tasks.
      */
-    public void add(Task task) {
+    public String add(Task task) {
+        StringBuilder str = new StringBuilder();
         if (task != null) {
             this.taskList.add(task);
             this.taskCount++;
-            System.out.println(TASK_ADDED + "\t" + taskList.get(this.taskCount - 1).toString());
-            System.out.println("\tNow you have " + this.taskCount
+            str.append(TASK_ADDED + taskList.get(this.taskCount - 1).toString());
+            str.append("\nNow you have " + this.taskCount
                     + " tasks in your task list arrr, better get workin' aye!\n");
-            ui.requestNextCommand();
+            str.append(ui.requestNextCommand());
+            return str.toString();
         } else {
-            ui.showError("\tTask is invalid matey :-(, please try again!\n");
+            str.append(ui.showError("\tTask is invalid matey :-(, please try again!\n"));
+            return str.toString();
         }
     }
 
@@ -97,16 +100,17 @@ public class TaskList {
      *
      * @param taskIndex 0-based index task number to be deleted.
      */
-    public void delete(int taskIndex) {
+    public String delete(int taskIndex) {
+        StringBuilder str = new StringBuilder();
         try {
             Task task = taskList.get(taskIndex);
             this.taskList.remove(taskIndex);
             this.taskCount--;
-            ui.deleteTask();
-            System.out.println("\t" + task);
-            ui.requestNextCommand();
+            str.append(ui.deleteTask() + task+ "\n" + ui.requestNextCommand());
+            return str.toString();
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
+            return str.toString();
         }
     }
 
@@ -115,18 +119,22 @@ public class TaskList {
      *
      * @param keyword keyword to be found in list of tasks
      */
-    public void findTaskMatchingKeyword(String keyword) {
+    public String findTaskMatchingKeyword(String keyword) {
+
+        StringBuilder output = new StringBuilder();
         List<Task> matchingTask = new ArrayList<>();
         matchingTask = this.taskList.stream()
                 .filter(str -> str.getTaskDescription().trim().contains(keyword))
                 .collect(Collectors.toList());
 
         // To be modified
-        ui.showMatchingTasks();
+        output.append(ui.showMatchingTasks());
         for (int i = 0; i < matchingTask.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + matchingTask.get(i));
+            output.append((i + 1) + "." + matchingTask.get(i) + "\n");
         }
-        ui.requestNextCommand();
+        output.append(ui.requestNextCommand());
+
+        return output.toString();
     }
 
     /**
@@ -157,12 +165,13 @@ public class TaskList {
      *
      * @param taskIndex 0-based index of task number.
      */
-    public void markTask(int taskIndex) {
+    public String markTask(int taskIndex) {
+        StringBuilder str = new StringBuilder();
         Task curr = taskList.get(taskIndex);
         curr.markAsDone();
-        ui.markAsDone();
-        System.out.println("\t" + curr);
-        ui.requestNextCommand();
+        str.append(ui.markAsDone() + curr + "\n" + ui.requestNextCommand());
+
+        return str.toString();
     }
 
     /**
@@ -170,23 +179,27 @@ public class TaskList {
      *
      * @param taskIndex 0-based index of task number.
      */
-    public void unmarkTask(int taskIndex) {
+    public String unmarkTask(int taskIndex) {
+        StringBuilder str = new StringBuilder();
         Task curr = taskList.get(taskIndex);
         curr.markAsUndone();
-        ui.markAsUndone();
-        System.out.println("\t" + curr);
-        ui.requestNextCommand();
+        str.append(ui.markAsUndone() + curr + "\n" + ui.requestNextCommand());
+
+        return str.toString();
     }
 
     /**
      * Prints out the list of outstanding tasks
      */
-    public void printTaskList() {
-        ui.printTaskList();
+    public String printTaskList() {
+        StringBuilder str = new StringBuilder();
+        str.append(ui.printTaskList());
         for (int i = 0; i < this.taskCount; i++) {
-            System.out.println("\t" + (i + 1) + "." + taskList.get(i).toString());
+            str.append((i + 1) + "." + taskList.get(i).toString() + "\n");
         }
-        ui.requestNextCommand();
+        str.append(ui.requestNextCommand());
+
+        return str.toString();
     }
 
 }

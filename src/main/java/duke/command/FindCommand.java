@@ -31,7 +31,8 @@ public class FindCommand extends Command {
      * @param storage  Saved history
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.findTaskMatchingKeyword(this.keyword);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String output = taskList.findTaskMatchingKeyword(this.keyword);
+        return output;
     }
 }

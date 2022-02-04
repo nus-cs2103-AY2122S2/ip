@@ -23,9 +23,9 @@ public class Duke {
      * Constructor for Duke chat-bot program which initialises with a saved file (if applicable),
      * list of tasks, and system Ui.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("src/main/java/Duke/data/duke.txt");
         try { // Load existing task-list
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -36,30 +36,52 @@ public class Duke {
         }
     }
 
+//    /**
+//     * Runs the Duke chat-bot program and takes in inputs
+//     */
+//    public void run() {
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                ui.showLine(); // show the divider line ("_______")
+//                Command c = Parser.parseCommand(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                if (c instanceof ByeCommand) {
+//                    isExit = true;
+//                }
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            } catch (NullPointerException e) {
+//                ui.showError("\tI'm sorry matey, that's an invalid input. Please try again :'(\n");
+//            }
+//        }
+//    }
+
     /**
-     * Runs the Duke chat-bot program and takes in inputs
+     * Returns a default response after receiving user input.
+     *
+     * @param input User input.
+     * @return Response.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(tasks, ui, storage);
-                if (c instanceof ByeCommand) {
-                    isExit = true;
-                }
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (NullPointerException e) {
-                ui.showError("\tI'm sorry matey, that's an invalid input. Please try again :'(\n");
+    public String getResponse(String input) throws DukeException {
+        try {
+            // Need to change this
+            Command c = Parser.parseCommand(input);
+            String output = c.execute(tasks, ui, storage);
+            if (c instanceof ByeCommand) {
+                return "exit";
             }
+            return output;
+        } catch (DukeException e) {
+            throw new DukeException("I'm sorry matey, that's an invalid input. Please try again :'(\n");
         }
+
+//        return "Cap'n Dave heard: " + input;
     }
 
-    public static void main(String[] args) {
-        new Duke("src/main/java/Duke/data/duke.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("src/main/java/Duke/data/duke.txt").run();
+//    }
 }

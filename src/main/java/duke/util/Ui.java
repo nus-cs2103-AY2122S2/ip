@@ -11,18 +11,18 @@ public class Ui {
     private static final PrintStream OUT = System.out;
     private static final Scanner IN = new Scanner(System.in);
 
-    private static final String HELP = "\tA 'bye' command will exit the program, yarr.\n";
-    private static final String LINE = "\t___________________________________________________________\n";
-    private static final String REQUEST_NEXT_COMMAND = "\tAye, Aye. Your next command:";
+    private static final String HELP = "A 'bye' command will exit the program, yarr.\n";
+    private static final String LINE = "___________________________________________________________\n";
+    private static final String REQUEST_NEXT_COMMAND = "Aye, Aye. Your next command:";
     private static final String REQUEST_NEXT_COMMAND_ANGRY
-            = "\tAye Aye, better get it right this time. Your next command:";
-    private static final String TASK_CALL = "\tAvast ye Matey. Here goes your task list:\n";
-    private static final String TASK_COMPLETED = "\tTask completed, good job matey!\n";
-    private static final String TASK_DELETED = "\tAlright matey, task has been deleted good on ya.\n";
-    private static final String TASK_MATCH = "\tAvast ye Matey. Here goes your matching tasks in your task list:\n";
-    private static final String TASK_UNCHECKED = "\tAlright matey, hurry up and finish up this task arrr:\n";
-    private static final String WELCOME_MESSAGE = "\tAhoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
-    private static final String WELCOME_QUESTION = "\tWhat can I do for you? Your command:\n";
+            = "Aye Aye, better get it right this time. Your next command:";
+    private static final String TASK_CALL = "Avast ye Matey. Here goes your task list:\n";
+    private static final String TASK_COMPLETED = "Task completed, good job matey!\n";
+    private static final String TASK_DELETED = "Alright matey, task has been deleted good on ya.\n";
+    private static final String TASK_MATCH = "Avast ye Matey. Here goes your matching tasks in your task list:\n";
+    private static final String TASK_UNCHECKED = "Alright matey, hurry up and finish up this task arrr:\n";
+    private static final String WELCOME_MESSAGE = "Ahoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
+    private static final String WELCOME_QUESTION = "What can I do for you? Your command:\n";
 
     /**
      * Reads the user input.
@@ -36,67 +36,67 @@ public class Ui {
     /**
      * Prints a message to inform user that task has been deleted
      */
-    public void deleteTask() {
-        System.out.println(TASK_DELETED);
+    public String deleteTask() {
+        return TASK_DELETED;
     }
 
     /**
      * Prints a message to inform user that task has been marked as done
      */
-    public void markAsDone() {
-        OUT.println(TASK_COMPLETED);
+    public String markAsDone() {
+        return TASK_COMPLETED;
     }
 
     /**
      * Prints a message to inform user that task has been marked as undone
      */
-    public void markAsUndone() {
-        OUT.println(TASK_UNCHECKED);
+    public String markAsUndone() {
+        return TASK_UNCHECKED;
     }
 
     /**
      * Prints a message to inform user of the list of outstanding tasks
      */
-    public void printTaskList() {
-        OUT.println(TASK_CALL);
+    public String printTaskList() {
+        return TASK_CALL;
     }
 
     /**
      * Prints a message to request for user to input next command
      */
-    public void requestNextCommand() {
-        OUT.println(LINE + REQUEST_NEXT_COMMAND);
+    public String requestNextCommand() {
+        return LINE + REQUEST_NEXT_COMMAND;
     }
 
-    public void showExitMessage() {
-        OUT.println("\tFair winds adventurer, till we meet next time yarr. Bye for now.\n" + LINE);
+    public String showExitMessage() {
+        return "Fair winds adventurer, till we meet next time yarr. Bye for now.\n" + LINE;
     }
 
     /**
      * Prints a message to inform user of the list of tasks that matches the keyword
      */
-    public void showMatchingTasks() {
-        OUT.println(TASK_MATCH);
+    public String showMatchingTasks() {
+        return TASK_MATCH;
     }
 
     /**
      * Prints a message to welcome the user
      */
-    public void showWelcome() {
-        OUT.println(LINE + WELCOME_MESSAGE + HELP + WELCOME_QUESTION);
+    public String showWelcome() {
+        return WELCOME_MESSAGE + HELP + WELCOME_QUESTION;
     }
 
     /**
      * Prints a LINE separator.
      */
-    public void showLine() {
-        OUT.println(LINE);
+    public String showLine() {
+        return LINE;
     }
 
     /**
      * Prints a message to inform user of their input error
      */
-    public void showError(String errorMessage) {
-        OUT.println(errorMessage + REQUEST_NEXT_COMMAND_ANGRY);
+    public String showError(String errorMessage) {
+        return errorMessage + REQUEST_NEXT_COMMAND_ANGRY;
     }
 }

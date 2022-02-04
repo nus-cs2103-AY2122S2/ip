@@ -16,7 +16,7 @@ public abstract class Command {
      * @param ui        Ui provided
      * @param storage   Saved history
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
 }
 

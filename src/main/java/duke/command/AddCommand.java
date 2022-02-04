@@ -30,9 +30,10 @@ public class AddCommand extends Command {
      * @param storage   Saved history
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.add(task);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String output = taskList.add(task);
         String contentToSave = task.toSave() + "\n";
         Storage.append(contentToSave);
+        return output;
     }
 }

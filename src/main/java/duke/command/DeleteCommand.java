@@ -30,8 +30,9 @@ public class DeleteCommand extends Command {
      * @param storage  Saved history.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.delete(this.taskIndex);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String output = taskList.delete(this.taskIndex);
         Storage.saveToFile(taskList.getCurrentList());
+        return output;
     }
 }
