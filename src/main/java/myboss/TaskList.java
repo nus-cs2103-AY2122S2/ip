@@ -63,7 +63,7 @@ public class TaskList {
      * @param index index of task to be deleted.
      * @return deleted task.
      */
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index) throws IndexOutOfBoundsException {
         size--;
         return taskList.remove(index);
     }

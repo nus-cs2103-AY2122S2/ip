@@ -2,6 +2,7 @@ package myboss;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ class StorageTest {
     }
 
     @Test
-    void testAppendTaskToFile() {
+    void testAppendTaskToFile() throws IOException {
         Storage s = new Storage("./test/StorageTest.txt");
         assertEquals(s.appendTaskToFile(new ToDo("Test Todo 1")),true);
         assertEquals(s.appendTaskToFile(new Event("Test Event 2", "2023-10-01 2pm")),true);

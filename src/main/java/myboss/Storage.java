@@ -52,7 +52,7 @@ public class Storage {
             fw.close();
             return true;
         } catch (IOException e) {
-            Ui.outputMyBoss("Error appending task to text file!");
+            //Ui.outputMyBoss("Error appending task to text file!");
             return false;
         }
     }
@@ -69,7 +69,7 @@ public class Storage {
             fw.close();
             return true;
         } catch (IOException e) {
-            Ui.outputMyBoss("Error clearing DB");
+            //Ui.outputMyBoss("Error clearing DB");
             return false;
         }
     }
@@ -91,7 +91,7 @@ public class Storage {
             }
             return true;
         } catch (IOException e) {
-            Ui.outputMyBoss("An Error has occurred with file creation!");
+            //Ui.outputMyBoss("An Error has occurred with file creation!");
             return false;
         }
     }
@@ -128,7 +128,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            Ui.outputMyBoss("Error file not found!");
+            //Ui.outputMyBoss("Error file not found!");
         }
         return tempTaskList;
     }
