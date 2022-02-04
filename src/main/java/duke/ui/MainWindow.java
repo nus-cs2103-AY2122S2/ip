@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke = new Duke();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Ash.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Ash.PNG"));
 
     public MainWindow() {
         try {

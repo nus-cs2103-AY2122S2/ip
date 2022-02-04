@@ -24,8 +24,8 @@ public class Ui {
 
     private static final Image ADD_OR_DELETE_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Add.png"));
     private static final Image MARK_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Mark.png"));
-    private static final Image UNMARK_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Unmark.png"));
-    private static final Image ERROR_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Error.png"));
+    private static final Image UNMARK_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Unmark.PNG"));
+    private static final Image ERROR_IMAGE = new Image(Ui.class.getResourceAsStream("/images/Error.PNG"));
     private Image responseImage = GENERAL_IMAGE;
     private StringBuilder message;
 
