@@ -4,6 +4,3 @@ E | 1 | project meeting | 2022-12-20
 T | 1 | join sports club
 T | 0 | borrow book
 E | 1 | group meeting | 1234-12-21
-T | 0 | adfa sdfa
-E | 1 | adsf a/ | 1234-12-12
-D | 0 | dafefadf | 1234-12-12

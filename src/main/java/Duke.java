@@ -1,3 +1,10 @@
+import command.Command;
+import data.DukeException;
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public class Duke {
     private final Storage storage;
     private TaskList tasks;

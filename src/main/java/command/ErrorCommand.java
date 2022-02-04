@@ -1,6 +1,12 @@
-public class ErrorCommand extends Command{
+package command;
+
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
+public class ErrorCommand extends Command {
     private final String err;
-    ErrorCommand(String err) {
+    public ErrorCommand(String err) {
         super();
         this.err = err;
     }

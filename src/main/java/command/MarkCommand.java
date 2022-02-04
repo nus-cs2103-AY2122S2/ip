@@ -1,7 +1,13 @@
+package command;
+
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public class MarkCommand extends Command {
     private final int markIndex;
 
-    MarkCommand(int markIndex) {
+    public MarkCommand(int markIndex) {
         super();
         this.markIndex = markIndex;
     }

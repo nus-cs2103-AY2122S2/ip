@@ -1,7 +1,14 @@
+package command;
+
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
 public class DeleteCommand extends Command {
     private final int deleteIndex;
 
-    DeleteCommand(int deleteIndex) {
+    public DeleteCommand(int deleteIndex) {
         super();
         this.deleteIndex = deleteIndex;
     }

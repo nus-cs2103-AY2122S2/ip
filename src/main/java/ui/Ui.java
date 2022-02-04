@@ -1,6 +1,10 @@
+package ui;
+
 import java.util.Scanner;
 import java.io.InputStream;
 import java.io.PrintStream;
+import data.DukeException;
+
 public class Ui {
     private final Scanner in;
     private final PrintStream out;
@@ -25,15 +29,8 @@ public class Ui {
 
     public void showWelcome() {
 
-        String logo = "    ██╗░░██╗░█████╗░███╗░░██╗\n"
-                    + "    ██║░░██║██╔══██╗████╗░██║\n"
-                    + "    ███████║███████║██╔██╗██║\n"
-                    + "    ██╔══██║██╔══██║██║╚████║\n"
-                    + "    ██║░░██║██║░░██║██║░╚███║\n"
-                    + "    ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝\n";
-
+        String logo = "    (/ /^ / - / ^/ /)";
         System.out.println(logo);
-
         System.out.println(output("Hello! I'm Duke by A0221330A.\n    What can I do for you?\n" + DIVIDER));
     }
 

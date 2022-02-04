@@ -1,4 +1,6 @@
-public class ToDo extends Task{
+package task;
+
+public class ToDo extends Task {
     public ToDo(String task) {
         super(task.trim());
     }
@@ -25,6 +27,6 @@ public class ToDo extends Task{
 
     @Override
     public String toString() {
-        return "["+Type.T+"]" + super.toString();
+        return "["+ Type.T+"]" + super.toString();
     }
 }

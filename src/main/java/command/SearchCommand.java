@@ -1,10 +1,16 @@
+package command;
+
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class SearchCommand extends Command {
     private final LocalDate date;
 
-    SearchCommand (LocalDate date) {
+    public SearchCommand(LocalDate date) {
         super();
         this.date = date;
     }

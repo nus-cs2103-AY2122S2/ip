@@ -1,5 +1,11 @@
+package command;
+
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public class ExitCommand extends Command {
-    ExitCommand() {
+    public ExitCommand() {
         super();
     }
 

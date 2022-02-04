@@ -1,11 +1,29 @@
+package parser;
+
+import command.AddDeadlineCommand;
+import command.Command;
+import command.ExitCommand;
+import command.MarkCommand;
+import command.ListCommand;
+import data.DukeException;
+import command.ErrorCommand;
+import command.UnmarkCommand;
+import command.DeleteCommand;
+import command.SearchCommand;
+import command.AddTodoCommand;
+import command.AddEventCommand;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+import ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
-
 public class Parser {
-    public static Command parse(String text) throws DukeException{
+    public static Command parse(String text) throws DukeException {
         Ui ui = new Ui();
         List<String> input = Arrays.asList(text.split(" "));
         switch (input.get(0)) {

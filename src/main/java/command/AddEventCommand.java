@@ -1,7 +1,14 @@
+package command;
+
+import storage.Storage;
+import task.Event;
+import task.TaskList;
+import ui.Ui;
+
 public class AddEventCommand extends Command {
     private final Event newEvent;
 
-    AddEventCommand(Event newEvent) {
+    public AddEventCommand(Event newEvent) {
         super();
         this.newEvent = newEvent;
     }

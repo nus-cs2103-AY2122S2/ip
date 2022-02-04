@@ -1,7 +1,13 @@
+package command;
+
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public class UnmarkCommand extends Command {
     private final int unmarkIndex;
 
-    UnmarkCommand(int unmarkIndex) {
+    public UnmarkCommand(int unmarkIndex) {
         super();
         this.unmarkIndex = unmarkIndex;
     }
