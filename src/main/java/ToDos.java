@@ -1,4 +1,3 @@
-import java.util.*;
 
 /**
  * Tasks without any date/time attached to it.
