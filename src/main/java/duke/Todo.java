@@ -11,6 +11,7 @@ public class Todo extends Task {
      * @param task description of task
      */
     Todo(String task) {
-        super(task, "T");
+        super(task, "T"
+        );
     }
 }

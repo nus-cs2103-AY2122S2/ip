@@ -13,14 +13,14 @@ public class BH {
     private Storage storage;
     private Scanner sc = new Scanner(System.in);
     private Ui ui;
-    private static String filePath = "/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
+    private static final String FILEPATH = "/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
 
     /**
      * constructor of BH
      * @throws DukeException if the filepath is invalid
      */
     public BH() throws DukeException {
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(FILEPATH);
         this.list = this.storage.load();
         this.ui = new Ui();
     }
