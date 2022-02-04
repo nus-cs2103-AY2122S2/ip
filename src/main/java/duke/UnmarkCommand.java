@@ -22,14 +22,14 @@ public class UnmarkCommand extends Command {
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
-     * @return String output from ui
+     * @return void
      * @throws IOException
      */
-    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
         assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
 
         tasklist.markUndone(ranking);
         storage.writeToFile(tasklist);
-        return ui.printUnmarkTaskFromDone(tasklist, ranking);
+        ui.printUnmarkTaskFromDone(tasklist, ranking);
     }
 }

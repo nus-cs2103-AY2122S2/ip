@@ -11,10 +11,10 @@ public class ByeCommand extends Command {
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
-     * @return String output from ui
+     * @return void
      */
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) {
         super.changeExit();
-        return ui.printBye();
+        ui.printBye();
     }
 }

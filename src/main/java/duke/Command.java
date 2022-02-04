@@ -18,11 +18,11 @@ public abstract class Command {
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
-     * @return String return by ui
+     * @return void
      * @throws DukeException
      * @throws IOException
      */
-    public abstract String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * Set isExit to true

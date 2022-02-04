@@ -25,9 +25,9 @@ public class AddCommand extends Command {
      * @param storage Storage saves tasklist
      * @return String output from ui
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(task);
         storage.writeToFile(taskList);
-        return ui.printTaskIsAdded(task);
+        ui.printTaskIsAdded(task);
     }
 }

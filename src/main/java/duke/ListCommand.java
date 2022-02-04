@@ -6,10 +6,10 @@ public class ListCommand extends Command{
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
-     * @return String printed by ui
+     * @return void
      */
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) {
 
-        return ui.printAllTasks(tasklist);
+        ui.printAllTasks(tasklist);
     }
 }

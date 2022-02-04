@@ -17,14 +17,14 @@ public class DeleteCommand extends Command {
      * @param tasklist TaskList has all current tasks
      * @param ui Ui handles printing to output
      * @param storage Storage saves tasklist
-     * @return String output from ui
+     * @return void
      * @throws IOException
      */
-    public String execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
         assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
 
         tasklist.delete(ranking);
         storage.writeToFile(tasklist);
-        return ui.printTaskIsDeleted(tasklist);
+        ui.printTaskIsDeleted(tasklist);
     }
 }

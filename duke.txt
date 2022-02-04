@@ -1,5 +1,6 @@
-1. [T][ ] skajdb
+1. [T][X] skajdb
 2. [E][ ] skjdb (at:nwdlcfn)
-3. [D][X] hello world (by:Dec 24 2022)
-4. [E][ ] read book (at:venue)
-5. [T][ ] say hello
+3. [E][ ] read book (at:venue)
+4. [T][ ] say hello
+5. [E][ ] aslkns (at:here)
+6. [D][ ] do work (by:Dec 24 2022)

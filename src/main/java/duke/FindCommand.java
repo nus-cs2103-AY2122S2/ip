@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @return String output from ui
      * @throws DukeException
      */
-    public String execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> all = tasklist.getAllTasks();
         ArrayList<Task> filtered = new ArrayList<Task>();
         for (Task t : all) {
@@ -86,11 +86,11 @@ public class FindCommand extends Command {
             }
         }
         if (filtered.size() == 0) {
-            return ui.printFilteredDeadline(0);
+            ui.printFilteredDeadline(0);
         } else {
             TaskList filteredTasklist = new TaskList(filtered);
             // do nothing to storage
-            return ui.printFilteredDeadline(filteredTasklist);
+            ui.printFilteredDeadline(filteredTasklist);
         }
     }
 
