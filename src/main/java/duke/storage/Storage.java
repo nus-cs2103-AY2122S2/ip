@@ -74,9 +74,8 @@ public class Storage {
     }
 
     public void saveTaskList(TaskList taskList) {
-        String FILE_PATH = "duke/data/TaskList.txt";
         try {
-            FileWriter writer = new FileWriter(FILE_PATH);
+            FileWriter writer = new FileWriter(filePath);
             for (Task task : taskList.tasks) {
                 writer.write(task.saveData());
                 writer.write(System.lineSeparator());

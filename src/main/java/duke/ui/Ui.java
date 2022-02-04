@@ -47,17 +47,15 @@ public class Ui {
 
     public String readCommand() {
         String fullInputLine = in.nextLine();
-
         // silently consume all ignored lines
         while (shouldIgnore(fullInputLine)) {
             fullInputLine = in.nextLine();
         }
-
         return fullInputLine;
     }
 
     public void showLoadingError() {
-
+        out.println(output("Sorry initialized failed"));
     }
 
     public void showExitMessage() {
@@ -65,20 +63,16 @@ public class Ui {
     }
 
     public void showFileCreated() {
-
+        out.println(output("New file has been created for first time"));
     }
 
     public void showIOException() {
-
+        out.println(output("I/O error happened"));
     }
 
     public void showInvalidIndex() {
         DukeException exception = new DukeException("OOPS!!! invalid index.");
         out.println(output(exception.toString()));
-    }
-
-    public void showErrorMessage() {
-        out.println(output("OOPS!!! I'm sorry, but I don't know what that means"));
     }
 
     public void showDateTimeParseException() {
