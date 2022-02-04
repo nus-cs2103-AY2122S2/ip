@@ -49,7 +49,7 @@ public class Event extends Task {
         int evDatePos = evTask.indexOf(event);
         String evDate = evTask.substring(evDatePos + 3); //Grabs all the text after the "/at" key word
         String evDes = evTask.substring(0, evDatePos);
-        if (evDate.trim().equals("") || evDate.trim().equals("")) {
+        if (evDes.trim().equals("") || evDate.trim().equals("")) {
             throw new DukeException("No valid date/description entered");
         }
         Event ev = new Event(evDes.trim(), evDate);

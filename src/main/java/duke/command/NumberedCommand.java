@@ -46,6 +46,8 @@ public class NumberedCommand extends Command {
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
      * @param tasks The task list which holds all tasks available.
+     * @return Message indicating that the numbered task has been
+     * operated on.
      * @throws IOException If an I/O error occurs.
      */
     @Override
@@ -77,7 +79,8 @@ public class NumberedCommand extends Command {
                 System.out.println("Noted! I've removed this task:");
                 System.out.println(task.toString());
                 ui.showCount(tasks);
-                return ui.showSuccessfulDeleteMessage() + "\n" + task;
+                return ui.showSuccessfulDeleteMessage() + "\n" + task + "\n"
+                        + ui.showNumberOfTasksMessage(tasks);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid number!");

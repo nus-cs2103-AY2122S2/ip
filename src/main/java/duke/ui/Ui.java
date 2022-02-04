@@ -72,24 +72,54 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns message indicating task added successfully.
+     *
+     * @return Successful add message.
+     */
     public String showSuccessfulAddMessage() {
-        return "Got it! I've added this task: ";
+        return "Got it! I've added this task: " + "\n";
     }
 
+    /**
+     * Return message indicating task marked successfully.
+     *
+     * @return Successful mark message.
+     */
     public String showSuccessfulMarkMessage() {
-        return "Got it! I've marked this task as completed: ";
+        return "Got it! I've marked this task as completed: " + "\n";
     }
 
+    /**
+     * Return message indicating task unmarked successfully.
+     *
+     * @return Successful unmark message.
+     */
     public String showSuccessfulUnmarkMessage() {
-        return "Got it! I've marked this task as not done yet: ";
+        return "Got it! I've marked this task as not done yet: " + "\n";
     }
 
+    /**
+     * Return message indicating task deleted successfully.
+     *
+     * @return Successful delete message.
+     */
     public String showSuccessfulDeleteMessage() {
-        return "Got it! I've removed this task: ";
+        return "Got it! I've removed this task: " + "\n";
     }
 
+    /**
+     * Returns all elements in an TaskList object in string format.
+     *
+     * @param lenOfArray The length of the input ArrayList.
+     * @param tasks      The input ArrayList.
+     */
     public String showListedTasks(int lenOfArray, TaskList tasks) {
         String res = "Here are the tasks in your list: " + "\n";
+        if (lenOfArray == 0) {
+            res += "Oops! No tasks added yet";
+            return res;
+        }
         for (int i = 0; i < lenOfArray; i++) {
             String temp = (i + 1) + ". " + tasks.get(i).toString()
                     + "\n";
@@ -98,6 +128,12 @@ public class Ui {
         return res;
     }
 
+    /**
+     * Returns all elements in an TaskList object matching a given keyword.
+     *
+     * @param lenOfArray The length of the input ArrayList.
+     * @param tasks      The input ArrayList.
+     */
     public String showMatchingTasks(int lenOfArray, TaskList tasks) {
         String res = "Here are the matching tasks in your list: " + "\n";
         for (int i = 0; i < lenOfArray; i++) {
@@ -106,6 +142,16 @@ public class Ui {
             res += temp;
         }
         return res;
+    }
+
+    /**
+     * Returns message indicating number of elements in tasklist.
+     *
+     * @param tasks The input ArrayList.
+     */
+    public String showNumberOfTasksMessage(TaskList tasks) {
+        int numOfTasks = tasks.getCount();
+        return "\n" + "There are now " + numOfTasks + " tasks in your list.";
     }
 
 }

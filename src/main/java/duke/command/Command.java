@@ -20,6 +20,7 @@ public abstract class Command {
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
      * @param tasks The task list which holds all tasks available.
+     * @return Message on the outcome of the command.
      * @throws DukeException If any error related to the Duke app occurs.
      * @throws IOException If an I/O error occurs.
      */

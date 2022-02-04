@@ -47,6 +47,7 @@ public class AddCommand extends Command {
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
      * @param tasks The task list which holds all tasks available.
+     * @return Message indicating if the task was added successfully.
      * @throws IOException If an I/O error occurs.
      */
     @Override
@@ -56,7 +57,8 @@ public class AddCommand extends Command {
                 Todo td = Todo.createTodo(this.textInput);
                 tasks.addTask(td);
                 stg.writeToFile(td.formatText() + "\n");
-                return ui.showSuccessfulAddMessage() + "\n" + td;
+                return ui.showSuccessfulAddMessage() + "\n" + td + "\n"
+                        + ui.showNumberOfTasksMessage(tasks);
             } catch (DukeException e) {
                 System.out.println("Please enter a valid description!");
                 ui.showLine();
@@ -67,7 +69,8 @@ public class AddCommand extends Command {
                 Deadline dl = Deadline.createDeadline(this.textInput);
                 tasks.addTask(dl);
                 stg.writeToFile(dl.formatText() + "\n");
-                return ui.showSuccessfulAddMessage() + "\n" + dl;
+                return ui.showSuccessfulAddMessage() + "\n" + dl + "\n"
+                        + ui.showNumberOfTasksMessage(tasks);
             } catch (DukeException e) {
                 System.out.println("Please enter a valid description/date!");
                 ui.showLine();
@@ -86,7 +89,8 @@ public class AddCommand extends Command {
                 Event ev = Event.createEvent(this.textInput);
                 tasks.addTask(ev);
                 stg.writeToFile(ev.formatText() + "\n");
-                return ui.showSuccessfulAddMessage() + "\n" + ev;
+                return ui.showSuccessfulAddMessage() + "\n" + ev + "\n"
+                        + ui.showNumberOfTasksMessage(tasks);
             } catch (DukeException e) {
                 System.out.println("Please enter a valid description/date!");
                 ui.showLine();

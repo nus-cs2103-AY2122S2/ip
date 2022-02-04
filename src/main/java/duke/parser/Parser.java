@@ -20,7 +20,7 @@ public class Parser {
     }
 
     /**
-     * Obtains the integer value after a single word.
+     * Returns the integer value after a single word.
      *
      * @param input The input string containing the number and a word.
      * @return The integer value after the word.
@@ -28,8 +28,8 @@ public class Parser {
     public static int getIndex(String input) {
         try {
             input = input.trim();
-            String seperator = " ";
-            int pos = input.indexOf(seperator);
+            String separator = " ";
+            int pos = input.indexOf(separator);
             int res = Integer.parseInt(input.substring(pos + 1).trim());
             return res;
         } catch (NumberFormatException e) {
@@ -38,8 +38,8 @@ public class Parser {
     }
 
     /**
-     * Parses a text input and returns the appropriate action to
-     * take.
+     * Returns the appropriate action to take after parsing a text
+     * input.
      *
      * @param text The user's input text.
      * @return A Command object that will carry out the appropriate
@@ -48,23 +48,35 @@ public class Parser {
     public Command parse(String text) {
         String input = text.trim();
         String command = getCommand(input);
-        if (command.equals("list")) {
-            return new ListCommand();
-        } else if (command.equals("mark") || command.equals("unmark")
-                || command.equals("delete")) {
-            return new NumberedCommand(getIndex(input), command, input);
-        } else if (command.equals("bye")) {
-            return new ExitCommand();
-        } else if (command.equals("todo") || command.equals("deadline")
-                || command.equals("event")) {
-            return new AddCommand(command, input);
-        } else if (command.equals("find")) {
-            return new FindCommand(input);
-        } else if (command.equals("clear")) {
-            return new ClearCommand();
-        } else {
-            return new InvalidCommand();
+        Command commandToExecute;
+        switch(command) {
+        case "list":
+            commandToExecute = new ListCommand();
+            break;
+        case "mark":
+        case "unmark":
+        case "delete":
+            commandToExecute = new NumberedCommand(getIndex(input), command, input);
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            commandToExecute = new AddCommand(command, input);
+            break;
+        case "find":
+            commandToExecute = new FindCommand(input);
+            break;
+        case "clear":
+            commandToExecute = new ClearCommand();
+            break;
+        case "bye":
+            commandToExecute = new ExitCommand();
+            break;
+        default:
+            commandToExecute = new InvalidCommand();
+            break;
         }
+        return commandToExecute;
     }
 
 }

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -34,15 +35,18 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(48, 47, 38));
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        Label lb = (Label) this.lookup("#dialog");
+        lb.setTranslateX(10);
+        lb.styleProperty().set("-fx-background-color: #d6ffe0; -fx-background-radius: 30;");
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);

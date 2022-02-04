@@ -19,6 +19,7 @@ public class ListCommand extends Command {
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
      * @param tasks The task list which holds all tasks available.
+     * @return The list of tasks currently in the list.
      * @throws IOException If an I/O error occurs.
      */
     @Override
