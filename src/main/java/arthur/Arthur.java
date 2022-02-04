@@ -1,10 +1,10 @@
 package arthur;
 
+import java.time.format.DateTimeParseException;
+
 import arthur.exceptions.ArthurException;
 import arthur.exceptions.EmptyDescriptionException;
 import arthur.exceptions.InvalidInstructionException;
-
-import java.time.format.DateTimeParseException;
 
 public class Arthur {
 
