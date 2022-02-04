@@ -18,15 +18,12 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String filePath;
+    private final String FILE_PATH = "data/duke.txt";
 
     /**
      * Constructor for Storage class.
-     * @param filePath the location of a textfile containing the user's list of tasks, relative to the root directory
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    public Storage() { }
 
     /**
      * Reads in a list of tasks from the user's text file and saves them into an arraylist of Tasks.
@@ -35,7 +32,7 @@ public class Storage {
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         String dir = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(dir, filePath);
+        java.nio.file.Path path = java.nio.file.Paths.get(dir, this.FILE_PATH);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
         try {
@@ -93,7 +90,7 @@ public class Storage {
         for (int i = 1; i <= tasks.size(); i++) {
             text += tasks.get(i - 1) + "\n";
         }
-        try (PrintWriter out = new PrintWriter(this.filePath)) {
+        try (PrintWriter out = new PrintWriter(this.FILE_PATH)) {
             out.println(text);
         } catch (FileNotFoundException e) {
             System.out.println("Failed to save list");

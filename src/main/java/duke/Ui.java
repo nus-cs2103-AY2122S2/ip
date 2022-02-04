@@ -30,20 +30,18 @@ public class Ui {
     /**
      * Greets the user as the app starts up.
      */
-    public void greet() {
-        System.out.println("Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n" +
+    public String greet() {
+        //printDoubleLine();
+        return "Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n" +
                 "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the " +
-                "task number!");
-        printDoubleLine();
+                "task number!";
     }
 
     /**
      * Says goodbye to the user as the app shuts down.
      */
-    public void goodbye() {
-        printSingleLine();
-        System.out.println("Bye. Have a great day!");
-        printDoubleLine();
+    public String goodbye() {
+        return "Bye. Have a great day!";
     }
 
     public void printSingleLine() {
@@ -58,32 +56,29 @@ public class Ui {
      * Prints out a given list of tasks for the user to see.
      * @param tasks arraylist of desired tasks to show the user.
      */
-    public void printTasks(ArrayList<Task> tasks) {
+    public String printTasks(ArrayList<Task> tasks) {
         System.out.println("Here are the requested tasks:");
         StringBuilder taskList = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
             taskList.append(i).append(". ").append(tasks.get(i - 1)).append("\n");
         }
-        System.out.println(taskList.toString().trim());
-        printDoubleLine();
+        return(taskList.toString().trim());
     }
 
     /**
      * used when a task has been successfully deleted.
      * @param t task that was removed.
      */
-    public void notifyRemovedTaskMessage(Task t) {
-        System.out.println("Noted. I've removed this task:\n" + t);
-        printDoubleLine();
+    public String notifyRemovedTaskMessage(Task t) {
+        return "Noted. I've removed this task:\n" + t;
     }
 
     /**
      * used when a task has been successfully added.
      * @param t task that was added.
      */
-    public void notifyAddedTaskMessage(Task t) {
-        System.out.println("Noted. I've added this task:\n" + t);
-        printDoubleLine();
+    public String notifyAddedTaskMessage(Task t) {
+        return "Noted. I've added this task:\n" + t;
     }
 
     /**
@@ -91,13 +86,12 @@ public class Ui {
      * @param t task that was marked
      * @param isComplete boolean flag for wehether the task was marked complete or not complete.
      */
-    public void notifyMarkedTaskMessage(Task t, boolean isComplete) {
+    public String notifyMarkedTaskMessage(Task t, boolean isComplete) {
         if (isComplete) {
-            System.out.println("Task " + t + " has been marked complete.");
+            return "Task " + t + " has been marked complete.";
         } else {
-            System.out.println("Task " + t + " has been marked incomplete.");
+            return "Task " + t + " has been marked incomplete.";
         }
-        printDoubleLine();
     }
 
 }

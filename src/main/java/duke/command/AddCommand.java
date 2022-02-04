@@ -69,9 +69,9 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskMaster tasks, Ui ui, Storage storage) {
+    public String execute(TaskMaster tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
-        ui.notifyAddedTaskMessage(this.task);
         storage.saveToFile(tasks.getTasks());
+        return ui.notifyAddedTaskMessage(this.task);
     }
 }

@@ -28,7 +28,7 @@ public abstract class Command {
      * @param storage saves the tasks to file if there were any edits to it.
      * @throws DukeException
      */
-    public abstract void execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * checks whether the the command was an exit command.

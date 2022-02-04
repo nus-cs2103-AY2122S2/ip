@@ -10,12 +10,12 @@ import duke.Ui;
 
 public class UiTest {
 
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final PrintStream STANDARD_OUTPUT = System.out;
+    private final ByteArrayOutputStream OUTPUT_STREAM_CAPTOR = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
+        System.setOut(new PrintStream(OUTPUT_STREAM_CAPTOR));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class UiTest {
         ui.goodbye();
         String expected = "------------------------------------------------------\n"
                 + "Bye. Have a great day!\n======================================================";
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @Test
@@ -34,11 +34,11 @@ public class UiTest {
         String expected = "Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n"
                 + "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the "
                 + "task number!\n======================================================";
-        assertEquals(expected, outputStreamCaptor.toString().trim());
+        assertEquals(expected, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
     @AfterEach
     public void tearDown() {
-        System.setOut(standardOut);
+        System.setOut(STANDARD_OUTPUT);
     }
 }

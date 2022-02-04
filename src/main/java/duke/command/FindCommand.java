@@ -29,8 +29,8 @@ public class FindCommand extends Command{
      * @param storage saves the tasks to file if there were any edits to it.
      */
     @Override
-    public void execute(TaskMaster tasks, Ui ui, Storage storage) {
-        ui.printTasks(tasks.findTasks(this.keyword));
+    public String execute(TaskMaster tasks, Ui ui, Storage storage) {
+        return ui.printTasks(tasks.findTasks(this.keyword));
     }
 
 }

@@ -25,7 +25,7 @@ public class ListCommand extends Command {
      * @param storage saves the tasks to file if there were any edits to it.
      */
     @Override
-    public void execute(TaskMaster tasks, Ui ui, Storage storage) {
-        ui.printTasks(tasks.getTasks());
+    public String execute(TaskMaster tasks, Ui ui, Storage storage) {
+        return ui.printTasks(tasks.getTasks());
     }
 }

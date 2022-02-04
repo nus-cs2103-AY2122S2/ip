@@ -26,8 +26,8 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskMaster tasks, Ui ui, Storage storage) {
+    public String execute(TaskMaster tasks, Ui ui, Storage storage) {
         this.startExit();
-        ui.goodbye();
+        return ui.goodbye();
     }
 }
