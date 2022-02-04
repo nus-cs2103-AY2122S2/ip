@@ -27,7 +27,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Abby");
-            stage.getIcons().addAll(appIcon);
+            stage.getIcons().add(appIcon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
