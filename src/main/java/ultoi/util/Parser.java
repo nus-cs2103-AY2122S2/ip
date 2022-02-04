@@ -77,7 +77,7 @@ public class Parser {
 
         String[] tokens = input.split(" ");
 
-        for (int i = 0; i < tokens.length; i++) {
+        for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].equals(AddCommand.COMMAND_BY)) {
                 for (int j = i + 1; j < tokens.length; j++) {
                     time += tokens[j] + " ";
@@ -108,7 +108,7 @@ public class Parser {
 
         String[] tokens = input.split(" ");
         
-        for (int i = 0; i < tokens.length; i++) {
+        for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].equals(AddCommand.COMMAND_AT)) {
                 for (int j = i + 1; j < tokens.length; j++) {
                     time += tokens[j] + " ";

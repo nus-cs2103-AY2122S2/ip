@@ -38,7 +38,7 @@ public class AddCommand implements Command {
     public AddCommand(String input) throws UltoiException {
         try {
             if (input.startsWith(this.COMMAND_TODO)) {
-                this.task = new ToDo(input);
+                this.task = new ToDo(input.substring(COMMAND_TODO.length() + 1));
             } else if (input.startsWith(this.COMMAND_DEADLINE)) {
                 this.task = Parser.parseDeadline(input);
             } else if (input.startsWith(this.COMMAND_EVENT)) {

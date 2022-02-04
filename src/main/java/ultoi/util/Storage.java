@@ -70,6 +70,8 @@ public class Storage {
 
         pw.println(tasks.toInputString());
 
+        pw.close();
+
         return;
     }
 }

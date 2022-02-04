@@ -116,7 +116,7 @@ public class TaskList {
         String str = "";
 
         for (int i = 0; i < size(); i++) {
-            str = str + (i + 1) + ". " + getTask(i).toInputString();
+            str = getTask(i).toInputString();
             if (i < size() - 1) {
                 str = str + "\n";
             }
