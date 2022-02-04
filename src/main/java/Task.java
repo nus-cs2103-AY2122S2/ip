@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String task;
     protected boolean done;
@@ -18,6 +20,10 @@ public class Task {
 
     public Task unmark() {
         return new Task(task, false);
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override
