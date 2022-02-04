@@ -8,6 +8,7 @@ import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.tasks.Event;
+import duke.tasks.Task;
 
 /**
  * AddEventCommand is a Command.
@@ -46,6 +47,7 @@ public class AddEventCommand extends Command<String> {
 
             // Create a new Event to add into TaskList
             Event newEvent = new Event(eventName, false, eventDateTime);
+            assert newEvent instanceof Event;
             toDoList.add(newEvent);
 
             // Print out the formatted message after adding to TaskList

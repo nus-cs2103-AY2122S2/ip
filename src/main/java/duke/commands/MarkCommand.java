@@ -35,6 +35,7 @@ public class MarkCommand extends Command<Integer> {
         try {
             // Mark the task
             Task taskToMark = toDoList.get(numberToMark);
+            assert taskToMark instanceof Task;
             taskToMark.mark();
 
             // Print out the formatted message after marking

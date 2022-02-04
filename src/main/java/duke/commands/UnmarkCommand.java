@@ -35,6 +35,7 @@ public class UnmarkCommand extends Command<Integer> {
         try {
             // Unmark the task
             Task taskToUnmark = toDoList.get(numberToUnmark);
+            assert taskToUnmark instanceof Task;
             taskToUnmark.unmark();
 
             // Print out the formatted message after unmarking
