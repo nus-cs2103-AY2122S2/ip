@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      * @throws BotException When the task cannot be generated due to incomplete information provided.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length == 1) {
@@ -99,6 +99,6 @@ public class AddCommand extends Command {
         storage.save(tasks);
 
         // Ui
-        ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
+        return ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
     }
 }

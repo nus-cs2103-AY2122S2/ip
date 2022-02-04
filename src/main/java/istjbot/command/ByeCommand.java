@@ -38,13 +38,13 @@ public class ByeCommand extends Command {
      * @throws BotException When the interaction cannot be finished due to extra information at the back.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length > 1) {
             throw new BotException("As an IstjBot, I cannot understand more than bye.");
         }
 
-        ui.showBye();
+        return ui.showBye();
     }
 }

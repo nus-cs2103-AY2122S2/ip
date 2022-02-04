@@ -26,7 +26,7 @@ public abstract class Command {
     }
 
     public abstract boolean isExit();
-    public abstract void execute(TaskList task, Ui ui, Storage storage) throws BotException;
+    public abstract String execute(TaskList task, Ui ui, Storage storage) throws BotException;
 
     /**
      * Returns the specific CommandEnum related to the Command.

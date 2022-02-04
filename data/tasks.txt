@@ -1,4 +1,1 @@
-todo / 0 / something meaningful task
-event / 0 / something not so meaningful / 2021-01-31
-deadline / 1 / elehleh / 2021-02-03
-deadline / 1 / something truthful / 2021-03-01
+event / 0 / something / 2021-02-05

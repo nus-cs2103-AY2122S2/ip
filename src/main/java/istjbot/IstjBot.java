@@ -22,6 +22,10 @@ public class IstjBot {
     /** Ui for printing out messages to be read by the user. */
     private Ui ui;
 
+    private boolean isExit = false;
+    private boolean existsConstructorError = false;
+    private String constructorError = "";
+
     /**
      * Constructor for IstjBot.
      * Takes in a String filePath and initializes a new Storage.
@@ -36,39 +40,31 @@ public class IstjBot {
             this.tasks = new TaskList(storage.load());
 
         } catch (IOException | BotException e) {
-            ui.showError(e.getMessage());
+            existsConstructorError = true;
+            constructorError = e.getMessage();
             this.tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the IstjBot.
-     * Ui takes in user input, which is passed to Parser, finally to an appropriate Command
-     * for execution. Operation terminated with a terminating Command.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (BotException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            isExit = c.isExit();
+            return c.execute(tasks, ui, storage);
+        } catch (BotException e) {
+            return ui.showError(e.getMessage());
         }
     }
 
-    /**
-     * Initiates a new IstjBot and runs it.
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new IstjBot("data/tasks.txt").run();
+    public boolean shouldExitIstjBot() {
+        return isExit;
+    }
+
+    public boolean existsConstructorError() {
+        return existsConstructorError;
+    }
+
+    public String showConstructorError() {
+        return constructorError;
     }
 }

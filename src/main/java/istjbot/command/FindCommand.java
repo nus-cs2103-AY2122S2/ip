@@ -37,7 +37,7 @@ public class FindCommand extends Command {
      * @param storage Storage.
      * @throws BotException When the keyword is not specified by the user.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
         StringBuilder keyword = new StringBuilder();
 
@@ -57,6 +57,6 @@ public class FindCommand extends Command {
         }
 
         String searchList = tasks.searchByKeywordString(keyword.toString());
-        ui.showTasksByKeyword(searchList);
+        return ui.showTasksByKeyword(searchList);
     }
 }

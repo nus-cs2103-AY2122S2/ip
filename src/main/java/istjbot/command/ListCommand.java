@@ -37,7 +37,7 @@ public class ListCommand extends Command {
      * @param storage Storage.
      * @throws BotException When there are unnecessary terms attached other than list.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length > 1) {
@@ -46,6 +46,6 @@ public class ListCommand extends Command {
 
         String list = tasks.tasksToString();
 
-        ui.showTasks(list);
+        return ui.showTasks(list);
     }
 }

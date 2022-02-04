@@ -17,7 +17,7 @@ public class ModifyCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length != 2) {
@@ -38,22 +38,20 @@ public class ModifyCommand extends Command {
         case MARK:
             tasks.markTask(taskNumber);
             storage.save(tasks);
-            ui.showTaskMarked(tasks.taskString(taskNumber));
-            break;
+            return ui.showTaskMarked(tasks.taskString(taskNumber));
 
         case UNMARK:
             tasks.unmarkTask(taskNumber);
             storage.save(tasks);
-            ui.showTaskUnmarked(tasks.taskString(taskNumber));
-            break;
+            return ui.showTaskUnmarked(tasks.taskString(taskNumber));
 
         case DELETE:
             String deletedTask = tasks.deletedTaskString(taskNumber);
             storage.save(tasks);
-            ui.showTaskDeleted(tasks.taskListSize(), deletedTask);
-            break;
+            return ui.showTaskDeleted(tasks.taskListSize(), deletedTask);
 
         default:
+            return null;
         }
     }
 }

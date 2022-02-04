@@ -39,7 +39,7 @@ public class DateCommand extends Command {
      * @param storage Storage.
      * @throws BotException When the date user inputted is not a valid one.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length != 2) {
@@ -48,7 +48,7 @@ public class DateCommand extends Command {
 
         try {
             String searchList = tasks.searchByDateString(commandInfo[1]);
-            ui.showTasksByDate(searchList);
+            return ui.showTasksByDate(searchList);
         } catch (DateTimeParseException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
         }
