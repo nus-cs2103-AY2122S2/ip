@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Comparator;
+
 /**
  * This is an abstract Task class that creates Task instances with a title,
  * whether task is completed and the type of Task.
@@ -10,7 +12,7 @@ package duke;
  * @since   2022-1-15
  */
 
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String name;
     protected int done;
     protected Character type;
@@ -42,6 +44,11 @@ public abstract class Task {
 
     public void setType(Character type) {
         this.type = type;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return name.compareTo(task.name);
     }
 
     /**

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Collections;
 import java.util.Locale;
 
 /**
@@ -23,7 +24,7 @@ public class Parser {
 
     //Must be in SNAKE_CASE
     enum Commands {
-        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, BYE
+        TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, SORT, BYE
     }
 
     /**
@@ -154,6 +155,8 @@ public class Parser {
                 return deleteTask();
             case FIND:
                 return findTask();
+            case SORT:
+                return sortTasks();
             case BYE:
                 terminateAndSaveProgram(storage);
                 System.exit(0);
@@ -334,6 +337,17 @@ public class Parser {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Sorts Tasks based on title of Task
+     */
+    private String sortTasks() {
+        StringBuilder successMessage = new StringBuilder();
+        Collections.sort(tasks.getTasks());
+        successMessage.append("\nThe Tasks have been sorted successfully!\n");
+        successMessage.append(listOutTasks());
+        return successMessage.toString();
     }
 
     /**

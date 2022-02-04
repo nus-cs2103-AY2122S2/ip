@@ -1,4 +1,4 @@
-T - 1 - Running
-D - 0 - Project - 2020/May/19
-D - 0 - Meeting - 2020/January/19
 T - 0 - Basketball
+D - 0 - Meeting - 2020/January/19
+D - 0 - Project - 2020/May/19
+T - 1 - Running
