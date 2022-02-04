@@ -24,7 +24,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        Task deletedTask = tasks.deleteTask(super.index);
+        int index = super.index;
+        assert index > 0 : "Index provided should be greater then 0";
+        Task deletedTask = tasks.deleteTask(index);
         String message = "Noted. I've removed this task:\n";
         return message + deletedTask.toString() + "\n"
                 + "Now you have " + tasks.getListSize() + " tasks in the list.";

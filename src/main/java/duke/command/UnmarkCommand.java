@@ -25,7 +25,9 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         String message = "OK, I've marked this task as not done yet:\n";
-        Task unMarkedTask = tasks.unMarkTask(super.index);
+        int index = super.index;
+        assert index > 0 : "Index provided should be greater then 0";
+        Task unMarkedTask = tasks.unMarkTask(index);
         return message + unMarkedTask;
     }
 
