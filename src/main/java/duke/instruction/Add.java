@@ -24,7 +24,7 @@ public final class Add extends Instruction {
     }
 
     /**
-     * Adds the task into the task manager, and return the message when the action is done.
+     * Adds the task into the task manager, and returns the message when the action is done.
      *
      * @param ui The UI to be used.
      */

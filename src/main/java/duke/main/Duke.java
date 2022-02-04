@@ -65,7 +65,10 @@ public class Duke {
             } catch (DukeException e) {
                 System.err.println(e.getMessage());
             } finally {
-                ui.askForInstruction();
+                if (!isExit) {
+                    ui.askForInstruction();
+
+                }
             }
         }
     }

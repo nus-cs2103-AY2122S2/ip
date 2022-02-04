@@ -3,7 +3,7 @@ package main.java.duke.task;
 import java.util.HashMap;
 
 /**
- * Represent a task that is stored by main.Duke.
+ * Represents a task that is stored by main.Duke.
  */
 public abstract class Task {
 
@@ -16,11 +16,12 @@ public abstract class Task {
     private static final String TASK_TYPE_FIELD = "task_type";
 
     /**
-     * Constructor of a task. Sets the description of the task, and set the isDone status to be false by default.
+     * Constructor of a task. Sets the description of the task,
+     * and sets the isDone status to be false by default.
      *
      * @param description The description of the task.
      */
-    protected Task(String description) {
+    protected Task(final String description) {
 
         this.description = description;
         this.isDone = false;
@@ -38,7 +39,8 @@ public abstract class Task {
     /**
      * Constructor using an infoTable.
      *
-     * @param infoTable The <code>HashMap</code> that contains the information about the current task.
+     * @param infoTable The <code>HashMap</code> that contains
+     *                  the information about the current task.
      */
     protected Task(HashMap<String, Object> infoTable) {
 
@@ -51,7 +53,8 @@ public abstract class Task {
      *
      * @param instruction The line of instruction used to create a task.
      * @return The instantiated task.
-     * @throws FailedToInterpretTaskException If the instruction (i) does not contain valid type of task; or
+     * @throws FailedToInterpretTaskException If the instruction
+     * (i) does not contain valid type of task; or
      * (ii) does not contain a valid description of task.
      */
     public static Task of(String instruction) throws FailedToInterpretTaskException {
@@ -61,23 +64,23 @@ public abstract class Task {
 
         if (args.length < 2) {
 
-            throw new FailedToInterpretTaskException("Oops, a type and a description for the task must be provided.");
+            throw new FailedToInterpretTaskException(
+                    "Oops, a type and a description for the task must be provided.");
         }
 
         // Contains the description and possibly other information about the task.
         String details = args[1];
 
         switch (type) {
-
-            case "todo":
-                return new ToDo(details);
-            case "event":
-                return new Event(details);
-            case "deadline":
-                return new Deadline(details);
-            default:
-                // Invalid type.
-                throw new IllegalArgumentException("Oops, the type of the task must be todo/event/deadline.");
+        case "todo":
+            return new ToDo(details);
+        case "event":
+            return new Event(details);
+        case "deadline":
+            return new Deadline(details);
+        default:
+            // Invalid type.
+            throw new IllegalArgumentException("Oops, the type of the task must be todo/event/deadline.");
         }
     }
 
@@ -145,7 +148,7 @@ public abstract class Task {
      * Initializes the information table for the current task. This table contains the (attribute, value) for all the
      * common attributes that a <code>task.Task</code> contains.
      *
-     * @return
+     * @return A HashMap that contains the information about the current task.
      */
     protected HashMap<String, Object> initializeInfoTable() {
 
