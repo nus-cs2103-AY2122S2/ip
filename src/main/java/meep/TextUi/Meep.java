@@ -1,6 +1,5 @@
 package meep.TextUi;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import meep.commands.Command;

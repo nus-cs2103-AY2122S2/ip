@@ -1,6 +1,5 @@
 package meep.ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Application;
