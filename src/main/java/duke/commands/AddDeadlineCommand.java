@@ -8,6 +8,7 @@ import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.tasks.Deadline;
+import duke.tasks.Task;
 
 
 /**
@@ -47,6 +48,7 @@ public class AddDeadlineCommand extends Command<String> {
 
             // Create a new Deadline to add to TaskList
             Deadline newDeadline = new Deadline(deadlineName, false, deadline);
+            assert newDeadline instanceof Deadline;
             toDoList.add(newDeadline);
 
             // Print out the formatted message after adding to TaskList

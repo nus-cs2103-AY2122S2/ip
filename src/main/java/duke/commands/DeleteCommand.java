@@ -34,7 +34,7 @@ public class DeleteCommand extends Command<Integer> {
         try {
             // Remove the Task from the TaskList
             Task deletedTask = toDoList.remove(numberToDelete);
-
+            assert deletedTask instanceof Task;
             // Print out the formatted message after removing from TaskList
             Ui.setDukeResponse(Parser.formatMsg("Noted. I've removed this task:\n" + deletedTask
                     + "\nNow you have " + toDoList.size() + " tasks in the list."));

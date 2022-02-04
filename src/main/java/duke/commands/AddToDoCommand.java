@@ -7,6 +7,7 @@ import duke.main.Parser;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
+import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 
@@ -42,6 +43,7 @@ public class AddToDoCommand extends Command<String> {
         try {
             // Create a new ToDo and add to TaskList
             ToDo newToDo = new ToDo(cmd.split("todo")[1], false);
+            assert newToDo instanceof ToDo;
             toDoList.add(newToDo);
 
             // Print out the formatted message after adding to TaskList
