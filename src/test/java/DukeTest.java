@@ -17,40 +17,40 @@ public class DukeTest {
         Parser p = new Parser();
 
         //test case 1: "list"
-        assertTrue(Arrays.equals(new String[]{"list", null, null, null}, p.messageProcess("list")));
+        assertTrue(Arrays.equals(new String[]{"list", null, null, null}, p.processMessage("list")));
 
         //test case 2: "mark 1"
-        assertTrue(Arrays.equals(new String[]{"mark", "0", null, null}, p.messageProcess("mark 1")));
+        assertTrue(Arrays.equals(new String[]{"mark", "0", null, null}, p.processMessage("mark 1")));
 
         //test case 3: "unmark 1"
-        assertTrue(Arrays.equals(new String[]{"unmark", "0", null, null}, p.messageProcess("unmark 1")));
+        assertTrue(Arrays.equals(new String[]{"unmark", "0", null, null}, p.processMessage("unmark 1")));
 
         //test case 4: "todo play"
-        assertTrue(Arrays.equals(new String[]{"todo", "play", null, null}, p.messageProcess("todo play")));
+        assertTrue(Arrays.equals(new String[]{"todo", "play", null, null}, p.processMessage("todo play")));
 
         //test case 5: "deadline homework /2022-01-01"
         assertTrue(Arrays.equals(new String[]{"deadline", "homework ", "2022-01-01T23:59", "false"},
-                p.messageProcess("deadline homework /2022-01-01")));
+                p.processMessage("deadline homework /2022-01-01")));
 
         //test case 6: "deadline homework/2022-01-01 1800"
         assertTrue(Arrays.equals(new String[]{"deadline", "homework ", "2022-01-01T18:00", "true"},
-                p.messageProcess("deadline homework /2022-01-01 1800")));
+                p.processMessage("deadline homework /2022-01-01 1800")));
 
         //test case 7: "event party /2022-01-03"
         assertTrue(Arrays.equals(new String[]{"event", "party ", "2022-01-03T00:00", "false"},
-                p.messageProcess("event party /2022-01-03")));
+                p.processMessage("event party /2022-01-03")));
 
         //test case 8: "event party /2022-01-03 1930"
         assertTrue(Arrays.equals(new String[]{"event", "party ", "2022-01-03T19:30", "true"},
-                p.messageProcess("event party /2022-01-03 1930")));
+                p.processMessage("event party /2022-01-03 1930")));
 
         //test case 9: "delete 2"
         assertTrue(Arrays.equals(new String[]{"delete", "1", null, null},
-                p.messageProcess("delete 2")));
+                p.processMessage("delete 2")));
 
         //test case 10: "schedule 2022-01-02"
         assertTrue(Arrays.equals(new String[]{"schedule", "2022-01-02", null, null},
-                p.messageProcess("schedule 2022-01-02")));
+                p.processMessage("schedule 2022-01-02")));
     }
 
     @Test

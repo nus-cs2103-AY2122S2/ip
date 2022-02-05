@@ -61,10 +61,10 @@ public class Storage {
     }
 
     /**
-     * deletes the Duke.task from local file by creating a temp file
-     * and copy every Duke.task except the one to be deleted
+     * Deletes the task from local file by creating a temp file
+     * and copy every task except the one to be deleted
      *
-     * @param taskToDelete the index of Duke.task to delete
+     * @param taskToDelete the index of task to delete
      */
     public void deleteFromFile(int taskToDelete) {
         String oldFileName = "src/main/data/duke.txt";
@@ -79,13 +79,11 @@ public class Storage {
             String line;
             boolean first = true;
             while ((line = br.readLine()) != null) {
-                if (indexAccessed != taskToDelete) {
-                    if (first) {
-                        bw.write(line);
-                        first = false;
-                    } else {
-                        bw.write("\n" + line);
-                    }
+                if (indexAccessed != taskToDelete && first) {
+                    bw.write(line);
+                    first = false;
+                } else if (indexAccessed != taskToDelete) {
+                    bw.write("\n" + line);
                 }
                 indexAccessed++;
             }
@@ -200,10 +198,10 @@ public class Storage {
 
             String line;
             while ((line = br.readLine()) != null) {
-                if (taskToChange == lineCount - 1) { //if it is the last line
-                    if (taskToChange == taskToMark) {
-                        line = line.replaceFirst(init, goal);
-                    }
+                if (taskToChange == lineCount - 1 && taskToChange == taskToMark) { //if it is the last line
+                    line = line.replaceFirst(init, goal);
+                    bw.write(line);
+                } else if (taskToChange == lineCount - 1) {
                     bw.write(line);
                 } else if (taskToChange == taskToMark) {
                     line = line.replaceFirst(init, goal);
