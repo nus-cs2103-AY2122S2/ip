@@ -3,3 +3,4 @@ Here are the tasks in your list:
 2. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
 3. [T][ ] wash car
 4. [T][ ] watch movie
+5. [E][ ] go party (at: Sunday 10pm)
