@@ -8,12 +8,15 @@
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" text="Label" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="5.0" stylesheets="@../styles/DialogBox.css" wrapText="true">
             <padding>
-                <Insets right="10.0" left="10.0"/>
+                <Insets topRightBottomLeft="10.0"/>
             </padding>
+            <HBox.margin>
+                <Insets topRightBottomLeft="5.0"/>
+            </HBox.margin>
         </Label>
-        <Circle fx:id="displayPicture" nodeOrientation="LEFT_TO_RIGHT" radius="50.0" stroke="#ff7e59"
+        <Circle fx:id="displayPicture" nodeOrientation="LEFT_TO_RIGHT" radius="30.0" stroke="#ff7e59"
                 strokeType="INSIDE"/>
     </children>
     <padding>
