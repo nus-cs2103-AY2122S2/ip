@@ -1,7 +1,8 @@
 package luca.command;
 
+import java.util.stream.IntStream;
+
 import luca.storage.Storage;
-import luca.task.Task;
 import luca.task.TaskList;
 
 /**
@@ -29,15 +30,11 @@ public class ListCommand extends Command {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks in your list:\n");
-        Task task;
-        for (int i = 0; i < taskList.size(); i++) {
-            task = taskList.get(i);
-            stringBuilder.append((i + 1) + "." + task.toString());
-            if (i != taskList.size() - 1) {
-                stringBuilder.append("\n");
-            }
-        }
-        return stringBuilder.toString();
+        IntStream.range(0, taskList.size())
+                .forEach(index -> stringBuilder.append((index + 1) + "."
+                        + taskList.get(index).toString() + "\n"));
+
+        return stringBuilder.toString().trim();
     }
 
     /**

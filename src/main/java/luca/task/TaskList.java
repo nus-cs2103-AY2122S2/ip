@@ -2,6 +2,7 @@ package luca.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Class containing the list of Tasks loaded to the chat bot.
@@ -92,6 +93,13 @@ public class TaskList {
      */
     public Task remove(int index) {
         return taskList.remove(index);
+    }
+
+    /**
+     * Outputs a stream of tasks.
+     */
+    public Stream<Task> stream() {
+        return taskList.stream();
     }
 
     /**
