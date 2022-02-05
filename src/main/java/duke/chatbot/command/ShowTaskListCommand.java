@@ -22,14 +22,19 @@ class ShowTaskListCommand extends TaskListCommand {
      */
     @Override
     public ArrayList<String> execute() {
-        TaskList taskList = this.getTaskList();
-        ArrayList<String> taskDescriptions = taskList.getTaskDescriptions();
         ArrayList<String> response = new ArrayList<>();
-        // Prepend each list item with its numbering inside list
-        for (int i = 0; i < taskDescriptions.size(); i++) {
-            String description = taskDescriptions.get(i);
-            response.add(String.format("%d.%s", i + 1, description));
+        TaskList taskList = this.getTaskList();
+        if (taskList.getSize() == 0) {
+            response.add("You have no tasks currently!");
+        } else {
+            ArrayList<String> taskDescriptions = taskList.getTaskDescriptions();
+            // Prepend each list item with its numbering inside list
+            for (int i = 0; i < taskDescriptions.size(); i++) {
+                String description = taskDescriptions.get(i);
+                response.add(String.format("%d.%s", i + 1, description));
+            }
         }
+
         return response;
     }
 }

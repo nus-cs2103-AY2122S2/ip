@@ -40,7 +40,7 @@ class DeleteTaskCommand extends TaskListCommand {
         ArrayList<String> response = new ArrayList<>();
         response.add("Noted. The following task has been deleted:");
         response.add(deletedTask.getDescription());
-        response.add(String.format("You now have %d tasks!", taskList.getTaskListSize()));
+        response.add(String.format("You now have %d tasks!", taskList.getSize()));
         return response;
     }
 }
