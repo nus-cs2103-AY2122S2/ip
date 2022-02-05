@@ -1,9 +1,18 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a parser to format user input
  */
 public class Parser {
+
+    static final int COMMAND_INDEX = 0;
+    static final int DESCRIPTION_INDEX = 1;
+    static final int TIME_INDEX = 2;
+
+    static final int TIME_INDEX_CORRECTION = 4;
 
     /**
      * Returns Command enum of string that user entered
@@ -40,27 +49,70 @@ public class Parser {
 
     /**
      * Returns String array of formatted input
-     * Index 0: Description of task
-     * Index 1: Time
+     * Index 0: Command
+     * Index 1: Description of task
+     * Index 2: Time
      * Time will be an empty string if not provided
      *
      * @param input String to be formatted
      * @return String array of formatted input
      */
     public static String[] parseInput(String input) {
-        String[] inputs = new String[2];
-        if (input.contains("/by")) {
-            int indexOfTime = input.indexOf("/by");
-            inputs[0] = input.substring(0, indexOfTime);
-            inputs[1] = input.substring(indexOfTime + 4);
-        } else if (input.contains("/at")) {
-            int indexOfTime = input.indexOf("/at");
-            inputs[0] = input.substring(0, indexOfTime);
-            inputs[1] = input.substring(indexOfTime + 4);
-        } else {
-            inputs[0] = input;
-            inputs[1] = "";
+        String[] output = new String[3];
+        String[] inputs = input.split(" ", 2);
+        output[COMMAND_INDEX] = inputs[0];
+        if (inputs.length == 1) {
+            return output;
         }
-        return inputs;
+
+        String taskDetails = inputs[1];
+        if (taskDetails.contains("/by")) {
+            int indexOfTime = taskDetails.indexOf("/by");
+            output[DESCRIPTION_INDEX] = taskDetails.substring(0, indexOfTime);
+            output[TIME_INDEX] = taskDetails.substring(indexOfTime + TIME_INDEX_CORRECTION);
+        } else if (taskDetails.contains("/at")) {
+            int indexOfTime = taskDetails.indexOf("/at");
+            output[DESCRIPTION_INDEX] = taskDetails.substring(0, indexOfTime);
+            output[TIME_INDEX] = taskDetails.substring(indexOfTime + TIME_INDEX_CORRECTION);
+        } else {
+            output[DESCRIPTION_INDEX] = taskDetails;
+            output[TIME_INDEX] = "";
+        }
+        return output;
     }
+
+    /**
+     * Parses string into TaskType enum
+     *
+     * @param taskType String indicating type of task
+     * @return TaskType enum indicating type of task
+     */
+    public static TaskType parseTaskType(String taskType) {
+        taskType = taskType.toLowerCase();
+        switch (taskType) {
+        case "todo":
+            return TaskType.TODO;
+        case "event":
+            return TaskType.EVENT;
+        case "deadline":
+            return TaskType.DEADLINE;
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Parses string into LocalDateTime
+     *
+     * @param time String representing DateTime
+     * @return LocalDateTime representing time entered as string
+     */
+    public static LocalDateTime parseTime(String time) {
+        try {
+            return LocalDateTime.parse(time);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
 }
