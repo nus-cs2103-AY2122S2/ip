@@ -21,7 +21,7 @@ import ultoi.util.DateTime;
  */
 public class DeleteCommand implements Command {
     private static final int COMMAND_LENGTH = 6;
-    private static final String MESSAGE = "Got it! I have added this task:";
+    private static final String MESSAGE = "Got it! I have deleted this task:";
 
     private final int index;
 

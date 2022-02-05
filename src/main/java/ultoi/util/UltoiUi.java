@@ -56,7 +56,7 @@ public class UltoiUi {
      * @param msg Message shown.
      */
     public String showMsg(String msg) {
-        String fullMsg = LINE_BREAK + "\n" + msg + "\n" + LINE_BREAK;
+        String fullMsg = msg;
         return fullMsg;
     }
 

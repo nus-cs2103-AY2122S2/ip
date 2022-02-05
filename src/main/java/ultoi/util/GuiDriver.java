@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.text.Font;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +25,7 @@ public class GuiDriver extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(GuiDriver.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDriver(ultoi);
             stage.show();
