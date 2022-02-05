@@ -20,7 +20,7 @@ public class Event extends Task {
     @Override
     public String getSaveDescription() {
         return String.format("%s | %s | %s | %s",
-                getClass().getSimpleName(), status == true ? 1 : 0, description, getTimeDate());
+                getClass().getSimpleName(), isDone == true ? 1 : 0, description, getTimeDate());
     }
 
     @Override

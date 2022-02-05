@@ -23,7 +23,7 @@ public class Deadline extends Task {
     @Override
     public String getSaveDescription() {
         return String.format("%s | %s | %s | %s",
-                getClass().getSimpleName(), status == true ? 1 : 0, description, dateTime.toString());
+                getClass().getSimpleName(), isDone == true ? 1 : 0, description, dateTime.toString());
     }
 
     @Override
