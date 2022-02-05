@@ -18,6 +18,6 @@ public class BaronException extends Exception {
      * @return the string representation of {@code BaronException}.
      */
     public String toString() {
-        return "☹ OOPS!!! " + getMessage();
+        return "OOPS!!! " + getMessage();
     }
 }
