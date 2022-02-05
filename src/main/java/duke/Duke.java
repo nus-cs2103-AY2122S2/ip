@@ -41,6 +41,7 @@ public class Duke {
         try {
             String[] commands = input.split(" ", 2);
             Command command = Parser.parseString(commands);
+            assert command != null;
 
             switch (command) {
             case BYE:
