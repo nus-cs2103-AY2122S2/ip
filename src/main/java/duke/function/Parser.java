@@ -11,6 +11,7 @@ import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 
 /**
@@ -55,6 +56,9 @@ public class Parser {
         case "find":
             command = new FindCommand(fullCommand);
             break;
+        case "tag":
+            command = new TagCommand(fullCommand);
+            break;
         case "bye":
             command = new ExitCommand(fullCommand);
             break;
@@ -63,7 +67,7 @@ public class Parser {
             break;
         }
 
-        assert command != null;
+//        assert command != null;
 
         return command;
 

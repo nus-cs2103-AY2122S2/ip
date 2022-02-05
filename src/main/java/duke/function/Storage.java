@@ -51,19 +51,29 @@ public class Storage {
                 Scanner fileSc = new Scanner(file);
                 while (fileSc.hasNextLine()) {
                     String[] line = fileSc.nextLine().split(";");
+                    int indexWhereTagsStart;
                     Task task;
                     if (line[0].equals("T")) {
                         task = new ToDoTask(line[2]);
+                        indexWhereTagsStart = 3;
                     } else if (line[0].equals("D")) {
                         task = new DeadlineTask(line[2], line[3], LocalDateTime.parse(line[4]));
+                        indexWhereTagsStart = 5;
                     } else if (line[0].equals("E")) {
                         task = new EventTask(line[2], line[3], LocalDateTime.parse(line[4]));
+                        indexWhereTagsStart = 5;
                     } else {
                         throw new DukeException("An invalid task type was read");
                     }
+
                     if (line[1].equals("X")) {
                         task.setMarked(true);
                     }
+
+                    for (int i = indexWhereTagsStart; i < line.length; i++) {
+                        task.addTag(line[i]);
+                    }
+
                     tasks.add(task);
                 }
             } catch (FileNotFoundException e) {
@@ -83,43 +93,48 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (Task task : tasks.getTasks()) {
-                String taskString = "";
+                StringBuilder taskString = new StringBuilder();
 
                 if (task instanceof ToDoTask) {
-                    taskString += "T";
+                    taskString.append("T");
                 } else if (task instanceof DeadlineTask) {
-                    taskString += "D";
-                } else {
-                    assert task instanceof EventTask;
-                    taskString += "E";
+                    taskString.append("D");
+                } else if (task instanceof EventTask) {
+                    taskString.append("E");
                 }
-                taskString += addDelimiter();
+                taskString.append(addDelimiter());
 
                 if (task.isMarked()) {
-                    taskString += "X";
+                    taskString.append("X");
                 } else {
-                    taskString += "O";
+                    taskString.append("O");
                 }
-                taskString += addDelimiter();
+                taskString.append(addDelimiter());
 
-                taskString += task.getName();
-                taskString += addDelimiter();
+                taskString.append(task.getName());
 
                 if (task instanceof DeadlineTask) {
                     DeadlineTask dTask = (DeadlineTask) task;
-                    taskString += addDelimiter();
-                    taskString += dTask.getPreposition();
-                    taskString += addDelimiter();
-                    taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
-                } else {
-                    assert task instanceof EventTask;
+                    taskString.append(addDelimiter());
+                    taskString.append(dTask.getPreposition());
+                    taskString.append(addDelimiter());
+                    taskString.append(dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME));
+                } else if (task instanceof EventTask) {
                     EventTask dTask = (EventTask) task;
-                    taskString += addDelimiter();
-                    taskString += dTask.getPreposition();
-                    taskString += addDelimiter();
-                    taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
+                    taskString.append(addDelimiter());
+                    taskString.append(dTask.getPreposition());
+                    taskString.append(addDelimiter());
+                    taskString.append(dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME));
                 }
-                fileWriter.write(taskString);
+                taskString.append(addDelimiter());
+
+                for (int i = 0; i < task.getTags().size(); i++) {
+                    String tag = task.getTags().get(i);
+                    taskString.append(tag);
+                    taskString.append(addDelimiter());
+                }
+
+                fileWriter.write(taskString.toString());
                 fileWriter.write(System.lineSeparator());
             }
             fileWriter.close();

@@ -59,6 +59,10 @@ public class DeleteCommand extends Command {
         String output = "";
         output += ui.printReturn(String.format("I've deleted task %d!", this.taskNumber));
         output += ui.printReturn(String.format("  %s", removedTask.toString()));
+
+        //Saving the task to the save file
+        storage.save(tasks);
+
         return output;
     }
 

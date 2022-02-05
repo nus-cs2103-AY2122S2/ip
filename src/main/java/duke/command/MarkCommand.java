@@ -75,6 +75,9 @@ public class MarkCommand extends Command {
         }
         output += ui.printReturn(String.format("  %d. %s", this.taskNumber, task.toString()));
 
+        //Saving the task to the save file
+        storage.save(tasks);
+
         return output;
     }
 
