@@ -1,4 +1,6 @@
 package duke;
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,11 +31,17 @@ public class TaskList {
     /**
      * print out the lists of tasks
      */
-    public void list() {
-        System.out.println("Here are your task(s):");
-        for (int i = 0; i < listOfInputs.size(); i++) {
-            System.out.println(((i + 1) + ". " + listOfInputs.get(i).message()));
+    public String list() {
+        String response = "";
+
+        if (listOfInputs.size() > 0) {
+            for (int i = 0; i < listOfInputs.size(); i++) {
+                response = response + "\n" + (((i + 1) + ". " + listOfInputs.get(i).message()));
+            }
+        } else {
+            response = "You got no task";
         }
+        return response;
     }
 
     /**
@@ -42,7 +50,7 @@ public class TaskList {
     public void find(String word) {
         boolean hasWord = false;
         for (int i = 0; i < listOfInputs.size(); i++) {
-            if (listOfInputs.get(i).description.contains(word)) {
+            if (listOfInputs.get(i).getDescription().contains(word)) {
                 System.out.println(listOfInputs.get(i).message());
                 hasWord = true;
             }
@@ -57,10 +65,12 @@ public class TaskList {
      * @param currNo
      * @throws IOException
      */
-    public void mark(int currNo) throws IOException {
+    public String mark(int currNo) throws IOException {
+        String response = "";
         Task taskDone = listOfInputs.get(currNo);
-        System.out.println("Good work!! I have marked it done:\n" + taskDone.markedDone());
+        response = response + taskDone.markDone(currNo);
         storage.updateData(taskDone.message(), filePath);
+        return "Good work!! I have marked it done:\n" + response;
     }
 
     /**
@@ -68,17 +78,18 @@ public class TaskList {
      * @param currNo
      * @throws IOException
      */
-    public void unMark(int currNo) throws IOException {
+    public String unMark(int currNo) throws IOException {
         Task taskUndone = listOfInputs.get(currNo);
-        System.out.println("Alrightt! I have marked it undone:\n" + taskUndone.markedUndone());
+        //System.out.println("Alrightt! I have marked it undone:\n" + taskUndone.markedUndone());
         storage.updateData(taskUndone.message(), filePath);
+        return "Alrightt! I have marked it undone:\n" + taskUndone.markedUndone();
     }
 
     /**
      * to update on list and display the todo message once it is called
      * @param str
-     * @return
-     * @throws IOException
+     * @return todo message
+     * @throws IOException e
      */
     public String toDo(String str) throws IOException {
         Todos todo = new Todos(str);
@@ -92,12 +103,15 @@ public class TaskList {
     /**
      * to update on list and display the deadline message once it is called
      * @param str
-     * @return
+     * @return deadline message
      * @throws IOException
      */
     public String deadLine(String str) throws IOException {
-        String[] deadL = str.split("/by ", 2);
-        DeadLine deadLineTemp = new DeadLine(deadL[0], deadL[1]);
+        String[] temp = str.split("deadline ", 2);
+        String[] deadL = temp[1].split("/by ", 2);
+        String description = deadL[0];
+        String by = deadL[1];
+        DeadLine deadLineTemp = new DeadLine(description, by);
         listOfInputs.add(deadLineTemp);
         storage.updateData(deadLineTemp.message(), filePath);
         return ("Deadline for this task:\n " + deadLineTemp.message() + "\n You have "
@@ -124,19 +138,20 @@ public class TaskList {
     /**
      * to delete the task from list and display a message once it is called
      * @param str
+     * @return delete message
      */
-    public void delete(String str) {
+    public String delete(String str) {
         int currNo = Integer.parseInt(str) - 1;
         listOfInputs.remove(currNo);
-        Delete deleteTemp = new Delete(listOfInputs.get(currNo).description);
-        System.out.println(deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.");
+        Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
+        return deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
     }
 
     /**
      * to write previously saved data to ArrayList
      * @throws IOException
      */
-    public void writeToArrFromPrevData () throws IOException {
+    public String writeToArrFromPrevData () throws IOException {
         BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
         String line = bufReader.readLine();
         while (line != null) {
@@ -145,6 +160,7 @@ public class TaskList {
             line = bufReader.readLine();
         }
         bufReader.close();
+        return "";
     }
 
 
