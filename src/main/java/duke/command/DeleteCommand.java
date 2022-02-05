@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
-import storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
 
 public class DeleteCommand extends Commands {
     public static final String COMMAND_WORDS = "delete";
@@ -10,7 +10,7 @@ public class DeleteCommand extends Commands {
     public static final String FAILURE_MESSAGE = "    'Delete' Command Executed Unsuccessfully";
 
     private static boolean IS_EXIT = false;
-    private String arguments; // In the form of user command
+    private String arguments; // In the form of user duke.command
 
     public DeleteCommand(String arguments) {
         this.arguments = arguments;

@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -55,6 +55,6 @@ public class Ui {
 
     public void showsLoadingError() {
         System.out.println(returnUserSpace() +
-                "There seems to be an error loading your task");
+                "There seems to be an error loading your duke.task");
     }
 }

@@ -1,15 +1,15 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
-import storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
 
 public class UnmarkCommand extends Commands {
     public static final String COMMAND_WORDS = "unmark";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Unmark' Command Executed Unsuccessfully";
     private static boolean IS_EXIT = false;
-    private String arguments; // In the form of user command
+    private String arguments; // In the form of user duke.command
 
     public UnmarkCommand(String arguments) {
         this.arguments = arguments;

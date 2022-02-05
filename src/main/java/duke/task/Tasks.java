@@ -1,9 +1,9 @@
-package task;
+package duke.task;
 
 //Abstract class Task that Todos, Events, and deadlines inherit from.
 public class Tasks {
-    String name; // Name of task
-    boolean completed; // Completion of task
+    String name; // Name of duke.task
+    boolean completed; // Completion of duke.task
 
     // Constructor for Task
     public Tasks(String taskName) {
@@ -16,32 +16,32 @@ public class Tasks {
         this.completed = completion;
     }
 
-    // Completion of task
+    // Completion of duke.task
     public Tasks completeTask() {
         return new Tasks(name, true);
     }
 
-    // Uncomplete the task
+    // Uncomplete the duke.task
     public Tasks uncompleteTask() {
         return new Tasks(name, false);
     }
 
-    // Get timing of task - overriden in todos and events
+    // Get timing of duke.task - overriden in todos and events
     String getTiming() {
         return "";
     }
 
-    // Get timing of task - overriden in todos and events
+    // Get timing of duke.task - overriden in todos and events
     String getDeadline() {
         return "";
     }
 
-    // Get name of task
+    // Get name of duke.task
     String getName() {
         return this.name;
     }
 
-    // Get completion status of the task
+    // Get completion status of the duke.task
     Boolean getCompletion() {
         return this.completed;
     }

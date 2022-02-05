@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-//A variant of task
+//A variant of duke.task
 public class Events extends Tasks {
     String timing; // Timing of event
 
@@ -20,13 +20,13 @@ public class Events extends Tasks {
         return "(at: " + timing + ")";
     }
 
-    // Completion of task
+    // Completion of duke.task
     @Override
     public Events completeTask() {
         return new Events(super.getName(), true, timing);
     }
 
-    // Uncomplete the task
+    // Uncomplete the duke.task
     @Override
     public Events uncompleteTask() {
         return new Events(super.getName(), false, timing);

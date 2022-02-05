@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-//A variant of task
+//A variant of duke.task
 public class Todos extends Tasks {
 
     // Constructor of Todos
@@ -12,13 +12,13 @@ public class Todos extends Tasks {
         super(taskName, completion);
     }
 
-    // Completion of task
+    // Completion of duke.task
     @Override
     public Todos completeTask() {
         return new Todos(name, true);
     }
 
-    // Uncomplete the task
+    // Uncomplete the duke.task
     @Override
     public Todos uncompleteTask() {
         return new Todos(name, false);

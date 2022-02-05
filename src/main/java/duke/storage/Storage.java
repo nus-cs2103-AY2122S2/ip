@@ -1,4 +1,4 @@
-package storage;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Tasks;
-import task.Deadlines;
-import task.Events;
-import task.Todos;
-
-import storage.Storage;
+import duke.task.Tasks;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Todos;
 
 public class Storage {
     String databasePath;

@@ -1,16 +1,16 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
-import storage.Storage;
+import duke.storage.Storage;
 
 public class MarkCommand extends Commands {
     public static final String COMMAND_WORDS = "mark";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Mark' Command Executed Unsuccessfully";
     private static boolean IS_EXIT = false;
-    private String arguments; // In the form of user command
+    private String arguments; // In the form of user duke.command
 
     public MarkCommand(String arguments) {
         this.arguments = arguments;

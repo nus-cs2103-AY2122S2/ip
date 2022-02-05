@@ -1,11 +1,11 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-//A variant of task 
+//A variant of duke.task
 public class Deadlines extends Tasks {
-    LocalDate deadline; // Deadline to complete deadline task
+    LocalDate deadline; // Deadline to complete deadline duke.task
 
     // Constructor
     public Deadlines(String taskName, String deadline) throws DateTimeParseException {
@@ -18,18 +18,18 @@ public class Deadlines extends Tasks {
         this.deadline = LocalDate.parse(deadline);
     }
 
-    // Get deadline of task
+    // Get deadline of duke.task
     String getTiming() {
         return "(by: " + deadline + ")";
     }
 
-    // Completion of task
+    // Completion of duke.task
     @Override
     public Deadlines completeTask() {
         return new Deadlines(super.getName(), true, deadline.toString());
     }
 
-    // Uncomplete the task
+    // Uncomplete the duke.task
     @Override
     public Deadlines uncompleteTask() {
         return new Deadlines(super.getName(), false, deadline.toString());
@@ -41,7 +41,7 @@ public class Deadlines extends Tasks {
                 + " | " + deadline + "\n";
     }
 
-    // toString returning task
+    // toString returning duke.task
     public String toString() {
         return "[D][" + (this.getCompletion() == true ? "X" : " ") + "] " + super.getName()
                 + " (by: " + deadline + ")";

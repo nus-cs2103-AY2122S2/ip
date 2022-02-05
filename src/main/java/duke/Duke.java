@@ -1,11 +1,12 @@
+package duke;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
-import command.Commands;
-import ui.Ui;
-import parser.Parser;
-import tasklist.TaskList;
-import storage.Storage;
+import duke.command.Commands;
+import duke.ui.Ui;
+import duke.parser.Parser;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
 
 public class Duke {
 
@@ -51,6 +52,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/java/data/DukeDatabase.txt").run();
+        new Duke("./src/main/java/duke/data/DukeDatabase.txt").run();
     }
 }

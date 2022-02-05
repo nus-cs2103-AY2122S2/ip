@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
-import storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
 
-// Enums of command
+// Enums of duke.command
 // public enum Commands123 {
 //     bye, list, mark, unmark, delete, todo, deadline, event;
 // } 

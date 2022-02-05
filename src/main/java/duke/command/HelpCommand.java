@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
-import storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
 
 public class HelpCommand extends Commands {
 
@@ -18,7 +18,7 @@ public class HelpCommand extends Commands {
 
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Did you accidentally write an incorrect command.");
+        System.out.println("    Did you accidentally write an incorrect duke.command.");
         return new CommandResult(SUCCESS_MESSAGE);
     }
 }

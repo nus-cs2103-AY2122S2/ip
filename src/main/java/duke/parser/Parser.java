@@ -1,15 +1,13 @@
-package parser;
+package duke.parser;
 
-import command.AddCommand;
-import command.Commands;
-import command.DeleteCommand;
-import command.ExitCommand;
-import command.HelpCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-
-import parser.Parser;
+import duke.command.AddCommand;
+import duke.command.Commands;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 public class Parser {
 

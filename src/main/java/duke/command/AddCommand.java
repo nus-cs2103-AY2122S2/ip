@@ -1,12 +1,12 @@
-package command;
+package duke.command;
 
-import ui.Ui;
-import tasklist.TaskList;
-import storage.Storage;
-import task.Deadlines;
-import task.Tasks;
-import task.Todos;
-import task.Events;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
+import duke.task.Deadlines;
+import duke.task.Tasks;
+import duke.task.Todos;
+import duke.task.Events;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class AddCommand extends Commands {
 
     private static boolean IS_EXIT = false;
     private String commandWord;
-    private String arguments; // In the form of user command
+    private String arguments; // In the form of user duke.command
 
     public AddCommand(String commandWord, String arguments) {
         this.commandWord = commandWord;
