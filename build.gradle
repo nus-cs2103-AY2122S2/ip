@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Duke"
+    archiveBaseName = "Cortana"
     archiveClassifier = null
 }
 

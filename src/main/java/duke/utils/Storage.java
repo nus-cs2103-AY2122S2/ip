@@ -113,12 +113,14 @@ public class Storage {
                 String[] actualTask = taskInString.substring(7).split("\\(by: ");
                 String description = actualTask[0];
                 String by = actualTask[1].replaceAll("\\)", "");
-                boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(by).find();
+                boolean hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
+                        .matcher(by).find();
                 if (hasTime) {
-                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
                     localDateTime = LocalDateTime.parse(by, formatter); //convert from hhmmaa to HHmm
                 } else {
-                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.ENGLISH);
+                    System.out.println(by);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.ENGLISH);
                     localDate = LocalDate.parse(by, formatter);
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
@@ -130,12 +132,13 @@ public class Storage {
                 String[] actualTask = taskInString.substring(7).split("\\(at: ");
                 String description = actualTask[0];
                 String at = actualTask[1].replaceAll("\\)", "");
-                boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(at).find();
+                boolean hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
+                        .matcher(at).find();
                 if (hasTime) {
-                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
                     localDateTime = LocalDateTime.parse(at, formatter); //convert from hhmmaa to HHmm
                 } else {
-                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.ENGLISH);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.ENGLISH);
                     localDate = LocalDate.parse(at, formatter);
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
