@@ -37,19 +37,19 @@ public class TaskList {
         boolean isAddSuccess;
         switch (type) {
         case TODO :
-            isAddSuccess = tasks.add(new ToDo(inputs[0]));
+            isAddSuccess = tasks.add(new ToDo(inputs[USER_DESCRIPTION_INDEX]));
             break;
         case DEADLINE:
             if (inputs[USER_TIME_INDEX].trim().equals("")) {
                 throw new EmptyDescriptionException("Time cant be empty");
             }
-            isAddSuccess = tasks.add(new Deadline(inputs[0], inputs[1]));
+            isAddSuccess = tasks.add(new Deadline(inputs[USER_DESCRIPTION_INDEX], inputs[USER_TIME_INDEX]));
             break;
         case EVENT:
             if (inputs[USER_TIME_INDEX].trim().equals("")) {
                 throw new EmptyDescriptionException("Time cant be empty");
             }
-            isAddSuccess = tasks.add(new Event(inputs[0], inputs[1]));
+            isAddSuccess = tasks.add(new Event(inputs[USER_DESCRIPTION_INDEX], inputs[USER_TIME_INDEX]));
             break;
         default:
             isAddSuccess = false;

@@ -13,6 +13,7 @@ public class DataStore {
 
     static final String PATH = "data/tasks.csv";
     static final String FOLDER_NAME = "data";
+
     static final int TASK_INDEX = 0;
     static final int COMPLETED_INDEX = 1;
     static final int DESCRIPTION_INDEX = 2;
@@ -60,7 +61,7 @@ public class DataStore {
     }
 
     /**
-     * Loads previously saved data from PATH
+     * Loads previously saved data from PATH if any
      *
      * @return TaskList with the previously saved tasks
      */
