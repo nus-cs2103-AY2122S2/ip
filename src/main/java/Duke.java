@@ -1,8 +1,10 @@
-import java.time.format.DateTimeParseException;
-import java.util.Scanner; //import Scanner
-import java.util.ArrayList; //import ArrayList
-import java.util.Arrays; //import Arrays
+package duke.duke;
+
+import duke.ui.DukeException;
+import duke.ui.InputHandler;
+
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
