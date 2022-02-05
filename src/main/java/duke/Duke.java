@@ -1,19 +1,18 @@
 package duke;
 
 import duke.command.Command;
+import duke.ui.Ui;
 
 /**
- * Represents Duke, the task manager program.
+ * Represents Duke.
  */
 public class Duke {
-
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
-
+    private TaskList tasks;
     /**
      * Constructs a Duke object.
-     * @param filePath The file path to where the tasks should be saved.
+     * @param filePath The file path to where tasks should be saved.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -26,24 +25,17 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
+     * Parses the user's input and generates the proper response.
+     *
+     * @param input The user's input.
+     * @return Duke's response.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(storage, tasks, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(storage, tasks, ui);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

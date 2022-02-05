@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents the command to list all tasks.
@@ -17,8 +17,8 @@ public class ListCommand extends Command {
      * @param ui User interface of Duke.
      * @throws DukeException if there is a problem updating the storage or user interface.
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.showTaskList(tasks);
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
+        return ui.listTasks(tasks);
     }
 
     /**

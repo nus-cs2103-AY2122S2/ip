@@ -3,8 +3,9 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Deadline;
+import duke.ui.Ui;
+
 
 /**
  * Represents the command to add a deadline.
@@ -24,10 +25,9 @@ public class DeadlineCommand extends Command {
      * @param ui User interface of Duke.
      * @throws DukeException if there is a problem updating the storage or user interface.
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(deadline);
-        ui.showTaskAdded(deadline);
-        ui.showNumberOfTasks(tasks);
+        return ui.addTask(deadline) + ui.countTasks(tasks);
     }
 
     /**

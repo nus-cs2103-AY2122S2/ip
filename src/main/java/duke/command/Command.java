@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents a command.
@@ -17,7 +17,7 @@ public abstract class Command {
      * @param ui User interface of Duke.
      * @throws DukeException if there is a problem updating the storage or user interface.
      */
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
+    public abstract String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
 
     /**
      * Indicates whether the program should stop after this command.

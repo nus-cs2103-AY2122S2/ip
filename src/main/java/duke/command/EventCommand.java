@@ -3,8 +3,8 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Event;
+import duke.ui.Ui;
 
 /**
  * Represents the command to add an event.
@@ -24,10 +24,9 @@ public class EventCommand extends Command {
      * @param ui User interface of Duke.
      * @throws DukeException if there is a problem updating the storage or user interface.
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(event);
-        ui.showTaskAdded(event);
-        ui.showNumberOfTasks(tasks);
+        return ui.addTask(event) + ui.countTasks(tasks);
     }
 
     /**

@@ -62,10 +62,9 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < tasks.size() - 1; i++) {
-            sb.append((i + 1) + "." + tasks.get(i) + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1) + "." + tasks.get(i));
         }
-        sb.append(tasks.size() + "." + tasks.get(tasks.size() - 1));
         return sb.toString();
     }
 }

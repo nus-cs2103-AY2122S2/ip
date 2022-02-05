@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents the command to find tasks according to a keyword.
@@ -26,8 +26,8 @@ public class FindCommand extends Command {
      * @param ui The user interface.
      * @throws DukeException if there is a problem updating the storage or user interface.
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         TaskList filteredTasks = tasks.filter(keyword);
-        ui.showFoundTaskList(filteredTasks);
+        return ui.filterTasks(filteredTasks);
     }
 }
