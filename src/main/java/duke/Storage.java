@@ -87,7 +87,7 @@ public class Storage {
                     tasks.add(eventTask);
                     break;
                 default:
-                    //empty
+                    assert false : "File contains illegal modifications";
                 }
             }
         } catch (FileNotFoundException e) {
