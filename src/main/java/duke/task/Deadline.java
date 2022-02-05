@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,6 +21,10 @@ public class Deadline extends Task {
             System.out.println("Invalid Date/Time format!");
         }
         return LocalDateTime.now().format(dateTimeFormatter);
+    }
+
+    public String getDateAndTime() {
+        return this.dateAndTime;
     }
 
     @Override

@@ -1,4 +1,9 @@
-import java.util.*;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 import java.io.*;
 
 public class Duke {

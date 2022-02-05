@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +14,7 @@ public class Ui {
 
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hi! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hi! I'm Duke.Duke\nWhat can I do for you?");
     }
 
     public void showExit() {

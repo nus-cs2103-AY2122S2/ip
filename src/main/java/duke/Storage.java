@@ -1,5 +1,8 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.*;
-import java.util.*;
 
 public class Storage {
     private String dataPath;
@@ -31,13 +34,13 @@ public class Storage {
                 Task task = taskList.getTask(i);
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
-                    printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.description + " | " + deadline.dateAndTime);
+                    printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.getDescription() + " | " + deadline.getDateAndTime());
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
-                    printWriter.println("E | " + event.getStatusIcon() + " | " + event.description + " | " + event.dateAndTime);
+                    printWriter.println("E | " + event.getStatusIcon() + " | " + event.getDescription() + " | " + event.getDateAndTime());
                 } else if (task instanceof Todo) {
                     Todo todo = (Todo) task;
-                    printWriter.println("T | " + todo.getStatusIcon() + " | " + todo.description);
+                    printWriter.println("T | " + todo.getStatusIcon() + " | " + todo.getDescription());
                 }
             }
             printWriter.close();

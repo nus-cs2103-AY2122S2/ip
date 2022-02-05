@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.*;
+
 public class AddCommand implements Command {
     protected String[] commandAndDetails;
 
