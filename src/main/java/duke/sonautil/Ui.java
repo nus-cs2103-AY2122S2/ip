@@ -7,12 +7,6 @@ import duke.task.Task;
  */
 public class Ui {
 
-    public static final String LOGO = "  *    ,---.    ,-----.  ,--.  ,--.   ,---.      *\n"
-            + "      '   .-'  '  .-.  ' |  ,'.|  |  /  O  \\    *\n"
-            + " *    `.  `-.  |  | |  | |  |' '  | |  .-.  |\n"
-            + "    * .-'    | '  '-'  ' |  | `   | |  | |  |      *\n"
-            + "*     `-----'   `-----'  `--'  `--' `--' `--'   *";
-
     /**
      * Prints when the list is empty
      *
@@ -50,16 +44,6 @@ public class Ui {
     }
 
     /**
-     * Prints out when file is invalid
-     *
-     * @returns message to user
-     */
-    public static String invalidFileMessage() {
-        return "Oops! I can't load your file due to some errors..."
-                + "\nDon't worry! I will create a new one for you.";
-    }
-
-    /**
      * Prints out when Duke.task description is not entered by user
      *
      * @return message to user
@@ -74,7 +58,7 @@ public class Ui {
      * @return message to user
      */
     public static String dateTimeErrorMessage() {
-        return "\nOh no... the format or the date/time you entered is wrong! "
+        return "Oh no... the format or the date/time you entered is wrong! "
                 + "The correct format should be YYYY-MM-DD HHMM\n"
                 + "It is not necessary to put in time!\n";
     }
@@ -105,6 +89,7 @@ public class Ui {
      * @return message to user
      */
     public static String showSchedule(String date) {
+        assert(date != null);
         return "These are the events/deadlines happening on " + date + ":\n";
     }
 
