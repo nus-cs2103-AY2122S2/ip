@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import duke.tag.Tag;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.tag.Tag;
 
 public class TaskListTest {
 
