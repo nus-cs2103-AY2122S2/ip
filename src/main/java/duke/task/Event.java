@@ -28,7 +28,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + this.getSymbol() + " " + this.getName() + " (at: " + this.date.trim() + ")";
+        return "[E]" + this.getSymbol() + " " + this.getName()
+                + " (at: " + this.date.trim() + ")";
     }
 
     /**
@@ -39,15 +40,16 @@ public class Event extends Task {
      * @throws StringIndexOutOfBoundsException If keyword /at is not used.
      * @throws DukeException If no title or date is input.
      */
-    public static Event createEvent(String input) throws StringIndexOutOfBoundsException, DukeException {
-        String evTask = input.substring(5); //Grabs all the text after the "event" command word
+    public static Event createEvent(String input)
+            throws StringIndexOutOfBoundsException, DukeException {
+        String evTask = input.substring(5);
         evTask = evTask.trim();
         if (evTask.equals("")) {
             throw new DukeException("Empty description for the Event object");
         }
         String event = "/at";
         int evDatePos = evTask.indexOf(event);
-        String evDate = evTask.substring(evDatePos + 3); //Grabs all the text after the "/at" key word
+        String evDate = evTask.substring(evDatePos + 3);
         String evDes = evTask.substring(0, evDatePos);
         if (evDes.trim().equals("") || evDate.trim().equals("")) {
             throw new DukeException("No valid date/description entered");

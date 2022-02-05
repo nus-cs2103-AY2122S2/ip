@@ -43,20 +43,22 @@ public class Deadline extends Task {
      * @throws StringIndexOutOfBoundsException If keyword /by is not used.
      * @throws DukeException If no title or date is input.
      */
-    public static Deadline createDeadline(String input) throws StringIndexOutOfBoundsException, DukeException {
-        String dlTask = input.substring(8); //Grabs all the text after the "deadline" command word
+    public static Deadline createDeadline(String input)
+            throws StringIndexOutOfBoundsException, DukeException {
+        String dlTask = input.substring(8);
         dlTask = dlTask.trim();
         if (dlTask.equals("")) {
             throw new DukeException("Empty description for Deadline object");
         }
         String dLine = "/by";
         int dlDatePos = dlTask.indexOf(dLine);
-        String dlDate = dlTask.substring(dlDatePos + 3); //Grabs all the text after the "/by" key word
+        String dlDate = dlTask.substring(dlDatePos + 3);
         String dlDes = dlTask.substring(0, dlDatePos);
         if (dlDate.trim().equals("") || dlDes.trim().equals("")) {
             throw new DukeException("No valid date/description entered");
         }
-        Deadline dl = new Deadline(dlDes.trim(), LocalDate.parse(dlDate.trim()));
+        LocalDate dateOfDeadline = LocalDate.parse(dlDate.trim());
+        Deadline dl = new Deadline(dlDes.trim(), dateOfDeadline);
         System.out.println("Got it! I've added this task:");
         System.out.println(dl.toString());
         return dl;
