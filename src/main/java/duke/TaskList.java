@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +36,7 @@ public class TaskList {
 
     /**
      * Returns ArrayList of current tasks.
+     *
      * @return An ArrayList of task
      */
     public ArrayList<Task> getTaskList() {
@@ -43,6 +45,7 @@ public class TaskList {
 
     /**
      * Get the size of current {@code taskList}
+     *
      * @return Integer value of {@code taskList} size.
      */
     public int getSize() {
@@ -106,5 +109,26 @@ public class TaskList {
         } catch (IndexOutOfBoundsException invalidTaskNumber) {
             dukeException.invalidTaskNumber();
         }
+    }
+
+
+    /**
+     * Method is used to scan through current TaskList, searching by supplied keyword.
+     *
+     * @param matchingDescription Description of Task that User is finding
+     */
+    public void find(String matchingDescription) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        ArrayList<Integer> indexList = new ArrayList<>();
+        for(int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            String currentDescription = currentTask.getDescription().toLowerCase();
+            matchingDescription = matchingDescription.toLowerCase();
+            if (currentDescription.contains(matchingDescription)) {
+                matchingTasks.add(currentTask);
+                indexList.add(i+1);
+            }
+        }
+        ui.displayFoundTasks(matchingTasks, indexList);
     }
 }
