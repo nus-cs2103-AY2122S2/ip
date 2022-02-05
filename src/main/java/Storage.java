@@ -81,10 +81,12 @@ public class Storage {
         if (task instanceof Todo) {
             String mark = (task.hasBeenMarked()) ? "[✓]" : "[X]";
             output = "[T] " + mark + " / " + task.name + "\n";
-        } else if (task instanceof Deadline deadline) {
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
             String mark = (deadline.hasBeenMarked()) ? "[✓]" : "[X]";
             output = "[D] " + mark + " / " + deadline.name + " / " + deadline.dueDate + " / " + deadline.dueTime + "\n";
-        } else if (task instanceof Event event) {
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
             String mark = (event.hasBeenMarked()) ? "[✓]" : "[X]";
             output = "[E] " + mark + " / " + event.name + " / " + event.dueDate + " / " + event.dueTime + "\n";
         }

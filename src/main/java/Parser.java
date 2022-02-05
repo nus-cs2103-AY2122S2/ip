@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Parser {
 
     /**
-     * Parses input from InputHandler and returns a new Task to be added to TaskList
+     * Parses input from InputHandler and returns a new Task to be added to TaskList. Handles event, deadline, todo commands
      * @param type CommandType of input, including (TODO, DEADLINE, EVENT)
      * @param splitInput SplitInput from InputHandler is user's input, split by empty spaces for processing
      * @return Task object of new task to be added to TaskList
@@ -65,7 +65,7 @@ public class Parser {
     }
 
     /**
-     * Parses input from InputHandler and writes/deletes/prints from storage accordingly
+     * Parses input from InputHandler and writes/deletes/prints from storage accordingly. Handles list, mark, unmark, delete commands
      * @param type CommandType of input, including (LIST, MARK, UNMARK, DELETE)
      * @param storage Storage object in InputHandler to write/delete/get data from
      * @param splitInput SplitInput from InputHandler is user's input, split by empty spaces for processing

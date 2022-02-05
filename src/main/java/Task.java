@@ -18,7 +18,7 @@ import java.time.format.FormatStyle;
  * Represents a Task. Contains a Task constructor, two methods to mark and unmark tasks, toString() method as well as a isMark() method to check if Task is marked
  */
 public class Task {
-    private boolean mark;
+    private boolean isMarked;
     public String name;
 
     /**
@@ -27,7 +27,7 @@ public class Task {
      */
     public Task (String name) {
         this.name = name;
-        this.mark = false;
+        this.isMarked = false;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Task {
      */
     public void setMarkedTask () {
         String markedMessage = "Nice! I've marked this task as done:\n";
-        this.mark = true;
+        this.isMarked = true;
         System.out.println(markedMessage + "  " + this);
     }
 
@@ -44,7 +44,7 @@ public class Task {
      */
     public void setUnmarkedTask() {
         String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
-        this.mark = false;
+        this.isMarked = false;
         System.out.println(unmarkedMessage + "  " + this);
     }
 
@@ -79,7 +79,7 @@ public class Task {
      * @return String version of task, with marked and name. E.g. [X] Task vs [✓] Task
      */
     public String toString() {
-        if (this.mark) {
+        if (this.isMarked) {
             String marked = "[✓] ";
             return marked + this.name;
         } else {

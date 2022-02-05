@@ -9,6 +9,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
+
+/**
+ * Custom DukeException to be handled by InputHandler
+ */
 public class DukeException extends Exception{
     private String errorMessage;
     public DukeException (String errorMessage) {
