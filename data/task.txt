@@ -1,3 +1,6 @@
-[D][ ] read (by: Monday, January 3, 2022)
+[D][X] read (by: Monday, January 3, 2022)
 [E][ ] return book (at: Thursday, February 3, 2022 0700PM)
 [D][ ] asfa (by: Monday, December 12, 2022 0600PM)
+[T][ ] as
+[D][X] as df (by: Monday, January 3, 2022)
+[E][ ] asdsf (at: Sunday, January 30, 2022)

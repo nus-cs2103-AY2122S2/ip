@@ -108,12 +108,16 @@ public class Storage {
         LocalDateTime localDateTime;
         LocalDate localDate;
         try {
-            if (type == 'D') {
-                /* deadline */
-                String[] actualTask = taskInString.substring(7).split("\\(by: ");
-                String description = actualTask[0];
+            String[] actualTask;
+            String description;
+            boolean hasTime;
+            switch (type) {
+            /* deadline */
+            case 'D':
+                actualTask = taskInString.substring(7).split("\\(by: ");
+                description = actualTask[0];
                 String by = actualTask[1].replaceAll("\\)", "");
-                boolean hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
+                hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
                         .matcher(by).find();
                 if (hasTime) {
                     formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
@@ -127,12 +131,12 @@ public class Storage {
                 Deadline deadline = new Deadline(description, localDateTime);
                 deadline.setDone(isDone);
                 return deadline;
-            } else if (type == 'E') {
-                /* event */
-                String[] actualTask = taskInString.substring(7).split("\\(at: ");
-                String description = actualTask[0];
+            /* event */
+            case 'E':
+                actualTask = taskInString.substring(7).split("\\(at: ");
+                description = actualTask[0];
                 String at = actualTask[1].replaceAll("\\)", "");
-                boolean hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
+                hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
                         .matcher(at).find();
                 if (hasTime) {
                     formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
@@ -145,9 +149,9 @@ public class Storage {
                 Event event = new Event(description, localDateTime);
                 event.setDone(isDone);
                 return event;
-            } else {
-                /* todo */
-                String description = taskInString.substring(7);
+            /* todo */
+            default:
+                description = taskInString.substring(7);
                 Todo todo = new Todo(description);
                 todo.setDone(isDone);
                 return todo;
