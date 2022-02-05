@@ -57,7 +57,7 @@ public class Parser {
                         int taskNumMark = Integer.parseInt(markStr) - 1;
                         command = new MarkCommand(taskNumMark);
                     } catch (IndexOutOfBoundsException e) {
-                        String invalidMarkMessage = "☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
+                        String invalidMarkMessage = "☹ Woof Woof!!! This task cannot be found!!!";
                         command = new InvalidCommand(invalidMarkMessage);
                     }
                     break;
@@ -67,7 +67,7 @@ public class Parser {
                         int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
                         command = new UnmarkCommand(taskNumUnmark);
                     } catch (IndexOutOfBoundsException e) {
-                        String invalidUnmarkMessage = "☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
+                        String invalidUnmarkMessage = "☹ Woof Woof!!! This task cannot be found!!!";
                         command = new InvalidCommand(invalidUnmarkMessage);
                     }
                     break;

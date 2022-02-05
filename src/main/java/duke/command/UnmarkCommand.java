@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
                     + " " + tasks.getTask(taskNum);
             response += unmarkString;
         } catch (IndexOutOfBoundsException e) {
-            response = "Woof Woof!!! This task cannot be found with my Wonka eyes!!!";
+            response = "Woof Woof!!! This task cannot be found!!!";
         }
         return response;
     }

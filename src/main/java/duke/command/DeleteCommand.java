@@ -27,10 +27,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Save save) {
-        Task deleteTask = tasks.getTask(this.taskNum);
-        tasks.delete(this.taskNum);
-        String response = "Noted. I've removed this task:\n" + deleteTask.track() + deleteTask.getStatus() + " "
-                + deleteTask + "\nNow you have " + tasks.getCount() + " tasks in the list.";
+        String response = "";
+        try {
+            Task deleteTask = tasks.getTask(this.taskNum);
+            tasks.delete(this.taskNum);
+            response = "Noted. I've removed this task:\n" + deleteTask.track() + deleteTask.getStatus() + " "
+                    + deleteTask + "\nNow you have " + tasks.getCount() + " tasks in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            response = "☹ Woof Woof!!! This task cannot be found!!!";
+        }
         return response;
     }
 }
