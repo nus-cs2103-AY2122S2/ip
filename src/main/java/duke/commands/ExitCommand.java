@@ -26,8 +26,7 @@ public class ExitCommand extends Command {
      * @param taskManager Not used.
      * @return true after displaying goodbye message to the ui.
      */
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
-        ui.showBye();
-        return true;
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+        return ui.showBye();
     }
 }

@@ -24,12 +24,11 @@ public class SortByDateCommand extends Command {
      * @see TaskByDateComparator
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
         ArrayList tasks = new ArrayList(taskManager.getTaskList());
         Collections.sort(tasks, new TaskByDateComparator());
 
-        ui.showList(new TaskManager(tasks));
-        return true;
+        return ui.showList(new TaskManager(tasks));
     }
 }
 

@@ -1,19 +1,19 @@
 package duke.commands;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 import duke.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 /**
  * Represents a command to find all tasks containing the specified keyword.
  */
-public class FindCommand extends Command {
+public class FindCommand extends Command{
 
-    public FindCommand(String userInput) {
+    public FindCommand(String userInput){
         super(userInput);
     }
 
@@ -26,15 +26,14 @@ public class FindCommand extends Command {
      * @return True after printing search results.
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
-        String keyword = userInput.replaceFirst("find", "").strip();
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+        String keyword = userInput.replaceFirst("find","").strip();
         ArrayList<Task> results = new ArrayList<>(
                 new ArrayList<>(taskManager.getTaskList())
                         .stream()
                         .filter(x -> x.getTaskName().contains(keyword))
                         .collect(Collectors.toList()));
 
-        ui.showFindResults(new TaskManager(results));
-        return true;
+        return ui.showFindResults(new TaskManager(results));
     }
 }
