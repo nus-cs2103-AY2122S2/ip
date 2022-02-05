@@ -61,16 +61,16 @@ public class Storage {
                 boolean isMarked = tokens[tokens.length - 1].equals("1");
                 switch(tokens[0]) {
                     case "todo":
-                        String todoTitle = "todo " + tokens[1];
+                        String todoTitle = tokens[1];
                         this.itemList.add(new TodoTask(todoTitle, isMarked));
                         break;
                     case "event":
-                        String eventTitle = "event " + tokens[1];
+                        String eventTitle = tokens[1];
                         String eventDeadline = tokens[2];
                         this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
                         break;
                     case "deadline":
-                        String deadlineTitle = "deadline " + tokens[1];
+                        String deadlineTitle = tokens[1];
                         String deadlineDeadline = tokens[2];
                         this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
                         break;
