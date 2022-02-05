@@ -31,7 +31,6 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
-        String dukeResponse = "";
         try {
             // check if the user input an int
             if (!taskIndexString.trim().matches("\\d+")) {
@@ -46,13 +45,13 @@ public class DeleteCommand extends Command {
             }
 
             Task task = taskList.remove(taskIndex);
-            dukeResponse = ui.showText("Okay, I've deleted this task") + ui.showTask(task.toString());
+            ui.deleteTask(task);
         } catch (DukeException e) {
-            dukeResponse = ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
 
         storage.updateFileContents(taskList);
-        return dukeResponse;
+        return ui.generateDukeResponse();
     }
 
     /**

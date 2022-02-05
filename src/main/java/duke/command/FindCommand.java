@@ -29,12 +29,12 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> originalTaskList = taskList.getTasks();
         ArrayList<Task> filteredTaskList = new ArrayList<>();
-        String dukeResponse = "";
         boolean tasksMatchingSearchKey = false;
 
         // cycle through existing tasks & filter tasks
-        for (Task task: taskList.getTasks()) {
+        for (Task task: originalTaskList) {
             // check if task matches searchKey
             if (task.getDescription().contains(searchKey)) {
                 filteredTaskList.add(task);
@@ -44,15 +44,15 @@ public class FindCommand extends Command {
 
         // if there are tasks that match the searchKey
         if (tasksMatchingSearchKey) {
-            ui.showText("Here are the matching tasks in your list: ");
+            ui.addText("Here are the matching tasks in your list: ");
             for (Task task: filteredTaskList) {
-                dukeResponse += ui.showTask(task.toString());
+                ui.listTask(originalTaskList.indexOf(task), task);
             }
         } else {
-            dukeResponse = ui.showText("Looks like there aren't any matching tasks in your list!");
+            ui.addText("Looks like there aren't any matching tasks in your list!");
         }
 
-        return dukeResponse;
+        return ui.generateDukeResponse();
     }
 
 }

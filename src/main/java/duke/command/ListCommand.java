@@ -25,17 +25,16 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String dukeResponse = "";
 
         if (taskList.isEmpty()) {
-            ui.showText("Your list is empty");
+            ui.addText("Your list is empty");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                dukeResponse += ui.showText((i + 1) + ". " + task.toString());
+                ui.listTask(i, task);
             }
         }
-        return dukeResponse;
+        return ui.generateDukeResponse();
     }
 
     /**

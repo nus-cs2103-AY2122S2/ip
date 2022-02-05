@@ -50,23 +50,23 @@ public class MarkCommand extends Command {
                 Task task = taskList.get(taskIndex);
                 if (mark) {
                     task.markAsDone();
-                    dukeResponse += ui.showText("Okay, marking this task as done:");
+                    ui.addText("Okay, marking this task as done:");
                 } else {
                     task.markAsUndone();
-                    dukeResponse += ui.showText("Okay, marking this task as not done yet:");
+                    ui.addText("Okay, marking this task as not done yet:");
                 }
 
-                dukeResponse += ui.showTask(task.toString());
+                ui.addText(task.toString());
 
             } catch (DukeException e) {
-                dukeResponse = ui.showError(e.getMessage());
+                return ui.showError(e.getMessage());
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
         }
 
         storage.updateFileContents(taskList);
-        return dukeResponse;
+        return ui.generateDukeResponse();
     }
 
     /**
