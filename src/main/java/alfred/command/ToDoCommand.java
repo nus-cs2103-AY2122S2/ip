@@ -57,6 +57,9 @@ public class ToDoCommand extends Command {
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws MissingInputException {
+
+        assert this.description != null;
+
         // validity check
         if ((this.description.length() < 1) || this.description.split(" ").length == 0) {
             throw new MissingInputException();
@@ -72,6 +75,11 @@ public class ToDoCommand extends Command {
         return out;
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return False
+     */
     @Override
     public boolean isExit() {
         return false;

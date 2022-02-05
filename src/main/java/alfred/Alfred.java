@@ -1,27 +1,11 @@
 package alfred;
 
+import alfred.command.Command;
+import alfred.exceptions.AlfredException;
 import alfred.parser.AlfredParser;
 import alfred.storage.AlfredStorage;
 import alfred.ui.AlfredUserInterface;
-import alfred.command.Command;
-import alfred.exceptions.AlfredException;
-import alfred.ui.controller.DialogBox;
 import java.io.File;
-
-import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 /**
@@ -30,9 +14,9 @@ import javafx.scene.image.ImageView;
 public class Alfred {
 
     // internals
-    private AlfredUserInterface ui;
-    private AlfredParser parser;
-    private AlfredStorage storage;
+    private final AlfredUserInterface ui;
+    private final AlfredParser parser;
+    private final AlfredStorage storage;
     private boolean isExit;
 
 
@@ -70,7 +54,7 @@ public class Alfred {
 
 
     /**
-     * Returns the appropriate respnonse and modifies the internal
+     * Returns the appropriate response and modifies the internal
      * data state of Alfred, given a user input.
      *
      * @param input User input.
@@ -78,6 +62,7 @@ public class Alfred {
      */
     public String getResponse(String input) {
         try {
+            assert input != null;
             Command command = this.parser.parseInput(input);
             String response = command.response(this.ui, this.storage);
             this.isExit = command.isExit();

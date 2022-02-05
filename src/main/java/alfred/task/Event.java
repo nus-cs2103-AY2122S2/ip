@@ -31,15 +31,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String taskToSaveString() {
         String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
-        return String.join(Task.FORMAT_SPLIT, this.type, mark, this.description, this.dateAndTime);
+        return String.join(Task.FORMAT_SPLIT, Event.type, mark, this.description, this.dateAndTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString() + " (at: "
-                + super.localDateTimeToString(this.dateTime) + ")";
+        return "[" + Event.type + "]" + super.toString() + " (at: "
+                + Task.localDateTimeToString(this.dateTime) + ")";
     }
 }

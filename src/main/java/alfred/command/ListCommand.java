@@ -32,12 +32,21 @@ public class ListCommand extends Command {
      */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) {
+        String listDescription = storage.listToString();
+        if (listDescription.length() == 0) {
+            return "Sir, you have no tasks.";
+        }
         String out = "";
         out += "Sir, here are the things you need to do:\n";
-        out += storage.listToString();
+        out += listDescription;
         return out;
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return False
+     */
     @Override
     public boolean isExit() {
         return false;

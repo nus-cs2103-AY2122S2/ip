@@ -27,13 +27,12 @@ public class AlfredUserInterface {
     }
 
     public String getByeMessage() {
-        return this.BYE;
+        return AlfredUserInterface.BYE;
     }
 
     public String getGreetingMessage() {
-        return this.GREETING;
+        return AlfredUserInterface.GREETING;
     }
-
 
 
     private static String line() {
@@ -52,6 +51,7 @@ public class AlfredUserInterface {
      * @param text Text to be wrapped.
      */
     public void sandwichAndPrint(String text) {
+        assert text != null;
         String out = "";
         out += AlfredUserInterface.BREAK_LINE;
         out += text + "\n";

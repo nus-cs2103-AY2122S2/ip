@@ -61,6 +61,9 @@ public class DeadlineCommand extends Command {
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidDateTimeException, InvalidInputException {
+
+        assert this.arguments != null;
+
         // check validity of data
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
@@ -81,6 +84,11 @@ public class DeadlineCommand extends Command {
         return out;
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return False
+     */
     @Override
     public boolean isExit() {
         return false;

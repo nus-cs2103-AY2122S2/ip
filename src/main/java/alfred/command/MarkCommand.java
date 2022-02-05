@@ -55,8 +55,11 @@ public class MarkCommand extends Command {
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidInputException,
             InvalidIndexException {
+
+        assert this.arguments != null;
+
         // check only two arguments
-        if (arguments.length != 2) {
+        if (this.arguments.length != 2) {
             throw new InvalidInputException();
         }
         // check that second argument is numerical
@@ -75,6 +78,11 @@ public class MarkCommand extends Command {
         return out;
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return False
+     */
     @Override
     public boolean isExit() {
         return false;

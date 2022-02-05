@@ -33,6 +33,11 @@ public class ExitCommand extends Command {
         return ui.getByeMessage();
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return True
+     */
     @Override
     public boolean isExit() {
         return true;
