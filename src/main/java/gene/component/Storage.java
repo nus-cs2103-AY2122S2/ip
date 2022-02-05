@@ -102,7 +102,7 @@ public class Storage {
 
             while((currentLine = reader.readLine()) != null) {
                 if(currentLine.equals(targetLine)) continue;
-                writer.write(currentLine);
+                writer.write(currentLine + "\n");
             }
 
             reader.close();
