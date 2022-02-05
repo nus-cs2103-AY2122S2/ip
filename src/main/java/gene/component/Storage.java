@@ -15,6 +15,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The storage class. handles all storage/file actions.
+ *
+ * @author Eugene Chia
+ * @version 1.0
+ * @since 2022-01-12
+ */
 public class Storage {
     private final ArrayList<Task> itemList = new ArrayList<>(0);
     private Path absolutePath;
@@ -22,6 +29,13 @@ public class Storage {
     private final String fileName;
     private File targetFile;
 
+    /**
+     * The storage constructor
+     * Gets property of user directory first, creates a data folder path and
+     * stores the absolute path for actual storage file path to be appended.
+     *
+     * @param fileName string for the name of file to save user input
+     */
     public Storage(String fileName) {
         String currentDir = System.getProperty("user.dir");
         Path currentPath = Path.of(currentDir + File.separator + "data");
@@ -30,7 +44,9 @@ public class Storage {
         this.fileName = fileName;
     }
 
-
+    /**
+     * Creates the folder directory using absolute path.
+     */
     public void createDirectory() {
         try {
             this.absolutePath = Files.createDirectories(this.absolutePath);
@@ -39,6 +55,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the target file for saving user input. If file already created,
+     * no worries
+     */
     public void createFile() {
         try {
             this.absolutePath = this.absolutePath.resolve(this.fileName);
@@ -48,6 +68,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file if it exists, it should since it was initiated upon
+     * start up. Else, error would have been thrown. This method catches errors
+     * too
+     * First, a file reader is created from the absolute path of the file,
+     * then a buffered reader is created from this
+     * Formatter to read saved date time format is created and from there
+     * for every line in the file, a to do, event or deadline task is created
+     * and added into Gene's list
+     *
+     * @return full list of existing tasks from the target file
+     */
     public ArrayList<Task> readFile() {
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
@@ -87,7 +119,11 @@ public class Storage {
         return this.itemList;
     }
 
-
+    /**
+     * This method handles the deletion of a task from the target file.
+     *
+     * @param index the line to delete
+     */
     public void deleteLineToFile(int index) {
         File inputFile = new File(this.absolutePath.toString());
         File tempFile = new File(this.folderPath.resolve("temp.txt").toString());
@@ -123,6 +159,13 @@ public class Storage {
         }
     }
 
+    /**
+     * This method handles the editing of a task in the target file. Marking
+     * or un marking depends on the mark parameter provided.
+     *
+     * @param index index of task to edit
+     * @param mark mark or un mark the task
+     */
     public void updatesToFile(int index, String mark) {
         //use already written text in file to edit.
         String targetLine = "";
@@ -139,6 +182,15 @@ public class Storage {
         }
     }
 
+    /**
+     * This method handles the writing to target file for hte execution of an
+     * add command. This method also parses and formats instructions the kinda
+     * optimises for less storage space. (Instead of UX)
+     *
+     * @param taskKey
+     * @param taskType
+     * @param isMarked
+     */
     public void writeToFile(String taskKey, String taskType, boolean isMarked) {
         String mark = isMarked ? "1" : "0";
         String toWrite = "";

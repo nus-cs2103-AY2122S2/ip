@@ -5,13 +5,33 @@ import gene.component.TaskList;
 import gene.component.Ui;
 import gene.task.Task;
 
+/**
+ * The delete command class. Deletes a task from both storage and list.
+ *
+ * @author Eugene Chia
+ * @version 1.0
+ * @since 2022-01-12
+ */
 public class DeleteCommand extends Command{
     private final String taskBody;
 
+    /**
+     * The delete command constructor
+     *
+     * @param body
+     */
     public DeleteCommand(String body) {
         this.taskBody = body;
     }
 
+    /**
+     * The execute command which holds the instructions for when the command is
+     * executed. Removes tasks from Gene's list as well as storage.
+     *
+     * @param tasks the list of tasks
+     * @param userInt the Ui class object
+     * @param storage the storage class object
+     */
     @Override
     public void execute(TaskList tasks, Ui userInt, Storage storage) {
         try {
@@ -35,6 +55,11 @@ public class DeleteCommand extends Command{
         }
     }
 
+    /**
+     * The method to distinguish this command from an exit command
+     *
+     * @return must return false
+     */
     @Override
     public boolean isExit() {
         return false;
