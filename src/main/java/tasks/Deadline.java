@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 
+/**
+ * Represents a deadline task
+ */
 public class Deadline extends Task {
 
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");

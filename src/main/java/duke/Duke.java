@@ -1,6 +1,9 @@
 package duke;
 import tasks.TaskList;
 
+/**
+ * Represents a Duke chat bot
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
@@ -9,7 +12,7 @@ public class Duke {
 
 
     /**
-     * Instantiates a duke.Duke object with a directoryPath and filePath of the storageFile
+     * Instantiates a duke.Duke object with a directoryPath and filePath of the storage file
      * @param directoryPath directoryPath to storage file
      * @param filePath filePath to storage file
      */
@@ -27,11 +30,11 @@ public class Duke {
     }
 
     /**
-     * Method that runs the duke.Duke Program
+     * Method that returns the response from running the Duke Program
      */
     public String getResponse(String input) {
         try {
-            return parser.parseInput(input);
+            return parser.parseInput(input).execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

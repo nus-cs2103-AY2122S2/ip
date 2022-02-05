@@ -1,11 +1,19 @@
 package duke;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
+import duke.commands.AddDeadline;
+import duke.commands.AddEvent;
+import duke.commands.AddToDo;
+import duke.commands.Bye;
+import duke.commands.Command;
+import duke.commands.Delete;
+import duke.commands.Find;
+import duke.commands.List;
+import duke.commands.Mark;
+import duke.commands.Unmark;
 import tasks.TaskList;
-import tasks.Todo;
 
-
+/**
+ * Represents a parser object that parses commands that the user types into the GUI
+ */
 public class Parser {
     enum CommandType {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND;
@@ -27,7 +35,7 @@ public class Parser {
      * @throws DukeException if task cannot be found within the tasklist
      * @throws NumberFormatException if taskId is not a number.
      */
-    public String taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
+    public Command taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
         try {
             int taskId = Integer.parseInt(index);
             if (!(taskId > 0 && taskId < (TaskList.getTaskSize() + 1))) {
@@ -36,11 +44,11 @@ public class Parser {
 
             switch (commandType) {
             case DELETE:
-                return TaskList.deleteTask(taskId);
+                return new Delete(taskId);
             case UNMARK:
-                return TaskList.markTask(taskId, false);
+                return new Unmark(taskId);
             case MARK:
-                return TaskList.markTask(taskId, true);
+                return new Mark(taskId);
             default:
                 throw new DukeException("Invalid Command Type!");
             }
@@ -57,15 +65,15 @@ public class Parser {
      * @return true if the command that has been inputted equals "bye", else return false
      * @throws DukeException if the command is invalid
      */
-    public String parseInput(String input) throws DukeException {
+    public Command parseInput(String input) throws DukeException {
         String[] inputArray = input.split(" ");
 
         // single command
         if (inputArray.length == 1) {
             if (inputArray[0].equalsIgnoreCase("list")) {
-                return TaskList.listTasks();
+                return new List();
             } else if (inputArray[0].equalsIgnoreCase("bye")) {
-                return "bye";
+                return new Bye();
             } else {
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
@@ -100,7 +108,7 @@ public class Parser {
 
             switch (commandType) {
             case FIND:
-                return TaskList.findTask(inputArray[1]);
+                return new Find(inputArray[1]);
             case DELETE:
                 return taskAction(CommandType.DELETE, inputArray[1]);
             case UNMARK:
@@ -108,28 +116,16 @@ public class Parser {
             case MARK:
                 return taskAction(CommandType.MARK, inputArray[1]);
             case TODO:
-                Task todo = new Todo(taskDetails);
-                if (taskDetails.equals("")) {
-                    throw new DukeException("Todo command is invalid!");
-                }
-                return TaskList.addTask(todo);
+                return new AddToDo(taskDetails);
             case DEADLINE:
-                if (description.equals("") || date.equals("")) {
-                    throw new DukeException("Deadline command is invalid!");
-                }
-                Task deadline = new Deadline(description, date);
-                return TaskList.addTask(deadline);
+                return new AddDeadline(description, date);
             case EVENT:
-                if (dateTime.equals("") || description.equals("")) {
-                    throw new DukeException("Event command is invalid");
-                }
-                Task event = new Event(description, dateTime);
-                return TaskList.addTask(event);
+                return new AddEvent(description, dateTime);
             default:
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
         }
 
-        return "";
+        return new Command();
     }
 }

@@ -7,12 +7,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
-
-
-
-
-
-
+/**
+ * Represents an event task
+ */
 public class Event extends Task {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

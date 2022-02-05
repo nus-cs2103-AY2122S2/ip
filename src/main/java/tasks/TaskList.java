@@ -71,7 +71,6 @@ public class TaskList {
      * @throws DukeException if unable to add task to tasks
      */
     public static String addTask(Task task) throws DukeException {
-        System.out.println("Added as per your request: " + task);
         tasks.add(task);
         Storage.writeToDukeFile();
         return "You now have a total of "
@@ -128,7 +127,6 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
-
         return "This is what we found! \n" + listTasks(matchingTasks);
     }
 

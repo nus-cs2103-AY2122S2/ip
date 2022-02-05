@@ -16,8 +16,10 @@ import tasks.Task;
 import tasks.TaskList;
 import tasks.Todo;
 
-
-
+/**
+ * Represents a Storage object that tracks and stores tasks that the user has keyed in
+ * previously
+ */
 public class Storage {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     protected String directoryPath;
@@ -60,28 +62,7 @@ public class Storage {
      * @throws DukeException if unable to read content from duke file/file does not exist
      */
     public ArrayList<Task> readFromDukeFile() throws DukeException {
-        boolean isDirectoryExists = new File(this.directoryPath).exists();
-        boolean isFileExists = new File(this.filePath).exists();
-        try {
-            if (!isDirectoryExists) {
-                Files.createDirectories(Path.of(this.directoryPath));
-                File dukeFile = new File(this.filePath);
-                if (!dukeFile.createNewFile()) {
-                    throw new IOException("Unable to create file at specified path. It already exists");
-                }
-            } else {
-                if (!isFileExists) {
-                    File dukeFile = new File(this.filePath);
-                    if (!dukeFile.createNewFile()) {
-                        throw new IOException("Unable to create file at specified path. It already exists");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new DukeException("Error with file/directory initialization!");
-        }
-
-
+        createDirectory();
         try {
             Scanner readFile = new Scanner(new File(this.filePath));
             while (readFile.hasNextLine()) {
@@ -124,7 +105,7 @@ public class Storage {
                     }
                     break;
                 default:
-                    System.out.println("No tasks in file!");
+                    throw new DukeException("No valid tasks found in file!");
                 }
             }
         } catch (FileNotFoundException e) {
@@ -134,11 +115,40 @@ public class Storage {
         return tasks;
     }
 
+
+    /**
+     * Method that creates a directory for the storage file if it does not exist
+     * @throws DukeException Error with creating Directory/File
+     */
+    public void createDirectory() throws DukeException {
+        boolean isDirectoryExists = new File(this.directoryPath).exists();
+        boolean isFileExists = new File(this.filePath).exists();
+        try {
+            if (!isDirectoryExists) {
+                Files.createDirectories(Path.of(this.directoryPath));
+                File dukeFile = new File(this.filePath);
+                if (!dukeFile.createNewFile()) {
+                    throw new IOException("Unable to create file at specified path. It already exists");
+                }
+            } else {
+                if (!isFileExists) {
+                    File dukeFile = new File(this.filePath);
+                    if (!dukeFile.createNewFile()) {
+                        throw new IOException("Unable to create file at specified path. It already exists");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new DukeException("Error with file/directory initialization!");
+        }
+    }
+
+
     public String getStorageTasks() {
         if (tasks.size() == 0) {
             return "No tasks in file!";
         } else {
-            return "Here is the list of tasks we have saved!" + TaskList.listTasks(tasks);
+            return "Here is the list of tasks we have saved! \n" + TaskList.listTasks(tasks);
         }
     }
 }

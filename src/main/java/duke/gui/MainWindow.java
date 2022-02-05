@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 public class MainWindow extends AnchorPane {
     private final TextUi ui = new TextUi();
-    private  final Storage storage = new Storage();
+    private final Storage storage = new Storage();
     @FXML
     private ScrollPane scrollPane;
     @FXML

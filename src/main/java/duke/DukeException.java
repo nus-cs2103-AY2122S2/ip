@@ -1,5 +1,8 @@
 package duke;
 
+/** Represents a duke exception that is thrown
+ * when duke-related errors occur
+ */
 public class DukeException extends Exception {
 
     /**
@@ -18,5 +21,4 @@ public class DukeException extends Exception {
     public String toString() {
         return this.getMessage();
     }
-
 }
