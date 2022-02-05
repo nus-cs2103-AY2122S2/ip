@@ -62,6 +62,9 @@ public class TagCommand extends Command {
                         this.taskNumber,
                         this.tag));
 
+        //Saving the task to the save file
+        storage.save(tasks);
+
         return output;
     }
 

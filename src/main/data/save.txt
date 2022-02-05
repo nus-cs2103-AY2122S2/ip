@@ -1,7 +1,0 @@
-T;X;homework
-D;X;report;by;2022-01-30T23:59:00
-T;X;whaat
-E;O;festival;on;2022-02-15T15:23:00
-T;O;homework
-D;O;homework;by;2022-03-25T13:20:00
-T;O;gym
