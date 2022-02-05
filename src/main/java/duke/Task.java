@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task to be completed. Includes a description of the task and a boolean representing
  * whether it has been completed.
@@ -7,6 +9,10 @@ package duke;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class Task {
+    protected static final DateTimeFormatter YEAR_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
+    protected static final DateTimeFormatter OUTPUT_YEAR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm a");
     protected String description;
     protected boolean isDone;
 

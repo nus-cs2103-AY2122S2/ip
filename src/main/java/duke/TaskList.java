@@ -21,10 +21,10 @@ public class TaskList {
     /**
      * Constructor that retrieves the TaskList elements from previous running of program.
      *
-     * @param list the list of tasks to be inputted
+     * @param tasks the list of tasks to be inputted
      */
-    public TaskList(List<Task> list) {
-        this.tasks = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**

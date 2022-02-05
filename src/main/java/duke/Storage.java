@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,8 +17,9 @@ import java.util.Scanner;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class Storage {
-    protected File dukeFile;
-    protected File dukeFolder;
+
+    private final File dukeFile;
+    private final File dukeFolder;
 
     /**
      * Constructor for the Storage class
@@ -60,9 +60,9 @@ public class Storage {
                     tasks.add(toDoTask);
                     break;
                 case "D":
-                    LocalDate currDate = LocalDate.parse(currLineArr[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalDate currDate = LocalDate.parse(currLineArr[3], Task.YEAR_FORMAT);
                     LocalTime currTime = currLineArr.length < 5 ? null : LocalTime.parse(currLineArr[4],
-                        DateTimeFormatter.ofPattern("HH:mm"));
+                        Task.TIME_FORMAT);
 
                     Task deadlineTask = currTime == null ? new Deadline(currLineArr[2], currDate) : new Deadline(
                         currLineArr[2], currDate, currTime);
@@ -74,10 +74,9 @@ public class Storage {
                     tasks.add(deadlineTask);
                     break;
                 case "E":
-                    LocalDate dateForEvent = LocalDate.parse(currLineArr[3],
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalTime beginTime = LocalTime.parse(currLineArr[4], DateTimeFormatter.ofPattern("HH:mm"));
-                    LocalTime endTime = LocalTime.parse(currLineArr[5], DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalDate dateForEvent = LocalDate.parse(currLineArr[3], Task.YEAR_FORMAT);
+                    LocalTime beginTime = LocalTime.parse(currLineArr[4], Task.TIME_FORMAT);
+                    LocalTime endTime = LocalTime.parse(currLineArr[5], Task.TIME_FORMAT);
                     Task eventTask = new Event(currLineArr[2], dateForEvent, beginTime, endTime);
 
                     if (currLineArr[1].equals("X")) {
