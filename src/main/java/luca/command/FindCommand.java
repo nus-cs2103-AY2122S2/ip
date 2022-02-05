@@ -1,5 +1,9 @@
 package luca.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import luca.storage.Storage;
 import luca.task.Task;
 import luca.task.TaskList;
@@ -27,24 +31,22 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the matching tasks in your list:\n");
-        int startIndex = 0;
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            if (task.getDescription().contains(keyword)) {
-                startIndex++;
-                stringBuilder.append("" + startIndex + "." + task.toString() + "\n");
-            }
-        }
 
-        if (startIndex > 0) {
-            String output = stringBuilder
-                    .deleteCharAt(stringBuilder.length() - 1)
-                    .toString();
-            return output;
-        } else {
+        List<Task> list = taskList.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+
+        if (list.size() == 0) {
             return "Sorry, I was unable to find any matching tasks.";
         }
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the matching tasks in your list:\n");
+        IntStream.range(0, list.size())
+                .forEach(index -> stringBuilder.append("" + (index + 1) + "."
+                        + list.get(index).toString() + "\n"));
+
+        return stringBuilder.toString().trim();
     }
 }

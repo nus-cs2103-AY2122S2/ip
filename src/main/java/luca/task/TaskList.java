@@ -2,6 +2,7 @@ package luca.task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import luca.parser.exceptions.InvalidArgumentException;
 
@@ -90,7 +91,13 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the task pointed to, marks it as done and outputs
+     * Outputs a stream of tasks.
+     */
+    public Stream<Task> stream() {
+        return taskList.stream();
+    }
+  
+    /* Retrieves the task pointed to, marks it as done and outputs
      * the task.
      *
      * @param pointer 1-based index of the task.
