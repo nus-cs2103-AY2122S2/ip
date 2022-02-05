@@ -28,7 +28,7 @@ public class DateTimeUtilTest {
             assertEquals(0, DateTimeUtil.getDateTime("invalid"));
             fail();
         } catch (BaronException e) {
-            assertEquals("☹ OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
+            assertEquals("OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
         }
     }
 
@@ -38,7 +38,7 @@ public class DateTimeUtilTest {
             assertEquals(0, DateTimeUtil.getDateTime("1/12/2022"));
             fail();
         } catch (BaronException e) {
-            assertEquals("☹ OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
+            assertEquals("OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
         }
     }
 
@@ -48,7 +48,7 @@ public class DateTimeUtilTest {
             assertEquals(0, DateTimeUtil.getDateTime("00:11"));
             fail();
         } catch (BaronException e) {
-            assertEquals("☹ OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
+            assertEquals("OOPS!!! The date/time should be in the following format: d/M/yyyy HH:mm", e.toString());
         }
     }
 
