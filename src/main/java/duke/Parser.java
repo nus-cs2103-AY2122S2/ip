@@ -30,22 +30,29 @@ public class Parser {
             if (input.length() < 6) {
                 throw new RequiredInformationMissingException("missing mark index");
             }
+            //mark index should not be empty now
+            assert !input.substring(5).isEmpty();
             parsedInput.add(input.substring(5));
 
         } else if (command.equals("unmark")) {
             if (input.length() < 8) {
                 throw new RequiredInformationMissingException("missing unmark index");
             }
+            //unmark index should not be empty
+            assert !input.substring(7).isEmpty();
             parsedInput.add(input.substring(7));
         } else if (command.equals("todo")) {
             if (input.length() < 6) {
                 throw new RequiredInformationMissingException("empty todo description");
             }
+            //description should not be empty
+            assert !input.substring(5).isEmpty();
             parsedInput.add(input.substring(5));
         } else if (command.equals("event")) {
             if (input.length() < 7) {
                 throw new RequiredInformationMissingException("empty event description");
             }
+            assert !input.substring(7).isEmpty();
             int indexOfStartDate = input.indexOf(" /") + 5;
             parsedInput.add(input.substring(6, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
@@ -53,6 +60,7 @@ public class Parser {
             if (input.length() < 10) {
                 throw new RequiredInformationMissingException("empty deadline description");
             }
+            assert !input.substring(9).isEmpty();
             int indexOfStartDate = input.indexOf(" /") + 5;
             parsedInput.add(input.substring(9, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
@@ -60,6 +68,7 @@ public class Parser {
             if (input.length() < 8) {
                 throw new RequiredInformationMissingException("missing delete index");
             }
+            assert !input.substring(7).isEmpty();
             parsedInput.add(input.substring(7));
         } else if (command.equals("find")) {
             parsedInput.add(input.substring(5));
