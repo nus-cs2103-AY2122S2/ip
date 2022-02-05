@@ -93,4 +93,19 @@ public class TaskList {
             break;
         }
     }
+
+    /**
+     * Displays all tasks in the todo list which consists the specified keyword.
+     *
+     * @param keyword keyword to search for tasks
+     */
+    public void find(String keyword) {
+        Ui.match();
+        int counter = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                System.out.println(counter++ + ". " + get(i));
+            }
+        }
+    }
 }

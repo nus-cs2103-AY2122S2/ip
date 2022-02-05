@@ -84,7 +84,12 @@ public class Parser {
                 storage.update(id, input);
                 tasks.update(id, input);
                 break;
-            default :
+            case "find":
+                sc.reset();
+                input = sc.nextLine().strip();
+                tasks.find(input);
+                break;
+            default:
                 sc.reset();
                 Ui.unknownCommand(sc.nextLine());
                 break;
