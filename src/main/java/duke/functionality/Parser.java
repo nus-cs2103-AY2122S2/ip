@@ -23,37 +23,39 @@ public class Parser {
      * @param taskList A tasklist to keep track of all the tasks.
      * @throws DukeException If user input is not understood or description is empty.
      */
-    public static void parse(String input, TaskList taskList) throws DukeException {
+    public static String parse(String input, TaskList taskList) throws DukeException {
+        String output = "";
         try {
             if (input.equals("list")) {
-                taskList.listItems();
+                output = taskList.listItems();
             } else if (input.startsWith("mark")) {
                 String taskNumber = input.substring(5);
-                taskList.markTask(taskNumber);
+                output = taskList.markTask(taskNumber);
             } else if (input.startsWith("unmark")) {
                 String taskNumber = input.substring(7);
-                taskList.unmarkTask(taskNumber);
+                output = taskList.unmarkTask(taskNumber);
             } else if (input.startsWith("todo")) {
                 String description = input.substring(5);
-                taskList.addToDoTask(description);
+                output = taskList.addToDoTask(description);
             } else if (input.startsWith("deadline")) {
                 String[] descriptionArr = input.substring(9).split(" /by ");
-                taskList.addDeadlineTask(descriptionArr);
+                output = taskList.addDeadlineTask(descriptionArr);
             } else if (input.startsWith("event")) {
                 String[] descriptionArr = input.substring(6).split(" /at ");
-                taskList.addEventTask(descriptionArr);
+                output = taskList.addEventTask(descriptionArr);
             } else if (input.startsWith("delete")) {
                 String taskNumber = input.substring(7);
-                taskList.deleteTask(taskNumber);
+                output = taskList.deleteTask(taskNumber);
             } else if (input.startsWith("find")) {
                 String description = input.substring(5);
-                taskList.findTask(taskList, description);
+                output = taskList.findTask(taskList, description);
             } else {
                 throw new DukeException(ERROR_UNKNOWN);
             }
         } catch (IndexOutOfBoundsException error) {
             throw new DukeException(ERROR_DESCRIPTION);
         }
+        return output;
     }
 
     /**
