@@ -1,9 +1,16 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * Class to get response from user inputs
  */
 public class Duke {
+
+    static final int COMMAND_INDEX = 0;
+    static final int DESCRIPTION_INDEX = 1;
+    static final int TIME_INDEX = 2;
+
     private final TaskList list = DataStore.loadData();
 
     /**
@@ -11,132 +18,39 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        // Parse input
-        String[] inputs = input.split(" ", 2);
-        Command actionType;
-        String[] parsedInputs = new String[2];
+
+        String[] parsedInputs = Parser.parseInput(input);
         String output = "";
+        Command actionType;
+
         try {
-            actionType = Parser.parseCommand(inputs[0]);
+            actionType = Parser.parseCommand(parsedInputs[COMMAND_INDEX]);
         } catch (CommandNotFoundException e) {
             return e.getMessage();
-        }
-        if (inputs.length != 1) {
-            parsedInputs = Parser.parseInput(inputs[1]);
-        } else {
-            parsedInputs[0] = "";
         }
 
         assert actionType != null : "actionType should not be null";
 
-        int indexOfList;
-        Boolean wasAddSuccess = null;
-
-
         switch (actionType) {
         case LIST:
-            output += list.toString();
+            output = handleList();
             break;
         case MARK:
-            try {
-                indexOfList = Integer.parseInt(parsedInputs[0]);
-                list.markComplete(indexOfList);
-                output += "Marked as complete \n";
-                output += list.toString(indexOfList);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-                output += "Integer required for Unmark command";
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
-                output += "Integer provided is not in the list";
-            }
+            output = handleMark(parsedInputs[DESCRIPTION_INDEX]);
             break;
         case UNMARK:
-            try {
-                indexOfList = Integer.parseInt(parsedInputs[0]);
-                list.markIncomplete(indexOfList);
-                output += "Marked as incomplete \n";
-                output += list.toString(indexOfList);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-                output += "Integer required for Unmark command";
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
-                output += "Integer provided is not in the list";
-            }
+            output = handleUnmark(parsedInputs[DESCRIPTION_INDEX]);
             break;
         case EVENT:
-            try {
-                wasAddSuccess = list.addTask(TaskType.EVENT, parsedInputs);
-            } catch (EmptyDescriptionException e) {
-                output += (e.getMessage() + "\n");
-                wasAddSuccess = false;
-            }
-
-            assert wasAddSuccess != null : "wasAddSuccess should not be null";
-
-            if (wasAddSuccess) {
-                output += ("added: " + parsedInputs[0].strip() + "\n");
-            } else {
-                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
-            }
-            output += "Number of tasks: ";
-            output += list.getLength();
-            break;
         case DEADLINE:
-            try {
-                wasAddSuccess = list.addTask(TaskType.DEADLINE, parsedInputs);
-            } catch (EmptyDescriptionException e) {
-                output += (e.getMessage() + "\n");
-                wasAddSuccess = false;
-            }
-
-            assert wasAddSuccess != null : "wasAddSuccess should not be null";
-
-            if (wasAddSuccess) {
-                output += ("added: " + parsedInputs[0].strip() + "\n");
-            } else {
-                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
-            }
-            output += "Number of tasks: ";
-            output += list.getLength();
-            break;
         case TODO:
-            try {
-                wasAddSuccess = list.addTask(TaskType.TODO, parsedInputs);
-            } catch (EmptyDescriptionException e) {
-                output += (e.getMessage() + "\n");
-                wasAddSuccess = false;
-            }
-
-            assert wasAddSuccess != null : "wasAddSuccess should not be null";
-
-            if (wasAddSuccess) {
-                output += ("added: " + parsedInputs[0].strip() + "\n");
-            } else {
-                output += ("Failed to add " + parsedInputs[0].strip() + "\n");
-            }
-            output += ("Number of tasks: ");
-            output += (list.getLength());
+            output = handleAddTask(parsedInputs);
             break;
         case DELETE:
-            try {
-                indexOfList = Integer.parseInt(parsedInputs[0]);
-                String outputToAdd = "Noted. I've removed this task: \n";
-                outputToAdd += (list.toString(indexOfList));
-                list.deleteTask(indexOfList);
-                output += outputToAdd;
-                output += ("Now you have " + list.getLength() + " tasks in the list.");
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-                output += "Integer required for Delete command";
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(e.getMessage());
-                output += "Integer provided is not in the list";
-            }
+            output = handleDelete(parsedInputs[DESCRIPTION_INDEX]);
             break;
         case FIND:
-            output += list.findTask(parsedInputs[0]);
+            output = handleFind(parsedInputs[DESCRIPTION_INDEX]);
             break;
         default:
             break;
@@ -150,6 +64,94 @@ public class Duke {
         return output;
     }
 
+    private String handleFind(String search) {
+        return list.findTask(search);
+    }
+
+    private String handleDelete(String input) {
+        int indexOfList;
+        String output = "";
+        try {
+            indexOfList = Integer.parseInt(input);
+            String outputToAdd = "Noted. I've removed this task: \n";
+            outputToAdd += (list.toString(indexOfList));
+            list.deleteTask(indexOfList);
+            output += outputToAdd;
+            output += ("Now you have " + list.getLength() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            output += "Integer required for Delete command";
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            output += "Integer provided is not in the list";
+        }
+        return output;
+    }
+
+    private String handleAddTask(String[] parsedInputs) {
+        Boolean wasAddSuccess;
+        String output = "";
+        TaskType task = Parser.parseTaskType(parsedInputs[COMMAND_INDEX]);
+        String[] restOfInputs = Arrays.copyOfRange(parsedInputs, DESCRIPTION_INDEX, TIME_INDEX + 1);
+
+        try {
+            wasAddSuccess = list.addTask(task, restOfInputs);
+        } catch (EmptyDescriptionException e) {
+            output += (e.getMessage() + "\n");
+            wasAddSuccess = false;
+        }
+
+        assert wasAddSuccess != null : "wasAddSuccess should not be null";
+
+        if (wasAddSuccess) {
+            output += ("added: " + parsedInputs[1].strip() + "\n");
+        } else {
+            output += ("Failed to add " + parsedInputs[1].strip() + "\n");
+        }
+        output += "Number of tasks: ";
+        output += list.getLength();
+        return output;
+    }
+
+    private String handleUnmark(String input) {
+        int indexOfList;
+        String output = "";
+        try {
+            indexOfList = Integer.parseInt(input);
+            list.markIncomplete(indexOfList);
+            output += "Marked as incomplete \n";
+            output += list.toString(indexOfList);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            output += "Integer required for Unmark command";
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            output += "Integer provided is not in the list";
+        }
+        return output;
+    }
+
+    private String handleList() {
+        return list.toString();
+    }
+
+    private String handleMark(String input) {
+        int indexOfList;
+        String output = "";
+        try {
+            indexOfList = Integer.parseInt(input);
+            list.markComplete(indexOfList);
+            output += "Marked as complete \n";
+            output += list.toString(indexOfList);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            output += "Integer required for Unmark command";
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            output += "Integer provided is not in the list";
+        }
+        return output;
+    }
 
 
 }

@@ -2,6 +2,8 @@ package duke;
 
 public class ToDo extends Task {
 
+    static final int TASK_INDEX = 0;
+    static final int TIME_INDEX = 3;
     /**
      * Creates new Todo task
      *
@@ -28,8 +30,8 @@ public class ToDo extends Task {
     @Override
     public String[] getDetails() {
         String[] details = super.getDetails();
-        details[0] = TaskType.TODO.toString();
-        details[3] = "";
+        details[TASK_INDEX] = TaskType.TODO.toString();
+        details[TIME_INDEX] = "";
         return details;
     }
 }
