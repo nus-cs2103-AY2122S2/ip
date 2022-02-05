@@ -60,10 +60,12 @@ public class UnmarkCommand extends Command {
 
         assert  this.arguments != null;
 
-        // check only two arguments
+        // check only two arguments, of which first in "unmark"
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
         }
+        assert this.arguments[0].equals("unmark");
+
         // check that second argument is numerical
         int taskId;
         try {

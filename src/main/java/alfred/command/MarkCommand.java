@@ -58,17 +58,20 @@ public class MarkCommand extends Command {
 
         assert this.arguments != null;
 
-        // check only two arguments
+        // check only two arguments, of which first is "mark"
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
         }
-        // check that second argument is numerical
+        assert this.arguments[0].equals("mark");
+
+        // check that second argument is numerical, for task index
         int taskId;
         try {
             taskId = Integer.valueOf(arguments[1]) - 1;
         } catch (NumberFormatException nfe) {
             throw new InvalidInputException();
         }
+
         // modify in storage
         storage.markTask(taskId);
 

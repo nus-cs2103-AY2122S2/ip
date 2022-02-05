@@ -61,15 +61,18 @@ public class EventCommand extends Command {
 
         assert this.arguments != null;
 
-        // check validity of data
+        // check that only description and date
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
         }
+
+        // check that second argument is a valid date format
         try {
             LocalDateTime.parse(this.arguments[1]);
         } catch (DateTimeParseException dte) {
             throw new InvalidDateTimeException();
         }
+
         // modify data state
         Task event = new Event(this.arguments[0], this.arguments[1]);
         storage.addTask(event);

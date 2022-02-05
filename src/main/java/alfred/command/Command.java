@@ -1,9 +1,7 @@
 package alfred.command;
 
 
-import alfred.Alfred;
 import alfred.exceptions.AlfredException;
-import alfred.exceptions.InvalidInputException;
 import alfred.storage.AlfredStorage;
 import alfred.ui.AlfredUserInterface;
 

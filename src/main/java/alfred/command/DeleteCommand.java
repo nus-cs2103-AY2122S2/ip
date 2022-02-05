@@ -60,7 +60,7 @@ public class DeleteCommand extends Command {
             throw new InvalidInputException();
         }
 
-        // check that second argument is numerical
+        // check that second argument is numerical, for index to delete
         int taskId;
         try {
             taskId = Integer.valueOf(arguments[1]) - 1;
@@ -68,7 +68,7 @@ public class DeleteCommand extends Command {
             throw new InvalidInputException();
         }
 
-        // response
+        // get response
         String out = "Noted sir. I've removed the following task:\n";
         out += storage.taskToString(taskId);
 
