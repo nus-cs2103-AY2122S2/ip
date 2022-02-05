@@ -1,19 +1,20 @@
 package duke;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.Deadline;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Deadline;
+
 
 public class TaskListTest {
     @Test
-    public void TaskListTest1() {
+    public void taskListTest1() {
         TaskList taskList = new TaskList();
         assertEquals(0, taskList.size());
     }
 
     @Test
-    public void TaskListTest2() {
+    public void taskListTest2() {
         TaskList taskList = new TaskList();
         Deadline deadline = new Deadline("task1", false, "D", "2011-11-11 12:30");
         taskList.add(deadline);
@@ -21,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void TaskListTest3() {
+    public void taskListTest3() {
         TaskList taskList = new TaskList();
         Deadline deadline = new Deadline("task1", false, "D", "2011-11-11 12:30");
         taskList.add(deadline);

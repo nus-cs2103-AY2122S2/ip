@@ -3,8 +3,8 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDescriptionException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDescriptionException;
 
 /**
  * Ui class handles the input

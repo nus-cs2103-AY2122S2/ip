@@ -1,19 +1,20 @@
 package duke;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.ToDo;
+
 
 public class ToDoTest {
     @Test
-    public void TodoTest1() {
+    public void todoTest1() {
         ToDo todo = new ToDo("test1", false, "T");
         assertEquals("[T][ ] test1" , todo.toString());
     }
 
     @Test
-    public void TodoTest2() {
+    public void todoTest2() {
         ToDo todo = new ToDo("test1", true, "T");
         assertEquals("[T][X] test1" , todo.toString());
     }

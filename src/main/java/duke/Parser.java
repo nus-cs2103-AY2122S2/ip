@@ -110,7 +110,8 @@ public class Parser {
         default:
             System.out.println("Month does not exist");
 
-        }// YYYY-MM-DD HH:MM
+        }
+        // YYYY-MM-DD HH:MM
         return year + "-" + monthNum + "-" + day + " " + time;
     }
 

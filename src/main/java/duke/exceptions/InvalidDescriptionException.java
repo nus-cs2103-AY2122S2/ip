@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.exceptions;
 
 /**
  * Exception Handler for Invalid description of task
