@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // Testing .assertEquals(Expected, actual)
 public class DukeTest {
     @Test
-    public void dummyTest() {
+    void dummyTest() {
         assertEquals(2, 2);
     }
 }
