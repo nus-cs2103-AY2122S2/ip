@@ -26,8 +26,6 @@ public class Duke {
      *
      * @param filePath - the file path of the folder where
      *                   the data of duke will be stored
-     * @throws DukeException - if folder or text file creation was
-     *                         unsuccessful
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -55,7 +53,7 @@ public class Duke {
         ui.showLine();
         ui.showTutorial();
         ui.showLine();
-        boolean isExitCommand = false;
+        boolean isExitCommand;
         do {
             Command c = new CommandEmpty();
             try {
