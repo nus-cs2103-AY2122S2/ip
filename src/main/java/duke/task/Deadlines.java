@@ -3,7 +3,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-//A variant of duke.task
+/**
+ * Represents a deadline created by the user that are/will be stored in the database.
+ * A <code>Deadlines</code> inherits from <code>Tasks</code> and is represented by its
+ * name, completion status, and the deadline of the event e.g.,
+ * <code>"Eat lunch", true, "2012-06-03"</code>
+ */
 public class Deadlines extends Tasks {
     LocalDate deadline; // Deadline to complete deadline duke.task
 
@@ -23,13 +28,21 @@ public class Deadlines extends Tasks {
         return "(by: " + deadline + ")";
     }
 
-    // Completion of duke.task
+    /**
+     * Returns a new completed instance of the task.
+     *
+     * @return a new instance of the task that has been completed.
+     */
     @Override
     public Deadlines completeTask() {
         return new Deadlines(super.getName(), true, deadline.toString());
     }
 
-    // Uncomplete the duke.task
+    /**
+     * Returns a new uncompleted instance of the task.
+     *
+     * @return a new instance of the task that has not been completed.
+     */
     @Override
     public Deadlines uncompleteTask() {
         return new Deadlines(super.getName(), false, deadline.toString());
