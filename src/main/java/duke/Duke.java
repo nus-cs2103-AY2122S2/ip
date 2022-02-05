@@ -1,14 +1,14 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.dukeexceptions.DukeExceptions;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Duke is a task list CLI application that stores three types of tasks, Todos, Deadlines and Events.
