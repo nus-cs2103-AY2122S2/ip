@@ -20,7 +20,7 @@ public class Deadline extends Task{
      * @return String in the standard saving format
      */
     @Override
-    String saveFormat() {
+    public String saveFormat() {
         return super.saveFormat() + " ### " + this.time;
     }
 
