@@ -68,4 +68,11 @@ public class Ui {
         System.out.println("Good bye, sir.");
         Ui.showLine();
     }
+
+    /**
+     * Displays a message to the standard output when user is searching for a task using a keyword.
+     */
+    public static void match() {
+        System.out.println("Here are the matching tasks in your list, sir: ");
+    }
 }
