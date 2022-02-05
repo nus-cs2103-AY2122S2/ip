@@ -2,8 +2,14 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class containing all UI methods
+ */
 public class Ui {
 
+    /**
+     * UI Constructor
+     */
     public Ui() {
 
     }
@@ -23,7 +29,7 @@ public class Ui {
     /**
      * Returns a styled welcome message upon launch
      */
-    public void displayWelcomeMsg() {
+    public String displayWelcomeMsg() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -33,14 +39,14 @@ public class Ui {
 
         String welcomeMsg = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(formatMsg(welcomeMsg));
+        return formatMsg(welcomeMsg);
     }
 
     /**
      * Returns a styled exit message on exit
      */
-    public void displayExitMsg() {
-        System.out.println(formatMsg("Bye. Hope to see you again soon!\n"));
+    public String displayExitMsg() {
+        return formatMsg("Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -52,7 +58,7 @@ public class Ui {
     public String renderTaskList(ArrayList<Task> tasks) {
         String renderStr = "";
         for (int i = 0; i < tasks.size(); i++) {
-            String dataStr = String.format("%d. ", i+1)
+            String dataStr = String.format("%d. ", i + 1)
                     + tasks.get(i)
                     + " \n";
             renderStr += dataStr;
@@ -63,11 +69,10 @@ public class Ui {
     /**
      * Prints string of stored data as an indexed list
      *
-     * @param data arrayList of Task data
-     * @return     data as a list in a single string
+     * @param tasks arrayList of Task data
      */
-    public void displayTaskList(ArrayList<Task> tasks) {
-        System.out.println(formatMsg(renderTaskList(tasks)));
+    public String displayTaskList(ArrayList<Task> tasks) {
+        return formatMsg(renderTaskList(tasks));
     }
 
     /**
@@ -75,9 +80,9 @@ public class Ui {
      *
      * @param foundTasks ArrayList of tasks found via FIND
      */
-    public void displayFoundTaskList(TaskList foundTasks) {
+    public String displayFoundTaskList(TaskList foundTasks) {
         String message = "Here are the matching tasks in your list:\n";
-        System.out.println(formatMsg(message + renderTaskList(foundTasks.getTasks())));
+        return formatMsg(message + renderTaskList(foundTasks.getTasks()));
     }
 
     /**
@@ -85,10 +90,10 @@ public class Ui {
      *
      * @param task Task to be marked as complete
      */
-    public void displayMarkMsg(String task) {
+    public String displayMarkMsg(String task) {
         String markMsg = "Nice! I've marked this task as done:\n"
                 + task + "\n";
-        System.out.println(formatMsg(markMsg));
+        return formatMsg(markMsg);
     }
 
     /**
@@ -96,10 +101,10 @@ public class Ui {
      *
      * @param task Task to be marked as incomplete
      */
-    public void displayUnmarkMsg(String task) {
+    public String displayUnmarkMsg(String task) {
         String unmarkMsg = "Nice! I've marked this task as NOT done:\n"
                 + task + "\n";
-        System.out.println(formatMsg(unmarkMsg));
+        return formatMsg(unmarkMsg);
     }
 
     /**
@@ -108,13 +113,13 @@ public class Ui {
      * @param task Task that was listed
      * @param size Number of tasks in list
      */
-    public void displayListedText(Task task, int size) {
+    public String displayListedText(Task task, int size) {
         String output = " Got it. I've added this task:\n   "
                 + task.toString()
                 + "\n Now you have "
                 + size
                 + " tasks in the list.\n";
-        System.out.println(formatMsg(output));
+        return formatMsg(output);
     }
 
     /**
@@ -123,14 +128,14 @@ public class Ui {
      * @param deletedTask Task that was deleted
      * @param size Number of tasks remaining in list
      */
-    public void displayDeletedMessage(Task deletedTask, int size) {
+    public String displayDeletedMessage(Task deletedTask, int size) {
         String output = " Noted. I've removed this task:\n"
                 + "  "
                 + deletedTask
                 + "\n Now you have "
                 + size
                 + " tasks in the list.\n";
-        System.out.println(formatMsg(output));
+        return formatMsg(output);
     }
 
     public void displayLoadError() {

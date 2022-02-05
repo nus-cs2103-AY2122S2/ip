@@ -107,7 +107,7 @@ public class Event extends Task {
                 + super.toString()
                 + "(at: "
                 + getStartTimeString()
-                +" till "
+                + " till "
                 + getEndTimeString()
                 + ")";
     }
