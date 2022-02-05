@@ -60,11 +60,10 @@ public class AddCommand implements Command {
      * @throws UltoiException If any Ultoi exception happens.
      */
     @Override
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
         tasks.addTask(this.task);
         storage.save(tasks);
-        ui.showMsg(generateMsg(tasks));
-        return;
+        return ui.showMsg(generateMsg(tasks));
     }
 
     /**

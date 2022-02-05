@@ -5,6 +5,15 @@ import ultoi.command.Command;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Represents a bot named Ultoi that could help users memorize their tasks.
  *
@@ -33,9 +42,9 @@ public class Ultoi {
         }
     }
 
-    /**
+    /*
      * Starts a chat session.
-     */
+     *
     public void run() {
         ui.showWelcomeMsg();
 
@@ -48,19 +57,34 @@ public class Ultoi {
                     return;
                 }
             } catch (UltoiException e) {
-                ui.showError(e);
+                return ui.showError(e);
             }
         }
     }
+    */
 
-    /**
+    public String showWelcomeMsg() {
+        return ui.showWelcomeMsg();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parse(input);
+            return cmd.execute(this.ui, this.tasks, this.storage);
+        } catch (UltoiException e) {
+            return ui.showError(e);
+        }
+    }
+
+    /*
      * Drives the execution of Ultoi bot.
      *
      * @param args User input.
-     */
+     *
     public static void main(String[] args) {
         Path filePath = Paths.get(System.getProperty("user.home"),
                 "iP", "data", "Ultoi.txt");
         new Ultoi(filePath).run();
     }
+    */
 }

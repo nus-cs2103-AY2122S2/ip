@@ -27,9 +27,8 @@ public class FindCommand implements Command {
         }
     }
 
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
-        ui.showMsg(generateMsg(tasks));
-        return;
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
+        return ui.showMsg(generateMsg(tasks));
     }
 
     private String generateMsg(TaskList tasks) {

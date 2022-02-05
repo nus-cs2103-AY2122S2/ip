@@ -53,7 +53,7 @@ public class MarkCommand implements Command {
      * @param storage Storage to be used.
      * @throws UltoiException If any Ultoi exception happens.
      */
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
         try {
             if (this.isMark) {
                 tasks.mark(this.index);
@@ -65,8 +65,7 @@ public class MarkCommand implements Command {
         }
 
         storage.save(tasks);
-        ui.showMsg(generateMsg(tasks.getTask(this.index)));
-        return;
+        return ui.showMsg(generateMsg(tasks.getTask(this.index)));
     }
 
     /**

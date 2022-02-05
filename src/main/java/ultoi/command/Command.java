@@ -20,5 +20,5 @@ import ultoi.util.DateTime;
  * @version 0.0.0
  */
 public interface Command {
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException;
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException;
 }

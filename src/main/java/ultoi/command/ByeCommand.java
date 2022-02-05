@@ -44,8 +44,7 @@ public class ByeCommand implements Command {
      * @throws UltoiException If any Ultoi exception happens.
      */
     @Override
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) {
-        ui.showMsg(this.MESSAGE);
-        return;
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) {
+        return ui.showMsg(this.MESSAGE);
     }
 }

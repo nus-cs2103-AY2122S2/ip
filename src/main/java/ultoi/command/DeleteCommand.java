@@ -47,7 +47,7 @@ public class DeleteCommand implements Command {
      * @param storage Storage to be used.
      * @throws UltoiException If any Ultoi exception happens.
      */
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) throws UltoiException {
         Task deletedTask;
 
         try {
@@ -57,8 +57,7 @@ public class DeleteCommand implements Command {
         }
 
         storage.save(tasks);
-        ui.showMsg(generateMsg(deletedTask, tasks));
-        return;
+        return ui.showMsg(generateMsg(deletedTask, tasks));
     }
 
     /**

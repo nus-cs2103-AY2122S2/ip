@@ -43,8 +43,7 @@ public class ListCommand implements Command {
      * @throws UltoiException If any Ultoi exception happens.
      */
     @Override
-    public void execute(UltoiUi ui, TaskList tasks, Storage storage) {
-        ui.showMsg(tasks.toString());
-        return;
+    public String execute(UltoiUi ui, TaskList tasks, Storage storage) {
+        return ui.showMsg(tasks.toString());
     }
 }

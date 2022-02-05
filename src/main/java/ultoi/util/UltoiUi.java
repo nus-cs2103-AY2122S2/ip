@@ -55,9 +55,9 @@ public class UltoiUi {
      *
      * @param msg Message shown.
      */
-    public void showMsg(String msg) {
+    public String showMsg(String msg) {
         String fullMsg = LINE_BREAK + "\n" + msg + "\n" + LINE_BREAK;
-        this.out.println(fullMsg);
+        return fullMsg;
     }
 
     /**
@@ -65,8 +65,8 @@ public class UltoiUi {
      *
      * @param msg Message shown.
      */
-    public void showWelcomeMsg() {
-        showMsg(WELCOME_MESSAGE);
+    public String showWelcomeMsg() {
+        return showMsg(WELCOME_MESSAGE);
     }
 
     /**
@@ -74,8 +74,8 @@ public class UltoiUi {
      *
      * @param msg Message shown.
      */
-    public void showLoadingError() {
-        showMsg(LOADING_ERROR);
+    public String showLoadingError() {
+        return showMsg(LOADING_ERROR);
     }
 
     /**
@@ -83,8 +83,8 @@ public class UltoiUi {
      *
      * @param msg Message shown.
      */
-    public void showError(UltoiException e) {
-        showMsg(e.toString() + " " + UltoiException.EXCEPTION_FACE);
+    public String showError(UltoiException e) {
+        return showMsg(e.toString() + " " + UltoiException.EXCEPTION_FACE);
     }
 
 }
