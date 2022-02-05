@@ -3,9 +3,10 @@ package backend;
 public class InputDecoder {
     private Commands currentCommand = null;
 
-    public InputDecoder() {}
+    public InputDecoder() {
+    }
 
-    private String[] parseInput(String input) throws IllegalArgumentException{
+    private String[] parseInput(String input) throws IllegalArgumentException {
         String[] commandSections = input.split(" ", 2);
         currentCommand = Commands.valueOf(commandSections[0].toUpperCase());
         return commandSections;
@@ -13,11 +14,12 @@ public class InputDecoder {
 
     /**
      * Returns the task equivalent from a task generating string input supplied by user
+     *
      * @param input task generating string that follows standard format
      * @return Task object containing information from input string
      * @throws ArrayIndexOutOfBoundsException if only command and no input behind is given
      */
-    public void decode(String input) {
+    public String decode(String input) {
         String[] commandSections = null;
 
         // parse input supplied
@@ -30,46 +32,44 @@ public class InputDecoder {
         //do a certain action based on the parsed input
         switch (currentCommand) {
         case LIST:
-            TaskList.list();
-            break;
+            return TaskList.list();
+
         case MARK:
             int indexMarked = Integer.parseInt(commandSections[1]) - 1;
-            TaskList.mark(indexMarked);
-            break;
+            return TaskList.mark(indexMarked);
+
         case UNMARK:
             int indexUnmmarked = Integer.parseInt(commandSections[1]) - 1;
-            TaskList.unmark(indexUnmmarked);
-            break;
+            return TaskList.unmark(indexUnmmarked);
+
         case DELETE:
             int indexDelete = Integer.parseInt(commandSections[1]) - 1;
-            TaskList.delete(indexDelete);
-            break;
+            return TaskList.delete(indexDelete);
+
         case TODO:
             String todoDescription = commandSections[1];
-            TaskList.addTodo(todoDescription);
-            break;
+            return TaskList.addTodo(todoDescription);
+
         case DEADLINE:
             String deadlineContent = commandSections[1];
             String[] deadlineSegments = deadlineContent.split(" /by ");
             String deadlineDescription = deadlineSegments[0];
             String deadlineTime = deadlineSegments[1];
-            TaskList.addDeadline(deadlineDescription, deadlineTime);
-            break;
+            return TaskList.addDeadline(deadlineDescription, deadlineTime);
+
         case EVENT:
             String eventContent = commandSections[1];
             String[] segments = eventContent.split(" /at ");
             String eventDescription = segments[0];
             String eventTime = segments[1];
-            TaskList.addEvent(eventDescription, eventTime);
-            break;
+            return TaskList.addEvent(eventDescription, eventTime);
 
         case FIND:
             String keyword = commandSections[1];
-            TaskList.find(keyword);
-            break;
+            return TaskList.find(keyword);
 
         default:
-            System.out.println("Sorry I did not understand you!");
+            return "Sorry I didnt understand you!";
         }
     }
 }
