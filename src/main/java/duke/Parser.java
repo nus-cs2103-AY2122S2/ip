@@ -39,22 +39,27 @@ public class Parser {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing mark index");
             }
-            parsedInput.add(input.substring(MARK_INFO_INDEX));
 
+            //mark index should not be empty now
+            assert !input.substring(MARK_INFO_INDEX).isEmpty();
+            parsedInput.add(input.substring(MARK_INFO_INDEX));
         } else if (command.equals("unmark")) {
             if (hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing unmark index");
             }
+            assert !input.substring(UNMARK_INFO_INDEX).isEmpty();
             parsedInput.add(input.substring(UNMARK_INFO_INDEX));
         } else if (command.equals("todo")) {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty todo description");
             }
+            assert !input.substring(TODO_INFO_INDEX).isEmpty();
             parsedInput.add(input.substring(TODO_INFO_INDEX));
         } else if (command.equals("event")) {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty event description");
             }
+            assert !input.substring(EVENT_INFO_INDEX).isEmpty();
             int indexOfStartDate = input.indexOf(" /") + 5;
             parsedInput.add(input.substring(EVENT_INFO_INDEX, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
@@ -62,6 +67,7 @@ public class Parser {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty deadline description");
             }
+            assert !input.substring(DEADLINE_INFO_INDEX).isEmpty();
             int indexOfStartDate = input.indexOf(" /") + 5;
             parsedInput.add(input.substring(DEADLINE_INFO_INDEX, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
@@ -69,6 +75,7 @@ public class Parser {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing delete index");
             }
+            assert !input.substring(DELETE_INFO_INDEX).isEmpty();
             parsedInput.add(input.substring(DELETE_INFO_INDEX));
         } else if (command.equals("find")) {
             parsedInput.add(input.substring(FIND_INFO_INDEX));
