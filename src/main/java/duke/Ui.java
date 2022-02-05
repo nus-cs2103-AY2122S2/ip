@@ -33,11 +33,31 @@ public class Ui {
      * @param taskList ArrayList of Current Task
      */
     public void displayTasks(ArrayList<Task> taskList) {
-        for(int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + "." + taskList.get(i).toString());
+        if (taskList.isEmpty()) {
+            System.out.println("The current taskList is empty.");
+        } else {
+            for(int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + "." + taskList.get(i).toString());
+            }
         }
     }
-
+    /**
+     * Prints All found tasks in supplied TaskList.
+     *
+     * @param taskList ArrayList of Current Tasks
+     * @param indexList ArrayList of Task indexes found by find function.
+     */
+    public void displayFoundTasks(ArrayList<Task> taskList, ArrayList<Integer> indexList) {
+        if (taskList.isEmpty()) {
+            System.out.println("No task found by your given keyword");
+        } else {
+            for(int i = 0; i < indexList.size(); i++) {
+               int taskIndex = indexList.get(i);
+               Task taskFound = taskList.get(i);
+               System.out.println(taskIndex + "." + taskFound);
+            }
+        }
+    }
     /**
      * Prints message with the size of supplied TaskList
      *

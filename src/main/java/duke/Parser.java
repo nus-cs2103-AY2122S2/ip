@@ -60,9 +60,6 @@ public class Parser {
                 try {
                     Todo todoTask = new Todo(command.substring(5));
                     taskListObj.addTask(todoTask);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(todoTask);
-                    System.out.println("Now you have " + taskListObj.getSize() + " tasks in the list.");
                 } catch (StringIndexOutOfBoundsException noDescription) {
                     dukeException.noDescriptionException();
                 }
@@ -102,6 +99,9 @@ public class Parser {
             } else if (command.startsWith("delete")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
                 taskListObj.delete(value);
+            } else if (command.startsWith("find")) {
+                String filteredCommand = command.replace("find", "").strip();
+                taskListObj.find(filteredCommand);
             } else {
                 dukeException.noSuchTaskException();
             }
