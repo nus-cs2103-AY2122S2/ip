@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ghost.jpg"));
 
     public void setDuke(Duke d) {
+        assert d != null : "Duke instance should be initialized";
         duke = d;
     }
 
@@ -39,6 +40,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert userImage != null : "Images should load";
+        assert dukeImage != null : "Images should load";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.greet(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }

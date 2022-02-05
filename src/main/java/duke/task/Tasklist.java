@@ -85,7 +85,6 @@ public class Tasklist {
      */
     public static String taskFormatter(LinkedList<Task> list) {
         StringBuilder allTasks = new StringBuilder("Fetching all records...\n");
-        System.out.println(list.size() + " inside of taskformatter");
         if (list.size() == 0) {
             return allTasks.append("No entries found, start by adding one!\n").toString();
         }

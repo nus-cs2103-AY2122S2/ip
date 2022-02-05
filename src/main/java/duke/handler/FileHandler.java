@@ -25,6 +25,7 @@ public class FileHandler {
      */
     public static String getFilePath() {
         String home = System.getProperty("user.home");
+        assert home != null : "Home should exist";
         java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
         return String.valueOf(path);
     }
@@ -36,6 +37,7 @@ public class FileHandler {
      */
     public static void readFromFile(Tasklist list) {
         String home = System.getProperty("user.home");
+        assert home != null : "Home should exist";
         java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
         if (java.nio.file.Files.exists(Paths.get(FileHandler.getFilePath()))) {
             try {
