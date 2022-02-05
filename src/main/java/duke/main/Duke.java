@@ -42,29 +42,6 @@ public class Duke {
         }
     }
 
-    //    /**
-    //     * Runs the Duke application
-    //     */
-    //    public void run() {
-    //        this.ui.printBootUp();
-    //        boolean isExit = false;
-    //
-    //        // Program will keep taking in new user input until terminated
-    //        while (!isExit) {
-    //            try {
-    //                String fullCommand = ui.readCommand();
-    //                this.ui.printLineSeparator();
-    //                Command command = Parser.parse(fullCommand);
-    //                command.execute(this.tasks, this.ui, this.storage);
-    //                isExit = command.isExit();
-    //            } catch (DukeException e) {
-    //                this.ui.printException(e);
-    //            } finally {
-    //                this.ui.printLineSeparator();
-    //            }
-    //        }
-    //    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.

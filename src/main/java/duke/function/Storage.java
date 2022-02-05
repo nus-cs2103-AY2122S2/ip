@@ -84,33 +84,39 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (Task task : tasks.getTasks()) {
                 String taskString = "";
+
                 if (task instanceof ToDoTask) {
-                    taskString += "T;";
+                    taskString += "T";
                 } else if (task instanceof DeadlineTask) {
-                    taskString += "D;";
+                    taskString += "D";
                 } else {
                     assert task instanceof EventTask;
-                    taskString += "E;";
+                    taskString += "E";
                 }
+                taskString += addDelimiter();
 
                 if (task.isMarked()) {
-                    taskString += "X;";
+                    taskString += "X";
                 } else {
-                    taskString += "O;";
+                    taskString += "O";
                 }
+                taskString += addDelimiter();
+
                 taskString += task.getName();
+                taskString += addDelimiter();
+
                 if (task instanceof DeadlineTask) {
                     DeadlineTask dTask = (DeadlineTask) task;
-                    taskString += ";";
+                    taskString += addDelimiter();
                     taskString += dTask.getPreposition();
-                    taskString += ";";
+                    taskString += addDelimiter();
                     taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
                 } else {
                     assert task instanceof EventTask;
                     EventTask dTask = (EventTask) task;
-                    taskString += ";";
+                    taskString += addDelimiter();
                     taskString += dTask.getPreposition();
-                    taskString += ";";
+                    taskString += addDelimiter();
                     taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
                 }
                 fileWriter.write(taskString);
@@ -120,5 +126,13 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Unable to save tasks *quack*");
         }
+    }
+
+    /**
+     * Returns a delimiter used in formatting save files.
+     * @return delimiter.
+     */
+    private String addDelimiter() {
+        return ";";
     }
 }

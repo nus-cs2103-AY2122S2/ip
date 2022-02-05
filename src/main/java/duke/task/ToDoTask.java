@@ -16,6 +16,8 @@ public class ToDoTask extends Task {
      */
 
     public String toString() {
-        return "[T]" + super.toString();
+        String prefix = "[T]";
+        String stateAndName = super.toString();
+        return prefix + stateAndName;
     }
 }

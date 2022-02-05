@@ -130,7 +130,7 @@ public class AddCommand extends Command {
         }
 
         //Creating the new task
-        Task newTask = new Task("");
+        Task newTask;
         if (this.taskType.equals("todo")) {
             newTask = new ToDoTask(this.taskName);
         } else if (this.taskType.equals("deadline")) {
