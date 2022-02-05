@@ -13,7 +13,7 @@ plugins {
 }
 
 application {
-    mainClassName "duke.Duke"
+    mainClassName "duke.Main"
 }
 
 checkstyle {
