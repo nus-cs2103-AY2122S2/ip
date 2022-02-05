@@ -33,8 +33,8 @@ public class TaskList {
      * @return the specified task to be marked.
      */
     public Task markTask(int taskNum) {
-        int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
-        Task markedTask = taskList.get(actualTaskNum); // get the task from the array
+        int actualTaskNum = taskNum - 1;
+        Task markedTask = taskList.get(actualTaskNum);
         markedTask.setTaskDone();
         return markedTask;
     }
@@ -44,9 +44,9 @@ public class TaskList {
      * @param taskNum an indicator to the index of taskList.
      * @return the specified task to be unmarked.
      */
-    public Task unMarkTask(int taskNum) {
+    public Task unmarkTask(int taskNum) {
         int actualTaskNum = taskNum - 1;
-        Task unMarkedtask = taskList.get(actualTaskNum); // get the task from the array
+        Task unMarkedtask = taskList.get(actualTaskNum);
         unMarkedtask.setTaskNotDone();
         return unMarkedtask;
     }

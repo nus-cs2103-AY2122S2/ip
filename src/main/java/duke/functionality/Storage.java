@@ -18,6 +18,12 @@ import duke.task.Todo;
 public class Storage {
     protected static String pwd;
     protected static String path;
+    private static final int FIRST_INPUT = 0;
+    private static final int SECOND_INPUT = 1;
+    private static final int THIRD_INPUT = 2;
+    private static final int FOURTH_INPUT = 3;
+    private static final int FIFTH_INPUT = 4;
+    private static final int SIXTH_INPUT = 5;
 
     /**
      * Constructor for Storage class.
@@ -69,32 +75,37 @@ public class Storage {
         TaskList newTaskList = new TaskList();
         while ((sc.hasNextLine())) {
             String input = sc.nextLine();
-            String[] inputSplit = input.split("\\|"); //split input by |
-            String task = inputSplit[0];
-            int mark = Integer.parseInt(inputSplit[1]);
+            String[] inputSplit = input.split("\\|");
+            String task = inputSplit[FIRST_INPUT];
+            int mark = Integer.parseInt(inputSplit[SECOND_INPUT]);
             if (task.equals("T")) {
-                Todo tempTask = new Todo(inputSplit[2]);
-                if (mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                newTaskList.addToList(tempTask);
+                Todo tempTask = new Todo(inputSplit[THIRD_INPUT]);
+                newTaskList.addToList(checkTaskDone(mark, tempTask));
+
             } else if (task.equals("D")) {
-                Deadline tempTask = new Deadline(inputSplit[2], Parser.formatDate(inputSplit[3]),
-                        Parser.formatTime(inputSplit[4]));
-                if (mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                newTaskList.addToList(tempTask);
+                Deadline tempTask = new Deadline(inputSplit[THIRD_INPUT], Parser.formatDate(inputSplit[FOURTH_INPUT]),
+                        Parser.formatTime(inputSplit[FIFTH_INPUT]));
+                newTaskList.addToList(checkTaskDone(mark, tempTask));
+
             } else if (task.equals("E")) {
-                Event tempTask = new Event(inputSplit[2], Parser.formatDate(inputSplit[3]) ,
-                        Parser.formatTime(inputSplit[4]), Parser.formatTime(inputSplit[5]));
-                if (mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                newTaskList.addToList(tempTask);
+                Event tempTask = new Event(inputSplit[THIRD_INPUT], Parser.formatDate(inputSplit[FOURTH_INPUT]) ,
+                        Parser.formatTime(inputSplit[FIFTH_INPUT]), Parser.formatTime(inputSplit[SIXTH_INPUT]));
+                newTaskList.addToList(checkTaskDone(mark, tempTask));
             }
         }
         return newTaskList;
+    }
+
+    /**
+     * Returns nothing, but used to check if a Task is done or not.
+     * @param mark indicator, 1 is done 0 is not done.
+     * @param task the Task object to be checked.
+     */
+    public Task checkTaskDone(int mark, Task task) {
+        if(mark == 1){
+            task.setTaskDone();
+        }
+        return task;
     }
 
     /**
