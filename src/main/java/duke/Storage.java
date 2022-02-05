@@ -11,16 +11,33 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
+/**
+ * The Storage program implements an application which saves and updates a todo list file.
+ *
+ * @author joey-chance
+ * @version 1.0
+ * @since 2022-02-05
+ */
 public class Storage {
     protected File directory;
     protected File file;
 
+    /**
+     * Returns a Storage object which saves and updates a todo list file.
+     *
+     * @param directoryPath path to the directory which the todo list is stored
+     * @param filePath path to the todo list file
+     */
     public Storage(String directoryPath, String filePath) {
         this.directory = new File(directoryPath);
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads the todo list stored in the file to a LinkedList.
+     *
+     * @return LinkedList containing all of the tasks from the todo list file
+     */
     public LinkedList<Task> load() {
         LinkedList<Task> tasks = new LinkedList<>();
         try {
@@ -78,6 +95,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new Taks object which is then stored by being written to the todo list file.
+     *
+     * @param task Task object to be stored into the todo list file
+     */
     public void create(Task task) {
         try {
             FileWriter writer = new FileWriter(file.getPath(), true);
@@ -90,6 +112,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates a task to be mark as done, mark as not done or removed from the todo list file.
+     *
+     * @param id ID of the task
+     * @param command how the task should be updated (mark done, mark not done or removed)
+     */
     public void update(int id, String command) {
         try {
             String path = file.getPath();

@@ -3,7 +3,22 @@ package duke;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * The Parser program implements an application which parses a user's input and acts accordingly.
+ *
+ * @author joey-chance
+ * @version 1.0
+ * @since 2022-02-05
+ */
 public class Parser {
+    /**
+     * Parses the user's input and allow Duke to act accordingly.
+     *
+     * @param input user's input
+     * @param sc scanner to scan user's input
+     * @param tasks list of tasks
+     * @param storage Storage object which handles updating the todo file accordingly
+     */
     public static void parse(String input, Scanner sc, TaskList tasks, Storage storage) {
         while (!input.equalsIgnoreCase("bye")) {
             Ui.showLine();
