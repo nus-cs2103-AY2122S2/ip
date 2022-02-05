@@ -1,4 +1,4 @@
-package luca.storage;
+package luca.storage.exceptions;
 
 import luca.common.DukeException;
 

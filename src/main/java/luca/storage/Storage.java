@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import luca.common.DukeException;
+import luca.storage.exceptions.InvalidFileSyntaxException;
 import luca.task.Deadline;
 import luca.task.Event;
 import luca.task.Task;
@@ -52,6 +53,9 @@ public class Storage {
      * @throws InvalidFileSyntaxException If syntax is unknown.
      */
     private void parseMarkSyntax(Task task, String[] tokens) throws InvalidFileSyntaxException {
+
+        assert tokens.length > 1 : "Incorrect number of tokens to parse.";
+
         tokens[1] = tokens[1].trim();
         if (tokens[1].equals("1")) {
             task.markAsDone();

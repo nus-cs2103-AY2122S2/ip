@@ -11,16 +11,16 @@ import luca.task.TaskList;
 public class MarkCommand extends Command {
 
     /** 1-based index of the task in the list. */
-    private int point;
+    private int pointer;
 
     /**
      * Constructor to create a Mark Command.
      *
-     * @param point 1-based index of the task in the list.
+     * @param pointer 1-based index of the task in the list.
      */
-    public MarkCommand(int point) {
+    public MarkCommand(int pointer) {
         super(CommandType.MARK);
-        this.point = point;
+        this.pointer = pointer;
     }
 
     /**
@@ -29,12 +29,11 @@ public class MarkCommand extends Command {
      * @param taskList list of tasks.
      * @param storage storage used by chat bot.
      * @return response string.
-     * @throws DukeException if File IO exception is thrown when saving file.
+     * @throws DukeException if I/O error or Invalid argument.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
-        Task task = taskList.get(point - 1);
-        task.markAsDone();
+        Task task = taskList.markTaskAsDone(pointer);
         storage.saveToFile(taskList);
         return "Great! I have marked this task as done:\n " + task;
     }
