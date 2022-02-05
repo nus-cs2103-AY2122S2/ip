@@ -15,6 +15,7 @@ public class Parser {
      * @return The first word of the input.
      */
     public static String getCommand(String input) {
+        assert !input.trim().equals("") : "input cannot be empty";
         int index = input.indexOf(' ');
         return (index >= 0) ? input.substring(0, index) : input;
     }

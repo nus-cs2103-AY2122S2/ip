@@ -85,6 +85,7 @@ public class AddCommand extends Command {
                 return "Please enter valid date in YYYY-MM-DD format!";
             }
         } else {
+            assert this.taskType.equals("event") : "Command word must be event";
             try {
                 Event ev = Event.createEvent(this.textInput);
                 tasks.addTask(ev);

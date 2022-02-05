@@ -52,6 +52,7 @@ public class NumberedCommand extends Command {
      */
     @Override
     public String execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
+        assert this.number > 0 : "The number supplied should not be 0 or negative";
         try {
             if (this.taskType.equals("mark")) {
                 Task task = tasks.get(this.number - 1);
