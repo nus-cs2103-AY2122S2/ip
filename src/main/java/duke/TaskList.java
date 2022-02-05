@@ -16,12 +16,16 @@ public class TaskList {
     public void list() {
         Ui.list();
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i +". " + tasks.get(i - 1));
+            System.out.println(i +". " + get(i - 1));
         }
     }
 
     public void add(Task task) {
         tasks.add(task);
+    }
+
+    public Task get(int id) {
+        return tasks.get(id);
     }
 
     public void update(int id, String command) {
@@ -30,7 +34,7 @@ public class TaskList {
         }
         switch (command) {
             case "mark" :
-                if (tasks.get(id - 1).isDone) {
+                if (tasks.get(id - 1).isDone()) {
                     Ui.alreadyDone(tasks.get(id - 1));
                 } else {
                     tasks.get(id - 1).markAsDone();
@@ -38,7 +42,7 @@ public class TaskList {
                 }
                 break;
             case "unmark" :
-                if (!tasks.get(id - 1).isDone) {
+                if (!tasks.get(id - 1).isDone()) {
                     Ui.alreadyNotDone(tasks.get(id - 1));
                 } else {
                     tasks.get(id - 1).markAsNotDone();

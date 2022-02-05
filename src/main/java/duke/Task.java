@@ -14,12 +14,16 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public String getStatusIcon() {
         return isDone ? "X" : "-"; //mark done tasks with X
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void markAsDone() {
