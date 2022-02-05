@@ -34,13 +34,13 @@ public class Events extends Tasks {
 
     // Format of saving to database
     public String toDatabaseString() {
-        return "E | " + (this.getCompletion() == true ? "X" : " ") + " | " + super.getName()
-                + " | " + timing + "\n";
+        return "E | " + (this.getCompletion() ? "X" : " ")
+                + " | " + super.getName() + " | " + timing + "\n";
     }
 
     // toString returning event
     public String toString() {
-        return "[E][" + (this.getCompletion() == true ? "X" : " ") + "] " + super.getName()
-                + " (at: " + timing + ")";
+        return "[E][" + (this.getCompletion() ? "X" : " ") + "] "
+                + super.getName() + " (at: " + timing + ")";
     }
 }

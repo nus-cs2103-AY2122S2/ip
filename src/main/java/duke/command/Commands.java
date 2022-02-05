@@ -12,7 +12,7 @@ import duke.storage.Storage;
 public class Commands {
 
     public static final String COMMAND_WORDS = "";
-    private static boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
 
     public boolean isExit() {
         return IS_EXIT;

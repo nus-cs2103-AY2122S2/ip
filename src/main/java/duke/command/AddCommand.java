@@ -15,11 +15,12 @@ public class AddCommand extends Commands {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DEADLINE = "deadline";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Add' Command Executed Unsuccessfully";
+    public static final String FAILURE_MESSAGE
+            = "    'Add' Command Executed Unsuccessfully";
+    private static final boolean IS_EXIT = false;
 
-    private static boolean IS_EXIT = false;
-    private String commandWord;
-    private String arguments; // In the form of user duke.command
+    private final String commandWord;
+    private final String arguments; // In the form of user duke.command
 
     public AddCommand(String commandWord, String arguments) {
         this.commandWord = commandWord;
@@ -41,13 +42,13 @@ public class AddCommand extends Commands {
                     break;
 
                 case COMMAND_EVENT:
-                    createdTaskList.add(new Events(arguments.split(" /at ", 2)[0],
-                            arguments.split(" /at ", 2)[1]));
+                    createdTaskList.add(new Events(arguments.split(" /at ",
+                            2)[0], arguments.split(" /at ", 2)[1]));
                     break;
 
                 case COMMAND_DEADLINE:
-                    createdTaskList.add(new Deadlines(arguments.split(" /by ", 2)[0],
-                            arguments.split(" /by ", 2)[1]));
+                    createdTaskList.add(new Deadlines(arguments.split(" /by ",
+                            2)[0], arguments.split(" /by ", 2)[1]));
                     break;
             }
 
@@ -59,11 +60,13 @@ public class AddCommand extends Commands {
 
         } catch (IndexOutOfBoundsException err) {
             System.out
-                    .println("    Addition of tasks unsuccessful, ensure that you are writing in the correct format.");
+                    .println("    Addition of tasks unsuccessful, "
+                            + "ensure that you are writing in the correct format.");
         } catch (DateTimeParseException err) {
             System.out
                     .println(
-                            "    Addition of tasks unsuccessful, ensure that the date is valid, and goes by the foramt of (YYYY-MM-DD).");
+                            "    Addition of tasks unsuccessful, ensure that the date is valid, " +
+                                    "and goes by the foramt of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
     }

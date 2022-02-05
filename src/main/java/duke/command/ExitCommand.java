@@ -5,11 +5,10 @@ import duke.tasklist.TaskList;
 import duke.storage.Storage;
 
 public class ExitCommand extends Commands {
-
     public static final String COMMAND_WORDS = "bye";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Bye' Command Executed Unsuccessfully";
-    private static boolean IS_EXIT = true;
+    private static final boolean IS_EXIT = true;
 
     @Override
     public boolean isExit() {

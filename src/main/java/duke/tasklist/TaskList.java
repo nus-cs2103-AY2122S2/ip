@@ -31,7 +31,8 @@ public class TaskList {
             Tasks taskData = taskList.get(taskIndexToFind);
             filteredTaskList.add(taskData);
         } catch (IndexOutOfBoundsException err) {
-            System.out.println("    Don't access a duke.task beyond the numeral boundary.");
+            System.out.println("    Don't access a task "
+                    + "beyond the numeral boundary.");
         }
         return filteredTaskList;
     }
@@ -43,13 +44,12 @@ public class TaskList {
                 this.taskList.add(task);
                 System.out.println("    Task has been successfully added:");
                 System.out.println("       " + task.toString() + "\n");
-                System.out.println("    There are " + fileContentCounter() + " tasks in the list.");
+                System.out.println("    There are "
+                        + fileContentCounter() + " tasks in the list.");
                 return true;
             }
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Task index out of bound while deleting duke.task.");
-        } catch (FileNotFoundException err) {
-            System.out.println("    Addition of tasks unsuccessful due to: " + err);
         } catch (IOException err) {
             System.out.println("    Addition of tasks unsuccessful due to: " + err);
         }
@@ -77,9 +77,11 @@ public class TaskList {
             if (storage.writesToDatabase(sb1.toString())) {
                 this.taskList.clear();
                 this.taskList.addAll(newList);
-                System.out.println("     Nice! I've " + (taskCompletion ? "marked this duke.task as completed"
+                System.out.println("     Nice! I've " + (taskCompletion
+                        ? "marked this duke.task as completed"
                         : "unmarked this duke.task as uncompleted"));
-                System.out.println("     " + (taskCompletion ? editTask.completeTask().toString()
+                System.out.println("     " + (taskCompletion
+                        ? editTask.completeTask().toString()
                         : editTask.uncompleteTask().toString()));
                 return true;
             }
@@ -92,7 +94,8 @@ public class TaskList {
     }
 
     // Delete duke.task -> returns duke.task deleted, then returns string to append
-    public ArrayList<Tasks> deletesTask(int taskIndexToDelete, Storage storage) throws IndexOutOfBoundsException {
+    public ArrayList<Tasks> deletesTask(int taskIndexToDelete, Storage storage)
+            throws IndexOutOfBoundsException {
         ArrayList<Tasks> newList = new ArrayList<Tasks>();
         ArrayList<Tasks> returnInfo = new ArrayList<Tasks>();
         StringBuilder sb1 = new StringBuilder("");
@@ -109,13 +112,16 @@ public class TaskList {
                 returnInfo.add(this.taskList.get(taskIndexToDelete));
                 this.taskList.clear();
                 this.taskList.addAll(newList);
-                System.out.println("    I have successfully removed the duke.task from the system:");
+                System.out.println("    I have successfully removed "
+                        + "the duke.task from the system:");
                 System.out.println("       " + deletedTask.toString() + "\n");
                 System.out.println(
-                        String.format("    You have %s tasks left in your list. :)", fileContentCounter()));
+                        String.format("    You have " +
+                                "%s tasks left in your list. :)", fileContentCounter()));
             }
         } catch (IndexOutOfBoundsException err) {
-            System.out.println("    Task index out of bound while deleting duke.task.");
+            System.out.println("    Task index out of bound "
+                    + "while deleting duke.task.");
         } catch (FileNotFoundException err) {
             System.out.println("    Deleting of tasks unsuccessful due to: " + err);
         }
@@ -135,7 +141,8 @@ public class TaskList {
             for (int i = 0; i < taskList.size(); i++) {
                 sb1.append("       " + (i + 1) + ". " + taskList.get(i).toString() + "\n");
             }
-            sb1.append(String.format("\n    You have %s tasks in your list! :)", fileContentCounter()));
+            sb1.append(String.format("\n    You have "
+                    + "%s tasks in your list! :)", fileContentCounter()));
             System.out.println(sb1.toString());
             return true;
         } catch (OutOfMemoryError err) {

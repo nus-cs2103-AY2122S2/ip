@@ -9,7 +9,7 @@ public class ListCommand extends Commands {
     public static final String COMMAND_WORDS = "list";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'List' Command Executed Unsuccessfully";
-    private static boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
 
     @Override
     public boolean isExit() {

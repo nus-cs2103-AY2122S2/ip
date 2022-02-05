@@ -20,32 +20,40 @@ public class Parser {
         }
 
         switch (commandWord) {
-            case AddCommand.COMMAND_TODO:
-                return new AddCommand(commandWord, arguments.toString());
 
-            case AddCommand.COMMAND_EVENT:
-                return new AddCommand(commandWord, arguments.toString());
+        //Fallthrough
+        case AddCommand.COMMAND_TODO:
 
-            case AddCommand.COMMAND_DEADLINE:
-                return new AddCommand(commandWord, arguments.toString());
+        //Fallthrough
+        case AddCommand.COMMAND_EVENT:
 
-            case ExitCommand.COMMAND_WORDS:
-                return new ExitCommand();
+        //Fallthrough
+        case AddCommand.COMMAND_DEADLINE:
+            return new AddCommand(commandWord,
+                    arguments.toString());
 
-            case ListCommand.COMMAND_WORDS:
-                return new ListCommand();
+        //Fallthrough
+        case ExitCommand.COMMAND_WORDS:
+            return new ExitCommand();
 
-            case MarkCommand.COMMAND_WORDS:
-                return new MarkCommand(arguments.toString());
+        //Fallthrough
+        case ListCommand.COMMAND_WORDS:
+            return new ListCommand();
 
-            case UnmarkCommand.COMMAND_WORDS:
-                return new UnmarkCommand(arguments.toString());
+        //Fallthrough
+        case MarkCommand.COMMAND_WORDS:
+            return new MarkCommand(arguments.toString());
 
-            case DeleteCommand.COMMAND_WORDS:
-                return new DeleteCommand(arguments.toString());
+        //Fallthrough
+        case UnmarkCommand.COMMAND_WORDS:
+            return new UnmarkCommand(arguments.toString());
 
-            default:
-                return new HelpCommand();
+        //Fallthrough
+        case DeleteCommand.COMMAND_WORDS:
+            return new DeleteCommand(arguments.toString());
+
+        default:
+            return new HelpCommand();
         }
 
     }

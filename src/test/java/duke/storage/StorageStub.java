@@ -35,7 +35,7 @@ public class StorageStub extends Storage {
     // Erase and rewrite to file method
     public boolean writesToDatabase(String textToAdd) throws FileNotFoundException {
         try {
-            FileWriter fw = new FileWriter(this.databasePath);
+            FileWriter fw = new FileWriter(super.getDatabasePath());
             fw.write(textToAdd);
             fw.close();
             return true;
@@ -49,7 +49,7 @@ public class StorageStub extends Storage {
     // Append to file method
     public boolean appendsToDatabase(String textToAppend) throws IOException {
         try {
-            FileWriter fw = new FileWriter(databasePath, true); // Append instead of rewriting over
+            FileWriter fw = new FileWriter(super.getDatabasePath(), true); // Append instead of rewriting over
             fw.write(textToAppend);
             fw.close();
             return true;
