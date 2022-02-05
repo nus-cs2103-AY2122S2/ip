@@ -112,6 +112,7 @@ public abstract class Task {
      */
     public abstract String taskToSaveString();
 
+
     @Override
     public String toString() {
         return "[" + this.markIfComplete() + "] " + this.description;

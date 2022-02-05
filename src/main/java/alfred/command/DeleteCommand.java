@@ -53,6 +53,8 @@ public class DeleteCommand extends Command {
             throws InvalidInputException,
             InvalidIndexException {
 
+        assert this.arguments != null;
+
         // check only two arguments
         if (arguments.length != 2) {
             throw new InvalidInputException();
@@ -76,6 +78,11 @@ public class DeleteCommand extends Command {
         return out;
     }
 
+    /**
+     * Returns True if command is an Exit Command.
+     *
+     * @return False
+     */
     @Override
     public boolean isExit() {
         return false;

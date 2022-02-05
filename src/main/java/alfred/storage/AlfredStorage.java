@@ -26,7 +26,6 @@ public class AlfredStorage {
      * @param dataPath Data path to where Alfred.txt file should be saved.
      */
     public AlfredStorage(String folderPath, String dataPath) {
-
         this.dataPath = dataPath;
         this.folderPath = folderPath;
         this.taskList = this.loadFromFile();
@@ -51,6 +50,7 @@ public class AlfredStorage {
      * @throws InvalidIndexException if index is out of bounds.
      */
     public void markTask(int taskId) throws InvalidIndexException {
+        assert this.taskList != null;
         this.checkValidListIndex(taskId);
         this.taskList.get(taskId).markComplete();
         this.saveToFile();
@@ -64,6 +64,7 @@ public class AlfredStorage {
      * @throws InvalidIndexException if index is out of bounds.
      */
     public void unmarkTask(int taskId) throws InvalidIndexException {
+        assert this.taskList != null;
         this.checkValidListIndex(taskId);
         this.taskList.get(taskId).markIncomplete();
         this.saveToFile();
@@ -76,6 +77,7 @@ public class AlfredStorage {
      * @throws InvalidIndexException if index is out of bounds.
      */
     public void deleteTask(int taskId) throws InvalidIndexException {
+        assert this.taskList != null;
         this.checkValidListIndex(taskId);
         this.taskList.remove(taskId);
         this.saveToFile();
@@ -90,6 +92,7 @@ public class AlfredStorage {
      *             and outputs with the user.
      */
     public void addTaskAndPrint(Task task, AlfredUserInterface ui) {
+        assert this.taskList != null;
         this.taskList.add(task);
         String out = "Yes sir, I've added this task.\n";
         out += task.toString() + "\n";
@@ -99,18 +102,13 @@ public class AlfredStorage {
     }
 
     /**
-     * Updates the internal data state to add a Task object
-     * to the list and returns the response.
+     * Updates the internal data state to add a Task object.
      *
      * @param task Task object.
-     * @param ui   AlfredInterface object used by Alfred to handle inputs
-     *             and outputs with the user.
      */
     public void addTask(Task task) {
+        assert this.taskList != null;
         this.taskList.add(task);
-        String out = "Yes sir, I've added this task.\n";
-        out += task.toString() + "\n";
-        out += this.summarizeList();
         this.saveToFile();
     }
 
@@ -134,7 +132,7 @@ public class AlfredStorage {
      * @return Formatted output list of tasks.
      */
     public String find(String text) {
-
+        assert this.taskList != null;
         ArrayList<Task> matches = new ArrayList<Task>();
         // iterate through arraylist to find match
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -145,12 +143,13 @@ public class AlfredStorage {
         }
         if (matches.size() == 0) {
             return "None found.";
-        } else {
-            return this.listToString(matches);
         }
+        return this.listToString(matches);
+
     }
 
     private String listToString(ArrayList<Task> taskList) {
+        assert taskList != null;
         String out = "";
         for (int i = 1; i < taskList.size() + 1; i++) {
             out += i + ". " + taskList.get(i - 1).toString() + "\n";
@@ -159,6 +158,7 @@ public class AlfredStorage {
     }
 
     private void checkValidListIndex(int taskId) throws InvalidIndexException {
+        assert this.taskList != null;
         if (taskId >= this.taskList.size() || taskId < 0) {
             throw new InvalidIndexException();
         }
@@ -170,6 +170,7 @@ public class AlfredStorage {
      * @return String description of task list.
      */
     public String summarizeList() {
+        assert this.taskList != null;
         return "Now you have " + this.taskList.size() + " task(s) in the your list.";
     }
 

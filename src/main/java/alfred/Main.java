@@ -2,9 +2,7 @@ package alfred;
 
 import alfred.ui.controller.MainWindow;
 import java.io.IOException;
-
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Alfred alfred = new Alfred();
+    private final Alfred alfred = new Alfred();
 
     @Override
     public void start(Stage stage) {

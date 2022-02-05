@@ -1,6 +1,5 @@
 package alfred.task;
 
-import java.time.LocalDateTime;
 
 /**
  * Encapsulates a T0D0 task.
@@ -24,15 +23,18 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String taskToSaveString() {
         String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
-        return String.join(Task.FORMAT_SPLIT, this.type, mark, this.description);
+        return String.join(Task.FORMAT_SPLIT, ToDo.type, mark, this.description);
     }
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString();
+        return "[" + ToDo.type + "]" + super.toString();
     }
 
 }

@@ -34,16 +34,20 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String taskToSaveString() {
         String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
-        return String.join(Task.FORMAT_SPLIT, this.type, mark, this.description, this.dateAndTime);
+        return String.join(Task.FORMAT_SPLIT, Deadline.type, mark, this.description,
+                this.dateAndTime);
     }
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString() + " (by: "
-                + super.localDateTimeToString(this.dateTime) + ")";
+        return "[" + Deadline.type + "]" + super.toString() + " (by: "
+                + Task.localDateTimeToString(this.dateTime) + ")";
 
     }
 }

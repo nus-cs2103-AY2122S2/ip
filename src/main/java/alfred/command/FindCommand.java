@@ -44,6 +44,9 @@ public class FindCommand extends Command {
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) throws
             MissingInputException {
+
+        assert this.text != null;
+
         // validity check
         if ((this.text.length() < 1) || this.text.split(" ").length == 0) {
             throw new MissingInputException();

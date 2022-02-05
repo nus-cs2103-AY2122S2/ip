@@ -29,6 +29,9 @@ public class AlfredParser {
      */
     public Command parseInput(String input) throws InvalidCommandException,
             IllegalCharacterException {
+
+        assert input != null;
+
         // read in arguments
         String[] arguments = input.split(" ");
         String command = arguments[0];
@@ -37,11 +40,8 @@ public class AlfredParser {
         if (input.contains(Task.FORMAT_SPLIT)) {
             throw new IllegalCharacterException();
         }
-        // LIST
         if ((command.equals("list")) && (arguments.length == 1)) {
             return new ListCommand();
-
-        // (UN)MARK and DELETE
         } else if (command.equals("mark")) {
             return new MarkCommand(input);
         } else if (command.equals("unmark")) {
