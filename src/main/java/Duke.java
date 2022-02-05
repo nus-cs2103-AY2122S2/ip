@@ -28,7 +28,6 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<Task>();
 
         Path newFile;
-//        String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get("../../../data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         try {
@@ -41,7 +40,6 @@ public class Duke {
             newFile = Paths.get("../../../data/duke.txt");
             list = populateList(newFile.toString());
         }
-        System.out.println(newFile.toString());
         while (!nextLine.equals("bye")) {
             System.out.println("__________________________________________________");
             String firstWord = nextLine.split(" ")[0];
