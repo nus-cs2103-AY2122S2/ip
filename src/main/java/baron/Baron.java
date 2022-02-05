@@ -83,6 +83,7 @@ public class Baron {
 
     /**
      * Returns the welcome message with the number of tasks that the user has.
+     *
      * @return the welcome message with the number of tasks that the user has.
      */
     public String getWelcomeMessage() {
