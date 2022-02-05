@@ -32,7 +32,7 @@ public class Duke {
             String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
             Parser parser = new Parser(storage, tasks, ui);
             parser.parse(command);
-            boolean isExitTriggered = parser.getExitTrigger();
+            boolean isExitTriggered = parser.isExitTrigger();
             if (isExitTriggered) {
                 isExit = true;
             }
