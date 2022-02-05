@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that needs to be done before a specific date/time.
@@ -12,8 +11,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate date;
-    protected LocalTime time;
+    public static final String FORMAT = "[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"\n"
+        + "            + \" empty if no time in current task)";
+
+    private final LocalDate date;
+    private final LocalTime time;
 
     /**
      * Constructor for Deadline class
@@ -24,10 +26,11 @@ public class Deadline extends Task {
     public Deadline(String d, LocalDate date) {
         super(d);
         this.date = date;
+        this.time = null;
     }
 
     /**
-     * Constructor for Deadline class
+     * Constructor for Deadline class that include a time reference
      *
      * @param d    a string representing a description of the task
      * @param date the date of the task
@@ -46,10 +49,10 @@ public class Deadline extends Task {
      */
     public String toStringInFileFormat() {
         String stringImplementationInFileFormat = "D|" + this.getStatusIcon() + "|" + this.description + "|"
-            + this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            + this.date.format(YEAR_FORMAT);
 
         if (time != null) {
-            stringImplementationInFileFormat += "|" + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
+            stringImplementationInFileFormat += "|" + this.time.format(TIME_FORMAT);
         }
 
         return stringImplementationInFileFormat;
@@ -62,8 +65,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String dateAndTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        dateAndTime += time == null ? "" : ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String dateAndTime = date.format(OUTPUT_YEAR_FORMAT);
+        dateAndTime += time == null ? "" : ", " + time.format(OUTPUT_TIME_FORMAT);
         return "[D]" + super.toString() + " (by: " + dateAndTime + ")";
     }
 }

@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that starts and ends at a specific date/time.
@@ -12,9 +11,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate date;
-    protected LocalTime timeBeginning;
-    protected LocalTime timeEnd;
+    public static final String FORMAT = "[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm";
+    private final LocalDate date;
+    private final LocalTime timeBeginning;
+    private final LocalTime timeEnd;
 
     /**
      * Constructor for Event class
@@ -39,9 +39,9 @@ public class Event extends Task {
     @Override
     public String toStringInFileFormat() {
         return "E|" + this.getStatusIcon() + "|" + this.description + "|"
-            + this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|"
-            + this.timeBeginning.format(DateTimeFormatter.ofPattern("HH:mm")) + "|"
-            + this.timeEnd.format(DateTimeFormatter.ofPattern("HH:mm"));
+            + this.date.format(YEAR_FORMAT) + "|"
+            + this.timeBeginning.format(TIME_FORMAT) + "|"
+            + this.timeEnd.format(TIME_FORMAT);
     }
 
     /**
@@ -51,9 +51,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateAndTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " from "
-            + timeBeginning.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to "
-            + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String dateAndTime = date.format(OUTPUT_YEAR_FORMAT) + " from "
+            + timeBeginning.format(OUTPUT_TIME_FORMAT) + " to "
+            + timeEnd.format(OUTPUT_TIME_FORMAT);
         return "[E]" + super.toString() + " (at: " + dateAndTime + ")";
     }
 }

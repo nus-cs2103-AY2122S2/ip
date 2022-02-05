@@ -3,7 +3,6 @@ package duke;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Parses the input given from the user and performs the required actions.
@@ -27,101 +26,61 @@ public class Parser {
         Task currTask;
         int index;
 
-        if (message.equalsIgnoreCase("bye")) {
+        if (isExitCommand(message)) {
             return null;
         }
 
-        if (!message.contains(" ")) { //take the first word of the input
-            currMessage = message.toLowerCase();
-        } else {
-            currMessage = message.substring(0, message.indexOf(" ")).toLowerCase();
-        }
+        currMessage = getFirstWord(message);
 
         switch (currMessage) {
         case "help":
-            returnMessage = "Here are the list of commands:\n"
-                + "|list [index]|: Show all the tasks currently in the list\n"
-                + "|mark [index]|: Mark a task as done\n"
-                + "|unmark [index]|: Mark a task as undone\n"
-                + "|delete [index]|: Delete a task\n"
-                + "|find [keyword]|: Show the list of tasks that match keyword\n"
-                + "|todo [description]|: Add a ToDo task. Represents a task without a date/time\n"
-                + "|deadline [Description] /by yyyy-mm-dd|: Add a Deadline Task. Represents a task that must be"
-                + "\n\tcompleted by certain date\n"
-                + "|deadline [Description] /by yyyy-mm-dd/HH:mm|: Add a Deadline task with a time condition.\n"
-                + "|event [Description] /at yyyy-mm-dd/HH:mm/HH:mm|: Add an Event task. Represents a task that"
-                + "\n\tstarts within a specific time range on a specific day "
-                + "\n\t(HH:mm/HH:mm represents Begin/End time)\n";
+            returnMessage = Ui.HELP;
             break;
         case "list":
-            String listOfTasks = tasks.toString();
-
-            returnMessage = "Provided are the tasks currently in your list:\n" + listOfTasks;
+            returnMessage = getListAsString(tasks);
             break;
         case "mark":
             index = getIndexFromMessage(message); //get the index
             currTask = tasks.getTaskAtIndex(index);
             currTask.markDone();
 
-            returnMessage = "Alright then! I've marked that task as done:" + "\n\t" + currTask;
+            returnMessage = markTaskMessage(currTask);
             break;
         case "unmark":
             index = getIndexFromMessage(message); //get the index
             currTask = tasks.getTaskAtIndex(index);
             currTask.markUndone();
 
-            returnMessage = "Alright then! I've marked that task as not done:" + "\n\t" + currTask;
+            returnMessage = unmarkTaskMessage(currTask);
             break;
         case "delete":
             index = getIndexFromMessage(message);
             currTask = tasks.removeTask(index);
             storage.modifyStorage(currTask, ConfirmCodes.DELETION, tasks);
 
-            returnMessage = "As you wish. I've removed the task from your list:" + "\n\t" + currTask
-                + "\nI hope it was nothing important..." + "\n" + getTaskCountMessage(tasks);
+            returnMessage = deleteTaskMessage(currTask, tasks);
             break;
         case "find":
-            int indexOfSpace = message.indexOf(" ");
-            String keyword = message.substring(message.indexOf(" ") + 1).toLowerCase();
-
-            if (keyword.length() < 1 || indexOfSpace == -1) {
-                throw new DukeException("Pardon me, but the body of the find command should not be empty");
-            }
-
-            String foundTasks = tasks.find(keyword);
-
-            if (foundTasks.equals("")) {
-                returnMessage = "My apologies, but no tasks were found for the given keyword.";
-            } else {
-                returnMessage = "I've searched the archives and found these matching tasks in your list:\n"
-                    + tasks.find(keyword);
-            }
+            String keyword = getKeyword(message);
+            returnMessage = getResultsOfFind(keyword, tasks);
             break;
         case "todo":
             currTask = parseMessageContents(message, TaskTypes.TODO);
-
-            tasks.addTask(currTask);
-            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-
-            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask
-                + "\n" + getTaskCountMessage(tasks);
+            addTask(currTask, storage, tasks);
+            returnMessage = addTaskMessage(currTask, tasks);
             break;
         case "deadline":
             currTask = parseMessageContents(message, TaskTypes.DEADLINE);
-            tasks.addTask(currTask);
-            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n"
-                + getTaskCountMessage(tasks);
+            addTask(currTask, storage, tasks);
+            returnMessage = addTaskMessage(currTask, tasks);
             break;
         case "event":
             currTask = parseMessageContents(message, TaskTypes.EVENT);
-            tasks.addTask(currTask);
-            storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n"
-                + getTaskCountMessage(tasks);
+            addTask(currTask, storage, tasks);
+            returnMessage = addTaskMessage(currTask, tasks);
             break;
         default:
-            throw new DukeException("Pardon me, but I did not understand what you said.");
+            throw new DukeException(DukeException.DID_NOT_UNDERSTAND);
         }
         return returnMessage;
     }
@@ -134,57 +93,58 @@ public class Parser {
      * @return Task object
      */
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
-        LocalDate date;
-        LocalTime timeBegin;
-        LocalTime timeEnd;
         String[] messageArr;
-        String description;
-        String dateString;
-        String timeBeginString;
-        String timeEndString;
 
         switch (type) {
         case TODO:
-            messageArr = message.split(" ", 2);
+            messageArr = getMessageArr(message, TaskTypes.TODO);
             throwIfWrongFormat(message, messageArr, TaskTypes.TODO);
+            assert messageArr != null;
             return new ToDo(messageArr[1]);
         case DEADLINE:
-            String messageWithoutCommand = message.substring(message.indexOf(" ") + 1);
-
-            messageArr = messageWithoutCommand.split("/");
+            messageArr = getMessageArr(message, TaskTypes.DEADLINE);
             throwIfWrongFormat(message, messageArr, TaskTypes.DEADLINE);
 
-            description = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
-            dateString = messageArr[1].substring(3);
-            timeBeginString = messageArr.length == 3 ? messageArr[2] : null;
-            date = parseDateFromString(dateString, TaskTypes.DEADLINE);
-            if (timeBeginString == null) {
-                timeBegin = null;
-            } else {
-                timeBegin = parseTimeFromString(timeBeginString, TaskTypes.DEADLINE);
-            }
-
-            return timeBeginString == null ? new Deadline(description, date) //include time only if user included it
-                : new Deadline(description, date, timeBegin);
+            assert messageArr != null;
+            return parseTask(messageArr, TaskTypes.DEADLINE);
         case EVENT:
-            String messageWithoutCommandEvent = message.substring(message.indexOf(" ") + 1);
-
-            messageArr = messageWithoutCommandEvent.split("/");
+            messageArr = getMessageArr(message, TaskTypes.EVENT);
             throwIfWrongFormat(message, messageArr, TaskTypes.EVENT);
 
-            description = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
-            dateString = messageArr[1].substring(3);
-            timeBeginString = messageArr[2];
-            timeEndString = messageArr[3];
-
-            date = parseDateFromString(dateString, TaskTypes.EVENT);
-            timeBegin = parseTimeFromString(timeBeginString, TaskTypes.EVENT);
-            timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
-
-            return new Event(description, date, timeBegin, timeEnd);
+            assert messageArr != null;
+            return parseTask(messageArr, TaskTypes.EVENT);
         default:
-            throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
+            throwInvalidTypeDeclaration();
         }
+        return null; //should not reach here
+    }
+
+    @SuppressWarnings("checkstyle:Regexp")
+    private Task parseTask(String[] messageArr, TaskTypes type) throws DukeException {
+        String description = getDescription(messageArr);
+        String dateString = getDateString(messageArr);
+        String timeBeginString = getTimeBeginString(messageArr, type);
+        String timeEndString = (type == TaskTypes.DEADLINE) ? null : getTimeEndString(messageArr);
+
+        LocalDate date = parseDateFromString(dateString, type);
+        LocalTime timeBegin = parseTimeFromString(timeBeginString, type);
+        LocalTime timeEnd = null;
+
+        if (type == TaskTypes.EVENT) {
+            timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
+            assert timeEnd != null;
+            throwIfEndTimeBeforeStartTime(timeBegin, timeEnd);
+        }
+
+        if (type == TaskTypes.DEADLINE) {
+            return new Deadline(description, date, timeBegin);
+        } else if (type == TaskTypes.EVENT) {
+            return new Event(description, date, timeBegin, timeEnd);
+        } else {
+            throwInvalidTypeDeclaration();
+        }
+
+        return null; //should not reach here
     }
 
     private int getIndexFromMessage(String message) throws DukeException {
@@ -204,6 +164,134 @@ public class Parser {
         return indexOfItem;
     }
 
+    private LocalDate parseDateFromString(String dateString, TaskTypes type) throws DukeException {
+        try {
+            return LocalDate.parse(dateString, Task.YEAR_FORMAT);
+        } catch (DateTimeException e) {
+            if (type == TaskTypes.DEADLINE) {
+                throwWrongDeadlineFormatException();
+            } else if (type == TaskTypes.EVENT) {
+                throwWrongEventFormatException();
+            } else {
+                throwInvalidTypeDeclaration();
+            }
+        }
+        return null; //should not reach here
+    }
+
+    private LocalTime parseTimeFromString(String timeString, TaskTypes type) throws DukeException {
+        try {
+            if (type == TaskTypes.DEADLINE && timeString == null) {
+                return null;
+            } else {
+                return LocalTime.parse(timeString, Task.TIME_FORMAT);
+            }
+        } catch (DateTimeException e) {
+            if (type == TaskTypes.DEADLINE) {
+                throwWrongDeadlineFormatException();
+            } else {
+                throwWrongEventFormatException();
+            }
+        }
+        return null; //should not reach here
+    }
+
+    private String addTaskMessage(Task task, TaskList tasks) {
+        return "Alright then! I've added the task to your list:" + "\n\t" + task + "\n"
+            + getTaskCountMessage(tasks);
+    }
+
+    private String deleteTaskMessage(Task task, TaskList tasks) {
+        return "As you wish. I've removed the task from your list:" + "\n\t" + task
+            + "\nI hope it was nothing important..." + "\n" + getTaskCountMessage(tasks);
+    }
+
+    private String markTaskMessage(Task task) {
+        return "Alright then! I've marked that task as done:" + "\n\t" + task;
+    }
+
+    private String unmarkTaskMessage(Task task) {
+        return "Alright then! I've marked that task as not done:" + "\n\t" + task;
+    }
+
+    private String getResultsOfFind(String keyword, TaskList tasks) {
+        String foundTasks = tasks.find(keyword);
+        if (foundTasks.equals("")) {
+            return "My apologies, but no tasks were found for the given keyword.";
+        } else {
+            return "I've searched the archives and found these matching tasks in your list:\n"
+                + tasks.find(keyword);
+        }
+    }
+
+    private String getFirstWord(String message) {
+        if (!message.contains(" ")) { //if the message is only one word
+            return message.toLowerCase();
+        } else {
+            return message.substring(0, message.indexOf(" ")).toLowerCase();
+        }
+    }
+
+    private String getKeyword(String message) throws DukeException {
+        String keyword = message.substring(message.indexOf(" ") + 1).toLowerCase();
+        throwIfNoKeyword(message, keyword);
+        return keyword;
+    }
+
+    private String getDescription(String[] messageArr) {
+        return messageArr[0].substring(0, messageArr[0].length() - 1); //remove last whitespace
+    }
+
+    private String getDateString(String[] messageArr) {
+        return messageArr[1].substring(3);
+    }
+
+    private String getTimeBeginString(String[] messageArr, TaskTypes type) {
+        if (type == TaskTypes.EVENT || (type == TaskTypes.DEADLINE && containsTimeString(messageArr))) {
+            return messageArr[2];
+        } else {
+            return null;
+        }
+    }
+
+    private String getTimeEndString(String[] messageArr) {
+        return messageArr[3];
+    }
+
+    private String getListAsString(TaskList tasks) {
+        String listOfTasks = tasks.toString();
+        if (listOfTasks.isEmpty()) {
+            return "Excuse me, but the list is empty. Perhaps the archive is incomplete...";
+        } else {
+            return "Provided are the tasks currently in your list:\n" + listOfTasks;
+        }
+    }
+
+    private String[] getMessageArr(String message, TaskTypes types) throws DukeException {
+        if (types == TaskTypes.TODO) {
+            return message.split(" ", 2);
+        } else if (types == TaskTypes.DEADLINE || types == TaskTypes.EVENT) {
+            String messageWithoutCommand = message.substring(message.indexOf(" ") + 1);
+            return messageWithoutCommand.split("/");
+        } else {
+            throwInvalidTypeDeclaration();
+        }
+        return null; //should not reach here
+    }
+
+    private boolean isExitCommand(String message) {
+        return message.equalsIgnoreCase("bye");
+    }
+
+    private boolean containsTimeString(String[] messageArr) {
+        return messageArr.length == 3;
+    }
+
+    private void addTask(Task task, Storage storage, TaskList tasks) throws DukeException {
+        tasks.addTask(task);
+        storage.modifyStorage(task, ConfirmCodes.ADDITION, tasks);
+    }
+
     private void throwIfWrongFormat(String message, String[] messageArr, TaskTypes type) throws DukeException {
         int indexOfSpace = message.indexOf(" ");
         switch (type) {
@@ -215,7 +303,7 @@ public class Parser {
         case DEADLINE:
             if (indexOfSpace == -1) {
                 throwEmptyDescriptionException();
-            } else if (messageArr.length < 2) {
+            } else if (messageArr.length < 2 || !message.contains("by")) {
                 throwWrongDeadlineFormatException();
             } else if (messageArr[1].length() < 4) {
                 throwEmptyDateException();
@@ -224,60 +312,55 @@ public class Parser {
         case EVENT:
             if (indexOfSpace == -1) {
                 throwEmptyDescriptionException();
-            } else if (messageArr.length < 4) {
+            } else if (messageArr.length < 4 || !message.contains("at")) {
                 throwWrongEventFormatException();
             } else if (messageArr[1].length() < 4) {
                 throwEmptyDateException();
             }
             break;
         default:
-            throw new DukeException("Unexpected value: " + type);
+            throwInvalidTypeDeclaration();
         }
     }
-    private LocalDate parseDateFromString(String dateString, TaskTypes type) throws DukeException {
-        try {
-            return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        } catch (DateTimeException e) {
-            if (type == TaskTypes.DEADLINE) {
-                throwWrongDeadlineFormatException();
-            } else {
-                throwWrongEventFormatException();
-            }
+
+    private void throwIfEndTimeBeforeStartTime(LocalTime beginTime, LocalTime endTime) throws DukeException {
+        if (endTime.isBefore(beginTime)) {
+            throw new DukeException("Pardon me, but the end time you have provided me"
+                + " takes place before the begin time. I must say that time travel is...\nnot in my repertoire...");
         }
-        return null; //should not reach here
     }
-    private LocalTime parseTimeFromString(String timeString, TaskTypes type) throws DukeException {
-        try {
-            return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
-        } catch (DateTimeException e) {
-            if (type == TaskTypes.DEADLINE) {
-                throwWrongDeadlineFormatException();
-            } else {
-                throwWrongEventFormatException();
-            }
+
+    private void throwIfNoKeyword(String message, String keyword) throws DukeException {
+        int indexOfSpace = message.indexOf(" ");
+        if (keyword.length() < 1 || indexOfSpace == -1) {
+            throw new DukeException("Pardon me, but the body of the find command should not be empty");
         }
-        return null; //should not reach here
     }
 
     private void throwWrongToDoFormatException() throws DukeException {
         throw new DukeException("Pardon me, but the description of a todo cannot be empty.");
     }
+
     private void throwWrongDeadlineFormatException() throws DukeException {
         throw new DukeException("Pardon me, but the Deadline format is incorrect."
-            + " The format should be:\n\t[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\""
-            + " empty if no time in current task)");
+            + " The format should be:\n\t" + Deadline.FORMAT);
     }
 
     private void throwWrongEventFormatException() throws DukeException {
         throw new DukeException("Pardon me, but the Event format is incorrect."
-            + " The format should be:\n\t[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
+            + " The format should be:\n\t" + Event.FORMAT);
     }
+
     private void throwEmptyDescriptionException() throws DukeException {
-        throw new DukeException("Pardon me, but the description of a deadline/event cannot be empty.");
+        throw new DukeException("Pardon me, but the description cannot be empty.");
     }
 
     private void throwEmptyDateException() throws DukeException {
         throw new DukeException("Pardon me, but the date/time cannot be empty.");
+    }
+
+    private void throwInvalidTypeDeclaration() throws DukeException {
+        throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
     }
 
     private String getTaskCountMessage(TaskList tasks) {
