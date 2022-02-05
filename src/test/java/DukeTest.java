@@ -18,7 +18,7 @@ public class DukeTest {
      * @throws UnknownCommandException
      */
     @Test
-    public void testEventInputParsing() throws RequiredInformationMissingException, UnknownCommandException {
+    public void testEventInputParsing_correctEventInput_correctArrayOfEventInputFields() throws RequiredInformationMissingException, UnknownCommandException {
         ArrayList<String> ls = Parser.parseInput("event brush teeth /at 12am");
         String[] expected = {"event", "brush teeth", "12am"};
         Assertions.assertArrayEquals(expected, ls.toArray());
@@ -30,7 +30,7 @@ public class DukeTest {
      * @throws UnknownCommandException
      */
     @Test
-    public void testDeadlineInputParsing() throws RequiredInformationMissingException, UnknownCommandException {
+    public void testDeadlineInputParsing_correctDeadlineInput_correctArrayOfDeadlineInputFields() throws RequiredInformationMissingException, UnknownCommandException {
         ArrayList<String> ls = Parser.parseInput("deadline brush teeth /by 12am");
         String[] expected = {"deadline", "brush teeth", "12am"};
         Assertions.assertArrayEquals(expected, ls.toArray());
@@ -42,7 +42,7 @@ public class DukeTest {
      * @throws UnknownCommandException
      */
     @Test
-    public void testToDoInputParsing() throws RequiredInformationMissingException, UnknownCommandException {
+    public void testToDoInputParsing_correctTodoInput_correctArrayOfTodoInputFields() throws RequiredInformationMissingException, UnknownCommandException {
         ArrayList<String> ls = Parser.parseInput("todo brush teeth");
         String[] expected = {"todo", "brush teeth"};
         Assertions.assertArrayEquals(expected, ls.toArray());

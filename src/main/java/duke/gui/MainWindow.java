@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        String introMsg = "Hello, I'm Duke, your trusty doggo assistant!\nHere's what i can do:\n\n"
+        String introMessage = "Hello, I'm Duke, your trusty doggo assistant!\nHere's what i can do:\n\n"
                 + "Add a event:\nevent <task name> /at <time & date>\n\n"
                 + "Add a todo task:\ntodo <task name>\n\n"
                 + "Add a deadline:\ndeadline <task name> /at <time & date>\n\n"
@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
                 + "Find tasks matching a keyword:\nfind <task name>\n\n"
                 + "Exit the chat:\nbye";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(introMsg, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(introMessage, dukeImage));
     }
 
     public void setCommandExecutor(CommandExecutor ex) {

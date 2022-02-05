@@ -9,6 +9,15 @@ import duke.exceptions.UnknownCommandException;
  * Class that has methods for handling user input
  */
 public class Parser {
+    //constants representing the index in the input string of the start of required information
+    //to carry out each command's actions
+    private static final int MARK_INFO_INDEX = 5;
+    private static final int UNMARK_INFO_INDEX = 7;
+    private static final int TODO_INFO_INDEX = 5;
+    private static final int EVENT_INFO_INDEX = 5;
+    private static final int DEADLINE_INFO_INDEX = 9;
+    private static final int DELETE_INFO_INDEX = 7;
+    private static final int FIND_INFO_INDEX = 5;
 
     /**
      * Parses the input typed in by user, returning a nicely formatted arraylist containing the command name as first
@@ -27,43 +36,44 @@ public class Parser {
         if (command.equals("list")) {
             parsedInput.add("list");
         } else if (command.equals("mark")) {
-            if (input.length() < 6) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing mark index");
             }
-            parsedInput.add(input.substring(5));
+            parsedInput.add(input.substring(MARK_INFO_INDEX));
 
         } else if (command.equals("unmark")) {
-            if (input.length() < 8) {
+            if (hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing unmark index");
             }
-            parsedInput.add(input.substring(7));
+            parsedInput.add(input.substring(UNMARK_INFO_INDEX));
         } else if (command.equals("todo")) {
-            if (input.length() < 6) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty todo description");
             }
-            parsedInput.add(input.substring(5));
+            parsedInput.add(input.substring(TODO_INFO_INDEX));
         } else if (command.equals("event")) {
-            if (input.length() < 7) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty event description");
             }
             int indexOfStartDate = input.indexOf(" /") + 5;
-            parsedInput.add(input.substring(6, input.indexOf(" /")));
+            parsedInput.add(input.substring(EVENT_INFO_INDEX, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
         } else if (command.equals("deadline")) {
-            if (input.length() < 10) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("empty deadline description");
             }
             int indexOfStartDate = input.indexOf(" /") + 5;
-            parsedInput.add(input.substring(9, input.indexOf(" /")));
+            parsedInput.add(input.substring(DEADLINE_INFO_INDEX, input.indexOf(" /")));
             parsedInput.add(input.substring(indexOfStartDate));
         } else if (command.equals("delete")) {
-            if (input.length() < 8) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing delete index");
             }
-            parsedInput.add(input.substring(7));
+            parsedInput.add(input.substring(DELETE_INFO_INDEX));
         } else if (command.equals("find")) {
-            parsedInput.add(input.substring(5));
+            parsedInput.add(input.substring(FIND_INFO_INDEX));
         } else if (command.equals("bye") || command.equals("list")) {
+            //no additional information for command required
         } else {
             throw new UnknownCommandException("unknown command entered");
         }
@@ -81,9 +91,56 @@ public class Parser {
         if (indexOfWhitespace == -1) {
             //1 word input
             return input;
-        } else {
-            return input.substring(0, indexOfWhitespace);
         }
+
+        return input.substring(0, indexOfWhitespace);
+    }
+
+    /**
+     * Checks for a given command, whether the input from user contains information sufficient to
+     * carry out the task, if so returns true, if not returns false.
+     * @param command command to run
+     * @param input input from user
+     * @return true if input has sufficient information, false if not
+     */
+    public static boolean hasRequiredInformation(String command, String input) {
+        if (command.equals("mark")) {
+            return input.length() > MARK_INFO_INDEX;
+        } else if (command.equals("unmark")) {
+            return input.length() > UNMARK_INFO_INDEX;
+        } else if (command.equals("todo")) {
+            return input.length() > TODO_INFO_INDEX;
+        } else if (command.equals("event")) {
+            if (input.length() <= EVENT_INFO_INDEX) {
+                return false;
+            }
+            //further check that there is a date for this event
+            int indexOfSlash = input.indexOf(" /");
+
+            if (indexOfSlash == -1) {
+                return false;
+            }
+
+            return input.length() > (indexOfSlash + 5);
+        } else if (command.equals("deadline")) {
+            if (input.length() <= DEADLINE_INFO_INDEX) {
+                return false;
+            }
+            //further check that there is a date for this event
+            int indexOfSlash = input.indexOf(" /");
+
+            if (indexOfSlash == -1) {
+                return false;
+            }
+
+            return input.length() > (indexOfSlash + 5);
+        } else if (command.equals("delete")) {
+            return input.length() > DELETE_INFO_INDEX;
+        }
+
+        //code should not reach here, given that we always pass in a valid command to this method.
+        assert "should not reach here" == null;
+        return false;
     }
 }
 
