@@ -3,10 +3,13 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -37,38 +40,39 @@ public class Storage {
                 String status = scanner.next();
                 String description = scanner.nextLine().strip();
                 switch (type) {
-                    case "[T]" :
-                        Todo task = new Todo(description);
+                case "[T]":
+                    Todo task = new Todo(description);
+                    if (status.equals("[X]")) {
+                        task.setDone();
+                    }
+                    tasks.add(task);
+                    break;
+                case "[D]":
+                    String[] by = description.split("by: ");
+                    SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy");
+                    try {
+                        Date date = format.parse(by[1].substring(0, by[1].length() - 1));
+                        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        Deadline deadline = new Deadline(by[0].substring(0, by[0].length() - 2), localDate);
                         if (status.equals("[X]")) {
-                            task.markAsDone();
+                            deadline.setDone();
                         }
-                        tasks.add(task);
-                        break;
-                    case "[D]" :
-                        String[] by = description.split("by: ");
-                        SimpleDateFormat format = new SimpleDateFormat("MMM d yyyy");
-                        try {
-                            Date date = format.parse(by[1].substring(0, by[1].length() - 1));
-                            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                            Deadline deadline = new Deadline(by[0].substring(0, by[0].length() - 2), localDate);
-                            if (status.equals("[X]")) {
-                                deadline.markAsDone();
-                            }
-                            tasks.add(deadline);
-                        } catch (ParseException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-                    case "[E]" :
-                        String[] venue = description.split("at: ");
-                        Event event = new Event(venue[0].substring(0, venue[0].length() - 2), venue[1].substring(0, venue[1].length() - 1));
-                        if (status.equals("[X]")) {
-                            event.markAsDone();
-                        }
-                        tasks.add(event);
-                        break;
-                    default :
-                        break;
+                        tasks.add(deadline);
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case "[E]":
+                    String[] venue = description.split("at: ");
+                    Event event = new Event(venue[0].substring(0, venue[0].length() - 2),
+                            venue[1].substring(0, venue[1].length() - 1));
+                    if (status.equals("[X]")) {
+                        event.setDone();
+                    }
+                    tasks.add(event);
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (IOException e) {
