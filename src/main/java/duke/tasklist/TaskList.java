@@ -2,6 +2,8 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -42,7 +44,7 @@ public class TaskList {
      * @param list ArrayList containg the tasks that you want to list out.
      * @return List of Tasks as a String.
      */
-    private String printTasks(StringBuilder beg, ArrayList<Task> list) {
+    private String printTasks(StringBuilder beg, List<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             beg.append("\t").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
@@ -56,7 +58,7 @@ public class TaskList {
      * @return List of Tasks, that contains the given keyword, as a String.
      */
     public String findKeyword(String keyword) {
-        ArrayList<Task> result = findKeywordHelper(keyword);
+        List<Task> result = findKeywordHelper(keyword);
         StringBuilder output = new StringBuilder("\n\tHere are the matching tasks in your list:\n");
         return printTasks(output, result);
     }
@@ -67,15 +69,11 @@ public class TaskList {
      * @param keyword keyword that the user wants to find.
      * @return List of Tasks that contains the given keyword.
      */
-    private ArrayList<Task> findKeywordHelper(String keyword) {
-        ArrayList<Task> result = new ArrayList<>();
-
-        for (int i = 0; i < this.tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(keyword)) {
-                result.add(tasks.get(i));
-            }
-        }
-
+    private List<Task> findKeywordHelper(String keyword) {
+        List<Task> result =
+                tasks.stream()
+                     .filter(task -> task.getDescription().contains(keyword))
+                     .collect(Collectors.toList());
         return result;
     }
 
@@ -147,16 +145,18 @@ public class TaskList {
     public String markAsDone(String in, boolean canShowMessage) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
+            }
+
+            this.tasks.get(index - 1).setDone(true);
+
+            if (canShowMessage) {
+                return "\n\tNice! I've marked this task as done:\n\t\t"
+                        + this.tasks.get(index - 1).toString() + "\n";
             } else {
-                this.tasks.get(index - 1).setDone(true);
-                if (canShowMessage) {
-                    return "\n\tNice! I've marked this task as done:\n\t\t"
-                            + this.tasks.get(index - 1).toString() + "\n";
-                } else {
-                    return null;
-                }
+                return null;
             }
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
@@ -176,13 +176,14 @@ public class TaskList {
     public String unmarkDone(String in) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
-            } else {
-                this.tasks.get(index - 1).setDone(false);
-                return "\n\tOK, I've marked this task as not done yet:\n\t\t"
-                        + this.tasks.get(index - 1).toString() + "\n";
             }
+
+            this.tasks.get(index - 1).setDone(false);
+            return "\n\tOK, I've marked this task as not done yet:\n\t\t"
+                    + this.tasks.get(index - 1).toString() + "\n";
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
                     + "after typing unmark: unmark <taskNum>");
@@ -201,13 +202,14 @@ public class TaskList {
     public String deleteTask(String in) throws DukeException {
         try {
             int index = Integer.parseInt(in);
+
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
-            } else {
-                Task deleted = tasks.remove(index - 1);
-                return "\n\tNoted. I've removed this task:\n\t\t" + deleted.toString()
-                        + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
             }
+
+            Task deleted = tasks.remove(index - 1);
+            return "\n\tNoted. I've removed this task:\n\t\t" + deleted.toString()
+                    + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
         } catch (NumberFormatException e) {
             throw new DukeWrongInputFormatException("Please input a valid Task number "
                     + "after typing delete: delete <taskNum>");
