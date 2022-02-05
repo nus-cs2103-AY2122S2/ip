@@ -14,7 +14,7 @@ import duke.tasks.Todo;
  * to allow users to track their tasks.
  */
 public class TaskList {
-    private static final String LIST = "Here are the tasks in your list:";
+    private static final String LIST = "Here are the tasks in your list:\n";
     private static final String MARK = "Nice! I've marked this task as done:\n  ";
     private static final String UNMARK = "OK, I've marked this task as not done yet:\n  ";
     private static final String ADDED = "Got it. I've added this task:\n  ";
@@ -22,7 +22,7 @@ public class TaskList {
     private static final String ALREADY_MARKED = "Tasked has already been marked...";
     private static final String ALREADY_UNMARKED = "Task has already been unmarked...";
     private static final String ALREADY_DELETED = "Task has already been deleted...";
-    private static final String MATCH = "Here are the matching tasks in your list:";
+    private static final String MATCH = "Here are the matching tasks in your list:\n";
 
     private final ArrayList<Task> taskList;
 
@@ -55,21 +55,23 @@ public class TaskList {
     /**
      * Prints out the list of tasks in the tasklist.
      */
-    public void listItems() {
-        System.out.println(LIST);
+    public String listItems() {
+        String output = LIST;
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println(i + 1 + "." + this.taskList.get(i));
+            output = output + (i + 1 + "." + this.taskList.get(i)) + "\n";
         }
+        return output;
     }
 
     /**
      * Prints a list of items that matches to the search.
      */
-    public void listItemsMatch() {
-        System.out.println(MATCH);
+    public String listItemsMatch() {
+        String output = MATCH;
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println(i + 1 + "." + this.taskList.get(i));
+            output = output + (i + 1 + "." + this.taskList.get(i)) + "\n";
         }
+        return output;
     }
 
     /**
@@ -78,7 +80,8 @@ public class TaskList {
      * @param taskNumber A String to be parsed into an integer, represents task number.
      * @throws DukeException If task has been marked.
      */
-    public void markTask(String taskNumber) throws DukeException {
+    public String markTask(String taskNumber) throws DukeException {
+        String output = MARK;
         int index = Integer.parseInt(taskNumber) - 1;
         Task taskToMark = this.taskList.get(index);
         if (!taskToMark.getStatusIcon().equals("X")) {
@@ -87,7 +90,8 @@ public class TaskList {
         } else {
             throw new DukeException(ALREADY_MARKED);
         }
-        System.out.println(MARK + taskToMark);
+        output = output + taskToMark;
+        return output;
     }
 
     /**
@@ -96,7 +100,8 @@ public class TaskList {
      * @param taskNumber A String to be parsed into an integer, represents task number.
      * @throws DukeException If task has been unmarked.
      */
-    public void unmarkTask(String taskNumber) throws DukeException {
+    public String unmarkTask(String taskNumber) throws DukeException {
+        String output = UNMARK;
         int num = Integer.parseInt(taskNumber) - 1;
         Task taskToUnmark = this.taskList.get(num);
         if (taskToUnmark.getStatusIcon().equals("X")) {
@@ -105,7 +110,8 @@ public class TaskList {
         } else {
             throw new DukeException(ALREADY_UNMARKED);
         }
-        System.out.println(UNMARK + taskToUnmark);
+        output = output + taskToUnmark;
+        return output;
     }
 
     /**
@@ -113,12 +119,14 @@ public class TaskList {
      *
      * @param description A description of the Todo task.
      */
-    public void addToDoTask(String description) {
+    public String addToDoTask(String description) {
+        String output = ADDED;
         Todo todoItem = new Todo(description);
         this.taskList.add(todoItem);
         int numOfItems = this.taskList.size();
-        System.out.println(ADDED + todoItem);
-        System.out.println("Now you have " + numOfItems + " tasks in the list.");
+        output = output + todoItem + "\n";
+        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -127,12 +135,14 @@ public class TaskList {
      * @param arr A String array containing the components of the user input.
      * @throws DukeException If conversion of the date is wrong in format.
      */
-    public void addDeadlineTask(String[] arr) throws DukeException {
+    public String addDeadlineTask(String[] arr) throws DukeException {
+        String output = ADDED;
         Deadline deadlineItem = new Deadline(arr[0], Parser.convertDate(arr[1]));
         this.taskList.add(deadlineItem);
         int numOfItems = this.taskList.size();
-        System.out.println(ADDED + deadlineItem);
-        System.out.println("Now you have " + numOfItems + " tasks in the list.");
+        output = output + deadlineItem + "\n";
+        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -141,12 +151,14 @@ public class TaskList {
      * @param arr A String array containing the components of the user input.
      * @throws DukeException If conversion of the date is wrong in format.
      */
-    public void addEventTask(String[] arr) throws DukeException {
+    public String addEventTask(String[] arr) throws DukeException {
+        String output = ADDED;
         Event eventItem = new Event(arr[0], Parser.convertDate(arr[1]));
         this.taskList.add(eventItem);
         int numOfItems = this.taskList.size();
-        System.out.println(ADDED + eventItem);
-        System.out.println("Now you have " + numOfItems + " tasks in the list.");
+        output = output + eventItem + "\n";
+        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -155,14 +167,16 @@ public class TaskList {
      * @param taskNumber A String to be parsed into an integer, represents task number.
      * @throws DukeException If the task to be deleted does not exist.
      */
-    public void deleteTask(String taskNumber) throws DukeException {
+    public String deleteTask(String taskNumber) throws DukeException {
         try {
+            String output = REMOVED;
             int index = Integer.parseInt(taskNumber) - 1;
             Task itemToDelete = this.taskList.get(index);
             this.taskList.remove(index);
             int numOfItems = this.taskList.size();
-            System.out.println(REMOVED + itemToDelete);
-            System.out.println("Now you have " + numOfItems + " tasks in the list.");
+            output = output + itemToDelete + "\n";
+            output = output + "Now you have " + numOfItems + " tasks in the list.";
+            return output;
         } catch (IndexOutOfBoundsException error) {
             throw new DukeException(ALREADY_DELETED);
         }
@@ -183,7 +197,7 @@ public class TaskList {
      * @param taskList The tasklist containing all the tasks.
      * @param userInput The String user input containing the key word to search.
      */
-    public void findTask(TaskList taskList, String userInput) {
+    public String findTask(TaskList taskList, String userInput) {
         TaskList foundTasks = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             String stringToSearch = taskList.get(i).getDescription();
@@ -191,7 +205,7 @@ public class TaskList {
                 foundTasks.addGeneralTask(taskList.get(i));
             }
         }
-        foundTasks.listItemsMatch();
+        return foundTasks.listItemsMatch();
     }
 
 }

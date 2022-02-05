@@ -11,7 +11,6 @@ import duke.ui.UserInterface;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private UserInterface userInterface;
 
     /**
      * Creates the Duke object.
@@ -19,46 +18,23 @@ public class Duke {
      * @param filePath The String filePath.
      */
     public Duke(String filePath) {
-        this.userInterface = new UserInterface();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
         try {
             storage.readFile(this.tasks);
         } catch (DukeException e) {
-            userInterface.errorMessage(e);
+            UserInterface.errorMessage(e);
         }
     }
 
-    /**
-     * Runs the logic of the application.
-     */
-    public void run() {
-        userInterface.introMessage();
-        String input = userInterface.readInput();
-        while (!input.equals("bye")) {
-            try {
-                userInterface.lineDivider();
-                Parser.parse(input, this.tasks);
-                this.storage.writeFile(this.tasks);
-                userInterface.lineDivider();
-            } catch (DukeException errorMessage) {
-                userInterface.errorMessage(errorMessage);
-            }
-            input = userInterface.readInput();
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            output = output + Parser.parse(input, this.tasks);
+            this.storage.writeFile(this.tasks);
+        } catch (DukeException errorMesssage) {
+            output = output + UserInterface.errorMessage(errorMesssage);
         }
-        userInterface.byeMessage();
-    }
-
-    protected String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    /**
-     * Executes the running of the application.
-     *
-     * @param args The main method arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        return output;
     }
 }
