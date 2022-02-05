@@ -1,4 +1,8 @@
+
 package duke;
+
+import duke.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -31,9 +35,10 @@ public class Storage {
         //start saving the results for next return
         for (int i = 0; i < listOfInputs.size(); i++) {
             if (i == 0) {
-                writeToFile(listOfInputs.get(i).message(), filePath);
+                writeToFile(listOfInputs.get(i).message() + "\n", filePath);
             } else {
                 listOfInputs.get(i).updateData(filePath);
+                //updateData(listOfInputs.get(i).message(), filePath);
 
             }
         }
@@ -43,16 +48,18 @@ public class Storage {
      * read data from file
      * @param filePath
      */
-    public void readData(String filePath) {
+    public String readData(String filePath) {
+        String message = "";
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+                 message = message + sc.nextLine();
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot read data!!!");
+           return message + "Cannot read data!!!";
         }
+        return message;
     }
 
     /**
@@ -76,9 +83,12 @@ public class Storage {
     public void updateData(String message, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write("\n" + message);
+        //fw.write(message + "\n");
         fw.close();
 
     }
+
+
 
 
 }

@@ -1,4 +1,7 @@
 package duke;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -18,17 +21,32 @@ public class Event extends Task {
     public Event (String description, String at) {
         super(description);
         this.at = at;
-        String[] dateTimeTemp = at.split(" ");
-        this.date = dateTimeTemp[0];
-        this.time = dateTimeTemp[1];
+        if (at.contains(" ")) {
+            String[] dateTimeTemp = at.split(" ");
+            this.date = dateTimeTemp[0];
+            this.time = dateTimeTemp[1];
+        } else {
+            this.date = at;
+            this.time = null;
+        }
     }
 
     @Override
     public String message() {
-        return "E | " + "[" + this.getStatusIcon() + "] "
-                + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+        if (this.time != null) {
+            return "E | " + "[" + this.getStatusIcon() + "] "
+                    + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+        } else {
+            return "E | " + "[" + this.getStatusIcon() + "] "
+                    + super.message() + "(at:" + dateTimeFormat(date) + ")";
+        }
     }
 
+    @Override
+    public String markDone(int currNo) {
+        this.isDone = true;
+        return this.message();
+    }
     /**
      * re-format the date and time
      * @param dateTime
@@ -39,5 +57,12 @@ public class Event extends Task {
         LocalDate d = LocalDate.parse(dateTime, formatter);
 
         return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    @Override
+    public void updateData (String path) throws IOException {
+        FileWriter fw = new FileWriter(path, true);
+        fw.write(this.message() + "\n");
+        fw.close();
     }
 }
