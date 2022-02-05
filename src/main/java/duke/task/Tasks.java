@@ -2,7 +2,7 @@ package duke.task;
 
 //Abstract class Task that Todos, Events, and deadlines inherit from.
 public class Tasks {
-    String name; // Name of duke.task
+    private final String name; // Name of duke.task
     boolean completed; // Completion of duke.task
 
     // Constructor for Task
@@ -27,17 +27,17 @@ public class Tasks {
     }
 
     // Get timing of duke.task - overriden in todos and events
-    String getTiming() {
+    public String getTiming() {
         return "";
     }
 
     // Get timing of duke.task - overriden in todos and events
-    String getDeadline() {
+    public String getDeadline() {
         return "";
     }
 
     // Get name of duke.task
-    String getName() {
+    public String getName() {
         return this.name;
     }
 

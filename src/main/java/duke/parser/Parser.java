@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Commands;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -43,6 +36,9 @@ public class Parser {
 
             case DeleteCommand.COMMAND_WORDS:
                 return new DeleteCommand(arguments.toString());
+
+        case FindCommand.COMMAND_WORDS:
+            return new FindCommand(arguments.toString().split(" ")[0]);
 
             default:
                 return new HelpCommand();

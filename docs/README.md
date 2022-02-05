@@ -25,5 +25,5 @@ Expected outcome:
 Description of the outcome.
 
 ```
-expected output
+expected duke.output
 ```

@@ -19,7 +19,7 @@ public class Deadlines extends Tasks {
     }
 
     // Get deadline of duke.task
-    String getTiming() {
+    public String getTiming() {
         return "(by: " + deadline + ")";
     }
 
