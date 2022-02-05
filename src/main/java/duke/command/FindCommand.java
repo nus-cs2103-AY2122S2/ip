@@ -6,7 +6,7 @@ import duke.DukeException;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 public class FindCommand extends Command {
 
@@ -28,8 +28,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> filteredTaskList = new ArrayList<>();
+        String dukeResponse = "";
         boolean tasksMatchingSearchKey = false;
 
         // cycle through existing tasks & filter tasks
@@ -45,12 +46,13 @@ public class FindCommand extends Command {
         if (tasksMatchingSearchKey) {
             ui.showText("Here are the matching tasks in your list: ");
             for (Task task: filteredTaskList) {
-                ui.showTask(task.toString());
+                dukeResponse += ui.showTask(task.toString());
             }
         } else {
-            ui.showText("Looks like there aren't any matching tasks in your list!");
+            dukeResponse = ui.showText("Looks like there aren't any matching tasks in your list!");
         }
 
+        return dukeResponse;
     }
 
 }

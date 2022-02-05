@@ -1,7 +1,7 @@
 package duke.command;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * ExitCommand represents the user's actions of exiting the Duke program.
@@ -23,9 +23,9 @@ public class ExitCommand extends Command {
      * @param storage The Storage object for saving & loading tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         super.active = false;
+        return ui.showGoodbye();
     }
 
     /**

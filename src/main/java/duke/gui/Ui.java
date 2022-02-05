@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.gui;
 import java.util.Scanner;
 
 /**
@@ -58,10 +58,10 @@ public class Ui {
     /**
      * Method to bid goodbye to the user, when the user wants to exit Duke.
      */
-    public void showGoodbye() {
+    public String showGoodbye() {
         // Jarvis says good bye & the scanner is closed
-        showText("Goodbye for now. \n");
         sc.close();
+        return showText("Goodbye for now. \n");
     }
 
     /**
@@ -81,30 +81,30 @@ public class Ui {
      * Method to print a text to screen.
      * @param text String of text to be printed.
      */
-    public void showText(String text) {
-        System.out.println(String.format("%s%s", indentationText, text));
+    public String showText(String text) {
+        return String.format("%s%s", indentationText, text);
     }
 
     /**
      * Method to print a task to screen.
      * @param task String of task to be printed.
      */
-    public void showTask(String task) {
-        System.out.println(String.format("%s%s", indentationTaskStatus, task));
+    public String showTask(String task) {
+        return String.format("%s%s", indentationTaskStatus, task);
     }
 
     /**
      * Method to show a line on the screen.
      */
-    public void showLine() {
-        System.out.println(String.format("%s%s", indentationBase, divider));
+    public String showLine() {
+        return String.format("%s%s", indentationBase, divider);
     }
 
     /**
      * Method to show an error on the screen.
      * @param errorMessage String of errorMessage to be printed.
      */
-    public void showError(String errorMessage) {
-        System.err.println(String.format("%s%s", indentationText, errorMessage));
+    public String showError(String errorMessage) {
+        return String.format("%s%s", indentationText, errorMessage);
     }
 }

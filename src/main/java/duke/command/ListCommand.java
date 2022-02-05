@@ -2,7 +2,7 @@ package duke.command;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * ListCommand represents the user's actions of listing all existing tasks.
@@ -24,15 +24,18 @@ public class ListCommand extends Command {
      * @param storage The Storage object for saving & loading tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String dukeResponse = "";
+
         if (taskList.isEmpty()) {
             ui.showText("Your list is empty");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                ui.showText((i + 1) + ". " + task.toString());
+                dukeResponse += ui.showText((i + 1) + ". " + task.toString());
             }
         }
+        return dukeResponse;
     }
 
     /**

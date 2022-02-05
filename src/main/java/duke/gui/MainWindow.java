@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,7 +21,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private SampleGui2 duke;
+    private Duke duke;
+    private boolean firstUserChat = true;
+    private String dukeResponse;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -30,7 +33,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(SampleGui2 d) {
+    public void setDuke(Duke d) {
         duke = d;
     }
 
@@ -41,11 +44,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox2.getUserDialog(input, userImage),
-                DialogBox2.getDukeDialog(response, dukeImage)
-        );
+
+        if (firstUserChat) {
+            dukeResponse = duke.welcomeUser(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(dukeResponse, dukeImage)
+            );
+        } else {
+            dukeResponse = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(dukeResponse, dukeImage)
+            );
+        }
+        firstUserChat = (firstUserChat == true) ? false : firstUserChat;
+
         userInput.clear();
     }
 

@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private SampleGui2 duke = new SampleGui2();
+    private Duke duke = new Duke("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

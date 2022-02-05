@@ -6,7 +6,7 @@ import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * AddCommand represents the user's actions of adding Todo, Event & Deadline tasks.
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
      * @throws DukeException Error if the user specifies an invalid task index.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         // check if the user's input is just whitespaces
         if (description.trim().length() == 0) {
@@ -41,13 +41,13 @@ public class AddCommand extends Command {
         }
 
         Task task;
+        String dukeResponse = "";
 
         switch (super.commandType) {
         case TODO:
             task = new Todo(description, false);
             taskList.add(task);
-            ui.showText("Noted. I've added this task: ");
-            ui.showTask(task.toString());
+            dukeResponse = ui.showText("Noted. I've added this task: ") + ui.showTask(task.toString());
             break;
         case EVENT:
             // Fallthrough
@@ -73,10 +73,9 @@ public class AddCommand extends Command {
                 }
 
                 taskList.add(task);
-                ui.showText("Noted. I've added this task: ");
-                ui.showText(task.toString());
+                dukeResponse = ui.showText("Noted. I've added this task: ") + ui.showText(task.toString());
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                dukeResponse = ui.showError(e.getMessage());
             }
             break;
         case BYE:
@@ -96,6 +95,7 @@ public class AddCommand extends Command {
         }
 
         storage.updateFileContents(taskList);
+        return dukeResponse;
     }
 
     /**

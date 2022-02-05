@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.command.Parser;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * Represents a Duke chatbot.
@@ -18,6 +18,7 @@ public class Duke {
     private String taskFilePath;
     private Ui ui;
     private Storage storage;
+    private String dukeResponse;
 
     /**
      * Constructor to initialize Duke & its various components.
@@ -59,13 +60,33 @@ public class Duke {
             try {
                 String userInput = ui.readCommand();
                 Command c = Parser.parse(userInput);
-                c.execute(taskList, ui, storage);
+                String output = c.execute(taskList, ui, storage);
+                System.out.println("-> " + output);
                 active = c.isActive();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                String out = ui.showError(e.getMessage());
+                System.out.println("-> " + out);
             }
         }
 
+    }
+
+    /**
+     * Reads user's input & executes corresponding commands.
+     * @return
+     */
+    public String getResponse(String userInput) {
+        try {
+            Command c = Parser.parse(userInput);
+            dukeResponse = c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            dukeResponse = e.getMessage();
+        }
+        return dukeResponse;
+    }
+
+    public String welcomeUser(String userInput) {
+        return "welcome Sam!";
     }
 
 }

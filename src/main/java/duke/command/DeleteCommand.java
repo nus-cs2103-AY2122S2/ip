@@ -3,7 +3,7 @@ import duke.DukeException;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * DeleteCommand representst the user's action of deleting a task.
@@ -29,7 +29,9 @@ public class DeleteCommand extends Command {
      * @param storage The Storage object for saving & loading tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+
+        String dukeResponse = "";
         try {
             // check if the user input an int
             if (!taskIndexString.trim().matches("\\d+")) {
@@ -44,13 +46,13 @@ public class DeleteCommand extends Command {
             }
 
             Task task = taskList.remove(taskIndex);
-            ui.showText("Okay, I've deleted this task");
-            ui.showTask(task.toString());
+            dukeResponse = ui.showText("Okay, I've deleted this task") + ui.showTask(task.toString());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            dukeResponse = ui.showError(e.getMessage());
         }
 
         storage.updateFileContents(taskList);
+        return dukeResponse;
     }
 
     /**

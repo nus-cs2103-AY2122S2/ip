@@ -2,7 +2,7 @@ package duke.command;
 import duke.DukeException;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * Abstract class to represent the framework of a Command.
@@ -23,7 +23,7 @@ public abstract class Command {
 
     /**
     * Returns a boolean reflecting if the current chat session with Duke is active or not.
-    * @return boolean Boolean indicatinf if the chat session is active.
+    * @return boolean indicating if the chat session is active.
     */
     public abstract boolean isActive();
 
@@ -34,6 +34,6 @@ public abstract class Command {
      * @param ui The Ui object interacting with the user.
      * @param storage The Storage object for loading & saving of user's tasks.
     */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
 }

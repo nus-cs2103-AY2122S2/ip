@@ -3,7 +3,7 @@ import duke.DukeException;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.gui.Ui;
 
 /**
  * MarkCommand represents the user's actions of marking/unmarking tasks.
@@ -34,7 +34,8 @@ public class MarkCommand extends Command {
      * @throws DukeException Error if the user missed a task index.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String dukeResponse = "";
 
         // when the user input has the "mark" command & an integer
         if (description.toLowerCase().matches(super.commandType.getRegex())) {
@@ -49,22 +50,23 @@ public class MarkCommand extends Command {
                 Task task = taskList.get(taskIndex);
                 if (mark) {
                     task.markAsDone();
-                    ui.showText("Okay, marking this task as done:");
+                    dukeResponse += ui.showText("Okay, marking this task as done:");
                 } else {
                     task.markAsUndone();
-                    ui.showText("Okay, marking this task as not done yet:");
+                    dukeResponse += ui.showText("Okay, marking this task as not done yet:");
                 }
 
-                ui.showTask(task.toString());
+                dukeResponse += ui.showTask(task.toString());
 
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                dukeResponse = ui.showError(e.getMessage());
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
         }
 
         storage.updateFileContents(taskList);
+        return dukeResponse;
     }
 
     /**
