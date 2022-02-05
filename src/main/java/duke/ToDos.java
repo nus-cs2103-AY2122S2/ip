@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * task to be done
+ */
 public class ToDos extends Task {
 
     public ToDos(String d) {
@@ -17,3 +20,4 @@ public class ToDos extends Task {
         return "[T]" + super.toString();
     }
 }
+

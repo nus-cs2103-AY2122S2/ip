@@ -1,6 +1,9 @@
 package duke;
 
-public class Event extends Task{
+/**
+ * class for Events
+ */
+public class Event extends Task {
     protected String place;
 
     /**
@@ -30,12 +33,13 @@ public class Event extends Task{
      * Method to return the location of task to be held at
      * @return A string representing the location of task
      */
-    public String getPlace(){
+    public String getPlace() {
         return this.place;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.toString() + " (at: " + place + ") ";
     }
 }
+

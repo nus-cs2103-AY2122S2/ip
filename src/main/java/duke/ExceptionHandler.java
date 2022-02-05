@@ -3,8 +3,8 @@ package duke;
 /**
  * Exceptions for duke errors
  */
-public class Exception_handler extends Exception {
-    public Exception_handler(String message) {
+public class ExceptionHandler extends Exception {
+    public ExceptionHandler(String message) {
         super(message);
     }
 

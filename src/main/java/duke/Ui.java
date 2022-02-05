@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * class that takes care of ui
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -21,6 +24,9 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * shows welcome message
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,11 +38,11 @@ public class Ui {
         System.out.println("What can I do for you?");
     }
 
-    public void println(String message){
+    public void println(String message) {
         System.out.println(message);
     }
 
-    public void println(Task task){
+    public void println(Task task) {
         System.out.println(task);
     }
 

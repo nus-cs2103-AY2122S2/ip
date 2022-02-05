@@ -8,19 +8,19 @@ import java.time.format.DateTimeParseException;
  * to understand user input commands
  */
 public class Parser {
-    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Method to parse input
      * @param input input string
      * @return a command
-     * @throws Exception_handler
+     * @throws ExceptionHandler
      */
-    public static Command parse(String input) throws Exception_handler {
+    public static Command parse(String input) throws ExceptionHandler {
         String[] temp = input.split(" ");
         if (temp[0].equals("todo")) {
             if (temp.length < 2) {
-                throw new Exception_handler("The description of a todo cannot be empty.");
+                throw new ExceptionHandler("The description of a todo cannot be empty.");
             }
             String temp2 = "";
             for (int i = 1; i < temp.length; i++) {
@@ -29,7 +29,7 @@ public class Parser {
             return new AddCommand(new ToDos(temp2));
         } else if (temp[0].equals("event")) {
             if (temp.length <= 2) {
-                throw new Exception_handler("The description of a event cannot be empty.");
+                throw new ExceptionHandler("The description of a event cannot be empty.");
             }
 
             String time = "";
@@ -49,7 +49,7 @@ public class Parser {
             return new AddCommand(new Event(str, time));
         } else if (temp[0].equals("deadline")) {
             if (temp.length <= 2) {
-                throw new Exception_handler("The description of a deadline cannot be empty.");
+                throw new ExceptionHandler("The description of a deadline cannot be empty.");
             }
             String temp2 = "";
             String time = "";
@@ -69,30 +69,30 @@ public class Parser {
             try {
                 dateTime = LocalDateTime.parse(time.trim(), dtf);
             } catch (DateTimeParseException e) {
-                throw new Exception_handler("Please enter deadline in dd/mm/yyyy HHmm format");
+                throw new ExceptionHandler("Please enter deadline in dd/mm/yyyy HHmm format");
             }
             return new AddCommand(new Deadline(temp2, dateTime));
-        } else if(temp[0].equals("bye")) {
+        } else if (temp[0].equals("bye")) {
             return new ExitCommand();
-        } else if(temp[0].equals("mark")) {
-            if(temp.length > 2) {
-                throw new Exception_handler("Invalid index");
+        } else if (temp[0].equals("mark")) {
+            if (temp.length > 2) {
+                throw new ExceptionHandler("Invalid index");
             }
             return new DoneCommand(Integer.parseInt(temp[1]) - 1);
-        } else if(temp[0].equals("list")) {
+        } else if (temp[0].equals("list")) {
             return new ListCommand();
-        } else if(temp[0].equals("delete")) {
-            if (temp.length>2) {
-                throw new Exception_handler("Invalid index");
+        } else if (temp[0].equals("delete")) {
+            if (temp.length > 2) {
+                throw new ExceptionHandler("Invalid index");
             }
             return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
         } else if (temp[0].equals("find")) {
-            if(temp.length > 2) {
-                throw new Exception_handler("Invalid keyword");
+            if (temp.length > 2) {
+                throw new ExceptionHandler("Invalid keyword");
             }
             return new FindCommand(temp[1]);
         } else {
-            throw new Exception_handler("I'm sorry, but I don't know what that means :-(");
+            throw new ExceptionHandler("I'm sorry, but I don't know what that means :-(");
         }
     }
 }

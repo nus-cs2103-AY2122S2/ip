@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * class to delete commands
+ */
 public class DeleteCommand extends Command {
     private int index;
 
@@ -18,13 +21,13 @@ public class DeleteCommand extends Command {
      * @param taskList a list to store the tasks
      * @param ui to display output
      * @param storage to store tasks
-     * @throws Exception_handler
+     * @throws ExceptionHandler
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ExceptionHandler, IOException {
         if (index < 0 || index >= taskList.getSize()) {
-            throw new Exception_handler("Index out of range");
+            throw new ExceptionHandler("Index out of range");
         }
         Task temp = taskList.removeTask(index);
         System.out.println("Noted. I've removed this task:");
@@ -37,7 +40,7 @@ public class DeleteCommand extends Command {
      * Method to check for exit command
      * @return A boolean to check if an exit command is entered
      */
-    public boolean isExit() {
+    public static boolean isExit() {
         return false;
     }
 }

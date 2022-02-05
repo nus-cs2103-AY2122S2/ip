@@ -11,17 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class
+ */
 public class Storage {
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private String filePath;
-    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * method to load tasks from file
-     * @return a List<Task> which has tasks loaded from the file
+     * @return a list of tasks loaded from files
      */
     public List<Task> load() {
         List<Task> tempList = new ArrayList<>();
@@ -31,24 +34,22 @@ public class Storage {
             while (fileScanner.hasNextLine()) {
                 String[] token = fileScanner.nextLine().split("\\|");
                 if (token.length <= 2) {
-                    throw new Exception_handler("Invalid line");
+                    throw new ExceptionHandler("Invalid line");
                 }
-                if(token[0].equals("T")){
+                if (token[0].equals("T")) {
                     tempList.add(new ToDos(token[2], token[1]));
-                } else if(token[0].equals("D")) {
+                } else if (token[0].equals("D")) {
                     tempList.add(new Deadline(token[2], token[1], LocalDateTime.parse(token[3], dtf)));
-                } else if(token[0].equals("E")) {
+                } else if (token[0].equals("E")) {
                     tempList.add(new Event(token[2], token[1], token[3]));
                 } else {
-                    throw new Exception_handler("Invalid task type");
+                    throw new ExceptionHandler("Invalid task type");
                 }
             }
             return tempList;
-        }
-        catch(Exception_handler de){
+        } catch (ExceptionHandler de) {
             System.out.println(de);
-        }
-        catch(IOException ie){
+        } catch (IOException ie) {
             System.out.println("IOException");
         }
         return tempList;

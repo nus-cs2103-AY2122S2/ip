@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * contains task list
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -14,14 +17,20 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public Task removeTask(int index) throws Exception_handler {
+    /**
+     * method to remove task in the list
+     * @param index task to be removed
+     * @return a list of task
+     * @throws ExceptionHandler
+     */
+    public Task removeTask(int index) throws ExceptionHandler {
         if (index < 0 || index >= taskList.size()) {
-            throw new Exception_handler("Invalid index");
+            throw new ExceptionHandler("Invalid index");
         }
         return taskList.remove(index - 1);
     }
 
-    public List<Task> getListOfTasks(){
+    public List<Task> getListOfTasks() {
         return taskList;
     }
 
@@ -29,11 +38,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-//    public Task removeTask(int index){
-//        return taskList.remove(index);
-//    }
-
-    public int getSize(){
+    public int getSize() {
         return taskList.size();
     }
 }

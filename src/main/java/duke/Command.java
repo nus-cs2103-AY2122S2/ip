@@ -9,12 +9,14 @@ public abstract class Command {
     /**
      *Abstract method which executes commands
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws ExceptionHandler, IOException;
 
     /**
-     *Abstract boolean method to check for exit command
+     * Abstract boolean method to check for exit command
      */
-    public abstract boolean isExit();
+    public static boolean isExit() {
+        return false;
+    }
 }
 
 

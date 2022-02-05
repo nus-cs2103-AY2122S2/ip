@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * class to mark command as done
+ */
 public class DoneCommand extends Command {
     private int index;
 
@@ -14,16 +17,17 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute the delete command
+     * execute delete command
      * @param taskList a list to add all the tasks
      * @param ui to display output
      * @param storage to store task
-     * @throws Exception_handler, IOException if error
+     * @throws IOException
+     * @throws ExceptionHandler
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, ExceptionHandler {
         if (index < 0 || index > taskList.getSize() - 1) {
-            throw new Exception_handler("Invalid task number");
+            throw new ExceptionHandler ("Invalid task number");
         }
         taskList.getListOfTasks().get(index).setDone();
         storage.writeToFile(taskList.getListOfTasks());
@@ -35,8 +39,9 @@ public class DoneCommand extends Command {
      * Method to check for exit command
      * @return A boolean to check if an exit command is entered
      */
-    public boolean isExit() {
+    public static boolean isExit() {
         return false;
     }
 }
+
 

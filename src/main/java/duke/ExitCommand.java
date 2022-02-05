@@ -1,15 +1,18 @@
 package duke;
 
-public class ExitCommand extends Command{
+/**
+ * class for exiting
+ */
+public class ExitCommand extends Command {
     /**
      * Execute exit command
      * @param taskList list to store all tasks
      * @param ui display output
      * @param storage store tasks
-     * @throws Exception_handler
+     * @throws ExceptionHandler
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ExceptionHandler {
         ui.println("Bye. Hope to see you again soon!");
     }
 
@@ -17,7 +20,7 @@ public class ExitCommand extends Command{
      * Method to check for exit command
      * @return A boolean to check if an exit command is entered
      */
-    public boolean isExit(){
+    public static boolean isExit() {
         return true;
     }
 }

@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDateTime;
 
+/**
+ * set deadline on task
+ */
 public class Deadline extends Task {
     protected LocalDateTime due;
 
@@ -10,10 +13,10 @@ public class Deadline extends Task {
      * @param d for task
      * @param due deadline
      */
-    public Deadline(String d, LocalDateTime due){
+    public Deadline(String d, LocalDateTime due) {
         super(d);
         this.due = due;
-        this.type= "D";
+        this.type = "D";
     }
 
     /**
@@ -22,10 +25,10 @@ public class Deadline extends Task {
      * @param done check for done task
      * @param due deadline
      */
-    public Deadline(String d, String done, LocalDateTime due){
-        super(d,done);
+    public Deadline(String d, String done, LocalDateTime due) {
+        super(d, done);
         this.due = due;
-        this.type= "D";
+        this.type = "D";
     }
 
     /**
@@ -33,7 +36,7 @@ public class Deadline extends Task {
      * @return a string which represents the time
      */
     public String getDue() {
-        return due.format(OUT_DTF);
+        return due.format(out_dtf);
     }
 
     /**
@@ -42,7 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due.format(OUT_DTF) +") ";
+        return "[D]" + super.toString() + " (by: " + due.format(out_dtf) + ")";
     }
 
 }

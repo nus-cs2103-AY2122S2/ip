@@ -5,14 +5,14 @@ import java.io.IOException;
 /**
  * add tasks
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     /**
      * Constructor for AddCommand
      * @param task to be added to the task list
      */
-    public AddCommand(Task task){
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -20,11 +20,11 @@ public class AddCommand extends Command{
      * @param taskList a list to store all tasks
      * @param ui to display output
      * @param storage to store task
-     * @throws Exception_handler
+     * @throws ExceptionHandler
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception_handler, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(task);
         ui.println("Got it. I've added this task:");
         ui.println(task);
@@ -36,7 +36,7 @@ public class AddCommand extends Command{
      * Method to check for exit command
      * @return A boolean to check if an exit command is entered
      */
-    public boolean isExit(){
+    public static boolean isExit() {
         return false;
     }
 }

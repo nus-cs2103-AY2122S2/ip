@@ -1,7 +1,5 @@
 package duke;
-
 import java.time.format.DateTimeFormatter;
-
 /**
  * parent class for task
  */
@@ -9,7 +7,7 @@ public class Task {
     protected String d;
     protected String type;
     protected boolean isDone;
-    protected final DateTimeFormatter OUT_DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected final DateTimeFormatter out_dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * constructor for Task
@@ -27,7 +25,7 @@ public class Task {
      */
     public Task(String d, String done) {
         this.d = d;
-        if(done.equals("1")) {
+        if (done.equals("1")) {
             this.isDone = true;
         } else {
             this.isDone = false;
@@ -43,10 +41,9 @@ public class Task {
     }
 
     public String getIsDone() {
-        if(isDone) {
+        if (isDone) {
             return "1";
-        }
-        else{
+        } else {
             return "0";
         }
     }
