@@ -9,20 +9,36 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-
+/**
+ * Class {@code Storage} for storing task into TaskList
+ */
 public class Storage {
     ArrayList<Task> taskList = new ArrayList<>();
 
-    // Overloaded Constructor with filepath
+    /**
+     * Overloaded Constructor with filepath
+     *
+     * @param filePath filePath to File for storing
+     */
     public Storage(String filePath) {
         loadTask(taskList, filePath);
     }
 
+
+    /**
+     * Return all task stored within File.
+     * @return ArrayList of current stored Task
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    // Reusable code for loading task into arrayList
+    /**
+     * Method to load all task from File, by supplied filePath.
+     *
+     * @param taskList Current session's TaskList
+     * @param filePath FilePath for where File is stored.
+     */
     public void loadTask(ArrayList<Task> taskList, String filePath) {
         String path = "src\\main\\java\\data\\duke.txt";
         path = path.replace("\\", "/");
@@ -67,6 +83,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to save all Task in given ArrayList of Tasks to File.
+     *
+     * @param taskList ArrayList of current session's Task.
+     */
     // Reusable code for writing into duke.txt task list
     public void saveToTaskList(ArrayList<Task> taskList) {
         String path = "src\\main\\java\\data\\duke.txt";

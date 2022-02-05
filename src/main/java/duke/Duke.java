@@ -1,17 +1,29 @@
 package duke;
 import java.util.Scanner;
-
+/**
+ * Main driver class for Duke.
+ */
 public class Duke {
     private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+
+    /**
+     * Constructor of Duke, creating a new Duke.
+     * Setup Ui, Storage and TaskList.
+     * @param filePath filePath of Storage of TaskList
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.getTaskList());
     }
 
+
+    /**
+     * Main Driver Method to run program until exit command is called.
+     */
     public void run() {
         ui.start();
         boolean isExit = false;
@@ -27,6 +39,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to start Duke.
+     *
+     * @param args Command Line Argument not used in this iteration of the program.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

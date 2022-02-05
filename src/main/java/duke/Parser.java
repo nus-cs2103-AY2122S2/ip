@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A Parser that make sense of user commands.
+ */
 public class Parser {
 
         private final Storage storage;
@@ -16,6 +19,14 @@ public class Parser {
         private final ArrayList<Task> taskListArr;
         private boolean isExit;
 
+    /**
+     * Constructor for {@code Parser} object.
+     * Initiate Setup for Parser, which requires Storage, TaskList, and Ui.
+     *
+     * @param storage Current Storage
+     * @param taskListObj Current TaskList
+     * @param ui Ui Implementation
+     */
         public Parser(Storage storage, TaskList taskListObj, Ui ui) {
             this.taskListObj = taskListObj;
             this.taskListArr = taskListObj.getTaskList();
@@ -25,6 +36,12 @@ public class Parser {
             this.isExit = false;
         }
 
+
+    /**
+     * Parse User Input, routing input to the correct action.
+     *
+     * @param command String Value of User Input
+     */
         public void parse(String command) {
             command = command.trim().strip();
             if (command.equals("bye")) {
@@ -90,6 +107,11 @@ public class Parser {
             }
         }
 
+    /**
+     * Method to check if exitTrigger is triggered.
+     *
+     * @return Exit Trigger as a boolean
+     */
         public boolean getExitTrigger() {
             return isExit;
         }
