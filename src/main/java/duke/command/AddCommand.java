@@ -54,7 +54,7 @@ public class AddCommand extends Commands {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Tasks> createdTaskList = new ArrayList<Tasks>();
+        ArrayList<Tasks> createdTaskList = new ArrayList<>();
         try {
             switch (commandWord) {
                 case COMMAND_TODO:
@@ -86,7 +86,7 @@ public class AddCommand extends Commands {
             System.out
                     .println(
                             "    Addition of tasks unsuccessful, ensure that the date is valid, " +
-                                    "and goes by the foramt of (YYYY-MM-DD).");
+                                    "and goes by the format of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
     }
