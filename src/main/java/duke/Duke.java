@@ -31,8 +31,8 @@ public class Duke {
     /**
      * Returns a String containing the response based on user input.
      *
-     * @param input the user input
-     * @return String containing the response based on user input
+     * @param input The user input.
+     * @return String containing the response based on user input.
      */
     String getResponse(String input) {
         input = input.toLowerCase().trim();
