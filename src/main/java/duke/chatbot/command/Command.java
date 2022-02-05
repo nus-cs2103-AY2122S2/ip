@@ -1,8 +1,8 @@
 package duke.chatbot.command;
 
-import duke.data.TaskList;
-
 import java.util.ArrayList;
+
+import duke.data.TaskList;
 
 /**
  * @author Jiaaa-yang
@@ -68,10 +68,10 @@ public abstract class Command {
             command = new DeleteTaskCommand(name, args, taskList);
             break;
         case "mark":
-            command = new MarkTaskCommand(name, args, taskList);
+            command = new MarkTaskCommand(name, args, MarkTaskCommand.MarkType.DONE, taskList);
             break;
         case "unmark":
-            command = new UnmarkTaskCommand(name, args, taskList);
+            command = new MarkTaskCommand(name, args, MarkTaskCommand.MarkType.UNDONE, taskList);
             break;
         case "find":
             command = new FindCommand(name, args, taskList);
