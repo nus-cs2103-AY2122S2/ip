@@ -21,7 +21,13 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Initialises a storage object.
+     *
+     * @param filePath A file path to a text file where data will be stored.
+     */
     public Storage(String filePath) {
+        assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
         this.filePath = filePath;
     }
 
@@ -31,6 +37,8 @@ public class Storage {
      * @return An array list of tasks.
      */
     public ArrayList<Task> load() {
+        assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
+
         ArrayList<Task> taskList = new ArrayList<Task>();
         File f = new File(filePath);
 
@@ -96,6 +104,7 @@ public class Storage {
      * @param taskList The task list to be saved.
      */
     public void save(ArrayList<Task> taskList) {
+        assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
         File f = new File(filePath);
         String directoryName = filePath.replace(f.getName(), "");
         File directory = new File(directoryName);

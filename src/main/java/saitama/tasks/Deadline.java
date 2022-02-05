@@ -23,12 +23,12 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws InvalidFormatException {
         super(description);
-        String[] time = by.split("/");
-        if (time.length < 3) {
+        String[] date = by.split("/");
+        if (date.length < 3) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
         }
         try {
-            LocalDate deadline = LocalDate.parse(time[2] + "-" + time[1] + "-" + time[0]);
+            LocalDate deadline = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
             this.deadline = deadline;
         } catch (DateTimeParseException e) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
@@ -45,12 +45,12 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) throws InvalidFormatException {
         super(description, isDone);
-        String[] time = by.split("/");
-        if (time.length < 3) {
+        String[] date = by.split("/");
+        if (date.length < 3) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
         }
         try {
-            LocalDate deadline = LocalDate.parse(time[2] + "-" + time[1] + "-" + time[0]);
+            LocalDate deadline = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
             this.deadline = deadline;
         } catch (DateTimeParseException e) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");

@@ -1,4 +1,6 @@
-package saitama;
+package saitama.ui;
+
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import saitama.Saitama;
 import saitama.exceptions.SaitamaException;
 
 /**
@@ -24,11 +27,14 @@ public class MainWindow extends AnchorPane {
 
     private Saitama saitama;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/King.jpg"));
-    private Image saitamaImage = new Image(this.getClass().getResourceAsStream("/images/Saitama.jpg"));
-    private Image saitamaExceptionImage = new Image(this.getClass().getResourceAsStream(
-            "/images/SaitamaException.jpg"));
-    private Image initialSaitamaImage = new Image(this.getClass().getResourceAsStream("/images/InitialSaitama.jpg"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/King.jpg")));
+    private final Image saitamaImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/Saitama.jpg")));
+    private final Image saitamaExceptionImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream(
+            "/images/SaitamaException.jpg")));
+    private final Image initialSaitamaImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/InitialSaitama.jpg")));
 
     /**
      * Initialises the MainWindow.

@@ -139,21 +139,21 @@ public class Parser {
 
         String taskType = splitCommand[0];
         String taskArguments = splitCommand[1];
-        String[] taskArgumentsList;
-        String taskDescription;
-        Task newTask;
+
+        assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
+                : "Parser detected invalid task type to add!";
 
         switch (taskType) {
         case "TODO":
-            newTask = new ToDo(taskArguments);
+            Task newTask = new ToDo(taskArguments);
             return new AddCommand(newTask);
         case "DEADLINE":
-            taskArgumentsList = taskArguments.split(" /by ", 2);
+            String[] taskArgumentsList = taskArguments.split(" /by ", 2);
             if (taskArgumentsList.length < 2) {
                 throw new InvalidFormatException("You need to specify "
                         + "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
             }
-            taskDescription = taskArgumentsList[0];
+            String taskDescription = taskArgumentsList[0];
             String deadline = taskArgumentsList[1];
             newTask = new Deadline(taskDescription, deadline);
             return new AddCommand(newTask);
@@ -167,6 +167,7 @@ public class Parser {
             newTask = new Event(taskDescription, location);
             return new AddCommand(newTask);
         default:
+            //Should never happen since we asserted that the task type is valid
             throw new InvalidCommandException();
         }
     }
