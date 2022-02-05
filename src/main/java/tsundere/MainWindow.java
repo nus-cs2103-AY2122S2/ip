@@ -25,12 +25,20 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
     private Image tsundereImage = new Image(this.getClass().getResourceAsStream("/images/Tsundere1.jpg"));
 
+    /**
+     * Initializes with a DialogBox with intro.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getTsundereDialog("Hmph, it's you again...", tsundereImage, false));
     }
 
+    /**
+     * Sets the Tsundere property to input Tsundere.
+     *
+     * @param d input Tsundere.
+     */
     public void setTsundere(Tsundere d) {
         tsundere = d;
     }
@@ -47,7 +55,7 @@ public class MainWindow extends AnchorPane {
         boolean isChain = false;
         if (lines.length > 3) {
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-            for (int i = 0; i < lines.length; i+=3) {
+            for (int i = 0; i < lines.length; i += 3) {
                 String s = lines[i];
                 if (i + 1 < lines.length) {
                     s = s + "\n" + lines[i + 1];

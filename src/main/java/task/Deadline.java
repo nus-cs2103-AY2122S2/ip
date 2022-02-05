@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * a type of task that contains due date
+ * A type of task that contains due date.
  */
 public class Deadline extends Task {
 
@@ -14,10 +14,10 @@ public class Deadline extends Task {
     protected String strBy;
 
     /**
-     * Create a new Deadline class
+     * Creates a new Deadline class.
      *
-     * @param description string of the description
-     * @param strBy string of the due date
+     * @param description string of the description.
+     * @param strBy string of the due date.
      */
     public Deadline(String description, String strBy) {
         super(description);
@@ -31,9 +31,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the save file.
      *
-     * @return string format for the save file
+     * @return string format for the save file.
      */
     @Override
     public String saveString() {
@@ -41,9 +41,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the printing.
      *
-     * @return string format for the save file
+     * @return string format for the printing.
      */
     @Override
     public String toString() {

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * a type of task that contains date
+ * A type of task that contains date.
  */
 public class Event extends Task {
 
@@ -14,10 +14,10 @@ public class Event extends Task {
     protected String strAt = "";
 
     /**
-     * Create a new Event class
+     * Creates a new Event class.
      *
-     * @param description string of the description
-     * @param strAt string of the date
+     * @param description string of the description.
+     * @param strAt string of the date.
      */
     public Event(String description, String strAt) {
         super(description);
@@ -31,9 +31,9 @@ public class Event extends Task {
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the save file.
      *
-     * @return string format for the save file
+     * @return string format for the save file.
      */
     @Override
     public String saveString() {
@@ -42,9 +42,9 @@ public class Event extends Task {
 
 
     /**
-     * string format for printing on the UI
+     * Returns string format for printing.
      *
-     * @return string format for printing on the UI
+     * @return string format for printing.
      */
     @Override
     public String toString() {

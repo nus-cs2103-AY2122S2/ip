@@ -9,17 +9,17 @@ import command.ListCommand;
 import command.MarkCommand;
 
 /**
- * Parser that parse input into commands
+ * Parses input into commands.
  */
 public class Parser {
 
     /**
-     * parse input into commands by look at keywords
+     * Parse input into commands by look at keywords.
      *
-     * @param s input string by the users
-     * @return commands for execution
-     * @throws TsundereException for incorrect input string format
-     * @throws NumberFormatException for incorrect input integer format
+     * @param s input string by the users.
+     * @return commands for execution.
+     * @throws TsundereException for incorrect input string format.
+     * @throws NumberFormatException for incorrect input integer format.
      */
     public static Command parse(String s) throws TsundereException, NumberFormatException {
 

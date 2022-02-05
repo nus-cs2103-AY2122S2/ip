@@ -1,6 +1,7 @@
 package tsundere;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,11 @@ public class Main extends Application {
 
     private Tsundere tsundere = new Tsundere();
 
+    /**
+     * starts the GUI for the chattingBot
+     *
+     * @param stage for the GUI
+     */
     @Override
     public void start(Stage stage) {
         try {

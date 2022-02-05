@@ -4,26 +4,26 @@ import task.TaskList;
 import tsundere.Storage;
 
 /**
- * Find tasks that contain user input keyword
+ * Finds tasks that contain user input keyword.
  */
 public class FindCommand extends Command {
 
     protected String body;
 
     /**
-     * Create a new FindCommand class
+     * Creates a new FindCommand class.
      *
-     * @param s userinput keyword
+     * @param s userinput keyword.
      */
     public FindCommand(String s) {
         this.body = s;
     }
 
     /**
-     * Execute finding of keyword by using t.findTask
+     * Executes finding of keyword by using t.findTask.
      *
-     * @param t TaskList for managing and adding tasks
-     * @param s Storage for saving to file
+     * @param t TaskList for managing and adding tasks.
+     * @param s Storage for saving to file.
      */
     public String execute(TaskList t, Storage s) {
         String[] st = this.body.split(" ");
@@ -37,9 +37,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Always return false as it is not an ExitCommand
+     * Always return false as it is not an ExitCommand.
      *
-     * @return false
+     * @return false always because it is not an ExitCommand.
      */
     public boolean isExit() {
         return false;

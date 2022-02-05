@@ -4,15 +4,15 @@ import command.Command;
 import task.TaskList;
 
 /**
- * A chatbot that manages tasks and stores them in data/tasks.txt
+ * A chatbot that manages tasks and stores them in data/tasks.txt.
  */
 public class Tsundere {
+    private static final String FILE_PATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
-    private static String FILE_PATH = "data/tasks.txt";
 
     /**
-     * A chatbot that manages tasks and stores them in data/tasks.txt
+     * Creates a Tsundere object with a new Storage and TaskList.
      */
     public Tsundere() {
         storage = new Storage(FILE_PATH);
@@ -24,8 +24,7 @@ public class Tsundere {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a string by parsing the input into command and executes the command.
      */
     public String getResponse(String input) {
         try {

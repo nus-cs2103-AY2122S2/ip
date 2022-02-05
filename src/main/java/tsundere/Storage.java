@@ -16,25 +16,25 @@ import task.Task;
 import task.ToDo;
 
 /**
- * Storage for managing save file
+ * Storage for managing save file.
  */
 public class Storage {
 
     protected String savePath;
 
     /**
-     * create a new storage class
+     * Creates a new storage class.
      *
-     * @param s path to the save file
+     * @param s path to the save file.
      */
     public Storage(String s) {
         this.savePath = System.getProperty("user.dir") + "/" + s;
     }
 
     /**
-     * save the tasks into the save file
+     * Saves the tasks into the save file.
      *
-     * @param textToAdd the tasks for saving
+     * @param textToAdd the tasks for saving.
      */
     public void saveFile(String textToAdd) {
 
@@ -57,10 +57,10 @@ public class Storage {
     }
 
     /**
-     * read the save file and return the list of tasks read
+     * Reads the save file and return the list of tasks read.
      *
-     * @return the list of saved task
-     * @throws TsundereException if the save file is corrupted
+     * @return the list of saved task.
+     * @throws TsundereException if the save file is corrupted.
      */
     public List<Task> load() throws TsundereException {
         List<Task> emptyTasks = new ArrayList<>();
@@ -73,7 +73,7 @@ public class Storage {
             return emptyTasks;
         }
         Scanner c = new Scanner(returnStr);
-        int countLst = 0;
+        int i = 0;
         while (c.hasNextLine()) {
             String strLine = c.nextLine();
             String[] strWords = strLine.split("[|]");
@@ -100,10 +100,10 @@ public class Storage {
             }
 
             if (strWords[1].equals("1")) {
-                emptyTasks.get(countLst).markDone();
+                emptyTasks.get(i).markDone();
             }
 
-            countLst++;
+            i++;
 
         }
         c.close();

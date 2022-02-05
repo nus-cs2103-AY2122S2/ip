@@ -1,23 +1,23 @@
 package task;
 
 /**
- * a type of task with no date
+ * A type of task with no date.
  */
 public class ToDo extends Task {
 
     /**
-     * Create a new ToDo class
+     * Creates a new ToDo class.
      *
-     * @param description string of the description
+     * @param description string of the description.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the save file.
      *
-     * @return string format for the save file
+     * @return string format for the save file.
      */
     @Override
     public String saveString() {
@@ -25,9 +25,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the save file.
      *
-     * @return string format for the save file
+     * @return string format for the save file.
      */
     @Override
     public String toString() {

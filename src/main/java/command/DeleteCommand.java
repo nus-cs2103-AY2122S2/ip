@@ -5,7 +5,7 @@ import tsundere.Storage;
 import tsundere.TsundereException;
 
 /**
- * Delete task in tasklist and storage saves it
+ * Deletes task in tasklist and saves it in storage.
  */
 public class DeleteCommand extends Command {
     protected int num;
@@ -14,12 +14,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete command to add the task into the tasklist and store it using the Storage
+     * Deletes the task in the tasklist and stores it using the storage.
      *
-     * @param t TaskList for managing and adding tasks
-     * @param u UI for displaying text
-     * @param s Storage for saving to file
-     * @throws TsundereException exception for invalid number
+     * @param t TaskList for managing and adding tasks.
+     * @param s Storage for saving to file.
+     * @throws TsundereException exception for invalid number.
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
         if (t.getCount() < this.num || this.num <= 0) {
@@ -31,6 +30,11 @@ public class DeleteCommand extends Command {
         return rs;
     }
 
+    /**
+     * Determines if the class is ExitCommand.
+     *
+     * @return false always because it is not an ExitCommand.
+     */
     public boolean isExit() {
         return false;
     }

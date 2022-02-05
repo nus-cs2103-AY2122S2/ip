@@ -8,7 +8,7 @@ import tsundere.Storage;
 import tsundere.TsundereException;
 
 /**
- * Add a new task into tasklist and storage saves it
+ * Add a new task into tasklist and storage saves it.
  */
 public class AddCommand extends Command {
     enum Type {
@@ -17,25 +17,25 @@ public class AddCommand extends Command {
         EVENT
     }
 
-    protected Type ty;
+    protected Type type;
     protected String body;
 
     /**
-     * Create a new AddCommand
+     * Create a new AddCommand.
      *
-     * @param s string to determine Type of command
-     * @param body string description of the task
+     * @param s string to determine Type of command.
+     * @param body string description of the task.
      */
     public AddCommand(String s, String body) {
         switch (s) {
         case "TODO":
-            this.ty = Type.TODO;
+            this.type = Type.TODO;
             break;
         case "DEADLINE":
-            this.ty = Type.DEADLINE;
+            this.type = Type.DEADLINE;
             break;
         case "EVENT":
-            this.ty = Type.EVENT;
+            this.type = Type.EVENT;
             break;
         default:
         }
@@ -43,16 +43,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute the add command to add the task into the tasklist and store it using the Storage
+     * Executes the add command to add the task into the tasklist and stores it using the Storage.
      *
-     * @param t TaskList for managing and adding tasks
-     * @param u UI for displaying text
-     * @param s Storage for saving to file
-     * @throws TsundereException for incorrect input format
+     * @param t TaskList for managing and adding tasks.
+     * @param s Storage for saving to file.
+     * @throws TsundereException for incorrect input format.
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
         String[] splitStr;
-        switch (this.ty) {
+        switch (this.type) {
         case TODO:
             t.addTask(new ToDo(body));
             break;
@@ -82,9 +81,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Determine if the class is ExitCommand.
+     * Determines if the class is ExitCommand.
      *
-     * @return False always because it is not an ExitCommand
+     * @return false always because it is not an ExitCommand.
      */
     public boolean isExit() {
         return false;

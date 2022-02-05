@@ -1,7 +1,7 @@
 package task;
 
 /**
- * a task which is inherited by ToDo, Deadline or Event
+ * A task which is inherited by ToDo, Deadline or Event.
  */
 public class Task {
 
@@ -9,9 +9,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     *  Create a new Task class
+     *  Creates a new Task class.
      *
-     * @param description string of the description
+     * @param description string of the description.
      */
     public Task(String description) {
         this.description = description;
@@ -19,41 +19,41 @@ public class Task {
     }
 
     /**
-     * determine if the task is done
+     * Determines if the task is done.
      *
-     * @return X if task is done, else " "
+     * @return X if task is done, else " ".
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
-     * mark the task is done by setting isDone to true
+     * Marks the task is done by setting isDone to true.
      */
     public void markDone() {
         isDone = true;
     }
 
     /**
-     * mark the task is not done by setting isDone to false
+     * Marks the task is not done by setting isDone to false.
      */
     public void markNotDone() {
         isDone = false;
     }
 
     /**
-     * string format for the save file
+     * Returns string format for the save file.
      *
-     * @return string format for the save file
+     * @return string format for the save file.
      */
     public String saveString() {
         return "X" + "|" + (this.isDone ? "1" : "0") + "|" + this.description;
     }
 
     /**
-     * string format for printing on the UI
+     * Returns string format for printing.
      *
-     * @return string format for printing on the UI
+     * @return string format for printing.
      */
     @Override
     public String toString() {

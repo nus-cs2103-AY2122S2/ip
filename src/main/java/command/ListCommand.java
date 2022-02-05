@@ -4,11 +4,11 @@ import task.TaskList;
 import tsundere.Storage;
 
 /**
- * List all tasks from tasklist and uses UI to print it
+ * Lists all tasks from tasklist and uses UI to print it.
  */
 public class ListCommand extends Command {
     /**
-     * List all tasks from tasklist and uses UI to print it
+     * Lists all tasks from tasklist and uses UI to print it.
      *
      * @param t TaskList for managing and adding tasks
      * @param s Storage for saving to file
@@ -18,9 +18,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Determine if the class is ExitCommand.
+     * Determines if the class is ExitCommand.
      *
-     * @return False always because it is not an ExitCommand
+     * @return False always because it is not an ExitCommand.
      */
     public boolean isExit() {
         return false;

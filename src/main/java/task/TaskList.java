@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * manage the list of tasks
+ * Manages the list of tasks.
  */
 public class TaskList {
     private List<Task> tasks;
     private int count;
 
     /**
-     * Create a new TaskList class
+     * Creates a new TaskList class.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Create a new TaskList class with input list of Tasks
+     * Creates a new TaskList class with input list of Tasks.
      *
-     * @param inputTks input list of tasks from reading the save file
+     * @param inputTks input list of tasks from reading the save file.
      */
     public TaskList(List<Task> inputTks) {
         tasks = inputTks;
@@ -28,9 +28,9 @@ public class TaskList {
     }
 
     /**
-     * add a new task into the list of task
+     * Adds a new task into the list of task.
      *
-     * @param tk input task
+     * @param tk input task.
      */
     public void addTask(Task tk) {
         tasks.add(tk);
@@ -38,9 +38,9 @@ public class TaskList {
     }
 
     /**
-     * delete a task in the list of task
+     * Deletes a task in the list of task.
      *
-     * @param num index + 1 of the task to be deleted
+     * @param num index + 1 of the task to be deleted.
      */
     public void delete(int num) {
         tasks.remove(num - 1);
@@ -48,46 +48,46 @@ public class TaskList {
     }
 
     /**
-     * mark the task as done
+     * Marks the task as done.
      *
-     * @param num index + 1 of the task to be marked
+     * @param num index + 1 of the task to be marked.
      */
     public void markTask(int num) {
         tasks.get(num - 1).markDone();
     }
 
     /**
-     * mark the task as not done
+     * Marks the task as not done.
      *
-     * @param num index + 1 of the task to be unmarked
+     * @param num index + 1 of the task to be unmarked.
      */
     public void unmarkTask(int num) {
         tasks.get(num - 1).markNotDone();
     }
 
     /**
-     * get the string format of a task
+     * Gets the string format of a task.
      *
-     * @param num index + 1 for the task
-     * @return the string format of the task
+     * @param num index + 1 for the task.
+     * @return the string format of the task.
      */
     public String getTaskStr(int num) {
         return tasks.get(num - 1).toString();
     }
 
     /**
-     * get the total number of task in the tasklist
+     * Gets the total number of task in the tasklist.
      *
-     * @return a number which is the total number of task in the tasklist
+     * @return a number which is the total number of task in the tasklist.
      */
     public int getCount() {
         return count;
     }
 
     /**
-     * return a string with all the task in the task list in string format
+     * Returns a string with all the task in the task list in string format.
      *
-     * @return a string with all the task in the task list in string format
+     * @return a string with all the task in the task list in string format.
      */
     public String listTasks() {
         if (count == 0) {
@@ -105,9 +105,9 @@ public class TaskList {
     }
 
     /**
-     * convert the list of tasks to string for file IO
+     * Converts the list of tasks to string for file IO.
      *
-     * @return a string of all the tasks in correct format for the save file
+     * @return a string of all the tasks in correct format for the save file.
      */
     public String tasksToString() {
         String strReturn = "";
@@ -122,10 +122,10 @@ public class TaskList {
     }
 
     /**
-     * find the tasks that contain keywords input by user
+     * Finds the tasks that contain keywords input by user.
      *
-     * @param toFind the keyword by user to find
-     * @return String of the found tasks
+     * @param toFind the keyword by user to find.
+     * @return String of the found tasks.
      */
     public String findTask(String... toFind) {
         String s = "";
