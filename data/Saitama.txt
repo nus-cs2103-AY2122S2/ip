@@ -4,3 +4,5 @@ D 1 CS2103T /by 30/01/2022
 E 1 birthday /at my house
 D 0 cs2105 /by 22/12/2022
 T 0 OP Presentation
+D 0 cs2103t zzz /by 20/12/2022
+T 0 eat

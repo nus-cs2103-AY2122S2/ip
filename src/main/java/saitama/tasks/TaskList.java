@@ -29,7 +29,8 @@ public class TaskList {
      * @param taskNumber The task number of the task to be marked.
      */
     public void markTask(int taskNumber) {
-        Task task = this.get(taskNumber);
+        assert taskNumber <= numOfTasks() : "Mark task number exceeds the number of tasks in TaskList";
+        Task task = this.getTask(taskNumber);
         task.markAsDone();
     }
 
@@ -39,7 +40,8 @@ public class TaskList {
      * @param taskNumber The task number of the task to be unmarked.
      */
     public void unmarkTask(int taskNumber) {
-        Task task = this.get(taskNumber);
+        assert taskNumber <= numOfTasks() : "Unmark task number exceeds the number of tasks in TaskList";
+        Task task = this.getTask(taskNumber);
         task.markAsUndone();
     }
 
@@ -49,6 +51,7 @@ public class TaskList {
      * @param taskNumber The task number to be deleted.
      */
     public void delete(int taskNumber) {
+        assert taskNumber <= numOfTasks() : "Delete task number exceeds the number of tasks in TaskList";
         taskList.remove(taskNumber - 1);
     }
 
@@ -58,7 +61,8 @@ public class TaskList {
      * @param taskNumber The task number ot get.
      * @return The given task number.
      */
-    public Task get(int taskNumber) {
+    public Task getTask(int taskNumber) {
+        assert taskNumber <= numOfTasks() : "Get task number exceeds the number of tasks in TaskList";
         return taskList.get(taskNumber - 1);
     }
 

@@ -19,6 +19,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(task);
+        assert taskList.getTask(taskList.numOfTasks()).equals(task) : "Add command failed to add task!";
         return ui.showAddTask(task, taskList);
     }
 

@@ -19,6 +19,7 @@ public class Saitama {
      */
     public Saitama(String filePath) {
         ui = new Ui();
+        assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }

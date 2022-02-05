@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        Task task = taskList.get(taskNumber);
+        Task task = taskList.getTask(taskNumber);
         taskList.unmarkTask(taskNumber);
         return ui.showUnmarkTask(task, taskList);
     }

@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        Task task = taskList.get(taskNumber);
+        Task task = taskList.getTask(taskNumber);
         taskList.markTask(taskNumber);
         return ui.showMarkTask(task, taskList);
     }
