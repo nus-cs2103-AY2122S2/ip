@@ -6,17 +6,17 @@ package duke;
  */
 public class Event extends Task {
 
-    protected String at;
+    protected String dueAt;
 
     /**
      * Constructor for {@code Event}
      *
      * @param description Description of the Event Task
-     * @param at Location of the Event Task
+     * @param dueAt Location of the Event Task
      */
-    public Event(String description, String at) {
+    public Event(String description, String dueAt) {
         super(description);
-        this.at = at;
+        this.dueAt = dueAt;
     }
 
     /**
@@ -35,6 +35,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + dueAt + ")";
     }
 }

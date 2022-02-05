@@ -56,7 +56,7 @@ public class Parser {
             } else if (command.startsWith("unmark")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
                 taskListObj.unmark(value);
-            } else if(command.startsWith("todo")) {
+            } else if (command.startsWith("todo")) {
                 try {
                     Todo todoTask = new Todo(command.substring(5));
                     taskListObj.addTask(todoTask);
@@ -112,7 +112,7 @@ public class Parser {
      *
      * @return Exit Trigger as a boolean
      */
-        public boolean getExitTrigger() {
+        public boolean isExitTrigger() {
             return isExit;
         }
 }
