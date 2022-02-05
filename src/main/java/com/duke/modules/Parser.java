@@ -32,7 +32,7 @@ public class Parser {
         if (strArr.length != 1) {
             str = string.substring(string.indexOf(" ") + 1);
         }
-        switch (strArr[0]) {
+        switch (strArr[0].toLowerCase()) {
         case "":
             cmdResult = new CommandResult("*crickets*");
             break;

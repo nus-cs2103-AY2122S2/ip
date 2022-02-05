@@ -81,7 +81,7 @@ public class TaskList {
      * @throws IOException On failure of read or write operations.
      */
     public void markTask(int i) throws IOException {
-        taskList.get(i).setStatus(true);
+        taskList.get(i).setDone(true);
         storage.saveList(taskList);
     }
 
@@ -92,7 +92,7 @@ public class TaskList {
      * @throws IOException On failure of read or write operations.
      */
     public void unmarkTask(int i) throws IOException {
-        taskList.get(i).setStatus(false);
+        taskList.get(i).setDone(false);
         storage.saveList(taskList);
     }
 

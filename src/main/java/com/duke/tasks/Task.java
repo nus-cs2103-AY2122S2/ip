@@ -1,7 +1,7 @@
 package com.duke.tasks;
 
 public class Task {
-    protected boolean status;
+    protected boolean isDone;
     protected String description;
 
     public static enum TaskType { TODO, DEADLINE, EVENT }
@@ -12,15 +12,15 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isDone = false;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setDone(boolean done) {
+        this.isDone = done;
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean getDone() {
+        return isDone;
     }
 
     public String getDescription() {
@@ -32,7 +32,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (status ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     public String getSaveDescription() {

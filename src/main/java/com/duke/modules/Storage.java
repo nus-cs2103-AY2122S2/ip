@@ -40,7 +40,7 @@ public class Storage {
      * @throws IOException On failure of read or write operations.
      */
     public boolean saveList(ArrayList<Task> taskList) throws IOException {
-        boolean success = false;
+        boolean isSuccess = false;
         File file = new File(this.directoryPath + this.listFile);
         file.getParentFile().mkdirs();
         file.createNewFile();
@@ -54,8 +54,8 @@ public class Storage {
         }
 
         bufferedWriter.close();
-        success = true;
-        return success;
+        isSuccess = true;
+        return isSuccess;
     }
 
 
@@ -82,19 +82,19 @@ public class Storage {
                 switch (task[0]) {
                 case "Todo":
                     Todo todoTask = new Todo(task[2]);
-                    todoTask.setStatus((task[1].equals("1") ? true : false));
+                    todoTask.setDone((task[1].equals("1") ? true : false));
                     taskList.add(todoTask);
                     break;
                 case "Deadline":
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
                     LocalDateTime dateTime = LocalDateTime.parse(task[3], dateTimeFormatter);
                     Deadline deadlineTask = new Deadline(task[2], dateTime);
-                    deadlineTask.setStatus((task[1].equals("1") ? true : false));
+                    deadlineTask.setDone((task[1].equals("1") ? true : false));
                     taskList.add(deadlineTask);
                     break;
                 case "Event":
                     Event eventTask = new Event(task[2], task[3]);
-                    eventTask.setStatus((task[1].equals("1") ? true : false));
+                    eventTask.setDone((task[1].equals("1") ? true : false));
                     taskList.add(eventTask);
                     break;
                 default:

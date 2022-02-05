@@ -106,7 +106,6 @@ public class CommandAdd extends Command {
      */
     private String taskAdder(String type, String args)
             throws DukeInvalidArgumentException, DateTimeParseException, IOException {
-        String message = "";
         Task task = null;
         Task.TaskType taskType = taskIdentifier(type, args);
         switch (taskType) {
@@ -130,5 +129,4 @@ public class CommandAdd extends Command {
         return String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list",
                 task.toString(), taskList.getTaskListSize());
     }
-
 }
