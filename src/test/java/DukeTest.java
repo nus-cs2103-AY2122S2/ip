@@ -1,9 +1,10 @@
-package duke;
-import org.junit.jupiter.api.Test;
+//import org.testng.annotations.Test;
 import java.io.IOException;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.*;
 import org.junit.jupiter.api.Test;
 
 public class DukeTest {
@@ -14,7 +15,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TaskListAddTest() throws Exception_handler{
+    public void TaskListAddTest() throws Exception_handler {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDos("todo walk dog"));
         assertEquals("todo walk dog", taskList.getListOfTasks().get(0).getDescription());
