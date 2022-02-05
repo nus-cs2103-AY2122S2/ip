@@ -106,18 +106,20 @@ public class Storage {
         for (Task task: taskList.getTasks()) {
             String taskText = "";
             // set event type
-            if (task.getEventType().equals(Type.EVENT))
+            if (task.getEventType().equals(Type.EVENT)) {
                 taskText += "E,";
-            else if (task.getEventType().equals(Type.TODO))
+            } else if (task.getEventType().equals(Type.TODO)) {
                 taskText += "T,";
-            else if (task.getEventType().equals(Type.DEADLINE))
+            } else if (task.getEventType().equals(Type.DEADLINE)) {
                 taskText += "D,";
+            }
 
             // set task completion status
-            if (task.getIsDone())
+            if (task.getIsDone()) {
                 taskText += "1,";
-            else
+            } else {
                 taskText += "0,";
+            }
 
             // set task name & timing
             if (task.getEventType().equals(Type.TODO)) {
