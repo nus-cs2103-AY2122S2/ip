@@ -1,0 +1,21 @@
+delete
+delete 1
+list
+todo
+todo buy book
+deadline
+deadline finish homework
+deadline  /by Saturday
+deadline finish homework /by 2022-01-01 06:00
+blah
+boo
+event meet Prof /at 2022-08-25 16:00
+event festival /at
+list
+mark 2
+mark 3
+unmark 3
+mark 4
+delete 2
+list
+bye

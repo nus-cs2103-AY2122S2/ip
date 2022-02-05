@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Greetings from Ann
+What can I do for you?
+Oops! Please use the following format:
+delete [task number]
+Oops! Currently, you have no tasks :)
+Currently, you have no tasks :)
+Oops! Please add a description for the todo!
+Alright! I've added this task:
+[T][ ] buy book
+Now there is 1 task in your list.
+Oops! Please use the following format:
+deadline [content] /by [deadline]
+Oops! Please use the following format:
+deadline [content] /by [deadline]
+Oops! Please add a description for the deadline!
+Alright! I've added this task:
+[D][ ] finish homework (by 1 Jan 2022 06:00 AM)
+Now there are 2 tasks in your list.
+Oops! Please enter a valid command!
+Oops! Please enter a valid command!
+Alright! I've added this task:
+[E][ ] meet Prof (at 25 Aug 2022 04:00 PM)
+Now there are 3 tasks in your list.
+Oops! Please use the following format:
+event [content] /at [time]
+Here are the tasks in your list:
+1. [T][ ] buy book
+2. [D][ ] finish homework (by 1 Jan 2022 06:00 AM)
+3. [E][ ] meet Prof (at 25 Aug 2022 04:00 PM)
+Alright! I've marked this task as done:
+[D][X] finish homework (by 1 Jan 2022 06:00 AM)
+Alright! I've marked this task as done:
+[E][X] meet Prof (at 25 Aug 2022 04:00 PM)
+Alright! I've marked this task as not done yet:
+[E][ ] meet Prof (at 25 Aug 2022 04:00 PM)
+Oops! Please enter a number between 1 and 3!
+Alright! I've removed this task:
+[D][X] finish homework (by 1 Jan 2022 06:00 AM)
+Now you have 2 tasks in your list.
+Here are the tasks in your list:
+1. [T][ ] buy book
+2. [E][ ] meet Prof (at 25 Aug 2022 04:00 PM)
+Sad to see you go :( See you again soon!
