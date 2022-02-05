@@ -23,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + this.getStatusIcon() + " " + super.description + "(by: " + this.getParsedDateAndTime() + ")";
+        return "[D]" + this.getStatusIcon() + " " + super.description + " (by: " + this.getParsedDateAndTime() + ")";
     }
 }

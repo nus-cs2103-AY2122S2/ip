@@ -24,43 +24,47 @@ public class Storage {
         }
     }
 
-    public void writeToFile(ArrayList<Task> taskList) {
+    public void writeToFile(TaskList taskList) {
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(this.file, false));
-            for (Task task : taskList) {
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.getTask(i);
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
-                    printWriter.println("D-" + deadline.description + "-" + deadline.dateAndTime);
+                    printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.description + " | " + deadline.dateAndTime);
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
-                    printWriter.println("E-" + event.description + "-" + event.dateAndTime);
+                    printWriter.println("E | " + event.getStatusIcon() + " | " + event.description + " | " + event.dateAndTime);
                 } else if (task instanceof Todo) {
                     Todo todo = (Todo) task;
-                    printWriter.println("T-" + todo.description);
+                    printWriter.println("T | " + todo.getStatusIcon() + " | " + todo.description);
                 }
             }
             printWriter.close();
         } catch (IOException e) {
-            System.out.println("An error has occured.");
+            System.out.println("An error has occurred.");
         }
     }
 
-    public ArrayList<Task> readFromFile() {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList readFromFile() {
+        TaskList taskList = new TaskList();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(this.file));
             String currentLine = bufferedReader.readLine();
             while (currentLine != null) {
-                String[] taskDetails = currentLine.split("-");
+                String[] taskDetails = currentLine.split(" \\| ");
                 Task task;
                 if (currentLine.charAt(0) == 'D') {
-                    task = new Deadline(taskDetails[1], taskDetails[2]);
+                    task = new Deadline(taskDetails[2], taskDetails[3]);
                 } else if (currentLine.charAt(0) == 'E') {
-                    task = new Event(taskDetails[1], taskDetails[2]);
+                    task = new Event(taskDetails[2], taskDetails[3]);
                 } else {
-                    task = new Todo(taskDetails[1]);
+                    task = new Todo(taskDetails[2]);
                 }
-                taskList.add(task);
+                if (taskDetails[1].equals("[X]")) {
+                    task.markAsDone();
+                }
+                taskList.addTask(task);
                 currentLine = bufferedReader.readLine();
             }
         } catch (FileNotFoundException e) {
