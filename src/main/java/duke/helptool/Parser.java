@@ -12,6 +12,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.tag.Tag;
 
 /**
  * The type Parser.
@@ -61,6 +62,62 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Add tag help method.
+     *
+     * @param input the input
+     * @return the tag
+     */
+    public static Tag addTag(String input) {
+        String tagDescription;
+        if (!input.contains("#")) {
+            tagDescription = "";
+        } else {
+            int tagPos = input.indexOf("#");
+            tagDescription = input.substring(tagPos + 1);
+        }
+        return new Tag(tagDescription);
+    }
+
+    /**
+     * Add tag help method.
+     *
+     * @param input the input
+     * @param type  the type
+     * @return the tag
+     */
+    public static String getDescription(String input, String type) {
+        String description;
+        if (type.equals("T") && !input.contains("#")) {
+            description = input.substring(4);
+        } else if (type.equals("T") && input.contains("#")) {
+            int tagPos = input.indexOf("#");
+            description = input.substring(4, tagPos);
+        } else if (type.equals("D")) {
+            int byPos = input.indexOf("/by");
+            description = input.substring(9, byPos);
+        } else if (type.equals("E")) {
+            int atPos = input.indexOf("/at");
+            description = input.substring(6, atPos);
+        } else {
+            description = "";
+        }
+        return description;
+    }
+
+    /**
+     * Gets tag pos.
+     *
+     * @param input the input
+     * @return the tag pos
+     */
+    public static int getTagPos(String input) {
+        if (!input.contains("#")) {
+            return -1;
+        } else {
+            return input.indexOf("#");
+        }
+    }
 
     /**
      * Parse command.
@@ -109,11 +166,12 @@ public class Parser {
                 }
             } else if (input.startsWith("todo")) {
                 // generate
-                String description = input.substring(4);
+                String description = getDescription(input, "T");
                 if (isEmpty(description)) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                return new AddCommand(description, "T");
+                Tag newTag = addTag(input);
+                return new AddCommand(description, "T", newTag);
             } else if (input.startsWith("deadline")) {
                 if (isEmpty(input.substring(8))) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -122,11 +180,17 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
                 }
                 int byPos = input.indexOf("/by");
-                String description = input.substring(9, byPos);
-                String by = input.substring(byPos + 4);
-                if (isValidDate(by)) {
-                    LocalDateTime dateTime = LocalDateTime.parse(by, dateFormat);
-                    return new AddCommand(description, "D", dateTime);
+                String description = getDescription(input, "D");
+                String byDateTime;
+                if (!input.contains("#")) {
+                    byDateTime = input.substring(byPos + 4);
+                } else {
+                    byDateTime = input.substring(byPos + 4, getTagPos(input) - 1);
+                }
+                if (isValidDate(byDateTime)) {
+                    LocalDateTime dateTime = LocalDateTime.parse(byDateTime, dateFormat);
+                    Tag newTag = addTag(input);
+                    return new AddCommand(description, "D", dateTime, newTag);
                 } else {
                     throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
                 }
@@ -138,11 +202,17 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
                 }
                 int atPos = input.indexOf("/at");
-                String description = input.substring(6, atPos);
-                String at = input.substring(atPos + 4);
-                if (isValidDate(at)) {
-                    LocalDateTime dateTime = LocalDateTime.parse(at, dateFormat);
-                    return new AddCommand(description, "E", dateTime);
+                String description = getDescription(input, "E");
+                String atDateTime;
+                if (!input.contains("#")) {
+                    atDateTime = input.substring(atPos + 4);
+                } else {
+                    atDateTime = input.substring(atPos + 4, getTagPos(input) - 1);
+                }
+                if (isValidDate(atDateTime)) {
+                    Tag newTag = addTag(input);
+                    LocalDateTime dateTime = LocalDateTime.parse(atDateTime, dateFormat);
+                    return new AddCommand(description, "E", dateTime, newTag);
                 } else {
                     throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
                 }

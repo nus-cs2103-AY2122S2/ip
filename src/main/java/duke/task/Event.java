@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.tag.Tag;
+
 /**
  * The type Event.
  */
@@ -14,13 +16,14 @@ public class Event extends Task {
     protected LocalDateTime atDateTime;
 
     /**
-     * Instantiates a new Event.
+     * Instantiates a new Event with tag.
      *
      * @param description the description
-     * @param atDateTime          the at
+     * @param atDateTime  the at date time
+     * @param tag         the tag
      */
-    public Event(String description, LocalDateTime atDateTime) {
-        super(description);
+    public Event(String description, LocalDateTime atDateTime, Tag tag) {
+        super(description, tag);
         this.atDateTime = atDateTime;
     }
 

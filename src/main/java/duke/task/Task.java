@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.tag.Tag;
+
 /**
  * The type Task.
  */
@@ -9,17 +11,23 @@ public class Task {
      */
     protected String description;
     /**
+     * The Tag.
+     */
+    protected Tag tag;
+    /**
      * The Is done.
      */
     protected boolean isDone;
 
     /**
-     * Instantiates a new Task.
+     * Instantiates a new Task with tag.
      *
      * @param description the description
+     * @param tag         the tag
      */
-    public Task(String description) {
+    public Task(String description, Tag tag) {
         this.description = description;
+        this.tag = tag;
         this.isDone = false;
         assert this.description != null : "Task description should not be null";
     }
@@ -58,6 +66,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.getDescription());
+        return String.format("[%s] %s %s", this.getStatusIcon(), this.tag, this.getDescription());
     }
 }

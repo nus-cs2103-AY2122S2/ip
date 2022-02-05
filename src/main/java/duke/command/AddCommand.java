@@ -6,6 +6,7 @@ import duke.helptool.DukeException;
 import duke.helptool.Storage;
 import duke.helptool.TaskList;
 import duke.helptool.Ui;
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -15,6 +16,7 @@ import duke.task.ToDo;
  */
 public class AddCommand extends Command {
     private final String description;
+    private final Tag tag;
     private final String type;
     private LocalDateTime dateTime;
 
@@ -24,9 +26,10 @@ public class AddCommand extends Command {
      * @param description the Task description
      * @param type        the type
      */
-    public AddCommand(String description, String type) {
+    public AddCommand(String description, String type, Tag tag) {
         this.type = type;
         this.description = description;
+        this.tag = tag;
     }
 
     /**
@@ -36,10 +39,11 @@ public class AddCommand extends Command {
      * @param type        the type
      * @param dateTime    the date time
      */
-    public AddCommand(String description, String type, LocalDateTime dateTime) {
+    public AddCommand(String description, String type, LocalDateTime dateTime, Tag tag) {
         this.type = type;
         this.description = description;
         this.dateTime = dateTime;
+        this.tag = tag;
     }
 
     @Override
@@ -53,7 +57,7 @@ public class AddCommand extends Command {
         switch (this.type) {
         case "T":
             try {
-                ToDo temp = new ToDo(description);
+                ToDo temp = new ToDo(description, tag);
                 tasks.addTask(temp);
                 tempResult = ui.showAddTodo(temp.toString(), tasks.getSize());
                 storage.write(tasks);
@@ -64,7 +68,7 @@ public class AddCommand extends Command {
             break;
         case "D":
             try {
-                Deadline ddl = new Deadline(description, dateTime);
+                Deadline ddl = new Deadline(description, dateTime, tag);
                 tasks.addTask(ddl);
                 tempResult = ui.showAddDeadline(ddl.toString(), tasks.getSize());
                 storage.write(tasks);
@@ -75,7 +79,7 @@ public class AddCommand extends Command {
             break;
         case "E":
             try {
-                Event event = new Event(description, dateTime);
+                Event event = new Event(description, dateTime, tag);
                 tasks.addTask(event);
                 tempResult = ui.showAddEvent(event.toString(), tasks.getSize());
                 storage.write(tasks);
