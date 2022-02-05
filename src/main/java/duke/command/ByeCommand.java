@@ -9,6 +9,9 @@ import duke.Ui;
  */
 public class ByeCommand extends Command {
 
+    /**
+     * Constructs a bye command. Set isExit to true.
+     */
     public ByeCommand() {
         super(true);
     }
@@ -19,9 +22,10 @@ public class ByeCommand extends Command {
      * @param taskList TaskList.
      * @param ui Ui.
      * @param storage Storage.
+     * @return Returns a String reply to user.
      */
     @Override
     public String execute(List taskList, Ui ui, Storage storage) {
-        return ui.byeUser();
+        return ui.showByeMessage();
     }
 }

@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+
 
 
 /**
@@ -24,6 +26,10 @@ public class Storage {
     private String filePath;
     private File directory;
 
+    /**
+     * Constructs a storage. Creates the directory if it does not exist.
+     * @param filePath Storage path of the file.
+     */
     public Storage(String filePath) {
         file = new File("data/duke.txt");
         this.filePath = filePath;
@@ -101,7 +107,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-
+            return new ArrayList<>();
         }
         return arrayList;
     }

@@ -1,9 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.List;
 import duke.Storage;
 import duke.Ui;
-import java.io.IOException;
+
 
 /**
  * Represents an UnmarkDoneCommand which marks a done task as not done.
@@ -12,6 +14,10 @@ public class UnmarkDoneCommand extends Command {
 
     private int index;
 
+    /**
+     * Constructs an unmark done command.
+     * @param index Index of task to be unmarked.
+     */
     public UnmarkDoneCommand(int index) {
         super(false);
         this.index = index;
@@ -29,6 +35,6 @@ public class UnmarkDoneCommand extends Command {
     public String execute(List taskList, Ui ui, Storage storage) throws IOException {
         taskList.unmarkDone(index);
         storage.writeToFile("data/duke.txt", taskList);
-        return ui.printUnmarkDoneTask(taskList.getArrayList().get(index));
+        return ui.showUnmarkDoneTask(taskList.getArrayList().get(index));
     }
 }

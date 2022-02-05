@@ -8,10 +8,8 @@ public abstract class Task {
 
     private String description;
     private boolean isDone;
-
-
     /**
-     * Constructor to create a task object.
+     * Constructs a task object.
      *
      * @param description Description of task.
      */

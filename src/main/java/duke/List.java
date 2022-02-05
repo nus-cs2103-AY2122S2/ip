@@ -1,16 +1,14 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.exception.ListException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Tasks;
 import duke.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-
 
 /**
  * Represents a list of the tasks added by the user.
@@ -64,18 +62,20 @@ public class List {
      * @param description Description of task.
      * @param timing Date/Time for event task.
      */
+    //CODESTYLE.OFF: "MissingSwitchDefault"
     public void add(Tasks taskType, String description, String timing) {
         switch (taskType) {
-            case TODO:
-                ToDo toDo = new ToDo(description);
-                arrayList.add(toDo);
-                break;
-            case EVENT:
-                Event event = new Event(description, timing);
-                arrayList.add(event);
-                break;
+        case TODO:
+            ToDo toDo = new ToDo(description);
+            arrayList.add(toDo);
+            break;
+        case EVENT:
+            Event event = new Event(description, timing);
+            arrayList.add(event);
+            break;
         }
     }
+    //CODESTYLE.OFF: "MissingSwitchDefault"
 
     /**
      * Adds a Task to the list, used for deadline task.
@@ -109,6 +109,12 @@ public class List {
         return arrayList.get(arrayList.size() - 1);
     }
 
+    /**
+     * Find a set of tasks that matches the description.
+     *
+     * @param findDescription Description of the tasks to find.
+     * @return Returns a list of the tasks found.
+     */
     public List findTask(String findDescription) {
         ArrayList<Task> findTaskList = new ArrayList<>();
         for (Task task : arrayList) {

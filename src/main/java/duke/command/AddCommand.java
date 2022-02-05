@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import duke.List;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Tasks;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 /**
  * Represents a Command which adds a Task to the task List.
@@ -64,7 +64,8 @@ public class AddCommand extends Command {
      * @param taskList Task List of Tasks.
      * @param ui Ui
      * @param storage Storage
-     * @throws IOException When writing to File in Storage.
+     * @return Returns a string acknowledgement of the task added.
+     * @throws IOException If File to be written to in Storage is not found.
      */
     @Override
     public String execute(List taskList, Ui ui, Storage storage) throws IOException {
@@ -74,6 +75,6 @@ public class AddCommand extends Command {
             taskList.add(taskType, description, time);
         }
         storage.writeToFile("data/duke.txt", taskList);
-        return ui.printAddedTask(taskList);
+        return ui.showAddedTask(taskList);
     }
 }

@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.List;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
 
-import java.io.IOException;
-
 /**
  * Represents a Command.
  */
-abstract public class Command {
+public abstract class Command {
 
     private boolean isExit;
 
@@ -18,11 +18,5 @@ abstract public class Command {
         this.isExit = isExit;
     }
 
-    public String execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException {
-        return "";
-    }
-
-    public boolean getIsExit() {
-        return this.isExit;
-    }
+    public abstract String execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException;
 }

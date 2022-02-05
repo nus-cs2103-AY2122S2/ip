@@ -3,7 +3,6 @@ package duke.command;
 import duke.List;
 import duke.Storage;
 import duke.Ui;
-
 /**
  * Represents a ListCommand which tells duke.Duke to print out the list of current tasks.
  */
@@ -15,6 +14,6 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(List taskList, Ui ui, Storage storage) {
-        return ui.printList(taskList);
+        return ui.showList(taskList);
     }
 }

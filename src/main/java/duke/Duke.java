@@ -1,26 +1,27 @@
 package duke;
 
-import duke.*;
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+/**
+ * The type Duke.
+ */
 public class Duke {
 
     private Storage storage;
     private List tasks;
     private Ui ui;
 
+    /**
+     * Create a chatterbot.
+     * @param filePath The file's storage path.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new List(storage.load());
-        try {
-            storage.printFileContent("data/duke.txt");
-        } catch (IOException e) {
-        }
     }
 
     public String getResponse(String input) {

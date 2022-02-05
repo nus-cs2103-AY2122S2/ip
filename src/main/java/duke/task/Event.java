@@ -7,6 +7,11 @@ package duke.task;
 public class Event extends Task {
     private String at;
 
+    /**
+     * Constructs an event task.
+     * @param description Description of event task.
+     * @param at Date and time string of event task.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

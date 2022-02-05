@@ -2,3 +2,4 @@ Here are the tasks in your list:
 1. [T][ ] study ACCA 
 2. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
 3. [T][ ] wash car
+4. [T][ ] watch movie
