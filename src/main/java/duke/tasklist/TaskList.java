@@ -24,17 +24,34 @@ public class TaskList {
         this.taskList = new ArrayList<Tasks>();
     }
 
-    // Find and return Task based on index, arraylist bypass null issue
-    ArrayList<Tasks> findsTask(String filePath, int taskIndexToFind) {
-        ArrayList<Tasks> filteredTaskList = new ArrayList<Tasks>();
+    // Maybe can abstract out the printing portion
+    public String queryTasks(String query) {
+        ArrayList<Tasks> unfilteredTasks = new ArrayList<Tasks>(taskList);
+        ArrayList<Tasks> filteredTasks = new ArrayList<Tasks>();
+        StringBuilder sb1 = new StringBuilder("    Here are the matching tasks in your list: \n");
         try {
-            Tasks taskData = taskList.get(taskIndexToFind);
-            filteredTaskList.add(taskData);
+            for (int i = 0; i < unfilteredTasks.size(); i++) {
+                String taskName = unfilteredTasks.get(i).getName();
+                String[] taskNameSplit = taskName.split(" ");
+                for (int j = 0; j < taskNameSplit.length; j++) {
+                    if (taskNameSplit[j].equals(query)) {
+                        filteredTasks.add(unfilteredTasks.get(i));
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < filteredTasks.size(); i++) {
+                sb1.append("      ").append(i + 1).append(". ").
+                        append(filteredTasks.get(i).toString()).append("\n");
+            }
+            sb1.append("\n    Congratulations! We found ").append(filteredTasks.size()).
+                    append(" results that may interest you! :)");
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Don't access a task "
                     + "beyond the numeral boundary.");
         }
-        return filteredTaskList;
+        return sb1.toString();
     }
 
     // Delete duke.task -> returns duke.task deleted, then returns string to append

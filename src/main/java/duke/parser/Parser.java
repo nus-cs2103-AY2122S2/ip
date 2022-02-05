@@ -66,6 +66,9 @@ public class Parser {
         case DeleteCommand.COMMAND_WORDS:
             return new DeleteCommand(arguments.toString());
 
+        case FindCommand.COMMAND_WORDS:
+            return new FindCommand(arguments.toString().split(" ")[0]);
+
         default:
             return new HelpCommand();
         }

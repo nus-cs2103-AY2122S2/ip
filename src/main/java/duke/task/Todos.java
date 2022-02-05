@@ -23,7 +23,7 @@ public class Todos extends Tasks {
      */
     @Override
     public Todos completeTask() {
-        return new Todos(name, true);
+        return new Todos(super.getName(), true);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Todos extends Tasks {
      */
     @Override
     public Todos uncompleteTask() {
-        return new Todos(name, false);
+        return new Todos(super.getName(), false);
     }
 
     // Save to database format

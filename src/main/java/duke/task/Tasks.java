@@ -6,8 +6,8 @@ package duke.task;
  * <code>"Eat breakfast by 9am", true</code>
  */
 public class Tasks {
-    String name; // Name of duke.task
-    boolean hasCompleted; // Completion of duke.task
+    private final String name; // Name of duke.task
+    private boolean hasCompleted; // Completion of duke.task
 
     // Constructor for Task
     public Tasks(String taskName) {
@@ -38,17 +38,18 @@ public class Tasks {
         return new Tasks(name, false);
     }
 
-    String getTiming() {
+    // Get timing of duke.task - overriden in todos and events
+    public String getTiming() {
         return "";
     }
 
     // Get timing of duke.task - overriden in todos and events
-    String getDeadline() {
+    public String getDeadline() {
         return "";
     }
 
     // Get name of duke.task
-    String getName() {
+    public String getName() {
         return this.name;
     }
 

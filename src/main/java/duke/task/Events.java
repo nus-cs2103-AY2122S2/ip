@@ -21,7 +21,7 @@ public class Events extends Tasks {
     }
 
     // Get timing of event
-    String getTiming() {
+    public String getTiming() {
         return "(at: " + timing + ")";
     }
 
