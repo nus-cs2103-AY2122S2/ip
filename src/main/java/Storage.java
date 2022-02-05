@@ -15,7 +15,11 @@ public class Storage {
     public Storage(){
     }
 
-    @SuppressWarnings("Unchecked")
+    @SuppressWarnings("unchecked")
+    public static <T> T castToAnything(Object obj) {
+        return (T) obj;
+    }
+
     public static ArrayList<Task> load() {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
@@ -29,11 +33,12 @@ public class Storage {
                 Ui.print("File is created!\n");
             } else {
                 Ui.print("File already exists.\n");
-                FileInputStream reader = new FileInputStream(DATA_PATH);
-                ObjectInputStream listInput = new ObjectInputStream(reader);
                 try {
-                    toDoList = (ArrayList<Task>) listInput.readObject();
+                    FileInputStream reader = new FileInputStream(DATA_PATH);
+                    ObjectInputStream listInput = new ObjectInputStream(reader);
+                    toDoList = castToAnything(listInput.readObject());
                     listInput.close();
+                    reader.close();
                 } catch (ClassNotFoundException e) {
                     Ui.print("class not found\n");
                 }
