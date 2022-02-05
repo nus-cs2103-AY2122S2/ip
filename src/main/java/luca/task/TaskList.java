@@ -3,6 +3,8 @@ package luca.task;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import luca.parser.exceptions.InvalidArgumentException;
+
 /**
  * Class containing the list of Tasks loaded to the chat bot.
  */
@@ -92,6 +94,42 @@ public class TaskList {
      */
     public Task remove(int index) {
         return taskList.remove(index);
+    }
+
+    /**
+     * Retrieves the task pointed to, marks it as done and outputs
+     * the task.
+     *
+     * @param pointer 1-based index of the task.
+     * @return task which is marked as done.
+     * @throws InvalidArgumentException if the pointer is not in valid range.
+     */
+    public Task markTaskAsDone(int pointer) throws InvalidArgumentException {
+        if (pointer < 0 || pointer > this.size()) {
+            throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
+                    + size() + ".");
+        }
+        Task task = this.get(pointer - 1);
+        task.markAsDone();
+        return task;
+    }
+
+    /**
+     * Retrieves the task pointed to, unmarks it as done and outputs
+     * the task.
+     *
+     * @param pointer 1-based index of the task.
+     * @return task which is unmarked as done.
+     * @throws InvalidArgumentException if the pointer is not in valid range.
+     */
+    public Task unmarkTaskAsDone(int pointer) throws InvalidArgumentException {
+        if (pointer < 0 || pointer > this.size()) {
+            throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
+                    + size() + ".");
+        }
+        Task task = this.get(pointer - 1);
+        task.unmarkAsDone();
+        return task;
     }
 
     /**

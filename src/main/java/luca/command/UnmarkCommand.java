@@ -11,16 +11,16 @@ import luca.task.TaskList;
 public class UnmarkCommand extends Command {
 
     /** 1-based index of the task in the list. */
-    private int point;
+    private int pointer;
 
     /**
      * Constructor to create a UnmarkCommand.
      *
-     * @param point 1-based index of the task in the list.
+     * @param pointer 1-based index of the task in the list.
      */
-    public UnmarkCommand(int point) {
+    public UnmarkCommand(int pointer) {
         super(CommandType.UNMARK);
-        this.point = point;
+        this.pointer = pointer;
     }
 
     /**
@@ -29,12 +29,11 @@ public class UnmarkCommand extends Command {
      * @param taskList list of tasks.
      * @param storage storage used by chat bot.
      * @return response string.
-     * @throws DukeException if FileIOexception thrown when saving file.
+     * @throws DukeException if I/O error or Invalid argument.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
-        Task task = taskList.get(point - 1);
-        task.unmarkAsDone();
+        Task task = taskList.unmarkTaskAsDone(pointer);;
         storage.saveToFile(taskList);
         return "OK, I've marked this task as not done yet:\n " + task;
     }
