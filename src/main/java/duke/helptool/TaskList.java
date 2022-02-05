@@ -43,6 +43,7 @@ public class TaskList {
      * @param index the index
      */
     public void delete(int index) {
+        assert index < this.taskList.size() : "index is within bound";
         this.taskList.remove(index);
     }
 
@@ -53,6 +54,7 @@ public class TaskList {
      * @return the task
      */
     public Task getTask(int index) {
+        assert index < this.taskList.size() : "index is within bound";
         return this.taskList.get(index);
     }
 

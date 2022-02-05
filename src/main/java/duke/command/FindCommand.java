@@ -20,6 +20,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String findDetail) {
         this.findDetail = findDetail;
+        assert this.findDetail != null : "findDetail should not be null";
     }
 
     @Override
