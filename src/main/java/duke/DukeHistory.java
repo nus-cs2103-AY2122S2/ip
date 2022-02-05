@@ -17,8 +17,9 @@ public class DukeHistory {
      * ArrayList records.
      *
      * @param description A String description interpreted by Commands.todo().
+     * @return Todo_task response.
      */
-    public void addToDo(String description) {
+    public String addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
         records.add(tempToDo);
         String msg = "_______________________________________________________\n"
@@ -26,7 +27,7 @@ public class DukeHistory {
                 + "    " + tempToDo.getToDo()
                 + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -47,12 +48,12 @@ public class DukeHistory {
     /**
      * A method that, when called, attempts to initialize a Deadline task using
      * the inputted description, date and time and adds it to the ArrayList records.
-     *
-     * @param description A String description interpreted by Commands.deadline().
+     *  @param description A String description interpreted by Commands.deadline().
      * @param date A String date interpreted by Commands.convertToDukeDate().
      * @param time A String time interpreted by Commands.convertToDukeTime().
+     * @return Deadline_task response.
      */
-    public void addDeadline(String description, String date, String time) {
+    public String addDeadline(String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(description, date, time);
         records.add(tempDeadline);
         String msg = "_______________________________________________________\n"
@@ -60,7 +61,7 @@ public class DukeHistory {
                 + "    " + tempDeadline.getDeadline()
                 + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -83,12 +84,12 @@ public class DukeHistory {
     /**
      * A method that, when called, attempts to initialize an Event task using
      * the inputted description, date and time and adds it to the ArrayList records.
-     *
-     * @param description A String description interpreted by Commands.event().
+     *  @param description A String description interpreted by Commands.event().
      * @param date A String date interpreted by Commands.convertToDukeDate().
      * @param time A String time interpreted by Commands.convertToDukeTime().
+     * @return Event_task response.
      */
-    public void addEvent(String description, String date, String time) {
+    public String addEvent(String description, String date, String time) {
         Event tempEvent = new Event(description, date, time);
         records.add(tempEvent);
         String msg = "_______________________________________________________\n"
@@ -96,7 +97,7 @@ public class DukeHistory {
                 + "    " + tempEvent.getEvent()
                 + "Currently you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -161,8 +162,9 @@ public class DukeHistory {
      * A method that, when called, deletes the corresponding entry index in ArrayList records.
      *
      * @param index An integer indicating the desired entry to delete.
+     * @return Delete response.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         StringBuilder description = new StringBuilder();
         Task temp = records.remove(index);
         if (temp instanceof ToDos) {
@@ -182,7 +184,7 @@ public class DukeHistory {
                 + "    " + description
                 + "Now you have " + records.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**

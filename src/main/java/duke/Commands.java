@@ -18,12 +18,13 @@ public class Commands {
 
     /**
      *  Prints a response to "bye" command to indicate that the command was accepted.
+     * @return Bye response.
      */
-    public void bye() { // Get DukeLCH to Exit
+    public String bye() { // Get DukeLCH to Exit
         String bye = "_______________________________________________________\n"
                 + "Goodbye. I hope to be of service to you again soon!\n"
                 + "_______________________________________________________\n";
-        System.out.println(bye);
+        return bye;
     }
 
     /**
@@ -85,22 +86,24 @@ public class Commands {
      * to print a list of all tasks in its records.
      *
      * @param history An instance of DukeHistory.
+     * @return List response.
      */
-    public void list(DukeHistory history) { // Get DukeLCH to List cmdHistory
+    public String list(DukeHistory history) { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
-        System.out.println(border
+        String response = border
                 + "These are your tasks that we have in our records:\n"
-                + history.printAll() + border);
+                + history.printAll() + border;
+        return response;
     }
 
     /**
      * A method that, when called, checks the validity of a given entry index before getting the inputted instance
      * of DukeHistory to mark that entry in its records as done.
-     *
-     * @param index An integer indicating the desired entry to mark.
+     *  @param index An integer indicating the desired entry to mark.
      * @param history An instance of DukeHistory.
+     * @return Mark response.
      */
-    public void mark(int index, DukeHistory history) {
+    public String mark(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
@@ -123,17 +126,17 @@ public class Commands {
                 + "Well done! You have completed the task:\n"
                 + "    " + tasking
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**
      * A method that, when called, checks the validity of a given entry index before getting the inputted instance
      * of DukeHistory to unmark that entry in its records.
-     *
-     * @param index An integer indicating the desired entry to unmark.
+     *  @param index An integer indicating the desired entry to unmark.
      * @param history An instance of DukeHistory.
+     * @return Unmark response.
      */
-    public void unmark(int index, DukeHistory history) {
+    public String unmark(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
@@ -156,7 +159,7 @@ public class Commands {
                 + "A reminder that the following task has not been done:\n"
                 + "    " + tasking
                 + "_______________________________________________________\n";
-        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -164,11 +167,11 @@ public class Commands {
      *
      * It then gets the inputted instance of DukeHistory to add a ToDos task entry into it's record
      * using the generated description.
-     *
-     * @param tokens A String[] of tokens inputted by the user.
+     *  @param tokens A String[] of tokens inputted by the user.
      * @param history An instance of DukeHistory.
+     * @return Todo_task response.
      */
-    public void todo(String[] tokens, DukeHistory history) {
+    public String todo(String[] tokens, DukeHistory history) {
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
             description = description.concat(tokens[i]);
@@ -176,7 +179,7 @@ public class Commands {
                 description = description.concat(" ");
             }
         }
-        history.addToDo(description);
+        return history.addToDo(description);
     }
 
     /**
@@ -189,8 +192,9 @@ public class Commands {
      * @param tokens A String[] of tokens inputted by the user.
      * @param history An instance of DukeHistory.
      * @throws DukeException If the '/by' phrase is not detected in the String[] of tokens.
+     * @return Deadline_task response.
      */
-    public void deadline(String[] tokens, DukeHistory history) throws DukeException {
+    public String deadline(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
         String time = "";
@@ -212,7 +216,7 @@ public class Commands {
         date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
         // Handle Time
         time = time.concat(convertToDukeTime(tokens[timeStart + 2]));
-        history.addDeadline(description, date, time);
+        return history.addDeadline(description, date, time);
     }
 
     /**
@@ -225,8 +229,9 @@ public class Commands {
      * @param tokens A String[] of tokens inputted by the user.
      * @param history An instance of DukeHistory.
      * @throws DukeException If the '/at' phrase is not detected in the String[] of tokens.
+     * @return Event_task response.
      */
-    public void event(String[] tokens, DukeHistory history) throws DukeException {
+    public String event(String[] tokens, DukeHistory history) throws DukeException {
         String description = "";
         String date = "";
         String time = "";
@@ -252,21 +257,21 @@ public class Commands {
         time = time.concat(convertToDukeTime(arr[0])
                 .concat("-")
                 .concat(convertToDukeTime(arr[1])));
-        history.addEvent(description, date, time);
+        return history.addEvent(description, date, time);
     }
 
     /**
      * A method that, when called, checks the validity of a given entry index before getting the inputted instance
      * of DukeHistory to delete that entry in its records.
-     *
-     * @param index An integer indicating the desired entry to delete.
+     *  @param index An integer indicating the desired entry to delete.
      * @param history An instance of DukeHistory
+     * @return Delete response.
      */
-    public void delete(int index, DukeHistory history) {
+    public String delete(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
-        history.deleteTask(index);
+        return history.deleteTask(index);
     }
 
     /**
@@ -278,8 +283,9 @@ public class Commands {
      * @param tokens A String[] of tokens inputted by the user.
      * @param history An instance of DukeHistory.
      * @throws DukeException If no task is found matching the inputted phrase.
+     * @return Find response.
      */
-    public void find(String[] tokens, DukeHistory history) throws DukeException {
+    public String find(String[] tokens, DukeHistory history) throws DukeException {
         StringBuilder phrase = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
             phrase.append(tokens[i]);
@@ -288,8 +294,8 @@ public class Commands {
             }
         }
         String border = "_______________________________________________________\n";
-        System.out.println(border
+        return border
                 + "Here is what we found:\n"
-                + history.findPhrase(phrase.toString()) + border);
+                + history.findPhrase(phrase.toString()) + border;
     }
 }

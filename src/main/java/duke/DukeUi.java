@@ -17,19 +17,19 @@ public class DukeUi {
                 + "Please try again!\n"
                 + "If the problem persists, please contact the administrator!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
     }
 
     /**
      * A method that prints a write error message.
+     * @return Error message.
      */
-    public void printWriteError() {
+    public String printWriteError() {
         String err = "_______________________________________________________\n"
                 + "* Write to duke.txt failed *\n"
                 + "Please try again!\n"
                 + "If the problem persists, please contact the administrator!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 
     /**
@@ -50,38 +50,41 @@ public class DukeUi {
 
     /**
      * A method that prints an error message when arguments are passed to command that do not require them.
+     * @return Error message.
      */
-    public void printFoundArgumentError() {
+    public String printFoundArgumentError() {
         String err = "_______________________________________________________\n"
                 + "* Arguments detected *\n"
                 + "This command does not require any arguments.\n"
                 + "Are you sure this command is what you mean? If so, please try again!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 
     /**
      * A method that prints an error message when arguments passed to a command is invalid.
+     * @return Error message.
      */
-    public void printInvalidArgumentError() {
+    public String printInvalidArgumentError() {
         String err = "_______________________________________________________\n"
                 + "* Invalid entry detected *\n"
                 + "Please provide a valid entry!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 
     /**
      * A method that prints an error message when there is no argument detected for a command that requires arguments.
      *
      * @param keyword A String representing the specific command used.
+     * @return Error message.
      */
-    public void printMissingArgumentError(String keyword) {
+    public String printMissingArgumentError(String keyword) {
         String err = "_______________________________________________________\n"
                 + "* No arguments detected *\n"
                 + "Please provide a description for your " + keyword + "!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 
     /**
@@ -89,8 +92,9 @@ public class DukeUi {
      * key phrases used to detect DateTime is inputted by the user.
      *
      * @param keyword A String representing the specific command used.
+     * @return Error message.
      */
-    public void printMissingDateTimeArgumentError(String keyword) {
+    public String printMissingDateTimeArgumentError(String keyword) {
         switch (keyword) {
         case "deadline": {
             String err = "_______________________________________________________\n"
@@ -99,8 +103,7 @@ public class DukeUi {
                     + "Check if you have typed '/by' to indicate the time frame!\n"
                     + "e.g. deadline return book /by Sunday 7pm\n"
                     + "_______________________________________________________\n";
-            System.out.println(err);
-            break;
+            return err;
         }
         case "event": {
             String err = "_______________________________________________________\n"
@@ -109,24 +112,22 @@ public class DukeUi {
                     + "Check if you have typed '/at' to indicate the time frame!\n"
                     + "e.g. event project meeting /at 20/2/2022 1000H-1200H\n"
                     + "_______________________________________________________\n";
-            System.out.println(err);
-            break;
+            return err;
         }
         default:
             String err = "_______________________________________________________\n"
                     + "* Time frame not detected *\n"
                     + "Please provide a time frame for your " + keyword + "!\n"
                     + "_______________________________________________________\n";
-            System.out.println(err);
-            break;
+            return err;
         }
-
     }
 
     /**
      * A method that prints a list of recognized commands if the user inputs an unrecognized command.
+     * @return Error message.
      */
-    public void printListOfCommands() {
+    public String printListOfCommands() {
         String err = "_______________________________________________________\n"
                 + "* Unrecognised keyword used *\n"
                 + "Please try the keywords provided below:\n"
@@ -140,17 +141,18 @@ public class DukeUi {
                 + "    8. update\n"
                 + "    9. bye\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 
     /**
      * A method that prints a response if Duke cannot find any tasks matching a users inputted phrase.
+     * @return Error message.
      */
-    public void printFoundNothing() {
+    public String printFoundNothing() {
         String err = "_______________________________________________________\n"
                 + "It appears we could not find anything matching the phrase.\n"
                 + "Please try adding the task to Duke!\n"
                 + "_______________________________________________________\n";
-        System.out.println(err);
+        return err;
     }
 }
