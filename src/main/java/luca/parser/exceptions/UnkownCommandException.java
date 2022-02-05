@@ -1,4 +1,4 @@
-package luca.parser;
+package luca.parser.exceptions;
 
 import luca.common.DukeException;
 

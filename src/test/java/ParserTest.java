@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import luca.command.ListCommand;
 import luca.common.DukeException;
 import luca.parser.Parser;
-import luca.parser.UnkownCommandException;
+import luca.parser.exceptions.UnkownCommandException;
 
 /**
  * Test the parser class.

@@ -15,11 +15,26 @@ import luca.command.ListCommand;
 import luca.command.MarkCommand;
 import luca.command.UnmarkCommand;
 import luca.common.DukeException;
+import luca.parser.exceptions.InvalidArgumentException;
+import luca.parser.exceptions.InvalidDateTimeFormatException;
+import luca.parser.exceptions.UnkownCommandException;
 
 /**
  *  Parses the user input.
  */
 public class Parser {
+
+    /** Error message when the event date time format is invalid. */
+    private static final String INVALID_EVENT_ERROR_MESSAGE = "Please enter the date and "
+            + "start and end times in the following format:\n"
+            + " yyyy-mm-dd HHMM HHMM in the 24 hour format";
+
+    /** Error message when the Deadline date time format is invalid. */
+    private static final String INVALID_DEADLINE_ERROR_MESSAGE = "Please enter the date/time in "
+            + "the following format:\n yyyy-mm-dd HHMM in the 24 hour format";
+
+    /** Default time given for deadline if not time was inputted. */
+    private static final String DEFAULT_DEADLINE_TIME = "T06:00:00";
 
     /**
      * Parse input tokens and creates Mark command.
@@ -96,6 +111,7 @@ public class Parser {
             throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
                     + "the task to be deleted.");
         }
+
         try {
             int point = Integer.parseInt(tokens[1]);
             return new DeleteCommand(point);
@@ -135,15 +151,13 @@ public class Parser {
             } else {
                 try {
                     if (i == tokens.length - 1) {
-                        dateTime = LocalDateTime.parse(tokens[i] + "T06:00:00");
+                        dateTime = LocalDateTime.parse(tokens[i] + DEFAULT_DEADLINE_TIME);
                     } else {
-
                         dateTime = parseDateTime(tokens[i], tokens[i + 1]);
                     }
                     i++;
                 } catch (NumberFormatException | DateTimeParseException exception) {
-                    throw new InvalidDateTimeFormatException("Please enter the date/time in "
-                                + "the following format:\n yyyy-mm-dd HHMM in the 24 hour format");
+                    throw new InvalidDateTimeFormatException(INVALID_DEADLINE_ERROR_MESSAGE);
                 }
             }
         }
@@ -184,17 +198,13 @@ public class Parser {
             } else {
                 try {
                     if (i > tokens.length - 3) {
-                        throw new InvalidDateTimeFormatException("Please enter the date and "
-                                + "start and end times in the following format:\n"
-                                + " yyyy-mm-dd HHMM HHMM in the 24 hour format");
+                        throw new InvalidDateTimeFormatException(INVALID_EVENT_ERROR_MESSAGE);
                     }
                     start = parseDateTime(tokens[i], tokens[i + 1]);
                     end = parseDateTime(tokens[i], tokens[i + 2]);
 
                 } catch (NumberFormatException | DateTimeParseException exception) {
-                    throw new InvalidDateTimeFormatException("Please enter the date and "
-                            + "start and end times in the following format:\n"
-                            + " yyyy-mm-dd HHMM HHMM in the 24 hour format");
+                    throw new InvalidDateTimeFormatException(INVALID_EVENT_ERROR_MESSAGE);
                 }
                 i += 2;
             }
