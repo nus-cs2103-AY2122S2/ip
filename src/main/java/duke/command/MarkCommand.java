@@ -23,7 +23,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        Task markedTask = tasks.markTask(super.index);
+        int index = super.index;
+        assert index > 0 : "Index provided should be greater then 0";
+        Task markedTask = tasks.markTask(index);
         String message = "Nice! I've marked this task as done:\n";
         return message + markedTask;
     }
