@@ -52,6 +52,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
+
         if (this.taskType.equals("todo")) {
             try {
                 Todo td = Todo.createTodo(this.textInput);
@@ -64,6 +65,7 @@ public class AddCommand extends Command {
                 ui.showLine();
                 return "Please enter a valid description!";
             }
+
         } else if (this.taskType.equals("deadline")) {
             try {
                 Deadline dl = Deadline.createDeadline(this.textInput);
@@ -84,6 +86,7 @@ public class AddCommand extends Command {
                 ui.showLine();
                 return "Please enter valid date in YYYY-MM-DD format!";
             }
+
         } else {
             assert this.taskType.equals("event") : "Command word must be event";
             try {

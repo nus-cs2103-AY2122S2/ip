@@ -44,10 +44,12 @@ public class FileHandler {
         File f = new File("./data/Duke.txt");
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
+
             String input = s.nextLine();
             if (input.trim().length() == 0) {
                 continue;
             }
+
             char identifier = input.charAt(0);
             if (identifier == 'T') {
                 int status = Character.getNumericValue(input.charAt(2));

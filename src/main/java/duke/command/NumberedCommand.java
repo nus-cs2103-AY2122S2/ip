@@ -63,6 +63,7 @@ public class NumberedCommand extends Command {
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
                 return ui.showSuccessfulMarkMessage() + "\n" + task;
+
             } else if (this.taskType.equals("unmark")) {
                 Task task = tasks.get(this.number - 1);
                 String oldMark = task.formatText();
@@ -72,6 +73,7 @@ public class NumberedCommand extends Command {
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
                 return ui.showSuccessfulUnmarkMessage() + "\n" + task;
+
             } else {
                 Task task = tasks.get(this.number - 1);
                 String oldDelete = task.formatText();
@@ -82,6 +84,7 @@ public class NumberedCommand extends Command {
                 ui.showCount(tasks);
                 return ui.showSuccessfulDeleteMessage() + "\n" + task + "\n"
                         + ui.showNumberOfTasksMessage(tasks);
+
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid number!");
