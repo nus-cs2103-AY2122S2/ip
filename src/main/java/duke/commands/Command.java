@@ -54,7 +54,7 @@ public abstract class Command {
      * @return true if the command executes successfully, false otherwise.
      * @throws DukeException If there is an error encountered during execution.
      */
-    public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
+    public abstract String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 
     public boolean isExit() {
         return false;

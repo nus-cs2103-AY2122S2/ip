@@ -22,8 +22,7 @@ public class ListCommand extends Command {
      * @param taskManager The TaskManager that contains the tasks to be displayed.
      * @return true after the list is displayed.
      */
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
-        ui.showList(taskManager);
-        return true;
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+        return ui.showList(taskManager);
     }
 }

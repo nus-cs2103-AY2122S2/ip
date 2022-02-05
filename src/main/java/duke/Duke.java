@@ -4,7 +4,8 @@ import duke.commands.Command;
 import duke.exceptions.DukeException;
 
 
-public class Duke {
+
+public class Duke{
     private TaskManager manager;
     private Ui ui;
     private Storage storage;
@@ -23,6 +24,7 @@ public class Duke {
         }
     }
 
+
     public void run() {
         ui.showBanner();
         ui.showList(manager);
@@ -34,12 +36,21 @@ public class Duke {
                 String userInput = ui.getUserInputLine();
 
                 Command command = Parser.parse(userInput);
-                command.execute(storage,ui,manager);
+                System.out.println(command.execute(storage,ui,manager));
 
                 isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(storage, ui, manager);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

@@ -24,13 +24,12 @@ public class AddCommand extends Command {
      * @return true if command executed successfully, false otherwise.
      * @throws DukeException If format of the task is wrong.
      */
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         try {
             Task task = Parser.parseToTask(this.userInput);
             taskManager.addTask(task);
-            ui.showAddedTask(task, taskManager.size());
             save(storage,ui,taskManager);
-            return true;
+            return ui.showAddedTask(task, taskManager.size());
         } catch (FailedTaskParseException exception) {
             throw new DukeException("Wrong Format!");
         }

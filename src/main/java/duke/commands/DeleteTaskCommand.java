@@ -23,27 +23,23 @@ public class DeleteTaskCommand extends Command {
      * @return true if command executed successfully, false otherwise.
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
         if (taskManager.size() == 0) {
-            ui.showDeleteEmptyList();
-        } else {
-            int index = Integer.parseInt(userInput.replaceFirst("delete","").strip()) - 1;
-
-            if (index < 0 || index >= taskManager.size()) {
-                ui.showDeleteOutOfBounds(taskManager.size());
-            } else {
-                Task t = taskManager.getTask(index);
-                boolean success = taskManager.deleteTask(t);
-                if (success) {
-                    save(storage, ui, taskManager);
-                    ui.showDeletedTask(t, taskManager.size());
-                } else {
-                    ui.showDeleteFailed();
-                    return false;
-                }
-                return true;
-            }
+            return ui.showDeleteEmptyList();
         }
-        return false;
+
+        int index = Integer.parseInt(userInput.replaceFirst("delete","").strip()) - 1;
+
+        if (index < 0 || index >= taskManager.size()) {
+            return ui.showDeleteOutOfBounds(taskManager.size());
+        }
+
+        Task t = taskManager.getTask(index);
+        boolean success = taskManager.deleteTask(t);
+        if (success) {
+            save(storage, ui, taskManager);
+            return ui.showDeletedTask(t, taskManager.size());
+        }
+        return ui.showDeleteFailed();
     }
 }

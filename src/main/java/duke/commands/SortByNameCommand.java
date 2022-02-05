@@ -25,12 +25,11 @@ public class SortByNameCommand extends Command {
      * @see TaskByNameComparator
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         ArrayList tasks = new ArrayList(taskManager.getTaskList());
         Collections.sort(tasks,new TaskByNameComparator());
 
-        ui.showList(new TaskManager(tasks));
-        return true;
+        return ui.showList(new TaskManager(tasks));
     }
 }
 /**

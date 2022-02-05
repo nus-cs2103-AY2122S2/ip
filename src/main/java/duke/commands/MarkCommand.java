@@ -30,5 +30,5 @@ public abstract class MarkCommand extends Command {
         }
     }
 
-    public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
+    public abstract String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
 }

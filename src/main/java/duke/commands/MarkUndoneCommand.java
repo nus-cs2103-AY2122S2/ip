@@ -24,30 +24,25 @@ public class MarkUndoneCommand extends MarkCommand{
      * @return true if command executed successfully, false otherwise.
      * @throws DukeException If index entered is not a number.
      */
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         try {
             if (taskManager.size() == 0) {
-                ui.showMarkEmptyList();
-                return false;
-            } else {
-                int index = Integer.parseInt(userInput.replaceFirst("unmark", "").strip()) - 1;
-
-                if (index < 0 || index >= taskManager.size()) {
-                    ui.showMarkOutOfBounds();
-                    return false;
-                } else {
-                    boolean isSuccess = taskManager.markTaskUndone(index);
-                    if (isSuccess) {
-                        ui.showUnmarked(taskManager.getTask(index));
-                        save(storage,ui,taskManager);
-                    } else {
-                        ui.showUnmarkNotNeeded(taskManager.getTask(index));
-                    }
-                    return true;
-                }
+                return ui.showUnmarkEmptyList();
             }
+            int index = Integer.parseInt(userInput.replaceFirst("unmark", "").strip()) - 1;
+
+            if (index < 0 || index >= taskManager.size()) {
+                return ui.showUnmarkOutOfBounds();
+            }
+            boolean isSuccess = taskManager.markTaskUndone(index);
+            if (isSuccess) {
+                save(storage,ui,taskManager);
+                return ui.showUnmarked(taskManager.getTask(index));
+            }
+            return ui.showUnmarkNotNeeded(taskManager.getTask(index));
+
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number entered!");
+            return "Invalid number entered!";
         }
     }
 }

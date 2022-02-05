@@ -3,7 +3,6 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class FindCommand extends Command{
      * @return True after printing search results.
      */
     @Override
-    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
         String keyword = userInput.replaceFirst("find","").strip();
         ArrayList<Task> results = new ArrayList<>(
                 new ArrayList<>(taskManager.getTaskList())
@@ -35,7 +34,6 @@ public class FindCommand extends Command{
                         .filter(x -> x.getTaskName().contains(keyword))
                         .collect(Collectors.toList()));
 
-        ui.showFindResults(new TaskManager(results));
-        return true;
+        return ui.showFindResults(new TaskManager(results));
     }
 }
