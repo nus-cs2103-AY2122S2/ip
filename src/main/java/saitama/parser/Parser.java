@@ -34,8 +34,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
             InvalidCommandException, InvalidTaskNumberException, MissingQueryException {
-        String[] splitCommand = fullCommand.split(" ", 2);
-        splitCommand[0] = splitCommand[0].toUpperCase();
+        String[] splitCommand = fullCommand.split(" ", 2); //split the command into [command_word, command_arguments]
+        splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
 
         switch (command) {

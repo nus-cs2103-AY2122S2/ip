@@ -23,16 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws InvalidFormatException {
         super(description);
-        String[] date = by.split("/");
-        if (date.length < 3) {
-            throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
-        }
-        try {
-            LocalDate deadline = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
-            this.deadline = deadline;
-        } catch (DateTimeParseException e) {
-            throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
-        }
+        this.deadline = processDate(by);
     }
 
     /**
@@ -45,13 +36,24 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) throws InvalidFormatException {
         super(description, isDone);
+        this.deadline = processDate(by);
+    }
+
+    /**
+     * Returns a LocalDate object based on the by parameter.
+     *
+     * @param by The deadline in dd/mm/yyyy format.
+     * @return LocalDate object corresponding to the provided date.
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     */
+    private LocalDate processDate(String by) throws InvalidFormatException {
         String[] date = by.split("/");
         if (date.length < 3) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
         }
         try {
             LocalDate deadline = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
-            this.deadline = deadline;
+            return deadline;
         } catch (DateTimeParseException e) {
             throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
         }
