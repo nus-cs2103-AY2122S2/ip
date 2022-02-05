@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static final File FOLDER_PATH = new File("../../../data");
-    private static final File DATA_PATH = new File("../../../data/data.txt");
+    private static final File FOLDER_PATH = new File("../../../../data");
+    private static final File DATA_PATH = new File("../../../../data/data.txt");
 
     public Storage(){
     }

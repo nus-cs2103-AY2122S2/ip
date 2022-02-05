@@ -1,11 +1,8 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+package duke;
+
 import java.time.LocalDate;
-import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 import java.time.format.FormatStyle;
-import java.util.Date;
 
 
 class Event extends Task {
