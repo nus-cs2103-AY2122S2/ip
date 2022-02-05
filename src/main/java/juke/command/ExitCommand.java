@@ -1,18 +1,19 @@
 package juke.command;
 
 import juke.exception.JukeException;
+import juke.exception.JukeInvalidParameterException;
 
 public class ExitCommand extends Command {
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Default argument not needed"));
+            this.result = Result.error(new JukeException("Default argument not needed."));
             return this;
         }
         return this;

@@ -1,7 +1,8 @@
 package juke.command;
 
+import juke.exception.JukeEmptyTaskListException;
 import juke.exception.JukeException;
-import juke.exception.JukeTaskListEmptyException;
+import juke.exception.JukeInvalidParameterException;
 
 public class ListCommand extends Command {
     
@@ -9,12 +10,12 @@ public class ListCommand extends Command {
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Default argument not needed"));
+            this.result = Result.error(new JukeException("Default argument not needed."));
             return this;
         }
         return this;
@@ -32,7 +33,7 @@ public class ListCommand extends Command {
         try {
             String[] strs = this.juke.getTaskList().list();
             this.result = Result.success(strs);
-        } catch (JukeTaskListEmptyException e) {
+        } catch (JukeEmptyTaskListException e) {
             this.result = Result.error(e);
             return this;
         }

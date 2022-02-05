@@ -7,6 +7,7 @@ import java.util.Arrays;
  * Helper for parsing strings to commands.
  */
 public class Parser {
+    
     /**
      * Takes a string input and parses it into the command, parameters and arguments.
      * The first element of the returned list is a string array containing the command and default argument.

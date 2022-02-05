@@ -1,7 +1,7 @@
 package juke.command;
 
-import juke.exception.JukeException;
 import juke.exception.JukeMissingArgumentException;
+import juke.exception.JukeInvalidParameterException;
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.TaskType;
@@ -24,11 +24,11 @@ public class AddCommand extends Command {
                 if (this.hasArgument("at")) {
                 
                 } else {
-                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName(), "at"));
+                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                     return this;
                 }
             } else {
-                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName(), "at"));
+                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                 return this;
             }
             break;
@@ -37,11 +37,11 @@ public class AddCommand extends Command {
                 if (this.hasArgument("by")) {
             
                 } else {
-                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName(), "by"));
+                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                     return this;
                 }
             } else {
-                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName(), "by"));
+                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                 return this;
             }
             break;
@@ -51,24 +51,24 @@ public class AddCommand extends Command {
                 switch (this.type) {
                 case EVENT:
                     if (!param.equals("at")) {
-                        this.result = Result.error(new JukeException("Unknown parameter " + param));
+                        this.result = Result.error(new JukeInvalidParameterException(param));
                         return this;
                     }
                     break;
                 case DEADLINE:
                     if (!param.equals("by")) {
-                        this.result = Result.error(new JukeException("Unknown parameter " + param));
+                        this.result = Result.error(new JukeInvalidParameterException(param));
                         return this;
                     }
                     break;
                 default:
-                    this.result = Result.error(new JukeException("Unknown parameter " + param));
+                    this.result = Result.error(new JukeInvalidParameterException(param));
                     return this;
                 }
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
             return this;
         }
         return this;
@@ -97,7 +97,7 @@ public class AddCommand extends Command {
                         this.getArgument("by")));
                 break;
             }
-            this.result = Result.success(String.format("New %s added: %s",
+            this.result = Result.success(String.format("New %s added: %s.",
                     this.type.getCommandName(), this.getDefaultArgument()));
         } catch (DateTimeParseException e) {
             // Comment to remember

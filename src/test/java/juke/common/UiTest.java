@@ -22,7 +22,7 @@ public class UiTest {
             assertEquals(0, new Ui().getCommand("aaa"));
             fail();
         } catch (JukeInvalidCommandException e) {
-            assertEquals("Invalid command aaa. Did you mean to type something else?", e.getMessage());
+            assertEquals("[ERROR] Invalid command: aaa.", e.getMessage());
         }
     }
     

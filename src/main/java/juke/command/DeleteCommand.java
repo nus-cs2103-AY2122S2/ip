@@ -1,18 +1,21 @@
 package juke.command;
 
-import juke.exception.JukeException;
+import juke.exception.JukeInvalidParameterException;
+import juke.exception.JukeInvalidTaskIndexException;
+import juke.exception.JukeMissingArgumentException;
+import juke.task.Task;
 
 public class DeleteCommand extends Command {
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeMissingArgumentException("delete"));
             return this;
         }
         return this;
@@ -30,11 +33,11 @@ public class DeleteCommand extends Command {
         try {
             int index = Integer.parseInt(this.getDefaultArgument()) - 1;
             if (index < 0 || index >= juke.getTaskList().size()) {
-                this.result = Result.error(new JukeException("Invalid index"));
+                this.result = Result.error(new JukeInvalidTaskIndexException());
                 return this;
             }
-            this.juke.getTaskList().remove(index);
-            this.result = Result.success("Successfully deleted.");
+            Task task = this.juke.getTaskList().remove(index);
+            this.result = Result.success(String.format("Successfully deleted task: %s.", task.getDescription()));
         } catch (NumberFormatException e) {
             this.result = Result.error(e);
             return this;

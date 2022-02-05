@@ -1,6 +1,7 @@
 package juke.command;
 
-import juke.exception.JukeException;
+import juke.exception.JukeInvalidParameterException;
+import juke.exception.JukeMissingArgumentException;
 
 /**
  * Command for echo.
@@ -12,12 +13,12 @@ public class EchoCommand extends Command {
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeMissingArgumentException("echo"));
             return this;
         }
         return this;

@@ -1,6 +1,8 @@
 package juke.command;
 
-import juke.exception.JukeException;
+import juke.exception.JukeInvalidParameterException;
+import juke.exception.JukeInvalidTaskIndexException;
+import juke.exception.JukeMissingArgumentException;
 import juke.task.TaskStatus;
 
 public class MarkCommand extends Command {
@@ -14,12 +16,12 @@ public class MarkCommand extends Command {
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeMissingArgumentException(this.status.getCommandName()));
             return this;
         }
         return this;
@@ -39,17 +41,19 @@ public class MarkCommand extends Command {
             switch (this.status) {
             case DONE:
                 if (this.juke.getTaskList().markTask(index)) {
-                    this.result = Result.success("Marked task as done.");
+                    this.result = Result.success(String.format("Marked task \u00ab%s\u00bb as done.",
+                        this.juke.getTaskList().get(index).getDescription()));
                 } else {
-                    this.result = Result.error(new JukeException("Invalid index"));
+                    this.result = Result.error(new JukeInvalidTaskIndexException());
                     return this;
                 }
                 break;
             case NOT_DONE:
                 if (this.juke.getTaskList().unmarkTask(index)) {
-                    this.result = Result.success("Marked task as not done");
+                    this.result = Result.success(String.format("Marked task \u00ab%s\u00bb as done.",
+                        this.juke.getTaskList().get(index).getDescription()));
                 } else {
-                    this.result = Result.error(new JukeException("Invalid index"));
+                    this.result = Result.error(new JukeInvalidTaskIndexException());
                     return this;
                 }
                 break;

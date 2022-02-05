@@ -4,19 +4,14 @@ package juke.exception;
  * Class for Juke related exceptions.
  */
 public class JukeException extends Exception {
-    private String cmd;
     
     /**
      * Constructor to initialize exception with a message.
      *
-     * @param cmd Message.
+     * @param msg Message.
      */
-    public JukeException(String cmd) {
-        this.cmd = cmd;
-    }
-    
-    protected String getCommand() {
-        return this.cmd;
+    public JukeException(String msg) {
+        super(msg);
     }
     
     /**
@@ -26,6 +21,6 @@ public class JukeException extends Exception {
      */
     @Override
     public String getMessage() {
-        return this.getCommand();
+        return String.format("[ERROR] %s", super.getMessage());
     }
 }

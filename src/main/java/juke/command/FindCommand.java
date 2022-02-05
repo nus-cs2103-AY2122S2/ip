@@ -1,6 +1,8 @@
 package juke.command;
 
-import juke.exception.JukeException;
+import juke.exception.JukeEmptyTaskListException;
+import juke.exception.JukeInvalidParameterException;
+import juke.exception.JukeMissingArgumentException;
 import juke.task.Task;
 
 import java.util.List;
@@ -10,12 +12,12 @@ public class FindCommand extends Command {
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeException("Unknown parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeMissingArgumentException("find"));
             return this;
         }
         return this;
@@ -32,7 +34,7 @@ public class FindCommand extends Command {
         }
         List<Task> tasks = this.juke.getTaskList().search(this.getDefaultArgument());
         if (tasks.size() == 0) {
-            this.result = Result.error(new JukeException("No results found"));
+            this.result = Result.error(new JukeEmptyTaskListException());
             return this;
         }
         String[] descriptions = new String[tasks.size()];
