@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,16 +17,18 @@ import duke.time.Time;
  */
 public class FileHandler {
 
+    private static final String HOME = System.getProperty("user.home");
+    private static final java.nio.file.Path PATH = java.nio.file.Paths.get(FileHandler.HOME,
+            "desktop", "ip", "data", "duke.txt");
+    // When reading from saved tasks, completed tasks are marked with "1" to represent TRUE
+    private static final String COMPLETED = "1";
+
     /**
-     * Returns the desired path where the output file is stored.
-     *
-     * @return The path in string format.
+     * Asserts that the paths specified have a value.
      */
-    public static String getFilePath() {
-        String home = System.getProperty("user.home");
-        assert home != null : "Home should exist";
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
-        return String.valueOf(path);
+    public static void pathAssertionCheck() {
+        assert FileHandler.HOME != null : "Home should be initialized";
+        assert FileHandler.PATH != null : "Path should be initialized";
     }
 
     /**
@@ -36,48 +37,45 @@ public class FileHandler {
      * @param list Tasklist that contains all tasks.
      */
     public static void readFromFile(Tasklist list) {
-        String home = System.getProperty("user.home");
-        assert home != null : "Home should exist";
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
-        if (java.nio.file.Files.exists(Paths.get(FileHandler.getFilePath()))) {
-            try {
-                String input = Files.readString(path);
-                String[] tasks = input.split("\\r?\\n");
-                for (int i = 0; i < tasks.length; i++) {
-                    String[] taskInfo = tasks[i].split("\\|");
-                    boolean completed = taskInfo[1].equals("1");
-                    switch (taskInfo[0]) {
-                    case "T":
-                        list.addTask(new Todo(completed, taskInfo[2]));
-                        break;
-                    case "D":
-                        if (taskInfo.length == 4) {
-                            list.addTask(new Deadline(completed, taskInfo[2],
-                                    Time.convertToDate(taskInfo[3]), ""));
-                        } else {
-                            list.addTask(new Deadline(completed, taskInfo[2],
-                                    Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                        }
-                        break;
-                    case "E":
-                        if (taskInfo.length == 4) {
-                            list.addTask(new Event(completed, taskInfo[2],
-                                    Time.convertToDate(taskInfo[3]), ""));
-                        } else {
-                            list.addTask(new Event(completed, taskInfo[2],
-                                    Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                        }
-                        break;
-                    default:
-                        throw new ArrayIndexOutOfBoundsException();
+        FileHandler.pathAssertionCheck();
+        if (!java.nio.file.Files.exists(FileHandler.PATH)) {
+            FileHandler.createFolder();
+        }
+        try {
+            String input = Files.readString(FileHandler.PATH);
+            String[] tasks = input.split("\\r?\\n");
+            for (int i = 0; i < tasks.length; i++) {
+                String[] taskInfo = tasks[i].split("\\|");
+                boolean completed = taskInfo[1].equals(COMPLETED);
+                switch (taskInfo[0]) {
+                case "T":
+                    list.addTask(new Todo(completed, taskInfo[2]));
+                    break;
+                case "D":
+                    if (taskInfo.length == 4) {
+                        list.addTask(new Deadline(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), ""));
+                    } else {
+                        list.addTask(new Deadline(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), taskInfo[4]));
                     }
+                    break;
+                case "E":
+                    if (taskInfo.length == 4) {
+                        list.addTask(new Event(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), ""));
+                    } else {
+                        list.addTask(new Event(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                    }
+                    break;
+                default:
+                    throw new ArrayIndexOutOfBoundsException();
                 }
-            } catch (IOException err) {
-                System.out.println("Path specified incorrectly.");
-            } catch (ArrayIndexOutOfBoundsException err) {
-                FileHandler.createFolder();
             }
-        } else {
+        } catch (IOException err) {
+            System.out.println("Path specified incorrectly.");
+        } catch (ArrayIndexOutOfBoundsException err) {
             FileHandler.createFolder();
         }
     }
@@ -88,7 +86,7 @@ public class FileHandler {
      * @param list Tasklist that contains all tasks.
      */
     public static void writeToFile(Tasklist list) {
-        String path = FileHandler.getFilePath();
+        FileHandler.pathAssertionCheck();
         StringBuilder writeTasks = new StringBuilder();
         for (int i = 0; i < list.getTotalTasks(); i++) {
             String digit;
@@ -112,7 +110,7 @@ public class FileHandler {
         }
         String content = writeTasks.toString();
         try {
-            FileWriter writer = new FileWriter(path);
+            FileWriter writer = new FileWriter(String.valueOf(FileHandler.PATH));
             writer.write(content);
             writer.close();
         } catch (IOException err) {
@@ -124,8 +122,8 @@ public class FileHandler {
      * Creates directory for the output file.
      */
     public static void createFolder() {
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data");
+        FileHandler.pathAssertionCheck();
+        java.nio.file.Path path = java.nio.file.Paths.get(FileHandler.HOME, "desktop", "ip", "data");
         File file = new File(String.valueOf(path));
         file.mkdirs();
     }
