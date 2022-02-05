@@ -35,7 +35,7 @@ public class Printer {
 
     public static void list(TaskList taskList) {
         System.out.println("\n" + BLANK_LINE);
-        for (int i = 1; i < taskList.size() + 1; i++) {
+        for (int i = 1; i < taskList.getTaskListSize() + 1; i++) {
             Task curr = taskList.get(i - 1);
             String toPrint = "     " + i + "." + curr;
             System.out.println(toPrint);
@@ -59,21 +59,21 @@ public class Printer {
 
     public static void todo(String todoString, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
-                + "\n" + "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+                + "\n" + "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
     public static void deadline(String deadlineName, String deadlineTime, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
                 "(by:" + deadlineTime + ")" + "\n" +
-                "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
     public static void event(String eventName, String eventTime, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
                 "(at: " + eventTime + ")" + "\n" +
-                "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
@@ -81,6 +81,6 @@ public class Printer {
         Task deleteTask = taskList.get(numToDelete - 1);
         taskList.remove(numToDelete);
         System.out.println(BLANK_LINE + "     Noted. I've removed this task: " + "\n" + "     " + deleteTask
-                + "\n" + "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE);
+                + "\n" + "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE);
     }
 }
