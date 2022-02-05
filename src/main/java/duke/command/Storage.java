@@ -1,19 +1,24 @@
 package duke.command;
 
-import java.io.File;
-import java.io.FileWriter;
+
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 
 public class Storage {
-    private final String path;
+    private final Path path;
     private final TaskList taskList;
 
-    public Storage(String path, TaskList taskList) {
-        this.path = path;
+    public Storage(String strPath, TaskList taskList) {
+        this.path = Paths.get(strPath);
         this.taskList = taskList;
         try {
-            File myObj = new File(path);
-            myObj.createNewFile();
+            if (Files.notExists(path)) {
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
+            }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -22,9 +27,7 @@ public class Storage {
 
     public void write() {
         try {
-            FileWriter myWriter =  new FileWriter(path);
-            myWriter.write(taskList.writeItem());
-            myWriter.close();
+            Files.writeString(path, taskList.writeItem());
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
