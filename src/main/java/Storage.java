@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
@@ -8,7 +7,7 @@ import java.nio.file.Path;
 import java.io.FileWriter;
 
 public class Storage {
-    ArrayList<Task> arr;
+    TaskList taskList;
     String FILEPATH = "data/data.txt";
 
     /**
@@ -18,37 +17,38 @@ public class Storage {
         try {
             File dataFile = new File(FILEPATH);
             Scanner sc = new Scanner(dataFile);
-            ArrayList<Task> newArr = new ArrayList<>();
+            TaskList newTaskList = new TaskList();
             while (sc.hasNextLine()) {
                 String nextLine = sc.nextLine();
-                String[] nextLineArr = nextLine.split(" ");
-                String taskType = nextLineArr[0];
+                String[] taskListaySplitBySpaces = nextLine.split(" ");
+                String taskType = taskListaySplitBySpaces[0];
+                String[] taskListaySplitBySlash = nextLine.split(" / ");
                 switch (taskType) {
                 case "[T]":
-                    Todo newTodo = new Todo(nextLineArr[2]);
-                    if (nextLineArr[1].equals("[✓]")) {
+                    Todo newTodo = new Todo(taskListaySplitBySlash[1]);
+                    if (taskListaySplitBySpaces[1].equals("[✓]")) {
                         newTodo.setMarkedTask();
                     }
-                    newArr.add(newTodo);
+                    newTaskList.add(newTodo);
                     break;
                 case "[D]":
-                    Deadline newDeadline = (nextLineArr[6].equals("null")) ? new Deadline(nextLineArr[2], nextLineArr[4]) : new Deadline(nextLineArr[2], nextLineArr[4], nextLineArr[6]);
-                    if (nextLineArr[1].equals("[✓]")) {
+                    Deadline newDeadline = (taskListaySplitBySlash[3].equals("null")) ? new Deadline(taskListaySplitBySlash[1], taskListaySplitBySlash[2]) : new Deadline(taskListaySplitBySlash[1], taskListaySplitBySlash[2], taskListaySplitBySlash[3]);
+                    if (taskListaySplitBySpaces[1].equals("[✓]")) {
                         newDeadline.setMarkedTask();
                     }
-                    newArr.add(newDeadline);
+                    newTaskList.add(newDeadline);
                     break;
                 case "[E]":
-                    Event newEvent = (nextLineArr[6].equals("null")) ? new Event(nextLineArr[2], nextLineArr[4]) : new Event(nextLineArr[2], nextLineArr[4], nextLineArr[6]);
-                    if (nextLineArr[1].equals("[✓]")) {
+                    Event newEvent = (taskListaySplitBySlash[3].equals("null")) ? new Event(taskListaySplitBySlash[1], taskListaySplitBySlash[2]) : new Event(taskListaySplitBySlash[1], taskListaySplitBySlash[2], taskListaySplitBySlash[3]);
+                    if (taskListaySplitBySpaces[1].equals("[✓]")) {
                         newEvent.setMarkedTask();
                     }
-                    newArr.add(newEvent);
+                    newTaskList.add(newEvent);
                     break;
                 default:
                 }
             }
-            this.arr = newArr;
+            this.taskList = newTaskList;
         } catch (IOException e){
             Path filePath = Paths.get("data");
             boolean dataDirectoryExists = Files.exists(filePath);
@@ -56,7 +56,7 @@ public class Storage {
                 new File("data").mkdir();
             }
             new File(FILEPATH).createNewFile();
-            this.arr = new ArrayList<>();
+            this.taskList = new TaskList();
         }
     }
 
@@ -69,13 +69,13 @@ public class Storage {
         String output = "";
         if (task instanceof Todo) {
             String mark = (task.hasBeenMarked()) ? "[✓]" : "[X]";
-            output = "[T] " + mark + " " + task.name + "\n";
+            output = "[T] " + mark + " / " + task.name + "\n";
         } else if (task instanceof Deadline deadline) {
             String mark = (deadline.hasBeenMarked()) ? "[✓]" : "[X]";
-            output = "[D] " + mark + " " + deadline.name + "| " + deadline.dueDate + " | " + deadline.dueTime + "\n";
+            output = "[D] " + mark + " / " + deadline.name + " / " + deadline.dueDate + " / " + deadline.dueTime + "\n";
         } else if (task instanceof Event event) {
             String mark = (event.hasBeenMarked()) ? "[✓]" : "[X]";
-            output = "[E] " + mark + " " + event.name + "| " + event.dueDate + " | " + event.dueTime + "\n";
+            output = "[E] " + mark + " / " + event.name + " / " + event.dueDate + " / " + event.dueTime + "\n";
         }
         return output;
     }
@@ -86,41 +86,41 @@ public class Storage {
      * @throws IOException if there is an error appending the task to data.txt
      */
     public void writeData(Task task) throws IOException {
-        this.arr.add(task);
+        this.taskList.add(task);
         FileWriter fw = new FileWriter(this.FILEPATH, true);
         fw.write(taskToStringConverter(task));
         fw.close();
     }
 
     /**
-     * Used when delete [index] is called for Duke. Deletes the entire file and rewrites it based on the new array
-     * Amends the current stored array as well
+     * Used when delete [index] is called for Duke. Deletes the entire file and rewrites it based on the new taskListay
+     * Amends the current stored taskListay as well
      * @param idx index of task to be deleted
      * @throws IOException if there is an error rewriting data.txt
      */
     public void deleteData(int idx) throws IOException {
-        Task taskToBeDeleted = this.arr.get(idx);
-        arr.remove(idx);
+        Task taskToBeDeleted = this.taskList.get(idx);
+        taskList.remove(idx);
         FileWriter fw = new FileWriter(this.FILEPATH);
-        for (Task task : this.arr) {
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
             fw.write(taskToStringConverter(task));
         }
         fw.close();
     }
 
     /**
-     * Obtains list of tasks from this.arr and returns it
+     * Obtains list of tasks from this.taskList and returns it
      * @return String that lists out the tasks currently
      */
     public String list() {
         String listOfTasks = "";
-        int i = 0;
-        for (Task item : this.arr) {
-            i += 1;
-            if (item.hasBeenMarked()) {
-                listOfTasks += i + ". " + item + "\n";
+        for (int i = 1; i <= this.taskList.size(); i++) {
+            Task task = this.taskList.get(i - 1);
+            if (task.hasBeenMarked()) {
+                listOfTasks += i + ". " + task + "\n";
             } else {
-                listOfTasks += i + ". " + item + "\n";
+                listOfTasks += i + ". " + task + "\n";
             }
         }
         return listOfTasks;
@@ -132,7 +132,7 @@ public class Storage {
      * @return task that is requested
      */
     public Task get(int idx) {
-        return this.arr.get(idx);
+        return this.taskList.get(idx);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Storage {
      * @return size of task list
      */
     public int taskListSize() {
-        return this.arr.size();
+        return this.taskList.size();
     }
 
 }
