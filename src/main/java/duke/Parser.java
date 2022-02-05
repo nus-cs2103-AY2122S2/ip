@@ -117,6 +117,7 @@ public class Parser {
         default:
             throwInvalidTypeDeclaration();
         }
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
 
@@ -144,7 +145,7 @@ public class Parser {
         } else {
             throwInvalidTypeDeclaration();
         }
-
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
 
@@ -177,6 +178,7 @@ public class Parser {
                 throwInvalidTypeDeclaration();
             }
         }
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
 
@@ -194,6 +196,7 @@ public class Parser {
                 throwWrongEventFormatException();
             }
         }
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
 
@@ -329,9 +332,6 @@ public class Parser {
             throw new DukeException("Pardon me, but the end time you have provided me"
                 + " takes place before the begin time. I must say that time travel is...\nnot in my repertoire...");
         }
-
-        assert false : "Runtime should not reach here";
-        return null; //should not reach here
     }
 
     private void throwIfNoKeyword(String message, String keyword) throws DukeException {
@@ -339,9 +339,6 @@ public class Parser {
         if (keyword.length() < 1 || indexOfSpace == -1) {
             throw new DukeException("Pardon me, but the body of the find command should not be empty");
         }
-
-        assert false : "Runtime should not reach here";
-        return null; //should not reach here
     }
 
     private void throwWrongToDoFormatException() throws DukeException {
