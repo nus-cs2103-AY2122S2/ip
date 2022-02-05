@@ -1,3 +1,4 @@
+//noinspection GroovyAssignabilityCheck
 plugins {
     id 'java'
     id 'application'
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke.Main.Duke"
+    mainClassName = "duke.main.Duke"
 }
 
 shadowJar {
