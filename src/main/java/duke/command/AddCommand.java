@@ -19,7 +19,8 @@ public class AddCommand extends Commands {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DEADLINE = "deadline";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Add' Command Executed Unsuccessfully";
+    public static final String FAILURE_MESSAGE
+            = "    'Add' Command Executed Unsuccessfully";
 
     private static final boolean IS_EXIT = false;
     private final String commandWord;
@@ -79,11 +80,13 @@ public class AddCommand extends Commands {
 
         } catch (IndexOutOfBoundsException err) {
             System.out
-                    .println("    Addition of tasks unsuccessful, ensure that you are writing in the correct format.");
+                    .println("    Addition of tasks unsuccessful, "
+                            + "ensure that you are writing in the correct format.");
         } catch (DateTimeParseException err) {
             System.out
                     .println(
-                            "    Addition of tasks unsuccessful, ensure that the date is valid, and goes by the foramt of (YYYY-MM-DD).");
+                            "    Addition of tasks unsuccessful, ensure that the date is valid, " +
+                                    "and goes by the foramt of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
     }

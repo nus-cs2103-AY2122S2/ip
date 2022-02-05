@@ -5,7 +5,7 @@ package duke.command;
  * corresponds to a result represented by a string e.g., <code>"Command successful!"</code>
  */
 public class CommandResult {
-    String commandResult;
+    private final String commandResult;
 
     public CommandResult(String commandResult) {
         this.commandResult = commandResult;

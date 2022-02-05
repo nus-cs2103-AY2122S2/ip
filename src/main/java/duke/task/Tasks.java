@@ -7,17 +7,17 @@ package duke.task;
  */
 public class Tasks {
     String name; // Name of duke.task
-    boolean completed; // Completion of duke.task
+    boolean hasCompleted; // Completion of duke.task
 
     // Constructor for Task
     public Tasks(String taskName) {
         this.name = taskName;
-        this.completed = false;
+        this.hasCompleted = false;
     }
 
     public Tasks(String taskName, boolean completion) {
         this.name = taskName;
-        this.completed = completion;
+        this.hasCompleted = completion;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Tasks {
 
     // Get completion status of the duke.task
     Boolean getCompletion() {
-        return this.completed;
+        return this.hasCompleted;
     }
 
     public String toDatabaseString() {

@@ -13,7 +13,7 @@ public class HelpCommand extends Commands {
     public static final String COMMAND_WORDS = "help";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Help' Command Executed Unsuccessfully";
-    private static boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
 
     /**
      * Returns the apt exit instruction after the command is executed.

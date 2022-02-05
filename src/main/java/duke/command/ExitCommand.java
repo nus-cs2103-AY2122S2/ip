@@ -9,7 +9,6 @@ import duke.storage.Storage;
  * a command that exits the program.
  */
 public class ExitCommand extends Commands {
-
     public static final String COMMAND_WORDS = "bye";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Bye' Command Executed Unsuccessfully";

@@ -18,7 +18,7 @@ import duke.task.Todos;
  * facilitate connection to the database file e.g., <code>"./src/database.txt"</code>.
  */
 public class Storage {
-    String databasePath;
+    private final String databasePath;
 
     public Storage(String databasePath) {
         this.databasePath = databasePath;
@@ -86,18 +86,19 @@ public class Storage {
                 switch (taskDataSplit[0]) {
                     case "T":
                         taskList.add(new Todos(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false));
+                                taskDataSplit[1].equals("X")));
                         break;
 
                     case "E":
                         taskList.add(new Events(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false, taskDataSplit[3]));
+                                taskDataSplit[1].equals("X"),
+                                        taskDataSplit[3]));
                         break;
 
                     case "D":
                         taskList.add(new Deadlines(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false,
-                                taskDataSplit[3]));
+                                taskDataSplit[1].equals("X"),
+                                        taskDataSplit[3]));
                         break;
                 }
             }
@@ -125,5 +126,9 @@ public class Storage {
             System.out.println("    Database loading failed.");
         }
         return taskList;
+    }
+
+    public String getDatabasePath() {
+        return databasePath;
     }
 }

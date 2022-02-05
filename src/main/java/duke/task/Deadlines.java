@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * <code>"Eat lunch", true, "2012-06-03"</code>
  */
 public class Deadlines extends Tasks {
-    LocalDate deadline; // Deadline to complete deadline duke.task
+    private final LocalDate deadline; // Deadline to complete deadline duke.task
 
     // Constructor
     public Deadlines(String taskName, String deadline) throws DateTimeParseException {
@@ -35,7 +35,8 @@ public class Deadlines extends Tasks {
      */
     @Override
     public Deadlines completeTask() {
-        return new Deadlines(super.getName(), true, deadline.toString());
+        return new Deadlines(super.getName(), true,
+                deadline.toString());
     }
 
     /**
@@ -45,19 +46,20 @@ public class Deadlines extends Tasks {
      */
     @Override
     public Deadlines uncompleteTask() {
-        return new Deadlines(super.getName(), false, deadline.toString());
+        return new Deadlines(super.getName(), false,
+                deadline.toString());
     }
 
     // Save to database format
     public String toDatabaseString() {
-        return "D | " + (this.getCompletion() == true ? "X" : " ") + " | " + super.getName()
-                + " | " + deadline + "\n";
+        return "D | " + (this.getCompletion() ? "X" : " ") + " | "
+                + super.getName() + " | " + deadline + "\n";
     }
 
     // toString returning duke.task
     public String toString() {
-        return "[D][" + (this.getCompletion() == true ? "X" : " ") + "] " + super.getName()
-                + " (by: " + deadline + ")";
+        return "[D][" + (this.getCompletion() ? "X" : " ") + "] "
+                + super.getName() + " (by: " + deadline + ")";
     }
 
 }
