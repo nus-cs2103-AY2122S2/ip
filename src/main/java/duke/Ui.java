@@ -18,7 +18,6 @@ public class Ui {
             if (command.equals("bye")) {
                 startGoodbye();
                 Storage.saveList(storeList);
-                break;
             } else {
                 CommandParser.parseCommand(command);
             }
@@ -27,16 +26,16 @@ public class Ui {
     }
 
     public static String unknownCommand() {
-        return "Master, I have all the knowledge in the world but I do not recognise that command," +
+        return "Master, I have all the knowledge in the world but I do not recognise that command," + "\n" +
                 " Please wish again";
     }
 
     public static String startGoodbye() {
-        return "Rub my lamp to summon me again, Good bye for now master";
+        return "Rub my lamp to summon me again!" + "\n" + "Good bye for now master";
     }
 
     public static String startGreeting() {
-        return "A very good day to you master, I'm Blue the Genie " +
-                "What do you wish for today? Your wish is my command";
+        return "A very good day to you master, I'm Blue the Genie " + "\n" +
+                "What do you wish for today?" + "\n" + "Your wish is my command";
     }
 }

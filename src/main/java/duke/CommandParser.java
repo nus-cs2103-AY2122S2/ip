@@ -19,6 +19,8 @@ public class CommandParser {
     public static String parseCommand(String command) throws IOException {
         if (command.equals("list")) {
             return TaskList.printTheList(Duke.storeList);
+        } else if (command.equals("hello") | command.equals("hi")) {
+            return Ui.startGreeting();
         } else if (command.startsWith("mark ")) {
             return TaskList.markCommand(command, Duke.storeList);
         } else if (command.startsWith("unmark ")) {

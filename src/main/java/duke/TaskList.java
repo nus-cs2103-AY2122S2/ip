@@ -21,7 +21,7 @@ public class TaskList {
         StringBuffer sb = new StringBuffer();
         for (Task s : storeList) {
             sb.append(s.toString());
-            sb.append(" ");
+            sb.append("\n");
         }
 
         String str = sb.toString();
@@ -38,16 +38,17 @@ public class TaskList {
      */
     public static String deleteTask(String command, ArrayList<Task> storeList) {
         if (command.length() <= 7) {
-            return "Master, you wished wrongly. Remember you have to wish in this format " +
+            return "Master, you wished wrongly. Remember you have to wish in this format " + "\n" +
                     "delete tasknumber. Please wish again";
         } else {
             try {
-                Task t = storeList.get(Integer.parseInt(command.substring(7)));
+                Task t = storeList.get(Integer.parseInt(command.substring(7)) + 1);
                 storeList.remove(Integer.parseInt(command.substring(7)));
-                return "Yes master. The task " + t.toString() + " has been removed " + "Now you have "
+                return "Yes master. The task " + t.toString() + " has been removed " + "\n" + "Now you have "
                         + storeList.size() + " tasks left master";
             } catch (IndexOutOfBoundsException e) {
-                return "Master, you only have " + storeList.size() + " tasks now. Please choose another task number";
+                return "Master, you only have " + storeList.size() + " tasks now." + "\n" +
+                        "Please choose another task number";
             }
         }
     }
@@ -64,7 +65,7 @@ public class TaskList {
         int taskNumber1 = Integer.parseInt(command.substring(7));
         if (taskNumber1 > storeList.size()) {
             return "Master, you do not have that many tasks, you currently only have "
-                    + storeList.size() + " tasks. Please wish again";
+                    + storeList.size() + " tasks. " + "\n" + "Please wish again";
         } else if (taskNumber1 <= 0) {
             return "Master, I am only a genie. Please choose a number between 1 and " + storeList.size();
         } else {
@@ -76,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark a task status in the task list
+     * Mark a task status in the task list
      *
      * @param command command by user which specify which task
      * @param storeList tasklist to be marked from
@@ -87,7 +88,7 @@ public class TaskList {
         int taskNumber = Integer.parseInt(command.substring(5));
         if (taskNumber > storeList.size()) {
             return "Master, you do not have that many tasks, you currently only have "
-                    + storeList.size() + " tasks. Please wish again";
+                    + storeList.size() + " tasks. " + "\n" + "Please wish again";
         } else if (taskNumber <= 0) {
             return "Master, I am only a genie. Please choose a number between 1 and " + storeList.size();
         } else {
@@ -109,8 +110,8 @@ public class TaskList {
     public static String addEvent(String command, ArrayList<Task> storeList) {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 6) {
-            return "Master, you wished wrongly. Remember you have to wish in this format " +
-                    "deadline task /at dateofevent. Please wish again";
+            return "Master, you wished wrongly." + "\n" + "Remember you have to wish in this format " +
+                    "event task /at TIME." + "\n" + "Please wish again";
         } else {
             String newtask = command.substring(6, slash - 1);
             String attime = command.substring(slash + 1);
@@ -131,13 +132,13 @@ public class TaskList {
      */
     public static String addTodo(String command, ArrayList<Task> storeList) {
         if (command.length() < 5) {
-            return "Master, I have all the knowledge in the world but I do not know what you want to do," +
+            return "Master, I have all the knowledge in the world but I do not know what you want to do," + "\n" +
                     " Please wish again in the format todo task";
         } else {
             String newtask = command.substring(5);
             Todo t = new Todo(newtask);
             storeList.add(t);
-            return "Added to my brain master:" + t.toString() + "Currently I have " +
+            return "Added to my brain master:" + "\n" + t.toString() + "\n" + "Currently I have "  +
                     storeList.size() + " things in my brain";
         }
     }
@@ -154,17 +155,17 @@ public class TaskList {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 9) {
             return "Master, you wished wrongly. Remember you have to wish in this format " +
-                    "deadline task /by dateofdeadline. Please wish again";
+                    "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
         } else {
             String newtask = command.substring(9, slash - 1);
             if (newtask.equals("")) {
                 return "Master, you wished wrongly. Remember you have to wish in this format " +
-                        "deadline task /by dateofdeadline. Please wish again";
+                        "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
             } else {
                 String endtime = command.substring(slash + 1);
                 Deadline d = new Deadline(newtask, endtime);
                 storeList.add(d);
-                return "Added to my brain master:" + d.toString() + "Currently I have " +
+                return "Added to my brain master:" + "\n" + d.toString() + "Currently I have " +
                         storeList.size() + " things in my brain";
             }
         }

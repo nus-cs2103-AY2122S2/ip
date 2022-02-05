@@ -1,4 +1,5 @@
 package duke;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -17,10 +18,15 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        LocalDate date = LocalDate.parse(by.substring(3, 13));
-        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        String dateFormatted = date.format(newFormat);
-        return dateFormatted;
+        try {
+            LocalDate date = LocalDate.parse(by.substring(3, 13));
+            DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            String dateFormatted = date.format(newFormat);
+            return dateFormatted;
+        } catch (DateTimeException e) {
+            return "Master, you wished wrongly. Remember you have to wish in this format " +
+                    "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
+        }
     }
 
     public String getTime() {
