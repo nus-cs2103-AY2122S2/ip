@@ -26,6 +26,16 @@ import duke.task.ToDo;
  * Represents a parser for Duke. It deals with making sense of the user command.
  */
 public class Parser {
+    private static final int EMPTY_INPUT = 0;
+    private static final int INDEX_AFTER_DELETE = 1;
+    private static final int INDEX_AFTER_MARK = 1;
+    private static final int INDEX_AFTER_UNMARK = 1;
+    private static final int INPUT_AFTER_AT = 3;
+    private static final int INPUT_AFTER_BY = 3;
+    private static final int INPUT_AFTER_TODO = 4;
+    private static final int INPUT_AFTER_FIND = 4;
+    private static final int INPUT_AFTER_EVENT = 5;
+    private static final int INPUT_AFTER_DEADLINE = 8;
 
     /**
      * Converts an input of type String into LocalDate. E.g., 12-12-2022.
@@ -93,37 +103,19 @@ public class Parser {
         } else if (input.equalsIgnoreCase("list")) {
             return new PrintCommand();
         } else if (firstWord.equalsIgnoreCase("mark")) {
-            return handleMarkInput(strs[1]);
+            return handleMarkInput(strs[INDEX_AFTER_MARK]);
         } else if (firstWord.equalsIgnoreCase("unmark")) {
-            return handleUnmarkInput(strs[1]);
+            return handleUnmarkInput(strs[INDEX_AFTER_UNMARK]);
         } else if (firstWord.equalsIgnoreCase("todo")) {
-            String subString = input.substring(4).trim(); // take the remaining of the input String after "todo"
-            if (subString.length() == 0) { // Check for empty description
-                throw new IncompleteInputException(firstWord);
-            } else {
-                return handleToDoInput(subString);
-            }
+            return handleTodo(input, firstWord);
         } else if (firstWord.equalsIgnoreCase("deadline")) {
-            String subString = input.substring(8).trim(); // take the remaining of the input String after "deadline"
-            if (subString.length() == 0) { // Check for empty description
-                throw new IncompleteInputException(firstWord);
-            } else {
-                return handleDeadlineInput(subString);
-            }
+            return handleDeadline(input, firstWord);
         } else if (firstWord.equalsIgnoreCase("event")) {
-            String subString = input.substring(5).trim(); // take the remaining of the input String after "event"
-            if (subString.length() == 0) { // Check for empty description
-                throw new IncompleteInputException(firstWord);
-            } else {
-                return handleEventInput(subString);
-            }
+            return handleEvent(input, firstWord);
         } else if (firstWord.equalsIgnoreCase("delete")) {
-            int listIndex = Integer.parseInt(strs[1]); // retrieve the index after delete
-            Task taskToBeDeleted = TaskList.TASK_ARRAY_LIST.get(listIndex - 1);
-            return new DeleteCommand(taskToBeDeleted);
+            return handleDelete(strs);
         } else if (firstWord.equalsIgnoreCase("find")) {
-            String keyword = input.substring(4).trim(); // take the remaining of the input String
-            return new FindCommand(keyword);
+            return handleFind(input);
         } else {
             throw new UnknownInputException();
         }
@@ -158,12 +150,13 @@ public class Parser {
         if (!inputArgs[1].substring(0, 3).equals("by ")) {
             throw new UnknownInputException();
         } else {
-            String deadlineDateTime = inputArgs[1].substring(3); // retrieves the String after '/by'
+            String description = inputArgs[0];
+            String deadlineDateTime = inputArgs[1].substring(INPUT_AFTER_BY);
             String[] dateTimeArgs = deadlineDateTime.split(" ");
             try {
                 LocalDate deadlineDate = convertStringToLocalDate(dateTimeArgs[0]);
                 LocalTime deadlineTime = convertStringToLocalTime(dateTimeArgs[1]);
-                Task deadline = new Deadline(inputArgs[0], deadlineDate, deadlineTime);
+                Task deadline = new Deadline(description, deadlineDate, deadlineTime);
                 return new AddCommand(deadline);
             } catch (DateTimeParseException e) {
                 throw new DukeException("you sussy baka, that's the wrong date format!"
@@ -178,7 +171,8 @@ public class Parser {
         if (!inputArgs[1].substring(0, 3).equals("at ")) {
             throw new UnknownInputException();
         } else {
-            String eventDateTime = inputArgs[1].substring(3); // retrieves the String after '/at'
+            String description = inputArgs[0];
+            String eventDateTime = inputArgs[1].substring(INPUT_AFTER_AT);
             String[] dateTimeArgs = eventDateTime.split(" ");
             try {
                 LocalDate eventDate = convertStringToLocalDate(dateTimeArgs[0]);
@@ -186,12 +180,50 @@ public class Parser {
                 String[] splitEventTimes = eventTime.split("-");
                 LocalTime eventStartTime = convertStringToLocalTime(splitEventTimes[0]);
                 LocalTime eventEndTime = convertStringToLocalTime(splitEventTimes[1]);
-                Task event = new Event(inputArgs[0], eventDate, eventStartTime, eventEndTime);
+                Task event = new Event(description, eventDate, eventStartTime, eventEndTime);
                 return new AddCommand(event);
             } catch (DateTimeParseException e) {
                 throw new DukeException("you sussy baka, that's the wrong date format! "
                         + "Enter dd-MM-yyyy HHmm-HHmm");
             }
         }
+    }
+
+    private static Command handleTodo(String str, String firstWord) throws IncompleteInputException {
+        String subString = str.substring(INPUT_AFTER_TODO).trim();
+        if (subString.length() == EMPTY_INPUT) {
+            throw new IncompleteInputException(firstWord);
+        } else {
+            return handleToDoInput(subString);
+        }
+    }
+
+    private static Command handleDeadline(String str, String firstWord) throws DukeException {
+        String subString = str.substring(INPUT_AFTER_DEADLINE).trim();
+        if (subString.length() == EMPTY_INPUT) {
+            throw new IncompleteInputException(firstWord);
+        } else {
+            return handleDeadlineInput(subString);
+        }
+    }
+
+    private static Command handleEvent(String str, String firstWord) throws DukeException {
+        String subString = str.substring(INPUT_AFTER_EVENT).trim();
+        if (subString.length() == EMPTY_INPUT) {
+            throw new IncompleteInputException(firstWord);
+        } else {
+            return handleEventInput(subString);
+        }
+    }
+
+    private static Command handleDelete(String[] strings) {
+        int listIndex = Integer.parseInt(strings[INDEX_AFTER_DELETE]);
+        Task taskToBeDeleted = TaskList.TASK_ARRAY_LIST.get(listIndex - 1);
+        return new DeleteCommand(taskToBeDeleted);
+    }
+
+    private static Command handleFind(String str) {
+        String keyword = str.substring(INPUT_AFTER_FIND).trim();
+        return new FindCommand(keyword);
     }
 }
