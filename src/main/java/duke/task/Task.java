@@ -25,6 +25,7 @@ public abstract class Task {
      */
     public static Task decodeTaskData(String taskData) {
         String[] data = taskData.split(",");
+        assert data.length == 4 : "Data file should have 4 comma separated values";
         String type = data[0];
         String name = data[1];
         String isDone = data[2];
@@ -41,6 +42,8 @@ public abstract class Task {
             task = new Deadline(name, time);
             break;
         }
+
+        assert task != null : "Task should not be null";
         if (isDone.equals("Y")) {
             task.markDone();
         }
