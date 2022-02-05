@@ -12,13 +12,6 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Constructor to create empty task list.
-     */
-    public TaskList() {
-        taskList = new ArrayList<>();
-    }
-
-    /**
      * Constructor to create TaskList object with loaded task.
      *
      * @param taskList list of tasks as an array list.

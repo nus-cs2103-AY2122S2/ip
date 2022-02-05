@@ -52,6 +52,9 @@ public class Storage {
      * @throws InvalidFileSyntaxException If syntax is unknown.
      */
     private void parseMarkSyntax(Task task, String[] tokens) throws InvalidFileSyntaxException {
+
+        assert tokens.length > 1 : "Incorrect number of tokens to parse.";
+
         tokens[1] = tokens[1].trim();
         if (tokens[1].equals("1")) {
             task.markAsDone();
