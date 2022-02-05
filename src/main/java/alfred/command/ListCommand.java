@@ -22,6 +22,14 @@ public class ListCommand extends Command {
         ui.sandwichAndPrint(out);
     }
 
+    /**
+     * Executes the list command by iterating through all tasks
+     * in the internal data state and printing them to console.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output meant for user.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) {
         String out = "";

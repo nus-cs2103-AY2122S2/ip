@@ -48,6 +48,16 @@ public class DeadlineCommand extends Command {
 
     }
 
+    /**
+     * Executes the Deadline command and returns the String response
+     * from Alfred to the user.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output meant for user.
+     * @throws InvalidDateTimeException If date-time being given is not in ISO format.
+     * @throws InvalidInputException    If any missing arguments.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidDateTimeException, InvalidInputException {

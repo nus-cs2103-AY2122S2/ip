@@ -22,7 +22,7 @@ public abstract class Task {
 
     // instance attributes
     protected final String description;
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /**
      * Constructor of the parent class, so every task must have
@@ -32,11 +32,11 @@ public abstract class Task {
      */
     Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     private String markIfComplete() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return Task.COMPLETION_MARK;
         } else {
             return Task.INCOMPLETE_MARK;
@@ -47,14 +47,14 @@ public abstract class Task {
      * Updates internal state of the task to be complete.
      */
     public void markComplete() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Updates internal state of the task to be incomplete.
      */
     public void markIncomplete() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**

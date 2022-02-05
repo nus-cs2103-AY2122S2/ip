@@ -164,6 +164,11 @@ public class AlfredStorage {
         }
     }
 
+    /**
+     * Returns a string that describes state of the task list.
+     *
+     * @return String description of task list.
+     */
     public String summarizeList() {
         return "Now you have " + this.taskList.size() + " task(s) in the your list.";
     }
@@ -197,7 +202,7 @@ public class AlfredStorage {
             } catch (IOException ioe) {
                 System.out.println(
                         "Something went wrong trying to save the file: " + ioe.getMessage()
-                        + "\nPlease restart.");
+                                + "\nPlease restart.");
             }
             return arr;
         }

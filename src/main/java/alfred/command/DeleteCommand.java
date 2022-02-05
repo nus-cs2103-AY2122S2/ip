@@ -38,8 +38,19 @@ public class DeleteCommand extends Command {
         ui.sandwichAndPrint(response);
     }
 
+    /**
+     * Executes the Delete Command, by removing the designated task from
+     * the internal storage object used by Alfred.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output meant for user.
+     * @throws InvalidInputException If too many or too few arguments, or list index is not numeric.
+     * @throws InvalidIndexException If item index is out of bounds.
+     */
     @Override
-    public String response(AlfredUserInterface ui, AlfredStorage storage) throws InvalidInputException,
+    public String response(AlfredUserInterface ui, AlfredStorage storage)
+            throws InvalidInputException,
             InvalidIndexException {
 
         // check only two arguments

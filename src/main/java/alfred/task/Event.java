@@ -33,7 +33,7 @@ public class Event extends Task {
 
     @Override
     public String taskToSaveString() {
-        String mark = this.completed ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
+        String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
         return String.join(Task.FORMAT_SPLIT, this.type, mark, this.description, this.dateAndTime);
     }
 

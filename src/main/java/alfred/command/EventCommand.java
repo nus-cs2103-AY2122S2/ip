@@ -46,6 +46,16 @@ public class EventCommand extends Command {
         ui.sandwichAndPrint(response);
     }
 
+    /**
+     * Executes the event command. Checks for valid input, modifies
+     * the internal data state of Alfred, then returns String output for user.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output meant for user.
+     * @throws InvalidDateTimeException If date-time being given is not in ISO format.
+     * @throws InvalidInputException    If any missing arguments.
+     */
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidDateTimeException, InvalidInputException {
         // check validity of data

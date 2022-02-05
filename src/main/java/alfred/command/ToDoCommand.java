@@ -42,8 +42,21 @@ public class ToDoCommand extends Command {
         ui.sandwichAndPrint(out);
     }
 
+    /**
+     * Executes the T0D0 command, by adding a new task to the internal
+     * data state of Alfred and printing to console.
+     *
+     * @param ui      AlfredUserInterface object used by Alfred for handling
+     *                interactions with the user.
+     * @param storage AlfredStorage object used to handle the internal data
+     *                states of Alfred.
+     * @return String output meant for user.
+     * @throws MissingInputException If there is no valid task description after
+     *                               the "todo" keyword.
+     */
     @Override
-    public String response(AlfredUserInterface ui, AlfredStorage storage) throws MissingInputException {
+    public String response(AlfredUserInterface ui, AlfredStorage storage)
+            throws MissingInputException {
         // validity check
         if ((this.description.length() < 1) || this.description.split(" ").length == 0) {
             throw new MissingInputException();

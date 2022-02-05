@@ -40,6 +40,17 @@ public class MarkCommand extends Command {
         ui.sandwichAndPrint(out);
     }
 
+    /**
+     * Executes the mark command, by modifying the internal data state
+     * of Alfred and then printing the change to console.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output for user.
+     * @throws InvalidInputException If there is more than 1 argument following "mark"
+     *                               in the input.
+     * @throws InvalidIndexException If object to be marked is at an invalid index.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidInputException,

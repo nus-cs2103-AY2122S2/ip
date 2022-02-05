@@ -41,7 +41,7 @@ public class AlfredParser {
         if ((command.equals("list")) && (arguments.length == 1)) {
             return new ListCommand();
 
-            // (UN)MARK and DELETE
+        // (UN)MARK and DELETE
         } else if (command.equals("mark")) {
             return new MarkCommand(input);
         } else if (command.equals("unmark")) {

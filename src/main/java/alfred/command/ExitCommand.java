@@ -21,6 +21,13 @@ public class ExitCommand extends Command {
         ui.bye();
     }
 
+    /**
+     * Calls the UI and returns desired exit message.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @return String output meant for user.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) {
         return ui.getByeMessage();

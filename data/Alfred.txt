@@ -1,2 +1,4 @@
-T` `things
-T` ` other thing
+T` `some thing
+T` `some other thing
+E` ` some event`2021-10-10T11:00:00
+D` ` some deadline`2022-11-12T13:00:00

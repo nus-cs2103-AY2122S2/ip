@@ -11,11 +11,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -24,13 +26,14 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextArea dialog;
     @FXML
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -38,8 +41,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(DialogBox.getRoundedImage(img, 100));
+        this.dialog.setText(text);
+        this.displayPicture.setImage(DialogBox.getRoundedImage(img, 100));
     }
 
     private static Image getRoundedImage(Image image, double radius) {
@@ -61,12 +64,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Wraps text and image into DialogBox.
+     *
+     * @param text Text to be wrapped.
+     * @param img  Image to be wrapped.
+     * @return DialogBox object.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
+    /**
+     * Wrapped text and image into DialogBox.
+     *
+     * @param text Text to be wrapped.
+     * @param img  Image to be wrapped.
+     * @return DialogBox object.
+     */
     public static DialogBox getAlfredDialog(String text, Image img) {
         return new DialogBox(text, img);
     }

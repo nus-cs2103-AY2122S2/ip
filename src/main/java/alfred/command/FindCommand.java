@@ -33,6 +33,14 @@ public class FindCommand extends Command {
         ui.sandwichAndPrint(out);
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @param ui      AlfredUserInterface object used for handling interactions with the user.
+     * @param storage AlfredStorage object used to manage internal data state of Alfred.
+     * @return String output for user.
+     * @throws MissingInputException if no valid string found after "find" in input.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) throws
             MissingInputException {

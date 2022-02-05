@@ -3,6 +3,7 @@ package alfred.command;
 import alfred.Alfred;
 import alfred.exceptions.InvalidIndexException;
 import alfred.exceptions.InvalidInputException;
+import alfred.exceptions.MissingInputException;
 import alfred.storage.AlfredStorage;
 import alfred.ui.AlfredUserInterface;
 
@@ -40,6 +41,18 @@ public class UnmarkCommand extends Command {
         ui.sandwichAndPrint(out);
     }
 
+    /**
+     * Executes the T0D0 command, by adding a new task to the internal
+     * data state of Alfred and returns String meant for user.
+     *
+     * @param ui      AlfredUserInterface object used by Alfred for handling
+     *                interactions with the user.
+     * @param storage AlfredStorage object used to handle the internal data
+     *                states of Alfred.
+     * @return String output meant for user.
+     * @throws MissingInputException If there is no valid task description after
+     *                               the "todo" keyword.
+     */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
             throws InvalidInputException,
