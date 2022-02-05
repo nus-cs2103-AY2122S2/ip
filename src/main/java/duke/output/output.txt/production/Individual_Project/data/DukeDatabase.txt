@@ -1,3 +1,2 @@
 T | X | hello my name is ben
 E |   | hello you are so cool | 2012-03-03
-T |   | hello my name is ben

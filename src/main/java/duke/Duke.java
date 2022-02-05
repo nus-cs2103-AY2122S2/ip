@@ -52,6 +52,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/java/duke/data/DukeDatabase.txt").run();
+        //new Duke("./src/main/java/duke/data/DukeDatabase.txt").run();
+        new Duke("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/Individual_Project/src/main/java/duke/data/DukeDatabase.txt").run();
     }
 }
