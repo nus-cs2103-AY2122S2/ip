@@ -5,16 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import seedu.duke.DukeException;
-import seedu.duke.Ui;
-import seedu.storage.Storage;
 import seedu.storage.TaskList;
 
 public abstract class Command {
 
-    protected boolean isExit = false;
+    protected static boolean isExit = false;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
     public abstract void input(String inst) throws DukeException;
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks) throws DukeException;
 
     /**
      * Converts index of list in string form into integer form.
@@ -59,7 +57,7 @@ public abstract class Command {
         }
     }
 
-    public boolean isExit() {
+    public static boolean isExit() {
         return isExit;
     }
 }

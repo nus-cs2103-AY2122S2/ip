@@ -49,19 +49,28 @@ public class TaskList {
      * Finds all instances where search string is in task description.
      * @param search String to be matched in Task description.
      */
-    public void find(String search) {
+    public String find(String search) {
+        StringBuilder s = new StringBuilder("Found:\n");
+
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(search)) {
-                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+                s.append("\t\t");
+                s.append(i + 1);
+                s.append(". ");
+                s.append(tasks.get(i).toString());
+                s.append("\n");
             }
         }
+
+        return s.toString();
     }
 
     @Override
     public String toString() {
         if (!tasks.isEmpty()) {
-            StringBuilder out = new StringBuilder();
+            StringBuilder out = new StringBuilder("This List:\n");
             for (int i = 0; i < tasks.size(); i++) {
+                out.append("\t\t");
                 out.append(i + 1);
                 out.append(". ");
                 out.append(tasks.get(i).toString());

@@ -3,8 +3,6 @@ package seedu.commands;
 import java.time.LocalDateTime;
 
 import seedu.duke.DukeException;
-import seedu.duke.Ui;
-import seedu.storage.Storage;
 import seedu.storage.TaskList;
 import seedu.task.Deadline;
 
@@ -27,9 +25,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Deadline t = new Deadline(description, dateTime);
         tasks.add(t);
-        ui.printDone(t, " added!");
+        return "New deadline: " + t.toString() + " added!";
     }
 }

@@ -19,12 +19,14 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError(e.getMessage());
-            tasks = new TaskList();
+            ui.showError(e.getMessage());
         }
+
+        System.out.println("Welcome!\n");
     }
 
     /**
@@ -33,23 +35,30 @@ public class Duke {
      * Stops if command == "bye".
      */
     public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
+        while (!Command.isExit()) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String resp = c.execute(tasks);
                 storage.saveAll(tasks.getTasks());
-                isExit = c.isExit();
+                ui.printCompleted(resp);
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            String resp = c.execute(tasks);
+            storage.saveAll(tasks.getTasks());
+            return resp;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

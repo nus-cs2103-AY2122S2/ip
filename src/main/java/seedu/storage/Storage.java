@@ -38,39 +38,39 @@ public class Storage {
         }
 
         if (createFile()) {
-            throw new DukeException(file.getAbsolutePath() + " created.");
+            System.out.println("Info: " + file.getAbsolutePath() + " created.\n");
         } else {
-            System.out.println("Info: Save file found.");
-            try {
-                Scanner sc = new Scanner(file);
-                ArrayList<Task> tasks = new ArrayList<>();
+            System.out.println("Info: Save file found.\n");
+        }
 
-                while (sc.hasNextLine()) {
-                    String[] task = sc.nextLine().split("\t");
-                    boolean isCompleted = Boolean.parseBoolean(task[2]);
+        try {
+            Scanner sc = new Scanner(file);
+            ArrayList<Task> tasks = new ArrayList<>();
 
-                    switch (task[0]) {
-                    case "T":
-                        tasks.add(new Todo(task[1], isCompleted));
-                        break;
-                    case "D":
-                        LocalDateTime by = LocalDateTime.parse(task[3], Task.getFormatter());
-                        tasks.add(new Deadline(task[1], isCompleted, by));
-                        break;
-                    case "E":
-                        LocalDateTime at = LocalDateTime.parse(task[3], Task.getFormatter());
-                        tasks.add(new Event(task[1], isCompleted, at));
-                        break;
-                    default:
-                        throw new DukeException("Unknown task type found: " + task[0]);
-                    }
+            while (sc.hasNextLine()) {
+                String[] task = sc.nextLine().split("\t");
+                boolean isCompleted = Boolean.parseBoolean(task[2]);
+
+                switch (task[0]) {
+                case "T":
+                    tasks.add(new Todo(task[1], isCompleted));
+                    break;
+                case "D":
+                    LocalDateTime by = LocalDateTime.parse(task[3], Task.getFormatter());
+                    tasks.add(new Deadline(task[1], isCompleted, by));
+                    break;
+                case "E":
+                    LocalDateTime at = LocalDateTime.parse(task[3], Task.getFormatter());
+                    tasks.add(new Event(task[1], isCompleted, at));
+                    break;
+                default:
+                    throw new DukeException("Unknown task type found: " + task[0]);
                 }
-
-                return tasks;
-            } catch (FileNotFoundException e) {
-                throw new DukeException("File for some reason cannot be found lol.");
             }
 
+            return tasks;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Save file cannot be found.");
         }
     }
 
