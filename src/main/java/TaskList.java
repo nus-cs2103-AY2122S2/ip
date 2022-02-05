@@ -13,7 +13,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public int size() {
+    public int getTaskListSize() {
         return taskList.size();
     }
 
@@ -21,9 +21,6 @@ public class TaskList {
         return taskList.get(i);
     }
 
-    public int getTaskListSize() {
-        return this.taskListSize;
-    }
 
     public void remove(int numToDelete) {
         Task currTask = this.taskList.get(numToDelete - 1);
