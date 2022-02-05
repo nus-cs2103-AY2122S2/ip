@@ -79,13 +79,11 @@ public class Storage {
             String line;
             boolean first = true;
             while ((line = br.readLine()) != null) {
-                if (indexAccessed != taskToDelete) {
-                    if (first) {
-                        bw.write(line);
-                        first = false;
-                    } else {
-                        bw.write("\n" + line);
-                    }
+                if (indexAccessed != taskToDelete && first) {
+                    bw.write(line);
+                    first = false;
+                } else if (indexAccessed != taskToDelete) {
+                    bw.write("\n" + line);
                 }
                 indexAccessed++;
             }
@@ -198,10 +196,10 @@ public class Storage {
 
             String line;
             while ((line = br.readLine()) != null) {
-                if (taskToChange == lineCount - 1) { //if it is the last line
-                    if (taskToChange == taskToMark) {
-                        line = line.replaceFirst(init, goal);
-                    }
+                if (taskToChange == lineCount - 1 && taskToChange == taskToMark) { //if it is the last line
+                    line = line.replaceFirst(init, goal);
+                    bw.write(line);
+                } else if (taskToChange == lineCount - 1) {
                     bw.write(line);
                 } else if (taskToChange == taskToMark) {
                     line = line.replaceFirst(init, goal);
