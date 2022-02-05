@@ -5,7 +5,7 @@ import storage.Storage;
 import task.TaskList;
 
 public class UnmarkCommand extends Command {
-    private int index;
+    private final int index;
 
     public UnmarkCommand(int serialNumber) {
         this.index = serialNumber - 1;
@@ -24,9 +24,11 @@ public class UnmarkCommand extends Command {
         if (this.index < 0 || this.index >= taskList.size()) {
             throw new DukeException("Have you entered the correct number?");
         }
+
+        assert (this.index >= 0 && this.index < taskList.size());
         taskList.get(this.index).setTaskStatus(false);
         storage.writeToFile(taskList);
-        return "Nice! I've marked this task as done: \n"
+        return "Nice! I've marked this task as not done: \n"
                 + taskList.get(this.index);
     }
 }

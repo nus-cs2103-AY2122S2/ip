@@ -6,7 +6,7 @@ import task.TaskList;
 import task.Todo;
 
 public class TodoCommand extends Command {
-    private String message;
+    private final String message;
 
     public TodoCommand(String message) {
         this.message = message;

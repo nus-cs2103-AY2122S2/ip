@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns String that is formatted for a way where its written to the file.
+     * Returns String that is formatted for a way where it's written to the file.
      * @return Formatted String that represents the Task.
      */
     public abstract String fileFormat();

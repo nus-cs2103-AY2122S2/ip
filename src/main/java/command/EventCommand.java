@@ -9,8 +9,8 @@ import task.Event;
 import task.TaskList;
 
 public class EventCommand extends Command {
-    private String message;
-    private String time;
+    private final String message;
+    private final String time;
 
     /** Stores message and time for Event Task to be created. */
     public EventCommand(String message, String time) {
