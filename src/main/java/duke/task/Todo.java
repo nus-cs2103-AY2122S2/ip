@@ -13,8 +13,8 @@ public class Todo extends Task {
         System.out.println("added: " + this.toString());
     }
 
-    public String toString(){
-        if (this.checked) {
+    public String toString() {
+        if (this.isChecked) {
             return "[T][X] " + this.title;
         } else {
             return "[T][ ] " + this.title;

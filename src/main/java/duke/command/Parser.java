@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.DukeException;
-
 import java.util.Arrays;
 
 public class Parser {

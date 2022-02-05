@@ -5,9 +5,10 @@ import duke.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final String title;
     private final LocalDate date;
     private final LocalTime time;
@@ -19,7 +20,7 @@ public class Deadline extends Task{
             String[] deadlineList = deadline.split(" ");
             this.date = LocalDate.parse(deadlineList[0].replace("/", "-"));
             this.time = LocalTime.parse(deadlineList[1]);
-        } catch (IndexOutOfBoundsException | DateTimeParseException e){
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException("Please tell me the deadline in this format: <Activity> /by YYYY/MM/DD HH:MM");
         }
         System.out.println("added: " + this.toString());
@@ -29,7 +30,7 @@ public class Deadline extends Task{
         int day = date.getDayOfMonth();
         Month month = date.getMonth();
         int year = date.getYear();
-        if (this.checked) {
+        if (this.isChecked) {
             return String.format("[D][X] %s (by: %d %s %d %s)", title, day, month, year, time);
         } else {
             return String.format("[D][ ] %s (by: %d %s %d %s)", title, day, month, year, time);

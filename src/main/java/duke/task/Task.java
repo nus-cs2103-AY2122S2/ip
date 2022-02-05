@@ -2,13 +2,13 @@ package duke.task;
 
 public abstract class Task {
 
-    boolean checked = false;
+    boolean isChecked = false;
 
     public void setChecked() {
-        this.checked = true;
+        this.isChecked = true;
     }
 
-    public void setUnChecked(){
-        this.checked = false;
+    public void setUnchecked(){
+        this.isChecked = false;
     }
 }
