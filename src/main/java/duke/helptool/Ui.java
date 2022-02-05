@@ -112,7 +112,7 @@ public class Ui {
     /**
      * Bye.
      */
-    public String bye() {
+    public String showBye() {
         // print result
         return "Bye. Hope to see you again soon!\nThe application will close automatically in 3 seconds...\n";
     }
