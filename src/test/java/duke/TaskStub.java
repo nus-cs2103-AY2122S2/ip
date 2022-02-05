@@ -2,7 +2,7 @@ package duke;
 
 import duke.task.Task;
 
-public class TaskStub extends Task{
+public class TaskStub extends Task {
 
     static final String STUB = "I AM A TASK_STUB";
 
@@ -19,5 +19,4 @@ public class TaskStub extends Task{
     public String toString() {
         return STUB;
     }
-    
 }

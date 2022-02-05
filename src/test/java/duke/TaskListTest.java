@@ -13,7 +13,6 @@ public class TaskListTest {
     public void newTaskList() {
         TaskList tasks = new TaskList();
         assertEquals(tasks.size(), 0);
-        
         ArrayList<Task> taskArray = new ArrayList<>();
         taskArray.add(new TaskStub());
         tasks = new TaskList(taskArray);
@@ -28,5 +27,4 @@ public class TaskListTest {
 
         assertEquals(tasks.size(), 1);
     }
-    
 }
