@@ -41,13 +41,12 @@ public class AddCommand extends Command {
         }
 
         Task task;
-        String dukeResponse = "";
 
         switch (super.commandType) {
         case TODO:
             task = new Todo(description, false);
             taskList.add(task);
-            dukeResponse = ui.showText("Noted. I've added this task: ") + ui.showTask(task.toString());
+            ui.addTask(task);
             break;
         case EVENT:
             // Fallthrough
@@ -77,9 +76,9 @@ public class AddCommand extends Command {
                 }
 
                 taskList.add(task);
-                dukeResponse = ui.showText("Noted. I've added this task: ") + ui.showText(task.toString());
+                ui.addTask(task);
             } catch (DukeException e) {
-                dukeResponse = ui.showError(e.getMessage());
+                ui.showError(e.getMessage());
             }
             break;
         case BYE:
@@ -99,7 +98,7 @@ public class AddCommand extends Command {
         }
 
         storage.updateFileContents(taskList);
-        return dukeResponse;
+        return ui.generateDukeResponse();
     }
 
     /**

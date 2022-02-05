@@ -35,43 +35,6 @@ public class Duke {
     }
 
     /**
-     * The main method which intializes Duke & runs it.
-     *
-     * @param args Unused.
-     *             return Nothing.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-
-    /**
-     * Main logic of Duke to set it up & run it.
-     */
-    public void run() {
-
-        // Jarvis introduces himself, asks for user's name & greets user
-        userName = ui.showWelcome();
-
-        // initialize the chat session as active
-        boolean active = true;
-
-        while (active) {
-            try {
-                String userInput = ui.readCommand();
-                Command c = Parser.parse(userInput);
-                String output = c.execute(taskList, ui, storage);
-                System.out.println("-> " + output);
-                active = c.isActive();
-            } catch (DukeException e) {
-                String out = ui.showError(e.getMessage());
-                System.out.println("-> " + out);
-            }
-        }
-
-    }
-
-    /**
      * Reads user's input & executes corresponding commands.
      * @return
      */
@@ -83,10 +46,6 @@ public class Duke {
             dukeResponse = e.getMessage();
         }
         return dukeResponse;
-    }
-
-    public String welcomeUser(String userInput) {
-        return "welcome Sam!";
     }
 
 }

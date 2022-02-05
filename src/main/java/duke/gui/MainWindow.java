@@ -24,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private boolean firstUserChat = true;
     private String dukeResponse;
+    private Ui ui;
+    private String userName;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -31,6 +33,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Ui().showWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -46,7 +51,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
 
         if (firstUserChat) {
-            dukeResponse = duke.welcomeUser(input);
+            dukeResponse = "hello " + input + "!";
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(dukeResponse, dukeImage)

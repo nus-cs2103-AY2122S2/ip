@@ -11,7 +11,6 @@ public class Launcher {
      * @param args
      */
     public static void main(String[] args) {
-        //Application.launch(SampleGui1.class, args);
         Application.launch(Main.class, args);
     }
 }
