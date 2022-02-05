@@ -63,7 +63,6 @@ public class TaskList {
             break;
         case DEADLINE:
             task = new Deadline(inputs[1], inputs[2]);
-
             break;
         case EVENT:
             task = new Event(inputs[1], inputs[2]);
@@ -71,11 +70,15 @@ public class TaskList {
         default:
             break;
         }
+
+        assert task != null : "Task cannot be null";
+
         if (inputs[0].equals("1")) {
             task.markCompleted();
         } else {
             task.markIncompleted();
         }
+
         tasks.add(task);
     }
 

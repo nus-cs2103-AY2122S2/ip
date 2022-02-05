@@ -69,7 +69,9 @@ public class DataStore {
                 String row = csvReader.readLine();
                 while (row != null) {
                     String[] inputs = row.split(",");
-                    tasks.loadTasks(parseTaskType(inputs[0]), Arrays.copyOfRange(inputs, 1, 4));
+                    TaskType type = parseTaskType(inputs[0]);
+                    assert type != null : "Task type cannot be null";
+                    tasks.loadTasks(type, Arrays.copyOfRange(inputs, 1, 4));
                     row = csvReader.readLine();
                 }
                 csvReader.close();

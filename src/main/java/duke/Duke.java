@@ -27,6 +27,8 @@ public class Duke {
             parsedInputs[0] = "";
         }
 
+        assert actionType != null : "actionType should not be null";
+
         int indexOfList;
         Boolean wasAddSuccess = null;
 
@@ -70,6 +72,9 @@ public class Duke {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
             }
+
+            assert wasAddSuccess != null : "wasAddSuccess should not be null";
+
             if (wasAddSuccess) {
                 output += ("added: " + parsedInputs[0].strip() + "\n");
             } else {
@@ -85,6 +90,9 @@ public class Duke {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
             }
+
+            assert wasAddSuccess != null : "wasAddSuccess should not be null";
+
             if (wasAddSuccess) {
                 output += ("added: " + parsedInputs[0].strip() + "\n");
             } else {
@@ -100,6 +108,9 @@ public class Duke {
                 output += (e.getMessage() + "\n");
                 wasAddSuccess = false;
             }
+
+            assert wasAddSuccess != null : "wasAddSuccess should not be null";
+
             if (wasAddSuccess) {
                 output += ("added: " + parsedInputs[0].strip() + "\n");
             } else {
@@ -123,7 +134,6 @@ public class Duke {
                 System.out.println(e.getMessage());
                 output += "Integer provided is not in the list";
             }
-
             break;
         case FIND:
             output += list.findTask(parsedInputs[0]);
@@ -134,6 +144,7 @@ public class Duke {
 
         DataStore.saveData(list);
 
+        assert output != "" : "Output string should not be empty";
 
         // Return String
         return output;
