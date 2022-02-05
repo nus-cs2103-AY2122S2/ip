@@ -2,7 +2,7 @@ package duke.ui;
 
 import duke.command.Command;
 import duke.dukeexceptions.DukeExceptions;
-import duke.dukeexceptions.InvalidCommand;
+import duke.dukeexceptions.InvalidCommandException;
 import duke.praser.Parser;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -65,9 +65,9 @@ public class Ui {
      *
      * @param userInput The user input.
      * @return A command that is entered by the user.
-     * @throws InvalidCommand If the user input is either empty or the user enters an invalid command.
+     * @throws InvalidCommandException If the user input is either empty or the user enters an invalid command.
      */
-    public Command showUserCommandLine(String userInput) throws InvalidCommand {
+    public Command showUserCommandLine(String userInput) throws InvalidCommandException {
         return Parser.parse(userInput);
     }
 

@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * The Storage object acts as an interface between Duke and the filename for database management.
  */
-public class Storage{
+public class Storage {
     /** The file which stores the tasks in the task list. */
     private File file;
 
@@ -40,7 +40,7 @@ public class Storage{
         while (fileInput.hasNextLine()) {
             // Gets the properties for a task.
             String type = fileInput.nextLine();
-            Boolean done = Boolean.parseBoolean(fileInput.nextLine());
+            Boolean isDone = Boolean.parseBoolean(fileInput.nextLine());
             String name = fileInput.nextLine();
             String date = fileInput.nextLine();
 
@@ -53,7 +53,7 @@ public class Storage{
 
             // Adds the task to the task list.
             try {
-                taskList.addTask(Task.createTask(type, done, name, date));
+                taskList.addTask(Task.createTask(type, isDone, name, date));
             } catch (DukeExceptions e) {
                 System.out.println(e.getMessage());
             }

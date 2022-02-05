@@ -1,13 +1,13 @@
 package duke.praser;
 
 import duke.command.Command;
-import duke.dukeexceptions.InvalidCommand;
+import duke.dukeexceptions.InvalidCommandException;
 
 /**
  * The parser object make sures that the command entered by the user is correct.
  */
 public class Parser {
-    public static Command parse(String userInput) throws InvalidCommand {
+    public static Command parse(String userInput) throws InvalidCommandException {
         String command;
         String parameter = "";
 

@@ -1,14 +1,8 @@
 package duke.command;
 
 
-import duke.dukeexceptions.DukeExceptions;
-import duke.dukeexceptions.EmptyDate;
-import duke.dukeexceptions.EmptyKeyword;
-import duke.dukeexceptions.EmptyNumber;
-import duke.dukeexceptions.EmptyTask;
-import duke.dukeexceptions.InvalidCommand;
-import duke.dukeexceptions.InvalidNumber;
-import duke.dukeexceptions.ListIndexOutOfBound;
+import duke.dukeexceptions.*;
+import duke.dukeexceptions.EmptyDateException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -47,11 +41,11 @@ public abstract class Command {
      * @param command The type of command.
      * @param parameter The parameter which varies based on the type of command.
      * @return The command with its type based on command.
-     * @throws InvalidCommand If the user enters either an invalid command or empty command.
+     * @throws InvalidCommandException If the user enters either an invalid command or empty command.
      */
-    public static Command getCommand(String command, String parameter) throws InvalidCommand {
+    public static Command getCommand(String command, String parameter) throws InvalidCommandException {
         // Check if the command entered by the user is valid, then return the command on that type, otherwise, throws
-        // the InvalidCommand exception.
+        // the InvalidCommandException exception.
         if (command.equals("BYE")) {
             return new ByeCommand(parameter);
         } else if (command.equals("LIST")) {
@@ -71,7 +65,7 @@ public abstract class Command {
         } else if (command.equals("FIND")) {
             return new FindCommand(parameter);
         } else {
-            throw InvalidCommand.createInvalidCommand(command);
+            throw InvalidCommandException.createInvalidCommand(command);
         }
     }
 }
@@ -148,7 +142,7 @@ class MarkCommand extends Command {
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         // Checks if the user did not enter a number, then throw an exception.
         if (parameter.isBlank()) {
-            throw EmptyNumber.createEmptyNumber("Mark");
+            throw EmptyNumberException.createEmptyNumber("Mark");
         }
 
         // Marks the task as indicated in the index of the task list.
@@ -158,12 +152,12 @@ class MarkCommand extends Command {
             storage.updateData(taskList);
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
-            throw new ListIndexOutOfBound();
+            throw new ListIndexOutOfBoundException();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
             // If the user enters a parameter that is not a number.
-            throw new InvalidNumber();
+            throw new InvalidNumberException();
         }
     }
 }
@@ -187,9 +181,9 @@ class UnmarkCommand extends Command {
      */
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
-        // Checks if the user did not enter a number, then throw an EmptyNumber exception.
+        // Checks if the user did not enter a number, then throw an EmptyNumberException exception.
         if (parameter.isBlank()) {
-            throw EmptyNumber.createEmptyNumber("Unmark");
+            throw EmptyNumberException.createEmptyNumber("Unmark");
         }
 
         // Unmarks the task as indicated in the index of the task list.
@@ -199,12 +193,12 @@ class UnmarkCommand extends Command {
             storage.updateData(taskList);
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
-            throw new ListIndexOutOfBound();
+            throw new ListIndexOutOfBoundException();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
             // If the user enters a parameter that is not a number.
-            throw new InvalidNumber();
+            throw new InvalidNumberException();
         }
     }
 }
@@ -230,7 +224,7 @@ class TodoCommand extends Command {
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         // Checks if the user enters an empty parameter.
         if (parameter.isBlank()) {
-            throw EmptyTask.createEmptyTask("todo");
+            throw EmptyTaskException.createEmptyTask("todo");
         }
 
         // Creates a new TODO task.
@@ -270,28 +264,28 @@ class DeadlineCommand extends Command {
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a task name and date, then throw Empty Task parameter.
         if (parameter.isBlank()) {
-            throw EmptyTask.createEmptyTask("dateline");
+            throw EmptyTaskException.createEmptyTask("dateline");
         }
 
         // Get the index "/by" from the parameter.
         int index = parameter.indexOf("/by ");
-        // If the user did not enter /by, then throw the EmptyDate exception.
+        // If the user did not enter /by, then throw the EmptyDateException exception.
         if (index < 0) {
-            throw EmptyDate.createEmptyDate("dateline");
+            throw EmptyDateException.createEmptyDate("dateline");
         }
 
         // Gets the task name form the parameter.
         String task = parameter.substring(0, index);
         // If the user did not enter a task name, then throw empty task exception.
         if (task.isBlank()) {
-            throw EmptyTask.createEmptyTask("dateline");
+            throw EmptyTaskException.createEmptyTask("dateline");
         }
 
         // Get the date from the parameter.
         String date = parameter.substring(index + 4, parameter.length());
         // If the user did not enter a date after "/by".
         if (date.isBlank()) {
-            throw EmptyDate.createEmptyDate("dateline");
+            throw EmptyDateException.createEmptyDate("dateline");
         }
 
         // Creates a new deadline task, then add it to the task list.
@@ -331,27 +325,27 @@ class EventCommand extends Command {
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a task name and date, then throw Empty Task parameter.
         if (parameter.isBlank()) {
-            throw EmptyTask.createEmptyTask("event");
+            throw EmptyTaskException.createEmptyTask("event");
         }
 
         // Get the index "/at" from the parameter.
         int index = parameter.indexOf("/at ");
         if (index < 0) {
-            throw EmptyDate.createEmptyDate("event");
+            throw EmptyDateException.createEmptyDate("event");
         }
 
         // Gets the task name form the parameter.
         String task = parameter.substring(0, index);
         // If the user did not enter a task name, then throw empty task exception.
         if (task.isBlank()) {
-            throw EmptyTask.createEmptyTask("event");
+            throw EmptyTaskException.createEmptyTask("event");
         }
 
         // Get the date from the parameter.
         String date = parameter.substring(index + 4, parameter.length());
         // If the user did not enter a date after "/at".
         if (date.isBlank()) {
-            throw EmptyDate.createEmptyDate("event");
+            throw EmptyDateException.createEmptyDate("event");
         }
 
         // Creates a new event task, then add it to the task list.
@@ -393,7 +387,7 @@ class DeleteCommand extends Command{
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         // If the user did not enter a number, returns an empty number parameter.
         if (parameter.isBlank()) {
-            throw EmptyNumber.createEmptyNumber("Delete");
+            throw EmptyNumberException.createEmptyNumber("Delete");
         }
 
         // Deletes the task from the task list based on the index. Then update the file.
@@ -403,12 +397,12 @@ class DeleteCommand extends Command{
             storage.updateData(taskList);
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
-            throw new ListIndexOutOfBound();
+            throw new ListIndexOutOfBoundException();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
             // If the user enters a parameter that is not a number.
-            throw new InvalidNumber();
+            throw new InvalidNumberException();
         }
     }
 }
@@ -428,9 +422,9 @@ class FindCommand extends Command {
 
     @Override
     public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
-        // Check if the user did not enter a keyword, then throw the EmptyKeyword exception.
+        // Check if the user did not enter a keyword, then throw the EmptyKeywordException exception.
         if (parameter.isBlank()) {
-            throw new EmptyKeyword();
+            throw new EmptyKeywordException();
         }
 
         // Gets a new task list which the tasks that contains the keyword.

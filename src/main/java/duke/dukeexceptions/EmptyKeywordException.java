@@ -3,11 +3,11 @@ package duke.dukeexceptions;
 /**
  * Thrown when the user did not enter the keyword when the command requires one.
  */
-public class EmptyKeyword extends DukeExceptions {
+public class EmptyKeywordException extends DukeExceptions {
     /**
-     * Creates a new EmptyKeyword exception.
+     * Creates a new EmptyKeywordException exception.
      */
-    public EmptyKeyword() {
+    public EmptyKeywordException() {
         super("Please enter a keyword for find command!");
     }
 }

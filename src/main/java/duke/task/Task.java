@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.dukeexceptions.InvalidDate;
+import duke.dukeexceptions.InvalidDateException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,9 +68,9 @@ public abstract class Task {
      * @param name The name of the task.
      * @param date The date of the task.
      * @return A new Task object.
-     * @throws InvalidDate If the task that requires a date encounters a date in an invalid format.
+     * @throws InvalidDateException If the task that requires a date encounters a date in an invalid format.
      */
-    public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDate {
+    public static Task createTask(String type, Boolean done, String name, String date) throws InvalidDateException {
         // Convert the task type to uppercase.
         type = type.toUpperCase();
 
@@ -130,16 +130,16 @@ final class Deadline extends Task {
      * @param taskName The name of the task.
      * @param done The completeness of the task.
      * @param deadline The date representing the deadline of the task.
-     * @throws InvalidDate If the user did not enter the date in the format dd/mm/yyyy HHmm.
+     * @throws InvalidDateException If the user did not enter the date in the format dd/mm/yyyy HHmm.
      */
-    protected Deadline(String taskName, boolean done, String deadline) throws InvalidDate {
+    protected Deadline(String taskName, boolean done, String deadline) throws InvalidDateException {
         super(taskName, done);
 
         // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.deadline = LocalDateTime.parse(deadline, initFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDate();
+            throw new InvalidDateException();
         }
     }
 
@@ -178,16 +178,16 @@ final class Event extends Task {
      * @param taskName The name of the task.
      * @param done The completeness of the task.
      * @param eventDate
-     * @throws InvalidDate
+     * @throws InvalidDateException
      */
-    protected Event(String taskName, boolean done, String eventDate) throws InvalidDate {
+    protected Event(String taskName, boolean done, String eventDate) throws InvalidDateException {
         super(taskName, done);
 
         // Parse the date of the deadline as DD MMM YYYY HH:mm.
         try {
             this.eventDate = LocalDateTime.parse(eventDate, initFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDate();
+            throw new InvalidDateException();
         }
     }
 
