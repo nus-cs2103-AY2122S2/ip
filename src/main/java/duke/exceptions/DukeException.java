@@ -11,6 +11,6 @@ public class DukeException extends Exception {
      * @param errorMsg error message to be printed.
      */
     public DukeException(String errorMsg) {
-        super("☹!!! " + errorMsg);
+        super("T_T! " + errorMsg);
     }
 }

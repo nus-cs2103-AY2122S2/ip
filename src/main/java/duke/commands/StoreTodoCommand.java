@@ -1,8 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 
@@ -25,19 +23,18 @@ public class StoreTodoCommand extends StoreCommand {
 
     /**
      * Executes the StoreTodoCommand object.
+     * Returns a String to notify the user that the task has been added.
      *
      * @param taskList a container of existing tasks in the program, used for the creation
      *                 and addition of a todo task into the task list.
-     * @param io a manager that deals with interactions with the user, used to print
-     *           notifications to the user.
-     * @param storage a manager that deals with storing and loading of files, used to save
-     *                changes to the task list to file.
+     * @return a notification about the added todo task.
+     * @throws DukeException when the user input provided does not satisfy the format
+     *                       to create a todo task.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
-        io.showMessage("Got it. I've added this task:\n       "
+    public String execute(TaskList taskList) throws DukeException {
+        return "Got it. I've added this task:\n    "
                 + taskList.addTodoTask(tokens)
-                + "\n     Now you have " + taskList.getSize() + " task(s) in the list.");
-        super.execute(taskList, io, storage);
+                + "\nNow you have " + taskList.getSize() + " task(s) in the list.";
     }
 }

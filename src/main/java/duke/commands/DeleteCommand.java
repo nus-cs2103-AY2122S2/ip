@@ -1,8 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 
@@ -14,6 +12,15 @@ import duke.tasks.TaskList;
  */
 public class DeleteCommand extends Command {
     protected int index;
+
+    /**
+     * Constructor of a delete command. Specifies that a delete command
+     * requires storage to file.
+     */
+    public DeleteCommand() {
+        modifyData = true;
+        exitProgram = false;
+    }
 
     /**
      * Handles user input and stores the index of the task to be deleted.
@@ -43,21 +50,18 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the DeleteCommand object.
+     * Executes the DeleteCommand object and returns a notification
+     * to tell the user that the task has been removed.
      *
      * @param taskList a container of existing tasks in the program, used to
      *                 acquire the task to be deleted.
-     * @param io a manager that deals with interactions with the user,
-     *           used to print notifications to the user.
-     * @param storage a manager that deals with storing and loading of files,
-     *                used to save changes to taskList to file.
+     * @return a String that notifies the user that the task has been added.
      * @throws DukeException when the index provided by the user is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
-        io.showMessage("Noted. I've removed this task:\n       "
+    public String execute(TaskList taskList) throws DukeException {
+        return "Noted. I've removed this task:\n    "
                 + taskList.remove(index)
-                + "\n     Now you have " + taskList.getSize() + " task(s) in the list.");
-        storage.save(taskList);
+                + "\nNow you have " + taskList.getSize() + " task(s) in the list.";
     }
 }

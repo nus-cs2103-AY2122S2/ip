@@ -1,7 +1,5 @@
 package duke.commands;
 
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -10,6 +8,15 @@ import duke.tasks.TaskList;
  * to terminate the program.
  */
 public class ExitCommand extends Command {
+
+    /**
+     * Constructor of an exit command. Specifies that an exit command
+     * ends the program.
+     */
+    public ExitCommand() {
+        modifyData = false;
+        exitProgram = true;
+    }
 
     /**
      * This command does not need any additional user input.
@@ -32,14 +39,11 @@ public class ExitCommand extends Command {
     /**
      * Executes the ExitCommand object.
      *
-     * @param taskList a container of existing tasks in the program.
-     * @param io a manager that deals with interactions with the user, used to
-     *           print the goodbye message.
-     * @param storage a manager that deals with storing and loading of files.
+     * @param taskList there is no modification to the task list in this command.
+     * @return null as this command does not have any feedback to the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) {
-        io.bye();
-        exitProgram = true;
+    public String execute(TaskList taskList) {
+        return "Bye. Hope to see you again soon!";
     }
 }

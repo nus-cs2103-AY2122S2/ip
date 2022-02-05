@@ -1,4 +1,4 @@
-package duke.managers;
+package duke.internal;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,7 +48,7 @@ public class Storage {
             ois.close();
             return tasks;
         } catch (Exception e) {
-            throw new DukeException("Hello! I see it's your first time here!");
+            throw new DukeException("");
         }
     }
 
