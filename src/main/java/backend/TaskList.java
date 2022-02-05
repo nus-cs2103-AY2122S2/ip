@@ -38,12 +38,9 @@ public class TaskList {
         try {
             Task currentTask = tasks.get(indexMarked);
             currentTask.setDone(true);
-            output = Ui.mark() + "\n";
-            output = output + currentTask.toString();
+            output = Ui.mark(currentTask.toString()) ;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException("task does not exist!"));
-        } catch (NumberFormatException e) {
-            System.out.println(new DukeException("provide an index instead :)"));
+            output = Ui.invalidTask();
         }
         return output;
     }
@@ -57,12 +54,9 @@ public class TaskList {
         try {
             Task currentTask = tasks.get(indexUnmarked);
             currentTask.setDone(false);
-            output = Ui.unmark() + "\n";
-            output = output + currentTask.toString();
+            output = Ui.unmark(currentTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException("task does not exist!"));
-        } catch (NumberFormatException e) {
-            System.out.println(new DukeException("provide an index instead :)"));
+            output = Ui.invalidTask();
         }
         return output;
     }
@@ -75,12 +69,9 @@ public class TaskList {
         String output = "";
         try {
             Task deletedTask = tasks.remove(indexDelete);
-            output =  Ui.delete() + "\n";
-            output = output + deletedTask.toString();
+            output =  Ui.delete(deletedTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException("task does not exist!"));
-        } catch (NumberFormatException e) {
-            System.out.println(new DukeException("provide an index instead :)"));
+            output = Ui.invalidTask();
         }
         return output;
     }
@@ -97,10 +88,9 @@ public class TaskList {
             }
             Todo currentTodo = new Todo(description);
             tasks.add(currentTodo);
-            output =  Ui.todo() + "\n";
-            output = output + currentTodo.toString();
+            output =  Ui.todo(currentTodo.toString());
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(new DukeException("The description of a todo cannot be empty"));
+            output = Ui.emptyDescription();
         }
         return output;
     }
@@ -119,11 +109,10 @@ public class TaskList {
             }
             Deadline currentDeadline = new Deadline(description, time);
             tasks.add(currentDeadline);
-            output =  Ui.deadline() + "\n";
-            output = output + currentDeadline.toString();
+            output =  Ui.deadline(currentDeadline.toString());
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(new DukeException("The description of a deadline cannot be empty"));
+            output = Ui.emptyDescription();
         }
         return output;
     }
@@ -141,10 +130,9 @@ public class TaskList {
             }
             Event currentEvent = new Event(description, time);
             tasks.add(currentEvent);
-            output =  Ui.event() + "\n";
-            output = output + currentEvent.toString();
+            output =  Ui.event(currentEvent.toString());
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(new DukeException("The description of a event cannot be empty"));
+            output = Ui.emptyDescription();
         }
         return output;
     }

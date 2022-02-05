@@ -26,7 +26,7 @@ public class InputDecoder {
         try {
             commandSections = this.parseInput(input);
         } catch (IllegalArgumentException e) {
-            System.out.println("Sorry I didnt catch that! Please make sure it is a valid command!");
+            return Ui.errorInput();
         }
 
         //do a certain action based on the parsed input
