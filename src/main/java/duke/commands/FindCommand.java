@@ -3,8 +3,6 @@ package duke.commands;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 
@@ -17,6 +15,15 @@ import duke.tasks.TaskList;
 public class FindCommand extends Command {
 
     protected String searchString;
+
+    /**
+     * Constructor of a find command. Specifies that a find command
+     * does not require any storage of data/ending the program.
+     */
+    public FindCommand() {
+        modifyData = false;
+        exitProgram = false;
+    }
 
     /**
      * Handles user input and stores the String that is used to search for
@@ -56,16 +63,16 @@ public class FindCommand extends Command {
      *
      * @param taskList a container of existing tasks in the program, used to search
      *                 for tasks with matching substrings.
-     * @param io a manager that deals with interactions with the user, used to print
-     *           notifications to the user.
-     * @param storage a manager that deals with storing and loading of files.
+     * @return a String that displays all the task information in the task list
+     *         matching the search string.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) {
-        io.showMessage("Here are the matching tasks in your list:");
+    public String execute(TaskList taskList) {
+        String output = "Here are the matching tasks in your list:" + "\n";
         ArrayList<String> tasksString = taskList.search(searchString);
         for (int i = 0; i < tasksString.size(); i++) {
-            io.showMessage(i + 1 + ". " + tasksString.get(i));
+            output += i + 1 + ". " + tasksString.get(i) + "\n    ";
         }
+        return output.trim();
     }
 }

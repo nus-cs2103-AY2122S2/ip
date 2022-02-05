@@ -2,8 +2,6 @@ package duke.commands;
 
 import java.util.ArrayList;
 
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -12,6 +10,15 @@ import duke.tasks.TaskList;
  * task list.
  */
 public class ListCommand extends Command {
+
+    /**
+     * Constructor of a list command. Specifies that a list command
+     * does not require any storage of data/ending the program.
+     */
+    public ListCommand() {
+        modifyData = false;
+        exitProgram = false;
+    }
 
     /**
      * This command does not need any additional user input.
@@ -35,16 +42,15 @@ public class ListCommand extends Command {
      * Executes the ListCommand object.
      *
      * @param taskList a container of existing tasks in the program.
-     * @param io a manager that deals with interactions with the user, used to
-     *           print the information of the tasks.
-     * @param storage a manager that deals with storing and loading of files.
+     * @return a String that displays all the task information in the task list.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) {
+    public String execute(TaskList taskList) {
         ArrayList<String> taskSet = taskList.list();
-        io.showMessage("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:" + "\n    ";
         for (int i = 0; i < taskSet.size(); i++) {
-            io.showMessage(i + 1 + ". " + taskSet.get(i));
+            output += i + 1 + ". " + taskSet.get(i) + "\n    ";
         }
+        return output.trim();
     }
 }

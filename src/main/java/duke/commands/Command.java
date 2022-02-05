@@ -1,8 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -11,6 +9,7 @@ import duke.tasks.TaskList;
 public abstract class Command {
 
     protected boolean exitProgram = false;
+    protected boolean modifyData = false;
 
     /**
      * Returns a boolean that specifies whether the user input matches the Command.
@@ -28,16 +27,14 @@ public abstract class Command {
     public abstract void handleParam(String[] tokens) throws DukeException;
 
     /**
-     * Executes the command object.
+     * Executes the command object and returns a String which signifies
+     * the response to the command.
      *
      * @param taskList a container of existing tasks in the program.
-     * @param io a manager that deals with interactions with the user.
-     * @param storage a manager that deals with storing and loading of files.
+     * @return a String which signifies the response to the command.
      * @throws DukeException when user input conflicts with required params.
      */
-    public abstract void execute(TaskList taskList, Ui io, Storage storage) throws DukeException;
-
-
+    public abstract String execute(TaskList taskList) throws DukeException;
 
     /**
      * Returns a boolean that specifies whether the program should end.
@@ -46,5 +43,14 @@ public abstract class Command {
      */
     public boolean getExit() {
         return exitProgram;
+    }
+
+    /**
+     * Returns a boolean that specifies whether the command modifies data.
+     *
+     * @return isExit which is the switch that determines if data should be saved to file.
+     */
+    public boolean getModify() {
+        return modifyData;
     }
 }

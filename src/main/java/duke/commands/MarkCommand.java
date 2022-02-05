@@ -1,8 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.managers.Storage;
-import duke.managers.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -17,11 +15,14 @@ public class MarkCommand extends Command {
     protected int index;
 
     /**
-     * Creates a MarkCommand object.
+     * Creates a MarkCommand object. Specifies that a mark command requires storing
+     * of data to file.
      *
      * @param isMark determines whether to mark or unmark a task upon command execution.
      */
     public MarkCommand(boolean isMark) {
+        modifyData = true;
+        exitProgram = false;
         this.isMark = isMark;
     }
 
@@ -62,17 +63,13 @@ public class MarkCommand extends Command {
      *
      * @param taskList a container of existing tasks in the program, used to
      *                 acquire the task to be marked/unmarked.
-     * @param io a manager that deals with interactions with the user,
-     *           used to print notifications to the user.
-     * @param storage a manager that deals with storing and loading of files,
-     *                used to save changes to taskList to file.
+     * @return a String that notifies the user that the task has been marked/unmarked.
      * @throws DukeException when the index provided by the user is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         String variance = isMark ? "done" : "undone";
-        String output = "Done! I've marked this task as " + variance + "\n       ";
-        io.showMessage(output + taskList.markTask(index, isMark));
-        storage.save(taskList);
+        String output = "Done! I've marked this task as " + variance + "\n    ";
+        return output + taskList.markTask(index, isMark);
     }
 }

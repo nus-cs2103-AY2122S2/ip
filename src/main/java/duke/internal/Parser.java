@@ -1,4 +1,4 @@
-package duke.managers;
+package duke.internal;
 
 import java.util.ArrayList;
 
