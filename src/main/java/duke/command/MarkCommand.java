@@ -33,7 +33,7 @@ public class MarkCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskMarked = taskList.mark(this.taskNum);
-            ui.printOutput("Nice! You've completed this task:\n      " + taskMarked);
+            ui.setResponse("Nice! You've completed this task:\n      " + taskMarked);
             storage.saveToHardDisk(taskList);
         } else {
             throw new DukeException("Invalid task number. There are " + currentTotalTasks + " in the list.");

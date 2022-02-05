@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * @param storage The storage of the program.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printOutput("Bye! Hope to see you again soon!");
+        ui.setResponse("Bye! Hope to see you again soon!");
     }
 
     /**

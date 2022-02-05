@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.command.Command;
 import duke.util.DukeException;
 import duke.util.Parser;
@@ -13,19 +11,17 @@ import duke.util.Ui;
  * Duke is a Personal Assistant Chatbot that helps a user to keep track of various things.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Constructor class.
-     *
-     * @param filePath The filepath to the text file to save tasks.
-     * @param fileName The name of the text file.
      */
-    public Duke(String filePath, String fileName) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, fileName);
+        storage = new Storage("data/", "duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -35,26 +31,28 @@ public class Duke {
     }
 
     /**
-     * Starts the program.
+     * Returns the welcome greeting to be shown upon start up.
+     *
+     * @return Welcome greeting.
      */
-    public void run() {
-        ui.showGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readInput();
-                ui.showLine(); // show the divider line ("―――――")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public static String getGreeting() {
+        return Ui.showWelcome();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/", "duke.txt").run();
+    /**
+     * Generates response based on user input.
+     *
+     * @param input Input from user.
+     * @return Response message from Duke.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.showResponse();
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }
 

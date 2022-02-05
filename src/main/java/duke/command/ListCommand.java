@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String listToPrint = taskList.getList();
-        ui.printOutput(listToPrint);
+        ui.setResponse(listToPrint);
     }
 
     /**
