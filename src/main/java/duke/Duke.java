@@ -60,6 +60,8 @@ public class Duke {
                 return "";
             case FIND:
                 return ui.formatFeedbackMessage(tasks.findKeyword(commands[1].trim()));
+            case SORT:
+                return ui.formatFeedbackMessage(tasks.sort());
             default:
                 return ui.formatFeedbackMessage(tasks.addTask(command, commands[1], true));
             }
