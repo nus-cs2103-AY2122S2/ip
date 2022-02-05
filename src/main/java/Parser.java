@@ -4,6 +4,13 @@ import java.io.IOException;
 
 public class Parser {
 
+    /**
+     * Parses input from InputHandler and returns a new Task to be added to TaskList
+     * @param type CommandType of input, including (TODO, DEADLINE, EVENT)
+     * @param splitInput SplitInput from InputHandler is user's input, split by empty spaces for processing
+     * @return Task object of new task to be added to TaskList
+     * @throws DukeException If format is wrong
+     */
     public Task parse(InputHandler.CommandType type, String[] splitInput) throws DukeException {
         switch (type) {
         case TODO:
@@ -47,6 +54,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input from InputHandler and writes/deletes/prints from storage accordingly
+     * @param type CommandType of input, including (LIST, MARK, UNMARK, DELETE)
+     * @param storage Storage object in InputHandler to write/delete/get data from
+     * @param splitInput SplitInput from InputHandler is user's input, split by empty spaces for processing
+     * @throws DukeException Handles unrecognised commands
+     * @throws IOException Handles IO Errors
+     */
     public void parse(InputHandler.CommandType type, Storage storage, String[] splitInput) throws DukeException, IOException {
         switch (type) {
         case LIST:

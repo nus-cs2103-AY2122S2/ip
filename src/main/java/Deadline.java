@@ -13,12 +13,26 @@ import java.time.LocalTime;
 public class Deadline extends Task {
     public LocalDate dueDate;
     public LocalTime dueTime;
+
+    /**
+     * Constructor for Deadline with date
+     * @param name Name of Deadline
+     * @param date Date of deadline in yyyy-mm-dd format
+     * @throws DateTimeParseException If date time is in wrong format
+     */
     public Deadline(String name, String date) throws DateTimeParseException {
         super(name);
         this.dueDate = LocalDate.parse(date);
         this.dueTime = null;
     }
 
+    /**
+     * Constructor for Deadline with date and time
+     * @param name Name of Deadline
+     * @param date Date of deadline in yyyy-mm-dd format
+     * @param time Time of deadline in hh:mm format
+     * @throws DateTimeParseException If date time is in wrong format
+     */
     public Deadline(String name, String date, String time) throws DateTimeParseException {
         super(name);
         this.dueDate = LocalDate.parse(date);

@@ -8,6 +8,11 @@ import java.util.Arrays;
  */
 
 public class Todo extends Task {
+
+    /**
+     * Constructor for Todo
+     * @param name Name of Todo
+     */
     public Todo (String name) {
         super(name);
     }

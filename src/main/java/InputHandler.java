@@ -105,6 +105,9 @@ public class InputHandler {
         System.out.println("Got it. I've added this task:\n" + task + "\nNow you have " + this.storage.taskListSize() + " tasks in the list." );
     }
 
+    /**
+     * Type of Command enum to be passed into Parser object
+     */
     enum CommandType {
         TODO,
         EVENT,
