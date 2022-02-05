@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.file_management.Time;
+import duke.filemanagement.Time;
 
 /**
  * One of the three tasks that a user can indicate.
@@ -8,7 +8,7 @@ import duke.file_management.Time;
  *
  * @author Justin Ng Jie Ern
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /**
      * Time Object that is the deadline for the Task.
      */
@@ -33,7 +33,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() +
-                " (by: " + this.time + ")";
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString()
+                + " (by: " + this.time + ")";
     }
 }

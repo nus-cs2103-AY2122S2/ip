@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDescriptionException;
-
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDescriptionException;
 
 /**
  * Ui class handles the input
@@ -16,17 +16,17 @@ public class Ui {
     /**
      * Constant String from Duke after every command to Duke.
      */
-    private final static String FROM_DUKE = "From Duke: \n\t";
+    private static final String FROM_DUKE = "From Duke: \n\t";
 
     /**
      * Storage Class to help with loading or saving or file.
      */
-    Storage storage;
+    private Storage storage;
 
     /**
      * TaskList Object is to help loaded and save.
      */
-    TaskList taskList;
+    private TaskList taskList;
 
     /**
      * Constructor to create a Ui Object.
@@ -51,10 +51,10 @@ public class Ui {
                 System.out.print(FROM_DUKE);
                 String[] commandArr = command.split(" ");
                 firstWord = commandArr[0];
-                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find") ||
-                        firstWord.equals("event") || firstWord.equals("todo") || firstWord.equals("deadline") ||
-                        firstWord.equals("delete") || firstWord.equals("save") || firstWord.equals("help") ||
-                        firstWord.equals("mark") || firstWord.equals("unmark"))) {
+                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find")
+                        || firstWord.equals("event") || firstWord.equals("todo") || firstWord.equals("deadline")
+                        || firstWord.equals("delete") || firstWord.equals("save") || firstWord.equals("help")
+                        || firstWord.equals("mark") || firstWord.equals("unmark"))) {
                     throw new InvalidCommandException();
 
                     // One word commands
@@ -94,8 +94,8 @@ public class Ui {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("That is an invalid task. Please try again!");
             } finally {
-            System.out.println("__________________________________________");
-        }
+                System.out.println("__________________________________________");
+            }
         }
     }
 }

@@ -8,13 +8,13 @@ package duke;
  */
 public class Duke {
 
-    public static String logo = " ____        _        \n"
+    private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n\n";
 
-    public static String start = "Hello! I am Duke.\n"
+    private static String start = "Hello! I am Duke.\n"
             + "Your Personal Assistant.\n\n"
             + "Input 'help' for the Command Manual!!\n\n"
             + "What can I do for you?\n"

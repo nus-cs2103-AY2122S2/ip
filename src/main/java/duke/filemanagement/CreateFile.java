@@ -1,4 +1,4 @@
-package duke.file_management;
+package duke.filemanagement;
 
 import java.io.File;
 import java.io.IOException;

@@ -6,7 +6,7 @@ package duke.task;
  *
  * @author Justin Ng Jie Ern
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * Constructor to create a ToDo Object.
      * @param name Name of the ToDo task.

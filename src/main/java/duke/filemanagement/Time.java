@@ -1,4 +1,4 @@
-package duke.file_management;
+package duke.filemanagement;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

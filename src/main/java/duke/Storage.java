@@ -1,15 +1,17 @@
 package duke;
 
-import duke.file_management.CreateFile;
-import duke.file_management.WriteFile;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import duke.filemanagement.CreateFile;
+import duke.filemanagement.WriteFile;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 /**
  * Storage Class handles saving and loading of files to th program.
@@ -73,7 +75,7 @@ public class Storage {
         String command = null;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            while((command = reader.readLine()) != null){
+            while ((command = reader.readLine()) != null) {
                 // 9: [E][ ] something  (at: Sep 11 2011, 12:12)
                 String[] commandArr = command.split("]");
                 String cmdTemp = commandArr[0];

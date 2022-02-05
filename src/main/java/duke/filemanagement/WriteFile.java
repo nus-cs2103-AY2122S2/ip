@@ -1,4 +1,4 @@
-package duke.file_management;
+package duke.filemanagement;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class WriteFile {
      *
      * @param text Contains the information that is to be written on the file.
      */
-    public void writeToFile(String text){
+    public void writeToFile(String text) {
         try {
             FileWriter fileWriter = new FileWriter(this.pathName, true);
             fileWriter.write(text);
