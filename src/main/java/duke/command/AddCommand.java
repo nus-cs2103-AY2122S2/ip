@@ -67,13 +67,13 @@ public class AddCommand extends Command {
      * @throws IOException When writing to File in Storage.
      */
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(List taskList, Ui ui, Storage storage) throws IOException {
         if (taskType == Tasks.DEADLINE) {
             taskList.add(taskType, description, localDateTime);
         } else {
             taskList.add(taskType, description, time);
         }
-        ui.printAddedTask(taskList);
         storage.writeToFile("data/duke.txt", taskList);
+        return ui.printAddedTask(taskList);
     }
 }

@@ -18,8 +18,8 @@ abstract public class Command {
         this.isExit = isExit;
     }
 
-    public void execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException {
-
+    public String execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        return "";
     }
 
     public boolean getIsExit() {

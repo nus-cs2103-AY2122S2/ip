@@ -10,7 +10,7 @@ import duke.task.Task;
 import java.io.IOException;
 
 /**
- * Represents a DeleteCommand which tells Duke to delete a Task from the TaskList.
+ * Represents a DeleteCommand which tells duke.Duke to delete a Task from the TaskList.
  */
 public class DeleteCommand extends Command {
 
@@ -31,9 +31,9 @@ public class DeleteCommand extends Command {
      * @throws DukeException If task to be deleted is not found in the list.
      */
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(List taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task task = taskList.delete(index);
-        ui.printDeletedTask(taskList, task);
         storage.writeToFile("data/duke.txt", taskList);
+        return ui.printDeletedTask(taskList, task);
     }
 }

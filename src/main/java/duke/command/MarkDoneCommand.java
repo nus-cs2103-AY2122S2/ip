@@ -7,7 +7,7 @@ import duke.Ui;
 import java.io.IOException;
 
 /**
- * Represents a MarkDoneCommand which tells Duke to mark a task as done.
+ * Represents a MarkDoneCommand which tells duke.Duke to mark a task as done.
  */
 public class MarkDoneCommand extends Command {
 
@@ -27,9 +27,9 @@ public class MarkDoneCommand extends Command {
      * @throws IOException If the File to be written to in Storage is not found.
      */
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(List taskList, Ui ui, Storage storage) throws IOException {
         taskList.markDone(index);
-        ui.printMarkDoneTask(taskList.getArrayList().get(index));
         storage.writeToFile("data/duke.txt", taskList);
+        return ui.printMarkDoneTask(taskList.getArrayList().get(index));
     }
 }
