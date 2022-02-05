@@ -17,8 +17,8 @@ public class Parser {
                             + "    Please select a valid task number to mark!\n" + Ui.BLANK_LINE);
                 }
                 if (numToMark > taskList.getTaskListSize() || numToMark < 1) {
-                    throw new InvalidInputException("\n" + Printer.BLANK_LINE
-                        + "    Please select a valid task number to mark!\n" + Printer.BLANK_LINE);
+                    throw new InvalidInputException("\n" + Ui.BLANK_LINE
+                        + "    Please select a valid task number to mark!\n" + Ui.BLANK_LINE);
                 }
                 Ui.mark(numToMark, taskList);
                 Storage.saveToFile(taskList);
@@ -30,8 +30,8 @@ public class Parser {
                             + "    Please select a valid task number to unmark!\n" + Ui.BLANK_LINE);
                 }
                 if (numToUnmark > taskList.getTaskListSize() || numToUnmark < 1) {
-                    throw new InvalidInputException("\n" + Printer.BLANK_LINE
-                            + "    Please select a valid task number to unmark!\n" + Printer.BLANK_LINE);
+                    throw new InvalidInputException("\n" + Ui.BLANK_LINE
+                            + "    Please select a valid task number to unmark!\n" + Ui.BLANK_LINE);
                 }
                 Ui.unmark(numToUnmark, taskList);
                 Storage.saveToFile(taskList);
@@ -108,8 +108,8 @@ public class Parser {
                             + "    Please select a valid task number to delete!\n" + Ui.BLANK_LINE);
                 }
                 if (numToDelete > taskList.getTaskListSize() || numToDelete < 0) {
-                    throw new InvalidInputException("\n" + Printer.BLANK_LINE
-                            + "    Please select a valid task number to delete!\n" + Printer.BLANK_LINE);
+                    throw new InvalidInputException("\n" + Ui.BLANK_LINE
+                            + "    Please select a valid task number to delete!\n" + Ui.BLANK_LINE);
                 }
                 Ui.delete(numToDelete, taskList);
                 Storage.saveToFile(taskList);

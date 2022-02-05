@@ -73,7 +73,7 @@ public class Storage {
 
     public static void saveToFile(TaskList taskList ) throws IOException {
         StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.getTaskListSize(); i++) {
             Task t = taskList.get(i);
             listString.append(i + 1).append(".").append(t.toString()).append("\n");
         }
