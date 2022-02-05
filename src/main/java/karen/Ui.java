@@ -43,7 +43,7 @@ public class Ui {
      * @param message Message generated from determined inputs and subsequent outputs.
      */
     public String displayUserInput(String message) {
-        return String.format("%s\n\n", message);
+        return String.format("%s", message);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Ui {
      * @param message Message generated
      */
     public String displayWarning(String message) {
-        return String.format("%s\n\n", message);
+        return String.format("%s", message);
     }
 
     /**

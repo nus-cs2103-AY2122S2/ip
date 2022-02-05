@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import karen.Karen;
+import karen.Main;
 import karen.Ui;
 
 /**
@@ -18,8 +19,8 @@ import karen.Ui;
  * Adapted from: https://se-education.org/guides/tutorials/javaFxPart4.html
  */
 public class MainWindow extends AnchorPane {
-    public static final String USER_IMAGE_PATH = "/images/DaUser.png";
-    public static final String KAREN_IMAGE_PATH = "/images/DaDuke.png";
+    public static final String USER_IMAGE_PATH = Main.USER_IMAGE_PATH;
+    public static final String KAREN_IMAGE_PATH = Main.KAREN_IMAGE_PATH;
 
     @FXML
     private ScrollPane scrollPane;

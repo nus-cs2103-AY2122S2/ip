@@ -15,8 +15,8 @@ import karen.gui.MainWindow;
 
 
 public class Main extends Application {
-    public static final String USER_IMAGE_PATH = "/images/DaUser.png";
-    public static final String KAREN_IMAGE_PATH = "/images/DaDuke.png";
+    public static final String USER_IMAGE_PATH = "/images/DaCat.png";
+    public static final String KAREN_IMAGE_PATH = "/images/DaKaren.png";
 
     private final Karen karen = new Karen();
 
