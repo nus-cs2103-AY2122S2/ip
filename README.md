@@ -1,24 +1,52 @@
-# com.duke.Duke project template
+# **DukePro** 
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "Stop making fake quotes and crediting it to me" - Sun Tzu([source](https://ifunny.co/picture/stop-making-fake-quotes-up-and-crediting-it-to-me-PoQLZnqk8))
 
-## Setting up in Intellij
+Ever missed an important assignment because it slipped your mind? Worry no more!
+DukePro is a simple chatbot aimed at managing your tasks to ensure that you'll never miss another important task ever again. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## **Its has:** 
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/com.duke.Duke.java` file, right-click it, and choose `Run com.duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+- A simple based input method suited for fast typers
+- Easy to learn commands
+- A quirky assistant bot brimming with personality 
+<img src="https://64.media.tumblr.com/e2358326f171b07a12cc09f46adc8a4f/d900fba9b3ad6ca6-88/s400x600/2568b87b5ccf0c7f2440e54df642328b90d7e0f6.png" alt="" width="100"/>
+
+## **All you need to do is**
+
+1.  Download it from [here](https://github.com/kev-intq/ip/releases/tag/Level-10)
+2.  Double-click it
+3. Add your tasks
+4. Let it manage your tasks for you :smiley:
+
+And it is **FREE!**
+
+## Features
+
+- [x] Managing simple tasks
+- [x] Managing deadlines and events (with dates)
+- [x] Genshin-themed UI
+
+![](https://static.wikia.nocookie.net/gensin-impact/images/7/74/Icon_Emoji_066_Hu_Tao_Reciting_poetry.png/revision/latest/scale-to-width-down/250?cb=20210906044059)
+
+If you are familiar with CSS and JavaFX, you can further customize the UI to suit your needs. Here is a snippet of the GUI code:
+```java
+private DialogBox(String text, Image img, String user) {
+        try {
+            FXMLLoader fxmlLoader;
+            if (user.matches("user")) {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxUser.fxml"));
+            } else {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxBot.fxml"));
+            }
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setFill(new ImagePattern(img));
+    }
+```
