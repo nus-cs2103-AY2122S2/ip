@@ -11,11 +11,11 @@ import duke.DukeException;
  * Encapsulates an additional LocalDate and LocalTime attribute
  * which represents the deadline of the Task.
  */
-public class Deadline extends Task{
-    static final private DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static final private DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
-    private LocalDate deadline;
+public class Deadline extends Task {
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private LocalTime time;
+    private LocalDate deadline;
 
     /**
      * Creates a new Deadline that is marked as not done.
@@ -67,7 +67,7 @@ public class Deadline extends Task{
      * @param deadlineDate The string representation of the deadline.
      * @throws DukeException If deadlineDate does not have the expected pattern.
      */
-    public Deadline (String task, boolean isDone, String deadlineDate) throws DukeException{
+    public Deadline (String task, boolean isDone, String deadlineDate) throws DukeException {
         this(task, deadlineDate);
         this.isDone = isDone;
     }

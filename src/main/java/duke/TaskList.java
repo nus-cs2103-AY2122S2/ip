@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /** Instantiates an empty task list */
     public TaskList() {
@@ -84,6 +84,15 @@ public class TaskList {
     }
 
     /**
+     * Returns the list of tasks.
+     * 
+     * @return The list of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    /**
      * Finds the list of tasks that contains the given keyword and lists them out.
      * 
      * @param searchText The keyword to search for.
@@ -120,6 +129,5 @@ public class TaskList {
 
         return sb.toString();
     }
-
     
 }

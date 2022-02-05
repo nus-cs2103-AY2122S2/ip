@@ -1,10 +1,4 @@
 package duke;
-import java.util.Scanner;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
@@ -30,7 +31,7 @@ public class Storage {
      * @return The created file.
      * @throws IOException If an I/O error occurs.
      */
-    private static File createFileIfNotExist(String filePath, String dirPath) throws IOException{
+    private static File createFileIfNotExist(String filePath, String dirPath) throws IOException {
         File dir = new File(dirPath);
         File file = new File(filePath);
         dir.mkdir();
@@ -49,7 +50,7 @@ public class Storage {
         File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
         FileWriter fw = new FileWriter(file, true);
         
-        for (Task task : taskList.tasks) {
+        for (Task task : taskList.getTasks()) {
             fw.write(task.toFileFormat());
         }
         fw.close();
@@ -63,20 +64,20 @@ public class Storage {
      * @return The list of tasks stored in the file.
      * @throws DukeException If the contents of the file cannot be restored correctly.
      */
-    public static TaskList readSaveFile() throws DukeException{
+    public static TaskList readSaveFile() throws DukeException {
         TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
         Scanner s = null;
 
         try {
             s = new Scanner(f);
-            while(s.hasNextLine()) {
+            while (s.hasNextLine()) {
                 String packet = s.nextLine();
                 String[] packetSections = packet.split(" \\| ");
                 String taskName = packetSections[2];
                 boolean isDone = Integer.parseInt(packetSections[1]) == 1;
 
-                switch (packetSections[0]){
+                switch (packetSections[0]) {
                 case "T":
                     tasks.addTask(new ToDo(taskName, isDone));
                     break;

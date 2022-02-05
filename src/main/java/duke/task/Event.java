@@ -11,9 +11,9 @@ import duke.DukeException;
  * Encapsulates an additional LocalDate and LocalTime attribute
  * which represents when the Event occur.
  */
-public class Event extends Task{
-    static final private DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static final private DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+public class Event extends Task {
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private LocalDate startDate;
     private LocalTime time;
 
@@ -68,7 +68,7 @@ public class Event extends Task{
      * @param startDate The string representation of when the event occurs.
      * @throws DukeException If startDate does not have the expected pattern.
      */
-    public Event (String task, boolean isDone, String startDate) throws DukeException{
+    public Event (String task, boolean isDone, String startDate) throws DukeException {
         this(task, startDate);
         this.isDone = isDone;
     }

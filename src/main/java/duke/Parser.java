@@ -10,10 +10,10 @@ import duke.task.ToDo;
  * Encapsulates the logic to parse and understand inputs by the user.
  */
 public class Parser {
-    
-    private TaskList tasks;
+
     /** Represents whether or not the parser is accepting userinput. */
     public boolean isPolling;
+    private TaskList tasks;
 
     public Parser() {
         try {
@@ -22,7 +22,7 @@ public class Parser {
             Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
             tasks = new TaskList();
         }
-        
+
         isPolling = true;
         Ui.printMessage(Ui.GREETING_MESSAGE);
     }
@@ -101,7 +101,7 @@ public class Parser {
      * @return A Task.
      * @throws DukeException if user-specified parameters do not meet the expected format.
      */
-    public Task createTask(String command, String commandDetails) throws DukeException{
+    public Task createTask(String command, String commandDetails) throws DukeException {
         String[] taskArgs = null;
 
         if (command.equals("todo")) {
@@ -112,8 +112,10 @@ public class Parser {
             taskArgs = commandDetails.split(" /at ", 2);
         }
 
-        if (taskArgs.length < 2) throw new DukeException(String.format(
+        if (taskArgs.length < 2) {
+            throw new DukeException(String.format(
             "Missing details for %s!", command));
+        }
 
         return command.equals("deadline") 
             ? new Deadline(taskArgs[0], taskArgs[1])
@@ -133,7 +135,9 @@ public class Parser {
     }
 
     private void assertNonEmptyDetails(String details) throws DukeException {
-        if (details == null) throw new DukeException("Missing details!");
+        if (details == null) {
+            throw new DukeException("Missing details!");
+        }
     }
 
     private boolean isNumeric(String string) {
@@ -146,14 +150,20 @@ public class Parser {
     }
 
     private void assertValidItemNumber(String str) throws DukeException {
-        if (str == null) throw new DukeException("Missing item number!");
+        if (str == null) {
+            throw new DukeException("Missing item number!");
+        }
         
-        if (!isNumeric(str)) throw new DukeException(
+        if (!isNumeric(str)) {
+            throw new DukeException(
             "Please specify a numerical value for the item number instead of \"" + str + "\"!");
+        }
 
         int itemNumber = Integer.parseInt(str);
 
-        if (!tasks.isValidItemNumber(itemNumber)) throw new DukeException(
+        if (!tasks.isValidItemNumber(itemNumber)) {
+            throw new DukeException(
             "Please specify a valid item number");
+        }
     }
 }

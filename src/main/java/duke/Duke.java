@@ -7,7 +7,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
 
-        while(parser.isPolling) {
+        while (parser.isPolling) {
             String input = sc.nextLine();
             parser.inputHandler(input);
         }

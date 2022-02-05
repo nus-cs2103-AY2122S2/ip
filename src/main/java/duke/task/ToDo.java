@@ -39,7 +39,7 @@ public class ToDo extends Task {
      * Returns the string representation of a ToDo.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[T]%s %s", this.statusString(), this.task);
     }
 }
