@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * Represents a ListCommand which tells Duke to print out the list of current tasks.
+ * Represents a ListCommand which tells duke.Duke to print out the list of current tasks.
  */
 public class ListCommand extends Command {
 
@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) {
-        ui.printList(taskList);
+    public String execute(List taskList, Ui ui, Storage storage) {
+        return ui.printList(taskList);
     }
 }

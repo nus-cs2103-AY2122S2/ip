@@ -26,9 +26,9 @@ public class UnmarkDoneCommand extends Command {
      * @throws IOException If the File to be written to in Storage is not found.
      */
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(List taskList, Ui ui, Storage storage) throws IOException {
         taskList.unmarkDone(index);
-        ui.printUnmarkDoneTask(taskList.getArrayList().get(index));
         storage.writeToFile("data/duke.txt", taskList);
+        return ui.printUnmarkDoneTask(taskList.getArrayList().get(index));
     }
 }

@@ -39,12 +39,14 @@ public class Storage {
      * @param filePath File path of file to be printed.
      * @throws FileNotFoundException If file is not found.
      */
-    public void printFileContent(String filePath) throws FileNotFoundException {
+    public String printFileContent(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
+        String string = "";
         while (s.hasNext()) {
-            System.out.println(s.nextLine());
+            string += s.nextLine();
         }
+        return string;
     }
 
     /**

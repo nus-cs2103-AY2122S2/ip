@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * Represents a ByeCommand which exits Duke.
+ * Represents a ByeCommand which exits duke.Duke.
  */
 public class ByeCommand extends Command {
 
@@ -14,14 +14,14 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Executes the ByeCommand and exits Duke.
+     * Executes the ByeCommand and exits duke.Duke.
      *
      * @param taskList TaskList.
      * @param ui Ui.
      * @param storage Storage.
      */
     @Override
-    public void execute(List taskList, Ui ui, Storage storage) {
-        ui.byeUser();
+    public String execute(List taskList, Ui ui, Storage storage) {
+        return ui.byeUser();
     }
 }
