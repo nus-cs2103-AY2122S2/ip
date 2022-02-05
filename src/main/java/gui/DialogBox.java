@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
+import duke.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,7 +62,22 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
 
-        System.out.println(db.dialog.heightProperty());
+        return db;
+    }
+
+    public static DialogBox getStartingBanner(Image img){
+        Ui ui = new Ui();
+        var db = new DialogBox(ui.showBanner(), img);
+        db.flip();
+        db.dialog.setWrapText(true);
+        return db;
+    }
+
+    public static DialogBox getHelpBanner(Image img){
+        Ui ui = new Ui();
+        var db = new DialogBox(ui.showHelpMenu(), img);
+        db.flip();
+        db.dialog.setWrapText(true);
         return db;
     }
 }
