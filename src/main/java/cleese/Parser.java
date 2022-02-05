@@ -67,7 +67,6 @@ public class Parser {
             return "mark/unmark";
         case "delete":
             int taskToDeleteIndex = Integer.parseInt(parameters) - 1;
-            System.out.println(taskToDeleteIndex);
             Task taskToDelete = taskList.get(taskToDeleteIndex);
             taskList.removeFromTaskList(taskToDelete);
             ui.printRemovedAck(taskToDelete, taskList);
