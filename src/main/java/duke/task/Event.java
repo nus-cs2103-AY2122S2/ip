@@ -7,11 +7,22 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event represents a Task that a user must attend at a certain date and time.
+ *
+ * @author Jian Rong
+ */
 public class Event extends Task{
     private final String title;
     private final LocalDate date;
     private final LocalTime time;
 
+    /**
+     * Constructor of Event class.
+     *
+     * @param command Input from User
+     * @throws DukeException If syntax of command is wrong.
+     */
     public Event(String command) throws DukeException {
         try {
             this.title = command.split(" /at ")[0];
@@ -25,6 +36,10 @@ public class Event extends Task{
         System.out.println("added: " + this.toString());
     }
 
+    /**
+     * Returns a summary of the Event Task.
+     * @return The summary of the Event.
+     */
     public String toString(){
         int day = date.getDayOfMonth();
         Month month = date.getMonth();

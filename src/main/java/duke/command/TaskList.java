@@ -9,9 +9,17 @@ import duke.task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList represents a list of Tasks. Includes methods to modify the TaskList and the Tasks in the list.
+ *
+ * @author Jian Rong
+ */
 public class TaskList {
     public List<Task> taskArray = new ArrayList<>();
 
+    /**
+     * Prints the list of tasks currently added.
+     */
     public void listItem() {
         System.out.println("__________________________________");
         if (taskArray.size() == 0) {
@@ -24,6 +32,14 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
+
+    /**
+     * Marks a specified task as done.
+     *
+     * @param command Commmand is the input given by the user
+     * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
+     * @throws NumberFormatException If user gives a string instead of a number
+     */
     public void markItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
         taskArray.get(index-1).setChecked();
@@ -33,6 +49,13 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
+    /**
+     * Unmarks a specified task as done.
+     *
+     * @param command Commmand is the input given by the user
+     * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
+     * @throws NumberFormatException If user gives a string instead of a number
+     */
     public void unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
         taskArray.get(index-1).setUnChecked();
@@ -42,6 +65,13 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
+    /**
+     * Deletes an item from the list of tasks.
+     *
+     * @param command Command is the input that the user gives
+     * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
+     * @throws NumberFormatException If user gives a string instead of a number
+     */
     public void deleteItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
         Task task = taskArray.remove(index - 1);
@@ -52,6 +82,13 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
+
+    /**
+     * Adds an item from the list of tasks.
+     *
+     * @param command Command is the input that the user gives
+     * @throws DukeException If syntax of input given by user is wrong
+     */
     public void addItem(String[] command) throws DukeException {
         String input = command[0];
         System.out.println("__________________________________");
@@ -70,6 +107,10 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
+    /**
+     * Returns the list of tasks in a readable format.
+     * @return String Representing the list of tasks
+     */
     public String writeItem() {
         StringBuilder list = new StringBuilder();
         if (taskArray.size() == 0) {

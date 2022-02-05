@@ -4,7 +4,22 @@ import duke.DukeException;
 
 import java.util.Arrays;
 
+
+/**
+ * This class parses user input from Duke.
+ * It can recognise 8 commands and deals with invalid user input.
+ *
+ * @author Jian Rong
+ */
 public class Parser {
+
+    /**
+     * Calls the appropriate method based on user input, or handles invalid user input.
+     *
+     * @param input Input comes from user
+     * @param taskList TaskList is the list of tasks that was created in Duke
+     * @return boolean Returns false if user says "bye", returns true otherwise
+     */
     public static boolean parseInput(String input, TaskList taskList) {
         String[] inputArray = input.split(" ");
         String[] tempArray = Arrays.copyOfRange(inputArray, 1, inputArray.length);

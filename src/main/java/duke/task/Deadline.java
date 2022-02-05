@@ -7,11 +7,23 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline represents a task that the user has to to by a certain time.
+ *
+ * @author Jian Rong
+ */
 public class Deadline extends Task{
     private final String title;
     private final LocalDate date;
     private final LocalTime time;
 
+
+    /**
+     * Constructor of Deadline class.
+     *
+     * @param command Input from User
+     * @throws DukeException If syntax of command is wrong.
+     */
     public Deadline(String command) throws DukeException {
         try {
             this.title = command.split(" /by ")[0];
@@ -25,6 +37,10 @@ public class Deadline extends Task{
         System.out.println("added: " + this.toString());
     }
 
+    /**
+     * Returns a summary of the Deadline Task.
+     * @return The summary of the Deadline.
+     */
     public String toString(){
         int day = date.getDayOfMonth();
         Month month = date.getMonth();
