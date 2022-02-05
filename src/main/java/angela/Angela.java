@@ -22,7 +22,7 @@ public class Angela {
     /**
      * Initialize an empty instance of Duke
      */
-    public Angela() {
+    public Angela(String... args) {
         botStorage = null;
         taskList = null;
         ui = null;
