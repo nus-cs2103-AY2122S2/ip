@@ -41,24 +41,11 @@ public class DeadlineInst extends NewTaskInst {
      *          time/date format is wrong.
      */
     public static DeadlineInst of(String taskDetails) throws InvalidInputException {
-        // input cannot start with or end with a space.
-        String[] split = taskDetails.split(" /by ");
-        // a correct format will produce a String[2].
+        // if missing details or wrong format, an exception will be thrown
+        checkTaskDetails(taskDetails);
 
-        if (split.length == 1) {
-            // happens in "deadline a /byb", "a/by b", "a/byb", or "abyb"
-            split = taskDetails.split("/by");
-            if (split.length == 2) {
-                // happens in "deadline a/by b", "a /byb", "a/by b".
-                // user included a "/by" but did not add appropriate spacing.
-                throw MISSING_SPACES_EXCEPTION;
-            }
-            // user did not include a "/by" at all.
-            throw MISSING_TASK_DETAILS_EXCEPTION;
-        }
-        if (split.length >= 3) { // happens with multiple " /by "s
-            throw TOO_MANY_ARGUMENTS_EXCEPTION;
-        }
+        String[] split = taskDetails.split(" /by ");
+        assert split.length == 2;
 
         DateTimeParser.checkValidFormat(split[1]); // if invalid, an exception will be thrown.
 
@@ -88,5 +75,36 @@ public class DeadlineInst extends NewTaskInst {
         taskList.add(true, task);
         return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now.",
                 task, taskList.length());
+    }
+
+    /**
+     * Checks for proper task details and the existence of the " /by " separator in the given task details.
+     * If it is missing, finds out why and returns the reason in the InvalidInputException.
+     *
+     * @param taskDetails the input string to be checked.
+     * @return true when the input has proper details separated with " /by ".
+     * @throws InvalidInputException when the input does not have proper details separated with " /by ",
+     *          or is missing spaces or the " /by " itself.
+     */
+    private static boolean checkTaskDetails(String taskDetails) throws InvalidInputException {
+        // input cannot start with or end with a space.
+        String[] split = taskDetails.split(" /by ");
+        // a correct format will produce a String[2].
+
+        if (split.length == 1) {
+            // happens in "deadline a /byb", "a/by b", "a/byb", or "abyb"
+            split = taskDetails.split("/by");
+            if (split.length == 2) {
+                // happens in "deadline a/by b", "a /byb", "a/by b".
+                // user included a "/by" but did not add appropriate spacing.
+                throw MISSING_SPACES_EXCEPTION;
+            }
+            // user did not include a "/by" at all.
+            throw MISSING_TASK_DETAILS_EXCEPTION;
+        }
+        if (split.length >= 3) { // happens with multiple " /by "s
+            throw TOO_MANY_ARGUMENTS_EXCEPTION;
+        }
+        return true;
     }
 }
