@@ -5,7 +5,7 @@ public class TodoTask extends Task {
     private final String taskType = "T";
     private boolean markedStatus;
 
-    public TodoTask (String taskTitle) {
+    public TodoTask(String taskTitle) {
         super(taskTitle);
         this.taskTitle = taskTitle;
         this.markedStatus = false;

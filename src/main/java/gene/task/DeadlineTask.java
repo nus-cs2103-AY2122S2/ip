@@ -7,9 +7,9 @@ public class DeadlineTask extends Task {
     private final String taskTitle;
     private final String taskType = "D";
     private boolean markedStatus;
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
-    public DeadlineTask (String taskTitle, LocalDateTime deadline) {
+    public DeadlineTask(String taskTitle, LocalDateTime deadline) {
         super(taskTitle, deadline);
         this.taskTitle = taskTitle;
         this.deadline = deadline;
@@ -42,7 +42,10 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         String mark = this.markedStatus ? "[X]" : "[ ]";
-        String deadlineText = "(by: " + deadline.format(DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm a")) + ")";
+        String deadlineText = "(by: "
+                + deadline.format(
+                        DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm a")
+        ) + ")";
         String toReturn = "[D]" + mark + " " + this.taskTitle + " " + deadlineText;
         return toReturn;
     }
