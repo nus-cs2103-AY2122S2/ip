@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 import chatbot.DukeException;
@@ -15,25 +17,47 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList;
+    private boolean hasLoadedData = false;
 
     ////////////////////////////////////////////////////////////////
     // Main Methods
 
     /**
     * Class constructor.
-    *
-    * @param  filePath  a string that denotes the intended directory of the
-    * stored data text file for the bot
     */
-    public Duke(String filePath) {
+    public Duke() {
         this.storage = new Storage(FILEPATH, FILEDIR);
         this.taskList = new TaskList();
 
         try { // attempt to load saved data
             storage.loadData(taskList);
+            hasLoadedData = true;
         } catch (DukeException dukeException) {
             Ui.displayMessage(dukeException.toString());
         }
+    }
+
+    /**
+     * Returns the String containing the bot's reply to loading data
+     *
+     * @return          the reply of the bot of whether data was loaded
+     */
+    public String getLoadDataResponse() {
+        if (hasLoadedData) {
+            return storage.LOAD_SUCCESS;
+        } else {
+            return storage.UNREADABLE_FILE;
+        }
+    }
+
+    /**
+     * Returns the String containing the bot's reply to the String inputText
+     *
+     * @param inputText the String from the user's input
+     * @return          the reply of the bot to the input
+     */
+    public String getResponse(String inputText) {
+        return Parser.parseTextGui(inputText, taskList, storage);
     }
 
     /**
@@ -67,13 +91,6 @@ public class Duke {
      * Main function that is run on startup of the bot.
      */
     public static void main(String[] args) {
-        // String logo = " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
-
-        new Duke(FILEPATH).run();
+        new Duke().run();
     }
 }

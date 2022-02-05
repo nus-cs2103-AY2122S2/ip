@@ -1,7 +1,5 @@
 package chatbot;
 import java.time.LocalDate;
-// import java.time.format.DateTimeFormatter;
-// import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
@@ -17,13 +15,12 @@ public class Parser {
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";
     private static final String COMMAND_REQUIRES_NUMBER = "Sorry Sir, this command requires a number.";
     private static final String MISSING_TASK_INFO = "Sorry Sir, the <%s> command cannot be empty.";
-
+    private static final String BYE_MESSAGE = "Farewell Sir. May you have a wonderful day.";
     /**
     * Displays the farewell message to the user.
     */
     public static void displayFarewell() {
-        String byeMessage = "Farewell Sir. May you have a wonderful day.";
-        Ui.displayMessage(byeMessage);
+        Ui.displayMessage(BYE_MESSAGE);
     }
     /**
     * Returns the boolean of whether the bot should expect more inputs from the user,
@@ -99,6 +96,71 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the String of the reply to the user's input inputText
+     *
+     * @param    inputText    input of the user
+     * @param    taskList     TaskList of the user
+     * @param    storage      Storage of the user denoting the location of the save file
+     * @return                the String containing the reply
+     * @see      TaskList
+     * @see      Storage
+     */
+    public static String parseTextGui(
+            String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
+        inputText = inputText.trim();
+        String[] inputStringArray = inputText.split(" ");
+        try {
+            if (inputText.equals("bye")) { // bye command
+                return BYE_MESSAGE;
+            } else if (inputText.equals("list")) { // list command
+                String message = taskList.getTaskListMessage();
+                return message;
+
+            } else if (inputStringArray[0].equals("mark") || inputStringArray[0].equals("unmark")) {
+                // mark / unmark command
+                try {
+                    String inputNumberString = inputStringArray[1];
+                    int taskIndex = convertToTaskIndex(inputNumberString);
+                    String message = taskList.markTask(taskIndex, inputStringArray[0]);
+                    storage.saveData(taskList);
+                    return message;
+                } catch (ArrayIndexOutOfBoundsException exception) { // no input together with command
+                    throw new DukeException(COMMAND_REQUIRES_NUMBER);
+                }
+
+            } else if (inputStringArray[0].equals("todo")
+                    || inputStringArray[0].equals("deadline")
+                    || inputStringArray[0].equals("event")) {
+                Task newTask = createNewTaskFromInput(inputStringArray[0], inputText);
+                String message = taskList.insertNewTask(newTask);
+                storage.saveData(taskList);
+                return message;
+
+            } else if (inputStringArray[0].equals("delete")) {
+                try {
+                    String inputNumberString = inputStringArray[1];
+                    int deleteTaskIndex = convertToTaskIndex(inputNumberString);
+                    String message = taskList.deleteTask(deleteTaskIndex);
+                    storage.saveData(taskList);
+                    return message;
+                } catch (ArrayIndexOutOfBoundsException exception) { // no input together with command
+                    throw new DukeException(COMMAND_REQUIRES_NUMBER);
+                }
+            } else if (inputStringArray[0].equals("find")) {
+                try {
+                    String message = taskList.findTaskName(inputStringArray[1]);
+                    return message;
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    throw new DukeException(String.format(MISSING_TASK_INFO, "find"));
+                }
+            } else { // other text input
+                throw new DukeException(UNRECOGNIZED_COMMAND);
+            }
+        } catch (DukeException dukeException) {
+            return dukeException.toString();
+        }
+    }
     /**
     * Returns the Task created from the user inputText.
     * The type parameter determines which type of Task is created.

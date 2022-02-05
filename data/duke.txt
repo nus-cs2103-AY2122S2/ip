@@ -1,4 +1,4 @@
-Todo/;DONE/;read book
-Deadline/;NOT_DONE/;return book to library/;2021-01-01/;null
-Event/;NOT_DONE/;project meeting with pals/;2021-01-01/;18:00
-Todo/;DONE/;join sports club
+Todo/;DONE/;borrow book
+Deadline/;DONE/;return book 2/;2021-01-01/;null
+Event/;NOT_DONE/;project meeting/;2021-01-01/;18:00
+Event/;NOT_DONE/;project meeting 2/;2021-01-01/;null

@@ -2,12 +2,9 @@ package chatbot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-// import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-// import java.time.format.DateTimeFormatter;
-// import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -22,6 +19,7 @@ import tasks.Todo;
 public class Storage {
     public static final String LOAD_SUCCESS = "I have successfully loaded your saved agenda, Sir.";
     public static final String UNREADABLE_FILE = "Sorry Sir, I was unable to access the data file.";
+    public static final String UNRECOGNIZED_DATA = "Sorry Sir, there is unrecognized data in the data file.";
 
     private String filePath;
     private String fileDirectory;
@@ -128,10 +126,10 @@ public class Storage {
                 Task newTask;
                 LocalTime taskTime;
                 switch (dataEntryArray[0]) {
-                case "Todo": // to-do task
+                case "Todo":
                     newTask = new Todo(dataEntryArray[2], isDone);
                     break;
-                case "Deadline": // deadline task
+                case "Deadline":
                     taskTime = null;
                     if (!dataEntryArray[4].equals("null")) {
                         taskTime = LocalTime.parse(dataEntryArray[4]);
@@ -142,7 +140,7 @@ public class Storage {
                         taskTime,
                         isDone);
                     break;
-                case "Event": // event task
+                case "Event":
                     taskTime = null;
                     if (!dataEntryArray[4].equals("null")) {
                         taskTime = LocalTime.parse(dataEntryArray[4]);
@@ -153,9 +151,8 @@ public class Storage {
                         taskTime,
                         isDone);
                     break;
-                default: // unknown task - should not reach here
-                    newTask = new Todo(dataEntryArray[2], isDone);
-                    break;
+                default: // unknown task - unrecognized data
+                    throw new DukeException(UNRECOGNIZED_DATA);
                 }
                 taskList.addTask(newTask);
             }
