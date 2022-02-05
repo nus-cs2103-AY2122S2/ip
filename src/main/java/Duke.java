@@ -1,8 +1,8 @@
+import myPackage.Storage;
+import myPackage.TaskList;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.*;
-import myPackage.*;
-import exceptions.DukeException;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
