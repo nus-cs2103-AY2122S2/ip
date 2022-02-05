@@ -47,7 +47,7 @@ public class Duke {
             if (input.equals("bye")) {
                 return Ui.goodbyeMessage();
             }
-            String[] command = new Parser().messageProcess(input);
+            String[] command = new Parser().processMessage(input);
             storage.executeCommand(command);
             return tasks.executeCommand(command);
         } catch (DukeException | IOException e) {

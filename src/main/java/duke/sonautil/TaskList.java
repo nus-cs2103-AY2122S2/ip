@@ -49,136 +49,178 @@ public class TaskList {
             } else {
                 return Ui.showListMessage() +  "\n" + showList();
             }
-
         case "todo": {
             Task task = new Todo(command[1]);
             addTask(task);
             return Ui.todoEnteredSuccessMessage(task, taskAddedIndex);
         }
-
         case "deadline": {
             Task task = new Deadline(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
             return Ui.deadlineEnterSuccessMessage(task, command[3], taskAddedIndex);
         }
-
         case "event": {
             Task task = new Event(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
             return Ui.eventEnterSuccessMessage(task, command[3], taskAddedIndex);
         }
-
         case "mark": {
-            int taskIndex = Integer.parseInt(command[1]);
-
-            //user trying to mark a non-existing Duke.task
-            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
-                throw new DukeException(Ui.taskDontExistMessage(taskIndex));
-            }
-
-            //user trying to mark a done Duke.task as done again
-            if (list.get(taskIndex).isDone()) {
-                throw new DukeException(Ui.markRepeatMessage());
-            }
-
-            list.get(taskIndex).markAsDone();
-            return Ui.markSuccessMessage(list.get(taskIndex));
+            return executeMarkCommand(command);
         }
-
         case "unmark": {
-            int taskIndex = Integer.parseInt(command[1]);
-            //user trying to unmark a non-existing Duke.task
-            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
-                throw new DukeException(Ui.taskDontExistMessage(taskIndex));
-            }
-            //user trying to mark a undone Duke.task as undone again
-            if (!list.get(taskIndex).isDone()) {
-                throw new DukeException(Ui.unmarkRepeatMessage());
-            }
-            list.get(taskIndex).unmark();
-            return Ui.unmarkSuccessMessage(list.get(taskIndex));
+            return executeUnmarkCommand(command);
         }
-
         case "delete": {
-            System.out.println("before:" + taskAddedIndex);
-            //list is empty
-            if (taskAddedIndex == 0) {
-                throw new DukeException(Ui.listEmptyMessage());
-            }
-            int taskIndex = Integer.parseInt(command[1]);
-            //user trying to delete a non-existing Duke.task
-            if (taskIndex >= taskAddedIndex || taskIndex < 0) {
-                System.out.println("taskIndex:" + taskIndex);
-                System.out.println("taskAddedIntex: " + taskAddedIndex);
-                throw new DukeException(Ui.taskDontExistMessage(taskIndex));
-            }
-            String str = Ui.taskRemovedMessage(getTask(taskIndex));
-            removeTask(taskIndex);
-            return str;
+            return executeDeleteCommand(command);
         }
-
         case "schedule":
-            //list is empty
-            if (taskAddedIndex == 0) {
-                throw new DukeException(Ui.scheduleEmptyMessage());
-            }
-            ArrayList<Task> scheduleList = new ArrayList<>(100);
-            LocalDate date = LocalDate.parse(command[1]);
-
-            for (int i = 0; i < taskAddedIndex; i++) {
-                if (list.get(i) instanceof Event) {
-                    Event task = (Event) list.get(i);
-                    if (date.isEqual(task.getAt().toLocalDate())) {
-                        scheduleList.add(task);
-                    }
-                }
-                if (list.get(i) instanceof Deadline) {
-                    Deadline task = (Deadline) list.get(i);
-                    if (date.isEqual((task.getBy().toLocalDate()))) {
-                        scheduleList.add(task);
-                    }
-                }
-            }
-
-            if (scheduleList.size() == 0) {
-                return Ui.scheduleEmptyMessage();
-            } else {
-                String str = Ui.showSchedule(date.toString());
-                for (int i = 0; i < scheduleList.size(); i++) {
-                    str += (i + 1) + "." + scheduleList.get(i).toString() + "\n";
-                }
-                return str;
-            }
-
+            return executeScheduleCommand(command);
         case "find":
-            String findWord = command[1];
-            ArrayList<Task> searchList = new ArrayList<>(100);
-
-            for (int i = 0; i < taskAddedIndex; i++) {
-                String taskDescription = list.get(i).getDescription();
-                if (taskDescription.contains(findWord)) {
-                    searchList.add(list.get(i));
-                }
-            }
-
-            if (searchList.size() == 0) {
-                return Ui.findNoMatchError();
-
-            } else {
-                String str = Ui.findShowResult();
-                for (int i = 0; i < searchList.size(); i++) {
-                    str += (i + 1) + "." + searchList.get(i).toString() + "\n";
-                }
-                return str;
-            }
-
+            return executeFindCommand(command);
         case "unknown":
             //fallthrough
-
         default:
             return "";
         }
     }
+
+    /**
+     * Processes user's 'mark' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     * @throws DukeException if command is invalid / not understood
+     */
+    private String executeMarkCommand(String[] command) throws DukeException {
+        int taskIndex = Integer.parseInt(command[1]);
+
+        //user trying to mark a non-existing Duke.task
+        if (taskIndex >= taskAddedIndex || taskIndex < 0) {
+            throw new DukeException(Ui.taskDontExistMessage(taskIndex));
+        }
+
+        //user trying to mark a done Duke.task as done again
+        if (list.get(taskIndex).isDone()) {
+            throw new DukeException(Ui.markRepeatMessage());
+        }
+
+        list.get(taskIndex).markAsDone();
+        return Ui.markSuccessMessage(list.get(taskIndex));
+    }
+
+    /**
+     * Processes user's 'unmark' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     * @throws DukeException if command is invalid / not understood
+     */
+    private String executeUnmarkCommand(String[] command) throws DukeException {
+        int taskIndex = Integer.parseInt(command[1]);
+        //user trying to unmark a non-existing Duke.task
+        if (taskIndex >= taskAddedIndex || taskIndex < 0) {
+            throw new DukeException(Ui.taskDontExistMessage(taskIndex));
+        }
+        //user trying to mark a undone Duke.task as undone again
+        if (!list.get(taskIndex).isDone()) {
+            throw new DukeException(Ui.unmarkRepeatMessage());
+        }
+        list.get(taskIndex).unmark();
+        return Ui.unmarkSuccessMessage(list.get(taskIndex));
+    }
+
+    /**
+     * Processes user's 'delete' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     * @throws DukeException if command is invalid / not understood
+     */
+    private String executeDeleteCommand(String[] command) throws DukeException {
+        //list is empty
+        if (taskAddedIndex == 0) {
+            throw new DukeException(Ui.listEmptyMessage());
+        }
+        int taskIndex = Integer.parseInt(command[1]);
+        //user trying to delete a non-existing Duke.task
+        if (taskIndex >= taskAddedIndex || taskIndex < 0) {
+            throw new DukeException(Ui.taskDontExistMessage(taskIndex));
+        }
+        String str = Ui.taskRemovedMessage(getTask(taskIndex));
+        removeTask(taskIndex);
+        return str;
+    }
+
+    /**
+     * Processes user's 'schedule' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     * @throws DukeException if command is invalid / not understood
+     */
+    private String executeScheduleCommand(String[] command) throws DukeException {
+        //list is empty
+        if (taskAddedIndex == 0) {
+            throw new DukeException(Ui.scheduleEmptyMessage());
+        }
+        ArrayList<Task> scheduleList = new ArrayList<>(100);
+        LocalDate date = LocalDate.parse(command[1]);
+
+        for (int i = 0; i < taskAddedIndex; i++) {
+            if (list.get(i) instanceof Event) {
+                Event task = (Event) list.get(i);
+                if (date.isEqual(task.getAt().toLocalDate())) {
+                    scheduleList.add(task);
+                }
+            }
+            if (list.get(i) instanceof Deadline) {
+                Deadline task = (Deadline) list.get(i);
+                if (date.isEqual((task.getBy().toLocalDate()))) {
+                    scheduleList.add(task);
+                }
+            }
+        }
+
+        if (scheduleList.size() == 0) {
+            return Ui.scheduleEmptyMessage();
+        } else {
+            String str = Ui.showSchedule(date.toString());
+            for (int i = 0; i < scheduleList.size(); i++) {
+                str += (i + 1) + "." + scheduleList.get(i).toString() + "\n";
+            }
+            return str;
+        }
+    }
+
+    /**
+     * Processes user's 'find' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     */
+    private String executeFindCommand(String[] command) {
+        String findWord = command[1];
+        ArrayList<Task> searchList = new ArrayList<>(100);
+
+        for (int i = 0; i < taskAddedIndex; i++) {
+            String taskDescription = list.get(i).getDescription();
+            if (taskDescription.contains(findWord)) {
+                searchList.add(list.get(i));
+            }
+        }
+
+        if (searchList.size() == 0) {
+            return Ui.findNoMatchError();
+
+        } else {
+            String str = Ui.findShowResult();
+            for (int i = 0; i < searchList.size(); i++) {
+                str += (i + 1) + "." + searchList.get(i).toString() + "\n";
+            }
+            return str;
+        }
+    }
+
 
     /**
      * Returns the Duke.task of the given index
