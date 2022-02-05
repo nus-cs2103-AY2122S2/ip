@@ -56,10 +56,10 @@ public class Ui {
     public void showDelete(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
-        if (tasks.getSize() == 1) {
-            System.out.println("Now you have " + tasks.getSize() + " task in the list.");
+        if (tasks.getSize() == 2) {
+            System.out.println("Now you have " + (tasks.getSize() - 1) + " task in the list.");
         } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+            System.out.println("Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
         }
     }
 

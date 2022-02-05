@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     public void delete(int n) {
-        this.tasks.remove(n);
+        this.tasks.remove(n - 1);
     }
 
     public int getSize() {
@@ -33,10 +33,10 @@ public class TaskList {
     }
 
     public void mark(int number) {
-        tasks.get(number).markAsDone();
+        tasks.get(number - 1).markAsDone();
     }
 
     public void unmark(int number) {
-        tasks.get(number).markAsUndone();
+        tasks.get(number - 1).markAsUndone();
     }
 }

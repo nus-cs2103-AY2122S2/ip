@@ -6,8 +6,8 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(Storage storage, TaskList tasks, Ui ui) {
+        ui.showDelete(tasks.get(number - 1), tasks);
         tasks.delete(number);
-        ui.showDelete(tasks.get(number), tasks);
     }
 
     @Override

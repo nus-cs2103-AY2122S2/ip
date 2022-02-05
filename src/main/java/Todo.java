@@ -19,7 +19,7 @@ public class Todo extends Task{
             isDoneNumber = 0;
         }
         return "T | " + isDoneNumber + " | " + description +
-                " | " + System.lineSeparator();
+                System.lineSeparator();
     }
 
 
