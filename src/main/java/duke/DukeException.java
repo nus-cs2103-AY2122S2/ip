@@ -23,14 +23,16 @@ public class DukeException extends Throwable {
      * Method to indicate to User that Deadline Syntax is invalid.
      */
     public void invalidDeadlineSyntax() {
-        System.out.println("☹ OOPS!!! Your syntax for adding deadline task is wrong. \r\n Please follow the command: deadline <Description> /by <dd/mm/yyyy>");
+        System.out.println("☹ OOPS!!! Your syntax for adding deadline task is wrong. \r\n " +
+                "Please follow the command: deadline <Description> /by <dd/mm/yyyy>");
     }
 
     /**
      * Method to indicate to User that Event Syntax is invalid.
      */
     public void invalidEventSyntax() {
-        System.out.println("☹ OOPS!!! Your syntax for adding event task is wrong. \r\n Please follow the command: event <Description> /at <Date/Time/DueDate/Place>");
+        System.out.println("☹ OOPS!!! Your syntax for adding event task is wrong. \r\n " +
+                "Please follow the command: event <Description> /at <Date/Time/DueDate/Place>");
     }
 
     /**
@@ -44,6 +46,7 @@ public class DukeException extends Throwable {
      * Method to indicate to User that the Task number supplied is invalid.
      */
     public void invalidTaskNumber() {
-        System.out.println("☹ OOPS!!! The task number provided is not valid. Please use the 'list' command to view all your tasks.");
+        System.out.println("☹ OOPS!!! The task number provided is not valid. \r\n " +
+                "Please use the 'list' command to view all your tasks.");
     }
 }

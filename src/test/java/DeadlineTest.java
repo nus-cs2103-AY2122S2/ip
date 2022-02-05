@@ -1,6 +1,9 @@
-import duke.*;
-import org.junit.jupiter.api.Test;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {

@@ -112,7 +112,7 @@ public class Parser {
      *
      * @return Exit Trigger as a boolean
      */
-        public boolean getExitTrigger() {
+        public boolean isExitTrigger() {
             return isExit;
         }
 }

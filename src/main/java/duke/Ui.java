@@ -11,13 +11,13 @@ public class Ui {
      * Method to print Duke's initial UI.
      */
     public void start() {
-            String logo = " ____        _        \n"
+        String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
-            System.out.println("Hello! I'm Duke\r\nWhat can I do for you?");
+        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Duke\r\nWhat can I do for you?");
     }
 
     /**
@@ -53,8 +53,8 @@ public class Ui {
      * @param task Task to be added to TaskList
      */
     public void addTask(Task task) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
     }
 
     /**

@@ -68,7 +68,7 @@ public class TaskList {
      */
     public void mark(int index) {
         try {
-            Task selectedTask = taskList.get(index-1);
+            Task selectedTask = taskList.get(index - 1);
             selectedTask.setDone();
             ui.markTask(selectedTask);
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class TaskList {
      */
     public void unmark(int index) {
         try {
-            Task selectedTask = taskList.get(index-1);
+            Task selectedTask = taskList.get(index - 1);
             selectedTask.setUndone();
             ui.markTask(selectedTask);
         } catch (Exception e) {
