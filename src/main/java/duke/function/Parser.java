@@ -30,10 +30,10 @@ public class Parser {
      * @throws DukeException Custom exception containing the error message.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        StringTokenizer st = new StringTokenizer(fullCommand);
+        String firstToken = new StringTokenizer(fullCommand).nextToken();
         Command command = null;
 
-        switch (st.nextToken()) {
+        switch (firstToken) {
         case "list":
             command = new ListCommand(fullCommand);
             break;

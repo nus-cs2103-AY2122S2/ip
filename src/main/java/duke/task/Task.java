@@ -44,6 +44,6 @@ public class Task {
 
     public String toString() {
         String doneState = isMarked ? "X" : " ";
-        return String.format("[%s] %s", doneState, this.name);
+        return String.format("[%s] %s", doneState, name);
     }
 }
