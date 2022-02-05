@@ -23,6 +23,10 @@ public class ListCommand extends Command {
      * @return list of tasks as a string.
      */
     private static String listToString(TaskList taskList) {
+        if (taskList.size() == 0) {
+            return "There are no tasks on your list.";
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks in your list:\n");
         Task task;
