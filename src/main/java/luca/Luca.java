@@ -1,6 +1,5 @@
 package luca;
 
-import javafx.application.Platform;
 import luca.command.Command;
 import luca.common.DukeException;
 import luca.parser.Parser;
@@ -27,9 +26,9 @@ public class Luca {
     public Luca(String filePath) {
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = TaskList.of(storage.load());
         } catch (DukeException e) {
-            tasks = new TaskList();
+            tasks = TaskList.emptyList();
         }
     }
 

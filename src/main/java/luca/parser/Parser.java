@@ -142,7 +142,7 @@ public class Parser {
                     }
                     i++;
                 } catch (NumberFormatException | DateTimeParseException exception) {
-                        throw new InvalidDateTimeFormatException("Please enter the date/time in "
+                    throw new InvalidDateTimeFormatException("Please enter the date/time in "
                                 + "the following format:\n yyyy-mm-dd HHMM in the 24 hour format");
                 }
             }

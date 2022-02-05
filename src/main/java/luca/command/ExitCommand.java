@@ -18,7 +18,6 @@ public class ExitCommand extends Command {
      * Outputs the exit message.
      *
      * @param taskList list of tasks.
-     * @param ui user interface of the chat bot.
      * @param storage storage used by chat bot.
      * @return response string.
      */

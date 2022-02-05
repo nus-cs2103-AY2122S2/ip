@@ -1,13 +1,13 @@
 package luca;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import luca.ui.MainWindow;
-
-import java.io.IOException;
 
 /**
  * Set up the GUI for Luca using FXML.
