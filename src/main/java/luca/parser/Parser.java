@@ -164,6 +164,10 @@ public class Parser {
         if (!foundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Due date/time of deadline cannot be empty.");
         }
+
+        assert description.length() > 0 : "Description is missing.";
+        assert dateTime != null : "Date and Time is missing.";
+
         return new CreateDeadlineCommand(description, dateTime);
     }
 
@@ -214,6 +218,11 @@ public class Parser {
             throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
                     + "cannot be empty.");
         }
+
+        assert description.length() > 0 : "Description is missing.";
+        assert start != null : "Start date and time is missing.";
+        assert end != null : "End date and time is missing.";
+
         return new CreateEventCommand(description, start, end);
     }
 
@@ -231,6 +240,7 @@ public class Parser {
         int time;
 
         time = Integer.parseInt(stringTime);
+        assert time > 0 : "Value given for time is negative.";
 
         String hours;
         String minutes;
@@ -272,6 +282,9 @@ public class Parser {
      * @throws DukeException thrown when incorrect format of invalid arguments are used.
      */
     public static Command parse(String input) throws DukeException {
+
+        assert input.length() > 0 : "Empty input string.";
+
         String[] tokens = input.split("\\s+");
         Command command;
         switch (tokens[0]) {

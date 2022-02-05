@@ -48,6 +48,8 @@ public class Luca {
         } catch (DukeException exception) {
             response = exception.getMessage();
         }
+        assert response.length() > 0 : "Empty response from chat bot.";
+
         return response;
     }
 
