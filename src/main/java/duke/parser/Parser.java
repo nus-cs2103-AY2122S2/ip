@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.FindDateCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
+import duke.command.*;
 import duke.main.DukeException;
 import duke.task.DeadLine;
 import duke.task.Events;
@@ -45,9 +38,33 @@ public class Parser {
         case "findDate":
         case "find":
             return Parser.prepareFind(input);
+        case "sort":
+            return Parser.prepareSort(input);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
+    }
+
+    private static Command prepareSort(String[] input) throws DukeException {
+        if (input.length != 3 && input.length != 2) {
+            throw new duke.main.DukeException("Fill in proper input to find.\n");
+        }
+
+        String keyword = input[1].toLowerCase();
+        if (!keyword.equals("task") && !keyword.equals("mark") && !keyword.equals("date")) {
+            throw new duke.main.DukeException("Keyword for sorting is invalid.\n");
+        }
+
+        if (input.length == 3) {
+            String order = input[2].toLowerCase();
+            if (!order.equals("asc") && !order.equals("desc")) {
+                throw new duke.main.DukeException("Cannot determine from command whether ascending or descending.\n");
+            }
+            Boolean isAscending = order.equals("asc");
+            return new SortCommand(input[1], isAscending);
+        }
+
+        return new SortCommand(input[1]);
     }
 
     private static Command prepareFind(String[] input) throws DukeException {

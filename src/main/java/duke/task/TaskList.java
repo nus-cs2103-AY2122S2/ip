@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -110,5 +111,21 @@ public class TaskList {
             encodedList.add(task.serialize());
         }
         return encodedList;
+    }
+
+    public List<Task> sort(String sortBy, Boolean isAscending) {
+        if (sortBy.equals("date")) {
+            Collections.sort(objectives, TaskComparator.DateComparator);
+        } else if (sortBy.equals("task")) {
+            Collections.sort(objectives, TaskComparator.ObjComparator);
+        } else if (sortBy.equals("mark")) {
+            Collections.sort(objectives, TaskComparator.MarkComparator);
+        }
+
+        if (!isAscending) {
+            Collections.reverse(objectives);
+        }
+
+        return this.objectives;
     }
 }

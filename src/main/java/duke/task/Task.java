@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Represents a task that the user wants to do. Can set to completed and uncompleted.
  *
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String objective;
     protected boolean done;
 
@@ -62,6 +62,8 @@ public abstract class Task {
      * @return True if task occurs on that date.
      */
     public abstract boolean sameTime(LocalDate date);
+
+    public abstract int compareTo(Task other);
 
     @Override
     public String toString() {

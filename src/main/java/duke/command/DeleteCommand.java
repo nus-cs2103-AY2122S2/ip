@@ -18,17 +18,17 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Storage storage) throws IOException {
-        String deletedTask = (task.getTask(this.index)).toString();
-        task.delete(this.index);
-        storage.overWriteFile(task);
+    public String execute(TaskList tasks, Storage storage) throws IOException {
+        String deletedTask = (tasks.getTask(this.index)).toString();
+        tasks.delete(this.index);
+        storage.overWriteFile(tasks);
 
         StringBuilder reply = new StringBuilder();
         reply.append(this.speak(Dialogue.DELETE));
         reply.append("\n");
         reply.append(deletedTask);
         reply.append("\n");
-        reply.append(this.speak(Dialogue.NUMLEFT, task.getSize()));
+        reply.append(this.speak(Dialogue.NUMLEFT, tasks.getSize()));
         return reply.toString();
     }
 

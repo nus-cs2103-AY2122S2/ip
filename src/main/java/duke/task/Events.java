@@ -59,6 +59,19 @@ public class Events extends Task {
     }
 
     @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDos) {
+            return -1;
+        } else if (task instanceof DeadLine) {
+            DeadLine deadline = (DeadLine) task;
+            return this.date.compareTo(deadline.bydate);
+        } else {
+            Events event = (Events) task;
+            return this.date.compareTo(event.date);
+        }
+    }
+
+    @Override
     public String serialize() {
         return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString()
                 + "|" + this.fromtime.toString() + "|" + this.bytime.toString() + "\n";

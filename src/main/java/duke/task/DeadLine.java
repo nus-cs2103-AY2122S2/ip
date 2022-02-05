@@ -43,6 +43,19 @@ public class DeadLine extends Task {
     }
 
     @Override
+    public int compareTo(Task task) {
+        if (task instanceof ToDos) {
+            return -1;
+        } else if (task instanceof DeadLine) {
+            DeadLine deadline = (DeadLine) task;
+            return this.bydate.compareTo(deadline.bydate);
+        } else {
+            Events event = (Events) task;
+            return this.bydate.compareTo(event.date);
+        }
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o instanceof DeadLine) {
             DeadLine e = (DeadLine) o;
