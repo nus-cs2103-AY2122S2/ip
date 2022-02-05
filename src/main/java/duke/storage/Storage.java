@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.tasklist.TaskList;
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class Storage {
 
@@ -58,11 +58,19 @@ public class Storage {
                 String saveText;
 
                 if (currTask instanceof ToDo) {
-                    saveText = "T | " + isComplete + " | " + description;
+                    saveText = "T | "
+                            + isComplete + " | "
+                            + description;
                 } else if (currTask instanceof Deadline) {
-                    saveText = "D | " + isComplete + " | " + description + " | " + ((Deadline) currTask).getDeadlineBy();
+                    saveText = "D | "
+                            + isComplete + " | "
+                            + description + " | "
+                            + ((Deadline) currTask).getDeadlineBy();
                 } else if (currTask instanceof Event) {
-                    saveText = "E | " + isComplete + " | " + description + " | " + ((Event) currTask).getEventBy();
+                    saveText = "E | "
+                            + isComplete + " | "
+                            + description + " | "
+                            + ((Event) currTask).getEventBy();
                 } else {
                     fw.close();
                     throw new DukeException("Invalid task instance: " + currTask);

@@ -1,17 +1,18 @@
 package duke.parser;
 
+import java.util.Locale;
+
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddToDoCommand;
-import duke.commands.RemoveCommand;
-import duke.commands.MarkCommand;
-import duke.commands.UnmarkCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
-import duke.tasklist.TaskList;
+import duke.commands.MarkCommand;
+import duke.commands.RemoveCommand;
+import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
 
-import java.util.Locale;
 
 public class Parser {
 

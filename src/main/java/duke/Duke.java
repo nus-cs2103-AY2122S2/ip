@@ -1,20 +1,20 @@
 package duke;
 
-import duke.parser.Parser;
-import duke.tasklist.TaskList;
-import duke.exceptions.DukeException;
-import duke.storage.Storage;
-import duke.ui.Ui;
-
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
+
+    public static final String FILE_PATH = "data/duke.txt";
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    public static final String FILE_PATH = "data/duke.txt";
 
     private Duke(String filePath) {
         ui = new Ui();
@@ -43,7 +43,7 @@ public class Duke {
             try {
                 Parser.processUserInput(commandType, userInput, tasks);
                 storage.saveData(tasks);
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 ui.printInvalidCommand();
             }
         } while (commandType != Parser.CommandType.BYE);

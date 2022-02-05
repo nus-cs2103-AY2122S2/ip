@@ -6,6 +6,11 @@ public class Event extends Task {
 
     protected LocalDate eventBy;
 
+    /**
+     * Event constructor
+     * @param description user input for event description
+     * @param eventBy validated event date with type LocalDate
+     */
     public Event(String description, LocalDate eventBy) {
         super(description);
         this.eventBy = eventBy;

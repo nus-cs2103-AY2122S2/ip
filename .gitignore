@@ -19,3 +19,4 @@ bin/
 lib
 .idea
 out/production/
+src/main/out/production/

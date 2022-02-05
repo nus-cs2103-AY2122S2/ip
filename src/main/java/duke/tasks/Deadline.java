@@ -1,13 +1,16 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 import java.time.LocalDate;
 
 public class Deadline extends Task {
 
     protected LocalDate deadlineBy;
 
+    /**
+     * Deadline constructor
+     * @param description user input for deadline description
+     * @param deadlineBy validated deadline with type LocalDate
+     */
     public Deadline(String description, LocalDate deadlineBy) {
         super(description);
         this.deadlineBy = deadlineBy;

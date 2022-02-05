@@ -1,13 +1,13 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.validation.TaskValidator;
-
-import java.util.ArrayList;
 
 public class TaskList {
 

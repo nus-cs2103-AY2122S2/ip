@@ -1,29 +1,33 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 public class Ui {
     protected static final String DIVIDER = "--------------------------------------------";
 
+    /** Print welcome message */
     public static void printWelcomeMessage() {
         System.out.println(DIVIDER);
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
         System.out.println(DIVIDER);
     }
 
+    /** Print exit message */
     public static void printExitMessage() {
         System.out.println(DIVIDER);
         System.out.println("Bye! Have a nice day! :)");
         System.out.println(DIVIDER);
     }
 
+    /** Print divider */
     public static void printDivider() {
         System.out.println(DIVIDER);
     }
 
+    /** Print add success message after task added */
     public static void printAddSuccess(TaskList taskList) {
         int lastTaskIndex = taskList.getTasks().size() - 1;
         System.out.println("Got it. I've added this task:\n" + taskList.getTasks().get(lastTaskIndex));
@@ -39,6 +43,7 @@ public class Ui {
         System.out.println("☹ OOPS!!! command is invalid, please try again!");
     }
 
+    /** Print result header for find command */
     public static void printFindResultHeader(String keyword) {
         System.out.println("Here are the matching tasks in your list containing "
                 + "\"" + keyword + "\"" + ":");

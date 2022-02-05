@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.tasks.Task;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
     /**
