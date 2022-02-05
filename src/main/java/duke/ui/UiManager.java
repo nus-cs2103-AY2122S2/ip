@@ -36,18 +36,14 @@ public class UiManager {
      * Prints a formatted welcome message.
      */
     public void welcome() {
-        this.showLine();
-        System.out.println("Hello there, I'm Larry!");
-        this.showLine();
+        System.out.println("> Larry started successfully");
     }
 
     /**
      * Prints a formatted exit message.
      */
-    public void exit() {
-        this.showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        this.showLine();
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -56,11 +52,10 @@ public class UiManager {
      * @param t Task Object that is added
      * @param i Number of elements stored in TaskManager Object
      */
-    public void printAdd(Task t, int i) {
-        this.showLine();
-        System.out.println("Got it, I added:\n" + t);
-        System.out.printf("Now you have %d item(s) in your list\n", i);
-        this.showLine();
+    public String printAdd(Task t, int i) {
+        String s = "Got it, I added:\n" + t + "\n";
+        s += "Now you have " + i + " item(s) in your list";
+        return s;
     }
 
     /**
@@ -68,11 +63,10 @@ public class UiManager {
      *
      * @param t Task Object to be printed
      */
-    public void printMark(Task t) {
-        this.showLine();
-        System.out.println("Done? Checked it off for you:");
-        System.out.println(t);
-        this.showLine();
+    public String printMark(Task t) {
+        String s = "Done? Checked it off for you:\n";
+        s += t;
+        return s;
     }
 
     /**
@@ -80,11 +74,10 @@ public class UiManager {
      *
      * @param t Task Object to be printed
      */
-    public void printUnmark(Task t) {
-        this.showLine();
-        System.out.println("Not done? Let me put it back for you:");
-        System.out.println(t);
-        this.showLine();
+    public String printUnmark(Task t) {
+        String s = "Not done? Let me put it back for you:\n";
+        s += t;
+        return s;
     }
 
 
@@ -94,21 +87,19 @@ public class UiManager {
      * @param string String representing deleted Task Object
      * @param i Number of elements stored in TaskManager Object
      */
-    public void printDelete(String string, int i) {
-        this.showLine();
-        System.out.println("I removed this task for you:");
-        System.out.println(string);
-        System.out.printf("Now you have %d items in your list\n", i);
-        this.showLine();
+    public String printDelete(String string, int i) {
+        String s = "I removed this task for you:\n";
+        s += string + "\n";
+        s += "Now you have " + i + " item(s) in your list";
+        return s;
     }
 
     /**
      * Prints a formatted message when TaskList is saved.
      */
-    public void printSave() {
-        this.showLine();
-        System.out.println("List saved in storage!");
-        this.showLine();
+    public String printSave() {
+        return "List saved in storage!";
+
     }
 
     /**
@@ -117,8 +108,8 @@ public class UiManager {
      *
      * @param tm TaskManager Object containing Task List
      */
-    public void printList(TaskManager tm) {
-        System.out.println(tm);
+    public String printList(TaskManager tm) {
+        return tm.toString();
     }
 
     /**
@@ -134,10 +125,8 @@ public class UiManager {
      *
      * @param string String containing error message
      */
-    public void showErrorMessage(String string) {
-        this.showLine();
-        System.out.println(string);
-        this.showLine();
+    public String showErrorMessage(String string) {
+        return string;
     }
 
     /**
@@ -147,11 +136,10 @@ public class UiManager {
      * @param tasks the list of tasks in a String format
      * @param taskName the String representation of the keyword
      */
-    public void printFind(String tasks, String taskName) {
-        this.showLine();
-        System.out.println("These are the tasks labeled " + taskName + ":");
-        System.out.println(tasks);
-        this.showLine();
+    public String printFind(String tasks, String taskName) {
+        String s = "These are the tasks labeled " + taskName + ":\n";
+        s += tasks;
+        return s;
     }
 
     /**

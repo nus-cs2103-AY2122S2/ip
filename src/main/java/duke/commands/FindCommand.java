@@ -28,10 +28,12 @@ public class FindCommand extends Command {
     /**
      * Finds Task Objects associated with the keyword and prints them
      * using the UiManager Object.
+     *
+     * @return String containing the relevant Task Object
      */
     @Override
-    public void execute() {
+    public String execute() {
         String tasks = this.taskManager.findTasks(this.taskName);
-        uiManager.printFind(tasks, this.taskName);
+        return uiManager.printFind(tasks, this.taskName);
     }
 }

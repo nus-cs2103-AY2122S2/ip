@@ -13,7 +13,7 @@ import duke.tasks.TaskManager;
  * a saved ser file during program initialisation.
  */
 public class ListLoader {
-    private TaskManager taskManager;
+    private final TaskManager taskManager;
 
     /**
      * Constructs ListLoader Object.

@@ -1,6 +1,7 @@
 package duke;
 
-import duke.commands.CommandManager;
+import duke.gui.Main;
+import javafx.application.Application;
 
 /**
  * A Chatbot that can be used as a digital scheduler.
@@ -13,7 +14,6 @@ public class Duke {
      * @param args String array containing arguments for main method
      */
     public static void main(String[] args) {
-        CommandManager commander = new CommandManager();
-        commander.run();
+        Application.launch(Main.class, args);
     }
 }

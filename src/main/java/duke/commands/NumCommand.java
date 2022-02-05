@@ -33,20 +33,18 @@ public class NumCommand extends Command {
     /**
      * Apply changes to the Task object using the TaskManager Object.
      *
+     * @return String containing the relevant Task Object
      * @throws IndexOutOfBoundsException if the index provided is invalid
      * @throws InvalidOperationException if the operation is invalid
      */
-    public void execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException {
+    public String execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException {
         switch (type) {
         case MARK:
-            taskManager.mark(num);
-            break;
+            return taskManager.mark(num);
         case UNMARK:
-            taskManager.unmark(num);
-            break;
+            return taskManager.unmark(num);
         case DELETE:
-            taskManager.delete(num);
-            break;
+            return taskManager.delete(num);
         default:
             throw new DukeException();
         }

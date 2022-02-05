@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 import duke.exceptions.DateException;
 import duke.exceptions.DukeException;
@@ -60,76 +59,77 @@ public class CommandManager {
         } catch (ClassNotFoundException e) {
             uiManager.showErrorMessage("Oops! There was a corrupted task in the previous list!");
         }
-        Scanner sc = new Scanner(System.in);
-        String s = "";
-        do {
-            s = sc.nextLine();
-            try {
-                String[] command = uiManager.parseCommand(s);
-                switch (command[0]) {
-                case "bye":
-                    this.setClose();
-                    listStorage.saveList();
-                    uiManager.exit();
-                    break;
-                case "list":
-                    uiManager.printList(taskManager);
-                    break;
-                case "todo":
-                    AddTaskCommand todo = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.TODO);
-                    todo.execute();
-                    listStorage.saveList();
-                    break;
-                case "deadline":
-                    AddTaskCommand deadline =
-                            new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.DEADLINE);
-                    deadline.execute();
-                    listStorage.saveList();
-                    break;
-                case "event":
-                    AddTaskCommand event = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.EVENT);
-                    event.execute();
-                    listStorage.saveList();
-                    break;
-                case "mark":
-                    NumCommand mark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.MARK);
-                    mark.execute();
-                    listStorage.saveList();
-                    break;
-                case "unmark":
-                    NumCommand unmark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.UNMARK);
-                    unmark.execute();
-                    listStorage.saveList();
-                    break;
-                case "delete":
-                    NumCommand delete = new NumCommand(this.uiManager, this.taskManager, command[1], Type.DELETE);
-                    delete.execute();
-                    listStorage.saveList();
-                    break;
-                case "save":
-                    SaveCommand save = new SaveCommand(this.uiManager, this.taskManager);
-                    save.execute();
-                    listStorage.saveList();
-                    break;
-                case "find":
-                    FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1]);
-                    find.execute();
-                    break;
-                default:
-                    throw new DukeException();
-                }
-            } catch (InvalidOperationException | DateException | TaskIndexException | DukeException e) {
-                uiManager.showErrorMessage(e.toString());
-            } catch (NumberFormatException e) {
-                uiManager.showErrorMessage("Give me the task number in numbers please!");
-            } catch (IndexOutOfBoundsException e) {
-                uiManager.showErrorMessage("I don't think we have that task!\nUse 'list' to check");
-            } catch (DateTimeParseException e) {
-                uiManager.showErrorMessage("Invalid date! Please use the format 'YYYY-MM-DD'");
-            } catch (IOException e) {
-                uiManager.showErrorMessage("Oops! There was a corrupted task in the previous list!");
+    }
+
+    /**
+     * Runs command based on a given string command.
+     * Returns a processed string to be printed on the GUI.
+     *
+     * @param s command to be parsed and processed
+     * @return String to be printed on the GUI
+     */
+    public String runCommand(String s) {
+        try {
+            String[] command = uiManager.parseCommand(s);
+            switch (command[0]) {
+            case "bye":
+                this.setClose();
+                listStorage.saveList();
+                return uiManager.exit();
+            case "list":
+                return uiManager.printList(taskManager);
+            case "todo":
+                AddTaskCommand todo = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.TODO);
+                String todoTask = todo.execute();
+                listStorage.saveList();
+                return todoTask;
+            case "deadline":
+                AddTaskCommand deadline =
+                        new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.DEADLINE);
+                String deadlineTask = deadline.execute();
+                listStorage.saveList();
+                return deadlineTask;
+            case "event":
+                AddTaskCommand event = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.EVENT);
+                String eventTask = event.execute();
+                listStorage.saveList();
+                return eventTask;
+            case "mark":
+                NumCommand mark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.MARK);
+                String markTask = mark.execute();
+                listStorage.saveList();
+                return markTask;
+            case "unmark":
+                NumCommand unmark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.UNMARK);
+                String unmarkTask = unmark.execute();
+                listStorage.saveList();
+                return unmarkTask;
+            case "delete":
+                NumCommand delete = new NumCommand(this.uiManager, this.taskManager, command[1], Type.DELETE);
+                String deleteTask = delete.execute();
+                listStorage.saveList();
+                return deleteTask;
+            case "save":
+                SaveCommand save = new SaveCommand(this.uiManager, this.taskManager);
+                String saveTask = save.execute();
+                listStorage.saveList();
+                return saveTask;
+            case "find":
+                FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1]);
+                return find.execute();
+            default:
+                throw new DukeException();
             }
-        } while (this.isOpen);
-        sc.close();
+        } catch (InvalidOperationException | DateException | TaskIndexException | DukeException e) {
+            return uiManager.showErrorMessage(e.toString());
+        } catch (NumberFormatException e) {
+            return uiManager.showErrorMessage("Give me the task number in numbers please!");
+        } catch (IndexOutOfBoundsException e) {
+            return uiManager.showErrorMessage("I don't think we have that task!\nUse 'list' to check");
+        } catch (DateTimeParseException e) {
+            return uiManager.showErrorMessage("Invalid date! Please use the format 'YYYY-MM-DD'");
+        } catch (IOException e) {
+            return uiManager.showErrorMessage("Oops! There was a corrupted task in the previous list!");
+        }
     }
 }

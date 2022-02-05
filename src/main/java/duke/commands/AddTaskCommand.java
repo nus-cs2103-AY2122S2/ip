@@ -65,22 +65,21 @@ public class AddTaskCommand extends Command {
     /**
      * Inserts Task Object into TaskManager Object's task list.
      *
-     * @throws DateTimeParseException if an invalid String is passed for date
+     * @return a String containing the Task Object
+     * @throws DateTimeParseException if an invalid String is passed into date
+     * @throws DukeException if an invalid command is given
      */
-    public void execute() throws DateTimeParseException, DukeException {
+    public String execute() throws DateTimeParseException, DukeException {
         switch (type) {
         case TODO:
             Task newToDo = new ToDo(this.description);
-            taskManager.addTask(newToDo);
-            break;
+            return taskManager.addTask(newToDo);
         case DEADLINE:
             Task newDeadline = new Deadline(this.description, this.date);
-            taskManager.addTask(newDeadline);
-            break;
+            return taskManager.addTask(newDeadline);
         case EVENT:
             Task newEvent = new Event(this.description, this.date);
-            taskManager.addTask(newEvent);
-            break;
+            return taskManager.addTask(newEvent);
         default:
             throw new DukeException();
         }
