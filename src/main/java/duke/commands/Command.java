@@ -11,8 +11,9 @@ public abstract class Command {
     /**
      * Checks and executes specific command.
      *
+     * @return a String containing the relevant Task Object
      * @throws InvalidOperationException if operation is invalid
      */
-    public abstract void execute() throws InvalidOperationException, DukeException;
+    public abstract String execute() throws InvalidOperationException, DukeException;
 
 }

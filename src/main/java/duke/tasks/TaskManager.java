@@ -29,10 +29,11 @@ public class TaskManager {
      * Upon appending, the task description and ArrayList size will be printed.
      *
      * @param task Task Object to be appended to the list
+     * @return String containing relevant Task object
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
-        uiManager.printAdd(task, this.size());
+        return uiManager.printAdd(task, this.size());
     }
 
     /**
@@ -41,12 +42,13 @@ public class TaskManager {
      * be printed.
      *
      * @param num Integer used for referencing Task Object
+     * @return String containing relevant Task object
      * @throws InvalidOperationException if Task Object is already marked as done.
      */
-    public void mark(Integer num) throws InvalidOperationException {
+    public String mark(Integer num) throws InvalidOperationException {
         Task task = tasks.get(num);
         task.mark();
-        uiManager.printMark(task);
+        return uiManager.printMark(task);
     }
 
     /**
@@ -55,12 +57,13 @@ public class TaskManager {
      * be printed.
      *
      * @param num Integer used for referencing Task Object
+     * @return String containing relevant Task object
      * @throws InvalidOperationException if Task Object is already unmarked.
      */
-    public void unmark(Integer num) throws InvalidOperationException {
+    public String unmark(Integer num) throws InvalidOperationException {
         Task task = tasks.get(num);
         task.unmark();
-        uiManager.printUnmark(task);
+        return uiManager.printUnmark(task);
     }
 
     /**
@@ -70,11 +73,12 @@ public class TaskManager {
      * Upon deletion, the task description is printed.
      *
      * @param num Index of the element to be removed
+     * @return String containing relevant Task object
      */
-    public void delete(int num) {
+    public String delete(int num) {
         String taskDetails = tasks.get(num).toString();
         tasks.remove(num);
-        uiManager.printDelete(taskDetails, tasks.size());
+        return uiManager.printDelete(taskDetails, tasks.size());
     }
 
     /**
@@ -88,7 +92,7 @@ public class TaskManager {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (currTask.toString().contains(string)) {
-                tasksFound += "\n" + currTask.toString();
+                tasksFound += "\n" + (i + 1) + ". " + currTask.toString();
             }
         }
         return tasksFound;

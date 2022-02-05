@@ -41,13 +41,15 @@ public class SaveCommand extends Command {
 
     /**
      * Saves and writes current tasks into a text file.
+     *
+     * @return String containing relevant Task Object
      */
-    public void execute() {
+    public String execute() {
         try {
             this.writeToFile(this.directory);
-            this.uiManager.printSave();
+            return this.uiManager.printSave();
         } catch (IOException e) {
-            uiManager.showErrorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
+            return uiManager.showErrorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
         }
     }
 }
