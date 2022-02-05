@@ -1,19 +1,33 @@
 package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Todo class.
+ */
 public class Todo extends Task {
 
-  public Todo(String description, boolean status) {
-    super(description, status);
-  }
+    /**
+     * Constructs todo item.
+     * @param description Task description.
+     * @param isMarked Indicates whether task is marked/done.
+     */
+    public Todo(String description, boolean isMarked) {
+        super(description, isMarked);
+    }
 
-  public Todo(String description) {
-    this(description, false);
-  }
+    /**
+     * Constructs todo item.
+     * @param description Task description.
+     */
+    public Todo(String description) {
+        this(description, false);
+    }
 
-  public String toString() {
-    return String.format("[T][%s] %s", super.isMarked(), super.getDescription());
-  }
+    /**
+     * Returns string representation of a todo item.
+     * @return Todo as a string
+     */
+    public String toString() {
+        return String.format("[T][%s] %s", super.isMarked(), super.getDescription());
+    }
 
 }
