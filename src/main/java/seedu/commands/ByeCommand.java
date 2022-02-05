@@ -1,7 +1,5 @@
 package seedu.commands;
 
-import seedu.duke.Ui;
-import seedu.storage.Storage;
 import seedu.storage.TaskList;
 
 public class ByeCommand extends Command {
@@ -12,7 +10,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        super.isExit = true;
+    public String execute(TaskList tasks) {
+        isExit = true;
+        return "Good Bye!";
     }
 }

@@ -44,20 +44,20 @@ public class Parser {
 
         if (cmds.length == 0) {
             throw new DukeException("There is no command.");
-        } else {
-            if (converter.containsKey(cmds[0].trim())) {
-                Command cmd = converter.get(cmds[0].trim());
-
-                if (cmds.length == 2) {
-                    cmd.input(cmds[1].trim());
-                } else {
-                    cmd.input("");
-                }
-
-                return cmd;
-            } else {
-                throw new DukeException("Wrong command.");
-            }
         }
+
+        if (!converter.containsKey(cmds[0].trim())) {
+            throw new DukeException("Wrong command.");
+        }
+
+        Command cmd = converter.get(cmds[0].trim());
+
+        if (cmds.length == 2) {
+            cmd.input(cmds[1].trim());
+        } else {
+            cmd.input("");
+        }
+
+        return cmd;
     }
 }
