@@ -1,15 +1,17 @@
-import backend.FileDecoder;
+import tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class fileDecoderTest {
+public class todoTest {
     @Test
     public void dummyTest() {
         assertEquals(2,2);
     }
 
-    public void decodeTest(){
-        FileDecoder fd = new FileDecoder();
+    @Test
+    public void todoTest(){
+        Todo test = new Todo("test");
+        assertEquals("T |   | test", test.toString());
     }
 }
