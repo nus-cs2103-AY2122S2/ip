@@ -39,8 +39,7 @@ public class MainWindow extends AnchorPane {
 
     private void showInitialisationMessage() {
         String welcomeMessage = "Greetings, erm, reclaimer...?" + "\n"
-                + "(why does he look so weird?)" + "\n\n"
-                + "Here are your tasks.";
+                + "(why does he look so weird?)" + "\n";
         String listOfTasks = spark.executeCommand("list");
         dialogContainer.getChildren().addAll(
                 SparkDialogBox.getSparkDialog(welcomeMessage, sparkImage)
