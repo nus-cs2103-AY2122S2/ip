@@ -59,6 +59,7 @@ public class AddCommand extends Command {
                 storage.write(tasks);
             } catch (DukeException e) {
                 tempResult = ui.showExceptionError(e);
+                assert tempResult != null : "DukeException is not null";
             }
             break;
         case "D":
@@ -69,6 +70,7 @@ public class AddCommand extends Command {
                 storage.write(tasks);
             } catch (DukeException e) {
                 tempResult = ui.showExceptionError(e);
+                assert tempResult != null : "DukeException is not null";
             }
             break;
         case "E":
@@ -79,6 +81,7 @@ public class AddCommand extends Command {
                 storage.write(tasks);
             } catch (DukeException e) {
                 tempResult = ui.showExceptionError(e);
+                assert tempResult != null : "DukeException is not null";
             }
             break;
         default:

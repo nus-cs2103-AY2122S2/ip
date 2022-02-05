@@ -77,7 +77,7 @@ public class Parser {
             // detect list
             return new ListCommand();
         } else if (input.startsWith("find")) {
-            String findDetail = input.substring(5);
+            String findDetail = input.substring(4);
             if (isEmpty(findDetail)) {
                 throw new DukeException("☹ OOPS!!! The description of a find cannot be empty.");
             }

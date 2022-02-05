@@ -41,16 +41,16 @@ public class Duke {
      * @return the response
      */
     public String getResponse(String input) {
-        String tempResult = "";
+        String result = "";
         try {
             Command c = Parser.parse(input);
             if (c != null) {
-                tempResult = c.execute(tasks, ui, storage);
+                result = c.execute(tasks, ui, storage);
             }
         } catch (DukeException e) {
-            tempResult = ui.showExceptionError(e);
+            result = ui.showExceptionError(e);
         }
-        return tempResult;
+        return result;
     }
 
 }

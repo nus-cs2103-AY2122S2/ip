@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
             storage.write(tasks);
         } catch (DukeException e) {
             tempResult = ui.showExceptionError(e);
+            assert tempResult != null : "DukeException is not null";
         }
         return tempResult;
     }
