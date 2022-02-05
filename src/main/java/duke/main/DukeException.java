@@ -1,4 +1,4 @@
-package main.java.duke.main;
+package duke.main;
 
 /**
  * An abstract clas that represents the exceptions related to main.Duke.

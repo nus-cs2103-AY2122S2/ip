@@ -1,6 +1,6 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.main.DukeException;
+import duke.main.DukeException;
 
 /**
  * Represents the exception that occurs when the user input of command is invalid.

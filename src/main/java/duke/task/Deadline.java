@@ -1,17 +1,17 @@
-package main.java.duke.task;
+package duke.task;
 
-import java.time.format.DateTimeParseException;
-import java.util.HashMap;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+import java.util.HashMap;
 
 /**
  * Represents a deadline, which has to be done within a specific date/time.
  */
 final class Deadline extends Task {
 
-    private final String DUE_TIME_FIELD = "due_time";
+    private static final String DUE_TIME_FIELD = "due_time";
     private final LocalDate dueTime;
 
     /**
@@ -24,7 +24,7 @@ final class Deadline extends Task {
         super(description);
         try {
             this.dueTime = LocalDate.parse(dueTime);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new FailedToInterpretTaskException("Oops, the format of date should be YYYY-MM-DD!");
         }
     }
@@ -98,8 +98,8 @@ final class Deadline extends Task {
 
 
     /**
-     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
-     * written into hard disk.
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code>
+     * that contains the necessary information to be written into hard disk.
      *
      * @return The HashMap containing the information about the current <code>task.Task</code>.
      */
@@ -118,7 +118,7 @@ final class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by " +
-                this.dueTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
+        return super.toString() + " (by "
+                + this.dueTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 }

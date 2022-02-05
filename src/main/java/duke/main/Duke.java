@@ -1,21 +1,21 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.instruction.Instruction;
-import main.java.duke.storage.Storage;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.instruction.Instruction;
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * The main class that creates a Duke -- a task manager, and runs the program.
  */
 public class Duke {
 
+    private static final String END_MESSAGE = "Bye!";
+    private static final String FILE_PATH = "data/tasks.txt";
+
     private final Storage storage;
     private final TaskManager taskManager;
     private final Ui ui;
-
-    private static final String END_MESSAGE = "Bye!";
-    private static final String FILE_PATH = "data/tasks.txt";
 
     /**
      * Constructs a main.Duke -- a personal task manager.

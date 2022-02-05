@@ -1,9 +1,9 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.main.DukeException;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.main.DukeException;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * A task represents an instruction inputted to main.Duke by a user.
@@ -11,9 +11,10 @@ import main.java.duke.ui.Ui;
  */
 public abstract class Instruction {
 
-    private String description;
     private static final String TERMINATE_INSTRUCTION = "bye";
+
     protected TaskManager tasks;
+    private String description;
 
     /**
      * Constructor to be used by subclasses.
@@ -97,7 +98,6 @@ public abstract class Instruction {
      * Performs the associated action of the task. By default, there is no action associated to a task.
      *
      * @param ui The UI to be used by this instruction.
-     * @return The message once the instruction is executed.
      */
     public abstract void act(Ui ui);
 

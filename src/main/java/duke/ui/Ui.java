@@ -1,12 +1,12 @@
-package main.java.duke.ui;
-
-import main.java.duke.instruction.Instruction;
-import main.java.duke.main.DukeException;
-import main.java.duke.parse.Parser;
-import main.java.duke.task.TaskManager;
+package duke.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
+import duke.instruction.Instruction;
+import duke.main.DukeException;
+import duke.parse.Parser;
+import duke.task.TaskManager;
 
 /**
  * Represents the UI component of the task manager.

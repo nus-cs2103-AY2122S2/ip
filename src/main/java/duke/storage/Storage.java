@@ -1,7 +1,4 @@
-package main.java.duke.storage;
-
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskNotFoundException;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import duke.task.Task;
+import duke.task.TaskNotFoundException;
 
 /**
  * Encapsulates the operations related to hard-disk storage.

@@ -1,13 +1,13 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 final class Delete extends Instruction {
 
-    int toDeleteIndex;
-    Task toDelete;
+    private int toDeleteIndex;
+    private Task toDelete;
 
     /**
      * Instantiates an instruction "delete", with the given line of instruction.
@@ -74,7 +74,7 @@ final class Delete extends Instruction {
 
         tasks.deleteIndex(toDeleteIndex);
 
-        ui.printMessage("You have successfully deleted:\n" +
-                this.toDelete.toString());
+        ui.printMessage("You have successfully deleted:\n"
+                + this.toDelete.toString());
     }
 }

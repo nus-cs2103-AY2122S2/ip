@@ -1,7 +1,7 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents the instruction 'quit'.

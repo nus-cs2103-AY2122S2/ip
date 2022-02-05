@@ -1,11 +1,11 @@
-package main.java.duke.parse;
-
-import main.java.duke.instruction.Instruction;
-import main.java.duke.main.DukeException;
-import main.java.duke.task.TaskManager;
+package duke.parse;
 
 import java.io.InputStream;
 import java.util.Scanner;
+
+import duke.instruction.Instruction;
+import duke.main.DukeException;
+import duke.task.TaskManager;
 
 /**
  * Represents the input parser for main.Duke.

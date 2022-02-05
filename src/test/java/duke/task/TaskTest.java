@@ -1,7 +1,7 @@
 package duke.task;
 
-import main.java.duke.task.FailedToInterpretTaskException;
-import main.java.duke.task.Task;
+import duke.task.FailedToInterpretTaskException;
+import duke.task.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

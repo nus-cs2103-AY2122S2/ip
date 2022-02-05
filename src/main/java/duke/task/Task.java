@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.util.HashMap;
 
@@ -7,13 +7,13 @@ import java.util.HashMap;
  */
 public abstract class Task {
 
-    private boolean isDone;
-    private final String description;
-
     // Used for generating info table about the task.
     private static final String DESCRIPTION_FIELD = "description";
     private static final String IS_DONE_FILED = "is_done";
     private static final String TASK_TYPE_FIELD = "task_type";
+
+    private boolean isDone;
+    private final String description;
 
     /**
      * Constructor of a task. Sets the description of the task,
@@ -28,15 +28,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns the description of the current task.
-     *
-     * @return The description.
-     */
-    protected String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Constructor using an infoTable.
      *
      * @param infoTable The <code>HashMap</code> that contains
@@ -46,6 +37,15 @@ public abstract class Task {
 
         this.description = (String) infoTable.get(DESCRIPTION_FIELD);
         this.isDone = (boolean) infoTable.get(IS_DONE_FILED);
+    }
+
+    /**
+     * Returns the description of the current task.
+     *
+     * @return The description.
+     */
+    protected String getDescription() {
+        return this.description;
     }
 
     /**
@@ -137,8 +137,8 @@ public abstract class Task {
     protected abstract TaskType getType();
 
     /**
-     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
-     * written into hard disk.
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the
+     * necessary information to be written into hard disk.
      *
      * @return The HashMap containing the information about the current <code>task.Task</code>.
      */
@@ -178,10 +178,9 @@ public abstract class Task {
             return new ToDo(infoTable);
         case EVENT:
             return new Event(infoTable);
+        default:
+            throw new TaskNotFoundException();
         }
-
-
-        throw new TaskNotFoundException();
     }
 
 

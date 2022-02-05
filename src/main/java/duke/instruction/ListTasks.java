@@ -1,10 +1,10 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import java.util.List;
 
-import java.util.*;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents the instruction "list".

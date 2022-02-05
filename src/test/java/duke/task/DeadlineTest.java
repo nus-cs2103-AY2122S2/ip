@@ -1,14 +1,15 @@
 package duke.task;
 
-import main.java.duke.main.DukeException;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskType;
+import duke.main.DukeException;
+import duke.task.Task;
+import duke.task.TaskType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class DeadlineTest {
 

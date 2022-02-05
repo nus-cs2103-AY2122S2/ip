@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.util.HashMap;
 
@@ -6,11 +6,11 @@ import java.util.HashMap;
  * Represents an event, which has a start time and end time.
  */
 final class Event extends Task {
+
+    private static final String TIME_RANGE_FIELD = "time_range";
+
     // At this stage, the time range is treated as a string.
     private final String timeRange;
-
-    private final String TIME_RANGE_FIELD = "time_range";
-
     /**
      * Initializes an event with a name (description) and a time range.
      *
@@ -66,8 +66,8 @@ final class Event extends Task {
     }
 
     /**
-     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that contains the necessary information to be
-     * written into hard disk.
+     * Turns the current <code>task.Task</code> into a <code>HashMap</code> that
+     * contains the necessary information to be written into hard disk.
      *
      * @return A table contains the information.
      */

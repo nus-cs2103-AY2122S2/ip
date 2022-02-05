@@ -1,12 +1,11 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 final class Find extends Instruction {
 
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructs a Find instruction.

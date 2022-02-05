@@ -1,11 +1,11 @@
-package main.java.duke.task;
-
-import main.java.duke.storage.Storage;
+package duke.task;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.storage.Storage;
 
 /**
  * Stores a list of tasks, and performs actions on them.

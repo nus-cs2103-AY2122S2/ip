@@ -1,8 +1,8 @@
-package main.java.duke.instruction;
+package duke.instruction;
 
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskManager;
-import main.java.duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Represents the instruction "unmark".
@@ -40,8 +40,8 @@ final class UnmarkAsDone extends Instruction {
      *
      * @param instruction The line of instruction.
      * @return The index of the object to be marked.
-     * @throws InvalidInstructionException If (i) the instruction has no valid integer to be parsed; or (ii) the index is
-     * out of range.
+     * @throws InvalidInstructionException If (i) the instruction has no valid integer to be parsed;
+     * or (ii) the index is out of range.
      */
     private static int parseInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
@@ -75,6 +75,6 @@ final class UnmarkAsDone extends Instruction {
     @Override
     public void act(Ui ui) {
         TaskManager.markAsNotDone(this.toUnmark);
-        ui.printMessage("I've marked this task as not done yet:\n" + this.toUnmark.toString());
+        ui.printMessage("I've marked this task as not done yet:\n" + this.toUnmark);
     }
 }
