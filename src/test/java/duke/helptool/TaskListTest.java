@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.tag.Tag;
 
 public class TaskListTest {
 
@@ -19,7 +20,8 @@ public class TaskListTest {
     @DisplayName("Determine size should work")
     void testTaskListSize() {
         assertEquals(tasks.size(), taskList.getSize(), "Default should be empty");
-        ToDo temp = new ToDo("hi");
+        Tag tag = new Tag("");
+        ToDo temp = new ToDo("hi", tag);
         tasks.add(temp);
         taskList.addTask(temp);
         assertEquals(tasks.size(), taskList.getSize(), "Add is successful");
@@ -31,7 +33,8 @@ public class TaskListTest {
     @Test
     @DisplayName("Determine add should work")
     void testTaskListGet() {
-        ToDo temp = new ToDo("hi");
+        Tag tag = new Tag("");
+        ToDo temp = new ToDo("hi", tag);
         tasks.add(temp);
         taskList.addTask(temp);
         assertEquals(tasks.get(0), taskList.getTask(0), "Add is successful");
