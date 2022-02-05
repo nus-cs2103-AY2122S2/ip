@@ -53,6 +53,10 @@ public class AddCommand extends Command {
             // Fallthrough
         case DEADLINE:
             String[] taskDescriptionStrings = description.split(super.commandType.getRegex());
+            if (taskDescriptionStrings.length <= 1) {
+                throw new DukeException("I'm sorry your " + commandType
+                        + " command is incorrectly formatted!");
+            }
             String taskDescriptionText = taskDescriptionStrings[0].strip();
             String taskDescriptionTime = taskDescriptionStrings[1].strip();
 
