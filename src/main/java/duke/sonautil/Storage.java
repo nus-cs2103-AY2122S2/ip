@@ -187,6 +187,8 @@ public class Storage {
      * @throws IOException if fails access local file
      */
     private void changeMarking(String init, String goal, int taskToMark) throws IOException {
+        assert (init.equals("0") || init.equals("1"));c
+        assert (goal.equals("0") || goal.equals("1"));
         String oldFileName = path;
         String tempFileName = "src/main/data/tempDuke.txt";
         File tempFile = new File(tempFileName);

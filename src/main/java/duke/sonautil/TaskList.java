@@ -42,6 +42,7 @@ public class TaskList {
      */
     public String executeCommand(String[] command) throws DukeException {
         String keyword = command[0];
+        assert (keyword != null && !keyword.equals(""));
         switch (keyword) {
         case "list":
             if (taskAddedIndex == 0) {
@@ -51,24 +52,35 @@ public class TaskList {
             }
 
         case "todo": {
+            assert (command[1] != null && !command[1].equals("")); //description is not empty and not null
             Task task = new Todo(command[1]);
             addTask(task);
             return Ui.todoEnteredSuccessMessage(task, taskAddedIndex);
         }
 
         case "deadline": {
+            assert (command[1] != null && !command[1].equals(""));
+            assert (command[2] != null && !command[2].equals(""));
+            assert (command[3] != null && !command[3].equals(""));
+
             Task task = new Deadline(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
             return Ui.deadlineEnterSuccessMessage(task, command[3], taskAddedIndex);
         }
 
         case "event": {
+            assert (command[1] != null && !command[1].equals(""));
+            assert (command[2] != null && !command[2].equals(""));
+            assert (command[3] != null && !command[3].equals(""));
+
             Task task = new Event(command[1], LocalDateTime.parse(command[2]));
             addTask(task);
             return Ui.eventEnterSuccessMessage(task, command[3], taskAddedIndex);
         }
 
         case "mark": {
+            assert (command[1] != null && !command[1].equals(""));
+
             int taskIndex = Integer.parseInt(command[1]);
 
             //user trying to mark a non-existing Duke.task
@@ -86,6 +98,8 @@ public class TaskList {
         }
 
         case "unmark": {
+            assert (command[1] != null && !command[1].equals(""));
+
             int taskIndex = Integer.parseInt(command[1]);
             //user trying to unmark a non-existing Duke.task
             if (taskIndex >= taskAddedIndex || taskIndex < 0) {
@@ -100,7 +114,8 @@ public class TaskList {
         }
 
         case "delete": {
-            System.out.println("before:" + taskAddedIndex);
+            assert (command[1] != null && !command[1].equals(""));
+
             //list is empty
             if (taskAddedIndex == 0) {
                 throw new DukeException(Ui.listEmptyMessage());
@@ -108,8 +123,6 @@ public class TaskList {
             int taskIndex = Integer.parseInt(command[1]);
             //user trying to delete a non-existing Duke.task
             if (taskIndex >= taskAddedIndex || taskIndex < 0) {
-                System.out.println("taskIndex:" + taskIndex);
-                System.out.println("taskAddedIntex: " + taskAddedIndex);
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
             String str = Ui.taskRemovedMessage(getTask(taskIndex));
@@ -118,6 +131,7 @@ public class TaskList {
         }
 
         case "schedule":
+            assert (command[1] != null && !command[1].equals(""));
             //list is empty
             if (taskAddedIndex == 0) {
                 throw new DukeException(Ui.scheduleEmptyMessage());
@@ -151,6 +165,8 @@ public class TaskList {
             }
 
         case "find":
+            assert (command[1] != null && !command[1].equals(""));
+
             String findWord = command[1];
             ArrayList<Task> searchList = new ArrayList<>(100);
 
@@ -187,6 +203,7 @@ public class TaskList {
      * @return Task of the given index
      */
     public Task getTask(int index) {
+        assert (index <= taskAddedIndex && index >= 0);
         return list.get(index);
     }
 
@@ -209,6 +226,7 @@ public class TaskList {
      * @param task Duke.task to be added into the list
      */
     private void addTask(Task task) {
+        assert(task instanceof Todo || task instanceof Deadline || task instanceof Event);
         list.add(task);
         taskAddedIndex++;
     }
@@ -219,6 +237,7 @@ public class TaskList {
      * @param taskIndex index of the Duke.task to be removed
      */
     private void removeTask(int taskIndex) {
+        assert (taskIndex <= taskAddedIndex && taskIndex >= 0);
         list.remove(taskIndex);
         taskAddedIndex--;
     }
