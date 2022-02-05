@@ -29,6 +29,7 @@ public class TestCommand{
     void createCommand_byeCommand_ByeCommand() {
         try {
             Command cmd = Command.getCommand("BYE", "");
+            Assertions.assertInstanceOf(ByeCommand.class, cmd);
         } catch (InvalidCommandException e) {
             Assertions.fail();
         }
