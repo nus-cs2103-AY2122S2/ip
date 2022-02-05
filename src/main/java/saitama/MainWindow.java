@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import saitama.exceptions.SaitamaException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,6 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/King.jpg"));
     private Image saitamaImage = new Image(this.getClass().getResourceAsStream("/images/Saitama.jpg"));
+    private Image saitamaExceptionImage = new Image(this.getClass().getResourceAsStream(
+            "/images/SaitamaException.jpg"));
     private Image initialSaitamaImage = new Image(this.getClass().getResourceAsStream("/images/InitialSaitama.jpg"));
 
     /**
@@ -33,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getSaitamaDialog(
-                "I'm Saitama, a hero for fun.\nWhat can I do for you?", initialSaitamaImage));
+                "Hello, I'm Saitama, a hero for fun.\nWhat can I do for you?", initialSaitamaImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -48,11 +51,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = saitama.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSaitamaDialog(response, saitamaImage)
-        );
+        try {
+            String response = saitama.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getSaitamaDialog(response, saitamaImage));
+        } catch (SaitamaException e) {
+            String response = e.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getSaitamaDialog(response, saitamaExceptionImage));
+        }
         userInput.clear();
     }
 }

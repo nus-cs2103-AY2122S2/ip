@@ -50,6 +50,7 @@ application {
 
 shadowJar {
     archiveBaseName = "saitama"
+    archiveVersion = "0.5"
     archiveClassifier = null
 }
 

@@ -23,13 +23,10 @@ public class Saitama {
         taskList = new TaskList(storage.load());
     }
 
-    public String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            return c.execute(taskList, ui, storage);
-        } catch (SaitamaException e) {
-            return ui.showError(e.getMessage());
-        }
+    public String getResponse(String input) throws SaitamaException {
+        Command c = Parser.parse(input);
+        return c.execute(taskList, ui, storage);
     }
 }
+
 

@@ -7,16 +7,6 @@ import saitama.tasks.TaskList;
 
 public class Ui {
     /**
-     * Returns the error message.
-     *
-     * @param errorMessage The error message to be printed.
-     * @return The error message.
-     */
-    public String showError(String errorMessage) {
-        return errorMessage;
-    }
-
-    /**
      * Returns the save message.
      *
      * @return The save message.
@@ -35,7 +25,7 @@ public class Ui {
      */
     public String showAddTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has been added to the list:\n"
-                + "%s\nNow you have %d tasks in the list", task, taskList.numOfTasks());
+                + "%s\nNow you have %d tasks in the list.", task, taskList.numOfTasks());
         return reply;
     }
 
@@ -48,7 +38,7 @@ public class Ui {
      */
     public String showDeleteTask(Task task, TaskList taskList) {
         String reply = String.format("OK...\nThe following task has been removed from the list:\n"
-                + "%s\nNow you have %d tasks in the list", task, taskList.numOfTasks());
+                + "%s\nNow you have %d tasks in the list.", task, taskList.numOfTasks());
         return reply;
     }
 

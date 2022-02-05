@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -109,6 +109,8 @@ public class TaskList {
      * @return The ArrayList format of a task list.
      */
     public ArrayList<Task> toArrayList() {
-        return this.taskList;
+        @SuppressWarnings("unchecked")
+        ArrayList<Task> taskArr = (ArrayList<Task>) this.taskList.clone();
+        return taskArr;
     }
 }
