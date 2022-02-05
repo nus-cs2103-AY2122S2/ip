@@ -36,29 +36,6 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Runs the Duke chat-bot program and takes in inputs
-//     */
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine(); // show the divider line ("_______")
-//                Command c = Parser.parseCommand(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                if (c instanceof ByeCommand) {
-//                    isExit = true;
-//                }
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } catch (NullPointerException e) {
-//                ui.showError("\tI'm sorry matey, that's an invalid input. Please try again :'(\n");
-//            }
-//        }
-//    }
-
     /**
      * Returns a default response after receiving user input.
      *
@@ -77,11 +54,5 @@ public class Duke {
         } catch (DukeException e) {
             throw new DukeException("I'm sorry matey, that's an invalid input. Please try again :'(\n");
         }
-
-//        return "Cap'n Dave heard: " + input;
     }
-
-//    public static void main(String[] args) {
-//        new Duke("src/main/java/Duke/data/duke.txt").run();
-//    }
 }

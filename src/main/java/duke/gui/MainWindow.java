@@ -4,12 +4,11 @@ import duke.Duke;
 import duke.exception.DukeException;
 import duke.util.Ui;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,8 +30,10 @@ public class MainWindow extends AnchorPane {
     private Stage stage;
     private static final Ui ui = new Ui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image welcomeGif = new Image(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif"));
+    private final Image exitGif = new Image(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif"));
 
     @FXML
     public void initialize() {
@@ -43,6 +44,10 @@ public class MainWindow extends AnchorPane {
         duke = d;
         this.stage = stage;
         // Send welcome message
+        ImageView iv = new ImageView(welcomeGif);
+        iv.setFitHeight(229);
+        iv.setFitWidth(540);
+        dialogContainer.getChildren().add(iv);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
     }
 
@@ -74,7 +79,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Handles the termination of the chatbot
+     * Handles the termination of the chat-bot
      */
     private void handleExit(String input) {
         String response = ui.showExitMessage();
@@ -82,6 +87,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog("Adventurer said: " + input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        // Show exit gif
+        ImageView iv = new ImageView(exitGif);
+        iv.setFitHeight(208);
+        iv.setFitWidth(500);
+        dialogContainer.getChildren().add(iv);
 
         userInput.setDisable(true);
         sendButton.setText("Exit");
