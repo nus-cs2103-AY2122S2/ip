@@ -7,26 +7,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Storage {
+   private final File file;
 
-    public static ArrayList<Task> tasks = new ArrayList<Task>();
-    public static File file = new File("data/duke.txt");
-    public void createFile() throws IOException {
-        File dir = new File("data/");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
+   public Storage(String path) throws IOException, DukeException {
+       String[] splits = path.split("/");
+       File dir = new File(splits[0]);
+       if(!dir.exists()) {
+           if(!dir.mkdir()) {
+               throw new DukeException("Error while creating ./data folder");
+           }
+       }
 
-        File savedTasks = file;
-        if (!savedTasks.exists()) {
-            savedTasks.createNewFile();
-        }
-    }
-    public void writeTasks( ) throws IOException {
-        File destination = file;
+       File savedTasks = new File(path);
+       if(!savedTasks.exists()) {
+           if(!savedTasks.createNewFile()) {
+               throw new DukeException("Error while creating savedTask.txt file");
+           }
+       }
+       this.file = savedTasks;
+   }
+
+    public void writeTasks(TaskList taskList ) throws IOException {
+
         StringBuilder textToAdd = new StringBuilder();
 
-        FileWriter fw = new FileWriter(destination);
-        for (Task curr : tasks) {
+        FileWriter fw = new FileWriter(this.file);
+        for (Task curr : taskList.getTasks()) {
             if (curr instanceof Todo) {
                 textToAdd.append("T ")
                         .append(curr.isDone() ? "1 " : "0 ")
@@ -55,9 +61,9 @@ class Storage {
 
 
     public ArrayList<Task> readTasks( ) throws FileNotFoundException {
+      ArrayList<Task> tasks = new ArrayList<>();
 
-        File source = file;
-        Scanner sc = new Scanner(source);
+        Scanner sc = new Scanner(this.file);
         while (sc.hasNext()) {
             String current = sc.nextLine();
             String[] splits = current.split(" ", 3);
