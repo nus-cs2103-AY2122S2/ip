@@ -11,7 +11,7 @@ public class Event extends Task {
      * @param task description of the task
      * @param time time of the event
      */
-    Event(String task, String time) {
+    public Event(String task, String time) {
         super(task, "E", time);
     }
 
@@ -20,7 +20,7 @@ public class Event extends Task {
      * @return String in the standard saving format
      */
     @Override
-    String saveFormat() {
+    public String saveFormat() {
         return super.saveFormat() + " ### " + this.time;
     }
 

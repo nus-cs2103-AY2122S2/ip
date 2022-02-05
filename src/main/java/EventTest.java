@@ -1,8 +1,8 @@
-package duke;
+import duke.Event;
 
 import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class EventTest {
 

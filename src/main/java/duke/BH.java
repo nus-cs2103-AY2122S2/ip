@@ -25,6 +25,14 @@ public class BH {
         this.ui = new Ui();
     }
 
+    public String getUiGreet() {
+        return this.ui.greet();
+    }
+
+    public String getUiLine() {
+        return this.ui.getLine();
+    }
+
     /**
      * continue reading input until a bye is detected
      * if input starts with list, print out all tasks in the list
@@ -35,35 +43,31 @@ public class BH {
      * if input starts with check, check all the task on the same date
      * @throws DukeException if wrong input is detected
      */
-    public void run() throws DukeException {
-        this.ui.greet();
+    public String run(String input) throws DukeException {
+        String output;
         try {
-            while (true) {
-                String input = sc.nextLine();
-                String[] inputArray = input.split(" ", 2);
-                String s1 = inputArray[0].toLowerCase();
+            String[] inputArray = input.split(" ", 2);
+            String s1 = inputArray[0].toLowerCase();
                 if (s1.equals("bye")) {
-                    System.out.println(ui.getLine() + "GoodBye! Thanks for using B.H!" + ui.getLine());
-                    this.storage.save(this.list);
-                    break;
+                    output = ui.getLine() + "GoodBye! Thanks for using B.H!" + ui.getLine();
                 } else if (s1.equals("list")) {
-                    System.out.println(ui.getLine() + this.getList() + ui.getLine());
+                    output = ui.getLine() + this.getList() + ui.getLine();
                 } else if (s1.equals("mark")) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     if (index < this.getListSize()) {
-                        System.out.println(ui.getLine() + "Well done! \n" + this.mark(index) + ui.getLine());
+                        output = ui.getLine() + "Well done! \n" + this.mark(index) + ui.getLine();
                     } else {
-                        System.out.println("Index out of range");
+                        output = "Index out of range";
                     }
                 } else if (s1.equals("unmark")) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
-                    System.out.println("Oh no! \n" + this.unMark(index));
+                    output = "Oh no! \n" + this.unMark(index);
                 } else if (s1.equals("todo")) {
                     String task = inputArray[1];
                     Task newTask = new Todo(task);
                     this.addToList(newTask);
-                    System.out.println(ui.getLine() + "Task added: " + newTask.toString() + "\n" +
-                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine());
+                    output = ui.getLine() + "Task added: " + newTask.toString() + "\n" +
+                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine();
                 } else if (s1.equals("deadline")) {
                     String s = inputArray[1];
                     String[] arr = s.split("/by");
@@ -71,8 +75,8 @@ public class BH {
                     String time = arr[1];
                     Task newTask = new Deadline(task, time);
                     this.addToList(newTask);
-                    System.out.println(ui.getLine() + "Task added:" + newTask.toString() + "\n" +
-                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine());
+                    output = ui.getLine() + "Task added:" + newTask.toString() + "\n" +
+                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine();
                 } else if (s1.equals("event")) {
                     String s = inputArray[1];
                     String[] arr = s.split("/at");
@@ -80,23 +84,24 @@ public class BH {
                     String time = arr[1];
                     Task newTask = new Event(task, time);
                     this.addToList(newTask);
-                    System.out.println(ui.getLine() + "Task added:" + newTask.toString() + "\n" +
-                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine());
+                    output = ui.getLine() + "Task added:" + newTask.toString() + "\n" +
+                            "Now you have " + this.getListSize() + " tasks in the list" + ui.getLine();
                 } else if (s1.equals("delete")) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
-                    System.out.println(ui.getLine() + "Okay, I have remove this task:\n" +
-                            this.deleteTask(index) + ui.getLine());
+                    output = ui.getLine() + "Okay, I have remove this task:\n" +
+                            this.deleteTask(index) + ui.getLine();
                 } else if (s1.equals("check")) {
                     LocalDate date = LocalDate.parse(inputArray[1]);
-                    this.checkDate(date);
+                    output  = ui.getLine() + this.checkDate(date) + ui.getLine();
                 } else if (s1.equals("find")) {
                     String[] arr = input.split(" ", 2);
                     String word = arr[1];
-                    this.checkWord(word);
+                    output = ui.getLine() + this.checkWord(word) + ui.getLine();
                 } else {
-                    System.out.println("Wrong input, please check again");
+                    output = "Wrong input, please check again";
                 }
-            }
+            this.storage.save(this.list);
+            return output;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
             throw new DukeException("Duke exception!!!");
@@ -108,25 +113,25 @@ public class BH {
      *
      * @param date the date to check
      */
-    void checkDate(LocalDate date) {
-        System.out.println(ui.getLine());
+    String checkDate(LocalDate date) {
+        String validDates = "";
         for (int i = 0; i < this.getListSize(); i++) {
             Task currTask = this.list.get(i);
             if (currTask.getDate().equals(date)) {
-                System.out.println(currTask.toString());
+                validDates += currTask.toString() + "\n";
             }
         }
-        System.out.println(ui.getLine());
+        return validDates;
     }
 
-    void checkWord(String word) {
-        System.out.println(ui.getLine());
+    String checkWord(String word) {
+        String validTasks = "";
         for (int i = 0; i < this.getListSize(); i++) {
             if (this.list.get(i).containsWord(word)) {
-                System.out.println(this.list.get(i).toString());
+                validTasks += this.list.get(i).toString() + "\n";
             }
         }
-        System.out.println(ui.getLine());
+        return validTasks;
     }
 
     private void addToList(Task task) {
@@ -141,8 +146,8 @@ public class BH {
 
     private String getList() {
         String s = "";
-        for (int i = 0; i < this.list.size(); i++) {
-            s = s + (i + 1) + ". " + list.get(i) + "\n";
+        for (int i = 0; i < this.getListSize(); i++) {
+            s = s + (i + 1) + ". " + this.list.get(i) + "\n";
         }
         return s;
     }

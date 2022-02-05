@@ -76,7 +76,7 @@ public class Task {
      * @return String in standard saving format
      */
 
-    String saveFormat() {
+    public String saveFormat() {
         if (this.isDone) {
             return this.type + " ### 1 ### " + this.task;
         } else {
