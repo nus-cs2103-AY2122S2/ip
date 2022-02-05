@@ -9,6 +9,8 @@ import spike.task.TaskList;
  * Lists tasks according to user requirement.
  */
 public class ListCommand extends Command {
+    public static final String MSG_LIST_TASK = "Here are the task(s) in your list:\n";
+    public static final String MSG_LIST_TASK_BY_DATE = "Here are the task(s) in your list filtered by date:\n";
     private int action;
     private LocalDateTime ldt;
 
@@ -54,7 +56,7 @@ public class ListCommand extends Command {
      */
     private String getTaskListText(TaskList tasks) {
         int i = 1;
-        String result = "Here are the task(s) in your list:\n";
+        String result = MSG_LIST_TASK;
         for (Task task : tasks.getTasks()) {
             result += i + "." + task + "\n";
             i++;
@@ -70,7 +72,7 @@ public class ListCommand extends Command {
      */
     private String getTaskListTextByDate(TaskList tasks) {
         int i = 1;
-        String result = "Here are the task(s) in your list filtered by date:\n";
+        String result = MSG_LIST_TASK_BY_DATE;
         for (Task task : tasks.getTasks()) {
             if (task.getDateTime().toLocalDate().equals(ldt.toLocalDate())) {
                 result = result + i + "." + task + "\n";

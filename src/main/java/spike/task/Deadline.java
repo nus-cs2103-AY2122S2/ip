@@ -20,7 +20,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileFormat() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         int status = super.isDone ? 1 : 0;
         return "D" + " | " + status + " | " + super.description + " | " + dtf.format(super.dateTime);
     }
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN_FOR_PRINT);
         return "[D]" + super.toString() + " (by: " + dtf.format(super.dateTime) + ")";
     }
 }

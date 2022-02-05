@@ -7,6 +7,7 @@ import spike.task.TaskList;
  * Finds task based on keyword given.
  */
 public class FindCommand extends Command {
+    public static final String MSG_MATCHING_TASK = "Here are the matching tasks in your list:\n";
     private String keyword;
 
     /**
@@ -27,7 +28,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         int i = 1;
-        String result = "Here are the matching tasks in your list:\n";
+        String result = MSG_MATCHING_TASK;
         for (Task task : tasks.getTasks()) {
             if (task.toString().contains(keyword)) {
                 result = result + i + "." + task + "\n";

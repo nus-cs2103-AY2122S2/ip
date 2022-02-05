@@ -1,5 +1,7 @@
 package spike.parser;
 
+import static spike.task.Task.DATE_TIME_PATTERN;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,17 +14,30 @@ import spike.command.FindCommand;
 import spike.command.IncorrectCommand;
 import spike.command.ListCommand;
 import spike.command.ToggleMarkCommand;
-import spike.exception.SpikeException;
 import spike.task.Deadline;
 import spike.task.Event;
 import spike.task.Task;
 import spike.task.TaskList;
 import spike.task.ToDo;
 
+
 /**
  * Encapsulates functionalities to parse user command.
  */
 public class Parser {
+    public static final String MSG_ERROR_LIST_BY_DATE =
+            "Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date";
+    public static final String MSG_MISSING_KEYWORD = "Kindly enter the keyword for finding task";
+    public static final String MSG_MISSING_TODO_INFO = "Hmmmm what to do? Think again?";
+    public static final String MSG_MISSING_DEADLINE_INFO = "Deadline or task description missing.";
+    public static final String MSG_WRONG_DATE_TIME_FORMAT = "Please enter a valid date in the format yyyy-MM-dd HHmm";
+    public static final String MSG_MISSING_EVENT_INFO = "Event time or event description missing.";
+    public static final String UNEXPECTED_ERROR = "Should not reach this line";
+    public static final String MSG_ERROR_MARKING = "Invalid arguments for (un)marking. Please check again!";
+    public static final String MSG_ERROR_DELETING = "Invalid arguments for deletion. Please check again!";
+    public static final String DEADLINE_BY = "/by";
+    public static final String EVENT_AT = "/at";
+
     protected enum CommandName {
         LIST("list"),
         MARK("mark"),
@@ -53,69 +68,33 @@ public class Parser {
      * @return a proper command to be executed
      */
     public Command parseCommand(String inputLine, TaskList tasks) {
-        // Extract the words
         String[] commandWords = inputLine.split(" ");
-        // Get the command name and check validity
         CommandName type = validateCommand(commandWords[0]);
         if (type == null) {
-            return new IncorrectCommand("Sorry, I am not programmed to do this yet :(");
+            return new IncorrectCommand();
         }
-        // Start to generate command
         switch (type) {
         case LIST:
-            try {
-                return parseList(inputLine);
-            } catch (SpikeException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+            return parseList(inputLine);
         case MARK:
             // Fallthrough
         case UNMARK:
-            try {
-                return parseToggleMark(type, commandWords, tasks);
-            } catch (SpikeException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+            return parseToggleMark(type, commandWords, tasks);
         case DELETE:
-            try {
-                return parseDelete(commandWords, tasks);
-            } catch (SpikeException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+            return parseDelete(commandWords, tasks);
         case TODO:
-            // Fallthrough
+            return parseAddToDo(type, inputLine);
         case DEADLINE:
+            return parseAddDeadline(type, inputLine, commandWords);
         case EVENT:
-            try {
-                return parseAdd(type, inputLine, commandWords);
-            } catch (SpikeException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+            return parseAddEvent(type, inputLine, commandWords);
         case FIND:
-            try {
-                return parseFind(inputLine);
-            } catch (SpikeException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+            return parseFind(inputLine);
         case BYE:
             return parseExit();
         default:
-            return new IncorrectCommand("Should not reach this line");
+            return new IncorrectCommand(UNEXPECTED_ERROR);
         }
-    }
-
-    /**
-     * Parses the find command.
-     *
-     * @param inputLine user raw input
-     * @return a command object ready to be executed
-     * @throws SpikeException if the keyword for find is missing
-     */
-    private Command parseFind(String inputLine) throws SpikeException {
-        if (inputLine.length() <= 5) {
-            throw new SpikeException("Kindly enter the keyword for finding task");
-        }
-        return new FindCommand(inputLine.substring(5));
     }
 
     /**
@@ -123,87 +102,100 @@ public class Parser {
      *
      * @param inputLine user raw input
      * @return a command object ready to be executed
-     * @throws SpikeException if the keyword for list by date is missing
      */
-    private Command parseList(String inputLine) throws SpikeException {
+    private Command parseList(String inputLine) {
         if (inputLine.length() >= 5) {
             // User tries to list task by date
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
             LocalDateTime ldt = parseDateTime(inputLine.substring(5), dtf);
             if (ldt == null) {
-                throw new SpikeException("Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date");
+                return new IncorrectCommand(MSG_ERROR_LIST_BY_DATE);
             }
             return new ListCommand(0, ldt);
-        } else {
-            return new ListCommand();
         }
+        return new ListCommand();
     }
 
     /**
-     * Parses the add command
+     * Parses the to-do command.
+     *
+     * @param c command name
+     * @param command whole command in string
+     * @return a command ready to be executed
+     */
+    private Command parseAddToDo(CommandName c, String command) {
+        if (command.length() <= 5) {
+            return new IncorrectCommand(MSG_MISSING_TODO_INFO);
+        }
+        ToDo newTD = new ToDo(command.substring(command.indexOf(c.getCommand()) + 5));
+        return new AddCommand(newTD);
+    }
+
+    /**
+     * Parses the deadline command.
      *
      * @param c command name
      * @param command whole command in string
      * @param commandWords command broken down into words
-     * @return a command object ready to be executed
-     * @throws SpikeException if any parameter is missing
+     * @return a command ready to be executed
      */
-    private Command parseAdd(CommandName c, String command, String[] commandWords) throws SpikeException {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        switch (c) {
-        case TODO:
-            if (command.length() <= 5) {
-                throw new SpikeException("Hmmmm what to do? Think again?");
-            }
-            ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
-            return new AddCommand(newTD);
-        case DEADLINE:
-            // Extract description and deadline and pass to constructor
-            if (commandWords.length <= 2 || command.indexOf("/by") == -1
-                    || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
-                throw new SpikeException("Deadline or task description missing.");
-            }
-            LocalDateTime deadlineT = parseDateTime(command.substring(command.indexOf("/by") + 4), dtf);
-            if (!(deadlineT == null)) {
-                Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
-                        command.indexOf("/by") - 1), deadlineT);
-                return new AddCommand(newD);
-            } else {
-                throw new SpikeException("Please enter a valid date in the format yyyy-MM-dd HHmm");
-            }
-        case EVENT:
-            if (commandWords.length <= 2 || command.indexOf("/at") == -1
-                    || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
-                throw new SpikeException("Event time or event description missing.");
-            }
-            LocalDateTime eventT = parseDateTime(command.substring(command.indexOf("/at") + 4), dtf);
-            if (!(eventT == null)) {
-                Event newE = new Event(command.substring(command.indexOf("event") + 6,
-                        command.indexOf("/at") - 1), eventT);
-                return new AddCommand(newE);
-            } else {
-                throw new SpikeException("Please enter a valid date in the format yyyy-MM-dd HHmm");
-            }
-        default:
-            return new IncorrectCommand("Should not reach this line");
+    private Command parseAddDeadline(CommandName c, String command, String[] commandWords) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+
+        boolean isIncompleteCommand = commandWords.length <= 2;
+        boolean isMissingEscapeChar = command.indexOf(DEADLINE_BY) == -1;
+        if (isIncompleteCommand || isMissingEscapeChar) {
+            return new IncorrectCommand(MSG_MISSING_DEADLINE_INFO);
         }
+
+        boolean isMissingTaskDescription = commandWords[1].equals(DEADLINE_BY);
+        boolean isMissingDateTime = command.indexOf(DEADLINE_BY) + 3 == command.length();
+        if (isMissingTaskDescription || isMissingDateTime) {
+            return new IncorrectCommand(MSG_MISSING_DEADLINE_INFO);
+        }
+        String deadline = command.substring(command.indexOf(DEADLINE_BY) + 4);
+        LocalDateTime deadlineT = parseDateTime(deadline, dtf);
+        if (deadlineT == null) {
+            return new IncorrectCommand(MSG_WRONG_DATE_TIME_FORMAT);
+        }
+        String taskDescription = command.substring(command.indexOf(c.getCommand()) + 9,
+                command.indexOf(DEADLINE_BY) - 1);
+        Deadline newD = new Deadline(taskDescription, deadlineT);
+        return new AddCommand(newD);
     }
 
+
     /**
-     * Parses delete command.
+     * Parses the event command.
      *
+     * @param c command name
+     * @param command whole command in string
      * @param commandWords command broken down into words
-     * @param tasks current task list
-     * @return a command object ready to be executed
-     * @throws SpikeException if any parameter is missing
+     * @return a command ready to be executed
      */
-    private Command parseDelete(String[] commandWords, TaskList tasks) throws SpikeException {
-        if (commandWords.length != 2 || isInt(commandWords[1]) == -1
-                || isInt(commandWords[1]) > tasks.getListSize()) {
-            throw new SpikeException("Invalid arguments for deletion. Please check again!");
+    private Command parseAddEvent(CommandName c, String command, String[] commandWords) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+
+        boolean isIncompleteCommand = commandWords.length <= 2;
+        boolean isMissingEscapeChar = command.indexOf(EVENT_AT) == -1;
+        if (isIncompleteCommand || isMissingEscapeChar) {
+            return new IncorrectCommand(MSG_MISSING_EVENT_INFO);
         }
-        Task toDelete = tasks.getTasks().get(Integer.parseInt(commandWords[1]) - 1);
-        return new DeleteCommand(toDelete);
+
+        boolean isMissingTaskDescription = commandWords[1].equals(EVENT_AT);
+        boolean isMissingDateTime = command.indexOf(EVENT_AT) + 3 == command.length();
+        if (isMissingTaskDescription || isMissingDateTime) {
+            return new IncorrectCommand(MSG_MISSING_EVENT_INFO);
+        }
+        String eventAt = command.substring(command.indexOf(EVENT_AT) + 4);
+        LocalDateTime eventT = parseDateTime(eventAt, dtf);
+        if (eventT == null) {
+            return new IncorrectCommand(MSG_WRONG_DATE_TIME_FORMAT);
+        }
+        String eventDescription = command.substring(command.indexOf(c.getCommand()) + 6,
+                command.indexOf(EVENT_AT) - 1);
+        Event newE = new Event(eventDescription, eventT);
+        return new AddCommand(newE);
     }
 
     /**
@@ -213,24 +205,64 @@ public class Parser {
      * @param commandWords command broken down into words
      * @param tasks current task list
      * @return a command object ready to be executed
-     * @throws SpikeException if any parameter is missing
      */
-    private Command parseToggleMark(CommandName c, String[] commandWords, TaskList tasks) throws SpikeException {
+    private Command parseToggleMark(CommandName c, String[] commandWords, TaskList tasks) {
+        if (!validateIndexCommand(commandWords, tasks)) {
+            return new IncorrectCommand(MSG_ERROR_MARKING);
+        }
         if (c.getCommand().equals("mark")) {
-            if (commandWords.length != 2 || isInt(commandWords[1]) == -1
-                    || isInt(commandWords[1]) > tasks.getListSize()) {
-                throw new SpikeException("Invalid arguments for marking. Please check again!");
-            }
             Task toMark = tasks.getTasks().get(Integer.parseInt(commandWords[1]) - 1);
             return new ToggleMarkCommand(1, toMark);
         } else {
-            if (commandWords.length != 2 || isInt(commandWords[1]) == -1
-                    || isInt(commandWords[1]) > tasks.getListSize()) {
-                throw new SpikeException("Invalid arguments for unmarking. Please check again!");
-            }
             Task toUnmark = tasks.getTasks().get(Integer.parseInt(commandWords[1]) - 1);
             return new ToggleMarkCommand(0, toUnmark);
         }
+    }
+
+    /**
+     * Parses delete command.
+     *
+     * @param commandWords command broken down into words
+     * @param tasks current task list
+     * @return a command object ready to be executed
+     */
+    private Command parseDelete(String[] commandWords, TaskList tasks) {
+        if (!validateIndexCommand(commandWords, tasks)) {
+            return new IncorrectCommand(MSG_ERROR_DELETING);
+        }
+        Task toDelete = tasks.getTasks().get(Integer.parseInt(commandWords[1]) - 1);
+        return new DeleteCommand(toDelete);
+    }
+
+    /**
+     * Validates command consist of only command and index.
+     * Such as delete and mark/mark
+     *
+     * @return true if command is valid, else false
+     */
+    private boolean validateIndexCommand(String[] commandWords, TaskList tasks) {
+        boolean isIncorrectParameter = commandWords.length != 2;
+        if (isIncorrectParameter) {
+            return false;
+        }
+        boolean isInvalidIndex = isValidIndex(commandWords[1], tasks.getListSize()) == -1;
+        if (isInvalidIndex) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Parses the find command.
+     *
+     * @param inputLine user raw input
+     * @return a command object ready to be executed
+     */
+    private Command parseFind(String inputLine) {
+        if (inputLine.length() <= 5) {
+            return new IncorrectCommand(MSG_MISSING_KEYWORD);
+        }
+        return new FindCommand(inputLine.substring(5));
     }
 
     /**
@@ -258,19 +290,22 @@ public class Parser {
     }
 
     /**
-     * Checks whether the input string is integer.
+     * Checks whether the input string is valid index.
      * If yes, return it, else return -1.
      *
-     * @return indicator of whether the input is an integer
+     * @return indicator of whether the index given is valid
      */
-    private static int isInt(String str) {
+    private static int isValidIndex(String str, int listSize) {
         try {
             int x = Integer.parseInt(str);
-            return x; // it is an integer
+            if (x - 1 >= listSize || x <= 0) {
+                return -1;
+            }
+            // Expect user to give 1-based index, while the list uses 0-based index
+            return x - 1;
         } catch (NumberFormatException e) {
-            return -1; // not an integer
+            return -1;
         }
-
     }
 
     /**
@@ -287,6 +322,4 @@ public class Parser {
         }
         return null;
     }
-
-
 }

@@ -7,6 +7,8 @@ import spike.task.TaskList;
  * Adds a task to the task list.
  */
 public class AddCommand extends Command {
+    public static final String MSG_ADDED_TASK = "Got it. I've added this task:\n";
+    public static final String MSG_AFTER_ADDED_TASK = "Now you have %s task(s) in the list.";
     private Task task;
 
     /**
@@ -35,9 +37,9 @@ public class AddCommand extends Command {
      * Returns the message needed for printing when adding task.
      */
     private String getAddedTaskText(Task task, TaskList tasks) {
-        String result = "Got it. I've added this task:\n"
+        String result = MSG_ADDED_TASK
                 + String.format("    %s\n", task.toString())
-                + String.format("Now you have %s task(s) in the list.", tasks.getTasks().size());
+                + String.format(MSG_AFTER_ADDED_TASK, tasks.getTasks().size());
         return result;
     }
 }

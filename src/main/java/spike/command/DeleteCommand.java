@@ -7,6 +7,8 @@ import spike.task.TaskList;
  * Deletes a task from the list.
  */
 public class DeleteCommand extends Command {
+    public static final String MSG_DELETED_TASK = " Noted. I've removed this task: \n";
+    public static final String MSG_AFTER_DELETED_TASK = "Now you have %s task(s) in the list.";
     private Task task;
 
     /**
@@ -37,9 +39,9 @@ public class DeleteCommand extends Command {
      * @return response after deleting task
      */
     private String getDeletedTaskText(Task task, TaskList tasks) {
-        String result = " Noted. I've removed this task: \n"
+        String result = MSG_DELETED_TASK
                 + String.format("    %s\n", task)
-                + String.format("Now you have %s task(s) in the list.", tasks.getTasks().size());
+                + String.format(MSG_AFTER_DELETED_TASK, tasks.getTasks().size());
         return result;
     }
 }
