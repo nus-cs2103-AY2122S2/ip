@@ -19,8 +19,12 @@ public class Parser {
      */
     public static String parse(String userInput, TaskList tl) throws DukeException {
 
+        // User Input cannot be Null
+        assert userInput != null : "assertion error";
+
         StringTokenizer st = new StringTokenizer(userInput, " ");
         String curr = st.nextToken();
+
 
         switch (curr) {
 
@@ -28,7 +32,7 @@ public class Parser {
 
             return tl.printList();
 
-            case "mark":
+        case "mark":
 
             try {
                 int toMark = Integer.parseInt(st.nextToken());
@@ -36,8 +40,6 @@ public class Parser {
             } catch (DukeException | NumberFormatException e) {
                 throw new DukeException.DukeInvalidNumberException();
             }
-
-
 
         case "unmark":
 
@@ -48,8 +50,6 @@ public class Parser {
                 throw new DukeException.DukeInvalidNumberException();
             }
 
-
-
         case "todo":
 
             try {
@@ -57,8 +57,6 @@ public class Parser {
             } catch (NoSuchElementException e) {
                 throw new DukeException.DukeNoTaskGivenException();
             }
-
-
 
         case "deadline":
 
