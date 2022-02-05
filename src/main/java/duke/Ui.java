@@ -15,15 +15,14 @@ public class Ui {
      * Return a line
      * @return A String of line
      */
-    String getLine() {
+    public String getLine() {
         return line;
     }
 
     /**
-     * Print the logo and greet user
+     * Return the logo and greet user
      */
-    void greet() {
-
-        System.out.println("Hello, I am B.H. How can I help you?\n" + logo + this.getLine());
+    public String greet() {
+        return "Hello, I am B.H. How can I help you?\n" + logo + this.getLine();
     }
 }
