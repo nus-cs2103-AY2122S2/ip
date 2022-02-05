@@ -19,11 +19,11 @@ public class Deadline extends Task {
      * Constructor method for Deadline
      *
      * @param desc Description of Deadline
-     * @param isComp Completion Status of Deadline
+     * @param isCompleted Completion Status of Deadline
      * @param date Date by which Deadline has to be Completed
      */
-    public Deadline(String desc, boolean isComp, LocalDate date) {
-        super(desc, isComp);
+    public Deadline(String desc, boolean isCompleted, LocalDate date) {
+        super(desc, isCompleted);
         this.date = date;
     }
 

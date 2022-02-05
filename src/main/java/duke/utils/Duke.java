@@ -1,8 +1,4 @@
 package duke.utils;
-import duke.utils.*;
-
-
-
 
 /**
  * Represents an instance of the task

@@ -19,11 +19,11 @@ public class Event extends Task {
      * Constructor method for Event
      *
      * @param desc Description of Event
-     * @param isComp Completion Status of Event
+     * @param isCompleted Completion Status of Event
      * @param date Date on which the Event Occurs
      */
-    public Event(String desc, boolean isComp, LocalDate date) {
-        super(desc, isComp);
+    public Event(String desc, boolean isCompleted, LocalDate date) {
+        super(desc, isCompleted);
         this.date = date;
     }
 

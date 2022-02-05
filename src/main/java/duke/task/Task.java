@@ -21,12 +21,12 @@ public abstract class Task implements Serializable {
     /**
      * Constructor method for task
      *
-     * @param x Description of the Task
-     * @param y Completion Status of the Task
+     * @param desc Description of the Task
+     * @param isCompleted Completion Status of the Task
      */
-    public Task(String x, boolean y) {
-        this.description = x;
-        this.isFinished = y;
+    public Task(String desc, boolean isCompleted) {
+        this.description = desc;
+        this.isFinished = isCompleted;
     }
 
     /**
