@@ -23,7 +23,9 @@ public class DeleteAllCommand extends Command {
         try {
             taskList.getTaskSet().clear();
             taskList.getTaskList().clear();
+            assert taskList.getTaskSet().isEmpty() && taskList.getTaskList().isEmpty();
             storage.writeFile(taskList);
+            assert storage.loadFile().isEmpty();
             return ui.deletedAll();
         } catch (Exception e) {
             throw new CortanaException("Something went wrong when attempting to delete all tasks.");

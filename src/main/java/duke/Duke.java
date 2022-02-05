@@ -23,6 +23,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        assert storage.loadFile() != null;
         tasks = new TaskList(storage.loadFile());
     }
 

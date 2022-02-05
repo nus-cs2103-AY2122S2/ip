@@ -35,9 +35,11 @@ public class DeleteCommand extends Command {
             Task taskDeleted = taskList.getTaskList().get(index);
             taskList.getTaskList().remove(index);
             taskList.getTaskSet().remove(taskDeleted);
+            assert !taskList.getTaskList().contains(taskDeleted) && !taskList.getTaskSet().contains(taskDeleted);
             storage.writeFile(taskList);
             return ui.deletedTask(taskList, taskDeleted);
         } catch (Exception e) {
+            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }
