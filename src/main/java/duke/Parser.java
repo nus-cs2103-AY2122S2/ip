@@ -56,7 +56,7 @@ public class Parser {
             } else if (command.startsWith("unmark")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
                 taskListObj.unmark(value);
-            } else if(command.startsWith("todo")) {
+            } else if (command.startsWith("todo")) {
                 try {
                     Todo todoTask = new Todo(command.substring(5));
                     taskListObj.addTask(todoTask);
@@ -66,7 +66,7 @@ public class Parser {
                 } catch (StringIndexOutOfBoundsException noDescription) {
                     dukeException.noDescriptionException();
                 }
-            } else if(command.startsWith("deadline")) {
+            } else if (command.startsWith("deadline")) {
                 command = command.replace("deadline", "");
                 String[] taskText = command.split(" /by");
                 try {
@@ -90,7 +90,7 @@ public class Parser {
                     Deadline deadlineTask = new Deadline(taskText[0].strip(), taskText[1].strip());
                     taskListObj.addTask(deadlineTask);
                 }
-            } else if(command.startsWith("event")) {
+            } else if (command.startsWith("event")) {
                 try {
                     command = command.replace("event", "");
                     String[] taskText = command.split(" /at");
@@ -99,7 +99,7 @@ public class Parser {
                 } catch(ArrayIndexOutOfBoundsException invalidEventSyntax) {
                     dukeException.invalidEventSyntax();
                 }
-            } else if(command.startsWith("delete")) {
+            } else if (command.startsWith("delete")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
                 taskListObj.delete(value);
             } else {

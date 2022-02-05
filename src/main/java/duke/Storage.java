@@ -47,30 +47,30 @@ public class Storage {
             Scanner reader = new Scanner(taskFile);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
-                if(data.contains("(by:")) {
+                if (data.contains("(by:")) {
                     data = data.substring(9);
                     String[] taskText = data.split("\\(by:");
                     StringBuilder sb = new StringBuilder(taskText[1].strip());
                     sb.deleteCharAt(sb.length()-1);
                     Deadline deadlineTask = new Deadline(taskText[0].strip(), sb.toString());
-                    if(data.contains("[X]")) {
+                    if (data.contains("[X]")) {
                         deadlineTask.setDone();
                     }
                     taskList.add(deadlineTask);
-                } else if(data.contains("(at: ")) {
+                } else if (data.contains("(at: ")) {
                     data = data.substring(9);
                     String[] taskText = data.split("\\(at:");
                     StringBuilder sb = new StringBuilder(taskText[1].strip());
                     sb.deleteCharAt(sb.length()-1);
                     Event eventTask = new Event(taskText[0].strip(),sb.toString());
-                    if(data.contains("[X]")) {
+                    if (data.contains("[X]")) {
                         eventTask.setDone();
                     }
                     taskList.add(eventTask);
                 } else {
                     data = data.substring(9);
                     Todo todoTask = new Todo(data);
-                    if(data.contains("[X]")) {
+                    if (data.contains("[X]")) {
                         todoTask.setDone();
                     }
                     taskList.add(todoTask);

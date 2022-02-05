@@ -30,7 +30,6 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
-        // if(Can get time, set this.by to with time)
         this.by = date.getDayOfMonth() + " " + date.getMonth() + " " + date.getYear();
     }
 
