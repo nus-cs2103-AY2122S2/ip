@@ -5,20 +5,30 @@ import java.util.Scanner;
 import baron.commands.Command;
 import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
+import baron.message.Message;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
 import baron.util.TextUi;
 
 /**
- * Main class for the Baron application that user uses to run. The Baron application keeps and
+ * Main logic class for the Baron application that user uses to run. The Baron application keeps and
  * tracks tasks like a to-do list.
  */
 public class Baron {
+    private static final String DEFAULT_STORAGE_FILE_PATH = "data/baron.txt";
+
     private final Scanner inputScanner;
     private final TaskManager taskManager;
     private final CommandManager commandManager;
     private final Storage storage;
     private final TextUi textUi;
+
+    /**
+     * Constructs a {@code Baron} object with the default relative file path.
+     */
+    public Baron() {
+        this(Baron.DEFAULT_STORAGE_FILE_PATH);
+    }
 
     /**
      * Constructs a {@code Baron} object with the specified relative file path.
@@ -49,7 +59,7 @@ public class Baron {
 
         do {
             String fullCommand = inputScanner.nextLine();
-            command = commandManager.parseCommand(fullCommand);
+            command = this.commandManager.parseCommand(fullCommand);
             TextUi.printCommandOutput(command.execute());
         }
         while (!command.isByeCommand());
@@ -62,7 +72,26 @@ public class Baron {
     }
 
     /**
-     * Initialises and starts the Baron application.
+     * Returns the response of the specified user input.
+     *
+     * @param input the input specified to get a response.
+     * @return the response of the specified user input.
+     */
+    public String getResponse(String input) {
+        return this.commandManager.parseCommand(input).execute();
+    }
+
+    /**
+     * Returns the welcome message with the number of tasks that the user has.
+     * @return the welcome message with the number of tasks that the user has.
+     */
+    public String getWelcomeMessage() {
+        return Message.generateNoOfTasksMessage(this.taskManager.getTaskCount())
+                + "\n" + "What can I do for you?";
+    }
+
+    /**
+     * Initialises and starts the Baron application (CLI).
      *
      * @param args the command line arguments (not used).
      */
