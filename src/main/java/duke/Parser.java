@@ -10,7 +10,6 @@ import java.time.LocalTime;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class Parser {
-
     /**
      * Processes the message given by the user. Returns the response to the user.
      *
@@ -94,6 +93,8 @@ public class Parser {
      */
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
         String[] messageArr;
+
+        assert (message != null) : "message should not be null";
 
         switch (type) {
         case TODO:
@@ -328,6 +329,9 @@ public class Parser {
             throw new DukeException("Pardon me, but the end time you have provided me"
                 + " takes place before the begin time. I must say that time travel is...\nnot in my repertoire...");
         }
+
+        assert false : "Runtime should not reach here";
+        return null; //should not reach here
     }
 
     private void throwIfNoKeyword(String message, String keyword) throws DukeException {
@@ -335,6 +339,9 @@ public class Parser {
         if (keyword.length() < 1 || indexOfSpace == -1) {
             throw new DukeException("Pardon me, but the body of the find command should not be empty");
         }
+
+        assert false : "Runtime should not reach here";
+        return null; //should not reach here
     }
 
     private void throwWrongToDoFormatException() throws DukeException {

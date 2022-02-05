@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -32,6 +33,10 @@ public class Duke {
             System.out.println("File cannot be created. Check directory.");
             System.exit(0);
         }
+
+        File dukeFile = new File(filePath);
+
+        assert dukeFile.exists() : "File should exist";
     }
 
     /**
