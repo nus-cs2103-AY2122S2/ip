@@ -11,11 +11,6 @@ import java.util.ArrayList;
  * that can be issued to a ChatBot.
  */
 public abstract class Command {
-    /** Constants for styling of printing command feedback */
-    private static final int FEEDBACK_DELIMITER_LENGTH = 25;
-    private static final int FEEDBACK_INDENT_SIZE = 4;
-    private static final String FEEDBACK_DELIMITER = "_".repeat(FEEDBACK_DELIMITER_LENGTH);
-    private static final String FEEDBACK_INDENT = " ".repeat(FEEDBACK_INDENT_SIZE);
 
     /** Name of current command */
     private final String name;
@@ -88,35 +83,6 @@ public abstract class Command {
             throw new IllegalArgumentException("Invalid command");
         }
         return command;
-    }
-
-    /**
-     * Print response of executed command styled between 2 lines
-     * with indentation. Each item in response array is printed
-     * in a new line.
-     *
-     * @param response List of response to print.
-     */
-    public static void styledPrint(ArrayList<String> response) {
-        response.add(0, FEEDBACK_DELIMITER);
-        response.add(FEEDBACK_DELIMITER);
-        // Prepend each response item with an indent and a line break
-        String styledResponse = response.stream()
-                .map(item -> FEEDBACK_INDENT + item + '\n')
-                .reduce("", (prevLine, nextLine) -> prevLine + nextLine);
-        System.out.println(styledResponse);
-    }
-
-    /**
-     * Reconstruct original command by user.
-     *
-     * @return String representing original command.
-     */
-    protected String getOriginalCommand() {
-        if (this.args != null) {
-            return this.name + " " + this.args;
-        }
-        return this.name;
     }
 
     protected String getName() {

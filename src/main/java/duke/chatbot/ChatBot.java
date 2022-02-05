@@ -13,9 +13,6 @@ import java.util.ArrayList;
  */
 public class ChatBot {
 
-    private static final String WELCOME_STRING = "Hello I'm Duke!\n"
-            + "What can I do for you?";
-
     /** Task list maintaining list of tasks for user */
     private final TaskList taskList;
 
@@ -25,14 +22,6 @@ public class ChatBot {
     public ChatBot(TaskList taskList) {
         this.taskList = taskList;
         this.hasTerminated = false;
-    }
-
-    /**
-     * Performs initialisation of the ChatBot. Should be called
-     * before receiving commands.
-     */
-    public void initialise() {
-        System.out.println(WELCOME_STRING);
     }
 
     /**
