@@ -77,17 +77,15 @@ public class TaskList {
             if (storage.writesToDatabase(sb1.toString())) {
                 this.taskList.clear();
                 this.taskList.addAll(newList);
-                System.out.println("     Nice! I've " + (taskCompletion == true ? "marked this duke.task as completed"
+                System.out.println("     Nice! I've " + (taskCompletion ? "marked this duke.task as completed"
                         : "unmarked this duke.task as uncompleted"));
-                System.out.println("     " + (taskCompletion == true ? editTask.completeTask().toString()
+                System.out.println("     " + (taskCompletion ? editTask.completeTask().toString()
                         : editTask.uncompleteTask().toString()));
                 return true;
             }
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Task index out of bound while marking duke.task.");
         } catch (FileNotFoundException err) {
-            System.out.println("    Marking of tasks unsuccessful due to: " + err);
-        } catch (IOException err) {
             System.out.println("    Marking of tasks unsuccessful due to: " + err);
         }
         return false;
@@ -119,8 +117,6 @@ public class TaskList {
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Task index out of bound while deleting duke.task.");
         } catch (FileNotFoundException err) {
-            System.out.println("    Deleting of tasks unsuccessful due to: " + err);
-        } catch (IOException err) {
             System.out.println("    Deleting of tasks unsuccessful due to: " + err);
         }
         return returnInfo;

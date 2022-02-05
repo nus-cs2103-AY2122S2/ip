@@ -20,7 +20,7 @@ public class Storage {
     }
 
     // Erase and rewrite to file method
-    public boolean writesToDatabase(String textToAdd) throws IOException, FileNotFoundException {
+    public boolean writesToDatabase(String textToAdd) throws FileNotFoundException {
         try {
             FileWriter fw = new FileWriter(this.databasePath);
             fw.write(textToAdd);
