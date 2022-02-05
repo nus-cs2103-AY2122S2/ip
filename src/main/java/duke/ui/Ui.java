@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import duke.task.Task;
 import duke.tasklist.DukeList;
 
 public class Ui {
@@ -56,6 +57,25 @@ public class Ui {
             System.out.println("Input a command!");
         }
         return ans;
+    }
+
+    public void markTask(Task t) {
+        System.out.println("Duke: Nice! I've marked this task as done:\n      " + t);
+    }
+
+    public void unmarkTask(Task t) {
+        System.out.println("Duke: OK, I've marked this task as not done yet:\n      " + t);
+    }
+
+    /**
+     * Prints out message for adding Task to the list
+     * @param t Task that was added
+     * @param n Current size of list
+     */
+    public void addTask(Task t, int n) {
+        System.out.println("\nDuke: Got it. I've added this task:\n      "
+                + t + "\n      Now you have "
+                + n + " tasks in the list.\n");
     }
 
 }

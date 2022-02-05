@@ -14,7 +14,6 @@ public class Events extends Task {
     public Events (String s, String time) {
         super(s);
         this.date = LocalDate.parse(time);
-        super.setDate(this.date);
     }
 
     /**
@@ -22,7 +21,7 @@ public class Events extends Task {
      * @return String representation of this Events
      */
     @Override
-    public String show() {
+    public String toString() {
         if (super.getDone()) {
             return "[E][X] " + super.taskDescription() + " (at: " + date + ")";
         } else {
@@ -37,6 +36,10 @@ public class Events extends Task {
     @Override
     public String storeFormat() {
         return "E|" + super.getDone() + "|" + super.taskDescription() + "|" + this.date + "\n";
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 
 }

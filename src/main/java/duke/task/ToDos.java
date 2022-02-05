@@ -15,7 +15,7 @@ public class ToDos extends Task {
      * @return String representation of this Todos
      */
     @Override
-    public String show() {
+    public String toString() {
         if (super.getDone()) {
             return "[T][X] " + super.taskDescription();
         } else {

@@ -10,7 +10,7 @@ import duke.task.Task;
 
 public class DukeList {
 
-    private List<Task> a;
+    private List<Task> tasks;
     private Storage storage;
 
     /**
@@ -19,7 +19,7 @@ public class DukeList {
      * @param s Instance of Storage
      */
     public DukeList(Storage s) {
-        this.a = s.load();
+        this.tasks = s.load();
         this.storage = s;
     }
 
@@ -28,25 +28,18 @@ public class DukeList {
      * @param t Task to be added
      */
     public void add(Task t) {
-        a.add(t);
-        storage.store(a);
-        System.out.println("\nDuke: Got it. I've added this task:\n      "
-                + t.show() + "\n      Now you have "
-                + this.a.size() + " tasks in the list.\n");
+        tasks.add(t);
+        storage.store(tasks);
     }
 
 
     /**
      * Mark specified task as done.
-     * @param x
+     * @param x index of task to mark
      */
     public void mark(int x) {
-        try {
-            a.get(x - 1).mark();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("\nDuke: Wrong index to mark! Use \"list\" to see the current tasks.\n");
-        }
-        storage.store(a);
+        tasks.get(x - 1).mark();
+        storage.store(tasks);
     }
 
     /**
@@ -54,12 +47,8 @@ public class DukeList {
      * @param x The task number
      */
     public void unmark(int x) {
-        try {
-            a.get(x - 1).unmark();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("\nDuke: Wrong index to unmark! Use \"list\" to see the current tasks.\n");
-        }
-        storage.store(a);
+        tasks.get(x - 1).unmark();
+        storage.store(tasks);
     }
 
     /**
@@ -68,13 +57,13 @@ public class DukeList {
      */
     @Override
     public String toString() {
-        if (a.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "NO TASKS\n";
         }
         String ans = "";
         int y = 1;
-        for (Task x : a) {
-            ans += y + ". " + x.show() + "\n";
+        for (Task x : tasks) {
+            ans += y + ". " + x + "\n";
             y++;
         }
         return ans;
@@ -88,12 +77,12 @@ public class DukeList {
      */
     public void delete(int x) {
         try {
-            Task t = a.get(x - 1);
-            a.remove(x - 1);
+            Task t = tasks.get(x - 1);
+            tasks.remove(x - 1);
             System.out.println("\nDuke: Noted. I've removed this task:\n      "
-                    + t.show() + "\n      Now you have "
-                    + this.a.size() + " tasks in the list.\n");
-            storage.store(a);
+                    + t + "\n      Now you have "
+                    + this.tasks.size() + " tasks in the list.\n");
+            storage.store(tasks);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n");
         }
@@ -106,11 +95,18 @@ public class DukeList {
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
-        for (Task t: a) {
-            if (t instanceof Events || t instanceof Deadlines) {
-                if (t.getDate().isEqual(cur)) {
+        for (Task t: tasks) {
+            if (t instanceof Deadlines) {
+                Deadlines d = (Deadlines) t;
+                if (d.getDate().isEqual(cur)) {
                     b = false;
-                    day = day + "     " + t.show() + "\n";
+                    day = day + "     " + t + "\n";
+                }
+            } else if (t instanceof Events) {
+                Events e = (Events) t;
+                if (e.getDate().isEqual(cur)) {
+                    b = false;
+                    day = day + "     " + t + "\n";
                 }
             }
         }
@@ -127,14 +123,31 @@ public class DukeList {
     public void findTasks(String arg) {
         String found = "\nDuke: Here are the matching tasks in your list\n";
         int n = 0;
-        for (Task t: a) {
+        for (Task t: tasks) {
             if (t.find(arg)) {
                 n += 1;
                 found = found + "      " + n + "."
-                        + t.show() + "\n";
+                        + t + "\n";
             }
         }
         System.out.println(found);
+    }
+
+    /**
+     * returns the Task at the given index in the DukeList
+     * @param index index of the Task to return
+     * @return a Task instance
+     */
+    public Task getTask(int index) {
+        return tasks.get(index - 1);
+    }
+
+    /**
+     * Returns the number of elements in the DukeList
+     * @return No of elements in DukeList
+     */
+    public int getSize() {
+        return tasks.size();
     }
 
 }

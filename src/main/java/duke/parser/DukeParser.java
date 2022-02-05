@@ -7,9 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.commands.AddDeadline;
-import duke.commands.AddEvents;
-import duke.commands.AddToDos;
+import duke.commands.AddTask;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
@@ -109,55 +107,64 @@ public class DukeParser {
      * @throws DukeException If the argument is invalid or missing arguments
      */
     private static Command createCommand(String[] arg, String cmd) throws DukeException {
-        if (cmd.equals("bye")) {
+        Command curr;
+        switch (cmd) {
+        case "bye" :
             if (arg.length == 1) {
-                return new ExitCommand();
+                curr = new ExitCommand();
+                break;
             } else {
                 throw new WrongFormatException();
             }
-        } else if (cmd.equals("mark")) {
+        case "mark" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else if (!isInt(arg[1])) {
                 throw new WrongFormatException();
             } else {
-                return new MarkCommand(Integer.parseInt(arg[1].trim()));
+                curr = new MarkCommand(Integer.parseInt(arg[1].trim()));
+                break;
             }
-        } else if (cmd.equals("unmark")) {
+        case "unmark" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else if (!isInt(arg[1])) {
                 throw new WrongFormatException();
             } else {
-                return new UnMarkCommand(Integer.parseInt(arg[1].trim()));
+                curr = new UnMarkCommand(Integer.parseInt(arg[1].trim()));
+                break;
             }
-        } else if (cmd.equals("delete")) {
+        case "delete" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else if (!isInt(arg[1])) {
                 throw new WrongFormatException();
             } else {
-                return new DeleteCommand(Integer.parseInt(arg[1].trim()));
+                curr = new DeleteCommand(Integer.parseInt(arg[1].trim()));
+                break;
             }
-        } else if (cmd.equals("today")) {
+        case "today" :
             if (arg.length == 1) {
-                return new TodayTask();
+                curr = new TodayTask();
+                break;
             } else {
                 throw new WrongFormatException();
             }
-        } else if (cmd.equals("list")) {
+        case "list" :
             if (arg.length == 1) {
-                return new ListCommand();
+                curr = new ListCommand();
+                break;
             } else {
                 throw new WrongFormatException();
             }
-        } else if (cmd.equals("todo")) {
+        case "todo" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else {
-                return new AddToDos(arg[1]);
+                curr = new AddTask(cmd, arg[1]);
+                break;
             }
-        } else if (cmd.equals("deadline")) {
+        case "deadline" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else if (!arg[1].matches(".+/by.+")) {
@@ -167,10 +174,11 @@ public class DukeParser {
                 if (!isValidDate(body[1].trim())) {
                     throw new InvalidDateException();
                 } else {
-                    return new AddDeadline(body[0], body[1].trim());
+                    curr = new AddTask(cmd, body[0], body[1].trim());
+                    break;
                 }
             }
-        } else if (cmd.equals("event")) {
+        case "event" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else if (!arg[1].matches(".+/at.+")) {
@@ -180,19 +188,21 @@ public class DukeParser {
                 if (!isValidDate(body[1].trim())) {
                     throw new InvalidDateException();
                 } else {
-                    return new AddEvents(body[1], body[1].trim());
+                    curr = new AddTask(cmd, body[0], body[1].trim());
+                    break;
                 }
             }
-        } else if (cmd.equals("find")) {
+        case "find" :
             if (arg.length == 1) {
                 throw new MissingArgumentException();
             } else {
-                return new FindCommand(arg[1]);
+                curr = new FindCommand(arg[1]);
+                break;
             }
-        } else {
+        default :
             throw new InvalidCommandException();
         }
-
+        return curr;
     }
 
     /**
@@ -210,7 +220,5 @@ public class DukeParser {
             return new TryAgain();
         }
     }
-
-
 
 }

@@ -14,7 +14,6 @@ public class Deadlines extends Task {
     public Deadlines(String s, String time) {
         super(s);
         this.date = LocalDate.parse(time);
-        super.setDate(this.date);
     }
 
     /**
@@ -22,7 +21,7 @@ public class Deadlines extends Task {
      * @return String representation of this Deadlines
      */
     @Override
-    public String show() {
+    public String toString() {
         if (super.getDone()) {
             return "[D][X] " + super.taskDescription() + " (by: " + date + ")";
         } else {
@@ -37,5 +36,9 @@ public class Deadlines extends Task {
     @Override
     public String storeFormat() {
         return "D|" + super.getDone() + "|" + super.taskDescription() + "|" + this.date + "\n";
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 }

@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class Duke {
 
     /**
-     * Main method to run the Duke list
+     * Main method to run the Duke program
      * @param args input
      */
     public static void main(String[] args) {

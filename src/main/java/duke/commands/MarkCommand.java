@@ -18,7 +18,12 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(Ui ui, DukeList tasks) {
-        tasks.mark(index);
+        try {
+            tasks.mark(index);
+            ui.markTask(tasks.getTask(index));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\nDuke: Wrong index to mark! Use \"list\" to see the current tasks.\n");
+        }
     }
 
     /**

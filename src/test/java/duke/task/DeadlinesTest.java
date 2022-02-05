@@ -16,7 +16,7 @@ public class DeadlinesTest {
 
     @Test
     public void testShow() {
-        assertEquals("[D][ ] testing task (by: 2022-12-11)", d.show());
+        assertEquals("[D][ ] testing task (by: 2022-12-11)", d);
     }
 
     @Test
