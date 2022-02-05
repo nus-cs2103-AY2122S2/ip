@@ -6,5 +6,5 @@ package duke;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public enum ConfirmCodes {
-    ADDITION, DELETION
+    ADDITION, DELETION, SORT
 }

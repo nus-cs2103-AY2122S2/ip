@@ -19,7 +19,11 @@ public class Ui {
         + "|deadline [Description] /by yyyy-mm-dd/HH:mm|: Add a Deadline task with a time condition.\n"
         + "|event [Description] /at yyyy-mm-dd/HH:mm/HH:mm|: Add an Event task. Represents a task that"
         + "\n\tstarts within a specific time range on a specific day "
-        + "\n\t(HH:mm/HH:mm represents Begin/End time)\n";
+        + "\n\t(HH:mm/HH:mm represents Begin/End time)\n"
+        + "|sort [keyword]| sorts the list using the given keyword:\n"
+        + "\tchronologically: sorts tasks by date and time\n"
+        + "\talphabetically: sorts tasks alphabetically by description\n"
+        + "\tdone: sorts tasks by whether they are done or not\n";;
 
     private final Parser parser;
 

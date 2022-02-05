@@ -20,7 +20,7 @@ public class Parser {
      * @throws DukeException throws if the format of the message was incorrect, or if the message was not understood
      */
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
-        String returnMessage;
+        String returnMessage = null;
         String currMessage;
         Task currTask;
         int index;
@@ -37,6 +37,13 @@ public class Parser {
             break;
         case "list":
             returnMessage = getListAsString(tasks);
+            break;
+        case "sort":
+            String typeString = getKeyword(message);
+            SortType type = getSortType(typeString);
+            tasks.sort(type);
+            storage.modifyStorage(null, ConfirmCodes.SORT, tasks);
+            returnMessage = getSortMessage(tasks);
             break;
         case "mark":
             index = getIndexFromMessage(message); //get the index
@@ -79,7 +86,7 @@ public class Parser {
             returnMessage = addTaskMessage(currTask, tasks);
             break;
         default:
-            throw new DukeException(DukeException.DID_NOT_UNDERSTAND);
+            throwInvalidInput();
         }
         return returnMessage;
     }
@@ -166,6 +173,19 @@ public class Parser {
         return indexOfItem;
     }
 
+    private SortType getSortType(String message) throws DukeException {
+        if (message.equalsIgnoreCase("chronologically")) {
+            return SortType.CHRONOLOGICALLY;
+        } else if (message.equalsIgnoreCase("alphabetically")) {
+            return SortType.ALPHABETICALLY;
+        } else if (message.equalsIgnoreCase("done")) {
+            return SortType.DONE;
+        } else {
+            throwInvalidInput();
+        }
+        assert false : "Runtime should not reach here";
+        return null;
+    }
     private LocalDate parseDateFromString(String dateString, TaskTypes type) throws DukeException {
         try {
             return LocalDate.parse(dateString, Task.YEAR_FORMAT);
@@ -216,6 +236,9 @@ public class Parser {
 
     private String unmarkTaskMessage(Task task) {
         return "Alright then! I've marked that task as not done:" + "\n\t" + task;
+    }
+    private String getSortMessage(TaskList tasks) {
+        return "Alright then! I've sorted the tasks accordingly: \n" + tasks;
     }
 
     private String getResultsOfFind(String keyword, TaskList tasks) {
@@ -337,7 +360,7 @@ public class Parser {
     private void throwIfNoKeyword(String message, String keyword) throws DukeException {
         int indexOfSpace = message.indexOf(" ");
         if (keyword.length() < 1 || indexOfSpace == -1) {
-            throw new DukeException("Pardon me, but the body of the find command should not be empty");
+            throw new DukeException("Pardon me, but the body of this command should not be empty");
         }
     }
 
@@ -364,7 +387,11 @@ public class Parser {
     }
 
     private void throwInvalidTypeDeclaration() throws DukeException {
-        throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
+        throw new DukeException(DukeException.INVALID_TYPE);
+    }
+
+    private void throwInvalidInput() throws DukeException {
+        throw new DukeException(DukeException.DID_NOT_UNDERSTAND);
     }
 
     private String getTaskCountMessage(TaskList tasks) {

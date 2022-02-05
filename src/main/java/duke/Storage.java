@@ -123,6 +123,7 @@ public class Storage {
                 fw.close();
                 break;
             case DELETION:
+            case SORT:
                 fw = new FileWriter(dukeFile.getPath());
                 fw.write(listInFileFormat(tasks));
                 fw.close();

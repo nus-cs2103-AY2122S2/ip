@@ -43,6 +43,26 @@ public class TaskList {
     }
 
     /**
+     * Sorts the task list by the given type.
+     * @param type the way the task list should be sorted
+     */
+    public void sort(SortType type) throws DukeException {
+        switch (type) {
+        case CHRONOLOGICALLY:
+            tasks.sort(Task.BY_DATE);
+            break;
+        case ALPHABETICALLY:
+            tasks.sort(Task.BY_STRING);
+            break;
+        case DONE:
+            tasks.sort(Task.BY_MARK);
+            break;
+        default:
+            throw new DukeException(DukeException.INVALID_TYPE);
+        }
+    }
+
+    /**
      * Adds the provided task to the list of tasks.
      *
      * @param t The task to be added

@@ -12,9 +12,9 @@ import java.time.LocalTime;
 public class Event extends Task {
 
     public static final String FORMAT = "[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm";
-    private final LocalDate date;
-    private final LocalTime timeBeginning;
-    private final LocalTime timeEnd;
+    protected final LocalDate date;
+    protected final LocalTime timeBeginning;
+    protected final LocalTime timeEnd;
 
     /**
      * Constructor for Event class
@@ -29,6 +29,68 @@ public class Event extends Task {
         this.date = date;
         this.timeBeginning = time1;
         this.timeEnd = time2;
+    }
+
+    /**
+     * Compares this instance with a Task
+     * @param t1 a Task object
+     * @return integer representing which deadline takes precedence
+     */
+    @Override
+    public int compareTo(Task t1) {
+        if (t1 instanceof ToDo) {
+            ToDo todo = (ToDo) t1;
+            return this.compareTo(todo);
+        } else if (t1 instanceof Deadline) {
+            Deadline deadline = (Deadline) t1;
+            return this.compareTo(deadline);
+        } else if (t1 instanceof Event) {
+            Event event = (Event) t1;
+            return this.compareTo(event);
+        }
+        return 0;
+    }
+
+    /**
+     * Compares this instance with a ToDo
+     * @param t1 a ToDo object
+     * @return 1
+     */
+    public int compareTo(ToDo t1) {
+        return 1; //ToDo takes precedence
+    }
+
+    /**
+     * Compares this instance with a Deadline
+     * @param d1 a Deadline object
+     * @return integer representing which takes precedence
+     */
+    public int compareTo(Deadline d1) {
+        int compare = this.date.compareTo(d1.date);
+        if (compare == 0) {
+            if (d1.time == null) {
+                return 1;
+            } else {
+                return this.timeBeginning.compareTo(d1.time);
+            }
+        }
+        return compare;
+    }
+
+    /**
+     * Compares this instance with another Event
+     * @param e1 another event object
+     * @return integer representing which  takes precedence
+     */
+    public int compareTo(Event e1) {
+        int compare = this.date.compareTo(e1.date);
+        if (compare == 0) {
+            compare = this.timeBeginning.compareTo(e1.timeBeginning);
+            if (compare == 0) {
+                return this.timeEnd.compareTo(e1.timeEnd);
+            }
+        }
+        return compare;
     }
 
     /**

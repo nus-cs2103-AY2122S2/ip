@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 /**
  * Represents a task to be completed. Includes a description of the task and a boolean representing
@@ -13,6 +14,42 @@ public class Task {
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
     protected static final DateTimeFormatter OUTPUT_YEAR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm a");
+    protected static final Comparator<Task> BY_STRING = new Comparator<Task>() {
+        @Override
+        public int compare(Task o1, Task o2) {
+            return o1.description.compareTo(o2.description);
+        }
+    };
+    protected static final Comparator<Task> BY_MARK = new Comparator<Task>() {
+        @Override
+        public int compare(Task o1, Task o2) {
+            if (o1.isDone == o2.isDone) {
+                return o1.description.compareTo(o2.description);
+            } else if (o1.isDone) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    };
+    protected static final Comparator<Task> BY_DATE = new Comparator<Task>() {
+        @Override
+        public int compare(Task o1, Task o2) {
+            if (o1 instanceof ToDo) {
+                ToDo todo = (ToDo) o1;
+                return todo.compareTo(o2);
+            } else if (o1 instanceof Deadline) {
+                Deadline deadline = (Deadline) o1;
+                return deadline.compareTo(o2);
+            } else if (o1 instanceof Event) {
+                Event event = (Event) o1;
+                return event.compareTo(o2);
+            } else {
+                return 0;
+            }
+        }
+    };
+
     protected String description;
     protected boolean isDone;
 
@@ -38,6 +75,15 @@ public class Task {
      */
     public void markUndone() {
         this.isDone = false;
+    }
+
+    /**
+     * Compares this task instance with another (to be Overridden)
+     * @param t another task
+     * @return 0
+     */
+    public int compareTo(Task t) {
+        return this.description.compareTo(t.description);
     }
 
     /**
