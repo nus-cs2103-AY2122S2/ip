@@ -1,11 +1,9 @@
 package duke;
 
-import java.lang.StringBuilder;
-
 import java.util.ArrayList;
 
 /**
- * Represents a class that maintains an ArrayList<Task> records using a variety of methods, that is created
+ * Represents a class that maintains an ArrayList records using a variety of methods, that is created
  * at the beginning of each session of Duke.
  */
 public class DukeHistory {
@@ -16,7 +14,7 @@ public class DukeHistory {
 
     /**
      * A method that, when called, attempts to initialize a ToDos task using the inputted description and adds it to the
-     * ArrayList<Task> records.
+     * ArrayList records.
      *
      * @param description A String description interpreted by Commands.todo().
      */
@@ -36,7 +34,7 @@ public class DukeHistory {
      * hard drive.
      *
      * It initializes a ToDos task using the mark and description found and adds it to
-     * the current instance of ArrayList<Task> records.
+     * the current instance of ArrayList records.
      *
      * @param mark An integer indicating whether the task is done or not.
      * @param description A String representing the description of the task.
@@ -48,7 +46,7 @@ public class DukeHistory {
 
     /**
      * A method that, when called, attempts to initialize a Deadline task using
-     * the inputted description, date and time and adds it to the ArrayList<Task> records.
+     * the inputted description, date and time and adds it to the ArrayList records.
      *
      * @param description A String description interpreted by Commands.deadline().
      * @param date A String date interpreted by Commands.convertToDukeDate().
@@ -70,7 +68,7 @@ public class DukeHistory {
      * hard drive.
      *
      * It initializes a Deadline task using the mark, description, date and time found and
-     * adds it to the current instance of ArrayList<Task> records.
+     * adds it to the current instance of ArrayList records.
      *
      * @param mark An integer indicating whether the task is done or not
      * @param description A String representing the description of the task.
@@ -84,7 +82,7 @@ public class DukeHistory {
 
     /**
      * A method that, when called, attempts to initialize an Event task using
-     * the inputted description, date and time and adds it to the ArrayList<Task> records.
+     * the inputted description, date and time and adds it to the ArrayList records.
      *
      * @param description A String description interpreted by Commands.event().
      * @param date A String date interpreted by Commands.convertToDukeDate().
@@ -106,7 +104,7 @@ public class DukeHistory {
      * hard drive.
      *
      * It initializes an Event task using the mark, description, date and time found
-     * and adds it to the current instance of ArrayList<Task> records.
+     * and adds it to the current instance of ArrayList records.
      *
      * @param mark An integer indicating whether the task is done or not.
      * @param description A String representing the description of the task.
@@ -120,9 +118,9 @@ public class DukeHistory {
 
     /**
      * A method that, when called, builds a String containing all the tasks stored
-     * in the current instance of ArrayList<Task> records.
+     * in the current instance of ArrayList records.
      *
-     * @return A String containing all the tasks stored in the current instance of ArrayList<Task> records.
+     * @return A String containing all the tasks stored in the current instance of ArrayList records.
      */
     public String printAll() {
         int count = 1;
@@ -153,14 +151,14 @@ public class DukeHistory {
      * Returns the task corresponding to the inputted entry index.
      *
      * @param index An integer indicating the desired entry to return.
-     * @return A Task stored in the current instance of ArrayList<Task> records.
+     * @return A Task stored in the current instance of ArrayList records.
      */
     public Task getTask(int index) {
         return records.get(index);
     }
 
     /**
-     * A method that, when called, deletes the corresponding entry index in ArrayList<Task> records.
+     * A method that, when called, deletes the corresponding entry index in ArrayList records.
      *
      * @param index An integer indicating the desired entry to delete.
      */
@@ -194,7 +192,7 @@ public class DukeHistory {
      * It will construct a String containing all the tasks in records, appropriately formatted by the getFormattedText()
      * methods of their respective class.
      *
-     * @return A String containing all the properly formatted tasks found in ArrayList<Task> records.
+     * @return A String containing all the properly formatted tasks found in ArrayList records.
      */
     String formatRecords() {
         StringBuilder s = new StringBuilder();
@@ -216,16 +214,16 @@ public class DukeHistory {
     }
 
     /**
-     * Returns the size of the current instance of ArrayList<Task> records.
+     * Returns the size of the current instance of ArrayList records.
      *
-     * @return An integer representing the size of ArrayList<Task> records.
+     * @return An integer representing the size of ArrayList records.
      */
     public int getSize() {
         return records.size();
     }
 
     /**
-     * A method that, when called, looks through all the tasks in the current instance of ArrayList<Task> records
+     * A method that, when called, looks through all the tasks in the current instance of ArrayList records
      * and find all the tasks whose description contains the inputted phrase.
      *
      * It then returns a constructed String containing a list of all the identified tasks.

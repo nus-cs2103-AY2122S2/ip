@@ -49,7 +49,7 @@ public class DukeUi {
     }
 
     /**
-     * A method that prints an error message when arguments are passed to commands that do not require them.
+     * A method that prints an error message when arguments are passed to command that do not require them.
      */
     public void printFoundArgumentError() {
         String err = "_______________________________________________________\n"
@@ -91,24 +91,36 @@ public class DukeUi {
      * @param keyword A String representing the specific command used.
      */
     public void printMissingDateTimeArgumentError(String keyword) {
-        String str;
         switch (keyword) {
-        case "deadline":
-            str = "Check if you have typed '/by' to indicate the time frame!\n"
-                    + "e.g. deadline return book /by Sunday 7pm\n";
-        case "event":
-            str = "Check if you have typed '/at' to indicate the time frame!\n"
-                    + "e.g. event project meeting /at 20/2/2022 1000H-1200H\n";
-
-        default:
-            str = "";
+        case "deadline": {
+            String err = "_______________________________________________________\n"
+                    + "* Time frame not detected *\n"
+                    + "Please provide a time frame for your " + keyword + "!\n"
+                    + "Check if you have typed '/by' to indicate the time frame!\n"
+                    + "e.g. deadline return book /by Sunday 7pm\n"
+                    + "_______________________________________________________\n";
+            System.out.println(err);
+            break;
         }
-        String err = "_______________________________________________________\n"
-                + "* Time frame not detected *\n"
-                + "Please provide a time frame for your " + keyword + "!\n"
-                + str
-                + "_______________________________________________________\n";
-        System.out.println(err);
+        case "event": {
+            String err = "_______________________________________________________\n"
+                    + "* Time frame not detected *\n"
+                    + "Please provide a time frame for your " + keyword + "!\n"
+                    + "Check if you have typed '/at' to indicate the time frame!\n"
+                    + "e.g. event project meeting /at 20/2/2022 1000H-1200H\n"
+                    + "_______________________________________________________\n";
+            System.out.println(err);
+            break;
+        }
+        default:
+            String err = "_______________________________________________________\n"
+                    + "* Time frame not detected *\n"
+                    + "Please provide a time frame for your " + keyword + "!\n"
+                    + "_______________________________________________________\n";
+            System.out.println(err);
+            break;
+        }
+
     }
 
     /**

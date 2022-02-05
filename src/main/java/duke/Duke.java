@@ -1,10 +1,12 @@
 package duke;
 
 import java.io.IOException;
-
 import java.util.MissingFormatArgumentException;
 import java.util.Scanner;
 
+/**
+ * Represents the Duke class that serves as the Main program for DukeLCH.
+ */
 public class Duke {
 
     private Commands cmd;
@@ -12,6 +14,11 @@ public class Duke {
     private DukeStorage storage;
     private DukeHistory history;
 
+    /**
+     * Constructor for Duke class that takes in a filePath to load data from the users local hard disk.
+     *
+     * @param filePath A String representing a given filePath.
+     */
     public Duke(String filePath) {
         cmd = new Commands();
         ui = new DukeUi();
@@ -27,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method that starts the Duke Main Program.
+     */
     public void run() {
         ui.printGreeting();
         Scanner io = new Scanner(System.in); // Scanner object created

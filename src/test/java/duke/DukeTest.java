@@ -1,8 +1,7 @@
 package duke;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,16 +11,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Represents a class meant for Unit Testing Duke.
  */
 public class DukeTest {
 
-    static DukeStorage dummyStorage = new DukeStorage();
-    DukeHistory dummyHistory = new DukeHistory();
-    Commands dummyCmd = new Commands();
+    private static DukeStorage dummyStorage = new DukeStorage();
+    private DukeHistory dummyHistory = new DukeHistory();
+    private Commands dummyCmd = new Commands();
 
     @BeforeAll
     public static void setUp() {
@@ -54,9 +55,9 @@ public class DukeTest {
                     .append("E>0>Team Meeting>Sunday>10am-12pm\n");
             fw.close();
             dummyStorage.restore(dummyHistory);
-            assertEquals(3
-                    , dummyHistory.getSize()
-                    , "restore SUCCEEDED in loading data into dummyHistory\n");
+            assertEquals(3,
+                    dummyHistory.getSize(),
+                    "restore SUCCEEDED in loading data into dummyHistory\n");
         } catch (IOException e) {
             fail("restore FAILED to locate, edit and read from dummyTest.txt\n");
         }

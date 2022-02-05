@@ -3,11 +3,9 @@ package duke;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Date;
 
 /**
@@ -264,7 +262,7 @@ public class Commands {
      * @param index An integer indicating the desired entry to delete.
      * @param history An instance of DukeHistory
      */
-    public void delete(int index, DukeHistory history)  {
+    public void delete(int index, DukeHistory history) {
         if (index < 0 || index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
