@@ -22,6 +22,12 @@ public final class DateTimeParser {
     public static final InvalidInputException INVALID_DATE_TIME_FORMAT =
             new InvalidInputException("The date/time format is wrong! Please enter in this format: yyyy-mm-dd hh:mm");
 
+    /** The indexes for a properly formatted date-time string input. Corresponds to yyyy-mm-dd hh:mm. */
+    private static final int INDEX_DASH_ONE = 4;
+    private static final int INDEX_DASH_TWO = 7;
+    private static final int INDEX_SPACE = 10;
+    private static final int INDEX_COLON = 13;
+
     /**
      * Parses a string input in the form yyyy-mm-dd hh:mm, where dd is the day, mm is the month,
      * yyyy is the year and hh:mm is the 24 hour time, to produce a LocalDateTime object
@@ -73,69 +79,115 @@ public final class DateTimeParser {
      * @throws InvalidInputException when a given format is wrong.
      */
     public static boolean checkValidFormat(String input) throws InvalidInputException {
-        if (input.length() != 16) {
+        boolean isCorrectSeparators = checkSeparatorsAndDigits(input);
+        String[] split = input.split(" ", 2);
+        assert split.length == 2; // [date, time]
+        boolean isValidDate = checkValidDate(split[0]);
+        boolean isValidTime = checkValidTime(split[1]);
+        return isCorrectSeparators && isValidDate && isValidTime;
+    }
+
+    /**
+     * Checks if the separators and digits of the input are correct for the DateTimeParser::parse method.
+     *
+     * @param dateTime the input date and time, of the format yyyy-mm-dd hh:mm.
+     * @return true when the given input has the right separators and are digits.
+     * @throws InvalidInputException when the input has something wrong with separators and digits.
+     */
+    private static boolean checkSeparatorsAndDigits(String dateTime) throws InvalidInputException {
+        if (dateTime.length() != 16) {
             throw INVALID_DATE_TIME_FORMAT;
         }
-        // check for separators and numbers
-        // 0123456789012345
-        // yyyy-mm-dd xx:xx
-        // if wrong format, return false
-        // Any "magic numbers" seen from this point onwards refer to the indexes of the specific
-        // string to check, as shown above in line 80.
-        for (int i = 0; i < input.length(); i++) {
-            if (i == 4 || i == 7) {
-                if (input.charAt(i) != '-') {
+        for (int i = 0; i < dateTime.length(); i++) {
+            if (i == INDEX_DASH_ONE || i == INDEX_DASH_TWO) {
+                if (dateTime.charAt(i) != '-') {
                     throw INVALID_DATE_TIME_FORMAT;
                 }
-            } else if (i == 10) {
-                if (input.charAt(10) != ' ') {
+            } else if (i == INDEX_SPACE) {
+                if (dateTime.charAt(10) != ' ') {
                     throw INVALID_DATE_TIME_FORMAT;
                 }
-            } else if (i == 13) {
-                if (input.charAt(13) != ':') {
+            } else if (i == INDEX_COLON) {
+                if (dateTime.charAt(13) != ':') {
                     throw INVALID_DATE_TIME_FORMAT;
                 }
             } else { // for non divider indexes
-                if (!Character.isDigit(input.charAt(i))) {
+                if (!Character.isDigit(dateTime.charAt(i))) {
                     throw INVALID_DATE_TIME_FORMAT;
                 }
             }
         }
+        return true;
+    }
 
-        // check valid numbers for months and days
-        // if invalid, throw Invalid Date Exception.
-        int monthNum = Integer.parseInt(input.substring(5, 7));
-        if (monthNum < 1 || monthNum > 12) {
-            throw new InvalidDateException(String.format("There is no %d-th month!", monthNum));
+    /**
+     * Checks if the given input date is a valid date. If the input is invalid, an InvalidDateException will
+     * be thrown, with an appropriate message.
+     *
+     * @param date the date, in the form of yyyy-mm-dd.
+     * @return true when the given input is valid.
+     * @throws InvalidDateException when the given input is invalid.
+     */
+    private static boolean checkValidDate(String date) throws InvalidDateException {
+        String[] split = date.split("-", 3);
+        assert split.length == 3;
+
+        int years = Integer.parseInt(split[0]);
+        int months = Integer.parseInt(split[1]);
+        int days = Integer.parseInt(split[2]);
+
+        boolean isLeapYear = Year.of(years).isLeap();
+        boolean isValidMonths = months > 0 && months <= 12;
+        boolean isValidDays = days > 0 && days <= 31;
+        boolean isFeb29 = months == 2 && days == 29;
+
+        if (isLeapYear && isFeb29) { // special case to deal with Feb29 on leap years
+            return true;
         }
-        Month month = Month.of(monthNum);
-        Year year = Year.of(Integer.parseInt(input.substring(0, 4)));
-        int dayNum = Integer.parseInt(input.substring(8, 10));
-        if (dayNum < 1 || dayNum > 31) {
-            throw new InvalidDateException(String.format("There is no %d-th day!", dayNum));
+        if (!isLeapYear && isFeb29) {
+            throw NotLeapYearException.get(years);
         }
-        if (!year.isLeap() && monthNum == 2) { // leap year
-            if (dayNum > month.minLength()) {
-                // throws not leap year exception
-                throw NotLeapYearException.get(year.toString());
-            }
-        } else {
-            if (dayNum > month.maxLength()) {
-                // throws invalid date exception
-                throw new InvalidDateException(
-                        String.format("%s does not have a %d-th day!", month, dayNum));
-            }
+        if (!isValidMonths) {
+            throw new InvalidDateException(String.format("There is no %d-th month!", months));
+        }
+        if (!isValidDays) {
+            throw new InvalidDateException(String.format("There is no %d-th day!", days));
         }
 
-        // check valid numbers for hours and min
-        int hours = Integer.parseInt(input.substring(11, 13));
-        int mins = Integer.parseInt((input.substring(14, 16)));
-        boolean isValidHour = hours >= 0 && hours < 24;
-        boolean isValidMin = mins >= 0 && mins < 60;
-        if (!isValidHour || !isValidMin) {
-            throw new InvalidTimeException(
-                    String.format("There is no %d-th hour, %d-th minute!", hours, mins));
+        Month monthObject = Month.of(months);
+        boolean isValidDayGivenMonth = monthObject.minLength() >= days;
+
+        if (!isValidDayGivenMonth) {
+            throw new InvalidDateException(String.format("%s does not have a %d-th day!", monthObject, days));
         }
         return true;
     }
+
+    /**
+     * Checks if the given input time is a valid time. If the input is invalid, an InvalidDateException will
+     * be thrown, with an appropriate message.
+     *
+     * @param time the time, in the form of hh:mm
+     * @return true when the given input is valid.
+     * @throws InvalidTimeException when the given input is invalid.
+     */
+    private static boolean checkValidTime(String time) throws InvalidTimeException {
+        String[] split = time.split(":", 2);
+        assert split.length == 2;
+
+        int hours = Integer.parseInt(split[0]);
+        int mins = Integer.parseInt(split[1]);
+
+        boolean isValidHours = hours >= 0 && hours < 24;
+        boolean isValidMins = mins >= 0 && mins < 60;
+
+        if (!isValidHours) {
+            throw new InvalidTimeException(String.format("There is no %d-th hour!", hours));
+        }
+        if (!isValidMins) {
+            throw new InvalidTimeException(String.format("There is no %d-th minute!", mins));
+        }
+        return true;
+    }
+
 }

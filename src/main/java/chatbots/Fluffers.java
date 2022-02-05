@@ -17,7 +17,6 @@ import tasks.TaskList;
  * @author Ong Han Yang
  */
 public class Fluffers extends TaskManagerChatbot {
-
     /** Name of the saved file */
     private String fileName = "";
 
@@ -123,13 +122,15 @@ public class Fluffers extends TaskManagerChatbot {
         if (!this.isAwake && !input.startsWith("hi")) {
             return "Fluffers is asleep... (Type \"hi\" to wake her up!)";
         }
+
         Instruction inst;
         try {
             inst = Instruction.of(input);
         } catch (InvalidInputException e) {
             return e.getMessage();
         }
-        // check for special inst
+
+        // check for special instructions
         if (inst instanceof ExitInst) {
             this.isAwake = false;
             return farewell();
@@ -144,9 +145,11 @@ public class Fluffers extends TaskManagerChatbot {
         }
         if (inst instanceof DisplayListInst || inst instanceof FindInst) {
             String output = super.instHandler.doInstruction(inst);
+
             if (inst instanceof DisplayListInst && output.length() == 0) {
                 return this.speak("Theres nothing in the list");
             }
+
             if (inst instanceof FindInst) {
                 if (output.length() == 0) {
                     return this.speak("Sorry, I found nothing...");

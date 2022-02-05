@@ -106,7 +106,7 @@ public class DateTimeParserTest {
             assertTrue(DateTimeParser.checkValidFormat("1999-09-01 16:60"));
             fail(); // should not reach here
         } catch (InvalidInputException e) {
-            assertEquals("There is no 16-th hour, 60-th minute!", e.getMessage());
+            assertEquals("There is no 60-th minute!", e.getMessage());
         }
     }
 
@@ -119,7 +119,7 @@ public class DateTimeParserTest {
             assertTrue(DateTimeParser.checkValidFormat("1999-09-01 24:45"));
             fail(); // should not reach here
         } catch (InvalidInputException e) {
-            assertEquals("There is no 24-th hour, 45-th minute!", e.getMessage());
+            assertEquals("There is no 24-th hour!", e.getMessage());
         }
     }
 

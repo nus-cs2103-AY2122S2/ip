@@ -18,10 +18,10 @@ public class NotLeapYearException extends InvalidDateException {
     /**
      * Produces a Not Leap Year exception with a given year input.
      *
-     * @param nonLeapYear the 4-digit year as an input to make an exception.
+     * @param nonLeapYear the year as an input to make an exception.
      * @return the exception that there is no leap year on the given year.
      */
-    public static NotLeapYearException get(String nonLeapYear) {
+    public static NotLeapYearException get(int nonLeapYear) {
         return new NotLeapYearException(
                 String.format("%s is not a leap year! There is no Feb-29", nonLeapYear));
     }
