@@ -1,3 +1,4 @@
+import myPackage.Parser;
 import myPackage.Storage;
 import myPackage.TaskList;
 
@@ -12,7 +13,7 @@ public class Duke {
         Storage.load("data/duke.txt");
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         int listCount = TaskList.list.size();
-
+        Parser.parseCommand();
         //String[] list = new String[100];
 
     }

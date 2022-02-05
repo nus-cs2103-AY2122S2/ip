@@ -2,12 +2,14 @@ package myPackage;
 
 import exceptions.DukeException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static myPackage.TaskList.listCount;
 
 public class Parser {
-    static void parseCommand() {
+    public static void parseCommand() {
         while (true) {
             Scanner input = new Scanner(System.in);
             String userInput = input.nextLine();
@@ -51,6 +53,28 @@ public class Parser {
                     Storage.save();
                     break;
                 }
+                case "find": {
+                    if (lenSplit > 1) {
+                        System.out.println("FINDING...");
+                        List<Task> l = new ArrayList<>();
+                        for (Task task : TaskList.list) {
+                            if (task.getDescription().contains(userInputSplit[1])) {
+                                l.add(task);
+                            }
+                        }
+                        if (!l.isEmpty()) {
+                            System.out.println("THESE ARE YOUR TASKS \n");
+                            int printCount = 1;
+                            for (Task t : l) {
+                                System.out.println(printCount + ". " + t.getFullDescription());
+                                printCount++;
+                            }
+                        } else {
+                            System.out.println("There doesnt seem to be any tasks found...");
+                        }
+                    }
+                }
+
                 default: {
                     switch (keyword) {
                         case "todo": {
