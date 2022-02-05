@@ -23,7 +23,6 @@ public class DeleteCommand extends Command {
         }
         Task task = taskList.getTask(taskNumber);
         taskList.delete(taskNumber);
-        assert !taskList.getTask(taskNumber).equals(task) : "Delete command failed to delete task!";
         return ui.showDeleteTask(task, taskList);
     }
 
