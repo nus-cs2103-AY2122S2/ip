@@ -25,6 +25,11 @@ public enum Handlers {
     Todo("todo"),
     Unmark("unmark");
 
+    // Only date is provided in input array
+    private static final int DATE = 3;
+    // Both date and time is provided in input array
+    private static final int DATEANDTIME = 4;
+
     public final String label;
 
     /**
@@ -96,10 +101,12 @@ public enum Handlers {
             Deadline task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
-            if (time.length == 3) {
+            if (time.length == DATE) {
                 task = new Deadline(false, input.substring(9, index - 1), date, "");
-            } else {
+            } else if (time.length == DATEANDTIME) {
                 task = new Deadline(false, input.substring(9, index - 1), date, time[3]);
+            } else {
+                throw new DukeException("Time provided in incorrect format.");
             }
             list.addTask(task);
             FileHandler.writeToFile(list);
@@ -144,10 +151,12 @@ public enum Handlers {
             Event task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
-            if (time.length == 3) {
+            if (time.length == DATE) {
                 task = new Event(false, input.substring(6, index - 1), date, "");
-            } else {
+            } else if (time.length == DATEANDTIME) {
                 task = new Event(false, input.substring(6, index - 1), date, time[3]);
+            } else {
+                throw new DukeException("Time provided in incorrect format.");
             }
             list.addTask(task);
             FileHandler.writeToFile(list);
