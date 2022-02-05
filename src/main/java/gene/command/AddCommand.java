@@ -61,7 +61,7 @@ public class AddCommand extends Command{
     }
 
     /**
-     * The method to distinguish this command from an exit command
+     * The method to distinguish this command from an exit command.
      *
      * @return must return false
      */
