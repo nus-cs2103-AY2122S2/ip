@@ -1,6 +1,7 @@
 package juke.task;
 
-import juke.DateTimeHandler;
+import juke.common.DateTimeHandler;
+import juke.exception.JukeParseException;
 
 /**
  * Task with a description and a deadline.
@@ -17,7 +18,7 @@ public class Deadline extends Task {
      * @param description
      * @param time
      */
-    public Deadline(String description, String time) {
+    public Deadline(String description, String time) throws JukeParseException {
         super(description);
         this.date = new DateTimeHandler(time);
     }

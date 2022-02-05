@@ -1,13 +1,12 @@
 package juke.command;
 
-import juke.exception.JukeMissingArgumentException;
 import juke.exception.JukeInvalidParameterException;
+import juke.exception.JukeMissingArgumentException;
+import juke.exception.JukeParseException;
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.TaskType;
 import juke.task.Todo;
-
-import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
     private TaskType type;
@@ -99,8 +98,7 @@ public class AddCommand extends Command {
             }
             this.result = Result.success(String.format("New %s added: %s.",
                     this.type.getCommandName(), this.getDefaultArgument()));
-        } catch (DateTimeParseException e) {
-            // Comment to remember
+        } catch (JukeParseException e) {
             this.result = Result.error(e);
             return this;
         }

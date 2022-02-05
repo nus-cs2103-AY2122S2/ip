@@ -1,25 +1,22 @@
-package juke;
+package juke.common;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import juke.exception.JukeParseException;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 public class DateTimeHandler {
     private LocalDateTime dateTime;
     
-    public DateTimeHandler(String string) {
+    public DateTimeHandler(String string) throws JukeParseException {
         this.parse(string);
     }
     
-    private void parse(String string) {
+    private void parse(String string) throws JukeParseException {
         if (string == null || string.isEmpty()) {
-            this.dateTime = null;
-            return;
+            throw new JukeParseException("date and time");
         } else {
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
@@ -28,7 +25,7 @@ public class DateTimeHandler {
             try {
                 this.dateTime = LocalDateTime.parse(string, formatter);
             } catch (DateTimeParseException e) {
-                this.dateTime = null;
+                throw new JukeParseException("date and time");
             }
         }
     }

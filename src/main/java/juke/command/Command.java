@@ -2,6 +2,7 @@ package juke.command;
 
 import juke.Juke;
 import juke.exception.JukeException;
+import juke.exception.JukeInvalidParameterException;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -84,11 +85,11 @@ public abstract class Command {
     public String getArgument(String param) {
         if (this.hasParameter(param)) {
             return this.paramArgs.get(param).orElseGet(() -> {
-                this.result = Result.error(new JukeException("Missing argument for parameter " + param));
+                this.result = Result.error(new JukeInvalidParameterException(param));
                 return "";
             });
         } else {
-            this.result = Result.error(new JukeException("Missing parameter " + param));
+            this.result = Result.error(new JukeInvalidParameterException(param));
             return "";
         }
     }
@@ -122,7 +123,7 @@ public abstract class Command {
      */
     public String getDefaultArgument() {
         return this.paramArgs.get(DEFAULT_PARAMETER).orElseGet(() -> {
-            this.result = Result.error(new JukeException("Missing default argument"));
+            this.result = Result.error(new JukeException("Missing default argument."));
             return "";
         });
     }
@@ -136,7 +137,6 @@ public abstract class Command {
      */
     public Command addParameter(String param, String args) {
         Optional<String> option = Optional.empty();
-        // Short circuit evaluation right here
         if (args != null && !args.isBlank()) {
             option = Optional.of(args);
         }
