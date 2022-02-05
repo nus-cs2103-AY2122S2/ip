@@ -6,6 +6,7 @@ import duke.command.ExitCommand;
 import duke.ui.TextUi;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 
 public class Duke {
     // Global Variables
@@ -29,8 +30,21 @@ public class Duke {
         }
     }
 
+    public Duke() {
+        fh = new Storage(FILENAME);
+        taskList = new TaskList(fh.importTasks());
+        parser = new Parser();
+        parser.setTaskList(taskList);
+    }
+
     public String getResponse(String string) {
-        return "I got " + string;
+        Command parsedCommand = parser.parseCommand(string);
+        CommandResult runCommand = parsedCommand.runCommand();
+
+        if (ExitCommand.isExitCommand(parsedCommand)) { // Checking for exit
+            Platform.exit();
+        }
+        return runCommand.toString();
     }
 
     /**
@@ -41,11 +55,6 @@ public class Duke {
     public void run_cmd() {
         // Setting up the goods
         ui = new TextUi();
-        fh = new Storage(FILENAME);
-        taskList = new TaskList(fh.importTasks());
-        parser = new Parser();
-        parser.setTaskList(taskList);
-
         ui.printIntro();
 
         // Starting input loop
