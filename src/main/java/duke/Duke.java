@@ -49,6 +49,10 @@ public class Duke {
         userInterface.byeMessage();
     }
 
+    protected String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
     /**
      * Executes the running of the application.
      *
