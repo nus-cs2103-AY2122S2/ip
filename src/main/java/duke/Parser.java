@@ -50,6 +50,7 @@ public class Parser {
             case MARK:
                 return new Mark(taskId);
             default:
+                assert false: commandType;
                 throw new DukeException("Invalid Command Type!");
             }
 
@@ -99,11 +100,19 @@ public class Parser {
             String dateTime = "";
 
             if (taskDetails.contains("/by")) {
-                description = taskDetails.split("/by", 2)[0];
-                date = taskDetails.split("/by", 2)[1].substring(1);
+                try {
+                    description = taskDetails.split("/by", 2)[0];
+                    date = taskDetails.split("/by", 2)[1].substring(1);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Missing deadline date or description!");
+                }
             } else if (taskDetails.contains("/at")) {
-                description = taskDetails.split("/at", 2)[0];
-                dateTime = taskDetails.split("/at", 2)[1].substring(1);
+                try {
+                    description = taskDetails.split("/at", 2)[0];
+                    dateTime = taskDetails.split("/at", 2)[1].substring(1);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Missing event date or description!");
+                }
             }
 
             switch (commandType) {
@@ -122,10 +131,12 @@ public class Parser {
             case EVENT:
                 return new AddEvent(description, dateTime);
             default:
+                assert false: commandType.toString();
                 throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
         }
 
+        assert false;
         return new Command();
     }
 }
