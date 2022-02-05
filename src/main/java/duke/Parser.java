@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,6 +66,13 @@ public class Parser {
             if (desc.equals("")) {
                 throw new EmptyDescException(Ui.getBorder() + "Todo description cannot be empty.\n" + Ui.getBorder());
             }
+            ArrayList<Task> tl = TaskList.getTasks();
+            for (Task currTask : tl) {
+                if (newTodo.toString().equals(currTask.toString())) {
+                    System.out.println("Duplicate task, not added.");
+                    return;
+                }
+            }
             TaskList.getTasks().add(newTodo);
             System.out.println(Ui.successMessage(newTodo));
             Storage.saveToFile();
@@ -84,6 +92,13 @@ public class Parser {
             }
             String dateTime = descDateTime[1].trim();
             Event newEvent = new Event(desc, dateTime);
+            ArrayList<Task> tl = TaskList.getTasks();
+            for (Task currTask : tl) {
+                if (newEvent.toString().equals(currTask.toString())) {
+                    System.out.println("Duplicate task, not added.");
+                    return;
+                }
+            }
             TaskList.getTasks().add(newEvent);
             System.out.println(Ui.successMessage(newEvent));
             Storage.saveToFile();
@@ -106,6 +121,13 @@ public class Parser {
             }
             String dateTime = descTimePair[1].trim();
             Deadline newDeadline = new Deadline(desc, dateTime);
+            ArrayList<Task> tl = TaskList.getTasks();
+            for (Task currTask : tl) {
+                if (newDeadline.toString().equals(currTask.toString())) {
+                    System.out.println("Duplicate task, not added.");
+                    return;
+                }
+            }
             TaskList.getTasks().add(newDeadline);
             System.out.println(Ui.successMessage(newDeadline));
             Storage.saveToFile();
