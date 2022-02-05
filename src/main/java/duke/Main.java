@@ -19,6 +19,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<duke.gui.MainWindow>getController().setDuke(duke);
+            fxmlLoader.<duke.gui.MainWindow>getController().setStage(stage);
             stage.show();
             stage.setTitle("Duke");
         } catch (IOException e) {
