@@ -6,6 +6,7 @@ package duke;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class DukeException extends Exception {
+    protected static final String DID_NOT_UNDERSTAND = "Pardon me, but I did not understand what you said.";
 
     /**
      * Constructor of DukeException class
