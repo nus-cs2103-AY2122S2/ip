@@ -12,30 +12,26 @@ public class Parser {
                 break;
             case("mark"):
                 int numToMark = Integer.parseInt(array[1]);
-<<<<<<< HEAD
-                if (numToMark > taskList.size() || numToMark < 1) {
+                if (numToMark > taskList.getTaskListSize() || numToMark < 1) {
                     throw new InvalidInputException("\n" + Ui.BLANK_LINE
-                        + "    Please select a valid task number to mark!\n" + Ui.BLANK_LINE);
-=======
+                            + "    Please select a valid task number to mark!\n" + Ui.BLANK_LINE);
+                }
                 if (numToMark > taskList.getTaskListSize() || numToMark < 1) {
                     throw new InvalidInputException("\n" + Printer.BLANK_LINE
                         + "    Please select a valid task number to mark!\n" + Printer.BLANK_LINE);
->>>>>>> branch-Level-8
                 }
                 Ui.mark(numToMark, taskList);
                 Storage.saveToFile(taskList);
                 break;
             case("unmark"):
                 int numToUnmark = Integer.parseInt(array[1]);
-<<<<<<< HEAD
-                if (numToUnmark > taskList.size() || numToUnmark < 1) {
+                if (numToUnmark > taskList.getTaskListSize() || numToUnmark < 1) {
                     throw new InvalidInputException("\n" + Ui.BLANK_LINE
                             + "    Please select a valid task number to unmark!\n" + Ui.BLANK_LINE);
-=======
+                }
                 if (numToUnmark > taskList.getTaskListSize() || numToUnmark < 1) {
                     throw new InvalidInputException("\n" + Printer.BLANK_LINE
                             + "    Please select a valid task number to unmark!\n" + Printer.BLANK_LINE);
->>>>>>> branch-Level-8
                 }
                 Ui.unmark(numToUnmark, taskList);
                 Storage.saveToFile(taskList);
@@ -107,15 +103,13 @@ public class Parser {
                 break;
             case("delete"):
                 int numToDelete = Integer.parseInt(array[1]);
-<<<<<<< HEAD
-                if (numToDelete > taskList.size() || numToDelete < 0) {
+                if (numToDelete > taskList.getTaskListSize() || numToDelete < 0) {
                     throw new InvalidInputException("\n" + Ui.BLANK_LINE
                             + "    Please select a valid task number to delete!\n" + Ui.BLANK_LINE);
-=======
+                }
                 if (numToDelete > taskList.getTaskListSize() || numToDelete < 0) {
                     throw new InvalidInputException("\n" + Printer.BLANK_LINE
                             + "    Please select a valid task number to delete!\n" + Printer.BLANK_LINE);
->>>>>>> branch-Level-8
                 }
                 Ui.delete(numToDelete, taskList);
                 Storage.saveToFile(taskList);
