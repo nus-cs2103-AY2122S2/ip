@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String result = taskList.findTasksWithKeyword(this.keyword);
-        ui.printOutput(result);
+        ui.setResponse(result);
     }
 
     /**

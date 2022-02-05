@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskDeleted = taskList.delete(this.taskNum);
-            ui.printOutput("Okay, I've deleted this task:\n  " + ui.showIndent()
+            ui.setResponse("Okay, I've deleted this task:\n  " + ui.showIndent()
                     + taskDeleted + "\n" + ui.showIndent() + taskList.getListStatus());
             storage.saveToHardDisk(taskList);
         } else {

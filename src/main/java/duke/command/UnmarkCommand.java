@@ -33,7 +33,7 @@ public class UnmarkCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskUnmarked = taskList.unmark(this.taskNum);
-            ui.printOutput("Okay, I've marked this task as undone:\n      " + taskUnmarked);
+            ui.setResponse("Okay, I've marked this task as undone:\n      " + taskUnmarked);
             storage.saveToHardDisk(taskList);
         } else {
             throw new DukeException("Invalid task number. There are " + currentTotalTasks + " in the list.");
