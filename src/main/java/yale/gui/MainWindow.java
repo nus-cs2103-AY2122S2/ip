@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import yale.Yale;
 import yale.command.Ui;
-import yale.gui.DialogBox;
 
 /**
  * Controller for yale.gui.MainWindow. Provides the layout for the other controls.
@@ -30,9 +29,13 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image yaleImage = new Image(this.getClass().getResourceAsStream("/images/Yale.png"));
 
+    /**
+     * Initialise method
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Ui.welcomePrompt();
         dialogContainer.getChildren().add(
                 DialogBox.getYaleDialog(Ui.welcomePrompt(), yaleImage));
     }
@@ -56,7 +59,7 @@ public class MainWindow extends AnchorPane {
         );
         if (input.equals("bye")) {
             Platform.exit();
-            }
-        userInput.clear();
         }
+        userInput.clear();
+    }
 }
