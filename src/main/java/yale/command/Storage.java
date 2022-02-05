@@ -1,11 +1,13 @@
 package yale.command;
 
-import yale.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import yale.task.TaskList;
+
+
 
 /**
  * Class to deal with loading tasks

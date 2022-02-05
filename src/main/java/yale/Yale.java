@@ -1,11 +1,13 @@
 package yale;
 
+import java.util.Scanner;
+
 import yale.command.Parser;
 import yale.command.Storage;
 import yale.command.Ui;
 import yale.task.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * Represents a chatbot that tracks
@@ -31,7 +33,6 @@ public class Yale {
         parser = new Parser();
         storage = new Storage(FILE_PATH);
         try {
-            ui.welcomePrompt();
             String fileData = storage.loadFileContents();
             list = new TaskList();
             list.importIn(fileData);
