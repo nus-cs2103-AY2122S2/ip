@@ -1,7 +1,8 @@
-package duke;
-import duke.task.Task;
+package duke.main;
 
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * A class that stores a lot of tasks as one array

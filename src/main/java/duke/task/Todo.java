@@ -10,7 +10,7 @@ public class Todo extends Task {
     }
 
     public Todo(String description, boolean isDone) {
-        super(description,isDone);
+        super(description, isDone);
     }
 
     /**
@@ -20,7 +20,7 @@ public class Todo extends Task {
     @Override
     public String dataFormatOfTask() {
         String bool;
-        if(this.isDone) {
+        if (this.isDone) {
             bool = "1";
         } else {
             bool = "0";

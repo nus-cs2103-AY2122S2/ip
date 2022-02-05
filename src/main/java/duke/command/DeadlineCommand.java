@@ -1,14 +1,16 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import java.io.IOException;
+
 import duke.dukeexceptions.DeadlineException;
 import duke.dukeexceptions.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
-import java.io.IOException;
+
 
 public class DeadlineCommand extends Command {
 
@@ -33,7 +35,8 @@ public class DeadlineCommand extends Command {
         }
         String[] split1 = input.split("/by ");
         if (split1.length == 1) {
-            throw new DeadlineException("You need to tell me your deadline date\n e.g deadline <yourtask> /by <deadline date>");
+            throw new DeadlineException("You need to tell me your deadline date\n "
+                                                + "e.g deadline <yourtask> /by <deadline date>");
         }
         String deadlineDesription = split1[0].substring(9);
         String deadlineDate = split1[1];

@@ -1,13 +1,14 @@
 package duke.command;
 
+import java.io.IOException;
 
-import duke.*;
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.EventException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.io.IOException;
 
 public class EventCommand extends Command {
 

@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.dukeexceptions.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.dukeexceptions.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 
 public class FindCommand extends Command {
 
@@ -25,13 +25,13 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         String keywords = input.substring(5);
-        ArrayList<String> searched_taskList = new ArrayList<>();
+        ArrayList<String> searchedTaskList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(keywords)) {
-                searched_taskList.add((i + 1) + "." + taskList.get(i).toString());
+                searchedTaskList.add((i + 1) + "." + taskList.get(i).toString());
             }
         }
-        ui.showFoundTask(searched_taskList);
+        ui.showFoundTask(searchedTaskList);
 
     }
 }

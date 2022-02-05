@@ -1,13 +1,14 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.MarkException;
-import duke.Storage;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.task.Task;
-import duke.TaskList;
-import duke.Ui;
 
-import java.io.IOException;
 
 public class MarkCommand extends Command {
 

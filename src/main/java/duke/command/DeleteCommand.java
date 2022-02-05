@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.dukeexceptions.DeleteException;
 import duke.dukeexceptions.DukeException;
-import duke.Storage;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.task.Task;
-import duke.TaskList;
-import duke.Ui;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(String input) {
@@ -40,8 +40,7 @@ public class DeleteCommand extends Command {
             storage.saveFile(taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new DeleteException("This task does not exist, there are " + taskList.size() + " tasks now");
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DeleteException("format must be: delete <task number> , other format is not acceptable");
         }
     }

@@ -4,7 +4,7 @@ package duke.dukeexceptions;
 /**
  * Exception class handling deadline task exception
  */
-public class DeadlineException extends DukeException{
+public class DeadlineException extends DukeException {
     public DeadlineException(String errorMessage) {
         super(errorMessage);
     }

@@ -1,17 +1,17 @@
-package duke;
-
-import duke.task.Task;
+package duke.main;
 
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * User Interface class, print beautiful output to user
  */
 public class Ui {
-    private final String lines = "____________________________" +
-            "________________________________";
-    private final String endline = "___________________________" +
-            "_________________________________\n";
+    private final String lines = "____________________________"
+                                         + "________________________________";
+    private final String endline = "___________________________"
+                                           + "_________________________________\n";
 
     /**
      * constructor
@@ -30,6 +30,11 @@ public class Ui {
         System.out.println(endline);
     }
 
+    /**
+     * Show all current tasks.
+     *
+     * @param taskList current list of tasks
+     */
     public void showAllTasks(TaskList taskList) {
         System.out.println("Here are all your tasks:");
         for (int i = 0; i < taskList.size(); i++) {
@@ -78,7 +83,7 @@ public class Ui {
      * @param todo the task to be added
      * @param taskList current list of tasks
      */
-    public void showTodoTaskAdded(Task todo,TaskList taskList) {
+    public void showTodoTaskAdded(Task todo, TaskList taskList) {
         System.out.println("Got it, I have added a TODO task:");
         System.out.println(todo.toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -119,9 +124,13 @@ public class Ui {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Tells the user how to delete a task correctly.
+     *
+     */
     public void showWhichTaskIsBeingDeleted() {
-        System.out.println("Which task are you deleting? " +
-                                   "Insert a number like this: delete <task number>");
+        System.out.println("Which task are you deleting? "
+                                   + "Insert a number like this: delete <task number>");
     }
 
     /**
@@ -148,14 +157,14 @@ public class Ui {
 
     /**
      * Shows found task using find command
-     * @param searched_taskList founded task list, a string array
+     * @param searchedTaskList founded task list, a string array
      */
-    public void showFoundTask(ArrayList<String> searched_taskList) {
-        if (searched_taskList.size() == 0) {
+    public void showFoundTask(ArrayList<String> searchedTaskList) {
+        if (searchedTaskList.size() == 0) {
             System.out.println("There are no matching tasks in your list");
         } else {
             System.out.println("Here are the matching tasks in your list:");
-            for (String s : searched_taskList) {
+            for (String s : searchedTaskList) {
                 System.out.println(s);
             }
         }
