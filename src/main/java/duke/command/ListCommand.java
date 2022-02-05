@@ -9,12 +9,22 @@ import duke.function.Ui;
  */
 public class ListCommand extends Command {
     /**
+     * If tags should be printed.
+     */
+    private boolean printTags;
+    /**
      * Initializes the help command with the user input.
      *
      * @param fullCommand The user input.
      */
     public ListCommand(String fullCommand) {
         super(fullCommand);
+        String[] fullCommandSplit = fullCommand.split(" ");
+        if (fullCommandSplit.length > 1 && fullCommandSplit[1].equals("--tags")) {
+            this.printTags = true;
+        } else {
+            this.printTags = false;
+        }
     }
 
     /**
@@ -26,7 +36,11 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return tasks.toString(ui);
+        if (printTags) {
+            return tasks.toStringTags(ui);
+        } else {
+            return tasks.toString(ui);
+        }
     }
 
     /**

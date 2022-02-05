@@ -85,12 +85,18 @@ public class Ui {
         String output = "";
         output += ui.printReturn("These are the commands you can use:");
         output += ui.printReturn("  'list' to list out all your tasks");
+        output += ui.printReturn("  'list --tags' to list out all your tasks with their tags");
         output += ui.printReturn("  'todo <description>' to add a todo task");
-        output += ui.printReturn("  'deadline <description> /<preposition> <YYYY-MM-DD><HH:MM>' to add a task with a deadline");
-        output += ui.printReturn("  'event <description> /<preposition> <YYYY-MM-DD> <HH:MM>' to add an event with a date");
+        output += ui.printReturn(
+                "  'deadline <description> /<preposition> <YYYY-MM-DD><HH:MM>' to add a task with a deadline"
+        );
+        output += ui.printReturn(
+                "  'event <description> /<preposition> <YYYY-MM-DD> <HH:MM>' to add an event with a date"
+        );
         output += ui.printReturn("  'mark <task number>' to mark a task as done");
         output += ui.printReturn("  'unmark <task number>' to unmark a task as done");
         output += ui.printReturn("  'delete <task number>' to delete a task");
+        output += ui.printReturn("  'tag <task number> <tag name>' to tag a task");
         output += ui.printReturn("  'bye' to close your Duck app");
         return output;
     }

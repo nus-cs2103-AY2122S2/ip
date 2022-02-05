@@ -34,7 +34,7 @@ public class FindCommand extends Command {
             throw this.exception;
         }
         TaskList filteredTasks = tasks.filterByKeyword(this.keyword);
-        return filteredTasks.toString(ui);
+        return filteredTasks.toStringTags(ui);
     }
 
     @Override

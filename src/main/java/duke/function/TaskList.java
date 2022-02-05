@@ -2,6 +2,7 @@ package duke.function;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -61,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Returns string of tasks out with their index (1-based).
+     * Returns string of tasks with their index (1-based).
      *
      * @param ui
      */
@@ -80,6 +81,25 @@ public class TaskList {
     }
 
     /**
+     * Returns string of tasks with their index and tags (1-based).
+     *
+     * @param ui
+     */
+    public String toStringTags(Ui ui) {
+        if (tasks.size() == 0) {
+            return ui.printReturn("You currently do not have any tasks *quack*, please add some more");
+        } else {
+            String output = "";
+            output += ui.printReturn("These are your tasks:");
+            for (int i = 1; i <= this.getSize(); i++) {
+                Task task = this.getByNumber(i);
+                output += ui.printReturn(String.format("%d. %s (%s)", i, task.toString(), task.returnTags()));
+            }
+            return output;
+        }
+    }
+
+    /**
      * Returns a new TaskList after filtering tasks with provided keyword.
      *
      * @param keyword Provided keyword.
@@ -88,7 +108,18 @@ public class TaskList {
     public TaskList filterByKeyword(String keyword) {
         TaskList newTaskList = new TaskList();
         for (Task task : this.getTasks()) {
-            if (task.getName().toLowerCase().contains(keyword)) {
+            boolean nameContains = task
+                    .getName()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase());
+            boolean tagContains = task
+                    .getTags()
+                    .stream()
+                    .map((tag) -> tag.toLowerCase())
+                    .collect(Collectors.toList())
+                    .contains(keyword.toLowerCase());
+
+            if (nameContains || tagContains) {
                 newTaskList.add(task);
             }
         }
