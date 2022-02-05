@@ -21,6 +21,16 @@ public class Task {
                 : " ";
     }
 
+    public String toSave() {
+        int isDoneNumber;
+        if(isDone) {
+            isDoneNumber = 1;
+        } else {
+            isDoneNumber = 0;
+        }
+        return " | " + isDoneNumber + " | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
