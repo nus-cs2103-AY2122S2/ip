@@ -9,8 +9,8 @@ import task.Deadline;
 import task.TaskList;
 
 public class DeadlineCommand extends Command {
-    private String message;
-    private String time;
+    private final String message;
+    private final String time;
 
     /** Stores message and time for Deadline Task to be created */
     public DeadlineCommand(String message, String time) {

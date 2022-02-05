@@ -17,6 +17,9 @@ public class Storage {
      * @throws DukeException If there is a problem with creating the file.
      */
     public Storage() throws DukeException {
+        assert FILENAME.endsWith(".txt"); // must be text file
+        assert !PATH.endsWith("/"); // we add a / later, not needed for the new FILE method
+
         File directory = new File(PATH + "/");
         if (!directory.exists()) {
             boolean wasCreated = directory.mkdir();

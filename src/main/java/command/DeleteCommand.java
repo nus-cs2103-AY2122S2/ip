@@ -5,7 +5,7 @@ import storage.Storage;
 import task.TaskList;
 
 public class DeleteCommand extends Command {
-    private int serialNumber;
+    private final int serialNumber;
 
     public DeleteCommand(int serialNumber) {
         this.serialNumber = serialNumber;
@@ -21,9 +21,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) throws DukeException {
-        if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
+        if ( taskList.size() == 0) {
+            throw new DukeException("Sorry, there is nothing to delete in your todolist!");
+        } else if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
             throw new DukeException("Have you entered the correct number?");
         }
+        assert (serialNumber > 0 && serialNumber <= taskList.size());
+
         String taskDescription = taskList.get(this.serialNumber - 1).getDescription();
         taskList.delete(this.serialNumber);
         storage.writeToFile(taskList);
