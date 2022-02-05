@@ -88,9 +88,11 @@ public class Storage {
                     taskString += "T;";
                 } else if (task instanceof DeadlineTask) {
                     taskString += "D;";
-                } else if (task instanceof EventTask) {
+                } else {
+                    assert task instanceof EventTask;
                     taskString += "E;";
                 }
+
                 if (task.isMarked()) {
                     taskString += "X;";
                 } else {
@@ -103,7 +105,8 @@ public class Storage {
                     taskString += dTask.getPreposition();
                     taskString += ";";
                     taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
-                } else if (task instanceof EventTask) {
+                } else {
+                    assert task instanceof EventTask;
                     EventTask dTask = (EventTask) task;
                     taskString += ";";
                     taskString += dTask.getPreposition();
