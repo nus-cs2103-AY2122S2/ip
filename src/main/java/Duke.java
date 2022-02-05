@@ -1,4 +1,8 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import exception.DukeException;
 
@@ -17,7 +21,70 @@ public class Duke {
     public static String MARK_MESSAGE = "Power la Mr Bosssssss, mark alr bro!";
     public static String UNMARK_MESSAGE = "No probs bro, unmarked already!";
 
-    public static void main(String[] args) {
+    // reading from the duke.txt should only be done upon starting up the
+    // application
+    // and then updating everything to the duke.txt should only be done upon bye
+    // command --> wil convert the tasks arrayList
+    // to duke.txt appropriate data
+
+    /**
+     * Method to write to the duke.txt file.
+     * 
+     * @param filePath path of the file to write to
+     * @param addText  text we want to add to the file
+     */
+    private static void writeToFile(String filePath, String addText) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(addText);
+        fw.close();
+    }
+
+    /**
+     * Method to append to the end of the present file.
+     * 
+     * @param filePath path of the file to write to
+     * @param addText  text we want to add to the file
+     */
+    private static void appendToFile(String filePath, String addText) throws IOException {
+        // adding the true argument allows
+        // changes FileWriter to append mode
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(addText);
+        fw.close();
+    }
+
+    /**
+     * Using this method, we will delete the task identified on the linePos
+     * provided.
+     * 
+     * @param filePath - path to perform CRUD operation on
+     * @param linePos  - line number the task is on in duke.txt
+     * @throws IOException
+     */
+    private static void deleteFromFile(String filePath, int linePos) throws IOException {
+    }
+
+    /**
+     * Method to invoke when we want to edit the specified task.
+     * 
+     * @param filePath - path to perform CRUD operation on
+     * @param linePos  - line number the task is on, in duke.txt
+     * @throws IOException
+     */
+    private static void updateTask(String filePath, int linePos) throws IOException {
+        // this method will mostly be used to update the marked/unmarked status of the
+        // task, and reflect it in the duke.txt file
+    }
+
+    /**
+     * Will read the lines in duke.txt, and will add each task to the
+     * arrayList(tasks) in this file.
+     */
+    private static void refreshTasks() {
+
+    }
+
+    public static void main(String[] args) throws IOException, DukeException {
 
         // an array of tasks
         // Task[] list = new Task[100];
@@ -29,6 +96,33 @@ public class Duke {
         // takes in the incoming prompt
         Scanner sc = new Scanner(System.in);
 
+        // checks for the existence of data directory
+        // and the duke.txt file
+        File completeDirectory = new File("data/duke.txt");
+        File dataFolder = new File("data");
+        String dataPath = "data/duke.txt";
+
+        // Check if the data directory exists.
+        // Then create duke.txt if it doesnt.
+        // if the folder and file exits, then we read the messages in there,
+        // and update our tasks ArrayList.
+
+        if (!completeDirectory.exists()) {
+            if (!dataFolder.exists()) {
+                // neither the full path nor the Folder exits
+                // proceed to create the dataFolder first
+                dataFolder.mkdir();
+            }
+            // here we will create the duke.txt file
+            completeDirectory.createNewFile();
+        } else {
+            System.out.println("duke.txt already exists");
+            // add the elements in the file to the tasks here
+
+            // replacing the ArrayList Tasks
+            tasks = ParseDukeTxt.readFile(completeDirectory);
+        }
+
         // Outputs
         while (true) {
 
@@ -39,6 +133,8 @@ public class Duke {
             String[] command = input.split(" ");
 
             if (input.equals("bye")) {
+                // update the duke.txt file
+                ParseDukeTxt.updateDukeTxt(dataPath, tasks);
                 System.out.println(BYE);
                 break;
             } else if (input.equals("list")) {

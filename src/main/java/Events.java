@@ -3,7 +3,7 @@
  */
 public class Events extends Task {
 
-    private String at;
+    public String at;
 
     public Events(String description, String at) {
         super(description);

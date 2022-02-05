@@ -1,4 +1,3 @@
-
 /**
  * Each task will hold the status of done or not done, plus description of the
  * task to be done.
@@ -34,12 +33,4 @@ public class Task {
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
-
-    /**
-     * What else do we need?
-     * 
-     * we firstly need to sort out the inputs from the scanner,
-     * we need to account for the number from the second input
-     */
-
 }

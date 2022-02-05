@@ -4,7 +4,7 @@
  */
 public class Deadlines extends Task {
 
-    private String by;
+    public String by;
 
     /**
      * Deadline will take in a description and a by timeline.

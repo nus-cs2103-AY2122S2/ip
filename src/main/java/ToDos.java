@@ -9,6 +9,9 @@ public class ToDos extends Task {
         // TODO Auto-generated constructor stub
     }
 
+    /**
+     * String version
+     */
     @Override
     public String toString() {
         return "[T]" + "[" + super.getStatusIcon() + "] " + super.getDescription();
