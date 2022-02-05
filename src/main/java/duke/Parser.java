@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class Parser {
-
     /**
      * Processes the message given by the user. Returns the response to the user.
      *
@@ -143,6 +142,8 @@ public class Parser {
         String timeBeginString;
         String timeEndString;
 
+        assert (message != null) : "message should not be null";
+
         switch (type) {
         case TODO:
             messageArr = message.split(" ", 2);
@@ -244,6 +245,8 @@ public class Parser {
                 throwWrongEventFormatException();
             }
         }
+
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
     private LocalTime parseTimeFromString(String timeString, TaskTypes type) throws DukeException {
@@ -256,6 +259,8 @@ public class Parser {
                 throwWrongEventFormatException();
             }
         }
+
+        assert false : "Runtime should not reach here";
         return null; //should not reach here
     }
 
