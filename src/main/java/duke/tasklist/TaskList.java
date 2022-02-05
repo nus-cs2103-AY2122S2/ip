@@ -1,6 +1,7 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -238,5 +239,18 @@ public class TaskList {
                 return it.next().formatSave();
             }
         };
+    }
+
+    /**
+     * Creates a formatted String listing out the duke.task.Task in sorted order.
+     *
+     * @return List of Tasks in sorted order as a String.
+     */
+    public String sort() {
+        ArrayList<Task> duplicate = new ArrayList<>(this.tasks);
+        Collections.sort(duplicate);
+
+        StringBuilder output = new StringBuilder("\n\tHere are your sorted Tasks:\n");
+        return printTasks(output, duplicate);
     }
 }

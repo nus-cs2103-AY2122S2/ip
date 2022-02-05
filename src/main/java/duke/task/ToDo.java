@@ -33,4 +33,12 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof ToDo) {
+            return this.description.compareTo(o.description);
+        }
+        return -1;
+    }
 }

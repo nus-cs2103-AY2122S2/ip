@@ -77,4 +77,17 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadlineString + ")";
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof ToDo) {
+            return 1;
+        }
+
+        if (o instanceof Deadline) {
+            int cmp = this.deadline.compareTo(((Deadline) o).deadline);
+            return cmp == 0 ? this.description.compareTo(o.description) : cmp;
+        }
+        return -1;
+    }
 }

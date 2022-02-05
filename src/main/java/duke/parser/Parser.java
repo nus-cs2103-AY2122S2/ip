@@ -65,6 +65,11 @@ public class Parser {
                 throw new DukeWrongInputFormatException("Missing keyword to find");
             }
             return Command.FIND;
+        case "sort":
+            if (command.length > 1 && !command[1].equals("")) {
+                throw new DukeWrongInputFormatException("Command sort should not have any arguments");
+            }
+            return Command.SORT;
         default:
             return Command.INVALID;
         }

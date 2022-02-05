@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents and encapsulates a Task.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected final String description;
     protected boolean isDone;
 

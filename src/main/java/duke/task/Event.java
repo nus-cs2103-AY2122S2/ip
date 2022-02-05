@@ -78,4 +78,13 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.scheduledTimeString + ")";
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Event) {
+            int cmp = this.scheduledTime.compareTo(((Event) o).scheduledTime);
+            return cmp == 0 ? this.description.compareTo(o.description) : cmp;
+        }
+        return 1;
+    }
 }
