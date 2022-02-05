@@ -20,10 +20,6 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
 
-    public String getResponse(String input) { // where it connects to the parser
-        return "I've heard " + input;
-    }
-
     /**
      * Default constructor for TextUi
      *

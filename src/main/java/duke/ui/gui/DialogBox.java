@@ -1,5 +1,7 @@
 package duke.ui.gui;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,8 +18,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
 
 /**
  * A custom control using FXML.
@@ -68,29 +68,4 @@ public class DialogBox extends HBox {
                 CornerRadii.EMPTY, Insets.EMPTY)));
         return db;
     }
-
-
-
-//    public DialogBox(Label l, ImageView iv) {
-//        text = l;
-//        displayPicture = iv;
-//
-//        text.setWrapText(true);
-//
-//        // Display Picture Settings
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
-//        displayPicture.setClip(new Circle(50, 50, 50));
-//
-//        this.setSpacing(10); // Spacing between elements
-//        this.setPadding(new Insets(10)); // Padding for each dialog box
-//
-//        // Setting colour
-//        this.setBackground(new Background(new BackgroundFill(Color.AQUA,
-//                CornerRadii.EMPTY, Insets.EMPTY)));
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        this.getChildren().addAll(text, displayPicture);
-//    }
-//
-
 }

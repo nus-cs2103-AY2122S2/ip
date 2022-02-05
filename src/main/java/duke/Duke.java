@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.command.CommandResult;
 import duke.command.ExitCommand;
 import duke.ui.TextUi;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 
@@ -18,6 +17,16 @@ public class Duke {
     private Parser parser;
 
     /**
+     * Default constructor for Duke. Initializes the main brains and other objects.
+     */
+    public Duke() {
+        fh = new Storage(FILENAME);
+        taskList = new TaskList(fh.importTasks());
+        parser = new Parser();
+        parser.setTaskList(taskList);
+    }
+
+    /**
      * The main entry point to the application
      *
      * Creates an instance of Duke and starts the application
@@ -28,13 +37,6 @@ public class Duke {
         } else { // GUI mode
             Application.launch(duke.ui.GraphicsUi.class, args);
         }
-    }
-
-    public Duke() {
-        fh = new Storage(FILENAME);
-        taskList = new TaskList(fh.importTasks());
-        parser = new Parser();
-        parser.setTaskList(taskList);
     }
 
     public String getResponse(String string) {
