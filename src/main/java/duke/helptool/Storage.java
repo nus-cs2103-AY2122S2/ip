@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -65,6 +66,19 @@ public class Storage {
     }
 
     /**
+     * Gets tag.
+     *
+     * @param data the data
+     * @return the tag
+     */
+    public Tag getTag(String data) {
+        int tagPos = data.indexOf("#{");
+        int tagEnd = data.indexOf("}");
+        String tagDescription = data.substring(tagPos + 3, tagEnd);
+        return new Tag(tagDescription);
+    }
+
+    /**
      * Load from file.
      *
      * @return the array list
@@ -81,7 +95,8 @@ public class Storage {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
                 switch (tempType) {
                 case "T":
-                    Task tempTask = new ToDo(data.substring(7));
+                    Tag tag = getTag(data);
+                    Task tempTask = new ToDo(data.substring(7), tag);
                     if (data.charAt(4) == 'X') {
                         tempTask.markAsDone();
                     }
@@ -91,7 +106,8 @@ public class Storage {
                     int byPos = data.indexOf("(by:");
                     String by = data.substring(byPos + 5, data.length() - 1);
                     String description = data.substring(7, byPos - 1);
-                    tempTask = new Deadline(description, LocalDateTime.parse(by, formatter));
+                    tag = getTag(data);
+                    tempTask = new Deadline(description, LocalDateTime.parse(by, formatter), tag);
                     if (data.charAt(4) == 'X') {
                         tempTask.markAsDone();
                     }
@@ -101,7 +117,8 @@ public class Storage {
                     int atPos = data.indexOf("(at:");
                     String at = data.substring(atPos + 5, data.length() - 1);
                     description = data.substring(7, atPos - 1);
-                    tempTask = new Event(description, LocalDateTime.parse(at, formatter));
+                    tag = getTag(data);
+                    tempTask = new Event(description, LocalDateTime.parse(at, formatter), tag);
                     if (data.charAt(4) == 'X') {
                         tempTask.markAsDone();
                     }
