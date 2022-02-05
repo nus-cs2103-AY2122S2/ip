@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
+
 /**
  * Represents an Event object
  */
 public class Event extends Task {
-    private String metaInfo;
+    private LocalDateTime metaInfo;
 
     /**
      * Default constructor
@@ -12,14 +14,15 @@ public class Event extends Task {
      */
     public Event(String description, String metaInfo) {
         super(description, "E");
-        this.metaInfo = metaInfo;
+        this.metaInfo = DateTimeCustomFormatter.getDateFromString(metaInfo);
     }
 
     /**
      * This constructor initializes event objects with isDone specified
-     * @param isDone whether this task is done or not
+     * 
+     * @param isDone      whether this task is done or not
      * @param description description of the task
-     * @param metaInfo duration information of the task
+     * @param metaInfo    duration information of the task
      */
     public Event(boolean isDone, String description, String metaInfo) {
         super(description, "E");
@@ -28,7 +31,7 @@ public class Event extends Task {
         } else {
             setUndone();
         }
-        this.metaInfo = metaInfo;
+        this.metaInfo = DateTimeCustomFormatter.getDateFromString(metaInfo);
     }
 
     /**
@@ -36,15 +39,15 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(at:" + this.metaInfo + ")";
+        return super.toString() + "(by:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
+
     }
 
-    
-    /** 
+    /**
      * @return String string representation of this task to be saved to file
      */
     @Override
     public String getPrintString() {
-        return super.getPrintString() + "|" + this.metaInfo;
+        return super.getPrintString() + "|" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo);
     }
 }

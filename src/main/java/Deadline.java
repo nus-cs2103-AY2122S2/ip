@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.zip.DataFormatException;
 
 /**
  * Represents a Deadline object

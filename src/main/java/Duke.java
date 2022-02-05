@@ -110,7 +110,7 @@ public class Duke {
         try {
             curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
-            System.err.println("Kindly input Date and Time in dd/mm/yyyy hhmm");
+            System.err.println("Kindly input Date and Time in dd/mm/yyyy hhmm format!");
             System.out.println("Please try again:");
             System.out.println(BAR);
             return;
@@ -124,8 +124,16 @@ public class Duke {
         String metaInfo = originalInput.split("/at")[1];
         String strippedCommand = originalInput.replaceAll(".*\\bevent\\.*", "");
         System.out.println(BAR);
+        Task curr = null;
+        try {
+            curr = new Event(strippedCommand.split("/")[0], metaInfo);
+        } catch (DateTimeParseException ex) {
+            System.err.println("Kindly input Date and Time in dd/mm/yyyy hhmm format!");
+            System.out.println("Please try again:");
+            System.out.println(BAR);
+            return;
+        }
         System.out.println("Got it. I've added this task:");
-        Task curr = new Event(strippedCommand.split("/")[0], metaInfo);
         processNewTask(curr);
         System.out.println(BAR);
     }
