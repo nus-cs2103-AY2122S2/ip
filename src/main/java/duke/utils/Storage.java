@@ -29,7 +29,6 @@ public  class Storage {
             readStream.close();
             return savedTasks;
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No Previously Saved Tasks Found");
             return new ArrayList<>();
         }
     }
@@ -42,6 +41,11 @@ public  class Storage {
      */
     // The solution below has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     public static void saveListToDisk(ArrayList<Task> saved) {
+
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
 
         try {
             FileOutputStream writeData = new FileOutputStream("data/list.ser");
