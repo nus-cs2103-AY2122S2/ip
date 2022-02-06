@@ -1,11 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.ListIterator;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 public class ParserTest {
 

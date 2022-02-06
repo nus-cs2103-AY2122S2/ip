@@ -1,13 +1,8 @@
 package duke.command;
 
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
-
-// Enums of duke.command
-// public enum Commands123 {
-//     bye, list, mark, unmark, delete, todo, deadline, event;
-// } 
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a general blueprint for a Command. A <code>Commands</code> is a command

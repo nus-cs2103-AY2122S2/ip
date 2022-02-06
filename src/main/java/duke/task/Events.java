@@ -7,14 +7,24 @@ package duke.task;
  * <code>"Eat lunch", true, "9am"</code>
  */
 public class Events extends Tasks {
-    String timing; // Timing of event
+    private final String timing; // Timing of event
 
-    // Constructor
+    /**
+     *
+     * @param taskName
+     * @param timing
+     */
     public Events(String taskName, String timing) {
         super(taskName);
         this.timing = timing;
     }
 
+    /**
+     *
+     * @param taskName
+     * @param completion
+     * @param timing
+     */
     public Events(String taskName, boolean completion, String timing) {
         super(taskName, completion);
         this.timing = timing;
@@ -46,12 +56,20 @@ public class Events extends Tasks {
     }
 
     // Format of saving to database
+    /**
+     *
+     * @return
+     */
     public String toDatabaseString() {
         return "E | " + (this.getCompletion() ? "X" : " ")
                 + " | " + super.getName() + " | " + timing + "\n";
     }
 
     // toString returning event
+    /**
+     *
+     * @return
+     */
     public String toString() {
         return "[E][" + (this.getCompletion() ? "X" : " ") + "] "
                 + super.getName() + " (at: " + timing + ")";

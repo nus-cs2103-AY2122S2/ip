@@ -1,30 +1,43 @@
 package duke.tasklist;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.lang.IndexOutOfBoundsException;
 
-import duke.task.Tasks;
+import duke.storage.Storage;
 import duke.task.Deadlines;
 import duke.task.Events;
+import duke.task.Tasks;
 import duke.task.Todos;
-import duke.storage.Storage;
 
+/**
+ *
+ */
 public class TaskList {
 
     private ArrayList<Tasks> taskList;
 
+    /**
+     *
+     * @param taskList
+     */
     public TaskList(ArrayList<Tasks> taskList) {
         this.taskList = new ArrayList<Tasks>();
         this.taskList.addAll(taskList);
     }
 
+    /**
+     *
+     */
     public TaskList() {
         this.taskList = new ArrayList<Tasks>();
     }
 
     // Maybe can abstract out the printing portion
+    /**
+     *
+     * @param query
+     * @return
+     */
     public String queryTasks(String query) {
         ArrayList<Tasks> unfilteredTasks = new ArrayList<Tasks>(taskList);
         ArrayList<Tasks> filteredTasks = new ArrayList<Tasks>();
@@ -42,11 +55,11 @@ public class TaskList {
             }
 
             for (int i = 0; i < filteredTasks.size(); i++) {
-                sb1.append("      ").append(i + 1).append(". ").
-                        append(filteredTasks.get(i).toString()).append("\n");
+                sb1.append("      ").append(i + 1).append(". ")
+                        .append(filteredTasks.get(i).toString()).append("\n");
             }
-            sb1.append("\n    Congratulations! We found ").append(filteredTasks.size()).
-                    append(" results that may interest you! :)");
+            sb1.append("\n    Congratulations! We found ").append(filteredTasks.size())
+                            .append(" results that may interest you! :)");
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Don't access a task "
                     + "beyond the numeral boundary.");
@@ -55,7 +68,15 @@ public class TaskList {
     }
 
     // Delete duke.task -> returns duke.task deleted, then returns string to append
-    public Boolean addsTask(Tasks task, Storage storage) throws IndexOutOfBoundsException {
+    /**
+     * Initiate the main bulk of adding a task from the user input into the database.
+     * If this is successful, it will return a boolean value of True.
+     *
+     * @param task Task to be added to the database
+     * @param storage Storage that facilitate writing of Task into the database
+     * @return returns a boolean value of the success of adding a task
+     */
+    public Boolean addsTask(Tasks task, Storage storage) {
         try {
             if (storage.appendsToDatabase(task.toDatabaseString())) {
                 this.taskList.add(task);
@@ -65,17 +86,23 @@ public class TaskList {
                         + fileContentCounter() + " tasks in the list.");
                 return true;
             }
-        } catch (IndexOutOfBoundsException err) {
-            System.out.println("    Task index out of bound while deleting duke.task.");
         } catch (IOException err) {
             System.out.println("    Addition of tasks unsuccessful due to: " + err);
         }
         return false;
     }
 
-    // Edit duke.task
-    public Boolean marksTask(Storage storage, int taskIndexToMark, boolean taskCompletion)
-            throws IndexOutOfBoundsException {
+    /**
+     * This method helps to facilitate the marking of a task as completed. If this is
+     * success in marking the task, a boolean value of true will be returned. Else,
+     * it returns false.
+     *
+     * @param storage Storage that facilitate writing of Task into the database
+     * @param taskIndexToMark Index of task to be marked in the database
+     * @param taskCompletion A boolean value indicating whether to mark it as completed or not
+     * @return returns a boolean value indicative of the success of marking a task
+     */
+    public Boolean marksTask(Storage storage, int taskIndexToMark, boolean taskCompletion) {
         ArrayList<Tasks> newList = new ArrayList<Tasks>();
         StringBuilder sb1 = new StringBuilder("");
         try {
@@ -110,9 +137,16 @@ public class TaskList {
         return false;
     }
 
-    // Delete duke.task -> returns duke.task deleted, then returns string to append
-    public ArrayList<Tasks> deletesTask(int taskIndexToDelete, Storage storage)
-            throws IndexOutOfBoundsException {
+    /**
+     * This method helps to facilitate the deletion of a task. If this is
+     * successful in deleting the task, a boolean value of true will be returned. Else,
+     * false is returned.
+     *
+     * @param taskIndexToDelete Index of task to be deleted in the database
+     * @param storage Storage that facilitate writing of Task into the database
+     * @return a boolean value indicative of the success of marking a task
+     */
+    public ArrayList<Tasks> deletesTask(int taskIndexToDelete, Storage storage) {
         ArrayList<Tasks> newList = new ArrayList<Tasks>();
         ArrayList<Tasks> returnInfo = new ArrayList<Tasks>();
         StringBuilder sb1 = new StringBuilder("");
@@ -133,8 +167,8 @@ public class TaskList {
                         + "the duke.task from the system:");
                 System.out.println("       " + deletedTask.toString() + "\n");
                 System.out.println(
-                        String.format("    You have " +
-                                "%s tasks left in your list. :)", fileContentCounter()));
+                        String.format("    You have "
+                                + "%s tasks left in your list. :)", fileContentCounter()));
             }
         } catch (IndexOutOfBoundsException err) {
             System.out.println("    Task index out of bound "
@@ -146,11 +180,22 @@ public class TaskList {
     }
 
     // Print file content method
+    /**
+     * This method returns the number of tasks in the database.
+     *
+     * @return Number of Tasks in the database.
+     */
     public int fileContentCounter() {
         return taskList.size();
     }
 
     // Print file content method
+    /**
+     * This methods help to faciltiate the printing of all the Tasks within the database.
+     * If this method is successful, it will return a boolean value of true, else false is returned.
+     *
+     * @return a boolean value indicative of the success of marking a task
+     */
     public Boolean printFileContent() {
         try {
             StringBuilder sb1 = new StringBuilder("");

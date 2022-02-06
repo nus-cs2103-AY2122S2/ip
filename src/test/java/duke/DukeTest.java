@@ -1,7 +1,9 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 
 // Format of testing -> WhatIsTested_descriptionOfTestInputs_ExpectedOutcome
 // Testing .assertEquals(Expected, actual)

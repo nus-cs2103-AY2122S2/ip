@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command used for the deletion of tasks. A <code>DeleteCommand</code> object corresponds to
@@ -13,7 +13,7 @@ public class DeleteCommand extends Commands {
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Delete' Command Executed Unsuccessfully";
 
-    private static boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private String arguments; // In the form of user duke.command
 
     public DeleteCommand(String arguments) {

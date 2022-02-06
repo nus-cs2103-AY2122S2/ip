@@ -1,29 +1,39 @@
 package duke.storage;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Tasks;
 import duke.task.Todos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class StorageStub extends Storage {
 
+    /**
+     *
+     * @param databasePath
+     */
     public StorageStub(String databasePath) {
-        super("./java/duke/data/DukeDatabaseStub.txt");
+        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
     }
 
+    /**
+     *
+     */
     public StorageStub() {
-        super("./java/duke/data/PrintDatabaseStub.txt");
+        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Tasks> preloadTaskList() {
-        ArrayList<Tasks> taskList = new ArrayList<Tasks>();
+        ArrayList<Tasks> taskList = new ArrayList<>();
         taskList.add(new Todos("Todo over"));
         taskList.add(new Events("Events over", "2012-03-03"));
         taskList.add(new Deadlines("Deadlines over", "2012-03-03"));
@@ -33,7 +43,7 @@ public class StorageStub extends Storage {
 
     @Override
     // Erase and rewrite to file method
-    public boolean writesToDatabase(String textToAdd) throws FileNotFoundException {
+    public boolean writesToDatabase(String textToAdd) {
         try {
             FileWriter fw = new FileWriter(super.getDatabasePath());
             fw.write(textToAdd);

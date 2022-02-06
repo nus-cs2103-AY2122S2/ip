@@ -20,10 +20,17 @@ public class Ui {
         return "       ";
     }
 
+    /**
+     *
+     * @param message
+     */
     public void showError(String message) {
         System.out.println(message);
     }
 
+    /**
+     *
+     */
     public void showLine() {
         System.out.println(returnBorderSpace()
                 + "____________________________________________________________");
@@ -33,6 +40,9 @@ public class Ui {
         return HYPHENATE + toWrap + HYPHENATE;
     }
 
+    /**
+     *
+     */
     public void welcomeUser() {
         showLine();
         System.out.println(returnBorderSpace()
@@ -40,6 +50,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     *
+     * @return
+     */
     public String readCommand() {
         String command = "";
         System.out.println("");
@@ -49,12 +63,18 @@ public class Ui {
         return command;
     }
 
+    /**
+     *
+     */
     public void closePrinter() {
         sc.close();
     }
 
+    /**
+     *
+     */
     public void showsLoadingError() {
-        System.out.println(returnUserSpace() +
-                "There seems to be an error loading your duke.task");
+        System.out.println(returnUserSpace()
+                + "There seems to be an error loading your duke.task");
     }
 }

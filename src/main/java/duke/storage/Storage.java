@@ -1,5 +1,4 @@
 package duke.storage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Tasks;
 import duke.task.Deadlines;
 import duke.task.Events;
+import duke.task.Tasks;
 import duke.task.Todos;
 
 /**
@@ -84,22 +83,25 @@ public class Storage {
                 String[] taskDataSplit = taskData.split(" \\| ");
 
                 switch (taskDataSplit[0]) {
-                    case "T":
-                        taskList.add(new Todos(taskDataSplit[2],
-                                taskDataSplit[1].equals("X")));
-                        break;
+                case "T":
+                    taskList.add(new Todos(taskDataSplit[2],
+                            taskDataSplit[1].equals("X")));
+                    break;
 
-                    case "E":
-                        taskList.add(new Events(taskDataSplit[2],
-                                taskDataSplit[1].equals("X"),
-                                        taskDataSplit[3]));
-                        break;
+                case "E":
+                    taskList.add(new Events(taskDataSplit[2],
+                            taskDataSplit[1].equals("X"),
+                                    taskDataSplit[3]));
+                    break;
 
-                    case "D":
-                        taskList.add(new Deadlines(taskDataSplit[2],
-                                taskDataSplit[1].equals("X"),
-                                        taskDataSplit[3]));
-                        break;
+                case "D":
+                    taskList.add(new Deadlines(taskDataSplit[2],
+                            taskDataSplit[1].equals("X"),
+                                    taskDataSplit[3]));
+                    break;
+
+                default:
+                    break;
                 }
             }
             sc.close();

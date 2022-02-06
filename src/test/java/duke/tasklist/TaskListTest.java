@@ -1,16 +1,17 @@
 package duke.tasklist;
 
-import duke.storage.StorageStub;
-import duke.task.Tasks;
-import duke.task.Todos;
-import duke.storage.Storage;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.storage.Storage;
+import duke.storage.StorageStub;
+import duke.task.Tasks;
+import duke.task.Todos;
 
 // Format of testing -> WhatIsTested_descriptionOfTestInputs_ExpectedOutcome
 // Testing .assertEquals(Expected, actual)
@@ -35,12 +36,12 @@ public class TaskListTest {
     }
 
     @Test
-    void deletesTask_writtenCorrectly_success () {
+    void deletesTask_writtenCorrectly_success() {
         try {
             Storage crudDatabase = new StorageStub(
                     "./src/test/java/duke/data/DukeDatabaseStub.txt");
             ArrayList<Tasks> oldStorageList = crudDatabase.load();
-            if (oldStorageList.size() > 0 ) {
+            if (oldStorageList.size() > 0) {
                 TaskList addTaskList = new TaskList(oldStorageList);
                 Tasks addTask = new Todos("Testing Addition");
                 addTaskList.deletesTask(0, crudDatabase);
@@ -58,9 +59,9 @@ public class TaskListTest {
     }
 
     @Test
-    void FileContentCounter_writtenCorrectly_success () {
+    void fileContentCounter_writtenCorrectly_success () {
         TaskList printTaskList = new TaskList(new StorageStub().preloadTaskList());
-        assertEquals( 4 , printTaskList.fileContentCounter() );
+        assertEquals (4 , printTaskList.fileContentCounter());
     }
 
     @Test
