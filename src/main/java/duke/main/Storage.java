@@ -38,14 +38,11 @@ public class Storage {
                     String[] splitLine  = line.split(" | ");
                     if (splitLine[0].equals("T")) {
                        task = new Todo(splitLine[2]);
-                    }
-                    else if (splitLine[0].equals("D")) {
+                    } else if (splitLine[0].equals("D")) {
                         task = new Deadline(splitLine[2], splitLine[3]);
-                    }
-                    else if (splitLine[0].equals("E")) {
+                    } else if (splitLine[0].equals("E")) {
                         task = new Event(splitLine[2], splitLine[3]);
-                    }
-                    else {
+                    } else {
                         throw new DukeException("OOPS!!! I don't know what task type is that.");
                     }
                     if (splitLine[1].equals("1")) {
@@ -54,12 +51,10 @@ public class Storage {
                     tasks.add(task);
                 }
                 return tasks;
-            }
-            else {
+            } else {
                 return new ArrayList<>();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("OOPS!!! An I0Exception occurred.");
         }
     }
@@ -78,8 +73,7 @@ public class Storage {
                 fw.write(task.getFileFormat() + "\n");
             }
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("OOPS!!! An I0Exception occurred.");
         }
     }

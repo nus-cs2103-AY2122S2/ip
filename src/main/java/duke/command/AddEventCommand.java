@@ -39,8 +39,7 @@ public class AddEventCommand extends Command {
         Task task;
         if (date == null) {
             task = new Event(description, at);
-        }
-        else {
+        } else {
             task = new Event(description, date);
         }
         tasks.addTask(task);

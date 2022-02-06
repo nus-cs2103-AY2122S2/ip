@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
  */
 public class Duke {
 
-
     private VBox dialogContainer;
     private Storage storage;
     private TaskList tasks;
@@ -48,8 +47,7 @@ public class Duke {
                 isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            }
-            finally {
+            } finally {
                 return ui.toString();
             }
         }

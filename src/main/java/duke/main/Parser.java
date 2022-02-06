@@ -25,8 +25,7 @@ public class Parser {
         } else if (fullCommand.startsWith("find")) {
             String remainingCommand = fullCommand.split(" ", 2)[1];
             return new FindCommand(remainingCommand);
-        }
-        else if(fullCommand.startsWith("mark")) {
+        } else if(fullCommand.startsWith("mark")) {
             String remainingCommand = fullCommand.split(" ", 2)[1];
             return new MarkCommand(Integer.parseInt(remainingCommand));
         } else if (fullCommand.startsWith("unmark")) {
@@ -43,23 +42,18 @@ public class Parser {
             String remainingCommand = fullCommand.split(" ", 2)[1];
             if (command.equals("todo")) {
                 return new AddTodoCommand(remainingCommand);
-            }
-            else if (command.equals("deadline")) {
+            } else if (command.equals("deadline")) {
                 String[] splitDescription = remainingCommand.split(" /by ");
                 if (!isDate(splitDescription[1])) {
                     return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
                 }
-                else {
-                    return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
-                }
-            }
-            else {
+                return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
+            } else {
                 String[] splitDescription = remainingCommand.split(" /at ");
                 if (!isDate(splitDescription[1])) {
                     return new AddEventCommand(splitDescription[0], splitDescription[1]);
-                } else {
-                    return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
                 }
+                return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
