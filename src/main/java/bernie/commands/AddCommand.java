@@ -48,7 +48,7 @@ public class AddCommand extends Command {
     /**
      * Executes the AddCommand, calling the TaskList to add the respective task based on the Type
      * determined by the parser. After adding, storage will save the updated tasks and inputResponder shows
-     * the message to the user.
+     * the message to the user. Type that goes through is only TODO, DEADLINE, EVENT
      * @return String, the resulting message
      */
     public String execute() {

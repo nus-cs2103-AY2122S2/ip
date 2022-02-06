@@ -21,3 +21,6 @@ text-inputResponder-test/EXPECTED-UNIX.TXT
 
 # jar files
 *.jar
+
+#text-ui-test
+text-ui-test

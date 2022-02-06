@@ -22,10 +22,12 @@ public class TaskList {
     }
 
     public int getSize() {
+        assert tasks.size() >= 0;
         return tasks.size();
     }
 
     public boolean isEmpty() {
+        assert tasks.size() >= 0;
         return tasks.size() == 0;
     }
 
@@ -35,7 +37,9 @@ public class TaskList {
      * @return Task object
      */
     public Task getTask(int i) {
-        return tasks.get(i);
+        Task retrievedTask = tasks.get(i);
+        assert retrievedTask != null;
+        return retrievedTask;
     }
 
     /**
@@ -49,6 +53,7 @@ public class TaskList {
                 count++;
             }
         }
+        assert (count >= 0);
         return count;
     }
 
@@ -156,6 +161,7 @@ public class TaskList {
                 s.append(String.format("%d. %s\n", i + 1, task));
             }
         }
+        assert count >= 0;
         if (count == 0) {
             return s.append("Nothing!")
                     .toString();
@@ -203,6 +209,7 @@ public class TaskList {
         default:
             break;
         }
+        assert (newTask != null);
         tasks.add(newTask);
     }
 }
