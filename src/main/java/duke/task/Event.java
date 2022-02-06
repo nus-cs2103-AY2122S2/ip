@@ -17,6 +17,11 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate date) {
         super(description, 'E');
+
+        assert description != null : "Event[Event] description cannot be null.";
+        assert description.length() > 0 : "Event[Event] description must contain data.";
+        assert date != null : "Event[Event] date cannot be null.";
+
         this.date = date;
     }
 

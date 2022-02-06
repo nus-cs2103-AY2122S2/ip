@@ -26,6 +26,9 @@ public class ToggleCommand extends Command {
      * @param isMark isMark indicates if a user has done the task.
      */
     public ToggleCommand(String args, boolean isMark) {
+        assert args != null : "ToggleCommand[ToggleCommand] args cannot be null.";
+        assert args.length() > 0 : "ToggleCommand[ToggleCommand] args must contain data.";
+
         this.args = args;
         this.isMark = isMark;
     }
@@ -35,6 +38,9 @@ public class ToggleCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "ToggleCommand[execute] taskList cannot be null.";
+        assert storage != null : "ToggleCommand[execute] storage cannot be null.";
+
         String response = "";
 
         try {

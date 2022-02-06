@@ -18,10 +18,8 @@ public class Duke {
 
     /**
      * Creates a Duke object that initializes all the necessary components for the task manager program.
-     * 
-     * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.taskList = new TaskList();
         this.storage = new Storage(Constants.FILE_PATH + Constants.FILE_NAME);
 
@@ -37,6 +35,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert input != null : "Duke[getResponse] input cannot be null.";
+        assert input.length() > 0 : "Duke[getResponse] input must contain data.";
+
         String response = "";
 
         try {

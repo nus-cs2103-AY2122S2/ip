@@ -21,11 +21,17 @@ public class FindCommand extends Command {
      * @param args args is the keywords to use for finding tasks.
      */
     public FindCommand(String args) {
+        assert args != null : "FindCommand[FindCommand] args cannot be null.";
+        assert args.length() > 0 : "FindCommand[FindCommand] args must contain data.";
+
         this.args = args;
     }
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "FindCommand[execute] taskList cannot be null.";
+        assert storage != null : "FindCommand[execute] storage cannot be null.";
+
         String response = "";
 
         try {

@@ -21,6 +21,8 @@ public class TaskList {
      * @param tasks tasks is the list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "TaskList[TaskList] tasks cannot be null.";
+
         this.tasks = new ArrayList<>(tasks);
     }
 
@@ -30,6 +32,8 @@ public class TaskList {
      * @param task task is the task to be added.
      */
     public void add(Task task) {
+        assert task != null : "TaskList[add] task cannot be null.";
+
         this.tasks.add(task);
     }
 
@@ -50,6 +54,8 @@ public class TaskList {
      * @return Returns the updated task.
      */
     public Task toggleCompleted(boolean isMark, int index) {
+        assert index > -1 : "TaskList[toggleCompleted] index must be more than -1.";
+
         Task updateTask = this.tasks.get(index);
 
         updateTask.setCompleted(isMark);
@@ -63,6 +69,8 @@ public class TaskList {
      * @param index index represents which task the user wants to delete.
      */
     public void delete(int index) {
+        assert index > -1 : "TaskList[delete] index must be more than -1.";
+
         this.tasks.remove(index);
     }
 

@@ -15,6 +15,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert taskList != null : "ListCommand[execute] taskList cannot be null.";
+        assert storage != null : "ListCommand[execute] storage cannot be null.";
+
         String response = "";
         int length = taskList.size();
         StringBuilder sb = new StringBuilder();

@@ -12,5 +12,8 @@ public class DukeException extends Exception {
      */
     public DukeException(String error) {
         super(error);
+
+        assert error != null : "DukeException[DukeException] error cannot be null.";
+        assert error.length() > 0 : "DukeException[DukeException] error must not be empty.";
     }
 }

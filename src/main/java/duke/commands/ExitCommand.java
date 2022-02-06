@@ -16,6 +16,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "ExitCommand[execute] taskList cannot be null.";
+        assert storage != null : "ExitCommand[execute] storage cannot be null.";
+
         return Constants.BYE;
     }
 

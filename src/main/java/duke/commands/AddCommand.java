@@ -26,6 +26,9 @@ public class AddCommand extends Command {
      * @param fullCommand fullCommand holds contents of the task to be added.
      */
     public AddCommand(String fullCommand) {
+        assert fullCommand != null : "AddCommand[AddCommand] fullCommand cannot be null.";
+        assert fullCommand.length() > 0 : "AddCommand[AddCommand] fullCommand must contain data.";
+
         this.fullCommand = fullCommand;
     }
 
@@ -36,6 +39,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "AddCommand[execute] taskList cannot be null.";
+        assert storage != null : "AddCommand[execute] storage cannot be null.";
+
         String[] taskArr = null;
         String type = "";
         String textToAdd = "";

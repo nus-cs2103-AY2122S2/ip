@@ -30,6 +30,9 @@ public class Storage {
      * @param filePath filePath is the relative path to the text file that stores user's tasks.
      */
     public Storage(String filePath) {
+        assert filePath != null : "Storage[Storage] filePath cannot be null.";
+        assert filePath.length() > 0 : "Storage[Storage] filePath must contain data.";
+
         this.filePath = filePath;
     }
 
@@ -93,6 +96,9 @@ public class Storage {
      * @throws IOException If error writing to local disk text file.
      */
     public void writeToFile(String taskString) throws IOException {
+        assert taskString != null : "Storage[writeToFile] taskString cannot be null.";
+        assert taskString.length() > 0 : "Storage[writeToFile] taskString must contain data.";
+
         FileWriter fw = new FileWriter(this.filePath, true);
 
         fw.write(taskString);
@@ -109,6 +115,10 @@ public class Storage {
      * @throws IOException If error writing to local disk text file.
      */
     public void writeToFile(String taskString, int index, boolean isDelete) throws IOException {
+        assert taskString != null : "Storage[writeToFile] taskString cannot be null.";
+        assert taskString.length() > 0 : "Storage[writeToFile] taskString must contain data.";
+        assert index > -1 : "Storage[writeToFile] index must be more than -1.";
+
         Path filePath = Paths.get(Constants.FILE_PATH, Constants.FILE_NAME);
         ArrayList<String> fileContent = new ArrayList<>(
                 Files.readAllLines(filePath, StandardCharsets.UTF_8));

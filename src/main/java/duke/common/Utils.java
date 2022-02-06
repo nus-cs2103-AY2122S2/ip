@@ -11,6 +11,9 @@ public class Utils {
      * @return If add command has a valid type.
      */
     public static boolean isValidType(String type) {
+        assert type != null : "Utils[isValidType] type cannot be null.";
+        assert type.length() > 0 : "Utils[isValidType] type must contain data.";
+
         if (type.equalsIgnoreCase("todo")
                 || type.equalsIgnoreCase("event")
                 || type.equalsIgnoreCase("deadline")) {
@@ -27,6 +30,9 @@ public class Utils {
      * @return If a new deadline or event has missing data in it.
      */
     public static boolean isMissingData(String[] taskArr) {
+        assert taskArr != null : "Utils[isMissingData] taskArr cannot be null.";
+        assert taskArr.length > 0 : "Utils[isMissingData] taskArr must contain data.";
+
         if (taskArr.length < 3 && !taskArr[0].equalsIgnoreCase("todo")) {
             return true;
         }
@@ -41,6 +47,9 @@ public class Utils {
      * @return If user input argument is numeric.
      */
     public static boolean isNumeric(String arg) {
+        assert arg != null : "Utils[isNumeric] arg cannot be null.";
+        assert arg.length() > 0 : "Utils[isNumeric] arg must contain data.";
+        
         if (arg == null) {
             return false;
         }

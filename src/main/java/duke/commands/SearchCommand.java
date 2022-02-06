@@ -24,6 +24,9 @@ public class SearchCommand extends Command {
      * @param args args is the keyword that user specified.
      */
     public SearchCommand(String args) {
+        assert args != null : "SearchCommand[SearchCommand] args cannot be null.";
+        assert args.length() > 0 : "SearchCommand[SearchCommand] args must contain data.";
+
         this.args = args;
     }
 
@@ -32,6 +35,9 @@ public class SearchCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "SearchCommand[execute] taskList cannot be null.";
+        assert storage != null : "SearchCommand[execute] storage cannot be null.";
+
         String response = "";
 
         try {

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private final Duke duke = new Duke(Constants.FILE_PATH + Constants.FILE_NAME);
+    private final Duke duke = new Duke();
     private Image appIcon = new Image(this.getClass().getResourceAsStream("/images/todo-64.png"));
 
     @Override
