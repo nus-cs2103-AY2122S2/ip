@@ -9,6 +9,7 @@ public class Event extends Task {
     protected static final String type = "E";
     private final LocalDateTime dateTime;
     private final String dateAndTime;
+    private final String description;
 
     /**
      * Constructs an Event object.
@@ -18,12 +19,14 @@ public class Event extends Task {
      */
     public Event(String description, String dateAndTime) {
         super(description);
+        this.description = description;
         this.dateAndTime = dateAndTime;
         this.dateTime = LocalDateTime.parse(dateAndTime);
     }
 
     protected Event(Boolean marked, String description, String dateAndTime) {
         super(description);
+        this.description = description;
         this.dateAndTime = dateAndTime;
         this.dateTime = LocalDateTime.parse(dateAndTime);
         if (marked) {
@@ -47,5 +50,17 @@ public class Event extends Task {
     public String toString() {
         return "[" + Event.type + "]" + super.toString() + " (at: "
                 + Task.localDateTimeToString(this.dateTime) + ")";
+    }
+
+    @Override
+    public boolean equals(Task task) {
+
+        if (!(task instanceof Event)) {
+            return false;
+        }
+
+        Event eventTask = (Event) task;
+        return this.description.equals(eventTask.description)
+                && this.dateTime.equals(eventTask.dateTime);
     }
 }

@@ -6,6 +6,7 @@ package alfred.task;
  */
 public class ToDo extends Task {
     protected static final String type = "T";
+    private final String description;
 
     /**
      * Constructs a T0D0 object.
@@ -14,10 +15,12 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+        this.description = description;
     }
 
     protected ToDo(Boolean marked, String description) {
         super(description);
+        this.description = description;
         if (marked) {
             this.markComplete();
         }
@@ -35,6 +38,17 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[" + ToDo.type + "]" + super.toString();
+    }
+
+    @Override
+    public boolean equals(Task task) {
+
+        if (!(task instanceof ToDo)) {
+            return false;
+        }
+
+        ToDo todoTask = (ToDo) task;
+        return this.description.equals(todoTask.description);
     }
 
 }

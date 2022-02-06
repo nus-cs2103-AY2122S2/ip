@@ -1,5 +1,6 @@
 package alfred.command;
 
+import alfred.exceptions.DuplicationException;
 import alfred.exceptions.InvalidDateTimeException;
 import alfred.exceptions.InvalidInputException;
 import alfred.storage.AlfredStorage;
@@ -43,10 +44,12 @@ public class DeadlineCommand extends Command {
      * @param storage AlfredStorage object used to handle internal storage for Alfred.
      * @throws InvalidDateTimeException If date-time being given is not in ISO format.
      * @throws InvalidInputException    If any missing arguments.
+     * @throws DuplicationException If the task is duplicated.
      */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage)
-            throws InvalidDateTimeException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException,
+            DuplicationException {
         String response = this.response(ui, storage);
         ui.sandwichAndPrint(response);
 
@@ -61,10 +64,12 @@ public class DeadlineCommand extends Command {
      * @return String output meant for user.
      * @throws InvalidDateTimeException If date-time being given is not in ISO format.
      * @throws InvalidInputException    If any missing arguments.
+     * @throws DuplicationException     If the task is duplicated.
      */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
-            throws InvalidDateTimeException, InvalidInputException {
+            throws InvalidDateTimeException, InvalidInputException,
+            DuplicationException {
 
         assert this.arguments != null;
 

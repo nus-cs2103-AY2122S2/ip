@@ -1,6 +1,7 @@
 package alfred.command;
 
 import alfred.Alfred;
+import alfred.exceptions.DuplicationException;
 import alfred.exceptions.MissingInputException;
 import alfred.storage.AlfredStorage;
 import alfred.task.Task;
@@ -34,10 +35,11 @@ public class ToDoCommand extends Command {
      *                states of Alfred.
      * @throws MissingInputException If there is no valid task description after
      *                               the "todo" keyword.
+     * @throws DuplicationException  If the task is duplicated.
      */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage)
-            throws MissingInputException {
+            throws MissingInputException, DuplicationException {
         String out = this.response(ui, storage);
         ui.sandwichAndPrint(out);
     }
@@ -53,10 +55,11 @@ public class ToDoCommand extends Command {
      * @return String output meant for user.
      * @throws MissingInputException If there is no valid task description after
      *                               the "todo" keyword.
+     * @throws DuplicationException  If the task is duplicated.
      */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage)
-            throws MissingInputException {
+            throws MissingInputException, DuplicationException {
 
         assert this.description != null;
 

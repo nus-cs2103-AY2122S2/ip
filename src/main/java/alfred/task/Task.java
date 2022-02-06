@@ -90,7 +90,6 @@ public abstract class Task {
         String[] arguments = input.split(Task.FORMAT_SPLIT);
         arguments = Arrays.stream(arguments).map(s -> s.trim()).toArray(String[]::new);
         String command = arguments[0];
-        System.out.println(command);
         boolean marked = arguments[1].equals(Task.COMPLETION_MARK);
         switch (command) {
         case ToDo.type:
@@ -110,6 +109,14 @@ public abstract class Task {
      * @return String for saving.
      */
     public abstract String taskToSaveString();
+
+    /**
+     * Returns true if the two tasks are equal.
+     *
+     * @param task Other task.
+     * @return true if tasks are meaningfully identical.
+     */
+    public abstract boolean equals(Task task);
 
 
     @Override
