@@ -1,3 +1,5 @@
 T |   | Eat a burger during lunch
 D |   | Finish Tennis training | 2020-06-03
-E |   | Go for Thriftbusu's new exhibit | 10 February 2022, 8pm
+E | X | Go for Thriftbusu's new exhibit | 10 February 2022, 8pm
+E | X | run a marathon | 2020-06-03
+D |   | run a marathon2 | 2020-06-03
