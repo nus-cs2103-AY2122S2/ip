@@ -52,4 +52,8 @@ public class Bobby {
         Ui.showWelcome();
         new Bobby("bobby.txt").run();
     }
+
+    public String getResponse(String text) {
+        return "Duke heard: " + text;
+    }
 }
