@@ -21,6 +21,8 @@ public class ListCommand extends Command {
         linePrinter.print("This is your task list:");
         taskList.doForEach((index, task) -> {
             // Note that index passed into this consumer is 0-based. Increment by 1 for readability
+            assert task != null;
+            assert index >= 0;
             linePrinter.print(String.format("%d. %s", index + 1, task.getReadableString()));
         });
         return true;

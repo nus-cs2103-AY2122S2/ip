@@ -67,6 +67,7 @@ public class Storage {
                         + dataFolder.getAbsolutePath());
             }
         }
+        assert dataFolder.exists();
     }
 
     /**
@@ -106,6 +107,7 @@ public class Storage {
                 }
             }
 
+            assert database.exists();
             return new FileOutputStream(database);
         } catch (IOException ex) {
             throw new DukeIoException("Could not create database");

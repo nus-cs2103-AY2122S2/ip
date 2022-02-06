@@ -28,6 +28,9 @@ public class BetweenCommand extends Command {
         final LocalDateTime start = parseDateTime(argParts[0]);
         final LocalDateTime end = parseDateTime(argParts[1]);
 
+        assert start != null;
+        assert end != null;
+
         linePrinter.print(String.format("Here are your tasks in between %s and %s:",
                 argParts[0], argParts[1]));
         taskList.doForEach((index, task) -> {

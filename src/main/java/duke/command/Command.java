@@ -39,6 +39,8 @@ public abstract class Command {
         } catch (NumberFormatException ex) {
             throw new DukeIllegalArgumentException("Task Number must be a number");
         }
+
+        assert taskIndex > 0;
         // Note that task storage uses 0-based index
         return taskIndex - 1;
     }

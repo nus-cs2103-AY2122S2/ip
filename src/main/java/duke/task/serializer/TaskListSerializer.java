@@ -32,10 +32,14 @@ public class TaskListSerializer {
         final DataInputStream dbDataStream = new DataInputStream(dbStream);
         try (dbDataStream) {
             final int recordCount = dbDataStream.readInt();
+            assert recordCount >= 0;
 
             for (int i = 0; i < recordCount; i++) {
                 final int recordLength = dbDataStream.readInt();
+                assert recordLength > 0;
                 final byte[] recordData = dbStream.readNBytes(recordLength);
+                assert recordData.length == recordLength;
+
                 try {
                     taskList.addTask(TaskSerializer.inflate(recordData));
                 } catch (DukeIoException ex) {
@@ -58,9 +62,12 @@ public class TaskListSerializer {
      */
     public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIoException {
         try (final DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
+            assert taskList.getTaskCount() >= 0;
             dbDataStream.writeInt(taskList.getTaskCount());
+
             for (int i = 0; i < taskList.getTaskCount(); i++) {
                 final byte[] flattenedData = TaskSerializer.deflate(taskList.getTaskByIndex(i));
+                assert flattenedData.length > 0;
                 dbDataStream.writeInt(flattenedData.length);
                 dbDataStream.write(flattenedData);
             }

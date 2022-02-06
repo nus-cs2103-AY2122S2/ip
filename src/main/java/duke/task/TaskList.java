@@ -24,6 +24,8 @@ public class TaskList {
      * @return <code>Task</code> object added to the list.
      */
     public Task addTask(Task task) {
+        assert task != null;
+
         this.tasks.add(task);
         this.notifyListeners();
         return task;
@@ -44,6 +46,7 @@ public class TaskList {
      * @param consumer Function that takes the 0-based index of the task in the list and the task object.
      */
     public void doForEach(BiConsumer<Integer, ? super Task> consumer) {
+        assert consumer != null;
         for (int i = 0; i < this.tasks.size(); i++) {
             consumer.accept(i, this.tasks.get(i));
         }
@@ -73,6 +76,8 @@ public class TaskList {
             return null;
         }
         final Task deletedTask = this.tasks.remove(index);
+        assert deletedTask != null;
+
         this.notifyListeners();
         return deletedTask;
     }
@@ -85,6 +90,7 @@ public class TaskList {
      * @return The <code>Task</code> supplied as the argument.
      */
     public Task markTask(Task task, boolean isDone) {
+        assert task != null;
         if (task.isDone() != isDone) {
             task.setDone(isDone);
             this.notifyListeners();
@@ -99,6 +105,7 @@ public class TaskList {
      * @param listener Change handler to add.
      */
     public void registerListener(Consumer<TaskList> listener) {
+        assert listener != null;
         this.changeListeners.add(listener);
     }
 
@@ -108,6 +115,7 @@ public class TaskList {
      * @param listener Change handler to remove.
      */
     public void removeListener(Consumer<TaskList> listener) {
+        assert listener != null;
         this.changeListeners.remove(listener);
     }
 

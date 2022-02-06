@@ -54,7 +54,10 @@ public class TaskSerializer {
             task.serialize(dataStream);
             dataStream.flush();
             memStream.flush();
-            return memStream.toByteArray();
+
+            final byte[] flattenedData = memStream.toByteArray();
+            assert flattenedData.length > 0;
+            return flattenedData;
         } catch (IOException ex) {
             throw new DukeIoException("Failed to serialize Task");
         }
