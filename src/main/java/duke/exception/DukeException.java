@@ -7,6 +7,7 @@ public class DukeException extends Exception {
 
     /**
      * Prints the exception message.
+     *
      * @param message Message to be printed.
      */
     public DukeException(String message) {

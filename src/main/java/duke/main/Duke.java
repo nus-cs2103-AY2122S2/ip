@@ -3,9 +3,6 @@ package duke.main;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * Behaves as a task manager to keep record of the different tasks.
@@ -15,10 +12,10 @@ public class Duke {
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * Creates a Duke object that takes in a filepath for reading and writing of data.
+     *
      * Initializes all necessary classes.
      * @param filePath Path in which the list of task is stored.
      */
@@ -26,27 +23,23 @@ public class Duke {
         parser = new Parser();
         storage = new Storage(filePath);
         taskList = new TaskList();
-        ui = new Ui();
+        taskList.fetchData(storage.readData());
     }
 
     /**
-     * Execute the Duke bot.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    private void run() {
-        taskList.fetchData(storage.readData());
-        ui.showWelcome();
+    public String getResponse(String input) {
+        String response = parser.parse(input);
 
-        boolean isExit = false;
-        Scanner scanner = new Scanner(System.in);
-
-        while (!isExit) {
-            parser.parse(scanner.nextLine());
-            isExit = parser.isExit();
-        }
-        storage.saveData(taskList.getList());
+        return "Duke: \n\n" + response;
     }
 
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+    /**
+     * Saves the current data in a text file.
+     */
+    public void saveData() {
+        storage.saveData(taskList.getList());
     }
 }

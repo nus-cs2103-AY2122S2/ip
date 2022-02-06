@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Creates a Storage object that has access to the text file as specified by the filepath.
+     *
      * @param filePath Path in which the text file is stored or to be stored.
      */
     public Storage(String filePath) {
@@ -30,12 +31,13 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Duke could not find the file! Please check the filepath again!");
         }
     }
 
     /**
      * Reads data from the text file and output it as a list of tasks.
+     *
      * @return An array list consisting of all previously stored tasks.
      */
     public ArrayList<Task> readData() {
@@ -63,13 +65,14 @@ public class Storage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("OOPS!!! Duke.Main.Duke is unable to locate your file!");
+            System.out.println("OOPS!!! Duke is unable to locate your file!");
         }
         return list;
     }
 
     /**
      * Saves the current tasks into the text file as specified by the filepath.
+     *
      * @param list List of tasks created by the user.
      */
     public void saveData(ArrayList<Task> list) {
@@ -88,7 +91,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("OOPS!!! Duke.Main.Duke is unable to write to your file!");
+            System.out.println("OOPS!!! Duke is unable to write to your file!");
         }
     }
 }

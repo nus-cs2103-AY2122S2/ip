@@ -8,25 +8,27 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate by;
+    private LocalDate date;
 
     /**
      * Creates a Deadline object with description of the task.
+     *
      * @param description Description of the deadline task.
-     * @param by Date in which the task is due.
+     * @param date Date in which the task is due.
      */
-    public Deadline(String description, LocalDate by) {
-        super(description, "D", by);
-        this.by = by;
+    public Deadline(String description, LocalDate date) {
+        super(description, "D", date);
+        this.date = date;
     }
 
     /**
      * Prints out the details of the Deadline task.
+     *
      * @return A string with details of the Deadline task.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

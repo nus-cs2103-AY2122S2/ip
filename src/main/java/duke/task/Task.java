@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.ui.Ui;
-
 import java.time.LocalDate;
 
 /**
@@ -15,6 +13,7 @@ public class Task {
 
     /**
      * Creates a Task object with the relevant details.
+     *
      * @param description Description of the task.
      * @param charId A character corresponding to the type of task created.
      * @param date Date in which the task is due.
@@ -28,10 +27,11 @@ public class Task {
 
     /**
      * Marks the task as completed or incomplete.
+     *
      * @param mark A boolean to mark or unmark a task.
      * @param show A boolean to print Duke's reply to the user.
      */
-    public void markTask(boolean mark, boolean show) {
+    public String markTask(boolean mark, boolean show) {
         this.marked = mark;
         String output;
 
@@ -41,12 +41,14 @@ public class Task {
             } else {
                 output = "OK, I've marked this task as not done yet:\n";
             }
-            new Ui().echo(output + toString());
+            return output + toString();
         }
+        return "";
     }
 
     /**
      * Returns 'X' if the task is mark, a space, ' ' otherwise.
+     *
      * @return 'X' if the task is mark, a space, ' ' otherwise.
      */
     public char getMark() {
@@ -55,6 +57,7 @@ public class Task {
 
     /**
      * Returns a description of the task.
+     *
      * @return A description of the task.
      */
     public String getUserInput() {
@@ -63,6 +66,7 @@ public class Task {
 
     /**
      * Returns the char representation of the task.
+     *
      * @return The char representation of the task.
      */
     public String getCharId() {
@@ -71,6 +75,7 @@ public class Task {
 
     /**
      * Returns the date in which the task is due.
+     *
      * @return The date in which the task is due.
      */
     public LocalDate getDate() {
@@ -79,6 +84,7 @@ public class Task {
 
     /**
      * Prints out the details of the task.
+     *
      * @return A string with details of the task.
      */
     @Override

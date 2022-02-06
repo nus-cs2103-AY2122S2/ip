@@ -1,7 +1,6 @@
 package duke.tasklist;
 
 import duke.exception.DukeException;
-import duke.ui.Ui;
 import duke.task.Task;
 
 import java.time.LocalDate;
@@ -26,26 +25,35 @@ public class TaskList {
 
     /**
      * Adds a new task to the list.
+     *
      * @param task Task to be added to the list.
      */
     public void add(Task task) {
         list.add(task);
-        new Ui().echo("Got it. I have added this task:\n" + task
-                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     /**
      * Removes a specific task in the list.
-     * @param pos Position at which the task in the list is to be removed.
+     *
+     * @param input Input given by the user.
+     * @return A string reply that indicates the removal of task from the list.
      */
-    public void delete(int pos) {
-        String description = list.get(pos).toString();
-        list.remove(pos);
-        new Ui().echo("Noted. I've removed this task:\n" + description + "\nNow you have " + list.size() + " tasks in the list.");
+    public String delete(String input) {
+        try {
+            int i = Integer.parseInt(input.strip()) - 1;
+
+            String description = list.get(i).toString();
+            list.remove(i);
+            return "Noted. I've removed this task:\n" + description + "\nNow you have "
+                    + list.size() + " tasks in the list.";
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            return "Please enter a valid task number!";
+        }
     }
 
     /**
      * Returns the list of tasks.
+     *
      * @return The list of tasks.
      */
     public ArrayList<Task> getList() {
@@ -54,34 +62,68 @@ public class TaskList {
 
     /**
      * Mark the task to be completed in the list.
-     * @param pos Position at which the task is to be marked completed.
+     *
+     * @param input Input given by the user.
+     * @return A string reply that notifies the user that the task is marked.
      */
-    public void markTask(int pos) {
-        list.get(pos).markTask(true, true);
+    public String markTask(String input) {
+        try {
+            int i = Integer.parseInt(input.strip()) - 1;
+
+            if (i < 0 || i >= list.size()) {
+                throw new DukeException("Duke has noticed that the number you provided does not "
+                        + "match the number of task you have.\nPlease enter a valid task number!");
+            }
+            return list.get(i).markTask(true, true);
+        } catch (NumberFormatException e) {
+            return "OOPS!!! Please enter a valid task number!";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
      * Unmark the task in the list.
-     * @param pos Position at which the task is to be unmarked.
+     *
+     * @param input Input given by the user.
+     * @return A string reply that notifies the user that the task is unmarked.
      */
-    public void unMarkTask(int pos) {
-        list.get(pos).markTask(false, true);
+    public String unMarkTask(String input) {
+        try {
+            int i = Integer.parseInt(input.strip()) - 1;
+
+            if (i < 0 || i >= list.size()) {
+                throw new DukeException("Duke has noticed that the number you provided does not "
+                        + "match the number of task you have.\nPlease enter a valid task number!");
+            }
+
+            return list.get(i).markTask(false, true);
+        } catch (NumberFormatException e) {
+            return "OOPS!!! Please enter a valid task number!";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
      * Returns a list of tasks in detail in the order which it was added.
+     *
+     * @return A string reply consisting of all the tasks in the list.
      */
-    public void readList() {
-        new Ui().showLine();
-        System.out.println("Here are the task in your list:");
+    public String readList() {
+        StringBuilder listBuilder = new StringBuilder();
+        listBuilder.append("Here are the task in your list:\n");
+
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i).toString());
+            listBuilder.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
-        new Ui().showLine();
+
+        return String.valueOf(listBuilder);
     }
 
     /**
      * Populate the list with tasks saved in the text file.
+     *
      * @param data Tasks from the text file to be populated into the list.
      */
     public void fetchData(ArrayList<Task> data) {
@@ -91,41 +133,43 @@ public class TaskList {
 
     /**
      * Finds a task by searching for a keyword.
+     *
      * @param input Keyword specified by the user.
+     * @return A string reply consisting of all the tasks that corresponds to the keyword in the list.
      */
-    public void find(String input) {
+    public String find(String input) {
         int i = 0;
-        new Ui().showLine();
+        StringBuilder listBuilder = new StringBuilder();
 
         try {
             if (input.equals("")) {
-                throw new DukeException("Empty body");
+                throw new DukeException("Find command cannot have an empty body!");
             }
             if (list.size() != 0) {
-                System.out.println("Here are the matching tasks in your list:\n");
+                listBuilder.append("Here are the matching tasks in your list:\n");
+
                 for (Task task: list) {
                     LocalDate date = task.getDate();
 
                     if (task.getUserInput().contains(input)) {
-                        System.out.println(++i + ". " + task);
+                        listBuilder.append(++i).append(". ").append(task).append("\n");
                         continue;
                     }
 
                     if (date != null) {
                         if (date.toString().contains(input)
                                 || date.format(DateTimeFormatter.ofPattern("MMM d yyyy")).contains(input)) {
-                            System.out.println(++i + ".  " + task);
+                            listBuilder.append(++i).append(".  ").append(task).append("\n");
                         }
                     }
                 }
             }
             if (i == 0) {
-                System.out.println("☹ OOPS!!! Duke searched high and low but could not find the task that you want!");
+                return "Duke searched high and low but could not find the task that you want!";
             }
         } catch (DukeException e) {
-            System.out.println("☹ OOPS!!! The description of the find command cannot be empty!");
+            return "OOPS!!! The description of the find command cannot be empty!";
         }
-
-        new Ui().showLine();
+        return String.valueOf(listBuilder);
     }
 }
