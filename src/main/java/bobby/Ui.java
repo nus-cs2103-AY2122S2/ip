@@ -22,8 +22,8 @@ public class Ui {
     private final String line1 = "\t====================================================================\n";
     private final String line2 = "\t====================================================================";
     private final String greeting = "Howdy! I'm Bobby\t\t(｡◕‿‿◕｡)\nWhat can I do for you?";
-    private final String goodbye = "Bye! Hope to see you again soon!\n(｡^‿‿^｡)";
     private final String invalid = "Invalid command!\n(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)";
+    private final String goodbye = "Bye! Hope to see you again soon!\n(｡^‿‿^｡)";
 
     public Ui(Scanner sc) {
         this.sc = sc;
