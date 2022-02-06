@@ -56,12 +56,17 @@ public class Parser {
         String timeOrPlace = null;
         Task parsedTask = null;
 
+        assert activity != null;
+
         switch (splitStr[0]) {
         case "T":
             parsedTask = new Todo(activity);
             break;
         case "E":
             timeOrPlace = splitStr[3];
+
+            assert timeOrPlace != null;
+
             parsedTask = new Event(activity, timeOrPlace);
             break;
         case "D":
@@ -75,7 +80,7 @@ public class Parser {
             break;
         default:
         }
-
+        assert parsedTask != null;
         parsedTask.setMarked(status);
         return parsedTask;
     }

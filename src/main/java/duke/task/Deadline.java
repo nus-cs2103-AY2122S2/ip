@@ -18,6 +18,7 @@ public class Deadline extends Task {
      */
     public Deadline(String activity, String by) {
         super(activity, "D");
+        assert  by != null;
         date = LocalDate.parse(by.trim());
     }
 

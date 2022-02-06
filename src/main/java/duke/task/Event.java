@@ -14,6 +14,7 @@ public class Event extends Task {
      */
     public Event(String activity, String at) {
         super(activity, "E");
+        assert at != null;
         this.at = at;
     }
 
