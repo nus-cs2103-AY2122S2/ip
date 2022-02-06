@@ -20,8 +20,10 @@ public class FindCommand extends Commands {
     }
 
     /**
+     * Returns the apt exit instruction after the command is executed.
+     * If the program ends after this is executed, true is returned.
      *
-     * @return
+     * @return the apt exit instruction.
      */
     @Override
     public boolean isExit() {
@@ -29,11 +31,14 @@ public class FindCommand extends Commands {
     }
 
     /**
+     * Executes the querying of a <code>Tasks</code> object that contains a specific keyword.
+     * If the creation is successful, a <code>CommandResult</code> containing a success message
+     * is returned, else one containing a failrue message will be returned.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.
      * @param storage A class that is in-charge of writing, appending, and reading the database.
-     * @return
+     * @return A command result with a string reflective of the task's success.
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
