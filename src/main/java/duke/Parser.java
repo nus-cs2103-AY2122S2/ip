@@ -114,11 +114,19 @@ public class Parser {
 
         // Process Event & Deadline commands
         if (taskDetails.contains("/by")) {
-            description = taskDetails.split("/by", 2)[0];
-            date = taskDetails.split("/by", 2)[1].substring(1);
+            try {
+                description = taskDetails.split("/by", 2)[0];
+                date = taskDetails.split("/by", 2)[1].substring(1);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Missing deadline date or description!");
+            }
         } else if (taskDetails.contains("/at")) {
-            description = taskDetails.split("/at", 2)[0];
-            dateTime = taskDetails.split("/at", 2)[1].substring(1);
+            try {
+                description = taskDetails.split("/at", 2)[0];
+                dateTime = taskDetails.split("/at", 2)[1].substring(1);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Missing event date or description!");
+            }
         }
 
         switch (commandType) {
