@@ -64,7 +64,9 @@ test {
 
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '9.3'
+    showViolations = true
+    ignoreFailures = false
 }
 
 run{
