@@ -1,6 +1,5 @@
 package com.duke;
 
-import com.duke.modules.Parser;
 import com.duke.modules.Storage;
 import com.duke.modules.TaskList;
 import com.duke.modules.Ui;
