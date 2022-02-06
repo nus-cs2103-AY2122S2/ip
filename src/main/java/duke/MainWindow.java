@@ -24,7 +24,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui ui;
     private TaskList taskList;
     private Parser parser;
 
@@ -37,10 +36,6 @@ public class MainWindow extends AnchorPane {
 
     public VBox getDialogContainer() {
         return this.dialogContainer;
-    }
-
-    public void setUi(Ui ui) {
-        this.ui = ui;
     }
 
     public void setTaskList(TaskList taskList) {
@@ -61,7 +56,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, (userImage))
         );
-        int runResult = parser.run(userInput.getText(), ui, taskList);
+        int runResult = parser.run(userInput.getText(), taskList);
         if (runResult == 1) {
             Storage.saveFile("data", "duke.txt", taskList);
         }

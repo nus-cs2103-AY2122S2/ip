@@ -28,7 +28,7 @@ public class Parser {
      * @param taskList The taskList that is used to maintain list of tasks in Duke
      * @return: Returns an integer that indicate the result of the run.
      */
-    public int run(String inputString, Ui ui, TaskList taskList) {
+    public int run(String inputString, TaskList taskList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = inputString.split("\\s+");
         String action = args[0];
@@ -36,72 +36,72 @@ public class Parser {
         try {
             validate(inputString, action, args, taskList);
         } catch (DukeException de) {
-            ui.print(de.getMessage());
+            Ui.print(de.getMessage());
             return 1;
         }
 
         switch(action) {
         case "bye":
-            ui.print("Bye. Hope to see you again soon!");
+            Ui.print("Bye. Hope to see you again soon!");
             return -1;
         case "list":
             if (args.length > 1) {
                 switch (args[1]) {
                 case "/on":
-                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
+                    Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
                             DateTimeFormatter.ofPattern("dd/M/yyyy")), 0));
                     break;
                 case "/before":
-                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
+                    Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
                             DateTimeFormatter.ofPattern("dd/M/yyyy")), 1));
                     break;
                 case "/after":
-                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
+                    Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
                             DateTimeFormatter.ofPattern("dd/M/yyyy")), 2));
                     break;
                 default:
                     break;
                 }
             } else {
-                ui.print(taskList.getList());
+                Ui.print(taskList.getList());
             }
             return 0;
         case "mark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).mark();
-            ui.print("Task marked as done: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
+            Ui.print("Task marked as done: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
             return 1;
         case "unmark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).unmark();
-            ui.print("Task as not done yet: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
+            Ui.print("Task as not done yet: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
             return 1;
         case "todo":
             taskList.addTask((inputString).substring(5).trim(), false, null, 0);
-            ui.print("Added Task: ", " " + taskList.getLast().toString(),
+            Ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "deadline":
             taskList.addTask(inputString.substring(9).split("/by")[0].trim(), false,
                     LocalDate.parse(inputString.split("/by")[1].substring(1), formatter), 1);
-            ui.print("Added Task: ", " " + taskList.getLast().toString(),
+            Ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "event":
             taskList.addTask(inputString.substring(6).split("/at")[0].trim(), false,
                     LocalDate.parse(inputString.split("/at")[1].substring(1), formatter), 2);
-            ui.print("Added Task: ", " " + taskList.getLast().toString(),
+            Ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "delete":
             String deletedTaskString = taskList.getTask(Integer.parseInt(args[1]) - 1).toString();
             taskList.removeTask(Integer.parseInt(args[1]) - 1);
-            ui.print("Deleted Task:", " " + deletedTaskString,
+            Ui.print("Deleted Task:", " " + deletedTaskString,
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "find":
-            ui.print(taskList.findTasksContaining(args[1]), "Here are the matching tasks in your list:");
+            Ui.print(taskList.findTasksContaining(args[1]), "Here are the matching tasks in your list:");
             return 1;
         default:
-            ui.print("MEOW?");
+            Ui.print("MEOW?");
             return 0;
         }
     }

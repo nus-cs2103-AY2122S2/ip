@@ -20,7 +20,6 @@ import javafx.stage.Stage;
  * Main Class for Duke.
  */
 public class Duke extends Application {
-    private Ui ui = new Ui(null, null);
     private Scanner in = new Scanner(System.in);
     private Parser parser = new Parser();
     private TaskList taskList = new TaskList();
@@ -32,9 +31,9 @@ public class Duke extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
 
-            ui = new Ui(fxmlLoader.<MainWindow>getController().getDialogContainer(),
+            Ui.init(fxmlLoader.<MainWindow>getController().getDialogContainer(),
                     new Image(this.getClass().getResourceAsStream("/images/jerry.png")));
-            fxmlLoader.<MainWindow>getController().setUi(ui);
+
             fxmlLoader.<MainWindow>getController().setParser(parser);
             fxmlLoader.<MainWindow>getController().setTaskList(taskList);
 
@@ -45,7 +44,7 @@ public class Duke extends Application {
             stage.setScene(scene);
             stage.show();
 
-            ui.print("Aye. Hi there young lad...");
+            Ui.print("Aye. Hi there young lad...");
         } catch (IOException e) {
             e.printStackTrace();
         }

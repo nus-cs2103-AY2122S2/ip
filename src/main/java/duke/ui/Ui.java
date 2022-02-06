@@ -13,24 +13,29 @@ import javafx.scene.layout.VBox;
  *
  */
 public class Ui {
-    private VBox v;
-    private Image d;
+    private static VBox vbox;
+    private static Image image;
     private String logo =
             " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    /**
-     * Constructor for DeadlineTask.
-     * @param v The VBox to be displayed on
-     * @param d The image for duke
-     */
-    public Ui(VBox v, Image d) {
-        this.v = v;
-        this.d = d;
+//    /**
+//     * Constructor for DeadlineTask.
+//     * @param v The VBox to be displayed on
+//     * @param d The image for duke
+//     */
+//    public Ui(VBox v, Image d) {
+//        this.v = v;
+//        this.d = d;
+//    }
+
+    public static void init(VBox v, Image d) {
+        vbox = v;
+        image = d;
     }
-    
+
     /**
      * Outputs the specified strings in the following format:
      * ========================================== <br>
@@ -47,7 +52,7 @@ public class Ui {
      * ==========================================
      * @param args strings to be displayed.
      */
-    public void print(String ... args) {
+    public static void print(String ... args) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("    %s%n", "========================"));
         Arrays.asList(args).forEach((x) -> sb.append(String.format("    %s%n", x)));
@@ -64,7 +69,7 @@ public class Ui {
      * ==========================================
      * @param arr list of task to be displayed.
      */
-    public void print(ArrayList<Task> arr) {
+    public static void print(ArrayList<Task> arr) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("    %s%n", "========================"));
         if (arr.size() == 0) {
@@ -86,7 +91,7 @@ public class Ui {
      * ==========================================
      * @param arr list of task to be displayed.
      */
-    public void print(ArrayList<Task> arr, String header) {
+    public static void print(ArrayList<Task> arr, String header) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("    %s%n", "========================"));
         sb.append(String.format("    %s", header));
@@ -103,9 +108,9 @@ public class Ui {
      * Prints the specified string onto the GUI.
      * @param ss The string that is to be displayed
      */
-    public void print(String ss) {
-        v.getChildren().addAll(
-                DialogBox.getDukeDialog(ss, d)
+    public static void print(String ss) {
+        vbox.getChildren().addAll(
+                DialogBox.getDukeDialog(ss, image)
         );
     }
 
