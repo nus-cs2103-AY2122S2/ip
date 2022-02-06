@@ -23,10 +23,12 @@ public class FindCommand extends Command {
             throw new DukeIllegalArgumentException("Search term cannot be empty");
         }
 
+        final String searchTerm = this.args.toLowerCase();
         linePrinter.print("Here are the tasks related to your search:");
         taskList.doForEach((index, task) -> {
-            if (task.getDescription().toLowerCase().contains(this.args.toLowerCase())) {
-                linePrinter.print(String.format("%d. %s", index + 1, task.getReadableString()));
+            if (task.getDescription().toLowerCase().contains(searchTerm)) {
+                linePrinter.print(String.format("%d. %s", index + OFFSET_LOGICAL_TO_READABLE,
+                        task.getReadableString()));
             }
         });
         return true;

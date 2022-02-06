@@ -43,7 +43,7 @@ public class Event extends Task {
     @Override
     public String getReadableString() {
         return String.format("%s (at: %s)", super.getReadableString(),
-                this.at.format(DateTimeFormatter.ofPattern("d MMM yyyy '-' hh:mm a")));
+                this.at.format(DateTimeFormatter.ofPattern(FORMAT_DATETIME)));
     }
 
     @Override

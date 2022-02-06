@@ -32,21 +32,34 @@ public class TaskListSerializer {
         final DataInputStream dbDataStream = new DataInputStream(dbStream);
         try (dbDataStream) {
             final int recordCount = dbDataStream.readInt();
-
-            for (int i = 0; i < recordCount; i++) {
-                final int recordLength = dbDataStream.readInt();
-                final byte[] recordData = dbStream.readNBytes(recordLength);
-                try {
-                    taskList.addTask(TaskSerializer.inflate(recordData));
-                } catch (DukeIoException ex) {
-                    System.out.println("Verbose: Failed to load Task record");
-                }
-            }
+            inflateRecords(dbDataStream, recordCount, taskList);
         } catch (IOException ex) {
             throw new DukeIoException("Failed to inflate database: IO Error");
         }
 
         return taskList;
+    }
+
+    /**
+     * Inflates task records from a database {@link DataInputStream} object.
+     *
+     * @param dbDataStream The data stream to read from.
+     * @param recordCount The number of records to read.
+     * @param taskList The list that inflated records should be added to.
+     * @throws IOException If any error occurs while reading the input stream.
+     */
+    private static void inflateRecords(DataInputStream dbDataStream, int recordCount, TaskList taskList)
+            throws IOException {
+        for (int i = 0; i < recordCount; i++) {
+            final int recordLength = dbDataStream.readInt();
+            final byte[] recordData = dbDataStream.readNBytes(recordLength);
+
+            try {
+                taskList.addTask(TaskSerializer.inflate(recordData));
+            } catch (DukeIoException ex) {
+                System.out.println("Verbose: Failed to load Task record");
+            }
+        }
     }
 
     /**
@@ -59,13 +72,26 @@ public class TaskListSerializer {
     public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIoException {
         try (final DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
             dbDataStream.writeInt(taskList.getTaskCount());
-            for (int i = 0; i < taskList.getTaskCount(); i++) {
-                final byte[] flattenedData = TaskSerializer.deflate(taskList.getTaskByIndex(i));
-                dbDataStream.writeInt(flattenedData.length);
-                dbDataStream.write(flattenedData);
-            }
+            deflateRecords(dbDataStream, taskList);
         } catch (IOException e) {
             throw new DukeIoException("Failed to deflate database: IO Error");
+        }
+    }
+
+    /**
+     * Deflates tasks from a task list into a {@link DataOutputStream} object.
+     *
+     * @param dbDataStream The data stream to write to.
+     * @param taskList The task list containing the tasks to be deflated.
+     * @throws DukeIoException If an error occurs during task deflation.
+     * @throws IOException If an error occurs while writing to the output stream.
+     */
+    private static void deflateRecords(DataOutputStream dbDataStream, TaskList taskList)
+            throws DukeIoException, IOException {
+        for (int i = 0; i < taskList.getTaskCount(); i++) {
+            final byte[] flattenedData = TaskSerializer.deflate(taskList.getTaskByIndex(i));
+            dbDataStream.writeInt(flattenedData.length);
+            dbDataStream.write(flattenedData);
         }
     }
 }

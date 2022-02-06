@@ -54,14 +54,14 @@ public class UpcomingCommandTest {
             new UpcomingCommand("test").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Days must be a positive number", ex.getMessage());
+            assertEquals("Days must be a non-negative number", ex.getMessage());
         }
 
         try {
             new UpcomingCommand("-1").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Days must be a positive number", ex.getMessage());
+            assertEquals("Days must be a non-negative number", ex.getMessage());
         }
     }
 }

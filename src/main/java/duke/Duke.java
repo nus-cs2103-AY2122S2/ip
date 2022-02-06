@@ -31,20 +31,22 @@ public class Duke extends Application {
     Duke initializeTaskList() {
         try {
             taskList = Storage.load();
-            taskList.registerListener(store -> {
-                try {
-                    Storage.save(store);
-                } catch (DukeIoException ex) {
-                    System.out.println("Warning: An error occurred while saving Task list");
-                }
-            });
         } catch (DukeIoException ex) {
             System.out.println("Encountered an error during initialization:\n"
                     + "\t " + ex.getMessage() + " \n"
                     + "Please check that you have read / write permissions in the current folder.\n"
                     + "If the saved data file is corrupted, consider deleting the data folder.\n"
                     + "Will not save any changes!");
+            return this;
         }
+
+        taskList.registerListener(store -> {
+            try {
+                Storage.save(store);
+            } catch (DukeIoException ex) {
+                System.out.println("Warning: An error occurred while saving Task list");
+            }
+        });
         return this;
     }
 

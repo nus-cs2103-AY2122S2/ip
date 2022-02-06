@@ -43,7 +43,7 @@ public class Deadline extends Task {
     @Override
     public String getReadableString() {
         return String.format("%s (by: %s)", super.getReadableString(),
-                this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy '-' hh:mm a")));
+                this.by.format(DateTimeFormatter.ofPattern(FORMAT_DATETIME)));
     }
 
     @Override
