@@ -90,33 +90,32 @@ public class Parser {
      * @throws DukeException handles incomplete and unknown inputs. E.g., "deadline do project /by 12312312".
      */
     public static Command parse(String input) throws DukeException {
-        // Create a String array to read various functions
         String[] strs = input.split(" ");
 
-        // Store first word as variable
         String firstWord = strs[0];
 
-        if (input.equals("")) {
+        switch (firstWord) {
+        case "":
             throw new EmptyInputException();
-        } else if (input.equalsIgnoreCase("bye")) {
+        case "bye":
             return new ExitCommand();
-        } else if (input.equalsIgnoreCase("list")) {
+        case "list":
             return new PrintCommand();
-        } else if (firstWord.equalsIgnoreCase("mark")) {
+        case "mark":
             return handleMarkInput(strs[INDEX_AFTER_MARK]);
-        } else if (firstWord.equalsIgnoreCase("unmark")) {
+        case "unmark":
             return handleUnmarkInput(strs[INDEX_AFTER_UNMARK]);
-        } else if (firstWord.equalsIgnoreCase("todo")) {
+        case "todo":
             return handleTodo(input, firstWord);
-        } else if (firstWord.equalsIgnoreCase("deadline")) {
+        case "deadline":
             return handleDeadline(input, firstWord);
-        } else if (firstWord.equalsIgnoreCase("event")) {
+        case "event":
             return handleEvent(input, firstWord);
-        } else if (firstWord.equalsIgnoreCase("delete")) {
+        case "delete":
             return handleDelete(strs);
-        } else if (firstWord.equalsIgnoreCase("find")) {
+        case "find":
             return handleFind(input);
-        } else {
+        default:
             throw new UnknownInputException();
         }
     }
