@@ -48,10 +48,11 @@ class AddTaskCommand extends TaskListCommand {
      * @throws IllegalArgumentException If args are invalid for task.
      */
     private static Task createTask(String name, String args) throws IllegalArgumentException {
-        Task task = null;
         if (args == null) {
             throw new IllegalArgumentException("Tasks description cannot be empty");
         }
+
+        Task task;
         switch (name) {
         case "todo":
             task = new ToDo(args);

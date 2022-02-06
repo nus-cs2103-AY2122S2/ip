@@ -11,10 +11,6 @@ import duke.task.Task;
  * a Task, either marking it as done or undone.
  */
 class MarkTaskCommand extends TaskListCommand {
-
-    /** Mark type for command, either done or undone */
-    private final MarkType markType;
-
     /**
      * Enum to represent whether the command should
      * mark task as done or undone.
@@ -23,6 +19,9 @@ class MarkTaskCommand extends TaskListCommand {
         DONE,
         UNDONE
     }
+
+    /** Mark type for command, either done or undone */
+    private final MarkType markType;
 
     public MarkTaskCommand(String name, String args, MarkType markType, TaskList taskList) {
         super(name, args, taskList);
