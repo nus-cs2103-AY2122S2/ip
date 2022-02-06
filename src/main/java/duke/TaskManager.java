@@ -3,7 +3,6 @@ package duke;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import duke.exceptions.UnknownFileEntry;
 import duke.tasks.Task;

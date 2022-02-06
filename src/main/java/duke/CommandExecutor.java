@@ -79,7 +79,7 @@ public class CommandExecutor {
      * @return string of output to print in gui for this action
      * @throws IOException if error encountered with writing to file
      */
-    public String executeMarkTask(int indexOfTask) throws IOException{
+    public String executeMarkTask(int indexOfTask) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append("Nice! I've marked this task as done:\n");
         str.append(taskManager.completeTask(indexOfTask));
@@ -93,7 +93,7 @@ public class CommandExecutor {
      * @return string of output to print in gui for this action
      * @throws IOException if error encountered with writing to file
      */
-    public String executeUnmarkTask(int indexOfTask) throws IOException{
+    public String executeUnmarkTask(int indexOfTask) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append("OK, I've marked this task as not done yet:\n");
         str.append(taskManager.removeCompletedStatusOfTask(indexOfTask));
@@ -107,7 +107,7 @@ public class CommandExecutor {
      * @return string of output to print in gui for this action
      * @throws IOException if error encountered with writing to file
      */
-    public String executeAddTask(Task task) throws IOException{
+    public String executeAddTask(Task task) throws IOException {
         taskManager.addTask(task);
         StringBuilder str = new StringBuilder();
         str.append("Got it. I've added this task:\n");
@@ -123,7 +123,7 @@ public class CommandExecutor {
      * @return string of output to print in gui for this action
      * @throws IOException
      */
-    public String executeDeleteTask(int indexOfTask) throws IOException{
+    public String executeDeleteTask(int indexOfTask) throws IOException {
         Task task = taskManager.removeTask(indexOfTask);
         StringBuilder str = new StringBuilder();
         str.append("Noted. I've removed this task:\n");
@@ -166,11 +166,16 @@ public class CommandExecutor {
         return str.toString();
     }
 
-    public String executeSort() {
+    /**
+     * Execute the sort command.
+     * @return string of output to print to gui for this action
+     */
+    public String executeSort() throws IOException {
         taskManager.sortByName();
         StringBuilder str = new StringBuilder();
         str.append("Here are your items sorted by name:\n");
         str.append(taskManager.getPrintableListOfTasks());
+        taskManager.saveTasks();
         return str.toString();
     }
 
