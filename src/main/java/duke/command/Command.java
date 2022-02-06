@@ -14,6 +14,11 @@ import duke.util.Printable;
  * Represents a command handler that executes actions based on supplied arguments.
  */
 public abstract class Command {
+    protected static final int OFFSET_READABLE_TO_LOGICAL = -1;
+    protected static final int OFFSET_LOGICAL_TO_READABLE = 1;
+    protected static final String DEFAULT_TIME = " 00:00";
+    protected static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
+
     /** Arguments supplied to the command handler. */
     protected final String args;
 
@@ -40,9 +45,8 @@ public abstract class Command {
             throw new DukeIllegalArgumentException("Task Number must be a number");
         }
 
-        assert taskIndex > 0;
-        // Note that task storage uses 0-based index
-        return taskIndex - 1;
+        // Convert UI 1-based indexing to task storage 0-based indexing
+        return taskIndex + OFFSET_READABLE_TO_LOGICAL;
     }
 
     /**
@@ -69,7 +73,7 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date string is not in a valid format.
      */
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString + " 00:00", "dd/MM/yyyy HH:mm");
+        return parseDateTime(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
     }
 
     /**
@@ -80,7 +84,7 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date-time string is not in a valid format.
      */
     protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString, "dd/MM/yyyy HH:mm");
+        return parseDateTime(dateString, FORMAT_DEFAULT_DATETIME);
     }
 
     /**

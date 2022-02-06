@@ -61,11 +61,9 @@ public class Storage {
         if (dataFolder.exists() && !dataFolder.isDirectory()) {
             throw new DukeIoException("Data Store is not a directory at: "
                     + dataFolder.getAbsolutePath());
-        } else if (!dataFolder.exists()) {
-            if (!dataFolder.mkdir()) {
-                throw new DukeIoException("Cannot create data store directory at: "
-                        + dataFolder.getAbsolutePath());
-            }
+        } else if (!dataFolder.exists() && !dataFolder.mkdir()) {
+            throw new DukeIoException("Cannot create data store directory at: "
+                    + dataFolder.getAbsolutePath());
         }
         assert dataFolder.exists();
     }
@@ -101,10 +99,8 @@ public class Storage {
 
         final File database = Paths.get(DATA_FOLDER_PATH, DATABASE_FILENAME).toFile();
         try {
-            if (!database.exists()) {
-                if (!database.createNewFile()) {
-                    throw new DukeIoException("Could not create database");
-                }
+            if (!database.exists() && !database.createNewFile()) {
+                throw new DukeIoException("Could not create database");
             }
 
             assert database.exists();

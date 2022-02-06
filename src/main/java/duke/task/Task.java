@@ -9,6 +9,8 @@ import java.util.Optional;
 import duke.util.Serializable;
 
 public abstract class Task implements Serializable {
+    protected static final String FORMAT_DATETIME = "d MMM yyyy '-' hh:mm a";
+
     private final TaskType type;
     private String description;
     private boolean isDone;
