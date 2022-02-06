@@ -38,26 +38,29 @@ public class Storage {
         File saveFile = new File(this.filepath);
         saveFile.getParentFile().mkdirs();
         try {
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-            }
+            saveFile.createNewFile();
         } catch (IOException e) {
-            System.exit(1);
+            e.printStackTrace();
         }
 
         ArrayList<Task> taskList = new ArrayList<>(100);
         Scanner readFile = null;
         String nextSavedTask;
+
         try {
             readFile = new Scanner(saveFile).useDelimiter("\\|");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.exit(1);
         }
+
+        assert readFile != null;
+
         while (readFile.hasNextLine()) {
             nextSavedTask = readFile.nextLine();
-            taskList.add(Parser.parseFile(nextSavedTask));
+            Task savedTask = Parser.parseFile(nextSavedTask);
+            taskList.add(savedTask);
         }
+
         readFile.close();
         return taskList;
     }
@@ -72,14 +75,14 @@ public class Storage {
             fw.write(addedTask.toString());
             fw.close();
         } catch (IOException e) {
-            System.exit(1);
+            e.printStackTrace();
         }
     }
 
     /**
      * Replaces a task in storage with the given task.
      * @param index the index of the stored task to be replaced.
-     * @param updatedTask the updated task.
+     * @param updatedTask the updated task. If null then the task is to be deleted.
      */
     public void saveUpdatedTask(int index, Task updatedTask) {
         String tempFilePath = "data/temp.txt";
@@ -91,38 +94,46 @@ public class Storage {
         try {
             reader = new BufferedReader(new FileReader(saveFile));
             writer = new BufferedWriter(new FileWriter(tempFile));
-
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
         }
+        assert writer != null;
 
-        String currentLine;
-        int i = 0;
+        changeLine(reader, writer, updatedTask, index);
+
         try {
+            // Update saved file with temp file and delete temp file.
+            Files.copy(Paths.get(tempFilePath), Paths.get(filepath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get(tempFilePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Changes the task at the given line number with the given task.
+     * @param reader reader io
+     * @param writer writer io
+     * @param updatedTask the task to be updated in save file. If null then delete the task in save file.
+     * @param lineNumber the line number of the task in the saved file to be updated.
+     */
+    private void changeLine(BufferedReader reader, BufferedWriter writer, Task updatedTask, int lineNumber) {
+        try {
+            String currentLine;
+            int i = -1;
             while ((currentLine = reader.readLine()) != null) {
-                if (i == index) {
-                    if (updatedTask != null) {
-                        writer.write(updatedTask.toString());
-                    }
-                } else {
+                i++;
+                if (i == lineNumber && updatedTask != null) {
+                    // Update the task at lineNumber
+                    writer.write(updatedTask.toString());
+                } else if (i != lineNumber) {
                     writer.write(currentLine + "\n");
                 }
-                i++;
             }
             writer.close();
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
-        }
-        try {
-            Files.copy(Paths.get(tempFilePath), Paths.get(filepath), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get(tempFilePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
         }
     }
-
 }
