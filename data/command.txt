@@ -1,2 +1,5 @@
-T | 1 | a
-T | 0 | b
+T | 0 | a
+T | 0 | a
+T | 0 | v
+T | 0 | dasdasd
+T | 0 | adasdasd
