@@ -9,12 +9,21 @@ import duke.ui.Ui;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Duke helps the user manage their tasks.
+ */
 public class Duke {
 
     private static final String LOG_PATH = "data/log.txt";
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor for Duke.
+     * Prints welcome message, initialises storage and taskList.
+     *
+     * @param filePath Path to log file.
+     */
     public Duke(String filePath) {
         Ui.welcome();
         try {
@@ -28,6 +37,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         //add scanner onwards
         Scanner input = new Scanner(System.in);

@@ -8,9 +8,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser for reading input from the user.
+ */
 public class Parser {
+
+    /**
+     * Returns boolean stating whether or not the user wants to quit Duke.
+     * Handles logic for each implemented command.
+     *
+     * @param input User's input.
+     * @param taskList Current list of tasks.
+     * @return Whether user is quitting Duke.
+     * @throws DukeException If user enters unknown command.
+     */
     public static boolean parse(String input, TaskList taskList) throws DukeException {
-        //rmb to return true if exit
         if (input.equals("bye")) {
             Ui.print("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
             return true;
@@ -43,6 +55,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Handles logic for list command.
+     * Prints all tasks in taskList
+     *
+     * @param taskList Current list of tasks.
+     */
     private static void handleList(TaskList taskList) {
         //Add name of task to str for easy printing
         int size = taskList.size();
@@ -57,11 +75,25 @@ public class Parser {
         }
     }
 
-    // returns true if incomplete
+    /**
+     * Checks if input is incomplete.
+     * If input is incomplete, returns true.
+     *
+     * @param inputArgs String array made up of individual words from input.
+     * @returns Whether input is incomplete.
+     */
     private static boolean checkIncompleteness(String[] inputArgs) {
         return (inputArgs.length < 2 || inputArgs[1].isBlank());
     }
 
+    /**
+     * Handles logic for mark/ unmark command.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @param isMark Whether to mark or unmark the task.
+     * @throws DukeException If number of task to mark/unmark not specified.
+     */
     private static void handleMark(TaskList taskList, String[] inputArgs, boolean isMark) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?");
@@ -81,6 +113,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles logic for delete command.
+     * Deletes selected task.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @throws DukeException If number of task to mark/unmark not specified.
+     */
     private static void handleDelete(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("YOU TRYING TO LEPAK IS IT? WAKE UP YOUR BLOODY IDEA!");
@@ -127,6 +167,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles logic for deadline command.
+     * Creates new Deadline with supplied information.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @throws DukeException If input is incomplete.
+     */
     private static void handleDeadline(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
@@ -149,6 +197,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles logic for event command.
+     * Creates new Event with supplied information.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @throws DukeException If input is incomplete.
+     */
     private static void handleEvent(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
@@ -172,6 +228,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles logic for todo command.
+     * Creates new ToDo with supplied information.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @throws DukeException If input is incomplete.
+     */
     private static void handleToDo(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
