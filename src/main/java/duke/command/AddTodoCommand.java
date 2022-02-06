@@ -32,6 +32,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         ToDo newTodo = new ToDo(description);
         tasks.add(newTodo);
         ui.appendMessage(Ui.ADD_MESSAGE);

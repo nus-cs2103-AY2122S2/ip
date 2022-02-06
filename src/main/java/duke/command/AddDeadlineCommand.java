@@ -36,6 +36,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         Deadline newDeadline = new Deadline(description, deadline);
         tasks.add(newDeadline);
         ui.appendMessage(Ui.ADD_MESSAGE);

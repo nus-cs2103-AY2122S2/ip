@@ -37,6 +37,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         tasks.markTask(taskIndex, isDone);
         String message;
         if (isDone) {

@@ -27,6 +27,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         try {
             String message = "Charizard's burning wish list:";
             ui.appendMessage(message);

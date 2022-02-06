@@ -36,6 +36,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         Event newEvent = new Event(description, dateTime);
         tasks.add(newEvent);
         ui.appendMessage(Ui.ADD_MESSAGE);
