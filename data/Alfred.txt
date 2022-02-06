@@ -1,4 +1,4 @@
-T` `some thing
-T` `some other thing
-E` ` some event`2021-10-10T11:00:00
-D` ` some deadline`2022-11-12T13:00:00
+T` ` thing
+D` ` some deadline`2022-10-22T10:00:00
+E` ` some event`2022-09-26T11:00:00
+E` ` some different event`2022-09-26T11:00:00

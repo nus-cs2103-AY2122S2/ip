@@ -7,9 +7,10 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    protected static final  String type = "D";
+    protected static final String type = "D";
     private final LocalDateTime dateTime;
     private final String dateAndTime;
+    private final String description;
 
     /**
      * Constructs a deadline object.
@@ -20,6 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dateAndTime) {
         super(description);
+        this.description = description;
         this.dateAndTime = dateAndTime;
         this.dateTime = LocalDateTime.parse(dateAndTime);
     }
@@ -27,6 +29,7 @@ public class Deadline extends Task {
 
     protected Deadline(Boolean marked, String description, String dateAndTime) {
         super(description);
+        this.description = description;
         this.dateAndTime = dateAndTime;
         this.dateTime = LocalDateTime.parse(dateAndTime);
         if (marked) {
@@ -49,5 +52,17 @@ public class Deadline extends Task {
         return "[" + Deadline.type + "]" + super.toString() + " (by: "
                 + Task.localDateTimeToString(this.dateTime) + ")";
 
+    }
+
+    @Override
+    public boolean equals(Task task) {
+
+        if (!(task instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline deadlineTask = (Deadline) task;
+        return this.description.equals(deadlineTask.description)
+                && this.dateTime.equals(deadlineTask.dateTime);
     }
 }

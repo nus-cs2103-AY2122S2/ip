@@ -1,5 +1,6 @@
 package alfred.storage;
 
+import alfred.exceptions.DuplicationException;
 import alfred.exceptions.InvalidIndexException;
 import alfred.task.Task;
 import java.io.File;
@@ -91,12 +92,20 @@ public class AlfredStorage {
     }
 
     /**
-     * Updates the internal data state to add a Task object.
+     * Adds a task to the internal state.
      *
-     * @param task Task object.
+     * @param task task to be added
+     * @throws DuplicationException if identical task already in task list.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DuplicationException {
+
         assert this.taskList != null;
+
+        // check for duplicates
+        boolean hasDuplicate = this.taskList.stream().anyMatch(t -> t.equals(task));
+        if (hasDuplicate) {
+            throw new DuplicationException();
+        }
         this.taskList.add(task);
         this.saveToFile();
     }
@@ -139,7 +148,6 @@ public class AlfredStorage {
         return this.listToString(matches);
 
     }
-
 
     private void checkValidListIndex(int taskId) throws InvalidIndexException {
         assert this.taskList != null;
