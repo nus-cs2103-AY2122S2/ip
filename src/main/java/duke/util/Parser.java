@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Parser {
     private String[] inputArray;
     private String originalInput;

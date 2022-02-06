@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Representation of a Task object
  */

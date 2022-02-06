@@ -1,31 +1,35 @@
+package duke.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+
+import duke.util.DateTimeCustomFormatter;
 
 /**
- * Represents a Deadline object
+ * Represents an Event object
  */
-class Deadline extends Task {
+public class Event extends Task {
     private LocalDateTime metaInfo;
 
     /**
      * Default constructor
      * 
      * @param description description of the task
-     * @param metaInfo    deadline information of the task
+     * @param metaInfo    duration information of the task
      */
-    public Deadline(String description, String metaInfo) throws DateTimeParseException{
-        super(description, "D");
+    public Event(String description, String metaInfo) {
+        super(description, "E");
         this.metaInfo = DateTimeCustomFormatter.getDateFromString(metaInfo);
     }
 
     /**
-     * This constructor initializes deadline objects with isDone specified
-     * @param isDone whether this task is done or not
+     * This constructor initializes event objects with isDone specified
+     * 
+     * @param isDone      whether this task is done or not
      * @param description description of the task
-     * @param metaInfo deadline information of the task
+     * @param metaInfo    duration information of the task
      */
-    public Deadline(boolean isDone, String description, String metaInfo) throws DateTimeParseException{
-        super(description, "D");
+    public Event(boolean isDone, String description, String metaInfo) {
+        super(description, "E");
         if (isDone) {
             setDone();
         } else {
@@ -35,15 +39,15 @@ class Deadline extends Task {
     }
 
     /**
-     * @return String default string representation of a deadline
+     * @return String default string representation of an event
      */
     @Override
     public String toString() {
         return super.toString() + "(by:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
+
     }
 
-    
-    /** 
+    /**
      * @return String string representation of this task to be saved to file
      */
     @Override
