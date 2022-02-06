@@ -1,10 +1,7 @@
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 /**
  * Decides which type of command to generate given user input
  */
-public class CommandFactory {
+public class Parser {
 
     /**
      * Extracts the command portion of the input provided by the user (usually first word)

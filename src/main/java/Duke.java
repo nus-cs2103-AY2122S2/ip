@@ -29,9 +29,9 @@ public class Duke {
         Ui.printIntro();
 
         // Reading and processing inputs
-        CommandFactory commandFactory = new CommandFactory();
+        Parser Parser = new Parser();
         while (true) {
-            Command nextCommand = commandFactory.makeCommand(ui.getNextLine()); // Creating the appropriate command
+            Command nextCommand = Parser.makeCommand(ui.getNextLine()); // Creating the appropriate command
             nextCommand.execute();
 
             if (nextCommand instanceof ByeCommand) { // Check for exit command
