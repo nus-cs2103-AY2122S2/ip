@@ -55,32 +55,6 @@ public class Duke {
     }
 
     /**
-     * Formats the given input between lines
-     *
-     * @param input Formatted input with proper indents and newlines.
-     */
-    public static String formatLines(String input) {
-        String output = "";
-        output += Duke.line();
-        output += input;
-        output += "\n" + Duke.line();
-
-        return output;
-    }
-
-    // TODO: Deprecate, UI provides the line
-
-    /**
-     * Provides a formatting line for Duke's responses
-     *
-     * @return A formatted line
-     */
-    public static String line() {
-        String line = "\t____________________________________________________________\n";
-        return line;
-    }
-
-    /**
      * Formats a single line with a new line
      *
      * @param input Input string

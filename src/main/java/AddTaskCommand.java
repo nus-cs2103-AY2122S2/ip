@@ -25,18 +25,6 @@ public class AddTaskCommand extends Command {
         this.isComplete = isComplete;
     }
 
-    /**
-     * Formats the echo for the task that was added to the user as confirmation
-     *
-     * @return Formatted echo
-     */
-    private String formatOutput(Task newTask) {
-        String response = "added: " + newTask.toString();
-        String formattedString = Duke.indent(response, 1);
-        String finalFormatted = Duke.formatLines(formattedString);
-
-        return finalFormatted;
-    }
 
     @Override
     public void execute() {
