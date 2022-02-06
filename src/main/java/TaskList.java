@@ -14,17 +14,23 @@ public class TaskList {
             File file = new File(path);
             file.createNewFile();
             Scanner sc = new Scanner(file);
-            sc.useDelimiter(" | ");
+            sc.useDelimiter(" \\| ");
             tasks = new ArrayList<>();
-            while (sc.hasNextLine()) {
+            while (sc.hasNext()) {
                 String taskType = sc.next();
                 String isDoneSymbol = sc.next();
                 String content = sc.next();
-                boolean isDone = switch (isDoneSymbol) {
-                    case "0" -> false;
-                    case "1" -> true;
-                    default -> throw new DukeException("I cannot read the file. It is not in the expected format.");
-                };
+                boolean isDone;
+                switch (isDoneSymbol) {
+                case "0":
+                    isDone = false;
+                    break;
+                case "1":
+                    isDone = true;
+                    break;
+                default:
+                    throw new DukeException("I cannot read the file. It is not in the expected format.");
+                }
                 switch (taskType) {
                 case "T":
                     tasks.add(new Todo(content, isDone));
@@ -116,10 +122,10 @@ public class TaskList {
     }
 
     public String fileUpdated() {
-        String result = "";
+        StringBuilder fileContent = new StringBuilder();
         for (Task t : tasks) {
-            result += t.fileFormat() + System.lineSeparator();
+            fileContent.append(t.fileFormat());
         }
-        return result;
+        return fileContent.toString();
     }
 }

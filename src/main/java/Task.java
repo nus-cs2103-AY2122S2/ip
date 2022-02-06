@@ -16,9 +16,9 @@ public abstract class Task {
 
     public String fileFormat() {
         if (isDone) {
-            return " | 1 | " + content;
+            return " | 1 | " + content + " | ";
         } else {
-            return " | 0 | " + content;
+            return " | 0 | " + content + " | ";
         }
     }
 
