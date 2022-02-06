@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
+import duke.DukeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class TaskList {
             System.out.println("No items in the list");
         } else {
             for (int i = 0; i < taskArray.size(); i++) {
-                System.out.printf("%d. " + taskArray.get(i)+ "\n", i+1);
+                System.out.printf("%d. " + taskArray.get(i) + "\n", i+1);
             }
         }
         System.out.println("__________________________________");
@@ -58,7 +59,7 @@ public class TaskList {
      */
     public void unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
-        taskArray.get(index-1).setUnChecked();
+        taskArray.get(index-1).setUnchecked();
         System.out.println("__________________________________");
         System.out.println("OK, I've marked this task as not done yet: ");
         System.out.println(taskArray.get(index-1));

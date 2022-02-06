@@ -26,12 +26,13 @@ public class Todo extends Task {
         System.out.println("added: " + this.toString());
     }
 
+
     /**
      * Returns a summary of the Todo Task.
      * @return The summary of the Todo.
      */
-    public String toString(){
-        if (this.checked) {
+    public String toString() {
+        if (this.isChecked) {
             return "[T][X] " + this.title;
         } else {
             return "[T][ ] " + this.title;

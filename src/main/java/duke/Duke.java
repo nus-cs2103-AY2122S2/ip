@@ -23,11 +23,11 @@ public class Duke {
         new Duke().listen();
     }
 
-    private void listen(){
+    private void listen() {
         Ui.printLogo();
-        boolean running = true;
-        while (running) {
-            running = Ui.run(taskList);
+        boolean isRunning = true;
+        while (isRunning) {
+            isRunning = Ui.run(taskList);
             storage.write();
         }
         System.out.println("__________________________________");

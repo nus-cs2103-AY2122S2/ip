@@ -5,6 +5,7 @@ import duke.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+
 import java.time.format.DateTimeParseException;
 
 /**
@@ -44,7 +45,7 @@ public class Event extends Task{
         int day = date.getDayOfMonth();
         Month month = date.getMonth();
         int year = date.getYear();
-        if (this.checked) {
+        if (this.isChecked) {
             return String.format("[D][X] %s (at: %d %s %d %s)", title, day, month, year, time);
         } else {
             return String.format("[D][ ] %s (at: %d %s %d %s)", title, day, month, year, time);

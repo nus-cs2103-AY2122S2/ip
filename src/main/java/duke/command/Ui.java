@@ -34,8 +34,8 @@ public class Ui {
      */
 
     public static boolean run(TaskList taskList) {
-        Scanner dukeScan = new Scanner(System.in);
-        String userInput = dukeScan.nextLine();
+        Scanner dukeScanner = new Scanner(System.in);
+        String userInput = dukeScanner.nextLine();
         return Parser.parseInput(userInput, taskList);
     }
 
