@@ -3,7 +3,8 @@ package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList that contains all added tasks.
@@ -58,8 +59,29 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    /**
+     * Removes all tasks in the list.
+     */
     public void clearAllTask() {
         this.tasks.clear();
+    }
+
+    /**
+     * Returns a task list with tasks that contains a given keyword.
+     *
+     * @param keyword The given keyword to be searched for.
+     * @return A task list with matching tasks.
+     */
+    public TaskList filterByWord(String keyword) {
+        ArrayList<Task> resArr = new ArrayList<Task>();
+        int size = this.getCount();
+        for (int i = 0; i < size; i++) {
+            Task task = this.tasks.get(i);
+            if (task.getName().contains(keyword)) {
+                resArr.add(task);
+            }
+        }
+        return new TaskList(resArr);
     }
 
 }

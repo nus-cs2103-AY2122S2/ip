@@ -84,7 +84,6 @@ public class NumberedCommand extends Command {
                 ui.showCount(tasks);
                 return ui.showSuccessfulDeleteMessage() + "\n" + task + "\n"
                         + ui.showNumberOfTasksMessage(tasks);
-
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid number!");

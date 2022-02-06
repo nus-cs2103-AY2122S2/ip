@@ -148,6 +148,7 @@ public class Ui {
      * Returns message indicating number of elements in tasklist.
      *
      * @param tasks The input ArrayList.
+     * @return Message stating how many tasks are in the tasklist.
      */
     public String showNumberOfTasksMessage(TaskList tasks) {
         int numOfTasks = tasks.getCount();

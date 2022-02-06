@@ -24,7 +24,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
-        System.out.println("Here are the tasks in your list:");
         ui.displayList(tasks.getCount(), tasks);
         ui.showLine();
         return ui.showListedTasks(tasks.getCount(), tasks);

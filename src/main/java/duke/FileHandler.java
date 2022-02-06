@@ -130,6 +130,12 @@ public class FileHandler {
         s.close();
     }
 
+    /**
+     * Clears an entire file.
+     *
+     * @param filePath The path to the file that will be cleared.
+     * @throws IOException If I/O error occurs.
+     */
     public static void clearFile(String filePath) throws IOException {
         File tempFile = new File("./data/temp.txt");
         if (!tempFile.exists()) {
