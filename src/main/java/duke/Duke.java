@@ -20,8 +20,12 @@ public class Duke {
     public Duke() {
         try {
             ui = new Ui();
+
             storage = new Storage("/ip/data");
+            assert storage != null : "storage should exist";
+
             tasks = new TaskList(storage.load());
+            assert tasks != null : "tasklist should exist";
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
