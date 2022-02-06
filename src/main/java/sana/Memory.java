@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import sana.exception.MemoryNotFoundException;
 import sana.task.Deadline;
 import sana.task.Event;
 import sana.task.Task;
@@ -62,11 +63,11 @@ public class Memory {
             s = new Scanner(memFile);
         } catch (FileNotFoundException e) {
             // Shouldn't happen since memory is initialised during initialisation of Sana
-            System.out.println("I can't read the memory. Let's just start afresh!");
             initialiseMem();
             return new LinkedList<>();
         }
         LinkedList<Task> taskList = new LinkedList<>();
+
         while (s.hasNext()) {
             String task = s.nextLine();
             if (task.charAt(0) == 'T') { // a todo sana.task

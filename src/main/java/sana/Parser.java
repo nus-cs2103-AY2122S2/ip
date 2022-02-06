@@ -10,7 +10,6 @@ import sana.exception.UnknownCommandException;
  * @version 1.0
  */
 public class Parser {
-    private static SanaResponse sanaResponse = new SanaResponse();
 
     /**
      * Parses the command given to Sana
@@ -19,6 +18,7 @@ public class Parser {
      * @return              a string of arguments from parsing the command
      */
     public String[] parseCommand(String userCommand) {
+        assert userCommand != null;
         try {
             if (userCommand.equals("bye")) {
                 return new String[] {"bye"};
