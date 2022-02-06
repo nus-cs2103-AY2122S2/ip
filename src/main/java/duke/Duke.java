@@ -26,7 +26,7 @@ public class Duke {
      * Stops after user input == "bye".
      */
     public void run() {
-        this.ui.initialGreet();
+        this.ui.greetUser();
 
         Scanner sc = new Scanner(System.in);
 
