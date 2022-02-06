@@ -2,6 +2,9 @@ package duke.ui;
 
 import duke.task.Task;
 
+/**
+ * Represents the UI for Duke. Handles printing of output.
+ */
 public class Ui {
     private static final String NORMAL_SPACE = "      ";
     private static final String TASK_SPACE = "        ";
@@ -14,6 +17,9 @@ public class Ui {
             "\\____/_| |_|\\___|_|_|\\_\\";
     private static final String BORDER = "   ____________________________________________________________";
 
+    /**
+     * Prints out welcome message.
+     */
     public static void welcome() {
         System.out.println("GOOD MORNING GENNERMEN from");
         System.out.println(LOGO);
@@ -23,14 +29,27 @@ public class Ui {
         printBorder();
     }
 
+    /**
+     * Prints out border.
+     */
     public static void printBorder() {
         System.out.println(BORDER);
     }
 
+    /**
+     * Prints input with correct space.
+     *
+     * @param input Input to print.
+     */
     public static void print(String input) {
         System.out.println(NORMAL_SPACE + input);
     }
 
+    /**
+     * Prints Task with correct space.
+     *
+     * @param taskInput Task to print.
+     */
     public static void print(Task taskInput) {
         System.out.println(TASK_SPACE + taskInput.toString());
     }

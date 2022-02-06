@@ -12,10 +12,19 @@ import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Represents a file storing a list of Tasks keyed into Duke.
+ */
 public class Storage {
     private String path;
 
+    /**
+     * Creates new Storage object pointing to log file provided by path.
+     * If there is no file at provided path, creates file at provided path.
+     *
+     * @param path Path to text file containing tasks entered into Duke.
+     * @throws DukeException If file does not exist.
+     */
     public Storage(String path) throws DukeException {
         // Splits pathname into relative path and filename
         // Creates missing dir/ file
@@ -34,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates log file with current list of tasks.
+     *
+     * @param taskList Current list of tasks.
+     * @throws IOException If log file is not found.
+     */
     public void updateTasks(TaskList taskList) throws IOException {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         FileWriter log = new FileWriter(path);
@@ -56,6 +71,11 @@ public class Storage {
         log.close();
     }
 
+    /**
+     * Parses each task in log file and returns ArrayList containing each task.
+     *
+     * @return ArrayList of tasks in log file.
+     */
     public ArrayList<Task> readTasks() {
         File f = new File(path);
         ArrayList<Task> tasks = new ArrayList<>();
