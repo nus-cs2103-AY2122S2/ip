@@ -25,8 +25,9 @@ public class MarkCommand extends Command {
     public String execute(TaskList taskList) {
         try {
             taskList.mark(num);
-            return "The bar on the top left of your screen just increased! Keep going!" + "\n   "
+            String message = "The bar on the top left of your screen just increased! Keep going!" + "\n   "
                     + taskList;
+            return message;
         } catch (IndexOutOfBoundsException e) {
             return "The task number is kinda sus... it's outta bounds!";
         }

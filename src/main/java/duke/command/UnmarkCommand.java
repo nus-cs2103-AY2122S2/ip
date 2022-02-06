@@ -25,7 +25,8 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList taskList) {
         try {
             taskList.unmark(num);
-            return "Surely you aren't the imposter... right??" + "\n   " + taskList;
+            String message = "Surely you aren't the imposter... right??" + "\n   " + taskList;
+            return message;
         } catch (IndexOutOfBoundsException e) {
             return "The task number is kinda sus... it's outta bounds!";
         }
