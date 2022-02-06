@@ -20,6 +20,8 @@ public class Storage {
      * @param filePath a path of a folder, not null
      */
     Storage(String filePath) {
+        File folder = new File(filePath);
+        assert(folder.exists());
         this.filePath = filePath;
     }
 
