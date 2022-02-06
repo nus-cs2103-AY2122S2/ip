@@ -11,8 +11,8 @@ public class ListCommand extends Command {
      * @param list DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList list) {
-        ui.printList(list);
+    public String execute(Ui ui, DukeList list) {
+        return ui.printList(list);
     }
 
     /**

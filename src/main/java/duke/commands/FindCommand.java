@@ -12,8 +12,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, DukeList list) {
-        list.findTasks(toFind);
+    public String execute(Ui ui, DukeList list) {
+        return list.findTasks(toFind);
     }
 
     @Override

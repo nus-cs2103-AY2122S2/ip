@@ -17,12 +17,12 @@ public class UnMarkCommand extends Command {
      * @param tasks DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList tasks) {
+    public String execute(Ui ui, DukeList tasks) {
         try {
             tasks.unmark(index);
-            ui.unmarkTask(tasks.getTask(index));
+            return ui.unmarkTask(tasks.getTask(index));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\nDuke: Wrong index to mark! Use \"list\" to see the current tasks.\n");
+            return "\nDuke: Wrong index to mark! Use \"list\" to see the current tasks.\n";
         }
     }
 

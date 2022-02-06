@@ -216,8 +216,7 @@ public class DukeParser {
             Command c = createCommand(arg, arg[0]);
             return c;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return new TryAgain();
+            return new TryAgain(e.getMessage());
         }
     }
 

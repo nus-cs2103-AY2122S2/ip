@@ -4,9 +4,14 @@ import duke.tasklist.DukeList;
 import duke.ui.Ui;
 
 public class TryAgain extends Command {
+    private String err;
+    public TryAgain(String e) {
+        err = e;
+    }
 
     @Override
-    public void execute(Ui ui, DukeList list) {
+    public String execute(Ui ui, DukeList list) {
+        return err;
     }
 
     /**

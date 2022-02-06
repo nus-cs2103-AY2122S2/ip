@@ -76,22 +76,15 @@ public class DukeList {
      * @param x Index of task in list to delete
      */
     public void delete(int x) {
-        try {
-            Task t = tasks.get(x - 1);
-            tasks.remove(x - 1);
-            System.out.println("\nDuke: Noted. I've removed this task:\n      "
-                    + t + "\n      Now you have "
-                    + this.tasks.size() + " tasks in the list.\n");
-            storage.store(tasks);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n");
-        }
+        Task t = tasks.get(x - 1);
+        tasks.remove(x - 1);
+        storage.store(tasks);
     }
 
     /**
      * Prints a list of tasks due on current date to the console
      */
-    public void todayTask() {
+    public String todayTask() {
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
@@ -113,14 +106,14 @@ public class DukeList {
         if (b) {
             day += "      NO TASK DUE TODAY";
         }
-        System.out.println(day);
+        return day;
     }
 
     /**
      * This method finds and prints out the tasks from the list that matches the input keyword
      * @param arg
      */
-    public void findTasks(String arg) {
+    public String findTasks(String arg) {
         String found = "\nDuke: Here are the matching tasks in your list\n";
         int n = 0;
         for (Task t: tasks) {
@@ -130,7 +123,10 @@ public class DukeList {
                         + t + "\n";
             }
         }
-        System.out.println(found);
+        if (n == 0) {
+            found = "\nDuke: No task matches your keyword. Try again?\n";
+        }
+        return found;
     }
 
     /**
