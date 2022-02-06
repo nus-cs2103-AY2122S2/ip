@@ -33,7 +33,6 @@ public class Parser {
             String[] inputArgs = input.split(" ", 2);
             String command = inputArgs[0];
 
-            //Assuming input correct
             if (command.equals("mark")) {
                 handleMark(taskList, inputArgs, true);
             } else if (command.equals("unmark")) {
