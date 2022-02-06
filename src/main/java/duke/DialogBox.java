@@ -55,9 +55,9 @@ public class DialogBox extends HBox {
         circle.setCenterY(displayPicture.getFitHeight() / 2);
         displayPicture.setClip(circle);
 
-        this.setAlignment(Pos.TOP_RIGHT);
+        //this.setAlignment(Pos.TOP_RIGHT);
         this.setSpacing(8);
-        this.setPadding(new Insets(9, 9, 9, 9));
+        //this.setPadding(new Insets(9, 9, 9, 9));
     }
 
     /**
