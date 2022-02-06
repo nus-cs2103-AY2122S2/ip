@@ -6,7 +6,7 @@ package duke;
 public class DukeException extends Exception {
 
     /**
-     * @param err error message
+     * @param err error message.
      */
     public DukeException(String err) {
         super(err);
