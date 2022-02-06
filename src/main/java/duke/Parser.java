@@ -56,6 +56,7 @@ public class Parser {
             case MARK:
                 return new Mark(taskId);
             default:
+                assert false: commandType;
                 throw new InvalidCommandException();
             }
 
@@ -90,9 +91,11 @@ public class Parser {
             }
             String taskDetails = taskDetailsBuilder.toString();
 
+
             return parseMultiCommand(commandType, inputArray[1], taskDetails);
         }
 
+        assert false;
         throw new InvalidCommandException();
     }
 
