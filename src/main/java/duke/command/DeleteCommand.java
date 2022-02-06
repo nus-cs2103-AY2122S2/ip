@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
             if (deletionIndex < 0 || deletionIndex >= tasks.size()) {
                 return ui.showError("Invalid entry number!");
             } else {
-                return ui.showDeletion(tasks.size(), tasks.removeTask(deletionIndex));
+                return ui.showAdditionOrDeletion(this, tasks.size(), tasks.removeTask(deletionIndex));
             }
         } catch (DukeException e) {
             return ui.showError(e.getMessage());

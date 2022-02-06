@@ -25,12 +25,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Execute.
+     * Displays a list of events that match the keyword given by the user.
      *
      * @param tasks   the tasks in `TaskList`
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
-     * @return string to show whether the keyword has been found or if the list is empty.
+     * @return list of events that match the keyword given by the user, if any
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

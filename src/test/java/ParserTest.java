@@ -36,7 +36,7 @@ public class ParserTest {
      * Test to determine if {@link Parser#parseCommand(String)} works as intended.
      */
     @Test
-    public void parseCommandTest() {
+    public void parseCommandTest() throws DukeException {
         String[] commands = {
             "exit", "list", "mark 0", "unmark 0", "todo todo",
             "event e /at 29/01/2022 16:00", "deadline d /by 29/01/2022 16:00",
