@@ -1,7 +1,11 @@
 package duke.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Duke;
 import duke.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -110,17 +114,20 @@ public class Window extends BorderPane {
      */
     public void update() {
         taskContainer.getChildren().clear();
-        TaskList tasks;
-
+        TaskList filteredTasks = new TaskList();
+        List<Integer> filteredTaskIndices = new ArrayList<>();
         String searchText = searchTaskInput.getText();
-        if (!searchText.isEmpty()) {
-            tasks = duke.getTasks().search(searchText);
-        } else {
-            tasks = duke.getTasks();
+
+        for (int i = 0; i < duke.getTasks().size(); i++) {
+            Task task = duke.getTasks().get(i);
+            if (task.getDescription().contains(searchText)) {
+                filteredTasks.add(task);
+                filteredTaskIndices.add(i);
+            }
         }
 
-        for (int i = 0; i < tasks.size(); i++) {
-            taskContainer.getChildren().add(new TaskCard(this, duke, tasks.get(i), i));
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            taskContainer.getChildren().add(new TaskCard(this, duke, filteredTasks.get(i), filteredTaskIndices.get(i)));
         }
     }
 }
