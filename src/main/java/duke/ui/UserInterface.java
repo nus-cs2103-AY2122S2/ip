@@ -9,20 +9,14 @@ import duke.exceptions.DukeException;
  * in which the user interacts with.
  */
 public class UserInterface {
-    private static final String INTRO = "\nHello! I'm YQ, your assistant\n" + "What can I do for you?\n";
+    private static final String INTRO = "Hello! I'm YQ, your personal assistant\n" + "What can I do for you?\n";
     private static final String BYE = "\nBye. Hope to see you again soon!\n";
 
     /**
      * Prints the introduction message.
      */
     public static String introMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = INTRO + logo ;
-        return intro;
+        return INTRO;
     }
 
     /**
