@@ -17,6 +17,13 @@ public class ChatCat {
         return this.parser.parseTask(str);
     }
 
+    public String showWelcomeSMS() {
+        String welcome = "Hello! I'm ChatCat\n"
+                + "What can I do for you?\n";
+        System.out.println(welcome);
+        return welcome;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

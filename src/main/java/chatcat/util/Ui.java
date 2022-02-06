@@ -5,10 +5,11 @@ package chatcat.util;
  */
 public class Ui {
 
-    public void showWelcomeSMS() {
-        String welcome = "Hello! I'm chatcat.ChatCat\n"
+    public String showWelcomeSMS() {
+        String welcome = "Hello! I'm ChatCat\n"
                 + "What can I do for you?\n";
         System.out.println(welcome);
+        return welcome;
     }
 
     public String printOutPutWithSpace(String commandOutput) {

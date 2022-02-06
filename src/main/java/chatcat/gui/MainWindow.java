@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import chatcat.ChatCat;
+import chatcat.util.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private ChatCat chatcat;
+    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private Image chatCatImage = new Image(this.getClass().getResourceAsStream("/images/chatCat.jpeg"));
@@ -35,6 +37,9 @@ public class MainWindow extends AnchorPane {
 
     public void setChatCat(ChatCat chatcat) {
         this.chatcat = chatcat;
+        this.dialogContainer.getChildren().add(
+            DialogBox.getChatCatDialog(chatcat.showWelcomeSMS(), chatCatImage)
+        );
     }
 
     /**
@@ -48,7 +53,7 @@ public class MainWindow extends AnchorPane {
             String response = chatcat.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, chatCatImage)
+                    DialogBox.getChatCatDialog(response, chatCatImage)
             );
         }
 
