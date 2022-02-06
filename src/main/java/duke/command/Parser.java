@@ -118,7 +118,7 @@ public class Parser {
      * @param taskList The list of task to be checked with.
      */
 
-    public static void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
+    static void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {
         case "list":
