@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import duke.command.AddCommand;
-import duke.command.Command;
 import duke.task.Task;
 
 /**
@@ -15,7 +13,7 @@ public class Ui {
     /**
      * Padding string used to format the bot's responses
      */
-    public static final String STR_PADDING = "    ";
+    public static final String STR_PADDING = "  ";
 
     /**
      * Close string.
@@ -33,9 +31,9 @@ public class Ui {
      * @return the contents of TaskList in string format.
      */
     public String showList(TaskList tasks) {
-        StringBuilder sb = new StringBuilder(Ui.STR_PADDING + "Here are the tasks in your list: \n");
+        StringBuilder sb = new StringBuilder(STR_PADDING + "Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(String.format(Ui.STR_PADDING + "  %d. " + tasks.get(i), i + 1));
+            sb.append(String.format(STR_PADDING + "  %d. " + tasks.get(i), i + 1));
             if (i != tasks.size() - 1) {
                 sb.append("\n");
             }
@@ -54,11 +52,11 @@ public class Ui {
         if (filteredTask.isEmpty()) {
             return String.format("I could not find any tasks that contains \"%s\"", findString);
         } else {
-            StringBuilder sb = new StringBuilder(Ui.STR_PADDING + "You've searched for: \"" + findString + "\"\n");
-            sb.append(Ui.STR_PADDING + "Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder(STR_PADDING + "You've searched for: \"" + findString + "\"\n");
+            sb.append(STR_PADDING + "Here are the matching tasks in your list:");
 
             for (int i = 0; i < filteredTask.size(); i++) {
-                sb.append(String.format("\n" + Ui.STR_PADDING + "  %d. " + filteredTask.get(i), i + 1));
+                sb.append(String.format("\n" + STR_PADDING + "  %d. " + filteredTask.get(i), i + 1));
             }
             return sb.toString();
         }
@@ -87,20 +85,43 @@ public class Ui {
      * @param task     the task
      * @return A string to acknowledge that a task has been added to the list.
      */
-    public String showAdditionOrDeletion(Command command, int listSize, Task task) {
+    public String showAddition(int listSize, Task task) {
         StringBuilder sb = new StringBuilder();
         String taskString = (listSize == 1)
                 ? "task"
                 : "tasks";
-        String ack = (command instanceof AddCommand)
-                ? "Got it, I've added this task: "
-                : "Noted, I've removed the following task: ";
+        String ack = "Got it, I've added this task: ";
         String size = String.format("Now you have %d %s in the list", listSize, taskString);
 
         sb.append(STR_PADDING).append(ack).append("\n");
         sb.append(STR_PADDING).append("   ").append(task).append("\n");
         sb.append(STR_PADDING).append(size);
 
+        return sb.toString();
+    }
+
+    /**
+     * Show that the input task(s) has been removed to the list.
+     *
+     * @param listSize the list size
+     * @param tasks     the task(s)
+     * @return A string to acknowledge that the task(s) specified has been added to the list.
+     */
+    public String showDeletion(int listSize, List<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        String taskString = (listSize == 1)
+                ? "task"
+                : "tasks";
+        String deletedTaskString = (tasks.size() == 1)
+                ? "task"
+                : "tasks";
+        String ack = String.format("Noted, I've removed the following %s: ", deletedTaskString);
+        String size = String.format("Now you have %d %s in the list", listSize, taskString);
+        sb.append(ack);
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(String.format("\n" + STR_PADDING + "  %d. " + tasks.get(i), i + 1));
+        }
+        sb.append("\n").append(STR_PADDING).append(size);
         return sb.toString();
     }
 
@@ -127,11 +148,11 @@ public class Ui {
         if (filteredTask.isEmpty()) {
             return String.format("I could not find any tasks that occurs on \"%s\"", sdf.format(dateCheck));
         } else {
-            StringBuilder sb = new StringBuilder(Ui.STR_PADDING);
+            StringBuilder sb = new StringBuilder(STR_PADDING);
             sb.append(String.format("You've searched for task(s) that occur on: \"%s\"\n", sdf.format(dateCheck)));
-            sb.append(Ui.STR_PADDING + "Here are the matching tasks in your list:");
+            sb.append(STR_PADDING + "Here are the matching tasks in your list:");
             for (int i = 0; i < filteredTask.size(); i++) {
-                sb.append(String.format("\n" + Ui.STR_PADDING + "  %d. " + filteredTask.get(i), i + 1));
+                sb.append(String.format("\n" + STR_PADDING + "  %d. " + filteredTask.get(i), i + 1));
             }
             return sb.toString();
         }
