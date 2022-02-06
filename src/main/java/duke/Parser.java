@@ -6,15 +6,6 @@ import java.time.LocalDate;
  * Also includes a method to parse and read save files.
  */
 public class Parser {
-    
-    private static final int LIST = 0;
-    private static final int TODO = 1;
-    private static final int DEADLINE = 2;
-    private static final int EVENT = 3;
-    private static final int MARK = 4;
-    private static final int UNMARK = 5;
-    private static final int DELETE = 6;
-    private static final int FIND = 7;
 
     /**
      * Reads the String input and determines the type of command to execute and returns it as an integer

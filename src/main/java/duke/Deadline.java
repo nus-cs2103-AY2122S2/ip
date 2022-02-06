@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * A Task that specifies the date required for the task to be completed
+ * A Task that specifies the date required for the task to be completed. Supports Task description and time
  */
 
 public class Deadline extends Task {

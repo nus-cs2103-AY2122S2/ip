@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * A Task that specifies a date of occurrence.
+ * A Task that specifies a date of occurrence. Supports Task description and time
  */
 public class Event extends Task {
 

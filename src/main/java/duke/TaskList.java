@@ -125,6 +125,13 @@ public class TaskList {
         return "\n    Now you have " + tasks.size() + " task" + isSingular + " in your list.";
     }
 
+    /**
+     * Finds tasks that contain the keyword in their description to return a list, else returns a message
+     * to inform failure of doing so
+     *
+     * @param keyword a String or Char sequence to be searched for
+     * @return a list of tasks containing the keyword in String format or a message to imply failure
+     */
     public String find(String keyword) {
         String resultStr = "";
         boolean keywordFound = false;
@@ -144,6 +151,14 @@ public class TaskList {
         }
 
         return resultStr;
+    }
+
+    /**
+     *
+     * @return exit message
+     */
+    public String exit() {
+        return "Bye bye. BMO will see you again soon ' v '";
     }
 
 }

@@ -36,6 +36,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String startMsg = duke.startDuke();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(startMsg, dukeImage)
+        );
     }
 
     /**
@@ -52,20 +56,26 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals("Bye bye. BMO will see you again soon ' v '")) {
-            duke.exitDuke();
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException exc) {
-                    ; //exception handling code here
-                }
-
-                Platform.exit();
-            }).start();
-
+        if (input.equals("bye")) {
+            duke.saveDuke();
+            waitAndThenExit();
         }
 
+    }
+
+    /**
+     * Waits for a moment and then exit the program
+     */
+    private void waitAndThenExit() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException exc) {
+                System.out.println("Exit operation interrupted");
+                System.out.println(exc);
+            }
+
+            Platform.exit();
+        }).start();
     }
 }

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * A Task that has no time limitation
+ * A simple Task object, supports Task description
  */
 public class ToDo extends Task {
 
