@@ -135,6 +135,19 @@ public class TaskList {
     }
 
     /**
+     * Returns true if list already contains a Task with the given title
+     */
+    public boolean alreadyHasTask(String title) {
+        for (Task t : tasks) {
+            if (t.getTitle().equals(title)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the last task that was added by the user.
      *
      * @return a reference to the last Task added.

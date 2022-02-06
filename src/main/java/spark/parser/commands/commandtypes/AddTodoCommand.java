@@ -7,6 +7,7 @@ import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.commandresponse.ErrorResponse;
 import spark.commandresponse.SuccessResponse;
+import spark.commandresponse.WarningResponse;
 import spark.exceptions.SparkException;
 import spark.parser.params.AddTodoParams;
 import spark.storage.Storage;
@@ -17,7 +18,6 @@ import spark.tasks.TaskList;
  */
 public class AddTodoCommand extends Command {
     private String title;
-    private String responseMessage;
 
     /**
      * Creates a new Todo with the specified title.
@@ -32,21 +32,30 @@ public class AddTodoCommand extends Command {
     public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
         List<CommandResponse> responses = new ArrayList<>();
 
+        boolean isDuplicate = tasks.alreadyHasTask(title);
+
         try {
             tasks.addTodo(title);
             storage.writeTasksFile(tasks.encodeTasks());
-            responseMessage = getAddTaskSuccessMessage(tasks);
-
-            responses.add(new SuccessResponse(responseMessage));
+            responses.add(new SuccessResponse(getAddTaskSuccessMessage(tasks)));
         } catch (SparkException e) {
             responses.add(new ErrorResponse(e));
         }
+
+        checkAndWarnUserOfDuplicateTask(responses, isDuplicate);
 
         return responses;
     }
 
     private String getAddTaskSuccessMessage(TaskList tasks) {
         return String.format("Okay! I've added this task:\n   %s", tasks.getLastAddedTask());
+    }
+
+    private void checkAndWarnUserOfDuplicateTask(List<CommandResponse> responses, boolean isDuplicate) {
+        if (isDuplicate) {
+            responses.add(new WarningResponse("You've previously added a Task with the same name!" + "\n"
+                    + "(have you mistakenly added it twice?)"));
+        }
     }
 }
 
