@@ -1,6 +1,5 @@
 package ari;
 
-import ari.command.ByeCommand;
 import ari.command.Command;
 import ari.parser.Parser;
 import ari.storage.Storage;
@@ -13,7 +12,8 @@ import ari.ui.Ui;
 public class Ari {
     private String filePath;
 
-    private Storage store;
+    private Parser parser;
+    private Storage storage;
     private TaskList toDoList;
     private Ui ui;
 
@@ -24,28 +24,23 @@ public class Ari {
      */
     public Ari(String path) {
         filePath = path;
+
+        parser = new Parser();
+        storage = new Storage();
+        storage.setFile(filePath);
         ui = new Ui();
+
+        toDoList = storage.load();
     }
 
-    /**
-     * Starts the program
-     */
-    public void run() {
-        ui.displayWelcomeMessage();
+    public String getResponse(String userInput) {
+        Command command = parser.parse(userInput);
+        command.setTaskList(toDoList);
+        storage.save(toDoList);
+        return command.execute();
+    }
 
-        Parser par = new Parser();
-        store = new Storage();
-        store.setFile(filePath);
-        toDoList = store.load();
-
-        String input = ui.getUserInput();
-        Command cmd = par.parse(input);
-        while (!ByeCommand.isGoodBye(cmd)) {
-            cmd.setTaskList(toDoList);
-            ui.displayMessage(cmd.execute());
-            cmd = par.parse(ui.getUserInput());
-            store.save(toDoList);
-        }
-        ui.displayMessage(cmd.execute());
+    public void save() {
+        storage.save(toDoList);
     }
 }

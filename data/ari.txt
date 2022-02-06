@@ -1,0 +1,2 @@
+event 1 cs2103t tutorial/at 2022-02-05
+deadline 0 cs2103t gui/by 2022-02-06
