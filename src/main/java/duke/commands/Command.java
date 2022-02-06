@@ -5,7 +5,7 @@ import duke.ui.Ui;
 
 public abstract class Command {
 
-    public abstract void execute(Ui ui, DukeList list);
+    public abstract String execute(Ui ui, DukeList list);
     public abstract boolean isExit();
 
 }

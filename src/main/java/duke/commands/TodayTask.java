@@ -11,8 +11,8 @@ public class TodayTask extends Command {
      * @param list DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList list) {
-        list.todayTask();
+    public String execute(Ui ui, DukeList list) {
+        return list.todayTask();
     }
 
     /**

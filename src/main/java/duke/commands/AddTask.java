@@ -41,7 +41,7 @@ public class AddTask extends Command {
      * @param list List of tasks
      */
     @Override
-    public void execute(Ui ui, DukeList list) {
+    public String execute(Ui ui, DukeList list) {
         Task t;
         switch(cmd) {
         case "todo" :
@@ -54,7 +54,7 @@ public class AddTask extends Command {
             t = new Events(msg, date);
         }
         list.add(t);
-        ui.addTask(t, list.getSize());
+        return ui.addTask(t, list.getSize());
     }
 
     @Override

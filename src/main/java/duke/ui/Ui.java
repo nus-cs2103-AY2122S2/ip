@@ -1,8 +1,5 @@
 package duke.ui;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,31 +14,28 @@ public class Ui {
     /**
      * Prints greeting message to the console.
      */
-    public void showWelcome() {
-        System.out.println(Greeting);
+    public String showWelcome() {
+        return Greeting;
     }
 
     /**
      * Prints closing message to the console.
      */
-    public void showClosing() {
-        System.out.println(Closing);
+    public String showClosing() {
+        return Closing;
     }
 
     /**
      * Prints the list of Tasks to the console.
      * @param a DukeList to be printed
+     * @return
      */
-    public void printList(DukeList a) {
-        try {
-            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
-            w.write("\nDuke:\nHere are the tasks in your list:\n");
-            w.write(a.toString());
-            w.newLine();
-            w.flush();
-        } catch (IOException e) {
-            System.out.println("Error when printing list");
-        }
+    public String printList(DukeList a) {
+        String msg;
+        msg = "\nDuke:\nHere are the tasks in your list:\n";
+        msg += a.toString();
+        msg += "\n";
+        return msg;
     }
 
     /**
@@ -59,12 +53,12 @@ public class Ui {
         return ans;
     }
 
-    public void markTask(Task t) {
-        System.out.println("Duke: Nice! I've marked this task as done:\n      " + t);
+    public String markTask(Task t) {
+        return "Duke: Nice! I've marked this task as done:\n      " + t;
     }
 
-    public void unmarkTask(Task t) {
-        System.out.println("Duke: OK, I've marked this task as not done yet:\n      " + t);
+    public String unmarkTask(Task t) {
+        return "Duke: OK, I've marked this task as not done yet:\n      " + t;
     }
 
     /**
@@ -72,10 +66,24 @@ public class Ui {
      * @param t Task that was added
      * @param n Current size of list
      */
-    public void addTask(Task t, int n) {
-        System.out.println("\nDuke: Got it. I've added this task:\n      "
+    public String addTask(Task t, int n) {
+        String msg = "\nDuke: Got it. I've added this task:\n      "
                 + t + "\n      Now you have "
-                + n + " tasks in the list.\n");
+                + n + " tasks in the list.\n";
+        return msg;
+    }
+
+    /**
+     * Prints out message for deleting Task from the list
+     * @param t
+     * @param n
+     * @return
+     */
+    public String deleteTask(Task t, int n) {
+        String msg = "\nDuke: Noted. I've removed this task:\n      "
+                + t + "\n      Now you have "
+                + n + " tasks in the list.\n";
+        return msg;
     }
 
 }

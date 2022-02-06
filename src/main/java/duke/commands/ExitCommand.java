@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * @param list DukeList that stores Tasks
      */
     @Override
-    public void execute(Ui ui, DukeList list) {
-        ui.showClosing();
+    public String execute(Ui ui, DukeList list) {
+        return ui.showClosing();
     }
 
     /**
