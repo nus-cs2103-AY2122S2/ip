@@ -24,16 +24,6 @@ public class Ui {
         return showMessage(cmdResult.getResultMessage());
     }
 
-    private void showStartMessage() {
-        String outputMessage = String.format("%s\n%s\n%s", LINE_BREAK, START_MESSAGE, LINE_BREAK);
-        System.out.println(outputMessage);
-    }
-
-    private void displayMessage(String message) {
-        String outputMessage = String.format("%s\n%s", message, LINE_BREAK);
-        System.out.println(outputMessage);
-    }
-
     private String showMessage(String message) {
         String outputMessage = String.format("%s", message);
         return outputMessage;
