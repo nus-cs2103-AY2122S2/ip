@@ -17,7 +17,7 @@ import spark.parser.params.AddTodoParams;
  */
 public class Parser {
     /** Specifies the accepted input-format for dates and times */
-    private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
 
     /**
      * Returns a Command specific to the type of operation
@@ -31,34 +31,26 @@ public class Parser {
         String commandKeyword = tokens[0]; // assume that the first keyword is always the command word
         CommandKeyword keyword = CommandKeyword.getCommand(commandKeyword);
 
-        if (keyword == CommandKeyword.BYE) {
+        switch (keyword) {
+        case BYE:
             return new ExitCommand();
-
-        } else if (keyword == CommandKeyword.LIST) {
+        case LIST:
             return new ListCommand();
-
-        } else if (keyword == CommandKeyword.MARK) {
+        case MARK:
             return new MarkCommand(getMarkParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.UNMARK) {
+        case UNMARK:
             return new UnMarkCommand(getUnmarkParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.DELETE) {
+        case DELETE:
             return new DeleteTaskCommand(getDeleteTaskParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.TODO) {
+        case TODO:
             return new AddTodoCommand(getAddToDoParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.DEADLINE) {
+        case DEADLINE:
             return new AddDeadlineCommand(getAddDeadlineParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.EVENT) {
+        case EVENT:
             return new AddEventCommand(getAddEventParams(input, keyword));
-
-        } else if (keyword == CommandKeyword.FIND) {
+        case FIND:
             return new FindTaskCommand(getFindTaskParams(input, keyword));
-
-        } else {
+        default:
             return new UnrecognisedCommand();
         }
     }
@@ -110,7 +102,7 @@ public class Parser {
         LocalDateTime localDateTime;
 
         try {
-            localDateTime = LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+            localDateTime = LocalDateTime.parse(dateTimeString, INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new InvalidDeadlineParamsException();
         }
@@ -136,7 +128,7 @@ public class Parser {
         LocalDateTime localDateTime;
 
         try {
-            localDateTime = LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+            localDateTime = LocalDateTime.parse(dateTimeString, INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new InvalidEventParamsException();
         }

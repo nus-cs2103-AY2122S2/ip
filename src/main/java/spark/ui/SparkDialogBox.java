@@ -26,6 +26,8 @@ public class SparkDialogBox extends HBox {
     private ImageView displayPicture;
 
     SparkDialogBox(String text, Image img) {
+        assert(text != null);
+        assert(img != null);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/SparkDialogBox.fxml"));
             fxmlLoader.setController(this);

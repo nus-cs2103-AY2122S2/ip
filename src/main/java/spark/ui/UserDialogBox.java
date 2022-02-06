@@ -26,6 +26,8 @@ public class UserDialogBox extends HBox {
     private ImageView displayPicture;
 
     UserDialogBox(String text, Image img) {
+        assert(text != null);
+        assert(img != null);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,16 +39,6 @@ public class UserDialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
     }
 
     public static UserDialogBox getUserDialog(String text, Image img) {
