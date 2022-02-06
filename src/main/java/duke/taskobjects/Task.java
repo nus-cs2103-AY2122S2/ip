@@ -11,6 +11,7 @@ public abstract class Task {
      * Default constructor for a Task
      *
      * By default, task is marked as undone
+     *
      * @param taskName Task name or description
      */
     public Task(String taskName) {
@@ -22,6 +23,7 @@ public abstract class Task {
      * Alternative constructor for a Task
      *
      * Takes in an additional boolean used for importing existing Tasks
+     *
      * @param taskName Task name or description
      * @param isDone Boolean which shows if the task is marked as done or not
      */
@@ -32,6 +34,7 @@ public abstract class Task {
 
     /**
      * Returns the task name or description
+     *
      * @return Task name or description
      */
     @Override
@@ -60,6 +63,7 @@ public abstract class Task {
 
     /**
      * Gets the current status of the task along with it's description
+     *
      * @return String representation of the current status of the task
      */
     public String getCurrentStatus() {
@@ -70,6 +74,7 @@ public abstract class Task {
 
     /**
      * Returns the task name or description
+     *
      * @return Task name or description
      */
     public String getTaskName() {
@@ -78,6 +83,7 @@ public abstract class Task {
 
     /**
      * Returns a boolean which shows if the task is done or not
+     *
      * @return Boolean showing if the task is done or not
      */
     public boolean isDone() {

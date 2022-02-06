@@ -8,6 +8,7 @@ public abstract class AddCommand extends TaskListCommand {
 
     /**
      * Default constructor for AddCommand.
+     *
      * @param taskList Provided task list where tasks are added to
      * @param taskObj The task that will be added to the task list
      */

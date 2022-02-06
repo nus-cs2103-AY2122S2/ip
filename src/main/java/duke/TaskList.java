@@ -22,8 +22,8 @@ public class TaskList {
 
     /**
      * Alternative constructor for TaskList
-     *
      * Takes in an {@code ArrayList<Task>} and sets it as a task list
+     *
      * @param taskList The task list that is this new instance wraps around
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -32,6 +32,7 @@ public class TaskList {
 
     /**
      * Adds a new {@code Task} to the task list
+     *
      * @param task Provided Task that is added to the task list
      * @return Returns true is addition is successful, else false
      */
@@ -41,6 +42,7 @@ public class TaskList {
 
     /**
      * Removes a {@code Task} from the task list based on the index
+     *
      * @param taskNo Index of the task to be removed
      * @return The {@code Task} that was removed
      */
@@ -50,6 +52,7 @@ public class TaskList {
 
     /**
      * Get function to get a {@code Task} from the task list
+     *
      * @param taskNo Index of the task to be retrieved
      * @return The retrieved {@code Task}
      */
@@ -59,6 +62,7 @@ public class TaskList {
 
     /**
      * Returns the contained task list. Terrible function (will remove soon)
+     *
      * @return The contained task list
      */
     public List<Task> getList() { // GET RID OF THIS IN THE FUTURE
@@ -67,6 +71,7 @@ public class TaskList {
 
     /**
      * Returns the number of elements in the task list
+     *
      * @return Number of elements in the task list in int
      */
     public int size() {
@@ -75,6 +80,7 @@ public class TaskList {
 
     /**
      * Returns a String which describes and lists all the elements in the task list
+     *
      * @return The String representation of all the items in the task list
      */
     public String listAll() {
@@ -92,6 +98,7 @@ public class TaskList {
 
     /**
      * Searches and returns the list of tasks with the matching search query.
+     *
      * @param searchQuery Search query that user enters
      * @return A string representation of the list of tasks with the matching search query
      */

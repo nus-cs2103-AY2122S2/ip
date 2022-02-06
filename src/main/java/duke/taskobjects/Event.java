@@ -6,6 +6,7 @@ package duke.taskobjects;
 public class Event extends TaskWithDate {
     /**
      * Default constructor for Event
+     *
      * @param name Task name or description
      * @param time String representation of date
      */
@@ -15,6 +16,7 @@ public class Event extends TaskWithDate {
 
     /**
      * Alternative constructor for Event used for importing existing task
+     *
      * @param name Task name or description
      * @param isDone Boolean which shows if task is marked as done or not
      * @param time String representation of date

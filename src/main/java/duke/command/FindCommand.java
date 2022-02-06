@@ -8,6 +8,7 @@ public class FindCommand extends TaskListCommand {
 
     /**
      * Default constructor for FindCommand
+     *
      * @param taskList Provided task list where the search query will be
      *                 matched with tasks from this list
      * @param searchQuery Inputted search query where the task with matching text will be returned

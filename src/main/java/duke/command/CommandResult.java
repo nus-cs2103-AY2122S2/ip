@@ -19,6 +19,7 @@ public class CommandResult {
 
     /**
      * Alternative Constructor for CommandResult
+     *
      * @param message Resulting message after executing the command
      * @param isModified Boolean to show if the task list has been modified or not
      */

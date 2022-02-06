@@ -10,6 +10,7 @@ public class Todo extends Task {
 
     /**
      * Default constructor for Todo
+     *
      * @param name Task name or description
      * @param isDone Boolean which shows it task is marked as done or not
      */

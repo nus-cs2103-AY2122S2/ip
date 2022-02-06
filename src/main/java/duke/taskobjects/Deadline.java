@@ -6,6 +6,7 @@ package duke.taskobjects;
 public class Deadline extends TaskWithDate {
     /**
      * Default constructor for Deadline
+     *
      * @param name Task name or description
      * @param deadline String representation of date
      */
@@ -15,6 +16,7 @@ public class Deadline extends TaskWithDate {
 
     /**
      * Alternative constructor for Deadline used for importing existing task
+     *
      * @param name Task name or description
      * @param isDone Boolean which shows if task is marked as done or not
      * @param deadline String representation of date
