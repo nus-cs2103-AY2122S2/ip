@@ -64,6 +64,7 @@ public class AddCommand implements Command {
             Event eventTask = new Event(event, eventDate);
             return tasks.addToList(eventTask, ui, storage);
         default:
+            assert false : taskType;
             return ("ERROR");
         }
     }
