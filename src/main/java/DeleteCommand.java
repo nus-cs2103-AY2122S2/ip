@@ -14,6 +14,8 @@ public class DeleteCommand extends Command {
         index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0
     }
 
+
+    // TODO: Deprecated, to delete
     private String formatOutput() {
         String output = "";
         String taskString = taskList.get(index).toString();
@@ -32,9 +34,8 @@ public class DeleteCommand extends Command {
     public void execute() {
         int index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0
         // Console prints
-        String output = formatOutput();
-        System.out.println(output);
-
+        Task task = TaskManager.taskList.get(index);
+        Ui.printDeleteTask(task); // Print before delete
         TaskManager.taskList.remove(index);
 
     }
