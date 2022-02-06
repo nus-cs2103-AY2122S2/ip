@@ -7,13 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 
 /**
@@ -43,6 +46,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        this.setBackground(new Background(BACKGROUND_COLOR));
+        this.setPadding(new Insets(5,5,5,5));
     }
 
     /**
@@ -56,11 +61,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String l, Image iv) {
-        return new DialogBox(l, iv);
+        var db = new DialogBox(l, iv);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);
+        db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
         return db;
     }
