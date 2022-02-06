@@ -68,7 +68,7 @@ public class TaskList {
     public String getTaskStore() {
         StringBuilder s = new StringBuilder();
         for (Task t: this.tasks) {
-            s.append(t.writeToFile()).append("\n");
+            s.append(t.convertToFileFormat()).append("\n");
         }
         return s.toString();
     }

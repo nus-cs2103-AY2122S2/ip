@@ -22,14 +22,14 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String TIME_FORMAT = "HH:mm";
+
     /** The relative file path of the data file */
     private final String dataFilePath;
 
     /** The relative path of the directory containing the data file */
     private final String dataFolderPath;
-
-    /** The File object representing the data file */
-    private File dataFile;
 
     /**
      * Constructor of the class.
@@ -38,10 +38,10 @@ public class Storage {
      */
     public Storage(String path) {
         this.dataFilePath = path;
-        String[] rPath = path.split("/");
+        String[] rPaths = path.split("/");
         StringBuilder s = new StringBuilder("./");
-        for (int i = 0; i < rPath.length - 1; i++) {
-            s.append(rPath[i]);
+        for (int i = 0; i < rPaths.length - 1; i++) {
+            s.append(rPaths[i]);
         }
         this.dataFolderPath = s.toString();
     }
@@ -53,7 +53,6 @@ public class Storage {
      * @return A Task instance of the task read from the data file.
      */
     private Task convertFileDataToTask(String task) {
-        // We assume the task stored inside is correct
         String[] splitTask = task.split("\\|");
         for (int i = 0; i < splitTask.length; i++) {
             splitTask[i] = splitTask[i].trim();
@@ -66,28 +65,17 @@ public class Storage {
         } else if (splitTask[0].equals("D")) {
             if (splitTask.length == 5) {
                 return new Deadline(splitTask[2], LocalDate.parse(splitTask[3],
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
+                        DateTimeFormatter.ofPattern(DATE_FORMAT)),
+                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         splitTask[1].equals("1"));
             }
-            /*else {
-                return new Deadline(splitTask[2], LocalDate.parse(splitTask[3],
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd")), splitTask[1].equals("1"));
-            }
-
-             */
         } else {
             if (splitTask.length == 6) {
-                return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
-                        LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern("HH:mm")),
+                return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern(DATE_FORMAT)),
+                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern(TIME_FORMAT)),
+                        LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         splitTask[1].equals("1"));
             }
-            /*else {
-                return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        splitTask[1].equals("1"));
-            }*/
-
         }
         return null;
     }
@@ -101,12 +89,10 @@ public class Storage {
     public ArrayList<Task> load() throws IOException, ChiException {
         try {
             ArrayList<Task> loadedTasks = new ArrayList<>();
-            this.dataFile = new File(dataFilePath);
+            File dataFile = new File(dataFilePath);
             Scanner s = new Scanner(dataFile);
             while (s.hasNext()) {
-                // Obtain the next line from the data file
                 String task = s.nextLine();
-                // Create new task based on content of task string
                 Task t = convertFileDataToTask(task);
                 loadedTasks.add(t);
             }
@@ -148,7 +134,7 @@ public class Storage {
             // Fallthrough
         case "todo":
             fw = new FileWriter(dataFilePath, true);
-            fw.write(task.writeToFile());
+            fw.write(task.convertToFileFormat());
             fw.close();
             break;
         default:

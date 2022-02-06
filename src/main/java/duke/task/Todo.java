@@ -23,8 +23,8 @@ public class Todo extends Task {
      * @return String of todo in data file storage format.
      */
     @Override
-    public String writeToFile() {
-        return " T " + super.writeToFile();
+    public String convertToFileFormat() {
+        return " T " + super.convertToFileFormat();
     }
 
     /**

@@ -6,7 +6,7 @@ package duke.task;
 public class Task {
 
     /** The description of the task */
-    private String description;
+    private final String description;
 
     /** The completion status of a task */
     private boolean isDone;
@@ -28,14 +28,12 @@ public class Task {
      * @return Boolean of whether task matches all keywords.
      */
     public boolean checkDescriptionForWords(String[] wordsToCheck) {
-        boolean isIn = true;
         for (String s: wordsToCheck) {
             if (!this.description.contains(s.trim())) {
-                isIn = false;
-                break;
+                return false;
             }
         }
-        return isIn;
+        return true;
     }
 
     /**
@@ -66,7 +64,7 @@ public class Task {
      *
      * @return String of task in data file storage format.
      */
-    public String writeToFile() {
+    public String convertToFileFormat() {
         return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description;
     }
 

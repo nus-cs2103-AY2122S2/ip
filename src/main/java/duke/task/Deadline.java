@@ -10,25 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     /** The date of the deadline */
-    private LocalDate deadlineDate;
+    private final LocalDate deadlineDate;
     /** The time of day of the deadline */
-    private LocalTime deadlineTime;
-
-    /**
-     * Constructor for Deadline Class.
-     *
-     * @param description The description of the deadline.
-     * @param by The date of the deadline as a LocalDate object.
-     * @param isDone The completion status of the deadline.
-     */
-    public Deadline(String description, LocalDate by, boolean isDone) {
-        super(description);
-        this.deadlineDate = by;
-        this.deadlineTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("HH:mm"));
-        if (isDone) {
-            this.markAsDone();
-        }
-    }
+    private final LocalTime deadlineTime;
 
     /**
      * Constructor for Deadline Class.
@@ -53,8 +37,8 @@ public class Deadline extends Task {
      * @return String of deadline in data file storage format.
      */
     @Override
-    public String writeToFile() {
-        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime;
+    public String convertToFileFormat() {
+        return " D " + super.convertToFileFormat() + " | " + this.deadlineDate + " | " + this.deadlineTime;
     }
 
     /**
@@ -66,6 +50,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " )";
+                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

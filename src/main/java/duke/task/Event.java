@@ -10,11 +10,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** The date of the event */
-    private LocalDate eventDate;
+    private final LocalDate eventDate;
     /** The starting time of the event */
-    private LocalTime eventStartTime;
+    private final LocalTime eventStartTime;
     /** The ending time of the event */
-    private LocalTime eventEndTime;
+    private final LocalTime eventEndTime;
 
 
     /**
@@ -42,8 +42,8 @@ public class Event extends Task {
      * @return String of event in data file storage format.
      */
     @Override
-    public String writeToFile() {
-        return " E " + super.writeToFile() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
+    public String convertToFileFormat() {
+        return " E " + super.convertToFileFormat() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
                 + this.eventEndTime;
     }
 
@@ -56,6 +56,6 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " from " + eventStartTime.format(DateTimeFormatter.ofPattern("hh: mm a")) + " to "
-                + eventEndTime.format(DateTimeFormatter.ofPattern("hh: mm a")) + " " + ")";
+                + eventEndTime.format(DateTimeFormatter.ofPattern("hh: mm a")) + ")";
     }
 }
