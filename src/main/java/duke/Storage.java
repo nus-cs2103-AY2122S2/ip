@@ -47,6 +47,7 @@ public class Storage {
         String taskType = currLineContents[0];
         boolean isDone = currLineContents[1].equals("X") ? true : false ;
         String description = currLineContents[2];
+        
         if (taskType.equals("T")) {
             listOfSavedTasks.add(new ToDo(description, isDone));
         } else if (taskType.equals("D")) {

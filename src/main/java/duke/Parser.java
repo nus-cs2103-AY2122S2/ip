@@ -116,7 +116,7 @@ public class Parser {
         assert number < tasks.size() : "Number stated is beyond the size of the list";
         Task taskToDelete = tasks.get(number - 1);
         tasks.remove(number - 1);
-       return "Noted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + taskToDelete + "\n"
                 + String.format("Now you have %d tasks in the list."
                 , tasks.size());
