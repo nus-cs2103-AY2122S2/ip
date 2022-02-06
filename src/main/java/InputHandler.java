@@ -116,8 +116,20 @@ public class InputHandler {
             } else {
                 throw new DukeException("Wrong usage of delete! Correct usage: delete [index]");
             }
+
+        case "find":
+            if (splitInput.length > 1) {
+                parser.parse(CommandType.FIND, this.storage, splitInput);
+                return false;
+            } else {
+                throw new DukeException("Uh oh! It seems like you did not specify what to find");
+            }
+
         case "bye":
             return true;
+
+
+
         default:
             throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: " +
                     "todo [task], event [task] /at [time],"
@@ -144,7 +156,8 @@ public class InputHandler {
         LIST,
         MARK,
         UNMARK,
-        DELETE
+        DELETE,
+        FIND
     }
 }
 

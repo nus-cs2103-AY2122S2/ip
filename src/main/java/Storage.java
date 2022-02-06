@@ -18,8 +18,8 @@ import java.nio.file.Path;
 import java.io.FileWriter;
 
 public class Storage {
-    TaskList taskList;
-    String FILEPATH = "data/data.txt";
+    private TaskList taskList;
+    final String FILEPATH = "data/data.txt";
 
     /**
      * Constructs a Storage object. Loads the data from data/data.txt. if no data dir or data.txt is found, create an empty one
@@ -155,6 +155,10 @@ public class Storage {
      */
     public int taskListSize() {
         return this.taskList.size();
+    }
+
+    public TaskList accessTaskList() {
+        return this.taskList;
     }
 
 }

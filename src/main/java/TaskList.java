@@ -12,7 +12,7 @@ import duke.task.Deadline;
 import duke.task.Task;
 import java.util.ArrayList;
 public class TaskList {
-    ArrayList<Task> list;
+    public ArrayList<Task> list;
 
     /**
      * Constructor for TaskList. Initialises an empty ArrayList<Task>
