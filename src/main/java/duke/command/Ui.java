@@ -38,8 +38,6 @@ public class Ui {
         String userInput = dukeScanner.nextLine();
         return Parser.parseInput(userInput, taskList);
     }
-
-
 }
 
 

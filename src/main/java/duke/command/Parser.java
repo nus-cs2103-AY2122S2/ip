@@ -1,6 +1,11 @@
 package duke.command;
 
 import duke.DukeException;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import java.util.Arrays;
 
 
@@ -22,7 +27,7 @@ public class Parser {
     public static boolean parseInput(String input, TaskList taskList) {
         String[] inputArray = input.split(" ");
         String[] tempArray = Arrays.copyOfRange(inputArray, 1, inputArray.length);
-        String [] command = {inputArray[0], String.join(" ", tempArray)};
+        String[] command = {inputArray[0], String.join(" ", tempArray)};
         try {
             switch (command[0]) {
             case ("bye"):
@@ -42,7 +47,10 @@ public class Parser {
             case ("todo"):
             case ("deadline"):
             case ("event"):
-                taskList.addItem(command);
+                parseAddItem(command, taskList);
+                break;
+            case ("find"):
+                taskList.findItem(command[1]);
                 break;
             default:
                 throw new DukeException("Sorry I don't understand that command");
@@ -55,6 +63,44 @@ public class Parser {
             System.out.println("__________________________________");
         }
         return true;
+    }
+
+    private static void parseAddItem(String[] command, TaskList taskList) throws DukeException {
+        switch (command[0]) {
+        case "todo":
+            if (command[1].isEmpty()) {
+                throw new DukeException("Please use this format: duke.task.Todo <Activity>");
+            }
+            taskList.addTodo(command[1]);
+            break;
+        case "deadline":
+            try {
+                String title = command[1].split(" /by ")[0];
+                String deadline = command[1].split(" /by ")[1];
+                String[] deadlineList = deadline.split(" ");
+                LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
+                LocalTime time = LocalTime.parse(deadlineList[1]);
+                taskList.addDeadline(title, date, time);
+            } catch (IndexOutOfBoundsException | DateTimeParseException e){
+                throw new DukeException("Please tell me the deadline in this format: <Activity> /by YYYY/MM/DD HH:MM");
+            }
+            break;
+        case "event":
+            try {
+                String title = command[1].split(" /at ")[0];
+                String deadline = command[1].split(" /at ")[1];
+                String[] deadlineList = deadline.split(" ");
+                LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
+                LocalTime time = LocalTime.parse(deadlineList[1]);
+                taskList.addEvent(title, date, time);
+            } catch (IndexOutOfBoundsException | DateTimeParseException e){
+                throw new DukeException("Please tell me the deadline in this format: <Activity> /at YYYY/MM/DD HH:MM");
+            }
+            break;
+        }
+        System.out.printf("You have %d tasks in your list\n", taskList.getSize());
+        System.out.println("__________________________________");
+
     }
 
 

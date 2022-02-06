@@ -7,6 +7,9 @@ import duke.task.Todo;
 
 import duke.DukeException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class TaskList {
             System.out.println("No items in the list");
         } else {
             for (int i = 0; i < taskArray.size(); i++) {
-                System.out.printf("%d. " + taskArray.get(i) + "\n", i+1);
+                System.out.printf("%d. " + taskArray.get(i) + "\n", i + 1);
             }
         }
         System.out.println("__________________________________");
@@ -43,7 +46,7 @@ public class TaskList {
      */
     public void markItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
-        taskArray.get(index-1).setChecked();
+        taskArray.get(index - 1).setChecked();
         System.out.println("__________________________________");
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(taskArray.get(index-1));
@@ -59,10 +62,10 @@ public class TaskList {
      */
     public void unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
-        taskArray.get(index-1).setUnchecked();
+        taskArray.get(index - 1).setUnchecked();
         System.out.println("__________________________________");
         System.out.println("OK, I've marked this task as not done yet: ");
-        System.out.println(taskArray.get(index-1));
+        System.out.println(taskArray.get(index - 1));
         System.out.println("__________________________________");
     }
 
@@ -84,28 +87,48 @@ public class TaskList {
     }
 
 
+    public void addTodo(String title) {
+        System.out.println("__________________________________");
+        taskArray.add(new Todo(title));
+    }
+
+    public void addDeadline(String title, LocalDate date, LocalTime time) {
+        System.out.println("__________________________________");
+        taskArray.add(new Deadline(title, date, time));
+    }
+
+    public void addEvent(String title, LocalDate date, LocalTime time) {
+        System.out.println("__________________________________");
+        taskArray.add(new Event(title, date, time));
+    }
+
+
+    public int getSize() {
+        return taskArray.size();
+    }
+
     /**
-     * Adds an item from the list of tasks.
-     *
-     * @param command Command is the input that the user gives
-     * @throws DukeException If syntax of input given by user is wrong
+     * Prints the tasks that contains the search term.
+     * @param term User wants to find tasks with this term
+     * @throws DukeException If user gives an empty string as a search term.
      */
-    public void addItem(String[] command) throws DukeException {
-        String input = command[0];
-        System.out.println("__________________________________");
-        switch (input) {
-        case "todo":
-            taskArray.add(new Todo(command[1]));
-            break;
-        case "deadline":
-            taskArray.add(new Deadline(command[1]));
-            break;
-        case "event":
-            taskArray.add(new Event(command[1]));
-            break;
+    public void findItem(String term) throws DukeException {
+        StringBuilder result = new StringBuilder();
+        if (term.isEmpty()){
+            throw new DukeException("Tell me what you're searching for");
         }
-        System.out.printf("You have %d tasks in your list\n", taskArray.size());
         System.out.println("__________________________________");
+        for (int i = 0; i < taskArray.size(); i++) {
+            if (taskArray.get(i).titleContains(term)) {
+                result.append(String.format("%d. " + taskArray.get(i).toString() + "\n", i + 1));
+            }
+        }
+        if (result.length() == 0) {
+            System.out.println("There are no tasks containing that term.");
+        } else {
+            System.out.print(result);
+            System.out.println("__________________________________");
+        }
     }
 
     /**
@@ -118,7 +141,7 @@ public class TaskList {
             list = new StringBuilder("No items in the list");
         } else {
             for (int i = 0; i < taskArray.size(); i++) {
-                String line = String.format("%d. " + taskArray.get(i)+ "\n", i+1);
+                String line = String.format("%d. " + taskArray.get(i)+ "\n", i + 1);
                 list.append(line);
             }
         }

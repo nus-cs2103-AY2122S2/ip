@@ -16,6 +16,6 @@ public class TaskListTest {
     @Test
     public void taskListTest1() {
         TaskList taskList = new TaskList();
-        assertThrows(DukeException.class, () -> taskList.addItem(new String[] {"deadline", "/by test"}));
+        assertThrows(DukeException.class, () -> Parser.parseInput("deadline /by test", taskList));
     }
 }
