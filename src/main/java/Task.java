@@ -53,7 +53,7 @@ public class Task {
      * @return boolean on whether task is marked
      */
     public boolean hasBeenMarked() {
-        return this.mark;
+        return this.isMarked;
     }
 
     /**

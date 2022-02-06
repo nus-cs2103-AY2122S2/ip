@@ -101,6 +101,7 @@ public class Storage {
     public void writeData(Task task) throws IOException {
         this.taskList.add(task);
         FileWriter fw = new FileWriter(this.FILEPATH, true);
+        System.out.println(new File(this.FILEPATH).getAbsolutePath());
         fw.write(taskToStringConverter(task));
         fw.close();
     }

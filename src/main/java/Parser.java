@@ -32,7 +32,8 @@ public class Parser {
             String[] stringArrayExcludingEvent = Arrays.copyOfRange(splitInput, 1, splitInput.length);
             String stringExcludingEvent = String.join(" ", stringArrayExcludingEvent);
             String[] eventNameAndTimeArray = stringExcludingEvent.split("/at ");
-            String eventName = eventNameAndTimeArray[0];
+            String eventNameWithExtraSpace = eventNameAndTimeArray[0];
+            String eventName = eventNameWithExtraSpace.substring(0, eventNameWithExtraSpace.length() -1);
             String eventTime = eventNameAndTimeArray[1];
             String[] eventTimeArray = eventTime.split(" ");
             try {
@@ -47,7 +48,8 @@ public class Parser {
             String[] stringArrayExcludingDeadline = Arrays.copyOfRange(splitInput, 1, splitInput.length);
             String stringExcludingDeadline = String.join(" ", stringArrayExcludingDeadline);
             String[] deadlineNameAndTimeArray = stringExcludingDeadline.split("/by ");
-            String deadlineName = deadlineNameAndTimeArray[0];
+            String deadlineNameWithSpace = deadlineNameAndTimeArray[0];
+            String deadlineName = deadlineNameWithSpace.substring(0, deadlineNameWithSpace.length() - 1);
             String deadlineTime = deadlineNameAndTimeArray[1];
             String[] deadlineTimeArray = deadlineTime.split(" ");
             try {
