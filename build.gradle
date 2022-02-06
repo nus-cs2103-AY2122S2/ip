@@ -2,9 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'checkstyle'
 }
-
+//    id 'checkstyle'
 repositories {
     mavenCentral()
 }
@@ -42,19 +41,19 @@ test {
 }
 
 application {
-    mainClassName = "duke.chi.Chi"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "chi"
+    archiveBaseName = "chibot"
     archiveClassifier = null
 }
 
-
+/*
 checkstyle {
     toolVersion = '8.29'
 }
-
+*/
 run{
     standardInput = System.in
     enableAssertions = true
