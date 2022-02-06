@@ -54,11 +54,6 @@ public class DialogBox extends HBox {
         circle.setCenterX(displayPicture.getFitWidth() / 2);
         circle.setCenterY(displayPicture.getFitHeight() / 2);
         displayPicture.setClip(circle);
-
-        //this.setAlignment(Pos.TOP_RIGHT);
-        //this.setSpacing(8);
-        //this.setHeight(dialog.getHeight());
-        //this.setPadding(new Insets(9, 9, 9, 9));
     }
 
     /**
@@ -71,6 +66,11 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Change the Background color of the DialogBox.
+     *
+     * @param color Color of the Background.
+     */
     private void changeBackGround(Color color) {
         BackgroundFill backgroundFill = new BackgroundFill(color,
                 CornerRadii.EMPTY, Insets.EMPTY);
@@ -80,12 +80,26 @@ public class DialogBox extends HBox {
         this.setBackground(background);
     }
 
+    /**
+     * Method to call to produce a DialogBox for User.
+     *
+     * @param text Text associated with User DialogBox.
+     * @param img Image of User DialogBox.
+     * @return DialogBox for User.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.changeBackGround(Color.LIGHTSKYBLUE);
         return db;
     }
 
+    /**
+     * Method to call to produce a DialogBox from Duke.
+     *
+     * @param text Text associated with Duke DialogBox.
+     * @param img Image of Duke DialogBox.
+     * @return DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

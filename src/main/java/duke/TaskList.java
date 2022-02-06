@@ -60,6 +60,8 @@ public class TaskList {
 
     /**
      * Command to signal to the program to close.
+     *
+     * @return Bye string to be used for Duke DialogBox.
      */
     public String bye(Storage storage) {
         storage.writeTasksToFile();
@@ -70,6 +72,8 @@ public class TaskList {
 
     /**
      * Command to list out all of the Tasks in the TaskList.
+     *
+     * @return List string to be used for Duke DialogBox.
      */
     public String list() {
         String reply = "";
@@ -94,6 +98,7 @@ public class TaskList {
      * Command to "mark" or "unmark" a Task in the TaskList.
      *
      * @param taskStr String of command inputted by the User.
+     * @return TaskCheck string to be used for Duke DialogBox.
      */
     public String taskCheck(String taskStr) {
         String reply = "";
@@ -124,6 +129,7 @@ public class TaskList {
      * Command to add a Todo Task into the TaskList.
      *
      * @param taskStr String of Todo Task instruction.
+     * @return Todo string to be used for Duke DialogBox.
      */
     public String todo(String taskStr) {
         // eg to_do borrow book (without the _)
@@ -141,6 +147,7 @@ public class TaskList {
      * Command to add a Deadline Task into the TaskList.
      *
      * @param taskStr String of Deadline Task instruction.
+     * @return Deadline string to be used for Duke DialogBox.
      */
     public String deadline(String taskStr) {
         String reply = "";
@@ -159,13 +166,13 @@ public class TaskList {
             reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
         }
         return reply;
-
     }
 
     /**
      * Command to add a Event Task into the TaskLIst.
      *
      * @param taskStr String of Event Task instruction.
+     * @return Event string to be used for Duke DialogBox.
      */
     public String event(String taskStr) {
         String reply = "";
@@ -190,6 +197,7 @@ public class TaskList {
      * Command to delete a Task from the TaskList.
      *
      * @param taskStr String of the Task that you are trying to delete.
+     * @return Delete string to be used for Duke DialogBox.
      */
     public String delete(String taskStr) {
         String reply = "";
@@ -218,6 +226,7 @@ public class TaskList {
      * Method to help users find tasks of a certain "keyword" in TaskList.
      *
      * @param taskStr Command inputted by users.
+     * @return Find string to be used for Duke DialogBox.
      */
     public String find(String taskStr) {
         String reply = "";
@@ -241,6 +250,8 @@ public class TaskList {
 
     /**
      * Manual that users can use if they need help.
+     *
+     * @return Help string to be used for Duke DialogBox.
      */
     public String help() {
         String reply = "Looks like you need some help! Here is a list of commands that you can use!\n"

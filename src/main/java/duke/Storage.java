@@ -45,6 +45,8 @@ public class Storage {
 
     /**
      * Method to save the TaskList into a file in the local device.
+     *
+     * @return Save string to be used for Duke DialogBox.
      */
     public String save() {
         writeTasksToFile();
