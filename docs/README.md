@@ -24,7 +24,7 @@ You can view all your tasks at a glance.
 
 ### Searching for tasks by name/date
 
-You can search for tasks that match a certain keyword or a date
+You can search for tasks that match a certain keyword or a date.
 
 ### Saving tasks
 
@@ -74,7 +74,7 @@ Create a new Deadline task and adds it to the current list of tasks.
 
 Format:
 
-`event <deadline-description> /by <due-date>`
+`deadline <deadline-description> /by <due-date>`
 
 ### `todo` - Create a new ToDo task
 
