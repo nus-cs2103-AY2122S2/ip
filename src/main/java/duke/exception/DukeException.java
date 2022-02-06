@@ -24,24 +24,29 @@ public class DukeException extends Exception {
      * @param index Index of the keyword '/by' or '/at' that is too be used in the tasks.
      * @param input The string that the user has entered following the command.
      * @param taskType Specifies the task type of either Deadline or Event.
+     * @param list Tasklist that contains all tasks.
      * @return An array of the date and time format, if specified.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static String[] isTaskValid(int index, String input, String taskType) throws DukeException {
+    public static String[] isTaskValid(int index, String input, String taskType, Tasklist list) throws DukeException {
         if (taskType.equals("event")) {
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/at'.\n");
             }
-            if (index - 1 < 6) {
+            if (index - 1 < 6 || input.substring(6, index - 1).strip().equals("")) {
                 throw new DukeException("Please key in a valid task name.\n");
             }
-        } else {
+            DukeException.isDuplicatedTask(input.substring(6, index - 1).strip(), list);
+        } else if (taskType.equals("deadline")){
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/by'.\n");
             }
-            if (index - 1 < 9) {
+            if (index - 1 < 9 || input.substring(9, index - 1).strip().equals("")) {
                 throw new DukeException("Please key in a valid task name.\n");
             }
+            DukeException.isDuplicatedTask(input.substring(9, index - 1).strip(), list);
+        } else {
+            throw new DukeException("Please use 'todo, deadline, event' to start adding tasks.\n");
         }
         if (index + 4 > input.length() || input.substring(index + 4).strip().equals("")) {
             throw new DukeException("Please key in a valid time.\n");
@@ -76,15 +81,17 @@ public class DukeException extends Exception {
      * Checks whether the input is valid for Todo tasks. Otherwise, throws an exception.
      *
      * @param input The string that the user has entered following the command.
+     * @param list Tasklist that contains all tasks.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static void isTaskValid(String input) throws DukeException {
+    public static void isTaskValid(String input, Tasklist list) throws DukeException {
         if (input.length() < 5 || input.substring(5).strip().equals("")) {
             throw new DukeException("Please key in a valid task name.\n");
         }
         if (input.contains("|")) {
             throw new DukeException("Sorry, avoid using '|' as it is a special character.\n");
         }
+        DukeException.isDuplicatedTask(input.substring(5).strip(), list);
     }
 
     /**
@@ -127,5 +134,20 @@ public class DukeException extends Exception {
             throw new DukeException("Please type in a word to search through the tasks.\n");
         }
         return input.substring(5);
+    }
+
+    /**
+     * Checks whether the input has a similar name as one of the existing tasks.
+     *
+     * @param input The string that the user has entered following the command.
+     * @param list Tasklist that contains all tasks.
+     * @throws DukeException If any of the params do not satisfy conditions for processing.
+     */
+    public static void isDuplicatedTask(String input, Tasklist list) throws DukeException {
+        for (int i = 0; i < list.getTotalTasks(); i++) {
+            if (list.getTask(i).getTaskName().equals(input)) {
+                throw new DukeException("Sorry, a task with a similar name already exists.\n");
+            }
+        }
     }
 }
