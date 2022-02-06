@@ -76,6 +76,7 @@ public class Storage {
      */
     public static TaskList initTaskList(int size) {
         File dataFile = new File(DATA_PATH);
+        assert size > 0;
         TaskList taskListOfTasks = new TaskList(size);
         if (dataFile.length() != 0) {
             loadData(dataFile, taskListOfTasks);
