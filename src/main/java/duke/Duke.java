@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.stage.Stage;
+
 /**
  * Main class of Duke
  * Prints the introduction text of Duke
@@ -12,6 +14,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private Stage stage;
 
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -28,12 +31,16 @@ public class Duke {
     /**
      * Constructor for Duke.
      */
-    public Duke() {
+    public Duke(Stage stage) {
         //System.out.println(logo + start);
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
         this.ui = new Ui(taskList, storage);
-        // ui.run();
+        this.stage = stage;
+    }
+
+    public Stage getStage() {
+        return this.stage;
     }
 
 

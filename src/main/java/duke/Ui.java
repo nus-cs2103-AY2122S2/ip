@@ -62,6 +62,7 @@ public class Ui {
                 // One word commands
             } else if (firstWord.equals("bye")) {
                 reply = taskList.bye(storage);
+
                 //break;
             } else if (firstWord.equals("save")) {
                 reply = storage.save();

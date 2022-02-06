@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private String logo =
-              " ___            _        \n"
+              " ___             _        \n"
             + "|   _ \\  _    _ | |  ____ \n"
             + "|  | |   |  |  |  | | / / _ \\\n"
             + "|  |_|  |  |_ |  |   <  __/\n"
@@ -72,5 +72,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            this.duke.getStage().close();
+        }
     }
 }
