@@ -8,6 +8,9 @@ import duke.main.TaskList;
 import duke.task.Task;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command which, when executed, sorts the TaskList based on priority.
+ */
 public class SortCommand extends Command {
     private static final boolean IS_EXIT = false;
 
