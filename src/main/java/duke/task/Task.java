@@ -90,6 +90,8 @@ public abstract class Task implements Serializable {
      */
     @Override
     public void serialize(DataOutputStream dOut) throws IOException {
+        assert dOut != null;
+
         dOut.writeShort(this.type.getTypeId());
         dOut.writeUTF(this.description);
         dOut.writeBoolean(this.isDone);
@@ -104,6 +106,8 @@ public abstract class Task implements Serializable {
      * @throws IOException If an error occurs during any read operation.
      */
     protected Task readSerializedData(DataInputStream dIn) throws IOException {
+        assert dIn != null;
+
         this.description = dIn.readUTF();
         this.isDone = dIn.readBoolean();
 

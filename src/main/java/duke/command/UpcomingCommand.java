@@ -27,6 +27,7 @@ public class UpcomingCommand extends Command {
         linePrinter.print(String.format("Here are your tasks in %d days:", days));
 
         taskList.doForEach((index, task) -> {
+            assert task != null;
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(endTime)) {
                     linePrinter.print(task.getReadableString());

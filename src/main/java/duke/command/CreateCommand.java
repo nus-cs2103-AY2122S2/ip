@@ -38,6 +38,7 @@ public class CreateCommand extends Command {
         } else if (this.taskType == TaskType.EVENT) {
             this.parseCreateEvent(linePrinter, taskList);
         } else {
+            assert false : "Trying to create invalid task type";
             throw new DukeIllegalArgumentException("Unknown task type to be created");
         }
 
@@ -56,6 +57,7 @@ public class CreateCommand extends Command {
         // Check for invalid task name
         validateTaskDescription(this.args);
 
+        assert args.length() > 0;
         final Task task = taskList.addTask(new Todo(this.args));
         this.printResponse(linePrinter, task, taskList, "Todo");
     }
@@ -73,8 +75,10 @@ public class CreateCommand extends Command {
         final String[] argParts = this.parseDelimitedCommand(this.args, " /by ");
         final String taskDescription = validateTaskDescription(argParts[0]);
         final LocalDateTime taskBy = parseDateTime(argParts[1]);
+        assert taskBy != null;
 
         final Task task = taskList.addTask(new Deadline(taskDescription, taskBy));
+        assert task != null;
         this.printResponse(linePrinter, task, taskList, "Deadline");
     }
 
@@ -91,8 +95,10 @@ public class CreateCommand extends Command {
         final String[] argParts = this.parseDelimitedCommand(this.args, " /at ");
         final String taskDescription = validateTaskDescription(argParts[0]);
         final LocalDateTime taskAt = parseDateTime(argParts[1]);
+        assert taskAt != null;
 
         final Task task = taskList.addTask(new Event(taskDescription, taskAt));
+        assert task != null;
         this.printResponse(linePrinter, task, taskList, "Event");
     }
 
@@ -125,6 +131,7 @@ public class CreateCommand extends Command {
         if (taskDescription.equals("")) {
             throw new DukeIllegalArgumentException("Task description cannot be empty");
         }
+        assert taskDescription.length() > 0;
         return taskDescription;
     }
 

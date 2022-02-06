@@ -26,6 +26,7 @@ public class MarkCommand extends Command {
     @Override
     public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         final Task task = parseSelectTask(taskList);
+        assert task != null;
 
         if (task.isDone() == this.isDone) {
             linePrinter.print(String.format("Task is already %s:", this.isDone ? "done" : "not done"));

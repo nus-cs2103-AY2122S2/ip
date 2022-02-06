@@ -78,7 +78,9 @@ public class Ui {
         final boolean isRunning = action.apply((line) -> {
             lines.add(line);
         });
+
         final String message = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
+        assert this.mainWindowController != null : "[UI] Main Window Controller not initialized";
         this.mainWindowController.printBotMessage(message);
         return isRunning;
     }
@@ -99,6 +101,7 @@ public class Ui {
         } else if (ex instanceof DukeIoException) {
             linePrinter.print(ERROR_IO);
         } else {
+            assert false : "[UI] Unknown printError Type";
             linePrinter.print(ERROR_GENERAL);
         }
     }

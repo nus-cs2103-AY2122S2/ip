@@ -32,6 +32,8 @@ public class TaskListSerializer {
         final DataInputStream dbDataStream = new DataInputStream(dbStream);
         try (dbDataStream) {
             final int recordCount = dbDataStream.readInt();
+            assert recordCount >= 0;
+
             inflateRecords(dbDataStream, recordCount, taskList);
         } catch (IOException ex) {
             throw new DukeIoException("Failed to inflate database: IO Error");
@@ -52,7 +54,9 @@ public class TaskListSerializer {
             throws IOException {
         for (int i = 0; i < recordCount; i++) {
             final int recordLength = dbDataStream.readInt();
+            assert recordLength > 0;
             final byte[] recordData = dbDataStream.readNBytes(recordLength);
+            assert recordData.length == recordLength;
 
             try {
                 taskList.addTask(TaskSerializer.inflate(recordData));
@@ -71,7 +75,9 @@ public class TaskListSerializer {
      */
     public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIoException {
         try (final DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
+            assert taskList.getTaskCount() >= 0;
             dbDataStream.writeInt(taskList.getTaskCount());
+
             deflateRecords(dbDataStream, taskList);
         } catch (IOException e) {
             throw new DukeIoException("Failed to deflate database: IO Error");
@@ -90,6 +96,8 @@ public class TaskListSerializer {
             throws DukeIoException, IOException {
         for (int i = 0; i < taskList.getTaskCount(); i++) {
             final byte[] flattenedData = TaskSerializer.deflate(taskList.getTaskByIndex(i));
+            assert flattenedData.length > 0;
+
             dbDataStream.writeInt(flattenedData.length);
             dbDataStream.write(flattenedData);
         }

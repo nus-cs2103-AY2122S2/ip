@@ -44,6 +44,7 @@ public abstract class Command {
         } catch (NumberFormatException ex) {
             throw new DukeIllegalArgumentException("Task Number must be a number");
         }
+
         // Convert UI 1-based indexing to task storage 0-based indexing
         return taskIndex + OFFSET_READABLE_TO_LOGICAL;
     }

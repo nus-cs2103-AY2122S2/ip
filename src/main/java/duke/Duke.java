@@ -59,6 +59,8 @@ public class Duke extends Application {
             System.out.println(ex.getMessage());
             Platform.exit();
         }
+        assert primaryStage.getScene() != null;
+
         primaryStage.show();
         Ui.getInstance().greet();
     }

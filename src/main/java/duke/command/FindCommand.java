@@ -24,8 +24,10 @@ public class FindCommand extends Command {
         }
 
         final String searchTerm = this.args.toLowerCase();
+        assert searchTerm.length() > 0;
         linePrinter.print("Here are the tasks related to your search:");
         taskList.doForEach((index, task) -> {
+            assert task != null;
             if (task.getDescription().toLowerCase().contains(searchTerm)) {
                 linePrinter.print(String.format("%d. %s", index + OFFSET_LOGICAL_TO_READABLE,
                         task.getReadableString()));
