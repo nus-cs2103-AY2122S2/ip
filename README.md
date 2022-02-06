@@ -1,6 +1,6 @@
-# Delphine
+# Daphne
 
-This is Delphine, a friendly bot to help you keep track of your tasks! 
+This is Daphne, a friendly bot to help you keep track of your tasks! 
 
 ![](src/main/resources/view/png/bot.png)
 
@@ -8,7 +8,7 @@ This is Delphine, a friendly bot to help you keep track of your tasks!
 
 ## Commands
 
-Here are some things Delphine can do for you.
+Here are some things Daphne can do for you.
 
 Hello: `hello`  
 List All Commands: `help`

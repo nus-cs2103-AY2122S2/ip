@@ -2,6 +2,7 @@ package chatbot.gui;
 
 import chatbot.command.CommandList;
 import chatbot.command.CommandOutput;
+import chatbot.sfx.Sfx;
 import chatbot.task.TaskList;
 import chatbot.util.Ui;
 import javafx.fxml.FXML;
@@ -55,7 +56,8 @@ public class MainWindow {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(new BotDialogBox(
-                "Hello! I'm Delphine. How may I help you today?\nType \"help\" for a list of commands."));
+                "Hello! I'm Daphne. How may I help you today?\nType \"help\" for a list of commands."));
+        Ui.playSound(Sfx.SFX_GREETINGS);
     }
 
     /**

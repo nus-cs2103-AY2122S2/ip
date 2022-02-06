@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
 
             // Set avatar.
-            Image avatarImage = new Image(new BufferedInputStream(getClass().getResourceAsStream(avatarFile)));
+            Image avatarImage = new Image(getClass().getResourceAsStream(avatarFile));
             avatar.setFill(new ImagePattern(avatarImage));
 
             // Set message.

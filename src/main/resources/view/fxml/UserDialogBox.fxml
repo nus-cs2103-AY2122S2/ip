@@ -5,20 +5,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-
-<fx:root alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308"
+         maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" spacing="10.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17">
     <children>
-        <Label fx:id="message" layoutX="15.0" layoutY="25.0" style="-fx-border-color: BLACK; -fx-background-color: #b7fcfb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2; -fx-text-fill: black;" text="Message" wrapText="true">
+        <Label fx:id="message" layoutX="15.0" layoutY="25.0"
+               style="-fx-border-color: BLACK; -fx-background-color: #b7fcfb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2; -fx-text-fill: black;"
+               text="Message" wrapText="true">
             <font>
-                <Font size="14.0" />
+                <Font size="14.0"/>
             </font>
             <padding>
-                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
             </padding>
         </Label>
-        <Circle fx:id="avatar" fill="DODGERBLUE" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" style="-fx-border-color: BLACK; -fx-background-color: PINK;" />
+        <Circle fx:id="avatar" fill="DODGERBLUE" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0"
+                style="-fx-border-color: BLACK; -fx-background-color: PINK;"/>
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </padding>
 </fx:root>

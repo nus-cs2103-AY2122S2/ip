@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Deadline;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
@@ -36,12 +37,11 @@ public class DeadlineCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid description\nCommand format: " + FORMAT, Sfx.SFX_ERROR_BLANK_DESC);
         } else if (date == null) {
-            return new CommandOutput("Error: Invalid date\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid date\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_DATE);
         } else if (time == null) {
-            return new CommandOutput("Error: Invalid time\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid time\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_TIME);
         }
 
         // Add event.
@@ -49,6 +49,6 @@ public class DeadlineCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                        taskList.size()), "/audio/wav/notification.wav");
+                        taskList.size()), Sfx.SFX_COMMAND_ADD);
     }
 }

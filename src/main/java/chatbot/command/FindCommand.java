@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
@@ -16,7 +17,7 @@ public class FindCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length < 2) {
-            return new CommandOutput("Error: Blank keyword\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_ARGS);
         }
 
         String keyword = String.join(" ", Arrays.asList(input).subList(1, input.length));
@@ -24,7 +25,7 @@ public class FindCommand extends Command {
 
         // No tasks found
         if (tasks.length == 0) {
-            return new CommandOutput("Sorry! I couldn't find anything...", "/audio/wav/notification.wav");
+            return new CommandOutput("Sorry! I couldn't find anything...", Sfx.SFX_COMMAND_FIND_NONE);
         }
 
         // Tasks found
@@ -32,6 +33,6 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.length; ++i) {
             output.append(i + 1).append(". ").append(tasks[i].toString());
         }
-        return new CommandOutput(output.toString(), "/audio/wav/notification.wav");
+        return new CommandOutput(output.toString(), Sfx.SFX_COMMAND_FIND);
     }
 }

@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Event;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
@@ -41,26 +42,25 @@ public class EventCommand extends Command {
         }
 
         if (desc.isBlank()) {
-            return new CommandOutput("Error: Invalid description\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Blank description\nCommand format: " + FORMAT, Sfx.SFX_ERROR_BLANK_DESC);
         } else if (startDate == null) {
             return new CommandOutput("Error: Invalid start date\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_START_DATE);
         } else if (startTime == null) {
             return new CommandOutput("Error: Invalid start time\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_START_TIME);
         } else if (endDate == null) {
             return new CommandOutput("Error: Invalid end date\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_END_DATE);
         } else if (endTime == null) {
             return new CommandOutput("Error: Invalid end time\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_END_TIME);
         } else if (startDate.isAfter(endDate)) {
             return new CommandOutput("Error: Start date cannot be after end date\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_DATE_ORDER);
         } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
             return new CommandOutput("Error: Start time cannot be after end time\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_ERROR_INVALID_TIME_ORDER);
         }
 
         // Add event.
@@ -68,6 +68,6 @@ public class EventCommand extends Command {
         taskList.add(task);
         return new CommandOutput(
                 String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                        taskList.size()), "/audio/wav/notification.wav");
+                        taskList.size()), Sfx.SFX_COMMAND_ADD);
     }
 }
