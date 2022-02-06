@@ -24,8 +24,8 @@ public class ErrorCommand extends Command {
     /**
      * return error Message.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override

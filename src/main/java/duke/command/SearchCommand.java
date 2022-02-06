@@ -7,6 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+
 /**
  * Represents a search command to display all the matches
  */
@@ -26,8 +27,8 @@ public class SearchCommand extends Command {
     /**
      * filter and format the string out put of list by the date.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override

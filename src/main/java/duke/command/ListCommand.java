@@ -12,8 +12,8 @@ public class ListCommand extends Command {
     /**
      * call and format the string out put of list.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override

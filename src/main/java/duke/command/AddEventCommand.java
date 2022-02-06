@@ -25,15 +25,15 @@ public class AddEventCommand extends Command {
     /**
      * Returns a deadline command with new deadline.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(new Event(newEvent.getTask(), newEvent.getDate()));
         storage.saveTaskList(tasks);
-        ui.showMessage("Got it. I've added this duke.task: \n        "
+        ui.showMessage("Got it. I've added this task: \n        "
                 + tasks.getByIndex(tasks.getSize() - 1) + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
 

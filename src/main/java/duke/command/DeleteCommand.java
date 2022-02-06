@@ -26,8 +26,8 @@ public class DeleteCommand extends Command {
      * Change tasks after delete.
      * Update the storage.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
         Task delete = tasks.getByIndex(deleteIndex);
         tasks = tasks.remove(deleteIndex);
         storage.saveTaskList(tasks);
-        ui.showMessage("Noted. I've removed this duke.task: \n        "
+        ui.showMessage("Noted. I've removed this task: \n        "
                 + delete + "\n    Now you have " + tasks.getSize() + " tasks in the list.");
     }
 }

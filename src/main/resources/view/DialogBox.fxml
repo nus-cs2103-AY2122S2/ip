@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" style="-fx-padding: 20">
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+    </padding>
+    <Label fx:id="dialog" text="Label" translateX="-15" translateY="5" maxHeight="-Infinity"
+           style=
+                   "-fx-font-size: 12;
+            -fx-background-radius: 20px;
+            -fx-background-color: white;
+            -fx-padding: 10;
+            -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+"/>
+    <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true"
+               style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);"/>
+</fx:root>

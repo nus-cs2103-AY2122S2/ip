@@ -11,6 +11,7 @@ public class Ui {
 
     private final Scanner in;
     private final PrintStream out;
+    private String outputString;
 
     public Ui() {
         this(System.in, System.out);
@@ -21,19 +22,19 @@ public class Ui {
         this.out = out;
     }
 
-    public void showLine() {
-        out.println(DIVIDER);
-    }
-
     public static String output(String text) {
         return DIVIDER + "\n    " + text;
     }
 
-    public void showWelcome() {
-
-        String logo = "    (/ /^ / - / ^/ /)";
+    public static String showWelcome() {
+        String logo = "    d(`･ω･´)b";
         System.out.println(logo);
         System.out.println(output("Hello! I'm duke.Duke by A0221330A.\n    What can I do for you?\n" + DIVIDER));
+        return "Hello! I'm Yae Guuji\nWhat can I do for you?";
+    }
+
+    public void showLine() {
+        out.println(DIVIDER);
     }
 
     /**
@@ -58,30 +59,41 @@ public class Ui {
 
     public void showLoadingError() {
         out.println(output("Sorry initialized failed"));
+        outputString = "Sorry initialized failed";
     }
 
     public void showExitMessage() {
         out.println(output("Bye. Hope to see you again soon!"));
+        outputString = "Bye. Hope to see you again soon!";
     }
 
     public void showFileCreated() {
         out.println(output("New file has been created for first time"));
+        outputString = "New file has been created for first time";
     }
 
     public void showIoException() {
         out.println(output("I/O error happened"));
+        outputString = "I/O error happened";
     }
 
     public void showInvalidIndex() {
         DukeException exception = new DukeException("OOPS!!! invalid index.");
         out.println(output(exception.toString()));
+        outputString = exception.toString();
     }
 
     public void showDateTimeParseException() {
         out.println(output("Sorry, date time format wrong, please use yyyy-MM-dd"));
+        outputString = "Sorry, date time format wrong, please use yyyy-MM-dd";
     }
 
     public void showMessage(String s) {
         out.println(output(s));
+        outputString = s;
+    }
+
+    public String getOutput() {
+        return outputString;
     }
 }

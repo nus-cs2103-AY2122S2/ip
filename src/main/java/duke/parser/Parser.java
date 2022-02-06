@@ -125,7 +125,7 @@ public class Parser {
                 return new ErrorCommand("Please put in keyword");
             }
         default:
-            return new ErrorCommand("OOPS!!! I'm sorry, but I don't know what that means");
+            return new ErrorCommand("I'm sorry, but I don't know what that means");
         }
     }
 

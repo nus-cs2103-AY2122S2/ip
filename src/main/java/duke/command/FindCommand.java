@@ -10,6 +10,7 @@ public class FindCommand extends Command {
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder searchText = new StringBuilder();

@@ -5,7 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDate by;
-    public Deadline (String task, LocalDate by) {
+
+    public Deadline(String task, LocalDate by) {
         super(task.trim());
         this.by = by;
     }
@@ -35,6 +36,7 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         return by;
     }
+
     @Override
     public String toString() {
         return "[" + Type.D + "]" + super.toString()

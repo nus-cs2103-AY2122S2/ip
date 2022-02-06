@@ -25,8 +25,8 @@ public class UnmarkCommand extends Command {
      * Change one task of tasks after unmark.
      * Update the storage.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
     @Override
@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
         try {
             tasks = tasks.set(unmarkIndex, tasks.getByIndex(unmarkIndex).unmark());
             storage.saveTaskList(tasks);
-            ui.showMessage("Nice! I've marked this duke.task as not done yet:\n        "
+            ui.showMessage("Nice! I've marked this task as not done yet:\n        "
                     + tasks.getByIndex(unmarkIndex));
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             ui.showInvalidIndex();

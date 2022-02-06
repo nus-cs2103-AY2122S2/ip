@@ -16,18 +16,20 @@ public class ExitCommand extends Command {
     /**
      * Returns a exit command.
      *
-     * @param tasks the entire TaskList.
-     * @param ui the ui interface and messages.
+     * @param tasks   the entire TaskList.
+     * @param ui      the ui interface and messages.
      * @param storage the storage operations.
      */
-    @Override public void execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showExitMessage();
     }
 
     /**
      * check and change the command exit to true.
      */
-    @Override public boolean isExit() {
+    @Override
+    public boolean isExit() {
         return true;
     }
 }
