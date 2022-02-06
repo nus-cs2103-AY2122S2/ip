@@ -93,10 +93,11 @@ public class Task {
 
     /**
      * Gets the name variable.
+     * The name is the description of the Task.
      *
      * @return name variable.
      */
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
@@ -105,7 +106,7 @@ public class Task {
      *
      * @return isDone status.
      */
-    Boolean getStatus() {
+    public Boolean getStatus() {
         return this.isDone;
     }
 
