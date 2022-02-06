@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
+    private String currMessage;
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -17,11 +18,16 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("____________________________________________________________");
+        println("________________________________________________________________");
     }
 
+    /**
+     * Method displaying errors
+     * @param message the error message
+     */
     public void showError(String message) {
         System.out.println(message);
+        currMessage += message + "\n";
     }
 
     /**
@@ -38,15 +44,33 @@ public class Ui {
         System.out.println("What can I do for you?");
     }
 
+    public static String getWelcomeMessage() {
+        return "Hello I'm Duke\n" + "What can I do for you?";
+    }
+
+    /**
+     * method to print the message
+     * @param message to be printed
+     */
     public void println(String message) {
+        currMessage += message + "\n";
         System.out.println(message);
     }
-
+    /**
+     * method to print tasks
+     * @param task to be printed
+     */
     public void println(Task task) {
         System.out.println(task);
+        currMessage += task.toString() + "\n";
     }
 
-    public void showLoadingError() {
-        System.out.println("File can't be loaded");
+    public String dumbMessage() {
+        return "dumb";
+    }
+    public String getMessage() {
+        String str = currMessage;
+        currMessage = "";
+        return str;
     }
 }
