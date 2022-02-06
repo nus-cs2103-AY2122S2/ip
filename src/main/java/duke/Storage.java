@@ -13,14 +13,14 @@ public class Storage {
     /**
      * Converts a txt file into a TaskList object
      *
-     * @return TaskList object that contains all tasks saved in the hard disk
+     * @return TaskList object that contains all tasks saved in the hard disk.
      * @throws DukeException
      * @throws IOException
      */
     static TaskList readFile() throws DukeException, IOException {
 
         File directory = new File("data/");
-        if (! directory.exists()){
+        if (!directory.exists()){
             directory.mkdir();
         }
 
@@ -42,6 +42,7 @@ public class Storage {
     }
 
     private static void addLineToTasks(String currLine, TaskList listOfSavedTasks) {
+        assert currLine.length() > 0 : "Empty line detected";
         String[] currLineContents = currLine.split(" ~ ");
         String taskType = currLineContents[0];
         boolean isDone = currLineContents[1].equals("X") ? true : false ;

@@ -34,9 +34,6 @@ public class Ui {
     /**
      * This method will handle user input from the CLI, it has multiple commands such as
      * list, mark, unmark, todo, deadline, event, delete, bye
-     *
-     * @throws DukeException
-     * @throws IOException
      */
     String run(String cmd) {
 
@@ -66,13 +63,14 @@ public class Ui {
             }
 
         } else if (cmd.startsWith(Ui.Commands.TODO.command)) {
-            String description = cmd.split(" ")[1];
-            if (description.length() == 0) {
-                return "OOPS!!! The description of " +
-                        "a todo cannot be empty.";
+            try {
+                String description = cmd.split(" ")[1];
+                ToDo todo = new ToDo(description);
+                response = parser.addToDo(todo);
+            } catch (Exception e) {
+                return "The format should be \"todo return book\"";
             }
-            ToDo todo = new ToDo(description);
-            response = parser.addToDo(todo);
+
 
         } else if (cmd.startsWith(Ui.Commands.DEADLINE.command)) {
             try {
