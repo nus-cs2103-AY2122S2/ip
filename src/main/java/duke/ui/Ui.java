@@ -47,9 +47,6 @@ public class Ui {
      */
     public void print(String ... args) {
         StringBuilder sb = new StringBuilder();
-//        System.out.printf("    %s%n", "==========================================");
-//        Arrays.asList(args).forEach((x) -> System.out.printf("    %s%n", x));
-//        System.out.printf("    %s%n", "==========================================");
         sb.append(String.format("    %s%n", "========================"));
         Arrays.asList(args).forEach((x) -> sb.append(String.format("    %s%n", x)));
         sb.append(String.format("    %s%n", "========================"));
@@ -67,13 +64,6 @@ public class Ui {
      */
     public void print(ArrayList<Task> arr) {
         StringBuilder sb = new StringBuilder();
-//        System.out.printf("    %s%n", "==========================================");
-//        if (arr.size() == 0) {
-//            System.out.println("    Nothing to show!");
-//        } else {
-//            arr.forEach((x) -> System.out.printf("    %d. %s%n", arr.indexOf(x) + 1, x.toString()));
-//        }
-//        System.out.printf("    %s%n", "==========================================");
         sb.append(String.format("    %s%n", "========================"));
         if (arr.size() == 0) {
             sb.append("    Nothing to show!");
@@ -95,17 +85,6 @@ public class Ui {
      * @param arr list of task to be displayed.
      */
     public void print(ArrayList<Task> arr, String header) {
-//        System.out.println(String.format("    %s", "=========================================="));
-//        System.out.println(String.format("    %s", header));
-//        if (arr.size() == 0) {
-//            System.out.println("    Nothing to show!");
-//        } else {
-//            arr.forEach((x) -> {
-//                System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString()));
-//            });
-//        }
-//        System.out.println(String.format("    %s", "=========================================="));
-
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("    %s%n", "========================"));
         sb.append(String.format("    %s", header));
@@ -119,22 +98,9 @@ public class Ui {
     }
 
     public void print(String ss) {
-        Label dukeText = new Label(ss);
         v.getChildren().addAll(
                 DialogBox.getDukeDialog(ss, d)
         );
     }
 
-    /**
-     * Outputs the Duke logo.
-     */
-    public void printLogo(VBox v, String ss, Image d) {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke, What can I do for you?");
-        System.out.println("-------------------------------------------\n");
-    }
-
-    public void printLogo() {
-        print("hey hey hey hey");
-    }
 }

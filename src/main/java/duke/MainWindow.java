@@ -6,7 +6,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -36,7 +35,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-
     public VBox getDialogContainer() {
         return this.dialogContainer;
     }
@@ -59,8 +57,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
-        String input = userInput.getText();;
+        String input = userInput.getText();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, (userImage))
         );
@@ -69,6 +66,5 @@ public class MainWindow extends AnchorPane {
             Storage.saveFile("data", "duke.txt", taskList.getList());
         }
         userInput.clear();
-
     }
 }
