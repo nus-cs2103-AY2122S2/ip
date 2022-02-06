@@ -21,10 +21,14 @@ import java.util.Arrays;
  */
 public class AddCommand extends Command {
 
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String TIME_FORMAT = "HH:mm";
+
     /** The type of add command */
-    private String command;
+    private final String command;
     /** The message body */
-    private String description;
+    private final String description;
 
     /**
      * Constructor of the class.
@@ -120,7 +124,7 @@ public class AddCommand extends Command {
             }
             try {
                 String datetime = msg.split("/by")[1].trim();
-                LocalDateTime dt = LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
                 return false;
             } catch (DateTimeParseException e) {
                 return true;
@@ -132,17 +136,23 @@ public class AddCommand extends Command {
                 return true;
             }
             try {
-                String datetime = msg.split("/at")[1].trim();
-                if (datetime.split(" ").length != 2
-                        || datetime.split(" ")[1].split("-").length != 2) {
+                String dateTime = msg.split("/at")[1].trim();
+                int numberOfDateTimeTokens = dateTime.split(" ").length;
+                int numberOfTimingsSpecified = dateTime.split(" ")[1].split("-").length;
+
+                if (numberOfDateTimeTokens != 2 || numberOfTimingsSpecified != 2) {
                     return true;
                 }
-                LocalDate d = LocalDate.parse(datetime.split(" ")[0].trim(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                LocalTime t1 = LocalTime.parse(datetime.split(" ")[1].split("-")[0].trim(),
-                        DateTimeFormatter.ofPattern("HH:mm"));
-                LocalTime t2 = LocalTime.parse(datetime.split(" ")[1].split("-")[1].trim(),
-                        DateTimeFormatter.ofPattern("HH:mm"));
+
+                String datePortion = dateTime.split(" ")[0].trim();
+                String startTiming = dateTime.split(" ")[1].split("-")[0].trim();
+                String endTiming = dateTime.split(" ")[1].split("-")[1].trim();
+
+                LocalDate.parse(datePortion, DateTimeFormatter.ofPattern(DATE_FORMAT));
+
+                LocalTime t1 = LocalTime.parse(startTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
+                LocalTime t2 = LocalTime.parse(endTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
+
                 return t1.isAfter(t2);
             } catch (DateTimeParseException e) {
                 return true;
@@ -176,7 +186,8 @@ public class AddCommand extends Command {
      */
     public LocalDate getDeadlineDate(String msg) {
         String datetime = msg.split("/by")[1].trim();
-        return LocalDate.parse(datetime.split(" ")[0].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String date = datetime.split(" ")[0].trim();
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**
@@ -187,7 +198,8 @@ public class AddCommand extends Command {
      */
     public LocalTime getDeadlineTiming(String msg) {
         String datetime = msg.split("/by")[1].trim();
-        return LocalTime.parse(datetime.split(" ")[1].trim(), DateTimeFormatter.ofPattern("HH:mm"));
+        String time = datetime.split(" ")[1].trim();
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 
     /**
@@ -198,7 +210,8 @@ public class AddCommand extends Command {
      */
     public LocalDate getEventDate(String msg) {
         String datetime = msg.split("/at")[1].trim();
-        return LocalDate.parse(datetime.split(" ")[0].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String date = datetime.split(" ")[0].trim();
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**
@@ -208,9 +221,10 @@ public class AddCommand extends Command {
      * @return A LocalTime of time specified.
      */
     public LocalTime getEventTimingStart(String msg) {
-        String datetime = msg.split("/at")[1].trim();
-        return LocalTime.parse(datetime.split(" ")[1].split("-")[0].trim(),
-                DateTimeFormatter.ofPattern("HH:mm"));
+        String dateTime = msg.split("/at")[1].trim();
+        String timings = dateTime.split(" ")[1];
+        String startTime = timings.split("-")[0].trim();
+        return LocalTime.parse(startTime, DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 
     /**
@@ -220,8 +234,9 @@ public class AddCommand extends Command {
      * @return A LocalTime of time specified.
      */
     public LocalTime getEventTimingEnd(String msg) {
-        String datetime = msg.split("/at")[1].trim();
-        return LocalTime.parse(datetime.split(" ")[1].split("-")[1].trim(),
-                DateTimeFormatter.ofPattern("HH:mm"));
+        String dateTime = msg.split("/at")[1].trim();
+        String timings = dateTime.split(" ")[1];
+        String startTime = timings.split("-")[1].trim();
+        return LocalTime.parse(startTime, DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 }

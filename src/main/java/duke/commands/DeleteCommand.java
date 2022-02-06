@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
 
     /** Message sent by user in array format */
-    private String[] tokens;
+    private final String[] tokens;
 
     /**
      * Constructor of the class.
@@ -35,20 +35,19 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tl, Storage sge) throws ChiException {
         try {
-            // Re-combines the message back into a single string
             String msg = String.join(" ", tokens);
             // Checks if it is a valid message
             boolean isValidMarkCommand = validateMessageBody(msg, tl);
             if (!isValidMarkCommand) {
                 throw new ChiException("Hey there is something wrong with this delete command nyan!");
-            } else {
-                int index = getIndexInMessage(msg);
-                Task toDelete = tl.getTask(index);
-                tl.deleteTask(toDelete);
-                sge.updateFile(toDelete, tl, "delete");
-                return String.format("Chi-san has removed the task~!\n%s\n You now have %d tasks!\n",
-                        toDelete, tl.getSize());
             }
+            int index = getIndexInMessage(msg);
+            Task toDelete = tl.getTask(index);
+            tl.deleteTask(toDelete);
+            sge.updateFile(toDelete, tl, "delete");
+            return String.format("Chi-san has removed the task~!\n%s\n You now have %d tasks!\n",
+                    toDelete, tl.getSize());
+
         } catch (IOException e) {
             throw new ChiException("Hey something went wrong with the IO nyan!");
         }
