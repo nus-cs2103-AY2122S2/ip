@@ -29,7 +29,9 @@ public class DeadlineCommand extends Command {
     public Response execute() throws DukeException {
         String[] ans = this.stringCmd.split(" /by ");
         Task tempTask = new Deadline(ans[0].replace("deadline ", ""), ans[1]);
+        Integer oldTaskListLength = taskList.taskLength();
         this.taskList.addTask(tempTask);
+        assert taskList.taskLength() == oldTaskListLength + 1 : "Add Deadline Task to list";
         this.store.loadToDisk(this.taskList);
         return new AddTaskResponse(tempTask, this.taskList);
     }
