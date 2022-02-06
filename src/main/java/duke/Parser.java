@@ -25,8 +25,9 @@ public class Parser {
     /**
      * Main parse command that takes in user input and returns a {@code Command} type.
      * It also checks for erroneous input.
-     * @param input User input
-     * @return A {@code Command} type based on user's input
+     *
+     * @param input User input.
+     * @return A {@code Command} type based on user's input.
      */
     public Command parseCommand(String input) {
         if (input.contains("`")) {
@@ -134,7 +135,7 @@ public class Parser {
     }
 
     /**
-     * Sets the task list used in the current Parser instance
+     * Sets the task list used in the current Parser instance.
      *
      * Used for {@code Command}s and certain result printing.
      * @param taskList Task list used for modification or reference when {@code Command}s are executed.

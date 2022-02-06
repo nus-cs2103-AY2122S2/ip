@@ -8,11 +8,10 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Default constructor for a Task
+     * Default constructor for a Task.
+     * By default, task is marked as undone.
      *
-     * By default, task is marked as undone
-     *
-     * @param taskName Task name or description
+     * @param taskName Task name or description.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -20,12 +19,11 @@ public abstract class Task {
     }
 
     /**
-     * Alternative constructor for a Task
+     * Alternative constructor for a Task.
+     * Takes in an additional boolean used for importing existing Tasks.
      *
-     * Takes in an additional boolean used for importing existing Tasks
-     *
-     * @param taskName Task name or description
-     * @param isDone Boolean which shows if the task is marked as done or not
+     * @param taskName Task name or description.
+     * @param isDone Boolean which shows if the task is marked as done or not.
      */
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
@@ -33,9 +31,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the task name or description
+     * Returns the task name or description.
      *
-     * @return Task name or description
+     * @return Task name or description.
      */
     @Override
     public String toString() {
@@ -48,23 +46,23 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Marks the task as undone
+     * Marks the task as undone.
      */
     public void markAsUndone() {
         this.isDone = false;
     }
 
     /**
-     * Gets the current status of the task along with it's description
+     * Gets the current status of the task along with it's description.
      *
-     * @return String representation of the current status of the task
+     * @return String representation of the current status of the task.
      */
     public String getCurrentStatus() {
         return "[" + getStatusIcon() + "] " + this;
@@ -73,18 +71,18 @@ public abstract class Task {
     public abstract Types getType();
 
     /**
-     * Returns the task name or description
+     * Returns the task name or description.
      *
-     * @return Task name or description
+     * @return Task name or description.
      */
     public String getTaskName() {
         return taskName;
     }
 
     /**
-     * Returns a boolean which shows if the task is done or not
+     * Returns a boolean which shows if the task is done or not.
      *
-     * @return Boolean showing if the task is done or not
+     * @return Boolean showing if the task is done or not.
      */
     public boolean isDone() {
         return isDone;

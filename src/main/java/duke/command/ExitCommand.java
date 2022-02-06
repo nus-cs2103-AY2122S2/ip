@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * A class representing the exit command. The program quits when this command is executed
+ * A class representing the exit command. The program quits when this command is executed.
  */
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";

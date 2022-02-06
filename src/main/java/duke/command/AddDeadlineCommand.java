@@ -4,7 +4,7 @@ import duke.TaskList;
 import duke.taskobjects.Deadline;
 
 /**
- * Command to add a deadline task to the task list
+ * Command to add a deadline task to the task list.
  */
 public class AddDeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";

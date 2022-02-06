@@ -1,7 +1,7 @@
 package duke.taskobjects;
 
 /**
- * A class representing a Todo Task
+ * A class representing a Todo Task.
  */
 public class Todo extends Task {
     public Todo(String name) {
@@ -9,10 +9,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Default constructor for Todo
+     * Default constructor for Todo.
      *
-     * @param name Task name or description
-     * @param isDone Boolean which shows it task is marked as done or not
+     * @param name Task name or description.
+     * @param isDone Boolean which shows it task is marked as done or not.
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);

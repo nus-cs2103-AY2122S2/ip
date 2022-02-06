@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * A class representing an incorrect command
+ * A class representing an incorrect command.
  */
 public class ErrorCommand extends Command {
     private final String message;

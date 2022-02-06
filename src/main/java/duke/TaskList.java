@@ -6,82 +6,81 @@ import java.util.List;
 import duke.taskobjects.Task;
 
 /**
- * TaskList object that is just a container for the task list
+ * TaskList object that is just a container for the task list.
  */
 public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Default constructor for TaskList
-     *
-     * Takes in no argument and creates an empty task list
+     * Default constructor for TaskList.
+     * Takes in no argument and creates an empty task list.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Alternative constructor for TaskList
-     * Takes in an {@code ArrayList<Task>} and sets it as a task list
+     * Alternative constructor for TaskList.
+     * Takes in an {@code ArrayList<Task>} and sets it as a task list.
      *
-     * @param taskList The task list that is this new instance wraps around
+     * @param taskList The task list that is this new instance wraps around.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Adds a new {@code Task} to the task list
+     * Adds a new {@code Task} to the task list.
      *
-     * @param task Provided Task that is added to the task list
-     * @return Returns true is addition is successful, else false
+     * @param task Provided Task that is added to the task list.
+     * @return Returns true is addition is successful, else false.
      */
     public boolean add(Task task) {
         return taskList.add(task);
     }
 
     /**
-     * Removes a {@code Task} from the task list based on the index
+     * Removes a {@code Task} from the task list based on the index.
      *
-     * @param taskNo Index of the task to be removed
-     * @return The {@code Task} that was removed
+     * @param taskNo Index of the task to be removed.
+     * @return The {@code Task} that was removed.
      */
     public Task remove(int taskNo) {
         return taskList.remove(taskNo);
     }
 
     /**
-     * Get function to get a {@code Task} from the task list
+     * Get function to get a {@code Task} from the task list.
      *
-     * @param taskNo Index of the task to be retrieved
-     * @return The retrieved {@code Task}
+     * @param taskNo Index of the task to be retrieved.
+     * @return The retrieved {@code Task}.
      */
     public Task get(int taskNo) {
         return taskList.get(taskNo);
     }
 
     /**
-     * Returns the contained task list. Terrible function (will remove soon)
+     * Returns the contained task list. Terrible function (will remove soon).
      *
-     * @return The contained task list
+     * @return The contained task list.
      */
     public List<Task> getList() { // GET RID OF THIS IN THE FUTURE
         return taskList;
     }
 
     /**
-     * Returns the number of elements in the task list
+     * Returns the number of elements in the task list.
      *
-     * @return Number of elements in the task list in int
+     * @return Number of elements in the task list in int.
      */
     public int size() {
         return taskList.size();
     }
 
     /**
-     * Returns a String which describes and lists all the elements in the task list
+     * Returns a String which describes and lists all the elements in the task list.
      *
-     * @return The String representation of all the items in the task list
+     * @return The String representation of all the items in the task list.
      */
     public String listAll() {
         StringBuilder newString = new StringBuilder("Tasklist:\n");
@@ -99,8 +98,8 @@ public class TaskList {
     /**
      * Searches and returns the list of tasks with the matching search query.
      *
-     * @param searchQuery Search query that user enters
-     * @return A string representation of the list of tasks with the matching search query
+     * @param searchQuery Search query that user enters.
+     * @return A string representation of the list of tasks with the matching search query.
      */
     public String search(String searchQuery) {
         StringBuilder newString = new StringBuilder();

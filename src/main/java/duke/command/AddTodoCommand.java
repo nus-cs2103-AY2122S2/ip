@@ -4,7 +4,7 @@ import duke.TaskList;
 import duke.taskobjects.Todo;
 
 /**
- * Command to add a Todo Task to the task list
+ * Command to add a Todo Task to the task list.
  */
 public class AddTodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";

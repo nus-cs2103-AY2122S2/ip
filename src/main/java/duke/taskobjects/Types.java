@@ -1,7 +1,7 @@
 package duke.taskobjects;
 
 /**
- * Enumerator representing the different types of Tasks and it's String representation
+ * Enumerator representing the different types of Tasks and it's String representation.
  */
 public enum Types {
     TODO("Todo Task"),

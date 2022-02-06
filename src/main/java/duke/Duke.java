@@ -27,9 +27,8 @@ public class Duke {
     }
 
     /**
-     * The main entry point to the application
-     *
-     * Creates an instance of Duke and starts the application
+     * The main entry point to the application.
+     * Creates an instance of Duke and starts the application.
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
@@ -50,9 +49,9 @@ public class Duke {
     }
 
     /**
-     * Starts the main logic of the program (command line mode)
+     * Starts the main logic of the program (command line mode).
      *
-     * Instantiates TextUi, Storage, TaskList, and Parser objects and starts input loop
+     * Instantiates TextUi, Storage, TaskList, and Parser objects and starts input loop.
      */
     public void run_cmd() {
         // Setting up the goods

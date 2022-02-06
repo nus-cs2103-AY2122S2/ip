@@ -4,7 +4,7 @@ import duke.TaskList;
 import duke.taskobjects.Event;
 
 /**
- * Command to add an event task to the task list
+ * Command to add an event task to the task list.
  */
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";

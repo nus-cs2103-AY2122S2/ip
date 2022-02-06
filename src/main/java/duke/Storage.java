@@ -18,7 +18,7 @@ import duke.taskobjects.Todo;
 import duke.taskobjects.Types;
 
 /**
- * Storage object that deals with exporting and importing task list items to a file
+ * Storage object that deals with exporting and importing task list items to a file.
  */
 class Storage {
     private final Path pathToFile;
