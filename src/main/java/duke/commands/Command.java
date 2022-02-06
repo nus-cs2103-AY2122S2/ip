@@ -30,12 +30,14 @@ public abstract class Command {
             return new DeleteCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
         case "MARK" :
             return new MarkCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "UNMARK":
+        case "UNMARK" :
             return new UnmarkCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "FIND":
+        case "FIND" :
             return new FindCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "LIST":
+        case "LIST" :
             return new ListCommand();
+        case "HELP" :
+            return new HelpCommand(tokens);
         default:
             throw new ChiException("Could not create command nyan!");
         }

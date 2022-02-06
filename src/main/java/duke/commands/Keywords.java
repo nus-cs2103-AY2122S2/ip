@@ -18,7 +18,8 @@ public enum Keywords {
     DELETE("delete"),
     FIND("find"),
     MARK("mark"),
-    UNMARK("unmark");
+    UNMARK("unmark"),
+    HELP("help");
 
     /** mapping of keywords to their respective enum instances */
     private final HashMap<String, Keywords> keywordMappings = new HashMap<>();

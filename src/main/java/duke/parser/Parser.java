@@ -61,9 +61,11 @@ public class Parser {
             } else if ((res.equals(Keywords.MARK) || res.equals(Keywords.UNMARK) || res.equals(Keywords.DELETE))
                     && tokens.length < 2) {
                 throw new ChiException("Hey can you specify a number nyan!"); // Check if numeric commands have numbers
-            } else if (res.equals(Keywords.LIST) && tokens.length > 2) {
+            } else if (res.equals(Keywords.LIST) && tokens.length > 1) {
                 // Check if list has anything defined behind it
-                throw new ChiException("Hey list doesn't take in so many arguments nyan!");
+                throw new ChiException("Hey this command doesn't take in so many arguments nyan!");
+            } else if (res.equals(Keywords.HELP) && tokens.length > 2) {
+                throw new ChiException("Hey Chi-san can only help you with one thing at a time nyan!");
             }
             return res;
         } catch (ChiException e) {
