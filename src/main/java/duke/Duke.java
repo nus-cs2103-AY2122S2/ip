@@ -8,18 +8,18 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class Duke {
+
     private Storage storage;
     private Calendar calendar;
     private Ui ui;
+    private String filePath = "tasks.txt";
 
     /**
-     * Constructs a Duke object with a new Ui and storage handler. The filePath
-     * will be used to load a previous save using the storage handler, but if
-     * no previous save exists a new Calendar will be created
-     * @param filePath - the file path for the previous save file.
+     * Constructs a Duke object with a new Ui and storage handler. The filePath is set
+     * as "tasks.txt", and will be used to load a previous save, but a new Calendar will
+     * be created if no previous save exists.
      */
-
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -28,6 +28,19 @@ public class Duke {
             ui.showLoadingError();
             this.calendar = new Calendar();
         }
+    };
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(calendar, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -35,13 +48,12 @@ public class Duke {
      * @param args - command line arguments
      */
     public static void main (String[] args) {
-        new Duke("tasks.txt").run();
+        new Duke().run();
     }
 
     /**
-     * Executes the Duke program.
+     * Executes the Duke Program.
      */
-
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

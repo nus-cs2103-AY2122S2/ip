@@ -41,7 +41,6 @@ public class Storage {
     Task parseTask(String fileEntry) throws DukeException {
         String[] splitEntry = fileEntry.split("\\|");
         String type = splitEntry[0];
-        System.out.println(type);
         String action = splitEntry[2];
         boolean isComplete = splitEntry[1].equals("0") ? false : true;
         switch(type) {

@@ -8,8 +8,6 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.utils.Text;
 
-
-
 public class MarkCommand extends Command {
 
     private final String indexToMark;
@@ -34,19 +32,19 @@ public class MarkCommand extends Command {
      * @throws InvalidInputException - if the indexToMark is invalid
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         try {
             Integer index = Integer.parseInt(indexToMark);
             calendar.markAsDone(index);
-            ui.showTaskComplete(calendar.taskStringAtIndex(index));
             storage.save(calendar);
+            return ui.showTaskComplete(calendar.taskStringAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException(String.format(Text.TEXT_INVALID_LIST_INDEX,
                     calendar.numOfEntries(), Integer.parseInt(indexToMark)));
         } catch (NumberFormatException e) {
             throw new InvalidInputException(String.format(Text.TEXT_NON_INTEGER_LIST_INDEX, this.indexToMark));
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 }

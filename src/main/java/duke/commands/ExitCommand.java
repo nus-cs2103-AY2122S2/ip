@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
      * @param storage - the storage handler for the program
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(Calendar calendar, Ui ui, Storage storage) {
+        return ui.showGoodbye();
     }
 }

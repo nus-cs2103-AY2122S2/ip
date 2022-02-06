@@ -29,7 +29,8 @@ public abstract class Command {
      * @param storage - the storage handler for the program
      * @throws InvalidInputException - if the input to the subclass commands are invalid
      */
-    public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         /* To be overridden in child classes; */
+        return "";
     }
 }

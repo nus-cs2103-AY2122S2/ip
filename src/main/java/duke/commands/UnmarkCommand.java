@@ -32,19 +32,19 @@ public class UnmarkCommand extends Command {
      * @throws InvalidInputException - if the indexToUnmark is invalid
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         try {
             Integer index = Integer.parseInt(indexToUnmark);
             calendar.markAsNotDone(index);
-            ui.showTaskIncomplete(calendar.taskStringAtIndex(index));
             storage.save(calendar);
+            return ui.showTaskIncomplete(calendar.taskStringAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException(String.format(Text.TEXT_INVALID_LIST_INDEX,
                     calendar.numOfEntries(), Integer.parseInt(indexToUnmark)));
         } catch (NumberFormatException e) {
             throw new InvalidInputException(String.format(Text.TEXT_NON_INTEGER_LIST_INDEX, this.indexToUnmark));
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 }

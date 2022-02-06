@@ -31,13 +31,13 @@ public abstract class AddCommand extends Command {
      * @param storage - the storage handler for the program
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) {
+    public String execute(Calendar calendar, Ui ui, Storage storage) {
         try {
             calendar.add(taskToAdd);
-            ui.showTaskAdded(taskToAdd, calendar.numOfEntries());
             storage.save(calendar);
+            return ui.showTaskAdded(taskToAdd, calendar.numOfEntries());
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 }
