@@ -22,6 +22,7 @@ public class Parser {
             case "list":
                 tasks.list();
                 break;
+
             case "mark":
                 //fallthrough
             case "unmark":
@@ -31,27 +32,33 @@ public class Parser {
                 tasks.update(cmd, idx);
                 tasksIsDiff = true;
                 break;
+
             case "todo":
                 Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
                 tasks.add(newTodo);
                 tasksIsDiff = true;
                 break;
+
             case "deadline":
                 String by = userInput.split("/by ")[1];
                 String deadlineDesc = userInput.split("/by ")[0];
                 deadlineDesc = deadlineDesc.substring(deadlineDesc.indexOf(" ")).strip();
+
                 Task newDeadline = new Deadline(deadlineDesc, by);
                 tasks.add(newDeadline);
                 tasksIsDiff = true;
                 break;
+
             case "event":
                 String time = userInput.split("/at ")[1];
                 String eventDesc = userInput.split("/at ")[0].strip();
                 eventDesc = eventDesc.substring(eventDesc.indexOf(" ")).strip();
+
                 Task newEvent = new Event(eventDesc, time);
                 tasks.add(newEvent);
                 tasksIsDiff = true;
                 break;
+
             default:
                 Ui.invalidCommand(cmd);
             }

@@ -69,14 +69,17 @@ public class TaskList {
             tasks.get(idx - 1).toggleDone();
             Ui.mark(tasks.get(idx - 1));
             break;
+
         case "unmark":
             tasks.get(idx - 1).toggleNotDone();
             Ui.unmark(tasks.get(idx - 1));
             break;
+
         case "delete":
             Ui.delete(tasks.size(), tasks.get(idx - 1));
             tasks.remove(idx - 1);
             break;
+            
         default:
             System.out.println("Invalid command!");
         }

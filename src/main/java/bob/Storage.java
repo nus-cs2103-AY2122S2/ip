@@ -65,18 +65,23 @@ public class Storage {
                 case ("T"):
                     newTask = new ToDo(taskDescription, isDone);
                     break;
+
                 case ("E"):
                     String[] taskDescriptionTime = taskDescription.split("/at ");
                     String eventTaskName = taskDescriptionTime[0];
                     String time = taskDescriptionTime[1];
+
                     newTask = new Event(eventTaskName, time, isDone);
                     break;
+
                 case ("D"):
                     String[] taskDescriptionSplit = taskDescription.split("/by ");
                     String deadlineTaskName = taskDescriptionSplit[0];
                     String deadline = taskDescriptionSplit[1];
+
                     newTask = new Deadline(deadlineTaskName, deadline, isDone);
                     break;
+
                 default:
                     throw new CorruptedEntryException("Saved file has corrupted entries! :(");
                 }
@@ -98,6 +103,7 @@ public class Storage {
      */
     public void writeTaskListToFile(TaskList tasks) {
         StringBuilder tasksString = new StringBuilder();
+        
         for (int i = 0; i < tasks.size(); i++) {
             tasksString.append(tasks.get(i).generateSavedEntry());
             tasksString.append("\n");
