@@ -89,9 +89,10 @@ public abstract class Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException;
 
     /**
      * Returns if user entered exit command.

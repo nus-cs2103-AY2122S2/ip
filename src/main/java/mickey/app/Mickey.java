@@ -17,14 +17,15 @@ public class Mickey {
     /** Ui to generate terminal output. */
     private final Ui ui;
 
+    /** Path of storage file. */
+    private static final String filePath = "src/main/data/save.txt";
+
     /**
      * Constructor.
-     *
-     * @param filePath Path of the file containing saved tasks.
      */
-    public Mickey(String filePath) {
+    public Mickey() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(Mickey.filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -56,9 +57,15 @@ public class Mickey {
     }
 
     /**
-     * @param args Arguments to be passed.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Mickey("src/main/data/tasks.txt").run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (MickeyException e) {
+            return e.toString();
+        }
     }
 }

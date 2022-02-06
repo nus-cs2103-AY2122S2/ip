@@ -25,15 +25,16 @@ public class DeleteCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         int indexToDelete = getIndex();
         if (indexToDelete >= tasks.size()) {
             throw new MickeyException("\tNo such task!");
         }
         Task removed = tasks.remove(indexToDelete);
-        ui.showDeleteTask(tasks.size(), removed);
+        return ui.showDeleteTask(tasks.size(), removed);
     }
 }
