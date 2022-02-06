@@ -1,3 +1,3 @@
-T |   | hello my name is ben
-E | X | hello you are so cool | 2012-03-03
-T |   | Ben is my name
+T |   | Eat a burger during lunch
+D |   | Finish Tennis training | 2020-06-03
+E |   | Go for Thriftbusu's new exhibit | 10 February 2022, 8pm
