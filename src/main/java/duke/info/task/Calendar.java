@@ -1,8 +1,8 @@
 package duke.info.task;
 
-import duke.utils.Text;
-
 import java.util.ArrayList;
+
+import duke.utils.Text;
 
 public class Calendar {
 
@@ -128,7 +128,8 @@ public class Calendar {
             for (int i = 0; i < this.calendar.size() - 1; i++) {
                 product += String.format("%s: %s\n", i + 1, this.calendar.get(i).toString());
             }
-            product += String.format("%s: %s", this.calendar.size(), this.calendar.get(this.calendar.size() - 1).toString());
+            product += String.format("%s: %s", this.calendar.size(),
+                    this.calendar.get(this.calendar.size() - 1).toString());
             return product;
         }
     }

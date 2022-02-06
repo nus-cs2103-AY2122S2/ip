@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.info.task.Calendar;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
 

@@ -1,15 +1,19 @@
 package duke.storage;
 
-import duke.info.exception.DukeException;
-import duke.info.exception.NoPreviousSaveException;
-import duke.info.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.info.exception.DukeException;
+import duke.info.exception.NoPreviousSaveException;
+import duke.info.task.Calendar;
+import duke.info.task.Deadline;
+import duke.info.task.Event;
+import duke.info.task.Task;
+import duke.info.task.Todo;
 
 public class Storage {
 
@@ -41,16 +45,16 @@ public class Storage {
         String action = splitEntry[2];
         boolean isComplete = splitEntry[1].equals("0") ? false : true;
         switch(type) {
-            case "todo":
-                return new Todo(action, isComplete);
-            case "deadline":
-                String deadlineDate = splitEntry[3];
-                return new Deadline(action, deadlineDate, isComplete);
-            case "event":
-                String eventDate = splitEntry[3];
-                return new Event(action, eventDate, isComplete);
-            default:
-                throw new DukeException("Error while parsing save file");
+        case "todo":
+            return new Todo(action, isComplete);
+        case "deadline":
+            String deadlineDate = splitEntry[3];
+            return new Deadline(action, deadlineDate, isComplete);
+        case "event":
+            String eventDate = splitEntry[3];
+            return new Event(action, eventDate, isComplete);
+        default:
+            throw new DukeException("Error while parsing save file");
         }
     }
 

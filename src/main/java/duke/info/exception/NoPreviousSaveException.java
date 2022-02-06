@@ -9,5 +9,7 @@ public class NoPreviousSaveException extends DukeException {
      * from Text.java in the duke.utils package
      */
 
-    public NoPreviousSaveException() { super(Text.TEXT_LOADING_ERROR); }
+    public NoPreviousSaveException() {
+        super(Text.TEXT_LOADING_ERROR);
+    }
 }
