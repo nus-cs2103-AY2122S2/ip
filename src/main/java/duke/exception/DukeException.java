@@ -37,7 +37,7 @@ public class DukeException extends Exception {
                 throw new DukeException("Please key in a valid task name.\n");
             }
             DukeException.isDuplicatedTask(input.substring(6, index - 1).strip(), list);
-        } else if (taskType.equals("deadline")){
+        } else if (taskType.equals("deadline")) {
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/by'.\n");
             }
