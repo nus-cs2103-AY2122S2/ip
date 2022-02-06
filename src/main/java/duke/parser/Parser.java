@@ -28,6 +28,8 @@ public class Parser {
                 handleMark(taskList, inputArgs, false);
             } else if (command.equals("delete")) {
                 handleDelete(taskList, inputArgs);
+            } else if (command.equals("find")) {
+                handleFind(taskList, inputArgs);
             } else if (command.equals("deadline")) {
                 handleDeadline(taskList, inputArgs);
             } else if (command.equals("event")) {
@@ -94,6 +96,33 @@ public class Parser {
                 Ui.print("NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!");
             } else {
                 Ui.print(size + " MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!");
+            }
+        }
+    }
+
+    private static void handleFind(TaskList taskList, String[] inputArgs) throws DukeException {
+        if (checkIncompleteness(inputArgs)) {
+            throw new DukeException("WHAT YOU TRYING TO FIND? WAKE UP YOUR BLOODY IDEA!");
+        } else {
+            String keyword = inputArgs[1];
+            TaskList tempTaskList = new TaskList();
+            int size = taskList.size();
+
+            for (int i = 0; i < size; i++) {
+                Task currentTask = taskList.get(i);
+                if (currentTask.getName().contains(keyword)) {
+                    tempTaskList.add(currentTask);
+                }
+            }
+
+            int tempSize = tempTaskList.size();
+            if (tempSize == 0) {
+                Ui.print("I NEVER FIND ANYTHING! YOU DARE MAKE ME WASTE MY TIME AH?? VERY GOOD!");
+            } else {
+                Ui.print("NEED ME HELP YOU FIND AH? VERY GOOD! THIS WEEKEND YOU WATCH OUT!");
+                for (int i = 0; i < tempTaskList.size(); i++) {
+                    Ui.print((i + 1) + "." + tempTaskList.get(i));
+                }
             }
         }
     }
