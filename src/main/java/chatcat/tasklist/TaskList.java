@@ -16,7 +16,7 @@ import chatcat.commands.Commands;
  * Allows clients to unmark, mark, add and delete tasks. Allows users to view task list.
  */
 public class TaskList {
-    ArrayList<Task> Tasks = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
     WriteToFile writeToFile;
     Commands commands;
     DateTimeUtil dateTimeUtil;
@@ -38,9 +38,9 @@ public class TaskList {
      * @see Task
      * @see Commands
      */
-    public void listTasks() {
-        Tasks = writeToFile.toRead();
-        commands.outputList(Tasks);
+    public String listTasks() {
+        tasks = writeToFile.toRead();
+        return commands.outputList(tasks);
     }
 
     /**
@@ -48,8 +48,8 @@ public class TaskList {
      *
      * @see Commands
      */
-    public void exitChatCat() {
-        commands.outputByeMessage();
+    public String exitChatCat() {
+        return commands.outputByeMessage();
     }
 
     /**
@@ -60,14 +60,14 @@ public class TaskList {
      * @see WriteToFile
      * @see Commands
      */
-    public void mark(String str) {
+    public String mark(String str) {
         String[] input = str.split(" ");
         int taskID = Integer.parseInt(input[1]) - 1;
 
-        Tasks.get(taskID).setDone();
-        writeToFile.toWrite(Tasks);
+        tasks.get(taskID).setDone();
+        writeToFile.toWrite(tasks);
 
-        commands.outputMarkMessage(Tasks.get(taskID));
+        return (commands.outputMarkMessage(tasks.get(taskID)));
     }
 
     /**
@@ -78,14 +78,14 @@ public class TaskList {
      * @see WriteToFile
      * @see Commands
      */
-    public void unmark(String str) {
+    public String unmark(String str) {
         String[] input = str.split(" ");
         int taskID = Integer.parseInt(input[1]) - 1;
 
-        Tasks.get(taskID).setUnDone();
-        writeToFile.toWrite(Tasks);
+        tasks.get(taskID).setUndone();
+        writeToFile.toWrite(tasks);
 
-        commands.outputUnmarkMessage(Tasks.get(taskID));
+        return commands.outputUnmarkMessage(tasks.get(taskID));
     }
 
     /**
@@ -97,7 +97,7 @@ public class TaskList {
      * @see WriteToFile
      * @see Commands
      */
-    public void setTodo(String str) throws ChatCatException {
+    public String setTodo(String str) throws ChatCatException {
         String[] input = str.split(" ");
 
         if (input.length == 1) {
@@ -106,10 +106,10 @@ public class TaskList {
         }
 
         Todo todo = new Todo(str.substring(5));
-        Tasks.add(todo);
-        writeToFile.toWrite(Tasks);
+        tasks.add(todo);
+        writeToFile.toWrite(tasks);
 
-        commands.outputTaskMessage(todo, Tasks.size());
+        return commands.outputTaskMessage(todo, tasks.size());
     }
 
     /**
@@ -122,7 +122,7 @@ public class TaskList {
      * @see Commands
      * @see DateTimeUtil
      */
-    public void setDeadline(String str) throws ChatCatException {
+    public String setDeadline(String str) throws ChatCatException {
         String[] input = str.split(" ");
 
         if (input.length == 1) {
@@ -133,10 +133,10 @@ public class TaskList {
         dateTimeUtil = new DateTimeUtil(split[1]);
         Deadline deadline = new Deadline(split[0].substring(9), dateTimeUtil.getTime());
 
-        Tasks.add(deadline);
-        writeToFile.toWrite(Tasks);
+        tasks.add(deadline);
+        writeToFile.toWrite(tasks);
 
-        commands.outputTaskMessage(deadline, Tasks.size());
+        return commands.outputTaskMessage(deadline, tasks.size());
     }
 
     /**
@@ -149,7 +149,7 @@ public class TaskList {
      * @see Commands
      * @see DateTimeUtil
      */
-    public void setEvent(String str) throws ChatCatException {
+    public String setEvent(String str) throws ChatCatException {
         String[] input = str.split(" ");
 
         if (input.length == 1) {
@@ -160,10 +160,10 @@ public class TaskList {
         dateTimeUtil = new DateTimeUtil(split[1]);
         Event event = new Event(split[0].substring(6), dateTimeUtil.getTime());
 
-        Tasks.add(event);
-        writeToFile.toWrite(Tasks);
+        tasks.add(event);
+        writeToFile.toWrite(tasks);
 
-        commands.outputTaskMessage(event, Tasks.size());
+        return commands.outputTaskMessage(event, tasks.size());
     }
 
     /**
@@ -174,15 +174,15 @@ public class TaskList {
      * @see WriteToFile
      * @see Commands
      */
-    public void delete(String str) {
-        Tasks = writeToFile.toRead();
+    public String delete(String str) {
+        tasks = writeToFile.toRead();
         String[] input = str.split(" ");
         int toDelete = Integer.parseInt(input[1]) - 1;
 
-        Task removed = Tasks.remove(toDelete);
-        writeToFile.toWrite(Tasks);
+        Task removed = tasks.remove(toDelete);
+        writeToFile.toWrite(tasks);
 
-        commands.outputDeleteMessage(removed, Tasks.size());
+        return (commands.outputDeleteMessage(removed, tasks.size()));
     }
 
     /**
@@ -192,13 +192,13 @@ public class TaskList {
      * @see Task
      * @see Commands
      */
-    public void filter(String str) throws ChatCatException {
-        Tasks = writeToFile.toRead();
+    public String filter(String str) throws ChatCatException {
+        tasks = writeToFile.toRead();
         ArrayList<Task> filteredList = new ArrayList<>();
         String[] input = str.split(" ");
 
-        Tasks.forEach(task -> {
-            if (task.containsKeyWord(input[1])) {
+        tasks.forEach(task -> {
+            if (task.containsKeyword(input[1])) {
                 filteredList.add(task);
             }
         });
@@ -207,6 +207,6 @@ public class TaskList {
             throw new ChatCatException("No task with keyword: " + "str");
         }
 
-        commands.outputFilterMessage(filteredList);
+        return commands.outputFilterMessage(filteredList);
     }
 }

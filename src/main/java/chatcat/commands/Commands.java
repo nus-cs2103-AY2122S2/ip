@@ -2,57 +2,63 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
-import chatcat.util.UI;
+import chatcat.util.Ui;
 import chatcat.tasks.Task;
 
 public class Commands {
-    UI ui = new UI();
+    Ui ui = new Ui();
 
-    public void outputList(ArrayList<Task> tasks) {
+    public String outputList(ArrayList<Task> tasks) {
+        StringBuffer str = new StringBuffer();
+
         if (tasks.size() == 0) {
-            ui.printOutPutWithSpace("empty list!");
+            str.append(ui.printOutPutWithSpace("empty list!"));
         } else {
-            ui.printOutPutWithoutSpace("Here are the tasks in your list:");
+            str.append(ui.printOutPutWithoutSpace("Here are the tasks in your list:") + "\n");
             for (int i = 0; i < tasks.size(); i++) {
-                ui.printOutPutWithoutSpace((i + 1) + ". " + tasks.get(i));
+                str.append(ui.printOutPutWithoutSpace((i + 1) + ". " + tasks.get(i)) + "\n");
             }
         }
-        ui.printOutPutWithoutSpace("");
+        str.append(ui.printOutPutWithoutSpace(""));
+
+        return str.toString();
     }
 
-    public void outputByeMessage() {
-        ui.printOutPutWithSpace("Bye. Hope to see you again soon!");
+    public String outputByeMessage() {
+        return (ui.printOutPutWithSpace("Bye. Hope to see you again soon!"));
     }
 
-    public void outputMarkMessage(Task task) {
-        ui.printOutPutWithSpace("Nice! I've marked this task as done:\n"
-                + task);
+    public String outputMarkMessage(Task task) {
+        return (ui.printOutPutWithSpace("Nice! I've marked this task as done:\n"
+                + task));
     }
 
-    public void outputUnmarkMessage(Task task) {
-        ui.printOutPutWithSpace("OK, I've marked this task as not done yet:\n"
-                + task);
+    public String outputUnmarkMessage(Task task) {
+        return (ui.printOutPutWithSpace("OK, I've marked this task as not done yet:\n"
+                + task));
     }
 
-    public void outputTaskMessage(Task task, int size) {
-        ui.printOutPutWithSpace("Got it. I've added this task:\n"
-                + task);
-        ui.printOutPutWithSpace("Now you have "
-                + size + " tasks in the list.");
+    public String outputTaskMessage(Task task, int size) {
+        return ui.printOutPutWithSpace("Got it. I've added this task:\n" + task) + "\n" +
+                ui.printOutPutWithSpace("Now you have " +
+                size + " tasks in the list.");
     }
 
-    public void outputDeleteMessage(Task task, int size) {
-        ui.printOutPutWithSpace("Noted. I've removed this task:\n"
-                + task);
-        ui.printOutPutWithSpace("Now you have " + size
-                + " tasks in the list.");
+    public String outputDeleteMessage(Task task, int size) {
+        return ui.printOutPutWithSpace("Noted. I've removed this task:\n" + task) + "\n" +
+                ui.printOutPutWithSpace("Now you have " + size +
+                " tasks in the list.");
     }
 
-    public void outputFilterMessage(ArrayList<Task> tasks) {
-        ui.printOutPutWithoutSpace("Here are the matching tasks in your list:");
+    public String outputFilterMessage(ArrayList<Task> tasks) {
+        StringBuffer str = new StringBuffer();
+
+        str.append(ui.printOutPutWithoutSpace("Here are the matching tasks in your list:" + "\n"));
         for (int i = 0; i < tasks.size(); i++) {
-            ui.printOutPutWithoutSpace((i + 1) + ". " + tasks.get(i));
+            str.append(ui.printOutPutWithoutSpace((i + 1) + ". " + tasks.get(i)) + "\n");
         }
-        ui.printOutPutWithoutSpace("");
+        str.append(ui.printOutPutWithoutSpace(""));
+
+        return str.toString();
     }
 }

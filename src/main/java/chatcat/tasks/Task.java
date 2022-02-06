@@ -6,7 +6,7 @@ import java.io.Serializable;
  * The default Task class.
  */
 public class Task implements Serializable {
-    private final String task;
+    private final String TASK;
     private boolean isDone;
 
     /**
@@ -15,7 +15,7 @@ public class Task implements Serializable {
      * @param task the description of this task.
      */
     public Task(String task) {
-        this.task = task;
+        this.TASK = task;
         this.isDone = false;
     }
 
@@ -29,7 +29,7 @@ public class Task implements Serializable {
     /**
      * Unmarks a task {@code Task} as not completed.
      */
-    public void setUnDone() {
+    public void setUndone() {
         isDone = false;
     }
 
@@ -47,8 +47,8 @@ public class Task implements Serializable {
      *
      * @return true if task contains a keyword, else returns false.
      */
-    public boolean containsKeyWord(String str) {
-        return task.contains(str);
+    public boolean containsKeyword(String str) {
+        return TASK.contains(str);
     }
 
     /**
@@ -58,6 +58,6 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        return getStatus() + " " + task;
+        return getStatus() + " " + TASK;
     }
 }

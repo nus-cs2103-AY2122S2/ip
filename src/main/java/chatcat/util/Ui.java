@@ -3,19 +3,21 @@ package chatcat.util;
 /**
  * Handles outputs to interact with user
  */
-public class UI {
+public class Ui {
 
     public void showWelcomeSMS() {
-        String welcome = "Hello! I'm ChatCat\n"
+        String welcome = "Hello! I'm chatcat.ChatCat\n"
                 + "What can I do for you?\n";
         System.out.println(welcome);
     }
 
-    public void printOutPutWithSpace(String commandOutput) {
+    public String printOutPutWithSpace(String commandOutput) {
         System.out.println(commandOutput + "\n");
+        return commandOutput;
     }
 
-    public void printOutPutWithoutSpace(String commandOutput) {
+    public String printOutPutWithoutSpace(String commandOutput) {
         System.out.println(commandOutput);
+        return commandOutput;
     }
 }
