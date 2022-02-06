@@ -8,7 +8,7 @@ public abstract class Task {
         this.isChecked = true;
     }
 
-    public void setUnchecked(){
+    public void setUnchecked() {
         this.isChecked = false;
     }
 }
