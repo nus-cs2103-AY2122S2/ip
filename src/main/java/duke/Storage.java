@@ -23,10 +23,14 @@ public class Storage {
     public Storage(String filePath) {
         dataFile = new File(filePath);
 
-        // dir/file check should not throw unless no r/w permission
+        // ensures that the path to the file exists and supports r/w access
+        canReadWrite(dataFile.getParentFile());
         dataFile.getParentFile().mkdirs();
         try {
             dataFile.createNewFile();
+
+            // ensures that the file has r/w access
+            assert canReadWrite(dataFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,6 +47,7 @@ public class Storage {
 
         // try block should populate dataList unless no r/w permission
         try (Scanner sc = new Scanner(dataFile)) {
+            //TODO: modify this a little to include to A-Stream
             dataList = sc.useDelimiter("\\n")
                     .tokens()
                     .collect(Collectors.toList());
@@ -75,5 +80,9 @@ public class Storage {
             // most likely r/w permissions
             throw new DukeException("Unable to locate/write to file.");
         }
+    }
+
+    private boolean canReadWrite(File f) {
+        return f.canRead() && f.canWrite();
     }
 }

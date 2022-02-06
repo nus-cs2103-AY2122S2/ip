@@ -63,6 +63,8 @@ public class Parser {
         Command cmd;
         String[] input = fullCommand.split(" ", 2);
 
+        //TODO: simplify this using hashset
+
         switch (input[0].toLowerCase()) {
         case "exit":
             cmd = new ExitCommand();

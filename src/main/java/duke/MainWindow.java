@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/bot_128p.jpg")));
-    private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/user_128p.jpg")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/bot_128p.jpg")));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/user_128p.jpg")));
 
 
     /**
