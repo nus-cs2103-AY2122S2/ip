@@ -20,6 +20,10 @@ public class Storage {
     protected static String currWorkingDirectory;
     private static final int IS_UNMARKED = 0;
     private static final int IS_MARKED = 1;
+    private static final int DESCRIPTION = 2;
+    private static final int START_DATE = 3;
+    private static final int START_TIME = 4;
+    private static final int END_TIME = 5;
 
     /**
      * A Storage constructor to initialise a <code>Storage</code> object. A <code>Storage</code>
@@ -126,35 +130,16 @@ public class Storage {
             String currentLine = s.nextLine();
             String[] lineArr = currentLine.split("\\|");
             int checkMarked = Integer.parseInt(lineArr[1]);
-            switch (lineArr[0]) {
+            String firstLetter = lineArr[0];
+            switch (firstLetter) {
             case "T":
-                Task toDo = new ToDo(lineArr[2]);
-                if (isMarked(checkMarked)) {
-                    toDo.mark();
-                } else {
-                    toDo.unmark();
-                }
-                TaskList.addToListNoPrint(toDo);
+                readTodo(lineArr, checkMarked);
                 break;
             case "D":
-                Task deadline = new Deadline(lineArr[2], Parser.convertStringToLocalDate(lineArr[3]),
-                        Parser.convertStringToLocalTime(lineArr[4]));
-                if (isMarked(checkMarked)) {
-                    deadline.mark();
-                } else {
-                    deadline.unmark();
-                }
-                TaskList.addToListNoPrint(deadline);
+                readDeadline(lineArr, checkMarked);
                 break;
             case "E":
-                Task event = new Event(lineArr[2], Parser.convertStringToLocalDate(lineArr[3]),
-                        Parser.convertStringToLocalTime(lineArr[4]), Parser.convertStringToLocalTime(lineArr[5]));
-                if (isMarked(checkMarked)) {
-                    event.mark();
-                } else {
-                    event.unmark();
-                }
-                TaskList.addToListNoPrint(event);
+                readEvent(lineArr, checkMarked);
                 break;
             default:
                 break;
@@ -170,5 +155,38 @@ public class Storage {
      */
     public static boolean isMarked(int markedNum) {
         return markedNum == 1;
+    }
+
+    private static void readTodo(String[] strings, int num) {
+        Task toDo = new ToDo(strings[2]);
+        if (isMarked(num)) {
+            toDo.mark();
+        } else {
+            toDo.unmark();
+        }
+        TaskList.addToListNoPrint(toDo);
+    }
+
+    private static void readDeadline(String[] strings, int num) {
+        Task deadline = new Deadline(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                Parser.convertStringToLocalTime(strings[START_TIME]));
+        if (isMarked(num)) {
+            deadline.mark();
+        } else {
+            deadline.unmark();
+        }
+        TaskList.addToListNoPrint(deadline);
+    }
+
+    private static void readEvent(String[] strings, int num) {
+        Task event = new Event(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                Parser.convertStringToLocalTime(strings[START_TIME]),
+                Parser.convertStringToLocalTime(strings[END_TIME]));
+        if (isMarked(num)) {
+            event.mark();
+        } else {
+            event.unmark();
+        }
+        TaskList.addToListNoPrint(event);
     }
 }

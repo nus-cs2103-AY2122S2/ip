@@ -15,9 +15,7 @@ public class Ui {
      * @return the welcome message for Duke.
      */
     public static String showWelcome() {
-        String getWelcomeMsgOne = WELCOME_MESSAGE_ONE;
-        String getWelcomeMsgTwo = WELCOME_MESSAGE_TWO;
-        return getWelcomeMsgOne + "\n" + getWelcomeMsgTwo;
+        return WELCOME_MESSAGE_ONE + "\n" + WELCOME_MESSAGE_TWO;
     }
 
     /**
