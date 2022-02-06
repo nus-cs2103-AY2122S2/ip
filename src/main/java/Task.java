@@ -44,7 +44,7 @@ class Event extends Task {
         at = b;
     }
     public String toString() {
-        return "[E]" + super.toString() + " (: " + at + ")";
+        return "[E]" + super.toString() + " (" + at + ")";
     }
 }
 
@@ -56,7 +56,7 @@ class Deadline extends Task {
         when = date;
     }
     public String toString() {
-        return "[D]" + super.toString() + " (: " +
+        return "[D]" + super.toString() + " (" +
                 when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
