@@ -1,14 +1,12 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class Duke {
-
-    //static ArrayList<Task> list = new ArrayList<Task>();
 
     private Storage storage;
     private TaskList list = new TaskList(new ArrayList<>());
@@ -22,9 +20,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("error");
             System.out.println(e.getMessage());
-        //} catch (DukeException e) {
-            //ui.showLoadingError();
-            //tasks = new TaskList();
         }
     }
 

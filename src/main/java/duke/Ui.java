@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String prince = "______       _\n"
