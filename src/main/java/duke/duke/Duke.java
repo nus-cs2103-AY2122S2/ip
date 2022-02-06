@@ -15,22 +15,14 @@ public class Duke {
             tasks = new TaskList(arr); // Creating new file if not
         }
     }
-
-    public String executeInput(String input) {
-        Parser reader = new Parser();
-        return reader.parse(input, tasks, storage);
-    }
-
+    
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        try {
-            return executeInput(input);
-        } catch (Exception e) {
-            return "test";
-        }
+        Parser reader = new Parser();
+        return reader.parse(input, tasks, storage);
     }
 }
 

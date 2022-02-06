@@ -59,7 +59,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Objects.equals(input, "bye")) {
-            // Thanks to @ddx-510 for providing inspiration.
+            // Credit to @ddx-510 for the wait method.
             PauseTransition wait = new PauseTransition(Duration.seconds(3));
             wait.setOnFinished(event -> Platform.exit());
             wait.play();
