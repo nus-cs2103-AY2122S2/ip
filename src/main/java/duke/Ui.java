@@ -22,7 +22,8 @@ public class Ui {
         DEADLINE("deadline"),
         EVENT("event"),
         DELETE("delete"),
-        FIND("find");
+        FIND("find"),
+        HELP("help");
 
         final String command;
 
@@ -112,6 +113,18 @@ public class Ui {
             } catch (Exception e) {
                 return "The format should be \"borrow book\"";
             }
+
+        } else if (cmd.startsWith(Ui.Commands.HELP.command)) {
+            String help = "";
+            help += "[todo] | example: todo return book\n";
+            help += "[deadline] | example: deadline return book /by yyyy-mm-dd\n";
+            help += "[event] | example: event attend lecture /at yyyy-mm-dd\n";
+            help += "[list] | no other command needed\n";
+            help += "[mark] | example: mark 1\n";
+            help += "[unmark] | example: unmark 1\n";
+            help += "[delete] | example: delete 1\n";
+            help += "[find] | example: find book\n";
+            return help;
 
         } else {
             response = "OOPS!!! I'm sorry, " +
