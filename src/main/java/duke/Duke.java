@@ -9,13 +9,6 @@ public class Duke {
         // Init UI
         Ui ui = new Ui();
 
-        // Init saved tasks
-        try {
-            Storage.loadTasks();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         // Init file if it is not there
         File f = new File("./tasklist.txt");
         if (!f.isFile()) {
@@ -25,6 +18,14 @@ public class Duke {
                 System.out.println(e);
             }
         }
+
+        // Init saved tasks
+        try {
+            Storage.loadTasks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Printing Duke's intro
         Ui.printIntro();
