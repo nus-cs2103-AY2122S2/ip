@@ -69,23 +69,25 @@ public class CommandAdd extends Command {
      * @throws DukeInvalidArgumentException On invalid argument string structure.
      */
     private Task.TaskType taskIdentifier(String type, String args) throws DukeInvalidArgumentException {
+        assert type != null;
+
         Task.TaskType taskType = null;
         if (type.equals("todo")) {
             if (!args.matches("\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "☹ OOPS!!! The description of a todo cannot be empty.");
+                        "OOPS!!! The description of a todo cannot be empty.");
             }
             taskType = Task.TaskType.TODO;
         } else if (type.equals("deadline")) {
             if (!args.matches("\\S+.*\\s/by\\s\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "☹ OOPS!!! The description/date of a deadline cannot be empty.");
+                        "OOPS!!! The description/date of a deadline cannot be empty.");
             }
             taskType = Task.TaskType.DEADLINE;
         } else if (type.equals("event")) {
             if (!args.matches("\\S+.*\\s/at\\s\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "☹ OOPS!!! The description/location of a event cannot be empty.");
+                        "OOPS!!! The description/location of a event cannot be empty.");
             }
             taskType = Task.TaskType.EVENT;
         }
@@ -106,6 +108,8 @@ public class CommandAdd extends Command {
      */
     private String taskAdder(String type, String args)
             throws DukeInvalidArgumentException, DateTimeParseException, IOException {
+        assert type != null;
+
         Task task = null;
         Task.TaskType taskType = taskIdentifier(type, args);
         switch (taskType) {
