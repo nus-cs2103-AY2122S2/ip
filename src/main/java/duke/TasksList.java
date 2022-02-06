@@ -158,14 +158,14 @@ public class TasksList {
      * @return Tasks in text format that contains keyword to be found.
      * @throws InvalidArgumentException If there is no keyword inputted.
      */
-    public String find(List<String> instruction) throws InvalidArgumentException {
+    public String findMatchingTasks(List<String> instruction) throws InvalidArgumentException {
         if (instruction.size() == 1) {
             throw new InvalidArgumentException();
         }
         StringBuilder response = new StringBuilder("");
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).toString().contains(instruction.get(1))) {
+            if (tasks.get(i).getName().contains(instruction.get(1))) {
                 response.append(String.format((i + 1) + ". " + tasks.get(i) + "\n"));
             }
         }
