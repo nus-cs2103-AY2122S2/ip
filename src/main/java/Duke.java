@@ -2,6 +2,7 @@ import exceptions.DukeExceptions;
 import exceptions.DukeInvalidInput;
 import exceptions.DukeInvalidTodo;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -100,7 +101,8 @@ public class Duke {
                         break;
                     case "deadline":
                         System.out.println("New task added:");
-                        Task t2 = new Deadline(fullDesc, textSplitOne[1]);
+                        String[] date = textSplitOne[1].split(" ");
+                        Task t2 = new Deadline(fullDesc, LocalDate.parse(date[1]));
                         lists.add(t2);
                         System.out.println(t2);
                         break;
