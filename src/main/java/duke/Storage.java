@@ -21,7 +21,7 @@ public class Storage {
      */
     Storage(String filePath) {
         File folder = new File(filePath);
-        assert(folder.exists());
+        assert folder.exists() : "The path specified does not exist";
         this.filePath = filePath;
     }
 
