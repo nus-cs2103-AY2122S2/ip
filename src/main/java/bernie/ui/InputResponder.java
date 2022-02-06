@@ -13,7 +13,15 @@ public class InputResponder {
      * @return String, the message
      */
     public String greet() {
-        return "Hello! I'm Bernie\nWhat's up?";
+        return "Hello, I'm Bernie your task manager!\n" +
+                "In case you forgot, here's how to create tasks:\n" +
+                "For tasks to do: todo <description>\n" +
+                "For deadlines: deadline <description> /by yyyy-mm-dd\n" +
+                "For events: event <description> /at <time>\n" +
+                "To mark/unmark a task: mark/unmark <taskNumber>\n" +
+                "To delete a task: delete <taskNumber>\n" +
+                "To find a task: find <description>\n" +
+                "To exit, type: bye";
     }
 
     /**
@@ -42,7 +50,7 @@ public class InputResponder {
      */
     public String showAddedMsg(Task newTask, int numTasksLeft) {
         StringBuilder s = new StringBuilder();
-        return s.append(String.format("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
+        return s.append(String.format("Got ya. Added:\n%s\nYou got %d tasks waiting to be done ya!\n",
                 newTask, numTasksLeft))
                 .toString();
     }
@@ -55,7 +63,7 @@ public class InputResponder {
      */
     public String showDeleteMsg(Task deletedTask, int numTasksLeft) {
         StringBuilder s = new StringBuilder();
-        return s.append(String.format("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
+        return s.append(String.format("Got ya. Removed:\n%s\nYou got %d tasks waiting to be done ya!\n",
                 deletedTask, numTasksLeft))
                 .toString();
     }
@@ -67,9 +75,11 @@ public class InputResponder {
      */
     public String showListTasksMsg(TaskList... tasks) {
         StringBuilder s = new StringBuilder();
-        s.append("Here's what you need to do buddy:\n");
+        String startingMsg = "Here's your current list buddy:\n";
+        s.append(startingMsg);
         if (tasks.length == 0) {
-            s.append("NOTHING! :D");
+            String noTasksMsg = "NOTHING! :D";
+            s.append(noTasksMsg);
             return s.toString();
         } else {
             return s.append(tasks[0].listTasks())

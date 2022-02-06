@@ -70,6 +70,8 @@ public class AddCommand extends Command {
             break;
         }
         String msgOutputFromSave = storage.saveTasks(tasks);
-        return inputResponder.showAddedMsg(newTask, tasks.numTasksLeft()) + msgOutputFromSave;
+        int numTasksLeft = tasks.numTasksLeft();
+        String addOutputMsg = inputResponder.showAddedMsg(newTask, numTasksLeft) + msgOutputFromSave;
+        return addOutputMsg;
     }
 }

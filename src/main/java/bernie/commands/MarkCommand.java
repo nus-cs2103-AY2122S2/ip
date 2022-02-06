@@ -37,8 +37,8 @@ public class MarkCommand extends Command {
      * @return String, the resulting message
      */
     public String execute() {
-        String action = parsedArr[0];
-        String taskNum = parsedArr[1];
+        String action = getAction();
+        String taskNum = getTaskNum();
         TaskList tasks = getTasks();
         InputResponder inputResponder = getInputResponder();
         String outputMsg = null;
@@ -55,5 +55,15 @@ public class MarkCommand extends Command {
             break;
         }
         return outputMsg;
+    }
+
+    private String getTaskNum() {
+        final int TASK_NUM_INDEX = 1;
+        return parsedArr[TASK_NUM_INDEX];
+    }
+
+    private String getAction() {
+        final int ACTION_INDEX = 0;
+        return parsedArr[ACTION_INDEX];
     }
 }

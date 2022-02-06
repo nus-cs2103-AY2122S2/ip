@@ -45,45 +45,48 @@ public class CommandHandler {
      */
     public String handle(String input) {
         Type type = parser.parseType(input);
-        String executeOutput = null;
+        String executeOutputMsg = null;
         try {
             switch (type) {
             case LIST:
                 if (tasks.isEmpty()) {
-                    executeOutput = inputResponder.showListTasksMsg();
+                    executeOutputMsg = inputResponder.showListTasksMsg();
                 } else {
-                    executeOutput = inputResponder.showListTasksMsg(tasks);
+                    executeOutputMsg = inputResponder.showListTasksMsg(tasks);
                 }
                 break;
             case BYE:
-                executeOutput = inputResponder.showLeaveMsg();
+                executeOutputMsg = inputResponder.showLeaveMsg();
                 break;
             case EMPTY:
-                throw new BernieException("Say something???");
+                String emptyInputMsg = "Say something???";
+                throw new BernieException(emptyInputMsg);
             case MARK:
                 MarkCommand markCommand = new MarkCommand(tasks, inputResponder, storage, parser, input);
-                executeOutput = markCommand.execute();
+                executeOutputMsg = markCommand.execute();
                 break;
             case DELETE:
                 DeleteCommand deleteCommand = new DeleteCommand(tasks, inputResponder, storage, parser, input);
-                executeOutput = deleteCommand.execute();
+                executeOutputMsg = deleteCommand.execute();
                 break;
             case ADD:
                 AddCommand addCommand = new AddCommand(tasks, inputResponder, storage, parser, input);
-                executeOutput = addCommand.execute();
+                executeOutputMsg = addCommand.execute();
                 break;
             case FIND:
                 FindCommand findCommand = new FindCommand(tasks, inputResponder, storage, parser, input);
-                executeOutput = findCommand.execute();
+                executeOutputMsg = findCommand.execute();
                 break;
             default:
                 break;
             }
-            return executeOutput;
+            return executeOutputMsg;
         } catch (BernieException e) {
-            return inputResponder.showErrorMsg(e.getMessage());
+            String bernieErrorMsg = inputResponder.showErrorMsg(e.getMessage());
+            return bernieErrorMsg;
         } catch (Exception e) {
-            return inputResponder.showErrorMsg(e.getMessage());
+            String generalErrorMsg = inputResponder.showErrorMsg(e.getMessage());
+            return generalErrorMsg;
         }
     }
 
@@ -94,12 +97,31 @@ public class CommandHandler {
      *             the user has used the app before.
      */
     public void initTaskOnLoad(String line) {
-        // calls parser to parse line
+        // gets the args required to create the task on load
         String[][] args = parser.parseFileLine(line);
-        String[] taskArgs = args[0];
-        String type = args[1][0];
-        String isDone = args[2][0];
-        // gets tasks to createTask
+        String[] taskArgs = getTaskArgsForInit(args);
+        String type = getTypeForInit(args);
+        String isDone = getIsDone(args);
         tasks.initTask(taskArgs, type, isDone);
+    }
+
+    private String getIsDone(String[][] args) {
+        final int DONE_STATUS_ARR_INDEX = 2;
+        final int DONE_STATUS_INDEX = 0;
+        String isDone = args[DONE_STATUS_ARR_INDEX][DONE_STATUS_INDEX];
+        return isDone;
+    }
+
+    private String getTypeForInit(String[][] args) {
+        final int TYPE_ARR_INDEX = 1;
+        final int TYPE_INDEX = 0;
+        String type = args[TYPE_ARR_INDEX][TYPE_INDEX];
+        return type;
+    }
+
+    private String[] getTaskArgsForInit(String[][] args) {
+        final int TASK_ARGS_INDEX = 0;
+        String[] taskArgs = args[TASK_ARGS_INDEX];
+        return taskArgs;
     }
 }

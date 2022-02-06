@@ -79,13 +79,20 @@ public class Storage {
                      BufferedReader reader) throws IOException {
         while (true) {
             String line = reader.readLine();
+            final String NO_TASKS = "NOTHING! :D";
             if (line == null) {
+                break;
+            }
+            // previously made text file, but text file has no tasks
+            if (line.equals(NO_TASKS)) {
+                s.append(NO_TASKS);
                 break;
             }
             commandHandler.initTaskOnLoad(line);
             s.append(line + "\n");
         }
-        return s.toString();
+        String outputMsg = s.toString();
+        return outputMsg;
     }
 
     /**
