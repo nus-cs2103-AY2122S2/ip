@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) throws DukeException {
-        if ( taskList.size() == 0) {
+        if (taskList.size() == 0) {
             throw new DukeException("Sorry, there is nothing to delete in your todolist!");
         } else if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
             throw new DukeException("Have you entered the correct number?");
