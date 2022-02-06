@@ -139,6 +139,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles logic for find command.
+     * Looks for and displays tasks containing keyword.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @throws DukeException If keyword missing.
+     */
     private static void handleFind(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU TRYING TO FIND? WAKE UP YOUR BLOODY IDEA!");
