@@ -6,7 +6,6 @@ import com.duke.modules.TaskList;
 import com.duke.modules.Ui;
 
 public class Duke {
-    private Parser cmdParser;
     private Ui ui;
     private Storage storage;
     private TaskList taskList;

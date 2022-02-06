@@ -61,7 +61,7 @@ public class CommandMark extends Command {
      * @throws DukeEmptyListException       When length of task list is 0.
      * @throws IOException                  On failure to save list.
      */
-    public String taskMarker(String args)
+    private String taskMarker(String args)
             throws DukeInvalidArgumentException, DukeEmptyListException, IOException {
         if (args.length() < 1) {
             throw new DukeInvalidArgumentException("Please choose which task you would like to ");
