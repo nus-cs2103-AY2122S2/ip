@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    private static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private LocalDate date;
 
 
@@ -26,19 +27,16 @@ public class Deadline extends Task {
     @Override
     public String printTask() {
         if (this.isMarked) {
-            return "[" + type + "][X] " + activity + " (by "
-                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[" + type + "][X] " + activity + " (by " + date.format(PRINT_FORMAT) + ")";
         } else {
-            return "[" + type + "][ ] " + activity + " (by "
-                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[" + type + "][ ] " + activity + " (by " + date.format(PRINT_FORMAT) + ")";
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return type + "|" + isMarked + "|" + activity + "|"
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "|\n";
+        return type + "|" + isMarked + "|" + activity + "|" + date.format(PRINT_FORMAT) + "|\n";
     }
 
 }

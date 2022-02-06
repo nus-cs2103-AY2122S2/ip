@@ -73,8 +73,8 @@ public class Parser {
             String tmp = splitStr[3];
             try {
                 timeOrPlace = savedFormat.format(taskFormat.parse(tmp));
-            } catch (ParseException e) {
-                System.exit(1);
+            } catch (ParseException e) { // Corrupted Save File.
+                e.printStackTrace();
             }
             parsedTask = new Deadline(activity, timeOrPlace);
             break;
@@ -92,11 +92,9 @@ public class Parser {
      * @throws DukeException if the user input is invalid.
      */
     public Command parseCommand(String command) throws DukeException {
-        String[] splitStr = command.split(" ", 2);
+        String[] userInput = command.split(" ", 2);
         Command parsed;
-        Task task;
-        int index;
-        switch (splitStr[0]) {
+        switch (userInput[0]) {
         case "bye":
             parsed = EXIT_COMMAND;
             break;
@@ -104,83 +102,163 @@ public class Parser {
             parsed = LIST;
             break;
         case "mark":
-            try {
-                index = Integer.parseInt(splitStr[1]);
-                index--;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command mark has invalid syntax -e.g., mark [index], "
-                        + "where integer is an index");
-            }
-            parsed = new MarkCommand(index);
+            parsed = parseMark(userInput);
             break;
         case "unmark":
-            try {
-                index = Integer.parseInt(splitStr[1]);
-                index--;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command unmark has invalid syntax -e.g., unmark [index], "
-                        + "where integer is an index");
-            }
-            parsed = new UnmarkCommand(index);
+            parsed = parseUnmark(userInput);
             break;
         case "todo":
-            try {
-                if (splitStr[1].trim().equals("")) {
-                    throw new InvalidCommandFormatException("Command todo cannot be blank. -e.g, todo [task], "
-                            + "where task is not empty");
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command todo cannot be blank. -e.g, todo [task], "
-                        + "where task is not empty");
-            }
-            task = new Todo(splitStr[1]);
-            parsed = new AddCommand(task);
+            parsed = parseTodo(userInput);
             break;
         case "deadline":
-            String[] tempStr = splitStr[1].split(" /by ");
-            try {
-                task = new Deadline(tempStr[0], tempStr[1]);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateException();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command deadline has invalid syntax -e.g., "
-                        + "deadline [activity] /by [yyyy-mm-dd]");
-            }
-            parsed = new AddCommand(task);
+            parsed = parseDeadline(userInput);
             break;
         case "event":
-            try {
-                String[] tempStr2 = splitStr[1].split(" /at ");
-                task = new Event(tempStr2[0], tempStr2[1]);
-                parsed = new AddCommand(task);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command deadline has invalid syntax -e.g., "
-                        + "event [activity] /at [location]");
-            }
+            parsed = parseEvent(userInput);
             break;
         case "delete":
-            try {
-                index = Integer.parseInt(splitStr[1]);
-                index--;
-                parsed = new DeleteCommand(index);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command delete has invalid syntax -e.g., "
-                        + "delete [index], where index is an integer");
-            }
+            parsed = parseDelete(userInput);
             break;
         case "find":
-            try {
-                String findTask = splitStr[1];
-                parsed = new FindCommand(findTask);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("Command find has invalid syntax -e.g., find [task]");
-            }
+            parsed = parseFind(userInput);
             break;
         default:
             parsed = INVALID_COMMAND;
             break;
         }
         return parsed;
+    }
+
+    /**
+     * Parses the given user input into a Mark Command.
+     * @param userInput the user input to be parsed.
+     * @return a Mark Command.
+     * @throws InvalidCommandFormatException if Mark Command format by userInput is invalid.
+     */
+    private Command parseMark(String[] userInput) throws InvalidCommandFormatException {
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+            index--;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command mark has invalid syntax -e.g., mark [index], "
+                    + "where integer is an index");
+        }
+        return new MarkCommand(index);
+    }
+
+    /**
+     * Parses the given user input into a Unmark Command.
+     * @param userInput the user input to be parsed.
+     * @return a Unmark Command.
+     * @throws InvalidCommandFormatException if the Unmark Command format by the userInput is invalid.
+     */
+    private Command parseUnmark(String[] userInput) throws InvalidCommandFormatException {
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+            index--;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command unmark has invalid syntax -e.g., unmark [index], "
+                    + "where integer is an index");
+        }
+        return new UnmarkCommand(index);
+    }
+
+    /**
+     * Parses the given user input into an Add Command for a To-Do task.
+     * @param userInput the user input to be parsed.
+     * @return a Add Command.
+     * @throws InvalidCommandFormatException if the user did not input an activity To-Do.
+     */
+    private Command parseTodo(String[] userInput) throws InvalidCommandFormatException {
+        try {
+            if (userInput[1].trim().equals("")) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command todo cannot be blank. -e.g, todo [task], "
+                    + "where task is not empty");
+        }
+        Task parsedTask = new Todo(userInput[1]);
+        return new AddCommand(parsedTask);
+    }
+
+    /**
+     * Parses the given user input into an Add Command for a Deadline task.
+     * @param userInput the user input to be parsed.
+     * @return an Add Command.
+     * @throws InvalidCommandFormatException if the Deadline Command format by the userInput is invalid.
+     * @throws InvalidDateException if the date given is of the wrong format.
+     */
+    private Command parseDeadline(String[] userInput) throws InvalidCommandFormatException, InvalidDateException {
+        Task parsedTask;
+        try {
+            String[] splitBy = userInput[1].split(" /by ");
+            String activity = splitBy[0];
+            String by = splitBy[1];
+            parsedTask = new Deadline(activity, by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command deadline has invalid syntax -e.g., "
+                    + "deadline [activity] /by [yyyy-mm-dd]");
+        }
+        return new AddCommand(parsedTask);
+    }
+
+    /**
+     * Parses the given user input into an Add Command for an Event task.
+     * @param userInput the user input to be parsed.
+     * @return an Add Command.
+     * @throws InvalidCommandFormatException if the Event Command format by the userInput is invalid.
+     */
+    private Command parseEvent(String[] userInput) throws InvalidCommandFormatException {
+        Task parsedTask;
+        try {
+            String[] splitAt = userInput[1].split(" /at ");
+            String activity = splitAt[0];
+            String at = splitAt[1];
+            parsedTask = new Event(activity, at);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command event has invalid syntax -e.g., "
+                    + "event [activity] /at [location]");
+        }
+        return new AddCommand(parsedTask);
+    }
+
+    /**
+     * Parses the given user input into a Delete Command.
+     * @param userInput the user input to be parsed.
+     * @return a Delete Command.
+     * @throws InvalidCommandFormatException if the Delete Command format by the userInput is invalid.
+     */
+    private Command parseDelete(String[] userInput) throws InvalidCommandFormatException {
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+            index--;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command delete has invalid syntax -e.g., "
+                    + "delete [index], where index is an integer");
+        }
+        return new DeleteCommand(index);
+    }
+
+    /**
+     * Parses the given user input into a Find Command.
+     * @param userInput the user input to be parsed.
+     * @return a Find Command.
+     * @throws InvalidCommandFormatException if the Find Command format by the userInput is invalid.
+     */
+    private Command parseFind(String[] userInput) throws InvalidCommandFormatException {
+        String findTask;
+        try {
+            findTask = userInput[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command find has invalid syntax -e.g., find [task]");
+        }
+        return new FindCommand(findTask);
     }
 
 }

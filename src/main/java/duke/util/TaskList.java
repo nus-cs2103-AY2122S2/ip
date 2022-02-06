@@ -12,7 +12,7 @@ import duke.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Constructor for TaskList.
@@ -96,6 +96,10 @@ public class TaskList {
      * @return the String to be printed.
      */
     public String list() {
+        if (taskList.size() == 0) {
+            return "Your task list is empty.";
+        }
+
         StringBuilder printStr = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             int num = i + 1;
@@ -115,35 +119,36 @@ public class TaskList {
      * @return the String to be printed.
      */
     public String find(String taskName) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        Iterator<Task> iter = taskList.iterator();
-        StringBuilder printStr = new StringBuilder();
-
         if (taskName.trim().equals("")) {
-            return "No matching tasks were found in your list.\n";
+            return "Please enter a task name to be found.\n";
         }
 
-        while (iter.hasNext()) {
-            Task currentTask = iter.next();
+        Iterator<Task> taskIterator = taskList.iterator();
+        ArrayList<Task> foundTasks = new ArrayList<>();
+
+        while (taskIterator.hasNext()) {
+            Task currentTask = taskIterator.next();
             if (currentTask.getActivity().contains(taskName)) {
                 foundTasks.add(currentTask);
             }
         }
 
-        if (foundTasks.size() > 0) {
-            printStr.append("Here are the marching tasks in your list:\n");
-            for (int i = 0; i < foundTasks.size(); i++) {
-                int num = i + 1;
-                printStr.append(num);
-                printStr.append(". ");
-                Task taskToBePrinted = foundTasks.get(i);
-                assert  taskToBePrinted != null;
-                printStr.append(taskToBePrinted.printTask());
-                printStr.append("\n");
-            }
-        } else {
-            printStr.append("No matching tasks were found in your list.");
+        if (foundTasks.size() == 0) {
+            return "No matching tasks were found in your list.\n";
         }
+
+        StringBuilder printStr = new StringBuilder();
+        printStr.append("Here are the marching tasks in your list:\n");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            int num = i + 1;
+            printStr.append(num);
+            printStr.append(". ");
+            Task taskToBePrinted = foundTasks.get(i);
+            assert  taskToBePrinted != null;
+            printStr.append(taskToBePrinted.printTask());
+            printStr.append("\n");
+        }
+
         return printStr.toString();
     }
 }

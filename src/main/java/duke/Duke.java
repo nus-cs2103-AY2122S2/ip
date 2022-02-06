@@ -32,6 +32,11 @@ public class Duke {
         return this.shouldAbort;
     }
 
+    /**
+     * Passes the given user input to duke and gets its response.
+     * @param input the user input.
+     * @return the response from Duke.
+     */
     public String getResponse(String input) {
         String response;
         try {
