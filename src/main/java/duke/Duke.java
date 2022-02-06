@@ -20,6 +20,7 @@ import duke.ui.Ui;
 public class Duke {
     public static final String FILE_PATH = "/data/taskInfo.txt";
 
+    private boolean isExit;
     private TaskList taskList;
     private Storage storage;
     private final Ui ui;
@@ -77,6 +78,7 @@ public class Duke {
             ui.setBot(((BotCommand) com).getBotType());
             break;
         case EXIT:
+            isExit = true;
             break;
         default:
             ui.formatError("Unexpected error in handleCommandFeedback!");
@@ -129,5 +131,9 @@ public class Duke {
      */
     public String getBotImagePath() {
         return ui.getBotImagePath();
+    }
+
+    public boolean getExitStatus() {
+        return isExit;
     }
 }

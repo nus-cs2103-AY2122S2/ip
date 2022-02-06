@@ -57,7 +57,7 @@ public class Ui {
      * @param errorMsg error message to be formatted and print.
      */
     public String formatError(String errorMsg) {
-        return "⚠ " + errorMsg;
+        return "!!! " + errorMsg;
     }
 
     /**

@@ -2,6 +2,8 @@ package duke.ui;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -62,17 +65,29 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response;
 
-        if (response != null) {
+        // check for input when duke status is not exiting.
+        if (!duke.getExitStatus()) {
+            response = duke.getResponse(input);
 
-            Image dukeImage = new Image(this.getClass().getResourceAsStream(duke.getBotImagePath()));;
+            if (response != null) {
 
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
-            userInput.clear();
+                Image dukeImage = new Image(this.getClass().getResourceAsStream(duke.getBotImagePath()));;
+
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+                userInput.clear();
+            }
+        }
+
+        // check for exit status after displaying response.
+        if (duke.getExitStatus()) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         }
     }
 }
