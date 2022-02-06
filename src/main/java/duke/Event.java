@@ -11,8 +11,8 @@ public class Event extends Task {
     private String eventTime;
     private LocalDate date;
 
-    Event(String description, String eventTime, Boolean completed) {
-        super(description, completed);
+    Event(String description, String eventTime, Boolean isCompleted) {
+        super(description, isCompleted);
         this.eventTime = eventTime;
         try {
             new SimpleDateFormat("yyyy-mm-dd").parse(eventTime);

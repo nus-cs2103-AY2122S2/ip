@@ -12,9 +12,9 @@ public abstract class Task {
         this.isCompleted = false;
     }
 
-    Task(String description, Boolean completed) {
+    Task(String description, Boolean isCompleted) {
         this.description = description;
-        this.isCompleted = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**

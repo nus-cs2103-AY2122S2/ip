@@ -8,8 +8,8 @@ public class ToDo extends Task {
         super(description);
     }
 
-    ToDo(String description, Boolean completed) {
-        super(description, completed);
+    ToDo(String description, Boolean isCompleted) {
+        super(description, isCompleted);
     }
 
     /**

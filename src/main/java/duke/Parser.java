@@ -70,11 +70,11 @@ public class Parser {
             String[] lineArguments = line.split(" ");
             String taskType = lineArguments[0];
             String taskName;
-            boolean completed;
+            boolean isCompleted;
             if (lineArguments[lineArguments.length - 1].equals("done")) {
-                completed = true;
+                isCompleted = true;
             } else if (lineArguments[lineArguments.length - 1].equals("undone")) {
-                completed = false;
+                isCompleted = false;
             } else {
                 throw new DukeInvalidFileException();
             }
@@ -83,17 +83,17 @@ public class Parser {
             switch (taskType) {
             case "ToDo":
                 taskName = line.substring("ToDo".length() + 1).trim();
-                return new ToDo(taskName, completed);
+                return new ToDo(taskName, isCompleted);
             case "Deadline":
                 String[] deadlineDetails = line.split("/by", 2);
                 String deadlineTime = deadlineDetails[1].trim();
                 taskName = deadlineDetails[0].substring("deadline".length() + 1).trim();
-                return new Deadline(taskName, deadlineTime, completed);
+                return new Deadline(taskName, deadlineTime, isCompleted);
             case "Event":
                 String[] eventDetails = line.split("/at", 2);
                 String eventTime = eventDetails[1].trim();
                 taskName = eventDetails[0].substring("event".length() + 1).trim();
-                return new Event(taskName, eventTime, completed);
+                return new Event(taskName, eventTime, isCompleted);
             default:
                 throw new DukeInvalidFileException();
             }

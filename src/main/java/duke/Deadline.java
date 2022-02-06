@@ -22,8 +22,8 @@ public class Deadline extends Task {
         }
     }
 
-    Deadline(String description, String deadlineDate, Boolean completed) {
-        super(description, completed);
+    Deadline(String description, String deadlineDate, Boolean isCompleted) {
+        super(description, isCompleted);
         this.deadlineDate = deadlineDate;
         try {
             new SimpleDateFormat("yyyy-mm-dd").parse(deadlineDate);
