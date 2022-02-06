@@ -118,6 +118,7 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(greetUser()), new ImageView(duke))
         );
@@ -167,7 +168,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String userInput) {
+    public String getResponse(String userInput) {
         String[] inputStringArray = userInput.split(" ");
         if (!inputStringArray[0].equals("bye")) {
             return new Duke().run(userInput);
