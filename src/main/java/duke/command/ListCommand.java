@@ -11,6 +11,6 @@ import duke.util.TaskList;
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return ui.showTasks(tasks.getAllTasks(), "");
+        return ui.showTasks(tasks.getAllTasks(), "list", "");
     }
 }

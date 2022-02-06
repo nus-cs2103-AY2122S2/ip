@@ -15,11 +15,13 @@ public class Ui {
             + "| | | | | | | |/ / _      = o_o =_______    \\ \\  -Julie Rhodes-\\\n"
             + "| |_| | |_| |   <  __/     __^      __(  \\.__) )\n"
             + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
-    private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?";
+    private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?\n"
+            + "(Type 'help' to view the available commands.)";
     private static final String GOODBYE = "Bye. Meow!";
     private static final String MESSAGE_NUM_LIST_ITEMS = "%sNumber of tasks in list: %d";
     private static final String MESSAGE_LIST_ITEM = "%d. %s\n";
     private static final String MESSAGE_TASK_WITH_KEYWORD = "Here are the matching tasks with keyword: %s\n";
+    private static final String MESSAGE_TASK_WITH_DATE = "Here are the matching tasks with date: %s\n";
 
     public Ui() {
     }
@@ -70,16 +72,24 @@ public class Ui {
 
     /**
      * Formats and returns the tasks to be shown to the user.
-     * If a keyword is given, the keyword will be shown as well.
+     * If a keyword or date is given, it will be shown as well.
      *
      * @param listItems List of tasks to be shown.
-     * @param keyword Keyword to be shown.
+     * @param command The command type.
+     * @param searchString The keyword or date to be shown.
      * @return The formatted tasks string.
      */
-    public String showTasks(ArrayList<Task> listItems, String keyword) {
+    public String showTasks(ArrayList<Task> listItems, String command, String searchString) {
         StringBuilder formatted = new StringBuilder();
-        if (!keyword.isBlank()) {
-            formatted.append(String.format(MESSAGE_TASK_WITH_KEYWORD, keyword));
+        switch (command) {
+        case "find":
+            formatted.append(String.format(MESSAGE_TASK_WITH_KEYWORD, searchString));
+            break;
+        case "schedule":
+            formatted.append(String.format(MESSAGE_TASK_WITH_DATE, searchString));
+            break;
+        default:
+            assert command.equals("list");
         }
         for (int i = 0; i < listItems.size(); i++) {
             formatted.append(String.format(MESSAGE_LIST_ITEM, i + 1, listItems.get(i)));

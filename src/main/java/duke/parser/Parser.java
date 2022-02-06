@@ -1,5 +1,6 @@
 package duke.parser;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import duke.command.AddCommand;
@@ -7,8 +8,10 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.ScheduleCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
@@ -25,7 +28,7 @@ public class Parser {
      *
      * @param date Date string to be parsed.
      * @return LocalDate object.
-     * @throws DukeException if the date is invalid.
+     * @throws DukeException If the date is invalid.
      */
     public static LocalDate parseDate(String date) throws DukeException {
         String[] splitDate = date.trim().split("-");
@@ -86,6 +89,21 @@ public class Parser {
         return new UnmarkCommand(Integer.parseInt(args[1]));
     }
 
+    private static HelpCommand createNewHelpCommand(String[] args) throws DukeException {
+        if (args.length == 1) {
+            return new HelpCommand("");
+        }
+        HelpCommand.checkIfCommandExists(args[1]);
+        return new HelpCommand(args[1]);
+    }
+
+    private static ScheduleCommand createNewScheduleCommand(String[] args) throws DukeException {
+        if (args.length == 1) {
+            throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
+        }
+        return new ScheduleCommand(parseDate(args[1]));
+    }
+
     private static AddCommand createNewAddCommand(String[] args, String taskType) throws DukeException {
         if (args.length == 1) {
             throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
@@ -117,7 +135,7 @@ public class Parser {
      *
      * @param input String representing user input.
      * @return Command object.
-     * @throws DukeException if the input is not a valid command.
+     * @throws DukeException If the input is not a valid command.
      */
     public static Command parseCommand(String input) throws DukeException {
         checkIfInputIsValid(input);
@@ -127,6 +145,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "help":
+            return createNewHelpCommand(args);
         case "find":
             return createNewFindCommand(args);
         case "delete":
@@ -135,6 +155,8 @@ public class Parser {
             return createNewMarkCommand(args);
         case "unmark":
             return createNewUnmarkCommand(args);
+        case "schedule":
+            return createNewScheduleCommand(args);
         case "deadline":
             return createNewAddCommand(args, "deadline");
         case "event":

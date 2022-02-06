@@ -33,6 +33,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.by;
+    }
+
+    @Override
     public String formatForFile() {
         return super.formatForFile() + " | " + this.by.toString();
     }
@@ -44,21 +49,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Deadline deadline = (Deadline) o;
-        return by.equals(deadline.by);
     }
 }

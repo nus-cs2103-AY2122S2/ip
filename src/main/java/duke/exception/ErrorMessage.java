@@ -1,6 +1,8 @@
 package duke.exception;
 
 /**
+ * Solution reused from
+ * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/common/Messages.java
  * Stores error messages to be shown to the user.
  */
 public class ErrorMessage {
@@ -16,4 +18,5 @@ public class ErrorMessage {
     public static final String MESSAGE_UNKNOWN_KEYWORD = "Meow! Enter a keyword to find!";
     public static final String MESSAGE_FILE_SAVE_ERROR = "Error writing to file: ";
     public static final String MESSAGE_FILE_LOAD_ERROR = "Error loading from file: ";
+    public static final String MESSAGE_NONEXISTENT_COMMAND = "Meow! Command to search for does not exist!";
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Task class represents the tasks created by the user.
  * It keeps track of the task's description and its status.
@@ -36,6 +38,10 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
@@ -78,6 +84,10 @@ public class Task {
         }
     }
 
+    public LocalDate getDate() {
+        return LocalDate.now();
+    }
+
     /**
      * Format and returns a string of the task for storage.
      *
@@ -93,25 +103,5 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Task task = (Task) o;
-        if (isDone != task.isDone) {
-            return false;
-        }
-        if (!description.equals(task.description)) {
-            return false;
-        }
-
-        return type == task.type;
     }
 }

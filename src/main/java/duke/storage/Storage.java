@@ -36,11 +36,33 @@ public class Storage {
         this.filePath = Paths.get(filePath);
     }
 
+    private boolean checkIfFileExists(Path filePath) {
+        return Files.exists(filePath) && Files.isRegularFile(filePath);
+    }
+
+    private void createFile(Path filePath) throws StorageException {
+        try {
+            if (checkIfFileExists(filePath)) {
+                return;
+            }
+
+            Path parentDir = filePath.getParent();
+            if (!Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
+            }
+
+            Files.createFile(filePath);
+            assert Files.exists(filePath) : "File should exist in the given path";
+        } catch (IOException e) {
+            throw new StorageException(ErrorMessage.MESSAGE_FILE_SAVE_ERROR + filePath);
+        }
+    }
+
     /**
      * Loads and decodes the saved tasks from file if they exist.
      *
-     * @return Saved tasks, else a new  empty list.
-     * @throws StorageException if the file cannot be loaded.
+     * @return Saved tasks, else a new empty list.
+     * @throws StorageException If the file cannot be loaded.
      */
     public ArrayList<Task> load() throws StorageException {
         if (!checkIfFileExists(filePath)) {
@@ -75,7 +97,7 @@ public class Storage {
      * Saves the tasks in the list to a file.
      *
      * @param tasks List of tasks to be saved.
-     * @throws StorageException if the tasks cannot be written to the file.
+     * @throws StorageException If the tasks cannot be written to the file.
      */
     public void save(TaskList tasks) throws StorageException {
         try {
@@ -84,29 +106,6 @@ public class Storage {
                 content.append(t.formatForFile()).append("\n");
             }
             Files.write(filePath, content.toString().getBytes());
-        } catch (IOException e) {
-            throw new StorageException(ErrorMessage.MESSAGE_FILE_SAVE_ERROR + filePath);
-        }
-    }
-
-    private boolean checkIfFileExists(Path filePath) {
-        return Files.exists(filePath) && Files.isRegularFile(filePath);
-    }
-
-    private void createFile(Path filePath) throws StorageException {
-        try {
-            if (checkIfFileExists(filePath)) {
-                return;
-            }
-
-            Path parentDir = filePath.getParent();
-            // check if data folder exists
-            if (!Files.exists(parentDir)) {
-                Files.createDirectories(parentDir);
-            }
-
-            Files.createFile(filePath);
-            assert Files.exists(filePath) : "File should exist in the given path";
         } catch (IOException e) {
             throw new StorageException(ErrorMessage.MESSAGE_FILE_SAVE_ERROR + filePath);
         }
