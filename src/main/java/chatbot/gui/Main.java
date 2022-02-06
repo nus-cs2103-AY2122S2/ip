@@ -19,6 +19,7 @@ public class Main extends Application {
 
     private ChatBot innkeeper = new ChatBot();
 
+
     @Override
     public void start(Stage stage) {
         try {

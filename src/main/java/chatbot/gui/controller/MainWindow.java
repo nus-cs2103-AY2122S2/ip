@@ -2,19 +2,28 @@ package chatbot.gui.controller;
 
 import static javafx.application.Platform.exit;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import chatbot.ChatBot;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.paint.Color;
 
 
 /**
@@ -36,10 +45,36 @@ public class MainWindow extends AnchorPane {
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/traveller.jpg")));
     private final Image innkeeperImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/innkeeper.jpg")));
+    private final Image backgroundImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/bg.jpg")));
 
+    /**
+     * Initialize MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(
+                new Background(
+                        Collections.singletonList(new BackgroundFill(
+                                Color.BROWN,
+                                new CornerRadii(0),
+                                new Insets(0))),
+                        Collections.singletonList(new BackgroundImage(
+                                backgroundImage,
+                                BackgroundRepeat.NO_REPEAT,
+                                BackgroundRepeat.NO_REPEAT,
+                                BackgroundPosition.CENTER,
+                                new BackgroundSize(
+                                        1.0,
+                                        1.0,
+                                        true,
+                                        true,
+                                        false,
+                                        false
+                                )
+                        ))
+                ));
     }
 
     public void setInnkeeper(ChatBot i) {
@@ -65,9 +100,7 @@ public class MainWindow extends AnchorPane {
             );
             userInput.clear();
             if (input.equals("bye")) {
-                CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(() -> {
-                    exit();
-                });
+                CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(() -> exit());
             }
         }
     }
