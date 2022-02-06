@@ -1,6 +1,11 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spark.Ui;
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.ErrorResponse;
 import spark.exceptions.formatexceptions.UnrecognisedCommandException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
@@ -13,15 +18,13 @@ public class UnrecognisedCommand extends Command {
     private String responseMessage;
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        UnrecognisedCommandException e = new UnrecognisedCommandException();
-        responseMessage = e.getMessage();
-        ui.printException(e);
-        return responseMessage;
-    }
+    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+        List<CommandResponse> responses = new ArrayList<>();
 
-    @Override
-    public boolean isExit() {
-        return false;
+        UnrecognisedCommandException e = new UnrecognisedCommandException();
+
+        responses.add(new ErrorResponse(e));
+
+        return responses;
     }
 }

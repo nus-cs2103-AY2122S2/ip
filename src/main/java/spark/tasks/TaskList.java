@@ -106,17 +106,14 @@ public class TaskList {
     public String getTaskList() {
         // if there are no tasks, inform the user
         if (tasks.size() == 0) {
-            return "No tasks found! (trust me, I've looked everywhere)";
+            return "";
         } else {
             StringBuilder listOfTasks = new StringBuilder();
 
-            listOfTasks.append("\n"
-                    + "Here are your tasks:"
-                    + "\n"
-            );
+            listOfTasks.append("Here are your tasks:" + "\n");
 
             for (int i = 0; i < tasks.size(); i++) {
-                listOfTasks.append(String.format("    %d. %s\n", i + 1, tasks.get(i)));
+                listOfTasks.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
             }
 
             return listOfTasks.toString();

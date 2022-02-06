@@ -1,8 +1,13 @@
 package spark.parser.commands.commandtypes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import spark.Ui;
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.ErrorResponse;
+import spark.commandresponse.SuccessResponse;
 import spark.exceptions.SparkException;
 import spark.parser.params.AddDeadlineParams;
 import spark.storage.Storage;
@@ -27,24 +32,20 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+        List<CommandResponse> responses = new ArrayList<>();
+
         try {
             tasks.addDeadline(title, by);
             storage.writeTasksFile(tasks.encodeTasks());
             responseMessage = getAddTaskSuccessMessage(tasks);
-            ui.printMessageWithDivider(responseMessage);
 
-            return responseMessage;
+            responses.add(new SuccessResponse(responseMessage));
         } catch (SparkException e) {
-            ui.printException(e);
-
-            return e.getMessage();
+            responses.add(new ErrorResponse(e));
         }
-    }
 
-    @Override
-    public boolean isExit() {
-        return false;
+        return responses;
     }
 
     private String getAddTaskSuccessMessage(TaskList tasks) {

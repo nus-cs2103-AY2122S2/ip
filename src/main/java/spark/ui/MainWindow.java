@@ -1,5 +1,7 @@
 package spark.ui;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import spark.Spark;
+import spark.commandresponse.CommandResponse;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Spark spark;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mister_chief.png"));
-    private Image sparkImage = new Image(this.getClass().getResourceAsStream("/images/343_guilty_spark.png"));
+    private final Image sparkImage = new Image(this.getClass().getResourceAsStream("/images/343_guilty_spark.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/mister_chief.png"));
 
     @FXML
     public void initialize() {
@@ -39,34 +42,84 @@ public class MainWindow extends AnchorPane {
 
     private void showInitialisationMessage() {
         String welcomeMessage = "Greetings, erm, reclaimer...?" + "\n"
-                + "(why does he look so weird?)" + "\n\n"
-                + "Here are your tasks.";
-        String listOfTasks = spark.executeCommand("list");
-        dialogContainer.getChildren().addAll(
-                SparkDialogBox.getSparkDialog(welcomeMessage, sparkImage)
-        );
-        dialogContainer.getChildren().addAll(
-                SparkDialogBox.getSparkDialog(listOfTasks, sparkImage)
-        );
+                + "(why does he look so weird?)";
+
+        List<CommandResponse> listOfTasks = spark.executeCommand("list");
+        addSparkChatBubble(welcomeMessage);
+        addCommandResponsesAsChatBubbles(listOfTasks);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Spark's reply and then appends them to the
+     * dialog container.
+     * <p>
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = spark.executeCommand(input);
-        dialogContainer.getChildren().addAll(
-                UserDialogBox.getUserDialog(input, userImage),
-                SparkDialogBox.getSparkDialog(response, sparkImage)
-        );
+        List<CommandResponse> responses = spark.executeCommand(getUserInput());
+
+        // print what the user typed as a chat-message sent by the user
+        addUserChatBubble(getUserInput());
+
+        // print each response messages resulting from the command as
+        // chat-messages sent by Spark
+        addCommandResponsesAsChatBubbles(responses);
+
         userInput.clear();
 
-        // TODO: create a way to exit Spark while printing a message!
-        if (response.contains("Cool, see you around!")) {
+        // close the program if the user has given a command
+        // for the program to exit
+        if (programShouldExit(responses)) {
             System.exit(0);
         }
+    }
+
+    private void addUserChatBubble(String message) {
+        dialogContainer
+                .getChildren()
+                .add(UserDialogBox.getDialog(message, userImage));
+    }
+
+    private void addSparkChatBubble(String message) {
+        dialogContainer
+                .getChildren()
+                .add(SparkDialogBox.getDialog(message, sparkImage));
+    }
+
+    private void addCommandResponseAsChatBubble(CommandResponse response) {
+        if (response.isError()) {
+            dialogContainer
+                    .getChildren()
+                    .add(SparkDialogBox.getErrorSparkDialog(response.getMessage(), sparkImage));
+        } else if (response.isWarning()) {
+            dialogContainer
+                    .getChildren()
+                    .add(SparkDialogBox.getWarningSparkDialog(response.getMessage(), sparkImage));
+        } else {
+            dialogContainer
+                    .getChildren()
+                    .add(SparkDialogBox.getSuccessSparkDialog(response.getMessage(), sparkImage));
+        }
+    }
+
+    private void addCommandResponsesAsChatBubbles(List<CommandResponse> responses) {
+        for (CommandResponse r : responses) {
+            addCommandResponseAsChatBubble(r);
+        }
+    }
+
+    private boolean programShouldExit(List<CommandResponse> responses) {
+        for (CommandResponse r : responses) {
+            if (r.isExit()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String getUserInput() {
+        return userInput.getText();
     }
 }

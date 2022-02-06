@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             // change the font
-            scene.getRoot().setStyle("-fx-font-family: Courier; -fx-font-size: 20");
+            scene.getRoot().setStyle("-fx-font-family: Courier; -fx-font-size: 18");
             stage.setScene(scene);
 
             fxmlLoader.<MainWindow>getController().setSpark(spark);
