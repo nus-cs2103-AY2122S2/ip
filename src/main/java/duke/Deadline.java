@@ -89,4 +89,16 @@ public class Deadline extends Task {
         result += ")";
         return result;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Deadline) {
+            Deadline newo = (Deadline) o;
+            if (this.toString().equals(newo.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

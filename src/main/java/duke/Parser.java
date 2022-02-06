@@ -239,6 +239,13 @@ public class Parser {
             String dateTime = splitString[1].trim();
             newTask = new Event(details, dateTime);
         }
+
+        for (Task t : taskList.getTasks()) {
+            if (t.toString().equals(newTask.toString())) {
+                throw new DukeException("This task already exists!");
+            }
+        }
+
         return taskList.guiAddTask(newTask);
     }
 }
