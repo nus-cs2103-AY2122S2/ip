@@ -1,33 +1,15 @@
-import karen.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UiTest {
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    protected Ui ui;
+import org.junit.jupiter.api.Test;
 
-    @BeforeEach
-    public void setUpUi() {
-        this.ui = new Ui();
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
+import karen.Ui;
+
+public class UiTest {
+    protected Ui ui;
 
     @Test
     public void displayUserInput() {
-//        ui.displayUserInput("hello");
-//        String output = "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\nhello\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n";
-//        assertEquals(output, outputStreamCaptor.toString());
+        assertEquals(ui.displayUserInput("hello"), "hello");
     }
 
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
 }

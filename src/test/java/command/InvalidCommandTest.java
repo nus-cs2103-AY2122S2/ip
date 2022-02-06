@@ -1,10 +1,11 @@
 package command;
 
-import karen.KarenException;
-import karen.command.InvalidCommand;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import karen.KarenException;
+import karen.command.InvalidCommand;
 
 public class InvalidCommandTest {
     @Test
