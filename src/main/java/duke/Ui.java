@@ -1,7 +1,11 @@
 package duke;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import duke.command.AddCommand;
+import duke.command.Command;
 import duke.task.Task;
 
 /**
@@ -77,36 +81,20 @@ public class Ui {
     }
 
     /**
-     * Show that the input task has been removed from the list.
-     *
-     * @param listSize the list size
-     * @param task     the task
-     * @return A string to acknowledge that a task has been removed from the list.
-     */
-    public String showDeletion(int listSize, Task task) {
-        StringBuilder sb = new StringBuilder();
-        String ack = "Noted, I've removed the following task: ";
-        String taskString = (listSize == 1) ? "task" : "tasks";
-        String size = String.format("Now you have %d %s in the list", listSize, taskString);
-
-        sb.append(STR_PADDING).append(ack).append("\n");;
-        sb.append(STR_PADDING).append("   ").append(task).append("\n");
-        sb.append(STR_PADDING).append(size);
-
-        return sb.toString();
-    }
-
-    /**
      * Show that the input task has been added to the list.
      *
      * @param listSize the list size
      * @param task     the task
      * @return A string to acknowledge that a task has been added to the list.
      */
-    public String showAddition(int listSize, Task task) {
+    public String showAdditionOrDeletion(Command command, int listSize, Task task) {
         StringBuilder sb = new StringBuilder();
-        String taskString = (listSize == 1) ? "task" : "tasks";
-        String ack = "Got it, I've added this task: ";
+        String taskString = (listSize == 1)
+                ? "task"
+                : "tasks";
+        String ack = (command instanceof AddCommand)
+                ? "Got it, I've added this task: "
+                : "Noted, I've removed the following task: ";
         String size = String.format("Now you have %d %s in the list", listSize, taskString);
 
         sb.append(STR_PADDING).append(ack).append("\n");
@@ -124,5 +112,91 @@ public class Ui {
      */
     public String showError(String errorMessage) {
         return String.format("Error: %s", errorMessage);
+    }
+
+    /**
+     * Shows a list of dated-events that occur on the specified date.
+     *
+     * @param dateCheck the date that the user wants to see
+     * @param filteredTask the taskList that has been filtered to search for the keyword
+     * @return the contents of filteredTask that matches the keyword, if any.
+     */
+    public String showSchedule(Date dateCheck, List<Task> filteredTask) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (filteredTask.isEmpty()) {
+            return String.format("I could not find any tasks that occurs on \"%s\"", sdf.format(dateCheck));
+        } else {
+            StringBuilder sb = new StringBuilder(Ui.STR_PADDING);
+            sb.append(String.format("You've searched for task(s) that occur on: \"%s\"\n", sdf.format(dateCheck)));
+            sb.append(Ui.STR_PADDING + "Here are the matching tasks in your list:");
+            for (int i = 0; i < filteredTask.size(); i++) {
+                sb.append(String.format("\n" + Ui.STR_PADDING + "  %d. " + filteredTask.get(i), i + 1));
+            }
+            return sb.toString();
+        }
+    }
+
+    /**
+     * Shows a list of commands that the user can use.
+     * @return list of commands that the user can use
+     */
+    public String showHelp() {
+        return "Here are the available commands -- \n"
+                + showHelpAdd()
+                + showHelpClear()
+                + showHelpDelete()
+                + showHelpExit()
+                + showHelpFind()
+                + showHelpList()
+                + showHelpToggle()
+                + showHelpView();
+    }
+
+    private String showHelpAdd() {
+        return "Add command: \n"
+                + "  todo <description>\n"
+                + "  event <description> /at <dd/MM/yyyy hh:mm>\n"
+                + "  deadline <description> /by <dd/MM/yyyy hh:mm>\n"
+                + "E.g: event meet John at the Cafe /at 06/03/2022 16:00\n\n";
+    }
+
+    private String showHelpClear() {
+        return "Clear command: [WARNING] This will remove all your tasks!!\n"
+                + "  clear\n\n";
+    }
+
+    private String showHelpDelete() {
+        return "Delete command: [NOTE] you can see the entry number using `list`\n"
+                + "  delete <entry number>\n\n";
+    }
+
+    private String showHelpExit() {
+        return "Exit command: [NOTE] Close using this to ensure your data is saved!!\n"
+                + "  exit\n\n";
+    }
+
+    private String showHelpFind() {
+        return "Find command:\n"
+                + "  find <keyword>\n"
+                + "E.g: find book -- this would give you all the task that contains "
+                + "\t\"book\" such as \"books\" or \"booking\"\n\n";
+    }
+
+    private String showHelpList() {
+        return "List command: [NOTE] the entry numbers here are used in mark/unmark/delete\n"
+                + "  list\n\n";
+    }
+
+    private String showHelpToggle() {
+        return "Mark/Unmark command: \n"
+                + "  mark <entry number>\n"
+                + "  unmark <entry number>\n\n";
+    }
+
+    private String showHelpView() {
+        return "View command: \n"
+                + "  view <dd/mm/yyyy>\n"
+                + "E.g: view 06/06/2022\n";
     }
 }

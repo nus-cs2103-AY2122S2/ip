@@ -41,12 +41,12 @@ public class AddCommand extends Command {
         switch (taskType) {
         case "todo":
             tasks.addTask(task = new ToDo(taskDetails));
-            return ui.showAddition(tasks.size(), task);
+            return ui.showAdditionOrDeletion(this, tasks.size(), task);
         case "event":
             String[] eventDetails = taskDetails.split(" /at ", 2);
             try {
                 tasks.addTask(task = new Event(eventDetails[0], eventDetails[1]));
-                return ui.showAddition(tasks.size(), task);
+                return ui.showAdditionOrDeletion(this, tasks.size(), task);
             } catch (DukeException e) {
                 return ui.showError(e.getMessage());
             }
@@ -54,7 +54,7 @@ public class AddCommand extends Command {
             String[] deadlineDetails = taskDetails.split(" /by ", 2);
             try {
                 tasks.addTask(task = new Deadline(deadlineDetails[0], deadlineDetails[1]));
-                return ui.showAddition(tasks.size(), task);
+                return ui.showAdditionOrDeletion(this, tasks.size(), task);
             } catch (DukeException e) {
                 return ui.showError(e.getMessage());
             }

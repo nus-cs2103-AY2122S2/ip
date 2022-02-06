@@ -34,7 +34,12 @@ public class Duke {
      * @return the response
      */
     public String getResponse(String input) {
-        Command cmd = Parser.parseCommand(input);
+        Command cmd = null;
+        try {
+            cmd = Parser.parseCommand(input);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
 
         // ensures cmd is not null so that it can be executed
         assert cmd != null;

@@ -6,9 +6,11 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.ToggleCommand;
+import duke.command.ViewScheduleCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -59,44 +61,36 @@ public class Parser {
      * @param fullCommand the full command containing the keyword and its necessary details
      * @return the corresponding command
      */
-    public static Command parseCommand(String fullCommand) {
+    public static Command parseCommand(String fullCommand) throws DukeException {
         // Not sure how to trim (if even necessary) this down since it's all case-checking.
-        Command cmd;
         String[] input = fullCommand.split(" ", 2);
-
-        //TODO: simplify this using hashset
 
         switch (input[0].toLowerCase()) {
         case "exit":
-            cmd = new ExitCommand();
-            break;
+            return new ExitCommand();
         case "list":
-            cmd = new ListCommand();
-            break;
+            return new ListCommand();
         case "mark":
         case "unmark":
-            cmd = new ToggleCommand(input[0], input[1]);
-            break;
+            return new ToggleCommand(input[0], input[1]);
         case "todo":
         case "event":
         case "deadline":
-            cmd = new AddCommand(input[0], input[1]);
-            break;
+            return new AddCommand(input[0], input[1]);
         case "remove":
         case "delete":
-            cmd = new DeleteCommand(input[1]);
-            break;
+            return new DeleteCommand(input[1]);
         case "clear":
-            cmd = new ClearCommand();
-            break;
+            return new ClearCommand();
         case "find":
-            cmd = new FindCommand(input[1]);
-            break;
+            return new FindCommand(input[1]);
+        case "view":
+            return new ViewScheduleCommand(input[1]);
+        case "help":
+            return new HelpCommand();
         default:
-            cmd = new InvalidCommand();
-            break;
+            return new InvalidCommand();
         }
-        return cmd;
     }
 
     /**
