@@ -22,8 +22,6 @@ public class Duke {
     /**
      * Main logic for the chatbot
      * Gets called in the main method
-     * 
-     * @throws DukeException if user input is invalid
      */
     private void run() {
         storageHandler = new Storage();
@@ -42,45 +40,28 @@ public class Duke {
             String originalInput = parser.getOriginalInput();
 
             switch (command) {
-                case "bye":
+                case "bye" -> {
                     tasks.handleBye();
                     sc.close();
                     canContinue = false;
-                    break;
-                case "list":
-                    tasks.handleList();
-                    break;
-                case "mark":
-                    tasks.handleMark(inputArray);
-                    break;
-                case "unmark":
-                    tasks.handleUnMark(inputArray);
-                    break;
-                case "todo":
-                    tasks.handleTodo(inputArray, originalInput);
-                    break;
-                case "deadline":
-                    tasks.handleDeadline(originalInput);
-                    break;
-                case "event":
-                    tasks.handleEvent(originalInput);
-                    break;
-                case "delete":
-                    tasks.handleDelete(inputArray);
-                    break;
-                default:
-                    Ui.printDontKnowCommand();
-                    break;
+                }
+                case "list" -> tasks.handleList();
+                case "mark" -> tasks.handleMark(inputArray);
+                case "unmark" -> tasks.handleUnMark(inputArray);
+                case "todo" -> tasks.handleTodo(inputArray, originalInput);
+                case "deadline" -> tasks.handleDeadline(originalInput);
+                case "event" -> tasks.handleEvent(originalInput);
+                case "delete" -> tasks.handleDelete(inputArray);
+                default -> Ui.printDontKnowCommand();
             }
         }
-        storageHandler.saveTaskstoFile(tasks.getTasks());
+        storageHandler.saveTasksToFile(tasks.getTasks());
     }
 
     /**
      * Initializes a Duke chatbot object and calls Duke.Run()
      * 
      * @param args
-     * @throws DukeException if user input is invalid
      */
     public static void main(String[] args) {
         Duke kizer = new Duke();

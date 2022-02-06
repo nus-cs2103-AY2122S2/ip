@@ -46,7 +46,7 @@ public class Storage {
     /**
      * @param tasks list of task objects to be saved to disk
      */
-    public void saveTaskstoFile(List<Task> tasks) {
+    public void saveTasksToFile(List<Task> tasks) {
         try {
             Files.deleteIfExists(filePath);
             createBlankFile(dirPath, filePath);
