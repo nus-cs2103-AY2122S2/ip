@@ -6,21 +6,21 @@ import java.util.ArrayList;
  */
 public class DeleteCommand extends Command {
     private String input; // Parameters: 1
-    public ArrayList<Task> taskList = TaskManager.taskList;
+    public ArrayList<Task> taskList = TaskList.taskList;
     private int index; // Index of target task
 
     public DeleteCommand(String i) {
         this.input = i;
         index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0
     }
-    
+
     @Override
     public void execute() {
         int index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0
         // Console prints
-        Task task = TaskManager.taskList.get(index);
+        Task task = TaskList.taskList.get(index);
         Ui.printDeleteTask(task); // Print before delete
-        TaskManager.taskList.remove(index);
+        TaskList.taskList.remove(index);
 
     }
 }

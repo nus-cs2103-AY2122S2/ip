@@ -1,8 +1,7 @@
 import java.io.*;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class TaskManager {
             String description = currentLine.substring(6);
 
             CustomTask task = new CustomTask(taskType, isComplete, description);
-            TaskManager.taskList.add(task);
+            TaskList.taskList.add(task);
 
         }
         reader.close();

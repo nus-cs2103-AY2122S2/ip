@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class UnmarkCommand extends Command {
     private String input; // Parameters: 1
-    public ArrayList<Task> taskList = TaskManager.taskList;
+    public ArrayList<Task> taskList = TaskList.taskList;
     private int index; // Index of target task
 
     public UnmarkCommand(String i) {
@@ -16,7 +16,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute() {
         int index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0
-        Task task = TaskManager.taskList.get(index);
+        Task task = TaskList.taskList.get(index);
         task.unmarkAsDone();
 
         Ui.printUnmarkTask(task);

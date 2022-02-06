@@ -10,7 +10,7 @@ public class Duke {
 
         // Init saved tasks
         try {
-            TaskManager.loadTasks();
+            TaskList.loadTasks();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class Duke {
         }
 
         try {
-            TaskManager.saveTaskList();
+            TaskList.saveTaskList();
         } catch (IOException e) {
             e.printStackTrace();
         }

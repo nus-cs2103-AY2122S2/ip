@@ -42,8 +42,8 @@ public class AddTaskCommand extends Command {
         // Set indicated completion state
         newTask.isComplete = this.isComplete;
 
-        // Adding task to TaskManager
-        TaskManager.taskList.add(newTask);
+        // Adding task to TaskList
+        TaskList.taskList.add(newTask);
 
         Ui.printAddTask(newTask);
     }

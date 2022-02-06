@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     @Override
     public void execute() {
-        ArrayList<Task> taskList = TaskManager.taskList;
+        ArrayList<Task> taskList = TaskList.taskList;
 
         // Formatting task list to be printed
         String formattedTaskList = formatTaskList(taskList);

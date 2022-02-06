@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class MarkCommand extends Command {
     private String input; // Parameters: 1
-    public ArrayList<Task> taskList = TaskManager.taskList;
+    public ArrayList<Task> taskList = TaskList.taskList;
     private int index; // Index of target task
 
     public MarkCommand(String i) {
