@@ -30,8 +30,7 @@ public class Ui {
         this.v = v;
         this.d = d;
     }
-
-
+    
     /**
      * Outputs the specified strings in the following format:
      * ========================================== <br>
