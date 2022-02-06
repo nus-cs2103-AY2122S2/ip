@@ -1,7 +1,6 @@
 package bob;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +44,6 @@ public class Storage {
      * Loads all saved entries in the file associated with this Storage instance into a list.
      *
      * @return A TaskList loaded from the saved file.
-     * @throws FileNotFoundException File to be loaded from not found.
      */
     public TaskList load() {
         List<Task> list = new ArrayList<>();
