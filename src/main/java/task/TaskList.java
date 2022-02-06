@@ -2,6 +2,7 @@ package task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Implements Serializable package to
@@ -85,13 +86,9 @@ public class TaskList implements Serializable {
      * @return An ArrayList of tasks that matches the search term
      */
     public ArrayList<Task> find (String search) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.getDescription() != null && t.getDescription().toLowerCase().contains(search)) {
-                foundTasks.add(t);
-            }
-        }
-        return foundTasks;
+        return (ArrayList<Task>) tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(search))
+                .collect(Collectors.toList());
     }
 }
 
