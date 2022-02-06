@@ -27,7 +27,7 @@ public class Storage {
     public static final String DATA_PATH = "./data/data.txt";
 
     /**
-     * Initialises a new storage instance.
+     * Instantiates a new storage instance.
      */
     public Storage() {
         try {

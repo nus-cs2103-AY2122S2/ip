@@ -21,7 +21,7 @@ public class TaskList {
     private int numberOfTasks;
 
     /**
-     * Initializes a new instance of list of tasks, according to the size specified.
+     * Instantiates a new instance of list of tasks, according to the size specified.
      *
      * @param size Size of list of tasks.
      */
@@ -36,7 +36,7 @@ public class TaskList {
      * @return the total number of tasks in the list.
      */
     public int getNumberOfTasks() {
-        return this.numberOfTasks;
+        return numberOfTasks;
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @return The list of tasks.
      */
     public ArrayList<Task> getListOfTasks() {
-        return this.listOfTasks;
+        return listOfTasks;
     }
 
     /**
@@ -53,7 +53,7 @@ public class TaskList {
      * Mostly used when a Task is being added to the TaskList.
      */
     public void incrementTasks() {
-        this.numberOfTasks++;
+        numberOfTasks++;
     }
 
     /**
@@ -62,8 +62,8 @@ public class TaskList {
     public String display() {
         String result = "";
         result += "     Here are the tasks in your list:\n";
-        for (int i = 1; i <= this.numberOfTasks; i++) {
-            Task currTask = this.listOfTasks.get(i - 1);
+        for (int i = 1; i <= numberOfTasks; i++) {
+            Task currTask = listOfTasks.get(i - 1);
             String output = "     " + i + "." + currTask + "\n";
             result += output;
         }
@@ -76,7 +76,7 @@ public class TaskList {
      * @param taskId The taskID that corresponds to the task that is to be marked.
      */
     public String mark(int taskId) {
-        Task currTask = this.listOfTasks.get(taskId - 1);
+        Task currTask = listOfTasks.get(taskId - 1);
         currTask.setStatus(true);
         writeToFile();
         return "Nice! I've marked this task as done:\n" + currTask;
@@ -88,7 +88,7 @@ public class TaskList {
      * @param taskId The taskID that corresponds to the task that is to be unmarked.
      */
     public String unmark(int taskId) {
-        Task currTask = this.listOfTasks.get(taskId - 1);
+        Task currTask = listOfTasks.get(taskId - 1);
         currTask.setStatus(false);
         writeToFile();
         return "OK, I've marked this task as not done yet:\n" + currTask;
@@ -100,14 +100,14 @@ public class TaskList {
      * @param userInput Command entered by the user that describes the task.
      */
     public String todo(String userInput) {
-        this.numberOfTasks++;
+        numberOfTasks++;
 
         Task currentTask = new Todo(userInput);
-        this.listOfTasks.add(currentTask);
+        listOfTasks.add(currentTask);
         writeToFile();
 
         return "Got it. I've added this task:\n" + currentTask + "\n"
-                + "Now you have " + this.numberOfTasks + " task/s in the list.";
+                + "Now you have " + numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -118,14 +118,14 @@ public class TaskList {
      * @param dueTime Specifies the time that this task has to be done by.
      */
     public String deadline(String userInput, LocalDate dueDate, LocalTime dueTime) {
-        this.numberOfTasks++;
+        numberOfTasks++;
 
         Task currentTask = new Deadline(userInput, dueDate, dueTime);
-        this.listOfTasks.add(currentTask);
+        listOfTasks.add(currentTask);
         writeToFile();
 
         return "Got it. I've added this task:\n" + currentTask + "\n"
-                + "Now you have " + this.numberOfTasks + " task/s in the list.";
+                + "Now you have " + numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -135,14 +135,14 @@ public class TaskList {
      */
     public String event(String userInput, LocalDate eventDate,
                       LocalTime eventStartTime, LocalTime eventEndTime) {
-        this.numberOfTasks++;
+        numberOfTasks++;
 
         Task currentTask = new Event(userInput, eventDate, eventStartTime, eventEndTime);
-        this.listOfTasks.add(currentTask);
+        listOfTasks.add(currentTask);
         writeToFile();
 
         return "Got it. I've added this task:\n" + currentTask + "\n"
-                + "Now you have " + this.numberOfTasks + " task/s in the list.";
+                + "Now you have " + numberOfTasks + " task/s in the list.";
     }
 
     /**
@@ -151,9 +151,9 @@ public class TaskList {
      * @param taskId The taskID that corresponds to the task that is to be deleted.
      */
     public String delete(int taskId) {
-        Task currTask = this.listOfTasks.get(taskId - 1);
-        this.listOfTasks.remove(taskId - 1);
-        this.numberOfTasks--;
+        Task currTask = listOfTasks.get(taskId - 1);
+        listOfTasks.remove(taskId - 1);
+        numberOfTasks--;
         writeToFile();
 
         return "Noted. I've removed this task:\n" + currTask;

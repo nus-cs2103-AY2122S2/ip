@@ -9,7 +9,7 @@ public class InvalidDateTime extends DukeException {
     private final String errorMessage;
 
     /**
-     * Initialises a new instance of InvalidDateTime.
+     * Instantiates a new instance of InvalidDateTime.
      *
      * @param errorMessage The error message that is related to the exception.
      */
@@ -25,6 +25,6 @@ public class InvalidDateTime extends DukeException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! " + this.errorMessage;
+        return "OOPS!!! " + errorMessage;
     }
 }

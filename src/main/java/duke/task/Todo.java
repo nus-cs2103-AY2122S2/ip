@@ -7,7 +7,7 @@ package duke.task;
  */
 public class Todo extends Task {
     /**
-     * Initializes a new instance of a task that is to be done, according to the task description.
+     * Instantiates a new instance of a task that is to be done, according to the task description.
      * By default, this task is set to "not done" and does not have any date/time attached to it.
      *
      * @param description Describes what needs to be done in this task.

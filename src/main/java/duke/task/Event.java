@@ -16,7 +16,7 @@ public class Event extends Task {
     private LocalTime eventEndTime;
 
     /**
-     * Initializes a new event task.
+     * Instantiates a new event task.
      * By default, the new task is set to "not done".
      * This task has a specific date as well as a start and end time.
      *
@@ -39,7 +39,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedDate = this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedDate = eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String formattedStartTime = "";
         String formattedEndTime = "";
         if (eventStartTime != null) {

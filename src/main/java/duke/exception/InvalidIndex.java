@@ -10,7 +10,7 @@ public class InvalidIndex extends DukeException {
     private final String errorMessage;
 
     /**
-     * Initialises a new instance of InvalidIndex.
+     * Instantiates a new instance of InvalidIndex.
      *
      * @param errorMessage The error message that is related to the exception.
      */
@@ -26,6 +26,6 @@ public class InvalidIndex extends DukeException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! " + this.errorMessage;
+        return "OOPS!!! " + errorMessage;
     }
 }

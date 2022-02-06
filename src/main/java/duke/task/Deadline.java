@@ -15,7 +15,7 @@ public class Deadline extends Task {
     private LocalTime dueTime;
 
     /**
-     * Initializes a new instance of task that has a deadline.
+     * Instantiates a new instance of task that has a deadline.
      * By default, the new task is set to "not done".
      *
      * @param description Describes what needs to be done in this task.
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String formattedDate = this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedDate = dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String formattedTime = "";
         if (dueTime != null) {
             formattedTime = " " + dueTime.toString();
