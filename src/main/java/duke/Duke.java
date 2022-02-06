@@ -1,20 +1,7 @@
 package duke;
 
-import java.io.IOException;
 import duke.command.Command;
 import duke.task.TaskList;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class Duke {
@@ -41,29 +28,6 @@ public class Duke {
         } catch (Exception e) {
             ui.showMessage(e.getMessage());
             this.tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Runs a Duke.
-     * @throws IOException if an I/O error occurred
-     */
-    public void run() throws IOException {
-        ui.showLine();
-        ui.showMessage(greet());
-        ui.showLine();
-        while (true) {
-            try {
-                String input = ui.readInput();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                storage.update(tasks);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 

@@ -10,7 +10,7 @@ public class TaskList {
      * Constructs an empty list of tasks.
      */
     public TaskList() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     /**

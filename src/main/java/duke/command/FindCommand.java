@@ -39,7 +39,7 @@ public class FindCommand extends Command {
         } else {
             String res = "Here are the matching tasks in your list:";
             for (int i : matchingIndexes) {
-                res += "\n" + tasks.get(i);
+                res += "\n  " + (i + 1) + ". " + tasks.get(i);
             }
             return res;
         }
