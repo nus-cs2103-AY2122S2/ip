@@ -28,25 +28,25 @@ public class Parser {
             String[] inputArray = input.split(" ", 2);
             String s1 = inputArray[0].toLowerCase();
             if (s1.equals("bye")) {
-                output = ui.getLine() + "GoodBye! Thanks for using B.H!" + ui.getLine();
+                output = ui.echo("GoodBye! Thanks for using B.H!");
             } else if (s1.equals("list")) {
-                output = ui.getLine() + this.taskList.getList() + ui.getLine();
+                output = ui.echo(this.taskList.getList());
             } else if (s1.equals("mark")) {
                 int index = Integer.parseInt(inputArray[1]) - 1;
                 if (index < this.taskList.getListSize()) {
-                    output = ui.getLine() + "Well done! \n" + this.taskList.mark(index) + ui.getLine();
+                    output = ui.echo("Well done! \n" + this.taskList.mark(index));
                 } else {
-                    output = "Index out of range";
+                    output = ui.echo("Index out of range");
                 }
             } else if (s1.equals("unmark")) {
                 int index = Integer.parseInt(inputArray[1]) - 1;
-                output = "Oh no! \n" + this.taskList.unMark(index);
+                output = ui.echo("Oh no! \n" + this.taskList.unMark(index));
             } else if (s1.equals("todo")) {
                 String task = inputArray[1];
                 Task newTask = new Todo(task);
                 this.taskList.addToList(newTask);
-                output = ui.getLine() + "Task added: " + newTask.toString() + "\n"
-                        + "Now you have " + this.taskList.getListSize() + " tasks in the list" + ui.getLine();
+                output = ui.echo("Task added: " + newTask.toString() + "\n"
+                        + "Now you have " + this.taskList.getListSize() + " tasks in the list");
             } else if (s1.equals("deadline")) {
                 String s = inputArray[1];
                 String[] arr = s.split("/by");
@@ -54,8 +54,8 @@ public class Parser {
                 String time = arr[1];
                 Task newTask = new Deadline(task, time);
                 this.taskList.addToList(newTask);
-                output = ui.getLine() + "Task added:" + newTask.toString() + "\n"
-                        + "Now you have " + this.taskList.getListSize() + " tasks in the list" + ui.getLine();
+                output = ui.echo("Task added:" + newTask.toString() + "\n"
+                        + "Now you have " + this.taskList.getListSize() + " tasks in the list");
             } else if (s1.equals("event")) {
                 String s = inputArray[1];
                 String[] arr = s.split("/at");
@@ -63,27 +63,27 @@ public class Parser {
                 String time = arr[1];
                 Task newTask = new Event(task, time);
                 this.taskList.addToList(newTask);
-                output = ui.getLine() + "Task added:" + newTask.toString() + "\n"
-                        + "Now you have " + this.taskList.getListSize() + " tasks in the list" + ui.getLine();
+                output = ui.echo("Task added:" + newTask.toString() + "\n"
+                        + "Now you have " + this.taskList.getListSize() + " tasks in the list");
             } else if (s1.equals("delete")) {
                 int index = Integer.parseInt(inputArray[1]) - 1;
-                output = ui.getLine() + "Okay, I have remove this task:\n"
-                        + this.taskList.deleteTask(index) + ui.getLine();
+                output = ui.echo("Okay, I have remove this task:\n"
+                        + this.taskList.deleteTask(index));
             } else if (s1.equals("check")) {
                 LocalDate date = LocalDate.parse(inputArray[1]);
-                output = ui.getLine() + this.taskList.checkDate(date) + ui.getLine();
+                output = ui.echo(this.taskList.checkDate(date));
             } else if (s1.equals("find")) {
                 String[] arr = input.split(" ", 2);
                 String word = arr[1];
-                output = ui.getLine() + this.taskList.checkWord(word) + ui.getLine();
+                output = ui.echo(this.taskList.checkWord(word));
             } else {
-                output = "Wrong input, please check again";
+                output = ui.echo("Wrong input, please check again");
             }
             this.storage.save(this.taskList.getArrayList());
             return output;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
-            throw new DukeException("Duke exception!!!");
+            throw new DukeException(ui.echo("Duke exception!!!"));
         }
     }
 }

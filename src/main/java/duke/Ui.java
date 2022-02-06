@@ -25,4 +25,8 @@ public class Ui {
     public String greet() {
         return "Hello, I am B.H. How can I help you?\n" + LOGO + this.getLine();
     }
+
+    public String echo(String input) {
+        return LINE + input + LINE;
+    }
 }

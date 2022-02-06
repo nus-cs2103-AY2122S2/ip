@@ -6,15 +6,10 @@ import duke.DukeException;
  * create a new BH object and start running the program
  */
 public class Duke{
-
     public BH bh;
 
     public Duke() throws DukeException {
         this.bh = new BH();
-    }
-
-    String getBhGreet() {
-        return this.bh.getUiGreet();
     }
 
     String getBhLine() {
