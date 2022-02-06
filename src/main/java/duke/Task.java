@@ -52,7 +52,7 @@ public class Task {
     }
 
     /**
-     * returns the string of each task together with their status and name to the GUI
+     * returns the string of each task together with their status and name
      * @return the string of each task together with their status and name to the GUI
      */
     public String guiPrintTask() {
