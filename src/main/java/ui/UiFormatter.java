@@ -30,7 +30,6 @@ public class UiFormatter {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
@@ -42,21 +41,19 @@ public class UiFormatter {
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**
-     * Formats the message according to a particular format.
+     * Formats the DukeException message according to a particular format.
      * @param message Text that must be formatted.
      * @return String of message with format applied
      */
-    public String formatMessage(String message) { //If I want to add something later
-        return message;
+    public static String formatExceptionMessage(String message) {
+        return "OOPS!!! " + message;
     }
 
     /** Returns the hello message when the bot starts.

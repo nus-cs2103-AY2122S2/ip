@@ -11,7 +11,9 @@ import command.TodoCommand;
 import command.UnmarkCommand;
 import exception.DukeException;
 
+/** Parses user input to find the correct command and the correct arguments. */
 public class Parser {
+
     /**
      * Returns the appropriate Command with appropriate arguments according to user input.
      * @param input Input that determines command type and parameters.
@@ -19,69 +21,85 @@ public class Parser {
      * @throws DukeException If input message does not make sense.
      */
     public static Command parse(String input) throws DukeException {
-        String[] commandWords = input.split(" ", 2);
-        if (input.strip().equals("list")) {
-            return new ListCommand();
+        String[] words = input.split(" ", 2);
+        String commandWord = words[0];
+        String message = "";
+        if (words.length > 1) {
+            message = words[1].trim();
         }
-        switch (commandWords[0]) {
+
+        switch (commandWord) {
+
+        case "list":
+            return new ListCommand();
+
         case "todo":
-            if (commandWords.length == 1 || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            return new TodoCommand(commandWords[1].trim());
+            return new TodoCommand(message);
+
         case "event":
-            if (commandWords.length == 1 || commandWords[0].isBlank() || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            String[] messageWords = commandWords[1].split("/at ", 2);
+            String[] messageWords = message.split("/at ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
+
             return new EventCommand(messageWords[0].trim(), messageWords[1].trim());
+
         case "deadline":
-            if (commandWords.length == 1 || commandWords[0].isBlank() || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            messageWords = commandWords[1].split("/by ", 2);
+            messageWords = message.split("/by ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
             return new DeadlineCommand(messageWords[0].trim(), messageWords[1].trim());
+
         case "mark":
-            if (commandWords.length == 1 || commandWords[1].isBlank()) {
+            int serialNumber;
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
             try {
-                int serialNumber = Integer.parseInt(commandWords[1].trim());
-                return new MarkCommand(serialNumber);
+                serialNumber = Integer.parseInt(message);
             } catch (NumberFormatException e) {
                 throw new DukeException("Have you typed in your number correctly in numerals?");
             }
+            return new MarkCommand(serialNumber);
+
         case "unmark":
-            if (commandWords.length == 1 || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
             try {
-                int serialNumber = Integer.parseInt(commandWords[1].trim());
-                return new UnmarkCommand(serialNumber);
+                serialNumber = Integer.parseInt(message);
             } catch (NumberFormatException e) {
                 throw new DukeException("Have you typed in your number correctly in numerals?");
             }
+            return new UnmarkCommand(serialNumber);
+
         case "delete":
-            if (commandWords.length == 1 || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
             try {
-                int serialNumber = Integer.parseInt(commandWords[1].trim());
-                return new DeleteCommand(serialNumber);
+                serialNumber = Integer.parseInt(message);
             } catch (NumberFormatException e) {
                 throw new DukeException("Have you typed in your number correctly in numerals?");
             }
+            return new DeleteCommand(serialNumber);
+
         case "find":
-            if (commandWords.length == 1 || commandWords[1].isBlank()) {
+            if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            return new FindCommand(commandWords[1].trim());
+            return new FindCommand(message);
+
         default:
             throw new DukeException("Sorry, but I don't know what that means :-(");
         }
