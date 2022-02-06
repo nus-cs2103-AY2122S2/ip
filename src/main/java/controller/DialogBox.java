@@ -1,5 +1,4 @@
 package controller;
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -57,20 +56,48 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Get user's input and translate it to a dialog box.
+     *
+     * @param l Message from the user
+     * @param iv Image view to render the photos
+     * @return DialogBox component
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l.getText(), iv.getImage(), true);
     }
 
+    /**
+     * Get user's input and translate it to a dialog box.
+     *
+     * @param text String format of the message from the user
+     * @param img Image view to render the photos
+     * @return DialogBox component
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, true);
     }
 
+    /**
+     * Get bot's response and translate it to a dialog box.
+     *
+     * @param l Message to be displayed by the bot
+     * @param iv Image view to render the photos
+     * @return DialogBox component
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l.getText(), iv.getImage(), false);
         db.flip();
         return db;
     }
 
+    /**
+     * Get bot's response and translate it to a dialog box.
+     *
+     * @param text Message to be displayed by the bot
+     * @param img Image view to render the photos
+     * @return DialogBox component
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();

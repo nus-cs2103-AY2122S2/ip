@@ -4,7 +4,7 @@ import exception.DukeException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
-import task.Todo;
+import task.ToDo;
 import ui.Response;
 import ui.Ui;
 
@@ -14,7 +14,7 @@ import ui.Ui;
  */
 public class TodoCommand extends Command {
 
-    protected Task todo;
+    protected Task toDo;
 
     /**
      * Class constructor.
@@ -23,7 +23,7 @@ public class TodoCommand extends Command {
      * @param description Description of todo
      */
     public TodoCommand(String description) {
-        this.todo = new Todo(description);
+        this.toDo = new ToDo(description);
     }
 
     /**
@@ -36,15 +36,15 @@ public class TodoCommand extends Command {
      * @throws DukeException Throws exception related commands
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            tasks.add(todo);
+            tasks.add(toDo);
             storage.store(tasks);
             this.response = new Response(ui.getResponseMessage("todo"),
-                    ui.getTaskMessage(todo),
+                    ui.getTaskMessage(toDo),
                     ui.getTasksCountMessage(tasks));
         } catch (DukeException e) {
-            // e.printStackTrace();
+            throw new DukeException(e.getMessage());
         }
     }
 

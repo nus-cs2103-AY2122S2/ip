@@ -59,7 +59,7 @@ public class Deadline extends Task {
      *
      * @return New Date/Date format
      */
-    public String formatDeadline() {
+    public String formatDeadLine() {
         if (this.datetime != null) {
             return datetime.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
         } else {
@@ -74,6 +74,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formatDeadline() + ")";
+        return "[D]" + super.toString() + " (by: " + formatDeadLine() + ")";
     }
 }

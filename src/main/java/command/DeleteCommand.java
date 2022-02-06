@@ -33,8 +33,7 @@ public class DeleteCommand extends Command {
      * @param storage Storage to perform caching features
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.index > 0 && this.index <= tasks.size()) {
             String taskMessage = ui.getTaskMessage(tasks.get(index - 1));
             tasks.removeTask(this.index - 1);
@@ -44,7 +43,7 @@ public class DeleteCommand extends Command {
                         taskMessage,
                         ui.getTasksCountMessage(tasks));
             } catch (DukeException e) {
-                e.printStackTrace();
+                throw new DukeException(e.getMessage());
             }
         } else {
             this.response = new Response(ui.showInvalidRange());

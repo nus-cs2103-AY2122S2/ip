@@ -33,14 +33,18 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.index > 0 && this.index <= tasks.size()) {
-            Task task = tasks.get(index - 1);
-            task.unmark();
-            storage.store(tasks);
-            this.response = new Response(ui.getResponseMessage("unmark"),
-                    ui.getTaskMessage(task));
-        } else {
-            ui.showInvalidRange();
+        try {
+            if (this.index > 0 && this.index <= tasks.size()) {
+                Task task = tasks.get(index - 1);
+                task.unmark();
+                storage.store(tasks);
+                this.response = new Response(ui.getResponseMessage("unmark"),
+                        ui.getTaskMessage(task));
+            } else {
+                ui.showInvalidRange();
+            }
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 }

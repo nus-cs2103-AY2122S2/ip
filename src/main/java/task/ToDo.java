@@ -5,14 +5,14 @@ package task;
  * A generic task that supports any type of text as a description.
  * Distinguishes itself from an Event or Deadline.
  */
-public class Todo extends Task {
+public class ToDo extends Task {
 
     /**
      * Class constructor.
      *
      * @param description Description of todo
      */
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 

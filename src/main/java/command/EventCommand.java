@@ -36,7 +36,7 @@ public class EventCommand extends Command {
      * @throws DukeException Throws exception related commands
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.add(event);
             storage.store(tasks);
@@ -44,7 +44,7 @@ public class EventCommand extends Command {
                     ui.getTaskMessage(event),
                     ui.getTasksCountMessage(tasks));
         } catch (DukeException e) {
-            // e.printStackTrace();
+            throw new DukeException(e.getMessage());
         }
     }
 
