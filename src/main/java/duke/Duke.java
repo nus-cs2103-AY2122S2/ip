@@ -1,4 +1,7 @@
 package duke;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 import tasks.TaskList;
 
 /**
@@ -23,7 +26,6 @@ public class Duke {
         try {
             tasks1 = new TaskList(storage.readFromDukeFile());
         } catch (DukeException e) {
-            this.ui.showLoadingError();
             tasks1 = new TaskList();
         }
         this.tasks = tasks1;
@@ -34,7 +36,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return parser.parseInput(input).execute(tasks, ui, storage);
+            Command c = parser.parseInput(input);
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

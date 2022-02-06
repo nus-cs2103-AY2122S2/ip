@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 
 public class EventTest {
     private Event event;

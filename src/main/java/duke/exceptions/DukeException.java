@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /** Represents a duke exception that is thrown
  * when duke-related errors occur
@@ -11,6 +11,9 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorMessage) {
         super(errorMessage);
+    }
+
+    public DukeException() {
     }
 
     /**
