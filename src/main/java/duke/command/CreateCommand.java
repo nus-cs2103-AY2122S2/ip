@@ -70,13 +70,7 @@ public class CreateCommand extends Command {
             }
             String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
             try {
-                if (dateTimeSplit.length == 1) {
-                    newTask = new DeadlineTask(subSplit[0].trim(), dateTimeSplit[0]);
-                } else if (dateTimeSplit.length == 2) {
-                    newTask = new DeadlineTask(subSplit[0].trim(), dateTimeSplit[0], dateTimeSplit[1]);
-                } else {
-                    throw new DukeException(ERROR_INVALID_TIME);
-                }
+                newTask = createNewDeadlineTask(subSplit[0].trim(), dateTimeSplit);
             } catch (DateTimeException e) {
                 throw new DukeException(ERROR_INVALID_TIME);
             }
@@ -91,13 +85,7 @@ public class CreateCommand extends Command {
             }
             String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
             try {
-                if (dateTimeSplit.length == 1) {
-                    newTask = new EventTask(subSplit[0].trim(), dateTimeSplit[0]);
-                } else if (dateTimeSplit.length == 2) {
-                    newTask = new EventTask(subSplit[0].trim(), dateTimeSplit[0], dateTimeSplit[1]);
-                } else {
-                    throw new DukeException(ERROR_INVALID_TIME);
-                }
+                newTask = createNewEvent(subSplit[0].trim(), dateTimeSplit);
             } catch (DateTimeException e) {
                 throw new DukeException(ERROR_INVALID_TIME);
             }
@@ -105,5 +93,29 @@ public class CreateCommand extends Command {
         }
         Storage.saveToFile(tasks);
         return ui.getAddDeleteTaskSuccess(tasks, newTask, MESSAGE_TASKADD);
+    }
+
+    private DeadlineTask createNewDeadlineTask(String title, String[] dateTime) throws DukeException {
+        DeadlineTask newTask;
+        if (dateTime.length == 1) {
+            newTask = new DeadlineTask(title, dateTime[0]);
+        } else if (dateTime.length == 2) {
+            newTask = new DeadlineTask(title, dateTime[0], dateTime[1]);
+        } else {
+            throw new DukeException(ERROR_INVALID_TIME);
+        }
+        return newTask;
+    }
+
+    private EventTask createNewEvent(String title, String[] dateTime) throws DukeException {
+        EventTask newTask;
+        if (dateTime.length == 1) {
+            newTask = new EventTask(title, dateTime[0]);
+        } else if (dateTime.length == 2) {
+            newTask = new EventTask(title, dateTime[0], dateTime[1]);
+        } else {
+            throw new DukeException(ERROR_INVALID_TIME);
+        }
+        return newTask;
     }
 }
