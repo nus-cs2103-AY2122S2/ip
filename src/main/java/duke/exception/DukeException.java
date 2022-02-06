@@ -37,7 +37,7 @@ public class DukeException extends Exception {
                 throw new DukeException("Please key in a valid task name.\n");
             }
             DukeException.isDuplicatedTask(input.substring(6, index - 1).strip(), list);
-        } else {
+        } else if (taskType.equals("deadline")){
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/by'.\n");
             }
@@ -45,6 +45,8 @@ public class DukeException extends Exception {
                 throw new DukeException("Please key in a valid task name.\n");
             }
             DukeException.isDuplicatedTask(input.substring(9, index - 1).strip(), list);
+        } else {
+            throw new DukeException("Please use 'todo, deadline, event' to start adding tasks.\n");
         }
         if (index + 4 > input.length() || input.substring(index + 4).strip().equals("")) {
             throw new DukeException("Please key in a valid time.\n");

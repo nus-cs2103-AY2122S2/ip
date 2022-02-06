@@ -106,7 +106,7 @@ public enum Handlers {
             } else if (time.length == DATEANDTIME) {
                 task = new Deadline(false, input.substring(9, index - 1), date, time[3]);
             } else {
-                throw new DukeException("Time provided in incorrect format.");
+                throw new DukeException("Time provided in incorrect format.\n");
             }
             list.addTask(task);
             FileHandler.writeToFile(list);
