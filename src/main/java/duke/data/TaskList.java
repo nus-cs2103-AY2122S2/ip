@@ -1,13 +1,13 @@
 package duke.data;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import duke.task.Task;
 
 /**
  * Class holding list of tasks stored by
@@ -19,32 +19,32 @@ public class TaskList {
     private final Storage store;
 
     /** Internal list of tasks */
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
-    private TaskList(Storage store, ArrayList<Task> taskList) {
+    private TaskList(Storage store, ArrayList<Task> tasks) {
         this.store = store;
-        this.taskList = taskList;
+        this.tasks = tasks;
     }
 
     /**
-     * Return ArrayList of string description of each
+     * Returns ArrayList of string description of each
      * task in taskList.
      *
      * @return ArrayList of tasks description.
      */
     public ArrayList<String> getTaskDescriptions() {
-        return this.taskList.stream()
+        return this.tasks.stream()
                 .map(Task::getDescription)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
-     * Returns the length of taskList array.
+     * Returns the length of tasks array.
      *
-     * @return Size of taskList.
+     * @return Size of tasks ArrayList.
      */
     public int getSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
             }
         };
 
-        return this.taskList
+        return this.tasks
                 .stream()
                 .filter(taskFilter)
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -89,7 +89,7 @@ public class TaskList {
      * @param task Task to add to task list.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
         this.saveState();
     }
 
@@ -104,7 +104,7 @@ public class TaskList {
         if (!isValidIndex(index)) {
             throw new IllegalArgumentException("Invalid index for current list");
         }
-        Task task = this.taskList.remove(index);
+        Task task = this.tasks.remove(index);
         this.saveState();
         return task;
     }
@@ -120,7 +120,7 @@ public class TaskList {
         if (!isValidIndex(index)) {
             throw new IllegalArgumentException("Invalid index for current list");
         }
-        Task task = this.taskList.get(index);
+        Task task = this.tasks.get(index);
         task.markDone();
         this.saveState();
         return task;
@@ -137,7 +137,7 @@ public class TaskList {
         if (!isValidIndex(index)) {
             throw new IllegalArgumentException("Invalid index for current list");
         }
-        Task task = this.taskList.get(index);
+        Task task = this.tasks.get(index);
         task.unmarkDone();
         this.saveState();
         return task;
@@ -147,7 +147,7 @@ public class TaskList {
      * Saves current state of TaskList into backing store.
      */
     private void saveState() {
-        List<String> taskData = this.taskList.stream()
+        List<String> taskData = this.tasks.stream()
                 .map(task -> task.encodeTaskData())
                 .collect(Collectors.toList());
         try {
@@ -165,7 +165,7 @@ public class TaskList {
      * @return Boolean of whether index is valid.
      */
     private boolean isValidIndex(int index) {
-        return (0 <= index) && (index < this.taskList.size());
+        return (0 <= index) && (index < this.tasks.size());
     }
 
     private static ArrayList<Task> generateSavedTasks(ArrayList<String> data) {

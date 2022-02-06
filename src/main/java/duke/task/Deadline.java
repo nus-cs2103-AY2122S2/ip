@@ -10,9 +10,9 @@ import java.util.Date;
  * be completed.
  */
 public class Deadline extends Task {
-    static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
-    static final SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd MMM");
+    private static final SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd MMM");
 
     /** Deadline for current task */
     private final Date deadline;
