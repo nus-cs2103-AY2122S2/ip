@@ -18,7 +18,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt");
+        Duke duke = new Duke("../../../data/duke.txt");
+        assert !(duke == null) : "Duke should not be null";
         Application.launch(Ui.class, args);
         Duke.storage.save(Duke.tasks);
 
