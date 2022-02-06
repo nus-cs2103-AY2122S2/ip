@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.EOFException;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
@@ -147,8 +148,8 @@ public class TaskTest {
                 assertEquals("Test Description 1", task.getDescription());
             }, reference);
             fail();
-        } catch (IOException ignored) {
-            assertTrue(true);
+        } catch (IOException ex) {
+            assertTrue(ex instanceof EOFException);
         }
     }
 }
