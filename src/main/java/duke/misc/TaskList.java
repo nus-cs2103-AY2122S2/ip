@@ -57,6 +57,15 @@ public class TaskList {
     }
 
     /**
+     * Adds the task into the TaskList.
+     *
+     * @param task Task to be added.
+     */
+    public void addTasks(Task task) {
+        listOfTasks.add(task);
+        numberOfTasks++;
+    }
+    /**
      * Iterates through the list and prints out each task that is on the list.
      */
     public String display() {
