@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.TaskList;
 
 public class HelpCommand extends Command {
@@ -13,8 +14,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_ARGS);
         }
 
         String output = "Commands:\n";
@@ -32,11 +32,11 @@ public class HelpCommand extends Command {
         output += DeleteCommand.TRIGGER + ": delete task\n";
         output += ResetCommand.TRIGGER + ": clear task list\n";
 
-        output += UwuCommand.TRIGGER + ": UwU";
-        output += OwoCommand.TRIGGER + ": OwO";
+        output += UwuCommand.TRIGGER + ": UwU\n";
+        output += OwoCommand.TRIGGER + ": OwO\n";
 
         output += TerminateCommand.TRIGGER + ": terminate program";
 
-        return new CommandOutput(output, "/audio/wav/notification.wav");
+        return new CommandOutput(output, Sfx.SFX_COMMAND_HELP);
     }
 }

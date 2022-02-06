@@ -30,7 +30,7 @@ import java.io.IOException;
  * Task management chat bot.
  */
 public class ChatBot extends Application {
-    public static final String APPLICATION_NAME = "Delphine v1.0";
+    public static final String APPLICATION_NAME = "Daphne v1.0";
     public static final String SAVE_FILE = "./data/save_file";
 
     private final CommandList commandList;

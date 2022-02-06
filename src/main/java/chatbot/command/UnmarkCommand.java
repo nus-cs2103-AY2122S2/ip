@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
@@ -18,9 +19,9 @@ public class UnmarkCommand extends Command {
             Task task = taskList.get(index - 1);
             task.setDone(false);
             return new CommandOutput(String.format("Okay, I've marked this task as not yet done:\n  %s", task),
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_COMMAND_UNMARK);
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_INDEX);
         }
     }
 }

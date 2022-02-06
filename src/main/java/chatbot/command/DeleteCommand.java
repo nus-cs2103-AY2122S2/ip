@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
@@ -17,9 +18,9 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.remove(index - 1);
             return new CommandOutput(String.format("Okay. I've removed this task:\n  %s", task),
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_COMMAND_DELETE);
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_INDEX);
         }
     }
 }

@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
@@ -18,9 +19,9 @@ public class MarkCommand extends Command {
             Task task = taskList.get(index - 1);
             task.setDone(true);
             return new CommandOutput(String.format("Good job! I've marked this task as done:\n  %s", task),
-                    "/audio/wav/notification.wav");
+                    Sfx.SFX_COMMAND_MARK);
         } catch (Exception e) {
-            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_INDEX);
         }
     }
 }

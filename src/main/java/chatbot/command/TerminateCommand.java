@@ -1,5 +1,6 @@
 package chatbot.command;
 
+import chatbot.sfx.Sfx;
 import chatbot.task.TaskList;
 
 public class TerminateCommand extends Command {
@@ -13,9 +14,8 @@ public class TerminateCommand extends Command {
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
         if (input.length > 1) {
-            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT,
-                    "/audio/wav/notification.wav");
+            return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_ARGS);
         }
-        return new CommandOutput("Bye bye! I will see you again, won't I?", "/audio/wav/notification.wav", true);
+        return new CommandOutput("Bye bye! I will see you again, won't I?", Sfx.SFX_COMMAND_TERMINATE, true);
     }
 }
