@@ -23,13 +23,13 @@ public class Deadline extends Task {
         super(taskName);
         dateTime = dateTime.trim();
         String[] splitString = dateTime.split(" ");
-        if (splitString.length == 1) {
+        if (splitString.length == 1) { // Only date is given
             try {
                 this.date = LocalDate.parse(splitString[0]);
             } catch (Exception e) {
                 throw new DukeException("Invalid input into date");
             }
-        } else if (splitString.length == 2) {
+        } else if (splitString.length == 2) { // Date and time is given
             try {
                 this.date = LocalDate.parse(splitString[0]);
                 this.time = LocalTime.parse(splitString[1]);

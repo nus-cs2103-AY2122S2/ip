@@ -50,6 +50,7 @@ public class TaskList {
      */
     public void reset() {
         tasks.clear();
+        assert tasks.size() == 0;
     }
 
     /**
@@ -126,6 +127,7 @@ public class TaskList {
             System.out.println("Index out of bounds, please try again");
         } else {
             tasks.get(index - 1).setDone(true);
+            assert tasks.get(index-1).getDone() == true;
             printList();
         }
     }
@@ -140,6 +142,7 @@ public class TaskList {
             return "Index out of bounds, please try again";
         } else {
             tasks.get(index - 1).setDone(true);
+            assert tasks.get(index-1).getDone() == true;
             return guiPrintList();
         }
     }
@@ -154,6 +157,7 @@ public class TaskList {
             System.out.println("Index out of bounds, please try again");
         } else {
             tasks.get(index - 1).setDone(false);
+            assert tasks.get(index-1).getDone() == false;
             printList();
         }
     }
@@ -168,6 +172,7 @@ public class TaskList {
             return "Index out of bounds, please try again";
         } else {
             tasks.get(index - 1).setDone(false);
+            assert tasks.get(index-1).getDone() == false;
             return guiPrintList();
         }
     }

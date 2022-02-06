@@ -46,6 +46,7 @@ public class Storage {
                 try {
                     if (taskType.equals("T")) {
                         task = new Todo(taskLine[2]);
+                        assert task instanceof Todo;
                     } else if (taskType.equals("D")) {
                         String dateTime = taskLine[3];
                         //Time is added
@@ -53,6 +54,7 @@ public class Storage {
                             dateTime += " " + taskLine[4];
                         }
                         task = new Deadline(taskLine[2], dateTime);
+                        assert task instanceof Deadline;
                     } else if (taskType.equals("E")) {
                         String dateTime = taskLine[3];
                         //Time is added
@@ -60,6 +62,7 @@ public class Storage {
                             dateTime += " " + taskLine[4];
                         }
                         task = new Event(taskLine[2], dateTime);
+                        assert task instanceof Event;
                     } else {
                         throw new DukeException("Invalid task was read");
                     }

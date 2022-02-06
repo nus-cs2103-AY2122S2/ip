@@ -33,6 +33,8 @@ public class Parser {
             if (splitString.length < 2) {
                 System.out.println("Did you miss out the index in your input?");
             } else {
+                //Make sure the string input contains at least 2 parts, command and index
+                assert splitString.length >= 2;
                 try {
                     int index = Integer.parseInt(splitString[1]);
                     if (instr.equals("unmark")) {
@@ -53,6 +55,7 @@ public class Parser {
             if (splitString.length < 2) {
                 throw new DukeException("Please input the keyword(s) for find");
             }
+            assert splitString.length >= 2;
             String command = splitString[0];
             String text = splitString[1];
             if (command.equals("find")) {
@@ -70,6 +73,7 @@ public class Parser {
                 throw new DukeException("Description of task cannot be empty!");
             }
 
+            assert stringArray.length >= 2;
             String taskType = stringArray[0];
             String taskDetails = stringArray[1];
 
@@ -125,6 +129,7 @@ public class Parser {
             if (splitString.length < 2) {
                 return "Did you miss out the index in your input?";
             } else {
+                assert splitString.length >= 2;
                 try {
                     int index = Integer.parseInt(splitString[1]);
                     if (instr.equals("unmark")) {
@@ -145,6 +150,7 @@ public class Parser {
             if (splitString.length < 2) {
                 throw new DukeException("Please input the keyword(s) for find");
             }
+            assert splitString.length >= 2;
             String command = splitString[0];
             String text = splitString[1];
             if (command.equals("find")) {
@@ -162,6 +168,7 @@ public class Parser {
                 throw new DukeException("Description of task cannot be empty!");
             }
 
+            assert stringArray.length >= 2;
             String taskType = stringArray[0];
             String taskDetails = stringArray[1];
 
