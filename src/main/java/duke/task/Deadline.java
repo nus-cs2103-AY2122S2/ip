@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a user's deadline.
  */
 public class Deadline extends Task {
-    private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
+    private static final DateTimeFormatter DATE_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
     protected LocalDate d;
     protected LocalTime t;
     private final boolean hasDate;
@@ -64,7 +64,7 @@ public class Deadline extends Task {
     private String getDate() {
         assert hasDate : "deadline should have date";
 
-        return d.format(dateOut);
+        return d.format(DATE_OUT);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Deadline extends Task {
     private String getTime() {
         assert hasTime : "deadline should have time";
 
-        return t.format(timeOut);
+        return t.format(DATE_OUT);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Deadline extends Task {
     private String getDateTime() {
         assert hasDate && hasTime : "deadline should have date and time";
 
-        return d.format(dateOut) + " " + t.format(timeOut);
+        return d.format(DATE_OUT) + " " + t.format(TIME_OUT);
     }
 
     /**
@@ -119,6 +119,36 @@ public class Deadline extends Task {
         return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | "
                 + (hasDate ? d.toString() : "0") + " | "
                 + (hasTime ? t.toString() : "0");
+    }
+
+    /**
+     * Produces the deadline task using data from the save file.
+     *
+     * @param data an array containing the data
+     * @return a deadline task containing the information from the data
+     */
+    public static Deadline getDeadlineFromData(String[] data) {
+        String done = data[1];
+        String description = data[2];
+        String date = data[3];
+        String time = data[4];
+
+        Deadline d;
+        if (!date.equals("0") && !time.equals("0")) {
+            d = new Deadline(description,
+                    LocalDate.parse(date),
+                    LocalTime.parse(time));
+        } else if (!date.equals("0")) {
+            d = new Deadline(description, LocalDate.parse(date));
+        } else {
+            d = new Deadline(description, LocalTime.parse(time));
+        }
+
+        if (done.equals("1")) {
+            d.markAsDone();
+        }
+
+        return d;
     }
 
     /**

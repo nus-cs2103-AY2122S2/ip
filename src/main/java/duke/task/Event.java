@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a user's event.
  */
 public class Event extends Task {
-    private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
+    private static final DateTimeFormatter DATE_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
     protected LocalDate d;
     protected LocalTime t;
     private final boolean hasDate;
@@ -64,8 +64,7 @@ public class Event extends Task {
     private String getDate() {
         assert hasDate : "event should have date";
 
-        return d.format(dateOut);
-    }
+        return d.format(DATE_OUT);    }
 
     /**
      * Retrieves the time of the event.
@@ -75,7 +74,7 @@ public class Event extends Task {
     private String getTime() {
         assert hasTime : "event should have time";
 
-        return t.format(timeOut);
+        return t.format(TIME_OUT);
     }
 
     /**
@@ -86,7 +85,7 @@ public class Event extends Task {
     private String getDateTime() {
         assert hasDate && hasTime : "event should have date and time";
 
-        return d.format(dateOut) + " " + t.format(timeOut);
+        return d.format(DATE_OUT) + " " + t.format(TIME_OUT);
     }
 
     /**
@@ -119,6 +118,36 @@ public class Event extends Task {
         return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | "
                 + (hasDate ? d.toString() : "0") + " | "
                 + (hasTime ? t.toString() : "0");
+    }
+
+    /**
+     * Produces the event task using data from the save file.
+     *
+     * @param data an array containing the data
+     * @return an event task containing the information from the data
+     */
+    public static Event getEventFromData(String[] data) {
+        String done = data[1];
+        String description = data[2];
+        String date = data[3];
+        String time = data[4];
+
+        Event e;
+        if (!date.equals("0") && !time.equals("0")) {
+            e = new Event(description,
+                    LocalDate.parse(date),
+                    LocalTime.parse(time));
+        } else if (!date.equals("0")) {
+            e = new Event(description, LocalDate.parse(date));
+        } else {
+            e = new Event(description, LocalTime.parse(time));
+        }
+
+        if (done.equals("1")) {
+            e.markAsDone();
+        }
+
+        return e;
     }
 
     /**
