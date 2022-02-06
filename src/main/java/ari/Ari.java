@@ -47,6 +47,5 @@ public class Ari {
             store.save(toDoList);
         }
         ui.displayMessage(cmd.execute());
-
     }
 }

@@ -1,5 +1,4 @@
-
-import ari.Ari;
+package ari;
 
 /**
  * Starts the running of Ari
