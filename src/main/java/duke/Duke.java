@@ -1,28 +1,16 @@
 package duke;
 
+import duke.commands.Command;
 import duke.info.exception.DukeException;
 import duke.info.task.Calendar;
-
-import duke.commands.Command;
-
 import duke.parser.Parser;
-
 import duke.storage.Storage;
-
 import duke.ui.Ui;
 
 public class Duke {
     private Storage storage;
     private Calendar calendar;
     private Ui ui;
-
-    /**
-     * Runs the Duke program using the run() method specified.
-     * @param args - command line arguments
-     */
-    public static void main (String[] args) {
-        new Duke("tasks.txt").run();
-    }
 
     /**
      * Constructs a Duke object with a new Ui and storage handler. The filePath
@@ -40,6 +28,14 @@ public class Duke {
             ui.showLoadingError();
             this.calendar = new Calendar();
         }
+    }
+
+    /**
+     * Runs the Duke program using the run() method specified.
+     * @param args - command line arguments
+     */
+    public static void main (String[] args) {
+        new Duke("tasks.txt").run();
     }
 
     /**

@@ -1,10 +1,12 @@
 package duke.ui;
 
+import java.util.Scanner;
+
+import duke.info.task.Calendar;
 import duke.info.task.Task;
 import duke.utils.Text;
-import duke.info.task.Calendar;
 
-import java.util.Scanner;
+
 
 public class Ui {
 
@@ -91,26 +93,34 @@ public class Ui {
      * @param addedTask - the task that was added
      * @param numOfTasks - the total number of tasks
      */
-    public void showTaskAdded(Task addedTask, int numOfTasks) { System.out.println(String.format(Text.TEXT_TASK_ADDED, addedTask, numOfTasks)); }
+    public void showTaskAdded(Task addedTask, int numOfTasks) {
+        System.out.println(String.format(Text.TEXT_TASK_ADDED, addedTask, numOfTasks));
+    }
 
     /**
      * Prints the success message indicating the specified
      * task was marked as complete in the calendar.
      * @param taskString - toString() of the task marked complete
      */
-    public void showTaskComplete(String taskString) { System.out.println(String.format(Text.TEXT_MARKED, taskString)); }
+    public void showTaskComplete(String taskString) {
+        System.out.println(String.format(Text.TEXT_MARKED, taskString));
+    }
 
     /**
      * Prints the success message indicating the specified task
      * was marked as yet to be completed in the calendar.
      * @param taskString - toString() of the task marked incomplete
      */
-    public void showTaskIncomplete(String taskString) { System.out.println(String.format(Text.TEXT_UNMARKED, taskString)); }
+    public void showTaskIncomplete(String taskString) {
+        System.out.println(String.format(Text.TEXT_UNMARKED, taskString));
+    }
 
     /**
      * Prints the success message indicating the specified task has
      * been deleted from the calendar.
      * @param taskString - toString() of the task that was deleted
      */
-    public void showTaskDeleted(String taskString) { System.out.println(String.format(Text.TEXT_DELETED, taskString)); }
+    public void showTaskDeleted(String taskString) {
+        System.out.println(String.format(Text.TEXT_DELETED, taskString));
+    }
 }

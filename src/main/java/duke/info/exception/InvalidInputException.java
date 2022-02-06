@@ -8,5 +8,7 @@ public class InvalidInputException extends DukeException {
      * @param str - the detail message
      */
 
-    public InvalidInputException(String str) { super(str); }
+    public InvalidInputException(String str) {
+        super(str);
+    }
 }
