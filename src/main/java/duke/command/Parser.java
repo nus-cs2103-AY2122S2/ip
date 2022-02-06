@@ -36,9 +36,12 @@ public class Parser {
         try {
             validate(inputString, action, args, taskList);
         } catch (DukeException de) {
+            assert !de.getMessage().equals(null);   // Ensures that the DukeException that is thrown has been assigned a message
             ui.print(de.getMessage());
             return 1;
         }
+
+        assert args.length != 0;    // Ensures that the argument list is not empty
 
         switch(action) {
         case "bye":

@@ -27,6 +27,8 @@ public class Ui {
      * @param d The image for duke
      */
     public Ui(VBox v, Image d) {
+        assert d != null : "Image cannot be null";
+        assert v != null : " VBox cannot be null";
         this.v = v;
         this.d = d;
     }
