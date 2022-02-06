@@ -120,6 +120,7 @@ public class Duke {
      */
     private void run() {
         Storage storageHandler = new Storage();
+        Parser parser;
         this.tasks = (ArrayList<Task>) storageHandler.loadTasksFromFile();
 
         String botName = "Kizer";
@@ -129,9 +130,10 @@ public class Duke {
 
         boolean canContinue = true;
         while (canContinue) {
-            String originalInput = sc.nextLine();
-            String[] inputArray = originalInput.split(" ");
-            String command = inputArray[0];
+            parser = new Parser(sc.nextLine());
+            String command = parser.getCommand();
+            String[] inputArray = parser.getInputArray();
+            String originalInput = parser.getOriginalInput();
 
             switch (command) {
                 case "bye":
