@@ -10,13 +10,13 @@ public class Duke {
 
         // Init saved tasks
         try {
-            TaskList.loadTasks();
+            Storage.loadTasks();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Init file if it is not there
-        File f = new File("tasklist.txt");
+        File f = new File("Storage.txt");
         if (!f.isFile()) {
             try {
                 f.createNewFile();
@@ -40,7 +40,7 @@ public class Duke {
         }
 
         try {
-            TaskList.saveTaskList();
+            Storage.saveTaskList();
         } catch (IOException e) {
             e.printStackTrace();
         }

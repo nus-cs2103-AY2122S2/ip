@@ -42,7 +42,7 @@ public class AddTaskCommand extends Command {
         // Set indicated completion state
         newTask.isComplete = this.isComplete;
 
-        // Adding task to TaskList
+        // Adding task to tasklist
         TaskList.taskList.add(newTask);
 
         Ui.printAddTask(newTask);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class DeleteCommand extends Command {
     private String input; // Parameters: 1
-    public ArrayList<Task> taskList = TaskList.taskList;
+    public ArrayList<Task> Storage = TaskList.taskList;
     private int index; // Index of target task
 
     public DeleteCommand(String i) {

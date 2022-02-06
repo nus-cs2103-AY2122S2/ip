@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     @Override
     public void execute() {
-        ArrayList<Task> taskList = TaskList.taskList;
+        ArrayList<Task> Storage = TaskList.taskList;
 
         // Formatting task list to be printed
-        String formattedTaskList = formatTaskList(taskList);
+        String formattedTaskList = formatTaskList(TaskList.taskList);
         Ui.printTaskList(formattedTaskList);
     }
 
