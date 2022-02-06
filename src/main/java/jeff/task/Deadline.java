@@ -1,7 +1,14 @@
+package jeff.task;
+
+import jeff.main.JeffException;
+
+import jeff.parser.DateParse;
+import jeff.parser.TimeParse;
+
 /**
- * Event class is a task customised to store date of the Event.
+ * Deadline class is a task customised to store end date of deadlines.
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected String dateInfo;
     protected String originalDate;
@@ -9,13 +16,13 @@ public class Event extends Task {
     protected TimeParse time;
 
     /**
-     * Constructor for Event class.
+     * Constructor for Deadline class.
      *
-     * @param description Name of the Event.
+     * @param description Name of the Deadline.
      * @param dateInfo Information for which this task is due.
      * @throws JeffException When no available format is available to parse dateInfo.
      */
-    public Event(String description, String dateInfo) throws JeffException {
+    public Deadline(String description, String dateInfo) throws JeffException {
         super(description);
         this.originalDate = dateInfo;
         String[] str = dateInfo.split(" ", 2);
@@ -27,10 +34,10 @@ public class Event extends Task {
     /**
      * Returns the identity of this Task class.
      *
-     * @return E for Event.
+     * @return D for Deadline.
      */
     public String whatType() {
-        return "E";
+        return "D";
     }
 
     /**
@@ -44,12 +51,12 @@ public class Event extends Task {
     }
 
     /**
-     * toString method specific for Event class,
+     * toString method specific for Deadline class,
      * inherits toString() fromTask class while adding additional information.
-     * Like the type of task, [E], and date information.
+     * Like the type of task, [D], and date information.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateInfo + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateInfo + ")";
     }
 }

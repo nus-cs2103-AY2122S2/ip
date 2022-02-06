@@ -1,3 +1,15 @@
+package jeff.main;
+
+import jeff.command.Command;
+
+import jeff.parser.Parser;
+
+import jeff.storage.Storage;
+
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
  * Jeff class is a task manager with a variety of commands.
  * To see the full list of commands, check the readme.txt.

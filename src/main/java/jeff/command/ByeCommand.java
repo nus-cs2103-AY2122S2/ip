@@ -1,3 +1,11 @@
+package jeff.command;
+
+import jeff.storage.Storage;
+
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
  * ByeCommand class is a Command that contains instructions
  * to run when user wants to exit the program.

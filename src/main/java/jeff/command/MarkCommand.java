@@ -1,29 +1,39 @@
+package jeff.command;
+
+import jeff.main.JeffException;
+
+import jeff.storage.Storage;
+
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
- * UnmarkCommand class is a Command that contains instructions
- * to run when user wants to mark a specific task as not done.
+ * MarkCommand class is a Command that contains instructions
+ * to run when user wants to mark a specific task as done.
  */
-public class UnmarkCommand extends Command {
+public class MarkCommand extends Command {
 
     private int index;
 
     /**
-     * Constructor of UnmarkCommand.
+     * Constructor of MarkCommand.
      *
-     * @param body Position of the task to mark as not done.
+     * @param body Position of the task to mark as done.
      */
-    public UnmarkCommand(String body) {
+    public MarkCommand(String body) {
         this.index = Integer.parseInt(body) - 1;
     }
 
     /**
-     * Marks the Task as not done according
+     * Marks the Task as done according
      * to index given by the user if available.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
-     * @throws JeffException When index of task to mark as not done
-     *                       is out of bounds or file cannot be saved.
+     * @throws JeffException When index of task to mark as done is
+     *                       out of bounds or file cannot be saved.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
@@ -31,12 +41,12 @@ public class UnmarkCommand extends Command {
             tasks.getAt(index);
         } catch (IndexOutOfBoundsException e) {
             int temp = index + 1;
-            throw new JeffException(" ☹ OOPS!!! The task you want to mark as not done at index "
+            throw new JeffException(" ☹ OOPS!!! The task you want to mark as done at index "
                     + temp + " is out of bounds,"
                     + "please double check the index number");
         }
-        tasks.unmark(index);
-        ui.showUnmark(tasks.getString(index));
+        tasks.mark(index);
+        ui.showMark(tasks.getString(index));
         storage.save(tasks);
     }
 

@@ -1,3 +1,13 @@
+package jeff.storage;
+
+import jeff.main.JeffException;
+
+import jeff.task.Deadline;
+import jeff.task.Event;
+import jeff.task.Task;
+import jeff.task.TaskList;
+import jeff.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -110,17 +120,17 @@ public class Storage {
                 switch (currTask.whatType()) {
                     case "T":
                         str = "T | ";
-                        suffix = currTask.description;
+                        suffix = currTask.getDescription();
                         break;
                     case "D":
                         str = "D | ";
                         Deadline tempD = (Deadline) currTask;
-                        suffix = tempD.description + " | " + tempD.getOriginalDate();
+                        suffix = tempD.getDescription() + " | " + tempD.getOriginalDate();
                         break;
                     case "E":
                         str = "E | ";
                         Event tempE = (Event) currTask;
-                        suffix = tempE.description + " | " + tempE.getOriginalDate();
+                        suffix = tempE.getDescription() + " | " + tempE.getOriginalDate();
                         break;
 
                 }

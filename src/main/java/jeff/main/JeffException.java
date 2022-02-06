@@ -1,3 +1,5 @@
+package jeff.main;
+
 /**
  * JeffException class is a custom exception class to handle
  * problems that might occur.

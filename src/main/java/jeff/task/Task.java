@@ -1,3 +1,5 @@
+package jeff.task;
+
 /**
  * Task class acts as a format for other Task classes.
  */
@@ -23,6 +25,15 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * Returns a string representation of the description.
+     *
+     * @return Description of this task.
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

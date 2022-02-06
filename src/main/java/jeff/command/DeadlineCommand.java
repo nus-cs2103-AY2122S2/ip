@@ -1,3 +1,15 @@
+package jeff.command;
+
+import jeff.main.JeffException;
+
+import jeff.storage.Storage;
+
+import jeff.task.Deadline;
+import jeff.task.Task;
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
  * DeadlineCommand class is a Command that contains instructions
  * to run when user wants to add a new Deadline task.

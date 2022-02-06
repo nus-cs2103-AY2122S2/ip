@@ -1,3 +1,5 @@
+package jeff.ui;
+
 import java.util.Scanner;
 
 /**
@@ -56,11 +58,11 @@ public class Ui {
     }
 
     public void showMark(String currTask){
-        System.out.println("Nice! I've marked this task as done:\n  " + addPrefix(currTask));
+        System.out.println("Nice! I've marked this task as done:\n" + addPrefix(currTask));
     }
 
     public void showUnmark(String currTask) {
-        System.out.println("OK, I've marked this task as not done yet:\n  " + addPrefix(currTask));
+        System.out.println("OK, I've marked this task as not done yet:\n" + addPrefix(currTask));
     }
 
     public void showAdded(String currTask, int size) {

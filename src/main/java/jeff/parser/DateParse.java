@@ -1,3 +1,7 @@
+package jeff.parser;
+
+import jeff.main.JeffException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +39,7 @@ public class DateParse {
      * Constructor for DateParse
      *
      * @param str String to be parsed into a LocalDate object
-     * @throws JeffException
+     * @throws JeffException When no available format is available to parse date input.
      */
     public DateParse(String str) throws JeffException {
         knownPatterns.add(format1);
@@ -65,17 +69,11 @@ public class DateParse {
             }
         }
 
-        // When the input string cannot be parsed, return JeffException
         if ((!isFound) && curr == 16) {
             throw new JeffException("Sorry but Jeff does not understand the date format given\n"
                     + "Please check the readme.txt for the acceptable formats.");
         }
-//        this.helper();
     }
-
-//    private LocalDate helper() {
-//        return date;
-//    }
 
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));

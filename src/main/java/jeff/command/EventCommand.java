@@ -1,3 +1,15 @@
+package jeff.command;
+
+import jeff.main.JeffException;
+
+import jeff.storage.Storage;
+
+import jeff.task.Event;
+import jeff.task.Task;
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
  * EventCommand class is a Command that contains instructions
  * to run when user wants to add a new Event task.

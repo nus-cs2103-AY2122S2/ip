@@ -1,3 +1,13 @@
+package jeff.command;
+
+import jeff.main.JeffException;
+
+import jeff.storage.Storage;
+
+import jeff.task.TaskList;
+
+import jeff.ui.Ui;
+
 /**
  * DeleteCommand class is a Command that contains instructions
  * to run when user wants to delete a specific task.
