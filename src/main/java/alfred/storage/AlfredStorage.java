@@ -2,7 +2,6 @@ package alfred.storage;
 
 import alfred.exceptions.InvalidIndexException;
 import alfred.task.Task;
-import alfred.ui.AlfredUserInterface;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -28,7 +27,7 @@ public class AlfredStorage {
     public AlfredStorage(String folderPath, String dataPath) {
         this.dataPath = dataPath;
         this.folderPath = folderPath;
-        this.taskList = this.loadFromFile();
+        this.taskList = this.loadOrCreateTaskList();
     }
 
     /**
@@ -41,6 +40,14 @@ public class AlfredStorage {
         return this.listToString(this.taskList);
     }
 
+    private String listToString(ArrayList<Task> taskList) {
+        assert taskList != null;
+        String out = "";
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            out += i + ". " + taskList.get(i - 1).toString() + "\n";
+        }
+        return out;
+    }
 
     /**
      * Updates internal data state to mark the defined task
@@ -84,24 +91,6 @@ public class AlfredStorage {
     }
 
     /**
-     * Updates the internal data state to add a Task object
-     * to the list and calls the UI to print a response.
-     *
-     * @param task Task object.
-     * @param ui   AlfredInterface object used by Alfred to handle inputs
-     *             and outputs with the user.
-     */
-    public void addTaskAndPrint(Task task, AlfredUserInterface ui) {
-        assert this.taskList != null;
-        this.taskList.add(task);
-        String out = "Yes sir, I've added this task.\n";
-        out += task.toString() + "\n";
-        out += this.summarizeList();
-        ui.sandwichAndPrint(out);
-        this.saveToFile();
-    }
-
-    /**
      * Updates the internal data state to add a Task object.
      *
      * @param task Task object.
@@ -134,6 +123,7 @@ public class AlfredStorage {
     public String find(String text) {
         assert this.taskList != null;
         ArrayList<Task> matches = new ArrayList<Task>();
+
         // iterate through arraylist to find match
         for (int i = 0; i < this.taskList.size(); i++) {
             Task task = this.taskList.get(i);
@@ -141,6 +131,8 @@ public class AlfredStorage {
                 matches.add(task);
             }
         }
+
+        // check to determine response
         if (matches.size() == 0) {
             return "None found.";
         }
@@ -148,14 +140,6 @@ public class AlfredStorage {
 
     }
 
-    private String listToString(ArrayList<Task> taskList) {
-        assert taskList != null;
-        String out = "";
-        for (int i = 1; i < taskList.size() + 1; i++) {
-            out += i + ". " + taskList.get(i - 1).toString() + "\n";
-        }
-        return out;
-    }
 
     private void checkValidListIndex(int taskId) throws InvalidIndexException {
         assert this.taskList != null;
@@ -174,40 +158,48 @@ public class AlfredStorage {
         return "Now you have " + this.taskList.size() + " task(s) in the your list.";
     }
 
-    private ArrayList<Task> loadFromFile() {
-        ArrayList<Task> arr = new ArrayList<Task>();
-
-        // try to load from file
+    private ArrayList<Task> loadOrCreateTaskList() {
+        ArrayList<Task> taskList;
         try {
-            File file = new File(this.dataPath);
-            Scanner sc = new Scanner(file);
-
-            // if can load, create list
-            String line;
-            Task task;
-            while (sc.hasNextLine()) {
-                line = sc.nextLine();
-                task = Task.parseSavedInput(line);
-                arr.add(task); // FIFO
-            }
-            return arr;
-
+            taskList = this.loadFromFile();
         } catch (FileNotFoundException fe) {
-            // create empty file
-            try {
-                System.out.println("Alfred.txt not created. Will create at: " + this.dataPath);
-                File directory = new File(this.folderPath);
-                directory.mkdir();
-                File output = new File(this.dataPath);
-                output.createNewFile();
+            try { // create empty file
+                this.createDataDirectoryAndFile();
+                taskList = new ArrayList<Task>();
             } catch (IOException ioe) {
                 System.out.println(
                         "Something went wrong trying to save the file: " + ioe.getMessage()
                                 + "\nPlease restart.");
+                return null;
             }
-            return arr;
         }
+        return taskList;
+    }
 
+    private ArrayList<Task> loadFromFile() throws FileNotFoundException {
+
+        // load file
+        File file = new File(this.dataPath);
+        Scanner sc = new Scanner(file);
+
+        // put into arraylist
+        String line;
+        Task task;
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        while (sc.hasNextLine()) {
+            line = sc.nextLine();
+            task = Task.parseSavedInput(line);
+            taskList.add(task); // FIFO
+        }
+        return taskList;
+    }
+
+    private void createDataDirectoryAndFile() throws IOException {
+        System.out.println("Alfred.txt not created. Will create at: " + this.dataPath);
+        File directory = new File(this.folderPath);
+        directory.mkdir();
+        File output = new File(this.dataPath);
+        output.createNewFile();
     }
 
     private void saveToFile() {
@@ -222,6 +214,7 @@ public class AlfredStorage {
                 fw.write(this.taskList.get(i).taskToSaveString());
             }
             fw.close();
+
         } catch (FileNotFoundException fe) { // create if needed
             System.out.println("Something went wrong trying to load the file: " + fe.getMessage());
 
@@ -230,4 +223,5 @@ public class AlfredStorage {
                     "Something went wrong trying to save the file: " + ioe.getMessage());
         }
     }
+
 }

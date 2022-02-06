@@ -32,10 +32,14 @@ public class ListCommand extends Command {
      */
     @Override
     public String response(AlfredUserInterface ui, AlfredStorage storage) {
+
+        // get tasks from storage object
         String listDescription = storage.listToString();
         if (listDescription.length() == 0) {
             return "Sir, you have no tasks.";
         }
+
+        // construct response
         String out = "";
         out += "Sir, here are the things you need to do:\n";
         out += listDescription;

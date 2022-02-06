@@ -60,10 +60,11 @@ public class ToDoCommand extends Command {
 
         assert this.description != null;
 
-        // validity check
+        // check that description is not an empty string
         if ((this.description.length() < 1) || this.description.split(" ").length == 0) {
             throw new MissingInputException();
         }
+
         // modify data state
         Task todo = new ToDo(this.description);
         storage.addTask(todo);

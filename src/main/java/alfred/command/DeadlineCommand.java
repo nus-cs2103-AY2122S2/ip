@@ -15,6 +15,8 @@ import java.util.Arrays;
  */
 public class DeadlineCommand extends Command {
     private String[] arguments;
+    private static final int COMMAND_CHAR_OFFSET = 8;
+    private static final String COMMAND_ARG_CHAR = " /by ";
 
     /**
      * Constructs a DeadlineCommand object. Removes the first 8 characters,
@@ -25,7 +27,9 @@ public class DeadlineCommand extends Command {
      *              as "deadline".
      */
     public DeadlineCommand(String input) {
-        this.arguments = input.substring(8).split(" /by ");
+
+        this.arguments = input.substring(DeadlineCommand.COMMAND_CHAR_OFFSET)
+                .split(DeadlineCommand.COMMAND_ARG_CHAR);
         this.arguments = Arrays.stream(this.arguments).filter(in -> !in.isEmpty())
                 .toArray(String[]::new); // filter away empty strings
     }
@@ -64,20 +68,23 @@ public class DeadlineCommand extends Command {
 
         assert this.arguments != null;
 
-        // check validity of data
+        // check that only description and date
         if (this.arguments.length != 2) {
             throw new InvalidInputException();
         }
+
+        // check that second argument is a valid date format
         try {
             LocalDateTime.parse(this.arguments[1]);
         } catch (DateTimeParseException dte) {
             throw new InvalidDateTimeException();
         }
+
         // modify data state
         Task event = new Deadline(this.arguments[0], this.arguments[1]);
         storage.addTask(event);
 
-        // response
+        // get response
         String out = "Yes sir, I've added this task.\n";
         out += event.toString() + "\n";
         out += storage.summarizeList();

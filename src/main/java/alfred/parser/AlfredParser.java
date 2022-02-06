@@ -33,14 +33,14 @@ public class AlfredParser {
         assert input != null;
 
         // read in arguments
-        String[] arguments = input.split(" ");
-        String command = arguments[0];
+        String[] arguments = input.split(" "); // expected split in console input
+        String command = arguments[0]; // expect first word as command
 
         // case by case, check for valid input
         if (input.contains(Task.FORMAT_SPLIT)) {
             throw new IllegalCharacterException();
         }
-        if ((command.equals("list")) && (arguments.length == 1)) {
+        if ((command.equals("list")) && (arguments.length == 1)) { // exactly one word expected
             return new ListCommand();
         } else if (command.equals("mark")) {
             return new MarkCommand(input);

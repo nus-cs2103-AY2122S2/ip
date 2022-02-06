@@ -47,11 +47,11 @@ public class FindCommand extends Command {
 
         assert this.text != null;
 
-        // validity check
+        // check that there is a valid regex string to search for by removing spaces
         if ((this.text.length() < 1) || this.text.split(" ").length == 0) {
             throw new MissingInputException();
         }
-        // do
+        // find from storage
         String out = "Here are the matching tasks, sir:\n";
         out += storage.find(this.text);
         return out;
