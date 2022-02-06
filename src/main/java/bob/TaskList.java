@@ -93,4 +93,20 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Lists all Tasks in the TaskList that contains a keyword.
+     *
+     * @param keyword String used to find matching Tasks.
+     */
+    public void find(String keyword) {
+        Ui.find();
+        int count = 1;
+        for (Task task : tasks) {
+            if (task.getDescription().equals(keyword)) {
+                System.out.println("    " + count++ + "." + task);
+            }
+        }
+        Ui.printLine();
+    }
 }
