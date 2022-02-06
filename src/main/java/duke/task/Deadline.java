@@ -17,6 +17,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate date) {
         super(description, 'D');
+
+        assert description != null : "Deadline[Deadline] description cannot be null.";
+        assert description.length() > 0 : "Deadline[Deadline] description must contain data.";
+        assert date != null : "Deadline[Deadline] date cannot be null.";
+
         this.date = date;
     }
 

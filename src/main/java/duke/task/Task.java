@@ -16,6 +16,9 @@ public class Task {
      * @param type type of the task.
      */
     public Task(String description, char type) {
+        assert description != null : "Task[Task] description cannot be null.";
+        assert description.length() > 0 : "Task[Task] description must contain data.";
+
         this.description = description;
         this.completed = false;
         this.type = type;

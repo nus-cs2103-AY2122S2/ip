@@ -23,6 +23,9 @@ public class Parser {
      * @param fullCommand fullCommand is the entire string of the user input.
      */
     public Parser(String fullCommand) {
+        assert fullCommand != null : "Parser[Parser] fullCommand cannot be null.";
+        assert fullCommand.length() > 0 : "Parser[Parser] fullCommand must contain data.";
+
         this.fullCommand = fullCommand;
     }
 
@@ -59,6 +62,9 @@ public class Parser {
     }
 
     private boolean isAdd(String command) {
+        assert command != null : "Parser[isAdd] command cannot be null.";
+        assert command.length() > 0 : "Parser[isAdd] command must contain data.";
+
         return command.equalsIgnoreCase("todo")
                 || command.equalsIgnoreCase("deadline")
                 || command.equalsIgnoreCase("event");

@@ -11,6 +11,9 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description, 'T');
+
+        assert description != null : "Todo[Todo] description cannot be null.";
+        assert description.length() > 0 : "Todo[Todo] description must contain data.";
     }
 
     /**

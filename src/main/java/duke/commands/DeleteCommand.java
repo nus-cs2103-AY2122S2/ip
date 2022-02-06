@@ -20,6 +20,9 @@ public class DeleteCommand extends Command {
      * @param args args holds the task number to be deleted.
      */
     public DeleteCommand(String args) {
+        assert args != null : "DeleteCommand[DeleteCommand] args cannot be null.";
+        assert args.length() > 0 : "DeleteCommand[DeleteCommand] args must contain data.";
+
         this.args = args;
     }
 
@@ -30,6 +33,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "DeleteCommand[execute] taskList cannot be null.";
+        assert storage != null : "DeleteCommand[execute] storage cannot be null.";
+
         try {
             if (this.args.length() == 0) {
                 throw new IllegalArgumentException();
