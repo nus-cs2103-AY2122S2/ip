@@ -84,6 +84,48 @@ public class Parser {
         }
     }
 
+    private static Command handleDeadline(String input, String command) throws DukeException {
+        String[] inputSlash = input.split("/");
+        String description = inputSlash[FIRST_INPUT].substring(DEADLINE_OFFSET).trim();
+        checkDescriptionLength(description, command);
+
+        String durationInput = inputSlash[SECOND_INPUT].substring(INPUT_OFFSET);
+        String[] splitDuration = durationInput.split(" ");
+
+        try {
+            LocalDate date = formatDate(splitDuration[FIRST_INPUT]);
+            LocalTime time = formatTime(splitDuration[SECOND_INPUT]);
+            return new AddCommand(new Deadline(description, date, time));
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The expected input form is deadline xxx /by yyyy-mm-dd hhmm");
+        }
+    }
+
+    private static Command handleEvent(String input, String command) throws DukeException {
+        String[] inputSlash = input.split("/");
+        String description = inputSlash[FIRST_INPUT].substring(EVENT_OFFSET).trim();
+        checkDescriptionLength(description, command);
+
+        String durationInput = inputSlash[SECOND_INPUT].substring(INPUT_OFFSET);
+        String[] splitDuration = durationInput.split(" ");
+
+        try {
+            LocalDate date = formatDate(splitDuration[FIRST_INPUT]);
+            LocalTime startTime = formatTime(splitDuration[SECOND_INPUT]);
+            LocalTime endTime = formatTime(splitDuration[THIRD_INPUT]);
+            return new AddCommand(new Event(description, date, startTime, endTime));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The expected input form is event xxx /at yyyy-mm-dd hhmm hhmm");
+        }
+    }
+
+    private static Command handleTodo(String input, String command) throws DukeException {
+        String description = input.substring(TODO_OFFSET).trim();
+        checkDescriptionLength(description, command);
+        return new AddCommand(new Todo(description));
+    }
+
     /**
      * Returns the respective command from user input.
      * @param input user input. Eg, "todo run".
@@ -100,43 +142,13 @@ public class Parser {
             return new PrintCommand();
 
         } else if (command.equals("todo")) {
-            String description = input.substring(TODO_OFFSET).trim();
-            checkDescriptionLength(description, command);
-            return new AddCommand(new Todo(description));
+            return handleTodo(input, command);
 
         } else if (command.equals("deadline")) {
-            String[] inputSlash = input.split("/");
-            String description = inputSlash[FIRST_INPUT].substring(DEADLINE_OFFSET).trim();
-            checkDescriptionLength(description, command);
-
-            String durationInput = inputSlash[SECOND_INPUT].substring(INPUT_OFFSET);
-            String[] splitDuration = durationInput.split(" ");
-
-            try {
-                LocalDate date = formatDate(splitDuration[FIRST_INPUT]);
-                LocalTime time = formatTime(splitDuration[SECOND_INPUT]);
-                return new AddCommand(new Deadline(description, date, time));
-
-            } catch (DateTimeParseException e) {
-                throw new DukeException("The expected input form is deadline xxx /by yyyy-mm-dd hhmm");
-            }
+            return handleDeadline(input, command);
 
         } else if (command.equals("event")) {
-            String[] inputSlash = input.split("/");
-            String description = inputSlash[FIRST_INPUT].substring(EVENT_OFFSET).trim();
-            checkDescriptionLength(description, command);
-
-            String durationInput = inputSlash[SECOND_INPUT].substring(INPUT_OFFSET);
-            String[] splitDuration = durationInput.split(" ");
-
-            try {
-                LocalDate date = formatDate(splitDuration[FIRST_INPUT]);
-                LocalTime startTime = formatTime(splitDuration[SECOND_INPUT]);
-                LocalTime endTime = formatTime(splitDuration[THIRD_INPUT]);
-                return new AddCommand(new Event(description, date, startTime, endTime));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("The expected input form is event xxx /at yyyy-mm-dd hhmm hhmm");
-            }
+            return handleEvent(input, command);
 
         } else if (command.equals("mark")) {
             return new MarkCommand(Integer.parseInt(inputSplit[SECOND_INPUT]));
