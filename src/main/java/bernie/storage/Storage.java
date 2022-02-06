@@ -39,7 +39,8 @@ public class Storage {
     public String loadTasks(CommandHandler commandHandler) {
         try {
             if (tasksFile.length() == 0) {
-                return "Nothing on your previous list!";
+                String emptyListMsg = "Nothing on your previous list!";
+                return emptyListMsg;
             }
             if (tasksFile.exists() && dataDir.exists()) {
                 StringBuilder s = new StringBuilder();
@@ -53,7 +54,10 @@ public class Storage {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
-                return "Didn't find any existing task files, created one for you!";
+                boolean fileExists = tasksFile.exists();
+                assert fileExists;
+                String noFileMsg = "Didn't find any existing task files, created one for you!";
+                return noFileMsg;
             }
         } catch (IOException e) {
             return e.getMessage();
@@ -93,16 +97,16 @@ public class Storage {
      */
     public String saveTasks(TaskList tasks) {
         try {
-            if (dataDir.exists() && tasksFile.exists()) {
-                save(tasks);
-                return "Successfully saved current tasks.";
-            } else {
+            if (!dataDir.exists() || !tasksFile.exists()) {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
-                save(tasks);
-                return "Successfully saved current tasks.";
+                boolean fileExists = tasksFile.exists();
+                assert fileExists;
             }
+            save(tasks);
+            String successMsg = "Successfully saved current tasks.";
+            return successMsg;
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -119,7 +123,8 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(tasksFile);
         BufferedWriter writer = new BufferedWriter(fileWriter);
         if (tasks.isEmpty()) {
-            writer.write("NOTHING! :D");
+            String noTasksMsg = "NOTHING! :D";
+            writer.write(noTasksMsg);
         }
         for (int i = 0; i < tasks.getSize(); i++) {
             Task currentTask = tasks.getTask(i);
