@@ -75,9 +75,10 @@ public class Task {
     }
 
     /**
-     * @override
+     *
      * @return String version of task, with marked and name. E.g. [X] Task vs [✓] Task
      */
+    @Override
     public String toString() {
         if (this.isMarked) {
             String marked = "[✓] ";

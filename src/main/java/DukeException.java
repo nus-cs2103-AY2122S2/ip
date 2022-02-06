@@ -15,6 +15,11 @@ import duke.task.Deadline;
  */
 public class DukeException extends Exception{
     private String errorMessage;
+
+    /**
+     * Constructs a DukeException. DukeException handles wrong inputs by user
+     * @param errorMessage Error message to be printed
+     */
     public DukeException (String errorMessage) {
         this.errorMessage = errorMessage;
     }

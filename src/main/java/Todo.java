@@ -25,9 +25,10 @@ public class Todo extends Task {
     }
 
     /**
-     * @override
+     *
      * @return String of Todo task, eg: [T][X] Todo
      */
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

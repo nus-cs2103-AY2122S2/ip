@@ -47,10 +47,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * @override
+     *
      * @return String of Deadline task, eg [D][X] Deadline (by:XX) vs [D][✓] Deadline (by;XX)
      */
-
+    @Override
     public String toString() {
         String dueDateAndTime = (this.dueTime == null) ? dateConverterToString(this.dueDate) : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
         return "[D]" + super.toString() + " (by:" + dueDateAndTime + ")"; }

@@ -75,7 +75,8 @@ public class InputHandler {
                 printAddTaskMessage(newDeadline);
                 return false;
             } else {
-                throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty. Correct usage: deadline [task] /by [time]");
+                throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty. " +
+                        "Correct usage: deadline [task] /by [time]");
             }
 
         case "list":
@@ -118,8 +119,9 @@ public class InputHandler {
         case "bye":
             return true;
         default:
-            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task], event [task] /at [time],"
-            + " deadline [task] /by [time], mark [index], unmark [index], delete [index], bye");
+            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: " +
+                    "todo [task], event [task] /at [time],"
+                    + " deadline [task] /by [time], mark [index], unmark [index], delete [index], bye");
         }
 
     }

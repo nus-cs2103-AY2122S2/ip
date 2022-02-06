@@ -48,9 +48,10 @@ public class Event extends Task {
     }
 
     /**
-     * @override
+     *
      * @return String of Event task, eg: [E][X] Event (at:) vs [E] [✓] Event (at:)
      */
+    @Override
     public String toString() {
         String dueDateAndTime = (this.dueTime == null) ? dateConverterToString(this.dueDate) : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
         return "[E]" + super.toString() + " (at:" + dueDateAndTime + ")"; }
