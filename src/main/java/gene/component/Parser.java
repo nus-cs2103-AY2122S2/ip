@@ -19,7 +19,8 @@ public class Parser {
     private final static String UNMARKKEY = "unmark\\s\\d";
     private final static String TODOKEY = "^todo.*$";
     private final static String EVENTKEY = "^event.*$";
-    private final static  String DEADLINEKEY = "^deadline.*$";
+    private final static String DEADLINEKEY = "^deadline.*$";
+    private final static String FINDKEY = "find\\s\\w";
 
     public Parser() {
     }
@@ -63,6 +64,10 @@ public class Parser {
 
         if (isExitCommand(toParse)) {
             return new ExitCommand();
+        }
+
+        if (isFindCommand(toParse)) {
+            return new FindCommand(toParse);
         }
 
         else {
@@ -157,5 +162,16 @@ public class Parser {
      */
     public static boolean isDeadlineCommand(String nextKey) {
         return nextKey.matches(DEADLINEKEY);
+    }
+
+    /**
+     * Method that figures out if input matches the description of find
+     * command. uses regex as described above
+     *
+     * @param nextKey the user input
+     * @return true if user input corresponds to find command
+     */
+    public static boolean isFindCommand(String nextKey) {
+        return nextKey.matches(FINDKEY);
     }
 }

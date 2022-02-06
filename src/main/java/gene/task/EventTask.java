@@ -52,4 +52,8 @@ public class EventTask extends Task {
         ) + ")";
         return "[E]" + mark + " " + this.taskTitle + " " + deadlineText;
     }
+
+    public boolean containsKeyword(String keyword) {
+        return this.taskTitle.contains(keyword);
+    }
 }

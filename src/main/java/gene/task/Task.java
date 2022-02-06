@@ -25,4 +25,6 @@ public abstract class Task {
     }
 
     public abstract String toString();
+
+    public abstract  boolean containsKeyword(String keyword);
 }

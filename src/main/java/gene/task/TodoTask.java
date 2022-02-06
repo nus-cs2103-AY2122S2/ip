@@ -43,4 +43,8 @@ public class TodoTask extends Task {
         String toReturn = "[T]" + mark + " " + this.taskTitle;
         return toReturn;
     }
+
+    public boolean containsKeyword(String keyword) {
+        return this.taskTitle.contains(keyword);
+    }
 }

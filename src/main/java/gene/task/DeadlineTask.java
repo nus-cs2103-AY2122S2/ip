@@ -49,4 +49,8 @@ public class DeadlineTask extends Task {
         String toReturn = "[D]" + mark + " " + this.taskTitle + " " + deadlineText;
         return toReturn;
     }
+
+    public boolean containsKeyword(String keyword) {
+        return this.taskTitle.contains(keyword);
+    }
 }
