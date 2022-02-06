@@ -23,38 +23,18 @@ public class Duke {
         tasks = new TaskList(storage.retrieveTaskList());
     }
 
-//    /**
-//     * Runs the program until exit is issued.
-//     */
-//    public void run() {
-//        ui.showWelcomeMessage();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String input = ui.getUserInput();
-//                Command c = Parser.parse(input);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showMessage(e.getMessage());
-//            }
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input The full user input string.
+     * @return Duke's response to the user input.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return ui.showMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 }

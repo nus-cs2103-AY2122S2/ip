@@ -27,9 +27,4 @@ public class AddCommand extends Command {
         storage.saveTaskList(tasks);
         return ui.showMessage(MESSAGE + "\n  " + task.toString() + "\n" + tasks.printTaskCount());
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

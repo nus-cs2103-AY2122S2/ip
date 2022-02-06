@@ -26,9 +26,4 @@ public class MarkCommand extends Command {
         storage.saveTaskList(tasks);
         return ui.showMessage(MESSAGE + "\n  " + tasks.getTaskString(index));
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

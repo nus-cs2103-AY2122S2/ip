@@ -13,9 +13,4 @@ public class ExitCommand extends Command {
         storage.saveTaskList(tasks);
         return ui.showExitMessage();
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

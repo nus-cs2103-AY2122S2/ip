@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * Constructs a deadline task.
      *
      * @param description Task description.
-     * @param by The date time of the deadline.
+     * @param by The date time of the deadline in dd/mm/yyyy hhmm.
      * @param isDone If the task has is done or not.
      */
     public Deadline(String description, String by, boolean isDone) {

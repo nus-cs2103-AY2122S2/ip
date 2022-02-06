@@ -27,9 +27,4 @@ public class DeleteCommand extends Command {
         storage.saveTaskList(tasks);
         return ui.showMessage(MESSAGE + "\n  " + t.toString() + "\n" + tasks.printTaskCount());
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
