@@ -27,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Formatted output for a confirmation of a new added task
+     * Formatted output for confirmation of a new added task
      *
      * @param task Newly added task
      */
@@ -38,6 +38,9 @@ public class Ui {
         System.out.println(Ui.line());
     }
 
+    /**
+     * Formatted output for confirmation of program exit
+     */
     public static void printExit() {
         String EXIT = "Duke terminated";
         System.out.println(Ui.line());
@@ -45,9 +48,21 @@ public class Ui {
         System.out.println(Ui.line());
     }
 
+    /**
+     * Formatted output for printing the task list to the user
+     *
+     * @param formattedTaskList Formatted task list from the task list array
+     */
     public static void printTaskList(String formattedTaskList) {
         System.out.println(Ui.line());
         System.out.println(formattedTaskList);
+        System.out.println(Ui.line());
+    }
+
+    public static void printMarkTask(Task task) {
+        System.out.println(Ui.line());
+        System.out.println("Task marked as done:");
+        System.out.println(task.toString());
         System.out.println(Ui.line());
     }
 

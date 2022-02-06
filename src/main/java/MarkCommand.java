@@ -18,7 +18,7 @@ public class MarkCommand extends Command {
         String taskString = taskList.get(index).toString();
 
         output += Duke.line();
-        output += Duke.newLine(Duke.indent("Task(s) marked as done: ",1));
+        output += Duke.newLine(Duke.indent("Task(s) marked as done: ", 1));
         output += Duke.indent("", 2);
         output += Duke.newLine(taskString);
         output += Duke.line();
@@ -29,11 +29,10 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute() {
-        taskList.get(index).markAsDone();
+        Task task = taskList.get(index);
+        task.markAsDone();
 
-        // Console prints
-        String output = formatOutput();
-        System.out.println(output);
+        Ui.printMarkTask(task);
 
     }
 }
