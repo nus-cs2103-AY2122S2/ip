@@ -1,5 +1,6 @@
 package bob;
 
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -45,9 +46,10 @@ public class Parser {
             case "delete":
                 int idxDel = Integer.parseInt(userInput.split(" ")[1]);
                 Task currTaskDel = tasks.remove(idxDel - 1);
+                tasksIsDiff = true;
+
                 System.out.println("Noted. I've removed this task:\n" + currTaskDel);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                tasksIsDiff = true;
                 break;
             case "todo":
                 Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
@@ -92,6 +94,8 @@ public class Parser {
             System.out.println("There is no such item! :0");
         } catch (NumberFormatException e) {
             System.out.println("Please use a valid integer! 12345!");
+        } catch (DateTimeParseException e) {
+            System.out.println("Please input the time in the correct format! yyyy-mm-ddThh:mm:ss");
         }
     }
 
