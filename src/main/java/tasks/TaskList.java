@@ -3,13 +3,16 @@ package tasks;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import duke.DukeException;
 import duke.Storage;
+import duke.TextUi;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
 
 
 public class TaskList {
 
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final TextUi ui = new TextUi();
 
     /**
      * Instantiates a taskList with a list of tasks
@@ -34,8 +37,7 @@ public class TaskList {
         Task preview = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
         Storage.writeToDukeFile();
-        return "Otsukaresamadeshita! You have finally completed one task.\n"
-                + preview;
+        return ui.showDeleteMsg(preview);
     }
 
     /**
@@ -47,20 +49,22 @@ public class TaskList {
     public static String markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
         if (mark) {
-            toSet.markIsDone();
-            tasks.set(taskId - 1, toSet);
-            Storage.writeToDukeFile();
-            return "Sugoi! I have marked this task as done!\n"
-                    + tasks.get(taskId - 1).toString();
+            if (!toSet.isDone) {
+                toSet.markIsDone();
+                tasks.set(taskId - 1, toSet);
+                Storage.writeToDukeFile();
+                return ui.showMarkDoneMsg(toSet);
+            } else {
+                throw new TaskException("DONE");
+            }
         } else {
             if (toSet.isDone) {
                 toSet.markUndone();
                 tasks.set(taskId - 1, toSet);
                 Storage.writeToDukeFile();
-                return "Daijoubu! I have unmarked this task for you!\n"
-                        + tasks.get(taskId - 1).toString();
+                return ui.showMarkUndoneMsg(toSet);
             } else {
-                throw new DukeException("This task has yet to be done!");
+                throw new TaskException("UNDONE");
             }
         }
     }
@@ -73,8 +77,7 @@ public class TaskList {
     public static String addTask(Task task) throws DukeException {
         tasks.add(task);
         Storage.writeToDukeFile();
-        return "You now have a total of "
-                + tasks.size() + " tasks in your list! Subarashii!";
+        return ui.showAddMsg(tasks.size());
     }
 
     /**
@@ -82,7 +85,7 @@ public class TaskList {
      */
     public static String listTasks() {
         if (tasks.size() == 0) {
-            return "Empty much!";
+            return ui.showEmptyMsg();
         }
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -97,7 +100,7 @@ public class TaskList {
      */
     public static String listTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            return "Empty much!";
+            return ui.showEmptyMsg();
         }
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -127,7 +130,7 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
-        return "This is what we found! \n" + listTasks(matchingTasks);
+        return ui.showFindTaskMsg(listTasks(matchingTasks));
     }
 
 
