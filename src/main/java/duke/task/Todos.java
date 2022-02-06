@@ -36,13 +36,19 @@ public class Todos extends Tasks {
         return new Todos(super.getName(), false);
     }
 
-    // Save to database format
+    /**
+     *
+     * @return
+     */
     public String toDatabaseString() {
         return "T | " + (super.getCompletion() ? "X" : " ")
                 + " | " + super.getName() + "\n";
     }
 
-    // toString returning Todos
+    /**
+     *
+     * @return
+     */
     public String toString() {
         return "[T][" + (this.getCompletion() ? "X" : " ")
                 + "] " + super.getName();

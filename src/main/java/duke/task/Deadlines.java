@@ -12,12 +12,24 @@ import java.time.format.DateTimeParseException;
 public class Deadlines extends Tasks {
     private final LocalDate deadline; // Deadline to complete deadline duke.task
 
-    // Constructor
+    /**
+     *
+     * @param taskName
+     * @param deadline
+     * @throws DateTimeParseException
+     */
     public Deadlines(String taskName, String deadline) throws DateTimeParseException {
         super(taskName);
         this.deadline = LocalDate.parse(deadline);
     }
 
+    /**
+     *
+     * @param taskName
+     * @param completion
+     * @param deadline
+     * @throws DateTimeParseException
+     */
     public Deadlines(String taskName, boolean completion, String deadline) throws DateTimeParseException {
         super(taskName, completion);
         this.deadline = LocalDate.parse(deadline);
@@ -51,12 +63,22 @@ public class Deadlines extends Tasks {
     }
 
     // Save to database format
+
+    /**
+     *
+     * @return
+     */
     public String toDatabaseString() {
         return "D | " + (this.getCompletion() ? "X" : " ") + " | "
                 + super.getName() + " | " + deadline + "\n";
     }
 
     // toString returning duke.task
+
+    /**
+     *
+     * @return
+     */
     public String toString() {
         return "[D][" + (this.getCompletion() ? "X" : " ") + "] "
                 + super.getName() + " (by: " + deadline + ")";

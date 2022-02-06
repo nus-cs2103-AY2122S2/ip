@@ -10,11 +10,20 @@ public class Tasks {
     private boolean hasCompleted; // Completion of duke.task
 
     // Constructor for Task
+    /**
+     *
+     * @param taskName
+     */
     public Tasks(String taskName) {
         this.name = taskName;
         this.hasCompleted = false;
     }
 
+    /**
+     *
+     * @param taskName
+     * @param completion
+     */
     public Tasks(String taskName, boolean completion) {
         this.name = taskName;
         this.hasCompleted = completion;

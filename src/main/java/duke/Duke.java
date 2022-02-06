@@ -3,17 +3,26 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
 import duke.command.Commands;
-import duke.ui.Ui;
 import duke.parser.Parser;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
+/**
+ * Represents the main program of a bot named DockerHawker. The main program is represented
+ * by a <code>Ui</code> object, a <code>TaskList</code> object, and a <code>Storage</code> object.
+ * These objects serve to facilitate, parse, and execute valid inputs provided by the user
+ */
 public class Duke {
 
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     *
+     * @param databasePath
+     */
     public Duke(String databasePath) {
         ui = new Ui();
         storage = new Storage(databasePath);
@@ -25,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     */
     public void run() {
         ui.welcomeUser();
         boolean isExit = false;
@@ -51,8 +63,13 @@ public class Duke {
         ui.closePrinter();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //new Duke("./src/main/java/duke/data/DukeDatabase.txt").run();
-        new Duke("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/Individual_Project/src/main/java/duke/data/DukeDatabase.txt").run();
+        new Duke("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/main/java/duke/data/DukeDatabase.txt").run();
     }
 }

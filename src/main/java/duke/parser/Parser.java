@@ -1,6 +1,13 @@
 package duke.parser;
-
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Commands;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Represents a parser that makes sense of the command provided by the user.

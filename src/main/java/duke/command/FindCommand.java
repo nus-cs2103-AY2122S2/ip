@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Tasks;
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
-import java.util.ArrayList;
-
+/**
+ *
+ */
 public class FindCommand extends Commands {
 
     public static final String COMMAND_WORDS = "find";
@@ -19,11 +19,22 @@ public class FindCommand extends Commands {
         this.arguments = arguments;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isExit() {
         return IS_EXIT;
     }
 
+    /**
+     *
+     * @param tasks An arraylist of tasks reflective of the current state in the database.
+     * @param ui A class that controls the user-interface of the user.
+     * @param storage A class that is in-charge of writing, appending, and reading the database.
+     * @return
+     */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println(tasks.queryTasks(arguments));

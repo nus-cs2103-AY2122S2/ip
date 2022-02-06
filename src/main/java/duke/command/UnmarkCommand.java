@@ -1,8 +1,7 @@
 package duke.command;
-
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command used to un-complete a <code>Tasks</code> object. A <code>UnmarkCommand</code>
@@ -13,7 +12,7 @@ public class UnmarkCommand extends Commands {
     public static final String COMMAND_WORDS = "unmark";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
     public static final String FAILURE_MESSAGE = "    'Unmark' Command Executed Unsuccessfully";
-    private static boolean IS_EXIT = false;
+    private static final boolean IS_EXIT = false;
     private final String arguments; // In the form of user duke.command
 
     public UnmarkCommand(String arguments) {
@@ -45,8 +44,8 @@ public class UnmarkCommand extends Commands {
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String trimmedArgument = arguments.trim();
-            if (tasks.marksTask(storage,
-                    (Integer.parseInt(trimmedArgument) - 1), false)) {
+            if (tasks.marksTask(storage, (
+                    Integer.parseInt(trimmedArgument) - 1), false)) {
                 return new CommandResult(SUCCESS_MESSAGE);
             }
         } catch (IndexOutOfBoundsException err) {

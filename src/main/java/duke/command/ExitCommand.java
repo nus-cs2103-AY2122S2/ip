@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command used to end the program. An <code>ExitCommand</code> object corresponds to

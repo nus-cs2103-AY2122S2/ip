@@ -1,24 +1,37 @@
 package duke.storage;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Tasks;
 import duke.task.Todos;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class StorageStub extends Storage {
 
+    /**
+     *
+     * @param databasePath
+     */
     public StorageStub(String databasePath) {
-        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
+        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
     }
 
+    /**
+     *
+     */
     public StorageStub() {
-        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
+        super("C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/test/java/duke/data/DukeDatabaseStub.txt");
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Tasks> preloadTaskList() {
         ArrayList<Tasks> taskList = new ArrayList<>();
         taskList.add(new Todos("Todo over"));

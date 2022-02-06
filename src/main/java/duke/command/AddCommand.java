@@ -1,14 +1,15 @@
 package duke.command;
 
-import duke.ui.Ui;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.task.Deadlines;
-import duke.task.Tasks;
-import duke.task.Todos;
-import duke.task.Events;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.storage.Storage;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Tasks;
+import duke.task.Todos;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command generalised for the addition of tasks. A <code>AddCommand</code> object corresponds to
@@ -19,13 +20,18 @@ public class AddCommand extends Commands {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DEADLINE = "deadline";
     public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE
-            = "    'Add' Command Executed Unsuccessfully";
+    public static final String FAILURE_MESSAGE =
+            "    'Add' Command Executed Unsuccessfully";
 
     private static final boolean IS_EXIT = false;
     private final String commandWord;
     private final String arguments; // In the form of user duke.command
 
+    /**
+     *
+     * @param commandWord
+     * @param arguments
+     */
     public AddCommand(String commandWord, String arguments) {
         this.commandWord = commandWord;
         this.arguments = arguments;
@@ -57,19 +63,23 @@ public class AddCommand extends Commands {
         ArrayList<Tasks> createdTaskList = new ArrayList<>();
         try {
             switch (commandWord) {
-                case COMMAND_TODO:
-                    createdTaskList.add(new Todos(arguments));
-                    break;
 
-                case COMMAND_EVENT:
-                    createdTaskList.add(new Events(arguments.split(" /at ", 2)[0],
-                            arguments.split(" /at ", 2)[1]));
-                    break;
+            case COMMAND_TODO:
+                createdTaskList.add(new Todos(arguments));
+                break;
 
-                case COMMAND_DEADLINE:
-                    createdTaskList.add(new Deadlines(arguments.split(" /by ", 2)[0],
-                            arguments.split(" /by ", 2)[1]));
-                    break;
+            case COMMAND_EVENT:
+                createdTaskList.add(new Events(arguments.split(" /at ", 2)[0],
+                        arguments.split(" /at ", 2)[1]));
+                break;
+
+            case COMMAND_DEADLINE:
+                createdTaskList.add(new Deadlines(arguments.split(" /by ", 2)[0],
+                        arguments.split(" /by ", 2)[1]));
+                break;
+
+            default:
+                break;
             }
 
             if (createdTaskList.size() > 0) {
@@ -85,8 +95,8 @@ public class AddCommand extends Commands {
         } catch (DateTimeParseException err) {
             System.out
                     .println(
-                            "    Addition of tasks unsuccessful, ensure that the date is valid, " +
-                                    "and goes by the format of (YYYY-MM-DD).");
+                            "    Addition of tasks unsuccessful, ensure that the date is valid, "
+                                    + "and goes by the format of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
     }
