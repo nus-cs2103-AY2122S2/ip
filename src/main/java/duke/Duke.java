@@ -35,6 +35,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command cmd = Parser.parseCommand(input);
+
+        // ensures cmd is not null so that it can be executed
+        assert cmd != null;
         String response = cmd.execute(tasks, ui, storage);
         Parser.setIsExit(cmd.isExit());
         return response;

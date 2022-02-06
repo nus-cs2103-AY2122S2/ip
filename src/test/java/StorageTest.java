@@ -11,8 +11,8 @@ import duke.task.ToDo;
 
 public class StorageTest {
 
-    private final Storage validStorage = new Storage("data/.test.dat");
-    private final Storage invalidStorage = new Storage("data/.invalid.dat");
+    private Storage validStorage = new Storage("data/.test.dat");
+    private Storage invalidStorage = new Storage("data/.invalid.dat");
 
     /**
      * Test to determine if {@link Storage#read()} works as intended.

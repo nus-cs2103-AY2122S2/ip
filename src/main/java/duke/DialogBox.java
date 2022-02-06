@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        InputStream fontStream = this.getClass().getResourceAsStream("/font/Hasklig-Regular.ttf");
+        Font font = Font.loadFont(fontStream, 14);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,7 +41,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setWrapText(true);
-        dialog.setFont(new Font("Hasklig", 14));
+        dialog.setFont(font);
 
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
         clip.setArcWidth(256);
@@ -62,7 +65,7 @@ public class DialogBox extends HBox {
      * @return the user dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var userDb = new DialogBox(text, img);
+        var userDb = new DialogBox(text + "    ", img);
         userDb.setMinHeight(Region.USE_PREF_SIZE);
         return userDb;
     }
