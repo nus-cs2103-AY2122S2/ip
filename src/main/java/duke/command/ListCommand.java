@@ -24,7 +24,7 @@ public class ListCommand extends Command {
         } else {
             String res = "Here are the tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
-                res += "\n" + tasks.get(i);
+                res += "\n  " + (i + 1) + ". " + tasks.get(i);
             }
             return res;
         }
