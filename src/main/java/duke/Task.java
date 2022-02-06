@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     protected String input;
     public boolean isComplete = false;
@@ -32,7 +34,7 @@ public class Task {
             return "[ ]";
         }
     }
-    
+
 
     /**
      * Returns description of task

@@ -1,3 +1,5 @@
+package duke;
+
 public class CustomTask extends Task {
     public CustomTask(String type, boolean isComplete, String input) {
         super(input);

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Prints bye message, terminating command for Duke.main()
  */

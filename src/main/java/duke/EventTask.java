@@ -1,24 +1,19 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package duke;
 
-public class DeadlineTask extends Task {
-
-    LocalDate date;
-
-    public DeadlineTask(String input) {
+public class EventTask extends Task {
+    public EventTask(String input) {
         super(input);
-        this.type = "deadline";
-        this.date = this.getDate();
+        this.type = "event";
         this.updateDescription();
     }
 
     /**
-     * Format DeadlineTask description into display format for Duke
+     * Format EventTask description into display format for Duke
      */
     private void updateDescription() {
         this.description += this.getInfo();
-        this.description += "(by: ";
-        this.description += this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        this.description += "(at: ";
+        this.description += this.getDate();
         this.description += ")";
     }
 
@@ -27,14 +22,14 @@ public class DeadlineTask extends Task {
      *
      * @return Integer index
      */
-    private int findDeadlineIndex() {
-        int index = this.input.indexOf("/by "); // "/by" as delimiting character for events
+    private int findEventIndex() {
+        int index = this.input.indexOf("/at "); // "/at" as delimiting character for events
         try {
             if (index == -1) {
                 throw new DukeException();
             }
         } catch (DukeException e) {
-            System.out.println("No /by date specified.");
+            System.out.println("No /at date specified.");
             System.exit(2);
         }
         return index;
@@ -46,7 +41,7 @@ public class DeadlineTask extends Task {
      * @return Task information
      */
     private String getInfo() {
-        int index = this.findDeadlineIndex();
+        int index = this.findEventIndex();
         String info = this.input.substring(0, index);
 
         return info;
@@ -57,12 +52,13 @@ public class DeadlineTask extends Task {
      *
      * @return Deadline date string
      */
-    private LocalDate getDate() {
-        int index = this.findDeadlineIndex() + 4;
+    private String getDate() {
+        int index = this.findEventIndex() + 4; // Offset of the string "/at "
         String date = this.input.substring(index);
-        LocalDate localDate = LocalDate.parse(date);
 
-        return localDate;
+        return date;
     }
 
 }
+
+

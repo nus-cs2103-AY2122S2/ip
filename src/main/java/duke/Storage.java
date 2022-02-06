@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 
 public class Storage {
@@ -5,7 +7,7 @@ public class Storage {
      * Loads existing tasks into the tasklist array (for use at start of program)
      */
     public static void loadTasks() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("tasklist.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("./tasklist.txt"));
         String currentLine;
         while ((currentLine = reader.readLine()) != null) {
             // Getting task type
@@ -37,7 +39,7 @@ public class Storage {
      * Writes the current task list into tasklist.txt
      */
     public static void saveTaskList() throws IOException {
-        File f = new File("tasklist.txt");
+        File f = new File("./tasklist.txt");
         f.delete(); // Delete current copy
         f.createNewFile();
 

@@ -1,6 +1,7 @@
+package duke;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -16,7 +17,7 @@ public class Duke {
         }
 
         // Init file if it is not there
-        File f = new File("Storage.txt");
+        File f = new File("./tasklist.txt");
         if (!f.isFile()) {
             try {
                 f.createNewFile();

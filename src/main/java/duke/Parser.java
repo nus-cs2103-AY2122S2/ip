@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Decides which type of command to generate given user input
  */
