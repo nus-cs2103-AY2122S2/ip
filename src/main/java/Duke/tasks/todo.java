@@ -7,6 +7,6 @@ public class todo extends Task{
 
     @Override
     public String toString() {
-        return String.format("T|%s|%s", this.finished(), super.toString());
+        return String.format("T | %s | %s", this.finished(), super.toString());
     }
 }

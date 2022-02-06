@@ -9,7 +9,7 @@ import Duke.tasks.todo;
 public class TaskList {
     static final String LIST = "Here are the things the covenent are after\n";
     static final String MARK = "We've completed these objectives\n";
-    static final String UNMARK = "The covenent have reclaimed these locations\n";
+    static final String UNMARK = "The covenant have reclaimed these locations\n";
     static final String ADDED = "Just one more thing to do\n";
     static final String DELETED = "It's wiped off the map\n";
 
@@ -49,7 +49,7 @@ public class TaskList {
     public void addTodo(String item) {
         todo newtodo = new todo(item);
         this.tasklist.add(newtodo);
-        System.out.println(ADDED + newtodo.toString());
+        System.out.println(ADDED + newtodo);
     }
     public void addTask(Task task) {
         this.tasklist.add(task);
@@ -60,13 +60,16 @@ public class TaskList {
     }
 
     public void addDeadline(String[] item) throws DukeException{
-        Deadline newDeadline = new Deadline(item[0], Parser.convert(item[1]));
+        Deadline newDeadline = new Deadline(item[0], Parser.convert1(item[1]));
+        //System.out.println(newDeadline);
         this.tasklist.add(newDeadline);
         System.out.println(ADDED + newDeadline);
     }
 
     public void addEvent(String[] item) throws DukeException{
-        Event newEvent = new Event(item[0], Parser.convert(item[1]));
+        //System.out.println(item[1]);
+        Event newEvent = new Event(item[0], Parser.convert1(item[1]));
+        //System.out.println(newEvent);
         this.tasklist.add(newEvent);
         System.out.println(ADDED + newEvent);
     }

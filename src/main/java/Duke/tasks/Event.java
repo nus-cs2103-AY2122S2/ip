@@ -1,18 +1,17 @@
 package Duke.tasks;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Event extends Task{
-    private LocalDate time;
+    Date date;
 
-    public Event(String item, LocalDate time) {
+    public Event(String item, Date date) {
         super(item);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), 
-            this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
+        return String.format("E | %s | %s | %s", this.getStatusIcon(), super.toString(),
+            this.date);
     }
 }

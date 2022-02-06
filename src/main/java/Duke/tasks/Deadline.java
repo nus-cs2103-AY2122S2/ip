@@ -1,18 +1,17 @@
 package Duke.tasks;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Deadline extends Task{
-    LocalDate date;
+    Date date;
 
-    public Deadline(String item, LocalDate date) {
+    public Deadline(String item, Date date) {
         super(item);
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), 
-            this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
+        return String.format("D | %s | %s | %s", this.getStatusIcon(), super.toString(),
+                this.date);
     }
 }

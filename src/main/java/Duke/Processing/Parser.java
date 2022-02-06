@@ -1,16 +1,30 @@
 package Duke.Processing;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import Duke.Exception.DukeException;
 
 public class Parser {
     
-    static LocalDate convert(String date) throws DukeException {
+    static Date convert1(String date) throws DukeException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        //System.out.println(date);
         try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Smth is wrong " + e);
+            Date date1 = formatter.parse(date);
+            return  date1;
+        } catch (ParseException e) {
+            throw  new DukeException("what is wrong" + e);
+        }
+    }
+
+    static Date convert2(String date) throws DukeException {
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        //System.out.println(date);
+        try {
+            Date date2 = formatter.parse(date);
+            return date2;
+        } catch (ParseException e) {
+            throw  new DukeException("What is wrong " + e);
         }
     }
 

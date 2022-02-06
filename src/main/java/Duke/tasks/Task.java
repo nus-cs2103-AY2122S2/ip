@@ -9,7 +9,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "1" : "0"); // mark done task with X
     }
 
     void done() {
@@ -30,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format(this.description); 
+        return String.format(this.description);
     }
 }
