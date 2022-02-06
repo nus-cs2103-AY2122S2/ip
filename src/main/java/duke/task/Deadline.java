@@ -62,6 +62,8 @@ public class Deadline extends Task {
      * @return the date of the deadline formatted in "MMM dd YYYY"
      */
     private String getDate() {
+        assert hasDate : "deadline should have date";
+
         return d.format(dateOut);
     }
 
@@ -71,6 +73,8 @@ public class Deadline extends Task {
      * @return the time of the deadline formatted in "hh:mm am/pm"
      */
     private String getTime() {
+        assert hasTime : "deadline should have time";
+
         return t.format(timeOut);
     }
 
@@ -80,6 +84,8 @@ public class Deadline extends Task {
      * @return the date and time of the deadline formatted in "MMM dd YYYY hh:mm am/pm"
      */
     private String getDateTime() {
+        assert hasDate && hasTime : "deadline should have date and time";
+
         return d.format(dateOut) + " " + t.format(timeOut);
     }
 
