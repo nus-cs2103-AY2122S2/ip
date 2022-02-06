@@ -43,6 +43,7 @@ public class DeleteCommand extends Command {
                 throw new ChiException("Hey there is something wrong with this delete command nyan!");
             } else {
                 int index = getIndexInMessage(msg);
+                assert index != tl.getSize() : "The index should never equal size";
                 Task toDelete = tl.getTask(index);
                 tl.deleteTask(toDelete);
                 sge.updateFile(toDelete, tl, "delete");
