@@ -56,7 +56,7 @@ public class TaskList {
 
         for (int i = 0; i < ls.size(); i++) {
             if (ls.get(i).getName().contains(keyword)) {
-                result +=(i + 1) + ". " + ls.get(i) + "\n";
+                result += (i + 1) + ". " + ls.get(i) + "\n";
             }
         }
         return result;

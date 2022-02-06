@@ -57,19 +57,23 @@ public class Storage {
                 while (scan.hasNextLine()) {
                     String line = scan.nextLine();
                     String[] splitted = line.split("\\|");
+                    String firstToken = splitted[0];
+                    String name = splitted[2];
                     boolean completed = splitted[1].equals("1");
-                    if (splitted[0].equals("D")) {
-                        Deadline toAdd = new Deadline(splitted[2], splitted[3]);
+                    if (firstToken.equals("D")) {
+                        String timing = splitted[3];
+                        Deadline toAdd = new Deadline(name, timing);
                         ls.add(toAdd);
                         if (completed) toAdd.setDone();
                     }
-                    if (splitted[0].equals("T")) {
+                    if (firstToken.equals("T")) {
                         Todo toAdd = new Todo(splitted[2]);
                         ls.add(toAdd);
                         if (completed) toAdd.setDone();
                     }
-                    if (splitted[0].equals("E")) {
-                        Event toAdd = new Event(splitted[2], splitted[3]);
+                    if (firstToken.equals("E")) {
+                        String timing = splitted[3];
+                        Event toAdd = new Event(name, timing);
                         ls.add(toAdd);
                         if (completed) toAdd.setDone();
                     }

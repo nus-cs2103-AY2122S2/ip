@@ -17,6 +17,7 @@ public class Parser {
      * @return The appropriate enum type.
      */
     public CommandType parse(String input) {
+        assert !input.isEmpty() : "Given input should not be empty";
         if (input.startsWith("bye")) {
             return CommandType.BYE;
         } else if (input.startsWith("list")) {
