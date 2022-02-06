@@ -56,20 +56,28 @@ public class NumberedCommand extends Command {
         try {
             if (this.taskType.equals("mark")) {
                 Task task = tasks.get(this.number - 1);
+
+                if (task.isMarked()) {
+                    return ui.showAlreadyMarkedMessage();
+                }
+
                 String oldMark = task.formatText();
                 task.markTask();
-                System.out.println("Nice! I've marked this task as done!");
-                System.out.println(task.toString());
+                stg.pushToMemory("mark " + this.number);
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
                 return ui.showSuccessfulMarkMessage() + "\n" + task;
 
             } else if (this.taskType.equals("unmark")) {
                 Task task = tasks.get(this.number - 1);
+
+                if (!task.isMarked()) {
+                    return ui.showAlreadyUnmarkedMessage();
+                }
+
                 String oldMark = task.formatText();
                 task.unmarkTask();
-                System.out.println("OK, I've marked this task as not done yet");
-                System.out.println(task.toString());
+                stg.pushToMemory("unmark " + this.number);
                 String replaceMark = task.formatText();
                 stg.editData(oldMark, replaceMark);
                 return ui.showSuccessfulUnmarkMessage() + "\n" + task;
@@ -78,15 +86,14 @@ public class NumberedCommand extends Command {
                 Task task = tasks.get(this.number - 1);
                 String oldDelete = task.formatText();
                 tasks.deleteTask(number - 1);
+                stg.pushToMemory("delete " + this.number + " -" + task.formatText());
                 stg.editData(oldDelete, " ");
-                System.out.println("Noted! I've removed this task:");
-                System.out.println(task.toString());
+
                 ui.showCount(tasks);
                 return ui.showSuccessfulDeleteMessage() + "\n" + task + "\n"
                         + ui.showNumberOfTasksMessage(tasks);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a valid number!");
             return "Please enter a valid number!";
         }
     }

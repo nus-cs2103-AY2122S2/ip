@@ -57,6 +57,7 @@ public class AddCommand extends Command {
             try {
                 Todo td = Todo.createTodo(this.textInput);
                 tasks.addTask(td);
+                stg.pushToMemory("add");
                 stg.writeToFile(td.formatText() + "\n");
                 return ui.showSuccessfulAddMessage() + "\n" + td + "\n"
                         + ui.showNumberOfTasksMessage(tasks);
@@ -70,6 +71,7 @@ public class AddCommand extends Command {
             try {
                 Deadline dl = Deadline.createDeadline(this.textInput);
                 tasks.addTask(dl);
+                stg.pushToMemory("add");
                 stg.writeToFile(dl.formatText() + "\n");
                 return ui.showSuccessfulAddMessage() + "\n" + dl + "\n"
                         + ui.showNumberOfTasksMessage(tasks);
@@ -92,6 +94,7 @@ public class AddCommand extends Command {
             try {
                 Event ev = Event.createEvent(this.textInput);
                 tasks.addTask(ev);
+                stg.pushToMemory("add");
                 stg.writeToFile(ev.formatText() + "\n");
                 return ui.showSuccessfulAddMessage() + "\n" + ev + "\n"
                         + ui.showNumberOfTasksMessage(tasks);

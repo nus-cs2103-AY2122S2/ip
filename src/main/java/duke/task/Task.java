@@ -80,4 +80,14 @@ public class Task {
         return "Text formatted";
     }
 
+    /**
+     * Returns boolean value based on completeness status of task.
+     *
+     * @return True if task is already marked as completed, false if
+     * task is not yet marked as complete.
+     */
+    public boolean isMarked() {
+        return this.status;
+    }
+
 }

@@ -3,8 +3,6 @@ package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList that contains all added tasks.
@@ -48,6 +46,10 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.tasks.add(task);
+    }
+
+    public void addTask(Task task, int index) {
+        this.tasks.add(index, task);
     }
 
     /**

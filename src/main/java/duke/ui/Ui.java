@@ -100,6 +100,24 @@ public class Ui {
     }
 
     /**
+     * Return message indicating task is already marked.
+     *
+     * @return Message stating task is already marked.
+     */
+    public String showAlreadyMarkedMessage() {
+        return "This task is already completed!" + "\n";
+    }
+
+    /**
+     * Return message indicating task is already unmarked.
+     *
+     * @return Message stating task is already unmarked.
+     */
+    public String showAlreadyUnmarkedMessage() {
+        return "This task is has already been marked incomplete!" + "\n";
+    }
+
+    /**
      * Return message indicating task deleted successfully.
      *
      * @return Successful delete message.

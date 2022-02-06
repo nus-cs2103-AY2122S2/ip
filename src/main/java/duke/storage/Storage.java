@@ -6,6 +6,7 @@ import duke.task.Task;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Represents a storage class that holds file
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class Storage {
 
     private String filePath;
+    private Stack<String> memory;
 
     /**
      * Constructor for a Storage object.
@@ -23,6 +25,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.filePath = path;
+        this.memory = new Stack<>();
     }
 
     /**
@@ -67,4 +70,35 @@ public class Storage {
         FileHandler.clearFile(this.filePath);
     }
 
+    /**
+     * Adds a new command to the stack in storage.
+     *
+     * @param command The command to be inserted to the stack.
+     * @throws IOException If I/O error occurs.
+     */
+    public void pushToMemory(String command) {
+        this.memory.push(command);
+    }
+
+    /**
+     * Retrieves a new command from the stack in storage.
+     *
+     * @throws IOException If I/O error occurs.
+     */
+    public String popFromMemory() {
+        return this.memory.pop();
+    }
+
+    /**
+     * Inserts a new line to the storage file.
+     *
+     * @param textToInsert The text to be inserted.
+     * @param indexToInsert The index in which to insert the
+     * new line.
+     * @throws IOException If I/O error occurs.
+     */
+    public void insertData(String textToInsert, int indexToInsert)
+            throws IOException {
+        FileHandler.insertToFile(this.filePath, indexToInsert, textToInsert);
+    }
 }

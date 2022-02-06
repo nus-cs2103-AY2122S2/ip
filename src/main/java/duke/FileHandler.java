@@ -1,9 +1,7 @@
 package duke;
 
+import duke.parser.Parser;
 import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,27 +47,8 @@ public class FileHandler {
             if (input.trim().length() == 0) {
                 continue;
             }
-
-            char identifier = input.charAt(0);
-            if (identifier == 'T') {
-                int status = Character.getNumericValue(input.charAt(2));
-                Todo td = Todo.createTodo(status, input.substring(4));
-                arr.add(td);
-            } else if (identifier == 'D') {
-                int status = Character.getNumericValue(input.charAt(2));
-                int seperator = input.lastIndexOf('/');
-                String description = input.substring(4, seperator);
-                String date = input.substring(seperator + 1);
-                Deadline dl = Deadline.createDeadline(status, description, date);
-                arr.add(dl);
-            } else {
-                int status = Character.getNumericValue(input.charAt(2));
-                int seperator = input.lastIndexOf('/');
-                String description = input.substring(4, seperator);
-                String date = input.substring(seperator + 1);
-                Event ev = Event.createEvent(status, description, date);
-                arr.add(ev);
-            }
+            Task task = Parser.textToTask(input);
+            arr.add(task);
         }
         s.close();
     }
@@ -147,5 +126,37 @@ public class FileHandler {
         FileWriter tempWriter = new FileWriter("./data/temp.txt");
         tempWriter.write("");
         tempWriter.close();
+    }
+
+    /**
+     * Inserts a line into a file at a given index.
+     *
+     * @param filePath A string with the path to the written file.
+     * @param index The file's line index that will be inserted to.
+     * @param lineToInsert  The line that will be inserted to the file.
+     * @throws IOException If I/O error occurs.
+     */
+    public static void insertToFile(String filePath, int index, String lineToInsert)
+            throws IOException {
+        File tempFile = new File("./data/temp.txt");
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
+        File file = new File(filePath);
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        String curr;
+        int count = 0;
+        while ((curr = reader.readLine()) != null) {
+            if (count + 1 == index) {
+                writer.write(lineToInsert + "\n");
+            }
+            String trimmedLine = curr.trim();
+            writer.write(curr + "\n");
+            count++;
+        }
+        writer.close();
+        reader.close();
+        copyToFile(tempFile, file);
     }
 }
