@@ -3,11 +3,8 @@ package duke;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.Todo;
+import tasks.*;
+import tasks.ToDo;
 
 public class Duke {
     private Storage storage;
@@ -93,7 +90,7 @@ public class Duke {
                 } else {
                     switch (temp[0]) {
                     case "todo":
-                        Todo todo = new Todo(str.substring(5));
+                        ToDo todo = new ToDo(str.substring(5));
                         taskList.addTask(todo);
                         storage.save(taskList);
                         return "Added: " + todo;

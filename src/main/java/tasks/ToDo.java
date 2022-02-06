@@ -2,24 +2,24 @@ package tasks;
 
 import duke.DukeException;
 
-public class Todo extends Task {
+public class ToDo extends Task {
     /**
-     * Creates a Todo task from user input.
+     * Creates a ToDo task from user input.
      *
-     * @param description Description of the Todo task generated from user input.
+     * @param description Description of the ToDo task generated from user input.
      */
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
         super.saveFormat = "T," + this.description;
     }
     /**
-     * Creates a Todo task from previously saved list of tasks during initialisation of chat-bot.
+     * Creates a ToDo task from previously saved list of tasks during initialisation of chat-bot.
      *
      * @param saveFormat Data saved in tasks list file.
      * @param blean A Boolean value set to True to differentiate the creation of task from saved list and user input.
      * @throws DukeException If the format is not followed or there are missing information.
      */
-    public Todo(String saveFormat, boolean blean) throws DukeException {
+    public ToDo(String saveFormat, boolean blean) throws DukeException {
         super(saveFormat);
         try {
             String[] strArr = description.split(",");
@@ -33,7 +33,7 @@ public class Todo extends Task {
         }
     }
     /**
-     * Returns the string representation of the Todo task.
+     * Returns the string representation of the ToDo task.
      *
      * @return a description of the task including its type and status.
      */

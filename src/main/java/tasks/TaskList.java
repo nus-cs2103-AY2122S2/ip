@@ -33,7 +33,7 @@ public class TaskList {
                     tasks.add(task);
                     break;
                 case "T" :
-                    task = new Todo(str, true);
+                    task = new ToDo(str, true);
                     tasks.add(task);
                     break;
                 default:
