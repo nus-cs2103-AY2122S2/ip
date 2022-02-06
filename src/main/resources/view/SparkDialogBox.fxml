@@ -4,18 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="580.0" spacing="10.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <HBox alignment="CENTER_LEFT" prefWidth="500.0" style="-fx-background-color: c4fafb c4fafb; -fx-background-radius: 10;">
-         <children>
-              <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
-              <Label fx:id="dialog" text="Label" wrapText="true" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" top="20.0" />
-         </padding>
-      </HBox>
+        <StackPane style="-fx-background-radius: 20; -fx-background-color: #FFFFFF; -fx-min-height: 110; -fx-min-width: 110; -fx-max-height: 110; -fx-max-width: 110">
+            <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        </StackPane>
+        <Label fx:id="dialog" style="-fx-label-padding: 20;" text="Label" wrapText="true" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

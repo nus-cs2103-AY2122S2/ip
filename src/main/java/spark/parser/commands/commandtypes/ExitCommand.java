@@ -1,6 +1,11 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spark.Ui;
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.ExitResponse;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 
@@ -11,14 +16,11 @@ public class ExitCommand extends Command {
     private String responseMessage;
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        responseMessage = "Cool, see you around!";
-        ui.printMessageWithDivider(responseMessage);
-        return responseMessage;
-    }
+    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+        List<CommandResponse> responses = new ArrayList<>();
 
-    @Override
-    public boolean isExit() {
-        return true;
+        responses.add(new ExitResponse());
+
+        return responses;
     }
 }

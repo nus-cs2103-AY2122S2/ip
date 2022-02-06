@@ -1,17 +1,20 @@
 package spark;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.ErrorResponse;
 import spark.exceptions.SparkException;
-import spark.parser.Parser;
-import spark.parser.commands.commandtypes.ExitCommand;
-import spark.storage.Storage;
-import spark.tasks.TaskList;
-import spark.parser.commands.commandtypes.Command;
-import spark.parser.commands.commandtypes.ListCommand;
 import spark.exceptions.fileexceptions.FileException;
 import spark.exceptions.fileexceptions.TaskDecodingException;
+import spark.parser.Parser;
+import spark.parser.commands.commandtypes.Command;
+import spark.storage.Storage;
+import spark.tasks.TaskList;
 
 public class Spark {
-    private static final String defaultFilePathString = "spark_save_file.txt";
+    private static final String DEFAULT_FILE_PATH_STRING = "spark_save_file.txt";
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -24,7 +27,7 @@ public class Spark {
         this.ui = new Ui();
 
         try {
-            this.storage = new Storage(defaultFilePathString);
+            this.storage = new Storage(DEFAULT_FILE_PATH_STRING);
             this.taskList = new TaskList(storage.readTasksFile());
         } catch (FileException | TaskDecodingException e) {
             ui.printException(e);
@@ -34,59 +37,23 @@ public class Spark {
     }
 
     /**
-     * Starts an instance of Spark that stores saved Tasks in
-     * the specified relative file-path on the user's hard-disk.
-     */
-    public Spark(String filePathString) {
-        this.ui = new Ui();
-
-        try {
-            this.storage = new Storage(filePathString);
-            this.taskList = new TaskList(storage.readTasksFile());
-        } catch (FileException | TaskDecodingException e) {
-            ui.printException(e);
-            this.taskList = new TaskList();
-        }
-    }
-
-    /** DEPRECATED
-     * No longer need a CLI interface for Spark after
-     * creating a GUI.
+     * Executes the command given by the user and returns a list
+     * of messages to be displayed to the user on the GUI
      *
-     * Todo: Remove this, along with all CLI-related code.
+     * @param userInput what the user has typed in
+     * @return          a list of messages to be displayed to the user on
+     *                  the GUI
      */
-    public void run() {
-        new ListCommand().execute(taskList, ui, storage);
-        ui.printWelcomeMessage();
+    public List<CommandResponse> executeCommand(String userInput) {
+        List<CommandResponse> responses = new ArrayList<>();
 
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String userInput = ui.getInput();
-                Command command = Parser.parseInput(userInput);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (SparkException e) {
-                ui.printException(e);
-            }
-        }
-    }
-
-    public String executeCommand(String userInput) {
         try {
             Command command = Parser.parseInput(userInput);
-            String response = command.execute(taskList, ui, storage);
-            boolean isExit = command.isExit();
-            return response;
+            responses.addAll(command.execute(taskList, ui, storage));
         } catch (SparkException e) {
-            ui.printException(e);
-
-            return e.getMessage();
+            responses.add(new ErrorResponse(e));
         }
-    }
 
-    public static void main(String[] args) {
-        new Spark().run();
+        return responses;
     }
 }

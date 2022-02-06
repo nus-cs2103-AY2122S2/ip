@@ -1,25 +1,19 @@
 package spark.ui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class SparkDialogBox extends HBox {
+public class SparkDialogBox extends DialogBox {
     @FXML
     private Label dialog;
     @FXML
@@ -41,17 +35,31 @@ public class SparkDialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+    public static DialogBox getDialog(String text, Image img) {
+        SparkDialogBox dialogBox = new SparkDialogBox(text, img);
+        dialogBox.dialog.setBackground(DialogBox.getNormalChatboxColor());
+
+        return dialogBox;
     }
 
-    public static SparkDialogBox getSparkDialog(String text, Image img) {
-        return new SparkDialogBox(text, img);
+    public static SparkDialogBox getSuccessSparkDialog(String text, Image img) {
+        SparkDialogBox dialogBox = new SparkDialogBox(text, img);
+        dialogBox.dialog.setBackground(DialogBox.getSuccessChatboxColor());
+
+        return dialogBox;
+    }
+
+    public static SparkDialogBox getWarningSparkDialog(String text, Image img) {
+        SparkDialogBox dialogBox = new SparkDialogBox(text, img);
+        dialogBox.dialog.setBackground(DialogBox.getWarningChatboxColor());
+
+        return dialogBox;
+    }
+
+    public static SparkDialogBox getErrorSparkDialog(String text, Image img) {
+        SparkDialogBox dialogBox = new SparkDialogBox(text, img);
+        dialogBox.dialog.setBackground(DialogBox.getErrorChatboxColor());
+
+        return dialogBox;
     }
 }

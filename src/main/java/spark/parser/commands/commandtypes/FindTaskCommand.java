@@ -1,8 +1,12 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import spark.Ui;
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.SuccessResponse;
+import spark.commandresponse.WarningResponse;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
 import spark.tasks.tasktypes.Task;
@@ -26,12 +30,20 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+        List<CommandResponse> responses = new ArrayList<>();
+        responses.add(findAllMatchingTasks(tasks, searchTerm));
+        return responses;
+    }
+
+    private CommandResponse findAllMatchingTasks(TaskList tasks, String searchTerm) {
         List<Task> matches = tasks.findTask(searchTerm);
 
         StringBuilder results = new StringBuilder();
+        String noMatchingTaskMessage = "I couldn't find anything that matches what you are looking for.";
+
         if (matches.isEmpty()) {
-            results.append("I couldn't find anything that matches what you are looking for.");
+            return new WarningResponse(noMatchingTaskMessage);
         } else {
             results.append("Okay, I've found these tasks: ");
             results.append(System.lineSeparator());
@@ -43,14 +55,6 @@ public class FindTaskCommand extends Command {
             }
         }
 
-        responseMessage = results.toString();
-        ui.printMessageWithDivider(responseMessage);
-
-        return responseMessage;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        return new SuccessResponse(results.toString());
     }
 }

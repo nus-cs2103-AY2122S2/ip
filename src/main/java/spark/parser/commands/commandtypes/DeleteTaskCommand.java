@@ -1,6 +1,12 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spark.Ui;
+import spark.commandresponse.CommandResponse;
+import spark.commandresponse.ErrorResponse;
+import spark.commandresponse.SuccessResponse;
 import spark.exceptions.SparkException;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
@@ -23,22 +29,20 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+        List<CommandResponse> responses = new ArrayList<>();
+
         try {
             tasks.deleteTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
             responseMessage = getDeleteTaskSuccessMessage(tasks);
-            ui.printMessageWithDivider(responseMessage);
-            return responseMessage;
-        } catch (SparkException e) {
-            ui.printException(e);
-            return e.getMessage();
-        }
-    }
 
-    @Override
-    public boolean isExit() {
-        return false;
+            responses.add(new SuccessResponse(responseMessage));
+        } catch (SparkException e) {
+            responses.add(new ErrorResponse(e));
+        }
+
+        return responses;
     }
 
     private String getDeleteTaskSuccessMessage(TaskList tasks) {

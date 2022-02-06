@@ -1,5 +1,5 @@
 T @@@ false @@@ buy milk
-D @@@ true @@@ destroy halo @@@ 1-22-2023 1600
 T @@@ false @@@ buy milk
 T @@@ false @@@ buy milk
 T @@@ false @@@ sell milk
+
