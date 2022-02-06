@@ -27,6 +27,7 @@ public class Storage {
      * @param filepath the relative filepath to store and load tasks from.
      */
     public Storage(String filepath) {
+        assert filepath != null;
         this.filepath = filepath;
     }
 

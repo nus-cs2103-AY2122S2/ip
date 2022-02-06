@@ -13,6 +13,7 @@ public abstract class DukeException extends Exception {
      */
     public DukeException(String errorMessage) {
         super();
+        assert errorMessage != null;
         this.errorMessage = errorMessage;
     }
 

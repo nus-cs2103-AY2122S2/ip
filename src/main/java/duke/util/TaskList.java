@@ -19,6 +19,7 @@ public class TaskList {
      * @param taskList an ArrayList which is abstracted into the TaskList.
      */
     public TaskList(ArrayList<Task> taskList) {
+        assert  taskList != null;
         this.taskList = taskList;
     }
 
@@ -28,6 +29,7 @@ public class TaskList {
      * @return the String which will be prints out the task that has been added and the current tasks in the list.
      */
     public String addTask(Task task) {
+        assert  task != null;
         this.taskList.add(task);
         return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size()
                 + " tasks in the list.";
@@ -46,6 +48,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
+        assert deletedTask != null;
         return "Noted. I've removed this task:\n" + deletedTask.printTask() + "\n" + "Now you have " + taskList.size()
                 + " tasks in the list.";
     }
@@ -63,6 +66,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
+        assert markTask != null;
         markTask.setMarked(true);
         return Map.entry(markTask, "Nice! I've marked this task as done\n"
                 + markTask.printTask());
@@ -81,6 +85,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException("1 to " + taskList.size() + " inclusive");
         }
+        assert unmarkTask != null;
         unmarkTask.setMarked(false);
         return Map.entry(unmarkTask, "Oof! I've marked this task as undone\n"
                 + unmarkTask.printTask());
@@ -100,7 +105,9 @@ public class TaskList {
             int num = i + 1;
             printStr.append(num);
             printStr.append(". ");
-            printStr.append(taskList.get(i).printTask());
+            Task taskToBePrinted = taskList.get(i);
+            assert  taskToBePrinted != null;
+            printStr.append(taskToBePrinted.printTask());
             printStr.append("\n");
         }
         return printStr.toString();
@@ -136,7 +143,9 @@ public class TaskList {
             int num = i + 1;
             printStr.append(num);
             printStr.append(". ");
-            printStr.append(foundTasks.get(i).printTask());
+            Task taskToBePrinted = foundTasks.get(i);
+            assert  taskToBePrinted != null;
+            printStr.append(taskToBePrinted.printTask());
             printStr.append("\n");
         }
 
