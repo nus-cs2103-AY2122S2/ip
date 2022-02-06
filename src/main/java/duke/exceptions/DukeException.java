@@ -7,6 +7,6 @@ public class DukeException extends Exception {
      * @param message Message from method where the DukeException is thrown
      */
     public DukeException(String message) {
-        super("☹ OOPS!!! " + message);
+        super("!" + message + "!");
     }
 }

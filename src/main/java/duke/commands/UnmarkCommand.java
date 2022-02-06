@@ -2,9 +2,11 @@ package duke.commands;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 public class UnmarkCommand extends Command {
 
+    Task currTask;
     /**
      * Mark a task as incomplete
      *
@@ -16,11 +18,16 @@ public class UnmarkCommand extends Command {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
             Task task = taskList.getTasks().get(index);
             task.setIncomplete();
-            System.out.println("OK, I've unmarked this task as incomplete:\n" + task);
+            currTask = task;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter a number of the item in the list you wish to unmark!");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println("Please enter index within range 1 to " + taskList.getTasks().size());
         }
+    }
+
+    @Override
+    public String execute(TaskList tasks, Ui ui) {
+        return Ui.printUnmarkSuccess(currTask);
     }
 }

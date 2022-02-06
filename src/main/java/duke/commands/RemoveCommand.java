@@ -2,9 +2,11 @@ package duke.commands;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 public class RemoveCommand extends Command {
 
+    String currTask;
     /**
      * Removes a task from task list
      *
@@ -16,11 +18,16 @@ public class RemoveCommand extends Command {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
             Task removedTask = taskList.getTasks().get(index);
             taskList.getTasks().remove(index);
-            System.out.println("Noted. I've removed this task:\n  " + removedTask.toString());
+            currTask = removedTask.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter index of task to be removed");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println("Please enter index within range 1 to " + taskList.getTasks().size());
         }
+    }
+
+    @Override
+    public String execute(TaskList tasks, Ui ui) {
+        return Ui.printRemoveTask(currTask);
     }
 }

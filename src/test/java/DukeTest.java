@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDate;
 
+import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import duke.tasklist.TaskList;
@@ -38,7 +39,7 @@ public class DukeTest {
     }
 
     @Test
-    public void testAddToDo() {
+    public void testAddToDo() throws DukeException {
         System.out.print("Testing testAddToDo(): ");
         TaskList taskList = new TaskList();
         boolean output = taskList.addToDoTask("todo");
@@ -46,7 +47,7 @@ public class DukeTest {
     }
 
     @Test
-    public void testAddEvent() {
+    public void testAddEvent() throws DukeException {
         System.out.print("Testing testAddEvent(): ");
         TaskList taskList = new TaskList();
         boolean output = taskList.addEventTask("event missing at without /");
@@ -54,7 +55,7 @@ public class DukeTest {
     }
 
     @Test
-    public void testAddDeadline() {
+    public void testAddDeadline() throws DukeException {
         System.out.print("Testing testAddDeadline(): ");
         TaskList taskList = new TaskList();
         boolean output = taskList.addDeadlineTask("deadline missing by without /");

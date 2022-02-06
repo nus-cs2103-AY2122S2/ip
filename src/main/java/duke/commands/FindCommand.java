@@ -9,6 +9,10 @@ import duke.tasks.Task;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
+
+    String keyword;
+    ArrayList<Task> tasks;
+
     /**
      * Find the list of tasks with matching keywords
      *
@@ -18,9 +22,9 @@ public class FindCommand extends Command {
      */
     public FindCommand(TaskList taskList, String userInput) {
         try {
-            String keyword = userInput.split(" ")[1];
+            String currKeyword = userInput.split(" ")[1];
             ArrayList<Task> foundTasks = (ArrayList<Task>) taskList.getTasks().stream()
-                    .filter(t -> t.getDescription().toLowerCase(Locale.ROOT).contains(keyword))
+                    .filter(t -> t.getDescription().toLowerCase(Locale.ROOT).contains(currKeyword))
                     .collect(Collectors.toList());
 
             boolean noMatch = foundTasks.isEmpty();
@@ -30,10 +34,15 @@ public class FindCommand extends Command {
                 return;
             }
 
-            Ui.printFindResultHeader(keyword);
-            Ui.printTasks(foundTasks);
+            keyword = currKeyword;
+            tasks = foundTasks;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please enter keyword of task to search!");
         }
+    }
+
+    @Override
+    public String execute(TaskList tasks, Ui ui) {
+        return Ui.printFindResultHeader(keyword, this.tasks);
     }
 }

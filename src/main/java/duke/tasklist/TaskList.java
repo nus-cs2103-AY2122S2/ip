@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
+import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -44,16 +45,20 @@ public class TaskList {
      *
      * @param userInput the input from user
      */
-    public boolean addToDoTask(String userInput) {
-        String description = TaskValidator.validateToDo(userInput);
-        boolean noDescription = description.equals("");
+    public boolean addToDoTask(String userInput) throws DukeException {
+        try {
+            String description = TaskValidator.validateToDo(userInput);
+            boolean noDescription = description.equals("");
 
-        if (noDescription) {
-            return false;
+            if (noDescription) {
+                return false;
+            }
+            ToDo todo = new ToDo(description);
+            tasks.add(todo);
+            return true;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
-        ToDo todo = new ToDo(description);
-        tasks.add(todo);
-        return true;
     }
 
     /**
@@ -61,7 +66,7 @@ public class TaskList {
      *
      * @param userInput the input from user
      */
-    public boolean addDeadlineTask(String userInput) {
+    public boolean addDeadlineTask(String userInput) throws DukeException {
         try {
             String[] information = TaskValidator.validateDeadline(userInput);
             boolean isDescriptionEmpty = information[0].equals("");
@@ -74,9 +79,8 @@ public class TaskList {
             tasks.add(deadline);
             return true;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException(e.getMessage());
         }
-        return false;
     }
 
     /**
@@ -84,7 +88,7 @@ public class TaskList {
      *
      * @param userInput the input from user
      */
-    public boolean addEventTask(String userInput) {
+    public boolean addEventTask(String userInput) throws DukeException {
         try {
             String[] information = TaskValidator.validateEvent(userInput);
             boolean isDescriptionEmpty = information[0].equals("");
@@ -98,8 +102,7 @@ public class TaskList {
             tasks.add(event);
             return true;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException(e.getMessage());
         }
-        return false;
     }
 }

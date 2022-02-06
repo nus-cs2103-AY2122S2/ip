@@ -128,6 +128,7 @@ public class Storage {
                     System.out.println(e.getMessage());
                 }
             }
+            System.out.println("Loaded all tasks");
         } catch (IOException e) {
             System.out.println("Unable to load data from " + filePath);
         }

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+import duke.Duke;
 import duke.exceptions.DukeException;
 
 public class TaskValidator {
@@ -37,24 +38,20 @@ public class TaskValidator {
      * @return the validated ToDo description
      * @throws DukeException if ToDo input from user is invalid
      */
-    public static String validateToDo(String userInput) {
+    public static String validateToDo(String userInput) throws DukeException {
         String description = "";
 
-        try {
-            String[] words = userInput.split(" ", 2);
-            boolean emptyCommand = (words.length == 1);
+        String[] words = userInput.split(" ", 2);
+        boolean emptyCommand = (words.length == 1);
 
-            if (emptyCommand) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            description = words[1].trim();
+        if (emptyCommand) {
+            throw new DukeException("The description of a todo cannot be empty");
+        }
+        description = words[1].trim();
 
-            boolean noDescription = description.equals("");
-            if (noDescription) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        boolean noDescription = description.equals("");
+        if (noDescription) {
+            throw new DukeException("The description of a todo cannot be empty");
         }
         return description;
     }
@@ -67,36 +64,32 @@ public class TaskValidator {
      * @return the validated deadline information
      * @throws DukeException if Deadline input from user is invalid
      */
-    public static String[] validateDeadline(String userInput) {
+    public static String[] validateDeadline(String userInput) throws DukeException {
         String[] information = new String[2];
         information[0] = "";
         information[1] = "";
 
-        try {
-            String[] words = userInput.split(" ", 2);
-            boolean emptyCommand = (words.length == 1);
+        String[] words = userInput.split(" ", 2);
+        boolean emptyCommand = (words.length == 1);
 
-            if (emptyCommand) {
-                throw new DukeException("The description of a deadline task cannot be empty.");
-            }
+        if (emptyCommand) {
+            throw new DukeException("The description of a deadline task cannot be empty");
+        }
 
-            int keywordIndex = words[1].indexOf("/by");
-            boolean noKeyword = (keywordIndex == -1);
-            if (noKeyword) {
-                throw new DukeException("The deadline time of the deadline task cannot be empty.");
-            }
+        int keywordIndex = words[1].indexOf("/by");
+        boolean noKeyword = (keywordIndex == -1);
+        if (noKeyword) {
+            throw new DukeException("The time of the deadline task cannot be empty");
+        }
 
-            information[0] = words[1].substring(0, keywordIndex).trim();
-            information[1] = words[1].substring(keywordIndex + 3).trim();
+        information[0] = words[1].substring(0, keywordIndex).trim();
+        information[1] = words[1].substring(keywordIndex + 3).trim();
 
-            boolean isDescriptionEmpty = information[0].equals("");
-            boolean isDeadlineEmpty = information[1].equals("");
+        boolean isDescriptionEmpty = information[0].equals("");
+        boolean isDeadlineEmpty = information[1].equals("");
 
-            if (isDescriptionEmpty || isDeadlineEmpty) {
-                throw new DukeException("The description or dateline time cannot be empty.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        if (isDescriptionEmpty || isDeadlineEmpty) {
+            throw new DukeException("The description or dateline time cannot be empty");
         }
         return information;
     }
@@ -109,34 +102,32 @@ public class TaskValidator {
      * @return the validated event information
      * @throws DukeException if Event input from user is invalid
      */
-    public static String[] validateEvent(String userInput) {
+    public static String[] validateEvent(String userInput) throws DukeException {
         String[] information = new String[2];
         information[0] = "";
         information[1] = "";
-        try {
-            String[] words = userInput.split(" ", 2);
-            boolean emptyCommand = (words.length == 1);
-            if (emptyCommand) {
-                throw new DukeException("The description of a event task cannot be empty.");
-            }
 
-            int keywordIndex = words[1].indexOf("/at");
-            boolean noKeyword = (keywordIndex == -1);
-            if (noKeyword) {
-                throw new DukeException("The event time of the event task cannot be empty.");
-            }
+        String[] words = userInput.split(" ", 2);
+        boolean emptyCommand = (words.length == 1);
 
-            information[0] = words[1].substring(0, keywordIndex).trim();
-            information[1] = words[1].substring(keywordIndex + 3).trim();
+        if (emptyCommand) {
+            throw new DukeException("The description of a event task cannot be empty");
+        }
 
-            boolean isDescriptionEmpty = information[0].equals("");
-            boolean isEventTimeEmpty = information[1].equals("");
+        int keywordIndex = words[1].indexOf("/at");
+        boolean noKeyword = (keywordIndex == -1);
+        if (noKeyword) {
+            throw new DukeException("The time of the event task cannot be empty");
+        }
 
-            if (isDescriptionEmpty || isEventTimeEmpty) {
-                throw new DukeException("The description or dateline time cannot be empty.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        information[0] = words[1].substring(0, keywordIndex).trim();
+        information[1] = words[1].substring(keywordIndex + 3).trim();
+
+        boolean isDescriptionEmpty = information[0].equals("");
+        boolean isEventTimeEmpty = information[1].equals("");
+
+        if (isDescriptionEmpty || isEventTimeEmpty) {
+            throw new DukeException("The description or dateline time cannot be empty");
         }
         return information;
     }

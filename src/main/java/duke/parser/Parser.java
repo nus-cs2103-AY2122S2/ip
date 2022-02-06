@@ -2,14 +2,7 @@ package duke.parser;
 
 import java.util.Locale;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.RemoveCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 
@@ -24,35 +17,27 @@ public class Parser {
      * @param taskList the list of tasks
      * @throws DukeException if input from user is invalid
      */
-    public static void processUserInput(CommandType commandType, String userInput,
+    public static Command processUserInput(CommandType commandType, String userInput,
                                         TaskList taskList) throws DukeException {
         switch (commandType) {
         case LIST:
-            new ListCommand(taskList);
-            break;
+            return new ListCommand(taskList);
         case MARK:
-            new MarkCommand(taskList, userInput);
-            break;
+            return new MarkCommand(taskList, userInput);
         case UNMARK:
-            new UnmarkCommand(taskList, userInput);
-            break;
+            return new UnmarkCommand(taskList, userInput);
         case DEADLINE:
-            new AddDeadlineCommand(taskList, userInput);
-            break;
+            return new AddDeadlineCommand(taskList, userInput);
         case EVENT:
-            new AddEventCommand(taskList, userInput);
-            break;
+            return new AddEventCommand(taskList, userInput);
         case TODO:
-            new AddToDoCommand(taskList, userInput);
-            break;
+            return new AddToDoCommand(taskList, userInput);
         case REMOVE:
-            new RemoveCommand(taskList, userInput);
-            break;
+            return new RemoveCommand(taskList, userInput);
         case FIND:
-            new FindCommand(taskList, userInput);
-            break;
+            return new FindCommand(taskList, userInput);
         case BYE:
-            break;
+            return new ByeCommand();
         default:
             throw new DukeException("Invalid input");
         }
