@@ -79,7 +79,7 @@ public class TaskList {
             Ui.delete(tasks.size(), tasks.get(idx - 1));
             tasks.remove(idx - 1);
             break;
-            
+
         default:
             System.out.println("Invalid command!");
         }
@@ -103,7 +103,7 @@ public class TaskList {
         Ui.find();
         int count = 1;
         for (Task task : tasks) {
-            if (task.getDescription().equals(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 System.out.println("    " + count++ + "." + task);
             }
         }
