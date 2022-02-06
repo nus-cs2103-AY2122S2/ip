@@ -12,8 +12,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class FileReaderWriter {
-    private static final File FOLDER_PATH = new File("../../../data");
-    private static final File DATA_PATH = new File("../../../data/data.txt");
+    private static final File FOLDER_PATH = new File("/Users/jiamingsim/repos/ip/data");
+    private static final File DATA_PATH = new File("/Users/jiamingsim/repos/ip/data/data.txt");
 
     public FileReaderWriter() {}
 
@@ -34,11 +34,11 @@ public class FileReaderWriter {
                 FileInputStream reader = new FileInputStream(DATA_PATH);
                 ObjectInputStream listInput = new ObjectInputStream(reader);
                 try {
-                    System.out.println("file read and data transfered");
                     toDoList = (ArrayList<Task>) listInput.readObject();
                     for (int i = 0; i < toDoList.size(); i++) {
                         TaskBank.getBank().add(toDoList.get(i));
                     }
+                    System.out.println("file read and data transferred");
                     listInput.close();
                 } catch (ClassNotFoundException e) {
                     System.out.println("class not found");
@@ -48,9 +48,10 @@ public class FileReaderWriter {
             e.printStackTrace();
         }
     }
-        
+
     public static void writeToFile() {
         try {
+//            FileWriter fw = new FileWriter("data.txt",false);
             FileOutputStream writer = new FileOutputStream(DATA_PATH);
             ObjectOutputStream saveList = new ObjectOutputStream(writer);
             saveList.writeObject(TaskBank.getBank());
