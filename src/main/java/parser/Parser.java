@@ -21,32 +21,30 @@ public class Parser {
      * @param storage Storage object that deals with storage updation.
      * @throws DukeException If user input message does not make sense.
      */
-    public void userCommand(String[] inputStringsArray, Storage storage) throws DukeException {
+    public String userCommand(String[] inputStringsArray, Storage storage) throws DukeException {
         switch (inputStringsArray[0]) {
             case "list":
-                tasks.displayList();
-                break;
+                return tasks.displayList();
             case "mark":
-                tasks.mark(inputStringsArray[1]);
+                String marked = tasks.mark(inputStringsArray[1]);
                 storage.updateData(tasks);
-                break;
+                return marked;
             case "unmark":
-                tasks.unmark(inputStringsArray[1]);
+                String unmarked = tasks.unmark(inputStringsArray[1]);
                 storage.updateData(tasks);
-                break;
+                return unmarked;
             case "todo":
             case "deadline":
             case "event":
-                tasks.addToList(inputStringsArray);
+                String added = tasks.addToList(inputStringsArray);
                 storage.updateData(tasks);
-                break;
+                return added;
             case "delete":
-                tasks.delete(inputStringsArray[1]);
+                String deleted = tasks.delete(inputStringsArray[1]);
                 storage.updateData(tasks);
-                break;
+                return deleted;
             case "find":
-                tasks.find(inputStringsArray[1]);
-                break;
+                return tasks.find(inputStringsArray[1]);
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
         }
