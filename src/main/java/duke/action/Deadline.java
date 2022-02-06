@@ -1,5 +1,7 @@
 package duke.action;
 
+import duke.ui.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,14 +23,8 @@ public class Deadline extends Action {
      */
     public Deadline(String task, String by)  {
         super(task);
-        try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
-            this.date = LocalDateTime.parse(by, format);
-        } catch (DateTimeParseException e) {
-            System.out.println("Wrong date format: Please delete input "
-                    + "and re-enter using yyyy-mm-dd format");
-            this.date = LocalDateTime.now();
-        }
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
+        this.date = LocalDateTime.parse(by, format);
     }
 
     /**

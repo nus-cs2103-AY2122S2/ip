@@ -9,6 +9,10 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Deals with making sense of the user's input.
  */
@@ -26,6 +30,13 @@ public class Parser {
         if (command.equals("todo") || command.equals("todo ")) {
             throw new DukeException("Todo cannot be empty");
         }
+        if (command.equals("deadline") || command.equals("deadline ")) {
+            throw new DukeException("Deadline cannot be empty");
+        }
+        if (command.equals("event") || command.equals("event ")) {
+            throw new DukeException("Event cannot be empty");
+        }
+
         if (command.equals("list")) {
             return new ListCommand();
         }
@@ -60,6 +71,27 @@ public class Parser {
         }
 
         String details = twoWords[1];
+        if (firstWord.equals("deadline")) {
+            try {
+                String date = details.split("/by ")[1];
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
+                LocalDateTime.parse(date, format);
+            }
+            catch (DateTimeParseException e) {
+                throw new DukeException("Wrong date format: Please re-enter using yyyy-mm-dd format");
+            }
+        }
+        if (firstWord.equals("event")) {
+            try {
+                String date = details.split("/at ")[1];
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
+                LocalDateTime.parse(date, format);
+            }
+            catch (DateTimeParseException e) {
+                throw new DukeException("Wrong date format: Please re-enter using yyyy-mm-dd format");
+            }
+        }
+
         return new AddCommand(firstWord, details);
     }
 }

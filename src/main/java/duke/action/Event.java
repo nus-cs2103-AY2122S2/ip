@@ -20,14 +20,8 @@ public class Event extends Action {
      */
     public Event(String task, String at) {
         super(task);
-        try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
-            this.date = LocalDateTime.parse(at, format);
-        } catch (DateTimeParseException e) {
-            System.out.println("Wrong date format: Please delete input "
-                    + "and re-enter using yyyy-mm-dd H:m format");
-            this.date = LocalDateTime.now();
-        }
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
+        this.date = LocalDateTime.parse(at, format);
     }
 
     /**

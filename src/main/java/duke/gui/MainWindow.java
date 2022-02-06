@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -46,17 +48,22 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        String input = userInput.getText();
         try {
-            String input = userInput.getText();
             Command c = Parser.parse(input);
             String response = c.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+        } catch (DukeException dukeError) {
+            //duke.getUi().showError(e.getMessage());
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(dukeError.getMessage(), dukeImage)
+            );
+        } finally {
             userInput.clear();
-        } catch (DukeException e) {
-            duke.getUi().showError(e.getMessage());
         }
     }
 }
