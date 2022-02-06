@@ -1,5 +1,6 @@
 package duke.util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -109,6 +110,18 @@ public class TaskList {
         String regex = ".*\\b" + Pattern.quote(keyword.trim()) + "\\b.*";
         return tasks.stream()
                 .filter(task -> task.getDescription().matches(regex))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Filters and returns the task(s) that occurs on the specified date.
+     *
+     * @param dateToSearch Date to filter the tasks with.
+     * @return ArrayList of tasks that occurs on the specified date.
+     */
+    public ArrayList<Task> getTasksWithDate(LocalDate dateToSearch) {
+        return tasks.stream()
+                .filter(task -> task.getDate().equals(dateToSearch))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

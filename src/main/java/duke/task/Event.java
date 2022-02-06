@@ -33,6 +33,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.at;
+    }
+
+    @Override
     public String formatForFile() {
         return super.formatForFile() + " | " + this.at.toString();
     }

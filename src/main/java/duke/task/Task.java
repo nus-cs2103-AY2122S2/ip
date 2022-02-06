@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Task class represents the tasks created by the user.
  * It keeps track of the task's description and its status.
@@ -80,6 +82,10 @@ public class Task {
         default:
             return "T";
         }
+    }
+
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     /**

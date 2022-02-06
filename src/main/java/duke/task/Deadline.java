@@ -33,6 +33,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.by;
+    }
+
+    @Override
     public String formatForFile() {
         return super.formatForFile() + " | " + this.by.toString();
     }

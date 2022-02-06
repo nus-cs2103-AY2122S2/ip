@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
             { "mark", "Marks the specified task as done.\nFormat: mark INDEX" },
             { "unmark", "Unmarks the specified task as done.\nFormat: unmark INDEX" },
             { "delete", "Deletes the specified task. Irreversible.\nFormat: delete INDEX" },
+            { "schedule", "Filters tasks that occur on the specified date.\nFormat: schedule DATE" },
             { "bye", "Exits the program.\nFormat: bye" },
             { "help", "Shows the list of commands.\nFormat: help [COMMAND]" }
     }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
