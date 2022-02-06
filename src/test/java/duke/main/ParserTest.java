@@ -126,7 +126,7 @@ public class ParserTest {
                 Parser.parseCommand("deadline testDeadline /by /by anything");
                 Assertions.fail("Parser fails to catch deadline command with invalid structure");
             } catch (DukeException e) {
-                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
+                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT
                         + DukeException.FORMAT_DEADLINE);
             }
         }, () -> {
@@ -156,7 +156,7 @@ public class ParserTest {
                 Parser.parseCommand("event /at anything");
                 Assertions.fail("Parser fails to catch event command with invalid structure");
             } catch (DukeException e) {
-                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT + "\n"
+                assertEquals(e.getMessage(), DukeException.ERROR_WRONG_FORMAT
                         + DukeException.FORMAT_EVENT);
             }
         }, () -> {
