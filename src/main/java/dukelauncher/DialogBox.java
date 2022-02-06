@@ -54,6 +54,13 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+
+        for (Node n : getChildren()) {
+            if (n instanceof Label) {
+                Label l = (Label) n;
+                l.setTranslateX(5);
+            }
+        }
         setAlignment(Pos.TOP_LEFT);
     }
 }
