@@ -36,8 +36,12 @@ public class DeleteCommand extends IndexCommand {
     @Override
     public CommandFeedback execute(TaskList taskList) throws InvalidArgumentException {
         try {
+            int formerSize = taskList.size();
+
             Task task = taskList.get(index);
             taskList.remove(task);
+
+            assert taskList.size() == formerSize - 1 : "deletion failed number of task does not add up.";
 
             return new CommandFeedback(CommandType.DELETE, taskList, task);
 

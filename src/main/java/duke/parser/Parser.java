@@ -61,6 +61,9 @@ public class Parser {
      * @throws DukeException if command format is invalid.
      */
     public static Command parseCommand(String input) throws DukeException {
+
+        assert !input.isBlank() : "Input should not be empty/blank";
+
         String[] inputArgs = input.trim().split(" ", 2);
 
         switch (inputArgs[0]) {
