@@ -56,7 +56,8 @@ public class DialogBox extends HBox {
         displayPicture.setClip(circle);
 
         //this.setAlignment(Pos.TOP_RIGHT);
-        this.setSpacing(8);
+        //this.setSpacing(8);
+        //this.setHeight(dialog.getHeight());
         //this.setPadding(new Insets(9, 9, 9, 9));
     }
 
