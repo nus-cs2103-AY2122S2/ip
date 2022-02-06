@@ -1,6 +1,6 @@
-E | 1 | cs2010 lect | 2022/01/24 0800
-T | 0 | test
-T | 0 | read book
-D | 0 | return book | 2022/01/26 0200
-E | 0 | project meeting | 2022/01/26 0200
-T | 0 | testAdd
+D | 0 | return book | HIGH | 2022/01/26 0200
+E | 0 | project meeting | HIGH | 2022/01/26 0200
+E | 1 | cs2010 lect | MEDIUM | 2022/01/24 0800
+T | 0 | read book | MEDIUM
+T | 0 | testAdd | MEDIUM
+T | 0 | test | LOW

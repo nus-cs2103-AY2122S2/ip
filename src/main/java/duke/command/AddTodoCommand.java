@@ -5,6 +5,7 @@ import duke.main.TaskList;
 import duke.task.ToDo;
 import duke.ui.ImageType;
 import duke.ui.Ui;
+import duke.utils.Priority;
 
 
 /**
@@ -14,15 +15,18 @@ public class AddTodoCommand extends Command {
     private static final String ENDING_MESSAGE_FORMAT = "\nThere are %d tasks in the burning list.";
     private static final boolean IS_EXIT = false;
     private String description;
+    private Priority priority;
 
     /**
      * Creates a new AddTodoCommand instance with the initialized description and deadline.
      *
      * @param description Description of the ToDo object to be added.
+     * @param priority The Priority object specifying the priority of the ToDo to be added.
      */
-    public AddTodoCommand(String description) {
+    public AddTodoCommand(String description, Priority priority) {
         super(IS_EXIT);
         this.description = description;
+        this.priority = priority;
     }
 
     /**
@@ -34,7 +38,7 @@ public class AddTodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
-        ToDo newTodo = new ToDo(description);
+        ToDo newTodo = new ToDo(description, priority);
         tasks.add(newTodo);
         ui.appendMessage(Ui.ADD_MESSAGE);
         ui.appendBorder();

@@ -16,6 +16,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.utils.Priority;
 
 /**
  * Storage is a utility class representing the file path on the disk
@@ -89,14 +90,15 @@ public class Storage {
     private Task getTaskFromStringArray(String[] splitTaskInput) throws DukeException {
         try {
             Task newTask;
+            Priority priority = new Priority(splitTaskInput[3]);;
             if (splitTaskInput[0].equals("T")) {
-                newTask = new ToDo(splitTaskInput[2]);
+                newTask = new ToDo(splitTaskInput[2], priority);
             } else if (splitTaskInput[0].equals("D")) {
-                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
-                newTask = new Deadline(splitTaskInput[2], dateTime);
+                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[4]);
+                newTask = new Deadline(splitTaskInput[2], dateTime, priority);
             } else if (splitTaskInput[0].equals("E")) {
-                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
-                newTask = new Event(splitTaskInput[2], dateTime);
+                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[4]);
+                newTask = new Event(splitTaskInput[2], dateTime, priority);
             } else {
                 throw new DukeException(DukeException.ERROR_INPUT_FILE_FORMAT_TASK);
             }

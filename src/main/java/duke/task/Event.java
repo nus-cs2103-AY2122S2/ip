@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.utils.Priority;
+
 public class Event extends Task {
     private LocalDateTime time;
 
@@ -11,9 +13,10 @@ public class Event extends Task {
      *
      * @param description The name of the event.
      * @param time The time of the event.
+     * @param priority The Priority object specifying the priority of this Event.
      */
-    public Event(String description, LocalDateTime time) {
-        super(description, TaskType.EVENT);
+    public Event(String description, LocalDateTime time, Priority priority) {
+        super(description, TaskType.EVENT, priority);
         this.time = time;
     }
 

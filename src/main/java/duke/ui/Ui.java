@@ -16,8 +16,8 @@ public class Ui {
     public static final String REMOVE_MESSAGE = "Charizard got tired of waiting and deleted this task";
     public static final String MARK_MESSAGE = "Charizard breathe out fire and burned the task.";
     public static final String UNMARK_MESSAGE = "Oh no! The task was not burnt completely!";
+    public static final String CHANGE_PRIORITY_MESSAGE = "Charizard changed priority of some tasks.";
     public static final Image GENERAL_IMAGE = new Image(Ui.class.getResourceAsStream("/images/General.png"));
-
     private static final int BORDER_LENGTH = 38;
     private static final String GREET_MESSAGE = "Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.\n"
             + "Which task shall we burn today?";
