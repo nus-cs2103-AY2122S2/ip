@@ -30,20 +30,22 @@ public class AddCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         Task newTask = null;
         switch (cmd) {
             case "todo":
                 newTask = new ToDo(getDescription());
-                ui.showNewTask(tasks.size() + 1, newTask, "todo");
-                break;
+                tasks.add(newTask);
+                return ui.showNewTask(tasks.size(), newTask, "todo");
             case "deadline":
                 try {
                     newTask = new Deadline(getDescription(), getDate());
-                    ui.showNewTask(tasks.size() + 1, newTask, "deadline");
+                    tasks.add(newTask);
+                    return ui.showNewTask(tasks.size(), newTask, "deadline");
                 } catch (DateTimeParseException e) {
                     System.out.println("Invalid date");
                 }
@@ -51,15 +53,14 @@ public class AddCommand extends Command {
             case "event":
                 try {
                     newTask = new Event(getDescription(), getDate());
-                    ui.showNewTask(tasks.size() + 1, newTask, "event");
+                    tasks.add(newTask);
+                    return ui.showNewTask(tasks.size(), newTask, "event");
                 } catch (DateTimeParseException e) {
                     System.out.println("Invalid date");
                 }
                 break;
             default:
         }
-        if (newTask != null) {
-            tasks.add(newTask);
-        }
+        return "";
     }
 }

@@ -48,9 +48,8 @@ public class Ui {
      * @param t Task to print.
      * @param type Type of task.
      */
-    public void showNewTask(int numTasks, Task t, String type) {
-        System.out.println("\tAw, gee! New " + type + ":\n\t\t" + t);
-        System.out.println("\tHooray! You now have " + numTasks + " tasks");
+    public String showNewTask(int numTasks, Task t, String type) {
+        return "Aw, gee! New " + type + ":\n\t" + t.toString() + "\nHooray! You now have " + numTasks + " tasks";
     }
 
     /**
@@ -58,9 +57,8 @@ public class Ui {
      *
      * @param t Task to print.
      */
-    public void showMarkAsDone(Task t) {
-        System.out.println("\tThat is swell! You have completed this task:");
-        System.out.println("\t\t" + t);
+    public String showMarkAsDone(Task t) {
+        return "That is swell! You have completed this task:\n" + t;
     }
 
     /**
@@ -68,9 +66,8 @@ public class Ui {
      *
      * @param t Task to print.
      */
-    public void showMarkAsUndone(Task t) {
-        System.out.println("\tHot dog! Complete this soon:");
-        System.out.println("\t\t" + t);
+    public String showMarkAsUndone(Task t) {
+        return "Hot dog! Complete this soon:\n" + t;
     }
 
     /**
@@ -79,10 +76,8 @@ public class Ui {
      * @param numTasks Number of current tasks.
      * @param t Task to print.
      */
-    public void showDeleteTask(int numTasks, Task t) {
-        System.out.println("\tAlrighty. I've removed this task.");
-        System.out.println("\t\t" + t);
-        System.out.println("\tYou now have " + numTasks + " tasks");
+    public String showDeleteTask(int numTasks, Task t) {
+        return "Alrighty. I've removed this task.\n" + t + "You now have " + numTasks + " tasks";
     }
 
     /**
@@ -90,21 +85,21 @@ public class Ui {
      *
      * @param msg Message string.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return msg;
     }
 
     /**
      * Print load file failed error.
      */
-    public void showLoadingError() {
-        System.out.println("Failed to load file. Creating new task list.\n");
+    public String showLoadingError() {
+        return "Failed to load file. Creating new task list.";
     }
 
     /**
      * Print exit message.
      */
-    public void showBye() {
-        System.out.println("\tToodles! See ya real soon!");
+    public String showBye() {
+        return "Toodles! See ya real soon!";
     }
 }

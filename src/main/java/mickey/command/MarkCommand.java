@@ -25,10 +25,11 @@ public class MarkCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         int indexToMark = getIndex();
         if (indexToMark >= tasks.size()) {
             throw new MickeyException("No such task!");
@@ -36,10 +37,10 @@ public class MarkCommand extends Command {
         Task toMark;
         if (cmd.equals("mark")) {
             toMark = tasks.get(indexToMark).markAsDone();
-            ui.showMarkAsDone(toMark);
+            return ui.showMarkAsDone(toMark);
         } else {
             toMark = tasks.get(indexToMark).markAsUndone();
-            ui.showMarkAsUndone(toMark);
+            return ui.showMarkAsUndone(toMark);
         }
     }
 }

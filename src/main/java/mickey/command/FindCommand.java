@@ -27,18 +27,21 @@ public class FindCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
         List<Task> foundTasks = tasks.findTasks(getDescription());
+        StringBuilder result = new StringBuilder();
         if (foundTasks.size() > 0) {
-            System.out.println("\tOh boy! I found " + foundTasks.size() + " matching tasks:");
+            result.append("Oh boy! I found ").append(foundTasks.size()).append(" matching tasks:");
             for (int i = 0; i < foundTasks.size(); i++) {
-                System.out.println("\t\t" + (i + 1) + ". " + foundTasks.get(i));
+                result.append("\t\t").append(i + 1).append(". ").append(foundTasks.get(i));
             }
         } else {
-            System.out.println("\tOops! No task found");
+            result.append("Oops! No task found");
         }
+        return result.toString();
     }
 }

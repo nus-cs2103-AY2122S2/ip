@@ -24,17 +24,20 @@ public class ListCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui to print feedback.
      * @param storage Storage to store tasks.
+     * @return Response after executing command.
      * @throws MickeyException Exception for invalid commands.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MickeyException {
+        StringBuilder result = new StringBuilder();
         if (tasks.size() > 0) {
-            System.out.println("\tOh boy! You have " + tasks.size() + " tasks:");
+            result.append("Oh boy! You have ").append(tasks.size()).append(" tasks:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("\t\t" + (i + 1) + ". " + tasks.get(i));
+                result.append("\n\t").append(i + 1).append(". ").append(tasks.get(i));
             }
         } else {
-            System.out.println("\tHooray! You have no tasks");
+           result.append("Hooray! You have no tasks");
         }
+        return result.toString();
     }
 }
