@@ -6,7 +6,6 @@ import duke.data.Storage;
 import duke.data.TaskList;
 import duke.dukeexceptions.DukeException;
 import duke.parser.Parser;
-import duke.responses.Response;
 import duke.ui.Ui;
 
 /***
@@ -18,15 +17,16 @@ public class Duke {
     private Parser commandHandler;
     private Ui cmdLine;
     private boolean isRunning = true;
+    private boolean isJavafxEnd = false;
 
     /**
      * Constructor for Duke Chatbot
      */
     public Duke() {
-        this.taskList = new TaskList();
-        this.store = new Storage(taskList);
-        this.commandHandler = new Parser();
-        this.cmdLine = new Ui();
+        taskList = new TaskList();
+        store = new Storage(taskList);
+        commandHandler = new Parser();
+        cmdLine = new Ui();
         store.initialiseStorage();
         taskList = store.loadFromDisk();
     }
@@ -38,6 +38,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command result = commandHandler.getCommand(input);
+            if (result instanceof ByeCommand) {
+                this.javafxExit();
+            }
             result.getResources(store, taskList);
             store.loadToDisk(taskList);
             return result.execute().callback();
@@ -47,35 +50,17 @@ public class Duke {
     }
 
     /**
-     * Starts Duke
-     */
-    public void run() {
-        cmdLine.callResponse(commandHandler.welcome());
-        cmdLine.callResponse(commandHandler.start());
-        while (isRunning) {
-            try {
-                String stringCmd = cmdLine.getNextLine();
-                Command cmd = commandHandler.getCommand(stringCmd);
-                cmd.getResources(store, taskList);
-                if (cmd instanceof ByeCommand) {
-                    this.stop();
-                }
-                Response feedback = cmd.execute();
-                cmdLine.callResponse(feedback);
-            } catch (DukeException e) {
-                e.callback();
-            }
-        }
-    }
-
-    /**
      * Method that stops the Chatbot;
      */
     public void stop() {
-        this.isRunning = false;
+        isRunning = false;
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    private void javafxExit() {
+        isJavafxEnd = true;
+    }
+
+    public boolean hasJavafxExited() {
+        return isJavafxEnd;
     }
 }

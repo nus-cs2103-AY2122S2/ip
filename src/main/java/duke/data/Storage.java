@@ -49,7 +49,7 @@ public class Storage {
         }
     }
 
-    private static boolean storageToMark(String mark) {
+    private static boolean convertMarkToBoolean(String mark) {
         if (mark.equals("1")) {
             return true;
         } else {
@@ -57,15 +57,15 @@ public class Storage {
         }
     }
 
-    private static Task storageToTask(String taskString) {
+    private static Task convertStorageToTask(String taskString) {
         String[] stringCmdUnits = taskString.split(" \\| ");
         switch (stringCmdUnits[0]) {
         case "T":
-            return new ToDo(stringCmdUnits[2], storageToMark(stringCmdUnits[1]));
+            return new ToDo(stringCmdUnits[2], convertMarkToBoolean(stringCmdUnits[1]));
         case "D":
-            return new Deadline(stringCmdUnits[2], storageToMark(stringCmdUnits[1]), stringCmdUnits[3]);
+            return new Deadline(stringCmdUnits[2], convertMarkToBoolean(stringCmdUnits[1]), stringCmdUnits[3]);
         case "E":
-            return new Event(stringCmdUnits[2], storageToMark(stringCmdUnits[1]), stringCmdUnits[3]);
+            return new Event(stringCmdUnits[2], convertMarkToBoolean(stringCmdUnits[1]), stringCmdUnits[3]);
         default:
             return null;
         }
@@ -77,13 +77,12 @@ public class Storage {
      */
     public TaskList loadFromDisk() {
         try {
-            System.out.println("Load From List");
             Scanner fileReader = null;
             fileReader = new Scanner(persistStore);
             TaskList taskList = new TaskList();
             while (fileReader.hasNext()) {
                 String command = fileReader.nextLine();
-                taskList.addTask(storageToTask(command));
+                taskList.addTask(convertStorageToTask(command));
             }
             return taskList;
         } catch (Exception e) {
@@ -100,7 +99,6 @@ public class Storage {
     public void loadToDisk(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(persistStore);
-            System.out.println("Load to List");
             for (int i = 0; i < taskList.taskLength(); i++) {
                 fileWriter.write(taskList.getTask(i).toStore() + "\n");
             }
