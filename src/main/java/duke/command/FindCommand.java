@@ -34,6 +34,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         ArrayList<Task> matchedTasks = tasks.findTasks(searchDescription);
         String message = "Charizard found some stuff from the burning list:";
         ui.appendMessage(message);

@@ -29,6 +29,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         storage.saveFileData(tasks.getTasks());
         ui.appendMessage(Ui.BYE_MESSAGE);
         ui.setRespondImage(ImageType.GENERAL);

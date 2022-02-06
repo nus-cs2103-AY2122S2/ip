@@ -45,6 +45,9 @@ public class Ui {
         this.message.append(message);
     }
 
+    /**
+     * Appends the line border to the stored message in Ui.
+     */
     public void appendBorder() {
         appendMessage("\n");
         for (int i = 0; i < BORDER_LENGTH; i++) {
@@ -71,15 +74,18 @@ public class Ui {
         message.setLength(0);
     }
 
+    public boolean hasEmptyMessage() {
+        return message.length() <= 0;
+    }
+
     /**
      * Flushes the stored message in the Ui and displays the message to the user.
      */
     public String getResponse() {
-        if (message.length() < 1) {
-            return "";
-        }
+        assert message.length() > 0 : "Response is empty!";
         String respondMessage = message.toString();
         message.setLength(0);
+        assert message.length() == 0 : "Message buffer not cleared";
         return respondMessage;
     }
 

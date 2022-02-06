@@ -31,9 +31,8 @@ public class Duke {
     }
 
     public Pair<String, Image> getResponse(String input) {
-        if (hasExited) {
-            return new Pair<String, Image>("", ui.getResponseImage());
-        }
+        assert hasExited == false : "Program should have ended";
+        assert hasLoadingError == false : "Program should have loading error";
         try {
             Command c = Parser.parseCommand(input);
             c.execute(tasks, ui, storage);
