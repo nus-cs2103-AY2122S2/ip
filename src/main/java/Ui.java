@@ -39,6 +39,16 @@ public class Ui {
     }
 
     /**
+     * Formatted output for confirmation of program start
+     */
+    public static void printIntro() {
+        String INTRO = "Duke initialised";
+        System.out.println(Ui.line());
+        System.out.println(INTRO);
+        System.out.println(Ui.line());
+    }
+
+    /**
      * Formatted output for confirmation of program exit
      */
     public static void printExit() {

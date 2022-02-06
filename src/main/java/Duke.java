@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-        // Constant strings
-        final String INTRO = "Duke initialised";
-
         // Init UI
         Ui ui = new Ui();
 
@@ -29,9 +26,7 @@ public class Duke {
         }
 
         // Printing Duke's intro
-        String formattedIntroText = Duke.indent(INTRO, 1);
-        String formattedIntro = Duke.formatLines(formattedIntroText);
-        System.out.println(formattedIntro);
+        Ui.printIntro();
 
         // Reading and processing inputs
         CommandFactory commandFactory = new CommandFactory();
