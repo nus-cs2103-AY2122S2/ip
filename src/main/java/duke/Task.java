@@ -64,4 +64,14 @@ public class Task {
         }
         return output;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Task) {
+            if (this.taskName == ((Task) o).taskName) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
