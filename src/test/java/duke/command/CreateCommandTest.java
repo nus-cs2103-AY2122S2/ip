@@ -53,21 +53,21 @@ public class CreateCommandTest {
             new CreateCommand("", TaskType.TODO).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Task name cannot be empty", ex.getMessage());
+            assertEquals("Task description cannot be empty", ex.getMessage());
         }
 
         try {
             new CreateCommand(" /by 23/12/2022 18:00", TaskType.DEADLINE).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Task name cannot be empty", ex.getMessage());
+            assertEquals("Task description cannot be empty", ex.getMessage());
         }
 
         try {
             new CreateCommand(" /at 23/12/2022 18:00", TaskType.EVENT).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Task name cannot be empty", ex.getMessage());
+            assertEquals("Task description cannot be empty", ex.getMessage());
         }
     }
 

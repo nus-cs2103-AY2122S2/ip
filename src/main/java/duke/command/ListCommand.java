@@ -20,8 +20,9 @@ public class ListCommand extends Command {
     public boolean execute(Printable linePrinter, TaskList taskList) {
         linePrinter.print("This is your task list:");
         taskList.doForEach((index, task) -> {
-            // Note that index passed into this consumer is 0-based. Increment by 1 for readability
-            linePrinter.print(String.format("%d. %s", index + 1, task.getReadableString()));
+            // Note that index passed into this consumer is 0-based. Increment index by 1 for readability.
+            linePrinter.print(String.format("%d. %s", index + OFFSET_LOGICAL_TO_READABLE,
+                    task.getReadableString()));
         });
         return true;
     }
