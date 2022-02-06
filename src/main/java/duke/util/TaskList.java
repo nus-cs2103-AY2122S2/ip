@@ -37,7 +37,7 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return new ArrayList<>(tasks);
     }
-    
+
     private int convertIndexToZeroBased(int index) throws DukeException {
         int zeroBasedIndex = index - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
@@ -51,7 +51,7 @@ public class TaskList {
      *
      * @param index One-based index of the task to be retrieved.
      * @return Task at index - 1.
-     * @throws DukeException if the index is invalid.
+     * @throws DukeException If the index is invalid.
      */
     public Task getTask(int index) throws DukeException {
         return tasks.get(convertIndexToZeroBased(index));
@@ -71,7 +71,7 @@ public class TaskList {
      *
      * @param index One-based index of the task to be deleted.
      * @return The deleted task.
-     * @throws DukeException if the index is invalid.
+     * @throws DukeException If the index is invalid.
      */
     public Task deleteTask(int index) throws DukeException {
         return tasks.remove(convertIndexToZeroBased(index));
@@ -81,7 +81,7 @@ public class TaskList {
      * Marks the task at the specified index as done.
      *
      * @param index One-based index of the task to be marked.
-     * @throws DukeException if the index is invalid.
+     * @throws DukeException If the index is invalid.
      */
     public void markAsDone(int index) throws DukeException {
         getTask(index).markAsDone();
@@ -92,7 +92,7 @@ public class TaskList {
      * Unmarks the task at the specified index as done.
      *
      * @param index One-based index of the task to be unmarked.
-     * @throws DukeException if the index is invalid.
+     * @throws DukeException If the index is invalid.
      */
     public void unmarkAsDone(int index) throws DukeException {
         getTask(index).unmarkAsDone();
@@ -100,7 +100,7 @@ public class TaskList {
     }
 
     /**
-     * Filters and returns the task(s) that contain(s) the specified keyword.
+     * Filters and returns the task(s) that contain(s) the specified whole keyword.
      *
      * @param keyword Keyword to find the tasks with.
      * @return ArrayList of tasks containing the specified keyword.

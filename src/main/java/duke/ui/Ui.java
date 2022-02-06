@@ -15,7 +15,8 @@ public class Ui {
             + "| | | | | | | |/ / _      = o_o =_______    \\ \\  -Julie Rhodes-\\\n"
             + "| |_| | |_| |   <  __/     __^      __(  \\.__) )\n"
             + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
-    private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?";
+    private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?\n"
+            + "(Type 'help' to view the available commands.)";
     private static final String GOODBYE = "Bye. Meow!";
     private static final String MESSAGE_NUM_LIST_ITEMS = "%sNumber of tasks in list: %d";
     private static final String MESSAGE_LIST_ITEM = "%d. %s\n";

@@ -38,6 +38,10 @@ public class Task {
         return description;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     /**
      * Returns status icon "X" of the task.
      * If the task is not done, " " is returned.
@@ -93,25 +97,5 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Task task = (Task) o;
-        if (isDone != task.isDone) {
-            return false;
-        }
-        if (!description.equals(task.description)) {
-            return false;
-        }
-
-        return type == task.type;
     }
 }

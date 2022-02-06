@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Represents a command that unmarks the specified task as not done.
+ * Represents a command that unmarks the specified task as done.
  */
 public class UnmarkCommand extends Command {
     private static final String MESSAGE_TO_SHOW = "Meow! Task is not done!\n%s\n";

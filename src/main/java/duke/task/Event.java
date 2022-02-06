@@ -45,20 +45,4 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: "
                 + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-
-        Event event = (Event) o;
-        return at.equals(event.at);
-    }
 }

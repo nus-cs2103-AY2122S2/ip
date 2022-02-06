@@ -25,7 +25,7 @@ public abstract class Command {
      * @param ui Ui of the current running application.
      * @param storage Storage of the current running application.
      * @return The string result.
-     * @throws DukeException if any error arises when executing the command.
+     * @throws DukeException If any error arises when executing the command.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
