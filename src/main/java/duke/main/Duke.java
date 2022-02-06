@@ -3,6 +3,7 @@ package duke.main;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exceptions.DukeException;
 import duke.operations.Parser;
 import duke.operations.Storage;
@@ -19,6 +20,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean hasExit = false;
 
     /**
      * Initializes a <code>Duke</code> object using a Duke constructor.
@@ -47,11 +49,18 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            if (c instanceof ExitCommand) {
+                hasExit = true;
+            }
             String output = c.execute(tasks);
             Storage.updateTextFile();
             return output;
         } catch (DukeException e) {
             return ui.showDukeError(e.getMessage());
         }
+    }
+
+    public boolean getHasExit() {
+        return hasExit;
     }
 }

@@ -3,6 +3,8 @@ package duke.main;
 import java.io.IOException;
 
 import duke.operations.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -45,12 +48,12 @@ public class MainWindow extends AnchorPane {
         try {
             duke.initializeStorage();
         } catch (IOException e) {
-            // if user load then got no folder/file, duke will prompt
+            // prompts duke when user does not have folder/file
             dialogContainer.getChildren().add(
                     DialogBox.getDukeDialog(e.getMessage(), dukeImage)
             );
         }
-        // regardless show welcome msg
+        // shows welcome message regardless
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
     }
@@ -61,12 +64,20 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        if (!duke.getHasExit()) {
+            String input = userInput.getText();
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+        }
+
+        if (duke.getHasExit()) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }
