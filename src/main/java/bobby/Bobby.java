@@ -54,6 +54,6 @@ public class Bobby {
     }
 
     public String getResponse(String text) {
-        return "Duke heard: " + text;
+        return Parser.parse(tasks, text, this);
     }
 }

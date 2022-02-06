@@ -26,14 +26,13 @@ public class TaskList {
      * @param task description of the task.
      * @throws BobbyException if the description of the task is empty.
      */
-    public void addToDo(String task) throws BobbyException {
+    public String addToDo(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             Todo newTodo = new Todo(inputs[1]);
-            System.out.println("Bobby heard: " + newTodo);
             taskArray.add(newTodo);
             storage.updateFile(taskArray);
-            System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+            return Ui.printAddedTask(newTodo, taskArray);
         } else {
             throw new BobbyException("Description cannot be empty.");
         }
@@ -44,7 +43,7 @@ public class TaskList {
      * @param task description of Deadline and when the task has to be completed in YYYY-MM-DD format.
      * @throws BobbyException when description is empty or date format is invalid.
      */
-    public void addDeadline(String task) throws BobbyException {
+    public String addDeadline(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /by ", 2);
@@ -52,10 +51,9 @@ public class TaskList {
                 String description = splitInputs[0];
                 LocalDate by = LocalDate.parse(splitInputs[1]);
                 Deadline newDeadline = new Deadline(description, by);
-                System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
                 storage.updateFile(taskArray);
-                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+                return Ui.printAddedTask(newDeadline, taskArray);
             } else {
                 throw new BobbyException("Invalid date format. Please use YYYY-MM-DD.");
             }
@@ -70,7 +68,7 @@ public class TaskList {
      * @param task description of Event and date/time of the Event.
      * @throws BobbyException when description or date/time is empty.
      */
-    public void addEvent(String task) throws BobbyException {
+    public String addEvent(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             String[] splitInputs = inputs[1].split(" /at ", 2);
@@ -78,10 +76,9 @@ public class TaskList {
                 String description = splitInputs[0];
                 String at = splitInputs[1];
                 Event newEvent = new Event(description, at);
-                System.out.println("Bobby heard: " + newEvent);
                 taskArray.add(newEvent);
                 storage.updateFile(taskArray);
-                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+                return Ui.printAddedTask(newEvent, taskArray);
             } else {
                 throw new BobbyException("Date/Time format of Event is incorrect or empty");
             }
@@ -95,17 +92,17 @@ public class TaskList {
      * @param task user input containing index of task to be deleted.
      * @throws BobbyException when no given index or when index is bigger than list.
      */
-    public void delete(String task) throws BobbyException {
+    public String delete(String task) throws BobbyException {
         String[] inputs = task.split(" ", 2);
         if (inputs.length > 1) {
             int i = Integer.parseInt(inputs[1]) - 1;
             if (i > taskArray.size()) {
                 throw new BobbyException("Invalid index given to Bobby.");
             }
-            System.out.println("Bobby has forgotten this task:\n" + taskArray.get(i));
+            Task t = taskArray.get(i);
             taskArray.remove(i);
             storage.updateFile(taskArray);
-            System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+            return Ui.printDeletedTask(t, taskArray);
         } else {
             throw new BobbyException("Indicate which task should be deleted.");
         }
@@ -114,8 +111,8 @@ public class TaskList {
     /**
      * Generates a list of current tasks.
      */
-    public void list() {
-        Ui.printList(taskArray);
+    public String list() {
+        return Ui.printList(taskArray);
     }
 
 
@@ -124,14 +121,14 @@ public class TaskList {
      * @param i index of task to be marked as done.
      * @throws BobbyException when index given exceeds size of list.
      */
-    public void mark(int i) throws BobbyException {
+    public String mark(int i) throws BobbyException {
         if (i > taskArray.size()) {
             throw new BobbyException("Invalid index given to Bobby.");
         }
         Task t = taskArray.get(i);
         t.markAsDone();
         storage.updateFile(taskArray);
-        Ui.taskDone(t);
+        return Ui.taskDone(t);
     }
 
 
@@ -140,34 +137,36 @@ public class TaskList {
      * @param i index of task to be unmarked.
      * @throws BobbyException when index given exceeds size of list.
      */
-    public void unmark(int i) throws BobbyException {
+    public String unmark(int i) throws BobbyException {
         if (i > taskArray.size()) {
             throw new BobbyException("Invalid index given to Bobby.");
         }
         Task t = taskArray.get(i);
         t.unmarkAsDone();
         storage.updateFile(taskArray);
-        Ui.taskNotDone(t);
+        return Ui.taskNotDone(t);
     }
 
     /**
      * Find a task by searching for a key word.
      * @param query keyword used to search.
      */
-    public void find(String query) {
+    public String find(String query) {
         boolean isSuccessful = false;
+        ArrayList<Task> resultTasks = new ArrayList<>();
         System.out.println("Bobby found these task(s):");
         for (Task t : taskArray) {
             String[] contents = t.description.split(" ");
             for (String content : contents) {
                 if (Objects.equals(content, query)) {
-                    Ui.printTask(t);
+                    resultTasks.add(t);
                     isSuccessful = true;
                 }
             }
         }
         if (!isSuccessful) {
-            System.out.println("Bobby could not find any matching tasks.");
+            return "Bobby could not find any matching tasks.";
         }
+        return Ui.printFoundTasks(resultTasks);
     }
 }
