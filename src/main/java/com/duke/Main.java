@@ -2,11 +2,13 @@ package com.duke;
 
 import java.io.IOException;
 
+import com.duke.gui.MainTabPaneWindow;
 import com.duke.gui.MainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -26,15 +28,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/TabPane.fxml"));
+            TabPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainTabPaneWindow>getController().setDuke(duke);
             stage.show();
 
-            Image img = new Image(this.getClass().getResourceAsStream("/images/background.png"));
+            Image img = new Image(this.getClass().getResourceAsStream("/images/backgroundhd.jpg"));
             BackgroundImage bImg = new BackgroundImage(img,
                     BackgroundRepeat.NO_REPEAT,
                     BackgroundRepeat.NO_REPEAT,
