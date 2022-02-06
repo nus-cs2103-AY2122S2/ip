@@ -49,6 +49,8 @@ public class DeleteCommand extends Command {
             throw new DukeException(ERROR_INVALID_DELETE);
         }
         int index = taskNumber - 1;
+
+        assert index >= 0;
         Task thisTask = tasks.get(index);
         tasks.remove(index);
         Storage.saveToFile(tasks);

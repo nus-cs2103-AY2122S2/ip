@@ -32,7 +32,7 @@ public class Parser {
         String[] splitCommand = fullCommand.split("\\s+");
         String command = splitCommand[0];
         String args = fullCommand.substring(splitCommand[0].length()).trim();
-
+        assert (!command.equals(""));
         switch (command) {
         case COMMAND_BYE:
             return new ByeCommand();

@@ -57,6 +57,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(List<Task> tasks, Ui ui) throws DukeException {
+        assert (this.taskNumber <= tasks.size() && this.taskNumber > 0);
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
             if (this.toMark) {
                 throw new DukeException(ERROR_INVALID_MARK);
