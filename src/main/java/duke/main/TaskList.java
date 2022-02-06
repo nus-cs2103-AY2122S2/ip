@@ -1,10 +1,13 @@
 package duke.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.utils.Priority;
 
 /**
  * Represents a list of Task objects.
@@ -29,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Constructs a new TaskList instance initialized to contain the specified tasks.
+     * Marks or unmarks the Task in the TaskList at the given index.
      *
      * @param zeroBasedIndex Index of the Task to be marked or unmarked.
      * @param isDone Boolean indicating mark or unmark action. A true value indicates mark
@@ -39,6 +42,21 @@ public class TaskList {
     public void markTask(int zeroBasedIndex, boolean isDone) throws DukeException {
         try {
             tasks.get(zeroBasedIndex).mark(isDone);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.ERROR_INVALID_INDEX);
+        }
+    }
+
+    /**
+     * Sets the priority of the Task in the TaskList at the given index.
+     *
+     * @param zeroBasedIndex Index of the Task to have its priority set.
+     * @param newPriority The new priority level of the Task.
+     * @throws DukeException If the given zeroBasedIndex is out of bounds.
+     */
+    public void setPriority(int zeroBasedIndex, Priority newPriority) throws DukeException {
+        try {
+            tasks.get(zeroBasedIndex).setPriority(newPriority);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(DukeException.ERROR_INVALID_INDEX);
         }
@@ -109,5 +127,9 @@ public class TaskList {
         return new ArrayList<Task>(tasks.stream()
                 .filter(task -> task.hasSubstring(searchDescription))
                 .collect(Collectors.toList()));
+    }
+
+    public void sort(Comparator<Task> taskComparator) {
+        Collections.sort(tasks, taskComparator);
     }
 }

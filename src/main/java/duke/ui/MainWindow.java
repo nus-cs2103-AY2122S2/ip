@@ -101,9 +101,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        if (duke.hasExited()) {
-            prepareToCloseWindow();
-        }
         String input = userInput.getText();
         Pair<String, Image> dukeResponse = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -111,6 +108,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(dukeResponse.getFirst(), dukeResponse.getSecond())
         );
         userInput.clear();
+        if (duke.hasExited()) {
+            prepareToCloseWindow();
+        }
     }
 
     private void prepareToCloseWindow() {
