@@ -61,27 +61,33 @@ public class TaskList {
     /**
      * Command to signal to the program to close.
      */
-    public void bye(Storage storage) {
+    public String bye(Storage storage) {
         storage.writeTasksToFile();
         String bye = "GoodBye! I hope to see you again!";
         System.out.println(bye);
+        return bye;
     }
 
     /**
      * Command to list out all of the Tasks in the TaskList.
      */
-    public void list() {
+    public String list() {
+        String reply = "";
         int leng = tasks.size();
         if (leng == 0) {
             System.out.println("There are no pending tasks!");
+            reply = "There are no pending tasks!";
         } else {
             System.out.println();
+            //reply += "\n";
             for (int i = 0; i < leng; i++) {
                 Task task = tasks.get(i);
                 int num = i + 1;
                 System.out.println(num + ": " + task.toString());
+                reply += num + ": " + task.toString() + "\n";
             }
         }
+        return reply;
     }
 
     /**
@@ -89,7 +95,8 @@ public class TaskList {
      *
      * @param taskStr String of command inputted by the User.
      */
-    public void taskCheck(String taskStr) {
+    public String taskCheck(String taskStr) {
+        String reply = "";
         try {
             String[] taskArr = taskStr.split(" ");
             int index = Integer.parseInt(taskArr[1]) - 1;
@@ -97,15 +104,20 @@ public class TaskList {
             if (taskArr[0].equals("mark")) {
                 task.setChecked(true);
                 System.out.println("Nice! I've marked this task as done: \n\t" + task.toString());
+                reply = "Nice! I've marked this task as done: \n\t" + task.toString();
             } else {
                 this.tasks.get(index).setChecked(false);
                 System.out.println("Alright, I've marked this task as not done yet: \n\t" + task.toString());
+                reply = "Alright, I've marked this task as not done yet: \n\t" + task.toString();
             }
         } catch (NumberFormatException e) {
             System.out.println("An invalid task index has been inputted");
+            reply = "An invalid task index has been inputted";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That index number is out of range! Please try again!");
+            reply = "That index number is out of range! Please try again!";
         }
+        return reply;
     }
 
     /**
@@ -113,13 +125,16 @@ public class TaskList {
      *
      * @param taskStr String of Todo Task instruction.
      */
-    public void todo(String taskStr) {
+    public String todo(String taskStr) {
         // eg to_do borrow book (without the _)
         String taskName = parser.parseToDo(taskStr);
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
         System.out.println("Added to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.size() + " tasks in your list");
+        String reply = "Added to your tasks: \n\t" + task.toString()
+                + "\nYou now have " + tasks.size() + " tasks in your list";
+        return reply;
     }
 
     /**
@@ -127,7 +142,8 @@ public class TaskList {
      *
      * @param taskStr String of Deadline Task instruction.
      */
-    public void deadline(String taskStr) {
+    public String deadline(String taskStr) {
+        String reply = "";
         try {
             String[] taskDetails = parser.parseDeadline(taskStr);
             String taskName = taskDetails[0];
@@ -136,9 +152,13 @@ public class TaskList {
             this.tasks.add(task);
             System.out.println("Added to your tasks: \n\t" + task.toString());
             System.out.println("You now have " + tasks.size() + " tasks in your list");
+            reply = "Added to your tasks: \n\t" + task.toString()
+                    + "\nYou now have " + tasks.size() + " tasks in your list";
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+            reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
         }
+        return reply;
 
     }
 
@@ -147,7 +167,8 @@ public class TaskList {
      *
      * @param taskStr String of Event Task instruction.
      */
-    public void event(String taskStr) {
+    public String event(String taskStr) {
+        String reply = "";
         try {
             String[] taskDetails = parser.parseEvent(taskStr);
             String taskName = taskDetails[0];
@@ -156,9 +177,13 @@ public class TaskList {
             this.tasks.add(task);
             System.out.println("Added to your tasks: \n\t" + task.toString());
             System.out.println("You now have " + tasks.size() + " tasks in your list");
+            reply = "Added to your tasks: \n\t" + task.toString()
+                    + "\nYou now have " + tasks.size() + " tasks in your list";
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+            reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
         }
+        return reply;
     }
 
     /**
@@ -166,7 +191,8 @@ public class TaskList {
      *
      * @param taskStr String of the Task that you are trying to delete.
      */
-    public void delete(String taskStr) {
+    public String delete(String taskStr) {
+        String reply = "";
         try {
             String[] taskArr = parser.splitLimitTwo(taskStr);
             String deleteIndStr = taskArr[1];
@@ -176,11 +202,16 @@ public class TaskList {
             int num = tasks.size() - 1;
             System.out.println("You now have " + num + " tasks in your list");
             this.tasks.remove(deleteInd);
+            reply = "Removed from your tasks: \n\t" + task.toString()
+                    + "\nYou now have " + num + " tasks in your list";
         } catch (NumberFormatException e) {
             System.out.println("An invalid task index has been inputted! PLease try again!");
+            reply = "An invalid task index has been inputted! PLease try again!";
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That index number is out of range! Please try again!");
+            reply = "That index number is out of range! Please try again!";
         }
+        return reply;
     }
 
     /**
@@ -188,7 +219,8 @@ public class TaskList {
      *
      * @param taskStr Command inputted by users.
      */
-    public void find(String taskStr) {
+    public String find(String taskStr) {
+        String reply = "";
         String[] taskArr = parser.splitLimitTwo(taskStr);
         TaskList foundTasks = new TaskList();
         String keyword = taskArr[1];
@@ -200,16 +232,18 @@ public class TaskList {
 
         if (foundTasks.size() == 0) {
             System.out.println("There are no pending tasks with keyword '" + keyword + "'!");
+            reply = "There are no pending tasks with keyword '" + keyword + "'!";
         } else {
-            foundTasks.list();
+            reply = foundTasks.list();
         }
+        return reply;
     }
 
     /**
      * Manual that users can use if they need help.
      */
-    public void help() {
-        System.out.println("Looks like you need some help! Here is a list of commands that you can use!\n"
+    public String help() {
+        String reply = "Looks like you need some help! Here is a list of commands that you can use!\n"
                 + "\n==> These are the utility commands that you can use!\n"
                 + "- 'save' : Use this to save all tasks that have been added to Duke into a local file.\n"
                 + "- 'bye'  : Use this to exit Duke. All tasks added will be saved upon this command as well.\n"
@@ -222,7 +256,8 @@ public class TaskList {
                 + "\n==> Lastly, these are the commands to edit a task on Duke.\n"
                 + "- 'mark *task#*' : Use this to mark a task as completed.\n"
                 + "- 'unmark *task#*' : Use this to un-mark a task as incomplete.\n"
-                + "- 'delete *task#*' : Use this to delete a task from Duke."
-        );
+                + "- 'delete *task#*' : Use this to delete a task from Duke.";
+        System.out.println(reply);
+        return reply;
     }
 }

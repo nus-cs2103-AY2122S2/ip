@@ -46,9 +46,10 @@ public class Storage {
     /**
      * Method to save the TaskList into a file in the local device.
      */
-    public void save() {
+    public String save() {
         writeTasksToFile();
         System.out.println("Your Tasks has been saved into your device!");
+        return "Your Tasks has been saved into your device!";
     }
 
     /**

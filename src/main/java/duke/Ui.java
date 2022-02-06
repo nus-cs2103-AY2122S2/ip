@@ -1,7 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.InvalidDescriptionException;
@@ -39,63 +39,71 @@ public class Ui {
         this.taskList = taskList;
     }
 
+
     /**
      * Method to run Duke.
      */
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
+    public String run(String command) {
+        //Scanner scanner = new Scanner(System.in);
         String firstWord = "";
-        while (true) {
-            try {
-                String command = scanner.nextLine();
-                System.out.print(FROM_DUKE);
-                String[] commandArr = command.split(" ");
-                firstWord = commandArr[0];
-                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find")
-                        || firstWord.equals("event") || firstWord.equals("todo") || firstWord.equals("deadline")
-                        || firstWord.equals("delete") || firstWord.equals("save") || firstWord.equals("help")
-                        || firstWord.equals("mark") || firstWord.equals("unmark"))) {
-                    throw new InvalidCommandException();
+        String reply = "";
+        //while (true) {
+        try {
+            //String command = scanner.nextLine();
+            //System.out.print(FROM_DUKE);
+            String[] commandArr = command.split(" ");
+            firstWord = commandArr[0];
+            if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("find")
+                    || firstWord.equals("event") || firstWord.equals("todo") || firstWord.equals("deadline")
+                    || firstWord.equals("delete") || firstWord.equals("save") || firstWord.equals("help")
+                    || firstWord.equals("mark") || firstWord.equals("unmark"))) {
+                throw new InvalidCommandException();
 
-                    // One word commands
-                } else if (firstWord.equals("bye")) {
-                    taskList.bye(storage);
-                    break;
-                } else if (firstWord.equals("save")) {
-                    storage.save();
-                } else if (firstWord.equals("list")) {
-                    taskList.list();
-                } else if (firstWord.equals("help")) {
-                    taskList.help();
+                // One word commands
+            } else if (firstWord.equals("bye")) {
+                reply = taskList.bye(storage);
+                //break;
+            } else if (firstWord.equals("save")) {
+                reply = storage.save();
+            } else if (firstWord.equals("list")) {
+                reply = taskList.list();
+            } else if (firstWord.equals("help")) {
+                reply = taskList.help();
 
-                    //Multiple word commands
-                } else if (commandArr.length < 2) {
-                    throw new InvalidDescriptionException();
-                } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
-                    taskList.taskCheck(command);
-                } else if (firstWord.equals("find")) {
-                    taskList.find(command);
-                } else if (firstWord.equals("todo")) {
-                    taskList.todo(command);
-                } else if (firstWord.equals("deadline")) {
-                    taskList.deadline(command);
-                } else if (firstWord.equals("event")) {
-                    taskList.event(command);
-                } else { //firstWord.equals("delete")
-                    taskList.delete(command);
-                }
-
-            } catch (InvalidCommandException e) {
-                System.out.println("'" + firstWord + "' is an invalid command! Please try again!");
-            } catch (InvalidDescriptionException e) {
-                System.out.println("There cannot be an empty description of your task! Please try again! ");
-            } catch (DateTimeParseException e) {
-                System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("That is an invalid task. Please try again!");
-            } finally {
-                System.out.println("__________________________________________");
+                //Multiple word commands
+            } else if (commandArr.length < 2) {
+                throw new InvalidDescriptionException();
+            } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+                reply = taskList.taskCheck(command);
+            } else if (firstWord.equals("find")) {
+                reply = taskList.find(command);
+            } else if (firstWord.equals("todo")) {
+                reply = taskList.todo(command);
+            } else if (firstWord.equals("deadline")) {
+                reply = taskList.deadline(command);
+            } else if (firstWord.equals("event")) {
+                reply = taskList.event(command);
+            } else { //firstWord.equals("delete")
+                reply = taskList.delete(command);
             }
+
+        } catch (InvalidCommandException e) {
+            System.out.println("'" + firstWord + "' is an invalid command! Please try again!");
+            reply = "'" + firstWord + "' is an invalid command! Please try again!";
+        } catch (InvalidDescriptionException e) {
+            System.out.println("There cannot be an empty description of your task! Please try again! ");
+            reply = "There cannot be an empty description of your task! Please try again! ";
+        } catch (DateTimeParseException e) {
+            System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
+            reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("That is an invalid task. Please try again!");
+            reply = "That is an invalid task. Please try again!";
+        } finally {
+            System.out.println("__________________________________________");
+            return reply + "\n";
         }
+        //}
+
     }
 }

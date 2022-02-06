@@ -22,6 +22,19 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private String logo =
+              " ___            _        \n"
+            + "|   _ \\  _    _ | |  ____ \n"
+            + "|  | |   |  |  |  | | / / _ \\\n"
+            + "|  |_|  |  |_ |  |   <  __/\n"
+            + "|____/ \\___,_|_|\\_\\___|\n\n";
+
+    private String start = "Hello! I am Duke.\n"
+            + "Your Personal Assistant.\n\n"
+            + "Input 'help' for the Command Manual!!\n\n"
+            + "What can I do for you?\n"
+            + "__________________________________________";
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -30,8 +43,20 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Start Up Message when Duke is run.
+     */
+    @FXML
+    public void startUpMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(logo, dukeImage),
+                DialogBox.getDukeDialog(start, dukeImage)
+        );
+    }
+
     public void setDuke(Duke d) {
         duke = d;
+        startUpMessage();
     }
 
     /**

@@ -6,36 +6,55 @@ package duke;
  *
  * @author Justin Ng Jie Ern
  */
-@SuppressWarnings("checkstyle:Regexp")
 public class Duke {
+    private static final String FROM_DUKE = "From Duke: \n\n";
+    private static final String BREAK_LINE = "__________________________________________";
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-    private static String logo = " ____        _        \n"
+    private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n\n";
 
-    private static String start = "Hello! I am Duke.\n"
+    private String start = "Hello! I am Duke.\n"
             + "Your Personal Assistant.\n\n"
             + "Input 'help' for the Command Manual!!\n\n"
             + "What can I do for you?\n"
-            + "__________________________________________";
+            + BREAK_LINE;
 
-    private static void run() {
-        System.out.println(logo + start);
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(taskList);
-        Ui ui = new Ui(taskList, storage);
-
-        ui.run();
+    /**
+     * Constructor for Duke.
+     */
+    public Duke() {
+        //System.out.println(logo + start);
+        this.taskList = new TaskList();
+        this.storage = new Storage(taskList);
+        this.ui = new Ui(taskList, storage);
+        // ui.run();
     }
+
+
+    /**
+     * Method to run Duke.
+     */
+    //public static void run() {
+    //System.out.println(logo + start);
+    //TaskList taskList = new TaskList();
+    // Storage storage = new Storage(taskList);
+    // Ui ui = new Ui(taskList, storage);
+    // ui.run();
+    //}
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String reply = ui.run(input);
+        return FROM_DUKE + reply + BREAK_LINE;
     }
 
-    public static void main(String[] args) {
-        run();
-    }
+    //public static void main(String[] args) {
+    //     run();
+    //}
 }
 
