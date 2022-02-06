@@ -5,23 +5,25 @@ package karen;
  * custom messages for user.
  */
 public class KarenException extends Exception {
-    private final String message;
+    private String message;
 
     /**
      * Constructor for throwing a KarenException
+     *
      * @param msg Error message
      */
     public KarenException(String msg) {
         super(msg);
-        this.message = msg;
+        message = msg;
     }
 
     /**
      * Converts message into a central formatting
+     *
      * @return Message from KarenException
      */
     @Override
     public String toString() {
-        return this.message;
+        return message;
     }
 }

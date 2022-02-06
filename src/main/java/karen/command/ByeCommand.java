@@ -12,6 +12,13 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    /**
+     * Returns Goodbye message.
+     *
+     * @param ui To control outputs related to execution
+     * @param storage To access and modify Tasks stored in Storage
+     * @return String result of output from successful execution of Command
+     */
     @Override
     public String execute(Ui ui, Storage storage) {
         return Ui.GOODBYE;

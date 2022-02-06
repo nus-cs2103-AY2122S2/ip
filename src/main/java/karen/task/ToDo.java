@@ -8,11 +8,17 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public String toSaveData() {
         return String.format("T|%s|%s", this.isDone, this.getDescription());
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

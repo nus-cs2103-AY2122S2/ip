@@ -7,19 +7,26 @@ import java.time.format.DateTimeFormatter;
  * Stores the (/by) date in which the Deadline occurs by
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate byDate;
+
     public Deadline(String description, String by) {
         super(description);
-        this.by = this.parseDate(by);
+        byDate = this.parseDate(by);
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public String toSaveData() {
-        return String.format("D|%s|%s|%s", this.isDone, this.getDescription(), this.by);
+        return String.format("D|%s|%s|%s", isDone, this.getDescription(), byDate);
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

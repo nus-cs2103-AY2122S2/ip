@@ -15,21 +15,20 @@ import karen.task.Task;
 public class FindCommand extends Command {
     protected String keyTerm;
 
-    public FindCommand(String keyTerm) {
-        this.keyTerm = keyTerm;
+    public FindCommand(String inputTerm) {
+        keyTerm = inputTerm;
     }
 
     /**
-     * Finds Task with matching description with keyTerm and passes list of matching Tasks
-     * to output with UI.
+     * Finds Task with matching description with keyTerm.
+     *
      * @param ui To control outputs related to execution
      * @param storage To access and modify Tasks stored in Storage
-     * @return String output after successful execution of command
-     * @throws KarenException
+     * @return String result of output from successful execution of Command
      */
     @Override
-    public String execute(Ui ui, Storage storage) throws KarenException {
-        Pattern keyTermFormat = Pattern.compile(this.keyTerm);
+    public String execute(Ui ui, Storage storage) {
+        Pattern keyTermFormat = Pattern.compile(keyTerm);
         ArrayList<Task> matchingList = new ArrayList<>();
 
         for (Task item: storage.getTaskList()) {

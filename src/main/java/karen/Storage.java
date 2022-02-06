@@ -50,8 +50,8 @@ public class Storage {
     }
 
     /**
-     * Reads data from DATA_PATH directory and parses it into an ArrayList of
-     * Task objects.
+     * Reads data from DATA_PATH directory and parses it into an ArrayList of Task objects.
+     *
      * @return ArrayList of Task objects read from DATA_PATH directory.
      */
     private ArrayList<Task> loadTasks() {
@@ -110,9 +110,11 @@ public class Storage {
             writer = new BufferedWriter(out);
             writer.write(data);
         } catch (FileNotFoundException err) {
+            // deprecated
             this.ui.displayWarning(
                     String.format("Improper access for file writing.\n\tCheck if %s exists.", DATA_DIR));
         } catch (IOException err) {
+            // deprecated
             this.ui.displayWarning("Something went wrong with writing to file");
         } finally {
             try {
@@ -125,6 +127,7 @@ public class Storage {
 
     /**
      * Creates Task object based on letters from data format saved in DATA_PATH.
+     *
      * @param taskType Single letter string to indicate subclass of Task object.
      * @param taskArgs Relevant arguments to instantiate subclasses of Task Objects
      * @return Task Object
@@ -151,6 +154,7 @@ public class Storage {
 
     /**
      * Getter method for Task objects within taskList based on (0-based) index
+     *
      * @param index of Task Object inside of taskList
      * @return Task object at index parameter
      * @throws IndexOutOfBoundsException if index is not within range of taskList
@@ -161,6 +165,7 @@ public class Storage {
 
     /**
      * Getter method for taskList
+     *
      * @return list of Task objects
      */
     public ArrayList<Task> getTaskList() {
@@ -169,6 +174,7 @@ public class Storage {
 
     /**
      * Adds Task object to end of taskList
+     *
      * @param item Task object to be added to taskList
      */
     public void addTask(Task item) {
@@ -177,6 +183,7 @@ public class Storage {
 
     /**
      * Deletes Task object based on (0-based) index
+     *
      * @param index of Task Object inside of taskList
      */
     public void deleteTask(int index) throws IndexOutOfBoundsException {

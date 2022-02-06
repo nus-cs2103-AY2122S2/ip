@@ -16,6 +16,7 @@ public class Ui {
     /**
      * Gets formatted string of item at (1-based) index.
      * Example: 1.[T][ ] example-task
+     *
      * @param index (1-based) index of item
      * @param item Task object
      * @return Formatted string object representation of item at index.
@@ -25,9 +26,9 @@ public class Ui {
     }
 
     /**
-     * Gets formatted string of item, action applied to item and the current
-     * count of objects.
+     * Gets formatted string of item, action applied to item and the current count of objects.
      * Example: Fine. Task added:\n[T][ ] example-task\nNow you have 1 in total.
+     *
      * @param action Action applied to object eg. added, deleted, marked.. etc
      * @param item Task object with action applied to
      * @param count Current count of Tasks in Storage
@@ -40,6 +41,7 @@ public class Ui {
 
     /**
      * Prints message for inputs and outputs with STD_DIVIDER wrapped around.
+     *
      * @param message Message generated from determined inputs and subsequent outputs.
      */
     public String displayUserInput(String message) {
@@ -47,8 +49,8 @@ public class Ui {
     }
 
     /**
-     * Prints warning messages for user during runtime resulting from
-     * missing configurations etc.
+     * Prints warning messages for user during runtime resulting from missing configurations etc.
+     *
      * @param message Message generated
      */
     public String displayWarning(String message) {
@@ -57,7 +59,8 @@ public class Ui {
 
     /**
      * Formats String representation of Task object(s) in taskList in 1-based index formatting.
-     * @param taskList
+     *
+     * @param taskList input ArrayList of Task objects
      * @return Formatted String representation of taskList
      */
     public String formatTaskList(ArrayList<Task> taskList) {

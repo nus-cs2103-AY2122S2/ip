@@ -33,6 +33,7 @@ public class Parser {
 
     /**
      * Validates if dateString parameter follows yyyy-mm-dd format.
+     *
      * @param dateString input string
      * @return dateString original input string
      * @throws KarenException if format doesn't follow yyyy-mm-dd
@@ -48,6 +49,7 @@ public class Parser {
 
     /**
      * Creates InvalidCommand objects with troubleshooting messages
+     *
      * @param keyWord first word of input
      * @param fullInput full input from user
      * @return InvalidCommand with default or custom message.
@@ -72,6 +74,7 @@ public class Parser {
     /**
      * Creates AddCommand object by parsing parameters to instantiate Task objects and
      * other relevant arguments.
+     *
      * @param keyWord first word of input
      * @param fullInput full input from user
      * @return AddCommand object
@@ -106,6 +109,7 @@ public class Parser {
     /**
      * Creates ModifyCommand object by parsing parameters to get (1-based index) of Tasks
      * to modify and the relevant ModifyType
+     *
      * @param keyWord first word of input
      * @param fullInput full input from user
      * @return ModifyCommand object
@@ -133,6 +137,7 @@ public class Parser {
     /**
      * Creates DeleteCommand object by parsing parameters to get (1-based index) of Tasks
      * to delete.
+     *
      * @param keyWord first word of input
      * @param fullInput full input from user
      * @return DeleteCommand object
@@ -152,6 +157,7 @@ public class Parser {
 
     /**
      * Creates FindCommand object by parsing parameters to get keyTerm to search with
+     *
      * @param keyWord first word of input
      * @param fullInput full input from user
      * @return FindCommand object
@@ -167,6 +173,7 @@ public class Parser {
 
     /**
      * Creates Command object from the full user input
+     *
      * @param fullInput full input from user
      * @return Command object
      */
@@ -212,12 +219,13 @@ public class Parser {
     /**
      * Wrapper function for Parser object to parse input strings from user
      * to create Command objects
+     *
      * @param fullInput full input from user
      * @return Command object
      */
     public Command parseInput(String fullInput) {
         Command cmd;
-        cmd = this.createCommand(fullInput);
+        cmd = createCommand(fullInput);
         return cmd;
     }
 }

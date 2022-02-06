@@ -17,6 +17,7 @@ import karen.gui.MainWindow;
 public class Main extends Application {
     public static final String USER_IMAGE_PATH = "/images/DaCat.png";
     public static final String KAREN_IMAGE_PATH = "/images/DaKaren.png";
+    public static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
 
     private final Karen karen = new Karen();
 
@@ -29,12 +30,13 @@ public class Main extends Application {
     /**
      * Adapted from JavaFx Tutorial:
      * https://se-education.org/guides/tutorials/javaFx.html
+     *
      * @param stage Base for GUI
      */
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
 
