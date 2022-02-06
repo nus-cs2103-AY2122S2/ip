@@ -26,12 +26,14 @@ public class Task {
         if (mark.equals("mark")) {
             setAsDone();
             String messageMarked = "Nice! I've marked this task as done: \n" + 
-                                    this.toString();
+                                    this.toString() + "\n " 
+                                    + "=======================================";
             return messageMarked; 
         } else {
             setAsUndone();
             String messageUnmarked = "OK, I've marked this task as not done yet: \n" +
-                                    this.toString();
+                                    this.toString() + "\n " 
+                                    + "=======================================";
             return messageUnmarked;
 
         }
@@ -43,5 +45,9 @@ public class Task {
 
     public String getInitial(){
         return "Task";
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
