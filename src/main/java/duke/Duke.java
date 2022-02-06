@@ -32,8 +32,8 @@ public class Duke {
     /**
      * Constructs a {@code Duke} object with its name and path for storage.
      */
-    public Duke() {
-        this.name = "Enkel";
+    public Duke(String name) {
+        this.name = name;
         this.ui = new Ui();
         this.storage = new Storage(System.getProperty("user.dir"));
         try {
@@ -72,7 +72,7 @@ public class Duke {
      * @return greetings from Duke.
      */
     public String greet() {
-        return "Hello! I'm " + name + "\nWhat can I do for you?";
+        return "Hello! I'm " + name + ".\nWhat can I do for you?";
     }
 
     public Pair<Boolean, String> getResponse(String input) {

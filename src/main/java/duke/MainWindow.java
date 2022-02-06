@@ -3,12 +3,12 @@ package duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
@@ -16,30 +16,35 @@ import javafx.util.Pair;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    public void setDuke(Duke d) {
+        duke = d;
+    }
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("\"Hello! I'm Enkel.\nWhat can I do for you?", dukeImage)
-        );
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        userInput.setPromptText("Type command");
+        userInput.setFont(Font.font(14));
+        userInput.setStyle("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);");
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void greet() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage));
     }
 
     /**
@@ -54,12 +59,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response.getValue(), dukeImage)
         );
+        userInput.clear();
         if (response.getKey()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
-        userInput.clear();
+        userInput.setPromptText("Type command");
     }
 
 }

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("Enkel");
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +23,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().greet();
+            stage.setTitle("Duke");
+            stage.setMinHeight(200.0);
+            stage.setMinWidth(240.0);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
