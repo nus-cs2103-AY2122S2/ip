@@ -47,6 +47,7 @@ public class Parser {
      * @param taskNumber represents which task to mark, 1 for the first task, 2 for the second, etc.
      */
     String mark(int taskNumber) {
+        assert taskNumber > 0 : "Task number cannot be negative";
         tasks.get(taskNumber - 1).mark();
         String response = "Nice! I've marked this task as done:\n";
         response += tasks.get(taskNumber - 1);
@@ -59,6 +60,7 @@ public class Parser {
      * @param taskNumber represents which task to unmark, 1 for the first task, 2 for the second, etc.
      */
     String unmark(int taskNumber) {
+        assert taskNumber > 0 : "Task number cannot be negative";
         tasks.get(taskNumber - 1).unmark();
         String response = "OK, I've marked this task as not done yet:";
         response += tasks.get(taskNumber - 1);
@@ -111,6 +113,7 @@ public class Parser {
      * @param number represents which task to delete, 1 for the first task, 2 for the second, etc.
      */
     String deleteTask(int number) {
+        assert number < tasks.size() : "Number stated is beyond the size of the list";
         Task taskToDelete = tasks.get(number - 1);
         tasks.remove(number - 1);
        return "Noted. I've removed this task:\n"
