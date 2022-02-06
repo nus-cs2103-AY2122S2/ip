@@ -15,17 +15,17 @@ import java.util.Scanner;
  */
 public class Storage {
     private String path;
-    private String file_dir;
+    private String fileDir;
 
     /**
      * Constructor for Storage class
      *
      * @param path the path to the storage file from root
-     * @param file_dir the path to the storage directory from root
+     * @param fileDir the path to the storage directory from root
      */
-    public Storage(String path, String file_dir) {
+    public Storage(String path, String fileDir) {
         this.path = path;
-        this.file_dir = file_dir;
+        this.fileDir = fileDir;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Storage {
      */
     public void storeTasks(ArrayList<Task> tasks) {
         //Saving the changes back to file
-        File file = new File(file_dir);
+        File file = new File(fileDir);
         //if prev file exists, delete it and replace with new empty file
         try {
             if (!file.exists()) {

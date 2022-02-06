@@ -55,6 +55,10 @@ public class Task {
         }
     }
 
+    /**
+     * returns the string of each task together with their status and name to the GUI
+     * @return the string of each task together with their status and name to the GUI
+     */
     public String guiPrintTask() {
         String output;
         if (this.getDone()) {

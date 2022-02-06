@@ -80,19 +80,19 @@ public class Parser {
             } else if (taskType.equals("deadline")) {
                 String[] stringSplit = taskDetails.split("/by");
                 if (stringSplit.length < 2) {
-                    throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
+                    throw new DukeException("Description of deadline must include a date/time! Missed out a /by?");
                 }
                 String details = stringSplit[0].trim();
                 String dateTime = stringSplit[1].trim();
-                newTask = new Deadline(details,dateTime);
+                newTask = new Deadline(details, dateTime);
             } else if (taskType.equals("event")) {
                 String[] splitString = taskDetails.split("/at");
                 if (splitString.length < 2) {
-                    throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
+                    throw new DukeException("Description of event must include a date/time! Missed out a /at?");
                 }
                 String details = splitString[0].trim();
                 String dateTime = splitString[1].trim();
-                newTask = new Event(details,dateTime);
+                newTask = new Event(details, dateTime);
             }
 
             taskList.addTask(newTask);
@@ -103,7 +103,14 @@ public class Parser {
         return false;
     }
 
-    public String guiTakeInput(String input, TaskList taskList) throws DukeException{
+    /**
+     * Takes an input string and returns the relevant details to be printed out by the GUI depending on instruction
+     * @param input String input
+     * @param taskList taskList of tasks
+     * @return a string containing the details to be printed out
+     * @throws DukeException
+     */
+    public String guiTakeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
             return "~BYE!~ Come back to Duke anytime";
         } else if (input.equals("list")) { //Check if input == list
@@ -165,11 +172,11 @@ public class Parser {
             } else if (taskType.equals("deadline")) {
                 String[] stringSplit = taskDetails.split("/by");
                 if (stringSplit.length < 2) {
-                    throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
+                    throw new DukeException("Description of deadline must include a date/time! Missed out a /by?");
                 }
                 String details = stringSplit[0].trim();
                 String dateTime = stringSplit[1].trim();
-                newTask = new Deadline(details,dateTime);
+                newTask = new Deadline(details, dateTime);
             } else if (taskType.equals("event")) {
                 String[] splitString = taskDetails.split("/at");
                 if (splitString.length < 2) {
@@ -177,7 +184,7 @@ public class Parser {
                 }
                 String details = splitString[0].trim();
                 String dateTime = splitString[1].trim();
-                newTask = new Event(details,dateTime);
+                newTask = new Event(details, dateTime);
             }
             return taskList.guiAddTask(newTask);
         } else {

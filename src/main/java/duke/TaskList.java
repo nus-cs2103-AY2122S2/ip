@@ -26,6 +26,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gives the string output containing the list of tasks back to GUI to be printed out
+     * @return an output string of the list of tasks
+     */
     public String guiPrintList() {
         String output = "";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -60,6 +64,11 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * returns a string containing the message after a task has been added
+     * @param task task input by user to be added
+     * @return a string containing the confirmation message and how many existing tasks back to GUI/user
+     */
     public String guiAddTask(Task task) {
         String output = "";
         tasks.add(task);
@@ -93,6 +102,11 @@ public class TaskList {
         }
     }
 
+    /**\
+     * returns the string output after a task has been deleted
+     * @param index the index of the task to be removed
+     * @return the string output of the task list after a task has been deleted
+     */
     public String guiDeleteTask(int index) {
         if (index > tasks.size() || index <= 0) {
             return "Index out of bounds, please try again";
@@ -116,6 +130,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * returns the task list after marking a task
+     * @param index the index of the task to be marked in the tasklist
+     * @return a string of the task list after marking a task
+     */
     public String guiMarkTask(int index) {
         if (index > tasks.size() || index <= 0) {
             return "Index out of bounds, please try again";
@@ -139,6 +158,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * returns the task list after unmarking a task
+     * @param index the index of the task to be unmarked in the tasklist
+     * @return a string of the task list after unmarking a task
+     */
     public String guiUnmarkTask(int index) {
         if (index > tasks.size() || index <= 0) {
             return "Index out of bounds, please try again";
@@ -174,6 +198,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * method to find any task with the matching text given by the user and returns them the list of tasks together
+     * with its index
+     * @param text input by the user to find
+     * @return a String of list of tasks that matches the user's input
+     * @throws DukeException if no matches found
+     */
     public String guiFind(String text) throws DukeException {
         String output = "";
         ArrayList<String> toPrint = new ArrayList<>();

@@ -16,9 +16,9 @@ public class Duke {
     /**
      * Constructor for Duke class
      */
-    public Duke(String path, String file_dir) {
+    public Duke(String path, String fileDir) {
         this.ui = new Ui();
-        this.storage = new Storage(path, file_dir);
+        this.storage = new Storage(path, fileDir);
         this.parser = new Parser();
 
         //Reading arraylist from data.txt

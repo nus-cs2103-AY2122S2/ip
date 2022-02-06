@@ -4,7 +4,7 @@ package duke;
  * UI class that handles the printing of startup and miscellaneous lines
  */
 public class Ui {
-     static final String LOGO = " ____        _        \n"
+    static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
