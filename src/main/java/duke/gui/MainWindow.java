@@ -57,7 +57,6 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage)
             );
         } catch (DukeException dukeError) {
-            //duke.getUi().showError(e.getMessage());
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(dukeError.getMessage(), dukeImage)
