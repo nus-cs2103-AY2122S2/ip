@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @param storage - the storage handler for the program
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) {
-        ui.showCalendar(calendar);
+    public String execute(Calendar calendar, Ui ui, Storage storage) {
+        return ui.showCalendar(calendar);
     }
 }

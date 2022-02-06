@@ -33,20 +33,20 @@ public class DeleteCommand extends Command {
      * @throws InvalidInputException - thrown when the index to delete is invalid
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         try {
             int index = Integer.parseInt(indexToDelete);
             String taskString = calendar.taskStringAtIndex(index);
             calendar.remove(index);
-            ui.showTaskDeleted(taskString);
             storage.save(calendar);
+            return ui.showTaskDeleted(taskString);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException(String.format(Text.TEXT_INVALID_LIST_INDEX,
                     calendar.numOfEntries(), Integer.parseInt(indexToDelete)));
         } catch (NumberFormatException e) {
             throw new InvalidInputException(String.format(Text.TEXT_NON_INTEGER_LIST_INDEX, this.indexToDelete));
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 }

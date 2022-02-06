@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      * @param storage - the storage handler for the program
      */
     @Override
-    public void execute(Calendar calendar, Ui ui, Storage storage) {
-        ui.showCalendar(calendar.tasksMatchingKeyword(this.keyword));
+    public String execute(Calendar calendar, Ui ui, Storage storage) {
+        return ui.showCalendar(calendar.tasksMatchingKeyword(this.keyword));
     }
 }
