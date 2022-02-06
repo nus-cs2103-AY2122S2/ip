@@ -8,14 +8,14 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     TaskList(ArrayList<Task> tasks) {
-        this.tasks = new ArrayList<Task>(tasks);
+        this.tasks = new ArrayList<>(tasks);
     }
 
     public ArrayList<Task> getTasks() {
@@ -71,10 +71,10 @@ public class TaskList {
     }
 
     /**
-     * Unmarks the Task according to the index provided and returns a message for successfully unmarking the Task
+     * Unmasks the Task according to the index provided and returns a message for successfully unmaking the Task
      *
      * @param idx index of the Task to be unmarked
-     * @return Message for successfully unmarking the Task
+     * @return Message for successfully unmaking the Task
      * @throws DukeException If the index specified is out of bounds OR If the TaskList is empty
      */
     public String unmark(int idx) throws DukeException {
@@ -136,9 +136,10 @@ public class TaskList {
         String resultStr = "";
         boolean keywordFound = false;
         int i = 1;
+        String lowerCasedKeyword = keyword.toLowerCase();
 
         for (Task t : this.tasks) {
-            if (t.description.contains(keyword)) {
+            if (t.description.toLowerCase().contains(lowerCasedKeyword)) {
                 keywordFound = true;
                 resultStr += i++ + ". " + t + "\n      ";
             }
@@ -154,7 +155,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @return exit message
      */
     public String exit() {
