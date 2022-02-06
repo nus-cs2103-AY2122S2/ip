@@ -58,11 +58,15 @@ public class Parser {
      */
     public boolean isType(Type taskType, String input) {
         if (taskType.equals(Type.MARK)) {
-            return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
+            boolean inputStartsWithMark = input.indexOf("mark") == 0;
+            boolean inputStartsWithUnmark = input.indexOf("unmark") == 0;
+            return inputStartsWithMark || inputStartsWithUnmark;
         } else if (taskType.equals(Type.EMPTY)) {
-            return input.equals("");
+            boolean isEmptyInput = input.equals("");
+            return isEmptyInput;
         }
-        return input.indexOf(taskType.name().toLowerCase()) == 0;
+        boolean inputStartsWithType = input.indexOf(taskType.name().toLowerCase()) == 0;
+        return inputStartsWithType;
     }
 
     /**
@@ -108,7 +112,8 @@ public class Parser {
         case DELETE:
             parsedArr = input.split(" ");
             checkMarkOrDeleteInput(parsedArr, Type.DELETE);
-            parsedArr = new String[]{ parsedArr[1] };
+            final int TASK_NUM_INDEX = 1;
+            parsedArr = new String[]{ parsedArr[TASK_NUM_INDEX] };
             break;
         case FIND:
             parsedArr = input.split("find ");
@@ -127,8 +132,10 @@ public class Parser {
      * @throws InvalidArgumentException if user attempts to marks a marked task or unmark an unmarked task
      */
     void checkValidMarkAction(String[] parsedArr) throws InvalidArgumentException {
-        String action = parsedArr[0];
-        int taskIndex = Integer.parseInt(parsedArr[1]) - 1;
+        final int ACTION_INDEX = 0;
+        final int TASK_NUM_INDEX = 1;
+        String action = parsedArr[ACTION_INDEX];
+        int taskIndex = Integer.parseInt(parsedArr[TASK_NUM_INDEX]) - 1;
         if (action.equals("mark")) {
             tasks.getTask(taskIndex).checkMark();
         } else if (action.equals("unmark")) {
@@ -144,19 +151,24 @@ public class Parser {
      * @throws InvalidArgumentException for invalid inputs
      */
     void checkMarkOrDeleteInput(String[] parsedArr, Type action) throws InvalidArgumentException {
-        if (parsedArr.length == 2) {
+        boolean isFullInput = parsedArr.length == 2;
+        if (isFullInput) {
             try {
-                String taskNum = parsedArr[1];
+                final int TASK_NUM_INDEX = 1;
+                String taskNum = parsedArr[TASK_NUM_INDEX];
                 Integer.parseInt(taskNum);
                 tasks.checkTaskExists(taskNum);
             } catch (NumberFormatException nfe) {
-                throw new InvalidArgumentException("That's not a task number! Put a number.");
+                String notNumberMsg = "That's not a task number! Put a number.";
+                throw new InvalidArgumentException(notNumberMsg);
             }
         } else {
             if (action.equals(Type.MARK)) {
-                throw new InvalidArgumentException("Wrong input. Type this: mark/unmark taskNumber");
+                String wrongMarkFormatMsg = "Wrong input. Type this: mark/unmark taskNumber";
+                throw new InvalidArgumentException(wrongMarkFormatMsg);
             } else {
-                throw new InvalidArgumentException("Wrong input. Type this: delete taskNumber");
+                String wrongDeleteFormatMsg = "Wrong input. Type this: delete taskNumber";
+                throw new InvalidArgumentException(wrongDeleteFormatMsg);
             }
         }
     }
@@ -172,15 +184,31 @@ public class Parser {
         String description;
         try {
             if (taskType.equals(Type.TODO) || taskType.equals(Type.FIND)) {
-                description = parsedArr[1];
+                final int DESCRIPTION_INDEX = 1;
+                description = parsedArr[DESCRIPTION_INDEX];
             } else {
-                description = parsedArr[0].split(taskType.name().toLowerCase() + " ")[1];
+                final int DESCRIPTION_PART_INDEX = 0;
+                description = extractDescriptionFromType(taskType, parsedArr[DESCRIPTION_PART_INDEX]);
             }
             checkDescriptionNotNumber(description);
             return description;
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidArgumentException("Where's the description?");
+            String emptyDescriptionMsg = "Where's the description?";
+            throw new InvalidArgumentException(emptyDescriptionMsg);
         }
+    }
+
+    /**
+     * For extracting description from deadline and event type
+     * @param taskType Type, either deadline or event
+     * @param parsedPart String of the first half of the parsed part: e.g "deadline do dishes" from
+     *                   "deadline do dishes /by ..."
+     * @return String, the description
+     */
+    private String extractDescriptionFromType(Type taskType, String parsedPart) {
+        final int DESCRIPTION_INDEX = 1;
+        final String typePart = taskType.name().toLowerCase() + " ";
+        return parsedPart.split(typePart)[DESCRIPTION_INDEX];
     }
 
     /**
@@ -192,7 +220,8 @@ public class Parser {
     boolean checkDescriptionNotNumber(String description) throws InvalidArgumentException {
         try {
             Integer.parseInt(description);
-            throw new InvalidArgumentException("Description can't be numbers? We need String!");
+            String nonStringDescriptionMsg = "Description can't be numbers? We need String!";
+            throw new InvalidArgumentException(nonStringDescriptionMsg);
         } catch (NumberFormatException nfe) {
             return true;
         }
@@ -209,13 +238,16 @@ public class Parser {
     String getTime(String[] parsedArr, Type taskType) throws InvalidArgumentException {
         try {
             if (taskType.equals(Type.DEADLINE)) {
-                LocalDate checkValid = LocalDate.parse(parsedArr[1]);
+                final int TIME_INDEX = 1;
+                LocalDate checkValid = LocalDate.parse(parsedArr[TIME_INDEX]);
             }
             return parsedArr[1];
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidArgumentException("Where's your time input?");
+            String missingTimeMsg = "Where's your time input?";
+            throw new InvalidArgumentException(missingTimeMsg);
         } catch (DateTimeParseException e) {
-            throw new InvalidArgumentException("Please enter deadline date in: yyyy-mm-dd");
+            String wrongDateFormatMsg = "Please enter deadline date in: yyyy-mm-dd";
+            throw new InvalidArgumentException(wrongDateFormatMsg);
         }
     }
 
@@ -251,7 +283,8 @@ public class Parser {
         default:
             break;
         }
-        return new String[][]{ taskArgs, new String[]{ type }, new String[]{ isDone } };
+        String[][] initTaskArgs = new String[][]{ taskArgs, new String[]{ type }, new String[]{ isDone } };
+        return initTaskArgs;
     }
 
     /**
@@ -261,7 +294,8 @@ public class Parser {
      * @return String, the task type
      */
     String parseTaskInLine(String[] splitArr) {
-        String letter = splitArr[1].substring(0, 1);
+        final int LETTER_PART_INDEX = 1;
+        String letter = extractLetter(splitArr[LETTER_PART_INDEX]);
         String type = null;
         switch (letter) {
         case "T":
@@ -280,13 +314,32 @@ public class Parser {
     }
 
     /**
+     * Extracts the letter of the type of tasks from the rest of the splitArr String
+     * @param splitArr String, after splitting the letter part out
+     * @return String, a letter representing the type either: "T", "D", "E"
+     */
+    private String extractLetter(String splitArr) {
+        return splitArr.substring(0, 1);
+    }
+
+    /**
      * Parses the splitArr to get the done status of the task
      * @param splitArr String[], array split by an open square bracket
      * @return String, indicating the done status by a whitespace (indicatingg not done)
      *          or X (indicates done)
      */
     String isDoneStatusInLine(String[] splitArr) {
-        return splitArr[2].substring(0, 1);
+        final int DONE_STATUS_PART_INDEX = 2;
+        return extractDoneStatus(splitArr[DONE_STATUS_PART_INDEX]);
+    }
+
+    /**
+     * Extracts the done status from the rest of the splitArr String
+     * @param splitArr String, after splitting the done status part out
+     * @return String, either "X" indicating done or " " not done
+     */
+    private String extractDoneStatus(String splitArr) {
+        return splitArr.substring(0, 1);
     }
 
     /**
@@ -296,10 +349,17 @@ public class Parser {
      * @return String[], args for creating event
      */
     String[] parseEventInLine(String[] splitArr) {
-        String parsingPart = splitArr[2];
-        String[] parsedArr = parsingPart.split(" \\(at: ");
-        String description = parsedArr[0].split(".] ")[1];
-        String at = removeEndBracket(parsedArr[1]);
+        final int PARSING_PART_INDEX = 2;
+        final String SPLIT_SEP_AT = " \\(at: ";
+        final String SPLIT_SEP_DESCRIPTION = ".] ";
+        final int DESCRIPTION_PART_INDEX = 0;
+        final int DESCRIPTION_INDEX = 1;
+        final int TIMING_AT_INDEX = 1;
+
+        String parsingPart = splitArr[PARSING_PART_INDEX];
+        String[] parsedArr = parsingPart.split(SPLIT_SEP_AT);
+        String description = parsedArr[DESCRIPTION_PART_INDEX].split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
+        String at = removeEndBracket(parsedArr[TIMING_AT_INDEX]);
         return new String[]{ description, at };
     }
 
@@ -310,10 +370,17 @@ public class Parser {
      * @return String[], args for creating deadline
      */
     String[] parseDeadlineInLine(String[] splitArr) {
-        String parsingPart = splitArr[2];
-        String[] parsedArr = parsingPart.split(" \\(by: ");
-        String description = parsedArr[0].split(".] ")[1];
-        String by = removeEndBracket(parsedArr[1]);
+        final int PARSING_PART_INDEX = 2;
+        final String SPLIT_SEP_AT = " \\(by: ";
+        final String SPLIT_SEP_DESCRIPTION = ".] ";
+        final int DESCRIPTION_PART_INDEX = 0;
+        final int DESCRIPTION_INDEX = 1;
+        final int DEADLINE_INDEX = 1;
+
+        String parsingPart = splitArr[PARSING_PART_INDEX];
+        String[] parsedArr = parsingPart.split(SPLIT_SEP_AT);
+        String description = parsedArr[DESCRIPTION_PART_INDEX].split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
+        String by = removeEndBracket(parsedArr[DEADLINE_INDEX]);
         String byInLocalDateFormat = changeDateFormat(by);
         return new String[]{ description, byInLocalDateFormat };
     }
@@ -325,8 +392,11 @@ public class Parser {
      * @return String[], args for creating todo
      */
     String[] parseToDoInLine(String[] splitArr) {
-        String parsingPart = splitArr[2];
-        String description = parsingPart.split(".] ")[1];
+        final int PARSING_PART_INDEX = 2;
+        final String SPLIT_SEP_DESCRIPTION = ".] ";
+        final int DESCRIPTION_INDEX = 1;
+        String parsingPart = splitArr[PARSING_PART_INDEX];
+        String description = parsingPart.split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
         return new String[]{ description };
     }
 
@@ -346,10 +416,14 @@ public class Parser {
      * @return date in yyyy-mm-dd format
      */
     String changeDateFormat(String date) {
-        String[] splitArr = date.split(" ");
-        String year = splitArr[2];
-        String day = splitArr[1];
-        String month = splitArr[0];
+        final int MONTH_INDEX = 0;
+        final int DAY_INDEX = 1;
+        final int YEAR_INDEX = 2;
+        final String WHITESPACE = " ";
+        String[] splitArr = date.split(WHITESPACE);
+        String year = splitArr[YEAR_INDEX];
+        String day = splitArr[DAY_INDEX];
+        String month = splitArr[MONTH_INDEX];
         String numericMonth = null;
         switch (month) {
         case "Jan":

@@ -37,7 +37,14 @@ public class FindCommand extends Command {
     public String execute() {
         TaskList tasks = getTasks();
         InputResponder inputResponder = getInputResponder();
-        String description = parsedArr[0];
-        return inputResponder.showFoundTasksMsg(tasks, description);
+        String description = getDescription();
+        String findOutputMsg = inputResponder.showFoundTasksMsg(tasks, description);
+        return findOutputMsg;
+    }
+
+    private String getDescription() {
+        final int DESCRIPTION_INDEX = 0;
+        String description = parsedArr[DESCRIPTION_INDEX];
+        return description;
     }
 }

@@ -40,9 +40,16 @@ public class DeleteCommand extends Command {
         TaskList tasks = getTasks();
         Storage storage = getStorage();
         InputResponder inputResponder = getInputResponder();
-        String taskNum = parsedArr[0];
+        String taskNum = getTaskNum();
         Task deletedTask = tasks.deleteTask(taskNum);
         String msgOutputFromSave = storage.saveTasks(tasks);
-        return inputResponder.showDeleteMsg(deletedTask, tasks.numTasksLeft()) + msgOutputFromSave;
+        String deleteOutputMsg = inputResponder.showDeleteMsg(deletedTask, tasks.numTasksLeft()) + msgOutputFromSave;
+        return deleteOutputMsg;
+    }
+
+    private String getTaskNum() {
+        final int TASK_NUM_INDEX = 0;
+        String taskNum = parsedArr[TASK_NUM_INDEX];
+        return taskNum;
     }
 }
