@@ -82,24 +82,38 @@ public class Parser {
             break;
 
         case MARK:
-            System.out.println("Nice! I've marked this task as done:\n");
-            int taskToBeMarkedIndex = Integer.parseInt(splitInput[1]) - 1;
-            Task taskToBeMarked = storage.get(taskToBeMarkedIndex);
-            taskToBeMarked.setMarkedTask();
+
+            try {
+                int taskToBeMarkedIndex = Integer.parseInt(splitInput[1]) - 1;
+                Task taskToBeMarked = storage.get(taskToBeMarkedIndex);
+                System.out.println("Nice! I've marked this task as done:\n");
+                taskToBeMarked.setMarkedTask();
+            } catch (NumberFormatException e) {
+                System.out.println("Make sure mark is in the format: mark [index]!");
+            }
             break;
 
         case UNMARK:
-            System.out.println("OK, I've marked this task as not done yet:\n");
-            int taskToBeUnmarkedIndex = Integer.parseInt(splitInput[1]) - 1;
-            Task taskToBeUnmarked = storage.get(taskToBeUnmarkedIndex);
-            taskToBeUnmarked.setUnmarkedTask();
+
+            try {
+                int taskToBeUnmarkedIndex = Integer.parseInt(splitInput[1]) - 1;
+                Task taskToBeUnmarked = storage.get(taskToBeUnmarkedIndex);
+                System.out.println("OK, I've marked this task as not done yet:\n");
+                taskToBeUnmarked.setUnmarkedTask();
+            } catch (NumberFormatException e) {
+                System.out.println("Make sure mark is in the format: mark [index]!");
+            }
             break;
 
         case DELETE:
-            int idx = Integer.parseInt(splitInput[1]) - 1;
-            Task taskToBeDeleted = storage.get(idx);
-            storage.deleteData(idx);
-            System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + storage.taskListSize() + " tasks in the list");
+            try {
+                int idx = Integer.parseInt(splitInput[1]) - 1;
+                Task taskToBeDeleted = storage.get(idx);
+                storage.deleteData(idx);
+                System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + storage.taskListSize() + " tasks in the list");
+            } catch (NumberFormatException e) {
+                System.out.println("Make sure mark is in the format: mark [index]!");
+            }
             break;
 
         default:
