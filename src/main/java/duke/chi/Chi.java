@@ -31,17 +31,14 @@ public class Chi {
      * @param filepath The filepath of task data saved in hard-disk.
      */
     public Chi(String filepath) {
-        // Create new Storage object by passing in specified data file path
         this.storage = new Storage(filepath);
         this.parser = new Parser();
         this.ui = new UI();
         try {
-            // Attempt to load the data from the data file into the task list
             this.taskList = new TaskList(storage.load());
         } catch (ChiException e) {
             this.taskList = new TaskList();
         } catch (IOException e) {
-            // print error for IO problems when instantiating Chi object
             ui.printErrorMsg("There's something wrong with the IO nyan~!!");
         }
     }
