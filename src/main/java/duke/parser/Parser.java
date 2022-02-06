@@ -13,6 +13,10 @@ import java.io.IOException;
  */
 public class Parser {
 
+    private static final int LIST_COMMAND_LENGTH = 1;
+    private static final int MIN_COMMAND_LENGTH = 2;
+    private static final int MAX_HELP_COMMAND_LENGTH = 2;
+
     /**
      * Processes the message sent by the user into an appropriate response.
      *
@@ -24,17 +28,14 @@ public class Parser {
      * @throws IOException If there is something wrong with the I/O during message processing.
      */
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
-        // Split the string by the space
         String[] messageFragments = msg.trim().split(" ");
         if (messageFragments.length == 0) {
-            // User didn't type anything
             throw new ChiException("Hey it's not like I want you to...but can you type something nyan!");
         } else {
             // Check if message is valid command
             Keywords s = messageValidator(messageFragments);
             // Create a new command instance for the user command
             Command r = Command.of(s, messageFragments);
-            // Execute the command
             return r.execute(tl, sge);
         }
     }
@@ -56,15 +57,17 @@ public class Parser {
              */
             Keywords res = Keywords.getKeyword(tokens[0].toUpperCase());
             // Check if it is an add task or find command that has at least 1 word defined
-            if ((res.equals(Keywords.ADD) || res.equals(Keywords.FIND)) && tokens.length < 2) {
+            boolean isMultiWordCommand = res.equals(Keywords.ADD) || res.equals(Keywords.FIND);
+            boolean isNumericCommand = res.equals(Keywords.MARK) || res.equals(Keywords.UNMARK)
+                    || res.equals(Keywords.DELETE);
+            if (isMultiWordCommand && tokens.length < MIN_COMMAND_LENGTH) {
                 throw new ChiException("Hey this command is too short nyan!");
-            } else if ((res.equals(Keywords.MARK) || res.equals(Keywords.UNMARK) || res.equals(Keywords.DELETE))
-                    && tokens.length < 2) {
+            } else if (isNumericCommand && tokens.length < MIN_COMMAND_LENGTH) {
                 throw new ChiException("Hey can you specify a number nyan!"); // Check if numeric commands have numbers
-            } else if (res.equals(Keywords.LIST) && tokens.length > 1) {
+            } else if (res.equals(Keywords.LIST) && tokens.length > LIST_COMMAND_LENGTH) {
                 // Check if list has anything defined behind it
                 throw new ChiException("Hey this command doesn't take in so many arguments nyan!");
-            } else if (res.equals(Keywords.HELP) && tokens.length > 2) {
+            } else if (res.equals(Keywords.HELP) && tokens.length > MAX_HELP_COMMAND_LENGTH) {
                 throw new ChiException("Hey Chi-san can only help you with one thing at a time nyan!");
             }
             return res;

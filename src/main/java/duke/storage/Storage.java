@@ -23,10 +23,10 @@ import java.util.Scanner;
 public class Storage {
 
     /** The relative file path of the data file */
-    private String dataFilePath;
+    private final String dataFilePath;
 
     /** The relative path of the directory containing the data file */
-    private String dataFolderPath;
+    private final String dataFolderPath;
 
     /** The File object representing the data file */
     private File dataFile;

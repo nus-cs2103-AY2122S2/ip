@@ -13,7 +13,7 @@ import java.io.IOException;
 public class MarkCommand extends Command {
 
     /** Message of user in array format */
-    private String[] tokens;
+    private final String[] tokens;
 
     /**
      * Constructor of the class.
@@ -39,15 +39,12 @@ public class MarkCommand extends Command {
             boolean isValidMarkCommand = validateMessageBody(msg, tl);
             if (!isValidMarkCommand) {
                 throw new ChiException("Hey there is something wrong with this mark command nyan!");
-            } else {
-                int index = getIndexInMessage(msg);
-                Task doneTask = tl.getTask(index);
-                // Mark as done
-                doneTask.markAsDone();
-                sge.updateFile(doneTask, tl, "mark");
-                return String.format("Great job nyan~!\n%s\n", doneTask);
-
             }
+            int index = getIndexInMessage(msg);
+            Task doneTask = tl.getTask(index);
+            doneTask.markAsDone();
+            sge.updateFile(doneTask, tl, "mark");
+            return String.format("Great job nyan~!\n%s\n", doneTask);
         } catch (IOException e) {
             throw new ChiException("Hey something went wrong with the IO nyan!");
         }

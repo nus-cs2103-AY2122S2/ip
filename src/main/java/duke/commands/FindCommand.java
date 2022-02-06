@@ -9,7 +9,7 @@ import duke.tasklist.TaskList;
 public class FindCommand extends Command {
 
     /** The message of the user in array format */
-    private String[] tokens;
+    private final String[] tokens;
 
     /**
      * Constructor of the class.

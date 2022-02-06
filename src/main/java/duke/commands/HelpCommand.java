@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 
 public class HelpCommand extends Command {
 
-    private String[] tokens;
+    private final String[] tokens;
 
     public HelpCommand(String[] tokens) {
         this.tokens = tokens;
