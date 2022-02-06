@@ -5,7 +5,7 @@ package alfred.task;
  * Encapsulates a T0D0 task.
  */
 public class ToDo extends Task {
-    protected final static String type = "T";
+    protected static final String type = "T";
 
     /**
      * Constructs a T0D0 object.

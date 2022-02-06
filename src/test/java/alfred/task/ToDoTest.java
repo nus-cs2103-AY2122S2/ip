@@ -1,9 +1,12 @@
 package alfred.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * Encapsulates tests for ToDo class.
+ */
 public class ToDoTest {
 
     @Test

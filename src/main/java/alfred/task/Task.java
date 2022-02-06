@@ -16,8 +16,7 @@ public abstract class Task {
     protected static final String COMPLETION_MARK = "X";
     protected static final String INCOMPLETE_MARK = " ";
     private static final DateTimeFormatter dateTimeFormatter =
-            DateTimeFormatter.ofLocalizedDateTime(
-                    FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
 
 
     // instance attributes
@@ -94,14 +93,14 @@ public abstract class Task {
         System.out.println(command);
         boolean marked = arguments[1].equals(Task.COMPLETION_MARK);
         switch (command) {
-            case ToDo.type:
-                return new ToDo(marked, arguments[2]);
-            case Event.type:
-                return new Event(marked, arguments[2], arguments[3]);
-            case Deadline.type:
-                return new Deadline(marked, arguments[2], arguments[3]);
-            default:
-                throw new RuntimeException("Invalid command saved!");
+        case ToDo.type:
+            return new ToDo(marked, arguments[2]);
+        case Event.type:
+            return new Event(marked, arguments[2], arguments[3]);
+        case Deadline.type:
+            return new Deadline(marked, arguments[2], arguments[3]);
+        default:
+            throw new RuntimeException("Invalid command saved!");
         }
     }
 

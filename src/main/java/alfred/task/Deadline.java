@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    protected final static String type = "D";
+    protected static final  String type = "D";
     private final LocalDateTime dateTime;
     private final String dateAndTime;
 

@@ -35,6 +35,9 @@ public class MainWindow extends AnchorPane {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
     }
 
+    /**
+     * Calls children of DialogContainer and adds startup Dialog to them.
+     */
     public void greetUser() {
         String greetingMessage = this.alfred.getGreetingMessage();
         DialogBox startupDialog = DialogBox.getAlfredDialog(greetingMessage, this.alfredImage);

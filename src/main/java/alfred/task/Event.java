@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Encapsulates the event task.
  */
 public class Event extends Task {
-    protected final static String type = "E";
+    protected static final String type = "E";
     private final LocalDateTime dateTime;
     private final String dateAndTime;
 
