@@ -36,8 +36,10 @@ public class DeleteCommand extends Command {
         if (targetIndex >= tasks.listSize() || targetIndex < 0) {
             throw new InvalidTaskException();
         }
+
         Task t = tasks.deleteTask(targetIndex);
         storage.save(tasks);
+
         return "No problem, I've deleted that task for you:\n\n"
                 + t.toString() + "\n\n"
                 + "You now have " + tasks.listSize() + " task(s) remaining on your list.";

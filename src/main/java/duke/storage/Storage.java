@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -69,73 +67,17 @@ public class Storage {
                 String task = s.nextLine();
                 String[] parsedTask = task.split(" \\| ");
                 switch (parsedTask[0]) {
-                case "T": {
-                    Todo t = new Todo(parsedTask[2]);
-                    if (parsedTask[1].equals("1")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
+                case "T":
+                    tasks.add(Todo.getTodoFromData(parsedTask));
                     break;
-                }
-                case "D": {
-                    String done = parsedTask[1];
-                    String desc = parsedTask[2];
-                    String date = parsedTask[3];
-                    String time = parsedTask[4];
-                    if (!date.equals("0") && !time.equals("0")) {
-                        Deadline d = new Deadline(desc,
-                                LocalDate.parse(date),
-                                LocalTime.parse(time));
-                        if (done.equals("1")) {
-                            d.markAsDone();
-                        }
-                        tasks.add(d);
-                    } else if (!date.equals("0")) {
-                        Deadline d = new Deadline(desc, LocalDate.parse(date));
-                        if (done.equals("1")) {
-                            d.markAsDone();
-                        }
-                        tasks.add(d);
-                    } else {
-                        Deadline d = new Deadline(desc, LocalTime.parse(time));
-                        if (done.equals("1")) {
-                            d.markAsDone();
-                        }
-                        tasks.add(d);
-                    }
+                case "D":
+                    tasks.add(Deadline.getDeadlineFromData(parsedTask));
                     break;
-                }
-                case "E": {
-                    String done = parsedTask[1];
-                    String desc = parsedTask[2];
-                    String date = parsedTask[3];
-                    String time = parsedTask[4];
-                    if (!date.equals("0") && !time.equals("0")) {
-                        Event e = new Event(desc,
-                                LocalDate.parse(date),
-                                LocalTime.parse(time));
-                        if (done.equals("1")) {
-                            e.markAsDone();
-                        }
-                        tasks.add(e);
-                    } else if (!date.equals("0")) {
-                        Event e = new Event(desc, LocalDate.parse(date));
-                        if (done.equals("1")) {
-                            e.markAsDone();
-                        }
-                        tasks.add(e);
-                    } else {
-                        Event e = new Event(desc, LocalTime.parse(time));
-                        if (done.equals("1")) {
-                            e.markAsDone();
-                        }
-                        tasks.add(e);
-                    }
+                case "E":
+                    tasks.add(Event.getEventFromData(parsedTask));
                     break;
-                }
-                default: {
+                default:
                     break;
-                }
                 }
             }
         } catch (IOException e) {
