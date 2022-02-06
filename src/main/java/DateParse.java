@@ -1,15 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 
-/**
- * This class parse a varying format of dates into a LocalDate object.
- */
+import java.util.ArrayList;
 
+/**
+ * DateParse class parse a varying format of dates into a LocalDate object.
+ */
 public class DateParse {
+
     private LocalDate date;
     private boolean isFound = false;
+
+    // All the available formats Jeff accepts as dates
     ArrayList<DateTimeFormatter> knownPatterns = new ArrayList<DateTimeFormatter>();
     DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -28,7 +31,13 @@ public class DateParse {
     DateTimeFormatter format15 = DateTimeFormatter.ofPattern("dd-M-yyyy");
     DateTimeFormatter format16 = DateTimeFormatter.ofPattern("dd/M/yyyy");
 
-    public DateParse(String str) {
+    /**
+     * Constructor for DateParse
+     *
+     * @param str String to be parsed into a LocalDate object
+     * @throws JeffException
+     */
+    public DateParse(String str) throws JeffException {
         knownPatterns.add(format1);
         knownPatterns.add(format2);
         knownPatterns.add(format3);
@@ -55,15 +64,18 @@ public class DateParse {
                 curr++;
             }
         }
+
+        // When the input string cannot be parsed, return JeffException
         if ((!isFound) && curr == 16) {
-            System.err.println("Format not found");
+            throw new JeffException("Sorry but Jeff does not understand the date format given\n"
+                    + "Please check the readme.txt for the acceptable formats.");
         }
-        this.helper();
+//        this.helper();
     }
 
-    private LocalDate helper() {
-        return date;
-    }
+//    private LocalDate helper() {
+//        return date;
+//    }
 
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
