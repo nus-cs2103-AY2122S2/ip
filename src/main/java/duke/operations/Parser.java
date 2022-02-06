@@ -119,6 +119,7 @@ public class Parser {
             }
         } else if (firstWord.equalsIgnoreCase("delete")) {
             int listIndex = Integer.parseInt(strs[1]); // retrieve the index after delete
+            assert (listIndex > 0) : "This index is sussy, it must be greater than 0!";
             Task taskToBeDeleted = TaskList.TASK_ARRAY_LIST.get(listIndex - 1);
             return new DeleteCommand(taskToBeDeleted);
         } else if (firstWord.equalsIgnoreCase("find")) {
