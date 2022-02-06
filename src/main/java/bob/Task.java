@@ -17,6 +17,15 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the description of the Task.
+     *
+     * @return Description of the Task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }

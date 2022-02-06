@@ -79,6 +79,11 @@ public class Ui {
         Ui.printLine();
     }
 
+    public static void find() {
+        Ui.printLine();
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
     /**
      * Prints UI message when an invalid command is given.
      *

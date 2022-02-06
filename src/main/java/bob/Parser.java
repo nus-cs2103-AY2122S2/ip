@@ -52,6 +52,11 @@ public class Parser {
                 tasks.add(newEvent);
                 tasksIsDiff = true;
                 break;
+            case "find":
+                String keyword = userInput.split(" ", 2)[1];
+                tasks.find(keyword);
+                break;
+                
             default:
                 Ui.invalidCommand(cmd);
             }
