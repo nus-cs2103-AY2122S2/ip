@@ -130,10 +130,7 @@ public class Parser {
     }
 
     private static boolean isValidDeadlineEventSplit(String[] splitInput) {
-        if (splitInput.length != 2 || isEmptyString(splitInput[0]) || isEmptyString(splitInput[1])) {
-            return false;
-        }
-        return true;
+        return splitInput.length == 2 && !isEmptyString(splitInput[0]) && !isEmptyString(splitInput[1]);
     }
 
     private static boolean isEmptyString(String s) {
