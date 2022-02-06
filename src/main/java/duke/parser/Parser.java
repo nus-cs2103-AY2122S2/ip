@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
     public static boolean parse(String input, TaskList taskList) throws DukeException {
-        //rmb to return true if exit
+
         if (input.equals("bye")) {
             Ui.print("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
             return true;
@@ -21,7 +21,6 @@ public class Parser {
             String[] inputArgs = input.split(" ", 2);
             String command = inputArgs[0];
 
-            //Assuming input correct
             if (command.equals("mark")) {
                 handleMark(taskList, inputArgs, true);
             } else if (command.equals("unmark")) {

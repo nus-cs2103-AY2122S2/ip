@@ -12,18 +12,19 @@ import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-
 public class Storage {
     private String path;
 
     public Storage(String path) throws DukeException {
-        // Splits pathname into relative path and filename
-        // Creates missing dir/ file
         this.path = path;
+
+        // Splits pathname into relative path and filename
         String filename = path.substring(path.lastIndexOf("/") + 1);
         String dir = path.split(filename)[0];
         File d = new File(dir);
         File f = new File(path);
+
+        // Creates missing dir/ file
         if (!d.exists()) {
             d.mkdirs();
         }
@@ -67,11 +68,11 @@ public class Storage {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
                 String curr = fileToRead.nextLine();
-                // taskComponent[0]: Type of duke.task.Task
-                // taskComponent[1]: Completion of duke.task.Task, can be either "1" or "0"
-                // taskComponent[2]: Name of duke.task.Task
-                // taskComponent[3]: Date of duke.task.Task
-                // taskComponent[4]: Time of duke.task.Task
+                // taskComponent[0]: Type of Task
+                // taskComponent[1]: Completion of Task, can be either "1" or "0"
+                // taskComponent[2]: Name of Task
+                // taskComponent[3]: Date of Task
+                // taskComponent[4]: Time of Task
                 // \\| needed to split "|"
                 String[] taskComponent = curr.split(" \\| ");
                 switch (taskComponent[0]) {

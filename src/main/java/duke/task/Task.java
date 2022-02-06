@@ -84,7 +84,7 @@ public class Task {
     @Override
     public String toString() {
         String str = "[";
-        //Completion
+
         if (this.done) {
             str += "X";
         } else {
