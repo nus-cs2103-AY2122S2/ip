@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.task.TaskList;
 
 public class ByeCommand extends Command {
@@ -14,11 +12,9 @@ public class ByeCommand extends Command {
     /**
      * Pushes a goodbye message to the UI.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         return "Bye. Hope to see you again soon!";
     }
 

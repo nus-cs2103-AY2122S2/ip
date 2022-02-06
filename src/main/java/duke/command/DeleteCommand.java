@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
@@ -19,11 +17,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task at the specified index in the list of tasks.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         if (index <= tasks.size()) {
             String res = "Noted. I've removed this task:\n" + tasks.get(index - 1);
             tasks.remove(index - 1);

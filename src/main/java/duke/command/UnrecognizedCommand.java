@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.task.TaskList;
 
 public class UnrecognizedCommand extends Command {
@@ -14,11 +12,9 @@ public class UnrecognizedCommand extends Command {
     /**
      * Pushes a message to the UI to indicate that the command is not recognized.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         return "Sorry, but I don't know what that means :(";
     }
 

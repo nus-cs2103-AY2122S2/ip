@@ -42,7 +42,7 @@ public class Duke {
     public Pair<Boolean, String> getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String res = c.execute(tasks, ui, storage);
+            String res = c.execute(tasks);
             storage.update(tasks);
             if (c.isExit()) {
                 return new Pair<>(true, res);

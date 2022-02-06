@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.task.TaskList;
 
 public class UnmarkCommand extends Command {
@@ -19,18 +17,15 @@ public class UnmarkCommand extends Command {
     /**
      * Unmarks the task at the specified index in the list of tasks.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (index <= tasks.size()) {
-            tasks.set(index - 1, tasks.get(index - 1).unmark());
-            return "OK, I've marked this task as not done yet:\n"
-                    + tasks.get(index - 1);
-        } else {
-            return "Index is invalid";
+    public String execute(TaskList tasks) {
+        if (index > tasks.size() || index <= 0) {
+            return "Invalid index";
         }
+        tasks.set(index - 1, tasks.get(index - 1).unmark());
+        return "OK, I've marked this task as not done yet:\n"
+                + tasks.get(index - 1);
     }
 
     @Override

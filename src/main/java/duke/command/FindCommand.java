@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -22,11 +20,9 @@ public class FindCommand extends Command {
     /**
      * Constructs a new {@code TaskList} with matching tasks and asks the UI to display the list.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         ArrayList<Integer> matchingIndexes = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -36,13 +32,12 @@ public class FindCommand extends Command {
         }
         if (matchingIndexes.size() == 0) {
             return "No matching tasks are found.";
-        } else {
-            String res = "Here are the matching tasks in your list:";
-            for (int i : matchingIndexes) {
-                res += "\n  " + (i + 1) + ". " + tasks.get(i);
-            }
-            return res;
         }
+        String res = "Here are the matching tasks in your list:";
+        for (int i : matchingIndexes) {
+            res += "\n  " + (i + 1) + ". " + tasks.get(i);
+        }
+        return res;
     }
 
     @Override

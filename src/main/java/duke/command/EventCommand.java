@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeDateTime;
 import duke.task.Task;
 import duke.task.Event;
@@ -25,11 +23,9 @@ public class EventCommand extends Command {
     /**
      * Adds an event into the list of tasks.
      * @param tasks current list of tasks
-     * @param ui the UI used
-     * @param storage the storage used
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         Task t = new Event(description, at);
         tasks.add(t);
         return "Got it. I've added this task:\n" + t
