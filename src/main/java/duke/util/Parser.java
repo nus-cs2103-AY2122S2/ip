@@ -32,8 +32,9 @@ public class Parser {
 
     private static final Command EXIT_COMMAND = new ExitCommand();
     private static final Command LIST = new ListCommand();
-    private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Task.\nValid tasks are: "
-            + "\"todo\", \"deadline\", \"event\" and \"find\"");
+    private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Command. Valid commands are:"
+            + "\n" + "todo\n" + "deadline\n" + "event\n" + "mark\n" + "unmark\n" + "list\n" + "delete\n" + "find\n"
+            + "bye");
 
     /**
      * Constructor for a parser.
@@ -118,6 +119,15 @@ public class Parser {
             parsed = new UnmarkCommand(index);
             break;
         case "todo":
+            try {
+                if (splitStr[1].trim().equals("")) {
+                    throw new InvalidCommandFormatException("Command todo cannot be blank. -e.g, todo [task], "
+                            + "where task is not empty");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidCommandFormatException("Command todo cannot be blank. -e.g, todo [task], "
+                        + "where task is not empty");
+            }
             task = new Todo(splitStr[1]);
             parsed = new AddCommand(task);
             break;

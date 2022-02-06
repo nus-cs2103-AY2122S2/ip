@@ -28,15 +28,6 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    /**
-     * The main method for the duke task list.
-     * Creates an instance of duke and runs it.
-     * @param args the arguments that are given when the program is run.
-     */
-    public static void main(String[] args) {
-        Duke chatBot = new Duke("data/data.txt");
-    }
-
     public boolean hasAborted() {
         return this.shouldAbort;
     }
