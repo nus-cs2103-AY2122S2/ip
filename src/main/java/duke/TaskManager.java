@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import duke.exceptions.UnknownFileEntry;
 import duke.tasks.Task;
@@ -45,12 +47,19 @@ public class TaskManager {
     }
 
     /**
-     * return the total number of duke.tasks in the task manager list.
+     * Return the total number of duke.tasks in the task manager list.
      *
      * @return total number of duke.tasks in the task manager list.
      */
     public int getNumberOfTasks() {
         return tasks.size();
+    }
+
+    /**
+     * Sorts the tasks in the list by name, in lexicographical order.
+     */
+    public void sortByName() {
+        Collections.sort(tasks);
     }
 
     /**

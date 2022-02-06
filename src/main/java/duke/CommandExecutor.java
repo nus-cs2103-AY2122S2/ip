@@ -63,6 +63,8 @@ public class CommandExecutor {
         } else if (command.equals("find")) {
             String keyword = parsedInput.get(1);
             return executeFind(keyword);
+        } else if (command.equals("sort")) {
+            return executeSort();
         }
 
         //should never be able to reach this return statement as if a bad input is given,
@@ -137,7 +139,7 @@ public class CommandExecutor {
      */
     public String executeListTasks() {
         StringBuilder str = new StringBuilder();
-        str.append("Heres a list of your items:\n");
+        str.append("Here's a list of your items:\n");
         str.append(taskManager.getPrintableListOfTasks());
         return str.toString();
     }
@@ -161,6 +163,14 @@ public class CommandExecutor {
             str.append((i + 1) + ". " + matchingTasks.get(i));
         }
 
+        return str.toString();
+    }
+
+    public String executeSort() {
+        taskManager.sortByName();
+        StringBuilder str = new StringBuilder();
+        str.append("Here are your items sorted by name:\n");
+        str.append(taskManager.getPrintableListOfTasks());
         return str.toString();
     }
 
