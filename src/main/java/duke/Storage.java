@@ -106,7 +106,7 @@ public class Storage {
                     }
                     break;
                 default:
-                    assert false: taskInput;
+                    assert false : taskInput;
                     throw new DukeException("No valid tasks found in file!");
                 }
             }

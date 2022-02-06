@@ -56,7 +56,7 @@ public class Parser {
             case MARK:
                 return new Mark(taskId);
             default:
-                assert false: commandType;
+                assert false : commandType;
                 throw new InvalidCommandException();
             }
 
