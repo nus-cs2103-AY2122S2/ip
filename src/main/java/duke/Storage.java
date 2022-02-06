@@ -68,18 +68,18 @@ public class Storage {
      */
     public boolean write(TaskList tasks) throws DukeException {
         try (FileWriter fw = new FileWriter(dataFile, false)) {
-            for (int i = 0; i < tasks.size(); i++) {
+            tasks.getTasks().forEach(task -> {
                 try {
-                    fw.write(tasks.get(i).toFile());
+                    fw.write(task.toFile());
                 } catch (IOException e) {
-                    throw new DukeException("Unable to write to file.");
+                    e.printStackTrace();
                 }
-            }
-            return true;
+            });
         } catch (IOException e) {
             // most likely r/w permissions
             throw new DukeException("Unable to locate/write to file.");
         }
+        return true;
     }
 
     private boolean canReadWrite(File f) {

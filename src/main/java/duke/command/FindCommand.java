@@ -37,6 +37,7 @@ public class FindCommand extends Command {
         if (tasks.isEmpty()) {
             return "Your list is empty!";
         } else {
+            // already does "fuzzy" search
             List<Task> filteredTask = tasks.getTasks().stream()
                     .filter(task -> task.getTaskName().contains(findString))
                     .collect(Collectors.toList());
