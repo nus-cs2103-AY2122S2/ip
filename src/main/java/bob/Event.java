@@ -3,6 +3,9 @@ package bob;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with an associated time.
+ */
 public class Event extends bob.Task {
     protected LocalDateTime time;
 

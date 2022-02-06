@@ -1,5 +1,8 @@
 package bob;
 
+/**
+ * Represents a task to be done.
+ */
 public class ToDo extends bob.Task {
     public ToDo(String description) {
         super(description);

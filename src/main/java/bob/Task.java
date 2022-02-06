@@ -1,5 +1,8 @@
 package bob;
 
+/**
+ * Parent class of all task types.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

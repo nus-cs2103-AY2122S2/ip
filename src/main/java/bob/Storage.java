@@ -44,10 +44,10 @@ public class Storage {
     /**
      * Loads all saved entries in the file associated with this Storage instance into a list.
      *
-     * @return A list of tasks loaded from the saved file.
+     * @return A TaskList loaded from the saved file.
      * @throws FileNotFoundException File to be loaded from not found.
      */
-    public List<Task> load() {
+    public TaskList load() {
         List<Task> list = new ArrayList<>();
 
         try {
@@ -88,7 +88,7 @@ public class Storage {
             e.printStackTrace();
         }
 
-        return list;
+        return new TaskList(list);
     }
 
     /**
@@ -96,10 +96,10 @@ public class Storage {
      *
      * @param tasks List of tasks to be written to file.
      */
-    public void writeTaskListToFile(List<Task> tasks) {
+    public void writeTaskListToFile(TaskList tasks) {
         StringBuilder tasksString = new StringBuilder();
-        for (Task task : tasks) {
-            tasksString.append(task.generateSavedEntry());
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksString.append(tasks.get(i).generateSavedEntry());
             tasksString.append("\n");
         }
         try {
