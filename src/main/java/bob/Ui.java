@@ -15,6 +15,15 @@ public class Ui {
     }
 
     /**
+     * Prints UI message when program exits.
+     */
+    public static void bye() {
+        Ui.printLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        Ui.printLine();
+    }
+
+    /**
      * Prints UI message for the list command.
      */
     public static void list() {

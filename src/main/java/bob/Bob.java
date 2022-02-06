@@ -19,10 +19,7 @@ public class Bob {
             Parser.parse(cmd, taskList, storage);
             cmd = sc.nextLine().strip();
         }
-
-        Ui.printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        Ui.printLine();
+        Ui.bye();
     }
 }
 
