@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Event extends Task {
 
-    private String at;
+    private final String at;
 
     /**
      * Constructor for event task.

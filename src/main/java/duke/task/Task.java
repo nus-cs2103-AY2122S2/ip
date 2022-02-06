@@ -8,7 +8,7 @@ public abstract class Task {
     // The variables that are common among all tasks.
     protected String activity;
     protected boolean isMarked = false;
-    protected String type = " ";
+    protected String type;
 
     /**
      * Constructor that contains parameters for all types of tasks.

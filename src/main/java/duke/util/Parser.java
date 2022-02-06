@@ -76,6 +76,7 @@ public class Parser {
             } catch (ParseException e) { // Corrupted Save File.
                 e.printStackTrace();
             }
+            assert timeOrPlace != null;
             parsedTask = new Deadline(activity, timeOrPlace);
             break;
         default:
