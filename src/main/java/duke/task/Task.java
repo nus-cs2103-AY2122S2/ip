@@ -23,7 +23,6 @@ public abstract class Task {
      * @return a String symbol representing if the task is done
      */
     public String getStatusIcon() {
-        // mark done duke.task with X
         return (isDone ? "X" : " ");
     }
 

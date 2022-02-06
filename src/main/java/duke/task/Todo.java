@@ -24,6 +24,20 @@ public class Todo extends Task {
     }
 
     /**
+     * Produces the todo task using data from the save file.
+     *
+     * @param data an array containing the data
+     * @return a todo task containing the information from the data
+     */
+    public static Todo getTodoFromData(String[] data) {
+        Todo todo = new Todo(data[2]);
+        if (data[1].equals("1")) {
+            todo.markAsDone();
+        }
+        return todo;
+    }
+
+    /**
      * Checks if a date is present in the todo.
      *
      * @return false
