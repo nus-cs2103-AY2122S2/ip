@@ -97,7 +97,7 @@ public enum Handlers {
     public static String deadlineHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/by");
-            String[] time = DukeException.isTaskValid(index, input, cmd);
+            String[] time = DukeException.isTaskValid(index, input, cmd, list);
             Deadline task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
@@ -147,7 +147,7 @@ public enum Handlers {
     public static String eventHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/at");
-            String[] time = DukeException.isTaskValid(index, input, cmd);
+            String[] time = DukeException.isTaskValid(index, input, cmd, list);
             Event task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
@@ -232,7 +232,7 @@ public enum Handlers {
      */
     public static String todoHandler(Tasklist list, String input) {
         try {
-            DukeException.isTaskValid(input);
+            DukeException.isTaskValid(input, list);
             Todo task = new Todo(false, input.substring(5));
             list.addTask(task);
             FileHandler.writeToFile(list);

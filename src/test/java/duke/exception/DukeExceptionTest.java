@@ -13,7 +13,7 @@ public class DukeExceptionTest {
     @Test
     public void taskValidation_invalidInput_exceptionThrown() {
         try {
-            DukeException.isTaskValid(8, "event t /at -12/12/1999", "event");
+            DukeException.isTaskValid(8, "event t /at -12/12/1999", "event", new Tasklist());
         } catch (DukeException err) {
             assertEquals("Please provide time in the format 'DD/MM/YYYY <time>'.\n", err.getMessage());
         }
