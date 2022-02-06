@@ -33,9 +33,9 @@ public class FindCommand extends Command {
 
         if (filteredList.isEmpty()) {
             return "There are no matching tasks in your list!";
-        } else {
-            return "Here are the matching tasks I've found in your list:\n" + filteredList;
         }
+
+        return "Here are the matching tasks I've found in your list:\n" + filteredList;
     }
 
     @Override

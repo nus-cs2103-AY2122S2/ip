@@ -28,11 +28,6 @@ public class Parser {
     private static final DateTimeFormatter DATE_IN = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_IN = DateTimeFormatter.ofPattern("HHmm");
 
-    // Output formats of date and times
-    private static final DateTimeFormatter DATE_TIME_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-    private static final DateTimeFormatter DATE_OUT = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
-
     private enum Format {
         DATE,
         TIME,
@@ -52,6 +47,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return false;
         }
+
         return true;
     }
 
@@ -67,6 +63,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return false;
         }
+
         return true;
     }
 
@@ -82,6 +79,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return false;
         }
+
         return true;
     }
 
@@ -98,12 +96,12 @@ public class Parser {
 
         if (parsedReq.length == 1) {
             return new IncorrectCommand("The description of a todo cannot be empty.");
-        } else {
-            return new AddCommand(
-                    new Todo(request
-                            .substring(5)
-                            .strip()));
         }
+
+        return new AddCommand(
+                new Todo(request
+                        .substring(5)
+                        .strip()));
     }
 
     /**
@@ -129,31 +127,31 @@ public class Parser {
             return new IncorrectCommand("The description of a deadline cannot be empty.");
         } else if (by.length() == 0) {
             return new IncorrectCommand("You left the date/time of the deadline empty!");
-        } else {
-            Parser.Format f = Parser.parseDateTime(by);
+        }
 
-            switch (f) {
-            case DATETIME:
-                String[] s = by.split(" ");
-                return new AddCommand(
-                        new Deadline(desc,
-                                LocalDate.parse(s[0], DATE_IN),
-                                LocalTime.parse(s[1], TIME_IN)));
-            case DATE:
-                return new AddCommand(
-                        new Deadline(desc,
-                                LocalDate.parse(by, DATE_IN)));
-            case TIME:
-                return new AddCommand(
-                        new Deadline(desc,
-                                LocalTime.parse(by, TIME_IN)));
-            case INVALID:
-            default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
-                        + "    yyyy-MM-dd HHmm\n"
-                        + "    yyyy-MM-dd\n"
-                        + "    or HHmm");
-            }
+        Parser.Format f = Parser.parseDateTime(by);
+
+        switch (f) {
+        case DATETIME:
+            String[] s = by.split(" ");
+            return new AddCommand(
+                    new Deadline(desc,
+                            LocalDate.parse(s[0], DATE_IN),
+                            LocalTime.parse(s[1], TIME_IN)));
+        case DATE:
+            return new AddCommand(
+                    new Deadline(desc,
+                            LocalDate.parse(by, DATE_IN)));
+        case TIME:
+            return new AddCommand(
+                    new Deadline(desc,
+                            LocalTime.parse(by, TIME_IN)));
+        case INVALID:
+        default:
+            return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                    + "    yyyy-MM-dd HHmm\n"
+                    + "    yyyy-MM-dd\n"
+                    + "    or HHmm");
         }
     }
 
@@ -180,31 +178,31 @@ public class Parser {
             return new IncorrectCommand("The description of an event cannot be empty.");
         } else if (at.length() == 0) {
             return new IncorrectCommand("You left the date/time of the event empty!");
-        } else {
-            Parser.Format f = Parser.parseDateTime(at);
+        }
 
-            switch (f) {
-            case DATETIME:
-                String[] s = at.split(" ");
-                return new AddCommand(
-                        new Event(desc,
-                                LocalDate.parse(s[0], DATE_IN),
-                                LocalTime.parse(s[1], TIME_IN)));
-            case DATE:
-                return new AddCommand(
-                        new Event(desc,
-                                LocalDate.parse(at, DATE_IN)));
-            case TIME:
-                return new AddCommand(
-                        new Event(desc,
-                                LocalTime.parse(at, TIME_IN)));
-            case INVALID:
-            default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
-                        + "    yyyy-MM-dd HHmm\n"
-                        + "    yyyy-MM-dd\n"
-                        + "    or HHmm");
-            }
+        Parser.Format f = Parser.parseDateTime(at);
+
+        switch (f) {
+        case DATETIME:
+            String[] s = at.split(" ");
+            return new AddCommand(
+                    new Event(desc,
+                            LocalDate.parse(s[0], DATE_IN),
+                            LocalTime.parse(s[1], TIME_IN)));
+        case DATE:
+            return new AddCommand(
+                    new Event(desc,
+                            LocalDate.parse(at, DATE_IN)));
+        case TIME:
+            return new AddCommand(
+                    new Event(desc,
+                            LocalTime.parse(at, TIME_IN)));
+        case INVALID:
+        default:
+            return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                    + "    yyyy-MM-dd HHmm\n"
+                    + "    yyyy-MM-dd\n"
+                    + "    or HHmm");
         }
     }
 
@@ -218,13 +216,13 @@ public class Parser {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
             return new IncorrectCommand("Please tell me which task you would like to delete.");
-        } else {
-            try {
-                return new DeleteCommand(
-                        Integer.parseInt(parsedReq[1]));
-            } catch (NumberFormatException n) {
-                return new IncorrectCommand("Please enter a valid task number to delete!");
-            }
+        }
+
+        try {
+            return new DeleteCommand(
+                    Integer.parseInt(parsedReq[1]));
+        } catch (NumberFormatException n) {
+            return new IncorrectCommand("Please enter a valid task number to delete!");
         }
     }
 
@@ -238,13 +236,13 @@ public class Parser {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
             return new IncorrectCommand("Please tell me which task you would like to be marked as done.");
-        } else {
-            try {
-                return new MarkCommand(
-                        Integer.parseInt(parsedReq[1]));
-            } catch (NumberFormatException n) {
-                return new IncorrectCommand("Please enter a valid task to mark as done!");
-            }
+        }
+
+        try {
+            return new MarkCommand(
+                    Integer.parseInt(parsedReq[1]));
+        } catch (NumberFormatException n) {
+            return new IncorrectCommand("Please enter a valid task to mark as done!");
         }
     }
 
@@ -259,13 +257,13 @@ public class Parser {
 
         if (parsedReq.length != 2) {
             return new IncorrectCommand("Please tell me which task you would like to be marked as undone.");
-        } else {
-            try {
-                return new UnmarkCommand(
-                        Integer.parseInt(parsedReq[1]));
-            } catch (NumberFormatException n) {
-                return new IncorrectCommand("Please enter a valid task number to mark as undone!");
-            }
+        }
+
+        try {
+            return new UnmarkCommand(
+                    Integer.parseInt(parsedReq[1]));
+        } catch (NumberFormatException n) {
+            return new IncorrectCommand("Please enter a valid task number to mark as undone!");
         }
     }
 
@@ -309,9 +307,9 @@ public class Parser {
             return prepareDelete(input);
         } else if (input.startsWith("find")) {
             return prepareFind(input);
-        } else {
-            return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
         }
+
+        return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
     }
 
     /**
