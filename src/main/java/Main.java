@@ -17,6 +17,10 @@ public class Main extends Application {
     public Main() throws DukeException {
     }
 
+    /**
+     * Start the GUI
+     * @param stage the stage of the GUI
+     */
     @Override
     public void start(Stage stage) {
         try {

@@ -1,4 +1,5 @@
 import duke.DukeException;
+import duke.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -51,7 +52,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (response.equals(duke.getBhLine() + "GoodBye! Thanks for using B.H!" + duke.getBhLine())) {
+        if (response.equals(Ui.echo("GoodBye! Thanks for using B.H!"))) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();

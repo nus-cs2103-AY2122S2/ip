@@ -25,16 +25,21 @@ public class BH {
         this.parser = new Parser(this.ui, this.taskList, this.storage);
     }
 
-    public String getUiGreet() {
-        return this.ui.greet();
-    }
-
+    /**
+     * Return a String of line
+     * @return String of line
+     */
     public String getUiLine() {
         return this.ui.getLine();
     }
 
-
-    @SuppressWarnings("checkstyle:OperatorWrap")
+    /**
+     * Read the input and execute the command according to the input
+     * Return the output as a String
+     * @param input Command from users
+     * @return String of the result after execuation
+     * @throws DukeException
+     */
     public String run(String input) throws DukeException {
         return this.parser.execute(input);
     }

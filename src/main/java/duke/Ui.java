@@ -26,7 +26,12 @@ public class Ui {
         return "Hello, I am B.H. How can I help you?\n" + LOGO + this.getLine();
     }
 
-    public String echo(String input) {
+    /**
+     * surround the input with two lines
+     * @param input String to be surrounded
+     * @return String of input surrounded with two lines
+     */
+    public static String echo(String input) {
         return LINE + input + LINE;
     }
 }

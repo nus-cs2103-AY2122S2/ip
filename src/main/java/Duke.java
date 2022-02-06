@@ -8,12 +8,12 @@ import duke.DukeException;
 public class Duke{
     public BH bh;
 
+    /**
+     * Constructor of Duke
+     * @throws DukeException if read file wrongly
+     */
     public Duke() throws DukeException {
         this.bh = new BH();
-    }
-
-    String getBhLine() {
-        return this.bh.getUiLine();
     }
 
     /**
