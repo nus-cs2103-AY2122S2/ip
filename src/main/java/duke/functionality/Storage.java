@@ -102,7 +102,7 @@ public class Storage {
      * @param task the Task object to be checked.
      */
     public Task checkTaskDone(int mark, Task task) {
-        if(mark == 1){
+        if (mark == 1) {
             task.setTaskDone();
         }
         return task;

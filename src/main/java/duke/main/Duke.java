@@ -15,12 +15,13 @@ import duke.functionality.TaskList;
 public class Duke {
     protected Storage storage;
     protected TaskList taskList;
-
+    protected boolean isExit;
     /**
      * Default constructor for Duke class.
      */
     public Duke() {
         this.taskList = new TaskList(); //default task list
+        this.isExit = false;
     }
 
     /**
@@ -35,6 +36,10 @@ public class Duke {
         this.taskList = storage.load();
     }
 
+    public boolean getExitStatus() {
+        return this.isExit;
+    }
+
     /**
      * Returns a message that corresponds to the action taken by the input of the user.
      * @param input user's input.
@@ -46,6 +51,10 @@ public class Duke {
             Command command = Parser.parse(input);
             output = command.execute(taskList);
             Storage.updateTextFile(taskList);
+
+            if (command.isExit()) {
+                this.isExit = true;
+            }
             return output;
         } catch (DukeException e) {
             return e.getMessage();
