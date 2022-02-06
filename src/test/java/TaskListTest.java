@@ -1,5 +1,5 @@
-import duke.task.TaskStub;
-import duke.tasklist.TaskList;
+import chibot.task.TaskStub;
+import chibot.tasklist.TaskList;
 
 import org.junit.jupiter.api.Test;
 
