@@ -12,6 +12,7 @@ public class Task {
     private String type;
     private String extension = "";
 
+
     public Task(String name, String type) {
         this.name = name;
         this.completed = false;
@@ -41,6 +42,14 @@ public class Task {
      */
     public void setUndone() {
         this.completed = false;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     /**

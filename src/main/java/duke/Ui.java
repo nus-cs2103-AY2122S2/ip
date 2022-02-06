@@ -176,6 +176,25 @@ public class Ui extends Application {
             response += "Here are the matching tasks in your list:\n";
             taskList.findAndGetTasks(splitted[1]);
             break;
+        case UPDATE:
+            String[] splittedString = userText.split(" ");
+            int index = Integer.valueOf(splittedString[1]);
+            String command = splittedString[2];
+            if (command.startsWith("name")) {
+                String name = userText.split("name")[1].trim();
+                taskList.findAndSetName(name, index);
+                response += "Noted. I have updated the name of task " + index + " to " + name + ".";
+            }
+            if (command.startsWith("time")) {
+                String time = splittedString[3].trim();
+                if (splittedString.length == 5) {
+                    time += " " + splittedString[4].trim();
+                }
+                response += "Noted. I have updated the time of task " + index + " to " + time + ".";
+                taskList.findAndSetTime(time, index);
+            }
+
+
         default:
             break;
         }

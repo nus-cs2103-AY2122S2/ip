@@ -34,8 +34,13 @@ public class Parser {
             return CommandType.DELETE;
         } else if (input.startsWith("event")){
             return CommandType.EVENT;
-        } else {
+        } else if (input.startsWith("find")) {
             return CommandType.FIND;
+        } else if (input.startsWith("update")) {
+            return CommandType.UPDATE;
+        } else {
+            System.out.println("Invalid command");
+            return null;
         }
     }
 

@@ -21,6 +21,7 @@ public class Duke {
         Duke duke = new Duke("../../../data/duke.txt");
         assert !(duke == null) : "Duke should not be null";
         Application.launch(Ui.class, args);
+        System.out.println("Hello");
         Duke.storage.save(Duke.tasks);
 
     }

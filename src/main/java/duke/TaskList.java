@@ -62,6 +62,38 @@ public class TaskList {
         return result;
     }
 
+    public void findAndSetName(String name, int index) {
+        try {
+            ls.get(index - 1).setName(name);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Provided index is invalid");
+        }
+
+    }
+
+    public void findAndSetTime(String time, int index) {
+        try {
+            System.out.println("Hi");
+            Task task = ls.get(index - 1);
+            if (task instanceof Todo) {
+                throw new IllegalArgumentException();
+            }
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                deadline.setTime(time);
+            }
+            if (task instanceof Event) {
+                Event event = (Event) task;
+                event.setTime(time);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Task is a todo");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Provided index is invalid");
+        }
+
+    }
+
     /**
      * Sets the task at specified index in the list as done.
      * @param index
