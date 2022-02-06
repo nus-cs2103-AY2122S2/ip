@@ -11,6 +11,7 @@ import task.Todo;
 
 /**
  * Represent a list of task.
+ *
  * @author Fan Jue
  * @version 0.1.0
  * @since 0.1.0
@@ -18,18 +19,26 @@ import task.Todo;
 public class TaskList {
     protected static final String INDENT2 = "        ";
 
-    /** A list of all tasks */
+    /**
+     * A list of all tasks
+     */
     protected List<Task> taskList;
-    /** The number of all current tasks */
+    /**
+     * The number of all current tasks
+     */
     protected int numOfTasks;
 
-    /** Create a TaskList to store and manipulate tasks */
+    /**
+     * Create a TaskList to store and manipulate tasks
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
         this.numOfTasks = 0;
     }
 
-    /** Create a TaskList from information obtained from storage memory */
+    /**
+     * Create a TaskList from information obtained from storage memory
+     */
     public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
         for (String str : storageMemory) {
@@ -60,7 +69,7 @@ public class TaskList {
     /**
      * Create a temporary list of tasks, used for filtering.
      *
-     * @param tasks A list of filtered tasks.
+     * @param tasks      A list of filtered tasks.
      * @param numOfTasks The number of tasks after filtering.
      */
     public TaskList(List<Task> tasks, int numOfTasks) {
@@ -166,6 +175,7 @@ public class TaskList {
 
     /**
      * Return a string representation of the list of all tasks to be printed out.
+     *
      * @return A string representation of the TaskList.
      */
     @Override

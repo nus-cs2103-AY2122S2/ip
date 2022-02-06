@@ -3,6 +3,7 @@ package command;
 import main.Storage;
 import main.TaskList;
 import main.TessUi;
+import task.Task;
 
 /**
  * Represent a command to unmark a task.
@@ -29,7 +30,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
-        taskList.markAsUndone(this.index);
-        return ui.markAsUndoneRes(taskList.get(index).toString());
+        Task unmarkedTask = taskList.markAsUndone(this.index);
+        return ui.markAsUndoneRes(unmarkedTask.toString());
     }
 }

@@ -7,8 +7,8 @@ package main;
  */
 public class TessUi {
     // deals with interactions with the user
-    protected static final String INDENT_ONE = "    ";
-    protected static final String INDENT_TWO = "        ";
+    protected static final String INDENT_ONE = "\t";
+    protected static final String INDENT_TWO = "\t\t";
 
     /**
      * Display the welcome message to the user.

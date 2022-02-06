@@ -3,16 +3,20 @@ package command;
 import main.Storage;
 import main.TaskList;
 import main.TessUi;
+import task.Task;
 
 /**
  * Represent a command to mark a task.
+ *
  * @author Fan Jue
  * @version 0.1.0
  * @since 0.1.0
  */
 public class MarkCommand extends Command {
     protected static final int KEYWORD = 1;
-    /** The index of the task to be marked */
+    /**
+     * The index of the task to be marked
+     */
     protected int index;
 
     MarkCommand(String[] cmdArr) {
@@ -24,13 +28,13 @@ public class MarkCommand extends Command {
      * Execute the command on the system to mark a task as done.
      *
      * @param taskList The list of all current tasks.
-     * @param ui The user interface.
-     * @param storage The memory storage.
+     * @param ui       The user interface.
+     * @param storage  The memory storage.
      */
     @Override
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
-        taskList.markAsDone(this.index);
+        Task markedTask = taskList.markAsDone(this.index);
         storage.needUpdate();
-        return ui.markAsDoneRes(taskList.get(index).toString());
+        return ui.markAsDoneRes(markedTask.toString());
     }
 }

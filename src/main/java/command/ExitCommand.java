@@ -12,7 +12,6 @@ import main.TesseractException;
  * @since 0.1.0
  */
 public class ExitCommand extends Command {
-    /** The specific command keyword */
 
     ExitCommand(String[] cmdArr) {
         super(cmdArr[0]);

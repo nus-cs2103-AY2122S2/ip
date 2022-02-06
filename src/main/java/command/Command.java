@@ -9,12 +9,15 @@ import main.TesseractException;
 
 /**
  * Represent a command.
+ *
  * @author Fan Jue
  * @version 0.1.0
  * @since 0.1.0
  */
 public class Command {
-    /** The specific command keyword */
+    /**
+     * The specific command keyword
+     */
     protected String cmdWord;
 
     Command(String keyword) {
@@ -25,8 +28,8 @@ public class Command {
      * Execute the command on the system.
      *
      * @param taskList The list of all current tasks.
-     * @param ui The user interface.
-     * @param storage The memory storage.
+     * @param ui       The user interface.
+     * @param storage  The memory storage.
      */
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
         return ui.admitBug();
@@ -35,7 +38,7 @@ public class Command {
     /**
      * Process the input to check if it is a valid command.
      *
-     * @param fullCmd The line of input.
+     * @param fullCmd    The line of input.
      * @param numOfTasks The current number of tasks in list.
      * @throws TesseractException If the input is not a valid command.
      */
@@ -93,7 +96,7 @@ public class Command {
         case "todo":
             if (cmdLen == 1) {
                 throw new TesseractException("I cannot create todo"
-                + " if you don't tell me what it's about eh :-(");
+                        + " if you don't tell me what it's about eh :-(");
             }
             break;
         default:
