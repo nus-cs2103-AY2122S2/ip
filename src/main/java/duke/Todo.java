@@ -19,12 +19,7 @@ public class Todo extends Task {
      */
     @Override
     public void printTask() {
-        System.out.print("[T]");
-        if (this.getDone()) {
-            System.out.println("[X] " + this.getTaskName());
-        } else {
-            System.out.println("[ ] " + this.getTaskName());
-        }
+        System.out.print(this.toString());
     }
 
     /**

@@ -51,38 +51,11 @@ public class Event extends Task {
     }
 
     /**
-     * formats and prints the date into MMM d YYYY format
-     */
-    public void printDate() {
-        System.out.print("(at: ");
-        System.out.print(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        printTime();
-        System.out.println(")");
-    }
-
-    /**
-     * formats and prints the time into HHmm format
-     */
-    public void printTime() {
-        if (this.time != null) {
-            System.out.print(" " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm"))));
-        }
-    }
-
-    /**
      * Method to print the Deadline task out, overrides the method in the superclass
      */
     @Override
     public void printTask() {
-        //print task type
-        System.out.print("[E]");
-        //print task done symbol
-        if (this.getDone()) {
-            System.out.print("[X] " + this.getTaskName() + " ");
-        } else {
-            System.out.print("[ ] " + this.getTaskName() + " ");
-        }
-        printDate();
+        System.out.print(this.toString());
     }
 
     /**
