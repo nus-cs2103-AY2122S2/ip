@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
         );
         int runResult = parser.run(userInput.getText(), ui, taskList);
         if (runResult == 1) {
-            Storage.saveFile("data", "duke.txt", taskList.getList());
+            Storage.saveFile("data", "duke.txt", taskList);
         }
         userInput.clear();
     }

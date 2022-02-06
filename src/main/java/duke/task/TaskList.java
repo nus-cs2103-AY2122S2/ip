@@ -105,6 +105,19 @@ public class TaskList {
     }
 
     /**
+     * Converts the Task List to a String to be used for File Saving.
+     */
+    public String toFileString() {
+        StringBuilder sb = new StringBuilder();
+        for (Task t : this.tasks) {
+            sb.append(t.toFileString());
+            sb.append(";");
+        }
+        sb.setLength((sb.length() - 1));
+        return sb.toString();
+    }
+
+    /**
      * Returns a list of tasks that contains the specified keyword.
      *
      * @param keyword The keyword to be searched.

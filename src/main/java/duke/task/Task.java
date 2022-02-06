@@ -22,6 +22,9 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Converts the Task to a String to be used for File Saving.
+     */
     public String toFileString() {
         return String.format("%s,%s,%s,", "Task", this.isDone, this.taskName);
     }

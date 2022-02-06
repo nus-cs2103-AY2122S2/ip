@@ -26,6 +26,15 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return String.format("%s,%s,%s,%s",
+                "E",
+                this.isDone ? "T" : "F",
+                this.taskName,
+                this.d.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
+    }
+
+    @Override
     public String toString() {
         return String.format("[E][%s] %s (at:%s)", this.isDone ? "X" : " ", this.taskName,
                 this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));

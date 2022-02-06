@@ -15,8 +15,9 @@ public class ToDoTask extends Task {
         this.isDone = isDone;
     }
 
+    @Override
     public String toFileString() {
-        return String.format("%s,%s,%s,", "T", this.isDone, this.taskName);
+        return String.format("%s,%s,%s,", "T", this.isDone ? "T" : "F", this.taskName);
     }
 
     @Override

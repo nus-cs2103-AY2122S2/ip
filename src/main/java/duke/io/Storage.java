@@ -9,12 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -34,7 +30,7 @@ public class Storage {
      * @param arr list of tasks to be saved.
      * @return 0: save success, -1: error encountered.
      */
-    public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
+    public static int saveFile(String folderName, String fileName, TaskList arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             Files.createDirectories(Paths.get(folderName));
@@ -42,29 +38,7 @@ public class Storage {
             File myObj = new File(filePath);
             myObj.createNewFile();
             FileWriter writer = new FileWriter(filePath);
-            StringBuilder sb = new StringBuilder();
-            for (Task t : arr) {
-                if (t.toString().charAt(1) == 'T') {
-                    sb.append(String.format("%s,%s,%s,",
-                            t.toString().charAt(1), t.isDone() ? "T" : "F",
-                            t.getTaskName()))
-                        .append(";");
-                } else if (t.toString().charAt(1) == 'D') {
-                    sb.append(String.format("%s,%s,%s,%s",
-                            t.toString().charAt(1),
-                            t.isDone() ? "T" : "F",
-                            t.getTaskName(), ((DeadlineTask) t).getDueDate().format(formatter)))
-                        .append(";");
-                } else if (t.toString().charAt(1) == 'E') {
-                    sb.append(String.format("%s,%s,%s,%s",
-                                    t.toString().charAt(1),
-                                    t.isDone() ? "T" : "F", t.getTaskName(), (
-                                            (EventTask) t).getDate().format(formatter)))
-                            .append(";");
-                }
-            }
-            sb.setLength((sb.length() - 1));
-            writer.write(sb.toString());
+            writer.write(arr.toFileString());
             writer.close();
             return 0;
         } catch (IOException e) {

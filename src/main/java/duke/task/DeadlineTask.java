@@ -26,6 +26,15 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return String.format("%s,%s,%s,%s",
+                "D",
+                this.isDone ? "T" : "F",
+                this.taskName,
+                this.d.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
+    }
+
+    @Override
     public String toString() {
         return String.format("[D][%s] %s (by:%s)", this.isDone ? "X" : " ", this.taskName,
                 this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
