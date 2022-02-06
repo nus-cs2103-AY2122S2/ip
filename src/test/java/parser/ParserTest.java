@@ -1,17 +1,19 @@
-package duke.parser;
+package parser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.MarkCommand;
 import duke.exception.InvalidArgumentException;
+import duke.parser.Parser;
 import duke.ui.Ui;
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 

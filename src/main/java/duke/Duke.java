@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * A chatbot that helps manage tasks of user.
@@ -17,6 +17,12 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Starts up the Duke Bot in a specified filePath. If filePath
+     * exists, then load the previously saved TaskList. Else, create a new one.
+     *
+     * @param filePath the specified filePath in user's computer downloads.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -34,13 +40,14 @@ public class Duke {
     public void run() {
         ui.greet();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
-                  String fullCommand = ui.readCommand();
-                  ui.divide();    // show the divider line ("__________")
-                  Command c = Parser.parse(fullCommand);
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
+                String fullCommand = ui.readCommand();
+                // shows the divider line ("__________")
+                ui.divide();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {

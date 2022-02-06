@@ -1,10 +1,13 @@
-package duke.task;
+package task;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 class TaskTest {
 
@@ -17,14 +20,14 @@ class TaskTest {
     void testMarkAsDone() {
         Task task = new Task("testing mark as done", false);
         task.markAsDone();
-        assertEquals(true, task.isDone);
+        assertEquals(true, task.getDoneStatus());
     }
 
     @Test
     void testMarkAsUndone() {
         Task task = new Task("testing mark as undone", true);
         task.markAsUndone();
-        assertEquals(false, task.isDone);
+        assertEquals(false, task.getDoneStatus());
     }
 
     @Test
@@ -43,6 +46,6 @@ class TaskTest {
 
     @Test
     void testToString() {
-    assertEquals("[X] task description", new Task("task description", true).toString());
+        assertEquals("[X] task description", new Task("task description", true).toString());
     }
 }
