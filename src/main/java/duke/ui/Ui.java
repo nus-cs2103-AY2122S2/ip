@@ -5,9 +5,7 @@ import java.util.Arrays;
 
 import duke.DialogBox;
 import duke.task.Task;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -17,17 +15,22 @@ import javafx.scene.layout.VBox;
 public class Ui {
     private VBox v;
     private Image d;
-
-    public Ui(VBox v, Image d) {
-        this.v = v;
-        this.d = d;
-    }
     private String logo =
-              " ____        _        \n"
+            " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    /**
+     * Constructor for DeadlineTask.
+     * @param v The VBox to be displayed on
+     * @param d The image for duke
+     */
+    public Ui(VBox v, Image d) {
+        this.v = v;
+        this.d = d;
+    }
+
 
     /**
      * Outputs the specified strings in the following format:
@@ -97,6 +100,10 @@ public class Ui {
         print(sb.toString());
     }
 
+    /**
+     * Prints the specified string onto the GUI.
+     * @param ss The string that is to be displayed
+     */
     public void print(String ss) {
         v.getChildren().addAll(
                 DialogBox.getDukeDialog(ss, d)

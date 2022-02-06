@@ -1,14 +1,9 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Collections;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,7 +23,7 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img, int type) {
         try {
             FXMLLoader fxmlLoader;
-            if(type == 1) {
+            if (type == 1) {
                 fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             } else {
                 fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox2.fxml"));
