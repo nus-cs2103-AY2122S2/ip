@@ -60,6 +60,7 @@ public class Parser {
      * @return the corresponding command
      */
     public static Command parseCommand(String fullCommand) {
+        // Not sure how to trim (if even necessary) this down since it's all case-checking.
         Command cmd;
         String[] input = fullCommand.split(" ", 2);
 
@@ -69,7 +70,6 @@ public class Parser {
         case "exit":
             cmd = new ExitCommand();
             break;
-        case "ls":
         case "list":
             cmd = new ListCommand();
             break;
@@ -82,7 +82,6 @@ public class Parser {
         case "deadline":
             cmd = new AddCommand(input[0], input[1]);
             break;
-        case "remove":
         case "delete":
             cmd = new DeleteCommand(input[1]);
             break;
