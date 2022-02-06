@@ -27,6 +27,7 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
+
     protected String getResponse(String input) {
         try {
             Command c = Parser.parse(input, this.tasks);
