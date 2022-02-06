@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * Represents a Event to be attended by the user with a specified date and/or time.
@@ -72,7 +73,7 @@ public class Event extends Task {
         String d = this.at.split(" ")[0].replace("-", " ");
         for (String format : DATE_FORMATS) {
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
                 LocalDate.parse(d, formatter);
                 this.dateFormat = format;
                 return true;
@@ -92,7 +93,7 @@ public class Event extends Task {
     public String getDate() {
         String d = this.at.split(" ")[0].replace("-", " ");
         if (this.isValidDate()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dateFormat);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dateFormat, Locale.ENGLISH);
             this.date = LocalDate.parse(d, formatter);
             return this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {

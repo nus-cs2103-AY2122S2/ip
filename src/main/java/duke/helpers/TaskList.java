@@ -49,7 +49,7 @@ public class TaskList {
      * @param input User input that calls for the task deletion.
      * @param ans the Duke object's reply to the user.
      */
-    public static void deleteTask(String input, String ans) throws DukeException {
+    public static String deleteTask(String input, String ans) throws DukeException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < len()) {
@@ -64,13 +64,13 @@ public class TaskList {
             throw new InvalidIndexException();
         }
         Storage.saveToFile(tasks);
-        System.out.println(ans);
+        return ans;
     }
 
     /**
      * Prints the TaskList as a formatted String.
      */
-    public static void getTaskList() {
+    public static String getTaskList() {
         String ans = "\tHere are the tasks in your list:\n";
         for (int i = 0; i < len(); i++) {
             Task t = tasks.get(i);
@@ -80,7 +80,7 @@ public class TaskList {
                 ans += String.format("\t%d.%s \n", i + 1, t.toString());
             }
         }
-        System.out.println(ans);
+        return ans;
     }
 
     /**
@@ -90,7 +90,7 @@ public class TaskList {
      * @param ans the Duke object's reply to the user.
      * @throws DukeException If user specified an unknown Task.
      */
-    public static void toggleMarkTask(String input, String ans) throws DukeException {
+    public static String toggleMarkTask(String input, String ans) throws DukeException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < len()) {
@@ -106,7 +106,7 @@ public class TaskList {
             throw new InvalidIndexException();
         }
         Storage.saveToFile(tasks);
-        System.out.println(ans);
+        return ans;
     }
 
     /**
@@ -116,7 +116,7 @@ public class TaskList {
      * @param ans the Duke object's reply to the user.
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      */
-    public static void onTodo(String input, String ans) throws java.io.IOException {
+    public static String onTodo(String input, String ans) throws java.io.IOException {
         String desc = input.substring(5);
         ToDo t = new ToDo(desc);
         addTask(t);
@@ -126,7 +126,7 @@ public class TaskList {
                 + "\n\tNow you have "
                 + getNumOfTasks()
                 + " in the list.";
-        System.out.println(ans);
+        return ans;
     }
 
     /**
@@ -137,7 +137,7 @@ public class TaskList {
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      * @throws InvalidDateException If a date with an invalid format and/or time is given by user.
      */
-    public static void onDeadline(String input, String ans) throws java.io.IOException, InvalidDateException {
+    public static String onDeadline(String input, String ans) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(9, input.indexOf("/by") - 1);
         String by = input.substring(input.indexOf("/by") + 4);
         Deadline t = new Deadline(desc, by);
@@ -151,7 +151,7 @@ public class TaskList {
                 + "\n\tNow you have "
                 + getNumOfTasks()
                 + " in the list.";
-        System.out.println(ans);
+        return ans;
     }
 
     /**
@@ -162,7 +162,7 @@ public class TaskList {
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      * @throws InvalidDateException If a date with an invalid format and/or time is given by user.
      */
-    public static void onEvent(String input, String ans) throws java.io.IOException, InvalidDateException {
+    public static String onEvent(String input, String ans) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(6, input.indexOf("/at") - 1);
         String time = input.substring(input.indexOf("/at") + 4);
         Event t = new Event(desc, time);
@@ -176,7 +176,7 @@ public class TaskList {
                 + "\n\tNow you have "
                 + getNumOfTasks()
                 + " in the list.";
-        System.out.println(ans);
+        return ans;
     }
 
     /**
@@ -215,7 +215,7 @@ public class TaskList {
      *
      * @param input User input that calls Duke to find Tasks with descriptions containing a given keyword.
      */
-    public static void getMatchedTasks(String input) {
+    public static String getMatchedTasks(String input) {
         boolean isMatched = false;
         String keyword = input.substring(5);
         String ans = "\tHere are the matching tasks in your list:";
@@ -227,7 +227,7 @@ public class TaskList {
             }
         }
         ans = (isMatched) ? ans : "There are no matching tasks in your list!";
-        System.out.println(ans);
+        return ans;
     }
 
 }

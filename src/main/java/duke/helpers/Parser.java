@@ -74,30 +74,31 @@ public class Parser {
      * @throws DukeException If command doesn't exist.
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      */
-    public static void parse(String input) {
-        String ans = "\t";
+    public static String parse(String input) {
+        String ans = "";
         try {
             if (isCommand(input, Command.BYE)) {
-                System.out.println("\tBye. Hope to see you again soon!");
+                ans = "\tBye. Hope to see you again soon!";
             } else if (isCommand(input, Command.LIST)) {
-                TaskList.getTaskList();
+                ans = TaskList.getTaskList();
             } else if (isCommand(input, Command.DELETE)) {
-                TaskList.deleteTask(input, ans);
+                ans = TaskList.deleteTask(input, ans);
             } else if (isCommand(input, Command.TOGGLEMARK)) {
-                TaskList.toggleMarkTask(input, ans);
+                ans = TaskList.toggleMarkTask(input, ans);
             } else if (isCommand(input, Command.TODO)) {
-                TaskList.onTodo(input, ans);
+                ans = TaskList.onTodo(input, ans);
             } else if (isCommand(input, Command.DEADLINE)) {
-                TaskList.onDeadline(input, ans);
+                ans = TaskList.onDeadline(input, ans);
             } else if (isCommand(input, Command.EVENT)) {
-                TaskList.onEvent(input, ans);
+                ans = TaskList.onEvent(input, ans);
             } else if (isCommand(input, Command.FIND)) {
-                TaskList.getMatchedTasks(input);
+                ans = TaskList.getMatchedTasks(input);
             } else {
                 throw new InvalidCommandException();
             }
         } catch (DukeException | java.io.IOException e) {
-            System.out.println(e.getMessage());
+            ans = e.getMessage();
         }
+        return ans;
     }
 }
