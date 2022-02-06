@@ -29,7 +29,7 @@ public class Duke {
         try {
             this.taskList = storage.getOldTaskList();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            System.out.println(ui.showError(e.getMessage()));
         }
     }
 
@@ -38,7 +38,7 @@ public class Duke {
      */
     public void run() {
         String name  = ui.showWelcome();
-        Parser parser = new Parser(name);
+        Parser parser = new Parser();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -55,12 +55,19 @@ public class Duke {
     /**
      * Runs the chatbot Duke with a specified path to the database file.
      */
-    public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir")  + "/data/OldTasks.txt";
+    /*public static void main(String[] args) {
+        String filePath = "C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt";
         new Duke(filePath).run();
-    }
+    }*/
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Parser parser = new Parser();
+            Command c = parser.parse(input); //read the full command and return the command
+            this.taskList = c.execute(this.taskList, this.ui, this.storage);
+            return c.getResponseAfterCommand(this.taskList);
+        } catch (DukeException | IOException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

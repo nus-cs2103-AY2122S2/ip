@@ -24,30 +24,22 @@ public class Ui {
     /**
      * Used to tell user that Duke is loading tasks saved in database.
      */
-    void showStartLoading() {
-        System.out.println("Hold on...I am checking if you have previous tasks saved...");
+    public static String showStartLoading() {
+        return "Hold on...I am checking if you have previous tasks saved...";
     }
 
     /**
      * Introduces Duke to user.
      * @return the name of user to personalise interaction after welcome
      */
-    String showWelcome() {
+    public static String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Thanks for waiting, let me introduce myself! Hello from\n" + logo);
-
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        String name = in.nextLine();
-        System.out.println("Hello " + name);
-
-        return name;
+        return "Thanks for waiting, let me introduce myself! Hello from\n" + logo;
     }
 
     /**
@@ -61,26 +53,28 @@ public class Ui {
     /**
      * Shows error message from exceptions raised.
      * @param errorMessage taken from exceptions raised
+     * @return
      */
-    void showError(String errorMessage) {
+    public static String showError(String errorMessage) {
         System.out.println(errorMessage);
+        return errorMessage;
     }
 
     /**
      *Shows the result of loading all saved task, which is a {@link TaskList}.
      * @param oldTaskList for {@link TaskList} generated from database
+     * @return
      */
-    void showLoadingResult(TaskList oldTaskList) {
-        System.out.println("Take a look at your previous tasks:");
-        oldTaskList.printTasks();
+    public static String showLoadingResult(TaskList oldTaskList) {
+        return "Take a look at your previous tasks:\n" + oldTaskList.printTasks();
     }
 
     /**
      * Used to indicate to user that a file that acts as database has been created.
      * @param myObj which is the file that was created
      */
-    void showFileCreated(File myObj) {
-        System.out.println("File Created: " + myObj.getName());
+     public static String showFileCreated(File myObj) {
+        return "File Created: " + myObj.getName();
     }
 
     /**
@@ -88,11 +82,11 @@ public class Ui {
      * @param taskList which is the {@link TaskList} that the {@link Task} was added to
      * @param newTask which is the new {@link Task} that was added
      */
-    public void showAddResult(TaskList taskList, Task newTask) {
-        System.out.println(String
+    public static String showAddResult(TaskList taskList, Task newTask) {
+        return String
                 .format("Got it, I've added this task: \n %s\nNow you have %d task in the list",
                         newTask.toString(),
-                        taskList.getNumberOfTasks()));
+                        taskList.getNumberOfTasks());
     }
 
     /**
@@ -100,20 +94,21 @@ public class Ui {
      * @param taskList which is the {@link TaskList} that the {@link Task} was deleted from
      * @param taskToRemove which is the {@link Task} that was deleted
      */
-    public void showDeleteResult(TaskList taskList, Task taskToRemove) {
-        System.out.println(String
+    public static String showDeleteResult(TaskList taskList, Task taskToRemove) {
+        return String
                 .format("Got it, I've deleted this task: \n %s\nNow you have %d task in the list",
                         taskToRemove.toString(),
-                        taskList.getNumberOfTasks()));
+                        taskList.getNumberOfTasks());
     }
 
     /**
      * Indicates to user that their command to unmark a {@link Task} is successful.
      * @param unmarkedTask which is the {@link Task} that was unmarked
+     * @return
      */
-    public static void showUnmarkedResult(Task unmarkedTask) {
-        System.out.println(String
-                .format("OK, I've marked this task as not done yet:\n %s", unmarkedTask.toString()));
+    public static String showUnmarkedResult(Task unmarkedTask) {
+        return String
+                .format("OK, I've marked this task as not done yet:\n %s", unmarkedTask.toString());
     }
 
 
@@ -121,17 +116,17 @@ public class Ui {
      * Indicates to user that their command to mark a {@link Task} is successful.
      * @param markedTask which is the {@link Task} that was marked
      */
-    public static void showMarkedResult(Task markedTask) {
-        System.out.println(String
-                .format("Nice! I've marked this task as done: \n%s", markedTask.toString()));
+    public static String showMarkedResult(Task markedTask) {
+        return String
+                .format("Nice! I've marked this task as done: \n%s", markedTask.toString());
     }
 
 
     /**
      * Indicates to user that the database has been updated after a change to {@link TaskList}.
      */
-    public void showCompleteUpdateOfFile() {
-        System.out.println("Database has been updated");
+    public static String showCompleteUpdateOfFile() {
+        return "Database has been updated";
     }
 
     /**
@@ -139,8 +134,7 @@ public class Ui {
      * Shows the user the tasks that match their search keyword
      * @param taskList which only contains {@link Task} that contain the search keyword
      */
-    public void showCompletedSearch(TaskList taskList) {
-        System.out.println("Here are the matched tasks:");
-        taskList.printTasks();
+    public static String showCompletedSearch(TaskList taskList) {
+        return "Here are the matched tasks:\n" + taskList.printTasks();
     }
 }

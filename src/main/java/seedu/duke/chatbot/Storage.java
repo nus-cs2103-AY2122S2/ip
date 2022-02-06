@@ -55,11 +55,13 @@ public class Storage {
             myObj = new File(this.filePath);
             //if the file does not exist, then ui can tell user that a new file will be created
             if (myObj.createNewFile()) {
-                ui.showFileCreated(myObj);
+                System.out.println(ui.showFileCreated(myObj));
             } else {
                 //if the file exists, a taskList will be created to store the previous tasks
                 oldTaskList = this.createTaskListFromDatabase(myObj);
             }
+            //welcome
+            System.out.println(Ui.showWelcome());
             return oldTaskList;
         } catch (IOException e) {
             throw new DukeException("An error occured. I will restart the list");
@@ -78,7 +80,7 @@ public class Storage {
             }
             sc.close();
             //ui to show the old task list to user
-            ui.showLoadingResult(taskList);
+            System.out.println(ui.showLoadingResult(taskList));
             return taskList;
         } catch (FileNotFoundException e) {
             throw new LoadingException();

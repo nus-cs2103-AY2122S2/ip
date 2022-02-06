@@ -28,15 +28,11 @@ import java.time.temporal.TemporalAccessor;
  * Handles commands from users in String and filters the information needed to create {@link Command}.
  */
 public class Parser {
-    private final String userName;
 
     /**
      * Creates a Parser, which processes command inputs from users, given in String.
-     * @param userName which is the name input by the user
      */
-    Parser(String userName) {
-        this.userName = userName;
-    }
+    public Parser() {}
 
     /**
      *Parses string commands from user into information needed to execute the command.
@@ -67,7 +63,7 @@ public class Parser {
             int index = this.parseForDelete(command);
             return new DeleteCommand(index);
         } else if (command.startsWith("bye")) {
-            return new ExitCommand(this.userName);
+            return new ExitCommand();
         } else if (command.startsWith("find")) {
             String searchString = this.parseForSearch(command);
             return new FindCommand(searchString);

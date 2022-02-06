@@ -31,6 +31,15 @@ public class UnmarkCommand extends Command {
     }
 
     /**
+     *{@inheritDoc}
+     */
+    @Override
+    public String getResponseAfterCommand(TaskList taskList) {
+        Task unmarkedTask = taskList.getTasks().get(this.index);
+        return Ui.showUnmarkedResult(unmarkedTask);
+    }
+
+    /**
      * {inheritDoc}.
      */
     @Override

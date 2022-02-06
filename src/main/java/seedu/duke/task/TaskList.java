@@ -46,11 +46,12 @@ public class TaskList {
     /**
      * Used to print all tasks when command "list" is called in Duke.
      */
-    public void printTasks() {
+    public String printTasks() {
+        String output = "";
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
-            System.out.println(String
-                    .format("%d . %s", i + 1, tasks.get(i).toString()));
+            output += String.format("%d . %s\n", i + 1, tasks.get(i).toString());
         }
+        return output;
     }
 
     /**

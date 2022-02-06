@@ -24,4 +24,10 @@ public abstract class Command {
      * @return true if user signals they want to exit, false if not
      */
     public abstract boolean isExit();
+
+    /**
+     * Used to get the response from Duke after a command has been executed.
+     * @return the response from Duke
+     */
+    public abstract String getResponseAfterCommand(TaskList taskList);
 }

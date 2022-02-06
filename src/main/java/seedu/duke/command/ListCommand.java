@@ -21,9 +21,15 @@ public class ListCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here is your to-do:");
-        tasks.printTasks();
         return tasks;
+    }
+
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public String getResponseAfterCommand(TaskList taskList) {
+        return "Here is your to-do:\n" + taskList.printTasks();
     }
 
     /**
