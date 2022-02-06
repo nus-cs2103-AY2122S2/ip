@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 
+/**
+ * Main logic of the bot.
+ */
 public class Duke {
     private final Ui ui;
     private TasksList taskslist;

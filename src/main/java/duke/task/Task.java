@@ -4,6 +4,9 @@ import duke.exception.InvalidArgumentException;
 
 import java.util.List;
 
+/**
+ * Main abstraction of a Task.
+ */
 public class Task {
     private final String name;
     private boolean isDone;

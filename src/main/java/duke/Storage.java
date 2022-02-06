@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main logic for storing data to filesystem.
+ */
 public class Storage {
 
     /**

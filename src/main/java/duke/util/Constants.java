@@ -2,6 +2,9 @@ package duke.util;
 
 import java.util.List;
 
+/**
+ * Utility class to hold all common constants.
+ */
 public class Constants {
     public static final String LINE = "___________________________________________________________________________";
     public static final String GAP = "      ";

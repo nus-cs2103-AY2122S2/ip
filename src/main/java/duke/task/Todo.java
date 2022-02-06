@@ -5,6 +5,9 @@ import duke.exception.InvalidArgumentException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * An Todo is a specialization of a Task.
+ */
 public class Todo extends Task {
 
     /**

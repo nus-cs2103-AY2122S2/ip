@@ -5,6 +5,9 @@ import duke.util.Constants;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * Main UI logic of the bot.
+ */
 public class Ui {
 
     /**
