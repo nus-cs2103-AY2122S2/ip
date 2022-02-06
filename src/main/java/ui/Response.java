@@ -17,6 +17,8 @@ public class Response {
     public Response (String... responses) {
         for (String response : responses) {
             responseList.add(response);
+            // Ensure that there is always a response.
+            assert !response.isEmpty();
         }
     }
 

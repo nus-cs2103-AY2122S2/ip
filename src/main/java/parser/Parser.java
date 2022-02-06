@@ -84,6 +84,7 @@ public class Parser {
                 default:
                     break;
                 }
+                assert command != null;
             } catch (DukeException e) {
                 return new IncorrectCommand(e.getMessage());
             } catch (IllegalArgumentException e) {

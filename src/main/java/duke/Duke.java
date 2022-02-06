@@ -45,6 +45,7 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private boolean isExit = false;
+
     /**
      * Starts an instance of the duke.Duke bot.
      */
@@ -57,10 +58,15 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         } finally {
-        //            run(); // Redundant
+            assert storage != null;
         }
     }
 
+    /**
+     * Starts the process of creating a Duke bot session.
+     *
+     * @param stage Stage to render the scene for the user
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
