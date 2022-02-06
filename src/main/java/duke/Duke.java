@@ -6,6 +6,7 @@ package duke;
  *
  * @author Justin Ng Jie Ern
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Duke {
 
     private static String logo = " ____        _        \n"
@@ -27,6 +28,10 @@ public class Duke {
         Ui ui = new Ui(taskList, storage);
 
         ui.run();
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
