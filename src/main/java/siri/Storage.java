@@ -35,6 +35,13 @@ class Storage {
         this.dataFile = new File(filePath);
     }
 
+    public Storage() {
+        this.filePath = "data/data.txt";
+        this.fileDirectoryPath = this.filePath.substring(0, filePath.lastIndexOf('/'));
+        this.directory = new File(fileDirectoryPath);
+        this.dataFile = new File(filePath);
+    }
+
     /**
      * Loads the file data (if there is a valid data file).
      *

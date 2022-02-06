@@ -37,17 +37,17 @@ class Task {
     /**
      * Changes isDone to true (mark task as done).
      */
-    public void markTaskDone() {
+    public String markTaskDone() {
         isDone = true;
-        System.out.printf("Great job for completing task:\n%s\n", this.getTaskDetails());
+        return "Great job for completing task:\n" + this.getTaskDetails() + "\n";
     }
 
     /**
      * Changes isDone to false (mark task as undone).
      */
-    public void markTaskUndone() {
+    public String markTaskUndone() {
         isDone = false;
-        System.out.printf("Task marked as uncompleted:\n%s\n", this.getTaskDetails());
+        return "Task marked as uncompleted:\n" + this.getTaskDetails() + "\n";
     }
 
     /**

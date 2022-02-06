@@ -36,7 +36,7 @@ class TaskList {
      *
      * @param task to be added.
      */
-    public void addItem(Task task) {
+    public String addItem(Task task) {
         list.add(task);
         if (task instanceof Deadline) {
             Deadline tmp = (Deadline) task;
@@ -45,8 +45,8 @@ class TaskList {
             Event tmp = (Event) task;
             eventList.add(tmp);
         }
-        System.out.printf("Got it! I've added this task:\n%s\nTotal tasks on the list: %d\n",
-                            task.getTaskDetails(), this.list.size());
+        return "Got it! I've added this task:\n" + task.getTaskDetails()
+                + "\nTotal tasks on the list: " + this.list.size() + "\n";
     }
 
     /**
@@ -54,7 +54,7 @@ class TaskList {
      *
      * @param index integer to indicate the index of the item that is selected to be deleted.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task removedTask = list.remove(index);
         if (removedTask instanceof Deadline) {
             Deadline tmp = (Deadline) removedTask;
@@ -63,27 +63,31 @@ class TaskList {
             Event tmp = (Event) removedTask;
             eventList.remove(tmp);
         }
-        System.out.printf("Successfully removed the following task:\n%s\n"
-                + "You have %d tasks remaining!!\n", removedTask.getTaskDetails(), this.list.size());
+        return "Successfully removed the following task:\n" + removedTask.getTaskDetails() + "\n"
+                + "You have " + this.list.size() + " tasks remaining!!\n";
     }
 
     /**
      * Prints the TaskList out in order with status of each task.
      */
-    public void print() {
+    public String print() {
+        String printString;
         if (list.size() == 0) {
-            System.out.println("There is currently no item on the list!!");
+            printString  = "There is currently no item on the list!!\n";
         } else {
-            System.out.println("Task List:");
-            list.forEach((item) -> System.out.println((list.indexOf(item) + 1) + ". " + item.getTaskDetails()));
+            printString = "Task List:\n";
+            for (int i = 0; i < list.size(); i++) {
+                printString = printString + (i + 1) + ". " + list.get(i).getTaskDetails() + "\n";
+            }
         }
+        return printString;
     }
 
     /**
      * Marks item of the given index of tasklist done.
      */
-    public void markItem(int index) {
-        list.get(index).markTaskDone();
+    public String markItem(int index) {
+        return list.get(index).markTaskDone();
     }
 
     /**
@@ -91,8 +95,8 @@ class TaskList {
      *
      * @param index integer to indicate the item index to be unmarked.
      */
-    public void unmarkItem(int index) {
-        list.get(index).markTaskUndone();
+    public String unmarkItem(int index) {
+        return list.get(index).markTaskUndone();
     }
 
     /**
@@ -100,9 +104,10 @@ class TaskList {
      *
      * @param date the date that the is being referenced to.
      */
-    public void printEventOn(LocalDate date) {
+    public String printEventOn(LocalDate date) {
         ArrayList<Event> tmp = new ArrayList<Event>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
+        String printString;
 
         if (eventList.size() != 0) {
             for (int i = 0; i < eventList.size(); i++) {
@@ -112,14 +117,19 @@ class TaskList {
             }
 
             if (tmp.size() == 0) {
-                System.out.printf("No event on %s!!\n", date.format(dtf));
+                printString = "No event on " + date.format(dtf) + "!!\n";
             } else {
-                System.out.printf("%d events on %s:\n", tmp.size(), date.format(dtf));
-                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getTaskDetails()));
+                printString = tmp.size() + " events on " + date.format(dtf) + ":\n";
+                for (int i = 0; i < tmp.size(); i++) {
+                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
+                }
+
             }
         } else {
-            System.out.printf("No event on %s!!\n", date.format(dtf));
+            printString = "No event on " + date.format(dtf) + "!!\n";
         }
+
+        return printString;
     }
 
     /**
@@ -127,7 +137,8 @@ class TaskList {
      *
      * @param date the date that the is being referenced to.
      */
-    public void printDeadlineOn(LocalDate date) {
+    public String printDeadlineOn(LocalDate date) {
+        String printString;
         ArrayList<Deadline> tmp = new ArrayList<Deadline>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
 
@@ -139,14 +150,18 @@ class TaskList {
             }
 
             if (tmp.size() == 0) {
-                System.out.printf("No deadline on %s!!\n", date.format(dtf));
+                printString = "No deadline on " + date.format(dtf) + "!!\n";
             } else {
-                System.out.printf("%d deadline item(s) on %s:\n", tmp.size(), date.format(dtf));
-                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getTaskDetails()));
+                printString = tmp.size() + " deadline item(s) on " + date.format(dtf) + ":\n";
+                for (int i = 0; i < tmp.size(); i++) {
+                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
+                }
             }
         } else {
-            System.out.printf("No deadline on %s!!\n", date.format(dtf));
+            printString = "No deadline on " + date.format(dtf) + "!!\n";
         }
+
+        return printString;
     }
 
     /**
@@ -154,8 +169,9 @@ class TaskList {
      *
      * @param keyword to search through the list of tasks.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> tmp = new ArrayList<Task>();
+        String printString = "";
 
         if (list.size() != 0) {
             for (int i = 0; i < list.size(); i++) {
@@ -165,14 +181,18 @@ class TaskList {
             }
 
             if (tmp.size() == 0) {
-                System.out.printf("No item on the list contains \"%s\"!!\n", keyword);
+                printString = "No item on the list contains \"" +  keyword + "\"!!\n";
             } else {
-                System.out.println("Here are the matching tasks in you list:");
-                tmp.forEach((item) -> System.out.println((tmp.indexOf(item) + 1) + ". " + item.getTaskDetails()));
+                printString = "Here are the matching tasks in you list:\n";
+                for (int i = 0; i < tmp.size(); i++) {
+                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
+                }
             }
         } else {
             System.out.println("There are currently no item on the list!!");
         }
+
+        return printString;
     }
 
     private void startUpAddTask(String input) {
