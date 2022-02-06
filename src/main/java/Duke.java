@@ -8,9 +8,27 @@ import java.time.LocalDate;
 
 public class Duke {
 
-    static ArrayList<Task> list = new ArrayList<Task>();
+    //static ArrayList<Task> list = new ArrayList<Task>();
 
-    public static void handle(String input) throws DukeException{
+    private Storage storage;
+    private TaskList list = new TaskList(new ArrayList<>());
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            list = new TaskList(storage.load());
+        } catch (IOException e) {
+            System.out.println("error");
+            System.out.println(e.getMessage());
+        //} catch (DukeException e) {
+            //ui.showLoadingError();
+            //tasks = new TaskList();
+        }
+    }
+
+    public void handle(String input) throws DukeException{
         String[] split = input.split(" ");
         String command = split[0];
         if (command.equals("todo")) {
@@ -79,6 +97,9 @@ public class Duke {
                 }
             }
         } else if (command.equals("mark") || command.equals("unmark")) {
+            if (split.length <= 1) {
+                throw new DukeException("You need to specify which task :/");
+            }
             int idx = Integer.parseInt(split[1]);
             if (idx > list.size()) {
                 throw new DukeException("The task number you've given is invalid");
@@ -113,54 +134,25 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-
-        String prince = "______       _\n"
-                +  "| ___ \\     (_)\n"
-                + "| |_/ /_ __  _  _ __    ___  ___\n"
-                + "|  __/| '__|| || '_ \\  / __|/ _ \\ \n"
-                + "| |   | |   | || | | || (__|  __/\n"
-                + "\\_|   |_|   |_||_| |_| \\___|\\___|\n";
-
-        String divider = "~~~~~~~~~~~~~~~~~~~~~~~";
-
-        try {
-            File data = new File("prince.txt");
-            if (!data.createNewFile()) {
-                Scanner s = new Scanner(data);
-                while (s.hasNext()) {
-                    //read tasks and add to arraylist
-                    String line = s.nextLine();
-                    Task t = new Parser(line).parse();
-                    if (line.substring(4,5).equals("X")) {
-                        t.makeDone();
-                    }
-                    list.add(t);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("error");
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println("Hello I'm\n" + prince);
-        System.out.println("How can I help you today?");
-        System.out.println(divider);
-
+    public void run() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             try {
                 String command = sc.nextLine();
                 handle(command);
-                System.out.println(divider);
+                ui.printDivider();
                 if (command.equals("bye")) {
                     break;
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                System.out.println(divider);
+                ui.showError(e);
             }
         }
     }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
 }
