@@ -1,0 +1,8 @@
+Label {
+        -fx-border-color: "black";
+        -fx-border-width: 2.5;
+        -fx-background-radius: 50;
+        -fx-border-radius: 50;
+        -fx-padding: 20;
+        -fx-background-color: #AFF8D8;
+        }

@@ -59,6 +59,7 @@ public class MainWindow extends AnchorPane {
 
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(getClass().getResource("/css/stylesheet.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Poogie");
             stage.show();
@@ -120,16 +121,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String userText = userInput.getText();
         Command command = new Parser().parseCommand(userText);
+        DialogBox userDialogueBox = DialogBox.getUserDialog(userText, userImage);
         try {
             String dukeText = command.execute(tasks, ui, storage);
+            DialogBox dukeDialogueBox = DialogBox.getDukeDialog(dukeText, dukeImage);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, userImage),
-                    DialogBox.getDukeDialog(dukeText, dukeImage)
+                    userDialogueBox,
+                    dukeDialogueBox
             );
         } catch (DukeException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, userImage),
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+            DialogBox dukeDialogueBox = DialogBox.getDukeDialog(e.getMessage(), dukeImage);
+                    dialogContainer.getChildren().addAll(
+                    userDialogueBox,
+                    dukeDialogueBox
             );
         } finally {
             userInput.clear();
