@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Prints initial greetings when the app starts.
      */
-    public void initialGreet() {
+    public void greetUser() {
         System.out.println(Constants.LINE);
         print("Hello from\n" + Constants.LOGO);
         print("I am a chat bot and I'm here to help you be productive :)\n" +

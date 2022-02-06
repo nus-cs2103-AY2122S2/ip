@@ -21,7 +21,7 @@ public class Deadline extends Task {
      */
     Deadline(String name, String by) {
         super(name);
-        if (dateValidator(by)) {
+        if (isValid(by)) {
             this.by = LocalDate.parse(by);
         } else {
             this.by = LocalDate.now();
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      * @param date Input value to validate.
      * @return True if the input value is a date, false otherwise.
      */
-    private Boolean dateValidator(String date) {
+    private Boolean isValid(String date) {
         try {
             LocalDate.parse(date);
         } catch (DateTimeParseException e) {
