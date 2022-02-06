@@ -4,6 +4,7 @@ import exceptions.DukeInvalidTodo;
 
 import java.io.*;
 import java.util.Objects;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class Duke {
                     fileInput = "[T][" + ele.getStatusIcon() + "]/" + ele.description;
                 } else if (ele instanceof Deadline) {
                     Deadline deadL = (Deadline) ele;
-                    fileInput = "[D][" + deadL.getStatusIcon() + "]/" + deadL.description + "/" + deadL.by;
+                    fileInput = "[D][" + deadL.getStatusIcon() + "]/" + deadL.description + "/" + deadL.when;
                 } else {
                     Event eve = (Event) ele;
                     fileInput = "[E][" + eve.getStatusIcon() + "]/" + eve.description + "/" + eve.at;
@@ -69,7 +70,7 @@ public class Duke {
                     t = new Event(tSplit[1], tSplit[2]);
                     break;
                 case "[D":
-                    t = new Deadline(tSplit[1], tSplit[2]);
+                    t = new Deadline(tSplit[1], LocalDate.parse(tSplit[2]));
                     break;
                 default:
                     t = new Task("eee");
@@ -186,7 +187,8 @@ public class Duke {
                     case "deadline":
                         lineTwo();
                         System.out.println("New task added:");
-                        Task t2 = new Deadline(fullDesc, textSplitOne[1]);
+                        String[] date = textSplitOne[1].split(" ");
+                        Task t2 = new Deadline(fullDesc, LocalDate.parse(date[1]));
                         lists.add(t2);
                         System.out.println(t2);
                         System.out.println("You have " + lists.size() + " tasks left now! ^_^");

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     String description;
     boolean isDone;
@@ -46,13 +49,14 @@ class Event extends Task {
 }
 
 class Deadline extends Task {
-    String by;
+    LocalDate when;
 
-    public Deadline(String desc, String b) {
+    public Deadline(String desc, LocalDate date) {
         super(desc);
-        by = b;
+        when = date;
     }
     public String toString() {
-        return "[D]" + super.toString() + " (: " + by + ")";
+        return "[D]" + super.toString() + " (: " +
+                when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
