@@ -4,8 +4,8 @@ package duke;
  * Deals with interactions with the user
  */
 public class Ui {
-    static String line = "\n---------------------\n";
-    static String logo = " ____         _   _     \n"
+    private static final String LINE = "\n---------------------\n";
+    private static final String LOGO = " ____         _   _     \n"
             + "|  _ \\       | | | |\n"
             + "| |_| |      | |-| |\n"
             + "| |_| |  _   | |-| |\n"
@@ -16,13 +16,13 @@ public class Ui {
      * @return A String of line
      */
     public String getLine() {
-        return line;
+        return LINE;
     }
 
     /**
      * Return the logo and greet user
      */
     public String greet() {
-        return "Hello, I am B.H. How can I help you?\n" + logo + this.getLine();
+        return "Hello, I am B.H. How can I help you?\n" + LOGO + this.getLine();
     }
 }
