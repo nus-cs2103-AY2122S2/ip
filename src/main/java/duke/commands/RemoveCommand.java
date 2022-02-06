@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class RemoveCommand extends Command {
 
-    String currTask;
+    private String currTask;
     /**
      * Removes a task from task list
      *

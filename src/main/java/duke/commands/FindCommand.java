@@ -10,8 +10,8 @@ import duke.ui.Ui;
 
 public class FindCommand extends Command {
 
-    String keyword;
-    ArrayList<Task> tasks;
+    private String keyword;
+    private ArrayList<Task> tasks;
 
     /**
      * Find the list of tasks with matching keywords

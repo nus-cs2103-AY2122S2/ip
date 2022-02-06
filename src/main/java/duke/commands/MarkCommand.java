@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class MarkCommand extends Command {
 
-    Task currTask;
+    private Task currTask;
 
     /**
      * Mark a task as complete

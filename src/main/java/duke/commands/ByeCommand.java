@@ -1,10 +1,9 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.tasks.Task;
 import duke.ui.Ui;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     public String execute(TaskList tasks, Ui ui) {
         return ui.printExitMessage();

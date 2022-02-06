@@ -2,7 +2,6 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;

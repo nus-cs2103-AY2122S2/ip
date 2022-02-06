@@ -1,22 +1,19 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import duke.validation.TaskValidator;
 
 public class AddToDoCommand extends Command {
 
-    String userInput;
+    private String userInput;
 
     /**
      * Add a todo task to task list
      *
-     * @param taskList the list of tasks
      * @param userInput the input from user
      */
-    public AddToDoCommand(TaskList taskList, String userInput) {
+    public AddToDoCommand(String userInput) {
         this.userInput = userInput;
     }
 

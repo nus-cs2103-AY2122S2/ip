@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -8,15 +7,14 @@ import duke.ui.Ui;
 
 public class AddEventCommand extends Command {
 
-    String userInput;
+    private String userInput;
 
     /**
      * Add a event task to task list
      *
-     * @param taskList the list of task
      * @param userInput the input from user
      */
-    public AddEventCommand(TaskList taskList, String userInput) {
+    public AddEventCommand(String userInput) {
         this.userInput = userInput;
     }
 

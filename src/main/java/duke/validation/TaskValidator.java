@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 
 public class TaskValidator {

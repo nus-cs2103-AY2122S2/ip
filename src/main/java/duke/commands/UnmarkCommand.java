@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class UnmarkCommand extends Command {
 
-    Task currTask;
+    private Task currTask;
     /**
      * Mark a task as incomplete
      *

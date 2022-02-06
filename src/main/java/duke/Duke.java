@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.commands.ByeCommand;
@@ -9,7 +8,6 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.tasks.Task;
 import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,17 +16,24 @@ import javafx.stage.Stage;
 public class Duke extends Application {
 
     public static final String FILE_PATH = "data/duke.txt";
+    private static Ui ui;
 
     private Storage storage;
     private TaskList tasks;
-    private static Ui ui;
 
+
+    /**
+     * Duke constructor
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.loadData());
     }
 
+    /**
+     * Initialize Duke program
+     */
     public void run() {
         storage.readFile();
         ui.printWelcomeMessage();
@@ -40,7 +45,7 @@ public class Duke extends Application {
         new Duke().run();
     }
 
-    public Ui getUi(){
+    public Ui getUi() {
         return ui;
     }
 

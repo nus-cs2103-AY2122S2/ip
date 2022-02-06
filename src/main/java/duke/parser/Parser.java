@@ -2,7 +2,16 @@ package duke.parser;
 
 import java.util.Locale;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.RemoveCommand;
+import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 
@@ -27,11 +36,11 @@ public class Parser {
         case UNMARK:
             return new UnmarkCommand(taskList, userInput);
         case DEADLINE:
-            return new AddDeadlineCommand(taskList, userInput);
+            return new AddDeadlineCommand(userInput);
         case EVENT:
-            return new AddEventCommand(taskList, userInput);
+            return new AddEventCommand(userInput);
         case TODO:
-            return new AddToDoCommand(taskList, userInput);
+            return new AddToDoCommand(userInput);
         case REMOVE:
             return new RemoveCommand(taskList, userInput);
         case FIND:

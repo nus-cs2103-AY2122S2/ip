@@ -7,14 +7,13 @@ import duke.ui.Ui;
 
 public class AddDeadlineCommand extends Command {
 
-    String userInput;
+    private String userInput;
     /**
      * Add a deadline task to task list
      *
-     * @param taskList the list of tasks
      * @param userInput the input from user
      */
-    public AddDeadlineCommand(TaskList taskList, String userInput) {
+    public AddDeadlineCommand(String userInput) {
         this.userInput = userInput;
     }
 

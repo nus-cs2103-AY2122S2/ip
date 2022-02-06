@@ -1,10 +1,7 @@
 package duke.commands;
 
 import duke.tasklist.TaskList;
-import duke.tasks.Task;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 public class ListCommand extends Command {
 

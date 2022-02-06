@@ -16,24 +16,25 @@ public class Ui {
     protected static final String DIVIDER = "--------------------------------------------";
 
     /** Print welcome message
-     * @return*/
+     * @return String response
+     */
     public static String printWelcomeMessage() {
         String response = "Hello I'm Duke! \nWhat can I do for you?";
         return response;
     }
 
-    /** Print exit message */
+    /** Print exit message
+     * @return String response
+     */
     public static String printExitMessage() {
         String response = "Bye! Have a nice day! :)";
         return response;
     }
 
-    /** Print divider */
-    public static void printDivider() {
-        System.out.println(DIVIDER);
-    }
-
-    /** Print add success message after task added */
+    /** Print add success message after task added
+     * @param taskList list of tasks
+     * @return String response
+     */
     public static String printAddSuccess(TaskList taskList) {
         int lastTaskIndex = taskList.getTasks().size() - 1;
         String response = "Got it. I've added this task:\n"
@@ -42,23 +43,37 @@ public class Ui {
         return response;
     }
 
+    /** Print add success message after task added
+     * @param task specified task
+     * @return String response
+     */
     public static String printMarkSuccess(Task task) {
         String response = "Nice! I've marked this task as complete:\n" + task;
         return response;
     }
 
+    /** Print add success message after task added
+     * @param task specified task
+     * @return String response
+     */
     public static String printUnmarkSuccess(Task task) {
         String response = "OK, I've unmarked this task as incomplete:\n" + task;
         return response;
     }
 
-    /** Prints message to inform user no matching task with given keyword */
+    /** Prints message to inform user no matching task with given keyword
+     * @return String response
+     */
     public static String printNoTaskFound() {
         String response = "No tasks found with given keyword. Please try again!";
 
         return response;
     }
 
+    /**
+     * Prints invalid command
+     * @return response
+     */
     public static String printInvalidCommand() {
         String response = "☹ OOPS!!! command is invalid, please try again!";
 
@@ -89,6 +104,11 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Prints response when task is removed
+     * @param removedTask task to remove
+     * @return response
+     */
     public static String printRemoveTask(String removedTask) {
         String response = "Noted. I've removed this task:\n  " + removedTask.toString();
 
