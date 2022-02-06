@@ -47,14 +47,12 @@ public class TaskList {
      * @return int, number of tasks not done
      */
     public int numTasksLeft() {
-        int count = 0;
-        for (Task task : tasks) {
-            if (!task.getIsDone()) {
-                count++;
-            }
-        }
-        assert (count >= 0);
-        return count;
+        int num;
+        num = (int) tasks.stream()
+                .filter((task) -> !task.getIsDone())
+                .count();
+        assert (num >= 0);
+        return num;
     }
 
     /**
