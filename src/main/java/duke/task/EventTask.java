@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A task that is happening on the specified date.
  */
 public class EventTask extends Task {
-    private LocalDate d;
+    private LocalDate eventDate;
 
     /**
      * Constructor for EventTask.
@@ -18,11 +18,11 @@ public class EventTask extends Task {
     public EventTask(String taskName, boolean isDone, LocalDate date) {
         this.taskName = taskName;
         this.isDone = isDone;
-        this.d = date;
+        this.eventDate = date;
     }
 
     public LocalDate getDate() {
-        return this.d;
+        return this.eventDate;
     }
 
     @Override
@@ -31,13 +31,13 @@ public class EventTask extends Task {
                 "E",
                 this.isDone ? "T" : "F",
                 this.taskName,
-                this.d.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
+                this.eventDate.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
     }
 
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at:%s)", this.isDone ? "X" : " ", this.taskName,
-                this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
 }
