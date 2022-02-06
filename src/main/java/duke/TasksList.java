@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Main layer of abstraction as a container of Task.
+ */
 public class TasksList {
     private List<Task> tasks;
 

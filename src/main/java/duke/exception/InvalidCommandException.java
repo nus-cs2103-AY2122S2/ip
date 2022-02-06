@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * A specialised exception for invalid/unknown command.
+ */
 public class InvalidCommandException extends DukeException {
 
     /**

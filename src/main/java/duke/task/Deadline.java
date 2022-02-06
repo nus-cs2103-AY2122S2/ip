@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * A Deadline is a specialization of a Task.
+ */
 public class Deadline extends Task {
     private final LocalDate by;
 

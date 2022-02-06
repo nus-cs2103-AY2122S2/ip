@@ -5,6 +5,9 @@ import duke.exception.InvalidArgumentException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * An Event is a specialization of a Task.
+ */
 public class Event extends Task {
     private final String at;
 

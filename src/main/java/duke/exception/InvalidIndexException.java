@@ -1,5 +1,9 @@
 package duke.exception;
 
+/**
+ * A specialised exception for invalid index.
+ * Triggered if index < 0 or >= size.
+ */
 public class InvalidIndexException extends DukeException {
 
     /**

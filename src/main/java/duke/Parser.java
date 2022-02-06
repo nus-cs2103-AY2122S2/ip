@@ -6,6 +6,9 @@ import duke.util.Constants;
 
 import java.util.Arrays;
 
+/**
+ * Main logic to parse and translate user inputs.
+ */
 public class Parser {
 
     /**
