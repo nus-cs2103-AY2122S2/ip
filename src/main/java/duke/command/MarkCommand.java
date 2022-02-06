@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.ui.ImageType;
 import duke.main.Storage;
 import duke.main.TaskList;
+import duke.ui.ImageType;
 import duke.ui.Ui;
 
 /**

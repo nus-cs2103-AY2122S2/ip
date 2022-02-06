@@ -13,6 +13,7 @@ import duke.ui.Ui;
  * Represents a Command which, when executed, finds all matching Task objects in the TaskList instance.
  */
 public class FindCommand extends Command {
+    private static final String BEGINNING_MESSAGE = "Charizard found some stuff from the burning list:";
     private static final boolean IS_EXIT = false;
     private String searchDescription;
 
@@ -36,10 +37,9 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         assert ui.hasEmptyMessage() : "Ui has leftover message from previous tasks";
         ArrayList<Task> matchedTasks = tasks.findTasks(searchDescription);
-        String message = "Charizard found some stuff from the burning list:";
-        ui.appendMessage(message);
+        ui.appendMessage(BEGINNING_MESSAGE);
         ui.appendBorder();
-        message = "";
+        String message = "";
         for (int i = 0; i < matchedTasks.size(); i++) {
             message += String.format("%d. %s", i + 1, matchedTasks.get(i));
             if (i < matchedTasks.size() - 1) {

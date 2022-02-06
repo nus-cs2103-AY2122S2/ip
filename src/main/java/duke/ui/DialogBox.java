@@ -27,6 +27,7 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String BACKGROUND_PATH = "/images/FireBackground2.jpg";
     @FXML
     private Label dialog;
     @FXML
@@ -61,8 +62,7 @@ public class DialogBox extends HBox {
     }
 
     private void initializeBackground() {
-        //set background
-        Image image = new Image(this.getClass().getResourceAsStream("/images/FireBackground2.jpg"));
+        Image image = new Image(this.getClass().getResourceAsStream(BACKGROUND_PATH));
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,

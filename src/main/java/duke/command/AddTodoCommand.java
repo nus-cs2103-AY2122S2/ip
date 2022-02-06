@@ -11,6 +11,7 @@ import duke.ui.Ui;
  * Represents a Command which, when executed, adds a ToDo object into a given TaskList instance.
  */
 public class AddTodoCommand extends Command {
+    private static final String ENDING_MESSAGE_FORMAT = "\nThere are %d tasks in the burning list.";
     private static final boolean IS_EXIT = false;
     private String description;
 
@@ -39,7 +40,7 @@ public class AddTodoCommand extends Command {
         ui.appendBorder();
         ui.appendMessage(newTodo.toString());
         ui.appendBorder();
-        ui.appendMessage(String.format("\nThere are %d tasks in the burning list.", tasks.getSize()));
+        ui.appendMessage(String.format(ENDING_MESSAGE_FORMAT, tasks.getSize()));
         ui.setRespondImage(ImageType.ADD_OR_DELETE);
     }
 }

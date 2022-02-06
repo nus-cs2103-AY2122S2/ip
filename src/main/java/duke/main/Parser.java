@@ -69,8 +69,7 @@ public class Parser {
     static LocalDateTime parseDateTime(String input) throws DukeException {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(input, format);
-            return dateTime;
+            return LocalDateTime.parse(input, format);
         } catch (DateTimeParseException e) {
             throw new DukeException(DukeException.FORMAT_DATE);
         }
@@ -86,7 +85,7 @@ public class Parser {
     }
 
     private static AddTodoCommand parseTodoCommand(String input) throws DukeException {
-        if (input.matches("\\s*")) {
+        if (isEmptyString(input)) {
             throw new DukeException(DukeException.ERROR_TODO_NO_NAME);
         }
         return new AddTodoCommand(input);
@@ -94,7 +93,7 @@ public class Parser {
 
     private static AddDeadlineCommand parseDeadlineCommand(String input) throws DukeException {
         String[] splitInputs = input.split("/by");
-        if (!validateDeadlineEventSplit(splitInputs)) {
+        if (!isValidDeadlineEventSplit(splitInputs)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + DukeException.FORMAT_DEADLINE);
         }
         String description = splitInputs[0].trim();
@@ -105,7 +104,7 @@ public class Parser {
 
     private static AddEventCommand parseEventCommand(String input) throws DukeException {
         String[] splitInputs = input.split("/at");
-        if (!validateDeadlineEventSplit(splitInputs)) {
+        if (!isValidDeadlineEventSplit(splitInputs)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + DukeException.FORMAT_EVENT);
         }
         String description = splitInputs[0].trim();
@@ -124,16 +123,20 @@ public class Parser {
     }
 
     private static FindCommand parseFindCommand(String input) throws DukeException {
-        if (input.matches("\\s*")) {
+        if (isEmptyString(input)) {
             throw new DukeException(DukeException.ERROR_FIND_NO_NAME);
         }
         return new FindCommand(input);
     }
 
-    private static boolean validateDeadlineEventSplit(String[] splitInput) throws DukeException {
-        if (splitInput.length != 2 || splitInput[0].matches("\\s*") || splitInput[1].matches("\\s*")) {
+    private static boolean isValidDeadlineEventSplit(String[] splitInput) {
+        if (splitInput.length != 2 || isEmptyString(splitInput[0]) || isEmptyString(splitInput[1])) {
             return false;
         }
         return true;
+    }
+
+    private static boolean isEmptyString(String s) {
+        return s.matches("\\s*");
     }
 }
