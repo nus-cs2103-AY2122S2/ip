@@ -1,5 +1,5 @@
 public class Event extends Task {
-    protected final String sym = "E";
+    private final String sym = "E";
     private String dayAndTime;
 
     Event (String description, String dayAndTime) {
@@ -7,15 +7,12 @@ public class Event extends Task {
         this.dayAndTime = dayAndTime;
     }
 
-    @Override
     String getSym() {
         return this.sym;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s]%s (at:%s)", sym, super.getStatusIcon(), super.description, this.dayAndTime);
+        return String.format("[%s][%s] %s (at:%s)", sym, super.getStatusIcon(), super.getDescription(), this.dayAndTime);
     }
-
-
 }

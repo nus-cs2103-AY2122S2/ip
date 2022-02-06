@@ -4,32 +4,30 @@ public class Action {
 
     Action() {}
 
-    void greet() {
-        String greet = "Hello! I'm JiaMing\nWhat can I do for you?\n";
+    public static void greet() {
+        String logo  = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String greet = "Hello! I'm JiaMing aka\n"+ logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
         System.out.println(greet);
     }
 
-    void echo(String phrase) {
+    public static void echo(String phrase) {
         System.out.println(phrase);
     }
 
-    void bye() {
+    public static void bye() {
         String bye = "Bye. Hope to see you again soon!\n";
         System.out.println(bye);
     }
 
-    void showList(ArrayList<Task> arrlst) {
+    public static void showList(ArrayList<Task> arrlst) {
         System.out.println("Here are the tasks in your list:");
         for (int i =  0; i < arrlst.size(); i++) {
-            String output = String.format("%d.[%s][%s]%s\n", i + 1, arrlst.get(i).sym,
-                                             arrlst.get(i).getStatusIcon(), arrlst.get(i).description);
+            String output = String.format("%d.%s\n", i + 1, arrlst.get(i));
             System.out.println(output);
         }
     }
-
-    @Override
-    public String toString() {
-        return "this is an Action (Parent)";
-    }
-
 }
