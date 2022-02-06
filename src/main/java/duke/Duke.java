@@ -23,27 +23,27 @@ public class Duke {
         tasks = new TaskList(storage.retrieveTaskList());
     }
 
-    /**
-     * Runs the program until exit is issued.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.getUserInput();
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+//    /**
+//     * Runs the program until exit is issued.
+//     */
+//    public void run() {
+//        ui.showWelcomeMessage();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String input = ui.getUserInput();
+//                Command c = Parser.parse(input);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showMessage(e.getMessage());
+//            }
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        new Duke().run();
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
