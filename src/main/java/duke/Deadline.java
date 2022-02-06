@@ -36,7 +36,7 @@ public class Deadline extends Task {
      * @return a string which represents the time
      */
     public String getDue() {
-        return due.format(out_dtf);
+        return due.format(outDtf);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due.format(out_dtf) + ")";
+        return "[D]" + super.toString() + " (by: " + due.format(outDtf) + ")";
     }
 
 }

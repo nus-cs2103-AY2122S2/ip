@@ -7,7 +7,7 @@ public class Task {
     protected String d;
     protected String type;
     protected boolean isDone;
-    protected final DateTimeFormatter out_dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected final DateTimeFormatter outDtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * constructor for Task
