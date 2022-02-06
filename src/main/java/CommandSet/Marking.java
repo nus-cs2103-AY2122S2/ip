@@ -1,8 +1,8 @@
-package CommandSet;
+package commandset;
 
-import Exceptions.FaultyTaskNumberException;
-import Helper.TaskList;
-import Helper.Ui;
+import exceptions.FaultyTaskNumberException;
+import helper.TaskList;
+import helper.Ui;
 
 /**
  * <h1>Marking</h1>
@@ -12,7 +12,7 @@ import Helper.Ui;
  * </p>
  * @author Saravanan Anuja Harish
  */
-public class Marking extends Command{
+public class Marking extends Command {
 
     /**
      * Constructor for Marking.
@@ -50,7 +50,7 @@ public class Marking extends Command{
     public static void unmarkTask(String message, TaskList taskList) {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
-        if(num > 0 && num <= taskList.numOfTasks()) {
+        if (num > 0 && num <= taskList.numOfTasks()) {
             taskList.get(num - 1).unMarkDone();
             Ui.printUnmarked(taskList.get(num - 1));
         } else {

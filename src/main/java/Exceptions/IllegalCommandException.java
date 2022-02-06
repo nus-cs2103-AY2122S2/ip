@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * <h1>IllegalCommandException</h1>

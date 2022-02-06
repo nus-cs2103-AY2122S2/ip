@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * <h1>Task</h1>
@@ -115,7 +115,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" +  (this.done ? CROSS : SPACE ) + "] " + this.task;
+        return "[" + (this.done ? CROSS : SPACE) + "] " + this.task;
     }
 
 }

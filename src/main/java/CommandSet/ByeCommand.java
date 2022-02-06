@@ -1,7 +1,7 @@
-package CommandSet;
+package commandset;
 
-import Helper.Storage;
-import Helper.TaskList;
+import helper.Storage;
+import helper.TaskList;
 
 /**
  * <h1>ByeCommand</h1>

@@ -1,21 +1,22 @@
-package Conan;
+package conan;
 
-import CommandSet.AddCommand;
-import CommandSet.ByeCommand;
-import CommandSet.Commands;
-import CommandSet.CommandChecker;
-import CommandSet.DeleteCommand;
-import CommandSet.DueCommand;
-import CommandSet.FindCommand;
-import CommandSet.Marking;
+import commandset.AddCommand;
+import commandset.ByeCommand;
+import commandset.CommandChecker;
+import commandset.Commands;
+import commandset.DeleteCommand;
+import commandset.DueCommand;
+import commandset.FindCommand;
+import commandset.Marking;
+import exceptions.IllegalCommandException;
+import exceptions.InvalidYesOrNoException;
+import helper.CarryOn;
+import helper.Storage;
+import helper.TaskList;
+import helper.Ui;
 
-import Helper.TaskList;
-import Helper.Storage;
-import Helper.Ui;
-import Helper.CarryOn;
 
-import Exceptions.InvalidYesOrNoException;
-import Exceptions.IllegalCommandException;
+
 
 /**
  * <h1>Conan</h1>
@@ -129,6 +130,7 @@ public class Conan {
                 ByeCommand.executeBye(this.username, this.storage, this.taskList);
                 Ui.printFarewell(this.username);
                 carryOn = CarryOn.STOP;
+                break;
             case DELETE:
                 DeleteCommand.delete(this.taskList, message);
                 break;

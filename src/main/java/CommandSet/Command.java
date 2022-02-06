@@ -1,4 +1,4 @@
-package CommandSet;
+package commandset;
 
 /**
  * <h1>Command class</h1>

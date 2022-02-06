@@ -1,30 +1,23 @@
 
 import java.util.Scanner;
 
-import Exceptions.EmptyCommandException;
-import Exceptions.IllegalCommandException;
-
-import Helper.CarryOn;
-import Helper.Ui;
-
-import Conan.Conan;
-
+import conan.Conan;
+import exceptions.EmptyCommandException;
+import exceptions.IllegalCommandException;
+import helper.CarryOn;
+import helper.DialogBox;
+import helper.Ui;
 import javafx.application.Application;
-
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -38,16 +31,21 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // stores empty_string.
+    private static final String EMPTY_STRING = "";
+
+    // contains the reference to user image file.
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+
+    // contains the reference to conan image file.
+    private final Image conanImage = new Image(this.getClass().getResourceAsStream("/images/conan.png"));
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image conanImage = new Image(this.getClass().getResourceAsStream("/images/conan.png"));
-
-    private final static String EMPTY_STRING = "";
 
     /**
      * starts the program.
@@ -66,7 +64,7 @@ public class Main extends Application {
 
         //keep asking the user for name till u get a valid name.
         while (userInput.trim().equalsIgnoreCase(EMPTY_STRING)) {
-           // Ui.printSeparator();
+            // Ui.printSeparator();
             Ui.printAskValidName();
             userInput = sc.nextLine();
         }
@@ -75,7 +73,7 @@ public class Main extends Application {
         boolean isSimilarPreviousUser = conan.tellName(userInput);
         if (isSimilarPreviousUser) {
             userInput = sc.nextLine();
-            while(!conan.continueFromLastTime(userInput)) {
+            while (!conan.continueFromLastTime(userInput)) {
                 userInput = sc.nextLine();
             }
         }

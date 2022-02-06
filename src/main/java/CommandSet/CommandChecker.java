@@ -1,9 +1,9 @@
-package CommandSet;
+package commandset;
 
-import Exceptions.InvalidYesOrNoException;
-import Exceptions.MissingTaskArgumentException;
-import Exceptions.IllegalCommandException;
-import Helper.Ui;
+import exceptions.IllegalCommandException;
+import exceptions.InvalidYesOrNoException;
+import exceptions.MissingTaskArgumentException;
+import helper.Ui;
 
 /**
  * <h1>CommandChecker</h1>
@@ -122,6 +122,8 @@ public class CommandChecker {
                 return Commands.DUEON;
             case FIND:
                 return Commands.FIND;
+            default:
+                // do nothing
             }
 
             return Commands.ADD;

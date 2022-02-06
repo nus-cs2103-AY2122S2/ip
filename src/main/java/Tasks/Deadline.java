@@ -1,8 +1,7 @@
-package Tasks;
+package tasks;
 
-import Helper.DateHandler;
-
-import Exceptions.MissingTimeArgumentException;
+import exceptions.MissingTimeArgumentException;
+import helper.DateHandler;
 
 /**
  * <h1>Deadline</h1>
@@ -36,9 +35,6 @@ public class Deadline extends Task {
     // The argument preceding time.
     private static final String TIME_ARGUMENT = "/by";
 
-    // instance variable to store deadline
-    private final DateHandler deadline;
-
     // stores the time argument indicator in the output string.
     private static final String TIME_ARGUMENT_OUTPUT = "(by: ";
 
@@ -48,6 +44,8 @@ public class Deadline extends Task {
     // stores the start index value.
     private static final int START_INDEX = 0;
 
+    // instance variable to store deadline
+    private final DateHandler deadline;
 
     /**
      * Constructor for Deadline class.
@@ -80,8 +78,8 @@ public class Deadline extends Task {
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
     public static boolean correctArgument(String text) {
-        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) ||
-                text.trim().split(TIME_ARGUMENT).length == 1) {
+        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT)
+                || text.trim().split(TIME_ARGUMENT).length == 1) {
             throw new MissingTimeArgumentException("Deadline " + text);
         }
 

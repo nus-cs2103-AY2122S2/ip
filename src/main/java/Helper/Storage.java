@@ -1,14 +1,13 @@
-package Helper;
-
-import java.util.Scanner;
-import java.util.ArrayList;
+package helper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import Tasks.Task;
+import tasks.Task;
 
 /**
  * <h1>Storage</h1>

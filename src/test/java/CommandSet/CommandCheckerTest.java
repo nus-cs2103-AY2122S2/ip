@@ -1,8 +1,9 @@
-package CommandSet;
+package commandset;
 
+import commandset.CommandChecker;
 import org.junit.jupiter.api.Test;
 
-import static CommandSet.Commands.*;
+import static commandset.Commands.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -13,8 +14,8 @@ public class CommandCheckerTest {
      */
     @Test
     public void yesOrNoChecker_userInputs_yesOrNo() {
-        assertEquals(YES, CommandChecker.yesOrNoChecker("yes"));
-        assertEquals(NO, CommandChecker.yesOrNoChecker("no"));
+        assertEquals(YES, CommandChecker.checkYesOrNo("yes"));
+        assertEquals(NO, CommandChecker.checkYesOrNo("no"));
     }
 
     /**

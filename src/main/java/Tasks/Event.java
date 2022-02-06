@@ -1,8 +1,7 @@
-package Tasks;
+package tasks;
 
-import Helper.DateHandler;
-
-import Exceptions.MissingTimeArgumentException;
+import exceptions.MissingTimeArgumentException;
+import helper.DateHandler;
 
 /**
  * <h1>Event</h1>
@@ -12,7 +11,7 @@ import Exceptions.MissingTimeArgumentException;
  *
  * @author Saravanan Anuja Harish
  */
-public class Event extends Task{
+public class Event extends Task {
 
     // Symbol for event class.
     private static final String SYMBOL = "[E]";
@@ -38,15 +37,14 @@ public class Event extends Task{
     // stores the time argument indicator in the output string.
     private static final String TIME_ARGUMENT_OUTPUT = "(at: ";
 
-    // instance variable to store event time.
-    private final DateHandler time;
-
     // stores the start index value.
     private static final int START_INDEX = 0;
 
     // used to differentiate between constructors
     private static final int DUMMY_VARIABLE = 1;
 
+    // instance variable to store event time.
+    private final DateHandler time;
 
     /**
      * Constructor for event class.
@@ -100,7 +98,9 @@ public class Event extends Task{
      */
     public static boolean correctArgument(String text) {
 
-        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) || text.trim().split(TIME_ARGUMENT).length == 1) {
+        if (!text.contains(SEPARATOR)
+                || !text.contains(TIME_ARGUMENT)
+                || text.trim().split(TIME_ARGUMENT).length == 1) {
             throw new MissingTimeArgumentException("Event " + text);
         }
 

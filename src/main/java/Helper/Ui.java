@@ -1,13 +1,12 @@
-package Helper;
-
-import Tasks.Task;
+package helper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import tasks.Task;
 
 /**
  * This file contains the implementation of Ui class.
@@ -69,8 +68,8 @@ public class Ui {
      * @param username the name of the user.
      */
     public static void printSayHello(String username) {
-        String str = "Hello, " + username + "!, Nice to meet you! (*^_^*)\n" +
-                "So, tell me what would you like to do, " + username + "!";
+        String str = "Hello, " + username + "!, Nice to meet you! (*^_^*)\n"
+                + "So, tell me what would you like to do, " + username + "!";
 
         try {
             FileWriter writer = new FileWriter(PATH_TEMP_FILE);
@@ -88,10 +87,10 @@ public class Ui {
      * @param previousUser the previous username.
      */
     public static void printFoundSimilarName(String previousUser) {
-        String str = "I have found out that there was a similar user in the past under the name:\n" +
-                previousUser + "\n" +
-                "If this is you, would you like to continue from the previous tasks ?" +
-                "If this isn't you or you don't want to use the previous tasks, please type no";
+        String str = "I have found out that there was a similar user in the past under the name:\n"
+                + previousUser + "\n"
+                + "If this is you, would you like to continue from the previous tasks ?"
+                + "If this isn't you or you don't want to use the previous tasks, please type no";
         try {
             FileWriter writer = new FileWriter(PATH_TEMP_FILE);
             writer.write(str);
@@ -108,11 +107,11 @@ public class Ui {
      * @param username the name of the user.
      */
     public static void printAsk(String username) {
-        String ASK = "Please let me know if there's anything else you would like to do, ";
+        String ask = "Please let me know if there's anything else you would like to do, ";
 
         try {
             FileWriter writer = new FileWriter(PATH_TEMP_FILE);
-            writer.write(ASK + username);
+            writer.write(ask + username);
             writer.close();
         } catch (IOException e) {
             Ui.printError();

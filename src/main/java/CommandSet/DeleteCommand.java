@@ -1,11 +1,9 @@
-package CommandSet;
+package commandset;
 
-import Helper.TaskList;
-import Helper.Ui;
-
-import Tasks.Task;
-
-import Exceptions.FaultyTaskNumberException;
+import exceptions.FaultyTaskNumberException;
+import helper.TaskList;
+import helper.Ui;
+import tasks.Task;
 
 /**
  * <h1>DeleteCommand</h1>

@@ -1,15 +1,15 @@
-package CommandSet;
+package commandset;
 
-import Helper.Storage;
-import Helper.TaskList;
-import Helper.Ui;
+import exceptions.MissingTimeArgumentException;
+import helper.Storage;
+import helper.TaskList;
+import helper.Ui;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
-import Tasks.Task;
-import Tasks.Todo;
-import Tasks.Deadline;
-import Tasks.Event;
 
-import Exceptions.MissingTimeArgumentException;
 
 /**
  * <h1>AddCommand</h1>
@@ -56,9 +56,9 @@ public class AddCommand extends Command {
      */
     public static void add(TaskList taskList, String text) {
 
-        String[] split_text = text.split(SPACE, 2);
-        String type = split_text[START_INDEX].toUpperCase();
-        String message = split_text[1];
+        String[] splitText = text.split(SPACE, 2);
+        String type = splitText[START_INDEX].toUpperCase();
+        String message = splitText[1];
 
         Task task;
 

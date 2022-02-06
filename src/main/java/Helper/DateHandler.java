@@ -1,11 +1,11 @@
-package Helper;
+package helper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
-import Exceptions.WrongDateArgumentException;
-import Exceptions.WrongTimeArgumentException;
+import exceptions.WrongDateArgumentException;
+import exceptions.WrongTimeArgumentException;
 
 /**
  * <h1>DateHandler</h1>
@@ -38,17 +38,17 @@ public class DateHandler {
     // The index value where minute character starts in time string.
     private static final int MINUTE_INDEX = 2;
 
-    // stores information on the date.
-    private final LocalDate date;
-
-    // stores information on the time.
-    private final boolean isTimeGiven;
-
     // stores the length of date argument.
     private static final int DATE_LENGTH = 10;
 
     // stores the length of time argument.
     private static final int TIME_LENGTH = 4;
+
+    // stores information on the date.
+    private final LocalDate date;
+
+    // stores information on the time.
+    private final boolean isTimeGiven;
 
     // stores the time argument.
     private final LocalTime time;
@@ -90,20 +90,20 @@ public class DateHandler {
             strings[strings.length - i - 1] = temp;
         }
 
-        int year_idx = 0;
-        int month_idx = 1;
-        int day_idx = 2;
-        this.date = LocalDate.of(Integer.valueOf(strings[year_idx]), Month.valueOf(strings[month_idx]),
-                Integer.valueOf(strings[day_idx]));
+        int yearIdx = 0;
+        int monthIdx = 1;
+        int dayIdx = 2;
+        this.date = LocalDate.of(Integer.valueOf(strings[yearIdx]), Month.valueOf(strings[monthIdx]),
+                Integer.valueOf(strings[dayIdx]));
 
         int splitArrLenWithTime = 5;
         if (strings.length == splitArrLenWithTime) {
             //extract time
             String[] time = strings[strings.length - 2].split(":");
-            int hour_idx = 0;
-            int minute_idx = 1;
-            int hour = Integer.valueOf(time[hour_idx]);
-            int minute = Integer.valueOf(time[minute_idx].substring(1));
+            int hourIdx = 0;
+            int minuteIdx = 1;
+            int hour = Integer.valueOf(time[hourIdx]);
+            int minute = Integer.valueOf(time[minuteIdx].substring(1));
             this.time = LocalTime.of(hour, minute);
             this.isTimeGiven = true;
         } else {
@@ -123,14 +123,14 @@ public class DateHandler {
 
         // handle time checking
         if (userDate.contains(SPACE)) {
-            String hr_mt = userDate.split(SPACE, LIMIT)[TIME_IDX].trim();
+            String hourMinute = userDate.split(SPACE, LIMIT)[TIME_IDX].trim();
 
-            if (hr_mt.length() != TIME_LENGTH) {
+            if (hourMinute.length() != TIME_LENGTH) {
                 throw new WrongTimeArgumentException(userDate);
             }
 
             for (int i = 0; i < TIME_LENGTH; i++) {
-                if (!Character.isDigit(hr_mt.charAt(i))) {
+                if (!Character.isDigit(hourMinute.charAt(i))) {
                     throw new WrongTimeArgumentException(userDate);
                 }
             }
@@ -188,8 +188,8 @@ public class DateHandler {
      */
     @Override
     public String toString() {
-        return this.date.getDayOfWeek() + SPACE + (this.isTimeGiven ? this.time + SPACE : EMPTY) +
-                this.date.getDayOfMonth() + SPACE + this.date.getMonth() + SPACE + this.date.getYear();
+        return this.date.getDayOfWeek() + SPACE + (this.isTimeGiven ? this.time + SPACE : EMPTY)
+                + this.date.getDayOfMonth() + SPACE + this.date.getMonth() + SPACE + this.date.getYear();
     }
 
 }

@@ -1,8 +1,8 @@
-package Helper;
+package helper;
 
 import java.util.ArrayList;
 
-import Tasks.Task;
+import tasks.Task;
 
 /**
  * <h1>TaskList</h1>
@@ -86,7 +86,7 @@ public class TaskList {
     public TaskList getTasksDueOn(String date) {
         DateHandler.checkValidDate(date);
         TaskList dueTasks = new TaskList();
-        for(int i = 0; i < this.numOfTasks(); i++) {
+        for (int i = 0; i < this.numOfTasks(); i++) {
             Task task = this.get(i);
             if (task.isOnDate(date)) {
                 dueTasks.add(task);
@@ -104,7 +104,7 @@ public class TaskList {
     public TaskList getTasksDueBefore(String date) {
         DateHandler.checkValidDate(date);
         TaskList dueTasks = new TaskList();
-        for(int i = 0; i < this.numOfTasks(); i++) {
+        for (int i = 0; i < this.numOfTasks(); i++) {
             Task task = this.get(i);
             if (task.isBefore(date)) {
                 dueTasks.add(task);
@@ -121,7 +121,7 @@ public class TaskList {
      */
     public TaskList getTasksContaining(String word) {
         TaskList tasksContainingWord = new TaskList();
-        for(int i = 0; i < this.numOfTasks(); i++) {
+        for (int i = 0; i < this.numOfTasks(); i++) {
             Task task = this.get(i);
             if (task.contains(word)) {
                 tasksContainingWord.add(task);

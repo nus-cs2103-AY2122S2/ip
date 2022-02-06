@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * <h1>Todo</h1>

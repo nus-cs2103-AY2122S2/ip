@@ -1,7 +1,7 @@
-package CommandSet;
+package commandset;
 
-import Helper.TaskList;
-import Helper.Ui;
+import helper.TaskList;
+import helper.Ui;
 
 /**
  * File contains the implementation of DueCommand class.
