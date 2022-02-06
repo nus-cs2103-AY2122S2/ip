@@ -105,7 +105,7 @@ public class Ui {
     /**
      * Prints the input messages line by line to user.
      *
-     * @param message The messages that are displayed to the user, can be 1 or more.
+     * @param message The messages that are displayed to the user, can be 1 or more using Varargs.
      */
     public void showToUser(String... message) {
         for (String m : message) {
