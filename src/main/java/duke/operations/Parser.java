@@ -217,6 +217,7 @@ public class Parser {
 
     private static Command handleDelete(String[] strings) {
         int listIndex = Integer.parseInt(strings[INDEX_AFTER_DELETE]);
+        assert (listIndex > 0) : "This index is sussy, it must be greater than 0!";
         Task taskToBeDeleted = TaskList.TASK_ARRAY_LIST.get(listIndex - 1);
         return new DeleteCommand(taskToBeDeleted);
     }
