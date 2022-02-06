@@ -7,7 +7,7 @@ public class EventTask extends Task {
     private final String taskTitle;
     private final String taskType = "E";
     private boolean markedStatus;
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     public EventTask(String taskTitle, LocalDateTime deadline) {
         super(taskTitle, deadline);
@@ -46,9 +46,11 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         String mark = this.markedStatus ? "[X]" : "[ ]";
-        String deadlineText = "(at: " + deadline.format(DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm a")) + ")";
-        String toReturn = "[E]" + mark + " " + this.taskTitle + " " + deadlineText;
-        return toReturn;
+        String deadlineText = "(at: "
+                + deadline.format(
+                        DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm a")
+        ) + ")";
+        return "[E]" + mark + " " + this.taskTitle + " " + deadlineText;
     }
 
     public boolean containsKeyword(String keyword) {

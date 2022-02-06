@@ -46,7 +46,7 @@ public class Gene {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (scanner.hasNextLine() ) {
+        while (scanner.hasNextLine()) {
             try {
                 Command currCommand = Parser.parseCommand(scanner.nextLine());
                 if (currCommand.isExit()) {
