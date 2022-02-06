@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Represents a Command which, when executed, lists all Task objects in the TaskList instance.
  */
 public class ListCommand extends Command {
+    private static final String BEGINNING_MESSAGE = "Charizard's burning wish list:";
     private static final boolean IS_EXIT = false;
 
     /**
@@ -28,10 +29,9 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String message = "Charizard's burning wish list:";
-            ui.appendMessage(message);
+            ui.appendMessage(BEGINNING_MESSAGE);
             ui.appendBorder();
-            message = "";
+            String message = "";
             for (int i = 0; i < tasks.getSize(); i++) {
                 message += String.format("%d. %s", i + 1, tasks.getTask(i).toString());
                 if (i < tasks.getSize() - 1) {

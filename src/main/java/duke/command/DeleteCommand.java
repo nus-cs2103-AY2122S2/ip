@@ -12,6 +12,7 @@ import duke.ui.Ui;
  * Represents a Command which, when executed, deletes a Task from the given TaskList instance.
  */
 public class DeleteCommand extends Command {
+    private static final String ENDING_MESSAGE_FORMAT = "\nThere are %d tasks in the burning list.";
     private static final boolean IS_EXIT = false;
     private int taskIndex;
 
@@ -40,7 +41,7 @@ public class DeleteCommand extends Command {
         ui.appendBorder();
         ui.appendMessage(task.toString());
         ui.appendBorder();
-        ui.appendMessage(String.format("\nThere are %d tasks in the burning list.", tasks.getSize()));
+        ui.appendMessage(String.format(ENDING_MESSAGE_FORMAT, tasks.getSize()));
         ui.setRespondImage(ImageType.ADD_OR_DELETE);
     }
 }

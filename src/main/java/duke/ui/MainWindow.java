@@ -40,6 +40,9 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Ash.PNG"));
 
+    /**
+     * Initializes a new MainWindow and sets itself to be the root and controller of MainWindow fxml.
+     */
     public MainWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
@@ -98,6 +101,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        if (duke.hasExited()) {
+            prepareToCloseWindow();
+        }
         String input = userInput.getText();
         Pair<String, Image> dukeResponse = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -105,15 +111,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(dukeResponse.getFirst(), dukeResponse.getSecond())
         );
         userInput.clear();
-        if (duke.hasExited()) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(CLOSING_MESSAGE, dukeResponse.getSecond())
-            );
-            sendButton.setDisable(true);
-            userInput.setDisable(true);
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(event -> javafx.application.Platform.exit());
-            delay.play();
-        }
+    }
+
+    private void prepareToCloseWindow() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(CLOSING_MESSAGE, Ui.GENERAL_IMAGE)
+        );
+        sendButton.setDisable(true);
+        userInput.setDisable(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> javafx.application.Platform.exit());
+        delay.play();
     }
 }

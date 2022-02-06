@@ -53,29 +53,12 @@ public class Storage {
             ArrayList<Task> readTasks = new ArrayList<Task>();
             while ((taskInput = fileReader.readLine()) != null) {
                 String[] splitTaskInput = taskInput.split(" \\| ");
-                Task newTask;
-                if (splitTaskInput[0].equals("T")) {
-                    newTask = new ToDo(splitTaskInput[2]);
-                } else if (splitTaskInput[0].equals("D")) {
-                    LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
-                    newTask = new Deadline(splitTaskInput[2], dateTime);
-                } else if (splitTaskInput[0].equals("E")) {
-                    LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
-                    newTask = new Event(splitTaskInput[2], dateTime);
-                } else {
-                    throw new DukeException("Error: duke.task.Task type is not T,D or E in file\n");
-                }
-                int i = Integer.parseInt(splitTaskInput[1]);
-                if (i == 1) {
-                    newTask.mark(true);
-                }
+                Task newTask = getTaskFromStringArray(splitTaskInput);
                 readTasks.add(newTask);
             }
             return readTasks;
         } catch (IOException e) {
-            throw new DukeException("Error: File input cannot be read\n" + e.getMessage());
-        } catch (NumberFormatException e) {
-            throw new DukeException("Error: isDone field is not indicated by 0 or 1 in file\n" + e.getMessage());
+            throw new DukeException(DukeException.ERROR_IO_INPUT);
         }
     }
 
@@ -99,7 +82,33 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeException("Unable to write to file\n" + e.getMessage());
+            throw new DukeException(DukeException.ERROR_WRITE_FILE);
+        }
+    }
+
+    private Task getTaskFromStringArray(String[] splitTaskInput) throws DukeException {
+        try {
+            Task newTask;
+            if (splitTaskInput[0].equals("T")) {
+                newTask = new ToDo(splitTaskInput[2]);
+            } else if (splitTaskInput[0].equals("D")) {
+                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
+                newTask = new Deadline(splitTaskInput[2], dateTime);
+            } else if (splitTaskInput[0].equals("E")) {
+                LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
+                newTask = new Event(splitTaskInput[2], dateTime);
+            } else {
+                throw new DukeException(DukeException.ERROR_INPUT_FILE_FORMAT_TASK);
+            }
+            int isDone = Integer.parseInt(splitTaskInput[1]);
+            if (isDone == 1) {
+                newTask.mark(true);
+            }
+            return newTask;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.ERROR_INPUT_FILE_FORMAT_SPLIT);
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.ERROR_INPUT_FILE_FORMAT_DONE);
         }
     }
 }
