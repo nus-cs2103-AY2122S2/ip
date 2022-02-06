@@ -82,6 +82,7 @@ public class Parser {
         case "deadline":
             cmd = new AddCommand(input[0], input[1]);
             break;
+        case "remove":
         case "delete":
             cmd = new DeleteCommand(input[1]);
             break;
