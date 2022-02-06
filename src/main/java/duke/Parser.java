@@ -1,12 +1,18 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Class that specifically deals with input from the user and calls the respective class and methods
  */
 public class Parser {
 
+    // String messages for printing/output
     private final String BYE_MSG = "~BYE!~ Come back to Duke anytime";
     private final String RESET_MSG = "List of tasks has been resetted";
+    private final String INVALID_CMD = "You have entered an invalid instruction";
+    private final String MISSING_DATETIME = "Description of deadline must include a date/time!";
 
     /**
      * Empty constructor for the Parser class
@@ -48,7 +54,7 @@ public class Parser {
                     } else if (instr.equals("delete")) {
                         taskList.deleteTask(index);
                     } else {
-                        throw new DukeException("You have entered an invalid instruction");
+                        throw new DukeException(INVALID_CMD);
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
@@ -65,7 +71,7 @@ public class Parser {
             if (command.equals("find")) {
                 taskList.find(text);
             } else {
-                throw new DukeException("You have entered an invalid command");
+                throw new DukeException(INVALID_CMD);
             }
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             //input is a new type of task
@@ -88,7 +94,7 @@ public class Parser {
             } else if (taskType.equals("deadline")) {
                 String[] stringSplit = taskDetails.split("/by");
                 if (stringSplit.length < 2) {
-                    throw new DukeException("Description of deadline must include a date/time! Missed out a /by?");
+                    throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
                 }
                 String details = stringSplit[0].trim();
                 String dateTime = stringSplit[1].trim();
@@ -96,7 +102,7 @@ public class Parser {
             } else if (taskType.equals("event")) {
                 String[] splitString = taskDetails.split("/at");
                 if (splitString.length < 2) {
-                    throw new DukeException("Description of event must include a date/time! Missed out a /at?");
+                    throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
                 }
                 String details = splitString[0].trim();
                 String dateTime = splitString[1].trim();
@@ -136,70 +142,103 @@ public class Parser {
                 assert splitString.length >= 2;
                 try {
                     int index = Integer.parseInt(splitString[1]);
-                    if (instr.equals("unmark")) {
-                        return taskList.guiUnmarkTask(index);
-                    } else if (instr.equals("mark")) {
-                        return taskList.guiMarkTask(index);
-                    } else if (instr.equals("delete")) {
-                        return taskList.guiDeleteTask(index);
-                    } else {
-                        throw new DukeException("You have entered an invalid instruction");
-                    }
+                    return modifyTasks(instr, index, taskList);
                 } catch (DukeException e) {
                     return e.toString();
                 }
             }
         } else if (input.contains("find")) { //input is find
             String[] splitString = input.split(" ", 2);
-            if (splitString.length < 2) {
-                throw new DukeException("Please input the keyword(s) for find");
-            }
-            assert splitString.length >= 2;
-            String command = splitString[0];
-            String text = splitString[1];
-            if (command.equals("find")) {
-                return taskList.guiFind(text);
-            } else {
-                throw new DukeException("You have entered an invalid command");
-            }
+            return parseFind(splitString, taskList);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             //input is a new type of task
-            //identify type of task
             String[] stringArray = input.split(" ", 2);
-
-            //task has no task detail/name
-            if (stringArray.length < 2) {
-                throw new DukeException("Description of task cannot be empty!");
-            }
-
-            assert stringArray.length >= 2;
-            String taskType = stringArray[0];
-            String taskDetails = stringArray[1];
-
-            Task newTask = new Task("");
-
-            if (taskType.equals("todo")) {
-                newTask = new Todo(taskDetails);
-            } else if (taskType.equals("deadline")) {
-                String[] stringSplit = taskDetails.split("/by");
-                if (stringSplit.length < 2) {
-                    throw new DukeException("Description of deadline must include a date/time! Missed out a /by?");
-                }
-                String details = stringSplit[0].trim();
-                String dateTime = stringSplit[1].trim();
-                newTask = new Deadline(details, dateTime);
-            } else if (taskType.equals("event")) {
-                String[] splitString = taskDetails.split("/at");
-                if (splitString.length < 2) {
-                    throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
-                }
-                String details = splitString[0].trim();
-                String dateTime = splitString[1].trim();
-                newTask = new Event(details, dateTime);
-            }
-            return taskList.guiAddTask(newTask);
+            return parseNewTask(stringArray, taskList);
         } else {
-            throw new DukeException("no such task type");
+            throw new DukeException("No such task type");
         }
+    }
+
+    /**
+     * Abstracted method to deal with unmark, mark and delete command
+     * @param cmd the string command passed in
+     * @param index index of task within tasklist
+     * @param taskList the tasklist itself
+     * @return a String output of the current tasklist after modification
+     * @throws DukeException for any invalid command given
+     */
+    public String modifyTasks(String cmd, Integer index, TaskList taskList) throws DukeException {
+        if (cmd.equals("unmark")) {
+            return taskList.guiUnmarkTask(index);
+        } else if (cmd.equals("mark")) {
+            return taskList.guiMarkTask(index);
+        } else if (cmd.equals("delete")) {
+            return taskList.guiDeleteTask(index);
+        } else {
+            throw new DukeException(INVALID_CMD);
+        }
+    }
+
+    /**
+     * Abstracted method call for find command
+     * @param splitString input that has been split into command and text
+     * @param taskList current list of tasks
+     * @return String containing index and tasks matching the text input given
+     * @throws DukeException for invalid commands and empty text to find
+     */
+    public String parseFind(String[] splitString, TaskList taskList) throws DukeException {
+        if (splitString.length < 2) {
+            throw new DukeException("Please input the keyword(s) for find");
+        }
+        assert splitString.length >= 2;
+        String command = splitString[0];
+        String text = splitString[1];
+        if (command.equals("find")) {
+            return taskList.guiFind(text);
+        } else {
+            throw new DukeException(INVALID_CMD);
+        }
+    }
+
+    /**
+     * Abstracted method call for adding new tasks
+     * @param stringArray input that has been split into command and task details
+     * @param taskList current list of tasks
+     * @return String containing confirmation message and task that has been added
+     * @throws DukeException for invalid commands/commands without their required details
+     */
+    public String parseNewTask(String[] stringArray, TaskList taskList) throws DukeException {
+        //task has no task detail/name
+        if (stringArray.length < 2) {
+            throw new DukeException("Description of task cannot be empty!");
+        }
+
+        assert stringArray.length >= 2;
+        String taskType = stringArray[0];
+        String taskDetails = stringArray[1];
+
+        Task newTask = new Task("");
+
+        //identify new task
+        if (taskType.equals("todo")) {
+            newTask = new Todo(taskDetails);
+        } else if (taskType.equals("deadline")) {
+            String[] stringSplit = taskDetails.split("/by");
+            if (stringSplit.length < 2) {
+                throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
+            }
+            String details = stringSplit[0].trim();
+            String dateTime = stringSplit[1].trim();
+            newTask = new Deadline(details, dateTime);
+        } else if (taskType.equals("event")) {
+            String[] splitString = taskDetails.split("/at");
+            if (splitString.length < 2) {
+                throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
+            }
+            String details = splitString[0].trim();
+            String dateTime = splitString[1].trim();
+            newTask = new Event(details, dateTime);
+        }
+        return taskList.guiAddTask(newTask);
     }
 }

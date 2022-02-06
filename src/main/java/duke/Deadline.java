@@ -52,6 +52,7 @@ public class Deadline extends Task {
 
     /**
      * Getter for time
+     *
      * @return time
      */
     public LocalTime getTime() {
@@ -59,41 +60,16 @@ public class Deadline extends Task {
     }
 
     /**
-     * formats and prints the date into MMM d YYYY format
-     */
-    public void printDate() {
-        System.out.print("(by: ");
-        System.out.print(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        printTime();
-        System.out.println(")");
-    }
-
-    /**
-     * formats and prints the time into HHmm format
-     */
-    public void printTime() {
-        if (this.time != null) {
-            System.out.print(" " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm"))));
-        }
-    }
-
-    /**
      * Method to print the Deadline task out, overrides the method in the superclass
      */
     @Override
     public void printTask() {
-        System.out.print("[D]");
-
-        if (this.getDone()) {
-            System.out.print("[X] " + this.getTaskName() + " ");
-        } else {
-            System.out.print("[ ] " + this.getTaskName() + " ");
-        }
-        printDate();
+        System.out.print(this.toString());
     }
 
     /**
      * Overrides the toString method, used for JUnit testing ensuring the correct output is printed out
+     *
      * @return String that goes into the output
      */
     @Override

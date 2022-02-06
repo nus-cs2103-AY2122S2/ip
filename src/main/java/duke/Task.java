@@ -40,10 +40,6 @@ public class Task {
         return taskName;
     }
 
-    public void setTaskName(String newName) {
-        this.taskName = newName;
-    }
-
     /**
      * Prints out the status of the task and the details
      */
