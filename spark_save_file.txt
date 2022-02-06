@@ -1,5 +1,5 @@
 T @@@ false @@@ buy milk
 T @@@ false @@@ buy milk
 T @@@ false @@@ buy milk
-T @@@ true @@@ buy milk
-T @@@ false @@@ buy milk
+T @@@ false @@@ sell milk
+

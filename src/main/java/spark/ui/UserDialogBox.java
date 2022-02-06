@@ -25,6 +25,8 @@ public class UserDialogBox extends DialogBox {
     private ImageView displayPicture;
 
     UserDialogBox(String text, Image img) {
+        assert(text != null);
+        assert(img != null);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
             fxmlLoader.setController(this);
