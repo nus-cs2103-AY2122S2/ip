@@ -8,6 +8,12 @@ public class Deadline extends Task {
 
     protected String dueDate;
 
+    /**
+     * Initializes a new Deadline class with the name and its due date.
+     *
+     * @param name The name of the Deadline needed by the user.
+     * @param dueDate The date when the Deadline is due.
+     */
     public Deadline(String name, String dueDate) {
         super(name);
         this.dueDate = dueDate;
@@ -20,7 +26,6 @@ public class Deadline extends Task {
      * @param dueDate Date in format of YYYY-MM-DD
      * @return Formatted date
      */
-
     public String convertDate(String dueDate) {
         try {
             LocalDate date = LocalDate.parse(dueDate);

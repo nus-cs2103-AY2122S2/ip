@@ -10,12 +10,12 @@ public class TaskList {
     }
 
     /**
-     * Print all the tasks in the ArrayList line by line.
+     * Returns a string of all the tasks in the ArrayList line by line.
      * It will number each line respectively up to the array size.
      *
      * @param arr The given ArrayList of tasks that the user currently has.
+     * @return List of tasks.
      */
-
     public String list(ArrayList<Task> arr) {
         String listToPrint = "";
         for (int i = 0; i < arr.size(); i++) {
@@ -25,14 +25,14 @@ public class TaskList {
     }
 
     /**
-     * Mark or unmark the respective index of the task in the ArrayList given by the input.
-     * Prints an acknowledgement if successful, else prints an edge case warning.
+     * Mark or un-mark the respective index of the task in the ArrayList given by the input.
+     * Returns a string of an acknowledgement if successful, else returns an edge case warning.
      *
      * @param input The respective index of the ArrayList needed to be mark or unmarked.
      * @param arr The ArrayList with the current list of tasks.
+     * @return Acknowledgement string.
      * @throws NumberFormatException If input is less than or equals to zero.
      */
-
     public String mark(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
@@ -56,13 +56,13 @@ public class TaskList {
 
     /**
      * Removes the respective index of the task in the ArrayList given by the input.
-     * Prints an acknowledgement if successful, else prints an edge case warning.
+     * Returns an acknowledgement if successful, else returns an edge case warning.
      *
      * @param input The respective index of the ArrayList needed to be removed.
      * @param arr The ArrayList with the current list of tasks.
-     * @throws NumberFormatException If input is less than or equals to zero.
+     * @return Acknowledgement string.
+     * @throws Exception Input is invalid.
      */
-
     public String delete(String input, ArrayList<Task> arr) {
         try {
             String s = input.replaceAll("\\D+", "");
@@ -86,13 +86,13 @@ public class TaskList {
     /**
      * Creates a new Deadline class with the input detailing the class variables.
      * Adds the new Deadline class to the ArrayList.
-     * Prints an acknowledgement if successful.
+     * Returns an acknowledgement if successful.
      *
      * @param input The information required for the initialization of the Deadline class.
      * @param arr The ArrayList with the current list of tasks.
-     * @throws IndexOutOfBoundsException If there are no details in input.
+     * @return Acknowledgement string.
+     * @throws Exception Invalid input.
      */
-
     public String deadline(String input, ArrayList<Task> arr) {
         try {
             String unprocessed = input.split("deadline ", 2)[1]; // Remove instruction
@@ -103,7 +103,7 @@ public class TaskList {
             return "Got it! I've added this task: \n    "
                    + newDeadline + "\n"
                    + "Now you have " + arr.size() + " tasks in the list.";
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return "Don't be cheeky. Give me a deadline to stress you over.";
         }
     }
@@ -111,13 +111,13 @@ public class TaskList {
     /**
      * Creates a new Event class with the input detailing the class variables.
      * Adds the new Event class to the ArrayList.
-     * Prints an acknowledgement if successful.
+     * Returns an acknowledgement if successful.
      *
      * @param input The information required for the initialization of the Event class.
      * @param arr The ArrayList with the current list of tasks.
-     * @throws IndexOutOfBoundsException If there are no details in input.
+     * @return Acknowledgement string.
+     * @throws Exception Invalid input.
      */
-
     public String event(String input, ArrayList<Task> arr) {
         try {
             String nonevent = input.split("event ", 2)[1]; // Remove instruction
@@ -128,11 +128,22 @@ public class TaskList {
             return "Got it! I've added this task: \n    "
                    + newEvent + "\n"
                    + "Now you have " + arr.size() + " tasks in the list.";
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return "Don't be cheeky. Give me an event to record.";
         }
     }
 
+    /**
+     * Searches the array for the given word within input.
+     * First, it strips the input to isolate the word that needs to be found.
+     * Then, it searches the array for the specific word.
+     * It will return an acknowledgment (either positive or negative) if the word is found.
+     *
+     * @param input The information required for the search.
+     * @param arr The ArrayList with the current list of tasks.
+     * @return Acknowledgement string (found / not found).
+     * @throws Exception If there are no details in input.
+     */
     public String find(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
@@ -162,13 +173,13 @@ public class TaskList {
     /**
      * Creates a new Task class with the input detailing the class variables.
      * Adds the new Task class to the ArrayList.
-     * Prints an acknowledgement if successful.
+     * Returns an acknowledgement if successful.
      *
      * @param input The information required for the initialization of the Task class.
      * @param arr The ArrayList with the current list of tasks.
-     * @throws IndexOutOfBoundsException If there are no details in input.
+     * @return Acknowledgement string.
+     * @throws Exception Invalid input.
      */
-
     public String toDo(String input, ArrayList<Task> arr) {
         try {
             String word = input.split(" ", 2)[1]; // Remove instruction
@@ -177,7 +188,7 @@ public class TaskList {
             return "Got it! I've added this task: \n "
                     + newToDo + "\n"
                     + "Now you have " + arr.size() + " tasks in the list";
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return "Don't be cheeky. Give me something to do.";
         }
     }

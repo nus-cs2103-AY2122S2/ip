@@ -8,6 +8,12 @@ public class Event extends Task {
 
     protected String time;
 
+    /**
+     * Initializes a new Event class with the name and its due date.
+     *
+     * @param name The name of the Event needed by the user.
+     * @param time The date when the Event is due.
+     */
     public Event(String name, String time) {
         super(name);
         this.time = time;
@@ -20,7 +26,6 @@ public class Event extends Task {
      * @param dueDate Date in format of YYYY-MM-DD
      * @return Formatted date
      */
-
     public String convertDate(String dueDate) {
         try {
             LocalDate date = LocalDate.parse(dueDate);

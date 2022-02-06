@@ -7,6 +7,11 @@ public class Task implements Serializable {
     protected final String mark = "[X]";
     protected final String unmarked = "[ ]";
 
+    /**
+     * Initializes a new Task class with the name.
+     *
+     * @param name The name of the Task needed by the user.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
@@ -24,6 +29,11 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Checks whether the task has been marked done or not and returns it so.
+     *
+     * @return The respective string of a marked / un-marked task.
+     */
     public String isDone() {
         if (this.isDone) {
             return mark;
