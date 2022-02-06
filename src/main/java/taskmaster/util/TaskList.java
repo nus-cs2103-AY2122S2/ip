@@ -1,10 +1,7 @@
 package taskmaster.util;
-
 import java.util.ArrayList;
 
 import taskmaster.task.Task;
-
-
 /*
  * This class encapsulates task list which contains the list of tasks
  * that was added by the user.
@@ -31,6 +28,7 @@ public class TaskList {
      *
      * @param index the index of the task in the task list
      *              to be returned.
+     *
      * @return task at the specified index in the task list.
      */
 
@@ -40,6 +38,7 @@ public class TaskList {
 
     /**
      * Adds the task into the existing taskList.
+     *
      * @param task task to be added.
      */
 
@@ -50,6 +49,7 @@ public class TaskList {
 
     /**
      * Marks the task in the task list at the specified index.
+     *
      * @param index task at the index to be marked.
      */
 
@@ -80,6 +80,8 @@ public class TaskList {
 
     /**
      * Display all the tasks in the list.
+     *
+     * @return list of tasks in String format.
      */
 
     public String list() {
@@ -116,6 +118,8 @@ public class TaskList {
      * in the Task Description/name.
      *
      * @param strToFind keyword to be present in the task description.
+     *
+     * @return list of tasks with specified keyword in String format.
      */
 
     public String find(String strToFind) {
@@ -139,6 +143,8 @@ public class TaskList {
     /**
      * Prints a message to inform user of the total number of
      * current tasks.
+     *
+     * @return returns the current size of the task list.
      */
 
     public String returnCurrentSize() {
@@ -148,7 +154,9 @@ public class TaskList {
     /**
      * Returns true is input is more than task list's size or
      * lesser than 0.
+     *
      * @param i the number to be checked against the size.
+     *
      * @return true if more than size of task list or lesser than 0
      *         False if it's lesser than size of task list.
      */
@@ -160,6 +168,7 @@ public class TaskList {
     /**
      * Returns true or false depending on whether
      * the task list is empty.
+     *
      * @return true if empty, false otherwise.
      */
 

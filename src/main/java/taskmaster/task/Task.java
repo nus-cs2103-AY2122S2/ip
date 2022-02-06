@@ -54,6 +54,9 @@ public abstract class Task {
     /**
      * Format the string representation of task objects for
      * saving and writing to the text file.
+     *
+     * @return string representation of how the file will be saved
+     * in the data file.
      */
     public abstract String saveToFileFormat();
 
@@ -62,6 +65,7 @@ public abstract class Task {
      * contains the specified keyword.
      *
      * @param keyword Word to be checked.
+     *
      * @return True if keyword is present and false if otherwise.
      */
 

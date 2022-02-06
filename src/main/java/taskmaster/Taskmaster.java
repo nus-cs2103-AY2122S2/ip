@@ -1,7 +1,7 @@
 package taskmaster;
 
 import taskmaster.commands.Commands;
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Parser;
 import taskmaster.util.Storage;
@@ -26,27 +26,29 @@ public class Taskmaster {
     /**
      * Constructor for Taskmaster the chatbot.
      */
-
     public Taskmaster () {
         this.ui = new UserInterface();
         this.taskList = new TaskList();
         this.storage = new Storage(FILE_PATH);
         try {
             storage.loadFile(taskList);
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             ui.displayErrorMessage(e.getMessage());
         }
     }
 
     /**
-     * Returns
+     * Returns the Opening Message Displayed at the start screen.
+     *
+     * @return Opening message displayed when the program launches.
      */
     public String getOpeningMessage() {
-        return ui.displayOpeningMessage();
+        return ui.getOpeningMessage();
     }
 
     /**
      * Returns True if the bye command has been performed.
+     *
      * @return Returns True if the bye command is performed.
      */
 
@@ -56,7 +58,9 @@ public class Taskmaster {
 
     /**
      * Returns a String response based on the user's input.
+     *
      * @param input string of the user input
+     *
      * @return String response based on given input.
      */
     public String getResponse(String input) {
@@ -66,7 +70,7 @@ public class Taskmaster {
             sb.append(command.execute(this.taskList, this.ui, this.storage));
             isExit = command.isExit();
 
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             sb.append(ui.displayErrorMessage(e.getMessage()));
         }
         return sb.toString();

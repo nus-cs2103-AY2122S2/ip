@@ -14,34 +14,50 @@ import taskmaster.Taskmaster;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    /** The Scroll Pane. **/
     @FXML
     private ScrollPane scrollPane;
+
+    /** Vertical Box will be used for the dialog container. **/
     @FXML
     private VBox dialogContainer;
+
+    /** The text field used for user's input. **/
     @FXML
     private TextField userInput;
+
+    /** The button that will be used to send message. **/
     @FXML
     private Button sendButton;
 
+    /** The taskmaster object that will be used in the program. **/
     private Taskmaster taskmaster;
 
-
+    /** User's image. **/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/lord.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/alphamale.png"));
 
+    /** task master's image. **/
+    private Image taskMasterImage = new Image(this.getClass().getResourceAsStream("/images/alphamale.png"));
+
+    /** Initializes the scroll pane. **/
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /** Sets the taskmaster for the program. **/
     public void setTaskmaster(Taskmaster t) {
         taskmaster = t;
     }
 
+
+    /**
+     *  Method to create a dialog container with the opening message.
+     */
     @FXML
     public void greet() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getTaskmasterDialog(taskmaster.getOpeningMessage(), dukeImage)
+                DialogBox.getTaskmasterDialog(taskmaster.getOpeningMessage(), taskMasterImage)
         );
     }
 
@@ -56,7 +72,7 @@ public class MainWindow extends AnchorPane {
         String response = taskmaster.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getTaskmasterDialog(response, dukeImage)
+                DialogBox.getTaskmasterDialog(response, taskMasterImage)
         );
         userInput.clear();
         if (taskmaster.isExit()) {
@@ -67,7 +83,6 @@ public class MainWindow extends AnchorPane {
                     ex.printStackTrace();
                 }
                 Platform.exit();
-                System.exit(0);
             }).start();
         }
     }

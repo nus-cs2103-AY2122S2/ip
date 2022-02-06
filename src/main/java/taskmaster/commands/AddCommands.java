@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
 import taskmaster.task.Task;
@@ -36,12 +36,12 @@ public class AddCommands extends Commands {
      * Categorise it into either Todo Command or Deadline/Event task.
      */
 
-    private String parseCommand(TaskList taskList) throws DukeExceptions {
+    private String parseCommand(TaskList taskList) throws TaskmasterExceptions {
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         //Handle the case of having no second input
         if (stringIntoParts.length == 1) {
-            throw new DukeExceptions("What?! Task description cannot be empty."
+            throw new TaskmasterExceptions("What?! Task description cannot be empty."
                     + "Eg todo eat, deadline eat food /by 12pm,"
                     + "event concert /at 8pm\n");
         }
@@ -60,13 +60,13 @@ public class AddCommands extends Commands {
      * Categorise it into either Deadline Command or Event Command.
      */
 
-    private String parseDeadlineEventTasks(TaskList taskList) throws DukeExceptions {
+    private String parseDeadlineEventTasks(TaskList taskList) throws TaskmasterExceptions {
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         String taskName = command.substring(command.indexOf(" "));
 
         if (!taskName.contains("/")) {
-            throw new DukeExceptions("Deadline and event tasks require /by and "
+            throw new TaskmasterExceptions("Deadline and event tasks require /by and "
                     + "/at to specify the deadline or time of occurrence.\n"
                     + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
         }
@@ -83,7 +83,7 @@ public class AddCommands extends Commands {
             if (firstWord.equals("deadline")) {
                 //Handle the case of deadline task having no /by
                 if (!temp.contains("by")) {
-                    throw new DukeExceptions("Deadline tasks require /by specify the deadline."
+                    throw new TaskmasterExceptions("Deadline tasks require /by specify the deadline."
                             + "Eg deadline eat food /by 12pm\n");
                 }
 
@@ -92,17 +92,17 @@ public class AddCommands extends Commands {
             } else {
                 //Handle the case of event task having no /at
                 if (!temp.contains("at")) {
-                    throw new DukeExceptions("Event tasks require /at specify the time of occurrence."
+                    throw new TaskmasterExceptions("Event tasks require /at specify the time of occurrence."
                             + "music concert /at 8pm\n");
                 }
                 return addEventTask(taskNameWithoutBack, dateTime, taskList);
 
             }
         } catch (NumberFormatException nfe) {
-            throw new DukeExceptions("ERROR! Expected Numbers for date and time!\n");
+            throw new TaskmasterExceptions("ERROR! Expected Numbers for date and time!\n");
 
         } catch (DateTimeParseException dt) {
-            throw new DukeExceptions("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
+            throw new TaskmasterExceptions("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
         }
     }
 
@@ -110,6 +110,11 @@ public class AddCommands extends Commands {
      * Helper function to add a new TodoTask to the Task list.
      *
      * @param taskName Name of the To do Task.
+     *
+     * @param taskList the task list that contains all the tasks.
+     *
+     * @return the confirmation of the execution of the task in
+     *      String format.
      */
 
     private String addTodoTask(String taskName, TaskList taskList) {
@@ -122,7 +127,11 @@ public class AddCommands extends Commands {
      * Helper function to add a new Deadline Task to the Task list.
      *
      * @param taskName Name of the Deadline Task.
+     *
      * @param dateTime Deadline the task is due by.
+     *
+     * @return the confirmation of the execution of the task in
+     *      String format.
      */
 
     private String addDeadlineTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
@@ -135,7 +144,11 @@ public class AddCommands extends Commands {
      * Helper function to add a new Event Task to the Task list.
      *
      * @param taskName Name of the Event Task.
+     *
      * @param dateTime The date and time the task is occurring at.
+     *
+     * @return the confirmation of the execution of the task in
+     *       String format.
      */
 
     private String addEventTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
@@ -149,6 +162,11 @@ public class AddCommands extends Commands {
      * the task has been successfully added.
      *
      * @param newTask Task that has been successfully added.
+     *
+     * @param taskList the task list that contains all the task.
+     *
+     * @return the confirmation of the execution of the task in
+     * String format.
      */
 
 
@@ -161,13 +179,17 @@ public class AddCommands extends Commands {
 
     /**
      * Execute the command.
+     *
      * @param ui The User interface.
+     *
      * @param storage The file that is storing the task information.
+     *
      * @return Returns a string confirmation that the task has been executed.
-     * @throws DukeExceptions Throws an exception if execution fails.
+     *
+     * @throws TaskmasterExceptions Throws an exception if execution fails.
      */
 
-    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws TaskmasterExceptions {
         return parseCommand(taskList);
     }
 

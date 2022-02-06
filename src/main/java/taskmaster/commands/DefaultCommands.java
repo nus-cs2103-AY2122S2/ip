@@ -1,5 +1,5 @@
 package taskmaster.commands;
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
@@ -24,13 +24,17 @@ public class DefaultCommands extends Commands {
     /**
      * Execute the command.
      * @param tasklist The task list that contains the task.
+     *
      * @param ui The User interface.
+     *
      * @param storage The file that is storing the task information.
+     *
      * @return Returns a string confirmation that the task has been executed.
-     * @throws DukeExceptions Throws an exception if execution fails.
+     *
+     * @throws TaskmasterExceptions Throws an exception if execution fails.
      */
     @Override
-    public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws TaskmasterExceptions {
         return ui.displayInvalidCommand(this.userInput);
     }
 }

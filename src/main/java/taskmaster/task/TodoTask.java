@@ -29,6 +29,9 @@ public class TodoTask extends Task {
     /**
      * Format the string representation of task objects for
      * saving and writing to the text file.
+     *
+     * @return string representation of how the file will be saved
+     * in the data file.
      */
 
     @Override

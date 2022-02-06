@@ -1,7 +1,4 @@
 package taskmaster.userinterface;
-import taskmaster.util.Storage;
-import taskmaster.util.TaskList;
-
 
 /**
  * This class encapsulates the UserInterface which interacts with
@@ -13,30 +10,35 @@ public class UserInterface {
     /** Taskmaster's logo. **/
     protected String logo = "  _____\n" + " /     \\\n" + " | () () |\n" + " \\  ^  /\n"
                                     + "   |||||\n" + "   |||||\n";
-    protected Storage storage;
-    protected TaskList tasklist;
-
     /**
      * Prints the opening message when the program runs.
+     *
+     * @return opening message
      */
 
-    public String displayOpeningMessage() {
+    public String getOpeningMessage() {
         return logo + "\nGreetings, I'm Taskmaster, I'm super grumpy 24/7"
                 + "\nOkay, what do you want?\n";
     }
 
     /**
-     * Prints the bye message displayed when the user exits.
+     * returns the bye message displayed when the user exits.
+     *
+     * @return bye message
      */
 
-    public String displayByeMessage() {
+    public String getByeMessage() {
         return "   See you around kiddo, I'm an angsty dude but deep down i'm a lonely man";
     }
 
 
     /**
      * Display Message when the user enters an invalid command.
+     *
      * @param input The input entered by the user
+     *
+     * @return display the reply from task master when a wrong
+     * command is entered.
      */
 
     public String displayInvalidCommand(String input) {
@@ -47,6 +49,8 @@ public class UserInterface {
 
     /**
      * Prints the list of commands that are in this program.
+     *
+     * @return list of commands available in the program.
      */
 
     public String displayListOfCommand() {
@@ -68,6 +72,13 @@ public class UserInterface {
         return result;
     }
 
+    /**
+     * Returns the error message.
+     *
+     * @param errorMsg what the message will be.
+     *
+     * @return error message in String representation.
+     */
     public String displayErrorMessage(String errorMsg) {
         return "   " + errorMsg;
     }

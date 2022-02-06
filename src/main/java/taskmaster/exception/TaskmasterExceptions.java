@@ -5,7 +5,7 @@ package taskmaster.exception;
  * exceptions in the Duke Program.
  */
 
-public class DukeExceptions extends Exception {
+public class TaskmasterExceptions extends Exception {
 
     /**
      * Constructor for the DukeExceptions class.
@@ -13,7 +13,7 @@ public class DukeExceptions extends Exception {
      * @param e - Error Message
      */
 
-    public DukeExceptions(String e) {
+    public TaskmasterExceptions(String e) {
         super(e);
     }
 }

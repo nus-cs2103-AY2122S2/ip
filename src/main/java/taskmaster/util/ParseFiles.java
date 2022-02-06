@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
 import taskmaster.task.Task;
@@ -22,6 +22,7 @@ public class ParseFiles {
      * Helper function that breaks the string into components.
      * @param str The string that is going to be broken up into
      *             components.
+     *
      * @return  An array of strings.
      */
 
@@ -39,8 +40,11 @@ public class ParseFiles {
      * that has been parsed in.
      *
      * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     *
      * @param description description of the task.
+     *
      * @param eventAt Date and time of event.
+     *
      * @return the newly created event task.
      */
 
@@ -58,8 +62,11 @@ public class ParseFiles {
      * that has been parsed in.
      *
      * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     *
      * @param description description of the task.
+     *
      * @param deadlineBy Date and time of deadline.
+     *
      * @return the newly created deadline task.
      */
 
@@ -77,7 +84,9 @@ public class ParseFiles {
      * that has been parsed in.
      *
      * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     *
      * @param description description of the task.
+     *
      * @return the newly created Todo task.
      */
 
@@ -96,6 +105,7 @@ public class ParseFiles {
      *  the task based on their respective task type.
      *
      * @param str Line from the file that is to be read.
+     *
      * @return Newly created Task.
      */
     public Task parseTask(String str) {
@@ -108,7 +118,7 @@ public class ParseFiles {
                 //Handle Wrong Inputs
                 //Case 1: user only specified Task type
                 if (stringIntoParts.length == 1) {
-                    throw new DukeExceptions("ERROR! You've only specified the task type, you need to specify"
+                    throw new TaskmasterExceptions("ERROR! You've only specified the task type, you need to specify"
                             + "whether task is completed or not and the description of the task \n");
                 }
 
@@ -117,13 +127,13 @@ public class ParseFiles {
 
                 //Case 3: There is only 2 inputs
                 if (stringIntoParts.length == 2) {
-                    throw new DukeExceptions("ERROR! You've only specified the task type and whether it is "
+                    throw new TaskmasterExceptions("ERROR! You've only specified the task type and whether it is "
                                                 + "incomplete or complete \n");
                 }
 
                 //Case 4: Second input is not 0 or 1
                 if (index != 0 && index != 1) {
-                    throw new DukeExceptions("ERROR! Second input has to be 0 or 1!\n");
+                    throw new TaskmasterExceptions("ERROR! Second input has to be 0 or 1!\n");
                 }
 
                 //If code reaches here, it is confirmed to have 3 or more parameters
@@ -133,7 +143,7 @@ public class ParseFiles {
                     // and the user is missing the deadline by/time of event.
 
                     if (stringIntoParts.length != 4) {
-                        throw new DukeExceptions("ERROR! Deadline and Event tasks is missing the date "
+                        throw new TaskmasterExceptions("ERROR! Deadline and Event tasks is missing the date "
                                                     + "which the event occur on/deadline");
                     } else {
                         String timeAndDate = stringIntoParts[3];
@@ -151,10 +161,10 @@ public class ParseFiles {
                 }
             } else {
                 //If Task type is not T/D/E
-                throw new DukeExceptions("ERROR! I do not recognise that task type!");
+                throw new TaskmasterExceptions("ERROR! I do not recognise that task type!");
             }
 
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
 
         } catch (NumberFormatException nfe) {

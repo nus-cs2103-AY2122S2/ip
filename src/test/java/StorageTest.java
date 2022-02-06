@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.TodoTask;
 import taskmaster.util.Storage;
@@ -27,7 +27,7 @@ public class StorageTest {
         StorageTest testStorage = new StorageTest();
         try {
             testStorage.storage.loadFile(taskList);
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }

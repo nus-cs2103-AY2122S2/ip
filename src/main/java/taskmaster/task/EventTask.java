@@ -12,7 +12,9 @@ public class EventTask extends Task {
 
     /**
      * Constructor for an EventTask.
+     *
      * @param taskName Name/Description of Task.
+     *
      * @param eventDate Time and Date of Event.
      */
     public EventTask(String taskName, LocalDateTime eventDate) {
@@ -23,6 +25,7 @@ public class EventTask extends Task {
 
     /**
      * Format the string representation of EventTask objects.
+     *
      * @return String representation of EventTask objects.
      */
     @Override
@@ -34,6 +37,9 @@ public class EventTask extends Task {
     /**
      * Format the string representation of task objects for
      * saving and writing to the text file.
+     *
+     * @return string representation of how the file will be saved
+     * in the data file.
      */
     @Override
     public String saveToFileFormat() {

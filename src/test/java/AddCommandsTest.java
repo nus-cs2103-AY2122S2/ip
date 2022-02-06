@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import taskmaster.commands.AddCommands;
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
 import taskmaster.task.TodoTask;
@@ -12,10 +12,12 @@ import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
+import java.nio.file.Paths;
+
 
 public class AddCommandsTest {
     private TaskList taskList = new TaskList();
-    private Storage storage = new Storage();
+    private Storage storage = new Storage(Paths.get("").toAbsolutePath() + "/data/Duke.txt");
     private UserInterface ui = new UserInterface();
 
     @Test
@@ -26,7 +28,7 @@ public class AddCommandsTest {
         try {
             command.execute(taskList, ui, storage);
             assertTrue(taskList.get(0) instanceof TodoTask);
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }
@@ -39,7 +41,7 @@ public class AddCommandsTest {
         try {
             command.execute(taskList, ui, storage);
             assertTrue(taskList.get(0) instanceof DeadlineTask);
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }
@@ -52,7 +54,7 @@ public class AddCommandsTest {
         try {
             command.execute(taskList, ui, storage);
             assertTrue(taskList.get(0) instanceof EventTask);
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }

@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class DeadlineTask extends Task {
-
     /** Time and Date of Deadline. **/
     private LocalDateTime deadline;
 
@@ -40,6 +39,9 @@ public class DeadlineTask extends Task {
     /**
      * Format the string representation of task objects for
      * saving and writing to the text file.
+     *
+     * @return string representation of how the file will be saved
+     * in the data file.
      */
 
     @Override

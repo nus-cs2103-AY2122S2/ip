@@ -14,9 +14,15 @@ import taskmaster.Taskmaster;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    /** Creates the taskmaster chatbot. **/
     private Taskmaster taskmaster = new Taskmaster();
 
+    /**
+     * Creates the entry point to the program.
+     *
+     * @param stage creates the stage to set the scene for the
+     *              program.
+     */
     @Override
     public void start(Stage stage) {
         try {

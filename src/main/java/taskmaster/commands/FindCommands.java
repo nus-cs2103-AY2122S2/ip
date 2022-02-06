@@ -1,6 +1,6 @@
 package taskmaster.commands;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
@@ -25,18 +25,21 @@ public class FindCommands extends Commands {
 
     /**
      * Execute the command.
-     * @param tasklist The task list that contains the task.
+     *
      * @param ui The User interface.
+     *
      * @param storage The file that is storing the task information.
+     *
      * @return Returns a string confirmation that the task has been executed.
-     * @throws DukeExceptions Throws an exception if execution fails.
+     *
+     * @throws TaskmasterExceptions Throws an exception if execution fails.
      */
 
     @Override
-    public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws TaskmasterExceptions {
         String[] stringIntoParts = input.split(" ");
         if (stringIntoParts.length == 1) {
-            throw new DukeExceptions("ERROR: find command requires a parameter to specify"
+            throw new TaskmasterExceptions("ERROR: find command requires a parameter to specify"
                     + " what keyword to find");
         }
         String toFind = input.substring(input.indexOf(" ") + 1);

@@ -1,6 +1,6 @@
 package taskmaster.commands;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.Task;
 import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
@@ -29,14 +29,14 @@ public class DeleteCommands extends Commands {
      * Extract the components of the command.
      */
 
-    private String parseCommand(TaskList taskList) throws DukeExceptions {
+    private String parseCommand(TaskList taskList) throws TaskmasterExceptions {
         String[] stringIntoParts = this.command.split(" ");
 
         if (stringIntoParts.length == 1) {
-            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
+            throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
         } else if (stringIntoParts.length > 2) {
             //Handle the case of having more than 2 inputs
-            throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
+            throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
         }
 
         try {
@@ -46,14 +46,14 @@ public class DeleteCommands extends Commands {
 
             //If index is out of range, throw illegal argument exception
             if (taskList.isNumberOutOfRange(index)) {
-                throw new DukeExceptions("BRAT ! Your index is out of range! "
+                throw new TaskmasterExceptions("BRAT ! Your index is out of range! "
                         + "Number has to in the range of the list\n");
             }
 
             return deleteTask(index, taskList);
 
         } catch (NumberFormatException nfe) {
-            throw new DukeExceptions("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
+            throw new TaskmasterExceptions("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
         }
     }
 
@@ -87,14 +87,18 @@ public class DeleteCommands extends Commands {
 
     /**
      * Execute the command.
+     *
      * @param ui The User interface.
+     *
      * @param storage The file that is storing the task information.
+     *
      * @return Returns a string confirmation that the task has been executed.
-     * @throws DukeExceptions Throws an exception if execution fails.
+     *
+     * @throws TaskmasterExceptions Throws an exception if execution fails.
      */
 
     @Override
-    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws TaskmasterExceptions {
         return parseCommand(taskList);
     }
 

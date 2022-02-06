@@ -20,10 +20,20 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    /** The dialog label. **/
     @FXML
     private Label dialog;
+    /** The display picture. **/
     @FXML
     private ImageView displayPicture;
+
+    /**
+     * Constructor for DialogBox.
+     *
+     * @param text the text that will be displayed.
+     *
+     * @param img the image that will be displayed.
+     */
 
     private DialogBox(String text, Image img) {
         try {
@@ -49,9 +59,29 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Get dialog box for user.
+     *
+     * @param text that is entered by the user.
+     *
+     * @param img the user image.
+     *
+     * @return the dialog box with both the image and the text.
+     */
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
+
+    /**
+     * Get dialog box for taskmaster.
+     *
+     * @param text that taskmaster replies with.
+     *
+     * @param img taskmaster image.
+     *
+     * @return the dialog box with both the image and the text.
+     */
 
     public static DialogBox getTaskmasterDialog(String text, Image img) {
         var db = new DialogBox(text, img);

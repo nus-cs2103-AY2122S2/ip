@@ -4,15 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import taskmaster.commands.DeleteCommands;
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.TodoTask;
 import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
+import java.nio.file.Paths;
+
 public class DeleteCommandsTest {
     private TaskList taskList = new TaskList();
-    private Storage storage = new Storage();
+    private Storage storage = new Storage(Paths.get("").toAbsolutePath() + "/data/Duke.txt");
     private UserInterface ui = new UserInterface();
 
     @Test
@@ -23,7 +25,7 @@ public class DeleteCommandsTest {
         try {
             command.execute(taskList, ui, storage);
             assertTrue(taskList.isEmpty());
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }
@@ -44,7 +46,7 @@ public class DeleteCommandsTest {
             command.execute(taskList, ui, storage);
             command.execute(taskList, ui, storage);
             assertTrue(taskList.isEmpty());
-        } catch (DukeExceptions e) {
+        } catch (TaskmasterExceptions e) {
             System.out.println(e.getMessage());
         }
     }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import taskmaster.exception.DukeExceptions;
+import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.Task;
 
 
@@ -72,9 +72,11 @@ public class Storage {
      *  the events parsed to the task list.
      *
      * @param taskList task list the tasks will be added to.
+     *
+     * @exception TaskmasterExceptions if unable to load file.
      */
 
-    public void loadFile(TaskList taskList) throws DukeExceptions {
+    public void loadFile(TaskList taskList) throws TaskmasterExceptions {
         String dir = Paths.get("").toAbsolutePath() + "/data/";
         File directory = new File(dir);
 
@@ -95,7 +97,7 @@ public class Storage {
             }
             reader.close();
         } catch (IOException e) {
-            throw new DukeExceptions("Unable to read or write to storage!");
+            throw new TaskmasterExceptions("Unable to read or write to storage!");
         }
     }
 
