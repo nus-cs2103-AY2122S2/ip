@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Represents find command
  */
 public class FindCommand extends Command{
-    protected String keyword;
+    private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

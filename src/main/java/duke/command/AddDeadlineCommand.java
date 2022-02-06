@@ -39,8 +39,7 @@ public class AddDeadlineCommand extends Command {
         Task task;
         if (date == null) {
             task = new Deadline(description, by);
-        }
-        else {
+        } else {
             task = new Deadline(description, date);
         }
         tasks.addTask(task);

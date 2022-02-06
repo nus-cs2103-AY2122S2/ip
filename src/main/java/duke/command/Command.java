@@ -8,7 +8,7 @@ import duke.exception.DukeException;
 /**
  * Represents a command
  */
-public class Command {
+public abstract class Command {
 
     /**
      * Validates whether an exit command is made

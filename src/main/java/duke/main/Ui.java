@@ -60,8 +60,7 @@ public class Ui {
         output = "Got it. I've added this task:\n" + task + "\n";
         if (tasks.size() <= 1) {
             output += String.format("Now you have %d task in the list.\n", tasks.size());
-        }
-        else {
+        } else {
             output += String.format("Now you have %d tasks in the list.\n", tasks.size());
         }
     }

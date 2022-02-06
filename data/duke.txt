@@ -1,1 +1,2 @@
-T | 1 | toyoy
+T | 0 | read book
+T | 0 | yoyo

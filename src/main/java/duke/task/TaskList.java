@@ -31,6 +31,7 @@ public class TaskList {
      * @param number task number of task on the list to be marked as done
      */
     public void markTask(int number) {
+        assert number >= 0 && number <= tasks.size();
         tasks.get(number).markTaskDone();
     }
 
@@ -40,6 +41,7 @@ public class TaskList {
      * @param number task number of task on the list to be unmarked
      */
     public void unmarkTask(int number) {
+        assert number >= 0 && number <= tasks.size();
         tasks.get(number).unmarkTaskDone();
     }
 
@@ -49,6 +51,7 @@ public class TaskList {
      * @param number task number of task to be deleted from the list
      */
     public void deleteTask(int number) {
+        assert number >= 0 && number <= tasks.size();
         tasks.remove(number);
     }
 
@@ -58,6 +61,7 @@ public class TaskList {
      * @param task task to be added to the list
      */
     public void addTask(Task task) {
+        assert task != null;
         tasks.add(task);
     }
 
@@ -68,6 +72,7 @@ public class TaskList {
      * @return list of matching tasks
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert !keyword.isBlank();
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.getDescription().contains(keyword)) {
