@@ -82,13 +82,25 @@ public class Ui {
     }
 
     /**
-     * Formatetd output for confirmation of deleting a task
+     * Formatted output for confirmation of deleting a task
      *
      * @param task Task
      */
     public static void printDeleteTask(Task task) {
         System.out.println(Ui.line());
         System.out.println("Task deleted:");
+        System.out.println(task.toString());
+        System.out.println(Ui.line());
+    }
+
+    /**
+     * Formatted output for confirmation of unmarking a task
+     *
+     * @param task Task
+     */
+    public static void printUnmarkTask(Task task) {
+        System.out.println(Ui.line());
+        System.out.println("Task marked as not done:");
         System.out.println(task.toString());
         System.out.println(Ui.line());
     }
