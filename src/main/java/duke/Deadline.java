@@ -34,6 +34,14 @@ public class Deadline extends Task {
                 + " " + dateTime.getYear() + ", " + time;
     }
 
+    public void setTime(String time) {
+        this.deadline = time;
+        this.setExtension(deadline);
+        System.out.println(this.saveString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+        this.dateTime = LocalDateTime.parse(deadline, formatter);
+    }
+
     private String getDayOfMonthSuffix(int n) {
         if (n >= 11 && n <= 13) {
             return "th";
