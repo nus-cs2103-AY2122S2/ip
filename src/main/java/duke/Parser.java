@@ -4,6 +4,10 @@ package duke;
  * Class that specifically deals with input from the user and calls the respective class and methods
  */
 public class Parser {
+
+    private final String BYE_MSG = "~BYE!~ Come back to Duke anytime";
+    private final String RESET_MSG = "List of tasks has been resetted";
+
     /**
      * Empty constructor for the Parser class
      */
@@ -19,13 +23,13 @@ public class Parser {
      */
     public boolean takeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
-            System.out.println("~BYE!~ Come back to Duke anytime");
+            System.out.println(BYE_MSG);
             return true;
         } else if (input.equals("list")) { //Check if input == list
             taskList.printList();
         } else if (input.equals("reset")) { //Instruction to reset the arraylist
             taskList.reset();
-            System.out.println("List of tasks has been resetted");
+            System.out.println(RESET_MSG);
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
             //Check if input == unmark or delete or mark
             String[] splitString = input.split("\\s+");
@@ -116,12 +120,12 @@ public class Parser {
      */
     public String guiTakeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
-            return "~BYE!~ Come back to Duke anytime";
+            return BYE_MSG;
         } else if (input.equals("list")) { //Check if input == list
             return taskList.guiPrintList();
         } else if (input.equals("reset")) { //Instruction to reset the arraylist
             taskList.reset();
-            return "List of tasks has been resetted";
+            return RESET_MSG;
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
             //Check if input == unmark or delete or mark
             String[] splitString = input.split("\\s+");
