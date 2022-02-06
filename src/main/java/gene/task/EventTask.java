@@ -50,4 +50,8 @@ public class EventTask extends Task {
         String toReturn = "[E]" + mark + " " + this.taskTitle + " " + deadlineText;
         return toReturn;
     }
+
+    public boolean containsKeyword(String keyword) {
+        return this.taskTitle.contains(keyword);
+    }
 }
