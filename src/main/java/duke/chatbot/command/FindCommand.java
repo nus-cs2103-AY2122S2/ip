@@ -18,7 +18,7 @@ public class FindCommand extends TaskListCommand {
 
     /**
      * Searches the TaskList using keyword passed in
-     * by user, and displays it.
+     * by user, and returns the tasks containing the keyword.
      *
      * @return ArrayList containing string description of tasks matching keyword.
      * @throws IllegalArgumentException If no search term was passed to command.

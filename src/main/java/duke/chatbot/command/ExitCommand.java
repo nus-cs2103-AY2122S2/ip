@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Signals the termination of the ChatBot by
-     * returning true.
+     * Command to signal the termination of the ChatBot,
+     * and returns a feedback to print a goodbye message.
      *
      * @return ArrayList containing the goodbye string.
      */

@@ -33,7 +33,6 @@ class DeleteTaskCommand extends TaskListCommand {
             throw new IllegalArgumentException("Non-number passed to delete task");
         }
 
-
         TaskList taskList = this.getTaskList();
         Task deletedTask = taskList.deleteTask(taskIndex);
 

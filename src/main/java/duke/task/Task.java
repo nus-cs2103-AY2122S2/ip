@@ -22,24 +22,28 @@ public abstract class Task {
      *
      * @param taskData String containing data of the task.
      * @return Task corresponding to saved data.
+     * @throws IllegalArgumentException If task data to corrupt is corrupted.
      */
-    public static Task decodeTaskData(String taskData) {
+    public static Task decodeTaskData(String taskData) throws IllegalArgumentException {
         String[] data = taskData.split(",");
         String type = data[0];
         String name = data[1];
         String isDone = data[2];
-        String time = data[3];
+        String date = data[3];
         Task task = null;
         switch (type) {
         case "T":
             task = new ToDo(name);
             break;
         case "E":
-            task = new Event(name, time);
+            task = new Event(name, date);
             break;
         case "D":
-            task = new Deadline(name, time);
+            task = new Deadline(name, date);
             break;
+        default:
+            // Type should only be of 'T', 'E' or 'D'.
+            throw new IllegalArgumentException("Corrupted data");
         }
         if (isDone.equals("Y")) {
             task.markDone();

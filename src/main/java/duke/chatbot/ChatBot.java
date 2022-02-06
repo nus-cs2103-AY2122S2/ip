@@ -1,10 +1,11 @@
 package duke.chatbot;
 
-import duke.data.TaskList;
+import java.util.ArrayList;
+
 import duke.chatbot.command.Command;
 import duke.chatbot.command.ExitCommand;
+import duke.data.TaskList;
 
-import java.util.ArrayList;
 
 /**
  * ChatBot class that serves as an interface between
@@ -12,9 +13,6 @@ import java.util.ArrayList;
  * inputted commands.
  */
 public class ChatBot {
-
-    private static final String WELCOME_STRING = "Hello I'm Duke!\n"
-            + "What can I do for you?";
 
     /** Task list maintaining list of tasks for user */
     private final TaskList taskList;
@@ -25,14 +23,6 @@ public class ChatBot {
     public ChatBot(TaskList taskList) {
         this.taskList = taskList;
         this.hasTerminated = false;
-    }
-
-    /**
-     * Performs initialisation of the ChatBot. Should be called
-     * before receiving commands.
-     */
-    public void initialise() {
-        System.out.println(WELCOME_STRING);
     }
 
     /**
@@ -47,7 +37,7 @@ public class ChatBot {
         try {
             Command command = Command.parseCommand(input, this.taskList);
             ArrayList<String> response = command.execute();
-            this.hasTerminated = command instanceof ExitCommand;
+            this.updateTerminationStatus(command);
             return response;
         } catch (IllegalArgumentException e) {
             ArrayList<String> response = new ArrayList<>();
@@ -59,5 +49,16 @@ public class ChatBot {
 
     public boolean hasTerminated() {
         return this.hasTerminated;
+    }
+
+    /**
+     * Updates termination status of ChatBot based on last
+     * command ran. Changes termination status to true if
+     * command is exit command, false otherwise.
+     *
+     * @param command Last command ran by ChatBot.
+     */
+    private void updateTerminationStatus(Command command) {
+        this.hasTerminated = command instanceof ExitCommand;
     }
 }
