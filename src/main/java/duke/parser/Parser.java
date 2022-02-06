@@ -36,7 +36,7 @@ public class Parser {
             Command r = Command.of(s, messageFragments);
             // Execute the command
             return r.execute(tl, sge);
-            }
+        }
     }
 
     /**

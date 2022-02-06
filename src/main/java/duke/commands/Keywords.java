@@ -13,7 +13,7 @@ import java.util.HashMap;
     with some modifications
  */
 public enum Keywords {
-    ADD("todo","deadline","event"),
+    ADD("todo", "deadline", "event"),
     LIST("list"),
     DELETE("delete"),
     FIND("find"),
@@ -30,7 +30,7 @@ public enum Keywords {
      */
     Keywords(String ... args) {
         for (String s: args) {
-            keywordMappings.put(s,this);
+            keywordMappings.put(s, this);
         }
     }
 

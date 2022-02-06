@@ -26,9 +26,9 @@ public class Event extends Task {
      * @param t2 The end time of the event as a LocalTime object.
      * @param isDone The completion status of the event.
      */
-    public Event(String description, LocalDate date, LocalTime t1, LocalTime t2, boolean isDone ) {
+    public Event(String description, LocalDate date, LocalTime t1, LocalTime t2, boolean isDone) {
         super(description);
-        this.eventDate =  date;
+        this.eventDate = date;
         this.eventStartTime = t1;
         this.eventEndTime = t2;
         if (isDone) {

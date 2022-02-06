@@ -85,7 +85,7 @@ public class AddCommand extends Command {
                     LocalDate ld = getEventDate(this.description);
                     LocalTime lt = getEventTimingStart(this.description);
                     LocalTime lt1 = getEventTimingEnd(this.description);
-                    newTask = new Event(s, ld, lt,lt1, false);
+                    newTask = new Event(s, ld, lt, lt1, false);
                     tl.addTask(newTask);
                     sge.updateFile(newTask, tl, "deadline");
                     return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
@@ -133,8 +133,8 @@ public class AddCommand extends Command {
             }
             try {
                 String datetime = msg.split("/at")[1].trim();
-                if (datetime.split(" ").length != 2 ||
-                        datetime.split(" ")[1].split("-").length != 2) {
+                if (datetime.split(" ").length != 2
+                        || datetime.split(" ")[1].split("-").length != 2) {
                     return true;
                 }
                 LocalDate d = LocalDate.parse(datetime.split(" ")[0].trim(),

@@ -2,8 +2,8 @@ package duke.ui;
 
 import duke.exception.ChiException;
 import duke.storage.Storage;
-import duke.tasklist.TaskList;
 import duke.parser.Parser;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -33,7 +33,7 @@ public class UI {
         while (!msg.equals("bye")) {
             try {
                 System.out.println("=========================================");
-                System.out.println(prs.processMessage(msg,tl,sge));
+                System.out.println(prs.processMessage(msg, tl, sge));
                 System.out.println("=========================================");
             } catch (ChiException e) {
                 this.printErrorMsg(e.toString());

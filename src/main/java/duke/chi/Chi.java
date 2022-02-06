@@ -55,6 +55,6 @@ public class Chi {
      * @throws IOException If there are problems with the I/O during message processing.
      */
     public String getResponse(String msg) throws ChiException, IOException {
-             return parser.processMessage(msg, taskList, storage);
+        return parser.processMessage(msg, taskList, storage);
     }
 }

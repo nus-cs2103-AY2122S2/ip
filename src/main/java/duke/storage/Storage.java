@@ -130,7 +130,7 @@ public class Storage {
      * @param type The command used.
      * @throws IOException If there are interruptions while accessing the file.
      */
-    public void updateFile(Task task, TaskList tl, String type) throws IOException {
+    public void updateFile(Task task, TaskList tl, String type) throws IOException, ChiException {
         FileWriter fw;
         switch(type) {
         case "mark":
@@ -151,6 +151,8 @@ public class Storage {
             fw.write(task.writeToFile());
             fw.close();
             break;
+        default:
+            throw new ChiException("Something went wrong while writing to file nyan!");
         }
     }
 

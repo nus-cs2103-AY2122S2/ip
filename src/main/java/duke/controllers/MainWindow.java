@@ -50,6 +50,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/simp.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chi.jpeg"));
 
+    /**
+     * Places introduction message when window opens.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -79,7 +82,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getChiDialog(response, dukeImage)
             );
             userInput.clear();
-        } catch (ChiException e){
+        } catch (ChiException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getChiDialog(e.getMessage(), dukeImage)

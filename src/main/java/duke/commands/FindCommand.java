@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Storage sge) {
-        return tl.checkWordsInTask(this.tokens).length() == 0 ? "Chi couldn't find anything nyan!" :
-                 "H..H..Here's what I could find!\n" + tl.checkWordsInTask(this.tokens);
+        return tl.checkWordsInTask(this.tokens).length() == 0 ? "Chi couldn't find anything nyan!"
+                : "H..H..Here's what I could find!\n" + tl.checkWordsInTask(this.tokens);
     }
 }

@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
                 tl.deleteTask(toDelete);
                 sge.updateFile(toDelete, tl, "delete");
                 return String.format("Chi-san has removed the task~!\n%s\n You now have %d tasks!\n",
-                        toDelete,tl.getSize());
+                        toDelete, tl.getSize());
             }
         } catch (IOException e) {
             throw new ChiException("Hey something went wrong with the IO nyan!");
@@ -61,7 +61,7 @@ public class DeleteCommand extends Command {
      * @param tl The TaskList.
      * @return A boolean of whether the message conforms to proper syntax.
      */
-    public boolean validateMessageBody(String msg, TaskList tl)  {
+    public boolean validateMessageBody(String msg, TaskList tl) {
         try {
             String[] words = msg.split(" ");
             if (words.length > 1) {
