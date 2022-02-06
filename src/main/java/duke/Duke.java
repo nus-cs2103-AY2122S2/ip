@@ -34,7 +34,6 @@ public class Duke extends Application {
             Ui.init(fxmlLoader.<MainWindow>getController().getDialogContainer(),
                     new Image(this.getClass().getResourceAsStream("/images/jerry.png")));
 
-            fxmlLoader.<MainWindow>getController().setParser(parser);
             fxmlLoader.<MainWindow>getController().setTaskList(taskList);
 
             Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);

@@ -25,8 +25,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private TaskList taskList;
-    private Parser parser;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tom.png"));
 
     @FXML
@@ -42,10 +40,6 @@ public class MainWindow extends AnchorPane {
         this.taskList = taskList;
     }
 
-    public void setParser(Parser parser) {
-        this.parser = parser;
-    }
-
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -56,7 +50,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, (userImage))
         );
-        int runResult = parser.run(userInput.getText(), taskList);
+        int runResult = Parser.run(userInput.getText(), taskList);
         if (runResult == 1) {
             Storage.saveFile("data", "duke.txt", taskList);
         }

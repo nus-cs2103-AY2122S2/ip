@@ -28,7 +28,7 @@ public class Parser {
      * @param taskList The taskList that is used to maintain list of tasks in Duke
      * @return: Returns an integer that indicate the result of the run.
      */
-    public int run(String inputString, TaskList taskList) {
+    public static int run(String inputString, TaskList taskList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = inputString.split("\\s+");
         String action = args[0];
@@ -118,7 +118,7 @@ public class Parser {
      * @param taskList The list of task to be checked with.
      */
 
-    public void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
+    public static void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {
         case "list":
