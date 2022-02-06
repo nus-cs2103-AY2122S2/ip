@@ -9,6 +9,7 @@ import gene.exception.UnrecognizedCommandException;
 
 import java.util.Scanner;
 
+
 /**
  * The Gene program is as of right now a simple program that tracks
  * to do, event and deadline tasks. Crud actions are supported.
@@ -67,9 +68,9 @@ public class Gene {
     /**
      * main method for Gene
      * @param args
-     * @return void
      */
     public static void main(String[] args) {
-        (new Gene("gene.txt")).run();
+        Gene toRun = new Gene("gene.txt");
+        toRun.run();
     }
 }
