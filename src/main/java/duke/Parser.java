@@ -79,7 +79,7 @@ public class Parser {
             parsedInput.add(input.substring(DELETE_INFO_INDEX));
         } else if (command.equals("find")) {
             parsedInput.add(input.substring(FIND_INFO_INDEX));
-        } else if (command.equals("bye") || command.equals("list")) {
+        } else if (command.equals("bye") || command.equals("list") || command.equals("sort")) {
             //no additional information for command required
         } else {
             throw new UnknownCommandException("unknown command entered");

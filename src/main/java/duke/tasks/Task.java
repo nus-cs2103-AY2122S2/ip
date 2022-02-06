@@ -4,7 +4,7 @@ package duke.tasks;
  * This class represents a task and all its attributes like its name or whether it is completed.
  */
 
-public class Task {
+public class Task implements Comparable<Task>{
     protected String name;
     protected boolean isCompleted = false;
 
@@ -74,5 +74,10 @@ public class Task {
         } else {
             return "[ ] " + name;
         }
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return name.compareTo(task.name);
     }
 }
