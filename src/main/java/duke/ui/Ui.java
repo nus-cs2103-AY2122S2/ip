@@ -1,34 +1,34 @@
 package duke.ui;
 
-import duke.task.TaskList;
-
 import java.util.Scanner;
+
+import duke.task.TaskList;
 
 /**
  * Class that deals with user interaction between Duke chatbot and user.
  */
 public class Ui {
-
-    Scanner scanner;
-
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static final String EXCLAMATION = "!";
+
     public static final String DIVIDER = "================================================================";
 
     public static final String LINE_PREFIX = "|| ";
 
     public static final String BOT_NAME = "Feline";
 
-    public static final String COMMANDS = "list, todo, deadline (using /by)," +
-                                        " event (using /at), mark, unmark, delete";
+    public static final String COMMANDS = "list, todo, deadline (using /by),"
+            + " event (using /at), mark, unmark, delete";
+
+    private Scanner scanner;
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
 
     /**
      * Returns the next String input of the user.
+     *
      * @return the next input of the user.
      */
     public String readCommand() {

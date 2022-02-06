@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.InvalidArgumentException;
 import duke.exception.OutOfBoundsException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Messages;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 public class UnmarkCommand extends Command {
 
@@ -17,6 +17,13 @@ public class UnmarkCommand extends Command {
         this.inputWords = inputWords;
     }
 
+    /**
+     * Unmarks the task as done.
+     *
+     * @param tasks TaskList that command is executed on.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage that saves and loads tasks after Command is executed.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!(inputWords.length == 2)) {
@@ -24,7 +31,7 @@ public class UnmarkCommand extends Command {
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-                throw new OutOfBoundsException(Messages.OUT_OF_BOUNDS_MSG(taskNumber));
+                throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsUndone();
             ui.print(Messages.UNMARK_SUCCESS);

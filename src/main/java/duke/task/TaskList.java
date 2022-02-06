@@ -27,8 +27,9 @@ public class TaskList {
     }
 
     /**
-     * @param i the task number to get.
+     * Returns the Task object in TaskList specified by the index.
      *
+     * @param i the task number to get.
      * @return the Task to get from TaskList.
      */
     public Task get(int i) {
@@ -54,9 +55,7 @@ public class TaskList {
     }
 
     /**
-     *
      * @param i Task number.
-     *
      * @return the String representation of the specified task number to be displayed.
      */
     public String getTaskStatement(int i) {

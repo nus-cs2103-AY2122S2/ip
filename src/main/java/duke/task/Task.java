@@ -8,23 +8,42 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a Task object.
+     *
+     * @param description description of Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Creates a Task object, including its Done status.
+     *
+     * @param description description of Task.
+     * @param isDone status of Task, whether is done or not.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
     /**
+     * Gets isDone status.
+     *
+     * @return isDone status of Task.
+     */
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
+    /**
      * Returns "X" when a task is done, and " " when a task is yet to be done.
      *
      * @return the status "X" or " ".
      */
     public String getStatusIcon() {
-        return this.isDone? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     /**
@@ -47,7 +66,7 @@ public class Task {
      * @return the String representation of boolean, "1" or "0".
      */
     public String getBool() {
-        return isDone? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     /**
@@ -77,7 +96,6 @@ public class Task {
     }
 
     /**
-     *
      * @return the String representation of a Task.
      */
     @Override

@@ -14,7 +14,6 @@ public class Todo extends Task {
     }
 
     /**
-     *
      * @return String representation of a todo Task.
      */
     @Override

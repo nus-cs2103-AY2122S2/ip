@@ -1,17 +1,17 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * A class that saves and loads the tasks in a filepath.
@@ -20,13 +20,19 @@ public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Stores the TaskList in the specified filePath.
+     *
+     * @param filePath specified filePath.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.filePath = filePath;
         if (!file.exists()) {
             try {
                 File directory = new File(file.getParent());
-                if (!directory.exists()) {  //data file not in specific folder, need to handle
+                //data file not in specific folder, need to handle
+                if (!directory.exists()) {
                     directory.mkdirs();
                 }
                 file.createNewFile();
@@ -40,7 +46,6 @@ public class Storage {
      * Saves tasks into file.
      *
      * @param tasks Tasks to be saved.
-     *
      * @throws IOException Exception if an I/O exception occurs.
      */
     public void save(TaskList tasks) throws IOException {
@@ -56,9 +61,7 @@ public class Storage {
      * does not exist in computer.
      *
      * @return the Arraylist of Task objects.
-     *
      * @throws FileNotFoundException Exception if the input filepath is not found.
-     *
      * @throws IOException Exception if an I/O exception occurs.
      */
     public ArrayList<Task> load() throws FileNotFoundException, IOException {
@@ -84,6 +87,8 @@ public class Storage {
                     String[] eventTasking = taskLine.split(" \\| ", 2);
                     taskToAdd = new Event(eventTasking[0], eventTasking[1], isDone);
                     break;
+                default:
+                    //will not reach here.
                 }
                 tasks.add(taskToAdd);
             }
