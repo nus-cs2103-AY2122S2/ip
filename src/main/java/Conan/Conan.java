@@ -44,14 +44,12 @@ public class Conan {
      * returns a new Conan instance.
      */
     public Conan() {
-        Ui.printSeparator();
-        Ui.printGreeting();
 
+        Ui.printGreeting();
         this.username = EMPTY_STR_FILLER;
         this.taskList = new TaskList();
         this.storage = new Storage();
 
-        Ui.printSeparator();
     }
 
     /**
@@ -70,7 +68,6 @@ public class Conan {
         }
 
         this.username = username.trim();
-        Ui.printSeparator();
 
         if (!previousUser.equalsIgnoreCase(this.username)) {
             Ui.printSayHello(this.username);
@@ -79,7 +76,6 @@ public class Conan {
             isSimilarUser = true;
         }
 
-        Ui.printSeparator();
         return isSimilarUser;
 
     }
@@ -101,10 +97,8 @@ public class Conan {
                 AddCommand.add(this.taskList, this.storage);
             }
             Ui.printAsk(this.username);
-            Ui.printSeparator();
 
         } catch (InvalidYesOrNoException e) {
-            Ui.printSeparator();
             Ui.printMessage(e.toString());
             isSuccessful = false;
 
@@ -123,7 +117,7 @@ public class Conan {
     public CarryOn tell(String message) {
         CarryOn carryOn = CarryOn.NEXT;
         try {
-            Ui.printSeparator();
+
             message = message.trim();
             Commands userCommand = CommandChecker.findAndCheck(message);
 
@@ -134,7 +128,6 @@ public class Conan {
             case BYE:
                 ByeCommand.executeBye(this.username, this.storage, this.taskList);
                 Ui.printFarewell(this.username);
-                Ui.printSeparator();
                 carryOn = CarryOn.STOP;
             case DELETE:
                 DeleteCommand.delete(this.taskList, message);
@@ -160,14 +153,11 @@ public class Conan {
             default:
                 // do nothing.
             }
-
-            Ui.printAsk(this.username);
-
+            // Ui.printAsk();
         } catch (IllegalCommandException e) {
             Ui.printMessage(e.toString());
-            Ui.printTryAgain();
+            //Ui.printTryAgain();
         } finally {
-            Ui.printSeparator();
             return carryOn;
         }
 

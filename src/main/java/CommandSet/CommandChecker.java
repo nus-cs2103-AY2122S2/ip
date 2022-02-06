@@ -3,6 +3,7 @@ package CommandSet;
 import Exceptions.InvalidYesOrNoException;
 import Exceptions.MissingTaskArgumentException;
 import Exceptions.IllegalCommandException;
+import Helper.Ui;
 
 /**
  * <h1>CommandChecker</h1>
@@ -125,8 +126,8 @@ public class CommandChecker {
 
             return Commands.ADD;
         } catch (IllegalCommandException e) {
-            System.out.println(e.toString());
-            System.out.println("Please try again");
+            Ui.printMessage(e.toString());
+            Ui.printTryAgain();
             return Commands.INVALID;
         }
     }
