@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
@@ -20,8 +21,9 @@ public class Duke {
     private Storage storage;
 
     /**
+     * Constructor for the creation of a Duke class instance.
      *
-     * @param databasePath
+     * @param databasePath Contains a String containing the path to the database.
      */
     public Duke(String databasePath) {
         ui = new Ui();
@@ -35,7 +37,11 @@ public class Duke {
     }
 
     /**
-     *
+     * This method forms the bulk of the program, facilitating and directing the
+     * program into different directories. It starts off by welcoming the user,
+     * then receiving valid inputs from them via the CLI. These inputs are then
+     * parsed, converted into commands, executed, and whose end results are then
+     * evaluated. If the user passes 'bye' into the terminal, the program terminates.
      */
     public void run() {
         ui.welcomeUser();
@@ -64,8 +70,9 @@ public class Duke {
     }
 
     /**
+     * Initiate the main program, which facilitates and brings DockerHawker to life.
      *
-     * @param args
+     * @param args Arguments received from the user through the CLI terminal.
      */
     public static void main(String[] args) {
         //new Duke("./src/main/java/duke/data/DukeDatabase.txt").run();
