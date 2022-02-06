@@ -25,6 +25,7 @@ public class Duke {
      */
     public Duke() {
         tasks = storage.loadTasks();
+        assert tasks != null;
     }
 
     public TaskList getTasks() {
