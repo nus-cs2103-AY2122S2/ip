@@ -6,6 +6,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,22 +54,48 @@ public class TaskList {
         System.out.println("__________________________________");
     }
 
-    public void addItem(String[] command) throws DukeException {
-        String input = command[0];
+    public void addTodo(String title) {
         System.out.println("__________________________________");
-        switch (input) {
-        case "todo":
-            taskArray.add(new Todo(command[1]));
-            break;
-        case "deadline":
-            taskArray.add(new Deadline(command[1]));
-            break;
-        case "event":
-            taskArray.add(new Event(command[1]));
-            break;
+        taskArray.add(new Todo(title));
+    }
+
+    public void addDeadline(String title, LocalDate date, LocalTime time) {
+        System.out.println("__________________________________");
+        taskArray.add(new Deadline(title, date, time));
+    }
+
+    public void addEvent(String title, LocalDate date, LocalTime time) {
+        System.out.println("__________________________________");
+        taskArray.add(new Event(title, date, time));
+    }
+
+
+    public int getSize() {
+        return taskArray.size();
+    }
+
+    /**
+     * Prints the tasks that contains the search term.
+     * @param term User wants to find tasks with this term
+     * @throws DukeException If user gives an empty string as a search term.
+     */
+    public void findItem(String term) throws DukeException {
+        StringBuilder result = new StringBuilder();
+        if (term.isEmpty()){
+            throw new DukeException("Tell me what you're searching for");
         }
-        System.out.printf("You have %d tasks in your list\n", taskArray.size());
         System.out.println("__________________________________");
+        for (int i = 0; i < taskArray.size(); i++) {
+            if (taskArray.get(i).titleContains(term)) {
+                result.append(String.format("%d. " + taskArray.get(i).toString() + "\n", i + 1));
+            }
+        }
+        if (result.length() == 0) {
+            System.out.println("There are no tasks containing that term.");
+        } else {
+            System.out.print(result);
+            System.out.println("__________________________________");
+        }
     }
 
     public String writeItem() {

@@ -21,8 +21,6 @@ public class Ui {
         String userInput = dukeScan.nextLine();
         return Parser.parseInput(userInput, taskList);
     }
-
-
 }
 
 
