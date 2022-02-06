@@ -26,7 +26,7 @@ public class Parser {
     /**
      * finds and prints task based on whether it contains the given keyword
      *
-     * @param keyword word to be matched with task description
+     * @param keyword word to be matched with task description.
      */
     String findTask(String keyword) {
         String response = "Here are the matching tasks in your list:\n";
@@ -44,7 +44,7 @@ public class Parser {
     /**
      * marks the chosen task as done and prints a confirmation
      *
-     * @param taskNumber represents which task to mark, 1 for the first task, 2 for the second, etc
+     * @param taskNumber represents which task to mark, 1 for the first task, 2 for the second, etc.
      */
     String mark(int taskNumber) {
         tasks.get(taskNumber - 1).mark();
@@ -56,7 +56,7 @@ public class Parser {
     /**
      * unmarks the chosen task and prints a confirmation
      *
-     * @param taskNumber represents which task to unmark, 1 for the first task, 2 for the second, etc
+     * @param taskNumber represents which task to unmark, 1 for the first task, 2 for the second, etc.
      */
     String unmark(int taskNumber) {
         tasks.get(taskNumber - 1).unmark();
@@ -68,7 +68,7 @@ public class Parser {
     /**
      * adds the given ToDo object and prints a confirmation
      *
-     * @param toDo ToDo object to be added to TaskList
+     * @param toDo ToDo object to be added to TaskList.
      */
     String addToDo(ToDo toDo) {
         tasks.add(toDo);
@@ -81,7 +81,7 @@ public class Parser {
     /**
      * adds the given Deadline object and prints a confirmation
      *
-     * @param deadline Deadline object to be added to TaskList
+     * @param deadline Deadline object to be added to TaskList.
      */
     String addDeadline(Deadline deadline) {
         tasks.add(deadline);
@@ -94,7 +94,7 @@ public class Parser {
     /**
      * adds the given Event object and prints a confirmation
      *
-     * @param event Event object to be added to TaskList
+     * @param event Event object to be added to TaskList.
      */
     String addEvent(Event event) {
         tasks.add(event);
@@ -108,7 +108,7 @@ public class Parser {
     /**
      * deletes task at a specified position and prints a confirmation
      *
-     * @param number represents which task to delete, 1 for the first task, 2 for the second, etc
+     * @param number represents which task to delete, 1 for the first task, 2 for the second, etc.
      */
     String deleteTask(int number) {
         Task taskToDelete = tasks.get(number - 1);

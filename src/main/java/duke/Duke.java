@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import gui.DialogBox;
 
 /**
- * The Duke class is a chatbot that controls and manages your todo list application
+ * The Duke class is a chatbot that controls and manages your todo list application.
  */
 public class Duke {
 
