@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks.
@@ -99,15 +100,10 @@ public class TaskList {
      * @return a new TaskList with tasks matching the keyword
      */
     public TaskList filter(String keyword) {
-        TaskList filteredList = new TaskList(new ArrayList<>());
-
-        for (Task t : tasks) {
-            if (t.hasKeyword(keyword)) {
-                filteredList.addTask(t);
-            }
-        }
-
-        return filteredList;
+        return new TaskList(tasks.stream()
+                        .filter(task -> task.hasKeyword(keyword))
+                        .collect(Collectors.toCollection(ArrayList::new))
+        );
     }
 
     /**
