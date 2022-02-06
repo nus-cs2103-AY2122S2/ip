@@ -11,11 +11,13 @@ public class Storage {
 
     public Storage(String dataPath) {
         this.dataPath = dataPath;
-        checkFile();
+        checkFolderAndFile();
     }
 
-    public void checkFile() {
+    public void checkFolderAndFile() {
         try {
+            File directory = new File("data");
+            directory.mkdir();
             this.file = new File(this.dataPath);
             if (file.createNewFile()) {
                 System.out.println("File is not found. A new file has been created for you.");
