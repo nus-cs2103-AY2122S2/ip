@@ -38,6 +38,7 @@ public class UpcomingCommand extends Command {
 
     /**
      * Parses the days argument and ensures that it is a non-negative integer.
+     *
      * @param daysInString The days argument as a String.
      * @return The parsed days argument as an Integer.
      * @throws DukeIllegalArgumentException If the days argument is not a non-negative integer.

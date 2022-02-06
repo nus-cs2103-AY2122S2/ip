@@ -46,7 +46,8 @@ public enum TaskType {
      * @return The matching {@link TaskType}, or null if the provided identifier is invalid.
      */
     public static TaskType matchType(int typeId) {
-        return Arrays.stream(TaskType.values()).filter(x -> x.getTypeId() == typeId)
+        return Arrays.stream(TaskType.values())
+                .filter(x -> x.getTypeId() == typeId)
                 .findFirst()
                 .orElse(null);
     }

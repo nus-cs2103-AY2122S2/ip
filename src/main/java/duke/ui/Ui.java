@@ -17,11 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Ui {
-    private static final String SEPARATOR = "\t------------------------------------";
     private static final String BOT_NAME = "Megumin";
     private static final String ERROR_INVALID_COMMAND = "I do not understand you!";
     private static final String ERROR_INVALID_SYNTAX = "There was a problem understanding you:";
     private static final String ERROR_IO = "I had a problem reading / writing my memory!";
+    private static final String ERROR_GENERAL = "Something went wrong and my head exploded!";
 
     private static Ui instance;
     private MainWindow mainWindowController;
@@ -78,7 +78,7 @@ public class Ui {
         final boolean isRunning = action.apply((line) -> {
             lines.add(line);
         });
-        String message = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
+        final String message = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
         this.mainWindowController.printBotMessage(message);
         return isRunning;
     }
@@ -98,6 +98,8 @@ public class Ui {
             linePrinter.print(ex.getMessage());
         } else if (ex instanceof DukeIoException) {
             linePrinter.print(ERROR_IO);
+        } else {
+            linePrinter.print(ERROR_GENERAL);
         }
     }
 
