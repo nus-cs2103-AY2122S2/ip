@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TextUi;
+import duke.exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Task;
 import tasks.TaskList;
