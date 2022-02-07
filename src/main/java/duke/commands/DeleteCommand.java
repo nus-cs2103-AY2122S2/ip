@@ -32,10 +32,10 @@ public class DeleteCommand extends Command {
         Task deletedTask = super.taskList.deleteTask(this.index);
         String uuid = deletedTask.getId();
 
-        // persist deletion
         super.storage.removeTask(uuid);
 
-        return String.format("Noted. I've removed this task:%n%s%n"
+        String deletionResponse = String.format("Noted. I've removed this task:%n%s%n"
                 + "Now you have %d tasks in the list.%n", deletedTask, super.taskList.getSize());
+        return deletionResponse;
     }
 }

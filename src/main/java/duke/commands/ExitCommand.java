@@ -5,6 +5,7 @@ package duke.commands;
  */
 public class ExitCommand extends Command {
     public String execute() {
-        return "EXIT";
+        String exitResponse = "EXIT";
+        return exitResponse;
     }
 }
