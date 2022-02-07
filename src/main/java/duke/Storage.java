@@ -18,7 +18,7 @@ public class Storage {
 
     private String filePath;
     private File file;
-    private boolean isFileOpen = false;
+    boolean isTaskAdded;
 
     /**
      * Is a constructor for the instance of Storage. This also checks if the directory and file exists, if not
@@ -28,7 +28,6 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         String basePath = new File("").getAbsolutePath();
-        //file = new File( basePath + "/" + filePath);
 
         String[] path = filePath.split("/");
         for (String s : path) {
@@ -38,9 +37,10 @@ public class Storage {
                 file.mkdirs();
             } else {
                 file = new File(basePath);
-                isFileOpen = true;
             }
         }
+
+        assert file.exists() : "file should exist";
     }
 
     /**
@@ -55,51 +55,25 @@ public class Storage {
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
         ArrayList<Task> taskArrayList = new ArrayList<>();
+        boolean isTaskCreated = false;
 
         if (file.length() == 0) {
             return taskArrayList;
         } else {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
+                isTaskCreated = false;
                 String currentLine = scanner.nextLine();
                 if (currentLine.contains("[T]")) {
-                    ToDos todo;
-                    if (currentLine.charAt(4) == 'X') {
-                        todo = new ToDos(currentLine.substring(6), true);
-                        taskArrayList.add(todo);
-                    } else {
-                        todo = new ToDos(currentLine.substring(6));
-                        taskArrayList.add(todo);
-                    }
+                    isTaskCreated = loadToDo(taskArrayList, currentLine);
                 } else if (currentLine.contains("[D]")) {
-                    String date = currentLine.substring(currentLine.indexOf('(') + 5, currentLine.indexOf(')'));
-                    Date dueDate = (Date) formatter.parse(date);
-
-                    Deadline deadline;
-                    if (currentLine.charAt(4) == 'X') {
-                        deadline = new Deadline(currentLine.substring(6,
-                                currentLine.indexOf('(') - 1), true, dueDate);
-                    } else {
-                        deadline = new Deadline(currentLine.substring(6,
-                                currentLine.indexOf('(') - 1), dueDate);
-                    }
-                    taskArrayList.add(deadline);
+                    isTaskCreated = loadDeadline(taskArrayList, currentLine);
                 } else if (currentLine.contains("[E]")) {
-                    String date = currentLine.substring(currentLine.indexOf('(') + 5,
-                            currentLine.indexOf(')'));
-                    Date dueDate = (Date) formatter.parse(date);
-                    Event event;
-                    if (currentLine.charAt(4) == 'X') {
-                        event = new Event(currentLine.substring(6,
-                                currentLine.indexOf('(') - 1), true, dueDate);
-                    } else {
-                        event = new Event(currentLine.substring(6,
-                                currentLine.indexOf('(') - 1), dueDate);
-                    }
-                    taskArrayList.add(event);
+                    isTaskCreated = loadEvent(taskArrayList, currentLine);
                 } else {
                     throw new DukeException("Something wrong with loading file");
                 }
+                assert isTaskCreated : "Task should be created";
             }
             return taskArrayList;
         }
@@ -132,4 +106,61 @@ public class Storage {
 
         rewriteWriter.close();
     }
+
+
+    /**
+     * Read the current line passed in from storage and load a new To-Do object.
+     * @param taskArrayList the current TaskList to be loaded up into.
+     * @param currentCommand the command that is being read.
+     * @return a boolean that returns true when loaded successfully.
+     */
+    public boolean loadToDo(ArrayList<Task> taskArrayList, String currentCommand) {
+        ToDos todo;
+        if (currentCommand.charAt(4) == 'X') {
+            todo = new ToDos(currentCommand.substring(6), true);
+            taskArrayList.add(todo);
+        } else {
+            todo = new ToDos(currentCommand.substring(6));
+            taskArrayList.add(todo);
+        }
+        return true;
+    }
+
+
+    public boolean loadDeadline(ArrayList<Task> taskArrayList, String currentCommand) throws ParseException {
+
+        String date = currentCommand.substring(currentCommand.indexOf('(') + 5, currentCommand.indexOf(')'));
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
+        Date dueDate = (Date) formatter.parse(date);
+
+        Deadline deadline;
+        if (currentCommand.charAt(4) == 'X') {
+            deadline = new Deadline(currentCommand.substring(6,
+                    currentCommand.indexOf('(') - 1), true, dueDate);
+        } else {
+            deadline = new Deadline(currentCommand.substring(6,
+                    currentCommand.indexOf('(') - 1), dueDate);
+        }
+        taskArrayList.add(deadline);
+        return true;
+    }
+
+    public boolean loadEvent(ArrayList<Task> taskArrayList, String currentCommand) throws ParseException {
+        String date = currentCommand.substring(currentCommand.indexOf('(') + 5,
+                currentCommand.indexOf(')'));
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
+        Date dueDate = (Date) formatter.parse(date);
+        Event event;
+
+        if (currentCommand.charAt(4) == 'X') {
+            event = new Event(currentCommand.substring(6,
+                    currentCommand.indexOf('(') - 1), true, dueDate);
+        } else {
+            event = new Event(currentCommand.substring(6,
+                    currentCommand.indexOf('(') - 1), dueDate);
+        }
+        taskArrayList.add(event);
+        return true;
+    }
+
 }

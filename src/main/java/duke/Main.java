@@ -37,5 +37,7 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        assert stage.isShowing()  : "stage should be showing";
     }
 }
