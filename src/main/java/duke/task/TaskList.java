@@ -66,4 +66,19 @@ public class TaskList {
             }
         }
     }
+
+    public void listTasks(String keyword) {
+        if (taskList.size() == 0) {
+            System.out.println("You have no tasks!");
+        } else {
+            System.out.println("Here are the task(s) that contain(s) your keyword.");
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskNumber = i + 1;
+                Task task = taskList.get(i);
+                if (task.getDescription().contains(keyword)) {
+                    System.out.println("  " + taskNumber + ". " + task);
+                }
+            }
+        }
+    }
 }
