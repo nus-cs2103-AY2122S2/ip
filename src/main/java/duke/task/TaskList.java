@@ -33,6 +33,8 @@ public class TaskList {
      * @return A list of tasks that matches the specified date and comparisonType.
      */
     public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int comparisonType) {
+        assert comparisonType > -1 && comparisonType < 3 : "comparisonType must be between 0 and 2";
+
         ArrayList<Predicate<Task>> taskTypePredicateList = new ArrayList<>();
         ArrayList<Predicate<Task>> taskDatePredicateList = new ArrayList<>();
 
@@ -85,6 +87,10 @@ public class TaskList {
      * @param taskType The type task to be added.
      */
     public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
+        assert !taskName.equals("") : "taskName must be specified";
+        assert date != null : "date must be specified";
+        assert taskType > -1 && taskType < 3 : "taskType must be between 0 and 2";
+
         switch (taskType) {
         case 0:
             this.tasks.add(new ToDoTask(taskName, isMarked));

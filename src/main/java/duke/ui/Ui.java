@@ -21,8 +21,9 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+  
 //    /**
-//     * Constructor for DeadlineTask.
+//     * Initializes Ui to output to the specfied Vbox, with the specfied image. 
 //     * @param v The VBox to be displayed on
 //     * @param d The image for duke
 //     */
@@ -30,7 +31,6 @@ public class Ui {
 //        this.v = v;
 //        this.d = d;
 //    }
-
     public static void init(VBox v, Image d) {
         vbox = v;
         image = d;
