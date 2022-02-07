@@ -24,10 +24,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui ui;
     private TaskList taskList;
-    private Parser parser;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tom.png"));
 
     @FXML
@@ -39,16 +36,8 @@ public class MainWindow extends AnchorPane {
         return this.dialogContainer;
     }
 
-    public void setUi(Ui ui) {
-        this.ui = ui;
-    }
-
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
-    }
-
-    public void setParser(Parser parser) {
-        this.parser = parser;
     }
 
     /**
@@ -61,9 +50,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, (userImage))
         );
-        int runResult = parser.run(userInput.getText(), ui, taskList);
+        int runResult = Parser.run(userInput.getText(), taskList);
         if (runResult == 1) {
-            Storage.saveFile("data", "duke.txt", taskList.getList());
+            Storage.saveFile("data", "duke.txt", taskList);
         }
         userInput.clear();
     }
