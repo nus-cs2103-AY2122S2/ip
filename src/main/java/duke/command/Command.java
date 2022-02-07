@@ -34,7 +34,7 @@ public abstract class Command {
      *
      * @param taskList The TaskList which the command will act on.
      * @param storage The Storage on which the command will act on.
-     * @return The string that will be shown on the duke dialogue.
+     * @return The string that will be shown on the Dialogue Box.
      * @throws DukeExceptions The exception from Duke if there are errors encountered.
      */
     public abstract String run(TaskList taskList, Storage storage) throws DukeExceptions;
@@ -69,6 +69,7 @@ public abstract class Command {
         } else if (command.equals("FIND")) {
             return new FindCommand(parameter);
         } else {
+            // Throws invalid command as the user gives a invalid command.
             throw InvalidCommandException.createInvalidCommand(command);
         }
     }
@@ -88,14 +89,13 @@ class ByeCommand extends Command {
      *
      * @param taskList The TaskList which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return Empty string, there is no significance.
      * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Exits duke.
         System.exit(0);
-
         return "";
     }
 }
@@ -114,8 +114,8 @@ class ListCommand extends Command {
      *
      * @param taskList The TaskList which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return All the tasks in the task list which will then be shown in the Dialogue box.
      * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -137,10 +137,9 @@ class MarkCommand extends Command {
      * Marks the task indicated by the index in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The recently marked task that will be shown on the Dialogue box.
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -182,10 +181,9 @@ class UnmarkCommand extends Command {
      * Unmarks the task indicated by the index in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The recently unmarked task that will be shown in the dialogue box.
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -228,10 +226,9 @@ class TodoCommand extends Command {
      * Adds a todo task in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The recently created todo which will then be shown on the dialogue box.
      * @throws DukeExceptions If the user did not indicate a name of the task.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -268,10 +265,9 @@ class DeadlineCommand extends Command {
      * Adds a deadline command into the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The recently created deadline that will be then shown in the dialogue box.
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -329,10 +325,9 @@ class EventCommand extends Command {
      * Adds an event task in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The recently created event which will be then sent to the dialogue box.
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -391,10 +386,9 @@ class DeleteCommand extends Command {
      * Deletes the task indicated by the index number in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui       The UI on which the command will act on.
-     * @param storage  The Storage on which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @return The recently deleted task that will be sent to the dialogue box.
      * @throws DukeExceptions If the user did not enter a number.
-     * @return
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
@@ -437,6 +431,14 @@ class FindCommand extends Command {
         super(parameter);
     }
 
+    /**
+     * Gets all the tasks that contains the keyword and shos it to the user.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @return The tasks that contain the keyword.
+     * @throws DukeExceptions
+     */
     @Override
     public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a keyword, then throw the EmptyKeywordException exception.

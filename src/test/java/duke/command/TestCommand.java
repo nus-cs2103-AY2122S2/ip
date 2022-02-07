@@ -1,24 +1,20 @@
 package duke.command;
 
-import java.awt.color.CMMException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
-import duke.dukeexceptions.InvalidDateException;
-import duke.task.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.InvalidCommandException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 
 public class TestCommand {
-    String fileName = "data/test/dukeEmptyTxt.txt";
+    private String fileName = "data/test/dukeEmptyTxt.txt";
 
     @Test
     void createCommand_noCommand_missingCommandExceptionThrown() {
@@ -126,11 +122,11 @@ public class TestCommand {
             FileWriter fw = new FileWriter(dataFile);
 
             // Add the initial data into the data file.
-            tasks.addTask(Task.createTask("TODO",false, "Task 1", ""));
+            tasks.addTask(Task.createTask("TODO", false, "Task 1", ""));
             storage.updateData(tasks);
             String result = "";
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(initial, result);
 
@@ -142,7 +138,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
@@ -197,11 +193,11 @@ public class TestCommand {
             FileWriter fw = new FileWriter(dataFile);
 
             // Initialize the data in the data file.
-            tasks.addTask(Task.createTask("TODO",true, "Task 1", ""));
+            tasks.addTask(Task.createTask("TODO", true, "Task 1", ""));
             storage.updateData(tasks);
             String result = "";
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(initial, result);
 
@@ -213,7 +209,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
@@ -227,7 +223,7 @@ public class TestCommand {
     }
 
     @Test
-    void createTodoCommand_TodoWithoutName_throwsEmptyTaskException() {
+    void createTodoCommand_todoWithoutName_throwsEmptyTaskException() {
         try {
             Command cmd = Command.getCommand("TODO", "");
             Storage storage = new Storage(fileName);
@@ -241,7 +237,7 @@ public class TestCommand {
     }
 
     @Test
-    void createTodoCommand_TodoWithName_createTodoInFile() {
+    void createTodoCommand_todoWithName_createTodoInFile() {
         String initial = "";
         String expectedOne = "Added the following todo into the list:\n[T][ ] Task 1";
         String expectedTwo = "TODO\n"
@@ -260,7 +256,7 @@ public class TestCommand {
             String result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(initial, result);
 
@@ -273,7 +269,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
@@ -331,8 +327,8 @@ public class TestCommand {
     @Test
     void createDeadlineCommand_correctDeadline_createDeadlineInFile() {
         String initial = "";
-        String expectedOne
-                = "Added the following deadline into the list:\n[D][ ] Deadline 1 (by: 01 Jan 2022 11:59 PM)";
+        String expectedOne =
+                "Added the following deadline into the list:\n[D][ ] Deadline 1 (by: 01 Jan 2022 11:59 PM)";
         String expectedTwo = "DEADLINE\n"
                 + "false\n"
                 + "Deadline 1\n"
@@ -350,7 +346,7 @@ public class TestCommand {
             String result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(initial, result);
 
@@ -363,7 +359,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
@@ -421,8 +417,8 @@ public class TestCommand {
     @Test
     void createEventCommand_correctEvent_createEventInFile() {
         String initial = "";
-        String expectedOne
-                = "Added the following event into the list:\n[E][ ] Event 1 (at: 03 May 2022 06:00 PM)";
+        String expectedOne =
+                "Added the following event into the list:\n[E][ ] Event 1 (at: 03 May 2022 06:00 PM)";
         String expectedTwo = "EVENT\n"
                 + "false\n"
                 + "Event 1\n"
@@ -440,7 +436,7 @@ public class TestCommand {
             String result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(initial, result);
 
@@ -453,7 +449,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
@@ -518,7 +514,7 @@ public class TestCommand {
             result = "";
             sc = new Scanner(dataFile);
             while (sc.hasNext()) {
-                result +=  sc.nextLine() + "\n";
+                result += sc.nextLine() + "\n";
             }
             Assertions.assertEquals(expectedTwo, result);
 
