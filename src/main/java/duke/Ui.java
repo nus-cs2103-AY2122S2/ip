@@ -71,18 +71,15 @@ public class Ui {
             return taskList.toDo(temp[1]);
         } else if (temp[0].equals("deadline")) {
             return taskList.deadLine(inp);
-           // return "ok deadline";
         } else if (temp[0].equals("event")) {
             return taskList.event(temp[1]);
         } else if (temp[0].equals("delete")) {
-            // DeleteCommand d = new DeleteCommand(DUKE_DIRECTORY,DUKE_TXTFILE);
             return taskList.delete(temp[1]);
         } else if (temp[0].equals("find")) {
             taskList.find(temp[1]);
             return "";
         } else {
             return "command is invalid, please re-enter again";
-//            throw new DukeException(temp[0]);
         }
     }
 

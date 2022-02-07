@@ -56,6 +56,7 @@ public class DeadLine extends Task {
      * @return formated date and time
      */
     public String dateTimeFormat(String dateTime) {
+        assert dateTime.contains("/") : "Input is not a date";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate d = LocalDate.parse(dateTime, formatter);
         return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));

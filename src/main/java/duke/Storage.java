@@ -1,7 +1,7 @@
 
 package duke;
 
-import duke.Task;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +38,7 @@ public class Storage {
                 writeToFile(listOfInputs.get(i).message() + "\n", filePath);
             } else {
                 listOfInputs.get(i).updateData(filePath);
-                //updateData(listOfInputs.get(i).message(), filePath);
+
 
             }
         }

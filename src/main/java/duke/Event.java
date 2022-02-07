@@ -26,6 +26,7 @@ public class Event extends Task {
             this.date = dateTimeTemp[0];
             this.time = dateTimeTemp[1];
         } else {
+            assert at.contains("/") : "Input is not a date";
             this.date = at;
             this.time = null;
         }
@@ -53,10 +54,11 @@ public class Event extends Task {
      * @return reformatted date and time
      */
     public String dateTimeFormat(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate d = LocalDate.parse(dateTime, formatter);
+            assert at.contains("/") : "Input is not a date";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            LocalDate d = LocalDate.parse(dateTime, formatter);
 
-        return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
