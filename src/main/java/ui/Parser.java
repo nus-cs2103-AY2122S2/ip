@@ -37,28 +37,45 @@ public class Parser {
             if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            return new TodoCommand(message);
+            Integer priority = null;
+            if (message.matches(".* :p[1-4]")) {
+                priority = Integer.parseInt(message.substring(message.length() - 1));
+                message = message.split(" :p[1-4]", 2)[0].trim();
+            }
+            return new TodoCommand(message, priority);
 
         case "event":
             if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
+            }
+
+            priority = null;
+            if (message.matches(".* :p[1-4]")) {
+                priority = Integer.parseInt(message.substring(message.length() - 1));
+                message = message.split(" :p[1-4]", 2)[0].trim();
             }
             String[] messageWords = message.split("/at ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
 
-            return new EventCommand(messageWords[0].trim(), messageWords[1].trim());
+            return new EventCommand(messageWords[0].trim(), messageWords[1].trim(), priority);
 
         case "deadline":
             if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
+
+            priority = null;
+            if (message.matches(".* :p[1-4]")) {
+                priority = Integer.parseInt(message.substring(message.length() - 1));
+                message = message.split(" :p[1-4]", 2)[0].trim();
+            }
             messageWords = message.split("/by ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
-            return new DeadlineCommand(messageWords[0].trim(), messageWords[1].trim());
+            return new DeadlineCommand(messageWords[0].trim(), messageWords[1].trim(), priority);
 
         case "mark":
             int serialNumber;

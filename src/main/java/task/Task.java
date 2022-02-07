@@ -6,11 +6,13 @@ package task;
 public abstract class Task {
     private String description;
     private boolean isDone;
+    private Integer priorityLevel;
 
-    /** Creates new Task, with minimally a description and status */
-    public Task (String description, boolean isDone) {
+    /** Creates new Task, with minimally a description and status and priority level. */
+    protected Task (String description, boolean isDone, Integer priorityLevel) {
         this.description = description;
         this.isDone = isDone;
+        this.priorityLevel = priorityLevel;
     }
 
     public String getDescription() {
@@ -19,6 +21,10 @@ public abstract class Task {
 
     public boolean getTaskStatus() {
         return this.isDone;
+    }
+
+    public Integer getPriorityLevel() {
+        return this.priorityLevel;
     }
 
     public void setDescription(String description) {

@@ -11,11 +11,13 @@ import task.TaskList;
 public class DeadlineCommand extends Command {
     private final String message;
     private final String time;
+    private final Integer priorityLevel;
 
     /** Stores message and time for Deadline Task to be created */
-    public DeadlineCommand(String message, String time) {
+    public DeadlineCommand(String message, String time, Integer priorityLevel) {
         this.message = message;
         this.time = time;
+        this.priorityLevel = priorityLevel;
     }
 
     /**
@@ -29,7 +31,7 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList taskList) throws DukeException { //throw exception if necessary
         try {
-            taskList.add(new Deadline(this.message, false, LocalDate.parse(this.time)));
+            taskList.add(new Deadline(this.message, false, this.priorityLevel, LocalDate.parse(this.time)));
         } catch (DateTimeParseException e) {
             throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
         }
