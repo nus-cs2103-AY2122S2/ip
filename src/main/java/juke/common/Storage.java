@@ -28,10 +28,10 @@ public class Storage {
     
     public Storage(Juke instance) {
         this.juke = instance;
-        this.initialiseFile();
+        this.initializeFile();
     }
     
-    private void initialiseFile() {
+    private void initializeFile() {
         try {
             if (this.file.getParentFile().mkdirs()) {
                 this.juke.getUi().formattedPrint("Directories not found. Creating new directories.");
