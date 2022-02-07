@@ -101,7 +101,7 @@ public class Duke {
      * @param input The input from the user.
      * @return The response from duke.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
 
         try {
             Instruction currentInstruction = Instruction.of(input, taskManager);
