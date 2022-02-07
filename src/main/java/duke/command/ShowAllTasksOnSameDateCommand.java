@@ -3,12 +3,12 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 import duke.utils.CortanaException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -40,64 +40,40 @@ public class ShowAllTasksOnSameDateCommand extends Command {
      * @param storage the storage to operate on
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
+        int numberOfTasksOnSameDate = (int) taskList.getTaskList()
+                .stream()
+                .filter(task -> !(task instanceof Todo) && isMatchingDateTime(task, dateTime))
+                .count();
+
         StringBuilder tasksOnSameDate = new StringBuilder();
-        LocalDate localDate = dateTime.toLocalDate();
-        LocalTime localTime = dateTime.toLocalTime();
-        int numberOfTasksOnSameDate = 0;
-        try {
-            for (Task task: taskList.getTaskList()) {
-                if (task instanceof Deadline) {
-                    /* task is a deadline */
-                    if (localTime != LocalTime.MAX) {
-                        //deadline has date and time
-                        if (((Deadline) task).getBy().equals(dateTime)) {
-                            /* all deadlines with the exact same date and time */
-                            numberOfTasksOnSameDate++;
-                            tasksOnSameDate.append(task).append("\n");
-                        }
-                    } else {
-                        /* deadline only has date */
-                        if (((Deadline) task).getBy().toLocalDate().equals(localDate)) {
-                            /* all deadlines with the same date regardless of time */
-                            numberOfTasksOnSameDate++;
-                            tasksOnSameDate.append(task).append("\n");
-                        }
-                    }
-                } else if (task instanceof Event) {
-                    /* task is an event */
-                    if (localTime != LocalTime.MAX) {
-                        /* event has date and time */
-                        if (((Event) task).getAt().equals(dateTime)) {
-                            /* all events with the exact same date and time */
-                            numberOfTasksOnSameDate++;
-                            tasksOnSameDate.append(task).append("\n");
-                        }
-                    } else { //event only has date
-                        if (((Event) task).getAt().toLocalDate().equals(localDate)) {
-                            /* all events with the same date regardless of time */
-                            numberOfTasksOnSameDate++;
-                            tasksOnSameDate.append(task).append("\n");
-                        }
-                    }
-                }
-            }
-            if (numberOfTasksOnSameDate == 0) {
-                /* no tasks found */
-                throw new CortanaException("No task found on " + dateTimeString + "!");
-            } else {
-                tasksOnSameDate.append(ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
-                return tasksOnSameDate.toString();
-            }
-        } catch (DateTimeParseException e) {
-            throw new CortanaException("Invalid date/time!");
-        }
+
+        taskList.getTaskList()
+                .stream()
+                .filter(task -> !(task instanceof Todo) && isMatchingDateTime(task, dateTime))
+                .forEach(task -> tasksOnSameDate.append(task).append("\n"));
+
+        tasksOnSameDate.append(ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
+        return tasksOnSameDate.toString();
     }
 
     /**
-     * The program is not yet exited.
+     * Returns whether a task matches the user input date/time
+     *
+     * @param task          the particular task in task list
+     * @param givenDateTime the given date time
+     * @return whether a task matches the user input date/time
      */
-    public boolean isExit() {
-        return false;
+    public boolean isMatchingDateTime(Task task, LocalDateTime givenDateTime) {
+        assert task instanceof Deadline || task instanceof Event;
+        LocalDateTime localDateTimeOfTask = task instanceof Deadline
+                ? ((Deadline) task).getBy()
+                : ((Event) task).getAt();
+        LocalDate localDateOfTask = localDateTimeOfTask.toLocalDate();
+
+        if (givenDateTime.toLocalTime() != LocalTime.MAX) {
+            return givenDateTime.equals(localDateTimeOfTask);
+        }
+        return givenDateTime.toLocalDate().equals(localDateOfTask);
     }
 
     @Override
