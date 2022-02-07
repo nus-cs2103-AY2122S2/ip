@@ -2,7 +2,10 @@ package duke.command;
 
 import java.util.Objects;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 import duke.utils.CortanaException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -20,6 +23,7 @@ public class AddCommand extends Command {
      * @param task the task to be added
      */
     public AddCommand(Task task) {
+        assert task instanceof Deadline || task instanceof Event || task instanceof Todo;
         this.task = task;
     }
 
