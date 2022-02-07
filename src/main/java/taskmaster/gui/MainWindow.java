@@ -61,6 +61,15 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    @FXML
+    public void loadFile() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getTaskmasterDialog(taskmaster.loadFile(), taskMasterImage)
+        );
+    }
+
+
+
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to

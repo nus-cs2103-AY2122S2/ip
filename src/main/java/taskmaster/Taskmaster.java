@@ -30,11 +30,6 @@ public class Taskmaster {
         this.ui = new UserInterface();
         this.taskList = new TaskList();
         this.storage = new Storage(FILE_PATH);
-        try {
-            storage.loadFile(taskList);
-        } catch (TaskmasterExceptions e) {
-            ui.displayErrorMessage(e.getMessage());
-        }
     }
 
     /**
@@ -44,6 +39,18 @@ public class Taskmaster {
      */
     public String getOpeningMessage() {
         return ui.getOpeningMessage();
+    }
+
+    public String loadFile() {
+        String result = "";
+        try {
+            storage.loadFile(this.taskList);
+            result += "Loading data file: Success\n";
+        } catch (TaskmasterExceptions e) {
+            ui.displayErrorMessage(e.getMessage());
+            result += "Loading data file: Fail\n";
+        }
+        return result;
     }
 
     /**
