@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,21 +20,25 @@ public class FindDateCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) throws IOException {
-        List<Task> t = tasks.getObjectives(keyword);
-        StringBuilder reply = new StringBuilder();
-        reply.append(this.speak(Dialogue.FINDDATE));
-        for (int i = 0; i < t.size(); i++) {
-            reply.append(i + 1);
-            reply.append(".");
-            reply.append(t.get(i));
-            reply.append("\n");
-        }
-        return reply.toString();
+    public String execute(TaskList tasks, Storage storage) {
+        List<Task> chosenTasks = tasks.getObjectives(keyword);
+        return getReply(chosenTasks);
     }
 
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    private String getReply(List<Task> chosenTasks) {
+        StringBuilder reply = new StringBuilder();
+        reply.append(this.speak(Dialogue.FINDDATE));
+        for (int i = 0; i < chosenTasks.size(); i++) {
+            reply.append(i + 1);
+            reply.append(".");
+            reply.append(chosenTasks.get(i));
+            reply.append("\n");
+        }
+        return reply.toString();
     }
 }

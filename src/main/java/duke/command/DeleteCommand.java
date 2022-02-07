@@ -22,7 +22,15 @@ public class DeleteCommand extends Command {
         String deletedTask = (task.getTask(this.index)).toString();
         task.delete(this.index);
         storage.overWriteFile(task);
+        return getReply(deletedTask, task);
+    }
 
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    private String getReply(String deletedTask, TaskList task) {
         StringBuilder reply = new StringBuilder();
         reply.append(this.speak(Dialogue.DELETE));
         reply.append("\n");
@@ -33,10 +41,5 @@ public class DeleteCommand extends Command {
         assert !reply.toString().equals("") : "Description of task deleted cannot be empty";
 
         return reply.toString();
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

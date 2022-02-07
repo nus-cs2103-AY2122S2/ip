@@ -21,17 +21,20 @@ public class AddCommand extends Command {
     public String execute(TaskList task, Storage storage) throws IOException {
         task.add(obj);
         storage.appendFile(obj);
+        return getReply();
+    }
 
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    private String getReply() {
         StringBuilder reply = new StringBuilder();
         reply.append(this.speak(Dialogue.ADDED));
         reply.append("\n");
         reply.append(this.obj.toString());
         assert !reply.toString().equals("") : "Description of task cannot be empty";
         return reply.toString();
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

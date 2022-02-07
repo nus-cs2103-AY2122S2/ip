@@ -69,29 +69,15 @@ public class Parser {
         }
 
         if (input[0].equals("todo")) {
-            StringBuilder obj = new StringBuilder("");
-            for (int i = 1; i < input.length; i++) {
-                obj.append(input[i]);
-                obj.append(" ");
-            }
-            return new AddCommand(new ToDos(obj.toString()));
+            String taskName = getTaskString(input);
+            return new AddCommand(new ToDos(taskName));
         } else {
-            int i = 1;
-            StringBuilder obj = new StringBuilder("");
-            for (; i < input.length; i++) {
-                if (input[i].charAt(0) == '/') {
-                    break;
-                }
-                obj.append(input[i]);
-                obj.append(" ");
-            }
-            obj.setLength(obj.length() - 1);
-
+            String taskName = getTaskString(input);
             if (input[0].equals("deadline")) {
-                return new AddCommand(new DeadLine(obj.toString(), input[input.length - 2], input[input.length - 1]));
+                return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
             } else {
                 assert input[0].equals("event");
-                return new AddCommand(new Events(obj.toString(),
+                return new AddCommand(new Events(taskName,
                         input[input.length - 3], input[input.length - 2], input[input.length - 1]));
             }
         }
@@ -114,5 +100,18 @@ public class Parser {
             throw new DukeException("Fill in proper integer for deletion.\n");
         }
         return new DeleteCommand(Integer.parseInt(input[1]));
+    }
+
+    private static String getTaskString(String[] input) {
+        StringBuilder obj = new StringBuilder("");
+        for (int i = 1; i < input.length; i++) {
+            if (input[i].charAt(0) == '/') {
+                break;
+            }
+            obj.append(input[i]);
+            obj.append(" ");
+        }
+        obj.setLength(obj.length() - 1);
+        return obj.toString();
     }
 }
