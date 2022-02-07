@@ -15,6 +15,8 @@ public class SanaResponse {
     public SanaResponse() {}
 
     public String addNewTask(Task taskAdded, Integer totalTaskAmount) {
+        assert totalTaskAmount >= 0;
+        assert taskAdded != null;
         StringBuilder responseText = new StringBuilder();
         responseText.append(addTaskText());
         responseText.append(printTaskInList(taskAdded));
@@ -24,6 +26,8 @@ public class SanaResponse {
     }
 
     public String deleteTask(Task taskDeleted, Integer totalTaskAmount) {
+        assert totalTaskAmount >= 0;
+        assert taskDeleted != null;
         StringBuilder responseText = new StringBuilder();
         responseText.append(deleteTaskText());
         responseText.append(printTaskInList(taskDeleted));

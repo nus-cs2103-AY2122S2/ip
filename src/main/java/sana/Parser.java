@@ -18,6 +18,7 @@ public class Parser {
      * @return              a string of arguments from parsing the command
      */
     public String[] parseCommand(String userCommand) {
+        assert userCommand != null;
         try {
             if (userCommand.equals("bye")) {
                 return new String[] {"bye"};

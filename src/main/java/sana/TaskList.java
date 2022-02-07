@@ -70,6 +70,7 @@ public class TaskList {
      * @param index     index of the sana.task to be removed
      */
     public void removeTask(int index) {
+        assert index < taskList.size();
         taskList.remove(index);
     }
 

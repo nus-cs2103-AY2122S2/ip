@@ -27,13 +27,18 @@ public class Sana {
     /** parser parses the user command */
     private Parser parser;
 
+    /** generates responses from sana */
+    private SanaResponse sanaResponse;
+
     /**
      * Constructor for the Sana class
      */
     public Sana() {
+        this.parser = new Parser();
+        this.sanaResponse = new SanaResponse();
         this.taskMem = new Memory();
         this.userTasks = new TaskList(taskMem.memToList());
-        this.parser = new Parser();
+
     }
 
     /**
@@ -81,6 +86,7 @@ public class Sana {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert input != null;
         return doCommand(input);
     }
 }
