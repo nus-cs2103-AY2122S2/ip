@@ -118,8 +118,12 @@ public class AddCommands extends Commands {
      */
 
     private String addTodoTask(String taskName, TaskList taskList) {
+        //initial size of the task list to check whether task has been successfully deleted.
+        int initialSize = taskList.getCurrentSize();
         TodoTask newTask = new TodoTask(taskName);
         taskList.add(newTask);
+        assert taskList.getCurrentSize() == initialSize + 1 : "Task list should contain one more than the initial size"
+                + " of the existing task list after adding a new task.";
         return printTask(newTask, taskList);
     }
 
@@ -135,8 +139,12 @@ public class AddCommands extends Commands {
      */
 
     private String addDeadlineTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
+        //initial size of the task list to check whether task has been successfully deleted.
+        int initialSize = taskList.getCurrentSize();
         DeadlineTask newTask = new DeadlineTask(taskName, dateTime);
         taskList.add(newTask);
+        assert taskList.getCurrentSize() == initialSize + 1 : "Task list should contain one more than the initial size"
+                + " of the existing task list after adding a new task.";
         return printTask(newTask, taskList);
     }
 
@@ -152,8 +160,12 @@ public class AddCommands extends Commands {
      */
 
     private String addEventTask(String taskName, LocalDateTime dateTime, TaskList taskList) {
+        //initial size of the task list to check whether task has been successfully deleted.
+        int initialSize = taskList.getCurrentSize();
         EventTask newTask = new EventTask(taskName, dateTime);
         taskList.add(newTask);
+        assert taskList.getCurrentSize() == initialSize + 1 : "Task list should contain one more than the initial size"
+                + " of the existing task list after adding a new task.";
         return printTask(newTask, taskList);
     }
 
@@ -174,7 +186,7 @@ public class AddCommands extends Commands {
         return "Quit ordering me around!\n"
                 + "I've added this task to our list:"
                 + "    \n" + newTask.toString()
-                + "\n" + taskList.returnCurrentSize();
+                + "\n" + taskList.printCurrentSize();
     }
 
     /**

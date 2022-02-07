@@ -66,11 +66,16 @@ public class DeleteCommands extends Commands {
 
     private String deleteTask(int index, TaskList taskList) {
         String result = "";
+        //initial size of the task list to check whether task has been successfully deleted.
+        int initialSize = taskList.getCurrentSize();
         Task selectedTask = taskList.get(index - 1);
         result += "YES! I've removed this task and soon I'll remove you as well!:\n";
         result += printTask(selectedTask) + "\n";
         taskList.delete(index - 1);
-        result += taskList.returnCurrentSize();
+        //Assert statement to ensure deletion is successful.
+        assert taskList.getCurrentSize() == initialSize - 1 : "Task list should contain one less element "
+                + "after deletion";
+        result += taskList.printCurrentSize();
         return result;
     }
 
