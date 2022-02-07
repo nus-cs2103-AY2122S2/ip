@@ -77,14 +77,14 @@ public class BetweenCommandTest {
             new BetweenCommand("www and 22/12/2022 14:30").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
 
         try {
             new BetweenCommand("22/12/2022 14:30 and asd").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
     }
 }

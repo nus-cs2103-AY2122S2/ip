@@ -1,8 +1,6 @@
 package duke.command;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
@@ -16,9 +14,6 @@ import duke.util.Printable;
 public abstract class Command {
     protected static final int OFFSET_READABLE_TO_LOGICAL = -1;
     protected static final int OFFSET_LOGICAL_TO_READABLE = 1;
-    protected static final String DEFAULT_TIME = " 00:00";
-    protected static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
-    protected static final String FORMAT_DEFAULT_DATE = "dd/MM/yyyy";
 
     /** Arguments supplied to the command handler. */
     protected final String args;
@@ -74,11 +69,11 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date string is not in a valid format.
      */
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
-        try {
-            return parseDateTime(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
-        } catch (DukeIllegalArgumentException ex) {
-            throw new DukeIllegalArgumentException("Date not in the format " + FORMAT_DEFAULT_DATE);
+        LocalDateTime parsedDate = NaturalDateParser.getInstance().parseDate(dateString);
+        if (parsedDate == null) {
+            throw new DukeIllegalArgumentException("Date not in a known format");
         }
+        return parsedDate;
     }
 
     /**
@@ -89,25 +84,11 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date-time string is not in a valid format.
      */
     protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString, FORMAT_DEFAULT_DATETIME);
-    }
-
-    /**
-     * Translates a patterned string to a {@link LocalDateTime} object based on the given format.
-     *
-     * @param dateString Date-time string to process.
-     * @param pattern Pattern format that the date-time string is in.
-     * @return A {@link LocalDateTime} that represents the supplied date-time.
-     * @throws DukeIllegalArgumentException If the supplied date-time string is not in the given pattern.
-     */
-    protected LocalDateTime parseDateTime(String dateString, String pattern)
-            throws DukeIllegalArgumentException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        try {
-            return LocalDateTime.parse(dateString, formatter);
-        } catch (DateTimeParseException ex) {
-            throw new DukeIllegalArgumentException("Date not in the format " + pattern);
+        LocalDateTime parsedDateTime = NaturalDateParser.getInstance().parseDateTime(dateString);
+        if (parsedDateTime == null) {
+            throw new DukeIllegalArgumentException("DateTime not in a known format");
         }
+        return parsedDateTime;
     }
 
     /**
