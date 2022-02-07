@@ -39,18 +39,15 @@ public class Event extends Task {
      */
     public Event(String saveFormat, boolean isSaved) throws DukeException {
         super(saveFormat);
-        try {
-            String[] strArr = description.split(",");
-            this.description = strArr[1];
-            date = LocalDate.parse(strArr[2]);
-            time = strArr[3];
-            if (Boolean.parseBoolean(strArr[4])) {
-                super.setDone();
-            }
-            super.saveFormat = strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + strArr[3];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException();
+        String[] strArr = description.split(",");
+        assert strArr.length == 5;
+        this.description = strArr[1];
+        date = LocalDate.parse(strArr[2]);
+        time = strArr[3];
+        if (Boolean.parseBoolean(strArr[4])) {
+            super.setDone();
         }
+        super.saveFormat = strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + strArr[3];
     }
 
     /**

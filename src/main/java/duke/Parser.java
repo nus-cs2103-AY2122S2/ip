@@ -37,7 +37,7 @@ public class Parser {
                             throw new InvalidTaskException();
                         }
                     } catch (Exception e) {
-                        throw e;
+                        throw new InvalidTaskException();
                     }
                 }
             }

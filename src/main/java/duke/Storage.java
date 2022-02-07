@@ -60,16 +60,11 @@ public class Storage implements StorageInterface {
             Files.delete(Path.of("Data/tasks.txt"));
         } catch (NoSuchFileException e) {
             File f = new File("Data");
-            f.mkdirs();
+            boolean isDirectoryCreated = f.mkdirs();
+            assert isDirectoryCreated;
         } finally {
             for (Task t: taskList.getTasks()) {
-                try {
-                    writeToFile("Data/tasks.txt", t.getSaveFormat() + "," + t.getStatus() + System.lineSeparator());
-                } catch (FileNotFoundException e) {
-                    File f = new File("Data");
-                    f.mkdirs();
-                    writeToFile("Data/tasks.txt", t.getSaveFormat() + "," + t.getStatus() + System.lineSeparator());
-                }
+                writeToFile("Data/tasks.txt", t.getSaveFormat() + "," + t.getStatus() + System.lineSeparator());
             }
         }
     }

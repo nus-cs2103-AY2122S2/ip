@@ -66,9 +66,10 @@ public class Duke {
                 return taskList.printList();
             default:
                 String[] temp = str.split(" ");
-                if (temp[0].equals("unmark") || temp[0].equals("mark") || temp[0].equals("delete")) {
+                String firstWord = temp[0];
+                if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")) {
                     int taskNumber = Integer.parseInt(temp[1]);
-                    switch (temp[0]) {
+                    switch (firstWord) {
                     case "mark":
                         return taskList.mark(taskNumber);
                     case "unmark":
@@ -76,10 +77,10 @@ public class Duke {
                     case "delete":
                         return taskList.delete(taskNumber);
                     default:
-                        return "Invallid command!";
+                        assert false : firstWord;
                     }
                 } else {
-                    switch (temp[0]) {
+                    switch (firstWord) {
                     case "todo":
                         ToDo todo = new ToDo(str.substring(5));
                         return taskList.addTask(todo);
@@ -92,6 +93,7 @@ public class Duke {
                     case "find":
                         return taskList.find(str.substring(5));
                     default:
+                        assert false : firstWord;
                     }
                 }
             }
