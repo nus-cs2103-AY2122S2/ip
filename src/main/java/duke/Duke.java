@@ -33,10 +33,12 @@ public class Duke {
         // Reading and processing inputs
         Parser Parser = new Parser();
         while (true) {
-            Command nextCommand = Parser.makeCommand(ui.getNextLine()); // Creating the appropriate command
+            // Creating the appropriate command
+            Command nextCommand = Parser.makeCommand(ui.getNextLine());
             nextCommand.execute();
 
-            if (nextCommand instanceof ByeCommand) { // Check for exit command
+            if (nextCommand instanceof ByeCommand) {
+                // Check for exit command
                 break;
             }
         }
