@@ -59,7 +59,7 @@ public class EventCommand extends Command {
             } else {
                 task = new Event(des, nDate, false);
             }
-            nDate.addTask(task); //potential bug
+            nDate.addTask(task);
         } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
             throw new PaggroException("    Really? =.= The use of the event command must be as follows:\n"
                     + "      event <DESCRIPTION> /<DATE AND/OR TIME>");
@@ -67,7 +67,9 @@ public class EventCommand extends Command {
             throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n"
                     + "      YYYY-MM-DD"));
         }
+
         lister.add(task);
+        assert lister.getTasks().size() > 0 : "Tasks should have at least one item";
 
         try {
             storage.addToStorage(task);
