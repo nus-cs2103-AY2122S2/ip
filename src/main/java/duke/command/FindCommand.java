@@ -7,6 +7,9 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/**
+ * The type Fond command.
+ */
 public class FindCommand extends Command {
     private final String keyWord;
 

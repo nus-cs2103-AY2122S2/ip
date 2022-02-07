@@ -96,7 +96,7 @@ public class Ui {
      * @param time                    the date/time
      */
     public String foundTaskOnSameDate(int numberOfTasksOnSameDate, String time) {
-        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "duke/task" : "tasks";
+        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "task" : "tasks";
         return String.format("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
 

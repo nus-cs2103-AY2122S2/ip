@@ -1,3 +1,6 @@
 [D][X] return (by: Sunday, January 23, 2022)
 [E][ ] lecture (at: Wednesday, February 23, 2022)
 [E][ ] party (at: Wednesday, March 23, 2022 0700PM)
+[D][ ] watch lecture (by: Wednesday, March 23, 2022)
+[D][ ] return pot (by: Saturday, February 12, 2022)
+[E][ ] party (at: Friday, December 23, 2022)
