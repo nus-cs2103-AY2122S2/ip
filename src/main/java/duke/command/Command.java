@@ -18,6 +18,7 @@ public abstract class Command {
     protected static final int OFFSET_LOGICAL_TO_READABLE = 1;
     protected static final String DEFAULT_TIME = " 00:00";
     protected static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
+    protected static final String FORMAT_DEFAULT_DATE = "dd/MM/yyyy";
 
     /** Arguments supplied to the command handler. */
     protected final String args;
@@ -73,7 +74,11 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date string is not in a valid format.
      */
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
+        try {
+            return parseDateTime(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
+        } catch (DukeIllegalArgumentException ex) {
+            throw new DukeIllegalArgumentException("Date not in the format " + FORMAT_DEFAULT_DATE);
+        }
     }
 
     /**
