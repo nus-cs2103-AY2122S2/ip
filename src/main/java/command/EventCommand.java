@@ -22,8 +22,8 @@ public class EventCommand extends Command {
      * @param description Description of event
      * @param at location of the event
      */
-    public EventCommand(String description, String at) {
-        this.event = new Event(description, at);
+    public EventCommand(String description, String at, int priority) {
+        this.event = new Event(description, at, priority);
     }
 
     /**

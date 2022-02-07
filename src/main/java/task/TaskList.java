@@ -2,6 +2,7 @@ package task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
@@ -89,6 +90,15 @@ public class TaskList implements Serializable {
         return (ArrayList<Task>) tasks.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(search))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Sort the tasks base on a custom comparator.
+     *
+     * @see Task
+     */
+    public void sort() {
+        Collections.sort(this.tasks);
     }
 }
 

@@ -22,8 +22,8 @@ public class TodoCommand extends Command {
      *
      * @param description Description of todo
      */
-    public TodoCommand(String description) {
-        this.toDo = new ToDo(description);
+    public TodoCommand(String description, int priority) {
+        this.toDo = new ToDo(description, priority);
     }
 
     /**

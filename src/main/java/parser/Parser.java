@@ -31,6 +31,8 @@ public class Parser {
         FIND;
     }
 
+    public static final int DEFAULT_PRIORITY = 999;
+
     /**
      * Processes a raw String command and decides the command.
      * If an error is detected, duke.Duke exception is thrown.
@@ -40,34 +42,43 @@ public class Parser {
      * @throws DukeException If an error occurs when processing a command
      */
     public static Command parse(String fullCommand) throws DukeException {
+        Commands command;
         String response = fullCommand.trim();
+        String[] responseArray;
+        String[] secondSplit;
+        int priority = DEFAULT_PRIORITY;
         if (response.equals("")) {
             return new IncorrectCommand();
         }
-        String[] responseArray;
         responseArray = response.split("\\s+");
-        String[] secondSplit;
-        Commands command;
         if (responseArray.length > 0) {
             try {
                 command = Commands.valueOf(responseArray[0].toUpperCase());
                 String textContent = removeSubString(response.toLowerCase(), responseArray[0].toLowerCase() + " ");
+                // if a command is creating a task, get the priority
+                if (responseArray.length > 1) {
+                    priority = getInt(responseArray[1]);
+                    // remove the priority number from the content of the task message
+                    if (priority != DEFAULT_PRIORITY) {
+                        textContent = removeSubString(response, responseArray[1]);
+                    }
+                }
                 switch (command) {
                 case FIND:
                     return new FindCommand(textContent);
                 case TODO:
-                    return new TodoCommand(textContent);
+                    return new TodoCommand(textContent, priority);
                 case DEADLINE:
                     try {
                         secondSplit = textContent.split(" /by ");
-                        return new DeadlineCommand(secondSplit[0], secondSplit[1]);
+                        return new DeadlineCommand(secondSplit[0], secondSplit[1], priority);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("date or time was not specified! Try again.");
                     }
                 case EVENT:
                     try {
                         secondSplit = textContent.split(" /at ");
-                        return new EventCommand(secondSplit[0], secondSplit[1]);
+                        return new EventCommand(secondSplit[0], secondSplit[1], priority);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("location was not specified! Try again.");
                     }
@@ -117,5 +128,25 @@ public class Parser {
             sb.append(con);
         }
         return sb.toString();
+    }
+
+    /**
+     * Check if a string is a number.
+     *
+     * @param strNum String to compare with
+     * @return Integer -> -1 = not convertible. Otherwise, the value
+     */
+    public static int getInt(String strNum) {
+        int d = DEFAULT_PRIORITY;
+        if (strNum == null || strNum.equals("")) {
+            return DEFAULT_PRIORITY;
+        } else {
+            try {
+                d = Integer.parseInt(strNum);
+            } catch (NumberFormatException nfe) {
+                return d;
+            }
+        }
+        return d;
     }
 }

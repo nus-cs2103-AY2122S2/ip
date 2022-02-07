@@ -12,8 +12,8 @@ public class ToDo extends Task {
      *
      * @param description Description of todo
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, int priority) {
+        super(description, priority);
     }
 
     /**

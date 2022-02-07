@@ -25,9 +25,9 @@ public class DeadlineCommand extends Command {
      * @param by Date/Time of the deadline
      * @throws DukeException If by param fails to parse
      */
-    public DeadlineCommand(String description, String by) throws DukeException {
+    public DeadlineCommand(String description, String by, int priority) throws DukeException {
         try {
-            this.deadline = new Deadline(description, by);
+            this.deadline = new Deadline(description, by, priority);
         } catch (DateTimeParseException e) {
             throw new DukeException("date or time was not formatted correctly. Make sure it is yyyy-MM-dd");
         }

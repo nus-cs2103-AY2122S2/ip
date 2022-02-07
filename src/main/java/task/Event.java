@@ -14,8 +14,8 @@ public class Event extends Task {
      * @param description Description of event
      * @param at location of the event
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, int priority) {
+        super(description, priority);
         this.at = at.trim();
     }
 

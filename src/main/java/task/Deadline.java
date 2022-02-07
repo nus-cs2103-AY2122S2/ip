@@ -30,8 +30,8 @@ public class Deadline extends Task {
      * @param description Description of deadline
      * @param by Date/Time of the deadline
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, int priority) {
+        super(description, priority);
         this.by = by;
         convertToDate(by);
     }

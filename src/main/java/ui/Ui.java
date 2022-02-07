@@ -185,7 +185,7 @@ public class Ui {
      * @return String message of a task
      */
     public String getTaskMessage(Task task) {
-        return task.toString();
+        return task.toString() + "\n";
     }
 
     /**

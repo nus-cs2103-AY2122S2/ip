@@ -156,6 +156,7 @@ public class Duke extends Application {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
+        tasks.sort();
         return Parser.arrayListToString(c.getResponse().getResponseList());
     }
 }
