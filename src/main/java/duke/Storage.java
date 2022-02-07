@@ -18,7 +18,6 @@ public class Storage {
 
     private String filePath;
     private File file;
-    boolean isTaskAdded;
 
     /**
      * Is a constructor for the instance of Storage. This also checks if the directory and file exists, if not
@@ -126,7 +125,12 @@ public class Storage {
         return true;
     }
 
-
+    /**
+     * Read the current line passed in from storage and load a new Deadline object.
+     * @param taskArrayList the current TaskList to be loaded up into.
+     * @param currentCommand the command that is being read.
+     * @return a boolean that returns true when loaded successfully.
+     */
     public boolean loadDeadline(ArrayList<Task> taskArrayList, String currentCommand) throws ParseException {
 
         String date = currentCommand.substring(currentCommand.indexOf('(') + 5, currentCommand.indexOf(')'));
@@ -145,6 +149,12 @@ public class Storage {
         return true;
     }
 
+    /**
+     * Read the current line passed in from storage and load a new Event object.
+     * @param taskArrayList the current TaskList to be loaded up into.
+     * @param currentCommand the command that is being read.
+     * @return a boolean that returns true when loaded successfully.
+     */
     public boolean loadEvent(ArrayList<Task> taskArrayList, String currentCommand) throws ParseException {
         String date = currentCommand.substring(currentCommand.indexOf('(') + 5,
                 currentCommand.indexOf(')'));

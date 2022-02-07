@@ -38,6 +38,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        assert stage.isShowing()  : "stage should be showing";
+        assert stage.isShowing() : "stage should be showing";
     }
 }
