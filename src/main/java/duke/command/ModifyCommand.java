@@ -18,34 +18,34 @@ public class ModifyCommand implements Command {
         int taskNumber = Integer.parseInt(this.commandAndDetails[1]);
         switch (command) {
             case "mark":
-                this.mark(taskNumber, taskList);
+                this.markTask(taskNumber, taskList);
                 break;
             case "unmark":
-                this.unmark(taskNumber, taskList);
+                this.unmarkTask(taskNumber, taskList);
                 break;
             case "delete":
-                this.delete(taskNumber, taskList);
+                this.deleteTask(taskNumber, taskList);
                 break;
         }
         storage.writeToFile(taskList);
         return false;
     }
 
-    public void mark(int taskNumber, TaskList taskList) {
+    public void markTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         task.markAsDone();
         System.out.println("Good job! This task is done:");
         System.out.println("  " + task);
     }
 
-    public void unmark(int taskNumber, TaskList taskList) {
+    public void unmarkTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         task.unmarkAsDone();
         System.out.println("Hurry up and get it done!");
         System.out.println("  " + task);
     }
 
-    public void delete(int taskNumber, TaskList taskList) {
+    public void deleteTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         taskList.removeTask(taskNumber - 1);
         System.out.println("This task has been removed:");
