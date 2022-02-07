@@ -8,18 +8,6 @@ import karen.Ui;
  * Allows for execution of functionalities related to Ui, Storage objects
  */
 public abstract class Command {
-    public Command() {
-    }
-
-    /**
-     * Gets flag marker to indicate if user wishes to exit from application
-     *
-     * @return Flag marker to indicate if program should end
-     */
-    public boolean isExit() {
-        return false;
-    }
-
     /**
      * Executes functionalities in implementations of Commands
      *

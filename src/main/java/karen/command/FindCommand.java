@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import karen.KarenException;
 import karen.Storage;
 import karen.Ui;
 import karen.task.Task;

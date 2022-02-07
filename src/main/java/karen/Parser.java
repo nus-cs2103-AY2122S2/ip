@@ -5,15 +5,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import karen.command.AddCommand;
-import karen.command.ByeCommand;
-import karen.command.Command;
-import karen.command.DeleteCommand;
-import karen.command.FindCommand;
-import karen.command.InvalidCommand;
-import karen.command.ListCommand;
-import karen.command.ModifyCommand;
-import karen.command.ModifyType;
+import karen.command.*;
 import karen.task.Deadline;
 import karen.task.Event;
 import karen.task.ToDo;
@@ -29,8 +21,6 @@ public class Parser {
     public static final Pattern EVENT_FORMAT = Pattern.compile("^event (?<description>.*) \\/at (?<time>.*)$");
     public static final Pattern FIND_FORMAT = Pattern.compile("^find (?<keyTerm>.*)$");
 
-    public static final String NA_MESSAGE = "I don't understand anything - I want to speak with your manager";
-
     /**
      * Validates if dateString parameter follows yyyy-mm-dd format.
      *
@@ -42,7 +32,7 @@ public class Parser {
         try {
             LocalDate.parse(dateString);
         } catch (DateTimeException err) {
-            throw new KarenException("Wrong date formatting. It should be in yyyy-mm-dd");
+            throw new KarenException(InvalidMessage.INVALID_DATE.toString());
         }
         return dateString;
     }
@@ -60,12 +50,12 @@ public class Parser {
         switch (keyWord) {
         case "deadline":
             if (fullInput.matches("^((?!\\/by).)*$")) {
-                cmd = new InvalidCommand("You're missing an /by flag needed to add deadlines");
+                cmd = new InvalidCommand(InvalidMessage.MISSING_BY.toString());
             }
             break;
         case "event":
             if (fullInput.matches("^((?!\\/at).)*$")) {
-                cmd = new InvalidCommand("You're missing an /at flag needed to add events");
+                cmd = new InvalidCommand(InvalidMessage.MISSING_AT.toString());
             }
         default:
             cmd = new InvalidCommand();
@@ -88,22 +78,30 @@ public class Parser {
     private Command prepareAdd(String keyWord, String fullInput) {
         final Matcher matcher;
         try {
-            if (keyWord.equals("todo")) {
+            Command cmd;
+
+            switch (keyWord) {
+            case "todo":
                 matcher = TODO_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new ToDo(matcher.group("description")));
-            } else if (keyWord.equals("deadline")) {
+                cmd = new AddCommand(new ToDo(matcher.group("description")));
+                break;
+            case "deadline":
                 matcher = DEADLINE_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new Deadline(matcher.group("description"),
+                cmd = new AddCommand(new Deadline(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
-            } else if (keyWord.equals("event")) {
+                break;
+            case "event":
                 matcher = EVENT_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new Event(matcher.group("description"),
+                cmd =  new AddCommand(new Event(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
+                break;
+            default:
+                cmd = new InvalidCommand();
             }
-            return new InvalidCommand("How did you invoke this.");
+            return cmd;
         } catch (IllegalStateException err) {
             // indicates that the format isn't valid - can't parse it
             return prepareInvalid(keyWord, fullInput);
@@ -123,7 +121,7 @@ public class Parser {
     private Command prepareModify(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand("Incorrect arguments passed into mark/unmark command");
+            return new InvalidCommand(InvalidMessage.INCORRECT_MODIFY.toString());
         }
 
         Command cmd;
@@ -135,7 +133,7 @@ public class Parser {
             cmd = new ModifyCommand(Integer.valueOf(matcher.group("index")) - 1, ModifyType.UNMARK);
             break;
         default:
-            cmd = new InvalidCommand("How did this even get here.");
+            return new InvalidCommand();
         }
 
         // default case should be a catch-all for initialising InvalidCommand with a default message
@@ -155,13 +153,13 @@ public class Parser {
     private Command prepareDelete(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand("Incorrect arguments passed into delete command");
+            return new InvalidCommand(InvalidMessage.MISSING_DELETE.toString());
         }
 
         try {
             return new DeleteCommand(Integer.valueOf(matcher.group("index")) - 1);
         } catch (IllegalStateException err) {
-            return new InvalidCommand("Missing arguments for delete command");
+            return new InvalidCommand(InvalidMessage.INCORRECT_DELETE.toString());
         }
     }
 
@@ -175,7 +173,7 @@ public class Parser {
     private Command prepareFind(String keyWord, String fullInput) {
         final Matcher matcher = FIND_FORMAT.matcher(fullInput.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("'find' command needs a term to even search with");
+            return new InvalidCommand(InvalidMessage.INCORRECT_FIND.toString());
         }
 
         return new FindCommand(matcher.group("keyTerm"));
@@ -191,7 +189,7 @@ public class Parser {
         // extract first word
         final Matcher matcher = KEYWORD_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand(NA_MESSAGE);
+            return new InvalidCommand();
         }
 
         String keyWord = matcher.group("keyWord");
@@ -220,7 +218,7 @@ public class Parser {
             getCommand = prepareFind(keyWord, fullInput);
             break;
         default:
-            getCommand = new InvalidCommand(NA_MESSAGE);
+            getCommand = new InvalidCommand();
             break;
         };
         return getCommand;

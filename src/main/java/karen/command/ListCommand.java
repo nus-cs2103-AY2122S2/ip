@@ -7,9 +7,6 @@ import karen.Ui;
  * To list objects currently in Storage
  */
 public class ListCommand extends Command {
-    public ListCommand() {
-    }
-
     /**
      * Returns string representation of current taskList from Storage.
      *
