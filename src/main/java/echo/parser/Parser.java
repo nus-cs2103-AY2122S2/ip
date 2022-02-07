@@ -35,7 +35,6 @@ public class Parser {
      */
     public static Command parse(String input) throws EchoException {
         try {
-            // Split input based on white spaces.
             String[] splitSpace = input.split(" ");
             String command = splitSpace[0];
 
@@ -47,16 +46,14 @@ public class Parser {
             case DeadlineCommand.COMMAND:
                 // Fallthrough
             case EventCommand.COMMAND:
-                // Split input based on /.
                 String[] splitSlash = input.split("/");
 
-                // Description of task.
                 String desc = splitSlash[0].substring(command.length() + 1).trim();
 
                 String dateTimeString;
                 LocalDateTime localDateTime;
 
-                // If second input (description) is not specified, throw EchoException.
+                // If second input (description) is not specified.
                 if (splitSpace.length == 1) {
                     throw new EchoException(String.format("The description of a %s cannot be empty.", input));
                 }
@@ -64,7 +61,6 @@ public class Parser {
                 if (command.equals(TodoCommand.COMMAND)) {
                     return prepareTodoCommand(desc);
                 } else {
-                    // "/" not specified in input.
                     if (!input.contains("/")) {
                         throw new EchoException("Please specify the time of the task: \n"
                                 + "<command> <description> /by <yyyy-mm-dd> <24hr time>");
@@ -90,8 +86,8 @@ public class Parser {
             case UnmarkCommand.COMMAND:
                 // Fallthrough
             case DeleteCommand.COMMAND:
+                // If second input (task number) is not specified.
                 if (splitSpace.length == 1) {
-                    // If second input (task number) is not specified
                     throw new EchoException("Please specify the task number. Eg. mark 1");
                 }
 
@@ -110,8 +106,8 @@ public class Parser {
                     throw new EchoException("Second input must be an integer. Eg. mark 1");
                 }
             case FindCommand.COMMAND:
+                // If second input (description) is not specified
                 if (splitSpace.length == 1) {
-                    // If second input (description) is not specified
                     throw new EchoException("Please specify the description to find!");
                 }
                 return prepareFindCommand(input.substring(command.length() + 1).trim());

@@ -52,13 +52,10 @@ public class Storage {
      * @throws EchoException If file at FILE_PATH is not formatted properly.
      */
     public TaskList load() throws FileNotFoundException, EchoException {
-        // Create a File using FILE_PATH.
         File file = new File(FILE_PATH);
 
-        // Create a Scanner using the File as the source.
         Scanner s = new Scanner(file);
 
-        // TaskList to contain tasks loaded from file.
         TaskList tasks = new TaskList();
 
         // Directory that the file is located in.
@@ -69,16 +66,11 @@ public class Storage {
             directory.mkdir();
         }
 
-        // Loads line by line.
         while (s.hasNext()) {
             String line = s.nextLine();
             try {
                 String[] split = line.split(Pattern.quote(" | "));
-
-                // Type of task.
                 String type = split[0];
-
-                // Description of task.
                 String desc = split[2];
 
                 // Local Date Time for DeadlineTask and EventTask.
