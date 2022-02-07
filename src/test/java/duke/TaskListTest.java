@@ -8,7 +8,7 @@ import duke.task.ToDo;
 import duke.util.TaskList;
 
 public class TaskListTest {
-    private final TaskList tasks = new TaskList();
+    private TaskList tasks = new TaskList();
 
     @Test
     public void size_success() {

@@ -22,39 +22,36 @@ public class Parser {
      * @throws DukeException when the command is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        switch (fullCommand) {
-        case "bye":
+        if (fullCommand.equals("bye")) {
             return new ByeCommand();
-        case "list":
+        } else if (fullCommand.equals("list")) {
             return new ListCommand();
-        case "todo":
+        } else if (fullCommand.equals("todo")) {
             throw new DukeException("The description of a todo cannot be empty.");
-        default:
+        } else {
             String[] commandArr = fullCommand.split(" ");
             if (commandArr.length > 1) {
                 String type = commandArr[0];
                 String description = commandArr[1];
-                switch (type) {
-                case "find":
+                if (type.equals("find")) {
                     return new FindCommand(description);
-                case "todo":
+                } else if (type.equals("todo")) {
                     return new ToDoCommand(description);
-                case "deadline":
+                } else if (type.equals("deadline")) {
                     String by = fullCommand.split(" /by ")[1];
                     return new DeadlineCommand(description, by);
-                case "event":
+                } else if (type.equals("event")) {
                     String at = fullCommand.split(" /at ")[1];
                     return new EventCommand(description, at);
-                default:
+                } else {
                     int index = Integer.parseInt(description) - 1;
-                    switch (type) {
-                    case "mark":
+                    if (type.equals("mark")) {
                         return new MarkCommand(index);
-                    case "unmark":
+                    } else if (type.equals("unmark")) {
                         return new UnmarkCommand(index);
-                    case "delete":
+                    } else if (type.equals("delete")) {
                         return new DeleteCommand(index);
-                    default:
+                    } else {
                         throw new DukeException("Sorry, but I don't know what that means :-(");
                     }
                 }

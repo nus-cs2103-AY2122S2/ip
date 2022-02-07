@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
      * @param storage  Storage of Duke.
      * @param tasks Task list of Duke.
      * @param ui User interface of Duke.
-     * @throws DukeException If there is a problem updating the storage or user interface.
+     * @throws DukeException if there is a problem updating the storage or user interface.
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.unmark(index);

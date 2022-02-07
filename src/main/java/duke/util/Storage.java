@@ -15,7 +15,7 @@ import duke.task.ToDo;
  * Represents Duke's storage for tasks.
  */
 public class Storage {
-    private final String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -23,7 +23,7 @@ public class Storage {
 
     /**
      * Loads saved tasks to the task list.
-     * @return A list of tasks.
+     * @returns A list of tasks.
      * @throws DukeException when tasks file or directory is not found.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -67,7 +67,7 @@ public class Storage {
      * @throws DukeException when tasks cannot be saved.
      */
     public void save(TaskList tasks) throws DukeException {
-        StringBuilder sb = new StringBuilder();
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(tasks.get(i).save());
         }
