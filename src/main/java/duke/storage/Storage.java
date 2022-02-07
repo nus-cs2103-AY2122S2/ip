@@ -62,24 +62,24 @@ public class Storage {
         while (sc.hasNext()) {
             String task = sc.nextLine();
             String[] taskData = task.split("\\s\\|\\s");
-            boolean completed = Integer.parseInt(taskData[1]) == 1;
+            boolean isDone = Integer.parseInt(taskData[1]) == 1;
 
             if (task.charAt(0) == 'T') {
                 Todo todo = new Todo(taskData[2]);
 
-                todo.setCompleted(completed);
+                todo.setCompleted(isDone);
                 allTasks.add(todo);
             } else if (task.charAt(0) == 'D') {
                 Deadline deadline = new Deadline(
                         taskData[2], LocalDate.parse(taskData[3]));
 
-                deadline.setCompleted(completed);
+                deadline.setCompleted(isDone);
                 allTasks.add(deadline);
             } else if (task.charAt(0) == 'E') {
                 Event event = new Event(
                         taskData[2], LocalDate.parse(taskData[3]));
 
-                event.setCompleted(completed);
+                event.setCompleted(isDone);
                 allTasks.add(event);
             }
         }
