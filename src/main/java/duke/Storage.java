@@ -1,4 +1,4 @@
-package duke.duke;
+package duke;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,7 +24,6 @@ public class Storage {
      * @throws IOException If file not found.
      * @throws ClassNotFoundException If unable to find Task class to cast ArrayList to.
      */
-
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         FileInputStream readData = new FileInputStream("data/duke.ser");
         ObjectInputStream readStream = new ObjectInputStream(readData);
@@ -43,7 +42,6 @@ public class Storage {
      *
      * @param arr Current task list.
      */
-
     public void save(ArrayList<Task> arr) {
         File directory = new File("data");
         if (!directory.exists()) {
@@ -61,8 +59,15 @@ public class Storage {
         }
     }
 
-    public void exit(ArrayList<Task> arr) {
+    /**
+     * Will invoke save command to save the current list into data/duke.ser to be loaded in future
+     * sessions. Then, it will bid farewell to the user.
+     *
+     * @param arr The list of tasks that Duke has for the current session.
+     * @return An acknowledgement that the session has ended.
+     */
+    public String exit(ArrayList<Task> arr) {
         save(arr);
-        System.out.println("Goodbye! I'll be here if you need anything else.");
+        return "Goodbye! I'll be here if you need anything else.";
     }
 }
