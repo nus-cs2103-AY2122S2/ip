@@ -14,19 +14,20 @@ import java.time.LocalDate;
  * AddCommand class that identifies the task type and adds it into the tastlist.
  */
 public class AddCommand extends Command {
+
     private TaskType taskType;
-    private String[] info;
+    private String[] tokens;
 
     public enum TaskType { TODO, DEADLINE, EVENT };
 
     /**
      * Constructs the AddCommand object.
      * @param taskType the type of the Task to be added.
-     * @param info a String array that stores information of the task to be added.
+     * @param tokens a String array that stores information of the task to be added.
      */
-    public AddCommand(TaskType taskType, String[] info) {
+    public AddCommand(TaskType taskType, String[] tokens) {
         this.taskType = taskType;
-        this.info = info;
+        this.tokens = tokens;
     }
 
     @Override
@@ -34,27 +35,27 @@ public class AddCommand extends Command {
         System.out.println("Nicely! I've added for you:");
 
         switch(taskType) {
-            case TODO: {
-                ToDo task = new ToDo(info[0]);
-                taskArrayList.add(task);
-                ui.print(task.toString());
-                ui.print(taskArrayList.getTasksStatus());
-                break;
-            }
-            case DEADLINE: {
-                Deadline task = new Deadline(info[0].trim(), LocalDate.parse(info[1]));
-                taskArrayList.add(task);
-                ui.print(task.toString());
-                ui.print(taskArrayList.getTasksStatus());
-                break;
-            }
-            case EVENT: {
-                Event task = new Event(info[0].trim(), LocalDate.parse(info[1]));
-                taskArrayList.add(task);
-                ui.print(task.toString());
-                ui.print(taskArrayList.getTasksStatus());
-                break;
-            }
+        case TODO:
+            ToDo toDo = new ToDo(tokens[0]);
+            taskArrayList.add(toDo);
+            ui.print(toDo.toString());
+            ui.print(taskArrayList.getTasksStatus());
+            break;
+
+        case DEADLINE:
+            Deadline deadline = new Deadline(tokens[0].trim(), LocalDate.parse(tokens[1]));
+            taskArrayList.add(deadline);
+            ui.print(deadline.toString());
+            ui.print(taskArrayList.getTasksStatus());
+            break;
+
+        case EVENT:
+            Event event = new Event(tokens[0].trim(), LocalDate.parse(tokens[1]));
+            taskArrayList.add(event);
+            ui.print(event.toString());
+            ui.print(taskArrayList.getTasksStatus());
+            break;
+
         }
         storage.saveFile(taskArrayList.getTasks());
     }

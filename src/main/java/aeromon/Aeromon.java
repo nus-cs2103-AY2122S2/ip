@@ -37,6 +37,7 @@ public class Aeromon {
     public void start() {
         ui.greet();
         boolean isBye = false;
+
         while (!isBye) {
             try {
                 String fullCommand = ui.readCommand();

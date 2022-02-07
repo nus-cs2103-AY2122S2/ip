@@ -2,9 +2,9 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.Ui;
 import aeromon.task.Task;
 import aeromon.task.TaskArrayList;
+import aeromon.Ui;
 
 /**
  * EditCommand handles the commands which edit the tasks in the TaskArrayList.
@@ -28,33 +28,31 @@ public class EditCommand extends Command {
 
     @Override
     public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+
         if (taskNum < 1 || taskNum > taskArrayList.getSize()) {
             throw new AeromonException("Nani is that task number, sir?\n");
         } else {
+            int index = taskNum - 1;
+
             switch (editType) {
-                case MARK: {
-                    int index = taskNum - 1;
-                    Task temp = taskArrayList.get(index);
-                    temp.markAsDone();
-                    storage.saveFile(taskArrayList.getTasks());
-                    break;
-                }
-                case UNMARK: {
-                    int index = taskNum - 1;
-                    Task temp = taskArrayList.get(index);
-                    temp.markAsNotDone();
-                    storage.saveFile(taskArrayList.getTasks());
-                    break;
-                }
-                case DELETE: {
-                    int index = taskNum - 1;
-                    taskArrayList.delete(index);
-                    storage.saveFile(taskArrayList.getTasks());
-                    break;
-                }
+            case MARK:
+                Task markTask = taskArrayList.get(index);
+                markTask.markAsDone();
+                storage.saveFile(taskArrayList.getTasks());
+                break;
+
+            case UNMARK:
+                Task unmarkTask = taskArrayList.get(index);
+                unmarkTask.markAsNotDone();
+                storage.saveFile(taskArrayList.getTasks());
+                break;
+
+            case DELETE:
+                taskArrayList.delete(index);
+                storage.saveFile(taskArrayList.getTasks());
+                break;
+
             }
         }
     }
-
-
 }

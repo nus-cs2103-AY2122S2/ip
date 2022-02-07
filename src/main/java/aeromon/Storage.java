@@ -17,6 +17,7 @@ import java.util.Scanner;
  * Storage class handles the loading and saving tasks in the file.
  */
 public class Storage {
+
     private File localTasks;
 
     /**
@@ -33,6 +34,7 @@ public class Storage {
      * @throws AeromonException when an error occurs when reading the file.
      */
     public ArrayList<Task> getFile() throws AeromonException {
+        
         try {
             if (localTasks.createNewFile()) {
                 return new ArrayList<>();
@@ -43,23 +45,24 @@ public class Storage {
 
                 while (fileScanner.hasNextLine()) {
                     String content = fileScanner.nextLine();
-                    String[] info = content.split(" / ");
-                    switch (info[0]) {
-                        case "T": {
-                            ToDo task = new ToDo(info[2]);
-                            tasks.add(task);
-                            break;
-                        }
-                        case "D": {
-                            Deadline task = new Deadline(info[2], LocalDate.parse(info[3], dateTimeFormatter));
-                            tasks.add(task);
-                            break;
-                        }
-                        case "E": {
-                            Event task = new Event(info[2], LocalDate.parse(info[3],dateTimeFormatter));
-                            tasks.add(task);
-                            break;
-                        }
+                    String[] tokens = content.split(" / ");
+
+                    switch (tokens[0]) { //tokens[0] indicates the task type
+                    case "T":
+                        ToDo toDo = new ToDo(tokens[2]);
+                        tasks.add(toDo);
+                        break;
+
+                    case "D":
+                        Deadline deadline = new Deadline(tokens[2], LocalDate.parse(tokens[3], dateTimeFormatter));
+                        tasks.add(deadline);
+                        break;
+
+                    case "E":
+                        Event event = new Event(tokens[2], LocalDate.parse(tokens[3], dateTimeFormatter));
+                        tasks.add(event);
+                        break;
+
                     }
                 }
                 fileScanner.close();
@@ -76,6 +79,7 @@ public class Storage {
      */
     public void saveFile(ArrayList<Task> tasks) {
         String content = "";
+
         for (int i = 0; i < tasks.size(); i++) {
             content += tasks.get(i).toOutputFormat() + "\n";
         }

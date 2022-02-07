@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Deadline class handles the Deadline Task type.
  */
 public class Deadline extends Task {
+
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate by;
 

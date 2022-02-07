@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Event class handles the Event Task type.
  */
 public class Event extends Task {
+
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate at;
 

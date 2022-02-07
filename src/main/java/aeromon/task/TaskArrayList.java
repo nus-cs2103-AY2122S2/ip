@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * TaskArrayList class handles the ArrayLists specifically for the Task object types.
  */
 public class TaskArrayList {
+
     private ArrayList<Task> tasks;
 
     /**
@@ -65,6 +66,7 @@ public class TaskArrayList {
      */
     public String getTaskList() {
         String list = "Konnichiwassup! Look at how much work you have to do!\n";
+
         for (int i = 0; i < tasks.size(); i++) {
             list += (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }

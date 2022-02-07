@@ -4,6 +4,7 @@ package aeromon.task;
  * Task class handles the different type of tasks.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
