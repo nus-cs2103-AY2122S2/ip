@@ -24,9 +24,9 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
-            return ui.showEmptyList();
+            return ui.getEmptyListMessage();
         }
 
-        return ui.showList(tasks.toString());
+        return ui.getListMessage(tasks.toString());
     }
 }

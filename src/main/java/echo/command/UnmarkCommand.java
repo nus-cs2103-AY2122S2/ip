@@ -43,7 +43,7 @@ public class UnmarkCommand extends Command {
         try {
             tasks.unmark(TASK_INDEX);
             storage.save(tasks);
-            return ui.showUnmark(tasks.taskStatus(TASK_INDEX));
+            return ui.getUnmarkMessage(tasks.taskStatus(TASK_INDEX));
         } catch (IndexOutOfBoundsException e) {
             // Task number provided by user does not exist in tasks.
             throw new EchoException(String.format("Task %d does not exist!", TASK_INDEX + 1));

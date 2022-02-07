@@ -6,13 +6,22 @@ package echo.ui;
 public class Ui {
 
     /**
+     * Returns the opening message.
+     *
+     * @return Opening message.
+     */
+    public String getOpeningMessage() {
+        return "Hi, my name is Echo, what can I do for you?";
+    }
+
+    /**
      * Returns error message.
      *
      * @param errorMessage Error message.
      *
      * @return String of error message.
      */
-    public String showError(String errorMessage) {
+    public String getErrorMessage(String errorMessage) {
         return errorMessage;
     }
 
@@ -21,7 +30,7 @@ public class Ui {
      *
      * @return String message for empty task list.
      */
-    public String showEmptyList() {
+    public String getEmptyListMessage() {
         return "Task list is empty!";
     }
 
@@ -33,7 +42,7 @@ public class Ui {
      *
      * @return String message that task is added.
      */
-    public String showAdd(String taskStatus, int size) {
+    public String getAddMessage(String taskStatus, int size) {
         return "Got it. I've added this task: \n"
                 + "  " + taskStatus + "\n"
                 + String.format("Now you have %d tasks in the list.", size);
@@ -46,7 +55,7 @@ public class Ui {
      *
      * @return String message that task is marked.
      */
-    public String showMark(String taskStatus) {
+    public String getMarkMessage(String taskStatus) {
         return "Nice! The task is marked as done: \n" + "  " + taskStatus;
     }
 
@@ -57,7 +66,7 @@ public class Ui {
      *
      * @return String message that task is marked.
      */
-    public String showUnmark(String taskStatus) {
+    public String getUnmarkMessage(String taskStatus) {
         return "OK! The task is unmarked: \n" + "  " + taskStatus;
     }
 
@@ -69,7 +78,7 @@ public class Ui {
      *
      * @return String message that task is deleted.
      */
-    public String showDelete(String taskStatus, int size) {
+    public String getDeleteMessage(String taskStatus, int size) {
         return "Noted. I've removed the task: \n"
                 + "  " + taskStatus + "\n"
                 + String.format("Now you have %d tasks in the list.", size);
@@ -82,7 +91,7 @@ public class Ui {
      *
      * @return String representation of task list.
      */
-    public String showList(String s) {
+    public String getListMessage(String s) {
         return s;
     }
 
@@ -94,7 +103,7 @@ public class Ui {
      *
      * @return String message of task that matches the user input.
      */
-    public String showFind(String s) {
+    public String getFindMessage(String s) {
         return "Here are the matching tasks in your list:\n" + s;
     }
 
@@ -103,7 +112,7 @@ public class Ui {
      *
      * @return String message that task could not be found.
      */
-    public String showCantFind() {
+    public String getCantFindMessage() {
         return "No task with that description";
     }
 
@@ -112,7 +121,7 @@ public class Ui {
      *
      * @return String message showing commands available.
      */
-    public String showHelp() {
+    public String getHelpMessage() {
         return "Commands: \n"
                 + "- list \n"
                 + "- todo <description> \n"
@@ -130,7 +139,7 @@ public class Ui {
      *
      * @return String message goodbye.
      */
-    public String sayBye() {
+    public String getByeMessage() {
         return "Goodbye!";
     }
 }

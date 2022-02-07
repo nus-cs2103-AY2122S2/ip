@@ -31,13 +31,31 @@ public class Echo {
     public Echo(String filePath) {
         UI = new Ui();
         STORAGE = new Storage(filePath);
+        tasks = new TaskList();
+    }
+
+    /**
+     * Returns the opening message.
+     *
+     * @return Opening message.
+     */
+    public String getOpeningMessage() {
+        return UI.getOpeningMessage();
+    }
+
+    /**
+     * Returns the status of loading the data file.
+     *
+     * @return Status of loading data file.
+     */
+    public String loadFile() {
         try {
             tasks = new TaskList(STORAGE.load());
+            return "Loading data file: Success";
         } catch (FileNotFoundException e) {
-            tasks = new TaskList();
+            return "Data file not found\n" + e.getMessage();
         } catch (EchoException e) {
-            UI.showError(e.getMessage().concat("\n Creating new list"));
-            tasks = new TaskList();
+            return "Loading data file: Failed\n" + e.getMessage();
         }
     }
 
@@ -53,7 +71,7 @@ public class Echo {
             Command c = Parser.parse(input);
             return c.execute(tasks, UI, STORAGE);
         } catch (EchoException e) {
-            return UI.showError(e.getMessage());
+            return UI.getErrorMessage(e.getMessage());
         }
     }
 }

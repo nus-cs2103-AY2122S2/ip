@@ -13,73 +13,73 @@ public class UiTest {
 
     @Test
     @DisplayName("Empty list message should be shown")
-    public void showEmptyList_noInput_emptyListMessage() {
+    public void getEmptyListMessage_noInput_emptyListMessage() {
         String message = "Task list is empty!";
-        assertEquals(message, ui.showEmptyList());
+        assertEquals(message, ui.getEmptyListMessage());
     }
 
     @Test
     @DisplayName("Add task message should be shown")
-    public void showAdd_validTaskStatus_expectedAddMessage() {
+    public void getAddMessage_validTaskStatus_expectedAddMessage() {
         String taskStatus = "1. [T][ ] read book";
         String message = "Got it. I've added this task: \n"
                 + "  " + taskStatus + "\n"
                 + "Now you have 1 tasks in the list.";
-        assertEquals(message, ui.showAdd(taskStatus, 1));
+        assertEquals(message, ui.getAddMessage(taskStatus, 1));
     }
 
     @Test
     @DisplayName("Mark message should be shown")
-    public void showMark_validTaskStatus_expectedMarkMessage() {
+    public void getMarkMessage_validTaskStatus_expectedMarkMessage() {
         String taskStatus = "1. [T][X] read book";
         String message = "Nice! The task is marked as done: \n" + "  " + taskStatus;
-        assertEquals(message, ui.showMark(taskStatus));
+        assertEquals(message, ui.getMarkMessage(taskStatus));
     }
 
     @Test
     @DisplayName("Unmark message should be shown")
-    public void showUnmark_validTaskStatus_expectedUnmarkMessage() {
+    public void getUnmarkMessage_validTaskStatus_expectedUnmarkMessage() {
         String taskStatus = "1. [T][ ] read book";
         String message = "OK! The task is unmarked: \n" + "  " + taskStatus;
-        assertEquals(message, ui.showUnmark(taskStatus));
+        assertEquals(message, ui.getUnmarkMessage(taskStatus));
     }
 
     @Test
     @DisplayName("Delete message should be shown")
-    public void showDelete_validTaskStatus_expectedDeleteMessage() {
+    public void getDeleteMessage_validTaskStatus_expectedDeleteMessage() {
         String taskStatus = "1. [T][ ] read book";
         String message = "Noted. I've removed the task: \n"
                 + "  " + taskStatus + "\n"
                 + String.format("Now you have %d tasks in the list.", 1);
-        assertEquals(message, ui.showDelete(taskStatus, 1));
+        assertEquals(message, ui.getDeleteMessage(taskStatus, 1));
     }
 
     @Test
     @DisplayName("List message should be shown")
-    public void showList_validListStatus_expectedListMessage() {
+    public void getListMessage_validListStatus_expectedListMessage() {
         String message = "1. [T][ ] read book";
-        assertEquals(message, ui.showList(message));
+        assertEquals(message, ui.getListMessage(message));
     }
 
     @Test
     @DisplayName("Find message should be shown")
-    public void showFind_validTaskStatus_expectedFindMessage() {
+    public void getFindMessage_validTaskStatus_expectedFindMessage() {
         String taskStatus = "1. [T][ ] read book";
         String message = "Here are the matching tasks in your list:\n" + taskStatus;
-        assertEquals(message, ui.showFind(taskStatus));
+        assertEquals(message, ui.getFindMessage(taskStatus));
     }
 
     @Test
     @DisplayName("Cant find message should be shown")
-    public void showCantFind_noInput_expectedCantFindMessage() {
+    public void getCantFindMessage_noInput_expectedCantFindMessage() {
         String message = "No task with that description";
-        assertEquals(message, ui.showCantFind());
+        assertEquals(message, ui.getCantFindMessage());
     }
 
     @Test
     @DisplayName("Bye message should be shown")
-    public void byeMessage_noInput_expectedByeMessage() {
+    public void getByeMessage_noInput_expectedByeMessage() {
         String message = "Goodbye!";
-        assertEquals(message, ui.sayBye());
+        assertEquals(message, ui.getByeMessage());
     }
 }

@@ -43,7 +43,7 @@ public class MarkCommand extends Command {
         try {
             tasks.mark(TASK_INDEX);
             storage.save(tasks);
-            return ui.showMark(tasks.taskStatus(TASK_INDEX));
+            return ui.getMarkMessage(tasks.taskStatus(TASK_INDEX));
         } catch (IndexOutOfBoundsException e) {
             // Task number provided by user does not exist in tasks.
             throw new EchoException(String.format("Task %d does not exist!", TASK_INDEX + 1));

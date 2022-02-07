@@ -50,7 +50,7 @@ public class EventCommand extends Command {
         try {
             tasks.add(new EventTask(DESCRIPTION, DATE_TIME));
             storage.save(tasks);
-            return ui.showAdd(tasks.taskStatus(tasks.size() - 1), tasks.size());
+            return ui.getAddMessage(tasks.taskStatus(tasks.size() - 1), tasks.size());
         } catch (IOException e) {
             throw new EchoException("Unable to access folder: " + storage.filePath());
         }

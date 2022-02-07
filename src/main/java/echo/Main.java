@@ -31,6 +31,8 @@ public class Main extends Application {
             stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setEcho(echo);
+            fxmlLoader.<MainWindow>getController().greet();
+            fxmlLoader.<MainWindow>getController().loadFile();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

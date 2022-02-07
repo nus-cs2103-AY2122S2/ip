@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             String taskStatus = tasks.taskStatus(TASK_INDEX);
             tasks.delete(TASK_INDEX);
             storage.save(tasks);
-            return ui.showDelete(taskStatus, tasks.size());
+            return ui.getDeleteMessage(taskStatus, tasks.size());
         } catch (IndexOutOfBoundsException e) {
             // Task number provided by user does not exist in tasks.
             throw new EchoException(String.format("Task %d does not exist!", TASK_INDEX + 1));

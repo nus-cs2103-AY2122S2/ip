@@ -44,7 +44,7 @@ public class TodoCommand extends Command {
         try {
             tasks.add(new TodoTask(DESCRIPTION));
             storage.save(tasks);
-            return ui.showAdd(tasks.taskStatus(tasks.size() - 1), tasks.size());
+            return ui.getAddMessage(tasks.taskStatus(tasks.size() - 1), tasks.size());
         } catch (IOException e) {
             throw new EchoException("Unable to access folder: " + storage.filePath());
         }

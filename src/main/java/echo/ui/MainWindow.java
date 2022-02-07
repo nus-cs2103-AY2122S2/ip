@@ -40,9 +40,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().add(
-                DialogBox.getEchoDialog("Hi, my name is Echo, what can I do for you?",
-                        echoImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -53,6 +50,26 @@ public class MainWindow extends AnchorPane {
      */
     public void setEcho(Echo e) {
         echo = e;
+    }
+
+    /**
+     * Creates a dialog container with the opening message.
+     */
+    @FXML
+    public void greet() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getEchoDialog(echo.getOpeningMessage(), echoImage)
+        );
+    }
+
+    /**
+     * Creates a dialog container with the status of loading data file.
+     */
+    @FXML
+    public void loadFile() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getEchoDialog(echo.loadFile(), echoImage)
+        );
     }
 
     /**

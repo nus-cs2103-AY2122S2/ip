@@ -38,10 +38,10 @@ public class FindCommand extends Command {
         String find = tasks.find(DESCRIPTION);
 
         if (find.length() == 0) {
-            return ui.showCantFind();
+            return ui.getCantFindMessage();
         }
 
-        return ui.showFind(find);
+        return ui.getFindMessage(find);
 
     }
 }
