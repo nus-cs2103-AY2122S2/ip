@@ -12,6 +12,7 @@ public class Parser {
 
     /**
      * Method to parse input
+     *
      * @param input input string
      * @return a command
      * @throws ExceptionHandler

@@ -23,6 +23,7 @@ public class Ui {
 
     /**
      * Method displaying errors
+     *
      * @param message the error message
      */
     public void showError(String message) {
@@ -50,6 +51,7 @@ public class Ui {
 
     /**
      * method to print the message
+     *
      * @param message to be printed
      */
     public void println(String message) {
@@ -58,6 +60,7 @@ public class Ui {
     }
     /**
      * method to print tasks
+     *
      * @param task to be printed
      */
     public void println(Task task) {

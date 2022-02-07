@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * constructor for Task
+     *
      * @param d task descriptiom
      */
     public Task(String d) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * constructor for Task
+     *
      * @param d task description
      * @param done check if task is done
      */
@@ -34,6 +36,7 @@ public class Task {
 
     /**
      * method to return the description of the task
+     *
      * @return A string representing the description
      */
     public String getDescription() {

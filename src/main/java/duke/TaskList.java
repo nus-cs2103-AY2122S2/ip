@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * method to remove task in the list
+     *
      * @param index task to be removed
      * @return a list of task
      * @throws ExceptionHandler
