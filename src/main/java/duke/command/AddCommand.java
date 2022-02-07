@@ -3,13 +3,29 @@ package duke.command;
 import duke.*;
 import duke.task.*;
 
+/**
+ * Represents a command for adding tasks.
+ */
 public class AddCommand implements Command {
     protected String[] commandAndDetails;
 
+    /**
+     * Constructor for an AddCommand object.
+     *
+     * @param commandAndDetails the specific task command and details of the task.
+     */
     public AddCommand(String[] commandAndDetails) {
         this.commandAndDetails = commandAndDetails;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param taskList the list of the tasks a user has.
+     * @param ui an instance of a user interface.
+     * @param storage a storage used to save the user's tasks.
+     * @return a boolean indicating whether it is an exit command.
+     */
     public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         String command = this.commandAndDetails[0];
         String details = this.commandAndDetails[1];
