@@ -30,8 +30,9 @@ public class TaskList {
      * To add a task into the list of tasks of the user.
      * @param task the object task that has been created.
      */
-    public void addTask(Task task) {
+    public boolean addTask(Task task) {
         taskArrayList.add(task);
+        return true;
     }
 
     /**
