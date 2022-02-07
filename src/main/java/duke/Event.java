@@ -26,6 +26,8 @@ public class Event extends Task {
      */
     @Override
     public String toString(){
+        assert (name != "" || name != null) : "Invalid: Event has no name";
+        assert (time != "" || time != null) : "Invalid: Event has no time";
         return String.format("%d. [E][%s] %s (at: %s)\n", number + 1, getStatus(), name, this.time);
     }
 }

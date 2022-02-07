@@ -34,6 +34,7 @@ public class Parser {
      */
     public static String parseInput(String input, TaskList taskList) {
         String s;
+        assert taskList.tasklist != null : "Invalid: Tasklist is null!";
         if (input.equals("list")) {
             s = Ui.printAllTasks(taskList);
         } else if (input.startsWith("delete")) {

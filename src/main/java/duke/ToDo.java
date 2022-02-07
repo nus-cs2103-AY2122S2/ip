@@ -23,6 +23,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString(){
+        assert (name != "" || name != null) : "Invalid: Deadline has no name";
         String s = String.format("%d. [T][%s] %s\n", number + 1, getStatus(), name);
         return s;
     }

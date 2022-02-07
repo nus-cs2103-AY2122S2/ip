@@ -121,8 +121,9 @@ public class Task {
     /**
      * Decrements number associated with the task.
      */
-    public void decrementNum(){
+    public void decrementNum() {
         this.number--;
+        assert this.number >= 0 : "Invalid: Task has Negative number! (function called - decrementNum())";
     }
 
     /**
