@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import saitama.exceptions.FileCorruptException;
+import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
@@ -78,7 +79,7 @@ public class Storage {
                     try {
                         newTask = new Deadline(splitCommandArguments[0], splitCommandArguments[1], isDone);
                         taskList.add(newTask);
-                    } catch (InvalidFormatException e) {
+                    } catch (InvalidFormatException | InvalidDateTimeException e) {
                         throw new FileCorruptException();
                     }
                     break;
@@ -91,10 +92,13 @@ public class Storage {
                     throw new FileCorruptException();
                 }
             }
-        } catch (FileNotFoundException | FileCorruptException e) {
-            return new ArrayList<>();
-        } finally {
             return taskList;
+        } catch (FileCorruptException e) {
+            System.out.println(e.getMessage());
+            return new ArrayList<>();
+        } catch (FileNotFoundException e) {
+            System.out.printf("***** Filepath %s not found. Creating new list... *****\n", filePath);
+            return new ArrayList<>();
         }
     }
 

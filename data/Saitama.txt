@@ -1,6 +1,1 @@
-D 1 cs2106 /by 20/11/2022
-E 0 party /at home
-D 1 CS2103T /by 30/01/2022
-E 1 birthday /at my house
-D 0 cs2105 /by 22/12/2022
-D 0 cs2103t zzz /by 20/12/2022
+D 0 cs2103t /by 20/12/2022 20:00

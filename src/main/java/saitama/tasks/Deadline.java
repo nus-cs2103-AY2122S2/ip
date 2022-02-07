@@ -2,17 +2,18 @@ package saitama.tasks;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
+import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 
 /**
  * A deadline task.
  */
 public class Deadline extends Task {
-    protected LocalDate deadline;
+    protected LocalDateTime deadline;
 
     /**
      * Initialises an undone deadline task.
@@ -21,9 +22,9 @@ public class Deadline extends Task {
      * @param by The deadline of the task in dd/mm/yyyy format.
      * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
      */
-    public Deadline(String description, String by) throws InvalidFormatException {
+    public Deadline(String description, String by) throws InvalidFormatException, InvalidDateTimeException {
         super(description);
-        this.deadline = processDate(by);
+        this.deadline = processDateTime(by);
     }
 
     /**
@@ -34,9 +35,10 @@ public class Deadline extends Task {
      * @param isDone Whether the task is done.
      * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
      */
-    public Deadline(String description, String by, boolean isDone) throws InvalidFormatException {
+    public Deadline(String description, String by, boolean isDone) throws
+            InvalidFormatException, InvalidDateTimeException {
         super(description, isDone);
-        this.deadline = processDate(by);
+        this.deadline = processDateTime(by);
     }
 
     /**
@@ -46,16 +48,33 @@ public class Deadline extends Task {
      * @return LocalDate object corresponding to the provided date.
      * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
      */
-    private LocalDate processDate(String by) throws InvalidFormatException {
-        String[] date = by.split("/");
-        if (date.length < 3) {
-            throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
+    private LocalDateTime processDateTime(String by) throws InvalidFormatException, InvalidDateTimeException {
+        String[] dateTime = by.split(" ", 2);
+        if (dateTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
         }
+
+        String date = dateTime[0];
+        String time = dateTime[1];
+        String[] splitDate = date.split("/");
+        String[] splitTime = time.split(":");
+
+        if (splitDate.length < 3 || splitTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        }
+
         try {
-            LocalDate deadline = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
+            int year = Integer.parseInt(splitDate[2]);
+            int month = Integer.parseInt(splitDate[1]);
+            int day = Integer.parseInt(splitDate[0]);
+            int hour = Integer.parseInt(splitTime[0]);
+            int minute = Integer.parseInt(splitTime[1]);
+            LocalDateTime deadline = LocalDateTime.of(year, month, day, hour, minute);
             return deadline;
-        } catch (DateTimeParseException e) {
-            throw new InvalidFormatException("Please enter a valid deadline format! (dd/mm/yyyy)");
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeException();
         }
     }
 
@@ -68,7 +87,7 @@ public class Deadline extends Task {
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
         fw.write("D " + isDone + " " + this.description
-                + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n");
+                + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\n");
     }
 
     /**
@@ -79,6 +98,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+                + this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")) + ")";
     }
 }

@@ -10,6 +10,7 @@ import saitama.commands.MarkCommand;
 import saitama.commands.UnmarkCommand;
 import saitama.exceptions.EmptyDescriptionException;
 import saitama.exceptions.InvalidCommandException;
+import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.exceptions.InvalidTaskNumberException;
 import saitama.exceptions.MissingQueryException;
@@ -33,7 +34,7 @@ public class Parser {
      * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist.
      */
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
-            InvalidCommandException, InvalidTaskNumberException, MissingQueryException {
+            InvalidCommandException, InvalidTaskNumberException, MissingQueryException, InvalidDateTimeException {
         String[] splitCommand = fullCommand.split(" ", 2); //split the command into [command_word, command_arguments]
         splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
@@ -132,7 +133,7 @@ public class Parser {
      * @throws InvalidCommandException if command does not exist.
      */
     private static Command prepareAdd(String[] splitCommand) throws
-            InvalidFormatException, EmptyDescriptionException, InvalidCommandException {
+            InvalidFormatException, EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
         if (splitCommand.length < 2) {
             throw new EmptyDescriptionException();
         }
@@ -151,7 +152,7 @@ public class Parser {
             String[] taskArgumentsList = taskArguments.split(" /by ", 2);
             if (taskArgumentsList.length < 2) {
                 throw new InvalidFormatException("You need to specify "
-                        + "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
+                        + "the deadline!\n deadline <task name> /by <dd/mm/yyyy hh:mm>");
             }
             String taskDescription = taskArgumentsList[0];
             String deadline = taskArgumentsList[1];
@@ -160,7 +161,8 @@ public class Parser {
         case "EVENT":
             taskArgumentsList = taskArguments.split(" /at ", 2);
             if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify event location! <Event> /at <location>");
+                throw new InvalidFormatException("You need to specify event location!\n"
+                        + "event <task name> /at <location>");
             }
             taskDescription = taskArgumentsList[0];
             String location = taskArgumentsList[1];
