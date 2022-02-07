@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * Deletes task from list based on specified index by user.
  */
 public class DeleteCommand extends Command {
-    private String args;
+    private final String args;
 
     /**
      * Creates new DeleteCommand object that receives the index by user.

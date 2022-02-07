@@ -21,7 +21,7 @@ import duke.task.Todo;
  * Handles storage reads and writes.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Creates a Storage object that allows program to perform storage
@@ -62,7 +62,7 @@ public class Storage {
         while (sc.hasNext()) {
             String task = sc.nextLine();
             String[] taskData = task.split("\\s\\|\\s");
-            Boolean completed = Integer.parseInt(taskData[1]) == 1;
+            boolean completed = Integer.parseInt(taskData[1]) == 1;
 
             if (task.charAt(0) == 'T') {
                 Todo todo = new Todo(taskData[2]);

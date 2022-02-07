@@ -18,7 +18,7 @@ public class ListCommand extends Command {
         assert taskList != null : "ListCommand[execute] taskList cannot be null.";
         assert storage != null : "ListCommand[execute] storage cannot be null.";
 
-        String response = "";
+        String response;
         int length = taskList.size();
         StringBuilder sb = new StringBuilder();
 

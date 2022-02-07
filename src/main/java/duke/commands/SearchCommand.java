@@ -16,7 +16,7 @@ import duke.task.TaskList;
  * Search task list based on keyword.
  */
 public class SearchCommand extends Command {
-    private String args;
+    private final String args;
 
     /**
      * Creates SearchCommand object with user input keyword.

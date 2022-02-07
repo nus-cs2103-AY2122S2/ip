@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.common.DukeException;
 import duke.constants.Constants;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -15,7 +14,7 @@ public class ExitCommand extends Command {
      * @return Output message for GUI.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) {
         assert taskList != null : "ExitCommand[execute] taskList cannot be null.";
         assert storage != null : "ExitCommand[execute] storage cannot be null.";
 
