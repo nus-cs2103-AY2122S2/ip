@@ -127,7 +127,6 @@ public class Storage {
      * @throws IOException           If an I/O error occur
      */
     public TaskList readFile() throws IOException, FunBoxExceptions {
-        assert new File(this.FILE_URL) != null : "New file is should not be null";
         File file = new File(this.FILE_URL);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String task;
@@ -184,9 +183,7 @@ public class Storage {
     public void deleteTask(int index) throws IOException {
         assert index >= 0 : "index should be greater or equal to 0";
         this.createFile(this.TEMPFILE_URL);
-        assert new File(this.TEMPFILE_URL) != null : "New file is not suppose to be null";
         File tempFile = new File(this.TEMPFILE_URL);
-        assert new File(this.FILE_URL) != null : "New file is not suppose to be null";
         File file = new File(this.FILE_URL);
         BufferedReader br = new BufferedReader(new FileReader(file));
         FileWriter fw = new FileWriter(this.TEMPFILE_URL, true);
