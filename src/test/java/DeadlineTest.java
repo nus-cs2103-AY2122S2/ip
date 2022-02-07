@@ -11,7 +11,7 @@ public class DeadlineTest {
     public void testGetByFormat() {
         LocalDateTime dateTime = LocalDateTime.parse("May 5 2022 23:59", Constant.OUT_TIME_FORMATTER);
         Deadline deadline = new Deadline("homework", dateTime);
-        assertEquals("May 5 2022 23:59", deadline.getBy());
+        assertEquals("May 5 2022 23:59", deadline.getBy().format(Constant.OUT_TIME_FORMATTER));
     }
 
     @Test

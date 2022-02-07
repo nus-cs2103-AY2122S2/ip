@@ -11,7 +11,7 @@ public class EventTest {
     public void testGetAtFormat() {
         LocalDateTime dateTime = LocalDateTime.parse("May 5 2022 23:59", Constant.OUT_TIME_FORMATTER);
         Event event = new Event("party", dateTime);
-        assertEquals("May 5 2022 23:59", event.getAt());
+        assertEquals("May 5 2022 23:59", event.getAt().format(Constant.OUT_TIME_FORMATTER));
     }
 
     @Test
