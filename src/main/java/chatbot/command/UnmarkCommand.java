@@ -14,6 +14,8 @@ public class UnmarkCommand extends Command {
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
+        validateTrigger(input);
+
         try {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
