@@ -11,7 +11,7 @@ public class Task {
 
     /**
      * Creates a Task object.
-     * 
+     *
      * @param description description of the task.
      * @param type type of the task.
      */
@@ -26,7 +26,7 @@ public class Task {
 
     /**
      * Gets description of task.
-     * 
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -35,7 +35,7 @@ public class Task {
 
     /**
      * Checks if task is completed.
-     * 
+     *
      * @return Task completed.
      */
     public boolean getCompleted() {
@@ -44,7 +44,7 @@ public class Task {
 
     /**
      * Gets the representation of whether task is completed.
-     * 
+     *
      * @return X marks task is completed.
      */
     public String getStatusIcon() {
@@ -53,7 +53,7 @@ public class Task {
 
     /**
      * Gets the type of task.
-     * 
+     *
      * @return Either Todo, Deadline or Event.
      */
     public char getType() {
@@ -62,7 +62,7 @@ public class Task {
 
     /**
      * Updates that task is completed.
-     * 
+     *
      * @param setCompleted setCompleted is whether task is done.
      */
     public void setCompleted(boolean setCompleted) {

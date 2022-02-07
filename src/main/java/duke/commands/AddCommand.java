@@ -22,7 +22,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates new AddCommand object that receives user input.
-     * 
+     *
      * @param fullCommand fullCommand holds contents of the task to be added.
      */
     public AddCommand(String fullCommand) {
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command.
-     * 
+     *
      * @return Output message for GUI.
      */
     @Override

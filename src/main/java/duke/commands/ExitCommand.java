@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class ExitCommand extends Command {
     /**
      * Executes the exit command.
-     * 
+     *
      * @return Output message for GUI.
      */
     @Override

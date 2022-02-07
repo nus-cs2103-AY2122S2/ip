@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline task with its description and deadline.
-     * 
+     *
      * @param description description of deadline task.
      * @param date date is the deadline of task.
      */
@@ -27,7 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Gets the deadline of this task.
-     * 
+     *
      * @return Returns the deadline of this task.
      */
     public LocalDate getDate() {

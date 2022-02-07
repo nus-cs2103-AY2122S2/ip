@@ -17,7 +17,7 @@ public class TaskList {
 
     /**
      * Creates a new TaskList object that holds tasks and CRUD functions.
-     * 
+     *
      * @param tasks tasks is the list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -28,7 +28,7 @@ public class TaskList {
 
     /**
      * Adds task to list.
-     * 
+     *
      * @param task task is the task to be added.
      */
     public void add(Task task) {
@@ -39,7 +39,7 @@ public class TaskList {
 
     /**
      * Gets all tasks.
-     * 
+     *
      * @return Returns list of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -48,7 +48,7 @@ public class TaskList {
 
     /**
      * Marks or unmarks a task.
-     * 
+     *
      * @param isMark isMark represents if user wants to mark a task.
      * @param index index represents which task the user wants to mark.
      * @return Returns the updated task.
@@ -65,7 +65,7 @@ public class TaskList {
 
     /**
      * Deletes the task.
-     * 
+     *
      * @param index index represents which task the user wants to delete.
      */
     public void delete(int index) {
@@ -76,7 +76,7 @@ public class TaskList {
 
     /**
      * Gets the number of tasks in the list.
-     * 
+     *
      * @return Returns the number of tasks in the list.
      */
     public int size() {
