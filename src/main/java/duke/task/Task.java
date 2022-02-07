@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task.
  */
 public class Task {
-    protected String description;
+    protected final String description;
     protected boolean isDone;
     /**
      * Constructs a task.

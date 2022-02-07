@@ -23,16 +23,16 @@ public class Ui {
      * Appends an 's' to the back of a word if it is plural.
      */
     private static String pluralise(int n) {
-        if (n < 1 || n > 1) {
-            return "s ";
+        if (n == 1) {
+            return " ";
         }
-        return " ";
+        return "s ";
     }
 
     /**
      * Displays welcome message.
      *
-     * @params isEmpty Whether there are saved tasks.
+     * @param tasks The task list.
      * @return Welcome message.
      */
     public String welcome(TaskList tasks) {
@@ -112,13 +112,5 @@ public class Ui {
         sc.close();
         storage.save(tasks);
         return "Bye. Hope to see you again soon!\n";
-    }
-
-    /**
-     * Reads incoming command.
-     * @return Incoming command.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }
