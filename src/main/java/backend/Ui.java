@@ -1,7 +1,5 @@
 package backend;
 
-import exception.DukeException;
-
 public class Ui {
     public Ui(){}
 

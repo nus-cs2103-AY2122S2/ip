@@ -1,6 +1,4 @@
 package backend;
-
-import exception.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -31,6 +29,7 @@ public class TaskList {
 
     /**
      * Marks the task at the supplied integer as completed, based on their ordering in this.list().
+     *
      * @param indexMarked index of the completed task
      */
     public static String mark(int indexMarked) {
@@ -47,10 +46,11 @@ public class TaskList {
 
     /**
      * Unmarks the task at the supplied integer as completed, based on their ordering in this.list().
+     *
      * @param indexUnmarked index of the task to be unmarked
      */
     public static String unmark(int indexUnmarked) {
-        String output = "";
+        String output;
         try {
             Task currentTask = tasks.get(indexUnmarked);
             currentTask.setDone(false);
@@ -63,6 +63,7 @@ public class TaskList {
 
     /**
      * removes the task at the supplied integer from tasklist, based on their ordering in this.list().
+     *
      * @param indexDelete index of the task to be deleted.
      */
     public static String delete(int indexDelete) {
@@ -78,10 +79,11 @@ public class TaskList {
 
     /**
      * creates a Todo task and adds it to the end of the tasklist
+     *
      * @param description description of the todo task.
      */
     public static String addTodo(String description) {
-        String output = "";
+        String output;
         try {
             if (description.isBlank()) {
                 throw new ArrayIndexOutOfBoundsException();
@@ -98,6 +100,7 @@ public class TaskList {
 
     /**
      * creates a deadline task and adds it to the end of the tasklist.
+     *
      * @param description description of the deadline task.
      * @param time time of the deadline task.
      */
@@ -119,6 +122,7 @@ public class TaskList {
 
     /**
      * creates a event task and adds it to the end of the tasklist.
+     *
      * @param description description of the event task.
      * @param time time of the event task.
      */
@@ -136,7 +140,11 @@ public class TaskList {
         }
         return output;
     }
-
+    /**
+     * returns all tasks that contain the designated keyword.
+     *
+     * @param keyword designated keyword
+     */
     public static String find(String keyword) {
         int counter = 1;
         String output = Ui.find() + "\n";
@@ -154,7 +162,8 @@ public class TaskList {
     }
 
     /**
-     * initialises the tasklist with an arraylist of tasks
+     * initialises the tasklist with an arraylist of tasks.
+     *
      * @param tasks pre saved tasks from data/duke.txt
      */
     public static void initialise(ArrayList<Task> tasks) {
