@@ -97,6 +97,16 @@ public class Storage {
             }
         }
     }
+
+    /**
+     * Saves objects to the configured file path.
+     *
+     * @param objs the objects to save
+     * @throws IOException if there was an error while saving objects
+     */
+    public void save(Object... objs) throws IOException {
+        save(Arrays.asList(objs));
+    }
 }
 
 // https://docs.oracle.com/javase/10/core/serialization-filtering1.htm#JSCOR-GUID-0A1D23AB-2F18-4979-9288-9CFEC04F207E
