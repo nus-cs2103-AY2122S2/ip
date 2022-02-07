@@ -34,6 +34,7 @@ public class Main extends Application {
             stage.getIcons().add(new Image("/images/nani.png"));
             fxmlLoader.<MainWindow>getController().setTaskmaster(taskmaster);
             fxmlLoader.<MainWindow>getController().greet();
+            fxmlLoader.<MainWindow>getController().loadFile();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
