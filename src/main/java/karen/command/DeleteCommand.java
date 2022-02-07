@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
             return ui.displayUserInput(ui.formatCount("removed", item, storage.getTaskCount()));
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
-                    String.format("Are you sure that [%d] is even in the 'list' command?", taskIndex + 1));
+                    String.format(InvalidMessage.INVALID_INDEX.toString(), taskIndex + 1));
         }
 
     }

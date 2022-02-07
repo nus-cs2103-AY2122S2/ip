@@ -49,7 +49,7 @@ public class ModifyCommand extends Command {
             return outputResult;
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
-                    String.format("Are you sure that [%d] is even in the 'list' command?", taskIndex + 1));
+                    String.format(InvalidMessage.INVALID_INDEX.toString(), taskIndex + 1));
         }
     }
 }
