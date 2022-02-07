@@ -13,7 +13,7 @@ import duke.TaskList;
 
 public class ParserTest {
     @Test
-    public void processMessage_wrongFormatMessage_exceptionThrown() throws IOException {
+    public void processMessage_wrongFormat_exceptionThrown() throws IOException {
         Parser parser = new Parser();
         Storage storage = new Storage("data/duke.txt");
         try {

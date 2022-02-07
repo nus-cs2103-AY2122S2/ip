@@ -46,7 +46,7 @@ public class Duke {
      * @return the response to the user's input
      */
     public String getResponse(String input) {
-        return ui.userInput(tasks, storage, input);
+        return ui.processUserInput(tasks, storage, input);
     }
 
 }

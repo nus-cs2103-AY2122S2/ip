@@ -42,7 +42,7 @@ public class Ui {
      * @param input   the user input
      * @return the chatbot response
      */
-    public String userInput(TaskList tasks, Storage storage, String input) {
+    public String processUserInput(TaskList tasks, Storage storage, String input) {
         if (input.equals("bye")) {
             return "Farewell then!";
         }
