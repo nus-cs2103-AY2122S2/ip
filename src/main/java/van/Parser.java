@@ -8,99 +8,38 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public static Command parseCommand(String parameter) {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String[] taskArguments;
         Command output = null;
         String[] parameters = parameter.split("\\s+", 2);
-        try {
-            switch (parameters[0].toLowerCase()) {
-            case "list":
-                output = new DisplayCommand();
-                break;
-
-            case "deadline":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
-                }
-                taskArguments = parameters[1].split(" /by ");
-                if (taskArguments.length != 2) {
-                    throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
-                }
-                try {
-                    LocalDateTime date = LocalDateTime.parse(taskArguments[1], dateFormat);
-                    output = new AddCommand(new Deadline(taskArguments[0], date));
-                } catch (DateTimeParseException e) {
-                    throw new VanException("Invalid date format. "
-                      + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
-                }
-                break;
-
-            case "event":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use: event <task> /at <date>");
-                }
-                taskArguments = parameters[1].split(" /at ");
-                if (taskArguments.length != 2) {
-                    throw new VanException("Invalid format. Please use: event <task> /at <date>");
-                }
-                try {
-                    LocalDateTime date = LocalDateTime.parse(taskArguments[1], dateFormat);
-                    output = new AddCommand(new Event(taskArguments[0], date));
-                } catch (DateTimeParseException e) {
-                    throw new VanException("Invalid date format. "
-                      + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
-                }
-                break;
-            case "todo":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
-                }
-                output = new AddCommand(new ToDo(parameters[1]));
-                break;
-            case "mark":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use mark <task number>");
-                }
-                try {
-                    output = new MarkCommand(true, Integer.parseInt(parameters[1]));
-                } catch (NumberFormatException ex) {
-                    output = new InvalidCommand("Please use integer numbers e.g. 1, 2");
-                }
-                break;
-            case "unmark":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use mark <task number>");
-                }
-                try {
-                    output = new MarkCommand(false, Integer.parseInt(parameters[1]));
-                } catch (NumberFormatException ex) {
-                    output = new InvalidCommand("Please use integers e.g. 1, 2");
-                }
-                break;
-            case "delete":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use delete <task number>");
-                }
-                try {
-                    output = new DeleteCommand(Integer.parseInt(parameters[1]));
-                } catch (NumberFormatException ex) {
-                    output = new InvalidCommand("Please use integers e.g. 1, 2");
-                }
-                break;
-            case "find":
-                if (parameters.length != 2) {
-                    throw new VanException("Invalid format. Please use find <keyword>");
-                }
-                output = new FindCommand(parameters[1]);
-                break;
-            case "bye":
-                output = new ExitCommand();
-                break;
-            default:
-                output = new InvalidCommand("Invalid Command");
-            }
-        } catch (VanException ex) {
-            output = new InvalidCommand(ex.getError());
+        switch (parameters[0].toLowerCase()) {
+        case "list":
+            output = new DisplayCommand();
+            break;
+        case "deadline":
+            output = caseDeadLine(parameters);
+            break;
+        case "event":
+            output = caseEvent(parameters);
+            break;
+        case "todo":
+            output = caseToDo(parameters);
+            break;
+        case "mark":
+            output = caseMark(parameters);
+            break;
+        case "unmark":
+            output = caseUnMark(parameters);
+            break;
+        case "delete":
+            output = caseDelete(parameters);
+            break;
+        case "find":
+            output = caseFind(parameters);
+            break;
+        case "bye":
+            output = new ExitCommand();
+            break;
+        default:
+            output = new InvalidCommand("Invalid Command");
         }
         assert output != null : "Problem with parsing command";
         return output;
@@ -118,23 +57,17 @@ public class Parser {
                 case "E":
                     date = LocalDateTime.parse(taskDetail[3], dateFormat);
                     tasks.add(new Event(taskDetail[2], date));
-                    if (taskDetail[1].equals("1")) {
-                        tasks.get(i).setDone();
-                    }
                     break;
                 case "D":
                     date = LocalDateTime.parse(taskDetail[3], dateFormat);
                     tasks.add(new Deadline(taskDetail[2], date));
-                    if (taskDetail[1].equals("1")) {
-                        tasks.get(i).setDone();
-                    }
                     break;
                 case "T":
                     tasks.add(new ToDo(taskDetail[2]));
-                    if (taskDetail[1].equals("1")) {
-                        tasks.get(i).setDone();
-                    }
                     break;
+                }
+                if (taskDetail[1].equals("1")) {
+                    tasks.get(i).setDone();
                 }
             }
         }
@@ -144,5 +77,116 @@ public class Parser {
     public static String[] parseDescription(Task task) {
         String[] keywords = task.getDescription().split(" ");
         return keywords;
+    }
+
+    private static Command caseDeadLine(String[] parameters) {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
+            }
+            String[] taskArguments = parameters[1].split(" /by ");
+            if (taskArguments.length != 2) {
+                throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
+            }
+            try {
+                LocalDateTime date = LocalDateTime.parse(taskArguments[1], dateFormat);
+                return new AddCommand(new Deadline(taskArguments[0], date));
+            } catch (DateTimeParseException e) {
+                throw new VanException("Invalid date format. "
+                  + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+            }
+        } catch (VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseEvent(String[] parameters) {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use: event <task> /at <date>");
+            }
+            String[] taskArguments = parameters[1].split(" /at ");
+            if (taskArguments.length != 2) {
+                throw new VanException("Invalid format. Please use: event <task> /at <date>");
+            }
+            try {
+                LocalDateTime date = LocalDateTime.parse(taskArguments[1], dateFormat);
+                return new AddCommand(new Event(taskArguments[0], date));
+            } catch (DateTimeParseException e) {
+                throw new VanException("Invalid date format. "
+                  + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+            }
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseToDo(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
+            }
+            return new AddCommand(new ToDo(parameters[1]));
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseMark(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use mark <task number>");
+            }
+            try {
+                return new MarkCommand(true, Integer.parseInt(parameters[1]));
+            } catch (NumberFormatException ex) {
+                return new InvalidCommand("Please use integer numbers e.g. 1, 2");
+            }
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseUnMark(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use unmark <task number>");
+            }
+            try {
+                return new MarkCommand(false, Integer.parseInt(parameters[1]));
+            } catch (NumberFormatException ex) {
+                return new InvalidCommand("Please use integers e.g. 1, 2");
+            }
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseDelete(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use delete <task number>");
+            }
+            try {
+                return new DeleteCommand(Integer.parseInt(parameters[1]));
+            } catch (NumberFormatException ex) {
+                return new InvalidCommand("Please use integers e.g. 1, 2");
+            }
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseFind(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use find <keyword>");
+            }
+            return new FindCommand(parameters[1]);
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
     }
 }
