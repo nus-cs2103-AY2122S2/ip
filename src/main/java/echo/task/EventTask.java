@@ -44,7 +44,6 @@ public class EventTask extends Task {
         return "[E]" + super.toString() + " (at: " + this.AT.format(formatDateTime) + ")";
     }
 
-
     /**
      * Checks if instances of EventCommand are equal.
      *

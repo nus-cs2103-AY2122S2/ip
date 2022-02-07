@@ -44,7 +44,6 @@ public class DeadlineTask extends Task {
         return "[D]" + super.toString() + " (by: " + this.BY.format(formatDateTime) + ")";
     }
 
-
     /**
      * Checks if instances of DeadlineCommand are equal.
      *
