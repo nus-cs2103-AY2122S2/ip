@@ -55,9 +55,9 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void list(TaskList taskList) {
+    public static void printList(TaskList taskList) {
         System.out.println("\n" + BLANK_LINE);
-        for (int i = 1; i < taskList.getTaskListSize() + 1; i++) {
+        for (int i = 1; i < taskList.getSize() + 1; i++) {
             Task curr = taskList.get(i - 1);
             String toPrint = "     " + i + "." + curr;
             System.out.println(toPrint);
@@ -72,7 +72,7 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void mark(int numToMark, TaskList taskList) {
+    public static void printMark(int numToMark, TaskList taskList) {
         Task markedTask = taskList.get(numToMark - 1);
         markedTask.markAsDone();
         System.out.println(BLANK_LINE + "     Nice! I've marked this task as done: " + "\n" + "     " + markedTask
@@ -86,7 +86,7 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void unmark(int numToUnmark, TaskList taskList) {
+    public static void printUnmark(int numToUnmark, TaskList taskList) {
         Task markedTask = taskList.get(numToUnmark - 1);
         markedTask.markAsNotDone();
         System.out.println(BLANK_LINE + "     OK, I've marked this task as not done yet: " + "\n" + "     " + markedTask
@@ -100,9 +100,9 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void todo(String todoString, TaskList taskList) {
+    public static void printTodo(String todoString, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
-                + "\n" + "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
+                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
@@ -114,10 +114,10 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void deadline(String deadlineName, String deadlineTime, TaskList taskList) {
+    public static void printDeadline(String deadlineName, String deadlineTime, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
                 "(by:" + deadlineTime + ")" + "\n" +
-                "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
@@ -129,10 +129,10 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void event(String eventName, String eventTime, TaskList taskList) {
+    public static void printEvent(String eventName, String eventTime, TaskList taskList) {
         String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
                 "(at: " + eventTime + ")" + "\n" +
-                "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
 
@@ -143,11 +143,12 @@ public class Ui {
      * @param taskList current taskList
      */
 
-    public static void delete(int numToDelete, TaskList taskList) {
+
+    public static void printDelete(int numToDelete, TaskList taskList) {
         Task deleteTask = taskList.get(numToDelete - 1);
         taskList.remove(numToDelete);
         System.out.println(BLANK_LINE + "     Noted. I've removed this task: " + "\n" + "     " + deleteTask
-                + "\n" + "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE);
+                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE);
     }
 }
 

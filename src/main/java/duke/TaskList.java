@@ -31,13 +31,14 @@ public class TaskList {
         taskList.add(task);
     }
 
+
     /**
      * Method to get the size of the current taskList
      *
      * @return size of the current taskList
      */
 
-    public int getTaskListSize() {
+    public int getSize() {
         return taskList.size();
     }
 
