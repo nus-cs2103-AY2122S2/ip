@@ -15,8 +15,7 @@ public class Parser {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         //System.out.println(date);
         try {
-            Date date1 = formatter.parse(date);
-            return  date1;
+            return  formatter.parse(date);
         } catch (ParseException e) {
             throw  new DukeException("what is wrong" + e);
         }
@@ -31,8 +30,7 @@ public class Parser {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
         //System.out.println(date);
         try {
-            Date date2 = formatter.parse(date);
-            return date2;
+            return formatter.parse(date);
         } catch (ParseException e) {
             throw  new DukeException("What is wrong " + e);
         }
