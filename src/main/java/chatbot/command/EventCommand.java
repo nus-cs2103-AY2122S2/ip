@@ -41,6 +41,7 @@ public class EventCommand extends Command {
             endTime = LocalTime.parse(input[i + 4]);
         } catch (Exception e) {
             // No need to handle exception here as the checks are done below.
+            // The checks are done outside the exception as certain invalid inputs do not throw an exception.
         }
 
         if (desc.isBlank()) {
