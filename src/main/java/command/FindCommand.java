@@ -16,6 +16,10 @@ import ui.Ui;
  */
 public class FindCommand extends Command {
 
+    /**
+     * String to store the words that will be used to filter
+     * the tasks.
+     */
     protected String words;
 
     /**

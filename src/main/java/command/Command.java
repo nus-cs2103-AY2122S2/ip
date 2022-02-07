@@ -20,7 +20,6 @@ public abstract class Command {
      */
     public Command() {
     }
-
     /**
      * Requires child classes to implement the method to ensure that every command has an executable function.
      * If an exception occurs, throws duke.Duke Exception.

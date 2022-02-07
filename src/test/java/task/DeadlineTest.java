@@ -12,14 +12,14 @@ public class DeadlineTest {
     @Test
     public void conversionToDate_nonTime_success() {
         Deadline testDeadline = new Deadline("read a book", "2019-01-01");
-        String testDateLine = testDeadline.formatDeadline();
+        String testDateLine = testDeadline.formatDeadLine();
         assertEquals("Jan 01 2019", testDateLine);
     }
 
     @Test
     public void conversionToDate_withTime_success() {
         Deadline testDeadline = new Deadline("read a book", "2019-01-01 1800");
-        String testDateLine = testDeadline.formatDeadline();
+        String testDateLine = testDeadline.formatDeadLine();
         assertEquals("Jan 01 2019 1800", testDateLine);
     }
 

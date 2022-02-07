@@ -43,12 +43,12 @@ public class DeadlineCommand extends Command {
      * @throws DukeException Throws exception related commands
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(deadline);
         try {
             storage.store(tasks);
         } catch (DukeException e) {
-            e.printStackTrace();
+            throw new DukeException(e.getMessage());
         }
         this.response = new Response(ui.getResponseMessage("deadline"),
                 ui.getTaskMessage(deadline),
