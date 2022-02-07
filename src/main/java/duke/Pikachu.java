@@ -54,6 +54,7 @@ public class Pikachu {
                 if (t.getClass().getSimpleName().equals("ToDo")) {
                     toDos.add((ToDo) t);
                 } else {
+                    assert t instanceof Deadline || t instanceof Event;
                     taskPrioQueue.add(t);
                 }
             }
@@ -91,7 +92,7 @@ public class Pikachu {
             }
             Task t = inputList.get(index);
             t.mark();
-
+            assert t.getStatus();
             return "Pikachu has marked this task as done!\n   > " + t;
         }
 
@@ -110,7 +111,7 @@ public class Pikachu {
             }
             Task t = inputList.get(index);
             t.unmark();
-
+            assert t.getStatus() == false;
             return "Pikachu has marked this task as not done yet!\n   > " + t;
         }
 
@@ -128,6 +129,7 @@ public class Pikachu {
                 return "Invalid task number!";
             }
             Task t = inputList.remove(index);
+            assert !inputList.contains(t);
 
             return "Pikachu has deleted this task!\n   > " + t + "\n"
                     + "You now have " + inputList.size() + " tasks in the list.";

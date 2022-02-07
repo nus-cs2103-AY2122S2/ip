@@ -22,6 +22,10 @@ public class Storage {
         return this.pikachu;
     }
 
+    public String getFilePath() {
+        return this.filePath;
+    }
+
     /**
      * Reads the tasklist stored in Tasklist.txt, or creates one if it does not exist.
      * Stores the read data into Pikachu's tasklist.
