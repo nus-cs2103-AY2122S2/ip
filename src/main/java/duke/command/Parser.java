@@ -37,7 +37,7 @@ public class Parser {
             validate(inputString, action, args, taskList);
         } catch (DukeException de) {
             assert !de.getMessage().equals(null);   // Ensures that the DukeException that is thrown has been assigned a message
-            ui.print(de.getMessage());
+            Ui.print(de.getMessage());
             return 1;
         }
 
