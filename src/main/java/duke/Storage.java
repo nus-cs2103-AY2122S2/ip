@@ -8,6 +8,12 @@ import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Storage class, which entails methods to initialise, load and save the taskList file.
+ *
+ * @author Benjamin Koh
+ */
+
 public class Storage {
     private String filePath;
     public static final String DATA_FOLDER_PATH = "./data";
@@ -35,7 +41,13 @@ public class Storage {
         }
     }
 
-    public static void loadFile() throws FileNotFoundException, DukeException {
+    /**
+     * Read tasks and loads it into memory
+     *
+     * @throws FileNotFoundException when the data file is not found
+     */
+
+    public static void loadFile() throws FileNotFoundException {
         Scanner sc = new Scanner(new File(TASKLIST_FILE_PATH));
         while (sc.hasNext()) {
             String current = sc.nextLine();
@@ -72,6 +84,13 @@ public class Storage {
             TaskList.add(taskToAdd);
         }
     }
+
+    /**
+     * Saves tasks to the file
+     *
+     * @param taskList current taskList being used in this instance
+     * @throws IOException when input or output has issues
+     */
 
     public static void saveToFile(TaskList taskList ) throws IOException {
         StringBuilder listString = new StringBuilder();

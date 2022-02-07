@@ -4,9 +4,21 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Duke Chat Bot that allows users to track tasks.
+ *
+ * @author Benjamin Koh
+ */
+
 public class Duke {
 
     private static TaskList taskList;
+
+    /**
+     * Main method. Takes in user input and updates list, interacts with user
+     *
+     * @param args The user inputs
+     */
 
     public static void main(String[] args) {
         Ui.welcome();

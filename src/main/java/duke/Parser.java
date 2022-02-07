@@ -3,7 +3,21 @@ package duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Parser class that contain the parsing logic for the Chat Bot.
+ *
+ * @author Benjamin Koh
+ */
+
 public class Parser {
+
+    /**
+     * Process the input provided by the user.
+     *
+     * @param input Input provided by the user
+     * @param taskList Current taskList based on user input
+     * @throws IOException
+     */
 
     public static void parse(String input, TaskList taskList) throws IOException {
         String[] array = input.split(" ");
