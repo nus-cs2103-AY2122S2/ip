@@ -43,6 +43,7 @@ public abstract class ChatBotList<T> {
      * @param t The item to insert.
      */
     public void insert(T t) throws ChatBotException {
+        assert !list.contains(t) : "List should not already contain the item being inserted";
         if (list.contains(t)) {
             throw new ChatBotException(String.format("This %s is already in your %s list traveller!", type, type));
         }
@@ -138,6 +139,7 @@ public abstract class ChatBotList<T> {
      * @return True if the index is invalid, else false.
      */
     public boolean isInvalidIndex(int index) {
+        assert index >= 0 && index < list.size() : "valid index should be nonnegative and smaller than list size";
         return index < 0 || index >= list.size();
     }
 

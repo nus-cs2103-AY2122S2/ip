@@ -53,6 +53,6 @@ public class ChatBot {
     }
 
     public String getGreeting() {
-        return ui.greet(taskList.isEmpty());
+        return ui.greet(taskList.isEmpty() && contactList.isEmpty());
     }
 }

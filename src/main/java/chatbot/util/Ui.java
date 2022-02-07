@@ -54,7 +54,7 @@ public class Ui {
         if (isEmpty) {
             greeting = greeting.concat("\nI'm the innkeeper and im here to help you with whatever you need.");
         } else {
-            greeting = greeting.concat("\nI've loaded up the tasks from your save file!");
+            greeting = greeting.concat("\nI've loaded up the data from your save files!");
         }
         return greeting;
     }
