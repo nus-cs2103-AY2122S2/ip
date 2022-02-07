@@ -16,7 +16,9 @@ public class Parser {
      * @return The output of the commands that the user has invoked.
      */
     public String parse(String commandString, TaskList tasks, Storage storage) {
-        if (commandString.equals("bye")) {
+        if (commandString.contains("S/U") || commandString.contains("s/u")) {
+            return "Sorry guys, but you know we don't do S/Us.";
+        } else if (commandString.equals("bye")) {
             return storage.exit(tasks.arr);
         } else if (commandString.equals("list")) {
             return tasks.list(tasks.arr);

@@ -17,9 +17,12 @@ public class TaskList {
      * @return List of tasks.
      */
     public String list(ArrayList<Task> arr) {
+        if (arr.size() == 0) {
+            return "Sorry, there is nothing in your list!";
+        }
         String listToPrint = "";
         for (int i = 0; i < arr.size(); i++) {
-            listToPrint += i + 1 + "." + arr.get(i).toString() + "\n";
+            listToPrint += i + 1 + ". " + arr.get(i).toString() + "\n";
         }
         return listToPrint;
     }
