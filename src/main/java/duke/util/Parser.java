@@ -22,36 +22,39 @@ public class Parser {
      * @throws DukeException when the command is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        if (fullCommand.equals("bye")) {
+        switch (fullCommand) {
+        case "bye":
             return new ByeCommand();
-        } else if (fullCommand.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (fullCommand.equals("todo")) {
+        case "todo":
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        } else {
+        default:
             String[] commandArr = fullCommand.split(" ");
             if (commandArr.length > 1) {
                 String type = commandArr[0];
                 String description = commandArr[1];
-                if (type.equals("find")) {
+                switch (type) {
+                case "find":
                     return new FindCommand(description);
-                } else if (type.equals("todo")) {
+                case "todo":
                     return new ToDoCommand(description);
-                } else if (type.equals("deadline")) {
+                case "deadline":
                     String by = fullCommand.split(" /by ")[1];
                     return new DeadlineCommand(description, by);
-                } else if (type.equals("event")) {
+                case "event":
                     String at = fullCommand.split(" /at ")[1];
                     return new EventCommand(description, at);
-                } else {
+                default:
                     int index = Integer.parseInt(description) - 1;
-                    if (type.equals("mark")) {
+                    switch (type) {
+                    case "mark":
                         return new MarkCommand(index);
-                    } else if (type.equals("unmark")) {
+                    case "unmark":
                         return new UnmarkCommand(index);
-                    } else if (type.equals("delete")) {
+                    case "delete":
                         return new DeleteCommand(index);
-                    } else {
+                    default:
                         throw new DukeException("Sorry, but I don't know what that means :-(");
                     }
                 }

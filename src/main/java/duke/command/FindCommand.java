@@ -9,7 +9,7 @@ import duke.util.TaskList;
  * Represents the command to find tasks according to a keyword.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String k) {
         keyword = k;

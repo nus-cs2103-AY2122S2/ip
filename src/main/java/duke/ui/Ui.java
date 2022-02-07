@@ -33,7 +33,7 @@ public class Ui {
     /**
      * Displays welcome message.
      *
-     * @params isEmpty Whether there are saved tasks.
+     * @param tasks The task list.
      * @return Welcome message.
      */
     public String welcome(TaskList tasks) {
@@ -114,13 +114,5 @@ public class Ui {
         sc.close();
         storage.save(tasks);
         return "Bye. Hope to see you again soon!\n";
-    }
-
-    /**
-     * Reads incoming command.
-     * @return Incoming command.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }
