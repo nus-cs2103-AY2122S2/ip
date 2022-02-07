@@ -52,11 +52,9 @@ public class DeleteCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return """
-                To delete a task, use the delete command followed by the task number.
-                (Hint: Use the list command to find the task number)
-                  Usage: delete <Task Id> | i.e. delete task 3
+        return "To delete a task, use the delete command followed by the task number.\n" +
+                "(Hint: Use the list command to find the task number)\n" +
+                "  Usage: delete <Task Id> | i.e. delete task 3\n\n";
 
-                """;
     }
 }

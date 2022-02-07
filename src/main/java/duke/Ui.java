@@ -28,13 +28,16 @@ public class Ui {
 
     public static final String MSG_EMPTYINPUT = "☹ OOPS!!! I'm sorry, input cannot be empty!";
 
-    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, task Id should be a number. " + "You can use the list command to find the tasks.";
+    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, task Id should be a number. " +
+            "You can use the list command to find the tasks.";
 
     public static final String MSG_INVALIDCMD = "☹ OOPS!!! I'm sorry, but I don't know what that means!";
 
-    public static final String MSG_INVALIDTASKID = "☹ OOPS!!! I'm sorry, task not found! Please select a task in " + "range. You can use the list command to find the tasks.";
+    public static final String MSG_INVALIDTASKID = "☹ OOPS!!! I'm sorry, task not found! Please select a task in " +
+            "range. You can use the list command to find the tasks.";
 
-    public static final String MSG_INVLIADCMDFORMAT = "☹ OOPS!!! I'm sorry, your formatting for your message isn't right!";
+    public static final String MSG_INVLIADCMDFORMAT = "☹ OOPS!!! I'm sorry, " +
+            "your formatting for your message isn't right!";
 
     public static final String MSG_TASKALREADYDONE = "☹ OOPS!!! Task already completed!";
 
@@ -44,11 +47,13 @@ public class Ui {
 
     public static final String MSG_FILEREADERROR = "☹ OOPS!!! There was an error loading the file.";
 
-    public static final String MSG_INVALIDDATETIMEFORMAT = "☹ OOPS!!! Wrong format for Date or Time. " + "Please use [dd-MM-yyyy HH:mm] format. i.e. 30-05-1959 13:59";
+    public static final String MSG_INVALIDDATETIMEFORMAT = "☹ OOPS!!! Wrong format for Date or Time. " +
+            "Please use [dd-MM-yyyy HH:mm] format. i.e. 30-05-1959 13:59";
 
     public static final String MSG_INVALIDDATETIME = "☹ OOPS!!! You can't set a task in the past!";
 
-    public static final String MSG_FILEWRITEERROR = "☹ OOPS!!! We can't save your records! This is likely due to write permissions on your system.";
+    public static final String MSG_FILEWRITEERROR = "☹ OOPS!!! We can't save your records! " +
+            "This is likely due to write permissions on your system.";
 
     public static final String MSG_NOMATCH = "☹ OOPS!!! We can't find anything!";
 
@@ -58,10 +63,9 @@ public class Ui {
      * Print welcome message.
      */
     public static void printWelcome() {
-        print("""
-                Hello! I'm DatoDato! Your personal helper bot. :)\s
-                (Hint: Type help and hit enter for assistance)\s
-                What can I do for you?""");
+        print( "Hello! I'm DatoDato! Your personal helper bot. :)\n" +
+                "(Hint: Type help and hit enter for assistance)\n"+
+                "What can I do for you?");
     }
 
     /**
@@ -118,7 +122,8 @@ public class Ui {
      * @return The formatted String to be printed.
      */
     public static String deleteTaskMsg(String description, int totalTask) {
-        return String.format("Noted. I've removed this task: \n  %s\nNow you have %d tasks in the list.", description, totalTask);
+        return String.format("Noted. I've removed this task: \n  " +
+                "%s\nNow you have %d tasks in the list.", description, totalTask);
     }
 
     /**
@@ -129,7 +134,8 @@ public class Ui {
      * @return The formatted String to be printed.
      */
     public static String addTaskMsg(String description, int totalTask) {
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", description, totalTask);
+        return String.format("Got it. I've added this task:\n  " +
+                "%s\nNow you have %d tasks in the list.", description, totalTask);
     }
 
     /**

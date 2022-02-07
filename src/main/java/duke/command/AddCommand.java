@@ -80,18 +80,20 @@ public class AddCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return """
-                There are three types of task. They are as follows
-                1. ToDo
-                   Todo represents simple tasks with only the description field.
-                   Usage: todo <description> | i.e. eat lunch with mum
-                 2. Event
-                   Event represents tasks happening at a certain time with the description field.
-                   Usage: event <description> /at <DD-MM-YYYY HH:MM> | i.e. event project meeting /at 30-05-2023 13:59
-                 3. Deadline
-                   Deadline represents tasks that are due by certain date time with the description field.
-                   Usage: deadline <description> /by <DD-MM-YYYY HH:MM> | i.e. deadline do homework /by 30-05-2023 13:59
+        return
+                "There are three types of task. They are as follows\n" +
+                "1. ToDo\n" +
+                "   Todo represents simple tasks with only the description field.\n" +
+                "   Usage: todo <description> | i.e. eat lunch with mum\n" +
+                "2. Event\n" +
+                "   Event represents tasks happening at a certain time with the description field.\n" +
+                "   Usage: event <description> /at <DD-MM-YYYY HH:MM> " +
+                        "| i.e. event project meeting /at 30-05-2023 13:59\n" +
+                "3. Deadline\n" +
+                "   Deadline represents tasks that are due by certain date time with the description field.\n" +
+                "   Usage: deadline <description> /by <DD-MM-YYYY HH:MM> " +
+                        "| i.e. deadline do homework /by 30-05-2023 13:59\n\n";
 
-                """;
+
     }
 }

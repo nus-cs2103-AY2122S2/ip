@@ -51,10 +51,7 @@ public class FindCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return """
-                To find a task, use the find command.
-                  Usage: find <search term> | i.e. find homework\s
-
-                """;
+        return "To find a task, use the find command.\n" +
+                "Usage: find <search term> | i.e. find homework\n\n";
     }
 }

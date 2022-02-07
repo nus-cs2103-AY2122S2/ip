@@ -45,4 +45,15 @@ public class UndoCommand extends Command {
             storage.writeToFile(taskList);
         }
     }
+
+    /**
+     * Generate the usage guide for this command.
+     *
+     * @return Returns the formatted String value for printing for the usage guide.
+     */
+    public static String usage() {
+        return "To mark a task as incomplete, use the undo command followed by the task number.\n"+
+                "(Hint: Use the list command to find the task number)\n"+
+                "  Usage: undo <Task Id> | i.e. undo 3\n\n";
+    }
 }

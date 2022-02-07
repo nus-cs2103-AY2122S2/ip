@@ -34,10 +34,8 @@ public class ListCommand extends Command{
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return """
-                To list all task(s), use the list command.
-                  Usage: list
+        return "To list all task(s), use the list command.\n" +
+                "  Usage: list\n\n";
 
-                """;
     }
 }

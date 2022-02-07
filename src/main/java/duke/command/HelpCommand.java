@@ -21,12 +21,4 @@ public class HelpCommand extends Command {
     public void execute(TaskList taskList, Storage storage) {
         Ui.printHelp();
     }
-
-    /**
-     *
-     * @return
-     */
-    public static String usage() {
-        return  "";
-    }
 }

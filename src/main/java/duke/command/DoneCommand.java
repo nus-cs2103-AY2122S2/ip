@@ -53,11 +53,8 @@ public class DoneCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return """
-                To mark a task as complete, use the done command followed by the task number.
-                (Hint: Use the list command to find the task number)
-                  Usage: done <Task Id> | i.e. done 3
-
-                """;
+        return "To mark a task as complete, use the done command followed by the task number.\n"+
+                "(Hint: Use the list command to find the task number)\n"+
+                "  Usage: done <Task Id> | i.e. done 3\n\n";
     }
 }
