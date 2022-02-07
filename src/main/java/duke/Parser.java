@@ -13,8 +13,6 @@ public class Parser {
     private static final ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event",
             "deadline", "mark", "unmark", "list", "bye", "delete", "find"));
 
-    private static final String LINES = "    ---------------------------------";
-
     /**
      * Manages the listing of task list.
      *
@@ -32,7 +30,6 @@ public class Parser {
      * @throws DukeException
      */
     static String parserTodo(TaskList taskLists, String userInputTask, Storage storage) throws DukeException, IOException {
-
         Parser.taskDescriptionValidator("todo", userInputTask);
 
         // adding task to todoList
@@ -54,7 +51,6 @@ public class Parser {
         try {
             Parser.taskDescriptionValidator("deadline", userInputTask);
         } catch (DukeException e) {
-            System.out.println("    OOPS!!! The description of a deadline cannot be empty.");
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
@@ -62,7 +58,6 @@ public class Parser {
         try {
             Parser.deadlineTaskValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println("    OOPS!!! Deadline tasks require a by day.");
             throw new DukeException("Deadline tasks require a by day.");
         }
 
@@ -70,7 +65,6 @@ public class Parser {
         try {
             Parser.deadlineByDayValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println("    OOPS!!! Deadline tasks can only have one by day.");
             throw new DukeException("Deadline tasks can only have one by day.");
         }
     }
@@ -110,9 +104,6 @@ public class Parser {
         try {
             Parser.taskDescriptionValidator("event", userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
-            System.out.println("    OOPS!!! The description of an event cannot be empty.");
-            System.out.println(LINES);
             throw new DukeException("The description of an event cannot be empty.");
         }
 
@@ -120,9 +111,6 @@ public class Parser {
         try {
             Parser.eventTaskValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
-            System.out.println("    OOPS!!! Event tasks require an at date and time.");
-            System.out.println(LINES);
             throw new DukeException("Event tasks require an at date and time.");
         }
 
@@ -130,9 +118,6 @@ public class Parser {
         try {
             Parser.eventAtDateTimeValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
-            System.out.println("    OOPS!!! Event tasks can only have one at date and time.");
-            System.out.println(LINES);
             throw new DukeException("Event tasks can only have one at date and time.");
         }
     }
@@ -144,15 +129,11 @@ public class Parser {
      * @param userInputTask user input task.
      */
     static String parserEvent(TaskList taskLists, String userInputTask, Storage storage) throws IOException {
-
         // splitting event into description and dateTime
         String[] eventTaskArr = userInputTask.split(" /at ");
         String eventDescription = eventTaskArr[0];
         String[] eventDateAndTime = eventTaskArr[1].split(" ");
         String eventDate = eventDateAndTime[0];
-
-        // splitting event into time and the rest
-        String[] eventTimeAndTheRest = userInputTask.split(" ");
 
         String eventTime = eventDateAndTime[1];
         LocalTime atTime = LocalTime.parse(eventTime);
@@ -205,9 +186,6 @@ public class Parser {
         try {
             Parser.deleteValidator(userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
-            System.out.println("    Delete command must have a specified task number to be deleted.");
-            System.out.println(LINES);
             throw new DukeException("Delete command must have a specified task number to be deleted.");
         }
 
@@ -215,9 +193,6 @@ public class Parser {
         try {
             Parser.deleteTaskNumberValidator(taskLists, userInputTask);
         } catch (DukeException e) {
-            System.out.println(LINES);
-            System.out.println("    Invalid task number to be deleted.");
-            System.out.println(LINES);
             throw new DukeException("Invalid task number to be deleted.");
         }
     }
@@ -250,7 +225,7 @@ public class Parser {
             }
         }
 
-        String output = "    These are my finding tasks in your list 😄:/n";
+        String output = "These are my finding tasks in your list 😄:/n";
         for (int j = 0; j < tasks.size(); j++) {
             output += "    " + (j + 1) + "." + tasks.get(j).toString() + "/n";
         }

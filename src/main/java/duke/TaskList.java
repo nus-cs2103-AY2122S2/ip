@@ -9,9 +9,6 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> taskLists;
 
-    // divider
-    private final String LINES = "    ---------------------------------";
-
     /**
      * Constructs a TaskList object.
      *
@@ -60,7 +57,6 @@ public class TaskList {
      * @param num position to remove task.
      */
     public String removeTask(int num, Storage storage) throws IOException {
-
         String output = "    Noted. I've removed this task:\n";
         String taskRemove = "        " + taskLists.get(num - 1).toString() + "\n";
 
@@ -73,7 +69,6 @@ public class TaskList {
         storage.save(tempTaskList);
         String taskRemainingString = String.format("    Now you have %d tasks in the list.", taskLists.size());
         return output + taskRemove + taskRemainingString;
-
     }
 
     /**
