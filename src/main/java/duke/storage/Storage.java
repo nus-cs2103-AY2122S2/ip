@@ -43,6 +43,7 @@ public class Storage {
         if (dir.createNewFile()) {
             throw new DukeException("No previous save file");
         } else {
+            assert dir.exists();
             Scanner sc = new Scanner(dir);
             while (sc.hasNext()) {
                 String encoded = sc.nextLine();

@@ -30,6 +30,7 @@ public class FindCommand extends Command {
             reply.append(t.get(i));
             reply.append("\n");
         }
+        
         return reply.toString();
     }
 

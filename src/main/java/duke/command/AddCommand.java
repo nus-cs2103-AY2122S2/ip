@@ -26,6 +26,7 @@ public class AddCommand extends Command {
         reply.append(this.speak(Dialogue.ADDED));
         reply.append("\n");
         reply.append(this.obj.toString());
+        assert !reply.toString().equals("") : "Description of task cannot be empty";
         return reply.toString();
     }
 

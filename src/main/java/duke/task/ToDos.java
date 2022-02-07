@@ -18,6 +18,7 @@ public class ToDos extends Task {
 
     @Override
     public String serialize() {
+        assert this.objective != null;
         return "T|" + (this.done ? "1|" : "0|") + this.objective + "\n";
     };
 

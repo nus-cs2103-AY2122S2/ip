@@ -29,6 +29,9 @@ public class DeleteCommand extends Command {
         reply.append(deletedTask);
         reply.append("\n");
         reply.append(this.speak(Dialogue.NUMLEFT, task.getSize()));
+
+        assert !reply.toString().equals("") : "Description of task deleted cannot be empty";
+
         return reply.toString();
     }
 

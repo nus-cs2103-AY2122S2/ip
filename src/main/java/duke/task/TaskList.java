@@ -109,6 +109,7 @@ public class TaskList {
         for (Task task : objectives) {
             encodedList.add(task.serialize());
         }
+        assert encodedList.size() == objectives.size();
         return encodedList;
     }
 }
