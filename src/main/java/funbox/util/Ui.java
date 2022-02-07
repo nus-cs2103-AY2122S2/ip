@@ -1,7 +1,5 @@
 package funbox.util;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import funbox.task.Task;
 
 public class Ui {

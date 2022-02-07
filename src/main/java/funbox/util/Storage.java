@@ -69,7 +69,6 @@ public class Storage {
         } else if (!isFileExist()) {
             this.createFile(this.FILE_URL);
         } else {
-            this.ui.printLoadData();
             try {
                 this.taskList = this.readFile();
             } catch (IOException | FunBoxExceptions e) {
@@ -110,9 +109,7 @@ public class Storage {
      */
     private void createFile(String fileUrl) {
         try {
-            if (new File(fileUrl).createNewFile() && fileUrl == this.FILE_URL) {
-                this.ui.printFileSuccess();
-            }
+            new File(fileUrl).createNewFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -133,7 +130,6 @@ public class Storage {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String task;
         TaskList taskList = new TaskList();
-        String[] resultArr;
         int isDone = 0;
         int counter = 0;
 
