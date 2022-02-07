@@ -89,7 +89,7 @@ public class Ui {
      */
     public String marked(int numOfTasksDeleted) {
         String taskOrTasks = numOfTasksDeleted <= 1 ? "task" : "tasks";
-        return String.format("Nice! I've marked the following %s as done:\n\n ", taskOrTasks);
+        return String.format("Nice! I've marked the following %s as done:\n\n", taskOrTasks);
     }
 
     /**
