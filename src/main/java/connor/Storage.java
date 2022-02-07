@@ -86,13 +86,13 @@ public class Storage {
     public static String taskToString(Task t) throws ConnorException {
         switch (t.getTaskType()) {
         case TODO: {
-            return TodoToString((ToDo) t);
+            return todoToString((ToDo) t);
         }
         case DEADLINE: {
-            return DeadlineToString((Deadline) t);
+            return deadlineToString((Deadline) t);
         }
         case EVENT: {
-            return EventToString((Event) t);
+            return eventToString((Event) t);
         }
         default: {
             // Something has gone wrong
@@ -107,7 +107,7 @@ public class Storage {
      * @param t {@code ToDo} to be converted.
      * @return A {@code String} representation of the ToDo suitable for storing in the text file.
      */
-    public static String TodoToString (ToDo t) {
+    public static String todoToString(ToDo t) {
         String doneStatus = t.isDone() ? "[#] " : "[ ] ";
         String taskType = "T";
         String spacing = " | ";
@@ -123,7 +123,7 @@ public class Storage {
      * @param t {@code Deadline} to be converted.
      * @return A {@code String} representation of the Deadline suitable for storing in the text file.
      */
-    public static String DeadlineToString (Deadline t) {
+    public static String deadlineToString(Deadline t) {
         String doneStatus = t.isDone() ? "[#] " : "[ ] ";
         String taskType = "D";
         String spacing = " | ";
@@ -141,7 +141,7 @@ public class Storage {
      * @param t {@code Event} to be converted.
      * @return A {@code String} representation of the Event suitable for storing in the text file.
      */
-    public static String EventToString (Event t) {
+    public static String eventToString(Event t) {
         String doneStatus = t.isDone() ? "[#] " : "[ ] ";
         String taskType = "E";
         String spacing = " | ";
