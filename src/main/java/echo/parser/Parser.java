@@ -186,7 +186,7 @@ public class Parser {
 
         if (!input.contains("/by")) {
             throw new EchoException("Invalid input. Make sure to include '/by'\n"
-                    + "    E.g. deadline return book /by 2019-10-15 1800");
+                    + "E.g. deadline return book /by 2019-10-15 1800");
         }
 
         return new DeadlineCommand(desc, localDateTime);
@@ -209,7 +209,7 @@ public class Parser {
 
         if (!input.contains("/at")) {
             throw new EchoException("Invalid input. Make sure to include '/at' \n."
-                    + "    E.g. event meeting /at 2019-10-15 1800");
+                    + "E.g. event meeting /at 2019-10-15 1800");
         }
 
         return new EventCommand(desc, localDateTime);

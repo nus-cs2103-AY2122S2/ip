@@ -43,4 +43,25 @@ public class DeadlineTask extends Task {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
         return "[D]" + super.toString() + " (by: " + this.BY.format(formatDateTime) + ")";
     }
+
+
+    /**
+     * Checks if instances of DeadlineCommand are equal.
+     *
+     * @param obj Object.
+     *
+     * @return If the DESCRIPTION and BY are equal, returns true; false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeadlineTask) {
+            // Since obj is an instanceof DeadlineCommand, it is safe to type cast
+            // Object to DeadlineCommand.
+            DeadlineTask deadlineTask = (DeadlineTask) obj;
+            boolean isDescriptionEqual = super.equals(deadlineTask);
+            boolean isDateTimeEqual = this.BY.equals(deadlineTask.BY);
+            return isDescriptionEqual && isDateTimeEqual;
+        }
+        return false;
+    }
 }

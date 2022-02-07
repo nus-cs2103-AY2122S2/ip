@@ -33,4 +33,22 @@ public class TodoTask extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Checks if instances of TodoTask are equal.
+     *
+     * @param obj Object.
+     *
+     * @return If the DESCRIPTION is equal, returns true; false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TodoTask) {
+            // Since obj is an instanceof TodoTask, it is safe to type cast
+            // Object to TodoTask.
+            TodoTask todoTask = (TodoTask) obj;
+            return super.equals(todoTask);
+        }
+        return false;
+    }
 }
