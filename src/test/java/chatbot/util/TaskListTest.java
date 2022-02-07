@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
+import chatbot.list.TaskList;
 
 public class TaskListTest {
 
@@ -31,6 +32,11 @@ public class TaskListTest {
             taskList.addToDo(new String[]{"todo"})
         );
         assertEquals("You need to key in the title of your todo traveller!", thrown.getMessage());
+
+        thrown = assertThrows(ChatBotException.class, () ->
+                taskList.addToDo(todoTitleArgs)
+        );
+        assertEquals("This task is already in your task list traveller!", thrown.getMessage());
     }
 
     @Test

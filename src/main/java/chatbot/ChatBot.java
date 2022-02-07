@@ -1,9 +1,9 @@
 package chatbot;
 
 import chatbot.exception.ChatBotException;
+import chatbot.list.TaskList;
 import chatbot.util.Parser;
 import chatbot.util.Storage;
-import chatbot.util.TaskList;
 import chatbot.util.Ui;
 
 

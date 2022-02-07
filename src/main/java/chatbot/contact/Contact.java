@@ -3,8 +3,9 @@ package chatbot.contact;
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
 
+
 /**
- * The type Contact.
+ * Represents a contact of the user.
  */
 public class Contact implements Comparable<Contact> {
     private final String name;
@@ -35,6 +36,24 @@ public class Contact implements Comparable<Contact> {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Gets the contact's phone number.
+     *
+     * @return Phone number of contact.
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Gets the contact's birthday.
+     *
+     * @return Birthday of contact.
+     */
+    public Timestamp getBirthday() {
+        return birthday;
     }
 
     private static boolean isNumeric(String str) {

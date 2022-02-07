@@ -8,102 +8,135 @@ import java.util.stream.Collectors;
 
 import chatbot.exception.ChatBotException;
 
+
 /**
- * The type Chat bot list.
+ * A generic wrapper for lists used by ChatBot.
  *
- * @param <T> the type parameter
+ * @param <T> The type parameter.
  */
 public abstract class ChatBotList<T> {
 
+    private final String type;
     private final List<T> list;
 
     /**
-     * Instantiates a new Chat bot list.
+     * Instantiates a new ChatBot list.
      */
-    public ChatBotList() {
+    public ChatBotList(String type) {
+        this.type = type;
         this.list = new ArrayList<>();
     }
 
     /**
-     * Instantiates a new Chat bot list.
+     * Instantiates a new ChatBot list given an existing list of items.
      *
-     * @param list the list
+     * @param list The list of items.
      */
-    public ChatBotList(List<T> list) {
+    public ChatBotList(String type, List<T> list) {
+        this.type = type;
         this.list = list;
     }
 
     /**
-     * Insert.
+     * Insert an item into the list.
      *
-     * @param t the t
+     * @param t The item to insert.
      */
-    public void insert(T t) {
+    public void insert(T t) throws ChatBotException {
+        if (list.contains(t)) {
+            throw new ChatBotException(String.format("This %s is already in your %s list traveller!", type, type));
+        }
         list.add(t);
     }
 
     /**
-     * Remove t.
+     * Delete an item from the list.
      *
-     * @param index the index
-     * @return the t
+     * @param index The index of the task to be deleted.
+     * @return The response to be outputted by the UI.
+     * @throws ChatBotException If the task index is invalid.
      */
-    public T remove(int index) {
-        return list.remove(index);
+    public String delete(int index) throws ChatBotException {
+        if (isInvalidIndex(index)) {
+            throw new ChatBotException(
+                    "This is an invalid task index traveller! You can type list to check all task indexes!"
+            );
+        }
+
+        T removed = list.remove(index);
+        return String.format(
+                "This %s has successfully been removed from your %s list!%n             %d. %s",
+                type,
+                type,
+                index + 1,
+                removed
+        );
     }
 
     /**
-     * Get t.
+     * Get an item from the list.
      *
-     * @param index the index
-     * @return the t
+     * @param index The index of the desired item.
+     * @return The desired item.
      */
     public T get(int index) {
         return list.get(index);
     }
 
     /**
-     * Gets num items.
+     * Get the size of the list.
      *
-     * @return the num items
+     * @return The number of items in the list.
      */
     public int getNumItems() {
         return list.size();
     }
 
     /**
-     * Is empty boolean.
+     * Get whether the list is empty or not.
      *
-     * @return the boolean
+     * @return True if list is empty, else false.
      */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
     /**
-     * Gets list.
+     * Get the list of items.
      *
-     * @return the list
+     * @return The list.
      */
     public List<T> getList() {
         return list;
     }
 
     /**
-     * Is valid index boolean.
+     * Prints all items in the list.
      *
-     * @param index the index
-     * @return the boolean
+     * @return The string format of the list to be outputted by the UI.
      */
-    public boolean isInvalidIndex(int index) {
-        return index < 0 || index > list.size();
+    public String summary() {
+        if (isEmpty()) {
+            return String.format("Your %s list is empty traveller! Add some %ss first!", type, type);
+        }
+        return toString();
     }
 
     /**
-     * Filter list.
+     * Check if the input index is a valid one or not.
      *
-     * @param condition the condition
-     * @return the list
+     * @param index The index to verify.
+     * @return True if the index is invalid, else false.
+     */
+    public boolean isInvalidIndex(int index) {
+        return index < 0 || index >= list.size();
+    }
+
+    /**
+     * Filter the list based on a given condition.
+     *
+     * @param condition The filter condition.
+     * @return The filtered list.
      */
     public List<T> filter(Predicate<T> condition) {
         return list
@@ -112,8 +145,20 @@ public abstract class ChatBotList<T> {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Saves items in the list to the save file.
+     *
+     * @param saveFile The save file.
+     * @throws ChatBotException If I/O error occurs while writing to the save file.
+     */
     public abstract void save(File saveFile) throws ChatBotException;
 
+    /**
+     * Loads the items saved in the save file into the list.
+     *
+     * @param saveFile The save file.
+     * @throws ChatBotException If the save file cannot be found, or the data in it is formatted incorrectly.
+     */
     public abstract void load(File saveFile) throws ChatBotException;
 
     @Override
