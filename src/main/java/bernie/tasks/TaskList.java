@@ -174,7 +174,7 @@ public class TaskList {
         assert count >= 0;
         if (count == 0) {
             String noTasksFoundMsg = "Nothing!";
-            return s.append(noTasksFoundMsg).toString();
+            s.append(noTasksFoundMsg);
         }
         return s.toString();
     }
@@ -223,5 +223,31 @@ public class TaskList {
         }
         assert (newTask != null);
         tasks.add(newTask);
+    }
+
+    /**
+     * Returns a String that contains the Deadline that are not done. This is done
+     * by checking that the task is a Deadline and it is not done yet.
+     * @return String, output message.
+     */
+    public String listDeadlines() {
+        int count = 0;
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            boolean notDone = !task.getIsDone();
+            boolean isDeadline = task instanceof Deadline;
+            if (isDeadline && notDone) {
+                String deadlineOutputMsg = String.format("%d. %s\n", i + 1, task);
+                s.append(deadlineOutputMsg);
+                count++;
+            }
+        }
+        assert count >= 0;
+        if (count == 0) {
+            String noDeadlinesMsg = "NOTHING! :D";
+            s.append(noDeadlinesMsg);
+        }
+        return s.toString();
     }
 }

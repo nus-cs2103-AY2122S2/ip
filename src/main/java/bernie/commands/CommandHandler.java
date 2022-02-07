@@ -77,6 +77,8 @@ public class CommandHandler {
                 FindCommand findCommand = new FindCommand(tasks, inputResponder, storage, parser, input);
                 executeOutputMsg = findCommand.execute();
                 break;
+            case REMIND:
+                executeOutputMsg = inputResponder.showDeadlinesMsg(tasks);
             default:
                 break;
             }

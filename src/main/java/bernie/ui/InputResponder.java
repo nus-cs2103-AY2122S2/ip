@@ -21,6 +21,7 @@ public class InputResponder {
                 "To mark/unmark a task: mark/unmark <taskNumber>\n" +
                 "To delete a task: delete <taskNumber>\n" +
                 "To find a task: find <description>\n" +
+                "To get deadlines not done, type: remind\n" +
                 "To exit, type: bye";
     }
 
@@ -120,5 +121,19 @@ public class InputResponder {
         return s.append("We found these tasks in your list:\n")
                 .append(tasks.findTasks(description))
                 .toString();
+    }
+
+    /**
+     * Returns the output message for the list of deadlines that have yet to be done.
+     * This is aided by TaskList to help to filter out tasks that are Deadline and
+     * not done.
+     * @param tasks TaskList
+     * @return String, the output message
+     */
+    public String showDeadlinesMsg(TaskList tasks) {
+        StringBuilder s = new StringBuilder();
+        String startingMsg = "Got your back! Your deadlines to meet:\n";
+        s.append(startingMsg);
+        return s.append(tasks.listDeadlines()).toString();
     }
 }

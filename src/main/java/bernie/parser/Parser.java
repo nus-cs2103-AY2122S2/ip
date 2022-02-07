@@ -28,7 +28,7 @@ public class Parser {
     /**
      * Serves as the preliminary Parser to determine what
      * type of input has the user keyed in. The possible inputs are:
-     * list, bye, mark, empty (the ""), delete, and a general add input
+     * list, bye, mark, empty (the ""), delete, remind, and a general add input
      * which is determined in the program by inputs: todo, deadline, event
      * @params input String
      */
@@ -45,6 +45,8 @@ public class Parser {
             return Type.DELETE;
         } else if (isType(Type.FIND, input)) {
             return Type.FIND;
+        } else if (isType(Type.REMIND, input)) {
+            return Type.REMIND;
         } else {
             return Type.ADD;
         }
