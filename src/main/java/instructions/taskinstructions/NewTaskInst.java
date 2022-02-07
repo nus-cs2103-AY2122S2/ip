@@ -74,6 +74,8 @@ public abstract class NewTaskInst extends Instruction {
             return DeadlineInst.of(taskDetails);
         case "event":
             return EventInst.of(taskDetails);
+        case "do":
+            return BetweenInst.of(taskDetails);
         default:
             // will not reach here, as Instruction.of controls the main flow
             // of instructions

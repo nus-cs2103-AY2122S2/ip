@@ -52,7 +52,8 @@ public abstract class Instruction {
             return ModifyListedTaskInst.of(input);
         case "todo": // Fallthrough
         case "deadline": // Fallthrough
-        case "event":
+        case "event": // Fallthrough
+        case "do":
             return NewTaskInst.of(input);
         case "find":
             return FindInst.of(input);

@@ -5,7 +5,7 @@ import tasks.ToDoTask;
 
 /**
  * This class represents an instruction for a new To Do task.
- * Format: "to_do xyz" where xyz is the task description (omit the _).
+ * Format: {@code to_do xyz} where xyz is the task description (omit the "_").
  *
  * @author Ong Han Yang
  */
