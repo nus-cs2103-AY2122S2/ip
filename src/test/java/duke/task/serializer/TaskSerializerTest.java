@@ -2,6 +2,7 @@ package duke.task.serializer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
@@ -25,9 +26,21 @@ public class TaskSerializerTest {
                 dOut.writeShort(innerI);
                 dOut.writeUTF("Test Description 1");
                 dOut.writeBoolean(true);
-                dOut.writeUTF("2022-12-12T13:00");
+                if (innerI != 1) {
+                    dOut.writeUTF("2022-12-12T13:00");
+                }
             });
-            assertNotNull(TaskSerializer.inflate(reference));
+            Task task = TaskSerializer.inflate(reference);
+            assertNotNull(task);
+            if (i == 1) {
+                assertTrue(task instanceof Todo);
+            } else if (i == 2) {
+                assertTrue(task instanceof Deadline);
+            } else if (i == 3) {
+                assertTrue(task instanceof Event);
+            } else {
+                fail();
+            }
         }
     }
 
