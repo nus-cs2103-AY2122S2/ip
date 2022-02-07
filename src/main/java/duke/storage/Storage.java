@@ -61,7 +61,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("OOPS!!! File not found D:");
-        } catch (DukeException | IOException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
