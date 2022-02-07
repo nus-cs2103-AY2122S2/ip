@@ -63,6 +63,7 @@ public class Task {
      */
     public void markDone() {
         this.done = true;
+        assert this.done;
     }
 
     /**
@@ -70,6 +71,7 @@ public class Task {
      */
     public void markUndone() {
         this.done = false;
+        assert !this.done;
     }
 
     /**

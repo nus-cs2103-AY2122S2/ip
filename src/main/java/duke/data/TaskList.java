@@ -43,8 +43,10 @@ public class TaskList {
      * @return the added todo task.
      */
     public Task addTodoTask(String input) {
+        int taskListBeforeAddition = taskList.size();
         TodoTask newTask = new TodoTask(input);
         taskList.add(newTask);
+        assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;
     }
 
@@ -56,8 +58,10 @@ public class TaskList {
      * @return the added deadline task.
      */
     public Task addDeadlineTask(String input, String deadline) {
+        int taskListBeforeAddition = taskList.size();
         DeadlineTask newTask = new DeadlineTask(input, deadline);
         taskList.add(newTask);
+        assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;
     }
 
@@ -69,8 +73,10 @@ public class TaskList {
      * @return the added event task.
      */
     public Task addEventTask(String input, String deadline) {
+        int taskListBeforeAddition = taskList.size();
         EventTask newTask = new EventTask(input, deadline);
         taskList.add(newTask);
+        assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;
     }
 
@@ -138,7 +144,9 @@ public class TaskList {
      */
     public Task deleteTask(int index) {
         Task foundTask = taskList.get(index - 1);
+        int taskListBeforeDeletion = taskList.size();
         taskList.remove(index - 1);
+        assert taskListBeforeDeletion - 1 == taskList.size() : "Task should be deleted from task list";
         return foundTask;
     }
 }
