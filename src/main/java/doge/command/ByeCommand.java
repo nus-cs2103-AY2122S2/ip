@@ -26,6 +26,10 @@ public class ByeCommand extends Command {
      * @throws DogeException if storage fails to save task list
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         storage.save(tasks.getTaskList());
         this.setExit(true);
     }

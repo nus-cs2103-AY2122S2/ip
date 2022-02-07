@@ -29,6 +29,10 @@ public class UnmarkCommand extends Command {
      * @throws DogeException if it fails to unmark the specified task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (this.details.isEmpty()) {
             throw new DogeException("How am I supposed to unmark something without knowing which task?");
         }

@@ -32,6 +32,7 @@ public class TaskList {
      * @param task the new task to be added
      */
     public void addTask(Task task) {
+        assert task != null : "added task should not be null";
         this.tasks.add(task);
     }
 

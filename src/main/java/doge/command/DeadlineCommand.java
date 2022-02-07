@@ -34,6 +34,10 @@ public class DeadlineCommand extends Command {
      * necessary details to initialise a Deadline task
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         String[] curr = this.task.getDescription().split("/");
 
         if (this.task.getDescription().isEmpty()) {

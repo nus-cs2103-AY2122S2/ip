@@ -30,6 +30,10 @@ public class FindCommand extends Command {
      * @throws DogeException if user fails to provide a String for Doge bot to search for
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (this.details.isEmpty()) {
             throw new DogeException("How am I supposed to find something if you don't give me the details?");
         }
