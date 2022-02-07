@@ -23,14 +23,12 @@ public class Tsohg {
         }
     }
 
-    /**
-     * Runs the program.
-     */
-    public void run() {
-        ui.run();
+    public String takeInput(String input){
+        try {
+            return ui.takeInput(input);
+        } catch (TsohgException e) {
+            return e.getMessage();
+        }
     }
 
-    public static void main(String[] args) {
-        new Tsohg("data.txt").run();
-    }
 }

@@ -1,171 +1,114 @@
 package tsohg;
 
-import java.io.PrintStream;
-import java.util.Scanner;
-
 /**
  * The class handling UI and IO from users.
  */
 public class Ui {
 
-    private static final Scanner IN = new Scanner(System.in);
-    private static final PrintStream OUT = System.out;
     private TaskList tasks;
 
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 
-    /**
-     * Runs the program.
-     */
-    public void run() {
-        printMenu();
-        while (true) {
-            try {
-                if (!takeInput()) {
-                    break;
-                }
-            } catch (TsohgException e) {
-                OUT.println(e.getMessage());
-            }
-        }
-        printLine();
-    }
-
-    private void printLine() {
-        String line = "\n~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\""
-                + "~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\n";
-        OUT.println(line);
-    }
-
-    private void printMenu() {
-        String art = "                      .-.\n"
-                + "         heehee      /aa \\_\n"
-                + "                   __\\-  / )                 .-.\n"
-                + "         .-.      (__/    /        haha    _/oo \\\n"
-                + "       _/ ..\\       /     \\               ( \\v  /__\n"
-                + "      ( \\  u/__    /       \\__             \\/   ___)\n"
-                + "       \\    \\__)   \\_.-._._   )  .-.       /     \\\n"
-                + "       /     \\             `-`  / ee\\_    /       \\_\n"
-                + "    __/       \\               __\\  o/ )   \\_.-.__   )\n"
-                + "   (   _._.-._/     hoho     (___   \\/           '-'\n"
-                + "jgs '-'                        /     \\\n"
-                + "                             _/       \\    teehee\n"
-                + "                            (   __.-._/\n";
-        String greet = "Heee hooo I'm Tsohg! How can I help you?";
-        OUT.println(art);
-        OUT.println(greet);
-    }
-
-    private boolean takeInput() throws TsohgException {
-        printLine();
-        String input = IN.nextLine();
-        printLine();
-
+    public String takeInput(String input) throws TsohgException {
         String[] splitInput = input.split("\\s+", 2);
         String command = splitInput[0];
         String argument = splitInput.length == 2 ? splitInput[1] : null;
         switch (command) {
         case "bye":
-            OUT.println("Seeeee youuuu sooon...");
-            return false;
+            return "Seeeee youuuu sooon...";
         case "list":
-            list();
-            break;
+            return list();
         case "delete":
-            delete(argument);
-            break;
+            return delete(argument);
         case "mark":
-            mark(argument);
-            break;
+            return mark(argument);
         case "unmark":
-            unmark(argument);
-            break;
+            return unmark(argument);
         case "todo":
-            todo(argument);
-            break;
+            return todo(argument);
         case "deadline":
-            deadline(argument);
-            break;
+            return deadline(argument);
         case "event":
-            event(argument);
-            break;
+            return event(argument);
         case "find":
-            find(argument);
-            break;
+            return find(argument);
         default:
-            throw new TsohgException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new TsohgException("OOPS!!! I'm sorry,\n but I don't know what that means :-(");
         }
-        return true;
     }
 
-    private void list() {
-        OUT.println("Here are the tasks in your list:");
-        OUT.print(tasks.toString());
+    private String list() {
+        String response = "Here are the tasks in your list:\n"
+                + tasks.toString();
+        return response;
     }
 
-    private void delete(String argument) throws TsohgException {
+    private String delete(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
-        OUT.println("Noted. I've removed this task:");
-        OUT.println(tasks.deleteItem(index));
-        OUT.println(tasks.listCount());
+        String response = "Noted. I've removed this task:\n"
+                + tasks.deleteItem(index) + "\n"
+                + tasks.listCount();
+        return response;
     }
 
-    private void mark(String argument) throws TsohgException {
+    private String mark(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
-        OUT.println("Nice! I've marked this task as done:");
-        OUT.println(tasks.markItem(index));
+        String response = "Nice! I've marked this task as done:\n"
+                + tasks.markItem(index);
+        return response;
     }
 
-    private void unmark(String argument) throws TsohgException {
+    private String unmark(String argument) throws TsohgException {
         int index = Integer.parseInt(argument) - 1;
-        OUT.println("OK, I've marked this task as not done yet:");
-        OUT.println(tasks.unmarkItem(index));
+        String response = "OK, I've marked this task as not done yet:\n"
+                + tasks.unmarkItem(index);
+        return response;
     }
 
-    private void todo(String argument) throws TsohgException {
+    private String todo(String argument) throws TsohgException {
         if (argument == null) {
             throw new TsohgException("OOPS!!! The description of a todo cannot be empty.");
         }
-        String response = tasks.addTodo(argument);
-        OUT.println("Got it. I've added this task:");
-        OUT.println(response);
-        OUT.println(tasks.listCount());
+        String response = "Got it. I've added this task:\n"
+                + tasks.addTodo(argument) + "\n"
+                + tasks.listCount();
+        return response;
     }
 
-    private void deadline(String argument) throws TsohgException {
+    private String deadline(String argument) throws TsohgException {
         String[] split = argument.split(" /by ", 2);
         if (split.length != 2) {
             throw new TsohgException("Date is not provided!");
         }
         String name = split[0];
         String date = split[1];
-        String response = tasks.addDeadline(name, date);
-        OUT.println("Got it. I've added this task:");
-        OUT.println(response);
-        OUT.println(tasks.listCount());
+        String response = "Got it. I've added this task:\n"
+                + tasks.addDeadline(name, date) + "\n"
+                + tasks.listCount();
+        return response;
     }
 
-    private void event(String argument) throws TsohgException {
+    private String event(String argument) throws TsohgException {
         String[] split = argument.split(" /at ", 2);
         if (split.length != 2) {
             throw new TsohgException("Date is not provided!");
         }
         String name = split[0];
         String date = split[1];
-        String response = tasks.addEvent(name, date);
-        OUT.println("Got it. I've added this task:");
-        OUT.println(response);
-        OUT.println(tasks.listCount());
+        String response = "Got it. I've added this task:\n"
+                + tasks.addEvent(name, date) + "\n"
+                + tasks.listCount();
+        return response;
     }
 
-    private void find(String argument) throws TsohgException {
+    private String find(String argument) throws TsohgException {
         if (argument == null) {
             throw new TsohgException("OOPS!!! The description of find cannot be empty.");
         }
-        String response = tasks.find(argument);
-        OUT.println("Here are the matching tasks in your list:");
-        OUT.println(response);
+        String response = "Here are the matching tasks in your list:\n"
+                + tasks.find(argument);
+        return response;
     }
 }
