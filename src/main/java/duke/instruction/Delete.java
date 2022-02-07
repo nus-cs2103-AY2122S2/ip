@@ -77,4 +77,19 @@ final class Delete extends Instruction {
         ui.printMessage("You have successfully deleted:\n"
                 + this.toDelete.toString());
     }
+
+    /**
+     * Performs the instruction and returns the output message to be printed to the GUI.
+     * This method is written for GUI only. If the input is supplied to GUI,the output
+     * will not be printed to the output stream.
+     *
+     * @return The output message to the GUI.
+     */
+    public String getOutputMessage() {
+
+        tasks.deleteIndex(toDeleteIndex);
+
+        return "You have successfully deleted:\n"
+                + this.toDelete.toString();
+    }
 }

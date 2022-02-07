@@ -28,4 +28,16 @@ final class Quit extends Instruction {
     public void act(Ui ui) {
         ui.printMessage(Quit.SEE_YOU_MESSAGE);
     }
+
+    /**
+     * Performs the instruction and returns the output message to be printed to the GUI.
+     * This method is written for GUI only. If the input is supplied to GUI,the output
+     * will not be printed to the output stream.
+     *
+     * @return The output message to the GUI.
+     */
+    public String getOutputMessage() {
+
+        return SEE_YOU_MESSAGE;
+    }
 }

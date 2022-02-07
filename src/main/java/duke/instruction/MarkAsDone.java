@@ -79,4 +79,17 @@ final class MarkAsDone extends Instruction {
         TaskManager.markAsDone(this.toMark);
         ui.printMessage("Nice! I've marked this task as done:\n     " + this.toMark);
     }
+
+    /**
+     * Performs the instruction and returns the output message to be printed to the GUI.
+     * This method is written for GUI only. If the input is supplied to GUI,the output
+     * will not be printed to the output stream.
+     *
+     * @return The output message to the GUI.
+     */
+    public String getOutputMessage() {
+
+        TaskManager.markAsDone(this.toMark);
+        return "Nice! I've marked this task as done:\n     " + this.toMark;
+    }
 }

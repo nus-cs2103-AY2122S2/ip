@@ -5,12 +5,13 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
+
+
 /**
  * The main class that creates a Duke -- a task manager, and runs the program.
  */
 public class Duke {
 
-    private static final String END_MESSAGE = "Bye!";
     private static final String FILE_PATH = "data/tasks.txt";
 
     private final Storage storage;
@@ -18,7 +19,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructs a main.Duke -- a personal task manager.
+     * Constructs a Duke -- a personal task manager.
      *
      * @param storage The storage to be used.
      * @param taskManager The task manager to be used.
@@ -28,6 +29,25 @@ public class Duke {
         this.storage = storage;
         this.taskManager = taskManager;
         this.ui = ui;
+    }
+
+    /**
+     * Constructs a Duke -- a personal task manager.
+     * This is the constructor for GUI application, as it does not require a UI
+     * anymore.
+     *
+     * @param storage The storage to be used.
+     * @param taskManager The task manager to be used.
+     */
+    private Duke(Storage storage, TaskManager taskManager) {
+
+        this.storage = storage;
+        this.taskManager = taskManager;
+        this.ui = null;
+    }
+
+    protected static Duke ofGuiApplication() {
+        return new Duke(new Storage(FILE_PATH), new TaskManager(new Storage(FILE_PATH)));
     }
 
     /**
@@ -71,5 +91,27 @@ public class Duke {
                 }
             }
         }
+    }
+
+    /**
+     * Returns the output from duke, given the input from user.
+     * This method is designed specifically for GUI, and it is invoked by the GUI to
+     * obtain the output and print out to the user.
+     *
+     * @param input The input from the user.
+     * @return The response from duke.
+     */
+    String getResponse(String input) {
+
+        try {
+            Instruction currentInstruction = Instruction.of(input, taskManager);
+            String response = currentInstruction.getOutputMessage();
+            taskManager.writeBack(storage);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+
+
     }
 }

@@ -77,4 +77,17 @@ final class UnmarkAsDone extends Instruction {
         TaskManager.markAsNotDone(this.toUnmark);
         ui.printMessage("I've marked this task as not done yet:\n" + this.toUnmark);
     }
+
+    /**
+     * Performs the instruction and returns the output message to be printed to the GUI.
+     * This method is written for GUI only. If the input is supplied to GUI,the output
+     * will not be printed to the output stream.
+     *
+     * @return The output message to the GUI.
+     */
+    public String getOutputMessage() {
+
+        TaskManager.markAsNotDone(this.toUnmark);
+        return "I've marked this task as not done yet:\n" + this.toUnmark;
+    }
 }
