@@ -17,10 +17,9 @@ public class Ui {
      * Prints the formatted version of given message to console
      */
     public void printMessage(String message) {
-        System.out.printf("""
-                        ____________________________________________________________
-                        %s
-                        ____________________________________________________________%n""",
+        System.out.printf("____________________________________________________________\n" +
+                        "%s\n" +
+                        "____________________________________________________________%n",
                 message
         );
     }

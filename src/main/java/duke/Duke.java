@@ -29,9 +29,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         ui.println("Hello from\n" + logo);
 
-        ui.printMessage("""
-                Hello! I'm Duke
-                What can I do for you?""");
+        ui.printMessage("Hello! I'm Duke\n" +
+                "What can I do for you?");
 
         storage.load();
 
@@ -77,10 +76,9 @@ public class Duke {
                     pastTasks.add(parser.parseTodos(command));
                     storage.save();
 
-                    ui.printMessage(String.format("""
-                            Got it. I've added this task:
-                            %s
-                            Now you have %d %s in the list.""",
+                    ui.printMessage(String.format("Got it. I've added this task:\n" +
+                            "%s\n" +
+                            "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -89,10 +87,9 @@ public class Duke {
                     pastTasks.add(parser.parseDeadlines(command));
                     storage.save();
 
-                    ui.printMessage(String.format("""
-                            Got it. I've added this task:
-                            %s
-                            Now you have %d %s in the list.""",
+                    ui.printMessage(String.format("Got it. I've added this task:\n" +
+                            "%s\n" +
+                            "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -101,10 +98,9 @@ public class Duke {
                     pastTasks.add(parser.parseEvent(command));
                     storage.save();
 
-                    ui.printMessage(String.format("""
-                            Got it. I've added this task:
-                            %s
-                            Now you have %d %s in the list.""",
+                    ui.printMessage(String.format("Got it. I've added this task:\n" +
+                            "%s\n" +
+                            "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -114,10 +110,9 @@ public class Duke {
 
                     storage.save();
 
-                    ui.printMessage(String.format("""
-                            Noted. I've removed this task:
-                            %s
-                            Now you have %d %s in the list.""",
+                    ui.printMessage(String.format("Noted. I've removed this task:\n" +
+                            "%s\n" +
+                            "Now you have %d %s in the list.",
                             removedTask,
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
