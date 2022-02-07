@@ -9,7 +9,7 @@
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;">
+      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="45.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;">
          <HBox.margin>
             <Insets />
          </HBox.margin>

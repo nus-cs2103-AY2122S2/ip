@@ -8,6 +8,7 @@ import com.duke.command.CommandFind;
 import com.duke.command.CommandList;
 import com.duke.command.CommandMark;
 import com.duke.command.CommandResult;
+import com.duke.command.CommandSwitchTab;
 import com.duke.command.CommandUnmark;
 
 /**
@@ -61,6 +62,12 @@ public class Parser {
         case "deadline":
         case "event":
             cmdResult = new CommandAdd(strArr[0], str, taskList).execute();
+            break;
+        case "chat":
+            cmdResult = new CommandSwitchTab(strArr[0], str).execute();
+            break;
+        case "help":
+            cmdResult = new CommandSwitchTab(strArr[0], str).execute();
             break;
         default:
             cmdResult = CommandResult.unknownResult();
