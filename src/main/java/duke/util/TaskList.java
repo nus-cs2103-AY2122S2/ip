@@ -65,9 +65,11 @@ public class TaskList {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append((i + 1) + "." + tasks.get(i));
+            sb.append(i + 1);
+            sb.append(".");
+            sb.append(tasks.get(i));
         }
         return sb.toString();
     }

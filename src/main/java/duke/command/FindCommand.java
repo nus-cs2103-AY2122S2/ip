@@ -9,7 +9,7 @@ import duke.util.TaskList;
  * Represents the command to find tasks according to a keyword.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String k) {
         keyword = k;
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @param storage  The storage.
      * @param tasks The list of tasks.
      * @param ui The user interface.
-     * @throws DukeException if there is a problem updating the storage or user interface.
+     * @throws DukeException If there is a problem updating the storage or user interface.
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         TaskList filteredTasks = tasks.filter(keyword);
