@@ -11,7 +11,7 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        atDate = this.parseDate(at);
+        atDate = parseDate(at);
     }
 
     /**
@@ -19,7 +19,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", isDone, this.getDescription(), atDate);
+        return String.format("E|%s|%s|%s", isDone, getDescription(), atDate);
     }
 
     /**

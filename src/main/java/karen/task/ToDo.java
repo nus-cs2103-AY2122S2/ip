@@ -13,7 +13,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toSaveData() {
-        return String.format("T|%s|%s", this.isDone, this.getDescription());
+        return String.format("T|%s|%s", isDone, getDescription());
     }
 
     /**

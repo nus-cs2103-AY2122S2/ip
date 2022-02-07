@@ -15,7 +15,7 @@ public class ModifyCommand extends Command {
     protected ModifyType modifyAction;
     private int taskIndex;
 
-    public ModifyCommand (int inputIndex, ModifyType inputAction) {
+    public ModifyCommand(int inputIndex, ModifyType inputAction) {
         taskIndex = inputIndex;
         modifyAction = inputAction;
     }

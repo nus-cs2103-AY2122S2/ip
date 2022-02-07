@@ -39,9 +39,12 @@ public class FindCommand extends Command {
         }
 
         StringBuilder formatString = new StringBuilder();
+
+        // if matching results found
         if (matchingList.size() > 0) {
             formatString.append("You made me find to just get this:\n");
         }
+
         formatString.append(ui.formatTaskList(matchingList));
         return ui.displayUserInput(formatString.toString());
     }

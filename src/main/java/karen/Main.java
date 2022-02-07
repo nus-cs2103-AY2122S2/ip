@@ -18,6 +18,7 @@ public class Main extends Application {
     public static final String USER_IMAGE_PATH = "/images/DaCat.png";
     public static final String KAREN_IMAGE_PATH = "/images/DaKaren.png";
     public static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
+    public static final String DIALOGBOX_PATH = "/view/DialogBox.fxml";
 
     private final Karen karen = new Karen();
 

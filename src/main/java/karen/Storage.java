@@ -165,7 +165,7 @@ public class Storage {
      * @throws IndexOutOfBoundsException if index is not within range of taskList
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
 
     /**
@@ -174,7 +174,7 @@ public class Storage {
      * @return list of Task objects
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     /**
@@ -183,7 +183,7 @@ public class Storage {
      * @param item Task object to be added to taskList
      */
     public void addTask(Task item) {
-        this.taskList.add(item);
+        taskList.add(item);
     }
 
     /**
@@ -192,7 +192,7 @@ public class Storage {
      * @param index of Task Object inside of taskList
      */
     public void deleteTask(int index) throws IndexOutOfBoundsException {
-        this.taskList.remove(index);
+        taskList.remove(index);
     }
 
 }
