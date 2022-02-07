@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,7 @@ import taskmaster.userinterface.UserInterface;
 import taskmaster.util.Storage;
 import taskmaster.util.TaskList;
 
-import java.nio.file.Paths;
+
 
 
 public class AddCommandsTest {
