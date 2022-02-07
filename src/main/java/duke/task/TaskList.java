@@ -86,7 +86,7 @@ public class TaskList {
      * @param date The date of the Task (null for TodoTask).
      * @param taskType The type task to be added.
      */
-    public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
+    public int addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
         assert !taskName.equals("") : "taskName must be specified";
         assert taskType > -1 && taskType < 3 : "taskType must be between 0 and 2";
 
@@ -103,6 +103,19 @@ public class TaskList {
         default:
             break;
         }
+        return 0;
+    }
+
+    /**
+     * Returns a boolean value indicating if a task with the specified taskName already exists.
+     * @param taskName The name of the Task to be checked
+     * @return A boolean value indicating if the taskName has a duplicate.
+     */
+    public boolean hasDuplicate(String taskName) {
+        if (this.tasks.stream().filter((t) -> t.getTaskName().equals(taskName)).count() > 0) {
+            return true;
+        }
+        return false;
     }
 
     public void removeTask(int index) {

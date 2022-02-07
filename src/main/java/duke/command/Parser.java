@@ -158,13 +158,21 @@ public class Parser {
             if (args.length == 1) {
                 throw new DukeException("Task Name must be provided!");
             }
+            if (taskList.hasDuplicate((inputString).substring(5).trim())) {
+                throw new DukeException("Duplicate Task Name!");
+            }
             break;
         case "deadline":
         case "event":
             String flag = action.equals("deadline") ? "/by" : "/at";
             int actionLength = action.equals("deadline") ? 9 : 6;
+            String taskName = inputString.substring(actionLength).split(flag)[0].trim();
+
             if (args.length == 1) {
                 throw new DukeException("Task Name must be provided!");
+            }
+            if (taskList.hasDuplicate(taskName)) {
+                throw new DukeException("Duplicate Task Name!");
             }
             if (Arrays.stream(args).noneMatch(flag::equals)) {
                 throw new DukeException(String
@@ -173,7 +181,7 @@ public class Parser {
             if (inputString.trim().split(flag).length == 1) {
                 throw new DukeException(String.format("Please specify deadline date after %s!", flag));
             }
-            if (inputString.substring(actionLength).split(flag)[0].trim().equals("")) {
+            if (taskName.equals("")) {
                 throw new DukeException("Task Name must be provided!");
             }
             try {
