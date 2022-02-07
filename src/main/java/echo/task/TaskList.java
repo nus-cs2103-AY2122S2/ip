@@ -2,6 +2,9 @@ package echo.task;
 
 import java.util.ArrayList;
 
+import echo.utils.EchoException;
+
+
 /**
  * This class encapsulates the list of tasks associated with Echo.
  */
@@ -29,8 +32,13 @@ public class TaskList {
      * Adds task to task list.
      *
      * @param task Task.
+     *
+     * @throws EchoException If task already exist in TASKS.
      */
-    public void add(Task task) {
+    public void add(Task task) throws EchoException {
+        if (checkDuplicate(task)) {
+            throw new EchoException(String.format("Duplicated task found: %s ", task.toString()));
+        }
         this.TASKS.add(task);
     }
 
@@ -118,6 +126,24 @@ public class TaskList {
             tasksString.setLength(tasksString.length() - 1);
         }
         return tasksString.toString();
+    }
+
+    /**
+     * Checks is a duplicated task exist.
+     *
+     * @param newTask New task to be added.
+     *
+     * @return If task already exist in TASKS, returns true; Otherwise false.
+     */
+    private boolean checkDuplicate(Task newTask) {
+        boolean hasDuplicate = false;
+        for (Task task : TASKS) {
+            if (newTask.equals(task)) {
+                hasDuplicate = true;
+                break;
+            }
+        }
+        return hasDuplicate;
     }
 
     /**

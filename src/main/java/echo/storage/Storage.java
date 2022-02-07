@@ -96,12 +96,12 @@ public class Storage {
                     break;
                 }
             } catch (NumberFormatException nfe) {
-                throw new EchoException(FILE_PATH + "\n    Second input must be 0 or 1 at line: " + line);
+                throw new EchoException(FILE_PATH + "\nSecond input must be 0 or 1 at line: " + line);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EchoException(FILE_PATH + "\n    Invalid format at line at line: " + line);
+                throw new EchoException(FILE_PATH + "\nInvalid format at line at line: " + line);
             } catch (DateTimeParseException e) {
-                throw new EchoException(FILE_PATH + "\n    Invalid date time format at line at line: " + line
-                        + "\n" + "    Follow the <yyyy-mm-dd> <24hr time> format. E.g. 2019-10-15 1800");
+                throw new EchoException(FILE_PATH + "\nInvalid date time format at line at line: " + line
+                        + "\nFollow the <yyyy-mm-dd> <24hr time> format. E.g. 2019-10-15 1800");
             }
         }
         s.close();

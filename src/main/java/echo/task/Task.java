@@ -62,4 +62,22 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), DESCRIPTION);
     }
+
+    /**
+     * Checks if instances of Task are equal.
+     *
+     * @param obj Object.
+     *
+     * @return If the DESCRIPTION is equal, returns true; false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            // Since obj is an instanceof Task, it is safe to type cast
+            // Object to Task.
+            Task task = (Task) obj;
+            return this.DESCRIPTION.equals(task.DESCRIPTION);
+        }
+        return false;
+    }
 }

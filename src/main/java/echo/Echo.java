@@ -33,7 +33,10 @@ public class Echo {
         STORAGE = new Storage(filePath);
         try {
             tasks = new TaskList(STORAGE.load());
-        } catch (FileNotFoundException | EchoException e) {
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        } catch (EchoException e) {
+            UI.showError(e.getMessage().concat("\n Creating new list"));
             tasks = new TaskList();
         }
     }
