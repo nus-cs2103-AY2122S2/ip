@@ -47,13 +47,14 @@ test {
     }
 }
 
-application {
-    mainClassName = "duke.launcher"
-}
 
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
+}
+
+application {
+    mainClassName = "duke.Launcher"
 }
 
  checkstyle {
@@ -61,5 +62,6 @@ shadowJar {
  }
 
 run {
+    enableAssertions = true
     standardInput = System.in
 }

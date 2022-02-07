@@ -154,7 +154,9 @@ public class Duke extends Application {
             if (c.isExit()) {
                 return "Exit program";
             } else {
-                return ui.getMessage();
+                String response = ui.getMessage();
+                assert response != null;
+                return response;
             }
         } catch (ExceptionHandler | IOException e) {
             return e.getMessage();
