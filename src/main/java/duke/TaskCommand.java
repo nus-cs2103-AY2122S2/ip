@@ -13,7 +13,7 @@ import java.util.Date;
 public class TaskCommand extends Command {
 
     enum TaskType {
-        todo, deadline, event
+        TODO, DEADLINE, EVENT
     }
 
     private TaskType taskType;
@@ -26,7 +26,7 @@ public class TaskCommand extends Command {
      */
     TaskCommand (TaskType taskType, String command) {
         this.taskType = taskType;
-        this.command = command; 
+        this.command = command;
     }
 
     /**
@@ -39,11 +39,11 @@ public class TaskCommand extends Command {
      * @throws ParseException when there is an error in recognising the text.
      */
     @Override
-    String runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException, ParseException {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException {
         String indentation = "    ";
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
         String message = null;
-        if (taskType == TaskType.todo) {
+        if (taskType == TaskType.TODO) {
             try {
                 String newString = command.substring(5).trim();
                 if (newString.length() == 0) {
@@ -61,7 +61,7 @@ public class TaskCommand extends Command {
                 ui.showWrongFormat("ToDo");
                 return "Error";
             }
-        } else if (taskType == TaskType.event) {
+        } else if (taskType == TaskType.EVENT) {
             try {
                 String description = command.substring(6, command.indexOf('/') - 1).trim();
                 String date = command.substring((command.indexOf('/') + 4)).trim();
@@ -78,7 +78,7 @@ public class TaskCommand extends Command {
                 ui.showWrongFormat("Event");
                 return "Error";
             }
-        } else if (taskType == TaskType.deadline) {
+        } else if (taskType == TaskType.DEADLINE) {
             try {
                 String description = command.substring(9, command.indexOf('/') - 1).trim();
                 String date = command.substring((command.indexOf('/') + 4)).trim();

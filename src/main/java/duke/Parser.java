@@ -1,31 +1,13 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Helps the software to make sense of the commands that the user has sent in.
  */
 public class Parser {
 
-    private Scanner scanner;
-    private String command;
 
-    /**
-     * Constructor to create a new instance of a parser.
-     */
     public Parser() {
-        this.scanner = new Scanner(System.in);
-        this.command = " ";
-    }
 
-    /**
-     * To read the command that the user has entered into the system.
-     * @return a instance of Command that the system will run.
-     * @throws DukeException when the user types a command that is not recognised.
-     */
-    public Command readCommand() throws DukeException {
-        this.command = scanner.nextLine();
-        return processCommand(command);
     }
 
     /**
@@ -49,11 +31,11 @@ public class Parser {
             int index = Integer.parseInt(command.substring(7));
             return new DeleteCommand(index - 1);
         } else if (command.contains("todo")) {
-            return new TaskCommand(TaskCommand.TaskType.todo, command);
+            return new TaskCommand(TaskCommand.TaskType.TODO, command);
         } else if (command.contains("event")) {
-            return new TaskCommand(TaskCommand.TaskType.event, command);
+            return new TaskCommand(TaskCommand.TaskType.EVENT, command);
         } else if (command.contains("deadline")) {
-            return new TaskCommand(TaskCommand.TaskType.deadline, command);
+            return new TaskCommand(TaskCommand.TaskType.DEADLINE, command);
         } else if (command.contains("/help")) {
             return new HelpCommand();
         } else if (command.contains("find")) {

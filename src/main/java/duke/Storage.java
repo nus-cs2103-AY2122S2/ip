@@ -112,7 +112,7 @@ public class Storage {
      */
     public void appendTask(Task task) throws IOException {
         FileWriter appendWriter = new FileWriter(file, true);
-        String toPrint = task.toString() + task.getStatus() +  task.getDescription();
+        String toPrint = task.toString() + task.getStatus() + task.getDescription();
         System.out.println("writing");
         appendWriter.write(toPrint + "\n");
         appendWriter.close();

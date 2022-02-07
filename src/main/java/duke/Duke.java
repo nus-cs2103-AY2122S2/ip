@@ -1,7 +1,10 @@
 package duke;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,10 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
 
 /**
  * This class consists of the main method, and to initialise the program.
@@ -32,8 +31,6 @@ public class Duke extends Application {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
-
-
 
     /**
      * This is the constructor to create a new instance of Duke.
@@ -116,25 +113,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the program Duke for the user
-     * @throws IOException if the file is corrupt or file is not found.
-     * @throws ParseException if the contents of the file is not in the correct format.
-     */
-    public void run() throws IOException, ParseException {
-
-        Parser parser = new Parser();
-
-        while (true) {
-            try {
-                Command command = parser.readCommand();
-                command.runCommand(taskList, ui, storage);
-            } catch (DukeException e) {
-                ui.showWrongCommand();
-            }
-        }
-    }
-
-    /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
@@ -151,8 +129,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws DukeException, IOException, ParseException {
-
+    String getResponse(String input) throws IOException, ParseException {
         try {
             Parser parser = new Parser();
             Command c = parser.processCommand(input);

@@ -20,13 +20,14 @@ public class FindCommand extends Command {
      */
     @Override
     String runCommand(TaskList taskList, Ui ui, Storage storage) {
-        ui.printList(taskList.find(taskToFind));
 
-        String s = new String();
+        ui.printList(taskList.find(taskToFind));
+        String newString = new String();
+
         for (String str : taskList.find(taskToFind)) {
-            s += str + "\n";
+            newString += str + "\n";
         }
 
-        return s;
+        return newString;
     }
 }
