@@ -11,12 +11,14 @@ import java.util.Date;
 
 
 public class FileDecoder {
+    private final SimpleDateFormat dateFormatter;
 
-    public FileDecoder() {}
+    public FileDecoder() {
+        this.dateFormatter = new SimpleDateFormat("MMM dd yyyy");
+    }
 
     /**
      * Returns the task equivalent from a task generating string input in pre-saved file
-     *
      * @param tasks A task generating string that follows standard format
      * @return Task object containing information from input string
      */
@@ -31,11 +33,9 @@ public class FileDecoder {
         // if String supplied is one with a date
         if (args.length == 4) {
             try {
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd yyyy");
                 Date dateObject = dateFormatter.parse(args[3]);
                 dateFormatter.applyPattern("yyyy-MM-dd");
                 taskDate = dateFormatter.format(dateObject);
-                ;
             } catch (ParseException e) {
                 System.out.println(e);
             }
