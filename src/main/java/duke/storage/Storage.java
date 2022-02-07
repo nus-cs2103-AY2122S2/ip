@@ -87,26 +87,30 @@ public class Storage {
      * @param tasks list of tasks to be saved
      * @throws IOException
      */
-    public void saveFile(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter("data/tasks.txt");
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            String type = t.getType();
-            String mark = t.getMark();
-            String detail = t.getDetail();
-            switch (type) {
-            case "T":
-                fw.write(type + " | " + mark + " | " + detail + "\n");
-                break;
-            case "E":
-            case "D":
-                String date = t.getDate();
-                fw.write(type + " | " + mark + " | " + detail + " | " + date + "\n");
-                break;
-            default:
-                break;
+    public void saveFile(TaskList tasks) {
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                String type = t.getType();
+                String mark = t.getMark();
+                String detail = t.getDetail();
+                switch (type) {
+                case "T":
+                    fw.write(type + " | " + mark + " | " + detail + "\n");
+                    break;
+                case "E":
+                case "D":
+                    String date = t.getDate();
+                    fw.write(type + " | " + mark + " | " + detail + " | " + date + "\n");
+                    break;
+                default:
+                    break;
+                }
             }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        fw.close();
     }
 }

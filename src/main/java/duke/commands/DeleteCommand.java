@@ -61,9 +61,7 @@ public class DeleteCommand extends Command {
         }
         deleted = tasks.get(deleteIndex);
         this.tasks.remove(deleteIndex);
-
-        return "Noted. I've removed this task:\n"
-            + "  " + deleted + "\n"
-            + "Now you have " + this.tasks.size() + " tasks in the list";
+        storage.saveFile(this.tasks);
+        return ui.deleteMessage(deleted, this.tasks.size());
     }
 }

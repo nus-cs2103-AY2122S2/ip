@@ -26,7 +26,6 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
-
         try {
             tasks = storage.load();
         } catch (IOException e) {
@@ -35,35 +34,8 @@ public class Duke {
         }
     }
 
-    /**
-     * duke.Main program loop that is run in main
-     */
-    public void run() {
-        //intro messages
-        ui.welcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        Command cmd;
-        //main program loop
-        while (true) {
-            try {
-                String input = sc.nextLine();
-                ui.printLine();
-                cmd = Parser.processInput(input);
-                cmd.execute(tasks, ui, storage);
-                tasks = cmd.getList();
-                if (cmd.endsProgram()) {
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getWelcome() {
+        return ui.welcomeMessage();
     }
 
     public String getResponse(String input) {

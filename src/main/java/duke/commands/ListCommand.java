@@ -42,7 +42,7 @@ public class ListCommand extends Command {
         this.tasks = tasks;
         String output;
 
-        output = INDENT + "Here are the tasks in your list:\n";
+        output = ui.listMessage();
         for (int i = 0; i < tasks.size(); i++) {
             output = output + INDENT + (i + 1) + "." + tasks.get(i).toString() + "\n";
         }

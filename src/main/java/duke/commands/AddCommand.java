@@ -73,9 +73,8 @@ public class AddCommand extends Command {
             break;
         }
         this.tasks.add(added);
+        storage.saveFile(tasks);
 
-        return ("Got it. I've added this task:\n"
-            + "  " + added + "\n"
-            + "Now you have " + tasks.size() + " tasks in the list");
+        return ui.addMessage(added, tasks.size());
     }
 }

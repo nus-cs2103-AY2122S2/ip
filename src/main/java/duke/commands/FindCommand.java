@@ -52,9 +52,9 @@ public class FindCommand extends Command {
         }
 
         if (temp.size() == 0) {
-            output = "There are no tasks matching in your list";
+            output = ui.findMessage(false);
         } else {
-            output = INDENT + "Here are the matching tasks in your list\n";
+            output = ui.findMessage(true);
             for (int i = 0; i < temp.size(); i++) {
                 output = output + INDENT + (i + 1) + "." + temp.get(i).toString() + "\n";
             }
