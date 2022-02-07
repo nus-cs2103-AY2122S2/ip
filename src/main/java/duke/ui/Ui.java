@@ -22,21 +22,4 @@ public class Ui {
                 + "What can I do for you?");
     }
 
-    /**
-     * Returns a string read from the user's input
-     * into Duke.
-     * @return user input
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints out the inputted error message.
-     * @param error error message
-     */
-    public void showError(String error) {
-        System.out.println("ERROR: " + error);
-    }
 }

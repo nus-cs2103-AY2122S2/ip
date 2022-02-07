@@ -21,12 +21,49 @@ public class Parser {
     /**
      * Returns a Command object which nature depends on
      * the type of command input.
-     * @param command the first word of the input sent to the chatbot
+     * @param userInput the first word of the input sent to the chatbot
      * @return command object
      * @throws DukeException if an input containing todo only contains
      * todo or if the input contains unacceptable commands
      */
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String userInput) throws DukeException {
+
+        if (userInput.equals("list")) {
+            return new ListCommand();
+        }
+        if (userInput.equals("bye")) {
+            return new ExitCommand();
+        }
+        //Checks for user inputs that are empty
+        //or are todo/deadline/event commands
+        //without a specified task.
+        checkForEmptyCommands(userInput);
+
+        String[] twoWords = userInput.split(" ", 2);
+        String firstWord = twoWords[0];
+        if (firstWord.equals("delete") || firstWord.contains("mark")) {
+            int number = Integer.parseInt(twoWords[1]);
+            return commandsWithNumbers(firstWord, number);
+        }
+        //Checks for commands not known to the
+        //parser.
+        checkForUnknownCommand(firstWord);
+
+        String task = twoWords[1];
+        if (firstWord.equals("find")) {
+            return new FindCommand(task);
+        }
+        //Checks for date inputs of the wrong format
+        String date = task;
+        checkForWrongDateInput(firstWord, date);
+
+        return new AddCommand(firstWord, date);
+    }
+
+    public static void checkForEmptyCommands(String command) throws DukeException {
+        if (command.equals("")) {
+            throw new DukeException("Empty Command");
+        }
         if (command.equals("todo") || command.equals("todo ")) {
             throw new DukeException("Todo cannot be empty");
         }
@@ -36,42 +73,16 @@ public class Parser {
         if (command.equals("event") || command.equals("event ")) {
             throw new DukeException("Event cannot be empty");
         }
+    }
 
-        if (command.equals("list")) {
-            return new ListCommand();
-        }
-        if (command.equals("bye")) {
-            return new ExitCommand();
-        }
-
-        String[] twoWords = command.split(" ", 2);
-        String firstWord = twoWords[0];
-        if (firstWord.equals("delete") || firstWord.contains("mark")) {
-            int number = Integer.parseInt(twoWords[1]);
-            if (firstWord.equals("delete")) {
-                return new DeleteCommand(number);
-            }
-
-            if (firstWord.equals("mark")) {
-                return new MarkCommand(number);
-            }
-
-            if (firstWord.equals("unmark")) {
-                return new UnmarkCommand(number);
-            }
-        }
-
-        if (firstWord.equals("find")) {
-            String task = twoWords[1];
-            return new FindCommand(task);
-        }
-
-        if (!firstWord.equals("deadline") && !firstWord.equals("todo") && !firstWord.equals("event")) {
+    public static void checkForUnknownCommand(String command) throws DukeException {
+        if (!command.equals("deadline") && !command.equals("todo") && !command.equals("event")) {
             throw new DukeException("Unknown Command");
         }
+    }
 
-        String details = twoWords[1];
-        if (firstWord.equals("deadline")) {
+    public static void checkForWrongDateInput(String command, String details) throws DukeException {
+        if (command.equals("deadline")) {
             try {
                 String date = details.split("/by ")[1];
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
@@ -81,7 +92,7 @@ public class Parser {
                 throw new DukeException("Wrong date format: Please re-enter using yyyy-mm-dd format");
             }
         }
-        if (firstWord.equals("event")) {
+        if (command.equals("event")) {
             try {
                 String date = details.split("/at ")[1];
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m");
@@ -91,7 +102,18 @@ public class Parser {
                 throw new DukeException("Wrong date format: Please re-enter using yyyy-mm-dd format");
             }
         }
+    }
 
-        return new AddCommand(firstWord, details);
+    public static Command commandsWithNumbers(String command, int number) throws DukeException {
+        switch (command) {
+            case "delete":
+                return new DeleteCommand(number);
+            case "mark":
+                return new MarkCommand(number);
+            case "unmark":
+                return new UnmarkCommand(number);
+            default:
+                throw new DukeException("Command has no number");
+        }
     }
 }
