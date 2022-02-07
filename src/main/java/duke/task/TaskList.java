@@ -25,6 +25,16 @@ public class TaskList {
         this.taskList.remove(index);
     }
 
+//    public TaskList findTask(String keyword) {
+//        ArrayList<Task> copiedTaskList = new ArrayList<>(taskList);
+//        copiedTaskList.removeIf(s -> !s.getDescription().contains(keyword));
+//        TaskList tasksWithKeyword = new TaskList();
+//        for (Task task : copiedTaskList) {
+//            tasksWithKeyword.addTask(task);
+//        }
+//        return tasksWithKeyword;
+//    }
+
     public void listTasks() {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks!");
@@ -33,6 +43,21 @@ public class TaskList {
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNumber = i + 1;
                 System.out.println("  " + taskNumber + ". " + taskList.get(i));
+            }
+        }
+    }
+
+    public void listTasks(String keyword) {
+        if (taskList.size() == 0) {
+            System.out.println("You have no tasks!");
+        } else {
+            System.out.println("Here are the task(s) that contain(s) your keyword.");
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskNumber = i + 1;
+                Task task = taskList.get(i);
+                if (task.getDescription().contains(keyword)) {
+                    System.out.println("  " + taskNumber + ". " + task);
+                }
             }
         }
     }

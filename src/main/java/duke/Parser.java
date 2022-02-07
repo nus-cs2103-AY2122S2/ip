@@ -20,6 +20,11 @@ public class Parser {
                 throw new DukeException("There's too many input!");
             }
             return new ListCommand();
+        case "find":
+            if (commandAndDetails.length == 1) {
+                throw new DukeException("Enter the keyword of the tasks you want to find.");
+            }
+            return new FindCommand(commandAndDetails);
         case "mark":
         case "unmark":
         case "delete":
