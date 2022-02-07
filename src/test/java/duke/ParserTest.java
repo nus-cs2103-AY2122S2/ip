@@ -18,7 +18,7 @@ public class ParserTest {
 
     @Test
     public void parseFileDataTest_success(){
-        Deadline expectedDeadline = new Deadline("eat", 1, "tmr", true);
+        Deadline expectedDeadline = new Deadline("eat", "tmr", true);
         Deadline actualDeadline = (Deadline) Parser.parseFileData("D---false---eat---tmr");
         assertEquals(expectedDeadline.toString().substring(3), actualDeadline.toString().substring(3));
     }

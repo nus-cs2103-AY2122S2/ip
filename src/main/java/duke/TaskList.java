@@ -15,6 +15,10 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
+    public ArrayList<Task> get() {
+        return this.tasklist;
+    }
+
     /**
      * Deletes a specified index (starts from 1) from the input ArrayList and shifts
      * all subsequent task numbers accordingly by +1.

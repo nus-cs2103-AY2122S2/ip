@@ -6,7 +6,6 @@ T---false--- die---
 T---false--- 1---
 T---true--- 2---
 T---true--- 3---
-T---true--- 4---
 D---false--- aaa ---Apr 04 1998 02:00 PM
 D---false--- eat dinner ---2022-1-27 2400
 D---false--- eat dinner ---Jan 28 2022 12:00 AM
@@ -23,3 +22,4 @@ E---false--- eat bread now ---Jul 07 2001 10:00 PM
 D---false--- eat cat ---Jan 01 2021 07:00 PM
 D---false--- eat water ---Jan 01 2020 07:00 PM
 D---false--- aa ---202
+D---false--- eat paper ---Jan 01 2020 07:00 PM

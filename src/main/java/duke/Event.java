@@ -11,12 +11,11 @@ public class Event extends Task {
      * Have to strip/process the input first and remove 'event'
      *
      * @param input descriptor of task
-     * @param number task number
      * @param time duration of event
      * @param isReading flag to check if input is being read from file data
      */
-    public Event(String input, int number, String time, boolean isReading) {
-        super(input, number, time, "E", isReading);
+    public Event(String input, String time, boolean isReading) {
+        super(input, Task.totalTask, time, "E", isReading);
     }
 
     /**
