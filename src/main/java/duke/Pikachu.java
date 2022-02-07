@@ -45,10 +45,29 @@ public class Pikachu {
         //Syntax: list
         if (str.toLowerCase().equals("list")) {
             //System.out.println("list command reached!");
+
+            //Sorting chronologically, with todo's at the end
+            PriorityQueue<Task> taskPrioQueue = new PriorityQueue<Task>(new TaskComparator());
+            ArrayList<ToDo> toDos = new ArrayList<ToDo>();
+            for (Task t : inputList) {
+                //Separating the todo's from the rest
+                if (t.getClass().getSimpleName().equals("ToDo")) {
+                    toDos.add((ToDo) t);
+                } else {
+                    taskPrioQueue.add(t);
+                }
+            }
+
             String result;
             result = "Here are the tasks in your list:\n";
             int count = 1;
-            for (Task t : inputList) {
+            //Printing the deadlines and events, sorted chronologically
+            while (!taskPrioQueue.isEmpty()) {
+                result += ("   " + count + ". " + taskPrioQueue.poll() + "\n");
+                count += 1;
+            }
+            //Printing the todos
+            for (ToDo t : toDos) {
                 result += ("   " + count + ". " + t + "\n");
                 count += 1;
             }
@@ -206,5 +225,38 @@ public class Pikachu {
 
         //For non-recognizable inputs
         return "Pikachu does not understand...";
+    }
+}
+
+class TaskComparator implements Comparator<Task> {
+    
+    /**
+     * Overriden compare function, used by parser for sorting of tasks by chronological order.
+     * 
+     * @param int t1: First task to be compared.
+     * @param int t2: Second task to be compared.
+     * @return int Returns -1 if t1 is earlier than t2, and 1 if vice versa. If equal, return 0. 
+     */
+    public int compare(Task t1, Task t2) {
+        LocalDateTime t1Val, t2Val;
+
+        //Checking if t1 and t2 are deadlines or events, and casting them accordingly.
+        if (t1.getClass().getSimpleName().equals("Deadline")) {
+            Deadline t1Deadline = (Deadline) t1;
+            t1Val = t1Deadline.getDeadline();
+        } else {
+            Event t1Event = (Event) t1;
+            t1Val = t1Event.getStartTime();
+        }
+
+        if (t2.getClass().getSimpleName().equals("Deadline")) {
+            Deadline t2Deadline = (Deadline) t2;
+            t2Val = t2Deadline.getDeadline();
+        } else {
+            Event t2Event = (Event) t2;
+            t2Val = t2Event.getStartTime();
+        }
+
+        return t1Val.compareTo(t2Val);
     }
 }
