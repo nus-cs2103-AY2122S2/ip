@@ -17,7 +17,16 @@ public class Deadline extends Task {
     /** Deadline for current task */
     private final Date deadline;
 
-    public Deadline(String name, String deadline) {
+    /**
+     * Returns a new Deadline with the given name,
+     * and parses deadline string to a Date object.
+     *
+     * @param name Name of deadline.
+     * @param deadline Date the deadline is to be completed by,
+     *                 in string format of DD/MM/YYYY.
+     * @throws IllegalArgumentException If deadline is not of proper format.
+     */
+    public Deadline(String name, String deadline) throws IllegalArgumentException {
         super(name);
         this.deadline = parseDeadline(deadline);
     }

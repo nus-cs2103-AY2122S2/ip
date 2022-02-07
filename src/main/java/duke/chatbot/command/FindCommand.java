@@ -1,9 +1,9 @@
 package duke.chatbot.command;
 
+import java.util.ArrayList;
+
 import duke.data.TaskList;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Command which searches among

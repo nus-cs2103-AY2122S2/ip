@@ -9,6 +9,13 @@ public class Event extends Task {
     /** Time at which this event occurs */
     private final String time;
 
+    /**
+     * Returns a new Event with given name,
+     * and the time which the event occurs.
+     *
+     * @param name Name of new event.
+     * @param time Time at which event occurs.
+     */
     public Event(String name, String time) {
         super(name);
         this.time = time;

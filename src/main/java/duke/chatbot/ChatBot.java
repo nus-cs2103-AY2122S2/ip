@@ -20,6 +20,13 @@ public class ChatBot {
     /** Boolean to track if bot has received a termination command */
     private boolean hasTerminated;
 
+    /**
+     * Returns a ChatBot that run commands based
+     * on given TaskList.
+     *
+     * @param taskList TaskList instance keeping track of
+     *                 list of tasks for user.
+     */
     public ChatBot(TaskList taskList) {
         this.taskList = taskList;
         this.hasTerminated = false;

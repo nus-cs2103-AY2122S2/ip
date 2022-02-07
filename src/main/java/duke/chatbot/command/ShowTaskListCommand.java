@@ -1,8 +1,8 @@
 package duke.chatbot.command;
 
-import duke.data.TaskList;
-
 import java.util.ArrayList;
+
+import duke.data.TaskList;
 
 /**
  * Command which prints out a list of item
