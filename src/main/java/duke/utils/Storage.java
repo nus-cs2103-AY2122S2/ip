@@ -103,13 +103,14 @@ public class Storage {
      */
     public static Task fileToTask(String taskInString) {
         char type = taskInString.charAt(1);
+        TaskType taskType = type == 'D' ? TaskType.DEADLINE : type == 'E' ? TaskType.EVENT : TaskType.TODO;
         boolean isDone = taskInString.charAt(4) == 'X';
         try {
             String[] actualTask;
             String description;
-            switch (type) {
+            switch (taskType) {
             /* deadline */
-            case 'D':
+            case DEADLINE:
                 actualTask = taskInString.substring(7).split("\\(by: ");
                 description = actualTask[0];
                 String by = actualTask[1].replaceAll("\\)", "");
@@ -117,7 +118,7 @@ public class Storage {
                 deadline.setDone(isDone);
                 return deadline;
             /* event */
-            case 'E':
+            case EVENT:
                 actualTask = taskInString.substring(7).split("\\(at: ");
                 description = actualTask[0];
                 String at = actualTask[1].replaceAll("\\)", "");
@@ -125,11 +126,13 @@ public class Storage {
                 event.setDone(isDone);
                 return event;
             /* todo */
-            default:
+            case TODO:
                 description = taskInString.substring(7);
                 Todo todo = new Todo(description);
                 todo.setDone(isDone);
                 return todo;
+            default:
+                return null;
             }
         } catch (DateTimeParseException e) {
             new Ui().showErrorMessage(e.getMessage());
@@ -137,18 +140,24 @@ public class Storage {
         }
     }
 
-    public static LocalDateTime extractDateTime(String keyword) {
+    /**
+     * Extract date/time in file to LocalDateTime
+     *
+     * @param dateTime the date/time in String
+     * @return the date/time in LocalDateTime
+     */
+    public static LocalDateTime extractDateTime(String dateTime) {
         DateTimeFormatter formatter;
         LocalDateTime localDateTime;
         LocalDate localDate;
         boolean hasTime = Pattern.compile("[A-Za-z]*, [A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)")
-                .matcher(keyword).find();
+                .matcher(dateTime).find();
         if (hasTime) {
             formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
-            localDateTime = LocalDateTime.parse(keyword, formatter); //convert from hhmmaa to HHmm
+            localDateTime = LocalDateTime.parse(dateTime, formatter); //convert from hhmmaa to HHmm
         } else {
             formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.ENGLISH);
-            localDate = LocalDate.parse(keyword, formatter);
+            localDate = LocalDate.parse(dateTime, formatter);
             localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
         }
         return localDateTime;

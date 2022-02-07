@@ -18,11 +18,4 @@ public abstract class Command {
      * @throws CortanaException the cortana exception
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws CortanaException;
-
-    /**
-     * Is user exited.
-     *
-     * @return whether the user inputs an exit command
-     */
-    public abstract boolean isExit();
 }
