@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
 
         output += UwuCommand.TRIGGER + ": UwU\n";
         output += OwoCommand.TRIGGER + ": OwO\n";
-
+ 
         output += TerminateCommand.TRIGGER + ": terminate program";
 
         return new CommandOutput(output, Sfx.SFX_COMMAND_HELP);
