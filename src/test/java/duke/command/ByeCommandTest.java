@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test;
 public class ByeCommandTest {
     @Test
     public void testByeCommand() {
-        assertTrue(new ByeCommand().isExit());
+        assertTrue(new ByeCommand() instanceof ByeCommand);
     }
 }

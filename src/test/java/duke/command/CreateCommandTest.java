@@ -3,9 +3,6 @@ package duke.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,17 +40,11 @@ public class CreateCommandTest {
         Ui ui = new Ui();
         List<Task> taskList = new ArrayList<Task>();
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outStream));
-            new CreateCommand("Test Title", TaskType.TODO).execute(taskList, ui);
-            outStream.flush();
-            String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n"
-                    + "     Got it. I've added this task:\n"
+            String lines = new CreateCommand("Test Title", TaskType.TODO).execute(taskList, ui);
+            assertEquals("Got it. I've added this task:\n"
                     + "       [T][ ] Test Title\n"
-                    + "     Now you have 1 task in the list.\n"
-                    + "    ____________________________________________________________\n\n", lines);
-        } catch (DukeException | IOException e) {
+                    + "     Now you have 1 task in the list.", lines);
+        } catch (DukeException e) {
             fail();
         }
     }
@@ -65,33 +56,22 @@ public class CreateCommandTest {
 
         //With Date + Time
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outStream));
-            new CreateCommand("Test Title /by 2022-01-01 11:11", TaskType.DEADLINE).execute(taskList, ui);
-            outStream.flush();
-            String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n"
-                    + "     Got it. I've added this task:\n"
+            String lines = new CreateCommand("Test Title /by 2022-01-01 11:11",
+                    TaskType.DEADLINE).execute(taskList, ui);
+            assertEquals("Got it. I've added this task:\n"
                     + "       [D][ ] Test Title (by: 2022-01-01 11:11)\n"
-                    + "     Now you have 1 task in the list.\n"
-                    + "    ____________________________________________________________\n\n", lines);
-        } catch (DukeException | IOException e) {
+                    + "     Now you have 1 task in the list.", lines);
+        } catch (DukeException e) {
             fail();
         }
 
         //With Date only
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outStream));
-            new CreateCommand("Test Title 2 /by 2022-01-02", TaskType.DEADLINE).execute(taskList, ui);
-            outStream.flush();
-            String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n"
-                    + "     Got it. I've added this task:\n"
+            String lines = new CreateCommand("Test Title 2 /by 2022-01-02", TaskType.DEADLINE).execute(taskList, ui);
+            assertEquals("Got it. I've added this task:\n"
                     + "       [D][ ] Test Title 2 (by: 2022-01-02)\n"
-                    + "     Now you have 2 tasks in the list.\n"
-                    + "    ____________________________________________________________\n\n", lines);
-        } catch (DukeException | IOException e) {
+                    + "     Now you have 2 tasks in the list.", lines);
+        } catch (DukeException e) {
             fail();
         }
     }
@@ -139,33 +119,21 @@ public class CreateCommandTest {
 
         //With Date + Time
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outStream));
-            new CreateCommand("Test Title /at 2022-01-01 11:11", TaskType.EVENT).execute(taskList, ui);
-            outStream.flush();
-            String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n"
-                    + "     Got it. I've added this task:\n"
+            String lines = new CreateCommand("Test Title /at 2022-01-01 11:11", TaskType.EVENT).execute(taskList, ui);
+            assertEquals("Got it. I've added this task:\n"
                     + "       [E][ ] Test Title (at: 2022-01-01 11:11)\n"
-                    + "     Now you have 1 task in the list.\n"
-                    + "    ____________________________________________________________\n\n", lines);
-        } catch (DukeException | IOException e) {
+                    + "     Now you have 1 task in the list.", lines);
+        } catch (DukeException e) {
             fail();
         }
 
         //With Date only
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outStream));
-            new CreateCommand("Test Title 2 /at 2022-01-02", TaskType.EVENT).execute(taskList, ui);
-            outStream.flush();
-            String lines = outStream.toString();
-            assertEquals("    ____________________________________________________________\n"
-                    + "     Got it. I've added this task:\n"
+            String lines = new CreateCommand("Test Title 2 /at 2022-01-02", TaskType.EVENT).execute(taskList, ui);;
+            assertEquals("Got it. I've added this task:\n"
                     + "       [E][ ] Test Title 2 (at: 2022-01-02)\n"
-                    + "     Now you have 2 tasks in the list.\n"
-                    + "    ____________________________________________________________\n\n", lines);
-        } catch (DukeException | IOException e) {
+                    + "     Now you have 2 tasks in the list.", lines);
+        } catch (DukeException e) {
             fail();
         }
     }

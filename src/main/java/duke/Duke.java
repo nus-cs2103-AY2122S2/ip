@@ -22,7 +22,7 @@ public class Duke extends Application {
 
     private List<Task> taskList = Storage.loadFromFile(FILE_PATH);
 
-    public Ui getUi(){
+    public Ui getUi() {
         return UI;
     }
 
