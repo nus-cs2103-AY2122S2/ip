@@ -167,8 +167,8 @@ public class Parser {
      */
     private static Command prepareDeadlineCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
+        assert localDateTime != null : "LocalDateTime for Deadline command is initialized incorrectly";
         if (!input.contains("/by")) {
-            // If /by is not specified.
             throw new EchoException("Invalid input. Make sure to include '/by'\n"
                     + "    E.g. deadline return book /by 2019-10-15 1800");
         }
@@ -188,8 +188,8 @@ public class Parser {
      */
     private static Command prepareEventCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
+        assert localDateTime != null : "LocalDateTime for Event command is initialized incorrectly";
         if (!input.contains("/at")) {
-            // If /at is not specified.
             throw new EchoException("Invalid input. Make sure to include '/at' \n."
                     + "    E.g. event meeting /at 2019-10-15 1800");
         }
