@@ -1,53 +1,17 @@
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TaskList {
     private static final String INDENT = "    ";
     private final List<Task> tasks;
 
-    public TaskList(String path) {
-        try {
-            File file = new File(path);
-            file.createNewFile();
-            Scanner sc = new Scanner(file);
-            sc.useDelimiter(" \\| ");
-            tasks = new ArrayList<>();
-            while (sc.hasNext()) {
-                String taskType = sc.next();
-                String isDoneSymbol = sc.next();
-                String content = sc.next();
-                boolean isDone;
-                switch (isDoneSymbol) {
-                case "0":
-                    isDone = false;
-                    break;
-                case "1":
-                    isDone = true;
-                    break;
-                default:
-                    throw new DukeException("I cannot read the file. It is not in the expected format.");
-                }
-                switch (taskType) {
-                case "T":
-                    tasks.add(new Todo(content, isDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(content, LocalDate.parse(sc.next()), isDone));
-                    break;
-                case "E":
-                    tasks.add(new Event(content, sc.next(), isDone));
-                    break;
-                default:
-                    throw new DukeException("I cannot read the file. It is not in the expected format.");
-                }
-            }
-        } catch (IOException e) {
-            throw new DukeException("I cannot create the data file.");
-        }
+    public TaskList() {
+        tasks = new ArrayList<>();
+    }
+
+    public void readFromFile(Task task) {
+        tasks.add(task);
     }
 
     public void addTodo(String s) {
