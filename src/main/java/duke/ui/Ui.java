@@ -26,7 +26,6 @@ public class Ui {
         if (n < 1 || n > 1) {
             return "s ";
         }
-        assert n == 0 : "n should be 0";
         return " ";
     }
 
@@ -41,7 +40,6 @@ public class Ui {
         if (!tasks.isEmpty()) {
             return greeting + "\n" + listTasks(tasks);
         }
-        assert tasks.isEmpty() : "There should be saved tasks";
         return greeting + " What can I do for you?";
     }
 
@@ -52,10 +50,9 @@ public class Ui {
     public String listTasks(TaskList tasks) {
         if (tasks.size() == 0) {
             return "You have no tasks in your list.";
+        } else {
+            return "Here are the tasks in your list:\n" + tasks;
         }
-        assert tasks.size() > 0 : "There should be more than 0 tasks";
-        return "Here are the tasks in your list:\n" + tasks;
-
     }
 
     /**

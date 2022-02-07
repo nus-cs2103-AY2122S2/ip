@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
      */
     public void welcome(String text) {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(text, dukeImage)
+                DialogBox.getWelcomeDialog(text, dukeImage)
         );
     }
 

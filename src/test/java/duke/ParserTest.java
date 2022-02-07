@@ -27,7 +27,7 @@ public class ParserTest {
             assertEquals("foo", Parser.parse("todo"));
             fail();
         } catch (DukeException e) {
-            assertEquals("The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of a todo cannot be empty.", e.getMessage());
         }
     }
 }
