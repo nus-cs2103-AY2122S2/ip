@@ -89,7 +89,7 @@ public class TaskList {
         if (currentSize == 0) {
             sb.append("    \nYou haven't added any task, brat!\n");
         } else {
-            sb.append("    \nHere are the tasks in your list:");
+            sb.append("    \nHere are the tasks in your list:\n");
             for (int i = 0; i < currentSize; i++) {
                 sb.append("    " + (i + 1) + ". " + this.taskList.get(i) + "\n");
             }
