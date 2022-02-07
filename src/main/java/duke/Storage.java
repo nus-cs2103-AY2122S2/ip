@@ -41,6 +41,7 @@ public class Storage {
 
         for (Task task : tasks) {
             Task.Type t = task.getType();
+            assert task != null: "task must not be null";
 
             switch (t) {
             case TODO:
@@ -83,24 +84,34 @@ public class Storage {
         int idx = 1;
         while (scanner.hasNext()) {
             String dataLine = scanner.nextLine();
-            String[] taskString = dataLine.split("\\s+\\|\\s+");
-            if (taskString[0].equals("T")) {
-                taskList.addTask(taskString[2], Task.Type.TODO);
-                if (taskString[1].equals("1")) {
-                    taskList.markTask(idx);
-                }
-            } else if (taskString[0].equals("D")) {
-                taskList.addTask(taskString[2],
-                        LocalDateTime.parse(taskString[3], Const.OUT_TIME_FORMATTER), Task.Type.DEADLINE);
-                if (taskString[1].equals("1")) {
-                    taskList.markTask(idx);
-                }
-            } else if (taskString[0].equals("E")) {
-                taskList.addTask(taskString[2],
-                        LocalDateTime.parse(taskString[3], Const.OUT_TIME_FORMATTER), Task.Type.EVENT);
-                if (taskString[1].equals("1")) {
-                    taskList.markTask(idx);
-                }
+            String[] taskArr = dataLine.split("\\s+\\|\\s+");
+            assert taskArr.length >= 3 : "There should be at least 3 parts, type, mark and description";
+
+            String taskType = taskArr[0];
+            assert taskType.matches("T|D|E") : "task type should be T, D or E";
+
+            String isDoneStr = taskArr[1];
+            assert isDoneStr.matches("1|0") : "isDone should be 1 or 0";
+
+            boolean isDone = isDoneStr.equals("1");
+            String description = taskArr[2];
+
+            if (taskType.equals("T")) {
+                taskList.addTask(description, Task.Type.TODO);
+            } else if (taskType.equals("D")) {
+                assert taskArr.length == 4 : "There should be a dateTime string";
+                String dateTimeStr = taskArr[3];
+
+                taskList.addTask(description,
+                        LocalDateTime.parse(dateTimeStr, Const.OUT_TIME_FORMATTER), Task.Type.DEADLINE);
+            } else if (taskType.equals("E")) {
+                assert taskArr.length == 4 : "There should be a dateTime string";
+                String dateTimeStr = taskArr[3];
+                taskList.addTask(description,
+                        LocalDateTime.parse(dateTimeStr, Const.OUT_TIME_FORMATTER), Task.Type.EVENT);
+            }
+            if (isDone) {
+                taskList.markTask(idx);
             }
             idx++;
         }

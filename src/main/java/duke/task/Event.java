@@ -19,6 +19,7 @@ public class Event extends Task {
     public Event(String description, LocalDateTime time) {
         super(description, Task.Type.EVENT);
         this.at = time;
+        assert this.at != null : "LocalDateTime should be assigned";
     }
 
     /**
