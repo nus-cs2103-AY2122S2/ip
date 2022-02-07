@@ -17,6 +17,7 @@ public class Parser {
      * @throws ExceptionHandler
      */
     public static Command parse(String input) throws ExceptionHandler {
+        assert input != null;
         String[] temp = input.split(" ");
         if (temp[0].equals("todo")) {
             if (temp.length < 2) {
