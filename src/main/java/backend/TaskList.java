@@ -34,7 +34,7 @@ public class TaskList {
      * @param indexMarked index of the completed task
      */
     public static String mark(int indexMarked) {
-        String output = "";
+        String output;
         try {
             Task currentTask = tasks.get(indexMarked);
             currentTask.setDone(true);
@@ -66,7 +66,7 @@ public class TaskList {
      * @param indexDelete index of the task to be deleted.
      */
     public static String delete(int indexDelete) {
-        String output = "";
+        String output;
         try {
             Task deletedTask = tasks.remove(indexDelete);
             output =  Ui.delete(deletedTask.toString());
@@ -123,7 +123,7 @@ public class TaskList {
      * @param time time of the event task.
      */
     public static String addEvent(String description, String time) {
-        String output = "";
+        String output;
         try {
             if (description.isBlank() || time.isBlank()) {
                 throw new ArrayIndexOutOfBoundsException();

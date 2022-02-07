@@ -1,5 +1,7 @@
 package backend;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class InputDecoder {
     private Commands currentCommand = null;
 
@@ -35,15 +37,30 @@ public class InputDecoder {
             return TaskList.list();
 
         case MARK:
-            int indexMarked = Integer.parseInt(commandSections[1]) - 1;
+            int indexMarked;
+            try {
+                indexMarked = Integer.parseInt(commandSections[1]) - 1;
+            } catch (NumberFormatException e){
+                return Ui.invalidIndex();
+            }
             return TaskList.mark(indexMarked);
 
         case UNMARK:
-            int indexUnmmarked = Integer.parseInt(commandSections[1]) - 1;
-            return TaskList.unmark(indexUnmmarked);
+            int indexUnmarked;
+            try {
+                indexUnmarked = Integer.parseInt(commandSections[1]) - 1;
+            } catch (NumberFormatException e){
+                return Ui.invalidIndex();
+            }
+            return TaskList.unmark(indexUnmarked);
 
         case DELETE:
-            int indexDelete = Integer.parseInt(commandSections[1]) - 1;
+            int indexDelete;
+            try {
+                indexDelete = Integer.parseInt(commandSections[1]) - 1;
+            } catch (NumberFormatException e) {
+                return Ui.invalidIndex();
+            }
             return TaskList.delete(indexDelete);
 
         case TODO:

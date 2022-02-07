@@ -1,5 +1,7 @@
 package backend;
 
+import exception.DukeException;
+
 public class Ui {
     public Ui(){}
 
@@ -47,4 +49,7 @@ public class Ui {
         return "The description of a task cannot be empty";
     }
 
+    public static String invalidIndex() {
+        return "sorry please tell me the index of the task instead!";
+    }
 }

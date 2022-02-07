@@ -1,3 +1,1 @@
-E |   | project meeting | Dec 02 2019
-T |   | bean
-T |   | b
+E | X | project meeting | Dec 02 2019
