@@ -48,12 +48,12 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String tempStr = " ";
+        String doneIndicator = " ";
 
         if (isDone) {
-            tempStr = "X";
+            doneIndicator = "X";
         }
 
-        return "[" + tempStr + "] " + description;
+        return "[" + doneIndicator + "] " + description;
     }
 }

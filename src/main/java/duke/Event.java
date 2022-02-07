@@ -17,13 +17,16 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String tempStr = " ";
 
+        String doneIndicator;
         if (isDone) {
-            tempStr = "X";
+            doneIndicator = "X";
+        } else {
+            doneIndicator = " ";
         }
 
-        return "[E][" + tempStr + "] " 
+        return "[E]["
+                + doneIndicator + "] "
                 + description + "(" 
                 + time.get().format(DATE_FORMATTER) + ")";
     }

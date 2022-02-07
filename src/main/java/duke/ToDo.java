@@ -15,13 +15,16 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String tempStr = " ";
+        assert time.isPresent() : "time of Deadline not found";
 
+        String doneIndicator = " ";
         if (isDone) {
-            tempStr = "X";
+            doneIndicator = "X";
+        } else {
+            doneIndicator = " ";
         }
 
-        return "[T][" + tempStr + "] " 
+        return "[T][" + doneIndicator + "] "
                 + description;
     }
 

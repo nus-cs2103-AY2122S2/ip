@@ -16,26 +16,29 @@ public class Parser {
      */
     public static Command getCommand(String input) throws DukeException {
         String str = input.split(" ", 2)[0];
-        
-        if (str.equals("list")) {
+
+        switch (str) {
+        case "list":
             return Command.LIST;
-        } else if (str.equals("todo")) {
+        case "todo":
             return Command.TODO;
-        } else if (str.equals("deadline")) {
+        case "deadline":
             return Command.DEADLINE;
-        } else if (str.equals("event")) {
+        case "event":
             return Command.EVENT;
-        } else if (str.equals("mark")) {
+        case "mark":
             return Command.MARK;
-        } else if (str.equals("unmark")) {
+        case "unmark":
             return Command.UNMARK;
-        } else if (str.equals("delete")) {
+        case "delete":
             return Command.DELETE;
-        } else if (str.equals("find")) {
+        case "find":
             return Command.FIND;
-        } else if (str.equals("bye")) {
+        case "bye":
             return Command.BYE;
-        } else {
+        case "hello":
+            return Command.HELLO;
+        default:
             throw new DukeException("Hmm BMO doesn't understand what that means...");
         }
         
@@ -99,17 +102,15 @@ public class Parser {
     public static Task getTask(String input) throws DukeException {
         
         String[] stringArr = input.split("#");
-        
-        if (stringArr[0].equals("T")) {
+
+        switch (stringArr[0]) {
+        case "T":
             return new ToDo(stringArr[2], stringArr[1].equals("true"));
-
-        } else if (stringArr[0].equals("D")) {
+        case "D":
             return new Deadline(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
-
-        } else if (stringArr[0].equals("E")) {
+        case "E":
             return new Event(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
-
-        } else {
+        default:
             throw new DukeException("Problem retrieving files from data");
 
         }

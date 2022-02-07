@@ -26,31 +26,34 @@ public class Ui {
         try {
             Command cmd = Parser.getCommand(input);
 
-            switch(cmd) {
-                case LIST:
-                    return tasks.list();
-                case TODO:
-                    return tasks.add(new ToDo(Parser.getDescription(input)));
-                case DEADLINE:
-                    return tasks.add(new Deadline(Parser.getDescription(input), Parser.getDate(input)));
-                case EVENT:
-                    return tasks.add(new Event(Parser.getDescription(input), Parser.getDate(input)));
-                case MARK:
-                    return tasks.mark(Parser.getIndex(input));
-                case UNMARK:
-                    return tasks.unmark(Parser.getIndex(input));
-                case DELETE:
-                    return tasks.delete(Parser.getIndex(input));
-                case FIND:
-                    return tasks.find(Parser.getDescription(input));
-                case BYE:
-                    return tasks.exit();
+            switch (cmd) {
+            case LIST:
+                return tasks.list();
+            case TODO:
+                return tasks.add(new ToDo(Parser.getDescription(input)));
+            case DEADLINE:
+                return tasks.add(new Deadline(Parser.getDescription(input), Parser.getDate(input)));
+            case EVENT:
+                return tasks.add(new Event(Parser.getDescription(input), Parser.getDate(input)));
+            case MARK:
+                return tasks.mark(Parser.getIndex(input));
+            case UNMARK:
+                return tasks.unmark(Parser.getIndex(input));
+            case DELETE:
+                return tasks.delete(Parser.getIndex(input));
+            case FIND:
+                return tasks.find(Parser.getDescription(input));
+            case BYE:
+                return tasks.exit();
+            case HELLO:
+                return tasks.greet();
+            default:
+                return OUTPUT_ERROR_MSG;
             }
         } catch (DukeException e) {
             return e.toString();
         }
 
-        return OUTPUT_ERROR_MSG;
     }
 
     public String getStartOutput() {

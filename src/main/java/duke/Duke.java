@@ -1,17 +1,14 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Main executable for the Duke program.
- * Helps user record the tasks to be completed and their deadlines.
  */
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
